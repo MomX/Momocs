@@ -901,7 +901,7 @@ text(+gy, par("usr")[4]-gx, col="grey40",cex=0.8,
   pos <- par("usr")
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
-plot.plop <- function(#basics
+plot.OutPCA <- function(#basics
   PCA, fac, xax=1, yax=2, 
   #color choice
   col="black", pch=20, palette=col.summer2,
