@@ -826,6 +826,16 @@ col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
   abline(h=g, v=g, col="grey90", lty=2)
   abline(h=0, v=0, col="grey80")}
 
+#rug
+.rug <- function(xy, fac, col){
+  if (is.null(fac)) {
+    rug(xy[, 1], ticksize=0.015, side=1, col="black")
+    rug(xy[, 2], ticksize=0.015, side=2, col="black")
+  } else {
+    for (i in seq(along=levels(fac))) {
+      rug(xy[fac==levels(fac)[i], 1], ticksize=0.015, lwd=1, side=1, col=col[i])
+      rug(xy[fac==levels(fac)[i], 2], ticksize=0.015, lwd=1,  side=2, col=col[i])}}}
+
 # convertir en vrai morphospace, à base de plotnew=TRUE/FALSE
 .morphospace <- function(xy, pos.shp, rot, mshape, amp.shp=1,
                          size.shp=15, border.shp="#00000055", col.shp="#00000011", ...){
@@ -852,7 +862,6 @@ col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
   for (i in seq(along=levels(fac))) {
     cent.i <- coo.centpos(xy[fac==levels(fac)[i], ])
     text(cent.i[1], cent.i[2], labels=levels(fac)[i], col=col[i], pos=3)}}
-
 
 .stars <- function(xy, fac, col){
   col.i <- paste0(col, "55")
