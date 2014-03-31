@@ -22,8 +22,10 @@ edm.nearest <- function(m1, m2, full=FALSE){
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
-# Color Palettes ---------------------------------------------------------------
-
+################################################################################
+# n. Color palettes
+# --------------
+################################################################################
 col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
 col.summer2 <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb",
                                   "#e78ac3", "#a6d854", "#ebad1f"))

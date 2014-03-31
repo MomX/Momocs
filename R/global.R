@@ -906,68 +906,6 @@ text(+gy, par("usr")[4]-gx, col="grey40",cex=0.8,
   pos <- par("usr")
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
-plot.OutPCA <- function(#basics
-  PCA, fac, xax=1, yax=2, 
-  #color choice
-  col="black", pch=20, palette=col.summer2,
-  #.frame
-  center.origin=FALSE, zoom=1,
-  #.grid
-  grid=TRUE, nb.grids=3,
-  #shapes
-  morphospace=TRUE, pos.shp="full", amp=1,
-  size.shp=20, border.shp="#00000055", col.shp="#00000011",
-  #stars
-  stars=TRUE,
-  #ellipses
-  ellipses=TRUE, conf=0.5,
-  #convexhulls
-  chull=TRUE,
-  #labels
-  labels=TRUE,
-  #axisnames
-  axisnames=TRUE,
-  #axisvar
-  axisvar=TRUE,
-  #eigen
-  eigen=TRUE,
-  #
-  rug=TRUE,
-  title=substitute(PCA)
-){
-  xy <- PCA$x[, c(xax, yax)]
-  # we check and prepare
-  if (!missing(fac)) {
-    if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-    if (missing(col)) {
-      col.groups <- palette(nlevels(fac))
-      col <- col.groups[fac]}
-    if (!missing(pch)) {
-      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }}}
-  opar <- par(mar = par("mar"), xpd=FALSE)
-  on.exit(par(opar))
-  par(mar = rep(0.1, 4)) #0.1
-  
-  .frame(xy, center.origin, zoom=zoom)
-  if (grid) .grid(xy)
-  .morphospace(xy, pos.shp=pos.shp, rot=PCA$rotation[, c(xax, yax)], mshape=PCA$mshape,
-               size.shp=size.shp, border.shp=border.shp, col.shp=col.shp)
-  if (!missing(fac)) {
-    if (stars)    .stars(xy, fac, col.groups)
-    if (ellipses) .ellipses(xy, fac, conf=conf, col.groups) #+conf
-    if (chull)    .chull(xy, fac, col.groups)
-    if (labels)   .labels(xy, fac, col.groups)
-    if (rug)      .rug(xy, fac, col.groups)
-  } else {
-    if (rug)      .rug(xy, NULL, col)
-  }
-  points(xy, pch=pch, col=col)
-  if (axisnames)  .axisnames(xax, yax)
-  if (axisvar)    .axisvar(PCA$sdev, xax, yax)
-  .title(title)
-  if (eigen)     .eigen(PCA$sdev, xax, yax)
-  box()
-}
 
 pca2shp.efourier <- function (pos, rot, mshape, amp=1, nb.pts=60, trans=TRUE) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")

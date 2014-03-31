@@ -1,0 +1,16 @@
+{
+    "contents" : "rm(list = ls())\nsource(\"R/global.R\")\nsource(\"R/Babel.R\")\nsource(\"R/Out.R\")\nsource(\"R/OutCoe.R\")\nsource(\"R/OutMethods.R\")\nsource(\"R/FourierCore.R\")\nsource(\"R/domestic.R\")\n# source(\"R/Landmarks.R\")\n# source(\"R/Multivariate.R\")\n# source(\"R/Open.R\")\nload(\"data/bot.rda\")\nload(\"data/trilo.rda\")\nload(\"data/mosquito.rda\")\nload(\"data/hearts.rda\")\n\n# http://cran.r-project.org/web/packages/tiff/index.html\n# http://cran.r-project.org/web/packages/png/index.html\n\nb <- bot[5]\nbot <- coo.sample(bot, 64)\nbotE <- eFourier(bot, 6, norm=TRUE)\nbotP <- pca(botE)\n\nplot(botP)\nsubset(bot, type==\"whisky\")\n\n",
+    "created" : 1396263264835.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "357552892",
+    "id" : "C0ADF6DF",
+    "lastKnownWriteTime" : 1396273774,
+    "path" : "~/Research/Momocs/workingplace.R",
+    "project_path" : "workingplace.R",
+    "properties" : {
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}
