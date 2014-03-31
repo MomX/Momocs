@@ -131,7 +131,6 @@ subset.Out <- function(Out, subset){
   }
   return(Out2)}
 
-
 # Out plotting methods ----------------------------------------------------
 # The main plot method that when plot(Out)
 # For a quick investigation of the shpes included in a Coo object
