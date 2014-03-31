@@ -31,7 +31,7 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
       coe[i, ] <- c(ef$A, ef$B, ef$C, ef$D)
     } else {
       coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}
-  return(OutCoe(coe=coe, fac=Out$fac, method="eFourier"))}
+  return(OutCoe(coe=coe, fac=Out$fac, method="eFourier", norm=norm))}
   
 rFourier <- function(Out, nb.h = 40, nb.smooth = 0, norm =TRUE){
   UseMethod("rFourier")}

@@ -1,7 +1,7 @@
 
-OutCoe <- function(coe.matrix, fac=data.frame(), method){
+OutCoe <- function(coe.matrix, fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to Coe")
-  OutCoe <- list(coe=coe.matrix, fac=fac, method=method)
+  OutCoe <- list(coe=coe.matrix, fac=fac, method=method, norm=norm)
   class(OutCoe) <- "OutCoe"
   return(OutCoe)}
 

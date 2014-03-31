@@ -22,6 +22,16 @@ edm.nearest <- function(m1, m2, full=FALSE){
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
+
+
+
+######## vrac
+.refactor <- function(df){
+  w <- sapply(df, is.factor)
+df[w] <- lapply(df[w], factor)
+df}
+
+
 ################################################################################
 # n. Color palettes
 # --------------

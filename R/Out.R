@@ -115,7 +115,7 @@ names.Out <- function(Out){
   names(x$coo) <- value
   return(x)}
 
-# candidate for the dirtiest function ever
+# candidate for the dirtiest function ever...
 subset.Out <- function(Out, subset){
   e <- substitute(subset)
   retain <- eval(e, Out$fac, parent.frame())
@@ -126,8 +126,7 @@ subset.Out <- function(Out, subset){
     Out2$fac <- Out$fac
     Out2$fac <- as.data.frame(Out2$fac[retain, ])
     names(Out2$fac) <- names(Out$fac)
-    for (i in ncol(Out2$fac)){
-      Out2$fac[, i] <- factor(Out2$fac[, i])}
+Out2$fac <- .refactor(Out2$fac)
   }
   return(Out2)}
 
