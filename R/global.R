@@ -804,9 +804,6 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   t(centroid + rad * ellpar %*% t(z))}
 
 ####################
-col.summer2 <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ebad1f"))
-col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
-
 
 # new frame
 .frame <- function(xy, center.origin=FALSE, zoom=1){
@@ -1025,8 +1022,7 @@ pos.shapes <- function(xy, pos.shp=c("range", "circle")[1],
   # if a non-valid method is passed
   return(xy)}
 
-# Datasets ----------------------------------------------------------------
-
+# Datasets ---------------------------------------------------------------------
 
 #' Outline coordinates of 20 beer and 20 whisky bottles.
 #' 
