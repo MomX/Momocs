@@ -835,9 +835,9 @@ col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
   shp <- lapply(shp, coo.scale, 1/width)
   burp <- lapply(shp, polygon, border=border.shp, col=col.shp)}
 
-.ellipses <- function(coo, fac, conf=0.5, col){
+.ellipses <- function(xy, fac, conf=0.5, col){
   for (i in seq(along=levels(fac))) {
-    pts.i <- coo[fac==levels(fac)[i], ]
+    pts.i <- xy[fac==levels(fac)[i], ]
     ell.i <- conf.ell(x=pts.i, conf=conf)
     lines(coo.close(ell.i), col=col[i])
     points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])
@@ -848,9 +848,9 @@ col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
     chull.i <- coo.chull(coo[fac==levels(fac)[i], ])
     lines(coo.close(chull.i), col=col[i])}}
 
-.labels <- function(coo, fac, col){
+.labels <- function(xy, fac, col){
   for (i in seq(along=levels(fac))) {
-    cent.i <- coo.centpos(coo[fac==levels(fac)[i], ])
+    cent.i <- coo.centpos(xy[fac==levels(fac)[i], ])
     text(cent.i[1], cent.i[2], labels=levels(fac)[i], col=col[i], pos=3)}}
 
 
@@ -861,7 +861,6 @@ col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
     cent.i <- coo.centpos(pts.i)
     for (j in 1:nrow(pts.i)){
       segments(cent.i[1], cent.i[2], pts.i[j, 1], pts.i[j, 2], col=col.i[i])}}}
-
 
 .eigen <- function(ev, xax, yax, ratio=0.12){
   plt0 <- par("plt")
