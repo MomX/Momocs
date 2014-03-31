@@ -1,0 +1,18 @@
+\docType{data}
+\name{trilo}
+\alias{trilo}
+\title{Outline coordinates of 50 cephalic outlines of trilobite}
+\format{An Out object 64 coordinates of 50 cephalic outlines from different
+ontogenetic stages of trilobite.}
+\source{
+Arranged from:
+\url{http://folk.uio.no/ohammer/past/outlines.dat}. The
+original data included 51 outlines and 5 ontogenetic
+stages, but one of them has just a single outline thas has
+been removed.
+}
+\description{
+Outline coordinates of 50 cephalic outlines of trilobite
+}
+\keyword{datasets}
+

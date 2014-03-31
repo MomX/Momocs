@@ -1,0 +1,22 @@
+citHeader("To cite Momocs in publications use:")
+
+citEntry(entry = "Article",
+  title        = "{Momocs}: Outline Analysis Using {R}",
+  author       = personList(as.person("Vincent Bonhomme"),
+                   as.person("Sandrine Picq"),
+                   as.person("C\\'edric Gaucherel"),
+                   as.person("Julien Claude")),
+  journal      = "Journal of Statistical Software",
+  year         = "2014",
+  volume       = "56",
+  number       = "13",
+  pages        = "1--24",
+  url          = "http://www.jstatsoft.org/v56/i13/",
+
+  textVersion  =
+  paste("Vincent Bonhomme, Sandrine Picq, Cedric Gaucherel, Julien Claude (2014).",
+        "Momocs: Outline Analysis Using R.",
+        "Journal of Statistical Software, 56(13), 1-24.",
+        "URL http://www.jstatsoft.org/v56/i13/.")
+)
+
