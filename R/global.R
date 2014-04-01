@@ -1257,7 +1257,119 @@ coeff.split <- function(cs, nb.h=8, cph=4){
 # 
 
 
-# 9. Datasets documentation ----------------------------------------------------
+
+# 9. TPS ------------------------------------------------------------------
+
+# Thin Plate Spline ##################################################
+
+tps2d <- function(grid0, fr, to){
+  if (is.closed(fr)) fr <- coo.unclose(fr)
+  if (is.closed(to)) to <- coo.unclose(to)
+  p  <- nrow(fr)
+  q  <- nrow(grid0)
+  P  <- matrix(NA, p, p)
+  for (i in 1:p) {
+    for (j in 1:p) {
+      r2     <- sum((fr[i,]-fr[j,])^2)
+      P[i,j] <- r2*log(r2)}}
+  P[is.na(P)] <- 0
+  Q  <- cbind(1, fr)
+  L  <- rbind(cbind(P, Q), cbind(t(Q), matrix(0,3,3)))
+  m2 <- rbind(to, matrix(0, 3, 2))
+  coefx <- solve(L)%*%m2[, 1]
+  coefy <- solve(L)%*%m2[, 2]
+  fx <- function(fr, grid0, coef) {
+    Xn <- numeric(q)
+    for (i in 1:q) {
+      Z     <- apply((fr-matrix(grid0[i, ], p, 2, byrow=TRUE))^2, 1, sum)
+      Xn[i] <- coef[p+1]+coef[p+2]*grid0[i,1]+coef[p+3]*grid0[i,2]+
+        sum(coef[1:p]*(Z*log(Z)))}
+    return(Xn)}
+  grid1 <- cbind(fx(fr, grid0, coefx), fx(fr, grid0, coefy))
+  return(grid1)}
+
+tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
+                     grid.size = 20, grid.col   = "grey40",
+                     shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),
+                     shp.lwd = c(2, 2), shp.lty = c(1, 1)){
+  # simple magnification
+  if (!missing(amp)) to <- to + (to-fr)*amp
+  # we prepare the grid
+  x1     <- min(to[, 1])
+  x2     <- max(to[, 1])
+  y1     <- min(to[, 2])
+  y2     <- max(to[, 2])
+  rx     <- x2 - x1
+  ry     <- y2 - y1
+  dim.grid <- if (rx > ry) { c(grid.size, round(grid.size*ry / rx)) } else { c(round(grid.size*rx / ry), grid.size) }
+  xgrid0 <- seq(x1-rx*grid.outside, x2+rx*grid.outside, length=dim.grid[1])
+  ygrid0 <- seq(y1-ry*grid.outside, y2+ry*grid.outside, length=dim.grid[2])
+  grid0 <- as.matrix(expand.grid(xgrid0, ygrid0))
+  grid1 <- tps2d(grid0, fr, to)
+  if (plot.full){
+    wdw <- apply(rbind(grid0, grid1), 2, range)
+  } else {
+    wdw <- apply(rbind(fr, to), 2, range)}
+  plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1, ann=FALSE, axes=FALSE, mar=rep(0, 4))
+  for (i in 1:dim.grid[2]) lines(grid1[(1:dim.grid[1]) + (i-1)*dim.grid[1],], col=grid.col)
+  for (i in 1:dim.grid[1]) lines(grid1[(1:dim.grid[2]) * dim.grid[1]-i+1,],   col=grid.col)
+  if (shp) {
+    coo.draw(fr, border=shp.border[1], col=shp.col[1], lwd=shp.lwd[1], lty=shp.lty[1])
+    coo.draw(to, border=shp.border[2], col=shp.col[2], lwd=shp.lwd[2], lty=shp.lty[2])}
+}
+
+
+tps.arr <- function(fr, to, amp=1, palette = col.summer,
+                    arr.nb = 100, arr.levels = 100, arr.len = 0.1,
+                    arr.ang = 30, arr.lwd = 1, arr.col = "grey50",
+                    shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),
+                    shp.lwd = c(2, 2), shp.lty = c(1, 1)){
+  if (!missing(amp)) to <- to + (to-fr)*amp
+  grid0  <- spsample(Polygon(coo.close(fr)), arr.nb, type="regular")@coords
+  grid1     <- tps2d(grid0, fr, to)
+  # grille simple, on affiche d'abord les deux courbes
+  wdw      <- apply(rbind(fr, to), 2, range)
+  plot(NA, xlim=wdw[, 1]*1.05, ylim=wdw[, 2]*1.05, asp=1, axes=FALSE, ann=FALSE, mar=rep(0,4))
+  if (missing(arr.levels)) {arr.levels = arr.nb}
+  if (!missing(palette)) {
+    q.lev   <- cut(edm(grid0, grid1), breaks=arr.levels, labels=FALSE)
+    arr.cols <- palette(arr.levels)[q.lev]
+  } else {
+    arr.cols <- rep(arr.col, nrow(grid0))}
+  arrows(grid0[, 1], grid0[, 2], grid1[, 1], grid1[, 2],
+         length=arr.len, angle=arr.ang, lwd=arr.lwd, col=arr.cols)
+  if (shp) {
+    coo.draw(fr, border=shp.border[1], col=shp.col[1], lwd=shp.lwd[1], lty=shp.lty[1])
+    coo.draw(to, border=shp.border[2], col=shp.col[2], lwd=shp.lwd[2], lty=shp.lty[2])}
+}
+
+
+tps.iso <- function(fr, to, amp=1, palette = col.summer,
+                    iso.nb = 500, iso.levels = 12, cont=TRUE, cont.col="black",
+                    shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),
+                    shp.lwd = c(2, 2), shp.lty = c(1, 1)){  
+  if (!missing(amp)) to <- to + (to-fr)*amp
+  grid0  <- spsample(Polygon(coo.close(fr)), iso.nb, type="regular")@coords
+  grid1  <- tps2d(grid0, fr, to)
+  def    <- edm(grid0, grid1)
+  x1     <- length(unique(grid0[,1]))
+  y1     <- length(unique(grid0[,2]))
+  im     <- matrix(NA,x1,y1)
+  xind   <- (1:x1)[as.factor(rank(grid0[,1]))]
+  yind   <- (1:y1)[as.factor(rank(grid0[,2]))]
+  n      <- length(xind)
+  for (i in 1:n) im[xind[i], yind[i]] <- def[i]
+  iso.cols <- palette(iso.levels)
+  x <- sort(unique(grid0[,1]))
+  y <- sort(unique(grid0[,2]))
+  image(x, y, im, col=iso.cols, asp=1, xlim=range(x)*1.05, ylim=range(y)*1.05,
+        axes=FALSE, frame=FALSE, ann=FALSE)
+  if (cont) contour(x, y, im, nlevels=iso.levels, add=TRUE, drawlabels=FALSE, col=cont.col)
+  if (shp) {
+    coo.draw(fr, border=shp.border[1], col=shp.col[1], lwd=shp.lwd[1], lty=shp.lty[1])
+    coo.draw(to, border=shp.border[2], col=shp.col[2], lwd=shp.lwd[2], lty=shp.lty[2])}}
+
+# 10. Datasets documentation ----------------------------------------------------
 #' Outline coordinates of 20 beer and 20 whisky bottles.
 #' 
 #' @docType data
