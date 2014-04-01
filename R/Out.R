@@ -191,3 +191,306 @@ panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
     } else {    
       if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
       text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
+
+
+
+# Out methods (calibration) ----------------------------------------------------
+
+#hpow
+hpow <- function(...){UseMethod("hpow")}
+hpow.Out <- function(Out, method="efourier", id=1:length(Out),
+                     nb.h=16, drop=1, smooth.it=0, plot=TRUE,
+                     title="Fourier coefficients power spectrum",
+                     lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1){
+              probs <- c(1, 0.5, 0)
+              # for one signle outline
+              if (missing(method)) {
+                cat(" * Method not provided. efourier is used.\n")
+                method   <- efourier
+              } else {
+                p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
+                if (is.na(p)) { warning("Unvalid method. efourier is used.")
+                } else {
+                  method   <- switch(p, efourier,   rfourier,   tfourier)}}
+              res <- matrix(nrow=length(id), ncol=(nb.h-drop))
+              x <- (drop+1) : nb.h
+              for (i in seq(along=id)) {
+                xf  <- method(Out$coo[[id[i]]], nb.h = nb.h, smooth.it = smooth.it)
+                pow <- harm.pow(xf)[x]
+                res[i, ] <-  (cumsum(pow)/sum(pow))}
+              res <- apply(res, 2, quantile, probs=probs)
+              rownames(res) <- c("Max", "Med", "Min")
+              colnames(res) <- paste("h", x, sep="")
+              if (plot){
+                plot(NA, xlim = range(x), ylim = c(min(res), 1), las=1, yaxs="i", 
+                     xlab = "Harmonic rank", ylab = "Cumulative harmonic power",
+                     main=title, sub=paste0("(", length(id), " outlines included)"), axes=FALSE)
+                axis(1, at=x) ; axis(2)
+                abline(h=lineat.y, lty=2, col="grey90")
+                segments(x,    res[1, ], x,    res[3, ], lwd=0.5)
+                segments(x-bw, res[1, ], x+bw, res[1, ], lwd=0.5)
+                segments(x-bw, res[3, ], x+bw, res[3, ], lwd=0.5)
+                lines(x, res[2, ], type="o", pch=20, cex=0.6) 
+                box()
+              }
+              return(res)}
+
+# Out methods (Fourier analysis) ------------------------------------------
+eFourier     <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
+  UseMethod("eFourier")}
+
+
+
+eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
+  q <- floor(min(sapply(Out$coo, nrow)/2)) - 1
+  if (missing(nb.h))  {
+    nb.h <- ifelse(q >= 32, 32, q)
+    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
+  if(nb.h  > (q+1)*2) {
+    nb.h <- q # should not be 1 #todo
+    warning(" * at least one outline has no more than ", (q+1)*2, " coordinates. 
+            'nb.h' has been set to: ", q,"\n")}
+  coo <- Out$coo
+  col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h, times = 4))
+  coe <- matrix(ncol = 4 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))
+  for (i in seq(along = coo)) { #todo: vectorize ?
+    ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, verbose = TRUE)
+    if (norm) {
+      ef <- efourier.norm(ef, start=start)
+      if (ef$A[1] < 0) {
+        ef$A <- (-ef$A)
+        ef$B <- (-ef$B)
+        ef$C <- (-ef$C)
+        ef$D <- (-ef$D)
+        ef$lnef <- (-ef$lnef)}
+      coe[i, ] <- c(ef$A, ef$B, ef$C, ef$D)
+    } else {
+      coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}
+  return(OutCoe(coe=coe, fac=Out$fac, method="eFourier", norm=norm))}
+
+rFourier <- function(Out, nb.h = 40, nb.smooth = 0, norm =TRUE){
+  UseMethod("rFourier")}
+
+rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
+  q <- floor(min(sapply(Out$coo, nrow)/2)) - 1
+  if (missing(nb.h))  {
+    nb.h <- ifelse(q >= 32, 32, q)
+    cat(" * nb.h not provided and set to", nb.h, "\n")}
+  if(nb.h  > (q+1)*2) {
+    nb.h <- q # should not be 1 #todo
+    warning("* at least one outline has no more than ", (q+1)*2, " coordinates. 
+            'nb.h' has been set to: ", q,"\n")}
+  coo <- Out$coo
+  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
+  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))
+  for (i in seq(along = coo)) {
+    rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose = TRUE) #todo: vectorize
+    coe[i, ] <- c(rf$an, rf$bn)}
+  return(OutCoe(coe, fac=Out$fac, method="rFourier"))}
+
+tFourier <- function(Out, nb.h = 40, smooth.it = 0, norm =TRUE){
+  UseMethod("tFourier")}
+
+tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
+  q <- floor(min(sapply(Out$coo, nrow)/2)) - 1
+  if (missing(nb.h))  {
+    nb.h <- if (q >= 32) { 32 } else { q }
+    cat(paste("  * nb.h not provided and set to", nb.h, "\n"))}
+  if(nb.h  > (q+1)*2) {
+    nb.h <- q # should not be 1
+    warning("At least one outline has no more than ", (q+1)*2, " coordinates. 
+            'nb.h' has been set to: ", q, "\n")}
+  coo <-Out$coo
+  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
+  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))
+  for (i in seq(along = coo)) {
+    tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose=TRUE)
+    coe[i, ] <- c(tf$an, tf$bn)}
+  return(OutCoe(coe, fac=Out$fac, method="tFourier"))}
+
+
+# OutCoe definition -------------------------------------------------------
+
+
+OutCoe <- function(coe.matrix, fac=data.frame(), method, norm){
+  if (missing(method)) stop("a method must be provided to Coe")
+  OutCoe <- list(coe=coe.matrix, fac=fac, method=method, norm=norm)
+  class(OutCoe) <- "OutCoe"
+  return(OutCoe)}
+
+# The print method for Out objects
+print.OutCoe <- function(OutCoe){
+  p <- pmatch(OutCoe$method, c("eFourier", "rFourier", "tFourier"))
+  met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
+  ### Header
+  cat("An OutCoe object [", met, "analysis ] (see ?OutCoe) \n")
+  cat(rep("-", 20),"\n", sep="")
+  coo.nb  <- nrow(OutCoe$coe) #nrow method ?
+  harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
+  # number of outlines and harmonics
+  cat(" -", coo.nb, "outlines described\n")
+  cat(" -", coo.nb, "harmonics\n")
+  # lets show some of them for a quick inspection
+  cat(" - Some harmonic coefficients from random outlines in $coe: \n")
+  row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
+  col.eg <- coeff.sel(retain=ifelse(harm.nb > 3, 3, harm.nb), drop=0,
+                      nb.h=harm.nb, cph=ifelse(p==1, 4, 2))
+  print(signif(OutCoe$coe[row.eg, col.eg], 3))
+  cat("etc.\n")
+  # number of grouping factors
+  df <- OutCoe$fac
+  nf <- ncol(df)
+  if (nf==0) {
+    cat(" - No groups defined\n")
+  } else {
+    cat(" -", nf, "grouping factor(s) defined:\n")
+    for (i in 1:nf) {
+      cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
+
+
+# OutCoe methods ----------------------------------------------------------
+pca <- function(x, ...){UseMethod("pca")}
+pca.OutCoe <- function(OutCoe){
+  PCA <- prcomp(OutCoe$coe, scale.=FALSE, center=TRUE)
+  PCA$fac <- OutCoe$fac
+  PCA$mshape <- apply(OutCoe$coe, 2, mean)
+  class(PCA) <- c("OutPCA", class(PCA))
+  return(PCA)}
+
+plot.OutPCA <- function(#basics
+  PCA, fac, xax=1, yax=2, 
+  #color choice
+  col="black", pch=20, palette=col.summer2,
+  #.frame
+  center.origin=FALSE, zoom=1,
+  #.grid
+  grid=TRUE, nb.grids=3,
+  #shapes
+  morphospace=TRUE, pos.shp="full", amp=1,
+  size.shp=20, border.shp="#00000055", col.shp="#00000011",
+  #stars
+  stars=TRUE,
+  #ellipses
+  ellipses=TRUE, conf=0.5,
+  #convexhulls
+  chull=TRUE,
+  #labels
+  labels=TRUE,
+  #axisnames
+  axisnames=TRUE,
+  #axisvar
+  axisvar=TRUE,
+  #eigen
+  eigen=TRUE,
+  #
+  rug=TRUE,
+  title=substitute(PCA)
+){
+  xy <- PCA$x[, c(xax, yax)]
+  # we check and prepare
+  if (!missing(fac)) {
+    if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
+    if (missing(col)) {
+      col.groups <- palette(nlevels(fac))
+      col <- col.groups[fac]}
+    if (!missing(pch)) {
+      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }}}
+  opar <- par(mar = par("mar"), xpd=FALSE)
+  on.exit(par(opar))
+  par(mar = rep(0.1, 4)) #0.1
+  
+  .frame(xy, center.origin, zoom=zoom)
+  if (grid) .grid(xy)
+  .morphospace(xy, pos.shp=pos.shp, rot=PCA$rotation[, c(xax, yax)], mshape=PCA$mshape,
+               size.shp=size.shp, border.shp=border.shp, col.shp=col.shp)
+  if (!missing(fac)) {
+    if (stars)    .stars(xy, fac, col.groups)
+    if (ellipses) .ellipses(xy, fac, conf=conf, col.groups) #+conf
+    if (chull)    .chull(xy, fac, col.groups)
+    if (labels)   .labels(xy, fac, col.groups)
+    if (rug)      .rug(xy, fac, col.groups)
+  } else {
+    if (rug)      .rug(xy, NULL, col)
+  }
+  points(xy, pch=pch, col=col)
+  if (axisnames)  .axisnames(xax, yax)
+  if (axisvar)    .axisvar(PCA$sdev, xax, yax)
+  .title(title)
+  if (eigen)     .eigen(PCA$sdev, xax, yax)
+  box()}
+
+# manova
+manova.default <- manova
+manova <- function(...){UseMethod("manova")}
+manova.OutCoe <- function(OutCoe, fac, retain, drop){
+  if (missing(fac)) stop("'fac' must be provided")
+  fac <- OutCoe$fac[, fac]
+  x <- OutCoe$coe
+  if (missing(drop)) {
+    if (OutCoe$norm) {
+      drop <- 1
+      cat(" * 1st harmonic removed (because of normalization)\n")
+    } else {
+      drop <- 0 }}
+  
+  nb.h <- ncol(x)/4
+  fr   <- floor((ncol(x)-2)/4) #full rank efourier
+  
+  if (!missing(retain)) {
+    if ((retain - drop) > fr) {
+      retain <- fr
+      if (retain > nb.h) retain <- nb.h
+      cat("'retain' was too high and the matrix not of full rank. Analysis done with", retain, "harmonics\n")}
+  } else {
+    retain <- fr
+    if (retain > nb.h) {retain <- nb.h}
+    cat("* Analysis done with", retain, "harmonics\n")}
+  
+  harm.sel <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=4)
+  mod <- summary(manova(x[,harm.sel]~fac), test="Hotelling")
+  return(mod)}
+
+#meanshapes
+meanshapes <- function(...){UseMethod("meanshapes")}
+meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
+  nb.h <-  ncol(OutCoe$coe)/4
+  if (missing(fac)) {
+    cat("* no 'fac' provided. Returns meanshape.")
+    coe.meanshape <- apply(OutCoe$coe, 2, mean)
+    xf <- coeff.split(coe.meanshape, nb.h, 4)
+    return(efourier.i(xf, nb.pts=nb.pts))}
+  
+  f <- OutCoe$fac[, fac]
+  fl <- levels(f)
+  res <- list()
+  
+  for (i in seq(along=fl)){
+    coe.i <- OutCoe$coe[f==fl[i], ]
+    if (is.matrix(coe.i)) {
+      coe.i <- apply(coe.i, 2, mean)}
+    xf <- coeff.split(cs=coe.i, nb.h=nb.h, cph=4)
+    res[[i]] <- efourier.i(xf, nb.h=nb.h, nb.pts=nb.pts)}
+  names(res) <- fl
+  return(res)}
+
+
+
+# Out TODO ----------------------------------------------------------------
+
+#c OutCoe
+# boxpltoCoe
+#hist
+#hcontrib
+#deprecate ellipse par
+#manova
+#meanshape
+#clust
+#discri
+#hquant
+#hqual
+#clust
+#todo Out.check
+# Out.nbh check etc. coderepété sur 10 lines
+# smooth.it -> nb.s ?
+
+
