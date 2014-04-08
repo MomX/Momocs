@@ -894,7 +894,9 @@ col.summer2 <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb",
                                   "#e78ac3", "#a6d854", "#ebad1f"))
 col.solarized <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", "#d33682",
                                     "#6c71c4", "#268bd2", "#2aa198", "#859900"))
-col.gallus <- colorRampPalette(c("#000080", "#FFFFFF", "#EE0000"))
+col.gallus <- colorRampPalette(c("#025D8C", "#FFFFFF", "#A80000"))
+col.hot  <- colorRampPalette(c("#F2F2F2","#A80000"))
+col.cold  <- colorRampPalette(c("#F2F2F2","#025D8C"))
 col.blackgallus <- colorRampPalette(c("#000080", "#000000", "#EE0000"))
 col.sari   <- colorRampPalette(c("#551A8B", "#FF7F00"))
 col.india  <- colorRampPalette(c("#FF9933", "#138808"))

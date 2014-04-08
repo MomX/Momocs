@@ -345,7 +345,7 @@ print.OutCoe <- function(OutCoe){
     for (i in 1:nf) {
       cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
 
-# 6. OutCoe plotting methods -------------------------------------------------
+# 6. OutCoe visualisation methods -------------------------------------------------
 
 boxplot.OutCoe <- function(OutCoe, retain, drop, palette=col.gallus,
                            title= "Variation of harmonic coefficients", legend=TRUE){
@@ -414,6 +414,48 @@ hist.OutCoe <-
     abline(v=mean(h), lwd=1)
     lines(h0, y0, col = "black", lwd = 2)}
   title(main=title, cex.main=2, font=2, outer=TRUE)}
+
+hcontrib <- function(...){UseMethod("hcontrib")}
+hcontrib.OutCoe <- function(
+  OutCoe,
+  id      = 1,
+  harm.range,
+  amp.h   = c(0, 0.5, 1, 2, 5, 10),
+  palette = col.heat,
+  title   = "Harmonic contribution"){
+  #if missing id meanshape
+  x <- OutCoe$coe
+  nb.h <- ncol(x)/4
+  if (missing(harm.range)) {
+    harm.range <- ifelse (nb.h > 6, 1:6, 1:nb.h) }
+    harm.range <- 1:nb.h
+  mult <- rep(1, nb.h)
+  method.i <- efourier.i
+  xf <- list(an=x[id, 1:nb.h + 0*nb.h], bn=x[id, 1:nb.h + 1*nb.h],
+             cn=x[id, 1:nb.h + 2*nb.h], dn=x[id, 1:nb.h + 3*nb.h])
+  res <- list()
+  p <- 1 # dirty
+  for (j in seq(along=harm.range)){
+    for (i in seq(along=amp.h)){
+      mult.loc    <- mult
+      mult.loc[harm.range[j]] <- amp.h[i]
+      xfi <- lapply(xf, function(x) x*mult.loc)
+      res[[p]] <-
+        method.i(xfi)
+      p <- p+1}}
+  
+  cols <- rep(palette(length(amp.h)), length(harm.range))
+  coo.list.panel(res, dim=c(length(amp.h), length(harm.range)),
+                 byrow=FALSE, cols=cols, mar=c(5.1, 5.1, 4.1, 2.1))
+  axis(1, at=(1:length(harm.range))-0.5,
+       labels=harm.range, line=2, lwd=1, lwd.ticks=0.5)
+  mtext("Harmonic rank", side=1, line=4)
+  axis(2, at=(1:length(amp.h))-0.5,
+       labels=rev(amp.h), line=1, lwd=1, lwd.ticks=0.5)
+  mtext("Amplification factor", side=2, line=3)
+  title(main=title)
+return(res)}
+
 
 # 6. OutCoe methods ----------------------------------------------------------
 pca <- function(x, ...){UseMethod("pca")}
@@ -545,8 +587,7 @@ meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
 # 0. Out TODO ----------------------------------------------------------------
 
 #c OutCoe
-# boxpltoCoe
-#hist
+
 #hcontrib
 #deprecate ellipse par
 #manova
