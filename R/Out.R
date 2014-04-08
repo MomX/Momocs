@@ -564,7 +564,7 @@ meanshapes <- function(...){UseMethod("meanshapes")}
 meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
   nb.h <-  ncol(OutCoe$coe)/4
   if (missing(fac)) {
-    cat("* no 'fac' provided. Returns meanshape.")
+    cat("* no 'fac' provided. Returns meanshape.\n")
     coe.meanshape <- apply(OutCoe$coe, 2, mean)
     xf <- coeff.split(coe.meanshape, nb.h, 4)
     return(efourier.i(xf, nb.pts=nb.pts))}
@@ -588,9 +588,7 @@ meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
 
 #c OutCoe
 
-#hcontrib
-#deprecate ellipse par
-#manova
+
 #meanshape
 #clust
 #discri

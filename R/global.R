@@ -652,6 +652,15 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col="#33333322", lwd=1, 
 coo.draw <- function(coo, ...){
   coo.plot(coo, plot.new=FALSE, ...)}
 
+#very prototypic
+coo.lolliplot <- function(coo1, coo2, type=c("lolli", "arrow")[1]){
+  wdw <- apply(rbind(coo1, coo2), 2, function(x) max(abs(x)))
+  plot(NA, xlim=c(-wdw[1], wdw[1]), ylim=c(-wdw[2], wdw[2]), asp=1)
+  for (i in 1:nrow(coo1)){
+    segments(coo1[i, 1], coo1[i, 2], coo2[i, 1], coo2[i, 2])
+  }
+  points(coo2, pch=20, cex=0.8)}
+
 coo.template   <- function(coo, size=1) {
   # only for matrices
   coo      <- coo * min(size/apply(coo, 2, function(x) diff(range(x))))
