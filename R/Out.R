@@ -1,5 +1,5 @@
 
-# Out builder and domestic functions -------------------------------------------
+# 1. Out builder and domestic functions -------------------------------------------
 
 #' Builds an Out object
 #'
@@ -130,7 +130,7 @@ Out2$fac <- .refactor(Out2$fac)
   }
   return(Out2)}
 
-# Out plotting methods ----------------------------------------------------
+# 2. Out plotting methods ----------------------------------------------------
 # The main plot method that when plot(Out)
 # For a quick investigation of the shpes included in a Coo object
 plot.Out <- function(Out, id, ...){
@@ -194,7 +194,7 @@ panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
 
 
 
-# Out methods (calibration) ----------------------------------------------------
+# 3. Out methods (calibration) ----------------------------------------------------
 
 #hpow
 hpow <- function(...){UseMethod("hpow")}
@@ -235,11 +235,9 @@ hpow.Out <- function(Out, method="efourier", id=1:length(Out),
               }
               return(res)}
 
-# Out methods (Fourier analysis) ------------------------------------------
+# 4. Out methods (Fourier analysis) ------------------------------------------
 eFourier     <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
   UseMethod("eFourier")}
-
-
 
 eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
   q <- floor(min(sapply(Out$coo, nrow)/2)) - 1
@@ -309,7 +307,7 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
   return(OutCoe(coe, fac=Out$fac, method="tFourier"))}
 
 
-# OutCoe definition -------------------------------------------------------
+# 5. OutCoe definition -------------------------------------------------------
 
 
 OutCoe <- function(coe.matrix, fac=data.frame(), method, norm){
@@ -347,8 +345,77 @@ print.OutCoe <- function(OutCoe){
     for (i in 1:nf) {
       cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
 
+# 6. OutCoe plotting methods -------------------------------------------------
 
-# OutCoe methods ----------------------------------------------------------
+boxplot.OutCoe <- function(OutCoe, retain, drop, palette=col.gallus,
+                           title= "Variation of harmonic coefficients", legend=TRUE){
+              # we deduce and prepare
+              x <- OutCoe$coe
+              nb.h  <- ncol(x)/4
+              cph   <- 4
+              if (missing(retain)) retain <- nb.h
+              if (missing(drop)) drop <- 0
+              cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
+              range <- (drop+1):retain
+              # we save the old par and prepare the plot
+              op <- par(no.readonly = TRUE)
+              on.exit(par(op))
+              cols <- palette(cph)
+
+                mv <- max(abs(range(x[, cs])))
+                ylim <- c(-mv, mv) 
+
+              plot(NA, ylim=ylim, xlim=range(range)+c(-0.6,0.6),
+                   xlab="Harmonic rank", ylab="Coefficient value", main=title,
+                   axes=FALSE, xaxs="i")
+              abline(v=range+0.4, col="grey80")
+              abline(h=0, col="grey80")
+              for (i in 1:cph) {  
+                boxplot(x[,(i-1)*nb.h+range],
+                        range=0, boxwex=0.2, at=range-0.6 + (i*0.2),
+                        col=cols[i], names=FALSE, border=cols[i], axes=FALSE, add=TRUE)
+              }
+              axis(1, at=range-0.1, labels=range)  
+              axis(2)
+              if (legend) {
+                legend("topright", legend = LETTERS[1:cph], bty="o",
+                       fill = cols, bg="#FFFFFFBB",
+                       cex=0.7, inset=0.005,
+                       title = " Harmonic coefficients ")
+              }
+              box()
+            }
+
+
+hist.OutCoe <-
+  function(OutCoe, retain, drop, palette=col.gallus,
+           title= "Variation of harmonic coefficients", legend=TRUE){
+  # we deduce and prepare
+  x <- OutCoe$coe
+  nb.h  <- ncol(x)/4
+  cph   <- 4
+  if (missing(retain)) retain <- nb.h
+  if (missing(drop)) drop <- 0
+  cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
+  range <- (drop+1):retain
+  # we save the old par and prepare the plot
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  cols <- palette(cph)
+  layout(matrix(1:length(cs), ncol=cph, byrow=TRUE))
+  par(oma=c(2, 2, 5, 2), mar=rep(2, 4))
+  h.names <- paste(rep(LETTERS[1:cph], each=retain-drop), range, sep="")
+  cols    <- rep(cols, each=retain-drop)
+  for (i in seq(along=cs)) { # thx Dufour, Chessel and Lobry
+    h  <- x[, cs[i]] 
+    h0 <- seq(min(h), max(h), len=50)
+    y0 <- dnorm(h0, mean(h), sd(h))
+    hist(h, main=h.names[i], col=cols[i], proba=TRUE, xlab="", ylab="", las=1)
+    abline(v=mean(h), lwd=1)
+    lines(h0, y0, col = "black", lwd = 2)}
+  title(main=title, cex.main=2, font=2, outer=TRUE)}
+
+# 6. OutCoe methods ----------------------------------------------------------
 pca <- function(x, ...){UseMethod("pca")}
 pca.OutCoe <- function(OutCoe){
   PCA <- prcomp(OutCoe$coe, scale.=FALSE, center=TRUE)
@@ -475,7 +542,7 @@ meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
 
 
 
-# Out TODO ----------------------------------------------------------------
+# 0. Out TODO ----------------------------------------------------------------
 
 #c OutCoe
 # boxpltoCoe

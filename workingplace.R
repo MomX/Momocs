@@ -1,5 +1,7 @@
 rm(list = ls())
+setwd("/Users/vincent/Momocs/")
 require(MASS)
+require(rgl)
 source("R/global.R")
 source("R/Out.R")
 source("R/FourierCore.R")
@@ -12,6 +14,7 @@ load("data/mosquito.rda")
 load("data/hearts.rda")
 
 bot <- coo.sample(bot, 64)
+b <- bot[5]
 botE <- eFourier(bot, 6, norm=TRUE)
 botP <- pca(botE)
 
