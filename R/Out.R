@@ -306,10 +306,57 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
     coe[i, ] <- c(tf$an, tf$bn)}
   return(OutCoe(coe, fac=Out$fac, method="tFourier"))}
 
+Ptolemy <- function(...){UseMethod("Ptolemy")}
+Ptolemy.Out <- function(Coo,
+                     id=1,
+                     t=seq(0, 2*pi, length=7)[-1],
+                     nb.h=3,
+                     nb.pts=360,
+                     palette=col.sari,
+                     legend=FALSE) {    # we prepare and deduce
+              op <- par(no.readonly = TRUE)
+              on.exit(par(op))
+              par(xpd=NA)
+              cols <- palette(nb.h)
+              coo <- coo.center(Coo$coo[[id]])
+              #k <- floor(length(coo$x)/4)
+              coo.plot(coo, main=names(Coo)[id])
+              # now we calculate for every harmonic
+              coo.ef  <- efourier(coo, nb.h)
+              coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
+              vect   <- matrix(nrow=nb.h, ncol=2)
+              vect <- rbind(c(0, 0), vect)
+              for (i in seq(along=t)) {
+                for(j in 1:nb.h) {
+                  vect[j+1, 1] <- coo.ef$an[j] * cos(j * t[i]) + coo.ef$bn[j] * sin(j * t[i])
+                  vect[j+1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + coo.ef$dn[j] * sin(j * t[i])}
+                vs <- apply(vect, 2, cumsum)
+                for (j in 1:nb.h){
+                  lh   <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j],
+                                         coo.ef$cn[1:j], coo.ef$dn[1:j],
+                                         nb.h=j, nb.pts=nb.pts, plot=FALSE)
+                  ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j],
+                                         coo.ef$cn[j], coo.ef$dn[j],
+                                         nb.h=1, nb.pts=nb.pts, plot=FALSE)
+                  lines(lh, col=paste(cols[j], "22", sep=""), lwd=0.8)
+                  lines(ellh[,1] + vs[j, 1], ellh[,2] + vs[j, 2],
+                        col=cols[j], lwd=1)
+                  points(vs[j+1, 1], vs[j+1, 2], col=cols[j], cex=0.8)
+                  arrows(vs[j, 1], vs[j, 2], vs[j+1, 1], vs[j+1, 2],
+                         col=cols[j], angle=10, length=0.05, lwd=1.2)
+                }
+              }
+              points(0, 0, pch=20, col=cols[1])
+              if (legend) {
+                legend("topright", legend = as.character(1:nb.h), bty="o",
+                       col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
+                       title = "Number of harmonics")}
+            }
+
+
+
 
 # 5. OutCoe definition -------------------------------------------------------
-
-
 OutCoe <- function(coe.matrix, fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to Coe")
   OutCoe <- list(coe=coe.matrix, fac=fac, method=method, norm=norm)
@@ -571,11 +618,10 @@ clust.OutCoe <- function(OutCoe, fac,
                 dist.mat <- dist(OutCoe$coe, method=method)
                 OutCoe.hc <- hclust(dist.mat)
                 op <- par(no.readonly = TRUE)
+                on.exit(par(op))
                 par(oma=rep(0, 4), mar=rep(0,4))
                 plot(as.phylo.hclust(OutCoe.hc), tip.color=cols, type=type, ...)
-                par(op)
                 return(list(dist.mat=dist.mat, hclust=OutCoe.hc))}
-
 
 meanshapes <- function(...){UseMethod("meanshapes")}
 meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
