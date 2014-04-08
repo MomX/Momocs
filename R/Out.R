@@ -266,7 +266,7 @@ hquant.Out <-
            dev.plot=TRUE,
            title = "Deviations along the outline",
            legend = TRUE,
-           legend.title = "# harmonics",
+           legend.title = "Nb of harmonics",
            palette = col.summer,
            lineat.y=c(0.5, 0.1, 0.01)){
     if (missing(method)) {
@@ -341,7 +341,7 @@ hquant.Out <-
             lines(1:ncol(m), m[i, ], col=cols[i])}}}
       # same for legend
       if (legend) {
-        legend("topright", legend = as.character(harm.range), bty="o",
+        legend("topright", legend = as.character(harm.range), bty="n",
                col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", inset=0.005, cex=0.7,
                title = legend.title)}
       box() }
@@ -796,15 +796,9 @@ meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
   names(res) <- fl
   return(res)}
 
-
-
 # 0. Out TODO ----------------------------------------------------------------
-
 #c OutCoe
-
 #discri
-#hquant
-#hqual
 #todo Out.check
 # Out.nbh check etc. coderepété sur 10 lines
 # smooth.it -> nb.s ?
