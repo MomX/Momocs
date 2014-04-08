@@ -701,7 +701,8 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
     res[i, ] <- c(trans[2], trans[1])
     polygon(coo.tp[[i]][, 1] + trans[2],
             coo.tp[[i]][, 2] + trans[1],
-            col=cols[i], border=borders[i])}}
+            col=cols[i], border=borders[i])}
+  invisible(res)}
 
 coo.oscillo <- function(coo, rug=TRUE, legend=TRUE, cols=col.gallus(2), nb.pts=12){
   coo <- coo.check(coo)
