@@ -1,6 +1,6 @@
 rm(list = ls())
 setwd("/Users/vincent/Momocs/")
-require(MASS) ; require(rgl)
+require(MASS) ; require(rgl) ; require(ape)
 source("R/global.R")
 source("R/Out.R")
 source("R/FourierCore.R")

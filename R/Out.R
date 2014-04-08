@@ -559,7 +559,24 @@ manova.OutCoe <- function(OutCoe, fac, retain, drop){
   mod <- summary(manova(x[,harm.sel]~fac), test="Hotelling")
   return(mod)}
 
-#meanshapes
+clust <- function(...){UseMethod("clust")}
+clust.OutCoe <- function(OutCoe, fac,
+                        method = "euclidean", type="unrooted", palette=col.summer2, ...){
+                if (missing(fac)) {
+                    cols <- rep("black", nrow(OutCoe$coe))
+                } else {
+                  facs <- OutCoe$fac[, fac]
+                  cols <- palette(nlevels(facs))[facs]
+                }
+                dist.mat <- dist(OutCoe$coe, method=method)
+                OutCoe.hc <- hclust(dist.mat)
+                op <- par(no.readonly = TRUE)
+                par(oma=rep(0, 4), mar=rep(0,4))
+                plot(as.phylo.hclust(OutCoe.hc), tip.color=cols, type=type, ...)
+                par(op)
+                return(list(dist.mat=dist.mat, hclust=OutCoe.hc))}
+
+
 meanshapes <- function(...){UseMethod("meanshapes")}
 meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
   nb.h <-  ncol(OutCoe$coe)/4
@@ -588,13 +605,9 @@ meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
 
 #c OutCoe
 
-
-#meanshape
-#clust
 #discri
 #hquant
 #hqual
-#clust
 #todo Out.check
 # Out.nbh check etc. coderepété sur 10 lines
 # smooth.it -> nb.s ?
