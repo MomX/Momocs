@@ -309,6 +309,11 @@ coo.perim.pts <-  function (coo){
   d <- sqrt(apply((coo - coo.slide(coo, n))^2, 1, sum))[-1]
   return(d)}
 
+coo.perim.cum <- function(coo){
+  coo <- coo.check(coo)
+  d <- cumsum(sqrt(apply((coo-rbind(coo[1,],coo[-(dim(coo)[1]),]))^2,1,sum)))
+  return(d)}
+
 # coo.bookstein registers a new baseline for the shape, with the ldk1-th
 # and ldk2-th points being set on (-0.5, 0) and (0.5, 0), respectively.
 #coo. <- function(coo){UseMethod("coo.")}

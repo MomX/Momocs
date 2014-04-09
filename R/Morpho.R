@@ -277,8 +277,6 @@ polynomials <- function(coo, n, norm=TRUE, orthogonal=TRUE){
   if (missing(n)) {
     n <- 5
     warning(paste(" * 'n' not provided and set to", n, "\n"))}
-  # borrowed to Gregor Gorjanc
-  # see http://www.r-bloggers.com/fitting-legendre-orthogonal-polynomials-in-r/
   x <- poly(coo[, 1], degree=n, raw=!orthogonal)
   mod <- lm(coo[, 2] ~ x)
   return(mod)}
