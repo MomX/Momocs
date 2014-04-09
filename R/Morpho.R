@@ -1,15 +1,7 @@
-################################################################################
-# FourierCore.R
-# Core functions to perform eft, rft, tft
-# ------------------------------------------------------------------------------
 
-
-# Fourier Core Functions -------------------------------------------------------
+# 1. Outline functions ----------------------------------------------------
 # Mainly due to Julien Claude with some wrapping
-
-# Elliptical Fourier Analysis --------------------------------------------------
-# smooth it should be removed from here ? #todo
-# given a shape, calculate eft
+# 1.1 Elliptical Fourier Analysis --------------------------------------------------
 efourier  <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   coo <- coo.check(coo)
   if (is.closed(coo)) coo <- coo.unclose(coo)
@@ -125,7 +117,7 @@ ef.amplify <- function(ef, amp=rep(0.5, 4)){
   ef$dn <- ef$dn*amp[4]
   return(ef)}
 
-# Radius lengths Fourier analysis ----------------------------------------------
+# 1.2 Radius lengths Fourier analysis ----------------------------------------------
 # given a shape, returns a 'rft' vector
 rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   coo <- coo.check(coo)
@@ -186,7 +178,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   if (plot) coo.plot(shp)
   return(shp)}
 
-# Tangent angle ----------------------------------------------------------------
+# 1.3 Tangent angle ----------------------------------------------------------------
 # given a shape returns a tft vector
 tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   if (missing(nb.h))  {stop("nb.h must be provided")}
@@ -263,7 +255,6 @@ tfourier.shape <- function(an, bn, ao=0, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   if (plot) coo.plot(shp)
   return(shp)}
 
-# calculates the harmonic power of a xft vector --------------------------------
 # xft vectors should be signed by a class or something #todo
 # Calculates harmonic power given a list from e/t/rfourier
 harm.pow <- function(xf){
@@ -276,3 +267,34 @@ harm.pow <- function(xf){
     }
   } else {
     stop("a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")}}
+
+
+# 2. Open outlines --------------------------------------------------------
+
+# 2.1 Polynomials ---------------------------------------------------------
+polynomials <- function(coo, n, norm=TRUE, orthogonal=TRUE){
+  coo <- coo.check(coo)
+  if (missing(n)) {
+    n <- 5
+    warning(paste(" * 'n' not provided and set to", n, "\n"))}
+  # borrowed to Gregor Gorjanc
+  # see http://www.r-bloggers.com/fitting-legendre-orthogonal-polynomials-in-r/
+  x <- poly(coo[, 1], degree=n, raw=!orthogonal)
+  mod <- lm(coo[, 2] ~ x)
+  return(mod)}
+
+polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model)){
+  if (missing(x.pred)) {
+    x.pred <- seq(-0.5, 0.5, length=nb.pts)}
+  x.poly <- poly(x.pred, degree=mod$rank-1)
+  y.pred <- predict(mod, newdata=data.frame(x=x.poly))
+  coo <- cbind(x.pred, y.pred)
+  colnames(coo) <- c("x", "y")
+  return(coo)}
+
+
+# 2.2 Cubic splines -------------------------------------------------------
+# 2.3 Bezier splines -------------------------------------------------------
+
+
+

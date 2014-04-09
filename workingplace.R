@@ -1,17 +1,25 @@
 rm(list = ls())
 setwd("/Users/vincent/Momocs/")
-require(MASS) ; require(rgl) ; require(ape)
+require(MASS) ; require(rgl) ; require(ape) ; require(orthopolynom)
 source("R/global.R")
 source("R/Out.R")
-source("R/FourierCore.R")
+source("R/Morpho.R")
 load("data/bot.rda")
 load("data/trilo.rda")
 load("data/mosquito.rda")
 load("data/hearts.rda")
+load("data/Dattes.rda")
 load("~/Dropbox/MG-out.rda")
 
 bot <- coo.sample(bot, 64)
 b <- bot[5]
+bup <- coo.up(coo.align.xax(b))
 botE <- eFourier(bot, 6, norm=TRUE)
 botP <- pca(botE)
 ms <- meanshapes(botE, 1)
+
+coo.plot(bup)
+# bup.p <- polynomials(bup, n=5, ortho=FALSE)
+# bup.pi <- polynomials.i(bup.p, bup[, 1])
+lines(bup.pi, col="red", type="b", pch=20)
+
