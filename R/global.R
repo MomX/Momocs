@@ -306,7 +306,7 @@ coo.rotate.center <- function(coo, theta, center=c(0, 0)){
 coo.perim.pts <-  function (coo){
   coo <- coo.check(coo)
   n <- nrow(coo)
-  d <- sqrt(apply((coo - coo.slide(coo, n))^2, 1, sum))
+  d <- sqrt(apply((coo - coo.slide(coo, n))^2, 1, sum))[-1]
   return(d)}
 
 # coo.bookstein registers a new baseline for the shape, with the ldk1-th

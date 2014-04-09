@@ -18,8 +18,8 @@ botE <- eFourier(bot, 6, norm=TRUE)
 botP <- pca(botE)
 ms <- meanshapes(botE, 1)
 
-coo.plot(bup)
+# coo.plot(bup)
 # bup.p <- polynomials(bup, n=5, ortho=FALSE)
 # bup.pi <- polynomials.i(bup.p, bup[, 1])
-lines(bup.pi, col="red", type="b", pch=20)
+# lines(bup.pi, col="red", type="b", pch=20)
 
