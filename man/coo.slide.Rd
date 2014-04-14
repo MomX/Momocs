@@ -2,11 +2,14 @@
 \alias{coo.slide}
 \title{Slides coordinates}
 \usage{
-coo.slide(coo)
+coo.slide(coo, id1)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
   Out object.}
+
+  \item{id1}{the id of the point that will become the new
+  first point.}
 }
 \value{
 a matrix of (x,y) coordinates or an Out object.
@@ -19,23 +22,27 @@ first one.
 data(bot)
 stack(bot)
 stack(coo.slide(bot, 50))
-coo.plot(b[4])
-coo.slide(coo.trans(b[4], 40))coo.slide <- function(coo, id1){UseMethod("coo.slide")}
+coo.plot(bot[4])
+coo.plot(coo.slide(coo.trans(bot[4], 40)))
 }
 \seealso{
 Other coo: \code{\link{coo.align}},
-\code{\link{coo.align}}; \code{\link{coo.center}},
+\code{\link{coo.align}}; \code{\link{coo.bookstein}},
+\code{\link{coo.bookstein}}; \code{\link{coo.center}},
 \code{\link{coo.center}}; \code{\link{coo.centpos}},
 \code{\link{coo.centpos}}; \code{\link{coo.check}};
 \code{\link{coo.close}}, \code{\link{coo.close}};
-\code{\link{coo.rotate}}, \code{\link{coo.rotate}};
-\code{\link{coo.sample.int}}, \code{\link{coo.sample.int}};
-\code{\link{coo.sample}}, \code{\link{coo.sample.rr}};
-\code{\link{coo.sample}}, \code{\link{coo.sample}};
-\code{\link{coo.scale}}, \code{\link{coo.scale}};
-\code{\link{coo.smooth}}, \code{\link{coo.smooth}};
-\code{\link{coo.trans}}, \code{\link{coo.trans}};
-\code{\link{is.closed}}, \code{\link{is.closed}}
+\code{\link{coo.perim.pts}}, \code{\link{coo.perim.pts}};
+\code{\link{coo.rotatecenter}},
+\code{\link{coo.rotatecenter}}; \code{\link{coo.rotate}},
+\code{\link{coo.rotate}}; \code{\link{coo.sample.int}},
+\code{\link{coo.sample.int}}; \code{\link{coo.sample.rr}},
+\code{\link{coo.sample.rr}}; \code{\link{coo.sample}},
+\code{\link{coo.sample}}; \code{\link{coo.scale}},
+\code{\link{coo.scale}}; \code{\link{coo.smooth}},
+\code{\link{coo.smooth}}; \code{\link{coo.trans}},
+\code{\link{coo.trans}}; \code{\link{is.closed}},
+\code{\link{is.closed}}
 }
 \keyword{coo}
 

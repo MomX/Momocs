@@ -1,31 +1,44 @@
-\name{coo.centpos}
-\alias{coo.centpos}
-\title{Returns the position of the centroid}
+\name{coo.bookstein}
+\alias{coo.bookstein}
+\title{Register new baselines}
 \usage{
-coo.centpos(coo)
+coo.bookstein(coo, ldk1, ldk2)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
   Out object.}
+
+  \item{ldk1}{the id of the first point of the new
+  baseline}
+
+  \item{ldk2}{the id of the second point of the new
+  baseline}
+
+  \item{t1}{a numerix for the (x,y) coordinates of the
+  first point of the new baseline}
+
+  \item{t2}{a numerix for the (x,y) coordinates of the
+  second point of the new baseline}
 }
 \value{
-a numeric or a matrix of (x,y) coordinates.
+a matrix of (x,y) coordinates or an Out object.
 }
 \description{
-Returns the (x, y) centroid coordinates of a shape.
+coo.bookstein registers a new baseline for the shape, with
+the ldk1-th
 }
 \examples{
-data(bot)
-stack(bot)
-stack(coo.smooth(bot, 10))
-coo.plot(bot[4])
-coo.plot(coo.smooth(bot[4], 30))
+data(hearts)
+stack(hearts)
+stack(coo.bookstein(hearts, 2, 4))
+# note the scale
+stack(coo.baseline(hearts, 2, 4, c(-1, 0), c(1, 0)))
 }
 \seealso{
 Other coo: \code{\link{coo.align}},
-\code{\link{coo.align}}; \code{\link{coo.bookstein}},
-\code{\link{coo.bookstein}}; \code{\link{coo.center}},
-\code{\link{coo.center}}; \code{\link{coo.check}};
+\code{\link{coo.align}}; \code{\link{coo.center}},
+\code{\link{coo.center}}; \code{\link{coo.centpos}},
+\code{\link{coo.centpos}}; \code{\link{coo.check}};
 \code{\link{coo.close}}, \code{\link{coo.close}};
 \code{\link{coo.perim.pts}}, \code{\link{coo.perim.pts}};
 \code{\link{coo.rotatecenter}},

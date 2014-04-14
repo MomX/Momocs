@@ -6,8 +6,7 @@
 Out(coo.list, ldk = list(), fac = data.frame())
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a \code{Out}
-  object.}
+  \item{coo.list}{a list of matrices of (x,y) coordinates.}
 
   \item{ldk}{(optionnal) a list of landmarks on these
   coordinates (provided as the row numbers) for every
@@ -30,10 +29,10 @@ They must be built from a list (or an array) of
 coordinates.
 }
 \examples{
-coo.list <- list(out1=matrix(1:10, nc=2),
-out2=matrix(1:20, nc=2))
-anOutobject <- Out(coo.list)
-anOutobject
+#coo.list <- list(out1=matrix(1:10, nc=2),
+#out2=matrix(1:20, nc=2))
+#anOutobject <- Out(coo.list)
+#anOutobject
 }
 \keyword{Out}
 

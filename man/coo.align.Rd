@@ -19,23 +19,27 @@ var-cov matrix and eigen values.
 data(bot)
 stack(bot)
 stack(coo.align(bot))
-coo.plot(b[4])
-coo.plot(coo.align(b[4]))
+coo.plot(bot[4])
+coo.plot(coo.align(bot[4]))
 }
 \seealso{
-Other coo: \code{\link{coo.center}},
+Other coo: \code{\link{coo.bookstein}},
+\code{\link{coo.bookstein}}; \code{\link{coo.center}},
 \code{\link{coo.center}}; \code{\link{coo.centpos}},
 \code{\link{coo.centpos}}; \code{\link{coo.check}};
 \code{\link{coo.close}}, \code{\link{coo.close}};
-\code{\link{coo.rotate}}, \code{\link{coo.rotate}};
-\code{\link{coo.sample.int}}, \code{\link{coo.sample.int}};
-\code{\link{coo.sample}}, \code{\link{coo.sample.rr}};
-\code{\link{coo.sample}}, \code{\link{coo.sample}};
-\code{\link{coo.scale}}, \code{\link{coo.scale}};
-\code{\link{coo.slide}}, \code{\link{coo.slide}};
-\code{\link{coo.smooth}}, \code{\link{coo.smooth}};
-\code{\link{coo.trans}}, \code{\link{coo.trans}};
-\code{\link{is.closed}}, \code{\link{is.closed}}
+\code{\link{coo.perim.pts}}, \code{\link{coo.perim.pts}};
+\code{\link{coo.rotatecenter}},
+\code{\link{coo.rotatecenter}}; \code{\link{coo.rotate}},
+\code{\link{coo.rotate}}; \code{\link{coo.sample.int}},
+\code{\link{coo.sample.int}}; \code{\link{coo.sample.rr}},
+\code{\link{coo.sample.rr}}; \code{\link{coo.sample}},
+\code{\link{coo.sample}}; \code{\link{coo.scale}},
+\code{\link{coo.scale}}; \code{\link{coo.slide}},
+\code{\link{coo.slide}}; \code{\link{coo.smooth}},
+\code{\link{coo.smooth}}; \code{\link{coo.trans}},
+\code{\link{coo.trans}}; \code{\link{is.closed}},
+\code{\link{is.closed}}
 }
 \keyword{coo}
 

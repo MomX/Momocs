@@ -10,7 +10,7 @@
 #'  
 #' @export Out Coo 
 #' 
-#' @param coo a matrix of (x,y) coordinates or a \code{Out} object.
+#' @param coo.list a list of matrices of (x,y) coordinates.
 #' @param ldk (optionnal) a list of landmarks on these coordinates (provided as the row numbers) for every outline
 #' @param fac (optionnal) a data.frame of factors, specifying the grouping structure.
 #' @return a \code{Out} object.
@@ -18,13 +18,13 @@
 #' @family Out
 #' @keywords Out
 #' @examples
-#' coo.list <- list(out1=matrix(1:10, nc=2),
-#' out2=matrix(1:20, nc=2))
-#' anOutobject <- Out(coo.list)
-#' anOutobject
-# Out class builder
+#' 
+#' #coo.list <- list(out1=matrix(1:10, nc=2),
+#' #out2=matrix(1:20, nc=2))
+#' #anOutobject <- Out(coo.list)
+#' #anOutobject
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){
-  Out <- list(coo=coo.list, ldk=list(), fac=fac)
+  Out <- list(coo.list, ldk=ldk, fac=fac)
   class(Out) <- "Out"
   return(Out)}
 
@@ -36,9 +36,9 @@ Coo  <- function(coo.list, ldk=list(), fac=data.frame()){
   class(Out) <- "Out"
   return(Out)}
 
-
 # The print method for Out objects
-print.Out <- function(Out){
+print.Out <- function(x, ...){
+  Out <- x
   ### Header
   cat("An Out object (see ?Out) with: \n")
   cat(rep("-", 20),"\n", sep="")
@@ -48,10 +48,10 @@ print.Out <- function(Out){
   # number of outlines
   cat(" -", coo.nb, "outlines\n")
   # one random outline
-  eg <- sample(length(Out), 1)
+  eg <- sample(length(Out$coo), 1)
   coo.eg <- Out$coo[[eg]]
   colnames(coo.eg) <- c("x", "y")
-  cat(" - One random outline in $coo: '", names(Out)[eg], "':\n", sep="")
+  cat(" - One random outline in $coo: '", names(Out$coo)[eg], "':\n", sep="")
   if (nrow(coo.eg) > 5) {
     print(coo.eg[1:5, ], print.gap=2)
     cat("etc.\n")
@@ -86,7 +86,8 @@ print.Out <- function(Out){
 # allows to maintain the tradition str() behaviour
 #' @export str.Out "[.Out" "[[.Out" length.Out names.Out "names<-.Out" print.Out
 #' @export plot.Out stack.Out panel panel.Out 
-str.Out <- function(Out){
+str.Out <- function(object, ...){
+  Out <- object
   ls.str(Out)}
 
 # Out can be indexing both to [ ] and [[ ]]
@@ -103,11 +104,13 @@ str.Out <- function(Out){
   if (is.numeric(i)) { return(x$coo[[i]]) }}
 
 # length on an Out return the length of Out$coo, ie the number of coordinates
-length.Out <- function(Out) {
+length.Out <- function(x) {
+  Out <- x
   return(length(Out$coo))}
 
 # names() on a Out retrieves the names of the Out$coo
-names.Out <- function(Out){
+names.Out <- function(x){
+  Out <- x
   return(names(Out$coo))}
 
 # which can in return may be named using names(Out) <- 
@@ -133,7 +136,8 @@ Out2$fac <- .refactor(Out2$fac)
 # 2. Out plotting methods ----------------------------------------------------
 # The main plot method that when plot(Out)
 # For a quick investigation of the shpes included in a Coo object
-plot.Out <- function(Out, id, ...){
+plot.Out <- function(x, id, ...){
+  Out <- x
   if (missing(id)) {
     repeat{
       id <- sample(length(Out), 1)
@@ -151,7 +155,8 @@ plot.Out <- function(Out, id, ...){
 # stack(Out) shows all the shapes stacked on the same plane
 stack.Out <- function(x, cols, borders,
                       points=FALSE, first.point=TRUE, centroid=TRUE,
-                      ldk=TRUE, ldk.pch=3, ldk.col="red", ldk.cex=1, xy.axis=TRUE){
+                      ldk=TRUE, ldk.pch=3, ldk.col="red", ldk.cex=1,
+                      xy.axis=TRUE, ...){
   Out <- x
   if (missing(cols)) {
     cols     <- rep(NA, length(Out))}
@@ -173,7 +178,7 @@ stack.Out <- function(x, cols, borders,
     points(Out[Out$ldk, ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
 
 # panel(Out) for a family picture of the shapes
-panel <- function(x, ...){UseMethod("panel")}
+panel <- function(Out, ...){UseMethod("panel")}
 panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
   
   if (missing(cols)) {

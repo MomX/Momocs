@@ -1,31 +1,28 @@
-\name{coo.rotate}
-\alias{coo.rotate}
-\title{Rotates coordinates}
+\name{coo.rotatecenter}
+\alias{coo.rotatecenter}
+\title{Rotates shapes with a custom center}
 \usage{
-coo.rotate(coo, theta = 0)
+coo.rotatecenter(coo, theta, center = c(0, 0))
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
   Out object.}
 
-  \item{theta}{angle in radians}
+  \item{theta}{an angle, in radians.}
+
+  \item{center}{the (x, y) position of the center}
 }
 \value{
 a matrix of (x,y) coordinates or an Out object.
 }
 \description{
-Rotates the coordinates by a 'theta' angle (in radians) If
-not provided, assumed to be the centroid size. It involves
-three steps: centering from current position, dividing
-coordinates by 'scale', pusing back to the original
-position.
+rotates a shape of "theta" angles (in radians) and with a
+(x, y) "center".
 }
 \examples{
 data(bot)
-stack(bot)
-stack(coo.rotate(bot, pi))
 coo.plot(bot[4])
-coo.plot(coo.rotate(bot[4], -pi/2))
+coo.plot(coo.rotatecenter(bot[4], pi/2, c(0, 0)))
 }
 \seealso{
 Other coo: \code{\link{coo.align}},
@@ -35,8 +32,7 @@ Other coo: \code{\link{coo.align}},
 \code{\link{coo.centpos}}; \code{\link{coo.check}};
 \code{\link{coo.close}}, \code{\link{coo.close}};
 \code{\link{coo.perim.pts}}, \code{\link{coo.perim.pts}};
-\code{\link{coo.rotatecenter}},
-\code{\link{coo.rotatecenter}};
+\code{\link{coo.rotate}}, \code{\link{coo.rotate}};
 \code{\link{coo.sample.int}}, \code{\link{coo.sample.int}};
 \code{\link{coo.sample.rr}}, \code{\link{coo.sample.rr}};
 \code{\link{coo.sample}}, \code{\link{coo.sample}};

@@ -1,33 +1,33 @@
-\name{coo.centpos}
-\alias{coo.centpos}
-\title{Returns the position of the centroid}
+\name{coo.perim.pts}
+\alias{coo.perim.pts}
+\title{Calculates the (cumulative) distance between every points of a shape.}
 \usage{
-coo.centpos(coo)
+coo.perim.pts(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  \item{coo}{a matrix or a list of (x,y) coordinates.}
 }
 \value{
-a numeric or a matrix of (x,y) coordinates.
+a numeric with every distance for coo.perim.pts; the
+cumulated sum for coo.perim.cum
 }
 \description{
-Returns the (x, y) centroid coordinates of a shape.
+Calculates the euclidean distance between every points of a
+shape for coo.perim.pts. The cumulative sum for
+coo.perim.cum
 }
 \examples{
 data(bot)
-stack(bot)
-stack(coo.smooth(bot, 10))
-coo.plot(bot[4])
-coo.plot(coo.smooth(bot[4], 30))
+coo.perim.pts(bot[4])
+coo.perim.cum(bot[4])
 }
 \seealso{
 Other coo: \code{\link{coo.align}},
 \code{\link{coo.align}}; \code{\link{coo.bookstein}},
 \code{\link{coo.bookstein}}; \code{\link{coo.center}},
-\code{\link{coo.center}}; \code{\link{coo.check}};
+\code{\link{coo.center}}; \code{\link{coo.centpos}},
+\code{\link{coo.centpos}}; \code{\link{coo.check}};
 \code{\link{coo.close}}, \code{\link{coo.close}};
-\code{\link{coo.perim.pts}}, \code{\link{coo.perim.pts}};
 \code{\link{coo.rotatecenter}},
 \code{\link{coo.rotatecenter}}; \code{\link{coo.rotate}},
 \code{\link{coo.rotate}}; \code{\link{coo.sample.int}},
