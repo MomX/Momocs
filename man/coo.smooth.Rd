@@ -1,8 +1,8 @@
-\name{coo.scale}
-\alias{coo.scale}
-\title{Scales coordinates}
+\name{coo.smooth}
+\alias{coo.smooth}
+\title{Smoothes coordinates}
 \usage{
-coo.scale(coo, scale)
+coo.smooth(coo, n)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
@@ -12,18 +12,15 @@ coo.scale(coo, scale)
 a matrix of (x,y) coordinates or an Out object.
 }
 \description{
-Scales the coordinates by a 'scale' factor. If not
-provided, assumed to be the centroid size. It involves
-three steps: centering from current position, dividing
-coordinates by 'scale', pusing back to the original
-position.
+Smoothes coordinates using a simple moving average. May be
+useful to remove digitization noise.
 }
 \examples{
 data(bot)
 stack(bot)
-stack(coo.scale(bot))
+stack(coo.smooth(bot, 10))
 coo.plot(b[4])
-coo.plot(coo.scale(b[4]))
+coo.plot(coo.smooth(b[4], 30))
 }
 \seealso{
 Other coo: \code{\link{coo.align}},
@@ -35,8 +32,8 @@ Other coo: \code{\link{coo.align}},
 \code{\link{coo.sample.int}}, \code{\link{coo.sample.int}};
 \code{\link{coo.sample}}, \code{\link{coo.sample.rr}};
 \code{\link{coo.sample}}, \code{\link{coo.sample}};
+\code{\link{coo.scale}}, \code{\link{coo.scale}};
 \code{\link{coo.slide}}, \code{\link{coo.slide}};
-\code{\link{coo.smooth}}, \code{\link{coo.smooth}};
 \code{\link{coo.trans}}, \code{\link{coo.trans}};
 \code{\link{is.closed}}, \code{\link{is.closed}}
 }

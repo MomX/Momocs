@@ -1,40 +1,36 @@
-\name{coo.scale}
-\alias{coo.scale}
-\title{Scales coordinates}
+\name{coo.centpos}
+\alias{coo.centpos}
+\title{Returns the position of the centroid}
 \usage{
-coo.scale(coo, scale)
+coo.centpos(coo)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
   Out object.}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a numeric or a matrix of (x,y) coordinates.
 }
 \description{
-Scales the coordinates by a 'scale' factor. If not
-provided, assumed to be the centroid size. It involves
-three steps: centering from current position, dividing
-coordinates by 'scale', pusing back to the original
-position.
+Returns the (x, y) centroid coordinates of a shape.
 }
 \examples{
 data(bot)
 stack(bot)
-stack(coo.scale(bot))
+stack(coo.smooth(bot, 10))
 coo.plot(b[4])
-coo.plot(coo.scale(b[4]))
+coo.plot(coo.smooth(b[4], 30))
 }
 \seealso{
 Other coo: \code{\link{coo.align}},
 \code{\link{coo.align}}; \code{\link{coo.center}},
-\code{\link{coo.center}}; \code{\link{coo.centpos}},
-\code{\link{coo.centpos}}; \code{\link{coo.check}};
+\code{\link{coo.center}}; \code{\link{coo.check}};
 \code{\link{coo.close}}, \code{\link{coo.close}};
 \code{\link{coo.rotate}}, \code{\link{coo.rotate}};
 \code{\link{coo.sample.int}}, \code{\link{coo.sample.int}};
 \code{\link{coo.sample}}, \code{\link{coo.sample.rr}};
 \code{\link{coo.sample}}, \code{\link{coo.sample}};
+\code{\link{coo.scale}}, \code{\link{coo.scale}};
 \code{\link{coo.slide}}, \code{\link{coo.slide}};
 \code{\link{coo.smooth}}, \code{\link{coo.smooth}};
 \code{\link{coo.trans}}, \code{\link{coo.trans}};

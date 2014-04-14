@@ -43,11 +43,11 @@ splines2 <- function(coo, nb.pts=100){
   y.i <- spline(z, coo[, 2], method="natural", n=100)$y
   return(cbind(x.i, y.i))}
 
-  # fx.i <- spline(seq(1, 6.3647907, length=length(z)), b[, 1], method="natural", n=100)$y
-  # fy.i <- spline(seq(1, 6.3647907, length=length(z)), b[, 2], method="natural", n=100)$y
-  # lines(fx.i, fy.i, col="green")
-  
-  
+# fx.i <- spline(seq(1, 6.3647907, length=length(z)), b[, 1], method="natural", n=100)$y
+# fy.i <- spline(seq(1, 6.3647907, length=length(z)), b[, 2], method="natural", n=100)$y
+# lines(fx.i, fy.i, col="green")
+
+
 
 # 
 # coo.plot(b)
@@ -85,7 +85,7 @@ click.bez <- function(x, n=10){
     ldk[i, ] <- l2m(locator(1))
     cat(ldk)
     bez <- bezier.i(bezier(ldk[1:i,])$B)
-}}
+  }}
 click.splines <- function(x, n=20){
   x <- as.raster(x)
   plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1)
@@ -102,5 +102,5 @@ click.splines <- function(x, n=20){
     spl <- splines2(ldk[1:i,])
   }}
 
-click.splines(x)
+#click.splines(x)
 

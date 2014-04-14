@@ -517,14 +517,14 @@ NULL
 #' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and reduced to 80 coordinates per outline.
 NULL
 
-#' Outline coordinates of 50 date seeds (Phoenix dactylifera), with 2 views
-#' 
-#' @docType data
-#' @name phoenix
-#' @keywords datasets
-#' @format An Out object with the outline coordinates of 50 date seeds
-#' (Phoenix dactylifera), with dorsal and lateral views
-#' @source We thank Jean-Frédéric Terral and Sarah Ivorral (UMR CBAE, Montpellier, France)
-#' from allowing us to share the data.
-NULL
+# #' Outline coordinates of 50 date seeds (Phoenix dactylifera), with 2 views
+# #' 
+# #' @docType data
+# #' @name phoenix
+# #' @keywords datasets
+# #' @format An Out object with the outline coordinates of 50 date seeds
+# #' (Phoenix dactylifera), with dorsal and lateral views
+# #' @source We thank Jean-Frédéric Terral and Sarah Ivorral (UMR CBAE, Montpellier, France)
+# #' from allowing us to share the data.
+# NULL
 
