@@ -1,41 +1,49 @@
-\name{coo.close}
-\alias{coo.close}
-\title{Closes/'Uncloses' shapes}
+\name{coo.baseline}
+\alias{coo.baseline}
+\title{Register new baselines}
 \usage{
-coo.close(coo)
+coo.baseline(coo, ldk1, ldk2, t1, t2)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix or a list of (x,y) coordinates or an
+  Out object.}
+
+  \item{ldk1}{the id of the first point of the new
+  baseline}
+
+  \item{ldk2}{the id of the second point of the new
+  baseline}
+
+  \item{t1}{a numerix for the (x,y) coordinates of the
+  first point of the new baseline}
+
+  \item{t2}{a numerix for the (x,y) coordinates of the
+  second point of the new baseline}
 }
 \value{
 a matrix of (x,y) coordinates or an Out object.
 }
 \description{
-Returns a (un)closed shape from (un)closed shapes.
+A non-exact baseline registration on t1 and t2 coordinates,
 }
 \examples{
-x <- (matrix(1:10, ncol=2))
-x2 <- coo.close(x)
-x3 <- coo.unclose(x2)
-x
-is.closed(x)
-x2
-is.closed(x2)
-x3
-is.closed(x3)
+data(hearts)
+stack(hearts)
+# note the scale
+stack(coo.baseline(hearts, 2, 4, c(-1, 0), c(1, 0)))
 }
 \seealso{
 Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.align}}, \code{\link{coo.align}};
 \code{\link{coo.area}}, \code{\link{coo.area}};
-\code{\link{coo.baseline}}, \code{\link{coo.baseline}};
 \code{\link{coo.bookstein}}, \code{\link{coo.bookstein}};
 \code{\link{coo.calliper}}, \code{\link{coo.calliper}};
 \code{\link{coo.centdist}}, \code{\link{coo.centdist}};
 \code{\link{coo.center}}, \code{\link{coo.center}};
 \code{\link{coo.centpos}}, \code{\link{coo.centpos}};
 \code{\link{coo.centsize}}, \code{\link{coo.centsize}};
-\code{\link{coo.check}}; \code{\link{coo.down}};
+\code{\link{coo.check}}; \code{\link{coo.close}},
+\code{\link{coo.close}}; \code{\link{coo.down}};
 \code{\link{coo.force2close}};
 \code{\link{coo.interpolate}},
 \code{\link{coo.interpolate}}; \code{\link{coo.ldk}},

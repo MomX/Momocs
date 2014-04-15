@@ -1,28 +1,26 @@
-\name{coo.close}
-\alias{coo.close}
-\title{Closes/'Uncloses' shapes}
+\name{coo.centdist}
+\alias{coo.centdist}
+\title{Returns the distance between everypoints and the centroid
+For every point of the shape, returns the (centroid-points) distance.}
 \usage{
-coo.close(coo)
+coo.centdist(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix or a list of (x,y) coordinates.}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates.
 }
 \description{
-Returns a (un)closed shape from (un)closed shapes.
+Returns the distance between everypoints and the centroid
+For every point of the shape, returns the (centroid-points)
+distance.
 }
 \examples{
-x <- (matrix(1:10, ncol=2))
-x2 <- coo.close(x)
-x3 <- coo.unclose(x2)
-x
-is.closed(x)
-x2
-is.closed(x2)
-x3
-is.closed(x3)
+data(bot)
+b <- coo.sample(bot[4], 64)
+d <- coo.centdist(b)
+barplot(d)
 }
 \seealso{
 Other coo: \code{\link{coo.align.xax}};
@@ -31,11 +29,11 @@ Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.baseline}}, \code{\link{coo.baseline}};
 \code{\link{coo.bookstein}}, \code{\link{coo.bookstein}};
 \code{\link{coo.calliper}}, \code{\link{coo.calliper}};
-\code{\link{coo.centdist}}, \code{\link{coo.centdist}};
 \code{\link{coo.center}}, \code{\link{coo.center}};
 \code{\link{coo.centpos}}, \code{\link{coo.centpos}};
 \code{\link{coo.centsize}}, \code{\link{coo.centsize}};
-\code{\link{coo.check}}; \code{\link{coo.down}};
+\code{\link{coo.check}}; \code{\link{coo.close}},
+\code{\link{coo.close}}; \code{\link{coo.down}};
 \code{\link{coo.force2close}};
 \code{\link{coo.interpolate}},
 \code{\link{coo.interpolate}}; \code{\link{coo.ldk}},

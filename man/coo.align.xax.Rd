@@ -1,36 +1,37 @@
-\name{coo.check}
-\alias{coo.check}
-\title{Checks shape}
+\name{coo.align.xax}
+\alias{coo.align.xax}
+\title{Aligns shapes along the x-axis
+Align the longest axis of a shape along the x-axis}
 \usage{
-coo.check(coo)
+\method{coo.align}{xax}(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a list.}
+  \item{coo}{a matrix or a list of (x,y) coordinates.}
 }
 \value{
 a matrix of (x,y) coordinates.
 }
 \description{
-A simple utility, used internally, mostly in the coo
-functions and methods. Returns a matrix, when passed with
-either a list or a matrix of coordinates.
+Aligns shapes along the x-axis Align the longest axis of a
+shape along the x-axis
 }
 \examples{
-#coo.check("Not a shape")
-#coo.check(matrix(1:10, ncol=2))
-#coo.check(list(x=1:5, y=6:10))
+data(bot)
+b <- bot[4]
+coo.plot(b)
+coo.plot(coo.align.xax(b))
 }
 \seealso{
-Other coo: \code{\link{coo.align.xax}};
-\code{\link{coo.align}}, \code{\link{coo.align}};
-\code{\link{coo.area}}, \code{\link{coo.area}};
-\code{\link{coo.baseline}}, \code{\link{coo.baseline}};
-\code{\link{coo.bookstein}}, \code{\link{coo.bookstein}};
-\code{\link{coo.calliper}}, \code{\link{coo.calliper}};
-\code{\link{coo.centdist}}, \code{\link{coo.centdist}};
-\code{\link{coo.center}}, \code{\link{coo.center}};
-\code{\link{coo.centpos}}, \code{\link{coo.centpos}};
-\code{\link{coo.centsize}}, \code{\link{coo.centsize}};
+Other coo: \code{\link{coo.align}},
+\code{\link{coo.align}}; \code{\link{coo.area}},
+\code{\link{coo.area}}; \code{\link{coo.baseline}},
+\code{\link{coo.baseline}}; \code{\link{coo.bookstein}},
+\code{\link{coo.bookstein}}; \code{\link{coo.calliper}},
+\code{\link{coo.calliper}}; \code{\link{coo.centdist}},
+\code{\link{coo.centdist}}; \code{\link{coo.center}},
+\code{\link{coo.center}}; \code{\link{coo.centpos}},
+\code{\link{coo.centpos}}; \code{\link{coo.centsize}},
+\code{\link{coo.centsize}}; \code{\link{coo.check}};
 \code{\link{coo.close}}, \code{\link{coo.close}};
 \code{\link{coo.down}}; \code{\link{coo.force2close}};
 \code{\link{coo.interpolate}},

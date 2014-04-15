@@ -1,33 +1,27 @@
-\name{coo.close}
-\alias{coo.close}
-\title{Closes/'Uncloses' shapes}
+\name{coo.area}
+\alias{coo.area}
+\title{Calculates the area
+Works for any non-crossing polygon.}
 \usage{
-coo.close(coo)
+coo.area(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix or a list of (x,y) coordinates.}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a numeric, the area.
 }
 \description{
-Returns a (un)closed shape from (un)closed shapes.
+Calculates the area Works for any non-crossing polygon.
 }
 \examples{
-x <- (matrix(1:10, ncol=2))
-x2 <- coo.close(x)
-x3 <- coo.unclose(x2)
-x
-is.closed(x)
-x2
-is.closed(x2)
-x3
-is.closed(x3)
+data(bot)
+coo.area(bot[4])
+hist(sapply(bot$coo, coo.area), breaks=10)
 }
 \seealso{
 Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.align}}, \code{\link{coo.align}};
-\code{\link{coo.area}}, \code{\link{coo.area}};
 \code{\link{coo.baseline}}, \code{\link{coo.baseline}};
 \code{\link{coo.bookstein}}, \code{\link{coo.bookstein}};
 \code{\link{coo.calliper}}, \code{\link{coo.calliper}};
@@ -35,7 +29,8 @@ Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.center}}, \code{\link{coo.center}};
 \code{\link{coo.centpos}}, \code{\link{coo.centpos}};
 \code{\link{coo.centsize}}, \code{\link{coo.centsize}};
-\code{\link{coo.check}}; \code{\link{coo.down}};
+\code{\link{coo.check}}; \code{\link{coo.close}},
+\code{\link{coo.close}}; \code{\link{coo.down}};
 \code{\link{coo.force2close}};
 \code{\link{coo.interpolate}},
 \code{\link{coo.interpolate}}; \code{\link{coo.ldk}},

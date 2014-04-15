@@ -59,9 +59,9 @@ splines2 <- function(coo, nb.pts=100){
 require(jpeg)
 require(grid)
 
-x <- readJPEG("~/Desktop/M_lite.jpg")
-x <- apply(x, 1:2, mean)
-class(x)
+# x <- readJPEG("~/Desktop/M_lite.jpg")
+# x <- apply(x, 1:2, mean)
+# class(x)
 
 # dev.off()
 # system.time(image(x, asp=1))

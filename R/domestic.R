@@ -1,4 +1,35 @@
 
+# 1. Package documentation and NAMESPACE import ---------------------------
+
+#' Momocs
+#' 
+#' Lubridate provides tools that make it easier to parse and 
+#' manipulate dates. These tools are grouped below by common 
+#' purpose. More information about each function can be found in 
+#' its help documentation.
+#'
+#' Parsing dates
+#'
+#' Lubridate's parsing functions read strings into R as POSIXct 
+#' date-time objects. Users should choose the function whose name 
+#' models the order in which the year ('y'), month ('m') and day 
+#' ('d') elements appear the string to be parsed: 
+#' 
+#' ...
+#' 
+#' @references Garrett Grolemund, Hadley Wickham (2011). Dates and Times
+#'   Made Easy with lubridate. Journal of Statistical Software, 40(3),
+#'   1-25. \url{http://www.jstatsoft.org/v40/i03/}.
+#' @import ape
+#' @importFrom jpeg readJPEG
+#' @importFrom sp spsample Polygon
+#' @importFrom spdep tri2nb
+#' @importFrom shapes procGPA
+#' @importFrom methods showDefault
+#' @importFrom MASS ginv
+#' @docType package
+#' @name Momocs
+NULL
 
 # 5. Morphospace functions -----------------------------------------------------
 pca2shp.efourier <- function (pos, rot, mshape, amp=1, nb.pts=60, trans=TRUE) {
@@ -101,7 +132,7 @@ fac.structure <- function(path, names=character(), split="_"){
   nc  <- as.numeric(unique(lapply(lf, length))) # we check that all files have the same filename structure
   if (length(nc) !=1 ) {
     stop("The files do not have the same filename structure. See ?get.structure")}
-  fac <- as.data.frame(matrix(NA, nr=length(lf), nc=nc)) # dirty
+  fac <- as.data.frame(matrix(NA, nrow=length(lf), ncol=nc)) # dirty
   if (!missing(names)) {
     if (length(names) != nc) {
       stop("The number of 'names' is different from the number of groups. See ?get.structure")}

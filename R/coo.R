@@ -191,11 +191,11 @@ coo.trans.Out <- function(coo, x=0, y=0){
 #' @family coo
 #' @keywords coo
 #' @examples
-#' data(bot)
-#' stack(bot)
-#' stack(coo.slide(bot, 50))
-#' coo.plot(bot[4])
-#' coo.plot(coo.slide(coo.trans(bot[4], 40)))
+#' data(hearts)
+#' stack(hearts)
+#' stack(coo.slide(hearts, 1))
+#' coo.plot(hearts[4])
+#' coo.plot(coo.slide(hearts[4], 50))
 coo.slide <- function(coo, id1){UseMethod("coo.slide")}
 coo.slide.default <- function(coo, id1){
   coo <- coo.check(coo)
@@ -244,10 +244,10 @@ coo.sample.Out <- function(coo, n){
 #'
 #' Samples n coordinates with a regular angle
 #' 
-#' @export coo.sample.rr
-#' @aliases coo.sample.rr 
-#' @S3method coo.sample.rr default
-#' @S3method coo.sample.rr Out
+#' @export coo.samplerr
+#' @aliases coo.samplerr 
+#' @S3method coo.samplerr default
+#' @S3method coo.samplerr Out
 #' @param coo a matrix or a list of (x,y) coordinates or an Out object.
 #' @param n an integer, the number fo points to sample.
 #' @return a matrix of (x,y) coordinates or an Out object.
@@ -256,12 +256,14 @@ coo.sample.Out <- function(coo, n){
 #' @examples
 #' data(bot)
 #' stack(bot)
-#' stack(coo.sample.rr(bot, 12))
+#' bot <- coo.center(bot)
+#' stack(coo.samplerr(bot, 12))
 #' coo.plot(bot[4])
-#' coo.plot(rr <- coo.sample.rr(bot[4], 12))
-#' segments(coo.centpos(bot[4][1], coo.centpos(bot[4])[2]), rr[, 1], rr[, 2])
-coo.sample.rr <- function(coo, n){UseMethod("coo.sample.rr")}
-coo.sample.rr.default <- function(coo, n){
+#' coo.plot(rr <- coo.samplerr(bot[4], 12))
+#' cpos <- coo.centpos(bot[4])
+#' segments(cpos[1], cpos[2], rr[, 1], rr[, 2])
+coo.samplerr <- function(coo, n){UseMethod("coo.samplerr")}
+coo.samplerr.default <- function(coo, n){
   coo <- coo.check(coo)
   Rx <- coo[, 1]
   Ry <- coo[, 2]
@@ -275,21 +277,20 @@ coo.sample.rr.default <- function(coo, n){
     V2[i+1] <- which.max((cos(M2[, 1] - 2*i*pi/n)))}
   V2 <- sort(V2)
   return(M1[V2, ])}
-coo.sample.rr.Out <- function(coo, n){
+coo.samplerr.Out <- function(coo, n){
   Out <- coo
-  Out$coo <- lapply(Out$coo, coo.sample.rr, n)
+  Out$coo <- lapply(Out$coo, coo.samplerr, n)
   return(Out)}
-
 
 #' Interpolates coordinates
 #'
 #' Interpolates n coordinates "among existing points"between" existing points,
 #' along the perimeter of the coordinates provided and keeping the first point
 #' 
-#' @export coo.sample.int
-#' @aliases coo.sample.int
-#' @S3method coo.sample.int default
-#' @S3method coo.sample.int Out
+#' @export coo.interpolate
+#' @aliases coo.interpolate
+#' @S3method coo.interpolate default
+#' @S3method coo.interpolate Out
 #' @param coo a matrix or a list of (x,y) coordinates or an Out object.
 #' @param n an integer, the number fo points to interpolate.
 #' @return a matrix of (x,y) coordinates or an Out object.
@@ -298,14 +299,14 @@ coo.sample.rr.Out <- function(coo, n){
 #' @examples
 #' data(bot)
 #' stack(bot)
-#' stack(coo.sample.int(coo.sample(bot, 12), 120))
+#' stack(coo.interpolate(coo.sample(bot, 12), 120))
 #' coo.plot(bot[4])
-#' coo.plot(coo.sample.int(coo.sample(bot[4], 12), 120))
-coo.sample.int <- function(coo, n){UseMethod("coo.sample.int")}
-coo.sample.int.default <- function(coo, n){
+#' coo.plot(coo.interpolate(coo.sample(bot[4], 12), 120))
+coo.interpolate <- function(coo, n){UseMethod("coo.interpolate")}
+coo.interpolate.default <- function(coo, n){
   coo <- coo.check(coo)
   if (!is.closed(coo)) { coo <- coo.close(coo) }
-  orig <- cumsum(coo.perim.pts(coo))
+  orig <- coo.perim.cum(coo)
   targ <- seq(0, coo.perim(coo), length=n+1)[-(n+1)]
   coo2 <- matrix(c(coo[1, ], rep(NA, n*2 - 2)), byrow=TRUE, nrow=n, ncol=2)
   for (i in 2:n) {
@@ -313,9 +314,9 @@ coo.sample.int.default <- function(coo, n){
     r <- (targ[i] - orig[k]) / (orig[k+1]- orig[k])
     coo2[i, ] <- edi(coo[k, ], coo[k+1, ], r)}
   return(coo2)}
-coo.sample.int.Out <- function(coo, n){
+coo.interpolate.Out <- function(coo, n){
   Out <- coo
-  Out$coo <- lapply(Out$coo, coo.sample.int, n)
+  Out$coo <- lapply(Out$coo, coo.interpolate, n)
   return(Out)}
 
 #' Smoothes coordinates
@@ -513,25 +514,17 @@ coo.perim.cum <- function(coo){
   d <- cumsum(sqrt(apply((coo-rbind(coo[1,],coo[-(dim(coo)[1]),]))^2,1,sum)))
   return(d)}
 
-#' Register new baselines
+#' Register Bookstein's coordinates
 #'
-#' coo.bookstein registers a new baseline for the shape, with the ldk1-th
+#' Registers a new baseline for the shape, with the ldk1-th
 # and ldk2-th points being set on (-0.5, 0) and (0.5, 0), respectively.
-# coo.baseline is a non-exact baseline registration on t1 and t2 coordinates,
-# for the ldk1-th and ldk2-th points. By default it returns Bookstein's coordinates.
 #' @export coo.bookstein
-#' @export coo.baseline
 #' @aliases coo.bookstein
-#' @aliases coo.baseline
 #' @S3method coo.bookstein default
 #' @S3method coo.bookstein Out
-#' @S3method coo.baseline default
-#' @S3method coo.baseline Out
 #' @param coo a matrix or a list of (x,y) coordinates or an Out object.
 #' @param ldk1 the id of the first point of the new baseline
 #' @param ldk2 the id of the second point of the new baseline
-#' @param t1 a numerix for the (x,y) coordinates of the first point of the new baseline
-#' @param t2 a numerix for the (x,y) coordinates of the second point of the new baseline
 #' @return a matrix of (x,y) coordinates or an Out object.
 #' @family coo
 #' @keywords coo
@@ -539,8 +532,6 @@ coo.perim.cum <- function(coo){
 #' data(hearts)
 #' stack(hearts)
 #' stack(coo.bookstein(hearts, 2, 4))
-#' # note the scale
-#' stack(coo.baseline(hearts, 2, 4, c(-1, 0), c(1, 0)))
 coo.bookstein <- function(coo, ldk1, ldk2){UseMethod("coo.bookstein")}
 coo.bookstein.default <- function(coo, ldk1, ldk2){
   D <- ed(coo[ldk1, ], coo[ldk2, ])
@@ -558,6 +549,27 @@ coo.bookstein.Out <- function(coo, ldk1, ldk2){ #id1 ?
     Out$coo[[i]] <- coo.bookstein(Out$coo[[i]], Out$ldk[[i]][ldk1], Out$ldk[[i]][ldk2])}
   return(Out)}
 
+#' Register new baselines
+#'
+#' A non-exact baseline registration on t1 and t2 coordinates,
+# for the ldk1-th and ldk2-th points. By default it returns Bookstein's coordinates.
+#' @export coo.baseline
+#' @aliases coo.baseline
+#' @S3method coo.baseline default
+#' @S3method coo.baseline Out
+#' @param coo a matrix or a list of (x,y) coordinates or an Out object.
+#' @param ldk1 the id of the first point of the new baseline
+#' @param ldk2 the id of the second point of the new baseline
+#' @param t1 a numerix for the (x,y) coordinates of the first point of the new baseline
+#' @param t2 a numerix for the (x,y) coordinates of the second point of the new baseline
+#' @return a matrix of (x,y) coordinates or an Out object.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(hearts)
+#' stack(hearts)
+#' # note the scale
+#' stack(coo.baseline(hearts, 2, 4, c(-1, 0), c(1, 0)))
 coo.baseline <- function(coo, ldk1, ldk2, t1, t2){UseMethod("coo.baseline")}
 coo.baseline.default <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
   if (is.list(coo)) {coo <- l2m(coo)}
@@ -596,55 +608,132 @@ coo.baseline.Out <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
     Out$coo[[i]] <- coo.baseline(Out$coo[[i]], Out$ldk[[i]][ldk1], Out$ldk[[i]][ldk2], t1, t2)}
   return(Out)}
 
-# coo.force2close returns closed shapes so that (if not already closed), it
-# distributes the original dx and dy between the first and last points.
+#' Forces shapes to close
+#'
+#' An exotic function that distribute the distance between the first and the last points
+#' of unclosed shapes, so that they become closed. May be useful (?) e.g. for t/rfourier methods
+#' where reconstructed shapes may not be closed.
+#' @export
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a matrix of (x,y) coordinates.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- coo.sample(bot[4], 64)
+#' b <- b[1:40,]
+#' coo.plot(b)
+#' coo.plot(coo.force2close(b))
 coo.force2close <- function(coo){
-  coo <- check.coo
+  coo <- coo.check(coo)
   if (is.closed(coo)) {return(coo)}
   n  <- nrow(coo)
   d  <- coo[1, ] - coo[n, ]
   dm <- cbind(seq(0, d[1], length=n), seq(0, d[2], length=n))
   return(coo + dm)}
 
-# coo.up only retains the coordinates with positive/zero y-coordinates
-#coo. <- function(coo){UseMethod("coo.")}
+#' Retains coordinates with positive y-coordinates
+#'
+#' Useful when shapes are aligned along the x-axis (e.g. because of a bilateral symmetry)
+#' and when one wants to retain just the upper side. 
+#' @export
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a matrix of (x,y) coordinates.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- coo.align.xax(bot[4])
+#' coo.plot(b)
+#' coo.plot(coo.up(b))
 
 coo.up <- function(coo){
   up <- coo[coo[,2]>=0,]
   return(up)}
 
-# coo.up only retains the coordinates with negative/zero y-coordinates
-#coo. <- function(coo){UseMethod("coo.")}
-
+#' Retains coordinates with negative y-coordinates
+#'
+#' Useful when shapes are aligned along the x-axis (e.g. because of a bilateral symmetry)
+#' and when one wants to retain just the lower side. 
+#' @export
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a matrix of (x,y) coordinates.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- coo.align.xax(bot[4])
+#' coo.plot(b)
+#' coo.plot(coo.down(b))
 coo.down <- function(coo){
   coo <- coo.check(coo)
   return(coo[coo[, 2]<=0,])}
 
-# coo.centdist returns, for every point, the distance to the centroid
-#coo. <- function(coo){UseMethod("coo.")}
-
+#' Returns the distance between everypoints and the centroid
+#' For every point of the shape, returns the (centroid-points) distance.
+#' @export coo.centdist
+#' @aliases coo.centdist
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a matrix of (x,y) coordinates.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- coo.sample(bot[4], 64)
+#' d <- coo.centdist(b)
+#' barplot(d)
 coo.centdist <- function(coo){
   coo <- coo.check(coo)
   return(apply(coo, 1, function(x) ed(coo.centpos(coo), x)))}
 
-# coo.align.xax align the longest axis of a shape along the x-axis
-#coo. <- function(coo){UseMethod("coo.")}
-
+#' Aligns shapes along the x-axis
+#' Align the longest axis of a shape along the x-axis
+#' @export
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a matrix of (x,y) coordinates.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- bot[4]
+#' coo.plot(b)
+#' coo.plot(coo.align.xax(b))
 coo.align.xax <- function(coo){
   coo <- coo.check(coo)
   coo <- coo.align(coo)
   return(coo.trans(coo, x=0, y=- coo.centpos(coo)[2]))}
 
-# coo.rev returns the reverse suite of coordinates, change shape's orientation
-#coo. <- function(coo){UseMethod("coo.")}
-
+#' Reverses coordinates
+#' 
+#' Returns the reverse suite of coordinates, i.e. change shape's orientation
+#' @export
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a matrix of (x,y) coordinates.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- coo.sample(bot[4], 4)
+#' b
+#' coo.rev(b)
 coo.rev <- function(coo){
   coo <- coo.check(coo)
   return(coo[nrow(coo):1,])}
 
-# coo.ldk allows to interactively define a "nb.ldk" number of landarks on a shape.
-#coo. <- function(coo){UseMethod("coo.")}
-
+#' Defines interactively landmarks
+#' Allows to interactively define a "nb.ldk" number of landarks on a shape.
+#' Used in other facilities to acquire/manipulate data.
+#' @export coo.ldk
+#' @aliases coo.ldk
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @param nb.ldk integer, the number of landmarks to define
+#' @return a numeric that corresponds to the closest ids, on the shape, from cliked points.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- coo.sample(bot[4], 4)
+#' # coo.ldk(b, 3) # run this, and click 3 times.
 coo.ldk <- function(coo, nb.ldk) {
   if (is.list(coo)) coo <- l2m(coo)
   coo.plot(coo)
@@ -655,31 +744,63 @@ coo.ldk <- function(coo, nb.ldk) {
     l <- apply(coo, 1, function(y) sqrt(sum((p-y)^2)))
     ldk[i] <- which.min(l)
     points(coo[ldk[i], 1], coo[ldk[i], 2], pch=20, col="red", cex=0.5)
-    cat("*")
-  }
+    cat("*")}
   cat("]\n")
   return(ldk)}
   
-  # 2. coo shape descriptors -----------------------------------------------------
-
-# coo.centsize returns the centroid size a shape.
-#coo. <- function(coo){UseMethod("coo.")}
+# 2. coo shape descriptors -----------------------------------------------------
+#' Calculates the centroid size
+#' @export coo.centsize
+#' @aliases coo.centsize
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a numeric, the centroid size.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' coo.centsize(bot[4])
+#' hist(sapply(bot$coo, coo.centsize), breaks=10)
 coo.centsize <- function(coo){
   coo  <- coo.check(coo)
   cent <- coo.centpos(coo)
   cs   <- mean(apply(coo, 1, function(x) sqrt(sum((x-cent)^2))))
   return(cs)}
 
-# coo.perim returns the perimeter of a shape.
-#coo. <- function(coo){UseMethod("coo.")}
-
+#' Calculates the perimeter
+#' @export coo.perim
+#' @aliases coo.perim
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a numeric, the perimeter.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' coo.perim(bot[4])
+#' hist(sapply(bot$coo, coo.perim), breaks=10)
 coo.perim <- function(coo){
   return(sum(coo.perim.pts(coo)))}
 
-# coo.calliper returns the Feret diameter, ie the longest distance that can
-# be found between a pair of coordinates.
-#coo. <- function(coo){UseMethod("coo.")}
-
+#' Calculates the calliper length
+#' 
+#' Also called the Feret's diameter, the longest distance between two points of
+#' the shape provided.
+#' @export coo.calliper
+#' @aliases coo.calliper
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @param arr.ind a boolean, if provided returns a list with the calliper length ($length) 
+#' and the two points ($arr.ind)
+#' @return a numeric, the centroid size.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' b <- bot[4]
+#' coo.calliper(b)
+#' p <- coo.calliper(b, arr.ind=TRUE)
+#' p$length
+#' ids <- p$arr.ind
+#' coo.plot(b)
+#' segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
 coo.calliper <- function(coo, arr.ind=FALSE){
   coo <- coo.check(coo)
   d   <- dist(coo, method = "euclidean")
@@ -697,14 +818,23 @@ coo.calliper <- function(coo, arr.ind=FALSE){
 
 # coo.lw returns the length and width of a shape based on their iniertia axis
 # ie alignment to the x-axis
-#coo. <- function(coo){UseMethod("coo.")}
 coo.lw <- function(coo){
   coo <- coo.check(coo)
   d   <- apply(coo.align(coo), 2, range)
   return(abs(d[2,] - d[1,]))}
 
-# coo.area computes the area of any non-crossing shape (in square units)
-#coo. <- function(coo){UseMethod("coo.")}
+#' Calculates the area
+#' Works for any non-crossing polygon.
+#' @export coo.area
+#' @aliases coo.area
+#' @param coo a matrix or a list of (x,y) coordinates.
+#' @return a numeric, the area.
+#' @family coo
+#' @keywords coo
+#' @examples
+#' data(bot)
+#' coo.area(bot[4])
+#' hist(sapply(bot$coo, coo.area), breaks=10)
 coo.area <- function(coo){
   coo <- coo.check(coo)
   coo <- coo.close(coo)
@@ -719,7 +849,7 @@ coo.area <- function(coo){
 
 # coo.theta.3pts returns the angle (in radians) defined by a triplet of points
 # either signed ("atan2") or not ("acos"). 
-theta3ldk <- function(m, method=c("atan2", "acos")[1]){  
+coo.theta3 <- function(m, method=c("atan2", "acos")[1]){  
   a <- c(m[1, 1] - m[2, 1], m[1, 2] - m[2, 2])
   b <- c(m[3, 1] - m[2, 1], m[3, 2] - m[2, 2])
   if (method=="atan2") {
@@ -736,7 +866,7 @@ coo.theta.pts <- function(coo, method=c("atan2", "acos")[1]){
   coo   <- rbind(coo[nrow(coo)-1, ], coo)
   theta <- numeric()
   for (i in 1:(nrow(coo)-2)){
-    theta[i] <- coo.theta.3pts(coo[i:(i+2),], method=method)
+    theta[i] <- coo.theta3(coo[i:(i+2),], method=method)
   }
   return(theta)}
 
@@ -767,7 +897,7 @@ coo.rectilinearity <- function(coo) {
     l1.e[i] <- l1(x1, y1, x2, y2)
     l2.e[i] <- l2(x1, y1, x2, y2)} # sum(l2.e) == coo.perim(coo)
   # "step 1" as in Zunic and Rosin
-  theta   <- coo.theta(coo)
+  theta   <- coo.theta.pts(coo)
   theta.k <- abs(c(theta - pi/2, theta - pi, theta - 3*pi/2, theta - 2*pi))
   alpha.k <- sort(theta.k)
   # "step 2" as in Zunic and Rosin

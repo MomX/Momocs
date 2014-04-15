@@ -1,28 +1,29 @@
-\name{coo.close}
-\alias{coo.close}
-\title{Closes/'Uncloses' shapes}
+\name{coo.ldk}
+\alias{coo.ldk}
+\title{Defines interactively landmarks
+Allows to interactively define a "nb.ldk" number of landarks on a shape.
+Used in other facilities to acquire/manipulate data.}
 \usage{
-coo.close(coo)
+coo.ldk(coo, nb.ldk)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix or a list of (x,y) coordinates.}
+
+  \item{nb.ldk}{integer, the number of landmarks to define}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a numeric that corresponds to the closest ids, on the
+shape, from cliked points.
 }
 \description{
-Returns a (un)closed shape from (un)closed shapes.
+Defines interactively landmarks Allows to interactively
+define a "nb.ldk" number of landarks on a shape. Used in
+other facilities to acquire/manipulate data.
 }
 \examples{
-x <- (matrix(1:10, ncol=2))
-x2 <- coo.close(x)
-x3 <- coo.unclose(x2)
-x
-is.closed(x)
-x2
-is.closed(x2)
-x3
-is.closed(x3)
+data(bot)
+b <- coo.sample(bot[4], 4)
+# coo.ldk(b, 3) # run this, and click 3 times.
 }
 \seealso{
 Other coo: \code{\link{coo.align.xax}};
@@ -35,11 +36,11 @@ Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.center}}, \code{\link{coo.center}};
 \code{\link{coo.centpos}}, \code{\link{coo.centpos}};
 \code{\link{coo.centsize}}, \code{\link{coo.centsize}};
-\code{\link{coo.check}}; \code{\link{coo.down}};
+\code{\link{coo.check}}; \code{\link{coo.close}},
+\code{\link{coo.close}}; \code{\link{coo.down}};
 \code{\link{coo.force2close}};
 \code{\link{coo.interpolate}},
-\code{\link{coo.interpolate}}; \code{\link{coo.ldk}},
-\code{\link{coo.ldk}}; \code{\link{coo.perim.pts}},
+\code{\link{coo.interpolate}}; \code{\link{coo.perim.pts}},
 \code{\link{coo.perim.pts}}; \code{\link{coo.perim}},
 \code{\link{coo.perim}}; \code{\link{coo.rev}};
 \code{\link{coo.rotatecenter}},

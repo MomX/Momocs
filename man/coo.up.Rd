@@ -1,28 +1,25 @@
-\name{coo.close}
-\alias{coo.close}
-\title{Closes/'Uncloses' shapes}
+\name{coo.up}
+\alias{coo.up}
+\title{Retains coordinates with positive y-coordinates}
 \usage{
-coo.close(coo)
+coo.up(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix or a list of (x,y) coordinates.}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates.
 }
 \description{
-Returns a (un)closed shape from (un)closed shapes.
+Useful when shapes are aligned along the x-axis (e.g.
+because of a bilateral symmetry) and when one wants to
+retain just the upper side.
 }
 \examples{
-x <- (matrix(1:10, ncol=2))
-x2 <- coo.close(x)
-x3 <- coo.unclose(x2)
-x
-is.closed(x)
-x2
-is.closed(x2)
-x3
-is.closed(x3)
+data(bot)
+b <- coo.align.xax(bot[4])
+coo.plot(b)
+coo.plot(coo.up(b))
 }
 \seealso{
 Other coo: \code{\link{coo.align.xax}};
@@ -35,7 +32,8 @@ Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.center}}, \code{\link{coo.center}};
 \code{\link{coo.centpos}}, \code{\link{coo.centpos}};
 \code{\link{coo.centsize}}, \code{\link{coo.centsize}};
-\code{\link{coo.check}}; \code{\link{coo.down}};
+\code{\link{coo.check}}; \code{\link{coo.close}},
+\code{\link{coo.close}}; \code{\link{coo.down}};
 \code{\link{coo.force2close}};
 \code{\link{coo.interpolate}},
 \code{\link{coo.interpolate}}; \code{\link{coo.ldk}},
@@ -50,8 +48,8 @@ Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.scale}}; \code{\link{coo.slide}},
 \code{\link{coo.slide}}; \code{\link{coo.smooth}},
 \code{\link{coo.smooth}}; \code{\link{coo.trans}},
-\code{\link{coo.trans}}; \code{\link{coo.up}};
-\code{\link{is.closed}}, \code{\link{is.closed}}
+\code{\link{coo.trans}}; \code{\link{is.closed}},
+\code{\link{is.closed}}
 }
 \keyword{coo}
 

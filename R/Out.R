@@ -119,7 +119,8 @@ names.Out <- function(x){
   return(x)}
 
 # candidate for the dirtiest function ever...
-subset.Out <- function(Out, subset){
+subset.Out <- function(x, subset, ...){
+  Out <- x
   e <- substitute(subset)
   retain <- eval(e, Out$fac, parent.frame())
   Out2 <- Out
@@ -198,7 +199,7 @@ panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
       text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
 
 # 3. Out methods (calibration) ----------------------------------------------------
-hqual <- function(...){UseMethod("hqual")}
+hqual <- function(Out, ...){UseMethod("hqual")}
 hqual.Out <-
   function(Out, method=c("efourier", "rfourier", "tfourier"),
            id, 
@@ -257,7 +258,7 @@ hqual.Out <-
                    title(names(Out)[id], cex=1.3)
                  }}}
 
-hquant <- function(...){UseMethod("hquant")}
+hquant <- function(Coo, ...){UseMethod("hquant")}
 hquant.Out <- 
   function(Coo,
            method = c("efourier", "rfourier", "tfourier"),
@@ -273,7 +274,7 @@ hquant.Out <-
            legend = TRUE,
            legend.title = "Nb of harmonics",
            palette = col.summer,
-           lineat.y=c(0.5, 0.1, 0.01)){
+           lineat.y=c(0.5, 0.1, 0.01), ...){
     if (missing(method)) {
       cat("  * Method not provided. efourier is used.\n")
       method   <- efourier
@@ -353,11 +354,11 @@ hquant.Out <-
     return(list(res=res, m=m, d=d))}
 
 #hpow
-hpow <- function(...){UseMethod("hpow")}
+hpow <- function(Out, ...){UseMethod("hpow")}
 hpow.Out <- function(Out, method="efourier", id=1:length(Out),
                      nb.h=16, drop=1, smooth.it=0, plot=TRUE,
                      title="Fourier coefficients power spectrum",
-                     lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1){
+                     lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1, ...){
               probs <- c(1, 0.5, 0)
               # for one signle outline
               if (missing(method)) {
@@ -392,7 +393,7 @@ hpow.Out <- function(Out, method="efourier", id=1:length(Out),
               return(res)}
 
 # 4. Out methods (Fourier analysis) ------------------------------------------
-eFourier     <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
+eFourier     <- function(Out, nb.h, smooth.it, norm, start){
   UseMethod("eFourier")}
 
 eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
@@ -422,7 +423,7 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
       coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}
   return(OutCoe(coe=coe, fac=Out$fac, method="eFourier", norm=norm))}
 
-rFourier <- function(Out, nb.h = 40, nb.smooth = 0, norm =TRUE){
+rFourier <- function(Out, nb.h, smooth.it, norm){
   UseMethod("rFourier")}
 
 rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
@@ -440,9 +441,9 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
   for (i in seq(along = coo)) {
     rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose = TRUE) #todo: vectorize
     coe[i, ] <- c(rf$an, rf$bn)}
-  return(OutCoe(coe, fac=Out$fac, method="rFourier"))}
+  return(OutCoe(coe=coe, fac=Out$fac, method="rFourier"))}
 
-tFourier <- function(Out, nb.h = 40, smooth.it = 0, norm =TRUE){
+tFourier <- function(Out, nb.h, smooth.it, norm){
   UseMethod("tFourier")}
 
 tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
@@ -460,9 +461,9 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
   for (i in seq(along = coo)) {
     tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose=TRUE)
     coe[i, ] <- c(tf$an, tf$bn)}
-  return(OutCoe(coe, fac=Out$fac, method="tFourier"))}
+  return(OutCoe(coe=coe, fac=Out$fac, method="tFourier"))}
 
-Ptolemy <- function(...){UseMethod("Ptolemy")}
+Ptolemy <- function(Coo, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
 Ptolemy.Out <- function(Coo,
                      id=1,
                      t=seq(0, 2*pi, length=7)[-1],
@@ -513,14 +514,15 @@ Ptolemy.Out <- function(Coo,
 
 
 # 5. OutCoe definition -------------------------------------------------------
-OutCoe <- function(coe.matrix, fac=data.frame(), method, norm){
+OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to Coe")
-  OutCoe <- list(coe=coe.matrix, fac=fac, method=method, norm=norm)
+  OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
   class(OutCoe) <- "OutCoe"
   return(OutCoe)}
 
 # The print method for Out objects
-print.OutCoe <- function(OutCoe){
+print.OutCoe <- function(x, ...){
+  OutCoe <- x
   p <- pmatch(OutCoe$method, c("eFourier", "rFourier", "tFourier"))
   met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
   ### Header
@@ -550,9 +552,11 @@ print.OutCoe <- function(OutCoe){
 
 # 6. OutCoe visualisation methods -------------------------------------------------
 
-boxplot.OutCoe <- function(OutCoe, retain, drop, palette=col.gallus,
-                           title= "Variation of harmonic coefficients", legend=TRUE){
+boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
+                           title= "Variation of harmonic coefficients",
+                           legend=TRUE, ...){
               # we deduce and prepare
+              OutCoe <- x
               x <- OutCoe$coe
               nb.h  <- ncol(x)/4
               cph   <- 4
@@ -591,9 +595,11 @@ boxplot.OutCoe <- function(OutCoe, retain, drop, palette=col.gallus,
 
 
 hist.OutCoe <-
-  function(OutCoe, retain, drop, palette=col.gallus,
-           title= "Variation of harmonic coefficients", legend=TRUE){
+  function(x, retain, drop, palette=col.gallus,
+           title= "Variation of harmonic coefficients",
+           legend=TRUE, ...){
   # we deduce and prepare
+  OutCoe <- x
   x <- OutCoe$coe
   nb.h  <- ncol(x)/4
   cph   <- 4
@@ -618,13 +624,13 @@ hist.OutCoe <-
     lines(h0, y0, col = "black", lwd = 2)}
   title(main=title, cex.main=2, font=2, outer=TRUE)}
 
-hcontrib <- function(...){UseMethod("hcontrib")}
+hcontrib <- function(OutCoe, id, harm.range, amp.h, palette, title){UseMethod("hcontrib")}
 hcontrib.OutCoe <- function(
   OutCoe,
   id      = 1,
   harm.range,
   amp.h   = c(0, 0.5, 1, 2, 5, 10),
-  palette = col.heat,
+  palette = col.hot,
   title   = "Harmonic contribution"){
   #if missing id meanshape
   x <- OutCoe$coe
@@ -659,10 +665,10 @@ hcontrib.OutCoe <- function(
   title(main=title)
 return(res)}
 
-
 # 6. OutCoe methods ----------------------------------------------------------
 pca <- function(x, ...){UseMethod("pca")}
-pca.OutCoe <- function(OutCoe){
+pca.OutCoe <- function(x, ...){
+  OutCoe <- x
   PCA <- prcomp(OutCoe$coe, scale.=FALSE, center=TRUE)
   PCA$fac <- OutCoe$fac
   PCA$mshape <- apply(OutCoe$coe, 2, mean)
@@ -670,7 +676,7 @@ pca.OutCoe <- function(OutCoe){
   return(PCA)}
 
 plot.OutPCA <- function(#basics
-  PCA, fac, xax=1, yax=2, 
+  x, fac, xax=1, yax=2, 
   #color choice
   col="black", pch=20, palette=col.summer2,
   #.frame
@@ -696,8 +702,9 @@ plot.OutPCA <- function(#basics
   eigen=TRUE,
   #
   rug=TRUE,
-  title=substitute(PCA)
+  title=substitute(PCA), ...
 ){
+  PCA <- x
   xy <- PCA$x[, c(xax, yax)]
   # we check and prepare
   if (!missing(fac)) {
@@ -734,7 +741,7 @@ plot.OutPCA <- function(#basics
 # manova
 manova.default <- manova
 manova <- function(...){UseMethod("manova")}
-manova.OutCoe <- function(OutCoe, fac, retain, drop){
+manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
   if (missing(fac)) stop("'fac' must be provided")
   fac <- OutCoe$fac[, fac]
   x <- OutCoe$coe
@@ -779,7 +786,7 @@ clust.OutCoe <- function(OutCoe, fac,
                 plot(as.phylo.hclust(OutCoe.hc), tip.color=cols, type=type, ...)
                 return(list(dist.mat=dist.mat, hclust=OutCoe.hc))}
 
-meanshapes <- function(...){UseMethod("meanshapes")}
+meanshapes <- function(OutCoe, fac, nb.pts){UseMethod("meanshapes")}
 meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
   nb.h <-  ncol(OutCoe$coe)/4
   if (missing(fac)) {

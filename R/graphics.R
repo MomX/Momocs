@@ -1,5 +1,33 @@
 
 # 3. graphical functions and utilities  ---------------------------------------
+#' Plots a single outline.
+#' 
+#' A simple wrapper for plotting shapes. Widely used in Momocs.
+#' @export coo.plot
+#' @param coo A \code{list} or a \code{matrix} of coordinates.
+#' @param xlim If \code{coo.plot} is called and \code{coo} is missing, then a
+#' vector of length 2 specifying the \code{ylim} of the ploting area.
+#' @param ylim If \code{coo.plot} is called and \code{coo} is missing, then a
+#' vector of length 2 specifying the \code{ylim} of the ploting area.
+#' @param border A color for the shape border.
+#' @param col A color to fill the shape polygon.
+#' @param lwd The \code{lwd} for drawing shapes.
+#' @param lty The \code{lty} for drawing shapes.
+#' @param points \code{logical}. Whether to display points. If missing and
+#' number of points is < 100, then points are plotted.
+#' @param first.point \code{logical} whether to plot or not the first point.
+#' @param centroid \code{logical}. Whether to display centroid.
+#' @param xy.axis \code{logical}. Whether to draw the xy axis.
+#' @param pch The \code{pch} for points.
+#' @param cex The \code{cex} for points.
+#' @param main \code{character}. A title for the plot.
+#' @param plot.new \code{logical} whether to plot or not a new frame.
+#' @return No returned value.
+#' @seealso coo.draw.
+#' @examples
+#' 
+#' data(bot)
+#' coo.plot(bot[1])
 
 coo.plot <- function(coo, xlim, ylim, border="#333333", col="#33333322", lwd=1, lty=1,
                      points=FALSE, first.point=TRUE, centroid=TRUE, xy.axis=TRUE,
@@ -277,17 +305,44 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
 # 4. color palettes ----------------------------------------------------------
-col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
-col.summer2 <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb",
-                                  "#e78ac3", "#a6d854", "#ebad1f"))
-col.solarized <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", "#d33682",
-                                    "#6c71c4", "#268bd2", "#2aa198", "#859900"))
-col.gallus <- colorRampPalette(c("#025D8C", "#FFFFFF", "#A80000"))
-col.hot  <- colorRampPalette(c("#F2F2F2","#A80000"))
-col.cold  <- colorRampPalette(c("#F2F2F2","#025D8C"))
+
+#' Some color palettes.
+#' @name col.summer
+#' @title col.summer and other color palettes
+#' @usage col.summer(n) 
+#' col.summer2(n)
+#' col.solarized(n)
+#' col.gallus(n)
+#' col.blackgallus(n)
+#' col.hot(n)
+#' col.cold(n)
+#' col.sari(n)
+#' col.india(n)
+#' col.bw(n)
+#' @export col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
+#' @aliases col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
+#' @param n the number of colors to generate from the color palette
+#' @return color codes (hexadecimal format)
+#' @examples
+#' barplot(1:10, col=col.summer(10), main="col.summer")
+#' barplot(1:10, col=col.summer2(10), main="col.summer2")
+#' barplot(1:10, col=col.solarized(10), main="col.solarized")
+#' barplot(1:10, col=col.gallus(10), main="col.gallus")
+#' barplot(1:10, col=col.blackgallus(10), main="col.blackgallus")
+#' barplot(1:10, col=col.hot(10), main="col.hot")
+#' barplot(1:10, col=col.cold(10), main="col.cold")
+#' barplot(1:10, col=col.sari(10), main="col.sari")
+#' barplot(1:10, col=col.india(10), main="col.india")
+#' barplot(1:10, col=col.bw(10), main="col.bw")
+col.summer      <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
+col.summer2     <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb",
+                                      "#e78ac3", "#a6d854", "#ebad1f"))
+col.solarized   <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", "#d33682",
+                                      "#6c71c4", "#268bd2", "#2aa198", "#859900"))
+col.gallus      <- colorRampPalette(c("#025D8C", "#FFFFFF", "#A80000"))
 col.blackgallus <- colorRampPalette(c("#000080", "#000000", "#EE0000"))
-col.sari   <- colorRampPalette(c("#551A8B", "#FF7F00"))
-col.india  <- colorRampPalette(c("#FF9933", "#138808"))
-col.bw     <- colorRampPalette(c("#FFFFFF", "#000000"))
-col.wcol   <- function(col.hex) colorRampPalette(c("#FFFFFF", col.hex))
-col.bcol   <- function(col.hex) colorRampPalette(c("#000000", col.hex))
+col.hot         <- colorRampPalette(c("#F2F2F2","#A80000"))
+col.cold        <- colorRampPalette(c("#F2F2F2","#025D8C"))
+col.sari        <- colorRampPalette(c("#551A8B", "#FF7F00"))
+col.india       <- colorRampPalette(c("#FF9933", "#138808"))
+col.bw          <- colorRampPalette(c("#FFFFFF", "#000000"))

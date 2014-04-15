@@ -1,28 +1,30 @@
-\name{coo.close}
-\alias{coo.close}
-\title{Closes/'Uncloses' shapes}
+\name{coo.interpolate}
+\alias{coo.interpolate}
+\title{Interpolates coordinates}
 \usage{
-coo.close(coo)
+coo.interpolate(coo, n)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix or a list of (x,y) coordinates or an
+  Out object.}
+
+  \item{n}{an integer, the number fo points to
+  interpolate.}
 }
 \value{
 a matrix of (x,y) coordinates or an Out object.
 }
 \description{
-Returns a (un)closed shape from (un)closed shapes.
+Interpolates n coordinates "among existing points"between"
+existing points, along the perimeter of the coordinates
+provided and keeping the first point
 }
 \examples{
-x <- (matrix(1:10, ncol=2))
-x2 <- coo.close(x)
-x3 <- coo.unclose(x2)
-x
-is.closed(x)
-x2
-is.closed(x2)
-x3
-is.closed(x3)
+data(bot)
+stack(bot)
+stack(coo.interpolate(coo.sample(bot, 12), 120))
+coo.plot(bot[4])
+coo.plot(coo.interpolate(coo.sample(bot[4], 12), 120))
 }
 \seealso{
 Other coo: \code{\link{coo.align.xax}};
@@ -35,10 +37,9 @@ Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.center}}, \code{\link{coo.center}};
 \code{\link{coo.centpos}}, \code{\link{coo.centpos}};
 \code{\link{coo.centsize}}, \code{\link{coo.centsize}};
-\code{\link{coo.check}}; \code{\link{coo.down}};
-\code{\link{coo.force2close}};
-\code{\link{coo.interpolate}},
-\code{\link{coo.interpolate}}; \code{\link{coo.ldk}},
+\code{\link{coo.check}}; \code{\link{coo.close}},
+\code{\link{coo.close}}; \code{\link{coo.down}};
+\code{\link{coo.force2close}}; \code{\link{coo.ldk}},
 \code{\link{coo.ldk}}; \code{\link{coo.perim.pts}},
 \code{\link{coo.perim.pts}}; \code{\link{coo.perim}},
 \code{\link{coo.perim}}; \code{\link{coo.rev}};

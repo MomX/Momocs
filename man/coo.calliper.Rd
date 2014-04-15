@@ -1,28 +1,32 @@
-\name{coo.close}
-\alias{coo.close}
-\title{Closes/'Uncloses' shapes}
+\name{coo.calliper}
+\alias{coo.calliper}
+\title{Calculates the calliper length}
 \usage{
-coo.close(coo)
+coo.calliper(coo, arr.ind = FALSE)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix or a list of (x,y) coordinates.}
+
+  \item{arr.ind}{a boolean, if provided returns a list with
+  the calliper length ($length) and the two points
+  ($arr.ind)}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a numeric, the centroid size.
 }
 \description{
-Returns a (un)closed shape from (un)closed shapes.
+Also called the Feret's diameter, the longest distance
+between two points of the shape provided.
 }
 \examples{
-x <- (matrix(1:10, ncol=2))
-x2 <- coo.close(x)
-x3 <- coo.unclose(x2)
-x
-is.closed(x)
-x2
-is.closed(x2)
-x3
-is.closed(x3)
+data(bot)
+b <- bot[4]
+coo.calliper(b)
+p <- coo.calliper(b, arr.ind=TRUE)
+p$length
+ids <- p$arr.ind
+coo.plot(b)
+segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
 }
 \seealso{
 Other coo: \code{\link{coo.align.xax}};
@@ -30,12 +34,12 @@ Other coo: \code{\link{coo.align.xax}};
 \code{\link{coo.area}}, \code{\link{coo.area}};
 \code{\link{coo.baseline}}, \code{\link{coo.baseline}};
 \code{\link{coo.bookstein}}, \code{\link{coo.bookstein}};
-\code{\link{coo.calliper}}, \code{\link{coo.calliper}};
 \code{\link{coo.centdist}}, \code{\link{coo.centdist}};
 \code{\link{coo.center}}, \code{\link{coo.center}};
 \code{\link{coo.centpos}}, \code{\link{coo.centpos}};
 \code{\link{coo.centsize}}, \code{\link{coo.centsize}};
-\code{\link{coo.check}}; \code{\link{coo.down}};
+\code{\link{coo.check}}; \code{\link{coo.close}},
+\code{\link{coo.close}}; \code{\link{coo.down}};
 \code{\link{coo.force2close}};
 \code{\link{coo.interpolate}},
 \code{\link{coo.interpolate}}; \code{\link{coo.ldk}},
