@@ -343,22 +343,24 @@ dev.plot       <- function(mat, dev, cols, x=1:ncol(mat),
 #' 
 #' # we load some data
 #' data(bot)
-#' guinness <- bot[9]
+#' guinness <- coo.sample(bot[9], 100)
 #' 
-#' # we calculate the best possible outline and one with 12 harm.
-#' out.best <- l2m(efourier.i(efourier(guinness, nb.h=-1), nb.pts=120))
-#' out.12   <- l2m(efourier.i(efourier(guinness, nb.h=12), nb.pts=120))
+#' # we calculate the diff between 48 harm and one with 6 harm.
+#' out.6    <- efourier.i(efourier(guinness, nb.h=6), nb.pts=120)
 #' 
 #' # we calculate deviations, you can also try 'edm'
-#' dev <- edm.nearest(out.12, out.best) / coo.centsize(out.12)
+#' dev <- edm.nearest(out.6, guinness) / coo.centsize(out.6)
 #' 
 #' # we prepare the color scale
 #' d.cut <- cut(dev, breaks=20, labels=FALSE, include.lowest=TRUE)
 #' cols  <- paste0(col.summer(20)[d.cut], "CC")
 #' 
 #' # we draw the results
-#' coo.plot(out.best, border="black", col="grey80", main="Guiness fitted by 20 harm.")
-#' dev.segments(out.12, cols=cols, lwd=4)
+#' coo.plot(guinness, main="Guiness fitted with 6 harm.", points=FALSE)
+#' par(xpd=NA)
+#' dev.segments(out.6, cols=cols, lwd=4)
+#' coo.draw(out.6, lty=2, points=FALSE, col=NA)
+#' par(xpd=FALSE)
 #' 
 #' @export dev.segments
 dev.segments <-function(coo, cols, lwd=1){
