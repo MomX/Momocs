@@ -21,4 +21,5 @@ b2 <- bot[5]
 coo.plot(b1)
 coo.draw(b2, border="red")
 }
+\keyword{graphics}
 

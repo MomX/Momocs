@@ -34,5 +34,8 @@ coordinates.
 #anOutobject <- Out(coo.list)
 #anOutobject
 }
+\seealso{
+Other res: \code{\link{coo.trans}}, \code{\link{coo.trans}}
+}
 \keyword{Out}
 

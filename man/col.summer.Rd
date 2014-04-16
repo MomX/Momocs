@@ -44,4 +44,5 @@ barplot(1:10, col=col.sari(10), main="col.sari")
 barplot(1:10, col=col.india(10), main="col.india")
 barplot(1:10, col=col.bw(10), main="col.bw")
 }
+\keyword{graphics}
 

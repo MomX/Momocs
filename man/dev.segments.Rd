@@ -37,5 +37,5 @@ cols  <- paste0(col.summer(20)[d.cut], "CC")
 coo.plot(out.best, border="black", col="grey80", main="Guiness fitted by 20 harm.")
 dev.segments(out.12, cols=cols, lwd=4)
 }
-\keyword{Utilities}
+\keyword{graphics}
 

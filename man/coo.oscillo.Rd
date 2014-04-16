@@ -34,5 +34,5 @@ development purpose but are included in the package.
 data(bot)
 coo.oscillo(bot[1])
 }
-\keyword{Utilities}
+\keyword{graphics}
 

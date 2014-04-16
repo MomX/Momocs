@@ -45,4 +45,5 @@ x # positions of shapes returned invisibly
 \seealso{
 \link{coo.plot} and \link{coo.template}.
 }
+\keyword{graphics}
 

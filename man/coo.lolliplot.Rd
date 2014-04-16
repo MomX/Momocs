@@ -25,4 +25,5 @@ b1 <- coo.center(coo.sample(bot[4], 24))
 b2 <- b1*1.2
 coo.lolliplot(b1, b2)
 }
+\keyword{graphics}
 

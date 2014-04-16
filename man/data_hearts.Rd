@@ -1,7 +1,7 @@
 \docType{data}
 \name{hearts}
 \alias{hearts}
-\title{Outline coordinates of 240 hand-drawn hearts}
+\title{Data: Outline coordinates of 240 hand-drawn hearts}
 \format{An Out object with the outline coordinates of 240 hand-drawn hearts
 by 8 different persons, with 4 landmarks.}
 \source{
@@ -11,7 +11,7 @@ then have been smoothed, scaled, centered, and reduced to
 80 coordinates per outline.
 }
 \description{
-Outline coordinates of 240 hand-drawn hearts
+Data: Outline coordinates of 240 hand-drawn hearts
 }
 \keyword{datasets}
 

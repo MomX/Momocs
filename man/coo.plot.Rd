@@ -60,6 +60,7 @@ data(bot)
 coo.plot(bot[1])
 }
 \seealso{
-coo.draw.
+coo.draw
 }
+\keyword{graphics}
 
