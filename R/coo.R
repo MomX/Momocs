@@ -688,7 +688,7 @@ coo.centdist <- function(coo){
 
 #' Aligns shapes along the x-axis
 #' Align the longest axis of a shape along the x-axis
-#' @export
+#' @export coo.align.xax
 #' @param coo a matrix or a list of (x,y) coordinates.
 #' @return a matrix of (x,y) coordinates.
 #' @family coo

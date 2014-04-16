@@ -1,6 +1,6 @@
 \name{coo.plot}
 \alias{coo.plot}
-\title{Plots a single outline.}
+\title{A simple wrapper for plotting shapes. Widely used in Momocs.}
 \usage{
 coo.plot(coo, xlim, ylim, border = "#333333", col = "#33333322", lwd = 1,
   lty = 1, points = FALSE, first.point = TRUE, centroid = TRUE,

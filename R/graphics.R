@@ -1,6 +1,5 @@
 
-# 3. graphical functions and utilities  ---------------------------------------
-#' Plots a single outline.
+# 1. Main plotters  ------------------------------------------------------------
 #' 
 #' A simple wrapper for plotting shapes. Widely used in Momocs.
 #' @export coo.plot
@@ -55,10 +54,35 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col="#33333322", lwd=1, 
     points(cent[1], cent[2], pch=3, col=border, cex=cex)}
   if (!missing(main)) title(main=main)} 
 
+#' Adds a single outline on the current plot.
+#' 
+#' \code{coo.draw} is a light version of \link{coo.plot} that simply adds a
+#' shape on the active plot.
+#' @export
+#' @param coo A \code{list} or a \code{matrix} of coordinates.
+#' @param ... optional parameters for coo.plot
+#' @examples
+#' data(bot)
+#' b1 <- bot[4]
+#' b2 <- bot[5]
+#' coo.plot(b1)
+#' coo.draw(b2, border="red")
 coo.draw <- function(coo, ...){
   coo.plot(coo, plot.new=FALSE, ...)}
 
-#very prototypic
+#' Plots differences between two configuratins
+#' 
+#' Draws "lollipops" between two configurations
+#' @export
+#' @param coo1 A \code{list} or a \code{matrix} of coordinates.
+#' @param coo2 A \code{list} or a \code{matrix} of coordinates.
+#' @param type either "lolli" or "arrow" to draw segments or arrows between pairs of points.
+#' @param ... optional parameters for coo.plot
+#' @examples
+#' data(bot)
+#' b1 <- coo.center(coo.sample(bot[4], 24))
+#' b2 <- b1*1.2
+#' coo.lolliplot(b1, b2)
 coo.lolliplot <- function(coo1, coo2, type=c("lolli", "arrow")[1]){
   wdw <- apply(rbind(coo1, coo2), 2, function(x) max(abs(x)))
   plot(NA, xlim=c(-wdw[1], wdw[1]), ylim=c(-wdw[2], wdw[2]), asp=1)
@@ -67,6 +91,31 @@ coo.lolliplot <- function(coo1, coo2, type=c("lolli", "arrow")[1]){
   }
   points(coo2, pch=20, cex=0.8)}
 
+#' "Templates" list and matrix of coordinates.
+#' 
+#' \code{coo.template} returns \code{coo} so that the shape it is centered on
+#' the origin and inscribed in a size-side square, also centered on the origin;
+#' see \link{coo.list.panel} for an illustration of this function.
+#' 
+#' @export coo.template
+#' @usage coo.template(coo, size)
+#' @param coo A \code{list} or a \code{matrix} of coordinates.
+#' @param size \code{numeric}. Indicates the length of the side "inscribing"
+#' the shape.
+#' @return Returns a matrix of \code{(x; y)}coordinates.
+#' @seealso \link{coo.list.panel}.
+#' @keywords Utilities
+#' @examples
+#' 
+#' data(bot)
+#' coo <- bot[1]
+#' coo.plot(coo.template(coo), xlim=c(-1, 1), ylim=c(-1, 1))
+#' rect(-0.5, -0.5, 0.5, 0.5)
+#' 
+#' s <- 0.01
+#' coo.plot(coo.template(coo, s))
+#' rect(-s/2, -s/2, s/2, s/2)
+
 coo.template   <- function(coo, size=1) {
   # only for matrices
   coo      <- coo * min(size/apply(coo, 2, function(x) diff(range(x))))
@@ -74,6 +123,34 @@ coo.template   <- function(coo, size=1) {
   observed <- apply(coo, 2, range)[2, ]
   shift    <-  expected - observed
   return(coo.trans(coo, shift[1], shift[2]))}
+
+#' Plots sets of shapes.
+#' 
+#' \code{coo.list.panel} plots a list of shapes if passed with a list of
+#' coordinates. Outlines are templated and on the same graphical window with
+#' the help of \link{coo.template}.
+#' 
+#' @export coo.list.panel
+#' @usage coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar =
+#' rep(0, 4), cols, borders)
+#' @param coo.list A \code{list} of coordinates
+#' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
+#' the panel display. If missing, shapes are arranged in a square.
+#' @param byrow \code{logical}. Whether to succesive shape by row or by col.
+#' @param fromtop \code{logical}. Whether to display shapes from the top of the
+#' plotting region.
+#' @param mar A \code{vector} to define margins.
+#' @param cols A \code{vector} of colors to fill shapes.
+#' @param borders A \code{vector} of colors to draw shape borders.
+#' @return Returns (invisibly) a \code{data.frame} with position of shapes that
+#' can be used for other sophisticated plotting design.
+#' @seealso \link{coo.plot} and \link{coo.template}.
+#' @examples
+#' data(bot)
+#' coo.list.panel(bot$coo)
+#' x <- coo.list.panel(bot$coo)
+#' x # positions of shapes returned invisibly 
+#' # axis(1) ; axis(2) # that's a single graphical window
 
 coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                            fromtop=TRUE, mar=rep(0, 4),
@@ -110,7 +187,39 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
             col=cols[i], border=borders[i])}
   invisible(res)}
 
-coo.oscillo <- function(coo, rug=TRUE, legend=TRUE, cols=col.gallus(2), nb.pts=12){
+
+# 2. "Secondary" plotters ------------------------------------------------------
+
+#' Momocs' "oscilloscope" for periodic functions.
+#' 
+#' Shape analysis deals with curve fitting, whether \eqn{x(t)} and \eqn{y(t)}
+#' positions along the curvilinear abscissa or radius/tangent angle variation.
+#' We may need to represent these single or double periodic functions that are
+#' ajusted by Fourier-based method. \code{coo.oscillo} and \code{coo.oscillo1}
+#' compute and provide standardized plot when given a matrix of coordinates or
+#' a vector, respectively. These functions are mainly used for development
+#' purpose but are included in the package.
+#' 
+#' @aliases coo.oscillo
+#' @usage coo.oscillo(coo, rug = TRUE, legend = TRUE, 
+#' cols = col.gallus(2), nb.pts=12)
+#' @param coo A list or a matrix of coordinates.
+#' @param rug \code{logical}. Whether to display a pseudo rug, that indicate if
+#' the derivate is positive.
+#' @param legend \code{logical}. Whether to add a legend.
+#' @param cols A \code{vector} of two colors for lines.
+#' @param nb.pts \code{integer}. The number or reference points, sampled
+#' equidistantly along the curvilinear abscissa and added on the oscillo
+#' curves.
+#' @keywords Utilities
+#' @examples
+#' 
+#' data(bot)
+#' coo.oscillo(bot[1])
+#' 
+#' @export coo.oscillo
+coo.oscillo <- function(coo, rug=TRUE, legend=TRUE,
+                        cols=col.gallus(2), nb.pts=12){
   coo <- coo.check(coo)
   nr <- nrow(coo)
   dx <- coo[, 1] - coo[1, 1]
@@ -132,15 +241,51 @@ coo.oscillo <- function(coo, rug=TRUE, legend=TRUE, cols=col.gallus(2), nb.pts=1
   axis(2, cex.axis=2/3, las=1)
   lines(dx, col=cols[1])
   lines(dy, col=cols[2])
-  text((1:nr)[refs], dx[refs], labels=as.character(1:nb.pts), cex=0.7, col=cols[1])
-  text((1:nr)[refs], dy[refs], labels=as.character(1:nb.pts), cex=0.7, col=cols[2])
+  text((1:nr)[refs], dx[refs],
+       labels=as.character(1:nb.pts), cex=0.7, col=cols[1])
+  text((1:nr)[refs], dy[refs],
+       labels=as.character(1:nb.pts), cex=0.7, col=cols[2])
   mtext("Deviation", side=2, line=1.5)
   box()
   if (legend) {
-    legend("bottomright", legend = c(expression(x[i] - x[0]), expression(y[i] - y[0])),
+    legend("bottomright",
+           legend = c(expression(x[i] - x[0]), expression(y[i] - y[0])),
            col = cols, bg="#FFFFFFCC", 
            cex=0.7, lty = 1, lwd=1, inset=0.05, bty="n")}}
 
+#' Plots deviation
+#' 
+#' Calculates and plots series with associated error bars. This function is used 
+#' internally by methods based on deviations for one one many outlines.
+#' Yet, it provides a quick way to create plots of series, possibly with deviations, from scratch.
+#' @export
+#' @usage dev.plot(mat, dev, cols, x=1:ncol(mat),
+#' lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
+#' plot=FALSE, main="Deviation plot", xlab="", ylab="Deviations")
+#' @param mat A \code{matrix} containing one or many lines (as individuals) with the corresponding y values (as cols).
+#' @param dev A \code{matrix} of the same dimension as mat but containing the deviation from the \code{mat} matrix.
+#' @param cols {A \code{vector} of \code{ncol(mat)} colors.}
+#' @param x An alternative vector of values for every column of \code{mat}.
+#' @param lines \code{logical}. Whether to draw lines for mean values.
+#' @param poly \code{logical}. Whether to draw polygons for mean + dev values.
+#' @param segments \code{logical}. Whether to draw segments for these mean + dev values.
+#' @param bw \code{numeric}. The width of the errors bars to draw.
+#' @param plot \code{logical}. Whether to plot a new graphical window.
+#' @param main \code{character}. A title for the plot.
+#' @param xlab \code{character}. A title for the x-axis.
+#' @param ylab \code{character}. A title for the y-axis.
+#' @examples
+#' # we prepare some fake data
+#' foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
+#' foo.mat  <- foo.mat + matrix(rep(c(0, 2, 5), each=10), 3, byrow=TRUE)
+#' foo.dev  <- matrix(abs(rnorm(30, sd=0.5)), nr=3, nc=10, byrow=TRUE)
+#' # some possible tuning
+#' dev.plot(foo.mat, plot=TRUE)
+#' dev.plot(foo.mat, foo.dev, plot=TRUE)
+#' dev.plot(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
+#' dev.plot(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
+#' dev.plot(foo.mat, foo.dev, cols=col.sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
+#' dev.plot(foo.mat, foo.dev, cols=col.summer(6)[4:6], plot=TRUE)
 dev.plot       <- function(mat, dev, cols, x=1:ncol(mat), 
                            lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
                            plot=FALSE, main="Deviation plot", xlab="", ylab="Deviations") {
@@ -177,8 +322,39 @@ dev.plot       <- function(mat, dev, cols, x=1:ncol(mat),
       if (lines) {
         lines(x, mat[i, ], col=cols[i], type="o", cex=0.25, pch=20)}}}}
 
-
-
+#' Draws colored segments from a matrix of coordinates.
+#' 
+#' Given a matrix of (x; y) coordinates, draws segments between every points
+#' defined by the row of the matrix and uses a color to display an information.
+#' 
+#' 
+#' @usage dev.segments(coo, cols, lwd = 1)
+#' @param coo A matrix of coordinates.
+#' @param cols A vector of color of \code{length = nrow(coo)}.
+#' @param lwd The \code{lwd} to use for drawing segments.
+#' @keywords Utilities
+#' @examples
+#' 
+#' # we load some data
+#' data(bot)
+#' guinness <- bot[9]
+#' 
+#' # we calculate the best possible outline and one with 12 harm.
+#' out.best <- l2m(efourier.i(efourier(guinness, nb.h=-1), nb.pts=120))
+#' out.12   <- l2m(efourier.i(efourier(guinness, nb.h=12), nb.pts=120))
+#' 
+#' # we calculate deviations, you can also try 'edm'
+#' dev <- edm.nearest(out.12, out.best) / coo.centsize(out.12)
+#' 
+#' # we prepare the color scale
+#' d.cut <- cut(dev, breaks=20, labels=FALSE, include.lowest=TRUE)
+#' cols  <- paste0(col.summer(20)[d.cut], "CC")
+#' 
+#' # we draw the results
+#' coo.plot(out.best, border="black", col="grey80", main="Guiness fitted by 20 harm.")
+#' dev.segments(out.12, cols=cols, lwd=4)
+#' 
+#' @export dev.segments
 dev.segments <-function(coo, cols, lwd=1){
   nr <- nrow(coo)
   coo <- rbind(coo, coo[1, ])
@@ -186,8 +362,15 @@ dev.segments <-function(coo, cols, lwd=1){
     segments(coo[i, 1], coo[i, 2], coo[i+1, 1], coo[i+1, 2],
              col=cols[i], lwd=lwd)}}
 
-
-# from Claude
+#' Confidence ellipses
+#' 
+#' Draw (gaussian) confidence ellipses
+#' @export conf.ell
+#' @param x numeric values on the x axis
+#' @param y numeric values on the y axis
+#' @param conf the level of confidence
+#' @param nb.pts the number of points to return, to draw the ellipsis
+#' @return a matrix of (x; y) coordinates to draw the ellipsis
 conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   if (is.matrix(x)) {
     y <- x[, 2]
@@ -202,7 +385,9 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   M2 <- matrix(c(var(x), var(y)), nrow=2, ncol=2)
   M3 <- matrix(c(1+r, 1-r), nrow=2, ncol=2, byrow=TRUE)
   ellpar <- M1 * sqrt(M2 * M3/2)
-  t(centroid + rad * ellpar %*% t(z))}
+  ell <- t(centroid + rad * ellpar %*% t(z))
+  colnames(ell) <- c("x", "y")
+  return(ell)}
 
 .frame <- function(xy, center.origin=FALSE, zoom=1){
   if (center.origin) {

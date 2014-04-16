@@ -1,0 +1,24 @@
+\name{coo.draw}
+\alias{coo.draw}
+\title{Adds a single outline on the current plot.}
+\usage{
+coo.draw(coo, ...)
+}
+\arguments{
+  \item{coo}{A \code{list} or a \code{matrix} of
+  coordinates.}
+
+  \item{...}{optional parameters for coo.plot}
+}
+\description{
+\code{coo.draw} is a light version of \link{coo.plot} that
+simply adds a shape on the active plot.
+}
+\examples{
+data(bot)
+b1 <- bot[4]
+b2 <- bot[5]
+coo.plot(b1)
+coo.draw(b2, border="red")
+}
+
