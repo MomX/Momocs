@@ -2,6 +2,8 @@ rm(list = ls())
 setwd("/Users/vincent/Momocs/")
 require(MASS) ; require(rgl) ; require(ape) ; require(orthopolynom)
 source("R/domestic.R")
+source("R/import.R")
+source("R/babel.R")
 source("R/coo.R")
 source("R/graphics.R")
 source("R/morpho.R")
@@ -27,21 +29,6 @@ ms <- meanshapes(botE, 1)
 
 b <- coo.scale(coo.center(coo.sample(bot[5], 12)))
 
-splines <- function(coo, method="natural", deriv=2){
-  coo <- coo.check(coo)
-  z <- coo.perim.cum(coo)
-  fx <- splinefun(z, coo[, 1], method=method)
-  fy <- splinefun(z, coo[, 2], method=method)
-  xcoe <- fy(z, deriv=2)
-  ycoe <- fy(z, deriv=2)
-  return(list(xcoe=xcoe, ycoe=ycoe))}
-
-
-splines2 <- function(coo, nb.pts=100){
-  z <- coo.perim.cum(coo)
-  x.i <- spline(z, coo[, 1], method="natural", n=100)$y
-  y.i <- spline(z, coo[, 2], method="natural", n=100)$y
-  return(cbind(x.i, y.i))}
 
 # fx.i <- spline(seq(1, 6.3647907, length=length(z)), b[, 1], method="natural", n=100)$y
 # fy.i <- spline(seq(1, 6.3647907, length=length(z)), b[, 2], method="natural", n=100)$y
@@ -72,35 +59,22 @@ require(grid)
 # dev.off()
 # system.time(grid.raster(as.raster(x)))
 
-click.bez <- function(x, n=10){
-  x <- as.raster(x)
-  plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1)
-  grid.raster(x)
-  ldk <- matrix(NA, n, 2)
-  bez <- NA
-  ldk[1, ] <- l2m(locator(1))
-  for (i in 2:n){
-    grid.raster(x)
-    lines(bez, col="red")
-    ldk[i, ] <- l2m(locator(1))
-    cat(ldk)
-    bez <- bezier.i(bezier(ldk[1:i,])$B)
-  }}
-click.splines <- function(x, n=20){
-  x <- as.raster(x)
-  plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1)
-  grid.raster(x)
-  ldk <- matrix(NA, n, 2)
-  spl <- NA
-  ldk[1, ] <- l2m(locator(1))
-  for (i in 2:n){
-    grid.raster(x)
-    points(ldk[1:i,], pch=20, col="black")
-    lines(spl, col="red")
-    ldk[i, ] <- l2m(locator(1))
-    cat(ldk)
-    spl <- splines2(ldk[1:i,])
-  }}
-
 #click.splines(x)
+
+# # deprecate (but #todo) import.multi1.jpg
+
+auto.notcentered = TRUE
+threshold   = 0.5
+imgs <- list.files("/Users/vincent/Research/Momocs/Datasets/test-import/", full=TRUE)
+coo <- import.jpg(imgs)
+coo.plot(coo[[1]])
+
+
+
+
+
+
+
+
+
 

@@ -24,7 +24,7 @@
 #' #anOutobject <- Out(coo.list)
 #' #anOutobject
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){
-  Out <- list(coo.list, ldk=ldk, fac=fac)
+  Out <- list(coo=coo.list, ldk=ldk, fac=fac)
   class(Out) <- "Out"
   return(Out)}
 
