@@ -1,0 +1,54 @@
+\name{efourier.i}
+\alias{efourier.i}
+\title{Calculates inverse elliptical Fourier analysis.}
+\usage{
+efourier.i(ef, nb.h, nb.pts = 120)
+}
+\arguments{
+  \item{ef}{\code{list}. A list containing \eqn{a_n},
+  \eqn{b_n}, \eqn{c_n} and \eqn{d_n} Fourier coefficients,
+  such as returned by \code{efourier}.}
+
+  \item{nb.h}{\code{integer}. The number of harmonics to
+  use. If not specified, \code{length(ef$an)} is used.}
+
+  \item{nb.pts}{\code{integer}. The number of points to
+  calculate.}
+}
+\value{
+A list with components: \item{x }{\code{vector} of
+\code{x}-coordinates.} \item{y }{\code{vector} of
+\code{y}-coordinates.}
+}
+\description{
+\code{efourier.i} uses the inverse elliptical Fourier
+transformation to calculate a shape, when given a list with
+Fourier coefficients, typically obtained computed with
+\link{efourier}.
+}
+\details{
+See \link{efourier} for the mathematical background.
+}
+\examples{
+data(bot)
+coo <- bot[1]
+coo.plot(coo)
+ef  <- efourier(coo, 12)
+ef
+efi <- efourier.i(ef)
+coo.draw(efi, border="red", col=NA)
+}
+\references{
+Claude, J. (2008) \emph{Morphometrics with R}, Use R!
+series, Springer 316 pp.
+
+Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape
+variation of two-dimensional outlines. \emph{Systematic
+Biology} \bold{34}: 59-68.
+}
+\seealso{
+\link{efourier} for the reverse operation. \link{l2m},
+\link{coeff.split} may be useful.
+}
+\keyword{coreMorpho}
+

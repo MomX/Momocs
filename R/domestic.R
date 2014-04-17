@@ -138,13 +138,111 @@ pos.shapes <- function(xy, pos.shp=c("range", "circle")[1],
   return(xy)}
 
 # 2. Domestic functions -------------------------------------------------------------
-ed             <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
+#' Calculates euclidean distance between two points.
+#' 
+#' \code{ed} simply calculates euclidean distance between two points defined by
+#' their (x; y) coordinates. This function is used internally but may be of
+#' interest for other analyses.
+#' 
+#' 
+#' @usage ed(pt1, pt2)
+#' @param pt1 (x; y) coordinates of the first point.
+#' @param pt2 (x; y) coordinates of the second point.
+#' @return Returns the euclidean distance between the two points.
+#' @seealso \link{edm}, \link{edm.nearest}, \link{dist}.
+#' @keywords Utilities
+#' @examples
+#' 
+#' ed(c(0,1), c(1,0)) # sqrt 2
+#' 
+#' @export ed
 
+ed             <- function(pt1, pt2){
+  return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
+
+#' Calculates euclidean intermediate between two points.
+#' 
+#' \code{edi} simply calculates coordinates of a points at the relative
+#' distance \code{r} on the \code{pt1-pt2} defined by their (x; y) coordinates.
+#' This function is used internally but may be of interest for other analyses.
+#' 
+#' 
+#' @usage edi(pt1, pt2, r = 0.5)
+#' @param pt1 (x; y) coordinates of the first point.
+#' @param pt2 (x; y) coordinates of the second point.
+#' @param r the relative distance from \code{pt1} to \code{pt2}.
+#' @return Returns the (x; y) interpolated coordinates.
+#' @seealso \link{ed}, \link{edm}.
+#' @keywords Utilities
+#' @examples
+#' 
+#' edi(c(0,1), c(1,0), r = 0.5)
+#' 
+#' @export edi
 edi <- function(pt1, pt2, r=0.5){
   return(r*(pt2-pt1) + pt1) }
 
-edm            <- function(m1, m2){return(sqrt((m1[, 1] - m2[, 1])^2 + (m1[, 2] - m2[, 2])^2))}
+#' Calculates euclidean distance every pairs of points in two matrices.
+#' 
+#' \code{edm} returns the euclidean distances between points \deqn{1 -> n} of
+#' two 2-col matrices of the same dimension. This function is used internally
+#' but may be of interest for other analyses.
+#' 
+#' If one wishes to align two (or more shapes) Procrustes surimposition may
+#' provide a better solution.
+#' 
+#' @usage edm(m1, m2)
+#' @param m1 The first \code{matrix} of coordinates.
+#' @param m2 The second \code{matrix} of coordinates.
+#' @return Returns a \code{vector} of euclidean distances between pairwise
+#' coordinates in the two matrices.
+#' @seealso \link{ed}, \link{edm.nearest}, \link{dist}.
+#' @keywords Utilities
+#' @examples
+#' 
+#' x <- matrix(1:10, nc=2)
+#' edm(x, x)
+#' edm(x, x+1)
+#' 
+#' @export edm
+edm            <- function(m1, m2){
+  return(sqrt((m1[, 1] - m2[, 1])^2 + (m1[, 2] - m2[, 2])^2))}
 
+#' Calculates the shortest euclidean distance found for every point of one
+#' matrix among those of a second.
+#' 
+#' 
+#' \code{edm.nearest} calculates the shortest euclidean distance found for
+#' every point of one matrix among those of a second. In other words, if
+#' \code{m1, m2} have \code{n} rows, the result will be the shortest distance
+#' for the first point of \code{m1} to any point of \code{m2} and so on,
+#' \code{n} times. This function is used internally but may be of interest for
+#' other analyses.
+#' 
+#' So far this function is quite time consumming since it performs \deqn{ n
+#' \times n } euclidean distance computation.  If one wishes to align two (or
+#' more shapes) Procrustes surimposition may provide a better solution.
+#' 
+#' @usage edm.nearest(m1, m2, full=FALSE)
+#' @param m1 The first \code{list} or \code{matrix} of coordinates.
+#' @param m2 The second \code{list} or \code{matrix} of coordinates.
+#' @param full \code{logical}. Whether to returns a condensed version of the
+#' results.
+#' @return If \code{full} is \code{TRUE}, returns a \code{list} with two
+#' components: \code{d} which is for every point of \code{m1} the shortest
+#' distance found between it and any point in \code{m2}, and \code{pos} the
+#' (\code{m2}) row indices of these points. Otherwise returns \code{d} as a
+#' numeric vector of the shortest distances.
+#' @seealso \link{ed}, \link{edm}, \link{dist}.
+#' @keywords Utilities
+#' @examples
+#' 
+#' x <- matrix(1:10, nc=2)
+#' edm.nearest(x, x+rnorm(10))
+#' edm.nearest(x, x+rnorm(10), full=TRUE)
+#' 
+#' 
+#' @export edm.nearest
 edm.nearest <- function(m1, m2, full=FALSE){
   if (!is.matrix(m1) | !is.matrix(m2)) stop("Matrices must be provided")
   if (ncol(m1)!=2    | ncol(m2)!=2)    stop("2-cols matrices must be provided")
@@ -157,20 +255,7 @@ edm.nearest <- function(m1, m2, full=FALSE){
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
-coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
-  cs <- numeric()
-  for (i in 1:cph) {
-    cs <- c(cs, (1+drop):retain + nb.h*(i-1))}
-  return(cs)}
 
-coeff.split <- function(cs, nb.h=8, cph=4){
-  if (missing(nb.h)) {nb.h <- length(cs)/cph }
-  cp <- list()
-  for (i in 1:cph) {
-    cp[[i]] <- cs[1:nb.h + (i-1)*nb.h]
-  }
-  names(cp) <- paste(letters[1:cph], "n", sep="")
-  return(cp)}
 
 .refactor <- function(df){
   w <- sapply(df, is.factor)

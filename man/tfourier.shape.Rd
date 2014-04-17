@@ -1,0 +1,65 @@
+\name{tfourier.shape}
+\alias{tfourier.shape}
+\title{Calculates and draw "tfourier" shapes.}
+\usage{
+tfourier.shape(an, bn, ao = 0, nb.h, nb.pts=80, alpha=2, plot=TRUE)
+}
+\arguments{
+  \item{an}{\code{numeric}. The \eqn{a_n} Fourier
+  coefficients on which to calculate a shape.}
+
+  \item{bn}{\code{numeric}. The \eqn{b_n} Fourier
+  coefficients on which to calculate a shape.}
+
+  \item{ao}{\code{ao} Harmonic coefficient.}
+
+  \item{nb.h}{\code{integer}. The number of harmonics to
+  use.}
+
+  \item{nb.pts}{\code{integer}. The number of points to
+  calculate.}
+
+  \item{alpha}{\code{numeric}. The power coefficient
+  associated with the (usually decreasing) amplitude of the
+  Fourier coefficients (see \bold{Details}).}
+
+  \item{plot}{\code{logical}. Whether to plot or not the
+  shape.}
+}
+\value{
+A list with components: \item{x }{\code{vector} of
+\code{x}-coordinates.} \item{y }{\code{vector} of
+\code{y}-coordinates.}
+}
+\description{
+\code{tfourier.shape} calculates a "Fourier tangent angle
+shape" given Fourier coefficients (see \code{Details}) or
+can generate some "tfourier" shapes.
+}
+\details{
+\code{tfourier.shape} can be used by specifying \code{nb.h}
+and \code{alpha}. The coefficients are then sampled in an
+uniform distribution \eqn{(-\pi ; \pi)} and this amplitude
+is then divided by \eqn{harmonicrank^alpha}. If
+\code{alpha} is lower than 1, consecutive coefficients will
+thus increase. See \link{tfourier} for the mathematical
+background.
+}
+\examples{
+data(bot)
+tf <- tfourier(bot[1], 24)
+tfourier.shape(tf$an, tf$bn) # equivalent to rfourier.i(rf)
+tfourier.shape()
+tfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
+panel(Out(a2l(replicate(100,
+coo.force2close(tfourier.shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
+}
+\references{
+Claude, J. (2008) \emph{Morphometrics with R}, Use R!
+series, Springer 316 pp.
+}
+\seealso{
+\link{tfourier.i}.
+}
+\keyword{coreMorpho}
+

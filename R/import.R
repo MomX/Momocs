@@ -153,7 +153,7 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
 #' @return a list of matrices of (x; y) coordinates that can be passed to Out
 import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
   cat("Extracting", length(jpg.paths), ".jpg outlines...\n")
-  if (length(jpg.list) > 10) {
+  if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE } else {t <- FALSE}
   res <- list()

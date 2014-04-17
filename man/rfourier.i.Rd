@@ -1,0 +1,54 @@
+\name{rfourier.i}
+\alias{rfourier.i}
+\title{Calculates inverse radii variation analysis.}
+\usage{
+rfourier.i(rf, nb.h, nb.pts=300)
+}
+\arguments{
+  \item{rf}{A \code{list} with \code{ao}, \code{an} and
+  \code{bn} components, typically as returned by
+  \code{rfourier}.}
+
+  \item{nb.h}{\code{integer}. The number of harmonics to
+  calculate/use.}
+
+  \item{nb.pts}{\code{integer}. The number of points to
+  calculate.}
+}
+\value{
+A list with components: \item{x }{\code{vector} of
+\code{x}-coordinates.} \item{y }{\code{vector} of
+\code{y}-coordinates.} \item{angle}{\code{vector} of angles
+used.} \item{r}{\code{vector} of radii calculated.}
+}
+\description{
+\code{rfourier.i} uses the inverse radii variation
+transformation to calculate a shape, when given a list with
+Fourier coefficients, typically obtained computed with
+\link{rfourier}.
+}
+\details{
+See \link{efourier} for the mathematical background.
+}
+\examples{
+data(bot)
+coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
+coo.plot(coo)
+rf  <- rfourier(coo, 12)
+rf
+rfi <- rfourier.i(rf)
+coo.draw(rfi, border="red", col=NA)
+    # it works since coo.draw and coo.plot retrieve "x"
+    # and "y" components (through l2m when passed with a list.
+}
+\references{
+Claude, J. (2008) \emph{Morphometrics with R}, Use R!
+series, Springer 316 pp.
+}
+\seealso{
+\link{efourier} for the reverse operation and also
+\code{rfourier.shape}. \link{l2m}, \link{coeff.split} may
+be useful.
+}
+\keyword{coreMorpho}
+

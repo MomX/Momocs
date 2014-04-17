@@ -1,0 +1,27 @@
+\name{l2m}
+\alias{l2m}
+\title{Converts a list of coordinates to a matrix.}
+\usage{
+l2m(l)
+}
+\arguments{
+  \item{l}{A \code{list} with x and y coordinates as
+  components.}
+}
+\value{
+Returns a matrix of \code{(x; y)}coordinates.
+}
+\description{
+\code{l2m} converts a \code{list} with x and y components
+to a 2-col \code{matrix} of coordinates.
+}
+\examples{
+l <- list(x=1:5, y=5:1)
+l2m(l)
+}
+\seealso{
+\link{m2l}.
+}
+\keyword{Utilities}
+\keyword{coo}
+

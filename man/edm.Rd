@@ -1,0 +1,35 @@
+\name{edm}
+\alias{edm}
+\title{Calculates euclidean distance every pairs of points in two matrices.}
+\usage{
+edm(m1, m2)
+}
+\arguments{
+  \item{m1}{The first \code{matrix} of coordinates.}
+
+  \item{m2}{The second \code{matrix} of coordinates.}
+}
+\value{
+Returns a \code{vector} of euclidean distances between
+pairwise coordinates in the two matrices.
+}
+\description{
+\code{edm} returns the euclidean distances between points
+\deqn{1 -> n} of two 2-col matrices of the same dimension.
+This function is used internally but may be of interest for
+other analyses.
+}
+\details{
+If one wishes to align two (or more shapes) Procrustes
+surimposition may provide a better solution.
+}
+\examples{
+x <- matrix(1:10, nc=2)
+edm(x, x)
+edm(x, x+1)
+}
+\seealso{
+\link{ed}, \link{edm.nearest}, \link{dist}.
+}
+\keyword{Utilities}
+

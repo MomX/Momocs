@@ -1,0 +1,65 @@
+\name{rfourier.shape}
+\alias{rfourier.shape}
+\title{Calculates and draw "rfourier" shapes.}
+\usage{
+rfourier.shape(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE)
+}
+\arguments{
+  \item{an}{\code{numeric}. The \eqn{a_n} Fourier
+  coefficients on which to calculate a shape.}
+
+  \item{bn}{\code{numeric}. The \eqn{b_n} Fourier
+  coefficients on which to calculate a shape.}
+
+  \item{nb.h}{\code{integer}. The number of harmonics to
+  use.}
+
+  \item{nb.pts}{\code{integer}. The number of points to
+  calculate.}
+
+  \item{alpha}{\code{numeric}. The power coefficient
+  associated with the (usually decreasing) amplitude of the
+  Fourier coefficients (see \bold{Details}).}
+
+  \item{plot}{\code{logical}. Whether to plot or not the
+  shape.}
+}
+\value{
+A list with components: \item{x }{\code{vector} of
+\code{x}-coordinates.} \item{y }{\code{vector} of
+\code{y}-coordinates.}
+}
+\description{
+\code{rfourier.shape} calculates a "Fourier radii variation
+shape" given Fourier coefficients (see \code{Details}) or
+can generate some "rfourier" shapes.
+}
+\details{
+\code{rfourier.shape} can be used by specifying \code{nb.h}
+and \code{alpha}. The coefficients are then sampled in an
+uniform distribution \eqn{(-\pi ; \pi)} and this amplitude
+is then divided by \eqn{harmonicrank^alpha}. If
+\code{alpha} is lower than 1, consecutive coefficients will
+thus increase. See \link{rfourier} for the mathematical
+background.
+}
+\examples{
+data(bot)
+rf <- rfourier(bot[1], 24)
+rfourier.shape(rf$an, rf$bn) # equivalent to rfourier.i(rf)
+rfourier.shape() # not very interesting
+
+rfourier.shape(nb.h=12) # better
+rfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
+
+panel(Out(a2l(replicate(100, rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))) # Butterflies
+}
+\references{
+Claude, J. (2008) \emph{Morphometrics with R}, Use R!
+series, Springer 316 pp.
+}
+\seealso{
+\link{rfourier.i}.
+}
+\keyword{coreMorpho}
+
