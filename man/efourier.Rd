@@ -2,7 +2,7 @@
 \alias{efourier}
 \title{Calculates elliptical Fourier analysis.}
 \usage{
-efourier(coo, nb.h, smooth.it = 0, silent = FALSE)
+efourier(coo, nb.h, smooth.it = 0, verbose = FALSE)
 }
 \arguments{
   \item{coo}{A \code{list} or a \code{matrix} of

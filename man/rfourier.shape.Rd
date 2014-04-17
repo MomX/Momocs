@@ -52,7 +52,8 @@ rfourier.shape() # not very interesting
 rfourier.shape(nb.h=12) # better
 rfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
 
-panel(Out(a2l(replicate(100, rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))) # Butterflies
+panel(Out(a2l(replicate(100,
+rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE))))) # Butterflies
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R!

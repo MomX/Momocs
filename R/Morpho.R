@@ -54,7 +54,7 @@
 #' reconstruction obtained from \eqn{N} harmonics is the best possible fit in a
 #' least-squares sense.
 #' @export efourier
-#' @usage efourier(coo, nb.h, smooth.it = 0, silent = FALSE)
+#' @usage efourier(coo, nb.h, smooth.it = 0, verbose = TRUE)
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to use
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -301,8 +301,8 @@ efourier.norm <- function(ef, start = FALSE) {
 #' efourier.shape(ef$an, ef$bn, ef$cn, ef$dn) # equivalent to efourier.i(ef)
 #' efourier.shape() # is autonomous
 #' 
-#' panel(Out(a2l(replicate(100, efourier.shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
-
+#' panel(Out(a2l(replicate(100, 
+#' efourier.shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
 efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE){
   if (missing(nb.h) &  missing(an)) nb.h <- 3
   if (missing(nb.h) & !missing(an)) nb.h <- length(an)
@@ -360,7 +360,7 @@ ef.amplify <- function(ef, amp=rep(0.5, 4)){
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 #' individual shape, are then used for multivariate analyses.
 #' @export rfourier
-#' @usage rfourier(coo, nb.h, smooth.it = 0, norm = FALSE, silent=FALSE)
+#' @usage rfourier(coo, nb.h, smooth.it = 0, norm = FALSE, verbose=FALSE)
 #' @param coo A \code{list} or \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -391,7 +391,8 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   if(nb.h * 2 > nrow(coo) | missing(nb.h)) {
     nb.h = floor(nrow(coo)/2) - 1 # should not be -1 but 0 #todo
     if (verbose){
-      warning("'nb.h' must be lower than half the number of points and has been set to: ", nb.h)}}
+      warning("'nb.h' must be lower than half the number of 
+              points and has been set to: ", nb.h)}}
   if (nb.h == -1) {
     nb.h = floor(nrow(coo)/2)-1 # should not be -1
     if (verbose){
@@ -451,14 +452,16 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' @export rfourier.i
 rfourier.i <- function(rf, nb.h, nb.pts=300) {
   if (!all(c("an", "bn") %in% names(rf))) {
-    stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")}
+    stop("a list containing 'an' and 'bn' harmonic coefficients 
+         must be provided")}
   ao <- ifelse(is.null(rf$ao), 1, rf$ao)
   an <- rf$an
   bn <- rf$bn
   if (missing(nb.h)) {nb.h <- length(an)}
   if (nb.h > length(an)) {
     nb.h <- length(an)
-    warning("nb.h cannot be higher than length(rf$an) and has been set to: ", nb.h)}
+    warning("nb.h cannot be higher than length(rf$an) and 
+            has been set to: ", nb.h)}
   theta <- seq(0, 2*pi, length=nb.pts)
   harm  <- matrix(NA, nrow=nb.h, ncol=nb.pts)
   for (i in 1:nb.h){
@@ -507,7 +510,8 @@ rfourier.i <- function(rf, nb.h, nb.pts=300) {
 #' rfourier.shape(nb.h=12) # better
 #' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
 #' 
-#' panel(Out(a2l(replicate(100, rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))) # Butterflies
+#' panel(Out(a2l(replicate(100,
+#' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE))))) # Butterflies
 rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   if (missing(nb.h) &  missing(an)) nb.h <- 1
   if (missing(nb.h) & !missing(an)) nb.h <- length(an)
@@ -516,7 +520,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   rf  <- list(an=an, bn=bn, ao=0)
   shp <- rfourier.i(rf, nb.h=nb.h, nb.pts=nb.pts)      
   if (plot) coo.plot(shp)
-  return(shp)}
+  return(cbind(shp$x, shp$y))}
 # 1.3 Tangent angle ============================================================
 #' Calculates tangent angle Fourier analysis.
 #' 
@@ -536,7 +540,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
 #' a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
 #' 
 #' @export tfourier
-#' @usage tfourier(coo, nb.h, smooth.it=0, norm = FALSE, silent = TRUE)
+#' @usage tfourier(coo, nb.h, smooth.it=0, norm = FALSE, verbose = TRUE)
 #' @param coo A list or matrix of coordinates
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
 #' @param smooth.it \code{integer}. The number of smoothing iterations to

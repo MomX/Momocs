@@ -55,7 +55,8 @@ ef <- efourier(bot[1], 24)
 efourier.shape(ef$an, ef$bn, ef$cn, ef$dn) # equivalent to efourier.i(ef)
 efourier.shape() # is autonomous
 
-panel(Out(a2l(replicate(100, efourier.shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
+panel(Out(a2l(replicate(100,
+efourier.shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R!
