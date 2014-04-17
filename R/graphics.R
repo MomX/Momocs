@@ -195,6 +195,27 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
 
 # 2. Secondary plotters ------------------------------------------------------
 
+#' Extract structure from filenames
+#' 
+#' A very simple (and fast) image plotter.
+#' @export lf.structure
+#' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
+#' @keywords import
+img.plot <- function(img){
+  # dirty here but made for convenience
+  # to have a fast img plotter..
+  if (!is.matrix(img)) { 
+    img <- (img[,,1] + img[,,2] + img[,,3])/3 }
+  op <- par(mar=rep(0.25, 4))
+  on.exit(par(op))
+  h <- nrow(img)
+  w <- ncol(img)
+  plot(NA, xlim=c(1, w), ylim=c(1, h), asp=1,
+       frame=FALSE, axes=FALSE, ann=FALSE)
+  rasterImage(img, 1, 1, w, h, interpolate=FALSE)
+  .title(paste(w, h, sep=" x "))
+  box()}
+
 #' Momocs' "oscilloscope" for periodic functions.
 #' 
 #' Shape analysis deals with curve fitting, whether \eqn{x(t)} and \eqn{y(t)}

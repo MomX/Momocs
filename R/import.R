@@ -1,64 +1,17 @@
 # Functions and utilities to import data in Momocs, notably from raw images,
 # and to ease the ahndling of these data (define landmarks, outlines, etc.)
 
-# Domestic utilities
 
-#' Extract structure from filenames
+#' Extract outlines from an image mask
 #' 
-#' If filenames are consistently named: eg 'speciesI_siteA_ind1_dorsalview', 
-#' returns a data.frame from it that can be passed to Out, Opn, Ldk, objects.
-#' @export lf.structure
-#' @param lf a list filenames, as characters, typically such as
-#' those obtained with \link{list.files}.
-#' @param names the names of the groups.
-#' @param split character, the spliiting factor used for the file names.
-#' @param trim.extension logical. Whether to remove the last for characters in
-#' filenames, typically their extension, eg. ".jpg".
-#' @return data.frame with, for every individual, the corresponding label
-#' for every group.
-#' @details #todo
+#' Provided with an image mask (black/1 pixels over a white/0 background), 
+#' and with the coordinates of a point within the shape, returns the (x; y)
+#' coordinates of the outline.
+#' @export import.Conte
+#' @param img a matrix that corresponds to an binary image mask
+#' @param x numeric the (x; y) coordinates of a starting point within the shape.
+#' @return a matrix, the (x; y) coordinates of the outline points.
 #' @keywords import
-#' @examples
-#' data(bot)
-#' coo.area(bot[4])
-#todo : work either from a path or from a char vect
-lf.structure <- function(lf, names=character(), split="_", trim.extension=TRUE){
-  if (trim.extension) {
-    lf0 <- strtrim(lf0, nchar(lf0)-4)}
-  lf  <- strsplit(lf0, split=split)
-  # we check that all files have the same name structure
-  nc  <- as.numeric(unique(lapply(lf, length)))
-  if (length(nc) !=1 ) {
-    stop("The files do not have the same filename structure. See ?get.structure")}
-  fac <- as.data.frame(matrix(NA, nrow=length(lf), ncol=nc)) # dirty
-  if (!missing(names)) {
-    if (length(names) != nc) {
-      stop("The number of 'names' is different from the number of groups. See ?get.structure")}
-    names(fac) <- names}
-  # nice rownames
-  rownames(fac) <- lf0
-  for (i in 1:nc) {
-    fac[, i] <- factor(unlist(lapply(lf, function(x) x[i])))} # ugly way to fill the df
-  return(fac)}
-
-# useless ?
-.trim <- function(lf, width=nchar(lf)-4) {return(strtrim(lf, width=width))}
-
-.img.plot <- function(img){
-  # dirty here but made for convenience
-  # to have a fast img plotter..
-  if (!is.matrix(img)) { 
-    img <- (img[,,1] + img[,,2] + img[,,3])/3 }
-  op <- par(mar=rep(5, 4))
-  on.exit(par(op))
-  h <- nrow(img)
-  w <- ncol(img)
-  plot(NA, xlim=c(1, w), ylim=c(1, h), asp=1,
-       frame=FALSE, axes=TRUE, ann=FALSE)
-  rasterImage(img, 1, 1, w, h, interpolate=FALSE)
-  .title(paste(w, h, sep=" x "))
-  box()}
-
 import.Conte <- function (img, x){ 
   while (abs(img[x[1], x[2]] - img[x[1] + 1, x[2]]) < 0.1) {
     x[1] <- x[1] + 1
@@ -107,8 +60,20 @@ import.Conte <- function (img, x){
 }
 
 # Import raw data ---------------------------------------------------------
+
+#' Import coordinates from a .txt file
+#' 
+#' A wrapper around read.table. May be used to import outline/landmark coordinates
+#' By default it assumes that the columns are not named in the .txt files. You can
+#' tune this using the '...' argument.
+#' @export import.txt
+#' @param txt.list a vector of paths corresponding to the .txt files to import
+#' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
+#' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
+#' Out, Opn, Ldk, etc.
+#' @keywords import
 import.txt <- function(txt.list, ...){
-  cat("Extracting", length(txt.list), ".jpg outlines...\n")
+  cat("Extracting", length(txt.list), "..txt coordinates...\n")
   if (length(txt.list) > 10) {
     pb <- txtProgressBar(1, length(txt.list))
     t <- TRUE } else {t <- FALSE}
@@ -121,84 +86,170 @@ import.txt <- function(txt.list, ...){
   names(res) <- substr(txt.list, start=1, stop=nchar(txt.list)-4)
   return(res)}
 
-import.jpg <- function(jpg.list, auto.notcentered=FALSE, threshold=0.5) {
-  cat("Extracting", length(jpg.list), ".jpg outlines...\n")
+#' Extract outline coordinates from a single .jpg file
+#' 
+#' Used to import outline coordinates from .jpg files. This function is used for
+#' single images and is the core function of \link{import.jpg}
+#' @export import.jpg1
+#' @param jpg.path a vector of paths corresponding to the .jpg files to import
+#' @param auto.notcentered logical if TRUE random locations will be used until
+#' one of them is (assumed) to be within the shape (because of a black pixel);
+#' if FALSE a \link{locator} will be called, and you will have to click on a 
+#' point within the shape.
+#' @param threshold the threshold value use to binarize the images. Above, pixels
+#' are turned to 1, below to 0.
+#' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
+#' @details jpegs can be provided
+#' either as RVB or as 8-bit greylevels or monochrome. The function binarizes
+#' pixels values using the 'threshold' argument. It will try to start apply
+#' the \link{import.Conte} algortih of outline extraction from the center of
+#' the image and 'loinking' downwards for the first black -> white 'frontier' in
+#' the pixels. This point will be the first of the outlines and it may be useful
+#' if you align manually the images and if you want to retain this information
+#' in the consequent morphometric analyses. If the point at the center of the 
+#' image is not within the shape, ie is "white" you have two choices defined by
+#' the 'auto.notcentered' argument. If it's TRUE, some random starting points
+#' will be tried until on of them is "black" and within the shape; if FALSE
+#' you will be asked to click on a point within the shape.
+#' @return a matrix of (x; y) coordinates that can be passed to Out
+import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
+  img <- readJPEG(jpg.path)
+  if (!is.matrix(img)) {
+    img <- (img[,,1] + img[,,2] + img[,,3])/3}
+  img[img >  threshold] <- 1
+  img[img <= threshold] <- 0
+  x <- round(dim(img)/2)
+  if (img[x[1], x[2]] != 0){
+    if (auto.notcentered){
+      while (img[x[1], x[2]] != 0) {
+        x[1] <- sample(dim(img)[1], 1)
+        x[2] <- sample(dim(img)[2], 1)}
+    } else {
+      .img.plot(img)
+      while (img[x[1], x[2]] != 0) {
+        cat(" * Click a point within the shape\n")
+        x <- rev(round(unlist(locator(1))))
+        if (x[1]>dim(img)[1]) x[1] <- dim(img)[1]
+        if (x[2]>dim(img)[2]) x[2] <- dim(img)[2]}}}
+  out <- import.Conte(img, x)
+  return(out)}
+
+#import.jpg.multi  #todo
+
+#' Extract outline coordinates from multiple .jpg files
+#' 
+#' This function is used to import outline coordinates and is built around 
+#' \link{import.jpg1}
+#' @export import.jpg
+#' @param jpg.paths a vector of paths corresponding to the .jpg files to import
+#' @param auto.notcentered logical if TRUE random locations will be used until
+#' one of them is (assumed) to be within the shape (because of a black pixel);
+#' if FALSE a \link{locator} will be called, and you will have to click on a 
+#' point within the shape.
+#' @param threshold the threshold value use to binarize the images. Above, pixels
+#' are turned to 1, below to 0.
+#' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
+#' @details see \link{import.jpg1} and \link{import.Conte}.
+#' @return a list of matrices of (x; y) coordinates that can be passed to Out
+import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
+  cat("Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.list) > 10) {
-    pb <- txtProgressBar(1, length(jpg.list))
+    pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE } else {t <- FALSE}
   res <- list()
-  for (i in seq(along=jpg.list)) {
-    img <- readJPEG(jpg.list[i])
-    if (!is.matrix(img)) {
-      img <- (img[,,1] + img[,,2] + img[,,3])/3}
-    img[img >  threshold] <- 1
-    img[img <= threshold] <- 0
-    x <- round(dim(img)/2)
-    if (img[x[1], x[2]] != 0){
-      if (auto.notcentered){
-        while (img[x[1], x[2]] != 0) {
-          x[1] <- sample(dim(img)[1], 1)
-          x[2] <- sample(dim(img)[2], 1)}
-      } else {
-        .img.plot(img)
-        while (img[x[1], x[2]] != 0) {
-          cat(" * Click a point within the shape\n")
-          x <- rev(round(unlist(locator(1))))
-          if (x[1]>dim(img)[1]) x[1] <- dim(img)[1]
-          if (x[2]>dim(img)[2]) x[2] <- dim(img)[2]
-        }
-      }
-    }
-    res[[i]] <- import.Conte(img, x)
+  for (i in seq(along=jpg.paths)) {
+    res[[i]] <- import.jpg1(jpg.paths[i],
+                            auto.notcentered=auto.notcentered, threshold=threshold)
     if (t) setTxtProgressBar(pb, i)}
-  names(res) <- substr(jpg.list, start=1, stop=nchar(jpg.list)-4) 
+  names(res) <- substr(jpg.paths, start=1, stop=nchar(jpg.paths)-4) 
   return(res)}
 
-# Manipulate raw data inside R--------------------------------------------------
 
+# # Manipulate raw data inside R--------------------------------------------------
+# splines <- function(coo, method="natural", deriv=2){
+#   coo <- coo.check(coo)
+#   z <- coo.perim.cum(coo)
+#   fx <- splinefun(z, coo[, 1], method=method)
+#   fy <- splinefun(z, coo[, 2], method=method)
+#   xcoe <- fy(z, deriv=2)
+#   ycoe <- fy(z, deriv=2)
+#   return(list(xcoe=xcoe, ycoe=ycoe))}
+# 
+# splines2 <- function(coo, nb.pts=100){
+#   z <- coo.perim.cum(coo)
+#   x.i <- spline(z, coo[, 1], method="natural", n=100)$y
+#   y.i <- spline(z, coo[, 2], method="natural", n=100)$y
+#   return(cbind(x.i, y.i))}
+# 
+# click.bez <- function(x, n=10){
+#   x <- as.raster(x)
+#   plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1)
+#   grid.raster(x)
+#   ldk <- matrix(NA, n, 2)
+#   bez <- NA
+#   ldk[1, ] <- l2m(locator(1))
+#   for (i in 2:n){
+#     grid.raster(x)
+#     lines(bez, col="red")
+#     ldk[i, ] <- l2m(locator(1))
+#     cat(ldk)
+#     bez <- bezier.i(bezier(ldk[1:i,])$B)
+#   }}
+# click.splines <- function(x, n=20){
+#   x <- as.raster(x)
+#   plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1)
+#   grid.raster(x)
+#   ldk <- matrix(NA, n, 2)
+#   spl <- NA
+#   ldk[1, ] <- l2m(locator(1))
+#   for (i in 2:n){
+#     grid.raster(x)
+#     points(ldk[1:i,], pch=20, col="black")
+#     lines(spl, col="red")
+#     ldk[i, ] <- l2m(locator(1))
+#     cat(ldk)
+#     spl <- splines2(ldk[1:i,])
+#   }}
 
-splines <- function(coo, method="natural", deriv=2){
-  coo <- coo.check(coo)
-  z <- coo.perim.cum(coo)
-  fx <- splinefun(z, coo[, 1], method=method)
-  fy <- splinefun(z, coo[, 2], method=method)
-  xcoe <- fy(z, deriv=2)
-  ycoe <- fy(z, deriv=2)
-  return(list(xcoe=xcoe, ycoe=ycoe))}
+# Import utilities --------------------------------------------------------
 
-splines2 <- function(coo, nb.pts=100){
-  z <- coo.perim.cum(coo)
-  x.i <- spline(z, coo[, 1], method="natural", n=100)$y
-  y.i <- spline(z, coo[, 2], method="natural", n=100)$y
-  return(cbind(x.i, y.i))}
+#' Extract structure from filenames
+#' 
+#' If filenames are consistently named: eg 'speciesI_siteA_ind1_dorsalview', 
+#' returns a data.frame from it that can be passed to Out, Opn, Ldk, objects.
+#' @export lf.structure
+#' @param lf a list filenames, as characters, typically such as
+#' those obtained with \link{list.files}.
+#' @param names the names of the groups.
+#' @param split character, the spliiting factor used for the file names.
+#' @param trim.extension logical. Whether to remove the last for characters in
+#' filenames, typically their extension, eg. ".jpg".
+#' @return data.frame with, for every individual, the corresponding label
+#' for every group.
+#' @details #todo
+#' @keywords import
+#' @examples
+#' data(bot)
+#' coo.area(bot[4])
+#todo : work either from a path or from a char vect
+lf.structure <- function(lf, names=character(), split="_", trim.extension=TRUE){
+  if (trim.extension) {
+    lf0 <- strtrim(lf0, nchar(lf0)-4)}
+  lf  <- strsplit(lf0, split=split)
+  # we check that all files have the same name structure
+  nc  <- as.numeric(unique(lapply(lf, length)))
+  if (length(nc) !=1 ) {
+    stop("The files do not have the same filename structure. See ?get.structure")}
+  fac <- as.data.frame(matrix(NA, nrow=length(lf), ncol=nc)) # dirty
+  if (!missing(names)) {
+    if (length(names) != nc) {
+      stop("The number of 'names' is different from the number of groups. See ?get.structure")}
+    names(fac) <- names}
+  # nice rownames
+  rownames(fac) <- lf0
+  for (i in 1:nc) {
+    fac[, i] <- factor(unlist(lapply(lf, function(x) x[i])))} # ugly way to fill the df
+  return(fac)}
 
-click.bez <- function(x, n=10){
-  x <- as.raster(x)
-  plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1)
-  grid.raster(x)
-  ldk <- matrix(NA, n, 2)
-  bez <- NA
-  ldk[1, ] <- l2m(locator(1))
-  for (i in 2:n){
-    grid.raster(x)
-    lines(bez, col="red")
-    ldk[i, ] <- l2m(locator(1))
-    cat(ldk)
-    bez <- bezier.i(bezier(ldk[1:i,])$B)
-  }}
-click.splines <- function(x, n=20){
-  x <- as.raster(x)
-  plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1)
-  grid.raster(x)
-  ldk <- matrix(NA, n, 2)
-  spl <- NA
-  ldk[1, ] <- l2m(locator(1))
-  for (i in 2:n){
-    grid.raster(x)
-    points(ldk[1:i,], pch=20, col="black")
-    lines(spl, col="red")
-    ldk[i, ] <- l2m(locator(1))
-    cat(ldk)
-    spl <- splines2(ldk[1:i,])
-  }}
-
+# useless ?
+#.trim <- function(lf, width=nchar(lf)-4) {return(strtrim(lf, width=width))}

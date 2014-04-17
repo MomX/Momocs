@@ -63,16 +63,6 @@ require(grid)
 
 # # deprecate (but #todo) import.multi1.jpg
 
-auto.notcentered = TRUE
-threshold   = 0.5
-imgs <- list.files("/Users/vincent/Research/Momocs/Datasets/test-import/", full=TRUE)
-coo <- import.jpg(imgs[1])
-coo.plot(coo[[1]])
-
-
-
-
-
 
 
 

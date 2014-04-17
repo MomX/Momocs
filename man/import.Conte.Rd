@@ -1,0 +1,23 @@
+\name{import.Conte}
+\alias{import.Conte}
+\title{Extract outlines from an image mask}
+\usage{
+import.Conte(img, x)
+}
+\arguments{
+  \item{img}{a matrix that corresponds to an binary image
+  mask}
+
+  \item{x}{numeric the (x; y) coordinates of a starting
+  point within the shape.}
+}
+\value{
+a matrix, the (x; y) coordinates of the outline points.
+}
+\description{
+Provided with an image mask (black/1 pixels over a white/0
+background), and with the coordinates of a point within the
+shape, returns the (x; y) coordinates of the outline.
+}
+\keyword{import}
+
