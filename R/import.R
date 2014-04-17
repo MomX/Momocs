@@ -26,7 +26,7 @@ lf.structure <- function(lf, names=character(), split="_", trim.extension=TRUE){
   if (trim.extension) {
     lf0 <- strtrim(lf0, nchar(lf0)-4)}
   lf  <- strsplit(lf0, split=split)
-  # we check that all files have the same filename structure
+  # we check that all files have the same name structure
   nc  <- as.numeric(unique(lapply(lf, length)))
   if (length(nc) !=1 ) {
     stop("The files do not have the same filename structure. See ?get.structure")}
@@ -60,8 +60,8 @@ lf.structure <- function(lf, names=character(), split="_", trim.extension=TRUE){
   box()}
 
 import.Conte <- function (img, x){ 
-  while (abs(img[x[1], x[2]] - img[x[1], (x[2] - 1)]) < 0.1) {
-    x[2] <- x[2] - 1
+  while (abs(img[x[1], x[2]] - img[x[1] + 1, x[2]]) < 0.1) {
+    x[1] <- x[1] + 1
   }
   a <- 1
   M <- matrix(c(0, -1, -1, -1, 0, 1, 1, 1, 1, 1, 0, -1, -1, -1, 0, 1), 

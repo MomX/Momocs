@@ -66,7 +66,7 @@ require(grid)
 auto.notcentered = TRUE
 threshold   = 0.5
 imgs <- list.files("/Users/vincent/Research/Momocs/Datasets/test-import/", full=TRUE)
-coo <- import.jpg(imgs)
+coo <- import.jpg(imgs[1])
 coo.plot(coo[[1]])
 
 
