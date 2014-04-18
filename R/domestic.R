@@ -1,89 +1,4 @@
 
-# 00. Package documentation and NAMESPACE import ---------------------------
-
-#' Momocs
-#' 
-#'
-#' Morphometrics using R
-#' @references Bonhomme et al. JSS
-#' @import ape
-#' @importFrom jpeg readJPEG
-#' @importFrom sp spsample Polygon
-#' @importFrom spdep tri2nb
-#' @importFrom shapes procGPA
-#' @importFrom methods showDefault
-#' @importFrom MASS ginv
-#' @docType package
-#' @name Momocs
-#' @keywords Abtract
-NULL
-
-# 0. Datasets documentation ----------------------------------------------------
-#' Data: Outline coordinates of 20 beer and 20 whisky bottles.
-#' 
-#' @docType data
-#' @name bot
-#' @rdname data_bot
-#' @keywords datasets
-#' @format An Out object containing the outlines coordinates and a grouping factor
-#' for 20 beer and 20 whisky bottles
-#' @source  Images have been grabbed on the internet and prepared by the package's
-#' authors. No particular choice has been made on the dimension of the original
-#' images or the brands cited here.
-NULL
-
-#' Data: Outline coordinates of 50 cephalic outlines of trilobite
-#' 
-#' @docType data
-#' @name trilo
-#' @rdname data_trilo
-#' @keywords datasets
-#' @format An Out object 64 coordinates of 50 cephalic outlines from different
-#' ontogenetic stages of trilobite.
-#' @source  Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
-#' The original data included 51 outlines and 5 ontogenetic stages, 
-#' but one of them has just a single outline thas has been removed.
-NULL
-
-
-#' Data: Outline coordinates of 126 mosquito wings.
-#' 
-#' @docType data
-#' @name mosquito
-#' @rdname data_mosquito
-#' @keywords datasets
-#' @format An Out object with the 126 mosquito wing outlines outlines
-#' used Rohlf and Archie (1984).
-#' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
-#' description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic Biology}: 302-317.
-#' Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
-NULL
-
-#' Data: Outline coordinates of 240 hand-drawn hearts
-#' 
-#' @docType data
-#' @name hearts
-#' @rdname data_hearts
-#' @keywords datasets
-#' @format An Out object with the outline coordinates of 240 hand-drawn hearts
-#' by 8 different persons, with 4 landmarks.
-#' @source We thank the fellows of the Ecology Department of the French Institute
-#' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and reduced to 80 coordinates per outline.
-NULL
-
-# #' Data: Outline coordinates of 50 date seeds (Phoenix dactylifera), with 2 views
-# #' 
-# #' @docType data
-# #' @name phoenix
-# #'@rdname data_phoenix
-# #' @keywords datasets
-# #' @format An Out object with the outline coordinates of 50 date seeds
-# #' (Phoenix dactylifera), with dorsal and lateral views
-# #' @source We thank Jean-Frédéric Terral and Sarah Ivorral (UMR CBAE, Montpellier, France)
-# #' from allowing us to share the data.
-# NULL
-
-
 # 2. Domestic functions -------------------------------------------------------------
 
 #' Calculates euclidean distance between two points.
@@ -99,7 +14,6 @@ NULL
 #' @seealso \link{edm}, \link{edm.nearest}, \link{dist}.
 #' @examples
 #' ed(c(0,1), c(1,0))
-#' @export
 ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 
 
@@ -193,3 +107,88 @@ edm.nearest <- function(m1, m2, full=FALSE){
   w <- sapply(df, is.factor)
   df[w] <- lapply(df[w], factor)
   df}
+
+
+# 00. Package documentation and NAMESPACE import ---------------------------
+
+#' Momocs
+#' 
+#'
+#' Morphometrics using R
+#' @references Bonhomme et al. JSS
+#' @import ape
+#' @importFrom jpeg readJPEG
+#' @importFrom sp spsample Polygon
+#' @importFrom spdep tri2nb
+#' @importFrom shapes procGPA
+#' @importFrom methods showDefault
+#' @importFrom MASS ginv
+#' @docType package
+#' @name Momocs
+#' @keywords Abtract
+NULL
+
+# 0. Datasets documentation ----------------------------------------------------
+#' Data: Outline coordinates of 20 beer and 20 whisky bottles.
+#' 
+#' @docType data
+#' @name bot
+#' @rdname data_bot
+#' @keywords datasets
+#' @format An Out object containing the outlines coordinates and a grouping factor
+#' for 20 beer and 20 whisky bottles
+#' @source  Images have been grabbed on the internet and prepared by the package's
+#' authors. No particular choice has been made on the dimension of the original
+#' images or the brands cited here.
+NULL
+
+#' Data: Outline coordinates of 50 cephalic outlines of trilobite
+#' 
+#' @docType data
+#' @name trilo
+#' @rdname data_trilo
+#' @keywords datasets
+#' @format An Out object 64 coordinates of 50 cephalic outlines from different
+#' ontogenetic stages of trilobite.
+#' @source  Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
+#' The original data included 51 outlines and 5 ontogenetic stages, 
+#' but one of them has just a single outline thas has been removed.
+NULL
+
+
+#' Data: Outline coordinates of 126 mosquito wings.
+#' 
+#' @docType data
+#' @name mosquito
+#' @rdname data_mosquito
+#' @keywords datasets
+#' @format An Out object with the 126 mosquito wing outlines outlines
+#' used Rohlf and Archie (1984).
+#' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
+#' description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic Biology}: 302-317.
+#' Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
+NULL
+
+#' Data: Outline coordinates of 240 hand-drawn hearts
+#' 
+#' @docType data
+#' @name hearts
+#' @rdname data_hearts
+#' @keywords datasets
+#' @format An Out object with the outline coordinates of 240 hand-drawn hearts
+#' by 8 different persons, with 4 landmarks.
+#' @source We thank the fellows of the Ecology Department of the French Institute
+#' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and reduced to 80 coordinates per outline.
+NULL
+
+# #' Data: Outline coordinates of 50 date seeds (Phoenix dactylifera), with 2 views
+# #' 
+# #' @docType data
+# #' @name phoenix
+# #'@rdname data_phoenix
+# #' @keywords datasets
+# #' @format An Out object with the outline coordinates of 50 date seeds
+# #' (Phoenix dactylifera), with dorsal and lateral views
+# #' @source We thank Jean-Frédéric Terral and Sarah Ivorral (UMR CBAE, Montpellier, France)
+# #' from allowing us to share the data.
+

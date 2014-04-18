@@ -2,7 +2,7 @@
 \alias{stack.Out}
 \title{Plot on Out objects: stacks all shapes}
 \usage{
-\method{stack.Out}{}(x, cols, borders, points = FALSE, first.point = TRUE,
+\method{stack}{Out}(x, cols, borders, points = FALSE, first.point = TRUE,
   centroid = TRUE, ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055",
   ldk.cex = 0.5, xy.axis = TRUE, ...)
 }

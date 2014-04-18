@@ -1,0 +1,25 @@
+\name{rFourier}
+\alias{rFourier}
+\title{Calculates radius lengths Fourier analysis on Out objects}
+\usage{
+rFourier(Out, nb.h, smooth.it, norm)
+}
+\arguments{
+  \item{Out}{the Out object on which to calculate eft}
+
+  \item{nb.h}{the number of harmonics to calculate}
+
+  \item{smooth.it}{the number of smoothing iterations to
+  perform}
+
+  \item{norm}{whether to normalize the matrix of
+  coefficients. See Details.}
+}
+\description{
+A wrapper for \link{rfourier} to be applied on Out objects.
+}
+\examples{
+data(bot)
+rFourier(bot, 12)
+}
+

@@ -90,7 +90,7 @@ least-squares sense.
 data(bot)
 coo <- bot[1]
 coo.plot(coo)
-ef  <- efourier(coo, 12)
+ef <- efourier(coo, 12)
 ef
 efi <- efourier.i(ef)
 coo.draw(efi, border="red", col=NA)

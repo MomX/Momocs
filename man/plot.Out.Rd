@@ -2,7 +2,7 @@
 \alias{plot.Out}
 \title{Plot on Out objects: quick review}
 \usage{
-\method{plot.Out}{}(x, id, ...)
+\method{plot}{Out}(x, id, ...)
 }
 \arguments{
   \item{x}{the Out object ('x' and not Out since this

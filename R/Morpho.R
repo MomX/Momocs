@@ -3,16 +3,21 @@
 
 # Mainly due to Julien Claude with some wrapping
 # 1.1 Elliptical Fourier Analysis ==============================================
+# Core functions for modern morphometrics
+# 1. Outline functions ---------------------------------------------------------
+
+# Mainly due to Julien Claude with some wrapping
+# 1.1 Elliptical Fourier Analysis ==============================================
 
 #' Calculates elliptical Fourier analysis.
-#' 
+#'
 #' \code{efourier} computes elliptical Fourier analysis from a matrix or a list
 #' of coordinates.
-#' 
+#'
 #' These functions and their mathematical background detailed below are here
 #' detailed to ease their use in new methods but are used internally by methods
 #' on \code{Out}-objects.
-#' 
+#'
 #' Elliptic Fourier analysis and normalization are calculated as follows. Let
 #' \eqn{T} be the perimeter of a given closed outline, here considered as the
 #' period of the signal. One sets \eqn{\omega = 2\pi/T} to be the pulse. Then,
@@ -22,12 +27,12 @@
 #' n\omega t } with \deqn{ a_n = \frac{2}{T}+ \int\limits_{0}^{T} x(t)\cos
 #' (n\omega t) \mathrm{d} t } \deqn{ b_n = \frac{2}{T}+ \int\limits_{0}^{T}
 #' x(t)\sin (n\omega t) \mathrm{d} t }
-#' 
+#'
 #' similarly, \deqn{ y(t) = \frac{c_0}{2}+\sum\limits_{n=1}^{+\infty} c_n\cos
 #' n\omega t + d_n\sin n\omega t } with \deqn{ c_n = \frac{2}{T}+
 #' \int\limits_{0}^{T} y(t)\cos (n\omega t) \mathrm{d} t } \deqn{d_n =
 #' \frac{2}{T}+ \int\limits_{0}^{T} y(t)\sin (n\omega t) \mathrm{d} t }
-#' 
+#'
 #' Since the outline contains a \eqn{k} finite number of points, one can
 #' therefore calculate discrete estimators for every harmonic coefficient of
 #' the \eqn{n^{th}} harmonics: \deqn{
@@ -35,13 +40,13 @@
 #' t_p}(\cos\frac{2\pi nt_p}{T}-\cos\frac{2\pi nt_{p-1}}{T}) } \deqn{
 #' b_n=\frac{T}{2\pi^2n^2}\sum\limits_{p=1}^k \frac{\Delta x_p}{\Delta
 #' t_p}(\sin\frac{2\pi nt_p}{T}-\sin\frac{2\pi nt_{p-1}}{T}) }
-#' 
+#'
 #' \eqn{\Delta x_1=x_1-x_k} and \eqn{c_n} and \eqn{d_n} are calculated
 #' similarly. \eqn{a_0} and \eqn{c_0} correspond to the estimate of the
 #' coordinates of the centroid of original outline and are estimated by: \deqn{
 #' a_0=\frac{2}{T}\sum\limits_{i=1}^p x_i } and \deqn{
 #' c_0=\frac{2}{T}\sum\limits_{i=1}^p y_i }
-#' 
+#'
 #' Intuitively, for all positive integers \eqn{n}, the sum of a cosine curve
 #' and a sine curve represent the \eqn{n^{th}} harmonic content of the \eqn{x}
 #' and \eqn{y} projections of the \eqn{k}-edged polygon, and for any \eqn{n},
@@ -53,7 +58,7 @@
 #' astronomical Ptolemy's epicycles (see \link{Ptolemy}), and the
 #' reconstruction obtained from \eqn{N} harmonics is the best possible fit in a
 #' least-squares sense.
-#' @export efourier
+#' @export 
 #' @usage efourier(coo, nb.h, smooth.it = 0, verbose = TRUE)
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to use
@@ -72,24 +77,24 @@
 #' of the Fourier's family.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' 
+#'
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 #' @keywords coreMorpho
 #' @examples
-#' 
+#'
 #' data(bot)
 #' coo <- bot[1]
 #' coo.plot(coo)
-#' ef  <- efourier(coo, 12)
+#' ef <- efourier(coo, 12)
 #' ef
 #' efi <- efourier.i(ef)
 #' coo.draw(efi, border="red", col=NA)
-efourier  <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
+efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   coo <- coo.check(coo)
   if (is.closed(coo)) coo <- coo.unclose(coo)
   nr <- nrow(coo)
-  if (missing(nb.h))  {
+  if (missing(nb.h)) {
     nb.h <- 32
     warning(paste(" * 'nb.h' not provided and set to", nb.h))}
   if(nb.h * 2 > nr) {
@@ -119,6 +124,8 @@ efourier  <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   ao <- 2 * sum(coo[, 1] * Dt/T)
   co <- 2 * sum(coo[, 2] * Dt/T)
   return(list(an = an, bn = bn, cn = cn, dn = dn, ao = ao, co = co))}
+
+
 
 #' Calculates inverse elliptical Fourier analysis.
 #' 

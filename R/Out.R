@@ -34,7 +34,6 @@ Out  <- function(coo.list, ldk=list(), fac=data.frame()){
 Coo <- Out
 
 # The print method for Out objects
-#' @export
 print.Out <- function(x, ...){
   Out <- x
   ### Header
@@ -150,7 +149,7 @@ subset.Out <- function(x, subset, ...){
 #' 
 #' Allows to plot shapes from Out objects
 #' todo
-#' @method plot.Out
+#' @method plot Out
 #' @export plot.Out
 #' @param x the Out object ('x' and not Out since this methods extends plot)
 #' @param id the id of the shape to plot, if not provided a 
@@ -177,7 +176,7 @@ plot.Out <- function(x, id, ...){
 #' 
 #' Plots all the outlines from a \code{Out} on the same graph with graphical 
 #' options.
-#' @method stack.Out
+#' @method stack Out
 #' @export stack.Out
 #' @param x The \code{Out} object to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
@@ -460,11 +459,10 @@ hpow.Out <- function(Out, method="efourier", id=1:length(Out),
 
 # 4. Out methods (Fourier analysis) --------------------------------------------
 #' Calculates elliptical Fourier transforms on Out objects
-#' 
+#'
 #' A wrapper for \link{efourier} to be applied on Out objects.
-#' @export eFourier
-#' @aliases eFourier
-#' @rdname eFourier
+#' @rdname eFourier-Out
+#' @export eFourier 
 #' @S3method eFourier Out
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
@@ -474,17 +472,17 @@ hpow.Out <- function(Out, method="efourier", id=1:length(Out),
 #' @examples
 #' data(bot)
 #' eFourier(bot, 12)
-eFourier     <- function(Out, nb.h, smooth.it, norm, start){
+eFourier <- function(Out, nb.h, smooth.it, norm, start){
   UseMethod("eFourier")}
 
 eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
   q <- floor(min(sapply(Out$coo, nrow)/2)) - 1
-  if (missing(nb.h))  {
+  if (missing(nb.h)) {
     nb.h <- ifelse(q >= 32, 32, q)
     cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
-  if(nb.h  > (q+1)*2) {
+  if(nb.h > (q+1)*2) {
     nb.h <- q # should not be 1 #todo
-    warning(" * at least one outline has no more than ", (q+1)*2, " coordinates. 
+    warning(" * at least one outline has no more than ", (q+1)*2, " coordinates.
             'nb.h' has been set to: ", q,"\n")}
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h, times = 4))
@@ -504,10 +502,12 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
       coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}
   return(OutCoe(coe=coe, fac=Out$fac, method="eFourier", norm=norm))}
 
+
 #' Calculates radius lengths Fourier analysis on Out objects
 #' 
 #' A wrapper for \link{rfourier} to be applied on Out objects.
-#' @export rFourier
+#' @rdname rFourier-Out
+#' @export rFourier 
 #' @S3method rFourier Out
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
@@ -539,7 +539,8 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
 #' Calculates tangent angle Fourier analysis on Out objects
 #' 
 #' A wrapper for \link{tfourier} to be applied on Out objects.
-#' @export tFourier
+#' @rdname tFourier-Out
+#' @export tFourier 
 #' @S3method tFourier Out
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
@@ -934,6 +935,16 @@ meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
     res[[i]] <- efourier.i(xf, nb.h=nb.h, nb.pts=nb.pts)}
   names(res) <- fl
   return(res)}
+
+
+#' PLOP
+#' 
+#' plopiplop
+#' @aliases PLOP
+#' @rdname PLOP
+#' @export PLOP
+#' 
+PLOP <- function(){}
 
 # 0. Out TODO ----------------------------------------------------------------
 #c OutCoe
