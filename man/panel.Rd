@@ -3,7 +3,7 @@
 \alias{panel.Out}
 \title{Plot on Out objects: family picture}
 \usage{
-panel(Out, ...)
+panel(Out, cols, borders, names, cex.names, ...)
 }
 \arguments{
   \item{Out}{The \code{Out} object to plot.}

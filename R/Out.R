@@ -246,9 +246,8 @@ stack.Out <- function(x, cols, borders,
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)
-panel <- function(Out, ...){UseMethod("panel")}
+panel <- function(Out, cols, borders, names, cex.names, ...){UseMethod("panel")}
 panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
-  
   if (missing(cols)) {
     cols     <- rep("#33333322", length(Out))}
   if (length(cols)!=length(Out)) {

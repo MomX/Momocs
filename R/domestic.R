@@ -85,11 +85,11 @@ NULL
 
 
 # 2. Domestic functions -------------------------------------------------------------
+
 #' Calculates euclidean distance between two points.
 #' 
 #' \code{ed} simply calculates euclidean distance between two points defined by
-#' their (x; y) coordinates. This function is used internally but may be of
-#' interest for other analyses.
+#' their (x; y) coordinates.
 #' 
 #' @export ed
 #' @usage ed(pt1, pt2)
@@ -97,12 +97,11 @@ NULL
 #' @param pt2 (x; y) coordinates of the second point.
 #' @return Returns the euclidean distance between the two points.
 #' @seealso \link{edm}, \link{edm.nearest}, \link{dist}.
-#' @keywords Utilities
 #' @examples
-#' 
-#' ed(c(0,1), c(1,0)) # sqrt 2
-ed             <- function(pt1, pt2){
-  return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
+#' ed(c(0,1), c(1,0))
+#' @export
+ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
+
 
 #' Calculates euclidean intermediate between two points.
 #' 
@@ -119,7 +118,6 @@ ed             <- function(pt1, pt2){
 #' @seealso \link{ed}, \link{edm}.
 #' @keywords Utilities
 #' @examples
-#' 
 #' edi(c(0,1), c(1,0), r = 0.5)
 edi <- function(pt1, pt2, r=0.5){
   return(r*(pt2-pt1) + pt1) }
@@ -191,16 +189,7 @@ edm.nearest <- function(m1, m2, full=FALSE){
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
-
-
 .refactor <- function(df){
   w <- sapply(df, is.factor)
   df[w] <- lapply(df[w], factor)
   df}
-
-
-
-
-
-
-
