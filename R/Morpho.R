@@ -866,7 +866,14 @@ polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model)){
   return(coo)}
 # 2.2 Cubic splines -------------------------------------------------------
 # 2.3 Bezier splines -------------------------------------------------------
-
+#' Calculates Bezier coefficients from a shape
+#' 
+#' todo
+#' @export bezier
+#' @param coo a matrix or a list of (x; y) coordinates
+#' @param n 
+#' @return a list with J and B
+#' @keywords morphoCore
 bezier <- function(coo, n){
   coo <- coo.check(coo)
   if (missing(n)) n <- nrow(coo)
@@ -884,6 +891,14 @@ bezier <- function(coo, n){
   B <- ginv(t(J[,1:n])%*%J[,1:n])%*%(t(J[,1:n])) %*% coo
   list(J=J, B=B)}
 
+#' Calculates a shape from Bezier coefficients
+#' 
+#' todo
+#' @export bezier.i
+#' @param B 
+#' @param nb.pts the number of points to return for drawing he shape
+#' @return a matrix of (x; y) coordinates
+#' @keywords morphoCore
 bezier.i <-function(B, nb.pts=120){
   x   <- y <- numeric(nb.pts)
   n    <- nrow(B)-1
