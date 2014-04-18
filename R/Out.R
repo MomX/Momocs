@@ -8,7 +8,7 @@
 #' 
 #' They must be built from a list (or an array) of coordinates.
 #'  
-#' @export Out Coo 
+#' @export Out
 #' 
 #' @param coo.list a list of matrices of (x,y) coordinates.
 #' @param ldk (optionnal) a list of landmarks on these coordinates (provided as the row numbers) for every outline
@@ -27,16 +27,14 @@ Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   Out <- list(coo=coo.list, ldk=ldk, fac=fac)
   class(Out) <- "Out"
   return(Out)}
-
 # For historical reasons.
 # Before version 1.xxx 'Out' classes used to be S4 classes and called 'Coo'
 # See http://www.jstatsoft.org/v56/i13
-Coo  <- function(coo.list, ldk=list(), fac=data.frame()){
-  Out <- list(coo=coo.list, ldk=list(), fac=fac)
-  class(Out) <- "Out"
-  return(Out)}
+#' @export
+Coo <- Out
 
 # The print method for Out objects
+#' @export
 print.Out <- function(x, ...){
   Out <- x
   ### Header
@@ -84,8 +82,7 @@ print.Out <- function(x, ...){
       cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
 
 # allows to maintain the tradition str() behaviour
-#' @export str.Out "[.Out" "[[.Out" length.Out names.Out "names<-.Out" print.Out
-#' @export plot.Out stack.Out panel panel.Out 
+#' @export
 str.Out <- function(object, ...){
   Out <- object
   ls.str(Out)}
@@ -93,32 +90,45 @@ str.Out <- function(object, ...){
 # Out can be indexing both to [ ] and [[ ]]
 # and returns the corresponding coordinate(s)
 # We define some getters
+#' @export
 "[.Out" <- function(x, i, ...) {
   if (missing(i))    { return(x$coo[])    }
   if (is.integer(i)) { return(x$coo[i])   }
   if (is.numeric(i)) { return(x$coo[[i]]) }}
 
+#' @export
 "[[.Out" <- function(x, i, ...) {
   if (missing(i))    { return(x$coo[])    }
   if (is.integer(i)) { return(x$coo[i])   }
   if (is.numeric(i)) { return(x$coo[[i]]) }}
 
 # length on an Out return the length of Out$coo, ie the number of coordinates
+#' @export
 length.Out <- function(x) {
   Out <- x
   return(length(Out$coo))}
 
 # names() on a Out retrieves the names of the Out$coo
+#' @export
 names.Out <- function(x){
   Out <- x
   return(names(Out$coo))}
 
 # which can in return may be named using names(Out) <- 
+#' @export
 "names<-.Out" <- function(x, value){
   names(x$coo) <- value
   return(x)}
 
-# candidate for the dirtiest function ever...
+#' Create subsets of Out objects
+#' 
+#' todo
+#' @S3method  subset Out
+#' @param x and Out object
+#' @param subset logical from the fac or indices
+#' @param ... (to preserve consistence with subset generic)
+#' @keywords Out
+#' @export
 subset.Out <- function(x, subset, ...){
   Out <- x
   e <- substitute(subset)
@@ -130,13 +140,23 @@ subset.Out <- function(x, subset, ...){
     Out2$fac <- Out$fac
     Out2$fac <- as.data.frame(Out2$fac[retain, ])
     names(Out2$fac) <- names(Out$fac)
-Out2$fac <- .refactor(Out2$fac)
+    Out2$fac <- .refactor(Out2$fac)
   }
   return(Out2)}
 
 # 2. Out plotting methods ----------------------------------------------------
-# The main plot method that when plot(Out)
-# For a quick investigation of the shpes included in a Coo object
+
+#' Plot on Out objects: quick review
+#' 
+#' Allows to plot shapes from Out objects
+#' todo
+#' @method plot.Out
+#' @export plot.Out
+#' @param x the Out object ('x' and not Out since this methods extends plot)
+#' @param id the id of the shape to plot, if not provided a 
+#' random shape is plotted
+#' @param ... further arguments to be passed to \link{coo.plot}
+#' @keywords Out
 plot.Out <- function(x, id, ...){
   Out <- x
   if (missing(id)) {
@@ -153,10 +173,37 @@ plot.Out <- function(x, id, ...){
         coo.plot(Out$coo[[id[i]]], main=names(Out)[id[i]], ...)
         readline(prompt = "Press <Enter> to continue, <Esc> to quit...")}}}}
 
-# stack(Out) shows all the shapes stacked on the same plane
+#' Plot on Out objects: stacks all shapes
+#' 
+#' Plots all the outlines from a \code{Out} on the same graph with graphical 
+#' options.
+#' @method stack.Out
+#' @export stack.Out
+#' @param x The \code{Out} object to plot.
+#' @param cols A \code{vector} of colors for drawing the outlines.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param borders A \code{vector} of colors for drawing the borders.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param points logical whether to draw or not points
+#' @param first.point logical whether to draw or not the first point
+#' @param centroid logical whether to draw or not the centroid
+#' @param ldk \code{logical}. Whether to display landmarks (if any).
+#' @param ldk.pch A \code{pch} for these landmarks.
+#' @param ldk.col A color for these landmarks.
+#' @param ldk.cex A \code{cex} fro these landmarks
+#' @param xy.axis whether to draw or not the x and y axes
+#' @param ... further arguments to be passed to coo.plot
+#' @seealso \link{panel.Out}, \link{plot.Out}.
+#' @examples
+#' data(mosquito)
+#' stack(mosquito, borders="#1A1A1A22", first.point=FALSE)
+#' data(hearts)
+#' stack(hearts)
+#' stack(hearts, ldk=FALSE)
+#' stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
 stack.Out <- function(x, cols, borders,
                       points=FALSE, first.point=TRUE, centroid=TRUE,
-                      ldk=TRUE, ldk.pch=3, ldk.col="red", ldk.cex=1,
+                      ldk=TRUE, ldk.pch=3, ldk.col="#FF000055", ldk.cex=0.5,
                       xy.axis=TRUE, ...){
   Out <- x
   if (missing(cols)) {
@@ -166,7 +213,7 @@ stack.Out <- function(x, cols, borders,
   if (missing(borders)) {
     borders     <- rep("#33333355", length(Out))}
   if (length(borders)!=length(Out)) {
-    cols     <- rep(borders[1], length(Out))}
+    borders     <- rep(borders[1], length(Out))}
   op <- par(mar=c(3, 3, 2, 1))
   on.exit(par(op))
   wdw <- apply(l2a(lapply(Out$coo, function(x) apply(x, 2, range))), 2, range)
@@ -174,11 +221,31 @@ stack.Out <- function(x, cols, borders,
   if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}
   for (i in 1:length(Out)) {
     coo.draw(Out$coo[[i]], col=cols[i], border=borders[i],
-             points=points, first.point=TRUE, centroid=centroid)}
+             points=points, first.point=TRUE, centroid=centroid)
   if (ldk & length(Out$ldk)!=0) {
-    points(Out[Out$ldk, ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
+    points(Out$coo[[i]][Out$ldk[[i]], ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
+}
 
-# panel(Out) for a family picture of the shapes
+#' Plot on Out objects: family picture
+#' 
+#' Plots all the outlines from a \code{Out} side by side
+#'
+#' @export panel
+#' @S3method panel Out
+#' @aliases panel.Out
+#' @param Out The \code{Out} object to plot.
+#' @param cols A \code{vector} of colors for drawing the outlines.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param borders A \code{vector} of colors for drawing the borders.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param names whether to plot names or not. If TRUE uses shape names, otherwise
+#' pass a character for the names of the files
+#' @param cex.names a cex for the names
+#' @param ... further arguments to be passed to \link{coo.list.panel}
+#' @seealso \link{stack.Out}, \link{plot.Out}.
+#' @examples
+#' data(mosquito)
+#' panel(mosquito, names=TRUE, cex.names=0.5)
 panel <- function(Out, ...){UseMethod("panel")}
 panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
   
@@ -392,7 +459,22 @@ hpow.Out <- function(Out, method="efourier", id=1:length(Out),
               }
               return(res)}
 
-# 4. Out methods (Fourier analysis) ------------------------------------------
+# 4. Out methods (Fourier analysis) --------------------------------------------
+#' Calculates elliptical Fourier transforms on Out objects
+#' 
+#' A wrapper for \link{efourier} to be applied on Out objects.
+#' @export eFourier
+#' @aliases eFourier
+#' @rdname eFourier
+#' @S3method eFourier Out
+#' @param Out the Out object on which to calculate eft
+#' @param nb.h the number of harmonics to calculate
+#' @param smooth.it the number of smoothing iterations to perform
+#' @param norm whether to normalize the matrix of coefficients. See Details.
+#' @param start logical whether to consider the first point as homologous
+#' @examples
+#' data(bot)
+#' eFourier(bot, 12)
 eFourier     <- function(Out, nb.h, smooth.it, norm, start){
   UseMethod("eFourier")}
 
@@ -423,6 +505,18 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
       coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}
   return(OutCoe(coe=coe, fac=Out$fac, method="eFourier", norm=norm))}
 
+#' Calculates radius lengths Fourier analysis on Out objects
+#' 
+#' A wrapper for \link{rfourier} to be applied on Out objects.
+#' @export rFourier
+#' @S3method rFourier Out
+#' @param Out the Out object on which to calculate eft
+#' @param nb.h the number of harmonics to calculate
+#' @param smooth.it the number of smoothing iterations to perform
+#' @param norm whether to normalize the matrix of coefficients. See Details.
+#' @examples
+#' data(bot)
+#' rFourier(bot, 12)
 rFourier <- function(Out, nb.h, smooth.it, norm){
   UseMethod("rFourier")}
 
@@ -441,8 +535,20 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
   for (i in seq(along = coo)) {
     rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose = TRUE) #todo: vectorize
     coe[i, ] <- c(rf$an, rf$bn)}
-  return(OutCoe(coe=coe, fac=Out$fac, method="rFourier"))}
+  return(OutCoe(coe=coe, fac=Out$fac, method="rFourier", norm=norm))}
 
+#' Calculates tangent angle Fourier analysis on Out objects
+#' 
+#' A wrapper for \link{tfourier} to be applied on Out objects.
+#' @export tFourier
+#' @S3method tFourier Out
+#' @param Out the Out object on which to calculate eft
+#' @param nb.h the number of harmonics to calculate
+#' @param smooth.it the number of smoothing iterations to perform
+#' @param norm whether to normalize the matrix of coefficients. See Details.
+#' @examples
+#' data(bot)
+#' tFourier(bot, 12)
 tFourier <- function(Out, nb.h, smooth.it, norm){
   UseMethod("tFourier")}
 
@@ -461,57 +567,79 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
   for (i in seq(along = coo)) {
     tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose=TRUE)
     coe[i, ] <- c(tf$an, tf$bn)}
-  return(OutCoe(coe=coe, fac=Out$fac, method="tFourier"))}
+  return(OutCoe(coe=coe, fac=Out$fac, method="tFourier", norm=norm))}
 
-Ptolemy <- function(Coo, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
-Ptolemy.Out <- function(Coo,
+#' Ptolemaic ellipses and illustration of eFourier
+#' 
+#' Calculate and display Ptolemaic ellipses which illustrates 
+#' intuitively the principle behing elliptical Fourier analysis.
+#' @export Ptolemy
+#' @S3method Ptolemy Out
+#' @param Out The \code{Out} object on which to display Ptolemaic ellipses.
+#' @param id The \code{id} on which to display Ptolemaic ellipses.
+#' @param t A \code{vector} af angles (in radians) on which to display ellipses.
+#' @param nb.h \code{integer}. The number of harmonics to display.
+#' @param nb.pts \code{integer}. The number of points to use to display shapes.
+#' @param palette A color palette.
+#' @param legend \code{logical}. Whether to plot the legend box.
+#' @references 
+#' This method has been inspired by the figures found in the followings papers.
+#' Kuhl FP, Giardina CR. 1982. Elliptic Fourier features of a closed contour.
+#'  \emph{Computer Graphics and Image Processing} \bold{18}: 236-258.
+#' Crampton JS. 1995. Elliptical Fourier shape analysis of fossil bivalves: 
+#' some practical considerations. \emph{Lethaia} \bold{28}: 179-186.
+#' @seealso \link{efourier}. 
+#' An intuitive explanation of elliptic Fourier analysis can be found in 
+#' the \bold{Details} section of the \link{efourier} function.
+#' @examples
+#' data(hearts)
+#' Ptolemy(hearts, 1)
+Ptolemy <- function(Out, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
+Ptolemy.Out <- function(Out,
                      id=1,
                      t=seq(0, 2*pi, length=7)[-1],
                      nb.h=3,
                      nb.pts=360,
                      palette=col.sari,
-                     legend=FALSE) {    # we prepare and deduce
-              op <- par(no.readonly = TRUE)
-              on.exit(par(op))
-              par(xpd=NA)
-              cols <- palette(nb.h)
-              coo <- coo.center(Coo$coo[[id]])
-              #k <- floor(length(coo$x)/4)
-              coo.plot(coo, main=names(Coo)[id])
-              # now we calculate for every harmonic
-              coo.ef  <- efourier(coo, nb.h)
-              coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
-              vect   <- matrix(nrow=nb.h, ncol=2)
-              vect <- rbind(c(0, 0), vect)
-              for (i in seq(along=t)) {
-                for(j in 1:nb.h) {
-                  vect[j+1, 1] <- coo.ef$an[j] * cos(j * t[i]) + coo.ef$bn[j] * sin(j * t[i])
-                  vect[j+1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + coo.ef$dn[j] * sin(j * t[i])}
-                vs <- apply(vect, 2, cumsum)
-                for (j in 1:nb.h){
-                  lh   <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j],
-                                         coo.ef$cn[1:j], coo.ef$dn[1:j],
-                                         nb.h=j, nb.pts=nb.pts, plot=FALSE)
-                  ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j],
-                                         coo.ef$cn[j], coo.ef$dn[j],
-                                         nb.h=1, nb.pts=nb.pts, plot=FALSE)
-                  lines(lh, col=paste(cols[j], "22", sep=""), lwd=0.8)
-                  lines(ellh[,1] + vs[j, 1], ellh[,2] + vs[j, 2],
-                        col=cols[j], lwd=1)
-                  points(vs[j+1, 1], vs[j+1, 2], col=cols[j], cex=0.8)
-                  arrows(vs[j, 1], vs[j, 2], vs[j+1, 1], vs[j+1, 2],
-                         col=cols[j], angle=10, length=0.05, lwd=1.2)
-                }
-              }
-              points(0, 0, pch=20, col=cols[1])
-              if (legend) {
-                legend("topright", legend = as.character(1:nb.h), bty="o",
-                       col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
-                       title = "Number of harmonics")}
-            }
-
-
-
+                     legend=FALSE) {
+  # we prepare and deduce
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(xpd=NA)
+  cols <- palette(nb.h)
+  coo <- coo.center(Out$coo[[id]])
+  #k <- floor(length(coo$x)/4)
+  coo.plot(coo, main=names(Coo)[id])
+  # now we calculate for every harmonic
+  coo.ef  <- efourier(coo, nb.h)
+  coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
+  vect   <- matrix(nrow=nb.h, ncol=2)
+  vect <- rbind(c(0, 0), vect)
+  for (i in seq(along=t)) {
+    for(j in 1:nb.h) {
+      vect[j+1, 1] <- coo.ef$an[j] * cos(j * t[i]) + coo.ef$bn[j] * sin(j * t[i])
+      vect[j+1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + coo.ef$dn[j] * sin(j * t[i])}
+    vs <- apply(vect, 2, cumsum)
+    for (j in 1:nb.h){
+      lh   <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j],
+                             coo.ef$cn[1:j], coo.ef$dn[1:j],
+                             nb.h=j, nb.pts=nb.pts, plot=FALSE)
+      ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j],
+                             coo.ef$cn[j], coo.ef$dn[j],
+                             nb.h=1, nb.pts=nb.pts, plot=FALSE)
+      lines(lh, col=paste(cols[j], "22", sep=""), lwd=0.8)
+      lines(ellh[,1] + vs[j, 1], ellh[,2] + vs[j, 2],
+            col=cols[j], lwd=1)
+      points(vs[j+1, 1], vs[j+1, 2], col=cols[j], cex=0.8)
+      arrows(vs[j, 1], vs[j, 2], vs[j+1, 1], vs[j+1, 2],
+             col=cols[j], angle=10, length=0.05, lwd=1.2)
+    }
+  }
+  points(0, 0, pch=20, col=cols[1])
+  if (legend) {
+    legend("topright", legend = as.character(1:nb.h), bty="o",
+           col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
+           title = "Number of harmonics")}}
 
 # 5. OutCoe definition -------------------------------------------------------
 OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){

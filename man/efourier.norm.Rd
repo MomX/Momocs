@@ -61,7 +61,7 @@ Biology} \bold{34}: 59-68.
 \seealso{
 \link{efourier} and \link{efourier.i}. Also \link{eFourier}
 for normalizing harmonic coefficients when calculating it
-for \code{Coo} objects.
+for \code{Out} objects.
 }
 \keyword{coreMorpho}
 

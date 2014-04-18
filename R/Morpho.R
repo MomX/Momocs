@@ -11,7 +11,7 @@
 #' 
 #' These functions and their mathematical background detailed below are here
 #' detailed to ease their use in new methods but are used internally by methods
-#' on \code{Coo}-objects.
+#' on \code{Out}-objects.
 #' 
 #' Elliptic Fourier analysis and normalization are calculated as follows. Let
 #' \eqn{T} be the perimeter of a given closed outline, here considered as the
@@ -67,7 +67,7 @@
 #' \eqn{d_{1->n}} harmonic coefficients.} \item{ao }{\code{ao} Harmonic
 #' coefficient.} \item{co }{\code{co} Harmonic coefficient.}
 #' @seealso \link{efourier.i} for the reverse operation and \link{eFourier} the
-#' method for \code{Coo} objects. \link{Ptolemy} for an implementation of the
+#' method for \code{Out} objects. \link{Ptolemy} for an implementation of the
 #' Ptolemaic ellipses. \link{rfourier}, \link{tfourier} for the other members
 #' of the Fourier's family.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
@@ -208,7 +208,7 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' \code{list} with A, B, C and D concatenated in a \code{vector} that may be
 #' convenient for some uses.}
 #' @seealso \link{efourier} and \link{efourier.i}. Also \link{eFourier} for
-#' normalizing harmonic coefficients when calculating it for \code{Coo}
+#' normalizing harmonic coefficients when calculating it for \code{Out}
 #' objects.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
@@ -360,7 +360,7 @@ ef.amplify <- function(ef, amp=rep(0.5, 4)){
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 #' individual shape, are then used for multivariate analyses.
 #' @export rfourier
-#' @usage rfourier(coo, nb.h, smooth.it = 0, norm = FALSE, verbose=FALSE)
+#' @usage rfourier(coo, nb.h, smooth.it = 0, norm = FALSE, verbose=TRUE)
 #' @param coo A \code{list} or \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -871,7 +871,7 @@ polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model)){
 #' todo
 #' @export bezier
 #' @param coo a matrix or a list of (x; y) coordinates
-#' @param n 
+#' @param n the degree
 #' @return a list with J and B
 #' @keywords morphoCore
 bezier <- function(coo, n){
@@ -895,7 +895,7 @@ bezier <- function(coo, n){
 #' 
 #' todo
 #' @export bezier.i
-#' @param B 
+#' @param B a matrix
 #' @param nb.pts the number of points to return for drawing he shape
 #' @return a matrix of (x; y) coordinates
 #' @keywords morphoCore

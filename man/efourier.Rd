@@ -2,7 +2,7 @@
 \alias{efourier}
 \title{Calculates elliptical Fourier analysis.}
 \usage{
-efourier(coo, nb.h, smooth.it = 0, verbose = FALSE)
+efourier(coo, nb.h, smooth.it = 0, verbose = TRUE)
 }
 \arguments{
   \item{coo}{A \code{list} or a \code{matrix} of
@@ -33,7 +33,7 @@ matrix or a list of coordinates.
 \details{
 These functions and their mathematical background detailed
 below are here detailed to ease their use in new methods
-but are used internally by methods on \code{Coo}-objects.
+but are used internally by methods on \code{Out}-objects.
 
 Elliptic Fourier analysis and normalization are calculated
 as follows. Let \eqn{T} be the perimeter of a given closed
@@ -105,7 +105,7 @@ Biology} \bold{34}: 59-68.
 }
 \seealso{
 \link{efourier.i} for the reverse operation and
-\link{eFourier} the method for \code{Coo} objects.
+\link{eFourier} the method for \code{Out} objects.
 \link{Ptolemy} for an implementation of the Ptolemaic
 ellipses. \link{rfourier}, \link{tfourier} for the other
 members of the Fourier's family.

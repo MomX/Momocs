@@ -91,7 +91,7 @@ NULL
 #' their (x; y) coordinates. This function is used internally but may be of
 #' interest for other analyses.
 #' 
-#' 
+#' @export ed
 #' @usage ed(pt1, pt2)
 #' @param pt1 (x; y) coordinates of the first point.
 #' @param pt2 (x; y) coordinates of the second point.
@@ -101,9 +101,6 @@ NULL
 #' @examples
 #' 
 #' ed(c(0,1), c(1,0)) # sqrt 2
-#' 
-#' @export ed
-
 ed             <- function(pt1, pt2){
   return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 
@@ -113,7 +110,7 @@ ed             <- function(pt1, pt2){
 #' distance \code{r} on the \code{pt1-pt2} defined by their (x; y) coordinates.
 #' This function is used internally but may be of interest for other analyses.
 #' 
-#' 
+#' @export edi
 #' @usage edi(pt1, pt2, r = 0.5)
 #' @param pt1 (x; y) coordinates of the first point.
 #' @param pt2 (x; y) coordinates of the second point.
@@ -124,8 +121,6 @@ ed             <- function(pt1, pt2){
 #' @examples
 #' 
 #' edi(c(0,1), c(1,0), r = 0.5)
-#' 
-#' @export edi
 edi <- function(pt1, pt2, r=0.5){
   return(r*(pt2-pt1) + pt1) }
 
@@ -137,7 +132,7 @@ edi <- function(pt1, pt2, r=0.5){
 #' 
 #' If one wishes to align two (or more shapes) Procrustes surimposition may
 #' provide a better solution.
-#' 
+#' @export edm
 #' @usage edm(m1, m2)
 #' @param m1 The first \code{matrix} of coordinates.
 #' @param m2 The second \code{matrix} of coordinates.
@@ -146,12 +141,9 @@ edi <- function(pt1, pt2, r=0.5){
 #' @seealso \link{ed}, \link{edm.nearest}, \link{dist}.
 #' @keywords Utilities
 #' @examples
-#' 
 #' x <- matrix(1:10, nc=2)
 #' edm(x, x)
 #' edm(x, x+1)
-#' 
-#' @export edm
 edm            <- function(m1, m2){
   return(sqrt((m1[, 1] - m2[, 1])^2 + (m1[, 2] - m2[, 2])^2))}
 
@@ -169,7 +161,7 @@ edm            <- function(m1, m2){
 #' So far this function is quite time consumming since it performs \deqn{ n
 #' \times n } euclidean distance computation.  If one wishes to align two (or
 #' more shapes) Procrustes surimposition may provide a better solution.
-#' 
+#' @export edm.nearest
 #' @usage edm.nearest(m1, m2, full=FALSE)
 #' @param m1 The first \code{list} or \code{matrix} of coordinates.
 #' @param m2 The second \code{list} or \code{matrix} of coordinates.
@@ -187,9 +179,6 @@ edm            <- function(m1, m2){
 #' x <- matrix(1:10, nc=2)
 #' edm.nearest(x, x+rnorm(10))
 #' edm.nearest(x, x+rnorm(10), full=TRUE)
-#' 
-#' 
-#' @export edm.nearest
 edm.nearest <- function(m1, m2, full=FALSE){
   if (!is.matrix(m1) | !is.matrix(m2)) stop("Matrices must be provided")
   if (ncol(m1)!=2    | ncol(m2)!=2)    stop("2-cols matrices must be provided")

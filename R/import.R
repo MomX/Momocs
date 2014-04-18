@@ -125,7 +125,7 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
         x[1] <- sample(dim(img)[1], 1)
         x[2] <- sample(dim(img)[2], 1)}
     } else {
-      .img.plot(img)
+      img.plot(img)
       while (img[x[1], x[2]] != 0) {
         cat(" * Click a point within the shape\n")
         x <- rev(round(unlist(locator(1))))
