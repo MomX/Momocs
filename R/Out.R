@@ -34,6 +34,7 @@ Out  <- function(coo.list, ldk=list(), fac=data.frame()){
 Coo <- Out
 
 # The print method for Out objects
+#' @S3method print Out
 print.Out <- function(x, ...){
   Out <- x
   ### Header
@@ -135,6 +136,10 @@ subset.Out <- function(x, subset, ...){
   Out2 <- Out
   Out2$coo <- Out$coo[retain]
   if (length(Out$ldk)>0) Out2$ldk <- Out$ldk[retain]
+  .refactor <- function(df){
+    w <- sapply(df, is.factor)
+    df[w] <- lapply(df[w], factor)
+    df}
   if (ncol(Out$fac)>0) {
     Out2$fac <- Out$fac
     Out2$fac <- as.data.frame(Out2$fac[retain, ])
@@ -830,7 +835,7 @@ plot.OutPCA <- function(#basics
   eigen=TRUE,
   #
   rug=TRUE,
-  title=substitute(PCA), ...
+  title=substitute(x), ...
 ){
   PCA <- x
   xy <- PCA$x[, c(xax, yax)]

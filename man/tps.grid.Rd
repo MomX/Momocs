@@ -1,0 +1,57 @@
+\name{tps.grid}
+\alias{tps.grid}
+\title{Deformation grids using Thin Plate Splines.}
+\usage{
+tps.grid(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2, grid.size
+= 20, grid.col = "grey40", shp = TRUE, shp.col = rep(NA, 2),
+shp.border=col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
+}
+\arguments{
+  \item{fr}{The reference \eqn{(x; y)} coordinates.}
+
+  \item{to}{The target \eqn{(x; y)} coordinates.}
+
+  \item{amp}{An amplification factor of differences between
+  \code{fr} and \code{to}.}
+
+  \item{plot.full}{\code{logical}. If \code{FALSE}
+  graphical window will encompasses the entire outlines but
+  maybe not the entire grid.}
+
+  \item{grid.outside}{A \code{numeric} that indicates how
+  much the grid extends beyond the range of outlines.
+  Expressed as a proportion of the latter.}
+
+  \item{grid.size}{A \code{numeric} to specify the number
+  of grid cells on the longer axis on the outlines.}
+
+  \item{grid.col}{A color for drawing the grid.}
+
+  \item{shp}{\code{logical}. Whether to draw shapes.}
+
+  \item{shp.col}{Two colors for filling the shapes.}
+
+  \item{shp.border}{Two colors for drawing the borders.}
+
+  \item{shp.lwd}{Two \code{lwd} for drawing shapes.}
+
+  \item{shp.lty}{Two \code{lty} fro drawing the shapes.}
+}
+\value{
+No returned value.
+}
+\description{
+\code{tps.grid} calculates and plots deformation grids
+between two configurations.
+}
+\examples{
+data(bot)
+botF <- eFourier(bot)
+x <- meanShapes(botF, "type", nb.pts=80)
+fr <- x$beer
+to <- x$whisky
+tps.grid(fr, to, amp=3, grid.size=40)
+}
+\keyword{Utilities}
+\keyword{coo}
+

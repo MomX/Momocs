@@ -1,0 +1,29 @@
+\name{tps2d}
+\alias{tps2d}
+\title{Thin Plate Splines for 2D data.}
+\usage{
+tps2d(grid0, fr, to)
+}
+\arguments{
+  \item{grid0}{A matrix of coordinates on which to
+  calculate deformations.}
+
+  \item{fr}{The reference \eqn{(x; y)} coordinates.}
+
+  \item{to}{The target \eqn{(x; y)} coordinates.}
+}
+\value{
+Returns a matrix of \code{(x; y)} coordinates with
+TPS-interpolated deformations.
+}
+\description{
+\code{tps2d} is the core function for Thin Plate Splines.
+It is used internally but might be useful elsewhere.
+}
+\seealso{
+The \link{tps.grid},\link{tps.iso}, \link{tps.arr}
+functions use \code{tps2d}.
+}
+\keyword{Utilities}
+\keyword{coo}
+

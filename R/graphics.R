@@ -421,6 +421,8 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
 
 
 # 3. PCA internals -------------------------------------------------------------
+#create an empty frame
+#' @export
 .frame <- function(xy, center.origin=FALSE, zoom=1){
   if (center.origin) {
     w <- zoom*max(abs(xy))
@@ -431,6 +433,7 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
          type="n", asp=1,  axes=FALSE, frame=TRUE)}}
 
 #grid layer
+#' @export
 .grid <- function(xy, nb.grids=3){
   m <- max(abs(xy))
   g <- seq(0, m, length=nb.grids)
@@ -439,6 +442,7 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   abline(h=0, v=0, col="grey80")}
 
 #rug
+#' @export
 .rug <- function(xy, fac, col){
   if (is.null(fac)) {
     rug(xy[, 1], ticksize=0.015, side=1, col="black")
@@ -449,6 +453,7 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
       rug(xy[fac==levels(fac)[i], 2], ticksize=0.015, lwd=1,  side=2, col=col[i])}}}
 
 # convertir en vrai morphospace, à base de plotnew=TRUE/FALSE
+#' @export
 .morphospace <- function(xy, pos.shp, rot, mshape, amp.shp=1,
                          size.shp=15, border.shp="#00000055", col.shp="#00000011", ...){
   pos <- pos.shapes(xy, pos.shp=pos.shp)
@@ -457,6 +462,8 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   shp <- lapply(shp, coo.scale, 1/width)
   burp <- lapply(shp, polygon, border=border.shp, col=col.shp)}
 
+#ellipse conf
+#' @export
 .ellipses <- function(xy, fac, conf=0.5, col){
   for (i in seq(along=levels(fac))) {
     pts.i <- xy[fac==levels(fac)[i], ]
@@ -465,16 +472,22 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
     points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])
   }}
 
+#convex hulls
+#' @export
 .chull <- function(coo, fac, col){
   for (i in seq(along=levels(fac))) {
     chull.i <- coo.chull(coo[fac==levels(fac)[i], ])
     lines(coo.close(chull.i), col=col[i])}}
 
+#add labels
+#' @export
 .labels <- function(xy, fac, col){
   for (i in seq(along=levels(fac))) {
     cent.i <- coo.centpos(xy[fac==levels(fac)[i], ])
     text(cent.i[1], cent.i[2], labels=levels(fac)[i], col=col[i], pos=3)}}
 
+#add 'stars'
+#' @export
 .stars <- function(xy, fac, col){
   col.i <- paste0(col, "55")
   for (i in seq(along=levels(fac))) {
@@ -483,6 +496,8 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
     for (j in 1:nrow(pts.i)){
       segments(cent.i[1], cent.i[2], pts.i[j, 1], pts.i[j, 2], col=col.i[i])}}}
 
+#add eigen
+#' @export
 .eigen <- function(ev, xax, yax, ratio=0.12){
   plt0 <- par("plt")
   on.exit(par(plt = plt0))
@@ -495,10 +510,11 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   cs.var <- cumsum(var)/sum(var)
   k <- ifelse(max(c(xax, yax))>5, max(c(xax, yax)), 5)
   barplot(var[1:k], axes=FALSE, col=cols, border=NA)
-  text(-0.7, par("usr")[3], labels="Eigenvalues", pos=4, cex=0.6, srt=90, col="grey40")
-  
-}
+  text(-0.7, par("usr")[3], labels="Eigenvalues",
+       pos=4, cex=0.6, srt=90, col="grey40")}
 
+#names axes
+#' @export
 .axisnames <- function(xax, yax){
   gx <- strwidth("PCN")/1.75
   gy <- strheight("PCN")/1.8
@@ -507,6 +523,8 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   text(-gy, par("usr")[4]-gx, col="grey40",cex=0.8,
        labels=paste0("PC", yax), srt=90)}
 
+#adds var captured
+#' @export
 .axisvar <- function(ev, xax, yax){
   var <- ev^2
   var <- signif(100*var/sum(var), 3)
@@ -517,12 +535,30 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   text(+gy, par("usr")[4]-gx, col="grey40",cex=0.8,
        labels=paste0(var[yax], "%"), srt=90)}
 
+#adds title to pca plots
+#' @export
 .title <- function(title){
   pos <- par("usr")
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
 
 # 4. Thin plate splines plotters -----------------------------------------------
+#' Thin Plate Splines for 2D data.
+#' 
+#' \code{tps2d} is the core function for Thin Plate Splines. It is used
+#' internally but might be useful elsewhere.
+#' 
+#' 
+#' @usage tps2d(grid0, fr, to)
+#' @param grid0 A matrix of coordinates on which to calculate deformations.
+#' @param fr The reference \eqn{(x; y)} coordinates.
+#' @param to The target \eqn{(x; y)} coordinates.
+#' @return Returns a matrix of \code{(x; y)} coordinates with TPS-interpolated
+#' deformations.
+#' @seealso The \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
+#' \code{tps2d}.
+#' @keywords coo Utilities
+#' @export tps2d
 tps2d <- function(grid0, fr, to){
   if (is.closed(fr)) fr <- coo.unclose(fr)
   if (is.closed(to)) to <- coo.unclose(to)
@@ -549,6 +585,44 @@ tps2d <- function(grid0, fr, to){
   grid1 <- cbind(fx(fr, grid0, coefx), fx(fr, grid0, coefy))
   return(grid1)}
 
+#' Deformation grids using Thin Plate Splines.
+#' 
+#' \code{tps.grid} calculates and plots deformation grids between two
+#' configurations.
+#' 
+#' 
+#' @usage tps.grid(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2, grid.size
+#' = 20, grid.col = "grey40", shp = TRUE, shp.col = rep(NA, 2),
+#' shp.border=col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
+#' @param fr The reference \eqn{(x; y)} coordinates.
+#' @param to The target \eqn{(x; y)} coordinates.
+#' @param amp An amplification factor of differences between \code{fr} and
+#' \code{to}.
+#' @param plot.full \code{logical}. If \code{FALSE} graphical window will
+#' encompasses the entire outlines but maybe not the entire grid.
+#' @param grid.outside A \code{numeric} that indicates how much the grid
+#' extends beyond the range of outlines. Expressed as a proportion of the
+#' latter.
+#' @param grid.size A \code{numeric} to specify the number of grid cells on the
+#' longer axis on the outlines.
+#' @param grid.col A color for drawing the grid.
+#' @param shp \code{logical}. Whether to draw shapes.
+#' @param shp.col Two colors for filling the shapes.
+#' @param shp.border Two colors for drawing the borders.
+#' @param shp.lwd Two \code{lwd} for drawing shapes.
+#' @param shp.lty Two \code{lty} fro drawing the shapes.
+#' @return No returned value.
+#' @keywords coo Utilities
+#' @examples
+#' 
+#' data(bot)
+#' botF <- eFourier(bot)
+#' x <- meanShapes(botF, "type", nb.pts=80)
+#' fr <- x$beer
+#' to <- x$whisky
+#' tps.grid(fr, to, amp=3, grid.size=40)
+#' 
+#' @export tps.grid
 tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
                      grid.size = 20, grid.col = "grey40",
                      shp = TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2),
@@ -586,6 +660,46 @@ tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
     coo.draw(to, border=shp.border[2], col=shp.col[2],
              lwd=shp.lwd[2], lty=shp.lty[2])}}
 
+#' Deformation "vector field" using Thin Plate Splines.
+#' 
+#' \code{tps.arr}(ows) calculates deformations between two configurations and
+#' illustrate them using arrows.
+#' 
+#' 
+#' @usage tps.arr(fr, to, amp=1, palette = col.summer, arr.nb = 100, arr.levels
+#' = 100, arr.len = 0.1, arr.ang = 30, arr.lwd = 1, arr.col = "grey50", shp =
+#' TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2), shp.lwd = c(2, 2),
+#' shp.lty = c(1, 1))
+#' @param fr The reference \eqn{(x; y)} coordinates.
+#' @param to The target \eqn{(x; y)} coordinates.
+#' @param amp An amplification factor of differences between \code{fr} and
+#' \code{to}.
+#' @param palette A color palette such those included in Momocs or produced
+#' with \link{colorRampPalette}.
+#' @param arr.nb A \code{numeric}. The number of arrows to calculate.
+#' @param arr.levels A \code{numeric}. The number of levels for the color of
+#' arrows.
+#' @param arr.len A \code{numeric}. The length of arrows.
+#' @param arr.ang A \code{numeric}. The angle for arrows' heads.
+#' @param arr.lwd A \code{numeric}. The \code{lwd} for drawing arrows.
+#' @param arr.col If \code{palette} is not used the color for arrwos.
+#' @param shp \code{logical}. Whether to draw shapes.
+#' @param shp.col Two colors for filling the shapes.
+#' @param shp.border Two colors for drawing the borders.
+#' @param shp.lwd Two \code{lwd} for drawing shapes.
+#' @param shp.lty Two \code{lty} fro drawing the shapes.
+#' @return No returned value.
+#' @keywords coo Utilities
+#' @examples
+#' 
+#' data(bot)
+#' botF <- eFourier(bot)
+#' x <- meanShapes(botF, "type", nb.pts=80)
+#' fr <- x$beer
+#' to <- x$whisky
+#' tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)
+#' 
+#' @export tps.arr
 tps.arr <- function(fr, to, amp=1, palette = col.summer,
                     arr.nb = 100, arr.levels = 100, arr.len = 0.1,
                     arr.ang = 30, arr.lwd = 1, arr.col = "grey50",
@@ -612,6 +726,44 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
     coo.draw(to, border=shp.border[2], col=shp.col[2],
              lwd=shp.lwd[2], lty=shp.lty[2])}}
 
+#' Deformation isolines using Thin Plate Splines.
+#' 
+#' \code{tps.iso} calculates deformations between two configurations and map
+#' them with or without isolines.
+#' 
+#' 
+#' @usage tps.iso(fr, to, amp=1, palette = col.summer, iso.nb = 500, iso.levels
+#' = 12, cont=TRUE, cont.col="black", shp = TRUE, shp.col = rep(NA, 2),
+#' shp.border=col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
+#' @param fr The reference \eqn{(x; y)} coordinates.
+#' @param to The target \eqn{(x; y)} coordinates.
+#' @param amp An amplification factor of differences between \code{fr} and
+#' \code{to}.
+#' @param palette A color palette such those included in Momocs or produced
+#' with \link{colorRampPalette}.
+#' @param iso.levels \code{numeric}. The number of levels for mapping the
+#' deformations.
+#' @param iso.nb A \code{numeric}. The number of points to use for the
+#' calculation of deformation.
+#' @param cont \code{logical}. Whether to draw contour lines.
+#' @param cont.col A color for drawing the contour lines.
+#' @param shp \code{logical}. Whether to draw shapes.
+#' @param shp.col Two colors for filling the shapes.
+#' @param shp.border Two colors for drawing the borders.
+#' @param shp.lwd Two \code{lwd} for drawing shapes.
+#' @param shp.lty Two \code{lty} fro drawing the shapes.
+#' @return No returned value.
+#' @keywords coo Utilities
+#' @examples
+#' 
+#' data(bot)
+#' botF <- eFourier(bot)
+#' x <- meanShapes(botF, "type", nb.pts=80)
+#' fr <- x$beer
+#' to <- x$whisky
+#' tps.iso(fr, to, iso.nb=2000, amp=3)
+#' 
+#' @export tps.iso
 tps.iso <- function(fr, to, amp=1, palette = col.summer,
                     iso.nb = 500, iso.levels = 12, cont=TRUE, cont.col="black",
                     shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),

@@ -1,12 +1,12 @@
-
-# 2. Domestic functions -------------------------------------------------------------
+# 1. Domestic functions -------------------------------------------------------------
+# Placed here so far
 
 #' Calculates euclidean distance between two points.
 #' 
 #' \code{ed} simply calculates euclidean distance between two points defined by
 #' their (x; y) coordinates.
 #' 
-#' @export ed
+#' @export
 #' @usage ed(pt1, pt2)
 #' @param pt1 (x; y) coordinates of the first point.
 #' @param pt2 (x; y) coordinates of the second point.
@@ -15,7 +15,6 @@
 #' @examples
 #' ed(c(0,1), c(1,0))
 ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
-
 
 #' Calculates euclidean intermediate between two points.
 #' 
@@ -102,12 +101,6 @@ edm.nearest <- function(m1, m2, full=FALSE){
     d[i]   <- min(di)
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
-
-.refactor <- function(df){
-  w <- sapply(df, is.factor)
-  df[w] <- lapply(df[w], factor)
-  df}
-
 
 # 00. Package documentation and NAMESPACE import ---------------------------
 
