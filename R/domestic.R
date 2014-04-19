@@ -102,6 +102,14 @@ edm.nearest <- function(m1, m2, full=FALSE){
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
+# Utilities (useless?)
+.refactor <- function(df){data.frame(lapply(df, factor))}
+.trim.ext <- function(lf, width=nchar(lf)-4) {return(strtrim(lf, width=width))}
+.trim.path <- function(lf){
+  lf0 <- strsplit(lf, "/")
+  lf0 <- sapply(lf0, function(x) x[length(x)])
+  lf0 <- substr(lf0, 1, nchar(lf0)-4)}
+
 # 00. Package documentation and NAMESPACE import ---------------------------
 
 #' Momocs
@@ -174,6 +182,24 @@ NULL
 #' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and reduced to 80 coordinates per outline.
 NULL
 
+#' Data: Outline coordinates of n olives
+#' 
+#' @docType data
+#' @name olea
+#' @rdname data_olea
+#' @keywords datasets
+#' @format An Out object with the outline coordinates of olive seeds.
+#' @source We thank Jean-Frederic Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
+#' from allowing us to share the data.
+#' 
+#' You can have a look to the original paper:
+#' Terral J-F, Alonso N, Capdevila RB i, Chatti N, Fabre L, Fiorentino G, 
+#' Marinval P, Jorda GP, Pradat B, Rovira N, et al. 2004. 
+#' Historical biogeography of olive domestication (\emph{Olea europaea} L.) 
+#' as revealed by geometrical morphometry applied to biological and 
+#' archaeological material. \emph{Journal of Biogeography} \bold{31}: 63-77.
+NULL
+
 # #' Data: Outline coordinates of 50 date seeds (Phoenix dactylifera), with 2 views
 # #' 
 # #' @docType data
@@ -182,6 +208,5 @@ NULL
 # #' @keywords datasets
 # #' @format An Out object with the outline coordinates of 50 date seeds
 # #' (Phoenix dactylifera), with dorsal and lateral views
-# #' @source We thank Jean-Frédéric Terral and Sarah Ivorral (UMR CBAE, Montpellier, France)
+# #' @source We thank Jean-Frédéric Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
 # #' from allowing us to share the data.
-

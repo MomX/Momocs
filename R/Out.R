@@ -25,6 +25,7 @@
 #' #anOutobject
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   Out <- list(coo=coo.list, ldk=ldk, fac=fac)
+  if (!is.null(Out$fac)) Out$fac <- .refactor(Out$fac)
   class(Out) <- "Out"
   return(Out)}
 # For historical reasons.
@@ -79,7 +80,9 @@ print.Out <- function(x, ...){
   } else {
     cat(" -", nf, "grouping factor(s) defined:\n")
     for (i in 1:nf) {
-      cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
+      lev.i <- levels(df[, i])
+      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", length(lev.i)-10, "more")
+      cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # allows to maintain the tradition str() behaviour
 #' @export
@@ -136,10 +139,6 @@ subset.Out <- function(x, subset, ...){
   Out2 <- Out
   Out2$coo <- Out$coo[retain]
   if (length(Out$ldk)>0) Out2$ldk <- Out$ldk[retain]
-  .refactor <- function(df){
-    w <- sapply(df, is.factor)
-    df[w] <- lapply(df[w], factor)
-    df}
   if (ncol(Out$fac)>0) {
     Out2$fac <- Out$fac
     Out2$fac <- as.data.frame(Out2$fac[retain, ])

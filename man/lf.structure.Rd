@@ -2,11 +2,14 @@
 \alias{lf.structure}
 \title{Extract structure from filenames}
 \usage{
-lf.structure(lf, names = character(), split = "_", trim.extension = TRUE)
+lf.structure(lf, names = character(), split = "_", trim.extension = FALSE)
 }
 \arguments{
   \item{lf}{a list filenames, as characters, typically such
-  as those obtained with \link{list.files}.}
+  as those obtained with \link{list.files} OR a path to a
+  folder containing the files. Actually, if lf is of length
+  1 (a single character), the function assumes it is a path
+  and do a \link{list.files}.}
 
   \item{names}{the names of the groups.}
 

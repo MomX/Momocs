@@ -13,9 +13,14 @@
 #' @return a matrix, the (x; y) coordinates of the outline points.
 #' @keywords import
 import.Conte <- function (img, x){ 
-  while (abs(img[x[1], x[2]] - img[x[1] + 1, x[2]]) < 0.1) {
+  while (abs(img[x[1], x[2]] - img[x[1] - 1, x[2]]) < 0.1) {
     x[1] <- x[1] + 1
   }
+
+#   while (abs(img[x[1], x[2]] - img[x[1], x[2]-1]) < 0.1) {
+#     x[2] <- x[2] -1
+#   }
+  
   a <- 1
   M <- matrix(c(0, -1, -1, -1, 0, 1, 1, 1, 1, 1, 0, -1, -1, -1, 0, 1), 
               nrow=2, ncol=8, byrow = TRUE)
@@ -118,6 +123,7 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
     img <- (img[,,1] + img[,,2] + img[,,3])/3}
   img[img >  threshold] <- 1
   img[img <= threshold] <- 0
+#   img <- x[dim(x)[1]:1,] #Conte/readJPEG, etc.
   x <- round(dim(img)/2)
   if (img[x[1], x[2]] != 0){
     if (auto.notcentered){
@@ -161,7 +167,7 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
     res[[i]] <- import.jpg1(jpg.paths[i],
                             auto.notcentered=auto.notcentered, threshold=threshold)
     if (t) setTxtProgressBar(pb, i)}
-  names(res) <- substr(jpg.paths, start=1, stop=nchar(jpg.paths)-4) 
+    names(res) <- .trim.path(jpg.paths)
   return(res)}
 
 
@@ -219,7 +225,9 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
 #' returns a data.frame from it that can be passed to Out, Opn, Ldk, objects.
 #' @export lf.structure
 #' @param lf a list filenames, as characters, typically such as
-#' those obtained with \link{list.files}.
+#' those obtained with \link{list.files} OR a path to a folder 
+#' containing the files. Actually, if lf is of length 1 (a single character),
+#' the function assumes it is a path and do a \link{list.files}.
 #' @param names the names of the groups.
 #' @param split character, the spliiting factor used for the file names.
 #' @param trim.extension logical. Whether to remove the last for characters in
@@ -232,24 +240,24 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
 #' data(bot)
 #' coo.area(bot[4])
 #todo : work either from a path or from a char vect
-lf.structure <- function(lf, names=character(), split="_", trim.extension=TRUE){
+lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE){
+  if(length(lf)==1) {
+    lf <- list.files(lf, full.names=FALSE)}
   if (trim.extension) {
-    lf0 <- strtrim(lf0, nchar(lf0)-4)}
-  lf  <- strsplit(lf0, split=split)
+    lf <- strtrim(lf, nchar(lf)-4)}
+  lf0 <- strsplit(lf, split=split)
   # we check that all files have the same name structure
-  nc  <- as.numeric(unique(lapply(lf, length)))
+  nc  <- unique(sapply(lf0, length))
   if (length(nc) !=1 ) {
-    stop("The files do not have the same filename structure. See ?get.structure")}
+    stop("The files do not have the same filename structure.")}
   fac <- as.data.frame(matrix(NA, nrow=length(lf), ncol=nc)) # dirty
   if (!missing(names)) {
     if (length(names) != nc) {
-      stop("The number of 'names' is different from the number of groups. See ?get.structure")}
+      stop("The number of 'names' is different from the number of groups.")}
     names(fac) <- names}
   # nice rownames
-  rownames(fac) <- lf0
+  rownames(fac) <- lf
   for (i in 1:nc) {
-    fac[, i] <- factor(unlist(lapply(lf, function(x) x[i])))} # ugly way to fill the df
+    # ugly way to fill the df
+    fac[, i] <- factor(sapply(lf0, function(x) x[i]))} 
   return(fac)}
-
-# useless ?
-#.trim <- function(lf, width=nchar(lf)-4) {return(strtrim(lf, width=width))}
