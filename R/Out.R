@@ -3,16 +3,19 @@
 
 #' Builds an Out object
 #'
-#' In Momocs, Out classes objects are lists of closed outlines, on which generic methods
-#' such as plotting methods (e.g. stack()) and specific methods (e.g. efourier()) can be applied.
+#' In Momocs, Out classes objects are lists of \bold{closed} outlines, 
+#' on which generic methods such as plotting methods (e.g. stack()) 
+#' and specific methods (e.g. efourier()) can be applied.
 #' 
-#' They must be built from a list (or an array) of coordinates.
+#' They must be built from a list (or an array) of (x; y) coordinates matrices.
 #'  
 #' @export Out
 #' 
-#' @param coo.list a list of matrices of (x,y) coordinates.
-#' @param ldk (optionnal) a list of landmarks on these coordinates (provided as the row numbers) for every outline
-#' @param fac (optionnal) a data.frame of factors, specifying the grouping structure.
+#' @param coo.list a list of (x; y) matrices of coordinates.
+#' @param ldk (optionnal) a list of landmarks on these coordinates 
+#' (provided as the row numbers) for every outline
+#' @param fac (optionnal) a data.frame of factors, 
+#' specifying the grouping structure.
 #' @return a \code{Out} object.
 #' @aliases Coo
 #' @family Out
@@ -58,7 +61,8 @@ print.Out <- function(x, ...){
     print(coo.eg, print.gap=2)
     cat("\n\n")}
   # number of coordinates
-  cat(" -", round(mean(coo.len )), "+/-", round(sd(coo.len )), "coordinates per outline\n")
+  cat(" -", round(mean(coo.len )), "+/-", round(sd(coo.len )),
+      "coordinates per outline\n")
   # outlines closed or not
   if (all(coo.closed)) {
     cat(" - All outlines are closed\n")
