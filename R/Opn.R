@@ -22,7 +22,7 @@
 #' @examples
 Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
   Opn <- list(coo=coo.list, ldk=ldk, fac=fac)
-  if (!is.null(Opn$fac)) Out$fac <- .refactor(Out$fac)
+  if (!is.null(Opn$fac)) Opn$fac <- .refactor(Opn$fac)
   class(Opn) <- c("Opn", "Out")
   return(Opn)}
 
@@ -37,7 +37,7 @@ print.Opn <- function(x, ...){
   coo.len <- sapply(Opn$coo, nrow)
   coo.closed <- sapply(Opn$coo, is.closed)
   # number of open outlines
-  cat(" -", coo.nb, " open outlines\n")
+  cat(" -", coo.nb, "open outlines\n")
   # one random outline
   eg <- sample(length(Opn$coo), 1)
   coo.eg <- Opn$coo[[eg]]
@@ -74,5 +74,13 @@ print.Opn <- function(x, ...){
     cat(" -", nf, "grouping factor(s) defined:\n")
     for (i in 1:nf) {
       lev.i <- levels(df[, i])
-      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", length(lev.i)-10, "more")
+      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
+                                       length(lev.i)-10, "more")
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
+
+# 5. OutCoe definition -------------------------------------------------------
+OpnCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
+  if (missing(method)) stop("a method must be provided to OpnCoe")
+  OpnCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
+  class(OpnCoe) <- "OpnCoe"
+  return(OpnCoe)}

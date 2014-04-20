@@ -85,7 +85,8 @@ print.Out <- function(x, ...){
     cat(" -", nf, "grouping factor(s) defined:\n")
     for (i in 1:nf) {
       lev.i <- levels(df[, i])
-      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", length(lev.i)-10, "more")
+      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
+                                       length(lev.i)-10, "more")
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # allows to maintain the tradition str() behaviour
@@ -256,14 +257,26 @@ stack.Out <- function(x, cols, borders,
 panel <- function(Out, cols, borders, names, cex.names, ...){UseMethod("panel")}
 panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
   if (missing(cols)) {
-    cols     <- rep("#33333322", length(Out))}
+    cols     <- rep(NA, length(Out))}
   if (length(cols)!=length(Out)) {
     cols     <- rep(cols[1], length(Out))}
   if (missing(borders)) {
     borders     <- rep("#333333", length(Out))}
   if (length(borders)!=length(Out)) {
-    cols     <- rep(borders[1], length(Out))}
-  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, ...)
+    cols     <- rep(borders[1], length(Out))} 
+  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=poly, ...)
+  if (!is.null(names)){
+    if (is.logical(names)) {
+      text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
+    } else {    
+      if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
+      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
+panel.Opn <- function(Out, borders, names=NULL, cex.names=0.6, ...){
+  if (missing(borders)) {
+    borders     <- rep("#333333", length(Out))}
+  if (length(borders)!=length(Out)) {
+    cols     <- rep(borders[1], length(Out))} 
+  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=FALSE, ...)
   if (!is.null(names)){
     if (is.logical(names)) {
       text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
@@ -651,7 +664,7 @@ Ptolemy.Out <- function(Out,
 
 # 5. OutCoe definition -------------------------------------------------------
 OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
-  if (missing(method)) stop("a method must be provided to Coe")
+  if (missing(method)) stop("a method must be provided to OpnCoe")
   OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
   class(OutCoe) <- "OutCoe"
   return(OutCoe)}

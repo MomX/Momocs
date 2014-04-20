@@ -30,7 +30,7 @@
 #' data(bot)
 #' coo.plot(bot[1])
 
-coo.plot <- function(coo, xlim, ylim, border="#333333", col="#33333322", lwd=1, lty=1,
+coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
                      points=FALSE, first.point=TRUE, centroid=TRUE, xy.axis=TRUE,
                      pch=1, cex=0.5, main, plot.new=TRUE){
   coo <- coo.check(coo)
@@ -146,6 +146,8 @@ coo.template   <- function(coo, size=1) {
 #' @param mar A \code{vector} to define margins.
 #' @param cols A \code{vector} of colors to fill shapes.
 #' @param borders A \code{vector} of colors to draw shape borders.
+#' @param poly logical whether to use polygon or lines to draw shapes.
+#' mainly for use for outlines and open outlines.
 #' @return Returns (invisibly) a \code{data.frame} with position of shapes that
 #' can be used for other sophisticated plotting design.
 #' @seealso \link{coo.plot} and \link{coo.template}.
@@ -159,7 +161,7 @@ coo.template   <- function(coo, size=1) {
 
 coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                            fromtop=TRUE, mar=rep(0, 4),
-                           cols, borders){
+                           cols, borders, poly=TRUE){
   coo.list <- lapply(coo.list, coo.check)
   # if dim is missing, we define a square
   n <- length(coo.list)
@@ -184,12 +186,20 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
   if (missing(cols))    { cols      <- rep("grey80", n) }
   if (missing(borders)) { borders   <- rep("grey20", n) }
   res <- data.frame(pos.x=numeric(), pos.y=numeric())
+  if (poly) {
   for (i in 1:n){
     trans <- which(pos==i, arr.ind=TRUE) - 0.5
     res[i, ] <- c(trans[2], trans[1])
     polygon(coo.tp[[i]][, 1] + trans[2],
             coo.tp[[i]][, 2] + trans[1],
             col=cols[i], border=borders[i])}
+  } else {
+    for (i in 1:n){
+    trans <- which(pos==i, arr.ind=TRUE) - 0.5
+    res[i, ] <- c(trans[2], trans[1])
+    lines(  coo.tp[[i]][, 1] + trans[2],
+            coo.tp[[i]][, 2] + trans[1],
+            col=borders[i])}}
   invisible(res)}
 
 
