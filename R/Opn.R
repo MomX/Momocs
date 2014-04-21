@@ -79,8 +79,53 @@ print.Opn <- function(x, ...){
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # 5. OutCoe definition -------------------------------------------------------
-OpnCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
+OpnCoe <- function(coe=matrix(), fac=data.frame(),
+                   method=character(), baseline1=numeric(), baseline2=numeric()){
   if (missing(method)) stop("a method must be provided to OpnCoe")
-  OpnCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
+  OpnCoe <- list(coe=coe, fac=fac, method=method, baseline1, baseline2)
   class(OpnCoe) <- "OpnCoe"
   return(OpnCoe)}
+
+
+
+# Polynomials -------------------------------------------------------------
+
+Polynomials <- function(Opn, degree, ortho, intercept, baseline1, baseline2){
+  UseMethod("Polynomials")}
+
+Polynomials.Opn <- function(Opn, degree, orthogonal=TRUE, intercept=TRUE, 
+                            baseline1=c(-1, 0), baseline2=c(1, 0), nb.pts=120){
+  #we check a bit
+  min.pts <- min(sapply(Opn$coo, nrow))
+  if (nb.pts > min.pts) {
+    if(missing(nb.pts)){
+      nb.pts <- min.pts
+      cat(" * 'nb.pts' missing and set to: ", 
+              nb.pts, "\n")
+    } else {
+      nb.pts <- min.pts
+      cat(" * at least one outline has less coordinates than 'nb.pts':", 
+              nb.pts, "\n")}}
+  if (missing(degree)){
+    degree <- 5
+    cat(" * 'degree' missing and set to: ", degree, "\n")}
+  #we normalize
+  Opn <- coo.sample(Opn, nb.pts)
+  coo <- Opn$coo
+  coo <- lapply(coo, coo.baseline, 
+                ldk1=1, ldk2=nb.pts, t1=baseline1, t2=baseline2)
+  #we prepare the coe matrix
+  rn <- names(coo)
+  cn <- paste0("x", 1:degree)
+  if (intercept) cn <- c("Intercept", cn)
+  coe <- matrix(NA, nrow=length(Opn), ncol=degree+intercept, 
+                dimnames=list(rn, cn))
+  #the loop
+  for (i in seq(along=coo)){
+    pol <- polynomials(coo[[i]], n=degree, orthogonal=orthogonal)
+    coe[i, ] <- pol$coefficients}
+  method <- ifelse(orthogonal, "poly.ortho", "poly.raw")
+  return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
+                baseline1=baseline1, baseline2=baseline2))}
+
+
