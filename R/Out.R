@@ -824,6 +824,14 @@ pca.OutCoe <- function(x, ...){
   class(PCA) <- c("OutPCA", class(PCA))
   return(PCA)}
 
+pca.OpnCoe <- function(x, ...){
+  OpnCoe <- x
+  PCA <- prcomp(OpnCoe$coe, scale.=FALSE, center=TRUE)
+  PCA$fac <- OpnCoe$fac
+  PCA$mshape <- apply(OpnCoe$coe, 2, mean)
+  class(PCA) <- c("PCA", class(PCA))
+  return(PCA)}
+
 plot.OutPCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
@@ -886,6 +894,70 @@ plot.OutPCA <- function(#basics
   .title(title)
   if (eigen)     .eigen(PCA$sdev, xax, yax)
   box()}
+
+plot.PCA <- function(#basics
+  x, fac, xax=1, yax=2, 
+  #color choice
+  col="black", pch=20, palette=col.summer2,
+  #.frame
+  center.origin=FALSE, zoom=1,
+  #.grid
+  grid=TRUE, nb.grids=3,
+  #shapes
+  morphospace=TRUE, pos.shp="full", amp=1,
+  size.shp=20, border.shp="#00000055", col.shp="#00000011",
+  #stars
+  stars=TRUE,
+  #ellipses
+  ellipses=TRUE, conf=0.5,
+  #convexhulls
+  chull=TRUE,
+  #labels
+  labels=TRUE,
+  #axisnames
+  axisnames=TRUE,
+  #axisvar
+  axisvar=TRUE,
+  #eigen
+  eigen=TRUE,
+  #
+  rug=TRUE,
+  title=substitute(x), ...
+){
+  PCA <- x
+  xy <- PCA$x[, c(xax, yax)]
+  # we check and prepare
+  if (!missing(fac)) {
+    if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
+    if (missing(col)) {
+      col.groups <- palette(nlevels(fac))
+      col <- col.groups[fac]}
+    if (!missing(pch)) {
+      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }}}
+  opar <- par(mar = par("mar"), xpd=FALSE)
+  on.exit(par(opar))
+  par(mar = rep(0.1, 4)) #0.1
+  
+  .frame(xy, center.origin, zoom=zoom)
+  if (grid) .grid(xy)
+#   .morphospace(xy, pos.shp=pos.shp, rot=PCA$rotation[, c(xax, yax)], mshape=PCA$mshape,
+#                size.shp=size.shp, border.shp=border.shp, col.shp=col.shp)
+  if (!missing(fac)) {
+    if (stars)    .stars(xy, fac, col.groups)
+    if (ellipses) .ellipses(xy, fac, conf=conf, col.groups) #+conf
+    if (chull)    .chull(xy, fac, col.groups)
+    if (labels)   .labels(xy, fac, col.groups)
+    if (rug)      .rug(xy, fac, col.groups)
+  } else {
+    if (rug)      .rug(xy, NULL, col)
+  }
+  points(xy, pch=pch, col=col)
+  if (axisnames)  .axisnames(xax, yax)
+  if (axisvar)    .axisvar(PCA$sdev, xax, yax)
+  .title(title)
+  if (eigen)     .eigen(PCA$sdev, xax, yax)
+  box()}
+
 
 # manova
 manova.default <- manova

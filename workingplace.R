@@ -16,3 +16,6 @@ load("data/olea.rda")
 olea <- coo.align.calliper(olea)
 olea$coo <- lapply(olea$coo, coo.up)
 olea <- Opn(olea$coo, fac=olea$fac)
+
+pol <- Polynomials(olea)
+x <- pca(pol)
