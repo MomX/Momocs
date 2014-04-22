@@ -35,19 +35,6 @@ x <- ol[1][, 1]
 y <- ol[1][, 2]
 coo.plot(cbind(x, y), points=FALSE)
 
-#raw
-craw <- lm(y ~ poly(x, degree=3, raw=TRUE))
-co1 <- craw$coefficients
-x.pred <- seq(-1, 1, length=50)
-y.pred <- co1[1] + co1[2]*x + co1[3]*x^2 + co1[4]*x^3
-y.pred2 <- co1[1] + co1[2]*x.pred + co1[3]*x.pred^2 + co1[4]*x.pred^3
-lines(x, y.pred)
-lines(x.pred, y.pred2)
-
-
-polynomials.i(polynomials(ol[1], 5))
-
-
 pca2shp.polynomials <- function (pos, rot, mshape, amp=1, nb.pts=60, trans=TRUE, mod) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
@@ -90,38 +77,10 @@ pos.shp <- pos.shapes(pos, pos.shp="full")
 
 
 modi <- polynomials(ol[1], n=5, orthogonal=FALSE)
-
 plot(NA, xlim=range(pos[, 1]), ylim=range(pos[, 2]), asp=1)
 points(pos, pch=20, cex=0.5)
 .morphospace2(pos, pos.shp=pos, rot=rot, mshape=mshape,
              size.shp=20, border.shp="black", mod=modi)
-
-
-coo.plot(polynomials.i(polynomials(ol[1], n=5, ortho=FALSE)))
-
-polynomials(ol[1], n=5, orthogonal=FALSE)
-
-x <- Polynomials(ol, degree=5, ortho=FALSE)
-
-
-x <- ol[1][, 1]
-y <- ol[1][, 2]
-plot(x, y, asp=1, pch=20, cex=0.5, col="grey60")
-mod <- lm(y~poly(x, 3, raw=FALSE))
-y.pred <- predict(mod, newdata=data.frame(x=x))
-lines(x, y.pred, col="red", lwd=2)
-
-pol.x <- poly(x, 3, raw=TRUE)
-coe.x <- mod$coefficients
-
-lines(x, rep(coe.x[1], 100) )
-lines(x, coe.x[2]*x )
-lines(x, coe.x[3]*x^2 )
-lines(x, coe.x[4]*x^3 )
-lines(x, coe.x[1] + coe.x[2]*pol.x[,1] + coe.x[3]*pol.x[,2]^2 + coe.x[4]*pol.x[,3]^3 )
-
-poly(1:10, 3, raw=FALSE)
-?poly
 
 
 
