@@ -123,10 +123,11 @@ Polynomials.Opn <- function(Opn, degree, orthogonal=TRUE, intercept=TRUE,
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
-    pol <- polynomials(coo[[i]], n=degree, orthogonal=orthogonal)
-    mod[[i]] <- pol
-    coe[i, ] <- pol$coefficients}
-  method <- ifelse(orthogonal, "poly.ortho", "poly.raw")
+    mod <- polynomials(coo[[i]], n=degree, orthogonal=orthogonal)
+    #mod[[i]] <- pol
+    coe[i, ] <- mod$coefficients}
+  #mod$coefficients <- rep(NA, length(mod$coefficients))
+  method <- ifelse(orthogonal, "orthoPolynomials", "rawPolynomials")
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
                 baseline1=baseline1, baseline2=baseline2, mod=mod))}
 
