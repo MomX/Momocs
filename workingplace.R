@@ -31,10 +31,6 @@ od.pca <- pca(od.pol)
 # plot(ol.pca, "cep")
 # plot(od.pca, "cep")
 
-x <- ol[1][, 1]
-y <- ol[1][, 2]
-coo.plot(cbind(x, y), points=FALSE)
-
 pca2shp.polynomials <- function (pos, rot, mshape, amp=1, nb.pts=60, trans=TRUE, mod) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
