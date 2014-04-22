@@ -87,6 +87,15 @@ OpnCoe <- function(coe=matrix(), fac=data.frame(),
   return(OpnCoe)}
 
 
+pca.OpnCoe <- function(x, ...){
+  OpnCoe <- x
+  PCA <- prcomp(OpnCoe$coe, scale.=FALSE, center=TRUE)
+  PCA$fac <- OpnCoe$fac
+  PCA$mshape <- apply(OpnCoe$coe, 2, mean)
+  PCA$method <- OpnCoe$method
+  PCA$mod    <- OpnCoe$mod
+  class(PCA) <- c("PCA", class(PCA))
+  return(PCA)}
 
 # Polynomials -------------------------------------------------------------
 

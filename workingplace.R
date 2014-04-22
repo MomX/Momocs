@@ -29,11 +29,12 @@ od.pol <- Polynomials(od, ortho=FALSE)
 ol.pca <- pca(ol.pol)
 od.pca <- pca(od.pol)
 
-plot(ol.pca)
-plot(od.pca)
+plot(ol.pca, pos.shp="xy")
+plot(od.pca, pos.shp="xy")
 
 
 bot.f <- eFourier(bot, 24)
 bot.p <- pca(bot.f)
 plot(bot.p, 1)
 plot(bot.p, 1, pos.shp="xy")
+

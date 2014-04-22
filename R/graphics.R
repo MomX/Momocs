@@ -465,54 +465,13 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
 # convertir en vrai morphospace, à base de plotnew=TRUE/FALSE
 #et surtout à base de swith -> generique
 #' @export
-.morphospace <- function(xy, pos.shp, rot, mshape, amp.shp=1,
-                         size.shp=15, border.shp="#00000055", col.shp="#00000011", ...){
-  pos <- pos.shapes(xy, pos.shp=pos.shp)
-  shp <- pca2shp.efourier(pos=pos, rot=rot, mshape=mshape, amp=amp.shp, trans=TRUE)
-  width <- (par("usr")[4] - par("usr")[3]) / size.shp
-  shp <- lapply(shp, coo.scale, 1/width)
-  burp <- lapply(shp, polygon, border=border.shp, col=col.shp)}
-
-.morphospacePCA <- 
-  function(PCA, xax, yax, pos.shp,
-           amp.shp=1, size.shp=15, pts.shp=60,
-           col.shp="#00000011", border.shp="#00000055"){
-    
-    xy     <- PCA$x[, c(xax, yax)]
-    rot    <- PCA$rotation[, c(xax, yax)]
-    mshape <- PCA$mshape
-    #we define the position of shapes
-    pos <- pos.shapes(xy, pos.shp=pos.shp)
-    # according to the type of morphometrics applied, we reconstruct shapes
-    method <- PCA$method
-    ## outlines
-    if (method=="eFourier"){
-      shp <- pca2shp.efourier(pos=pos, rot=rot,
-                              mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
-      cd <- TRUE}
-    if (method=="rFourier"){
-      return(cat("* not yet (re) implemented"))
-      cd <- TRUE}
-    if (method=="tFourier"){
-      return(cat("* not yet (re) implemented"))
-      cd <- TRUE}
-    ## open outlines
-    if (method=="orthoPolynomials"){
-      # no pts.shp below (to avoid some bugs as long as it works with mod :-s )
-      shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                                 mshape=mshape, amp=amp.shp, mod=PCA$mod)
-      cd <- FALSE}
-    if (method=="rawPolynomials"){
-      shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                                 mshape=mshape, amp=amp.shp, mod=PCA$mod)
-      cd <- FALSE}
-    width   <- (par("usr")[4] - par("usr")[3]) / size.shp
-    shp     <- lapply(shp, coo.scale, 1/width)
-    if (cd) {
-      garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, points=FALSE)
-    } else {
-      garbage <- lapply(shp, lines, col=border.shp)}
-  }
+# .morphospace <- function(xy, pos.shp, rot, mshape, amp.shp=1,
+#                          size.shp=15, border.shp="#00000055", col.shp="#00000011", ...){
+#   pos <- pos.shapes(xy, pos.shp=pos.shp)
+#   shp <- pca2shp.efourier(pos=pos, rot=rot, mshape=mshape, amp=amp.shp, trans=TRUE)
+#   width <- (par("usr")[4] - par("usr")[3]) / size.shp
+#   shp <- lapply(shp, coo.scale, 1/width)
+#   burp <- lapply(shp, polygon, border=border.shp, col=col.shp)}
 
 #ellipse conf
 #' @export
@@ -913,6 +872,50 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
              lwd=shp.lwd[2], lty=shp.lty[2])}}
 
 # 5. Morphospace functions -----------------------------------------------------
+
+
+.morphospacePCA <- 
+  function(PCA, xax, yax, pos.shp,
+           amp.shp=1, size.shp=15, pts.shp=60,
+           col.shp="#00000011", border.shp="#00000055"){
+    
+    xy     <- PCA$x[, c(xax, yax)]
+    rot    <- PCA$rotation[, c(xax, yax)]
+    mshape <- PCA$mshape
+    #we define the position of shapes
+    pos <- pos.shapes(xy, pos.shp=pos.shp)
+    # according to the type of morphometrics applied, we reconstruct shapes
+    method <- PCA$method
+    ## outlines
+    if (method=="eFourier"){
+      shp <- pca2shp.efourier(pos=pos, rot=rot,
+                              mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+      cd <- TRUE}
+    if (method=="rFourier"){
+      return(cat("* not yet (re) implemented"))
+      cd <- TRUE}
+    if (method=="tFourier"){
+      return(cat("* not yet (re) implemented"))
+      cd <- TRUE}
+    ## open outlines
+    if (method=="orthoPolynomials"){
+      # no pts.shp below (to avoid some bugs as long as it works with mod :-s )
+      shp <- pca2shp.polynomials(pos=pos, rot=rot,
+                                 mshape=mshape, amp=amp.shp, mod=PCA$mod)
+      cd <- FALSE}
+    if (method=="rawPolynomials"){
+      shp <- pca2shp.polynomials(pos=pos, rot=rot,
+                                 mshape=mshape, amp=amp.shp, mod=PCA$mod)
+      cd <- FALSE}
+    width   <- (par("usr")[4] - par("usr")[3]) / size.shp
+    shp     <- lapply(shp, coo.scale, 1/width)
+    if (cd) {
+      garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, points=FALSE)
+    } else {
+      garbage <- lapply(shp, lines, col=border.shp)}
+  }
+
+
 #' Returns shape for a point on a PC plan
 #' 
 #' todo
@@ -965,7 +968,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
   for (i in 1:n) {
     ax.contrib <- mprod(rot, pos[i, ])*amp.shp
     mod$coefficients        <- mshape + apply(ax.contrib, 1, sum)
-    coo        <- polynomials.i(mod, nb.pts=pts.shp)
+    coo        <- polynomials.i(mod) #nb.pts ici fout un sacré bordel #todo
     mod$coefficients <- rep(NA, degree)
     # reconstructed shapes are translated on their centroid
     #if (trans) {

@@ -825,15 +825,7 @@ pca.OutCoe <- function(x, ...){
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
 
-pca.OpnCoe <- function(x, ...){
-  OpnCoe <- x
-  PCA <- prcomp(OpnCoe$coe, scale.=FALSE, center=TRUE)
-  PCA$fac <- OpnCoe$fac
-  PCA$mshape <- apply(OpnCoe$coe, 2, mean)
-  PCA$method <- OpnCoe$method
-  PCA$mod    <- OpnCoe$mod
-  class(PCA) <- c("PCA", class(PCA))
-  return(PCA)}
+
 
 
 
@@ -906,16 +898,6 @@ meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
     res[[i]] <- efourier.i(xf, nb.h=nb.h, nb.pts=nb.pts)}
   names(res) <- fl
   return(res)}
-
-
-#' PLOP
-#' 
-#' plopiplop
-#' @aliases PLOP
-#' @rdname PLOP
-#' @export PLOP
-#' 
-PLOP <- function(){}
 
 # 0. Out TODO ----------------------------------------------------------------
 #c OutCoe
