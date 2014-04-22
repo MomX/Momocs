@@ -829,6 +829,7 @@ pca.OpnCoe <- function(x, ...){
   PCA <- prcomp(OpnCoe$coe, scale.=FALSE, center=TRUE)
   PCA$fac <- OpnCoe$fac
   PCA$mshape <- apply(OpnCoe$coe, 2, mean)
+  PCA$method <- OpnCoe$method
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
 
@@ -898,7 +899,7 @@ plot.OutPCA <- function(#basics
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
-  col="black", pch=20, palette=col.summer2,
+  col="black", pch=20, cex=0.5, palette=col.solarized,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -907,11 +908,11 @@ plot.PCA <- function(#basics
   morphospace=TRUE, pos.shp="full", amp=1,
   size.shp=20, border.shp="#00000055", col.shp="#00000011",
   #stars
-  stars=TRUE,
+  stars=FALSE,
   #ellipses
   ellipses=TRUE, conf=0.5,
   #convexhulls
-  chull=TRUE,
+  chull=TRUE, chull.lty=3,
   #labels
   labels=TRUE,
   #axisnames
@@ -945,13 +946,13 @@ plot.PCA <- function(#basics
   if (!missing(fac)) {
     if (stars)    .stars(xy, fac, col.groups)
     if (ellipses) .ellipses(xy, fac, conf=conf, col.groups) #+conf
-    if (chull)    .chull(xy, fac, col.groups)
+    if (chull)    .chull(xy, fac, col.groups, chull.lty)
     if (labels)   .labels(xy, fac, col.groups)
     if (rug)      .rug(xy, fac, col.groups)
   } else {
     if (rug)      .rug(xy, NULL, col)
   }
-  points(xy, pch=pch, col=col)
+  points(xy, pch=pch, col=col, cex=cex)
   if (axisnames)  .axisnames(xax, yax)
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
   .title(title)
