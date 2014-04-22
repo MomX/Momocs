@@ -863,9 +863,10 @@ polynomials <- function(coo, n,orthogonal=TRUE){
 #' the number of points in the original shape.
 #' @return a matrix of (x; y) coordinates.
 #' @keywords morphoCore
-polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model)){
+polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model),
+                          baseline1x=-1, baseline2x=1){
   if (missing(x.pred)) {
-    x.pred <- seq(-0.5, 0.5, length=nb.pts)}
+    x.pred <- seq(baseline1x, baseline2x, length=nb.pts)}
   x.poly <- poly(x.pred, degree=mod$rank-1)
   y.pred <- predict(mod, newdata=data.frame(x=x.poly))
   coo <- cbind(x.pred, y.pred)

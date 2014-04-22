@@ -80,9 +80,9 @@ print.Opn <- function(x, ...){
 
 # 5. OutCoe definition -------------------------------------------------------
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
-                   method=character(), baseline1=numeric(), baseline2=numeric()){
+                   method=character(), baseline1=numeric(), baseline2=numeric(), mod=list()){
   if (missing(method)) stop("a method must be provided to OpnCoe")
-  OpnCoe <- list(coe=coe, fac=fac, method=method, baseline1, baseline2)
+  OpnCoe <- list(coe=coe, fac=fac, method=method, baseline1, baseline2, mod=mod)
   class(OpnCoe) <- "OpnCoe"
   return(OpnCoe)}
 
@@ -120,12 +120,14 @@ Polynomials.Opn <- function(Opn, degree, orthogonal=TRUE, intercept=TRUE,
   if (intercept) cn <- c("Intercept", cn)
   coe <- matrix(NA, nrow=length(Opn), ncol=degree+intercept, 
                 dimnames=list(rn, cn))
+  mod <- list()
   #the loop
   for (i in seq(along=coo)){
     pol <- polynomials(coo[[i]], n=degree, orthogonal=orthogonal)
+    mod[[i]] <- pol
     coe[i, ] <- pol$coefficients}
   method <- ifelse(orthogonal, "poly.ortho", "poly.raw")
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
-                baseline1=baseline1, baseline2=baseline2))}
+                baseline1=baseline1, baseline2=baseline2, mod=mod))}
 
 

@@ -463,6 +463,7 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
       rug(xy[fac==levels(fac)[i], 2], ticksize=0.015, lwd=1,  side=2, col=col[i])}}}
 
 # convertir en vrai morphospace, à base de plotnew=TRUE/FALSE
+#et surtout à base de swith -> generique
 #' @export
 .morphospace <- function(xy, pos.shp, rot, mshape, amp.shp=1,
                          size.shp=15, border.shp="#00000055", col.shp="#00000011", ...){
@@ -484,10 +485,10 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
 
 #convex hulls
 #' @export
-.chull <- function(coo, fac, col){
+.chull <- function(coo, fac, col, lty){
   for (i in seq(along=levels(fac))) {
     chull.i <- coo.chull(coo[fac==levels(fac)[i], ])
-    lines(coo.close(chull.i), col=col[i])}}
+    lines(coo.close(chull.i), col=col[i], lty=lty)}}
 
 #add labels
 #' @export
