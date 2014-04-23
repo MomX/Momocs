@@ -573,7 +573,7 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
   x <- OutCoe$coe
   nb.h  <- ncol(x)/4
   cph   <- 4
-  if (missing(retain)) retain <- nb.h
+  if (missing(retain)) retain <- 6
   if (missing(drop)) drop <- 0
   cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
   range <- (drop+1):retain
@@ -587,28 +587,53 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
   
   plot(NA, ylim=ylim, xlim=range(range)+c(-0.6,0.6),
        xlab="Harmonic rank", ylab="Coefficient value", main=title,
-       axes=FALSE, xaxs="i")
-  abline(v=range+0.4, col="grey80")
+       axes=FALSE, xaxs="i", frame=FALSE)
+  abline(v=range+0.4, col="grey80", lty=2)
   abline(h=0, col="grey80")
-  for (i in 1:cph) {  
-    boxplot(x[,(i-1)*nb.h+range],
+  for (i in 1:cph) {
+    xi <- x[,(i-1)*nb.h+range]
+    boxplot(xi,
             range=0, boxwex=0.2, at=range-0.6 + (i*0.2),
-            col=cols[i], names=FALSE, border=cols[i], axes=FALSE, add=TRUE)
-  }
+            col=cols[i], names=FALSE, border=cols[i], axes=FALSE, add=TRUE)}
   axis(1, at=range-0.1, labels=range)  
   axis(2)
   if (legend) {
-    legend("topright", legend = LETTERS[1:cph], bty="o",
-           fill = cols, bg="#FFFFFFBB",
+    legend("topright", legend = LETTERS[1:cph], bty="n",
+           fill = cols, border=NA, bg="#FFFFFFBB",
            cex=0.7, inset=0.005,
-           title = "Harmonic coefficients")
-  }
-  box()}
+           title = "Harmonic coefficients")}}
 
-boxplot.OpnCoe <- function(x, ...){}
+boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
+                           title= "Variation of polynomials coefficients", ...){
+  # we deduce and prepare
+  #   OutCoe <- x
+  #   x <- OutCoe$coe
+  x <- x$coe
+  degree  <- ncol(x)
+  if (missing(retain)) retain <- degree
+  if (missing(drop)) drop <- 0
+  cs    <- (drop+1):retain
+  h.names <- colnames(x)[cs]
+  # we save the old par and prepare the plot
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  cols <- palette(degree)
+  mv <- max(abs(range(x[, cs])))
+  ylim <- c(-mv, mv) 
+  plot(NA, ylim=ylim, xlim=range(cs)+c(-0.6,0.6),
+       ylab="Coefficient value", main=title,
+       axes=FALSE, xaxs="i", frame=FALSE)
+  abline(v=cs, col="grey80", lty=2)
+  abline(h=0, col="grey80")
+  for (i in seq(along=cs)) {
+    boxplot(x[, cs[i]],
+            range=0, boxwex=0.2, at=i,
+            col=cols[i], names=FALSE, border=cols[i], axes=FALSE, add=TRUE)}
+  axis(1, at=cs, labels=h.names)  
+  axis(2)}
 
 hist.OutCoe <-
-  function(x, retain=4, drop, palette=col.gallus,
+  function(x, retain, drop, palette=col.gallus,
            title= "Variation of harmonic coefficients", ...){
     # we deduce and prepare
     #OutCoe <- x
@@ -616,7 +641,7 @@ hist.OutCoe <-
     x <- x$coe
     nb.h  <- ncol(x)/4 #todo: restore rfourier, tfourier
     cph   <- 4
-    if (missing(retain)) retain <- nb.h
+    if (missing(retain)) retain <- 4
     if (missing(drop)) drop <- 0
     cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
     h.names <- colnames(x)[cs]
@@ -650,8 +675,8 @@ hist.OpnCoe <-
     #OpnCoe <- x
     #x <- OpnCoe$coe
     x <- x$coe
-    nb.h  <- ncol(x)
-    if (missing(retain)) retain <- nb.h
+    degree  <- ncol(x)
+    if (missing(retain)) retain <- degree
     if (missing(drop)) drop <- 0
     cs    <- (drop+1):retain
     h.names <- colnames(x)[cs]

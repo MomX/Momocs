@@ -431,10 +431,9 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
         ef$lnef <- (-ef$lnef)}
       coe[i, ] <- c(ef$A, ef$B, ef$C, ef$D)
     } else {
-      coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}
+      coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}  
   coe[abs(coe)<1e-12] <- 0 #not elegant but round normalized values to 0
   return(OutCoe(coe=coe, fac=Out$fac, method="eFourier", norm=norm))}
-
 
 #' Calculates radius lengths Fourier analysis on Out objects
 #' 
