@@ -297,7 +297,7 @@ print.OutCoe <- function(x, ...){
   harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
   # number of outlines and harmonics
   cat(" -", coo.nb, "outlines described\n")
-  cat(" -", coo.nb, "harmonics\n")
+  cat(" -", harm.nb, "harmonics\n")
   # lets show some of them for a quick inspection
   cat(" - Some harmonic coefficients from random outlines in $coe: \n")
   row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
@@ -311,9 +311,12 @@ print.OutCoe <- function(x, ...){
   if (nf==0) {
     cat(" - No groups defined\n")
   } else {
-    cat(" -", nf, "grouping factor(s) defined:\n")
+    cat(" -", nf, "grouping factor(s) defined in $fac:\n")
     for (i in 1:nf) {
-      cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
+      lev.i <- levels(df[, i])
+      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
+                                       length(lev.i)-10, "more")
+      cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # 4. Out morphometrics ---------------------------------------------------------
 #' Calculates elliptical Fourier transforms on Out objects

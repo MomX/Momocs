@@ -74,10 +74,44 @@ print.Opn <- function(x, ...){
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
                    method=character(), baseline1=numeric(), baseline2=numeric(), mod=list()){
   if (missing(method)) stop("a method must be provided to OpnCoe")
-  OpnCoe <- list(coe=coe, fac=fac, method=method, baseline1, baseline2, mod=mod)
+  OpnCoe <- list(coe=coe, fac=fac, method=method,
+                 baseline1=baseline1, baseline2=baseline2, mod=mod)
   class(OpnCoe) <- c("OpnCoe", "Coe")
   return(OpnCoe)}
 
+# The print method for Out objects
+print.OpnCoe <- function(x, ...){
+  OpnCoe <- x
+  p <- pmatch(OpnCoe$method, c("rawPolynomials", "orthoPolynomials"))
+  met <- switch(p, "raw Polynomials", "orthogonal Polynomials")
+  ### Header
+  cat("An OpnCoe object [", met, "analysis ] (see ?OpnCoe) \n")
+  cat(rep("-", 20),"\n", sep="")
+  coo.nb  <- nrow(OpnCoe$coe) #nrow method ?
+  degree  <- ncol(OpnCoe$coe)
+  # number of outlines and harmonics
+  cat(" -", coo.nb, "open outlines described (an lm object in $mod)\n")
+  cat(" -", degree, "degree (+Intercept) \n")
+  cat(" - registered on the baseline: [(", 
+      OpnCoe$baseline1[1], "; ",OpnCoe$baseline1[2], ") - (", 
+      OpnCoe$baseline2[1], "; ",OpnCoe$baseline2[2], ")]\n", sep="")
+  # lets show some of them for a quick inspection
+  cat(" - Polynomials coefficients from random open outlines in $coe: \n")
+  row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
+  print(signif(OpnCoe$coe[row.eg, ], 3))
+  cat("etc.\n")
+  # number of grouping factors
+  df <- OpnCoe$fac
+  nf <- ncol(df)
+  if (nf==0) {
+    cat(" - No groups defined\n")
+  } else {
+    cat(" -", nf, "grouping factor(s) defined in $fac:\n")
+    for (i in 1:nf) {
+      lev.i <- levels(df[, i])
+      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
+                                       length(lev.i)-10, "more")
+      cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # Opn calibration ---------------------------------------------------------
 nqual <- function(Opn, ...){UseMethod("nqual")}
