@@ -48,7 +48,7 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
   polygon(coo, col=col, border=NA)
   lines(coo, col=border, lwd=lwd, lty=lty)
   # we handle coordinate points
-  if (missing(points)) { if (nrow(coo)<=100) points(coo, pch=pch, cex=cex, col=border)}
+  if (missing(points)) { if (nrow(coo)<=120) points(coo, pch=pch, cex=cex, col=border)}
   if (points) { points(coo, pch=pch, cex=cex, col=border) }
   if (first.point) {points(coo[1, 1], coo[1, 2], col = border, pch=20)}
   if (centroid) {

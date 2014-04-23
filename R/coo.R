@@ -884,7 +884,7 @@ coo.calliper <- function(coo, arr.ind=FALSE){
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.area(bot[4])
+#' coo.lw(bot[4])
 #' 
 coo.lw <- function(coo){
   coo <- coo.check(coo)
@@ -916,7 +916,7 @@ coo.area <- function(coo){
     y[i] <- coo[i+1 , 1] * coo[i, 2]
   }
   area <- (0.5 * (sum(x) - sum(y)))
-  return(area)}
+  return(abs(area))}
 
 #' The angle formed by three points.
 #' 
