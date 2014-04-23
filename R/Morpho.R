@@ -842,7 +842,8 @@ coeff.split <- function(cs, nb.h=8, cph=4){
 #' @param orthogonal logical wheter to calculate orthogonal coefficients
 #' @return a lm model object
 #' @keywords morphoCore
-polynomials <- function(coo, n,orthogonal=TRUE){
+
+polynomials <- function(coo, n, orthogonal=TRUE){
   coo <- coo.check(coo)
   if (missing(n)) {
     n <- 5

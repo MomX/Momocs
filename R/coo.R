@@ -342,6 +342,23 @@ coo.smooth.Coo <- function(coo, n){
   Coo$coo <- lapply(Coo$coo, coo.smooth, n)
   return(Coo)}
 
+
+coo.smooth.curve <- function(coo, n){UseMethod("coo.smooth.curve")}
+coo.smooth.curve.default <- function(coo, n=0){
+  coo <- coo.check(coo)
+  p   <- nrow(coo)
+  a   <- 0
+  while (a < n) {
+    a <- a + 1
+    for (i in 2:(p-1)){
+      coo[i, ] <- (coo[i-1, ]*0.25 + coo[i, ]*0.5 + coo[i+1, ]*0.25)}}
+  return(coo)}
+coo.smooth.curve.Opn <- function(coo, n){
+  Opn <- coo
+  Opn$coo <- lapply(Opn$coo, coo.smooth.curve, n)
+  return(Opn)}
+coo.smooth.Opn <- coo.smooth.curve.Opn
+
 #' Tests if shapes are closed
 #'
 #' Returns TRUE/FALSE whether the last coordinate of the shapes is the same
