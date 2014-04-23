@@ -23,7 +23,7 @@
 Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
   Opn <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Opn$fac)) Opn$fac <- .refactor(Opn$fac)
-  class(Opn) <- c("Opn", "Out")
+  class(Opn) <- c("Opn", "Coo")
   return(Opn)}
 
 # The print method for Out objects
@@ -52,14 +52,6 @@ print.Opn <- function(x, ...){
   # number of coordinates
   cat(" -", round(mean(coo.len )), "+/-", round(sd(coo.len)), 
       "coordinates per outline\n")
-  # outlines closed or not
-  if (all(coo.closed)) {
-    cat(" - All outlines are closed\n")
-  } else {
-    if (any(!coo.closed)) {
-      cat(" - All outlines are unclosed\n")
-    } else {
-      cat(" -", sum(coo.closed), "outlines are closed\n")}}
   # number of landmarks
   if (length(Opn$ldk)!=0) {
     cat(" -", length(Opn$ldk[[1]]), "landmark(s) defined\n")
@@ -78,32 +70,22 @@ print.Opn <- function(x, ...){
                                        length(lev.i)-10, "more")
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
-# 5. OutCoe definition -------------------------------------------------------
+# 2. OpnCoe definition -------------------------------------------------------
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
                    method=character(), baseline1=numeric(), baseline2=numeric(), mod=list()){
   if (missing(method)) stop("a method must be provided to OpnCoe")
   OpnCoe <- list(coe=coe, fac=fac, method=method, baseline1, baseline2, mod=mod)
-  class(OpnCoe) <- "OpnCoe"
+  class(OpnCoe) <- c("OpnCoe", "Coe")
   return(OpnCoe)}
 
 
-pca.OpnCoe <- function(x, ...){
-  OpnCoe <- x
-  PCA <- prcomp(OpnCoe$coe, scale.=FALSE, center=TRUE)
-  PCA$fac <- OpnCoe$fac
-  PCA$mshape <- apply(OpnCoe$coe, 2, mean)
-  PCA$method <- OpnCoe$method
-  PCA$mod    <- OpnCoe$mod
-  class(PCA) <- c("PCA", class(PCA))
-  return(PCA)}
+# 3. Morpho on Opn -------------------------------------------------------------
 
-# Polynomials -------------------------------------------------------------
+rawPolynomials <- function(Opn, degree, baseline1, baseline2){
+  UseMethod("rawPolynomials")}
 
-Polynomials <- function(Opn, degree, ortho, intercept, baseline1, baseline2){
-  UseMethod("Polynomials")}
-
-Polynomials.Opn <- function(Opn, degree, orthogonal=TRUE, intercept=TRUE, 
-                            baseline1=c(-1, 0), baseline2=c(1, 0), nb.pts=120){
+rawPolynomials.Opn <- function(Opn, degree,
+                               baseline1=c(-1, 0), baseline2=c(1, 0), nb.pts=120){
   #we check a bit
   min.pts <- min(sapply(Opn$coo, nrow))
   if (nb.pts > min.pts) {
@@ -126,18 +108,63 @@ Polynomials.Opn <- function(Opn, degree, orthogonal=TRUE, intercept=TRUE,
   #we prepare the coe matrix
   rn <- names(coo)
   cn <- paste0("x", 1:degree)
-  if (intercept) cn <- c("Intercept", cn)
-  coe <- matrix(NA, nrow=length(Opn), ncol=degree+intercept, 
+  cn <- c("Intercept", cn)
+  coe <- matrix(NA, nrow=length(Opn), ncol=degree+1, 
                 dimnames=list(rn, cn))
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
-    mod <- polynomials(coo[[i]], n=degree, orthogonal=orthogonal)
+    mod <- polynomials(coo[[i]], n=degree, orthogonal=FALSE)
     #mod[[i]] <- pol
     coe[i, ] <- mod$coefficients}
   #mod$coefficients <- rep(NA, length(mod$coefficients))
-  method <- ifelse(orthogonal, "orthoPolynomials", "rawPolynomials")
+  method <- "rawPolynomials"
+  return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
+                baseline1=baseline1, baseline2=baseline2, mod=mod))}
+
+# orthoPolynomials
+orthoPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
+  UseMethod("orthoPolynomials")}
+
+orthoPolynomials.Opn <- function(Opn, degree,
+                                 baseline1=c(-1, 0), baseline2=c(1, 0), nb.pts=120){
+  #we check a bit
+  min.pts <- min(sapply(Opn$coo, nrow))
+  if (nb.pts > min.pts) {
+    if(missing(nb.pts)){
+      nb.pts <- min.pts
+      cat(" * 'nb.pts' missing and set to: ", 
+          nb.pts, "\n")
+    } else {
+      nb.pts <- min.pts
+      cat(" * at least one outline has less coordinates than 'nb.pts':", 
+          nb.pts, "\n")}}
+  if (missing(degree)){
+    degree <- 5
+    cat(" * 'degree' missing and set to: ", degree, "\n")}
+  #we normalize
+  Opn <- coo.sample(Opn, nb.pts)
+  coo <- Opn$coo
+  coo <- lapply(coo, coo.baseline, 
+                ldk1=1, ldk2=nb.pts, t1=baseline1, t2=baseline2)
+  #we prepare the coe matrix
+  rn <- names(coo)
+  cn <- paste0("x", 1:degree)
+  cn <- c("Intercept", cn)
+  coe <- matrix(NA, nrow=length(Opn), ncol=degree+1, 
+                dimnames=list(rn, cn))
+  mod <- list()
+  #the loop
+  for (i in seq(along=coo)){
+    mod <- polynomials(coo[[i]], n=degree, orthogonal=TRUE)
+    #mod[[i]] <- pol
+    coe[i, ] <- mod$coefficients}
+  #mod$coefficients <- rep(NA, length(mod$coefficients))
+  method <- "orthoPolynomials"
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
                 baseline1=baseline1, baseline2=baseline2, mod=mod))}
 
 
+#natSplines
+#cubicSplines
+#Bezier

@@ -14,7 +14,7 @@ Description: Morphometrics using R
 License: GPL-2 | GPL-3
 URL: http://www.vincentbonhomme.fr/Momocs
 Depends: R(>= 3.0)
-Collate: domestic.R import.R babel.R graphics.R coo.R morpho.R Out.R Opn.R
+Collate: domestic.R import.R babel.R graphics.R coo.R morpho.R multivariate.R Out.R Opn.R
 Imports:
     methods,
     sp,

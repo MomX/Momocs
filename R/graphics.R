@@ -430,6 +430,261 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   return(ell)}
 
 
+
+# Coo / Out / Opn plotters ------------------------------------------------
+
+#' Plot on Coo (Out/Opn) objects: quick review
+#' 
+#' Allows to plot shapes from Coo objects
+#' todo
+#' @method plot Coo
+#' @export plot.Coo
+#' @param x the Coo object
+#' @param id the id of the shape to plot, if not provided a 
+#' random shape is plotted
+#' @param ... further arguments to be passed to \link{coo.plot}
+#' @keywords Coo
+plot.Coo <- function(x, id, ...){
+  Coo <- x
+  if (missing(id)) {
+    repeat{
+      id <- sample(length(Coo), 1)
+      coo.plot(Coo$coo[[id]], main=names(Coo)[id], ...)
+      readline(prompt = "Press <Enter> to continue, <Esc> to quit...")}}
+  if (id[1]=="all") { id <- 1:length(Coo)}
+  if (is.numeric(id)){
+    if (length(id)==1) {
+      coo.plot(Coo$coo[[id]], main=names(Coo)[id], ...)
+    } else {
+      for (i in seq(along=id)) {
+        coo.plot(Coo$coo[[id[i]]], main=names(Coo)[id[i]], ...)
+        readline(prompt = "Press <Enter> to continue, <Esc> to quit...")}}}}
+
+#' Plot on Coo objects: stacks all shapes
+#' 
+#' Plots all the outlines from a \code{Coo} on the same graph with graphical 
+#' options.
+#' @method stack Coo
+#' @export stack.Coo
+#' @param x The \code{Coo} object to plot.
+#' @param cols A \code{vector} of colors for drawing the outlines.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param borders A \code{vector} of colors for drawing the borders.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param points logical whether to draw or not points
+#' @param first.point logical whether to draw or not the first point
+#' @param centroid logical whether to draw or not the centroid
+#' @param ldk \code{logical}. Whether to display landmarks (if any).
+#' @param ldk.pch A \code{pch} for these landmarks.
+#' @param ldk.col A color for these landmarks.
+#' @param ldk.cex A \code{cex} fro these landmarks
+#' @param xy.axis whether to draw or not the x and y axes
+#' @param ... further arguments to be passed to coo.plot
+#' @seealso \link{panel.Coo}, \link{plot.Coo}.
+#' @examples
+#' data(mosquito)
+#' stack(mosquito, borders="#1A1A1A22", first.point=FALSE)
+#' data(hearts)
+#' stack(hearts)
+#' stack(hearts, ldk=FALSE)
+#' stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
+stack.Coo <- function(x, cols, borders,
+                      points=FALSE, first.point=TRUE, centroid=TRUE,
+                      ldk=TRUE, ldk.pch=3, ldk.col="#FF000055", ldk.cex=0.5,
+                      xy.axis=TRUE, ...){
+  Coo <- x
+  if (missing(cols)) {
+    cols     <- rep(NA, length(Coo))}
+  if (length(cols)!=length(Coo)) {
+    cols     <- rep(cols[1], length(Coo))}
+  if (missing(borders)) {
+    borders     <- rep("#33333355", length(Coo))}
+  if (length(borders)!=length(Coo)) {
+    borders     <- rep(borders[1], length(Coo))}
+  op <- par(mar=c(3, 3, 2, 1))
+  on.exit(par(op))
+  wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2, range))), 2, range)
+  plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1, las=1, cex.axis=2/3, ann=FALSE, frame=FALSE)
+  if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}
+  for (i in 1:length(Coo)) {
+    coo.draw(Coo$coo[[i]], col=cols[i], border=borders[i],
+             points=points, first.point=TRUE, centroid=centroid)
+    if (ldk & length(Coo$ldk)!=0) {
+      points(Coo$coo[[i]][Coo$ldk[[i]], ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
+}
+
+#' Plot on Coo objects: family picture
+#' 
+#' Plots all the outlines from a \code{Coo} side by side
+#'
+#' @export panel
+#' @S3method panel Coo
+#' @aliases panel.Coo
+#' @param Coo The \code{Coo} object to plot.
+#' @param cols A \code{vector} of colors for drawing the outlines.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param borders A \code{vector} of colors for drawing the borders.
+#' Either a single value or of length exactly equals to the number of coordinates.
+#' @param names whether to plot names or not. If TRUE uses shape names, otherwise
+#' pass a character for the names of the files
+#' @param cex.names a cex for the names
+#' @param ... further arguments to be passed to \link{coo.list.panel}
+#' @seealso \link{stack.Coo}, \link{plot.Coo}.
+#' @examples
+#' data(mosquito)
+#' panel(mosquito, names=TRUE, cex.names=0.5)
+panel <- function(Coo, cols, borders, names, cex.names, ...){UseMethod("panel")}
+panel.Out <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
+  Out <- Coo
+  if (missing(cols)) {
+    cols     <- rep(NA, length(Out))}
+  if (length(cols)!=length(Out)) {
+    cols     <- rep(cols[1], length(Out))}
+  if (missing(borders)) {
+    borders     <- rep("#333333", length(Out))}
+  if (length(borders)!=length(Out)) {
+    cols     <- rep(borders[1], length(Out))} 
+  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=poly, ...)
+  if (!is.null(names)){
+    if (is.logical(names)) {
+      text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
+    } else {    
+      if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
+      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
+panel.Opn <- function(Out, borders, names=NULL, cex.names=0.6, ...){
+  if (missing(borders)) {
+    borders     <- rep("#333333", length(Out))}
+  if (length(borders)!=length(Out)) {
+    cols     <- rep(borders[1], length(Out))} 
+  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=FALSE, ...)
+  if (!is.null(names)){
+    if (is.logical(names)) {
+      text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
+    } else {    
+      if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
+      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
+
+
+# N. Coe plotters ------------------------------------------------------------
+
+#hist
+#boxplot
+# 6. OutCoe visualisation methods -------------------------------------------------
+
+boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
+                           title= "Variation of harmonic coefficients",
+                           legend=TRUE, ...){
+  # we deduce and prepare
+  OutCoe <- x
+  x <- OutCoe$coe
+  nb.h  <- ncol(x)/4
+  cph   <- 4
+  if (missing(retain)) retain <- nb.h
+  if (missing(drop)) drop <- 0
+  cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
+  range <- (drop+1):retain
+  # we save the old par and prepare the plot
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  cols <- palette(cph)
+  
+  mv <- max(abs(range(x[, cs])))
+  ylim <- c(-mv, mv) 
+  
+  plot(NA, ylim=ylim, xlim=range(range)+c(-0.6,0.6),
+       xlab="Harmonic rank", ylab="Coefficient value", main=title,
+       axes=FALSE, xaxs="i")
+  abline(v=range+0.4, col="grey80")
+  abline(h=0, col="grey80")
+  for (i in 1:cph) {  
+    boxplot(x[,(i-1)*nb.h+range],
+            range=0, boxwex=0.2, at=range-0.6 + (i*0.2),
+            col=cols[i], names=FALSE, border=cols[i], axes=FALSE, add=TRUE)
+  }
+  axis(1, at=range-0.1, labels=range)  
+  axis(2)
+  if (legend) {
+    legend("topright", legend = LETTERS[1:cph], bty="o",
+           fill = cols, bg="#FFFFFFBB",
+           cex=0.7, inset=0.005,
+           title = "Harmonic coefficients")
+  }
+  box()}
+
+
+hist.OutCoe <-
+  function(x, retain, drop, palette=col.gallus,
+           title= "Variation of harmonic coefficients",
+           legend=TRUE, ...){
+    # we deduce and prepare
+    OutCoe <- x
+    x <- OutCoe$coe
+    nb.h  <- ncol(x)/4
+    cph   <- 4
+    if (missing(retain)) retain <- nb.h
+    if (missing(drop)) drop <- 0
+    cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
+    range <- (drop+1):retain
+    # we save the old par and prepare the plot
+    #op <- par(no.readonly = TRUE)
+    #on.exit(par(op))
+    cols <- palette(cph)
+    layout(matrix(1:length(cs), ncol=cph, byrow=TRUE))
+    #par(oma=c(2, 2, 5, 2), mar=rep(2, 4))
+    h.names <- paste(rep(LETTERS[1:cph], each=retain-drop), range, sep="")
+    cols    <- rep(cols, each=retain-drop)
+    for (i in seq(along=cs)) { # thx Dufour, Chessel and Lobry
+      h  <- x[, cs[i]] 
+      h0 <- seq(min(h), max(h), len=50)
+      y0 <- dnorm(h0, mean(h), sd(h))
+      hist(h, main=h.names[i], col=cols[i], proba=TRUE, xlab="", ylab="", las=1)
+      abline(v=mean(h), lwd=1)
+      lines(h0, y0, col = "black", lwd = 2)}
+    title(main=title, cex.main=2, font=2, outer=TRUE)}
+
+hcontrib <- function(OutCoe, id, harm.range, amp.h, palette, title){UseMethod("hcontrib")}
+hcontrib.OutCoe <- function(
+  OutCoe,
+  id      = 1,
+  harm.range,
+  amp.h   = c(0, 0.5, 1, 2, 5, 10),
+  palette = col.hot,
+  title   = "Harmonic contribution"){
+  #if missing id meanshape
+  x <- OutCoe$coe
+  nb.h <- ncol(x)/4
+  if (missing(harm.range)) {
+    harm.range <- ifelse (nb.h > 6, 1:6, 1:nb.h) }
+  harm.range <- 1:nb.h
+  mult <- rep(1, nb.h)
+  method.i <- efourier.i
+  xf <- list(an=x[id, 1:nb.h + 0*nb.h], bn=x[id, 1:nb.h + 1*nb.h],
+             cn=x[id, 1:nb.h + 2*nb.h], dn=x[id, 1:nb.h + 3*nb.h])
+  res <- list()
+  p <- 1 # dirty
+  for (j in seq(along=harm.range)){
+    for (i in seq(along=amp.h)){
+      mult.loc    <- mult
+      mult.loc[harm.range[j]] <- amp.h[i]
+      xfi <- lapply(xf, function(x) x*mult.loc)
+      res[[p]] <-
+        method.i(xfi)
+      p <- p+1}}
+  
+  cols <- rep(palette(length(amp.h)), length(harm.range))
+  coo.list.panel(res, dim=c(length(amp.h), length(harm.range)),
+                 byrow=FALSE, cols=cols, mar=c(5.1, 5.1, 4.1, 2.1))
+  axis(1, at=(1:length(harm.range))-0.5,
+       labels=harm.range, line=2, lwd=1, lwd.ticks=0.5)
+  mtext("Harmonic rank", side=1, line=4)
+  axis(2, at=(1:length(amp.h))-0.5,
+       labels=rev(amp.h), line=1, lwd=1, lwd.ticks=0.5)
+  mtext("Amplification factor", side=2, line=3)
+  title(main=title)
+  return(res)}
+
+
+
 # 3. PCA internals -------------------------------------------------------------
 #create an empty frame
 #' @export

@@ -1,5 +1,4 @@
-
-# 1. Out builder and domestic functions -------------------------------------------
+# 1. Out -----------------------------------------------------------------------
 
 #' Builds an Out object
 #'
@@ -29,13 +28,8 @@
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   Out <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Out$fac)) Out$fac <- .refactor(Out$fac)
-  class(Out) <- "Out"
+  class(Out) <- c("Out", "Coo")
   return(Out)}
-# For historical reasons.
-# Before version 1.xxx 'Out' classes used to be S4 classes and called 'Coo'
-# See http://www.jstatsoft.org/v56/i13
-#' @export
-Coo <- Out
 
 # The print method for Out objects
 #' @S3method print Out
@@ -89,202 +83,8 @@ print.Out <- function(x, ...){
                                        length(lev.i)-10, "more")
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
-# allows to maintain the tradition str() behaviour
-#' @export
-str.Out <- function(object, ...){
-  Out <- object
-  ls.str(Out)}
 
-# Out can be indexing both to [ ] and [[ ]]
-# and returns the corresponding coordinate(s)
-# We define some getters
-#' @export
-"[.Out" <- function(x, i, ...) {
-  if (missing(i))    { return(x$coo[])    }
-  if (is.integer(i)) { return(x$coo[i])   }
-  if (is.numeric(i)) { return(x$coo[[i]]) }}
-
-#' @export
-"[[.Out" <- function(x, i, ...) {
-  if (missing(i))    { return(x$coo[])    }
-  if (is.integer(i)) { return(x$coo[i])   }
-  if (is.numeric(i)) { return(x$coo[[i]]) }}
-
-# length on an Out return the length of Out$coo, ie the number of coordinates
-#' @export
-length.Out <- function(x) {
-  Out <- x
-  return(length(Out$coo))}
-
-# names() on a Out retrieves the names of the Out$coo
-#' @export
-names.Out <- function(x){
-  Out <- x
-  return(names(Out$coo))}
-
-# which can in return may be named using names(Out) <- 
-#' @export
-"names<-.Out" <- function(x, value){
-  names(x$coo) <- value
-  return(x)}
-
-#' Create subsets of Out objects
-#' 
-#' todo
-#' @S3method  subset Out
-#' @param x and Out object
-#' @param subset logical from the fac or indices
-#' @param ... (to preserve consistence with subset generic)
-#' @keywords Out
-#' @export
-subset.Out <- function(x, subset, ...){
-  Out <- x
-  e <- substitute(subset)
-  retain <- eval(e, Out$fac, parent.frame())
-  Out2 <- Out
-  Out2$coo <- Out$coo[retain]
-  if (length(Out$ldk)>0) Out2$ldk <- Out$ldk[retain]
-  if (ncol(Out$fac)>0) {
-    Out2$fac <- Out$fac
-    Out2$fac <- as.data.frame(Out2$fac[retain, ])
-    names(Out2$fac) <- names(Out$fac)
-    Out2$fac <- .refactor(Out2$fac)
-  }
-  return(Out2)}
-
-# 2. Out plotting methods ----------------------------------------------------
-
-#' Plot on Out objects: quick review
-#' 
-#' Allows to plot shapes from Out objects
-#' todo
-#' @method plot Out
-#' @export plot.Out
-#' @param x the Out object ('x' and not Out since this methods extends plot)
-#' @param id the id of the shape to plot, if not provided a 
-#' random shape is plotted
-#' @param ... further arguments to be passed to \link{coo.plot}
-#' @keywords Out
-plot.Out <- function(x, id, ...){
-  Out <- x
-  if (missing(id)) {
-    repeat{
-      id <- sample(length(Out), 1)
-      coo.plot(Out$coo[[id]], main=names(Out)[id], ...)
-      readline(prompt = "Press <Enter> to continue, <Esc> to quit...")}}
-  if (id[1]=="all") { id <- 1:length(Out)}
-  if (is.numeric(id)){
-    if (length(id)==1) {
-      coo.plot(Out$coo[[id]], main=names(Out)[id], ...)
-    } else {
-      for (i in seq(along=id)) {
-        coo.plot(Out$coo[[id[i]]], main=names(Out)[id[i]], ...)
-        readline(prompt = "Press <Enter> to continue, <Esc> to quit...")}}}}
-
-#' Plot on Out objects: stacks all shapes
-#' 
-#' Plots all the outlines from a \code{Out} on the same graph with graphical 
-#' options.
-#' @method stack Out
-#' @export stack.Out
-#' @param x The \code{Out} object to plot.
-#' @param cols A \code{vector} of colors for drawing the outlines.
-#' Either a single value or of length exactly equals to the number of coordinates.
-#' @param borders A \code{vector} of colors for drawing the borders.
-#' Either a single value or of length exactly equals to the number of coordinates.
-#' @param points logical whether to draw or not points
-#' @param first.point logical whether to draw or not the first point
-#' @param centroid logical whether to draw or not the centroid
-#' @param ldk \code{logical}. Whether to display landmarks (if any).
-#' @param ldk.pch A \code{pch} for these landmarks.
-#' @param ldk.col A color for these landmarks.
-#' @param ldk.cex A \code{cex} fro these landmarks
-#' @param xy.axis whether to draw or not the x and y axes
-#' @param ... further arguments to be passed to coo.plot
-#' @seealso \link{panel.Out}, \link{plot.Out}.
-#' @examples
-#' data(mosquito)
-#' stack(mosquito, borders="#1A1A1A22", first.point=FALSE)
-#' data(hearts)
-#' stack(hearts)
-#' stack(hearts, ldk=FALSE)
-#' stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
-stack.Out <- function(x, cols, borders,
-                      points=FALSE, first.point=TRUE, centroid=TRUE,
-                      ldk=TRUE, ldk.pch=3, ldk.col="#FF000055", ldk.cex=0.5,
-                      xy.axis=TRUE, ...){
-  Out <- x
-  if (missing(cols)) {
-    cols     <- rep(NA, length(Out))}
-  if (length(cols)!=length(Out)) {
-    cols     <- rep(cols[1], length(Out))}
-  if (missing(borders)) {
-    borders     <- rep("#33333355", length(Out))}
-  if (length(borders)!=length(Out)) {
-    borders     <- rep(borders[1], length(Out))}
-  op <- par(mar=c(3, 3, 2, 1))
-  on.exit(par(op))
-  wdw <- apply(l2a(lapply(Out$coo, function(x) apply(x, 2, range))), 2, range)
-  plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1, las=1, cex.axis=2/3, ann=FALSE, frame=FALSE)
-  if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}
-  for (i in 1:length(Out)) {
-    coo.draw(Out$coo[[i]], col=cols[i], border=borders[i],
-             points=points, first.point=TRUE, centroid=centroid)
-  if (ldk & length(Out$ldk)!=0) {
-    points(Out$coo[[i]][Out$ldk[[i]], ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
-}
-
-#' Plot on Out objects: family picture
-#' 
-#' Plots all the outlines from a \code{Out} side by side
-#'
-#' @export panel
-#' @S3method panel Out
-#' @aliases panel.Out
-#' @param Out The \code{Out} object to plot.
-#' @param cols A \code{vector} of colors for drawing the outlines.
-#' Either a single value or of length exactly equals to the number of coordinates.
-#' @param borders A \code{vector} of colors for drawing the borders.
-#' Either a single value or of length exactly equals to the number of coordinates.
-#' @param names whether to plot names or not. If TRUE uses shape names, otherwise
-#' pass a character for the names of the files
-#' @param cex.names a cex for the names
-#' @param ... further arguments to be passed to \link{coo.list.panel}
-#' @seealso \link{stack.Out}, \link{plot.Out}.
-#' @examples
-#' data(mosquito)
-#' panel(mosquito, names=TRUE, cex.names=0.5)
-panel <- function(Out, cols, borders, names, cex.names, ...){UseMethod("panel")}
-panel.Out <- function(Out, cols, borders, names=NULL, cex.names=0.6, ...){
-  if (missing(cols)) {
-    cols     <- rep(NA, length(Out))}
-  if (length(cols)!=length(Out)) {
-    cols     <- rep(cols[1], length(Out))}
-  if (missing(borders)) {
-    borders     <- rep("#333333", length(Out))}
-  if (length(borders)!=length(Out)) {
-    cols     <- rep(borders[1], length(Out))} 
-  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=poly, ...)
-  if (!is.null(names)){
-    if (is.logical(names)) {
-      text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
-    } else {    
-      if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
-      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
-panel.Opn <- function(Out, borders, names=NULL, cex.names=0.6, ...){
-  if (missing(borders)) {
-    borders     <- rep("#333333", length(Out))}
-  if (length(borders)!=length(Out)) {
-    cols     <- rep(borders[1], length(Out))} 
-  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=FALSE, ...)
-  if (!is.null(names)){
-    if (is.logical(names)) {
-      text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
-    } else {    
-      if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
-      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
-
-# 3. Out methods (calibration) ----------------------------------------------------
+# 2. Out calibration -----------------------------------------------------------
 hqual <- function(Out, ...){UseMethod("hqual")}
 hqual.Out <-
   function(Out, method=c("efourier", "rfourier", "tfourier"),
@@ -478,7 +278,44 @@ hpow.Out <- function(Out, method="efourier", id=1:length(Out),
               }
               return(res)}
 
-# 4. Out methods (Fourier analysis) --------------------------------------------
+# 3. OutCoe definition -------------------------------------------------------
+OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
+  if (missing(method)) stop("a method must be provided to OpnCoe")
+  OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
+  class(OutCoe) <- c("OutCoe", "Coe")
+  return(OutCoe)}
+
+# The print method for Out objects
+print.OutCoe <- function(x, ...){
+  OutCoe <- x
+  p <- pmatch(OutCoe$method, c("eFourier", "rFourier", "tFourier"))
+  met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
+  ### Header
+  cat("An OutCoe object [", met, "analysis ] (see ?OutCoe) \n")
+  cat(rep("-", 20),"\n", sep="")
+  coo.nb  <- nrow(OutCoe$coe) #nrow method ?
+  harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
+  # number of outlines and harmonics
+  cat(" -", coo.nb, "outlines described\n")
+  cat(" -", coo.nb, "harmonics\n")
+  # lets show some of them for a quick inspection
+  cat(" - Some harmonic coefficients from random outlines in $coe: \n")
+  row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
+  col.eg <- coeff.sel(retain=ifelse(harm.nb > 3, 3, harm.nb), drop=0,
+                      nb.h=harm.nb, cph=ifelse(p==1, 4, 2))
+  print(signif(OutCoe$coe[row.eg, col.eg], 3))
+  cat("etc.\n")
+  # number of grouping factors
+  df <- OutCoe$fac
+  nf <- ncol(df)
+  if (nf==0) {
+    cat(" - No groups defined\n")
+  } else {
+    cat(" -", nf, "grouping factor(s) defined:\n")
+    for (i in 1:nf) {
+      cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
+
+# 4. Out morphometrics ---------------------------------------------------------
 #' Calculates elliptical Fourier transforms on Out objects
 #'
 #' A wrapper for \link{efourier} to be applied on Out objects.
@@ -662,244 +499,8 @@ Ptolemy.Out <- function(Out,
            col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
            title = "Number of harmonics")}}
 
-# 5. OutCoe definition -------------------------------------------------------
-OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
-  if (missing(method)) stop("a method must be provided to OpnCoe")
-  OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
-  class(OutCoe) <- "OutCoe"
-  return(OutCoe)}
 
-# The print method for Out objects
-print.OutCoe <- function(x, ...){
-  OutCoe <- x
-  p <- pmatch(OutCoe$method, c("eFourier", "rFourier", "tFourier"))
-  met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
-  ### Header
-  cat("An OutCoe object [", met, "analysis ] (see ?OutCoe) \n")
-  cat(rep("-", 20),"\n", sep="")
-  coo.nb  <- nrow(OutCoe$coe) #nrow method ?
-  harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
-  # number of outlines and harmonics
-  cat(" -", coo.nb, "outlines described\n")
-  cat(" -", coo.nb, "harmonics\n")
-  # lets show some of them for a quick inspection
-  cat(" - Some harmonic coefficients from random outlines in $coe: \n")
-  row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
-  col.eg <- coeff.sel(retain=ifelse(harm.nb > 3, 3, harm.nb), drop=0,
-                      nb.h=harm.nb, cph=ifelse(p==1, 4, 2))
-  print(signif(OutCoe$coe[row.eg, col.eg], 3))
-  cat("etc.\n")
-  # number of grouping factors
-  df <- OutCoe$fac
-  nf <- ncol(df)
-  if (nf==0) {
-    cat(" - No groups defined\n")
-  } else {
-    cat(" -", nf, "grouping factor(s) defined:\n")
-    for (i in 1:nf) {
-      cat("     ", colnames(df)[i], ": ", levels(df[, i]),"\n")}}}
-
-# 6. OutCoe visualisation methods -------------------------------------------------
-
-boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
-                           title= "Variation of harmonic coefficients",
-                           legend=TRUE, ...){
-              # we deduce and prepare
-              OutCoe <- x
-              x <- OutCoe$coe
-              nb.h  <- ncol(x)/4
-              cph   <- 4
-              if (missing(retain)) retain <- nb.h
-              if (missing(drop)) drop <- 0
-              cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
-              range <- (drop+1):retain
-              # we save the old par and prepare the plot
-              op <- par(no.readonly = TRUE)
-              on.exit(par(op))
-              cols <- palette(cph)
-
-                mv <- max(abs(range(x[, cs])))
-                ylim <- c(-mv, mv) 
-
-              plot(NA, ylim=ylim, xlim=range(range)+c(-0.6,0.6),
-                   xlab="Harmonic rank", ylab="Coefficient value", main=title,
-                   axes=FALSE, xaxs="i")
-              abline(v=range+0.4, col="grey80")
-              abline(h=0, col="grey80")
-              for (i in 1:cph) {  
-                boxplot(x[,(i-1)*nb.h+range],
-                        range=0, boxwex=0.2, at=range-0.6 + (i*0.2),
-                        col=cols[i], names=FALSE, border=cols[i], axes=FALSE, add=TRUE)
-              }
-              axis(1, at=range-0.1, labels=range)  
-              axis(2)
-              if (legend) {
-                legend("topright", legend = LETTERS[1:cph], bty="o",
-                       fill = cols, bg="#FFFFFFBB",
-                       cex=0.7, inset=0.005,
-                       title = " Harmonic coefficients ")
-              }
-              box()
-            }
-
-
-hist.OutCoe <-
-  function(x, retain, drop, palette=col.gallus,
-           title= "Variation of harmonic coefficients",
-           legend=TRUE, ...){
-  # we deduce and prepare
-  OutCoe <- x
-  x <- OutCoe$coe
-  nb.h  <- ncol(x)/4
-  cph   <- 4
-  if (missing(retain)) retain <- nb.h
-  if (missing(drop)) drop <- 0
-  cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
-  range <- (drop+1):retain
-  # we save the old par and prepare the plot
-  op <- par(no.readonly = TRUE)
-  on.exit(par(op))
-  cols <- palette(cph)
-  layout(matrix(1:length(cs), ncol=cph, byrow=TRUE))
-  par(oma=c(2, 2, 5, 2), mar=rep(2, 4))
-  h.names <- paste(rep(LETTERS[1:cph], each=retain-drop), range, sep="")
-  cols    <- rep(cols, each=retain-drop)
-  for (i in seq(along=cs)) { # thx Dufour, Chessel and Lobry
-    h  <- x[, cs[i]] 
-    h0 <- seq(min(h), max(h), len=50)
-    y0 <- dnorm(h0, mean(h), sd(h))
-    hist(h, main=h.names[i], col=cols[i], proba=TRUE, xlab="", ylab="", las=1)
-    abline(v=mean(h), lwd=1)
-    lines(h0, y0, col = "black", lwd = 2)}
-  title(main=title, cex.main=2, font=2, outer=TRUE)}
-
-hcontrib <- function(OutCoe, id, harm.range, amp.h, palette, title){UseMethod("hcontrib")}
-hcontrib.OutCoe <- function(
-  OutCoe,
-  id      = 1,
-  harm.range,
-  amp.h   = c(0, 0.5, 1, 2, 5, 10),
-  palette = col.hot,
-  title   = "Harmonic contribution"){
-  #if missing id meanshape
-  x <- OutCoe$coe
-  nb.h <- ncol(x)/4
-  if (missing(harm.range)) {
-    harm.range <- ifelse (nb.h > 6, 1:6, 1:nb.h) }
-    harm.range <- 1:nb.h
-  mult <- rep(1, nb.h)
-  method.i <- efourier.i
-  xf <- list(an=x[id, 1:nb.h + 0*nb.h], bn=x[id, 1:nb.h + 1*nb.h],
-             cn=x[id, 1:nb.h + 2*nb.h], dn=x[id, 1:nb.h + 3*nb.h])
-  res <- list()
-  p <- 1 # dirty
-  for (j in seq(along=harm.range)){
-    for (i in seq(along=amp.h)){
-      mult.loc    <- mult
-      mult.loc[harm.range[j]] <- amp.h[i]
-      xfi <- lapply(xf, function(x) x*mult.loc)
-      res[[p]] <-
-        method.i(xfi)
-      p <- p+1}}
-  
-  cols <- rep(palette(length(amp.h)), length(harm.range))
-  coo.list.panel(res, dim=c(length(amp.h), length(harm.range)),
-                 byrow=FALSE, cols=cols, mar=c(5.1, 5.1, 4.1, 2.1))
-  axis(1, at=(1:length(harm.range))-0.5,
-       labels=harm.range, line=2, lwd=1, lwd.ticks=0.5)
-  mtext("Harmonic rank", side=1, line=4)
-  axis(2, at=(1:length(amp.h))-0.5,
-       labels=rev(amp.h), line=1, lwd=1, lwd.ticks=0.5)
-  mtext("Amplification factor", side=2, line=3)
-  title(main=title)
-return(res)}
-
-# 6. OutCoe methods ----------------------------------------------------------
-pca <- function(x, ...){UseMethod("pca")}
-pca.OutCoe <- function(x, ...){
-  OutCoe <- x
-  PCA <- prcomp(OutCoe$coe, scale.=FALSE, center=TRUE)
-  PCA$fac <- OutCoe$fac
-  PCA$mshape <- apply(OutCoe$coe, 2, mean)
-  PCA$method <- OutCoe$method
-  class(PCA) <- c("PCA", class(PCA))
-  return(PCA)}
-
-
-
-
-
-# manova
-manova.default <- manova
-manova <- function(...){UseMethod("manova")}
-manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
-  if (missing(fac)) stop("'fac' must be provided")
-  fac <- OutCoe$fac[, fac]
-  x <- OutCoe$coe
-  if (missing(drop)) {
-    if (OutCoe$norm) {
-      drop <- 1
-      cat(" * 1st harmonic removed (because of normalization)\n")
-    } else {
-      drop <- 0 }}
-  
-  nb.h <- ncol(x)/4
-  fr   <- floor((ncol(x)-2)/4) #full rank efourier
-  
-  if (!missing(retain)) {
-    if ((retain - drop) > fr) {
-      retain <- fr
-      if (retain > nb.h) retain <- nb.h
-      cat("'retain' was too high and the matrix not of full rank. Analysis done with", retain, "harmonics\n")}
-  } else {
-    retain <- fr
-    if (retain > nb.h) {retain <- nb.h}
-    cat("* Analysis done with", retain, "harmonics\n")}
-  
-  harm.sel <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=4)
-  mod <- summary(manova(x[,harm.sel]~fac), test="Hotelling")
-  return(mod)}
-
-clust <- function(...){UseMethod("clust")}
-clust.OutCoe <- function(OutCoe, fac,
-                        method = "euclidean", type="unrooted", palette=col.summer2, ...){
-                if (missing(fac)) {
-                    cols <- rep("black", nrow(OutCoe$coe))
-                } else {
-                  facs <- OutCoe$fac[, fac]
-                  cols <- palette(nlevels(facs))[facs]
-                }
-                dist.mat <- dist(OutCoe$coe, method=method)
-                OutCoe.hc <- hclust(dist.mat)
-                op <- par(no.readonly = TRUE)
-                on.exit(par(op))
-                par(oma=rep(0, 4), mar=rep(0,4))
-                plot(as.phylo.hclust(OutCoe.hc), tip.color=cols, type=type, ...)
-                return(list(dist.mat=dist.mat, hclust=OutCoe.hc))}
-
-meanshapes <- function(OutCoe, fac, nb.pts){UseMethod("meanshapes")}
-meanshapes.OutCoe <- function(OutCoe, fac, nb.pts=120){
-  nb.h <-  ncol(OutCoe$coe)/4
-  if (missing(fac)) {
-    cat("* no 'fac' provided. Returns meanshape.\n")
-    coe.meanshape <- apply(OutCoe$coe, 2, mean)
-    xf <- coeff.split(coe.meanshape, nb.h, 4)
-    return(efourier.i(xf, nb.pts=nb.pts))}
-  
-  f <- OutCoe$fac[, fac]
-  fl <- levels(f)
-  res <- list()
-  
-  for (i in seq(along=fl)){
-    coe.i <- OutCoe$coe[f==fl[i], ]
-    if (is.matrix(coe.i)) {
-      coe.i <- apply(coe.i, 2, mean)}
-    xf <- coeff.split(cs=coe.i, nb.h=nb.h, cph=4)
-    res[[i]] <- efourier.i(xf, nb.h=nb.h, nb.pts=nb.pts)}
-  names(res) <- fl
-  return(res)}
-
-# 0. Out TODO ----------------------------------------------------------------
+# XXX. Out TODO ----------------------------------------------------------------
 #c OutCoe
 #discri
 #todo Out.check
