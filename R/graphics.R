@@ -608,36 +608,74 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
 boxplot.OpnCoe <- function(x, ...){}
 
 hist.OutCoe <-
-  function(x, retain, drop, palette=col.gallus,
-           title= "Variation of harmonic coefficients",
-           legend=TRUE, ...){
+  function(x, retain=4, drop, palette=col.gallus,
+           title= "Variation of harmonic coefficients", ...){
     # we deduce and prepare
-    OutCoe <- x
-    x <- OutCoe$coe
-    nb.h  <- ncol(x)/4
+    #OutCoe <- x
+    #x <- OutCoe$coe
+    x <- x$coe
+    nb.h  <- ncol(x)/4 #todo: restore rfourier, tfourier
     cph   <- 4
     if (missing(retain)) retain <- nb.h
     if (missing(drop)) drop <- 0
     cs    <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
-    range <- (drop+1):retain
+    h.names <- colnames(x)[cs]
     # we save the old par and prepare the plot
-    #op <- par(no.readonly = TRUE)
-    #on.exit(par(op))
+    op <- par(no.readonly = TRUE)
+    on.exit(par(op))
     cols <- palette(cph)
     layout(matrix(1:length(cs), ncol=cph, byrow=TRUE))
-    #par(oma=c(2, 2, 5, 2), mar=rep(2, 4))
-    h.names <- paste(rep(LETTERS[1:cph], each=retain-drop), range, sep="")
+    #par(oma=c(2, 2, 5, 2), mar=rep(2, 4)) #former version, also below
+    par(oma=c(2, 2, 5, 2), mar=c(2, 0.5, 1.5, 0.5))
     cols    <- rep(cols, each=retain-drop)
-    for (i in seq(along=cs)) { # thx Dufour, Chessel and Lobry
+    for (i in seq(along=cs)) { #thx Dufour, Chessel and Lobry
       h  <- x[, cs[i]] 
-      h0 <- seq(min(h), max(h), len=50)
-      y0 <- dnorm(h0, mean(h), sd(h))
-      hist(h, main=h.names[i], col=cols[i], proba=TRUE, xlab="", ylab="", las=1)
-      abline(v=mean(h), lwd=1)
-      lines(h0, y0, col = "black", lwd = 2)}
-    title(main=title, cex.main=2, font=2, outer=TRUE)}
+      #hist(h, main=h.names[i], col=cols[i], proba=TRUE, xlab="", ylab="", las=1)
+      hx <- hist(h, main=h.names[i], freq=FALSE, col=cols[i], axes=FALSE, las=1)
+      if (sd(h)>1e-10) { #eg. when coeff are not normalized
+        h0 <- seq(min(h), max(h), len=50)
+        y0 <- dnorm(h0, mean(h), sd(h))
+        abline(v=mean(h), lwd=1, lty=2)
+        lines(h0, y0, col = "black", lwd = 1)
+        at <- c(range(hx$mids), mean(hx$mids))
+        axis(1, at=at, labels=signif(at, 3), cex.axis=0.75)}}
+    title(main=title, cex.main=1.5, outer=TRUE)
+  layout(matrix(1))}
 
-hist.OpnCoe <- function(x, ...){}
+hist.OpnCoe <-
+  function(x, retain=4, drop, palette=col.gallus,
+           title= "Variation of polynomials coefficients",
+           hist.per.row=3, ...){
+    # we deduce and prepare
+    #OpnCoe <- x
+    #x <- OpnCoe$coe
+    x <- x$coe
+    nb.h  <- ncol(x)
+    if (missing(retain)) retain <- nb.h
+    if (missing(drop)) drop <- 0
+    cs    <- (drop+1):retain
+    h.names <- colnames(x)[cs]
+    # we save the old par and prepare the plot
+    op <- par(no.readonly = TRUE)
+    on.exit(par(op))
+    nc <- length(cs)
+    cols <- palette(nc)
+    lay.nr <- ceiling(nc/hist.per.row)
+    layout(matrix(1:nc, nrow=lay.nr, ncol=hist.per.row, byrow=TRUE))
+    par(oma=c(2, 2, 5, 2), mar=c(2, 0.5, 1.5, 0.5))
+    for (i in seq(along=cs)) { #thx Dufour, Chessel and Lobry
+      h  <- x[, cs[i]] 
+      #hist(h, main=h.names[i], col=cols[i], proba=TRUE, xlab="", ylab="", las=1)
+      hx <- hist(h, main=h.names[i], freq=FALSE, col=cols[i], axes=FALSE, las=1)
+      if (sd(h)>1e-10) { #eg. when coeff are not normalized
+        h0 <- seq(min(h), max(h), len=50)
+        y0 <- dnorm(h0, mean(h), sd(h))
+        abline(v=mean(h), lwd=1, lty=2)
+        lines(h0, y0, col = "black", lwd = 1)
+        at <- c(range(hx$mids), mean(hx$mids))
+        axis(1, at=at, labels=signif(at, 3), cex.axis=0.75)}}
+    title(main=title, cex.main=1.5, outer=TRUE)
+    layout(matrix(1))}
 
 hcontrib <- function(OutCoe, id, harm.range, amp.h, palette, title){UseMethod("hcontrib")}
 hcontrib.OutCoe <- function(
