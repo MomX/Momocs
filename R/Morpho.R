@@ -1,3 +1,4 @@
+##todo: ventiler dans Out/Opn?
 # Core functions for modern morphometrics
 # 1. Outline functions ---------------------------------------------------------
 

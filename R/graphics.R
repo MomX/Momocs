@@ -187,19 +187,19 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
   if (missing(borders)) { borders   <- rep("grey20", n) }
   res <- data.frame(pos.x=numeric(), pos.y=numeric())
   if (poly) {
-  for (i in 1:n){
-    trans <- which(pos==i, arr.ind=TRUE) - 0.5
-    res[i, ] <- c(trans[2], trans[1])
-    polygon(coo.tp[[i]][, 1] + trans[2],
-            coo.tp[[i]][, 2] + trans[1],
-            col=cols[i], border=borders[i])}
+    for (i in 1:n){
+      trans <- which(pos==i, arr.ind=TRUE) - 0.5
+      res[i, ] <- c(trans[2], trans[1])
+      polygon(coo.tp[[i]][, 1] + trans[2],
+              coo.tp[[i]][, 2] + trans[1],
+              col=cols[i], border=borders[i])}
   } else {
     for (i in 1:n){
-    trans <- which(pos==i, arr.ind=TRUE) - 0.5
-    res[i, ] <- c(trans[2], trans[1])
-    lines(  coo.tp[[i]][, 1] + trans[2],
-            coo.tp[[i]][, 2] + trans[1],
-            col=borders[i])}}
+      trans <- which(pos==i, arr.ind=TRUE) - 0.5
+      res[i, ] <- c(trans[2], trans[1])
+      lines(  coo.tp[[i]][, 1] + trans[2],
+              coo.tp[[i]][, 2] + trans[1],
+              col=borders[i])}}
   invisible(res)}
 
 
@@ -431,8 +431,7 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
 
 
 
-# Coo / Out / Opn plotters ------------------------------------------------
-
+# 3. Coo / Out / Opn plotters --------------------------------------------------
 #' Plot on Coo (Out/Opn) objects: quick review
 #' 
 #' Allows to plot shapes from Coo objects
@@ -565,12 +564,7 @@ panel.Opn <- function(Out, borders, names=NULL, cex.names=0.6, ...){
       text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
 
 
-# N. Coe plotters ------------------------------------------------------------
-
-#hist
-#boxplot
-# 6. OutCoe visualisation methods -------------------------------------------------
-
+# 4. Coe / OutCoe / OpnCoe plotters ------------------------------------------
 boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
                            title= "Variation of harmonic coefficients",
                            legend=TRUE, ...){
@@ -611,6 +605,7 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
   }
   box()}
 
+boxplot.OpnCoe <- function(x, ...){}
 
 hist.OutCoe <-
   function(x, retain, drop, palette=col.gallus,
@@ -641,6 +636,8 @@ hist.OutCoe <-
       abline(v=mean(h), lwd=1)
       lines(h0, y0, col = "black", lwd = 2)}
     title(main=title, cex.main=2, font=2, outer=TRUE)}
+
+hist.OpnCoe <- function(x, ...){}
 
 hcontrib <- function(OutCoe, id, harm.range, amp.h, palette, title){UseMethod("hcontrib")}
 hcontrib.OutCoe <- function(
@@ -683,9 +680,154 @@ hcontrib.OutCoe <- function(
   title(main=title)
   return(res)}
 
+# 5. Morphospace functions -----------------------------------------------------
+# stupid function
+.mprod <- function(m, s){
+  res <- m
+  for (i in 1:ncol(m)) { res[, i] <- m[, i]*s[i] }
+  return(res)}
+
+.morphospacePCA <- function(PCA, xax, yax, pos.shp,
+                            amp.shp=1, size.shp=15, pts.shp=60,
+                            col.shp="#00000011", border.shp="#00000055"){
+  
+  xy     <- PCA$x[, c(xax, yax)]
+  rot    <- PCA$rotation[, c(xax, yax)]
+  mshape <- PCA$mshape
+  #we define the position of shapes
+  pos <- pos.shapes(xy, pos.shp=pos.shp)
+  # according to the type of morphometrics applied, we reconstruct shapes
+  method <- PCA$method
+  ## outlines
+  if (method=="eFourier"){
+    shp <- pca2shp.efourier(pos=pos, rot=rot,
+                            mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+    cd <- TRUE}
+  if (method=="rFourier"){
+    return(cat("* not yet (re) implemented"))
+    cd <- TRUE}
+  if (method=="tFourier"){
+    return(cat("* not yet (re) implemented"))
+    cd <- TRUE}
+  ## open outlines
+  if (method=="orthoPolynomials"){
+    # no pts.shp below (to avoid some bugs as long as it works with mod :-s )
+    shp <- pca2shp.polynomials(pos=pos, rot=rot,
+                               mshape=mshape, amp=amp.shp, mod=PCA$mod)
+    cd <- FALSE}
+  if (method=="rawPolynomials"){
+    shp <- pca2shp.polynomials(pos=pos, rot=rot,
+                               mshape=mshape, amp=amp.shp, mod=PCA$mod)
+    cd <- FALSE}
+  width   <- (par("usr")[4] - par("usr")[3]) / size.shp
+  shp     <- lapply(shp, coo.scale, 1/width)
+  if (cd) {
+    garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, points=FALSE)
+  } else {
+    garbage <- lapply(shp, lines, col=border.shp)}
+}
 
 
-# 3. PCA internals -------------------------------------------------------------
+#' Calculates nice positions on a plan for drawing shapes
+#' 
+#' todo
+#' @export pos.shapes
+#' @param xy todo
+#' @param pos.shp the way shape should be positionned
+#' @param nb.shp the total number of shapes
+#' @param nr.shp the number of rows to position shapes
+#' @param nc.shp the number of cols to position shapes
+#' @param circle.r.shp if circle, its radius
+#' @keywords graphics
+pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
+                       nb.shp=12, nr.shp=6, nc.shp=5, circle.r.shp){
+  if (is.data.frame(pos.shp) | is.matrix(pos.shp)) {
+    return(as.matrix(pos.shp))}
+  if (pos.shp=="xy"){
+    return(xy)}
+  if (pos.shp=="circle") {
+    if (missing(circle.r.shp)) {
+      # mean distance from origin
+      circle.r.shp <- mean(apply(xy, 1, function(x) sqrt(sum(x^2))))}
+    t <- seq(0, 2*pi, len=nb.shp+1)[-(nb.shp+1)]
+    pos <- cbind(circle.r.shp*cos(t), circle.r.shp*sin(t))
+    colnames(pos) <- c("x", "y") # pure cosmetics
+    return(pos)}
+  if (pos.shp=="range") {
+    pos <- expand.grid(seq(min(xy[, 1]), max(xy[, 1]), len=nr.shp),
+                       seq(min(xy[, 2]), max(xy[, 2]), len=nc.shp))
+    pos <- as.matrix(pos)
+    colnames(pos) <- c("x", "y") # pure cosmetics
+    return(pos)}
+  if (pos.shp=="full") {
+    #     w <- par("usr")
+    #     pos <- expand.grid(seq(w[1], w[2], len=nr.shp),
+    #                        seq(w[3], w[4], len=nc.shp))
+    w <- par("usr")
+    pos <- expand.grid(seq(par("xaxp")[1]*0.9, par("xaxp")[2]*0.9, len=nr.shp),
+                       seq(par("yaxp")[1]*0.9, par("yaxp")[2]*0.9, len=nc.shp))
+    pos <- as.matrix(pos)
+    colnames(pos) <- c("x", "y") # pure cosmetics
+    return(pos)   
+  }
+  # if a non-valid method is passed
+  return(xy)}
+
+
+#' Returns shape for a point on a PC plan
+#' 
+#' todo
+#' @export pca2shp.efourier
+#' @param pos the position on the plan
+#' @param rot the loadings
+#' @param mshape the mean shape
+#' @param amp the amplification factor
+#' @param nb.pts the number of point for drawing the shapes
+#' @param trans logical
+#' @keywords graphics
+pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
+  if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
+  if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
+  nb.h <- length(mshape)/4
+  n  <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ])*amp.shp
+    coe        <- mshape + apply(ax.contrib, 1, sum)
+    xf         <- coeff.split(coe)
+    coo        <- efourier.i(xf, nb.h = nb.h, nb.pts=pts.shp)
+    # reconstructed shapes are translated on their centroid
+    #if (trans) {
+    dx <- pos[i, 1] - coo.centpos(coo)[1] 
+    dy <- pos[i, 2] - coo.centpos(coo)[2] 
+    coo <- coo.trans(coo, dx, dy)
+    #}
+    res[[i]] <- coo}
+  return(res)}
+
+pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
+  if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
+  if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
+  degree <- length(mshape)
+  n  <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ])*amp.shp
+    mod$coefficients        <- mshape + apply(ax.contrib, 1, sum)
+    coo        <- polynomials.i(mod) #nb.pts ici fout un sacré bordel #todo
+    mod$coefficients <- rep(NA, degree)
+    # reconstructed shapes are translated on their centroid
+    #if (trans) {
+    dx <- pos[i, 1] - coo.centpos(coo)[1] 
+    dy <- pos[i, 2] - coo.centpos(coo)[2] 
+    coo <- coo.trans(coo, dx, dy)
+    res[[i]] <- coo}
+  #}
+  return(res)}
+
+# 6. PCA -----------------------------------------------------------------------
 #create an empty frame
 #' @export
 .frame <- function(xy, center.origin=FALSE, zoom=1){
@@ -807,10 +949,6 @@ hcontrib.OutCoe <- function(
   pos <- par("usr")
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
-
-
-# PCA plotters ------------------------------------------------------------
-
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
@@ -876,7 +1014,11 @@ plot.PCA <- function(#basics
   if (eigen)     .eigen(PCA$sdev, xax, yax)
   box()}
 
-# 4. Thin plate splines plotters -----------------------------------------------
+
+# 7. LDA ------------------------------------------------------------------
+
+
+# 8. Thin plate splines plotters -----------------------------------------------
 #' Thin Plate Splines for 2D data.
 #' 
 #' \code{tps2d} is the core function for Thin Plate Splines. It is used
@@ -1126,160 +1268,7 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
     coo.draw(to, border=shp.border[2], col=shp.col[2],
              lwd=shp.lwd[2], lty=shp.lty[2])}}
 
-# 5. Morphospace functions -----------------------------------------------------
-
-
-.morphospacePCA <- 
-  function(PCA, xax, yax, pos.shp,
-           amp.shp=1, size.shp=15, pts.shp=60,
-           col.shp="#00000011", border.shp="#00000055"){
-    
-    xy     <- PCA$x[, c(xax, yax)]
-    rot    <- PCA$rotation[, c(xax, yax)]
-    mshape <- PCA$mshape
-    #we define the position of shapes
-    pos <- pos.shapes(xy, pos.shp=pos.shp)
-    # according to the type of morphometrics applied, we reconstruct shapes
-    method <- PCA$method
-    ## outlines
-    if (method=="eFourier"){
-      shp <- pca2shp.efourier(pos=pos, rot=rot,
-                              mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
-      cd <- TRUE}
-    if (method=="rFourier"){
-      return(cat("* not yet (re) implemented"))
-      cd <- TRUE}
-    if (method=="tFourier"){
-      return(cat("* not yet (re) implemented"))
-      cd <- TRUE}
-    ## open outlines
-    if (method=="orthoPolynomials"){
-      # no pts.shp below (to avoid some bugs as long as it works with mod :-s )
-      shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                                 mshape=mshape, amp=amp.shp, mod=PCA$mod)
-      cd <- FALSE}
-    if (method=="rawPolynomials"){
-      shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                                 mshape=mshape, amp=amp.shp, mod=PCA$mod)
-      cd <- FALSE}
-    width   <- (par("usr")[4] - par("usr")[3]) / size.shp
-    shp     <- lapply(shp, coo.scale, 1/width)
-    if (cd) {
-      garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, points=FALSE)
-    } else {
-      garbage <- lapply(shp, lines, col=border.shp)}
-  }
-
-
-#' Returns shape for a point on a PC plan
-#' 
-#' todo
-#' @export pca2shp.efourier
-#' @param pos the position on the plan
-#' @param rot the loadings
-#' @param mshape the mean shape
-#' @param amp the amplification factor
-#' @param nb.pts the number of point for drawing the shapes
-#' @param trans logical
-#' @keywords graphics
-pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
-  if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
-  if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
-  # stupid function
-  mprod <- function(m, s){
-    res <- m
-    for (i in 1:ncol(m)) { res[, i] <- m[, i]*s[i] }
-    return(res)}
-  nb.h <- length(mshape)/4
-  n  <- nrow(pos)
-  # we prepare the array
-  res <- list()
-  for (i in 1:n) {
-    ax.contrib <- mprod(rot, pos[i, ])*amp.shp
-    coe        <- mshape + apply(ax.contrib, 1, sum)
-    xf         <- coeff.split(coe)
-    coo        <- efourier.i(xf, nb.h = nb.h, nb.pts=pts.shp)
-    # reconstructed shapes are translated on their centroid
-    #if (trans) {
-      dx <- pos[i, 1] - coo.centpos(coo)[1] 
-      dy <- pos[i, 2] - coo.centpos(coo)[2] 
-      coo <- coo.trans(coo, dx, dy)
-  #}
-    res[[i]] <- coo}
-  return(res)}
-
-pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
-  if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
-  if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
-  # stupid function
-  mprod <- function(m, s){
-    res <- m
-    for (i in 1:ncol(m)) { res[, i] <- m[, i]*s[i] }
-    return(res)}
-  degree <- length(mshape)
-  n  <- nrow(pos)
-  # we prepare the array
-  res <- list()
-  for (i in 1:n) {
-    ax.contrib <- mprod(rot, pos[i, ])*amp.shp
-    mod$coefficients        <- mshape + apply(ax.contrib, 1, sum)
-    coo        <- polynomials.i(mod) #nb.pts ici fout un sacré bordel #todo
-    mod$coefficients <- rep(NA, degree)
-    # reconstructed shapes are translated on their centroid
-    #if (trans) {
-      dx <- pos[i, 1] - coo.centpos(coo)[1] 
-      dy <- pos[i, 2] - coo.centpos(coo)[2] 
-      coo <- coo.trans(coo, dx, dy)
-    res[[i]] <- coo}
-  #}
-  return(res)}
-
-#' Calculates nice positions on a plan for drawing shapes
-#' 
-#' todo
-#' @export pos.shapes
-#' @param xy todo
-#' @param pos.shp the way shape should be positionned
-#' @param nb.shp the total number of shapes
-#' @param nr.shp the number of rows to position shapes
-#' @param nc.shp the number of cols to position shapes
-#' @param circle.r.shp if circle, its radius
-#' @keywords graphics
-pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
-                       nb.shp=12, nr.shp=6, nc.shp=5, circle.r.shp){
-  if (is.data.frame(pos.shp) | is.matrix(pos.shp)) {
-    return(as.matrix(pos.shp))}
-  if (pos.shp=="xy"){
-    return(xy)}
-  if (pos.shp=="circle") {
-    if (missing(circle.r.shp)) {
-      # mean distance from origin
-      circle.r.shp <- mean(apply(xy, 1, function(x) sqrt(sum(x^2))))}
-    t <- seq(0, 2*pi, len=nb.shp+1)[-(nb.shp+1)]
-    pos <- cbind(circle.r.shp*cos(t), circle.r.shp*sin(t))
-    colnames(pos) <- c("x", "y") # pure cosmetics
-    return(pos)}
-  if (pos.shp=="range") {
-    pos <- expand.grid(seq(min(xy[, 1]), max(xy[, 1]), len=nr.shp),
-                       seq(min(xy[, 2]), max(xy[, 2]), len=nc.shp))
-    pos <- as.matrix(pos)
-    colnames(pos) <- c("x", "y") # pure cosmetics
-    return(pos)}
-  if (pos.shp=="full") {
-    #     w <- par("usr")
-    #     pos <- expand.grid(seq(w[1], w[2], len=nr.shp),
-    #                        seq(w[3], w[4], len=nc.shp))
-    w <- par("usr")
-    pos <- expand.grid(seq(par("xaxp")[1]*0.9, par("xaxp")[2]*0.9, len=nr.shp),
-                       seq(par("yaxp")[1]*0.9, par("yaxp")[2]*0.9, len=nc.shp))
-    pos <- as.matrix(pos)
-    colnames(pos) <- c("x", "y") # pure cosmetics
-    return(pos)   
-  }
-  # if a non-valid method is passed
-  return(xy)}
-
-# 6. Color palettes ------------------------------------------------------------
+# 0. Color palettes ------------------------------------------------------------
 
 #' Some color palettes.
 #' @name col.summer
