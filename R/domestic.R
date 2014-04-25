@@ -1,3 +1,87 @@
+# 0. Coo (Opn/Out/Ldk) domestics -----------------------------------------------
+# Opn, Out, Ldk classes are all, primarily, Coo objects on whihc we define here
+# some domestic functions.
+
+# allows to maintain the tradition str() behaviour
+# actually useless but dont remember why/where
+#' @export
+str.Coo <- function(object, ...){
+  Coo <- object
+  ls.str(Coo)}
+#' @export
+str.Coe <- function(object, ...){
+  Coe <- object
+  ls.str(Coe)}
+
+# Coo can be indexing both to [ ] and [[ ]]
+# and returns the corresponding coordinate(s)
+# We define some getters
+#' @export
+"[.Coo" <- function(x, i, ...) {
+  if (missing(i))    { return(x$coo[])    }
+  if (is.integer(i)) { return(x$coo[i])   }
+  if (is.numeric(i)) { return(x$coo[[i]]) }}
+#todo ij coe
+#' @export
+#' #todo ij coe
+"[[.Coo" <- function(x, i, ...) {
+  if (missing(i))    { return(x$coo[])    }
+  if (is.integer(i)) { return(x$coo[i])   }
+  if (is.numeric(i)) { return(x$coo[[i]]) }}
+
+# length on an Coo return the length of Coo$coo, ie the number of coordinates
+#' @export
+length.Coo <- function(x) {
+  Coo <- x
+  return(length(Coo$coo))}
+#' @export
+dim.Coe <- function(x){
+  return(dim(x$coe))}
+
+
+# names() on a Coo retrieves the names of the Coo$coo
+#' @export
+names.Coo <- function(x){
+  Coo <- x
+  return(names(Coo$coo))}
+#' @export
+names.Coe <- function(x){
+  Coe <- x
+  return(rownames(Coe$coe))}
+
+# which can in return may be named using names(Coo) <- 
+#' @export
+"names<-.Coo" <- function(x, value){
+  names(x$coo) <- value
+  return(x)}
+#' @export
+"names<-.Coe" <- function(x, value){
+  rownames(x$coe) <- value
+  return(x)}
+
+#' Create subsets of Coo objects
+#' 
+#' todo
+#' @S3method  subset Coo
+#' @param x and Coo object
+#' @param subset logical from the fac or indices
+#' @param ... (to preserve consistence with subset generic)
+#' @keywords Coo
+#' @export
+subset.Coo <- function(x, subset, ...){
+  Coo <- x
+  e <- substitute(subset)
+  retain <- eval(e, Coo$fac, parent.frame())
+  Coo2 <- Coo
+  Coo2$coo <- Coo$coo[retain]
+  if (length(Coo$ldk)>0) Coo2$ldk <- Coo$ldk[retain]
+  if (ncol(Coo$fac)>0) {
+    Coo2$fac <- Coo$fac
+    Coo2$fac <- as.data.frame(Coo2$fac[retain, ])
+    names(Coo2$fac) <- names(Coo$fac)
+    Coo2$fac <- .refactor(Coo2$fac)
+  }
+  return(Coo2)}
 
 # 1. Domestic functions -------------------------------------------------------------
 # Placed here so far
