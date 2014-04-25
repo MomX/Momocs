@@ -15,4 +15,6 @@ load("data/trilo.rda")
 load("data/mosquito.rda")
 load("data/hearts.rda")
 
+bot.f <- eFourier(bot, 24)
+ol.p <- rawPolynomials(olea)
 

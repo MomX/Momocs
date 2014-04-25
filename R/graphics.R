@@ -702,20 +702,19 @@ hist.OpnCoe <-
     title(main=title, cex.main=1.5, outer=TRUE)
     layout(matrix(1))}
 
-hcontrib <- function(OutCoe, id, harm.range, amp.h, palette, title){UseMethod("hcontrib")}
-hcontrib.OutCoe <- function(
+#todo: missing id sample
+harm.contrib <- function(OutCoe, id, harm.range, amp.h, palette, title){
+  UseMethod("harm.contrib")}
+harm.contrib.OutCoe <- function(
   OutCoe,
-  id      = 1,
-  harm.range,
+  id=1,
+  harm.range =1:6,
   amp.h   = c(0, 0.5, 1, 2, 5, 10),
   palette = col.hot,
   title   = "Harmonic contribution"){
   #if missing id meanshape
   x <- OutCoe$coe
   nb.h <- ncol(x)/4
-  if (missing(harm.range)) {
-    harm.range <- ifelse (nb.h > 6, 1:6, 1:nb.h) }
-  harm.range <- 1:nb.h
   mult <- rep(1, nb.h)
   method.i <- efourier.i
   xf <- list(an=x[id, 1:nb.h + 0*nb.h], bn=x[id, 1:nb.h + 1*nb.h],
@@ -727,8 +726,7 @@ hcontrib.OutCoe <- function(
       mult.loc    <- mult
       mult.loc[harm.range[j]] <- amp.h[i]
       xfi <- lapply(xf, function(x) x*mult.loc)
-      res[[p]] <-
-        method.i(xfi)
+      res[[p]] <- method.i(xfi)
       p <- p+1}}
   
   cols <- rep(palette(length(amp.h)), length(harm.range))
@@ -738,49 +736,45 @@ hcontrib.OutCoe <- function(
        labels=harm.range, line=2, lwd=1, lwd.ticks=0.5)
   mtext("Harmonic rank", side=1, line=4)
   axis(2, at=(1:length(amp.h))-0.5,
-       labels=rev(amp.h), line=1, lwd=1, lwd.ticks=0.5)
+       labels=rev(amp.h), line=1, lwd=1, lwd.ticks=0.5, las=2)
   mtext("Amplification factor", side=2, line=3)
-  title(main=title)
-  return(res)}
+  title(main=title)}
 
-ccontrib <- function(x, ...){
-  UseMethod("ccontrib")}
-ccontrib.OpnCoe <- function(x, 
+#todo: missing id sample
+degree.contrib <- function(
+  OpnCoe, id, degree.range, amp.d, palette, title){UseMethod("degree.contrib")}
+degree.contrib.OpnCoe <- function(
+  OpnCoe,
   id      = 1,
-  n.range,
-  amp.h   = c(0, 0.5, 1, 2, 5, 10),
+  degree.range =1:ncol(OpnCoe$coe),
+  amp.d   = c(0, 0.5, 1, 2, 5, 10),
   palette = col.hot,
-  title   = "Coefficient contribution"){
+  title   = "Degree contribution"){
   #if missing id meanshape
-  x <- OpnCoe$coe
-  degree <- ncol(x)
-  if (missing(harm.range)) {
-    n.range <- ifelse (degree > 6, 1:6, 1:degree) }
+  coe <- OpnCoe$coe[id, ]
+  degree <- length(coe)
   mult <- rep(1, degree)
-  xf <- list(an=x[id, 1:nb.h + 0*nb.h], bn=x[id, 1:nb.h + 1*nb.h],
-             cn=x[id, 1:nb.h + 2*nb.h], dn=x[id, 1:nb.h + 3*nb.h])
+  mod <- OpnCoe$mod
   res <- list()
   p <- 1 # dirty
-  for (j in seq(along=harm.range)){
-    for (i in seq(along=amp.h)){
+  for (j in seq(along=degree.range)){
+    for (i in seq(along=amp.d)){
       mult.loc    <- mult
-      mult.loc[harm.range[j]] <- amp.h[i]
-      xfi <- lapply(xf, function(x) x*mult.loc)
-      res[[p]] <-
-        method.i(xfi)
+      mult.loc[degree.range[j]] <- amp.d[i]
+      mod$coefficients <- coe*mult.loc
+      res[[p]] <- polynomials.i(mod)
       p <- p+1}}
   
-  cols <- rep(palette(length(amp.h)), length(harm.range))
-  coo.list.panel(res, dim=c(length(amp.h), length(harm.range)),
-                 byrow=FALSE, cols=cols, mar=c(5.1, 5.1, 4.1, 2.1))
-  axis(1, at=(1:length(harm.range))-0.5,
-       labels=harm.range, line=2, lwd=1, lwd.ticks=0.5)
-  mtext("Harmonic rank", side=1, line=4)
-  axis(2, at=(1:length(amp.h))-0.5,
-       labels=rev(amp.h), line=1, lwd=1, lwd.ticks=0.5)
+  cols <- rep(palette(length(amp.d)*2)[-c(1:length(amp.d))], degree)
+  coo.list.panel(res, dim=c(length(amp.d), degree),
+                 byrow=FALSE, borders=cols, mar=c(5.1, 5.1, 4.1, 2.1), poly=FALSE)
+  axis(1, at=(1:degree)-0.5,
+       labels=names(coe), line=2, lwd=1, lwd.ticks=0.5)
+  mtext("Degree", side=1, line=4)
+  axis(2, at=(1:length(amp.d))-0.5,
+       labels=rev(amp.d), line=1, lwd=1, lwd.ticks=0.5, las=2)
   mtext("Amplification factor", side=2, line=3)
-  title(main=title)
-  return(res)}
+  title(main=title)}
 
 # 5. Morphospace functions -----------------------------------------------------
 # stupid function
