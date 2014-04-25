@@ -765,7 +765,7 @@ degree.contrib.OpnCoe <- function(
       res[[p]] <- polynomials.i(mod)
       p <- p+1}}
   
-  cols <- rep(palette(length(amp.d)*2)[-c(1:length(amp.d))], degree)
+  cols <- rep(palette(length(amp.d)+4)[-(1:4)], degree)
   coo.list.panel(res, dim=c(length(amp.d), degree),
                  byrow=FALSE, borders=cols, mar=c(5.1, 5.1, 4.1, 2.1), poly=FALSE)
   axis(1, at=(1:degree)-0.5,
