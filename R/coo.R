@@ -513,7 +513,7 @@ coo.force2close <- function(coo){
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' b <- coo.align.xax(bot[4])
+#' b <- coo.alignxax(bot[4])
 #' coo.plot(b)
 #' coo.plot(coo.up(b))
 
@@ -531,7 +531,7 @@ coo.up <- function(coo){
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' b <- coo.align.xax(bot[4])
+#' b <- coo.alignxax(bot[4])
 #' coo.plot(b)
 #' coo.plot(coo.down(b))
 coo.down <- function(coo){
@@ -540,10 +540,10 @@ coo.down <- function(coo){
 
 #' Aligns shapes along the x-axis
 #' Align the longest axis of a shape along the x-axis
-#' @aliases coo.align.xax
-#' @export coo.align.xax
-#' @S3method coo.align.xax default
-#' @S3method coo.align.xax Coo
+#' @aliases coo.alignxax
+#' @export coo.alignxax
+#' @S3method coo.alignxax default
+#' @S3method coo.alignxax Coo
 #' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
 #' @return a matrix of (x,y) coordinates or an Coo object.
 #' @keywords coo_utilities
@@ -552,27 +552,27 @@ coo.down <- function(coo){
 #' data(bot)
 #' b <- bot[4]
 #' coo.plot(b)
-#' coo.plot(coo.align.xax(b))
+#' coo.plot(coo.alignxax(b))
 #' }
 
-coo.align.xax <- function(coo){UseMethod("coo.align.xax")}
-coo.align.xax.default <- function(coo){
+coo.alignxax <- function(coo){UseMethod("coo.alignxax")}
+coo.alignxax.default <- function(coo){
   coo <- coo.check(coo)
   coo <- coo.align(coo)
   return(coo.trans(coo, x=0, y= -coo.centpos(coo)[2]))}
 
-coo.align.xax.Coo <- function(coo){
+coo.alignxax.Coo <- function(coo){
   Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.align.xax)
+  Coo$coo <- lapply(Coo$coo, coo.alignxax)
   return(Coo)}
 
 #' Aligns shapes along their calliper length
 #' And returns them registered on bookstein coordinates.
 #' See \link{coo.bookstein}.
-#' @aliases coo.align.calliper
-#' @export coo.align.calliper
-#' @S3method coo.align.calliper default
-#' @S3method coo.align.calliper Coo
+#' @export coo.aligncalliper
+#' @aliases coo.aligncalliper
+#' @S3method coo.aligncalliper default
+#' @S3method coo.aligncalliper Coo
 #' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
 #' @return a matrix of (x,y) coordinates or an Coo object.
 #' @keywords coo_utilities
@@ -581,21 +581,21 @@ coo.align.xax.Coo <- function(coo){
 #' data(bot)
 #' b <- bot[4]
 #' coo.plot(b)
-#' coo.plot(coo.align.calliper(b))
-#' bot.al <- coo.align.calliper(bot)
+#' coo.plot(coo.aligncalliper(b))
+#' bot.al <- coo.aligncalliper(bot)
 #' stack(bot.al)
 #' }
 
-coo.align.calliper <- function(coo){UseMethod("coo.align.calliper")}
-coo.align.calliper.default <- function(coo){
+coo.aligncalliper <- function(coo){UseMethod("coo.aligncalliper")}
+coo.aligncalliper.default <- function(coo){
   coo <- coo.check(coo)
   cal.ind <- coo.calliper(coo, arr.ind=TRUE)$arr.ind
   coo <- coo.bookstein(coo, cal.ind[1], cal.ind[2])
   return(coo)}
 
-coo.align.calliper.Coo <- function(coo){
+coo.aligncalliper.Coo <- function(coo){
   Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.align.calliper)
+  Coo$coo <- lapply(Coo$coo, coo.aligncalliper)
   return(Coo)}
 
 #' Reverses coordinates

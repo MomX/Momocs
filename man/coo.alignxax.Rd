@@ -1,9 +1,9 @@
-\name{coo.align.xax}
-\alias{coo.align.xax}
+\name{coo.alignxax}
+\alias{coo.alignxax}
 \title{Aligns shapes along the x-axis
 Align the longest axis of a shape along the x-axis}
 \usage{
-coo.align.xax(coo)
+coo.alignxax(coo)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
@@ -21,7 +21,7 @@ shape along the x-axis
 data(bot)
 b <- bot[4]
 coo.plot(b)
-coo.plot(coo.align.xax(b))
+coo.plot(coo.alignxax(b))
 }
 }
 \keyword{coo_utilities}

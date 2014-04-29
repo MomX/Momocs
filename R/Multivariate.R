@@ -1,5 +1,20 @@
 # 1. mshapes on Coe ------------------------------------------------------------
+#' Mean shapes
+#' 
+#' Calculates mean shapes on matrices of coefficients by groups or globally. 
+#' @aliases mshapes
+#' @export mshapes
+#' @S3method mshapes default
+#' @S3method mshapes OutCoe
+#' @S3method mshapes OpnCoe
+#' @param Coe a Coe object
+#' @param fac factor from the data.frame in Coe$fac, if empty returns global mshape
+#' @param nb.pts numeric the number of points for calculated shapes
+#' @return a list of matrices of (x,y) coordinates.
+#' @keywords multivariate
+#todo
 mshapes <- function(Coe, fac, nb.pts){UseMethod("mshapes")}
+mshapes.default <- function(Coe, fac, nb.pts){}
 mshapes.OutCoe <- function(Coe, fac, nb.pts=120){
   OutCoe <- Coe
   nb.h <-  ncol(OutCoe$coe)/4 #todo

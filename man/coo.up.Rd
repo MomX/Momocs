@@ -17,7 +17,7 @@ retain just the upper side.
 }
 \examples{
 data(bot)
-b <- coo.align.xax(bot[4])
+b <- coo.alignxax(bot[4])
 coo.plot(b)
 coo.plot(coo.up(b))
 }

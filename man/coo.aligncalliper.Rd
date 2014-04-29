@@ -1,10 +1,10 @@
-\name{coo.align.calliper}
-\alias{coo.align.calliper}
+\name{coo.aligncalliper}
+\alias{coo.aligncalliper}
 \title{Aligns shapes along their calliper length
 And returns them registered on bookstein coordinates.
 See \link{coo.bookstein}.}
 \usage{
-coo.align.calliper(coo)
+coo.aligncalliper(coo)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
@@ -23,8 +23,8 @@ registered on bookstein coordinates. See
 data(bot)
 b <- bot[4]
 coo.plot(b)
-coo.plot(coo.align.calliper(b))
-bot.al <- coo.align.calliper(bot)
+coo.plot(coo.aligncalliper(b))
+bot.al <- coo.aligncalliper(bot)
 stack(bot.al)
 }
 }
