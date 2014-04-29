@@ -3,15 +3,15 @@
 # abbreviated as "shape" (either outlines, open outlines or lanfmarks)
 # they can be passed either as two-column matrices colnames ("x" and "y"
 # colnaming is not mandatory) or as a list with $x and $y components.
-# and returns a (named) matrix of coordinates.
+# and returns a (named) \code{matrix} of coordinates.
 
 #' Checks shape
 #'
 #' A simple utility, used internally, mostly in the coo functions and methods.
-#' Returns a matrix, when passed with either a list or a matrix of coordinates.
+#' Returns a matrix, when passed with either a list or a \code{matrix} of coordinates.
 #'
-#' @param coo a matrix of (x,y) coordinates or a list.
-#' @return a matrix of (x,y) coordinates.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates or a list.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
 #' @keywords coo_utilities
 #' @export coo.check
 #' @examples
@@ -31,12 +31,12 @@ coo.check <- function(coo){
 #' @aliases coo.center
 #' @S3method coo.center default
 #' @S3method coo.center Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
-#' coo.center(matrix(1:10, ncol=2))
-#' coo.center(list(x=1:5, y=6:10))
+#' data(bot)
+#' b <- bot[1]
 coo.center <- function(coo){UseMethod("coo.center")}
 coo.center.default <- function(coo){
   coo <- coo.check(coo)
@@ -57,16 +57,17 @@ coo.center.Coo <- function(coo){
 #' @aliases coo.scale 
 #' @S3method coo.scale default
 #' @S3method coo.scale Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @param scale numeric, the scaling factor, by default the centroid size.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param scale the scaling factor, by default, the centroid size.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
+#' b <- bot[1]
 #' stack(bot)
 #' stack(coo.scale(bot))
-#' coo.plot(bot[4])
-#' coo.plot(coo.scale(bot[4]))
+#' coo.plot(b)
+#' coo.plot(coo.scale(b))
 
 coo.scale <- function(coo, scale){UseMethod("coo.scale")}
 coo.scale.default <- function (coo, scale=coo.centsize(coo)) {
@@ -95,16 +96,18 @@ coo.scale.Coo <- function(coo, scale){
 #' @aliases coo.rotate 
 #' @S3method coo.rotate default
 #' @S3method coo.rotate Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @param theta angle in radians
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param theta \code{numeric}the angle (in radians) to rotate shapes.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.rotatecenter}
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
+#' b <- bot[1]
 #' stack(bot)
 #' stack(coo.rotate(bot, pi))
-#' coo.plot(bot[4])
-#' coo.plot(coo.rotate(bot[4], -pi/2))
+#' coo.plot(b)
+#' coo.plot(coo.rotate(b, pi))
 coo.rotate <- function(coo, theta=0){UseMethod("coo.rotate")}
 coo.rotate.default <- function(coo, theta=0){
   coo <- coo.check(coo)
@@ -124,15 +127,17 @@ coo.rotate.Coo <- function(coo, theta=0){
 #' @aliases coo.align 
 #' @S3method coo.align default
 #' @S3method coo.align Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.aligncalliper}, \link{coo.alignxax}
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
+#' b <- bot[1]
 #' stack(bot)
 #' stack(coo.align(bot))
-#' coo.plot(bot[4])
-#' coo.plot(coo.align(bot[4]))
+#' coo.plot(b)
+#' coo.plot(coo.align(b))
 coo.align <- function(coo){UseMethod("coo.align")}
 coo.align.default <- function(coo){
   coo <- coo.check(coo)
@@ -150,18 +155,18 @@ coo.align.Coo <- function(coo){
 #' @aliases coo.trans 
 #' @S3method coo.trans default
 #' @S3method coo.trans Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @param x the translation on the x dimension.
-#' @param y the translation on the y dimension.
-#' @return a matrix of (x,y) coordinates or an Coo object.
-#' @family coo
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param x \code{numeric}translation along the x-axis.
+#' @param y \code{numeric}translation along the y-axis.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
+#' b <- bot[1]
 #' stack(bot)
-#' stack(coo.trans(bot, 10, 10))
-#' coo.plot(bot[4])
-#' coo.plot(coo.trans(bot[4], 10, 10))
+#' stack(coo.trans(bot, 50, 100))
+#' coo.plot(b)
+#' coo.plot(coo.trans(b, 50, 100))
 coo.trans <- function(coo, x=0, y=0){UseMethod("coo.trans")}
 coo.trans.default <- function(coo, x=0, y=0){
   coo <- coo.check(coo)
@@ -178,9 +183,9 @@ coo.trans.Coo <- function(coo, x=0, y=0){
 #' @aliases coo.slide
 #' @S3method coo.slide default
 #' @S3method coo.slide Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param id1 the id of the point that will become the new first point.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(hearts)
@@ -211,16 +216,17 @@ coo.slide.Coo <- function(coo, id1){
 #' @aliases coo.sample 
 #' @S3method coo.sample default
 #' @S3method coo.sample Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to sample.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
+#' b <- bot[1]
 #' stack(bot)
-#' stack(coo.sample(bot, 12))
-#' coo.plot(bot[4])
-#' coo.plot(coo.sample(bot[4], 12))
+#' stack(coo.sample(bot, 24))
+#' coo.plot(b)
+#' coo.plot(coo.sample(b, 24))
 coo.sample <- function(coo, n){UseMethod("coo.sample")}
 coo.sample.default <- function (coo, n) {
   coo <- coo.check(coo)
@@ -233,24 +239,24 @@ coo.sample.Coo <- function(coo, n){
 
 #' Samples coordinates (regular radius)
 #'
-#' Samples n coordinates with a regular angle
+#' Samples n coordinates with a regular angle.
 #' 
 #' @export coo.samplerr
 #' @aliases coo.samplerr 
 #' @S3method coo.samplerr default
 #' @S3method coo.samplerr Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @param n an integer, the number fo points to sample.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param n integer, the number of points to sample.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates or an Coo object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
 #' stack(bot)
 #' bot <- coo.center(bot)
 #' stack(coo.samplerr(bot, 12))
-#' coo.plot(bot[4])
-#' coo.plot(rr <- coo.samplerr(bot[4], 12))
-#' cpos <- coo.centpos(bot[4])
+#' coo.plot(bot[1])
+#' coo.plot(rr <- coo.samplerr(bot[1], 12))
+#' cpos <- coo.centpos(bot[1])
 #' segments(cpos[1], cpos[2], rr[, 1], rr[, 2])
 coo.samplerr <- function(coo, n){UseMethod("coo.samplerr")}
 coo.samplerr.default <- function(coo, n){
@@ -281,16 +287,22 @@ coo.samplerr.Coo <- function(coo, n){
 #' @aliases coo.interpolate
 #' @S3method coo.interpolate default
 #' @S3method coo.interpolate Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to interpolate.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
+#' b <- bot[1]
+#' stack(bot)
+#' stack(coo.scale(bot))
+#' coo.plot(b)
+#' coo.plot(coo.scale(b))
+#' data(bot)
 #' stack(bot)
 #' stack(coo.interpolate(coo.sample(bot, 12), 120))
-#' coo.plot(bot[4])
-#' coo.plot(coo.interpolate(coo.sample(bot[4], 12), 120))
+#' coo.plot(bot[1])
+#' coo.plot(coo.interpolate(coo.sample(bot[1], 12), 120))
 coo.interpolate <- function(coo, n){UseMethod("coo.interpolate")}
 coo.interpolate.default <- function(coo, n){
   coo <- coo.check(coo)
@@ -308,7 +320,7 @@ coo.interpolate.Coo <- function(coo, n){
   Coo$coo <- lapply(Coo$coo, coo.interpolate, n)
   return(Coo)}
 
-#' Smoothes coordinates
+#' Smoothes coordinates (closed outlines)
 #'
 #' Smoothes coordinates using a simple moving average.
 #' May be useful to remove digitization noise.
@@ -316,16 +328,18 @@ coo.interpolate.Coo <- function(coo, n){
 #' @aliases coo.smooth
 #' @S3method coo.smooth default
 #' @S3method coo.smooth Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @param n an integer to specify the number of smoothing iterations
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.smoothcurve}
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
+#' b <- bot[1]
 #' stack(bot)
 #' stack(coo.smooth(bot, 10))
-#' coo.plot(bot[4])
-#' coo.plot(coo.smooth(bot[4], 30))
+#' coo.plot(bot[1])
+#' coo.plot(coo.smooth(bot[1], 30))
 coo.smooth <- function(coo, n){UseMethod("coo.smooth")}
 coo.smooth.default <- function(coo, n=0){
   coo <- coo.check(coo)
@@ -342,9 +356,27 @@ coo.smooth.Coo <- function(coo, n){
   Coo$coo <- lapply(Coo$coo, coo.smooth, n)
   return(Coo)}
 
-
-coo.smooth.curve <- function(coo, n){UseMethod("coo.smooth.curve")}
-coo.smooth.curve.default <- function(coo, n=0){
+#' Smoothes coordinates (open outlines)
+#'
+#' Smoothes coordinates using a simple moving average but let the first and last points unchanged.
+#' May be useful to remove digitization noise.
+#' @export coo.smoothcurve
+#' @aliases coo.smoothcurve
+#' @S3method coo.smoothcurve default
+#' @S3method coo.smoothcurve Opn
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.smooth}
+#' @keywords coo_utilities
+#' @examples
+#' data(olea)
+#' o <- olea[1]
+#' coo.plot(o, border="grey50", points=FALSE)
+#' coo.draw(coo.smooth(o, 24), border="blue", points=FALSE)
+#' coo.draw(coo.smoothcurve(o, 24), border="red", points=FALSE)
+coo.smoothcurve <- function(coo, n){UseMethod("coo.smoothcurve")}
+coo.smoothcurve.default <- function(coo, n=0){
   coo <- coo.check(coo)
   p   <- nrow(coo)
   a   <- 0
@@ -353,11 +385,10 @@ coo.smooth.curve.default <- function(coo, n=0){
     for (i in 2:(p-1)){
       coo[i, ] <- (coo[i-1, ]*0.25 + coo[i, ]*0.5 + coo[i+1, ]*0.25)}}
   return(coo)}
-coo.smooth.curve.Opn <- function(coo, n){
+coo.smoothcurve.Opn <- function(coo, n){
   Opn <- coo
-  Opn$coo <- lapply(Opn$coo, coo.smooth.curve, n)
+  Opn$coo <- lapply(Opn$coo, coo.smoothcurve, n)
   return(Opn)}
-coo.smooth.Opn <- coo.smooth.curve.Opn
 
 #' Tests if shapes are closed
 #'
@@ -368,12 +399,16 @@ coo.smooth.Opn <- coo.smooth.curve.Opn
 #' @aliases is.closed
 #' @S3method is.closed default
 #' @S3method is.closed Coo
-#' @param coo a matrix of (x,y) coordinates or a Coo object
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @return a boolean.
+#' @seealso \link{coo.close}, \link{coo.unclose}
 #' @keywords coo_utilities
 #' @examples
 #' is.closed(matrix(1:10, ncol=2))
 #' is.closed(coo.close(matrix(1:10, ncol=2)))
+#' data(bot)
+#' is.closed(bot)
+#' is.closed(coo.close(bot))
 
 is.closed <- function(coo){UseMethod("is.closed")}
 is.closed.default <- function(coo){
@@ -397,8 +432,9 @@ is.closed.Coo <- function(coo){
 #' @export coo.close
 #' @S3method coo.close default
 #' @S3method coo.close Coo
-#' @param coo a matrix of (x,y) coordinates or a Coo object
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.unclose}, \link{is.closed}
 #' @keywords coo_utilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
@@ -420,14 +456,16 @@ coo.close.Coo <- function(coo){
   return(Coo)}
 
 #' 'Uncloses' shapes
-#'
+#' 
 #' Returns a unclosed shape from (un)closed shapes. See also \link{coo.close}.
 #' 
-#' @export coo.unclose 
+#' @export coo.unclose
 #' @S3method coo.unclose default
 #' @S3method coo.unclose Coo
-#' @param coo a matrix of (x,y) coordinates or a Coo object
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo}
+#'   object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.close}, \link{is.closed}
 #' @keywords coo_utilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
@@ -453,20 +491,22 @@ coo.unclose.Coo <- function(coo){
 
 #' Rotates shapes with a custom center
 #'
-#' rotates a shape of "theta" angles (in radians) and with a (x, y) "center".
+#' rotates a shape of "theta" angles (in radians) and with a \eqn{(x; y)} "center".
 #' @export coo.rotatecenter
 #' @aliases coo.rotatecenter
 #' @S3method coo.rotatecenter default
 #' @S3method coo.rotatecenter Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @param theta an angle, in radians.
-#' @param center the (x, y) position of the center
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param theta \code{numeric} the angle (in radians) to rotate shapes.
+#' @param center the \eqn{(x; y)} position of the center
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.rotate}
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' coo.plot(bot[4])
-#' coo.plot(coo.rotatecenter(bot[4], pi/2, c(0, 0)))
+#' b <- bot[1]
+#' coo.plot(b)
+#' coo.draw(coo.rotatecenter(b, -pi/2, c(200, 200)), border="red")
 coo.rotatecenter <- function(coo, theta, center=c(0, 0)){UseMethod("coo.rotatecenter")}
 coo.rotatecenter.default <- function(coo, theta, center=c(0, 0)){
   coo <- coo.trans(coo, -center[1], -center[2])
@@ -484,22 +524,26 @@ coo.rotatecenter.Coo <- function(coo, theta, center=c(0, 0)){
 #' of unclosed shapes, so that they become closed. May be useful (?) e.g. for t/rfourier methods
 #' where reconstructed shapes may not be closed.
 #' @export
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a matrix of (x,y) coordinates.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 64)
+#' b <- coo.sample(bot[1], 64)
 #' b <- b[1:40,]
 #' coo.plot(b)
-#' coo.plot(coo.force2close(b))
+#' coo.draw(coo.force2close(b), border="red")
 coo.force2close <- function(coo){
   coo <- coo.check(coo)
+  xy <- coo.centpos(coo)
   if (is.closed(coo)) {return(coo)}
   n  <- nrow(coo)
   d  <- coo[1, ] - coo[n, ]
   dm <- cbind(seq(0, d[1], length=n), seq(0, d[2], length=n))
-  return(coo + dm)}
+  coo2 <- coo + dm
+  xy2 <- coo.centpos(coo2)
+  coo2 <- coo.trans(coo2, xy[1] - xy2[1], xy[2] - xy2[2])
+  return(coo2)}
 
 # 2. Handling / baselines on coo and Coo -------------------------------------
 # Some functions and methods to ease alignments, grabbing part of shapes, etc.
@@ -508,14 +552,14 @@ coo.force2close <- function(coo){
 #' Useful when shapes are aligned along the x-axis (e.g. because of a 
 #' bilateral symmetry) #' and when one wants to retain just the upper side. 
 #' @export coo.up
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a matrix of (x,y) coordinates.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' b <- coo.alignxax(bot[4])
+#' b <- coo.alignxax(bot[1])
 #' coo.plot(b)
-#' coo.plot(coo.up(b))
+#' coo.draw(coo.up(b), border="red")
 
 coo.up <- function(coo){
   up <- coo[coo[,2]>=0,]
@@ -526,31 +570,33 @@ coo.up <- function(coo){
 #' Useful when shapes are aligned along the x-axis (e.g. because of a 
 #' bilateral symmetry) and when one wants to retain just the lower side. 
 #' @export coo.down
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a matrix of (x,y) coordinates.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' b <- coo.alignxax(bot[4])
+#' b <- coo.alignxax(bot[1])
 #' coo.plot(b)
-#' coo.plot(coo.down(b))
+#' coo.draw(coo.down(b), border="red")
 coo.down <- function(coo){
   coo <- coo.check(coo)
   return(coo[coo[, 2]<=0,])}
 
 #' Aligns shapes along the x-axis
-#' Align the longest axis of a shape along the x-axis
+#' 
+#' Align the longest axis of a shape along the x-axis.
 #' @aliases coo.alignxax
 #' @export coo.alignxax
 #' @S3method coo.alignxax default
 #' @S3method coo.alignxax Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.align}, \link{coo.aligncalliper}
 #' @keywords coo_utilities
 #' @examples
 #' \dontrun{
 #' data(bot)
-#' b <- bot[4]
+#' b <- bot[1]
 #' coo.plot(b)
 #' coo.plot(coo.alignxax(b))
 #' }
@@ -566,20 +612,22 @@ coo.alignxax.Coo <- function(coo){
   Coo$coo <- lapply(Coo$coo, coo.alignxax)
   return(Coo)}
 
-#' Aligns shapes along their calliper length
+#' Aligns shapes along their "calliper length"
+#' 
 #' And returns them registered on bookstein coordinates.
 #' See \link{coo.bookstein}.
 #' @export coo.aligncalliper
 #' @aliases coo.aligncalliper
 #' @S3method coo.aligncalliper default
 #' @S3method coo.aligncalliper Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.align}, \link{coo.alignxax}, \link{coo.calliper}
 #' @keywords coo_utilities
 #' @examples
 #' \dontrun{
 #' data(bot)
-#' b <- bot[4]
+#' b <- bot[1]
 #' coo.plot(b)
 #' coo.plot(coo.aligncalliper(b))
 #' bot.al <- coo.aligncalliper(bot)
@@ -602,12 +650,12 @@ coo.aligncalliper.Coo <- function(coo){
 #' 
 #' Returns the reverse suite of coordinates, i.e. change shape's orientation
 #' @export
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a matrix of (x,y) coordinates.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 4)
+#' b <- coo.sample(bot[1], 4)
 #' b
 #' coo.rev(b)
 coo.rev <- function(coo){
@@ -619,15 +667,18 @@ coo.rev <- function(coo){
 #' Used in other facilities to acquire/manipulate data.
 #' @export coo.ldk
 #' @aliases coo.ldk
-#' @param coo a matrix or a list of (x,y) coordinates.
+#' @param coo a \code{matrix} or a list of \eqn{(x; y)} coordinates.
 #' @param nb.ldk integer, the number of landmarks to define
-#' @return a numeric that corresponds to the closest ids,
+#' @return \code{numeric} that corresponds to the closest ids,
 #' on the shape, from cliked points.
 #' @keywords coo_utilities
 #' @examples
+#' \dontrun{
 #' data(bot)
-#' b <- coo.sample(bot[4], 4)
-#' # coo.ldk(b, 3) # run this, and click 3 times.
+#' b <- bot[1]
+#' coo.ldk(b, 3) # run this, and click 3 times
+#' coo.ldk(bot, 2) # this also works on Out
+#' }
 coo.ldk <- function(coo, nb.ldk) {
   if (is.list(coo)) coo <- l2m(coo)
   coo.plot(coo)
@@ -644,21 +695,25 @@ coo.ldk <- function(coo, nb.ldk) {
 
 #' Register Bookstein's coordinates
 #'
-#' Registers a new baseline for the shape, with the ldk1-th
-# and ldk2-th points being set on (-0.5, 0) and (0.5, 0), respectively.
+#' Registers a new baseline for the shape, with the \code{ldk1}-th
+#' and \code{ldk2}-th points being set on \eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=0)}, respectively.
 #' @export coo.bookstein
 #' @aliases coo.bookstein
 #' @S3method coo.bookstein default
 #' @S3method coo.bookstein Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
+#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param ldk1 the id of the first point of the new baseline
 #' @param ldk2 the id of the second point of the new baseline
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @seealso \link{coo.baseline}
 #' @keywords coo_utilities
 #' @examples
 #' data(hearts)
 #' stack(hearts)
 #' stack(coo.bookstein(hearts, 2, 4))
+#' h <- hearts[1]
+#' coo.plot(h)
+#' coo.plot(coo.bookstein(h, 20, 57), border="red")
 coo.bookstein <- function(coo, ldk1, ldk2){UseMethod("coo.bookstein")}
 coo.bookstein.default <- function(coo, ldk1, ldk2){
   D <- ed(coo[ldk1, ], coo[ldk2, ])
@@ -679,25 +734,25 @@ coo.bookstein.Coo <- function(coo, ldk1, ldk2){ #id1 ?
 
 #' Register new baselines
 #'
-#' A non-exact baseline registration on t1 and t2 coordinates,
-#' for the ldk1-th and ldk2-th points.
+#' A non-exact baseline registration on \code{t1} and \code{t2} coordinates,
+#' for the \code{ldk1}-th and \code{ldk2}-th points.
 #' By default it returns Bookstein's coordinates.
 #' @export coo.baseline
 #' @aliases coo.baseline
 #' @S3method coo.baseline default
 #' @S3method coo.baseline Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param ldk1 the id of the first point of the new baseline
 #' @param ldk2 the id of the second point of the new baseline
-#' @param t1 numeric the (x,y) coordinates of the 1st point of the new baseline
-#' @param t2 numeric the (x,y) coordinates of the 2nd point of the new baseline
-#' @return a matrix of (x,y) coordinates or an Coo object.
+#' @param t1 \code{numeric} the \eqn{(x; y)} coordinates of the 1st point of the new baseline
+#' @param t2 \code{numeric} the \eqn{(x; y)} coordinates of the 2nd point of the new baseline
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates or a \link{Coo} object.
+#' @seealso \link{coo.bookstein}
 #' @keywords coo_utilities
 #' @examples
 #' data(hearts)
 #' stack(hearts)
-#' # note the scale
-#' stack(coo.baseline(hearts, 2, 4, c(-1, 0), c(1, 0)))
+#' stack(coo.baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
 coo.baseline <- function(coo, ldk1, ldk2, t1, t2){UseMethod("coo.baseline")}
 coo.baseline.default <- 
   function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
@@ -747,21 +802,21 @@ coo.baseline.Coo <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
 # a. centroid -------------------------------------------------------------
 #' Returns the position of the centroid
 #'
-#' Returns the (x, y) centroid coordinates of a shape.
+#' Returns the \eqn{(x; y)} centroid coordinates of a shape.
 #' @export coo.centpos
 #' @aliases coo.centpos
 #' @S3method coo.centpos default
 #' @S3method coo.centpos Coo
-#' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
-#' @return a numeric or a matrix of (x,y) coordinates.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return \eqn{(x; y)} coordinates as \code{numeric}.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
-#' stack(bot)
-#' stack(coo.smooth(bot, 10))
-#' coo.plot(bot[4])
-#' coo.plot(coo.smooth(bot[4], 30))
-# coo.centpos returns the (x, y) centroid coordinates of a shape.
+#' b <- bot[1]
+#' coo.plot(b)
+#' xy <- coo.centpos(b)
+#' points(xy[1], xy[2], cex=2, col="blue")
+#' xy
 coo.centpos <- function(coo){UseMethod("coo.centpos")}
 coo.centpos.default <- function(coo){
   coo <- coo.check(coo)
@@ -775,13 +830,14 @@ coo.centpos.Coo <- function(coo){
 #' Calculates the centroid size
 #' @export coo.centsize
 #' @aliases coo.centsize
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the centroid size.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return \code{numeric}, the centroid size.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.centsize(bot[4])
-#' hist(sapply(bot$coo, coo.centsize), breaks=10)
+#' coo.centsize(bot[1])
+#' cs <- sapply(bot$coo, coo.centsize)
+#' hist(cs, breaks=10)
 coo.centsize <- function(coo){
   coo  <- coo.check(coo)
   cent <- coo.centpos(coo)
@@ -792,32 +848,31 @@ coo.centsize <- function(coo){
 #' For every point of the shape, returns the (centroid-points) distance.
 #' @export coo.centdist
 #' @aliases coo.centdist
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a matrix of (x,y) coordinates.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 64)
+#' b <- coo.sample(bot[1], 64)
 #' d <- coo.centdist(b)
 #' barplot(d)
 coo.centdist <- function(coo){
   coo <- coo.check(coo)
   return(apply(coo, 1, function(x) ed(coo.centpos(coo), x)))}
 
-
 # b. length(s) -----------------------------------------------------------------
 
-#' Calculates the (cumulative) distance between every points of a shape.
+#' Calculates the chordal distance along a shape.
 #'
 #' Calculates the euclidean distance between every points of a shape for coo.perim.pts.
 #' The cumulative sum for coo.perim.cum
 #' @export coo.perim.pts
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric with every distance for coo.perim.pts.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return \code{numeric} the distance between every point.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 24)
+#' b <- coo.sample(bot[1], 24)
 #' coo.perim.pts(b)
 
 coo.perim.pts <-  function (coo){
@@ -826,16 +881,16 @@ coo.perim.pts <-  function (coo){
   d <- sqrt(apply((coo - coo.slide(coo, n))^2, 1, sum))[-1]
   return(d)}
 
-#' Calculates the cumulative distance between every points of a shape.
+#' Calculates the cumulative chrodal distance a shape.
 #'
 #' Just a wrapper for cumsum(coo.perim.pts). See \link{coo.perim.pts}.
 #' @export coo.perim.cum
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return numeric the cumulated sum for coo.perim.pts.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return \code{numeric} the cumulate sum of chrodal distances
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 24)
+#' b <- coo.sample(bot[1], 24)
 #' coo.perim.cum(b)
 coo.perim.cum <- function(coo){
   coo <- coo.check(coo)
@@ -844,12 +899,12 @@ coo.perim.cum <- function(coo){
 
 #' Calculates the perimeter
 #' @export coo.perim
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the perimeter.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return \code{numeric}, the perimeter.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.perim(bot[4])
+#' coo.perim(bot[1])
 #' hist(sapply(bot$coo, coo.perim), breaks=10)
 coo.perim <- function(coo){
   return(sum(coo.perim.pts(coo)))}
@@ -860,14 +915,14 @@ coo.perim <- function(coo){
 #' the shape provided.
 #' @export coo.calliper
 #' @aliases coo.calliper
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @param arr.ind a boolean, if provided returns a list with the calliper length ($length) 
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param arr.ind a boolean, if provided returns
+#' @return \code{numeric}, the centroid size. If arr.ind=TRUE, a list with the calliper length ($length) 
 #' and the two points ($arr.ind)
-#' @return a numeric, the centroid size.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' b <- bot[4]
+#' b <- bot[1]
 #' coo.calliper(b)
 #' p <- coo.calliper(b, arr.ind=TRUE)
 #' p$length
@@ -898,12 +953,12 @@ coo.calliper <- function(coo, arr.ind=FALSE){
 #' i.e. alignment to the x-axis. The length is defined as
 #' the range along the x-axis; the width as the range on the y-axis.
 #' @export coo.lw
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return two numeric, the length and the width.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return two \code{numeric}, the length and the width.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.lw(bot[4])
+#' coo.lw(bot[1])
 #' 
 coo.lw <- function(coo){
   coo <- coo.check(coo)
@@ -918,12 +973,12 @@ coo.lw <- function(coo){
 #' Calculates the area for any non-crossing polygon.
 #' @export coo.area
 #' @aliases coo.area
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the area.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return \code{numeric}, the area.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.area(bot[4])
+#' coo.area(bot[1])
 #' hist(sapply(bot$coo, coo.area), breaks=10)
 coo.area <- function(coo){
   coo <- coo.check(coo)
@@ -942,13 +997,13 @@ coo.area <- function(coo){
 #' Returns the angle (in radians) defined by a triplet of points
 # either signed ("atan2") or not ("acos").
 #' @export coo.theta3
-#' @param m a 3x2 matrix of 3 points (rows) and (x; y) coordinates
+#' @param m a 3x2 \code{matrix} of 3 points (rows) and \eqn{(x; y)} coordinates
 #' @param method one of "atan2" or "acos" for a signed or not angle.
-#' @return numeric the angle in radians.
+#' @return \code{numeric} the angle in radians.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 64)
+#' b <- coo.sample(bot[1], 64)
 #' b <- b[c(1, 14, 24), ]
 #' coo.plot(b)
 #' coo.theta3(b)
@@ -966,13 +1021,13 @@ coo.theta3 <- function(m, method=c("atan2", "acos")[1]){
 #' Returns the angle (in radians) of every edge of a shape,
 # either signed ("atan2") or not ("acos"). A wrapper for \link{coo.theta3}
 #' @export coo.theta.pts
-#' @param coo a matrix or a list of (x,y) coordinates.
+#' @param coo a \code{matrix} or a list of \eqn{(x; y)} coordinates.
 #' @param method one of "atan2" or "acos" for a signed or not angle.
-#' @return numeric the angles in radians for every edge.
+#' @return \code{numeric} the angles in radians for every edge.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 64)
+#' b <- coo.sample(bot[1], 64)
 #' coo.theta.pts(b)
 coo.theta.pts <- function(coo, method=c("atan2", "acos")[1]){
   coo <- coo.check(coo)
@@ -983,23 +1038,23 @@ coo.theta.pts <- function(coo, method=c("atan2", "acos")[1]){
     theta[i] <- coo.theta3(coo[i:(i+2),], method=method)}
   return(theta)}
 
-
 # d. Scalar shape descriptors used in traditional morphometrics -------------------
 
 #' Calculates the rectilinearity of a shape
 #' 
-#' As proposed by by Zunic and Rosin
+#' As proposed by Zunic and Rosin (see below). I do not 100% guarantee the code.
 #' @export  coo.rectilinearity
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the rectilinearity
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the rectilinearity
 #' @note due to the laborious nature of the algorithm (in nb.pts^2), 
 #' and of its implementation, it may be very long to compute.
 #' @keywords coo_descriptors
+#' @source Zunic J, Rosin PL. 2003. Rectilinearity measurements for polygons. 
+#' IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[4], 32)
+#' b <- coo.sample(bot[1], 32)
 #' coo.rectilinearity(b)
-
 coo.rectilinearity <- function(coo) {
   # some check
   coo <- coo.check(coo)
@@ -1049,12 +1104,14 @@ coo.rectilinearity <- function(coo) {
 #' Returns Haralick's circularity which is less sensible
 #' to digitalization noise than coo.circularity. See ...#todo
 #' @export coo.circularity.haralick
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the Haralick's circularity.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the Haralick's circularity.
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.circularity.haralick(bot[4])
+#' coo.circularity.haralick(bot[1])
 coo.circularity.haralick <- function(coo) {
   cd <- coo.centdist(coo)
   return(mean(cd)/sd(cd))}
@@ -1065,13 +1122,12 @@ coo.circularity.haralick <- function(coo) {
 # and shape factor.
 #' @export coo.circularity
 #' @aliases coo.compactness coo.shapefactor
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the circularity.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the circularity.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.circularity(bot[4])
-
+#' coo.circularity(bot[1])
 coo.circularity <- function(coo) {
   return(coo.perim(coo)^2 / coo.area(coo))}
 
@@ -1080,14 +1136,14 @@ coo.circularity <- function(coo) {
 #' Returns the "circularity", also called compactness
 # and shape factor, but normalized to the unit circle.
 #' @export coo.circularity.norm
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the circularity normalized to the unit circle.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the circularity normalized to the unit circle.
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.circularity.norm(bot[4])
-
-# coo.circularity.norm returns the circularity, normalised to the unit circle.
+#' coo.circularity.norm(bot[1])
 coo.circularity.norm <- function(coo) {
   return(coo.perim(coo)^2 / (coo.area(coo)*4*pi))}
 
@@ -1101,12 +1157,14 @@ coo.circularity.norm <- function(coo) {
 #' 
 #' Calculated using a ratio of the eigen values (inertia axis)
 #' @export coo.eccentricity.eigen
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the eccentricity (eigenvalues)
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the eccentricity (eigenvalues)
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.eccentricity.eigen(bot[4])
+#' coo.eccentricity.eigen(bot[1])
 coo.eccentricity.eigen <- function(coo){
   coo <- coo.check(coo)
   eig <- eigen(cov(coo))$values
@@ -1116,12 +1174,14 @@ coo.eccentricity.eigen <- function(coo){
 #' 
 #' Calculated using the width / length ratio. See \link{coo.lw}
 #' @export coo.eccentricity.boundingbox
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the eccentricity (boundingbox)
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the eccentricity (boundingbox)
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.eccentricity.boundingbox(bot[4])
+#' coo.eccentricity.boundingbox(bot[1])
 coo.eccentricity.boundingbox <- function(coo){
   coo <- coo.check(coo)
   lw <- coo.lw(coo)
@@ -1130,12 +1190,14 @@ coo.eccentricity.boundingbox <- function(coo){
 #' Calculates the elongation of a shape
 #' 
 #' @export coo.elongation
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the circularity normalized to the unit circle.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the circularity normalized to the unit circle.
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.elongation(bot[4])
+#' coo.elongation(bot[1])
 coo.elongation <- function(coo){
   coo <- coo.check(coo)
   lw <- coo.lw(coo)
@@ -1144,12 +1206,14 @@ coo.elongation <- function(coo){
 #' Calculates the rectangularity of a shape
 #' 
 #' @export coo.rectangularity
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the rectangularity.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the rectangularity.
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.rectangularity(bot[4])
+#' coo.rectangularity(bot[1])
 coo.rectangularity <- function(coo){
   coo <- coo.check(coo)
   abr <- prod(coo.lw(coo))
@@ -1159,8 +1223,8 @@ coo.rectangularity <- function(coo){
 #' 
 #' Returns the ids of points that define the convex hull of a shape.
 #' @export coo.chull
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a matrix of (x; y) coordinates defining the convex hull of the shape.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return a \code{matrix} of ids defining the convex hull of the shape.
 #' @keywords coo_descriptors
 #' @examples
 #' data(hearts)
@@ -1176,12 +1240,14 @@ coo.chull <- function(coo){
 #' 
 #' Calculated using a ratio of the eigen values (inertia axis)
 #' @export coo.convexity
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the convexity.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the convexity.
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.convexity(bot[4])
+#' coo.convexity(bot[1])
 coo.convexity <- function(coo){
   coo <- coo.check(coo)
   return(coo.perim(coo.chull(coo))/coo.perim(coo))}
@@ -1190,12 +1256,14 @@ coo.convexity <- function(coo){
 #' 
 #' Returns the ids of points that define the convex hull of a shape.
 #' @export coo.solidity
-#' @param coo a matrix or a list of (x,y) coordinates.
-#' @return a numeric, the solidity of a shape.
+#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @return numeric, the solidity of a shape.
+#' @source Rosin PL. 2005. Computing global shape measures.
+#' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
-#' coo.solidity(bot[4])
+#' coo.solidity(bot[1])
 coo.solidity <- function(coo){
   coo <- coo.check(coo)
   return(coo.area(coo)/coo.area(coo.chull(coo)))}

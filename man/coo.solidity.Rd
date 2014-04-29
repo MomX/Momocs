@@ -1,14 +1,18 @@
 \name{coo.solidity}
 \alias{coo.solidity}
 \title{Calculates the solidity of a shape}
+\source{
+Rosin PL. 2005. Computing global shape measures. Handbook
+of Pattern Recognition and Computer Vision. 177-196.
+}
 \usage{
 coo.solidity(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a numeric, the solidity of a shape.
+numeric, the solidity of a shape.
 }
 \description{
 Returns the ids of points that define the convex hull of a
@@ -16,7 +20,7 @@ shape.
 }
 \examples{
 data(bot)
-coo.solidity(bot[4])
+coo.solidity(bot[1])
 }
 \keyword{coo_descriptors}
 

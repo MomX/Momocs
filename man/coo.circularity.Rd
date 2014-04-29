@@ -7,17 +7,17 @@
 coo.circularity(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a numeric, the circularity.
+numeric, the circularity.
 }
 \description{
 Returns the "circularity measure". Also called compactness
 }
 \examples{
 data(bot)
-coo.circularity(bot[4])
+coo.circularity(bot[1])
 }
 \keyword{coo_descriptors}
 

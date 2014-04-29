@@ -5,10 +5,10 @@
 coo.lw(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-two numeric, the length and the width.
+two \code{numeric}, the length and the width.
 }
 \description{
 Returns the length and width of a shape based on their
@@ -18,7 +18,7 @@ range on the y-axis.
 }
 \examples{
 data(bot)
-coo.lw(bot[4])
+coo.lw(bot[1])
 }
 \keyword{coo_descriptors}
 

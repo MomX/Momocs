@@ -1,0 +1,30 @@
+\name{Coo}
+\alias{Coo}
+\title{Coo classes}
+\usage{
+Coo(...)
+}
+\arguments{
+  \item{...}{anything and, anyway, this function will
+  simply returns a message.}
+}
+\description{
+\code{Coo} class is now a super class for \link{Opn} and
+\link{Out} classes, \bold{open outlines} and \bold{closed
+outlines}, respectively.
+}
+\details{
+It allows to recycle most of the methods, since both of
+them apply on \eqn{(x; y)} coordinates. In other words,
+\code{Opn} and \code{Out} classes are all, primarily,
+\code{Coo} objects on which we define generic \emph{and}
+specific methods.
+
+If you used Momocs before version <1.0, or if you have read
+the JSS paper, you are probably looking for \link{Out}.
+
+More, generally, \link{Opn} and \link{Out} for
+documentation on these classes.
+}
+\keyword{Coo}
+

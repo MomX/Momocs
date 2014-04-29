@@ -5,18 +5,19 @@
 coo.center(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Coo object.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 }
 \value{
-a matrix of (x,y) coordinates or an Coo object.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
 Returns a shape centered on the origin.
 }
 \examples{
-coo.center(matrix(1:10, ncol=2))
-coo.center(list(x=1:5, y=6:10))
+data(bot)
+b <- bot[1]
 }
 \keyword{coo_utilities}
 

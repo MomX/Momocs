@@ -1,14 +1,14 @@
 \name{coo.perim.cum}
 \alias{coo.perim.cum}
-\title{Calculates the cumulative distance between every points of a shape.}
+\title{Calculates the cumulative chrodal distance a shape.}
 \usage{
 coo.perim.cum(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-numeric the cumulated sum for coo.perim.pts.
+\code{numeric} the cumulate sum of chrodal distances
 }
 \description{
 Just a wrapper for cumsum(coo.perim.pts). See
@@ -16,7 +16,7 @@ Just a wrapper for cumsum(coo.perim.pts). See
 }
 \examples{
 data(bot)
-b <- coo.sample(bot[4], 24)
+b <- coo.sample(bot[1], 24)
 coo.perim.cum(b)
 }
 \keyword{coo_descriptors}

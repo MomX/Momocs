@@ -1,6 +1,29 @@
 # 0. Coo (Opn/Out/Ldk) domestics -----------------------------------------------
+
+#' Coo classes
+#' 
+#' \code{Coo} class is now a super class for \link{Opn} and \link{Out} classes,
+#' \bold{open outlines} and \bold{closed outlines}, respectively.
+#' 
+#' It allows to recycle most of the methods, since both of them apply on
+#' \eqn{(x; y)} coordinates. In other words, \code{Opn} and \code{Out} classes
+#' are all, primarily, \code{Coo} objects on which we define generic \emph{and} 
+#' specific methods.
+#' 
+#' If you used Momocs before version <1.0, or if you have read the JSS paper,
+#' you are probably looking for \link{Out}.
+#' 
+#' More, generally, \link{Opn} and \link{Out} for documentation on these classes.
+#'
+#'@param ... anything and, anyway, this function will simply returns a message.
+#' @keywords Coo
+#' @export
+Coo <- function(...){
+  cat(" * Coo constructor has been deprecated. See ?Coo")}
+
 # Opn, Out, Ldk classes are all, primarily, Coo objects on whihc we define here
 # some domestic functions.
+
 
 # allows to maintain the tradition str() behaviour
 # actually useless but dont remember why/where
@@ -61,13 +84,29 @@ names.Coe <- function(x){
 
 #' Create subsets of Coo objects
 #' 
-#' todo
+#' Pretty useful in morphometrics. Imagine you have a \link{Out} or a \link{Opn}
+#' object that combines several different \emph{groups}, 
+#' whatever \emph{groups} are : species, views, etc. You may be interested in
+#' doing separated analyses (even if you could combine them later), then this
+#' function will ease the process. See the examples below.
+#' @aliases subset
 #' @S3method  subset Coo
-#' @param x and Coo object
-#' @param subset logical from the fac or indices
-#' @param ... (to preserve consistence with subset generic)
-#' @keywords Coo
+#' @param x a \code{Coo} object, i.e. \link{Out} or \link{Opn}
+#' @param subset logical taken from the $fac slot, or indices. See examples.
+#' @param ... useless here but maintains consistence with the generic subset.
+#' @keywords Opn Coo
 #' @export
+#' @example
+#' data(bot)
+#' bot$fac
+#' beers <- subset(bot, type=="beer")
+#' whisk <- subset(bot, type=="whisky")
+#' # or you may prefere indices
+#' subset(bot, c(1, 13, 34, 37))
+#' # and you can combine them :
+#' data(olea)
+#' olea$fac
+#' subset(olea, domes=="cult" & view=="VL")
 subset.Coo <- function(x, subset, ...){
   Coo <- x
   e <- substitute(subset)

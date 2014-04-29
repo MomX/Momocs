@@ -1,14 +1,14 @@
 \name{coo.perim.pts}
 \alias{coo.perim.pts}
-\title{Calculates the (cumulative) distance between every points of a shape.}
+\title{Calculates the chordal distance along a shape.}
 \usage{
 coo.perim.pts(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a numeric with every distance for coo.perim.pts.
+\code{numeric} the distance between every point.
 }
 \description{
 Calculates the euclidean distance between every points of a
@@ -17,7 +17,7 @@ coo.perim.cum
 }
 \examples{
 data(bot)
-b <- coo.sample(bot[4], 24)
+b <- coo.sample(bot[1], 24)
 coo.perim.pts(b)
 }
 \keyword{coo_descriptors}

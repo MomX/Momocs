@@ -29,8 +29,7 @@ They must be built from a list (or an array) of (x; y)
 coordinates matrices.
 }
 \seealso{
-Other res: \code{\link{Coo}}, \code{\link{Out}};
-\code{\link{coo.trans}}, \code{\link{coo.trans}}
+Other res: \code{\link{Out}}
 }
 \keyword{Opn}
 

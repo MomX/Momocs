@@ -5,11 +5,11 @@
 coo.chull(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a matrix of (x; y) coordinates defining the convex hull of
-the shape.
+a \code{matrix} of ids defining the convex hull of the
+shape.
 }
 \description{
 Returns the ids of points that define the convex hull of a

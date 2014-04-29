@@ -5,8 +5,8 @@
 coo.bookstein(coo, ldk1, ldk2)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Coo object.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 
   \item{ldk1}{the id of the first point of the new
   baseline}
@@ -15,15 +15,24 @@ coo.bookstein(coo, ldk1, ldk2)
   baseline}
 }
 \value{
-a matrix of (x,y) coordinates or an Coo object.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
-Registers a new baseline for the shape, with the ldk1-th
+Registers a new baseline for the shape, with the
+\code{ldk1}-th and \code{ldk2}-th points being set on
+\eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=0)}, respectively.
 }
 \examples{
 data(hearts)
 stack(hearts)
 stack(coo.bookstein(hearts, 2, 4))
+h <- hearts[1]
+coo.plot(h)
+coo.plot(coo.bookstein(h, 20, 57), border="red")
+}
+\seealso{
+\link{coo.baseline}
 }
 \keyword{coo_utilities}
 

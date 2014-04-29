@@ -5,13 +5,15 @@
 coo.rotate(coo, theta = 0)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Coo object.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 
-  \item{theta}{angle in radians}
+  \item{theta}{\code{numeric}the angle (in radians) to
+  rotate shapes.}
 }
 \value{
-a matrix of (x,y) coordinates or an Coo object.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
 Rotates the coordinates by a 'theta' angle (in radians) If
@@ -22,10 +24,14 @@ position.
 }
 \examples{
 data(bot)
+b <- bot[1]
 stack(bot)
 stack(coo.rotate(bot, pi))
-coo.plot(bot[4])
-coo.plot(coo.rotate(bot[4], -pi/2))
+coo.plot(b)
+coo.plot(coo.rotate(b, pi))
+}
+\seealso{
+\link{coo.rotatecenter}
 }
 \keyword{coo_utilities}
 

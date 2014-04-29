@@ -5,10 +5,12 @@
 coo.unclose(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Coo object}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 }
 \value{
-a matrix of (x,y) coordinates or an Coo object.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
 Returns a unclosed shape from (un)closed shapes. See also
@@ -24,6 +26,9 @@ x2
 is.closed(x2)
 x3
 is.closed(x3)
+}
+\seealso{
+\link{coo.close}, \link{is.closed}
 }
 \keyword{coo_utilities}
 

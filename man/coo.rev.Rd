@@ -5,10 +5,11 @@
 coo.rev(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates.}
 }
 \value{
-a matrix of (x,y) coordinates.
+a \code{matrix} of \eqn{(x; y)} coordinates.
 }
 \description{
 Returns the reverse suite of coordinates, i.e. change
@@ -16,7 +17,7 @@ shape's orientation
 }
 \examples{
 data(bot)
-b <- coo.sample(bot[4], 4)
+b <- coo.sample(bot[1], 4)
 b
 coo.rev(b)
 }

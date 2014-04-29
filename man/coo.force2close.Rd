@@ -5,10 +5,12 @@
 coo.force2close(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 }
 \value{
-a matrix of (x,y) coordinates.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
 An exotic function that distribute the distance between the
@@ -18,10 +20,10 @@ methods where reconstructed shapes may not be closed.
 }
 \examples{
 data(bot)
-b <- coo.sample(bot[4], 64)
+b <- coo.sample(bot[1], 64)
 b <- b[1:40,]
 coo.plot(b)
-coo.plot(coo.force2close(b))
+coo.draw(coo.force2close(b), border="red")
 }
 \keyword{coo_utilities}
 

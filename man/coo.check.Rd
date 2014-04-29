@@ -5,15 +5,16 @@
 coo.check(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a list.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates or
+  a list.}
 }
 \value{
-a matrix of (x,y) coordinates.
+a \code{matrix} of \eqn{(x; y)} coordinates.
 }
 \description{
 A simple utility, used internally, mostly in the coo
 functions and methods. Returns a matrix, when passed with
-either a list or a matrix of coordinates.
+either a list or a \code{matrix} of coordinates.
 }
 \examples{
 #coo.check("Not a shape")

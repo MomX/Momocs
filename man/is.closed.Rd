@@ -5,7 +5,8 @@
 is.closed(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Coo object}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 }
 \value{
 a boolean.
@@ -17,6 +18,12 @@ shapes is the same as the first one.
 \examples{
 is.closed(matrix(1:10, ncol=2))
 is.closed(coo.close(matrix(1:10, ncol=2)))
+data(bot)
+is.closed(bot)
+is.closed(coo.close(bot))
+}
+\seealso{
+\link{coo.close}, \link{coo.unclose}
 }
 \keyword{coo_utilities}
 

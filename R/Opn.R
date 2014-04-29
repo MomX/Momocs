@@ -98,7 +98,7 @@ nqual.Opn <-
       n.range <- (min(sapply(Opn$coo, nrow))- 1)
       cat(" * n.range was too high and set to: ", n.range, ".\n")}
     coo <- Opn$coo[[id]]
-    if (smooth.it  != 0) coo <- coo.smooth.curve(coo, smooth.it)
+    if (smooth.it  != 0) coo <- coo.smoothcurve(coo, smooth.it)
     coo <- coo.baseline(coo, ldk1=1, ldk2=nrow(coo), t1=baseline1, t2=baseline2)
     res <- list()
     for (i in seq(along=n.range)) {

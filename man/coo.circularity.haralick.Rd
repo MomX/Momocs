@@ -1,14 +1,18 @@
 \name{coo.circularity.haralick}
 \alias{coo.circularity.haralick}
 \title{Calculates the Haralick's circularity of a shape}
+\source{
+Rosin PL. 2005. Computing global shape measures. Handbook
+of Pattern Recognition and Computer Vision. 177-196.
+}
 \usage{
 coo.circularity.haralick(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a numeric, the Haralick's circularity.
+numeric, the Haralick's circularity.
 }
 \description{
 Returns Haralick's circularity which is less sensible to
@@ -16,7 +20,7 @@ digitalization noise than coo.circularity. See ...#todo
 }
 \examples{
 data(bot)
-coo.circularity.haralick(bot[4])
+coo.circularity.haralick(bot[1])
 }
 \keyword{coo_descriptors}
 

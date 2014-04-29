@@ -2,21 +2,19 @@
 
 #' Builds an Out object
 #'
-#' In Momocs, Out classes objects are lists of \bold{closed} outlines, 
+#' In Momocs, \code{Out} classes objects are lists of \bold{closed} outlines, 
 #' on which generic methods such as plotting methods (e.g. stack()) 
 #' and specific methods (e.g. efourier()) can be applied.
 #' 
 #' They must be built from a list (or an array) of (x; y) coordinates matrices.
 #'  
 #' @export Out
-#' 
 #' @param coo.list a list of (x; y) matrices of coordinates.
 #' @param ldk (optionnal) a list of landmarks on these coordinates 
 #' (provided as the row numbers) for every outline
 #' @param fac (optionnal) a data.frame of factors, 
 #' specifying the grouping structure.
 #' @return a \code{Out} object.
-#' @aliases Coo
 #' @family Out
 #' @keywords Out
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){

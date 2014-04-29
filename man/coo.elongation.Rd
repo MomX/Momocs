@@ -1,21 +1,25 @@
 \name{coo.elongation}
 \alias{coo.elongation}
 \title{Calculates the elongation of a shape}
+\source{
+Rosin PL. 2005. Computing global shape measures. Handbook
+of Pattern Recognition and Computer Vision. 177-196.
+}
 \usage{
 coo.elongation(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a numeric, the circularity normalized to the unit circle.
+numeric, the circularity normalized to the unit circle.
 }
 \description{
 Calculates the elongation of a shape
 }
 \examples{
 data(bot)
-coo.elongation(bot[4])
+coo.elongation(bot[1])
 }
 \keyword{coo_descriptors}
 

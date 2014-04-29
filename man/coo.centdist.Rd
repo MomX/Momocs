@@ -6,10 +6,10 @@ For every point of the shape, returns the (centroid-points) distance.}
 coo.centdist(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a matrix of (x,y) coordinates.
+a \code{matrix} of \eqn{(x; y)} coordinates.
 }
 \description{
 Returns the distance between everypoints and the centroid
@@ -18,7 +18,7 @@ distance.
 }
 \examples{
 data(bot)
-b <- coo.sample(bot[4], 64)
+b <- coo.sample(bot[1], 64)
 d <- coo.centdist(b)
 barplot(d)
 }

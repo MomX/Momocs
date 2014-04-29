@@ -1,18 +1,19 @@
 \name{coo.smooth}
 \alias{coo.smooth}
-\title{Smoothes coordinates}
+\title{Smoothes coordinates (closed outlines)}
 \usage{
 coo.smooth(coo, n)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Coo object.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 
-  \item{n}{an integer to specify the number of smoothing
-  iterations}
+  \item{n}{an (integer) \code{numeric} to specify the
+  number of smoothing iterations}
 }
 \value{
-a matrix of (x,y) coordinates or an Coo object.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
 Smoothes coordinates using a simple moving average. May be
@@ -20,10 +21,14 @@ useful to remove digitization noise.
 }
 \examples{
 data(bot)
+b <- bot[1]
 stack(bot)
 stack(coo.smooth(bot, 10))
-coo.plot(bot[4])
-coo.plot(coo.smooth(bot[4], 30))
+coo.plot(bot[1])
+coo.plot(coo.smooth(bot[1], 30))
+}
+\seealso{
+\link{coo.smoothcurve}
 }
 \keyword{coo_utilities}
 

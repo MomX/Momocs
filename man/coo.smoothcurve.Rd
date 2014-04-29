@@ -1,0 +1,34 @@
+\name{coo.smoothcurve}
+\alias{coo.smoothcurve}
+\title{Smoothes coordinates (open outlines)}
+\usage{
+coo.smoothcurve(coo, n)
+}
+\arguments{
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
+
+  \item{n}{an (integer) \code{numeric} to specify the
+  number of smoothing iterations}
+}
+\value{
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
+}
+\description{
+Smoothes coordinates using a simple moving average but let
+the first and last points unchanged. May be useful to
+remove digitization noise.
+}
+\examples{
+data(olea)
+o <- olea[1]
+coo.plot(o, border="grey50", points=FALSE)
+coo.draw(coo.smooth(o, 24), border="blue", points=FALSE)
+coo.draw(coo.smoothcurve(o, 24), border="red", points=FALSE)
+}
+\seealso{
+\link{coo.smooth}
+}
+\keyword{coo_utilities}
+

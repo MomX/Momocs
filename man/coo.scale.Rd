@@ -5,14 +5,15 @@
 coo.scale(coo, scale)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Coo object.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 
-  \item{scale}{numeric, the scaling factor, by default the
-  centroid size.}
+  \item{scale}{the scaling factor, by default, the centroid
+  size.}
 }
 \value{
-a matrix of (x,y) coordinates or an Coo object.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
 Scales the coordinates by a 'scale' factor. If not
@@ -23,10 +24,11 @@ position.
 }
 \examples{
 data(bot)
+b <- bot[1]
 stack(bot)
 stack(coo.scale(bot))
-coo.plot(bot[4])
-coo.plot(coo.scale(bot[4]))
+coo.plot(b)
+coo.plot(coo.scale(b))
 }
 \keyword{coo_utilities}
 

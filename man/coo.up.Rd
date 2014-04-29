@@ -5,10 +5,11 @@
 coo.up(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates.}
 }
 \value{
-a matrix of (x,y) coordinates.
+a \code{matrix} of \eqn{(x; y)} coordinates.
 }
 \description{
 Useful when shapes are aligned along the x-axis (e.g.
@@ -17,9 +18,9 @@ retain just the upper side.
 }
 \examples{
 data(bot)
-b <- coo.alignxax(bot[4])
+b <- coo.alignxax(bot[1])
 coo.plot(b)
-coo.plot(coo.up(b))
+coo.draw(coo.up(b), border="red")
 }
 \keyword{coo_utilities}
 

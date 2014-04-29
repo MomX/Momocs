@@ -5,17 +5,17 @@
 coo.area(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 }
 \value{
-a numeric, the area.
+\code{numeric}, the area.
 }
 \description{
 Calculates the area for any non-crossing polygon.
 }
 \examples{
 data(bot)
-coo.area(bot[4])
+coo.area(bot[1])
 hist(sapply(bot$coo, coo.area), breaks=10)
 }
 \keyword{coo_descriptors}

@@ -5,11 +5,12 @@
 coo.align(coo)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Coo object.}
+  \item{coo}{either a \code{matrix} of \eqn{(x; y)}
+  coordinates, or a \link{Coo} object.}
 }
 \value{
-a matrix of (x,y) coordinates or an Coo object.
+a \code{matrix} of \eqn{(x; y)} coordinates, or a
+\link{Coo} object.
 }
 \description{
 Aligns the coordinates along their longer axis using
@@ -17,10 +18,14 @@ var-cov matrix and eigen values.
 }
 \examples{
 data(bot)
+b <- bot[1]
 stack(bot)
 stack(coo.align(bot))
-coo.plot(bot[4])
-coo.plot(coo.align(bot[4]))
+coo.plot(b)
+coo.plot(coo.align(b))
+}
+\seealso{
+\link{coo.aligncalliper}, \link{coo.alignxax}
 }
 \keyword{coo_utilities}
 

@@ -5,14 +5,14 @@
 coo.calliper(coo, arr.ind = FALSE)
 }
 \arguments{
-  \item{coo}{a matrix or a list of (x,y) coordinates.}
+  \item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
 
-  \item{arr.ind}{a boolean, if provided returns a list with
-  the calliper length ($length) and the two points
-  ($arr.ind)}
+  \item{arr.ind}{a boolean, if provided returns}
 }
 \value{
-a numeric, the centroid size.
+\code{numeric}, the centroid size. If arr.ind=TRUE, a list
+with the calliper length ($length) and the two points
+($arr.ind)
 }
 \description{
 Also called the Feret's diameter, the longest distance
@@ -20,7 +20,7 @@ between two points of the shape provided.
 }
 \examples{
 data(bot)
-b <- bot[4]
+b <- bot[1]
 coo.calliper(b)
 p <- coo.calliper(b, arr.ind=TRUE)
 p$length
