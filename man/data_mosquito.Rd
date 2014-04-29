@@ -2,7 +2,7 @@
 \name{mosquito}
 \alias{mosquito}
 \title{Data: Outline coordinates of 126 mosquito wings.}
-\format{An Out object with the 126 mosquito wing outlines outlines
+\format{A \link{Out} object with the 126 mosquito wing outlines outlines
 used Rohlf and Archie (1984).}
 \source{
 Rohlf F, Archie J. 1984. A comparison of Fourier methods

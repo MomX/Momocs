@@ -9,7 +9,7 @@ l2m(l)
   components.}
 }
 \value{
-Returns a matrix of \code{(x; y)}coordinates.
+Returns a matrix of \eqn{(x; y)}coordinates.
 }
 \description{
 \code{l2m} converts a \code{list} with x and y components
@@ -22,6 +22,5 @@ l2m(l)
 \seealso{
 \link{m2l}.
 }
-\keyword{Utilities}
-\keyword{coo}
+\keyword{Babel}
 

@@ -2,7 +2,7 @@
 \name{trilo}
 \alias{trilo}
 \title{Data: Outline coordinates of 50 cephalic outlines of trilobite}
-\format{An Out object 64 coordinates of 50 cephalic outlines from different
+\format{A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 ontogenetic stages of trilobite.}
 \source{
 Arranged from:

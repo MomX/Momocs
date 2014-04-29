@@ -5,15 +5,15 @@
 edi(pt1, pt2, r = 0.5)
 }
 \arguments{
-  \item{pt1}{(x; y) coordinates of the first point.}
+  \item{pt1}{\eqn{(x; y)} coordinates of the first point.}
 
-  \item{pt2}{(x; y) coordinates of the second point.}
+  \item{pt2}{\eqn{(x; y)} coordinates of the second point.}
 
   \item{r}{the relative distance from \code{pt1} to
   \code{pt2}.}
 }
 \value{
-Returns the (x; y) interpolated coordinates.
+returns the \eqn{(x; y)} interpolated coordinates.
 }
 \description{
 \code{edi} simply calculates coordinates of a points at the
@@ -27,5 +27,5 @@ edi(c(0,1), c(1,0), r = 0.5)
 \seealso{
 \link{ed}, \link{edm}.
 }
-\keyword{Utilities}
+\keyword{domestic}
 

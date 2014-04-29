@@ -31,5 +31,5 @@ edm(x, x+1)
 \seealso{
 \link{ed}, \link{edm.nearest}, \link{dist}.
 }
-\keyword{Utilities}
+\keyword{domestic}
 

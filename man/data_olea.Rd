@@ -1,8 +1,8 @@
 \docType{data}
 \name{olea}
 \alias{olea}
-\title{Data: Outline coordinates of n olives}
-\format{An Out object with the outline coordinates of olive seeds.}
+\title{Data: Outline coordinates of 210 olive seeds oopen outlines.}
+\format{An \link{Opn} object with the outline coordinates of olive seeds.}
 \source{
 We thank Jean-Frederic Terral and Sarah Ivorra (UMR CBAE,
 Montpellier, France) from allowing us to share the data.
@@ -16,7 +16,8 @@ applied to biological and archaeological material.
 \emph{Journal of Biogeography} \bold{31}: 63-77.
 }
 \description{
-Data: Outline coordinates of n olives
+Data: Outline coordinates of 210 olive seeds oopen
+outlines.
 }
 \keyword{datasets}
 

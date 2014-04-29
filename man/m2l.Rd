@@ -9,10 +9,10 @@ m2l(m)
   coordinates.}
 }
 \value{
-Returns a \code{list} with \code{x; y} components.
+Returns a \code{list} with \eqn{x; y} components.
 }
 \description{
-\code{m2l} converts a matrix of \code{(x; y)}coordinates to
+\code{m2l} converts a matrix of \eqn{(x; y)}coordinates to
 a list with \code{x; y} components.
 }
 \examples{
@@ -24,6 +24,5 @@ m2l(gorf.dat[,,1])
 \seealso{
 \link{l2m}.
 }
-\keyword{Utilities}
-\keyword{coo}
+\keyword{Babel}
 

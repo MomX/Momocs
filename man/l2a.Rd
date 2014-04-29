@@ -26,6 +26,5 @@ A.plot(a)
 \seealso{
 \link{a2l}.
 }
-\keyword{Utilities}
-\keyword{coo}
+\keyword{Babel}
 

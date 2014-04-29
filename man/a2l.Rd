@@ -8,7 +8,7 @@ a2l(a)
   \item{a}{An \code{array} of coordinates.}
 }
 \value{
-A \code{list} with 2-cols matrices of \code{(x; y)}
+A \code{list} with 2-cols matrices of \eqn{(x; y)}
 coordinates.
 }
 \description{
@@ -24,6 +24,5 @@ coordinates.
 \seealso{
 \link{l2a}
 }
-\keyword{Utilities}
-\keyword{coo}
+\keyword{Babel}
 

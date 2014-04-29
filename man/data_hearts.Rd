@@ -2,12 +2,12 @@
 \name{hearts}
 \alias{hearts}
 \title{Data: Outline coordinates of 240 hand-drawn hearts}
-\format{An Out object with the outline coordinates of 240 hand-drawn hearts
+\format{A \link{Out} object with the outline coordinates of 240 hand-drawn hearts
 by 8 different persons, with 4 landmarks.}
 \source{
 We thank the fellows of the Ecology Department of the
 French Institute of Pondicherry that drawn the hearts, that
-then have been smoothed, scaled, centered, and reduced to
+then have been smoothed, scaled, centered, and degraded to
 80 coordinates per outline.
 }
 \description{

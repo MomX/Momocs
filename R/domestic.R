@@ -96,7 +96,7 @@ names.Coe <- function(x){
 #' @param ... useless here but maintains consistence with the generic subset.
 #' @keywords Opn Coo
 #' @export
-#' @example
+#' @examples
 #' data(bot)
 #' bot$fac
 #' beers <- subset(bot, type=="beer")
@@ -148,12 +148,12 @@ ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 #' 
 #' @export edi
 #' @usage edi(pt1, pt2, r = 0.5)
-#' @param pt1 (x; y) coordinates of the first point.
-#' @param pt2 (x; y) coordinates of the second point.
+#' @param pt1 \eqn{(x; y)} coordinates of the first point.
+#' @param pt2 \eqn{(x; y)} coordinates of the second point.
 #' @param r the relative distance from \code{pt1} to \code{pt2}.
-#' @return Returns the (x; y) interpolated coordinates.
+#' @return returns the \eqn{(x; y)} interpolated coordinates.
 #' @seealso \link{ed}, \link{edm}.
-#' @keywords Utilities
+#' @keywords domestic
 #' @examples
 #' edi(c(0,1), c(1,0), r = 0.5)
 edi <- function(pt1, pt2, r=0.5){
@@ -174,7 +174,7 @@ edi <- function(pt1, pt2, r=0.5){
 #' @return Returns a \code{vector} of euclidean distances between pairwise
 #' coordinates in the two matrices.
 #' @seealso \link{ed}, \link{edm.nearest}, \link{dist}.
-#' @keywords Utilities
+#' @keywords domestic
 #' @examples
 #' x <- matrix(1:10, nc=2)
 #' edm(x, x)
@@ -184,7 +184,6 @@ edm            <- function(m1, m2){
 
 #' Calculates the shortest euclidean distance found for every point of one
 #' matrix among those of a second.
-#' 
 #' 
 #' \code{edm.nearest} calculates the shortest euclidean distance found for
 #' every point of one matrix among those of a second. In other words, if
@@ -208,7 +207,7 @@ edm            <- function(m1, m2){
 #' (\code{m2}) row indices of these points. Otherwise returns \code{d} as a
 #' numeric vector of the shortest distances.
 #' @seealso \link{ed}, \link{edm}, \link{dist}.
-#' @keywords Utilities
+#' @keywords domestic
 #' @examples
 #' 
 #' x <- matrix(1:10, nc=2)
@@ -240,7 +239,16 @@ edm.nearest <- function(m1, m2, full=FALSE){
 #' 
 #'
 #' Morphometrics using R
-#' @references Bonhomme et al. JSS
+#' 
+#' @seealso
+#' Momocs' homepage : \url{http://www.vincentbonhomme.fr/Momocs}
+#' 
+#' Momocs' GitHub repo : \url{https://github.com/vbonhomme/Momocs}
+#' 
+#' @references Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R. 
+#' \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
+#' 
+#' Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 #' @import ape
 #' @importFrom jpeg readJPEG
 #' @importFrom sp spsample Polygon
@@ -260,7 +268,7 @@ NULL
 #' @name bot
 #' @rdname data_bot
 #' @keywords datasets
-#' @format An Out object containing the outlines coordinates and a grouping factor
+#' @format A \link{Out} object containing the outlines coordinates and a grouping factor
 #' for 20 beer and 20 whisky bottles
 #' @source  Images have been grabbed on the internet and prepared by the package's
 #' authors. No particular choice has been made on the dimension of the original
@@ -273,7 +281,7 @@ NULL
 #' @name trilo
 #' @rdname data_trilo
 #' @keywords datasets
-#' @format An Out object 64 coordinates of 50 cephalic outlines from different
+#' @format A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 #' ontogenetic stages of trilobite.
 #' @source  Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
 #' The original data included 51 outlines and 5 ontogenetic stages, 
@@ -287,7 +295,7 @@ NULL
 #' @name mosquito
 #' @rdname data_mosquito
 #' @keywords datasets
-#' @format An Out object with the 126 mosquito wing outlines outlines
+#' @format A \link{Out} object with the 126 mosquito wing outlines outlines
 #' used Rohlf and Archie (1984).
 #' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
 #' description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic Biology}: 302-317.
@@ -300,19 +308,19 @@ NULL
 #' @name hearts
 #' @rdname data_hearts
 #' @keywords datasets
-#' @format An Out object with the outline coordinates of 240 hand-drawn hearts
+#' @format A \link{Out} object with the outline coordinates of 240 hand-drawn hearts
 #' by 8 different persons, with 4 landmarks.
 #' @source We thank the fellows of the Ecology Department of the French Institute
-#' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and reduced to 80 coordinates per outline.
+#' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and degraded to 80 coordinates per outline.
 NULL
 
-#' Data: Outline coordinates of n olives
+#' Data: Outline coordinates of 210 olive seeds oopen outlines.
 #' 
 #' @docType data
 #' @name olea
 #' @rdname data_olea
 #' @keywords datasets
-#' @format An Out object with the outline coordinates of olive seeds.
+#' @format An \link{Opn} object with the outline coordinates of olive seeds.
 #' @source We thank Jean-Frederic Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
 #' from allowing us to share the data.
 #' 
