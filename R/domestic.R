@@ -16,14 +16,14 @@ str.Coe <- function(object, ...){
 # Coo can be indexing both to [ ] and [[ ]]
 # and returns the corresponding coordinate(s)
 # We define some getters
+
 #' @export
 "[.Coo" <- function(x, i, ...) {
   if (missing(i))    { return(x$coo[])    }
   if (is.integer(i)) { return(x$coo[i])   }
   if (is.numeric(i)) { return(x$coo[[i]]) }}
-#todo ij coe
+
 #' @export
-#' #todo ij coe
 "[[.Coo" <- function(x, i, ...) {
   if (missing(i))    { return(x$coo[])    }
   if (is.integer(i)) { return(x$coo[i])   }

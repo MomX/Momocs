@@ -5,7 +5,7 @@ mshapes.OutCoe <- function(Coe, fac, nb.pts=120){
   nb.h <-  ncol(OutCoe$coe)/4 #todo
   if (missing(fac)) {
     cat("* no 'fac' provided. Returns meanshape.\n")
-    coe.m <- apply(OutCoe$coe, 2, mean)
+    coe.mshape <- apply(OutCoe$coe, 2, mean)
     xf <- coeff.split(coe.mshape, nb.h, 4)
     return(efourier.i(xf, nb.pts=nb.pts))}
   

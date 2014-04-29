@@ -19,7 +19,6 @@
 #' @return a \code{Out} object.
 #' @family Opn
 #' @keywords Opn
-#' @examples
 Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
   Opn <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Opn$fac)) Opn$fac <- .refactor(Opn$fac)

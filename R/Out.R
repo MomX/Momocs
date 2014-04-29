@@ -19,12 +19,6 @@
 #' @aliases Coo
 #' @family Out
 #' @keywords Out
-#' @examples
-#' 
-#' #coo.list <- list(out1=matrix(1:10, nc=2),
-#' #out2=matrix(1:20, nc=2))
-#' #anOutobject <- Out(coo.list)
-#' #anOutobject
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   Out <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Out$fac)) Out$fac <- .refactor(Out$fac)
@@ -470,7 +464,7 @@ Ptolemy.Out <- function(Out,
   cols <- palette(nb.h)
   coo <- coo.center(Out$coo[[id]])
   #k <- floor(length(coo$x)/4)
-  coo.plot(coo, main=names(Coo)[id])
+  coo.plot(coo, main=names(Out)[id])
   # now we calculate for every harmonic
   coo.ef  <- efourier(coo, nb.h)
   coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
@@ -502,12 +496,5 @@ Ptolemy.Out <- function(Out,
            col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
            title = "Number of harmonics")}}
 
-
-# XXX. Out TODO ----------------------------------------------------------------
-#c OutCoe
-#discri
-#todo Out.check
-# Out.nbh check etc. coderepété sur 10 lines
-# smooth.it -> nb.s ?
 
 

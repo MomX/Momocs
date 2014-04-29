@@ -2,8 +2,8 @@
 \alias{pos.shapes}
 \title{Calculates nice positions on a plan for drawing shapes}
 \usage{
-pos.shapes(xy, pos.shp = c("range", "circle")[1], nb.shp = 12, nr.shp = 6,
-  nc.shp = 5, circle.r.shp)
+pos.shapes(xy, pos.shp = c("range", "circle", "xy")[1], nb.shp = 12,
+  nr.shp = 6, nc.shp = 5, circle.r.shp)
 }
 \arguments{
   \item{xy}{todo}

@@ -1,0 +1,20 @@
+\name{plot.Coo}
+\alias{plot.Coo}
+\title{Plot on Coo (Out/Opn) objects: quick review}
+\usage{
+\method{plot}{Coo}(x, id, ...)
+}
+\arguments{
+  \item{x}{the Coo object}
+
+  \item{id}{the id of the shape to plot, if not provided a
+  random shape is plotted}
+
+  \item{...}{further arguments to be passed to
+  \link{coo.plot}}
+}
+\description{
+Allows to plot shapes from Coo objects todo
+}
+\keyword{Coo}
+

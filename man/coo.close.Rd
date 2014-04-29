@@ -5,10 +5,10 @@
 coo.close(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix of (x,y) coordinates or a Coo object}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 Returns a closed shape from (un)closed shapes. See also

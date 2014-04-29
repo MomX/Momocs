@@ -6,13 +6,13 @@ coo.smooth(coo, n)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 
   \item{n}{an integer to specify the number of smoothing
   iterations}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 Smoothes coordinates using a simple moving average. May be

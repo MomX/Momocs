@@ -863,6 +863,8 @@ polynomials <- function(coo, n, orthogonal=TRUE){
 #' of points along the the baseline range).
 #' @param nb.pts the number of points to predict. By default (and can't be higher)
 #' the number of points in the original shape.
+#' @param baseline1x (x; y) coordinates of the first point of the baseline.
+#' @param baseline2x (x; y) coordinates of the second point of the baseline.
 #' @return a matrix of (x; y) coordinates.
 #' @keywords morphoCore
 polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model),
@@ -877,8 +879,7 @@ polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model),
 # 2.2 Cubic splines -------------------------------------------------------
 # 2.3 Bezier splines -------------------------------------------------------
 #' Calculates Bezier coefficients from a shape
-#' 
-#' todo
+#' #todo
 #' @export bezier
 #' @param coo a matrix or a list of (x; y) coordinates
 #' @param n the degree

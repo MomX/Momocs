@@ -2,7 +2,7 @@
 \alias{coo.plot}
 \title{A simple wrapper for plotting shapes. Widely used in Momocs.}
 \usage{
-coo.plot(coo, xlim, ylim, border = "#333333", col = "#33333322", lwd = 1,
+coo.plot(coo, xlim, ylim, border = "#333333", col = NA, lwd = 1,
   lty = 1, points = FALSE, first.point = TRUE, centroid = TRUE,
   xy.axis = TRUE, pch = 1, cex = 0.5, main, plot.new = TRUE)
 }

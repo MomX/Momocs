@@ -6,7 +6,7 @@ coo.centpos(coo)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 }
 \value{
 a numeric or a matrix of (x,y) coordinates.

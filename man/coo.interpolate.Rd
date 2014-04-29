@@ -6,13 +6,13 @@ coo.interpolate(coo, n)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 
   \item{n}{an integer, the number fo points to
   interpolate.}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 Interpolates n coordinates "among existing points"between"

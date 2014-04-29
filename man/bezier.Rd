@@ -1,6 +1,7 @@
 \name{bezier}
 \alias{bezier}
-\title{Calculates Bezier coefficients from a shape}
+\title{Calculates Bezier coefficients from a shape
+#todo}
 \usage{
 bezier(coo, n)
 }
@@ -13,7 +14,7 @@ bezier(coo, n)
 a list with J and B
 }
 \description{
-todo
+Calculates Bezier coefficients from a shape #todo
 }
 \keyword{morphoCore}
 

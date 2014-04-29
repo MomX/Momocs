@@ -1,13 +1,13 @@
-\name{stack.Out}
-\alias{stack.Out}
-\title{Plot on Out objects: stacks all shapes}
+\name{stack.Coo}
+\alias{stack.Coo}
+\title{Plot on Coo objects: stacks all shapes}
 \usage{
-\method{stack}{Out}(x, cols, borders, points = FALSE, first.point = TRUE,
+\method{stack}{Coo}(x, cols, borders, points = FALSE, first.point = TRUE,
   centroid = TRUE, ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055",
   ldk.cex = 0.5, xy.axis = TRUE, ...)
 }
 \arguments{
-  \item{x}{The \code{Out} object to plot.}
+  \item{x}{The \code{Coo} object to plot.}
 
   \item{cols}{A \code{vector} of colors for drawing the
   outlines. Either a single value or of length exactly
@@ -39,7 +39,7 @@
   \item{...}{further arguments to be passed to coo.plot}
 }
 \description{
-Plots all the outlines from a \code{Out} on the same graph
+Plots all the outlines from a \code{Coo} on the same graph
 with graphical options.
 }
 \examples{
@@ -51,6 +51,6 @@ stack(hearts, ldk=FALSE)
 stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
 }
 \seealso{
-\link{panel.Out}, \link{plot.Out}.
+\link{panel}, \link{plot.Coo}.
 }
 

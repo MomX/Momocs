@@ -55,7 +55,7 @@ configurations and illustrate them using arrows.
 \examples{
 data(bot)
 botF <- eFourier(bot)
-x <- meanShapes(botF, "type", nb.pts=80)
+x <- mshapes(botF, "type", nb.pts=80)
 fr <- x$beer
 to <- x$whisky
 tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)

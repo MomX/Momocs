@@ -3,9 +3,6 @@ Type: Package
 Title: Morphometrics using R
 Version: 1.0
 Date: 2014-04-15
-Authors@R: c(person("Vincent", "Bonhomme", role = c("aut", "cre"), email = "bonhomme.vincent@gmail.com"),
-	     			   person("Julien", "Claude", role = "aut"),
-	      			   person("Sandrine", "Picq", role = "ctb"))
 Author: Vincent Bonhomme, Sandrine Picq, Julien Claude with suggestions and
     contributions from Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus
     Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Asher Wishkerman.

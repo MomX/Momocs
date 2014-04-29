@@ -6,7 +6,7 @@ coo.baseline(coo, ldk1, ldk2, t1, t2)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 
   \item{ldk1}{the id of the first point of the new
   baseline}
@@ -21,7 +21,7 @@ coo.baseline(coo, ldk1, ldk2, t1, t2)
   of the new baseline}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 A non-exact baseline registration on t1 and t2 coordinates,

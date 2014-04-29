@@ -2,7 +2,7 @@
 \alias{pca2shp.efourier}
 \title{Returns shape for a point on a PC plan}
 \usage{
-pca2shp.efourier(pos, rot, mshape, amp = 1, nb.pts = 60, trans = TRUE)
+pca2shp.efourier(pos, rot, mshape, amp.shp = 1, pts.shp = 60)
 }
 \arguments{
   \item{pos}{the position on the plan}
@@ -11,11 +11,10 @@ pca2shp.efourier(pos, rot, mshape, amp = 1, nb.pts = 60, trans = TRUE)
 
   \item{mshape}{the mean shape}
 
-  \item{amp}{the amplification factor}
+  \item{amp.shp}{the amplification factor}
 
-  \item{nb.pts}{the number of point for drawing the shapes}
-
-  \item{trans}{logical}
+  \item{pts.shp}{the number of point for drawing the
+  shapes}
 }
 \description{
 todo

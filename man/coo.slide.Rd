@@ -6,13 +6,13 @@ coo.slide(coo, id1)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 
   \item{id1}{the id of the point that will become the new
   first point.}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 Slides the coordinates so that the id1-th point become the

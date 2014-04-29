@@ -540,24 +540,26 @@ coo.down <- function(coo){
 
 #' Aligns shapes along the x-axis
 #' Align the longest axis of a shape along the x-axis
-#' @export coo.align.xax
 #' @aliases coo.align.xax
+#' @export coo.align.xax
 #' @S3method coo.align.xax default
 #' @S3method coo.align.xax Coo
 #' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
 #' @return a matrix of (x,y) coordinates or an Coo object.
 #' @keywords coo_utilities
 #' @examples
+#' \dontrun{
 #' data(bot)
 #' b <- bot[4]
 #' coo.plot(b)
 #' coo.plot(coo.align.xax(b))
+#' }
 
 coo.align.xax <- function(coo){UseMethod("coo.align.xax")}
 coo.align.xax.default <- function(coo){
   coo <- coo.check(coo)
   coo <- coo.align(coo)
-  return(coo.trans(coo, x=0, y=- coo.centpos(coo)[2]))}
+  return(coo.trans(coo, x=0, y= -coo.centpos(coo)[2]))}
 
 coo.align.xax.Coo <- function(coo){
   Coo <- coo
@@ -567,19 +569,19 @@ coo.align.xax.Coo <- function(coo){
 #' Aligns shapes along their calliper length
 #' And returns them registered on bookstein coordinates.
 #' See \link{coo.bookstein}.
-#' @export coo.align.calliper
 #' @aliases coo.align.calliper
+#' @export coo.align.calliper
 #' @S3method coo.align.calliper default
 #' @S3method coo.align.calliper Coo
 #' @param coo a matrix or a list of (x,y) coordinates or an Coo object.
 #' @return a matrix of (x,y) coordinates or an Coo object.
 #' @keywords coo_utilities
 #' @examples
+#' \dontrun{
 #' data(bot)
 #' b <- bot[4]
 #' coo.plot(b)
 #' coo.plot(coo.align.calliper(b))
-#' \dontrun{ #todo olea
 #' bot.al <- coo.align.calliper(bot)
 #' stack(bot.al)
 #' }

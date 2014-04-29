@@ -6,12 +6,12 @@ coo.rotate(coo, theta = 0)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 
   \item{theta}{angle in radians}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 Rotates the coordinates by a 'theta' angle (in radians) If

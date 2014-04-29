@@ -5,7 +5,7 @@
 is.closed(coo)
 }
 \arguments{
-  \item{coo}{a matrix of (x,y) coordinates or a Out object}
+  \item{coo}{a matrix of (x,y) coordinates or a Coo object}
 }
 \value{
 a boolean.

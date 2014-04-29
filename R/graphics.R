@@ -136,7 +136,7 @@ coo.template   <- function(coo, size=1) {
 #' 
 #' @export coo.list.panel
 #' @usage coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar =
-#' rep(0, 4), cols, borders)
+#' rep(0, 4), cols, borders, poly=TRUE)
 #' @param coo.list A \code{list} of coordinates
 #' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
 #' the panel display. If missing, shapes are arranged in a square.
@@ -479,7 +479,7 @@ plot.Coo <- function(x, id, ...){
 #' @param ldk.cex A \code{cex} fro these landmarks
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param ... further arguments to be passed to coo.plot
-#' @seealso \link{panel.Coo}, \link{plot.Coo}.
+#' @seealso \link{panel}, \link{plot.Coo}.
 #' @examples
 #' data(mosquito)
 #' stack(mosquito, borders="#1A1A1A22", first.point=FALSE)
@@ -517,9 +517,9 @@ stack.Coo <- function(x, cols, borders,
 #' Plots all the outlines from a \code{Coo} side by side
 #'
 #' @export panel
-#' @S3method panel Coo
-#' @aliases panel.Coo
-#' @param Coo The \code{Coo} object to plot.
+#' @S3method panel Out
+#' @S3method panel Opn
+#' @param Coo The \code{Coo (Out/Opn)} object  to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equals to the number of coordinates.
 #' @param borders A \code{vector} of colors for drawing the borders.
@@ -532,7 +532,7 @@ stack.Coo <- function(x, cols, borders,
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)
-panel <- function(Coo, cols, borders, names, cex.names, ...){UseMethod("panel")}
+panel <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
 panel.Out <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
   Out <- Coo
   if (missing(cols)) {
@@ -543,24 +543,29 @@ panel.Out <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
     borders     <- rep("#333333", length(Out))}
   if (length(borders)!=length(Out)) {
     cols     <- rep(borders[1], length(Out))} 
-  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=poly, ...)
+  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=TRUE, ...)
   if (!is.null(names)){
     if (is.logical(names)) {
       text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
     } else {    
       if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
       text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
-panel.Opn <- function(Out, borders, names=NULL, cex.names=0.6, ...){
+panel.Opn <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
+  Opn <- Coo
+  if (missing(cols)) {
+    cols     <- rep(par("bg"), length(Opn))}
+  if (length(cols)!=length(Opn)) {
+    cols     <- rep(cols[1], length(Opn))}
   if (missing(borders)) {
-    borders     <- rep("#333333", length(Out))}
-  if (length(borders)!=length(Out)) {
-    cols     <- rep(borders[1], length(Out))} 
-  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=FALSE, ...)
+    borders     <- rep("#333333", length(Opn))}
+  if (length(borders)!=length(Opn)) {
+    cols     <- rep(borders[1], length(Opn))} 
+  pos <- coo.list.panel(Opn$coo, cols=cols, borders=borders, poly=FALSE, ...)
   if (!is.null(names)){
     if (is.logical(names)) {
-      text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
+      text(pos[,1], pos[,2], labels=names(Opn), cex=cex.names)
     } else {    
-      if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
+      if (length(names)!=length(Opn)) stop("* 'names' and Opn lengths differ.")
       text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
 
 
@@ -809,11 +814,11 @@ degree.contrib.OpnCoe <- function(
   if (method=="orthoPolynomials"){
     # no pts.shp below (to avoid some bugs as long as it works with mod :-s )
     shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                               mshape=mshape, amp=amp.shp, mod=PCA$mod)
+                               mshape=mshape, amp.shp=amp.shp, mod=PCA$mod)
     cd <- FALSE}
   if (method=="rawPolynomials"){
     shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                               mshape=mshape, amp=amp.shp, mod=PCA$mod)
+                               mshape=mshape, amp.shp=amp.shp, mod=PCA$mod)
     cd <- FALSE}
   width   <- (par("usr")[4] - par("usr")[3]) / size.shp
   shp     <- lapply(shp, coo.scale, 1/width)
@@ -877,9 +882,8 @@ pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
 #' @param pos the position on the plan
 #' @param rot the loadings
 #' @param mshape the mean shape
-#' @param amp the amplification factor
-#' @param nb.pts the number of point for drawing the shapes
-#' @param trans logical
+#' @param amp.shp the amplification factor
+#' @param pts.shp the number of point for drawing the shapes
 #' @keywords graphics
 pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
@@ -1189,7 +1193,7 @@ tps2d <- function(grid0, fr, to){
 #' 
 #' data(bot)
 #' botF <- eFourier(bot)
-#' x <- meanShapes(botF, "type", nb.pts=80)
+#' x <- mshapes(botF, "type", nb.pts=80)
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps.grid(fr, to, amp=3, grid.size=40)
@@ -1266,7 +1270,7 @@ tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
 #' 
 #' data(bot)
 #' botF <- eFourier(bot)
-#' x <- meanShapes(botF, "type", nb.pts=80)
+#' x <- mshapes(botF, "type", nb.pts=80)
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)
@@ -1330,7 +1334,7 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' 
 #' data(bot)
 #' botF <- eFourier(bot)
-#' x <- meanShapes(botF, "type", nb.pts=80)
+#' x <- mshapes(botF, "type", nb.pts=80)
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps.iso(fr, to, iso.nb=2000, amp=3)

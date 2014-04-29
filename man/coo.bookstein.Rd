@@ -6,7 +6,7 @@ coo.bookstein(coo, ldk1, ldk2)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 
   \item{ldk1}{the id of the first point of the new
   baseline}
@@ -15,7 +15,7 @@ coo.bookstein(coo, ldk1, ldk2)
   baseline}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 Registers a new baseline for the shape, with the ldk1-th

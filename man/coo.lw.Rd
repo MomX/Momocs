@@ -18,7 +18,7 @@ range on the y-axis.
 }
 \examples{
 data(bot)
-coo.area(bot[4])
+coo.lw(bot[4])
 }
 \keyword{coo_descriptors}
 

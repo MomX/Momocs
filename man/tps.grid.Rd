@@ -47,7 +47,7 @@ between two configurations.
 \examples{
 data(bot)
 botF <- eFourier(bot)
-x <- meanShapes(botF, "type", nb.pts=80)
+x <- mshapes(botF, "type", nb.pts=80)
 fr <- x$beer
 to <- x$whisky
 tps.grid(fr, to, amp=3, grid.size=40)

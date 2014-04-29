@@ -1,11 +1,11 @@
-\name{subset.Out}
-\alias{subset.Out}
-\title{Create subsets of Out objects}
+\name{subset.Coo}
+\alias{subset.Coo}
+\title{Create subsets of Coo objects}
 \usage{
-\method{subset}{Out}(x, subset, ...)
+\method{subset}{Coo}(x, subset, ...)
 }
 \arguments{
-  \item{x}{and Out object}
+  \item{x}{and Coo object}
 
   \item{subset}{logical from the fac or indices}
 
@@ -14,5 +14,5 @@
 \description{
 todo
 }
-\keyword{Out}
+\keyword{Coo}
 

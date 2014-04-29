@@ -3,7 +3,7 @@
 \title{Plots sets of shapes.}
 \usage{
 coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar =
-rep(0, 4), cols, borders)
+rep(0, 4), cols, borders, poly=TRUE)
 }
 \arguments{
   \item{coo.list}{A \code{list} of coordinates}
@@ -24,6 +24,10 @@ rep(0, 4), cols, borders)
 
   \item{borders}{A \code{vector} of colors to draw shape
   borders.}
+
+  \item{poly}{logical whether to use polygon or lines to
+  draw shapes. mainly for use for outlines and open
+  outlines.}
 }
 \value{
 Returns (invisibly) a \code{data.frame} with position of

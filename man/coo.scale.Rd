@@ -6,13 +6,13 @@ coo.scale(coo, scale)
 }
 \arguments{
   \item{coo}{a matrix or a list of (x,y) coordinates or an
-  Out object.}
+  Coo object.}
 
   \item{scale}{numeric, the scaling factor, by default the
   centroid size.}
 }
 \value{
-a matrix of (x,y) coordinates or an Out object.
+a matrix of (x,y) coordinates or an Coo object.
 }
 \description{
 Scales the coordinates by a 'scale' factor. If not

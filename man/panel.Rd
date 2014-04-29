@@ -1,12 +1,11 @@
 \name{panel}
 \alias{panel}
-\alias{panel.Out}
-\title{Plot on Out objects: family picture}
+\title{Plot on Coo objects: family picture}
 \usage{
-panel(Out, cols, borders, names, cex.names, ...)
+panel(Coo, cols, borders, names = NULL, cex.names = 0.6, ...)
 }
 \arguments{
-  \item{Out}{The \code{Out} object to plot.}
+  \item{Coo}{The \code{Coo (Out/Opn)} object to plot.}
 
   \item{cols}{A \code{vector} of colors for drawing the
   outlines. Either a single value or of length exactly
@@ -26,13 +25,13 @@ panel(Out, cols, borders, names, cex.names, ...)
   \link{coo.list.panel}}
 }
 \description{
-Plots all the outlines from a \code{Out} side by side
+Plots all the outlines from a \code{Coo} side by side
 }
 \examples{
 data(mosquito)
 panel(mosquito, names=TRUE, cex.names=0.5)
 }
 \seealso{
-\link{stack.Out}, \link{plot.Out}.
+\link{stack.Coo}, \link{plot.Coo}.
 }
 
