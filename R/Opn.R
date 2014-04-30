@@ -77,10 +77,45 @@ print.Opn <- function(x, ...){
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # 2. Opn calibration -----------------------------------------------------------
-
-nqual <- function(Opn, method){UseMethod("nqual")}
+#' Graphical calibration for Opn objects
+#' 
+#' Calculate and displays reconstructed shapes using a
+#' range of polynomial degrees.
+#' 
+#' 
+#' @export nqual
+#' @aliases nqual
+#' @S3method nqual Opn
+#' @param Oon the \code{Opn} object on which to nqual
+#' @param method any method from \code{c("rawPolynomials", "orthoPolynomials")}
+#' @param id the shape on which to perform nqual
+#' @param n.range vector of polynomial degrees on which to perform nqual
+#' @param smooth.it numeric, number of smoothing iterations
+#' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
+#' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
+#' @param plot.method either \code{"\link{panel}"} or \code{"\link{stack}"}
+#' @param legend logical whether to plot a legend
+#' @param legend.title if TRUE above, its title
+#' @param palette a color \link{palette}
+#' @param shp.border a color for the border of the shape
+#' @keywords Opn
+#' @examples
+#' data(olea)
+#' nqual(olea)
+nqual <- function(Opn,
+                  method=c("rawPolynomials", "orthoPolynomials"),
+                  id, 
+                  n.range = c(2, 3, 4, 6, 8, 10),
+                  smooth.it=0,
+                  baseline1=c(-1, 0), baseline2=c(1, 0),
+                  plot.method=c("panel", "stack")[1],
+                  legend = TRUE,
+                  legend.title = "Degree",
+                  palette = col.india,
+                  shp.border="#1A1A1A"){UseMethod("nqual")}
 nqual.Opn <-
-  function(Opn, method=c("rawPolynomials", "orthoPolynomials"),
+  function(Opn,
+           method=c("rawPolynomials", "orthoPolynomials"),
            id, 
            n.range = c(2, 3, 4, 6, 8, 10),
            smooth.it=0,
@@ -89,8 +124,7 @@ nqual.Opn <-
            legend = TRUE,
            legend.title = "Degree",
            palette = col.india,
-           shp.border="#1A1A1A",
-           ...){
+           shp.border="#1A1A1A"){
     if (missing(id)) id <- sample(length(Opn$coo), 1)
     if (missing(method)) {
       cat(" * Method not provided. orthoPolynomials is used.\n")
@@ -110,7 +144,8 @@ nqual.Opn <-
     coo <- coo.baseline(coo, ldk1=1, ldk2=nrow(coo), t1=baseline1, t2=baseline2)
     res <- list()
     for (i in seq(along=n.range)) {
-      res[[i]] <- polynomials.i(polynomials(coo, n=n.range[i], orthogonal=orthogonal))}
+      res[[i]] <- polynomials.i(
+        polynomials(coo, n=n.range[i], orthogonal=orthogonal))}
     # plotting
     op <- par(mar=c(3, 3, 2, 1))
     on.exit(par(op))
@@ -131,6 +166,9 @@ nqual.Opn <-
         if (legend) {text(x=pos[, 1], y=pos[, 2],
                           as.character(n.range))}
         title(names(Opn)[id], cex=1.3)}}}
+
+#nquant
+#npow
 
 # 3. OpnCoe definition ---------------------------------------------------------
 #' Builds an OpnCoe object
@@ -203,13 +241,12 @@ print.OpnCoe <- function(x, ...){
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # 3. Opn morphometrics ---------------------------------------------------------
-#' Calculates elliptical Fourier transforms on outlines
+#' Calculates raw (natural) polynomials on Opn
 #'
 #' 
 #' @export rawPolynomials
 #' @aliases rawPolynomials
 #' @S3method rawPolynomials Opn
-#' @S3method coo.center Coo
 #' @param Opn an \link{Opn} object
 #' @param degree of the polynomial
 #' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
@@ -217,11 +254,11 @@ print.OpnCoe <- function(x, ...){
 #' @param baseline2 numeric the \eqn{(x; y)} coordinates of the second baseline
 #' by default \eqn{(x= 1; y=0)}
 #' @param nb.pts number of points to sample and on which to calculate polynomials
-#' @return a \code{Coe} object.
+#' @return a \code{OpnCoe} object.
 #' @keywords Opn
 #' @examples
-#' data(bot)
-#' b <- bot[1]
+#' data(olea)
+#' rawPolynomials(olea, 5)
 rawPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("rawPolynomials")}
 
@@ -263,7 +300,24 @@ rawPolynomials.Opn <- function(Opn, degree,
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
                 baseline1=baseline1, baseline2=baseline2, mod=mod))}
 
-# orthoPolynomials
+#' Calculates orthogonal polynomials on Opn
+#'
+#' 
+#' @export orthoPolynomials
+#' @aliases orthoPolynomials
+#' @S3method orthoPolynomials Opn
+#' @param Opn an \link{Opn} object
+#' @param degree of the polynomial
+#' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
+#' by default \eqn{(x= -1; y=0)}
+#' @param baseline2 numeric the \eqn{(x; y)} coordinates of the second baseline
+#' by default \eqn{(x= 1; y=0)}
+#' @param nb.pts number of points to sample and on which to calculate polynomials
+#' @return a \code{OpnCoe} object.
+#' @keywords Opn
+#' @examples
+#' data(olea)
+#' orthoPolynomials(olea, 5)
 orthoPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("orthoPolynomials")}
 
@@ -305,7 +359,8 @@ orthoPolynomials.Opn <- function(Opn, degree,
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
                 baseline1=baseline1, baseline2=baseline2, mod=mod))}
 
-
+#nquant
+#npow / nr2
 #natSplines
 #cubicSplines
 #Bezier
