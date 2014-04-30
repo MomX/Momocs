@@ -1373,7 +1373,7 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' Some color palettes.
 #' @name col.summer
 #' @title col.summer and other color palettes
-#' @usage col.summer(n) 
+#' @usage col.summer(n)
 #' col.summer2(n)
 #' col.solarized(n)
 #' col.gallus(n)
@@ -1399,15 +1399,15 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' barplot(1:10, col=col.sari(10), main="col.sari")
 #' barplot(1:10, col=col.india(10), main="col.india")
 #' barplot(1:10, col=col.bw(10), main="col.bw")
-col.summer      <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
-col.summer2     <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb",
-                                      "#e78ac3", "#a6d854", "#ebad1f"))
-col.solarized   <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", "#d33682",
-                                      "#6c71c4", "#268bd2", "#2aa198", "#859900"))
-col.gallus      <- colorRampPalette(c("#025D8C", "#FFFFFF", "#A80000"))
+col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
+col.summer2 <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb",
+                                  "#e78ac3", "#a6d854", "#ebad1f"))
+col.solarized <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", "#d33682",
+                                    "#6c71c4", "#268bd2", "#2aa198", "#859900"))
+col.gallus <- colorRampPalette(c("#025D8C", "#FFFFFF", "#A80000"))
 col.blackgallus <- colorRampPalette(c("#000080", "#000000", "#EE0000"))
-col.hot         <- colorRampPalette(c("#F2F2F2","#A80000"))
-col.cold        <- colorRampPalette(c("#F2F2F2","#025D8C"))
-col.sari        <- colorRampPalette(c("#551A8B", "#FF7F00"))
-col.india       <- colorRampPalette(c("#FF9933", "#138808"))
-col.bw          <- colorRampPalette(c("#FFFFFF", "#000000"))
+col.hot <- colorRampPalette(c("#F2F2F2","#A80000"))
+col.cold <- colorRampPalette(c("#F2F2F2","#025D8C"))
+col.sari <- colorRampPalette(c("#551A8B", "#FF7F00"))
+col.india <- colorRampPalette(c("#FF9933", "#138808"))
+col.bw <- colorRampPalette(c("#FFFFFF", "#000000"))
