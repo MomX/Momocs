@@ -239,7 +239,6 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
 #' @examples
 #' data(bot)
 #' coo.area(bot[4])
-#todo : work either from a path or from a char vect
 lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE){
   if(length(lf)==1) {
     lf <- list.files(lf, full.names=FALSE)}

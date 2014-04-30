@@ -3,38 +3,29 @@
 
 #' Builds an Opn object
 #'
-#' In Momocs, \code{Opn} classes objects are lists of \bold{open} outlines,
+#' In Momocs, \code{Opn} classes objects are wrapping around 
+#' lists of \bold{open} outlines, along with other informations,
 #' on which generic methods such as plotting methods (e.g. \link{stack}) 
 #' and specific methods (e.g. \link{rawPolynomials} can be applied.
+#'  \code{Opn} objects are primarily \code{\link{Coo}} objects.
 #' 
-#' \code{Opn} objects are primarily \link{\code{Coo}} objects.
-#' 
-#' \code{Opn} objects are lists, that consist of the following slots:
-#' \describe{
-#'  \item{$coo}{the coordinates}
-#'  \item{$ldk}{landmarks}
-#'  \item{$fac}{some classifiers}
-#'  }
-#'  
-#' @param coo a list of matrices of \eqn{(x; y)} coordinates.
-#' @param ldk (optionnal) a list of landmarks on these coordinates. Not yet used
-#' for Opn objects but might be in a near future. See \link{Coo} methods.
-#'  (provided as the row numbers) for every outline
+#' @param coo.list \code{list} of matrices of \eqn{(x; y)} coordinates
+#' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @param fac (optionnal) a \code{data.frame} of factors, 
-#' specifying the grouping structure.
-#' @return an \code{Out} object.
+#' specifying the grouping structure
+#' @return an \code{Out} object
 #' @details These methods can be applied on \code{Opn} objects:
 #' \enumerate{
-#' \item Handling: subset, all the coo.xxx family;
-#' \item Graphics: plot, stack, panel;
-#' \item Morpho: rawPolynomials, orthoPolynomials.
+#' \item Handling: \code{subset, coo.} family;
+#' \item Calibration : \code{nqual, nquant, npow};
+#' \item Graphics: \code{plot, stack, panel};
+#' \item Morpho: \code{rawPolynomials, orthoPolynomials}.
 #' }
 #'
-#' @family Opn
+#' @seealso \link{Coo}, \link{Out}
 #' @keywords Opn
 #' @export Opn
 #' @aliases Opn
-#' 
 Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
   Opn <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Opn$fac)) Opn$fac <- .refactor(Opn$fac)
@@ -85,8 +76,9 @@ print.Opn <- function(x, ...){
                                        length(lev.i)-10, "more")
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
-# 2. Opn calibration ---------------------------------------------------------
-nqual <- function(Opn, ...){UseMethod("nqual")}
+# 2. Opn calibration -----------------------------------------------------------
+
+nqual <- function(Opn, method){UseMethod("nqual")}
 nqual.Opn <-
   function(Opn, method=c("rawPolynomials", "orthoPolynomials"),
            id, 
@@ -140,9 +132,36 @@ nqual.Opn <-
                           as.character(n.range))}
         title(names(Opn)[id], cex=1.3)}}}
 
-# 3. OpnCoe definition -------------------------------------------------------
+# 3. OpnCoe definition ---------------------------------------------------------
+#' Builds an OpnCoe object
+#'
+#' In Momocs, \code{OpnCoe} classes objects are wrapping around
+#' lists of morphometric coefficients, along with other informations,
+#' on which generic methods such as plotting methods (e.g. \link{boxplot}) 
+#' and specific methods can be applied.
+#'  \code{OpnCoe} objects are primarily \code{\link{Coe}} objects.
+#' 
+#' @param coe \code{matrix} of morphometric coefficients
+#' @param fac (optionnal) a \code{data.frame} of factors, 
+#' specifying the grouping structure
+#' @param method used to obtain these coefficients
+#' @param baseline1 \eqn{(x; y)} coordinates of the first baseline point
+#' @param baseline2 \eqn{(x; y)} coordinates of the second baseline point
+#' @param mod an R \link{lm} object, used to reconstruct shapes
+#' @return an \code{OpnCoe} object
+#' @details These methods can be applied on \code{Opn} objects:
+#' \enumerate{
+#' \item Graphics: \code{hist, boxplot};
+#' \item Multivariate analyses: \code{pca, etc.}.
+#' }
+#'
+#' @seealso \link{Coe}, \link{OutCoe}
+#' @keywords OpnCoe
+#' @export OpnCoe
+#' @aliases OpnCoe
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
-                   method=character(), baseline1=numeric(), baseline2=numeric(), mod=list()){
+                   method=character(),
+                   baseline1=numeric(), baseline2=numeric(), mod=list()){
   if (missing(method)) stop("a method must be provided to OpnCoe")
   OpnCoe <- list(coe=coe, fac=fac, method=method,
                  baseline1=baseline1, baseline2=baseline2, mod=mod)

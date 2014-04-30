@@ -1384,7 +1384,7 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' col.india(n)
 #' col.bw(n)
 #' @export col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
-#' @aliases col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
+#' @aliases palette col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
 #' @param n the number of colors to generate from the color palette
 #' @return color codes (hexadecimal format)
 #' @keywords graphics

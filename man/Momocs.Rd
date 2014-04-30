@@ -17,10 +17,12 @@ Springer-Verlag, New-York.
 }
 \seealso{
 Momocs' homepage :
-\url{http://www.vincentbonhomme.fr/Momocs}
+\url{http://www.vincentbonhomme.fr/Momocs} with tutorials
+and hotline.
 
 Momocs' GitHub repo :
-\url{https://github.com/vbonhomme/Momocs}
+\url{https://github.com/vbonhomme/Momocs} to contribute,
+among other things.
 }
 \keyword{Abtract}
 

@@ -2,21 +2,28 @@
 
 #' Builds an Out object
 #'
-#' In Momocs, \code{Out} classes objects are lists of \bold{closed} outlines, 
-#' on which generic methods such as plotting methods (e.g. stack()) 
-#' and specific methods (e.g. efourier()) can be applied.
+#' In Momocs, \code{Out} classes objects are lists of \bold{closed} outlines,
+#' on which generic methods such as plotting methods (e.g. \link{stack}) 
+#' and specific methods (e.g. \link{eFourier} can be applied.
+#'  \code{Out} objects are primarily \code{\link{Coo}} objects.
 #' 
-#' They must be built from a list (or an array) of (x; y) coordinates matrices.
-#'  
-#' @export Out
-#' @param coo.list a list of (x; y) matrices of coordinates.
-#' @param ldk (optionnal) a list of landmarks on these coordinates 
-#' (provided as the row numbers) for every outline
-#' @param fac (optionnal) a data.frame of factors, 
-#' specifying the grouping structure.
-#' @return a \code{Out} object.
-#' @family Out
+#' @param coo.list \code{list} of matrices of \eqn{(x; y)} coordinates
+#' @param ldk (optionnal) \code{list} of landmarks as row number indices
+#' @param fac (optionnal) a \code{data.frame} of factors, 
+#' specifying the grouping structure
+#' @return an \code{Out} object
+#' @details These methods can be applied on \code{Out} objects:
+#' \enumerate{
+#' \item Handling: \code{subset, coo.} family;
+#' \item Graphics: \code{plot, stack, panel};
+#' \item Calibration : \code{hqual, hquant, hpow};
+#' \item Morpho: \code{eFourier, tFourier, tFourier, Ptolemy}.
+#' }
+#'
+#' @seealso \link{Coo}, \link{Opn}
 #' @keywords Out
+#' @export Out
+#' @aliases Out
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   Out <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Out$fac)) Out$fac <- .refactor(Out$fac)
@@ -77,7 +84,46 @@ print.Out <- function(x, ...){
 
 
 # 2. Out calibration -----------------------------------------------------------
-hqual <- function(Out, ...){UseMethod("hqual")}
+#' Graphical calibration for Out objects
+#' 
+#' Calculate and displays reconstructed shapes using a
+#' range of harmonic number.
+#' 
+#' 
+#' @export hqual
+#' @aliases hqual
+#' @S3method hqual Out
+#' @param Out the \code{Out} object on which to hqual
+#' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
+#' @param id the shape on which to perform hqual
+#' @param harm.range vector of harmonics on which to perform hqual
+#' @param smooth.it numeric, number of smoothing iterations
+#' @param scale logical whether to scale the shape
+#' @param center logical whether to center the shape
+#' @param align logical whether to align th shape
+#' @param plot.method either \code{"\link{panel}"} or \code{"\link{stack}"}
+#' @param legend logical whether to plot a legend
+#' @param legend.title if TRUE above, its title
+#' @param palette a color \link{palette}
+#' @param shp.col a color for the shape (\code{NA} by default)
+#' @param shp.border a color for the border of the shape
+#' @param ... additional parameters to fed \link{coo.plot}
+#' @keywords Out
+#' @examples
+#' data(bot)
+#' hqual(bot)
+hqual <- function(Out, method=c("efourier", "rfourier", "tfourier"),
+                  id, 
+                  harm.range = c(1, 2, 4, 8, 16, 32),
+                  smooth.it=0,
+                  scale=TRUE, center=TRUE, align=TRUE,
+                  plot.method=c("panel", "stack")[1],
+                  legend = TRUE,
+                  legend.title = "Nb of harmonics",
+                  palette = col.india,
+                  shp.col=NA,
+                  shp.border="#1A1A1A", ...){UseMethod("hqual")}
+
 hqual.Out <-
   function(Out, method=c("efourier", "rfourier", "tfourier"),
            id, 
@@ -136,13 +182,54 @@ hqual.Out <-
                    title(names(Out)[id], cex=1.3)
                  }}}
 
-hquant <- function(Coo, ...){UseMethod("hquant")}
+#' Quantitative calibration, through deviations, for Out objects
+#' 
+#' Calculate deviations from original and reconstructed shapes using a
+#' range of harmonic number.
+#' 
+#' 
+#' @export hquant
+#' @aliases hquant
+#' @S3method hquant Out
+#' @param Coo the \code{Out} object on which to hquant
+#' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
+#' @param id the shape on which to perform hquant
+#' @param harm.range vector of harmonics on which to perform hquant
+#' @param smooth.it numeric, number of smoothing iterations
+#' @param norm.centsize logical whether to normalize deviation by the centroid size
+#' @param dist.method a method such as \link{edm.nearest} to calculate deviations
+#' @param dist.nbpts numeric the number of points to use for deviations calculations
+#' @param plot logical whether to plot the results
+#' @param dev.plot logical whether to plot deviations
+#' @param title a title for the plot
+#' @param legend logical whether to plot a legend
+#' @param legend.title if TRUE above, its title
+#' @param palette a color \link{palette}
+#' @param lineat.y vector of numeric for drawing horizontal lines
+#' @keywords Out
+#' @examples
+#' data(bot)
+#' hqual(bot)
+hquant <- function(Coo, method = c("efourier", "rfourier", "tfourier"),
+                   id        = 1,
+                   harm.range = seq(4, 20, 4),
+                   smooth.it = 0,
+                   norm.centsize = TRUE,
+                   dist.method = edm.nearest,
+                   dist.nbpts = 120,
+                   plot = TRUE,
+                   dev.plot=TRUE,
+                   title = "Deviations along the outline",
+                   legend = TRUE,
+                   legend.title = "Nb of harmonics",
+                   palette = col.summer,
+                   lineat.y=c(0.5, 0.1, 0.01)){UseMethod("hquant")}
 hquant.Out <- 
   function(Coo,
            method = c("efourier", "rfourier", "tfourier"),
            id        = 1,
-           smooth.it = 0,
            harm.range = seq(4, 20, 4),
+           smooth.it = 0,
            norm.centsize = TRUE,
            dist.method = edm.nearest,
            dist.nbpts = 120,
@@ -152,7 +239,7 @@ hquant.Out <-
            legend = TRUE,
            legend.title = "Nb of harmonics",
            palette = col.summer,
-           lineat.y=c(0.5, 0.1, 0.01), ...){
+           lineat.y=c(0.5, 0.1, 0.01)){
     if (missing(method)) {
       cat("  * Method not provided. efourier is used.\n")
       method   <- efourier
@@ -231,46 +318,111 @@ hquant.Out <-
       box() }
     return(list(res=res, m=m, d=d))}
 
-#hpow
-hpow <- function(Out, ...){UseMethod("hpow")}
-hpow.Out <- function(Out, method="efourier", id=1:length(Out),
-                     nb.h=16, drop=1, smooth.it=0, plot=TRUE,
-                     title="Fourier coefficients power spectrum",
-                     lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1, ...){
-              probs <- c(1, 0.5, 0)
-              # for one signle outline
-              if (missing(method)) {
-                cat(" * Method not provided. efourier is used.\n")
-                method   <- efourier
-              } else {
-                p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-                if (is.na(p)) { warning("Unvalid method. efourier is used.")
-                } else {
-                  method   <- switch(p, efourier,   rfourier,   tfourier)}}
-              res <- matrix(nrow=length(id), ncol=(nb.h-drop))
-              x <- (drop+1) : nb.h
-              for (i in seq(along=id)) {
-                xf  <- method(Out$coo[[id[i]]], nb.h = nb.h, smooth.it = smooth.it)
-                pow <- harm.pow(xf)[x]
-                res[i, ] <-  (cumsum(pow)/sum(pow))}
-              res <- apply(res, 2, quantile, probs=probs)
-              rownames(res) <- c("Max", "Med", "Min")
-              colnames(res) <- paste("h", x, sep="")
-              if (plot){
-                plot(NA, xlim = range(x), ylim = c(min(res), 1), las=1, yaxs="i", 
-                     xlab = "Harmonic rank", ylab = "Cumulative harmonic power",
-                     main=title, sub=paste0("(", length(id), " outlines included)"), axes=FALSE)
-                axis(1, at=x) ; axis(2)
-                abline(h=lineat.y, lty=2, col="grey90")
-                segments(x,    res[1, ], x,    res[3, ], lwd=0.5)
-                segments(x-bw, res[1, ], x+bw, res[1, ], lwd=0.5)
-                segments(x-bw, res[3, ], x+bw, res[3, ], lwd=0.5)
-                lines(x, res[2, ], type="o", pch=20, cex=0.6) 
-                box()
-              }
-              return(res)}
+#' Quantitative calibration, through harmonic power, for Out objects
+#' 
+#' Estimates the number of harmonics required for the three Fourier methods
+#' implemented so far in Momocs: elliptical Fourier analysis 
+#' (see \link{efourier}), radii variation analysis (see \link{tfourier}) 
+#' and tangent angle analysis (see \link{tfourier}). 
+#' It returns and can plot cumulated harmonic power whether dropping 
+#' the first harmonic or not. 
+#' 
+#' 
+#' @export hpow
+#' @aliases hpow
+#' @S3method hpow Out
+#' @param Out the \code{Out} object on which to hpow
+#' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
+#' @param id the shape on which to perform hpow. All by default
+#' @param nb.h numeric the maximum number of harmonic
+#' @param drop numeric the number of harmonics to drop for the cumulative sum
+#' @param smooth.it numeric, number of smoothing iterations
+#' @param plot logical whether to plot the result or simply return the matrix
+#' @param title a title for the plot
+#' @param lineat.y vector of numeric for drawing horizontal lines
+#' @param bw width of horizontal segments drawn for each harmonic.
+#' @return a matrix containing cumulated harmonic power for each harmonic. 
+#' @details 
+#' The power of a given harmonic \eqn{n} is calculated as follows for 
+#' elliptical Fourier analysis and the n-th harmonic:
+#' \deqn{HarmonicPower_n \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
+#' and as follows for radii variation and tangent angle:
+#' \deqn{
+#' HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}
+#' }
+#' @keywords Out
+#' @examples
+#' data(bot)
+#' hpow(bot)
+
+hpow <- 
+  function(Out, method="efourier", id=1:length(Out),
+           nb.h=16, drop=1, smooth.it=0, plot=TRUE,
+           title="Fourier coefficients power spectrum",
+           lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1){UseMethod("hpow")}
+hpow.Out <- 
+  function(Out, method="efourier", id=1:length(Out),
+           nb.h=16, drop=1, smooth.it=0, plot=TRUE,
+           title="Fourier coefficients power spectrum",
+           lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1){
+    probs <- c(1, 0.5, 0)
+    # for one signle outline
+    if (missing(method)) {
+      cat(" * Method not provided. efourier is used.\n")
+      method   <- efourier
+    } else {
+      p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
+      if (is.na(p)) { warning("Unvalid method. efourier is used.")
+      } else {
+        method   <- switch(p, efourier,   rfourier,   tfourier)}}
+    res <- matrix(nrow=length(id), ncol=(nb.h-drop))
+    x <- (drop+1) : nb.h
+    for (i in seq(along=id)) {
+      xf  <- method(Out$coo[[id[i]]], nb.h = nb.h, smooth.it = smooth.it)
+      pow <- harm.pow(xf)[x]
+      res[i, ] <-  (cumsum(pow)/sum(pow))}
+    res <- apply(res, 2, quantile, probs=probs)
+    rownames(res) <- c("Max", "Med", "Min")
+    colnames(res) <- paste("h", x, sep="")
+    if (plot){
+      plot(NA, xlim = range(x), ylim = c(min(res), 1), las=1, yaxs="i", 
+           xlab = "Harmonic rank", ylab = "Cumulative harmonic power",
+           main=title,sub=paste0("(", length(id), " outlines included)"), axes=FALSE)
+      axis(1, at=x) ; axis(2)
+      abline(h=lineat.y, lty=2, col="grey90")
+      segments(x,    res[1, ], x,    res[3, ], lwd=0.5)
+      segments(x-bw, res[1, ], x+bw, res[1, ], lwd=0.5)
+      segments(x-bw, res[3, ], x+bw, res[3, ], lwd=0.5)
+      lines(x, res[2, ], type="o", pch=20, cex=0.6) 
+      box()
+    }
+    return(res)}
 
 # 3. OutCoe definition -------------------------------------------------------
+#' Builds an OutCoe object
+#'
+#' In Momocs, \code{OutCoe} classes objects are wrapping around
+#' lists of morphometric coefficients, along with other informations,
+#' on which generic methods such as plotting methods (e.g. \link{boxplot}) 
+#' and specific methods can be applied.
+#'  \code{OutCoe} objects are primarily \code{\link{Coe}} objects.
+#' 
+#' @param coe \code{matrix} of harmonic coefficients
+#' @param fac (optionnal) a \code{data.frame} of factors, 
+#' specifying the grouping structure
+#' @param method used to obtain these coefficients
+#' @param norm the normalisation used to obtain these coefficients
+#' @return an \code{OutCoe} object
+#' @details These methods can be applied on \code{Out} objects:
+#' \enumerate{
+#' \item Graphics: \code{hist, boxplot};
+#' \item Multivariate analyses: \code{pca, etc.}.
+#' }
+#'
+#' @seealso \link{Coe}, \link{OpnCoe}
+#' @keywords OutCoe
+#' @export OutCoe
+#' @aliases OutCoe
 OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to OpnCoe")
   OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
@@ -320,8 +472,9 @@ print.OutCoe <- function(x, ...){
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
-#' @param norm whether to normalize the matrix of coefficients. See Details.
+#' @param norm whether to normalize the coefficients using \link{efourier.norm}
 #' @param start logical whether to consider the first point as homologous
+#' @seealso \link{efourier}, \link{efourier.norm}
 #' @examples
 #' data(bot)
 #' eFourier(bot, 12)
@@ -365,7 +518,8 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
-#' @param norm whether to normalize the matrix of coefficients. See Details.
+#' @param norm whether to normalize the matrix of coefficients.
+#' @seealso \link{rfourier}
 #' @examples
 #' data(bot)
 #' rFourier(bot, 12)
@@ -399,6 +553,7 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
 #' @param norm whether to normalize the matrix of coefficients. See Details.
+#' @seealso \link{tfourier}
 #' @examples
 #' data(bot)
 #' tFourier(bot, 12)
@@ -493,6 +648,3 @@ Ptolemy.Out <- function(Out,
     legend("topright", legend = as.character(1:nb.h), bty="o",
            col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
            title = "Number of harmonics")}}
-
-
-

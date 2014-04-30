@@ -1,6 +1,6 @@
 \name{Coo}
 \alias{Coo}
-\title{Coo classes}
+\title{Coo class}
 \usage{
 Coo(...)
 }
@@ -9,7 +9,7 @@ Coo(...)
   simply returns a message.}
 }
 \description{
-\code{Coo} class is now a super class for \link{Opn} and
+\code{Coo} class is a super class for \link{Opn} and
 \link{Out} classes, \bold{open outlines} and \bold{closed
 outlines}, respectively.
 }
@@ -23,7 +23,7 @@ specific methods.
 If you used Momocs before version <1.0, or if you have read
 the JSS paper, you are probably looking for \link{Out}.
 
-More, generally, \link{Opn} and \link{Out} for
+More, generally, see \link{Opn} and \link{Out} for
 documentation on these classes.
 }
 \keyword{Coo}

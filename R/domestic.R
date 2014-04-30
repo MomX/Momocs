@@ -1,8 +1,8 @@
 # 0. Coo (Opn/Out/Ldk) domestics -----------------------------------------------
 
-#' Coo classes
+#' Coo class
 #' 
-#' \code{Coo} class is now a super class for \link{Opn} and \link{Out} classes,
+#' \code{Coo} class is a super class for \link{Opn} and \link{Out} classes,
 #' \bold{open outlines} and \bold{closed outlines}, respectively.
 #' 
 #' It allows to recycle most of the methods, since both of them apply on
@@ -13,7 +13,7 @@
 #' If you used Momocs before version <1.0, or if you have read the JSS paper,
 #' you are probably looking for \link{Out}.
 #' 
-#' More, generally, \link{Opn} and \link{Out} for documentation on these classes.
+#' More, generally, see \link{Opn} and \link{Out} for documentation on these classes.
 #'
 #'@param ... anything and, anyway, this function will simply returns a message.
 #' @keywords Coo
@@ -21,9 +21,24 @@
 Coo <- function(...){
   cat(" * Coo constructor has been deprecated. See ?Coo")}
 
-# Opn, Out, Ldk classes are all, primarily, Coo objects on whihc we define here
-# some domestic functions.
-
+#' Coe class
+#' 
+#' \code{Coe} class is a super class for \link{OutCoe} and \link{OpnCoe} classes,
+#' matrices of coefficients, along with other informations, obtained with
+#' morphometrics methods on \code{\link{Out}} and \code{\link{Opn}} objects.
+#' 
+#' It allows to recycle most of the methods, since both of them apply on
+#' matrices of coefficients. In other words, \code{OutCoe} and \code{OpnCoe}
+#' classes are all, primarily, \code{Coe} objects on which we define generic 
+#' \emph{and} specific methods.
+#' 
+#' More, generally, see \link{Opn} and \link{Out} for documentation on these classes.
+#'
+#' @param ... anything and, anyway, this function will simply returns a message.
+#' @keywords Coe
+#' @export
+Coe <- function(...){
+  cat(" * Coe constructor does not exist alone. See ?Coe")}
 
 # allows to maintain the tradition str() behaviour
 # actually useless but dont remember why/where
@@ -241,14 +256,17 @@ edm.nearest <- function(m1, m2, full=FALSE){
 #' Morphometrics using R
 #' 
 #' @seealso
-#' Momocs' homepage : \url{http://www.vincentbonhomme.fr/Momocs}
+#' Momocs' homepage : \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
+#' and hotline.
 #' 
-#' Momocs' GitHub repo : \url{https://github.com/vbonhomme/Momocs}
+#' Momocs' GitHub repo : \url{https://github.com/vbonhomme/Momocs} to contribute,
+#' among other things.
 #' 
 #' @references Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R. 
 #' \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
 #' 
 #' Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
+#' 
 #' @import ape
 #' @importFrom jpeg readJPEG
 #' @importFrom sp spsample Polygon

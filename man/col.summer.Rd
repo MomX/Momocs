@@ -9,6 +9,7 @@
 \alias{col.solarized}
 \alias{col.summer}
 \alias{col.summer2}
+\alias{palette}
 \title{col.summer and other color palettes}
 \usage{
 col.summer(n)

@@ -1,0 +1,58 @@
+\name{hquant}
+\alias{hquant}
+\title{Quantitative calibration, through deviations, for Out objects}
+\usage{
+hquant(Coo, method = c("efourier", "rfourier", "tfourier"), id = 1,
+  harm.range = seq(4, 20, 4), smooth.it = 0, norm.centsize = TRUE,
+  dist.method = edm.nearest, dist.nbpts = 120, plot = TRUE,
+  dev.plot = TRUE, title = "Deviations along the outline", legend = TRUE,
+  legend.title = "Nb of harmonics", palette = col.summer,
+  lineat.y = c(0.5, 0.1, 0.01))
+}
+\arguments{
+  \item{Coo}{the \code{Out} object on which to hquant}
+
+  \item{method}{any method from \code{c("efourier",
+  "rfourier", "tfourier")}}
+
+  \item{id}{the shape on which to perform hquant}
+
+  \item{harm.range}{vector of harmonics on which to perform
+  hquant}
+
+  \item{smooth.it}{numeric, number of smoothing iterations}
+
+  \item{norm.centsize}{logical whether to normalize
+  deviation by the centroid size}
+
+  \item{dist.method}{a method such as \link{edm.nearest} to
+  calculate deviations}
+
+  \item{dist.nbpts}{numeric the number of points to use for
+  deviations calculations}
+
+  \item{plot}{logical whether to plot the results}
+
+  \item{dev.plot}{logical whether to plot deviations}
+
+  \item{title}{a title for the plot}
+
+  \item{legend}{logical whether to plot a legend}
+
+  \item{legend.title}{if TRUE above, its title}
+
+  \item{palette}{a color \link{palette}}
+
+  \item{lineat.y}{vector of numeric for drawing horizontal
+  lines}
+}
+\description{
+Calculate deviations from original and reconstructed shapes
+using a range of harmonic number.
+}
+\examples{
+data(bot)
+hqual(bot)
+}
+\keyword{Out}
+
