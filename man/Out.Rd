@@ -29,7 +29,7 @@ They must be built from a list (or an array) of (x; y)
 coordinates matrices.
 }
 \seealso{
-Other res: \code{\link{Opn}}
+Other res: \code{\link{Opn}}, \code{\link{Opn}}
 }
 \keyword{Out}
 

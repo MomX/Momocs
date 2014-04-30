@@ -3,22 +3,38 @@
 
 #' Builds an Opn object
 #'
-#' In Momocs, Opn classes objects are lists of \bold{open} outlines,
-#' on which generic methods such as plotting methods (e.g. stack()) 
-#' and specific methods (e.g. polynomials()) can be applied.
+#' In Momocs, \code{Opn} classes objects are lists of \bold{open} outlines,
+#' on which generic methods such as plotting methods (e.g. \link{stack}) 
+#' and specific methods (e.g. \link{rawPolynomials} can be applied.
 #' 
-#' They must be built from a list (or an array) of (x; y) coordinates matrices.
+#' \code{Opn} objects are primarily \link{\code{Coo}} objects.
+#' 
+#' \code{Opn} objects are lists, that consist of the following slots:
+#' \describe{
+#'  \item{$coo}{the coordinates}
+#'  \item{$ldk}{landmarks}
+#'  \item{$fac}{some classifiers}
+#'  }
 #'  
-#' @export Opn
-#' 
-#' @param coo.list a list of (x; y) matrices of coordinates.
-#' @param ldk (optionnal) a list of landmarks on these coordinates
+#' @param coo a list of matrices of \eqn{(x; y)} coordinates.
+#' @param ldk (optionnal) a list of landmarks on these coordinates. Not yet used
+#' for Opn objects but might be in a near future. See \link{Coo} methods.
 #'  (provided as the row numbers) for every outline
-#' @param fac (optionnal) a data.frame of factors, 
+#' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure.
-#' @return a \code{Out} object.
+#' @return an \code{Out} object.
+#' @details These methods can be applied on \code{Opn} objects:
+#' \enumerate{
+#' \item Handling: subset, all the coo.xxx family;
+#' \item Graphics: plot, stack, panel;
+#' \item Morpho: rawPolynomials, orthoPolynomials.
+#' }
+#'
 #' @family Opn
 #' @keywords Opn
+#' @export Opn
+#' @aliases Opn
+#' 
 Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
   Opn <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Opn$fac)) Opn$fac <- .refactor(Opn$fac)
@@ -168,7 +184,26 @@ print.OpnCoe <- function(x, ...){
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
 
 # 3. Opn morphometrics ---------------------------------------------------------
-rawPolynomials <- function(Opn, degree, baseline1, baseline2){
+#' Calculates elliptical Fourier transforms on outlines
+#'
+#' 
+#' @export rawPolynomials
+#' @aliases rawPolynomials
+#' @S3method rawPolynomials Opn
+#' @S3method coo.center Coo
+#' @param Opn an \link{Opn} object
+#' @param degree of the polynomial
+#' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
+#' by default \eqn{(x= -1; y=0)}
+#' @param baseline2 numeric the \eqn{(x; y)} coordinates of the second baseline
+#' by default \eqn{(x= 1; y=0)}
+#' @param nb.pts number of points to sample and on which to calculate polynomials
+#' @return a \code{Coe} object.
+#' @keywords Opn
+#' @examples
+#' data(bot)
+#' b <- bot[1]
+rawPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("rawPolynomials")}
 
 rawPolynomials.Opn <- function(Opn, degree,
