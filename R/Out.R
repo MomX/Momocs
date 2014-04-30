@@ -112,17 +112,19 @@ print.Out <- function(x, ...){
 #' @examples
 #' data(bot)
 #' hqual(bot)
-hqual <- function(Out, method=c("efourier", "rfourier", "tfourier"),
-                  id, 
-                  harm.range = c(1, 2, 4, 8, 16, 32),
-                  smooth.it=0,
-                  scale=TRUE, center=TRUE, align=TRUE,
-                  plot.method=c("panel", "stack")[1],
-                  legend = TRUE,
-                  legend.title = "Nb of harmonics",
-                  palette = col.india,
-                  shp.col=NA,
-                  shp.border="#1A1A1A", ...){UseMethod("hqual")}
+hqual <- 
+  function(Out,
+           method=c("efourier", "rfourier", "tfourier"),
+           id, 
+           harm.range = c(1, 2, 4, 8, 16, 32),
+           smooth.it=0,
+           scale=TRUE, center=TRUE, align=TRUE,
+           plot.method=c("panel", "stack")[1],
+           legend = TRUE,
+           legend.title = "Nb of harmonics",
+           palette = col.india,
+           shp.col=NA,
+           shp.border="#1A1A1A", ...){UseMethod("hqual")}
 
 hqual.Out <-
   function(Out, method=c("efourier", "rfourier", "tfourier"),
@@ -138,49 +140,49 @@ hqual.Out <-
            shp.border="#1A1A1A",
            ...){
     if (missing(id)) id <- sample(length(Out$coo), 1)
-              if (missing(method)) {
-                cat(" * Method not provided. efourier is used.\n")
-                method   <- efourier
-                method.i <- efourier.i 
-              } else {
-                p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-                if (is.na(p)) { warning(" * Unvalid method. efourier is used.\n")
-                } else {
-                  method   <- switch(p, efourier,   rfourier,   tfourier)
-                  method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)}}
-
-              # check for too ambitious harm.range
-              if (max(harm.range) > (min(sapply(Out$coo, nrow))/2 + 1)) {
-                harm.range <- floor(seq(1, q/2 - 1, length=6))
-                cat(" * harm.range was too high and set to: ", harm.range, ".\n")}
-              coo <- Out$coo[[id]]
-              if (scale)  coo <- coo.scale(coo)
-              if (center) coo <- coo.center(coo)
-              if (align)  coo <- coo.align(coo)
-              res <- list()
-              for (i in seq(along=harm.range)) {
-                res[[i]] <- method.i(method(coo, nb.h=max(harm.range), smooth.it=smooth.it), nb.h=harm.range[i])}
-              # plotting
-              op <- par(mar=c(3, 3, 2, 1))
-              on.exit(par(op))
-              cols <- paste0(palette(length(harm.range)), "EE")
-              if (plot.method=="stack") {
-                coo <- coo.smooth(coo, smooth.it)
-                 coo.plot(coo, border=shp.border, col=shp.col,
-                          lwd=2, points=FALSE, main=names(Out)[id], ...)
-                 for (i in seq(along=harm.range)) {lines(res[[i]], col=cols[i], lwd=1)}
-                 if (legend) {
-                   legend("topright", legend = as.character(harm.range), bty="n",
-                          col = cols, lty = 1, lwd=1, cex=0.7,
-                          title = legend.title)}
-               } else {
-                 if (plot.method=="panel") {
-                   #par(oma=c(1, 1, 3, 0))
-                   pos <- coo.list.panel(res, cols=cols)
-                   if (legend) {text(x=pos[, 1], y=pos[, 2],
-                                     as.character(harm.range))}
-                   title(names(Out)[id], cex=1.3)
-                 }}}
+    if (missing(method)) {
+      cat(" * Method not provided. efourier is used.\n")
+      method   <- efourier
+      method.i <- efourier.i 
+    } else {
+      p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
+      if (is.na(p)) { warning(" * Unvalid method. efourier is used.\n")
+      } else {
+        method   <- switch(p, efourier,   rfourier,   tfourier)
+        method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)}}
+    
+    # check for too ambitious harm.range
+    if (max(harm.range) > (min(sapply(Out$coo, nrow))/2 + 1)) {
+      harm.range <- floor(seq(1, q/2 - 1, length=6))
+      cat(" * harm.range was too high and set to: ", harm.range, ".\n")}
+    coo <- Out$coo[[id]]
+    if (scale)  coo <- coo.scale(coo)
+    if (center) coo <- coo.center(coo)
+    if (align)  coo <- coo.align(coo)
+    res <- list()
+    for (i in seq(along=harm.range)) {
+      res[[i]] <- method.i(method(coo, nb.h=max(harm.range), smooth.it=smooth.it), nb.h=harm.range[i])}
+    # plotting
+    op <- par(mar=c(3, 3, 2, 1))
+    on.exit(par(op))
+    cols <- paste0(palette(length(harm.range)), "EE")
+    if (plot.method=="stack") {
+      coo <- coo.smooth(coo, smooth.it)
+      coo.plot(coo, border=shp.border, col=shp.col,
+               lwd=2, points=FALSE, main=names(Out)[id], ...)
+      for (i in seq(along=harm.range)) {lines(res[[i]], col=cols[i], lwd=1)}
+      if (legend) {
+        legend("topright", legend = as.character(harm.range), bty="n",
+               col = cols, lty = 1, lwd=1, cex=0.7,
+               title = legend.title)}
+    } else {
+      if (plot.method=="panel") {
+        #par(oma=c(1, 1, 3, 0))
+        pos <- coo.list.panel(res, cols=cols)
+        if (legend) {text(x=pos[, 1], y=pos[, 2],
+                          as.character(harm.range))}
+        title(names(Out)[id], cex=1.3)
+      }}}
 
 #' Quantitative calibration, through deviations, for Out objects
 #' 
@@ -210,20 +212,22 @@ hqual.Out <-
 #' @examples
 #' data(bot)
 #' hqual(bot)
-hquant <- function(Coo, method = c("efourier", "rfourier", "tfourier"),
-                   id        = 1,
-                   harm.range = seq(4, 20, 4),
-                   smooth.it = 0,
-                   norm.centsize = TRUE,
-                   dist.method = edm.nearest,
-                   dist.nbpts = 120,
-                   plot = TRUE,
-                   dev.plot=TRUE,
-                   title = "Deviations along the outline",
-                   legend = TRUE,
-                   legend.title = "Nb of harmonics",
-                   palette = col.summer,
-                   lineat.y=c(0.5, 0.1, 0.01)){UseMethod("hquant")}
+hquant <- 
+  function(Coo,
+           method = c("efourier", "rfourier", "tfourier"),
+           id        = 1,
+           harm.range = seq(4, 20, 4),
+           smooth.it = 0,
+           norm.centsize = TRUE,
+           dist.method = edm.nearest,
+           dist.nbpts = 120,
+           plot = TRUE,
+           dev.plot=TRUE,
+           title = "Deviations along the outline",
+           legend = TRUE,
+           legend.title = "Nb of harmonics",
+           palette = col.summer,
+           lineat.y=c(0.5, 0.1, 0.01)){UseMethod("hquant")}
 hquant.Out <- 
   function(Coo,
            method = c("efourier", "rfourier", "tfourier"),
@@ -604,12 +608,12 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
 #' Ptolemy(hearts, 1)
 Ptolemy <- function(Out, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
 Ptolemy.Out <- function(Out,
-                     id=1,
-                     t=seq(0, 2*pi, length=7)[-1],
-                     nb.h=3,
-                     nb.pts=360,
-                     palette=col.sari,
-                     legend=FALSE) {
+                        id=1,
+                        t=seq(0, 2*pi, length=7)[-1],
+                        nb.h=3,
+                        nb.pts=360,
+                        palette=col.sari,
+                        legend=FALSE) {
   # we prepare and deduce
   op <- par(no.readonly = TRUE)
   on.exit(par(op))

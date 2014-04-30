@@ -12,8 +12,8 @@ eFourier(Out, nb.h, smooth.it, norm, start)
   \item{smooth.it}{the number of smoothing iterations to
   perform}
 
-  \item{norm}{whether to normalize the matrix of
-  coefficients. See Details.}
+  \item{norm}{whether to normalize the coefficients using
+  \link{efourier.norm}}
 
   \item{start}{logical whether to consider the first point
   as homologous}
@@ -24,5 +24,8 @@ A wrapper for \link{efourier} to be applied on Out objects.
 \examples{
 data(bot)
 eFourier(bot, 12)
+}
+\seealso{
+\link{efourier}, \link{efourier.norm}
 }
 

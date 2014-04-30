@@ -22,4 +22,7 @@ A wrapper for \link{tfourier} to be applied on Out objects.
 data(bot)
 tFourier(bot, 12)
 }
+\seealso{
+\link{tfourier}
+}
 

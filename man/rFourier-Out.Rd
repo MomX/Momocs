@@ -13,7 +13,7 @@ rFourier(Out, nb.h, smooth.it, norm)
   perform}
 
   \item{norm}{whether to normalize the matrix of
-  coefficients. See Details.}
+  coefficients.}
 }
 \description{
 A wrapper for \link{rfourier} to be applied on Out objects.
@@ -21,5 +21,8 @@ A wrapper for \link{rfourier} to be applied on Out objects.
 \examples{
 data(bot)
 rFourier(bot, 12)
+}
+\seealso{
+\link{rfourier}
 }
 
