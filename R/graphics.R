@@ -1370,9 +1370,9 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 
 # 0. Color palettes ------------------------------------------------------------
 
-#' Some color palettes.
+#' Colors, colors, colors.
 #' @name col.summer
-#' @title col.summer and other color palettes
+#' @title Some color palettes.
 #' @usage col.summer(n)
 #' col.summer2(n)
 #' col.solarized(n)
@@ -1384,7 +1384,7 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' col.india(n)
 #' col.bw(n)
 #' @export col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
-#' @aliases palette col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
+#' @aliases col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
 #' @param n the number of colors to generate from the color palette
 #' @return color codes (hexadecimal format)
 #' @keywords graphics

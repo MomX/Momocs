@@ -9,8 +9,7 @@
 \alias{col.solarized}
 \alias{col.summer}
 \alias{col.summer2}
-\alias{palette}
-\title{col.summer and other color palettes}
+\title{Some color palettes.}
 \usage{
 col.summer(n)
 col.summer2(n)
@@ -31,7 +30,7 @@ col.bw(n)
 color codes (hexadecimal format)
 }
 \description{
-Some color palettes.
+Colors, colors, colors.
 }
 \examples{
 barplot(1:10, col=col.summer(10), main="col.summer")
