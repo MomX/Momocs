@@ -86,7 +86,7 @@ print.Opn <- function(x, ...){
 #' @export nqual
 #' @aliases nqual
 #' @S3method nqual Opn
-#' @param Oon the \code{Opn} object on which to nqual
+#' @param Opn the \code{Opn} object on which to nqual
 #' @param method any method from \code{c("rawPolynomials", "orthoPolynomials")}
 #' @param id the shape on which to perform nqual
 #' @param n.range vector of polynomial degrees on which to perform nqual

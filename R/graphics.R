@@ -429,8 +429,6 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   colnames(ell) <- c("x", "y")
   return(ell)}
 
-
-
 # 3. Coo / Out / Opn plotters --------------------------------------------------
 #' Plot on Coo (Out/Opn) objects: quick review
 #' 
@@ -509,8 +507,7 @@ stack.Coo <- function(x, cols, borders,
     coo.draw(Coo$coo[[i]], col=cols[i], border=borders[i],
              points=points, first.point=TRUE, centroid=centroid)
     if (ldk & length(Coo$ldk)!=0) {
-      points(Coo$coo[[i]][Coo$ldk[[i]], ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
-}
+      points(Coo$coo[[i]][Coo$ldk[[i]], ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}}
 
 #' Plot on Coo objects: family picture
 #' 
@@ -825,9 +822,7 @@ degree.contrib.OpnCoe <- function(
   if (cd) {
     garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, points=FALSE)
   } else {
-    garbage <- lapply(shp, lines, col=border.shp)}
-}
-
+    garbage <- lapply(shp, lines, col=border.shp)}}
 
 #' Calculates nice positions on a plan for drawing shapes
 #' 

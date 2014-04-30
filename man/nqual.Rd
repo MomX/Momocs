@@ -9,7 +9,7 @@ nqual(Opn, method = c("rawPolynomials", "orthoPolynomials"), id,
   shp.border = "#1A1A1A")
 }
 \arguments{
-  \item{Oon}{the \code{Opn} object on which to nqual}
+  \item{Opn}{the \code{Opn} object on which to nqual}
 
   \item{method}{any method from \code{c("rawPolynomials",
   "orthoPolynomials")}}
