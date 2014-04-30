@@ -1,8 +1,8 @@
-\name{rawPolynomials}
-\alias{rawPolynomials}
-\title{Calculates raw (natural) polynomials on Opn}
+\name{orthoPolynomials}
+\alias{orthoPolynomials}
+\title{Calculates orthogonal polynomials on Opn}
 \usage{
-rawPolynomials(Opn, degree, baseline1, baseline2, nb.pts)
+orthoPolynomials(Opn, degree, baseline1, baseline2, nb.pts)
 }
 \arguments{
   \item{Opn}{an \link{Opn} object}
@@ -22,11 +22,11 @@ rawPolynomials(Opn, degree, baseline1, baseline2, nb.pts)
 a \code{OpnCoe} object.
 }
 \description{
-Calculates raw (natural) polynomials on Opn
+Calculates orthogonal polynomials on Opn
 }
 \examples{
 data(olea)
-rawPolynomials(olea, 5)
+orthoPolynomials(olea, 5)
 }
 \keyword{Opn}
 
