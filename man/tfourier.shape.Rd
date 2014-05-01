@@ -2,7 +2,8 @@
 \alias{tfourier.shape}
 \title{Calculates and draw "tfourier" shapes.}
 \usage{
-tfourier.shape(an, bn, ao = 0, nb.h, nb.pts=80, alpha=2, plot=TRUE)
+tfourier.shape(an, bn, ao = 0, nb.h, nb.pts = 80, alpha = 2,
+  plot = TRUE)
 }
 \arguments{
   \item{an}{\code{numeric}. The \eqn{a_n} Fourier

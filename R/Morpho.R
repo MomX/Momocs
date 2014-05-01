@@ -60,7 +60,6 @@
 #' reconstruction obtained from \eqn{N} harmonics is the best possible fit in a
 #' least-squares sense.
 #' @export 
-#' @usage efourier(coo, nb.h, smooth.it = 0, verbose = TRUE)
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to use
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -138,7 +137,6 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' See \link{efourier} for the mathematical background.
 #' 
 #' @export efourier.i
-#' @usage efourier.i(ef, nb.h, nb.pts = 120)
 #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
 #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
 #' @param nb.h \code{integer}. The number of harmonics to use. If not
@@ -198,7 +196,6 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' versions.
 #' 
 #' @export efourier.norm
-#' @usage efourier.norm(ef, start = FALSE)
 #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
 #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
 #' @param start \code{logical}. Whether to conserve the position of the first
@@ -279,7 +276,6 @@ efourier.norm <- function(ef, start = FALSE) {
 #' background.
 #' 
 #' @export efourier.shape
-#' @usage efourier.shape(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE)
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -329,8 +325,7 @@ efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE){
 #'  Calculates dilated and eroded shapes based on elliptical
 #' Fourier decomposition \emph{i.e.} taking into account the shape as a whole.
 #' Lists created by \code{efourier} objects can be passed to \code{ef.amplify}
-#' @export ef.amplify
-#' @usage ef.amplify(ef, amp=rep(0.5, 4)) 
+#' @export ef.amplify 
 #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
 #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
 #' @param amp A vector of \code{numeric}. If \code{amp} is of length 4, the
@@ -369,7 +364,6 @@ ef.amplify <- function(ef, amp=rep(0.5, 4)){
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 #' individual shape, are then used for multivariate analyses.
 #' @export rfourier
-#' @usage rfourier(coo, nb.h, smooth.it = 0, norm = FALSE, verbose=TRUE)
 #' @param coo A \code{list} or \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -435,7 +429,6 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' 
 #' See \link{efourier} for the mathematical background.
 #' 
-#' @usage rfourier.i(rf, nb.h, nb.pts=300)
 #' @param rf A \code{list} with \code{ao}, \code{an} and \code{bn} components,
 #' typically as returned by \code{rfourier}.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
@@ -497,7 +490,6 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
 #' background.
 #' 
 #' @export rfourier.shape
-#' @usage rfourier.shape(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE)
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -523,8 +515,9 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
 #' rfourier.shape(nb.h=12) # better
 #' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
 #' 
+#' # Butterflies of the vignette' cover
 #' panel(Out(a2l(replicate(100,
-#' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE))))) # Butterflies
+#' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   if (missing(nb.h) &  missing(an)) nb.h <- 1
   if (missing(nb.h) & !missing(an)) nb.h <- length(an)
@@ -533,7 +526,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   rf  <- list(an=an, bn=bn, ao=0)
   shp <- rfourier.i(rf, nb.h=nb.h, nb.pts=nb.pts)      
   if (plot) coo.plot(shp)
-  return(cbind(shp$x, shp$y))}
+  return(shp)}
 # 1.3 Tangent angle ============================================================
 #' Calculates tangent angle Fourier analysis.
 #' 
@@ -553,7 +546,6 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
 #' a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
 #' 
 #' @export tfourier
-#' @usage tfourier(coo, nb.h, smooth.it=0, norm = FALSE, verbose = TRUE)
 #' @param coo A list or matrix of coordinates
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -632,8 +624,6 @@ tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' See \link{tfourier} for the mathematical background.
 #' 
 #' @export tfourier.i
-#' @usage tfourier.i(tf, nb.h, nb.pts = 300, force2close = FALSE, rescale
-#' =TRUE, perim = 2 * pi, thetao = 0)
 #' @param tf a list with ao, an and bn components, typically as returned by
 #' tfourier
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
@@ -711,7 +701,6 @@ tfourier.i<-function(tf, nb.h, nb.pts=120,
 #' background.
 #'
 #' @export tfourier.shape
-#' @usage tfourier.shape(an, bn, ao = 0, nb.h, nb.pts=80, alpha=2, plot=TRUE)
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -754,8 +743,6 @@ tfourier.shape <- function(an, bn, ao=0, nb.h, nb.pts=80, alpha=2, plot=TRUE){
 #' Given a list with \code{an, bn (and eventually cn and dn)}, returns the
 #' harmonic power.
 #' 
-#' 
-#' @usage harm.pow(xf)
 #' @param xf A list with an, bn (and cn, dn) components, typically from a
 #' e/r/tfourier passed on coo.
 #' @return Returns a \code{vector} of harmonic power
@@ -799,7 +786,6 @@ harm.pow <- function(xf){
 #' be of interest elwewhere.
 #' 
 #' @export coeff.sel
-#' @usage coeff.sel(retain = 8, drop = 0, nb.h = 32, cph = 4)
 #' @param retain \code{numeric}. The number of harmonics to retain.
 #' @param drop \code{numeric}. The number of harmonics to drop
 #' @param nb.h \code{numeric}. The maximum harmonic rank.
@@ -826,7 +812,6 @@ coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
 #' function is used internally but might be of interest elwewhere.
 #' 
 #' @export coeff.split
-#' @usage coeff.split(cs, nb.h = 8, cph = 4)
 #' @param cs A \code{vector} of harmonic coefficients.
 #' @param nb.h \code{numeric}. The maximum harmonic rank.
 #' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and

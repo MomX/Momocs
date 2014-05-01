@@ -19,7 +19,7 @@ pos.shapes(xy, pos.shp = c("range", "circle", "xy")[1], nb.shp = 12,
   \item{circle.r.shp}{if circle, its radius}
 }
 \description{
-todo
+Calculates nice positions on a plan for drawing shapes
 }
 \keyword{graphics}
 

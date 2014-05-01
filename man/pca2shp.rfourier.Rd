@@ -1,8 +1,8 @@
-\name{pca2shp.efourier}
-\alias{pca2shp.efourier}
-\title{Calculates shapes from PC plane: efourier}
+\name{pca2shp.rfourier}
+\alias{pca2shp.rfourier}
+\title{Calculates shapes from PC plane: rfourier}
 \usage{
-pca2shp.efourier(pos, rot, mshape, amp.shp = 1, pts.shp = 60)
+pca2shp.rfourier(pos, rot, mshape, amp.shp = 1, pts.shp = 60)
 }
 \arguments{
   \item{pos}{the position on two PC axis}
@@ -17,6 +17,6 @@ pca2shp.efourier(pos, rot, mshape, amp.shp = 1, pts.shp = 60)
   \item{pts.shp}{number of points to reconstruct the shape}
 }
 \description{
-Calculates shapes from PC plane: efourier
+Calculates shapes from PC plane: rfourier
 }
 

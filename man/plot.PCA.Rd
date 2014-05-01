@@ -1,0 +1,102 @@
+\name{plot.PCA}
+\alias{plot.PCA}
+\title{Plots Principal Component Analysis}
+\usage{
+\method{plot}{PCA}(x, fac, xax = 1, yax = 2, col = "black", pch = 20,
+  cex = 0.5, palette = col.summer2, center.origin = FALSE, zoom = 1,
+  grid = TRUE, nb.grids = 3, morphospace = TRUE, pos.shp = "full",
+  amp.shp = 1, size.shp = 20, pts.shp = 60, border.shp = "#00000055",
+  col.shp = "#00000011", stars = FALSE, ellipses = TRUE, conf = 0.5,
+  chull = TRUE, chull.lty = 3, labels = TRUE, axisnames = TRUE,
+  axisvar = TRUE, eigen = TRUE, rug = TRUE, title = substitute(x), ...)
+}
+\arguments{
+  \item{x}{an object of class "PCA", typically obtained
+  with \link{pca}}
+
+  \item{fac}{factor, or a name or the column id from the
+  $fac slot}
+
+  \item{xax}{the first PC axis}
+
+  \item{yax}{the second PC axis}
+
+  \item{col}{a color for the points (either global, for
+  every level of the fac or for every individual, see
+  examples)}
+
+  \item{pch}{a pch for the points (either global, for every
+  level of the fac or for every individual, see examples)}
+
+  \item{cex}{the size of the points}
+
+  \item{palette}{a \link{palette}}
+
+  \item{center.origin}{logical whether to center the plot
+  onto the origin}
+
+  \item{zoom}{to keep your distances}
+
+  \item{grid}{logical whether to draw a grid}
+
+  \item{nb.grids}{and how many of them}
+
+  \item{morphospace}{logical whether to add the
+  morphological space}
+
+  \item{pos.shp}{either "full", "range", "circle", "xy" or
+  a data.frame for \link{pos.shapes}}
+
+  \item{amp.shp}{amplification factor for shape
+  deformation}
+
+  \item{size.shp}{the size of the shapes}
+
+  \item{pts.shp}{the number of points fro drawing shapes}
+
+  \item{border.shp}{the border color of the shapes}
+
+  \item{col.shp}{the color of the shapes}
+
+  \item{stars}{logical whether to draw "stars"}
+
+  \item{ellipses}{logical whether to draw confidence
+  ellipses}
+
+  \item{conf}{the level of confidence}
+
+  \item{chull}{logical whether to draw a convex hull}
+
+  \item{chull.lty}{if yes, its linetype}
+
+  \item{labels}{logical whether to add labels for groups}
+
+  \item{axisnames}{logical whether to add PC names}
+
+  \item{axisvar}{logical whether to draw the variance they
+  explain}
+
+  \item{eigen}{logical whether to draw a plot of the eigen
+  values}
+
+  \item{rug}{logical whether to add rug to margins}
+
+  \item{title}{character a name for the plot}
+
+  \item{...}{useless here, just to fit the generic plot}
+}
+\description{
+The Momocs' PCA plotter with many graphical options and
+morphospaces.
+}
+\details{
+Widely inspired by the philosophy behind graphical
+functions of the ade4 R package.
+}
+\examples{
+data(bot)
+bot.f <- eFourier(bot, 24)
+bot.p <- pca(bot.f)
+plot(bot.p, 1)
+}
+

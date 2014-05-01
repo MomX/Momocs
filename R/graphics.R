@@ -433,7 +433,6 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
 #' Plot on Coo (Out/Opn) objects: quick review
 #' 
 #' Allows to plot shapes from Coo objects
-#' todo
 #' @method plot Coo
 #' @export plot.Coo
 #' @param x the Coo object
@@ -828,7 +827,6 @@ degree.contrib.OpnCoe <- function(
 
 #' Calculates nice positions on a plan for drawing shapes
 #' 
-#' todo
 #' @export pos.shapes
 #' @param xy todo
 #' @param pos.shp the way shape should be positionned
@@ -871,17 +869,14 @@ pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
   # if a non-valid method is passed
   return(xy)}
 
-
-#' Returns shape for a point on a PC plan
+#' Calculates shapes from PC plane: efourier
 #' 
-#' todo
-#' @export pca2shp.efourier
-#' @param pos the position on the plan
-#' @param rot the loadings
-#' @param mshape the mean shape
-#' @param amp.shp the amplification factor
-#' @param pts.shp the number of point for drawing the shapes
-#' @keywords graphics
+#' @param pos the position on two PC axis
+#' @param rot the corresponding loadings
+#' @param mshape the meanshape
+#' @param amp.shp amplification factor for the shape deformation
+#' @param pts.shp number of points to reconstruct the shape
+#' @export
 pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
@@ -903,6 +898,14 @@ pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     res[[i]] <- coo}
   return(res)}
 
+#' Calculates shapes from PC plane: rfourier
+#' 
+#' @param pos the position on two PC axis
+#' @param rot the corresponding loadings
+#' @param mshape the meanshape
+#' @param amp.shp amplification factor for the shape deformation
+#' @param pts.shp number of points to reconstruct the shape
+#' @export
 pca2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
@@ -924,6 +927,14 @@ pca2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     res[[i]] <- coo}
   return(res)}
 
+#' Calculates shapes from PC plane: tfourier
+#' 
+#' @param pos the position on two PC axis
+#' @param rot the corresponding loadings
+#' @param mshape the meanshape
+#' @param amp.shp amplification factor for the shape deformation
+#' @param pts.shp number of points to reconstruct the shape
+#' @export
 pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
@@ -945,6 +956,16 @@ pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     res[[i]] <- coo}
   return(res)}
 
+#' Calculates shapes from PC plane: polynomials
+#' 
+#' @param pos the position on two PC axis
+#' @param rot the corresponding loadings
+#' @param mshape the meanshape
+#' @param amp.shp amplification factor for the shape deformation
+#' @param pts.shp number of points to reconstruct the shape
+#' @param mod a lm model
+#' @export
+#' 
 pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
   if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
@@ -998,26 +1019,14 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
       rug(xy[fac==levels(fac)[i], 1], ticksize=0.015, lwd=1, side=1, col=col[i])
       rug(xy[fac==levels(fac)[i], 2], ticksize=0.015, lwd=1,  side=2, col=col[i])}}}
 
-# convertir en vrai morphospace, à base de plotnew=TRUE/FALSE
-#et surtout à base de swith -> generique
-#' @export
-# .morphospace <- function(xy, pos.shp, rot, mshape, amp.shp=1,
-#                          size.shp=15, border.shp="#00000055", col.shp="#00000011", ...){
-#   pos <- pos.shapes(xy, pos.shp=pos.shp)
-#   shp <- pca2shp.efourier(pos=pos, rot=rot, mshape=mshape, amp=amp.shp, trans=TRUE)
-#   width <- (par("usr")[4] - par("usr")[3]) / size.shp
-#   shp <- lapply(shp, coo.scale, 1/width)
-#   burp <- lapply(shp, polygon, border=border.shp, col=col.shp)}
-
-#ellipse conf
+#confidence ellipses
 #' @export
 .ellipses <- function(xy, fac, conf=0.5, col){
   for (i in seq(along=levels(fac))) {
     pts.i <- xy[fac==levels(fac)[i], ]
     ell.i <- conf.ell(x=pts.i, conf=conf)
     lines(coo.close(ell.i), col=col[i])
-    points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])
-  }}
+    points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])}}
 
 #convex hulls
 #' @export
@@ -1088,7 +1097,52 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
   pos <- par("usr")
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
-#' @S3method plot PCA
+#' Plots Principal Component Analysis
+#' 
+#' The Momocs' PCA plotter with many graphical options and morphospaces.
+#' @method plot PCA
+#' @export plot.PCA
+#' @param x an object of class "PCA", typically obtained with \link{pca}
+#' @param fac factor, or a name or the column id from the $fac slot
+#' @param xax the first PC axis
+#' @param yax the second PC axis
+#' @param col a color for the points (either global, for every level of the fac
+#' or for every individual, see examples)
+#' @param pch a pch for the points (either global, for every level of the fac
+#' or for every individual, see examples)
+#' @param cex the size of the points
+#' @param palette a \link{palette}
+#' @param center.origin logical whether to center the plot onto the origin
+#' @param zoom to keep your distances
+#' @param grid logical whether to draw a grid
+#' @param nb.grids and how many of them
+#' @param morphospace logical whether to add the morphological space
+#' @param pos.shp either "full", "range", "circle", "xy" 
+#' or a data.frame for \link{pos.shapes}
+#' @param amp.shp amplification factor for shape deformation
+#' @param size.shp the size of the shapes
+#' @param pts.shp the number of points fro drawing shapes
+#' @param border.shp the border color of the shapes
+#' @param col.shp the color of the shapes
+#' @param stars logical whether to draw "stars"
+#' @param ellipses logical whether to draw confidence ellipses
+#' @param conf the level of confidence
+#' @param chull logical whether to draw a convex hull
+#' @param chull.lty if yes, its linetype
+#' @param labels logical whether to add labels for groups
+#' @param axisnames logical whether to add PC names
+#' @param axisvar logical whether to draw the variance they explain
+#' @param eigen logical whether to draw a plot of the eigen values
+#' @param rug logical whether to add rug to margins
+#' @param title character a name for the plot
+#' @param ... useless here, just to fit the generic plot
+#' @details Widely inspired by the philosophy behind graphical functions
+#' of the ade4 R package.
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 24)
+#' bot.p <- pca(bot.f)
+#' plot(bot.p, 1)
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice

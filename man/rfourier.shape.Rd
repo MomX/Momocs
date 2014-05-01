@@ -2,7 +2,7 @@
 \alias{rfourier.shape}
 \title{Calculates and draw "rfourier" shapes.}
 \usage{
-rfourier.shape(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE)
+rfourier.shape(an, bn, nb.h, nb.pts = 80, alpha = 2, plot = TRUE)
 }
 \arguments{
   \item{an}{\code{numeric}. The \eqn{a_n} Fourier
@@ -52,8 +52,9 @@ rfourier.shape() # not very interesting
 rfourier.shape(nb.h=12) # better
 rfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
 
+# Butterflies of the vignette' cover
 panel(Out(a2l(replicate(100,
-rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE))))) # Butterflies
+rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R!

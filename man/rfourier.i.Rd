@@ -2,7 +2,7 @@
 \alias{rfourier.i}
 \title{Calculates inverse radii variation analysis.}
 \usage{
-rfourier.i(rf, nb.h, nb.pts=300)
+rfourier.i(rf, nb.h, nb.pts = 120)
 }
 \arguments{
   \item{rf}{A \code{list} with \code{ao}, \code{an} and
@@ -38,8 +38,6 @@ rf  <- rfourier(coo, 12)
 rf
 rfi <- rfourier.i(rf)
 coo.draw(rfi, border="red", col=NA)
-    # it works since coo.draw and coo.plot retrieve "x"
-    # and "y" components (through l2m when passed with a list.
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R!

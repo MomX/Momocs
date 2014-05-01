@@ -2,7 +2,7 @@
 \alias{ef.amplify}
 \title{Dilates shapes based on elliptical Fourier decomposition.}
 \usage{
-ef.amplify(ef, amp=rep(0.5, 4))
+ef.amplify(ef, amp = rep(0.5, 4))
 }
 \arguments{
   \item{ef}{\code{list}. A list containing \eqn{a_n},

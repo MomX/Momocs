@@ -2,7 +2,7 @@
 \alias{tfourier}
 \title{Calculates tangent angle Fourier analysis.}
 \usage{
-tfourier(coo, nb.h, smooth.it=0, norm = FALSE, verbose = TRUE)
+tfourier(coo, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE)
 }
 \arguments{
   \item{coo}{A list or matrix of coordinates}

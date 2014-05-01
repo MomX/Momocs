@@ -2,7 +2,7 @@
 \alias{rfourier}
 \title{Calculates radii variation Fourier analysis.}
 \usage{
-rfourier(coo, nb.h, smooth.it = 0, norm = FALSE, verbose=TRUE)
+rfourier(coo, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE)
 }
 \arguments{
   \item{coo}{A \code{list} or \code{matrix} of

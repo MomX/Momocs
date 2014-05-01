@@ -2,7 +2,7 @@
 \alias{efourier.shape}
 \title{Calculates and draw "efourier" shapes.}
 \usage{
-efourier.shape(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE)
+efourier.shape(an, bn, cn, dn, nb.h, nb.pts = 60, alpha = 2, plot = TRUE)
 }
 \arguments{
   \item{an}{\code{numeric}. The \eqn{a_n} Fourier

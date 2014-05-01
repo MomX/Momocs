@@ -107,9 +107,19 @@ Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
 
 
 # 2. PCA on Coe ----------------------------------------------------------------
-pca <- function(x, ...){UseMethod("pca")}
-pca.Coe <- function(x, ...){
-  OutCoe <- x
+#' Principal component analysis on Coe objects
+#' 
+#' Performs a PCA on OutCoe, OpnCoe objects.
+#' @aliases pca
+#' @export pca
+#' @S3method pca Coe
+#' @S3method pca OpnCoe
+#' @param Coe the \link{Coe} object
+#' @return a "PCA" object on which to apply \link{plot.PCA}
+
+pca <- function(Coe){UseMethod("pca")}
+pca.Coe <- function(Coe){
+  OutCoe <- Coe
   PCA <- prcomp(OutCoe$coe, scale.=FALSE, center=TRUE)
   PCA$fac <- OutCoe$fac
   PCA$mshape <- apply(OutCoe$coe, 2, mean)
@@ -117,8 +127,8 @@ pca.Coe <- function(x, ...){
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
 
-pca.OpnCoe <- function(x, ...){
-  OpnCoe <- x
+pca.OpnCoe <- function(Coe){
+  OpnCoe <- Coe
   PCA <- prcomp(OpnCoe$coe, scale.=FALSE, center=TRUE)
   PCA$fac <- OpnCoe$fac
   PCA$mshape <- apply(OpnCoe$coe, 2, mean)

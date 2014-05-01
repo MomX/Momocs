@@ -14,7 +14,7 @@
   \link{coo.plot}}
 }
 \description{
-Allows to plot shapes from Coo objects todo
+Allows to plot shapes from Coo objects
 }
 \keyword{Coo}
 
