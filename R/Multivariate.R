@@ -108,7 +108,7 @@ Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
 
 # 2. PCA on Coe ----------------------------------------------------------------
 pca <- function(x, ...){UseMethod("pca")}
-pca.OutCoe <- function(x, ...){
+pca.Coe <- function(x, ...){
   OutCoe <- x
   PCA <- prcomp(OutCoe$coe, scale.=FALSE, center=TRUE)
   PCA$fac <- OutCoe$fac

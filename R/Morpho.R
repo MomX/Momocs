@@ -97,13 +97,14 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   nr <- nrow(coo)
   if (missing(nb.h)) {
     nb.h <- 32
-    warning(paste(" * 'nb.h' not provided and set to", nb.h))}
+    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
   if(nb.h * 2 > nr) {
-    nb.h = floor(nr/2) - 1
+    nb.h = floor(nr/2)
     if (verbose){
-      warning(" * 'nb.h' must be lower than half the number of points and has been set to: ", nb.h)}}
+      cat(" * 'nb.h' must be lower than half the number of points.\n",
+          "* It has been set to", nb.h, "harmonics.\n")}}
   if (nb.h == -1) {
-    nb.h = floor(nr/2) - 1 # should not be -1 #todo
+    nb.h = floor(nr/2)
     if (verbose){
       cat(" * The number of harmonics used has been set to: ", nb.h)}}
   if (smooth.it != 0) { coo <- coo.smooth(coo, smooth.it) }
@@ -395,16 +396,19 @@ ef.amplify <- function(ef, amp=rep(0.5, 4)){
 #' coo.draw(rfi, border="red", col=NA)
 rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   coo <- coo.check(coo)
+  if (missing(nb.h)) {
+    nb.h <- 12
+    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
   if (is.closed(coo)) {coo <- coo.unclose(coo)}
   if(nb.h * 2 > nrow(coo) | missing(nb.h)) {
-    nb.h = floor(nrow(coo)/2) - 1 # should not be -1 but 0 #todo
+    nb.h = floor(nrow(coo)/2)
     if (verbose){
-      warning("'nb.h' must be lower than half the number of 
-              points and has been set to: ", nb.h)}}
+      cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", nb.h)}}
   if (nb.h == -1) {
-    nb.h = floor(nrow(coo)/2)-1 # should not be -1
+    nb.h = floor(nrow(coo)/2)
     if (verbose){
-      cat("The number of harmonics used has been set to: ", nb.h)}}
+      cat(" * 'nb.h' must be lower than half the number of points.\n",
+          "* It has been set to", nb.h, "harmonics.\n")}}
   if (smooth.it!=0) { coo <- coo.smooth(coo, smooth.it)}
   if (norm) {
     coo   <- coo.scale(coo.center(coo))
@@ -454,11 +458,9 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' rf
 #' rfi <- rfourier.i(rf)
 #' coo.draw(rfi, border="red", col=NA)
-#'     # it works since coo.draw and coo.plot retrieve "x"
-#'     # and "y" components (through l2m when passed with a list.
 #' 
 #' @export rfourier.i
-rfourier.i <- function(rf, nb.h, nb.pts=300) {
+rfourier.i <- function(rf, nb.h, nb.pts=120) {
   if (!all(c("an", "bn") %in% names(rf))) {
     stop("a list containing 'an' and 'bn' harmonic coefficients 
          must be provided")}
@@ -468,16 +470,19 @@ rfourier.i <- function(rf, nb.h, nb.pts=300) {
   if (missing(nb.h)) {nb.h <- length(an)}
   if (nb.h > length(an)) {
     nb.h <- length(an)
-    warning("nb.h cannot be higher than length(rf$an) and 
-            has been set to: ", nb.h)}
+    cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ", nb.h)}
   theta <- seq(0, 2*pi, length=nb.pts)
   harm  <- matrix(NA, nrow=nb.h, ncol=nb.pts)
   for (i in 1:nb.h){
     harm[i, ]<- an[i]*cos(i*theta) + bn[i]*sin(i*theta)}
   r <- (ao/2) + apply(harm, 2, sum)
   Z <- complex(modulus=r, argument=theta)
-  list(x=Re(Z), y=Im(Z), angle=theta, r=r)}
-
+  #list(x=Re(Z), y=Im(Z), angle=theta, r=r)}
+  x <- Re(Z)
+  y <- Im(Z)
+  coo <- cbind(x, y)
+  colnames(coo) <- c("x", "y")
+  return(coo)}
 #' Calculates and draw "rfourier" shapes.
 #' 
 #' \code{rfourier.shape} calculates a "Fourier radii variation shape" given
@@ -584,17 +589,20 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
 #' coo.draw(tfi, border="red", col=NA) # the outline is not closed...
 #' coo.draw(tfourier.i(tf, force2close=TRUE), border="blue", col=NA) # we force it to close.
 tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
-  if (missing(nb.h))  {stop("nb.h must be provided")}
+  if (missing(nb.h)) {
+    nb.h <- 12
+    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
   if (is.list(coo))   {coo <- l2m(coo)}
   if (is.closed(coo)) {coo <- coo.unclose(coo)}
   if(nb.h * 2 > nrow(coo)) {
-    nb.h = floor(nrow(coo)/2)-1 # should not be -1
+    nb.h = floor(nrow(coo)/2)
     if (verbose){
-      warning("'nb.h' must be lower than half the number of points and has been set to: ", nb.h)}}
+      cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", nb.h)}}
   if (nb.h == -1) {
-    nb.h = floor(nrow(coo)/2)-1 # should not be -1
+    nb.h = floor(nrow(coo)/2)
     if (verbose){
-      cat("The number of harmonics used has been set to: ", nb.h)}}
+      cat(" * 'nb.h' must be lower than half the number of points.\n",
+          "* It has been set to", nb.h, "harmonics.\n")}}
   if (smooth.it!=0) { coo <- coo.smooth(coo, smooth.it)}
   if (norm) {
     coo <- coo.scale(coo.center(coo))
@@ -654,7 +662,7 @@ tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' tfourier(bot[1], 24)
 #' tfourier.shape()
 
-tfourier.i<-function(tf, nb.h, nb.pts=300, #nb.h -> 180 everywhere ?#todo
+tfourier.i<-function(tf, nb.h, nb.pts=120,
                      force2close=FALSE, rescale=TRUE, perim=2*pi, thetao=0){
   if (!all(c("an", "bn") %in% names(tf))) {
     stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")}
@@ -665,8 +673,9 @@ tfourier.i<-function(tf, nb.h, nb.pts=300, #nb.h -> 180 everywhere ?#todo
   if (missing(nb.h)) {nb.h <- length(an)}
   if (nb.h > length(an)) {
     nb.h <- length(an)
-    warning("nb.h cannot be higher than length(rf$an) and has been set to: ", nb.h)}
-  #if (missing(nb.pts)) {nb.pts=nb.h*2}
+    #cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ", nb.h)}
+  }
+    #if (missing(nb.pts)) {nb.pts=nb.h*2}
   theta <- seq(0, 2*pi, length=nb.pts)
   harm  <- matrix(NA, nrow=nb.h, ncol=nb.pts)
   for (i in 1:nb.h){
@@ -683,8 +692,11 @@ tfourier.i<-function(tf, nb.h, nb.pts=300, #nb.h -> 180 everywhere ?#todo
     coo <- coo.scale(coo, coo.perim(coo)/perim) }
   if (!all(is.null(tf$x1) & is.null(tf$x1))) {
     coo <- coo.trans(coo, tf$x1, tf$y1)}
-  return(list(x=coo[, 1], y=coo[, 2], angle=theta, phi=phi))}
-
+  #return(list(x=coo[, 1], y=coo[, 2], angle=theta, phi=phi))}
+  colnames(coo) <- c("x", "y")
+  return(coo)}
+  
+  
 #' Calculates and draw "tfourier" shapes.
 #' 
 #' \code{tfourier.shape} calculates a "Fourier tangent angle shape" given
@@ -848,7 +860,7 @@ polynomials <- function(coo, n, orthogonal=TRUE){
   coo <- coo.check(coo)
   if (missing(n)) {
     n <- 5
-    warning(paste(" * 'n' not provided and set to", n, "\n"))}
+    cat(" * 'n' not provided and set to", n, ".\n")}
   x <- poly(coo[, 1], degree=n, raw=!orthogonal)
   mod <- lm(coo[, 2] ~ x)
   return(mod)}

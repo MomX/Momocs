@@ -802,10 +802,12 @@ degree.contrib.OpnCoe <- function(
                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     cd <- TRUE}
   if (method=="rFourier"){
-    return(cat("* not yet (re) implemented"))
+    shp <- pca2shp.rfourier(pos=pos, rot=rot,
+                            mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     cd <- TRUE}
   if (method=="tFourier"){
-    return(cat("* not yet (re) implemented"))
+    shp <- pca2shp.tfourier(pos=pos, rot=rot,
+                            mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     cd <- TRUE}
   ## open outlines
   if (method=="orthoPolynomials"){
@@ -892,6 +894,48 @@ pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     coe        <- mshape + apply(ax.contrib, 1, sum)
     xf         <- coeff.split(coe)
     coo        <- efourier.i(xf, nb.h = nb.h, nb.pts=pts.shp)
+    # reconstructed shapes are translated on their centroid
+    #if (trans) {
+    dx <- pos[i, 1] - coo.centpos(coo)[1] 
+    dy <- pos[i, 2] - coo.centpos(coo)[2] 
+    coo <- coo.trans(coo, dx, dy)
+    #}
+    res[[i]] <- coo}
+  return(res)}
+
+pca2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
+  if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
+  if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
+  nb.h <- length(mshape)/2
+  n  <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ])*amp.shp
+    coe        <- mshape + apply(ax.contrib, 1, sum)
+    xf         <- coeff.split(coe, cph=2)
+    coo        <- rfourier.i(xf, nb.h = nb.h, nb.pts=pts.shp)
+    # reconstructed shapes are translated on their centroid
+    #if (trans) {
+    dx <- pos[i, 1] - coo.centpos(coo)[1] 
+    dy <- pos[i, 2] - coo.centpos(coo)[2] 
+    coo <- coo.trans(coo, dx, dy)
+    #}
+    res[[i]] <- coo}
+  return(res)}
+
+pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
+  if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
+  if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
+  nb.h <- length(mshape)/2
+  n  <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ])*amp.shp
+    coe        <- mshape + apply(ax.contrib, 1, sum)
+    xf         <- coeff.split(coe, 2)
+    coo        <- tfourier.i(xf, nb.h = nb.h, nb.pts=pts.shp, force2close=TRUE)
     # reconstructed shapes are translated on their centroid
     #if (trans) {
     dx <- pos[i, 1] - coo.centpos(coo)[1] 
@@ -1044,6 +1088,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
   pos <- par("usr")
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
+#' @S3method plot PCA
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice

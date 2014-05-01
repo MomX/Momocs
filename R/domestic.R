@@ -241,6 +241,7 @@ edm.nearest <- function(m1, m2, full=FALSE){
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
 # Utilities (useless?)
+#'@export
 .refactor <- function(df){data.frame(lapply(df, factor))}
 .trim.ext <- function(lf, width=nchar(lf)-4) {return(strtrim(lf, width=width))}
 .trim.path <- function(lf){
