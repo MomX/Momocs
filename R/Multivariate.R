@@ -1,14 +1,15 @@
 # 1. mshapes on Coe ------------------------------------------------------------
-#' Mean shapes
+#' Mean shape calculation from matrices of coefficients
 #' 
-#' Calculates mean shapes on matrices of coefficients by groups or globally. 
+#' Calculates mean shapes on matrices of coefficients by groups (if passed with
+#' a "fac") or globally (if not).
 #' @aliases mshapes
 #' @export mshapes
 #' @S3method mshapes default
 #' @S3method mshapes OutCoe
 #' @S3method mshapes OpnCoe
-#' @param Coe a Coe object
-#' @param fac factor from the data.frame in Coe$fac, if empty returns global mshape
+#' @param Coe a \link{Coe} object
+#' @param fac factor from the $fac slot. See examples below.
 #' @param nb.pts numeric the number of points for calculated shapes
 #' @return a list of matrices of (x,y) coordinates.
 #' @keywords multivariate
@@ -61,12 +62,20 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
   return(res)}
 
 # 2. MANOVAs -------------------------------------------------------------------
-#todo
-manova.default <- manova
-manova <- function(...){UseMethod("manova")}
-manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
+#' Multivariate analysis of variance on matrices of coefficients
+#' 
+#' Calculates mean shapes on matrices of coefficients by groups (if passed with
+#' a "fac") or globally (if not).
+#' @aliases Manova
+#' @export Manova
+#' @S3method Manova OutCoe
+#' @param ... a \link{Coe} object
+#' @return a list of matrices of (x,y) coordinates.
+#' @keywords multivariate
+Manova <- function(...){UseMethod("Manova")}
+Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
   if (missing(fac)) stop("'fac' must be provided")
-  fac <- OutCoe$fac[, fac]
+  if (!is.factor(fac)) {fac <- OutCoe$fac[, fac]}
   x <- OutCoe$coe
   if (missing(drop)) {
     if (OutCoe$norm) {
@@ -74,22 +83,26 @@ manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
       cat(" * 1st harmonic removed (because of normalization)\n")
     } else {
       drop <- 0 }}
-  
-  nb.h <- ncol(x)/4
-  fr   <- floor((ncol(x)-2)/4) #full rank efourier
-  
-  if (!missing(retain)) {
-    if ((retain - drop) > fr) {
-      retain <- fr
-      if (retain > nb.h) retain <- nb.h
-      cat("'retain' was too high and the matrix not of full rank. Analysis done with", retain, "harmonics\n")}
+  cph <- ifelse(OutCoe$method == "eFourier", 4, 2)
+  nb.h <- ncol(x)/cph
+  fr <- nrow(x) - nlevels(fac)
+  max.h <- floor(fr/cph)
+  if (missing(retain)) {
+    retain <- max.h + drop
+    if (retain > nb.h) { retain <- nb.h }
+    cat(" * 'retain' was missing. MANOVA done with", retain, "harmonics ")
+    if (drop>0) { cat( "and the first", drop, "dropped.\n") } else {cat("./n")}
   } else {
-    retain <- fr
-    if (retain > nb.h) {retain <- nb.h}
-    cat("* Analysis done with", retain, "harmonics\n")}
-  
-  harm.sel <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=4)
-  mod <- summary(manova(x[,harm.sel]~fac), test="Hotelling")
+    if ((retain - drop)> max.h) {
+      retain <- max.h + drop
+      if (retain > nb.h) { retain <- nb.h }
+      cat(" * 'retain' was too ambitious. MANOVA done with", retain, "harmonics ")
+      if (drop>0) {cat( "and the first", drop, "dropped.\n")} else {cat("./n")}}}
+
+  harm.sel <- coeff.sel(retain=retain, drop=drop, nb.h=nb.h, cph=cph)
+  #cat(retain, drop, nb.h, cph)  
+  cat("\n")
+  mod <- summary(manova(x[, harm.sel]~fac), test="Hotelling")
   return(mod)}
 
 
@@ -131,5 +144,3 @@ clust.OutCoe <- function(OutCoe, fac,
   par(oma=rep(0, 4), mar=rep(0,4))
   plot(as.phylo.hclust(OutCoe.hc), tip.color=cols, type=type, ...)
   return(list(dist.mat=dist.mat, hclust=OutCoe.hc))}
-
-

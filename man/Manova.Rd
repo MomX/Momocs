@@ -1,0 +1,18 @@
+\name{Manova}
+\alias{Manova}
+\title{Multivariate analysis of variance on matrices of coefficients}
+\usage{
+Manova(...)
+}
+\arguments{
+  \item{...}{a \link{Coe} object}
+}
+\value{
+a list of matrices of (x,y) coordinates.
+}
+\description{
+Calculates mean shapes on matrices of coefficients by
+groups (if passed with a "fac") or globally (if not).
+}
+\keyword{multivariate}
+

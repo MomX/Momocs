@@ -1,14 +1,14 @@
 \name{mshapes}
 \alias{mshapes}
-\title{Mean shapes}
+\title{Mean shape calculation from matrices of coefficients}
 \usage{
 mshapes(Coe, fac, nb.pts)
 }
 \arguments{
-  \item{Coe}{a Coe object}
+  \item{Coe}{a \link{Coe} object}
 
-  \item{fac}{factor from the data.frame in Coe$fac, if
-  empty returns global mshape}
+  \item{fac}{factor from the $fac slot. See examples
+  below.}
 
   \item{nb.pts}{numeric the number of points for calculated
   shapes}
@@ -18,7 +18,7 @@ a list of matrices of (x,y) coordinates.
 }
 \description{
 Calculates mean shapes on matrices of coefficients by
-groups or globally.
+groups (if passed with a "fac") or globally (if not).
 }
 \keyword{multivariate}
 
