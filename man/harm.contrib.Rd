@@ -1,0 +1,37 @@
+\name{harm.contrib}
+\alias{harm.contrib}
+\title{Calculates and displays the contribution of every harmonic on shape}
+\usage{
+harm.contrib(OutCoe, id, harm.range, amp.h, palette, title)
+}
+\arguments{
+  \item{OutCoe}{the \link{OutCoe} object}
+
+  \item{id}{numeric the id of the shape to consider}
+
+  \item{harm.range}{a vector of harmonics}
+
+  \item{amp.h}{a vector of amplification factor}
+
+  \item{palette}{a color \link{palette}}
+
+  \item{title}{a title for the plot}
+}
+\description{
+Applies \code{amp.h} values for each of the
+\code{harm.range} harmonics when reconstruction shapes.
+This thus help to visualize the respective contribution of
+every harmonic, in other words their contribution in
+describing shapes.
+}
+\examples{
+data(bot)
+bot.f <- eFourier(bot, 24)
+harm.contrib(bot.f)
+}
+\seealso{
+\link{degree.contrib}
+}
+\keyword{OutCoe}
+\keyword{graphics}
+

@@ -146,7 +146,6 @@ subset.Coo <- function(x, subset, ...){
 #' their (x; y) coordinates.
 #' 
 #' @export
-#' @usage ed(pt1, pt2)
 #' @param pt1 (x; y) coordinates of the first point.
 #' @param pt2 (x; y) coordinates of the second point.
 #' @return Returns the euclidean distance between the two points.
@@ -162,7 +161,6 @@ ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 #' This function is used internally but may be of interest for other analyses.
 #' 
 #' @export edi
-#' @usage edi(pt1, pt2, r = 0.5)
 #' @param pt1 \eqn{(x; y)} coordinates of the first point.
 #' @param pt2 \eqn{(x; y)} coordinates of the second point.
 #' @param r the relative distance from \code{pt1} to \code{pt2}.
@@ -183,7 +181,6 @@ edi <- function(pt1, pt2, r=0.5){
 #' If one wishes to align two (or more shapes) Procrustes surimposition may
 #' provide a better solution.
 #' @export edm
-#' @usage edm(m1, m2)
 #' @param m1 The first \code{matrix} of coordinates.
 #' @param m2 The second \code{matrix} of coordinates.
 #' @return Returns a \code{vector} of euclidean distances between pairwise
@@ -211,7 +208,6 @@ edm            <- function(m1, m2){
 #' \times n } euclidean distance computation.  If one wishes to align two (or
 #' more shapes) Procrustes surimposition may provide a better solution.
 #' @export edm.nearest
-#' @usage edm.nearest(m1, m2, full=FALSE)
 #' @param m1 The first \code{list} or \code{matrix} of coordinates.
 #' @param m2 The second \code{list} or \code{matrix} of coordinates.
 #' @param full \code{logical}. Whether to returns a condensed version of the

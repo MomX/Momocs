@@ -1,0 +1,37 @@
+\name{degree.contrib}
+\alias{degree.contrib}
+\title{Calculates and displays the contribution of every polynomial on shape}
+\usage{
+degree.contrib(OpnCoe, id, degree.range, amp.d, palette, title)
+}
+\arguments{
+  \item{OpnCoe}{the \link{OpnCoe} object}
+
+  \item{id}{numeric the id of the shape to consider}
+
+  \item{degree.range}{a vector of polynomials}
+
+  \item{amp.d}{a vector of amplification factor}
+
+  \item{palette}{a color \link{palette}}
+
+  \item{title}{a title for the plot}
+}
+\description{
+Applies \code{amp.d} values for each of the
+\code{degree.range} polynomials when reconstruction shapes.
+This thus help to visualize the respective contribution of
+every coefficient, in other words their contribution in
+describing shapes.
+}
+\examples{
+data(olea)
+olea.p <- rawPolynomials(olea, 6)
+degree.contrib(olea.p)
+}
+\seealso{
+\link{harm.contrib}
+}
+\keyword{OpnCoe}
+\keyword{graphics}
+

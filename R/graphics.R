@@ -528,6 +528,8 @@ stack.Coo <- function(x, cols, borders,
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)
+#' data(olea)
+#' panel(olea)
 panel <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
 panel.Out <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
   Out <- Coo
@@ -566,6 +568,25 @@ panel.Opn <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
 
 
 # 4. Coe / OutCoe / OpnCoe plotters ------------------------------------------
+#' Boxplot on OutCoe matrices of harmonic coefficients
+#' 
+#' Allows to explore diversity of coefficients from OutCoe objects,
+#' typically obtain after a eFourier, tFourier, rFourier on an Out object.
+#' @method boxplot OutCoe
+#' @export boxplot.OutCoe
+#' @param x the \link{OutCoe} object
+#' @param retain numeric the number of harmonics to retain
+#' @param drop numeric the number of harmonics to drop
+#' @param palette a color \link{palette}
+#' @param title a title for the plot
+#' @param legend logical whether to add a legend
+#' @param ... useless here but maintain the consistency with generic boxplot
+#' @seealso \link{hist.OutCoe}
+#' @keywords OutCoe graphics
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 24)
+#' boxplot(bot.f)
 boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
                            title= "Variation of harmonic coefficients",
                            legend=TRUE, ...){
@@ -604,6 +625,24 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
            cex=0.7, inset=0.005,
            title = "Harmonic coefficients")}}
 
+#' Boxplot on OpnCoe matrices of polynomial coefficients
+#' 
+#' Allows to explore variability of these coefficients, typically after a
+#' rawPolynomials or orthoPolynomials on Opn objects.
+#' @method boxplot OpnCoe
+#' @export boxplot.OpnCoe
+#' @param x the \link{OpnCoe} object
+#' @param retain numeric the number of harmonics to retain
+#' @param drop numeric the number of harmonics to drop
+#' @param palette a color \link{palette}
+#' @param title a title for the plot
+#' @param ... useless here but maintain the consistency with generic boxplot
+#' @seealso \link{hist.OpnCoe}
+#' @keywords OpnCoe graphics
+#' @examples
+#' data(olea)
+#' olea.p <- rawPolynomials(olea, 5)
+#' boxplot(olea.p)
 boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
                            title= "Variation of polynomials coefficients", ...){
   # we deduce and prepare
@@ -633,6 +672,23 @@ boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
   axis(1, at=cs, labels=h.names)  
   axis(2)}
 
+#' Histogram on OutCoe matrices of harmonic coefficients
+#' 
+#' Explores the distribution of harmonic coefficient values
+#' @method hist OutCoe
+#' @export hist.OutCoe
+#' @param x the \link{OutCoe} object
+#' @param retain numeric the number of harmonics to retain
+#' @param drop numeric the number of harmonics to drop
+#' @param palette a color \link{palette}
+#' @param title a title for the plot
+#' @param ... useless here but maintain the consistency with generic hist
+#' @seealso \link{boxplot.OutCoe}
+#' @keywords OutCoe graphics
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 24)
+#' hist(bot.f)
 hist.OutCoe <-
   function(x, retain, drop, palette=col.gallus,
            title= "Variation of harmonic coefficients", ...){
@@ -668,6 +724,24 @@ hist.OutCoe <-
     title(main=title, cex.main=1.5, outer=TRUE)
   layout(matrix(1))}
 
+#' Histogram on OpnCoe matrices of polynomials coefficients
+#' 
+#' Explores the distribution of polynomials coefficient values
+#' @method hist OpnCoe
+#' @export hist.OpnCoe
+#' @param x the \link{OpnCoe} object
+#' @param retain numeric the number of harmonics to retain
+#' @param drop numeric the number of harmonics to drop
+#' @param palette a color \link{palette}
+#' @param title a title for the plot
+#' @param hist.per.row numeric the number of histograms per row
+#' @param ... useless here but maintain the consistency with generic hist
+#' @keywords OpnCoe graphics
+#' @seealso \link{boxplot.OpnCoe}
+#' @examples
+#' data(olea)
+#' olea.p <- orthoPolynomials(olea, 5)
+#' hist(olea.p)
 hist.OpnCoe <-
   function(x, retain=4, drop, palette=col.gallus,
            title= "Variation of polynomials coefficients",
@@ -703,7 +777,27 @@ hist.OpnCoe <-
     title(main=title, cex.main=1.5, outer=TRUE)
     layout(matrix(1))}
 
-#todo: missing id sample
+#' Calculates and displays the contribution of every harmonic on shape
+#' 
+#' Applies \code{amp.h} values for each of the \code{harm.range} harmonics 
+#' when reconstruction shapes. This thus help to visualize the respective 
+#' contribution of every harmonic, in other words their contribution 
+#' in describing shapes.
+#' @export harm.contrib
+#' @aliases harm.contrib
+#' @S3method harm.contrib OutCoe
+#' @param OutCoe the \link{OutCoe} object
+#' @param id numeric the id of the shape to consider
+#' @param harm.range a vector of harmonics
+#' @param amp.h a vector of amplification factor
+#' @param palette a color \link{palette}
+#' @param title a title for the plot
+#' @seealso \link{degree.contrib}
+#' @keywords OutCoe graphics
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 24)
+#' harm.contrib(bot.f)
 harm.contrib <- function(OutCoe, id, harm.range, amp.h, palette, title){
   UseMethod("harm.contrib")}
 harm.contrib.OutCoe <- function(
@@ -741,7 +835,27 @@ harm.contrib.OutCoe <- function(
   mtext("Amplification factor", side=2, line=3)
   title(main=title)}
 
-#todo: missing id sample
+#' Calculates and displays the contribution of every polynomial on shape
+#' 
+#' Applies \code{amp.d} values for each of the \code{degree.range} polynomials 
+#' when reconstruction shapes. This thus help to visualize the respective 
+#' contribution of every coefficient, in other words their contribution 
+#' in describing shapes.
+#' @export degree.contrib
+#' @aliases degree.contrib
+#' @S3method degree.contrib OpnCoe
+#' @param OpnCoe the \link{OpnCoe} object
+#' @param id numeric the id of the shape to consider
+#' @param degree.range a vector of polynomials
+#' @param amp.d a vector of amplification factor
+#' @param palette a color \link{palette}
+#' @param title a title for the plot
+#' @seealso \link{harm.contrib}
+#' @keywords OpnCoe graphics
+#' @examples
+#' data(olea)
+#' olea.p <- rawPolynomials(olea, 6)
+#' degree.contrib(olea.p)
 degree.contrib <- function(
   OpnCoe, id, degree.range, amp.d, palette, title){UseMethod("degree.contrib")}
 degree.contrib.OpnCoe <- function(

@@ -1,0 +1,38 @@
+\name{hist.OpnCoe}
+\alias{hist.OpnCoe}
+\title{Histogram on OpnCoe matrices of polynomials coefficients}
+\usage{
+\method{hist}{OpnCoe}(x, retain = 4, drop, palette = col.gallus,
+  title = "Variation of polynomials coefficients", hist.per.row = 3, ...)
+}
+\arguments{
+  \item{x}{the \link{OpnCoe} object}
+
+  \item{retain}{numeric the number of harmonics to retain}
+
+  \item{drop}{numeric the number of harmonics to drop}
+
+  \item{palette}{a color \link{palette}}
+
+  \item{title}{a title for the plot}
+
+  \item{hist.per.row}{numeric the number of histograms per
+  row}
+
+  \item{...}{useless here but maintain the consistency with
+  generic hist}
+}
+\description{
+Explores the distribution of polynomials coefficient values
+}
+\examples{
+data(olea)
+olea.p <- orthoPolynomials(olea, 5)
+hist(olea.p)
+}
+\seealso{
+\link{boxplot.OpnCoe}
+}
+\keyword{OpnCoe}
+\keyword{graphics}
+

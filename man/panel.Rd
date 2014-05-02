@@ -30,6 +30,8 @@ Plots all the outlines from a \code{Coo} side by side
 \examples{
 data(mosquito)
 panel(mosquito, names=TRUE, cex.names=0.5)
+data(olea)
+panel(olea)
 }
 \seealso{
 \link{stack.Coo}, \link{plot.Coo}.
