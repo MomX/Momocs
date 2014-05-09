@@ -137,25 +137,28 @@ a2l <- function(a){
 #   names(coo.list) <- coo.names
 #   return(Coo(coo.list))}
 # 
-# nef2Coe <- function(nef.path) {
-#   # change nef to coe one day
-#   nef     <- readLines(nef.path)
-#   HARMO.l <- grep(pattern="HARMO", nef)
-#   nb.h    <- as.numeric(substring(nef[HARMO.l], 8))
-#   nef     <- nef[-(1:HARMO.l)]
-#   nb.coo  <- length(nef)/(nb.h+1)
-#   coo.i   <- 1:nb.coo
-#   coo.beg <- (coo.i-1)*(nb.h + 1)+1
-#   coo.end <- coo.beg + nb.h
-#   res     <- matrix(NA, nrow=nb.coo, ncol=nb.h*4, dimnames=
-#                       list(nef[coo.beg],
-#                            paste(rep(LETTERS[1:4], each=nb.h), 1:nb.h, sep="")))
-#   for (i in seq(along=coo.i)) {
-#     nef.i    <- nef[(coo.beg[i]+1) : coo.end[i]]
-#     x        <- as.numeric(unlist(strsplit(nef.i, " ")))
-#     res[i, ] <- x[!is.na(x)]}
-#   return(Coe(res))}
-# 
+nef2Coe <- function(nef.path) {
+  # change nef to coe one day
+  nef     <- readLines(nef.path)
+  HARMO.l <- grep(pattern="HARMO", nef)
+  nb.h    <- as.numeric(substring(nef[HARMO.l], 8))
+  nef     <- nef[-(1:HARMO.l)]
+  nb.coo  <- length(nef)/(nb.h+1)
+  coo.i   <- 1:nb.coo
+  coo.beg <- (coo.i-1)*(nb.h + 1)+1
+  coo.end <- coo.beg + nb.h
+  res     <- matrix(NA, nrow=nb.coo, ncol=nb.h*4, dimnames=
+                      list(nef[coo.beg],
+                           paste0(rep(LETTERS[1:4], each=nb.h), 1:nb.h)))
+  reorder <- c(1:nb.h *4 - 3, 1:nb.h *4 - 2, 1:nb.h *4 - 1, 1:nb.h *4)
+  for (i in seq(along=coo.i)) {
+    nef.i    <- nef[(coo.beg[i]+1) : coo.end[i]]
+    x        <- as.numeric(unlist(strsplit(nef.i, " ")))
+    x        <- x[!is.na(x)]
+    res[i, ] <- x[reorder]}
+  return(res)}
+
+# todo
 # Coe2nef <- function(Coe, file="nef.nef"){
 #   nb.h      <- Coe@nb.h
 #   coo.names <- Coe@names

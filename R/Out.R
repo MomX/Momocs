@@ -433,7 +433,9 @@ OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   class(OutCoe) <- c("OutCoe", "Coe")
   return(OutCoe)}
 
+
 # The print method for Out objects
+#' @S3method print Out
 print.OutCoe <- function(x, ...){
   OutCoe <- x
   p <- pmatch(OutCoe$method, c("eFourier", "rFourier", "tFourier"))
