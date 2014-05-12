@@ -629,7 +629,6 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
 #' 
 #' Allows to explore variability of these coefficients, typically after a
 #' rawPolynomials or orthoPolynomials on Opn objects.
-#' @method boxplot OpnCoe
 #' @export boxplot.OpnCoe
 #' @param x the \link{OpnCoe} object
 #' @param retain numeric the number of harmonics to retain
@@ -861,29 +860,32 @@ degree.contrib <- function(
 degree.contrib.OpnCoe <- function(
   OpnCoe,
   id      = 1,
-  degree.range =1:ncol(OpnCoe$coe),
+  degree.range,
   amp.d   = c(0, 0.5, 1, 2, 5, 10),
   palette = col.hot,
   title   = "Degree contribution"){
   #if missing id meanshape
   coe <- OpnCoe$coe[id, ]
-  degree <- length(coe)
+  degree <- length(coe)-1
+  if (missing(degree.range)) { degree.range <- 1:degree}
   mult <- rep(1, degree)
-  mod <- OpnCoe$mod
+  ortho <- ifelse(OpnCoe$method=="rawPolynomials", TRUE, FALSE)
+  pol <- list(coeff=coe, ortho=ortho, 
+              baseline1=OpnCoe$baseline1, baseline2=OpnCoe$baseline2)
   res <- list()
   p <- 1 # dirty
   for (j in seq(along=degree.range)){
     for (i in seq(along=amp.d)){
       mult.loc    <- mult
       mult.loc[degree.range[j]] <- amp.d[i]
-      mod$coefficients <- coe*mult.loc
-      res[[p]] <- polynomials.i(mod)
+      pol$coeff <- coe*mult.loc
+      res[[p]] <- polynomials.i(pol)
       p <- p+1}}
   
   cols <- rep(palette(length(amp.d)+4)[-(1:4)], degree)
   coo.list.panel(res, dim=c(length(amp.d), degree),
                  byrow=FALSE, borders=cols, mar=c(5.1, 5.1, 4.1, 2.1), poly=FALSE)
-  axis(1, at=(1:degree)-0.5,
+  axis(1, at=(1:(degree+1))-0.5,
        labels=names(coe), line=2, lwd=1, lwd.ticks=0.5)
   mtext("Degree", side=1, line=4)
   axis(2, at=(1:length(amp.d))-0.5,
@@ -924,13 +926,14 @@ degree.contrib.OpnCoe <- function(
     cd <- TRUE}
   ## open outlines
   if (method=="orthoPolynomials"){
-    # no pts.shp below (to avoid some bugs as long as it works with mod :-s )
     shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                               mshape=mshape, amp.shp=amp.shp, mod=PCA$mod)
+                               mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=TRUE,
+                               baseline1=PCA$baseline1, baseline2=PCA$baseline2)
     cd <- FALSE}
   if (method=="rawPolynomials"){
     shp <- pca2shp.polynomials(pos=pos, rot=rot,
-                               mshape=mshape, amp.shp=amp.shp, mod=PCA$mod)
+                               mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
+                               baseline1=PCA$baseline1, baseline2=PCA$baseline2)
     cd <- FALSE}
   width   <- (par("usr")[4] - par("usr")[3]) / size.shp
   shp     <- lapply(shp, coo.scale, 1/width)
@@ -1077,21 +1080,27 @@ pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
 #' @param mshape the meanshape
 #' @param amp.shp amplification factor for the shape deformation
 #' @param pts.shp number of points to reconstruct the shape
-#' @param mod a lm model
+#' @param ortho logical whether working with raw or orthogonal polynomials
+#' @param baseline1 the (x; y) coordinates of the first baseline point
+#' @param baseline2 the (x; y) coordinates of the second baseline point
 #' @export
 #' 
-pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, mod) {
+pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
+                                 baseline1, baseline2) {
   if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
   degree <- length(mshape)
   n  <- nrow(pos)
+  # an empy pol object
+  pol <- list(coeff=rep(NA, degree), ortho=ortho, 
+       baseline1=baseline1, baseline2=baseline2)
   # we prepare the array
   res <- list()
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ])*amp.shp
-    mod$coefficients        <- mshape + apply(ax.contrib, 1, sum)
-    coo        <- polynomials.i(mod) #nb.pts ici fout un sacré bordel #todo
-    mod$coefficients <- rep(NA, degree)
+    pol$coeff        <- mshape + apply(ax.contrib, 1, sum)
+    coo        <- polynomials.i(pol, nb.pts=pts.shp, reregister=TRUE)
+    pol$coeff <- rep(NA, degree)
     # reconstructed shapes are translated on their centroid
     #if (trans) {
     dx <- pos[i, 1] - coo.centpos(coo)[1] 
@@ -1374,16 +1383,10 @@ tps2d <- function(grid0, fr, to){
 #' \code{tps.grid} calculates and plots deformation grids between two
 #' configurations.
 #' 
-#' 
-#' @usage tps.grid(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2, grid.size
-#' = 20, grid.col = "grey40", shp = TRUE, shp.col = rep(NA, 2),
-#' shp.border=col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
 #' \code{to}.
-#' @param plot.full \code{logical}. If \code{FALSE} graphical window will
-#' encompasses the entire outlines but maybe not the entire grid.
 #' @param grid.outside A \code{numeric} that indicates how much the grid
 #' extends beyond the range of outlines. Expressed as a proportion of the
 #' latter.
@@ -1407,8 +1410,8 @@ tps2d <- function(grid0, fr, to){
 #' tps.grid(fr, to, amp=3, grid.size=40)
 #' 
 #' @export tps.grid
-tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
-                     grid.size = 20, grid.col = "grey40",
+tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
+                     grid.size = 40, grid.col = "grey80",
                      shp = TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2),
                      shp.lwd = c(2, 2), shp.lty = c(1, 1)){
   # simple magnification
@@ -1428,10 +1431,9 @@ tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
   ygrid0 <- seq(y1-ry*grid.outside, y2+ry*grid.outside, length=dim.grid[2])
   grid0 <- as.matrix(expand.grid(xgrid0, ygrid0))
   grid1 <- tps2d(grid0, fr, to)
-  if (plot.full){
-    wdw <- apply(rbind(grid0, grid1), 2, range)
-  } else {
-    wdw <- apply(rbind(fr, to), 2, range)}
+  op <- par(mar=rep(0, 4))
+  on.exit(par(op))
+  wdw <- apply(rbind(grid0, grid1), 2, range)
   plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1,
        ann=FALSE, axes=FALSE, mar=rep(0, 4))
   for (i in 1:dim.grid[2]) {
@@ -1440,20 +1442,15 @@ tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
     lines(grid1[(1:dim.grid[2]) * dim.grid[1]-i+1,],   col=grid.col)}
   if (shp) {
     coo.draw(fr, border=shp.border[1], col=shp.col[1],
-             lwd=shp.lwd[1], lty=shp.lty[1])
+             lwd=shp.lwd[1], lty=shp.lty[1], points=FALSE)
     coo.draw(to, border=shp.border[2], col=shp.col[2],
-             lwd=shp.lwd[2], lty=shp.lty[2])}}
+             lwd=shp.lwd[2], lty=shp.lty[2], points=FALSE)}}
 
 #' Deformation "vector field" using Thin Plate Splines.
 #' 
 #' \code{tps.arr}(ows) calculates deformations between two configurations and
 #' illustrate them using arrows.
 #' 
-#' 
-#' @usage tps.arr(fr, to, amp=1, palette = col.summer, arr.nb = 100, arr.levels
-#' = 100, arr.len = 0.1, arr.ang = 30, arr.lwd = 1, arr.col = "grey50", shp =
-#' TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2), shp.lwd = c(2, 2),
-#' shp.lty = c(1, 1))
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1485,14 +1482,16 @@ tps.grid <- function(fr, to, amp=1, plot.full=TRUE, grid.outside = 0.2,
 #' 
 #' @export tps.arr
 tps.arr <- function(fr, to, amp=1, palette = col.summer,
-                    arr.nb = 100, arr.levels = 100, arr.len = 0.1,
-                    arr.ang = 30, arr.lwd = 1, arr.col = "grey50",
+                    arr.nb = 200, arr.levels = 100, arr.len = 0.1,
+                    arr.ang = 20, arr.lwd = 0.75, arr.col = "grey50",
                     shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),
                     shp.lwd = c(2, 2), shp.lty = c(1, 1)){
   if (!missing(amp)) to <- to + (to-fr)*amp
   grid0  <- spsample(Polygon(coo.close(fr)), arr.nb, type="regular")@coords
   grid1     <- tps2d(grid0, fr, to)
   # grille simple, on affiche d'abord les deux courbes
+  op <- par(mar=rep(0, 4))
+  on.exit(par(op))
   wdw      <- apply(rbind(fr, to), 2, range)
   plot(NA, xlim=wdw[, 1]*1.05, ylim=wdw[, 2]*1.05, asp=1,
        axes=FALSE, ann=FALSE, mar=rep(0,4))
@@ -1506,19 +1505,15 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
          length=arr.len, angle=arr.ang, lwd=arr.lwd, col=arr.cols)
   if (shp) {
     coo.draw(fr, border=shp.border[1], col=shp.col[1],
-             lwd=shp.lwd[1], lty=shp.lty[1])
+             lwd=shp.lwd[1], lty=shp.lty[1], points=FALSE)
     coo.draw(to, border=shp.border[2], col=shp.col[2],
-             lwd=shp.lwd[2], lty=shp.lty[2])}}
+             lwd=shp.lwd[2], lty=shp.lty[2], points=FALSE)}}
 
 #' Deformation isolines using Thin Plate Splines.
 #' 
 #' \code{tps.iso} calculates deformations between two configurations and map
 #' them with or without isolines.
 #' 
-#' 
-#' @usage tps.iso(fr, to, amp=1, palette = col.summer, iso.nb = 500, iso.levels
-#' = 12, cont=TRUE, cont.col="black", shp = TRUE, shp.col = rep(NA, 2),
-#' shp.border=col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1532,7 +1527,6 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' @param cont \code{logical}. Whether to draw contour lines.
 #' @param cont.col A color for drawing the contour lines.
 #' @param shp \code{logical}. Whether to draw shapes.
-#' @param shp.col Two colors for filling the shapes.
 #' @param shp.border Two colors for drawing the borders.
 #' @param shp.lwd Two \code{lwd} for drawing shapes.
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
@@ -1549,10 +1543,10 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' 
 #' @export tps.iso
 tps.iso <- function(fr, to, amp=1, palette = col.summer,
-                    iso.nb = 500, iso.levels = 12, cont=TRUE, cont.col="black",
-                    shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),
-                    shp.lwd = c(2, 2), shp.lty = c(1, 1)){  
-  if (!missing(amp)) to <- to + (to-fr)*amp
+                    iso.nb = 1000, iso.levels = 12, cont=TRUE, cont.col="black",
+                    shp = TRUE, shp.border=col.gallus(2),
+                    shp.lwd = c(1, 1), shp.lty = c(1, 1)){  
+  # if (!missing(amp)) to <- to + (to-fr)*amp
   grid0  <- spsample(Polygon(coo.close(fr)), iso.nb, type="regular")@coords
   grid1  <- tps2d(grid0, fr, to)
   def    <- edm(grid0, grid1)
@@ -1566,15 +1560,17 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
   iso.cols <- palette(iso.levels)
   x <- sort(unique(grid0[,1]))
   y <- sort(unique(grid0[,2]))
+  op <- par(mar=rep(1, 4))
+  on.exit(par(op))
   image(x, y, im, col=iso.cols, asp=1, xlim=range(x)*1.05, ylim=range(y)*1.05,
         axes=FALSE, frame=FALSE, ann=FALSE)
   if (cont) {contour(x, y, im, nlevels=iso.levels,
-                     add=TRUE, drawlabels=FALSE, col=cont.col)}
+                     add=TRUE, drawlabels=FALSE, col=cont.col, lty=2)}
   if (shp) {
-    coo.draw(fr, border=shp.border[1], col=shp.col[1],
-             lwd=shp.lwd[1], lty=shp.lty[1])
-    coo.draw(to, border=shp.border[2], col=shp.col[2],
-             lwd=shp.lwd[2], lty=shp.lty[2])}}
+    coo.draw(fr, border=shp.border[1], col=NA,
+             lwd=shp.lwd[1], lty=shp.lty[1], points=FALSE)
+    coo.draw(to, border=shp.border[2], col=NA,
+             lwd=shp.lwd[2], lty=shp.lty[2], points=FALSE)}}
 
 # 0. Color palettes ------------------------------------------------------------
 

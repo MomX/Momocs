@@ -5,7 +5,6 @@
 #' a "fac") or globally (if not).
 #' @aliases mshapes
 #' @export mshapes
-#' @S3method mshapes default
 #' @S3method mshapes OutCoe
 #' @S3method mshapes OpnCoe
 #' @param Coe a \link{Coe} object
@@ -134,6 +133,8 @@ pca.OpnCoe <- function(Coe){
   PCA$mshape <- apply(OpnCoe$coe, 2, mean)
   PCA$method <- OpnCoe$method
   PCA$mod    <- OpnCoe$mod #the only diff so far
+  PCA$baseline1 <- OpnCoe$baseline1
+  PCA$baseline2 <- OpnCoe$baseline2
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
 

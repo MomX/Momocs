@@ -495,7 +495,7 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
   if(nb.h > q) {
     nb.h <- q # should not be 1 #todo
     cat(" * at least one outline has no more than", q*2, "coordinates.\n",
-            "* 'nb.h' has been set to", q,"harmonics.\n")}
+        "* 'nb.h' has been set to", q,"harmonics.\n")}
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h, times = 4))
   coe <- matrix(ncol = 4 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))
@@ -540,7 +540,7 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
   if(nb.h  > q) {
     nb.h <- q # should not be 1 #todo
     cat(" * at least one outline has no more than", q*2, "coordinates.\n", 
-            "* 'nb.h' has been set to", q,"harmonics.\n")}
+        "* 'nb.h' has been set to", q,"harmonics.\n")}
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
   coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))

@@ -837,40 +837,53 @@ coeff.split <- function(cs, nb.h=8, cph=4){
 #' @export polynomials
 #' @param coo a matrix or a list of (x; y) coefficients
 #' @param n the degree of the polynomial to fit (the intercept is returned)
-#' @param orthogonal logical wheter to calculate orthogonal coefficients
+#' @param ortho logical wheter to calculate orthogonal coefficients
 #' @return a lm model object
 #' @keywords morphoCore
 
-polynomials <- function(coo, n, orthogonal=TRUE){
+polynomials <- function(coo, n, ortho=TRUE){
   coo <- coo.check(coo)
   if (missing(n)) {
     n <- 5
     cat(" * 'n' not provided and set to", n, ".\n")}
-  x <- poly(coo[, 1], degree=n, raw=!orthogonal)
+  x <- poly(coo[, 1], degree=n, raw=!ortho)
   mod <- lm(coo[, 2] ~ x)
-  return(mod)}
+  return(list(coeff=mod$coefficients, ortho=ortho, 
+              baseline1=coo[1, ], baseline2=coo[nrow(coo), ], mod=mod))}
 
 #' Calculate shape from a polynomial model
 #' 
 #' Returns a matrix of (x; y) coordinates when passed with a model obtained with
 #' \link{polynomials}.
 #' @export polynomials.i
-#' @param mod a lm model (see \link{polynomials}).
-#' @param x.pred the x-range on which to predict y-values (basically, a sequence
-#' of points along the the baseline range).
+#' @param pol a pol list such as created by \link{polynomials}.
 #' @param nb.pts the number of points to predict. By default (and can't be higher)
 #' the number of points in the original shape.
-#' @param baseline1x (x; y) coordinates of the first point of the baseline.
-#' @param baseline2x (x; y) coordinates of the second point of the baseline.
+#' @param reregister logical whether to reregister the shape with the original baseline.
 #' @return a matrix of (x; y) coordinates.
 #' @keywords morphoCore
-polynomials.i <- function(mod, x.pred, nb.pts=nrow(mod$model),
-                          baseline1x=-1, baseline2x=1){
-  if (missing(x.pred)) {
-    x.pred <- seq(baseline1x, baseline2x, length=nb.pts)}
-  x.poly <- poly(x.pred, degree=mod$rank-1)
-  y.pred <- predict(mod, newdata=data.frame(x=x.poly))
-  coo <- cbind(x.pred, y.pred)
+#' @examples
+#' data(olea)
+#' o <- olea[5]
+#' coo.plot(o)
+#' for (i in 2:7){
+#' x <- polynomials.i(polynomials(o, i, ortho=TRUE))
+#' coo.draw(x, border=col.summer(7)[i], points=FALSE)  }
+polynomials.i <- function(pol, nb.pts=120, reregister=TRUE){
+  x.new  <- seq(pol$baseline1[1], pol$baseline2[1], length=nb.pts)
+  degree <- length(pol$coeff)-1
+  if (pol$ortho) {
+    x.poly <- poly(x.new, degree=degree)
+    y.pred <- predict(x.poly, x.new)
+    y.new  <- pol$coeff[1] + apply(.mprod(m=y.pred, s=pol$coeff[-1]), 1, sum) 
+  } else {
+    y.pred <- numeric(nb.pts)
+    for (i in 1:degree){
+      y.pred <- y.pred + (x.new^i * pol$coeff[i+1]) }
+    y.new <- y.pred + pol$coeff[1]}
+  coo <- cbind(x.new, y.new)
+  if (reregister) {
+    coo <- coo.baseline(coo, 1, nrow(coo), t1=pol$baseline1, t2=pol$baseline2)}
   colnames(coo) <- c("x", "y")
   return(coo)}
 # 2.2 Cubic splines -------------------------------------------------------

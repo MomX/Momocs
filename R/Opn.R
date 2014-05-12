@@ -128,12 +128,12 @@ nqual.Opn <-
     if (missing(id)) id <- sample(length(Opn$coo), 1)
     if (missing(method)) {
       cat(" * Method not provided. orthoPolynomials is used.\n")
-      orthogonal   <- TRUE
+      ortho   <- TRUE
     } else {
       p <- pmatch(tolower(method), c("rawpolynomials", "orthopolynomials"))
       if (is.na(p)) { warning(" * Unvalid method. orthoPolynomials is used.\n")
       } else {
-        orthogonal <- switch(p, TRUE,   FALSE)}}
+        ortho <- switch(p, TRUE,   FALSE)}}
     
     # check for too ambitious harm.range
     if (max(n.range) > (min(sapply(Opn$coo, nrow))- 1)) {
@@ -145,7 +145,7 @@ nqual.Opn <-
     res <- list()
     for (i in seq(along=n.range)) {
       res[[i]] <- polynomials.i(
-        polynomials(coo, n=n.range[i], orthogonal=orthogonal))}
+        polynomials(coo, n=n.range[i], ortho=ortho))}
     # plotting
     op <- par(mar=c(3, 3, 2, 1))
     on.exit(par(op))
@@ -261,7 +261,6 @@ print.OpnCoe <- function(x, ...){
 #' rawPolynomials(olea, 5)
 rawPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("rawPolynomials")}
-
 rawPolynomials.Opn <- function(Opn, degree,
                                baseline1=c(-1, 0), baseline2=c(1, 0), nb.pts=120){
   #we check a bit
@@ -292,13 +291,13 @@ rawPolynomials.Opn <- function(Opn, degree,
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
-    mod <- polynomials(coo[[i]], n=degree, orthogonal=FALSE)
+    mod <- polynomials(coo[[i]], n=degree, ortho=FALSE)
     #mod[[i]] <- pol
-    coe[i, ] <- mod$coefficients}
+    coe[i, ] <- mod$coeff}
   #mod$coefficients <- rep(NA, length(mod$coefficients))
   method <- "rawPolynomials"
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
-                baseline1=baseline1, baseline2=baseline2, mod=mod))}
+                baseline1=baseline1, baseline2=baseline2))}
 
 #' Calculates orthogonal polynomials on Opn
 #'
@@ -322,7 +321,7 @@ orthoPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("orthoPolynomials")}
 
 orthoPolynomials.Opn <- function(Opn, degree,
-                                 baseline1=c(-1, 0), baseline2=c(1, 0), nb.pts=120){
+                                 baseline1=c(-0.5, 0), baseline2=c(0.5, 0), nb.pts=120){
   #we check a bit
   min.pts <- min(sapply(Opn$coo, nrow))
   if (nb.pts > min.pts) {
@@ -351,9 +350,9 @@ orthoPolynomials.Opn <- function(Opn, degree,
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
-    mod <- polynomials(coo[[i]], n=degree, orthogonal=TRUE)
+    mod <- polynomials(coo[[i]], n=degree, ortho=TRUE)
     #mod[[i]] <- pol
-    coe[i, ] <- mod$coefficients}
+    coe[i, ] <- mod$coeff}
   #mod$coefficients <- rep(NA, length(mod$coefficients))
   method <- "orthoPolynomials"
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 

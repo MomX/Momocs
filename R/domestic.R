@@ -263,11 +263,13 @@ edm.nearest <- function(m1, m2, full=FALSE){
 #' \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
 #' 
 #' Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
-#' 
+#' @details
+#' We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus
+#' Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
+#' their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
 #' @importFrom jpeg readJPEG
 #' @importFrom sp spsample Polygon
-#' @importFrom spdep tri2nb
 #' @importFrom shapes procGPA
 #' @importFrom methods showDefault
 #' @importFrom MASS ginv
