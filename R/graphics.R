@@ -146,6 +146,7 @@ coo.template   <- function(coo, size=1) {
 #' @param mar A \code{vector} to define margins.
 #' @param cols A \code{vector} of colors to fill shapes.
 #' @param borders A \code{vector} of colors to draw shape borders.
+#' @param reorder a factor or a numeric to reorder shapes, colors and borders.
 #' @param poly logical whether to use polygon or lines to draw shapes.
 #' mainly for use for outlines and open outlines.
 #' @return Returns (invisibly) a \code{data.frame} with position of shapes that
@@ -158,11 +159,19 @@ coo.template   <- function(coo, size=1) {
 #' x <- coo.list.panel(bot$coo)
 #' x # positions of shapes returned invisibly 
 #' # axis(1) ; axis(2) # that's a single graphical window
+#' 
+#' data(bot)
+#' coo <- bot$coo
+#' ord <- sapply(coo, coo.eccentricity.eigen)
+#' pos <- coo.list.panel(coo, reorder=ord)
+#' text(pos, labels=signif(ord[order(ord)], 3))
 
 coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                            fromtop=TRUE, mar=rep(0, 4),
-                           cols, borders, poly=TRUE){
+                           cols, borders, reorder=NULL, poly=TRUE){
   coo.list <- lapply(coo.list, coo.check)
+  if (!is.null(reorder)) {
+    coo.list <- coo.list[order(reorder)]}
   # if dim is missing, we define a square
   n <- length(coo.list)
   if(missing(dim)) {
@@ -170,9 +179,9 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
     nr  <- ceiling(n/nc)
     dim <- c(nr, nc)}
   k   <- dim[1]*dim[2]
-  if (k < n) stop("dim[1]*dim[2] must be >= the length of coo.list")
+  if (k < n) stop(" * dim[1]*dim[2] must be >= the length of coo.list")
   pos <- matrix(1:k, dim[1], dim[2], byrow=byrow)
-  if (fromtop & dim[1]>1) { pos <- pos[dim[1]:1,] }
+  if (fromtop & dim[1]>1) { pos <- pos[dim[1]:1, ] }
   # we prepare the panel
   op <- par("mar", "oma")
   on.exit(par(op))
@@ -183,8 +192,13 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
        xaxs="i", yaxs="i", frame=FALSE, ann=FALSE, axes=FALSE)
   # we template and plot shapes
   coo.tp  <- lapply(coo.list, coo.template, size=0.95)
-  if (missing(cols))    { cols      <- rep("grey80", n) }
+  if (missing(cols))    { cols      <- rep("grey95", n) }
   if (missing(borders)) { borders   <- rep("grey20", n) }
+  
+  if (!is.null(reorder)) {
+    cols <- cols[order(reorder)]
+    borders <- borders[order(reorder)]}
+  
   res <- data.frame(pos.x=numeric(), pos.y=numeric())
   if (poly) {
     for (i in 1:n){
@@ -520,6 +534,8 @@ stack.Coo <- function(x, cols, borders,
 #' Either a single value or of length exactly equals to the number of coordinates.
 #' @param borders A \code{vector} of colors for drawing the borders.
 #' Either a single value or of length exactly equals to the number of coordinates.
+#' @param fac a factor within the $fac slot for colors
+#' @param reorder a factor or a numeric to reorder shapes
 #' @param names whether to plot names or not. If TRUE uses shape names, otherwise
 #' pass a character for the names of the files
 #' @param cex.names a cex for the names
@@ -530,8 +546,8 @@ stack.Coo <- function(x, cols, borders,
 #' panel(mosquito, names=TRUE, cex.names=0.5)
 #' data(olea)
 #' panel(olea)
-panel <- function(Coo, cols, borders, fac, palette=col.summer, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
-panel.Out <- function(Coo, cols, borders, fac, palette=col.summer, names=NULL, cex.names=0.6, ...){
+panel <- function(Coo, cols, borders, fac, reorder, palette=col.summer, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
+panel.Out <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer, names=NULL, cex.names=0.6, ...){
   Out <- Coo
   if (!missing(fac)){
     
@@ -549,31 +565,52 @@ panel.Out <- function(Coo, cols, borders, fac, palette=col.summer, names=NULL, c
     borders     <- rep("#333333", length(Out))}
   if (length(borders)!=length(Out)) {
     cols     <- rep(borders[1], length(Out))} 
-  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, poly=TRUE, ...)
+  if (!missing(reorder)) reorder <- Out$fac[, reorder]
+  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, reorder=reorder, poly=TRUE, ...)
   if (!is.null(names)){
     if (is.logical(names)) {
       text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
     } else {    
-      #if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
-      #text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
-      text(pos[,1], pos[,2], labels=Coo$fac[, names], cex=cex.names)}}}      
-panel.Opn <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
+      if (length(names)!=length(Out)) {
+        if (is.null(reorder)) {
+          text(pos[,1], pos[,2], labels=Coo$fac[, names], cex=cex.names)
+        } else {
+          text(pos[,1], pos[,2], labels=Coo$fac[, names][order(reorder)], cex=cex.names)
+        }
+      } else {
+      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
+panel.Opn <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer, names=NULL, cex.names=0.6, ...){
   Opn <- Coo
+  if (!missing(fac)){
+    
+    if (missing(cols)){
+      cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[, fac]]
+    } else {
+      cols <- cols[Coo$fac[, fac]]
+    }
+  }
   if (missing(cols)) {
-    cols     <- rep(par("bg"), length(Opn))}
+    cols     <- rep(NA, length(Opn))}
   if (length(cols)!=length(Opn)) {
     cols     <- rep(cols[1], length(Opn))}
   if (missing(borders)) {
     borders     <- rep("#333333", length(Opn))}
   if (length(borders)!=length(Opn)) {
     cols     <- rep(borders[1], length(Opn))} 
-  pos <- coo.list.panel(Opn$coo, cols=cols, borders=borders, poly=FALSE, ...)
+  if (!missing(reorder)) reorder <- Opn$fac[, reorder]
+  pos <- coo.list.panel(Opn$coo, cols=cols, borders=borders, reorder=reorder, poly=FALSE, ...)
   if (!is.null(names)){
     if (is.logical(names)) {
       text(pos[,1], pos[,2], labels=names(Opn), cex=cex.names)
     } else {    
-      if (length(names)!=length(Opn)) stop("* 'names' and Opn lengths differ.")
-      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
+      if (length(names)!=length(Opn)) {
+        if (is.null(reorder)) {
+          text(pos[,1], pos[,2], labels=Coo$fac[, names], cex=cex.names)
+        } else {
+          text(pos[,1], pos[,2], labels=Coo$fac[, names][order(reorder)], cex=cex.names)
+        }
+      } else {
+        text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
 
 
 # 4. Coe / OutCoe / OpnCoe plotters ------------------------------------------
