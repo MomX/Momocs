@@ -554,8 +554,9 @@ panel.Out <- function(Coo, cols, borders, fac, palette=col.summer, names=NULL, c
     if (is.logical(names)) {
       text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
     } else {    
-      if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
-      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
+      #if (length(names)!=length(Out)) stop("* 'names' and Out lengths differ.")
+      #text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}
+      text(pos[,1], pos[,2], labels=Coo$fac[, names], cex=cex.names)}}}      
 panel.Opn <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
   Opn <- Coo
   if (missing(cols)) {
