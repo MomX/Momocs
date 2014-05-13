@@ -7,6 +7,11 @@
 \description{
 Morphometrics using R
 }
+\details{
+We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus
+Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
+their helpful contributions, ideas, bug reports, and much more.
+}
 \references{
 Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R.
 \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.

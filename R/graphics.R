@@ -1300,9 +1300,13 @@ plot.PCA <- function(#basics
   # we check and prepare
   if (!missing(fac)) {
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-    if (missing(col)) {
+    if (!missing(col) & length(col)==nlevels(fac)) {
+      col.groups <- col
+      col <- col.groups[fac]
+    } else {
       col.groups <- palette(nlevels(fac))
-      col <- col.groups[fac]}
+      col <- col.groups[fac]
+    } 
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }}}
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -1383,6 +1387,7 @@ tps2d <- function(grid0, fr, to){
 #' \code{tps.grid} calculates and plots deformation grids between two
 #' configurations.
 #' 
+#' @export tps.grid
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1408,8 +1413,7 @@ tps2d <- function(grid0, fr, to){
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps.grid(fr, to, amp=3, grid.size=40)
-#' 
-#' @export tps.grid
+
 tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
                      grid.size = 40, grid.col = "grey80",
                      shp = TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2),
@@ -1451,6 +1455,7 @@ tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
 #' \code{tps.arr}(ows) calculates deformations between two configurations and
 #' illustrate them using arrows.
 #' 
+#' @export
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1480,7 +1485,7 @@ tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
 #' to <- x$whisky
 #' tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)
 #' 
-#' @export tps.arr
+
 tps.arr <- function(fr, to, amp=1, palette = col.summer,
                     arr.nb = 200, arr.levels = 100, arr.len = 0.1,
                     arr.ang = 20, arr.lwd = 0.75, arr.col = "grey50",
@@ -1514,6 +1519,7 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' \code{tps.iso} calculates deformations between two configurations and map
 #' them with or without isolines.
 #' 
+#' @export
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1541,7 +1547,7 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' to <- x$whisky
 #' tps.iso(fr, to, iso.nb=2000, amp=3)
 #' 
-#' @export tps.iso
+
 tps.iso <- function(fr, to, amp=1, palette = col.summer,
                     iso.nb = 1000, iso.levels = 12, cont=TRUE, cont.col="black",
                     shp = TRUE, shp.border=col.gallus(2),

@@ -239,11 +239,14 @@ edm.nearest <- function(m1, m2, full=FALSE){
 # Utilities (useless?)
 #'@export
 .refactor <- function(df){data.frame(lapply(df, factor))}
+#' @export
 .trim.ext <- function(lf, width=nchar(lf)-4) {return(strtrim(lf, width=width))}
+#' @export
 .trim.path <- function(lf){
   lf0 <- strsplit(lf, "/")
   lf0 <- sapply(lf0, function(x) x[length(x)])
-  lf0 <- substr(lf0, 1, nchar(lf0)-4)}
+  lf0 <- substr(lf0, 1, nchar(lf0)-4)
+return(lf0)}
 
 # 00. Package documentation and NAMESPACE import ---------------------------
 
@@ -268,8 +271,8 @@ edm.nearest <- function(m1, m2, full=FALSE){
 #' Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
 #' their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
+#' @import sp
 #' @importFrom jpeg readJPEG
-#' @importFrom sp spsample Polygon
 #' @importFrom shapes procGPA
 #' @importFrom methods showDefault
 #' @importFrom MASS ginv
