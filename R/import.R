@@ -142,22 +142,22 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
 
 #import.jpg.multi  #todo
 
-##' Extract outline coordinates from multiple .jpg files
-##' 
-##' This function is used to import outline coordinates and is built around 
-##' \link{import.jpg1}
-##' @export import.jpg
-##' @param jpg.paths a vector of paths corresponding to the .jpg files to import
-##' @param auto.notcentered logical if TRUE random locations will be used until
-##' one of them is (assumed) to be within the shape (because of a black pixel);
-##' if FALSE a \link{locator} will be called, and you will have to click on a 
-##' point within the shape.
-##' @param threshold the threshold value use to binarize the images. Above, pixels
-##' are turned to 1, below to 0.
-##' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
-##' @details see \link{import.jpg1} and \link{import.Conte}.
-##' @return a list of matrices of (x; y) coordinates that can be passed to Out
-import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
+#' Extract outline coordinates from multiple .jpg files
+#' 
+#' This function is used to import outline coordinates and is built around 
+#' \link{import.jpg1}
+#' @export import.jpg
+#' @param jpg.paths a vector of paths corresponding to the .jpg files to import
+#' @param auto.notcentered logical if TRUE random locations will be used until
+#' one of them is (assumed) to be within the shape (because of a black pixel);
+#' if FALSE a \link{locator} will be called, and you will have to click on a 
+#' point within the shape.
+#' @param threshold the threshold value use to binarize the images. Above, pixels
+#' are turned to 1, below to 0.
+#' @param verbose whether to print which file is being treated. Useful to detect problems.
+#' @details see \link{import.jpg1} and \link{import.Conte}.
+#' @return a list of matrices of (x; y) coordinates that can be passed to Out
+import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose=TRUE) {
   cat("Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
@@ -166,7 +166,12 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5) {
   for (i in seq(along=jpg.paths)) {
     res[[i]] <- import.jpg1(jpg.paths[i],
                             auto.notcentered=auto.notcentered, threshold=threshold)
-    if (t) setTxtProgressBar(pb, i)}
+    if (verbose) {
+      cat(jpg.paths[i], "\n")
+    } else {
+      if (t) setTxtProgressBar(pb, i)
+    }
+  }
     names(res) <- .trim.path(jpg.paths)
   return(res)}
 

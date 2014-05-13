@@ -530,9 +530,17 @@ stack.Coo <- function(x, cols, borders,
 #' panel(mosquito, names=TRUE, cex.names=0.5)
 #' data(olea)
 #' panel(olea)
-panel <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
-panel.Out <- function(Coo, cols, borders, names=NULL, cex.names=0.6, ...){
+panel <- function(Coo, cols, borders, fac, palette=col.summer, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
+panel.Out <- function(Coo, cols, borders, fac, palette=col.summer, names=NULL, cex.names=0.6, ...){
   Out <- Coo
+  if (!missing(fac)){
+    
+    if (missing(cols)){
+      cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[, fac]]
+    } else {
+      cols <- cols[Coo$fac[, fac]]
+    }
+  }
   if (missing(cols)) {
     cols     <- rep(NA, length(Out))}
   if (length(cols)!=length(Out)) {
@@ -721,7 +729,7 @@ hist.OutCoe <-
         at <- c(range(hx$mids), mean(hx$mids))
         axis(1, at=at, labels=signif(at, 3), cex.axis=0.75)}}
     title(main=title, cex.main=1.5, outer=TRUE)
-  layout(matrix(1))}
+    layout(matrix(1))}
 
 #' Histogram on OpnCoe matrices of polynomials coefficients
 #' 
@@ -1093,7 +1101,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
   n  <- nrow(pos)
   # an empy pol object
   pol <- list(coeff=rep(NA, degree), ortho=ortho, 
-       baseline1=baseline1, baseline2=baseline2)
+              baseline1=baseline1, baseline2=baseline2)
   # we prepare the array
   res <- list()
   for (i in 1:n) {
