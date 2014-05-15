@@ -29,8 +29,8 @@ coo.check <- function(coo){
 #' 
 #' @export coo.center
 #' @aliases coo.center
-#' @S3method coo.center default
-#' @S3method coo.center Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
@@ -55,8 +55,8 @@ coo.center.Coo <- function(coo){
 #' 
 #' @export coo.scale
 #' @aliases coo.scale 
-#' @S3method coo.scale default
-#' @S3method coo.scale Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param scale the scaling factor, by default, the centroid size.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -94,8 +94,8 @@ coo.scale.Coo <- function(coo, scale){
 #' 
 #' @export coo.rotate
 #' @aliases coo.rotate 
-#' @S3method coo.rotate default
-#' @S3method coo.rotate Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param theta \code{numeric}the angle (in radians) to rotate shapes.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -125,8 +125,8 @@ coo.rotate.Coo <- function(coo, theta=0){
 #' 
 #' @export coo.align
 #' @aliases coo.align 
-#' @S3method coo.align default
-#' @S3method coo.align Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.aligncalliper}, \link{coo.alignxax}
@@ -153,8 +153,8 @@ coo.align.Coo <- function(coo){
 #' 
 #' @export coo.trans
 #' @aliases coo.trans 
-#' @S3method coo.trans default
-#' @S3method coo.trans Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param x \code{numeric}translation along the x-axis.
 #' @param y \code{numeric}translation along the y-axis.
@@ -181,8 +181,8 @@ coo.trans.Coo <- function(coo, x=0, y=0){
 #' Slides the coordinates so that the id1-th point become the first one.
 #' @export coo.slide
 #' @aliases coo.slide
-#' @S3method coo.slide default
-#' @S3method coo.slide Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param id1 the id of the point that will become the new first point.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -214,8 +214,8 @@ coo.slide.Coo <- function(coo, id1){
 #' 
 #' @export coo.sample
 #' @aliases coo.sample 
-#' @S3method coo.sample default
-#' @S3method coo.sample Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to sample.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -243,8 +243,8 @@ coo.sample.Coo <- function(coo, n){
 #' 
 #' @export coo.samplerr
 #' @aliases coo.samplerr 
-#' @S3method coo.samplerr default
-#' @S3method coo.samplerr Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param n integer, the number of points to sample.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates or an Coo object.
@@ -285,8 +285,8 @@ coo.samplerr.Coo <- function(coo, n){
 #' 
 #' @export coo.interpolate
 #' @aliases coo.interpolate
-#' @S3method coo.interpolate default
-#' @S3method coo.interpolate Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to interpolate.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -326,8 +326,8 @@ coo.interpolate.Coo <- function(coo, n){
 #' May be useful to remove digitization noise.
 #' @export coo.smooth
 #' @aliases coo.smooth
-#' @S3method coo.smooth default
-#' @S3method coo.smooth Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -362,8 +362,8 @@ coo.smooth.Coo <- function(coo, n){
 #' May be useful to remove digitization noise.
 #' @export coo.smoothcurve
 #' @aliases coo.smoothcurve
-#' @S3method coo.smoothcurve default
-#' @S3method coo.smoothcurve Opn
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -397,8 +397,8 @@ coo.smoothcurve.Opn <- function(coo, n){
 #' 
 #' @export is.closed
 #' @aliases is.closed
-#' @S3method is.closed default
-#' @S3method is.closed Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @return a boolean.
 #' @seealso \link{coo.close}, \link{coo.unclose}
@@ -430,8 +430,8 @@ is.closed.Coo <- function(coo){
 #' Returns a closed shape from (un)closed shapes. See also \link{coo.unclose}.
 #' 
 #' @export coo.close
-#' @S3method coo.close default
-#' @S3method coo.close Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.unclose}, \link{is.closed}
@@ -460,8 +460,8 @@ coo.close.Coo <- function(coo){
 #' Returns a unclosed shape from (un)closed shapes. See also \link{coo.close}.
 #' 
 #' @export coo.unclose
-#' @S3method coo.unclose default
-#' @S3method coo.unclose Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo}
 #'   object.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
@@ -494,8 +494,8 @@ coo.unclose.Coo <- function(coo){
 #' rotates a shape of "theta" angles (in radians) and with a \eqn{(x; y)} "center".
 #' @export coo.rotatecenter
 #' @aliases coo.rotatecenter
-#' @S3method coo.rotatecenter default
-#' @S3method coo.rotatecenter Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param theta \code{numeric} the angle (in radians) to rotate shapes.
 #' @param center the \eqn{(x; y)} position of the center
@@ -587,8 +587,8 @@ coo.down <- function(coo){
 #' Align the longest axis of a shape along the x-axis.
 #' @aliases coo.alignxax
 #' @export coo.alignxax
-#' @S3method coo.alignxax default
-#' @S3method coo.alignxax Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.align}, \link{coo.aligncalliper}
@@ -618,8 +618,8 @@ coo.alignxax.Coo <- function(coo){
 #' See \link{coo.bookstein}.
 #' @export coo.aligncalliper
 #' @aliases coo.aligncalliper
-#' @S3method coo.aligncalliper default
-#' @S3method coo.aligncalliper Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.align}, \link{coo.alignxax}, \link{coo.calliper}
@@ -699,8 +699,8 @@ coo.ldk <- function(coo, nb.ldk) {
 #' and \code{ldk2}-th points being set on \eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=0)}, respectively.
 #' @export coo.bookstein
 #' @aliases coo.bookstein
-#' @S3method coo.bookstein default
-#' @S3method coo.bookstein Coo
+#' @export
+#' @export
 #' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param ldk1 the id of the first point of the new baseline
 #' @param ldk2 the id of the second point of the new baseline
@@ -739,8 +739,8 @@ coo.bookstein.Coo <- function(coo, ldk1, ldk2){ #id1 ?
 #' By default it returns Bookstein's coordinates.
 #' @export coo.baseline
 #' @aliases coo.baseline
-#' @S3method coo.baseline default
-#' @S3method coo.baseline Coo
+#' @export
+#' @export
 #' @param coo a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
 #' @param ldk1 the id of the first point of the new baseline
 #' @param ldk2 the id of the second point of the new baseline
@@ -805,8 +805,8 @@ coo.baseline.Coo <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
 #' Returns the \eqn{(x; y)} centroid coordinates of a shape.
 #' @export coo.centpos
 #' @aliases coo.centpos
-#' @S3method coo.centpos default
-#' @S3method coo.centpos Coo
+#' @export
+#' @export
 #' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
 #' @return \eqn{(x; y)} coordinates as \code{numeric}.
 #' @keywords coo_utilities

@@ -33,7 +33,7 @@ Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
   return(Opn)}
 
 # The print method for Out objects
-#' @S3method print Opn
+#' @export
 print.Opn <- function(x, ...){
   Opn <- x
   ### Header
@@ -85,7 +85,7 @@ print.Opn <- function(x, ...){
 #' 
 #' @export nqual
 #' @aliases nqual
-#' @S3method nqual Opn
+#' @export
 #' @param Opn the \code{Opn} object on which to nqual
 #' @param method any method from \code{c("rawPolynomials", "orthoPolynomials")}
 #' @param id the shape on which to perform nqual
@@ -246,7 +246,7 @@ print.OpnCoe <- function(x, ...){
 #' 
 #' @export rawPolynomials
 #' @aliases rawPolynomials
-#' @S3method rawPolynomials Opn
+#' @export
 #' @param Opn an \link{Opn} object
 #' @param degree of the polynomial
 #' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
@@ -304,7 +304,7 @@ rawPolynomials.Opn <- function(Opn, degree,
 #' 
 #' @export orthoPolynomials
 #' @aliases orthoPolynomials
-#' @S3method orthoPolynomials Opn
+#' @export
 #' @param Opn an \link{Opn} object
 #' @param degree of the polynomial
 #' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline

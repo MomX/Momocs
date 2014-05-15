@@ -9,9 +9,28 @@ It hinges on the core functions developed in the book _Morphometrics with R_ by 
 
 From data acquisition to display, handling, calibration and calculations on morphometrics datasets, and then multivariate analyses, Momocs intends to provides a complete, convenient and extendable toolkit to specialists within every field that are, or may be, interested in integrating shape in their researches.
 
-Tutorial
---------
-
 Features
 --------
+Soon
+
+Planned features
+--------
+Soon
+
+Tutorial
+--------
+* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf)
+* More to come.
+
+Contact
+--------
+
+You are welcome to:
+
+* submit suggestions and bug-reports at: https://github.com/vbonhomme/Momocs/issues
+* send a pull request on: https://github.com/vbonhomme/Momocs/
+* compose a friendly e-mail to: bonhomme.vincent@gmail.com if you would like to collaborate with me or if you have any problem with your scripts. This will benefit to everyone.
+* have a look to my personnal webpage: http://www.vincentbonhomme.fr
+
+
 

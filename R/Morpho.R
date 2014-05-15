@@ -937,3 +937,4 @@ bezier.i <-function(B, nb.pts=120){
   coo <- cbind(x, y)
   return(coo)}
 # 3. Landmarks ------------------------------------------------------------
+

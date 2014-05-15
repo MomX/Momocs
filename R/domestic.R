@@ -105,7 +105,7 @@ names.Coe <- function(x){
 #' doing separated analyses (even if you could combine them later), then this
 #' function will ease the process. See the examples below.
 #' @aliases subset
-#' @S3method  subset Coo
+#' @export
 #' @param x a \code{Coo} object, i.e. \link{Out} or \link{Opn}
 #' @param subset logical taken from the $fac slot, or indices. See examples.
 #' @param ... useless here but maintains consistence with the generic subset.

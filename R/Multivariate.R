@@ -5,8 +5,8 @@
 #' a "fac") or globally (if not).
 #' @aliases mshapes
 #' @export mshapes
-#' @S3method mshapes OutCoe
-#' @S3method mshapes OpnCoe
+#' @export
+#' @export
 #' @param Coe a \link{Coe} object
 #' @param fac factor from the $fac slot. See examples below.
 #' @param nb.pts numeric the number of points for calculated shapes
@@ -67,7 +67,7 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
 #' a "fac") or globally (if not).
 #' @aliases Manova
 #' @export Manova
-#' @S3method Manova OutCoe
+#' @export
 #' @param ... a \link{Coe} object
 #' @return a list of matrices of (x,y) coordinates.
 #' @keywords multivariate
@@ -111,8 +111,8 @@ Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
 #' Performs a PCA on OutCoe, OpnCoe objects.
 #' @aliases pca
 #' @export pca
-#' @S3method pca Coe
-#' @S3method pca OpnCoe
+#' @export
+#' @export
 #' @param Coe the \link{Coe} object
 #' @return a "PCA" object on which to apply \link{plot.PCA}
 

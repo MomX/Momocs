@@ -31,7 +31,7 @@ Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   return(Out)}
 
 # The print method for Out objects
-#' @S3method print Out
+#' @export
 print.Out <- function(x, ...){
   Out <- x
   ### Header
@@ -92,7 +92,7 @@ print.Out <- function(x, ...){
 #' 
 #' @export hqual
 #' @aliases hqual
-#' @S3method hqual Out
+#' @export
 #' @param Out the \code{Out} object on which to hqual
 #' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
 #' @param id the shape on which to perform hqual
@@ -192,7 +192,7 @@ hqual.Out <-
 #' 
 #' @export hquant
 #' @aliases hquant
-#' @S3method hquant Out
+#' @export
 #' @param Coo the \code{Out} object on which to hquant
 #' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
 #' @param id the shape on which to perform hquant
@@ -334,7 +334,7 @@ hquant.Out <-
 #' 
 #' @export hpow
 #' @aliases hpow
-#' @S3method hpow Out
+#' @export
 #' @param Out the \code{Out} object on which to hpow
 #' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
 #' @param id the shape on which to perform hpow. All by default
@@ -435,7 +435,7 @@ OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
 
 
 # The print method for Out objects
-#' @S3method print Out
+#' @export
 print.OutCoe <- function(x, ...){
   OutCoe <- x
   p <- pmatch(OutCoe$method, c("eFourier", "rFourier", "tFourier"))
@@ -474,7 +474,7 @@ print.OutCoe <- function(x, ...){
 #' A wrapper for \link{efourier} to be applied on Out objects.
 #' @rdname eFourier-Out
 #' @export eFourier 
-#' @S3method eFourier Out
+#' @export
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
@@ -520,7 +520,7 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
 #' A wrapper for \link{rfourier} to be applied on Out objects.
 #' @rdname rFourier-Out
 #' @export rFourier 
-#' @S3method rFourier Out
+#' @export
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
@@ -554,7 +554,7 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
 #' A wrapper for \link{tfourier} to be applied on Out objects.
 #' @rdname tFourier-Out
 #' @export tFourier 
-#' @S3method tFourier Out
+#' @export
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
@@ -588,7 +588,7 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
 #' Calculate and display Ptolemaic ellipses which illustrates 
 #' intuitively the principle behing elliptical Fourier analysis.
 #' @export Ptolemy
-#' @S3method Ptolemy Out
+#' @export
 #' @param Out The \code{Out} object on which to display Ptolemaic ellipses.
 #' @param id The \code{id} on which to display Ptolemaic ellipses.
 #' @param t A \code{vector} af angles (in radians) on which to display ellipses.
@@ -654,3 +654,4 @@ Ptolemy.Out <- function(Out,
     legend("topright", legend = as.character(1:nb.h), bty="o",
            col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
            title = "Number of harmonics")}}
+

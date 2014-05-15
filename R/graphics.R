@@ -525,8 +525,8 @@ stack.Coo <- function(x, cols, borders,
 #' Plots all the outlines from a \code{Coo} side by side
 #'
 #' @export panel
-#' @S3method panel Out
-#' @S3method panel Opn
+#' @export
+#' @export
 #' @param Coo The \code{Coo (Out/Opn)} object  to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equals to the number of coordinates.
@@ -829,7 +829,7 @@ hist.OpnCoe <-
 #' in describing shapes.
 #' @export harm.contrib
 #' @aliases harm.contrib
-#' @S3method harm.contrib OutCoe
+#' @export
 #' @param OutCoe the \link{OutCoe} object
 #' @param id numeric the id of the shape to consider
 #' @param harm.range a vector of harmonics
@@ -887,7 +887,7 @@ harm.contrib.OutCoe <- function(
 #' in describing shapes.
 #' @export degree.contrib
 #' @aliases degree.contrib
-#' @S3method degree.contrib OpnCoe
+#' @export
 #' @param OpnCoe the \link{OpnCoe} object
 #' @param id numeric the id of the shape to consider
 #' @param degree.range a vector of polynomials
