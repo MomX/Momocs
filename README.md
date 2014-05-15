@@ -20,12 +20,12 @@ Soon
 Installation
 --------
 
-* From R: 
+* From R:<br />
 <code>
 install.packages("Momocs")
 library(Momocs)
 </code>
-* For the very last version: 
+* For the very last version: <br />
 <code>
 library(devtools) # You need to install it first using install.packages("devtools")
 install_github("https://github.com/vbonhomme/Momocs")
