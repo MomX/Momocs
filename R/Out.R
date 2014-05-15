@@ -320,7 +320,7 @@ hquant.Out <-
                col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", inset=0.005, cex=0.7,
                title = legend.title)}
       box() }
-    return(list(res=res, m=m, d=d))}
+    invisible(list(res=res, m=m, d=d))}
 
 #' Quantitative calibration, through harmonic power, for Out objects
 #' 

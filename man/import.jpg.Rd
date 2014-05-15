@@ -3,7 +3,8 @@
 \alias{import.jpg}
 \title{Extract outline coordinates from multiple .jpg files}
 \usage{
-import.jpg(jpg.paths, auto.notcentered = FALSE, threshold = 0.5)
+import.jpg(jpg.paths, auto.notcentered = FALSE, threshold = 0.5,
+  verbose = TRUE)
 }
 \arguments{
 \item{jpg.paths}{a vector of paths corresponding to the .jpg files to import}
@@ -16,7 +17,7 @@ point within the shape.}
 \item{threshold}{the threshold value use to binarize the images. Above, pixels
 are turned to 1, below to 0.}
 
-\item{...}{arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.}
+\item{verbose}{whether to print which file is being treated. Useful to detect problems.}
 }
 \value{
 a list of matrices of (x; y) coordinates that can be passed to Out

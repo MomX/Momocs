@@ -3,7 +3,8 @@
 \alias{panel}
 \title{Plot on Coo objects: family picture}
 \usage{
-panel(Coo, cols, borders, names = NULL, cex.names = 0.6, ...)
+panel(Coo, cols, borders, fac, reorder, palette = col.summer, names = NULL,
+  cex.names = 0.6, ...)
 }
 \arguments{
 \item{Coo}{The \code{Coo (Out/Opn)} object  to plot.}
@@ -13,6 +14,12 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{borders}{A \code{vector} of colors for drawing the borders.
 Either a single value or of length exactly equals to the number of coordinates.}
+
+\item{fac}{a factor within the $fac slot for colors}
+
+\item{reorder}{a factor or a numeric to reorder shapes}
+
+\item{palette}{a color \link{palette}}
 
 \item{names}{whether to plot names or not. If TRUE uses shape names, otherwise
 pass a character for the names of the files}

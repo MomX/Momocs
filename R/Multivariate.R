@@ -141,7 +141,7 @@ pca.OpnCoe <- function(Coe){
 
 clust <- function(...){UseMethod("clust")}
 clust.OutCoe <- function(OutCoe, fac,
-                         method = "euclidean", type="unrooted", palette=col.summer2, ...){
+                         method = "euclidean", type="unrooted", palette=col.summer, ...){
   if (missing(fac)) {
     cols <- rep("black", nrow(OutCoe$coe))
   } else {

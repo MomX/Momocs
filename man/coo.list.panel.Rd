@@ -3,8 +3,8 @@
 \alias{coo.list.panel}
 \title{Plots sets of shapes.}
 \usage{
-coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar =
-rep(0, 4), cols, borders, poly=TRUE)
+coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar = rep(0,
+  4), cols, borders, reorder = NULL, poly = TRUE)
 }
 \arguments{
 \item{coo.list}{A \code{list} of coordinates}
@@ -22,6 +22,8 @@ plotting region.}
 \item{cols}{A \code{vector} of colors to fill shapes.}
 
 \item{borders}{A \code{vector} of colors to draw shape borders.}
+
+\item{reorder}{a factor or a numeric to reorder shapes, colors and borders.}
 
 \item{poly}{logical whether to use polygon or lines to draw shapes.
 mainly for use for outlines and open outlines.}
@@ -41,6 +43,12 @@ coo.list.panel(bot$coo)
 x <- coo.list.panel(bot$coo)
 x # positions of shapes returned invisibly
 # axis(1) ; axis(2) # that's a single graphical window
+
+data(bot)
+coo <- bot$coo
+ord <- sapply(coo, coo.eccentricity.eigen)
+pos <- coo.list.panel(coo, reorder=ord)
+text(pos, labels=signif(ord[order(ord)], 3))
 }
 \seealso{
 \link{coo.plot} and \link{coo.template}.

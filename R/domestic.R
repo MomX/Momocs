@@ -352,6 +352,16 @@ NULL
 #' archaeological material. \emph{Journal of Biogeography} \bold{31}: 63-77.
 NULL
 
+#' Data: Outline coordinates of 210 olive seeds oopen outlines.
+#' 
+#' @docType data
+#' @name shapes
+#' @rdname data_shapes
+#' @keywords datasets
+#' @format An \link{Out} object with the outline coordinates of some various shapes.
+#' @source Borrowed from default shapes from (c) Adobe Photoshop.
+NULL
+
 # #' Data: Outline coordinates of 50 date seeds (Phoenix dactylifera), with 2 views
 # #' 
 # #' @docType data

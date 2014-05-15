@@ -135,8 +135,6 @@ coo.template   <- function(coo, size=1) {
 #' the help of \link{coo.template}.
 #' 
 #' @export coo.list.panel
-#' @usage coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar =
-#' rep(0, 4), cols, borders, poly=TRUE)
 #' @param coo.list A \code{list} of coordinates
 #' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
 #' the panel display. If missing, shapes are arranged in a square.
@@ -536,6 +534,7 @@ stack.Coo <- function(x, cols, borders,
 #' Either a single value or of length exactly equals to the number of coordinates.
 #' @param fac a factor within the $fac slot for colors
 #' @param reorder a factor or a numeric to reorder shapes
+#' @param palette a color \link{palette}
 #' @param names whether to plot names or not. If TRUE uses shape names, otherwise
 #' pass a character for the names of the files
 #' @param cex.names a cex for the names
@@ -1315,7 +1314,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
-  col="black", pch=20, cex=0.5, palette=col.summer2,
+  col="black", pch=20, cex=0.5, palette=col.summer,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -1630,7 +1629,8 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' @name col.summer
 #' @title Some color palettes.
 #' @usage col.summer(n)
-#' col.summer2(n)
+#' col.spring(n)
+#' col.autumn(n)
 #' col.solarized(n)
 #' col.gallus(n)
 #' col.blackgallus(n)
@@ -1639,14 +1639,15 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' col.sari(n)
 #' col.india(n)
 #' col.bw(n)
-#' @export col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
-#' @aliases col.summer col.summer2 col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
+#' @export col.spring col.summer col.autumn col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
+#' @aliases col.spring col.summer col.autumn col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
 #' @param n the number of colors to generate from the color palette
 #' @return color codes (hexadecimal format)
 #' @keywords graphics
 #' @examples
 #' barplot(1:10, col=col.summer(10), main="col.summer")
-#' barplot(1:10, col=col.summer2(10), main="col.summer2")
+#' barplot(1:10, col=col.spring(10), main="col.spring")
+#' barplot(1:10, col=col.autumn(10), main="col.autumn")
 #' barplot(1:10, col=col.solarized(10), main="col.solarized")
 #' barplot(1:10, col=col.gallus(10), main="col.gallus")
 #' barplot(1:10, col=col.blackgallus(10), main="col.blackgallus")
@@ -1656,8 +1657,9 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' barplot(1:10, col=col.india(10), main="col.india")
 #' barplot(1:10, col=col.bw(10), main="col.bw")
 col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
-col.summer2 <- colorRampPalette(c("#66c2a5", "#fc8d62", "#8da0cb",
-                                  "#e78ac3", "#a6d854", "#ebad1f"))
+col.spring <- colorRampPalette(c("#a3baff", "#ffff7f", "#ff9797"))
+
+col.autumn <- colorRampPalette(c("#3353b3", "#b1b100", "#b32222"))
 col.solarized <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", "#d33682",
                                     "#6c71c4", "#268bd2", "#2aa198", "#859900"))
 col.gallus <- colorRampPalette(c("#025D8C", "#FFFFFF", "#A80000"))
