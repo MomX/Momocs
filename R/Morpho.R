@@ -59,7 +59,6 @@
 #' astronomical Ptolemy's epicycles (see \link{Ptolemy}), and the
 #' reconstruction obtained from \eqn{N} harmonics is the best possible fit in a
 #' least-squares sense.
-#' @export 
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to use
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -90,6 +89,7 @@
 #' ef
 #' efi <- efourier.i(ef)
 #' coo.draw(efi, border="red", col=NA)
+#' @export
 efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   coo <- coo.check(coo)
   if (is.closed(coo)) coo <- coo.unclose(coo)
@@ -126,8 +126,6 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   co <- 2 * sum(coo[, 2] * Dt/T)
   return(list(an = an, bn = bn, cn = cn, dn = dn, ao = ao, co = co))}
 
-
-
 #' Calculates inverse elliptical Fourier analysis.
 #' 
 #' \code{efourier.i} uses the inverse elliptical Fourier transformation to
@@ -136,7 +134,6 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' 
 #' See \link{efourier} for the mathematical background.
 #' 
-#' @export efourier.i
 #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
 #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
 #' @param nb.h \code{integer}. The number of harmonics to use. If not
@@ -161,6 +158,7 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' ef
 #' efi <- efourier.i(ef)
 #' coo.draw(efi, border="red", col=NA)
+#' @export
 efourier.i <- function(ef, nb.h, nb.pts = 120) {
   #if (any(names(ef) != c("an", "bn", "cn", "dn"))) {
   #  stop("a list containing 'an', 'bn', 'cn' and 'dn' harmonic coefficients must be provided")}
@@ -195,7 +193,6 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' or using the longest radius. They will be implemented in further Momocs
 #' versions.
 #' 
-#' @export efourier.norm
 #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
 #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
 #' @param start \code{logical}. Whether to conserve the position of the first
@@ -230,6 +227,7 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' efourier.norm(q)
 #' efourier.shape(nb.h=5, alpha=1.2)
 #' efourier.shape(nb.h=12, alpha=0.9)
+#' @export
 efourier.norm <- function(ef, start = FALSE) {
   A1 <- ef$an[1]
   B1 <- ef$bn[1]
@@ -275,7 +273,6 @@ efourier.norm <- function(ef, start = FALSE) {
 #' coefficients will thus increase. See \link{efourier} for the mathematical
 #' background.
 #' 
-#' @export efourier.shape
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -308,6 +305,7 @@ efourier.norm <- function(ef, start = FALSE) {
 #' 
 #' panel(Out(a2l(replicate(100, 
 #' efourier.shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
+#' @export
 efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE){
   if (missing(nb.h) &  missing(an)) nb.h <- 3
   if (missing(nb.h) & !missing(an)) nb.h <- length(an)
@@ -338,6 +336,7 @@ efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE){
 #' analysis and \link{Ptolemy} for an illustration of the first
 #' ellipse/harmonic defining the shape "amplitude".
 #' @keywords coreMorpho
+#' @export
 ef.amplify <- function(ef, amp=rep(0.5, 4)){
   ef$an <- ef$an*amp[1]
   ef$bn <- ef$bn*amp[2]
@@ -363,7 +362,6 @@ ef.amplify <- function(ef, amp=rep(0.5, 4)){
 #' 
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 #' individual shape, are then used for multivariate analyses.
-#' @export rfourier
 #' @param coo A \code{list} or \code{matrix} of coordinates.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -388,6 +386,7 @@ ef.amplify <- function(ef, amp=rep(0.5, 4)){
 #' rf
 #' rfi <- rfourier.i(rf)
 #' coo.draw(rfi, border="red", col=NA)
+#' @export
 rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   coo <- coo.check(coo)
   if (missing(nb.h)) {
@@ -452,7 +451,7 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' rfi <- rfourier.i(rf)
 #' coo.draw(rfi, border="red", col=NA)
 #' 
-#' @export rfourier.i
+#' @export
 rfourier.i <- function(rf, nb.h, nb.pts=120) {
   if (!all(c("an", "bn") %in% names(rf))) {
     stop("a list containing 'an' and 'bn' harmonic coefficients 
@@ -476,6 +475,7 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
   coo <- cbind(x, y)
   colnames(coo) <- c("x", "y")
   return(coo)}
+
 #' Calculates and draw "rfourier" shapes.
 #' 
 #' \code{rfourier.shape} calculates a "Fourier radii variation shape" given
@@ -489,7 +489,6 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
 #' coefficients will thus increase. See \link{rfourier} for the mathematical
 #' background.
 #' 
-#' @export rfourier.shape
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -518,6 +517,7 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
 #' # Butterflies of the vignette' cover
 #' panel(Out(a2l(replicate(100,
 #' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
+#' @export
 rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   if (missing(nb.h) &  missing(an)) nb.h <- 1
   if (missing(nb.h) & !missing(an)) nb.h <- length(an)
@@ -527,6 +527,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   shp <- rfourier.i(rf, nb.h=nb.h, nb.pts=nb.pts)      
   if (plot) coo.plot(shp)
   return(shp)}
+
 # 1.3 Tangent angle ============================================================
 #' Calculates tangent angle Fourier analysis.
 #' 
@@ -545,7 +546,6 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
 #' b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \deqn{
 #' a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
 #' 
-#' @export tfourier
 #' @param coo A list or matrix of coordinates
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -580,6 +580,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
 #' tfi <- tfourier.i(tf)
 #' coo.draw(tfi, border="red", col=NA) # the outline is not closed...
 #' coo.draw(tfourier.i(tf, force2close=TRUE), border="blue", col=NA) # we force it to close.
+#' @export
 tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   if (missing(nb.h)) {
     nb.h <- 12
@@ -623,7 +624,6 @@ tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' 
 #' See \link{tfourier} for the mathematical background.
 #' 
-#' @export tfourier.i
 #' @param tf a list with ao, an and bn components, typically as returned by
 #' tfourier
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
@@ -651,7 +651,7 @@ tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' data(bot)
 #' tfourier(bot[1], 24)
 #' tfourier.shape()
-
+#' @export
 tfourier.i<-function(tf, nb.h, nb.pts=120,
                      force2close=FALSE, rescale=TRUE, perim=2*pi, thetao=0){
   if (!all(c("an", "bn") %in% names(tf))) {
@@ -700,7 +700,6 @@ tfourier.i<-function(tf, nb.h, nb.pts=120,
 #' coefficients will thus increase. See \link{tfourier} for the mathematical
 #' background.
 #'
-#' @export tfourier.shape
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -727,7 +726,7 @@ tfourier.i<-function(tf, nb.h, nb.pts=120,
 #' tfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
 #' panel(Out(a2l(replicate(100,
 #' coo.force2close(tfourier.shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
-
+#' @export
 tfourier.shape <- function(an, bn, ao=0, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   if (missing(nb.h) &  missing(an)) nb.h <- 1
   if (missing(nb.h) & !missing(an)) nb.h <- length(an)
@@ -759,8 +758,7 @@ tfourier.shape <- function(an, bn, ao=0, nb.h, nb.pts=80, alpha=2, plot=TRUE){
 #'   main="Cumulated harmonic power without the first harmonic",
 #'   ylab="Cumulated harmonic power", xlab="Harmonic rank")
 #' 
-#' 
-#' @export harm.pow
+#' @export
 harm.pow <- function(xf){
   if (is.list(xf)) {
     if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
@@ -785,7 +783,6 @@ harm.pow <- function(xf){
 #' \link{tfourier} respectively). . This function is used internally but might
 #' be of interest elwewhere.
 #' 
-#' @export coeff.sel
 #' @param retain \code{numeric}. The number of harmonics to retain.
 #' @param drop \code{numeric}. The number of harmonics to drop
 #' @param nb.h \code{numeric}. The maximum harmonic rank.
@@ -794,6 +791,7 @@ harm.pow <- function(xf){
 #' @return \code{coeff.sel} returns indices that can be used to select columns
 #' from an harmonic coefficient matrix. \code{coeff.split} returns a named list
 #' of coordinates.
+#' @export
 coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
   cs <- numeric()
   for (i in 1:cph) {
@@ -811,7 +809,6 @@ coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
 #' approaches (see \link{rfourier} and \link{tfourier} respectively). This
 #' function is used internally but might be of interest elwewhere.
 #' 
-#' @export coeff.split
 #' @param cs A \code{vector} of harmonic coefficients.
 #' @param nb.h \code{numeric}. The maximum harmonic rank.
 #' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and
@@ -820,6 +817,7 @@ coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
 #' @examples
 #' coeff.split(1:128, nb.h=32, cph=4) # efourier
 #' coeff.split(1:64, nb.h=32, cph=2)  # t/r fourier
+#' @export
 coeff.split <- function(cs, nb.h=8, cph=4){
   if (missing(nb.h)) {nb.h <- length(cs)/cph }
   cp <- list()
@@ -834,13 +832,12 @@ coeff.split <- function(cs, nb.h=8, cph=4){
 #' 
 #' Returns a model obtained with a lm with polynomial coefficients, orthogonal 
 #' or not, from a matrix of (x; y) coordinates (assumed to be normalized).
-#' @export polynomials
 #' @param coo a matrix or a list of (x; y) coefficients
 #' @param n the degree of the polynomial to fit (the intercept is returned)
 #' @param ortho logical wheter to calculate orthogonal coefficients
 #' @return a lm model object
 #' @keywords morphoCore
-
+#' @export
 polynomials <- function(coo, n, ortho=TRUE){
   coo <- coo.check(coo)
   if (missing(n)) {
@@ -855,7 +852,6 @@ polynomials <- function(coo, n, ortho=TRUE){
 #' 
 #' Returns a matrix of (x; y) coordinates when passed with a model obtained with
 #' \link{polynomials}.
-#' @export polynomials.i
 #' @param pol a pol list such as created by \link{polynomials}.
 #' @param nb.pts the number of points to predict. By default (and can't be higher)
 #' the number of points in the original shape.
@@ -869,6 +865,7 @@ polynomials <- function(coo, n, ortho=TRUE){
 #' for (i in 2:7){
 #' x <- polynomials.i(polynomials(o, i, ortho=TRUE))
 #' coo.draw(x, border=col.summer(7)[i], points=FALSE)  }
+#' @export
 polynomials.i <- function(pol, nb.pts=120, reregister=TRUE){
   x.new  <- seq(pol$baseline1[1], pol$baseline2[1], length=nb.pts)
   degree <- length(pol$coeff)-1
@@ -890,11 +887,11 @@ polynomials.i <- function(pol, nb.pts=120, reregister=TRUE){
 # 2.3 Bezier splines -------------------------------------------------------
 #' Calculates Bezier coefficients from a shape
 #' #todo
-#' @export bezier
 #' @param coo a matrix or a list of (x; y) coordinates
 #' @param n the degree
 #' @return a list with J and B
 #' @keywords morphoCore
+#' @export
 bezier <- function(coo, n){
   coo <- coo.check(coo)
   if (missing(n)) n <- nrow(coo)
@@ -915,11 +912,11 @@ bezier <- function(coo, n){
 #' Calculates a shape from Bezier coefficients
 #' 
 #' todo
-#' @export bezier.i
 #' @param B a matrix
 #' @param nb.pts the number of points to return for drawing he shape
 #' @return a matrix of (x; y) coordinates
 #' @keywords morphoCore
+#' @export
 bezier.i <-function(B, nb.pts=120){
   x   <- y <- numeric(nb.pts)
   n    <- nrow(B)-1

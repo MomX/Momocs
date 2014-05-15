@@ -4,7 +4,6 @@
 #' \code{l2m} converts a \code{list} with x and y components to a 2-col
 #' \code{matrix} of coordinates.
 #' 
-#' @export
 #' @usage l2m(l)
 #' @param l A \code{list} with x and y coordinates as components.
 #' @return Returns a matrix of \eqn{(x; y)}coordinates.
@@ -14,7 +13,7 @@
 #' 
 #' l <- list(x=1:5, y=5:1)
 #' l2m(l)
-
+#' @export
 l2m  <- function(l) {
   m <- cbind(l$x, l$y)
   colnames(m) <- c("x", "y")
@@ -25,7 +24,6 @@ l2m  <- function(l) {
 #' \code{m2l} converts a matrix of \eqn{(x; y)}coordinates to a list with
 #' \code{x; y} components.
 #' 
-#' @export
 #' @usage m2l(m)
 #' @param m A 2-columns \code{matrix} containing x and y coordinates.
 #' @return Returns a \code{list} with \eqn{x; y} components.
@@ -37,6 +35,7 @@ l2m  <- function(l) {
 #' data(gorf.dat)
 #' m2l(gorf.dat[,,1])
 #' }
+#' @export
 m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
 
 #' Converts a list of coordinates to an array.
@@ -44,7 +43,6 @@ m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
 #' \code{l2a} converts a list of \code{k} matrices with n-rows and n-col
 #' matrices to a \code{m x n x k} array.
 #' 
-#' @export
 #' @usage l2a(l)
 #' @param l A \code{list} of matrices of the same dimension.
 #' @return An array of coordinates.
@@ -58,6 +56,7 @@ m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
 #' a <- l2a(l)
 #' A.plot(a)
 #' 	}
+#' @export
 l2a  <- function(l){
   return(array(unlist(l), dim=c(nrow(l[[1]]), ncol(l[[1]]), length(l))))}
 
@@ -65,20 +64,17 @@ l2a  <- function(l){
 #' 
 #' \code{a2l} converts an array of coordinates into a list of 2-cols matrices.
 #' 
-#' 
 #' @usage a2l(a)
 #' @param a An \code{array} of coordinates.
 #' @return A \code{list} with 2-cols matrices of \eqn{(x; y)} coordinates.
 #' @seealso \link{l2a}
 #' @keywords Babel
 #' @examples
-#' 
 #' #data(gorf.dat) # we import gorf.data from shapes package
 #' #l <- a2l(gorf.dat)
 #' #a <- l2a(l)
 #' #A.plot(a)
-#' 
-#' @export a2l
+#' @export
 a2l <- function(a){
   if (!is.array(a)) stop("An array of dimension 3 must be provided")
   k <- dim(a)[3]
@@ -136,7 +132,12 @@ a2l <- function(a){
 #   }
 #   names(coo.list) <- coo.names
 #   return(Coo(coo.list))}
-# 
+
+
+#' Conversion from nef to Coe
+#' 
+#' @param nef.path the path to the .nef file
+#' @export
 nef2Coe <- function(nef.path) {
   # change nef to coe one day
   nef     <- readLines(nef.path)

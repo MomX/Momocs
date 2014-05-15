@@ -22,8 +22,8 @@
 #'
 #' @seealso \link{Coo}, \link{Opn}
 #' @keywords Out
-#' @export Out
 #' @aliases Out
+#' @export
 Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   Out <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Out$fac)) Out$fac <- .refactor(Out$fac)
@@ -89,10 +89,7 @@ print.Out <- function(x, ...){
 #' Calculate and displays reconstructed shapes using a
 #' range of harmonic number.
 #' 
-#' 
-#' @export hqual
 #' @aliases hqual
-#' @export
 #' @param Out the \code{Out} object on which to hqual
 #' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
 #' @param id the shape on which to perform hqual
@@ -112,6 +109,7 @@ print.Out <- function(x, ...){
 #' @examples
 #' data(bot)
 #' hqual(bot)
+#' @export
 hqual <- 
   function(Out,
            method=c("efourier", "rfourier", "tfourier"),
@@ -125,7 +123,7 @@ hqual <-
            palette = col.india,
            shp.col=NA,
            shp.border="#1A1A1A", ...){UseMethod("hqual")}
-
+#' @export
 hqual.Out <-
   function(Out, method=c("efourier", "rfourier", "tfourier"),
            id, 
@@ -189,10 +187,7 @@ hqual.Out <-
 #' Calculate deviations from original and reconstructed shapes using a
 #' range of harmonic number.
 #' 
-#' 
-#' @export hquant
 #' @aliases hquant
-#' @export
 #' @param Coo the \code{Out} object on which to hquant
 #' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
 #' @param id the shape on which to perform hquant
@@ -212,6 +207,7 @@ hqual.Out <-
 #' @examples
 #' data(bot)
 #' hqual(bot)
+#' @export
 hquant <- 
   function(Coo,
            method = c("efourier", "rfourier", "tfourier"),
@@ -228,6 +224,8 @@ hquant <-
            legend.title = "Nb of harmonics",
            palette = col.summer,
            lineat.y=c(0.5, 0.1, 0.01)){UseMethod("hquant")}
+
+#' @export
 hquant.Out <- 
   function(Coo,
            method = c("efourier", "rfourier", "tfourier"),
@@ -331,10 +329,7 @@ hquant.Out <-
 #' It returns and can plot cumulated harmonic power whether dropping 
 #' the first harmonic or not. 
 #' 
-#' 
-#' @export hpow
 #' @aliases hpow
-#' @export
 #' @param Out the \code{Out} object on which to hpow
 #' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
 #' @param id the shape on which to perform hpow. All by default
@@ -358,12 +353,13 @@ hquant.Out <-
 #' @examples
 #' data(bot)
 #' hpow(bot)
-
+#' @export
 hpow <- 
   function(Out, method="efourier", id=1:length(Out),
            nb.h=16, drop=1, smooth.it=0, plot=TRUE,
            title="Fourier coefficients power spectrum",
            lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1){UseMethod("hpow")}
+#' @export
 hpow.Out <- 
   function(Out, method="efourier", id=1:length(Out),
            nb.h=16, drop=1, smooth.it=0, plot=TRUE,
@@ -425,8 +421,8 @@ hpow.Out <-
 #'
 #' @seealso \link{Coe}, \link{OpnCoe}
 #' @keywords OutCoe
-#' @export OutCoe
 #' @aliases OutCoe
+#' @export
 OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to OpnCoe")
   OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
@@ -473,8 +469,6 @@ print.OutCoe <- function(x, ...){
 #'
 #' A wrapper for \link{efourier} to be applied on Out objects.
 #' @rdname eFourier-Out
-#' @export eFourier 
-#' @export
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
@@ -484,9 +478,10 @@ print.OutCoe <- function(x, ...){
 #' @examples
 #' data(bot)
 #' eFourier(bot, 12)
+#' @export
 eFourier <- function(Out, nb.h, smooth.it, norm, start){
   UseMethod("eFourier")}
-
+#' @export
 eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
   q <- floor(min(sapply(Out$coo, nrow)/2)) 
   if (missing(nb.h)) {
@@ -519,8 +514,6 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
 #' 
 #' A wrapper for \link{rfourier} to be applied on Out objects.
 #' @rdname rFourier-Out
-#' @export rFourier 
-#' @export
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
@@ -529,9 +522,10 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
 #' @examples
 #' data(bot)
 #' rFourier(bot, 12)
+#' @export
 rFourier <- function(Out, nb.h, smooth.it, norm){
   UseMethod("rFourier")}
-
+#' @export
 rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h))  {
@@ -553,8 +547,6 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
 #' 
 #' A wrapper for \link{tfourier} to be applied on Out objects.
 #' @rdname tFourier-Out
-#' @export tFourier 
-#' @export
 #' @param Out the Out object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
@@ -563,9 +555,10 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
 #' @examples
 #' data(bot)
 #' tFourier(bot, 12)
+#' @export
 tFourier <- function(Out, nb.h, smooth.it, norm){
   UseMethod("tFourier")}
-
+#' @export
 tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h))  {
@@ -582,76 +575,4 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
     tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose=TRUE)
     coe[i, ] <- c(tf$an, tf$bn)}
   return(OutCoe(coe=coe, fac=Out$fac, method="tFourier", norm=norm))}
-
-#' Ptolemaic ellipses and illustration of eFourier
-#' 
-#' Calculate and display Ptolemaic ellipses which illustrates 
-#' intuitively the principle behing elliptical Fourier analysis.
-#' @export Ptolemy
-#' @export
-#' @param Out The \code{Out} object on which to display Ptolemaic ellipses.
-#' @param id The \code{id} on which to display Ptolemaic ellipses.
-#' @param t A \code{vector} af angles (in radians) on which to display ellipses.
-#' @param nb.h \code{integer}. The number of harmonics to display.
-#' @param nb.pts \code{integer}. The number of points to use to display shapes.
-#' @param palette A color palette.
-#' @param legend \code{logical}. Whether to plot the legend box.
-#' @references 
-#' This method has been inspired by the figures found in the followings papers.
-#' Kuhl FP, Giardina CR. 1982. Elliptic Fourier features of a closed contour.
-#'  \emph{Computer Graphics and Image Processing} \bold{18}: 236-258.
-#' Crampton JS. 1995. Elliptical Fourier shape analysis of fossil bivalves: 
-#' some practical considerations. \emph{Lethaia} \bold{28}: 179-186.
-#' @seealso \link{efourier}. 
-#' An intuitive explanation of elliptic Fourier analysis can be found in 
-#' the \bold{Details} section of the \link{efourier} function.
-#' @examples
-#' data(hearts)
-#' Ptolemy(hearts, 1)
-Ptolemy <- function(Out, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
-Ptolemy.Out <- function(Out,
-                        id=1,
-                        t=seq(0, 2*pi, length=7)[-1],
-                        nb.h=3,
-                        nb.pts=360,
-                        palette=col.sari,
-                        legend=FALSE) {
-  # we prepare and deduce
-  op <- par(no.readonly = TRUE)
-  on.exit(par(op))
-  par(xpd=NA)
-  cols <- palette(nb.h)
-  coo <- coo.center(Out$coo[[id]])
-  #k <- floor(length(coo$x)/4)
-  coo.plot(coo, main=names(Out)[id])
-  # now we calculate for every harmonic
-  coo.ef  <- efourier(coo, nb.h)
-  coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
-  vect   <- matrix(nrow=nb.h, ncol=2)
-  vect <- rbind(c(0, 0), vect)
-  for (i in seq(along=t)) {
-    for(j in 1:nb.h) {
-      vect[j+1, 1] <- coo.ef$an[j] * cos(j * t[i]) + coo.ef$bn[j] * sin(j * t[i])
-      vect[j+1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + coo.ef$dn[j] * sin(j * t[i])}
-    vs <- apply(vect, 2, cumsum)
-    for (j in 1:nb.h){
-      lh   <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j],
-                             coo.ef$cn[1:j], coo.ef$dn[1:j],
-                             nb.h=j, nb.pts=nb.pts, plot=FALSE)
-      ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j],
-                             coo.ef$cn[j], coo.ef$dn[j],
-                             nb.h=1, nb.pts=nb.pts, plot=FALSE)
-      lines(lh, col=paste(cols[j], "22", sep=""), lwd=0.8)
-      lines(ellh[,1] + vs[j, 1], ellh[,2] + vs[j, 2],
-            col=cols[j], lwd=1)
-      points(vs[j+1, 1], vs[j+1, 2], col=cols[j], cex=0.8)
-      arrows(vs[j, 1], vs[j, 2], vs[j+1, 1], vs[j+1, 2],
-             col=cols[j], angle=10, length=0.05, lwd=1.2)
-    }
-  }
-  points(0, 0, pch=20, col=cols[1])
-  if (legend) {
-    legend("topright", legend = as.character(1:nb.h), bty="o",
-           col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
-           title = "Number of harmonics")}}
 

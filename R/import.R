@@ -7,11 +7,11 @@
 #' Provided with an image mask (black/1 pixels over a white/0 background), 
 #' and with the coordinates of a point within the shape, returns the (x; y)
 #' coordinates of the outline.
-#' @export import.Conte
 #' @param img a matrix that corresponds to an binary image mask
 #' @param x numeric the (x; y) coordinates of a starting point within the shape.
 #' @return a matrix, the (x; y) coordinates of the outline points.
 #' @keywords import
+#' @export
 import.Conte <- function (img, x){ 
   while (abs(img[x[1], x[2]] - img[x[1] - 1, x[2]]) < 0.1) {
     x[1] <- x[1] + 1
@@ -71,12 +71,12 @@ import.Conte <- function (img, x){
 #' A wrapper around read.table. May be used to import outline/landmark coordinates
 #' By default it assumes that the columns are not named in the .txt files. You can
 #' tune this using the '...' argument.
-#' @export import.txt
 #' @param txt.list a vector of paths corresponding to the .txt files to import
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
 #' Out, Opn, Ldk, etc.
 #' @keywords import
+#' @export
 import.txt <- function(txt.list, ...){
   cat("Extracting", length(txt.list), "..txt coordinates...\n")
   if (length(txt.list) > 10) {
@@ -95,7 +95,6 @@ import.txt <- function(txt.list, ...){
 #' 
 #' Used to import outline coordinates from .jpg files. This function is used for
 #' single images and is the core function of \link{import.jpg}
-#' @export import.jpg1
 #' @param jpg.path a vector of paths corresponding to the .jpg files to import
 #' @param auto.notcentered logical if TRUE random locations will be used until
 #' one of them is (assumed) to be within the shape (because of a black pixel);
@@ -117,6 +116,7 @@ import.txt <- function(txt.list, ...){
 #' will be tried until on of them is "black" and within the shape; if FALSE
 #' you will be asked to click on a point within the shape.
 #' @return a matrix of (x; y) coordinates that can be passed to Out
+#' @export
 import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
   img <- readJPEG(jpg.path)
   if (!is.matrix(img)) {
@@ -146,7 +146,6 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
 #' 
 #' This function is used to import outline coordinates and is built around 
 #' \link{import.jpg1}
-#' @export import.jpg
 #' @param jpg.paths a vector of paths corresponding to the .jpg files to import
 #' @param auto.notcentered logical if TRUE random locations will be used until
 #' one of them is (assumed) to be within the shape (because of a black pixel);
@@ -157,6 +156,7 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
 #' @param verbose whether to print which file is being treated. Useful to detect problems.
 #' @details see \link{import.jpg1} and \link{import.Conte}.
 #' @return a list of matrices of (x; y) coordinates that can be passed to Out
+#' @export
 import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose=TRUE) {
   cat("Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.paths) > 10) {
@@ -228,7 +228,6 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
 #' 
 #' If filenames are consistently named: eg 'speciesI_siteA_ind1_dorsalview', 
 #' returns a data.frame from it that can be passed to Out, Opn, Ldk, objects.
-#' @export lf.structure
 #' @param lf a list filenames, as characters, typically such as
 #' those obtained with \link{list.files} OR a path to a folder 
 #' containing the files. Actually, if lf is of length 1 (a single character),
@@ -244,6 +243,7 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
 #' @examples
 #' data(bot)
 #' coo.area(bot[4])
+#' @export
 lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE){
   if(length(lf)==1) {
     lf <- list.files(lf, full.names=FALSE)}

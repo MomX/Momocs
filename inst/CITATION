@@ -1,4 +1,4 @@
-citHeader("To cite Momocs in publications use:")
+citHeader("To cite Momocs in publications, please cite:")
 
 citEntry(entry = "Article",
   title        = "{Momocs}: Outline Analysis Using {R}",

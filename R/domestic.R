@@ -105,12 +105,10 @@ names.Coe <- function(x){
 #' doing separated analyses (even if you could combine them later), then this
 #' function will ease the process. See the examples below.
 #' @aliases subset
-#' @export
 #' @param x a \code{Coo} object, i.e. \link{Out} or \link{Opn}
 #' @param subset logical taken from the $fac slot, or indices. See examples.
 #' @param ... useless here but maintains consistence with the generic subset.
 #' @keywords Opn Coo
-#' @export
 #' @examples
 #' data(bot)
 #' bot$fac
@@ -122,6 +120,7 @@ names.Coe <- function(x){
 #' data(olea)
 #' olea$fac
 #' subset(olea, domes=="cult" & view=="VL")
+#' @export
 subset.Coo <- function(x, subset, ...){
   Coo <- x
   e <- substitute(subset)
@@ -145,13 +144,13 @@ subset.Coo <- function(x, subset, ...){
 #' \code{ed} simply calculates euclidean distance between two points defined by
 #' their (x; y) coordinates.
 #' 
-#' @export
 #' @param pt1 (x; y) coordinates of the first point.
 #' @param pt2 (x; y) coordinates of the second point.
 #' @return Returns the euclidean distance between the two points.
 #' @seealso \link{edm}, \link{edm.nearest}, \link{dist}.
 #' @examples
 #' ed(c(0,1), c(1,0))
+#' @export
 ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 
 #' Calculates euclidean intermediate between two points.
@@ -160,7 +159,6 @@ ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 #' distance \code{r} on the \code{pt1-pt2} defined by their (x; y) coordinates.
 #' This function is used internally but may be of interest for other analyses.
 #' 
-#' @export edi
 #' @param pt1 \eqn{(x; y)} coordinates of the first point.
 #' @param pt2 \eqn{(x; y)} coordinates of the second point.
 #' @param r the relative distance from \code{pt1} to \code{pt2}.
@@ -169,6 +167,7 @@ ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 #' @keywords domestic
 #' @examples
 #' edi(c(0,1), c(1,0), r = 0.5)
+#' @export
 edi <- function(pt1, pt2, r=0.5){
   return(r*(pt2-pt1) + pt1) }
 
@@ -180,7 +179,6 @@ edi <- function(pt1, pt2, r=0.5){
 #' 
 #' If one wishes to align two (or more shapes) Procrustes surimposition may
 #' provide a better solution.
-#' @export edm
 #' @param m1 The first \code{matrix} of coordinates.
 #' @param m2 The second \code{matrix} of coordinates.
 #' @return Returns a \code{vector} of euclidean distances between pairwise
@@ -191,6 +189,7 @@ edi <- function(pt1, pt2, r=0.5){
 #' x <- matrix(1:10, nc=2)
 #' edm(x, x)
 #' edm(x, x+1)
+#' @export
 edm            <- function(m1, m2){
   return(sqrt((m1[, 1] - m2[, 1])^2 + (m1[, 2] - m2[, 2])^2))}
 
@@ -207,7 +206,6 @@ edm            <- function(m1, m2){
 #' So far this function is quite time consumming since it performs \deqn{ n
 #' \times n } euclidean distance computation.  If one wishes to align two (or
 #' more shapes) Procrustes surimposition may provide a better solution.
-#' @export edm.nearest
 #' @param m1 The first \code{list} or \code{matrix} of coordinates.
 #' @param m2 The second \code{list} or \code{matrix} of coordinates.
 #' @param full \code{logical}. Whether to returns a condensed version of the
@@ -220,10 +218,10 @@ edm            <- function(m1, m2){
 #' @seealso \link{ed}, \link{edm}, \link{dist}.
 #' @keywords domestic
 #' @examples
-#' 
 #' x <- matrix(1:10, nc=2)
 #' edm.nearest(x, x+rnorm(10))
 #' edm.nearest(x, x+rnorm(10), full=TRUE)
+#' @export
 edm.nearest <- function(m1, m2, full=FALSE){
   if (!is.matrix(m1) | !is.matrix(m2)) stop("Matrices must be provided")
   if (ncol(m1)!=2    | ncol(m2)!=2)    stop("2-cols matrices must be provided")
@@ -247,39 +245,6 @@ edm.nearest <- function(m1, m2, full=FALSE){
   lf0 <- sapply(lf0, function(x) x[length(x)])
   lf0 <- substr(lf0, 1, nchar(lf0)-4)
 return(lf0)}
-
-# 00. Package documentation and NAMESPACE import ---------------------------
-
-#' Momocs
-#' 
-#'
-#' Morphometrics using R
-#' 
-#' @seealso
-#' Momocs' homepage : \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
-#' and hotline.
-#' 
-#' Momocs' GitHub repo : \url{https://github.com/vbonhomme/Momocs} to contribute,
-#' among other things.
-#' 
-#' @references Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R. 
-#' \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
-#' 
-#' Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
-#' @details
-#' We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus
-#' Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
-#' their helpful contributions, ideas, bug reports, and much more.
-#' @import ape
-#' @import sp
-#' @importFrom jpeg readJPEG
-#' @importFrom shapes procGPA
-#' @importFrom methods showDefault
-#' @importFrom MASS ginv
-#' @docType package
-#' @name Momocs
-#' @keywords Abtract
-NULL
 
 # 0. Datasets documentation ----------------------------------------------------
 #' Data: Outline coordinates of 20 beer and 20 whisky bottles.
@@ -362,13 +327,35 @@ NULL
 #' @source Borrowed from default shapes from (c) Adobe Photoshop.
 NULL
 
-# #' Data: Outline coordinates of 50 date seeds (Phoenix dactylifera), with 2 views
-# #' 
-# #' @docType data
-# #' @name phoenix
-# #'@rdname data_phoenix
-# #' @keywords datasets
-# #' @format An Out object with the outline coordinates of 50 date seeds
-# #' (Phoenix dactylifera), with dorsal and lateral views
-# #' @source We thank Jean-Frédéric Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
-# #' from allowing us to share the data.
+# 00. Package documentation and NAMESPACE import ---------------------------
+
+#' Momocs
+#' 
+#' Morphometrics using R
+#' 
+#' @seealso
+#' Momocs' homepage : \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
+#' and hotline.
+#' 
+#' Momocs' GitHub repo : \url{https://github.com/vbonhomme/Momocs} to contribute,
+#' among other things.
+#' 
+#' @references Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R. 
+#' \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
+#' 
+#' Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
+#' @details
+#' We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus
+#' Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
+#' their helpful contributions, ideas, bug reports, and much more.
+#' @import ape
+#' @import sp
+#' @importFrom jpeg readJPEG
+#' @importFrom shapes procGPA
+#' @importFrom methods showDefault
+#' @importFrom MASS ginv
+#' @importFrom graphics boxplot
+#' @importFrom utils stack
+#' @docType package
+#' @name Momocs
+#' @keywords Abtract

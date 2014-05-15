@@ -3,7 +3,6 @@
 # 1. Main plotters  ------------------------------------------------------------
 #' 
 #' A simple wrapper for plotting shapes. Widely used in Momocs.
-#' @export coo.plot
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param xlim If \code{coo.plot} is called and \code{coo} is missing, then a
 #' vector of length 2 specifying the \code{ylim} of the ploting area.
@@ -29,7 +28,7 @@
 #' 
 #' data(bot)
 #' coo.plot(bot[1])
-
+#' @export
 coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
                      points=FALSE, first.point=TRUE, centroid=TRUE, xy.axis=TRUE,
                      pch=1, cex=0.5, main, plot.new=TRUE){
@@ -60,7 +59,6 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
 #' 
 #' \code{coo.draw} is a light version of \link{coo.plot} that simply adds a
 #' shape on the active plot.
-#' @export
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param ... optional parameters for coo.plot
 #' @keywords graphics
@@ -70,13 +68,13 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
 #' b2 <- bot[5]
 #' coo.plot(b1)
 #' coo.draw(b2, border="red")
+#' @export
 coo.draw <- function(coo, ...){
   coo.plot(coo, plot.new=FALSE, ...)}
 
 #' Plots differences between two configuratins
 #' 
 #' Draws "lollipops" between two configurations
-#' @export
 #' @param coo1 A \code{list} or a \code{matrix} of coordinates.
 #' @param coo2 A \code{list} or a \code{matrix} of coordinates.
 #' @param type either "lolli" or "arrow" to draw segments or arrows between pairs of points.
@@ -87,6 +85,7 @@ coo.draw <- function(coo, ...){
 #' b1 <- coo.center(coo.sample(bot[4], 24))
 #' b2 <- b1*1.2
 #' coo.lolliplot(b1, b2)
+#' @export
 coo.lolliplot <- function(coo1, coo2, type=c("lolli", "arrow")[1]){
   wdw <- apply(rbind(coo1, coo2), 2, function(x) max(abs(x)))
   plot(NA, xlim=c(-wdw[1], wdw[1]), ylim=c(-wdw[2], wdw[2]), asp=1)
@@ -101,7 +100,6 @@ coo.lolliplot <- function(coo1, coo2, type=c("lolli", "arrow")[1]){
 #' the origin and inscribed in a size-side square, also centered on the origin;
 #' see \link{coo.list.panel} for an illustration of this function.
 #' 
-#' @export coo.template
 #' @usage coo.template(coo, size)
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param size \code{numeric}. Indicates the length of the side "inscribing"
@@ -119,7 +117,7 @@ coo.lolliplot <- function(coo1, coo2, type=c("lolli", "arrow")[1]){
 #' s <- 0.01
 #' coo.plot(coo.template(coo, s))
 #' rect(-s/2, -s/2, s/2, s/2)
-
+#' @export
 coo.template   <- function(coo, size=1) {
   # only for matrices
   coo      <- coo * min(size/apply(coo, 2, function(x) diff(range(x))))
@@ -134,7 +132,6 @@ coo.template   <- function(coo, size=1) {
 #' coordinates. Outlines are templated and on the same graphical window with
 #' the help of \link{coo.template}.
 #' 
-#' @export coo.list.panel
 #' @param coo.list A \code{list} of coordinates
 #' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
 #' the panel display. If missing, shapes are arranged in a square.
@@ -163,7 +160,7 @@ coo.template   <- function(coo, size=1) {
 #' ord <- sapply(coo, coo.eccentricity.eigen)
 #' pos <- coo.list.panel(coo, reorder=ord)
 #' text(pos, labels=signif(ord[order(ord)], 3))
-
+#' @export
 coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                            fromtop=TRUE, mar=rep(0, 4),
                            cols, borders, reorder=NULL, poly=TRUE){
@@ -220,9 +217,9 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
 #' Extract structure from filenames
 #' 
 #' A very simple (and fast) image plotter.
-#' @export lf.structure
 #' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
 #' @keywords import
+#' @export
 img.plot <- function(img){
   # dirty here but made for convenience
   # to have a fast img plotter..
@@ -265,7 +262,7 @@ img.plot <- function(img){
 #' data(bot)
 #' coo.oscillo(bot[1])
 #' 
-#' @export coo.oscillo
+#' @export
 coo.oscillo <- function(coo, rug=TRUE, legend=TRUE,
                         cols=col.gallus(2), nb.pts=12){
   coo <- coo.check(coo)
@@ -306,7 +303,7 @@ coo.oscillo <- function(coo, rug=TRUE, legend=TRUE,
 #' Calculates and plots series with associated error bars. This function is used 
 #' internally by methods based on deviations for one one many outlines.
 #' Yet, it provides a quick way to create plots of series, possibly with deviations, from scratch.
-#' @export
+#' 
 #' @usage dev.plot(mat, dev, cols, x=1:ncol(mat),
 #' lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
 #' plot=FALSE, main="Deviation plot", xlab="", ylab="Deviations")
@@ -335,6 +332,7 @@ coo.oscillo <- function(coo, rug=TRUE, legend=TRUE,
 #' dev.plot(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
 #' dev.plot(foo.mat, foo.dev, cols=col.sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
 #' dev.plot(foo.mat, foo.dev, cols=col.summer(6)[4:6], plot=TRUE)
+#' @export
 dev.plot       <- function(mat, dev, cols, x=1:ncol(mat), 
                            lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
                            plot=FALSE, main="Deviation plot", xlab="", ylab="Deviations") {
@@ -405,7 +403,7 @@ dev.plot       <- function(mat, dev, cols, x=1:ncol(mat),
 #' coo.draw(out.6, lty=2, points=FALSE, col=NA)
 #' par(xpd=FALSE)
 #' 
-#' @export dev.segments
+#' @export
 dev.segments <-function(coo, cols, lwd=1){
   nr <- nrow(coo)
   coo <- rbind(coo, coo[1, ])
@@ -416,13 +414,13 @@ dev.segments <-function(coo, cols, lwd=1){
 #' Confidence ellipses
 #' 
 #' Draw (gaussian) confidence ellipses
-#' @export conf.ell
 #' @param x numeric values on the x axis
 #' @param y numeric values on the y axis
 #' @param conf the level of confidence
 #' @param nb.pts the number of points to return, to draw the ellipsis
 #' @keywords graphics
 #' @return a matrix of (x; y) coordinates to draw the ellipsis
+#' @export
 conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   if (is.matrix(x)) {
     y <- x[, 2]
@@ -441,17 +439,90 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   colnames(ell) <- c("x", "y")
   return(ell)}
 
+#' Ptolemaic ellipses and illustration of eFourier
+#' 
+#' Calculate and display Ptolemaic ellipses which illustrates 
+#' intuitively the principle behing elliptical Fourier analysis.
+#' 
+#' @param Out The \code{Out} object on which to display Ptolemaic ellipses.
+#' @param id The \code{id} on which to display Ptolemaic ellipses.
+#' @param t A \code{vector} af angles (in radians) on which to display ellipses.
+#' @param nb.h \code{integer}. The number of harmonics to display.
+#' @param nb.pts \code{integer}. The number of points to use to display shapes.
+#' @param palette A color palette.
+#' @param legend \code{logical}. Whether to plot the legend box.
+#' @references 
+#' This method has been inspired by the figures found in the followings papers.
+#' Kuhl FP, Giardina CR. 1982. Elliptic Fourier features of a closed contour.
+#'  \emph{Computer Graphics and Image Processing} \bold{18}: 236-258.
+#' Crampton JS. 1995. Elliptical Fourier shape analysis of fossil bivalves: 
+#' some practical considerations. \emph{Lethaia} \bold{28}: 179-186.
+#' @seealso \link{efourier}. 
+#' An intuitive explanation of elliptic Fourier analysis can be found in 
+#' the \bold{Details} section of the \link{efourier} function.
+#' @examples
+#' data(hearts)
+#' Ptolemy(hearts, 1)
+#' @export
+Ptolemy <- function(Out, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
+#' @export
+Ptolemy.Out <- function(Out,
+                        id=1,
+                        t=seq(0, 2*pi, length=7)[-1],
+                        nb.h=3,
+                        nb.pts=360,
+                        palette=col.sari,
+                        legend=FALSE) {
+  # we prepare and deduce
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(xpd=NA)
+  cols <- palette(nb.h)
+  coo <- coo.center(Out$coo[[id]])
+  #k <- floor(length(coo$x)/4)
+  coo.plot(coo, main=names(Out)[id])
+  # now we calculate for every harmonic
+  coo.ef  <- efourier(coo, nb.h)
+  coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
+  vect   <- matrix(nrow=nb.h, ncol=2)
+  vect <- rbind(c(0, 0), vect)
+  for (i in seq(along=t)) {
+    for(j in 1:nb.h) {
+      vect[j+1, 1] <- coo.ef$an[j] * cos(j * t[i]) + coo.ef$bn[j] * sin(j * t[i])
+      vect[j+1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + coo.ef$dn[j] * sin(j * t[i])}
+    vs <- apply(vect, 2, cumsum)
+    for (j in 1:nb.h){
+      lh   <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j],
+                             coo.ef$cn[1:j], coo.ef$dn[1:j],
+                             nb.h=j, nb.pts=nb.pts, plot=FALSE)
+      ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j],
+                             coo.ef$cn[j], coo.ef$dn[j],
+                             nb.h=1, nb.pts=nb.pts, plot=FALSE)
+      lines(lh, col=paste(cols[j], "22", sep=""), lwd=0.8)
+      lines(ellh[,1] + vs[j, 1], ellh[,2] + vs[j, 2],
+            col=cols[j], lwd=1)
+      points(vs[j+1, 1], vs[j+1, 2], col=cols[j], cex=0.8)
+      arrows(vs[j, 1], vs[j, 2], vs[j+1, 1], vs[j+1, 2],
+             col=cols[j], angle=10, length=0.05, lwd=1.2)
+    }
+  }
+  points(0, 0, pch=20, col=cols[1])
+  if (legend) {
+    legend("topright", legend = as.character(1:nb.h), bty="o",
+           col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
+           title = "Number of harmonics")}}
+
 # 3. Coo / Out / Opn plotters --------------------------------------------------
 #' Plot on Coo (Out/Opn) objects: quick review
 #' 
 #' Allows to plot shapes from Coo objects
 #' @method plot Coo
-#' @export plot.Coo
 #' @param x the Coo object
 #' @param id the id of the shape to plot, if not provided a 
 #' random shape is plotted
 #' @param ... further arguments to be passed to \link{coo.plot}
 #' @keywords Coo
+#' @export
 plot.Coo <- function(x, id, ...){
   Coo <- x
   if (missing(id)) {
@@ -473,7 +544,6 @@ plot.Coo <- function(x, id, ...){
 #' Plots all the outlines from a \code{Coo} on the same graph with graphical 
 #' options.
 #' @method stack Coo
-#' @export stack.Coo
 #' @param x The \code{Coo} object to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equals to the number of coordinates.
@@ -496,6 +566,7 @@ plot.Coo <- function(x, id, ...){
 #' stack(hearts)
 #' stack(hearts, ldk=FALSE)
 #' stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
+#' @export
 stack.Coo <- function(x, cols, borders,
                       points=FALSE, first.point=TRUE, centroid=TRUE,
                       ldk=TRUE, ldk.pch=3, ldk.col="#FF000055", ldk.cex=0.5,
@@ -524,9 +595,6 @@ stack.Coo <- function(x, cols, borders,
 #' 
 #' Plots all the outlines from a \code{Coo} side by side
 #'
-#' @export panel
-#' @export
-#' @export
 #' @param Coo The \code{Coo (Out/Opn)} object  to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equals to the number of coordinates.
@@ -545,7 +613,9 @@ stack.Coo <- function(x, cols, borders,
 #' panel(mosquito, names=TRUE, cex.names=0.5)
 #' data(olea)
 #' panel(olea)
+#' @export
 panel <- function(Coo, cols, borders, fac, reorder, palette=col.summer, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
+#' @export
 panel.Out <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer, names=NULL, cex.names=0.6, ...){
   Out <- Coo
   if (!missing(fac)){
@@ -578,6 +648,7 @@ panel.Out <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer,
         }
       } else {
       text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
+#' @export
 panel.Opn <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer, names=NULL, cex.names=0.6, ...){
   Opn <- Coo
   if (!missing(fac)){
@@ -617,8 +688,7 @@ panel.Opn <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer,
 #' 
 #' Allows to explore diversity of coefficients from OutCoe objects,
 #' typically obtain after a eFourier, tFourier, rFourier on an Out object.
-#' @method boxplot OutCoe
-#' @export boxplot.OutCoe
+#' 
 #' @param x the \link{OutCoe} object
 #' @param retain numeric the number of harmonics to retain
 #' @param drop numeric the number of harmonics to drop
@@ -632,6 +702,7 @@ panel.Opn <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer,
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
 #' boxplot(bot.f)
+#' @export
 boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
                            title= "Variation of harmonic coefficients",
                            legend=TRUE, ...){
@@ -674,7 +745,7 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
 #' 
 #' Allows to explore variability of these coefficients, typically after a
 #' rawPolynomials or orthoPolynomials on Opn objects.
-#' @export boxplot.OpnCoe
+#' 
 #' @param x the \link{OpnCoe} object
 #' @param retain numeric the number of harmonics to retain
 #' @param drop numeric the number of harmonics to drop
@@ -687,6 +758,7 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
 #' data(olea)
 #' olea.p <- rawPolynomials(olea, 5)
 #' boxplot(olea.p)
+#' @export
 boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
                            title= "Variation of polynomials coefficients", ...){
   # we deduce and prepare
@@ -720,7 +792,6 @@ boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
 #' 
 #' Explores the distribution of harmonic coefficient values
 #' @method hist OutCoe
-#' @export hist.OutCoe
 #' @param x the \link{OutCoe} object
 #' @param retain numeric the number of harmonics to retain
 #' @param drop numeric the number of harmonics to drop
@@ -733,6 +804,7 @@ boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
 #' hist(bot.f)
+#' @export
 hist.OutCoe <-
   function(x, retain, drop, palette=col.gallus,
            title= "Variation of harmonic coefficients", ...){
@@ -771,8 +843,7 @@ hist.OutCoe <-
 #' Histogram on OpnCoe matrices of polynomials coefficients
 #' 
 #' Explores the distribution of polynomials coefficient values
-#' @method hist OpnCoe
-#' @export hist.OpnCoe
+#' 
 #' @param x the \link{OpnCoe} object
 #' @param retain numeric the number of harmonics to retain
 #' @param drop numeric the number of harmonics to drop
@@ -786,6 +857,7 @@ hist.OutCoe <-
 #' data(olea)
 #' olea.p <- orthoPolynomials(olea, 5)
 #' hist(olea.p)
+#' @export
 hist.OpnCoe <-
   function(x, retain=4, drop, palette=col.gallus,
            title= "Variation of polynomials coefficients",
@@ -827,9 +899,7 @@ hist.OpnCoe <-
 #' when reconstruction shapes. This thus help to visualize the respective 
 #' contribution of every harmonic, in other words their contribution 
 #' in describing shapes.
-#' @export harm.contrib
 #' @aliases harm.contrib
-#' @export
 #' @param OutCoe the \link{OutCoe} object
 #' @param id numeric the id of the shape to consider
 #' @param harm.range a vector of harmonics
@@ -842,8 +912,10 @@ hist.OpnCoe <-
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
 #' harm.contrib(bot.f)
+#' @export
 harm.contrib <- function(OutCoe, id, harm.range, amp.h, palette, title){
   UseMethod("harm.contrib")}
+#' @export
 harm.contrib.OutCoe <- function(
   OutCoe,
   id=1,
@@ -885,7 +957,6 @@ harm.contrib.OutCoe <- function(
 #' when reconstruction shapes. This thus help to visualize the respective 
 #' contribution of every coefficient, in other words their contribution 
 #' in describing shapes.
-#' @export degree.contrib
 #' @aliases degree.contrib
 #' @export
 #' @param OpnCoe the \link{OpnCoe} object
@@ -900,8 +971,10 @@ harm.contrib.OutCoe <- function(
 #' data(olea)
 #' olea.p <- rawPolynomials(olea, 6)
 #' degree.contrib(olea.p)
+#' @export
 degree.contrib <- function(
   OpnCoe, id, degree.range, amp.d, palette, title){UseMethod("degree.contrib")}
+#' @export
 degree.contrib.OpnCoe <- function(
   OpnCoe,
   id      = 1,
@@ -940,11 +1013,13 @@ degree.contrib.OpnCoe <- function(
 
 # 5. Morphospace functions -----------------------------------------------------
 # stupid function
+#' @export
 .mprod <- function(m, s){
   res <- m
   for (i in 1:ncol(m)) { res[, i] <- m[, i]*s[i] }
   return(res)}
 
+#' @export
 .morphospacePCA <- function(PCA, xax, yax, pos.shp,
                             amp.shp=1, size.shp=15, pts.shp=60,
                             col.shp="#00000011", border.shp="#00000055"){
@@ -989,7 +1064,6 @@ degree.contrib.OpnCoe <- function(
 
 #' Calculates nice positions on a plan for drawing shapes
 #' 
-#' @export pos.shapes
 #' @param xy todo
 #' @param pos.shp the way shape should be positionned
 #' @param nb.shp the total number of shapes
@@ -997,6 +1071,7 @@ degree.contrib.OpnCoe <- function(
 #' @param nc.shp the number of cols to position shapes
 #' @param circle.r.shp if circle, its radius
 #' @keywords graphics
+#' @export
 pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
                        nb.shp=12, nr.shp=6, nc.shp=5, circle.r.shp){
   if (is.data.frame(pos.shp) | is.matrix(pos.shp)) {
@@ -1129,7 +1204,6 @@ pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
 #' @param baseline1 the (x; y) coordinates of the first baseline point
 #' @param baseline2 the (x; y) coordinates of the second baseline point
 #' @export
-#' 
 pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
                                  baseline1, baseline2) {
   if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
@@ -1269,7 +1343,6 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 #' 
 #' The Momocs' PCA plotter with many graphical options and morphospaces.
 #' @method plot PCA
-#' @export plot.PCA
 #' @param x an object of class "PCA", typically obtained with \link{pca}
 #' @param fac factor, or a name or the column id from the $fac slot
 #' @param xax the first PC axis
@@ -1311,6 +1384,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 #' bot.f <- eFourier(bot, 24)
 #' bot.p <- pca(bot.f)
 #' plot(bot.p, 1)
+#' @export
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
@@ -1400,7 +1474,7 @@ plot.PCA <- function(#basics
 #' @seealso The \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
 #' \code{tps2d}.
 #' @keywords coo Utilities
-#' @export tps2d
+#' @export
 tps2d <- function(grid0, fr, to){
   if (is.closed(fr)) fr <- coo.unclose(fr)
   if (is.closed(to)) to <- coo.unclose(to)
@@ -1432,7 +1506,6 @@ tps2d <- function(grid0, fr, to){
 #' \code{tps.grid} calculates and plots deformation grids between two
 #' configurations.
 #' 
-#' @export tps.grid
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1458,7 +1531,7 @@ tps2d <- function(grid0, fr, to){
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps.grid(fr, to, amp=3, grid.size=40)
-
+#' @export
 tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
                      grid.size = 40, grid.col = "grey80",
                      shp = TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2),
@@ -1500,7 +1573,6 @@ tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
 #' \code{tps.arr}(ows) calculates deformations between two configurations and
 #' illustrate them using arrows.
 #' 
-#' @export
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1529,8 +1601,7 @@ tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)
-#' 
-
+#' @export
 tps.arr <- function(fr, to, amp=1, palette = col.summer,
                     arr.nb = 200, arr.levels = 100, arr.len = 0.1,
                     arr.ang = 20, arr.lwd = 0.75, arr.col = "grey50",
@@ -1564,7 +1635,6 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' \code{tps.iso} calculates deformations between two configurations and map
 #' them with or without isolines.
 #' 
-#' @export
 #' @param fr The reference \eqn{(x; y)} coordinates.
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -1591,8 +1661,7 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps.iso(fr, to, iso.nb=2000, amp=3)
-#' 
-
+#' @export
 tps.iso <- function(fr, to, amp=1, palette = col.summer,
                     iso.nb = 1000, iso.levels = 12, cont=TRUE, cont.col="black",
                     shp = TRUE, shp.border=col.gallus(2),
@@ -1639,7 +1708,6 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' col.sari(n)
 #' col.india(n)
 #' col.bw(n)
-#' @export col.spring col.summer col.autumn col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
 #' @aliases col.spring col.summer col.autumn col.solarized col.gallus col.blackgallus col.hot col.cold col.sari col.india col.bw
 #' @param n the number of colors to generate from the color palette
 #' @return color codes (hexadecimal format)
@@ -1656,16 +1724,26 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
 #' barplot(1:10, col=col.sari(10), main="col.sari")
 #' barplot(1:10, col=col.india(10), main="col.india")
 #' barplot(1:10, col=col.bw(10), main="col.bw")
+#' @export
 col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
+#' @export
 col.spring <- colorRampPalette(c("#a3baff", "#ffff7f", "#ff9797"))
-
+#' @export
 col.autumn <- colorRampPalette(c("#3353b3", "#b1b100", "#b32222"))
+#' @export
 col.solarized <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", "#d33682",
                                     "#6c71c4", "#268bd2", "#2aa198", "#859900"))
+#' @export
 col.gallus <- colorRampPalette(c("#025D8C", "#FFFFFF", "#A80000"))
+#' @export
 col.blackgallus <- colorRampPalette(c("#000080", "#000000", "#EE0000"))
+#' @export
 col.hot <- colorRampPalette(c("#F2F2F2","#A80000"))
+#' @export
 col.cold <- colorRampPalette(c("#F2F2F2","#025D8C"))
+#' @export
 col.sari <- colorRampPalette(c("#551A8B", "#FF7F00"))
+#' @export
 col.india <- colorRampPalette(c("#FF9933", "#138808"))
+#' @export
 col.bw <- colorRampPalette(c("#FFFFFF", "#000000"))

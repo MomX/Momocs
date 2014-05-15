@@ -24,8 +24,8 @@
 #'
 #' @seealso \link{Coo}, \link{Out}
 #' @keywords Opn
-#' @export Opn
 #' @aliases Opn
+#' @export
 Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
   Opn <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Opn$fac)) Opn$fac <- .refactor(Opn$fac)
@@ -82,10 +82,7 @@ print.Opn <- function(x, ...){
 #' Calculate and displays reconstructed shapes using a
 #' range of polynomial degrees.
 #' 
-#' 
-#' @export nqual
 #' @aliases nqual
-#' @export
 #' @param Opn the \code{Opn} object on which to nqual
 #' @param method any method from \code{c("rawPolynomials", "orthoPolynomials")}
 #' @param id the shape on which to perform nqual
@@ -102,6 +99,7 @@ print.Opn <- function(x, ...){
 #' @examples
 #' data(olea)
 #' nqual(olea)
+#' @export
 nqual <- function(Opn,
                   method=c("rawPolynomials", "orthoPolynomials"),
                   id, 
@@ -113,6 +111,7 @@ nqual <- function(Opn,
                   legend.title = "Degree",
                   palette = col.india,
                   shp.border="#1A1A1A"){UseMethod("nqual")}
+#' @export
 nqual.Opn <-
   function(Opn,
            method=c("rawPolynomials", "orthoPolynomials"),
@@ -195,8 +194,8 @@ nqual.Opn <-
 #'
 #' @seealso \link{Coe}, \link{OutCoe}
 #' @keywords OpnCoe
-#' @export OpnCoe
 #' @aliases OpnCoe
+#' @export
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
                    method=character(),
                    baseline1=numeric(), baseline2=numeric(), mod=list()){
@@ -207,6 +206,7 @@ OpnCoe <- function(coe=matrix(), fac=data.frame(),
   return(OpnCoe)}
 
 # The print method for Out objects
+#' @export
 print.OpnCoe <- function(x, ...){
   OpnCoe <- x
   p <- pmatch(OpnCoe$method, c("rawPolynomials", "orthoPolynomials"))
@@ -243,10 +243,7 @@ print.OpnCoe <- function(x, ...){
 # 3. Opn morphometrics ---------------------------------------------------------
 #' Calculates raw (natural) polynomials on Opn
 #'
-#' 
-#' @export rawPolynomials
 #' @aliases rawPolynomials
-#' @export
 #' @param Opn an \link{Opn} object
 #' @param degree of the polynomial
 #' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
@@ -259,8 +256,10 @@ print.OpnCoe <- function(x, ...){
 #' @examples
 #' data(olea)
 #' rawPolynomials(olea, 5)
+#' @export
 rawPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("rawPolynomials")}
+#' @export
 rawPolynomials.Opn <- function(Opn, degree,
                                baseline1=c(-1, 0), baseline2=c(1, 0), nb.pts=120){
   #we check a bit
@@ -301,10 +300,7 @@ rawPolynomials.Opn <- function(Opn, degree,
 
 #' Calculates orthogonal polynomials on Opn
 #'
-#' 
-#' @export orthoPolynomials
 #' @aliases orthoPolynomials
-#' @export
 #' @param Opn an \link{Opn} object
 #' @param degree of the polynomial
 #' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
@@ -317,9 +313,10 @@ rawPolynomials.Opn <- function(Opn, degree,
 #' @examples
 #' data(olea)
 #' orthoPolynomials(olea, 5)
+#' @export
 orthoPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("orthoPolynomials")}
-
+#' @export
 orthoPolynomials.Opn <- function(Opn, degree,
                                  baseline1=c(-0.5, 0), baseline2=c(0.5, 0), nb.pts=120){
   #we check a bit

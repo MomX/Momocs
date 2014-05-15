@@ -4,17 +4,16 @@
 #' Calculates mean shapes on matrices of coefficients by groups (if passed with
 #' a "fac") or globally (if not).
 #' @aliases mshapes
-#' @export mshapes
-#' @export
-#' @export
 #' @param Coe a \link{Coe} object
 #' @param fac factor from the $fac slot. See examples below.
 #' @param nb.pts numeric the number of points for calculated shapes
 #' @return a list of matrices of (x,y) coordinates.
 #' @keywords multivariate
-#todo
+#' @export
 mshapes <- function(Coe, fac, nb.pts){UseMethod("mshapes")}
+#' @export
 mshapes.default <- function(Coe, fac, nb.pts){}
+#' @export
 mshapes.OutCoe <- function(Coe, fac, nb.pts=120){
   OutCoe <- Coe
   nb.h <-  ncol(OutCoe$coe)/4 #todo
@@ -37,6 +36,7 @@ mshapes.OutCoe <- function(Coe, fac, nb.pts=120){
   names(res) <- fl
   return(res)}
 
+#' @export
 mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
   OpnCoe <- Coe
   n <-  length(OpnCoe$mshape) #todo
@@ -66,12 +66,12 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
 #' Calculates mean shapes on matrices of coefficients by groups (if passed with
 #' a "fac") or globally (if not).
 #' @aliases Manova
-#' @export Manova
-#' @export
 #' @param ... a \link{Coe} object
 #' @return a list of matrices of (x,y) coordinates.
 #' @keywords multivariate
+#' @export
 Manova <- function(...){UseMethod("Manova")}
+#' @export
 Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
   if (missing(fac)) stop("'fac' must be provided")
   if (!is.factor(fac)) {fac <- OutCoe$fac[, fac]}
@@ -110,13 +110,11 @@ Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
 #' 
 #' Performs a PCA on OutCoe, OpnCoe objects.
 #' @aliases pca
-#' @export pca
-#' @export
-#' @export
 #' @param Coe the \link{Coe} object
 #' @return a "PCA" object on which to apply \link{plot.PCA}
-
+#' @export
 pca <- function(Coe){UseMethod("pca")}
+#' @export
 pca.Coe <- function(Coe){
   OutCoe <- Coe
   PCA <- prcomp(OutCoe$coe, scale.=FALSE, center=TRUE)
@@ -125,7 +123,7 @@ pca.Coe <- function(Coe){
   PCA$method <- OutCoe$method
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
-
+#' @export
 pca.OpnCoe <- function(Coe){
   OpnCoe <- Coe
   PCA <- prcomp(OpnCoe$coe, scale.=FALSE, center=TRUE)
@@ -138,8 +136,17 @@ pca.OpnCoe <- function(Coe){
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
 
-
-clust <- function(...){UseMethod("clust")}
+#' Hierarchical clustering #todo
+#' 
+#' @param OutCoe an OutCoe object
+#' @param fac a colum or an id from $fac
+#' @param method the method to use
+#' @param type the type of plot
+#' @param palette a color palette to use
+#' @param ... additional arguments to fed plot.phylo
+#' @export
+clust <- function(OutCoe, fac, method, type, palette, ...){UseMethod("clust")}
+#' @export
 clust.OutCoe <- function(OutCoe, fac,
                          method = "euclidean", type="unrooted", palette=col.summer, ...){
   if (missing(fac)) {
