@@ -28,7 +28,7 @@ library(Momocs)
 * For the very last version: <br />
 <code>
 library(devtools) # You need to install it first using install.packages("devtools")
-install_github("https://github.com/vbonhomme/Momocs")
+install_github(c("vbonhomme/Momocs", "vbonhomme"))
 </code>
 
 Tutorial
