@@ -359,3 +359,4 @@ NULL
 #' @docType package
 #' @name Momocs
 #' @keywords Abtract
+NULL
