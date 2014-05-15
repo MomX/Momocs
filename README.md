@@ -17,6 +17,20 @@ Planned features
 --------
 Soon
 
+Installation
+--------
+
+* From R: 
+<code>
+install.packages("Momocs")
+library(Momocs)
+</code>
+* For the very last version: 
+<code>
+library(devtools) # You need to install it first using install.packages("devtools")
+install_github("https://github.com/vbonhomme/Momocs")
+</code>
+
 Tutorial
 --------
 * [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf)
