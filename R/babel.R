@@ -133,32 +133,6 @@ a2l <- function(a){
 #   names(coo.list) <- coo.names
 #   return(Coo(coo.list))}
 
-
-#' Conversion from nef to Coe
-#' 
-#' @param nef.path the path to the .nef file
-#' @export
-nef2Coe <- function(nef.path) {
-  # change nef to coe one day
-  nef     <- readLines(nef.path)
-  HARMO.l <- grep(pattern="HARMO", nef)
-  nb.h    <- as.numeric(substring(nef[HARMO.l], 8))
-  nef     <- nef[-(1:HARMO.l)]
-  nb.coo  <- length(nef)/(nb.h+1)
-  coo.i   <- 1:nb.coo
-  coo.beg <- (coo.i-1)*(nb.h + 1)+1
-  coo.end <- coo.beg + nb.h
-  res     <- matrix(NA, nrow=nb.coo, ncol=nb.h*4, dimnames=
-                      list(nef[coo.beg],
-                           paste0(rep(LETTERS[1:4], each=nb.h), 1:nb.h)))
-  reorder <- c(1:nb.h *4 - 3, 1:nb.h *4 - 2, 1:nb.h *4 - 1, 1:nb.h *4)
-  for (i in seq(along=coo.i)) {
-    nef.i    <- nef[(coo.beg[i]+1) : coo.end[i]]
-    x        <- as.numeric(unlist(strsplit(nef.i, " ")))
-    x        <- x[!is.na(x)]
-    res[i, ] <- x[reorder]}
-  return(res)}
-
 # todo
 # Coe2nef <- function(Coe, file="nef.nef"){
 #   nb.h      <- Coe@nb.h
@@ -187,4 +161,100 @@ nef2Coe <- function(nef.path) {
 #         "\n",
 #         sep="", file=file, labels=NULL, append=TRUE)}
 # }
+
+#' From .nef to Coe objects
+#' 
+#' Useful to convert .nef files into Coe objects.
+#' It returns a matrix of coefficients that can be passed to \link{Coe}.
+#' @param nef.path the path to the .nef file
+#' @details I'm not very familiar to other morphometric formats.
+#' So if you have troubles importing your datasets, please contact me.
+#' @keywords babel
+#' @export
+nef2Coe <- function(nef.path) {
+  # change nef to coe one day
+  nef     <- readLines(nef.path)
+  HARMO.l <- grep(pattern="HARMO", nef)
+  nb.h    <- as.numeric(substring(nef[HARMO.l], 8))
+  nef     <- nef[-(1:HARMO.l)]
+  nb.coo  <- length(nef)/(nb.h+1)
+  coo.i   <- 1:nb.coo
+  coo.beg <- (coo.i-1)*(nb.h + 1)+1
+  coo.end <- coo.beg + nb.h
+  res     <- matrix(NA, nrow=nb.coo, ncol=nb.h*4, dimnames=
+                      list(nef[coo.beg],
+                           paste0(rep(LETTERS[1:4], each=nb.h), 1:nb.h)))
+  reorder <- c(1:nb.h *4 - 3, 1:nb.h *4 - 2, 1:nb.h *4 - 1, 1:nb.h *4)
+  for (i in seq(along=coo.i)) {
+    nef.i    <- nef[(coo.beg[i]+1) : coo.end[i]]
+    x        <- as.numeric(unlist(strsplit(nef.i, " ")))
+    x        <- x[!is.na(x)]
+    res[i, ] <- x[reorder]}
+  return(res)}
+
+#' From .tps to Coo objects
+#' 
+#' Useful to convert .tps files into Coo objects.
+#' It returns a list of matrices of coordinates that can be passed to \link{Coo}.
+#' @param tps.path the path to the .tps file
+#' @param sep the separator between data
+#' @details I'm not very familiar to other morphometric formats.
+#' So if you have troubles importing your datasets, please contact me.
+#' @keywords babel
+#' @export
+tps2Coo <- function(tps.path, sep=" "){
+  # we read all lines of the file
+  tps <- readLines(tps.path)
+  # we detect the beginning of every individual
+  tps.pos <- cbind(grep(pattern="lm=", x=tps, ignore.case=TRUE),
+                 c(grep(pattern="lm=", x=tps, ignore.case=TRUE)[-1]-1, length(tps)))
+  # we prepare a vector and a list to host the data
+  img.names   <- character()
+  coo.list      <- list()
+  # and we loop over individuals
+  for (i in 1:nrow(tps.pos)) {
+    # first we pick one of the individuals
+    tps.i         <- tps[tps.pos[i, 1] : tps.pos[i, 2]]
+    # and we grab and clean the image name information
+    img.i         <- tps.i[grep("image", tps.i, ignore.case=TRUE)]
+    img.i         <- gsub("image=" , "", img.i, ignore.case=TRUE)
+    img.names[i]  <- gsub(".jpg"   , "", img.i, ignore.case=TRUE)
+    # here we exclude every line that start with a letter
+    coo.i         <- tps.i[-grep(pattern="[[:alpha:]]", tps.i)]
+    # and convert it as a matrix of coordinates
+    coo.i         <- unlist(strsplit(coo.i, sep))
+    coo.list[[i]] <- matrix(as.numeric(coo.i), ncol=2, byrow=TRUE)
+  }
+  coo.list <- lapply(coo.list, function(x) colnames())
+  names(coo.list) <- img.names
+  return(coo.list)}
+
+#' From .nts to Coo objects
+#' 
+#' Useful to convert .nts files into Coo objects.
+#' It returns a list of matrices of coordinates that can be passed to \link{Coo}.
+#' @param nts.path the path to the .nts file
+#' @param sep the separator between data
+#' @details I'm not very familiar to other morphometric formats.
+#' So if you have troubles importing your datasets, please contact me.
+#' @keywords babel
+#' @export
+nts2Coo <- function(nts.path, sep="\t"){
+  # we read all lines and remove the first one
+  nts <- readLines(nts.path, warn=FALSE)
+  nts <- nts[-1]
+  # we prepare a vector and a list to store the data
+  img.i <- character()
+  coo.list <- list()
+  # we loop over every individual
+  for (i in 1:length(past)){
+    # we pick every individual
+    ind.i <- unlist(strsplit(past[i], sep))
+    # the first element is the name
+    img.i[i] <- ind.i[1]
+    # then we convert the rest as a matrix
+    coo.list[[i]] <- matrix(as.numeric(ind.i[-1]), ncol=2, byrow=TRUE)}
+  # we rename list components with image names
+  names(coo.list) <- img.i
+  return(coo.list)}
 
