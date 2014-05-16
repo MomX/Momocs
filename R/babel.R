@@ -84,29 +84,57 @@ a2l <- function(a){
 
 # Import/Export morphometrics formats ------------------------------------------
 
-# pix2chc <- function(coo) {
-#   if (is.list(coo)) {
-#     coo <- l2m(coo)}
-#   if (is.matrix(coo) & ncol(coo)!=2) {
-#     stop("A 2 col matrix must be provided")}
-#   coo.d <- apply(coo, 2, diff)
-#   if (!all(coo.d %in% -1:1)) {
-#     stop("Matrix must contain only entire pixels indices")}
-#   if (any(apply(coo.d, 1, function(x) all(x==rep(0, 2))))) {
-#     stop("At least two succesive coordinates don't code for a displacement")}
-#   m   <- as.matrix(expand.grid(-1:1, -1:1))[-5,]
-#   g   <- c(5, 6, 7, 4, 0, 3, 2, 1)
-#   chc <- g[apply(coo.d, 1, function(x) which(x[1]==m[, 1] & x[2]==m[, 2]))] #dirty
-#   return(chc)}
-# 
-# chc2pix <- function(chc){
-#   if (!all(chc %in% 0:7)) {
-#     stop("chc string must only contain integers between 0 and 7")}
-#   m <- matrix(c(1, 0, 1, 1, 0, 1, -1, 1,
-#                 -1, 0, -1, -1, 0, -1, 1, -1), ncol=2, byrow=TRUE)
-#   pix <- apply(m[chc+1,], 2, cumsum)
-#   return(pix)}
-# 
+#' Convert (x; y) coordinates to chaincoded coordinates
+#' 
+#' May be useful to convert (x; y) coordinates to chain-coded coordinates.
+#' @param coo (x; y) coordinates passed as a matrix
+#' @seealso \link{chc2pix}
+#' @references Kuhl, F. P., & Giardina, C. R. (1982).
+#' Elliptic Fourier features of a closed contour. 
+#' Computer Graphics and Image Processing, 18(3), 236-258.
+#' @keywords babel
+#' @examples
+#' data(bot)
+#' pix2chc(bot[1])
+#' @export
+pix2chc <- function(coo) {
+  if (is.list(coo)) {
+    coo <- l2m(coo)}
+  if (is.matrix(coo) & ncol(coo)!=2) {
+    stop("A 2 col matrix must be provided")}
+  coo.d <- apply(coo, 2, diff)
+  if (!all(coo.d %in% -1:1)) {
+    stop("Matrix must contain only entire pixels indices")}
+  if (any(apply(coo.d, 1, function(x) all(x==rep(0, 2))))) {
+    stop("At least two succesive coordinates don't code for a displacement")}
+  m   <- as.matrix(expand.grid(-1:1, -1:1))[-5,]
+  g   <- c(5, 6, 7, 4, 0, 3, 2, 1)
+  chc <- g[apply(coo.d, 1, function(x) which(x[1]==m[, 1] & x[2]==m[, 2]))] #dirty
+  return(chc)}
+
+#' Convert chain-coded coordinates to (x; y) coordinates
+#' 
+#' May be useful to convert (prehistoric?) chain-coded coordinates
+#' to (x; y) coordinates. The first point is set at the origin.
+#' @param chc chain-coded coordinates
+#' @seealso \link{pix2chc}
+#' @references Kuhl, F. P., & Giardina, C. R. (1982).
+#' Elliptic Fourier features of a closed contour. 
+#' Computer Graphics and Image Processing, 18(3), 236-258.
+#' @keywords babel
+#' @examples
+#' data(bot)
+#' x <- pix2chc(bot[1])
+#' coo.plot(chc2pix(x))
+#' @export
+chc2pix <- function(chc){
+  if (!all(chc %in% 0:7)) {
+    stop("chc string must only contain integers between 0 and 7")}
+  m <- matrix(c(1, 0, 1, 1, 0, 1, -1, 1,
+                -1, 0, -1, -1, 0, -1, 1, -1), ncol=2, byrow=TRUE)
+  pix <- apply(m[chc+1,], 2, cumsum)
+  return(pix)}
+
 # Coo2chc <- function(Coo, file="chc.chc"){ 
 #   res <- list()
 #   pb <- txtProgressBar(1, Coo@coo.nb)
@@ -247,9 +275,9 @@ nts2Coo <- function(nts.path, sep="\t"){
   img.i <- character()
   coo.list <- list()
   # we loop over every individual
-  for (i in 1:length(past)){
+  for (i in 1:length(nts)){
     # we pick every individual
-    ind.i <- unlist(strsplit(past[i], sep))
+    ind.i <- unlist(strsplit(nts[i], sep))
     # the first element is the name
     img.i[i] <- ind.i[1]
     # then we convert the rest as a matrix
