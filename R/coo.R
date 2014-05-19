@@ -732,6 +732,12 @@ coo.bookstein.Coo <- function(coo, ldk1, ldk2){ #id1 ?
                                   Coo$ldk[[i]][ldk2])}
   return(Coo)}
 
+#' @export
+coo.bookstein.Ldk <- function(coo, ldk1, ldk2){
+  Ldk <- coo
+  Ldk$coo <- lapply(Ldk$coo, coo.bookstein, ldk1=ldk1, ldk2=ldk2)
+  return(Ldk)}
+
 #' Register new baselines
 #'
 #' A non-exact baseline registration on \code{t1} and \code{t2} coordinates,
