@@ -619,6 +619,29 @@ stack.Coo <- function(x, cols, borders,
     if (ldk & length(Coo$ldk)!=0) {
       points(Coo$coo[[i]][Coo$ldk[[i]], ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}}
 
+#' @export
+stack.Ldk <- function(x, cols, borders,
+                      first.point=TRUE, centroid=TRUE,
+                      ldk=TRUE, ldk.pch=3, ldk.col="#33333355", ldk.cex=0.5,
+                      xy.axis=TRUE, ...){
+  Coo <- x
+  if (missing(cols)) {
+    cols     <- rep(NA, length(Coo))}
+  if (length(cols)!=length(Coo)) {
+    cols     <- rep(cols[1], length(Coo))}
+  if (missing(borders)) {
+    borders     <- rep("#33333355", length(Coo))}
+  if (length(borders)!=length(Coo)) {
+    borders     <- rep(borders[1], length(Coo))}
+  op <- par(mar=c(3, 3, 2, 1))
+  on.exit(par(op))
+  wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2, range))), 2, range)
+  plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1, las=1, cex.axis=2/3, ann=FALSE, frame=FALSE)
+  if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}
+  for (i in 1:length(Coo)) {
+      points(Coo$coo[[i]], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
+
+
 #' Plot on Coo objects: family picture
 #' 
 #' Plots all the outlines from a \code{Coo} side by side
