@@ -21,6 +21,7 @@
 #' @param cex The \code{cex} for points.
 #' @param main \code{character}. A title for the plot.
 #' @param plot.new \code{logical} whether to plot or not a new frame.
+#' @param plot logical whether to plot something or just to create an empty plot
 #' @return No returned value.
 #' @seealso coo.draw
 #' @keywords graphics
@@ -31,7 +32,7 @@
 #' @export
 coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
                      points=FALSE, first.point=TRUE, centroid=TRUE, xy.axis=TRUE,
-                     pch=1, cex=0.5, main, plot.new=TRUE){
+                     pch=1, cex=0.5, main, plot.new=TRUE, plot=TRUE){
   coo <- coo.check(coo)
   if (plot.new) {
     # we setup coo.plot graphical parameters
@@ -44,16 +45,17 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
     } else {
       plot(coo, type="n", asp=1,  las=1, cex.axis=2/3, ann=FALSE, frame=FALSE)}
     if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}}
-  polygon(coo, col=col, border=NA)
-  lines(coo, col=border, lwd=lwd, lty=lty)
-  # we handle coordinate points
-  if (missing(points)) { if (nrow(coo)<=120) points(coo, pch=pch, cex=cex, col=border)}
-  if (points) { points(coo, pch=pch, cex=cex, col=border) }
-  if (first.point) {points(coo[1, 1], coo[1, 2], col = border, pch=20)}
-  if (centroid) {
-    cent <- coo.centpos(coo)
-    points(cent[1], cent[2], pch=3, col=border, cex=cex)}
-  if (!missing(main)) title(main=main)} 
+  if (plot) {
+    polygon(coo, col=col, border=NA)
+    lines(coo, col=border, lwd=lwd, lty=lty)
+    # we handle coordinate points
+    if (missing(points)) { if (nrow(coo)<=120) points(coo, pch=pch, cex=cex, col=border)}
+    if (points) { points(coo, pch=pch, cex=cex, col=border) }
+    if (first.point) {points(coo[1, 1], coo[1, 2], col = border, pch=20)}
+    if (centroid) {
+      cent <- coo.centpos(coo)
+      points(cent[1], cent[2], pch=3, col=border, cex=cex)}
+    if (!missing(main)) title(main=main)}}
 
 #' Adds a single outline on the current plot.
 #' 
@@ -72,27 +74,53 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
 coo.draw <- function(coo, ...){
   coo.plot(coo, plot.new=FALSE, ...)}
 
-#' Plots differences between two configuratins
+#' Illustrate differences between two configurations
 #' 
-#' Draws "lollipops" between two configurations
+#' Draws "lollipops" between two configurations.
 #' @param coo1 A \code{list} or a \code{matrix} of coordinates.
 #' @param coo2 A \code{list} or a \code{matrix} of coordinates.
-#' @param type either "lolli" or "arrow" to draw segments or arrows between pairs of points.
-#' @param ... optional parameters for coo.plot
+#' @param pch a pch for the points
+#' @param cex a cex for the points
+#' @param ... optional parameters to fed \link{points} and \link{segments}.
+#' @seealso \link{coo.arrows}
 #' @keywords graphics
 #' @examples
-#' data(bot)
-#' b1 <- coo.center(coo.sample(bot[4], 24))
-#' b2 <- b1*1.2
-#' coo.lolliplot(b1, b2)
+#' data(olea)
+#' coo.lolli(coo.sample(olea[3], 50), coo.sample(olea[6], 50))
 #' @export
-coo.lolliplot <- function(coo1, coo2, type=c("lolli", "arrow")[1]){
-  wdw <- apply(rbind(coo1, coo2), 2, function(x) max(abs(x)))
-  plot(NA, xlim=c(-wdw[1], wdw[1]), ylim=c(-wdw[2], wdw[2]), asp=1)
-  for (i in 1:nrow(coo1)){
-    segments(coo1[i, 1], coo1[i, 2], coo2[i, 1], coo2[i, 2])
-  }
-  points(coo2, pch=20, cex=0.8)}
+coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, ...){
+  coo.plot(rbind(coo1, coo2), plot=FALSE)
+  coo1 <- coo.check(coo1)
+  coo2 <- coo.check(coo2)
+  if (nrow(coo1) != nrow(coo2)) {
+    stop(" * coo1 and coo2 have different number of coordinates.")}
+  s <- seq(nrow(coo1)-1)
+    segments(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2], ...)
+    points(coo2[, 1], coo2[, 2], pch=pch, cex=cex, ...)}
+
+#' Illustrate differences between two configurations
+#' 
+#' Draws "arrows" between two configurations.
+#' @param coo1 A \code{list} or a \code{matrix} of coordinates.
+#' @param coo2 A \code{list} or a \code{matrix} of coordinates.
+#' @param length a length for the arrows.
+#' @param angle an angle for the arrows
+#' @param ... optional parameters to fed \link{arrows}.
+#' @seealso \link{coo.arrows}
+#' @keywords graphics
+#' @examples
+#' data(olea)
+#' coo.arrows(coo.sample(olea[3], 50), coo.sample(olea[6], 50))
+#' @export
+coo.arrows <- function(coo1, coo2, length=0.1, angle=20, ...){
+  coo.plot(rbind(coo1, coo2), plot=FALSE)
+  coo1 <- coo.check(coo1)
+  coo2 <- coo.check(coo2)
+  if (nrow(coo1) != nrow(coo2)) {
+    stop(" * coo1 and coo2 have different number of coordinates.")}
+  s <- seq(nrow(coo1)-1)
+    arrows(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2],
+           length=length, angle=angle,...)}
 
 #' "Templates" list and matrix of coordinates.
 #' 

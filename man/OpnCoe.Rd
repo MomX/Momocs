@@ -4,7 +4,8 @@
 \title{Builds an OpnCoe object}
 \usage{
 OpnCoe(coe = matrix(), fac = data.frame(), method = character(),
-  baseline1 = numeric(), baseline2 = numeric(), mod = list())
+  baseline1 = numeric(), baseline2 = numeric(), mod = list(),
+  r2 = numeric())
 }
 \arguments{
 \item{coe}{\code{matrix} of morphometric coefficients}
@@ -19,6 +20,8 @@ specifying the grouping structure}
 \item{baseline2}{\eqn{(x; y)} coordinates of the second baseline point}
 
 \item{mod}{an R \link{lm} object, used to reconstruct shapes}
+
+\item{r2}{numeric, the r-squared from every model}
 }
 \value{
 an \code{OpnCoe} object

@@ -845,8 +845,9 @@ polynomials <- function(coo, n, ortho=TRUE){
     cat(" * 'n' not provided and set to", n, ".\n")}
   x <- poly(coo[, 1], degree=n, raw=!ortho)
   mod <- lm(coo[, 2] ~ x)
+  r2 <- summary(mod)$r.squared
   return(list(coeff=mod$coefficients, ortho=ortho, 
-              baseline1=coo[1, ], baseline2=coo[nrow(coo), ], mod=mod))}
+              baseline1=coo[1, ], baseline2=coo[nrow(coo), ], r2=r2, mod=mod))}
 
 #' Calculate shape from a polynomial model
 #' 

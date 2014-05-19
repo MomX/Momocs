@@ -185,6 +185,7 @@ nqual.Opn <-
 #' @param baseline1 \eqn{(x; y)} coordinates of the first baseline point
 #' @param baseline2 \eqn{(x; y)} coordinates of the second baseline point
 #' @param mod an R \link{lm} object, used to reconstruct shapes
+#' @param r2 numeric, the r-squared from every model
 #' @return an \code{OpnCoe} object
 #' @details These methods can be applied on \code{Opn} objects:
 #' \enumerate{
@@ -198,10 +199,11 @@ nqual.Opn <-
 #' @export
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
                    method=character(),
-                   baseline1=numeric(), baseline2=numeric(), mod=list()){
+                   baseline1=numeric(), baseline2=numeric(),
+                   mod=list(), r2=numeric()){
   if (missing(method)) stop("a method must be provided to OpnCoe")
   OpnCoe <- list(coe=coe, fac=fac, method=method,
-                 baseline1=baseline1, baseline2=baseline2, mod=mod)
+                 baseline1=baseline1, baseline2=baseline2, mod=mod, r2=r2)
   class(OpnCoe) <- c("OpnCoe", "Coe")
   return(OpnCoe)}
 
@@ -227,6 +229,8 @@ print.OpnCoe <- function(x, ...){
   row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
   print(signif(OpnCoe$coe[row.eg, ], 3))
   cat("etc.\n")
+  cat(" - r2 summary ($r2) - min, median, max: ",
+      signif(c(min(OpnCoe$r2), median(OpnCoe$r2), max(OpnCoe$r2)), 3), "\n")
   # number of grouping factors
   df <- OpnCoe$fac
   nf <- ncol(df)
@@ -287,16 +291,19 @@ rawPolynomials.Opn <- function(Opn, degree,
   cn <- c("Intercept", cn)
   coe <- matrix(NA, nrow=length(Opn), ncol=degree+1, 
                 dimnames=list(rn, cn))
+  r2 <- numeric(length(Opn))
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
     mod <- polynomials(coo[[i]], n=degree, ortho=FALSE)
     #mod[[i]] <- pol
-    coe[i, ] <- mod$coeff}
+    coe[i, ] <- mod$coeff
+    r2[i]    <- mod$r2
+  }
   #mod$coefficients <- rep(NA, length(mod$coefficients))
   method <- "rawPolynomials"
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
-                baseline1=baseline1, baseline2=baseline2))}
+                baseline1=baseline1, baseline2=baseline2, r2=r2, mod=mod))}
 
 #' Calculates orthogonal polynomials on Opn
 #'
@@ -344,16 +351,18 @@ orthoPolynomials.Opn <- function(Opn, degree,
   cn <- c("Intercept", cn)
   coe <- matrix(NA, nrow=length(Opn), ncol=degree+1, 
                 dimnames=list(rn, cn))
+  r2 <- numeric(length(Opn))
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
     mod <- polynomials(coo[[i]], n=degree, ortho=TRUE)
     #mod[[i]] <- pol
-    coe[i, ] <- mod$coeff}
+    coe[i, ] <- mod$coeff
+    r2[i] <- mod$r2}
   #mod$coefficients <- rep(NA, length(mod$coefficients))
   method <- "orthoPolynomials"
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
-                baseline1=baseline1, baseline2=baseline2, mod=mod))}
+                baseline1=baseline1, baseline2=baseline2, r2=r2, mod=mod))}
 
 #nquant
 #npow / nr2
