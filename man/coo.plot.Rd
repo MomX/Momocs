@@ -5,7 +5,8 @@
 \usage{
 coo.plot(coo, xlim, ylim, border = "#333333", col = NA, lwd = 1,
   lty = 1, points = FALSE, first.point = TRUE, centroid = TRUE,
-  xy.axis = TRUE, pch = 1, cex = 0.5, main, plot.new = TRUE)
+  xy.axis = TRUE, pch = 1, cex = 0.5, main, plot.new = TRUE,
+  plot = TRUE)
 }
 \arguments{
 \item{coo}{A \code{list} or a \code{matrix} of coordinates.}
@@ -40,6 +41,8 @@ number of points is < 100, then points are plotted.}
 \item{main}{\code{character}. A title for the plot.}
 
 \item{plot.new}{\code{logical} whether to plot or not a new frame.}
+
+\item{plot}{logical whether to plot something or just to create an empty plot}
 }
 \value{
 No returned value.
