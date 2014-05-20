@@ -446,6 +446,8 @@ dev.segments <-function(coo, cols, lwd=1){
 #' @param y numeric values on the y axis
 #' @param conf the level of confidence
 #' @param nb.pts the number of points to return, to draw the ellipsis
+#' @return a list with $ell coordinates of the ellipse and $seg coordinates
+#' of its vertices
 #' @keywords graphics
 #' @return a matrix of (x; y) coordinates to draw the ellipsis
 #' @export
@@ -465,7 +467,12 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   ellpar <- M1 * sqrt(M2 * M3/2)
   ell <- t(centroid + rad * ellpar %*% t(z))
   colnames(ell) <- c("x", "y")
-  return(ell)}
+  #stupid approximation
+  ell.al  <- coo.align(ell)
+  ell.ids <- c(which.min(ell.al[, 1]), which.max(ell.al[, 1]),
+               which.min(ell.al[, 2]), which.max(ell.al[, 2]))
+  seg <- ell[ell.ids, ]
+  return(list(ell=ell, seg=seg))}
 
 #' Ptolemaic ellipses and illustration of eFourier
 #' 
@@ -1314,12 +1321,23 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 
 #confidence ellipses
 #' @export
-.ellipses <- function(xy, fac, conf=0.5, col){
+.ellipses <- function(xy, fac, conf, col){
   for (i in seq(along=levels(fac))) {
     pts.i <- xy[fac==levels(fac)[i], ]
-    ell.i <- conf.ell(x=pts.i, conf=conf)
+    ell.i <- conf.ell(x=pts.i, conf=conf)$ell
     lines(coo.close(ell.i), col=col[i])
     points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])}}
+
+#confidence ellipses
+#' @export
+.ellipsesax <- function(xy, fac, conf, col, lty){
+  for (i in seq(along=levels(fac))) {
+    pts.i <- xy[fac==levels(fac)[i], ]
+    seg.i <- conf.ell(x=pts.i, conf=conf, nb.pts=720)$seg
+    segments(seg.i[1, 1], seg.i[1, 2],
+             seg.i[2, 1], seg.i[2, 2], lty=lty, col=col[i])
+    segments(seg.i[3, 1], seg.i[3, 2],
+             seg.i[4, 1], seg.i[4, 2], lty=lty, col=col[i])}}
 
 #convex hulls
 #' @export
@@ -1419,6 +1437,8 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
 #' @param conf the level of confidence
+#' @param ellipsesax logical whether to draw ellipse axes
+#' @param lty.ellipsesax if yes, the lty for them
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
 #' @param labels logical whether to add labels for groups
@@ -1450,7 +1470,7 @@ plot.PCA <- function(#basics
   #stars
   stars=FALSE,
   #ellipses
-  ellipses=TRUE, conf=0.5,
+  ellipses=TRUE, conf=0.5, ellipsesax=TRUE, lty.ellipsesax=2,
   #convexhulls
   chull=TRUE, chull.lty=3,
   #labels
@@ -1490,13 +1510,14 @@ plot.PCA <- function(#basics
                     amp.shp=1, size.shp=size.shp, pts.shp=pts.shp,
                     col.shp=col.shp, border.shp=border.shp)}
   if (!missing(fac)) {
-    if (stars)    .stars(xy, fac, col.groups)
-    if (ellipses) .ellipses(xy, fac, conf=conf, col.groups) #+conf
-    if (chull)    .chull(xy, fac, col.groups, chull.lty)
-    if (labels)   .labels(xy, fac, col.groups)
-    if (rug)      .rug(xy, fac, col.groups)
+    if (stars)      .stars(xy, fac, col.groups)
+    if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
+    if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
+    if (chull)      .chull(xy, fac, col.groups, chull.lty)
+    if (labels)     .labels(xy, fac, col.groups)
+    if (rug)        .rug(xy, fac, col.groups)
   } else {
-    if (rug)      .rug(xy, NULL, col)
+    if (rug)        .rug(xy, NULL, col)
   }
   points(xy, pch=pch, col=col, cex=cex)
   if (axisnames)  .axisnames(xax, yax)
