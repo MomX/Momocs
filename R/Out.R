@@ -30,6 +30,22 @@ Out  <- function(coo.list, ldk=list(), fac=data.frame()){
   class(Out) <- c("Out", "Coo")
   return(Out)}
 
+# merge method for Out objects (experimental)
+
+#' Combine Out objects
+#' 
+#' @param ... a list of Out objects
+#' @export
+combine <- function(...){UseMethod("combine")}
+#' @export
+combine.Out <- function(...){
+  args <- list(...)
+  Out     <- Out(do.call( c, lapply( args, c )))
+  Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
+  if (any(lapply(args, function(x) length(x$ldk))!=0)){
+    Out$ldk <- do.call("rbind", lapply(args, function(x) x$ldk))}
+  Out}
+
 # The print method for Out objects
 #' @export
 print.Out <- function(x, ...){
