@@ -3,7 +3,7 @@
 \alias{tps.arr}
 \title{Deformation "vector field" using Thin Plate Splines.}
 \usage{
-tps.arr(fr, to, amp = 1, palette = col.summer, arr.nb = 200,
+tps.arr(fr, to, amp = 1, over = 1.2, palette = col.summer, arr.nb = 200,
   arr.levels = 100, arr.len = 0.1, arr.ang = 20, arr.lwd = 0.75,
   arr.col = "grey50", shp = TRUE, shp.col = rep(NA, 2),
   shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
@@ -15,6 +15,9 @@ tps.arr(fr, to, amp = 1, palette = col.summer, arr.nb = 200,
 
 \item{amp}{An amplification factor of differences between \code{fr} and
 \code{to}.}
+
+\item{over}{A \code{numeric} that indicates how much the thin plate splines
+extends over the shapes.}
 
 \item{palette}{A color palette such those included in Momocs or produced
 with \link{colorRampPalette}.}

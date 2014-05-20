@@ -3,9 +3,10 @@
 \alias{tps.iso}
 \title{Deformation isolines using Thin Plate Splines.}
 \usage{
-tps.iso(fr, to, amp = 1, palette = col.summer, iso.nb = 1000,
-  iso.levels = 12, cont = TRUE, cont.col = "black", shp = TRUE,
-  shp.border = col.gallus(2), shp.lwd = c(1, 1), shp.lty = c(1, 1))
+tps.iso(fr, to, amp = 1, over = 1.2, palette = col.summer,
+  iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black",
+  shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(1, 1),
+  shp.lty = c(1, 1))
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates.}
@@ -14,6 +15,9 @@ tps.iso(fr, to, amp = 1, palette = col.summer, iso.nb = 1000,
 
 \item{amp}{An amplification factor of differences between \code{fr} and
 \code{to}.}
+
+\item{over}{A \code{numeric} that indicates how much the thin plate splines
+extends over the shapes.}
 
 \item{palette}{A color palette such those included in Momocs or produced
 with \link{colorRampPalette}.}

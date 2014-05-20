@@ -246,6 +246,17 @@ edm.nearest <- function(m1, m2, full=FALSE){
   lf0 <- substr(lf0, 1, nchar(lf0)-4)
 return(lf0)}
 
+#' @export
+.grid.sample <- function(..., nside=10, over=1){
+  wdw <- apply(rbind(...), 2, range)
+  wdw <- coo.scale(wdw, scale=1/over)
+  by <- min(apply(wdw, 2, diff))/nside
+  xr <- seq(wdw[1, 1], wdw[2, 1], by=by)
+  yr <- seq(wdw[1, 2], wdw[2, 2], by=by)
+  grid <- expand.grid(xr, yr)
+  return(as.matrix(grid))
+}
+
 # 0. Datasets documentation ----------------------------------------------------
 #' Data: Outline coordinates of 20 beer and 20 whisky bottles.
 #' 

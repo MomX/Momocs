@@ -1529,6 +1529,7 @@ plot.PCA <- function(#basics
 tps2d <- function(grid0, fr, to){
   if (is.closed(fr)) fr <- coo.unclose(fr)
   if (is.closed(to)) to <- coo.unclose(to)
+  if (!is.matrix(grid0)) grid0 <- as.matrix(grid0)
   p  <- nrow(fr)
   q  <- nrow(grid0)
   P  <- matrix(NA, p, p)
@@ -1543,7 +1544,8 @@ tps2d <- function(grid0, fr, to){
   coefx <- solve(L)%*%m2[, 1]
   coefy <- solve(L)%*%m2[, 2]
   fx <- function(fr, grid0, coef) {
-    Xn <- numeric(q)
+    Xn <- numeric(nrow(grid0))
+    p  <- nrow(fr)
     for (i in 1:q) {
       Z     <- apply((fr-matrix(grid0[i, ], p, 2, byrow=TRUE))^2, 1, sum)
       Xn[i] <- coef[p+1]+coef[p+2]*grid0[i,1]+coef[p+3]*grid0[i,2]+
@@ -1561,9 +1563,8 @@ tps2d <- function(grid0, fr, to){
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
 #' \code{to}.
-#' @param grid.outside A \code{numeric} that indicates how much the grid
-#' extends beyond the range of outlines. Expressed as a proportion of the
-#' latter.
+#' @param over A \code{numeric} that indicates how much the thin plate splines
+#' extends over the shapes
 #' @param grid.size A \code{numeric} to specify the number of grid cells on the
 #' longer axis on the outlines.
 #' @param grid.col A color for drawing the grid.
@@ -1583,41 +1584,30 @@ tps2d <- function(grid0, fr, to){
 #' to <- x$whisky
 #' tps.grid(fr, to, amp=3, grid.size=40)
 #' @export
-tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
-                     grid.size = 40, grid.col = "grey80",
+tps.grid <- function(fr, to, amp=1, over=1.2,
+                     grid.size = 15, grid.col = "grey80",
                      shp = TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2),
                      shp.lwd = c(2, 2), shp.lty = c(1, 1)){
   # simple magnification
   if (!missing(amp)) to <- to + (to-fr)*amp
-  # we prepare the grid
-  x1     <- min(to[, 1])
-  x2     <- max(to[, 1])
-  y1     <- min(to[, 2])
-  y2     <- max(to[, 2])
-  rx     <- x2 - x1
-  ry     <- y2 - y1
-  dim.grid <- if (rx > ry) { 
-    c(grid.size, round(grid.size*ry / rx))
-  } else {
-    c(round(grid.size*rx / ry), grid.size) }
-  xgrid0 <- seq(x1-rx*grid.outside, x2+rx*grid.outside, length=dim.grid[1])
-  ygrid0 <- seq(y1-ry*grid.outside, y2+ry*grid.outside, length=dim.grid[2])
-  grid0 <- as.matrix(expand.grid(xgrid0, ygrid0))
+  grid0 <- .grid.sample(fr, to, nside=round(grid.size), over=over)
   grid1 <- tps2d(grid0, fr, to)
+dim.grid <- c(length(unique(grid0[, 1])), length(unique(grid0[, 2])))
   op <- par(mar=rep(0, 4))
   on.exit(par(op))
-  wdw <- apply(rbind(grid0, grid1), 2, range)
-  plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1,
+  plot(NA, xlim=range(grid1[, 1]), ylim=range(grid1[, 2]), asp=1,
        ann=FALSE, axes=FALSE, mar=rep(0, 4))
   for (i in 1:dim.grid[2]) {
     lines(grid1[(1:dim.grid[1]) + (i-1)*dim.grid[1],], col=grid.col)}
   for (i in 1:dim.grid[1]) {
     lines(grid1[(1:dim.grid[2]) * dim.grid[1]-i+1,],   col=grid.col)}
   if (shp) {
-    coo.draw(fr, border=shp.border[1], col=shp.col[1],
-             lwd=shp.lwd[1], lty=shp.lty[1], points=FALSE)
-    coo.draw(to, border=shp.border[2], col=shp.col[2],
-             lwd=shp.lwd[2], lty=shp.lty[2], points=FALSE)}}
+    coo.draw(coo.close(fr), border=shp.border[1], col=NA,
+             lwd=shp.lwd[1], lty=shp.lty[1],
+             points=FALSE, first.point=FALSE, centroid=FALSE)
+    coo.draw(coo.close(to), border=shp.border[2], col=NA,
+             lwd=shp.lwd[2], lty=shp.lty[2],
+             points=FALSE, first.point=FALSE, centroid=FALSE)}}
 
 #' Deformation "vector field" using Thin Plate Splines.
 #' 
@@ -1628,6 +1618,8 @@ tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
 #' \code{to}.
+#' @param over A \code{numeric} that indicates how much the thin plate splines
+#' extends over the shapes.
 #' @param palette A color palette such those included in Momocs or produced
 #' with \link{colorRampPalette}.
 #' @param arr.nb A \code{numeric}. The number of arrows to calculate.
@@ -1653,19 +1645,19 @@ tps.grid <- function(fr, to, amp=1, grid.outside = 0.2,
 #' to <- x$whisky
 #' tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)
 #' @export
-tps.arr <- function(fr, to, amp=1, palette = col.summer,
+tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
                     arr.nb = 200, arr.levels = 100, arr.len = 0.1,
                     arr.ang = 20, arr.lwd = 0.75, arr.col = "grey50",
                     shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),
                     shp.lwd = c(2, 2), shp.lty = c(1, 1)){
   if (!missing(amp)) to <- to + (to-fr)*amp
-  grid0  <- spsample(Polygon(coo.close(fr)), arr.nb, type="regular")@coords
+  #grid0  <- spsample(Polygon(coo.close(fr)), arr.nb, type="regular")@coords
+  grid0 <- .grid.sample(fr, to, nside=round(sqrt(arr.nb)), over=over)
   grid1     <- tps2d(grid0, fr, to)
   # grille simple, on affiche d'abord les deux courbes
   op <- par(mar=rep(0, 4))
   on.exit(par(op))
-  wdw      <- apply(rbind(fr, to), 2, range)
-  plot(NA, xlim=wdw[, 1]*1.05, ylim=wdw[, 2]*1.05, asp=1,
+  plot(NA, xlim=range(grid0[, 1]), ylim=range(grid0[, 2]), asp=1,
        axes=FALSE, ann=FALSE, mar=rep(0,4))
   if (missing(arr.levels)) {arr.levels = arr.nb}
   if (!missing(palette)) {
@@ -1676,10 +1668,12 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
   arrows(grid0[, 1], grid0[, 2], grid1[, 1], grid1[, 2],
          length=arr.len, angle=arr.ang, lwd=arr.lwd, col=arr.cols)
   if (shp) {
-    coo.draw(fr, border=shp.border[1], col=shp.col[1],
-             lwd=shp.lwd[1], lty=shp.lty[1], points=FALSE)
-    coo.draw(to, border=shp.border[2], col=shp.col[2],
-             lwd=shp.lwd[2], lty=shp.lty[2], points=FALSE)}}
+    coo.draw(coo.close(fr), border=shp.border[1], col=NA,
+             lwd=shp.lwd[1], lty=shp.lty[1],
+             points=FALSE, first.point=FALSE, centroid=FALSE)
+    coo.draw(coo.close(to), border=shp.border[2], col=NA,
+             lwd=shp.lwd[2], lty=shp.lty[2],
+             points=FALSE, first.point=FALSE, centroid=FALSE)}}
 
 #' Deformation isolines using Thin Plate Splines.
 #' 
@@ -1690,6 +1684,8 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @param amp An amplification factor of differences between \code{fr} and
 #' \code{to}.
+#' @param over A \code{numeric} that indicates how much the thin plate splines
+#' extends over the shapes.
 #' @param palette A color palette such those included in Momocs or produced
 #' with \link{colorRampPalette}.
 #' @param iso.levels \code{numeric}. The number of levels for mapping the
@@ -1713,12 +1709,13 @@ tps.arr <- function(fr, to, amp=1, palette = col.summer,
 #' to <- x$whisky
 #' tps.iso(fr, to, iso.nb=2000, amp=3)
 #' @export
-tps.iso <- function(fr, to, amp=1, palette = col.summer,
+tps.iso <- function(fr, to, amp=1, over=1.2, palette = col.summer,
                     iso.nb = 1000, iso.levels = 12, cont=TRUE, cont.col="black",
                     shp = TRUE, shp.border=col.gallus(2),
                     shp.lwd = c(1, 1), shp.lty = c(1, 1)){  
   # if (!missing(amp)) to <- to + (to-fr)*amp
-  grid0  <- spsample(Polygon(coo.close(fr)), iso.nb, type="regular")@coords
+  #grid0  <- spsample(Polygon(coo.close(fr)), iso.nb, type="regular")@coords
+  grid0 <- .grid.sample(fr, to, nside=round(sqrt(iso.nb)), over=over)
   grid1  <- tps2d(grid0, fr, to)
   def    <- edm(grid0, grid1)
   x1     <- length(unique(grid0[,1]))
@@ -1733,15 +1730,18 @@ tps.iso <- function(fr, to, amp=1, palette = col.summer,
   y <- sort(unique(grid0[,2]))
   op <- par(mar=rep(1, 4))
   on.exit(par(op))
-  image(x, y, im, col=iso.cols, asp=1, xlim=range(x)*1.05, ylim=range(y)*1.05,
+  image(x, y, im, col=iso.cols, asp=1,
+        xlim=range(grid0[, 1]), ylim=range(grid0[, 2]),
         axes=FALSE, frame=FALSE, ann=FALSE)
   if (cont) {contour(x, y, im, nlevels=iso.levels,
                      add=TRUE, drawlabels=FALSE, col=cont.col, lty=2)}
   if (shp) {
-    coo.draw(fr, border=shp.border[1], col=NA,
-             lwd=shp.lwd[1], lty=shp.lty[1], points=FALSE)
-    coo.draw(to, border=shp.border[2], col=NA,
-             lwd=shp.lwd[2], lty=shp.lty[2], points=FALSE)}}
+    coo.draw(coo.close(fr), border=shp.border[1], col=NA,
+             lwd=shp.lwd[1], lty=shp.lty[1],
+             points=FALSE, first.point=FALSE, centroid=FALSE)
+    coo.draw(coo.close(to), border=shp.border[2], col=NA,
+             lwd=shp.lwd[2], lty=shp.lty[2],
+             points=FALSE, first.point=FALSE, centroid=FALSE)}}
 
 # 0. Color palettes ------------------------------------------------------------
 

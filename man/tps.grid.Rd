@@ -3,7 +3,7 @@
 \alias{tps.grid}
 \title{Deformation grids using Thin Plate Splines.}
 \usage{
-tps.grid(fr, to, amp = 1, grid.outside = 0.2, grid.size = 40,
+tps.grid(fr, to, amp = 1, over = 1.2, grid.size = 15,
   grid.col = "grey80", shp = TRUE, shp.col = rep(NA, 2),
   shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
 }
@@ -15,9 +15,8 @@ tps.grid(fr, to, amp = 1, grid.outside = 0.2, grid.size = 40,
 \item{amp}{An amplification factor of differences between \code{fr} and
 \code{to}.}
 
-\item{grid.outside}{A \code{numeric} that indicates how much the grid
-extends beyond the range of outlines. Expressed as a proportion of the
-latter.}
+\item{over}{A \code{numeric} that indicates how much the thin plate splines
+extends over the shapes}
 
 \item{grid.size}{A \code{numeric} to specify the number of grid cells on the
 longer axis on the outlines.}
