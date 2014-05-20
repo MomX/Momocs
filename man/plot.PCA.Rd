@@ -8,8 +8,9 @@
   grid = TRUE, nb.grids = 3, morphospace = TRUE, pos.shp = "full",
   amp.shp = 1, size.shp = 20, pts.shp = 60, border.shp = "#00000055",
   col.shp = "#00000011", stars = FALSE, ellipses = TRUE, conf = 0.5,
-  chull = TRUE, chull.lty = 3, labels = TRUE, axisnames = TRUE,
-  axisvar = TRUE, eigen = TRUE, rug = TRUE, title = substitute(x), ...)
+  ellipsesax = TRUE, lty.ellipsesax = 2, chull = TRUE, chull.lty = 3,
+  labels = TRUE, axisnames = TRUE, axisvar = TRUE, eigen = TRUE,
+  rug = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{pca}}
@@ -58,6 +59,10 @@ or a data.frame for \link{pos.shapes}}
 \item{ellipses}{logical whether to draw confidence ellipses}
 
 \item{conf}{the level of confidence}
+
+\item{ellipsesax}{logical whether to draw ellipse axes}
+
+\item{lty.ellipsesax}{if yes, the lty for them}
 
 \item{chull}{logical whether to draw a convex hull}
 

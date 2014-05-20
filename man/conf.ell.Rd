@@ -15,6 +15,9 @@ conf.ell(x, y, conf = 0.95, nb.pts = 60)
 \item{nb.pts}{the number of points to return, to draw the ellipsis}
 }
 \value{
+a list with $ell coordinates of the ellipse and $seg coordinates
+of its vertices
+
 a matrix of (x; y) coordinates to draw the ellipsis
 }
 \description{
