@@ -995,6 +995,31 @@ coo.area <- function(coo){
   area <- (0.5 * (sum(x) - sum(y)))
   return(abs(area))}
 
+# g. angle ----------------------------------------------------------------------
+#' Returns the tangent angle along the perimeter
+#' 
+#' Calculated using complex numbers and returned in radians
+#' minus the first one (modulo 2*pi).
+#' @param coo a matrix of coordinates
+#' @return a numeric, the tangent angle along the perimeter
+#' @seealso \link{tfourier}
+#' @examples
+#' data(bot)
+#' b <- bot[1]
+#' phi  <- coo.tangle(b)
+#' phi2 <- coo.tangle(coo.smooth(b, 2))
+#' plot(phi, type="l")
+#' plot(phi2, type="l", col="red") # ta is very sensible to noise
+#' @export
+coo.tangle <- function(coo){
+  p <- nrow(coo)
+  tangvect <- coo - rbind(coo[p, ], coo[-p, ])
+  tet1   <- Arg(complex(real=tangvect[,1], imaginary = tangvect[,2]))
+  tet0   <- tet1[1]
+  t1     <- seq(0, 2*pi, length= (p+1))[1:p]
+  phi    <- (tet1-tet0-t1)%%(2*pi)
+  return(phi)}
+
 #' The angle formed by three points.
 #' 
 #' Returns the angle (in radians) defined by a triplet of points
