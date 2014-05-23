@@ -252,8 +252,9 @@ lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE)
   lf0 <- strsplit(lf, split=split)
   # we check that all files have the same name structure
   lfl <- sapply(lf0, length)
+  nc <- unique(lfl)
   ### todo. which ones ?
-  if (length(unique(lfl)) !=1 ) {
+  if (length(nc) !=1 ) {
     most.ab <- as.numeric(names(sort(table(lfl), decreasing=TRUE)[1]))
     lfl.pb  <- which(lfl != most.ab)
     cat("Most of the filenames have", most.ab, "groups.\n",

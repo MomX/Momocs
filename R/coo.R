@@ -778,12 +778,6 @@ coo.baseline.default <-
   tx <- t2x - t1x
   ty <- t2y - t1y
   # returns difference angle and norm ratios between two vectors given as 4 numeric.
-  vecs.param <- function(r1, i1, r2, i2){
-    x <- c(r1, i1, r2, i2)
-    r.norms <- sqrt((r2^2 + i2^2)) / sqrt((r1^2 + i1^2))
-    d1 <- sqrt(sum(r1^2 + i1^2))
-    d2 <- sqrt(sum(r2^2 + i2^2))
-    return(list(r.norms=d1/d2, d.angle=atan2(i2, r2) - atan2(i1, r1)))}
   vi <- vecs.param(rx, ry, tx, ty)
   # we rotate accordingly with a center defined
   # as the first landmark (trans, rot, untrans)

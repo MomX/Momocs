@@ -234,6 +234,36 @@ edm.nearest <- function(m1, m2, full=FALSE){
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
+#' Some vector utilities.
+#' 
+#' Returns ratio of norms and signed angle between two vectors provided as four
+#' numeric.
+#' 
+#' @param r1 the "real" part of the first vector, i.e. difference in
+#' x-coordinates.
+#' @param i1 the "imaginary" part of the first vector, i.e. difference in
+#' y-coordinates.
+#' @param r2 the "real" part of the second vector, i.e. difference in
+#' x-coordinates.
+#' @param i2 the "imaginary" part of the second vector, i.e. difference in
+#' y-coordinates.
+#' @return A list with two components: \code{r.norms} the ratio of (norm of
+#' vector 1)/(norm of vector 2) and \code{d.angle} the signed angle 'from' the
+#' first 'to' the second vector.
+#' @keywords Utilities
+#' @examples
+#' vecs.param(1, 0, 0, 2)
+#' 
+#' @export vecs.param
+vecs.param <- function(r1, i1, r2, i2){
+  x <- c(r1, i1, r2, i2)
+  if (!is.numeric(x)) {stop("4 numeric must be passed.")}
+  if (length(x)!=4)   {stop("4 numeric must be passed.")}
+  r.norms <- sqrt((r2^2 + i2^2)) / sqrt((r1^2 + i1^2))
+  d1 <- sqrt(sum(r1^2 + i1^2))
+  d2 <- sqrt(sum(r2^2 + i2^2))
+  return(list(r.norms=d1/d2, d.angle=atan2(i2, r2) - atan2(i1, r1)))}
+
 # Utilities (useless?)
 #'@export
 .refactor <- function(df){data.frame(lapply(df, factor))}
