@@ -110,6 +110,7 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   Dx <- coo[, 1] - coo[, 1][c(nr, (1:(nr - 1)))] # there was a bug there. check from claude? #todo
   Dy <- coo[, 2] - coo[, 2][c(nr, (1:(nr - 1)))]
   Dt <- sqrt(Dx^2 + Dy^2)
+  Dt[Dt<1e-10] <- 1e-10 # to avoid Nan
   t1 <- cumsum(Dt)
   t1m1 <- c(0, t1[-nr])
   T <- sum(Dt)
