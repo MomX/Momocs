@@ -251,8 +251,14 @@ lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE)
     lf <- strtrim(lf, nchar(lf)-4)}
   lf0 <- strsplit(lf, split=split)
   # we check that all files have the same name structure
-  nc  <- unique(sapply(lf0, length))
-  if (length(nc) !=1 ) {
+  lfl <- sapply(lf0, length)
+  ### todo. which ones ?
+  if (length(unique(lfl)) !=1 ) {
+    most.ab <- as.numeric(names(sort(table(lfl), decreasing=TRUE)[1]))
+    lfl.pb  <- which(lfl != most.ab)
+    cat("Most of the filenames have", most.ab, "groups.\n",
+        "Maybe you should inspect these file(name)s:\n")
+    cat(lf[lfl.pb], sep="\n")
     stop("The files do not have the same filename structure.")}
   fac <- as.data.frame(matrix(NA, nrow=length(lf), ncol=nc)) # dirty
   if (!missing(names)) {
