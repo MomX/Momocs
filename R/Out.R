@@ -592,3 +592,124 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
     coe[i, ] <- c(tf$an, tf$bn)}
   return(OutCoe(coe=coe, fac=Out$fac, method="tFourier", norm=norm))}
 
+# 5. Out + landmarks ---------------------------------------------------------
+
+#' Define landmarks on Out and Opn objects
+#' 
+#' Helps to define landmarks on a \code{Coo} object.
+#' The number of landmarks must be specified and rows indices that 
+#' correspond to the nearest points clicked on every outlines are 
+#' stored in the \code{$ldk} slot of the \code{Coo} object.
+#' @param Coo an Out or Opn object
+#' @param nb.ldk the number of landmarks to define on every shape
+#' @return an Out or an Opn object with some landmarks defined
+#' @keywords Out Opn Ldk
+#' @examples
+#' \dontrun{
+#' data(bot)
+#' bot <- bot[1:5] # to make it shorter to try
+#' # click on 3 points, 5 times.
+#' # Don't forget to save the object returned by defLandmarks...
+#' bot2 <- defLandmarks(bot, 3) 
+#' stack(bot2)
+#' bot2$ldk
+#' }
+#' @export
+defLandmarks <- function(Coo, nb.ldk){UseMethod("defLandmarks")}
+#' @export
+defLandmarks.Coo <- function(Coo, nb.ldk){
+  if (missing(nb.ldk)) stop(" * 'nb.ldk' must be specified.")
+  ldk <- list()
+  for (i in seq(along=Coo$coo)){
+    Coo$ldk[[i]] <- coo.ldk(Coo$coo[[i]], nb.ldk=nb.ldk)
+  }
+  return(Coo)}
+
+#' Retrieve landmarks coordinates from Opn and Out objects
+#' 
+#' In \link{Out} and \link{Opn} classes, landmarks (if any) are stored as
+#' row indices. This methods allows to retrieve the corresponding (x; y) coordinates.
+#' @param Coo a Coo object, either Out or Opn
+#' @return an array of coordinates X (x; y) coordinates X number of shapes.
+#' @seealso \link{defLandmarks}, \link{gProcrustes}
+#' @keywords Out Opn Ldk
+#' @examples
+#' data(hearts)
+#' ldk.h <- getLandmarks(hearts) 
+#' stack(Ldk(a2l(ldk.h)))
+#' ldk.h
+#' @export
+getLandmarks <- function(Coo){UseMethod("getLandmarks")}
+#' @export
+getLandmarks.Out <- function(Coo){
+  coo <- Coo$coo
+  ldk <- Coo$ldk
+  ref <- array(NA, dim=c(length(ldk[[1]]), ncol(coo[[1]]), length(coo)))
+  for (i in seq(along=coo)){
+    ref[,,i] <- coo[[i]][ldk[[1]], ]}
+  return(ref)}
+#' @export
+getLandmarks.Opn <- getLandmarks.Out
+
+#' Performs a general Procrustes alignment on Opn and Out objects
+#' 
+#' It relies on the $ldk slot and on the procGPA function in the shapes package.
+#' @param Coo a Coo object (only Out so far)
+#' @param ... additional arguments to be passed to procGPA
+#' @return a procGPA-aligned Coo object
+#' @seealso \link{defLandmarks} to define landmarks on your shapes and 
+#' \link{coo.bookstein} for another "alignment" approach. \link{procGPA} for the
+#' core function. Thanks to Dryden et al. !
+#' @keywords Out Opn Ldk
+#' @examples
+#' \dontrun{
+#' data(hearts)
+#' stack(hearts) # raw hearts
+#' hearts2 <- gProcrustes(hearts)
+#' stack(hearts2) #procGPA-aligned hearts
+#' hearts3 <- coo.bookstein(hearts, 2, 4)
+#' stack(hearts3) # bookstein baseline
+#' hearts4 <- coo.slide(hearts3, 2)
+#' stack(hearts4) #bookstein baseline + first point on the second landmarks
+#' }
+#' @export
+gProcrustes <- function(Coo, ...){UseMethod("gProcrustes")}
+#' @export
+gProcrustes.Out <- function(Coo, ...){
+  if (length(Coo$ldk)==0) stop(" * No landmarks defined. See ?add.ldk")
+  Coo2 <- coo.center(coo.scale(Coo))
+  ref  <- getLandmarks(Coo2)
+  tar <- procGPA(ref, tol1=1e-30, proc.output=TRUE, ...)$rotated
+  # would benefit to be handled by coo.baseline
+  for (i in 1:length(Coo2)) {
+    tari <- tar[, , i]
+    refi <- ref[, , i]
+    t1x <- tari[1, 1]
+    t1y <- tari[1, 2]
+    t2x <- tari[2, 1]
+    t2y <- tari[2, 2]
+    r1x <- refi[1, 1]
+    r1y <- refi[1, 2]
+    r2x <- refi[2, 1]
+    r2y <- refi[2, 2]
+    # translation
+    t <- tari[1, ] - refi[1, ]
+    refi <- coo.trans(refi, t[1], t[2])
+    # rotation  
+    tx <- t2x - t1x
+    ty <- t2y - t1y
+    rx <- r2x - r1x
+    ry <- r2y - r1y
+    vi <- vecs.param(rx, ry, tx, ty)
+    coo.i <- Coo2$coo[[i]]
+    coo.i <- coo.trans(coo.i, t[1]-t1x, t[2]-t1y)
+    coo.i <- coo.i / vi$r.norms
+    coo.i <- coo.rotate(coo.i, -vi$d.angle)
+    coo.i <- coo.trans(coo.i, t1x, t1y)
+    Coo2$coo[[i]] <- coo.i
+  }
+  return(Coo2)}
+
+#' @export
+gProcrustes.Opn <- gProcrustes.Out
+
