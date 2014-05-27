@@ -105,7 +105,7 @@ Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
   return(mod)}
 
 
-# 2. PCA on Coe ----------------------------------------------------------------
+# 3. PCA on Coe ----------------------------------------------------------------
 #' Principal component analysis on Coe objects
 #' 
 #' Performs a PCA on OutCoe, OpnCoe objects.
@@ -135,6 +135,36 @@ pca.OpnCoe <- function(Coe){
   PCA$baseline2 <- OpnCoe$baseline2
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
+
+
+# 4 - LDA ----------------------------------------------------------------
+
+#' @export
+lda.OutCoe <- function(x, fac, axs=1:2, palette=col.india){
+  if (missing(fac)) stop(" * no fac provided")
+  fac    <- x$fac[, fac]
+  X      <- x$coe
+  remove <- which(apply(X, 2, sd)<1e-10)
+  if (length(remove)!=0) { X <- X[, -remove] } else { remove <- NULL }    
+  mod    <- lda(X, grouping=fac)
+  mod.pred <- predict(mod, X)
+  CV <- table(fac, mod.pred$class)
+  names(dimnames(CV)) <- c("actual", "classified")
+  LDA <- list(x=X, fac=fac, removed=remove,
+              mod=mod, mod.pred=mod.pred,
+              CV=CV, correct=sum(diag(CV))/sum(CV))
+  LDA$mshape <- apply(x$coe, 2, mean)
+  LDA$method <- x$method
+  class(LDA) <- c("LDA", class(LDA))
+  return(LDA)}
+
+#' @export
+print.LDA <- function(x, ...){
+  cat("An 'LDA' object. See ?LDA.\n")
+  cat("Cross-validation table (", signif(x$correct * 100, 3), "% ): \n")
+  print(x$CV)}
+
+# n - Clustering ----------------------------------------------------------
 
 #' Hierarchical clustering #todo
 #' 
