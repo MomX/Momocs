@@ -394,7 +394,8 @@ NULL
 #' @importFrom jpeg readJPEG
 #' @importFrom shapes procGPA
 #' @importFrom methods showDefault
-#' @importFrom MASS ginv lda
+#' @importFrom MASS ginv
+#' @importFrom MASS lda
 #' @importFrom graphics boxplot
 #' @importFrom utils stack
 #' @docType package

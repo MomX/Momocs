@@ -138,12 +138,20 @@ pca.OpnCoe <- function(Coe){
 
 
 # 4 - LDA ----------------------------------------------------------------
-
+#' Linear Discriminant Analysis on Coe objects
+#' 
+#' Performs a LDA on OutCoe, (OpnCoe no yet) objects. Relies on \link{lda} in MASS.
+#' @aliases LDA
+#' @param Coe the \link{Coe} object
+#' @param fac the grouping factor (names of one of the $fac column or column id)
+#' @return a "LDA" object on which to apply \link{plot.LDA}. #todo
 #' @export
-lda.OutCoe <- function(x, fac, axs=1:2, palette=col.india){
+LDA <- function(Coe, fac){UseMethod("LDA")}
+#' @export
+LDA.OutCoe <- function(Coe, fac){
   if (missing(fac)) stop(" * no fac provided")
-  fac    <- x$fac[, fac]
-  X      <- x$coe
+  fac    <- Coe$fac[, fac]
+  X      <- Coe$coe
   remove <- which(apply(X, 2, sd)<1e-10)
   if (length(remove)!=0) { X <- X[, -remove] } else { remove <- NULL }    
   mod    <- lda(X, grouping=fac)
@@ -153,8 +161,8 @@ lda.OutCoe <- function(x, fac, axs=1:2, palette=col.india){
   LDA <- list(x=X, fac=fac, removed=remove,
               mod=mod, mod.pred=mod.pred,
               CV=CV, correct=sum(diag(CV))/sum(CV))
-  LDA$mshape <- apply(x$coe, 2, mean)
-  LDA$method <- x$method
+  LDA$mshape <- apply(Coe$coe, 2, mean)
+  LDA$method <- Coe$method
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)}
 

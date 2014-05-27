@@ -1532,7 +1532,57 @@ plot.PCA <- function(#basics
 
 
 # 7. LDA ------------------------------------------------------------------
-
+#' Plots Linear Discriminant Analysis
+#' 
+#' The Momocs' LCA plotter with many graphical options and morphospaces.
+#' @method plot LDA
+#' @param x an object of class "LDA", typically obtained with \link{LDA}
+#' @param xax the first LD axis
+#' @param yax the second LD axis
+#' @param col a color for the points (either global, for every level of the fac
+#' or for every individual, see examples)
+#' @param pch a pch for the points (either global, for every level of the fac
+#' or for every individual, see examples)
+#' @param cex the size of the points
+#' @param palette a \link{palette}
+#' @param center.origin logical whether to center the plot onto the origin
+#' @param zoom to keep your distances
+#' @param grid logical whether to draw a grid
+#' @param nb.grids and how many of them
+#' @param morphospace logical whether to add the morphological space
+#' @param pos.shp either "full", "range", "circle", "xy" 
+#' or a data.frame for \link{pos.shapes}
+#' @param amp.shp amplification factor for shape deformation
+#' @param size.shp the size of the shapes
+#' @param pts.shp the number of points fro drawing shapes
+#' @param border.shp the border color of the shapes
+#' @param col.shp the color of the shapes
+#' @param stars logical whether to draw "stars"
+#' @param ellipses logical whether to draw confidence ellipses
+#' @param conf the level of confidence
+#' @param ellipsesax logical whether to draw ellipse axes
+#' @param lty.ellipsesax if yes, the lty for them
+#' @param chull logical whether to draw a convex hull
+#' @param chull.lty if yes, its linetype
+#' @param labels logical whether to add labels for groups
+#' @param axisnames logical whether to add PC names
+#' @param axisvar logical whether to draw the variance they explain
+#' @param eigen logical whether to draw a plot of the eigen values
+#' @param rug logical whether to add rug to margins
+#' @param title character a name for the plot
+#' @param ... useless here, just to fit the generic plot
+#' @details Widely inspired by the philosophy behind graphical functions
+#' of the ade4 R package.
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 24)
+#' bot.l <- LDA(bot.f, "type")
+#' plot(bot.l)
+#' 
+#' bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
+#' bot.l <- LDA(bot.f, "plop")
+#' plot(bot.l)
+#' @export
 plot.LDA <- function(#basics
   x, xax=1, yax=2, 
   #color choice
