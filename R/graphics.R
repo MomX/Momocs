@@ -95,8 +95,8 @@ coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, ...){
   if (nrow(coo1) != nrow(coo2)) {
     stop(" * coo1 and coo2 have different number of coordinates.")}
   s <- seq(nrow(coo1)-1)
-    segments(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2], ...)
-    points(coo2[, 1], coo2[, 2], pch=pch, cex=cex, ...)}
+  segments(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2], ...)
+  points(coo2[, 1], coo2[, 2], pch=pch, cex=cex, ...)}
 
 #' Illustrate differences between two configurations
 #' 
@@ -119,8 +119,8 @@ coo.arrows <- function(coo1, coo2, length=0.1, angle=20, ...){
   if (nrow(coo1) != nrow(coo2)) {
     stop(" * coo1 and coo2 have different number of coordinates.")}
   s <- seq(nrow(coo1)-1)
-    arrows(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2],
-           length=length, angle=angle,...)}
+  arrows(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2],
+         length=length, angle=angle,...)}
 
 #' "Templates" list and matrix of coordinates.
 #' 
@@ -646,7 +646,7 @@ stack.Ldk <- function(x, cols, borders,
   plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1, las=1, cex.axis=2/3, ann=FALSE, frame=FALSE)
   if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}
   for (i in 1:length(Coo)) {
-      points(Coo$coo[[i]], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
+    points(Coo$coo[[i]], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
 
 
 #' Plot on Coo objects: family picture
@@ -705,7 +705,7 @@ panel.Out <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer,
           text(pos[,1], pos[,2], labels=Coo$fac[, names][order(reorder)], cex=cex.names)
         }
       } else {
-      text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
+        text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
 #' @export
 panel.Opn <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer, names=NULL, cex.names=0.6, ...){
   Opn <- Coo
@@ -1365,7 +1365,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 
 #add eigen
 #' @export
-.eigen <- function(ev, xax, yax, ratio=0.12){
+.eigen <- function(ev, xax, yax, ratio=0.12, ev.names){
   plt0 <- par("plt")
   on.exit(par(plt = plt0))
   g <- 0.015
@@ -1377,7 +1377,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
   cs.var <- cumsum(var)/sum(var)
   k <- ifelse(max(c(xax, yax))>5, max(c(xax, yax)), 5)
   barplot(var[1:k], axes=FALSE, col=cols, border=NA)
-  text(-0.7, par("usr")[3], labels="Eigenvalues",
+  text(-0.9, par("usr")[3], labels=ev.names,
        pos=4, cex=0.6, srt=90, col="grey40")}
 
 #names axes
@@ -1459,7 +1459,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
-  col="black", pch=20, cex=0.5, palette=col.summer,
+  col="black", pch=20, cex=0.5, palette=col.autumn,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -1527,7 +1527,7 @@ plot.PCA <- function(#basics
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
   .title(title)
-  if (eigen)     .eigen(PCA$sdev, xax, yax)
+  if (eigen)     .eigen(PCA$sdev, xax, yax, ev.names="Eigenvalues")
   box()}
 
 
@@ -1536,7 +1536,7 @@ plot.PCA <- function(#basics
 plot.LDA <- function(#basics
   x, xax=1, yax=2, 
   #color choice
-  col="black", pch=20, cex=0.5, palette=col.summer,
+  col="black", pch=1:nlevels(x$fac), cex=0.8, palette=col.autumn,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -1563,51 +1563,69 @@ plot.LDA <- function(#basics
   title=substitute(x), ...
 ){
   LDA <- x
-  xy <- LDA$mod.pred$x[, c(xax, yax)]
-  # we check and prepare
   fac <- LDA$fac
-#   if (!missing(fac)) {
-#     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-    if (!missing(col)){
-      if (length(col)==nlevels(fac)) {
+  # we check and prepare
+  if (nlevels(fac) <= 2) { # case of 2 levels and a single LD
+    xy <- LDA$mod.pred$x[, 1]
+  } else {   
+    xy <- LDA$mod.pred$x[, c(xax, yax)]
+  }
+  # we check and prepare
+  if (!missing(col)){
+    if (length(col)==nlevels(fac)) {
       col.groups <- col
       col <- col.groups[fac]
-      } else {
-        col.groups <- rep(col[1], nlevels(fac))
-        col <- rep(col[1], nrow(xy))}
     } else {
-      col.groups <- palette(nlevels(fac))
-      col <- col.groups[fac]
-    } 
-#     if (!missing(pch)) {
-      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }#}}
+      col.groups <- rep(col[1], nlevels(fac))
+      col <- rep(col[1], nrow(xy))}
+  } else {
+    col.groups <- palette(nlevels(fac))
+    col <- col.groups[fac]
+  } 
+  if (!missing(pch)){
+    if(length(pch)==nlevels(fac)) {
+      pch <- pch[fac] 
+    } else {
+      pch <- pch}
+  }
+  
+  # case of 2 levels and a single LD
+  if (nlevels(fac) <= 2){
+    op <- par(mfrow=c(2, 1), oma=c(0, 0, 0, 0), mar=c(4, 1, 3, 1 ))
+    on.exit(op)
+    hist.range <- range(xy)
+    hist(xy[fac==levels(fac)[1]], xlim=hist.range,
+         ylab=NA, xlab="LD1", main=levels(fac)[1], 
+         col=palette(2)[1], axes=FALSE); axis(1)
+    hist(xy[fac==levels(fac)[2]], xlim=hist.range,
+         ylab=NA, xlab="LD1", main=levels(fac)[2],
+         col=palette(2)[2], axes=FALSE); axis(1)
+    par(mfrow=c(1, 1))
+    return()
+  }
+  
   opar <- par(mar = par("mar"), xpd=FALSE)
   on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
   
   .frame(xy, center.origin, zoom=zoom)
   if (grid) .grid(nb.grids)
-#   if (morphospace) {
-#     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
-#                     amp.shp=1, size.shp=size.shp, pts.shp=pts.shp,
-#                     col.shp=col.shp, border.shp=border.shp)}
-#  if (!missing(fac)) {
-    if (stars)      .stars(xy, fac, col.groups)
-    if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
-    if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
-    if (chull)      .chull(xy, fac, col.groups, chull.lty)
-    if (labels)     .labels(xy, fac, col.groups)
-    if (rug)        .rug(xy, fac, col.groups)
-#  } else {
-#    if (rug)        .rug(xy, NULL, col)
-#  }
+  #   if (morphospace) {
+  #     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+  #                     amp.shp=1, size.shp=size.shp, pts.shp=pts.shp,
+  #                     col.shp=col.shp, border.shp=border.shp)}
+  if (stars)      .stars(xy, fac, col.groups)
+  if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
+  if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
+  if (chull)      .chull(xy, fac, col.groups, chull.lty)
+  if (labels)     .labels(xy, fac, col.groups)
+  if (rug)        .rug(xy, fac, col.groups)
   points(xy, pch=pch, col=col, cex=cex)
   if (axisnames)  .axisnames(xax, yax, "LD")
-#  if (axisvar)    .axisvar(PCA$sdev, xax, yax)
+  if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
   .title(title)
-#  if (eigen)     .eigen(PCA$sdev, xax, yax)
+  if (eigen)     .eigen(LDA$mod$svd, xax, yax, ev.names="Proportion of trace")
   box()}
-
 
 # 8. Thin plate splines plotters -----------------------------------------------
 #' Thin Plate Splines for 2D data.
@@ -1692,7 +1710,7 @@ tps.grid <- function(fr, to, amp=1, over=1.2,
   if (!missing(amp)) to <- to + (to-fr)*amp
   grid0 <- .grid.sample(fr, to, nside=round(grid.size), over=over)
   grid1 <- tps2d(grid0, fr, to)
-dim.grid <- c(length(unique(grid0[, 1])), length(unique(grid0[, 2])))
+  dim.grid <- c(length(unique(grid0[, 1])), length(unique(grid0[, 2])))
   op <- par(mar=rep(0, 4))
   on.exit(par(op))
   plot(NA, xlim=range(grid1[, 1]), ylim=range(grid1[, 2]), asp=1,
