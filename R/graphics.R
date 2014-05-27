@@ -1382,13 +1382,13 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 
 #names axes
 #' @export
-.axisnames <- function(xax, yax){
+.axisnames <- function(xax, yax, nax="PC"){
   gx <- strwidth("PCN")/1.75
   gy <- strheight("PCN")/1.8
   text(par("usr")[2]-gx, gy, col="grey40", cex=0.8,
-       labels=paste0("PC", xax))
+       labels=paste0(nax, xax))
   text(-gy, par("usr")[4]-gx, col="grey40",cex=0.8,
-       labels=paste0("PC", yax), srt=90)}
+       labels=paste0(nax, yax), srt=90)}
 
 #adds var captured
 #' @export
@@ -1520,7 +1520,7 @@ plot.PCA <- function(#basics
     if (rug)        .rug(xy, NULL, col)
   }
   points(xy, pch=pch, col=col, cex=cex)
-  if (axisnames)  .axisnames(xax, yax)
+  if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
   .title(title)
   if (eigen)     .eigen(PCA$sdev, xax, yax)
@@ -1528,6 +1528,77 @@ plot.PCA <- function(#basics
 
 
 # 7. LDA ------------------------------------------------------------------
+
+plot.LDA <- function(#basics
+  x, xax=1, yax=2, 
+  #color choice
+  col="black", pch=20, cex=0.5, palette=col.summer,
+  #.frame
+  center.origin=FALSE, zoom=1,
+  #.grid
+  grid=TRUE, nb.grids=3,
+  #shapes
+  morphospace=TRUE, pos.shp="full", amp.shp=1, size.shp=20,
+  pts.shp=60, border.shp="#00000055", col.shp="#00000011",
+  #stars
+  stars=FALSE,
+  #ellipses
+  ellipses=TRUE, conf=0.5, ellipsesax=TRUE, lty.ellipsesax=2,
+  #convexhulls
+  chull=TRUE, chull.lty=3,
+  #labels
+  labels=TRUE,
+  #axisnames
+  axisnames=TRUE,
+  #axisvar
+  axisvar=TRUE,
+  #eigen
+  eigen=TRUE,
+  #
+  rug=TRUE,
+  title=substitute(x), ...
+){
+  LDA <- x
+  xy <- LDA$mod.pred$x[, c(xax, yax)]
+  # we check and prepare
+  fac <- LDA$fac
+#   if (!missing(fac)) {
+#     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
+    if (!missing(col) & length(col)==nlevels(fac)) {
+      col.groups <- col
+      col <- col.groups[fac]
+    } else {
+      col.groups <- palette(nlevels(fac))
+      col <- col.groups[fac]
+    } 
+#     if (!missing(pch)) {
+      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }#}}
+  opar <- par(mar = par("mar"), xpd=FALSE)
+  on.exit(par(opar))
+  par(mar = rep(0.1, 4)) #0.1
+  
+  .frame(xy, center.origin, zoom=zoom)
+  if (grid) .grid(xy)
+#   if (morphospace) {
+#     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+#                     amp.shp=1, size.shp=size.shp, pts.shp=pts.shp,
+#                     col.shp=col.shp, border.shp=border.shp)}
+#  if (!missing(fac)) {
+    if (stars)      .stars(xy, fac, col.groups)
+    if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
+    if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
+    if (chull)      .chull(xy, fac, col.groups, chull.lty)
+    if (labels)     .labels(xy, fac, col.groups)
+    if (rug)        .rug(xy, fac, col.groups)
+#  } else {
+#    if (rug)        .rug(xy, NULL, col)
+#  }
+  points(xy, pch=pch, col=col, cex=cex)
+  if (axisnames)  .axisnames(xax, yax, "LD")
+#  if (axisvar)    .axisvar(PCA$sdev, xax, yax)
+  .title(title)
+#  if (eigen)     .eigen(PCA$sdev, xax, yax)
+  box()}
 
 
 # 8. Thin plate splines plotters -----------------------------------------------
