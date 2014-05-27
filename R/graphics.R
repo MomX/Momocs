@@ -1301,11 +1301,11 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 
 #grid layer
 #' @export
-.grid <- function(xy, nb.grids=3){
-  m <- max(abs(xy))
+.grid <- function(nb.grids=3){
+  m <- max(abs(par("usr")))
   g <- seq(0, m, length=nb.grids)
   g <- c(g[-1]*-1, g[-1])
-  abline(h=g, v=g, col="grey90", lty=2)
+  abline(h=g, v=g, col="grey90", lty=3)
   abline(h=0, v=0, col="grey80")}
 
 #rug
@@ -1490,9 +1490,13 @@ plot.PCA <- function(#basics
   # we check and prepare
   if (!missing(fac)) {
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-    if (!missing(col) & length(col)==nlevels(fac)) {
-      col.groups <- col
-      col <- col.groups[fac]
+    if (!missing(col)){
+      if (length(col)==nlevels(fac)) {
+        col.groups <- col
+        col <- col.groups[fac]
+      } else {
+        col.groups <- rep(col[1], nlevels(fac))
+        col <- rep(col[1], nrow(xy))}
     } else {
       col.groups <- palette(nlevels(fac))
       col <- col.groups[fac]
@@ -1504,7 +1508,7 @@ plot.PCA <- function(#basics
   par(mar = rep(0.1, 4)) #0.1
   
   .frame(xy, center.origin, zoom=zoom)
-  if (grid) .grid(xy)
+  if (grid) .grid(nb.grids)
   if (morphospace) {
     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
                     amp.shp=1, size.shp=size.shp, pts.shp=pts.shp,
@@ -1543,7 +1547,7 @@ plot.LDA <- function(#basics
   #stars
   stars=FALSE,
   #ellipses
-  ellipses=TRUE, conf=0.5, ellipsesax=TRUE, lty.ellipsesax=2,
+  ellipses=FALSE, conf=0.5, ellipsesax=FALSE, lty.ellipsesax=2,
   #convexhulls
   chull=TRUE, chull.lty=3,
   #labels
@@ -1564,9 +1568,13 @@ plot.LDA <- function(#basics
   fac <- LDA$fac
 #   if (!missing(fac)) {
 #     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-    if (!missing(col) & length(col)==nlevels(fac)) {
+    if (!missing(col)){
+      if (length(col)==nlevels(fac)) {
       col.groups <- col
       col <- col.groups[fac]
+      } else {
+        col.groups <- rep(col[1], nlevels(fac))
+        col <- rep(col[1], nrow(xy))}
     } else {
       col.groups <- palette(nlevels(fac))
       col <- col.groups[fac]
@@ -1578,7 +1586,7 @@ plot.LDA <- function(#basics
   par(mar = rep(0.1, 4)) #0.1
   
   .frame(xy, center.origin, zoom=zoom)
-  if (grid) .grid(xy)
+  if (grid) .grid(nb.grids)
 #   if (morphospace) {
 #     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
 #                     amp.shp=1, size.shp=size.shp, pts.shp=pts.shp,
