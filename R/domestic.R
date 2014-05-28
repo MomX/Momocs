@@ -314,7 +314,6 @@ NULL
 #' but one of them has just a single outline thas has been removed.
 NULL
 
-
 #' Data: Outline coordinates of 126 mosquito wings.
 #' 
 #' @docType data
@@ -366,6 +365,16 @@ NULL
 #' @keywords datasets
 #' @format An \link{Out} object with the outline coordinates of some various shapes.
 #' @source Borrowed from default shapes from (c) Adobe Photoshop.
+NULL
+
+#' Data: Outline coordinates of 20 beer and 20 whisky bottles.
+#' 
+#' @docType data
+#' @name wings
+#' @rdname data_wings
+#' @keywords datasets
+#' @format A \link{Ldk} object containing 18 (x; y) landmarks  from 127 mosquito wings, from 
+#' @source Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
 NULL
 
 # 00. Package documentation and NAMESPACE import ---------------------------

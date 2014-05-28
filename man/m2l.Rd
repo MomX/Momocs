@@ -16,10 +16,11 @@ Returns a \code{list} with \eqn{x; y} components.
 \code{x; y} components.
 }
 \examples{
-\dontrun{
-data(gorf.dat)
-m2l(gorf.dat[,,1])
-}
+data(wings)
+l <- m2l(wings[1])
+l
+m <- l2m(l)
+m
 }
 \seealso{
 \link{l2m}.

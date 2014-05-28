@@ -16,8 +16,11 @@ Returns a matrix of \eqn{(x; y)}coordinates.
 \code{matrix} of coordinates.
 }
 \examples{
-l <- list(x=1:5, y=5:1)
-l2m(l)
+data(wings)
+l <- m2l(wings[1])
+l
+m <- l2m(l)
+m
 }
 \seealso{
 \link{m2l}.

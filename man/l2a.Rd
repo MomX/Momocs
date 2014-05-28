@@ -16,12 +16,11 @@ An array of coordinates.
 matrices to a \code{m x n x k} array.
 }
 \examples{
-\dontrun{
-data(gorf.dat)
-l <- a2l(gorf.dat)
+data(wings)
+l <- wings$coo
+l
 a <- l2a(l)
-A.plot(a)
-	}
+a
 }
 \seealso{
 \link{a2l}.

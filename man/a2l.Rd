@@ -15,10 +15,11 @@ A \code{list} with 2-cols matrices of \eqn{(x; y)} coordinates.
 \code{a2l} converts an array of coordinates into a list of 2-cols matrices.
 }
 \examples{
-#data(gorf.dat) # we import gorf.data from shapes package
-#l <- a2l(gorf.dat)
-#a <- l2a(l)
-#A.plot(a)
+data(wings)
+l <- wings$coo
+l
+a <- l2a(l)
+a
 }
 \seealso{
 \link{l2a}

@@ -16,4 +16,16 @@ a "LDA" object on which to apply \link{plot.LDA}. #todo
 \description{
 Performs a LDA on OutCoe, (OpnCoe no yet) objects. Relies on \link{lda} in MASS.
 }
+\examples{
+data(bot)
+bot.f <- eFourier(bot, 24)
+bot.l <- LDA(bot.f, "type")
+bot.l
+plot(bot.l)
+
+bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
+bot.l <- LDA(bot.f, "plop")
+bot.l
+plot(bot.l)
+}
 

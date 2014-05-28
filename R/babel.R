@@ -10,9 +10,11 @@
 #' @seealso \link{m2l}.
 #' @keywords Babel
 #' @examples
-#' 
-#' l <- list(x=1:5, y=5:1)
-#' l2m(l)
+#' data(wings)
+#' l <- m2l(wings[1])
+#' l
+#' m <- l2m(l)
+#' m
 #' @export
 l2m  <- function(l) {
   m <- cbind(l$x, l$y)
@@ -30,11 +32,11 @@ l2m  <- function(l) {
 #' @seealso \link{l2m}.
 #' @keywords Babel
 #' @examples
-#' 
-#' \dontrun{
-#' data(gorf.dat)
-#' m2l(gorf.dat[,,1])
-#' }
+#' data(wings)
+#' l <- m2l(wings[1])
+#' l
+#' m <- l2m(l)
+#' m
 #' @export
 m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
 
@@ -49,16 +51,19 @@ m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
 #' @seealso \link{a2l}.
 #' @keywords Babel
 #' @examples
-#' 
-#' \dontrun{
-#' data(gorf.dat)
-#' l <- a2l(gorf.dat)
+#' data(wings)
+#' l <- wings$coo
+#' l
 #' a <- l2a(l)
-#' A.plot(a)
-#' 	}
+#' a
 #' @export
 l2a  <- function(l){
-  return(array(unlist(l), dim=c(nrow(l[[1]]), ncol(l[[1]]), length(l))))}
+  nr <- nrow(l[[1]])
+  nc <- 2
+  ni <- length(l)
+  a  <- array(unlist(l), dim=c(nr, nc, ni),
+              dimnames=list(1:nr, c("x", "y"), names(l)))
+  return(a)}
 
 #' Converts an array of coordinates to a list.
 #' 
@@ -70,10 +75,11 @@ l2a  <- function(l){
 #' @seealso \link{l2a}
 #' @keywords Babel
 #' @examples
-#' #data(gorf.dat) # we import gorf.data from shapes package
-#' #l <- a2l(gorf.dat)
-#' #a <- l2a(l)
-#' #A.plot(a)
+#' data(wings)
+#' l <- wings$coo
+#' l
+#' a <- l2a(l)
+#' a
 #' @export
 a2l <- function(a){
   if (!is.array(a)) stop("An array of dimension 3 must be provided")
@@ -81,6 +87,56 @@ a2l <- function(a){
   l <- list()
   for (i in 1:k) {l[[i]] <- a[,,i]}
   return(l)}
+
+#' Converts an array of coordinates to a matrix
+#' 
+#' Converts an array of coordinates into a matrix.
+#' All the individuals (the 3rd dimension of the array) becomes rows, and
+#' columns are (all) x coordinates and (all) y coordinates, so that we have 
+#' x1, x2, ..., xn, y1, y2, ..., yn. Rows and colums are names anyway.
+#' 
+#' @param a An \code{array} of coordinates.
+#' @return A matrix (see above)
+#' @seealso \link{m2a} the reverse function
+#' @keywords Babel
+#' @examples
+#' data(wings)
+#' a <- l2a(wings$coo)
+#' a
+#' a2m(a)
+#' @export
+a2m <- function(a){
+  #ugly
+  m <- sapply(a, as.numeric)
+  nc <- dim(a)[1]
+  m <- matrix(m, nrow=dim(a)[3], ncol=nc*2, byrow=TRUE)
+  colnames(m) <- paste0(rep(c("x", "y"), each=nc), 1:nc)
+  if (!is.null(dimnames(a))) {
+    rownames(m) <- dimnames(a)[[3]]}
+  return(m)}
+
+#' Converts a "matrix" of coordinates to an array of coordinates
+#' 
+#' Converts a matrix arranged with the individuals (the 3rd dimension of the array) as rows,
+#' and (all) x coordinates and (all) y coordinates as columns, into an array built as follows:
+#' nb.of.landmarks x 2 (x; y) x nb.of.individuals.
+#' 
+#' @param m a matrix (see above)
+#' @return an array (see above)
+#' @seealso \link{a2m} the reverse function
+#' @keywords Babel
+#' @examples
+#' data(wings)
+#' m <- a2m(l2a(wings$coo))
+#' m2a(m)
+#' @export
+m2a <- function(m){
+  #ugly
+  a <- array(NA, dim=c(ncol(m)/2, 2, nrow(m)),
+             dimnames=list(1:(ncol(m)/2), c("x", "y"), rownames(m)))
+  for (i in 1:nrow(m)){
+   a[,,i] <- matrix(m[i, ], ncol=2)}
+  return(a)}
 
 # Import/Export morphometrics formats ------------------------------------------
 
@@ -259,18 +315,31 @@ tps2Coo <- function(tps.path, sep=" "){
 
 #' From .nts to Coo objects
 #' 
-#' Useful to convert .nts files into Coo objects.
-#' It returns a list of matrices of coordinates that can be passed to \link{Coo}.
+#' Useful to convert .nts files into Coo objects. For .nts provided as rows, use
+#' ntsrow2Coo; for .nts provided as columns of coordinates, try ntscol2Coo. It
+#' returns a list of matrices of coordinates that can be passed to \link{Coo}.
+#' @aliases ntscol2Coo ntsrow2Coo
 #' @param nts.path the path to the .nts file
 #' @param sep the separator between data
-#' @details I'm not very familiar to other morphometric formats.
-#' So if you have troubles importing your datasets, please contact me.
+#' @details I'm not very familiar to other morphometric formats and these
+#'   functions are (highly) experimental. So if you have troubles importing your
+#'   datasets, please contact me.
 #' @keywords babel
+#' @examples
+#' \dontrun{
+#' # That's how wings dataset was created
+#' # made a local copy from http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts
+#' # then :
+#' coo.list  <- ntscol2Coo("~/Desktop/mosquitowings.nts)
+#' fac       <- data.frame(fac=factor(substr(names(coo.list), 1, 2)))
+#' wings <- Ldk(coo.list, fac=fac) 
+#' }
 #' @export
-nts2Coo <- function(nts.path, sep="\t"){
+ntsrow2Coo <- function(nts.path, sep="\t"){
   # we read all lines and remove the first one
   nts <- readLines(nts.path, warn=FALSE)
-  nts <- nts[-1]
+  comments <- grep(pattern="\"", nts)
+  nts <- nts[-comments]
   # we prepare a vector and a list to store the data
   img.i <- character()
   coo.list <- list()
@@ -286,3 +355,27 @@ nts2Coo <- function(nts.path, sep="\t"){
   names(coo.list) <- img.i
   return(coo.list)}
 
+#' @export
+ntscol2Coo <- function(nts.path, sep="\t"){
+  # candidate for the most ugly function ever?
+  # we read all lines and remove the skip one
+  nts <- readLines(nts.path, warn=FALSE)
+  comments <- grep(pattern="\"", nts)
+  nts <- nts[-comments]
+  nb.ldk <- as.numeric(strsplit(nts[1], " ")[[1]][3])
+  nts <- nts[-1]
+  nts <- unlist(strsplit(nts, " "))
+  nts <- nts[-which(nchar(nts)==0)]
+  nb.nts <- length(nts) / (nb.ldk+1)
+  # we prepare a vector and a list to store the data
+  names.id <- 1+(nb.ldk+1)*(0:(nb.nts-1))
+  start.id <- names.id + 1
+  end.id <- start.id + nb.ldk - 1
+  img.i <- nts[names.id]
+  coo.list <- list()
+  # we loop over every individual
+  for (i in 1:nb.nts){
+    coo.list[[i]] <- matrix(as.numeric(nts[start.id[i]:end.id[i]]), ncol=2, byrow=TRUE)}
+  # we rename list components with image names
+  names(coo.list) <- img.i
+  return(coo.list)}
