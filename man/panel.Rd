@@ -4,7 +4,8 @@
 \title{Plot on Coo objects: family picture}
 \usage{
 panel(Coo, cols, borders, fac, reorder, palette = col.summer, names = NULL,
-  cex.names = 0.6, ...)
+  cex.names = 0.6, points = TRUE, points.pch = 3, points.cex = 0.2,
+  points.col, ...)
 }
 \arguments{
 \item{Coo}{The \code{Coo (Out/Opn)} object  to plot.}
@@ -26,7 +27,15 @@ pass a character for the names of the files}
 
 \item{cex.names}{a cex for the names}
 
-\item{...}{further arguments to be passed to \link{coo.list.panel}}
+\item{points}{logical (for Ldk) whether to draw points}
+
+\item{points.pch}{(for Ldk) and a pch for these points}
+
+\item{points.cex}{(for Ldk) and a cex for these points}
+
+\item{points.col}{(for Ldk) and a col  for these points}
+
+\item{...}{further arguments for the generic}
 }
 \description{
 Plots all the outlines from a \code{Coo} side by side

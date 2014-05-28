@@ -172,6 +172,10 @@ coo.template   <- function(coo, size=1) {
 #' @param reorder a factor or a numeric to reorder shapes, colors and borders.
 #' @param poly logical whether to use polygon or lines to draw shapes.
 #' mainly for use for outlines and open outlines.
+#' @param points logical if poly is set to FALSE whether to add points
+#' @param points.pch if points is TRUE, a pch for these points
+#' @param points.cex if points is TRUE, a cex for these points
+#' @param points.col if points is TRUE, a col  for these points
 #' @return Returns (invisibly) a \code{data.frame} with position of shapes that
 #' can be used for other sophisticated plotting design.
 #' @seealso \link{coo.plot} and \link{coo.template}.
@@ -191,7 +195,9 @@ coo.template   <- function(coo, size=1) {
 #' @export
 coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                            fromtop=TRUE, mar=rep(0, 4),
-                           cols, borders, reorder=NULL, poly=TRUE){
+                           cols, borders, reorder=NULL, poly=TRUE,
+                           points=FALSE, points.pch=3, points.cex=0.2,
+                           points.col="grey40"){
   coo.list <- lapply(coo.list, coo.check)
   if (!is.null(reorder)) {
     coo.list <- coo.list[order(reorder)]}
@@ -236,9 +242,15 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
       res[i, ] <- c(trans[2], trans[1])
       lines(  coo.tp[[i]][, 1] + trans[2],
               coo.tp[[i]][, 2] + trans[1],
-              col=borders[i])}}
+              col=borders[i])
+      if (points) {
+        if (!missing(points.col)) {
+          col <- rep(points.col, length(coo.list))
+        }
+        points(coo.tp[[i]][, 1] + trans[2],
+               coo.tp[[i]][, 2] + trans[1],
+               col=col[i], pch=points.pch, cex=points.cex)}}}
   invisible(res)}
-
 
 # 2. Secondary plotters ------------------------------------------------------
 
@@ -664,7 +676,11 @@ stack.Ldk <- function(x, cols, borders,
 #' @param names whether to plot names or not. If TRUE uses shape names, otherwise
 #' pass a character for the names of the files
 #' @param cex.names a cex for the names
-#' @param ... further arguments to be passed to \link{coo.list.panel}
+#' @param points logical (for Ldk) whether to draw points
+#' @param points.pch (for Ldk) and a pch for these points
+#' @param points.cex (for Ldk) and a cex for these points
+#' @param points.col (for Ldk) and a col  for these points
+#' @param ... further arguments for the generic
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
 #' @examples
 #' data(mosquito)
@@ -672,9 +688,15 @@ stack.Ldk <- function(x, cols, borders,
 #' data(olea)
 #' panel(olea)
 #' @export
-panel <- function(Coo, cols, borders, fac, reorder, palette=col.summer, names=NULL, cex.names=0.6, ...){UseMethod("panel")}
+panel <- function(Coo, cols, borders, fac,
+                  reorder, palette=col.summer,
+                  names=NULL, cex.names=0.6, points=TRUE, points.pch=3,
+                  points.cex=0.2, points.col, ...){UseMethod("panel")}
 #' @export
-panel.Out <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer, names=NULL, cex.names=0.6, ...){
+panel.Out <- function(Coo, cols, borders,
+                      fac, reorder=NULL, palette=col.summer,
+                      names=NULL, cex.names=0.6, points=TRUE, points.pch=3,
+                      points.cex=0.2, points.col, ...){
   Out <- Coo
   if (!missing(fac)){
     
@@ -693,7 +715,8 @@ panel.Out <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer,
   if (length(borders)!=length(Out)) {
     cols     <- rep(borders[1], length(Out))} 
   if (!missing(reorder)) reorder <- Out$fac[, reorder]
-  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders, reorder=reorder, poly=TRUE, ...)
+  pos <- coo.list.panel(Out$coo, cols=cols, borders=borders,
+                        reorder=reorder, poly=TRUE)
   if (!is.null(names)){
     if (is.logical(names)) {
       text(pos[,1], pos[,2], labels=names(Out), cex=cex.names)
@@ -707,7 +730,10 @@ panel.Out <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer,
       } else {
         text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
 #' @export
-panel.Opn <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer, names=NULL, cex.names=0.6, ...){
+panel.Opn <- function(Coo, cols, borders, fac,
+                      reorder=NULL, palette=col.summer,
+                      names=NULL, cex.names=0.6, points=TRUE, points.pch=3,
+                      points.cex=0.2, points.col, ...){
   Opn <- Coo
   if (!missing(fac)){
     
@@ -726,7 +752,44 @@ panel.Opn <- function(Coo, cols, borders, fac, reorder=NULL, palette=col.summer,
   if (length(borders)!=length(Opn)) {
     cols     <- rep(borders[1], length(Opn))} 
   if (!missing(reorder)) reorder <- Opn$fac[, reorder]
-  pos <- coo.list.panel(Opn$coo, cols=cols, borders=borders, reorder=reorder, poly=FALSE, ...)
+  pos <- coo.list.panel(Opn$coo, cols=cols, borders=borders,
+                        reorder=reorder, poly=FALSE)
+  if (!is.null(names)){
+    if (is.logical(names)) {
+      text(pos[,1], pos[,2], labels=names(Opn), cex=cex.names)
+    } else {    
+      if (length(names)!=length(Opn)) {
+        if (is.null(reorder)) {
+          text(pos[,1], pos[,2], labels=Coo$fac[, names], cex=cex.names)
+        } else {
+          text(pos[,1], pos[,2], labels=Coo$fac[, names][order(reorder)], cex=cex.names)
+        }
+      } else {
+        text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
+
+#' @export
+panel.Ldk <- function(Coo, cols, borders, fac,
+                      reorder=NULL, palette=col.summer,
+                      names=NULL, cex.names=0.6,
+                      points=TRUE, points.pch=3,
+                      points.cex=0.2, points.col, ...){
+  Opn <- Coo
+  if (!missing(fac)){
+    if (missing(borders)){
+      borders <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[, fac]]
+    } else {
+      borders <- borders[Coo$fac[, fac]]
+    }
+  }
+  if (missing(borders)) {
+    borders     <- rep("#333333", length(Opn))}
+  if (length(borders)!=length(Opn)) {
+    borders     <- rep(borders[1], length(Opn))} 
+  if (!missing(reorder)) reorder <- Opn$fac[, reorder]
+  pos <- coo.list.panel(Opn$coo, cols=cols, borders=borders,
+                        reorder=reorder, poly=FALSE,
+                        points=points, points.pch=points.pch,
+                        points.cex=points.cex, points.col=points.col)
   if (!is.null(names)){
     if (is.logical(names)) {
       text(pos[,1], pos[,2], labels=names(Opn), cex=cex.names)

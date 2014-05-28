@@ -4,7 +4,8 @@
 \title{Plots sets of shapes.}
 \usage{
 coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar = rep(0,
-  4), cols, borders, reorder = NULL, poly = TRUE)
+  4), cols, borders, reorder = NULL, poly = TRUE, points = FALSE,
+  points.pch = 3, points.cex = 0.2, points.col = "grey40")
 }
 \arguments{
 \item{coo.list}{A \code{list} of coordinates}
@@ -27,6 +28,14 @@ plotting region.}
 
 \item{poly}{logical whether to use polygon or lines to draw shapes.
 mainly for use for outlines and open outlines.}
+
+\item{points}{logical if poly is set to FALSE whether to add points}
+
+\item{points.pch}{if points is TRUE, a pch for these points}
+
+\item{points.cex}{if points is TRUE, a cex for these points}
+
+\item{points.col}{if points is TRUE, a col  for these points}
 }
 \value{
 Returns (invisibly) a \code{data.frame} with position of shapes that
