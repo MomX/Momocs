@@ -1005,4 +1005,6 @@ gProcrustes.Ldk <- function(Coo, ...){
   ref <- l2a(Coo2$coo)
   tar <- procGPA(ref, tol1=1e-30, proc.output=TRUE, ...)$rotated
   Coo2$coo <- a2l(tar)
+  names(Coo2$coo) <- names(Coo$coo)
+  class(Coo2) <- c(class(Coo2), "LdkCoe", "Coe")
   return(Coo2)}

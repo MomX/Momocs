@@ -5,7 +5,7 @@
 \usage{
 coo.list.panel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar = rep(0,
   4), cols, borders, reorder = NULL, poly = TRUE, points = FALSE,
-  points.pch = 3, points.cex = 0.2, points.col = "grey40")
+  points.pch = 3, points.cex = 0.2, points.col = "#333333")
 }
 \arguments{
 \item{coo.list}{A \code{list} of coordinates}

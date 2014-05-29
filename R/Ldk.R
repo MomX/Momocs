@@ -69,3 +69,5 @@ print.Ldk <- function(x, ...){
       if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
                                        length(lev.i)-10, "more")
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
+
+

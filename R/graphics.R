@@ -197,7 +197,7 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                            fromtop=TRUE, mar=rep(0, 4),
                            cols, borders, reorder=NULL, poly=TRUE,
                            points=FALSE, points.pch=3, points.cex=0.2,
-                           points.col="grey40"){
+                           points.col="#333333"){
   coo.list <- lapply(coo.list, coo.check)
   if (!is.null(reorder)) {
     coo.list <- coo.list[order(reorder)]}
@@ -244,12 +244,12 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
               coo.tp[[i]][, 2] + trans[1],
               col=borders[i])
       if (points) {
-        if (!missing(points.col)) {
-          col <- rep(points.col, length(coo.list))
-        }
+#         if (!missing(points.col)) {
+#           col <- rep(points.col, length(coo.list))
+#         }
         points(coo.tp[[i]][, 1] + trans[2],
                coo.tp[[i]][, 2] + trans[1],
-               col=col[i], pch=points.pch, cex=points.cex)}}}
+               col=points.col, pch=points.pch, cex=points.cex)}}}
   invisible(res)}
 
 # 2. Secondary plotters ------------------------------------------------------
@@ -772,7 +772,7 @@ panel.Ldk <- function(Coo, cols, borders, fac,
                       reorder=NULL, palette=col.summer,
                       names=NULL, cex.names=0.6,
                       points=TRUE, points.pch=3,
-                      points.cex=0.2, points.col, ...){
+                      points.cex=0.2, points.col="#333333", ...){
   Opn <- Coo
   if (!missing(fac)){
     if (missing(borders)){
@@ -1176,6 +1176,10 @@ degree.contrib.OpnCoe <- function(
                                mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
                                baseline1=PCA$baseline1, baseline2=PCA$baseline2)
     cd <- FALSE}
+  if (method=="procrustes"){
+    shp <- pca2shp.procrustes(pos=pos, rot=rot,
+                              mshape=mshape, amp.shp=amp.shp)
+    cd <- FALSE}
   width   <- (par("usr")[4] - par("usr")[3]) / size.shp
   shp     <- lapply(shp, coo.scale, 1/width)
   if (cd) {
@@ -1350,6 +1354,25 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
   #}
   return(res)}
 
+pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
+  if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
+  if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
+  n  <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ])*amp.shp
+    shape.i    <- mshape + apply(ax.contrib, 1, sum)
+    coo        <- matrix(shape.i, ncol=2, byrow=FALSE)
+    # reconstructed shapes are translated on their centroid
+    #if (trans) {
+    dx <- pos[i, 1] - coo.centpos(coo)[1] 
+    dy <- pos[i, 2] - coo.centpos(coo)[2] 
+    coo <- coo.trans(coo, dx, dy)
+    res[[i]] <- coo}
+  #}
+  return(res)}
+
 # 6. PCA -----------------------------------------------------------------------
 #create an empty frame
 #' @export
@@ -1387,33 +1410,42 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 .ellipses <- function(xy, fac, conf, col){
   for (i in seq(along=levels(fac))) {
     pts.i <- xy[fac==levels(fac)[i], ]
+    if (is.matrix(pts.i)) {
+      if (nrow(pts.i)>1) {
     ell.i <- conf.ell(x=pts.i, conf=conf)$ell
     lines(coo.close(ell.i), col=col[i])
-    points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])}}
+    points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])}}}}
 
 #confidence ellipses
 #' @export
 .ellipsesax <- function(xy, fac, conf, col, lty){
   for (i in seq(along=levels(fac))) {
     pts.i <- xy[fac==levels(fac)[i], ]
+    if (is.matrix(pts.i)) {
+      if (nrow(pts.i)>1) {
     seg.i <- conf.ell(x=pts.i, conf=conf, nb.pts=720)$seg
     segments(seg.i[1, 1], seg.i[1, 2],
              seg.i[2, 1], seg.i[2, 2], lty=lty, col=col[i])
     segments(seg.i[3, 1], seg.i[3, 2],
-             seg.i[4, 1], seg.i[4, 2], lty=lty, col=col[i])}}
+             seg.i[4, 1], seg.i[4, 2], lty=lty, col=col[i])}}}}
 
 #convex hulls
 #' @export
 .chull <- function(coo, fac, col, lty){
   for (i in seq(along=levels(fac))) {
-    chull.i <- coo.chull(coo[fac==levels(fac)[i], ])
-    lines(coo.close(chull.i), col=col[i], lty=lty)}}
+    coo.i <- coo[fac==levels(fac)[i], ] 
+      if (is.matrix(coo.i)) {
+        if (nrow(coo.i)>1) {
+    chull.i <- coo.chull(coo.i)
+    lines(coo.close(chull.i), col=col[i], lty=lty)}}}}
 
 #add labels
 #' @export
 .labels <- function(xy, fac, col){
   for (i in seq(along=levels(fac))) {
-    cent.i <- coo.centpos(xy[fac==levels(fac)[i], ])
+    cent.i <- xy[fac==levels(fac)[i], ]
+    if (is.matrix(cent.i)){
+    cent.i <- coo.centpos(xy[fac==levels(fac)[i], ])}
     text(cent.i[1], cent.i[2], labels=levels(fac)[i], col=col[i], pos=3)}}
 
 #add 'stars'

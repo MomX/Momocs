@@ -136,6 +136,19 @@ pca.OpnCoe <- function(Coe){
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
 
+#' @export
+pca.LdkCoe <- function(Coe){
+  LdkCoe <- Coe
+  LdkCoe$coe <- a2m(l2a(Coe$coo))
+  PCA <- prcomp(LdkCoe$coe, scale.=FALSE, center=TRUE)
+  PCA$fac <- LdkCoe$fac
+  PCA$mshape <- apply(LdkCoe$coe, 2, mean)
+  PCA$method <- "procrustes"
+  #PCA$mod    <- OpnCoe$mod #the only diff so far
+  #PCA$baseline1 <- OpnCoe$baseline1
+  #PCA$baseline2 <- OpnCoe$baseline2
+  class(PCA) <- c("PCA", class(PCA))
+  return(PCA)}
 
 # 4 - LDA ----------------------------------------------------------------
 #' Linear Discriminant Analysis on Coe objects
