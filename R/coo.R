@@ -5,13 +5,14 @@
 # colnaming is not mandatory) or as a list with $x and $y components.
 # and returns a (named) \code{matrix} of coordinates.
 
-#' Checks shape
+#' Checks "coo" shapes
 #'
 #' A simple utility, used internally, mostly in the coo functions and methods.
-#' Returns a matrix, when passed with either a list or a \code{matrix} of coordinates.
+#' Returns a matrix of coordinates, when passed with either a list or a \code{matrix} of coordinates.
 #'
 #' @param coo a \code{matrix} of \eqn{(x; y)} coordinates or a list.
 #' @return a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @seealso \link{ldk.check}
 #' @keywords coo_utilities
 #' @examples
 #' #coo.check("Not a shape")
@@ -20,8 +21,39 @@
 #' @export
 coo.check <- function(coo){
   if (is.matrix(coo)) {return(coo)}
-  if (is.list(coo))   {return(l2m(coo))}
-  stop("A list or a matrix of (x, y) coordinates must be provided.")}
+  if (is.list(coo))   {
+    if (length(coo)==1) return(l2m(coo))}
+  stop(" * A list or a matrix of (x, y) coordinates must be provided.")}
+
+#' Checks "ldk" shapes
+#'
+#' A simple utility, used internally, mostly in the Ldk methods,
+#' in some graphical functions, and notably in \link{l2a}.
+#' Returns an array of landmarks arranged as (nb.ldk) x (x; y) x (nb.shapes),
+#' when passed with either a list, a matrix or an array of coordinates.
+#' If a list is provided, checks that the number of landmarks is consistent.
+#'
+#' @param ldk a \code{matrix} of \eqn{(x; y)} coordinates, a list, or an array.
+#' @return an \code{array} of \eqn{(x; y)} coordinates.
+#' @seealso \link{coo.check}
+#' @keywords coo_utilities
+#' @examples
+#' #coo.check("Not a shape")
+#' #coo.check(matrix(1:10, ncol=2))
+#' #coo.check(list(x=1:5, y=6:10))
+#' @export
+ldk.check <- function(ldk){
+  if (is.array(ldk)){
+    if (length(dim(ldk)==3)){ return(ldk)}
+    if (length(dim(ldk)==2)){ return(array(ldk, dim=c(nrow(ldk), ncol(ldk), 1)))}
+    stop(" * A matrix an array (dim=3) must be provided.")
+  }
+  if (is.list(ldk)) {
+    l <- sapply(ldk, length)
+    if (length(unique(l))==1){return(l2a(ldk))}
+    stop(" * A list of matrices with the same number of coordinates must be provided.")
+  }
+  stop(" * A list, a matrix or a dim=3 array must be provided.")}
 
 #' Centers coordinates
 #'

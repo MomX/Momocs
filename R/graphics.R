@@ -1,6 +1,7 @@
 # The graphics R file for everyhting graphics. Some internals used elsewhere.
 
-# 1. Main plotters  ------------------------------------------------------------
+# 1. coo plotters  ------------------------------------------------------------
+#' The basics shape plotter.
 #' 
 #' A simple wrapper for plotting shapes. Widely used in Momocs.
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
@@ -252,7 +253,106 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                col=points.col, pch=points.pch, cex=points.cex)}}}
   invisible(res)}
 
-# 2. Secondary plotters ------------------------------------------------------
+# 2. ldk plotters ---------------------------------------------------------
+
+#' add landmarks to coo.plot
+#' 
+#' @param coo a matrix of (x; y) coordinates: where to plot the labels
+#' @param d how far from the coordinates, on a (centroid-landmark) segment
+#' @param cex the cex for the label
+#' @param ... additional parameters to fed \link{text}
+#' @export
+# todo
+ldk.labels <- function(ldk, d=0.1, cex=0.8, ...){
+  ldk <- coo.check(ldk)
+  centpos <- coo.centpos(ldk)
+  dm <- median(coo.centdist(ldk))
+  for (i in 1:nrow(ldk)){
+    dxy <- ed(centpos, ldk[i, ])
+    labxy <- edi(centpos, ldk[i, ], (dxy+dm*d)/dxy)
+    text(labxy[1], labxy[2], labels=i, cex=cex,  ...)}}
+
+#' Draws the links between landmarks
+#' 
+#' Cosmetics only but useful to visualize shape variation.
+#' 
+#' @param ldk a matrix of (x; y) coordinates
+#' @param links a matrix of links. On the first column the starting-id,
+#' on the second column the ending-id (id= the number of the coordinate)
+#' @param col a color to draw the links
+#' @param pch a pch for the edges
+#' @param ... additional parameters to fed \link{segments}
+#' @export
+# todo
+ldk.links <- function(ldk, links, col="black", pch=20, ...){
+  ldk <- ldk.check(ldk)
+  links <- coo.check(links)
+  for (i in 1:nrow(links)){
+    segments(ldk[links[i, 1], 1],ldk[links[i, 1], 2],
+             ldk[links[i, 2], 1],ldk[links[i, 2], 2],
+             col=col, pch=pch, ...)}}
+
+#' Draws confidence ellipses for landmark positions
+#' 
+#' todo
+#' @param ldk an array (or a list) of landmarks
+#' @param conf the confidence level (normal quantile)
+#' @param col the color for the ellipse
+#' @param ell.lty an lty for the ellipse
+#' @param ax logical whether to draw ellipses axes
+#' @param ax.lty an lty for ellipses axes
+#' @export
+ldk.confell <- function(ldk, conf=0.5, col="grey40",
+                        ell.lty=3, ax=TRUE, ax.lty=2){
+  ldk <- ldk.check(ldk)
+  for (i in 1:dim(ldk)[1]){
+    if (all(apply(ldk[i,,], 1, var)!=0)) {
+      xy.i <- t(ldk[i,,])
+      ell.i <- conf.ell(xy.i[, 1], xy.i[, 2], conf=conf, nb.pts=360)
+      lines(ell.i$ell, col=col, lty=ell.lty, lwd=1)
+      if (ax){
+        segments(ell.i$seg[1, 1], ell.i$seg[1, 2],
+                 ell.i$seg[2, 1], ell.i$seg[2, 2], lty=ax.lty, col=col, lwd=1)
+        segments(ell.i$seg[3, 1], ell.i$seg[3, 2],
+                 ell.i$seg[4, 1], ell.i$seg[4, 2], lty=ax.lty, col=col, lwd=1)}}}}
+
+#' Draws kernel density contours around landmark positions
+#' 
+#' using \link{kde2d} #todo
+#' @param ldk an array (or a list) of landmarks
+#' @param nlevels the number of contour lines
+#' @param grid.nb the grid.nb
+#' @param col a color for drawing the contour lines
+#' @seealso \link{kde2d}
+#'  @export
+ldk.contour <- function(ldk, nlevels=5, grid.nb=50, col="grey60") {
+  ldk <- ldk.check(ldk)
+  for (i in 1:dim(ldk)[1]){
+    kx <- ldk[i,1,]
+    ky <- ldk[i,2,]
+    if (all(sd(kx)>0, sd(ky)>0)){
+      k <- kde2d(kx, ky, n=grid.nb)
+      contour(k$x, k$y, k$z, nlevels=nlevels,
+              add=TRUE, drawlabels=FALSE, col=col)}}}
+
+#' Draws convex hulls around landmark positions
+#' 
+#' A wrapper that uses \link{coo.chull}
+#' @param ldk an array (or a list) of landmarks
+#' @param col a color for drawing the convex hull
+#' @param lty an lty for drawing the convex hulls
+#' @seealso \link{coo.chull}
+#' @export
+ldk.chull <- function(ldk, col="grey40", lty=1){
+  ldk <- ldk.check(ldk)
+  nl <- dim(ldk)[1]
+  for (i in 1:nl){
+    ind.i <- chull(ldk[i,1,], ldk[i,2,])
+    coo.draw(coo.close(t(ldk[i,,ind.i])),
+             border=col, col=NA, lty=lty,
+             points=FALSE, first.point=FALSE, centroid=FALSE)}}
+
+# 3. various plotters ------------------------------------------------------
 
 #' Extract structure from filenames
 #' 
@@ -486,79 +586,6 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   seg <- ell[ell.ids, ]
   return(list(ell=ell, seg=seg))}
 
-#' Ptolemaic ellipses and illustration of eFourier
-#' 
-#' Calculate and display Ptolemaic ellipses which illustrates 
-#' intuitively the principle behing elliptical Fourier analysis.
-#' 
-#' @param Out The \code{Out} object on which to display Ptolemaic ellipses.
-#' @param id The \code{id} on which to display Ptolemaic ellipses.
-#' @param t A \code{vector} af angles (in radians) on which to display ellipses.
-#' @param nb.h \code{integer}. The number of harmonics to display.
-#' @param nb.pts \code{integer}. The number of points to use to display shapes.
-#' @param palette A color palette.
-#' @param legend \code{logical}. Whether to plot the legend box.
-#' @references 
-#' This method has been inspired by the figures found in the followings papers.
-#' Kuhl FP, Giardina CR. 1982. Elliptic Fourier features of a closed contour.
-#'  \emph{Computer Graphics and Image Processing} \bold{18}: 236-258.
-#' Crampton JS. 1995. Elliptical Fourier shape analysis of fossil bivalves: 
-#' some practical considerations. \emph{Lethaia} \bold{28}: 179-186.
-#' @seealso \link{efourier}. 
-#' An intuitive explanation of elliptic Fourier analysis can be found in 
-#' the \bold{Details} section of the \link{efourier} function.
-#' @examples
-#' data(hearts)
-#' Ptolemy(hearts, 1)
-#' @export
-Ptolemy <- function(Out, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
-#' @export
-Ptolemy.Out <- function(Out,
-                        id=1,
-                        t=seq(0, 2*pi, length=7)[-1],
-                        nb.h=3,
-                        nb.pts=360,
-                        palette=col.sari,
-                        legend=FALSE) {
-  # we prepare and deduce
-  op <- par(no.readonly = TRUE)
-  on.exit(par(op))
-  par(xpd=NA)
-  cols <- palette(nb.h)
-  coo <- coo.center(Out$coo[[id]])
-  #k <- floor(length(coo$x)/4)
-  coo.plot(coo, main=names(Out)[id])
-  # now we calculate for every harmonic
-  coo.ef  <- efourier(coo, nb.h)
-  coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
-  vect   <- matrix(nrow=nb.h, ncol=2)
-  vect <- rbind(c(0, 0), vect)
-  for (i in seq(along=t)) {
-    for(j in 1:nb.h) {
-      vect[j+1, 1] <- coo.ef$an[j] * cos(j * t[i]) + coo.ef$bn[j] * sin(j * t[i])
-      vect[j+1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + coo.ef$dn[j] * sin(j * t[i])}
-    vs <- apply(vect, 2, cumsum)
-    for (j in 1:nb.h){
-      lh   <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j],
-                             coo.ef$cn[1:j], coo.ef$dn[1:j],
-                             nb.h=j, nb.pts=nb.pts, plot=FALSE)
-      ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j],
-                             coo.ef$cn[j], coo.ef$dn[j],
-                             nb.h=1, nb.pts=nb.pts, plot=FALSE)
-      lines(lh, col=paste(cols[j], "22", sep=""), lwd=0.8)
-      lines(ellh[,1] + vs[j, 1], ellh[,2] + vs[j, 2],
-            col=cols[j], lwd=1)
-      points(vs[j+1, 1], vs[j+1, 2], col=cols[j], cex=0.8)
-      arrows(vs[j, 1], vs[j, 2], vs[j+1, 1], vs[j+1, 2],
-             col=cols[j], angle=10, length=0.05, lwd=1.2)
-    }
-  }
-  points(0, 0, pch=20, col=cols[1])
-  if (legend) {
-    legend("topright", legend = as.character(1:nb.h), bty="o",
-           col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
-           title = "Number of harmonics")}}
-
 # 3. Graphics subfunctions -----------------------------------------------------------------------
 #create an empty frame
 #' @export
@@ -689,15 +716,6 @@ Ptolemy.Out <- function(Out,
   pos <- par("usr")
   text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
 
-#add landmarks to coo.plot
-#'@export
-.ldklabels <- function(coo, d=0.1, cex=0.8, ...){
-  centpos <- coo.centpos(coo)
-  dm <- median(coo.centdist(coo))
-  for (i in 1:nrow(coo)){
-    dxy <- ed(centpos, coo[i, ])
-    labxy <- edi(centpos, coo[i, ], (dxy+dm*d)/dxy)
-    text(labxy[1], labxy[2], labels=i, cex=cex,  ...)}}
 
 # 4. Coo / Out / Opn plotters --------------------------------------------------
 #' Plot on Coo (Out/Opn) objects: quick review
@@ -781,7 +799,7 @@ stack.Coo <- function(x, cols, borders,
 #' @export
 stack.Ldk <- function(x, cols, borders,
                       first.point=TRUE, centroid=TRUE,
-                      ldk=TRUE, ldk.pch=3, ldk.col="#33333355", ldk.cex=0.5,
+                      ldk=TRUE, ldk.pch=3, ldk.col="#33333333", ldk.cex=0.5,
                       xy.axis=TRUE, ...){
   Coo <- x
   if (missing(cols)) {

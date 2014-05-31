@@ -9,7 +9,7 @@
 #' and specific methods (e.g. todo-Procrustes can be applied.
 #'  \code{Ldk} objects are primarily \code{\link{Coo}} objects.
 #' 
-#' @param coo.list \code{list} of matrices of \eqn{(x; y)} coordinates
+#' @param x \code{list} of matrices of \eqn{(x; y)} coordinates
 #' @param links a matrix of "links" between landmarks, mainly for plotting
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
@@ -23,13 +23,25 @@
 #'
 #' @seealso \link{Coo}, \link{Out}, link{Opn}.
 #' @keywords Ldk
-#' @aliases Ldk
+#' @aliases Ldk Ldk.default Ldk.Ldk Ldk.list
 #' @export
-Ldk  <- function(coo.list, links=matrix(), fac=data.frame()){
-  Ldk <- list(coo=coo.list, links=links, fac=fac)
+Ldk <- function(x, links=NULL, fac=data.frame()){UseMethod("Ldk")}
+#' @export
+Ldk.default <- function(x, links=NULL, fac=data.frame()){
+  cat(" * an Ldk object can only be build froma list, an array or an Ldk object")}
+#' @export
+Ldk.list  <- function(x, links=NULL, fac=data.frame()){
+  Ldk <- list(coo=x, links=links, fac=fac)
   if (!is.null(Ldk$fac)) Ldk$fac <- .refactor(Ldk$fac)
   class(Ldk) <- c("Ldk", "Coo")
   return(Ldk)}
+#' @export
+Ldk.array  <- function(x, links=NULL, fac=data.frame()){
+  x <- a2l(x)
+  Ldk(x, links=links, fac=fac)}
+#' @export
+Ldk.Ldk <- function(x, links=NULL, fac=data.frame()){
+  Ldk(x=x$coo, links=x$links, fac=x$fac)}
 
 # The print method for Ldk objects
 #' @export
@@ -69,5 +81,3 @@ print.Ldk <- function(x, ...){
       if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
                                        length(lev.i)-10, "more")
       cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
-
-

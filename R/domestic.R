@@ -405,6 +405,7 @@ NULL
 #' @importFrom methods showDefault
 #' @importFrom MASS ginv
 #' @importFrom MASS lda
+#' @importFrom MASS kde2d
 #' @importFrom graphics boxplot
 #' @importFrom utils stack
 #' @docType package
