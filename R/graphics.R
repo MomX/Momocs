@@ -257,7 +257,7 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
 
 #' add landmarks to coo.plot
 #' 
-#' @param coo a matrix of (x; y) coordinates: where to plot the labels
+#' @param ldk a matrix of (x; y) coordinates: where to plot the labels
 #' @param d how far from the coordinates, on a (centroid-landmark) segment
 #' @param cex the cex for the label
 #' @param ... additional parameters to fed \link{text}
@@ -303,7 +303,7 @@ ldk.links <- function(ldk, links, col="black", pch=20, ...){
 #' @param ax.lty an lty for ellipses axes
 #' @export
 ldk.confell <- function(ldk, conf=0.5, col="grey40",
-                        ell.lty=3, ax=TRUE, ax.lty=2){
+                        ell.lty=1, ax=TRUE, ax.lty=2){
   ldk <- ldk.check(ldk)
   for (i in 1:dim(ldk)[1]){
     if (all(apply(ldk[i,,], 1, var)!=0)) {
@@ -758,9 +758,14 @@ plot.Coo <- function(x, id, ...){
 #' @param first.point logical whether to draw or not the first point
 #' @param centroid logical whether to draw or not the centroid
 #' @param ldk \code{logical}. Whether to display landmarks (if any).
-#' @param ldk.pch A \code{pch} for these landmarks.
-#' @param ldk.col A color for these landmarks.
+#' @param ldk.pch A \code{pch} for these landmarks
+#' @param ldk.col A color for these landmarks
 #' @param ldk.cex A \code{cex} fro these landmarks
+#' @param ldk.links logical whether to draw links (of the mean shape)
+#' @param ldk.confell logical whether to draw conf ellipses
+#' @param ldk.contour logical whether to draw contour lines
+#' @param ldk.chull logical whether to draw convex hull
+#' @param ldk.labels logical whether to draw landmark labels
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param ... further arguments to be passed to coo.plot
 #' @seealso \link{panel}, \link{plot.Coo}.
@@ -775,6 +780,8 @@ plot.Coo <- function(x, id, ...){
 stack.Coo <- function(x, cols, borders,
                       points=FALSE, first.point=TRUE, centroid=TRUE,
                       ldk=TRUE, ldk.pch=3, ldk.col="#FF000055", ldk.cex=0.5,
+                      ldk.links=FALSE, ldk.confell=FALSE, ldk.contour=FALSE,
+                      ldk.chull=FALSE, ldk.labels=FALSE,
                       xy.axis=TRUE, ...){
   Coo <- x
   if (missing(cols)) {
@@ -799,7 +806,9 @@ stack.Coo <- function(x, cols, borders,
 #' @export
 stack.Ldk <- function(x, cols, borders,
                       first.point=TRUE, centroid=TRUE,
-                      ldk=TRUE, ldk.pch=3, ldk.col="#33333333", ldk.cex=0.5,
+                      ldk=TRUE, ldk.pch=20, ldk.col="#33333333", ldk.cex=0.3,
+                      ldk.links=FALSE, ldk.confell=FALSE, ldk.contour=FALSE,
+                      ldk.chull=FALSE, ldk.labels=FALSE,
                       xy.axis=TRUE, ...){
   Coo <- x
   if (missing(cols)) {
@@ -816,8 +825,17 @@ stack.Ldk <- function(x, cols, borders,
   plot(NA, xlim=wdw[, 1], ylim=wdw[, 2], asp=1, las=1, cex.axis=2/3, ann=FALSE, frame=FALSE)
   if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}
   for (i in 1:length(Coo)) {
-    points(Coo$coo[[i]], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}
-
+    points(Coo$coo[[i]], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}  
+  # Specific to Ldk
+  # not very clean below #todo
+  A <- l2a(Coo$coo)
+  mA <- mshape(A)
+  points(mA, pch=20, cex=ifelse(ldk.cex>0.5, ldk.cex*1.5, 1), col="grey20")
+  if (ldk.confell) { ldk.confell(A, conf=0.9) }
+  if (ldk.contour) { ldk.contour(A, nlevels=3) }
+  if (ldk.chull)   { ldk.chull(A) }
+  if (ldk.links)    { if (is.matrix(Coo$links)) ldk.links(mshape(A), Coo$links) }
+  if (ldk.labels)  { ldk.labels(mshape(A)) }}
 
 #' Plot on Coo objects: family picture
 #' 

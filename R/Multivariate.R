@@ -195,7 +195,7 @@ pca.LdkCoe <- function(Coe){
 # 4 - LDA ----------------------------------------------------------------
 #' Linear Discriminant Analysis on Coe objects
 #' 
-#' Performs a LDA on OutCoe, (OpnCoe no yet) objects. Relies on \link{lda} in MASS.
+#' Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 #' @aliases LDA
 #' @param Coe the \link{Coe} object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
@@ -214,7 +214,7 @@ pca.LdkCoe <- function(Coe){
 #' @export
 LDA <- function(Coe, fac){UseMethod("LDA")}
 #' @export
-LDA.OutCoe <- function(Coe, fac){
+LDA.Coe <- function(Coe, fac){
   if (missing(fac)) stop(" * no fac provided")
   fac    <- Coe$fac[, fac]
   X      <- Coe$coe

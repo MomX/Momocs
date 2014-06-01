@@ -14,8 +14,8 @@ to (x; y) coordinates. The first point is set at the origin.
 }
 \examples{
 data(bot)
-x <- pix2chc(bot[1])
-coo.plot(chc2pix(x))
+#x <- pix2chc(bot[1])
+#coo.plot(chc2pix(x))
 }
 \references{
 Kuhl, F. P., & Giardina, C. R. (1982).

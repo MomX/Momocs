@@ -3,7 +3,7 @@
 \alias{ldk.confell}
 \title{Draws confidence ellipses for landmark positions}
 \usage{
-ldk.confell(ldk, conf = 0.5, col = "grey40", ell.lty = 3, ax = TRUE,
+ldk.confell(ldk, conf = 0.5, col = "grey40", ell.lty = 1, ax = TRUE,
   ax.lty = 2)
 }
 \arguments{

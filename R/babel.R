@@ -150,8 +150,8 @@ m2a <- function(m){
 #' Computer Graphics and Image Processing, 18(3), 236-258.
 #' @keywords babel
 #' @examples
-#' data(bot)
-#' pix2chc(bot[1])
+#' #data(bot)
+#' #pix2chc(bot[1])
 #' @export
 pix2chc <- function(coo) {
   if (is.list(coo)) {
@@ -180,8 +180,8 @@ pix2chc <- function(coo) {
 #' @keywords babel
 #' @examples
 #' data(bot)
-#' x <- pix2chc(bot[1])
-#' coo.plot(chc2pix(x))
+#' #x <- pix2chc(bot[1])
+#' #coo.plot(chc2pix(x))
 #' @export
 chc2pix <- function(chc){
   if (!all(chc %in% 0:7)) {

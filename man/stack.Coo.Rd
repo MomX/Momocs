@@ -5,7 +5,9 @@
 \usage{
 \method{stack}{Coo}(x, cols, borders, points = FALSE, first.point = TRUE,
   centroid = TRUE, ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055",
-  ldk.cex = 0.5, xy.axis = TRUE, ...)
+  ldk.cex = 0.5, ldk.links = FALSE, ldk.confell = FALSE,
+  ldk.contour = FALSE, ldk.chull = FALSE, ldk.labels = FALSE,
+  xy.axis = TRUE, ...)
 }
 \arguments{
 \item{x}{The \code{Coo} object to plot.}
@@ -24,11 +26,21 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{ldk}{\code{logical}. Whether to display landmarks (if any).}
 
-\item{ldk.pch}{A \code{pch} for these landmarks.}
+\item{ldk.pch}{A \code{pch} for these landmarks}
 
-\item{ldk.col}{A color for these landmarks.}
+\item{ldk.col}{A color for these landmarks}
 
 \item{ldk.cex}{A \code{cex} fro these landmarks}
+
+\item{ldk.links}{logical whether to draw links (of the mean shape)}
+
+\item{ldk.confell}{logical whether to draw conf ellipses}
+
+\item{ldk.contour}{logical whether to draw contour lines}
+
+\item{ldk.chull}{logical whether to draw convex hull}
+
+\item{ldk.labels}{logical whether to draw landmark labels}
 
 \item{xy.axis}{whether to draw or not the x and y axes}
 

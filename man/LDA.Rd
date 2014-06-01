@@ -14,7 +14,7 @@ LDA(Coe, fac)
 a "LDA" object on which to apply \link{plot.LDA}. #todo
 }
 \description{
-Performs a LDA on OutCoe, (OpnCoe no yet) objects. Relies on \link{lda} in MASS.
+Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 }
 \examples{
 data(bot)
