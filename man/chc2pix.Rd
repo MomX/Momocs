@@ -13,9 +13,9 @@ May be useful to convert (prehistoric?) chain-coded coordinates
 to (x; y) coordinates. The first point is set at the origin.
 }
 \examples{
-data(bot)
-#x <- pix2chc(bot[1])
-#coo.plot(chc2pix(x))
+data(shapes)
+x <- pix2chc(shapes[1])
+coo.plot(chc2pix(x))
 }
 \references{
 Kuhl, F. P., & Giardina, C. R. (1982).

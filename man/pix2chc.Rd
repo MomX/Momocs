@@ -12,8 +12,8 @@ pix2chc(coo)
 May be useful to convert (x; y) coordinates to chain-coded coordinates.
 }
 \examples{
-#data(bot)
-#pix2chc(bot[1])
+data(shapes)
+pix2chc(shapes[1])
 }
 \references{
 Kuhl, F. P., & Giardina, C. R. (1982).
