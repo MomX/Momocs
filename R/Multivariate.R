@@ -97,7 +97,7 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
     coe.i <- OpnCoe$coe[f==fl[i], ]
     if (is.matrix(coe.i)) {
       coe.i <- apply(coe.i, 2, mean)}
-    mod.mshape$coefficients <- coe.mshape
+    mod.mshape$coeff <- coe.i
     res[[i]] <- polynomials.i(mod.mshape)}
   names(res) <- fl
   return(res)}

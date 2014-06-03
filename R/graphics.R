@@ -1318,7 +1318,7 @@ degree.contrib.OpnCoe <- function(
 
 #' @export
 .morphospacePCA <- function(PCA, xax, yax, pos.shp,
-                            amp.shp=1, size.shp=15, pts.shp=60,
+                            amp.shp=1, size.shp=1, pts.shp=60,
                             col.shp="#00000011", border.shp="#00000055"){
   
   xy     <- PCA$x[, c(xax, yax)]
@@ -1356,7 +1356,7 @@ degree.contrib.OpnCoe <- function(
     shp <- pca2shp.procrustes(pos=pos, rot=rot,
                               mshape=mshape, amp.shp=amp.shp)
     cd <- FALSE}
-  width   <- (par("usr")[4] - par("usr")[3]) / size.shp
+  width   <- (par("usr")[4] - par("usr")[3]) * size.shp
   shp     <- lapply(shp, coo.scale, 1/width)
   if (cd) {
     garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, points=FALSE)
@@ -1608,7 +1608,7 @@ plot.PCA <- function(#basics
   #.grid
   grid=TRUE, nb.grids=3,
   #shapes
-  morphospace=TRUE, pos.shp="full", amp.shp=1, size.shp=20,
+  morphospace=TRUE, pos.shp="full", amp.shp=1, size.shp=1/20,
   pts.shp=60, border.shp="#00000055", col.shp="#00000011",
   #stars
   stars=FALSE,
@@ -1727,7 +1727,7 @@ plot.PCA <- function(#basics
 plot.LDA <- function(#basics
   x, xax=1, yax=2, 
   #color choice
-  col="black", pch=1:nlevels(x$fac), cex=0.8, palette=col.autumn,
+  col="black", pch, cex=0.8, palette=col.autumn,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -1778,6 +1778,8 @@ plot.LDA <- function(#basics
       pch <- pch[fac] 
     } else {
       pch <- pch}
+  } else {
+    pch <- as.numeric(fac)    
   }
   
   # case of 2 levels and a single LD
