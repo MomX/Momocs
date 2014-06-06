@@ -121,6 +121,7 @@ names.Coe <- function(x){
 #' olea$fac
 #' subset(olea, domes=="cult" & view=="VL")
 #' @export
+# bloody dirty #todo
 subset.Coo <- function(x, subset, ...){
   Coo <- x
   e <- substitute(subset)
@@ -135,6 +136,21 @@ subset.Coo <- function(x, subset, ...){
     Coo2$fac <- .refactor(Coo2$fac)
   }
   return(Coo2)}
+
+#' @export
+subset.OutCoe <- function(x, subset, ...){
+  OutCoe <- x
+  e <- substitute(subset)
+  retain <- eval(e, OutCoe$fac, parent.frame())
+  OutCoe2 <- OutCoe
+  OutCoe2$coe <- OutCoe$coe[retain, ]
+  if (ncol(OutCoe$fac)>0) {
+    OutCoe2$fac <- OutCoe$fac
+    OutCoe2$fac <- as.data.frame(OutCoe2$fac[retain, ])
+    names(OutCoe2$fac) <- names(OutCoe$fac)
+    OutCoe2$fac <- .refactor(OutCoe2$fac)
+  }
+  return(OutCoe2)}
 
 # 0. Datasets documentation ----------------------------------------------------
 #' Data: Outline coordinates of 20 beer and 20 whisky bottles.
