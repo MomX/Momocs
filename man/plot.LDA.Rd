@@ -3,15 +3,14 @@
 \alias{plot.LDA}
 \title{Plots Linear Discriminant Analysis}
 \usage{
-\method{plot}{LDA}(x, xax = 1, yax = 2, col = "black",
-  pch = 1:nlevels(x$fac), cex = 0.8, palette = col.autumn,
-  center.origin = FALSE, zoom = 1, grid = TRUE, nb.grids = 3,
-  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 20,
-  pts.shp = 60, border.shp = "#00000055", col.shp = "#00000011",
-  stars = FALSE, ellipses = FALSE, conf = 0.5, ellipsesax = FALSE,
-  lty.ellipsesax = 2, chull = TRUE, chull.lty = 3, labels = TRUE,
-  axisnames = TRUE, axisvar = TRUE, eigen = TRUE, rug = TRUE,
-  title = substitute(x), ...)
+\method{plot}{LDA}(x, xax = 1, yax = 2, col = "black", pch, cex = 0.8,
+  palette = col.autumn, center.origin = FALSE, zoom = 1, grid = TRUE,
+  nb.grids = 3, morphospace = TRUE, pos.shp = "full", amp.shp = 1,
+  size.shp = 20, pts.shp = 60, border.shp = "#00000055",
+  col.shp = "#00000011", stars = FALSE, ellipses = FALSE, conf = 0.5,
+  ellipsesax = FALSE, lty.ellipsesax = 2, chull = TRUE, chull.lty = 3,
+  labels = TRUE, axisnames = TRUE, axisvar = TRUE, eigen = TRUE,
+  rug = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{an object of class "LDA", typically obtained with \link{LDA}}

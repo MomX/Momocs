@@ -6,7 +6,7 @@
 \method{plot}{PCA}(x, fac, xax = 1, yax = 2, col = "black", pch = 20,
   cex = 0.5, palette = col.autumn, center.origin = FALSE, zoom = 1,
   grid = TRUE, nb.grids = 3, morphospace = TRUE, pos.shp = "full",
-  amp.shp = 1, size.shp = 20, pts.shp = 60, border.shp = "#00000055",
+  amp.shp = 1, size.shp = 1/20, pts.shp = 60, border.shp = "#00000055",
   col.shp = "#00000011", stars = FALSE, ellipses = TRUE, conf = 0.5,
   ellipsesax = TRUE, lty.ellipsesax = 2, chull = TRUE, chull.lty = 3,
   labels = TRUE, axisnames = TRUE, axisvar = TRUE, eigen = TRUE,

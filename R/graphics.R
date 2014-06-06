@@ -1781,7 +1781,6 @@ plot.LDA <- function(#basics
   } else {
     pch <- as.numeric(fac)    
   }
-  
   # case of 2 levels and a single LD
   if (nlevels(fac) <= 2){
     op <- par(mfrow=c(2, 1), oma=c(0, 0, 0, 0), mar=c(4, 1, 3, 1 ))
@@ -1796,7 +1795,6 @@ plot.LDA <- function(#basics
     par(mfrow=c(1, 1))
     return()
   }
-  
   opar <- par(mar = par("mar"), xpd=FALSE)
   on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
