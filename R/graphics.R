@@ -52,7 +52,7 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
     # we handle coordinate points
     if (missing(points)) { if (nrow(coo)<=120) points(coo, pch=pch, cex=cex, col=border)}
     if (points) { points(coo, pch=pch, cex=cex, col=border) }
-    if (first.point) {points(coo[1, 1], coo[1, 2], col = border, pch=20)}
+    if (first.point) {points(coo[1, 1], coo[1, 2], col = border, pch=20, cex=2/3)}
     if (centroid) {
       cent <- coo.centpos(coo)
       points(cent[1], cent[2], pch=3, col=border, cex=cex)}
@@ -153,7 +153,9 @@ coo.template   <- function(coo, size=1) {
   expected <- apply(coo, 2, function(x) diff(range(x)))/2
   observed <- apply(coo, 2, range)[2, ]
   shift    <-  expected - observed
-  return(coo.trans(coo, shift[1], shift[2]))}
+  coo <- coo.trans(coo, shift[1], shift[2])
+  #if (keep.pos) {coo2 <- coo.trans(coo2, coo.centpos(coo)[1], coo.centpos(coo)[2])}
+  return(coo)}
 
 #' Plots sets of shapes.
 #' 
@@ -1317,15 +1319,15 @@ degree.contrib.OpnCoe <- function(
   return(res)}
 
 #' @export
-.morphospacePCA <- function(PCA, xax, yax, pos.shp,
-                            amp.shp=1, size.shp=1, pts.shp=60,
+.morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp=24, nr.shp=6, nc.shp=5,
+                            amp.shp=1, size.shp=15, pts.shp=60,
                             col.shp="#00000011", border.shp="#00000055"){
   
   xy     <- PCA$x[, c(xax, yax)]
   rot    <- PCA$rotation[, c(xax, yax)]
   mshape <- PCA$mshape
   #we define the position of shapes
-  pos <- pos.shapes(xy, pos.shp=pos.shp)
+  pos <- pos.shapes(xy, pos.shp=pos.shp, nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp)
   # according to the type of morphometrics applied, we reconstruct shapes
   method <- PCA$method
   ## outlines
@@ -1356,10 +1358,16 @@ degree.contrib.OpnCoe <- function(
     shp <- pca2shp.procrustes(pos=pos, rot=rot,
                               mshape=mshape, amp.shp=amp.shp)
     cd <- FALSE}
-  width   <- (par("usr")[4] - par("usr")[3]) * size.shp
-  shp     <- lapply(shp, coo.scale, 1/width)
+  #width   <- (par("usr")[4] - par("usr")[3]) * size.shp
+  #shp     <- lapply(shp, coo.scale, 1/width)
+  # not enough compact. #todo
+  shp <- lapply(shp, coo.template, size=(max(.wdw()) / size.shp))
+  shp <- lapply(shp, coo.close)
+  for (i in 1:length(shp)){
+    shp[[i]] <- coo.trans(shp[[i]], pos[i, 1], pos[i, 2])}
   if (cd) {
-    garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, points=FALSE)
+    garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp,
+                      points=FALSE, centroid=FALSE, first.point=TRUE)
   } else {
     garbage <- lapply(shp, lines, col=border.shp)}}
 
@@ -1398,8 +1406,8 @@ pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
     #     pos <- expand.grid(seq(w[1], w[2], len=nr.shp),
     #                        seq(w[3], w[4], len=nc.shp))
     w <- par("usr")
-    pos <- expand.grid(seq(par("xaxp")[1]*0.9, par("xaxp")[2]*0.9, len=nr.shp),
-                       seq(par("yaxp")[1]*0.9, par("yaxp")[2]*0.9, len=nc.shp))
+    pos <- expand.grid(seq(w[1]*0.85, w[2]*0.85, len=nr.shp),
+                       seq(w[3]*0.85, w[4]*0.85, len=nc.shp))
     pos <- as.matrix(pos)
     colnames(pos) <- c("x", "y") # pure cosmetics
     return(pos)   
@@ -1608,8 +1616,8 @@ plot.PCA <- function(#basics
   #.grid
   grid=TRUE, nb.grids=3,
   #shapes
-  morphospace=TRUE, pos.shp="full", amp.shp=1, size.shp=1/20,
-  pts.shp=60, border.shp="#00000055", col.shp="#00000011",
+  morphospace=TRUE, pos.shp="full", amp.shp=1, size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
+  pts.shp=60, border.shp="#00000033", col.shp="#00000011",
   #stars
   stars=FALSE,
   #ellipses
@@ -1653,7 +1661,7 @@ plot.PCA <- function(#basics
   .frame(xy, center.origin, zoom=zoom)
   if (grid) .grid(nb.grids)
   if (morphospace) {
-    .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+    .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp, nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                     col.shp=col.shp, border.shp=border.shp)}
   if (!missing(fac)) {
