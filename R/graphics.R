@@ -1582,6 +1582,9 @@ pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
 #' or a data.frame for \link{pos.shapes}
 #' @param amp.shp amplification factor for shape deformation
 #' @param size.shp the size of the shapes
+#' @param nb.shp (pos.shp="circle") the number of shapes on the compass
+#' @param nc.shp (pos.shp="full" or "range) the number of shapes per column
+#' @param nr.shp (pos.shp="full" or "range) the number of shapes per row
 #' @param pts.shp the number of points fro drawing shapes
 #' @param border.shp the border color of the shapes
 #' @param col.shp the color of the shapes
@@ -1616,7 +1619,8 @@ plot.PCA <- function(#basics
   #.grid
   grid=TRUE, nb.grids=3,
   #shapes
-  morphospace=TRUE, pos.shp="full", amp.shp=1, size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
+  morphospace=TRUE, pos.shp="full", amp.shp=1,
+  size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
   pts.shp=60, border.shp="#00000033", col.shp="#00000011",
   #stars
   stars=FALSE,

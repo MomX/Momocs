@@ -937,6 +937,70 @@ bezier.i <-function(B, nb.pts=120){
   return(coo)}
 # 3. Landmarks ------------------------------------------------------------
 
+#' Full Procrustes alignment between two shapes
+#' 
+#' Directly borrowed from Claude 2008.
+#' @param coo1 Configuration matrix to be superimposed onto the centered preshape of coo2.
+#' @param coo2 Reference configuration matrix.
+#' @return a list with components
+#' \enumerate{
+#' \item coo1: Superimposed centered preshape of coo1 onto the centered preshape of coo2
+#' \item coo2: Centered preshape of coo2
+#' \item rotation: Rotation matrix
+#' \item scale: Scale parameter
+#' \item DF: Full Procrustes distance between coo1 and coo2.
+#' }
+#' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
+#' @export
+fProcrustes <- function(coo1, coo2){
+  # directly borrowed from Claude
+  k <- ncol(coo1)
+  Z1      <- coo.center(coo.scale(coo1))  
+  Z2      <- coo.center(coo.scale(coo2))  
+  sv      <- svd(t(Z2) %*% Z1)
+  U       <- sv$v
+  V       <- sv$u
+  Delt    <- sv$d
+  sig     <- sign(det(t(Z2)%*%Z1))
+  Delt[k] <- sig*abs(Delt[k])
+  V[,k]   <- sig * V[,k]
+  Gam<-U%*%t(V)
+  beta<-sum(Delt)
+  list(coo1=beta*Z1%*%Gam, coo2=Z2,
+       rotation=Gam, scale=beta, DF=sqrt(1-beta^2))}
+
+#' Partial Procrustes alignment between two shapes
+#' 
+#' Directly borrowed from Claude 2008.
+#' @param coo1 Configuration matrix to be superimposed onto the centered preshape of coo2.
+#' @param coo2 Reference configuration matrix.
+#' @return a list with components
+#' \enumerate{
+#' \item coo1: Superimposed centered preshape of coo1 onto the centered preshape of coo2
+#' \item coo2: Centered preshape of coo2
+#' \item rotation: Rotation matrix
+#' \item DP: Partial Procrustes distance between coo1 and coo2.
+#' \item rho: Trigonometric Procrustes distance.
+#' }
+#' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
+#' @export
+pProcrustes <- function(coo1, coo2){
+  # directly borrowed from Claude
+  k <- ncol(coo1)
+  Z1      <- coo.center(coo.scale(coo1))  
+  Z2      <- coo.center(coo.scale(coo2))  
+  sv      <- svd(t(Z2) %*% Z1)
+  U       <- sv$v
+  V       <- sv$u
+  Delt    <- sv$d
+  sig     <- sign(det(t(Z2)%*%Z1))
+  Delt[k] <- sig*abs(Delt[k])
+  V[,k]   <- sig * V[,k]
+  Gam<-U%*%t(V)
+  beta<-sum(Delt)
+  list(coo1=Z1%*%Gam, coo2=Z2,
+       rotation=Gam, DP=sqrt(sum(edm(Z1%*%Gam, Z2)^2)), rho=acos(beta))}
+
 #' Performs a general Procrustes alignment on Opn and Out objects
 #' 
 #' It relies on the $ldk slot and on the procGPA function in the shapes package.

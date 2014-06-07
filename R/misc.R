@@ -52,8 +52,8 @@ edi <- function(pt1, pt2, r=0.5){
 #' edm(x, x)
 #' edm(x, x+1)
 #' @export
-edm            <- function(m1, m2){
-  return(sqrt((m1[, 1] - m2[, 1])^2 + (m1[, 2] - m2[, 2])^2))}
+edm            <- function(m1, m2){ 
+  return(sqrt(apply((m1-m2)^2, 1, sum)))}
 
 #' Calculates the shortest euclidean distance found for every point of one
 #' matrix among those of a second.
