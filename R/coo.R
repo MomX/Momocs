@@ -872,9 +872,7 @@ coo.centpos.Coo <- function(coo){
 #' @export
 coo.centsize <- function(coo){
   coo  <- coo.check(coo)
-  cent <- coo.centpos(coo)
-  cs   <- mean(apply(coo, 1, function(x) sqrt(sum((x-cent)^2))))
-  return(cs)}
+  return(sqrt(sum(apply(coo, 2, var))*(nrow(coo)-1)))}
 
 #' Returns the distance between everypoints and the centroid
 #' For every point of the shape, returns the (centroid-points) distance.
