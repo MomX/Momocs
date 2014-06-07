@@ -73,7 +73,7 @@ coo.center <- function(coo){UseMethod("coo.center")}
 #' @export
 coo.center.default <- function(coo){
   coo <- coo.check(coo)
-  return(apply(coo, 2, function(x) x - mean(x)))}
+  return(scale(coo, scale=FALSE))}
 #' @export
 coo.center.Coo <- function(coo){
   Coo <- coo
