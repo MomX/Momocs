@@ -7,7 +7,8 @@
 #' and specific methods (e.g. \link{eFourier} can be applied.
 #'  \code{Out} objects are primarily \code{\link{Coo}} objects.
 #' 
-#' @param coo.list \code{list} of matrices of \eqn{(x; y)} coordinates
+#' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
+#' or an array or an Out object or an Ldk object
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
@@ -24,11 +25,29 @@
 #' @keywords Out
 #' @aliases Out
 #' @export
-Out  <- function(coo.list, ldk=list(), fac=data.frame()){
+Out <- function(x, ldk=list(), fac=data.frame){UseMethod("Out")}
+
+#' @export
+Out.default <- function(x, ldk=list(), fac=data.frame()){
+  cat(" * an Ldk object can only be build from a list, an array or an Opn object")}
+
+#' @export
+Out.list  <- function(x, ldk=list(), fac=data.frame()){
+  coo.list <- x
   Out <- list(coo=coo.list, ldk=ldk, fac=fac)
   if (!is.null(Out$fac)) Out$fac <- .refactor(Out$fac)
   class(Out) <- c("Out", "Coo")
   return(Out)}
+
+#' @export
+Out.array  <- function(x, ldk=list(), fac=data.frame()){
+  x <- a2l(x)
+  Out(x, fac=fac)}
+
+# experimental below
+#' @export
+Out.Coo <- function(x, ldk=list(), fac=data.frame()){
+  Out(x=x$coo, fac=x$fac)}
 
 # merge method for Out objects (experimental)
 
@@ -643,7 +662,7 @@ defLandmarks.Coo <- function(Coo, nb.ldk){
 #' row indices. This methods allows to retrieve the corresponding (x; y) coordinates.
 #' @param Coo a Coo object, either Out or Opn
 #' @return an array of coordinates X (x; y) coordinates X number of shapes.
-#' @seealso \link{defLandmarks}, \link{gProcrustes}
+#' @seealso \link{defLandmarks}, \link{fgProcrustes}
 #' @keywords Out Opn Ldk
 #' @examples
 #' data(hearts)
@@ -662,7 +681,6 @@ getLandmarks.Out <- function(Coo){
   return(ref)}
 #' @export
 getLandmarks.Opn <- getLandmarks.Out
-
 
 #  Bonus ------------------------------------------------------------------
 

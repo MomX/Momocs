@@ -9,7 +9,8 @@
 #' and specific methods (e.g. todo-Procrustes can be applied.
 #'  \code{Ldk} objects are primarily \code{\link{Coo}} objects.
 #' 
-#' @param x \code{list} of matrices of \eqn{(x; y)} coordinates
+#' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
+#' or an array, an Ldk object.
 #' @param links a matrix of "links" between landmarks, mainly for plotting
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
@@ -28,7 +29,7 @@
 Ldk <- function(x, links=NULL, fac=data.frame()){UseMethod("Ldk")}
 #' @export
 Ldk.default <- function(x, links=NULL, fac=data.frame()){
-  cat(" * an Ldk object can only be build froma list, an array or an Ldk object")}
+  cat(" * an Ldk object can only be build from a list, an array or an Ldk object")}
 #' @export
 Ldk.list  <- function(x, links=NULL, fac=data.frame()){
   Ldk <- list(coo=x, links=links, fac=fac)

@@ -834,7 +834,7 @@ stack.Ldk <- function(x, cols, borders,
   mA <- mshape(A)
   points(mA, pch=20, cex=ifelse(ldk.cex>0.5, ldk.cex*1.5, 1), col="grey20")
   if (ldk.confell) { ldk.confell(A, conf=0.9) }
-  if (ldk.contour) { ldk.contour(A, nlevels=3) }
+  if (ldk.contour) { ldk.contour(A, nlevels=3, col="grey20") }
   if (ldk.chull)   { ldk.chull(A) }
   if (ldk.links)    { if (is.matrix(Coo$links)) ldk.links(mshape(A), Coo$links) }
   if (ldk.labels)  { ldk.labels(mshape(A)) }}

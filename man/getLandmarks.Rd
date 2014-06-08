@@ -22,7 +22,7 @@ stack(Ldk(a2l(ldk.h)))
 ldk.h
 }
 \seealso{
-\link{defLandmarks}, \link{gProcrustes}
+\link{defLandmarks}, \link{fgProcrustes}
 }
 \keyword{Ldk}
 \keyword{Opn}

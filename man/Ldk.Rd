@@ -9,7 +9,8 @@
 Ldk(x, links = NULL, fac = data.frame())
 }
 \arguments{
-\item{x}{\code{list} of matrices of \eqn{(x; y)} coordinates}
+\item{x}{a \code{list} of matrices of \eqn{(x; y)} coordinates,
+or an array, an Ldk object.}
 
 \item{links}{a matrix of "links" between landmarks, mainly for plotting}
 

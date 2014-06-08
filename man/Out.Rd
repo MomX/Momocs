@@ -3,10 +3,11 @@
 \alias{Out}
 \title{Builds an Out object}
 \usage{
-Out(coo.list, ldk = list(), fac = data.frame())
+Out(x, ldk = list(), fac = data.frame)
 }
 \arguments{
-\item{coo.list}{\code{list} of matrices of \eqn{(x; y)} coordinates}
+\item{x}{a \code{list} of matrices of \eqn{(x; y)} coordinates,
+or an array or an Out object or an Ldk object}
 
 \item{ldk}{(optionnal) \code{list} of landmarks as row number indices}
 

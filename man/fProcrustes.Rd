@@ -21,7 +21,7 @@ a list with components
 }
 }
 \description{
-Directly borrowed from Claude 2008.
+Directly borrowed from Claude 2008 (fPsup)
 }
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
