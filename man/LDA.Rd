@@ -3,12 +3,14 @@
 \alias{LDA}
 \title{Linear Discriminant Analysis on Coe objects}
 \usage{
-LDA(Coe, fac)
+LDA(x, fac, retain)
 }
 \arguments{
-\item{Coe}{the \link{Coe} object}
+\item{x}{a \link{Coe}, or a PCA object}
 
 \item{fac}{the grouping factor (names of one of the $fac column or column id)}
+
+\item{retain}{the number of PC axis to retain for LDA.PCA}
 }
 \value{
 a "LDA" object on which to apply \link{plot.LDA}. #todo

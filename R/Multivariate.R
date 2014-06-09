@@ -197,8 +197,9 @@ pca.LdkCoe <- function(Coe){
 #' 
 #' Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 #' @aliases LDA
-#' @param Coe the \link{Coe} object
+#' @param x a \link{Coe}, or a PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
+#' @param retain the number of PC axis to retain for LDA.PCA
 #' @return a "LDA" object on which to apply \link{plot.LDA}. #todo
 #' @examples
 #' data(bot)
@@ -212,9 +213,10 @@ pca.LdkCoe <- function(Coe){
 #' bot.l
 #' plot(bot.l)
 #' @export
-LDA <- function(Coe, fac){UseMethod("LDA")}
+LDA <- function(x, fac, retain){UseMethod("LDA")}
 #' @export
-LDA.Coe <- function(Coe, fac){
+LDA.Coe <- function(x, fac, retain){
+  Coe <- x
   if (missing(fac)) stop(" * no fac provided")
   fac    <- Coe$fac[, fac]
   X      <- Coe$coe
@@ -229,6 +231,32 @@ LDA.Coe <- function(Coe, fac){
               CV=CV, correct=sum(diag(CV))/sum(CV))
   LDA$mshape <- apply(Coe$coe, 2, mean)
   LDA$method <- Coe$method
+  class(LDA) <- c("LDA", class(LDA))
+  return(LDA)}
+
+#' @export
+LDA.PCA <- function(x, fac, retain=3){
+  PCA <- x
+  if (missing(fac)) stop(" * no fac provided")
+  fac    <- PCA$fac[, fac]
+  if (missing(retain)) {
+    retain <- ncol(PCA$x)-5
+  } 
+  X      <- PCA$x[, 1:retain]
+  if (is.matrix(X)){
+    remove <- which(apply(X, 2, sd)<1e-5)
+    if (length(remove)!=0) { X <- X[, -remove] }
+    } else { remove <- NULL } 
+  X <- as.matrix(X)
+  mod    <- lda(X, grouping=fac, tol=1e-10)
+  mod.pred <- predict(mod, X)
+  CV <- table(fac, mod.pred$class)
+  names(dimnames(CV)) <- c("actual", "classified")
+  LDA <- list(x=X, fac=fac, removed=remove,
+              mod=mod, mod.pred=mod.pred,
+              CV=CV, correct=sum(diag(CV))/sum(CV))
+  #LDA$mshape <- apply(PCA$x, 2, mean)
+  LDA$method <- PCA$method
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)}
 
