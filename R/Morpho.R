@@ -1090,7 +1090,7 @@ fgProcrustes.Ldk <- function(x, tol=1e-10, verbose=TRUE){
   Coo <- x
   Coo2 <- Coo
   ref <- l2a(Coo2$coo)
-  tar <- fgProcrustes(ref, tol=tol, verbose=TRUE)$rotated
+  tar <- fgProcrustes(ref, tol=tol, verbose=verbose)$rotated
   Coo2$coo <- a2l(tar)
   Coo2$coe <- a2m(l2a(Coo2$coo))
   Coo2$method <- "gProcrustes"
