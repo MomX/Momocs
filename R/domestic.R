@@ -242,6 +242,19 @@ NULL
 #' @source Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
 NULL
 
+#' Data: Configuration of landmarks on 176 oak leaves
+#' 
+#' From Viscosi and Cardini (2001).
+#' @docType data
+#' @name oak
+#' @rdname data_oak
+#' @keywords datasets
+#' @format A \link{Ldk} object containing 11 (x; y) landmarks  from 176 oak leaves wings, from 
+#' @source Viscosi, V., & Cardini, A. (2011). Leaf morphology, taxonomy and
+#' geometric morphometrics: a simplified protocol for beginners.
+#' PloS One, 6(10), e25630. doi:10.1371/journal.pone.0025630
+NULL
+
 # 00. Package documentation and NAMESPACE import ---------------------------
 
 #' Momocs
