@@ -998,7 +998,7 @@ coo.lw <- function(coo){
 #todo source the algo
 #' Calculates the area
 #' 
-#' Calculates the area for any non-crossing polygon.
+#' Calculates the area for a polygon.
 #' @aliases coo.area
 #' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
 #' @return \code{numeric}, the area.
@@ -1009,16 +1009,18 @@ coo.lw <- function(coo){
 #' hist(sapply(bot$coo, coo.area), breaks=10)
 #' @export
 coo.area <- function(coo){
-  coo <- coo.check(coo)
+ # coo <- coo.check(coo)
   coo <- coo.close(coo)
-  nr <- nrow(coo)-1
-  y <- x <- numeric(nr)
-  for (i in 1:nr){
-    x[i] <- coo[i, 1] * coo[i+1, 2]
-    y[i] <- coo[i+1 , 1] * coo[i, 2]
-  }
-  area <- (0.5 * (sum(x) - sum(y)))
-  return(abs(area))}
+#   nr <- nrow(coo)-1
+#   y <- x <- numeric(nr)
+#   for (i in 1:nr){
+#     x[i] <- coo[i, 1] * coo[i+1, 2]
+#     y[i] <- coo[i+1 , 1] * coo[i, 2]
+#   }
+#   area <- (0.5 * (sum(x) - sum(y)))
+#   return(abs(area))}
+  area.poly(as(coo, "gpc.poly"))}
+
 
 # g. angle ----------------------------------------------------------------------
 #' Returns the tangent angle along the perimeter
@@ -1320,4 +1322,46 @@ coo.convexity <- function(coo){
 coo.solidity <- function(coo){
   coo <- coo.check(coo)
   return(coo.area(coo)/coo.area(coo.chull(coo)))}
+
+#' Calculate area overlap between two shapes
+#' 
+#' Simply calculates (area(coo1) + area(coo2) - area(union(coo1, coo2)))
+#' 
+#' @param coo1 the first shape
+#' @param coo2 the second shape
+#' @return the area of the overlap
+#' @examples
+#' data(bot)
+#' b1 <- bot[1]
+#' b2 <- coo.trans(b1, 50)
+#' coo.plot(b1)
+#' coo.draw(b2)
+#' coo.overlap(b1, b2)
+coo.overlap <- function(coo1, coo2){
+  p1 <- as(coo1, "gpc.poly")
+  p2 <- as(coo2, "gpc.poly")
+  p0 <- union(p1,p2)
+  ov <- area.poly(p1) + area.poly(p2) - area.poly(p0)
+  return(ov)}
+
+#' Calculate the union between two shapes
+#' 
+#' If the two shapes overlaps returns the shape of their union. If not, returns NULL.
+#' 
+#' @param coo1 the first shape
+#' @param coo2 the second shape
+#' @return the area of the overlap
+#' @examples
+#' data(bot)
+#' b1 <- bot[1]
+#' ba <- coo.union(b1, coo.trans(b1, 200))
+#' coo.plot(ba)
+#' coo.union(b1, coo.trans(b1, 1e3)) 
+coo.union <- function(coo1, coo2){
+  p1 <- as(coo1, "gpc.poly")
+  p2 <- as(coo2, "gpc.poly")
+  pu <- union(p1, p2)
+  if (length(pu@pts) > 1) return(NULL)
+  pu <- cbind(pu@pts[[1]]$x, pu@pts[[1]]$y)
+  return(pu)}
 

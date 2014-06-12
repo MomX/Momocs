@@ -1559,6 +1559,7 @@ pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
 
 # 7 - PCA & LDA ------------------------------------------------------------
 
+#todo: add deformation grids on the extreme PC axes (pos / meanshape)
 #' Plots Principal Component Analysis
 #' 
 #' The Momocs' PCA plotter with many graphical options and morphospaces.
