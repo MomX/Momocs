@@ -17,7 +17,7 @@ Imports:
 	graphics,
     methods,
     jpeg,
-    shapes,
     sp,
     MASS,
-    ape
+    ape,
+    gpclib

@@ -278,8 +278,8 @@ NULL
 #' their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
 #' @import sp
+#' @import gpclib
 #' @importFrom jpeg readJPEG
-#' @importFrom shapes procGPA
 #' @importFrom methods showDefault
 #' @importFrom MASS ginv
 #' @importFrom MASS lda

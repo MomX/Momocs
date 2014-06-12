@@ -12,7 +12,7 @@ coo.area(coo)
 \code{numeric}, the area.
 }
 \description{
-Calculates the area for any non-crossing polygon.
+Calculates the area for a polygon.
 }
 \examples{
 data(bot)

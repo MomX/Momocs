@@ -1337,6 +1337,7 @@ coo.solidity <- function(coo){
 #' coo.plot(b1)
 #' coo.draw(b2)
 #' coo.overlap(b1, b2)
+#' @export
 coo.overlap <- function(coo1, coo2){
   p1 <- as(coo1, "gpc.poly")
   p2 <- as(coo2, "gpc.poly")
@@ -1357,6 +1358,7 @@ coo.overlap <- function(coo1, coo2){
 #' ba <- coo.union(b1, coo.trans(b1, 200))
 #' coo.plot(ba)
 #' coo.union(b1, coo.trans(b1, 1e3)) 
+#' @export
 coo.union <- function(coo1, coo2){
   p1 <- as(coo1, "gpc.poly")
   p2 <- as(coo2, "gpc.poly")
