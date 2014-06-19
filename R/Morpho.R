@@ -1048,7 +1048,14 @@ fgProcrustes.default <- function(x, tol=1e-5, verbose=TRUE){
 #' @export
 fgProcrustes.Out <- function(x, tol=1e-10, verbose=TRUE){
   Coo <- x
-  if (length(Coo$ldk)==0) stop(" * No landmarks defined. See ?add.ldk")
+  # if no $ldk defined, we convert Out into a Ldk and then perform the fgProcrustes
+  # and return back an Out object.
+  if (length(Coo$ldk)==0) {
+    cat(" * No landmarks defined in $ldk, so trying to work on $coo directly.\n")
+    Coo2 <- Ldk(Coo)
+    Coo2 <- fgProcrustes(Coo2, tol=tol, verbose=verbose)
+    Coo2 <- Out(Coo2)
+    return(Coo2)}
   Coo2 <- coo.center(coo.scale(Coo))
   ref  <- getLandmarks(Coo2)
   tar <- fgProcrustes(ref, tol=tol, verbose=verbose)$rotated
