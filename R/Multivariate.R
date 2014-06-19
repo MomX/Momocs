@@ -115,6 +115,7 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
 Manova <- function(...){UseMethod("Manova")}
 #' @export
 Manova.OutCoe <- function(OutCoe, fac, retain, drop, ...){
+  if (length(OutCoe$method)>1) stop(" * cannot yet be used on combined OutCoe. Do it manually.")
   if (missing(fac)) stop("'fac' must be provided")
   if (!is.factor(fac)) {fac <- OutCoe$fac[, fac]}
   x <- OutCoe$coe
