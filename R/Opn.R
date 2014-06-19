@@ -9,11 +9,11 @@
 #' and specific methods (e.g. \link{rawPolynomials} can be applied.
 #'  \code{Opn} objects are primarily \code{\link{Coo}} objects.
 #' 
-#' @param coo.list \code{list} of matrices of \eqn{(x; y)} coordinates
+#' @param x \code{list} of matrices of \eqn{(x; y)} coordinates
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
-#' @return an \code{Out} object
+#' @return an \code{Opn} object
 #' @details These methods can be applied on \code{Opn} objects:
 #' \enumerate{
 #' \item Handling: \code{subset, coo.} family;
@@ -26,11 +26,27 @@
 #' @keywords Opn
 #' @aliases Opn
 #' @export
-Opn  <- function(coo.list, ldk=list(), fac=data.frame()){
-  Opn <- list(coo=coo.list, ldk=ldk, fac=fac)
+Opn <- function(x, ldk=NULL, fac=data.frame()){UseMethod("Opn")}
+
+#' @export
+Opn.default <- function(x, ldk=NULL, fac=data.frame()){
+  cat(" * an Opn object can only be build from a list, an array or a Coo object")}
+
+#' @export
+Opn.list  <- function(x, ldk=NULL, fac=data.frame()){
+  Opn <- list(coo=x, ldk=ldk, fac=fac)
   if (!is.null(Opn$fac)) Opn$fac <- .refactor(Opn$fac)
   class(Opn) <- c("Opn", "Coo")
   return(Opn)}
+
+#' @export
+Opn.array  <- function(x, ldk=NULL, fac=data.frame()){
+  x <- a2l(x)
+  Opn(x, ldk=x$ldk, fac=fac)}
+
+#' @export
+Opn.Coo <- function(x, ldk=NULL, fac=data.frame()){
+  Opn(x=x$coo, ldk=x$ldk, fac=x$fac)}
 
 # The print method for Out objects
 #' @export

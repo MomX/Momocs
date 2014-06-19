@@ -47,7 +47,7 @@ Out.array  <- function(x, ldk=list(), fac=data.frame()){
 # experimental below
 #' @export
 Out.Coo <- function(x, ldk=list(), fac=data.frame()){
-  Out(x=x$coo, fac=x$fac)}
+  Out(x=x$coo, ldk=x$ldk, fac=x$fac)}
 
 # merge method for Out objects (experimental)
 

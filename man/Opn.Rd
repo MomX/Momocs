@@ -3,10 +3,10 @@
 \alias{Opn}
 \title{Builds an Opn object}
 \usage{
-Opn(coo.list, ldk = list(), fac = data.frame())
+Opn(x, ldk = NULL, fac = data.frame())
 }
 \arguments{
-\item{coo.list}{\code{list} of matrices of \eqn{(x; y)} coordinates}
+\item{x}{\code{list} of matrices of \eqn{(x; y)} coordinates}
 
 \item{ldk}{(optionnal) \code{list} of landmarks as row number indices}
 
@@ -14,7 +14,7 @@ Opn(coo.list, ldk = list(), fac = data.frame())
 specifying the grouping structure}
 }
 \value{
-an \code{Out} object
+an \code{Opn} object
 }
 \description{
 In Momocs, \code{Opn} classes objects are wrapping around

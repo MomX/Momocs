@@ -9,6 +9,9 @@
 #' and specific methods (e.g. todo-Procrustes can be applied.
 #'  \code{Ldk} objects are primarily \code{\link{Coo}} objects.
 #' 
+#' All the shapes in x must have the same number of landmarks. If you are 
+#' trying to make an Ldk object from an Out or an Opn object, try \link{coo.sample}.
+#' 
 #' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
 #' or an array, an Ldk object.
 #' @param links a matrix of "links" between landmarks, mainly for plotting
@@ -27,22 +30,29 @@
 #' @aliases Ldk Ldk.default Ldk.Ldk Ldk.list
 #' @export
 Ldk <- function(x, links=NULL, fac=data.frame()){UseMethod("Ldk")}
+
 #' @export
 Ldk.default <- function(x, links=NULL, fac=data.frame()){
   cat(" * an Ldk object can only be build from a list, an array or an Ldk object")}
+
 #' @export
 Ldk.list  <- function(x, links=NULL, fac=data.frame()){
   Ldk <- list(coo=x, links=links, fac=fac)
   if (!is.null(Ldk$fac)) Ldk$fac <- .refactor(Ldk$fac)
   class(Ldk) <- c("Ldk", "Coo")
   return(Ldk)}
+
 #' @export
 Ldk.array  <- function(x, links=NULL, fac=data.frame()){
   x <- a2l(x)
   Ldk(x, links=links, fac=fac)}
+
 #' @export
-Ldk.Ldk <- function(x, links=NULL, fac=data.frame()){
+Ldk.Coo <- function(x, links=NULL, fac=data.frame()){
+  nb.ldk <- sapply(x$coo, length)
+  if (length(unique(nb.ldk))>1) stop(" * shapes do not have the same number of landmarks.")
   Ldk(x=x$coo, links=x$links, fac=x$fac)}
+
 
 # The print method for Ldk objects
 #' @export
