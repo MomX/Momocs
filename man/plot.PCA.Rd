@@ -9,9 +9,9 @@
   amp.shp = 1, size.shp = 15, nb.shp = 12, nr.shp = 6, nc.shp = 5,
   pts.shp = 60, border.shp = "#00000033", col.shp = "#00000011",
   stars = FALSE, ellipses = TRUE, conf = 0.5, ellipsesax = TRUE,
-  lty.ellipsesax = 2, chull = TRUE, chull.lty = 3, labels = TRUE,
-  axisnames = TRUE, axisvar = TRUE, eigen = TRUE, rug = TRUE,
-  title = substitute(x), ...)
+  lty.ellipsesax = 2, chull = TRUE, chull.lty = 3, loadings = FALSE,
+  labels = TRUE, axisnames = TRUE, axisvar = TRUE, eigen = TRUE,
+  rug = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{pca}}
@@ -74,6 +74,8 @@ or a data.frame for \link{pos.shapes}}
 \item{chull}{logical whether to draw a convex hull}
 
 \item{chull.lty}{if yes, its linetype}
+
+\item{loadings}{logical whether to add loadings for every variables}
 
 \item{labels}{logical whether to add labels for groups}
 

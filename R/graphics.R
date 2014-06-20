@@ -1606,6 +1606,7 @@ pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
 #' @param lty.ellipsesax if yes, the lty for them
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
+#' @param loadings logical whether to add loadings for every variables
 #' @param labels logical whether to add labels for groups
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
