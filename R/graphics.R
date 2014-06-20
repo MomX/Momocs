@@ -673,6 +673,16 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
     for (j in 1:nrow(pts.i)){
       segments(cent.i[1], cent.i[2], pts.i[j, 1], pts.i[j, 2], col=col.i[i])}}}
 
+#add loading vectors
+#' @export
+.loadings <- function(loadings.mat, d=1, d.lab=1.2, col="red"){
+  loadings.mat <- loadings.mat*d
+  loadings.lab <- loadings.mat*d.lab
+  arrows(0, 0, loadings.mat[, 1], loadings.mat[, 2],
+          angle=20, length=0.1, col=col)
+  text(loadings.lab[, 1], loadings.lab[, 2],
+          labels=rownames(loadings.lab), cex=0.8, col=col)}
+
 #add eigen
 #' @export
 .eigen <- function(ev, xax, yax, ratio=0.12, ev.names){
@@ -1629,6 +1639,8 @@ plot.PCA <- function(#basics
   ellipses=TRUE, conf=0.5, ellipsesax=TRUE, lty.ellipsesax=2,
   #convexhulls
   chull=TRUE, chull.lty=3,
+  #loadings
+  loadings=FALSE,
   #labels
   labels=TRUE,
   #axisnames
@@ -1665,7 +1677,7 @@ plot.PCA <- function(#basics
   
   .frame(xy, center.origin, zoom=zoom)
   if (grid) .grid(nb.grids)
-  if (morphospace) {
+  if (morphospace & !is.null(PCA$method) & length(PCA$method)<2) {
     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp, nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                     col.shp=col.shp, border.shp=border.shp)}
@@ -1680,6 +1692,7 @@ plot.PCA <- function(#basics
     if (rug)        .rug(xy, NULL, col)
   }
   points(xy, pch=pch, col=col, cex=cex)
+    if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
   .title(title)
