@@ -193,6 +193,25 @@ pca.LdkCoe <- function(Coe){
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)}
 
+#' @export
+pca.default <- function(Coe){
+  PCA <- prcomp(Coe, scale.=TRUE, center=TRUE)
+  PCA$fac <- NULL
+  PCA$method <- NULL
+  #PCA$baseline2 <- OpnCoe$baseline2
+  class(PCA) <- c("PCA", class(PCA))
+  return(PCA)}
+
+  #' @export
+pca.data.frame <- function(Coe){
+  PCA <- prcomp(Coe, scale.=TRUE, center=TRUE)
+  PCA$fac <- NULL
+  PCA$method <- NULL
+  #PCA$baseline2 <- OpnCoe$baseline2
+  class(PCA) <- c("PCA", class(PCA))
+  return(PCA)}
+
+
 # 4 - LDA ----------------------------------------------------------------
 #' Linear Discriminant Analysis on Coe objects
 #' 
