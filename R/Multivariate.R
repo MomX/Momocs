@@ -255,6 +255,22 @@ LDA.Coe <- function(x, fac, retain){
   return(LDA)}
 
 #' @export
+LDA.default <- function(x, fac, retain){
+  X <- x
+  if (missing(fac)) stop(" * no fac provided")
+  mod    <- lda(X, grouping=fac)
+  mod.pred <- predict(mod, X)
+  CV <- table(fac, mod.pred$class)
+  names(dimnames(CV)) <- c("actual", "classified")
+  LDA <- list(x=X, fac=fac, removed=remove,
+              mod=mod, mod.pred=mod.pred,
+              CV=CV, correct=sum(diag(CV))/sum(CV))
+  LDA$mshape <- NULL
+  LDA$method <- NULL
+  class(LDA) <- c("LDA", class(LDA))
+  return(LDA)}
+
+#' @export
 LDA.PCA <- function(x, fac, retain=3){
   PCA <- x
   if (missing(fac)) stop(" * no fac provided")
