@@ -15,7 +15,7 @@ I plan a releaase of the version v0.9 before July 2014 and a release of v1.0 whi
 * __Data acquisition__
  * Outline extraction
  * Landmark definition on outlines
-* Import from .nts, .tps, PAST, .txt, .xls, .csv
+ * Import from .nts, .tps, PAST, .txt, .xls, .csv
 
 * __Outline analysis__
  * Elliptical Fourier analysis
@@ -70,7 +70,7 @@ library(Momocs)
 
 Tutorial
 --------
-* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf)
+* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what $(x; y)$ coordinates may be.
 * Blog posts, ref card, FAQ, to come.
 
 Contact
