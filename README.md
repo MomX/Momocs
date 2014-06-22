@@ -29,8 +29,8 @@ Features
 	*	Discrete Cosinus Transform*
 	*	Same calibration methods as above
  * Configuration of landmarks
-  * Full Generalized Procrustes Adjustment
-  * Resistant Fit Procrustes Adjustments*
+	*	Full Generalized Procrustes Adjustment
+	*	Resistant Fit Procrustes Adjustments*
 	*	Sliding semi-landmarks*
  * Traditional morphometrics and global shape descriptors
 	*	Some built-in facilities for multivariate analysis
