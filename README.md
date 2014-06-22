@@ -56,16 +56,17 @@ I plan a releaase of the version v0.9 before July 2014 and a release of v1.0 whi
 Installation
 --------
 From R:
-<code>
- install.packages("Momocs")
- library(Momocs)
-</code>
-For the very last version:
-<code>
- library(devtools) # You need to install it first using install.packages("devtools")
- install_github(c("vbonhomme/Momocs", "vbonhomme"))
- library(Momocs)
-<code>
+```
+  install.packages("Momocs")
+  library(Momocs)
+```
+
+For the very last version: 
+```
+  library(devtools)
+  install_github(c("vbonhomme/Momocs", "vbonhomme"))
+  library(Momocs)
+````
 
 __You are welcome to:__
 * test Momocs and send me your feedback
