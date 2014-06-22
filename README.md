@@ -70,7 +70,7 @@ library(Momocs)
 
 Tutorial
 --------
-* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what $(x; y)$ coordinates may be.
+* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what (x; y) coordinates may be.
 * Blog posts, ref card, FAQ, to come.
 
 Contact
