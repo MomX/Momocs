@@ -55,32 +55,27 @@ I plan a releaase of the version v0.9 before July 2014 and a release of v1.0 whi
 
 Installation
 --------
+From R:
+ install.packages("Momocs")
+ library(Momocs)
 
-* From R:<br />
-<code>
-install.packages("Momocs")
-library(Momocs)
-</code>
-* For the very last version: <br />
-<code>
-library(devtools) # You need to install it first using install.packages("devtools")
-install_github(c("vbonhomme/Momocs", "vbonhomme"))
-library(Momocs)
-</code>
+For the very last version:
+ library(devtools) # You need to install it first using install.packages("devtools")
+ install_github(c("vbonhomme/Momocs", "vbonhomme"))
+ library(Momocs)
+
+__You are welcome to:__
+* test Momocs and send me your feedback
+* submit suggestions and bug-reports
+* ask for hotline
+* collaborate with me
+* just send an email to: bonhomme.vincent@gmail.com
 
 Tutorial
 --------
 * [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what (x; y) coordinates may be.
 * Blog posts, ref card, FAQ, to come.
 
-Contact
---------
-You are welcome to:
-
-* submit suggestions and bug-reports at: https://github.com/vbonhomme/Momocs/issues
-* send a pull request on: https://github.com/vbonhomme/Momocs/
-* compose a friendly e-mail to: bonhomme.vincent@gmail.com if you would like to collaborate with me or if you have any problem with your scripts. This will benefit to everyone.
-* have a look to my personnal webpage: http://www.vincentbonhomme.fr
 
 
 
