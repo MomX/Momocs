@@ -93,8 +93,8 @@ bot.f <- eFourier(bot, 24)
 bot.l <- LDA(bot.f, "type")
 plot(bot.l)
 
-bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
-bot.l <- LDA(bot.f, "plop")
+bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
+bot.l <- LDA(bot.f, "fake")
 plot(bot.l)
 }
 

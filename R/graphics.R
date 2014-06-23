@@ -1381,6 +1381,69 @@ degree.contrib.OpnCoe <- function(
   } else {
     garbage <- lapply(shp, lines, col=border.shp)}}
 
+#' @export
+.morphospaceLDA <- 
+  function(LDA, xax, yax, pos.shp, nb.shp=24, nr.shp=6, nc.shp=5,
+           amp.shp=1, size.shp=15, pts.shp=60,
+           col.shp="#00000011", border.shp="#00000055"){
+    
+    xy     <- LDA$mod.pred$x[, c(xax, yax)]
+    rot    <- LDA$LDs[, c(xax, yax)]
+    mshape <- LDA$mshape
+    
+    # we fill any removed variables with 0s  
+    r <- LDA$removed
+    if (length(r)>0) {
+      m2 <- matrix(rep(0, length(r) * 2), nrow=length(r),
+                   byrow=TRUE, dimnames=list(names(r), colnames(rot)))
+      m3 <- rbind(rot, m2)
+      rot <- m3[match(names(mshape), rownames(m3)),]}
+    
+    #we define the position of shapes
+    pos <- pos.shapes(xy, pos.shp=pos.shp, nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp)
+    # according to the type of morphometrics applied, we reconstruct shapes
+    method <- LDA$method
+    ## outlines
+    if (method=="eFourier"){
+      shp <- lda2shp.efourier(pos=pos, rot=rot,
+                              mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+      cd <- TRUE}
+    #   if (method=="rFourier"){
+    #     shp <- pca2shp.rfourier(pos=pos, rot=rot,
+    #                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+    #     cd <- TRUE}
+    #   if (method=="tFourier"){
+    #     shp <- pca2shp.tfourier(pos=pos, rot=rot,
+    #                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+    #     cd <- TRUE}
+    #   ## open outlines
+    #   if (method=="orthoPolynomials"){
+    #     shp <- pca2shp.polynomials(pos=pos, rot=rot,
+    #                                mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=TRUE,
+    #                                baseline1=PCA$baseline1, baseline2=PCA$baseline2)
+    #     cd <- FALSE}
+    #   if (method=="rawPolynomials"){
+    #     shp <- pca2shp.polynomials(pos=pos, rot=rot,
+    #                                mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
+    #                                baseline1=PCA$baseline1, baseline2=PCA$baseline2)
+    #     cd <- FALSE}
+    #   if (method=="procrustes"){
+    #     shp <- pca2shp.procrustes(pos=pos, rot=rot,
+    #                               mshape=mshape, amp.shp=amp.shp)
+    #     cd <- FALSE}
+    #width   <- (par("usr")[4] - par("usr")[3]) * size.shp
+    #shp     <- lapply(shp, coo.scale, 1/width)
+    # not enough compact. #todo
+    shp <- lapply(shp, coo.template, size=(max(.wdw()) / size.shp))
+    shp <- lapply(shp, coo.close)
+    for (i in 1:length(shp)){
+      shp[[i]] <- coo.trans(shp[[i]], pos[i, 1], pos[i, 2])}
+    if (cd) {
+      garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp,
+                        points=FALSE, centroid=FALSE, first.point=TRUE)
+    } else {
+      garbage <- lapply(shp, lines, col=border.shp)}}
+
 #' Calculates nice positions on a plan for drawing shapes
 #' 
 #' @param xy todo
@@ -1548,6 +1611,13 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
   #}
   return(res)}
 
+#' Calculates shapes from PC plane: (aligned) landmarks
+#' 
+#' @param pos the position on two PC axis
+#' @param rot the corresponding loadings
+#' @param mshape the meanshape
+#' @param amp.shp amplification factor for the shape deformation
+#' @export
 pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
   if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
@@ -1567,6 +1637,35 @@ pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
   #}
   return(res)}
 
+#' Calculates shapes from LD plane: efourier
+#' 
+#' @param pos the position on two PC axis
+#' @param rot the (unstardized) loadings
+#' @param mshape the meanshape
+#' @param amp.shp amplification factor for the shape deformation
+#' @param pts.shp number of points to reconstruct the shape
+#' @export
+#' @export
+lda2shp.efourier <- function (pos, rot,  mshape, amp.shp=1, pts.shp=60) {
+  if (ncol(pos) != ncol(rot)) stop(" * 'rot' and 'pos' must have the same ncol")
+  if(length(mshape) != nrow(rot)) stop(" * 'mshape' and ncol(rot) lengths differ")
+  nb.h <- length(mshape)/4
+  n  <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ])*amp.shp
+    coe        <- mshape + apply(ax.contrib, 1, sum)
+    xf         <- coeff.split(coe)
+    coo        <- efourier.i(xf, nb.h = nb.h, nb.pts=pts.shp)
+    # reconstructed shapes are translated on their centroid
+    #if (trans) {
+    dx <- pos[i, 1] - coo.centpos(coo)[1] 
+    dy <- pos[i, 2] - coo.centpos(coo)[2] 
+    coo <- coo.trans(coo, dx, dy)
+    #}
+    res[[i]] <- coo}
+  return(res)}
 # 7 - PCA & LDA ------------------------------------------------------------
 
 #todo: add deformation grids on the extreme PC axes (pos / meanshape)
@@ -1747,8 +1846,8 @@ plot.PCA <- function(#basics
 #' bot.l <- LDA(bot.f, "type")
 #' plot(bot.l)
 #' 
-#' bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
-#' bot.l <- LDA(bot.f, "plop")
+#' bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
+#' bot.l <- LDA(bot.f, "fake")
 #' plot(bot.l)
 #' @export
 plot.LDA <- function(#basics
@@ -1828,10 +1927,10 @@ plot.LDA <- function(#basics
   
   .frame(xy, center.origin, zoom=zoom)
   if (grid) .grid(nb.grids)
-  #   if (morphospace) {
-  #     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
-  #                     amp.shp=1, size.shp=size.shp, pts.shp=pts.shp,
-  #                     col.shp=col.shp, border.shp=border.shp)}
+    if (morphospace) {
+      .morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
+                      amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
+                      col.shp=col.shp, border.shp=border.shp)}
   if (stars)      .stars(xy, fac, col.groups)
   if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
   if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
@@ -1842,6 +1941,7 @@ plot.LDA <- function(#basics
   if (axisnames)  .axisnames(xax, yax, "LD")
   if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
   .title(title)
+   # should be called differently #todo
   if (eigen)     .eigen(LDA$mod$svd, xax, yax, ev.names="Proportion of trace")
   box()}
 

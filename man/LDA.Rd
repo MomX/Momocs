@@ -13,7 +13,19 @@ LDA(x, fac, retain)
 \item{retain}{the number of PC axis to retain for LDA.PCA}
 }
 \value{
-a "LDA" object on which to apply \link{plot.LDA}. #todo
+a "LDA" object on which to apply \link{plot.LDA}, which is a list with components:
+\describe{
+\item{x}{matrix of coefficients used for computation}
+\item{fac}{grouping structure used}
+\item{removed}{ids of columns in the original matrix that have been removed since constant (if any)}
+\item{mod}{raw lda object returned by \link{lda}}
+\item{mod.pred}{predicted classification using the model. Probably optimistic, you can try CV leave-one-out or other approaches.}
+\item{CV}{cross-validation table using mod.pred results}
+\item{correct}{proportion of well classified individuals}
+\item{LDs}{unstandardized LD scores see Claude (2008)}
+\item{mshape}{mean values of coefficients in the original matrix}
+\item{method}{inherited from the Coe object (if any)}
+}
 }
 \description{
 Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
@@ -24,7 +36,6 @@ bot.f <- eFourier(bot, 24)
 bot.l <- LDA(bot.f, "type")
 bot.l
 plot(bot.l)
-
 bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
 bot.l <- LDA(bot.f, "plop")
 bot.l
