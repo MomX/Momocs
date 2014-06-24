@@ -12,11 +12,12 @@ tps2Coo(tps.path, sep = " ")
 }
 \description{
 Useful to convert .tps files into Coo objects.
-It returns a list of matrices of coordinates that can be passed to \link{Coo}.
+It returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
 }
-\details{
+\note{
 I'm not very familiar to other morphometric formats.
-So if you have troubles importing your datasets, please contact me.
+So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
+please let met know!
 }
-\keyword{babel}
+\keyword{Babel}
 

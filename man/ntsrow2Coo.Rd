@@ -12,14 +12,14 @@ ntsrow2Coo(nts.path, sep = "\\t")
 \item{sep}{the separator between data}
 }
 \description{
-Useful to convert .nts files into Coo objects. For .nts provided as rows, use
+Useful to convert .nts files into \link{Coo} objects. For .nts provided as rows, use
 ntsrow2Coo; for .nts provided as columns of coordinates, try ntscol2Coo. It
-returns a list of matrices of coordinates that can be passed to \link{Coo}.
+returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
 }
-\details{
-I'm not very familiar to other morphometric formats and these
-  functions are (highly) experimental. So if you have troubles importing your
-  datasets, please contact me.
+\note{
+I'm not very familiar to other morphometric formats.
+So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
+please let met know!
 }
 \examples{
 \dontrun{
@@ -31,5 +31,5 @@ fac       <- data.frame(fac=factor(substr(names(coo.list), 1, 2)))
 wings <- Ldk(coo.list, fac=fac)
 }
 }
-\keyword{babel}
+\keyword{Babel}
 

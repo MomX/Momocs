@@ -6,10 +6,10 @@
 chc2pix(chc)
 }
 \arguments{
-\item{chc}{chain-coded coordinates}
+\item{chc}{a vector of chain-coded coordinates}
 }
 \description{
-May be useful to convert (prehistoric?) chain-coded coordinates
+May be useful to convert chain-coded coordinates
 to (x; y) coordinates. The first point is set at the origin.
 }
 \examples{
@@ -20,10 +20,10 @@ coo.plot(chc2pix(x))
 \references{
 Kuhl, F. P., & Giardina, C. R. (1982).
 Elliptic Fourier features of a closed contour.
-Computer Graphics and Image Processing, 18(3), 236-258.
+\emph{Computer Graphics and Image Processing}, 18(3), 236-258.
 }
 \seealso{
 \link{pix2chc}
 }
-\keyword{babel}
+\keyword{Babel}
 

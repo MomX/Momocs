@@ -9,7 +9,7 @@ pix2chc(coo)
 \item{coo}{(x; y) coordinates passed as a matrix}
 }
 \description{
-May be useful to convert (x; y) coordinates to chain-coded coordinates.
+Useful to convert (x; y) coordinates to chain-coded coordinates.
 }
 \examples{
 data(shapes)
@@ -18,10 +18,10 @@ pix2chc(shapes[1])
 \references{
 Kuhl, F. P., & Giardina, C. R. (1982).
 Elliptic Fourier features of a closed contour.
-Computer Graphics and Image Processing, 18(3), 236-258.
+\emph{Computer Graphics and Image Processing}, 18(3), 236-258.
 }
 \seealso{
 \link{chc2pix}
 }
-\keyword{babel}
+\keyword{Babel}
 
