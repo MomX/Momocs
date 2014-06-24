@@ -9,19 +9,63 @@ Coo(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coo} class is a super class for \link{Opn} and \link{Out} classes,
-\bold{open outlines} and \bold{closed outlines}, respectively.
+\code{Coo} class is a "super class" for \link{Out}, \link{Opn} and \link{Ldk} classes,
+for handling \bold{closed outlines}, \bold{open outlines} and \bold{configuration of landmarks}, respectively.
 }
 \details{
-It allows to recycle most of the methods, since both of them apply on
-\eqn{(x; y)} coordinates. In other words, \code{Opn} and \code{Out} classes
+This class allows to recycle most of the methods, since all of them apply on
+(x; y) coordinates stored \code{$coo} slot. All of them also have a \code{$fac} component,
+yet not mandatory, to store grouping informations (also called classifiers). Others slots
+may be present in certain classes.
+
+In other words, \code{Out}, \code{Out} and \code{Ldk} classes
 are all, primarily, \code{Coo} objects on which we define generic \emph{and}
 specific methods.
 
-If you used Momocs before version <1.0, or if you have read the JSS paper,
+More, generally, see \link{Out}, \link{Opn} and \link{Ldk} for documentation on these classes.
+And Momocs' vignette for more detailed informations on the Momocs' "architecture".
+
+Finally, note that if you used Momocs before version <0.9, and/or if you have read the JSS paper,
 you are probably looking for \link{Out}.
 
-More, generally, see \link{Opn} and \link{Out} for documentation on these classes.
+You can access all the methods available for Coo objects with \code{methods(class=Coo)}.
+Among them, some are not individually documented but you will find an exhaustive list
+below, as well as in individual  Momocs' vignettes.
+}
+\examples{
+# to see all methods for Coo objects.
+methods(class="Coo")
+# Let's take an Out example. But all methods shown here
+# work on Ldk (try data(wings) ) and on Opn (try data(olea))
+data(bot)
+# Primarily a "Coo" objects, but also an "Out"
+class(bot)
+panel(bot)
+stack(bot)
+\dontrun{
+plot(bot)
+}
+# Getters (you can also use it to set data)
+bot[1] # equivalent to bot[[1]]
+# access the different components
+# $coo coordinates
+bot$coo
+# $fac grouping factors
+bot$fac
+# table
+table(bot$fac)
+# an internal view of an Out object
+str(bot)
+# subsetting
+w <- subset(bot, type=="whisky") # if you dont like beer
+b <- subset(bot, type=="beer")   # if you don't like whisky
+w # an example of Momocs:::print.Out
+b # same thing for beers
+combine(b, w) # if, eventually, you want to mix them
+length(bot) # the number of shapes
+names(bot) # access all individual names
+bot2 <- bot
+names(bot2) <- paste0("newnames", 1:length(bot2)) # define new names
 }
 \keyword{Coo}
 

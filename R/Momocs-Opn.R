@@ -211,7 +211,6 @@ nqual.Opn <-
 #'
 #' @seealso \link{Coe}, \link{OutCoe}
 #' @keywords OpnCoe
-#' @aliases OpnCoe
 #' @export
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
                    method=character(),

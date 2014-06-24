@@ -9,9 +9,10 @@ Coe(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coe} class is a super class for \link{OutCoe} and \link{OpnCoe} classes,
-matrices of coefficients, along with other informations, obtained with
-morphometrics methods on \code{\link{Out}} and \code{\link{Opn}} objects.
+\code{Coe} class is a "super class" for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
+matrices of coefficients (in their \code{$coe} slot), along with other informations,
+(e.g. an inherited \code{$fac}) obtained with morphometrics methods on
+\link{Out}, \link{Opn} and \link{Ldk} objects.
 }
 \details{
 It allows to recycle most of the methods, since both of them apply on
@@ -19,7 +20,17 @@ matrices of coefficients. In other words, \code{OutCoe} and \code{OpnCoe}
 classes are all, primarily, \code{Coe} objects on which we define generic
 \emph{and} specific methods.
 
-More, generally, see \link{Opn} and \link{Out} for documentation on these classes.
+More, generally, see \link{OutCoe}, \link{OpnCoe} and \link{LdkCoe}
+for documentation on these classes.
 }
+\keyword{#}
 \keyword{Coe}
+\keyword{Coo}
+\keyword{all}
+\keyword{for}
+\keyword{methods}
+\keyword{methods(class="Coe")}
+\keyword{objects.}
+\keyword{see}
+\keyword{to}
 

@@ -59,7 +59,7 @@ combine <- function(...){UseMethod("combine")}
 #' @export
 combine.Out <- function(...){
   args <- list(...)
-  Out     <- Out(do.call( c, lapply( args, c )))
+  Out     <- Out(do.call( c, lapply(args, function(x) c(x$coo) )))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
   if (any(lapply(args, function(x) length(x$ldk))!=0)){
     Out$ldk <- do.call("rbind", lapply(args, function(x) x$ldk))}
@@ -457,7 +457,6 @@ hpow.Out <-
 #'
 #' @seealso \link{Coe}, \link{OpnCoe}
 #' @keywords OutCoe
-#' @aliases OutCoe
 #' @export
 OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to OutCoe")

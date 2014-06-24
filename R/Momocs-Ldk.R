@@ -27,7 +27,7 @@
 #'
 #' @seealso \link{Coo}, \link{Out}, link{Opn}.
 #' @keywords Ldk
-#' @aliases Ldk Ldk.default Ldk.Ldk Ldk.list
+#' @aliases Ldk Ldk.default Ldk.Ldk Ldk.list LdkCoe
 #' @export
 Ldk <- function(x, links=NULL, fac=data.frame()){UseMethod("Ldk")}
 

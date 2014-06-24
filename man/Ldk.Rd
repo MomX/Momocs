@@ -4,6 +4,7 @@
 \alias{Ldk.Ldk}
 \alias{Ldk.default}
 \alias{Ldk.list}
+\alias{LdkCoe}
 \title{Builds an Ldk object}
 \usage{
 Ldk(x, links = NULL, fac = data.frame())
