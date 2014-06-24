@@ -1,34 +1,31 @@
-##### coo-shapedescriptors
-# scalars used in shape description
+##### Global shape descriptors (scalars mainly) used in traditional morphometrics
 
-#' Calculates the area
+#' Calculates the area of a shape
 #' 
-#' Calculates the area for a polygon.
-#' @aliases coo.area
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' Calculates the area for a shape using \link{area.poly} in gpc package.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric}, the area.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.area(bot[1])
+#' # for the distribution of the area of the bottles dataset
 #' hist(sapply(bot$coo, coo.area), breaks=10)
 #' @export
 coo.area <- function(coo){
- # coo <- coo.check(coo)
+  # coo <- coo.check(coo)
   coo <- coo.close(coo)
-#   nr <- nrow(coo)-1
-#   y <- x <- numeric(nr)
-#   for (i in 1:nr){
-#     x[i] <- coo[i, 1] * coo[i+1, 2]
-#     y[i] <- coo[i+1 , 1] * coo[i, 2]
-#   }
-#   area <- (0.5 * (sum(x) - sum(y)))
-#   return(abs(area))}
+  #   nr <- nrow(coo)-1
+  #   y <- x <- numeric(nr)
+  #   for (i in 1:nr){
+  #     x[i] <- coo[i, 1] * coo[i+1, 2]
+  #     y[i] <- coo[i+1 , 1] * coo[i, 2]
+  #   }
+  #   area <- (0.5 * (sum(x) - sum(y)))
+  #   return(abs(area))}
   area.poly(as(coo, "gpc.poly"))}
 
-
-# g. angle ----------------------------------------------------------------------
-#' Returns the tangent angle along the perimeter
+#' Calculates the tangent angle along the perimeter of a shape
 #' 
 #' Calculated using complex numbers and returned in radians
 #' minus the first one (modulo 2*pi).
@@ -52,14 +49,14 @@ coo.tangle <- function(coo){
   phi    <- (tet1-tet0-t1)%%(2*pi)
   return(phi)}
 
-#' The angle formed by three points.
+#' Calculate the angle formed by three (x; y) coordinates
 #' 
 #' Returns the angle (in radians) defined by a triplet of points
-# either signed ("atan2") or not ("acos").
-#' @param m a 3x2 \code{matrix} of 3 points (rows) and \eqn{(x; y)} coordinates
+#' either signed ("atan2") or not ("acos").
+#' @param m a 3x2 \code{matrix} of 3 points (rows) and (x; y) coordinates
 #' @param method one of "atan2" or "acos" for a signed or not angle.
 #' @return \code{numeric} the angle in radians.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 64)
@@ -76,14 +73,14 @@ coo.theta3 <- function(m, method=c("atan2", "acos")[1]){
   if (method=="acos") {
     return(acos(sum(a*b)/(sqrt(sum(a*a)) * sqrt(sum(b*b)))))}}
 
-#' The angle of every edge of a shape
+#' Calculates the angle of every edge of a shape
 #' 
 #' Returns the angle (in radians) of every edge of a shape,
 # either signed ("atan2") or not ("acos"). A wrapper for \link{coo.theta3}
-#' @param coo a \code{matrix} or a list of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} or a list of (x; y) coordinates.
 #' @param method one of "atan2" or "acos" for a signed or not angle.
 #' @return \code{numeric} the angles in radians for every edge.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 64)
@@ -98,16 +95,14 @@ coo.theta.pts <- function(coo, method=c("atan2", "acos")[1]){
     theta[i] <- coo.theta3(coo[i:(i+2),], method=method)}
   return(theta)}
 
-# d. Scalar shape descriptors used in traditional morphometrics -------------------
-
 #' Calculates the rectilinearity of a shape
 #' 
-#' As proposed by Zunic and Rosin (see below). I do not 100% guarantee the code.
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' As proposed by Zunic and Rosin (see below). May need some testing/review.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the rectilinearity
 #' @note due to the laborious nature of the algorithm (in nb.pts^2), 
 #' and of its implementation, it may be very long to compute.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @source Zunic J, Rosin PL. 2003. Rectilinearity measurements for polygons. 
 #' IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 #' @examples
@@ -162,12 +157,12 @@ coo.rectilinearity <- function(coo) {
 #' Calculates the Haralick's circularity of a shape
 #' 
 #' Returns Haralick's circularity which is less sensible
-#' to digitalization noise than coo.circularity. See ...#todo
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' to digitalization noise than coo.circularity.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the Haralick's circularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.circularity.haralick(bot[1])
@@ -178,12 +173,12 @@ coo.circularity.haralick <- function(coo) {
 
 #' Calculates the circularity of a shape
 #' 
-#' Returns the "circularity measure". Also called compactness
-# and shape factor.
+#' Returns the "circularity measure". Also called "compactness"
+#' and "shape factor" sometimes.
 #' @aliases coo.compactness coo.shapefactor
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the circularity.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.circularity(bot[1])
@@ -194,12 +189,12 @@ coo.circularity <- function(coo) {
 #' Calculates the "normalized" circularity of a shape
 #' 
 #' Returns the "circularity", also called compactness
-# and shape factor, but normalized to the unit circle.
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' and shape factor, but normalized to the unit circle.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the circularity normalized to the unit circle.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.circularity.norm(bot[1])
@@ -207,20 +202,15 @@ coo.circularity <- function(coo) {
 coo.circularity.norm <- function(coo) {
   return(coo.perim(coo)^2 / (coo.area(coo)*4*pi))}
 
-# scale dependent... #todo
-# coo.fracdim <- function(coo){
-#   return((2*log(coo.perim(coo))) / log(coo.area(coo)))}
-#coo. <- function(coo){UseMethod("coo.")}
-
-
-#' Returns the eccentricity (eigenvalues) of a shape
+#' Calculates the eccentricity (using eigenvalues) of a shape
 #' 
-#' Calculated using a ratio of the eigen values (inertia axis)
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' Calculated using a ratio of the eigen values (inertia axes oof coordinates.)
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the eccentricity (eigenvalues)
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @seealso \link{coo.eccentricity.boundingbox}
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.eccentricity.eigen(bot[1])
@@ -233,11 +223,12 @@ coo.eccentricity.eigen <- function(coo){
 #' Calculates the eccentricity (bounding box) of a shape
 #' 
 #' Calculated using the width / length ratio. See \link{coo.lw}
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the eccentricity (boundingbox)
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @seealso \link{coo.eccentricity.eigen}
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.eccentricity.boundingbox(bot[1])
@@ -249,11 +240,11 @@ coo.eccentricity.boundingbox <- function(coo){
 
 #' Calculates the elongation of a shape
 #' 
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the circularity normalized to the unit circle.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.elongation(bot[1])
@@ -265,11 +256,11 @@ coo.elongation <- function(coo){
 
 #' Calculates the rectangularity of a shape
 #' 
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the rectangularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.rectangularity(bot[1])
@@ -281,10 +272,11 @@ coo.rectangularity <- function(coo){
 
 #' Calculates the convex hull of a shape
 #' 
-#' Returns the ids of points that define the convex hull of a shape.
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' Returns the ids of points that define the convex hull of a shape. A simple wrapper
+#' around \link{chull}, mainly used in graphical functions.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return a \code{matrix} of ids defining the convex hull of the shape.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(hearts)
 #' h <- coo.sample(hearts[4], 32)
@@ -299,11 +291,11 @@ coo.chull <- function(coo){
 #' Calculates the convexity of a shape
 #' 
 #' Calculated using a ratio of the eigen values (inertia axis)
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the convexity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.convexity(bot[1])
@@ -315,11 +307,11 @@ coo.convexity <- function(coo){
 #' Calculates the solidity of a shape
 #' 
 #' Returns the ids of points that define the convex hull of a shape.
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the solidity of a shape.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords coo_descriptors
+#' @keywords Global shape descriptors
 #' @examples
 #' data(bot)
 #' coo.solidity(bot[1])
@@ -328,7 +320,7 @@ coo.solidity <- function(coo){
   coo <- coo.check(coo)
   return(coo.area(coo)/coo.area(coo.chull(coo)))}
 
-#' Calculate area overlap between two shapes
+#' Calculate the area overlap between two shapes
 #' 
 #' Simply calculates (area(coo1) + area(coo2) - area(union(coo1, coo2)))
 #' 
@@ -350,7 +342,7 @@ coo.overlap <- function(coo1, coo2){
   ov <- area.poly(p1) + area.poly(p2) - area.poly(p0)
   return(ov)}
 
-#' Calculate the union between two shapes
+#' Calculate the area union between two shapes
 #' 
 #' If the two shapes overlaps returns the shape of their union. If not, returns NULL.
 #' 
@@ -409,5 +401,4 @@ coo.symmetry <- function(coo, order.max=12){
     sd[i] <- sd(ov.i)
   }
   sd[1] <- 0
-  return(list(ov=ov, sd=sd, sym=sym))
-}
+  return(list(ov=ov, sd=sd, sym=sym))}
