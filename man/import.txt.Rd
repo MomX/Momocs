@@ -12,12 +12,20 @@ import.txt(txt.list, ...)
 }
 \value{
 a list of matrix(ces) of (x; y) coordinates that can be passed to
-Out, Opn, Ldk, etc.
+\link{Out}, \link{Opn} and \link{Ldk}.
 }
 \description{
-A wrapper around read.table. May be used to import outline/landmark coordinates
-By default it assumes that the columns are not named in the .txt files. You can
-tune this using the '...' argument.
+A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
+}
+\details{
+By default, it works with the default arguments of \link{read.table}, e.g. assumes that the
+columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
+Define the \link{read.table} arguments that allow to import a single file, and then
+pass them to this function.
+}
+\seealso{
+\link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+See also Momocs' vignettes for data import.
 }
 \keyword{import}
 

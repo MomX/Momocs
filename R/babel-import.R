@@ -1,19 +1,23 @@
-# Functions and utilities to import data in Momocs, notably from raw images,
-# and to ease the ahndling of these data (define landmarks, outlines, etc.)
+# Functions and utilities to import data in Momocs, particularly from raw images,
 
 #' Import coordinates from a .txt file
 #' 
-#' A wrapper around read.table. May be used to import outline/landmark coordinates
-#' By default it assumes that the columns are not named in the .txt files. You can
-#' tune this using the '...' argument.
+#' A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
+#' 
+#' By default, it works with the default arguments of \link{read.table}, e.g. assumes that the
+#' columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
+#' Define the \link{read.table} arguments that allow to import a single file, and then
+#' pass them to this function.
 #' @param txt.list a vector of paths corresponding to the .txt files to import
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
-#' Out, Opn, Ldk, etc.
+#' \link{Out}, \link{Opn} and \link{Ldk}.
+#' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+#' See also Momocs' vignettes for data import.
 #' @keywords import
 #' @export
 import.txt <- function(txt.list, ...){
-  cat("Extracting", length(txt.list), "..txt coordinates...\n")
+  cat(" * Extracting", length(txt.list), "..txt coordinates...\n")
   if (length(txt.list) > 10) {
     pb <- txtProgressBar(1, length(txt.list))
     t <- TRUE } else {t <- FALSE}
@@ -26,25 +30,34 @@ import.txt <- function(txt.list, ...){
   names(res) <- substr(txt.list, start=1, stop=nchar(txt.list)-4)
   return(res)}
 
-#' Extract outlines from an image mask
+#' Extract outlines coordinates from an image silhouette
 #' 
-#' Provided with an image mask (black/1 pixels over a white/0 background), 
-#' and with the coordinates of a point within the shape, returns the (x; y)
-#' coordinates of the outline.
-#' @param img a matrix that corresponds to an binary image mask
+#' Provided with an image "mask" (i.e. black pixels on a white background),
+#' and a point form where to start the algorithm, returns the (x; y) coordinates of its outline.
+#' 
+#' Used internally by \link{import.jpg1} but may be useful for other purposes.
+#' @param img a matrix of a binary image mask
 #' @param x numeric the (x; y) coordinates of a starting point within the shape.
-#' @return a matrix, the (x; y) coordinates of the outline points.
+#' @return a matrix the (x; y) coordinates of the outline points.
+#' @references
+#' \itemize{
+#' \item The original algorithm is due to: Pavlidis, T. (1982). \emph{Algorithms 
+#' for graphics and image processing}. Computer science press.
+#' \item is detailed in: Rohlf, F. J. (1990). An overview of image processing and 
+#' analysis techniques for morphometrics. In \emph{Proceedings of the Michigan Morphometrics Workshop}. Special Publication No. 2 (pp. 47-60). University of Michigan Museum of Zoology: Ann Arbor.
+#' \item and translated in R by: Claude, J. (2008). \emph{Morphometrics with R}. (p. 316). Springer.
+#' }
+#' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+#' See also Momocs' vignettes for data import.
 #' @keywords import
 #' @export
 import.Conte <- function (img, x){ 
   while (abs(img[x[1], x[2]] - img[x[1] - 1, x[2]]) < 0.1) {
     x[1] <- x[1] + 1
   }
-
-#   while (abs(img[x[1], x[2]] - img[x[1], x[2]-1]) < 0.1) {
-#     x[2] <- x[2] -1
-#   }
-  
+  #   while (abs(img[x[1], x[2]] - img[x[1], x[2]-1]) < 0.1) {
+  #     x[2] <- x[2] -1
+  #   }
   a <- 1
   M <- matrix(c(0, -1, -1, -1, 0, 1, 1, 1, 1, 1, 0, -1, -1, -1, 0, 1), 
               nrow=2, ncol=8, byrow = TRUE)
@@ -91,27 +104,35 @@ import.Conte <- function (img, x){
 #' Extract outline coordinates from a single .jpg file
 #' 
 #' Used to import outline coordinates from .jpg files. This function is used for
-#' single images and is the core function of \link{import.jpg}
-#' @param jpg.path a vector of paths corresponding to the .jpg files to import
+#' single images and is wrapped by \link{import.jpg}. It relies itself on \link{import.Conte}
+#' @param jpg.path vector of paths corresponding to the .jpg files to import, such as
+#' those obtained with \link{list.files}.
 #' @param auto.notcentered logical if TRUE random locations will be used until
-#' one of them is (assumed) to be within the shape (because of a black pixel);
+#' one of them is (assumed) to be within the shape (because it corresponds to a black pixel);
 #' if FALSE a \link{locator} will be called, and you will have to click on a 
 #' point within the shape.
 #' @param threshold the threshold value use to binarize the images. Above, pixels
 #' are turned to 1, below to 0.
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
-#' @details jpegs can be provided
-#' either as RVB or as 8-bit greylevels or monochrome. The function binarizes
-#' pixels values using the 'threshold' argument. It will try to start apply
-#' the \link{import.Conte} algortih of outline extraction from the center of
-#' the image and 'loinking' downwards for the first black -> white 'frontier' in
-#' the pixels. This point will be the first of the outlines and it may be useful
+#' @details jpegs can be provided either as RVB or as 8-bit greylevels or monochrome.
+#' The function binarizes pixels values using the 'threshold' argument. It will try to start to
+#' apply the \link{import.Conte} algorithm from the center of
+#' the image and 'looking' downwards for the first black/white 'frontier' in
+#' the pixels. This point will be the first of the outlines. The latter may be useful
 #' if you align manually the images and if you want to retain this information
-#' in the consequent morphometric analyses. If the point at the center of the 
-#' image is not within the shape, ie is "white" you have two choices defined by
+#' in the consequent morphometric analyses.
+#' 
+#' If the point at the center of the 
+#' image is not within the shape, i.e. is "white" you have two choices defined by
 #' the 'auto.notcentered' argument. If it's TRUE, some random starting points
 #' will be tried until on of them is "black" and within the shape; if FALSE
 #' you will be asked to click on a point within the shape.
+#' 
+#' If the images are not in your working directory, \link{list.files} must be
+#' called with the argument "full.names=TRUE".
+#' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+#' See also Momocs' vignettes for data import.
+#' @keywords import
 #' @return a matrix of (x; y) coordinates that can be passed to Out
 #' @export
 import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
@@ -137,8 +158,6 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
   out <- import.Conte(img, x)
   return(out)}
 
-#import.jpg.multi  #todo
-
 #' Extract outline coordinates from multiple .jpg files
 #' 
 #' This function is used to import outline coordinates and is built around 
@@ -151,11 +170,15 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
 #' @param threshold the threshold value use to binarize the images. Above, pixels
 #' are turned to 1, below to 0.
 #' @param verbose whether to print which file is being treated. Useful to detect problems.
-#' @details see \link{import.jpg1} and \link{import.Conte}.
-#' @return a list of matrices of (x; y) coordinates that can be passed to Out
+#' @details see \link{import.jpg1} for important informations about how the outlines are extracted, 
+#' and \link{import.Conte} for the algorithm itself.
+#' @keywords import
+#' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+#' See also Momocs' vignettes for data import.
+#' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 #' @export
 import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose=TRUE) {
-  cat("Extracting", length(jpg.paths), ".jpg outlines...\n")
+  cat(" * Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE } else {t <- FALSE}
@@ -170,8 +193,8 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
     }
   }
     names(res) <- .trim.path(jpg.paths)
+    cat(" * Done.")
   return(res)}
-
 
 # # Manipulate raw data inside R--------------------------------------------------
 # splines <- function(coo, method="natural", deriv=2){

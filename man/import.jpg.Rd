@@ -20,13 +20,19 @@ are turned to 1, below to 0.}
 \item{verbose}{whether to print which file is being treated. Useful to detect problems.}
 }
 \value{
-a list of matrices of (x; y) coordinates that can be passed to Out
+a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 }
 \description{
 This function is used to import outline coordinates and is built around
 \link{import.jpg1}
 }
 \details{
-see \link{import.jpg1} and \link{import.Conte}.
+see \link{import.jpg1} for important informations about how the outlines are extracted,
+and \link{import.Conte} for the algorithm itself.
 }
+\seealso{
+\link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+See also Momocs' vignettes for data import.
+}
+\keyword{import}
 

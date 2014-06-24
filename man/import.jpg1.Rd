@@ -6,10 +6,11 @@
 import.jpg1(jpg.path, auto.notcentered = FALSE, threshold = 0.5)
 }
 \arguments{
-\item{jpg.path}{a vector of paths corresponding to the .jpg files to import}
+\item{jpg.path}{vector of paths corresponding to the .jpg files to import, such as
+those obtained with \link{list.files}.}
 
 \item{auto.notcentered}{logical if TRUE random locations will be used until
-one of them is (assumed) to be within the shape (because of a black pixel);
+one of them is (assumed) to be within the shape (because it corresponds to a black pixel);
 if FALSE a \link{locator} will be called, and you will have to click on a
 point within the shape.}
 
@@ -23,20 +24,29 @@ a matrix of (x; y) coordinates that can be passed to Out
 }
 \description{
 Used to import outline coordinates from .jpg files. This function is used for
-single images and is the core function of \link{import.jpg}
+single images and is wrapped by \link{import.jpg}. It relies itself on \link{import.Conte}
 }
 \details{
-jpegs can be provided
-either as RVB or as 8-bit greylevels or monochrome. The function binarizes
-pixels values using the 'threshold' argument. It will try to start apply
-the \link{import.Conte} algortih of outline extraction from the center of
-the image and 'loinking' downwards for the first black -> white 'frontier' in
-the pixels. This point will be the first of the outlines and it may be useful
+jpegs can be provided either as RVB or as 8-bit greylevels or monochrome.
+The function binarizes pixels values using the 'threshold' argument. It will try to start to
+apply the \link{import.Conte} algorithm from the center of
+the image and 'looking' downwards for the first black/white 'frontier' in
+the pixels. This point will be the first of the outlines. The latter may be useful
 if you align manually the images and if you want to retain this information
-in the consequent morphometric analyses. If the point at the center of the
-image is not within the shape, ie is "white" you have two choices defined by
+in the consequent morphometric analyses.
+
+If the point at the center of the
+image is not within the shape, i.e. is "white" you have two choices defined by
 the 'auto.notcentered' argument. If it's TRUE, some random starting points
 will be tried until on of them is "black" and within the shape; if FALSE
 you will be asked to click on a point within the shape.
+
+If the images are not in your working directory, \link{list.files} must be
+called with the argument "full.names=TRUE".
 }
+\seealso{
+\link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+See also Momocs' vignettes for data import.
+}
+\keyword{import}
 
