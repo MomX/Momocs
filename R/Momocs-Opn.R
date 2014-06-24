@@ -14,17 +14,11 @@
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
 #' @return an \code{Opn} object
-#' @details These methods can be applied on \code{Opn} objects:
-#' \enumerate{
-#' \item Handling: \code{subset, coo.} family;
-#' \item Calibration : \code{nqual, nquant, npow};
-#' \item Graphics: \code{plot, stack, panel};
-#' \item Morpho: \code{rawPolynomials, orthoPolynomials}.
-#' }
-#'
-#' @seealso \link{Coo}, \link{Out}
+#' @seealso \link{Coo}, \link{Out}, link{Ldk}.
 #' @keywords Opn
 #' @aliases Opn
+#' @examples
+#' methods(class=Opn)
 #' @export
 Opn <- function(x, ldk=NULL, fac=data.frame()){UseMethod("Opn")}
 
@@ -203,12 +197,6 @@ nqual.Opn <-
 #' @param mod an R \link{lm} object, used to reconstruct shapes
 #' @param r2 numeric, the r-squared from every model
 #' @return an \code{OpnCoe} object
-#' @details These methods can be applied on \code{Opn} objects:
-#' \enumerate{
-#' \item Graphics: \code{hist, boxplot};
-#' \item Multivariate analyses: \code{pca, etc.}.
-#' }
-#'
 #' @seealso \link{Coe}, \link{OutCoe}
 #' @keywords OpnCoe
 #' @export

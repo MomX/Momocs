@@ -31,13 +31,9 @@ and specific methods (e.g. todo-Procrustes can be applied.
 \details{
 All the shapes in x must have the same number of landmarks. If you are
 trying to make an Ldk object from an Out or an Opn object, try \link{coo.sample}.
-
-These methods can be applied on \code{Ldk} objects:
-\enumerate{
-\item Handling: \code{subset, coo.} family;
-\item Graphics: \code{plot, stack, panel};
-\item Morpho: todo
 }
+\examples{
+methods(class=Ldk)
 }
 \seealso{
 \link{Coo}, \link{Out}, link{Opn}.

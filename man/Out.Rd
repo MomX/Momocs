@@ -23,17 +23,11 @@ on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. \link{eFourier} can be applied.
  \code{Out} objects are primarily \code{\link{Coo}} objects.
 }
-\details{
-These methods can be applied on \code{Out} objects:
-\enumerate{
-\item Handling: \code{subset, coo.} family;
-\item Graphics: \code{plot, stack, panel};
-\item Calibration : \code{hqual, hquant, hpow};
-\item Morpho: \code{eFourier, tFourier, tFourier, Ptolemy}.
-}
+\examples{
+methods(class=Out)
 }
 \seealso{
-\link{Coo}, \link{Opn}
+\link{Coo}, \link{Opn}, link{Ldk}.
 }
 \keyword{Out}
 

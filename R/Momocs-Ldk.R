@@ -18,16 +18,11 @@
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
 #' @return an \code{Ldk} object
-#' @details These methods can be applied on \code{Ldk} objects:
-#' \enumerate{
-#' \item Handling: \code{subset, coo.} family;
-#' \item Graphics: \code{plot, stack, panel};
-#' \item Morpho: todo
-#' }
-#'
 #' @seealso \link{Coo}, \link{Out}, link{Opn}.
 #' @keywords Ldk
 #' @aliases Ldk Ldk.default Ldk.Ldk Ldk.list LdkCoe
+#' @examples
+#' methods(class=Ldk)
 #' @export
 Ldk <- function(x, links=NULL, fac=data.frame()){UseMethod("Ldk")}
 

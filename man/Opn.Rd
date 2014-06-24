@@ -23,17 +23,11 @@ on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. \link{rawPolynomials} can be applied.
  \code{Opn} objects are primarily \code{\link{Coo}} objects.
 }
-\details{
-These methods can be applied on \code{Opn} objects:
-\enumerate{
-\item Handling: \code{subset, coo.} family;
-\item Calibration : \code{nqual, nquant, npow};
-\item Graphics: \code{plot, stack, panel};
-\item Morpho: \code{rawPolynomials, orthoPolynomials}.
-}
+\examples{
+methods(class=Opn)
 }
 \seealso{
-\link{Coo}, \link{Out}
+\link{Coo}, \link{Out}, link{Ldk}.
 }
 \keyword{Opn}
 

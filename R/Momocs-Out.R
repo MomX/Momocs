@@ -13,17 +13,11 @@
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
 #' @return an \code{Out} object
-#' @details These methods can be applied on \code{Out} objects:
-#' \enumerate{
-#' \item Handling: \code{subset, coo.} family;
-#' \item Graphics: \code{plot, stack, panel};
-#' \item Calibration : \code{hqual, hquant, hpow};
-#' \item Morpho: \code{eFourier, tFourier, tFourier, Ptolemy}.
-#' }
-#'
-#' @seealso \link{Coo}, \link{Opn}
+#' @seealso \link{Coo}, \link{Opn}, link{Ldk}.
 #' @keywords Out
 #' @aliases Out
+#' @examples
+#' methods(class=Out)
 #' @export
 Out <- function(x, ldk=list(), fac=data.frame){UseMethod("Out")}
 

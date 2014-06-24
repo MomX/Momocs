@@ -33,13 +33,6 @@ on which generic methods such as plotting methods (e.g. \link{boxplot})
 and specific methods can be applied.
  \code{OpnCoe} objects are primarily \code{\link{Coe}} objects.
 }
-\details{
-These methods can be applied on \code{Opn} objects:
-\enumerate{
-\item Graphics: \code{hist, boxplot};
-\item Multivariate analyses: \code{pca, etc.}.
-}
-}
 \seealso{
 \link{Coe}, \link{OutCoe}
 }
