@@ -41,8 +41,8 @@ the 'auto.notcentered' argument. If it's TRUE, some random starting points
 will be tried until on of them is "black" and within the shape; if FALSE
 you will be asked to click on a point within the shape.
 
-If the images are not in your working directory, \link{list.files} must be
-called with the argument "full.names=TRUE".
+Finally, remember that ff the images are not in your working directory,
+\link{list.files} must be called with the argument full.names=TRUE.
 }
 \seealso{
 \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.

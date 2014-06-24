@@ -128,8 +128,8 @@ import.Conte <- function (img, x){
 #' will be tried until on of them is "black" and within the shape; if FALSE
 #' you will be asked to click on a point within the shape.
 #' 
-#' If the images are not in your working directory, \link{list.files} must be
-#' called with the argument "full.names=TRUE".
+#' Finally, remember that ff the images are not in your working directory,
+#' \link{list.files} must be called with the argument full.names=TRUE.
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
 #' @keywords import
@@ -196,7 +196,67 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
     cat(" * Done.")
   return(res)}
 
-# # Manipulate raw data inside R--------------------------------------------------
+#' Extract structure from filenames
+#' 
+#' If filenames are consistently named with the same character serating factors,
+#' and with every individual including its belonging levels, e.g.: 
+#' \itemize{
+#' \item \code{001_speciesI_siteA_ind1_dorsalview}
+#' \item \code{002_speciesI_siteA_ind2_lateralview} } etc., this function returns a \link{data.frame}
+#' from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
+#' 
+#' The number of groups must be consistent accross filenames.
+#' @param lf list of filenames, as characters, typically such as
+#' those obtained with \link{list.files}. Alternatively, a path to a folder
+#' containing the files. Actually, if lf is of length 1 (a single character),
+#' the function assumes it is a path and do a \link{list.files} on it.
+#' @param names the names of the groups, as a vector of characters which length corresponds
+#' to the number of groups.
+#' @param split character, the spliting factor used for the file names.
+#' @param trim.extension logical. Whether to remove the last for characters in
+#' filenames, typically their extension, e.g. ".jpg".
+#' @return data.frame with, for every individual, the corresponding level
+#' for every group.
+#' @note This is, to my view, a good practice to "store" the grouoing structure
+#' in filenames, but it is of course not mandatory.
+#' 
+#' Note also that you can: i) do a \link{import.jpg} and save is a list, say "foo";
+#' then ii) pass "names(foo)" to lf.structure. See Momocs' vignette for an illustration.
+#' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+#' See also Momocs' vignettes for data import.
+#' @keywords import
+#' @export
+lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE){
+  if(length(lf)==1) {
+    lf <- list.files(lf, full.names=FALSE)}
+  if (trim.extension) {
+    lf <- strtrim(lf, nchar(lf)-4)}
+  lf0 <- strsplit(lf, split=split)
+  # we check that all files have the same name structure
+  lfl <- sapply(lf0, length)
+  nc <- unique(lfl)
+  ### todo. which ones ?
+  if (length(nc) !=1 ) {
+    most.ab <- as.numeric(names(sort(table(lfl), decreasing=TRUE)[1]))
+    lfl.pb  <- which(lfl != most.ab)
+    cat(" * Most of the filenames have", most.ab, "groups.\n",
+        " * Maybe you should inspect these file(name)s:\n")
+    cat(lf[lfl.pb], sep="\n")
+    stop("The files do not have the same filename structure.")}
+  fac <- as.data.frame(matrix(NA, nrow=length(lf), ncol=nc)) # dirty
+  if (!missing(names)) {
+    if (length(names) != nc) {
+      stop(" * The number of 'names' is different from the number of groups.")}
+    names(fac) <- names}
+  # nice rownames
+  rownames(fac) <- lf
+  for (i in 1:nc) {
+    # really ugly way to fill the df
+    fac[, i] <- factor(sapply(lf0, function(x) x[i]))} 
+  return(fac)}
+
+# Fridge -------
+
 # splines <- function(coo, method="natural", deriv=2){
 #   coo <- coo.check(coo)
 #   z <- coo.perim.cum(coo)
@@ -241,54 +301,3 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
 #     cat(ldk)
 #     spl <- splines2(ldk[1:i,])
 #   }}
-
-# Import utilities --------------------------------------------------------
-
-#' Extract structure from filenames
-#' 
-#' If filenames are consistently named: eg 'speciesI_siteA_ind1_dorsalview', 
-#' returns a data.frame from it that can be passed to Out, Opn, Ldk, objects.
-#' @param lf a list filenames, as characters, typically such as
-#' those obtained with \link{list.files} OR a path to a folder 
-#' containing the files. Actually, if lf is of length 1 (a single character),
-#' the function assumes it is a path and do a \link{list.files}.
-#' @param names the names of the groups.
-#' @param split character, the spliiting factor used for the file names.
-#' @param trim.extension logical. Whether to remove the last for characters in
-#' filenames, typically their extension, eg. ".jpg".
-#' @return data.frame with, for every individual, the corresponding label
-#' for every group.
-#' @details #todo
-#' @keywords import
-#' @examples
-#' data(bot)
-#' coo.area(bot[4])
-#' @export
-lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE){
-  if(length(lf)==1) {
-    lf <- list.files(lf, full.names=FALSE)}
-  if (trim.extension) {
-    lf <- strtrim(lf, nchar(lf)-4)}
-  lf0 <- strsplit(lf, split=split)
-  # we check that all files have the same name structure
-  lfl <- sapply(lf0, length)
-  nc <- unique(lfl)
-  ### todo. which ones ?
-  if (length(nc) !=1 ) {
-    most.ab <- as.numeric(names(sort(table(lfl), decreasing=TRUE)[1]))
-    lfl.pb  <- which(lfl != most.ab)
-    cat("Most of the filenames have", most.ab, "groups.\n",
-        "Maybe you should inspect these file(name)s:\n")
-    cat(lf[lfl.pb], sep="\n")
-    stop("The files do not have the same filename structure.")}
-  fac <- as.data.frame(matrix(NA, nrow=length(lf), ncol=nc)) # dirty
-  if (!missing(names)) {
-    if (length(names) != nc) {
-      stop("The number of 'names' is different from the number of groups.")}
-    names(fac) <- names}
-  # nice rownames
-  rownames(fac) <- lf
-  for (i in 1:nc) {
-    # ugly way to fill the df
-    fac[, i] <- factor(sapply(lf0, function(x) x[i]))} 
-  return(fac)}

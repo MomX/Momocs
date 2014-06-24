@@ -6,32 +6,44 @@
 lf.structure(lf, names = character(), split = "_", trim.extension = FALSE)
 }
 \arguments{
-\item{lf}{a list filenames, as characters, typically such as
-those obtained with \link{list.files} OR a path to a folder
+\item{lf}{list of filenames, as characters, typically such as
+those obtained with \link{list.files}. Alternatively, a path to a folder
 containing the files. Actually, if lf is of length 1 (a single character),
-the function assumes it is a path and do a \link{list.files}.}
+the function assumes it is a path and do a \link{list.files} on it.}
 
-\item{names}{the names of the groups.}
+\item{names}{the names of the groups, as a vector of characters which length corresponds
+to the number of groups.}
 
-\item{split}{character, the spliiting factor used for the file names.}
+\item{split}{character, the spliting factor used for the file names.}
 
 \item{trim.extension}{logical. Whether to remove the last for characters in
-filenames, typically their extension, eg. ".jpg".}
+filenames, typically their extension, e.g. ".jpg".}
 }
 \value{
-data.frame with, for every individual, the corresponding label
+data.frame with, for every individual, the corresponding level
 for every group.
 }
 \description{
-If filenames are consistently named: eg 'speciesI_siteA_ind1_dorsalview',
-returns a data.frame from it that can be passed to Out, Opn, Ldk, objects.
+If filenames are consistently named with the same character serating factors,
+and with every individual including its belonging levels, e.g.:
+\itemize{
+\item \code{001_speciesI_siteA_ind1_dorsalview}
+\item \code{002_speciesI_siteA_ind2_lateralview} } etc., this function returns a \link{data.frame}
+from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
 }
 \details{
-#todo
+The number of groups must be consistent accross filenames.
 }
-\examples{
-data(bot)
-coo.area(bot[4])
+\note{
+This is, to my view, a good practice to "store" the grouoing structure
+in filenames, but it is of course not mandatory.
+
+Note also that you can: i) do a \link{import.jpg} and save is a list, say "foo";
+then ii) pass "names(foo)" to lf.structure. See Momocs' vignette for an illustration.
+}
+\seealso{
+\link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+See also Momocs' vignettes for data import.
 }
 \keyword{import}
 
