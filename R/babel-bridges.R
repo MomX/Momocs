@@ -1,12 +1,13 @@
 ##### Simple bridges between R classes
-#' Converts a list of coordinates to a matrix.
+
+#' Converts a list of coordinates to a matrix of coordinates.
 #' 
-#' \code{l2m} converts a \code{list} with x and y components to a 2-col
-#' \code{matrix} of coordinates.
+#' Converts a \code{list} with x and y components to a two-columns
+#' (colnamed) \code{matrix} of coordinates.
 #' 
 #' @usage l2m(l)
-#' @param l A \code{list} with x and y coordinates as components.
-#' @return Returns a matrix of \eqn{(x; y)}coordinates.
+#' @param l a \code{list} with x and y coordinates as components.
+#' @return \code{matrix} of (x; y) coordinates.
 #' @seealso \link{m2l}.
 #' @keywords Babel
 #' @examples
@@ -21,14 +22,14 @@ l2m  <- function(l) {
   colnames(m) <- c("x", "y")
   return(m)}
 
-#' Convert a matrix of coordinates to a list of coordinates.
+#' Converts a matrix of coordinates to a list of coordinates.
 #' 
-#' \code{m2l} converts a matrix of \eqn{(x; y)}coordinates to a list with
-#' \code{x; y} components.
+#' Converts a matrix of (x; y) coordinates to a list with
+#' x and y components.
 #' 
 #' @usage m2l(m)
-#' @param m A 2-columns \code{matrix} containing x and y coordinates.
-#' @return Returns a \code{list} with \eqn{x; y} components.
+#' @param m a two-columns \code{matrix} of x and y coordinates.
+#' @returna \code{list} with x and y components.
 #' @seealso \link{l2m}.
 #' @keywords Babel
 #' @examples
@@ -40,14 +41,17 @@ l2m  <- function(l) {
 #' @export
 m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
 
-#' Converts a list of coordinates to an array.
+#' Converts a list of coordinates to an array of coordinates
 #' 
-#' \code{l2a} converts a list of \code{k} matrices with n-rows and n-col
-#' matrices to a \code{m x n x k} array.
+#' l2a converts a list of \code{k} matrices with \code{m} rows
+#' and \code{n} columns matrices to a \code{m x n x k} array.
+#' 
+#' May be useful to communicate with other morphometrics packages that use
+#' array of coordinates when handling configurations of landmarks.
 #' 
 #' @usage l2a(l)
-#' @param l A \code{list} of matrices of the same dimension.
-#' @return An array of coordinates.
+#' @param l \code{list} of matrices of the same dimension.
+#' @return an array of coordinates.
 #' @seealso \link{a2l}.
 #' @keywords Babel
 #' @examples
@@ -65,13 +69,17 @@ l2a  <- function(l){
               dimnames=list(1:nr, c("x", "y"), names(l)))
   return(a)}
 
-#' Converts an array of coordinates to a list.
+#' Converts an array of coordinates to a list of matrices
 #' 
-#' \code{a2l} converts an array of coordinates into a list of 2-cols matrices.
+#' Converts a \code{m x n x k} array of coordinates to a list of
+#' \code{k} matrices with \code{m} rows and \code{n} columns matrices.
+#' 
+#' May be useful to communicate with other morphometrics packages that use
+#' array of coordinates when handling configurations of landmarks.
 #' 
 #' @usage a2l(a)
-#' @param a An \code{array} of coordinates.
-#' @return A \code{list} with 2-cols matrices of \eqn{(x; y)} coordinates.
+#' @param a \code{array} of coordinates.
+#' @return \code{list} with 2-cols matrices of (x; y) coordinates.
 #' @seealso \link{l2a}
 #' @keywords Babel
 #' @examples
@@ -82,7 +90,7 @@ l2a  <- function(l){
 #' a
 #' @export
 a2l <- function(a){
-  if (!is.array(a)) stop("An array of dimension 3 must be provided")
+  if (!is.array(a)) stop(" * An array of dimension 3 must be provided")
   k <- dim(a)[3]
   l <- list()
   for (i in 1:k) {l[[i]] <- a[,,i]}
@@ -90,14 +98,15 @@ a2l <- function(a){
 
 #' Converts an array of coordinates to a matrix
 #' 
-#' Converts an array of coordinates into a matrix.
 #' All the individuals (the 3rd dimension of the array) becomes rows, and
-#' columns are (all) x coordinates and (all) y coordinates, so that we have 
-#' x1, x2, ..., xn, y1, y2, ..., yn. Rows and colums are names anyway.
+#' columns are (all the) x coordinates and (all the) y coordinates, so that we have 
+#' x1, x2, ..., xn, y1, y2, ..., yn columns. Rows and colums are named anyway.
 #' 
-#' @param a An \code{array} of coordinates.
-#' @return A matrix (see above)
-#' @seealso \link{m2a} the reverse function
+#' Used in landmarks methods, e.g. for multivariate analysis after a Procrustes alignment.
+#' 
+#' @param a \code{array} of (x; y) coordinates.
+#' @return matrix (see above).
+#' @seealso \link{m2a} the reverse function.
 #' @keywords Babel
 #' @examples
 #' data(wings)
@@ -115,15 +124,17 @@ a2m <- function(a){
     rownames(m) <- dimnames(a)[[3]]}
   return(m)}
 
-#' Converts a "matrix" of coordinates to an array of coordinates
+#' Converts a matrix of coordinates to an array of coordinates
 #' 
 #' Converts a matrix arranged with the individuals (the 3rd dimension of the array) as rows,
 #' and (all) x coordinates and (all) y coordinates as columns, into an array built as follows:
 #' nb.of.landmarks x 2 (x; y) x nb.of.individuals.
 #' 
-#' @param m a matrix (see above)
-#' @return an array (see above)
-#' @seealso \link{a2m} the reverse function
+#' Used in landmarks methods.
+#' 
+#' @param m a matrix (see above).
+#' @return an array (see above).
+#' @seealso \link{a2m} the reverse function.
 #' @keywords Babel
 #' @examples
 #' data(wings)
