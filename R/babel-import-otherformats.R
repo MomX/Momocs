@@ -1,15 +1,16 @@
 
-# Import/Export morphometrics formats ------------------------------------------
+##### Import/Export morphometrics formats
+# More or less experimental so far.
 
 #' Convert (x; y) coordinates to chaincoded coordinates
 #' 
-#' May be useful to convert (x; y) coordinates to chain-coded coordinates.
+#' Useful to convert (x; y) coordinates to chain-coded coordinates.
 #' @param coo (x; y) coordinates passed as a matrix
 #' @seealso \link{chc2pix}
 #' @references Kuhl, F. P., & Giardina, C. R. (1982).
 #' Elliptic Fourier features of a closed contour. 
-#' Computer Graphics and Image Processing, 18(3), 236-258.
-#' @keywords babel
+#' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
+#' @keywords Babel
 #' @examples
 #' data(shapes)
 #' pix2chc(shapes[1])
@@ -18,12 +19,12 @@ pix2chc <- function(coo) {
   if (is.list(coo)) {
     coo <- l2m(coo)}
   if (is.matrix(coo) & ncol(coo)!=2) {
-    stop("A 2 col matrix must be provided")}
+    stop(" * A 2 col matrix must be provided")}
   coo.d <- apply(coo, 2, diff)
   if (!all(coo.d %in% -1:1)) {
-    stop("Matrix must contain only entire pixels indices")}
+    stop(" * Matrix must contain only entire pixels indices")}
   if (any(apply(coo.d, 1, function(x) all(x==rep(0, 2))))) {
-    stop("At least two succesive coordinates don't code for a displacement")}
+    stop(" * At least two succesive coordinates don't code for a displacement")}
   m   <- as.matrix(expand.grid(-1:1, -1:1))[-5,]
   g   <- c(5, 6, 7, 4, 0, 3, 2, 1)
   chc <- g[apply(coo.d, 1, function(x) which(x[1]==m[, 1] & x[2]==m[, 2]))] #dirty
@@ -31,14 +32,14 @@ pix2chc <- function(coo) {
 
 #' Convert chain-coded coordinates to (x; y) coordinates
 #' 
-#' May be useful to convert (prehistoric?) chain-coded coordinates
+#' May be useful to convert chain-coded coordinates
 #' to (x; y) coordinates. The first point is set at the origin.
-#' @param chc chain-coded coordinates
+#' @param chc a vector of chain-coded coordinates
 #' @seealso \link{pix2chc}
 #' @references Kuhl, F. P., & Giardina, C. R. (1982).
 #' Elliptic Fourier features of a closed contour. 
-#' Computer Graphics and Image Processing, 18(3), 236-258.
-#' @keywords babel
+#' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
+#' @keywords Babel
 #' @examples
 #' data(shapes)
 #' x <- pix2chc(shapes[1])
@@ -46,75 +47,21 @@ pix2chc <- function(coo) {
 #' @export
 chc2pix <- function(chc){
   if (!all(chc %in% 0:7)) {
-    stop("chc string must only contain integers between 0 and 7")}
+    stop(" * chc string must only contain integers between 0 and 7")}
   m <- matrix(c(1, 0, 1, 1, 0, 1, -1, 1,
                 -1, 0, -1, -1, 0, -1, 1, -1), ncol=2, byrow=TRUE)
   pix <- apply(m[chc+1,], 2, cumsum)
   return(pix)}
-
-# Coo2chc <- function(Coo, file="chc.chc"){ 
-#   res <- list()
-#   pb <- txtProgressBar(1, Coo@coo.nb)
-#   for (i in 1:Coo@coo.nb){
-#     res[[i]] <- c(Coo@names[i], rep(1, 3), Polygon(list(Coo@coo[[i]]))@area,
-#                   pix2chc(Coo@coo[[i]]), -1, "\n")
-#     setTxtProgressBar(pb, i)}
-#   cat(unlist(res), file=file)
-#   cat(".chc file succesfully written here:", file)}
-# 
-# chc2Coo <- function(chc.path){
-#   chc <- readLines(chc.path)
-#   coo.list <- list()
-#   coo.names <- character()
-#   for (i in seq(along=chc)) {
-#     chc.i <- unlist(strsplit(chc[i], " "))
-#     rm    <- match(chc.i, c("", " ", "-1"), , nomatch=0)
-#     if (any(rm)) {chc.i <- chc.i[rm==0]}
-#     coo.names[i] <- chc.i[1]
-#     st    <- as.numeric(chc.i[2:3])
-#     pix.i <- chc2pix(as.numeric(chc.i[-(1:5)]))
-#     coo.list[[i]] <- coo.trans(pix.i, st[1], st[2])
-#   }
-#   names(coo.list) <- coo.names
-#   return(Coo(coo.list))}
-
-# todo
-# Coe2nef <- function(Coe, file="nef.nef"){
-#   nb.h      <- Coe@nb.h
-#   coo.names <- Coe@names
-#   coo.i   <- 1:length(coo.names)
-#   coo.beg <- (coo.i-1)*(nb.h + 1)+1
-#   coo.end <- coo.beg + nb.h
-#   #nef <- c("#CONST ", constant.coeff, " \n", "#HARMO ", nb.h, " \n")
-#   nef <- character()
-#   for (i in seq(along=coo.names)) {
-#     nef <- append(nef, c(coo.names[i], "\n"))
-#     for (j in 1:nb.h){
-#       coeff.i <- round(as.numeric(Coe@coeff[i, (0:3)*nb.h+j]), 8)
-#       nef     <- append(nef, c(coeff.i, "\n"))}
-#   }
-#   cat(nef, file=file)
-#   cat(".nef file succesfully written here:", file)
-# }
-# 
-# 
-# Coo2morphoJ <- function(arr, file="morphoJ.txt"){
-#   if (file.exists(file=file)) {file.remove(file=file)}
-#   for (i in 1:length(arr)) {
-#     cat(names(arr)[i], ", ",
-#         paste(as.character(t(arr[[i]])), collapse=", "),
-#         "\n",
-#         sep="", file=file, labels=NULL, append=TRUE)}
-# }
 
 #' From .nef to Coe objects
 #' 
 #' Useful to convert .nef files into Coe objects.
 #' It returns a matrix of coefficients that can be passed to \link{Coe}.
 #' @param nef.path the path to the .nef file
-#' @details I'm not very familiar to other morphometric formats.
-#' So if you have troubles importing your datasets, please contact me.
-#' @keywords babel
+#' @note I'm not very familiar to other morphometric formats.
+#' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
+#' please let met know!
+#' @keywords Babel
 #' @export
 nef2Coe <- function(nef.path) {
   # change nef to coe one day
@@ -140,12 +87,13 @@ nef2Coe <- function(nef.path) {
 #' From .tps to Coo objects
 #' 
 #' Useful to convert .tps files into Coo objects.
-#' It returns a list of matrices of coordinates that can be passed to \link{Coo}.
+#' It returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
 #' @param tps.path the path to the .tps file
 #' @param sep the separator between data
-#' @details I'm not very familiar to other morphometric formats.
-#' So if you have troubles importing your datasets, please contact me.
-#' @keywords babel
+#' @note I'm not very familiar to other morphometric formats.
+#' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
+#' please let met know!
+#' @keywords Babel
 #' @export
 tps2Coo <- function(tps.path, sep=" "){
   # we read all lines of the file
@@ -176,16 +124,16 @@ tps2Coo <- function(tps.path, sep=" "){
 
 #' From .nts to Coo objects
 #' 
-#' Useful to convert .nts files into Coo objects. For .nts provided as rows, use
+#' Useful to convert .nts files into \link{Coo} objects. For .nts provided as rows, use
 #' ntsrow2Coo; for .nts provided as columns of coordinates, try ntscol2Coo. It
-#' returns a list of matrices of coordinates that can be passed to \link{Coo}.
+#' returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
 #' @aliases ntscol2Coo ntsrow2Coo
 #' @param nts.path the path to the .nts file
 #' @param sep the separator between data
-#' @details I'm not very familiar to other morphometric formats and these
-#'   functions are (highly) experimental. So if you have troubles importing your
-#'   datasets, please contact me.
-#' @keywords babel
+#' @note I'm not very familiar to other morphometric formats.
+#' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
+#' please let met know!
+#' @keywords Babel
 #' @examples
 #' \dontrun{
 #' # That's how wings dataset was created
