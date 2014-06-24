@@ -1,17 +1,19 @@
-##### coo utilities and Coo methods
+##### Come various coo utility
 # a family of functions that do simple functions on 2d coordinates (further
 # abbreviated as "shape" (either outlines, open outlines or lanfmarks)
 # they can be passed either as two-column matrices colnames ("x" and "y"
 # colnaming is not mandatory) or as a list with $x and $y components.
 # and returns a (named) \code{matrix} of coordinates.
+# Some of them, likely the most used, have also Coo methods.
 
+# deprecate?
 #' Checks "coo" shapes
 #'
 #' A simple utility, used internally, mostly in the coo functions and methods.
 #' Returns a matrix of coordinates, when passed with either a list or a \code{matrix} of coordinates.
 #'
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates or a list.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates or a list.
+#' @return a \code{matrix} of (x; y) coordinates.
 #' @seealso \link{ldk.check}
 #' @keywords coo_utilities
 #' @examples
@@ -23,18 +25,18 @@ coo.check <- function(coo){
   if (is.matrix(coo)) {return(coo)}
   if (is.list(coo))   {
     if (length(coo)==1) return(l2m(coo))}
-  stop(" * A list or a matrix of (x, y) coordinates must be provided.")}
+  stop(" * a list or a matrix of (x; y) coordinates must be provided.")}
 
 #' Checks "ldk" shapes
 #'
-#' A simple utility, used internally, mostly in the Ldk methods,
+#' A simple utility, used internally, mostly by \link{Ldk} methods,
 #' in some graphical functions, and notably in \link{l2a}.
-#' Returns an array of landmarks arranged as (nb.ldk) x (x; y) x (nb.shapes),
+#' Returns an array of landmarks arranged as \code{(nb.ldk) x (x; y) x (nb.shapes)},
 #' when passed with either a list, a matrix or an array of coordinates.
 #' If a list is provided, checks that the number of landmarks is consistent.
 #'
-#' @param ldk a \code{matrix} of \eqn{(x; y)} coordinates, a list, or an array.
-#' @return an \code{array} of \eqn{(x; y)} coordinates.
+#' @param ldk a \code{matrix} of (x; y) coordinates, a list, or an array.
+#' @return an \code{array} of (x; y) coordinates.
 #' @seealso \link{coo.check}
 #' @keywords coo_utilities
 #' @examples
@@ -46,24 +48,21 @@ ldk.check <- function(ldk){
   if (is.array(ldk)){
     if (length(dim(ldk)==3)){ return(ldk)}
     if (length(dim(ldk)==2)){ return(array(ldk, dim=c(nrow(ldk), ncol(ldk), 1)))}
-    stop(" * A matrix an array (dim=3) must be provided.")
+    stop("A matrix an array (dim=3) must be provided.")
   }
   if (is.list(ldk)) {
     l <- sapply(ldk, length)
     if (length(unique(l))==1){return(l2a(ldk))}
-    stop(" * A list of matrices with the same number of coordinates must be provided.")
+    stop("A list of matrices with the same number of coordinates must be provided.")
   }
-  stop(" * A list, a matrix or a dim=3 array must be provided.")}
+  stop("A list, a matrix or a dim=3 array must be provided.")}
 
 #' Centers coordinates
 #'
 #' Returns a shape centered on the origin.
 #' 
-#' @aliases coo.center
-#' @export
-#' @export
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -88,11 +87,9 @@ coo.center.Coo <- function(coo){
 #' dividing coordinates by 'scale', pusing back to the original position.
 #' 
 #' @aliases coo.scale 
-#' @export
-#' @export
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param scale the scaling factor, by default, the centroid size.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -128,11 +125,9 @@ coo.scale.Coo <- function(coo, scale){
 #' dividing coordinates by 'scale', pusing back to the original position.
 #' 
 #' @aliases coo.rotate 
-#' @export
-#' @export
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param theta \code{numeric}the angle (in radians) to rotate shapes.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.rotatecenter}
 #' @keywords coo_utilities
 #' @examples
@@ -160,9 +155,8 @@ coo.rotate.Coo <- function(coo, theta=0){
 #'
 #' Aligns the coordinates along their longer axis using var-cov matrix and eigen values.
 #' 
-#' @aliases coo.align 
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.aligncalliper}, \link{coo.alignxax}
 #' @keywords coo_utilities
 #' @examples
@@ -189,12 +183,10 @@ coo.align.Coo <- function(coo){
 #' Translates the coordinatesby a 'x' and 'y' value
 #' 
 #' @aliases coo.trans 
-#' @export
-#' @export
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param x \code{numeric}translation along the x-axis.
 #' @param y \code{numeric}translation along the y-axis.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -219,9 +211,9 @@ coo.trans.Coo <- function(coo, x=0, y=0){
 #'
 #' Slides the coordinates so that the id1-th point become the first one.
 #' @aliases coo.slide
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param id1 the id of the point that will become the new first point.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(hearts)
@@ -252,9 +244,9 @@ coo.slide.Coo <- function(coo, id1){
 #' Sample n coordinates among existing points
 #' 
 #' @aliases coo.sample 
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to sample.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -281,9 +273,9 @@ coo.sample.Coo <- function(coo, n){
 #' Samples n coordinates with a regular angle.
 #' 
 #' @aliases coo.samplerr 
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n integer, the number of points to sample.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates or an Coo object.
+#' @return a \code{matrix} of (x; y) coordinates or an Coo object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -323,9 +315,9 @@ coo.samplerr.Coo <- function(coo, n){
 #' along the perimeter of the coordinates provided and keeping the first point
 #' 
 #' @aliases coo.interpolate
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to interpolate.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -364,9 +356,9 @@ coo.interpolate.Coo <- function(coo, n){
 #' Smoothes coordinates using a simple moving average.
 #' May be useful to remove digitization noise.
 #' @aliases coo.smooth
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.smoothcurve}
 #' @keywords coo_utilities
 #' @examples
@@ -400,9 +392,9 @@ coo.smooth.Coo <- function(coo, n){
 #' Smoothes coordinates using a simple moving average but let the first and last points unchanged.
 #' May be useful to remove digitization noise.
 #' @aliases coo.smoothcurve
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.smooth}
 #' @keywords coo_utilities
 #' @examples
@@ -435,7 +427,7 @@ coo.smoothcurve.Opn <- function(coo, n){
 #' as the first one.
 #' 
 #' @aliases is.closed
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a boolean.
 #' @seealso \link{coo.close}, \link{coo.unclose}
 #' @keywords coo_utilities
@@ -467,8 +459,8 @@ is.closed.Coo <- function(coo){
 #'
 #' Returns a closed shape from (un)closed shapes. See also \link{coo.unclose}.
 #' 
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.unclose}, \link{is.closed}
 #' @keywords coo_utilities
 #' @examples
@@ -497,9 +489,9 @@ coo.close.Coo <- function(coo){
 #' 
 #' Returns a unclosed shape from (un)closed shapes. See also \link{coo.close}.
 #' 
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo}
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo}
 #'   object.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.close}, \link{is.closed}
 #' @keywords coo_utilities
 #' @examples
@@ -529,12 +521,12 @@ coo.unclose.Coo <- function(coo){
 
 #' Rotates shapes with a custom center
 #'
-#' rotates a shape of "theta" angles (in radians) and with a \eqn{(x; y)} "center".
+#' rotates a shape of "theta" angles (in radians) and with a (x; y) "center".
 #' @aliases coo.rotatecenter
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param theta \code{numeric} the angle (in radians) to rotate shapes.
-#' @param center the \eqn{(x; y)} position of the center
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param center the (x; y) position of the center
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.rotate}
 #' @keywords coo_utilities
 #' @examples
@@ -561,8 +553,8 @@ coo.rotatecenter.Coo <- function(coo, theta, center=c(0, 0)){
 #' An exotic function that distribute the distance between the first and the last points
 #' of unclosed shapes, so that they become closed. May be useful (?) e.g. for t/rfourier methods
 #' where reconstructed shapes may not be closed.
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -589,8 +581,8 @@ coo.force2close <- function(coo){
 #'
 #' Useful when shapes are aligned along the x-axis (e.g. because of a 
 #' bilateral symmetry) #' and when one wants to retain just the upper side. 
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo either a \code{matrix} of (x; y) coordinates.
+#' @return a \code{matrix} of (x; y) coordinates.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -606,8 +598,8 @@ coo.up <- function(coo){
 #'
 #' Useful when shapes are aligned along the x-axis (e.g. because of a 
 #' bilateral symmetry) and when one wants to retain just the lower side. 
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo either a \code{matrix} of (x; y) coordinates.
+#' @return a \code{matrix} of (x; y) coordinates.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -623,8 +615,8 @@ coo.down <- function(coo){
 #' 
 #' Align the longest axis of a shape along the x-axis.
 #' @aliases coo.alignxax
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.align}, \link{coo.aligncalliper}
 #' @keywords coo_utilities
 #' @examples
@@ -652,8 +644,8 @@ coo.alignxax.Coo <- function(coo){
 #' And returns them registered on bookstein coordinates.
 #' See \link{coo.bookstein}.
 #' @aliases coo.aligncalliper
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.align}, \link{coo.alignxax}, \link{coo.calliper}
 #' @keywords coo_utilities
 #' @examples
@@ -682,8 +674,8 @@ coo.aligncalliper.Coo <- function(coo){
 #' Reverses coordinates
 #' 
 #' Returns the reverse suite of coordinates, i.e. change shape's orientation
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo either a \code{matrix} of (x; y) coordinates.
+#' @return a \code{matrix} of (x; y) coordinates.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -699,7 +691,7 @@ coo.rev <- function(coo){
 #' Allows to interactively define a "nb.ldk" number of landarks on a shape.
 #' Used in other facilities to acquire/manipulate data.
 #' @aliases coo.ldk
-#' @param coo a \code{matrix} or a list of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} or a list of (x; y) coordinates.
 #' @param nb.ldk integer, the number of landmarks to define
 #' @return \code{numeric} that corresponds to the closest ids,
 #' on the shape, from cliked points.
@@ -731,10 +723,10 @@ coo.ldk <- function(coo, nb.ldk) {
 #' Registers a new baseline for the shape, with the \code{ldk1}-th
 #' and \code{ldk2}-th points being set on \eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=0)}, respectively.
 #' @aliases coo.bookstein
-#' @param coo either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param ldk1 the id of the first point of the new baseline
 #' @param ldk2 the id of the second point of the new baseline
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.baseline}
 #' @keywords coo_utilities
 #' @examples
@@ -777,12 +769,12 @@ coo.bookstein.Ldk <- function(coo, ldk1, ldk2){
 #' for the \code{ldk1}-th and \code{ldk2}-th points.
 #' By default it returns Bookstein's coordinates.
 #' @aliases coo.baseline
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+#' @param coo a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param ldk1 the id of the first point of the new baseline
 #' @param ldk2 the id of the second point of the new baseline
-#' @param t1 \code{numeric} the \eqn{(x; y)} coordinates of the 1st point of the new baseline
-#' @param t2 \code{numeric} the \eqn{(x; y)} coordinates of the 2nd point of the new baseline
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates or a \link{Coo} object.
+#' @param t1 \code{numeric} the (x; y) coordinates of the 1st point of the new baseline
+#' @param t2 \code{numeric} the (x; y) coordinates of the 2nd point of the new baseline
+#' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
 #' @seealso \link{coo.bookstein}
 #' @keywords coo_utilities
 #' @examples
@@ -835,10 +827,10 @@ coo.baseline.Coo <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
 # a. centroid -------------------------------------------------------------
 #' Returns the position of the centroid
 #'
-#' Returns the \eqn{(x; y)} centroid coordinates of a shape.
+#' Returns the (x; y) centroid coordinates of a shape.
 #' @aliases coo.centpos
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
-#' @return \eqn{(x; y)} coordinates as \code{numeric}.
+#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @return (x; y) coordinates as \code{numeric}.
 #' @keywords coo_utilities
 #' @examples
 #' data(bot)
@@ -862,7 +854,7 @@ coo.centpos.Coo <- function(coo){
 
 #' Calculates the centroid size
 #' @aliases coo.centsize
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric}, the centroid size.
 #' @keywords coo_descriptors
 #' @examples
@@ -878,8 +870,8 @@ coo.centsize <- function(coo){
 #' Returns the distance between everypoints and the centroid
 #' For every point of the shape, returns the (centroid-points) distance.
 #' @aliases coo.centdist
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
-#' @return a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @return a \code{matrix} of (x; y) coordinates.
 #' @keywords coo_descriptors
 #' @examples
 #' data(bot)
@@ -897,7 +889,7 @@ coo.centdist <- function(coo){
 #'
 #' Calculates the euclidean distance between every points of a shape for coo.perim.pts.
 #' The cumulative sum for coo.perim.cum
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric} the distance between every point.
 #' @keywords coo_descriptors
 #' @examples
@@ -914,7 +906,7 @@ coo.perim.pts <-  function (coo){
 #' Calculates the cumulative chrodal distance a shape.
 #'
 #' Just a wrapper for cumsum(coo.perim.pts). See \link{coo.perim.pts}.
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric} the cumulate sum of chrodal distances
 #' @keywords coo_descriptors
 #' @examples
@@ -928,7 +920,7 @@ coo.perim.cum <- function(coo){
   return(d)}
 
 #' Calculates the perimeter
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric}, the perimeter.
 #' @keywords coo_descriptors
 #' @examples
@@ -944,7 +936,7 @@ coo.perim <- function(coo){
 #' Also called the Feret's diameter, the longest distance between two points of
 #' the shape provided.
 #' @aliases coo.calliper
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @param arr.ind a boolean, if provided returns
 #' @return \code{numeric}, the centroid size. If arr.ind=TRUE, a list with the calliper length ($length) 
 #' and the two points ($arr.ind)
@@ -981,7 +973,7 @@ coo.calliper <- function(coo, arr.ind=FALSE){
 #' Returns the length and width of a shape based on their iniertia axis
 #' i.e. alignment to the x-axis. The length is defined as
 #' the range along the x-axis; the width as the range on the y-axis.
-#' @param coo a \code{matrix} of \eqn{(x; y)} coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return two \code{numeric}, the length and the width.
 #' @keywords coo_descriptors
 #' @examples
