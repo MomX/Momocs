@@ -1,0 +1,103 @@
+##### Dataset documentation and declaration
+
+#' Data: Outline coordinates of 20 beer and 20 whisky bottles.
+#' 
+#' @docType data
+#' @name bot
+#' @rdname data_bot
+#' @keywords datasets
+#' @format A \link{Out} object containing the outlines coordinates and a grouping factor
+#' for 20 beer and 20 whisky bottles
+#' @source  Images have been grabbed on the internet and prepared by the package's
+#' authors. No particular choice has been made on the dimension of the original
+#' images or the brands cited here.
+NULL
+
+#' Data: Outline coordinates of 50 cephalic outlines of trilobite
+#' 
+#' @docType data
+#' @name trilo
+#' @rdname data_trilo
+#' @keywords datasets
+#' @format A \link{Out} object 64 coordinates of 50 cephalic outlines from different
+#' ontogenetic stages of trilobite.
+#' @source  Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
+#' The original data included 51 outlines and 5 ontogenetic stages, 
+#' but one of them has just a single outline thas has been removed.
+NULL
+
+#' Data: Outline coordinates of 126 mosquito wings.
+#' 
+#' @docType data
+#' @name mosquito
+#' @rdname data_mosquito
+#' @keywords datasets
+#' @format A \link{Out} object with the 126 mosquito wing outlines outlines
+#' used Rohlf and Archie (1984).
+#' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
+#' description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic Biology}: 302-317.
+#' Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
+NULL
+
+#' Data: Outline coordinates of 240 hand-drawn hearts
+#' 
+#' @docType data
+#' @name hearts
+#' @rdname data_hearts
+#' @keywords datasets
+#' @format A \link{Out} object with the outline coordinates of 240 hand-drawn hearts
+#' by 8 different persons, with 4 landmarks.
+#' @source We thank the fellows of the Ecology Department of the French Institute
+#' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and degraded to 80 coordinates per outline.
+NULL
+
+#' Data: Outline coordinates of 210 olive seeds oopen outlines.
+#' 
+#' @docType data
+#' @name olea
+#' @rdname data_olea
+#' @keywords datasets
+#' @format An \link{Opn} object with the outline coordinates of olive seeds.
+#' @source We thank Jean-Frederic Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
+#' from allowing us to share the data.
+#' 
+#' You can have a look to the original paper:
+#' Terral J-F, Alonso N, Capdevila RB i, Chatti N, Fabre L, Fiorentino G, 
+#' Marinval P, Jorda GP, Pradat B, Rovira N, et al. 2004. 
+#' Historical biogeography of olive domestication (\emph{Olea europaea} L.) 
+#' as revealed by geometrical morphometry applied to biological and 
+#' archaeological material. \emph{Journal of Biogeography} \bold{31}: 63-77.
+NULL
+
+#' Data: Outline coordinates of 210 olive seeds oopen outlines.
+#' 
+#' @docType data
+#' @name shapes
+#' @rdname data_shapes
+#' @keywords datasets
+#' @format An \link{Out} object with the outline coordinates of some various shapes.
+#' @source Borrowed from default shapes from (c) Adobe Photoshop.
+NULL
+
+#' Data: Outline coordinates of 20 beer and 20 whisky bottles.
+#' 
+#' @docType data
+#' @name wings
+#' @rdname data_wings
+#' @keywords datasets
+#' @format A \link{Ldk} object containing 18 (x; y) landmarks  from 127 mosquito wings, from 
+#' @source Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
+NULL
+
+#' Data: Configuration of landmarks on 176 oak leaves
+#' 
+#' From Viscosi and Cardini (2001).
+#' @docType data
+#' @name oak
+#' @rdname data_oak
+#' @keywords datasets
+#' @format A \link{Ldk} object containing 11 (x; y) landmarks  from 176 oak leaves wings, from 
+#' @source Viscosi, V., & Cardini, A. (2011). Leaf morphology, taxonomy and
+#' geometric morphometrics: a simplified protocol for beginners.
+#' PloS One, 6(10), e25630. doi:10.1371/journal.pone.0025630
+NULL

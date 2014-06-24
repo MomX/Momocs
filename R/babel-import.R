@@ -1,6 +1,30 @@
 # Functions and utilities to import data in Momocs, notably from raw images,
 # and to ease the ahndling of these data (define landmarks, outlines, etc.)
 
+#' Import coordinates from a .txt file
+#' 
+#' A wrapper around read.table. May be used to import outline/landmark coordinates
+#' By default it assumes that the columns are not named in the .txt files. You can
+#' tune this using the '...' argument.
+#' @param txt.list a vector of paths corresponding to the .txt files to import
+#' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
+#' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
+#' Out, Opn, Ldk, etc.
+#' @keywords import
+#' @export
+import.txt <- function(txt.list, ...){
+  cat("Extracting", length(txt.list), "..txt coordinates...\n")
+  if (length(txt.list) > 10) {
+    pb <- txtProgressBar(1, length(txt.list))
+    t <- TRUE } else {t <- FALSE}
+  res <- list()
+  for (i in seq(along = txt.list)) {
+    coo <- read.table(txt.list[i], ...)
+    res[[i]] <- as.matrix(coo)
+    if (t) setTxtProgressBar(pb, i)
+  }
+  names(res) <- substr(txt.list, start=1, stop=nchar(txt.list)-4)
+  return(res)}
 
 #' Extract outlines from an image mask
 #' 
@@ -63,33 +87,6 @@ import.Conte <- function (img, x){
   }
   return(cbind((Y[-1]), ((dim(img)[1] - X))[-1]))
 }
-
-# Import raw data ---------------------------------------------------------
-
-#' Import coordinates from a .txt file
-#' 
-#' A wrapper around read.table. May be used to import outline/landmark coordinates
-#' By default it assumes that the columns are not named in the .txt files. You can
-#' tune this using the '...' argument.
-#' @param txt.list a vector of paths corresponding to the .txt files to import
-#' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
-#' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
-#' Out, Opn, Ldk, etc.
-#' @keywords import
-#' @export
-import.txt <- function(txt.list, ...){
-  cat("Extracting", length(txt.list), "..txt coordinates...\n")
-  if (length(txt.list) > 10) {
-    pb <- txtProgressBar(1, length(txt.list))
-    t <- TRUE } else {t <- FALSE}
-  res <- list()
-  for (i in seq(along = txt.list)) {
-    coo <- read.table(txt.list[i], ...)
-    res[[i]] <- as.matrix(coo)
-    if (t) setTxtProgressBar(pb, i)
-  }
-  names(res) <- substr(txt.list, start=1, stop=nchar(txt.list)-4)
-  return(res)}
 
 #' Extract outline coordinates from a single .jpg file
 #' 
