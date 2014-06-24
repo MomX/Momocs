@@ -6,7 +6,7 @@
 import.Conte(img, x)
 }
 \arguments{
-\item{img}{a matrix of a binary image mask}
+\item{img}{a matrix of a binary image mask.}
 
 \item{x}{numeric the (x; y) coordinates of a starting point within the shape.}
 }

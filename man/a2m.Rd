@@ -6,16 +6,18 @@
 a2m(a)
 }
 \arguments{
-\item{a}{An \code{array} of coordinates.}
+\item{a}{\code{array} of (x; y) coordinates.}
 }
 \value{
-A matrix (see above)
+matrix (see above).
 }
 \description{
-Converts an array of coordinates into a matrix.
 All the individuals (the 3rd dimension of the array) becomes rows, and
-columns are (all) x coordinates and (all) y coordinates, so that we have
-x1, x2, ..., xn, y1, y2, ..., yn. Rows and colums are names anyway.
+columns are (all the) x coordinates and (all the) y coordinates, so that we have
+x1, x2, ..., xn, y1, y2, ..., yn columns. Rows and colums are named anyway.
+}
+\details{
+Used in landmarks methods, e.g. for multivariate analysis after a Procrustes alignment.
 }
 \examples{
 data(wings)
@@ -24,7 +26,7 @@ a
 a2m(a)
 }
 \seealso{
-\link{m2a} the reverse function
+\link{m2a} the reverse function.
 }
 \keyword{Babel}
 

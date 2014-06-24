@@ -29,7 +29,7 @@ l2m  <- function(l) {
 #' 
 #' @usage m2l(m)
 #' @param m a two-columns \code{matrix} of x and y coordinates.
-#' @returna \code{list} with x and y components.
+#' @return a \code{list} with x and y components.
 #' @seealso \link{l2m}.
 #' @keywords Babel
 #' @examples

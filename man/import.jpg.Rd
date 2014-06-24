@@ -7,9 +7,9 @@ import.jpg(jpg.paths, auto.notcentered = FALSE, threshold = 0.5,
   verbose = TRUE)
 }
 \arguments{
-\item{jpg.paths}{a vector of paths corresponding to the .jpg files to import}
+\item{jpg.paths}{a vector of paths corresponding to the .jpg files to import.}
 
-\item{auto.notcentered}{logical if TRUE random locations will be used until
+\item{auto.notcentered}{logical if TRUE random locations will be used until.
 one of them is (assumed) to be within the shape (because of a black pixel);
 if FALSE a \link{locator} will be called, and you will have to click on a
 point within the shape.}

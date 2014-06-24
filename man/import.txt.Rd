@@ -6,7 +6,7 @@
 import.txt(txt.list, ...)
 }
 \arguments{
-\item{txt.list}{a vector of paths corresponding to the .txt files to import}
+\item{txt.list}{a vector of paths corresponding to the .txt files to import.}
 
 \item{...}{arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.}
 }
