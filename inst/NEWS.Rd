@@ -5,13 +5,13 @@
 
 \encoding{UTF-8}
 
-\section{Changes in version 0.99}{
+\section{Changes in version 0.99 - "Barley"}{
 
   \subsection{GENERAL}{
     \itemize{
       \item item 1
       \item item 2
-
+      }
   } % end general
 
   \subsection{BUG FIXES}{
@@ -29,6 +29,5 @@
       }
   } % new features 
 
-}
 }
 

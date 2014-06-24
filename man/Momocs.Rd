@@ -5,25 +5,39 @@
 \alias{Momocs-package}
 \title{Momocs}
 \description{
-Morphometrics using R
+Momocs is intended to ease and to popularize morphometrics,
+the quantitative analysis of form. It aims at gathering the most common approaches:
+traditional morphometrics, global descriptors, open outlines, closed outlines
+and configuration of landmarks into the same, open-source, environment.
+It hinges on the core functions developed in the book \emph{Morphometrics with R}
+by Julien Claude (2008), extend them graphically and statistically,
+using the same, unified and extendable, grammar. From import from other
+morphometrics format or data acquisition, to display, handling,
+calibration and calculations on morphometrics datasets on which to apply
+an array of statistical analyses, Momocs intends to provides a complete,
+convenient and extendable toolkit to specialists within every field that are,
+or may be, interested in integrating shape in their researches.
 }
-\details{
+\section{Cheers}{
+
 We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus
 Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
 their helpful contributions, ideas, bug reports, and much more.
 }
 \references{
-Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R.
+\itemize{
+\item Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R.
 \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
-
-Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
+\item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
+}
 }
 \seealso{
-Momocs' homepage : \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
-and hotline.
-
-Momocs' GitHub repo : \url{https://github.com/vbonhomme/Momocs} to contribute,
-among other things.
+\describe{
+ \item{Homepage}{\url{http://www.vincentbonhomme.fr/Momocs} with tutorials
+and hotline}
+ \item{GitHub repo}{\url{https://github.com/vbonhomme/Momocs} to contribute,
+get the last version, etc.}
+}
 }
 \keyword{Abtract}
 
