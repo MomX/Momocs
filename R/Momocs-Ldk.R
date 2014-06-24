@@ -12,7 +12,7 @@
 #' All the shapes in x must have the same number of landmarks. If you are 
 #' trying to make an Ldk object from an Out or an Opn object, try \link{coo.sample}.
 #' 
-#' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
+#' @param x a \code{list} of matrices of (x; y) coordinates,
 #' or an array, an Ldk object.
 #' @param links a matrix of "links" between landmarks, mainly for plotting
 #' @param fac (optionnal) a \code{data.frame} of factors, 
