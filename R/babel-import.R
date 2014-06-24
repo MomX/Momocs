@@ -8,7 +8,7 @@
 #' columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 #' Define the \link{read.table} arguments that allow to import a single file, and then
 #' pass them to this function.
-#' @param txt.list a vector of paths corresponding to the .txt files to import
+#' @param txt.list a vector of paths corresponding to the .txt files to import.
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
 #' \link{Out}, \link{Opn} and \link{Ldk}.
@@ -36,7 +36,7 @@ import.txt <- function(txt.list, ...){
 #' and a point form where to start the algorithm, returns the (x; y) coordinates of its outline.
 #' 
 #' Used internally by \link{import.jpg1} but may be useful for other purposes.
-#' @param img a matrix of a binary image mask
+#' @param img a matrix of a binary image mask.
 #' @param x numeric the (x; y) coordinates of a starting point within the shape.
 #' @return a matrix the (x; y) coordinates of the outline points.
 #' @references
@@ -162,8 +162,8 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
 #' 
 #' This function is used to import outline coordinates and is built around 
 #' \link{import.jpg1}
-#' @param jpg.paths a vector of paths corresponding to the .jpg files to import
-#' @param auto.notcentered logical if TRUE random locations will be used until
+#' @param jpg.paths a vector of paths corresponding to the .jpg files to import.
+#' @param auto.notcentered logical if TRUE random locations will be used until.
 #' one of them is (assumed) to be within the shape (because of a black pixel);
 #' if FALSE a \link{locator} will be called, and you will have to click on a 
 #' point within the shape.
