@@ -6,14 +6,14 @@
 coo.bookstein(coo, ldk1, ldk2)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
 \item{ldk1}{the id of the first point of the new baseline}
 
 \item{ldk2}{the id of the second point of the new baseline}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Registers a new baseline for the shape, with the \code{ldk1}-th

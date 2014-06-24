@@ -6,14 +6,14 @@
 coo.trans(coo, x = 0, y = 0)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
 \item{x}{\code{numeric}translation along the x-axis.}
 
 \item{y}{\code{numeric}translation along the y-axis.}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Translates the coordinatesby a 'x' and 'y' value

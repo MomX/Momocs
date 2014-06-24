@@ -10,13 +10,13 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 coo.rectilinearity(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the rectilinearity
 }
 \description{
-As proposed by Zunic and Rosin (see below). I do not 100% guarantee the code.
+As proposed by Zunic and Rosin (see below). May need some testing/review.
 }
 \note{
 due to the laborious nature of the algorithm (in nb.pts^2),
@@ -27,5 +27,7 @@ data(bot)
 b <- coo.sample(bot[1], 32)
 coo.rectilinearity(b)
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

@@ -10,18 +10,20 @@ Handbook of Pattern Recognition and Computer Vision. 177-196.
 coo.circularity.haralick(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the Haralick's circularity.
 }
 \description{
 Returns Haralick's circularity which is less sensible
-to digitalization noise than coo.circularity. See ...#todo
+to digitalization noise than coo.circularity.
 }
 \examples{
 data(bot)
 coo.circularity.haralick(bot[1])
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

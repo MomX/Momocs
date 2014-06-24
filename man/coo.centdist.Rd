@@ -7,10 +7,10 @@ For every point of the shape, returns the (centroid-points) distance.}
 coo.centdist(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates.
+a \code{matrix} of (x; y) coordinates.
 }
 \description{
 Returns the distance between everypoints and the centroid

@@ -6,15 +6,15 @@
 ldk.check(ldk)
 }
 \arguments{
-\item{ldk}{a \code{matrix} of \eqn{(x; y)} coordinates, a list, or an array.}
+\item{ldk}{a \code{matrix} of (x; y) coordinates, a list, or an array.}
 }
 \value{
-an \code{array} of \eqn{(x; y)} coordinates.
+an \code{array} of (x; y) coordinates.
 }
 \description{
-A simple utility, used internally, mostly in the Ldk methods,
+A simple utility, used internally, mostly by \link{Ldk} methods,
 in some graphical functions, and notably in \link{l2a}.
-Returns an array of landmarks arranged as (nb.ldk) x (x; y) x (nb.shapes),
+Returns an array of landmarks arranged as \code{(nb.ldk) x (x; y) x (nb.shapes)},
 when passed with either a list, a matrix or an array of coordinates.
 If a list is provided, checks that the number of landmarks is consistent.
 }

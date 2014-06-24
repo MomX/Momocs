@@ -6,13 +6,13 @@
 coo.centpos(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
-\eqn{(x; y)} coordinates as \code{numeric}.
+(x; y) coordinates as \code{numeric}.
 }
 \description{
-Returns the \eqn{(x; y)} centroid coordinates of a shape.
+Returns the (x; y) centroid coordinates of a shape.
 }
 \examples{
 data(bot)

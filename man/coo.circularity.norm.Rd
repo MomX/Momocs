@@ -10,17 +10,20 @@ Handbook of Pattern Recognition and Computer Vision. 177-196.
 coo.circularity.norm(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the circularity normalized to the unit circle.
 }
 \description{
 Returns the "circularity", also called compactness
+and shape factor, but normalized to the unit circle.
 }
 \examples{
 data(bot)
 coo.circularity.norm(bot[1])
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

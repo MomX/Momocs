@@ -6,7 +6,7 @@
 coo.centsize(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 \code{numeric}, the centroid size.

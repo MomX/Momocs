@@ -6,18 +6,18 @@
 coo.baseline(coo, ldk1, ldk2, t1, t2)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
 \item{ldk1}{the id of the first point of the new baseline}
 
 \item{ldk2}{the id of the second point of the new baseline}
 
-\item{t1}{\code{numeric} the \eqn{(x; y)} coordinates of the 1st point of the new baseline}
+\item{t1}{\code{numeric} the (x; y) coordinates of the 1st point of the new baseline}
 
-\item{t2}{\code{numeric} the \eqn{(x; y)} coordinates of the 2nd point of the new baseline}
+\item{t2}{\code{numeric} the (x; y) coordinates of the 2nd point of the new baseline}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
 }
 \description{
 A non-exact baseline registration on \code{t1} and \code{t2} coordinates,

@@ -10,7 +10,7 @@ Handbook of Pattern Recognition and Computer Vision. 177-196.
 coo.solidity(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the solidity of a shape.
@@ -22,5 +22,7 @@ Returns the ids of points that define the convex hull of a shape.
 data(bot)
 coo.solidity(bot[1])
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

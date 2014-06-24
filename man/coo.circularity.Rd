@@ -8,17 +8,20 @@
 coo.circularity(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the circularity.
 }
 \description{
-Returns the "circularity measure". Also called compactness
+Returns the "circularity measure". Also called "compactness"
+and "shape factor" sometimes.
 }
 \examples{
 data(bot)
 coo.circularity(bot[1])
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

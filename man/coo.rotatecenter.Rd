@@ -6,17 +6,17 @@
 coo.rotatecenter(coo, theta, center = c(0, 0))
 }
 \arguments{
-\item{coo}{either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
 \item{theta}{\code{numeric} the angle (in radians) to rotate shapes.}
 
-\item{center}{the \eqn{(x; y)} position of the center}
+\item{center}{the (x; y) position of the center}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
-rotates a shape of "theta" angles (in radians) and with a \eqn{(x; y)} "center".
+rotates a shape of "theta" angles (in radians) and with a (x; y) "center".
 }
 \examples{
 data(bot)

@@ -10,7 +10,7 @@ Handbook of Pattern Recognition and Computer Vision. 177-196.
 coo.elongation(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the circularity normalized to the unit circle.
@@ -22,5 +22,7 @@ Calculates the elongation of a shape
 data(bot)
 coo.elongation(bot[1])
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

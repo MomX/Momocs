@@ -6,12 +6,12 @@
 coo.scale(coo, scale)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
 \item{scale}{the scaling factor, by default, the centroid size.}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Scales the coordinates by a 'scale' factor. If not provided,

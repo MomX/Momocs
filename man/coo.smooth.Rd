@@ -6,12 +6,12 @@
 coo.smooth(coo, n)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
 \item{n}{an (integer) \code{numeric} to specify the number of smoothing iterations}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Smoothes coordinates using a simple moving average.

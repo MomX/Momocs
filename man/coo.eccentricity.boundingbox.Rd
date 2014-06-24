@@ -10,7 +10,7 @@ Handbook of Pattern Recognition and Computer Vision. 177-196.
 coo.eccentricity.boundingbox(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the eccentricity (boundingbox)
@@ -22,5 +22,10 @@ Calculated using the width / length ratio. See \link{coo.lw}
 data(bot)
 coo.eccentricity.boundingbox(bot[1])
 }
-\keyword{coo_descriptors}
+\seealso{
+\link{coo.eccentricity.eigen}
+}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

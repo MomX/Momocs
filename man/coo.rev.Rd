@@ -6,10 +6,10 @@
 coo.rev(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates.}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates.
+a \code{matrix} of (x; y) coordinates.
 }
 \description{
 Returns the reverse suite of coordinates, i.e. change shape's orientation

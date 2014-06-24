@@ -6,7 +6,7 @@
 coo.calliper(coo, arr.ind = FALSE)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 
 \item{arr.ind}{a boolean, if provided returns}
 }

@@ -6,13 +6,14 @@
 coo.chull(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 a \code{matrix} of ids defining the convex hull of the shape.
 }
 \description{
-Returns the ids of points that define the convex hull of a shape.
+Returns the ids of points that define the convex hull of a shape. A simple wrapper
+around \link{chull}, mainly used in graphical functions.
 }
 \examples{
 data(hearts)
@@ -21,5 +22,7 @@ coo.plot(h)
 ch <- coo.chull(h)
 lines(ch, col="red", lty=2)
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 

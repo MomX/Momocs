@@ -8,7 +8,7 @@ Used in other facilities to acquire/manipulate data.}
 coo.ldk(coo, nb.ldk)
 }
 \arguments{
-\item{coo}{a \code{matrix} or a list of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} or a list of (x; y) coordinates.}
 
 \item{nb.ldk}{integer, the number of landmarks to define}
 }

@@ -6,10 +6,10 @@
 coo.check(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates or a list.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a list.}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates.
+a \code{matrix} of (x; y) coordinates.
 }
 \description{
 A simple utility, used internally, mostly in the coo functions and methods.

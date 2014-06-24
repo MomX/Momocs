@@ -6,10 +6,10 @@
 coo.down(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates.}
 }
 \value{
-a \code{matrix} of \eqn{(x; y)} coordinates.
+a \code{matrix} of (x; y) coordinates.
 }
 \description{
 Useful when shapes are aligned along the x-axis (e.g. because of a

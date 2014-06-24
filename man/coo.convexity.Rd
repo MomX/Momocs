@@ -10,7 +10,7 @@ Handbook of Pattern Recognition and Computer Vision. 177-196.
 coo.convexity(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of \eqn{(x; y)} coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
 numeric, the convexity.
@@ -22,5 +22,7 @@ Calculated using a ratio of the eigen values (inertia axis)
 data(bot)
 coo.convexity(bot[1])
 }
-\keyword{coo_descriptors}
+\keyword{Global}
+\keyword{descriptors}
+\keyword{shape}
 
