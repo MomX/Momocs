@@ -18,6 +18,9 @@ an array of statistical analyses, Momocs intends to provides a complete,
 convenient and extendable toolkit to specialists within every field that are,
 or may be, interested in integrating shape in their researches.
 }
+\details{
+To cite Momocs in publications: \code{citation("Momocs")}.
+}
 \section{Cheers}{
 
 We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus

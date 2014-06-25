@@ -21,9 +21,10 @@ deformations.
 internally but might be useful elsewhere.
 }
 \seealso{
-The \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
+\link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
 \code{tps2d}.
 }
-\keyword{Utilities}
-\keyword{coo}
+\keyword{Thin}
+\keyword{plate}
+\keyword{splines}
 

@@ -12,9 +12,9 @@
 #' @param to The target \eqn{(x; y)} coordinates.
 #' @return Returns a matrix of \code{(x; y)} coordinates with TPS-interpolated
 #' deformations.
-#' @seealso The \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
+#' @seealso \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
 #' \code{tps2d}.
-#' @keywords coo Utilities
+#' @keywords Thin plate splines
 #' @export
 tps2d <- function(grid0, fr, to){
   if (is.closed(fr)) fr <- coo.unclose(fr)
@@ -64,7 +64,8 @@ tps2d <- function(grid0, fr, to){
 #' @param shp.lwd Two \code{lwd} for drawing shapes.
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @return No returned value.
-#' @keywords coo Utilities
+#' @seealso \link{tps.iso} and \link{tps.arr}.
+#' @keywords Thin plate splines
 #' @examples
 #' 
 #' data(bot)
@@ -125,9 +126,9 @@ tps.grid <- function(fr, to, amp=1, over=1.2,
 #' @param shp.lwd Two \code{lwd} for drawing shapes.
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @return No returned value.
-#' @keywords coo Utilities
+#' @seealso \link{tps.grid} and \link{tps.iso}.
+#' @keywords Thin plate splines
 #' @examples
-#' 
 #' data(bot)
 #' botF <- eFourier(bot)
 #' x <- mshapes(botF, "type", nb.pts=80)
@@ -189,7 +190,8 @@ tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
 #' @param shp.lwd Two \code{lwd} for drawing shapes.
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @return No returned value.
-#' @keywords coo Utilities
+#' @seealso \link{tps.grid} and \link{tps.arr}
+#' @keywords Thin plate splines
 #' @examples
 #' 
 #' data(bot)

@@ -55,6 +55,10 @@ fr <- x$beer
 to <- x$whisky
 tps.iso(fr, to, iso.nb=2000, amp=3)
 }
-\keyword{Utilities}
-\keyword{coo}
+\seealso{
+\link{tps.grid} and \link{tps.arr}
+}
+\keyword{Thin}
+\keyword{plate}
+\keyword{splines}
 

@@ -1,10 +1,10 @@
-citHeader("To cite Momocs in publications, please cite:")
+citHeader("If you use Momocs in publications, please cite this paper:")
 
 citEntry(entry = "Article",
-  title        = "{Momocs}: Outline Analysis Using {R}",
+  title        = "Momocs: Outline Analysis Using R",
   author       = personList(as.person("Vincent Bonhomme"),
                    as.person("Sandrine Picq"),
-                   as.person("C\\'edric Gaucherel"),
+                   as.person("Cedric Gaucherel"),
                    as.person("Julien Claude")),
   journal      = "Journal of Statistical Software",
   year         = "2014",

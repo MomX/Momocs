@@ -48,6 +48,10 @@ fr <- x$beer
 to <- x$whisky
 tps.grid(fr, to, amp=3, grid.size=40)
 }
-\keyword{Utilities}
-\keyword{coo}
+\seealso{
+\link{tps.iso} and \link{tps.arr}.
+}
+\keyword{Thin}
+\keyword{plate}
+\keyword{splines}
 

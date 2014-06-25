@@ -15,6 +15,8 @@
 #' convenient and extendable toolkit to specialists within every field that are, 
 #' or may be, interested in integrating shape in their researches.
 #' 
+#' To cite Momocs in publications: \code{citation("Momocs")}.
+#' 
 #' @seealso
 #' \describe{
 #'  \item{Homepage}{\url{http://www.vincentbonhomme.fr/Momocs} with tutorials
