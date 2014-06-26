@@ -40,7 +40,7 @@ range of polynomial degrees.
 }
 \examples{
 data(olea)
-nqual(olea)
+nqual(olea, degree.range=1:9)
 }
 \keyword{Opn}
 

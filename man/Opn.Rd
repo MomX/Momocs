@@ -6,7 +6,7 @@
 Opn(x, ldk = NULL, fac = data.frame())
 }
 \arguments{
-\item{x}{\code{list} of matrices of \eqn{(x; y)} coordinates}
+\item{x}{\code{list} of matrices of (x; y) coordinates}
 
 \item{ldk}{(optionnal) \code{list} of landmarks as row number indices}
 
@@ -21,13 +21,31 @@ In Momocs, \code{Opn} classes objects are wrapping around
 lists of \bold{open} outlines, along with other informations,
 on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. \link{rawPolynomials} can be applied.
- \code{Opn} objects are primarily \code{\link{Coo}} objects.
+ \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 }
 \examples{
 methods(class=Opn)
+# we load some open outlines. See ?olea for credits
+data(olea)
+olea
+panel(olea)
+nqual(olea)
+# orthogonal polynomials
+op <- orthoPolynomials(olea, degree=5)
+# we print the Coe
+op
+# Let's do a PCA on it
+opca <- pca(op)
+plot(opca, "domes")
+plot(opca, "cep")
+# and now an LDA
+olda <- LDA(op, "cep")
+# for CV table
+olda
+plot(olda)
 }
 \seealso{
-\link{Coo}, \link{Out}, link{Ldk}.
+\link{Coo}, \link{Out}, \link{Ldk}.
 }
 \keyword{Opn}
 

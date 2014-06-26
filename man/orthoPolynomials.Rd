@@ -26,7 +26,13 @@ Calculates orthogonal polynomials on Opn
 }
 \examples{
 data(olea)
-orthoPolynomials(olea, 5)
+op <- orthoPolynomials(olea, 5)
+op
+# a summary of the r2 (fit)
+hist(op$r2)
+summary(op$r2)
+# and the standard deviation
+sd(op$r2)
 }
 \keyword{Opn}
 

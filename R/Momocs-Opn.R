@@ -34,7 +34,7 @@
 #' plot(opca, "cep")
 #' # and now an LDA
 #' olda <- LDA(op, "cep")
-#' for CV table
+#' # for CV table
 #' olda 
 #' plot(olda)
 #' @export
@@ -347,7 +347,7 @@ rawPolynomials.Opn <- function(Opn, degree,
 #' data(olea)
 #' op <- orthoPolynomials(olea, 5)
 #' op
-#' a summary of the r2 (fit)
+#' # a summary of the r2 (fit)
 #' hist(op$r2)
 #' summary(op$r2)
 #' # and the standard deviation

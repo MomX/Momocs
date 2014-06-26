@@ -10,11 +10,11 @@ rawPolynomials(Opn, degree, baseline1, baseline2, nb.pts)
 
 \item{degree}{of the polynomial}
 
-\item{baseline1}{numeric the \eqn{(x; y)} coordinates of the first baseline
-by default \eqn{(x= -1; y=0)}}
+\item{baseline1}{numeric the (x; y) coordinates of the first baseline
+by default (x= -1; y=0)}
 
-\item{baseline2}{numeric the \eqn{(x; y)} coordinates of the second baseline
-by default \eqn{(x= 1; y=0)}}
+\item{baseline2}{numeric the (x; y) coordinates of the second baseline
+by default (x= 1; y=0)}
 
 \item{nb.pts}{number of points to sample and on which to calculate polynomials}
 }
@@ -26,7 +26,12 @@ Calculates raw (natural) polynomials on Opn
 }
 \examples{
 data(olea)
-rawPolynomials(olea, 5)
+op <- rawPolynomials(olea, 5)
+op
+# a summary of the r2 (fit)
+hist(op$r2)
+# and the standard deviation
+sd(op$r2)
 }
 \keyword{Opn}
 
