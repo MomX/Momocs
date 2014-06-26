@@ -14,17 +14,18 @@ LDA(x, fac, retain)
 }
 \value{
 a "LDA" object on which to apply \link{plot.LDA}, which is a list with components:
-\describe{
-\item{x}{matrix of coefficients used for computation}
-\item{fac}{grouping structure used}
-\item{removed}{ids of columns in the original matrix that have been removed since constant (if any)}
-\item{mod}{raw lda object returned by \link{lda}}
-\item{mod.pred}{predicted classification using the model. Probably optimistic, you can try CV leave-one-out or other approaches.}
-\item{CV}{cross-validation table using mod.pred results}
-\item{correct}{proportion of well classified individuals}
-\item{LDs}{unstandardized LD scores see Claude (2008)}
-\item{mshape}{mean values of coefficients in the original matrix}
-\item{method}{inherited from the Coe object (if any)}
+\itemize{
+ \item \code{x} any \link{Coe} object (or a matrix)
+ \item \code{fac} grouping factor used
+ \item \code{removed} ids of columns in the original matrix that have been removed since constant (if any)
+ \item \code{mod} the raw lda mod from \link{lda}
+ \item \code{mod.pred} the predicted model using x and mod
+ \item \code{CV.fac} cross-validated classification
+ \item \code{CV.tab} cross-validation tabke
+ \item \code{CV.correct} proportion of correctly classified individuals
+ \item \code{LDs} unstandardized LD scores see Claude (2008)
+ \item \code{mshape} mean values of coefficients in the original matrix
+ \item \code{method} inherited from the Coe object (if any)
 }
 }
 \description{
@@ -40,5 +41,8 @@ bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
 bot.l <- LDA(bot.f, "plop")
 bot.l
 plot(bot.l)
+}
+\seealso{
+\link{plot.LDA}
 }
 

@@ -8,18 +8,20 @@
 #' @param fac the grouping factor (names of one of the $fac column or column id)
 #' @param retain the number of PC axis to retain for LDA.PCA
 #' @return a "LDA" object on which to apply \link{plot.LDA}, which is a list with components:
-#' \describe{
-#' \item{x}{matrix of coefficients used for computation}
-#' \item{fac}{grouping structure used}
-#' \item{removed}{ids of columns in the original matrix that have been removed since constant (if any)}
-#' \item{mod}{raw lda object returned by \link{lda}}
-#' \item{mod.pred}{predicted classification using the model. Probably optimistic, you can try CV leave-one-out or other approaches.}
-#' \item{CV}{cross-validation table using mod.pred results}
-#' \item{correct}{proportion of well classified individuals}
-#' \item{LDs}{unstandardized LD scores see Claude (2008)}
-#' \item{mshape}{mean values of coefficients in the original matrix}
-#' \item{method}{inherited from the Coe object (if any)}
+#' \itemize{
+#'  \item \code{x} any \link{Coe} object (or a matrix)
+#'  \item \code{fac} grouping factor used
+#'  \item \code{removed} ids of columns in the original matrix that have been removed since constant (if any)
+#'  \item \code{mod} the raw lda mod from \link{lda}
+#'  \item \code{mod.pred} the predicted model using x and mod
+#'  \item \code{CV.fac} cross-validated classification
+#'  \item \code{CV.tab} cross-validation tabke
+#'  \item \code{CV.correct} proportion of correctly classified individuals
+#'  \item \code{LDs} unstandardized LD scores see Claude (2008)
+#'  \item \code{mshape} mean values of coefficients in the original matrix
+#'  \item \code{method} inherited from the Coe object (if any)
 #' }
+#' @seealso \link{plot.LDA}
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
@@ -44,13 +46,23 @@ LDA.Coe <- function(x, fac, retain){
     cat(" * variables", colnames(X)[remove], "are removed since they are constant.\n")
     X <- X[, -remove] 
   } else { remove <- NULL }  
-  # now we calculate two linear models with MASS::lda
+  # now we calculate two lda models with MASS::lda
   # one with
   mod      <- lda(X, grouping=fac)
   mod.pred <- predict(mod, X)
-  mod.CV   <- lda(X, grouping=fac, CV=TRUE)
-  CV <- table(fac, mod.pred$class)
-  names(dimnames(CV)) <- c("actual", "classified")
+  # manual leave-one-out cross validation
+  # dont know why but with CV=TRUE, results are not stable.
+  Xn     <- nrow(X)
+  CV.fac <- factor(levels=levels(fac))
+  for (i in 1:Xn){
+    X.i       <- X[-i, ]
+    fac.i     <- fac[-i  ]
+    mod       <- lda(X.i, fac.i)
+    CV.fac[i] <- predict(mod, X[i,])$class}
+  # we build a nice table from it
+  CV.tab <- table(fac, CV.fac)
+  names(dimnames(CV.tab)) <- c("actual", "classified")
+  CV.correct <- sum(diag(CV.tab))/sum(CV.tab)
   # we calculate unstandardized LDs
   n <- nrow(X)
   lm.mod <- lm(X ~ fac)
@@ -66,8 +78,9 @@ LDA.Coe <- function(x, fac, retain){
               removed  = remove,
               mod      = mod,
               mod.pred = mod.pred,
-              CV       = CV,
-              correct  = sum(diag(CV))/sum(CV),
+              CV.fac   = CV.fac,
+              CV.tab   = CV.tab,
+              CV.correct  = CV.correct,
               LDs      = LDs,
               mshape   = apply(Coe$coe, 2, mean),
               method   = Coe$method)
@@ -78,12 +91,23 @@ LDA.Coe <- function(x, fac, retain){
 LDA.default <- function(x, fac, retain){
   X <- x
   if (missing(fac)) stop(" * no fac provided")
-  # we compute lda and predictions
+  # now we calculate two lda models with MASS::lda
+  # one with
   mod      <- lda(X, grouping=fac)
   mod.pred <- predict(mod, X)
-  # we prepare a nice CV table
-  CV <- table(fac, mod.pred$class)
-  names(dimnames(CV)) <- c("actual", "classified")
+  # manual leave-one-out cross validation
+  # dont know why but with CV=TRUE, results are not stable.
+  Xn     <- nrow(X)
+  CV.fac <- factor(levels=levels(fac))
+  for (i in 1:Xn){
+    X.i       <- X[-i, ]
+    fac.i     <- fac[-i  ]
+    mod       <- lda(X.i, fac.i)
+    CV.fac[i] <- predict(mod, X[i,])$class}
+  # we build a nice table from it
+  CV.tab <- table(fac, CV.fac)
+  names(dimnames(CV.tab)) <- c("actual", "classified")
+  CV.correct <- sum(diag(CV.tab))/sum(CV.tab)
   # we calculate unstandardized LDs
   n <- nrow(X)
   lm.mod <- lm(X ~ fac)
@@ -97,8 +121,9 @@ LDA.default <- function(x, fac, retain){
               removed  = remove,
               mod      = mod,
               mod.pred = mod.pred,
-              CV       = CV,
-              correct  = sum(diag(CV))/sum(CV),
+              CV.fac   = CV.fac,
+              CV.tab   = CV.tab,
+              CV.correct  = CV.correct,
               LDs      = LDs,
               mshape   = NULL,
               method   = NULL)
@@ -106,7 +131,7 @@ LDA.default <- function(x, fac, retain){
   return(LDA)}
 
 #' @export
-LDA.PCA <- function(x, fac, retain=3){
+LDA.PCA <- function(x, fac, retain=5){
   PCA <- x
   if (missing(fac)) stop(" * no fac provided")
   fac    <- PCA$fac[, fac]
@@ -119,9 +144,23 @@ LDA.PCA <- function(x, fac, retain=3){
       X <- X[, -remove] }
   } else { remove <- NULL } 
   X <- as.matrix(X)
-  # we compute lda and predictions
-  mod      <- lda(X, grouping=fac, tol=1e-10)
+  # now we calculate two lda models with MASS::lda
+  # one with
+  mod      <- lda(X, grouping=fac)
   mod.pred <- predict(mod, X)
+  # manual leave-one-out cross validation
+  # dont know why but with CV=TRUE, results are not stable.
+  Xn     <- nrow(X)
+  CV.fac <- factor(levels=levels(fac))
+  for (i in 1:Xn){
+    X.i       <- X[-i, ]
+    fac.i     <- fac[-i  ]
+    mod       <- lda(X.i, fac.i)
+    CV.fac[i] <- predict(mod, X[i,])$class}
+  # we build a nice table from it
+  CV.tab <- table(fac, CV.fac)
+  names(dimnames(CV.tab)) <- c("actual", "classified")
+  CV.correct <- sum(diag(CV.tab))/sum(CV.tab)
   # we calculate unstandardized LDs (wrong here for use in shape reconstruction, 
   # would need one more step (pca2shp?) but not sure how useful it is)
   n <- nrow(X)
@@ -130,25 +169,23 @@ LDA.PCA <- function(x, fac, retain=3){
   SSw    <- var(lm.mod$residuals) * (n-1)
   VCVw   <- SSw / dfw
   LDs    <- VCVw %*% mod$scaling
-  # we prepare a nice CV table
-  CV <- table(fac, mod.pred$class)
-  names(dimnames(CV)) <- c("actual", "classified")
+  #
   LDA <- list(x          = X,
               fac        = fac,
               removed    = remove,
-              mod        = mod,
-              mod.pred   = mod.pred,
-              CV         = CV,
-              correct    = sum(diag(CV))/sum(CV),
-              LDs      = LDs,
+              mod      = mod,
+              mod.pred = mod.pred,
+              CV.fac   = CV.fac,
+              CV.tab   = CV.tab,
+              CV.correct  = CV.correct,
+              LDs        = LDs,
               mshape     = NULL,
-              method     = PCA$method) # may be interesting to add LDA on PCA here?
-  LDA$method <- PCA$method
+              method     = "LDAPCA") # may be interesting to add LDA on PCA here?
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)}
 
 #' @export
 print.LDA <- function(x, ...){
-  cat("An 'LDA' object. See ?LDA.\n")
-  cat("Actual / predicted groups (", signif(x$correct * 100, 3), "% ): \n")
-  print(x$CV)}
+  cat("Leave-one-out cross-validation: (",
+      signif(x$CV.correct * 100, 3), "% - ", sum(diag(x$CV.tab)),"/", sum(x$CV.tab),"): \n", sep="")
+  print(x$CV.tab)}
