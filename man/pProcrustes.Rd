@@ -12,16 +12,16 @@ pProcrustes(coo1, coo2)
 }
 \value{
 a list with components
-\enumerate{
-\item coo1: Superimposed centered preshape of coo1 onto the centered preshape of coo2
-\item coo2: Centered preshape of coo2
-\item rotation: Rotation matrix
-\item DP: Partial Procrustes distance between coo1 and coo2.
-\item rho: Trigonometric Procrustes distance.
+\describe{
+\item{coo1}{superimposed centered preshape of coo1 onto the centered preshape of coo2}
+\item{coo2}{centered preshape of coo2}
+\item{rotation}{rotation matrix}
+\item{DP}{partial Procrustes distance between coo1 and coo2}
+\item{rho}{trigonometric Procrustes distance}.
 }
 }
 \description{
-Directly borrowed from Claude 2008 (pPsup).
+Directly borrowed from Claude (2008), and called \code{pPsup} there.
 }
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.

@@ -1,17 +1,18 @@
-# 3. Landmarks ------------------------------------------------------------
+##### Core functions for Procrustes alignement
 
+# DF should be used for hquant #todo
 #' Full Procrustes alignment between two shapes
 #' 
-#' Directly borrowed from Claude 2008 (fPsup)
-#' @param coo1 Configuration matrix to be superimposed onto the centered preshape of coo2.
-#' @param coo2 Reference configuration matrix.
-#' @return a list with components
-#' \enumerate{
-#' \item coo1: Superimposed centered preshape of coo1 onto the centered preshape of coo2
-#' \item coo2: Centered preshape of coo2
-#' \item rotation: Rotation matrix
-#' \item scale: Scale parameter
-#' \item DF: Full Procrustes distance between coo1 and coo2.
+#' Directly borrowed from Claude (2008), called there the \code{fPsup} function.
+#' @param coo1 configuration matrix to be superimposed onto the centered preshape of coo2.
+#' @param coo2 reference configuration matrix.
+#' @return a list with components:
+#' \describe{
+#' \item{coo1}{superimposed centered preshape of coo1 onto the centered preshape of coo2}
+#' \item{coo2}{centered preshape of coo2}
+#' \item{rotation}{rotation matrix}
+#' \item{scale}{scale parameter}
+#' \item{DF}{full Procrustes distance between coo1 and coo2.}
 #' }
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 #' @export
@@ -35,27 +36,32 @@ fProcrustes <- function(coo1, coo2){
 
 #' Full Generalized Procrustes alignment between shapes
 #' 
-#' Directly borrowed from Claude 2008 (fgpa2).
-#' @param x an array, a list of configurations, or an Out or on Ldk object
+#' Directly borrowed from Claude (2008), called there the \code{fgpa2} function.
+#' 
+#' If performed on an \link{Out} or an \link{Opn} object, will try to use the \code{$ldk} slot,
+#' if landmarks have been previousy defined, then (with a message) on the \code{$coo} slot,
+#' but in that case, all shapes must have the same number of coordinates (\link{coo.sample} may help).
+#' @param x an array, a list of configurations, or an \link{Out}, \link{Opn} or \link{Ldk} object
 #' @param tol numeric when to stop iterations
-#' @param verbose logical whether to print outputs
-#' @return a list with components
-#' \enumerate{
-#' \item rotated: Array of superimposed configurations.
-#' \item iterationnumber: Number of iterations.
-#' \item Q: Convergence criterion.
-#' \item Qi: Full list of Q.
-#' \item Qd: Difference between succesive Q.
-#' \item interproc.dist: Minimal sum of squared norms of pairwise differences between
-#' all shapes in the superimposed sample.
-#' \item mshape: Mean shape configuration.
-#' \item cent.size: Vector of centroid sizes.
-#' } or and Ldk or and Out object.
+#' @param verbose logical whether to print outputs (iteration number, and gain)
+#' @return a list with components:
+#' \describe{
+#' \item{rotated}{array of superimposed configurations}
+#' \item{iterationnumber}{number of iterations}
+#' \item{Q}{convergence criterion}
+#' \item{Qi}{full list of Q}
+#' \item{Qd}{difference between succesive Q}
+#' \item{interproc.dist}{Minimal sum of squared norms of pairwise differences between
+#' all shapes in the superimposed sample}
+#' \item{mshape}{mean shape configuration}
+#' \item{cent.size}{vector of centroid sizes.}
+#' } or an \link{Out}, \link{Opn} or an \link{Ldk} object.
 #' @note Slightly less optimized than procGPA in the shapes package (~20% on my machine).
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 #' @export
 fgProcrustes <- function(x, tol, verbose){UseMethod("fgProcrustes")}
 
+#' @export
 fgProcrustes.default <- function(x, tol=1e-5, verbose=TRUE){
   A <- x
   A <- ldk.check(A)
@@ -170,16 +176,16 @@ fgProcrustes.Ldk <- function(x, tol=1e-10, verbose=TRUE){
 
 #' Partial Procrustes alignment between two shapes
 #' 
-#' Directly borrowed from Claude 2008 (pPsup).
+#' Directly borrowed from Claude (2008), and called \code{pPsup} there.
 #' @param coo1 Configuration matrix to be superimposed onto the centered preshape of coo2.
 #' @param coo2 Reference configuration matrix.
 #' @return a list with components
-#' \enumerate{
-#' \item coo1: Superimposed centered preshape of coo1 onto the centered preshape of coo2
-#' \item coo2: Centered preshape of coo2
-#' \item rotation: Rotation matrix
-#' \item DP: Partial Procrustes distance between coo1 and coo2.
-#' \item rho: Trigonometric Procrustes distance.
+#' \describe{
+#' \item{coo1}{superimposed centered preshape of coo1 onto the centered preshape of coo2}
+#' \item{coo2}{centered preshape of coo2}
+#' \item{rotation}{rotation matrix}
+#' \item{DP}{partial Procrustes distance between coo1 and coo2}
+#' \item{rho}{trigonometric Procrustes distance}.
 #' }
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 #' @export
@@ -200,3 +206,4 @@ pProcrustes <- function(coo1, coo2){
   list(coo1=Z1%*%Gam, coo2=Z2,
        rotation=Gam, DP=sqrt(sum(edm(Z1%*%Gam, Z2)^2)), rho=acos(beta))}
 
+##### end

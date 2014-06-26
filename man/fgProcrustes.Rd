@@ -6,28 +6,33 @@
 fgProcrustes(x, tol, verbose)
 }
 \arguments{
-\item{x}{an array, a list of configurations, or an Out or on Ldk object}
+\item{x}{an array, a list of configurations, or an \link{Out}, \link{Opn} or \link{Ldk} object}
 
 \item{tol}{numeric when to stop iterations}
 
-\item{verbose}{logical whether to print outputs}
+\item{verbose}{logical whether to print outputs (iteration number, and gain)}
 }
 \value{
-a list with components
-\enumerate{
-\item rotated: Array of superimposed configurations.
-\item iterationnumber: Number of iterations.
-\item Q: Convergence criterion.
-\item Qi: Full list of Q.
-\item Qd: Difference between succesive Q.
-\item interproc.dist: Minimal sum of squared norms of pairwise differences between
-all shapes in the superimposed sample.
-\item mshape: Mean shape configuration.
-\item cent.size: Vector of centroid sizes.
-} or and Ldk or and Out object.
+a list with components:
+\describe{
+\item{rotated}{array of superimposed configurations}
+\item{iterationnumber}{number of iterations}
+\item{Q}{convergence criterion}
+\item{Qi}{full list of Q}
+\item{Qd}{difference between succesive Q}
+\item{interproc.dist}{Minimal sum of squared norms of pairwise differences between
+all shapes in the superimposed sample}
+\item{mshape}{mean shape configuration}
+\item{cent.size}{vector of centroid sizes.}
+} or an \link{Out}, \link{Opn} or an \link{Ldk} object.
 }
 \description{
-Directly borrowed from Claude 2008 (fgpa2).
+Directly borrowed from Claude (2008), called there the \code{fgpa2} function.
+}
+\details{
+If performed on an \link{Out} or an \link{Opn} object, will try to use the \code{$ldk} slot,
+if landmarks have been previousy defined, then (with a message) on the \code{$coo} slot,
+but in that case, all shapes must have the same number of coordinates (\link{coo.sample} may help).
 }
 \note{
 Slightly less optimized than procGPA in the shapes package (~20% on my machine).

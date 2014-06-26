@@ -6,22 +6,22 @@
 fProcrustes(coo1, coo2)
 }
 \arguments{
-\item{coo1}{Configuration matrix to be superimposed onto the centered preshape of coo2.}
+\item{coo1}{configuration matrix to be superimposed onto the centered preshape of coo2.}
 
-\item{coo2}{Reference configuration matrix.}
+\item{coo2}{reference configuration matrix.}
 }
 \value{
-a list with components
-\enumerate{
-\item coo1: Superimposed centered preshape of coo1 onto the centered preshape of coo2
-\item coo2: Centered preshape of coo2
-\item rotation: Rotation matrix
-\item scale: Scale parameter
-\item DF: Full Procrustes distance between coo1 and coo2.
+a list with components:
+\describe{
+\item{coo1}{superimposed centered preshape of coo1 onto the centered preshape of coo2}
+\item{coo2}{centered preshape of coo2}
+\item{rotation}{rotation matrix}
+\item{scale}{scale parameter}
+\item{DF}{full Procrustes distance between coo1 and coo2.}
 }
 }
 \description{
-Directly borrowed from Claude 2008 (fPsup)
+Directly borrowed from Claude (2008), called there the \code{fPsup} function.
 }
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
