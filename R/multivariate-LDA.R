@@ -46,8 +46,9 @@ LDA.Coe <- function(x, fac, retain){
   } else { remove <- NULL }  
   # now we calculate two linear models with MASS::lda
   # one with
-  mod    <- lda(X, grouping=fac)
+  mod      <- lda(X, grouping=fac)
   mod.pred <- predict(mod, X)
+  mod.CV   <- lda(X, grouping=fac, CV=TRUE)
   CV <- table(fac, mod.pred$class)
   names(dimnames(CV)) <- c("actual", "classified")
   # we calculate unstandardized LDs
@@ -149,5 +150,5 @@ LDA.PCA <- function(x, fac, retain=3){
 #' @export
 print.LDA <- function(x, ...){
   cat("An 'LDA' object. See ?LDA.\n")
-  cat("Cross-validation table (", signif(x$correct * 100, 3), "% ): \n")
+  cat("Actual / predicted groups (", signif(x$correct * 100, 3), "% ): \n")
   print(x$CV)}

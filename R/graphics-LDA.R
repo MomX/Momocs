@@ -127,7 +127,7 @@ plot.LDA <- function(#basics
   
   .frame(xy, center.origin, zoom=zoom)
   if (grid) .grid(nb.grids)
-    if (morphospace) {
+    if (morphospace & LDA$method=="eFourier") {
       .morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
                       amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                       col.shp=col.shp, border.shp=border.shp)}

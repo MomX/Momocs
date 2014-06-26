@@ -7,18 +7,36 @@
 #' lists of \bold{open} outlines, along with other informations,
 #' on which generic methods such as plotting methods (e.g. \link{stack}) 
 #' and specific methods (e.g. \link{rawPolynomials} can be applied.
-#'  \code{Opn} objects are primarily \code{\link{Coo}} objects.
+#'  \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 #' 
-#' @param x \code{list} of matrices of \eqn{(x; y)} coordinates
+#' @param x \code{list} of matrices of (x; y) coordinates
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @param fac (optionnal) a \code{data.frame} of factors, 
 #' specifying the grouping structure
 #' @return an \code{Opn} object
-#' @seealso \link{Coo}, \link{Out}, link{Ldk}.
+#' @seealso \link{Coo}, \link{Out}, \link{Ldk}.
 #' @keywords Opn
 #' @aliases Opn
 #' @examples
 #' methods(class=Opn)
+#' # we load some open outlines. See ?olea for credits
+#' data(olea)
+#' olea
+#' panel(olea)
+#' nqual(olea)
+#' # orthogonal polynomials
+#' op <- orthoPolynomials(olea, degree=5)
+#' # we print the Coe
+#' op
+#' # Let's do a PCA on it
+#' opca <- pca(op)
+#' plot(opca, "domes")
+#' plot(opca, "cep")
+#' # and now an LDA
+#' olda <- LDA(op, "cep")
+#' for CV table
+#' olda 
+#' plot(olda)
 #' @export
 Opn <- function(x, ldk=NULL, fac=data.frame()){UseMethod("Opn")}
 
@@ -108,7 +126,7 @@ print.Opn <- function(x, ...){
 #' @keywords Opn
 #' @examples
 #' data(olea)
-#' nqual(olea)
+#' nqual(olea, degree.range=1:9)
 #' @export
 nqual <- function(Opn,
                   method=c("rawPolynomials", "orthoPolynomials"),
@@ -253,16 +271,21 @@ print.OpnCoe <- function(x, ...){
 #' @aliases rawPolynomials
 #' @param Opn an \link{Opn} object
 #' @param degree of the polynomial
-#' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
-#' by default \eqn{(x= -1; y=0)}
-#' @param baseline2 numeric the \eqn{(x; y)} coordinates of the second baseline
-#' by default \eqn{(x= 1; y=0)}
+#' @param baseline1 numeric the (x; y) coordinates of the first baseline
+#' by default (x= -1; y=0)
+#' @param baseline2 numeric the (x; y) coordinates of the second baseline
+#' by default (x= 1; y=0)
 #' @param nb.pts number of points to sample and on which to calculate polynomials
 #' @return a \code{OpnCoe} object.
 #' @keywords Opn
 #' @examples
 #' data(olea)
-#' rawPolynomials(olea, 5)
+#' op <- rawPolynomials(olea, 5)
+#' op
+#' # a summary of the r2 (fit)
+#' hist(op$r2)
+#' # and the standard deviation
+#' sd(op$r2)
 #' @export
 rawPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("rawPolynomials")}
@@ -322,7 +345,13 @@ rawPolynomials.Opn <- function(Opn, degree,
 #' @keywords Opn
 #' @examples
 #' data(olea)
-#' orthoPolynomials(olea, 5)
+#' op <- orthoPolynomials(olea, 5)
+#' op
+#' a summary of the r2 (fit)
+#' hist(op$r2)
+#' summary(op$r2)
+#' # and the standard deviation
+#' sd(op$r2)
 #' @export
 orthoPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts){
   UseMethod("orthoPolynomials")}
@@ -367,8 +396,10 @@ orthoPolynomials.Opn <- function(Opn, degree,
   return(OpnCoe(coe=coe, fac=Opn$fac, method=method, 
                 baseline1=baseline1, baseline2=baseline2, r2=r2, mod=mod))}
 
-#nquant
+#nquant (n no longer pertinent) calib.xxx everywhere ??
 #npow / nr2
 #natSplines
 #cubicSplines
 #Bezier
+
+###### end Opn
