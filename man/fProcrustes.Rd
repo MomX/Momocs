@@ -12,12 +12,12 @@ fProcrustes(coo1, coo2)
 }
 \value{
 a list with components:
-\describe{
-\item{coo1}{superimposed centered preshape of coo1 onto the centered preshape of coo2}
-\item{coo2}{centered preshape of coo2}
-\item{rotation}{rotation matrix}
-\item{scale}{scale parameter}
-\item{DF}{full Procrustes distance between coo1 and coo2.}
+\itemize{
+\item \code{coo1} superimposed centered preshape of coo1 onto the centered preshape of coo2
+\item \code{coo2} centered preshape of coo2
+\item \code{rotation} rotation matrix
+\item \code{scale} scale parameter
+\item \code{DF} full Procrustes distance between coo1 and coo2.
 }
 }
 \description{
@@ -26,4 +26,5 @@ Directly borrowed from Claude (2008), called there the \code{fPsup} function.
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
+\keyword{Procrustes}
 

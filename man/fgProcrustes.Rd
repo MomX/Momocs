@@ -14,16 +14,16 @@ fgProcrustes(x, tol, verbose)
 }
 \value{
 a list with components:
-\describe{
-\item{rotated}{array of superimposed configurations}
-\item{iterationnumber}{number of iterations}
-\item{Q}{convergence criterion}
-\item{Qi}{full list of Q}
-\item{Qd}{difference between succesive Q}
-\item{interproc.dist}{Minimal sum of squared norms of pairwise differences between
-all shapes in the superimposed sample}
-\item{mshape}{mean shape configuration}
-\item{cent.size}{vector of centroid sizes.}
+\itemize{
+\item \code{rotated} array of superimposed configurations
+\item \code{iterationnumber} number of iterations
+\item \code{Q} convergence criterion
+\item \code{Qi} full list of Q
+\item \code{Qd} difference between succesive Q
+\item \code{interproc.dist} minimal sum of squared norms of pairwise differences between
+all shapes in the superimposed sample
+\item \code{mshape} mean shape configuration
+\item \code{cent.size} vector of centroid sizes.
 } or an \link{Out}, \link{Opn} or an \link{Ldk} object.
 }
 \description{
@@ -40,4 +40,5 @@ Slightly less optimized than procGPA in the shapes package (~20% on my machine).
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
+\keyword{Procrustes}
 

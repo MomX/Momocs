@@ -1,12 +1,24 @@
-# 2.2 Cubic splines -------------------------------------------------------
-#todo
-# 2.3 Bezier splines ------------------------------------------------------
+##### Core functions for Bezier analysis. will probably be deprecated and never used.
+
 #' Calculates Bezier coefficients from a shape
-#' #todo
+#' 
+#' Directly borrowed for Claude (2008), and also called \code{bezier} there.
 #' @param coo a matrix or a list of (x; y) coordinates
-#' @param n the degree
-#' @return a list with J and B
-#' @keywords morphoCore
+#' @param n the degree, by default the number of coordinates.
+#' @return a list with components:
+#' \itemize{
+#' \item \code{$J} matrix of Bezier coefficients
+#' \item \code{$B} matrix of Bezier vertices.
+#' }
+#' @note Not implemented for open outlines but may be useful for other purposes.
+#' @keywords Bezier
+#' @examples
+#' set.seed(34)
+#' x <- coo.sample(efourier.shape(), 5)
+#' plot(x, ylim=c(-3, 3), asp=1, type="b", pch=20)
+#' b <- bezier(x)
+#' bi <- bezier.i(b$B)
+#' lines(bi, col="red")
 #' @export
 bezier <- function(coo, n){
   coo <- coo.check(coo)
@@ -27,11 +39,19 @@ bezier <- function(coo, n){
 
 #' Calculates a shape from Bezier coefficients
 #' 
-#' todo
-#' @param B a matrix
-#' @param nb.pts the number of points to return for drawing he shape
+#' Directly borrowed for Claude (2008), and called \code{beziercurve} there.
+#' @param B a matrix of Bezier vertices, such as those produced by \link{bezier}
+#' @param nb.pts the number of points to sample along the curve.
 #' @return a matrix of (x; y) coordinates
-#' @keywords morphoCore
+#' @note Not implemented for open outlines but may be useful for other purposes.
+#' @keywords Bezier
+#' @examples
+#' set.seed(34)
+#' x <- coo.sample(efourier.shape(), 5)
+#' plot(x, ylim=c(-3, 3), asp=1, type="b", pch=20)
+#' b <- bezier(x)
+#' bi <- bezier.i(b$B)
+#' lines(bi, col="red")
 #' @export
 bezier.i <-function(B, nb.pts=120){
   x   <- y <- numeric(nb.pts)
@@ -49,3 +69,5 @@ bezier.i <-function(B, nb.pts=120){
     y[j] <- sum(vecty)}
   coo <- cbind(x, y)
   return(coo)}
+
+##### end Bezier

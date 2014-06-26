@@ -6,15 +6,26 @@
 bezier.i(B, nb.pts = 120)
 }
 \arguments{
-\item{B}{a matrix}
+\item{B}{a matrix of Bezier vertices, such as those produced by \link{bezier}}
 
-\item{nb.pts}{the number of points to return for drawing he shape}
+\item{nb.pts}{the number of points to sample along the curve.}
 }
 \value{
 a matrix of (x; y) coordinates
 }
 \description{
-todo
+Directly borrowed for Claude (2008), and called \code{beziercurve} there.
 }
-\keyword{morphoCore}
+\note{
+Not implemented for open outlines but may be useful for other purposes.
+}
+\examples{
+set.seed(34)
+x <- coo.sample(efourier.shape(), 5)
+plot(x, ylim=c(-3, 3), asp=1, type="b", pch=20)
+b <- bezier(x)
+bi <- bezier.i(b$B)
+lines(bi, col="red")
+}
+\keyword{Bezier}
 

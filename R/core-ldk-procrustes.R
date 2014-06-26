@@ -1,20 +1,21 @@
-##### Core functions for Procrustes alignement
+##### Core functions for Procrustes alignements
 
-# DF should be used for hquant #todo
+# should DF be used for hquant ? #todo
 #' Full Procrustes alignment between two shapes
 #' 
 #' Directly borrowed from Claude (2008), called there the \code{fPsup} function.
 #' @param coo1 configuration matrix to be superimposed onto the centered preshape of coo2.
 #' @param coo2 reference configuration matrix.
 #' @return a list with components:
-#' \describe{
-#' \item{coo1}{superimposed centered preshape of coo1 onto the centered preshape of coo2}
-#' \item{coo2}{centered preshape of coo2}
-#' \item{rotation}{rotation matrix}
-#' \item{scale}{scale parameter}
-#' \item{DF}{full Procrustes distance between coo1 and coo2.}
+#' \itemize{
+#' \item \code{coo1} superimposed centered preshape of coo1 onto the centered preshape of coo2
+#' \item \code{coo2} centered preshape of coo2
+#' \item \code{rotation} rotation matrix
+#' \item \code{scale} scale parameter
+#' \item \code{DF} full Procrustes distance between coo1 and coo2.
 #' }
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
+#' @keywords Procrustes
 #' @export
 fProcrustes <- function(coo1, coo2){
   # directly borrowed from Claude
@@ -45,19 +46,20 @@ fProcrustes <- function(coo1, coo2){
 #' @param tol numeric when to stop iterations
 #' @param verbose logical whether to print outputs (iteration number, and gain)
 #' @return a list with components:
-#' \describe{
-#' \item{rotated}{array of superimposed configurations}
-#' \item{iterationnumber}{number of iterations}
-#' \item{Q}{convergence criterion}
-#' \item{Qi}{full list of Q}
-#' \item{Qd}{difference between succesive Q}
-#' \item{interproc.dist}{Minimal sum of squared norms of pairwise differences between
-#' all shapes in the superimposed sample}
-#' \item{mshape}{mean shape configuration}
-#' \item{cent.size}{vector of centroid sizes.}
+#' \itemize{
+#' \item \code{rotated} array of superimposed configurations
+#' \item \code{iterationnumber} number of iterations
+#' \item \code{Q} convergence criterion
+#' \item \code{Qi} full list of Q
+#' \item \code{Qd} difference between succesive Q
+#' \item \code{interproc.dist} minimal sum of squared norms of pairwise differences between
+#' all shapes in the superimposed sample
+#' \item \code{mshape} mean shape configuration
+#' \item \code{cent.size} vector of centroid sizes.
 #' } or an \link{Out}, \link{Opn} or an \link{Ldk} object.
 #' @note Slightly less optimized than procGPA in the shapes package (~20% on my machine).
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
+#' @keywords Procrustes
 #' @export
 fgProcrustes <- function(x, tol, verbose){UseMethod("fgProcrustes")}
 
@@ -180,14 +182,15 @@ fgProcrustes.Ldk <- function(x, tol=1e-10, verbose=TRUE){
 #' @param coo1 Configuration matrix to be superimposed onto the centered preshape of coo2.
 #' @param coo2 Reference configuration matrix.
 #' @return a list with components
-#' \describe{
-#' \item{coo1}{superimposed centered preshape of coo1 onto the centered preshape of coo2}
-#' \item{coo2}{centered preshape of coo2}
-#' \item{rotation}{rotation matrix}
-#' \item{DP}{partial Procrustes distance between coo1 and coo2}
-#' \item{rho}{trigonometric Procrustes distance}.
+#' \itemize{
+#' \item \code{coo1} superimposed centered preshape of coo1 onto the centered preshape of coo2
+#' \item \code{coo2} centered preshape of coo2
+#' \item \code{rotation} rotation matrix
+#' \item \code{DP} partial Procrustes distance between coo1 and coo2
+#' \item \code{rho} trigonometric Procrustes distance.
 #' }
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
+#' @keywords Procrustes
 #' @export
 pProcrustes <- function(coo1, coo2){
   # directly borrowed from Claude
@@ -206,4 +209,4 @@ pProcrustes <- function(coo1, coo2){
   list(coo1=Z1%*%Gam, coo2=Z2,
        rotation=Gam, DP=sqrt(sum(edm(Z1%*%Gam, Z2)^2)), rho=acos(beta))}
 
-##### end
+##### end Procrustes
