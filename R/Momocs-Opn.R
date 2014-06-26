@@ -96,7 +96,7 @@ print.Opn <- function(x, ...){
 #' @param Opn the \code{Opn} object on which to nqual
 #' @param method any method from \code{c("rawPolynomials", "orthoPolynomials")}
 #' @param id the shape on which to perform nqual
-#' @param n.range vector of polynomial degrees on which to perform nqual
+#' @param degree.range vector of polynomial degrees on which to perform nqual
 #' @param smooth.it numeric, number of smoothing iterations
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
@@ -113,7 +113,7 @@ print.Opn <- function(x, ...){
 nqual <- function(Opn,
                   method=c("rawPolynomials", "orthoPolynomials"),
                   id, 
-                  n.range = c(2, 3, 4, 6, 8, 10),
+                  degree.range = c(2, 3, 4, 6, 8, 10),
                   smooth.it=0,
                   baseline1=c(-1, 0), baseline2=c(1, 0),
                   plot.method=c("panel", "stack")[1],
@@ -126,7 +126,7 @@ nqual.Opn <-
   function(Opn,
            method=c("rawPolynomials", "orthoPolynomials"),
            id, 
-           n.range = c(2, 3, 4, 6, 8, 10),
+           degree.range = c(2, 3, 4, 6, 8, 10),
            smooth.it=0,
            baseline1=c(-1, 0), baseline2=c(1, 0),
            plot.method=c("panel", "stack")[1],
@@ -145,27 +145,27 @@ nqual.Opn <-
         ortho <- switch(p, TRUE,   FALSE)}}
     
     # check for too ambitious harm.range
-    if (max(n.range) > (min(sapply(Opn$coo, nrow))- 1)) {
-      n.range <- (min(sapply(Opn$coo, nrow))- 1)
-      cat(" * n.range was too high and set to: ", n.range, ".\n")}
+    if (max(degree.range) > (min(sapply(Opn$coo, nrow))- 1)) {
+      degree.range <- (min(sapply(Opn$coo, nrow))- 1)
+      cat(" * degree.range was too high and set to: ", degree.range, ".\n")}
     coo <- Opn$coo[[id]]
     if (smooth.it  != 0) coo <- coo.smoothcurve(coo, smooth.it)
     coo <- coo.baseline(coo, ldk1=1, ldk2=nrow(coo), t1=baseline1, t2=baseline2)
     res <- list()
-    for (i in seq(along=n.range)) {
+    for (i in seq(along=degree.range)) {
       res[[i]] <- polynomials.i(
-        polynomials(coo, n=n.range[i], ortho=ortho))}
+        polynomials(coo, degree=degree.range[i], ortho=ortho))}
     # plotting
     op <- par(mar=c(3, 3, 2, 1))
     on.exit(par(op))
-    cols <- paste0(palette(length(n.range)), "EE")
+    cols <- paste0(palette(length(degree.range)), "EE")
     if (plot.method=="stack") {
       #to initiate the plot but stack may be a better option for that part
       coo.plot(coo, border=shp.border, lwd=1)
-      for (i in seq(along=n.range)){
+      for (i in seq(along=degree.range)){
         lines(res[[i]], col=cols[i])}
       if (legend) {
-        legend("topright", legend = as.character(n.range), bty="n",
+        legend("topright", legend = as.character(degree.range), bty="n",
                col = cols, lty = 1, lwd=1, cex=0.7,
                title = legend.title)}
     } else {
@@ -173,7 +173,7 @@ nqual.Opn <-
         #par(oma=c(1, 1, 3, 0))
         pos <- coo.list.panel(res, borders=cols, cols=par("bg"), poly=FALSE)
         if (legend) {text(x=pos[, 1], y=pos[, 2],
-                          as.character(n.range))}
+                          as.character(degree.range))}
         title(names(Opn)[id], cex=1.3)}}}
 
 #nquant
@@ -298,7 +298,7 @@ rawPolynomials.Opn <- function(Opn, degree,
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
-    mod <- polynomials(coo[[i]], n=degree, ortho=FALSE)
+    mod <- polynomials(coo[[i]], degree=degree, ortho=FALSE)
     #mod[[i]] <- pol
     coe[i, ] <- mod$coeff
     r2[i]    <- mod$r2
@@ -358,7 +358,7 @@ orthoPolynomials.Opn <- function(Opn, degree,
   mod <- list()
   #the loop
   for (i in seq(along=coo)){
-    mod <- polynomials(coo[[i]], n=degree, ortho=TRUE)
+    mod <- polynomials(coo[[i]], degree=degree, ortho=TRUE)
     #mod[[i]] <- pol
     coe[i, ] <- mod$coeff
     r2[i] <- mod$r2}

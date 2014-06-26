@@ -724,8 +724,8 @@ coo.ldk <- function(coo, nb.ldk) {
 #' and \code{ldk2}-th points being set on \eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=0)}, respectively.
 #' @aliases coo.bookstein
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @param ldk1 the id of the first point of the new baseline
-#' @param ldk2 the id of the second point of the new baseline
+#' @param ldk1 the id of the first point of the new baseline (the first, by default)
+#' @param ldk2 the id of the second point of the new baseline (the last, by default)
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.baseline}
 #' @keywords coo_utilities
@@ -739,7 +739,7 @@ coo.ldk <- function(coo, nb.ldk) {
 #' @export
 coo.bookstein <- function(coo, ldk1, ldk2){UseMethod("coo.bookstein")}
 #' @export
-coo.bookstein.default <- function(coo, ldk1, ldk2){
+coo.bookstein.default <- function(coo, ldk1=1, ldk2=nrow(coo)){
   D <- ed(coo[ldk1, ], coo[ldk2, ])
   coo2 <- matrix(NA, nrow(coo), ncol(coo))
   ldk1 <- coo[ldk1,]

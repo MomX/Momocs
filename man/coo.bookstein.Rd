@@ -8,9 +8,9 @@ coo.bookstein(coo, ldk1, ldk2)
 \arguments{
 \item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
-\item{ldk1}{the id of the first point of the new baseline}
+\item{ldk1}{the id of the first point of the new baseline (the first, by default)}
 
-\item{ldk2}{the id of the second point of the new baseline}
+\item{ldk2}{the id of the second point of the new baseline (the last, by default)}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.

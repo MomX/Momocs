@@ -4,8 +4,8 @@
 \title{Graphical calibration for Opn objects}
 \usage{
 nqual(Opn, method = c("rawPolynomials", "orthoPolynomials"), id,
-  n.range = c(2, 3, 4, 6, 8, 10), smooth.it = 0, baseline1 = c(-1, 0),
-  baseline2 = c(1, 0), plot.method = c("panel", "stack")[1],
+  degree.range = c(2, 3, 4, 6, 8, 10), smooth.it = 0, baseline1 = c(-1,
+  0), baseline2 = c(1, 0), plot.method = c("panel", "stack")[1],
   legend = TRUE, legend.title = "Degree", palette = col.india,
   shp.border = "#1A1A1A")
 }
@@ -16,7 +16,7 @@ nqual(Opn, method = c("rawPolynomials", "orthoPolynomials"), id,
 
 \item{id}{the shape on which to perform nqual}
 
-\item{n.range}{vector of polynomial degrees on which to perform nqual}
+\item{degree.range}{vector of polynomial degrees on which to perform nqual}
 
 \item{smooth.it}{numeric, number of smoothing iterations}
 
