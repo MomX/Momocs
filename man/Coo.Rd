@@ -67,5 +67,4 @@ names(bot) # access all individual names
 bot2 <- bot
 names(bot2) <- paste0("newnames", 1:length(bot2)) # define new names
 }
-\keyword{Coo}
 

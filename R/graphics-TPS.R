@@ -14,7 +14,7 @@
 #' deformations.
 #' @seealso \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
 #' \code{tps2d}.
-#' @keywords Thin plate splines
+#' @keywords ThinPlateSplines
 #' @export
 tps2d <- function(grid0, fr, to){
   if (is.closed(fr)) fr <- coo.unclose(fr)
@@ -65,7 +65,7 @@ tps2d <- function(grid0, fr, to){
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @return No returned value.
 #' @seealso \link{tps.iso} and \link{tps.arr}.
-#' @keywords Thin plate splines
+#' @keywords ThinPlateSplines
 #' @examples
 #' 
 #' data(bot)
@@ -127,7 +127,7 @@ tps.grid <- function(fr, to, amp=1, over=1.2,
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @return No returned value.
 #' @seealso \link{tps.grid} and \link{tps.iso}.
-#' @keywords Thin plate splines
+#' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
 #' botF <- eFourier(bot)
@@ -191,7 +191,7 @@ tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @return No returned value.
 #' @seealso \link{tps.grid} and \link{tps.arr}
-#' @keywords Thin plate splines
+#' @keywords ThinPlateSplines
 #' @examples
 #' 
 #' data(bot)

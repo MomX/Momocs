@@ -24,7 +24,5 @@ internally but might be useful elsewhere.
 \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
 \code{tps2d}.
 }
-\keyword{Thin}
-\keyword{plate}
-\keyword{splines}
+\keyword{ThinPlateSplines}
 

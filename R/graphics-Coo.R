@@ -1,13 +1,25 @@
-# 4. Coo / Out / Opn plotters --------------------------------------------------
-#' Plot on Coo (Out/Opn) objects: quick review
+##### Main Coo (Out/Opn/Ldk) plotters
+
+#' Plots Coo objects: quick review
 #' 
-#' Allows to plot shapes from Coo objects
+#' Allows to plot shapes, individually, for \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 #' @method plot Coo
-#' @param x the Coo object
+#' @param x the \link{Coo} object
 #' @param id the id of the shape to plot, if not provided a 
-#' random shape is plotted
+#' random shape is plotted. If passed with \code{"all"} all shapes are plotted,
+#' one by one.
 #' @param ... further arguments to be passed to \link{coo.plot}
-#' @keywords Coo
+#' @keywords Graphics
+#' @seealso \link{panel.Coo}, \link{stack.Coo}.
+#' @examples
+#' \dontrun{
+#' data(bot)
+#' plot(bot, 5)
+#' plot(bot)
+#' plot(bot, 5, pch=3, points=TRUE) # an example of '...' use
+#' }
+#' @rdname plot.Coo
+#' @aliases plot.Coo
 #' @export
 plot.Coo <- function(x, id, ...){
   Coo <- x
@@ -25,10 +37,13 @@ plot.Coo <- function(x, id, ...){
         coo.plot(Coo$coo[[id[i]]], main=names(Coo)[id[i]], ...)
         readline(prompt = "Press <Enter> to continue, <Esc> to quit...")}}}}
 
-#' Plot on Coo objects: stacks all shapes
+# todo: gestion links
+# plot.Ldk <- plot.Coo
+
+#' Plots Coo objects: stacks all shapes
 #' 
-#' Plots all the outlines from a \code{Coo} on the same graph with graphical 
-#' options.
+#' Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
+#' object.
 #' @method stack Coo
 #' @param x The \code{Coo} object to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
@@ -48,15 +63,20 @@ plot.Coo <- function(x, id, ...){
 #' @param ldk.chull logical whether to draw convex hull
 #' @param ldk.labels logical whether to draw landmark labels
 #' @param xy.axis whether to draw or not the x and y axes
-#' @param ... further arguments to be passed to coo.plot
-#' @seealso \link{panel}, \link{plot.Coo}.
+#' @param ... further arguments to be passed to \link{coo.plot}
+#' @seealso \link{panel.Coo}, \link{plot.Coo}.
+#' @keywords Graphics
 #' @examples
+#' \dontrun{
 #' data(mosquito)
 #' stack(mosquito, borders="#1A1A1A22", first.point=FALSE)
 #' data(hearts)
 #' stack(hearts)
 #' stack(hearts, ldk=FALSE)
 #' stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
+#' }
+#' @rdname stack.Coo
+#' @aliases stack.Coo
 #' @export
 stack.Coo <- function(x, cols, borders,
                       points=FALSE, first.point=TRUE, centroid=TRUE,
@@ -84,6 +104,7 @@ stack.Coo <- function(x, cols, borders,
     if (ldk & length(Coo$ldk)!=0) {
       points(Coo$coo[[i]][Coo$ldk[[i]], ], pch=ldk.pch, col=ldk.col, cex=ldk.cex)}}}
 
+#' @rdname stack.Coo
 #' @export
 stack.Ldk <- function(x, cols, borders,
                       first.point=TRUE, centroid=TRUE,
@@ -118,13 +139,14 @@ stack.Ldk <- function(x, cols, borders,
   if (ldk.links)    { if (is.matrix(Coo$links)) ldk.links(mshape(A), Coo$links) }
   if (ldk.labels)  { ldk.labels(mshape(A)) }}
 
-#' Plot on Coo objects: family picture
+#' Plots Coo objects: family picture
 #' 
-#' Plots all the outlines from a \code{Coo} side by side
+#' Plots all the outlines, side by side, from 
+#' a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 #'
 #' @param Coo The \code{Coo (Out/Opn)} object  to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
-#' Either a single value or of length exactly equals to the number of coordinates.
+#' Either a single value or of length exactly equal to the number of coordinates.
 #' @param borders A \code{vector} of colors for drawing the borders.
 #' Either a single value or of length exactly equals to the number of coordinates.
 #' @param fac a factor within the $fac slot for colors
@@ -137,18 +159,25 @@ stack.Ldk <- function(x, cols, borders,
 #' @param points.pch (for Ldk) and a pch for these points
 #' @param points.cex (for Ldk) and a cex for these points
 #' @param points.col (for Ldk) and a col  for these points
-#' @param ... further arguments for the generic
+#' @param ... further arguments to maintain consistency with the generic \link{plot}.
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
+#' @keywords Graphics
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)
 #' data(olea)
 #' panel(olea)
+#' data(bot)
+#' # an illustration of the use of fac
+#' panel(bot, fac="type", palette=col.spring, names=TRUE)
+#' @aliases panel.Coo
+#' @rdname panel.Coo
 #' @export
 panel <- function(Coo, cols, borders, fac,
                   reorder, palette=col.summer,
                   names=NULL, cex.names=0.6, points=TRUE, points.pch=3,
                   points.cex=0.2, points.col, ...){UseMethod("panel")}
+#' @rdname panel.Coo
 #' @export
 panel.Out <- function(Coo, cols, borders,
                       fac, reorder=NULL, palette=col.summer,
@@ -185,7 +214,9 @@ panel.Out <- function(Coo, cols, borders,
           text(pos[,1], pos[,2], labels=Coo$fac[, names][order(reorder)], cex=cex.names)
         }
       } else {
-        text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
+        text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}    
+
+#' @rdname panel.Coo
 #' @export
 panel.Opn <- function(Coo, cols, borders, fac,
                       reorder=NULL, palette=col.summer,
@@ -224,6 +255,7 @@ panel.Opn <- function(Coo, cols, borders, fac,
       } else {
         text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
 
+#' @rdname panel.Coo
 #' @export
 panel.Ldk <- function(Coo, cols, borders, fac,
                       reorder=NULL, palette=col.summer,
@@ -259,3 +291,5 @@ panel.Ldk <- function(Coo, cols, borders, fac,
         }
       } else {
         text(pos[,1], pos[,2], labels=names, cex=cex.names)}}}}     
+
+##### end graphics Coo

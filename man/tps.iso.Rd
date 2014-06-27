@@ -58,7 +58,5 @@ tps.iso(fr, to, iso.nb=2000, amp=3)
 \seealso{
 \link{tps.grid} and \link{tps.arr}
 }
-\keyword{Thin}
-\keyword{plate}
-\keyword{splines}
+\keyword{ThinPlateSplines}
 

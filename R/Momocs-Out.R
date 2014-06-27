@@ -38,26 +38,6 @@ Out.array  <- function(x, ldk=list(), fac=data.frame()){
   x <- a2l(x)
   Out(x, fac=fac)}
 
-# experimental below
-#' @export
-Out.Coo <- function(x, ldk=list(), fac=data.frame()){
-  Out(x=x$coo, ldk=x$ldk, fac=x$fac)}
-
-# merge method for Out objects (experimental)
-
-#' Combine Out objects
-#' 
-#' @param ... a list of Out objects
-#' @export
-combine <- function(...){UseMethod("combine")}
-#' @export
-combine.Out <- function(...){
-  args <- list(...)
-  Out     <- Out(do.call( c, lapply(args, function(x) c(x$coo) )))
-  Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
-  if (any(lapply(args, function(x) length(x$ldk))!=0)){
-    Out$ldk <- do.call("rbind", lapply(args, function(x) x$ldk))}
-  return(Out)}
 
 # The print method for Out objects
 #' @export
@@ -458,6 +438,7 @@ OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   class(OutCoe) <- c("OutCoe", "Coe")
   return(OutCoe)}
 
+#' @rdname combine
 #' @export
 combine.OutCoe <- function(...){
   args <- list(...)

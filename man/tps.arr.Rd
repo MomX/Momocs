@@ -63,7 +63,5 @@ tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)
 \seealso{
 \link{tps.grid} and \link{tps.iso}.
 }
-\keyword{Thin}
-\keyword{plate}
-\keyword{splines}
+\keyword{ThinPlateSplines}
 

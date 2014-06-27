@@ -6,7 +6,9 @@
 Coe(...)
 }
 \arguments{
-\item{...}{anything and, anyway, this function will simply returns a message.}
+\item{...}{anything and, anyway, this function will simply returns a message.
+# to see all methods for Coo objects.
+methods(class="Coe")}
 }
 \description{
 \code{Coe} class is a "super class" for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
@@ -23,14 +25,4 @@ classes are all, primarily, \code{Coe} objects on which we define generic
 More, generally, see \link{OutCoe}, \link{OpnCoe} and \link{LdkCoe}
 for documentation on these classes.
 }
-\keyword{#}
-\keyword{Coe}
-\keyword{Coo}
-\keyword{all}
-\keyword{for}
-\keyword{methods}
-\keyword{methods(class="Coe")}
-\keyword{objects.}
-\keyword{see}
-\keyword{to}
 

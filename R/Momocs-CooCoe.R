@@ -27,7 +27,6 @@
 #' below, as well as in individual  Momocs' vignettes.
 #' 
 #' @param ... anything and, anyway, this function will simply returns a message.
-#' @keywords Coo
 #' @examples
 #' # to see all methods for Coo objects.
 #' methods(class="Coo")
@@ -82,14 +81,13 @@ Coo <- function(...){
 #' for documentation on these classes.
 #'
 #' @param ... anything and, anyway, this function will simply returns a message.
-#' @keywords Coe
 #' # to see all methods for Coo objects.
 #' methods(class="Coe")
 #' @export
 Coe <- function(...){
   cat(" * Coe constructor does not exist alone. See ?Coe")}
 
-# allows to maintain the tradition str() behaviour
+# allows to maintain the traditionnal str() behaviour
 # actually useless but dont remember why/where
 #' @export
 str.Coo <- function(object, ...){
@@ -149,58 +147,3 @@ names.Coe <- function(x){
 "names<-.Coe" <- function(x, value){
   rownames(x$coe) <- value
   return(x)}
-
-#' Create subsets of Coo objects
-#' 
-#' Pretty useful in morphometrics. Imagine you have a \link{Out} or a \link{Opn}
-#' object that combines several different \emph{groups}, 
-#' whatever \emph{groups} are : species, views, etc. You may be interested in
-#' doing separated analyses (even if you could combine them later), then this
-#' function will ease the process. See the examples below.
-#' @aliases subset
-#' @param x a \code{Coo} object, i.e. \link{Out} or \link{Opn}
-#' @param subset logical taken from the $fac slot, or indices. See examples.
-#' @param ... useless here but maintains consistence with the generic subset.
-#' @keywords Opn Coo
-#' @examples
-#' data(bot)
-#' bot$fac
-#' beers <- subset(bot, type=="beer")
-#' whisk <- subset(bot, type=="whisky")
-#' # or you may prefere indices
-#' subset(bot, c(1, 13, 34, 37))
-#' # and you can combine them :
-#' data(olea)
-#' olea$fac
-#' subset(olea, domes=="cult" & view=="VL")
-#' @export
-# bloody dirty #todo
-subset.Coo <- function(x, subset, ...){
-  Coo <- x
-  e <- substitute(subset)
-  retain <- eval(e, Coo$fac, parent.frame())
-  Coo2 <- Coo
-  Coo2$coo <- Coo$coo[retain]
-  if (length(Coo$ldk)>0) Coo2$ldk <- Coo$ldk[retain]
-  if (ncol(Coo$fac)>0) {
-    Coo2$fac <- Coo$fac
-    Coo2$fac <- as.data.frame(Coo2$fac[retain, ])
-    names(Coo2$fac) <- names(Coo$fac)
-    Coo2$fac <- .refactor(Coo2$fac)
-  }
-  return(Coo2)}
-
-#' @export
-subset.OutCoe <- function(x, subset, ...){
-  OutCoe <- x
-  e <- substitute(subset)
-  retain <- eval(e, OutCoe$fac, parent.frame())
-  OutCoe2 <- OutCoe
-  OutCoe2$coe <- OutCoe$coe[retain, ]
-  if (ncol(OutCoe$fac)>0) {
-    OutCoe2$fac <- OutCoe$fac
-    OutCoe2$fac <- as.data.frame(OutCoe2$fac[retain, ])
-    names(OutCoe2$fac) <- names(OutCoe$fac)
-    OutCoe2$fac <- .refactor(OutCoe2$fac)
-  }
-  return(OutCoe2)}
