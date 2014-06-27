@@ -29,8 +29,11 @@ calculate a shape.}
 \item{plot}{\code{logical}. Whether to plot or not the shape.}
 }
 \value{
-A list with components: \item{x }{\code{vector} of
-\code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
+A list with components:
+\itemize{
+ \item \code{x} \code{vector} of x-coordinates
+ \item \code{y} \code{vector} of y-coordinates.
+ }
 }
 \description{
 \code{efourier.shape} calculates a "Fourier elliptical shape" given Fourier
@@ -62,7 +65,7 @@ Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
-\link{efourier.i}.
+\link{efourier.i}, \link{rfourier.shape}, \link{tfourier.shape}.
 }
-\keyword{coreMorpho}
+\keyword{eFourier}
 

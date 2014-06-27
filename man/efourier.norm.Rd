@@ -13,19 +13,21 @@ efourier.norm(ef, start = FALSE)
 point of the outline.}
 }
 \value{
-A list with following components: \item{A }{\code{vector} of
-\code{numeric} \eqn{A_{1->n}} \emph{normalized} harmonic coefficients.}
-\item{B }{\code{vector} of \code{numeric} \eqn{B_{1->n}} \emph{normalized}
-harmonic coefficients.} \item{C }{\code{vector} of \code{numeric}
-\eqn{C_{1->n}} \emph{normalized} harmonic coefficients.} \item{D
-}{\code{vector} of \code{numeric} \eqn{D_{1->n}} \emph{normalized} harmonic
-coefficients.} \item{size }{Magnitude of the semi-major axis of the first
-fitting ellipse.} \item{theta }{Angle, in radians, between the starting
-point and the semi-major axis of the first fitting ellipse.} \item{psi
-}{Orientation of the first fitting ellipse.} \item{ao }{\code{ao} Harmonic
-coefficient.} \item{co }{\code{co} Harmonic coefficient.} \item{lnef }{A
-\code{list} with A, B, C and D concatenated in a \code{vector} that may be
-convenient for some uses.}
+A list with the following components:
+\itemize{
+ \item \code{A} vector of \eqn{A_{1->n}} \emph{normalized} harmonic coefficients
+ \item \code{B} vector of \eqn{B_{1->n}} \emph{normalized} harmonic coefficients
+ \item \code{C} vector of \eqn{C_{1->n}} \emph{normalized} harmonic coefficients
+ \item \code{D} vector of \eqn{D_{1->n}} \emph{normalized} harmonic coefficients
+ \item \code{size} Magnitude of the semi-major axis of the first
+fitting ellipse
+\item \code{theta} angle, in radians, between the starting
+point and the semi-major axis of the first fitting ellipse
+\item psi orientation of the first fitting ellipse
+\item \code{ao} ao harmonic coefficient
+\item \code{co} co Harmonic coefficient
+\item \code{lnef} a list with A, B, C and D concatenated in a vector.
+}
 }
 \description{
 \code{efourier.norm} normalizes Fourier coefficients for rotation,

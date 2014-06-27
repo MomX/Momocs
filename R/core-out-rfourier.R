@@ -1,5 +1,5 @@
+##### Core function for radii variation Fourier analyses
 
-# 1.2 Radius lengths Fourier analysis ==========================================
 #' Calculates radii variation Fourier analysis.
 #' 
 #' \code{rfourier} computes radii variation Fourier analysis from a matrix or a
@@ -25,15 +25,22 @@
 #' @param norm \code{logical}. Whether to scale the outlines so that the mean
 #' length of the radii used equals 1.
 #' @param verbose \code{logical}. Whether to display diagnosis messages.
-#' @return A list with these components: \item{an }{\code{vector} of
-#' \eqn{a_{1->n}} harmonic coefficients.} \item{bn }{\code{vector} of
-#' \eqn{b_{1->n}} harmonic coefficients.} \item{ao }{\code{ao} Harmonic
-#' coefficient.} \item{r }{\code{vector} of radii lengths.}
-#' @seealso \link{rfourier.i} for the inverse operation, \link{rfourier.shape}.
+#' @return A list with following components:
+#' \itemize{
+#'  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients 
+#'  \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
+#'  \item \code{ao} ao harmonic coefficient.
+#'  \item \code{r} vector of radii lengths.
+#'  }
+#' @seealso \link{rFourier} for rfourier on \link{Out} objects.
+#' \link{rfourier.i} for the inverse operation, \link{rfourier.shape} to play around
+#' with this approach.
 #' \link{efourier}, \link{tfourier} for the other members of the Fourier's
 #' family.
+#' @note Directly borrowed for Claude (2008), and called \code{fourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
+#' @keywords rFourier
 #' @examples
 #' data(bot)
 #' coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
@@ -56,14 +63,12 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   if (nb.h == -1) {
     nb.h = floor(nrow(coo)/2)
     if (verbose){
-      cat(" * 'nb.h' must be lower than half the number of points.\n",
-          "* It has been set to", nb.h, "harmonics.\n")}}
+      cat(" * 'nb.h' must be lower than half the number of points and has been set to", nb.h, "harmonics.\n")}}
   if (smooth.it!=0) { coo <- coo.smooth(coo, smooth.it)}
   if (norm) {
     coo   <- coo.scale(coo.center(coo))
     rsize <- mean(apply(coo, 1, function(x) sqrt(sum(x^2))))
     coo   <- coo.scale(coo, 1/rsize)}
-  
   # from Claude
   p     <- nrow(coo)
   an    <- bn <- numeric(nb.h)
@@ -94,11 +99,11 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' calculated.}
 #' @seealso \link{efourier} for the reverse operation and also
 #' \code{rfourier.shape}. \link{l2m}, \link{coeff.split} may be useful.
+#' @note Directly borrowed for Claude (2008), and called \code{ifourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords coreMorpho
+#' @keywords rFourier
 #' @examples
-#' 
 #' data(bot)
 #' coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
 #' coo.plot(coo)
@@ -155,12 +160,11 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
 #' (usually decreasing) amplitude of the Fourier coefficients (see
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
-#' @return A list with components: \item{x }{\code{vector} of
-#' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
-#' @seealso \link{rfourier.i}.
+#' @return A matrix of (x; y) coordinates.
+#' @seealso \link{rfourier.i}, \link{efourier.shape}, \link{tfourier.shape}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords coreMorpho
+#' @keywords rFourier
 #' @examples
 #' data(bot)
 #' rf <- rfourier(bot[1], 24)
@@ -183,3 +187,5 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   shp <- rfourier.i(rf, nb.h=nb.h, nb.pts=nb.pts)      
   if (plot) coo.plot(shp)
   return(shp)}
+
+##### end rFourier

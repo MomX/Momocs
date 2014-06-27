@@ -23,8 +23,7 @@ calculate a shape.}
 \item{plot}{\code{logical}. Whether to plot or not the shape.}
 }
 \value{
-A list with components: \item{x }{\code{vector} of
-\code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
+A matrix of (x; y) coordinates.
 }
 \description{
 \code{rfourier.shape} calculates a "Fourier radii variation shape" given
@@ -57,7 +56,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-\link{rfourier.i}.
+\link{rfourier.i}, \link{efourier.shape}, \link{tfourier.shape}.
 }
-\keyword{coreMorpho}
+\keyword{rFourier}
 

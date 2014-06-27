@@ -19,15 +19,18 @@ that the first point used is sent on the origin.}
 \item{verbose}{\code{logical}. Whether to display diagnosis messages.}
 }
 \value{
-A list with these components: \item{ao }{\code{ao} Harmonic
-coefficient.} \item{an }{\code{vector} of \eqn{a_{1->n}} harmonic
-coefficients.} \item{bn }{\code{vector} of \eqn{b_{1->n}} harmonic
-coefficients.} \item{phi }{\code{vector} of variation of the tangent angle.}
-\item{t }{\code{vector} of distance along the perimeter expressed in
-radians.} \item{perimeter }{\code{numeric}. The perimeter of the outline.}
-\item{thetao }{\code{numeric}. The first tangent angle.} \item{x1 }{The
-x-coordinate of the first point.} \item{y1 }{The y-coordinate of the first
-point.}
+A list with the following components:
+\itemize{
+\item \code{ao} ao harmonic coefficient
+\item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
+\item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
+\item \code{phi} vector of variation of the tangent angle
+\item \code{t} vector of distance along the perimeter expressed in radians
+\item \code{perimeter} numeric. The perimeter of the outline
+\item \code{thetao} numeric. The first tangent angle
+\item \code{x1} The x-coordinate of the first point
+\item \code{y1} The y-coordinate of the first point.
+}
 }
 \description{
 \code{tfourier} computes tangent angle Fourier analysis from a matrix or a
@@ -45,6 +48,9 @@ coefficients per harmonics can be estimated as follow:
 \deqn{ a_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\cos n \theta_i } \deqn{
 b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \deqn{
 a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
+}
+\note{
+Directly borrowed for Claude (2008), and called \code{fourier2} there.
 }
 \examples{
 data(bot)
@@ -64,8 +70,9 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 pp.
 }
 \seealso{
+\link{tFourier} for analysis on \link{Out} objects.
 \link{efourier}, \link{rfourier} for the other members of the
-Fourier's family.
+Fourier's family. \link{tfourier.shape} to play around with this approach.
 }
 \keyword{coreMorpho}
 

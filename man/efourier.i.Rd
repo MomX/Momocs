@@ -15,8 +15,7 @@ specified, \code{length(ef$an)} is used.}
 \item{nb.pts}{\code{integer}. The number of points to calculate.}
 }
 \value{
-A list with components: \item{x }{\code{vector} of
-\code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
+A matrix of (x; y) coordinates.
 }
 \description{
 \code{efourier.i} uses the inverse elliptical Fourier transformation to
@@ -27,7 +26,7 @@ obtained computed with \link{efourier}.
 See \link{efourier} for the mathematical background.
 }
 \note{
-Directly borrowed for Claude (2008), and also called \code{efourier} there.
+Directly borrowed for Claude (2008), and also called \code{iefourier} there.
 }
 \examples{
 data(bot)

@@ -7,7 +7,7 @@
 
 \section{Changes in version 0.99 - "Barley"}{
 
-"BArley" release with a complete rewriting of the package, and the inclusion of
+"Barley" release with a complete rewriting of the package, and the inclusion of
 new morphometrics approches (open outlines, configuration of landmarks, global
 shape descriptors).
 

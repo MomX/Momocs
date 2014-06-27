@@ -26,8 +26,7 @@ calculate a shape.}
 \item{plot}{\code{logical}. Whether to plot or not the shape.}
 }
 \value{
-A list with components: \item{x }{\code{vector} of
-\code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
+A matrix of (x; y) coordinates.
 }
 \description{
 \code{tfourier.shape} calculates a "Fourier tangent angle shape" given
@@ -56,7 +55,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-\link{tfourier.i}.
+\link{tfourier.i}, \link{tfourier}, link{tFourier}.
 }
-\keyword{coreMorpho}
+\keyword{tFourier}
 

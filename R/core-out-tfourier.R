@@ -1,5 +1,5 @@
+##### Core function for tangent angle Fourier analyses
 
-# 1.3 Tangent angle ============================================================
 #' Calculates tangent angle Fourier analysis.
 #' 
 #' \code{tfourier} computes tangent angle Fourier analysis from a matrix or a
@@ -24,17 +24,22 @@
 #' @param norm \code{logical}. Whether to scale and register new coordinates so
 #' that the first point used is sent on the origin.
 #' @param verbose \code{logical}. Whether to display diagnosis messages.
-#' @return A list with these components: \item{ao }{\code{ao} Harmonic
-#' coefficient.} \item{an }{\code{vector} of \eqn{a_{1->n}} harmonic
-#' coefficients.} \item{bn }{\code{vector} of \eqn{b_{1->n}} harmonic
-#' coefficients.} \item{phi }{\code{vector} of variation of the tangent angle.}
-#' \item{t }{\code{vector} of distance along the perimeter expressed in
-#' radians.} \item{perimeter }{\code{numeric}. The perimeter of the outline.}
-#' \item{thetao }{\code{numeric}. The first tangent angle.} \item{x1 }{The
-#' x-coordinate of the first point.} \item{y1 }{The y-coordinate of the first
-#' point.}
-#' @seealso \link{efourier}, \link{rfourier} for the other members of the
-#' Fourier's family.
+#' @return A list with the following components:
+#' \itemize{
+#' \item \code{ao} ao harmonic coefficient
+#' \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
+#' \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
+#' \item \code{phi} vector of variation of the tangent angle
+#' \item \code{t} vector of distance along the perimeter expressed in radians
+#' \item \code{perimeter} numeric. The perimeter of the outline
+#' \item \code{thetao} numeric. The first tangent angle
+#' \item \code{x1} The x-coordinate of the first point
+#' \item \code{y1} The y-coordinate of the first point.
+#' }
+#' @seealso \link{tFourier} for analysis on \link{Out} objects. 
+#' \link{efourier}, \link{rfourier} for the other members of the
+#' Fourier's family. \link{tfourier.shape} to play around with this approach.
+#' @note Directly borrowed for Claude (2008), and called \code{fourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
 #' 
@@ -42,7 +47,6 @@
 #' pp.
 #' @keywords coreMorpho
 #' @examples
-#' 
 #' data(bot)
 #' coo <- bot[1]
 #' coo.plot(coo)
@@ -110,15 +114,15 @@ tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' \item{phi }{\code{vector} of interpolated changes on the tangent angle.}
 #' \item{angle }{\code{vector} of position on the perimeter (in radians).}
 #' @seealso \link{tfourier} for the reverse operation and also
-#' \code{tfourier.shape}. \link{l2m}, \link{coeff.split} may be useful.
+#' \code{tfourier.shape}. \link{tFourier}. \link{l2m}, \link{coeff.split} may be useful.
+#' @note Directly borrowed for Claude (2008), and called \code{ifourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
 #' 
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
-#' @keywords coreMorpho
+#' @keywords tFourier
 #' @examples
-#' 
 #' data(bot)
 #' tfourier(bot[1], 24)
 #' tfourier.shape()
@@ -182,14 +186,12 @@ tfourier.i<-function(tf, nb.h, nb.pts=120,
 #' (usually decreasing) amplitude of the Fourier coefficients (see
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
-#' @return A list with components: \item{x }{\code{vector} of
-#' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
-#' @seealso \link{tfourier.i}.
+#' @return A matrix of (x; y) coordinates.
+#' @seealso \link{tfourier.i}, \link{tfourier}, link{tFourier}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords coreMorpho
+#' @keywords tFourier
 #' @examples
-#' 
 #' data(bot)
 #' tf <- tfourier(bot[1], 24)
 #' tfourier.shape(tf$an, tf$bn) # equivalent to rfourier.i(rf)
@@ -207,3 +209,5 @@ tfourier.shape <- function(an, bn, ao=0, nb.h, nb.pts=80, alpha=2, plot=TRUE){
   shp <- tfourier.i(tf, nb.h=nb.h, nb.pts=nb.pts)      
   if (plot) coo.plot(shp)
   return(shp)}
+
+##### end tFourier

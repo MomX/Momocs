@@ -19,10 +19,13 @@ length of the radii used equals 1.}
 \item{verbose}{\code{logical}. Whether to display diagnosis messages.}
 }
 \value{
-A list with these components: \item{an }{\code{vector} of
-\eqn{a_{1->n}} harmonic coefficients.} \item{bn }{\code{vector} of
-\eqn{b_{1->n}} harmonic coefficients.} \item{ao }{\code{ao} Harmonic
-coefficient.} \item{r }{\code{vector} of radii lengths.}
+A list with following components:
+\itemize{
+ \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
+ \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
+ \item \code{ao} ao harmonic coefficient.
+ \item \code{r} vector of radii lengths.
+ }
 }
 \description{
 \code{rfourier} computes radii variation Fourier analysis from a matrix or a
@@ -43,6 +46,9 @@ b_k\sin(w_k\theta)} with: \deqn{ a_n =
 The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 individual shape, are then used for multivariate analyses.
 }
+\note{
+Directly borrowed for Claude (2008), and called \code{fourier1} there.
+}
 \examples{
 data(bot)
 coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
@@ -57,8 +63,11 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-\link{rfourier.i} for the inverse operation, \link{rfourier.shape}.
+\link{rFourier} for rfourier on \link{Out} objects.
+\link{rfourier.i} for the inverse operation, \link{rfourier.shape} to play around
+with this approach.
 \link{efourier}, \link{tfourier} for the other members of the Fourier's
 family.
 }
+\keyword{rFourier}
 

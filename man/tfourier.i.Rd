@@ -38,6 +38,9 @@ obtained computed with \link{tfourier}.
 \details{
 See \link{tfourier} for the mathematical background.
 }
+\note{
+Directly borrowed for Claude (2008), and called \code{ifourier2} there.
+}
 \examples{
 data(bot)
 tfourier(bot[1], 24)
@@ -52,7 +55,7 @@ pp.
 }
 \seealso{
 \link{tfourier} for the reverse operation and also
-\code{tfourier.shape}. \link{l2m}, \link{coeff.split} may be useful.
+\code{tfourier.shape}. \link{tFourier}. \link{l2m}, \link{coeff.split} may be useful.
 }
-\keyword{coreMorpho}
+\keyword{tFourier}
 

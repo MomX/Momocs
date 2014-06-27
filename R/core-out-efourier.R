@@ -1,4 +1,4 @@
-##### Core function for outline (Fourier-based) analyses
+##### Core function for elliptical Fourier analyses
 
 #' Calculates elliptical Fourier analysis.
 #'
@@ -129,11 +129,10 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' @param nb.h \code{integer}. The number of harmonics to use. If not
 #' specified, \code{length(ef$an)} is used.
 #' @param nb.pts \code{integer}. The number of points to calculate.
-#' @return A list with components: \item{x }{\code{vector} of
-#' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
+#' @return A matrix of (x; y) coordinates.
 #' @seealso \link{efourier} for the reverse operation. \link{l2m},
 #' \link{coeff.split} may be useful.
-#' @note Directly borrowed for Claude (2008), and also called \code{efourier} there.
+#' @note Directly borrowed for Claude (2008), and also called \code{iefourier} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
@@ -194,19 +193,21 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
 #' @param start \code{logical}. Whether to conserve the position of the first
 #' point of the outline.
-#' @return A list with following components: \item{A }{\code{vector} of
-#' \code{numeric} \eqn{A_{1->n}} \emph{normalized} harmonic coefficients.}
-#' \item{B }{\code{vector} of \code{numeric} \eqn{B_{1->n}} \emph{normalized}
-#' harmonic coefficients.} \item{C }{\code{vector} of \code{numeric}
-#' \eqn{C_{1->n}} \emph{normalized} harmonic coefficients.} \item{D
-#' }{\code{vector} of \code{numeric} \eqn{D_{1->n}} \emph{normalized} harmonic
-#' coefficients.} \item{size }{Magnitude of the semi-major axis of the first
-#' fitting ellipse.} \item{theta }{Angle, in radians, between the starting
-#' point and the semi-major axis of the first fitting ellipse.} \item{psi
-#' }{Orientation of the first fitting ellipse.} \item{ao }{\code{ao} Harmonic
-#' coefficient.} \item{co }{\code{co} Harmonic coefficient.} \item{lnef }{A
-#' \code{list} with A, B, C and D concatenated in a \code{vector} that may be
-#' convenient for some uses.}
+#' @return A list with the following components:
+#' \itemize{
+#'  \item \code{A} vector of \eqn{A_{1->n}} \emph{normalized} harmonic coefficients
+#'  \item \code{B} vector of \eqn{B_{1->n}} \emph{normalized} harmonic coefficients
+#'  \item \code{C} vector of \eqn{C_{1->n}} \emph{normalized} harmonic coefficients
+#'  \item \code{D} vector of \eqn{D_{1->n}} \emph{normalized} harmonic coefficients
+#'  \item \code{size} Magnitude of the semi-major axis of the first
+#' fitting ellipse
+#' \item \code{theta} angle, in radians, between the starting
+#' point and the semi-major axis of the first fitting ellipse
+#' \item psi orientation of the first fitting ellipse
+#' \item \code{ao} ao harmonic coefficient
+#' \item \code{co} co Harmonic coefficient
+#' \item \code{lnef} a list with A, B, C and D concatenated in a vector.
+#' }
 #' @seealso \link{efourier} and \link{efourier.i}. Also \link{eFourier} for
 #' normalizing harmonic coefficients when calculating it for \code{Out}
 #' objects.
@@ -217,7 +218,6 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 #' @keywords eFourier
 #' @examples
-#' 
 #' data(bot)
 #' q <- efourier(bot[1], 24)
 #' efourier.i(q) # equivalent to efourier.shape(q$an, q$bn, q$cn, q$dn)
@@ -285,15 +285,18 @@ efourier.norm <- function(ef, start = FALSE) {
 #' (usually decreasing) amplitude of the Fourier coefficients (see
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
-#' @return A list with components: \item{x }{\code{vector} of
-#' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
-#' @seealso \link{efourier.i}.
+#' @return A list with components:
+#' \itemize{
+#'  \item \code{x} \code{vector} of x-coordinates
+#'  \item \code{y} \code{vector} of y-coordinates.
+#'  }
+#' @seealso \link{efourier.i}, \link{rfourier.shape}, \link{tfourier.shape}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' 
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords coreMorpho
+#' @keywords eFourier
 #' @examples
 #' 
 #' data(bot)
@@ -316,6 +319,7 @@ efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE){
   if (plot) coo.plot(shp)
   return(shp)}
 
+# exotic and useless
 # #' Dilates shapes based on elliptical Fourier decomposition.
 # #' 
 # #' Calculates dilated and eroded shapes based on elliptical

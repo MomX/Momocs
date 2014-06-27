@@ -1,11 +1,10 @@
-
-# 1.4 Utilities ================================================================
+##### Miscellaneous functions for Fourier-based approaches
 
 #' Helps to select a given number of harmonics from a numerical vector.
 #' 
 #' \code{coeff.sel} helps to select a given number of harmonics by returning
 #' their indices when arranged as a numeric vector. For instance, harmonic
-#' coefficients are arranged in the \code{$coe} slot of \code{Coe}-objects in
+#' coefficients are arranged in the \code{$coe} slot of \code{\link{Coe}}-objects in
 #' that way: \deqn{A_1, \dots, A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1,
 #' \dots, D-n} after an elliptical Fourier analysis (see \link{eFourier} and
 #' \link{efourier}) while \deqn{C_n and D_n} harmonic are absent for radii
@@ -21,6 +20,15 @@
 #' @return \code{coeff.sel} returns indices that can be used to select columns
 #' from an harmonic coefficient matrix. \code{coeff.split} returns a named list
 #' of coordinates.
+#' @keywords miscFourier
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 32)
+#' coe <- bot.f$coe # the raw matrix
+#' coe
+#' # if you want, say the first 8 harmonics but not the first one
+#' retain <- coeff.sel(retain=8, drop=1, nb.h=32, cph=4)
+#' head(coe[, retain])
 #' @export
 coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
   cs <- numeric()
@@ -44,6 +52,7 @@ coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
 #' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and
 #' \code{tfourier} were used.
 #' @return Returns a named list of coordinates.
+#' @keywords miscFourier
 #' @examples
 #' coeff.split(1:128, nb.h=32, cph=4) # efourier
 #' coeff.split(1:64, nb.h=32, cph=2)  # t/r fourier
@@ -65,7 +74,7 @@ coeff.split <- function(cs, nb.h=8, cph=4){
 #' @param xf A list with an, bn (and cn, dn) components, typically from a
 #' e/r/tfourier passed on coo.
 #' @return Returns a \code{vector} of harmonic power
-#' @keywords calibration
+#' @keywords miscFourier
 #' @examples
 #' 
 #' data(bot)
@@ -89,3 +98,5 @@ harm.pow <- function(xf){
     }
   } else {
     stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")}}
+
+##### end misc Fourier

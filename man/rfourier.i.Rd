@@ -27,6 +27,9 @@ obtained computed with \link{rfourier}.
 \details{
 See \link{efourier} for the mathematical background.
 }
+\note{
+Directly borrowed for Claude (2008), and called \code{ifourier1} there.
+}
 \examples{
 data(bot)
 coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
@@ -44,5 +47,5 @@ Springer 316 pp.
 \link{efourier} for the reverse operation and also
 \code{rfourier.shape}. \link{l2m}, \link{coeff.split} may be useful.
 }
-\keyword{coreMorpho}
+\keyword{rFourier}
 
