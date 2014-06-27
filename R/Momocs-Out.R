@@ -38,6 +38,10 @@ Out.array  <- function(x, ldk=list(), fac=data.frame()){
   x <- a2l(x)
   Out(x, fac=fac)}
 
+# experimental below
+#' @export
+Out.Coo <- function(x, ldk=list(), fac=data.frame()){
+  Out(x=x$coo, ldk=x$ldk, fac=x$fac)}
 
 # The print method for Out objects
 #' @export
@@ -436,18 +440,6 @@ OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to OutCoe")
   OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
   class(OutCoe) <- c("OutCoe", "Coe")
-  return(OutCoe)}
-
-#' @rdname combine
-#' @export
-combine.OutCoe <- function(...){
-  args <- list(...)
-  #Out     <- Out(do.call( c, lapply( args, c )))
-  coeS <- do.call("cbind", lapply(args, function(x) x$coe))
-  facS <- args[[1]]$fac
-  methodS <- do.call(c, lapply(args, function(x) x$method))
-  normS <- do.call(c, lapply(args, function(x) x$norm))
-  OutCoe <- OutCoe(coe=coeS, fac=facS, method=methodS, norm=normS)
   return(OutCoe)}
   
 ##### TO FIX FOR Combined OutCoe

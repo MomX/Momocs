@@ -1,3 +1,4 @@
+##### Combining or subsetting Momocs' classes
 
 #bloody dirty todo
 #' Create subsets of Coo objects
@@ -54,12 +55,6 @@ subset.Coe <- function(x, subset, ...){
   }
   return(Coe2)}
 
-
-# experimental below
-#' @export
-Out.Coo <- function(x, ldk=list(), fac=data.frame()){
-  Out(x=x$coo, ldk=x$ldk, fac=x$fac)}
-
 # merge method for Out objects (experimental)
 
 #' Combine Out objects
@@ -84,4 +79,17 @@ combine.Out <- function(...){
 #' @export
 combine.Opn <- combine.Out
 
+#' @rdname combine
+#' @export
+combine.OutCoe <- function(...){
+  args <- list(...)
+  #Out     <- Out(do.call( c, lapply( args, c )))
+  coeS <- do.call("cbind", lapply(args, function(x) x$coe))
+  facS <- args[[1]]$fac
+  methodS <- do.call(c, lapply(args, function(x) x$method))
+  normS <- do.call(c, lapply(args, function(x) x$norm))
+  OutCoe <- OutCoe(coe=coeS, fac=facS, method=methodS, norm=normS)
+  return(OutCoe)}
+
+##### end subset-combine
 
