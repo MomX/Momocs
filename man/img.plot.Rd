@@ -11,5 +11,5 @@ img.plot(img)
 \description{
 A very simple (and fast) image plotter.
 }
-\keyword{import}
+\keyword{Import}
 

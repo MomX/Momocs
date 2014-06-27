@@ -17,4 +17,5 @@ pca2shp.procrustes(pos, rot, mshape, amp.shp = 1)
 \description{
 Calculates shapes from PC plane: (aligned) landmarks
 }
+\keyword{Graphics}
 

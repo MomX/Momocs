@@ -360,7 +360,7 @@ ldk.chull <- function(ldk, col="grey40", lty=1){
 #' 
 #' A very simple (and fast) image plotter.
 #' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
-#' @keywords import
+#' @keywords Import
 #' @export
 img.plot <- function(img){
   # dirty here but made for convenience

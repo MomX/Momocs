@@ -22,5 +22,5 @@ pos.shapes(xy, pos.shp = c("range", "circle", "xy")[1], nb.shp = 12,
 \description{
 Calculates nice positions on a plan for drawing shapes
 }
-\keyword{graphics}
+\keyword{Graphics}
 

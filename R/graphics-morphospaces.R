@@ -130,7 +130,7 @@
 #' @param nr.shp the number of rows to position shapes
 #' @param nc.shp the number of cols to position shapes
 #' @param circle.r.shp if circle, its radius
-#' @keywords graphics
+#' @keywords Graphics
 #' @export
 pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
                        nb.shp=12, nr.shp=6, nc.shp=5, circle.r.shp){
@@ -166,13 +166,15 @@ pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
   # if a non-valid method is passed
   return(xy)}
 
-#' Calculates shapes from PC plane: efourier
+#' Calculates shapes from PC plane: e/r/tfourier
 #' 
 #' @param pos the position on two PC axis
 #' @param rot the corresponding loadings
 #' @param mshape the meanshape
 #' @param amp.shp amplification factor for the shape deformation
 #' @param pts.shp number of points to reconstruct the shape
+#' @keywords Graphics
+#' @rdname pca2shp.fourier
 #' @export
 pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
@@ -195,13 +197,7 @@ pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     res[[i]] <- coo}
   return(res)}
 
-#' Calculates shapes from PC plane: rfourier
-#' 
-#' @param pos the position on two PC axis
-#' @param rot the corresponding loadings
-#' @param mshape the meanshape
-#' @param amp.shp amplification factor for the shape deformation
-#' @param pts.shp number of points to reconstruct the shape
+#' @rdname pca2shp.fourier
 #' @export
 pca2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
@@ -224,13 +220,7 @@ pca2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     res[[i]] <- coo}
   return(res)}
 
-#' Calculates shapes from PC plane: tfourier
-#' 
-#' @param pos the position on two PC axis
-#' @param rot the corresponding loadings
-#' @param mshape the meanshape
-#' @param amp.shp amplification factor for the shape deformation
-#' @param pts.shp number of points to reconstruct the shape
+#' @rdname pca2shp.fourier
 #' @export
 pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
@@ -263,6 +253,7 @@ pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
 #' @param ortho logical whether working with raw or orthogonal polynomials
 #' @param baseline1 the (x; y) coordinates of the first baseline point
 #' @param baseline2 the (x; y) coordinates of the second baseline point
+#' @keywords Graphics
 #' @export
 pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
                                  baseline1, baseline2) {
@@ -295,6 +286,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 #' @param rot the corresponding loadings
 #' @param mshape the meanshape
 #' @param amp.shp amplification factor for the shape deformation
+#' @keywords Graphics
 #' @export
 pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
   if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
@@ -315,14 +307,16 @@ pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
   #}
   return(res)}
 
-#' Calculates shapes from LD plane: efourier
+#todo r/t
+#' Calculates shapes from LD plane: e/r/tfourier
 #' 
 #' @param pos the position on two PC axis
 #' @param rot the (unstardized) loadings
 #' @param mshape the meanshape
 #' @param amp.shp amplification factor for the shape deformation
 #' @param pts.shp number of points to reconstruct the shape
-#' @export
+#' @keywords Graphics
+#' @rdname lda2shp.fourier
 #' @export
 lda2shp.efourier <- function (pos, rot,  mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop(" * 'rot' and 'pos' must have the same ncol")
@@ -344,3 +338,15 @@ lda2shp.efourier <- function (pos, rot,  mshape, amp.shp=1, pts.shp=60) {
     #}
     res[[i]] <- coo}
   return(res)}
+
+#' @keywords Graphics
+#' @rdname lda2shp.fourier
+#' @export
+lda2shp.rfourier <- function(){}
+
+#' @keywords Graphics
+#' @rdname lda2shp.fourier
+#' @export
+lda2shp.tfourier <- function(){}
+
+##### end morphospaces

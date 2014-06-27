@@ -26,4 +26,5 @@ pca2shp.polynomials(pos, rot, mshape, amp.shp = 1, pts.shp = 60, ortho,
 \description{
 Calculates shapes from PC plane: polynomials
 }
+\keyword{Graphics}
 

@@ -14,22 +14,32 @@
 \title{Some color palettes.}
 \usage{
 col.summer(n)
+
 col.spring(n)
+
 col.autumn(n)
+
 col.solarized(n)
+
 col.gallus(n)
+
 col.blackgallus(n)
+
 col.hot(n)
+
 col.cold(n)
+
 col.sari(n)
+
 col.india(n)
+
 col.bw(n)
 }
 \arguments{
 \item{n}{the number of colors to generate from the color palette}
 }
 \value{
-color codes (hexadecimal format)
+colors (hexadecimal format)
 }
 \description{
 Colors, colors, colors.
@@ -47,5 +57,5 @@ barplot(1:10, col=col.sari(10), main="col.sari")
 barplot(1:10, col=col.india(10), main="col.india")
 barplot(1:10, col=col.bw(10), main="col.bw")
 }
-\keyword{graphics}
+\keyword{Graphics}
 
