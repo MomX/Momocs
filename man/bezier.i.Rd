@@ -14,9 +14,10 @@ bezier.i(B, nb.pts = 120)
 a matrix of (x; y) coordinates
 }
 \description{
-Directly borrowed for Claude (2008), and called \code{beziercurve} there.
+Calculates a shape from Bezier coefficients
 }
 \note{
+Directly borrowed for Claude (2008), and called \code{beziercurve} there.
 Not implemented for open outlines but may be useful for other purposes.
 }
 \examples{
@@ -26,6 +27,9 @@ plot(x, ylim=c(-3, 3), asp=1, type="b", pch=20)
 b <- bezier(x)
 bi <- bezier.i(b$B)
 lines(bi, col="red")
+}
+\references{
+Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 }
 \keyword{Bezier}
 

@@ -33,9 +33,17 @@ tranlation, size and orientation of the first ellipse.
 }
 \details{
 See \link{efourier} for the mathematical background of the normalization.
-Other approaches implemented in SHAPE are possible such as manually editing
-or using the longest radius. They will be implemented in further Momocs
-versions.
+
+Sometimes shapes do not "align" well each others, and this is usually detectable
+on a morphospace on a regular PCA. You mat find 180° rotated shapes or strange clustering.
+Most of the time this is due to a poor normalization on the matrix of coefficients, and the
+variability you observe may mostly be due to the variability in the alignment of the
+"first" ellipsis which is defined by the first harmonic, used for the normalization. In that
+case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You
+have several options: \link{coo.align}, \link{coo.aligncalliper}, \link{fgProcrustes} either directly on
+the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of
+what shall provide a good alignment. Have a look to Momocs' vignette for some illustration of these pitfalls
+and how to manage them.
 }
 \examples{
 data(bot)
@@ -57,5 +65,5 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 normalizing harmonic coefficients when calculating it for \code{Out}
 objects.
 }
-\keyword{coreMorpho}
+\keyword{eFourier}
 

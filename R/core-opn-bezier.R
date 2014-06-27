@@ -2,7 +2,6 @@
 
 #' Calculates Bezier coefficients from a shape
 #' 
-#' Directly borrowed for Claude (2008), and also called \code{bezier} there.
 #' @param coo a matrix or a list of (x; y) coordinates
 #' @param n the degree, by default the number of coordinates.
 #' @return a list with components:
@@ -10,7 +9,10 @@
 #' \item \code{$J} matrix of Bezier coefficients
 #' \item \code{$B} matrix of Bezier vertices.
 #' }
-#' @note Not implemented for open outlines but may be useful for other purposes.
+#' @note Directly borrowed for Claude (2008), and also called \code{bezier} there.
+#' Not implemented for open outlines but may be useful for other purposes.
+#' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
+#' Springer 316 pp.
 #' @keywords Bezier
 #' @examples
 #' set.seed(34)
@@ -39,11 +41,12 @@ bezier <- function(coo, n){
 
 #' Calculates a shape from Bezier coefficients
 #' 
-#' Directly borrowed for Claude (2008), and called \code{beziercurve} there.
 #' @param B a matrix of Bezier vertices, such as those produced by \link{bezier}
 #' @param nb.pts the number of points to sample along the curve.
 #' @return a matrix of (x; y) coordinates
-#' @note Not implemented for open outlines but may be useful for other purposes.
+#' @note Directly borrowed for Claude (2008), and called \code{beziercurve} there.
+#' Not implemented for open outlines but may be useful for other purposes.
+#' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' @keywords Bezier
 #' @examples
 #' set.seed(34)

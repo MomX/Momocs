@@ -24,8 +24,8 @@ A list with these components: \item{an }{\code{vector} of
 coefficient.} \item{co }{\code{co} Harmonic coefficient.}
 }
 \description{
-\code{efourier} computes elliptical Fourier analysis from a matrix or a list
-of coordinates.
+\code{efourier} computes Elliptical Fourier Analysis (or Transforms or EFT)
+from a matrix (or a list) of (x; y) coordinates.
 }
 \details{
 These functions and their mathematical background detailed below are here
@@ -73,6 +73,9 @@ astronomical Ptolemy's epicycles (see \link{Ptolemy}), and the
 reconstruction obtained from \eqn{N} harmonics is the best possible fit in a
 least-squares sense.
 }
+\note{
+Directly borrowed for Claude (2008), and also called \code{efourier} there.
+}
 \examples{
 data(bot)
 coo <- bot[1]
@@ -85,15 +88,15 @@ coo.draw(efi, border="red", col=NA)
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
-
 Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
 \link{efourier.i} for the reverse operation and \link{eFourier} the
 method for \code{Out} objects. \link{Ptolemy} for an implementation of the
-Ptolemaic ellipses. \link{rfourier}, \link{tfourier} for the other members
+Ptolemaic ellipses graph sometimes used to illustrate this approach.
+\link{rfourier}, \link{tfourier} for the other members
 of the Fourier's family.
 }
-\keyword{coreMorpho}
+\keyword{eFourier}
 

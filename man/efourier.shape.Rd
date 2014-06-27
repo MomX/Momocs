@@ -35,6 +35,7 @@ A list with components: \item{x }{\code{vector} of
 \description{
 \code{efourier.shape} calculates a "Fourier elliptical shape" given Fourier
 coefficients (see \code{Details}) or can generate some "efourier" shapes.
+Mainly intended to generate shapes and/or to understand how efourier works.
 }
 \details{
 \code{efourier.shape} can be used by specifying \code{nb.h} and

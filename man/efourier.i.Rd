@@ -26,6 +26,9 @@ obtained computed with \link{efourier}.
 \details{
 See \link{efourier} for the mathematical background.
 }
+\note{
+Directly borrowed for Claude (2008), and also called \code{efourier} there.
+}
 \examples{
 data(bot)
 coo <- bot[1]
@@ -38,7 +41,6 @@ coo.draw(efi, border="red", col=NA)
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
-
 Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
@@ -46,5 +48,5 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 \link{efourier} for the reverse operation. \link{l2m},
 \link{coeff.split} may be useful.
 }
-\keyword{coreMorpho}
+\keyword{eFourier}
 

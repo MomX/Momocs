@@ -1,19 +1,9 @@
-##todo: ventiler dans Out/Opn?
-# Core functions for modern morphometrics
-# 1. Outline functions ---------------------------------------------------------
-
-# Mainly due to Julien Claude with some wrapping
-# 1.1 Elliptical Fourier Analysis ==============================================
-# Core functions for modern morphometrics
-# 1. Outline functions ---------------------------------------------------------
-
-# Mainly due to Julien Claude with some wrapping
-# 1.1 Elliptical Fourier Analysis ==============================================
+##### Core function for outline (Fourier-based) analyses
 
 #' Calculates elliptical Fourier analysis.
 #'
-#' \code{efourier} computes elliptical Fourier analysis from a matrix or a list
-#' of coordinates.
+#' \code{efourier} computes Elliptical Fourier Analysis (or Transforms or EFT) 
+#' from a matrix (or a list) of (x; y) coordinates.
 #'
 #' These functions and their mathematical background detailed below are here
 #' detailed to ease their use in new methods but are used internally by methods
@@ -72,16 +62,16 @@
 #' coefficient.} \item{co }{\code{co} Harmonic coefficient.}
 #' @seealso \link{efourier.i} for the reverse operation and \link{eFourier} the
 #' method for \code{Out} objects. \link{Ptolemy} for an implementation of the
-#' Ptolemaic ellipses. \link{rfourier}, \link{tfourier} for the other members
+#' Ptolemaic ellipses graph sometimes used to illustrate this approach.
+#' \link{rfourier}, \link{tfourier} for the other members
 #' of the Fourier's family.
+#' @note Directly borrowed for Claude (2008), and also called \code{efourier} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#'
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords coreMorpho
+#' @keywords eFourier
 #' @examples
-#'
 #' data(bot)
 #' coo <- bot[1]
 #' coo.plot(coo)
@@ -100,8 +90,7 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   if(nb.h * 2 > nr) {
     nb.h = floor(nr/2)
     if (verbose){
-      cat(" * 'nb.h' must be lower than half the number of points.\n",
-          "* It has been set to", nb.h, "harmonics.\n")}}
+      cat(" * 'nb.h' must be lower than half the number of points, and has been set to", nb.h, "harmonics.\n")}}
   if (nb.h == -1) {
     nb.h = floor(nr/2)
     if (verbose){
@@ -144,14 +133,13 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
 #' @seealso \link{efourier} for the reverse operation. \link{l2m},
 #' \link{coeff.split} may be useful.
+#' @note Directly borrowed for Claude (2008), and also called \code{efourier} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' 
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords coreMorpho
+#' @keywords eFourier
 #' @examples
-#' 
 #' data(bot)
 #' coo <- bot[1]
 #' coo.plot(coo)
@@ -190,9 +178,17 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' tranlation, size and orientation of the first ellipse.
 #' 
 #' See \link{efourier} for the mathematical background of the normalization.
-#' Other approaches implemented in SHAPE are possible such as manually editing
-#' or using the longest radius. They will be implemented in further Momocs
-#' versions.
+#' 
+#' Sometimes shapes do not "align" well each others, and this is usually detectable
+#' on a morphospace on a regular PCA. You mat find 180° rotated shapes or strange clustering.
+#' Most of the time this is due to a poor normalization on the matrix of coefficients, and the
+#' variability you observe may mostly be due to the variability in the alignment of the
+#' "first" ellipsis which is defined by the first harmonic, used for the normalization. In that
+#' case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You 
+#' have several options: \link{coo.align}, \link{coo.aligncalliper}, \link{fgProcrustes} either directly on
+#' the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of
+#' what shall provide a good alignment. Have a look to Momocs' vignette for some illustration of these pitfalls
+#' and how to manage them.
 #' 
 #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
 #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
@@ -219,7 +215,7 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' 
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords coreMorpho
+#' @keywords eFourier
 #' @examples
 #' 
 #' data(bot)
@@ -266,6 +262,7 @@ efourier.norm <- function(ef, start = FALSE) {
 #' 
 #' \code{efourier.shape} calculates a "Fourier elliptical shape" given Fourier
 #' coefficients (see \code{Details}) or can generate some "efourier" shapes.
+#' Mainly intended to generate shapes and/or to understand how efourier works.
 #' 
 #' \code{efourier.shape} can be used by specifying \code{nb.h} and
 #' \code{alpha}. The coefficients are then sampled in an uniform distribution
@@ -319,28 +316,40 @@ efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE){
   if (plot) coo.plot(shp)
   return(shp)}
 
-#' Dilates shapes based on elliptical Fourier decomposition.
-#' 
-#'  Calculates dilated and eroded shapes based on elliptical
-#' Fourier decomposition \emph{i.e.} taking into account the shape as a whole.
-#' Lists created by \code{efourier} objects can be passed to \code{ef.amplify}
-#' @export ef.amplify 
-#' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
-#' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
-#' @param amp A vector of \code{numeric}. If \code{amp} is of length 4, the
-#' value specify the multiplication factor for \eqn{a_1}, \eqn{b_1}, \eqn{c_1}
-#' and \eqn{d_1} ; if only one value is provided, then the multiplication
-#' factor will be the same for the four coefficients \eqn{abcd_1}.
-#' @return \code{ef.amplify} returns the \code{ef} provided but with
-#' "amplified" coefficients for the first harmonics.
-#' @seealso \link{efourier} for a description of the elliptical Fourier
-#' analysis and \link{Ptolemy} for an illustration of the first
-#' ellipse/harmonic defining the shape "amplitude".
-#' @keywords coreMorpho
-#' @export
-ef.amplify <- function(ef, amp=rep(0.5, 4)){
-  ef$an <- ef$an*amp[1]
-  ef$bn <- ef$bn*amp[2]
-  ef$cn <- ef$cn*amp[3]
-  ef$dn <- ef$dn*amp[4]
-  return(ef)}
+# #' Dilates shapes based on elliptical Fourier decomposition.
+# #' 
+# #' Calculates dilated and eroded shapes based on elliptical
+# #' Fourier decomposition \emph{i.e.} taking into account the shape as a whole.
+# #' Lists created by \code{efourier} objects can be passed to \code{ef.amplify}
+# #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
+# #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
+# #' @param amp A vector of \code{numeric}. If \code{amp} is of length 4, the
+# #' value specify the multiplication factor for \eqn{a_1}, \eqn{b_1}, \eqn{c_1}
+# #' and \eqn{d_1} ; if only one value is provided, then the multiplication
+# #' factor will be the same for the four coefficients \eqn{abcd_1}.
+# #' @return \code{ef.amplify} returns the \code{ef} provided but with
+# #' "amplified" coefficients for the first harmonics.
+# #' @seealso \link{efourier} for a description of the elliptical Fourier
+# #' analysis and \link{Ptolemy} for an illustration of the first
+# #' ellipse/harmonic defining the shape "amplitude".
+# #' @keywords eFourier
+# #' @examples 
+# #' shp <- efourier.shape()
+# #' plot(shp, xlim=c(-20, 20), asp=1, type="l")
+# #' shp.coe <- efourier(shp, 12)
+# #' amps <- seq(0.2, 2, 0.2)
+# #' cols <- col.summer(length(amps))
+# #' for (i in seq(along=amps)) {
+# #'  shp.coe2 <- ef.amplify(shp.coe, amp=amps[i])
+# #'  shp2  <- efourier.i(shp.coe2)
+# #'  lines(shp2, col=cols[i])}
+# #' @export
+# ef.amplify <- function(ef, amp=rep(0.5, 4)){
+#   if (length(amp)==1) amp <- rep(amp, 4)
+#   ef$an <- ef$an*amp[1]
+#   ef$bn <- ef$bn*amp[2]
+#   ef$cn <- ef$cn*amp[3]
+#   ef$dn <- ef$dn*amp[4]
+#   return(ef)}
+
+##### end eFourier
