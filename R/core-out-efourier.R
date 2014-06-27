@@ -179,7 +179,7 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' See \link{efourier} for the mathematical background of the normalization.
 #' 
 #' Sometimes shapes do not "align" well each others, and this is usually detectable
-#' on a morphospace on a regular PCA. You mat find 180° rotated shapes or strange clustering.
+#' on a morphospace on a regular PCA. You mat find 180 degrees rotated shapes or strange clustering.
 #' Most of the time this is due to a poor normalization on the matrix of coefficients, and the
 #' variability you observe may mostly be due to the variability in the alignment of the
 #' "first" ellipsis which is defined by the first harmonic, used for the normalization. In that

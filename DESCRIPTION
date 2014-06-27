@@ -5,16 +5,27 @@ Version: 0.99
 Date: 2014-07-01
 Author: Vincent Bonhomme, Sandrine Picq and Julien Claude.
 Maintainer: Vincent Bonhomme <bonhomme.vincent@gmail.com>
-Description: Momocs is intended to ease and to popularize morphometrics, the quantitative analysis of form. It aims at gathering the most common approaches: traditional morphometrics, global descriptors, open outlines, closed outlines and configuration of landmarks into the same, open-source, environment. It hinges on the core functions developed in the book 'Morphometrics with R' by Julien Claude (2008), extend them graphically and statistically, using the same, unified and extendable, grammar. From import from other morphometrics format or data acquisition, to display, handling, calibration and calculations on morphometrics datasets on which to apply an array of statistical analyses, Momocs intends to provides a complete, convenient and extendable toolkit to specialists within every field that are, or may be, interested in integrating shape in their researches.
+Description: Momocs is intended to ease and to popularize morphometrics, the
+    quantitative analysis of form. It aims at gathering the most common
+    approaches: traditional morphometrics, global descriptors, open outlines,
+    closed outlines and configuration of landmarks into the same, open-source,
+    environment. It hinges on the core functions developed in the book
+    'Morphometrics with R' by Julien Claude (2008), extend them graphically and
+    statistically, using the same, unified and extendable, grammar. From import
+    from other morphometrics format or data acquisition, to display, handling,
+    calibration and calculations on morphometrics datasets on which to apply an
+    array of statistical analyses, Momocs intends to provides a complete,
+    convenient and extendable toolkit to specialists within every field that
+    are, or may be, interested in integrating shape in their researches.
 License: GPL-2 | GPL-3
 Roxygen: list(wrap = FALSE)
-URL: http://www.vincentbonhomme.fr/Momocs 
-BugReports: https://github.com/vbonhomme/Momocs 
+URL: http://www.vincentbonhomme.fr/Momocs
+BugReports: https://github.com/vbonhomme/Momocs
 Depends:
     R(>= 3.0)
 Imports:
-	utils,
-	graphics,
+    utils,
+    graphics,
     methods,
     jpeg,
     sp,
