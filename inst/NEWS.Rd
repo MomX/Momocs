@@ -23,7 +23,7 @@ shape descriptors).
       \item Graphics have been refreshed: \link{panel}, \link{stack}, \link{plot.PCA},
       \link{plot.LDA} (along with morphospaces handling), the tps family, plus various
       minor improvements.
-      \item New datasets (oak, olea, shapes, wings) to play around.
+      \item New datasets (oak, olea, molars, shapes, wings) to play around.
       }
   } % end general
   
