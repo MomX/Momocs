@@ -45,5 +45,5 @@ then ii) pass "names(foo)" to lf.structure. See Momocs' vignette for an illustra
 \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 See also Momocs' vignettes for data import.
 }
-\keyword{import}
+\keyword{Import}
 

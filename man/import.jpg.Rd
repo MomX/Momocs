@@ -34,5 +34,5 @@ and \link{import.Conte} for the algorithm itself.
 \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 See also Momocs' vignettes for data import.
 }
-\keyword{import}
+\keyword{Import}
 

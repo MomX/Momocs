@@ -48,5 +48,5 @@ Finally, remember that ff the images are not in your working directory,
 \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 See also Momocs' vignettes for data import.
 }
-\keyword{import}
+\keyword{Import}
 
