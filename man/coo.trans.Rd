@@ -26,5 +26,5 @@ stack(coo.trans(bot, 50, 100))
 coo.plot(b)
 coo.plot(coo.trans(b, 50, 100))
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

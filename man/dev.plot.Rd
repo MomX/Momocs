@@ -50,5 +50,5 @@ dev.plot(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
 dev.plot(foo.mat, foo.dev, cols=col.sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
 dev.plot(foo.mat, foo.dev, cols=col.summer(6)[4:6], plot=TRUE)
 }
-\keyword{graphics}
+\keyword{Graphics}
 

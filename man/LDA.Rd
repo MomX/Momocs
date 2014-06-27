@@ -45,4 +45,5 @@ plot(bot.l)
 \seealso{
 \link{plot.LDA}
 }
+\keyword{Multivariate}
 

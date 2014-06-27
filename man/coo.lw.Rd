@@ -20,5 +20,5 @@ the range along the x-axis; the width as the range on the y-axis.
 data(bot)
 coo.lw(bot[1])
 }
-\keyword{coo_descriptors}
+\keyword{ShapeDescriptors}
 

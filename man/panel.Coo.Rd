@@ -70,4 +70,7 @@ panel(bot, fac="type", palette=col.spring, names=TRUE)
 \link{stack.Coo}, \link{plot.Coo}.
 }
 \keyword{Graphics}
+\keyword{Ldk}
+\keyword{Opn}
+\keyword{Out}
 

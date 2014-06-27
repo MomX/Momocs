@@ -9,7 +9,7 @@
 #' random shape is plotted. If passed with \code{"all"} all shapes are plotted,
 #' one by one.
 #' @param ... further arguments to be passed to \link{coo.plot}
-#' @keywords Graphics
+#' @keywords Graphics Out Opn Ldk
 #' @seealso \link{panel.Coo}, \link{stack.Coo}.
 #' @examples
 #' \dontrun{
@@ -65,7 +65,7 @@ plot.Coo <- function(x, id, ...){
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param ... further arguments to be passed to \link{coo.plot}
 #' @seealso \link{panel.Coo}, \link{plot.Coo}.
-#' @keywords Graphics
+#' @keywords Graphics Out Opn Ldk
 #' @examples
 #' \dontrun{
 #' data(mosquito)
@@ -161,7 +161,7 @@ stack.Ldk <- function(x, cols, borders,
 #' @param points.col (for Ldk) and a col  for these points
 #' @param ... further arguments to maintain consistency with the generic \link{plot}.
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
-#' @keywords Graphics
+#' @keywords Graphics Out Opn Ldk
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)

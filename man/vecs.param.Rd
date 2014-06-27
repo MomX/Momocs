@@ -30,5 +30,5 @@ numeric.
 \examples{
 vecs.param(1, 0, 0, 2)
 }
-\keyword{Utilities}
+\keyword{Miscellaneous}
 

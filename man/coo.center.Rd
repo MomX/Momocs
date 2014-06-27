@@ -18,5 +18,5 @@ Returns a shape centered on the origin.
 data(bot)
 b <- bot[1]
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

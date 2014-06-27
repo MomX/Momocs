@@ -10,5 +10,5 @@ Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice19
 \description{
 Data: Outline coordinates of 20 beer and 20 whisky bottles.
 }
-\keyword{datasets}
+\keyword{Datasets}
 

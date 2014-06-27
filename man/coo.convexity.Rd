@@ -22,7 +22,5 @@ Calculated using a ratio of the eigen values (inertia axis)
 data(bot)
 coo.convexity(bot[1])
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

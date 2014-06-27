@@ -22,6 +22,7 @@
 #'  \item \code{method} inherited from the Coe object (if any)
 #' }
 #' @seealso \link{plot.LDA}
+#' @keywords Multivariate
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)

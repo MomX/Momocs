@@ -21,4 +21,5 @@ clust(OutCoe, fac, method, type, palette, ...)
 \description{
 Hierarchical clustering #todo
 }
+\keyword{Multivariate}
 

@@ -26,5 +26,5 @@ stack(coo.scale(bot))
 coo.plot(b)
 coo.plot(coo.scale(b))
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

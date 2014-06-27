@@ -28,5 +28,5 @@ is.closed(x3)
 \seealso{
 \link{coo.unclose}, \link{is.closed}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

@@ -20,5 +20,5 @@ coo.centsize(bot[1])
 cs <- sapply(bot$coo, coo.centsize)
 hist(cs, breaks=10)
 }
-\keyword{coo_descriptors}
+\keyword{ShapeDescriptors}
 

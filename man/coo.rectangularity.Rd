@@ -22,7 +22,5 @@ Calculates the rectangularity of a shape
 data(bot)
 coo.rectangularity(bot[1])
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

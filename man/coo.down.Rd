@@ -21,5 +21,5 @@ b <- coo.alignxax(bot[1])
 coo.plot(b)
 coo.draw(coo.down(b), border="red")
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

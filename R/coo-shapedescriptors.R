@@ -1,11 +1,11 @@
-##### Global shape descriptors (scalars mainly) used in traditional morphometrics
+##### ShapeDescriptors (scalars mainly) used in traditional morphometrics
 
 #' Calculates the area of a shape
 #' 
 #' Calculates the area for a shape using \link{area.poly} in gpc package.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric}, the area.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.area(bot[1])
@@ -56,7 +56,7 @@ coo.tangle <- function(coo){
 #' @param m a 3x2 \code{matrix} of 3 points (rows) and (x; y) coordinates
 #' @param method one of "atan2" or "acos" for a signed or not angle.
 #' @return \code{numeric} the angle in radians.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 64)
@@ -80,7 +80,7 @@ coo.theta3 <- function(m, method=c("atan2", "acos")[1]){
 #' @param coo a \code{matrix} or a list of (x; y) coordinates.
 #' @param method one of "atan2" or "acos" for a signed or not angle.
 #' @return \code{numeric} the angles in radians for every edge.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 64)
@@ -102,7 +102,7 @@ coo.theta.pts <- function(coo, method=c("atan2", "acos")[1]){
 #' @return numeric, the rectilinearity
 #' @note due to the laborious nature of the algorithm (in nb.pts^2), 
 #' and of its implementation, it may be very long to compute.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @source Zunic J, Rosin PL. 2003. Rectilinearity measurements for polygons. 
 #' IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 #' @examples
@@ -162,7 +162,7 @@ coo.rectilinearity <- function(coo) {
 #' @return numeric, the Haralick's circularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.circularity.haralick(bot[1])
@@ -178,7 +178,7 @@ coo.circularity.haralick <- function(coo) {
 #' @aliases coo.compactness coo.shapefactor
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the circularity.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.circularity(bot[1])
@@ -194,7 +194,7 @@ coo.circularity <- function(coo) {
 #' @return numeric, the circularity normalized to the unit circle.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.circularity.norm(bot[1])
@@ -210,7 +210,7 @@ coo.circularity.norm <- function(coo) {
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @seealso \link{coo.eccentricity.boundingbox}
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.eccentricity.eigen(bot[1])
@@ -228,7 +228,7 @@ coo.eccentricity.eigen <- function(coo){
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @seealso \link{coo.eccentricity.eigen}
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.eccentricity.boundingbox(bot[1])
@@ -244,7 +244,7 @@ coo.eccentricity.boundingbox <- function(coo){
 #' @return numeric, the circularity normalized to the unit circle.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.elongation(bot[1])
@@ -260,7 +260,7 @@ coo.elongation <- function(coo){
 #' @return numeric, the rectangularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.rectangularity(bot[1])
@@ -276,7 +276,7 @@ coo.rectangularity <- function(coo){
 #' around \link{chull}, mainly used in graphical functions.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return a \code{matrix} of ids defining the convex hull of the shape.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(hearts)
 #' h <- coo.sample(hearts[4], 32)
@@ -295,7 +295,7 @@ coo.chull <- function(coo){
 #' @return numeric, the convexity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.convexity(bot[1])
@@ -311,7 +311,7 @@ coo.convexity <- function(coo){
 #' @return numeric, the solidity of a shape.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords Global shape descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.solidity(bot[1])

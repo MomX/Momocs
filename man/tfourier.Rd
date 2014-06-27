@@ -74,5 +74,5 @@ pp.
 \link{efourier}, \link{rfourier} for the other members of the
 Fourier's family. \link{tfourier.shape} to play around with this approach.
 }
-\keyword{coreMorpho}
+\keyword{tFourier}
 

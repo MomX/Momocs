@@ -13,5 +13,5 @@ images or the brands cited here.
 \description{
 Data: Outline coordinates of 20 beer and 20 whisky bottles.
 }
-\keyword{datasets}
+\keyword{Datasets}
 

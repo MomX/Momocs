@@ -14,7 +14,7 @@
 #' \link{Out}, \link{Opn} and \link{Ldk}.
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords import
+#' @keywords Import
 #' @export
 import.txt <- function(txt.list, ...){
   cat(" * Extracting", length(txt.list), "..txt coordinates...\n")
@@ -49,7 +49,7 @@ import.txt <- function(txt.list, ...){
 #' }
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords import
+#' @keywords Import
 #' @export
 import.Conte <- function (img, x){ 
   while (abs(img[x[1], x[2]] - img[x[1] - 1, x[2]]) < 0.1) {
@@ -132,7 +132,7 @@ import.Conte <- function (img, x){
 #' \link{list.files} must be called with the argument full.names=TRUE.
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords import
+#' @keywords Import
 #' @return a matrix of (x; y) coordinates that can be passed to Out
 #' @export
 import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
@@ -172,7 +172,7 @@ import.jpg1 <- function(jpg.path, auto.notcentered=FALSE, threshold=0.5){
 #' @param verbose whether to print which file is being treated. Useful to detect problems.
 #' @details see \link{import.jpg1} for important informations about how the outlines are extracted, 
 #' and \link{import.Conte} for the algorithm itself.
-#' @keywords import
+#' @keywords Import
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
@@ -224,7 +224,7 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
 #' then ii) pass "names(foo)" to lf.structure. See Momocs' vignette for an illustration.
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords import
+#' @keywords Import
 #' @export
 lf.structure <- function(lf, names=character(), split="_", trim.extension=FALSE){
   if(length(lf)==1) {

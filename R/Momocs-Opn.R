@@ -216,7 +216,10 @@ nqual.Opn <-
 #' @param r2 numeric, the r-squared from every model
 #' @return an \code{OpnCoe} object
 #' @seealso \link{Coe}, \link{OutCoe}
-#' @keywords OpnCoe
+#' @keywords Opn
+#' @examples
+#' # all OpnCoe classes
+#' methods(class="OpnCoe")
 #' @export
 OpnCoe <- function(coe=matrix(), fac=data.frame(),
                    method=character(),

@@ -24,5 +24,5 @@ stack(coo.sample(bot, 24))
 coo.plot(b)
 coo.plot(coo.sample(b, 24))
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

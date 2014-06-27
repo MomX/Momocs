@@ -38,5 +38,5 @@ dev.segments(out.6, cols=cols, lwd=4)
 coo.draw(out.6, lty=2, points=FALSE, col=NA)
 par(xpd=FALSE)
 }
-\keyword{graphics}
+\keyword{Graphics}
 

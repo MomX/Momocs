@@ -428,13 +428,11 @@ hpow.Out <-
 #' @param norm the normalisation used to obtain these coefficients
 #' @return an \code{OutCoe} object
 #' @details These methods can be applied on \code{Out} objects:
-#' \enumerate{
-#' \item Graphics: \code{hist, boxplot};
-#' \item Multivariate analyses: \code{pca, etc.}.
-#' }
-#'
 #' @seealso \link{Coe}, \link{OpnCoe}
-#' @keywords OutCoe
+#' @keywords Out
+#' @examples
+#' # all OutCoe methods
+#' methods(class="OutCoe")
 #' @export
 OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
   if (missing(method)) stop("a method must be provided to OutCoe")

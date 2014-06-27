@@ -23,5 +23,5 @@ a matrix of (x; y) coordinates to draw the ellipsis
 \description{
 Draw (gaussian) confidence ellipses
 }
-\keyword{graphics}
+\keyword{Graphics}
 

@@ -33,6 +33,4 @@ data(olea)
 olea$fac
 subset(olea, domes=="cult" & view=="VL")
 }
-\keyword{Coe}
-\keyword{Coo}
 

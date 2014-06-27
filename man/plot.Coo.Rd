@@ -29,4 +29,7 @@ plot(bot, 5, pch=3, points=TRUE) # an example of '...' use
 \link{panel.Coo}, \link{stack.Coo}.
 }
 \keyword{Graphics}
+\keyword{Ldk}
+\keyword{Opn}
+\keyword{Out}
 

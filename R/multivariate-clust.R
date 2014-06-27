@@ -1,4 +1,3 @@
-# n - Clustering ----------------------------------------------------------
 
 #' Hierarchical clustering #todo
 #' 
@@ -8,6 +7,7 @@
 #' @param type the type of plot
 #' @param palette a color palette to use
 #' @param ... additional arguments to fed plot.phylo
+#' @keywords Multivariate
 #' @export
 clust <- function(OutCoe, fac, method, type, palette, ...){UseMethod("clust")}
 #' @export

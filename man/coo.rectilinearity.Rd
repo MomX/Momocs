@@ -27,7 +27,5 @@ data(bot)
 b <- coo.sample(bot[1], 32)
 coo.rectilinearity(b)
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

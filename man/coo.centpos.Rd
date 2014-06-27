@@ -22,5 +22,5 @@ xy <- coo.centpos(b)
 points(xy[1], xy[2], cex=2, col="blue")
 xy
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

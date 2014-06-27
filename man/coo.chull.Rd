@@ -22,7 +22,5 @@ coo.plot(h)
 ch <- coo.chull(h)
 lines(ch, col="red", lty=2)
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

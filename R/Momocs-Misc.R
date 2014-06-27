@@ -1,5 +1,4 @@
-# 1. Domestic functions -------------------------------------------------------------
-# Placed here so far
+##### Miscellaneous functions
 
 #' Calculates euclidean distance between two points.
 #' 
@@ -10,6 +9,7 @@
 #' @param pt2 (x; y) coordinates of the second point.
 #' @return Returns the euclidean distance between the two points.
 #' @seealso \link{edm}, \link{edm.nearest}, \link{dist}.
+#' @keywords Miscellaneous
 #' @examples
 #' ed(c(0,1), c(1,0))
 #' @export
@@ -26,7 +26,7 @@ ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 #' @param r the relative distance from \code{pt1} to \code{pt2}.
 #' @return returns the \eqn{(x; y)} interpolated coordinates.
 #' @seealso \link{ed}, \link{edm}.
-#' @keywords domestic
+#' @keywords Miscellaneous
 #' @examples
 #' edi(c(0,1), c(1,0), r = 0.5)
 #' @export
@@ -46,7 +46,7 @@ edi <- function(pt1, pt2, r=0.5){
 #' @return Returns a \code{vector} of euclidean distances between pairwise
 #' coordinates in the two matrices.
 #' @seealso \link{ed}, \link{edm.nearest}, \link{dist}.
-#' @keywords domestic
+#' @keywords Miscellaneous
 #' @examples
 #' x <- matrix(1:10, nc=2)
 #' edm(x, x)
@@ -78,7 +78,7 @@ edm            <- function(m1, m2){
 #' (\code{m2}) row indices of these points. Otherwise returns \code{d} as a
 #' numeric vector of the shortest distances.
 #' @seealso \link{ed}, \link{edm}, \link{dist}.
-#' @keywords domestic
+#' @keywords Miscellaneous
 #' @examples
 #' x <- matrix(1:10, nc=2)
 #' edm.nearest(x, x+rnorm(10))
@@ -96,6 +96,109 @@ edm.nearest <- function(m1, m2, full=FALSE){
     pos[i] <- which.min(di)}
   if (full) return(list(d=d, pos=pos)) else return(d) }
 
+##### Miscellaneous functions for Fourier-based approaches
+
+#' Helps to select a given number of harmonics from a numerical vector.
+#' 
+#' \code{coeff.sel} helps to select a given number of harmonics by returning
+#' their indices when arranged as a numeric vector. For instance, harmonic
+#' coefficients are arranged in the \code{$coe} slot of \code{\link{Coe}}-objects in
+#' that way: \deqn{A_1, \dots, A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1,
+#' \dots, D-n} after an elliptical Fourier analysis (see \link{eFourier} and
+#' \link{efourier}) while \deqn{C_n and D_n} harmonic are absent for radii
+#' variation and tangent angle approaches (see \link{rfourier} and
+#' \link{tfourier} respectively). . This function is used internally but might
+#' be of interest elwewhere.
+#' 
+#' @param retain \code{numeric}. The number of harmonics to retain.
+#' @param drop \code{numeric}. The number of harmonics to drop
+#' @param nb.h \code{numeric}. The maximum harmonic rank.
+#' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and
+#' \code{tfourier} were used.
+#' @return \code{coeff.sel} returns indices that can be used to select columns
+#' from an harmonic coefficient matrix. \code{coeff.split} returns a named list
+#' of coordinates.
+#' @keywords Miscellaneous
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 32)
+#' coe <- bot.f$coe # the raw matrix
+#' coe
+#' # if you want, say the first 8 harmonics but not the first one
+#' retain <- coeff.sel(retain=8, drop=1, nb.h=32, cph=4)
+#' head(coe[, retain])
+#' @export
+coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
+  cs <- numeric()
+  for (i in 1:cph) {
+    cs <- c(cs, (1+drop):retain + nb.h*(i-1))}
+  return(cs)}
+
+#' Converts a numerical description of harmonic coefficients to a named list.
+#' 
+#' \code{coeff.split} returns a named list of coordinates from a vector of
+#' harmonic coefficients. For instance, harmonic coefficients are arranged in
+#' the \code{$coe} slot of \code{Coe}-objects in that way: \deqn{A_1, \dots,
+#' A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1, \dots, D-n} after an elliptical
+#' Fourier analysis (see \link{eFourier} and \link{efourier}) while \deqn{C_n
+#' and D_n} harmonic are absent for radii variation and tangent angle
+#' approaches (see \link{rfourier} and \link{tfourier} respectively). This
+#' function is used internally but might be of interest elwewhere.
+#' 
+#' @param cs A \code{vector} of harmonic coefficients.
+#' @param nb.h \code{numeric}. The maximum harmonic rank.
+#' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and
+#' \code{tfourier} were used.
+#' @return Returns a named list of coordinates.
+#' @keywords Miscellaneous
+#' @examples
+#' coeff.split(1:128, nb.h=32, cph=4) # efourier
+#' coeff.split(1:64, nb.h=32, cph=2)  # t/r fourier
+#' @export
+coeff.split <- function(cs, nb.h=8, cph=4){
+  if (missing(nb.h)) {nb.h <- length(cs)/cph }
+  cp <- list()
+  for (i in 1:cph) {
+    cp[[i]] <- cs[1:nb.h + (i-1)*nb.h]
+  }
+  names(cp) <- paste(letters[1:cph], "n", sep="")
+  return(cp)}
+
+#' Calculates harmonic power given a list from e/t/rfourier
+#' 
+#' Given a list with \code{an, bn (and eventually cn and dn)}, returns the
+#' harmonic power.
+#' 
+#' @param xf A list with an, bn (and cn, dn) components, typically from a
+#' e/r/tfourier passed on coo.
+#' @return Returns a \code{vector} of harmonic power
+#' @keywords Miscellaneous
+#' @examples
+#' 
+#' data(bot)
+#' ef <- efourier(bot[1], 24)
+#' rf <- efourier(bot[1], 24)
+#' harm.pow(ef)
+#' harm.pow(rf)
+#' 
+#' plot(cumsum(harm.pow(ef)[-1]), type="o",
+#'   main="Cumulated harmonic power without the first harmonic",
+#'   ylab="Cumulated harmonic power", xlab="Harmonic rank")
+#' 
+#' @export
+harm.pow <- function(xf){
+  if (is.list(xf)) {
+    if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
+      return((xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2)
+    } else {
+      if (all(c("an", "bn") %in% names(xf))) {
+        return((xf$an^2 + xf$bn^2)/2)}
+    }
+  } else {
+    stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")}}
+
+##### end misc Fourier
+
 #' Some vector utilities.
 #' 
 #' Returns ratio of norms and signed angle between two vectors provided as four
@@ -112,7 +215,7 @@ edm.nearest <- function(m1, m2, full=FALSE){
 #' @return A list with two components: \code{r.norms} the ratio of (norm of
 #' vector 1)/(norm of vector 2) and \code{d.angle} the signed angle 'from' the
 #' first 'to' the second vector.
-#' @keywords Utilities
+#' @keywords Miscellaneous
 #' @examples
 #' vecs.param(1, 0, 0, 2)
 #' 
@@ -138,20 +241,4 @@ vecs.param <- function(r1, i1, r2, i2){
   lf0 <- substr(lf0, 1, nchar(lf0)-4)
 return(lf0)}
 
-#' @export
-.grid.sample <- function(..., nside=10, over=1){
-  wdw <- apply(rbind(...), 2, range)
-  wdw <- coo.scale(wdw, scale=1/over)
-  by <- min(apply(wdw, 2, diff))/nside
-  xr <- seq(wdw[1, 1], wdw[2, 1], by=by)
-  yr <- seq(wdw[1, 2], wdw[2, 2], by=by)
-  grid <- expand.grid(xr, yr)
-  return(as.matrix(grid))}
-
-#' @export
-# returns the size of the graphical window
-.wdw <- function(){
-  wdw <- par("usr")
-  x <- wdw[2] - wdw[1]
-  y <- wdw[4] - wdw[3]
-  return(c(x, y))}
+##### End Miscellaneous

@@ -26,5 +26,5 @@ coo.arrows(coo.sample(olea[3], 50), coo.sample(olea[6], 50))
 \seealso{
 \link{coo.arrows}
 }
-\keyword{graphics}
+\keyword{Graphics}
 

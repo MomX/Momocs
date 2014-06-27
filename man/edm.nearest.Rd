@@ -42,5 +42,5 @@ edm.nearest(x, x+rnorm(10), full=TRUE)
 \seealso{
 \link{ed}, \link{edm}, \link{dist}.
 }
-\keyword{domestic}
+\keyword{Miscellaneous}
 

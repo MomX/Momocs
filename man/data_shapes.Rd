@@ -10,5 +10,5 @@ Borrowed from default shapes from (c) Adobe Photoshop.
 \description{
 Data: Outline coordinates of 210 olive seeds oopen outlines.
 }
-\keyword{datasets}
+\keyword{Datasets}
 

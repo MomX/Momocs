@@ -21,7 +21,5 @@ and "shape factor" sometimes.
 data(bot)
 coo.circularity(bot[1])
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

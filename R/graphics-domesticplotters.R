@@ -25,7 +25,7 @@
 #' @param plot logical whether to plot something or just to create an empty plot
 #' @return No returned value.
 #' @seealso coo.draw
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' 
 #' data(bot)
@@ -64,7 +64,7 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
 #' shape on the active plot.
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param ... optional parameters for coo.plot
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' data(bot)
 #' b1 <- bot[4]
@@ -84,7 +84,7 @@ coo.draw <- function(coo, ...){
 #' @param cex a cex for the points
 #' @param ... optional parameters to fed \link{points} and \link{segments}.
 #' @seealso \link{coo.arrows}
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' data(olea)
 #' coo.lolli(coo.sample(olea[3], 50), coo.sample(olea[6], 50))
@@ -108,7 +108,7 @@ coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, ...){
 #' @param angle an angle for the arrows
 #' @param ... optional parameters to fed \link{arrows}.
 #' @seealso \link{coo.arrows}
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' data(olea)
 #' coo.arrows(coo.sample(olea[3], 50), coo.sample(olea[6], 50))
@@ -135,7 +135,7 @@ coo.arrows <- function(coo1, coo2, length=0.1, angle=20, ...){
 #' the shape.
 #' @return Returns a matrix of \code{(x; y)}coordinates.
 #' @seealso \link{coo.list.panel}.
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' 
 #' data(bot)
@@ -182,7 +182,7 @@ coo.template   <- function(coo, size=1) {
 #' @return Returns (invisibly) a \code{data.frame} with position of shapes that
 #' can be used for other sophisticated plotting design.
 #' @seealso \link{coo.plot} and \link{coo.template}.
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' data(bot)
 #' coo.list.panel(bot$coo)
@@ -398,7 +398,7 @@ img.plot <- function(img){
 #' @param nb.pts \code{integer}. The number or reference points, sampled
 #' equidistantly along the curvilinear abscissa and added on the oscillo
 #' curves.
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' 
 #' data(bot)
@@ -461,7 +461,7 @@ coo.oscillo <- function(coo, rug=TRUE, legend=TRUE,
 #' @param main \code{character}. A title for the plot.
 #' @param xlab \code{character}. A title for the x-axis.
 #' @param ylab \code{character}. A title for the y-axis.
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' # we prepare some fake data
 #' foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
@@ -521,7 +521,7 @@ dev.plot       <- function(mat, dev, cols, x=1:ncol(mat),
 #' @param coo A matrix of coordinates.
 #' @param cols A vector of color of \code{length = nrow(coo)}.
 #' @param lwd The \code{lwd} to use for drawing segments.
-#' @keywords graphics
+#' @keywords Graphics
 #' @examples
 #' 
 #' # we load some data
@@ -562,7 +562,7 @@ dev.segments <-function(coo, cols, lwd=1){
 #' @param nb.pts the number of points to return, to draw the ellipsis
 #' @return a list with $ell coordinates of the ellipse and $seg coordinates
 #' of its vertices
-#' @keywords graphics
+#' @keywords Graphics
 #' @return a matrix of (x; y) coordinates to draw the ellipsis
 #' @export
 conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
@@ -587,3 +587,25 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
                which.min(ell.al[, 2]), which.max(ell.al[, 2]))
   seg <- ell[ell.ids, ]
   return(list(ell=ell, seg=seg))}
+
+##### Graphics misc
+
+#' @export
+.grid.sample <- function(..., nside=10, over=1){
+  wdw <- apply(rbind(...), 2, range)
+  wdw <- coo.scale(wdw, scale=1/over)
+  by <- min(apply(wdw, 2, diff))/nside
+  xr <- seq(wdw[1, 1], wdw[2, 1], by=by)
+  yr <- seq(wdw[1, 2], wdw[2, 2], by=by)
+  grid <- expand.grid(xr, yr)
+  return(as.matrix(grid))}
+
+#' @export
+# returns the size of the graphical window
+.wdw <- function(){
+  wdw <- par("usr")
+  x <- wdw[2] - wdw[1]
+  y <- wdw[4] - wdw[3]
+  return(c(x, y))}
+
+##### 

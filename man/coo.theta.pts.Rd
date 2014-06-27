@@ -21,7 +21,5 @@ data(bot)
 b <- coo.sample(bot[1], 64)
 coo.theta.pts(b)
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

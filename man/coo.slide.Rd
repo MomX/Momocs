@@ -23,5 +23,5 @@ stack(coo.slide(hearts, 1))
 coo.plot(hearts[4])
 coo.plot(coo.slide(hearts[4], 50))
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

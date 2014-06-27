@@ -28,5 +28,5 @@ stack(bot.al)
 \seealso{
 \link{coo.align}, \link{coo.alignxax}, \link{coo.calliper}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

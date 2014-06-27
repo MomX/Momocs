@@ -33,8 +33,12 @@ on which generic methods such as plotting methods (e.g. \link{boxplot})
 and specific methods can be applied.
  \code{OpnCoe} objects are primarily \code{\link{Coe}} objects.
 }
+\examples{
+# all OpnCoe classes
+methods(class="OpnCoe")
+}
 \seealso{
 \link{Coe}, \link{OutCoe}
 }
-\keyword{OpnCoe}
+\keyword{Opn}
 

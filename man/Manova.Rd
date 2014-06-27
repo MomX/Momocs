@@ -15,5 +15,5 @@ a list of matrices of (x,y) coordinates.
 Calculates mean shapes on matrices of coefficients by groups (if passed with
 a "fac") or globally (if not).
 }
-\keyword{multivariate}
+\keyword{Multivariate}
 

@@ -25,7 +25,5 @@ coo.plot(b)
 coo.theta3(b)
 coo.theta3(b, method="acos")
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

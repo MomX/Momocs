@@ -29,5 +29,5 @@ coo.plot(coo.rotate(b, pi))
 \seealso{
 \link{coo.rotatecenter}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

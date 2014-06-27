@@ -30,5 +30,5 @@ stack(coo.interpolate(coo.sample(bot, 12), 120))
 coo.plot(bot[1])
 coo.plot(coo.interpolate(coo.sample(bot[1], 12), 120))
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

@@ -22,7 +22,5 @@ Calculates the elongation of a shape
 data(bot)
 coo.elongation(bot[1])
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

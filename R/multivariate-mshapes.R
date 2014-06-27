@@ -3,16 +3,20 @@
 #' 
 #' Calculates mean shapes on matrices of coefficients by groups (if passed with
 #' a "fac") or globally (if not).
-#' @aliases mshapes
 #' @param Coe a \link{Coe} object
 #' @param fac factor from the $fac slot. See examples below.
 #' @param nb.pts numeric the number of points for calculated shapes
 #' @return a list of matrices of (x,y) coordinates.
-#' @keywords multivariate
+#' @rdname mshapes
+#' @keywords Multivariate
 #' @export
 mshapes <- function(Coe, fac, nb.pts){UseMethod("mshapes")}
+
+#' @rdname mshapes
 #' @export
 mshapes.default <- function(Coe, fac, nb.pts){}
+
+#' @rdname mshapes
 #' @export
 mshapes.OutCoe <- function(Coe, fac, nb.pts=120){
   OutCoe <- Coe
@@ -36,6 +40,7 @@ mshapes.OutCoe <- function(Coe, fac, nb.pts=120){
   names(res) <- fl
   return(res)}
 
+#' @rdname mshapes
 #' @export
 mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
   OpnCoe <- Coe

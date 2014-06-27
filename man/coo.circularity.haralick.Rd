@@ -23,7 +23,5 @@ to digitalization noise than coo.circularity.
 data(bot)
 coo.circularity.haralick(bot[1])
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

@@ -22,5 +22,5 @@ b <- coo.sample(bot[1], 64)
 d <- coo.centdist(b)
 barplot(d)
 }
-\keyword{coo_descriptors}
+\keyword{ShapeDescriptors}
 

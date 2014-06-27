@@ -28,5 +28,5 @@ ids <- p$arr.ind
 coo.plot(b)
 segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
 }
-\keyword{coo_descriptors}
+\keyword{ShapeDescriptors}
 

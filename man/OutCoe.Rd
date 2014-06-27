@@ -27,13 +27,13 @@ and specific methods can be applied.
 }
 \details{
 These methods can be applied on \code{Out} objects:
-\enumerate{
-\item Graphics: \code{hist, boxplot};
-\item Multivariate analyses: \code{pca, etc.}.
 }
+\examples{
+# all OutCoe methods
+methods(class="OutCoe")
 }
 \seealso{
 \link{Coe}, \link{OpnCoe}
 }
-\keyword{OutCoe}
+\keyword{Out}
 

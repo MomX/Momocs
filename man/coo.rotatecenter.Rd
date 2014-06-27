@@ -27,5 +27,5 @@ coo.draw(coo.rotatecenter(b, -pi/2, c(200, 200)), border="red")
 \seealso{
 \link{coo.rotate}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

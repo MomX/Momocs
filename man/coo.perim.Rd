@@ -19,5 +19,5 @@ data(bot)
 coo.perim(bot[1])
 hist(sapply(bot$coo, coo.perim), breaks=10)
 }
-\keyword{coo_descriptors}
+\keyword{ShapeDescriptors}
 

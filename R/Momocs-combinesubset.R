@@ -11,7 +11,6 @@
 #' @param x a \code{Coo} or a \link{Coe} object
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
 #' @param ... useless here but maintains consistence with the generic subset.
-#' @keywords Coo Coe
 #' @examples
 #' data(bot)
 #' bot$fac

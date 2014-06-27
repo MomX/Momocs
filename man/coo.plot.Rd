@@ -57,5 +57,5 @@ coo.plot(bot[1])
 \seealso{
 coo.draw
 }
-\keyword{graphics}
+\keyword{Graphics}
 

@@ -23,5 +23,5 @@ Returns a matrix of coordinates, when passed with either a list or a \code{matri
 \seealso{
 \link{ldk.check}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

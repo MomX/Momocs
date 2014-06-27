@@ -26,5 +26,5 @@ If a list is provided, checks that the number of landmarks is consistent.
 \seealso{
 \link{coo.check}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

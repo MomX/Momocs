@@ -20,7 +20,5 @@ coo.area(bot[1])
 # for the distribution of the area of the bottles dataset
 hist(sapply(bot$coo, coo.area), breaks=10)
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

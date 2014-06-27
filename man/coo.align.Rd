@@ -25,5 +25,5 @@ coo.plot(coo.align(b))
 \seealso{
 \link{coo.aligncalliper}, \link{coo.alignxax}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

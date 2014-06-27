@@ -22,7 +22,5 @@ Returns the ids of points that define the convex hull of a shape.
 data(bot)
 coo.solidity(bot[1])
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

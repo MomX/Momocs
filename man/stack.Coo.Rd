@@ -70,4 +70,7 @@ stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
 \link{panel.Coo}, \link{plot.Coo}.
 }
 \keyword{Graphics}
+\keyword{Ldk}
+\keyword{Opn}
+\keyword{Out}
 

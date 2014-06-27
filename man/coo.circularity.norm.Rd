@@ -23,7 +23,5 @@ and shape factor, but normalized to the unit circle.
 data(bot)
 coo.circularity.norm(bot[1])
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

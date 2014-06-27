@@ -1,5 +1,4 @@
 
-# 2. MANOVAs -------------------------------------------------------------------
 #' Multivariate analysis of variance on matrices of coefficients
 #' 
 #' Calculates mean shapes on matrices of coefficients by groups (if passed with
@@ -7,7 +6,7 @@
 #' @aliases Manova
 #' @param ... a \link{Coe} object
 #' @return a list of matrices of (x,y) coordinates.
-#' @keywords multivariate
+#' @keywords Multivariate
 #' @export
 Manova <- function(...){UseMethod("Manova")}
 #' @export

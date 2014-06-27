@@ -30,5 +30,5 @@ function is used internally but might be of interest elwewhere.
 coeff.split(1:128, nb.h=32, cph=4) # efourier
 coeff.split(1:64, nb.h=32, cph=2)  # t/r fourier
 }
-\keyword{miscFourier}
+\keyword{Miscellaneous}
 

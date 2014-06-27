@@ -1,5 +1,3 @@
-
-
 # 5. Coe / OutCoe / OpnCoe plotters ------------------------------------------
 #' Boxplot on OutCoe matrices of harmonic coefficients
 #' 
@@ -14,7 +12,9 @@
 #' @param legend logical whether to add a legend
 #' @param ... useless here but maintain the consistency with generic boxplot
 #' @seealso \link{hist.OutCoe}
-#' @keywords OutCoe graphics
+#' @rdname boxplot.Coe
+#' @keywords Graphics Out Opn Ldk
+#' @aliases boxplot.Coe
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
@@ -58,23 +58,8 @@ boxplot.OutCoe <- function(x, retain, drop, palette=col.gallus,
            cex=0.7, inset=0.005,
            title = "Harmonic coefficients")}}
 
-#' Boxplot on OpnCoe matrices of polynomial coefficients
-#' 
-#' Allows to explore variability of these coefficients, typically after a
-#' rawPolynomials or orthoPolynomials on Opn objects.
-#' 
-#' @param x the \link{OpnCoe} object
-#' @param retain numeric the number of harmonics to retain
-#' @param drop numeric the number of harmonics to drop
-#' @param palette a color \link{palette}
-#' @param title a title for the plot
-#' @param ... useless here but maintain the consistency with generic boxplot
-#' @seealso \link{hist.OpnCoe}
-#' @keywords OpnCoe graphics
-#' @examples
-#' data(olea)
-#' olea.p <- rawPolynomials(olea, 5)
-#' boxplot(olea.p)
+#' @rdname boxplot.Coe
+#' @keywords Graphics
 #' @export
 boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
                            title= "Variation of polynomials coefficients", ...){
@@ -115,8 +100,8 @@ boxplot.OpnCoe <- function(x, retain, drop, palette=col.gallus,
 #' @param palette a color \link{palette}
 #' @param title a title for the plot
 #' @param ... useless here but maintain the consistency with generic hist
-#' @seealso \link{boxplot.OutCoe}
-#' @keywords OutCoe graphics
+#' @seealso \link{boxplot.Coe}, \link{hist.OpnCoe}
+#' @keywords Graphics Out
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
@@ -168,8 +153,9 @@ hist.OutCoe <-
 #' @param title a title for the plot
 #' @param hist.per.row numeric the number of histograms per row
 #' @param ... useless here but maintain the consistency with generic hist
-#' @keywords OpnCoe graphics
-#' @seealso \link{boxplot.OpnCoe}
+#' @seealso \link{boxplot.Coe}
+#' @keywords Graphics Opn
+#' @seealso \link{hist.OutCoe}, \link{boxplot.Coe}
 #' @examples
 #' data(olea)
 #' olea.p <- orthoPolynomials(olea, 5)
@@ -209,3 +195,5 @@ hist.OpnCoe <-
         axis(1, at=at, labels=signif(at, 3), cex.axis=0.75)}}
     title(main=title, cex.main=1.5, outer=TRUE)
     layout(matrix(1))}
+
+##### end graphics Coe

@@ -27,5 +27,5 @@ coo.draw(coo.smoothcurve(o, 24), border="red", points=FALSE)
 \seealso{
 \link{coo.smooth}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

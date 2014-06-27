@@ -19,5 +19,5 @@ data(bot)
 b <- coo.sample(bot[1], 24)
 coo.perim.cum(b)
 }
-\keyword{coo_descriptors}
+\keyword{ShapeDescriptors}
 

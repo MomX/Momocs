@@ -26,5 +26,5 @@ edi(c(0,1), c(1,0), r = 0.5)
 \seealso{
 \link{ed}, \link{edm}.
 }
-\keyword{domestic}
+\keyword{Miscellaneous}
 

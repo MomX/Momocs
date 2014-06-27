@@ -28,8 +28,8 @@ bot.f <- eFourier(bot, 24)
 hist(bot.f)
 }
 \seealso{
-\link{boxplot.OutCoe}
+\link{boxplot.Coe}, \link{hist.OpnCoe}
 }
-\keyword{OutCoe}
-\keyword{graphics}
+\keyword{Graphics}
+\keyword{Out}
 

@@ -27,5 +27,5 @@ plot(cumsum(harm.pow(ef)[-1]), type="o",
   main="Cumulated harmonic power without the first harmonic",
   ylab="Cumulated harmonic power", xlab="Harmonic rank")
 }
-\keyword{miscFourier}
+\keyword{Miscellaneous}
 

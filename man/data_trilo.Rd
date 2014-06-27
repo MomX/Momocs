@@ -13,5 +13,5 @@ but one of them has just a single outline thas has been removed.
 \description{
 Data: Outline coordinates of 50 cephalic outlines of trilobite
 }
-\keyword{datasets}
+\keyword{Datasets}
 

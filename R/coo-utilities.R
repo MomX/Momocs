@@ -15,7 +15,7 @@
 #' @param coo a \code{matrix} of (x; y) coordinates or a list.
 #' @return a \code{matrix} of (x; y) coordinates.
 #' @seealso \link{ldk.check}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' #coo.check("Not a shape")
 #' #coo.check(matrix(1:10, ncol=2))
@@ -38,7 +38,7 @@ coo.check <- function(coo){
 #' @param ldk a \code{matrix} of (x; y) coordinates, a list, or an array.
 #' @return an \code{array} of (x; y) coordinates.
 #' @seealso \link{coo.check}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' #coo.check("Not a shape")
 #' #coo.check(matrix(1:10, ncol=2))
@@ -63,7 +63,7 @@ ldk.check <- function(ldk){
 #' 
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -90,7 +90,7 @@ coo.center.Coo <- function(coo){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param scale the scaling factor, by default, the centroid size.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -129,7 +129,7 @@ coo.scale.Coo <- function(coo, scale){
 #' @param theta \code{numeric}the angle (in radians) to rotate shapes.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.rotatecenter}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -158,7 +158,7 @@ coo.rotate.Coo <- function(coo, theta=0){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.aligncalliper}, \link{coo.alignxax}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -187,7 +187,7 @@ coo.align.Coo <- function(coo){
 #' @param x \code{numeric}translation along the x-axis.
 #' @param y \code{numeric}translation along the y-axis.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -214,7 +214,7 @@ coo.trans.Coo <- function(coo, x=0, y=0){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param id1 the id of the point that will become the new first point.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(hearts)
 #' stack(hearts)
@@ -247,7 +247,7 @@ coo.slide.Coo <- function(coo, id1){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to sample.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -276,7 +276,7 @@ coo.sample.Coo <- function(coo, n){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n integer, the number of points to sample.
 #' @return a \code{matrix} of (x; y) coordinates or an Coo object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' stack(bot)
@@ -318,7 +318,7 @@ coo.samplerr.Coo <- function(coo, n){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param n an integer, the number fo points to interpolate.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -360,7 +360,7 @@ coo.interpolate.Coo <- function(coo, n){
 #' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.smoothcurve}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -396,7 +396,7 @@ coo.smooth.Coo <- function(coo, n){
 #' @param n an (integer) \code{numeric} to specify the number of smoothing iterations
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.smooth}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(olea)
 #' o <- olea[1]
@@ -430,7 +430,7 @@ coo.smoothcurve.Opn <- function(coo, n){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a boolean.
 #' @seealso \link{coo.close}, \link{coo.unclose}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' is.closed(matrix(1:10, ncol=2))
 #' is.closed(coo.close(matrix(1:10, ncol=2)))
@@ -462,7 +462,7 @@ is.closed.Coo <- function(coo){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.unclose}, \link{is.closed}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo.close(x)
@@ -493,7 +493,7 @@ coo.close.Coo <- function(coo){
 #'   object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.close}, \link{is.closed}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo.close(x)
@@ -528,7 +528,7 @@ coo.unclose.Coo <- function(coo){
 #' @param center the (x; y) position of the center
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.rotate}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -555,7 +555,7 @@ coo.rotatecenter.Coo <- function(coo, theta, center=c(0, 0)){
 #' where reconstructed shapes may not be closed.
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 64)
@@ -583,7 +583,7 @@ coo.force2close <- function(coo){
 #' bilateral symmetry) #' and when one wants to retain just the upper side. 
 #' @param coo either a \code{matrix} of (x; y) coordinates.
 #' @return a \code{matrix} of (x; y) coordinates.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- coo.alignxax(bot[1])
@@ -600,7 +600,7 @@ coo.up <- function(coo){
 #' bilateral symmetry) and when one wants to retain just the lower side. 
 #' @param coo either a \code{matrix} of (x; y) coordinates.
 #' @return a \code{matrix} of (x; y) coordinates.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- coo.alignxax(bot[1])
@@ -618,7 +618,7 @@ coo.down <- function(coo){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.align}, \link{coo.aligncalliper}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -647,7 +647,7 @@ coo.alignxax.Coo <- function(coo){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.align}, \link{coo.alignxax}, \link{coo.calliper}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -676,7 +676,7 @@ coo.aligncalliper.Coo <- function(coo){
 #' Returns the reverse suite of coordinates, i.e. change shape's orientation
 #' @param coo either a \code{matrix} of (x; y) coordinates.
 #' @return a \code{matrix} of (x; y) coordinates.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 4)
@@ -695,7 +695,7 @@ coo.rev <- function(coo){
 #' @param nb.ldk integer, the number of landmarks to define
 #' @return \code{numeric} that corresponds to the closest ids,
 #' on the shape, from cliked points.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -728,7 +728,7 @@ coo.ldk <- function(coo, nb.ldk) {
 #' @param ldk2 the id of the second point of the new baseline (the last, by default)
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo.baseline}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(hearts)
 #' stack(hearts)
@@ -776,7 +776,7 @@ coo.bookstein.Ldk <- function(coo, ldk1, ldk2){
 #' @param t2 \code{numeric} the (x; y) coordinates of the 2nd point of the new baseline
 #' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
 #' @seealso \link{coo.bookstein}
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(hearts)
 #' stack(hearts)
@@ -831,7 +831,7 @@ coo.baseline.Coo <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
 #' @aliases coo.centpos
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return (x; y) coordinates as \code{numeric}.
-#' @keywords coo_utilities
+#' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -856,7 +856,7 @@ coo.centpos.Coo <- function(coo){
 #' @aliases coo.centsize
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric}, the centroid size.
-#' @keywords coo_descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.centsize(bot[1])
@@ -872,7 +872,7 @@ coo.centsize <- function(coo){
 #' @aliases coo.centdist
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return a \code{matrix} of (x; y) coordinates.
-#' @keywords coo_descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 64)
@@ -891,7 +891,7 @@ coo.centdist <- function(coo){
 #' The cumulative sum for coo.perim.cum
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric} the distance between every point.
-#' @keywords coo_descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 24)
@@ -908,7 +908,7 @@ coo.perim.pts <-  function (coo){
 #' Just a wrapper for cumsum(coo.perim.pts). See \link{coo.perim.pts}.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric} the cumulate sum of chrodal distances
-#' @keywords coo_descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo.sample(bot[1], 24)
@@ -922,7 +922,7 @@ coo.perim.cum <- function(coo){
 #' Calculates the perimeter
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric}, the perimeter.
-#' @keywords coo_descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.perim(bot[1])
@@ -940,7 +940,7 @@ coo.perim <- function(coo){
 #' @param arr.ind a boolean, if provided returns
 #' @return \code{numeric}, the centroid size. If arr.ind=TRUE, a list with the calliper length ($length) 
 #' and the two points ($arr.ind)
-#' @keywords coo_descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -975,7 +975,7 @@ coo.calliper <- function(coo, arr.ind=FALSE){
 #' the range along the x-axis; the width as the range on the y-axis.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return two \code{numeric}, the length and the width.
-#' @keywords coo_descriptors
+#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo.lw(bot[1])

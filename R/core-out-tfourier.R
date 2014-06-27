@@ -45,7 +45,7 @@
 #' 
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
-#' @keywords coreMorpho
+#' @keywords tFourier
 #' @examples
 #' data(bot)
 #' coo <- bot[1]

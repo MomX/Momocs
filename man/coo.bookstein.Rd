@@ -30,5 +30,5 @@ coo.plot(coo.bookstein(h, 20, 57), border="red")
 \seealso{
 \link{coo.baseline}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 

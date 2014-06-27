@@ -25,7 +25,5 @@ coo.eccentricity.boundingbox(bot[1])
 \seealso{
 \link{coo.eccentricity.eigen}
 }
-\keyword{Global}
-\keyword{descriptors}
-\keyword{shape}
+\keyword{ShapeDescriptors}
 

@@ -30,8 +30,10 @@ olea.p <- orthoPolynomials(olea, 5)
 hist(olea.p)
 }
 \seealso{
-\link{boxplot.OpnCoe}
+\link{boxplot.Coe}
+
+\link{hist.OutCoe}, \link{boxplot.Coe}
 }
-\keyword{OpnCoe}
-\keyword{graphics}
+\keyword{Graphics}
+\keyword{Opn}
 

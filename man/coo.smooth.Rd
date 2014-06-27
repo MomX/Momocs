@@ -28,5 +28,5 @@ coo.plot(coo.smooth(bot[1], 30))
 \seealso{
 \link{coo.smoothcurve}
 }
-\keyword{coo_utilities}
+\keyword{ShapeUtilities}
 
