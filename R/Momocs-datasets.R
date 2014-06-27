@@ -101,3 +101,19 @@ NULL
 #' geometric morphometrics: a simplified protocol for beginners.
 #' PloS One, 6(10), e25630. doi:10.1371/journal.pone.0025630
 NULL
+
+#' Data: Outline coordinates of 360 molars
+#' 
+#' Courtesy of Julien Corny and Florent Detroit. 
+#' @docType data
+#' @name molars
+#' @rdname data_molars
+#' @keywords Datasets
+#' @format A \link{Out} object containing 79 (x; y) coordinates for 360 molars,
+#' along with their type, their number, and the individual they come from.
+#' @source Corny, J., & Detroit, F. (2014). Technical Note: Anatomic 
+#' identification of isolated modern human molars: testing Procrustes aligned 
+#' outlines as a standardization procedure for elliptic fourier analysis. 
+#' \emph{American Journal of Physical Anthropology}, 153(2), 314-22. doi:10.1002/ajpa.22428
+#' \url{http://onlinelibrary.wiley.com/doi/10.1002/ajpa.22428/abstract}
+NULL
