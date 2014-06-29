@@ -15,7 +15,13 @@ ldk.chull(ldk, col = "grey40", lty = 1)
 \description{
 A wrapper that uses \link{coo.chull}
 }
-\seealso{
-\link{coo.chull}
+\examples{
+data(wings)
+coo.plot(mshape(wings))
+ldk.chull(wings$coo)
 }
+\seealso{
+\link{coo.chull}, \link{chull}, \link{ldk.confell}, \link{ldk.contour}
+}
+\keyword{Graphics}
 

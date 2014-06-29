@@ -9,7 +9,8 @@ img.plot(img)
 \item{img}{a matrix of an image, such as those obtained with \link{readJPEG}.}
 }
 \description{
-A very simple (and fast) image plotter.
+A very simple image plotter. If not provided with an imagematrix, will
+ask you to choose interactively a \code{.jpeg} image.
 }
 \keyword{Import}
 

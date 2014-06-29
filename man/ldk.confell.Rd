@@ -9,7 +9,7 @@ ldk.confell(ldk, conf = 0.5, col = "grey40", ell.lty = 1, ax = TRUE,
 \arguments{
 \item{ldk}{an array (or a list) of landmarks}
 
-\item{conf}{the confidence level (normal quantile)}
+\item{conf}{the confidence level (normal quantile, 0.5 by default)}
 
 \item{col}{the color for the ellipse}
 
@@ -20,6 +20,15 @@ ldk.confell(ldk, conf = 0.5, col = "grey40", ell.lty = 1, ax = TRUE,
 \item{ax.lty}{an lty for ellipses axes}
 }
 \description{
-todo
+Draws confidence ellipses for landmark positions
 }
+\examples{
+data(wings)
+coo.plot(mshape(wings))
+ldk.confell(wings$coo)
+}
+\seealso{
+\link{ldk.contour}, \link{ldk.chull}
+}
+\keyword{Graphics}
 

@@ -43,16 +43,15 @@ can be used for other sophisticated plotting design.
 }
 \description{
 \code{coo.list.panel} plots a list of shapes if passed with a list of
-coordinates. Outlines are templated and on the same graphical window with
-the help of \link{coo.template}.
+coordinates. Outlines are "templated" (see \link{coo.template} and will be drawn
+the same graphical window. Mainly used by \link{panel.Coo} functions.
 }
 \examples{
 data(bot)
-coo.list.panel(bot$coo)
+coo.list.panel(bot$coo) # equivalent to panel(bot)
 x <- coo.list.panel(bot$coo)
 x # positions of shapes returned invisibly
 # axis(1) ; axis(2) # that's a single graphical window
-
 data(bot)
 coo <- bot$coo
 ord <- sapply(coo, coo.eccentricity.eigen)

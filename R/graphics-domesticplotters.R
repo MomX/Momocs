@@ -1,9 +1,9 @@
-# The graphics R file for everyhting graphics. Some internals used elsewhere.
+##### The graphics R file for everyhting graphics. Some internals used elsewhere.
 
-# 1. coo plotters  ------------------------------------------------------------
-#' The basics shape plotter.
+#' Plots a single shape
 #' 
-#' A simple wrapper for plotting shapes. Widely used in Momocs.
+#' A simple wrapper around \link{plot} for plotting shapes. Widely used in Momocs
+#' in other graphical functions, in methods, etc.
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
 #' @param xlim If \code{coo.plot} is called and \code{coo} is missing, then a
 #' vector of length 2 specifying the \code{ylim} of the ploting area.
@@ -22,25 +22,41 @@
 #' @param cex The \code{cex} for points.
 #' @param main \code{character}. A title for the plot.
 #' @param plot.new \code{logical} whether to plot or not a new frame.
-#' @param plot logical whether to plot something or just to create an empty plot
+#' @param plot logical whether to plot something or just to create an empty plot.
+#' @param zoom a numeric to take your distances.
 #' @return No returned value.
 #' @seealso coo.draw
 #' @keywords Graphics
 #' @examples
-#' 
 #' data(bot)
-#' coo.plot(bot[1])
+#' b <- bot[1]
+#' coo.plot(b)
+#' coo.plot(bot[2], plot.new=FALSE) # equivalent to coo.draw(bot[2]) 
+#' coo.plot(b, zoom=2)
+#' coo.plot(b, border="blue")
+#' coo.plot(b, first.point=FALSE, centroid=FALSE)
+#' coo.plot(b, points=TRUE, pch=20)
+#' coo.plot(b, xy.axis=FALSE, lwd=2, col="#F2F2F2")
 #' @export
 coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
                      points=FALSE, first.point=TRUE, centroid=TRUE, xy.axis=TRUE,
-                     pch=1, cex=0.5, main, plot.new=TRUE, plot=TRUE){ #todo zoom
+                     pch=1, cex=0.5, main, plot.new=TRUE, plot=TRUE, zoom=1){ #todo zoom
   coo <- coo.check(coo)
   if (plot.new) {
     # we setup coo.plot graphical parameters
     op <- par(mar=c(3, 3, 2, 1))
     on.exit(par(op))
-    if (!missing(xlim) | !missing(ylim)) {
-      if (missing(xlim)){ xlim <- ylim } else {ylim <- xlim }
+    # if zoom if provided, we define wlim and ylim manually
+    if (!missing(zoom)){
+      wdw.range <- apply(coo, 2, range)
+      wdw.diff <- apply(wdw.range, 2, diff)
+      add.wdw <- (max(wdw.diff)/2)*zoom
+      max.wdw <- which.max(wdw.diff)
+      xlim <- ylim <- c(wdw.range[1, max.wdw] - add.wdw, wdw.range[1, max.wdw] + add.wdw) }
+    # if xlim or ylim are provided
+    if (!missing(xlim) | !missing(ylim)) { 
+      if (missing(xlim)){ xlim <- ylim }
+      if (missing(ylim)){ ylim <- xlim }
       plot(coo, type="n", asp=1,  las=1, cex.axis=2/3, ann=FALSE, frame=FALSE,
            xlim=xlim, ylim=ylim)
     } else {
@@ -58,24 +74,24 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
       points(cent[1], cent[2], pch=3, col=border, cex=cex)}
     if (!missing(main)) title(main=main)}}
 
-#' Adds a single outline on the current plot.
+#' Adds a shape to the current plot
 #' 
-#' \code{coo.draw} is a light version of \link{coo.plot} that simply adds a
-#' shape on the active plot.
-#' @param coo A \code{list} or a \code{matrix} of coordinates.
-#' @param ... optional parameters for coo.plot
+#' \code{coo.draw} is simply a \link{coo.plot} with \code{plot.new=FALSE}, ie 
+#' that adds a shape on the active plot.
+#' @param coo a \code{list} or a \code{matrix} of coordinates.
+#' @param ... optional parameters for \link{coo.plot}
 #' @keywords Graphics
 #' @examples
 #' data(bot)
 #' b1 <- bot[4]
 #' b2 <- bot[5]
 #' coo.plot(b1)
-#' coo.draw(b2, border="red")
+#' coo.draw(b2, border="red") # all coo.plot arguments will work for coo.draw
 #' @export
 coo.draw <- function(coo, ...){
   coo.plot(coo, plot.new=FALSE, ...)}
 
-#' Illustrate differences between two configurations
+#' Plots (lollipop) differences between two configurations
 #' 
 #' Draws "lollipops" between two configurations.
 #' @param coo1 A \code{list} or a \code{matrix} of coordinates.
@@ -99,7 +115,7 @@ coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, ...){
   segments(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2], ...)
   points(coo2[, 1], coo2[, 2], pch=pch, cex=cex, ...)}
 
-#' Illustrate differences between two configurations
+#' Plots (lollipop) differences between two configurations
 #' 
 #' Draws "arrows" between two configurations.
 #' @param coo1 A \code{list} or a \code{matrix} of coordinates.
@@ -123,11 +139,12 @@ coo.arrows <- function(coo1, coo2, length=0.1, angle=20, ...){
   arrows(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2],
          length=length, angle=angle,...)}
 
-#' "Templates" list and matrix of coordinates.
+#' "Templates" shapes
 #' 
-#' \code{coo.template} returns \code{coo} so that the shape it is centered on
-#' the origin and inscribed in a size-side square, also centered on the origin;
-#' see \link{coo.list.panel} for an illustration of this function.
+#' \code{coo.template} returns shape centered on the origin and inscribed in a \code{size}-side square
+#' 
+#' See \link{coo.list.panel} for an illustration of this function. The morphospaces
+#' functions also take profit of this function. May be useful to develop other graphical functions.
 #' 
 #' @usage coo.template(coo, size)
 #' @param coo A \code{list} or a \code{matrix} of coordinates.
@@ -160,8 +177,8 @@ coo.template   <- function(coo, size=1) {
 #' Plots sets of shapes.
 #' 
 #' \code{coo.list.panel} plots a list of shapes if passed with a list of
-#' coordinates. Outlines are templated and on the same graphical window with
-#' the help of \link{coo.template}.
+#' coordinates. Outlines are "templated" (see \link{coo.template} and will be drawn
+#' the same graphical window. Mainly used by \link{panel.Coo} functions.
 #' 
 #' @param coo.list A \code{list} of coordinates
 #' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
@@ -185,11 +202,10 @@ coo.template   <- function(coo, size=1) {
 #' @keywords Graphics
 #' @examples
 #' data(bot)
-#' coo.list.panel(bot$coo)
+#' coo.list.panel(bot$coo) # equivalent to panel(bot)
 #' x <- coo.list.panel(bot$coo)
 #' x # positions of shapes returned invisibly 
 #' # axis(1) ; axis(2) # that's a single graphical window
-#' 
 #' data(bot)
 #' coo <- bot$coo
 #' ord <- sapply(coo, coo.eccentricity.eigen)
@@ -255,16 +271,23 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
                col=points.col, pch=points.pch, cex=points.cex)}}}
   invisible(res)}
 
-# 2. ldk plotters ---------------------------------------------------------
+# ldk plotters ---------------------------------------------------------
 
-#' add landmarks to coo.plot
+#' Add landmarks labels
 #' 
 #' @param ldk a matrix of (x; y) coordinates: where to plot the labels
 #' @param d how far from the coordinates, on a (centroid-landmark) segment
 #' @param cex the cex for the label
 #' @param ... additional parameters to fed \link{text}
+#' @keywords Graphics
+#' @examples
+#' data(wings)
+#' coo.plot(wings[1])
+#' ldk.labels(wings[1])
+#' # closer and smaller
+#' coo.plot(wings[1])
+#' ldk.labels(wings[1], d=0.05, cex=0.5)
 #' @export
-# todo
 ldk.labels <- function(ldk, d=0.1, cex=0.8, ...){
   ldk <- coo.check(ldk)
   centpos <- coo.centpos(ldk)
@@ -274,7 +297,7 @@ ldk.labels <- function(ldk, d=0.1, cex=0.8, ...){
     labxy <- edi(centpos, ldk[i, ], (dxy+dm*d)/dxy)
     text(labxy[1], labxy[2], labels=i, cex=cex,  ...)}}
 
-#' Draws the links between landmarks
+#' Draws links between landmarks
 #' 
 #' Cosmetics only but useful to visualize shape variation.
 #' 
@@ -284,6 +307,7 @@ ldk.labels <- function(ldk, d=0.1, cex=0.8, ...){
 #' @param col a color to draw the links
 #' @param pch a pch for the edges
 #' @param ... additional parameters to fed \link{segments}
+#' @keywords Graphics
 #' @export
 # todo
 ldk.links <- function(ldk, links, col="black", pch=20, ...){
@@ -296,13 +320,18 @@ ldk.links <- function(ldk, links, col="black", pch=20, ...){
 
 #' Draws confidence ellipses for landmark positions
 #' 
-#' todo
 #' @param ldk an array (or a list) of landmarks
-#' @param conf the confidence level (normal quantile)
+#' @param conf the confidence level (normal quantile, 0.5 by default)
 #' @param col the color for the ellipse
 #' @param ell.lty an lty for the ellipse
 #' @param ax logical whether to draw ellipses axes
 #' @param ax.lty an lty for ellipses axes
+#' @seealso \link{ldk.contour}, \link{ldk.chull}
+#' @keywords Graphics
+#' @examples
+#' data(wings)
+#' coo.plot(mshape(wings))
+#' ldk.confell(wings$coo)
 #' @export
 ldk.confell <- function(ldk, conf=0.5, col="grey40",
                         ell.lty=1, ax=TRUE, ax.lty=2){
@@ -318,14 +347,19 @@ ldk.confell <- function(ldk, conf=0.5, col="grey40",
         segments(ell.i$seg[3, 1], ell.i$seg[3, 2],
                  ell.i$seg[4, 1], ell.i$seg[4, 2], lty=ax.lty, col=col, lwd=1)}}}}
 
-#' Draws kernel density contours around landmark positions
+#' Draws kernel density contours around landmark
 #' 
-#' using \link{kde2d} #todo
+#' Using \link{kde2d} in the MASS package.
 #' @param ldk an array (or a list) of landmarks
 #' @param nlevels the number of contour lines
 #' @param grid.nb the grid.nb
 #' @param col a color for drawing the contour lines
-#' @seealso \link{kde2d}
+#' @seealso \link{kde2d}, \link{ldk.confell}, \link{ldk.chull}
+#' @keywords Graphics
+#' @examples
+#' data(wings)
+#' coo.plot(mshape(wings))
+#' ldk.contour(wings$coo)
 #'  @export
 ldk.contour <- function(ldk, nlevels=5, grid.nb=50, col="grey60") {
   ldk <- ldk.check(ldk)
@@ -343,7 +377,12 @@ ldk.contour <- function(ldk, nlevels=5, grid.nb=50, col="grey60") {
 #' @param ldk an array (or a list) of landmarks
 #' @param col a color for drawing the convex hull
 #' @param lty an lty for drawing the convex hulls
-#' @seealso \link{coo.chull}
+#' @seealso \link{coo.chull}, \link{chull}, \link{ldk.confell}, \link{ldk.contour}
+#' @keywords Graphics
+#' @examples
+#' data(wings)
+#' coo.plot(mshape(wings))
+#' ldk.chull(wings$coo)
 #' @export
 ldk.chull <- function(ldk, col="grey40", lty=1){
   ldk <- ldk.check(ldk)
@@ -358,13 +397,16 @@ ldk.chull <- function(ldk, col="grey40", lty=1){
 
 #' Extract structure from filenames
 #' 
-#' A very simple (and fast) image plotter.
+#' A very simple image plotter. If not provided with an imagematrix, will
+#' ask you to choose interactively a \code{.jpeg} image.
+#' 
 #' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
 #' @keywords Import
 #' @export
 img.plot <- function(img){
   # dirty here but made for convenience
   # to have a fast img plotter..
+  if (missing(img)) img <- readJPEG(source = file.choose())
   if (!is.matrix(img)) { 
     img <- (img[,,1] + img[,,2] + img[,,3])/3 }
   op <- par(mar=rep(0.25, 4))
@@ -399,8 +441,7 @@ img.plot <- function(img){
 #' equidistantly along the curvilinear abscissa and added on the oscillo
 #' curves.
 #' @keywords Graphics
-#' @examples
-#' 
+#' @examples 
 #' data(bot)
 #' coo.oscillo(bot[1])
 #' 
@@ -467,9 +508,9 @@ coo.oscillo <- function(coo, rug=TRUE, legend=TRUE,
 #' foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
 #' foo.mat  <- foo.mat + matrix(rep(c(0, 2, 5), each=10), 3, byrow=TRUE)
 #' foo.dev  <- matrix(abs(rnorm(30, sd=0.5)), nr=3, nc=10, byrow=TRUE)
-#' # some possible tuning
 #' dev.plot(foo.mat, plot=TRUE)
 #' dev.plot(foo.mat, foo.dev, plot=TRUE)
+#' # some possible tuning
 #' dev.plot(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
 #' dev.plot(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
 #' dev.plot(foo.mat, foo.dev, cols=col.sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
@@ -515,7 +556,6 @@ dev.plot       <- function(mat, dev, cols, x=1:ncol(mat),
 #' 
 #' Given a matrix of (x; y) coordinates, draws segments between every points
 #' defined by the row of the matrix and uses a color to display an information.
-#' 
 #' 
 #' @usage dev.segments(coo, cols, lwd = 1)
 #' @param coo A matrix of coordinates.
@@ -564,6 +604,19 @@ dev.segments <-function(coo, cols, lwd=1){
 #' of its vertices
 #' @keywords Graphics
 #' @return a matrix of (x; y) coordinates to draw the ellipsis
+#' @examples
+#' x <- rnorm(100, sd=3)
+#' y <- rnorm(100)
+#' plot(x, y, asp=1)
+#' ce095 <- conf.ell(x, y, conf=0.95) # no need for conf arg since it's .95 by default
+#' ce090 <- conf.ell(x, y, conf=0.90)
+#' ce050 <- conf.ell(x, y, conf=0.50)
+#' cols <- col.hot(10)
+#' lines(ce050$ell, col=cols[5]) # you can also coo.close(ce050$ell)
+#' lines(ce090$ell, col=cols[8])
+#' lines(ce095$ell, col=cols[9])
+#' segments(ce095$seg[1, 1], ce095$seg[1, 2], ce095$seg[2, 1], ce095$seg[2, 2])
+#' segments(ce095$seg[3, 1], ce095$seg[3, 2], ce095$seg[4, 1], ce095$seg[4, 2])
 #' @export
 conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   if (is.matrix(x)) {
@@ -608,4 +661,4 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   y <- wdw[4] - wdw[3]
   return(c(x, y))}
 
-##### 
+##### end basic plotters
