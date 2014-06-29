@@ -42,9 +42,9 @@ Yet, it provides a quick way to create plots of series, possibly with deviations
 foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
 foo.mat  <- foo.mat + matrix(rep(c(0, 2, 5), each=10), 3, byrow=TRUE)
 foo.dev  <- matrix(abs(rnorm(30, sd=0.5)), nr=3, nc=10, byrow=TRUE)
-# some possible tuning
 dev.plot(foo.mat, plot=TRUE)
 dev.plot(foo.mat, foo.dev, plot=TRUE)
+# some possible tuning
 dev.plot(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
 dev.plot(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
 dev.plot(foo.mat, foo.dev, cols=col.sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
