@@ -28,7 +28,7 @@ a matrix of (x; y) coordinates
 }
 \description{
 Returns the mean shape, usually for procrustes/bookstein/baseline - aligned
-Ldk objects, matrices (just return the matrix) and dim-3 arrays.
+\link{Ldk} objects, matrices (just return the matrix) and dim-3 arrays.
 }
 \examples{
 data(wings)
@@ -37,6 +37,11 @@ mshape(wings$coo)
 data(bot)
 mshape(coo.sample(bot, 24)$coo)
 mshape(wings[1])
+stack(wings)
+coo.draw(mshape(wings))
+}
+\seealso{
+\link{mshapes}
 }
 \keyword{Multivariate}
 

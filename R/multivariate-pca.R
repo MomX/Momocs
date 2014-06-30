@@ -2,7 +2,7 @@
 
 #' Principal component analysis on Coe objects
 #' 
-#' Performs a PCA on \link{Coe} objects.
+#' Performs a PCA on \link{Coe} objects, using \link{prcomp}.
 #' 
 #' By default, methods on \link{Coe} object do not scale the input data but center them.
 #' There is also a generic method (eg for traditional morphometrics) that centers and scales data.

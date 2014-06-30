@@ -1,14 +1,36 @@
+##### mean shapes on coefficients
 
 #' Mean shape calculation from matrices of coefficients
 #' 
 #' Calculates mean shapes on matrices of coefficients by groups (if passed with
-#' a "fac") or globally (if not).
+#' a "fac") or globally (if not), and on \link{Coe} objects.
+#' 
 #' @param Coe a \link{Coe} object
 #' @param fac factor from the $fac slot. See examples below.
 #' @param nb.pts numeric the number of points for calculated shapes
 #' @return a list of matrices of (x,y) coordinates.
 #' @rdname mshapes
 #' @keywords Multivariate
+#' @seealso \link{mshape} for operations on raw coordinates.
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 12)
+#' mshapes(bot.f) # the mean (global) shape
+#' ms <- mshapes(bot.f, "type")
+#' coo.plot(ms$beer)
+#' coo.draw(ms$whisky, border="forestgreen")
+#' tps.arr(ms$whisky, ms$beer) #etc.
+#' 
+#' data(olea)
+#' op <- rawPolynomials(subset(olea, view=="VL"), 5)
+#' ms <- mshapes(op, "cep") #etc
+#' panel(Opn(ms), names=TRUE) 
+#' 
+#' data(wings)
+#' wp <- fgProcrustes(wings, tol=1e-4)
+#' ms <- mshapes(wp, 1)
+#' panel(Ldk(ms), names=TRUE) #etc.
+#' 
 #' @export
 mshapes <- function(Coe, fac, nb.pts){UseMethod("mshapes")}
 
@@ -64,3 +86,22 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
     res[[i]] <- polynomials.i(mod.mshape)}
   names(res) <- fl
   return(res)}
+
+#' @rdname mshapes
+#' @export
+mshapes.LdkCoe <- function(Coe, fac, nb.pts=120){
+  LdkCoe <- Coe
+  if (missing(fac)) {
+    cat("* no 'fac' provided. Returns meanshape.\n")
+    return(mshape(LdkCoe))}
+  
+  f <- LdkCoe$fac[, fac]
+  fl <- levels(f)
+  res <- list()
+  for (i in seq(along=fl)){
+    res[[i]] <- mshape(LdkCoe$coo[f==fl[i]])
+    }
+  names(res) <- fl
+  return(res)}
+
+##### end mshapes

@@ -1,12 +1,13 @@
-# 1. mshapes on Coo/Coe ------------------------------------------------------------
+##### mean shape on raw coordinates.
 
 #' Mean shape calculation
 #' 
 #' Returns the mean shape, usually for procrustes/bookstein/baseline - aligned
-#' Ldk objects, matrices (just return the matrix) and dim-3 arrays.
+#' \link{Ldk} objects, matrices (just return the matrix) and dim-3 arrays.
 #' @param x an array (of dim=3), a list of coordinates or an Ldk object
 #' @return a matrix of (x; y) coordinates
 #' @rdname mshape
+#' @seealso \link{mshapes}
 #' @keywords Multivariate
 #' @examples 
 #' data(wings)
@@ -15,6 +16,8 @@
 #' data(bot)
 #' mshape(coo.sample(bot, 24)$coo)
 #' mshape(wings[1])
+#' stack(wings)
+#' coo.draw(mshape(wings))
 #' @export
 mshape <- function(x){UseMethod("mshape")}
 
