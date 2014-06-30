@@ -19,7 +19,7 @@
 #' \item dist.mat the distance matrix
 #' \item hclust the hclust object
 #' }
-#' @keywords Multivariate
+#' @keywords Multivariate Graphics
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)

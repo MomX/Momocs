@@ -29,7 +29,7 @@
 #' plot(op.p, 1, morpho=TRUE)
 #' 
 #' data(wings)
-#' wp <- fgProcrustes(wp)
+#' wp <- fgProcrustes(wings, tol=1e-4)
 #' wpp <- PCA(wp)
 #' wpp
 #' plot(wpp, 1)
