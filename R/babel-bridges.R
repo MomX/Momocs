@@ -148,3 +148,5 @@ m2a <- function(m){
   for (i in 1:nrow(m)){
    a[,,i] <- matrix(m[i, ], ncol=2)}
   return(a)}
+
+##### end bridges
