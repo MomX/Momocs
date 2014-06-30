@@ -5,7 +5,7 @@
 #' 
 #' The Momocs' PCA plotter with many graphical options and morphospaces.
 #' @method plot PCA
-#' @param x an object of class "PCA", typically obtained with \link{pca}
+#' @param x an object of class "PCA", typically obtained with \link{PCA}
 #' @param fac factor, or a name or the column id from the $fac slot
 #' @param xax the first PC axis
 #' @param yax the second PC axis
@@ -50,7 +50,7 @@
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
-#' bot.p <- pca(bot.f)
+#' bot.p <- PCA(bot.f)
 #' plot(bot.p, 1)
 #' @export
 plot.PCA <- function(#basics

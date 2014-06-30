@@ -133,7 +133,7 @@
   text(+gy, par("usr")[4]-gx, col="grey40",cex=0.8,
        labels=paste0(var[yax], "%"), srt=90)}
 
-#adds title to pca plots
+#adds title to plots
 #' @export
 .title <- function(title){
   pos <- par("usr")

@@ -20,13 +20,13 @@
 #' bot.p <- PCA(bot.f)
 #' plot(bot.p)
 #' @export
-PCA <- function(x){UseMethod("PCA")}
+PCA <- function(x, scale., center){UseMethod("PCA")}
 
 #' @rdname PCA
 #' @export
 PCA.OutCoe <- function(x, scale.=FALSE, center=TRUE){
   OutCoe <- x
-  PCA <- prcomp(OutCoe$coe, scale.=sclae., center=center)
+  PCA <- prcomp(OutCoe$coe, scale.=scale., center=center)
   PCA$fac <- OutCoe$fac
   PCA$mshape <- apply(OutCoe$coe, 2, mean)
   PCA$method <- OutCoe$method

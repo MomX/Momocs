@@ -35,9 +35,9 @@ op <- orthoPolynomials(olea, degree=5)
 # we print the Coe
 op
 # Let's do a PCA on it
-opca <- pca(op)
-plot(opca, "domes")
-plot(opca, "cep")
+op.p <- PCA(op)
+plot(op.p, "domes")
+plot(op.p, "cep")
 # and now an LDA
 olda <- LDA(op, "cep")
 # for CV table

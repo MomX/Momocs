@@ -14,7 +14,7 @@
   rug = TRUE, title = substitute(x), ...)
 }
 \arguments{
-\item{x}{an object of class "PCA", typically obtained with \link{pca}}
+\item{x}{an object of class "PCA", typically obtained with \link{PCA}}
 
 \item{fac}{factor, or a name or the column id from the $fac slot}
 
@@ -101,7 +101,7 @@ of the ade4 R package.
 \examples{
 data(bot)
 bot.f <- eFourier(bot, 24)
-bot.p <- pca(bot.f)
+bot.p <- PCA(bot.f)
 plot(bot.p, 1)
 }
 

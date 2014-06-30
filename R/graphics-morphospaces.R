@@ -20,30 +20,30 @@
   method <- PCA$method
   ## outlines
   if (method=="eFourier"){
-    shp <- pca2shp.efourier(pos=pos, rot=rot,
+    shp <- PCA2shp.efourier(pos=pos, rot=rot,
                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     cd <- TRUE}
   if (method=="rFourier"){
-    shp <- pca2shp.rfourier(pos=pos, rot=rot,
+    shp <- PCA2shp.rfourier(pos=pos, rot=rot,
                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     cd <- TRUE}
   if (method=="tFourier"){
-    shp <- pca2shp.tfourier(pos=pos, rot=rot,
+    shp <- PCA2shp.tfourier(pos=pos, rot=rot,
                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     cd <- TRUE}
   ## open outlines
   if (method=="orthoPolynomials"){
-    shp <- pca2shp.polynomials(pos=pos, rot=rot,
+    shp <- PCA2shp.polynomials(pos=pos, rot=rot,
                                mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=TRUE,
                                baseline1=PCA$baseline1, baseline2=PCA$baseline2)
     cd <- FALSE}
   if (method=="rawPolynomials"){
-    shp <- pca2shp.polynomials(pos=pos, rot=rot,
+    shp <- PCA2shp.polynomials(pos=pos, rot=rot,
                                mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
                                baseline1=PCA$baseline1, baseline2=PCA$baseline2)
     cd <- FALSE}
   if (method=="procrustes"){
-    shp <- pca2shp.procrustes(pos=pos, rot=rot,
+    shp <- PCA2shp.procrustes(pos=pos, rot=rot,
                               mshape=mshape, amp.shp=amp.shp)
     cd <- FALSE}
   #width   <- (par("usr")[4] - par("usr")[3]) * size.shp
@@ -87,26 +87,26 @@
                               mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
       cd <- TRUE}
     #   if (method=="rFourier"){
-    #     shp <- pca2shp.rfourier(pos=pos, rot=rot,
+    #     shp <- PCA2shp.rfourier(pos=pos, rot=rot,
     #                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     #     cd <- TRUE}
     #   if (method=="tFourier"){
-    #     shp <- pca2shp.tfourier(pos=pos, rot=rot,
+    #     shp <- PCA2shp.tfourier(pos=pos, rot=rot,
     #                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
     #     cd <- TRUE}
     #   ## open outlines
     #   if (method=="orthoPolynomials"){
-    #     shp <- pca2shp.polynomials(pos=pos, rot=rot,
+    #     shp <- PCA2shp.polynomials(pos=pos, rot=rot,
     #                                mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=TRUE,
     #                                baseline1=PCA$baseline1, baseline2=PCA$baseline2)
     #     cd <- FALSE}
     #   if (method=="rawPolynomials"){
-    #     shp <- pca2shp.polynomials(pos=pos, rot=rot,
+    #     shp <- PCA2shp.polynomials(pos=pos, rot=rot,
     #                                mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
     #                                baseline1=PCA$baseline1, baseline2=PCA$baseline2)
     #     cd <- FALSE}
     #   if (method=="procrustes"){
-    #     shp <- pca2shp.procrustes(pos=pos, rot=rot,
+    #     shp <- PCA2shp.procrustes(pos=pos, rot=rot,
     #                               mshape=mshape, amp.shp=amp.shp)
     #     cd <- FALSE}
     #width   <- (par("usr")[4] - par("usr")[3]) * size.shp
@@ -174,9 +174,9 @@ pos.shapes <- function(xy, pos.shp=c("range", "circle", "xy")[1],
 #' @param amp.shp amplification factor for the shape deformation
 #' @param pts.shp number of points to reconstruct the shape
 #' @keywords Graphics
-#' @rdname pca2shp.fourier
+#' @rdname PCA2shp.fourier
 #' @export
-pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
+PCA2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
   nb.h <- length(mshape)/4
@@ -197,9 +197,9 @@ pca2shp.efourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     res[[i]] <- coo}
   return(res)}
 
-#' @rdname pca2shp.fourier
+#' @rdname PCA2shp.fourier
 #' @export
-pca2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
+PCA2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
   nb.h <- length(mshape)/2
@@ -220,9 +220,9 @@ pca2shp.rfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
     res[[i]] <- coo}
   return(res)}
 
-#' @rdname pca2shp.fourier
+#' @rdname PCA2shp.fourier
 #' @export
-pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
+PCA2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
   if (ncol(pos) != ncol(rot)) stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
   nb.h <- length(mshape)/2
@@ -255,7 +255,7 @@ pca2shp.tfourier <- function (pos, rot, mshape, amp.shp=1, pts.shp=60) {
 #' @param baseline2 the (x; y) coordinates of the second baseline point
 #' @keywords Graphics
 #' @export
-pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
+PCA2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
                                  baseline1, baseline2) {
   if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
@@ -288,7 +288,7 @@ pca2shp.polynomials <- function (pos, rot, mshape, amp.shp=1, pts.shp=60, ortho,
 #' @param amp.shp amplification factor for the shape deformation
 #' @keywords Graphics
 #' @export
-pca2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
+PCA2shp.procrustes <- function (pos, rot, mshape, amp.shp=1) {
   if (ncol(pos) != ncol(rot))     stop("'rot' and 'pos' must have the same ncol")
   if(length(mshape) != nrow(rot)) stop("'mshape' and ncol(rot) lengths differ")
   n  <- nrow(pos)

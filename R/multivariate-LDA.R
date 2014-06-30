@@ -163,7 +163,7 @@ LDA.PCA <- function(x, fac, retain=5){
   names(dimnames(CV.tab)) <- c("actual", "classified")
   CV.correct <- sum(diag(CV.tab))/sum(CV.tab)
   # we calculate unstandardized LDs (wrong here for use in shape reconstruction, 
-  # would need one more step (pca2shp?) but not sure how useful it is)
+  # would need one more step (PCA2shp?) but not sure how useful it is)
   n <- nrow(X)
   lm.mod <- lm(X ~ fac)
   dfw    <- n - nlevels(fac)
