@@ -129,5 +129,35 @@ dct.i <- function(df, nb.pts=60){
   shp <- cbind(Re(s_r), Im(s_r))
   return(shp)}
 
+#' Calculates and draws "dct" shapes
+#' 
+#' Calculates shapes based on "Discrete cosine transforms" given harmonic coefficients 
+#' (see \link{dct}) or can generate some random "dct" shapes. 
+#' Mainly intended to generate shapes and/or to understand how dct works.
+#' @param A vector of harmonic coefficients
+#' @param B vector of harmonic coefficients
+#' @param nb.h if \code{A} and/or \code{B} are not provided, 
+#' the number of harmonics to generate
+#' @param nb.pts if \code{A} and/or \code{B} are not provided, 
+#' the number of points to use to reconstruct the shapes 
+#' @param alpha tThe power coefficient associated with the (usually decreasing) 
+#' amplitude of the harmonic coefficients (see \link{efourier.shape})
+#' @param plot logical whether to plot the shape
+#' @examples 
+#' # some signatures
+#' panel(coo.align(Opn(replicate(48, dct.shape(alpha=0.5, nb.h=6)))))
+#' # some worms
+#' panel(coo.align(Opn(replicate(48, dct.shape(alpha=2, nb.h=6)))))
+#' @export
+dct.shape <- function(A, B, nb.h, nb.pts=60, alpha=2, plot=TRUE){
+  if (missing(nb.h) &  missing(A)) nb.h <- 3
+  if (missing(nb.h) & !missing(A)) nb.h <- length(A)
+  if (missing(A)) A <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
+  if (missing(B)) B <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
+  df  <- list(A=A, B=B)
+  shp <- dct.i(df, nb.pts=nb.pts)      
+  if (plot) coo.plot(shp)
+  return(shp)}
+
 ##### end core-dct
 

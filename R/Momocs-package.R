@@ -2,18 +2,18 @@
 
 #' Momocs
 #' 
-#' Momocs is intended to ease and to popularize morphometrics, 
-#' the quantitative analysis of form. It aims, eventually, at gathering the most common approaches: 
-#' traditional morphometrics, global descriptors, open outlines, closed outlines 
-#' and configuration of landmarks into the same, open-source, environment. 
-#' It hinges on the core functions developed in the book \emph{Morphometrics with R} 
-#' by Julien Claude (2008), extend them graphically and statistically, 
-#' using the same, unified and extendable, grammar. From import from other 
-#' morphometrics format or data acquisition, to display, handling, 
-#' calibration and calculations on morphometrics datasets on which to apply 
-#' an array of statistical analyses, Momocs intends to provides a complete, 
-#' convenient and extendable toolkit to specialists within every field that are, 
-#' or may be, interested in integrating shape in their researches.
+#' Momocs is intended to ease and to popularize morphometrics, the quantitative analysis
+#' of form. It aims, eventually, at gathering the most common approaches: traditional 
+#' morphometrics, global descriptors, open outlines, closed outlines and configuration of 
+#' landmarks into the same, open-source, environment.
+#' It hinges on the core functions  developed in the book \emph{Morphometrics with R} 
+#' by Julien Claude (2008), extend them graphically and statistically, using the same, 
+#' unified and extendable, grammar.
+#' From import from other morphometrics format or data acquisition, to display, handling, 
+#' calibration and calculations on morphometrics datasets on which to apply an array of 
+#' statistical analyses, Momocs intends to provides a complete, convenient and extendable 
+#' toolkit to specialists within every field that are, or may be, interested in integrating
+#'  shape in their researches.
 #' 
 #' To cite Momocs in publications: \code{citation("Momocs")}.
 #' 
