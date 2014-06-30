@@ -100,8 +100,23 @@ of the ade4 R package.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 24)
+bot.f <- eFourier(bot, 12)
 bot.p <- PCA(bot.f)
-plot(bot.p, 1)
+bot.p
+plot(bot.p, morpho=FALSE)
+plot(bot.p, "type")
+
+data(olea)
+op <- rawPolynomials(olea, 5)
+op.p <- PCA(op)
+op.p
+plot(op.p, 1, morpho=TRUE)
+
+data(wings)
+wp <- fgProcrustes(wings, tol=1e-4)
+wpp <- PCA(wp)
+wpp
+plot(wpp, 1)
 }
+\keyword{Graphics}
 

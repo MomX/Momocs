@@ -72,17 +72,43 @@ Coo <- function(...){
 #' (e.g. an inherited \code{$fac}) obtained with morphometrics methods on 
 #' \link{Out}, \link{Opn} and \link{Ldk} objects.
 #' 
-#' It allows to recycle most of the methods, since both of them apply on
-#' matrices of coefficients. In other words, \code{OutCoe} and \code{OpnCoe}
+#' This classes allows to recycle most of the methods, since both of them apply on
+#' matrices of coefficients. In other words, \code{OutCoe}, \code{OpnCoe} and \code{LdkCoe}
 #' classes are all, primarily, \code{Coe} objects on which we define generic 
 #' \emph{and} specific methods.
+#' 
+#' All these classes contain a \code{$coe} slot where the coefficients are stored,
+#' and can be accessed.
 #' 
 #' More, generally, see \link{OutCoe}, \link{OpnCoe} and \link{LdkCoe}
 #' for documentation on these classes.
 #'
 #' @param ... anything and, anyway, this function will simply returns a message.
+#' @examples
 #' # to see all methods for Coo objects.
 #' methods(class="Coe")
+#' 
+#' data(bot)
+#' bot.f<- eFourier(bot, 12)
+#' bot.f
+#' class(bot.f)
+#' 
+#' # if you want to work directly on the matrix of coefficients
+#' bot.f$coe
+#' 
+#' data(olea)
+#' op <- orthoPolynomials(olea, 5)
+#' op
+#' class(op)
+#' op$coe # same thing
+#' 
+#' data(wings)
+#' wp <- fgProcrustes(wings, tol=1e-4)
+#' wp
+#' class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects
+#' # so you can apply all Ldk methods available.
+#' wp$coe # Procrustes aligned coordinates
+#' 
 #' @export
 Coe <- function(...){
   cat(" * Coe constructor does not exist alone. See ?Coe")}

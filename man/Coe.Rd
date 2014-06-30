@@ -6,9 +6,7 @@
 Coe(...)
 }
 \arguments{
-\item{...}{anything and, anyway, this function will simply returns a message.
-# to see all methods for Coo objects.
-methods(class="Coe")}
+\item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
 \code{Coe} class is a "super class" for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
@@ -17,12 +15,40 @@ matrices of coefficients (in their \code{$coe} slot), along with other informati
 \link{Out}, \link{Opn} and \link{Ldk} objects.
 }
 \details{
-It allows to recycle most of the methods, since both of them apply on
-matrices of coefficients. In other words, \code{OutCoe} and \code{OpnCoe}
+This classes allows to recycle most of the methods, since both of them apply on
+matrices of coefficients. In other words, \code{OutCoe}, \code{OpnCoe} and \code{LdkCoe}
 classes are all, primarily, \code{Coe} objects on which we define generic
 \emph{and} specific methods.
 
+All these classes contain a \code{$coe} slot where the coefficients are stored,
+and can be accessed.
+
 More, generally, see \link{OutCoe}, \link{OpnCoe} and \link{LdkCoe}
 for documentation on these classes.
+}
+\examples{
+# to see all methods for Coo objects.
+methods(class="Coe")
+
+data(bot)
+bot.f<- eFourier(bot, 12)
+bot.f
+class(bot.f)
+
+# if you want to work directly on the matrix of coefficients
+bot.f$coe
+
+data(olea)
+op <- orthoPolynomials(olea, 5)
+op
+class(op)
+op$coe # same thing
+
+data(wings)
+wp <- fgProcrustes(wings, tol=1e-4)
+wp
+class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects
+# so you can apply all Ldk methods available.
+wp$coe # Procrustes aligned coordinates
 }
 

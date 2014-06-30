@@ -1,9 +1,10 @@
+##### LDA methods on Coe objects
 
-# 4 - LDA ----------------------------------------------------------------
 #' Linear Discriminant Analysis on Coe objects
 #' 
 #' Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 #' @aliases LDA
+#' @rdname LDA
 #' @param x a \link{Coe}, or a PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
 #' @param retain the number of PC axis to retain for LDA.PCA
@@ -36,6 +37,7 @@
 #' @export
 LDA <- function(x, fac, retain){UseMethod("LDA")}
 
+#' @rdname LDA
 #' @export
 LDA.Coe <- function(x, fac, retain){
   Coe <- x
@@ -88,6 +90,7 @@ LDA.Coe <- function(x, fac, retain){
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)}
 
+#' @rdname LDA
 #' @export
 LDA.default <- function(x, fac, retain){
   X <- x
@@ -131,6 +134,7 @@ LDA.default <- function(x, fac, retain){
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)}
 
+#' @rdname LDA
 #' @export
 LDA.PCA <- function(x, fac, retain=5){
   PCA <- x
@@ -190,3 +194,5 @@ print.LDA <- function(x, ...){
   cat("Leave-one-out cross-validation: (",
       signif(x$CV.correct * 100, 3), "% - ", sum(diag(x$CV.tab)),"/", sum(x$CV.tab),"): \n", sep="")
   print(x$CV.tab)}
+
+##### end LDA

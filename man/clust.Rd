@@ -47,5 +47,6 @@ data(wings)
 wp <- fgProcrustes(wings)
 clust(wp, 1)
 }
+\keyword{Graphics}
 \keyword{Multivariate}
 
