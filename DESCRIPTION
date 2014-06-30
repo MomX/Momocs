@@ -1,12 +1,12 @@
 Package: Momocs
 Type: Package
 Title: Morphometrics using R
-Version: 0.99
+Version: 0.9
 Date: 2014-07-01
 Author: Vincent Bonhomme, Sandrine Picq and Julien Claude.
 Maintainer: Vincent Bonhomme <bonhomme.vincent@gmail.com>
 Description: Momocs is intended to ease and to popularize morphometrics, the
-    quantitative analysis of form. It aims at gathering the most common
+    quantitative analysis of form. It aims, eventually, at gathering the most common
     approaches: traditional morphometrics, global descriptors, open outlines,
     closed outlines and configuration of landmarks into the same, open-source,
     environment. It hinges on the core functions developed in the book
@@ -30,5 +30,4 @@ Imports:
     jpeg,
     sp,
     MASS,
-    ape,
-    gpclib
+    ape

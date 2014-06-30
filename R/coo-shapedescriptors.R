@@ -2,9 +2,12 @@
 
 #' Calculates the area of a shape
 #' 
-#' Calculates the area for a shape using \link{area.poly} in gpc package.
+#' Calculates the area for a (non-crossing) shape.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric}, the area.
+#' @note Using \code{area.poly} in gpc package is a good idea, but their licence
+#' impedes Momocs to rely on it. but here is the function to do it, once gpc is loaded:
+#' \code{ area.poly(as(coo, "gpc.poly")) }
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
@@ -13,17 +16,17 @@
 #' hist(sapply(bot$coo, coo.area), breaks=10)
 #' @export
 coo.area <- function(coo){
-  # coo <- coo.check(coo)
+  coo <- coo.check(coo)
   coo <- coo.close(coo)
-  #   nr <- nrow(coo)-1
-  #   y <- x <- numeric(nr)
-  #   for (i in 1:nr){
-  #     x[i] <- coo[i, 1] * coo[i+1, 2]
-  #     y[i] <- coo[i+1 , 1] * coo[i, 2]
-  #   }
-  #   area <- (0.5 * (sum(x) - sum(y)))
-  #   return(abs(area))}
-  area.poly(as(coo, "gpc.poly"))}
+    nr <- nrow(coo)-1
+    y <- x <- numeric(nr)
+    for (i in 1:nr){
+      x[i] <- coo[i, 1] * coo[i+1, 2]
+      y[i] <- coo[i+1 , 1] * coo[i, 2]
+    }
+    area <- (0.5 * (sum(x) - sum(y)))
+    return(abs(area))}
+  # area.poly(as(coo, "gpc.poly"))}
 
 #' Calculates the tangent angle along the perimeter of a shape
 #' 
@@ -320,85 +323,86 @@ coo.solidity <- function(coo){
   coo <- coo.check(coo)
   return(coo.area(coo)/coo.area(coo.chull(coo)))}
 
-#' Calculate the area overlap between two shapes
-#' 
-#' Simply calculates (area(coo1) + area(coo2) - area(union(coo1, coo2)))
-#' 
-#' @param coo1 the first shape
-#' @param coo2 the second shape
-#' @return the area of the overlap
-#' @examples
-#' data(bot)
-#' b1 <- bot[1]
-#' b2 <- coo.trans(b1, 50)
-#' coo.plot(b1)
-#' coo.draw(b2)
-#' coo.overlap(b1, b2)
-#' @export
-coo.overlap <- function(coo1, coo2){
-  p1 <- as(coo1, "gpc.poly")
-  p2 <- as(coo2, "gpc.poly")
-  p0 <- union(p1,p2)
-  ov <- area.poly(p1) + area.poly(p2) - area.poly(p0)
-  return(ov)}
-
-#' Calculate the area union between two shapes
-#' 
-#' If the two shapes overlaps returns the shape of their union. If not, returns NULL.
-#' 
-#' @param coo1 the first shape
-#' @param coo2 the second shape
-#' @return the area of the overlap
-#' @examples
-#' data(bot)
-#' b1 <- bot[1]
-#' ba <- coo.union(b1, coo.trans(b1, 200))
-#' coo.plot(ba)
-#' coo.union(b1, coo.trans(b1, 1e3)) 
-#' @export
-coo.union <- function(coo1, coo2){
-  p1 <- as(coo1, "gpc.poly")
-  p2 <- as(coo2, "gpc.poly")
-  pu <- union(p1, p2)
-  if (length(pu@pts) > 1) return(NULL)
-  pu <- cbind(pu@pts[[1]]$x, pu@pts[[1]]$y)
-  return(pu)}
-
-#' Estimates radial symmetry
-#' 
-#' This function implements a simple estimate of radial symmetry occurence,
-#' by calculating overlapping of rotated shapes against reference shapes. For n-order
-#' radia symmetry, it averages the overlap (normalized by the area of the orginal shapes) of
-#' 2*pi / (n-1) radians rotated shapes. See references below for a detailed explanation.
-#' @param coo a matrix of a shape
-#' @param order.max the n maximal order (estimates will be calculated for the 2:order.max range)
-#' @return a list with $ov (the mean overlapping index), $sd the standard deviation, and $sym the
-#' n orders of radial symmetry
-#' @references Rosin, P. L. (2005). Computing global shape measures. In C. H. Chen and P. S. P. Wang (Eds.),
-#' Handbook of Pattern Recognition and Computer Vision (pp. 177-196).
-#' @examples
-#' data(bot)
-#' x <- coo.symmetry(bot[1])
-#' w <- barplot(x$ov)
-#' axis(1, at=w, labels=x$sym)
-#' segments(w, x$ov - x$sd, w, x$ov + x$sd)
-#' @export
-coo.symmetry <- function(coo, order.max=12){
-  coo <- coo.check(coo)
-  coo <- coo.center(coo)
-  coo.a <- coo.area(coo)
-  sym <- 2:order.max
-  sd <- ov <- numeric(length(sym))
-  #theta <- seq(0, 2*pi, length=n+1)[-n+1]
-  for (i in seq(along=sym)){
-    n <- sym[i]
-    ov.i <- numeric(n-1)
-    for (j in 1:(n-1)) { 
-      ov.i[j] <- coo.overlap(coo, coo.rotate(coo, j*2*pi/n))
-    }
-    ov.i <- ov.i/coo.a
-    ov[i] <- mean(ov.i)
-    sd[i] <- sd(ov.i)
-  }
-  sd[1] <- 0
-  return(list(ov=ov, sd=sd, sym=sym))}
+# Cannot be included since it relies on gpc.lib #todo: find an alternative
+# #' Calculate the area overlap between two shapes
+# #' 
+# #' Simply calculates (area(coo1) + area(coo2) - area(union(coo1, coo2)))
+# #' 
+# #' @param coo1 the first shape
+# #' @param coo2 the second shape
+# #' @return the area of the overlap
+# #' @examples
+# #' data(bot)
+# #' b1 <- bot[1]
+# #' b2 <- coo.trans(b1, 50)
+# #' coo.plot(b1)
+# #' coo.draw(b2)
+# #' coo.overlap(b1, b2)
+# #' @export
+# coo.overlap <- function(coo1, coo2){
+#   p1 <- as(coo1, "gpc.poly")
+#   p2 <- as(coo2, "gpc.poly")
+#   p0 <- union(p1,p2)
+#   ov <- area.poly(p1) + area.poly(p2) - area.poly(p0)
+#   return(ov)}
+# 
+# #' Calculate the area union between two shapes
+# #' 
+# #' If the two shapes overlaps returns the shape of their union. If not, returns NULL.
+# #' 
+# #' @param coo1 the first shape
+# #' @param coo2 the second shape
+# #' @return the area of the overlap
+# #' @examples
+# #' data(bot)
+# #' b1 <- bot[1]
+# #' ba <- coo.union(b1, coo.trans(b1, 200))
+# #' coo.plot(ba)
+# #' coo.union(b1, coo.trans(b1, 1e3)) 
+# #' @export
+# coo.union <- function(coo1, coo2){
+#   p1 <- as(coo1, "gpc.poly")
+#   p2 <- as(coo2, "gpc.poly")
+#   pu <- union(p1, p2)
+#   if (length(pu@pts) > 1) return(NULL)
+#   pu <- cbind(pu@pts[[1]]$x, pu@pts[[1]]$y)
+#   return(pu)}
+# 
+# #' Estimates radial symmetry
+# #' 
+# #' This function implements a simple estimate of radial symmetry occurence,
+# #' by calculating overlapping of rotated shapes against reference shapes. For n-order
+# #' radia symmetry, it averages the overlap (normalized by the area of the orginal shapes) of
+# #' 2*pi / (n-1) radians rotated shapes. See references below for a detailed explanation.
+# #' @param coo a matrix of a shape
+# #' @param order.max the n maximal order (estimates will be calculated for the 2:order.max range)
+# #' @return a list with $ov (the mean overlapping index), $sd the standard deviation, and $sym the
+# #' n orders of radial symmetry
+# #' @references Rosin, P. L. (2005). Computing global shape measures. In C. H. Chen and P. S. P. Wang (Eds.),
+# #' Handbook of Pattern Recognition and Computer Vision (pp. 177-196).
+# #' @examples
+# #' data(bot)
+# #' x <- coo.symmetry(bot[1])
+# #' w <- barplot(x$ov)
+# #' axis(1, at=w, labels=x$sym)
+# #' segments(w, x$ov - x$sd, w, x$ov + x$sd)
+# #' @export
+# coo.symmetry <- function(coo, order.max=12){
+#   coo <- coo.check(coo)
+#   coo <- coo.center(coo)
+#   coo.a <- coo.area(coo)
+#   sym <- 2:order.max
+#   sd <- ov <- numeric(length(sym))
+#   #theta <- seq(0, 2*pi, length=n+1)[-n+1]
+#   for (i in seq(along=sym)){
+#     n <- sym[i]
+#     ov.i <- numeric(n-1)
+#     for (j in 1:(n-1)) { 
+#       ov.i[j] <- coo.overlap(coo, coo.rotate(coo, j*2*pi/n))
+#     }
+#     ov.i <- ov.i/coo.a
+#     ov[i] <- mean(ov.i)
+#     sd[i] <- sd(ov.i)
+#   }
+#   sd[1] <- 0
+#   return(list(ov=ov, sd=sd, sym=sym))}

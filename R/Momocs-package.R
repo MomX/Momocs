@@ -3,7 +3,7 @@
 #' Momocs
 #' 
 #' Momocs is intended to ease and to popularize morphometrics, 
-#' the quantitative analysis of form. It aims at gathering the most common approaches: 
+#' the quantitative analysis of form. It aims, eventually, at gathering the most common approaches: 
 #' traditional morphometrics, global descriptors, open outlines, closed outlines 
 #' and configuration of landmarks into the same, open-source, environment. 
 #' It hinges on the core functions developed in the book \emph{Morphometrics with R} 
@@ -18,12 +18,16 @@
 #' To cite Momocs in publications: \code{citation("Momocs")}.
 #' 
 #' @seealso
-#' \describe{
-#'  \item{Homepage}{\url{http://www.vincentbonhomme.fr/Momocs} with tutorials
-#' and hotline}
-#'  \item{GitHub repo}{\url{https://github.com/vbonhomme/Momocs} to contribute,
-#' get the last version, etc.}
+#' \itemize{
+#'  \item \bold{Demos}: \code{demo(package="Momocs")} for the list of demos, e.g. \code{demo(eft)}
+#'  \item \bold{Homepage}: \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
+#' and hotline
+#'  \item \bold{GitHub repo}: \url{https://github.com/vbonhomme/Momocs} to contribute,
+#' get the last version, etc.
+#' \item \bold{Hotline, questions, requests, etc.}: Feel free to send me an email, should you need, report or
+#' request something about Momocs.
 #' }
+#' 
 #' @references
 #' \itemize{
 #' \item Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R. 
@@ -36,8 +40,7 @@
 #' their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
 #' @import sp
-#' @import gpclib
-#' @import MASS
+#' @importFrom MASS lda ginv kde2d
 #' @importFrom jpeg readJPEG
 #' @importFrom methods showDefault
 #' @importFrom graphics boxplot
