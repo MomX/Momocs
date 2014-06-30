@@ -35,7 +35,7 @@
 #' \item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 #' }
 #' @section Cheers:
-#' We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Neus
+#' We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Neus
 #' Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
 #' their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
@@ -49,3 +49,11 @@
 #' @name Momocs
 #' @keywords Abtract
 NULL
+
+# .onAttach <- function(lib, pkg)  {
+#   packageStartupMessage("This is Momocs ",
+#                         utils::packageDescription("Momocs",
+#                                                   field="Version"),
+#                         appendLF = TRUE)
+# }
+

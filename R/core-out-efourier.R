@@ -1,6 +1,6 @@
 ##### Core function for elliptical Fourier analyses
 
-#' Calculates elliptical Fourier analysis.
+#' Elliptical Fourier transform
 #'
 #' \code{efourier} computes Elliptical Fourier Analysis (or Transforms or EFT) 
 #' from a matrix (or a list) of (x; y) coordinates.
@@ -116,7 +116,7 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
   co <- 2 * sum(coo[, 2] * Dt/T)
   return(list(an = an, bn = bn, cn = cn, dn = dn, ao = ao, co = co))}
 
-#' Calculates inverse elliptical Fourier analysis.
+#' Inverse elliptical Fourier transform
 #' 
 #' \code{efourier.i} uses the inverse elliptical Fourier transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically

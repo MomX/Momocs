@@ -93,10 +93,10 @@ tps.grid <- function(fr, to, amp=1, over=1.2,
   for (i in 1:dim.grid[1]) {
     lines(grid1[(1:dim.grid[2]) * dim.grid[1]-i+1,],   col=grid.col)}
   if (shp) {
-    coo.draw(coo.close(fr), border=shp.border[1], col=NA,
+    coo.draw(fr, border=shp.border[1], col=NA,
              lwd=shp.lwd[1], lty=shp.lty[1],
              points=FALSE, first.point=FALSE, centroid=FALSE)
-    coo.draw(coo.close(to), border=shp.border[2], col=NA,
+    coo.draw(to, border=shp.border[2], col=NA,
              lwd=shp.lwd[2], lty=shp.lty[2],
              points=FALSE, first.point=FALSE, centroid=FALSE)}}
 
@@ -159,10 +159,10 @@ tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
   arrows(grid0[, 1], grid0[, 2], grid1[, 1], grid1[, 2],
          length=arr.len, angle=arr.ang, lwd=arr.lwd, col=arr.cols)
   if (shp) {
-    coo.draw(coo.close(fr), border=shp.border[1], col=NA,
+    coo.draw(fr, border=shp.border[1], col=NA,
              lwd=shp.lwd[1], lty=shp.lty[1],
              points=FALSE, first.point=FALSE, centroid=FALSE)
-    coo.draw(coo.close(to), border=shp.border[2], col=NA,
+    coo.draw(to, border=shp.border[2], col=NA,
              lwd=shp.lwd[2], lty=shp.lty[2],
              points=FALSE, first.point=FALSE, centroid=FALSE)}}
 
@@ -228,9 +228,9 @@ tps.iso <- function(fr, to, amp=1, over=1.2, palette = col.summer,
   if (cont) {contour(x, y, im, nlevels=iso.levels,
                      add=TRUE, drawlabels=FALSE, col=cont.col, lty=2)}
   if (shp) {
-    coo.draw(coo.close(fr), border=shp.border[1], col=NA,
+    coo.draw(fr, border=shp.border[1], col=NA,
              lwd=shp.lwd[1], lty=shp.lty[1],
              points=FALSE, first.point=FALSE, centroid=FALSE)
-    coo.draw(coo.close(to), border=shp.border[2], col=NA,
+    coo.draw(to, border=shp.border[2], col=NA,
              lwd=shp.lwd[2], lty=shp.lty[2],
              points=FALSE, first.point=FALSE, centroid=FALSE)}}

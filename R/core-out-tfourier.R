@@ -1,6 +1,6 @@
 ##### Core function for tangent angle Fourier analyses
 
-#' Calculates tangent angle Fourier analysis.
+#' Tangent angle Fourier transform
 #' 
 #' \code{tfourier} computes tangent angle Fourier analysis from a matrix or a
 #' list of coordinates.
@@ -91,7 +91,7 @@ tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
   list(ao=ao, an=an, bn=bn, phi=phi, t=t1, perimeter=perim,
        thetao=tet0, x1=coo[1, 1], y1=coo[1, 2])}
 
-#' Calculates inverse tangent angle Fourier analysis.
+#' Inverse tangent angle Fourier transform
 #' 
 #' \code{tfourier.i} uses the inverse tangent angle Fourier transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
@@ -162,7 +162,7 @@ tfourier.i<-function(tf, nb.h, nb.pts=120,
   return(coo)}
   
   
-#' Calculates and draw "tfourier" shapes.
+#' Calculates and draws "tfourier" shapes.
 #' 
 #' \code{tfourier.shape} calculates a "Fourier tangent angle shape" given
 #' Fourier coefficients (see \code{Details}) or can generate some "tfourier"

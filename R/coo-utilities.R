@@ -722,6 +722,9 @@ coo.ldk <- function(coo, nb.ldk) {
 #'
 #' Registers a new baseline for the shape, with the \code{ldk1}-th
 #' and \code{ldk2}-th points being set on \eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=0)}, respectively.
+#' 
+#' For \Link{Out}, it tries to do it using \code{$ldk} slot. Also the case for \link{Opn}, but if
+#' no landmark is defined, it will do it on the first and the last point of the shape.
 #' @aliases coo.bookstein
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param ldk1 the id of the first point of the new baseline (the first, by default)
@@ -750,12 +753,25 @@ coo.bookstein.default <- function(coo, ldk1=1, ldk2=nrow(coo)){
                 - (ldk2[2]-ldk1[2])  * (coo[,1]-ldk1[1])) / (D^2)
   return(coo2)}
 #' @export
-coo.bookstein.Coo <- function(coo, ldk1, ldk2){ #id1 ?
-  Coo <- coo
-  for (i in seq(along=Coo$coo)){
-    Coo$coo[[i]] <- coo.bookstein(Coo$coo[[i]], Coo$ldk[[i]][ldk1], 
-                                  Coo$ldk[[i]][ldk2])}
-  return(Coo)}
+coo.bookstein.Out <- function(coo, ldk1, ldk2){ #id1 ?
+  Out <- coo
+  for (i in seq(along=Out$coo)){
+    Out$coo[[i]] <- coo.bookstein(Out$coo[[i]], Out$ldk[[i]][ldk1], 
+                                  Out$ldk[[i]][ldk2])}
+  return(Out)}
+
+#' @export
+coo.bookstein.Opn <- function(coo, ldk1, ldk2){ #id1 ?
+  Opn <- coo
+  # by default, using the first and last coordinate
+  if (length(Opn$ldk)==0){
+    Opn$coo <- lapply(Opn$coo, coo.bookstein)
+  } else {
+    for (i in seq(along=Opn$coo)){
+      
+      Opn$coo[[i]] <- coo.bookstein(Opn$coo[[i]], Opn$ldk[[i]][ldk1], 
+                                    Opn$ldk[[i]][ldk2])}}
+  return(Opn)}
 
 #' @export
 coo.bookstein.Ldk <- function(coo, ldk1, ldk2){

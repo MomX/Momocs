@@ -1,6 +1,6 @@
 ##### Core function for radii variation Fourier analyses
 
-#' Calculates radii variation Fourier analysis.
+#' Radii variation Fourier transform
 #' 
 #' \code{rfourier} computes radii variation Fourier analysis from a matrix or a
 #' list of coordinates.
@@ -81,7 +81,7 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
     bn[i]<-(2/p)*sum(r * sin(i*angle))}
   list(an=an, bn=bn, ao=ao, r=r)}
 
-#' Calculates inverse radii variation analysis.
+#' Inverse radii variation Fourier transform
 #' 
 #' \code{rfourier.i} uses the inverse radii variation transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically

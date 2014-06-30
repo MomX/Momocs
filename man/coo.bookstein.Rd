@@ -19,6 +19,10 @@ a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 Registers a new baseline for the shape, with the \code{ldk1}-th
 and \code{ldk2}-th points being set on \eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=0)}, respectively.
 }
+\details{
+For \Link{Out}, it tries to do it using \code{$ldk} slot. Also the case for \link{Opn}, but if
+no landmark is defined, it will do it on the first and the last point of the shape.
+}
 \examples{
 data(hearts)
 stack(hearts)
