@@ -38,7 +38,21 @@ There is also a generic method (eg for traditional morphometrics) that centers a
 data(bot)
 bot.f <- eFourier(bot, 12)
 bot.p <- PCA(bot.f)
-plot(bot.p)
+bot.p
+plot(bot.p, morpho=FALSE)
+plot(bot.p, "type")
+
+data(olea)
+op <- rawPolynomials(olea, 5)
+op.p <- PCA(op)
+op.p
+plot(op.p, 1, morpho=TRUE)
+
+data(wings)
+wp <- fgProcrustes(wp)
+wpp <- PCA(wp)
+wpp
+plot(wpp, 1)
 }
 \seealso{
 \link{plot.PCA}

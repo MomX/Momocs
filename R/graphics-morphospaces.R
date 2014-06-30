@@ -22,14 +22,17 @@
   if (method=="eFourier"){
     shp <- PCA2shp.efourier(pos=pos, rot=rot,
                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+    shp <- lapply(shp, coo.close)
     cd <- TRUE}
   if (method=="rFourier"){
     shp <- PCA2shp.rfourier(pos=pos, rot=rot,
                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+    shp <- lapply(shp, coo.close)
     cd <- TRUE}
   if (method=="tFourier"){
     shp <- PCA2shp.tfourier(pos=pos, rot=rot,
                             mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
+    shp <- lapply(shp, coo.close)
     cd <- TRUE}
   ## open outlines
   if (method=="orthoPolynomials"){
@@ -48,14 +51,14 @@
     cd <- FALSE}
   #width   <- (par("usr")[4] - par("usr")[3]) * size.shp
   #shp     <- lapply(shp, coo.scale, 1/width)
-  # not enough compact. #todo
+  # not compact enough. #todo #switch ?
   shp <- lapply(shp, coo.template, size=(max(.wdw()) / size.shp))
-  shp <- lapply(shp, coo.close)
+  
   for (i in 1:length(shp)){
     shp[[i]] <- coo.trans(shp[[i]], pos[i, 1], pos[i, 2])}
   if (cd) {
     garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp,
-                      points=FALSE, centroid=FALSE, first.point=TRUE)
+                      points=FALSE, centroid=FALSE, first.point=FALSE)
   } else {
     garbage <- lapply(shp, lines, col=border.shp)}}
 

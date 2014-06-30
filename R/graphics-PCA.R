@@ -64,7 +64,7 @@ plot.PCA <- function(#basics
   #shapes
   morphospace=TRUE, pos.shp="full", amp.shp=1,
   size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
-  pts.shp=60, border.shp="#00000033", col.shp="#00000011",
+  pts.shp=60, border.shp="#00000088", col.shp="#00000011",
   #stars
   stars=FALSE,
   #ellipses

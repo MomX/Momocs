@@ -1,5 +1,5 @@
+##### PCA on Coe objects
 
-# 3. PCA on Coe ----------------------------------------------------------------
 #' Principal component analysis on Coe objects
 #' 
 #' Performs a PCA on \link{Coe} objects.
@@ -18,7 +18,21 @@
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
 #' bot.p <- PCA(bot.f)
-#' plot(bot.p)
+#' bot.p
+#' plot(bot.p, morpho=FALSE)
+#' plot(bot.p, "type") 
+#' 
+#' data(olea)
+#' op <- rawPolynomials(olea, 5)
+#' op.p <- PCA(op)
+#' op.p
+#' plot(op.p, 1, morpho=TRUE)
+#' 
+#' data(wings)
+#' wp <- fgProcrustes(wp)
+#' wpp <- PCA(wp)
+#' wpp
+#' plot(wpp, 1)
 #' @export
 PCA <- function(x, scale., center){UseMethod("PCA")}
 
@@ -51,7 +65,7 @@ PCA.OpnCoe <- function(x, scale.=FALSE, center=TRUE){
 #' @export
 PCA.LdkCoe <- function(x, scale.=FALSE, center=TRUE){
   LdkCoe <- x
-  LdkCoe$coe <- a2m(l2a(Coe$coo))
+  #LdkCoe$coe <- a2m(l2a(Coe$coo))
   PCA <- prcomp(LdkCoe$coe, scale.=scale., center=center)
   PCA$fac <- LdkCoe$fac
   PCA$mshape <- apply(LdkCoe$coe, 2, mean)
