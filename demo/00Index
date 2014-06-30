@@ -1,1 +1,3 @@
-eft    Elliptical Fourier Analysis
+eft            Elliptical Fourier Analysis on bot dataset
+polynomials    Natural and orthogonal polynomials on olea dataset
+landmarks	   Analysis of a configuration of landmark on wings dataset

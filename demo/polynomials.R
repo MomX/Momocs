@@ -1,0 +1,2 @@
+#' @demoTitle polynomials
+# plop
