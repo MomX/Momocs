@@ -28,7 +28,7 @@ PCA(x, scale., center)
 a "PCA" object on which to apply \link{plot.PCA}
 }
 \description{
-Performs a PCA on \link{Coe} objects.
+Performs a PCA on \link{Coe} objects, using \link{prcomp}.
 }
 \details{
 By default, methods on \link{Coe} object do not scale the input data but center them.
