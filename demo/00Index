@@ -1,3 +1,3 @@
-eft            Elliptical Fourier Analysis on bot dataset
-polynomials    Natural and orthogonal polynomials on olea dataset
-landmarks	   Analysis of a configuration of landmark on wings dataset
+eft			  Elliptical Fourier Analysis on bot dataset
+landmarks     Some bits of landmark analysis on the wings dataset
+polynomials   Open outline analysis on the olea dataset

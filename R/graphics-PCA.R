@@ -1,4 +1,4 @@
-# 7 - PCA & LDA ------------------------------------------------------------
+##### PCA plotters
 
 #todo: add deformation grids on the extreme PC axes (pos / meanshape)
 #' Plots Principal Component Analysis
@@ -145,3 +145,42 @@ plot.PCA <- function(#basics
   .title(title)
   if (eigen)     .eigen(PCA$sdev, xax, yax, ev.names="Eigenvalues")
   box()}
+
+#' Plots a combination of the three first PCs
+#' 
+#' Creates a 2 x 3 layout with, from top to bottom and form left to right: PC1-PC2,
+#' PC1-PC3, PC2-3, and the barplot of eigenvalues percentages.
+#' @param PCA a \link{PCA} object
+#' @param ... additional arguments to fed \link{plot.PCA}
+#' @keywords Graphics
+#' @rdname plot3.PCA
+#' @examples 
+#' data(bot)
+#' bot.f <- eFourier(bot, 12)
+#' bot.p <- PCA(bot.f)
+#' plot3(bot.p) # no groups
+#' plot3(bot.p, 1) # groups
+#' plot3(bot.p, "type", pos.shp="circle") # all plot.PCA args should work
+#' @export
+plot3 <- function(PCA, ...){UseMethod("plot3")}
+#' @rdname plot3.PCA
+#' @export
+plot3.PCA <- function(PCA, ... ){
+  op1 <- par(mfrow=c(2, 2))
+  on.exit(par(op1))
+  # The three plot.PCA plots
+  plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), eigen=TRUE, ...)
+  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=TRUE, ...)
+  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=TRUE, ...)
+  # The eigen value plot
+  op2 <- par(mar=rep(8, 4))
+  var <- PCA$sdev^2
+  pc <- 100*var/sum(var)
+  cols <- rep("grey80", 5)
+  cols[1:3] <- "grey40"
+  v <- pc[1:5]
+  bp <- barplot(v, col=cols, border=NA, axes=FALSE, main="Eigenvalues")
+  text(bp, v+5, labels = round(v, 1))}
+
+##### end PCA plotters
+

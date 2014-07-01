@@ -81,7 +81,8 @@ or a data.frame for \link{pos.shapes}}
 \item{...}{useless here, just to fit the generic plot}
 }
 \description{
-The Momocs' LCA plotter with many graphical options and morphospaces.
+The Momocs' LCA plotter with many graphical options and morphospaces
+(the latter being experimental so far).
 }
 \details{
 Widely inspired by the philosophy behind graphical functions
