@@ -94,6 +94,7 @@ LDA.Coe <- function(x, fac, retain){
 #' @export
 LDA.default <- function(x, fac, retain){
   X <- x
+  if (!is.matrix(X)) X <- as.matrix(X)
   if (missing(fac)) stop(" * no fac provided")
   # now we calculate two lda models with MASS::lda
   # one with
@@ -130,7 +131,7 @@ LDA.default <- function(x, fac, retain){
               CV.correct  = CV.correct,
               LDs      = LDs,
               mshape   = NULL,
-              method   = NULL)
+              method   = "other")
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)}
 
