@@ -6,10 +6,19 @@ Momocs, morphometrics using R
  * _And_ using the same, simple and easy-to-learn, open-source, and extendable grammar both for the user and programmers.
  * Momocs hinges on the core functions developed in the book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008), wraps them into the same coding grammar, and extends them both graphically and statistically.
 
+Installation
+--------
+
+For the very last version: 
+```
+  library(devtools)
+  install_github("vbonhomme/Momocs")
+  library(Momocs)
+````
 
 Features
 --------
-__Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) and published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) to the version v0.9 available only [here](https://github.com/vbonhomme/Momocs/releases) so far, planned for extensive testing. A v1.0 which will include all the features marked with an asterisk (*) below, is planned for ~ September, 2014.
+__Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) and published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) to the version v0.9 available only (see above) so far, planned for extensive testing. A v1.0 which will include all the features marked with an asterisk (*) below, is planned for ~ September, 2014.
 
 * __Data acquisition__
  * Outline extraction
@@ -52,20 +61,8 @@ __Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](h
  * Family pictures and quick inspection of whole datasets
  * Many other morphometrics plots
 
-Installation
+How can you help and find help
 --------
-From R:
-```
-  install.packages("Momocs")
-  library(Momocs)
-```
-
-For the very last version: 
-```
-  library(devtools)
-  install_github(c("vbonhomme/Momocs", "vbonhomme"))
-  library(Momocs)
-````
 
 __You are welcome to:__
 * test Momocs and send me your feedback
