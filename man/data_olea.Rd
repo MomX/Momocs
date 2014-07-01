@@ -2,7 +2,7 @@
 \docType{data}
 \name{olea}
 \alias{olea}
-\title{Data: Outline coordinates of 210 olive seeds oopen outlines.}
+\title{Data: Outline coordinates of olive seeds open outlines.}
 \format{An \link{Opn} object with the outline coordinates of olive seeds.}
 \source{
 We thank Jean-Frederic Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
@@ -16,7 +16,7 @@ as revealed by geometrical morphometry applied to biological and
 archaeological material. \emph{Journal of Biogeography} \bold{31}: 63-77.
 }
 \description{
-Data: Outline coordinates of 210 olive seeds oopen outlines.
+Data: Outline coordinates of olive seeds open outlines.
 }
 \keyword{Datasets}
 

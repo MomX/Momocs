@@ -2,7 +2,7 @@
 \docType{data}
 \name{mosquito}
 \alias{mosquito}
-\title{Data: Outline coordinates of 126 mosquito wings.}
+\title{Data: Outline coordinates of mosquito wings.}
 \format{A \link{Out} object with the 126 mosquito wing outlines outlines
 used Rohlf and Archie (1984).}
 \source{
@@ -11,7 +11,7 @@ description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic B
 Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
 }
 \description{
-Data: Outline coordinates of 126 mosquito wings.
+Data: Outline coordinates of mosquito wings.
 }
 \keyword{Datasets}
 

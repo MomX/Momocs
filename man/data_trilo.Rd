@@ -2,7 +2,7 @@
 \docType{data}
 \name{trilo}
 \alias{trilo}
-\title{Data: Outline coordinates of 50 cephalic outlines of trilobite}
+\title{Data: Outline coordinates of cephalic outlines of trilobite}
 \format{A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 ontogenetic stages of trilobite.}
 \source{
@@ -11,7 +11,7 @@ The original data included 51 outlines and 5 ontogenetic stages,
 but one of them has just a single outline thas has been removed.
 }
 \description{
-Data: Outline coordinates of 50 cephalic outlines of trilobite
+Data: Outline coordinates of cephalic outlines of trilobite
 }
 \keyword{Datasets}
 
