@@ -1,7 +1,8 @@
 
 #' Plots Linear Discriminant Analysis
 #' 
-#' The Momocs' LCA plotter with many graphical options and morphospaces.
+#' The Momocs' LCA plotter with many graphical options and morphospaces 
+#' (the latter being experimental so far).
 #' @method plot LDA
 #' @param x an object of class "LDA", typically obtained with \link{LDA}
 #' @param xax the first LD axis
