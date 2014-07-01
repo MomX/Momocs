@@ -9,8 +9,7 @@ Momocs, morphometrics using R
 
 Features
 --------
-__Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) and published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) to the version v0.9 available only on GitHub so far.
-I plan a releaase of the version v0.9 before July 2014 and a release of v1.0 which will include all the features marked with an asterisk (*) below, before September, 2014.
+__Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) and published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) to the version v0.9 available only [here](https://github.com/vbonhomme/Momocs/releases) so far, planned for extensive testing. A v1.0 which will include all the features marked with an asterisk (*) below, is planned for ~ September, 2014.
 
 * __Data acquisition__
  * Outline extraction
