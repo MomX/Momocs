@@ -21,9 +21,13 @@
 #' @param pch The \code{pch} for points.
 #' @param cex The \code{cex} for points.
 #' @param main \code{character}. A title for the plot.
+#' @param poly logical whether to use \link{polygon} and \link{lines} to draw the shape,
+#' or just \link{points}. In other words, whether the shape should be considered as a configuration
+#' of landmarks or not (eg a closed outline).
 #' @param plot.new \code{logical} whether to plot or not a new frame.
 #' @param plot logical whether to plot something or just to create an empty plot.
 #' @param zoom a numeric to take your distances.
+#' @param ... further arguments for use in coo.plot methods. See examples.
 #' @return No returned value.
 #' @seealso coo.draw
 #' @keywords Graphics
@@ -37,11 +41,18 @@
 #' coo.plot(b, first.point=FALSE, centroid=FALSE)
 #' coo.plot(b, points=TRUE, pch=20)
 #' coo.plot(b, xy.axis=FALSE, lwd=2, col="#F2F2F2")
+#' @aliases coo.plot
+#' @rdname coo.plot
 #' @export
-coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
+coo.plot <- function(coo, ...){UseMethod("coo.plot")}
+                                                               
+#' @rdname coo.plot
+#' @export
+coo.plot.default <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
                      points=FALSE, first.point=TRUE, centroid=TRUE, xy.axis=TRUE,
-                     pch=1, cex=0.5, main, plot.new=TRUE, plot=TRUE, zoom=1){ #todo zoom
+                     pch=1, cex=0.5, main, poly=TRUE, plot.new=TRUE, plot=TRUE, zoom=1, ...){ #todo zoom
   coo <- coo.check(coo)
+  # if 'plot.new=TRUE' we have initiate the graphical window
   if (plot.new) {
     # we setup coo.plot graphical parameters
     op <- par(mar=c(3, 3, 2, 1))
@@ -62,11 +73,17 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
     } else {
       plot(coo, type="n", asp=1,  las=1, cex.axis=2/3, ann=FALSE, frame=FALSE)}
     if (xy.axis) {abline(h=0, v=0, col="grey80", lty=2)}}
+  # if 'plot.new=FALSE', we simply have to draw the shape in the existing window
+  # 'plot' is meant to initialize a graphical window without plotting a shape
   if (plot) {
+    # 'poly'=FALSE allows to plot only points, eg for landmarks
+    if (!missing(poly)) {if ((!poly) & missing(points)) points <- TRUE}
+    if (poly) {
     polygon(coo, col=col, border=NA)
-    lines(coo, col=border, lwd=lwd, lty=lty)
+    lines(coo, col=border, lwd=lwd, lty=lty)}
     # we handle coordinate points
-    if (missing(points)) { if (nrow(coo)<=120) points(coo, pch=pch, cex=cex, col=border)}
+    # if very few points and 'points' is missing we draw them by default
+    if (missing(points)) { if (nrow(coo)<=60) points <- TRUE }
     if (points) { points(coo, pch=pch, cex=cex, col=border) }
     if (first.point) {points(coo[1, 1], coo[1, 2], col = border, pch=20, cex=2/3)}
     if (centroid) {
@@ -74,6 +91,11 @@ coo.plot <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
       points(cent[1], cent[2], pch=3, col=border, cex=cex)}
     if (!missing(main)) title(main=main)}}
 
+#' @rdname coo.plot
+#' @export
+coo.plot.ldk <- function(coo, cex=1, poly=FALSE, ...){
+  coo.plot.default(coo, cex=cex, poly=poly,  ...)}
+ 
 #' Adds a shape to the current plot
 #' 
 #' \code{coo.draw} is simply a \link{coo.plot} with \code{plot.new=FALSE}, ie 

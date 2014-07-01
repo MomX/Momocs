@@ -2,13 +2,13 @@
 \docType{data}
 \name{shapes}
 \alias{shapes}
-\title{Data: Outline coordinates of 210 olive seeds oopen outlines.}
+\title{Data: Outline coordinates of various shapes}
 \format{An \link{Out} object with the outline coordinates of some various shapes.}
 \source{
 Borrowed from default shapes from (c) Adobe Photoshop.
 }
 \description{
-Data: Outline coordinates of 210 olive seeds oopen outlines.
+Data: Outline coordinates of various shapes
 }
 \keyword{Datasets}
 

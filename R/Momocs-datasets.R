@@ -1,6 +1,6 @@
 ##### Dataset documentation and declaration
 
-#' Data: Outline coordinates of 20 beer and 20 whisky bottles.
+#' Data: Outline coordinates of beer and whisky bottles.
 #' 
 #' @docType data
 #' @name bot
@@ -13,7 +13,7 @@
 #' images or the brands cited here.
 NULL
 
-#' Data: Outline coordinates of 50 cephalic outlines of trilobite
+#' Data: Outline coordinates of cephalic outlines of trilobite
 #' 
 #' @docType data
 #' @name trilo
@@ -26,7 +26,7 @@ NULL
 #' but one of them has just a single outline thas has been removed.
 NULL
 
-#' Data: Outline coordinates of 126 mosquito wings.
+#' Data: Outline coordinates of mosquito wings.
 #' 
 #' @docType data
 #' @name mosquito
@@ -39,7 +39,7 @@ NULL
 #' Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
 NULL
 
-#' Data: Outline coordinates of 240 hand-drawn hearts
+#' Data: Outline coordinates of hand-drawn hearts
 #' 
 #' @docType data
 #' @name hearts
@@ -51,7 +51,7 @@ NULL
 #' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and degraded to 80 coordinates per outline.
 NULL
 
-#' Data: Outline coordinates of 210 olive seeds oopen outlines.
+#' Data: Outline coordinates of olive seeds open outlines.
 #' 
 #' @docType data
 #' @name olea
@@ -69,7 +69,7 @@ NULL
 #' archaeological material. \emph{Journal of Biogeography} \bold{31}: 63-77.
 NULL
 
-#' Data: Outline coordinates of 210 olive seeds oopen outlines.
+#' Data: Outline coordinates of various shapes
 #' 
 #' @docType data
 #' @name shapes
@@ -79,7 +79,7 @@ NULL
 #' @source Borrowed from default shapes from (c) Adobe Photoshop.
 NULL
 
-#' Data: Outline coordinates of 20 beer and 20 whisky bottles.
+#' Data: Landmarks coordinates of mosquito wings
 #' 
 #' @docType data
 #' @name wings
@@ -89,7 +89,7 @@ NULL
 #' @source Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
 NULL
 
-#' Data: Configuration of landmarks on 176 oak leaves
+#' Data: Configuration of landmarks of oak leaves
 #' 
 #' From Viscosi and Cardini (2001).
 #' @docType data

@@ -36,7 +36,7 @@
 #' }
 #' @section Cheers:
 #' We are very grateful to  Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Neus
-#' Martinez, Marcelo Reginato, Evan Saitta, Norbert Telmon, Bill Venables, Asher Wishkerman for
+#' Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Norbert Telmon, Bill Venables, Asher Wishkerman for
 #' their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
 #' @import sp
