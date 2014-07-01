@@ -27,36 +27,6 @@ coo.check <- function(coo){
     if (length(coo)==1) return(l2m(coo))}
   stop(" * a list or a matrix of (x; y) coordinates must be provided.")}
 
-#' Checks "ldk" shapes
-#'
-#' A simple utility, used internally, mostly by \link{Ldk} methods,
-#' in some graphical functions, and notably in \link{l2a}.
-#' Returns an array of landmarks arranged as \code{(nb.ldk) x (x; y) x (nb.shapes)},
-#' when passed with either a list, a matrix or an array of coordinates.
-#' If a list is provided, checks that the number of landmarks is consistent.
-#'
-#' @param ldk a \code{matrix} of (x; y) coordinates, a list, or an array.
-#' @return an \code{array} of (x; y) coordinates.
-#' @seealso \link{coo.check}
-#' @keywords ShapeUtilities
-#' @examples
-#' #coo.check("Not a shape")
-#' #coo.check(matrix(1:10, ncol=2))
-#' #coo.check(list(x=1:5, y=6:10))
-#' @export
-ldk.check <- function(ldk){
-  if (is.array(ldk)){
-    if (length(dim(ldk)==3)){ return(ldk)}
-    if (length(dim(ldk)==2)){ return(array(ldk, dim=c(nrow(ldk), ncol(ldk), 1)))}
-    stop("A matrix an array (dim=3) must be provided.")
-  }
-  if (is.list(ldk)) {
-    l <- sapply(ldk, length)
-    if (length(unique(l))==1){return(l2a(ldk))}
-    stop("A list of matrices with the same number of coordinates must be provided.")
-  }
-  stop("A list, a matrix or a dim=3 array must be provided.")}
-
 #' Centers coordinates
 #'
 #' Returns a shape centered on the origin.

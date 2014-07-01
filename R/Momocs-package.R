@@ -41,6 +41,7 @@
 #' @import ape
 #' @import sp
 #' @importFrom MASS lda ginv kde2d
+#' @importFrom geometry delaunayn
 #' @importFrom jpeg readJPEG
 #' @importFrom methods showDefault
 #' @importFrom graphics boxplot
