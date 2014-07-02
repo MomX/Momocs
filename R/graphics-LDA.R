@@ -128,10 +128,11 @@ plot.LDA <- function(#basics
   
   .frame(xy, center.origin, zoom=zoom)
   if (grid) .grid(nb.grids)
-    if (morphospace & LDA$method=="eFourier") {
+    if (morphospace & length(LDA$method)<2) {
+      if(LDA$method=="eFourier") {
       .morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
                       amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                      col.shp=col.shp, border.shp=border.shp)}
+                      col.shp=col.shp, border.shp=border.shp)}}
   if (stars)      .stars(xy, fac, col.groups)
   if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
   if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
