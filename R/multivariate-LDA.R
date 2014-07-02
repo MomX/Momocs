@@ -43,7 +43,9 @@ LDA.Coe <- function(x, fac, retain){
   Coe <- x
   if (missing(fac)) stop(" * no fac provided")
   fac    <- Coe$fac[, fac]
-  X      <- Coe$coe
+  X      <- as.matrix(Coe$coe)
+#   if (!missing(retain)) X <- X[, coeff.sel(retain=retain, nb.h = ncol(X)/4, cph=4)]
+#   cat(class(X))
   remove <- which(apply(X, 2, sd)<1e-10)
   if (length(remove)!=0) {
     cat(" * variables", colnames(X)[remove], "are removed since they are constant.\n")
