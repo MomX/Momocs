@@ -5,11 +5,13 @@
 \alias{Manova.OutCoe}
 \title{Multivariate analysis of variance on Coe objects}
 \usage{
-Manova(x, fac, test = "Hotelling", retain, drop)
+Manova(x, fac, test = "Hotelling", retain, drop, verbose)
 
-\method{Manova}{OpnCoe}(x, fac, test = "Hotelling", retain, drop)
+\method{Manova}{OpnCoe}(x, fac, test = "Hotelling", retain, drop,
+  verbose = TRUE)
 
-\method{Manova}{OutCoe}(x, fac, test = "Hotelling", retain, drop)
+\method{Manova}{OutCoe}(x, fac, test = "Hotelling", retain, drop,
+  verbose = TRUE)
 }
 \arguments{
 \item{x}{a \link{Coe} object}
@@ -21,6 +23,8 @@ Manova(x, fac, test = "Hotelling", retain, drop)
 \item{retain}{how many harmonics (or polynomials) to retain}
 
 \item{drop}{how many harmonics (or polynomials) to drop}
+
+\item{verbose}{logical whether to print messages}
 }
 \value{
 a list of matrices of (x,y) coordinates.
@@ -48,6 +52,9 @@ Manova(bot.f, "type")
 data(olea)
 op <- rawPolynomials(olea, 5)
 Manova(op, "domes")
+}
+\seealso{
+\link{ManovaPW}
 }
 \keyword{Multivariate}
 
