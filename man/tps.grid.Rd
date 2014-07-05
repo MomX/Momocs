@@ -5,7 +5,8 @@
 \usage{
 tps.grid(fr, to, amp = 1, over = 1.2, grid.size = 15,
   grid.col = "grey80", shp = TRUE, shp.col = rep(NA, 2),
-  shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
+  shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1),
+  legend = TRUE)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates.}
@@ -32,6 +33,8 @@ longer axis on the outlines.}
 \item{shp.lwd}{Two \code{lwd} for drawing shapes.}
 
 \item{shp.lty}{Two \code{lty} fro drawing the shapes.}
+
+\item{legend}{logical whether to plot a legend.}
 }
 \value{
 No returned value.

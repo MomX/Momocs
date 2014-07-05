@@ -3,10 +3,10 @@
 \alias{tps.iso}
 \title{Deformation isolines using Thin Plate Splines.}
 \usage{
-tps.iso(fr, to, amp = 1, over = 1.2, palette = col.summer,
+tps.iso(fr, to, amp = 1, over = 1.2, palette = col.spring,
   iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black",
-  shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(1, 1),
-  shp.lty = c(1, 1))
+  shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(2, 2),
+  shp.lty = c(1, 1), legend = TRUE)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates.}
@@ -39,6 +39,8 @@ calculation of deformation.}
 \item{shp.lwd}{Two \code{lwd} for drawing shapes.}
 
 \item{shp.lty}{Two \code{lty} fro drawing the shapes.}
+
+\item{legend}{logical whether to plot a legend.}
 }
 \value{
 No returned value.

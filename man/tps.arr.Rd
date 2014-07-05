@@ -6,7 +6,8 @@
 tps.arr(fr, to, amp = 1, over = 1.2, palette = col.summer, arr.nb = 200,
   arr.levels = 100, arr.len = 0.1, arr.ang = 20, arr.lwd = 0.75,
   arr.col = "grey50", shp = TRUE, shp.col = rep(NA, 2),
-  shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1))
+  shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1),
+  legend = TRUE)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates.}
@@ -44,6 +45,8 @@ arrows.}
 \item{shp.lwd}{Two \code{lwd} for drawing shapes.}
 
 \item{shp.lty}{Two \code{lty} fro drawing the shapes.}
+
+\item{legend}{logical whether to plot a legend.}
 }
 \value{
 No returned value.
