@@ -24,12 +24,12 @@
 #' @export
 .rug <- function(xy, fac, col){
   if (is.null(fac)) {
-    rug(xy[, 1], ticksize=0.015, side=1, col="black")
-    rug(xy[, 2], ticksize=0.015, side=2, col="black")
+    rug(xy[, 1], ticksize=0.01, side=1, col="black")
+    rug(xy[, 2], ticksize=0.01, side=2, col="black")
   } else {
     for (i in seq(along=levels(fac))) {
-      rug(xy[fac==levels(fac)[i], 1], ticksize=0.015, lwd=1, side=1, col=col[i])
-      rug(xy[fac==levels(fac)[i], 2], ticksize=0.015, lwd=1,  side=2, col=col[i])}}}
+      rug(xy[fac==levels(fac)[i], 1], ticksize=0.01, lwd=1, side=1, col=col[i])
+      rug(xy[fac==levels(fac)[i], 2], ticksize=0.01, lwd=1,  side=2, col=col[i])}}}
 
 #confidence ellipses
 #' @export
@@ -40,7 +40,7 @@
       if (nrow(pts.i)>1) {
         ell.i <- conf.ell(x=pts.i, conf=conf)$ell
         lines(coo.close(ell.i), col=col[i])
-        points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, col=col[i])}}}}
+        points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2], pch=3, cex=0.3, col=col[i])}}}}
 
 #confidence ellipses
 #' @export
@@ -72,7 +72,7 @@
     cent.i <- xy[fac==levels(fac)[i], ]
     if (is.matrix(cent.i)){
       cent.i <- coo.centpos(xy[fac==levels(fac)[i], ])}
-    text(cent.i[1], cent.i[2], labels=levels(fac)[i], col=col[i], pos=3)}}
+    text(cent.i[1], cent.i[2], labels=levels(fac)[i], col=col[i], pos=3, cex=0.8)}}
 
 #add 'stars'
 #' @export

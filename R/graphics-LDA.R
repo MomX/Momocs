@@ -54,7 +54,7 @@
 plot.LDA <- function(#basics
   x, xax=1, yax=2, 
   #color choice
-  col="black", pch, cex=0.8, palette=col.autumn,
+  col="black", pch, cex=0.3, palette=col.autumn,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid

@@ -4,11 +4,11 @@
 \title{Plots Principal Component Analysis}
 \usage{
 \method{plot}{PCA}(x, fac, xax = 1, yax = 2, col = "black", pch = 20,
-  cex = 0.5, palette = col.autumn, center.origin = FALSE, zoom = 1,
+  cex = 0.3, palette = col.autumn, center.origin = FALSE, zoom = 1,
   grid = TRUE, nb.grids = 3, morphospace = TRUE, pos.shp = "full",
   amp.shp = 1, size.shp = 15, nb.shp = 12, nr.shp = 6, nc.shp = 5,
   pts.shp = 60, border.shp = "#00000088", col.shp = "#00000011",
-  stars = FALSE, ellipses = TRUE, conf = 0.5, ellipsesax = TRUE,
+  stars = FALSE, ellipses = TRUE, conf = 0.5, ellipsesax = FALSE,
   lty.ellipsesax = 2, chull = TRUE, chull.lty = 3, loadings = FALSE,
   labels = TRUE, axisnames = TRUE, axisvar = TRUE, eigen = TRUE,
   rug = TRUE, title = substitute(x), ...)

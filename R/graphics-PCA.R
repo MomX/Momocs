@@ -71,7 +71,7 @@
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
-  col="black", pch=20, cex=0.5, palette=col.autumn,
+  col="black", pch=20, cex=0.3, palette=col.autumn,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -83,7 +83,7 @@ plot.PCA <- function(#basics
   #stars
   stars=FALSE,
   #ellipses
-  ellipses=TRUE, conf=0.5, ellipsesax=TRUE, lty.ellipsesax=2,
+  ellipses=TRUE, conf=0.5, ellipsesax=FALSE, lty.ellipsesax=2,
   #convexhulls
   chull=TRUE, chull.lty=3,
   #loadings
@@ -173,14 +173,16 @@ plot3.PCA <- function(PCA, ... ){
   plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=TRUE, ...)
   plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=TRUE, ...)
   # The eigen value plot
-  op2 <- par(mar=rep(8, 4))
+  op2 <- par(mar=c(2, 3, 4, 3), xpd=NA)
   var <- PCA$sdev^2
   pc <- 100*var/sum(var)
   cols <- rep("grey80", 5)
   cols[1:3] <- "grey40"
   v <- pc[1:5]
   bp <- barplot(v, col=cols, border=NA, axes=FALSE, main="Eigenvalues")
-  text(bp, v+5, labels = round(v, 1))}
+  text(bp, v+2, labels = paste0(round(v, 1), "%"))
+  axis(1, at = bp, labels=paste0("PC", 1:5), line = -1, tick = FALSE)
+}
 
 ##### end PCA plotters
 
