@@ -22,7 +22,7 @@
 #'  \item \code{mshape} mean values of coefficients in the original matrix
 #'  \item \code{method} inherited from the Coe object (if any)
 #' }
-#' @seealso \link{plot.LDA}
+#' @seealso \link{plot.LDA}, \link{plotCV}
 #' @keywords Multivariate
 #' @examples
 #' data(bot)
@@ -44,8 +44,8 @@ LDA.Coe <- function(x, fac, retain){
   if (missing(fac)) stop(" * no fac provided")
   fac    <- Coe$fac[, fac]
   X      <- as.matrix(Coe$coe)
-#   if (!missing(retain)) X <- X[, coeff.sel(retain=retain, nb.h = ncol(X)/4, cph=4)]
-#   cat(class(X))
+  #   if (!missing(retain)) X <- X[, coeff.sel(retain=retain, nb.h = ncol(X)/4, cph=4)]
+  #   cat(class(X))
   remove <- which(apply(X, 2, sd)<1e-10)
   if (length(remove)!=0) {
     cat(" * variables", colnames(X)[remove], "are removed since they are constant.\n")
@@ -53,10 +53,10 @@ LDA.Coe <- function(x, fac, retain){
   } else { remove <- NULL }  
   # now we calculate two lda models with MASS::lda
   # one with
-  mod      <- lda(X, grouping=fac)
+  mod      <- lda(X, grouping=fac, tol=1e-08)
   mod.pred <- predict(mod, X)
   # manual leave-one-out cross validation
-  # dont know why but with CV=TRUE, results are not stable.
+  # dont know why but with CV=TRUE, results are not stable. #todo
   Xn     <- nrow(X)
   CV.fac <- factor(levels=levels(fac))
   for (i in 1:Xn){

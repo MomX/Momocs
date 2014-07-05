@@ -41,6 +41,8 @@
 #' @param ... useless here, just to fit the generic plot
 #' @details Widely inspired by the philosophy behind graphical functions
 #' of the ade4 R package.
+#' @seealso \link{LDA}, \link{plotCV}
+#' @keywords Multivariate
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 24)
@@ -128,8 +130,8 @@ plot.LDA <- function(#basics
   
   .frame(xy, center.origin, zoom=zoom)
   if (grid) .grid(nb.grids)
-    if (morphospace & length(LDA$method)<2) {
-      if(LDA$method=="eFourier") {
+  if (morphospace & length(LDA$method)<2) {
+    if(LDA$method=="eFourier") {
       .morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
                       amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                       col.shp=col.shp, border.shp=border.shp)}}
@@ -143,6 +145,6 @@ plot.LDA <- function(#basics
   if (axisnames)  .axisnames(xax, yax, "LD")
   if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
   .title(title)
-   # should be called differently #todo
+  # should be called differently #todo
   if (eigen)     .eigen(LDA$mod$svd, xax, yax, ev.names="Proportion of trace")
   box()}

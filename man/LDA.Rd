@@ -52,7 +52,7 @@ bot.l
 plot(bot.l)
 }
 \seealso{
-\link{plot.LDA}
+\link{plot.LDA}, \link{plotCV}
 }
 \keyword{Multivariate}
 

@@ -98,4 +98,8 @@ bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
 bot.l <- LDA(bot.f, "fake")
 plot(bot.l)
 }
+\seealso{
+\link{LDA}, \link{plotCV}
+}
+\keyword{Multivariate}
 
