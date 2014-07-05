@@ -3,7 +3,7 @@
 \alias{plot.LDA}
 \title{Plots Linear Discriminant Analysis}
 \usage{
-\method{plot}{LDA}(x, xax = 1, yax = 2, col = "black", pch, cex = 0.8,
+\method{plot}{LDA}(x, xax = 1, yax = 2, col = "black", pch, cex = 0.3,
   palette = col.autumn, center.origin = FALSE, zoom = 1, grid = TRUE,
   nb.grids = 3, morphospace = TRUE, pos.shp = "full", amp.shp = 1,
   size.shp = 20, pts.shp = 60, border.shp = "#00000055",
