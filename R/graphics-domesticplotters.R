@@ -683,4 +683,140 @@ conf.ell <- function(x, y, conf=0.95, nb.pts = 60){
   y <- wdw[4] - wdw[3]
   return(c(x, y))}
 
+
+#' Plots a cross-correlation table
+#' 
+#' Or any contingency table. A simple graphic representation based on variable
+#' width and/or color for arrows or segments, based on the relative frequencies.
+#' 
+#' @param x an \link{LDA} object, a table or a squared matrix
+#' @param links.FUN a function to draw the links: eg \link{segments} (by default), \link{arrows}, etc.
+#' @param col logical whether to vary the color of the links
+#' @param col0 a color for the default link (when \code{col = FALSE})
+#' @param col.breaks the number of different colors
+#' @param palette a color palette, eg \link{col.summer}, \link{col.hot}, etc.
+#' @param lwd logical whether to vary the width of the links
+#' @param lwd0 a width for the default link (when \code{lwd = FALSE})
+#' @param gap.dots numeric to set space between the dots and the links
+#' @param pch.dots a pch for the dots
+#' @param gap.names numeric to set the space between the dots and the group names
+#' @param cex.names a cex for the names
+#' @param legend logical whether to add a legend
+#' @param ... useless here.
+#' @seealso \link{LDA}, \link{plot.LDA}
+#' @keywords Multivariate
+#' @examples
+#' # Below various table that you can try. We will use the last one for the examples.
+#' \dontrun{
+#' #pure random
+#' a <- sample(rep(letters[1:4], each=10))
+#' b <- sample(rep(letters[1:4], each=10))
+#' tab <- table(a, b)
+#' 
+#' # veryhuge + some structure 
+#' a <- sample(rep(letters[1:10], each=10))
+#' b <- sample(rep(letters[1:10], each=10))
+#' tab <- table(a, b)
+#' diag(tab) <- round(runif(10, 10, 20))
+#' 
+# more structure
+#' tab <- matrix(c(8, 3, 1, 0, 0,
+#'                 2, 7, 1, 2, 3,
+#'                 3, 5, 9, 1, 1,
+#'                 1, 1, 2, 7, 1,
+#'                 0, 9, 1, 4, 5), 5, 5, byrow=TRUE)
+#' tab <- as.table(tab)
+#' }
+#' # good prediction
+#' tab <- matrix(c(8, 1, 1, 0, 0,
+#'                1, 7, 1, 0, 0,
+#'                 1, 2, 9, 1, 0,
+#'                 1, 1, 1, 7, 1,
+#'                 0, 0, 0, 1, 8), 5, 5, byrow=TRUE)
+#' tab <- as.table(tab)
+#' 
+#' 
+#' plotCV(tab)
+#' plotCV(tab, arrows) # if you prefer arrows
+#' plotCV(tab, lwd=FALSE, lwd0=1, palette=col.india) # if you like india but not lwds
+#' plotCV(tab, col=FALSE, col0="pink") # only lwd
+#' plotCV(tab, col=FALSE, lwd0=10, cex.names=2) # if you're getting old
+#' plotCV(tab, col=FALSE, lwd=FALSE) # pretty but useless
+#' plotCV(tab, col.breaks=2) # if you think it's either good or bad
+#' plotCV(tab, pch=NA) # if you do not like dots
+#' plotCV(tab, gap.dots=0) # if you want to 'fill the gap'
+#' plotCV(tab, gap.dots=1) # or not
+#' 
+#' #trilo examples
+#' data(trilo)
+#' trilo.f <- eFourier(trilo, 8)
+#' trilo.l <- LDA(trilo.f, "onto")
+#' trilo.l$CV.tab
+#' plotCV(trilo.l$CV.tab) # but see below, 'works' directly on the LDA
+#' plotCV(trilo.l)
+#' 
+#' # olea example
+#' data(olea)
+#' op <- orthoPolynomials(olea, 5)
+#' opl <- LDA(op, "cep")
+#' plotCV(opl)
+#' @rdname plotCV
+#' @export
+plotCV <- function(x, ...){UseMethod("plotCV")}
+#' @rdname plotCV
+#' @export
+plotCV.LDA <- function(x, ...){
+  plotCV(x$CV.tab, ...)}
+#' @rdname plotCV
+#' @export
+plotCV.default <- function(x, links.FUN = segments,
+                   col=TRUE, col0="black", col.breaks=5, palette=col.summer,
+                   lwd=TRUE, lwd0=5,
+                   gap.dots=0.05, pch.dots=20, gap.names=0.15, cex.names=1, legend=TRUE,...){
+  # to maintain the generic
+  tab <- x
+  # we check a bit
+  if (ncol(x)!=nrow(x)) stop(" * a table or a squared matrix must be passed.")
+  # we deduce xy positions
+  gap.mid <- 3
+  n <- nrow(tab)
+  x.dots   <- c(rep(1, n), rep(1 + gap.mid, n))
+  y.dots   <- rep(1:n, 2)
+  x1.link  <- rep(1 + gap.dots, n)
+  x2.link  <- rep(1 + gap.mid - gap.dots, n)
+  y.link   <- y.dots
+  # we initiate the graphics window: no margins and 'butt' lines end
+  op <- par(mar=rep(0, 4), lend=1)
+ leg.y1 <- ifelse(legend, 0, 0.5)
+  plot(NA, xlim=c(0.8, gap.mid+1.2), ylim=c(leg.y1, n+0.5))
+  # we deduce the 'lwd matrix'
+  if (lwd){
+    tab.lwd <- apply(tab, 1, function(x) x / sum(x))
+    tab.lwd <- tab.lwd*lwd0
+  } else {
+    if (missing(lwd0)) lwd0 <- 1 # to avoid too puffy segments
+    tab.lwd <- matrix(lwd0, nrow=n, ncol=n)}
+  # we decude the 'col matrix'
+  if (col){
+    cols <- palette(col.breaks)[as.numeric(cut(tab, breaks = col.breaks))]
+  } else {
+    cols <- rep(col0, n^2)}
+  # since cols is not yet a matrix, allows a parallel coding in 'segments' below
+  tab.cols <- matrix(cols, n, n, byrow=TRUE)
+  # the loop that draws the segments
+  for (i in 1:n){
+    for (j in 1:n){
+      links.FUN(x1.link[i], y.link[i], x2.link[j], y.link[j],
+               lwd = tab.lwd[i, j], col=tab.cols[i, j])}}
+  # we add dots and classes names
+  points(x.dots, y.dots, pch=pch.dots)
+  text(x.dots, y.dots+gap.names, labels=unlist(dimnames(tab)), cex=cex.names)
+  if (legend){
+    text(1, 1/3, labels="True\nGroups", cex=cex.names, font=2)
+    text(1+gap.mid, 1/3, labels="Classified\nGroups", cex=cex.names, font=2)
+  }
+  # we restore the graphics parameters
+  par(op)}
+
+
 ##### end basic plotters
