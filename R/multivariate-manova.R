@@ -108,7 +108,7 @@ Manova.OutCoe <- function(x, fac, test="Hotelling", retain, drop, verbose=TRUE){
 
 #' Pairwise Multitlivariate analyses of variance
 #' 
-#' A wrapper for pairwise \link{Manova}s on \link{Coe} object.
+#' A wrapper for pairwise \link{Manova}s on \link{Coe} objects.
 #' @param Coe a Coe object
 #' @param fac a name (or its id) of a grouping factor in \code{$fac} or a factor
 #' @param verbose to feed \link{Manova}

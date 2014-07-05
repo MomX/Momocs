@@ -646,7 +646,53 @@ getLandmarks.Out <- function(Coo){
 #' @export
 getLandmarks.Opn <- getLandmarks.Out
 
-# remove (a)symmetric variation
+# Symmetry -----------------
+
+#' Calcuates symmetry indices on OutCoe objects
+#' 
+#' For \link{OutCoe} objects obtained with \link{eFourier}, calculates several
+#' indices on the matrix of coefficients: \code{AD}, the sum of absolute values of
+#' harmonic coefficients A and D; \code{BC} same thing for B and C; \code{amp} the
+#' sum of the absolute value of all harmonic coefficients and \code{sym} which is the ratio
+#' of \code{AD} over \code{amp}. See references below for more details.
+#' @param OutCoe [efourier] objects
+#' @return a matrix with 4 colums described above.
+#' @references Below: the first mention, and two applications.
+#' \itemize{
+#' #' \item Iwata, H., Niikura, S., Matsuura, S., Takano, Y., & Ukai, Y. (1998). 
+#' Evaluation of variation of root shape of Japanese radish (Raphanus sativus L.) 
+#' based on image analysis using elliptic Fourier descriptors. Euphytica, 102, 143-149. 
+#' \item Iwata, H., Nesumi, H., Ninomiya, S., Takano, Y., & Ukai, Y. (2002). 
+#' The Evaluation of Genotype x Environment Interactions of Citrus Leaf Morphology 
+#' Using Image Analysis and Elliptic Fourier Descriptors. Breeding Science, 52(2), 
+#' 89-94. doi:10.1270/jsbbs.52.89
+#' \item Yoshioka, Y., Iwata, H., Ohsawa, R., & Ninomiya, S. (2004). 
+#' Analysis of petal shape variation of Primula sieboldii by elliptic fourier descriptors 
+#' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
+#' }
+#' @seealso \link{removeAsymmetric} and \link{removeSymmetric}.
+#' @keywords OutCoe
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 12)
+#' res <- symmetry(bot.f)
+#' hist(res[, "sym"])
+#' @export
+symmetry <- function(OutCoe){UseMethod("symmetry")}
+#' @export
+symmetry.OutCoe <- function(OutCoe){
+  if (OutCoe$method != "eFourier") stop(" * Can only be applied on OutCoe [eFourier] objects.")
+  x <- OutCoe$coe
+  nb.h <- ncol(x)/4
+  AD.ids <- c(1:nb.h, ((nb.h*3 +1):(nb.h*4)))
+  BC.ids <- (nb.h+1):(nb.h*3)
+  AD <- apply(abs(x[, AD.ids]), 1, sum)
+  BC <- apply(abs(x[, BC.ids]), 1, sum)
+  amp <- apply(abs(x), 1, sum)
+  sym <- AD/amp
+  res <- cbind(AD, BC, amp, sym)
+  return(res)}
+
 
 #' Removes asymmetric and symmetric variation on OutCoe objects
 #' 
@@ -668,6 +714,7 @@ getLandmarks.Opn <- getLandmarks.Out
 #' Analysis of petal shape variation of Primula sieboldii by elliptic fourier descriptors 
 #' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
 #' }
+#' @seealso \link{symmetry}.
 #' @examples
 #' data(bot)
 #' botf <- eFourier(bot, 12)

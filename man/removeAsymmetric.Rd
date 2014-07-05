@@ -64,4 +64,7 @@ Analysis of petal shape variation of Primula sieboldii by elliptic fourier descr
 and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
 }
 }
+\seealso{
+\link{symmetry}.
+}
 

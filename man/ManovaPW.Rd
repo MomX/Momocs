@@ -28,7 +28,7 @@ may be very long, see examples):
 }
 }
 \description{
-A wrapper for pairwise \link{Manova}s on \link{Coe} object.
+A wrapper for pairwise \link{Manova}s on \link{Coe} objects.
 }
 \note{
 If the fac passed has only two levels, there is only pair and it is
