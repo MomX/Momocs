@@ -30,7 +30,12 @@ Performs multivariate analysis of variance on \link{Coe} objects.
 }
 \details{
 For outlines, checks if the matrix of coefficients is of full rank, and if not removes the
-higher order harmonics (for Out objects.)
+higher order harmonics (for Out objects).
+
+If OutCoe objects have been normalized, the first harmonic will be removed with a message.
+
+If \link{removeAsymmetric} or \link{removeSymmetric}
+have been used on OutCoe object, the zero-ed harmonics will be removed with a message.
 }
 \note{
 Needs a review #todo.

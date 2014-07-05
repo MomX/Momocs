@@ -5,7 +5,12 @@
 #' Performs multivariate analysis of variance on \link{Coe} objects.
 #' 
 #' For outlines, checks if the matrix of coefficients is of full rank, and if not removes the
-#' higher order harmonics (for Out objects.)
+#' higher order harmonics (for Out objects). 
+#' 
+#' If OutCoe objects have been normalized, the first harmonic will be removed with a message.
+#' 
+#' If \link{removeAsymmetric} or \link{removeSymmetric}
+#' have been used on OutCoe object, the zero-ed harmonics will be removed with a message.
 #' @aliases Manova
 #' @rdname Manova
 #' @param x a \link{Coe} object
@@ -50,13 +55,33 @@ Manova.OutCoe <- function(x, fac, test="Hotelling", retain, drop){
   if (missing(fac)) stop("'fac' must be provided")
   if (!is.factor(fac)) {fac <- OutCoe$fac[, fac]}
   x <- OutCoe$coe
+  cph <- NULL
+  # we check for (a)symetrization
+  if (OutCoe$method == "eFourier"){
+    nb.h <- ncol(x)/4
+    BC <- (nb.h+1):(nb.h*3)
+    AD <- c(1:nb.h, ((nb.h*3 +1):(nb.h*4)))
+    if (sum(x[, BC])==0){
+      x <- x[, -BC]
+      cph <- 2
+      cat(" * B and C harmonics removed (because of removeAsymetric)\n")
+    } else {
+      if (sum(x[, AD])==0){
+        x <- x[, -AD]
+        cph <- 2
+        cat(" * A and D harmonics removed (because of removeSymetric)\n")
+      }
+    }
+  }
+  # we remove normalized harmonics (if any)
   if (missing(drop)) {
     if (OutCoe$norm) {
       drop <- 1
       cat(" * 1st harmonic removed (because of normalization)\n")
     } else {
       drop <- 0 }}
-  cph <- ifelse(OutCoe$method == "eFourier", 4, 2)
+  
+  if (is.null(cph)) { cph <- ifelse(OutCoe$method == "eFourier", 4, 2) }
   nb.h <- ncol(x)/cph
   fr <- nrow(x) - nlevels(fac)
   max.h <- floor(fr/cph)
