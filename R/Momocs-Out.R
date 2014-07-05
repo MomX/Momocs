@@ -646,6 +646,78 @@ getLandmarks.Out <- function(Coo){
 #' @export
 getLandmarks.Opn <- getLandmarks.Out
 
+# remove (a)symmetric variation
+
+#' Removes asymmetric and symmetric variation on OutCoe objects
+#' 
+#' Only for those obtained with \link{eFourier}, otherwise a message is returned.
+#' \code{removeAsymmetric} sets all B and C coefficients to 0; \code{removeSymmetric} sets
+#' all A and D coefficients to 0.
+#' @param OutCoe an OutCoe object
+#' @return an OutCoe object
+#' @references Below: the first mention, and two applications.
+#' \itemize{
+#' #' \item Iwata, H., Niikura, S., Matsuura, S., Takano, Y., & Ukai, Y. (1998). 
+#' Evaluation of variation of root shape of Japanese radish (Raphanus sativus L.) 
+#' based on image analysis using elliptic Fourier descriptors. Euphytica, 102, 143-149. 
+#' \item Iwata, H., Nesumi, H., Ninomiya, S., Takano, Y., & Ukai, Y. (2002). 
+#' The Evaluation of Genotype x Environment Interactions of Citrus Leaf Morphology 
+#' Using Image Analysis and Elliptic Fourier Descriptors. Breeding Science, 52(2), 
+#' 89-94. doi:10.1270/jsbbs.52.89
+#' \item Yoshioka, Y., Iwata, H., Ohsawa, R., & Ninomiya, S. (2004). 
+#' Analysis of petal shape variation of Primula sieboldii by elliptic fourier descriptors 
+#' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
+#' }
+#' @examples
+#' data(bot)
+#' botf <- eFourier(bot, 12)
+#' botSym <- removeAsymmetric(botf)
+#' boxplot(botSym)
+#' botSymp <- PCA(botSym)
+#' plot(botSymp)
+#' plot(botSymp, amp.shp=5)
+#' 
+#' # Asymmetric only
+#' botAsym <- removeSymmetric(botf)
+#' boxplot(botAsym)
+#' botAsymp <- PCA(botAsym)
+#' plot(botAsymp) 
+#' # strange shapes because the original shape was mainly symmetric and would need its
+#' # symmetric (eg its average) for a proper reconstruction. Should only be used like that:
+#' plot(botAsymp, morpho=FALSE)
+#' @rdname removeAsymmetric
+#' @aliases removeSymmetric
+#' @export
+removeAsymmetric <- function(OutCoe){UseMethod("removeAsymmetric")}
+#' @rdname removeAsymmetric
+#' @export
+removeAsymmetric.default <- function(OutCoe){cat(" * Can only be applied on OutCoe objects.")}
+#' @rdname removeAsymmetric
+#' @export
+removeAsymmetric.OutCoe  <- function(OutCoe){
+  if (OutCoe$method != "eFourier") stop(" * Can only be applied on OutCoe [eFourier] objects.")
+  x <- OutCoe$coe
+  nb.h <- ncol(OutCoe$coe)/4
+  zeros <- (nb.h+1):(nb.h*3)
+  OutCoe$coe[, zeros] <- 0
+  return(OutCoe)}
+
+#' @rdname removeAsymmetric
+#' @export
+removeSymmetric <- function(OutCoe){UseMethod("removeSymmetric")}
+#' @rdname removeAsymmetric
+#' @export
+removeSymmetric.default <- function(OutCoe){cat(" * Can only be applied on OutCoe objects.")}
+#' @rdname removeAsymmetric
+#' @export
+removeSymmetric.OutCoe  <- function(OutCoe){
+  if (OutCoe$method != "eFourier") stop(" * Can only be applied on OutCoe [eFourier] objects.")
+  x <- OutCoe$coe
+  nb.h <- ncol(OutCoe$coe)/4
+  zeros <- c(1:nb.h, ((nb.h*3 +1):(nb.h*4)))
+  OutCoe$coe[, zeros] <- 0
+  return(OutCoe)}
+
 #  Bonus ------------------------------------------------------------------
 
 #' Ptolemaic ellipses and illustration of eFourier
