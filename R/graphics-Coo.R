@@ -90,7 +90,7 @@ stack.Coo <- function(x, cols, borders,
   if (length(cols)!=length(Coo)) {
     cols     <- rep(cols[1], length(Coo))}
   if (missing(borders)) {
-    borders     <- rep("#33333355", length(Coo))}
+    borders     <- rep("#33333311", length(Coo))}
   if (length(borders)!=length(Coo)) {
     borders     <- rep(borders[1], length(Coo))}
   op <- par(mar=c(3, 3, 2, 1))

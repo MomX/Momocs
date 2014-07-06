@@ -108,7 +108,8 @@ import.Conte <- function (img, x){
 #' @param jpg.path vector of paths corresponding to the .jpg files to import, such as
 #' those obtained with \link{list.files}.
 #' @param auto.notcentered logical if TRUE random locations will be used until
-#' one of them is (assumed) to be within the shape (because it corresponds to a black pixel);
+#' one of them is (assumed) to be within the shape (because it corresponds to a black pixel) and only if
+#' the middle point is not black;
 #' if FALSE a \link{locator} will be called, and you will have to click on a 
 #' point within the shape.
 #' @param fun.notcentered NULL by default but can accept a function that, when passed with an imagematrix and returns
@@ -154,19 +155,24 @@ import.jpg1 <-
     img[img >  threshold] <- 1
     img[img <= threshold] <- 0
     #   img <- x[dim(x)[1]:1,] #Conte/readJPEG, etc.
-    x <- round(dim(img)/2)
+    # we initialize value with the middle or (1,1)
+    if (missing(fun.notcentered)){
+      x <- round(dim(img)/2)
+    } else {
+      x <- c(1, 1)
+    }
     # while we dont start a black pixel (ie img[x1, x2]==0) to start Conte, we search for it
     while (img[x[1], x[2]] != 0){
       # etiher with a smart function, if provided
-      if (!is.null(fun.notcentered)){
+      if (!missing(fun.notcentered)){
         x <- fun.notcentered(img)} 
       # either randomly picking points
       if (auto.notcentered){
         while (img[x[1], x[2]] != 0) {
           x[1] <- sample(dim(img)[1], 1)
-          x[2] <- sample(dim(img)[2], 1)}
-      } else {
-        # or manually by plotting the image and begging for a click
+          x[2] <- sample(dim(img)[2], 1)}}
+      # or manually by plotting the image and begging for a click
+      if (is.null(fun.notcentered) & !auto.notcentered){
         img.plot(img)
         while (img[x[1], x[2]] != 0) {
           cat(" * Click a point within the shape\n")
@@ -176,8 +182,8 @@ import.jpg1 <-
           if (x[1] < 1)           { x[1] <- 1           }    
           if (x[2] > dim(img)[2]) { x[2] <- dim(img)[2] }
           if (x[2] < 1)           { x[2] <- 1           }
-          # cat(xy, "\t", x, "\n") for tests
-        }
+          }
+        # cat(xy, "\t", x, "\n") here, for tests
       }
     }
     # Then we start import.Conte
@@ -193,6 +199,8 @@ import.jpg1 <-
 #' one of them is (assumed) to be within the shape (because of a black pixel);
 #' if FALSE a \link{locator} will be called, and you will have to click on a 
 #' point within the shape.
+#' @param fun.notcentered NULL by default. Is your shapes are not centered and if a random pick of
+#' a black pixel is not satisfactory. See \link{import.jpg1} help and examples.
 #' @param threshold the threshold value use to binarize the images. Above, pixels
 #' are turned to 1, below to 0.
 #' @param verbose whether to print which file is being treated. Useful to detect problems.
@@ -203,7 +211,7 @@ import.jpg1 <-
 #' See also Momocs' vignettes for data import.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 #' @export
-import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose=TRUE) {
+import.jpg <- function(jpg.paths, auto.notcentered=FALSE, fun.notcentered=NULL, threshold=0.5, verbose=TRUE) {
   cat(" * Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
@@ -211,7 +219,8 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
   res <- list()
   for (i in seq(along=jpg.paths)) {
     res[[i]] <- import.jpg1(jpg.paths[i],
-                            auto.notcentered=auto.notcentered, threshold=threshold)
+                            auto.notcentered=auto.notcentered, fun.notcentered=fun.notcentered, 
+                            threshold=threshold)
     if (verbose) {
       cat(jpg.paths[i], "\n")
     } else {
@@ -228,8 +237,12 @@ import.jpg <- function(jpg.paths, auto.notcentered=FALSE, threshold=0.5, verbose
 #' read the .jpg and plots it. If not provided with an imagematrix, will
 #' ask you to choose interactively a \code{.jpeg} image.
 #' 
+#' \code{img.plot} is used in import functions such as \link{import.jpg1};
+#' \code{img.plot0} does the same job but preserves the \code{par} and plots axes.
+#' 
 #' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
 #' @keywords Import
+#' @rdname img.plot
 #' @export
 img.plot <- function(img){
   # dirty here but made for convenience
@@ -253,6 +266,32 @@ img.plot <- function(img){
   #        frame=TRUE, axes=TRUE, ann=TRUE)
   rasterImage(img, 1, 1, w, h, interpolate=FALSE)
   # rect(1, 1, w, h, col=NA, border="red")
+  .title(paste(w, h, sep=" x "))
+  box()}
+
+#' @rdname img.plot
+#' @export
+img.plot0 <- function(img){
+  # dirty here but made for convenience
+  # to have a fast img plotter..
+  if (missing(img)) {
+    source <- file.choose()
+    img <- readJPEG(source)
+    cat("img.plot('", source, "')\n", sep="")}
+  if (is.character(img)){
+    img <- readJPEG(img)  }
+  if (!is.matrix(img)) { 
+    img <- (img[,,1] + img[,,2] + img[,,3])/3 }
+  #op <- par(mar=rep(4, 4))
+  h <- nrow(img)
+  w <- ncol(img)
+  plot(NA, xlim=c(1, w), ylim=c(1, h), asp=1,
+       frame=TRUE, axes=TRUE, ann=TRUE,
+       xlab="imgmatrix columns ids", ylab="imgmatrix (reversed) row ids")
+  #   plot(NA, xlim=c(1, w), ylim=c(1, h), asp=1,
+  #        frame=TRUE, axes=TRUE, ann=TRUE)
+  rasterImage(img, 1, 1, w, h, interpolate=FALSE)
+  rect(1, 1, w, h, col=NA, border="red")
   .title(paste(w, h, sep=" x "))
   box()}
 
