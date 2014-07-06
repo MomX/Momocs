@@ -156,7 +156,7 @@ import.jpg1 <-
     img[img <= threshold] <- 0
     #   img <- x[dim(x)[1]:1,] #Conte/readJPEG, etc.
     # we initialize value with the middle or (1,1)
-    if (missing(fun.notcentered)){
+    if (is.null(fun.notcentered)){
       x <- round(dim(img)/2)
     } else {
       x <- c(1, 1)
@@ -164,7 +164,7 @@ import.jpg1 <-
     # while we dont start a black pixel (ie img[x1, x2]==0) to start Conte, we search for it
     while (img[x[1], x[2]] != 0){
       # etiher with a smart function, if provided
-      if (!missing(fun.notcentered)){
+      if (!is.function(fun.notcentered)){
         x <- fun.notcentered(img)} 
       # either randomly picking points
       if (auto.notcentered){
