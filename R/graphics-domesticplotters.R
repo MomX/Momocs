@@ -417,30 +417,6 @@ ldk.chull <- function(ldk, col="grey40", lty=1){
 
 # 3. various plotters ------------------------------------------------------
 
-#' Extract structure from filenames
-#' 
-#' A very simple image plotter. If not provided with an imagematrix, will
-#' ask you to choose interactively a \code{.jpeg} image.
-#' 
-#' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
-#' @keywords Import
-#' @export
-img.plot <- function(img){
-  # dirty here but made for convenience
-  # to have a fast img plotter..
-  if (missing(img)) img <- readJPEG(source = file.choose())
-  if (!is.matrix(img)) { 
-    img <- (img[,,1] + img[,,2] + img[,,3])/3 }
-  op <- par(mar=rep(0.25, 4))
-  on.exit(par(op))
-  h <- nrow(img)
-  w <- ncol(img)
-  plot(NA, xlim=c(1, w), ylim=c(1, h), asp=1,
-       frame=FALSE, axes=FALSE, ann=FALSE)
-  rasterImage(img, 1, 1, w, h, interpolate=FALSE)
-  .title(paste(w, h, sep=" x "))
-  box()}
-
 #' Momocs' "oscilloscope" for periodic functions.
 #' 
 #' Shape analysis deals with curve fitting, whether \eqn{x(t)} and \eqn{y(t)}

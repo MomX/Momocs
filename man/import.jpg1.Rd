@@ -3,7 +3,8 @@
 \alias{import.jpg1}
 \title{Extract outline coordinates from a single .jpg file}
 \usage{
-import.jpg1(jpg.path, auto.notcentered = FALSE, threshold = 0.5)
+import.jpg1(jpg.path, auto.notcentered = FALSE, fun.notcentered = NULL,
+  threshold = 0.5)
 }
 \arguments{
 \item{jpg.path}{vector of paths corresponding to the .jpg files to import, such as
@@ -13,6 +14,11 @@ those obtained with \link{list.files}.}
 one of them is (assumed) to be within the shape (because it corresponds to a black pixel);
 if FALSE a \link{locator} will be called, and you will have to click on a
 point within the shape.}
+
+\item{fun.notcentered}{NULL by default but can accept a function that, when passed with an imagematrix and returns
+a numeric of length two that corresponds to a starting point on the imagematrix for the Conte
+algorithm. A \code{while} instruction wraps it, so the function may be wrong in proposing this
+starting position. See the examples below for a quick example.}
 
 \item{threshold}{the threshold value use to binarize the images. Above, pixels
 are turned to 1, below to 0.}
@@ -41,11 +47,15 @@ the 'auto.notcentered' argument. If it's TRUE, some random starting points
 will be tried until on of them is "black" and within the shape; if FALSE
 you will be asked to click on a point within the shape.
 
-Finally, remember that ff the images are not in your working directory,
-\link{list.files} must be called with the argument full.names=TRUE.
+Finally, remember that if the images are not in your working directory,
+\link{list.files} must be called with the argument \code{full.names=TRUE}!
+
+Note that the use of the \code{fun.notcentered} argument will probably leads to serious headaches
+and will probably imply the dissection of these functions: \link{import.Conte}, \link{img.plot} and
+\code{import.jpg} itself
 }
 \seealso{
-\link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
+\link{import.jpg}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 See also Momocs' vignettes for data import.
 }
 \keyword{Import}
