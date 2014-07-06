@@ -1,6 +1,6 @@
 ##### mean shapes on coefficients
-
-#' Mean shape calculation from matrices of coefficients
+# todo: better handling of $slots (eg r2 for Opn, etc.)
+#' Mean shape calculation from Coe objects
 #' 
 #' Calculates mean shapes on matrices of coefficients by groups (if passed with
 #' a "fac") or globally (if not), and on \link{Coe} objects.
@@ -8,7 +8,8 @@
 #' @param Coe a \link{Coe} object
 #' @param fac factor from the $fac slot. See examples below.
 #' @param nb.pts numeric the number of points for calculated shapes
-#' @return a list of matrices of (x,y) coordinates.
+#' @return a list with two components: \code{$Coe} object of the same class, and
+#' \code{$shp} a list of matrices of (x, y) coordinates.
 #' @rdname mshapes
 #' @keywords Multivariate
 #' @seealso \link{mshape} for operations on raw coordinates.
@@ -17,6 +18,9 @@
 #' bot.f <- eFourier(bot, 12)
 #' mshapes(bot.f) # the mean (global) shape
 #' ms <- mshapes(bot.f, "type")
+#' ms$Coe
+#' class(ms$Coe)
+#' ms <- ms$shp
 #' coo.plot(ms$beer)
 #' coo.draw(ms$whisky, border="forestgreen")
 #' tps.arr(ms$whisky, ms$beer) #etc.
@@ -24,12 +28,15 @@
 #' data(olea)
 #' op <- rawPolynomials(subset(olea, view=="VL"), 5)
 #' ms <- mshapes(op, "cep") #etc
-#' panel(Opn(ms), names=TRUE) 
+#' ms$Coe
+#' panel(Opn(ms$shp), names=TRUE) 
 #' 
 #' data(wings)
 #' wp <- fgProcrustes(wings, tol=1e-4)
 #' ms <- mshapes(wp, 1)
-#' panel(Ldk(ms), names=TRUE) #etc.
+#' ms$Coe
+#' panel(Ldk(ms$shp), names=TRUE) #etc.
+#' panel(ms$Coe) # equivalent (except the $fac slot)
 #' 
 #' @export
 mshapes <- function(Coe, fac, nb.pts){UseMethod("mshapes")}
@@ -51,16 +58,21 @@ mshapes.OutCoe <- function(Coe, fac, nb.pts=120){
   
   f <- OutCoe$fac[, fac]
   fl <- levels(f)
-  res <- list()
-  
+  shp <- list()
+  coe <- matrix(NA, nrow=nlevels(f), ncol=ncol(OutCoe$coe), 
+                dimnames=list(fl, colnames(OutCoe$coe)))
   for (i in seq(along=fl)){
     coe.i <- OutCoe$coe[f==fl[i], ]
     if (is.matrix(coe.i)) {
       coe.i <- apply(coe.i, 2, mean)}
+    coe[i, ] <- coe.i
     xf <- coeff.split(cs=coe.i, nb.h=nb.h, cph=4)
-    res[[i]] <- efourier.i(xf, nb.h=nb.h, nb.pts=nb.pts)}
-  names(res) <- fl
-  return(res)}
+    shp[[i]] <- efourier.i(xf, nb.h=nb.h, nb.pts=nb.pts)}
+  names(shp) <- fl
+  Coe2 <- OutCoe
+  Coe2$coe <- coe
+  Coe2$fac <- data.frame(fac=fl)
+  return(list(Coe=Coe2, shp=shp))}
 
 #' @rdname mshapes
 #' @export
@@ -76,16 +88,22 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts=120){
   
   f <- OpnCoe$fac[, fac]
   fl <- levels(f)
-  res <- list()
+  shp <- list()
+  coe <- matrix(NA, nrow=nlevels(f), ncol=ncol(OpnCoe$coe), 
+                dimnames=list(fl, colnames(OpnCoe$coe)))
   mod.mshape <- OpnCoe$mod
   for (i in seq(along=fl)){
     coe.i <- OpnCoe$coe[f==fl[i], ]
     if (is.matrix(coe.i)) {
       coe.i <- apply(coe.i, 2, mean)}
     mod.mshape$coeff <- coe.i
-    res[[i]] <- polynomials.i(mod.mshape)}
-  names(res) <- fl
-  return(res)}
+    coe[i, ] <- coe.i
+    shp[[i]] <- polynomials.i(mod.mshape)}
+  names(shp) <- fl
+  Coe2 <- OpnCoe
+  Coe2$coe <- coe
+  Coe2$fac <- data.frame(fac=fl)
+  return(list(Coe=Coe2, shp=shp))}
 
 #' @rdname mshapes
 #' @export
@@ -97,11 +115,13 @@ mshapes.LdkCoe <- function(Coe, fac, nb.pts=120){
   
   f <- LdkCoe$fac[, fac]
   fl <- levels(f)
-  res <- list()
+  shp <- list()
   for (i in seq(along=fl)){
-    res[[i]] <- mshape(LdkCoe$coo[f==fl[i]])
+    shp[[i]] <- mshape(LdkCoe$coo[f==fl[i]])
     }
-  names(res) <- fl
-  return(res)}
+  names(shp) <- fl
+  Coe2 <- Ldk(shp) # todo, probably wrong
+  Coe2$fac <- data.frame(fac=fl)
+  return(list(Coe=Coe2, shp=shp))}
 
 ##### end mshapes

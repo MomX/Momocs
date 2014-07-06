@@ -457,7 +457,7 @@ print.OutCoe <- function(x, ...){
   cat(" -", harm.nb, "harmonics\n")
   # lets show some of them for a quick inspection
   cat(" - Some harmonic coefficients from random outlines in $coe: \n")
-  row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
+  row.eg <- sort(sample(coo.nb, ifelse(coo.nb<5, coo.nb, 5), replace=FALSE))
   col.eg <- coeff.sel(retain=ifelse(harm.nb > 3, 3, harm.nb), drop=0,
                       nb.h=harm.nb, cph=ifelse(p==1, 4, 2))
   print(signif(OutCoe$coe[row.eg, col.eg], 3))

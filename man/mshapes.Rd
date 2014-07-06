@@ -5,7 +5,7 @@
 \alias{mshapes.OpnCoe}
 \alias{mshapes.OutCoe}
 \alias{mshapes.default}
-\title{Mean shape calculation from matrices of coefficients}
+\title{Mean shape calculation from Coe objects}
 \usage{
 mshapes(Coe, fac, nb.pts)
 
@@ -25,7 +25,8 @@ mshapes(Coe, fac, nb.pts)
 \item{nb.pts}{numeric the number of points for calculated shapes}
 }
 \value{
-a list of matrices of (x,y) coordinates.
+a list with two components: \code{$Coe} object of the same class, and
+\code{$shp} a list of matrices of (x, y) coordinates.
 }
 \description{
 Calculates mean shapes on matrices of coefficients by groups (if passed with
@@ -36,6 +37,9 @@ data(bot)
 bot.f <- eFourier(bot, 12)
 mshapes(bot.f) # the mean (global) shape
 ms <- mshapes(bot.f, "type")
+ms$Coe
+class(ms$Coe)
+ms <- ms$shp
 coo.plot(ms$beer)
 coo.draw(ms$whisky, border="forestgreen")
 tps.arr(ms$whisky, ms$beer) #etc.
@@ -43,12 +47,15 @@ tps.arr(ms$whisky, ms$beer) #etc.
 data(olea)
 op <- rawPolynomials(subset(olea, view=="VL"), 5)
 ms <- mshapes(op, "cep") #etc
-panel(Opn(ms), names=TRUE)
+ms$Coe
+panel(Opn(ms$shp), names=TRUE)
 
 data(wings)
 wp <- fgProcrustes(wings, tol=1e-4)
 ms <- mshapes(wp, 1)
-panel(Ldk(ms), names=TRUE) #etc.
+ms$Coe
+panel(Ldk(ms$shp), names=TRUE) #etc.
+panel(ms$Coe) # equivalent (except the $fac slot)
 }
 \seealso{
 \link{mshape} for operations on raw coordinates.

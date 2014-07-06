@@ -58,7 +58,7 @@ illustrate them using arrows.
 \examples{
 data(bot)
 botF <- eFourier(bot)
-x <- mshapes(botF, "type", nb.pts=80)
+x <- mshapes(botF, "type", nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
 tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)

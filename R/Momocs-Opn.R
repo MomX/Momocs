@@ -250,7 +250,7 @@ print.OpnCoe <- function(x, ...){
       OpnCoe$baseline2[1], "; ",OpnCoe$baseline2[2], ")]\n", sep="")
   # lets show some of them for a quick inspection
   cat(" - Polynomials coefficients from random open outlines in $coe: \n")
-  row.eg <- sort(sample(coo.nb, 5, replace=FALSE))
+  row.eg <- sort(sample(coo.nb, ifelse(coo.nb<5, coo.nb, 5), replace=FALSE))
   print(signif(OpnCoe$coe[row.eg, ], 3))
   cat("etc.\n")
   cat(" - r2 summary ($r2) - min, median, max: ",
