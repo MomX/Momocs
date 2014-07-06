@@ -11,7 +11,8 @@ import.jpg1(jpg.path, auto.notcentered = FALSE, fun.notcentered = NULL,
 those obtained with \link{list.files}.}
 
 \item{auto.notcentered}{logical if TRUE random locations will be used until
-one of them is (assumed) to be within the shape (because it corresponds to a black pixel);
+one of them is (assumed) to be within the shape (because it corresponds to a black pixel) and only if
+the middle point is not black;
 if FALSE a \link{locator} will be called, and you will have to click on a
 point within the shape.}
 

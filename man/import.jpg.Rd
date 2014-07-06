@@ -3,8 +3,8 @@
 \alias{import.jpg}
 \title{Extract outline coordinates from multiple .jpg files}
 \usage{
-import.jpg(jpg.paths, auto.notcentered = FALSE, threshold = 0.5,
-  verbose = TRUE)
+import.jpg(jpg.paths, auto.notcentered = FALSE, fun.notcentered = NULL,
+  threshold = 0.5, verbose = TRUE)
 }
 \arguments{
 \item{jpg.paths}{a vector of paths corresponding to the .jpg files to import.}
@@ -13,6 +13,9 @@ import.jpg(jpg.paths, auto.notcentered = FALSE, threshold = 0.5,
 one of them is (assumed) to be within the shape (because of a black pixel);
 if FALSE a \link{locator} will be called, and you will have to click on a
 point within the shape.}
+
+\item{fun.notcentered}{NULL by default. Is your shapes are not centered and if a random pick of
+a black pixel is not satisfactory. See \link{import.jpg1} help and examples.}
 
 \item{threshold}{the threshold value use to binarize the images. Above, pixels
 are turned to 1, below to 0.}
