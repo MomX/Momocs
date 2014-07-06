@@ -209,6 +209,53 @@ coo.slide.Coo <- function(coo, id1){
     Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][id1] -1)) %% nrow(Coo$coo[[i]])}
   return(Coo)}
 
+#' Slides coordinates in a particular direction
+#' 
+#' Shapes are centered and then, according to direction, the point northwards, southwards,
+#' eastwards or westwards the centroid, becomes the first point with \link{coo.slide}.
+#' @param coo a matrix (or a list) or (x; y) coordinates or a Coo object
+#' @param direction a character among \code{"N"} (by default), \code{"S"}, \code{"E"}, or \code{"W"}.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @keywords ShapeUtilities
+#' @examples
+#' data(bot)
+#' b <- coo.rotate(bot[1], pi/6) # dummy example just to make it obvious
+#' coo.plot(b) # not the first point
+#' coo.plot(coo.slidedirection(b, "N"))
+#' coo.plot(coo.slidedirection(b, "E"))
+#' coo.plot(coo.slidedirection(b, "W"))
+#' coo.plot(coo.slidedirection(b, "S"))
+#' 
+#' # on Coo objects
+#' stack(bot)
+#' stack(coo.slidedirection(bot, "E"))
+#' @export
+coo.slidedirection <- function(coo, direction){UseMethod("coo.slidedirection")}
+#' @export
+coo.slidedirection.default <- function(coo, direction="N"){
+  coo <- coo.check(coo)
+  coo <- coo.center(coo)
+  if (direction == "N"){
+    x0.ed     <- order(abs(coo[, 1]), decreasing = FALSE)
+    id0       <- x0.ed[which(coo[x0.ed, 2]>0)[1]]}
+  if (direction == "S"){
+    x0.ed     <- order(abs(coo[, 1]), decreasing = FALSE)
+    id0       <- x0.ed[which(coo[x0.ed, 2]<0)[1]]}
+  if (direction == "E"){
+    y0.ed     <- order(abs(coo[, 2]), decreasing = FALSE)
+    id0       <- y0.ed[which(coo[y0.ed, 1]>0)[1]]}
+  if (direction == "W"){
+    y0.ed     <- order(abs(coo[, 2]), decreasing = FALSE)
+    id0       <- y0.ed[which(coo[y0.ed, 1]<0)[1]]}
+  coo <- coo.slide(coo, id0)
+  return(coo)}
+
+#' @export
+coo.slidedirection.Coo <- function(coo, direction){
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.slidedirection, direction)
+    return(Coo)}
+
 #' Sample coordinates (among points)
 #'
 #' Sample n coordinates among existing points
