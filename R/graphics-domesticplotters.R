@@ -745,10 +745,10 @@ plotCV.LDA <- function(x, ...){
   plotCV(x$CV.tab, ...)}
 #' @rdname plotCV
 #' @export
-plotCV.default <- function(x, links.FUN = segments,
-                   col=TRUE, col0="black", col.breaks=5, palette=col.summer,
+plotCV.default <- function(x, links.FUN = arrows,
+                   col=TRUE, col0="black", col.breaks=5, palette=col.gallus,
                    lwd=TRUE, lwd0=5,
-                   gap.dots=0.05, pch.dots=20, gap.names=0.15, cex.names=1, legend=TRUE,...){
+                   gap.dots=0.2, pch.dots=20, gap.names=0.25, cex.names=1, legend=TRUE,...){
   # to maintain the generic
   tab <- x
   # we check a bit

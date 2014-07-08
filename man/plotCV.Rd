@@ -9,9 +9,9 @@ plotCV(x, ...)
 
 \method{plotCV}{LDA}(x, ...)
 
-\method{plotCV}{default}(x, links.FUN = segments, col = TRUE,
-  col0 = "black", col.breaks = 5, palette = col.summer, lwd = TRUE,
-  lwd0 = 5, gap.dots = 0.05, pch.dots = 20, gap.names = 0.15,
+\method{plotCV}{default}(x, links.FUN = arrows, col = TRUE,
+  col0 = "black", col.breaks = 5, palette = col.gallus, lwd = TRUE,
+  lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25,
   cex.names = 1, legend = TRUE, ...)
 }
 \arguments{

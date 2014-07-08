@@ -6,13 +6,13 @@
 \alias{LDA.default}
 \title{Linear Discriminant Analysis on Coe objects}
 \usage{
-LDA(x, fac, retain)
+LDA(x, fac, retain, ...)
 
-\method{LDA}{Coe}(x, fac, retain)
+\method{LDA}{Coe}(x, fac, retain, ...)
 
-\method{LDA}{default}(x, fac, retain)
+\method{LDA}{default}(x, fac, retain, ...)
 
-\method{LDA}{PCA}(x, fac, retain = 5)
+\method{LDA}{PCA}(x, fac, retain = 5, ...)
 }
 \arguments{
 \item{x}{a \link{Coe}, or a PCA object}
@@ -20,6 +20,8 @@ LDA(x, fac, retain)
 \item{fac}{the grouping factor (names of one of the $fac column or column id)}
 
 \item{retain}{the number of PC axis to retain for LDA.PCA}
+
+\item{...}{additional arguments to feed \link{lda}}
 }
 \value{
 a "LDA" object on which to apply \link{plot.LDA}, which is a list with components:

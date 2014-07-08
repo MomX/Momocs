@@ -8,6 +8,7 @@
 #' @param x a \link{Coe}, or a PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
 #' @param retain the number of PC axis to retain for LDA.PCA
+#' @param ... additional arguments to feed \link{lda}
 #' @return a "LDA" object on which to apply \link{plot.LDA}, which is a list with components:
 #' \itemize{
 #'  \item \code{x} any \link{Coe} object (or a matrix)
@@ -35,17 +36,17 @@
 #' bot.l
 #' plot(bot.l)
 #' @export
-LDA <- function(x, fac, retain){UseMethod("LDA")}
+LDA <- function(x, fac, retain, ...){UseMethod("LDA")}
 
 #' @rdname LDA
 #' @export
-LDA.Coe <- function(x, fac, retain){
+LDA.Coe <- function(x, fac, retain, ...){
   Coe <- x
   if (missing(fac)) stop(" * no fac provided")
   fac    <- Coe$fac[, fac]
   X      <- as.matrix(Coe$coe)
-  #   if (!missing(retain)) X <- X[, coeff.sel(retain=retain, nb.h = ncol(X)/4, cph=4)]
-  #   cat(class(X))
+  if (!missing(retain) & length(Coe$method)==1 & Coe$method[1]=="eFourier") {
+    X <- X[, coeff.sel(retain=retain, nb.h = ncol(X)/4, cph=4)]}
   remove <- which(apply(X, 2, sd)<1e-10)
   if (length(remove)!=0) {
     cat(" * variables", colnames(X)[remove], "are removed since they are constant.\n")
@@ -53,17 +54,10 @@ LDA.Coe <- function(x, fac, retain){
   } else { remove <- NULL }  
   # now we calculate two lda models with MASS::lda
   # one with
-  mod      <- lda(X, grouping=fac, tol=1e-08)
+  mod      <- lda(X, grouping=fac, tol=1e-08, ...)
   mod.pred <- predict(mod, X)
-  # manual leave-one-out cross validation
-  # dont know why but with CV=TRUE, results are not stable. #todo
-  Xn     <- nrow(X)
-  CV.fac <- factor(levels=levels(fac))
-  for (i in 1:Xn){
-    X.i       <- X[-i, ]
-    fac.i     <- fac[-i  ]
-    mod       <- lda(X.i, fac.i)
-    CV.fac[i] <- predict(mod, X[i,])$class}
+  # leave-one-out cross validation
+  CV.fac <- lda(X, grouping=fac, tol=1e-08, CV=TRUE, ...)$class
   # we build a nice table from it
   CV.tab <- table(fac, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")
@@ -94,7 +88,7 @@ LDA.Coe <- function(x, fac, retain){
 
 #' @rdname LDA
 #' @export
-LDA.default <- function(x, fac, retain){
+LDA.default <- function(x, fac, retain, ...){
   X <- x
   if (!is.matrix(X)) X <- as.matrix(X)
   if (missing(fac)) stop(" * no fac provided")
@@ -102,15 +96,8 @@ LDA.default <- function(x, fac, retain){
   # one with
   mod      <- lda(X, grouping=fac)
   mod.pred <- predict(mod, X)
-  # manual leave-one-out cross validation
-  # dont know why but with CV=TRUE, results are not stable.
-  Xn     <- nrow(X)
-  CV.fac <- factor(levels=levels(fac))
-  for (i in 1:Xn){
-    X.i       <- X[-i, ]
-    fac.i     <- fac[-i  ]
-    mod       <- lda(X.i, fac.i)
-    CV.fac[i] <- predict(mod, X[i,])$class}
+  # leave-one-out cross validation
+  CV.fac <- lda(X, grouping=fac, tol=1e-08, CV=TRUE, ...)$class
   # we build a nice table from it
   CV.tab <- table(fac, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")
@@ -139,7 +126,7 @@ LDA.default <- function(x, fac, retain){
 
 #' @rdname LDA
 #' @export
-LDA.PCA <- function(x, fac, retain=5){
+LDA.PCA <- function(x, fac, retain=5, ...){
   PCA <- x
   if (missing(fac)) stop(" * no fac provided")
   fac    <- PCA$fac[, fac]
@@ -154,17 +141,10 @@ LDA.PCA <- function(x, fac, retain=5){
   X <- as.matrix(X)
   # now we calculate two lda models with MASS::lda
   # one with
-  mod      <- lda(X, grouping=fac)
+  mod      <- lda(X, grouping=fac, tol=1e-08, ...)
   mod.pred <- predict(mod, X)
-  # manual leave-one-out cross validation
-  # dont know why but with CV=TRUE, results are not stable.
-  Xn     <- nrow(X)
-  CV.fac <- factor(levels=levels(fac))
-  for (i in 1:Xn){
-    X.i       <- X[-i, ]
-    fac.i     <- fac[-i  ]
-    mod       <- lda(X.i, fac.i)
-    CV.fac[i] <- predict(mod, X[i,])$class}
+  # leave-one-out cross validation
+  CV.fac <- lda(X, grouping=fac, tol=1e-08, CV=TRUE, ...)$class
   # we build a nice table from it
   CV.tab <- table(fac, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")

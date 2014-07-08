@@ -179,7 +179,7 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
 #' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 #' @export
 rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
-  if (missing(nb.h) &  missing(an)) nb.h <- 1
+  if (missing(nb.h) &  missing(an)) nb.h <- 6
   if (missing(nb.h) & !missing(an)) nb.h <- length(an)
   if (missing(an)) an <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
   if (missing(bn)) bn <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
