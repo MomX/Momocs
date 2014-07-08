@@ -3,7 +3,7 @@
 \alias{import.jpg}
 \title{Extract outline coordinates from multiple .jpg files}
 \usage{
-import.jpg(jpg.paths, auto.notcentered = FALSE, fun.notcentered = NULL,
+import.jpg(jpg.paths, auto.notcentered = TRUE, fun.notcentered = NULL,
   threshold = 0.5, verbose = TRUE)
 }
 \arguments{

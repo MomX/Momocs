@@ -145,7 +145,7 @@ import.Conte <- function (img, x){
 #' @return a matrix of (x; y) coordinates that can be passed to Out
 #' @export
 import.jpg1 <- 
-  function(jpg.path, auto.notcentered=FALSE, fun.notcentered=NULL, threshold=0.5){
+  function(jpg.path, auto.notcentered=TRUE, fun.notcentered=NULL, threshold=0.5){
     img <- readJPEG(jpg.path)
     # if a RVB is provided
     # by the way, apply (img, 1:2, mean) is much slower
@@ -164,7 +164,7 @@ import.jpg1 <-
     # while we dont start a black pixel (ie img[x1, x2]==0) to start Conte, we search for it
     while (img[x[1], x[2]] != 0){
       # etiher with a smart function, if provided
-      if (!is.function(fun.notcentered)){
+      if (!is.null(fun.notcentered)){
         x <- fun.notcentered(img)} 
       # either randomly picking points
       if (auto.notcentered){
@@ -211,16 +211,21 @@ import.jpg1 <-
 #' See also Momocs' vignettes for data import.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 #' @export
-import.jpg <- function(jpg.paths, auto.notcentered=FALSE, fun.notcentered=NULL, threshold=0.5, verbose=TRUE) {
+import.jpg <- function(jpg.paths, auto.notcentered=TRUE, fun.notcentered=NULL, threshold=0.5, verbose=TRUE) {
   cat(" * Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE } else {t <- FALSE}
+  # future safe import
+  #jpg.names <- .trim.path(.trim.ext(jpgs.paths))
   res <- list()
   for (i in seq(along=jpg.paths)) {
-    res[[i]] <- import.jpg1(jpg.paths[i],
-                            auto.notcentered=auto.notcentered, fun.notcentered=fun.notcentered, 
-                            threshold=threshold)
+    coo.i <- import.jpg1(jpg.paths[i],
+                         auto.notcentered=auto.notcentered,
+                         fun.notcentered=fun.notcentered, 
+                         threshold=threshold)
+    res[[i]] <- coo.i
+    #if (export){coo.export(coo.i, jpg.paths[i])}
     if (verbose) {
       cat(jpg.paths[i], "\n")
     } else {
