@@ -111,4 +111,6 @@ col.transp <- function(n, col="#000000"){
   alpha.hex[nchar(alpha.hex)<2] <- paste0("0", alpha.hex[nchar(alpha.hex)<2])
   return(paste0(cols, alpha.hex))}
 
+#' @export
+.cex <- function(x){3/(log(x+1)+1)}
 ##### end colors graphics
