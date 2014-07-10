@@ -153,7 +153,6 @@ dim.Coo <- function(x){
 dim.Coe <- function(x){
   return(dim(x$coe))}
 
-
 # names() on a Coo retrieves the names of the Coo$coo
 #' @export
 names.Coo <- function(x){
