@@ -70,7 +70,7 @@
 
 #add labels
 #' @export
-.labels <- function(xy, fac, col){
+.labelsgroups <- function(xy, fac, col, cex=0.8, rect=TRUE, abbreviate=FALSE){
   cent <- matrix(NA, nlevels(fac), 2)
   for (i in seq(along=levels(fac))) {
     cent.i <- xy[fac==levels(fac)[i], ]
@@ -80,7 +80,19 @@
 #   if (thigmophobe & nlevels(fac)>2){
 #     thigmophobe.labels(cent[, 1], cent[, 2], labels = levels(fac), col=col)
 #   } else {
-    text(cent[, 1], cent[, 2], labels=levels(fac), col=col, pos=3, cex=0.8)
+    labels <- levels(fac)
+    if (abbreviate) labels <- abbreviate(labels, minlength = 1)
+    p <- strheight(labels[1])
+    if (rect){
+      if (abbreviate) labels <- abbreviate(labels, minlength = 1)
+      w <- strwidth(labels, cex=cex)
+      h <- strheight(labels, cex=cex)
+      rect(xleft  = cent[, 1]-w/2 -p, ybottom = cent[, 2]-h/2 +p,
+           xright = cent[, 1]+w/2 +p, ytop    = cent[, 2]+h/2 +p,
+           col = .transp("#FFFFFF", 0.5), border = NA)
+      text(cent[, 1], cent[, 2] +p, labels=labels, cex=cex, col=col)
+    } else {
+    text(cent[, 1], cent[, 2] +p, labels=labels, col=col, cex=cex)}
 # }
 }
 
@@ -124,27 +136,30 @@
 #names axes
 #' @export
 .axisnames <- function(xax, yax, nax="PC"){
-  gx <- strwidth("PCN")/1.75
-  gy <- strheight("PCN")/1.8
-  text(par("usr")[2]-gx, gy, col="grey40", cex=0.8,
-       labels=paste0(nax, xax))
-  text(-gy, par("usr")[4]-gx, col="grey40",cex=0.8,
-       labels=paste0(nax, yax), srt=90)}
+  cex <- 0.7
+  #gx <- strwidth("PCN", cex=cex)/1.5
+  gy <- strheight("PCN", cex=cex)/1.5
+  gx <- strwidth("00.0%", cex=cex)/1.5 # center / relatively to var %
+  text(par("usr")[2]-gx, gy,  col="grey40", cex=cex, labels=paste0(nax, xax))
+  text(-gy, par("usr")[4]-gx, col="grey40", cex=cex, labels=paste0(nax, yax), srt=90)}
 
 #adds var captured
 #' @export
 .axisvar <- function(ev, xax, yax){
+  cex <- 0.7
   var <- ev^2
   var <- signif(100*var/sum(var), 3)
-  gx <- strwidth("00.0%")/1.75
-  gy <- strheight("00.0%")/1.8
-  text(par("usr")[2]-gx, -gy, col="grey40", cex=0.8,
-       labels=paste0(var[xax], "%"))
-  text(+gy, par("usr")[4]-gx, col="grey40",cex=0.8,
-       labels=paste0(var[yax], "%"), srt=90)}
+  gx <- strwidth("00.0%", cex=cex)/1.5
+  gy <- strheight("00.0%", cex=cex)/1.5
+  text(par("usr")[2]-gx, -gy, col="grey40", cex=cex, labels=paste0(var[xax], "%"))
+  text(+gy, par("usr")[4]-gx, col="grey40", cex=cex, labels=paste0(var[yax], "%"), srt=90)}
 
 #adds title to plots
 #' @export
 .title <- function(title){
   pos <- par("usr")
-  text(pos[1], pos[3]+ strheight(title), labels=title, pos=4)}
+  gy <- strheight(title, font=2)/0.8
+  gx <- strheight(title, font=2)/2
+  text(pos[1] + gx + gy, pos[3] + gy, labels=title, font=2)}
+
+##### end layers
