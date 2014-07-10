@@ -8,10 +8,12 @@
   grid = TRUE, nb.grids = 3, morphospace = TRUE, pos.shp = "full",
   amp.shp = 1, size.shp = 15, nb.shp = 12, nr.shp = 6, nc.shp = 5,
   pts.shp = 60, border.shp = "#00000088", col.shp = "#00000011",
-  stars = FALSE, ellipses = TRUE, conf = 0.5, ellipsesax = FALSE,
-  lty.ellipsesax = 2, chull = TRUE, chull.lty = 3, loadings = FALSE,
-  labels = TRUE, axisnames = TRUE, axisvar = TRUE, eigen = TRUE,
-  rug = TRUE, title = substitute(x), ...)
+  stars = FALSE, ellipses = FALSE, conf.ellipses = 0.5,
+  ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75), lwd.ellipsesax = 1,
+  lty.ellipsesax = 1, chull = FALSE, chull.lty = 3, loadings = FALSE,
+  labelsgroups = TRUE, cex.labelsgroups = 0.8,
+  abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
+  eigen = TRUE, rug = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
@@ -65,11 +67,15 @@ or a data.frame for \link{pos.shapes}}
 
 \item{ellipses}{logical whether to draw confidence ellipses}
 
-\item{conf}{the level of confidence}
+\item{conf.ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
 
 \item{ellipsesax}{logical whether to draw ellipse axes}
 
-\item{lty.ellipsesax}{if yes, the lty for them}
+\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussiance) ellipses axes}
+
+\item{lwd.ellipsesax}{if yes, a numeric the line width (being squared) for the lower conf.ellipsesax value}
+
+\item{lty.ellipsesax}{if yes, the lty with which to draw these axes}
 
 \item{chull}{logical whether to draw a convex hull}
 
@@ -77,7 +83,11 @@ or a data.frame for \link{pos.shapes}}
 
 \item{loadings}{logical whether to add loadings for every variables}
 
-\item{labels}{logical whether to add labels for groups}
+\item{labelsgroups}{logical whether to add labels for groups}
+
+\item{cex.labelsgroups}{ifyes, a numeric for the size of the labels}
+
+\item{abbreviate.labelsgroups}{if yes, whether to abbreviate group names}
 
 \item{axisnames}{logical whether to add PC names}
 

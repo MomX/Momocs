@@ -9,8 +9,9 @@
   size.shp = 20, pts.shp = 60, border.shp = "#00000055",
   col.shp = "#00000011", stars = FALSE, ellipses = FALSE, conf = 0.5,
   ellipsesax = FALSE, lty.ellipsesax = 2, chull = TRUE, chull.lty = 3,
-  labels = TRUE, axisnames = TRUE, axisvar = TRUE, eigen = TRUE,
-  rug = TRUE, title = substitute(x), ...)
+  labelsgroups = TRUE, cex.labelsgroups = 0.8,
+  abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
+  eigen = TRUE, rug = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{an object of class "LDA", typically obtained with \link{LDA}}
@@ -66,7 +67,11 @@ or a data.frame for \link{pos.shapes}}
 
 \item{chull.lty}{if yes, its linetype}
 
-\item{labels}{logical whether to add labels for groups}
+\item{labelsgroups}{logical whether to add labels for groups}
+
+\item{cex.labelsgroups}{ifyes, a numeric for the size of the labels}
+
+\item{abbreviate.labelsgroups}{if yes, whether to abbreviate group names}
 
 \item{axisnames}{logical whether to add PC names}
 

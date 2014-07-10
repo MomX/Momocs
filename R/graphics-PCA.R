@@ -1,5 +1,10 @@
 ##### PCA plotters
 
+### if high nb of group or if long, abbreviate auto
+### change labelsgroups in lda
+### cahnge confell in lda
+### integrate .cex
+
 #todo: add deformation grids on the extreme PC axes (pos / meanshape)
 #' Plots Principal Component Analysis
 #' 
@@ -32,13 +37,17 @@
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
-#' @param conf the level of confidence
+#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses 
 #' @param ellipsesax logical whether to draw ellipse axes
-#' @param lty.ellipsesax if yes, the lty for them
+#' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussiance) ellipses axes
+#' @param lwd.ellipsesax if yes, a numeric the line width (being squared) for the lower conf.ellipsesax value
+#' @param lty.ellipsesax if yes, the lty with which to draw these axes
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
 #' @param loadings logical whether to add loadings for every variables
-#' @param labels logical whether to add labels for groups
+#' @param labelsgroups logical whether to add labels for groups
+#' @param cex.labelsgroups ifyes, a numeric for the size of the labels
+#' @param abbreviate.labelsgroups if yes, whether to abbreviate group names
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
 #' @param eigen logical whether to draw a plot of the eigen values
@@ -83,13 +92,15 @@ plot.PCA <- function(#basics
   #stars
   stars=FALSE,
   #ellipses
-  ellipses=TRUE, conf=0.5, ellipsesax=FALSE, lty.ellipsesax=2,
+  ellipses=FALSE, conf.ellipses=0.5,
+  #ellipsesax
+  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75), lwd.ellipsesax=1, lty.ellipsesax=1,
   #convexhulls
-  chull=TRUE, chull.lty=3,
+  chull=FALSE, chull.lty=3,
   #loadings
   loadings=FALSE,
   #labels
-  labels=TRUE,
+  labelsgroups=TRUE, cex.labelsgroups=0.8, abbreviate.labelsgroups=FALSE,
   #axisnames
   axisnames=TRUE,
   #axisvar
@@ -130,10 +141,11 @@ plot.PCA <- function(#basics
                     col.shp=col.shp, border.shp=border.shp)}
   if (!missing(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
-    if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
-    if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
+    if (ellipsesax) .ellipsesax(xy, fac, conf.ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
+    if (ellipses)   .ellipses(xy, fac, conf.ellipses, col.groups) #+conf
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
-    if (labels)     .labels(xy, fac, col.groups)
+    if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
+                                        cex=cex.labelsgroups, abbreviate=abbreviate.labelsgroups)     
     if (rug)        .rug(xy, fac, col.groups)
   } else {
     if (rug)        .rug(xy, NULL, col)

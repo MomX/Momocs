@@ -32,7 +32,9 @@
 #' @param lty.ellipsesax if yes, the lty for them
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
-#' @param labels logical whether to add labels for groups
+#' @param labelsgroups logical whether to add labels for groups
+#' @param cex.labelsgroups ifyes, a numeric for the size of the labels
+#' @param abbreviate.labelsgroups if yes, whether to abbreviate group names
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
 #' @param eigen logical whether to draw a plot of the eigen values
@@ -71,7 +73,7 @@ plot.LDA <- function(#basics
   #convexhulls
   chull=TRUE, chull.lty=3,
   #labels
-  labels=TRUE,
+  labelsgroups=TRUE, cex.labelsgroups=0.8, abbreviate.labelsgroups=FALSE,
   #axisnames
   axisnames=TRUE,
   #axisvar
@@ -139,7 +141,8 @@ plot.LDA <- function(#basics
   if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
   if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
   if (chull)      .chull(xy, fac, col.groups, chull.lty)
-  if (labels)     .labels(xy, fac, col.groups)
+  if (labelsgroups)     .labelsgroups(xy, fac, col.groups, 
+                                      cex=cex.labelsgroups, abbreviate=abbreviate.labelsgroups)
   if (rug)        .rug(xy, fac, col.groups)
   points(xy, pch=pch, col=col, cex=cex)
   if (axisnames)  .axisnames(xax, yax, "LD")
