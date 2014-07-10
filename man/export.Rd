@@ -2,7 +2,7 @@
 \name{export}
 \alias{export}
 \alias{export.Coe}
-\title{Export Coe objets}
+\title{Export Coe objects and shapes}
 \usage{
 export(x, file, sep, dec)
 
@@ -46,6 +46,9 @@ export(bot.f) # data.txt which can be opened by every software including MS Exce
 # and for use in Excel.
 export(bot.f, dec=",")
 export(bot.f, file="data.xls", dec=",")
+
+# for shapes (matrices)
+ export(bot[1], file="bot1.txt")
 }
 }
 \keyword{Babel}

@@ -1,6 +1,6 @@
 ##### export functions and methods for use in foreign programs
 
-#' Export Coe objets
+#' Export Coe objects and shapes
 #' 
 #' Writes a \code{.txt} or \code{.xls} or whatever readable from a \link{Coe}
 #' object, along with individual names and grouping factors. A simple wrapper
@@ -33,6 +33,9 @@
 #' # and for use in Excel.
 #' export(bot.f, dec=",") 
 #' export(bot.f, file="data.xls", dec=",")
+#' 
+#' # for shapes (matrices)
+#'  export(bot[1], file="bot1.txt")
 #' }
 #' @rdname export
 #' @export
@@ -43,5 +46,11 @@ export.Coe <- function(x, file="data.txt", sep="\t", dec="."){
   data <- cbind(name=rownames(x$coe), x$fac, x$coe)
   write.table(data, file=file, row.names=FALSE, col.names=TRUE, quote=FALSE, sep=sep, dec=dec)
   cat(" * File written:", file, "\n")}
+
+#' @export
+export.matrix <- function(x, file="data.txt", sep="\t", dec="."){
+  colnames(x) <- c("x", "y")
+  write.table(x=x, file = file,
+              quote = FALSE, row.names = FALSE, col.names = TRUE, sep="\t", dec=".")}
 
 ##### end export
