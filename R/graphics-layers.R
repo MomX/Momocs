@@ -1,5 +1,8 @@
+##### Functions for graphical layers
+# The loops for the fac handling are neither
+# the most orthodox nor the fastest option
+# but are pretty readable and easy to write as a first approach.
 
-# 3. Graphics subfunctions -----------------------------------------------------------------------
 #create an empty frame
 #' @export
 .frame <- function(xy, center.origin=FALSE, zoom=1){
@@ -24,12 +27,12 @@
 #' @export
 .rug <- function(xy, fac, col){
   if (is.null(fac)) {
-    rug(xy[, 1], ticksize=0.01, side=1, col="black")
-    rug(xy[, 2], ticksize=0.01, side=2, col="black")
+    rug(xy[, 1], ticksize=0.005, side=1, col="black", quiet=TRUE)
+    rug(xy[, 2], ticksize=0.005, side=2, col="black", quiet=TRUE)
   } else {
     for (i in seq(along=levels(fac))) {
-      rug(xy[fac==levels(fac)[i], 1], ticksize=0.01, lwd=1, side=1, col=col[i])
-      rug(xy[fac==levels(fac)[i], 2], ticksize=0.01, lwd=1,  side=2, col=col[i])}}}
+      rug(xy[fac==levels(fac)[i], 1], ticksize=0.005, lwd=1, side=1, col=col[i], quiet=TRUE)
+      rug(xy[fac==levels(fac)[i], 2], ticksize=0.005, lwd=1,  side=2, col=col[i], quiet=TRUE)}}}
 
 #confidence ellipses
 #' @export
@@ -44,16 +47,16 @@
 
 #confidence ellipses
 #' @export
-.ellipsesax <- function(xy, fac, conf, col, lty){
+.ellipsesax <- function(xy, fac, conf, col, lty, lwd=1){
   for (i in seq(along=levels(fac))) {
     pts.i <- xy[fac==levels(fac)[i], ]
     if (is.matrix(pts.i)) {
       if (nrow(pts.i)>1) {
         seg.i <- conf.ell(x=pts.i, conf=conf, nb.pts=720)$seg
         segments(seg.i[1, 1], seg.i[1, 2],
-                 seg.i[2, 1], seg.i[2, 2], lty=lty, col=col[i])
+                 seg.i[2, 1], seg.i[2, 2], lty=lty, col=col[i], lwd=lwd)
         segments(seg.i[3, 1], seg.i[3, 2],
-                 seg.i[4, 1], seg.i[4, 2], lty=lty, col=col[i])}}}}
+                 seg.i[4, 1], seg.i[4, 2], lty=lty, col=col[i], lwd=lwd)}}}}
 
 #convex hulls
 #' @export
@@ -68,11 +71,18 @@
 #add labels
 #' @export
 .labels <- function(xy, fac, col){
+  cent <- matrix(NA, nlevels(fac), 2)
   for (i in seq(along=levels(fac))) {
     cent.i <- xy[fac==levels(fac)[i], ]
     if (is.matrix(cent.i)){
       cent.i <- coo.centpos(xy[fac==levels(fac)[i], ])}
-    text(cent.i[1], cent.i[2], labels=levels(fac)[i], col=col[i], pos=3, cex=0.8)}}
+    cent[i, ] <- cent.i}
+#   if (thigmophobe & nlevels(fac)>2){
+#     thigmophobe.labels(cent[, 1], cent[, 2], labels = levels(fac), col=col)
+#   } else {
+    text(cent[, 1], cent[, 2], labels=levels(fac), col=col, pos=3, cex=0.8)
+# }
+}
 
 #add 'stars'
 #' @export
