@@ -233,7 +233,8 @@ vecs.param <- function(r1, i1, r2, i2){
 #'@export
 .refactor <- function(df){data.frame(lapply(df, factor))}
 #' @export
-.trim.ext <- function(lf, width=nchar(lf)-4) {return(strtrim(lf, width=width))}
+.trim.ext <- function(lf, width=nchar(lf)-4) {
+  return(strtrim(lf, width=width))}
 #' @export
 .trim.path <- function(lf){
   lf0 <- strsplit(lf, "/")
