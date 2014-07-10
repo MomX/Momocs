@@ -240,5 +240,10 @@ vecs.param <- function(r1, i1, r2, i2){
   lf0 <- sapply(lf0, function(x) x[length(x)])
   lf0 <- substr(lf0, 1, nchar(lf0)-4)
 return(lf0)}
+#' @export
+.normalize <- function(x){
+  x <- x-min(x)
+  return(x/max(x))}
+
 
 ##### End Miscellaneous
