@@ -40,15 +40,15 @@
 #' @param ellipses logical whether to draw confidence ellipses
 #' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses 
 #' @param ellipsesax logical whether to draw ellipse axes
-#' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussiance) ellipses axes
-#' @param lwd.ellipsesax if yes, a numeric the line width (being squared) for the lower conf.ellipsesax value
+#' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
+#' @param lwd.ellipsesax if yes, one or more numeric for the line widths
 #' @param lty.ellipsesax if yes, the lty with which to draw these axes
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
 #' @param density whether to add a 2d density kernel estimation (based on \link{kde2d})
-#' @param density.lev if yes, the number of levels to plot (through \link{image})
+#' @param lev.density if yes, the number of levels to plot (through \link{image})
 #' @param contour whether to add contour lines based on 2d density kernel
-#' @param contour.lev if yes, the (approximate) number of lines to draw
+#' @param lev.contour if yes, the (approximate) number of lines to draw
 #' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
 #' @param delaunay logical whether to add a delaunay 'mesh' between points
 #' @param loadings logical whether to add loadings for every variables
@@ -102,12 +102,12 @@ plot.PCA <- function(#basics
   #ellipses
   ellipses=FALSE, conf.ellipses=0.5,
   #ellipsesax
-  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75), lwd.ellipsesax=1, lty.ellipsesax=1,
+  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
   #convexhulls
   chull=FALSE, chull.lty=3,
   #kde2d
-  density=FALSE, density.lev=20,
-  contour = FALSE, contour.lev=3, n.kde2d=100,
+  density=FALSE, lev.density=20,
+  contour = FALSE, lev.contour=3, n.kde2d=100,
   #delaunay
   delaunay=FALSE,
   #loadings
@@ -146,6 +146,10 @@ plot.PCA <- function(#basics
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }}}
   
+  # cosmectics
+  if ((density) & missing(contour)) contour <- TRUE
+  if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
+  if (missing(rug) & nlevels(fac)>6) rug <- FALSE
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
   on.exit(par(opar))
@@ -155,8 +159,8 @@ plot.PCA <- function(#basics
   .frame(xy, center.origin, zoom=zoom)
   # then the layers
   if (grid)    .grid(nb.grids)
-  if (density) .density(xy, fac, density.lev= density.lev, col=col.groups, n.kde2d=n.kde2d)
-  if (contour) .contour(xy, fac, contour.lev= contour.lev, col=col.groups, n.kde2d=n.kde2d)
+  if (density) .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
+  if (contour) .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
   if (delaunay) .delaunay(xy, fac, col)
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<2) {

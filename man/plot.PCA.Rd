@@ -9,10 +9,10 @@
   pos.shp = "full", amp.shp = 1, size.shp = 15, nb.shp = 12,
   nr.shp = 6, nc.shp = 5, pts.shp = 60, border.shp = "#00000032",
   lwd.shp = 1, col.shp = "#00000019", stars = FALSE, ellipses = FALSE,
-  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75),
-  lwd.ellipsesax = 1, lty.ellipsesax = 1, chull = FALSE, chull.lty = 3,
-  density = FALSE, density.lev = 20, contour = FALSE, contour.lev = 3,
-  n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
+  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75,
+  0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
+  chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
+  lev.contour = 3, n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
   labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = TRUE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
   eigen = TRUE, rug = TRUE, title = substitute(x), ...)
@@ -75,9 +75,9 @@ or a data.frame for \link{pos.shapes}}
 
 \item{ellipsesax}{logical whether to draw ellipse axes}
 
-\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussiance) ellipses axes}
+\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
 
-\item{lwd.ellipsesax}{if yes, a numeric the line width (being squared) for the lower conf.ellipsesax value}
+\item{lwd.ellipsesax}{if yes, one or more numeric for the line widths}
 
 \item{lty.ellipsesax}{if yes, the lty with which to draw these axes}
 
@@ -87,11 +87,11 @@ or a data.frame for \link{pos.shapes}}
 
 \item{density}{whether to add a 2d density kernel estimation (based on \link{kde2d})}
 
-\item{density.lev}{if yes, the number of levels to plot (through \link{image})}
+\item{lev.density}{if yes, the number of levels to plot (through \link{image})}
 
 \item{contour}{whether to add contour lines based on 2d density kernel}
 
-\item{contour.lev}{if yes, the (approximate) number of lines to draw}
+\item{lev.contour}{if yes, the (approximate) number of lines to draw}
 
 \item{n.kde2d}{the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel}
 
