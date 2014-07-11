@@ -3,15 +3,17 @@
 \alias{plot.PCA}
 \title{Plots Principal Component Analysis}
 \usage{
-\method{plot}{PCA}(x, fac, xax = 1, yax = 2, col = "black", pch = 20,
-  cex = 0.3, palette = col.autumn, center.origin = FALSE, zoom = 1,
-  grid = TRUE, nb.grids = 3, morphospace = TRUE, pos.shp = "full",
-  amp.shp = 1, size.shp = 15, nb.shp = 12, nr.shp = 6, nc.shp = 5,
-  pts.shp = 60, border.shp = "#00000088", col.shp = "#00000011",
-  stars = FALSE, ellipses = FALSE, conf.ellipses = 0.5,
-  ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75), lwd.ellipsesax = 1,
-  lty.ellipsesax = 1, chull = FALSE, chull.lty = 3, loadings = FALSE,
-  labelsgroups = TRUE, cex.labelsgroups = 0.8,
+\method{plot}{PCA}(x, fac, xax = 1, yax = 2, col = "#000000", pch = 20,
+  cex = .cex(nrow(PCA$x)), palette = col.autumn, center.origin = FALSE,
+  zoom = 1, grid = TRUE, nb.grids = 3, morphospace = TRUE,
+  pos.shp = "full", amp.shp = 1, size.shp = 15, nb.shp = 12,
+  nr.shp = 6, nc.shp = 5, pts.shp = 60, border.shp = "#00000032",
+  lwd.shp = 1, col.shp = "#00000019", stars = FALSE, ellipses = FALSE,
+  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75),
+  lwd.ellipsesax = 1, lty.ellipsesax = 1, chull = FALSE, chull.lty = 3,
+  density = FALSE, density.lev = 20, contour = FALSE, contour.lev = 3,
+  n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
+  labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = TRUE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
   eigen = TRUE, rug = TRUE, title = substitute(x), ...)
 }
@@ -61,6 +63,8 @@ or a data.frame for \link{pos.shapes}}
 
 \item{border.shp}{the border color of the shapes}
 
+\item{lwd.shp}{the line width for these shapes}
+
 \item{col.shp}{the color of the shapes}
 
 \item{stars}{logical whether to draw "stars"}
@@ -81,11 +85,25 @@ or a data.frame for \link{pos.shapes}}
 
 \item{chull.lty}{if yes, its linetype}
 
+\item{density}{whether to add a 2d density kernel estimation (based on \link{kde2d})}
+
+\item{density.lev}{if yes, the number of levels to plot (through \link{image})}
+
+\item{contour}{whether to add contour lines based on 2d density kernel}
+
+\item{contour.lev}{if yes, the (approximate) number of lines to draw}
+
+\item{n.kde2d}{the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel}
+
+\item{delaunay}{logical whether to add a delaunay 'mesh' between points}
+
 \item{loadings}{logical whether to add loadings for every variables}
 
 \item{labelsgroups}{logical whether to add labels for groups}
 
 \item{cex.labelsgroups}{ifyes, a numeric for the size of the labels}
+
+\item{rect.labelsgroups}{logical whether to add a rectangle behind groups names}
 
 \item{abbreviate.labelsgroups}{if yes, whether to abbreviate group names}
 
