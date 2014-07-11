@@ -3,17 +3,13 @@
 \alias{ldk.links}
 \title{Draws links between landmarks}
 \usage{
-ldk.links(ldk, links, col = "black", pch = 20, ...)
+ldk.links(ldk, links, ...)
 }
 \arguments{
 \item{ldk}{a matrix of (x; y) coordinates}
 
 \item{links}{a matrix of links. On the first column the starting-id,
 on the second column the ending-id (id= the number of the coordinate)}
-
-\item{col}{a color to draw the links}
-
-\item{pch}{a pch for the edges}
 
 \item{...}{additional parameters to fed \link{segments}}
 }
