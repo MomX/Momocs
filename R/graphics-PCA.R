@@ -34,6 +34,7 @@
 #' @param nr.shp (pos.shp="full" or "range) the number of shapes per row
 #' @param pts.shp the number of points fro drawing shapes
 #' @param border.shp the border color of the shapes
+#' @param lwd.shp the line width for these shapes
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
@@ -44,9 +45,16 @@
 #' @param lty.ellipsesax if yes, the lty with which to draw these axes
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
+#' @param density whether to add a 2d density kernel estimation (based on \link{kde2d})
+#' @param density.lev if yes, the number of levels to plot (through \link{image})
+#' @param contour whether to add contour lines based on 2d density kernel
+#' @param contour.lev if yes, the (approximate) number of lines to draw
+#' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
+#' @param delaunay logical whether to add a delaunay 'mesh' between points
 #' @param loadings logical whether to add loadings for every variables
 #' @param labelsgroups logical whether to add labels for groups
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
+#' @param rect.labelsgroups logical whether to add a rectangle behind groups names
 #' @param abbreviate.labelsgroups if yes, whether to abbreviate group names
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
@@ -80,7 +88,7 @@
 plot.PCA <- function(#basics
   x, fac, xax=1, yax=2, 
   #color choice
-  col="black", pch=20, cex=0.3, palette=col.autumn,
+  col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.autumn,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -88,7 +96,7 @@ plot.PCA <- function(#basics
   #shapes
   morphospace=TRUE, pos.shp="full", amp.shp=1,
   size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
-  pts.shp=60, border.shp="#00000088", col.shp="#00000011",
+  pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
   #stars
   stars=FALSE,
   #ellipses
@@ -97,10 +105,15 @@ plot.PCA <- function(#basics
   ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75), lwd.ellipsesax=1, lty.ellipsesax=1,
   #convexhulls
   chull=FALSE, chull.lty=3,
+  #kde2d
+  density=FALSE, density.lev=20,
+  contour = FALSE, contour.lev=3, n.kde2d=100,
+  #delaunay
+  delaunay=FALSE,
   #loadings
   loadings=FALSE,
   #labels
-  labelsgroups=TRUE, cex.labelsgroups=0.8, abbreviate.labelsgroups=FALSE,
+  labelsgroups=TRUE, cex.labelsgroups=0.8, rect.labelsgroups=TRUE, abbreviate.labelsgroups=FALSE,
   #axisnames
   axisnames=TRUE,
   #axisvar
@@ -113,8 +126,11 @@ plot.PCA <- function(#basics
 ){
   PCA <- x
   xy <- PCA$x[, c(xax, yax)]
-  # we check and prepare
-  if (!missing(fac)) {
+  # we check and prepare evrtything related to groups
+  if (missing(fac)) { # mainly for density and contour
+    fac <- NULL
+    col.groups <- col
+  } else {
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
     if (!missing(col)){
       if (length(col)==nlevels(fac)) {
@@ -129,29 +145,39 @@ plot.PCA <- function(#basics
     } 
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }}}
+  
+  # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
   on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
   
+  # we initate it
   .frame(xy, center.origin, zoom=zoom)
-  if (grid) .grid(nb.grids)
+  # then the layers
+  if (grid)    .grid(nb.grids)
+  if (density) .density(xy, fac, density.lev= density.lev, col=col.groups, n.kde2d=n.kde2d)
+  if (contour) .contour(xy, fac, contour.lev= contour.lev, col=col.groups, n.kde2d=n.kde2d)
+  if (delaunay) .delaunay(xy, fac, col)
+  # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<2) {
-    .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp, nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
+    .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+                    nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                    col.shp=col.shp, border.shp=border.shp)}
-  if (!missing(fac)) {
+                    col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)}
+  if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
     if (ellipsesax) .ellipsesax(xy, fac, conf.ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
     if (ellipses)   .ellipses(xy, fac, conf.ellipses, col.groups) #+conf
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
     if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
-                                        cex=cex.labelsgroups, abbreviate=abbreviate.labelsgroups)     
+                                        cex=cex.labelsgroups, rect=rect.labelsgroups,
+                                        abbreviate=abbreviate.labelsgroups)     
     if (rug)        .rug(xy, fac, col.groups)
   } else {
     if (rug)        .rug(xy, NULL, col)
   }
   points(xy, pch=pch, col=col, cex=cex)
-    if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
+  if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
   .title(title)
