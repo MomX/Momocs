@@ -80,6 +80,7 @@ col.summer2 <- colorRampPalette(c("#781C81", "#413B93", "#4065B1", "#488BC2",
 #' To ease transparency handling.
 #' @param n the number of colors to generate
 #' @param col a color in hexadecimal format on which to generate levels of transparency
+#' @param ceiling the maximal opacity (from 0 to 1)
 #' @param cols on or more colors, provided as hexadecimal values
 #' @param transp numeric between 0 and 1, the value of the transparency to obtain
 #' @rdname colors_transp
@@ -98,8 +99,8 @@ col.summer2 <- colorRampPalette(c("#781C81", "#413B93", "#4065B1", "#488BC2",
 #' barplot(x, col=summer10.transp8)
 #' barplot(x/2, col=summer10.transp2, add=TRUE)
 #' @export
-col.transp <- function(n, col="#000000"){
-  alpha.int <- as.integer(seq(0, 255, length=n))
+col.transp <- function(n, col="#000000", ceiling=1){
+  alpha.int <- as.integer(seq(0, 255*ceiling, length=n))
   alpha.hex <- as.character(as.hexmode(alpha.int))
   alpha.hex[nchar(alpha.hex)<2] <- paste0("f", alpha.hex[nchar(alpha.hex)<2])
   return(paste0(col, alpha.hex))}
