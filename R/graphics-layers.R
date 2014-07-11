@@ -20,8 +20,10 @@
   m <- max(abs(par("usr")))
   g <- seq(0, m, length=nb.grids)
   g <- c(g[-1]*-1, g[-1])
-  abline(h=g, v=g, col="grey90", lty=3)
-  abline(h=0, v=0, col="grey80")}
+  abline(h=g, col="grey80", lty=3)
+  abline(v=g, col="grey80", lty=3)
+  abline(v=0, col="grey80")
+  abline(h=0, col="grey80")}
 
 #rug
 #' @export
@@ -106,15 +108,63 @@
     for (j in 1:nrow(pts.i)){
       segments(cent.i[1], cent.i[2], pts.i[j, 1], pts.i[j, 2], col=col.i[i])}}}
 
+#add density
+#' @export
+.density <- function(xy, fac, density.lev, col, n.kde2d = 50){
+  if (missing(fac) | is.null(fac)) fac <- factor(rep("f", nrow(xy)))
+  #   z0 <- kde2d(xy[, 1], xy[, 2], n=n.kde2d, lims = c(par("usr")))$z
+  #   zmin <- min(z0)
+  #   zmax <- max(z0)
+  xy <- as.matrix(xy)
+  for (i in seq(along=levels(fac))) {
+    xy.i <- xy[fac==levels(fac)[i], ]
+    if (is.matrix(xy.i)){
+      ki <- kde2d(xy.i[, 1], xy.i[, 2], n=n.kde2d, lims = c(par("usr")))
+      #       ki$z <- .normalize(ki$z, zmin, zmax)
+      ki$z <- .normalize(ki$z)
+      image(ki$x, ki$y, ki$z, add=TRUE,
+            xlim=range(ki$x), ylim=range(ki$y), 
+            col=col.transp(density.lev, col[i], 0.25))}}}
+
+#add contour lines
+#' @export
+.contour <- function(xy, fac, contour.lev, col, n.kde2d = 50){
+  if (missing(fac) | is.null(fac)) fac <- factor(rep("f", nrow(xy)))
+  #   z0 <- kde2d(xy[, 1], xy[, 2], n=n.kde2d, lims = c(par("usr")))$z
+  #   zmin <- min(z0)
+  #   zmax <- max(z0)
+  xy <- as.matrix(xy)
+  for (i in seq(along=levels(fac))) {
+    xy.i <- xy[fac==levels(fac)[i], ]
+    if (is.matrix(xy.i)){
+      ki <- kde2d(xy.i[, 1], xy.i[, 2], n=n.kde2d, lims = c(par("usr")))
+      #       ki$z <- .normalize(ki$z, zmin, zmax)
+      ki$z <- .normalize(ki$z)
+      contour(ki$x, ki$y, ki$z, add=TRUE,
+              nlevels=contour.lev, drawlabels=FALSE, 
+              col=.transp(rep(col[i], contour.lev), 0.5))}}}
+
+#add delaunay triangulation
+#' @export
+.delaunay <- function(xy, fac, col){
+  if (missing(fac) | is.null(fac)) fac <- factor(rep("f", nrow(xy)))
+  for (i in seq(along=levels(fac))) {
+    xy.i <- xy[fac==levels(fac)[i], ]
+    if (is.matrix(xy.i)){
+      if (nrow(xy.i)>3) {
+      links.i <- links.delaunay(xy.i)
+      ldk.links(xy.i, links.i, col=.transp(col[i], 2/3), lwd=1.5)}}}}
+
 #add loading vectors
 #' @export
 .loadings <- function(loadings.mat, d=1, d.lab=1.2, col="red"){
   loadings.mat <- loadings.mat*d
   loadings.lab <- loadings.mat*d.lab
   arrows(0, 0, loadings.mat[, 1], loadings.mat[, 2],
-          angle=20, length=0.1, col=col)
+         angle=20, length=0.1, col=col)
   text(loadings.lab[, 1], loadings.lab[, 2],
-          labels=rownames(loadings.lab), cex=0.8, col=col)}
+       labels=rownames(loadings.lab), cex=0.8, col=col)}
+
 
 #add eigen
 #' @export
