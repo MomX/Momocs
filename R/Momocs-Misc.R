@@ -242,9 +242,13 @@ vecs.param <- function(r1, i1, r2, i2){
   lf0 <- substr(lf0, 1, nchar(lf0)-4)
 return(lf0)}
 #' @export
-.normalize <- function(x){
-  x <- x-min(x)
-  return(x/max(x))}
+.normalize <- function(x, min.x, max.x){
+  # damn long but default arguments are not accepted
+  if (missing(min.x)) min.x <- min(x)
+  x <- x - min(x)
+  if (missing(max.x)) max.x <- max(x)
+  x <- x / max.x
+  return(x)}
 
 
 ##### End Miscellaneous
