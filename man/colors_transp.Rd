@@ -4,7 +4,7 @@
 \alias{col.transp}
 \title{Transparency helpers and palettes}
 \usage{
-col.transp(n, col = "#000000")
+col.transp(n, col = "#000000", ceiling = 1)
 
 .transp(cols, transp = 0)
 }
@@ -12,6 +12,8 @@ col.transp(n, col = "#000000")
 \item{n}{the number of colors to generate}
 
 \item{col}{a color in hexadecimal format on which to generate levels of transparency}
+
+\item{ceiling}{the maximal opacity (from 0 to 1)}
 
 \item{cols}{on or more colors, provided as hexadecimal values}
 
