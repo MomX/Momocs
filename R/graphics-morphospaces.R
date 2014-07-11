@@ -9,7 +9,7 @@
 #' @export
 .morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp=24, nr.shp=6, nc.shp=5,
                             amp.shp=1, size.shp=15, pts.shp=60,
-                            col.shp="#00000011", border.shp="#00000055"){
+                            col.shp="#00000011", border.shp="#00000055", lwd.shp=1){
   
   xy     <- PCA$x[, c(xax, yax)]
   rot    <- PCA$rotation[, c(xax, yax)]
@@ -57,10 +57,10 @@
   for (i in 1:length(shp)){
     shp[[i]] <- coo.trans(shp[[i]], pos[i, 1], pos[i, 2])}
   if (cd) {
-    garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp,
+    garbage <- lapply(shp, coo.draw, col=col.shp, border=border.shp, lwd=lwd.shp,
                       points=FALSE, centroid=FALSE, first.point=FALSE)
   } else {
-    garbage <- lapply(shp, lines, col=border.shp)}}
+    garbage <- lapply(shp, lines, col=border.shp, lwd=lwd.shp*2)}}
 
 #' @export
 .morphospaceLDA <- 
