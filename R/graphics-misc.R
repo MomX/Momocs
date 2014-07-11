@@ -58,7 +58,10 @@ col.sari <- colorRampPalette(c("#551A8B", "#FF7F00"))
 col.india <- colorRampPalette(c("#FF9933", "#138808"))
 #' @rdname color_palettes
 #' @export
-col.bw <- colorRampPalette(c("#FFFFFF", "#000000"))
+col.bw <- colorRampPalette(c("#000000", "#FFFFFF"))
+#' @rdname color_palettes
+#' @export
+col.gw <- colorRampPalette(c("#E5E5E5", "#1A1A1A"))
 #' @rdname color_palettes
 #' @export
 col.div <- colorRampPalette(c("#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C",

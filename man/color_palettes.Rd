@@ -8,6 +8,7 @@
 \alias{col.div}
 \alias{col.gallus}
 \alias{col.gallus2}
+\alias{col.gw}
 \alias{col.hot}
 \alias{col.india}
 \alias{col.sari}
@@ -38,6 +39,8 @@ col.sari(n)
 col.india(n)
 
 col.bw(n)
+
+col.gw(n)
 
 col.div(n)
 
