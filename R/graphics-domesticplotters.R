@@ -326,19 +326,16 @@ ldk.labels <- function(ldk, d=0.1, cex=0.8, ...){
 #' @param ldk a matrix of (x; y) coordinates
 #' @param links a matrix of links. On the first column the starting-id,
 #' on the second column the ending-id (id= the number of the coordinate)
-#' @param col a color to draw the links
-#' @param pch a pch for the edges
 #' @param ... additional parameters to fed \link{segments}
 #' @keywords Graphics
 #' @export
 # todo
-ldk.links <- function(ldk, links, col="black", pch=20, ...){
+ldk.links <- function(ldk, links, ...){
   ldk <- ldk.check(ldk)
   links <- coo.check(links)
   for (i in 1:nrow(links)){
     segments(ldk[links[i, 1], 1],ldk[links[i, 1], 2],
-             ldk[links[i, 2], 1],ldk[links[i, 2], 2],
-             col=col, pch=pch, ...)}}
+             ldk[links[i, 2], 1],ldk[links[i, 2], 2], ...)}}
 
 #' Draws confidence ellipses for landmark positions
 #' 
