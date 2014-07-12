@@ -250,5 +250,30 @@ return(lf0)}
   x <- x / max.x
   return(x)}
 
+#' @export
+.mat.buffer <-
+  function(m, buff.size, buff.fill=1){
+    nr     <- nrow(m)
+    c.buff <- matrix(buff.fill, nrow=nr, ncol=buff.size)
+    m      <- cbind(c.buff, m, c.buff)
+    nc     <- ncol(m)
+    r.buff <- matrix(buff.fill, nrow=buff.size, ncol=nc)
+    m      <- rbind(r.buff, m, r.buff)
+    return(m)}
+
+#' @export
+.mat.unbuffer <-
+  function(m, unbuff.size){
+    nr     <- nrow(m)
+    m      <- m[  -c(1:unbuff.size, (nr-unbuff.size+1):nr), ]
+    nc     <- ncol(m)
+    m      <- m[, -c(1:unbuff.size, (nc-unbuff.size+1):nc)  ]
+    return(m)}
+
+#' @export
+.mat.resize <- function(m, ratio) {
+    dm <- floor(dim(m)/ratio)
+    return(m[round(seq(1, nrow(m), len=dm[1])),
+             round(seq(1, ncol(m), len=dm[2]))])}
 
 ##### End Miscellaneous

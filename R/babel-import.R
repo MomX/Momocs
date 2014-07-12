@@ -133,6 +133,9 @@ import.Conte <- function (img, x){
 #' will be tried until on of them is "black" and within the shape; if FALSE
 #' you will be asked to click on a point within the shape.
 #' 
+#' If some pixels on the borders are not white, this functions adds a 1-pixel
+#' border of white pixels; otherwise \link{import.Conte} would fail and return an error.
+#' 
 #' Finally, remember that if the images are not in your working directory,
 #' \link{list.files} must be called with the argument \code{full.names=TRUE}!
 #' 
@@ -154,6 +157,11 @@ import.jpg1 <-
     # we binarize using threshold
     img[img >  threshold] <- 1
     img[img <= threshold] <- 0
+    # we test for images with black pixels on their border
+    # which causes Conte to fail. IF it is the case, we add a 1 pixel white border around
+    borders <- c(img[1, ], img[nrow(img), ], img[, 1], img[, ncol(img)])
+    if (any(borders!=1)) {
+      img <- .mat.buffer(img, buff.size = 1, buff.fill = 1)}
     #   img <- x[dim(x)[1]:1,] #Conte/readJPEG, etc.
     # we initialize value with the middle or (1,1)
     if (is.null(fun.notcentered)){
