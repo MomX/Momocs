@@ -3,11 +3,12 @@
 \alias{import.jpg}
 \title{Extract outline coordinates from multiple .jpg files}
 \usage{
-import.jpg(jpg.paths, auto.notcentered = TRUE, fun.notcentered = NULL,
-  threshold = 0.5, verbose = TRUE)
+import.jpg(jpg.paths = NULL, auto.notcentered = TRUE,
+  fun.notcentered = NULL, threshold = 0.5, verbose = TRUE)
 }
 \arguments{
-\item{jpg.paths}{a vector of paths corresponding to the .jpg files to import.}
+\item{jpg.paths}{a vector of paths corresponding to the .jpg files to import. If not
+provided, switches to the automatic version. See Details below.}
 
 \item{auto.notcentered}{logical if TRUE random locations will be used until.
 one of them is (assumed) to be within the shape (because of a black pixel);
@@ -27,11 +28,14 @@ a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 }
 \description{
 This function is used to import outline coordinates and is built around
-\link{import.jpg1}
+\link{import.jpg1}.
 }
 \details{
 see \link{import.jpg1} for important informations about how the outlines are extracted,
 and \link{import.Conte} for the algorithm itself.
+
+If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
+file in the folder taht contains all your files. All the outlines should be imported then.
 }
 \examples{
 \dontrun{
@@ -40,6 +44,9 @@ and \link{import.Conte} for the algorithm itself.
 lf <- list.files("/foo/jpegs", full.names=TRUE)
 coo <- import.jpg(lf)
 Out(coo)
+
+# "automatic" version
+coo <- import.jpg()
 }
 }
 \seealso{

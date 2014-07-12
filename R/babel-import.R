@@ -201,8 +201,9 @@ import.jpg1 <-
 #' Extract outline coordinates from multiple .jpg files
 #' 
 #' This function is used to import outline coordinates and is built around 
-#' \link{import.jpg1}
-#' @param jpg.paths a vector of paths corresponding to the .jpg files to import.
+#' \link{import.jpg1}.
+#' @param jpg.paths a vector of paths corresponding to the .jpg files to import. If not 
+#' provided, switches to the automatic version. See Details below.
 #' @param auto.notcentered logical if TRUE random locations will be used until.
 #' one of them is (assumed) to be within the shape (because of a black pixel);
 #' if FALSE a \link{locator} will be called, and you will have to click on a 
@@ -214,6 +215,9 @@ import.jpg1 <-
 #' @param verbose whether to print which file is being treated. Useful to detect problems.
 #' @details see \link{import.jpg1} for important informations about how the outlines are extracted, 
 #' and \link{import.Conte} for the algorithm itself.
+#' 
+#' If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
+#' file in the folder taht contains all your files. All the outlines should be imported then.
 #' @keywords Import
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
@@ -225,14 +229,19 @@ import.jpg1 <-
 #' lf <- list.files("/foo/jpegs", full.names=TRUE)
 #' coo <- import.jpg(lf)
 #' Out(coo)
+#' 
+#' # "automatic" version
+#' coo <- import.jpg()
 #' }
 #' @export
-import.jpg <- function(jpg.paths, auto.notcentered=TRUE, fun.notcentered=NULL, threshold=0.5, verbose=TRUE) {
+import.jpg <- function(jpg.paths=NULL, auto.notcentered=TRUE, fun.notcentered=NULL, threshold=0.5, verbose=TRUE) {
+  # if not provided
+  if (is.null(jpg.paths)) { jpg.paths <- .lf.auto() }
   cat(" * Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE } else {t <- FALSE}
-  # future safe import
+  # for a futurer safer import
   #jpg.names <- .trim.path(.trim.ext(jpgs.paths))
   res <- list()
   for (i in seq(along=jpg.paths)) {

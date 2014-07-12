@@ -229,18 +229,31 @@ vecs.param <- function(r1, i1, r2, i2){
   d2 <- sqrt(sum(r2^2 + i2^2))
   return(list(r.norms=d1/d2, d.angle=atan2(i2, r2) - atan2(i1, r1)))}
 
-# Utilities (useless?)
+##### Utilities (useless?)
 #'@export
 .refactor <- function(df){data.frame(lapply(df, factor))}
+
 #' @export
 .trim.ext <- function(lf, width=nchar(lf)-4) {
   return(strtrim(lf, width=width))}
+
 #' @export
 .trim.path <- function(lf){
   lf0 <- strsplit(lf, "/")
   lf0 <- sapply(lf0, function(x) x[length(x)])
   lf0 <- substr(lf0, 1, nchar(lf0)-4)
 return(lf0)}
+
+#' @export
+.lf.auto <- function(){
+  p <- file.choose()
+  # damn ugly
+  p <- strsplit(p, split = "/")
+  p <- p[[1]][-length(p[[1]])]
+  p <- paste0(p, collapse="/")
+  lf <- list.files(p, full.names = TRUE)
+  return(lf)}
+
 #' @export
 .normalize <- function(x, min.x, max.x){
   # damn long but default arguments are not accepted
