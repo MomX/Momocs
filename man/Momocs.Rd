@@ -24,8 +24,9 @@ To cite Momocs in publications: \code{citation("Momocs")}.
 \section{Cheers}{
 
 We are very grateful to Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Neus
-Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Norbert Telmon, Bill Venables, Asher Wishkerman for
-their helpful contributions, ideas, bug reports, and much more.
+Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Norbert Telmon, Bill Venables,
+Daniele Ventura and Asher Wishkerman for their helpful contributions, ideas,
+bug reports, and much more.
 }
 \references{
 \itemize{
