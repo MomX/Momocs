@@ -26,7 +26,9 @@ More, generally, see \link{Out}, \link{Opn} and \link{Ldk} for documentation on 
 And Momocs' vignette for more detailed informations on the Momocs' "architecture".
 
 Finally, note that if you used Momocs before version <0.9, and/or if you have read the JSS paper,
-you are probably looking for \link{Out}.
+you are probably looking for \link{Out}. If you have "old" Coo files, eg saved as \code{.rda} files,
+you can import them by: i) opening a new R session; ii) load your file, say "foo", iii) load Momocs,
+iv) type: \code{Out(foo@coo, fac=foo@fac)}, same thing for the \code{@ldk} slot, if any.
 
 You can access all the methods available for Coo objects with \code{methods(class=Coo)}.
 Among them, some are not individually documented but you will find an exhaustive list
