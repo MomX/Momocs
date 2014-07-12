@@ -218,6 +218,14 @@ import.jpg1 <-
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
+#' @examples
+#' \dontrun{
+#' 
+#' # if your images are in the folder "/foo/jpgs/"
+#' lf <- list.files("/foo/jpegs", full.names=TRUE)
+#' coo <- import.jpg(lf)
+#' Out(coo)
+#' }
 #' @export
 import.jpg <- function(jpg.paths, auto.notcentered=TRUE, fun.notcentered=NULL, threshold=0.5, verbose=TRUE) {
   cat(" * Extracting", length(jpg.paths), ".jpg outlines...\n")

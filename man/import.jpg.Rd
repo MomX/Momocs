@@ -33,6 +33,15 @@ This function is used to import outline coordinates and is built around
 see \link{import.jpg1} for important informations about how the outlines are extracted,
 and \link{import.Conte} for the algorithm itself.
 }
+\examples{
+\dontrun{
+
+# if your images are in the folder "/foo/jpgs/"
+lf <- list.files("/foo/jpegs", full.names=TRUE)
+coo <- import.jpg(lf)
+Out(coo)
+}
+}
 \seealso{
 \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 See also Momocs' vignettes for data import.
