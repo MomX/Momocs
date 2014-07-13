@@ -3,7 +3,7 @@
 \alias{ldk.labels}
 \title{Add landmarks labels}
 \usage{
-ldk.labels(ldk, d = 0.1, cex = 2/3, ...)
+ldk.labels(ldk, d = 0.05, cex = 2/3, ...)
 }
 \arguments{
 \item{ldk}{a matrix of (x; y) coordinates: where to plot the labels}
