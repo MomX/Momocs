@@ -5,9 +5,9 @@
 \usage{
 tps.arr(fr, to, amp = 1, over = 1.2, palette = col.summer, arr.nb = 200,
   arr.levels = 100, arr.len = 0.1, arr.ang = 20, arr.lwd = 0.75,
-  arr.col = "grey50", shp = TRUE, shp.col = rep(NA, 2),
+  arr.col = "grey50", poly = TRUE, shp = TRUE, shp.col = rep(NA, 2),
   shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1),
-  legend = TRUE)
+  legend = TRUE, ...)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates.}
@@ -34,7 +34,9 @@ arrows.}
 
 \item{arr.lwd}{A \code{numeric}. The \code{lwd} for drawing arrows.}
 
-\item{arr.col}{If \code{palette} is not used the color for arrwos.}
+\item{arr.col}{If \code{palette} is not used the color for arrows.}
+
+\item{poly}{whether to draw polygons (for outlines) or points (for landmarks)}
 
 \item{shp}{\code{logical}. Whether to draw shapes.}
 
@@ -47,6 +49,8 @@ arrows.}
 \item{shp.lty}{Two \code{lty} fro drawing the shapes.}
 
 \item{legend}{logical whether to plot a legend.}
+
+\item{...}{additional arguments to feed \link{coo.draw}}
 }
 \value{
 No returned value.

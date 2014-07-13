@@ -5,8 +5,8 @@
 \usage{
 tps.iso(fr, to, amp = 1, over = 1.2, palette = col.spring,
   iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black",
-  shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(2, 2),
-  shp.lty = c(1, 1), legend = TRUE)
+  poly = TRUE, shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(2,
+  2), shp.lty = c(1, 1), legend = TRUE, ...)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates.}
@@ -32,6 +32,8 @@ calculation of deformation.}
 
 \item{cont.col}{A color for drawing the contour lines.}
 
+\item{poly}{whether to draw polygons (for outlines) or points (for landmarks)}
+
 \item{shp}{\code{logical}. Whether to draw shapes.}
 
 \item{shp.border}{Two colors for drawing the borders.}
@@ -41,6 +43,8 @@ calculation of deformation.}
 \item{shp.lty}{Two \code{lty} fro drawing the shapes.}
 
 \item{legend}{logical whether to plot a legend.}
+
+\item{...}{additional arguments to feed \link{coo.draw}}
 }
 \value{
 No returned value.

@@ -4,9 +4,9 @@
 \title{Deformation grids using Thin Plate Splines.}
 \usage{
 tps.grid(fr, to, amp = 1, over = 1.2, grid.size = 15,
-  grid.col = "grey80", shp = TRUE, shp.col = rep(NA, 2),
-  shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1),
-  legend = TRUE)
+  grid.col = "grey80", poly = TRUE, shp = TRUE, shp.col = rep(NA, 2),
+  shp.border = col.gallus(2), shp.lwd = c(1, 1), shp.lty = c(1, 1),
+  legend = TRUE, ...)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates.}
@@ -24,6 +24,8 @@ longer axis on the outlines.}
 
 \item{grid.col}{A color for drawing the grid.}
 
+\item{poly}{whether to draw polygons (for outlines) or points (for landmarks)}
+
 \item{shp}{\code{logical}. Whether to draw shapes.}
 
 \item{shp.col}{Two colors for filling the shapes.}
@@ -35,6 +37,8 @@ longer axis on the outlines.}
 \item{shp.lty}{Two \code{lty} fro drawing the shapes.}
 
 \item{legend}{logical whether to plot a legend.}
+
+\item{...}{additional arguments to feed \link{coo.draw}}
 }
 \value{
 No returned value.
