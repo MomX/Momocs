@@ -3,7 +3,7 @@
 \name{molars}
 \alias{molars}
 \title{Data: Outline coordinates of 360 molars}
-\format{A \link{Out} object containing 79 79 equilinearly spaced (x; y)
+\format{A \link{Out} object containing 79 equilinearly spaced (x; y)
 coordinates for 360 crown outlines, of modern human molars,
 along with their type (\code{$type}) - 90 first upper molars (UM1), 90 second upper molars (UM2),
 90 first lower molars (LM1), 90 second lower molars (LM2) -
