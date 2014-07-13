@@ -310,7 +310,9 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
 #' coo.plot(wings[1])
 #' ldk.labels(wings[1], d=0.05, cex=0.5)
 #' @export
-ldk.labels <- function(ldk, d=0.1, cex=0.8, ...){
+ldk.labels <- function(ldk, d=0.1, cex=2/3, ...){
+  op <- par(xpd=NA)
+  on.exit(par(op))
   ldk <- coo.check(ldk)
   centpos <- coo.centpos(ldk)
   dm <- median(coo.centdist(ldk))
