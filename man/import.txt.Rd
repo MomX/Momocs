@@ -3,10 +3,12 @@
 \alias{import.txt}
 \title{Import coordinates from a .txt file}
 \usage{
-import.txt(txt.list, ...)
+import.txt(txt.paths = NULL, ...)
 }
 \arguments{
-\item{txt.list}{a vector of paths corresponding to the .txt files to import.}
+\item{txt.paths}{a vector of paths corresponding to the .txt files to import. If not
+provided (or \code{NULL}), switches to the automatic version, just as in\link{import.jpg}.
+See Details there.}
 
 \item{...}{arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.}
 }

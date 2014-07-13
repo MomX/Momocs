@@ -8,7 +8,7 @@ import.jpg(jpg.paths = NULL, auto.notcentered = TRUE,
 }
 \arguments{
 \item{jpg.paths}{a vector of paths corresponding to the .jpg files to import. If not
-provided, switches to the automatic version. See Details below.}
+provided (or \code{NULL}), switches to the automatic version. See Details below.}
 
 \item{auto.notcentered}{logical if TRUE random locations will be used until.
 one of them is (assumed) to be within the shape (because of a black pixel);

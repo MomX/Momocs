@@ -8,7 +8,9 @@
 #' columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 #' Define the \link{read.table} arguments that allow to import a single file, and then
 #' pass them to this function.
-#' @param txt.list a vector of paths corresponding to the .txt files to import.
+#' @param txt.paths a vector of paths corresponding to the .txt files to import. If not 
+#' provided (or \code{NULL}), switches to the automatic version, just as in\link{import.jpg}.
+#' See Details there.
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
 #' \link{Out}, \link{Opn} and \link{Ldk}.
@@ -16,18 +18,20 @@
 #' See also Momocs' vignettes for data import.
 #' @keywords Import
 #' @export
-import.txt <- function(txt.list, ...){
-  cat(" * Extracting", length(txt.list), "..txt coordinates...\n")
-  if (length(txt.list) > 10) {
-    pb <- txtProgressBar(1, length(txt.list))
+import.txt <- function(txt.paths=NULL, ...){
+  if (is.null(txt.paths)) { txt.paths <- .lf.auto() }
+  cat(" * Extracting", length(txt.paths), "..txt coordinates...\n")
+  if (length(txt.paths) > 10) {
+    pb <- txtProgressBar(1, length(txt.paths))
     t <- TRUE } else {t <- FALSE}
   res <- list()
-  for (i in seq(along = txt.list)) {
-    coo <- read.table(txt.list[i], ...)
+  for (i in seq(along = txt.paths)) {
+    coo <- read.table(txt.paths[i], ...)
     res[[i]] <- as.matrix(coo)
     if (t) setTxtProgressBar(pb, i)
   }
-  names(res) <- substr(txt.list, start=1, stop=nchar(txt.list)-4)
+  #names(res) <- substr(txt.paths, start=1, stop=nchar(txt.paths)-4)
+  names(res) <- .trim.ext(txt.paths)
   return(res)}
 
 #' Extract outlines coordinates from an image silhouette
@@ -203,7 +207,7 @@ import.jpg1 <-
 #' This function is used to import outline coordinates and is built around 
 #' \link{import.jpg1}.
 #' @param jpg.paths a vector of paths corresponding to the .jpg files to import. If not 
-#' provided, switches to the automatic version. See Details below.
+#' provided (or \code{NULL}), switches to the automatic version. See Details below.
 #' @param auto.notcentered logical if TRUE random locations will be used until.
 #' one of them is (assumed) to be within the shape (because of a black pixel);
 #' if FALSE a \link{locator} will be called, and you will have to click on a 
