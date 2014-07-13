@@ -48,7 +48,7 @@ the 'auto.notcentered' argument. If it's TRUE, some random starting points
 will be tried until on of them is "black" and within the shape; if FALSE
 you will be asked to click on a point within the shape.
 
-If some pixels on the borders are not white, this functions adds a 1-pixel
+If some pixels on the borders are not white, this functions adds a 2-pixel
 border of white pixels; otherwise \link{import.Conte} would fail and return an error.
 
 Finally, remember that if the images are not in your working directory,

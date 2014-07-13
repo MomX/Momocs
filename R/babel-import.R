@@ -133,7 +133,7 @@ import.Conte <- function (img, x){
 #' will be tried until on of them is "black" and within the shape; if FALSE
 #' you will be asked to click on a point within the shape.
 #' 
-#' If some pixels on the borders are not white, this functions adds a 1-pixel
+#' If some pixels on the borders are not white, this functions adds a 2-pixel
 #' border of white pixels; otherwise \link{import.Conte} would fail and return an error.
 #' 
 #' Finally, remember that if the images are not in your working directory,
@@ -161,7 +161,7 @@ import.jpg1 <-
     # which causes Conte to fail. IF it is the case, we add a 1 pixel white border around
     borders <- c(img[1, ], img[nrow(img), ], img[, 1], img[, ncol(img)])
     if (any(borders!=1)) {
-      img <- .mat.buffer(img, buff.size = 1, buff.fill = 1)}
+      img <- .mat.buffer(img, buff.size = 2, buff.fill = 1)}
     #   img <- x[dim(x)[1]:1,] #Conte/readJPEG, etc.
     # we initialize value with the middle or (1,1)
     if (is.null(fun.notcentered)){
@@ -242,7 +242,7 @@ import.jpg <- function(jpg.paths=NULL, auto.notcentered=TRUE, fun.notcentered=NU
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE } else {t <- FALSE}
   # for a futurer safer import
-  #jpg.names <- .trim.path(.trim.ext(jpgs.paths))
+  # jpg.names <- .trim.path(.trim.ext(jpgs.paths))
   res <- list()
   for (i in seq(along=jpg.paths)) {
     coo.i <- import.jpg1(jpg.paths[i],
