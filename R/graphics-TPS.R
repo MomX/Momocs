@@ -58,12 +58,14 @@ tps2d <- function(grid0, fr, to){
 #' @param grid.size A \code{numeric} to specify the number of grid cells on the
 #' longer axis on the outlines.
 #' @param grid.col A color for drawing the grid.
+#' @param poly whether to draw polygons (for outlines) or points (for landmarks)
 #' @param shp \code{logical}. Whether to draw shapes.
 #' @param shp.col Two colors for filling the shapes.
 #' @param shp.border Two colors for drawing the borders.
 #' @param shp.lwd Two \code{lwd} for drawing shapes.
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @param legend logical whether to plot a legend.
+#' @param ... additional arguments to feed \link{coo.draw}
 #' @return No returned value.
 #' @seealso \link{tps.iso} and \link{tps.arr}.
 #' @keywords ThinPlateSplines
@@ -77,9 +79,11 @@ tps2d <- function(grid0, fr, to){
 #' tps.grid(fr, to, amp=3, grid.size=40)
 #' @export
 tps.grid <- function(fr, to, amp=1, over=1.2,
-                     grid.size = 15, grid.col = "grey80",
+                     grid.size = 15, grid.col = "grey80", poly=TRUE,
                      shp = TRUE, shp.col = rep(NA, 2), shp.border=col.gallus(2),
-                     shp.lwd = c(2, 2), shp.lty = c(1, 1), legend=TRUE){
+                     shp.lwd = c(1, 1), shp.lty = c(1, 1), legend=TRUE, ...){
+  fr.n <- substitute(fr)
+  to.n <- substitute(to) # otherwise problems with substitute in legend below
   # simple magnification
   if (!missing(amp)) to <- to + (to-fr)*amp
   grid0 <- .grid.sample(fr, to, nside=round(grid.size), over=over)
@@ -94,14 +98,15 @@ tps.grid <- function(fr, to, amp=1, over=1.2,
   for (i in 1:dim.grid[1]) {
     lines(grid1[(1:dim.grid[2]) * dim.grid[1]-i+1,],   col=grid.col)}
   if (shp) {
+    points <- ifelse(poly, FALSE, TRUE)
     coo.draw(fr, border=shp.border[1], col=NA,
              lwd=shp.lwd[1], lty=shp.lty[1],
-             points=FALSE, first.point=FALSE, centroid=FALSE)
+             points=points, first.point=FALSE, centroid=FALSE, ...)
     coo.draw(to, border=shp.border[2], col=NA,
              lwd=shp.lwd[2], lty=shp.lty[2],
-             points=FALSE, first.point=FALSE, centroid=FALSE)
+             points=points, first.point=FALSE, centroid=FALSE, ...)
   if (legend) {
-    legend("topright", legend = c(substitute(fr), substitute(to)), 
+    legend("topright", legend = c(fr.n, to.n), 
            col=shp.border, lwd = shp.lwd, bty="n")}
   
   }}
@@ -125,13 +130,15 @@ tps.grid <- function(fr, to, amp=1, over=1.2,
 #' @param arr.len A \code{numeric}. The length of arrows.
 #' @param arr.ang A \code{numeric}. The angle for arrows' heads.
 #' @param arr.lwd A \code{numeric}. The \code{lwd} for drawing arrows.
-#' @param arr.col If \code{palette} is not used the color for arrwos.
+#' @param arr.col If \code{palette} is not used the color for arrows.
+#' @param poly whether to draw polygons (for outlines) or points (for landmarks)
 #' @param shp \code{logical}. Whether to draw shapes.
 #' @param shp.col Two colors for filling the shapes.
 #' @param shp.border Two colors for drawing the borders.
 #' @param shp.lwd Two \code{lwd} for drawing shapes.
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @param legend logical whether to plot a legend.
+#' @param ... additional arguments to feed \link{coo.draw}
 #' @return No returned value.
 #' @seealso \link{tps.grid} and \link{tps.iso}.
 #' @keywords ThinPlateSplines
@@ -145,9 +152,11 @@ tps.grid <- function(fr, to, amp=1, over=1.2,
 #' @export
 tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
                     arr.nb = 200, arr.levels = 100, arr.len = 0.1,
-                    arr.ang = 20, arr.lwd = 0.75, arr.col = "grey50",
+                    arr.ang = 20, arr.lwd = 0.75, arr.col = "grey50", poly=TRUE,
                     shp = TRUE, shp.col =  rep(NA, 2), shp.border=col.gallus(2),
-                    shp.lwd = c(2, 2), shp.lty = c(1, 1), legend = TRUE){
+                    shp.lwd = c(2, 2), shp.lty = c(1, 1), legend = TRUE, ...){
+  fr.n <- substitute(fr)
+  to.n <- substitute(to) # otherwise problems with substitute in legend below
   if (!missing(amp)) to <- to + (to-fr)*amp
   #grid0  <- spsample(Polygon(coo.close(fr)), arr.nb, type="regular")@coords
   grid0 <- .grid.sample(fr, to, nside=round(sqrt(arr.nb)), over=over)
@@ -166,14 +175,15 @@ tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
   arrows(grid0[, 1], grid0[, 2], grid1[, 1], grid1[, 2],
          length=arr.len, angle=arr.ang, lwd=arr.lwd, col=arr.cols)
   if (shp) {
+    points <- ifelse(poly, FALSE, TRUE)
     coo.draw(fr, border=shp.border[1], col=NA,
              lwd=shp.lwd[1], lty=shp.lty[1],
-             points=FALSE, first.point=FALSE, centroid=FALSE)
+             points=points, first.point=FALSE, centroid=FALSE, ...)
     coo.draw(to, border=shp.border[2], col=NA,
              lwd=shp.lwd[2], lty=shp.lty[2],
-             points=FALSE, first.point=FALSE, centroid=FALSE)
+             points=points, first.point=FALSE, centroid=FALSE, ...)
     if (legend) {
-      legend("topright", legend = c(substitute(fr), substitute(to)), 
+      legend("topright", legend = c(fr.n, to.n), 
              col=shp.border, lwd = shp.lwd, bty="n")}
   }}
 
@@ -196,11 +206,13 @@ tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
 #' calculation of deformation.
 #' @param cont \code{logical}. Whether to draw contour lines.
 #' @param cont.col A color for drawing the contour lines.
+#' @param poly whether to draw polygons (for outlines) or points (for landmarks)
 #' @param shp \code{logical}. Whether to draw shapes.
 #' @param shp.border Two colors for drawing the borders.
 #' @param shp.lwd Two \code{lwd} for drawing shapes.
 #' @param shp.lty Two \code{lty} fro drawing the shapes.
 #' @param legend logical whether to plot a legend.
+#' @param ... additional arguments to feed \link{coo.draw}
 #' @return No returned value.
 #' @seealso \link{tps.grid} and \link{tps.arr}
 #' @keywords ThinPlateSplines
@@ -214,10 +226,12 @@ tps.arr <- function(fr, to, amp=1, over=1.2, palette = col.summer,
 #' tps.iso(fr, to, iso.nb=2000, amp=3)
 #' @export
 tps.iso <- function(fr, to, amp=1, over=1.2, palette = col.spring,
-                    iso.nb = 1000, iso.levels = 12, cont=TRUE, cont.col="black",
+                    iso.nb = 1000, iso.levels = 12, cont=TRUE, cont.col="black", poly=TRUE,
                     shp = TRUE, shp.border=col.gallus(2),
-                    shp.lwd = c(2, 2), shp.lty = c(1, 1), legend = TRUE){  
-  # if (!missing(amp)) to <- to + (to-fr)*amp
+                    shp.lwd = c(2, 2), shp.lty = c(1, 1), legend = TRUE, ...){  
+  fr.n <- substitute(fr)
+  to.n <- substitute(to) # otherwise problems with substitute in legend below
+  if (!missing(amp)) to <- to + (to-fr)*amp
   #grid0  <- spsample(Polygon(coo.close(fr)), iso.nb, type="regular")@coords
   grid0 <- .grid.sample(fr, to, nside=round(sqrt(iso.nb)), over=over)
   grid1  <- tps2d(grid0, fr, to)
@@ -240,13 +254,14 @@ tps.iso <- function(fr, to, amp=1, over=1.2, palette = col.spring,
   if (cont) {contour(x, y, im, nlevels=iso.levels,
                      add=TRUE, drawlabels=FALSE, col=cont.col, lty=2)}
   if (shp) {
+    points <- ifelse(poly, FALSE, TRUE)
     coo.draw(fr, border=shp.border[1], col=NA,
              lwd=shp.lwd[1], lty=shp.lty[1],
-             points=FALSE, first.point=FALSE, centroid=FALSE)
+             points=points, first.point=FALSE, centroid=FALSE, ...)
     coo.draw(to, border=shp.border[2], col=NA,
              lwd=shp.lwd[2], lty=shp.lty[2],
-             points=FALSE, first.point=FALSE, centroid=FALSE)
+             points=points, first.point=FALSE, centroid=FALSE, ...)
     if (legend) {
-      legend("topright", legend = c(substitute(fr), substitute(to)), 
+      legend("topright", legend = c(fr.n, to.n), 
              col=shp.border, lwd = shp.lwd, bty="n")}
   }}
