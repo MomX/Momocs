@@ -9,7 +9,7 @@ coo.plot(coo, ...)
 
 \method{coo.plot}{default}(coo, xlim, ylim, border = "#333333", col = NA,
   lwd = 1, lty = 1, points = FALSE, first.point = TRUE,
-  centroid = TRUE, xy.axis = TRUE, pch = 1, cex = 0.5, main,
+  centroid = TRUE, xy.axis = TRUE, pch = 1, cex = 0.5, main = NA,
   poly = TRUE, plot.new = TRUE, plot = TRUE, zoom = 1, ...)
 
 \method{coo.plot}{ldk}(coo, cex = 1, poly = FALSE, ...)

@@ -3,7 +3,7 @@
 \alias{coo.lolli}
 \title{Plots (lollipop) differences between two configurations}
 \usage{
-coo.lolli(coo1, coo2, pch = 20, cex = 0.5, ...)
+coo.lolli(coo1, coo2, pch = 20, cex = 0.5, main = NA, ...)
 }
 \arguments{
 \item{coo1}{A \code{list} or a \code{matrix} of coordinates.}
@@ -13,6 +13,8 @@ coo.lolli(coo1, coo2, pch = 20, cex = 0.5, ...)
 \item{pch}{a pch for the points}
 
 \item{cex}{a cex for the points}
+
+\item{main}{character a title for the plot}
 
 \item{...}{optional parameters to fed \link{points} and \link{segments}.}
 }

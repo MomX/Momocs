@@ -50,7 +50,7 @@ coo.plot <- function(coo, ...){UseMethod("coo.plot")}
 #' @export
 coo.plot.default <- function(coo, xlim, ylim, border="#333333", col=NA, lwd=1, lty=1,
                      points=FALSE, first.point=TRUE, centroid=TRUE, xy.axis=TRUE,
-                     pch=1, cex=0.5, main, poly=TRUE, plot.new=TRUE, plot=TRUE, zoom=1, ...){ #todo zoom
+                     pch=1, cex=0.5, main=NA, poly=TRUE, plot.new=TRUE, plot=TRUE, zoom=1, ...){ #todo zoom
   coo <- coo.check(coo)
   # if 'plot.new=TRUE' we have initiate the graphical window
   if (plot.new) {
@@ -120,6 +120,7 @@ coo.draw <- function(coo, ...){
 #' @param coo2 A \code{list} or a \code{matrix} of coordinates.
 #' @param pch a pch for the points
 #' @param cex a cex for the points
+#' @param main character a title for the plot
 #' @param ... optional parameters to fed \link{points} and \link{segments}.
 #' @seealso \link{coo.arrows}
 #' @keywords Graphics
@@ -127,15 +128,16 @@ coo.draw <- function(coo, ...){
 #' data(olea)
 #' coo.lolli(coo.sample(olea[3], 50), coo.sample(olea[6], 50))
 #' @export
-coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, ...){
+coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, main=NA, ...){
   coo.plot(rbind(coo1, coo2), plot=FALSE)
   coo1 <- coo.check(coo1)
   coo2 <- coo.check(coo2)
   if (nrow(coo1) != nrow(coo2)) {
     stop(" * coo1 and coo2 have different number of coordinates.")}
   s <- seq(nrow(coo1)-1)
-  segments(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2], ...)
-  points(coo2[, 1], coo2[, 2], pch=pch, cex=cex, ...)}
+  segments(coo1[s, 1], coo1[s, 2], coo2[s, 1], coo2[s, 2], ...)
+  points(coo2[, 1], coo2[, 2], pch=pch, cex=cex, ...)
+  if(!missing(main)) title(main=main)}
 
 #' Plots (lollipop) differences between two configurations
 #' 
@@ -144,6 +146,7 @@ coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, ...){
 #' @param coo2 A \code{list} or a \code{matrix} of coordinates.
 #' @param length a length for the arrows.
 #' @param angle an angle for the arrows
+#' @param main character a title for the plot
 #' @param ... optional parameters to fed \link{arrows}.
 #' @seealso \link{coo.arrows}
 #' @keywords Graphics
@@ -151,15 +154,16 @@ coo.lolli <- function(coo1, coo2, pch=20, cex=0.5, ...){
 #' data(olea)
 #' coo.arrows(coo.sample(olea[3], 50), coo.sample(olea[6], 50))
 #' @export
-coo.arrows <- function(coo1, coo2, length=0.1, angle=20, ...){
-  coo.plot(rbind(coo1, coo2), plot=FALSE)
+coo.arrows <- function(coo1, coo2, length=0.1, angle=20, main=NA, ...){
+  coo.plot(rbind(coo1, coo2), plot=FALSE, main = main)
   coo1 <- coo.check(coo1)
   coo2 <- coo.check(coo2)
   if (nrow(coo1) != nrow(coo2)) {
     stop(" * coo1 and coo2 have different number of coordinates.")}
   s <- seq(nrow(coo1)-1)
-  arrows(coo1[s, 1], coo1[s, 2], coo2[s+1, 1], coo2[s+1, 2],
-         length=length, angle=angle,...)}
+  arrows(coo1[s, 1], coo1[s, 2], coo2[s, 1], coo2[s, 2],
+         length=length, angle=angle,...)
+  if(!missing(main)) title(main=main)}
 
 #' "Templates" shapes
 #' 
@@ -310,7 +314,7 @@ coo.list.panel <- function(coo.list, dim, byrow=TRUE,
 #' coo.plot(wings[1])
 #' ldk.labels(wings[1], d=0.05, cex=0.5)
 #' @export
-ldk.labels <- function(ldk, d=0.1, cex=2/3, ...){
+ldk.labels <- function(ldk, d=0.05, cex=2/3, ...){
   op <- par(xpd=NA)
   on.exit(par(op))
   ldk <- coo.check(ldk)

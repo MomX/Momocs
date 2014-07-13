@@ -3,7 +3,7 @@
 \alias{coo.arrows}
 \title{Plots (lollipop) differences between two configurations}
 \usage{
-coo.arrows(coo1, coo2, length = 0.1, angle = 20, ...)
+coo.arrows(coo1, coo2, length = 0.1, angle = 20, main = NA, ...)
 }
 \arguments{
 \item{coo1}{A \code{list} or a \code{matrix} of coordinates.}
@@ -13,6 +13,8 @@ coo.arrows(coo1, coo2, length = 0.1, angle = 20, ...)
 \item{length}{a length for the arrows.}
 
 \item{angle}{an angle for the arrows}
+
+\item{main}{character a title for the plot}
 
 \item{...}{optional parameters to fed \link{arrows}.}
 }
