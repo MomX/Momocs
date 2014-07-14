@@ -32,10 +32,10 @@
   g <- 0.0075
   y0 <- par("usr")[3]
   x0 <- par("usr")[1]
-  gy <- (par("usr")[4] - par("usr")[3])*g
-  gx <- (par("usr")[2] - par("usr")[1])*g #*(.wdw()[2] / .wdw()[1])
-  #   gy <- 0
-  #   gx <- 0
+  #   gy <- (par("usr")[4] - par("usr")[3])*g
+  #   gx <- (par("usr")[2] - par("usr")[1])*g #*(.wdw()[2] / .wdw()[1])
+  gy <- 0
+  gx <- 0
   if (is.null(fac)) {
     rug(xy[, 1], ticksize=g, side=1, col="black", lend=1, quiet=TRUE)
     rug(xy[, 2], ticksize=g, side=2, col="black", lend=1, quiet=TRUE)
@@ -196,8 +196,10 @@
   cs.var <- cumsum(var)/sum(var)
   k <- ifelse(max(c(xax, yax))>5, max(c(xax, yax)), 5)
   barplot(var[1:k], axes=FALSE, col=cols, border=NA)
-  text(-1, par("usr")[3], labels=ev.names,
-       pos=4, cex=2/3, srt=90, col="grey40")}
+  gy <- strheight(ev.names, cex=2/3)
+  title(main = ev.names, cex.main = 0.6, outer=FALSE, line=0.15, col.main="grey40", font.main=1)}
+#  text(gy, 0, labels=ev.names,
+#       pos=4, cex=2/3, srt=90, col="grey40")}
 
 #names axes
 #' @export
@@ -223,9 +225,9 @@
 #adds title to plots
 #' @export
 .title <- function(title){
+  title <- as.character(title) # since substitute return a 'name' not a 'character'
   pos <- par("usr")
-  gy <- strheight(title, font=2)/0.8
-  gx <- strheight(title, font=2)/2
-  text(pos[1] + gx + gy, pos[3] + gy, labels=title, font=2)}
-
+  gy <- strheight(title, font=2)*0.75
+  text(pos[1], pos[3] + gy, pos=4, labels=title, font=2, cex=0.8)}
+#text(0, 0, "plop")}
 ##### end layers
