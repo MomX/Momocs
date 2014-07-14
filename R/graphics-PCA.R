@@ -148,6 +148,7 @@ plot.PCA <- function(#basics
   
   # cosmectics
   if ((density) & missing(contour)) contour <- TRUE
+  if ((density) & missing(ellipses)) ellipses <- FALSE
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
   # we prepare the graphic window
@@ -161,7 +162,7 @@ plot.PCA <- function(#basics
   if (grid)    .grid(nb.grids)
   if (density) .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
   if (contour) .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
-  if (delaunay) .delaunay(xy, fac, col)
+  if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<2) {
     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
