@@ -21,7 +21,7 @@ clust(x, fac, method, type, palette, ...)
 \item{...}{additional arguments to fed \link{plot.phylo}}
 }
 \value{
-a list with the following components:
+a (invisible) list with the following components:
 \itemize{
 \item dist.mat the distance matrix
 \item hclust the hclust object
@@ -36,7 +36,8 @@ package ape.
 data(bot)
 bot.f <- eFourier(bot, 12)
 clust(bot.f)
-clust(bot.f, "type", cex=0.7)
+bot.c <- clust(bot.f, "type", cex=0.7)
+#bot.c
 
 data(olea)
 olea.VL <- subset(olea, view=="VL")

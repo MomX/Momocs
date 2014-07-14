@@ -14,7 +14,7 @@
 #' \code{"fan"}, \code{"unrooted"} and \code{"radial"} to feed \link{plot.phylo}
 #' @param palette a color palette to use
 #' @param ... additional arguments to fed \link{plot.phylo}
-#' @return a list with the following components:
+#' @return a (invisible) list with the following components:
 #' \itemize{
 #' \item dist.mat the distance matrix
 #' \item hclust the hclust object
@@ -24,7 +24,8 @@
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
 #' clust(bot.f)
-#' clust(bot.f, "type", cex=0.7)
+#' bot.c <- clust(bot.f, "type", cex=0.7)
+#' #bot.c
 #' 
 #' data(olea)
 #' olea.VL <- subset(olea, view=="VL")
@@ -53,7 +54,7 @@ clust.Coe <- function(x, fac,
   on.exit(par(op))
   par(oma=rep(0, 4), mar=rep(0,4))
   plot(as.phylo.hclust(Coe.hc), tip.color=cols, type=type, ...)
-  return(list(dist.mat=dist.mat, hclust=Coe.hc))}
+  invisible(list(dist.mat=dist.mat, hclust=Coe.hc))}
 
 ##### end clust
 
