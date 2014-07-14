@@ -420,67 +420,80 @@ ldk.chull <- function(ldk, col="grey40", lty=1){
 
 # 3. various plotters ------------------------------------------------------
 
-#' Momocs' "oscilloscope" for periodic functions.
+#' Momocs' "oscilloscope" for Fourier-based approaches
 #' 
 #' Shape analysis deals with curve fitting, whether \eqn{x(t)} and \eqn{y(t)}
-#' positions along the curvilinear abscissa or radius/tangent angle variation.
-#' We may need to represent these single or double periodic functions that are
-#' ajusted by Fourier-based method. \code{coo.oscillo} and \code{coo.oscillo1}
-#' compute and provide standardized plot when given a matrix of coordinates or
-#' a vector, respectively. These functions are mainly used for development
-#' purpose but are included in the package.
-#' 
-#' @aliases coo.oscillo
-#' @usage coo.oscillo(coo, rug = TRUE, legend = TRUE, 
-#' cols = col.gallus(2), nb.pts=12)
+#' positions along the curvilinear abscissa and/or radius/tangent angle variation.
+#' These functions are mainly intended for (self-)teaching of Fourier-based methods.
 #' @param coo A list or a matrix of coordinates.
-#' @param rug \code{logical}. Whether to display a pseudo rug, that indicate if
-#' the derivate is positive.
-#' @param legend \code{logical}. Whether to add a legend.
-#' @param cols A \code{vector} of two colors for lines.
+#' @param method character among \code{c("efourier", "rfourier", "tfourier", "all")}. 
+#' \code{"all"} by default
 #' @param nb.pts \code{integer}. The number or reference points, sampled
 #' equidistantly along the curvilinear abscissa and added on the oscillo
 #' curves.
 #' @keywords Graphics
 #' @examples 
-#' data(bot)
-#' coo.oscillo(bot[1])
-#' 
+#' data(shapes)
+#' coo.oscillo(shapes[4])
+#' coo.oscillo(shapes[4], "efourier")
+#' coo.oscillo(shapes[4], "rfourier")
+#' coo.oscillo(shapes[4], "tfourier")
+#' #tfourier is prone to high-frequency noise but smoothing can help
+#' coo.oscillo(coo.smooth(shapes[4], 10), "tfourier") 
 #' @export
-coo.oscillo <- function(coo, rug=TRUE, legend=TRUE,
-                        cols=col.gallus(2), nb.pts=12){
-  coo <- coo.check(coo)
-  nr <- nrow(coo)
-  dx <- coo[, 1] - coo[1, 1]
-  dy <- coo[, 2] - coo[1, 2]
+coo.oscillo <- function(coo, method=c("efourier", "rfourier", "tfourier", "all")[4], nb.pts=24){
+  # we preapre a couple of things for coming graphics
+  labels <- 1:nb.pts
+  sampled <- round(seq(1, nrow(coo), len = nb.pts + 1)[-(nb.pts + 1)])
+  coo.lite <- coo[sampled, ] # equivalent to coo.sample
+  # we define a layout
+  if (method=="all"){
+    layout(matrix(1:4, ncol = 2, byrow = TRUE))
+  } else {
+    layout(matrix(1:2, ncol = 2, byrow = TRUE))}
   
-  def.par <- par(no.readonly = TRUE)
-  on.exit(par(def.par))
-  layout(matrix(1:2, ncol=2), widths=c(1, 2))
-  par(mar=c(3, 3, 2 , 1))
-  coo.plot(coo, points=FALSE, first.point=FALSE)
-  box()
-  refs <- round(seq(1, nr, length=nb.pts+1)[-(nb.pts+1)])
-  text(coo[refs, 1], coo[refs, 2], labels=as.character(1:nb.pts), cex=0.7)
-  ry <- max(abs(range(c(dx, dy))))
-  par(mar=c(3, 3, 2 , 1))
-  plot(NA, xlim=c(1, nr), xlab="",
-       ylim=c(-ry, ry)*1.1,   ylab="Deviation",
-       las=1, frame=FALSE, axes=FALSE)
-  axis(2, cex.axis=2/3, las=1)
-  lines(dx, col=cols[1])
-  lines(dy, col=cols[2])
-  text((1:nr)[refs], dx[refs],
-       labels=as.character(1:nb.pts), cex=0.7, col=cols[1])
-  text((1:nr)[refs], dy[refs],
-       labels=as.character(1:nb.pts), cex=0.7, col=cols[2])
-  mtext("Deviation", side=2, line=1.5)
-  box()
-  if (legend) {
+  # the original shape
+  coo.plot(coo, first.point=FALSE)
+  text(coo.lite, labels=labels, cex=0.7, font=2)
+  
+  if (any(method==c("all", "efourier"))){
+    # efourier
+    dxy <- coo.dxy(coo)
+    plot(NA, xlim=c(1, nrow(coo)), ylim=c(range(unlist(dxy))),
+         main = "Elliptical analysis",
+         xlab = "Points along the outline",
+         ylab = "Deviation from the first point (pixels)")
+    lines(dxy$dx, col="red")
+    text(sampled, dxy$dx[sampled], labels=labels, col="red", cex=0.7, font=2)
+    lines(dxy$dy, col="blue")
+    text(sampled, dxy$dy[sampled], labels=labels, col="blue", cex=0.7, font=2)
     legend("bottomright",
            legend = c(expression(x[i] - x[0]), expression(y[i] - y[0])),
-           col = cols, bg="#FFFFFFCC", 
-           cex=0.7, lty = 1, lwd=1, inset=0.05, bty="n")}}
+           col = c("red", "blue"), bg="#FFFFFFCC", 
+           cex=0.7, lty = 1, lwd=1, inset=0.05, bty="n")}
+  
+  if (any(method==c("all", "rfourier"))){
+    # rfourier
+    dr <- coo.centdist(coo)
+    plot(NA, xlim=c(1, nrow(coo)), ylim=range(dr),
+         main = "Radius variation",
+         xlab = "Points along the outline",
+         ylab = "Radius length (pixels)")
+    lines(dr, col="black")
+    text(sampled, dr[sampled], labels=labels, col="black", cex=0.7, font=2)}
+  # tfourier
+  if (any(method==c("all", "tfourier"))){
+    dt <- coo.tangle(coo)
+    plot(NA, xlim=c(1, nrow(coo)), ylim=range(dt),
+         main = "Tangent angle",
+         xlab = "Points along the outline",
+         ylab = "Tangent angle (radians)")
+    #lines((1:nrow(coo))[sampled], dt[sampled], lty=2, col="black")
+    lines(dt, col="black")
+    text(sampled, dt[sampled], labels=labels, col="black", cex=0.7, font=2)}
+  # we restore the layout
+  layout(matrix(1))
+}
 
 #' Plots deviation
 #' 
