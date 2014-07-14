@@ -592,6 +592,23 @@ coo.force2close <- function(coo){
   coo2 <- coo.trans(coo2, xy[1] - xy2[1], xy[2] - xy2[2])
   return(coo2)}
 
+
+#' Calculate abscissa and ordinate on a shape
+#' 
+#' A simple wrapper to calculate dxi - dx1 and dyi - dx1.
+#' @param coo a matrix (or a list) of (x; y) coordinates
+#' @return a list with two components \code{dx} and \code{dy}
+#' @seealso \link{coo.oscillo}
+#' @examples
+#' data(bot)
+#' coo.dxy(bot[1])
+#' @export
+coo.dxy <- function(coo){
+  coo <- coo.check(coo)
+  dx <- coo[, 1] - coo[1, 1]
+  dy <- coo[, 2] - coo[1, 2]
+  return(list(dx=dx, dy=dy))}
+
 # 2. Handling / baselines on coo and Coo -------------------------------------
 # Some functions and methods to ease alignments, grabbing part of shapes, etc.
 #' Retains coordinates with positive y-coordinates
