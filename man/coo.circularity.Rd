@@ -14,8 +14,8 @@ coo.circularity(coo)
 numeric, the circularity.
 }
 \description{
-Returns the "circularity measure". Also called "compactness"
-and "shape factor" sometimes.
+Returns the 'circularity measure'. Also called 'compactness'
+and 'shape factor' sometimes.
 }
 \examples{
 data(bot)

@@ -13,7 +13,9 @@
 #' @examples
 #' ed(c(0,1), c(1,0))
 #' @export
-ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
+ed <- function(pt1, pt2) {
+    return(sqrt((pt1[1] - pt2[1])^2 + (pt1[2] - pt2[2])^2))
+}
 
 #' Calculates euclidean intermediate between two points.
 #' 
@@ -30,8 +32,9 @@ ed <- function(pt1, pt2){return(sqrt((pt1[1]-pt2[1])^2+(pt1[2]-pt2[2])^2))}
 #' @examples
 #' edi(c(0,1), c(1,0), r = 0.5)
 #' @export
-edi <- function(pt1, pt2, r=0.5){
-  return(r*(pt2-pt1) + pt1) }
+edi <- function(pt1, pt2, r = 0.5) {
+    return(r * (pt2 - pt1) + pt1)
+}
 
 #' Calculates euclidean distance every pairs of points in two matrices.
 #' 
@@ -52,8 +55,9 @@ edi <- function(pt1, pt2, r=0.5){
 #' edm(x, x)
 #' edm(x, x+1)
 #' @export
-edm            <- function(m1, m2){ 
-  return(sqrt(apply((m1-m2)^2, 1, sum)))}
+edm <- function(m1, m2) {
+    return(sqrt(apply((m1 - m2)^2, 1, sum)))
+}
 
 #' Calculates the shortest euclidean distance found for every point of one
 #' matrix among those of a second.
@@ -84,17 +88,22 @@ edm            <- function(m1, m2){
 #' edm.nearest(x, x+rnorm(10))
 #' edm.nearest(x, x+rnorm(10), full=TRUE)
 #' @export
-edm.nearest <- function(m1, m2, full=FALSE){
-  if (!is.matrix(m1) | !is.matrix(m2)) stop("Matrices must be provided")
-  if (ncol(m1)!=2    | ncol(m2)!=2)    stop("2-cols matrices must be provided")
-  nr <- nrow(m1)
-  pos <- d  <- numeric(nr)
-  for (i in 1:nr){
-    m1.i   <- m1[i, ]
-    di     <- apply(m2, 1, function(x) sqrt(sum((x - m1.i)^2)))
-    d[i]   <- min(di)
-    pos[i] <- which.min(di)}
-  if (full) return(list(d=d, pos=pos)) else return(d) }
+edm.nearest <- function(m1, m2, full = FALSE) {
+    if (!is.matrix(m1) | !is.matrix(m2)) 
+        stop("Matrices must be provided")
+    if (ncol(m1) != 2 | ncol(m2) != 2) 
+        stop("2-cols matrices must be provided")
+    nr <- nrow(m1)
+    pos <- d <- numeric(nr)
+    for (i in 1:nr) {
+        m1.i <- m1[i, ]
+        di <- apply(m2, 1, function(x) sqrt(sum((x - m1.i)^2)))
+        d[i] <- min(di)
+        pos[i] <- which.min(di)
+    }
+    if (full) 
+        return(list(d = d, pos = pos)) else return(d)
+}
 
 ##### Miscellaneous functions for Fourier-based approaches
 
@@ -128,11 +137,13 @@ edm.nearest <- function(m1, m2, full=FALSE){
 #' retain <- coeff.sel(retain=8, drop=1, nb.h=32, cph=4)
 #' head(coe[, retain])
 #' @export
-coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
-  cs <- numeric()
-  for (i in 1:cph) {
-    cs <- c(cs, (1+drop):retain + nb.h*(i-1))}
-  return(cs)}
+coeff.sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
+    cs <- numeric()
+    for (i in 1:cph) {
+        cs <- c(cs, (1 + drop):retain + nb.h * (i - 1))
+    }
+    return(cs)
+}
 
 #' Converts a numerical description of harmonic coefficients to a named list.
 #' 
@@ -155,14 +166,17 @@ coeff.sel <- function(retain=8, drop=0, nb.h=32, cph=4){
 #' coeff.split(1:128, nb.h=32, cph=4) # efourier
 #' coeff.split(1:64, nb.h=32, cph=2)  # t/r fourier
 #' @export
-coeff.split <- function(cs, nb.h=8, cph=4){
-  if (missing(nb.h)) {nb.h <- length(cs)/cph }
-  cp <- list()
-  for (i in 1:cph) {
-    cp[[i]] <- cs[1:nb.h + (i-1)*nb.h]
-  }
-  names(cp) <- paste(letters[1:cph], "n", sep="")
-  return(cp)}
+coeff.split <- function(cs, nb.h = 8, cph = 4) {
+    if (missing(nb.h)) {
+        nb.h <- length(cs)/cph
+    }
+    cp <- list()
+    for (i in 1:cph) {
+        cp[[i]] <- cs[1:nb.h + (i - 1) * nb.h]
+    }
+    names(cp) <- paste(letters[1:cph], "n", sep = "")
+    return(cp)
+}
 
 #' Calculates harmonic power given a list from e/t/rfourier
 #' 
@@ -181,21 +195,24 @@ coeff.split <- function(cs, nb.h=8, cph=4){
 #' harm.pow(ef)
 #' harm.pow(rf)
 #' 
-#' plot(cumsum(harm.pow(ef)[-1]), type="o",
-#'   main="Cumulated harmonic power without the first harmonic",
-#'   ylab="Cumulated harmonic power", xlab="Harmonic rank")
+#' plot(cumsum(harm.pow(ef)[-1]), type='o',
+#'   main='Cumulated harmonic power without the first harmonic',
+#'   ylab='Cumulated harmonic power', xlab='Harmonic rank')
 #' 
 #' @export
-harm.pow <- function(xf){
-  if (is.list(xf)) {
-    if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
-      return((xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2)
+harm.pow <- function(xf) {
+    if (is.list(xf)) {
+        if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
+            return((xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2)
+        } else {
+            if (all(c("an", "bn") %in% names(xf))) {
+                return((xf$an^2 + xf$bn^2)/2)
+            }
+        }
     } else {
-      if (all(c("an", "bn") %in% names(xf))) {
-        return((xf$an^2 + xf$bn^2)/2)}
+        stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")
     }
-  } else {
-    stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")}}
+}
 
 ##### end misc Fourier
 
@@ -204,13 +221,13 @@ harm.pow <- function(xf){
 #' Returns ratio of norms and signed angle between two vectors provided as four
 #' numeric.
 #' 
-#' @param r1 the "real" part of the first vector, i.e. difference in
+#' @param r1 the 'real' part of the first vector, i.e. difference in
 #' x-coordinates.
-#' @param i1 the "imaginary" part of the first vector, i.e. difference in
+#' @param i1 the 'imaginary' part of the first vector, i.e. difference in
 #' y-coordinates.
-#' @param r2 the "real" part of the second vector, i.e. difference in
+#' @param r2 the 'real' part of the second vector, i.e. difference in
 #' x-coordinates.
-#' @param i2 the "imaginary" part of the second vector, i.e. difference in
+#' @param i2 the 'imaginary' part of the second vector, i.e. difference in
 #' y-coordinates.
 #' @return A list with two components: \code{r.norms} the ratio of (norm of
 #' vector 1)/(norm of vector 2) and \code{d.angle} the signed angle 'from' the
@@ -220,73 +237,88 @@ harm.pow <- function(xf){
 #' vecs.param(1, 0, 0, 2)
 #' 
 #' @export vecs.param
-vecs.param <- function(r1, i1, r2, i2){
-  x <- c(r1, i1, r2, i2)
-  if (!is.numeric(x)) {stop("4 numeric must be passed.")}
-  if (length(x)!=4)   {stop("4 numeric must be passed.")}
-  r.norms <- sqrt((r2^2 + i2^2)) / sqrt((r1^2 + i1^2))
-  d1 <- sqrt(sum(r1^2 + i1^2))
-  d2 <- sqrt(sum(r2^2 + i2^2))
-  return(list(r.norms=d1/d2, d.angle=atan2(i2, r2) - atan2(i1, r1)))}
+vecs.param <- function(r1, i1, r2, i2) {
+    x <- c(r1, i1, r2, i2)
+    if (!is.numeric(x)) {
+        stop("4 numeric must be passed.")
+    }
+    if (length(x) != 4) {
+        stop("4 numeric must be passed.")
+    }
+    r.norms <- sqrt((r2^2 + i2^2))/sqrt((r1^2 + i1^2))
+    d1 <- sqrt(sum(r1^2 + i1^2))
+    d2 <- sqrt(sum(r2^2 + i2^2))
+    return(list(r.norms = d1/d2, d.angle = atan2(i2, r2) - atan2(i1, 
+        r1)))
+}
 
 ##### Utilities (useless?)
 #'@export
-.refactor <- function(df){data.frame(lapply(df, factor))}
+.refactor <- function(df) {
+    data.frame(lapply(df, factor))
+}
 
 #' @export
-.trim.ext <- function(lf, width=nchar(lf)-4) {
-  return(strtrim(lf, width=width))}
+.trim.ext <- function(lf, width = nchar(lf) - 4) {
+    return(strtrim(lf, width = width))
+}
 
 #' @export
-.trim.path <- function(lf){
-  lf0 <- strsplit(lf, "/")
-  lf0 <- sapply(lf0, function(x) x[length(x)])
-  lf0 <- substr(lf0, 1, nchar(lf0)-4)
-return(lf0)}
+.trim.path <- function(lf) {
+    lf0 <- strsplit(lf, "/")
+    lf0 <- sapply(lf0, function(x) x[length(x)])
+    lf0 <- substr(lf0, 1, nchar(lf0) - 4)
+    return(lf0)
+}
 
 #' @export
-.lf.auto <- function(){
-  p <- file.choose()
-  # damn ugly
-  p <- strsplit(p, split = "/")
-  p <- p[[1]][-length(p[[1]])]
-  p <- paste0(p, collapse="/")
-  lf <- list.files(p, full.names = TRUE)
-  return(lf)}
+.lf.auto <- function() {
+    p <- file.choose()
+    # damn ugly
+    p <- strsplit(p, split = "/")
+    p <- p[[1]][-length(p[[1]])]
+    p <- paste0(p, collapse = "/")
+    lf <- list.files(p, full.names = TRUE)
+    return(lf)
+}
 
 #' @export
-.normalize <- function(x, min.x, max.x){
-  # damn long but default arguments are not accepted
-  if (missing(min.x)) min.x <- min(x)
-  x <- x - min(x)
-  if (missing(max.x)) max.x <- max(x)
-  x <- x / max.x
-  return(x)}
+.normalize <- function(x, min.x, max.x) {
+    # damn long but default arguments are not accepted
+    if (missing(min.x)) 
+        min.x <- min(x)
+    x <- x - min(x)
+    if (missing(max.x)) 
+        max.x <- max(x)
+    x <- x/max.x
+    return(x)
+}
 
 #' @export
-.mat.buffer <-
-  function(m, buff.size, buff.fill=1){
-    nr     <- nrow(m)
-    c.buff <- matrix(buff.fill, nrow=nr, ncol=buff.size)
-    m      <- cbind(c.buff, m, c.buff)
-    nc     <- ncol(m)
-    r.buff <- matrix(buff.fill, nrow=buff.size, ncol=nc)
-    m      <- rbind(r.buff, m, r.buff)
-    return(m)}
+.mat.buffer <- function(m, buff.size, buff.fill = 1) {
+    nr <- nrow(m)
+    c.buff <- matrix(buff.fill, nrow = nr, ncol = buff.size)
+    m <- cbind(c.buff, m, c.buff)
+    nc <- ncol(m)
+    r.buff <- matrix(buff.fill, nrow = buff.size, ncol = nc)
+    m <- rbind(r.buff, m, r.buff)
+    return(m)
+}
 
 #' @export
-.mat.unbuffer <-
-  function(m, unbuff.size){
-    nr     <- nrow(m)
-    m      <- m[  -c(1:unbuff.size, (nr-unbuff.size+1):nr), ]
-    nc     <- ncol(m)
-    m      <- m[, -c(1:unbuff.size, (nc-unbuff.size+1):nc)  ]
-    return(m)}
+.mat.unbuffer <- function(m, unbuff.size) {
+    nr <- nrow(m)
+    m <- m[-c(1:unbuff.size, (nr - unbuff.size + 1):nr), ]
+    nc <- ncol(m)
+    m <- m[, -c(1:unbuff.size, (nc - unbuff.size + 1):nc)]
+    return(m)
+}
 
 #' @export
 .mat.resize <- function(m, ratio) {
     dm <- floor(dim(m)/ratio)
-    return(m[round(seq(1, nrow(m), len=dm[1])),
-             round(seq(1, ncol(m), len=dm[2]))])}
+    return(m[round(seq(1, nrow(m), len = dm[1])), round(seq(1, 
+        ncol(m), len = dm[2]))])
+}
 
-##### End Miscellaneous
+##### End Miscellaneous 

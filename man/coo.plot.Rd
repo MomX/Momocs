@@ -71,10 +71,10 @@ b <- bot[1]
 coo.plot(b)
 coo.plot(bot[2], plot.new=FALSE) # equivalent to coo.draw(bot[2])
 coo.plot(b, zoom=2)
-coo.plot(b, border="blue")
+coo.plot(b, border='blue')
 coo.plot(b, first.point=FALSE, centroid=FALSE)
 coo.plot(b, points=TRUE, pch=20)
-coo.plot(b, xy.axis=FALSE, lwd=2, col="#F2F2F2")
+coo.plot(b, xy.axis=FALSE, lwd=2, col='#F2F2F2')
 }
 \seealso{
 coo.draw

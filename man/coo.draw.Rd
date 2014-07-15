@@ -19,7 +19,7 @@ data(bot)
 b1 <- bot[4]
 b2 <- bot[5]
 coo.plot(b1)
-coo.draw(b2, border="red") # all coo.plot arguments will work for coo.draw
+coo.draw(b2, border='red') # all coo.plot arguments will work for coo.draw
 }
 \keyword{Graphics}
 

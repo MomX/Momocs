@@ -12,7 +12,7 @@ hqual(Out, method = c("efourier", "rfourier", "tfourier"), id,
 \arguments{
 \item{Out}{the \code{Out} object on which to hqual}
 
-\item{method}{any method from \code{c("efourier", "rfourier", "tfourier")}}
+\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
 
 \item{id}{the shape on which to perform hqual}
 
@@ -26,7 +26,7 @@ hqual(Out, method = c("efourier", "rfourier", "tfourier"), id,
 
 \item{align}{logical whether to align th shape}
 
-\item{plot.method}{either \code{"\link{panel}"} or \code{"\link{stack}"}}
+\item{plot.method}{either \code{'\link{panel}'} or \code{'\link{stack}'}}
 
 \item{legend}{logical whether to plot a legend}
 

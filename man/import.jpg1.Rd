@@ -43,9 +43,9 @@ if you align manually the images and if you want to retain this information
 in the consequent morphometric analyses.
 
 If the point at the center of the
-image is not within the shape, i.e. is "white" you have two choices defined by
+image is not within the shape, i.e. is 'white' you have two choices defined by
 the 'auto.notcentered' argument. If it's TRUE, some random starting points
-will be tried until on of them is "black" and within the shape; if FALSE
+will be tried until on of them is 'black' and within the shape; if FALSE
 you will be asked to click on a point within the shape.
 
 If some pixels on the borders are not white, this functions adds a 2-pixel

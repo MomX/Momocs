@@ -120,4 +120,4 @@ NULL
 #' outlines as a standardization procedure for elliptic fourier analysis. 
 #' \emph{American Journal of Physical Anthropology}, 153(2), 314-22. doi:10.1002/ajpa.22428
 #' \url{http://onlinelibrary.wiley.com/doi/10.1002/ajpa.22428/abstract}
-NULL
+NULL 

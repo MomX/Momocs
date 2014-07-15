@@ -17,7 +17,7 @@ to the number of groups.}
 \item{split}{character, the spliting factor used for the file names.}
 
 \item{trim.extension}{logical. Whether to remove the last for characters in
-filenames, typically their extension, e.g. ".jpg".}
+filenames, typically their extension, e.g. '.jpg'.}
 }
 \value{
 data.frame with, for every individual, the corresponding level
@@ -35,11 +35,11 @@ from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
 The number of groups must be consistent accross filenames.
 }
 \note{
-This is, to my view, a good practice to "store" the grouoing structure
+This is, to my view, a good practice to 'store' the grouoing structure
 in filenames, but it is of course not mandatory.
 
-Note also that you can: i) do a \link{import.jpg} and save is a list, say "foo";
-then ii) pass "names(foo)" to lf.structure. See Momocs' vignette for an illustration.
+Note also that you can: i) do a \link{import.jpg} and save is a list, say 'foo';
+then ii) pass 'names(foo)' to lf.structure. See Momocs' vignette for an illustration.
 }
 \seealso{
 \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.

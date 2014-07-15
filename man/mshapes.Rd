@@ -30,23 +30,23 @@ a list with two components: \code{$Coe} object of the same class, and
 }
 \description{
 Calculates mean shapes on matrices of coefficients by groups (if passed with
-a "fac") or globally (if not), and on \link{Coe} objects.
+a 'fac') or globally (if not), and on \link{Coe} objects.
 }
 \examples{
 data(bot)
 bot.f <- eFourier(bot, 12)
 mshapes(bot.f) # the mean (global) shape
-ms <- mshapes(bot.f, "type")
+ms <- mshapes(bot.f, 'type')
 ms$Coe
 class(ms$Coe)
 ms <- ms$shp
 coo.plot(ms$beer)
-coo.draw(ms$whisky, border="forestgreen")
+coo.draw(ms$whisky, border='forestgreen')
 tps.arr(ms$whisky, ms$beer) #etc.
 
 data(olea)
-op <- rawPolynomials(subset(olea, view=="VL"), 5)
-ms <- mshapes(op, "cep") #etc
+op <- rawPolynomials(subset(olea, view=='VL'), 5)
+ms <- mshapes(op, 'cep') #etc
 ms$Coe
 panel(Opn(ms$shp), names=TRUE)
 

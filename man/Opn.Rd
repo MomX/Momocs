@@ -36,10 +36,10 @@ op <- orthoPolynomials(olea, degree=5)
 op
 # Let's do a PCA on it
 op.p <- PCA(op)
-plot(op.p, "domes")
-plot(op.p, "cep")
+plot(op.p, 'domes')
+plot(op.p, 'cep')
 # and now an LDA
-olda <- LDA(op, "cep")
+olda <- LDA(op, 'cep')
 # for CV table
 olda
 plot(olda)

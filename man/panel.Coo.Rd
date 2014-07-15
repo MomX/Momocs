@@ -64,7 +64,7 @@ data(olea)
 panel(olea)
 data(bot)
 # an illustration of the use of fac
-panel(bot, fac="type", palette=col.spring, names=TRUE)
+panel(bot, fac='type', palette=col.spring, names=TRUE)
 }
 \seealso{
 \link{stack.Coo}, \link{plot.Coo}.

@@ -22,7 +22,7 @@ of \code{AD} over \code{amp}. See references below for more details.
 data(bot)
 bot.f <- eFourier(bot, 12)
 res <- symmetry(bot.f)
-hist(res[, "sym"])
+hist(res[, 'sym'])
 }
 \references{
 Below: the first mention, and two applications.

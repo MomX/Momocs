@@ -8,7 +8,7 @@ coo.theta.pts(coo, method = c("atan2", "acos")[1])
 \arguments{
 \item{coo}{a \code{matrix} or a list of (x; y) coordinates.}
 
-\item{method}{one of "atan2" or "acos" for a signed or not angle.}
+\item{method}{one of 'atan2' or 'acos' for a signed or not angle.}
 }
 \value{
 \code{numeric} the angles in radians for every edge.

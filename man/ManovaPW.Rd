@@ -24,7 +24,7 @@ may be very long, see examples):
  \item manovas a list containing all the raw manovas
  \item summary a matrix with all important statists
  \item stars.tab a table with 'significance star', discutable but useful:
- '***' if Pr(>F) < 0.001; '**' of < 0.01; '*' if < 0.05; "." if < 0.10 and "-" if above.
+ '***' if Pr(>F) < 0.001; '**' of < 0.01; '*' if < 0.05; '.' if < 0.10 and '-' if above.
 }
 }
 \description{
@@ -39,14 +39,14 @@ data(bot)
 # we create a fake factor with 4 levels
 bot$fac$fake <- factor(rep(letters[1:4], each=10))
 bot.f <- eFourier(bot, 8)
-ManovaPW(bot.f, "fake") # or ManovaPW(bot.f, 2)
+ManovaPW(bot.f, 'fake') # or ManovaPW(bot.f, 2)
 
 # an example on open outlines
 data(olea)
 op <- rawPolynomials(olea)
-ManovaPW(op, "domes")
+ManovaPW(op, 'domes')
 # to get the results
-res <- ManovaPW(op, "domes")
+res <- ManovaPW(op, 'domes')
 res$manovas
 res$stars.tab
 res$summary

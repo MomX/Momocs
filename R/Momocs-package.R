@@ -15,11 +15,11 @@
 #' toolkit to specialists within every field that are, or may be, interested in integrating
 #'  shape in their researches.
 #' 
-#' To cite Momocs in publications: \code{citation("Momocs")}.
+#' To cite Momocs in publications: \code{citation('Momocs')}.
 #' 
 #' @seealso
 #' \itemize{
-#'  \item \bold{Demos}: \code{demo(package="Momocs")} for the list of demos, e.g. \code{demo(eft)}
+#'  \item \bold{Demos}: \code{demo(package='Momocs')} for the list of demos, e.g. \code{demo(eft)}
 #'  \item \bold{Homepage}: \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
 #' and hotline
 #'  \item \bold{GitHub repo}: \url{https://github.com/vbonhomme/Momocs} to contribute,
@@ -52,10 +52,7 @@
 #' @keywords Abtract
 NULL
 
-# .onAttach <- function(lib, pkg)  {
-#   packageStartupMessage("This is Momocs ",
-#                         utils::packageDescription("Momocs",
-#                                                   field="Version"),
-#                         appendLF = TRUE)
-# }
-
+# .onAttach <- function(lib, pkg) {
+# packageStartupMessage('This is Momocs ',
+# utils::packageDescription('Momocs', field='Version'),
+# appendLF = TRUE) } 

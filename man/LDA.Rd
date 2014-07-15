@@ -24,7 +24,7 @@ LDA(x, fac, retain, ...)
 \item{...}{additional arguments to feed \link{lda}}
 }
 \value{
-a "LDA" object on which to apply \link{plot.LDA}, which is a list with components:
+a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:
 \itemize{
  \item \code{x} any \link{Coe} object (or a matrix)
  \item \code{fac} grouping factor used
@@ -45,11 +45,11 @@ Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 \examples{
 data(bot)
 bot.f <- eFourier(bot, 24)
-bot.l <- LDA(bot.f, "type")
+bot.l <- LDA(bot.f, 'type')
 bot.l
 plot(bot.l)
 bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
-bot.l <- LDA(bot.f, "plop")
+bot.l <- LDA(bot.f, 'plop')
 bot.l
 plot(bot.l)
 }

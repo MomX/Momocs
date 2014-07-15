@@ -14,7 +14,7 @@ coo.interpolate(coo, n)
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
-Interpolates n coordinates "among existing points"between" existing points,
+Interpolates n coordinates 'among existing points'between' existing points,
 along the perimeter of the coordinates provided and keeping the first point
 }
 \examples{

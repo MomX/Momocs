@@ -37,7 +37,7 @@ coo.plot(coo)
 rf  <- rfourier(coo, 12)
 rf
 rfi <- rfourier.i(rf)
-coo.draw(rfi, border="red", col=NA)
+coo.draw(rfi, border='red', col=NA)
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,

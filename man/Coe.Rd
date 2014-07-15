@@ -9,7 +9,7 @@ Coe(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coe} class is a "super class" for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
+\code{Coe} class is a 'super class' for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
 matrices of coefficients (in their \code{$coe} slot), along with other informations,
 (e.g. an inherited \code{$fac}) obtained with morphometrics methods on
 \link{Out}, \link{Opn} and \link{Ldk} objects.
@@ -28,7 +28,7 @@ for documentation on these classes.
 }
 \examples{
 # to see all methods for Coo objects.
-methods(class="Coe")
+methods(class='Coe')
 
 data(bot)
 bot.f<- eFourier(bot, 12)

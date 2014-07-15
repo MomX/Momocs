@@ -42,7 +42,7 @@
 #' and a sine curve represent the \eqn{n^{th}} harmonic content of the \eqn{x}
 #' and \eqn{y} projections of the \eqn{k}-edged polygon, and for any \eqn{n},
 #' these two curves define an ellipse in the plane. Ferson and colleagues
-#' noticed that in the "time" it takes the \eqn{n^{th}} harmonic to traverse
+#' noticed that in the 'time' it takes the \eqn{n^{th}} harmonic to traverse
 #' its ellipse \eqn{n} times, the \eqn{(n+1)^{th}} harmonic has traversed its
 #' own ellipse \eqn{n+1} times. The reconstruction of the original polygon is
 #' done by vector adding these ellipses for all harmonics, which echoes
@@ -78,43 +78,59 @@
 #' ef <- efourier(coo, 12)
 #' ef
 #' efi <- efourier.i(ef)
-#' coo.draw(efi, border="red", col=NA)
+#' coo.draw(efi, border='red', col=NA)
 #' @export
-efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
-  coo <- coo.check(coo)
-  if (is.closed(coo)) coo <- coo.unclose(coo)
-  nr <- nrow(coo)
-  if (missing(nb.h)) {
-    nb.h <- 32
-    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
-  if(nb.h * 2 > nr) {
-    nb.h = floor(nr/2)
-    if (verbose){
-      cat(" * 'nb.h' must be lower than half the number of points, and has been set to", nb.h, "harmonics.\n")}}
-  if (nb.h == -1) {
-    nb.h = floor(nr/2)
-    if (verbose){
-      cat(" * The number of harmonics used has been set to: ", nb.h)}}
-  if (smooth.it != 0) { coo <- coo.smooth(coo, smooth.it) }
-  Dx <- coo[, 1] - coo[, 1][c(nr, (1:(nr - 1)))] # there was a bug there. check from claude? #todo
-  Dy <- coo[, 2] - coo[, 2][c(nr, (1:(nr - 1)))]
-  Dt <- sqrt(Dx^2 + Dy^2)
-  Dt[Dt<1e-10] <- 1e-10 # to avoid Nan
-  t1 <- cumsum(Dt)
-  t1m1 <- c(0, t1[-nr])
-  T <- sum(Dt)
-  an <- bn <- cn <- dn <- numeric(nb.h)
-  for (i in 1:nb.h) {
-    Ti <- (T/(2 * pi^2 * i^2))
-    r <- 2 * i * pi
-    an[i] <- Ti * sum((Dx/Dt) * (cos(r * t1/T) - cos(r * t1m1/T)))
-    bn[i] <- Ti * sum((Dx/Dt) * (sin(r * t1/T) - sin(r * t1m1/T)))
-    cn[i] <- Ti * sum((Dy/Dt) * (cos(r * t1/T) - cos(r * t1m1/T)))
-    dn[i] <- Ti * sum((Dy/Dt) * (sin(r * t1/T) - sin(r * t1m1/T)))
-  }
-  ao <- 2 * sum(coo[, 1] * Dt/T)
-  co <- 2 * sum(coo[, 2] * Dt/T)
-  return(list(an = an, bn = bn, cn = cn, dn = dn, ao = ao, co = co))}
+efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
+    coo <- coo.check(coo)
+    if (is.closed(coo)) 
+        coo <- coo.unclose(coo)
+    nr <- nrow(coo)
+    if (missing(nb.h)) {
+        nb.h <- 32
+        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+    }
+    if (nb.h * 2 > nr) {
+        nb.h = floor(nr/2)
+        if (verbose) {
+            cat(" * 'nb.h' must be lower than half the number of points, and has been set to", 
+                nb.h, "harmonics.\n")
+        }
+    }
+    if (nb.h == -1) {
+        nb.h = floor(nr/2)
+        if (verbose) {
+            cat(" * The number of harmonics used has been set to: ", 
+                nb.h)
+        }
+    }
+    if (smooth.it != 0) {
+        coo <- coo.smooth(coo, smooth.it)
+    }
+    Dx <- coo[, 1] - coo[, 1][c(nr, (1:(nr - 1)))]  # there was a bug there. check from claude? #todo
+    Dy <- coo[, 2] - coo[, 2][c(nr, (1:(nr - 1)))]
+    Dt <- sqrt(Dx^2 + Dy^2)
+    Dt[Dt < 1e-10] <- 1e-10  # to avoid Nan
+    t1 <- cumsum(Dt)
+    t1m1 <- c(0, t1[-nr])
+    T <- sum(Dt)
+    an <- bn <- cn <- dn <- numeric(nb.h)
+    for (i in 1:nb.h) {
+        Ti <- (T/(2 * pi^2 * i^2))
+        r <- 2 * i * pi
+        an[i] <- Ti * sum((Dx/Dt) * (cos(r * t1/T) - cos(r * 
+            t1m1/T)))
+        bn[i] <- Ti * sum((Dx/Dt) * (sin(r * t1/T) - sin(r * 
+            t1m1/T)))
+        cn[i] <- Ti * sum((Dy/Dt) * (cos(r * t1/T) - cos(r * 
+            t1m1/T)))
+        dn[i] <- Ti * sum((Dy/Dt) * (sin(r * t1/T) - sin(r * 
+            t1m1/T)))
+    }
+    ao <- 2 * sum(coo[, 1] * Dt/T)
+    co <- 2 * sum(coo[, 2] * Dt/T)
+    return(list(an = an, bn = bn, cn = cn, dn = dn, ao = ao, 
+        co = co))
+}
 
 #' Inverse elliptical Fourier transform
 #' 
@@ -145,31 +161,38 @@ efourier <- function (coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' ef  <- efourier(coo, 12)
 #' ef
 #' efi <- efourier.i(ef)
-#' coo.draw(efi, border="red", col=NA)
+#' coo.draw(efi, border='red', col=NA)
 #' @export
 efourier.i <- function(ef, nb.h, nb.pts = 120) {
-  #if (any(names(ef) != c("an", "bn", "cn", "dn"))) {
-  #  stop("a list containing 'an', 'bn', 'cn' and 'dn' harmonic coefficients must be provided")}
-  if (is.null(ef$ao)) ef$ao <- 0
-  if (is.null(ef$co)) ef$co <- 0
-  an <- ef$an
-  bn <- ef$bn
-  cn <- ef$cn
-  dn <- ef$dn
-  ao <- ef$ao
-  co <- ef$co
-  if (missing(nb.h)) { nb.h <- length(an) }
-  theta <- seq(0, 2 * pi, length = nb.pts + 1)[-(nb.pts + 1)]
-  hx <- matrix(NA, nb.h, nb.pts)
-  hy <- matrix(NA, nb.h, nb.pts)
-  for (i in 1:nb.h) {
-    hx[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * theta)
-    hy[i, ] <- cn[i] * cos(i * theta) + dn[i] * sin(i * theta)}
-  x <- (ao/2) + apply(hx, 2, sum)
-  y <- (co/2) + apply(hy, 2, sum)
-  coo <- cbind(x, y)
-  colnames(coo) <- c("x", "y")
-  return(coo)}
+    # if (any(names(ef) != c('an', 'bn', 'cn', 'dn'))) { stop('a
+    # list containing 'an', 'bn', 'cn' and 'dn' harmonic
+    # coefficients must be provided')}
+    if (is.null(ef$ao)) 
+        ef$ao <- 0
+    if (is.null(ef$co)) 
+        ef$co <- 0
+    an <- ef$an
+    bn <- ef$bn
+    cn <- ef$cn
+    dn <- ef$dn
+    ao <- ef$ao
+    co <- ef$co
+    if (missing(nb.h)) {
+        nb.h <- length(an)
+    }
+    theta <- seq(0, 2 * pi, length = nb.pts + 1)[-(nb.pts + 1)]
+    hx <- matrix(NA, nb.h, nb.pts)
+    hy <- matrix(NA, nb.h, nb.pts)
+    for (i in 1:nb.h) {
+        hx[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * theta)
+        hy[i, ] <- cn[i] * cos(i * theta) + dn[i] * sin(i * theta)
+    }
+    x <- (ao/2) + apply(hx, 2, sum)
+    y <- (co/2) + apply(hy, 2, sum)
+    coo <- cbind(x, y)
+    colnames(coo) <- c("x", "y")
+    return(coo)
+}
 
 #' Normalizes harmonic coefficients.
 #' 
@@ -178,11 +201,11 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' 
 #' See \link{efourier} for the mathematical background of the normalization.
 #' 
-#' Sometimes shapes do not "align" well each others, and this is usually detectable
+#' Sometimes shapes do not 'align' well each others, and this is usually detectable
 #' on a morphospace on a regular PCA. You mat find 180 degrees rotated shapes or bizarre clustering.
 #' Most of the time this is due to a poor normalization on the matrix of coefficients, and the
 #' variability you observe may mostly be due to the variability in the alignment of the
-#' "first" ellipsis which is defined by the first harmonic, used for the normalization. In that
+#' 'first' ellipsis which is defined by the first harmonic, used for the normalization. In that
 #' case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You 
 #' have several options: \link{coo.align}, \link{coo.aligncalliper}, \link{fgProcrustes} either directly on
 #' the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of
@@ -226,42 +249,54 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' efourier.shape(nb.h=12, alpha=0.9)
 #' @export
 efourier.norm <- function(ef, start = FALSE) {
-  A1 <- ef$an[1]
-  B1 <- ef$bn[1]
-  C1 <- ef$cn[1]
-  D1 <- ef$dn[1]
-  nb.h <- length(ef$an)
-  theta      <- 0.5 * atan(2 * (A1 * B1 + C1 * D1)/(A1^2 + C1^2 - B1^2 - D1^2)) %% pi
-  phaseshift <- matrix(c(cos(theta), sin(theta), -sin(theta), cos(theta)), 2, 2)
-  M2 <- matrix(c(A1, C1, B1, D1), 2, 2) %*% phaseshift
-  v <- apply(M2^2, 2, sum)
-  if (v[1] < v[2]) {theta <- theta + pi/2}
-  theta <- (theta + pi/2)%%pi - pi/2
-  Aa <- A1*cos(theta) + B1*sin(theta)
-  Cc <- C1*cos(theta) + D1*sin(theta)
-  scale <- sqrt(Aa^2 + Cc^2)
-  psi   <- atan(Cc/Aa)%%pi
-  if (Aa<0){psi<-psi+pi}
-  size  <- 1/scale
-  rotation <- matrix(c(cos(psi), -sin(psi), sin(psi), cos(psi)), 2, 2)
-  A <- B <- C <- D <- numeric(nb.h)
-  if (start) {theta <- 0}
-  for (i in 1:nb.h) {
-    mat <- size * rotation %*%
-      matrix(c(ef$an[i], ef$cn[i], ef$bn[i], ef$dn[i]), 2, 2) %*%
-      matrix(c(cos(i*theta), sin(i*theta), -sin(i*theta), cos(i*theta)), 2, 2)
-    A[i] <- mat[1, 1]
-    B[i] <- mat[1, 2]
-    C[i] <- mat[2, 1]
-    D[i] <- mat[2, 2]
-    lnef <- c(A[i], B[i], C[i], D[i])}
-  list(A = A, B = B, C = C, D = D, size = scale, theta = theta, 
-       psi = psi, ao = ef$ao, co = ef$co, lnef = lnef)}
+    A1 <- ef$an[1]
+    B1 <- ef$bn[1]
+    C1 <- ef$cn[1]
+    D1 <- ef$dn[1]
+    nb.h <- length(ef$an)
+    theta <- 0.5 * atan(2 * (A1 * B1 + C1 * D1)/(A1^2 + C1^2 - 
+        B1^2 - D1^2))%%pi
+    phaseshift <- matrix(c(cos(theta), sin(theta), -sin(theta), 
+        cos(theta)), 2, 2)
+    M2 <- matrix(c(A1, C1, B1, D1), 2, 2) %*% phaseshift
+    v <- apply(M2^2, 2, sum)
+    if (v[1] < v[2]) {
+        theta <- theta + pi/2
+    }
+    theta <- (theta + pi/2)%%pi - pi/2
+    Aa <- A1 * cos(theta) + B1 * sin(theta)
+    Cc <- C1 * cos(theta) + D1 * sin(theta)
+    scale <- sqrt(Aa^2 + Cc^2)
+    psi <- atan(Cc/Aa)%%pi
+    if (Aa < 0) {
+        psi <- psi + pi
+    }
+    size <- 1/scale
+    rotation <- matrix(c(cos(psi), -sin(psi), sin(psi), cos(psi)), 
+        2, 2)
+    A <- B <- C <- D <- numeric(nb.h)
+    if (start) {
+        theta <- 0
+    }
+    for (i in 1:nb.h) {
+        mat <- size * rotation %*% matrix(c(ef$an[i], ef$cn[i], 
+            ef$bn[i], ef$dn[i]), 2, 2) %*% matrix(c(cos(i * theta), 
+            sin(i * theta), -sin(i * theta), cos(i * theta)), 
+            2, 2)
+        A[i] <- mat[1, 1]
+        B[i] <- mat[1, 2]
+        C[i] <- mat[2, 1]
+        D[i] <- mat[2, 2]
+        lnef <- c(A[i], B[i], C[i], D[i])
+    }
+    list(A = A, B = B, C = C, D = D, size = scale, theta = theta, 
+        psi = psi, ao = ef$ao, co = ef$co, lnef = lnef)
+}
 
-#' Calculates and draw "efourier" shapes.
+#' Calculates and draw 'efourier' shapes.
 #' 
-#' \code{efourier.shape} calculates a "Fourier elliptical shape" given Fourier
-#' coefficients (see \code{Details}) or can generate some "efourier" shapes.
+#' \code{efourier.shape} calculates a 'Fourier elliptical shape' given Fourier
+#' coefficients (see \code{Details}) or can generate some 'efourier' shapes.
 #' Mainly intended to generate shapes and/or to understand how efourier works.
 #' 
 #' \code{efourier.shape} can be used by specifying \code{nb.h} and
@@ -307,53 +342,56 @@ efourier.norm <- function(ef, start = FALSE) {
 #' panel(Out(a2l(replicate(100, 
 #' efourier.shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
 #' @export
-efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts=60, alpha=2, plot=TRUE){
-  if (missing(nb.h) &  missing(an)) nb.h <- 3
-  if (missing(nb.h) & !missing(an)) nb.h <- length(an)
-  if (missing(an)) an <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  if (missing(bn)) bn <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  if (missing(cn)) cn <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  if (missing(dn)) dn <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  ef  <- list(an=an, bn=bn, cn=cn, dn=dn, ao=0, co=0)
-  shp <- efourier.i(ef, nb.h=nb.h, nb.pts=nb.pts)      
-  if (plot) coo.plot(shp)
-  return(shp)}
+efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60, 
+    alpha = 2, plot = TRUE) {
+    if (missing(nb.h) & missing(an)) 
+        nb.h <- 3
+    if (missing(nb.h) & !missing(an)) 
+        nb.h <- length(an)
+    if (missing(an)) 
+        an <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    if (missing(bn)) 
+        bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    if (missing(cn)) 
+        cn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    if (missing(dn)) 
+        dn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    ef <- list(an = an, bn = bn, cn = cn, dn = dn, ao = 0, co = 0)
+    shp <- efourier.i(ef, nb.h = nb.h, nb.pts = nb.pts)
+    if (plot) 
+        coo.plot(shp)
+    return(shp)
+}
 
-# exotic and useless
-# #' Dilates shapes based on elliptical Fourier decomposition.
-# #' 
-# #' Calculates dilated and eroded shapes based on elliptical
-# #' Fourier decomposition \emph{i.e.} taking into account the shape as a whole.
-# #' Lists created by \code{efourier} objects can be passed to \code{ef.amplify}
-# #' @param ef \code{list}. A list containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and
-# #' \eqn{d_n} Fourier coefficients, such as returned by \code{efourier}.
-# #' @param amp A vector of \code{numeric}. If \code{amp} is of length 4, the
-# #' value specify the multiplication factor for \eqn{a_1}, \eqn{b_1}, \eqn{c_1}
-# #' and \eqn{d_1} ; if only one value is provided, then the multiplication
-# #' factor will be the same for the four coefficients \eqn{abcd_1}.
-# #' @return \code{ef.amplify} returns the \code{ef} provided but with
-# #' "amplified" coefficients for the first harmonics.
-# #' @seealso \link{efourier} for a description of the elliptical Fourier
-# #' analysis and \link{Ptolemy} for an illustration of the first
-# #' ellipse/harmonic defining the shape "amplitude".
-# #' @keywords eFourier
-# #' @examples 
-# #' shp <- efourier.shape()
-# #' plot(shp, xlim=c(-20, 20), asp=1, type="l")
-# #' shp.coe <- efourier(shp, 12)
-# #' amps <- seq(0.2, 2, 0.2)
-# #' cols <- col.summer(length(amps))
-# #' for (i in seq(along=amps)) {
-# #'  shp.coe2 <- ef.amplify(shp.coe, amp=amps[i])
-# #'  shp2  <- efourier.i(shp.coe2)
-# #'  lines(shp2, col=cols[i])}
-# #' @export
-# ef.amplify <- function(ef, amp=rep(0.5, 4)){
-#   if (length(amp)==1) amp <- rep(amp, 4)
-#   ef$an <- ef$an*amp[1]
-#   ef$bn <- ef$bn*amp[2]
-#   ef$cn <- ef$cn*amp[3]
-#   ef$dn <- ef$dn*amp[4]
-#   return(ef)}
+# exotic and useless #' Dilates shapes based on elliptical
+# Fourier decomposition.  #' #' Calculates dilated and eroded
+# shapes based on elliptical #' Fourier decomposition
+# \emph{i.e.} taking into account the shape as a whole.  #'
+# Lists created by \code{efourier} objects can be passed to
+# \code{ef.amplify} #' @param ef \code{list}. A list
+# containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and #'
+# \eqn{d_n} Fourier coefficients, such as returned by
+# \code{efourier}.  #' @param amp A vector of
+# \code{numeric}. If \code{amp} is of length 4, the #'
+# value specify the multiplication factor for \eqn{a_1},
+# \eqn{b_1}, \eqn{c_1} #' and \eqn{d_1} ; if only one
+# value is provided, then the multiplication #' factor will
+# be the same for the four coefficients \eqn{abcd_1}.  #'
+# @return \code{ef.amplify} returns the \code{ef} provided
+# but with #' 'amplified' coefficients for the first
+# harmonics.  #' @seealso \link{efourier} for a description
+# of the elliptical Fourier #' analysis and \link{Ptolemy}
+# for an illustration of the first #' ellipse/harmonic
+# defining the shape 'amplitude'.  #' @keywords eFourier #'
+# @examples #' shp <- efourier.shape() #' plot(shp,
+# xlim=c(-20, 20), asp=1, type='l') #' shp.coe <-
+# efourier(shp, 12) #' amps <- seq(0.2, 2, 0.2) #' cols <-
+# col.summer(length(amps)) #' for (i in seq(along=amps)) { #'
+# shp.coe2 <- ef.amplify(shp.coe, amp=amps[i]) #' shp2 <-
+# efourier.i(shp.coe2) #' lines(shp2, col=cols[i])} #'
+# @export ef.amplify <- function(ef, amp=rep(0.5, 4)){ if
+# (length(amp)==1) amp <- rep(amp, 4) ef$an <- ef$an*amp[1]
+# ef$bn <- ef$bn*amp[2] ef$cn <- ef$cn*amp[3] ef$dn <-
+# ef$dn*amp[4] return(ef)}
 
-##### end eFourier
+##### end eFourier 

@@ -25,7 +25,7 @@ PCA(x, scale., center)
 \item{center}{logical whether to center the input data}
 }
 \value{
-a "PCA" object on which to apply \link{plot.PCA}
+a 'PCA' object on which to apply \link{plot.PCA}
 }
 \description{
 Performs a PCA on \link{Coe} objects, using \link{prcomp}.
@@ -40,7 +40,7 @@ bot.f <- eFourier(bot, 12)
 bot.p <- PCA(bot.f)
 bot.p
 plot(bot.p, morpho=FALSE)
-plot(bot.p, "type")
+plot(bot.p, 'type')
 
 data(olea)
 op <- rawPolynomials(olea, 5)

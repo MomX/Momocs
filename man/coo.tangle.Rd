@@ -20,8 +20,8 @@ data(bot)
 b <- bot[1]
 phi  <- coo.tangle(b)
 phi2 <- coo.tangle(coo.smooth(b, 2))
-plot(phi, type="l")
-plot(phi2, type="l", col="red") # ta is very sensible to noise
+plot(phi, type='l')
+plot(phi2, type='l', col='red') # ta is very sensible to noise
 }
 \seealso{
 \link{tfourier}

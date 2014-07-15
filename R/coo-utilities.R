@@ -1,13 +1,14 @@
-##### Come various coo utility
-# a family of functions that do simple functions on 2d coordinates (further
-# abbreviated as "shape" (either outlines, open outlines or lanfmarks)
-# they can be passed either as two-column matrices colnames ("x" and "y"
-# colnaming is not mandatory) or as a list with $x and $y components.
-# and returns a (named) \code{matrix} of coordinates.
-# Some of them, likely the most used, have also Coo methods.
+##### Come various coo utility a family of functions that do
+##### simple functions on 2d coordinates (further abbreviated as
+##### 'shape' (either outlines, open outlines or lanfmarks) they
+##### can be passed either as two-column matrices colnames ('x'
+##### and 'y' colnaming is not mandatory) or as a list with $x
+##### and $y components.  and returns a (named) \code{matrix} of
+##### coordinates.  Some of them, likely the most used, have also
+##### Coo methods.
 
 # deprecate?
-#' Checks "coo" shapes
+#' Checks 'coo' shapes
 #'
 #' A simple utility, used internally, mostly in the coo functions and methods.
 #' Returns a matrix of coordinates, when passed with either a list or a \code{matrix} of coordinates.
@@ -17,15 +18,20 @@
 #' @seealso \link{ldk.check}
 #' @keywords ShapeUtilities
 #' @examples
-#' #coo.check("Not a shape")
+#' #coo.check('Not a shape')
 #' #coo.check(matrix(1:10, ncol=2))
 #' #coo.check(list(x=1:5, y=6:10))
 #' @export
-coo.check <- function(coo){
-  if (is.matrix(coo)) {return(coo)}
-  if (is.list(coo))   {
-    if (length(coo)==1) return(l2m(coo))}
-  stop(" * a list or a matrix of (x; y) coordinates must be provided.")}
+coo.check <- function(coo) {
+    if (is.matrix(coo)) {
+        return(coo)
+    }
+    if (is.list(coo)) {
+        if (length(coo) == 1) 
+            return(l2m(coo))
+    }
+    stop(" * a list or a matrix of (x; y) coordinates must be provided.")
+}
 
 #' Centers coordinates
 #'
@@ -38,17 +44,22 @@ coo.check <- function(coo){
 #' data(bot)
 #' b <- bot[1]
 #' @export
-coo.center <- function(coo){UseMethod("coo.center")}
+coo.center <- function(coo) {
+    UseMethod("coo.center")
+}
 #' @export
-coo.center.default <- function(coo){
-  coo <- coo.check(coo)
-  # equivalent but slower: apply(coo, 2, function(x) x - mean(x))
-  return(scale(coo, scale=FALSE))}
+coo.center.default <- function(coo) {
+    coo <- coo.check(coo)
+    # equivalent but slower: apply(coo, 2, function(x) x -
+    # mean(x))
+    return(scale(coo, scale = FALSE))
+}
 #' @export
-coo.center.Coo <- function(coo){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.center)
-  return(Coo)}
+coo.center.Coo <- function(coo) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.center)
+    return(Coo)
+}
 
 #' Scales coordinates
 #'
@@ -69,24 +80,32 @@ coo.center.Coo <- function(coo){
 #' coo.plot(b)
 #' coo.plot(coo.scale(b))
 #' @export
-coo.scale <- function(coo, scale){UseMethod("coo.scale")}
+coo.scale <- function(coo, scale) {
+    UseMethod("coo.scale")
+}
 #' @export
-coo.scale.default <- function (coo, scale=coo.centsize(coo)) {
-  coo <- coo.check(coo)
-  cp  <- coo.centpos(coo)
-  coo <- coo.trans(coo.trans(coo, -cp[1], -cp[2])/scale, cp[1], cp[2])
-  return(coo)}
+coo.scale.default <- function(coo, scale = coo.centsize(coo)) {
+    coo <- coo.check(coo)
+    cp <- coo.centpos(coo)
+    coo <- coo.trans(coo.trans(coo, -cp[1], -cp[2])/scale, cp[1], 
+        cp[2])
+    return(coo)
+}
 #' @export
-coo.scale.Coo <- function(coo, scale){
-  Coo <- coo
-  #dirty loop but had bad time trying to vectorize it
-  if (missing(scale)) {
-    scale <- sapply(Coo$coo, coo.centsize)}
-  if (length(scale) != length(Coo)) {
-    scale <- rep(scale, length(Coo))}
-  for (i in seq(along=Coo$coo)){
-    Coo$coo[[i]] <- coo.scale(Coo$coo[[i]], scale[i])}
-  return(Coo)}
+coo.scale.Coo <- function(coo, scale) {
+    Coo <- coo
+    # dirty loop but had bad time trying to vectorize it
+    if (missing(scale)) {
+        scale <- sapply(Coo$coo, coo.centsize)
+    }
+    if (length(scale) != length(Coo)) {
+        scale <- rep(scale, length(Coo))
+    }
+    for (i in seq(along = Coo$coo)) {
+        Coo$coo[[i]] <- coo.scale(Coo$coo[[i]], scale[i])
+    }
+    return(Coo)
+}
 
 #' Rotates coordinates
 #'
@@ -108,18 +127,22 @@ coo.scale.Coo <- function(coo, scale){
 #' coo.plot(b)
 #' coo.plot(coo.rotate(b, pi))
 #' @export
-coo.rotate <- function(coo, theta=0){UseMethod("coo.rotate")}
+coo.rotate <- function(coo, theta = 0) {
+    UseMethod("coo.rotate")
+}
 #' @export
-coo.rotate.default <- function(coo, theta=0){
-  coo <- coo.check(coo)
-  rmat <- matrix(c(cos(theta), sin(theta),
-                   -sin(theta), cos(theta)), nrow=2)
-  return(coo %*% rmat)}
+coo.rotate.default <- function(coo, theta = 0) {
+    coo <- coo.check(coo)
+    rmat <- matrix(c(cos(theta), sin(theta), -sin(theta), cos(theta)), 
+        nrow = 2)
+    return(coo %*% rmat)
+}
 #' @export
-coo.rotate.Coo <- function(coo, theta=0){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.rotate, theta)
-  return(Coo)}
+coo.rotate.Coo <- function(coo, theta = 0) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.rotate, theta)
+    return(Coo)
+}
 
 #' Aligns coordinates
 #'
@@ -137,16 +160,20 @@ coo.rotate.Coo <- function(coo, theta=0){
 #' coo.plot(b)
 #' coo.plot(coo.align(b))
 #' @export
-coo.align <- function(coo){UseMethod("coo.align")}
+coo.align <- function(coo) {
+    UseMethod("coo.align")
+}
 #' @export
-coo.align.default <- function(coo){
-  coo <- coo.check(coo)
-  return(coo %*% svd(var(coo))$u)}
+coo.align.default <- function(coo) {
+    coo <- coo.check(coo)
+    return(coo %*% svd(var(coo))$u)
+}
 #' @export
-coo.align.Coo <- function(coo){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.align)
-  return(Coo)}
+coo.align.Coo <- function(coo) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.align)
+    return(Coo)
+}
 
 #' Translates coordinates
 #'
@@ -166,16 +193,20 @@ coo.align.Coo <- function(coo){
 #' coo.plot(b)
 #' coo.plot(coo.trans(b, 50, 100))
 #' @export
-coo.trans <- function(coo, x=0, y=0){UseMethod("coo.trans")}
+coo.trans <- function(coo, x = 0, y = 0) {
+    UseMethod("coo.trans")
+}
 #' @export
-coo.trans.default <- function(coo, x=0, y=0){
-  coo <- coo.check(coo)
-  cbind(coo[, 1] + x, coo[, 2] + y) }
+coo.trans.default <- function(coo, x = 0, y = 0) {
+    coo <- coo.check(coo)
+    cbind(coo[, 1] + x, coo[, 2] + y)
+}
 #' @export
-coo.trans.Coo <- function(coo, x=0, y=0){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.trans, x, y)
-  return(Coo)}
+coo.trans.Coo <- function(coo, x = 0, y = 0) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.trans, x, y)
+    return(Coo)
+}
 
 #' Slides coordinates
 #'
@@ -192,69 +223,86 @@ coo.trans.Coo <- function(coo, x=0, y=0){
 #' coo.plot(hearts[4])
 #' coo.plot(coo.slide(hearts[4], 50))
 #' @export
-coo.slide <- function(coo, id1){UseMethod("coo.slide")}
+coo.slide <- function(coo, id1) {
+    UseMethod("coo.slide")
+}
 #' @export
-coo.slide.default <- function(coo, id1){
-  coo <- coo.check(coo)
-  if (id1 == 0) {return(coo)}
-  n <- nrow(coo)
-  slided.rows <- c(id1:n, 1:(id1-1))
-  return(coo[slided.rows, ])}
+coo.slide.default <- function(coo, id1) {
+    coo <- coo.check(coo)
+    if (id1 == 0) {
+        return(coo)
+    }
+    n <- nrow(coo)
+    slided.rows <- c(id1:n, 1:(id1 - 1))
+    return(coo[slided.rows, ])
+}
 #' @export
-coo.slide.Coo <- function(coo, id1){
-  Coo <- coo
-  if (length(Coo$ldk)==0) stop(" * No landmarks defined.")
-  for (i in seq(along=Coo$coo)) {
-    Coo$coo[[i]] <- coo.slide(Coo$coo[[i]], Coo$ldk[[i]][id1])
-    Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][id1] -1)) %% nrow(Coo$coo[[i]])}
-  return(Coo)}
+coo.slide.Coo <- function(coo, id1) {
+    Coo <- coo
+    if (length(Coo$ldk) == 0) 
+        stop(" * No landmarks defined.")
+    for (i in seq(along = Coo$coo)) {
+        Coo$coo[[i]] <- coo.slide(Coo$coo[[i]], Coo$ldk[[i]][id1])
+        Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][id1] - 
+            1))%%nrow(Coo$coo[[i]])
+    }
+    return(Coo)
+}
 
 #' Slides coordinates in a particular direction
 #' 
 #' Shapes are centered and then, according to direction, the point northwards, southwards,
 #' eastwards or westwards the centroid, becomes the first point with \link{coo.slide}.
 #' @param coo a matrix (or a list) or (x; y) coordinates or a Coo object
-#' @param direction a character among \code{"N"} (by default), \code{"S"}, \code{"E"}, or \code{"W"}.
+#' @param direction a character among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
 #' b <- coo.rotate(bot[1], pi/6) # dummy example just to make it obvious
 #' coo.plot(b) # not the first point
-#' coo.plot(coo.slidedirection(b, "N"))
-#' coo.plot(coo.slidedirection(b, "E"))
-#' coo.plot(coo.slidedirection(b, "W"))
-#' coo.plot(coo.slidedirection(b, "S"))
+#' coo.plot(coo.slidedirection(b, 'N'))
+#' coo.plot(coo.slidedirection(b, 'E'))
+#' coo.plot(coo.slidedirection(b, 'W'))
+#' coo.plot(coo.slidedirection(b, 'S'))
 #' 
 #' # on Coo objects
 #' stack(bot)
-#' stack(coo.slidedirection(bot, "E"))
+#' stack(coo.slidedirection(bot, 'E'))
 #' @export
-coo.slidedirection <- function(coo, direction){UseMethod("coo.slidedirection")}
+coo.slidedirection <- function(coo, direction) {
+    UseMethod("coo.slidedirection")
+}
 #' @export
-coo.slidedirection.default <- function(coo, direction="N"){
-  coo <- coo.check(coo)
-  coo <- coo.center(coo)
-  if (direction == "N"){
-    x0.ed     <- order(abs(coo[, 1]), decreasing = FALSE)
-    id0       <- x0.ed[which(coo[x0.ed, 2]>0)[1]]}
-  if (direction == "S"){
-    x0.ed     <- order(abs(coo[, 1]), decreasing = FALSE)
-    id0       <- x0.ed[which(coo[x0.ed, 2]<0)[1]]}
-  if (direction == "E"){
-    y0.ed     <- order(abs(coo[, 2]), decreasing = FALSE)
-    id0       <- y0.ed[which(coo[y0.ed, 1]>0)[1]]}
-  if (direction == "W"){
-    y0.ed     <- order(abs(coo[, 2]), decreasing = FALSE)
-    id0       <- y0.ed[which(coo[y0.ed, 1]<0)[1]]}
-  coo <- coo.slide(coo, id0)
-  return(coo)}
+coo.slidedirection.default <- function(coo, direction = "N") {
+    coo <- coo.check(coo)
+    coo <- coo.center(coo)
+    if (direction == "N") {
+        x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+        id0 <- x0.ed[which(coo[x0.ed, 2] > 0)[1]]
+    }
+    if (direction == "S") {
+        x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+        id0 <- x0.ed[which(coo[x0.ed, 2] < 0)[1]]
+    }
+    if (direction == "E") {
+        y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+        id0 <- y0.ed[which(coo[y0.ed, 1] > 0)[1]]
+    }
+    if (direction == "W") {
+        y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+        id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
+    }
+    coo <- coo.slide(coo, id0)
+    return(coo)
+}
 
 #' @export
-coo.slidedirection.Coo <- function(coo, direction){
+coo.slidedirection.Coo <- function(coo, direction) {
     Coo <- coo
     Coo$coo <- lapply(Coo$coo, coo.slidedirection, direction)
-    return(Coo)}
+    return(Coo)
+}
 
 #' Sample coordinates (among points)
 #'
@@ -273,17 +321,21 @@ coo.slidedirection.Coo <- function(coo, direction){
 #' coo.plot(b)
 #' coo.plot(coo.sample(b, 24))
 #' @export
-coo.sample <- function(coo, n){UseMethod("coo.sample")}
+coo.sample <- function(coo, n) {
+    UseMethod("coo.sample")
+}
 #' @export
-coo.sample.default <- function (coo, n) {
-  coo <- coo.check(coo)
-  sampled <- round(seq(1, nrow(coo), len = n + 1)[-(n + 1)])
-  return(coo[sampled, ])}
+coo.sample.default <- function(coo, n) {
+    coo <- coo.check(coo)
+    sampled <- round(seq(1, nrow(coo), len = n + 1)[-(n + 1)])
+    return(coo[sampled, ])
+}
 #' @export
-coo.sample.Coo <- function(coo, n){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.sample, n)
-  return(Coo)}
+coo.sample.Coo <- function(coo, n) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.sample, n)
+    return(Coo)
+}
 
 #' Samples coordinates (regular radius)
 #'
@@ -304,31 +356,36 @@ coo.sample.Coo <- function(coo, n){
 #' cpos <- coo.centpos(bot[1])
 #' segments(cpos[1], cpos[2], rr[, 1], rr[, 2])
 #' @export
-coo.samplerr <- function(coo, n){UseMethod("coo.samplerr")}
+coo.samplerr <- function(coo, n) {
+    UseMethod("coo.samplerr")
+}
 #' @export
-coo.samplerr.default <- function(coo, n){
-  coo <- coo.check(coo)
-  Rx <- coo[, 1]
-  Ry <- coo[, 2]
-  le  <-length(Rx)
-  M   <-matrix(c(Rx, Ry), le, 2)
-  M1  <-matrix(c(Rx-mean(Rx), Ry-mean(Ry)), le, 2)
-  V1  <-complex(real=M1[, 1], imaginary=M1[, 2])
-  M2  <-matrix(c(Arg(V1), Mod(V1)), le, 2)
-  V2  <-NA
-  for (i in 0:(n-1)){
-    V2[i+1] <- which.max((cos(M2[, 1] - 2*i*pi/n)))}
-  V2 <- sort(V2)
-  return(M1[V2, ])}
+coo.samplerr.default <- function(coo, n) {
+    coo <- coo.check(coo)
+    Rx <- coo[, 1]
+    Ry <- coo[, 2]
+    le <- length(Rx)
+    M <- matrix(c(Rx, Ry), le, 2)
+    M1 <- matrix(c(Rx - mean(Rx), Ry - mean(Ry)), le, 2)
+    V1 <- complex(real = M1[, 1], imaginary = M1[, 2])
+    M2 <- matrix(c(Arg(V1), Mod(V1)), le, 2)
+    V2 <- NA
+    for (i in 0:(n - 1)) {
+        V2[i + 1] <- which.max((cos(M2[, 1] - 2 * i * pi/n)))
+    }
+    V2 <- sort(V2)
+    return(M1[V2, ])
+}
 #' @export
-coo.samplerr.Coo <- function(coo, n){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.samplerr, n)
-  return(Coo)}
+coo.samplerr.Coo <- function(coo, n) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.samplerr, n)
+    return(Coo)
+}
 
 #' Interpolates coordinates
 #'
-#' Interpolates n coordinates "among existing points"between" existing points,
+#' Interpolates n coordinates 'among existing points'between' existing points,
 #' along the perimeter of the coordinates provided and keeping the first point
 #' 
 #' @aliases coo.interpolate
@@ -349,24 +406,32 @@ coo.samplerr.Coo <- function(coo, n){
 #' coo.plot(bot[1])
 #' coo.plot(coo.interpolate(coo.sample(bot[1], 12), 120))
 #' @export
-coo.interpolate <- function(coo, n){UseMethod("coo.interpolate")}
+coo.interpolate <- function(coo, n) {
+    UseMethod("coo.interpolate")
+}
 #' @export
-coo.interpolate.default <- function(coo, n){
-  coo <- coo.check(coo)
-  if (!is.closed(coo)) { coo <- coo.close(coo) }
-  orig <- coo.perim.cum(coo)
-  targ <- seq(0, coo.perim(coo), length=n+1)[-(n+1)]
-  coo2 <- matrix(c(coo[1, ], rep(NA, n*2 - 2)), byrow=TRUE, nrow=n, ncol=2)
-  for (i in 2:n) {
-    k <- max(which(orig <= targ[i]))
-    r <- (targ[i] - orig[k]) / (orig[k+1]- orig[k])
-    coo2[i, ] <- edi(coo[k, ], coo[k+1, ], r)}
-  return(coo2)}
+coo.interpolate.default <- function(coo, n) {
+    coo <- coo.check(coo)
+    if (!is.closed(coo)) {
+        coo <- coo.close(coo)
+    }
+    orig <- coo.perim.cum(coo)
+    targ <- seq(0, coo.perim(coo), length = n + 1)[-(n + 1)]
+    coo2 <- matrix(c(coo[1, ], rep(NA, n * 2 - 2)), byrow = TRUE, 
+        nrow = n, ncol = 2)
+    for (i in 2:n) {
+        k <- max(which(orig <= targ[i]))
+        r <- (targ[i] - orig[k])/(orig[k + 1] - orig[k])
+        coo2[i, ] <- edi(coo[k, ], coo[k + 1, ], r)
+    }
+    return(coo2)
+}
 #' @export
-coo.interpolate.Coo <- function(coo, n){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.interpolate, n)
-  return(Coo)}
+coo.interpolate.Coo <- function(coo, n) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.interpolate, n)
+    return(Coo)
+}
 
 #' Smoothes coordinates (closed outlines)
 #'
@@ -386,23 +451,28 @@ coo.interpolate.Coo <- function(coo, n){
 #' coo.plot(bot[1])
 #' coo.plot(coo.smooth(bot[1], 30))
 #' @export
-coo.smooth <- function(coo, n){UseMethod("coo.smooth")}
+coo.smooth <- function(coo, n) {
+    UseMethod("coo.smooth")
+}
 #' @export
-coo.smooth.default <- function(coo, n=0){
-  coo <- coo.check(coo)
-  p   <- nrow(coo)
-  a   <- 0
-  while (a < n) {
-    a <- a + 1
-    coo.i <- rbind(coo[-1, ], coo[1, ])
-    coo.s <- rbind(coo[p, ],  coo[-p, ])
-    coo   <- coo/2 + coo.i/4 + coo.s/4}
-  return(coo)}
+coo.smooth.default <- function(coo, n = 0) {
+    coo <- coo.check(coo)
+    p <- nrow(coo)
+    a <- 0
+    while (a < n) {
+        a <- a + 1
+        coo.i <- rbind(coo[-1, ], coo[1, ])
+        coo.s <- rbind(coo[p, ], coo[-p, ])
+        coo <- coo/2 + coo.i/4 + coo.s/4
+    }
+    return(coo)
+}
 #' @export
-coo.smooth.Coo <- function(coo, n){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.smooth, n)
-  return(Coo)}
+coo.smooth.Coo <- function(coo, n) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.smooth, n)
+    return(Coo)
+}
 
 #' Smoothes coordinates (open outlines)
 #'
@@ -417,26 +487,33 @@ coo.smooth.Coo <- function(coo, n){
 #' @examples
 #' data(olea)
 #' o <- olea[1]
-#' coo.plot(o, border="grey50", points=FALSE)
-#' coo.draw(coo.smooth(o, 24), border="blue", points=FALSE)
-#' coo.draw(coo.smoothcurve(o, 24), border="red", points=FALSE)
+#' coo.plot(o, border='grey50', points=FALSE)
+#' coo.draw(coo.smooth(o, 24), border='blue', points=FALSE)
+#' coo.draw(coo.smoothcurve(o, 24), border='red', points=FALSE)
 #' @export
-coo.smoothcurve <- function(coo, n){UseMethod("coo.smoothcurve")}
+coo.smoothcurve <- function(coo, n) {
+    UseMethod("coo.smoothcurve")
+}
 #' @export
-coo.smoothcurve.default <- function(coo, n=0){
-  coo <- coo.check(coo)
-  p   <- nrow(coo)
-  a   <- 0
-  while (a < n) {
-    a <- a + 1
-    for (i in 2:(p-1)){
-      coo[i, ] <- (coo[i-1, ]*0.25 + coo[i, ]*0.5 + coo[i+1, ]*0.25)}}
-  return(coo)}
+coo.smoothcurve.default <- function(coo, n = 0) {
+    coo <- coo.check(coo)
+    p <- nrow(coo)
+    a <- 0
+    while (a < n) {
+        a <- a + 1
+        for (i in 2:(p - 1)) {
+            coo[i, ] <- (coo[i - 1, ] * 0.25 + coo[i, ] * 0.5 + 
+                coo[i + 1, ] * 0.25)
+        }
+    }
+    return(coo)
+}
 #' @export
-coo.smoothcurve.Opn <- function(coo, n){
-  Opn <- coo
-  Opn$coo <- lapply(Opn$coo, coo.smoothcurve, n)
-  return(Opn)}
+coo.smoothcurve.Opn <- function(coo, n) {
+    Opn <- coo
+    Opn$coo <- lapply(Opn$coo, coo.smoothcurve, n)
+    return(Opn)
+}
 
 #' Tests if shapes are closed
 #'
@@ -455,22 +532,25 @@ coo.smoothcurve.Opn <- function(coo, n){
 #' is.closed(bot)
 #' is.closed(coo.close(bot))
 #' @export
-is.closed <- function(coo){UseMethod("is.closed")}
+is.closed <- function(coo) {
+    UseMethod("is.closed")
+}
 #' @export
-is.closed.default <- function(coo){
-  coo <- coo.check(coo)
-  identical(coo[1,], coo[nrow(coo),]) }
+is.closed.default <- function(coo) {
+    coo <- coo.check(coo)
+    identical(coo[1, ], coo[nrow(coo), ])
+}
 #' @export
-is.closed.Coo <- function(coo){
-  Coo <- coo
-  return(sapply(Coo$coo, is.closed))}
+is.closed.Coo <- function(coo) {
+    Coo <- coo
+    return(sapply(Coo$coo, is.closed))
+}
 
-# # is.likelyopen tries to estimate is a matrix of coordinates is likely to be a
-# # closed polygon
-# is.likelyclosedpolygon <- function(coo) {
-#   x <- coo.perim.pts(coo)
-#   d <- max(x) / median(x[-which.max(x)])
-#   ifelse(d > 3, TRUE, FALSE)}
+# # is.likelyopen tries to estimate is a matrix of
+# coordinates is likely to be a # closed polygon
+# is.likelyclosedpolygon <- function(coo) { x <-
+# coo.perim.pts(coo) d <- max(x) / median(x[-which.max(x)])
+# ifelse(d > 3, TRUE, FALSE)}
 
 #' Closes/'Uncloses' shapes
 #'
@@ -491,16 +571,21 @@ is.closed.Coo <- function(coo){
 #' x3
 #' is.closed(x3)
 #' @export
-coo.close <- function(coo){UseMethod("coo.close")}
+coo.close <- function(coo) {
+    UseMethod("coo.close")
+}
 #' @export
-coo.close.default <- function(coo){
-  coo <- coo.check(coo)
-  ifelse(is.closed(coo), return(coo), return(rbind(coo, coo[1, ])))}
+coo.close.default <- function(coo) {
+    coo <- coo.check(coo)
+    ifelse(is.closed(coo), return(coo), return(rbind(coo, coo[1, 
+        ])))
+}
 #' @export
-coo.close.Coo <- function(coo){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.close)
-  return(Coo)}
+coo.close.Coo <- function(coo) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.close)
+    return(Coo)
+}
 
 #' 'Uncloses' shapes
 #' 
@@ -522,23 +607,28 @@ coo.close.Coo <- function(coo){
 #' x3
 #' is.closed(x3)
 #' @export
-coo.unclose <- function(coo){UseMethod("coo.unclose")}
+coo.unclose <- function(coo) {
+    UseMethod("coo.unclose")
+}
 #' @export
-coo.unclose.default <- function(coo){
-  coo <- coo.check(coo)
-  ifelse(is.closed(coo), return(coo[-nrow(coo), ]), return(coo))}
+coo.unclose.default <- function(coo) {
+    coo <- coo.check(coo)
+    ifelse(is.closed(coo), return(coo[-nrow(coo), ]), return(coo))
+}
 #' @export
-coo.unclose.Coo <- function(coo){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.unclose)
-  return(Coo)}
+coo.unclose.Coo <- function(coo) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.unclose)
+    return(Coo)
+}
 
-# Some utilities documented yet less likely to be used. They may be useful for
-# some testing, developing new methods, or on monday mornings.
+# Some utilities documented yet less likely to be used. They
+# may be useful for some testing, developing new methods, or
+# on monday mornings.
 
 #' Rotates shapes with a custom center
 #'
-#' rotates a shape of "theta" angles (in radians) and with a (x; y) "center".
+#' rotates a shape of 'theta' angles (in radians) and with a (x; y) 'center'.
 #' @aliases coo.rotatecenter
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @param theta \code{numeric} the angle (in radians) to rotate shapes.
@@ -550,20 +640,27 @@ coo.unclose.Coo <- function(coo){
 #' data(bot)
 #' b <- bot[1]
 #' coo.plot(b)
-#' coo.draw(coo.rotatecenter(b, -pi/2, c(200, 200)), border="red")
+#' coo.draw(coo.rotatecenter(b, -pi/2, c(200, 200)), border='red')
 #' @export
-coo.rotatecenter <- function(coo, theta, center=c(0, 0)){UseMethod("coo.rotatecenter")}
+coo.rotatecenter <- function(coo, theta, center = c(0, 0)) {
+    UseMethod("coo.rotatecenter")
+}
 #' @export
-coo.rotatecenter.default <- function(coo, theta, center=c(0, 0)){
-  coo <- coo.trans(coo, -center[1], -center[2])
-  coo <- coo.rotate(coo, theta)
-  return(coo.trans(coo, center[1], center[2]))}
+coo.rotatecenter.default <- function(coo, theta, center = c(0, 
+    0)) {
+    coo <- coo.trans(coo, -center[1], -center[2])
+    coo <- coo.rotate(coo, theta)
+    return(coo.trans(coo, center[1], center[2]))
+}
 #' @export
-coo.rotatecenter.Coo <- function(coo, theta, center=c(0, 0)){
-  Coo <- coo
-  for (i in seq(along=Coo$coo)){
-    Coo$coo[[i]] <- coo.rotatecenter(Coo$coo[[i]], theta, center)}
-  return(Coo)}
+coo.rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
+    Coo <- coo
+    for (i in seq(along = Coo$coo)) {
+        Coo$coo[[i]] <- coo.rotatecenter(Coo$coo[[i]], theta, 
+            center)
+    }
+    return(Coo)
+}
 
 #' Forces shapes to close
 #'
@@ -578,19 +675,22 @@ coo.rotatecenter.Coo <- function(coo, theta, center=c(0, 0)){
 #' b <- coo.sample(bot[1], 64)
 #' b <- b[1:40,]
 #' coo.plot(b)
-#' coo.draw(coo.force2close(b), border="red")
+#' coo.draw(coo.force2close(b), border='red')
 #' @export
-coo.force2close <- function(coo){
-  coo <- coo.check(coo)
-  xy <- coo.centpos(coo)
-  if (is.closed(coo)) {return(coo)}
-  n  <- nrow(coo)
-  d  <- coo[1, ] - coo[n, ]
-  dm <- cbind(seq(0, d[1], length=n), seq(0, d[2], length=n))
-  coo2 <- coo + dm
-  xy2 <- coo.centpos(coo2)
-  coo2 <- coo.trans(coo2, xy[1] - xy2[1], xy[2] - xy2[2])
-  return(coo2)}
+coo.force2close <- function(coo) {
+    coo <- coo.check(coo)
+    xy <- coo.centpos(coo)
+    if (is.closed(coo)) {
+        return(coo)
+    }
+    n <- nrow(coo)
+    d <- coo[1, ] - coo[n, ]
+    dm <- cbind(seq(0, d[1], length = n), seq(0, d[2], length = n))
+    coo2 <- coo + dm
+    xy2 <- coo.centpos(coo2)
+    coo2 <- coo.trans(coo2, xy[1] - xy2[1], xy[2] - xy2[2])
+    return(coo2)
+}
 
 
 #' Calculate abscissa and ordinate on a shape
@@ -603,14 +703,16 @@ coo.force2close <- function(coo){
 #' data(bot)
 #' coo.dxy(bot[1])
 #' @export
-coo.dxy <- function(coo){
-  coo <- coo.check(coo)
-  dx <- coo[, 1] - coo[1, 1]
-  dy <- coo[, 2] - coo[1, 2]
-  return(list(dx=dx, dy=dy))}
+coo.dxy <- function(coo) {
+    coo <- coo.check(coo)
+    dx <- coo[, 1] - coo[1, 1]
+    dy <- coo[, 2] - coo[1, 2]
+    return(list(dx = dx, dy = dy))
+}
 
-# 2. Handling / baselines on coo and Coo -------------------------------------
-# Some functions and methods to ease alignments, grabbing part of shapes, etc.
+# 2. Handling / baselines on coo and Coo
+# ------------------------------------- Some functions and
+# methods to ease alignments, grabbing part of shapes, etc.
 #' Retains coordinates with positive y-coordinates
 #'
 #' Useful when shapes are aligned along the x-axis (e.g. because of a 
@@ -622,11 +724,12 @@ coo.dxy <- function(coo){
 #' data(bot)
 #' b <- coo.alignxax(bot[1])
 #' coo.plot(b)
-#' coo.draw(coo.up(b), border="red")
+#' coo.draw(coo.up(b), border='red')
 #' @export
-coo.up <- function(coo){
-  up <- coo[coo[,2]>=0,]
-  return(up)}
+coo.up <- function(coo) {
+    up <- coo[coo[, 2] >= 0, ]
+    return(up)
+}
 
 #' Retains coordinates with negative y-coordinates
 #'
@@ -639,11 +742,12 @@ coo.up <- function(coo){
 #' data(bot)
 #' b <- coo.alignxax(bot[1])
 #' coo.plot(b)
-#' coo.draw(coo.down(b), border="red")
+#' coo.draw(coo.down(b), border='red')
 #' @export
-coo.down <- function(coo){
-  coo <- coo.check(coo)
-  return(coo[coo[, 2]<=0,])}
+coo.down <- function(coo) {
+    coo <- coo.check(coo)
+    return(coo[coo[, 2] <= 0, ])
+}
 
 #' Aligns shapes along the x-axis
 #' 
@@ -661,19 +765,23 @@ coo.down <- function(coo){
 #' coo.plot(coo.alignxax(b))
 #' }
 #' @export
-coo.alignxax <- function(coo){UseMethod("coo.alignxax")}
+coo.alignxax <- function(coo) {
+    UseMethod("coo.alignxax")
+}
 #' @export
-coo.alignxax.default <- function(coo){
-  coo <- coo.check(coo)
-  coo <- coo.align(coo)
-  return(coo.trans(coo, x=0, y= -coo.centpos(coo)[2]))}
+coo.alignxax.default <- function(coo) {
+    coo <- coo.check(coo)
+    coo <- coo.align(coo)
+    return(coo.trans(coo, x = 0, y = -coo.centpos(coo)[2]))
+}
 #' @export
-coo.alignxax.Coo <- function(coo){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.alignxax)
-  return(Coo)}
+coo.alignxax.Coo <- function(coo) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.alignxax)
+    return(Coo)
+}
 
-#' Aligns shapes along their "calliper length"
+#' Aligns shapes along their 'calliper length'
 #' 
 #' And returns them registered on bookstein coordinates.
 #' See \link{coo.bookstein}.
@@ -692,18 +800,22 @@ coo.alignxax.Coo <- function(coo){
 #' stack(bot.al)
 #' }
 #' @export
-coo.aligncalliper <- function(coo){UseMethod("coo.aligncalliper")}
+coo.aligncalliper <- function(coo) {
+    UseMethod("coo.aligncalliper")
+}
 #' @export
-coo.aligncalliper.default <- function(coo){
-  coo <- coo.check(coo)
-  cal.ind <- coo.calliper(coo, arr.ind=TRUE)$arr.ind
-  coo <- coo.bookstein(coo, cal.ind[1], cal.ind[2])
-  return(coo)}
+coo.aligncalliper.default <- function(coo) {
+    coo <- coo.check(coo)
+    cal.ind <- coo.calliper(coo, arr.ind = TRUE)$arr.ind
+    coo <- coo.bookstein(coo, cal.ind[1], cal.ind[2])
+    return(coo)
+}
 #' @export
-coo.aligncalliper.Coo <- function(coo){
-  Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo.aligncalliper)
-  return(Coo)}
+coo.aligncalliper.Coo <- function(coo) {
+    Coo <- coo
+    Coo$coo <- lapply(Coo$coo, coo.aligncalliper)
+    return(Coo)
+}
 
 #' Reverses coordinates
 #' 
@@ -717,12 +829,13 @@ coo.aligncalliper.Coo <- function(coo){
 #' b
 #' coo.rev(b)
 #' @export
-coo.rev <- function(coo){
-  coo <- coo.check(coo)
-  return(coo[nrow(coo):1,])}
+coo.rev <- function(coo) {
+    coo <- coo.check(coo)
+    return(coo[nrow(coo):1, ])
+}
 
 #' Defines interactively landmarks
-#' Allows to interactively define a "nb.ldk" number of landarks on a shape.
+#' Allows to interactively define a 'nb.ldk' number of landarks on a shape.
 #' Used in other facilities to acquire/manipulate data.
 #' @aliases coo.ldk
 #' @param coo a \code{matrix} or a list of (x; y) coordinates.
@@ -739,18 +852,22 @@ coo.rev <- function(coo){
 #' }
 #' @export
 coo.ldk <- function(coo, nb.ldk) {
-  if (is.list(coo)) coo <- l2m(coo)
-  coo.plot(coo)
-  ldk <- numeric(nb.ldk)
-  cat("[")
-  for (i in 1:nb.ldk){
-    p <- l2m(locator(1))
-    l <- apply(coo, 1, function(y) sqrt(sum((p-y)^2)))
-    ldk[i] <- which.min(l)
-    points(coo[ldk[i], 1], coo[ldk[i], 2], pch=20, col="red", cex=0.5)
-    cat("*")}
-  cat("]\n")
-  return(ldk)}
+    if (is.list(coo)) 
+        coo <- l2m(coo)
+    coo.plot(coo)
+    ldk <- numeric(nb.ldk)
+    cat("[")
+    for (i in 1:nb.ldk) {
+        p <- l2m(locator(1))
+        l <- apply(coo, 1, function(y) sqrt(sum((p - y)^2)))
+        ldk[i] <- which.min(l)
+        points(coo[ldk[i], 1], coo[ldk[i], 2], pch = 20, col = "red", 
+            cex = 0.5)
+        cat("*")
+    }
+    cat("]\n")
+    return(ldk)
+}
 
 #' Register Bookstein's coordinates
 #'
@@ -772,46 +889,58 @@ coo.ldk <- function(coo, nb.ldk) {
 #' stack(coo.bookstein(hearts, 2, 4))
 #' h <- hearts[1]
 #' coo.plot(h)
-#' coo.plot(coo.bookstein(h, 20, 57), border="red")
+#' coo.plot(coo.bookstein(h, 20, 57), border='red')
 #' @export
-coo.bookstein <- function(coo, ldk1, ldk2){UseMethod("coo.bookstein")}
+coo.bookstein <- function(coo, ldk1, ldk2) {
+    UseMethod("coo.bookstein")
+}
 #' @export
-coo.bookstein.default <- function(coo, ldk1=1, ldk2=nrow(coo)){
-  D <- ed(coo[ldk1, ], coo[ldk2, ])
-  coo2 <- matrix(NA, nrow(coo), ncol(coo))
-  ldk1 <- coo[ldk1,]
-  ldk2 <- coo[ldk2,]
-  coo2[, 1] <- (((ldk2[1]-ldk1[1]) * (coo[,1]-ldk1[1])
-                 + (ldk2[2]-ldk1[2]) * (coo[,2]-ldk1[2])) / (D^2)) - 0.5
-  coo2[, 2] <- ((ldk2[1]-ldk1[1])  * (coo[,2]-ldk1[2])
-                - (ldk2[2]-ldk1[2])  * (coo[,1]-ldk1[1])) / (D^2)
-  return(coo2)}
+coo.bookstein.default <- function(coo, ldk1 = 1, ldk2 = nrow(coo)) {
+    D <- ed(coo[ldk1, ], coo[ldk2, ])
+    coo2 <- matrix(NA, nrow(coo), ncol(coo))
+    ldk1 <- coo[ldk1, ]
+    ldk2 <- coo[ldk2, ]
+    coo2[, 1] <- (((ldk2[1] - ldk1[1]) * (coo[, 1] - ldk1[1]) + 
+        (ldk2[2] - ldk1[2]) * (coo[, 2] - ldk1[2]))/(D^2)) - 
+        0.5
+    coo2[, 2] <- ((ldk2[1] - ldk1[1]) * (coo[, 2] - ldk1[2]) - 
+        (ldk2[2] - ldk1[2]) * (coo[, 1] - ldk1[1]))/(D^2)
+    return(coo2)
+}
 #' @export
-coo.bookstein.Out <- function(coo, ldk1, ldk2){ #id1 ?
-  Out <- coo
-  for (i in seq(along=Out$coo)){
-    Out$coo[[i]] <- coo.bookstein(Out$coo[[i]], Out$ldk[[i]][ldk1], 
-                                  Out$ldk[[i]][ldk2])}
-  return(Out)}
+coo.bookstein.Out <- function(coo, ldk1, ldk2) {
+    # id1 ?
+    Out <- coo
+    for (i in seq(along = Out$coo)) {
+        Out$coo[[i]] <- coo.bookstein(Out$coo[[i]], Out$ldk[[i]][ldk1], 
+            Out$ldk[[i]][ldk2])
+    }
+    return(Out)
+}
 
 #' @export
-coo.bookstein.Opn <- function(coo, ldk1, ldk2){ #id1 ?
-  Opn <- coo
-  # by default, using the first and last coordinate
-  if (length(Opn$ldk)==0){
-    Opn$coo <- lapply(Opn$coo, coo.bookstein)
-  } else {
-    for (i in seq(along=Opn$coo)){
-      
-      Opn$coo[[i]] <- coo.bookstein(Opn$coo[[i]], Opn$ldk[[i]][ldk1], 
-                                    Opn$ldk[[i]][ldk2])}}
-  return(Opn)}
+coo.bookstein.Opn <- function(coo, ldk1, ldk2) {
+    # id1 ?
+    Opn <- coo
+    # by default, using the first and last coordinate
+    if (length(Opn$ldk) == 0) {
+        Opn$coo <- lapply(Opn$coo, coo.bookstein)
+    } else {
+        for (i in seq(along = Opn$coo)) {
+            
+            Opn$coo[[i]] <- coo.bookstein(Opn$coo[[i]], Opn$ldk[[i]][ldk1], 
+                Opn$ldk[[i]][ldk2])
+        }
+    }
+    return(Opn)
+}
 
 #' @export
-coo.bookstein.Ldk <- function(coo, ldk1, ldk2){
-  Ldk <- coo
-  Ldk$coo <- lapply(Ldk$coo, coo.bookstein, ldk1=ldk1, ldk2=ldk2)
-  return(Ldk)}
+coo.bookstein.Ldk <- function(coo, ldk1, ldk2) {
+    Ldk <- coo
+    Ldk$coo <- lapply(Ldk$coo, coo.bookstein, ldk1 = ldk1, ldk2 = ldk2)
+    return(Ldk)
+}
 
 #' Register new baselines
 #'
@@ -832,49 +961,61 @@ coo.bookstein.Ldk <- function(coo, ldk1, ldk2){
 #' stack(hearts)
 #' stack(coo.baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
 #' @export
-coo.baseline <- function(coo, ldk1, ldk2, t1, t2){UseMethod("coo.baseline")}
+coo.baseline <- function(coo, ldk1, ldk2, t1, t2) {
+    UseMethod("coo.baseline")
+}
 #' @export
-coo.baseline.default <- 
-  function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
-  if (is.list(coo)) {coo <- l2m(coo)}
-  t1x <- t1[1]
-  t1y <- t1[2]
-  t2x <- t2[1]
-  t2y <- t2[2]
-  r1x <- coo[ldk1, 1]
-  r1y <- coo[ldk1, 2]
-  r2x <- coo[ldk2, 1]
-  r2y <- coo[ldk2, 2]
-  # translation based on the first landmark
-  ref <- coo.trans(coo, t1x - coo[ldk1, 1] , t1y - coo[ldk1, 2])
-  # we calculate dx and dy for the two vectors
-  rx <- ref[ldk2, 1] - t1x
-  ry <- ref[ldk2, 2] - t1y 
-  tx <- t2x - t1x
-  ty <- t2y - t1y
-  # returns difference angle and norm ratios between two vectors given as 4 numeric.
-  vi <- vecs.param(rx, ry, tx, ty)
-  # we rotate accordingly with a center defined
-  # as the first landmark (trans, rot, untrans)
-  ref <- coo.trans(ref, -t1x, -t1y)
-  ref <- ref / vi$r.norms
-  ref <- coo.rotate(ref, -vi$d.angle)
-  ref <- coo.trans(ref, t1x, t1y)
-  return(ref)}
+coo.baseline.default <- function(coo, ldk1 = 1, ldk2 = 2, t1 = c(-0.5, 
+    0), t2 = c(0.5, 0)) {
+    if (is.list(coo)) {
+        coo <- l2m(coo)
+    }
+    t1x <- t1[1]
+    t1y <- t1[2]
+    t2x <- t2[1]
+    t2y <- t2[2]
+    r1x <- coo[ldk1, 1]
+    r1y <- coo[ldk1, 2]
+    r2x <- coo[ldk2, 1]
+    r2y <- coo[ldk2, 2]
+    # translation based on the first landmark
+    ref <- coo.trans(coo, t1x - coo[ldk1, 1], t1y - coo[ldk1, 
+        2])
+    # we calculate dx and dy for the two vectors
+    rx <- ref[ldk2, 1] - t1x
+    ry <- ref[ldk2, 2] - t1y
+    tx <- t2x - t1x
+    ty <- t2y - t1y
+    # returns difference angle and norm ratios between two
+    # vectors given as 4 numeric.
+    vi <- vecs.param(rx, ry, tx, ty)
+    # we rotate accordingly with a center defined as the first
+    # landmark (trans, rot, untrans)
+    ref <- coo.trans(ref, -t1x, -t1y)
+    ref <- ref/vi$r.norms
+    ref <- coo.rotate(ref, -vi$d.angle)
+    ref <- coo.trans(ref, t1x, t1y)
+    return(ref)
+}
 #' @export
-coo.baseline.Coo <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
-  Coo <- coo
-  for (i in seq(along=Coo$coo)){
-    Coo$coo[[i]] <- coo.baseline(Coo$coo[[i]], Coo$ldk[[i]][ldk1],
-                                 Coo$ldk[[i]][ldk2], t1, t2)}
-  return(Coo)}
+coo.baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2, t1 = c(-0.5, 
+    0), t2 = c(0.5, 0)) {
+    Coo <- coo
+    for (i in seq(along = Coo$coo)) {
+        Coo$coo[[i]] <- coo.baseline(Coo$coo[[i]], Coo$ldk[[i]][ldk1], 
+            Coo$ldk[[i]][ldk2], t1, t2)
+    }
+    return(Coo)
+}
 
-# 3. coo shape descriptors -----------------------------------------------------
-# Mainly intended for traditional morphometrics.
-# Convert to methods ? Or an utility to get these descriptors ? #todo
+# 3. coo shape descriptors
+# -----------------------------------------------------
+# Mainly intended for traditional morphometrics.  Convert to
+# methods ? Or an utility to get these descriptors ? #todo
 
 
-# a. centroid -------------------------------------------------------------
+# a. centroid
+# -------------------------------------------------------------
 #' Returns the position of the centroid
 #'
 #' Returns the (x; y) centroid coordinates of a shape.
@@ -887,20 +1028,24 @@ coo.baseline.Coo <- function(coo, ldk1=1, ldk2=2, t1=c(-0.5, 0), t2=c(0.5, 0)){
 #' b <- bot[1]
 #' coo.plot(b)
 #' xy <- coo.centpos(b)
-#' points(xy[1], xy[2], cex=2, col="blue")
+#' points(xy[1], xy[2], cex=2, col='blue')
 #' xy
 #' @export
-coo.centpos <- function(coo){UseMethod("coo.centpos")}
+coo.centpos <- function(coo) {
+    UseMethod("coo.centpos")
+}
 #' @export
-coo.centpos.default <- function(coo){
-  coo <- coo.check(coo)
-  return(apply(coo, 2, mean))}
+coo.centpos.default <- function(coo) {
+    coo <- coo.check(coo)
+    return(apply(coo, 2, mean))
+}
 #' @export
-coo.centpos.Coo <- function(coo){
-  Coo <- coo
-  centpos <- t(sapply(Coo$coo, coo.centpos))
-  colnames(centpos) <- c("x", "y") # pure cosmetics
-  return(centpos)}
+coo.centpos.Coo <- function(coo) {
+    Coo <- coo
+    centpos <- t(sapply(Coo$coo, coo.centpos))
+    colnames(centpos) <- c("x", "y")  # pure cosmetics
+    return(centpos)
+}
 
 #' Calculates the centroid size
 #' @aliases coo.centsize
@@ -913,9 +1058,10 @@ coo.centpos.Coo <- function(coo){
 #' cs <- sapply(bot$coo, coo.centsize)
 #' hist(cs, breaks=10)
 #' @export
-coo.centsize <- function(coo){
-  coo  <- coo.check(coo)
-  return(sqrt(sum(apply(coo, 2, var))*(nrow(coo)-1)))}
+coo.centsize <- function(coo) {
+    coo <- coo.check(coo)
+    return(sqrt(sum(apply(coo, 2, var)) * (nrow(coo) - 1)))
+}
 
 #' Returns the distance between everypoints and the centroid
 #' For every point of the shape, returns the (centroid-points) distance.
@@ -929,11 +1075,13 @@ coo.centsize <- function(coo){
 #' d <- coo.centdist(b)
 #' barplot(d)
 #' @export
-coo.centdist <- function(coo){
-  coo <- coo.check(coo)
-  return(apply(coo, 1, function(x) ed(coo.centpos(coo), x)))}
+coo.centdist <- function(coo) {
+    coo <- coo.check(coo)
+    return(apply(coo, 1, function(x) ed(coo.centpos(coo), x)))
+}
 
-# b. length(s) -----------------------------------------------------------------
+# b. length(s)
+# -----------------------------------------------------------------
 
 #' Calculates the chordal distance along a shape.
 #'
@@ -947,11 +1095,12 @@ coo.centdist <- function(coo){
 #' b <- coo.sample(bot[1], 24)
 #' coo.perim.pts(b)
 #' @export
-coo.perim.pts <-  function (coo){
-  coo <- coo.check(coo)
-  n <- nrow(coo)
-  d <- sqrt(apply((coo - coo.slide(coo, n))^2, 1, sum))[-1]
-  return(d)}
+coo.perim.pts <- function(coo) {
+    coo <- coo.check(coo)
+    n <- nrow(coo)
+    d <- sqrt(apply((coo - coo.slide(coo, n))^2, 1, sum))[-1]
+    return(d)
+}
 
 #' Calculates the cumulative chrodal distance a shape.
 #'
@@ -964,10 +1113,12 @@ coo.perim.pts <-  function (coo){
 #' b <- coo.sample(bot[1], 24)
 #' coo.perim.cum(b)
 #' @export
-coo.perim.cum <- function(coo){
-  coo <- coo.check(coo)
-  d <- cumsum(sqrt(apply((coo-rbind(coo[1,],coo[-(dim(coo)[1]),]))^2,1,sum)))
-  return(d)}
+coo.perim.cum <- function(coo) {
+    coo <- coo.check(coo)
+    d <- cumsum(sqrt(apply((coo - rbind(coo[1, ], coo[-(dim(coo)[1]), 
+        ]))^2, 1, sum)))
+    return(d)
+}
 
 #' Calculates the perimeter
 #' @param coo a \code{matrix} of (x; y) coordinates.
@@ -978,8 +1129,9 @@ coo.perim.cum <- function(coo){
 #' coo.perim(bot[1])
 #' hist(sapply(bot$coo, coo.perim), breaks=10)
 #' @export
-coo.perim <- function(coo){
-  return(sum(coo.perim.pts(coo)))}
+coo.perim <- function(coo) {
+    return(sum(coo.perim.pts(coo)))
+}
 
 #' Calculates the calliper length
 #' 
@@ -1001,23 +1153,26 @@ coo.perim <- function(coo){
 #' coo.plot(b)
 #' segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
 #' @export
-coo.calliper <- function(coo, arr.ind=FALSE){
-  coo <- coo.check(coo)
-  d   <- dist(coo, method = "euclidean")
-  # we check if there is no ex aequo
-  ea <- length(which(d==max(d), arr.ind=TRUE))
-  if (length(ea)>1) {cat(" * coo.length: at least two lengths are ex aequo.")}
-  if (arr.ind) {
-    arr.ind <- which(as.matrix(d)==max(d), arr.ind=TRUE)
-    # to return a vector (numeric and sorted) of the rows between which the max
-    # length has been found
-    arr.ind <- sort(as.numeric(arr.ind[1, ]))
-    return(list(length=max(d), arr.ind=arr.ind))
-  } else {
-    return(max(d))}}
+coo.calliper <- function(coo, arr.ind = FALSE) {
+    coo <- coo.check(coo)
+    d <- dist(coo, method = "euclidean")
+    # we check if there is no ex aequo
+    ea <- length(which(d == max(d), arr.ind = TRUE))
+    if (length(ea) > 1) {
+        cat(" * coo.length: at least two lengths are ex aequo.")
+    }
+    if (arr.ind) {
+        arr.ind <- which(as.matrix(d) == max(d), arr.ind = TRUE)
+        # to return a vector (numeric and sorted) of the rows between
+        # which the max length has been found
+        arr.ind <- sort(as.numeric(arr.ind[1, ]))
+        return(list(length = max(d), arr.ind = arr.ind))
+    } else {
+        return(max(d))
+    }
+}
 
-#todo: bouding box
-#todo: based on svd cov mat
+# todo: bouding box todo: based on svd cov mat
 #' Calculates length and width
 #' 
 #' Returns the length and width of a shape based on their iniertia axis
@@ -1030,7 +1185,8 @@ coo.calliper <- function(coo, arr.ind=FALSE){
 #' data(bot)
 #' coo.lw(bot[1])
 #' @export
-coo.lw <- function(coo){
-  coo <- coo.check(coo)
-  d   <- apply(coo.align(coo), 2, range)
-  return(abs(d[2,] - d[1,]))}
+coo.lw <- function(coo) {
+    coo <- coo.check(coo)
+    d <- apply(coo.align(coo), 2, range)
+    return(abs(d[2, ] - d[1, ]))
+} 

@@ -1,10 +1,12 @@
-##### Coo and Coe classes declarations, domestic functions and helpers.
+##### Coo and Coe classes declarations, domestic functions and
+##### helpers.
 
-# 0. Coo (Opn/Out/Ldk) domestics -----------------------------------------------
+# 0. Coo (Opn/Out/Ldk) domestics
+# -----------------------------------------------
 
 #' Coo class
 #' 
-#' \code{Coo} class is a "super class" for \link{Out}, \link{Opn} and \link{Ldk} classes,
+#' \code{Coo} class is a 'super class' for \link{Out}, \link{Opn} and \link{Ldk} classes,
 #' for handling \bold{closed outlines}, \bold{open outlines} and \bold{configuration of landmarks}, respectively.
 #' 
 #' This class allows to recycle most of the methods, since all of them apply on
@@ -17,11 +19,11 @@
 #' specific methods.
 #' 
 #' More, generally, see \link{Out}, \link{Opn} and \link{Ldk} for documentation on these classes.
-#' And Momocs' vignette for more detailed informations on the Momocs' "architecture".
+#' And Momocs' vignette for more detailed informations on the Momocs' 'architecture'.
 #' 
 #' Finally, note that if you used Momocs before version <0.9, and/or if you have read the JSS paper,
-#' you are probably looking for \link{Out}. If you have "old" Coo files, eg saved as \code{.rda} files,
-#' you can import them by: i) opening a new R session; ii) load your file, say "foo", iii) load Momocs,
+#' you are probably looking for \link{Out}. If you have 'old' Coo files, eg saved as \code{.rda} files,
+#' you can import them by: i) opening a new R session; ii) load your file, say 'foo', iii) load Momocs,
 #' iv) type: \code{Out(foo@@coo, fac=foo@@fac)}, same thing for the \code{@@ldk} slot, if any.
 #' 
 #' You can access all the methods available for Coo objects with \code{methods(class=Coo)}.
@@ -31,11 +33,11 @@
 #' @param ... anything and, anyway, this function will simply returns a message.
 #' @examples
 #' # to see all methods for Coo objects.
-#' methods(class="Coo")
+#' methods(class='Coo')
 #' # Let's take an Out example. But all methods shown here
 #' # work on Ldk (try data(wings) ) and on Opn (try data(olea))
 #' data(bot)
-#' # Primarily a "Coo" objects, but also an "Out"
+#' # Primarily a 'Coo' objects, but also an 'Out'
 #' class(bot)
 #' panel(bot)
 #' stack(bot)
@@ -54,22 +56,23 @@
 #' # an internal view of an Out object
 #' str(bot)
 #' # subsetting
-#' w <- subset(bot, type=="whisky") # if you dont like beer
-#' b <- subset(bot, type=="beer")   # if you don't like whisky
+#' w <- subset(bot, type=='whisky') # if you dont like beer
+#' b <- subset(bot, type=='beer')   # if you don't like whisky
 #' w # an example of Momocs:::print.Out
 #' b # same thing for beers
 #' combine(b, w) # if, eventually, you want to mix them
 #' length(bot) # the number of shapes
 #' names(bot) # access all individual names
 #' bot2 <- bot
-#' names(bot2) <- paste0("newnames", 1:length(bot2)) # define new names
+#' names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
 #' @export
-Coo <- function(...){
-  cat(" * Coo constructor has been deprecated. You may be looking for Out(), Opn)() or Ldk(). See ?Coo")}
+Coo <- function(...) {
+    cat(" * Coo constructor has been deprecated. You may be looking for Out(), Opn)() or Ldk(). See ?Coo")
+}
 
 #' Coe class
 #' 
-#' \code{Coe} class is a "super class" for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
+#' \code{Coe} class is a 'super class' for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
 #' matrices of coefficients (in their \code{$coe} slot), along with other informations,
 #' (e.g. an inherited \code{$fac}) obtained with morphometrics methods on 
 #' \link{Out}, \link{Opn} and \link{Ldk} objects.
@@ -88,7 +91,7 @@ Coo <- function(...){
 #' @param ... anything and, anyway, this function will simply returns a message.
 #' @examples
 #' # to see all methods for Coo objects.
-#' methods(class="Coe")
+#' methods(class='Coe')
 #' 
 #' data(bot)
 #' bot.f<- eFourier(bot, 12)
@@ -112,65 +115,89 @@ Coo <- function(...){
 #' wp$coe # Procrustes aligned coordinates
 #' 
 #' @export
-Coe <- function(...){
-  cat(" * Coe constructor does not exist alone. See ?Coe")}
+Coe <- function(...) {
+    cat(" * Coe constructor does not exist alone. See ?Coe")
+}
 
 # allows to maintain the traditionnal str() behaviour
 # actually useless but dont remember why/where
 #' @export
-str.Coo <- function(object, ...){
-  Coo <- object
-  ls.str(Coo)}
+str.Coo <- function(object, ...) {
+    Coo <- object
+    ls.str(Coo)
+}
 #' @export
-str.Coe <- function(object, ...){
-  Coe <- object
-  ls.str(Coe)}
+str.Coe <- function(object, ...) {
+    Coe <- object
+    ls.str(Coe)
+}
 
-# Coo can be indexing both to [ ] and [[ ]]
-# and returns the corresponding coordinate(s)
-# We define some getters
+# Coo can be indexing both to [ ] and [[ ]] and returns the
+# corresponding coordinate(s) We define some getters
 
 #' @export
 "[.Coo" <- function(x, i, ...) {
-  if (missing(i))    { return(x$coo[])    }
-  if (is.integer(i)) { return(x$coo[i])   }
-  if (is.numeric(i)) { return(x$coo[[i]]) }}
+    if (missing(i)) {
+        return(x$coo[])
+    }
+    if (is.integer(i)) {
+        return(x$coo[i])
+    }
+    if (is.numeric(i)) {
+        return(x$coo[[i]])
+    }
+}
 
 #' @export
 "[[.Coo" <- function(x, i, ...) {
-  if (missing(i))    { return(x$coo[])    }
-  if (is.integer(i)) { return(x$coo[i])   }
-  if (is.numeric(i)) { return(x$coo[[i]]) }}
+    if (missing(i)) {
+        return(x$coo[])
+    }
+    if (is.integer(i)) {
+        return(x$coo[i])
+    }
+    if (is.numeric(i)) {
+        return(x$coo[[i]])
+    }
+}
 
-# length on an Coo return the length of Coo$coo, ie the number of coordinates
+# length on an Coo return the length of Coo$coo, ie the
+# number of coordinates
 #' @export
-length.Coo <- function(x){
-  Coo <- x
-  return(length(Coo$coo))}
+length.Coo <- function(x) {
+    Coo <- x
+    return(length(Coo$coo))
+}
 #' @export
-dim.Coo <- function(x){
-  return(length(Coo$coo))}
+dim.Coo <- function(x) {
+    return(length(Coo$coo))
+}
 
 #' @export
-dim.Coe <- function(x){
-  return(dim(x$coe))}
+dim.Coe <- function(x) {
+    return(dim(x$coe))
+}
 
 # names() on a Coo retrieves the names of the Coo$coo
 #' @export
-names.Coo <- function(x){
-  Coo <- x
-  return(names(Coo$coo))}
+names.Coo <- function(x) {
+    Coo <- x
+    return(names(Coo$coo))
+}
 #' @export
-names.Coe <- function(x){
-  Coe <- x
-  return(rownames(Coe$coe))}
+names.Coe <- function(x) {
+    Coe <- x
+    return(rownames(Coe$coe))
+}
 
-# which can in return may be named using names(Coo) <- 
+# which can in return may be named using names(Coo) <-
 #' @export
-"names<-.Coo" <- function(x, value){
-  names(x$coo) <- value
-  return(x)}
+"names<-.Coo" <- function(x, value) {
+    names(x$coo) <- value
+    return(x)
+}
 #' @export
-"names<-.Coe" <- function(x, value){
-  rownames(x$coe) <- value
-  return(x)}
+"names<-.Coe" <- function(x, value) {
+    rownames(x$coe) <- value
+    return(x)
+} 

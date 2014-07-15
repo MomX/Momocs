@@ -35,7 +35,7 @@ coo.plot(coo)
 ef  <- efourier(coo, 12)
 ef
 efi <- efourier.i(ef)
-coo.draw(efi, border="red", col=NA)
+coo.draw(efi, border='red', col=NA)
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,

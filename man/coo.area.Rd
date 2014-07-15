@@ -17,7 +17,7 @@ Calculates the area for a (non-crossing) shape.
 \note{
 Using \code{area.poly} in gpc package is a good idea, but their licence
 impedes Momocs to rely on it. but here is the function to do it, once gpc is loaded:
-\code{ area.poly(as(coo, "gpc.poly")) }
+\code{ area.poly(as(coo, 'gpc.poly')) }
 }
 \examples{
 data(bot)

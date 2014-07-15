@@ -10,11 +10,11 @@ clust(x, fac, method, type, palette, ...)
 
 \item{fac}{a column or an id from $fac}
 
-\item{method}{the method to use among \code{"euclidean"}, \code{"maximum"},
-\code{"manhattan"}, \code{"canberra"}, \code{"binary"} or \code{"minkowski"} to feed \link{dist}}
+\item{method}{the method to use among \code{'euclidean'}, \code{'maximum'},
+\code{'manhattan'}, \code{'canberra'}, \code{'binary'} or \code{'minkowski'} to feed \link{dist}}
 
-\item{type}{the type of plot among \code{"phylogram"} (the default), \code{"cladogram"},
-\code{"fan"}, \code{"unrooted"} and \code{"radial"} to feed \link{plot.phylo}}
+\item{type}{the type of plot among \code{'phylogram'} (the default), \code{'cladogram'},
+\code{'fan'}, \code{'unrooted'} and \code{'radial'} to feed \link{plot.phylo}}
 
 \item{palette}{a color palette to use}
 
@@ -36,13 +36,13 @@ package ape.
 data(bot)
 bot.f <- eFourier(bot, 12)
 clust(bot.f)
-bot.c <- clust(bot.f, "type", cex=0.7)
+bot.c <- clust(bot.f, 'type', cex=0.7)
 #bot.c
 
 data(olea)
-olea.VL <- subset(olea, view=="VL")
+olea.VL <- subset(olea, view=='VL')
 op <- rawPolynomials(olea.VL, 5)
-clust(op, 1, type="cladogram", palette=col.autumn, cex=0.5)
+clust(op, 1, type='cladogram', palette=col.autumn, cex=0.5)
 
 data(wings)
 wp <- fgProcrustes(wings)

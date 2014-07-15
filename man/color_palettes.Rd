@@ -63,20 +63,20 @@ Colors, colors, colors.
 Sron \url{http://www.sron.nl/~pault/colourschemes.pdf}
 }
 \examples{
-barplot(1:20, col=col.summer(20), main="col.summer")
-barplot(1:20, col=col.summer2(20), main="col.summer2")
-barplot(1:20, col=col.spring(20), main="col.spring")
-barplot(1:20, col=col.autumn(20), main="col.autumn")
-barplot(1:20, col=col.solarized(20), main="col.solarized")
-barplot(1:20, col=col.gallus(20), main="col.gallus")
-barplot(1:20, col=col.gallus2(20), main="col.gallus2")
-barplot(1:20, col=col.blackgallus(20), main="col.blackgallus")
-barplot(1:20, col=col.hot(20), main="col.hot")
-barplot(1:20, col=col.cold(20), main="col.cold")
-barplot(1:20, col=col.sari(20), main="col.sari")
-barplot(1:20, col=col.india(20), main="col.india")
-barplot(1:20, col=col.bw(20), main="col.bw")
-barplot(1:20, col=col.div(20), main="col.div")
+barplot(1:20, col=col.summer(20), main='col.summer')
+barplot(1:20, col=col.summer2(20), main='col.summer2')
+barplot(1:20, col=col.spring(20), main='col.spring')
+barplot(1:20, col=col.autumn(20), main='col.autumn')
+barplot(1:20, col=col.solarized(20), main='col.solarized')
+barplot(1:20, col=col.gallus(20), main='col.gallus')
+barplot(1:20, col=col.gallus2(20), main='col.gallus2')
+barplot(1:20, col=col.blackgallus(20), main='col.blackgallus')
+barplot(1:20, col=col.hot(20), main='col.hot')
+barplot(1:20, col=col.cold(20), main='col.cold')
+barplot(1:20, col=col.sari(20), main='col.sari')
+barplot(1:20, col=col.india(20), main='col.india')
+barplot(1:20, col=col.bw(20), main='col.bw')
+barplot(1:20, col=col.div(20), main='col.div')
 }
 \keyword{Graphics}
 

@@ -18,7 +18,7 @@ Manova(x, fac, test = "Hotelling", retain, drop, verbose)
 
 \item{fac}{a name of a colum in the \code{$fac} slot, or its id}
 
-\item{test}{a test for \link{manova} (\code{"Hotelling"} by default)}
+\item{test}{a test for \link{manova} (\code{'Hotelling'} by default)}
 
 \item{retain}{how many harmonics (or polynomials) to retain}
 
@@ -47,11 +47,11 @@ Needs a review #todo.
 \examples{
 data(bot)
 bot.f <- eFourier(bot, 12)
-Manova(bot.f, "type")
+Manova(bot.f, 'type')
 
 data(olea)
 op <- rawPolynomials(olea, 5)
-Manova(op, "domes")
+Manova(op, 'domes')
 }
 \seealso{
 \link{ManovaPW}

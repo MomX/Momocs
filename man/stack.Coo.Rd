@@ -59,11 +59,11 @@ object.
 \examples{
 \dontrun{
 data(mosquito)
-stack(mosquito, borders="#1A1A1A22", first.point=FALSE)
+stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
 data(hearts)
 stack(hearts)
 stack(hearts, ldk=FALSE)
-stack(hearts, borders="#1A1A1A22", ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
+stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
 }
 }
 \seealso{

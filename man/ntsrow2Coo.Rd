@@ -26,7 +26,7 @@ please let met know!
 # That's how wings dataset was created
 # made a local copy from http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts
 # then :
-coo.list  <- ntscol2Coo("~/Desktop/mosquitowings.nts)
+coo.list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
 fac       <- data.frame(fac=factor(substr(names(coo.list), 1, 2)))
 wings <- Ldk(coo.list, fac=fac)
 }

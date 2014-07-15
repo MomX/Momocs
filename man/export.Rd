@@ -28,13 +28,13 @@ around \link{write.table}.
 Default parameters will write a \code{.txt} file, directly readable by MS Excel
 and other programs. With default parameters, numbers will dots as decimal points, which is
 considered as a character chain in Excel in many countries (locale versions.) this can be solved
-using \code{dec=","} as in the examples below.
+using \code{dec=','} as in the examples below.
 
 If you are new to R, you may be looking for where this damn file has been saved. With the defaults
 settings, \code{getwd()} will provide the answer.
 
 I have to mention that everytime you use this function, escape from R to use Excel and
-do "statistics" there, an adorable kitten is probably murdered somewhere. Use R, not Excel!
+do 'statistics' there, an adorable kitten is probably murdered somewhere. Use R, not Excel!
 }
 \examples{
 \dontrun{
@@ -44,11 +44,11 @@ bot.f <- eFourier(bot, 6)
 export(bot.f) # data.txt which can be opened by every software including MS Excel
 # If you are French, or another country that has not been invaded by anglo-american rules.
 # and for use in Excel.
-export(bot.f, dec=",")
-export(bot.f, file="data.xls", dec=",")
+export(bot.f, dec=',')
+export(bot.f, file='data.xls', dec=',')
 
 # for shapes (matrices)
- export(bot[1], file="bot1.txt")
+ export(bot[1], file='bot1.txt')
 }
 }
 \keyword{Babel}

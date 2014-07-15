@@ -50,7 +50,7 @@ configurations.
 \examples{
 data(bot)
 botF <- eFourier(bot)
-x <- mshapes(botF, "type", nb.pts=80)$shp
+x <- mshapes(botF, 'type', nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
 tps.grid(fr, to, amp=3, grid.size=40)

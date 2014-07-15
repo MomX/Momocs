@@ -5,7 +5,7 @@
 \usage{
 dev.plot(mat, dev, cols, x=1:ncol(mat),
 lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
-plot=FALSE, main="Deviation plot", xlab="", ylab="Deviations")
+plot=FALSE, main='Deviation plot', xlab='', ylab='Deviations')
 }
 \arguments{
 \item{mat}{A \code{matrix} containing one or many lines (as individuals) with the corresponding y values (as cols).}

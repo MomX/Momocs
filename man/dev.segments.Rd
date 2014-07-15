@@ -29,10 +29,10 @@ dev <- edm.nearest(out.6, guinness) / coo.centsize(out.6)
 
 # we prepare the color scale
 d.cut <- cut(dev, breaks=20, labels=FALSE, include.lowest=TRUE)
-cols  <- paste0(col.summer(20)[d.cut], "CC")
+cols  <- paste0(col.summer(20)[d.cut], 'CC')
 
 # we draw the results
-coo.plot(guinness, main="Guiness fitted with 6 harm.", points=FALSE)
+coo.plot(guinness, main='Guiness fitted with 6 harm.', points=FALSE)
 par(xpd=NA)
 dev.segments(out.6, cols=cols, lwd=4)
 coo.draw(out.6, lty=2, points=FALSE, col=NA)

@@ -16,13 +16,13 @@ coo.rotatecenter(coo, theta, center = c(0, 0))
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
-rotates a shape of "theta" angles (in radians) and with a (x; y) "center".
+rotates a shape of 'theta' angles (in radians) and with a (x; y) 'center'.
 }
 \examples{
 data(bot)
 b <- bot[1]
 coo.plot(b)
-coo.draw(coo.rotatecenter(b, -pi/2, c(200, 200)), border="red")
+coo.draw(coo.rotatecenter(b, -pi/2, c(200, 200)), border='red')
 }
 \seealso{
 \link{coo.rotate}

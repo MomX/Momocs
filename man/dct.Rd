@@ -36,7 +36,7 @@ o.dct <- dct(o, nb.h=12)
 o.dct
 o.i <- dct.i(o.dct)
 o.i <- coo.bookstein(o.i)
-coo.draw(o.i, border="red")
+coo.draw(o.i, border='red')
 
 #future hqual
 o <- olea[1]
@@ -44,9 +44,9 @@ h.range <- 2:13
 coo <- list()
 for (i in seq(along=h.range)){
 coo[[i]] <- dct.i(dct(o, nb.h=h.range[i]))}
-names(coo) <- paste0("h", h.range)
+names(coo) <- paste0('h', h.range)
 panel(Opn(coo), borders=col.india(12), names=TRUE)
-title("Discrete Cosine Transforms")
+title('Discrete Cosine Transforms')
 }
 \references{
 \itemize{

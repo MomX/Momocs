@@ -12,7 +12,7 @@ nqual(Opn, method = c("rawPolynomials", "orthoPolynomials"), id,
 \arguments{
 \item{Opn}{the \code{Opn} object on which to nqual}
 
-\item{method}{any method from \code{c("rawPolynomials", "orthoPolynomials")}}
+\item{method}{any method from \code{c('rawPolynomials', 'orthoPolynomials')}}
 
 \item{id}{the shape on which to perform nqual}
 
@@ -24,7 +24,7 @@ nqual(Opn, method = c("rawPolynomials", "orthoPolynomials"), id,
 
 \item{baseline2}{\eqn{(x; y)} coordinates for the second point of the baseline}
 
-\item{plot.method}{either \code{"\link{panel}"} or \code{"\link{stack}"}}
+\item{plot.method}{either \code{'\link{panel}'} or \code{'\link{stack}'}}
 
 \item{legend}{logical whether to plot a legend}
 

@@ -53,43 +53,60 @@
 #' tf  <- tfourier(coo, 12)
 #' tf
 #' tfi <- tfourier.i(tf)
-#' coo.draw(tfi, border="red", col=NA) # the outline is not closed...
-#' coo.draw(tfourier.i(tf, force2close=TRUE), border="blue", col=NA) # we force it to close.
+#' coo.draw(tfi, border='red', col=NA) # the outline is not closed...
+#' coo.draw(tfourier.i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
 #' @export
-tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
-  if (missing(nb.h)) {
-    nb.h <- 12
-    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
-  if (is.list(coo))   {coo <- l2m(coo)}
-  if (is.closed(coo)) {coo <- coo.unclose(coo)}
-  if(nb.h * 2 > nrow(coo)) {
-    nb.h = floor(nrow(coo)/2)
-    if (verbose){
-      cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", nb.h)}}
-  if (nb.h == -1) {
-    nb.h = floor(nrow(coo)/2)
-    if (verbose){
-      cat(" * 'nb.h' must be lower than half the number of points.\n",
-          "* It has been set to", nb.h, "harmonics.\n")}}
-  if (smooth.it!=0) { coo <- coo.smooth(coo, smooth.it)}
-  if (norm) {
-    coo <- coo.scale(coo.center(coo))
-    coo <- coo.trans(coo, -coo[1, 1], -coo[1, 2])}
-  p <- nrow(coo)
-  an <- bn <- numeric(nb.h)
-  tangvect <- coo - rbind(coo[p,], coo[-p,])
-  perim <- sum(sqrt(apply((tangvect)^2, 1, sum)))
-  v0    <- coo[1,]-coo[p,]
-  tet1   <- Arg(complex(real=tangvect[,1], imaginary = tangvect[,2]))
-  tet0   <- tet1[1]
-  t1     <- seq(0, 2*pi, length= (p+1))[1:p]
-  phi    <- (tet1-tet0-t1)%%(2*pi)
-  ao     <- 2*sum(phi)/p
-  for (i in 1:nb.h){
-    an[i]<- (2/p) * sum( phi * cos (i*t1))
-    bn[i]<- (2/p) * sum( phi * sin (i*t1))}
-  list(ao=ao, an=an, bn=bn, phi=phi, t=t1, perimeter=perim,
-       thetao=tet0, x1=coo[1, 1], y1=coo[1, 2])}
+tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
+    verbose = TRUE) {
+    if (missing(nb.h)) {
+        nb.h <- 12
+        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+    }
+    if (is.list(coo)) {
+        coo <- l2m(coo)
+    }
+    if (is.closed(coo)) {
+        coo <- coo.unclose(coo)
+    }
+    if (nb.h * 2 > nrow(coo)) {
+        nb.h = floor(nrow(coo)/2)
+        if (verbose) {
+            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", 
+                nb.h)
+        }
+    }
+    if (nb.h == -1) {
+        nb.h = floor(nrow(coo)/2)
+        if (verbose) {
+            cat(" * 'nb.h' must be lower than half the number of points.\n", 
+                "* It has been set to", nb.h, "harmonics.\n")
+        }
+    }
+    if (smooth.it != 0) {
+        coo <- coo.smooth(coo, smooth.it)
+    }
+    if (norm) {
+        coo <- coo.scale(coo.center(coo))
+        coo <- coo.trans(coo, -coo[1, 1], -coo[1, 2])
+    }
+    p <- nrow(coo)
+    an <- bn <- numeric(nb.h)
+    tangvect <- coo - rbind(coo[p, ], coo[-p, ])
+    perim <- sum(sqrt(apply((tangvect)^2, 1, sum)))
+    v0 <- coo[1, ] - coo[p, ]
+    tet1 <- Arg(complex(real = tangvect[, 1], imaginary = tangvect[, 
+        2]))
+    tet0 <- tet1[1]
+    t1 <- seq(0, 2 * pi, length = (p + 1))[1:p]
+    phi <- (tet1 - tet0 - t1)%%(2 * pi)
+    ao <- 2 * sum(phi)/p
+    for (i in 1:nb.h) {
+        an[i] <- (2/p) * sum(phi * cos(i * t1))
+        bn[i] <- (2/p) * sum(phi * sin(i * t1))
+    }
+    list(ao = ao, an = an, bn = bn, phi = phi, t = t1, perimeter = perim, 
+        thetao = tet0, x1 = coo[1, 1], y1 = coo[1, 2])
+}
 
 #' Inverse tangent angle Fourier transform
 #' 
@@ -127,45 +144,60 @@ tfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' tfourier(bot[1], 24)
 #' tfourier.shape()
 #' @export
-tfourier.i<-function(tf, nb.h, nb.pts=120,
-                     force2close=FALSE, rescale=TRUE, perim=2*pi, thetao=0){
-  if (!all(c("an", "bn") %in% names(tf))) {
-    stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")}
-  ao <- ifelse(is.null(tf$ao), 0, tf$ao)
-  if (missing(thetao)) { thetao <- ifelse(is.null(tf$thetao), 0, tf$thetao) }
-  an <- tf$an
-  bn <- tf$bn
-  if (missing(nb.h)) {nb.h <- length(an)}
-  if (nb.h > length(an)) {
-    nb.h <- length(an)
-    #cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ", nb.h)}
-  }
-    #if (missing(nb.pts)) {nb.pts=nb.h*2}
-  theta <- seq(0, 2*pi, length=nb.pts)
-  harm  <- matrix(NA, nrow=nb.h, ncol=nb.pts)
-  for (i in 1:nb.h){
-    harm[i,] <- an[i]*cos(i*theta) + bn[i]*sin(i*theta)}
-  phi  <- (ao/2) + apply(harm, 2, sum)
-  vect <- matrix(NA, 2, nb.pts)
-  Z    <- complex(modulus=(2*pi)/nb.pts, argument=phi+theta+thetao)
-  Z1   <- cumsum(Z)
-  coo <- cbind(Re(Z1), Im(Z1))
-  if (force2close) { coo <- coo.force2close(coo)}
-  if (rescale)     {
-    if(missing(perim)) {
-      perim <- ifelse(is.null(tf$perim), 2*pi, tf$perim)}
-    coo <- coo.scale(coo, coo.perim(coo)/perim) }
-  if (!all(is.null(tf$x1) & is.null(tf$x1))) {
-    coo <- coo.trans(coo, tf$x1, tf$y1)}
-  #return(list(x=coo[, 1], y=coo[, 2], angle=theta, phi=phi))}
-  colnames(coo) <- c("x", "y")
-  return(coo)}
-  
-  
-#' Calculates and draws "tfourier" shapes.
+tfourier.i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE, 
+    rescale = TRUE, perim = 2 * pi, thetao = 0) {
+    if (!all(c("an", "bn") %in% names(tf))) {
+        stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")
+    }
+    ao <- ifelse(is.null(tf$ao), 0, tf$ao)
+    if (missing(thetao)) {
+        thetao <- ifelse(is.null(tf$thetao), 0, tf$thetao)
+    }
+    an <- tf$an
+    bn <- tf$bn
+    if (missing(nb.h)) {
+        nb.h <- length(an)
+    }
+    if (nb.h > length(an)) {
+        nb.h <- length(an)
+        # cat(' * nb.h cannot be higher than length(rf$an) and has
+        # been set to: ', nb.h)}
+    }
+    # if (missing(nb.pts)) {nb.pts=nb.h*2}
+    theta <- seq(0, 2 * pi, length = nb.pts)
+    harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)
+    for (i in 1:nb.h) {
+        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * 
+            theta)
+    }
+    phi <- (ao/2) + apply(harm, 2, sum)
+    vect <- matrix(NA, 2, nb.pts)
+    Z <- complex(modulus = (2 * pi)/nb.pts, argument = phi + 
+        theta + thetao)
+    Z1 <- cumsum(Z)
+    coo <- cbind(Re(Z1), Im(Z1))
+    if (force2close) {
+        coo <- coo.force2close(coo)
+    }
+    if (rescale) {
+        if (missing(perim)) {
+            perim <- ifelse(is.null(tf$perim), 2 * pi, tf$perim)
+        }
+        coo <- coo.scale(coo, coo.perim(coo)/perim)
+    }
+    if (!all(is.null(tf$x1) & is.null(tf$x1))) {
+        coo <- coo.trans(coo, tf$x1, tf$y1)
+    }
+    # return(list(x=coo[, 1], y=coo[, 2], angle=theta, phi=phi))}
+    colnames(coo) <- c("x", "y")
+    return(coo)
+}
+
+
+#' Calculates and draws 'tfourier' shapes.
 #' 
-#' \code{tfourier.shape} calculates a "Fourier tangent angle shape" given
-#' Fourier coefficients (see \code{Details}) or can generate some "tfourier"
+#' \code{tfourier.shape} calculates a 'Fourier tangent angle shape' given
+#' Fourier coefficients (see \code{Details}) or can generate some 'tfourier'
 #' shapes.
 #' 
 #' \code{tfourier.shape} can be used by specifying \code{nb.h} and
@@ -200,14 +232,21 @@ tfourier.i<-function(tf, nb.h, nb.pts=120,
 #' panel(Out(a2l(replicate(100,
 #' coo.force2close(tfourier.shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
 #' @export
-tfourier.shape <- function(an, bn, ao=0, nb.h, nb.pts=80, alpha=2, plot=TRUE){
-  if (missing(nb.h) &  missing(an)) nb.h <- 1
-  if (missing(nb.h) & !missing(an)) nb.h <- length(an)
-  if (missing(an)) an <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  if (missing(bn)) bn <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  tf  <- list(an=an, bn=bn, ao=ao)
-  shp <- tfourier.i(tf, nb.h=nb.h, nb.pts=nb.pts)      
-  if (plot) coo.plot(shp)
-  return(shp)}
+tfourier.shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80, 
+    alpha = 2, plot = TRUE) {
+    if (missing(nb.h) & missing(an)) 
+        nb.h <- 1
+    if (missing(nb.h) & !missing(an)) 
+        nb.h <- length(an)
+    if (missing(an)) 
+        an <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    if (missing(bn)) 
+        bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    tf <- list(an = an, bn = bn, ao = ao)
+    shp <- tfourier.i(tf, nb.h = nb.h, nb.pts = nb.pts)
+    if (plot) 
+        coo.plot(shp)
+    return(shp)
+}
 
-##### end tFourier
+##### end tFourier 

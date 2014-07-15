@@ -11,7 +11,7 @@ hpow(Out, method = "efourier", id = 1:length(Out), nb.h = 16, drop = 1,
 \arguments{
 \item{Out}{the \code{Out} object on which to hpow}
 
-\item{method}{any method from \code{c("efourier", "rfourier", "tfourier")}}
+\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
 
 \item{id}{the shape on which to perform hpow. All by default}
 

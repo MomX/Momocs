@@ -13,7 +13,7 @@ Ldk(x, links = NULL, fac = data.frame())
 \item{x}{a \code{list} of matrices of (x; y) coordinates,
 or an array, an Ldk object.}
 
-\item{links}{a matrix of "links" between landmarks, mainly for plotting}
+\item{links}{a matrix of 'links' between landmarks, mainly for plotting}
 
 \item{fac}{(optionnal) a \code{data.frame} of factors,
 specifying the grouping structure}

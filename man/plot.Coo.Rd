@@ -9,7 +9,7 @@
 \item{x}{the \link{Coo} object}
 
 \item{id}{the id of the shape to plot, if not provided a
-random shape is plotted. If passed with \code{"all"} all shapes are plotted,
+random shape is plotted. If passed with \code{'all'} all shapes are plotted,
 one by one.}
 
 \item{...}{further arguments to be passed to \link{coo.plot}}

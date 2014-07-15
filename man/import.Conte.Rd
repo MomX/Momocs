@@ -14,7 +14,7 @@ import.Conte(img, x)
 a matrix the (x; y) coordinates of the outline points.
 }
 \description{
-Provided with an image "mask" (i.e. black pixels on a white background),
+Provided with an image 'mask' (i.e. black pixels on a white background),
 and a point form where to start the algorithm, returns the (x; y) coordinates of its outline.
 }
 \details{

@@ -1,4 +1,5 @@
-# 1. Out -----------------------------------------------------------------------
+# 1. Out
+# -----------------------------------------------------------------------
 
 #' Builds an Out object
 #'
@@ -19,84 +20,101 @@
 #' @examples
 #' methods(class=Out)
 #' @export
-Out <- function(x, ldk=list(), fac=data.frame){UseMethod("Out")}
+Out <- function(x, ldk = list(), fac = data.frame) {
+    UseMethod("Out")
+}
 
 #' @export
-Out.default <- function(x, ldk=list(), fac=data.frame()){
-  cat(" * an Ldk object can only be build from a list, an array or an Opn object")}
+Out.default <- function(x, ldk = list(), fac = data.frame()) {
+    cat(" * an Ldk object can only be build from a list, an array or an Opn object")
+}
 
 #' @export
-Out.list  <- function(x, ldk=list(), fac=data.frame()){
-  coo.list <- x
-  Out <- list(coo=coo.list, ldk=ldk, fac=fac)
-  if (!is.null(Out$fac)) Out$fac <- .refactor(Out$fac)
-  class(Out) <- c("Out", "Coo")
-  return(Out)}
+Out.list <- function(x, ldk = list(), fac = data.frame()) {
+    coo.list <- x
+    Out <- list(coo = coo.list, ldk = ldk, fac = fac)
+    if (!is.null(Out$fac)) 
+        Out$fac <- .refactor(Out$fac)
+    class(Out) <- c("Out", "Coo")
+    return(Out)
+}
 
 #' @export
-Out.array  <- function(x, ldk=list(), fac=data.frame()){
-  x <- a2l(x)
-  Out(x, fac=fac)}
+Out.array <- function(x, ldk = list(), fac = data.frame()) {
+    x <- a2l(x)
+    Out(x, fac = fac)
+}
 
 # experimental below
 #' @export
-Out.Coo <- function(x, ldk=list(), fac=data.frame()){
-  Out(x=x$coo, ldk=x$ldk, fac=x$fac)}
+Out.Coo <- function(x, ldk = list(), fac = data.frame()) {
+    Out(x = x$coo, ldk = x$ldk, fac = x$fac)
+}
 
 # The print method for Out objects
 #' @export
-print.Out <- function(x, ...){
-  Out <- x
-  ### Header
-  cat("An Out object (see ?Out) with: \n")
-  cat(rep("-", 20),"\n", sep="")
-  coo.nb  <- length(Out)
-  coo.len <- sapply(Out$coo, nrow)
-  coo.closed <- sapply(Out$coo, is.closed)
-  # number of outlines
-  cat(" -", coo.nb, "outlines\n")
-  # one random outline
-  eg <- sample(length(Out$coo), 1)
-  coo.eg <- Out$coo[[eg]]
-  colnames(coo.eg) <- c("x", "y")
-  cat(" - One random outline in $coo: '", names(Out$coo)[eg], "':\n", sep="")
-  if (nrow(coo.eg) > 5) {
-    print(coo.eg[1:5, ], print.gap=2)
-    cat("etc.\n")
-  } else {
-    print(coo.eg, print.gap=2)
-    cat("\n\n")}
-  # number of coordinates
-  cat(" -", round(mean(coo.len )), "+/-", round(sd(coo.len )),
-      "coordinates per outline\n")
-  # outlines closed or not
-  if (all(coo.closed)) {
-    cat(" - All outlines are closed\n")
-  } else {
-    if (any(!coo.closed)) {
-      cat(" - All outlines are unclosed\n")
+print.Out <- function(x, ...) {
+    Out <- x
+    ### Header
+    cat("An Out object (see ?Out) with: \n")
+    cat(rep("-", 20), "\n", sep = "")
+    coo.nb <- length(Out)
+    coo.len <- sapply(Out$coo, nrow)
+    coo.closed <- sapply(Out$coo, is.closed)
+    # number of outlines
+    cat(" -", coo.nb, "outlines\n")
+    # one random outline
+    eg <- sample(length(Out$coo), 1)
+    coo.eg <- Out$coo[[eg]]
+    colnames(coo.eg) <- c("x", "y")
+    cat(" - One random outline in $coo: '", names(Out$coo)[eg], 
+        "':\n", sep = "")
+    if (nrow(coo.eg) > 5) {
+        print(coo.eg[1:5, ], print.gap = 2)
+        cat("etc.\n")
     } else {
-      cat(" -", sum(coo.closed), "outlines are closed\n")}}
-  # number of landmarks
-  if (length(Out$ldk)!=0) {
-    cat(" -", length(Out$ldk[[1]]), "landmark(s) defined\n")
-  } else {
-    cat(" - No landmark defined\n")}
-  # number of grouping factors
-  df <- Out$fac
-  nf <- ncol(df)
-  if (nf==0) {
-    cat(" - No groups defined\n")
-  } else {
-    cat(" -", nf, "grouping factor(s) defined:\n")
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
-                                       length(lev.i)-10, "more")
-      cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
+        print(coo.eg, print.gap = 2)
+        cat("\n\n")
+    }
+    # number of coordinates
+    cat(" -", round(mean(coo.len)), "+/-", round(sd(coo.len)), 
+        "coordinates per outline\n")
+    # outlines closed or not
+    if (all(coo.closed)) {
+        cat(" - All outlines are closed\n")
+    } else {
+        if (any(!coo.closed)) {
+            cat(" - All outlines are unclosed\n")
+        } else {
+            cat(" -", sum(coo.closed), "outlines are closed\n")
+        }
+    }
+    # number of landmarks
+    if (length(Out$ldk) != 0) {
+        cat(" -", length(Out$ldk[[1]]), "landmark(s) defined\n")
+    } else {
+        cat(" - No landmark defined\n")
+    }
+    # number of grouping factors
+    df <- Out$fac
+    nf <- ncol(df)
+    if (nf == 0) {
+        cat(" - No groups defined\n")
+    } else {
+        cat(" -", nf, "grouping factor(s) defined:\n")
+        for (i in 1:nf) {
+            lev.i <- levels(df[, i])
+            if (length(lev.i) > 10) 
+                lev.i <- c(lev.i[1:10], " ... ", length(lev.i) - 
+                  10, "more")
+            cat("     ", colnames(df)[i], ": ", lev.i, "\n")
+        }
+    }
+}
 
 
-# 2. Out calibration -----------------------------------------------------------
+# 2. Out calibration
+# -----------------------------------------------------------
 #' Graphical calibration for Out objects
 #' 
 #' Calculate and displays reconstructed shapes using a
@@ -104,14 +122,14 @@ print.Out <- function(x, ...){
 #' 
 #' @aliases hqual
 #' @param Out the \code{Out} object on which to hqual
-#' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
+#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
 #' @param id the shape on which to perform hqual
 #' @param harm.range vector of harmonics on which to perform hqual
 #' @param smooth.it numeric, number of smoothing iterations
 #' @param scale logical whether to scale the shape
 #' @param center logical whether to center the shape
 #' @param align logical whether to align th shape
-#' @param plot.method either \code{"\link{panel}"} or \code{"\link{stack}"}
+#' @param plot.method either \code{'\link{panel}'} or \code{'\link{stack}'}
 #' @param legend logical whether to plot a legend
 #' @param legend.title if TRUE above, its title
 #' @param palette a color \link{palette}
@@ -123,77 +141,82 @@ print.Out <- function(x, ...){
 #' data(bot)
 #' hqual(bot)
 #' @export
-hqual <- 
-  function(Out,
-           method=c("efourier", "rfourier", "tfourier"),
-           id, 
-           harm.range = c(1, 2, 4, 8, 16, 32),
-           smooth.it=0,
-           scale=TRUE, center=TRUE, align=TRUE,
-           plot.method=c("panel", "stack")[1],
-           legend = TRUE,
-           legend.title = "Nb of harmonics",
-           palette = col.india,
-           shp.col=NA,
-           shp.border="#1A1A1A", ...){UseMethod("hqual")}
+hqual <- function(Out, method = c("efourier", "rfourier", "tfourier"), 
+    id, harm.range = c(1, 2, 4, 8, 16, 32), smooth.it = 0, scale = TRUE, 
+    center = TRUE, align = TRUE, plot.method = c("panel", "stack")[1], 
+    legend = TRUE, legend.title = "Nb of harmonics", palette = col.india, 
+    shp.col = NA, shp.border = "#1A1A1A", ...) {
+    UseMethod("hqual")
+}
 #' @export
-hqual.Out <-
-  function(Out, method=c("efourier", "rfourier", "tfourier"),
-           id, 
-           harm.range = c(1, 2, 4, 8, 16, 32),
-           smooth.it=0,
-           scale=TRUE, center=TRUE, align=TRUE,
-           plot.method=c("panel", "stack")[1],
-           legend = TRUE,
-           legend.title = "Nb of harmonics",
-           palette = col.india,
-           shp.col=NA,
-           shp.border="#1A1A1A",
-           ...){
-    if (missing(id)) id <- sample(length(Out$coo), 1)
+hqual.Out <- function(Out, method = c("efourier", "rfourier", 
+    "tfourier"), id, harm.range = c(1, 2, 4, 8, 16, 32), smooth.it = 0, 
+    scale = TRUE, center = TRUE, align = TRUE, plot.method = c("panel", 
+        "stack")[1], legend = TRUE, legend.title = "Nb of harmonics", 
+    palette = col.india, shp.col = NA, shp.border = "#1A1A1A", 
+    ...) {
+    if (missing(id)) 
+        id <- sample(length(Out$coo), 1)
     if (missing(method)) {
-      cat(" * Method not provided. efourier is used.\n")
-      method   <- efourier
-      method.i <- efourier.i 
+        cat(" * Method not provided. efourier is used.\n")
+        method <- efourier
+        method.i <- efourier.i
     } else {
-      p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-      if (is.na(p)) { warning(" * Unvalid method. efourier is used.\n")
-      } else {
-        method   <- switch(p, efourier,   rfourier,   tfourier)
-        method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)}}
+        p <- pmatch(tolower(method), c("efourier", "rfourier", 
+            "tfourier"))
+        if (is.na(p)) {
+            warning(" * Unvalid method. efourier is used.\n")
+        } else {
+            method <- switch(p, efourier, rfourier, tfourier)
+            method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
+        }
+    }
     
     # check for too ambitious harm.range
     if (max(harm.range) > (min(sapply(Out$coo, nrow))/2 + 1)) {
-      harm.range <- floor(seq(1, q/2 - 1, length=6))
-      cat(" * harm.range was too high and set to: ", harm.range, ".\n")}
+        harm.range <- floor(seq(1, q/2 - 1, length = 6))
+        cat(" * harm.range was too high and set to: ", harm.range, 
+            ".\n")
+    }
     coo <- Out$coo[[id]]
-    if (scale)  coo <- coo.scale(coo)
-    if (center) coo <- coo.center(coo)
-    if (align)  coo <- coo.align(coo)
+    if (scale) 
+        coo <- coo.scale(coo)
+    if (center) 
+        coo <- coo.center(coo)
+    if (align) 
+        coo <- coo.align(coo)
     res <- list()
-    for (i in seq(along=harm.range)) {
-      res[[i]] <- method.i(method(coo, nb.h=max(harm.range), smooth.it=smooth.it), nb.h=harm.range[i])}
+    for (i in seq(along = harm.range)) {
+        res[[i]] <- method.i(method(coo, nb.h = max(harm.range), 
+            smooth.it = smooth.it), nb.h = harm.range[i])
+    }
     # plotting
-    op <- par(mar=c(3, 3, 2, 1))
+    op <- par(mar = c(3, 3, 2, 1))
     on.exit(par(op))
     cols <- paste0(palette(length(harm.range)), "EE")
-    if (plot.method=="stack") {
-      coo <- coo.smooth(coo, smooth.it)
-      coo.plot(coo, border=shp.border, col=shp.col,
-               lwd=2, points=FALSE, main=names(Out)[id], ...)
-      for (i in seq(along=harm.range)) {lines(res[[i]], col=cols[i], lwd=1)}
-      if (legend) {
-        legend("topright", legend = as.character(harm.range), bty="n",
-               col = cols, lty = 1, lwd=1, cex=0.7,
-               title = legend.title)}
+    if (plot.method == "stack") {
+        coo <- coo.smooth(coo, smooth.it)
+        coo.plot(coo, border = shp.border, col = shp.col, lwd = 2, 
+            points = FALSE, main = names(Out)[id], ...)
+        for (i in seq(along = harm.range)) {
+            lines(res[[i]], col = cols[i], lwd = 1)
+        }
+        if (legend) {
+            legend("topright", legend = as.character(harm.range), 
+                bty = "n", col = cols, lty = 1, lwd = 1, cex = 0.7, 
+                title = legend.title)
+        }
     } else {
-      if (plot.method=="panel") {
-        #par(oma=c(1, 1, 3, 0))
-        pos <- coo.list.panel(res, cols=cols)
-        if (legend) {text(x=pos[, 1], y=pos[, 2],
-                          as.character(harm.range))}
-        title(names(Out)[id], cex=1.3)
-      }}}
+        if (plot.method == "panel") {
+            # par(oma=c(1, 1, 3, 0))
+            pos <- coo.list.panel(res, cols = cols)
+            if (legend) {
+                text(x = pos[, 1], y = pos[, 2], as.character(harm.range))
+            }
+            title(names(Out)[id], cex = 1.3)
+        }
+    }
+}
 
 #' Quantitative calibration, through deviations, for Out objects
 #' 
@@ -202,7 +225,7 @@ hqual.Out <-
 #' 
 #' @aliases hquant
 #' @param Coo the \code{Out} object on which to hquant
-#' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
+#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
 #' @param id the shape on which to perform hquant
 #' @param harm.range vector of harmonics on which to perform hquant
 #' @param smooth.it numeric, number of smoothing iterations
@@ -221,117 +244,127 @@ hqual.Out <-
 #' data(bot)
 #' hqual(bot)
 #' @export
-hquant <- 
-  function(Coo,
-           method = c("efourier", "rfourier", "tfourier"),
-           id        = 1,
-           harm.range = seq(4, 20, 4),
-           smooth.it = 0,
-           norm.centsize = TRUE,
-           dist.method = edm.nearest,
-           dist.nbpts = 120,
-           plot = TRUE,
-           dev.plot=TRUE,
-           title = "Deviations along the outline",
-           legend = TRUE,
-           legend.title = "Nb of harmonics",
-           palette = col.summer,
-           lineat.y=c(0.5, 0.1, 0.01)){UseMethod("hquant")}
+hquant <- function(Coo, method = c("efourier", "rfourier", "tfourier"), 
+    id = 1, harm.range = seq(4, 20, 4), smooth.it = 0, norm.centsize = TRUE, 
+    dist.method = edm.nearest, dist.nbpts = 120, plot = TRUE, 
+    dev.plot = TRUE, title = "Deviations along the outline", 
+    legend = TRUE, legend.title = "Nb of harmonics", palette = col.summer, 
+    lineat.y = c(0.5, 0.1, 0.01)) {
+    UseMethod("hquant")
+}
 
 #' @export
-hquant.Out <- 
-  function(Coo,
-           method = c("efourier", "rfourier", "tfourier"),
-           id        = 1,
-           harm.range = seq(4, 20, 4),
-           smooth.it = 0,
-           norm.centsize = TRUE,
-           dist.method = edm.nearest,
-           dist.nbpts = 120,
-           plot = TRUE,
-           dev.plot=TRUE,
-           title = "Deviations along the outline",
-           legend = TRUE,
-           legend.title = "Nb of harmonics",
-           palette = col.summer,
-           lineat.y=c(0.5, 0.1, 0.01)){
+hquant.Out <- function(Coo, method = c("efourier", "rfourier", 
+    "tfourier"), id = 1, harm.range = seq(4, 20, 4), smooth.it = 0, 
+    norm.centsize = TRUE, dist.method = edm.nearest, dist.nbpts = 120, 
+    plot = TRUE, dev.plot = TRUE, title = "Deviations along the outline", 
+    legend = TRUE, legend.title = "Nb of harmonics", palette = col.summer, 
+    lineat.y = c(0.5, 0.1, 0.01)) {
     if (missing(method)) {
-      cat("  * Method not provided. efourier is used.\n")
-      method   <- efourier
-      method.i <- efourier.i 
+        cat("  * Method not provided. efourier is used.\n")
+        method <- efourier
+        method.i <- efourier.i
     } else {
-      p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-      if (is.na(p)) { warning("Unvalid method. efourier is used.")
-      } else {
-        method   <- switch(p, efourier,   rfourier,   tfourier)
-        method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)}}
+        p <- pmatch(tolower(method), c("efourier", "rfourier", 
+            "tfourier"))
+        if (is.na(p)) {
+            warning("Unvalid method. efourier is used.")
+        } else {
+            method <- switch(p, efourier, rfourier, tfourier)
+            method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
+        }
+    }
     # We define the highest possible nb.h along Coo@coo[id]
     min.nb.pts <- min(sapply(Coo$coo[id], nrow))
-    nb.h.best  <- floor(min.nb.pts/2)-1
+    nb.h.best <- floor(min.nb.pts/2) - 1
     # we handle too ambitious harm.range
     if (max(harm.range) > nb.h.best) {
-      harm.range <- floor(seq(4, nb.h.best, length=6))
-      cat("  * 'harm.range' was too high and set to: ", harm.range, ".\n")}
+        harm.range <- floor(seq(4, nb.h.best, length = 6))
+        cat("  * 'harm.range' was too high and set to: ", harm.range, 
+            ".\n")
+    }
     # we prepare the results array
-    nb.pts <- ifelse(dist.nbpts == "max", 2*nb.h.best, dist.nbpts)
+    nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
     nr <- length(harm.range)
     nc <- nb.pts
     nk <- length(id)
-    res <- array(NA, dim=c(nr, nc, nk),
-                 dimnames=list(paste0("h", harm.range),
-                               paste("pt", 1:nb.pts),
-                               names(Coo)[id]))
+    res <- array(NA, dim = c(nr, nc, nk), dimnames = list(paste0("h", 
+        harm.range), paste("pt", 1:nb.pts), names(Coo)[id]))
     # progressbar
     if (nk > 5) {
-      pb <- txtProgressBar(1, nk)
-      t <- TRUE } else {t <- FALSE}
-    # the core loops that will calculate deviations
-    for (ind in seq(along=id)) {
-      coo <- Coo$coo[[id[ind]]]
-      # below, the best possible fit
-      coo.best <- method.i(method(coo, nb.h=nb.h.best, smooth.it=smooth.it), nb.pts=nb.pts)
-      for (i in seq(along=harm.range)) {
-        # for each number of harmonics we calculate deviation with the FUN=method
-        coo.i <- method.i(method(coo, nb.h=harm.range[i], smooth.it=smooth.it), nb.pts=nb.pts)
-        res[i, , ind] <- dist.method(coo.best, coo.i)
-      }
-      # we normalize by the centroid size
-      if (norm.centsize) {res[,,ind] <- res[,,ind]/coo.centsize(coo)}
-      if (t) setTxtProgressBar(pb, ind)}
-    # below we manage for single/several individuals
-    if (nk > 1) { # if more than 1, we calculate median and sd
-      m <- apply(res, 1:2, median)
-      d <- apply(res, 1:2, sd)
+        pb <- txtProgressBar(1, nk)
+        t <- TRUE
     } else {
-      m <- res[,,1]
-      d <- NULL}
+        t <- FALSE
+    }
+    # the core loops that will calculate deviations
+    for (ind in seq(along = id)) {
+        coo <- Coo$coo[[id[ind]]]
+        # below, the best possible fit
+        coo.best <- method.i(method(coo, nb.h = nb.h.best, smooth.it = smooth.it), 
+            nb.pts = nb.pts)
+        for (i in seq(along = harm.range)) {
+            # for each number of harmonics we calculate deviation with
+            # the FUN=method
+            coo.i <- method.i(method(coo, nb.h = harm.range[i], 
+                smooth.it = smooth.it), nb.pts = nb.pts)
+            res[i, , ind] <- dist.method(coo.best, coo.i)
+        }
+        # we normalize by the centroid size
+        if (norm.centsize) {
+            res[, , ind] <- res[, , ind]/coo.centsize(coo)
+        }
+        if (t) 
+            setTxtProgressBar(pb, ind)
+    }
+    # below we manage for single/several individuals if more than
+    # 1, we calculate median and sd
+    if (nk > 1) {
+        m <- apply(res, 1:2, median)
+        d <- apply(res, 1:2, sd)
+    } else {
+        m <- res[, , 1]
+        d <- NULL
+    }
     # plotting stuff
     if (plot) {
-      cols <- palette(nr)
-      if (nk > 1) {ylim <- c(0, max(m+d, na.rm=TRUE))} else {ylim <- range(m)}
-      if (norm.centsize) {
-        ylab = "Deviation (in % of the centroid size)"
-      } else {
-        ylab = "Deviation (in original units)"}
-      plot(NA, xlim=c(1, nc), ylim=ylim,
-           xlab="Points sampled along the outline",
-           ylab=ylab, main=title,
-           xaxs="i", yaxs="i", axes=FALSE)
-      axis(1, at=seq(0, dist.nbpts, length=5))
-      axis(2)
-      abline(h=lineat.y, lty=2, col="grey90")
-      # if you want deviations, here they are
-      if (dev.plot) {
-        if (nk > 1) {dev.plot(m, d, cols=cols) } else {
-          for (i in 1:nr) {
-            lines(1:ncol(m), m[i, ], col=cols[i])}}}
-      # same for legend
-      if (legend) {
-        legend("topright", legend = as.character(harm.range), bty="n",
-               col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", inset=0.005, cex=0.7,
-               title = legend.title)}
-      box() }
-    invisible(list(res=res, m=m, d=d))}
+        cols <- palette(nr)
+        if (nk > 1) {
+            ylim <- c(0, max(m + d, na.rm = TRUE))
+        } else {
+            ylim <- range(m)
+        }
+        if (norm.centsize) {
+            ylab = "Deviation (in % of the centroid size)"
+        } else {
+            ylab = "Deviation (in original units)"
+        }
+        plot(NA, xlim = c(1, nc), ylim = ylim, xlab = "Points sampled along the outline", 
+            ylab = ylab, main = title, xaxs = "i", yaxs = "i", 
+            axes = FALSE)
+        axis(1, at = seq(0, dist.nbpts, length = 5))
+        axis(2)
+        abline(h = lineat.y, lty = 2, col = "grey90")
+        # if you want deviations, here they are
+        if (dev.plot) {
+            if (nk > 1) {
+                dev.plot(m, d, cols = cols)
+            } else {
+                for (i in 1:nr) {
+                  lines(1:ncol(m), m[i, ], col = cols[i])
+                }
+            }
+        }
+        # same for legend
+        if (legend) {
+            legend("topright", legend = as.character(harm.range), 
+                bty = "n", col = cols, lty = 1, lwd = 1, bg = "#FFFFFFCC", 
+                inset = 0.005, cex = 0.7, title = legend.title)
+        }
+        box()
+    }
+    invisible(list(res = res, m = m, d = d))
+}
 
 #' Quantitative calibration, through harmonic power, for Out objects
 #' 
@@ -344,7 +377,7 @@ hquant.Out <-
 #' 
 #' @aliases hpow
 #' @param Out the \code{Out} object on which to hpow
-#' @param method any method from \code{c("efourier", "rfourier", "tfourier")}
+#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
 #' @param id the shape on which to perform hpow. All by default
 #' @param nb.h numeric the maximum number of harmonic
 #' @param drop numeric the number of harmonics to drop for the cumulative sum
@@ -367,52 +400,59 @@ hquant.Out <-
 #' data(bot)
 #' hpow(bot)
 #' @export
-hpow <- 
-  function(Out, method="efourier", id=1:length(Out),
-           nb.h=16, drop=1, smooth.it=0, plot=TRUE,
-           title="Fourier coefficients power spectrum",
-           lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1){UseMethod("hpow")}
+hpow <- function(Out, method = "efourier", id = 1:length(Out), 
+    nb.h = 16, drop = 1, smooth.it = 0, plot = TRUE, title = "Fourier coefficients power spectrum", 
+    lineat.y = c(0.9, 0.95, 0.99, 0.999), bw = 0.1) {
+    UseMethod("hpow")
+}
 #' @export
-hpow.Out <- 
-  function(Out, method="efourier", id=1:length(Out),
-           nb.h=16, drop=1, smooth.it=0, plot=TRUE,
-           title="Fourier coefficients power spectrum",
-           lineat.y=c(0.9, 0.95, 0.99, 0.999), bw=0.1){
+hpow.Out <- function(Out, method = "efourier", id = 1:length(Out), 
+    nb.h = 16, drop = 1, smooth.it = 0, plot = TRUE, title = "Fourier coefficients power spectrum", 
+    lineat.y = c(0.9, 0.95, 0.99, 0.999), bw = 0.1) {
     probs <- c(1, 0.5, 0)
     # for one signle outline
     if (missing(method)) {
-      cat(" * Method not provided. efourier is used.\n")
-      method   <- efourier
+        cat(" * Method not provided. efourier is used.\n")
+        method <- efourier
     } else {
-      p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-      if (is.na(p)) { warning("Unvalid method. efourier is used.")
-      } else {
-        method   <- switch(p, efourier,   rfourier,   tfourier)}}
-    res <- matrix(nrow=length(id), ncol=(nb.h-drop))
-    x <- (drop+1) : nb.h
-    for (i in seq(along=id)) {
-      xf  <- method(Out$coo[[id[i]]], nb.h = nb.h, smooth.it = smooth.it)
-      pow <- harm.pow(xf)[x]
-      res[i, ] <-  (cumsum(pow)/sum(pow))}
-    res <- apply(res, 2, quantile, probs=probs)
-    rownames(res) <- c("Max", "Med", "Min")
-    colnames(res) <- paste("h", x, sep="")
-    if (plot){
-      plot(NA, xlim = range(x), ylim = c(min(res), 1), las=1, yaxs="i", 
-           xlab = "Harmonic rank", ylab = "Cumulative harmonic power",
-           main=title,sub=paste0("(", length(id), " outlines included)"), axes=FALSE)
-      axis(1, at=x) ; axis(2)
-      abline(h=lineat.y, lty=2, col="grey90")
-      segments(x,    res[1, ], x,    res[3, ], lwd=0.5)
-      segments(x-bw, res[1, ], x+bw, res[1, ], lwd=0.5)
-      segments(x-bw, res[3, ], x+bw, res[3, ], lwd=0.5)
-      lines(x, res[2, ], type="o", pch=20, cex=0.6) 
-      box()
+        p <- pmatch(tolower(method), c("efourier", "rfourier", 
+            "tfourier"))
+        if (is.na(p)) {
+            warning("Unvalid method. efourier is used.")
+        } else {
+            method <- switch(p, efourier, rfourier, tfourier)
+        }
     }
-    return(res)}
+    res <- matrix(nrow = length(id), ncol = (nb.h - drop))
+    x <- (drop + 1):nb.h
+    for (i in seq(along = id)) {
+        xf <- method(Out$coo[[id[i]]], nb.h = nb.h, smooth.it = smooth.it)
+        pow <- harm.pow(xf)[x]
+        res[i, ] <- (cumsum(pow)/sum(pow))
+    }
+    res <- apply(res, 2, quantile, probs = probs)
+    rownames(res) <- c("Max", "Med", "Min")
+    colnames(res) <- paste("h", x, sep = "")
+    if (plot) {
+        plot(NA, xlim = range(x), ylim = c(min(res), 1), las = 1, 
+            yaxs = "i", xlab = "Harmonic rank", ylab = "Cumulative harmonic power", 
+            main = title, sub = paste0("(", length(id), " outlines included)"), 
+            axes = FALSE)
+        axis(1, at = x)
+        axis(2)
+        abline(h = lineat.y, lty = 2, col = "grey90")
+        segments(x, res[1, ], x, res[3, ], lwd = 0.5)
+        segments(x - bw, res[1, ], x + bw, res[1, ], lwd = 0.5)
+        segments(x - bw, res[3, ], x + bw, res[3, ], lwd = 0.5)
+        lines(x, res[2, ], type = "o", pch = 20, cex = 0.6)
+        box()
+    }
+    return(res)
+}
 
 
-# 3. OutCoe definition -------------------------------------------------------
+# 3. OutCoe definition
+# -------------------------------------------------------
 #' Builds an OutCoe object
 #'
 #' In Momocs, \code{OutCoe} classes objects are wrapping around
@@ -432,50 +472,59 @@ hpow.Out <-
 #' @keywords Out
 #' @examples
 #' # all OutCoe methods
-#' methods(class="OutCoe")
+#' methods(class='OutCoe')
 #' @export
-OutCoe <- function(coe=matrix(), fac=data.frame(), method, norm){
-  if (missing(method)) stop("a method must be provided to OutCoe")
-  OutCoe <- list(coe=coe, fac=fac, method=method, norm=norm)
-  class(OutCoe) <- c("OutCoe", "Coe")
-  return(OutCoe)}
-  
-##### TO FIX FOR Combined OutCoe
-# The print method for Out objects
-#' @export
-print.OutCoe <- function(x, ...){
-  OutCoe <- x
-  p <- pmatch(OutCoe$method[1], c("eFourier", "rFourier", "tFourier"))
-  met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
-  ### Header
-  cat("An OutCoe object [", met, "analysis ] (see ?OutCoe) \n")
-  cat(rep("-", 20),"\n", sep="")
-  coo.nb  <- nrow(OutCoe$coe) #nrow method ?
-  harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
-  # number of outlines and harmonics
-  cat(" -", coo.nb, "outlines described\n")
-  cat(" -", harm.nb, "harmonics\n")
-  # lets show some of them for a quick inspection
-  cat(" - Some harmonic coefficients from random outlines in $coe: \n")
-  row.eg <- sort(sample(coo.nb, ifelse(coo.nb<5, coo.nb, 5), replace=FALSE))
-  col.eg <- coeff.sel(retain=ifelse(harm.nb > 3, 3, harm.nb), drop=0,
-                      nb.h=harm.nb, cph=ifelse(p==1, 4, 2))
-  print(signif(OutCoe$coe[row.eg, col.eg], 3))
-  cat("etc.\n")
-  # number of grouping factors
-  df <- OutCoe$fac
-  nf <- ncol(df)
-  if (nf==0) {
-    cat(" - No groups defined\n")
-  } else {
-    cat(" -", nf, "grouping factor(s) defined in $fac:\n")
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      if (length(lev.i)>10) lev.i <- c(lev.i[1:10], " ... ", 
-                                       length(lev.i)-10, "more")
-      cat("     ", colnames(df)[i], ": ", lev.i,"\n")}}}
+OutCoe <- function(coe = matrix(), fac = data.frame(), method, 
+    norm) {
+    if (missing(method)) 
+        stop("a method must be provided to OutCoe")
+    OutCoe <- list(coe = coe, fac = fac, method = method, norm = norm)
+    class(OutCoe) <- c("OutCoe", "Coe")
+    return(OutCoe)
+}
 
-# 4. Out morphometrics ---------------------------------------------------------
+##### TO FIX FOR Combined OutCoe The print method for Out objects
+#' @export
+print.OutCoe <- function(x, ...) {
+    OutCoe <- x
+    p <- pmatch(OutCoe$method[1], c("eFourier", "rFourier", "tFourier"))
+    met <- switch(p, "elliptical Fourier", "radii variation", 
+        "tangent angle")
+    ### Header
+    cat("An OutCoe object [", met, "analysis ] (see ?OutCoe) \n")
+    cat(rep("-", 20), "\n", sep = "")
+    coo.nb <- nrow(OutCoe$coe)  #nrow method ?
+    harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
+    # number of outlines and harmonics
+    cat(" -", coo.nb, "outlines described\n")
+    cat(" -", harm.nb, "harmonics\n")
+    # lets show some of them for a quick inspection
+    cat(" - Some harmonic coefficients from random outlines in $coe: \n")
+    row.eg <- sort(sample(coo.nb, ifelse(coo.nb < 5, coo.nb, 
+        5), replace = FALSE))
+    col.eg <- coeff.sel(retain = ifelse(harm.nb > 3, 3, harm.nb), 
+        drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
+    print(signif(OutCoe$coe[row.eg, col.eg], 3))
+    cat("etc.\n")
+    # number of grouping factors
+    df <- OutCoe$fac
+    nf <- ncol(df)
+    if (nf == 0) {
+        cat(" - No groups defined\n")
+    } else {
+        cat(" -", nf, "grouping factor(s) defined in $fac:\n")
+        for (i in 1:nf) {
+            lev.i <- levels(df[, i])
+            if (length(lev.i) > 10) 
+                lev.i <- c(lev.i[1:10], " ... ", length(lev.i) - 
+                  10, "more")
+            cat("     ", colnames(df)[i], ": ", lev.i, "\n")
+        }
+    }
+}
+
+# 4. Out morphometrics
+# ---------------------------------------------------------
 #' Calculates elliptical Fourier transforms on Out objects
 #'
 #' A wrapper for \link{efourier} to be applied on Out objects.
@@ -490,36 +539,50 @@ print.OutCoe <- function(x, ...){
 #' data(bot)
 #' eFourier(bot, 12)
 #' @export
-eFourier <- function(Out, nb.h, smooth.it, norm, start){
-  UseMethod("eFourier")}
+eFourier <- function(Out, nb.h, smooth.it, norm, start) {
+    UseMethod("eFourier")
+}
 #' @export
-eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
-  q <- floor(min(sapply(Out$coo, nrow)/2)) 
-  if (missing(nb.h)) {
-    nb.h <- ifelse(q >= 32, 32, q)
-    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
-  if(nb.h > q) {
-    nb.h <- q # should not be 1 #todo
-    cat(" * at least one outline has no more than", q*2, "coordinates.\n",
-        "* 'nb.h' has been set to", q,"harmonics.\n")}
-  coo <- Out$coo
-  col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h, times = 4))
-  coe <- matrix(ncol = 4 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))
-  for (i in seq(along = coo)) { #todo: vectorize ?
-    ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, verbose = TRUE)
-    if (norm) {
-      ef <- efourier.norm(ef, start=start)
-      if (ef$A[1] < 0) {
-        ef$A <- (-ef$A)
-        ef$B <- (-ef$B)
-        ef$C <- (-ef$C)
-        ef$D <- (-ef$D)
-        ef$lnef <- (-ef$lnef)}
-      coe[i, ] <- c(ef$A, ef$B, ef$C, ef$D)
-    } else {
-      coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)}}  
-  coe[abs(coe)<1e-12] <- 0 #not elegant but round normalized values to 0
-  return(OutCoe(coe=coe, fac=Out$fac, method="eFourier", norm=norm))}
+eFourier.Out <- function(Out, nb.h, smooth.it = 0, norm = TRUE, 
+    start = FALSE) {
+    q <- floor(min(sapply(Out$coo, nrow)/2))
+    if (missing(nb.h)) {
+        nb.h <- ifelse(q >= 32, 32, q)
+        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+    }
+    if (nb.h > q) {
+        nb.h <- q  # should not be 1 #todo
+        cat(" * at least one outline has no more than", q * 2, 
+            "coordinates.\n", "* 'nb.h' has been set to", q, 
+            "harmonics.\n")
+    }
+    coo <- Out$coo
+    col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h, 
+        times = 4))
+    coe <- matrix(ncol = 4 * nb.h, nrow = length(coo), dimnames = list(names(coo), 
+        col.n))
+    for (i in seq(along = coo)) {
+        # todo: vectorize ?
+        ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, 
+            verbose = TRUE)
+        if (norm) {
+            ef <- efourier.norm(ef, start = start)
+            if (ef$A[1] < 0) {
+                ef$A <- (-ef$A)
+                ef$B <- (-ef$B)
+                ef$C <- (-ef$C)
+                ef$D <- (-ef$D)
+                ef$lnef <- (-ef$lnef)
+            }
+            coe[i, ] <- c(ef$A, ef$B, ef$C, ef$D)
+        } else {
+            coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)
+        }
+    }
+    coe[abs(coe) < 1e-12] <- 0  #not elegant but round normalized values to 0
+    return(OutCoe(coe = coe, fac = Out$fac, method = "eFourier", 
+        norm = norm))
+}
 
 #' Calculates radius lengths Fourier analysis on Out objects
 #' 
@@ -534,25 +597,35 @@ eFourier.Out <- function(Out, nb.h, smooth.it=0, norm=TRUE, start=FALSE){
 #' data(bot)
 #' rFourier(bot, 12)
 #' @export
-rFourier <- function(Out, nb.h, smooth.it, norm){
-  UseMethod("rFourier")}
+rFourier <- function(Out, nb.h, smooth.it, norm) {
+    UseMethod("rFourier")
+}
 #' @export
 rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
-  q <- floor(min(sapply(Out$coo, nrow)/2))
-  if (missing(nb.h))  {
-    nb.h <- ifelse(q >= 32, 32, q)
-    cat(" * nb.h not provided and set to", nb.h, "\n")}
-  if(nb.h  > q) {
-    nb.h <- q # should not be 1 #todo
-    cat(" * at least one outline has no more than", q*2, "coordinates.\n", 
-        "* 'nb.h' has been set to", q,"harmonics.\n")}
-  coo <- Out$coo
-  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
-  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))
-  for (i in seq(along = coo)) {
-    rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose = TRUE) #todo: vectorize
-    coe[i, ] <- c(rf$an, rf$bn)}
-  return(OutCoe(coe=coe, fac=Out$fac, method="rFourier", norm=norm))}
+    q <- floor(min(sapply(Out$coo, nrow)/2))
+    if (missing(nb.h)) {
+        nb.h <- ifelse(q >= 32, 32, q)
+        cat(" * nb.h not provided and set to", nb.h, "\n")
+    }
+    if (nb.h > q) {
+        nb.h <- q  # should not be 1 #todo
+        cat(" * at least one outline has no more than", q * 2, 
+            "coordinates.\n", "* 'nb.h' has been set to", q, 
+            "harmonics.\n")
+    }
+    coo <- Out$coo
+    col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, 
+        times = 2))
+    coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo), 
+        col.n))
+    for (i in seq(along = coo)) {
+        rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, 
+            norm = norm, verbose = TRUE)  #todo: vectorize
+        coe[i, ] <- c(rf$an, rf$bn)
+    }
+    return(OutCoe(coe = coe, fac = Out$fac, method = "rFourier", 
+        norm = norm))
+}
 
 #' Calculates tangent angle Fourier analysis on Out objects
 #' 
@@ -567,27 +640,42 @@ rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
 #' data(bot)
 #' tFourier(bot, 12)
 #' @export
-tFourier <- function(Out, nb.h, smooth.it, norm){
-  UseMethod("tFourier")}
+tFourier <- function(Out, nb.h, smooth.it, norm) {
+    UseMethod("tFourier")
+}
 #' @export
-tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
-  q <- floor(min(sapply(Out$coo, nrow)/2))
-  if (missing(nb.h))  {
-    nb.h <- if (q >= 32) { 32 } else { q }
-    cat(paste("  * nb.h not provided and set to", nb.h, "\n"))}
-  if(nb.h  > q) {
-    nb.h <- q # should not be 1
-    cat(" * At least one outline has no more than", q*2, "coordinates.\n", 
-        "* 'nb.h' has been set to", q, "harmonics.\n")}
-  coo <-Out$coo
-  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
-  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo), col.n))
-  for (i in seq(along = coo)) {
-    tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, norm=norm, verbose=TRUE)
-    coe[i, ] <- c(tf$an, tf$bn)}
-  return(OutCoe(coe=coe, fac=Out$fac, method="tFourier", norm=norm))}
+tFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
+    q <- floor(min(sapply(Out$coo, nrow)/2))
+    if (missing(nb.h)) {
+        nb.h <- if (q >= 32) {
+            32
+        } else {
+            q
+        }
+        cat(paste("  * nb.h not provided and set to", nb.h, "\n"))
+    }
+    if (nb.h > q) {
+        nb.h <- q  # should not be 1
+        cat(" * At least one outline has no more than", q * 2, 
+            "coordinates.\n", "* 'nb.h' has been set to", q, 
+            "harmonics.\n")
+    }
+    coo <- Out$coo
+    col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, 
+        times = 2))
+    coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo), 
+        col.n))
+    for (i in seq(along = coo)) {
+        tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it, 
+            norm = norm, verbose = TRUE)
+        coe[i, ] <- c(tf$an, tf$bn)
+    }
+    return(OutCoe(coe = coe, fac = Out$fac, method = "tFourier", 
+        norm = norm))
+}
 
-# 5. Out + landmarks ---------------------------------------------------------
+# 5. Out + landmarks
+# ---------------------------------------------------------
 
 #' Define landmarks on Out and Opn objects
 #' 
@@ -610,15 +698,19 @@ tFourier.Out <- function(Out, nb.h=40, smooth.it = 0, norm=TRUE){
 #' bot2$ldk
 #' }
 #' @export
-defLandmarks <- function(Coo, nb.ldk){UseMethod("defLandmarks")}
+defLandmarks <- function(Coo, nb.ldk) {
+    UseMethod("defLandmarks")
+}
 #' @export
-defLandmarks.Coo <- function(Coo, nb.ldk){
-  if (missing(nb.ldk)) stop(" * 'nb.ldk' must be specified.")
-  ldk <- list()
-  for (i in seq(along=Coo$coo)){
-    Coo$ldk[[i]] <- coo.ldk(Coo$coo[[i]], nb.ldk=nb.ldk)
-  }
-  return(Coo)}
+defLandmarks.Coo <- function(Coo, nb.ldk) {
+    if (missing(nb.ldk)) 
+        stop(" * 'nb.ldk' must be specified.")
+    ldk <- list()
+    for (i in seq(along = Coo$coo)) {
+        Coo$ldk[[i]] <- coo.ldk(Coo$coo[[i]], nb.ldk = nb.ldk)
+    }
+    return(Coo)
+}
 
 #' Retrieve landmarks coordinates from Opn and Out objects
 #' 
@@ -634,15 +726,20 @@ defLandmarks.Coo <- function(Coo, nb.ldk){
 #' stack(Ldk(a2l(ldk.h)))
 #' ldk.h
 #' @export
-getLandmarks <- function(Coo){UseMethod("getLandmarks")}
+getLandmarks <- function(Coo) {
+    UseMethod("getLandmarks")
+}
 #' @export
-getLandmarks.Out <- function(Coo){
-  coo <- Coo$coo
-  ldk <- Coo$ldk
-  ref <- array(NA, dim=c(length(ldk[[1]]), ncol(coo[[1]]), length(coo)))
-  for (i in seq(along=coo)){
-    ref[,,i] <- coo[[i]][ldk[[1]], ]}
-  return(ref)}
+getLandmarks.Out <- function(Coo) {
+    coo <- Coo$coo
+    ldk <- Coo$ldk
+    ref <- array(NA, dim = c(length(ldk[[1]]), ncol(coo[[1]]), 
+        length(coo)))
+    for (i in seq(along = coo)) {
+        ref[, , i] <- coo[[i]][ldk[[1]], ]
+    }
+    return(ref)
+}
 #' @export
 getLandmarks.Opn <- getLandmarks.Out
 
@@ -676,22 +773,26 @@ getLandmarks.Opn <- getLandmarks.Out
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
 #' res <- symmetry(bot.f)
-#' hist(res[, "sym"])
+#' hist(res[, 'sym'])
 #' @export
-symmetry <- function(OutCoe){UseMethod("symmetry")}
+symmetry <- function(OutCoe) {
+    UseMethod("symmetry")
+}
 #' @export
-symmetry.OutCoe <- function(OutCoe){
-  if (OutCoe$method != "eFourier") stop(" * Can only be applied on OutCoe [eFourier] objects.")
-  x <- OutCoe$coe
-  nb.h <- ncol(x)/4
-  AD.ids <- c(1:nb.h, ((nb.h*3 +1):(nb.h*4)))
-  BC.ids <- (nb.h+1):(nb.h*3)
-  AD <- apply(abs(x[, AD.ids]), 1, sum)
-  BC <- apply(abs(x[, BC.ids]), 1, sum)
-  amp <- apply(abs(x), 1, sum)
-  sym <- AD/amp
-  res <- cbind(AD, BC, amp, sym)
-  return(res)}
+symmetry.OutCoe <- function(OutCoe) {
+    if (OutCoe$method != "eFourier") 
+        stop(" * Can only be applied on OutCoe [eFourier] objects.")
+    x <- OutCoe$coe
+    nb.h <- ncol(x)/4
+    AD.ids <- c(1:nb.h, ((nb.h * 3 + 1):(nb.h * 4)))
+    BC.ids <- (nb.h + 1):(nb.h * 3)
+    AD <- apply(abs(x[, AD.ids]), 1, sum)
+    BC <- apply(abs(x[, BC.ids]), 1, sum)
+    amp <- apply(abs(x), 1, sum)
+    sym <- AD/amp
+    res <- cbind(AD, BC, amp, sym)
+    return(res)
+}
 
 
 #' Removes asymmetric and symmetric variation on OutCoe objects
@@ -735,37 +836,50 @@ symmetry.OutCoe <- function(OutCoe){
 #' @rdname removeAsymmetric
 #' @aliases removeSymmetric
 #' @export
-removeAsymmetric <- function(OutCoe){UseMethod("removeAsymmetric")}
+removeAsymmetric <- function(OutCoe) {
+    UseMethod("removeAsymmetric")
+}
 #' @rdname removeAsymmetric
 #' @export
-removeAsymmetric.default <- function(OutCoe){cat(" * Can only be applied on OutCoe objects.")}
+removeAsymmetric.default <- function(OutCoe) {
+    cat(" * Can only be applied on OutCoe objects.")
+}
 #' @rdname removeAsymmetric
 #' @export
-removeAsymmetric.OutCoe  <- function(OutCoe){
-  if (OutCoe$method != "eFourier") stop(" * Can only be applied on OutCoe [eFourier] objects.")
-  x <- OutCoe$coe
-  nb.h <- ncol(OutCoe$coe)/4
-  zeros <- (nb.h+1):(nb.h*3)
-  OutCoe$coe[, zeros] <- 0
-  return(OutCoe)}
+removeAsymmetric.OutCoe <- function(OutCoe) {
+    if (OutCoe$method != "eFourier") 
+        stop(" * Can only be applied on OutCoe [eFourier] objects.")
+    x <- OutCoe$coe
+    nb.h <- ncol(OutCoe$coe)/4
+    zeros <- (nb.h + 1):(nb.h * 3)
+    OutCoe$coe[, zeros] <- 0
+    return(OutCoe)
+}
 
 #' @rdname removeAsymmetric
 #' @export
-removeSymmetric <- function(OutCoe){UseMethod("removeSymmetric")}
+removeSymmetric <- function(OutCoe) {
+    UseMethod("removeSymmetric")
+}
 #' @rdname removeAsymmetric
 #' @export
-removeSymmetric.default <- function(OutCoe){cat(" * Can only be applied on OutCoe objects.")}
+removeSymmetric.default <- function(OutCoe) {
+    cat(" * Can only be applied on OutCoe objects.")
+}
 #' @rdname removeAsymmetric
 #' @export
-removeSymmetric.OutCoe  <- function(OutCoe){
-  if (OutCoe$method != "eFourier") stop(" * Can only be applied on OutCoe [eFourier] objects.")
-  x <- OutCoe$coe
-  nb.h <- ncol(OutCoe$coe)/4
-  zeros <- c(1:nb.h, ((nb.h*3 +1):(nb.h*4)))
-  OutCoe$coe[, zeros] <- 0
-  return(OutCoe)}
+removeSymmetric.OutCoe <- function(OutCoe) {
+    if (OutCoe$method != "eFourier") 
+        stop(" * Can only be applied on OutCoe [eFourier] objects.")
+    x <- OutCoe$coe
+    nb.h <- ncol(OutCoe$coe)/4
+    zeros <- c(1:nb.h, ((nb.h * 3 + 1):(nb.h * 4)))
+    OutCoe$coe[, zeros] <- 0
+    return(OutCoe)
+}
 
-#  Bonus ------------------------------------------------------------------
+# Bonus
+# ------------------------------------------------------------------
 
 #' Ptolemaic ellipses and illustration of eFourier
 #' 
@@ -792,51 +906,54 @@ removeSymmetric.OutCoe  <- function(OutCoe){
 #' data(hearts)
 #' Ptolemy(hearts, 1)
 #' @export
-Ptolemy <- function(Out, id, t, nb.h, nb.pts, palette, legend){UseMethod("Ptolemy")}
+Ptolemy <- function(Out, id, t, nb.h, nb.pts, palette, legend) {
+    UseMethod("Ptolemy")
+}
 #' @export
-Ptolemy.Out <- function(Out,
-                        id=1,
-                        t=seq(0, 2*pi, length=7)[-1],
-                        nb.h=3,
-                        nb.pts=360,
-                        palette=col.sari,
-                        legend=FALSE) {
-  # we prepare and deduce
-  op <- par(no.readonly = TRUE)
-  on.exit(par(op))
-  par(xpd=NA)
-  cols <- palette(nb.h)
-  coo <- coo.center(Out$coo[[id]])
-  #k <- floor(length(coo$x)/4)
-  coo.plot(coo, main=names(Out)[id])
-  # now we calculate for every harmonic
-  coo.ef  <- efourier(coo, nb.h)
-  coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
-  vect   <- matrix(nrow=nb.h, ncol=2)
-  vect <- rbind(c(0, 0), vect)
-  for (i in seq(along=t)) {
-    for(j in 1:nb.h) {
-      vect[j+1, 1] <- coo.ef$an[j] * cos(j * t[i]) + coo.ef$bn[j] * sin(j * t[i])
-      vect[j+1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + coo.ef$dn[j] * sin(j * t[i])}
-    vs <- apply(vect, 2, cumsum)
-    for (j in 1:nb.h){
-      lh   <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j],
-                             coo.ef$cn[1:j], coo.ef$dn[1:j],
-                             nb.h=j, nb.pts=nb.pts, plot=FALSE)
-      ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j],
-                             coo.ef$cn[j], coo.ef$dn[j],
-                             nb.h=1, nb.pts=nb.pts, plot=FALSE)
-      lines(lh, col=paste(cols[j], "22", sep=""), lwd=0.8)
-      lines(ellh[,1] + vs[j, 1], ellh[,2] + vs[j, 2],
-            col=cols[j], lwd=1)
-      points(vs[j+1, 1], vs[j+1, 2], col=cols[j], cex=0.8)
-      arrows(vs[j, 1], vs[j, 2], vs[j+1, 1], vs[j+1, 2],
-             col=cols[j], angle=10, length=0.05, lwd=1.2)
+Ptolemy.Out <- function(Out, id = 1, t = seq(0, 2 * pi, length = 7)[-1], 
+    nb.h = 3, nb.pts = 360, palette = col.sari, legend = FALSE) {
+    # we prepare and deduce
+    op <- par(no.readonly = TRUE)
+    on.exit(par(op))
+    par(xpd = NA)
+    cols <- palette(nb.h)
+    coo <- coo.center(Out$coo[[id]])
+    # k <- floor(length(coo$x)/4)
+    coo.plot(coo, main = names(Out)[id])
+    # now we calculate for every harmonic
+    coo.ef <- efourier(coo, nb.h)
+    coo.efi <- efourier.i(coo.ef, nb.h, nb.pts)
+    vect <- matrix(nrow = nb.h, ncol = 2)
+    vect <- rbind(c(0, 0), vect)
+    for (i in seq(along = t)) {
+        for (j in 1:nb.h) {
+            vect[j + 1, 1] <- coo.ef$an[j] * cos(j * t[i]) + 
+                coo.ef$bn[j] * sin(j * t[i])
+            vect[j + 1, 2] <- coo.ef$cn[j] * cos(j * t[i]) + 
+                coo.ef$dn[j] * sin(j * t[i])
+        }
+        vs <- apply(vect, 2, cumsum)
+        for (j in 1:nb.h) {
+            lh <- efourier.shape(coo.ef$an[1:j], coo.ef$bn[1:j], 
+                coo.ef$cn[1:j], coo.ef$dn[1:j], nb.h = j, nb.pts = nb.pts, 
+                plot = FALSE)
+            ellh <- efourier.shape(coo.ef$an[j], coo.ef$bn[j], 
+                coo.ef$cn[j], coo.ef$dn[j], nb.h = 1, nb.pts = nb.pts, 
+                plot = FALSE)
+            lines(lh, col = paste(cols[j], "22", sep = ""), lwd = 0.8)
+            lines(ellh[, 1] + vs[j, 1], ellh[, 2] + vs[j, 2], 
+                col = cols[j], lwd = 1)
+            points(vs[j + 1, 1], vs[j + 1, 2], col = cols[j], 
+                cex = 0.8)
+            arrows(vs[j, 1], vs[j, 2], vs[j + 1, 1], vs[j + 1, 
+                2], col = cols[j], angle = 10, length = 0.05, 
+                lwd = 1.2)
+        }
     }
-  }
-  points(0, 0, pch=20, col=cols[1])
-  if (legend) {
-    legend("topright", legend = as.character(1:nb.h), bty="o",
-           col = cols, lty = 1, lwd=1, bg="#FFFFFFCC", cex=0.7,
-           title = "Number of harmonics")}}
-
+    points(0, 0, pch = 20, col = cols[1])
+    if (legend) {
+        legend("topright", legend = as.character(1:nb.h), bty = "o", 
+            col = cols, lty = 1, lwd = 1, bg = "#FFFFFFCC", cex = 0.7, 
+            title = "Number of harmonics")
+    }
+} 

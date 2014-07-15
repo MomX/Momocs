@@ -23,10 +23,10 @@ Not implemented for open outlines but may be useful for other purposes.
 \examples{
 set.seed(34)
 x <- coo.sample(efourier.shape(), 5)
-plot(x, ylim=c(-3, 3), asp=1, type="b", pch=20)
+plot(x, ylim=c(-3, 3), asp=1, type='b', pch=20)
 b <- bezier(x)
 bi <- bezier.i(b$B)
-lines(bi, col="red")
+lines(bi, col='red')
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,

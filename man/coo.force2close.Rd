@@ -21,7 +21,7 @@ data(bot)
 b <- coo.sample(bot[1], 64)
 b <- b[1:40,]
 coo.plot(b)
-coo.draw(coo.force2close(b), border="red")
+coo.draw(coo.force2close(b), border='red')
 }
 \keyword{ShapeUtilities}
 

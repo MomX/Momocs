@@ -19,7 +19,7 @@ toolkit to specialists within every field that are, or may be, interested in int
  shape in their researches.
 }
 \details{
-To cite Momocs in publications: \code{citation("Momocs")}.
+To cite Momocs in publications: \code{citation('Momocs')}.
 }
 \section{Cheers}{
 
@@ -37,7 +37,7 @@ bug reports, and much more.
 }
 \seealso{
 \itemize{
- \item \bold{Demos}: \code{demo(package="Momocs")} for the list of demos, e.g. \code{demo(eft)}
+ \item \bold{Demos}: \code{demo(package='Momocs')} for the list of demos, e.g. \code{demo(eft)}
  \item \bold{Homepage}: \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
 and hotline
  \item \bold{GitHub repo}: \url{https://github.com/vbonhomme/Momocs} to contribute,

@@ -19,7 +19,7 @@ data(bot)
 b <- bot[1]
 coo.plot(b)
 xy <- coo.centpos(b)
-points(xy[1], xy[2], cex=2, col="blue")
+points(xy[1], xy[2], cex=2, col='blue')
 xy
 }
 \keyword{ShapeUtilities}

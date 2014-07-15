@@ -19,7 +19,7 @@ coo.arrows(coo1, coo2, length = 0.1, angle = 20, main = NA, ...)
 \item{...}{optional parameters to fed \link{arrows}.}
 }
 \description{
-Draws "arrows" between two configurations.
+Draws 'arrows' between two configurations.
 }
 \examples{
 data(olea)

@@ -20,7 +20,7 @@ data(hearts)
 h <- coo.sample(hearts[4], 32)
 coo.plot(h)
 ch <- coo.chull(h)
-lines(ch, col="red", lty=2)
+lines(ch, col='red', lty=2)
 }
 \keyword{ShapeDescriptors}
 

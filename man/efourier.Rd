@@ -65,7 +65,7 @@ Intuitively, for all positive integers \eqn{n}, the sum of a cosine curve
 and a sine curve represent the \eqn{n^{th}} harmonic content of the \eqn{x}
 and \eqn{y} projections of the \eqn{k}-edged polygon, and for any \eqn{n},
 these two curves define an ellipse in the plane. Ferson and colleagues
-noticed that in the "time" it takes the \eqn{n^{th}} harmonic to traverse
+noticed that in the 'time' it takes the \eqn{n^{th}} harmonic to traverse
 its ellipse \eqn{n} times, the \eqn{(n+1)^{th}} harmonic has traversed its
 own ellipse \eqn{n+1} times. The reconstruction of the original polygon is
 done by vector adding these ellipses for all harmonics, which echoes
@@ -83,7 +83,7 @@ coo.plot(coo)
 ef <- efourier(coo, 12)
 ef
 efi <- efourier.i(ef)
-coo.draw(efi, border="red", col=NA)
+coo.draw(efi, border='red', col=NA)
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,

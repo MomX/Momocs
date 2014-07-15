@@ -6,16 +6,16 @@
 vecs.param(r1, i1, r2, i2)
 }
 \arguments{
-\item{r1}{the "real" part of the first vector, i.e. difference in
+\item{r1}{the 'real' part of the first vector, i.e. difference in
 x-coordinates.}
 
-\item{i1}{the "imaginary" part of the first vector, i.e. difference in
+\item{i1}{the 'imaginary' part of the first vector, i.e. difference in
 y-coordinates.}
 
-\item{r2}{the "real" part of the second vector, i.e. difference in
+\item{r2}{the 'real' part of the second vector, i.e. difference in
 x-coordinates.}
 
-\item{i2}{the "imaginary" part of the second vector, i.e. difference in
+\item{i2}{the 'imaginary' part of the second vector, i.e. difference in
 y-coordinates.}
 }
 \value{

@@ -80,7 +80,7 @@ tab <- as.table(tab)
 plotCV(tab)
 plotCV(tab, arrows) # if you prefer arrows
 plotCV(tab, lwd=FALSE, lwd0=1, palette=col.india) # if you like india but not lwds
-plotCV(tab, col=FALSE, col0="pink") # only lwd
+plotCV(tab, col=FALSE, col0='pink') # only lwd
 plotCV(tab, col=FALSE, lwd0=10, cex.names=2) # if you're getting old
 plotCV(tab, col=FALSE, lwd=FALSE) # pretty but useless
 plotCV(tab, col.breaks=2) # if you think it's either good or bad
@@ -91,7 +91,7 @@ plotCV(tab, gap.dots=1) # or not
 #trilo examples
 data(trilo)
 trilo.f <- eFourier(trilo, 8)
-trilo.l <- LDA(trilo.f, "onto")
+trilo.l <- LDA(trilo.f, 'onto')
 trilo.l$CV.tab
 plotCV(trilo.l$CV.tab) # but see below, 'works' directly on the LDA
 plotCV(trilo.l)
@@ -99,7 +99,7 @@ plotCV(trilo.l)
 # olea example
 data(olea)
 op <- orthoPolynomials(olea, 5)
-opl <- LDA(op, "cep")
+opl <- LDA(op, 'cep')
 plotCV(opl)
 }
 \seealso{

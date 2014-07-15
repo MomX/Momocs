@@ -9,7 +9,7 @@ Coo(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coo} class is a "super class" for \link{Out}, \link{Opn} and \link{Ldk} classes,
+\code{Coo} class is a 'super class' for \link{Out}, \link{Opn} and \link{Ldk} classes,
 for handling \bold{closed outlines}, \bold{open outlines} and \bold{configuration of landmarks}, respectively.
 }
 \details{
@@ -23,11 +23,11 @@ are all, primarily, \code{Coo} objects on which we define generic \emph{and}
 specific methods.
 
 More, generally, see \link{Out}, \link{Opn} and \link{Ldk} for documentation on these classes.
-And Momocs' vignette for more detailed informations on the Momocs' "architecture".
+And Momocs' vignette for more detailed informations on the Momocs' 'architecture'.
 
 Finally, note that if you used Momocs before version <0.9, and/or if you have read the JSS paper,
-you are probably looking for \link{Out}. If you have "old" Coo files, eg saved as \code{.rda} files,
-you can import them by: i) opening a new R session; ii) load your file, say "foo", iii) load Momocs,
+you are probably looking for \link{Out}. If you have 'old' Coo files, eg saved as \code{.rda} files,
+you can import them by: i) opening a new R session; ii) load your file, say 'foo', iii) load Momocs,
 iv) type: \code{Out(foo@coo, fac=foo@fac)}, same thing for the \code{@ldk} slot, if any.
 
 You can access all the methods available for Coo objects with \code{methods(class=Coo)}.
@@ -36,11 +36,11 @@ below, as well as in individual  Momocs' vignettes.
 }
 \examples{
 # to see all methods for Coo objects.
-methods(class="Coo")
+methods(class='Coo')
 # Let's take an Out example. But all methods shown here
 # work on Ldk (try data(wings) ) and on Opn (try data(olea))
 data(bot)
-# Primarily a "Coo" objects, but also an "Out"
+# Primarily a 'Coo' objects, but also an 'Out'
 class(bot)
 panel(bot)
 stack(bot)
@@ -59,14 +59,14 @@ table(bot$fac)
 # an internal view of an Out object
 str(bot)
 # subsetting
-w <- subset(bot, type=="whisky") # if you dont like beer
-b <- subset(bot, type=="beer")   # if you don't like whisky
+w <- subset(bot, type=='whisky') # if you dont like beer
+b <- subset(bot, type=='beer')   # if you don't like whisky
 w # an example of Momocs:::print.Out
 b # same thing for beers
 combine(b, w) # if, eventually, you want to mix them
 length(bot) # the number of shapes
 names(bot) # access all individual names
 bot2 <- bot
-names(bot2) <- paste0("newnames", 1:length(bot2)) # define new names
+names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
 }
 

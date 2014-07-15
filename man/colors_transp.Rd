@@ -23,9 +23,9 @@ col.transp(n, col = "#000000", ceiling = 1)
 To ease transparency handling.
 }
 \examples{
-x <- col.transp(10, col="#000000")
+x <- col.transp(10, col='#000000')
 x
-barplot(1:10, col=x, main="a transparent black is grey")
+barplot(1:10, col=x, main='a transparent black is grey')
 
 summer10 <- col.summer(10)
 summer10

@@ -17,10 +17,11 @@
 #' m <- l2m(l)
 #' m
 #' @export
-l2m  <- function(l) {
-  m <- cbind(l$x, l$y)
-  colnames(m) <- c("x", "y")
-  return(m)}
+l2m <- function(l) {
+    m <- cbind(l$x, l$y)
+    colnames(m) <- c("x", "y")
+    return(m)
+}
 
 #' Converts a matrix of coordinates to a list of coordinates.
 #' 
@@ -39,7 +40,9 @@ l2m  <- function(l) {
 #' m <- l2m(l)
 #' m
 #' @export
-m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
+m2l <- function(m) {
+    return(list(x = m[, 1], y = m[, 2]))
+}
 
 #' Converts a list of coordinates to an array of coordinates
 #' 
@@ -61,13 +64,14 @@ m2l  <- function(m) {return(list(x=m[,1], y=m[,2]))}
 #' a <- l2a(l)
 #' a
 #' @export
-l2a  <- function(l){
-  nr <- nrow(l[[1]])
-  nc <- 2
-  ni <- length(l)
-  a  <- array(unlist(l), dim=c(nr, nc, ni),
-              dimnames=list(1:nr, c("x", "y"), names(l)))
-  return(a)}
+l2a <- function(l) {
+    nr <- nrow(l[[1]])
+    nc <- 2
+    ni <- length(l)
+    a <- array(unlist(l), dim = c(nr, nc, ni), dimnames = list(1:nr, 
+        c("x", "y"), names(l)))
+    return(a)
+}
 
 #' Converts an array of coordinates to a list of matrices
 #' 
@@ -89,12 +93,16 @@ l2a  <- function(l){
 #' a <- l2a(l)
 #' a
 #' @export
-a2l <- function(a){
-  if (!is.array(a)) stop(" * An array of dimension 3 must be provided")
-  k <- dim(a)[3]
-  l <- list()
-  for (i in 1:k) {l[[i]] <- a[,,i]}
-  return(l)}
+a2l <- function(a) {
+    if (!is.array(a)) 
+        stop(" * An array of dimension 3 must be provided")
+    k <- dim(a)[3]
+    l <- list()
+    for (i in 1:k) {
+        l[[i]] <- a[, , i]
+    }
+    return(l)
+}
 
 #' Converts an array of coordinates to a matrix
 #' 
@@ -114,15 +122,17 @@ a2l <- function(a){
 #' a
 #' a2m(a)
 #' @export
-a2m <- function(a){
-  #ugly
-  m <- sapply(a, as.numeric)
-  nc <- dim(a)[1]
-  m <- matrix(m, nrow=dim(a)[3], ncol=nc*2, byrow=TRUE)
-  colnames(m) <- paste0(rep(c("x", "y"), each=nc), 1:nc)
-  if (!is.null(dimnames(a))) {
-    rownames(m) <- dimnames(a)[[3]]}
-  return(m)}
+a2m <- function(a) {
+    # ugly
+    m <- sapply(a, as.numeric)
+    nc <- dim(a)[1]
+    m <- matrix(m, nrow = dim(a)[3], ncol = nc * 2, byrow = TRUE)
+    colnames(m) <- paste0(rep(c("x", "y"), each = nc), 1:nc)
+    if (!is.null(dimnames(a))) {
+        rownames(m) <- dimnames(a)[[3]]
+    }
+    return(m)
+}
 
 #' Converts a matrix of coordinates to an array of coordinates
 #' 
@@ -141,12 +151,14 @@ a2m <- function(a){
 #' m <- a2m(l2a(wings$coo))
 #' m2a(m)
 #' @export
-m2a <- function(m){
-  #ugly
-  a <- array(NA, dim=c(ncol(m)/2, 2, nrow(m)),
-             dimnames=list(1:(ncol(m)/2), c("x", "y"), rownames(m)))
-  for (i in 1:nrow(m)){
-   a[,,i] <- matrix(m[i, ], ncol=2)}
-  return(a)}
+m2a <- function(m) {
+    # ugly
+    a <- array(NA, dim = c(ncol(m)/2, 2, nrow(m)), dimnames = list(1:(ncol(m)/2), 
+        c("x", "y"), rownames(m)))
+    for (i in 1:nrow(m)) {
+        a[, , i] <- matrix(m[i, ], ncol = 2)
+    }
+    return(a)
+}
 
-##### end bridges
+##### end bridges 

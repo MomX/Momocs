@@ -30,7 +30,7 @@ These methods can be applied on \code{Out} objects:
 }
 \examples{
 # all OutCoe methods
-methods(class="OutCoe")
+methods(class='OutCoe')
 }
 \seealso{
 \link{Coe}, \link{OpnCoe}

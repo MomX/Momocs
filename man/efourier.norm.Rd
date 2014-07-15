@@ -36,11 +36,11 @@ tranlation, size and orientation of the first ellipse.
 \details{
 See \link{efourier} for the mathematical background of the normalization.
 
-Sometimes shapes do not "align" well each others, and this is usually detectable
+Sometimes shapes do not 'align' well each others, and this is usually detectable
 on a morphospace on a regular PCA. You mat find 180 degrees rotated shapes or bizarre clustering.
 Most of the time this is due to a poor normalization on the matrix of coefficients, and the
 variability you observe may mostly be due to the variability in the alignment of the
-"first" ellipsis which is defined by the first harmonic, used for the normalization. In that
+'first' ellipsis which is defined by the first harmonic, used for the normalization. In that
 case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You
 have several options: \link{coo.align}, \link{coo.aligncalliper}, \link{fgProcrustes} either directly on
 the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of

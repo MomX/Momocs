@@ -2,7 +2,7 @@
 \name{coo.ldk}
 \alias{coo.ldk}
 \title{Defines interactively landmarks
-Allows to interactively define a "nb.ldk" number of landarks on a shape.
+Allows to interactively define a 'nb.ldk' number of landarks on a shape.
 Used in other facilities to acquire/manipulate data.}
 \usage{
 coo.ldk(coo, nb.ldk)
@@ -18,7 +18,7 @@ on the shape, from cliked points.
 }
 \description{
 Defines interactively landmarks
-Allows to interactively define a "nb.ldk" number of landarks on a shape.
+Allows to interactively define a 'nb.ldk' number of landarks on a shape.
 Used in other facilities to acquire/manipulate data.
 }
 \examples{

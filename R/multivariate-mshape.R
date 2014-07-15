@@ -19,34 +19,43 @@
 #' stack(wings)
 #' coo.draw(mshape(wings))
 #' @export
-mshape <- function(x){UseMethod("mshape")}
+mshape <- function(x) {
+    UseMethod("mshape")
+}
 
 #' @rdname mshape
 #' @export
-mshape.default <- function(x){cat(" * can only be called on matrices, 3-arrays, lists or Ldk objects")}
+mshape.default <- function(x) {
+    cat(" * can only be called on matrices, 3-arrays, lists or Ldk objects")
+}
 
 #' @rdname mshape
 #' @export
-mshape.Ldk <- function(x){
-  Ldk <- x
-  A <- ldk.check(Ldk$coo)
-  return(apply(A, 1:2, mean, na.rm=TRUE))}
+mshape.Ldk <- function(x) {
+    Ldk <- x
+    A <- ldk.check(Ldk$coo)
+    return(apply(A, 1:2, mean, na.rm = TRUE))
+}
 
 #' @rdname mshape
 #' @export
-mshape.list <- function(x){
-  A <- ldk.check(x)
-  return(apply(A, 1:2, mean, na.rm=TRUE))}
-
-#' @rdname mshape
-#' @export
-mshape.array <- function(x){
-  if (length(dim(x))==3) {
+mshape.list <- function(x) {
     A <- ldk.check(x)
-    return(apply(A, 1:2, mean, na.rm=TRUE))}}
+    return(apply(A, 1:2, mean, na.rm = TRUE))
+}
 
 #' @rdname mshape
 #' @export
-mshape.matrix <- function(x){
-  x <- coo.check(x)
-  return(x)}
+mshape.array <- function(x) {
+    if (length(dim(x)) == 3) {
+        A <- ldk.check(x)
+        return(apply(A, 1:2, mean, na.rm = TRUE))
+    }
+}
+
+#' @rdname mshape
+#' @export
+mshape.matrix <- function(x) {
+    x <- coo.check(x)
+    return(x)
+} 

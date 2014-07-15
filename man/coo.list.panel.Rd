@@ -43,7 +43,7 @@ can be used for other sophisticated plotting design.
 }
 \description{
 \code{coo.list.panel} plots a list of shapes if passed with a list of
-coordinates. Outlines are "templated" (see \link{coo.template} and will be drawn
+coordinates. Outlines are 'templated' (see \link{coo.template} and will be drawn
 the same graphical window. Mainly used by \link{panel.Coo} functions.
 }
 \examples{

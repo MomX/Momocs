@@ -48,38 +48,53 @@
 #' rf  <- rfourier(coo, 12)
 #' rf
 #' rfi <- rfourier.i(rf)
-#' coo.draw(rfi, border="red", col=NA)
+#' coo.draw(rfi, border='red', col=NA)
 #' @export
-rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
-  coo <- coo.check(coo)
-  if (missing(nb.h)) {
-    nb.h <- 12
-    cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
-  if (is.closed(coo)) {coo <- coo.unclose(coo)}
-  if(nb.h * 2 > nrow(coo) | missing(nb.h)) {
-    nb.h = floor(nrow(coo)/2)
-    if (verbose){
-      cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", nb.h)}}
-  if (nb.h == -1) {
-    nb.h = floor(nrow(coo)/2)
-    if (verbose){
-      cat(" * 'nb.h' must be lower than half the number of points and has been set to", nb.h, "harmonics.\n")}}
-  if (smooth.it!=0) { coo <- coo.smooth(coo, smooth.it)}
-  if (norm) {
-    coo   <- coo.scale(coo.center(coo))
-    rsize <- mean(apply(coo, 1, function(x) sqrt(sum(x^2))))
-    coo   <- coo.scale(coo, 1/rsize)}
-  # from Claude
-  p     <- nrow(coo)
-  an    <- bn <- numeric(nb.h)
-  Z     <- complex(real=coo[, 1], imaginary=coo[, 2])
-  r     <- Mod(Z)
-  angle <- Arg(Z)
-  ao    <- 2*sum(r)/p
-  for (i in 1:nb.h){
-    an[i]<-(2/p)*sum(r * cos(i*angle))
-    bn[i]<-(2/p)*sum(r * sin(i*angle))}
-  list(an=an, bn=bn, ao=ao, r=r)}
+rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
+    verbose = TRUE) {
+    coo <- coo.check(coo)
+    if (missing(nb.h)) {
+        nb.h <- 12
+        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+    }
+    if (is.closed(coo)) {
+        coo <- coo.unclose(coo)
+    }
+    if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
+        nb.h = floor(nrow(coo)/2)
+        if (verbose) {
+            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", 
+                nb.h)
+        }
+    }
+    if (nb.h == -1) {
+        nb.h = floor(nrow(coo)/2)
+        if (verbose) {
+            cat(" * 'nb.h' must be lower than half the number of points and has been set to", 
+                nb.h, "harmonics.\n")
+        }
+    }
+    if (smooth.it != 0) {
+        coo <- coo.smooth(coo, smooth.it)
+    }
+    if (norm) {
+        coo <- coo.scale(coo.center(coo))
+        rsize <- mean(apply(coo, 1, function(x) sqrt(sum(x^2))))
+        coo <- coo.scale(coo, 1/rsize)
+    }
+    # from Claude
+    p <- nrow(coo)
+    an <- bn <- numeric(nb.h)
+    Z <- complex(real = coo[, 1], imaginary = coo[, 2])
+    r <- Mod(Z)
+    angle <- Arg(Z)
+    ao <- 2 * sum(r)/p
+    for (i in 1:nb.h) {
+        an[i] <- (2/p) * sum(r * cos(i * angle))
+        bn[i] <- (2/p) * sum(r * sin(i * angle))
+    }
+    list(an = an, bn = bn, ao = ao, r = r)
+}
 
 #' Inverse radii variation Fourier transform
 #' 
@@ -110,37 +125,44 @@ rfourier <- function(coo, nb.h, smooth.it=0, norm=FALSE, verbose=TRUE){
 #' rf  <- rfourier(coo, 12)
 #' rf
 #' rfi <- rfourier.i(rf)
-#' coo.draw(rfi, border="red", col=NA)
+#' coo.draw(rfi, border='red', col=NA)
 #' 
 #' @export
-rfourier.i <- function(rf, nb.h, nb.pts=120) {
-  if (!all(c("an", "bn") %in% names(rf))) {
-    stop("a list containing 'an' and 'bn' harmonic coefficients 
-         must be provided")}
-  ao <- ifelse(is.null(rf$ao), 1, rf$ao)
-  an <- rf$an
-  bn <- rf$bn
-  if (missing(nb.h)) {nb.h <- length(an)}
-  if (nb.h > length(an)) {
-    nb.h <- length(an)
-    cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ", nb.h)}
-  theta <- seq(0, 2*pi, length=nb.pts)
-  harm  <- matrix(NA, nrow=nb.h, ncol=nb.pts)
-  for (i in 1:nb.h){
-    harm[i, ]<- an[i]*cos(i*theta) + bn[i]*sin(i*theta)}
-  r <- (ao/2) + apply(harm, 2, sum)
-  Z <- complex(modulus=r, argument=theta)
-  #list(x=Re(Z), y=Im(Z), angle=theta, r=r)}
-  x <- Re(Z)
-  y <- Im(Z)
-  coo <- cbind(x, y)
-  colnames(coo) <- c("x", "y")
-  return(coo)}
+rfourier.i <- function(rf, nb.h, nb.pts = 120) {
+    if (!all(c("an", "bn") %in% names(rf))) {
+        stop("a list containing 'an' and 'bn' harmonic coefficients \n         must be provided")
+    }
+    ao <- ifelse(is.null(rf$ao), 1, rf$ao)
+    an <- rf$an
+    bn <- rf$bn
+    if (missing(nb.h)) {
+        nb.h <- length(an)
+    }
+    if (nb.h > length(an)) {
+        nb.h <- length(an)
+        cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ", 
+            nb.h)
+    }
+    theta <- seq(0, 2 * pi, length = nb.pts)
+    harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)
+    for (i in 1:nb.h) {
+        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * 
+            theta)
+    }
+    r <- (ao/2) + apply(harm, 2, sum)
+    Z <- complex(modulus = r, argument = theta)
+    # list(x=Re(Z), y=Im(Z), angle=theta, r=r)}
+    x <- Re(Z)
+    y <- Im(Z)
+    coo <- cbind(x, y)
+    colnames(coo) <- c("x", "y")
+    return(coo)
+}
 
-#' Calculates and draw "rfourier" shapes.
+#' Calculates and draw 'rfourier' shapes.
 #' 
-#' \code{rfourier.shape} calculates a "Fourier radii variation shape" given
-#' Fourier coefficients (see \code{Details}) or can generate some "rfourier"
+#' \code{rfourier.shape} calculates a 'Fourier radii variation shape' given
+#' Fourier coefficients (see \code{Details}) or can generate some 'rfourier'
 #' shapes.
 #' 
 #' \code{rfourier.shape} can be used by specifying \code{nb.h} and
@@ -178,14 +200,21 @@ rfourier.i <- function(rf, nb.h, nb.pts=120) {
 #' panel(Out(a2l(replicate(100,
 #' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 #' @export
-rfourier.shape <- function(an, bn, nb.h, nb.pts=80, alpha=2, plot=TRUE){
-  if (missing(nb.h) &  missing(an)) nb.h <- 6
-  if (missing(nb.h) & !missing(an)) nb.h <- length(an)
-  if (missing(an)) an <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  if (missing(bn)) bn <- runif(nb.h, -pi, pi) / (1:nb.h)^alpha
-  rf  <- list(an=an, bn=bn, ao=0)
-  shp <- rfourier.i(rf, nb.h=nb.h, nb.pts=nb.pts)      
-  if (plot) coo.plot(shp)
-  return(shp)}
+rfourier.shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2, 
+    plot = TRUE) {
+    if (missing(nb.h) & missing(an)) 
+        nb.h <- 6
+    if (missing(nb.h) & !missing(an)) 
+        nb.h <- length(an)
+    if (missing(an)) 
+        an <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    if (missing(bn)) 
+        bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+    rf <- list(an = an, bn = bn, ao = 0)
+    shp <- rfourier.i(rf, nb.h = nb.h, nb.pts = nb.pts)
+    if (plot) 
+        coo.plot(shp)
+    return(shp)
+}
 
-##### end rFourier
+##### end rFourier 

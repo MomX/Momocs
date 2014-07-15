@@ -19,7 +19,7 @@ coo.lolli(coo1, coo2, pch = 20, cex = 0.5, main = NA, ...)
 \item{...}{optional parameters to fed \link{points} and \link{segments}.}
 }
 \description{
-Draws "lollipops" between two configurations.
+Draws 'lollipops' between two configurations.
 }
 \examples{
 data(olea)

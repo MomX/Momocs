@@ -24,13 +24,13 @@ function will ease the process. See the examples below.
 \examples{
 data(bot)
 bot$fac
-beers <- subset(bot, type=="beer")
-whisk <- subset(bot, type=="whisky")
+beers <- subset(bot, type=='beer')
+whisk <- subset(bot, type=='whisky')
 # or you may prefere indices
 subset(bot, c(1, 13, 34, 37))
 # and you can combine them :
 data(olea)
 olea$fac
-subset(olea, domes=="cult" & view=="VL")
+subset(olea, domes=='cult' & view=='VL')
 }
 

@@ -8,7 +8,7 @@ coo.slidedirection(coo, direction)
 \arguments{
 \item{coo}{a matrix (or a list) or (x; y) coordinates or a Coo object}
 
-\item{direction}{a character among \code{"N"} (by default), \code{"S"}, \code{"E"}, or \code{"W"}.}
+\item{direction}{a character among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -21,14 +21,14 @@ eastwards or westwards the centroid, becomes the first point with \link{coo.slid
 data(bot)
 b <- coo.rotate(bot[1], pi/6) # dummy example just to make it obvious
 coo.plot(b) # not the first point
-coo.plot(coo.slidedirection(b, "N"))
-coo.plot(coo.slidedirection(b, "E"))
-coo.plot(coo.slidedirection(b, "W"))
-coo.plot(coo.slidedirection(b, "S"))
+coo.plot(coo.slidedirection(b, 'N'))
+coo.plot(coo.slidedirection(b, 'E'))
+coo.plot(coo.slidedirection(b, 'W'))
+coo.plot(coo.slidedirection(b, 'S'))
 
 # on Coo objects
 stack(bot)
-stack(coo.slidedirection(bot, "E"))
+stack(coo.slidedirection(bot, 'E'))
 }
 \keyword{ShapeUtilities}
 

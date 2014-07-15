@@ -13,7 +13,7 @@ hquant(Coo, method = c("efourier", "rfourier", "tfourier"), id = 1,
 \arguments{
 \item{Coo}{the \code{Out} object on which to hquant}
 
-\item{method}{any method from \code{c("efourier", "rfourier", "tfourier")}}
+\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
 
 \item{id}{the shape on which to perform hquant}
 

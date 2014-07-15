@@ -29,7 +29,7 @@ stack(hearts)
 stack(coo.bookstein(hearts, 2, 4))
 h <- hearts[1]
 coo.plot(h)
-coo.plot(coo.bookstein(h, 20, 57), border="red")
+coo.plot(coo.bookstein(h, 20, 57), border='red')
 }
 \seealso{
 \link{coo.baseline}

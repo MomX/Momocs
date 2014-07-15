@@ -19,7 +19,7 @@ bilateral symmetry) #' and when one wants to retain just the upper side.
 data(bot)
 b <- coo.alignxax(bot[1])
 coo.plot(b)
-coo.draw(coo.up(b), border="red")
+coo.draw(coo.up(b), border='red')
 }
 \keyword{ShapeUtilities}
 

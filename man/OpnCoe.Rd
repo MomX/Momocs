@@ -35,7 +35,7 @@ and specific methods can be applied.
 }
 \examples{
 # all OpnCoe classes
-methods(class="OpnCoe")
+methods(class='OpnCoe')
 }
 \seealso{
 \link{Coe}, \link{OutCoe}

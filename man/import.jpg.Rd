@@ -40,12 +40,12 @@ file in the folder taht contains all your files. All the outlines should be impo
 \examples{
 \dontrun{
 
-# if your images are in the folder "/foo/jpgs/"
-lf <- list.files("/foo/jpegs", full.names=TRUE)
+# if your images are in the folder '/foo/jpgs/'
+lf <- list.files('/foo/jpegs', full.names=TRUE)
 coo <- import.jpg(lf)
 Out(coo)
 
-# "automatic" version
+# 'automatic' version
 coo <- import.jpg()
 }
 }
