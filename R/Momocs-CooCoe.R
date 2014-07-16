@@ -6,7 +6,7 @@
 
 #' Coo class
 #' 
-#' \code{Coo} class is a 'super class' for \link{Out}, \link{Opn} and \link{Ldk} classes,
+#' \code{Coo} class is a 'super class' for \link{Out}, \code{\link{Opn}} and \link{Ldk} classes,
 #' for handling \bold{closed outlines}, \bold{open outlines} and \bold{configuration of landmarks}, respectively.
 #' 
 #' This class allows to recycle most of the methods, since all of them apply on

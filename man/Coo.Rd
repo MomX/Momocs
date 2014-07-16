@@ -9,7 +9,7 @@ Coo(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coo} class is a 'super class' for \link{Out}, \link{Opn} and \link{Ldk} classes,
+\code{Coo} class is a 'super class' for \link{Out}, \code{\link{Opn}} and \link{Ldk} classes,
 for handling \bold{closed outlines}, \bold{open outlines} and \bold{configuration of landmarks}, respectively.
 }
 \details{

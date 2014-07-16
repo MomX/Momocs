@@ -240,7 +240,7 @@ panel.Out <- function(Coo, cols, borders, fac, reorder = NULL,
         borders <- rep("#333333", length(Out))
     }
     if (length(borders) != length(Out)) {
-        cols <- rep(borders[1], length(Out))
+        borders <- rep(borders[1], length(Out))
     }
     if (!missing(reorder)) 
         reorder <- Out$fac[, reorder]
