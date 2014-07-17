@@ -32,4 +32,5 @@ Imports:
     sp,
     MASS,
     ape,
-    geometry
+    geometry,
+    colorspace

@@ -2,15 +2,13 @@
 \name{col.summer}
 \alias{Palettes}
 \alias{col.autumn}
-\alias{col.blackgallus}
 \alias{col.bw}
 \alias{col.cold}
-\alias{col.div}
 \alias{col.gallus}
-\alias{col.gallus2}
 \alias{col.gw}
 \alias{col.hot}
 \alias{col.india}
+\alias{col.qual}
 \alias{col.sari}
 \alias{col.solarized}
 \alias{col.spring}
@@ -20,6 +18,8 @@
 \usage{
 col.summer(n)
 
+col.summer2(n)
+
 col.spring(n)
 
 col.autumn(n)
@@ -28,7 +28,7 @@ col.solarized(n)
 
 col.gallus(n)
 
-col.blackgallus(n)
+col.qual(n)
 
 col.hot(n)
 
@@ -41,12 +41,6 @@ col.india(n)
 col.bw(n)
 
 col.gw(n)
-
-col.div(n)
-
-col.gallus2(n)
-
-col.summer2(n)
 }
 \arguments{
 \item{n}{the number of colors to generate from the color palette}
@@ -60,23 +54,8 @@ Colors, colors, colors.
 \note{
 \code{col.solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
 \code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/}; \code{col.gallus2} is based on
-Sron \url{http://www.sron.nl/~pault/colourschemes.pdf}
-}
-\examples{
-barplot(1:20, col=col.summer(20), main='col.summer')
-barplot(1:20, col=col.summer2(20), main='col.summer2')
-barplot(1:20, col=col.spring(20), main='col.spring')
-barplot(1:20, col=col.autumn(20), main='col.autumn')
-barplot(1:20, col=col.solarized(20), main='col.solarized')
-barplot(1:20, col=col.gallus(20), main='col.gallus')
-barplot(1:20, col=col.gallus2(20), main='col.gallus2')
-barplot(1:20, col=col.blackgallus(20), main='col.blackgallus')
-barplot(1:20, col=col.hot(20), main='col.hot')
-barplot(1:20, col=col.cold(20), main='col.cold')
-barplot(1:20, col=col.sari(20), main='col.sari')
-barplot(1:20, col=col.india(20), main='col.india')
-barplot(1:20, col=col.bw(20), main='col.bw')
-barplot(1:20, col=col.div(20), main='col.div')
+Sron \url{http://www.sron.nl/~pault/colourschemes.pdf}; \code{col.qual}, \code{col.heat},
+\code{col.cold} and \code{col.gallus} use the colorspace package.
 }
 \keyword{Graphics}
 
