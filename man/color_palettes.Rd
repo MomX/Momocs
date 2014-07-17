@@ -5,7 +5,8 @@
 \alias{col.bw}
 \alias{col.cold}
 \alias{col.gallus}
-\alias{col.gw}
+\alias{col.grey}
+\alias{col.heat}
 \alias{col.hot}
 \alias{col.india}
 \alias{col.qual}
@@ -30,6 +31,8 @@ col.gallus(n)
 
 col.qual(n)
 
+col.heat(n)
+
 col.hot(n)
 
 col.cold(n)
@@ -40,7 +43,7 @@ col.india(n)
 
 col.bw(n)
 
-col.gw(n)
+col.grey(n)
 }
 \arguments{
 \item{n}{the number of colors to generate from the color palette}
@@ -52,10 +55,36 @@ colors (hexadecimal format)
 Colors, colors, colors.
 }
 \note{
-\code{col.solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
-\code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/}; \code{col.gallus2} is based on
-Sron \url{http://www.sron.nl/~pault/colourschemes.pdf}; \code{col.qual}, \code{col.heat},
-\code{col.cold} and \code{col.gallus} use the colorspace package.
+\itemize{
+\item \code{col.solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
+\item \code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/};
+\item \code{col.qual}, \code{col.heat}, \code{col.cold} and \code{col.gallus} use the colorspace package.
+}
+}
+\examples{
+wheel <- function(palette, n=10){
+ op <- par(mar=rep(0, 4)) ; on.exit(par(op))
+ pie(rep(1, n), col=palette(n), labels=NA, clockwise=TRUE)}
+
+ # Qualitative
+ wheel(col.qual)
+ wheel(col.solarized)
+ wheel(col.summer)
+ wheel(col.summer2)
+ wheel(col.spring)
+ wheel(col.autumn)
+
+ # Divergent
+ wheel(col.gallus)
+ wheel(col.india)
+
+ # Sequential
+ wheel(col.heat)
+ wheel(col.hot)
+ wheel(col.cold)
+ wheel(col.sari)
+ wheel(col.bw)
+ wheel(col.grey)
 }
 \keyword{Graphics}
 

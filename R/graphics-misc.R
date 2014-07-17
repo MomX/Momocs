@@ -7,11 +7,38 @@
 #' @aliases Palettes
 #' @param n the number of colors to generate from the color palette
 #' @return colors (hexadecimal format)
-#' @note \code{col.solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized}; 
-#' \code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/}; \code{col.gallus2} is based on
-#' Sron \url{http://www.sron.nl/~pault/colourschemes.pdf}; \code{col.qual}, \code{col.heat},
-#' \code{col.cold} and \code{col.gallus} use the colorspace package.
+#' @note 
+#' \itemize{
+#' \item \code{col.solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized}; 
+#' \item \code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/};
+#' \item \code{col.qual}, \code{col.heat}, \code{col.cold} and \code{col.gallus} use the colorspace package.
+#' }
 #' @keywords Graphics
+#' @examples
+#' 
+#' wheel <- function(palette, n=10){
+#'  op <- par(mar=rep(0, 4)) ; on.exit(par(op))
+#'  pie(rep(1, n), col=palette(n), labels=NA, clockwise=TRUE)}
+#'  
+#'  # Qualitative
+#'  wheel(col.qual)
+#'  wheel(col.solarized)
+#'  wheel(col.summer)
+#'  wheel(col.summer2)
+#'  wheel(col.spring)
+#'  wheel(col.autumn)
+#'  
+#'  # Divergent
+#'  wheel(col.gallus)
+#'  wheel(col.india)
+#'  
+#'  # Sequential
+#'  wheel(col.heat)
+#'  wheel(col.hot)
+#'  wheel(col.cold)
+#'  wheel(col.sari)
+#'  wheel(col.bw)
+#'  wheel(col.grey)
 #' @export
 col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
 #' @rdname color_palettes
@@ -45,26 +72,27 @@ col.qual <- function(n) {
 }
 #' @rdname color_palettes
 #' @export
-col.hot <- function(n) {
+col.heat <- function(n) {
     return(rev(heat_hcl(n)))
 }
 #' @rdname color_palettes
 #' @export
-col.cold <- function(n) {
-    return(rev(sequential_hcl(n)))
-}
+col.hot <- colorRampPalette(c("#FFFFFF", "#8E063B"))
 #' @rdname color_palettes
 #' @export
-col.sari <- colorRampPalette(c("#551A8B", "#FF7F00"))
+col.cold <- colorRampPalette(c("#FFFFFF", "#023FA5"))
 #' @rdname color_palettes
 #' @export
-col.india <- colorRampPalette(c("#FF9933", "#138808"))
+col.sari <- colorRampPalette(c("#551A8B", "#47A23E", "#FF7F00"))
+#' @rdname color_palettes
+#' @export
+col.india <- colorRampPalette(c("#FF9933", "#FFFFFF", "#138808"))
 #' @rdname color_palettes
 #' @export
 col.bw <- colorRampPalette(c("#000000", "#FFFFFF"))
 #' @rdname color_palettes
 #' @export
-col.gw <- colorRampPalette(c("#E5E5E5", "#1A1A1A"))
+col.grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
 
 #' Transparency helpers and palettes
 #' 
