@@ -233,5 +233,57 @@ plot3.PCA <- function(PCA, ... ){
   axis(1, at = bp, labels=paste0("PC", 1:5), line = -1, tick = FALSE)
 }
 
+
+#' Boxplot on PCA objects
+#' 
+#' @method boxplot PCA
+#' @param x an object of class "PCA", typically obtained with \link{PCA}
+#' @param fac factor, or a name or the column id from the $fac slot
+#' @param nax the range of PC axis
+#' @param cols a vector of colors is palette is not provided
+#' @param palette a color palette
+#' @param fixed.axes logical whether axes shoudl have the same scaled
+#' @param center.origin if TRUE before, whether to center the origin
+#' @param ...  further arguments to feed \link{boxplot}
+#' @examples
+#' data(bot)
+#' bot.f <- eFourier(bot, 12)
+#' bot.p <- PCA(bot.f)
+#' boxplot(bot.p, 1)
+#' @export
+boxplot.PCA <- function(x, fac, nax=1:5, cols, palette=col.qual,
+                        fixed.axes=TRUE, center.origin=TRUE, ...){
+  xy <- x$x[, nax]
+  if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
+  fl <- levels(fac)
+  fn <- nlevels(fac)
+  if (missing(cols)){ cols <- palette(fn) }
+
+  if (fixed.axes){
+    yl <- range(xy)
+    if (center.origin) {
+      yl <- max(abs(yl))
+      yl <- c(-yl, yl)
+    }
+  op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(1, 3, 2, 0), lend=2)
+  for (i in seq(along=nax)){
+    boxplot(xy[, nax[i]] ~ fac, ylim=yl, at=fn:1, horizontal=TRUE,
+            col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=20,
+            axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)}
+  axis(1)
+  } else {
+    op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(3, 3, 2, 0), lend=2)
+    for (i in seq(along=nax)){
+      boxplot(xy[, nax[i]] ~ fac, at=fn:1, horizontal=TRUE,
+              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=20,
+              axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)
+    axis(1)}
+  }
+  legend("topright", legend = levels(fac), fill = cols, bty="n", border = NA)
+}
+
+
+
+
 ##### end PCA plotters
 
