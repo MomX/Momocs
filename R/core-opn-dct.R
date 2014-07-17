@@ -53,7 +53,8 @@ dct <- function(coo, nb.h) {
     }
     # preliminaries
     N <- nrow(coo)
-    pol <- coo[, 1] + (0 + (0+1i)) * coo[, 2]
+    pol <- coo[, 1] + (0 + (0 + (0 + (0 + (0 + (0+1i)))))) * 
+        coo[, 2]
     # dct
     c <- rep(sqrt(2/N), N)
     c[1] <- 1/sqrt(N)
@@ -116,8 +117,8 @@ dct.i <- function(df, nb.pts = 60) {
     c <- rep(sqrt(2/nb.pts), nb.pts)
     c[1] <- 1/sqrt(nb.pts)
     
-    S <- A + (0 + (0+1i)) * B
-    S <- c(0 + 0 * (0 + (0+1i)), S)  # we add a trivial harmonic corresponding to (0; 0)
+    S <- A + (0 + (0 + (0 + (0 + (0 + (0+1i)))))) * B
+    S <- c(0 + 0 * (0 + (0 + (0 + (0 + (0 + (0+1i)))))), S)  # we add a trivial harmonic corresponding to (0; 0)
     
     sv_r <- rep(NA, nb.h)
     s_r <- rep(NA, nb.pts)

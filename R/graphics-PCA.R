@@ -85,10 +85,9 @@
 #' wpp
 #' plot(wpp, 1)
 #' @export
-plot.PCA <- function(#basics
-  x, fac, xax=1, yax=2, 
+plot.PCA <- function(x, fac, xax=1, yax=2, 
   #color choice
-  col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.autumn,
+  col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -144,8 +143,15 @@ plot.PCA <- function(#basics
       col <- col.groups[fac]
     } 
     if (!missing(pch)) {
-      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }}}
-  
+      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
+    } else {
+      if (nlevels(fac) < 10) {
+        pch <- .pch()[fac]
+      } else {
+        pch <- 20
+      }
+    }
+}  
   # cosmectics
   if ((density) & missing(contour)) contour <- TRUE
   if ((density) & missing(ellipses)) ellipses <- FALSE

@@ -55,9 +55,7 @@
 #' bot.l <- LDA(bot.f, "fake")
 #' plot(bot.l)
 #' @export
-plot.LDA <- function(#basics
-  x, xax=1, yax=2, 
-  #color choice
+plot.LDA <- function(x, xax=1, yax=2,
   col="black", pch, cex=0.3, palette=col.autumn,
   #.frame
   center.origin=FALSE, zoom=1,

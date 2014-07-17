@@ -41,6 +41,7 @@
 #' bug reports, and much more.
 #' @import ape
 #' @import sp
+#' @import colorspace
 #' @importFrom MASS lda ginv kde2d
 #' @importFrom geometry delaunayn
 #' @importFrom jpeg readJPEG
