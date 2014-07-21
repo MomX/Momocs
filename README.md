@@ -18,7 +18,7 @@ Note that you can find in `?Coo` the steps to import your former `Coo`objects.
 
 Tutorial
 --------
-* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/v0.9/) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what (x; y) coordinates may be. So far, huge gaps remain.
+* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/tree/master/v0.9) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what (x; y) coordinates may be. So far, huge gaps remain.
 * Blog posts, ref card, FAQ, to come.
 
 
