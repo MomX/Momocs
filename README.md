@@ -1,20 +1,26 @@
 Momocs, morphometrics using R
 ======
 
- * Momocs is an [R](http://cran.r-project.org/) package intended to ease and to popularize morphometrics, the quantitative analysis of form.
- * It aims at gathering the most common approaches: traditional morphometrics, global descriptors, open outlines, closed outlines and configuration of landmarks into the same, open-source, environment.
- * _And_ using the same, simple and easy-to-learn, open-source, and extendable grammar both for the user and programmers.
- * Momocs hinges on the core functions developed in the book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008), wraps them into the same coding grammar, and extends them both graphically and statistically.
+Momocs is an [R](http://cran.r-project.org/) package intended to ease and to popularize morphometrics, the quantitative analysis of form.
+It aims at gathering the most common approaches: traditional morphometrics, global descriptors, open outlines, closed outlines and configuration of landmarks into the same, open-source, environment. _And_ using the same, simple and easy-to-learn, open-source, and extendable grammar both for the user and programmers. Momocs hinges on the core functions developed in the book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008), wraps them into the same coding grammar, and extends them both graphically and statistically.
 
 Installation
 --------
 
 For the very last version: 
 ```
-  library(devtools)
-  install_github("vbonhomme/Momocs")
-  library(Momocs)
+library(devtools)
+install_github("vbonhomme/Momocs")
+library(Momocs)
 ````
+Note that you can find in `?Coo` the steps to import your former `Coo`objects.
+
+
+Tutorial
+--------
+* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what (x; y) coordinates may be. So far, huge gaps remain.
+* Blog posts, ref card, FAQ, to come.
+
 
 Features
 --------
@@ -71,10 +77,6 @@ __You are welcome to:__
 * collaborate with me
 * just send an email to: bonhomme.vincent@gmail.com
 
-Tutorial
---------
-* [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/blob/master/a-graph-intro-Momocs.pdf) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what (x; y) coordinates may be.
-* Blog posts, ref card, FAQ, to come.
 
 
 
