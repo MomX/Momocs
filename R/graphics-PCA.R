@@ -14,6 +14,7 @@
 #' @param fac factor, or a name or the column id from the $fac slot
 #' @param xax the first PC axis
 #' @param yax the second PC axis
+#' @param points logical whether to plot points
 #' @param col a color for the points (either global, for every level of the fac
 #' or for every individual, see examples)
 #' @param pch a pch for the points (either global, for every level of the fac
@@ -64,7 +65,8 @@
 #' @param ... useless here, just to fit the generic plot
 #' @details Widely inspired by the philosophy behind graphical functions
 #' of the ade4 R package.
-#' @keywords Graphics
+#' @seealso \link{plot.LDA}
+#' @keywords Multivariate, Graphics
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
@@ -87,7 +89,7 @@
 #' @export
 plot.PCA <- function(x, fac, xax=1, yax=2, 
   #color choice
-  col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
+  points=TRUE, col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -101,7 +103,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   #ellipses
   ellipses=FALSE, conf.ellipses=0.5,
   #ellipsesax
-  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
+  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), 
+  lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
   #convexhulls
   chull=FALSE, chull.lty=3,
   #kde2d
@@ -112,7 +115,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   #loadings
   loadings=FALSE,
   #labels
-  labelsgroups=TRUE, cex.labelsgroups=0.8, rect.labelsgroups=TRUE, abbreviate.labelsgroups=FALSE,
+  labelsgroups=TRUE, cex.labelsgroups=0.8, 
+  rect.labelsgroups=TRUE, abbreviate.labelsgroups=FALSE,
   #axisnames
   axisnames=TRUE,
   #axisvar
@@ -125,12 +129,14 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
 ){
   PCA <- x
   xy <- PCA$x[, c(xax, yax)]
-  # we check and prepare evrtything related to groups
+  ### we check and prepare evrtything related to groups
+  # fac handling
   if (missing(fac)) { # mainly for density and contour
     fac <- NULL
     col.groups <- col
   } else {
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
+    # col handling
     if (!missing(col)){
       if (length(col)==nlevels(fac)) {
         col.groups <- col
@@ -142,6 +148,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
       col.groups <- palette(nlevels(fac))
       col <- col.groups[fac]
     } 
+    # pch handling
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
     } else {
@@ -187,7 +194,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   } else {
     if (rug)        .rug(xy, NULL, col)
   }
-  points(xy, pch=pch, col=col, cex=cex)
+  if (points) points(xy, pch=pch, col=col, cex=cex)
   if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
@@ -251,14 +258,21 @@ plot3.PCA <- function(PCA, ... ){
 #' bot.p <- PCA(bot.f)
 #' boxplot(bot.p, 1)
 #' @export
-boxplot.PCA <- function(x, fac, nax=1:5, cols, palette=col.qual,
+boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
                         fixed.axes=TRUE, center.origin=TRUE, ...){
   xy <- x$x[, nax]
+  if (missing(fac)){
+    fac <- factor(rep("foo", nrow(xy)))
+    no.fac <- TRUE 
+  } else {
+    no.fac <- FALSE
+  }
+  
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   fl <- levels(fac)
   fn <- nlevels(fac)
   if (missing(cols)){ cols <- palette(fn) }
-
+  if (no.fac) { cols <- "grey20" }
   if (fixed.axes){
     yl <- range(xy)
     if (center.origin) {
@@ -266,20 +280,23 @@ boxplot.PCA <- function(x, fac, nax=1:5, cols, palette=col.qual,
       yl <- c(-yl, yl)
     }
   op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(1, 3, 2, 0), lend=2)
+  on.exit(par(op))
   for (i in seq(along=nax)){
     boxplot(xy[, nax[i]] ~ fac, ylim=yl, at=fn:1, horizontal=TRUE,
-            col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=20,
+            col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=1,
             axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)}
   axis(1)
   } else {
     op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(3, 3, 2, 0), lend=2)
     for (i in seq(along=nax)){
       boxplot(xy[, nax[i]] ~ fac, at=fn:1, horizontal=TRUE,
-              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=20,
+              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=1,
               axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)
     axis(1)}
   }
+  if (!no.fac) {
   legend("topright", legend = levels(fac), fill = cols, bty="n", border = NA)
+}
 }
 
 
