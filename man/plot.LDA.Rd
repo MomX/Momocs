@@ -3,22 +3,29 @@
 \alias{plot.LDA}
 \title{Plots Linear Discriminant Analysis}
 \usage{
-\method{plot}{LDA}(x, xax = 1, yax = 2, col = "black", pch, cex = 0.3,
-  palette = col.autumn, center.origin = FALSE, zoom = 1, grid = TRUE,
-  nb.grids = 3, morphospace = TRUE, pos.shp = "full", amp.shp = 1,
-  size.shp = 20, pts.shp = 60, border.shp = "#00000055",
-  col.shp = "#00000011", stars = FALSE, ellipses = FALSE, conf = 0.5,
-  ellipsesax = FALSE, lty.ellipsesax = 2, chull = TRUE, chull.lty = 3,
-  labelsgroups = TRUE, cex.labelsgroups = 0.8,
+\method{plot}{LDA}(x, xax = 1, yax = 2, points = TRUE, col = "#000000",
+  pch = 20, cex = .cex(nrow(LDA$mod.pred$x)), palette = col.summer2,
+  center.origin = FALSE, zoom = 1, grid = TRUE, nb.grids = 3,
+  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 15,
+  nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
+  border.shp = "#00000032", lwd.shp = 1, col.shp = "#00000019",
+  stars = FALSE, ellipses = FALSE, conf.ellipses = 0.5,
+  ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75, 0.9),
+  lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
+  chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
+  lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labelsgroups = TRUE,
+  cex.labelsgroups = 0.8, rect.labelsgroups = TRUE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
   eigen = TRUE, rug = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{an object of class "LDA", typically obtained with \link{LDA}}
 
-\item{xax}{the first LD axis}
+\item{xax}{the first PC axis}
 
-\item{yax}{the second LD axis}
+\item{yax}{the second PC axis}
+
+\item{points}{logical whether to plot points}
 
 \item{col}{a color for the points (either global, for every level of the fac
 or for every individual, see examples)}
@@ -47,9 +54,17 @@ or a data.frame for \link{pos.shapes}}
 
 \item{size.shp}{the size of the shapes}
 
+\item{nb.shp}{(pos.shp="circle") the number of shapes on the compass}
+
+\item{nc.shp}{(pos.shp="full" or "range) the number of shapes per column}
+
+\item{nr.shp}{(pos.shp="full" or "range) the number of shapes per row}
+
 \item{pts.shp}{the number of points fro drawing shapes}
 
 \item{border.shp}{the border color of the shapes}
+
+\item{lwd.shp}{the line width for these shapes}
 
 \item{col.shp}{the color of the shapes}
 
@@ -57,19 +72,37 @@ or a data.frame for \link{pos.shapes}}
 
 \item{ellipses}{logical whether to draw confidence ellipses}
 
-\item{conf}{the level of confidence}
+\item{conf.ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
 
 \item{ellipsesax}{logical whether to draw ellipse axes}
 
-\item{lty.ellipsesax}{if yes, the lty for them}
+\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
+
+\item{lwd.ellipsesax}{if yes, one or more numeric for the line widths}
+
+\item{lty.ellipsesax}{if yes, the lty with which to draw these axes}
 
 \item{chull}{logical whether to draw a convex hull}
 
 \item{chull.lty}{if yes, its linetype}
 
+\item{density}{whether to add a 2d density kernel estimation (based on \link{kde2d})}
+
+\item{lev.density}{if yes, the number of levels to plot (through \link{image})}
+
+\item{contour}{whether to add contour lines based on 2d density kernel}
+
+\item{lev.contour}{if yes, the (approximate) number of lines to draw}
+
+\item{n.kde2d}{the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel}
+
+\item{delaunay}{logical whether to add a delaunay 'mesh' between points}
+
 \item{labelsgroups}{logical whether to add labels for groups}
 
 \item{cex.labelsgroups}{ifyes, a numeric for the size of the labels}
+
+\item{rect.labelsgroups}{logical whether to add a rectangle behind groups names}
 
 \item{abbreviate.labelsgroups}{if yes, whether to abbreviate group names}
 
@@ -104,7 +137,8 @@ bot.l <- LDA(bot.f, "fake")
 plot(bot.l)
 }
 \seealso{
-\link{LDA}, \link{plotCV}
+\link{LDA}, \link{plotCV}, \link{plot.PCA}.
 }
-\keyword{Multivariate}
+\keyword{Graphics}
+\keyword{Multivariate,}
 
