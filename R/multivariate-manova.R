@@ -120,9 +120,9 @@ Manova.OutCoe <- function(x, fac, test = "Hotelling", retain,
             cat(" * 'retain' was missing. MANOVA done with", 
                 retain, "harmonics ")
             if (drop > 0) {
-                cat("and the first", drop, "dropped.\n")
+                cat("and the first", drop, "dropped\n")
             } else {
-                cat("./n")
+                cat("\n")
             }
         }
     } else {
@@ -136,9 +136,9 @@ Manova.OutCoe <- function(x, fac, test = "Hotelling", retain,
                   retain, "harmonics ")
             if (verbose) {
                 if (drop > 0) {
-                  cat("and the first", drop, "dropped.\n")
+                  cat("and the first", drop, "dropped\n")
                 } else {
-                  cat("./n")
+                  cat("\n")
                 }
             }
         }
