@@ -5,6 +5,8 @@
 \alias{PCA.OpnCoe}
 \alias{PCA.OutCoe}
 \alias{PCA.default}
+\alias{as.PCA}
+\alias{as.PCA.prcomp}
 \title{Principal component analysis on Coe objects}
 \usage{
 PCA(x, scale., center)
@@ -16,9 +18,15 @@ PCA(x, scale., center)
 \method{PCA}{LdkCoe}(x, scale. = FALSE, center = TRUE)
 
 \method{PCA}{default}(x, scale. = TRUE, center = TRUE)
+
+as.PCA(x, fac)
+
+\method{as.PCA}{prcomp}(x, fac)
 }
 \arguments{
-\item{x}{a \link{Coe} object}
+\item{x}{a \link{Coe} object or a \link{prcomp} object for \code{as.PCA}}
+
+\item{fac}{any factor or data.frame to be passed to \code{as.PCA} and for use with \link{plot.PCA}}
 
 \item{scale.}{logical whether to scale the input data}
 
@@ -53,6 +61,13 @@ wp <- fgProcrustes(wings, tol=1e-4)
 wpp <- PCA(wp)
 wpp
 plot(wpp, 1)
+
+# "foreign prcomp"
+head(iris)
+iris.p <- prcomp(iris[, 1:4])
+iris.p <- as.PCA(iris.p, iris[, 5])
+class(iris.p)
+plot(iris.p, 1)
 }
 \seealso{
 \link{plot.PCA}
