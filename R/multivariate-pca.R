@@ -8,7 +8,8 @@
 #' There is also a generic method (eg for traditional morphometrics) that centers and scales data.
 #' @aliases PCA
 #' @rdname PCA
-#' @param x a \link{Coe} object
+#' @param x a \link{Coe} object or a \link{prcomp} object for \code{as.PCA}
+#' @param fac any factor or data.frame to be passed to \code{as.PCA} and for use with \link{plot.PCA}
 #' @param scale. logical whether to scale the input data
 #' @param center logical whether to center the input data
 #' @return a 'PCA' object on which to apply \link{plot.PCA}
@@ -33,6 +34,13 @@
 #' wpp <- PCA(wp)
 #' wpp
 #' plot(wpp, 1)
+#' 
+#' # "foreign prcomp"
+#' head(iris)
+#' iris.p <- prcomp(iris[, 1:4])
+#' iris.p <- as.PCA(iris.p, iris[, 5])
+#' class(iris.p)
+#' plot(iris.p, 1)
 #' @export
 PCA <- function(x, scale., center) {
     UseMethod("PCA")
@@ -91,4 +99,14 @@ PCA.default <- function(x, scale. = TRUE, center = TRUE) {
     return(PCA)
 }
 
+#' @rdname PCA
+#' @export
+as.PCA <- function(x, fac){UseMethod("as.PCA")}
+#' @rdname PCA
+#' @export
+as.PCA.prcomp <- function(x, fac){
+  if (class(x)[1] != "PCA"){
+  class(x) <- c("PCA", class(x))
+  if (!missing(fac)) x$fac <- as.data.frame(fac)
+  return(x)}}
 ##### end PCA 
