@@ -252,7 +252,19 @@ vecs.param <- function(r1, i1, r2, i2) {
         r1)))
 }
 
-##### Utilities (useless?)
+##### Various utilities
+
+# x = any vector
+# conf = gaussian quantile
+#' @export
+.which.out <- function(x, conf=1e-4){
+  out <- which(dnorm(x, mean(x), sd(x))< conf)
+  if(length(out)==0) {
+    return(NA)
+  } else {
+    return(out)}}
+
+
 #'@export
 .refactor <- function(df) {
     data.frame(lapply(df, factor))
