@@ -76,7 +76,7 @@ combine.Out <- function(...) {
     Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
     Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
     if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
-        Out$ldk <- do.call("rbind", lapply(args, function(x) x$ldk))
+        Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
     }
     return(Out)
 }
