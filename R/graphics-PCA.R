@@ -88,45 +88,45 @@
 #' wpp
 #' plot(wpp, 1)
 #' @export
-plot.PCA <- function(x, fac, xax=1, yax=2, 
-                     #color choice
-                     points=TRUE, col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
-                     #.frame
-                     center.origin=FALSE, zoom=1,
-                     #.grid
-                     grid=TRUE, nb.grids=3,
-                     #shapes
-                     morphospace=TRUE, pos.shp="full", amp.shp=1,
-                     size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
-                     pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
-                     #stars
-                     stars=FALSE,
-                     #ellipses
-                     ellipses=FALSE, conf.ellipses=0.5,
-                     #ellipsesax
-                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), 
-                     lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
-                     #convexhulls
-                     chull=FALSE, chull.lty=3,
-                     #kde2d
-                     density=FALSE, lev.density=20,
-                     contour = FALSE, lev.contour=3, n.kde2d=100,
-                     #delaunay
-                     delaunay=FALSE,
-                     #loadings
-                     loadings=FALSE,
-                     #labels
-                     labelsgroups=TRUE, cex.labelsgroups=0.8, 
-                     rect.labelsgroups=TRUE, abbreviate.labelsgroups=FALSE,
-                     #axisnames
-                     axisnames=TRUE,
-                     #axisvar
-                     axisvar=TRUE,
-                     #eigen
-                     eigen=TRUE,
-                     #
-                     rug=TRUE,
-                     title=substitute(x), box=TRUE, ...
+plot.PCA <- function(x, fac, xax=1, yax=2,
+   #color choice
+   points=TRUE, col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
+   #.frame
+   center.origin=FALSE, zoom=1,
+   #.grid
+   grid=TRUE, nb.grids=3,
+   #shapes
+   morphospace=TRUE, pos.shp="full", amp.shp=1,
+   size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
+   pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
+   #stars
+   stars=FALSE,
+   #ellipses
+   ellipses=FALSE, conf.ellipses=0.5,
+   #ellipsesax
+   ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), 
+   lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
+   #convexhulls
+   chull=FALSE, chull.lty=3,
+   #kde2d
+   density=FALSE, lev.density=20,
+   contour = FALSE, lev.contour=3, n.kde2d=100,
+   #delaunay
+   delaunay=FALSE,
+   #loadings
+   loadings=FALSE,
+   #labels
+   labelsgroups=TRUE, cex.labelsgroups=0.8, 
+   rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
+   #axisnames
+   axisnames=TRUE,
+   #axisvar
+   axisvar=TRUE,
+   #eigen
+   eigen=TRUE,
+   #
+   rug=TRUE,
+   title=substitute(x), box=TRUE, ...
 ){
   PCA <- x
   xy <- PCA$x[, c(xax, yax)]

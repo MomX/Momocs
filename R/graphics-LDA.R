@@ -70,7 +70,7 @@
 #' bot.l <- LDA(bot.f, "fake")
 #' plot(bot.l)
 #' @export
-plot.LDA <- function( x, xax=1, yax=2,
+plot.LDA <- function(x, xax=1, yax=2,
   #color choice
   points=TRUE, col="#000000", pch=20, cex=.cex(nrow(LDA$mod.pred$x)), palette=col.summer2,
   #.frame
@@ -99,7 +99,7 @@ plot.LDA <- function( x, xax=1, yax=2,
   #loadings=FALSE,
   #labels
   labelsgroups=TRUE, cex.labelsgroups=0.8, 
-  rect.labelsgroups=TRUE, abbreviate.labelsgroups=FALSE,
+  rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
   #axisnames
   axisnames=TRUE,
   #axisvar
