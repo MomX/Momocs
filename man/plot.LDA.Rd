@@ -16,7 +16,7 @@
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labelsgroups = TRUE,
   cex.labelsgroups = 0.8, rect.labelsgroups = TRUE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
-  eigen = TRUE, rug = TRUE, title = substitute(x), ...)
+  eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class "LDA", typically obtained with \link{LDA}}
@@ -115,6 +115,8 @@ or a data.frame for \link{pos.shapes}}
 \item{rug}{logical whether to add rug to margins}
 
 \item{title}{character a name for the plot}
+
+\item{box}{whether to draw a box around the plotting region}
 
 \item{...}{useless here, just to fit the generic plot}
 }

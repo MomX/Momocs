@@ -54,6 +54,7 @@
 #' @param eigen logical whether to draw a plot of the eigen values
 #' @param rug logical whether to add rug to margins
 #' @param title character a name for the plot
+#' @param box whether to draw a box around the plotting region
 #' @param ... useless here, just to fit the generic plot
 #' @details Widely inspired by the philosophy behind graphical functions
 #' of the ade4 R package.
@@ -107,7 +108,7 @@ plot.LDA <- function( x, xax=1, yax=2,
   eigen=TRUE,
   #
   rug=TRUE,
-  title=substitute(x), ...
+  title=substitute(x), box=TRUE, ...
 ){
   LDA <- x
   fac <- LDA$fac
@@ -195,30 +196,5 @@ plot.LDA <- function( x, xax=1, yax=2,
   if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
   .title(title)
   if (eigen)     .eigen(LDA$mod$svd, xax, yax, ev.names="Proportion of trace")
-  box()}
+  if (box) box()}
 
-#   opar <- par(mar = par("mar"), xpd=FALSE)
-#   on.exit(par(opar))
-#   par(mar = rep(0.1, 4)) #0.1
-#   
-#   .frame(xy, center.origin, zoom=zoom)
-#   if (grid) .grid(nb.grids)
-#   if (morphospace & length(LDA$method)<2) {
-#     if(LDA$method=="eFourier") {
-#       .morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
-#                       amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-#                       col.shp=col.shp, border.shp=border.shp)}}
-#   if (stars)      .stars(xy, fac, col.groups)
-#   if (ellipsesax) .ellipsesax(xy, fac, conf, col.groups, lty.ellipsesax)
-#   if (ellipses)   .ellipses(xy, fac, conf, col.groups) #+conf
-#   if (chull)      .chull(xy, fac, col.groups, chull.lty)
-#   if (labelsgroups)     .labelsgroups(xy, fac, col.groups, 
-#                                       cex=cex.labelsgroups, abbreviate=abbreviate.labelsgroups)
-#   if (rug)        .rug(xy, fac, col.groups)
-#   points(xy, pch=pch, col=col, cex=cex)
-#   if (axisnames)  .axisnames(xax, yax, "LD")
-#   if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
-#   .title(title)
-#   # should be called differently #todo
-#   if (eigen)     .eigen(LDA$mod$svd, xax, yax, ev.names="Proportion of trace")
-#   box()}

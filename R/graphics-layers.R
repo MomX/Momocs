@@ -9,11 +9,11 @@
     if (center.origin) {
         w <- zoom * max(abs(xy))
         plot(NA, xlim = c(-w, w), ylim = c(-w, w), asp = 1, axes = FALSE, 
-            frame = TRUE)
+            frame = FALSE)
     } else {
         w <- zoom * apply(abs(xy), 2, max)
         plot(xy, xlim = c(-w[1], w[1]), ylim = c(-w[2], w[2]), 
-            type = "n", asp = 1, axes = FALSE, frame = TRUE)
+            type = "n", asp = 1, axes = FALSE, frame = FALSE)
     }
 }
 

@@ -6,7 +6,7 @@
 \alias{PCA.OutCoe}
 \alias{PCA.default}
 \alias{as.PCA}
-\alias{as.PCA.prcomp}
+\alias{as.PCA.default}
 \title{Principal component analysis on Coe objects}
 \usage{
 PCA(x, scale., center)
@@ -21,10 +21,10 @@ PCA(x, scale., center)
 
 as.PCA(x, fac)
 
-\method{as.PCA}{prcomp}(x, fac)
+\method{as.PCA}{default}(x, fac)
 }
 \arguments{
-\item{x}{a \link{Coe} object or a \link{prcomp} object for \code{as.PCA}}
+\item{x}{a \link{Coe} object or an appropriate object (eg \link{prcomp}) for \code{as.PCA}}
 
 \item{fac}{any factor or data.frame to be passed to \code{as.PCA} and for use with \link{plot.PCA}}
 

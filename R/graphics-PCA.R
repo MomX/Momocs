@@ -62,6 +62,7 @@
 #' @param eigen logical whether to draw a plot of the eigen values
 #' @param rug logical whether to add rug to margins
 #' @param title character a name for the plot
+#' @param box whether to draw a box around the plotting region
 #' @param ... useless here, just to fit the generic plot
 #' @details Widely inspired by the philosophy behind graphical functions
 #' of the ade4 R package.
@@ -88,44 +89,44 @@
 #' plot(wpp, 1)
 #' @export
 plot.PCA <- function(x, fac, xax=1, yax=2, 
-  #color choice
-  points=TRUE, col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
-  #.frame
-  center.origin=FALSE, zoom=1,
-  #.grid
-  grid=TRUE, nb.grids=3,
-  #shapes
-  morphospace=TRUE, pos.shp="full", amp.shp=1,
-  size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
-  pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
-  #stars
-  stars=FALSE,
-  #ellipses
-  ellipses=FALSE, conf.ellipses=0.5,
-  #ellipsesax
-  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), 
-  lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
-  #convexhulls
-  chull=FALSE, chull.lty=3,
-  #kde2d
-  density=FALSE, lev.density=20,
-  contour = FALSE, lev.contour=3, n.kde2d=100,
-  #delaunay
-  delaunay=FALSE,
-  #loadings
-  loadings=FALSE,
-  #labels
-  labelsgroups=TRUE, cex.labelsgroups=0.8, 
-  rect.labelsgroups=TRUE, abbreviate.labelsgroups=FALSE,
-  #axisnames
-  axisnames=TRUE,
-  #axisvar
-  axisvar=TRUE,
-  #eigen
-  eigen=TRUE,
-  #
-  rug=TRUE,
-  title=substitute(x), ...
+                     #color choice
+                     points=TRUE, col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
+                     #.frame
+                     center.origin=FALSE, zoom=1,
+                     #.grid
+                     grid=TRUE, nb.grids=3,
+                     #shapes
+                     morphospace=TRUE, pos.shp="full", amp.shp=1,
+                     size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
+                     pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
+                     #stars
+                     stars=FALSE,
+                     #ellipses
+                     ellipses=FALSE, conf.ellipses=0.5,
+                     #ellipsesax
+                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), 
+                     lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
+                     #convexhulls
+                     chull=FALSE, chull.lty=3,
+                     #kde2d
+                     density=FALSE, lev.density=20,
+                     contour = FALSE, lev.contour=3, n.kde2d=100,
+                     #delaunay
+                     delaunay=FALSE,
+                     #loadings
+                     loadings=FALSE,
+                     #labels
+                     labelsgroups=TRUE, cex.labelsgroups=0.8, 
+                     rect.labelsgroups=TRUE, abbreviate.labelsgroups=FALSE,
+                     #axisnames
+                     axisnames=TRUE,
+                     #axisvar
+                     axisvar=TRUE,
+                     #eigen
+                     eigen=TRUE,
+                     #
+                     rug=TRUE,
+                     title=substitute(x), box=TRUE, ...
 ){
   PCA <- x
   xy <- PCA$x[, c(xax, yax)]
@@ -158,7 +159,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
         pch <- 20
       }
     }
-}  
+  }  
   # cosmectics
   if ((density) & missing(contour)) contour <- TRUE
   if ((density) & missing(ellipses)) ellipses <- FALSE
@@ -168,7 +169,6 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   opar <- par(mar = par("mar"), xpd=FALSE)
   on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
-  
   # we initate it
   .frame(xy, center.origin, zoom=zoom)
   # then the layers
@@ -200,7 +200,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
   .title(title)
   if (eigen)     .eigen(PCA$sdev, xax, yax, ev.names="Eigenvalues")
-  box()}
+  if (box) box()
+}
 
 #' Plots a combination of the three first PCs
 #' 
@@ -221,23 +222,23 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
 plot3 <- function(PCA, ...){UseMethod("plot3")}
 #' @rdname plot3.PCA
 #' @export
-plot3.PCA <- function(PCA, ... ){
+plot3.PCA <- function(PCA,  ... ){
   op1 <- par(mfrow=c(2, 2))
   on.exit(par(op1))
   # The three plot.PCA plots
-  plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), eigen=TRUE, ...)
-  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=TRUE, ...)
-  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=TRUE, ...)
+  plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), ...)
+  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), ...)
+  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), ...)
   # The eigen value plot
-  op2 <- par(mar=c(2, 3, 4, 3), xpd=NA)
+  op2 <- par(mar=c(3, 8, 4, 8), xpd=NA)
   var <- PCA$sdev^2
   pc <- 100*var/sum(var)
   cols <- rep("grey80", 5)
   cols[1:3] <- "grey40"
   v <- pc[1:5]
   bp <- barplot(v, col=cols, border=NA, axes=FALSE, main="Eigenvalues")
-  text(bp, v+2, labels = paste0(round(v, 1), "%"))
-  axis(1, at = bp, labels=paste0("PC", 1:5), line = -1, tick = FALSE)
+  text(bp, v+2, labels = paste0(round(v, 1), "%"), cex=0.8)
+  axis(1, at = bp, labels=paste0("PC", 1:5), line = -1, tick = FALSE, cex.axis=0.8)
 }
 
 
@@ -279,24 +280,24 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
       yl <- max(abs(yl))
       yl <- c(-yl, yl)
     }
-  op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(1, 3, 2, 0), lend=2)
-  on.exit(par(op))
-  for (i in seq(along=nax)){
-    boxplot(xy[, nax[i]] ~ fac, ylim=yl, at=fn:1, horizontal=TRUE,
-            col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=1,
-            axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)}
-  axis(1)
+    op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(1, 3, 2, 0), lend=2)
+    on.exit(par(op))
+    for (i in seq(along=nax)){
+      boxplot(xy[, nax[i]] ~ fac, ylim=yl, at=fn:1, horizontal=TRUE,
+              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=1,
+              axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)}
+    axis(1)
   } else {
     op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(3, 3, 2, 0), lend=2)
     for (i in seq(along=nax)){
       boxplot(xy[, nax[i]] ~ fac, at=fn:1, horizontal=TRUE,
               col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=1,
               axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)
-    axis(1)}
+      axis(1)}
   }
   if (!no.fac) {
-  legend("topright", legend = levels(fac), fill = cols, bty="n", border = NA)
-}
+    legend("topright", legend = levels(fac), fill = cols, bty="n", border = NA)
+  }
 }
 
 
