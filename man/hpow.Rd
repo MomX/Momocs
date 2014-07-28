@@ -3,42 +3,52 @@
 \alias{hpow}
 \title{Quantitative calibration, through harmonic power, for Out objects}
 \usage{
-hpow(Out, method = "efourier", id = 1:length(Out), nb.h = 16, drop = 1,
-  smooth.it = 0, plot = TRUE,
-  title = "Fourier coefficients power spectrum", lineat.y = c(0.9, 0.95,
-  0.99, 0.999), bw = 0.1)
+hpow(Out, method = "efourier", id = 1:length(Out), nb.h = 24, drop = 1,
+  probs = seq(0, 1, 0.25), smooth.it = 0, plot = TRUE, xlim = c(drop +
+  1, nb.h), ylim = c(0, 100), title = "Fourier coefficients power spectrum",
+  lineat.y = c(90, 95, 99, 99.9))
 }
 \arguments{
 \item{Out}{the \code{Out} object on which to hpow}
 
 \item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
 
-\item{id}{the shape on which to perform hpow. All by default}
+\item{id}{the shape on which to perform hpow. All of them by default}
 
 \item{nb.h}{numeric the maximum number of harmonic}
 
 \item{drop}{numeric the number of harmonics to drop for the cumulative sum}
 
+\item{probs}{a vector of quantiles to calculate, to be passed to \link{quantile}}
+
 \item{smooth.it}{numeric, number of smoothing iterations}
 
 \item{plot}{logical whether to plot the result or simply return the matrix}
 
+\item{xlim}{an optional xlim to refine the plot}
+
+\item{ylim}{an optional xlim to refine the plot}
+
 \item{title}{a title for the plot}
 
-\item{lineat.y}{vector of numeric for drawing horizontal lines}
-
-\item{bw}{width of horizontal segments drawn for each harmonic.}
+\item{lineat.y}{vector of numeric for drawing horizontal lines, and also used for
+\code{minh} below}
 }
 \value{
 a matrix containing cumulated harmonic power for each harmonic.
+
+returns a list with component \code{q} the quantile matrix
+and \code{minh} a quick summary that returns the number of harmonics required to achieve
+a certain proportion of the total harmonic power.
 }
 \description{
 Estimates the number of harmonics required for the three Fourier methods
-implemented so far in Momocs: elliptical Fourier analysis
-(see \link{efourier}), radii variation analysis (see \link{tfourier})
+implemented in Momocs: elliptical Fourier analysis
+(see \link{efourier}), radii variation analysis (see \link{rfourier})
 and tangent angle analysis (see \link{tfourier}).
 It returns and can plot cumulated harmonic power whether dropping
-the first harmonic or not.
+the first harmonic or not, and based and the maximum possible number
+of harmonics on the \code{Out} object.
 }
 \details{
 The power of a given harmonic \eqn{n} is calculated as follows for
@@ -52,6 +62,8 @@ HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}
 \examples{
 data(bot)
 hpow(bot)
+# if you want to do eFourier with 99\% hpow in one step
+eFourier(bot, nb.h=hpow(bot, "efourier", plot=FALSE)$minh["99\%"])
 }
 \keyword{Out}
 
