@@ -192,7 +192,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
   #if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
-  if (axisnames)  .axisnames(xax, yax, "PC")
+  if (axisnames)  .axisnames(xax, yax, "LD")
   if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
   .title(title)
   if (eigen)     .eigen(LDA$mod$svd, xax, yax, ev.names="Proportion of trace")

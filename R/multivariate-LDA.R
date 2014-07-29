@@ -126,10 +126,10 @@ LDA.default <- function(x, fac, retain, ...) {
 LDA.PCA <- function(x, fac, retain = 5, ...) {
     PCA <- x
     if (missing(fac)) 
-        stop(" * no fac provided")
+        stop(" * no 'fac' provided.")
     fac <- PCA$fac[, fac]
     if (missing(retain)) {
-        cat(" * the first", retain, "PC axes are used.")
+        cat(" * the first", retain, "PC axes are used.\n")
     }
     X <- PCA$x[, 1:retain]
     if (is.matrix(X)) {
