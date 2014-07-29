@@ -290,10 +290,12 @@
 # adds title to plots
 #' @export
 .title <- function(title) {
-    title <- as.character(title)  # since substitute return a 'name' not a 'character'
+    # for cases where plot(PCA()) are passed
+    if (is.call(title)) title <- as.character(title)[1]
+    # since substitute return a 'name' not a 'character'
+    title <- as.character(title)  
     pos <- par("usr")
     gy <- strheight(title, font = 2) * 0.75
-    text(pos[1], pos[3] + gy, pos = 4, labels = title, font = 2, 
-        cex = 0.8)
+    text(pos[1], pos[3] + gy, pos = 4, labels = title, font = 2, cex = 0.8)
 }
 # text(0, 0, 'plop')} end layers 
