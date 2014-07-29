@@ -21,7 +21,8 @@
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
 
-\item{fac}{factor, or a name or the column id from the $fac slot}
+\item{fac}{factor, or a name or the column id from the $fac slot, or a formula combining colum names
+from the $fac slot (cf. examples)}
 
 \item{xax}{the first PC axis}
 
@@ -143,7 +144,7 @@ data(olea)
 op <- rawPolynomials(olea, 5)
 op.p <- PCA(op)
 op.p
-plot(op.p, 1, morpho=TRUE)
+plot(op.p, ~ domes + cep, morpho=TRUE) # use of formula
 
 data(wings)
 wp <- fgProcrustes(wings, tol=1e-4)

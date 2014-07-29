@@ -7,11 +7,12 @@
 
 #todo: add deformation grids on the extreme PC axes (pos / meanshape)
 #' Plots Principal Component Analysis
-#' 
+#'
 #' The Momocs' PCA plotter with many graphical options and morphospaces.
 #' @method plot PCA
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
-#' @param fac factor, or a name or the column id from the $fac slot
+#' @param fac factor, or a name or the column id from the $fac slot, or a formula combining colum names
+#' from the $fac slot (cf. examples)
 #' @param xax the first PC axis
 #' @param yax the second PC axis
 #' @param points logical whether to plot points
@@ -26,7 +27,7 @@
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
 #' @param morphospace logical whether to add the morphological space
-#' @param pos.shp either "full", "range", "circle", "xy" 
+#' @param pos.shp either "full", "range", "circle", "xy"
 #' or a data.frame for \link{pos.shapes}
 #' @param amp.shp amplification factor for shape deformation
 #' @param size.shp the size of the shapes
@@ -39,7 +40,7 @@
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
-#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses 
+#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
 #' @param ellipsesax logical whether to draw ellipse axes
 #' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
 #' @param lwd.ellipsesax if yes, one or more numeric for the line widths
@@ -74,14 +75,14 @@
 #' bot.p <- PCA(bot.f)
 #' bot.p
 #' plot(bot.p, morpho=FALSE)
-#' plot(bot.p, "type") 
-#' 
+#' plot(bot.p, "type")
+#'
 #' data(olea)
 #' op <- rawPolynomials(olea, 5)
 #' op.p <- PCA(op)
 #' op.p
-#' plot(op.p, 1, morpho=TRUE)
-#' 
+#' plot(op.p, ~ domes + cep, morpho=TRUE) # use of formula
+#'
 #' data(wings)
 #' wp <- fgProcrustes(wings, tol=1e-4)
 #' wpp <- PCA(wp)
@@ -104,8 +105,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
    #ellipses
    ellipses=FALSE, conf.ellipses=0.5,
    #ellipsesax
-   ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), 
-   lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
+   ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
+   lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
    #convexhulls
    chull=FALSE, chull.lty=3,
    #kde2d
@@ -116,7 +117,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
    #loadings
    loadings=FALSE,
    #labels
-   labelsgroups=TRUE, cex.labelsgroups=0.8, 
+   labelsgroups=TRUE, cex.labelsgroups=0.8,
    rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
    #axisnames
    axisnames=TRUE,
@@ -136,6 +137,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     fac <- NULL
     col.groups <- col
   } else {
+    if (class(fac)=="formula"){
+      f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
+      fac <- interaction(f0)}
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
     # col handling
     if (!missing(col)){
@@ -148,7 +152,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     } else {
       col.groups <- palette(nlevels(fac))
       col <- col.groups[fac]
-    } 
+    }
     # pch handling
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
@@ -159,7 +163,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
         pch <- 20
       }
     }
-  }  
+  }
   # cosmectics
   if ((density) & missing(contour)) contour <- TRUE
   if ((density) & missing(ellipses)) ellipses <- FALSE
@@ -189,7 +193,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
     if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
                                         cex=cex.labelsgroups, rect=rect.labelsgroups,
-                                        abbreviate=abbreviate.labelsgroups)     
+                                        abbreviate=abbreviate.labelsgroups)
     if (rug)        .rug(xy, fac, col.groups)
   } else {
     if (rug)        .rug(xy, NULL, col)
@@ -204,14 +208,14 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
 }
 
 #' Plots a combination of the three first PCs
-#' 
+#'
 #' Creates a 2 x 3 layout with, from top to bottom and form left to right: PC1-PC2,
 #' PC1-PC3, PC2-3, and the barplot of eigenvalues percentages.
 #' @param PCA a \link{PCA} object
 #' @param ... additional arguments to fed \link{plot.PCA}
 #' @keywords Graphics
 #' @rdname plot3.PCA
-#' @examples 
+#' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
 #' bot.p <- PCA(bot.f)
@@ -243,7 +247,7 @@ plot3.PCA <- function(PCA,  ... ){
 
 
 #' Boxplot on PCA objects
-#' 
+#'
 #' @method boxplot PCA
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
 #' @param fac factor, or a name or the column id from the $fac slot
@@ -264,11 +268,11 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
   xy <- x$x[, nax]
   if (missing(fac)){
     fac <- factor(rep("foo", nrow(xy)))
-    no.fac <- TRUE 
+    no.fac <- TRUE
   } else {
     no.fac <- FALSE
   }
-  
+
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   fl <- levels(fac)
   fn <- nlevels(fac)
