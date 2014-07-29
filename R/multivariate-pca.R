@@ -110,4 +110,32 @@ as.PCA.default <- function(x, fac){
   if (!missing(fac)) x$fac <- as.data.frame(fac)
   return(x)}}
 
+#' @export
+print.PCA <- function(x, ...){
+  cat("A PCA object\n")
+  cat(rep("-", 20), "\n", sep = "")
+  df <- x$fac
+  nf <- ncol(df)
+  if (nf == 0) {
+    cat(" - $fac: No groups defined\n")
+  } else {
+    if (nf<2) {
+      cat(" - $fac:", nf, "grouping factor:\n")
+    } else {
+      cat(" - $fac:", nf, "grouping factors:\n")}
+    for (i in 1:nf) {
+      lev.i <- levels(df[, i])
+      # cosmectics below
+      if (sum(nchar(lev.i))>60){
+        maxprint <- which(cumsum(nchar(lev.i))>30)[1]
+        cat("     '", colnames(df)[i], "': ", paste(lev.i[1:maxprint], collapse=", "),
+            " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
+      } else {
+        cat("     '", colnames(df)[i], "': ", paste(lev.i, collapse=", "), ".\n", sep="")
+      }
+    }
+  }
+  cat(" - All components: ",  paste(names(x), collapse=", "), ".\n", sep="")
+}
+
 ##### end PCA 
