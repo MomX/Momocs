@@ -6,7 +6,7 @@
 hpow(Out, method = "efourier", id = 1:length(Out), nb.h = 24, drop = 1,
   probs = seq(0, 1, 0.25), smooth.it = 0, plot = TRUE, xlim = c(drop +
   1, nb.h), ylim = c(0, 100), title = "Fourier coefficients power spectrum",
-  lineat.y = c(90, 95, 99, 99.9))
+  lineat.y = c(90, 95, 99, 99.9), verbose = TRUE)
 }
 \arguments{
 \item{Out}{the \code{Out} object on which to hpow}
@@ -33,6 +33,8 @@ hpow(Out, method = "efourier", id = 1:length(Out), nb.h = 24, drop = 1,
 
 \item{lineat.y}{vector of numeric for drawing horizontal lines, and also used for
 \code{minh} below}
+
+\item{verbose}{whether to print results}
 }
 \value{
 a matrix containing cumulated harmonic power for each harmonic.

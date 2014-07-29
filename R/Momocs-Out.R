@@ -390,6 +390,7 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
 #' @param title a title for the plot
 #' @param lineat.y vector of numeric for drawing horizontal lines, and also used for
 #' \code{minh} below
+#' @param verbose whether to print results
 #' @return a matrix containing cumulated harmonic power for each harmonic.
 #' @return returns a list with component \code{q} the quantile matrix
 #' and \code{minh} a quick summary that returns the number of harmonics required to achieve
@@ -414,7 +415,7 @@ hpow <- function(Out, method = "efourier", id = 1:length(Out),
                  smooth.it = 0, plot = TRUE,
                  xlim=c(drop+1, nb.h), ylim=c(0, 100),
                  title = "Fourier coefficients power spectrum",
-                 lineat.y = c(90, 95, 99, 99.9)) {
+                 lineat.y = c(90, 95, 99, 99.9), verbose=TRUE) {
   UseMethod("hpow")
 }
 #' @export
@@ -423,11 +424,11 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
                      smooth.it = 0, plot = TRUE,
                      xlim=c(drop+1, nb.h), ylim=c(0, 100),
                      title = "Harmonic power of coefficients",
-                     lineat.y = c(90, 95, 99, 99.9)) {
+                     lineat.y = c(90, 95, 99, 99.9), verbose=TRUE) {
 
   # we swith among methods, with a messsage
   if (missing(method)) {
-    cat(" * Method not provided. hpow | efourier is used.\n")
+    if (verbose) cat(" * Method not provided. hpow | efourier is used.\n")
     method <- efourier
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
@@ -466,7 +467,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
     wi <- which(med.res > lineat.y[i])
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
   minh <- minh+drop
-#   return(q)
+  #   return(q)
   # plot section
   if (plot) {
     if (missing(xlim)) xlim <- c(1+drop, minh[length(minh)])
@@ -500,11 +501,11 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
 
     box()
   }
-
-  cat("$q:\n")
-  print(round(res[, 1:(max(minh, na.rm=TRUE)-drop)], 3))
-  cat("\n$minh:\n")
-  print(minh)
+  if (verbose){
+    cat("$q:\n")
+    print(round(res[, 1:(max(minh, na.rm=TRUE)-drop)], 3))
+    cat("\n$minh:\n")
+    print(minh)}
   invisible(list(q=res, minh=minh))
 }
 
