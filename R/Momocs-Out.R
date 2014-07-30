@@ -295,8 +295,9 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
   nr <- length(harm.range)
   nc <- nb.pts
   nk <- length(id)
-  res <- array(NA, dim = c(nr, nc, nk), dimnames = list(paste0("h",
-                                                               harm.range), paste("pt", 1:nb.pts), names(Coo)[id]))
+  res <- array(NA, dim = c(nr, nc, nk),
+               dimnames = list(paste0("h", harm.range), 
+                               paste("pt", 1:nb.pts), names(Coo)[id]))
   # progressbar
   if (nk > 5) {
     pb <- txtProgressBar(1, nk)
@@ -306,7 +307,7 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
   }
   # the core loops that will calculate deviations
   for (ind in seq(along = id)) {
-    coo <- Coo$coo[[id[ind]]]
+    coo <- Coo$coo[[id[ind]]] #Coo[id]?
     # below, the best possible fit
     coo.best <- method.i(method(coo, nb.h = nb.h.best, smooth.it = smooth.it),
                          nb.pts = nb.pts)
