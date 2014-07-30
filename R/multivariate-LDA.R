@@ -1,7 +1,7 @@
 ##### LDA methods on Coe objects
 
 #' Linear Discriminant Analysis on Coe objects
-#' 
+#'
 #' Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 #' @aliases LDA
 #' @rdname LDA
@@ -44,13 +44,18 @@ LDA <- function(x, fac, retain, ...) {
 #' @export
 LDA.Coe <- function(x, fac, retain, ...) {
     Coe <- x
-    if (missing(fac)) 
+    # fac handling
+    if (missing(fac))
         stop(" * no fac provided")
-    fac <- Coe$fac[, fac]
+    if (class(fac)=="formula"){
+      f0 <- x$fac[, attr(terms(fac), "term.labels")]
+      fac <- interaction(f0)}
+    if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
+
     X <- as.matrix(Coe$coe)
-    if (!missing(retain) & length(Coe$method) == 1 & Coe$method[1] == 
+    if (!missing(retain) & length(Coe$method) == 1 & Coe$method[1] ==
         "eFourier") {
-        X <- X[, coeff.sel(retain = retain, nb.h = ncol(X)/4, 
+        X <- X[, coeff.sel(retain = retain, nb.h = ncol(X)/4,
             cph = 4)]
     }
     remove <- which(apply(X, 2, sd) < 1e-10)
@@ -64,7 +69,7 @@ LDA.Coe <- function(x, fac, retain, ...) {
     mod <- lda(X, grouping = fac, tol = 1e-08, ...)
     mod.pred <- predict(mod, X)
     # leave-one-out cross validation
-    CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE, 
+    CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE,
         ...)$class
     # we build a nice table from it
     CV.tab <- table(fac, CV.fac)
@@ -80,9 +85,9 @@ LDA.Coe <- function(x, fac, retain, ...) {
     # we build the list with all the components that may be
     # useful elsewhere including the lda output, the CV
     # prediction and unstandardized LDs for shape reconstruction
-    LDA <- list(x = X, fac = fac, removed = remove, mod = mod, 
-        mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab, 
-        CV.correct = CV.correct, LDs = LDs, mshape = apply(Coe$coe, 
+    LDA <- list(x = X, fac = fac, removed = remove, mod = mod,
+        mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
+        CV.correct = CV.correct, LDs = LDs, mshape = apply(Coe$coe,
             2, mean), method = Coe$method)
     class(LDA) <- c("LDA", class(LDA))
     return(LDA)
@@ -92,15 +97,15 @@ LDA.Coe <- function(x, fac, retain, ...) {
 #' @export
 LDA.default <- function(x, fac, retain, ...) {
     X <- x
-    if (!is.matrix(X)) 
+    if (!is.matrix(X))
         X <- as.matrix(X)
-    if (missing(fac)) 
+    if (missing(fac))
         stop(" * no fac provided")
     # now we calculate two lda models with MASS::lda one with
     mod <- lda(X, grouping = fac)
     mod.pred <- predict(mod, X)
     # leave-one-out cross validation
-    CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE, 
+    CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE,
         ...)$class
     # we build a nice table from it
     CV.tab <- table(fac, CV.fac)
@@ -114,8 +119,8 @@ LDA.default <- function(x, fac, retain, ...) {
     VCVw <- SSw/dfw
     LDs <- VCVw %*% mod$scaling
     # we build the list to be returned
-    LDA <- list(x = X, fac = fac, removed = remove, mod = mod, 
-        mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab, 
+    LDA <- list(x = X, fac = fac, removed = remove, mod = mod,
+        mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
         CV.correct = CV.correct, LDs = LDs, mshape = NULL, method = "other")
     class(LDA) <- c("LDA", class(LDA))
     return(LDA)
@@ -125,9 +130,14 @@ LDA.default <- function(x, fac, retain, ...) {
 #' @export
 LDA.PCA <- function(x, fac, retain = 5, ...) {
     PCA <- x
-    if (missing(fac)) 
+    #fac handling
+    if (missing(fac))
         stop(" * no 'fac' provided.")
-    fac <- PCA$fac[, fac]
+    if (class(fac)=="formula"){
+      f0 <- x$fac[, attr(terms(fac), "term.labels")]
+      fac <- interaction(f0)}
+    if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
+    # PC number selection
     if (missing(retain)) {
         cat(" * the first", retain, "PC axes are used.\n")
     }
@@ -146,7 +156,7 @@ LDA.PCA <- function(x, fac, retain = 5, ...) {
     mod <- lda(X, grouping = fac, tol = 1e-08, ...)
     mod.pred <- predict(mod, X)
     # leave-one-out cross validation
-    CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE, 
+    CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE,
         ...)$class
     # we build a nice table from it
     CV.tab <- table(fac, CV.fac)
@@ -161,9 +171,9 @@ LDA.PCA <- function(x, fac, retain = 5, ...) {
     SSw <- var(lm.mod$residuals) * (n - 1)
     VCVw <- SSw/dfw
     LDs <- VCVw %*% mod$scaling
-    # 
-    LDA <- list(x = X, fac = fac, removed = remove, mod = mod, 
-        mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab, 
+    #
+    LDA <- list(x = X, fac = fac, removed = remove, mod = mod,
+        mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
         CV.correct = CV.correct, LDs = LDs, mshape = NULL, method = "LDAPCA")  # may be interesting to add LDA on PCA here?
     class(LDA) <- c("LDA", class(LDA))
     return(LDA)
@@ -171,10 +181,10 @@ LDA.PCA <- function(x, fac, retain = 5, ...) {
 
 #' @export
 print.LDA <- function(x, ...) {
-    cat("Leave-one-out cross-validation: (", signif(x$CV.correct * 
-        100, 3), "% - ", sum(diag(x$CV.tab)), "/", sum(x$CV.tab), 
+    cat("Leave-one-out cross-validation: (", signif(x$CV.correct *
+        100, 3), "% - ", sum(diag(x$CV.tab)), "/", sum(x$CV.tab),
         "): \n", sep = "")
     print(x$CV.tab)
 }
 
-##### end LDA 
+##### end LDA
