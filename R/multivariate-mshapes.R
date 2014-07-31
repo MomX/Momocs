@@ -78,6 +78,7 @@ mshapes.OutCoe <- function(Coe, fac, nb.pts = 120) {
     Coe2 <- OutCoe
     Coe2$coe <- coe
     Coe2$fac <- data.frame(fac = fl)
+    names(Coe2$fac) <- as.character(fac)
     return(list(Coe = Coe2, shp = shp))
 }
 
@@ -113,6 +114,7 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts = 120) {
     Coe2 <- OpnCoe
     Coe2$coe <- coe
     Coe2$fac <- data.frame(fac = fl)
+    names(Coe2$fac) <- as.character(fac)
     return(list(Coe = Coe2, shp = shp))
 }
 
@@ -134,6 +136,7 @@ mshapes.LdkCoe <- function(Coe, fac, nb.pts = 120) {
     names(shp) <- fl
     Coe2 <- Ldk(shp)  # todo, probably wrong
     Coe2$fac <- data.frame(fac = fl)
+    names(Coe2$fac) <- as.character(fac)
     return(list(Coe = Coe2, shp = shp))
 }
 
