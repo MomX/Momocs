@@ -7,6 +7,7 @@
 #' 
 #' @param Coe a \link{Coe} object
 #' @param fac factor from the $fac slot. See examples below.
+#' @param FUN a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)
 #' @param nb.pts numeric the number of points for calculated shapes
 #' @return a list with two components: \code{$Coe} object of the same class, and
 #' \code{$shp} a list of matrices of (x, y) coordinates.
@@ -39,23 +40,24 @@
 #' panel(ms$Coe) # equivalent (except the $fac slot)
 #' 
 #' @export
-mshapes <- function(Coe, fac, nb.pts) {
+mshapes <- function(Coe, fac, FUN, nb.pts) {
     UseMethod("mshapes")
 }
 
 #' @rdname mshapes
 #' @export
-mshapes.default <- function(Coe, fac, nb.pts) {
+mshapes.default <- function(Coe, fac, FUN, nb.pts) {
+  cat("* this method must be used on a Coe object.")
 }
 
 #' @rdname mshapes
 #' @export
-mshapes.OutCoe <- function(Coe, fac, nb.pts = 120) {
+mshapes.OutCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
     OutCoe <- Coe
     nb.h <- ncol(OutCoe$coe)/4  #todo
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")
-        coe.mshape <- apply(OutCoe$coe, 2, mean)
+        coe.mshape <- apply(OutCoe$coe, 2, FUN)
         xf <- coeff.split(coe.mshape, nb.h, 4)
         return(efourier.i(xf, nb.pts = nb.pts))
     }
@@ -68,7 +70,7 @@ mshapes.OutCoe <- function(Coe, fac, nb.pts = 120) {
     for (i in seq(along = fl)) {
         coe.i <- OutCoe$coe[f == fl[i], ]
         if (is.matrix(coe.i)) {
-            coe.i <- apply(coe.i, 2, mean)
+            coe.i <- apply(coe.i, 2, FUN)
         }
         coe[i, ] <- coe.i
         xf <- coeff.split(cs = coe.i, nb.h = nb.h, cph = 4)
@@ -84,12 +86,12 @@ mshapes.OutCoe <- function(Coe, fac, nb.pts = 120) {
 
 #' @rdname mshapes
 #' @export
-mshapes.OpnCoe <- function(Coe, fac, nb.pts = 120) {
+mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
     OpnCoe <- Coe
     n <- length(OpnCoe$mshape)  #todo
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")
-        coe.mshape <- apply(OpnCoe$coe, 2, mean)
+        coe.mshape <- apply(OpnCoe$coe, 2, FUN)
         mod.mshape <- OpnCoe$mod
         mod.mshape$coefficients <- coe.mshape
         return(polynomials.i(mod.mshape))
@@ -104,7 +106,7 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts = 120) {
     for (i in seq(along = fl)) {
         coe.i <- OpnCoe$coe[f == fl[i], ]
         if (is.matrix(coe.i)) {
-            coe.i <- apply(coe.i, 2, mean)
+            coe.i <- apply(coe.i, 2, FUN)
         }
         mod.mshape$coeff <- coe.i
         coe[i, ] <- coe.i
@@ -120,7 +122,7 @@ mshapes.OpnCoe <- function(Coe, fac, nb.pts = 120) {
 
 #' @rdname mshapes
 #' @export
-mshapes.LdkCoe <- function(Coe, fac, nb.pts = 120) {
+mshapes.LdkCoe <- function(Coe, fac, FUN=NULL, nb.pts = 120) {
     LdkCoe <- Coe
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")

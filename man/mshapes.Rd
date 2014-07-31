@@ -7,20 +7,22 @@
 \alias{mshapes.default}
 \title{Mean shape calculation from Coe objects}
 \usage{
-mshapes(Coe, fac, nb.pts)
+mshapes(Coe, fac, FUN, nb.pts)
 
-\method{mshapes}{default}(Coe, fac, nb.pts)
+\method{mshapes}{default}(Coe, fac, FUN, nb.pts)
 
-\method{mshapes}{OutCoe}(Coe, fac, nb.pts = 120)
+\method{mshapes}{OutCoe}(Coe, fac, FUN = mean, nb.pts = 120)
 
-\method{mshapes}{OpnCoe}(Coe, fac, nb.pts = 120)
+\method{mshapes}{OpnCoe}(Coe, fac, FUN = mean, nb.pts = 120)
 
-\method{mshapes}{LdkCoe}(Coe, fac, nb.pts = 120)
+\method{mshapes}{LdkCoe}(Coe, fac, FUN = NULL, nb.pts = 120)
 }
 \arguments{
 \item{Coe}{a \link{Coe} object}
 
 \item{fac}{factor from the $fac slot. See examples below.}
+
+\item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
 
 \item{nb.pts}{numeric the number of points for calculated shapes}
 }
