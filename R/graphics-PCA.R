@@ -131,16 +131,23 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
 ){
   PCA <- x
   xy <- PCA$x[, c(xax, yax)]
-  ### we check and prepare evrtything related to groups
-  # fac handling
+  ### we check and prepare everything related to groups
+  ### fac not provided
   if (missing(fac)) { # mainly for density and contour
     fac <- NULL
     col.groups <- col
   } else {
+  ### fac provided
+  # fac provided, as formula
     if (class(fac)=="formula"){
       f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
-      fac <- interaction(f0)}
+      fac <- interaction(f0)
+      fac <- factor(fac) # I love R
+    }
+  # fac provided, as column name or id
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
+  # if fac as been provided, we now have a valid fac
+    #
     # col handling
     if (!missing(col)){
       if (length(col)==nlevels(fac)) {
