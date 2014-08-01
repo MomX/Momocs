@@ -1,5 +1,4 @@
-# 1. Out
-# -----------------------------------------------------------------------
+# 1. Out --------------------------------------------------
 
 #' Builds an Out object
 #'
@@ -50,6 +49,58 @@ Out.array <- function(x, ldk = list(), fac = data.frame()) {
 Out.Coo <- function(x, ldk = list(), fac = data.frame()) {
   Out(x = x$coo, ldk = x$ldk, fac = x$fac)
 }
+
+#' Convert an OutCoe object into an Out object
+#' 
+#' Uses the \code{$method} to do the inverse corresponding function. For instance,
+#' an \link{OutCoe} object obtained with \link{eFourier}, will be converted to an \link{Out}
+#' object (outlines from harmonic coefficients), using \link{efourier.i}.
+#' 
+#' Note that the 'positionnal' coefficients (\code{ao} and \code{co} if any) are lost, so for a proper
+#' comparison between a raw \code{Out} and a \code{Out} from \code{Out -> OutCoe -> Out},
+#' the raw \code{Out} should be centered.
+#' 
+#' This method is useful since it allows a direct inspection at how Fourier-based
+#' methods handle outlines, and in particular how they normalize it (when they do). If you
+#' have bad "reconstruction" using \code{as.Out}, this probably means that you have to think
+#' about alternative alignements on the raw outlines. For instance, it is obvious
+#' that normalization does a good job on the bottle example, yet it -pi/2 turns the "outlines"
+#' yet neutral for further analysis (and that can be manage with the argument \code{rotate.shp} in
+#' functions/methods that use reconstructed outlines, e.g. \link{plot.PCA}).
+#' @param object an OutCoe object
+#' @param OutCoe used by \code{as}, useless for the front user
+#' @param nb.pts number of point for the reconstructed outlines
+#' @return an \link{Out} object.
+#' @keywords Out
+#' @examples
+#' data(bot)
+#' bot <- coo.center(bot)
+#' bot.f <- rFourier(bot, 120)
+#' bot.fi <- as.Out(bot.f)
+#' op <- par(mfrow=c(1, 2))
+#' stack(bot, title="raw bot")
+#' stack(bot.fi, title="outlines from bot.f")
+#' par(op)
+#' @export
+as.Out <- function(object, OutCoe, nb.pts=120){
+  # we swith among methods, with a messsage
+  method <- object$method
+  if (is.null(method)) {
+    stop(" * '$method' is missing. Not a regular Coe object.")
+  } else {
+    p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
+    method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
+    cph      <- switch(p, 4, 2, 2)
+  }
+  coe <- object$coe
+  nb.h <- ncol(coe)/cph
+  coo <- list()
+  for (i in 1:nrow(coe)){
+    ef.i <- coeff.split(coe[i, ], nb.h = nb.h, cph = cph)
+    coo[[i]] <- method.i(ef.i, nb.pts = nb.pts)}
+  names(coo) <- rownames(coe)
+  return(Out(coo, fac=object$fac))}
+
 
 # The print method for Out objects
 #' @export
@@ -120,8 +171,7 @@ print.Out <- function(x, ...) {
 }
 
 
-# 2. Out calibration
-# -----------------------------------------------------------
+# 2. Out calibration --------------------------------------
 #' Graphical calibration for Out objects
 #'
 #' Calculate and displays reconstructed shapes using a
