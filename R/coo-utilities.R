@@ -107,6 +107,34 @@ coo.scale.Coo <- function(coo, scale) {
     return(Coo)
 }
 
+#' Scales coordinates in one direction
+#' 
+#' \code{coo.scalex} applies a scaling a matrix of (x; y) (or a list),
+#' parallel to the x-axis,
+#' \code{coo.scaley} does it parallel to the y-axis.
+#' @rdname coo.scalexy
+#' @param coo a matrix or a list of coordinates
+#' @param k scaling factor
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @keywords ShapeUtilities
+#' @examples
+#' data(shapes)
+#' coo <- coo.template(shapes[11])
+#' coo.plot(coo, xlim=c(-1, 1))
+#' coo.draw(coo.scalex(coo, 0.5), border="blue")
+#' coo.draw(coo.scalex(coo, 1.2), border="blue", lty=2)
+#' coo.draw(coo.scaley(coo, 0.5), border="red")
+#' coo.draw(coo.scaley(coo, 1.2), border="red", lty=2)
+#' @export
+coo.scalex <- function(coo, k=1){
+  smat <- matrix(c(k, 0, 0, 1), nrow=2)
+  return(coo %*% smat)}
+#' @rdname coo.scalexy
+#' @export
+coo.scaley <- function(coo, k=1){
+  smat <- matrix(c(1, 0, 0, k), nrow=2)
+  return(coo %*% smat)}
+
 #' Rotates coordinates
 #'
 #' Rotates the coordinates by a 'theta' angle (in radians) If not provided,
@@ -692,6 +720,31 @@ coo.force2close <- function(coo) {
     return(coo2)
 }
 
+
+#' Shears shapes
+#' 
+#' \code{coo.shearx} applies a shear mapping on a matrix of (x; y) coordinates (or a list), parallel
+#' to the x-axis (i.e. x' = x + ky; y' = y + kx). \code{coo.sheary} does it parallel to the y-axis.
+#' @rdname coo.shear
+#' @param coo a matrix or a list of coordinates
+#' @param k shear factor
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @keywords ShapeUtilities
+#' @examples
+#' data(shapes)
+#' coo <- coo.template(shapes[11])
+#' coo.plot(coo)
+#' coo.draw(coo.shearx(coo, 0.5), border="blue")
+#' coo.draw(coo.sheary(coo, 0.5), border="red")
+#' @export
+coo.shearx <- function(coo, k=1){
+  smat <- matrix(c(1, 0, k, 1), nrow=2)
+  return(coo %*% smat)}
+#' @rdname coo.shear
+#' @export
+coo.sheary <- function(coo, k){
+  smat <- matrix(c(1, k, 0, 1), nrow=2)
+  return(coo %*% smat)}
 
 #' Calculate abscissa and ordinate on a shape
 #' 
