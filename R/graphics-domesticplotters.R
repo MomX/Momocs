@@ -234,7 +234,9 @@ coo.arrows <- function(coo1, coo2, length = 0.1, angle = 20,
 #' coo.plot(coo.template(coo, s))
 #' rect(-s/2, -s/2, s/2, s/2)
 #' @export
-coo.template <- function(coo, size = 1) {
+coo.template <- function(coo, size){UseMethod("coo.template")}
+#' @export
+coo.template.default <- function(coo, size = 1) {
     # only for matrices
     coo <- coo * min(size/apply(coo, 2, function(x) diff(range(x))))
     expected <- apply(coo, 2, function(x) diff(range(x)))/2
@@ -245,6 +247,14 @@ coo.template <- function(coo, size = 1) {
     # coo.centpos(coo)[2])}
     return(coo)
 }
+#' @export
+coo.template.Coo <- function(coo, size=1){
+  Coo <- coo
+  Coo$coo <- lapply(Coo$coo, coo.template, size=size)
+  return(Coo)
+}
+
+
 
 #' Plots sets of shapes.
 #' 
