@@ -2,18 +2,19 @@
 \name{stack.Coo}
 \alias{stack.Coo}
 \alias{stack.Ldk}
-\title{Plots Coo objects: stacks all shapes}
+\title{Plots Coo objects: stack (all shapes in the same frame)}
 \usage{
 \method{stack}{Coo}(x, cols, borders, points = FALSE, first.point = TRUE,
   centroid = TRUE, ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055",
   ldk.cex = 0.5, ldk.links = FALSE, ldk.confell = FALSE,
   ldk.contour = FALSE, ldk.chull = FALSE, ldk.labels = FALSE,
-  xy.axis = TRUE, ...)
+  xy.axis = TRUE, title = substitute(x), ...)
 
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
   ldk = TRUE, ldk.pch = 20, ldk.col = "#33333333", ldk.cex = 0.3,
   ldk.links = FALSE, ldk.confell = FALSE, ldk.contour = FALSE,
-  ldk.chull = FALSE, ldk.labels = FALSE, xy.axis = TRUE, ...)
+  ldk.chull = FALSE, ldk.labels = FALSE, xy.axis = TRUE,
+  title = substitute(x), ...)
 }
 \arguments{
 \item{x}{The \code{Coo} object to plot.}
@@ -49,6 +50,8 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{ldk.labels}{logical whether to draw landmark labels}
 
 \item{xy.axis}{whether to draw or not the x and y axes}
+
+\item{title}{a title for the plot. The name of the \code{Coo} by default.}
 
 \item{...}{further arguments to be passed to \link{coo.plot}}
 }

@@ -5,7 +5,7 @@
 \alias{panel.Ldk}
 \alias{panel.Opn}
 \alias{panel.Out}
-\title{Plots Coo objects: family picture}
+\title{Plots Coo objects: panel (family picture)}
 \usage{
 panel(Coo, cols, borders, fac, reorder, palette = col.summer, names = NULL,
   cex.names = 0.6, points = TRUE, points.pch = 3, points.cex = 0.2,
