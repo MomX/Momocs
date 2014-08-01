@@ -99,7 +99,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
    #shapes
    morphospace=TRUE, pos.shp="full", amp.shp=1,
    size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
-   pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
+   pts.shp=60, border.shp=.transp("#000000", 0.5), lwd.shp=1, col.shp=.transp("#000000", 0.9),
    #stars
    stars=FALSE,
    #ellipses
