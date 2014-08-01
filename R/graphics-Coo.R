@@ -1,5 +1,6 @@
 ##### Main Coo (Out/Opn/Ldk) plotters
 
+# plot ----------------------------------------------------
 #' Plots Coo objects: plot (quick review)
 #'
 #' Allows to plot shapes, individually, for \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
@@ -48,6 +49,7 @@ plot.Coo <- function(x, id, ...) {
 
 # todo: gestion links plot.Ldk <- plot.Coo
 
+# stack ----------------------------------------------------
 #' Plots Coo objects: stack (all shapes in the same frame)
 #'
 #' Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
@@ -71,12 +73,20 @@ plot.Coo <- function(x, id, ...) {
 #' @param ldk.chull logical whether to draw convex hull
 #' @param ldk.labels logical whether to draw landmark labels
 #' @param xy.axis whether to draw or not the x and y axes
-#' @param title a title for the plot. The name of the \code{Coo} by default.
-#' @param ... further arguments to be passed to \link{coo.plot}
+#' @param title a title for the plot. The name of the \code{Coo} by default
+#' @param nb.pts the number of points to use for the shape reconstruction
+#' @param ... further arguments to be passed to \link{coo.plot} 
 #' @seealso \link{panel.Coo}, \link{plot.Coo}.
-#' @keywords Graphics Out Opn Ldk
+#' @note When applied on a \link{OutCoe} object, a wrapper 
+#' for \code{stack(as.Out(OutCoe), ...)}. In that case, 
+#' \code{...} feeds \code{stack} itself. (same thing for \code{OpnCoe} to come)
+#' @keywords Graphics Out Opn Ldk OutCoe
 #' @examples
 #' \dontrun{
+#' data(bot)
+#' stack(bot)
+#' bot.f <- eFourier(bot, 12)
+#' stack(bot.f)
 #' data(mosquito)
 #' stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
 #' data(hearts)
@@ -123,6 +133,13 @@ stack.Coo <- function(x, cols, borders, points = FALSE, first.point = TRUE,
     }
   }
 }
+
+#' @rdname stack.Coo
+#' @export
+stack.OutCoe <- function(x, nb.pts=120, ...){
+  OutCoe <- x
+  Out <- as.Out(x, nb.pts=nb.pts)
+  stack(Out, title=paste0(substitute(x),".i"),...)}
 
 #' @rdname stack.Coo
 #' @export
@@ -179,12 +196,13 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
 }
 
+# panel ---------------------------------------------------
 #' Plots Coo objects: panel (family picture)
 #'
 #' Plots all the outlines, side by side, from
 #' a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 #'
-#' @param Coo The \code{Coo (Out/Opn)} object  to plot.
+#' @param x The \code{Coo} (or \code{OutCoe}) object  to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equal to the number of coordinates.
 #' @param borders A \code{vector} of colors for drawing the borders.
@@ -199,31 +217,35 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' @param points.pch (for Ldk) and a pch for these points
 #' @param points.cex (for Ldk) and a cex for these points
 #' @param points.col (for Ldk) and a col  for these points
+#' @param nb.pts the number of points to use for the shape reconstruction
 #' @param ... further arguments to maintain consistency with the generic \link{plot}.
+#' @note When applied on a \link{OutCoe} object, a wrapper 
+#' for \code{panel(as.Out(OutCoe), ...)}. In that case, 
+#' \code{...} feeds \code{panel} itself. (same thing for \code{OpnCoe} to come)
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
-#' @keywords Graphics Out Opn Ldk
+#' @keywords Graphics Out Opn Ldk OutCoe
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)
 #' data(olea)
 #' panel(olea)
 #' data(bot)
+#' bot.f <- eFourier(bot, 12)
+#' panel(bot.f)
 #' # an illustration of the use of fac
 #' panel(bot, fac='type', palette=col.spring, names=TRUE)
 #' @aliases panel.Coo
 #' @rdname panel.Coo
 #' @export
-panel <- function(Coo, cols, borders, fac, reorder, palette = col.summer,
-                  names = NULL, cex.names = 0.6, points = TRUE, points.pch = 3,
-                  points.cex = 0.2, points.col, ...) {
+panel <- function(x, ...) {
   UseMethod("panel")
 }
 #' @rdname panel.Coo
 #' @export
-panel.Out <- function(Coo, cols, borders, fac, reorder = NULL,
+panel.Out <- function(x, cols, borders, fac, reorder = NULL,
                       palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
-  Out <- Coo
+  Coo <- x
   if (!missing(fac)) {
     
     if (missing(cols)) {
@@ -234,26 +256,26 @@ panel.Out <- function(Coo, cols, borders, fac, reorder = NULL,
     }
   }
   if (missing(cols)) {
-    cols <- rep(NA, length(Out))
+    cols <- rep(NA, length(Coo))
   }
-  if (length(cols) != length(Out)) {
-    cols <- rep(cols[1], length(Out))
+  if (length(cols) != length(Coo)) {
+    cols <- rep(cols[1], length(Coo))
   }
   if (missing(borders)) {
-    borders <- rep("#333333", length(Out))
+    borders <- rep("#333333", length(Coo))
   }
-  if (length(borders) != length(Out)) {
-    borders <- rep(borders[1], length(Out))
+  if (length(borders) != length(Coo)) {
+    borders <- rep(borders[1], length(Coo))
   }
   if (!missing(reorder))
-    reorder <- Out$fac[, reorder]
-  pos <- coo.list.panel(Out$coo, cols = cols, borders = borders,
+    reorder <- Coo$fac[, reorder]
+  pos <- coo.list.panel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = TRUE)
   if (!is.null(names)) {
     if (is.logical(names)) {
-      text(pos[, 1], pos[, 2], labels = names(Out), cex = cex.names)
+      text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
-      if (length(names) != length(Out)) {
+      if (length(names) != length(Coo)) {
         if (is.null(reorder)) {
           text(pos[, 1], pos[, 2], labels = Coo$fac[,
                                                     names], cex = cex.names)
@@ -270,10 +292,18 @@ panel.Out <- function(Coo, cols, borders, fac, reorder = NULL,
 
 #' @rdname panel.Coo
 #' @export
-panel.Opn <- function(Coo, cols, borders, fac, reorder = NULL,
+panel.OutCoe <- function(x, nb.pts=120, ...){
+  OutCoe <- x
+  Out <- as.Out(x, nb.pts=nb.pts)
+  panel(Out, title=paste0(substitute(x),".i"),...)}
+
+
+#' @rdname panel.Coo
+#' @export
+panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
                       palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
-  Opn <- Coo
+  Coo <- x
   if (!missing(fac)) {
     
     if (missing(cols)) {
@@ -284,26 +314,26 @@ panel.Opn <- function(Coo, cols, borders, fac, reorder = NULL,
     }
   }
   if (missing(cols)) {
-    cols <- rep(NA, length(Opn))
+    cols <- rep(NA, length(Coo))
   }
-  if (length(cols) != length(Opn)) {
-    cols <- rep(cols[1], length(Opn))
+  if (length(cols) != length(Coo)) {
+    cols <- rep(cols[1], length(Coo))
   }
   if (missing(borders)) {
-    borders <- rep("#333333", length(Opn))
+    borders <- rep("#333333", length(Coo))
   }
-  if (length(borders) != length(Opn)) {
-    cols <- rep(borders[1], length(Opn))
+  if (length(borders) != length(Coo)) {
+    cols <- rep(borders[1], length(Coo))
   }
   if (!missing(reorder))
-    reorder <- Opn$fac[, reorder]
-  pos <- coo.list.panel(Opn$coo, cols = cols, borders = borders,
+    reorder <- Coo$fac[, reorder]
+  pos <- coo.list.panel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = FALSE)
   if (!is.null(names)) {
     if (is.logical(names)) {
-      text(pos[, 1], pos[, 2], labels = names(Opn), cex = cex.names)
+      text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
-      if (length(names) != length(Opn)) {
+      if (length(names) != length(Coo)) {
         if (is.null(reorder)) {
           text(pos[, 1], pos[, 2], labels = Coo$fac[,
                                                     names], cex = cex.names)
@@ -320,11 +350,11 @@ panel.Opn <- function(Coo, cols, borders, fac, reorder = NULL,
 
 #' @rdname panel.Coo
 #' @export
-panel.Ldk <- function(Coo, cols, borders, fac, reorder = NULL,
+panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
                       palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col = "#333333",
                       ...) {
-  Opn <- Coo
+  Coo <- x
   if (!missing(fac)) {
     if (missing(borders)) {
       borders <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[,
@@ -334,21 +364,21 @@ panel.Ldk <- function(Coo, cols, borders, fac, reorder = NULL,
     }
   }
   if (missing(borders)) {
-    borders <- rep("#333333", length(Opn))
+    borders <- rep("#333333", length(Coo))
   }
-  if (length(borders) != length(Opn)) {
-    borders <- rep(borders[1], length(Opn))
+  if (length(borders) != length(Coo)) {
+    borders <- rep(borders[1], length(Coo))
   }
   if (!missing(reorder))
-    reorder <- Opn$fac[, reorder]
-  pos <- coo.list.panel(Opn$coo, cols = cols, borders = borders,
+    reorder <- Coo$fac[, reorder]
+  pos <- coo.list.panel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = FALSE, points = points, points.pch = points.pch,
                         points.cex = points.cex, points.col = points.col)
   if (!is.null(names)) {
     if (is.logical(names)) {
-      text(pos[, 1], pos[, 2], labels = names(Opn), cex = cex.names)
+      text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
-      if (length(names) != length(Opn)) {
+      if (length(names) != length(Coo)) {
         if (is.null(reorder)) {
           text(pos[, 1], pos[, 2], labels = Coo$fac[,
                                                     names], cex = cex.names)

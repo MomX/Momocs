@@ -2,6 +2,7 @@
 \name{stack.Coo}
 \alias{stack.Coo}
 \alias{stack.Ldk}
+\alias{stack.OutCoe}
 \title{Plots Coo objects: stack (all shapes in the same frame)}
 \usage{
 \method{stack}{Coo}(x, cols, borders, points = FALSE, first.point = TRUE,
@@ -9,6 +10,8 @@
   ldk.cex = 0.5, ldk.links = FALSE, ldk.confell = FALSE,
   ldk.contour = FALSE, ldk.chull = FALSE, ldk.labels = FALSE,
   xy.axis = TRUE, title = substitute(x), ...)
+
+\method{stack}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
   ldk = TRUE, ldk.pch = 20, ldk.col = "#33333333", ldk.cex = 0.3,
@@ -51,7 +54,9 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{xy.axis}{whether to draw or not the x and y axes}
 
-\item{title}{a title for the plot. The name of the \code{Coo} by default.}
+\item{title}{a title for the plot. The name of the \code{Coo} by default}
+
+\item{nb.pts}{the number of points to use for the shape reconstruction}
 
 \item{...}{further arguments to be passed to \link{coo.plot}}
 }
@@ -59,8 +64,17 @@ Either a single value or of length exactly equals to the number of coordinates.}
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
 object.
 }
+\note{
+When applied on a \link{OutCoe} object, a wrapper
+for \code{stack(as.Out(OutCoe), ...)}. In that case,
+\code{...} feeds \code{stack} itself. (same thing for \code{OpnCoe} to come)
+}
 \examples{
 \dontrun{
+data(bot)
+stack(bot)
+bot.f <- eFourier(bot, 12)
+stack(bot.f)
 data(mosquito)
 stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
 data(hearts)
@@ -76,4 +90,5 @@ stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
 \keyword{Ldk}
 \keyword{Opn}
 \keyword{Out}
+\keyword{OutCoe}
 

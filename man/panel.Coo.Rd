@@ -5,26 +5,27 @@
 \alias{panel.Ldk}
 \alias{panel.Opn}
 \alias{panel.Out}
+\alias{panel.OutCoe}
 \title{Plots Coo objects: panel (family picture)}
 \usage{
-panel(Coo, cols, borders, fac, reorder, palette = col.summer, names = NULL,
-  cex.names = 0.6, points = TRUE, points.pch = 3, points.cex = 0.2,
-  points.col, ...)
+panel(x, ...)
 
-\method{panel}{Out}(Coo, cols, borders, fac, reorder = NULL,
+\method{panel}{Out}(x, cols, borders, fac, reorder = NULL,
   palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col, ...)
 
-\method{panel}{Opn}(Coo, cols, borders, fac, reorder = NULL,
+\method{panel}{OutCoe}(x, nb.pts = 120, ...)
+
+\method{panel}{Opn}(x, cols, borders, fac, reorder = NULL,
   palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col, ...)
 
-\method{panel}{Ldk}(Coo, cols, borders, fac, reorder = NULL,
+\method{panel}{Ldk}(x, cols, borders, fac, reorder = NULL,
   palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col = "#333333", ...)
 }
 \arguments{
-\item{Coo}{The \code{Coo (Out/Opn)} object  to plot.}
+\item{x}{The \code{Coo} (or \code{OutCoe}) object  to plot.}
 
 \item{cols}{A \code{vector} of colors for drawing the outlines.
 Either a single value or of length exactly equal to the number of coordinates.}
@@ -51,11 +52,18 @@ pass a character for the names of the files}
 
 \item{points.col}{(for Ldk) and a col  for these points}
 
+\item{nb.pts}{the number of points to use for the shape reconstruction}
+
 \item{...}{further arguments to maintain consistency with the generic \link{plot}.}
 }
 \description{
 Plots all the outlines, side by side, from
 a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
+}
+\note{
+When applied on a \link{OutCoe} object, a wrapper
+for \code{panel(as.Out(OutCoe), ...)}. In that case,
+\code{...} feeds \code{panel} itself. (same thing for \code{OpnCoe} to come)
 }
 \examples{
 data(mosquito)
@@ -63,6 +71,8 @@ panel(mosquito, names=TRUE, cex.names=0.5)
 data(olea)
 panel(olea)
 data(bot)
+bot.f <- eFourier(bot, 12)
+panel(bot.f)
 # an illustration of the use of fac
 panel(bot, fac='type', palette=col.spring, names=TRUE)
 }
@@ -73,4 +83,5 @@ panel(bot, fac='type', palette=col.spring, names=TRUE)
 \keyword{Ldk}
 \keyword{Opn}
 \keyword{Out}
+\keyword{OutCoe}
 
