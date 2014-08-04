@@ -4,8 +4,8 @@
 
 #' Builds an Ldk object
 #'
-#' In Momocs, \code{Ldk} classes objects are wrapping around 
-#' lists of configurations of landmarks, along with other informations,
+#' In Momocs, \code{Ldk} classes objects are 
+#' lists of configurations of \bold{l}an\bold{d}mar\bold{k}s, with optionnal components,
 #' on which generic methods such as plotting methods (e.g. \link{stack}) 
 #' and specific methods (e.g. todo-Procrustes can be applied.
 #'  \code{Ldk} objects are primarily \code{\link{Coo}} objects.
@@ -20,6 +20,7 @@
 #' specifying the grouping structure
 #' @return an \code{Ldk} object
 #' @seealso \link{Coo}, \link{Out}, link{Opn}.
+#' @note \code{Ldk} methods must be, so far, considered as experimental in Momocs.
 #' @keywords Ldk
 #' @aliases Ldk Ldk.default Ldk.Ldk Ldk.list LdkCoe
 #' @examples
@@ -102,10 +103,10 @@ print.Ldk <- function(x, ...) {
       # cosmectics below
       if (sum(nchar(lev.i))>60){
         maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "': ", paste(lev.i[1:maxprint], collapse=", "),
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
             " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
       } else {
-        cat("     '", colnames(df)[i], "': ", paste(lev.i, collapse=", "), ".\n", sep="")
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
       }
     }
   }
@@ -155,10 +156,10 @@ print.LdkCoe <- function(x, ...) {
       # cosmectics below
       if (sum(nchar(lev.i))>60){
         maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "': ", paste(lev.i[1:maxprint], collapse=", "),
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
             " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
       } else {
-        cat("     '", colnames(df)[i], "': ", paste(lev.i, collapse=", "), ".\n", sep="")
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
       }
     }
   }

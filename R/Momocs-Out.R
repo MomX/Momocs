@@ -2,8 +2,8 @@
 
 #' Builds an Out object
 #'
-#' In Momocs, \code{Out} classes objects are lists of \bold{closed} outlines,
-#' on which generic methods such as plotting methods (e.g. \link{stack})
+#' In Momocs, \code{Out}-classes objects are lists of closed \bold{out}lines,
+#' with optionnal components, and on which generic methods such as plotting methods (e.g. \link{stack})
 #' and specific methods (e.g. \link{eFourier} can be applied.
 #'  \code{Out} objects are primarily \code{\link{Coo}} objects.
 #'
@@ -51,15 +51,15 @@ Out.Coo <- function(x, ldk = list(), fac = data.frame()) {
 }
 
 #' Convert an OutCoe object into an Out object
-#' 
+#'
 #' Uses the \code{$method} to do the inverse corresponding function. For instance,
 #' an \link{OutCoe} object obtained with \link{eFourier}, will be converted to an \link{Out}
 #' object (outlines from harmonic coefficients), using \link{efourier.i}.
-#' 
+#'
 #' Note that the 'positionnal' coefficients (\code{ao} and \code{co} if any) are lost, so for a proper
 #' comparison between a raw \code{Out} and a \code{Out} from \code{Out -> OutCoe -> Out},
 #' the raw \code{Out} should be centered.
-#' 
+#'
 #' This method is useful since it allows a direct inspection at how Fourier-based
 #' methods handle outlines, and in particular how they normalize it (when they do). If you
 #' have bad "reconstruction" using \code{as.Out}, this probably means that you have to think
@@ -127,7 +127,7 @@ print.Out <- function(x, ...) {
   #     }
   # number of outlines
   cat(" - $coo:", coo.nb, "outlines")
-  
+
   # number of coordinates
   cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates, ", sep="")
   # outlines closed or not
@@ -161,10 +161,10 @@ print.Out <- function(x, ...) {
       # cosmectics below
       if (sum(nchar(lev.i))>60){
         maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "': ", paste(lev.i[1:maxprint], collapse=", "),
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
             " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
       } else {
-        cat("     '", colnames(df)[i], "': ", paste(lev.i, collapse=", "), ".\n", sep="")
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
       }
     }
   }
@@ -228,7 +228,7 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
       method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
     }
   }
-  
+
   # check for too ambitious harm.range
   if (max(harm.range) > (min(sapply(Out$coo, nrow))/2 + 1)) {
     harm.range <- floor(seq(1, q/2 - 1, length = 6))
@@ -346,7 +346,7 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
   nc <- nb.pts
   nk <- length(id)
   res <- array(NA, dim = c(nr, nc, nk),
-               dimnames = list(paste0("h", harm.range), 
+               dimnames = list(paste0("h", harm.range),
                                paste("pt", 1:nb.pts), names(Coo)[id]))
   # progressbar
   if (nk > 5) {
@@ -483,7 +483,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
                      xlim=c(drop+1, nb.h), ylim=c(0, 100),
                      title = "Harmonic power of coefficients",
                      lineat.y = c(90, 95, 99, 99.9), verbose=TRUE) {
-  
+
   # we swith among methods, with a messsage
   if (missing(method)) {
     if (verbose) cat(" * Method not provided. hpow | efourier is used.\n")
@@ -539,7 +539,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
     #abline(h = lineat.y, lty = 1, col = col.heat(length(lineat.y)))
     #         lines(x, res[2, ], col="grey50")
     #         segments(x, res[1, ], x, res[3, ])
-    
+
     devmat.plot <- function(q, x, cols.poly, med.col, opacity.max=0.5, ...){
       if (missing(x)) x <- 1:ncol(q)
       nq <- floor(nrow(q)/2)
@@ -554,9 +554,9 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
       if (nrow(q) %% 2) {
         lines(x, q[nq+1, ], col=med.col, ...)}
     }
-    
+
     devmat.plot(res, x, type="o", cex=2/3, pch=20, lty=3)
-    
+
     box()
   }
   if (verbose){
@@ -604,23 +604,33 @@ OutCoe <- function(coe = matrix(), fac = data.frame(), method,
 #' @export
 print.OutCoe <- function(x, ...) {
   OutCoe <- x
-  p <- pmatch(OutCoe$method[1], c("eFourier", "rFourier", "tFourier"))
-  met <- switch(p, "elliptical Fourier", "radii variation",
-                "tangent angle")
+  if (length(OutCoe$method)>1) {
+    met <- c("combined:", paste0(OutCoe$method, collapse=" + "))
+    met <- c(met, "analyses ]\n")
+    combined <- TRUE
+  } else {
+    p <- pmatch(OutCoe$method[1], c("eFourier", "rFourier", "tFourier"))
+    met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
+    met <- c(met, "analysis ]\n")
+    combined <- FALSE}
   ### Header
-  cat("An OutCoe object [", met, "analysis ]\n")
+  cat("An OutCoe object [", met)
   cat(rep("-", 20), "\n", sep = "")
   coo.nb <- nrow(OutCoe$coe)  #nrow method ?
-  harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
-  # number of outlines and harmonics
-  cat(" - $coe:", coo.nb, "outlines described, ")
-  cat(harm.nb, "harmonics\n")
+  if (!combined){
+    harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
+    # number of outlines and harmonics
+    cat(" - $coe:", coo.nb, "outlines described, ")
+    cat(harm.nb, "harmonics\n")
   # lets show some of them for a quick inspection
   cat(" - $coe: 1st harmonic coefficients from random individuals: \n")
   row.eg <- sort(sample(coo.nb, ifelse(coo.nb < 5, coo.nb, 5), replace = FALSE))
   col.eg <- coeff.sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
   print(round(OutCoe$coe[row.eg, col.eg], 3))
   cat("etc.\n")
+  } else {
+    cat(" - $coe: harmonic coefficients\n")
+  }
   # number of grouping factors
   df <- OutCoe$fac
   nf <- ncol(df)
@@ -636,10 +646,10 @@ print.OutCoe <- function(x, ...) {
       # cosmectics below
       if (sum(nchar(lev.i))>60){
         maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "': ", paste(lev.i[1:maxprint], collapse=", "),
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
             " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
       } else {
-        cat("     '", colnames(df)[i], "': ", paste(lev.i, collapse=", "), ".\n", sep="")
+        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
       }
     }
   }
