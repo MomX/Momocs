@@ -142,10 +142,10 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (class(fac)=="formula"){
       f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
       fac <- interaction(f0)
-      fac <- factor(fac) # I love R
     }
   # fac provided, as column name or id
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
+  fac <- factor(fac) # I love R
   # if fac as been provided, we now have a valid fac
     #
     # col handling
@@ -212,6 +212,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   .title(title)
   if (eigen)     .eigen(PCA$sdev, xax, yax, ev.names="Eigenvalues")
   if (box) box()
+  invisible(list(xy=xy, fac=fac))
 }
 
 #' Plots a combination of the three first PCs
