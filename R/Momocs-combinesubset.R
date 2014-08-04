@@ -2,7 +2,7 @@
 
 # bloody dirty todo
 #' Create subsets of Coo objects
-#' 
+#'
 #' Pretty useful in morphometrics. Imagine you have a \link{Coo} or a \link{Coe} object,
 #' that combines several different \emph{groups}, whatever \emph{groups} are : species, views, etc.
 #' You may be interested in doing separated analyses (even if you could combine them later), then this
@@ -29,7 +29,7 @@ subset.Coo <- function(x, subset, ...) {
     retain <- eval(e, Coo$fac, parent.frame())
     Coo2 <- Coo
     Coo2$coo <- Coo$coo[retain]
-    if (length(Coo$ldk) > 0) 
+    if (length(Coo$ldk) > 0)
         Coo2$ldk <- Coo$ldk[retain]
     if (ncol(Coo$fac) > 0) {
         Coo2$fac <- Coo$fac
@@ -60,7 +60,7 @@ subset.Coe <- function(x, subset, ...) {
 # merge method for Out objects (experimental)
 
 #' Combine Out objects
-#' 
+#'
 #' @param ... a list of Out objects
 #' @seealso \link{subset.Coo}
 #' @rdname combine
@@ -75,6 +75,7 @@ combine.Out <- function(...) {
     args <- list(...)
     Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
     Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
+    Out$fac <- .refactor(Out$fac)
     if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
         Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
     }
@@ -87,6 +88,19 @@ combine.Opn <- combine.Out
 
 #' @rdname combine
 #' @export
+combine.Ldk <- function(...) {
+  args <- list(...)
+  Ldk <- Ldk(do.call(c, lapply(args, function(x) c(x$coo))))
+  Ldk$fac <- do.call("rbind", lapply(args, function(x) x$fac))
+  if (any(lapply(args, function(x) length(x$links)) != 0)) {
+    Ldk$ldk <- do.call("c", lapply(args, function(x) x$links))
+  }
+  return(Ldk)
+}
+
+
+#' @rdname combine
+#' @export
 combine.OutCoe <- function(...) {
     args <- list(...)
     # Out <- Out(do.call( c, lapply( args, c )))
@@ -94,9 +108,23 @@ combine.OutCoe <- function(...) {
     facS <- args[[1]]$fac
     methodS <- do.call(c, lapply(args, function(x) x$method))
     normS <- do.call(c, lapply(args, function(x) x$norm))
-    OutCoe <- OutCoe(coe = coeS, fac = facS, method = methodS, 
-        norm = normS)
+    OutCoe <- OutCoe(coe = coeS, fac = facS, method = methodS, norm = normS)
     return(OutCoe)
 }
 
-##### end subset-combine 
+#' @rdname combine
+#' @export
+combine.OpnCoe <- function(...) {
+  args <- list(...)
+  coeS <- do.call("cbind", lapply(args, function(x) x$coe))
+  facS <- args[[1]]$fac
+  methodS <- do.call(c, lapply(args, function(x) x$method))
+  baseline1S <- do.call(c, lapply(args, function(x) x$baseline1))
+  baseline2S <- do.call(c, lapply(args, function(x) x$baseline2))
+  r2S <- do.call(c, lapply(args, function(x) x$r2))
+  modS <- do.call(c, lapply(args, function(x) x$mod))
+  OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS, baseline1=baseline1S, baseline2=baseline2S, mod=modS, r2=r2S)
+  return(OpnCoe)
+}
+
+##### end subset-combine
