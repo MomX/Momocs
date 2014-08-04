@@ -22,8 +22,8 @@ specifying the grouping structure}
 an \code{Ldk} object
 }
 \description{
-In Momocs, \code{Ldk} classes objects are wrapping around
-lists of configurations of landmarks, along with other informations,
+In Momocs, \code{Ldk} classes objects are
+lists of configurations of \bold{l}an\bold{d}mar\bold{k}s, with optionnal components,
 on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. todo-Procrustes can be applied.
  \code{Ldk} objects are primarily \code{\link{Coo}} objects.
@@ -31,6 +31,9 @@ and specific methods (e.g. todo-Procrustes can be applied.
 \details{
 All the shapes in x must have the same number of landmarks. If you are
 trying to make an Ldk object from an Out or an Opn object, try \link{coo.sample}.
+}
+\note{
+\code{Ldk} methods must be, so far, considered as experimental in Momocs.
 }
 \examples{
 methods(class=Ldk)
