@@ -6,7 +6,7 @@
 \method{plot}{LDA}(x, xax = 1, yax = 2, points = TRUE, col = "#000000",
   pch = 20, cex = 0.5, palette = col.summer2, center.origin = FALSE,
   zoom = 1, grid = TRUE, nb.grids = 3, morphospace = TRUE,
-  pos.shp = "full", amp.shp = 1, size.shp = 15, nb.shp = 12,
+  pos.shp = "full", amp.shp = 1, size.shp = 1, nb.shp = 12,
   nr.shp = 6, nc.shp = 5, pts.shp = 60, border.shp = "#00000032",
   lwd.shp = 1, col.shp = "#00000019", stars = FALSE, ellipses = FALSE,
   conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75,
