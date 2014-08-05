@@ -14,17 +14,17 @@
 .morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24, 
     nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 15, pts.shp = 60, 
     col.shp = "#00000011", border.shp = "#00000055", lwd.shp = 1) {
-    
+    # We retrive the values corresponding to the two plotted axes and the meanshape
     xy <- PCA$x[, c(xax, yax)]
     rot <- PCA$rotation[, c(xax, yax)]
     mshape <- PCA$mshape
     # we define the position of shapes
     pos <- pos.shapes(xy, pos.shp = pos.shp, nb.shp = nb.shp, 
         nr.shp = nr.shp, nc.shp = nc.shp)
-    # according to the type of morphometrics applied, we
-    # reconstruct shapes
+    # according to the type of morphometrics applied, we switch the method
+    # and the way we plot reconstruct shapes (coo.draw ie polygon, or just lines)
     method <- PCA$method
-    ## outlines
+    
     if (method == "eFourier") {
         shp <- PCA2shp.efourier(pos = pos, rot = rot, mshape = mshape, 
             amp.shp = amp.shp, pts.shp = pts.shp)

@@ -37,4 +37,5 @@ x <- 1:10
 barplot(x, col=summer10.transp8)
 barplot(x/2, col=summer10.transp2, add=TRUE)
 }
+\keyword{Graphics}
 

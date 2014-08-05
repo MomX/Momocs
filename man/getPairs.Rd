@@ -39,4 +39,6 @@ segments(bot.pairs$session1[, 1], bot.pairs$session1[, 2],
        bot.pairs$session2[, 1], bot.pairs$session2[, 2],
        col=col.summer(2)[bot.pairs$fac$type])
 }
+\keyword{Coe}
+\keyword{Multivariate}
 

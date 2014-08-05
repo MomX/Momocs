@@ -42,5 +42,5 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
 \seealso{
 \link{removeAsymmetric} and \link{removeSymmetric}.
 }
-\keyword{OutCoe}
+\keyword{eFourier}
 

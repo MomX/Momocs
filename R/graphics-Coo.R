@@ -80,7 +80,7 @@ plot.Coo <- function(x, id, ...) {
 #' @note When applied on a \link{OutCoe} object, a wrapper 
 #' for \code{stack(as.Out(OutCoe), ...)}. In that case, 
 #' \code{...} feeds \code{stack} itself. (same thing for \code{OpnCoe} to come)
-#' @keywords Graphics Out Opn Ldk OutCoe
+#' @keywords Graphics Out Opn Ldk
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -223,7 +223,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' for \code{panel(as.Out(OutCoe), ...)}. In that case, 
 #' \code{...} feeds \code{panel} itself. (same thing for \code{OpnCoe} to come)
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
-#' @keywords Graphics Out Opn Ldk OutCoe
+#' @keywords Graphics Out Opn Ldk
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)

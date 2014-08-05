@@ -1,6 +1,6 @@
 # PCA on Coe objects
 
-# PCA -----------------------------------------------------
+# 1. PCA calculation and builder --------------------------
 #' Principal component analysis on Coe objects
 #'
 #' Performs a PCA on \link{Coe} objects, using \link{prcomp}.
@@ -100,7 +100,7 @@ PCA.default <- function(x, scale. = TRUE, center = TRUE) {
   return(PCA)
 }
 
-# Bridges -------------------------------------------------
+# 2. PCA Bridges ------------------------------------------
 #' @rdname PCA
 #' @export
 as.PCA <- function(x, fac){UseMethod("as.PCA")}
@@ -146,7 +146,7 @@ print.PCA <- function(x, ...){
   cat(" - All components: ",  paste(names(x), collapse=", "), ".\n", sep="")
 }
 
-# PCA methods ---------------------------------------------
+# 3. PCA methods ------------------------------------------
 #' Get paired individual on a Coe, PCA or LDA objects
 #'
 #' If you have paired individuals, i.e. before and after a treatment or for repeated measures,
@@ -158,6 +158,7 @@ print.PCA <- function(x, ...){
 #' @return a list with components \code{x1} all coefficients/scores corresponding to the
 #' first level of the \code{fac} provided; \code{x2} same thing for the second level;
 #' \code{fac} the corresponding \code{fac}.
+#' @keywords Coe Multivariate
 #' @examples
 #' data(bot)
 #' bot2 <- bot1 <- coo.scale(coo.center(coo.sample(bot, 60)))

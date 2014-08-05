@@ -1,4 +1,4 @@
-# 1. Out --------------------------------------------------
+# 1. Out builders ---------------------------------------------
 
 #' Builds an Out object
 #'
@@ -568,8 +568,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
 }
 
 
-# 3. OutCoe definition
-# -------------------------------------------------------
+#  3. OutCoe builders -----------------------------------------------
 #' Builds an OutCoe object
 #'
 #' In Momocs, \code{OutCoe} classes objects are wrapping around
@@ -655,8 +654,7 @@ print.OutCoe <- function(x, ...) {
   }
 }
 
-# 4. Out morphometrics
-# ---------------------------------------------------------
+# 4. Out morphometrics ---------------------------------------------------------
 #' Calculates elliptical Fourier transforms on Out objects
 #'
 #' A wrapper for \link{efourier} to be applied on Out objects.
@@ -806,8 +804,7 @@ tFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
                 norm = norm))
 }
 
-# 5. Out + landmarks
-# ---------------------------------------------------------
+# 5. Out + landmarks --------------------------------------
 
 #' Define landmarks on Out and Opn objects
 #'
@@ -875,7 +872,7 @@ getLandmarks.Out <- function(Coo) {
 #' @export
 getLandmarks.Opn <- getLandmarks.Out
 
-# Symmetry -----------------
+# 6. Out symmetry --------------------------------------------
 
 #' Calcuates symmetry indices on OutCoe objects
 #'
@@ -900,7 +897,7 @@ getLandmarks.Opn <- getLandmarks.Out
 #' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
 #' }
 #' @seealso \link{removeAsymmetric} and \link{removeSymmetric}.
-#' @keywords OutCoe
+#' @keywords eFourier
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
@@ -965,6 +962,7 @@ symmetry.OutCoe <- function(OutCoe) {
 #' # strange shapes because the original shape was mainly symmetric and would need its
 #' # symmetric (eg its average) for a proper reconstruction. Should only be used like that:
 #' plot(botAsymp, morpho=FALSE)
+#' @keywords eFourier
 #' @rdname removeAsymmetric
 #' @aliases removeSymmetric
 #' @export
@@ -1010,8 +1008,7 @@ removeSymmetric.OutCoe <- function(OutCoe) {
   return(OutCoe)
 }
 
-# Bonus
-# ------------------------------------------------------------------
+# 7. Out misc ----------------------------------------------
 
 #' Ptolemaic ellipses and illustration of eFourier
 #'
@@ -1025,6 +1022,7 @@ removeSymmetric.OutCoe <- function(OutCoe) {
 #' @param nb.pts \code{integer}. The number of points to use to display shapes.
 #' @param palette A color palette.
 #' @param legend \code{logical}. Whether to plot the legend box.
+#' @keywords Graphics
 #' @references
 #' This method has been inspired by the figures found in the followings papers.
 #' Kuhl FP, Giardina CR. 1982. Elliptic Fourier features of a closed contour.

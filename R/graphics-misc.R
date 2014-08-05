@@ -103,6 +103,7 @@ col.grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
 #' @param cols on or more colors, provided as hexadecimal values
 #' @param transp numeric between 0 and 1, the value of the transparency to obtain
 #' @rdname colors_transp
+#' @keywords Graphics
 #' @examples
 #' x <- col.transp(10, col='#000000')
 #' x

@@ -240,25 +240,29 @@
 
 # add eigen
 #' @export
-.eigen <- function(ev, xax, yax, ratio = 0.08, ev.names) {
-    plt0 <- par("plt")
-    on.exit(par(plt = plt0))
-    g <- 0.015
-    w <- min(c(plt0[2] - plt0[1]), plt0[4] - plt0[3]) * ratio
-    par(plt = c(plt0[2] - w - g, plt0[2] - g, plt0[3] + g * 1.5,
-        plt0[3] + w + g * 1.5), xpd = NA, new = TRUE)
-    cols <- rep("grey80", 5)
-    cols[c(xax, yax)] <- "grey40"
-    var <- ev^2
-    cs.var <- cumsum(var)/sum(var)
-    k <- ifelse(max(c(xax, yax)) > 5, max(c(xax, yax)), 5)
-    barplot(var[1:k], axes = FALSE, col = cols, border = NA)
-    gy <- strheight(ev.names, cex = 2/3)
-    title(main = ev.names, cex.main = 0.6, outer = FALSE, line = 0.15,
+.eigen <- function(ev, xax, yax, ratio = 0.08, ev.names="") {
+  op <- par(no.readonly = TRUE)
+  #on.exit(par(op))
+  plt0 <- par("plt")
+  #on.exit(par(plt = plt0))
+  g <- 0.015
+  w <- min(c(plt0[2] - plt0[1]), plt0[4] - plt0[3]) * ratio
+  par(plt = c(plt0[2] - w - g, 
+              plt0[2] - g,
+              plt0[3] + g * 1.5,
+              plt0[3] + w + g * 1.5),
+      xpd = NA, new =  TRUE)
+  cols <- rep("grey80", 5)
+  cols[c(xax, yax)] <- "grey40"
+  var <- ev^2
+  cs.var <- cumsum(var)/sum(var)
+  k <- ifelse(max(c(xax, yax)) > 5, max(c(xax, yax)), 5)
+  barplot(var[1:k], axes = FALSE, col = cols, border = NA)
+  gy <- strheight(ev.names, cex = 2/3)
+  title(main = ev.names, cex.main = 0.6, outer = FALSE, line = 0.15,
         col.main = "grey40", font.main = 1)
+  par(op)
 }
-# text(gy, 0, labels=ev.names, pos=4, cex=2/3, srt=90,
-# col='grey40')}
 
 # names axes
 #' @export
@@ -299,7 +303,7 @@
     text(pos[1], pos[3] + gy, pos = 4, labels = title, font = 2, cex = 0.8)
 }
 
-# experimental below and maybe useless ##############
+# Experimental and maybe useless --------------------
 # combine factor (a quick wrapper around interaction)
 # for PCA, LDA or any data.frame
 #' @export

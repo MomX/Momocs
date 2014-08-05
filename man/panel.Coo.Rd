@@ -83,5 +83,4 @@ panel(bot, fac='type', palette=col.spring, names=TRUE)
 \keyword{Ldk}
 \keyword{Opn}
 \keyword{Out}
-\keyword{OutCoe}
 
