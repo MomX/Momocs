@@ -64,6 +64,7 @@
 #' @param rug logical whether to add rug to margins
 #' @param title character a name for the plot
 #' @param box whether to draw a box around the plotting region
+#' @param old.par whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.
 #' @param ... useless here, just to fit the generic plot
 #' @details Widely inspired by the philosophy behind graphical functions
 #' of the ade4 R package.
@@ -90,45 +91,46 @@
 #' plot(wpp, 1)
 #' @export
 plot.PCA <- function(x, fac, xax=1, yax=2,
-   #color choice
-   points=TRUE, col="#000000", pch=20, cex=.cex(nrow(PCA$x)), palette=col.summer2,
-   #.frame
-   center.origin=FALSE, zoom=1,
-   #.grid
-   grid=TRUE, nb.grids=3,
-   #shapes
-   morphospace=TRUE, pos.shp="full", amp.shp=1,
-   size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
-   pts.shp=60, border.shp=.transp("#000000", 0.5), lwd.shp=1, col.shp=.transp("#000000", 0.9),
-   #stars
-   stars=FALSE,
-   #ellipses
-   ellipses=FALSE, conf.ellipses=0.5,
-   #ellipsesax
-   ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
-   lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
-   #convexhulls
-   chull=FALSE, chull.lty=3,
-   #kde2d
-   density=FALSE, lev.density=20,
-   contour = FALSE, lev.contour=3, n.kde2d=100,
-   #delaunay
-   delaunay=FALSE,
-   #loadings
-   loadings=FALSE,
-   #labels
-   labelsgroups=TRUE, cex.labelsgroups=0.8,
-   rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
-   #axisnames
-   axisnames=TRUE,
-   #axisvar
-   axisvar=TRUE,
-   #eigen
-   eigen=TRUE,
-   #
-   rug=TRUE,
-   title=substitute(x), box=TRUE, ...
+                     #color choice
+                     points=TRUE, col="#000000", pch=20, cex=0.5, palette=col.summer2,
+                     #.frame
+                     center.origin=FALSE, zoom=1,
+                     #.grid
+                     grid=TRUE, nb.grids=3,
+                     #shapes
+                     morphospace=TRUE, pos.shp="full", amp.shp=1,
+                     size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
+                     pts.shp=60, border.shp=.transp("#000000", 0.5), lwd.shp=1, col.shp=.transp("#000000", 0.9),
+                     #stars
+                     stars=FALSE,
+                     #ellipses
+                     ellipses=FALSE, conf.ellipses=0.5,
+                     #ellipsesax
+                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
+                     lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
+                     #convexhulls
+                     chull=FALSE, chull.lty=3,
+                     #kde2d
+                     density=FALSE, lev.density=20,
+                     contour = FALSE, lev.contour=3, n.kde2d=100,
+                     #delaunay
+                     delaunay=FALSE,
+                     #loadings
+                     loadings=FALSE,
+                     #labels
+                     labelsgroups=TRUE, cex.labelsgroups=0.8,
+                     rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
+                     #axisnames
+                     axisnames=TRUE,
+                     #axisvar
+                     axisvar=TRUE,
+                     #eigen
+                     eigen=TRUE,
+                     # various
+                     rug=TRUE,
+                     title=substitute(x), box=TRUE, old.par=TRUE, ...
 ){
+  ##### Preliminaries
   PCA <- x
   xy <- PCA$x[, c(xax, yax)]
   ### we check and prepare everything related to groups
@@ -137,17 +139,16 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     fac <- NULL
     col.groups <- col
   } else {
-  ### fac provided
-  # fac provided, as formula
+    ### fac provided
+    # fac provided, as formula
     if (class(fac)=="formula"){
       f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
       fac <- interaction(f0)
     }
-  # fac provided, as column name or id
+    # fac provided, as column name or id
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-  fac <- factor(fac) # I love R
-  # if fac as been provided, we now have a valid fac
-    #
+    fac <- factor(fac) # I love R
+    # if 'fac' has been provided, we now have a valid fac
     # col handling
     if (!missing(col)){
       if (length(col)==nlevels(fac)) {
@@ -176,9 +177,11 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if ((density) & missing(ellipses)) ellipses <- FALSE
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
+  
+  ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
-  on.exit(par(opar))
+  if (old.par) on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
   # we initate it
   .frame(xy, center.origin, zoom=zoom)
@@ -280,7 +283,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
   } else {
     no.fac <- FALSE
   }
-
+  
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   fl <- levels(fac)
   fn <- nlevels(fac)

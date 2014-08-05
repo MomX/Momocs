@@ -55,6 +55,7 @@
 #' @param rug logical whether to add rug to margins
 #' @param title character a name for the plot
 #' @param box whether to draw a box around the plotting region
+#' @param old.par whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.
 #' @param ... useless here, just to fit the generic plot
 #' @details Widely inspired by the philosophy behind graphical functions
 #' of the ade4 R package.
@@ -72,7 +73,7 @@
 #' @export
 plot.LDA <- function(x, xax=1, yax=2,
   #color choice
-  points=TRUE, col="#000000", pch=20, cex=.cex(nrow(LDA$mod.pred$x)), palette=col.summer2,
+  points=TRUE, col="#000000", pch=20, cex=0.5, palette=col.summer2,
   #.frame
   center.origin=FALSE, zoom=1,
   #.grid
@@ -108,7 +109,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   eigen=TRUE,
   #
   rug=TRUE,
-  title=substitute(x), box=TRUE, ...
+  title=substitute(x), box=TRUE, old.par=TRUE, ...
 ){
   LDA <- x
   fac <- LDA$fac
@@ -162,7 +163,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
-  on.exit(par(opar))
+  if (old.par) on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
   
   # we initate it

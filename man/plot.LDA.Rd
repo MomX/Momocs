@@ -4,19 +4,19 @@
 \title{Plots Linear Discriminant Analysis}
 \usage{
 \method{plot}{LDA}(x, xax = 1, yax = 2, points = TRUE, col = "#000000",
-  pch = 20, cex = .cex(nrow(LDA$mod.pred$x)), palette = col.summer2,
-  center.origin = FALSE, zoom = 1, grid = TRUE, nb.grids = 3,
-  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 15,
-  nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
-  border.shp = "#00000032", lwd.shp = 1, col.shp = "#00000019",
-  stars = FALSE, ellipses = FALSE, conf.ellipses = 0.5,
-  ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75, 0.9),
-  lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
+  pch = 20, cex = 0.5, palette = col.summer2, center.origin = FALSE,
+  zoom = 1, grid = TRUE, nb.grids = 3, morphospace = TRUE,
+  pos.shp = "full", amp.shp = 1, size.shp = 15, nb.shp = 12,
+  nr.shp = 6, nc.shp = 5, pts.shp = 60, border.shp = "#00000032",
+  lwd.shp = 1, col.shp = "#00000019", stars = FALSE, ellipses = FALSE,
+  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75,
+  0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labelsgroups = TRUE,
   cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
-  eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE, ...)
+  eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,
+  old.par = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class "LDA", typically obtained with \link{LDA}}
@@ -117,6 +117,8 @@ or a data.frame for \link{pos.shapes}}
 \item{title}{character a name for the plot}
 
 \item{box}{whether to draw a box around the plotting region}
+
+\item{old.par}{whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.}
 
 \item{...}{useless here, just to fit the generic plot}
 }
