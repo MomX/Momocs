@@ -2,18 +2,23 @@
 \name{ManovaPW}
 \alias{ManovaPW}
 \alias{ManovaPW.Coe}
-\title{Pairwise Multitlivariate analyses of variance}
+\alias{ManovaPW.PCA}
+\title{Pairwise Multivariate analyses of variance}
 \usage{
-ManovaPW(Coe, fac, verbose, ...)
+ManovaPW(x, fac, verbose, ...)
 
-\method{ManovaPW}{Coe}(Coe, fac, verbose = FALSE, ...)
+\method{ManovaPW}{Coe}(x, fac, verbose = FALSE, ...)
+
+\method{ManovaPW}{PCA}(x, fac, verbose = FALSE, retain = 1:5, ...)
 }
 \arguments{
-\item{Coe}{a Coe object}
+\item{x}{a \link{Coe} or a \link{PCA} object}
 
 \item{fac}{a name (or its id) of a grouping factor in \code{$fac} or a factor}
 
 \item{verbose}{to feed \link{Manova}}
+
+\item{retain}{the number of PCaxis to retain}
 
 \item{...}{more arguments to feed \link{Manova}}
 }
@@ -28,11 +33,13 @@ may be very long, see examples):
 }
 }
 \description{
-A wrapper for pairwise \link{Manova}s on \link{Coe} objects.
+A wrapper for pairwise \link{Manova}s on \link{Coe} objects. Calculates a Manova for every
+pairwise combination of the factor provided.
 }
 \note{
+Needs a review and should be considered as experimental.
 If the fac passed has only two levels, there is only pair and it is
-equivalent to \link{Manova}.
+equivalent to \link{Manova}. \code{ManovaPW.PCA} works with the regular \link{manova}.
 }
 \examples{
 data(bot)
@@ -52,7 +59,7 @@ res$stars.tab
 res$summary
 }
 \seealso{
-\link{Manova}
+\link{Manova}, \link{manova}.
 }
 \keyword{Multivariate}
 

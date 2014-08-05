@@ -42,7 +42,7 @@ If \link{removeAsymmetric} or \link{removeSymmetric}
 have been used on OutCoe object, the zero-ed harmonics will be removed with a message.
 }
 \note{
-Needs a review #todo.
+Needs a review and should be considered as experimental.
 }
 \examples{
 data(bot)
