@@ -55,6 +55,7 @@ PCA.OutCoe <- function(x, scale. = FALSE, center = TRUE) {
   PCA$fac <- OutCoe$fac
   PCA$mshape <- apply(OutCoe$coe, 2, mean)
   PCA$method <- OutCoe$method
+  PCA$cuts   <- OutCoe$cuts
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)
 }
@@ -70,6 +71,7 @@ PCA.OpnCoe <- function(x, scale. = FALSE, center = TRUE) {
   PCA$mod <- OpnCoe$mod  #the only diff so far
   PCA$baseline1 <- OpnCoe$baseline1
   PCA$baseline2 <- OpnCoe$baseline2
+  PCA$cuts   <- OpnCoe$cuts
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)
 }
@@ -83,6 +85,7 @@ PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE) {
   PCA$fac <- LdkCoe$fac
   PCA$mshape <- apply(LdkCoe$coe, 2, mean)
   PCA$method <- "procrustes"
+  PCA$cuts   <- LdkCoe$cuts
   # PCA$mod <- OpnCoe$mod #the only diff so far PCA$baseline1
   # <- OpnCoe$baseline1 PCA$baseline2 <- OpnCoe$baseline2
   class(PCA) <- c("PCA", class(PCA))

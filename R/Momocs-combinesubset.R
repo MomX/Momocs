@@ -95,6 +95,8 @@ combine.Ldk <- function(...) {
   if (any(lapply(args, function(x) length(x$links)) != 0)) {
     Ldk$ldk <- do.call("c", lapply(args, function(x) x$links))
   }
+  cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
+  Ldk$cuts <- cutS
   return(Ldk)
 }
 
@@ -109,6 +111,8 @@ combine.OutCoe <- function(...) {
     methodS <- do.call(c, lapply(args, function(x) x$method))
     normS <- do.call(c, lapply(args, function(x) x$norm))
     OutCoe <- OutCoe(coe = coeS, fac = facS, method = methodS, norm = normS)
+    cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
+    OutCoe$cuts <- cutS
     return(OutCoe)
 }
 
@@ -124,6 +128,8 @@ combine.OpnCoe <- function(...) {
   r2S <- do.call(c, lapply(args, function(x) x$r2))
   modS <- do.call(c, lapply(args, function(x) x$mod))
   OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS, baseline1=baseline1S, baseline2=baseline2S, mod=modS, r2=r2S)
+  cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
+  OpnCoe$cuts <- cutS
   return(OpnCoe)
 }
 
