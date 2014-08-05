@@ -55,6 +55,9 @@ PCA.OutCoe <- function(x, scale. = FALSE, center = TRUE) {
   PCA$fac <- OutCoe$fac
   PCA$mshape <- apply(OutCoe$coe, 2, mean)
   PCA$method <- OutCoe$method
+  if (!is.null(OutCoe$baseline1)){
+    PCA$baseline1 <- OutCoe$baseline1
+    PCA$baseline2 <- OutCoe$baseline2}
   PCA$cuts   <- OutCoe$cuts
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)
