@@ -99,7 +99,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      grid=TRUE, nb.grids=3,
                      #shapes
                      morphospace=TRUE, pos.shp="full", amp.shp=1,
-                     size.shp=15, nb.shp=12, nr.shp=6, nc.shp=5,
+                     size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
                      pts.shp=60, border.shp=.transp("#000000", 0.5), lwd.shp=1, col.shp=.transp("#000000", 0.9),
                      #stars
                      stars=FALSE,
@@ -191,7 +191,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (contour) .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
   if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
-  if (morphospace & !is.null(PCA$method) & length(PCA$method)<2) {
+  if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
     .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
                     nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,

@@ -6,7 +6,7 @@
 \method{plot}{PCA}(x, fac, xax = 1, yax = 2, points = TRUE,
   col = "#000000", pch = 20, cex = 0.5, palette = col.summer2,
   center.origin = FALSE, zoom = 1, grid = TRUE, nb.grids = 3,
-  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 15,
+  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 1,
   nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
   border.shp = .transp("#000000", 0.5), lwd.shp = 1,
   col.shp = .transp("#000000", 0.9), stars = FALSE, ellipses = FALSE,
