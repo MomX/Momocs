@@ -1,10 +1,10 @@
 ##### Miscellaneous functions
 
 #' Calculates euclidean distance between two points.
-#' 
+#'
 #' \code{ed} simply calculates euclidean distance between two points defined by
 #' their (x; y) coordinates.
-#' 
+#'
 #' @param pt1 (x; y) coordinates of the first point.
 #' @param pt2 (x; y) coordinates of the second point.
 #' @return Returns the euclidean distance between the two points.
@@ -18,11 +18,11 @@ ed <- function(pt1, pt2) {
 }
 
 #' Calculates euclidean intermediate between two points.
-#' 
+#'
 #' \code{edi} simply calculates coordinates of a points at the relative
 #' distance \code{r} on the \code{pt1-pt2} defined by their (x; y) coordinates.
 #' This function is used internally but may be of interest for other analyses.
-#' 
+#'
 #' @param pt1 \eqn{(x; y)} coordinates of the first point.
 #' @param pt2 \eqn{(x; y)} coordinates of the second point.
 #' @param r the relative distance from \code{pt1} to \code{pt2}.
@@ -37,11 +37,11 @@ edi <- function(pt1, pt2, r = 0.5) {
 }
 
 #' Calculates euclidean distance every pairs of points in two matrices.
-#' 
+#'
 #' \code{edm} returns the euclidean distances between points \deqn{1 -> n} of
 #' two 2-col matrices of the same dimension. This function is used internally
 #' but may be of interest for other analyses.
-#' 
+#'
 #' If one wishes to align two (or more shapes) Procrustes surimposition may
 #' provide a better solution.
 #' @param m1 The first \code{matrix} of coordinates.
@@ -61,14 +61,14 @@ edm <- function(m1, m2) {
 
 #' Calculates the shortest euclidean distance found for every point of one
 #' matrix among those of a second.
-#' 
+#'
 #' \code{edm.nearest} calculates the shortest euclidean distance found for
 #' every point of one matrix among those of a second. In other words, if
 #' \code{m1, m2} have \code{n} rows, the result will be the shortest distance
 #' for the first point of \code{m1} to any point of \code{m2} and so on,
 #' \code{n} times. This function is used internally but may be of interest for
 #' other analyses.
-#' 
+#'
 #' So far this function is quite time consumming since it performs \deqn{ n
 #' \times n } euclidean distance computation.  If one wishes to align two (or
 #' more shapes) Procrustes surimposition may provide a better solution.
@@ -89,9 +89,9 @@ edm <- function(m1, m2) {
 #' edm.nearest(x, x+rnorm(10), full=TRUE)
 #' @export
 edm.nearest <- function(m1, m2, full = FALSE) {
-    if (!is.matrix(m1) | !is.matrix(m2)) 
+    if (!is.matrix(m1) | !is.matrix(m2))
         stop("Matrices must be provided")
-    if (ncol(m1) != 2 | ncol(m2) != 2) 
+    if (ncol(m1) != 2 | ncol(m2) != 2)
         stop("2-cols matrices must be provided")
     nr <- nrow(m1)
     pos <- d <- numeric(nr)
@@ -101,14 +101,14 @@ edm.nearest <- function(m1, m2, full = FALSE) {
         d[i] <- min(di)
         pos[i] <- which.min(di)
     }
-    if (full) 
+    if (full)
         return(list(d = d, pos = pos)) else return(d)
 }
 
 ##### Miscellaneous functions for Fourier-based approaches
 
 #' Helps to select a given number of harmonics from a numerical vector.
-#' 
+#'
 #' \code{coeff.sel} helps to select a given number of harmonics by returning
 #' their indices when arranged as a numeric vector. For instance, harmonic
 #' coefficients are arranged in the \code{$coe} slot of \code{\link{Coe}}-objects in
@@ -118,7 +118,7 @@ edm.nearest <- function(m1, m2, full = FALSE) {
 #' variation and tangent angle approaches (see \link{rfourier} and
 #' \link{tfourier} respectively). . This function is used internally but might
 #' be of interest elwewhere.
-#' 
+#'
 #' @param retain \code{numeric}. The number of harmonics to retain.
 #' @param drop \code{numeric}. The number of harmonics to drop
 #' @param nb.h \code{numeric}. The maximum harmonic rank.
@@ -146,7 +146,7 @@ coeff.sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 }
 
 #' Converts a numerical description of harmonic coefficients to a named list.
-#' 
+#'
 #' \code{coeff.split} returns a named list of coordinates from a vector of
 #' harmonic coefficients. For instance, harmonic coefficients are arranged in
 #' the \code{$coe} slot of \code{Coe}-objects in that way: \deqn{A_1, \dots,
@@ -155,7 +155,7 @@ coeff.sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 #' and D_n} harmonic are absent for radii variation and tangent angle
 #' approaches (see \link{rfourier} and \link{tfourier} respectively). This
 #' function is used internally but might be of interest elwewhere.
-#' 
+#'
 #' @param cs A \code{vector} of harmonic coefficients.
 #' @param nb.h \code{numeric}. The maximum harmonic rank.
 #' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and
@@ -179,36 +179,38 @@ coeff.split <- function(cs, nb.h = 8, cph = 4) {
 }
 
 #' Calculates harmonic power given a list from e/t/rfourier
-#' 
+#'
 #' Given a list with \code{an, bn (and eventually cn and dn)}, returns the
 #' harmonic power.
-#' 
+#'
 #' @param xf A list with an, bn (and cn, dn) components, typically from a
 #' e/r/tfourier passed on coo.
 #' @return Returns a \code{vector} of harmonic power
 #' @keywords Miscellaneous
 #' @examples
-#' 
+#'
 #' data(bot)
 #' ef <- efourier(bot[1], 24)
 #' rf <- efourier(bot[1], 24)
 #' harm.pow(ef)
 #' harm.pow(rf)
-#' 
+#'
 #' plot(cumsum(harm.pow(ef)[-1]), type='o',
 #'   main='Cumulated harmonic power without the first harmonic',
 #'   ylab='Cumulated harmonic power', xlab='Harmonic rank')
-#' 
+#'
 #' @export
 harm.pow <- function(xf) {
     if (is.list(xf)) {
         if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
-            return((xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2)
+            hp <- (xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2
         } else {
             if (all(c("an", "bn") %in% names(xf))) {
-                return((xf$an^2 + xf$bn^2)/2)
+                hp <- (xf$an^2 + xf$bn^2)/2
             }
         }
+        names(hp) <- paste0("H", 1:length(hp))
+        return(hp)
     } else {
         stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")
     }
@@ -217,10 +219,10 @@ harm.pow <- function(xf) {
 ##### end misc Fourier
 
 #' Some vector utilities.
-#' 
+#'
 #' Returns ratio of norms and signed angle between two vectors provided as four
 #' numeric.
-#' 
+#'
 #' @param r1 the 'real' part of the first vector, i.e. difference in
 #' x-coordinates.
 #' @param i1 the 'imaginary' part of the first vector, i.e. difference in
@@ -235,7 +237,7 @@ harm.pow <- function(xf) {
 #' @keywords Miscellaneous
 #' @examples
 #' vecs.param(1, 0, 0, 2)
-#' 
+#'
 #' @export vecs.param
 vecs.param <- function(r1, i1, r2, i2) {
     x <- c(r1, i1, r2, i2)
@@ -248,7 +250,7 @@ vecs.param <- function(r1, i1, r2, i2) {
     r.norms <- sqrt((r2^2 + i2^2))/sqrt((r1^2 + i1^2))
     d1 <- sqrt(sum(r1^2 + i1^2))
     d2 <- sqrt(sum(r2^2 + i2^2))
-    return(list(r.norms = d1/d2, d.angle = atan2(i2, r2) - atan2(i1, 
+    return(list(r.norms = d1/d2, d.angle = atan2(i2, r2) - atan2(i1,
         r1)))
 }
 
@@ -297,10 +299,10 @@ vecs.param <- function(r1, i1, r2, i2) {
 #' @export
 .normalize <- function(x, min.x, max.x) {
     # damn long but default arguments are not accepted
-    if (missing(min.x)) 
+    if (missing(min.x))
         min.x <- min(x)
     x <- x - min(x)
-    if (missing(max.x)) 
+    if (missing(max.x))
         max.x <- max(x)
     x <- x/max.x
     return(x)
@@ -329,8 +331,8 @@ vecs.param <- function(r1, i1, r2, i2) {
 #' @export
 .mat.resize <- function(m, ratio) {
     dm <- floor(dim(m)/ratio)
-    return(m[round(seq(1, nrow(m), len = dm[1])), round(seq(1, 
+    return(m[round(seq(1, nrow(m), len = dm[1])), round(seq(1,
         ncol(m), len = dm[2]))])
 }
 
-##### End Miscellaneous 
+##### End Miscellaneous
