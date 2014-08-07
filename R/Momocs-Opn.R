@@ -98,7 +98,7 @@ print.Opn <- function(x, ...) {
   cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates)\n", sep="")
   # number of landmarks
   if (length(Opn$ldk) != 0) {
-    cat(" -", length(Opn$ldk[[1]]), "landmark(s) defined\n")
+    cat(" - $ldk", length(Opn$ldk[[1]]), "landmark(s) defined\n")
   } else {
     #     cat(" - No landmark defined\n")
   }
