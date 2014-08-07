@@ -3,6 +3,7 @@
 \alias{Manova}
 \alias{Manova.OpnCoe}
 \alias{Manova.OutCoe}
+\alias{Manova.PCA}
 \title{Multivariate analysis of variance on Coe objects}
 \usage{
 Manova(x, fac, test = "Hotelling", retain, drop, verbose)
@@ -12,6 +13,9 @@ Manova(x, fac, test = "Hotelling", retain, drop, verbose)
 
 \method{Manova}{OutCoe}(x, fac, test = "Hotelling", retain, drop,
   verbose = TRUE)
+
+\method{Manova}{PCA}(x, fac, test = "Hotelling", retain = 0.99, drop,
+  verbose = TRUE)
 }
 \arguments{
 \item{x}{a \link{Coe} object}
@@ -20,7 +24,8 @@ Manova(x, fac, test = "Hotelling", retain, drop, verbose)
 
 \item{test}{a test for \link{manova} (\code{'Hotelling'} by default)}
 
-\item{retain}{how many harmonics (or polynomials) to retain}
+\item{retain}{how many harmonics (or polynomials) to retain, for PCA
+the highest number of PC axis to retain, or the proportion of the variance to capture.}
 
 \item{drop}{how many harmonics (or polynomials) to drop}
 
@@ -30,16 +35,15 @@ Manova(x, fac, test = "Hotelling", retain, drop, verbose)
 a list of matrices of (x,y) coordinates.
 }
 \description{
-Performs multivariate analysis of variance on \link{Coe} objects.
+Performs multivariate analysis of variance on \link{PCA} objects and on \link{Coe} objects.
 }
 \details{
 For outlines, checks if the matrix of coefficients is of full rank, and if not removes the
-higher order harmonics (for Out objects).
-
-If OutCoe objects have been normalized, the first harmonic will be removed with a message.
-
-If \link{removeAsymmetric} or \link{removeSymmetric}
+higher order harmonics (for Out objects). If OutCoe objects have been normalized, the first harmonic will be removed with a message. If \link{removeAsymmetric} or \link{removeSymmetric}
 have been used on OutCoe object, the zero-ed harmonics will be removed with a message.
+
+Overall it is probably a better idea to work on the PCA scores
+(and it should ultimately be the same results).
 }
 \note{
 Needs a review and should be considered as experimental.

@@ -4,21 +4,21 @@
 
 #' Multivariate analysis of variance on Coe objects
 #'
-#' Performs multivariate analysis of variance on \link{Coe} objects.
+#' Performs multivariate analysis of variance on \link{PCA} objects and on \link{Coe} objects.
 #'
 #' For outlines, checks if the matrix of coefficients is of full rank, and if not removes the
-#' higher order harmonics (for Out objects).
-#'
-#' If OutCoe objects have been normalized, the first harmonic will be removed with a message.
-#'
-#' If \link{removeAsymmetric} or \link{removeSymmetric}
+#' higher order harmonics (for Out objects). If OutCoe objects have been normalized, the first harmonic will be removed with a message. If \link{removeAsymmetric} or \link{removeSymmetric}
 #' have been used on OutCoe object, the zero-ed harmonics will be removed with a message.
+#' 
+#' Overall it is probably a better idea to work on the PCA scores
+#' (and it should ultimately be the same results).
 #' @aliases Manova
 #' @rdname Manova
 #' @param x a \link{Coe} object
 #' @param fac a name of a colum in the \code{$fac} slot, or its id
 #' @param test a test for \link{manova} (\code{'Hotelling'} by default)
-#' @param retain how many harmonics (or polynomials) to retain
+#' @param retain how many harmonics (or polynomials) to retain, for PCA 
+#' the highest number of PC axis to retain, or the proportion of the variance to capture.
 #' @param drop how many harmonics (or polynomials) to drop
 #' @param verbose logical whether to print messages
 #' @return a list of matrices of (x,y) coordinates.
@@ -65,8 +65,7 @@ Manova.OpnCoe <- function(x, fac, test = "Hotelling", retain,
 
 #' @rdname Manova
 #' @export
-Manova.OutCoe <- function(x, fac, test = "Hotelling", retain,
-                          drop, verbose = TRUE) {
+Manova.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TRUE) {
   OutCoe <- x
   if (length(OutCoe$method) > 1)
     stop(" * cannot yet be used on combined OutCoe. Do it manually.")
@@ -106,7 +105,7 @@ Manova.OutCoe <- function(x, fac, test = "Hotelling", retain,
       drop <- 0
     }
   }
-
+  
   if (is.null(cph)) {
     cph <- ifelse(OutCoe$method == "eFourier", 4, 2)
   }
@@ -145,13 +144,35 @@ Manova.OutCoe <- function(x, fac, test = "Hotelling", retain,
       }
     }
   }
-
+  
   harm.sel <- coeff.sel(retain = retain, drop = drop, nb.h = nb.h,
                         cph = cph)
   # cat(retain, drop, nb.h, cph)
   if (verbose)
     cat("\n")
   mod <- summary(manova(x[, harm.sel] ~ fac), test = test)
+  return(mod)
+}
+
+#' @rdname Manova
+#' @export
+Manova.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = TRUE) {
+  if (missing(fac))
+    stop(" * 'fac' must be provided")
+  if (!is.factor(fac)) {
+    fac <- x$fac[, fac]
+  }
+  # we grab the PCs to capture retain% of the variance
+  if (retain<1){
+    vars <- x$sdev^2
+    retain <- min(which((cumsum(vars)/sum(vars))>retain))
+  }  
+  if (retain>nrow(x$x))
+    retain <- nrow(x$x)
+  cat(" * PC axes 1 to", retain, "were retained.\n")
+  retain <- 1:retain
+  x <- x$x[, retain]
+  mod <- summary(manova(x ~ fac), test = test)
   return(mod)
 }
 
@@ -164,7 +185,7 @@ Manova.OutCoe <- function(x, fac, test = "Hotelling", retain,
 #' @param x a \link{Coe} or a \link{PCA} object
 #' @param fac a name (or its id) of a grouping factor in \code{$fac} or a factor
 #' @param verbose to feed \link{Manova}
-#' @param retain the number of PCaxis to retain
+#' @param retain the number of PC axis to retain (1:retain) or the proportion of variance to capture (0.99 par default). 
 #' @param ... more arguments to feed \link{Manova}
 #' @note Needs a review and should be considered as experimental.
 #' If the fac passed has only two levels, there is only pair and it is
@@ -257,17 +278,36 @@ ManovaPW.Coe <- function(x, fac, verbose = FALSE, ...) {
 
 #' @rdname ManovaPW
 #' @export
-ManovaPW.PCA <- function(x, fac, verbose = FALSE, retain=1:5,...) {
+ManovaPW.PCA <- function(x, fac, verbose = FALSE, retain=0.99,...) {
   # preliminaries
   PCA <- x
-  x <- PCA$x[, retain]
-  cat(" * PC axis", retain, "were retained\n")
+  
   fac0 <- fac
   if (missing(fac))
     stop("'fac' must be provided")
   if (!is.factor(fac)) {
     fac <- factor(PCA$fac[, fac])
   }
+
+  # we grab the PCs to capture retain% of the variance
+  if (retain<1){
+    vars <- PCA$sdev^2
+    retain <- min(which((cumsum(vars)/sum(vars))>0.99))
+  }
+  
+  # we check all factors to avoid full rank
+  tab <- table(fac)
+  if (min(tab) < retain ) {
+    retain <- min(tab)
+    cat(" * '", names(which.min(tab)), "' has ", min(tab), " rows, and 'retain' is set accordingly.\n", sep="")}
+  
+  cat(" * PC axes 1 to", retain, "were retained\n")
+  retain <- 1:retain
+  x <- PCA$x[, retain]  
+  
+  
+  
+
   # we get all combinations, and prepare the loop
   pws <- t(combn(levels(fac), 2))
   n <- nrow(pws)

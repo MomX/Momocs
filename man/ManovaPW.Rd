@@ -9,7 +9,7 @@ ManovaPW(x, fac, verbose, ...)
 
 \method{ManovaPW}{Coe}(x, fac, verbose = FALSE, ...)
 
-\method{ManovaPW}{PCA}(x, fac, verbose = FALSE, retain = 1:5, ...)
+\method{ManovaPW}{PCA}(x, fac, verbose = FALSE, retain = 0.99, ...)
 }
 \arguments{
 \item{x}{a \link{Coe} or a \link{PCA} object}
@@ -18,7 +18,7 @@ ManovaPW(x, fac, verbose, ...)
 
 \item{verbose}{to feed \link{Manova}}
 
-\item{retain}{the number of PCaxis to retain}
+\item{retain}{the number of PC axis to retain (1:retain) or the proportion of variance to capture (0.99 par default).}
 
 \item{...}{more arguments to feed \link{Manova}}
 }
