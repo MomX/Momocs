@@ -22,6 +22,9 @@ and \code{ldk2}-th points being set on \eqn{(x= -0.5; y=0)} and \eqn{(x= 0.5; y=
 \details{
 For \link{Out}, it tries to do it using \code{$ldk} slot. Also the case for \link{Opn}, but if
 no landmark is defined, it will do it on the first and the last point of the shape.
+
+For \code{Out} and \code{Opn} defines the first landmark as the first point of the
+new shapes with \link{coo.slide}.
 }
 \examples{
 data(hearts)
