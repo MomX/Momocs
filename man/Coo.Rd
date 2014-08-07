@@ -25,14 +25,22 @@ specific methods.
 More, generally, see \link{Out}, \link{Opn} and \link{Ldk} for documentation on these classes.
 And Momocs' vignette for more detailed informations on the Momocs' 'architecture'.
 
-Finally, note that if you used Momocs before version <0.9, and/or if you have read the JSS paper,
-you are probably looking for \link{Out}. If you have 'old' Coo files, eg saved as \code{.rda} files,
-you can import them by: i) opening a new R session; ii) load your file, say 'foo', iii) load Momocs,
-iv) type: \code{Out(foo@coo, fac=foo@fac)}, same thing for the \code{@ldk} slot, if any.
-
 You can access all the methods available for Coo objects with \code{methods(class=Coo)}.
 Among them, some are not individually documented but you will find an exhaustive list
 below, as well as in individual  Momocs' vignettes.
+}
+\note{
+If you used Momocs before version <0.9, and/or if you have read the JSS paper,
+you are probably looking for \link{Out}. If you have "old" Coo files, e.g. saved as \code{.rda} files,
+no worry, you can import them:
+\enumerate{
+\item open a new R session or detach Momocs: \code{detach(package:Momocs, unload=TRUE)}
+\item load your file: \code{load("foo.rda")}
+It may produce an error but the \code{.rda} has been loaded (see \code{ls()})
+\item load the last version of Momocs
+\item type: \code{foo2 <- Out(foo@coo, fac=foo@fac)}, same thing for the \code{@ldk} slot and others, if any.
+\item et voila!
+}
 }
 \examples{
 # to see all methods for Coo objects.
@@ -48,12 +56,12 @@ stack(bot)
 plot(bot)
 }
 # Getters (you can also use it to set data)
-bot[1] # equivalent to bot[[1]]
+bot[1]
 # access the different components
 # $coo coordinates
-bot$coo
+head(bot$coo)
 # $fac grouping factors
-bot$fac
+head(bot$fac)
 # table
 table(bot$fac)
 # an internal view of an Out object
