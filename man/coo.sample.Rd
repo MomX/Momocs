@@ -6,15 +6,22 @@
 coo.sample(coo, n)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates,
+or a \link{Out} or \link{Opn}. object.}
 
 \item{n}{an integer, the number fo points to sample.}
 }
 \value{
-a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates,
+or a \link{Out} or \link{Opn} object.
 }
 \description{
-Sample n coordinates among existing points
+Sample n coordinates among existing points.
+}
+\details{
+For the \link{Out} an \link{Opn}
+methods (pointless for \link{Ldk}), in an \code{$ldk} component is defined,
+it is changed accordingly by multiplying the ids by  n over the number of coordinates.
 }
 \examples{
 data(bot)
