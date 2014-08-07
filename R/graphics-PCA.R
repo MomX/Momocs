@@ -177,7 +177,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if ((density) & missing(ellipses)) ellipses <- FALSE
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
-  
+
   ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -241,9 +241,9 @@ plot3.PCA <- function(PCA,  ... ){
   op1 <- par(mfrow=c(2, 2))
   on.exit(par(op1))
   # The three plot.PCA plots
-  plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), ...)
-  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), ...)
-  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), ...)
+  plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), eigen=FALSE, ...)
+  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=FALSE, ...)
+  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=FALSE,  ...)
   # The eigen value plot
   op2 <- par(mar=c(3, 8, 4, 8), xpd=NA)
   var <- PCA$sdev^2
@@ -283,7 +283,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
   } else {
     no.fac <- FALSE
   }
-  
+
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   fl <- levels(fac)
   fn <- nlevels(fac)
