@@ -251,7 +251,7 @@ ManovaPW.Coe <- function(x, fac, verbose = FALSE, ...) {
   cat("$stars.tab\n")
   print(stars.tab)
   cat("\n$summary (see also $manovas)\n")
-  print(res)
+  print(res, digits=4)
   invisible(list(manovas = manovas, summary = res, stars.tab = stars.tab))
 }
 
@@ -307,7 +307,7 @@ ManovaPW.PCA <- function(x, fac, verbose = FALSE, retain=1:5,...) {
   cat("$stars.tab\n")
   print(stars.tab)
   cat("\n$summary (see also $manovas)\n")
-  print(res)
+  print(res, digits=4)
   invisible(list(manovas = manovas, summary = res, stars.tab = stars.tab))
 }
 
