@@ -3,7 +3,7 @@
 \alias{fgProcrustes}
 \title{Full Generalized Procrustes alignment between shapes}
 \usage{
-fgProcrustes(x, tol, verbose)
+fgProcrustes(x, tol, verbose, coo)
 }
 \arguments{
 \item{x}{an array, a list of configurations, or an \link{Out}, \link{Opn} or \link{Ldk} object}
@@ -11,6 +11,8 @@ fgProcrustes(x, tol, verbose)
 \item{tol}{numeric when to stop iterations}
 
 \item{verbose}{logical whether to print outputs (iteration number, and gain)}
+
+\item{coo}{logical, when working on \code{Out} or \code{Opn}, whether to use \code{$coo} rather than \code{$ldk}}
 }
 \value{
 a list with components:
