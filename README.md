@@ -22,6 +22,17 @@ Next big steps
 * Review the helpfiles, finish the [tutorial](https://github.com/vbonhomme/Momocs-vignette/tree/master/v0.9) (a collection of vignettes)
 * Release Momocs 1.0 (September/October 2014)
 
+How can you help and find help ?
+--------
+
+__You are welcome to:__
+* test Momocs and send me your feedback
+* submit suggestions and bug-reports
+* ask for hotline
+* collaborate with me
+* just send an email to: bonhomme.vincent@gmail.com
+
+
 Features
 --------
 __Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) and published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) to the version v0.9 available only (see above) so far, planned for extensive testing. A v1.0 which will include all the features marked with an asterisk (*) below, is planned for ~ September, 2014.
@@ -64,18 +75,3 @@ __Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](h
  * Thin plate splines and variation around deformation grids
  * Family pictures and quick inspection of whole datasets
  * Many other morphometrics plots
-
-How can you help and find help
---------
-
-__You are welcome to:__
-* test Momocs and send me your feedback
-* submit suggestions and bug-reports
-* ask for hotline
-* collaborate with me
-* just send an email to: bonhomme.vincent@gmail.com
-
-
-
-
-
