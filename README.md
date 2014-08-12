@@ -21,6 +21,12 @@ Tutorial
 * [A graphical introduction to Momocs](https://github.com/vbonhomme/Momocs-vignette/tree/master/v0.9) which will aim to be a complete guide to morphometrics using Momocs even if you never heard of R or what (x; y) coordinates may be. So far, huge gaps remain.
 * Blog posts, ref card, FAQ, to come.
 
+Next big steps
+--------
+* Fill the gaps (particularly for landmarks)
+* Convert and unify all plots with ggplot2
+* Write the tutorial and work on demos
+* Release Momocs 1.0
 
 Features
 --------
@@ -35,12 +41,11 @@ __Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](h
  * Elliptical Fourier analysis
  * Radius Variation Fourier analysis
  * Tangent Angle Fourier analysis
- * Eigen shape analysis*
  * Calibration (shape reconstruction, deviation, harmonic power, etc.)
 * __Open-outlines__
  * Natural (raw) polynomials
  * Orthogonal (Legendre) polynomials
- * Discrete Cosinus Transform*
+ * Discrete Cosinus Transform (core funct. available though)
  * Same calibration methods as above
 * __Configuration of landmarks__
  * Full Generalized Procrustes Adjustment
@@ -49,11 +54,10 @@ __Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](h
 * __Traditional morphometrics and global shape descriptors__
  * Some built-in facilities for multivariate analysis
  * A long list of shape scalars (eg. eccentricity, rectilinearity, etc.)
-
 * __Multivariate analysis__
  * Mean shape (groupwise) calculations
  * Principal component analysis (with morphospace)
- * Multivariate analysis of variance
+ * Multivariate analysis of variance + pairwise testing
  * Linear discriminant analysis (with morphospace)
  * Hierarchical clustering
  * Regression trees*
@@ -63,7 +67,7 @@ __Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](h
 
 * __Graphical methods__
  * Morphospaces for all morphometrics methods (and for combined views*) x PCA, LDA
- * Thin plate splines and deformation grids
+ * Thin plate splines and variation around deformation grids
  * Family pictures and quick inspection of whole datasets
  * Many other morphometrics plots
 
