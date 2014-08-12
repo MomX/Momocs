@@ -30,7 +30,7 @@ __You are welcome to:__
 * submit suggestions and bug-reports
 * ask for hotline
 * collaborate with me
-* just send an email to: bonhomme.vincent@gmail.com
+* just send me an email: bonhomme.vincent@gmail.com
 
 
 Features
