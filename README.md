@@ -25,7 +25,7 @@ Next big steps
 --------
 * Fill the gaps (particularly for landmarks)
 * Convert and unify all plots with ggplot2
-* Write the tutorial and work on demos
+* Review the helpfiles, write the tutorial (a collection of vignettes)
 * Release Momocs 1.0
 
 Features
