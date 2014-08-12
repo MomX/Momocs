@@ -20,7 +20,7 @@ Next big steps
 * Fill the gaps (particularly for landmarks)
 * Convert and unify all plots with ggplot2
 * Review the helpfiles, finish the [tutorial](https://github.com/vbonhomme/Momocs-vignette/tree/master/v0.9) (a collection of vignettes)
-* Release Momocs 1.0
+* Release Momocs 1.0 (September/October 2014)
 
 Features
 --------
