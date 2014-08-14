@@ -4,13 +4,14 @@
 \title{Plots Linear Discriminant Analysis}
 \usage{
 \method{plot}{LDA}(x, xax = 1, yax = 2, points = TRUE, col = "#000000",
-  pch = 20, cex = 0.5, palette = col.summer2, center.origin = FALSE,
-  zoom = 1, grid = TRUE, nb.grids = 3, morphospace = TRUE,
-  pos.shp = "full", amp.shp = 1, size.shp = 1, nb.shp = 12,
-  nr.shp = 6, nc.shp = 5, pts.shp = 60, border.shp = "#00000032",
-  lwd.shp = 1, col.shp = "#00000019", stars = FALSE, ellipses = FALSE,
-  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75,
-  0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
+  pch = 20, cex = 0.5, palette = col.solarized, center.origin = FALSE,
+  zoom = 1, bg = par("bg"), grid = TRUE, nb.grids = 3,
+  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 1,
+  nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
+  border.shp = "#00000032", lwd.shp = 1, col.shp = "#00000019",
+  stars = FALSE, ellipses = FALSE, conf.ellipses = 0.5,
+  ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75, 0.9),
+  lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labelsgroups = TRUE,
   cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
@@ -40,6 +41,8 @@ or for every individual, see examples)}
 \item{center.origin}{logical whether to center the plot onto the origin}
 
 \item{zoom}{to keep your distances}
+
+\item{bg}{color for the background}
 
 \item{grid}{logical whether to draw a grid}
 

@@ -4,12 +4,12 @@
 \title{Plots Principal Component Analysis}
 \usage{
 \method{plot}{PCA}(x, fac, xax = 1, yax = 2, points = TRUE,
-  col = "#000000", pch = 20, cex = 0.5, palette = col.summer2,
-  center.origin = FALSE, zoom = 1, grid = TRUE, nb.grids = 3,
-  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 1,
-  nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
+  col = "#000000", pch = 20, cex = 0.5, palette = col.solarized,
+  center.origin = FALSE, zoom = 1, bg = par("bg"), grid = TRUE,
+  nb.grids = 3, morphospace = TRUE, pos.shp = "full", amp.shp = 1,
+  size.shp = 1, nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
   border.shp = .transp("#000000", 0.5), lwd.shp = 1,
-  col.shp = .transp("#000000", 0.9), stars = FALSE, ellipses = FALSE,
+  col.shp = .transp("#000000", 0.95), stars = FALSE, ellipses = FALSE,
   conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75,
   0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
@@ -44,6 +44,8 @@ or for every individual, see examples)}
 \item{center.origin}{logical whether to center the plot onto the origin}
 
 \item{zoom}{to keep your distances}
+
+\item{bg}{color for the background}
 
 \item{grid}{logical whether to draw a grid}
 

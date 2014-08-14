@@ -16,6 +16,7 @@
 #' @param palette a \link{palette}
 #' @param center.origin logical whether to center the plot onto the origin
 #' @param zoom to keep your distances
+#' @param bg color for the background
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
 #' @param morphospace logical whether to add the morphological space
@@ -73,9 +74,9 @@
 #' @export
 plot.LDA <- function(x, xax=1, yax=2,
   #color choice
-  points=TRUE, col="#000000", pch=20, cex=0.5, palette=col.summer2,
+  points=TRUE, col="#000000", pch=20, cex=0.5, palette=col.solarized,
   #.frame
-  center.origin=FALSE, zoom=1,
+  center.origin=FALSE, zoom=1, bg=par("bg"),
   #.grid
   grid=TRUE, nb.grids=3,
   #shapes
@@ -167,7 +168,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   par(mar = rep(0.1, 4)) #0.1
   
   # we initate it
-  .frame(xy, center.origin, zoom=zoom)
+  .frame(xy, center.origin, zoom=zoom, bg=bg)
   # then the layers
   if (grid)    .grid(nb.grids)
   if (density) .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
