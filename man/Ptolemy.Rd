@@ -3,30 +3,34 @@
 \alias{Ptolemy}
 \title{Ptolemaic ellipses and illustration of eFourier}
 \usage{
-Ptolemy(Out, id, t, nb.h, nb.pts, palette, legend)
+Ptolemy(coo, t = seq(0, 2 * pi, length = 7)[-1], nb.h = 3, nb.pts = 360,
+  palette = col.heat, zoom = 5/4, legend = TRUE, ...)
 }
 \arguments{
-\item{Out}{The \code{Out} object on which to display Ptolemaic ellipses.}
+\item{coo}{a matrix of (x; y) coordinates}
 
-\item{id}{The \code{id} on which to display Ptolemaic ellipses.}
+\item{t}{A \code{vector} af angles (in radians) on which to display ellipses}
 
-\item{t}{A \code{vector} af angles (in radians) on which to display ellipses.}
+\item{nb.h}{\code{integer}. The number of harmonics to display}
 
-\item{nb.h}{\code{integer}. The number of harmonics to display.}
+\item{nb.pts}{\code{integer}. The number of points to use to display shapes}
 
-\item{nb.pts}{\code{integer}. The number of points to use to display shapes.}
+\item{zoom}{numeric a zoom factor for \link{coo.plot}}
 
-\item{palette}{A color palette.}
+\item{palette}{a color palette}
 
-\item{legend}{\code{logical}. Whether to plot the legend box.}
+\item{legend}{\code{logical}. Whether to plot the legend box}
+
+\item{...}{additional parameters to feed \link{coo.plot}}
 }
 \description{
 Calculate and display Ptolemaic ellipses which illustrates
 intuitively the principle behing elliptical Fourier analysis.
 }
 \examples{
-data(hearts)
-Ptolemy(hearts, 1)
+data(shapes)
+cat <- shapes[4]
+Ptolemy(cat, main="An EFT cat")
 }
 \references{
 This method has been inspired by the figures found in the followings papers.
