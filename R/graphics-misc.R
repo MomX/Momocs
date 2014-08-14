@@ -56,9 +56,24 @@ col.autumn <- colorRampPalette(c("#3353b3", "#b1b100", "#b32222"))
 ### solarized
 #' @rdname color_palettes
 #' @export
-col.solarized <- colorRampPalette(c("#b58900", "#cb4b16", "#dc322f", 
-    "#d33682", "#6c71c4", "#268bd2", "#2aa198", "#859900"))
-
+col.solarized <- colorRampPalette(c(
+# "#002b36", 
+# "#073642", 
+# "#586e75", 
+# "#657b83", 
+# "#839496", 
+# "#93a1a1", 
+# "#eee8d5", 
+# "#fdf6e3", 
+# "#b58900",
+#"#cb4b16", 
+"#dc322f", 
+"#d33682", 
+"#6c71c4", 
+"#268bd2", 
+"#2aa198", 
+"#859900"))
+  
 ### colorspace
 #' @rdname color_palettes
 #' @export
@@ -68,12 +83,12 @@ col.gallus <- function(n) {
 #' @rdname color_palettes
 #' @export
 col.qual <- function(n) {
-    rainbow_hcl(n, c = 80)
-}
+  rainbow_hcl(n, c = 90)}
+
 #' @rdname color_palettes
 #' @export
 col.heat <- function(n) {
-    return(rev(heat_hcl(n)))
+  return(rev(heat_hcl(n, h=c(10, 90), c.=c(160, 40))))
 }
 #' @rdname color_palettes
 #' @export
