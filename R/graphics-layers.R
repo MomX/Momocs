@@ -5,7 +5,9 @@
 
 # create an empty frame
 #' @export
-.frame <- function(xy, center.origin = FALSE, zoom = 1) {
+.frame <- function(xy, center.origin = FALSE, zoom = 1, bg="white") {
+  op <- par(bg=bg)
+  on.exit(par(op))
     if (center.origin) {
         w <- (1/zoom) * max(abs(xy))
         plot(NA, xlim = c(-w, w), ylim = c(-w, w), asp = 1, axes = FALSE,
