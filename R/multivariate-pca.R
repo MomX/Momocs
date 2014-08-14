@@ -129,7 +129,7 @@ print.PCA <- function(x, ...){
     cat(" - $method: [", x$method, "analysis ]\n")}
     # Fac printers
   df <- x$fac
-  nf <- ncol(df)
+  nf <- ifelse(is.null(df), 0, ncol(df))
   if (nf == 0) {
     cat(" - $fac: No groups defined\n")
   } else {
@@ -201,7 +201,6 @@ getPairs.Coe <- function(x, fac, range){
   names(res)[1:2] <- fl
   return(res)
 }
-
 #' @export
 getPairs.PCA <- function(x, fac, range){
   # we check and prepare
