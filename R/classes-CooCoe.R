@@ -30,10 +30,8 @@
 #' you are probably looking for \link{Out}. If you have "old" Coo files, e.g. saved as \code{.rda} files,
 #' no worry, you can import them:
 #' \enumerate{
-#' \item open a new R session or detach Momocs: \code{detach(package:Momocs, unload=TRUE)}
 #' \item load your file: \code{load("foo.rda")}
 #' It may produce an error but the \code{.rda} has been loaded (see \code{ls()})
-#' \item load the last version of Momocs
 #' \item type: \code{foo2 <- Out(foo@@coo, fac=foo@@fac)}, same thing for the \code{@@ldk} slot and others, if any.
 #' \item et voila!
 #'}
