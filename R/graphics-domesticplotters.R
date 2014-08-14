@@ -727,8 +727,8 @@ conf.ell <- function(x, y, conf = 0.95, nb.pts = 60) {
 #' @param cex.names a cex for the names
 #' @param legend logical whether to add a legend
 #' @param ... useless here.
-#' @seealso \link{LDA}, \link{plot.LDA}
-#' @keywords Multivariate
+#' @seealso \link{LDA}, \link{plot.LDA}, \link{plotCV2}
+#' @keywords Multivariate Graphics
 #' @examples
 #' # Below various table that you can try. We will use the last one for the examples.
 #' \dontrun{
@@ -776,28 +776,16 @@ conf.ell <- function(x, y, conf = 0.95, nb.pts = 60) {
 #' trilo.f <- eFourier(trilo, 8)
 #' trilo.l <- LDA(trilo.f, 'onto')
 #' trilo.l$CV.tab
-#' plotCV(trilo.l$CV.tab) # but see below, 'works' directly on the LDA
-#' plotCV(trilo.l)
+#' plotCV(trilo.l$CV.tab) 
 #' 
 #' # olea example
 #' data(olea)
 #' op <- orthoPolynomials(olea, 5)
-#' opl <- LDA(op, 'cep')
+#' opl <- LDA(op, 'cep')$CV.tab
 #' plotCV(opl)
-#' @rdname plotCV
 #' @export
-plotCV <- function(x, ...) {
-  UseMethod("plotCV")
-}
-#' @rdname plotCV
-#' @export
-plotCV.LDA <- function(x, ...) {
-  plotCV(x$CV.tab, ...)
-}
-#' @rdname plotCV
-#' @export
-plotCV.default <- function(x, links.FUN = arrows, col = TRUE, 
-                           col0 = "black", col.breaks = 5, palette = col.gallus, lwd = TRUE, 
+plotCV <- function(x, links.FUN = arrows, col = TRUE, 
+                           col0 = "black", col.breaks = 5, palette = col.heat, lwd = TRUE, 
                            lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25, 
                            cex.names = 1, legend = TRUE, ...) {
   # to maintain the generic
@@ -849,14 +837,119 @@ plotCV.default <- function(x, links.FUN = arrows, col = TRUE,
   text(x.dots, y.dots + gap.names, labels = unlist(dimnames(tab)), 
        cex = cex.names)
   if (legend) {
-    text(1, 1/3, labels = "True\nGroups", cex = cex.names, 
+    text(1, 1/3, labels = names(dimnames(tab))[1], cex = cex.names, 
          font = 2)
-    text(1 + gap.mid, 1/3, labels = "Classified\nGroups", 
+    text(1 + gap.mid, 1/3, labels = names(dimnames(tab))[2], 
          cex = cex.names, font = 2)
   }
   # we restore the graphics parameters
   par(op)
 }
+
+
+#' Plots a cross-validation table as an heatmap
+#' 
+#' Either with frequencies (or percentages) plus marginal sums,
+#' and values as heatmaps. Used in Momocs for plotting cross-validation tables
+#' but may be used for any table (likely with \code{freq=FALSE}).
+#' 
+#' @param x a (typically cross-correlation) table to plot
+#' @param freq whether to use row-wise frequencies
+#' @param palette a color palette such as \link{col.heat} to use,
+#' if \code{cols} is not used.
+#' @param levels number of levels, otherwise the highest cell in the table
+#' @param cols a vector of colors
+#' @param pc whether to use percentages
+#' @param margin whether to add marginal sums
+#' @param cex a cex for all values
+#' @seealso \link{LDA}, \link{plot.LDA}, \link{plotCV2}
+#' @keywords Multivariate Graphics
+#' @examples
+#' data(bot)
+#' bot.p <- PCA(eFourier(bot, 12))
+#' bot.l <- LDA(bot.p, 1)
+#' tab <- bot.l$CV.tab
+#' tab
+#' plotCV2(tab)
+#' 
+#' data(olea)
+#' ol <- LDA(PCA(rawPolynomials(olea, nb.pts=50)), "cep")
+#' plotCV2(ol$CV.tab)
+#' # raw counts
+#' plotCV2(tab, freq=FALSE, palette=col.india)
+#' # any other count table
+#' m <- matrix(runif(120, 0, 6), 12)
+#' tab <- as.table(round(m)) 
+#' plotCV2(tab, palette=terrain.colors, levels=5, cex=0.8)
+#' @export
+plotCV2 <- function(x, freq=TRUE, 
+                       palette=col.heat, levels=20, cols,
+                       pc=TRUE, margin=TRUE, cex=1){
+  tab <- x
+  tab <- t(tab)
+  tab <- tab[, ncol(tab):1 ]
+  print(tab)
+  # if required, we return frequencies (and percentages)
+  # but by default we forbid freq on small samples
+  #   if (missing(freq) & sum(tab) < 50) freq <- FALSE
+  if (freq) tab <- apply(tab, 2, function(x) x/ sum(x)) * ifelse(pc, 100, 1)
+  #   if (freq) tab <- tab/sum(tab) * ifelse(pc, 100, 1)
+  
+  # here start the graphics
+  op <- par(xpd=NA, mar=c(5, 5, 4, 1))
+  on.exit(par(op))
+  # cosmetics
+  if (missing(cols)) cols <- palette(levels)
+  if (any(tab==0)) cols[1] <- par("bg")
+  #breaks <- seq(0, sum(tab)/ncol(tab), length=length(cols)+1)
+  # the core piece
+  image(x=0:nrow(tab), y=0:ncol(tab), z=tab,
+        asp=1, ann=FALSE, axes=FALSE, col=cols, frame=FALSE)
+  # draw the grid
+  xn <- nrow(tab)
+  yn <- ncol(tab)
+  segments(0:xn, 0, 0:xn, yn)
+  segments(0, 0:yn, xn, 0:yn)
+  
+  # if the table has names, we add them
+  names <- names(dimnames(tab))
+  if (length(names) != 0){
+    text(yn/2, -0.5, labels=names[1], font=2)
+    text(-0.5, xn/2, labels=names[2], srt=90, font=2)}
+
+  text(-0.1, 1:yn - 0.5, rev(rownames(x)), 
+       cex=cex, adj = 1, font=2)
+  text(1:xn - 0.5, yn+0.1, colnames(x),
+       cex=cex, adj = c(0.5, 0), font=2)
+  
+  # if freq are used, from now on, we transform the table into a 
+  # reasonable number of digits to plot
+  
+  # grand total
+  if (TRUE){
+    segments(xn, 0, xn+0.05, -0.05)
+    text(xn+0.1, -0.1, sum(tab), cex=cex*0.8, adj=c(0, 1))
+  }
+  arrows(-0.1, yn+0.1, 0, yn, length=0.1)
+  
+  # we plot the values
+  xx <- rep(1:xn - 0.5, times=yn)
+  yy <- rep(1:yn - 0.5, each=xn)
+  if (freq) 
+    tab2 <- signif(tab, log10(sum(tab)))
+  else
+    tab2 <- tab
+  text(xx, yy, tab2, cex=cex)
+  
+  # marginal sums
+  if (margin){
+    text(1:xn - 0.5, - 0.1, rowSums(tab2), cex=cex*0.8, adj=c(0.5, 1))
+    text(xn+0.1, 1:yn - 0.5, colSums(tab), cex=cex*0.8, adj =0 )
+  }
+  
+}
+
+
 
 # Illustration / teaching ---------------------------------
 
