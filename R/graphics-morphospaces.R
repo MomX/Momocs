@@ -174,7 +174,8 @@
 #'
 #' @param xy todo
 #' @param pos.shp how shapes should be positionned: \code{range} of xy, 
-#' \code{full} extent of the plane, \code{circle} as a rosewind, on \code{xy} values provided.
+#' \code{full} extent of the plane, \code{circle} as a rosewind, 
+#' on \code{xy} values provided.
 #' @param nb.shp the total number of shapes
 #' @param nr.shp the number of rows to position shapes
 #' @param nc.shp the number of cols to position shapes
@@ -192,7 +193,7 @@ pos.shapes <- function(xy, pos.shp = c("range", "circle", "xy")[1],
   if (pos.shp == "circle") {
     if (missing(circle.r.shp)) {
       # mean distance from origin
-      circle.r.shp <- mean(apply(xy, 1, function(x) sqrt(sum(x^2))))
+      circle.r.shp <- coo.centdist(xy)
     }
     t <- seq(0, 2 * pi, len = nb.shp + 1)[-(nb.shp + 1)]
     pos <- cbind(circle.r.shp * cos(t), circle.r.shp * sin(t))
