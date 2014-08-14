@@ -105,6 +105,7 @@
     if (plot.method == "points"){
       garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp)}
   }
+  invisible(shp)
 }
 
 #' @export
@@ -166,12 +167,14 @@
   } else {
     garbage <- lapply(shp, lines, col = border.shp)
   }
+  invisible(shp)
 }
 
-#' Calculates nice positions on a plan for drawing shapes
+#' Calculates nice positions on a plane for drawing shapes
 #'
 #' @param xy todo
-#' @param pos.shp the way shape should be positionned
+#' @param pos.shp how shapes should be positionned: \code{range} of xy, 
+#' \code{full} extent of the plane, \code{circle} as a rosewind, on \code{xy} values provided.
 #' @param nb.shp the total number of shapes
 #' @param nr.shp the number of rows to position shapes
 #' @param nc.shp the number of cols to position shapes
