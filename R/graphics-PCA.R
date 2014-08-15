@@ -157,15 +157,17 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
         col <- col.groups[fac]
       } else {
         col.groups <- rep(col[1], nlevels(fac))
-        col <- rep(col[1], nrow(xy))}
+        if (length(col) != nrow(xy)){
+        col <- rep(col[1], nrow(xy))}}
     } else {
       col.groups <- palette(nlevels(fac))
-      col <- col.groups[fac]
+      if (length(col) != nrow(xy)){
+      col <- col.groups[fac]}
     }
     # pch handling
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
-    } 
+    }
 #else {
 #       if (nlevels(fac) < 10) {
 #         pch <- .pch()[fac]
@@ -179,6 +181,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if ((density) & missing(ellipses)) ellipses <- FALSE
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
+  if (!missing(chull.lty)) chull <- TRUE
 
   ##### Graphics start here
   # we prepare the graphic window
