@@ -120,12 +120,11 @@ tps.grid <- function(fr, to, amp = 1, over = 1.2, grid.size = 15,
         coo.draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
             lty = shp.lty[2], points = points, first.point = FALSE, 
             centroid = FALSE, ...)
-        if (legend) {
+        if (legend | !missing(legend.text)) {
           if (missing(legend.text)) legend.text <- c(fr.n, to.n)
-            legend("topright", legend = c(fr.n, to.n), col = shp.border, 
+            legend("topright", legend = legend.text, col = shp.border, 
                 lwd = shp.lwd, bty = "n")
         }
-        
     }
 }
 
@@ -208,9 +207,9 @@ tps.arr <- function(fr, to, amp = 1, over = 1.2, palette = col.summer,
         coo.draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
             lty = shp.lty[2], points = points, first.point = FALSE, 
             centroid = FALSE, ...)
-        if (legend) {
+        if (legend | !missing(legend.text)) {
           if (missing(legend.text)) legend.text <- c(fr.n, to.n)
-            legend("topright", legend = c(fr.n, to.n), col = shp.border, 
+            legend("topright", legend = legend.text, col = shp.border, 
                 lwd = shp.lwd, bty = "n")
         }
     }
@@ -296,9 +295,9 @@ tps.iso <- function(fr, to, amp = 1, over = 1.2, palette = col.spring,
         coo.draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
             lty = shp.lty[2], points = points, first.point = FALSE, 
             centroid = FALSE, ...)
-        if (legend) {
+        if (legend | !missing(legend.text)) {
           if (missing(legend.text)) legend.text <- c(fr.n, to.n)
-            legend("topright", legend = c(fr.n, to.n), col = shp.border, 
+            legend("topright", legend = legend.text, col = shp.border, 
                 lwd = shp.lwd, bty = "n")
         }
     }
