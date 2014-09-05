@@ -6,48 +6,50 @@
 tps.iso(fr, to, amp = 1, over = 1.2, palette = col.spring,
   iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black",
   poly = TRUE, shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(2,
-  2), shp.lty = c(1, 1), legend = TRUE, ...)
+  2), shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
 }
 \arguments{
-\item{fr}{The reference \eqn{(x; y)} coordinates.}
+\item{fr}{The reference \eqn{(x; y)} coordinates}
 
-\item{to}{The target \eqn{(x; y)} coordinates.}
+\item{to}{The target \eqn{(x; y)} coordinates}
 
 \item{amp}{An amplification factor of differences between \code{fr} and
-\code{to}.}
+\code{to}}
 
 \item{over}{A \code{numeric} that indicates how much the thin plate splines
-extends over the shapes.}
+extends over the shapes}
 
 \item{palette}{A color palette such those included in Momocs or produced
-with \link{colorRampPalette}.}
+with \link{colorRampPalette}}
 
 \item{iso.levels}{\code{numeric}. The number of levels for mapping the
-deformations.}
+deformations}
 
 \item{iso.nb}{A \code{numeric}. The number of points to use for the
-calculation of deformation.}
+calculation of deformation}
 
-\item{cont}{\code{logical}. Whether to draw contour lines.}
+\item{cont}{\code{logical}. Whether to draw contour lines}
 
-\item{cont.col}{A color for drawing the contour lines.}
+\item{cont.col}{A color for drawing the contour lines}
 
 \item{poly}{whether to draw polygons (for outlines) or points (for landmarks)}
 
-\item{shp}{\code{logical}. Whether to draw shapes.}
+\item{shp}{\code{logical}. Whether to draw shapes}
 
-\item{shp.border}{Two colors for drawing the borders.}
+\item{shp.border}{Two colors for drawing the borders}
 
-\item{shp.lwd}{Two \code{lwd} for drawing shapes.}
+\item{shp.lwd}{Two \code{lwd} for drawing shapes}
 
-\item{shp.lty}{Two \code{lty} fro drawing the shapes.}
+\item{shp.lty}{Two \code{lty} fro drawing the shapes}
 
-\item{legend}{logical whether to plot a legend.}
+\item{legend}{logical whether to plot a legend}
+
+\item{legend.text}{some text for the legend}
 
 \item{...}{additional arguments to feed \link{coo.draw}}
 }
 \value{
-No returned value.
+No returned value
 }
 \description{
 \code{tps.iso} calculates deformations between two configurations and map

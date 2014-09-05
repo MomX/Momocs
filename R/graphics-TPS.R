@@ -1,20 +1,18 @@
 
 # 8. Thin plate splines plotters
 # -----------------------------------------------
-#' Thin Plate Splines for 2D data.
+#' Thin Plate Splines for 2D data
 #' 
 #' \code{tps2d} is the core function for Thin Plate Splines. It is used
 #' internally but might be useful elsewhere.
 #' 
-#' 
-#' @usage tps2d(grid0, fr, to)
-#' @param grid0 A matrix of coordinates on which to calculate deformations.
-#' @param fr The reference \eqn{(x; y)} coordinates.
-#' @param to The target \eqn{(x; y)} coordinates.
-#' @return Returns a matrix of \code{(x; y)} coordinates with TPS-interpolated
-#' deformations.
+#' @param grid0 a matrix of coordinates on which to calculate deformations
+#' @param fr the reference \eqn{(x; y)} coordinates
+#' @param to the target \eqn{(x; y)} coordinates
+#' @return a matrix of \code{(x; y)} coordinates with TPS-interpolated
+#' deformations
 #' @seealso \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
-#' \code{tps2d}.
+#' \code{tps2d}
 #' @keywords ThinPlateSplines
 #' @export
 tps2d <- function(grid0, fr, to) {
@@ -55,33 +53,33 @@ tps2d <- function(grid0, fr, to) {
     return(grid1)
 }
 
-#' Deformation grids using Thin Plate Splines.
+#' Deformation grids using Thin Plate Splines
 #' 
 #' \code{tps.grid} calculates and plots deformation grids between two
 #' configurations.
 #' 
-#' @param fr The reference \eqn{(x; y)} coordinates.
-#' @param to The target \eqn{(x; y)} coordinates.
-#' @param amp An amplification factor of differences between \code{fr} and
-#' \code{to}.
-#' @param over A \code{numeric} that indicates how much the thin plate splines
+#' @param fr the reference \eqn{(x; y)} coordinates
+#' @param to the target \eqn{(x; y)} coordinates
+#' @param amp an amplification factor of differences between \code{fr} and
+#' \code{to}
+#' @param over \code{numeric} that indicates how much the thin plate splines
 #' extends over the shapes
-#' @param grid.size A \code{numeric} to specify the number of grid cells on the
-#' longer axis on the outlines.
-#' @param grid.col A color for drawing the grid.
+#' @param grid.size \code{numeric} to specify the number of grid cells on the
+#' longer axis on the outlines
+#' @param grid.col color for drawing the grid
 #' @param poly whether to draw polygons (for outlines) or points (for landmarks)
-#' @param shp \code{logical}. Whether to draw shapes.
-#' @param shp.col Two colors for filling the shapes.
-#' @param shp.border Two colors for drawing the borders.
-#' @param shp.lwd Two \code{lwd} for drawing shapes.
-#' @param shp.lty Two \code{lty} fro drawing the shapes.
-#' @param legend logical whether to plot a legend.
+#' @param shp \code{logical}. Whether to draw shapes
+#' @param shp.col Two colors for filling the shapes
+#' @param shp.border Two colors for drawing the borders
+#' @param shp.lwd Two \code{lwd} for drawing shapes
+#' @param shp.lty Two \code{lty} fro drawing the shapes
+#' @param legend logical whether to plot a legend
+#' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo.draw}
-#' @return No returned value.
+#' @return Nothing
 #' @seealso \link{tps.iso} and \link{tps.arr}.
 #' @keywords ThinPlateSplines
 #' @examples
-#' 
 #' data(bot)
 #' botF <- eFourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
@@ -92,7 +90,7 @@ tps2d <- function(grid0, fr, to) {
 tps.grid <- function(fr, to, amp = 1, over = 1.2, grid.size = 15, 
     grid.col = "grey80", poly = TRUE, shp = TRUE, shp.col = rep(NA, 
         2), shp.border = col.gallus(2), shp.lwd = c(1, 1), shp.lty = c(1, 
-        1), legend = TRUE, ...) {
+        1), legend = TRUE, legend.text, ...) {
     fr.n <- substitute(fr)
     to.n <- substitute(to)  # otherwise problems with substitute in legend below
     # simple magnification
@@ -123,6 +121,7 @@ tps.grid <- function(fr, to, amp = 1, over = 1.2, grid.size = 15,
             lty = shp.lty[2], points = points, first.point = FALSE, 
             centroid = FALSE, ...)
         if (legend) {
+          if (missing(legend.text)) legend.text <- c(fr.n, to.n)
             legend("topright", legend = c(fr.n, to.n), col = shp.border, 
                 lwd = shp.lwd, bty = "n")
         }
@@ -130,35 +129,36 @@ tps.grid <- function(fr, to, amp = 1, over = 1.2, grid.size = 15,
     }
 }
 
-#' Deformation 'vector field' using Thin Plate Splines.
+#' Deformation 'vector field' using Thin Plate Splines
 #' 
 #' \code{tps.arr}(ows) calculates deformations between two configurations and
 #' illustrate them using arrows.
 #' 
-#' @param fr The reference \eqn{(x; y)} coordinates.
-#' @param to The target \eqn{(x; y)} coordinates.
-#' @param amp An amplification factor of differences between \code{fr} and
-#' \code{to}.
-#' @param over A \code{numeric} that indicates how much the thin plate splines
-#' extends over the shapes.
-#' @param palette A color palette such those included in Momocs or produced
-#' with \link{colorRampPalette}.
-#' @param arr.nb A \code{numeric}. The number of arrows to calculate.
-#' @param arr.levels A \code{numeric}. The number of levels for the color of
-#' arrows.
-#' @param arr.len A \code{numeric}. The length of arrows.
-#' @param arr.ang A \code{numeric}. The angle for arrows' heads.
-#' @param arr.lwd A \code{numeric}. The \code{lwd} for drawing arrows.
-#' @param arr.col If \code{palette} is not used the color for arrows.
+#' @param fr the reference \eqn{(x; y)} coordinates
+#' @param to the target \eqn{(x; y)} coordinates
+#' @param amp an amplification factor of differences between \code{fr} and
+#' \code{to}
+#' @param over \code{numeric} that indicates how much the thin plate splines
+#' extends over the shapes
+#' @param palette a color palette such those included in Momocs or produced
+#' with \link{colorRampPalette}
+#' @param arr.nb \code{numeric} The number of arrows to calculate
+#' @param arr.levels \code{numeric}. The number of levels for the color of
+#' arrows
+#' @param arr.len \code{numeric} for the length of arrows
+#' @param arr.ang \code{numeric} for the angle for arrows' heads
+#' @param arr.lwd \code{numeric} for the \code{lwd} for drawing arrows
+#' @param arr.col if \code{palette} is not used the color for arrows
 #' @param poly whether to draw polygons (for outlines) or points (for landmarks)
-#' @param shp \code{logical}. Whether to draw shapes.
-#' @param shp.col Two colors for filling the shapes.
-#' @param shp.border Two colors for drawing the borders.
-#' @param shp.lwd Two \code{lwd} for drawing shapes.
-#' @param shp.lty Two \code{lty} fro drawing the shapes.
-#' @param legend logical whether to plot a legend.
+#' @param shp \code{logical}. whether to draw shapes
+#' @param shp.col two colors for filling the shapes
+#' @param shp.border two colors for drawing the borders
+#' @param shp.lwd two \code{lwd} for drawing shapes
+#' @param shp.lty two \code{lty} fro drawing the shapes
+#' @param legend logical whether to plot a legend
+#' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo.draw}
-#' @return No returned value.
+#' @return Nothing.
 #' @seealso \link{tps.grid} and \link{tps.iso}.
 #' @keywords ThinPlateSplines
 #' @examples
@@ -173,7 +173,7 @@ tps.arr <- function(fr, to, amp = 1, over = 1.2, palette = col.summer,
     arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20, 
     arr.lwd = 0.75, arr.col = "grey50", poly = TRUE, shp = TRUE, 
     shp.col = rep(NA, 2), shp.border = col.gallus(2), shp.lwd = c(2, 
-        2), shp.lty = c(1, 1), legend = TRUE, ...) {
+        2), shp.lty = c(1, 1), legend = TRUE, legend.text, ...) {
     fr.n <- substitute(fr)
     to.n <- substitute(to)  # otherwise problems with substitute in legend below
     if (!missing(amp)) 
@@ -209,6 +209,7 @@ tps.arr <- function(fr, to, amp = 1, over = 1.2, palette = col.summer,
             lty = shp.lty[2], points = points, first.point = FALSE, 
             centroid = FALSE, ...)
         if (legend) {
+          if (missing(legend.text)) legend.text <- c(fr.n, to.n)
             legend("topright", legend = c(fr.n, to.n), col = shp.border, 
                 lwd = shp.lwd, bty = "n")
         }
@@ -220,28 +221,29 @@ tps.arr <- function(fr, to, amp = 1, over = 1.2, palette = col.summer,
 #' \code{tps.iso} calculates deformations between two configurations and map
 #' them with or without isolines.
 #' 
-#' @param fr The reference \eqn{(x; y)} coordinates.
-#' @param to The target \eqn{(x; y)} coordinates.
+#' @param fr The reference \eqn{(x; y)} coordinates
+#' @param to The target \eqn{(x; y)} coordinates
 #' @param amp An amplification factor of differences between \code{fr} and
-#' \code{to}.
+#' \code{to}
 #' @param over A \code{numeric} that indicates how much the thin plate splines
-#' extends over the shapes.
+#' extends over the shapes
 #' @param palette A color palette such those included in Momocs or produced
-#' with \link{colorRampPalette}.
+#' with \link{colorRampPalette}
 #' @param iso.levels \code{numeric}. The number of levels for mapping the
-#' deformations.
+#' deformations
 #' @param iso.nb A \code{numeric}. The number of points to use for the
-#' calculation of deformation.
-#' @param cont \code{logical}. Whether to draw contour lines.
-#' @param cont.col A color for drawing the contour lines.
+#' calculation of deformation
+#' @param cont \code{logical}. Whether to draw contour lines
+#' @param cont.col A color for drawing the contour lines
 #' @param poly whether to draw polygons (for outlines) or points (for landmarks)
-#' @param shp \code{logical}. Whether to draw shapes.
-#' @param shp.border Two colors for drawing the borders.
-#' @param shp.lwd Two \code{lwd} for drawing shapes.
-#' @param shp.lty Two \code{lty} fro drawing the shapes.
-#' @param legend logical whether to plot a legend.
+#' @param shp \code{logical}. Whether to draw shapes
+#' @param shp.border Two colors for drawing the borders
+#' @param shp.lwd Two \code{lwd} for drawing shapes
+#' @param shp.lty Two \code{lty} fro drawing the shapes
+#' @param legend logical whether to plot a legend
+#' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo.draw}
-#' @return No returned value.
+#' @return No returned value
 #' @seealso \link{tps.grid} and \link{tps.arr}
 #' @keywords ThinPlateSplines
 #' @examples
@@ -256,7 +258,7 @@ tps.arr <- function(fr, to, amp = 1, over = 1.2, palette = col.summer,
 tps.iso <- function(fr, to, amp = 1, over = 1.2, palette = col.spring, 
     iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black", 
     poly = TRUE, shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(2, 
-        2), shp.lty = c(1, 1), legend = TRUE, ...) {
+        2), shp.lty = c(1, 1), legend = TRUE, legend.text, ...) {
     fr.n <- substitute(fr)
     to.n <- substitute(to)  # otherwise problems with substitute in legend below
     if (!missing(amp)) 
@@ -295,6 +297,7 @@ tps.iso <- function(fr, to, amp = 1, over = 1.2, palette = col.spring,
             lty = shp.lty[2], points = points, first.point = FALSE, 
             centroid = FALSE, ...)
         if (legend) {
+          if (missing(legend.text)) legend.text <- c(fr.n, to.n)
             legend("topright", legend = c(fr.n, to.n), col = shp.border, 
                 lwd = shp.lwd, bty = "n")
         }
