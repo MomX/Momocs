@@ -35,3 +35,6 @@ Imports:
     ape,
     geometry,
     colorspace
+Suggests:
+    knitr
+VignetteBuilder: knitr

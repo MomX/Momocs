@@ -1,0 +1,72 @@
+---
+title: "Operations on coordinates"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Operation on coordinates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+Shapes are primarily $(x; y)$ coordinates on which we can apply transformations, e.g. center, scale, translate, etc.
+
+Momocs comes with a large family of such transformations and this vignette aims at presenting them extensively. A full documentation can be found in their respective helpfiles. It point out what to look for on the plots, transformations. When it makes sense to have a custom use of one of these operation, it is usually available as an argument. If not, do it yourself and please let me know, or write me, I'll try arrange that.
+
+Some details about how to write your own transformation, and how to apply them on `Out` objects are also provided.
+
+## Preliminaries
+We load a cat and we call it `shp`. You can work on a different shape by changing this.
+
+```{r}
+library(Momocs)
+data(shapes)
+shp <- shapes[4] #try shapes[20] if you like Monty Pythons
+coo.plot(shp, main = "A cat")
+```
+
+## Basic operations
+Most of them are linear mapping that rely on transformation matrices. The dedicated [Wikipedia](http://en.wikipedia.org/wiki/Linear_map) page is your friend.
+
+### Centering
+Note the axis lines drawn by `coo.plot`.
+```{r}
+coo.plot(coo.center(shp))
+```
+
+### Scaling
+Note the scale. By default, the centroid size is used as a scaling factor.
+```{r}
+coo.plot(coo.scale(shp))
+```
+
+Operations can be combined ad infinitum, e.g. centering and scaling:
+```{r}
+coo.plot(coo.center(coo.scale(shp)))
+```
+
+You could write your own function to do that (or anything else)
+```{r, eval=FALSE}
+coo.ccs <- function(coo){
+  return(coo.center(coo.scale(coo)))}
+coo.plot(coo.cs) # try that
+```
+Or even [maggritr](http://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html)-style with:
+```{r, eval=FALSE}
+library(magrittr)
+coo.cs2 <- function(coo) coo %>% coo.scale %>% coo.center
+coo.plot(coo.cs2(shp))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
