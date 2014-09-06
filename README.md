@@ -15,6 +15,8 @@ library(Momocs)
 ````
 Note that you can find in `?Coo` the steps to import your former `Coo`objects.
 
+![Momocs functionnal architecture](https://raw.githubusercontent.com/vbonhomme/Momocs-vignette/master/v0.9/figures/Momocs-arch.png)
+
 Next big steps
 --------
 * Fill the gaps (particularly for landmarks)
