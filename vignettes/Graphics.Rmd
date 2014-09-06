@@ -1,0 +1,49 @@
+---
+title: "Graphics"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Operation on coordinates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+  
+# Shape graphics
+`coo.plot` and `coo.draw` are the basic shape plotters in Momocs, used in many functions/methods. We will load the `wings` dataset (see `?wings` for details and credits), and illustrate some options of these plotters.
+
+```{r}
+library(Momocs)
+data(wings)
+w1 <- wings[1]
+w2 <- wings[2]
+coo.plot(w1, border = "#FF0000", lwd = 0.5, lty = 3, main="Two mosquito wings")
+coo.draw(w2, border="#0000FF", col=.transp("000FF", 0.9), poly=FALSE, pch=20)
+```
+  
+  Note that the red-dotted outlines are not biologically relevant, since we want to display landmark positions, with some of them being within the wings. In other words, this should not be drawn as a polygon. That is what we have done with the second shape, with the blue dots, by passing `poly=FALSE`, for `coo.draw` which simply adds a shape in the existing graphical window.
+
+If we want to illustrate differences in landmark positions, we can use `coo.lolli` (lollipops/lolliplots), and `coo.arrows`. In the background we add, for the first plot, landmarks that correspond to the mean shape. For the second plot, we add landmarks labels which are the row numbers for the shapes.
+
+```{r`
+coo.lolli(w1, w2, main="coo.lolli")
+coo.draw(ms, border="blue", poly=FALSE)
+
+coo.arrows(w1, w2, main="coo.arrows")
+ldk.labels(ms, d=0.15)
+```
+  
+# Thin plate splines
+We will extract the mean shapes of whisky and beer bottles, from the bottles dataset. We have seen the first two steps before. We add some custom arguments to the `tps.` family but it "works" with only the first two.
+```{r}
+data(bot)
+bot.f <- eFourier(bot, 12)
+ms <- mshapes(bot.f, "type") #mshapes 'type'-wise, see bot.f$fac
+whisky <- ms$shp$whisky
+beer   <- ms$shp$beer 
+tps.grid(beer, whisky, grid.size = 30, amp=2)
+tps.arr(beer, whisky, amp=2, palette=col.summer2)
+tps.iso(beer, whisky, amp=2, palette=col.spring)
+```
+
+  
