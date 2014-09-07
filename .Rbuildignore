@@ -1,2 +1,6 @@
-^.*\.Rproj$
-^\.Rproj\.user$
+.gitignore
+aux$
+log$
+out$
+inst/doc/*
+NEWS.md

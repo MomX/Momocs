@@ -20,6 +20,7 @@ Let's start multivariate approaches with Principal Component Analysis. How shape
 The pca in Momocs is calculated with `PCA()`. It makes different assumptions depending on your `Coe` type. For instance, Fourier-based approaches are not rescaled, since higher order harmonics actually contribute less than low-order harmonics. `PCA must be called on a `Coe` object, `bot.f` below. 
 
 ```{r}
+library(Momocs)
 data(bot)
 bot.f <- eFourier(bot, 12)
 bot.p <- PCA(bot.f)
