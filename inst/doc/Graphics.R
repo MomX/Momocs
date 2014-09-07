@@ -52,3 +52,38 @@ stack(bot)
 bot <- coo.slidedirection(coo.scale(coo.center(bot)), "W")
 stack(bot)
 
+## ----, fig.show='hold'---------------------------------------------------
+data(olea) # Opn 
+class(olea)
+panel(olea)
+stack(olea)
+
+data(wings) # Ldk
+class(wings)
+panel(wings)
+stack(wings)
+
+## ----, fig.show='hold'---------------------------------------------------
+bot.f <- eFourier(bot, 12)
+hist(bot.f)
+boxplot(bot.f)
+
+## ----, fig.show='hold'---------------------------------------------------
+panel(bot.f)
+stack(bot.f)
+
+## ----, fig.show='hold'---------------------------------------------------
+olea.p <- orthoPolynomials(olea, degree = 5, nb.pts = 50)
+hist(olea.p)
+boxplot(olea.p)
+#todo
+#panel(olea.p)
+#stack(olea.p)
+
+wings.fg <- fgProcrustes(wings, verbose = FALSE)
+#todo
+#hist(wings.fg)
+#boxplot(wings.fg)
+panel(wings.fg)
+stack(wings.fg)
+
