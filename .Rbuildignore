@@ -2,5 +2,6 @@
 aux$
 log$
 out$
-inst/doc/*
 NEWS.md
+^.*\.Rproj$
+^\.Rproj\.user$

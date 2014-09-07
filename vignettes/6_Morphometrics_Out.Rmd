@@ -68,9 +68,10 @@ clust(bot.f, "type", palette=col.gallus)
 ```
 
 ### Mean shapes and Thin Plate Splines
-```{r, fig.show='hold', warning=FALSE}
+Try:
+```{r, fig.show='hold', eval=FALSE}
 ms <- mshapes(bot.f, "type")$shp
 tps.iso(ms$beer, ms$whisky)
-tps.arr(ms$beer, ms$whisky)
-tps.grid(ms$beer, ms$whisky)
+#tps.arr(ms$beer, ms$whisky)
+#tps.grid(ms$beer, ms$whisky)
 ```
