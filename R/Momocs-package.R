@@ -19,8 +19,7 @@
 #' 
 #' @seealso
 #' \itemize{
-#'  \item \bold{Tutorial}: \url{https://github.com/vbonhomme/Momocs-vignette/tree/master/v0.9} (work in progess...)
-#'  \item \bold{Demos}: \code{demo(package='Momocs')} for the list of demos, e.g. \code{demo(eft)}
+#'  \item \bold{Tutorial}: \code{browseVignettes("Momocs")} (work in progress...)
 #'  \item \bold{Homepage}: \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
 #' and hotline
 #'  \item \bold{GitHub repo}: \url{https://github.com/vbonhomme/Momocs} to contribute,
