@@ -1,0 +1,76 @@
+---
+title: "Morphometrics: outline analysis"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Morphometrics: outline analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+Preliminary note.
+
+# eFourier: Elliptical Fourier Transforms
+```{r}
+library(Momocs)
+data(bot)
+bot
+```
+
+### How EFT works
+```{r}
+#coo.oscillo(bot[1], method = "efourier")
+```
+
+```{r}
+panel(bot, fac="type", palette=col.india, names=TRUE)
+stack(bot)
+```
+
+### Calibration
+```{r}
+hpow(bot)
+hquant(bot, id=1:5)
+hqual(bot, harm.range = 1:12)
+```
+
+## EFT
+```{r}
+bot.f <- eFourier(bot, 9)
+bot.f
+```
+
+### A PCA
+```{r}
+bot.p <- PCA(bot.f)
+plot(bot.p, "type")
+# some variation around PCA
+plot(bot.p, "type", xax=2, yax=3, pos="xy")
+```
+### MANOVA
+```{r}
+Manova(bot.f, "type")
+```
+
+### LDA
+```{r}
+# Let's try and LDA now
+bot.l <- LDA(bot.f, "type")
+bot.l
+plot(bot.l)
+plotCV(bot.l$CV.tab)
+```
+
+### Hierachical clustering
+```{r}
+clust(bot.f, "type", palette=col.gallus)
+```
+
+### Mean shapes and Thin Plate Splines
+```{r, fig.show='hold', warning=FALSE}
+ms <- mshapes(bot.f, "type")$shp
+tps.iso(ms$beer, ms$whisky)
+tps.arr(ms$beer, ms$whisky)
+tps.grid(ms$beer, ms$whisky)
+```
