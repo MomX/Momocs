@@ -75,3 +75,73 @@ tps.iso(ms$beer, ms$whisky)
 #tps.arr(ms$beer, ms$whisky)
 #tps.grid(ms$beer, ms$whisky)
 ```
+
+
+# Which Fourier analysis?
+
+```{r}
+data(shapes)
+# cats are prone to high frequency noise (well, just tfourier)
+cat <- coo.sample(coo.smooth(shapes[4], 10), 120)
+#coo.oscillo(cat, "all")
+```
+
+```{r}
+Ptolemy(cat)
+```
+
+# EFT
+## Normalization
+### numerically
+
+```{r, fig.show='hold'}
+data(hearts)
+hearts.raw  <- eFourier(hearts, nb.h=8, norm=FALSE)
+hist(hearts.raw)
+hearts.norm <- eFourier(hearts, nb.h=8, norm=TRUE)
+hist(hearts.norm)
+plot(PCA(hearts.raw),  border.shp="grey30", title="hearts - raw")
+plot(PCA(hearts.norm), border.shp="grey30", title="hearts - norm")
+```
+
+```{r, results='hide', fig.show='hold'}
+hearts2 <- hearts
+set.seed(123)
+hearts2$coo <- lapply(hearts2$coo, function(x) 
+  coo.trans(coo.rotate(x, runif(1, -pi, pi)), x=runif(1, -5, 5), y=runif(1, -5, 5)))
+stack(hearts2, borders="grey40")
+
+hearts2.raw  <- eFourier(hearts2, nb.h=8, norm = FALSE)
+hearts2.norm <- eFourier(hearts2, nb.h=8, norm = TRUE)
+
+plot(PCA(hearts2.raw),  border.shp="grey30", title="heart2 - raw")
+plot(PCA(hearts2.norm), border.shp="grey30", title="hearts2 - norm")
+
+hearts3 <- fgProcrustes(hearts2)
+stack(hearts3)
+hearts3 <- coo.slide(coo.bookstein(hearts3, 2, 4), id1 = 4)
+stack(hearts3)
+
+hearts3.f <- eFourier(hearts3, nb.h=8, norm=FALSE)
+hearts3.p <- PCA(hearts3.f)
+plot(hearts3.p, border.shp="black")
+```
+
+
+### With landmarks
+### With fgP
+
+## Calibration
+### hqual
+### hquant
+### hpow
+
+## From outlines to coefficients
+```{r, eval=FALSE}
+hist
+boxplot
+hcontrib
+removeSymmetric
+```
+
+

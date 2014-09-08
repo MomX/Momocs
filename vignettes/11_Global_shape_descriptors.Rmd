@@ -9,4 +9,31 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+Todo.
+
+```{r, eval=FALSE}
+
+coo.perim
+coo.perim.cum
+coo.perim.pts
+
+coo.area
+coo.calliper
+coo.perim
+coo.lw
+coo.circularity
+coo.circularity.haralick
+coo.circularity.norm
+coo.convexity
+coo.eccentricity.boundingbox
+coo.eccentricity.eigen
+coo.elongation
+coo.rectangularity
+coo.rectilinearity
+coo.solidity
+
+
+```
+
+
 

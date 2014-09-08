@@ -9,4 +9,28 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+Morphometrics is the statistical description of shapes, in other words methods that turn $(x, y)$ coordinates into quantitative variables.
+
+Of course, the raw data may differ in their nature: outlines, curves, configuration of landmarks, and once you have quantitative variables you have a bunch of multivariate analyses at your fingertips.
+
+Whatever the morphometric approach you are using (say outline analysis) you have very *generic* needs that you share with other approaches (say configuration of landmarks), for instance centering and plotting your shape dataset. But you have have very *specific* needs, for instance calculation Elliptical Fourier Transform, which makes no sense on configuration of landmarks.
+
+Momocs use a simple scheme of classes to handle the different morphometrics approaches and the methods associated with:
+
+* **Coo**rdinates are primarily `Coo` objects but also of class:
+    + `Out` for **out**lines
+    + `Opn` for **op**e**n** outlines
+    + `Ldk` for configurations of **l**an**d**mar**k**s
+* **Coe**fficients are primarily `Coe` objects but also of class:
+    + `OutCoe`
+    + `OpnCoe`
+    + `LdkCoe`
+    
+They are all described in their own helpfiles (*e.g.* `?Out`).
+
+*******
+![Momocs architecture](MomocsArch.png)
+
+*******
+
 

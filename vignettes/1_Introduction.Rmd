@@ -9,7 +9,7 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-### About morphometrics
+# About morphometrics
 The link, if there were one, between the form and the function of objects, living or inert, has been one of the most enduring questions in the realm of science. In many situations, analysing the shape variation among objects can bring deep insights into their functioning and to the underlying mechanism leading to their variation in shape. 
 
 Morphometrics aims at analyzing the variation and covariation of the *size* and *shape* of objects, defining altogether their form. Shape and form might be confusing words, used as synonyms  in many languages. Hereafter, we will use the definition of shape proposed by Kendall (1989) and Small (1996) that it is:
@@ -25,7 +25,7 @@ In other words, What remains if we draw an heart, and then rotate the page, or c
 
 ******
 
-## About Momocs
+# About Momocs
 Momocs, which names stands for **mo**dern **mo**rphometri**cs** aims at provinding a comprehensive environment for shape analysis in R.
 
 Momocs started with the seminal book by Julien Claude, *Morphometrics with R* that provided, for the first time, an exhaustive list of function along with a very didactical approach. Then Sandrine Picq, as part of her PhD at the UMR CBAE in Montpellier, France, wrapped some of these functions to analyse the outlines of her grapevine seeds. After my PhD, I finally had the opportunity to start morphometrics while I was doing a post-doc at the French Institute of Pondicherry in India, with Cédric Gaucherel. At that time, Momocs was only dedicated to outline analyses and has been released for the first time in May 2012. The associated paper has been published in [Journal of Statistical Software](http://www.jstatsoft.org/v56/i13/) but in the meantime Momocs grown, month after month, and mainly because of the great welcome it had among morphometricians *union* R-users.
@@ -34,7 +34,7 @@ More recently I started a new post-doc with Eleanor Stillman and Glynis Jones, a
 
 Our ultimate aim is to provide a very complete environment and toolkit for all morphometrics approaches, to bring them all in an open-source environment, easy to extend, improve and fine-tune. In brief, to focus more on science than on softwares.
 
-## About these vignettes
+# About these vignettes
 Most of the useRs will probably not need to read all of these vignettes to use Momocs but they will grab the overall logic behind Momocs and be quickly free as birds. Altogether, they are intended for form a nice and complete tutorial.
 
 For pure R beginners, the way will be a bit longer but I hope it's feasible though. And if you come to R, thanks to morphometrics, I consider that a great news!
@@ -49,12 +49,12 @@ The aim of this manual is to provide an overview of the package, mostly graphica
 
 Finally, this manual itself is written using a combination of R and RMarkdown thanks to RStudio. And you can access its code source [there](https://github.com/vbonhomme).
 
-## How to contribute
+# How to contribute
 Momocs is open-source and does not belong to someone in particular; it relies on you to signal bugs, share ideas, methods, tutorials, talks, datasets, etc.
 
 Momocs has a [GitHub](https://github.com/vbonhomme/Momocs/) repository that welcomes contributions:  otherwise you can send me an email at the adress below. And naturally, any contribution you will be properly credited.
 
-## Install and load Momocs
+# Install and load Momocs
 Enough talking, let's do some morphometrics with Momocs! All the grey boxes below contain R code, most of the time with the results it produces, text and/or graphs. If you copy/paste it in your own R, it should work the same way as here.
 
 ### From CRAN
@@ -77,7 +77,42 @@ install_github("vbonhomme/Momocs")
 library(Momocs)
 ```
 
-## Contact me!
+# A quick example
+
+Let's start with a quick analysis on one of the datasets bundled with Momocs. The `bot`tles dataset which includes 20 (randomly chosen) outlines of beer bottles, and 20 of whisky bottles. We are interested in: i) exploring the morphological diversity of these 40 bottles, and ii) in testing whether whisky and beer bottles differ in shape.
+
+We will first load it, print it, then calculate some elliptical Fourier analysis on it. On the matrix of coefficients, we will calculate a Principal Component Analysis and plot it, then test using a Multivariate analysis of variance whether the beer bottles have different shapes than the whisly bottles.
+```{r}
+library(Momocs)
+data(bot)
+bot
+```
+
+This overview indicates that `bot` is a `Out` object, some outlines (x; y) coordinates, and also that we have one "classifier" in the `\$fac` slot, called "type" and that indicates whether the corresponding outline is a beer or a whisky bottle.
+```{r}
+panel(bot, names=TRUE, fac="type")
+```
+
+On these, bottles, let's apply an elliptical Fourier analysis with default settings. Most of the core function of Momocs have default settings but print a message when important decisions are made for you. Here, the number of harmonics chosen.
+```{r}
+bot.f <- eFourier(bot, nb.h=12)
+```
+
+And then a principal component analysis, using the \texttt{type} classifier to draw groups of beer and whisky bottles.
+```{r}
+bot.p <- PCA(bot.f)
+plot(bot.p, "type")
+```
+
+Then, a multivariate analysis of variance on the matrix of coefficients (\texttt{bot.f}) to test if the shapes of the two groups differ.
+
+```{r}
+Manova(bot.f, "type")
+```
+
+So, whisky and beer bottles do not "significantly" differ in their shape.
+
+### Contact me!
 If you:
 * struggle to "make it works"
 * have a doubt on something
