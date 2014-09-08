@@ -4,7 +4,7 @@ author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Global shape descriptors}
+  %\VignetteIndexEntry{11 - Global shape descriptors}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---

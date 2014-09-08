@@ -4,7 +4,7 @@ author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Morphometrics: configuration of landmarks}
+  %\VignetteIndexEntry{08 - Morphometrics: configuration of landmarks}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---

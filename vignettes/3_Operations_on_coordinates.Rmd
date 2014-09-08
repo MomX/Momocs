@@ -4,7 +4,7 @@ author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Operation on coordinates}
+  %\VignetteIndexEntry{03 - Operation on coordinates}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
