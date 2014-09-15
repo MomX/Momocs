@@ -4,14 +4,14 @@
 \alias{PC.contrib.PCA}
 \title{Shape variation along PC axes}
 \usage{
-PC.contrib(x, ...)
+PC.contrib(PCA, ...)
 
-\method{PC.contrib}{PCA}(x, nax = 1:4, sd.r = c(-2, -1, -0.5, 0, 0.5, 1, 2),
-  main = "PC contribution to shape", xlab = "(Mean + ) SD",
+\method{PC.contrib}{PCA}(PCA, nax = 1:4, sd.r = c(-2, -1, -0.5, 0, 0.5, 1,
+  2), main = "PC contribution to shape", xlab = "(Mean + ) SD",
   ylab = "PC axes", ...)
 }
 \arguments{
-\item{x}{a \code{\link{PCA}} object}
+\item{PCA}{a \code{\link{PCA}} object}
 
 \item{...}{additional parameter to pass to \code{\link{coo.draw}}}
 
