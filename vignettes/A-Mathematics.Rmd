@@ -1,0 +1,190 @@
+---
+title: "Mathematics of morphometrics"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A - Mathematics of morphometrics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Outline analysis
+This section is directly pasted from the [JSS paper](http://www.jstatsoft.org/v56/i13/).
+
+### Fourier radius variation
+Zahn and Roskies (1972) stated that, given a closed outline, the radius $r$,
+taken as the distance from the outline centroid and a given point of
+the outline, can be expressed as a periodic function of the angle
+$\theta$. Harmonics from $0$ to $k$ approximate the function:
+
+\[r(\theta)= \frac{1}{2}a_0 +  \sum\limits_{n=1}^{k}a_n\cos(w_n\theta) + b_n\sin(w_n\theta) \]
+
+with:
+
+$$a_n = \frac{2}{p}\sum\limits_{i=1}^{p}r_i\cos(n\theta_i)$$
+$$b_n = \frac{2}{p}\sum\limits_{i=1}^{p}r_i\sin(n\theta_i)$$
+
+and:
+
+$$a_0 = \sqrt{\frac{2}{p}}\sum\limits_{i=1}^{p}r_i$$
+
+$w$ refers to the pulse and $p$ is the number of sampled points along the outline (equivalent here to the number of sampled radii in this case). The $a_n$ and $b_n$ harmonic coefficients, extracted for every
+individual shape, can be used for multivariate analyses to compare a
+set of outlines.
+
+### Fourier tangent angle
+Radius variation may fail to fit some complex outlines, in particular
+when a given radius intercepts the outline twice, a situation that can
+arise when the outline presents convexities and
+concavities. Zahn and Roskies (1972) proposed also another approach. The Fourier
+tangent angle fits the cumulative change in the angle of a tangent
+vector ($\phi(t)$), as a function of the cumulative curvilinear
+distance $t$ along the outline.
+
+Given a closed outline, previously scaled to $2\pi$, $\phi(t)$ can be
+expressed as:
+
+\[
+\phi(t) = \theta(t) - \theta(0) - t,
+\]
+
+where $t$ is the distance along the outline, $\theta(t)$ the angle of
+the tangent vector at $t$ and $\theta(0)$ the angle of the tangent
+vector taken for the first point. It can be removed for normalizing
+the coefficients obtained. Two coefficients per harmonic can be
+estimated as follows:
+
+$$a_n = \frac{2}{p}\sum\limits_{i=1}^{p}\phi(t)\cos(n \theta_i)$$
+$$b_n = \frac{2}{p}\sum\limits_{i=1}^{p}\phi(t)\sin(n \theta_i)$$
+
+and:
+$$a_0 = \sqrt{\frac{2}{p}}\sum\limits_{i=1}^{p}\phi(t)$$
+
+
+### Elliptical Fourier Transforms
+Let $T$ be the perimeter of a given closed outline, here considered as
+the period of the signal. One sets $\omega = 2\pi/T$ to be the
+pulse. Then, the curvilinear abscissa $t$ varies from $0$ to $T$. One
+can express $x(t)$ and $y(t)$ as follows:
+
+$$x(t) = \frac{a_0}{2}+\sum\limits_{n=1}^{+\infty} a_n\cos(n\omega t) + b_n(\sin n\omega t)$$
+
+with: 
+$$a_n = \frac{2}{T}+ \int\limits_{0}^{T} x(t)\cos (n\omega t) \mathrm{d} t$$
+$$b_n = \frac{2}{T}+ \int\limits_{0}^{T} x(t)\sin (n\omega t) \mathrm{d} t$$
+
+Similarly :
+$$y(t) = \frac{c_0}{2}+\sum\limits_{n=1}^{+\infty} c_n(\cos n\omega t) + d_n(\sin n\omega t)$$
+
+with:
+
+$$c_n = \frac{2}{T}+ \int\limits_{0}^{T} y(t)\cos (n\omega t) \mathrm{d} t $$
+$$d_n = \frac{2}{T}+ \int\limits_{0}^{T} y(t)\sin (n\omega t) \mathrm{d} t $$
+
+Since the outline contains a finite number of points given by $k$, one
+can calculate discrete estimators for every harmonic coefficient of
+the $n^{th}$ rank:
+
+$$a_n =\frac{T}{2\pi^2n^2}\sum\limits_{p=1}^k \frac{\Delta x_p}{\Delta t_p}\left(\cos\frac{2\pi nt_p}{T}-\cos\frac{2\pi nt_{p-1}}{T}\right)$$
+$$b_n =\frac{T}{2\pi^2n^2}\sum\limits_{p=1}^k \frac{\Delta x_p}{\Delta t_p}\left(\sin\frac{2\pi nt_p}{T}-\sin\frac{2\pi nt_{p-1}}{T}\right)$$
+
+$\Delta x_1=x_1-x_k$ and $c_n$ and $d_n$ are calculated
+similarly. $a_0$ and $c_0$ correspond to the estimate of the
+coordinates of the centroid of the original outline and are estimated
+by:
+$$a_0 =\frac{2}{T}\sum\limits_{i=1}^p x_i$$
+$$c_0 =\frac{2}{T}\sum\limits_{i=1}^p y_i$$
+Intuitively, for all positive integers $n$, the sum of a cosine curve
+and a sine curve represent the $n^{th}$ harmonic content of the $x$
+and $y$ projections of the $k$-edged polygon, and for any $n$, these
+two curves define an ellipse in the plane. Ferson et al. noticed
+that in the "time"", say one period, it takes the $n^{th}$ harmonic
+to traverse its ellipse $n$ times, the $(n+1)^{th}$ harmonic has
+traversed its own ellipse $n+1$ times. Ferson et al. noticed that the reconstruction
+of the original polygon is done by vector-adding these ellipses for
+all harmonics, which echoes (the ancient astronomer) Ptolemy's
+epicycles, and the reconstruction obtained from $N$ harmonics is the
+best possible fit in a least-squares sense (see `Ptolemy` function).
+
+In elliptic Fourier analysis, four coefficients per harmonic are
+obtained, two for $x$ and two for $y$. We can use the first harmonic,
+the one that defines the best-fitting ellipse, to normalize the
+harmonic coefficients and make them invariant to size and
+rotation. The harmonic coefficients can also be normalized for the
+location of the first outline coordinate. When this is done, the
+shapes are individually aligned according to their first fitted
+ellipse. If at least one homologous point can be defined, one can
+rather use them to align the outlines. Normalized elliptic Fourier
+coefficients, further symbolized by $A_n$, $B_n$, $C_n$ and $D_n$, are
+obtained:
+\[
+\left(
+\begin{array}{c c}
+A_n & B_n \\
+C_n & D_n
+\end{array}
+\right)
+= \frac{1}{\lambda}
+\left(
+\begin{array}{c c}
+\cos\psi & \sin\psi \\
+-\sin\psi & \cos\psi
+\end{array}
+\right)
+\left(
+\begin{array}{c c}
+a_n & b_n \\
+c_n & d_n
+\end{array}
+\right)
+\left(
+\begin{array}{c c}
+\cos n\theta & -\sin\theta \\
+\sin n\theta & \cos n\theta
+\end{array}
+\right)
+\]
+
+The scale $\lambda$ is estimated as the magnitude of the semi-major
+axis of the ellipse as defined by the first harmonic. The second right
+term corresponds to the orientation of the first ellipse, with $\psi$
+being the rotation angle, the third to the original harmonic
+coefficient, and the last to the rotation of the starting point to the
+end of the ellipse, with a rotation angle of
+$\theta$. Ferson et al. also supplied the following formulas with
+which to calculate these parameters:
+
+\[
+\psi = 0.5\arctan\frac{2\times(a_1b_1 + c_1d_1)}{a^2_1 + c^2_1 - b^2_1 - d^2_1} 
+\]
+with first
+\[
+\lambda = \sqrt[]{a^{*2} + c^{*2}}
+\]
+and
+\[
+\theta=\arctan(c^*/a^*)
+\]
+with
+\[
+a^{*2}=a_1\cos\psi + b_1\sin\psi
+\]
+\[
+c^{*2}=c_1\cos\psi + d_1\sin\psi \\
+\]
+
+(todo below)
+
+# Open outline analysis
+
+### Natural polynomials
+
+### Orthogonal polynomials
+
+### Discrete cosinus transform
+
+# Configuration of landmarks
+
+# Global descriptors of shape
+

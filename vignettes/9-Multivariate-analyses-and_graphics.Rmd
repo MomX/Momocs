@@ -1,0 +1,178 @@
+---
+title: "Multivariate analyses and graphics"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{09 - Multivariate analyses and graphics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+This vignette illustrates multivariate analyses and their associated graphics. It is thus somehow the continuation of the vignette dedicated to Graphics.
+
+Note that graphics below may have a funny appearance. This is due to the restrictions on the graphics/vignettes sizes. Everything should be ok when code is runned on your machine.
+
+# PCA: Principal Component Analyses
+
+Let's start multivariate approaches with Principal Component Analysis. How shape variability is spread accross the quantitative variable, and where "fall" our groups, if any, on the factorial plane?
+
+The pca in Momocs is calculated with `PCA()`. It makes different assumptions depending on your `Coe` type. For instance, Fourier-based approaches are not rescaled, since higher order harmonics actually contribute less than low-order harmonics. `PCA must be called on a `Coe` object, `bot.f` below. 
+
+```{r}
+library(Momocs)
+data(bot)
+bot.f <- eFourier(bot, 12)
+bot.p <- PCA(bot.f)
+class(bot.p)
+```
+
+The object created, `bot.p` is of `PCA` class, a Momocs class, and also `prcomp` since it is produced by this function. It means that if you have your own functions that handle `prcomp` object, you can feed them with the `PCA`-objects created by Momocs. Such class declaration allows to write our own methods. Below, the good old `plot` "works" on `bot.p`.
+
+```{r, fig.show='hold'}
+plot(bot.p)
+```
+
+You have a nice plot even with default arguments. Here for instance, we have the first two PC axis as indicated on the axes themselves. You also have the percentage of variance explained by these two axes the eigen value barplot for the first five PC axes in the bottom-right corner.
+
+We also add the name of the PCA object in the bottom-left corner, and when possible, the morphospace in the background. The morphospace is based on the two PC axis plotted and aims to indicate what the linear combination of the quantitative variables (here the harmonic coefficients), weighted by the loadings and compared to the mean shape (the origin), means in terms of shape.
+
+The `bot` data set has a grouping factor, called "type". It is passed from the coordinates (the `Out` object here, but that's the case for any `Coo`), to the matrix of coefficients (the `OutCoe` object, same remark for `Coe`), and eventually to the `PCA` object.
+
+We can use this "type" grouping factor to do many things in multivariate analysis, and first of all to plot this group on the factorial plane, either through their column names or their column id:
+
+```{r, fig.show='hold'}
+plot(bot.p, "type") # equivalent to plot(bot.p, 1)
+```
+
+Naturally, nothing has changed for the points or the morphospace, but we see how whisky and bottle shapes are distributed accross PC1 and PC2.
+
+You have a bunch of options to fine-tune this graphics beyond the default options. 
+
+I add a technical point here. To see what are the default options, and more importantly, to know all the available options you can play with you can either press `<Tab>` in most environment (but all `plot` methods are merged so it is more convenient to type `plot.PCA` directly); you can also print all the arguments `args(Momocs:::plot.PCA)` (a big baby); or more easily have a look to the helpfiles: `?plot.PCA` and the examples in it. Note that as this plotting method extends the generic plot, you have to add `.PCA` to get the help. Above, to get the arguments, but it would also work to get the methods code, you have to add `Momocs:::` to indicate the R the namespace is has to look for. But that is technical stuff; let's come back to the PCA.
+
+Below a showcase of what `plot.PCA` can do for you, with some minor tuning.
+
+```{r, fig.show='hold'}
+# PC2 and 3 with 0.75 bivariate gaussian confidence ellipses but not their axes
+plot(bot.p, "type", xax = 2, yax=3, ellipses=TRUE, conf.ellipses=0.5, 
+     ellipsesax.conf = c(0.25, 0.5, 0.75, 0.9), cex=0.3)
+# color + title
+plot(bot.p, "type", pch=c("w", "b"), col=c("darkslateblue", "hotpink"), 
+     rug=FALSE, eigen=FALSE, ellipsesax=FALSE, title="A nice title", cex=1)
+# another color example
+plot(bot.p, col=col.summer(40), cex=1.5)
+# a fac passed on the fly
+plot(bot.p, fac=factor(rep(letters[1:4], each=10)))
+# delaunay triangulation
+plot(bot.p, 1, zoom=1.5, delaunay=TRUE, labelsgroups = FALSE, ellipsesax=FALSE)
+# convex hulls
+plot(bot.p, 1, chull=TRUE, ellipsesax=FALSE, stars=TRUE, chull.lty = 1, 
+     palette=col.india, abbreviate.labelsgroups = TRUE, 
+     cex.labelsgroups = 1.25, rect.labelsgroups=FALSE)
+```
+
+Now, some variations on morphospaces.
+```{r, fig.show='hold'}
+plot(bot.p, 1, pos.shp="circle", nb.shp=16, col.shp="gold")
+plot(bot.p, 1, pos.shp="range", nr.shp=20, nc.shp=15, 
+     size.shp = 1/3, amp.shp=2, border.shp="grey20")
+plot(bot.p, 1, pos.shp="xy", lwd.shp=3)
+plot(bot.p, 1, morphospace=FALSE) # no morphospace
+```
+
+And variations around some kernel density estimates.
+```{r, fig.show='hold'}
+plot(bot.p, density=TRUE, contour=FALSE) # density only
+plot(bot.p, 1, contour=TRUE, lev.contour=5, palette=col.autumn) # contour only
+```
+
+Here I have used the bottles dataset, but we can used another approach, for instance orthogonal polynomial fitting on open curves. Let's try on the dataset `olea`.
+
+```{r, fig.show='hold'}
+data(olea)
+olea.pol <- orthoPolynomials(olea, 5, nb.pts = 60)
+olea.p <- PCA(olea.pol)
+plot(olea.p, "cep", lwd.shp=2)
+```
+
+And reconstructed shapes are also open curves. Let's try with configuration of landmarks. Note that morphospace still needs to handle landmarks + links properly. Soon.
+
+```{r, fig.show='hold'}
+data(wings)
+wings.al <- fgProcrustes(wings, verbose=FALSE, tol = 1e-4) # to speed up
+wings.p <- PCA(wings.al)
+plot(wings.p)
+```
+
+In other words, once you are familiar with the (very limited though) grammar of Momocs, you can do all the morphometrics approach and further analyses in a very parallel fashion.
+
+Two more things. You can use the function `plot3` to plot a combination of the three PC axes, and all the options can be passed to it. Try:
+
+```{r, fig.show='hold', eval=FALSE}
+plot3(bot.p, 1, contour=TRUE, lev.contour=5,
+      pos.shp="circle", border.shp="grey20")
+```
+
+Also, `plot.PCA` is pretty generic, so you can easily plot any `pca` output from `prcomp`, or any other function. It just needs a `$x` and a `$fac` components. See the example below. 
+
+```{r, fig.show='hold'}
+# a pca
+mat <- matrix(rnorm(100), 20)
+mat.p <- prcomp(mat)
+class(mat.p) <- "PCA"
+plot(mat.p)
+
+# a kmeans-helped scatter-plot
+set.seed(123)
+x <- replicate(2, rnorm(500))
+fac <- factor(kmeans(x, centers = 8)$cluster)
+fake <- list(x=x)
+class(fake) <- c("PCA", class(PCA))
+op <- par(bg="grey20", fg="white")
+plot(fake, fac, density=TRUE, palette=col.solarized, eigen=FALSE)
+par(op)
+```
+
+# MANOVA: Multivariate analysis of variance
+We can test if whisky and beer bottles, or any other groups within a given `\$fac} differ in their shape using a Multivariate analysis of variance. `Manova} is your friend here. It applies on `Coe} objects and needs a factor to test for differences between groups.
+
+```{r, fig.show='hold'}
+Manova(bot.f, "type") #bottles - type
+Manova(olea.pol, "cep") #olea - cepages
+# not yet on Ldk.
+```
+
+If you want to test all pairwise differences between levels of a group, try `ManovaPW`:
+
+```{r, fig.show='hold'}
+ManovaPW(olea.pol, "cep")
+```
+
+# LDA: Linear Discriminant Analysis
+But some method on `Coe`are available.
+```{r, fig.show='hold'}
+bot.l <- LDA(bot.p, "type") 
+plot(bot.l)
+plotCV2(bot.l$CV.tab)
+bot.l
+```
+
+And on olea:
+```{r, fig.show='hold'}
+olea.l <- LDA(olea.p, "cep")
+plot(olea.l)
+plotCV(olea.l$CV.tab)
+```
+
+Note that almost all plotting options for PCA also work for LDA!
+
+# Hierarchical clustering
+```{r, fig.show='hold'}
+# todo: add shapes on hclust plots
+clust(bot.f, "type", type = "fan")
+clust(bot.f, "type", type = "cladogram")
+```
+
+Add RDA and multreg here.
+  
