@@ -339,15 +339,15 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
 #'  @examples
 #'  data(bot)
 #'  bot.p <- PCA(eFourier(bot, 12))
-#'  PC.contrib(bot.p)
-#'  PC.contrib(bot.p, nax=1:5, sd.r=c(-5, 2, 1, 0, 1, 2, 5),
+#'  PCcontrib(bot.p)
+#'  PCcontrib(bot.p, nax=1:5, sd.r=c(-5, 2, 1, 0, 1, 2, 5),
 #'    main="A nice title", border="grey40", col="grey80")
-#'  @rdname PC.contrib
+#'  @rdname PCcontrib
 #'  @export
-PC.contrib <- function(PCA, ...){UseMethod("PC.contrib")}
-#'  @rdname PC.contrib
+PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
+#'  @rdname PCcontrib
 #'  @export
-PC.contrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2), 
+PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2), 
                            main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
   # we prepare the graphical windows
   # same paradigm as coo.list.panel
