@@ -3,7 +3,7 @@
 \alias{tps.iso}
 \title{Deformation isolines using Thin Plate Splines.}
 \usage{
-tps.iso(fr, to, amp = 1, over = 1.2, palette = col.spring,
+tps.iso(fr, to, amp = 1, grid = FALSE, over = 1.2, palette = col.spring,
   iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black",
   poly = TRUE, shp = TRUE, shp.border = col.gallus(2), shp.lwd = c(2,
   2), shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
@@ -15,6 +15,9 @@ tps.iso(fr, to, amp = 1, over = 1.2, palette = col.spring,
 
 \item{amp}{An amplification factor of differences between \code{fr} and
 \code{to}}
+
+\item{grid}{whether to calculate and plot changes across the graphical window
+\code{TRUE} or just within the starting shape (\code{FALSE})}
 
 \item{over}{A \code{numeric} that indicates how much the thin plate splines
 extends over the shapes}
@@ -61,7 +64,8 @@ botF <- eFourier(bot)
 x <- mshapes(botF, 'type', nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
-tps.iso(fr, to, iso.nb=2000, amp=3)
+tps.iso(fr, to, iso.nb=200, amp=3)
+tps.iso(fr, to, iso.nb=200, amp=3, grid=TRUE)
 }
 \seealso{
 \link{tps.grid} and \link{tps.arr}

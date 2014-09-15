@@ -3,11 +3,11 @@
 \alias{tps.arr}
 \title{Deformation 'vector field' using Thin Plate Splines}
 \usage{
-tps.arr(fr, to, amp = 1, over = 1.2, palette = col.summer, arr.nb = 200,
-  arr.levels = 100, arr.len = 0.1, arr.ang = 20, arr.lwd = 0.75,
-  arr.col = "grey50", poly = TRUE, shp = TRUE, shp.col = rep(NA, 2),
-  shp.border = col.gallus(2), shp.lwd = c(2, 2), shp.lty = c(1, 1),
-  legend = TRUE, legend.text, ...)
+tps.arr(fr, to, amp = 1, grid = TRUE, over = 1.2, palette = col.summer,
+  arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20,
+  arr.lwd = 0.75, arr.col = "grey50", poly = TRUE, shp = TRUE,
+  shp.col = rep(NA, 2), shp.border = col.gallus(2), shp.lwd = c(2, 2),
+  shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
 }
 \arguments{
 \item{fr}{the reference \eqn{(x; y)} coordinates}
@@ -16,6 +16,9 @@ tps.arr(fr, to, amp = 1, over = 1.2, palette = col.summer, arr.nb = 200,
 
 \item{amp}{an amplification factor of differences between \code{fr} and
 \code{to}}
+
+\item{grid}{whether to calculate and plot changes across the graphical window
+\code{TRUE} or just within the starting shape (\code{FALSE})}
 
 \item{over}{\code{numeric} that indicates how much the thin plate splines
 extends over the shapes}
@@ -67,7 +70,8 @@ botF <- eFourier(bot)
 x <- mshapes(botF, 'type', nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
-tps.arr(fr, to, arr.nb=400, palette=col.sari, amp=3)
+tps.arr(fr, to, arr.nb=200, palette=col.sari, amp=3)
+tps.arr(fr, to, arr.nb=200, palette=col.sari, amp=3, grid=FALSE)
 }
 \seealso{
 \link{tps.grid} and \link{tps.iso}.

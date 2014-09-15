@@ -55,7 +55,7 @@ botF <- eFourier(bot)
 x <- mshapes(botF, 'type', nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
-tps.grid(fr, to, amp=3, grid.size=40)
+tps.grid(fr, to, amp=3, grid.size=10)
 }
 \seealso{
 \link{tps.iso} and \link{tps.arr}.
