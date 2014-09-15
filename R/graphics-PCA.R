@@ -325,7 +325,57 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
   }
 }
 
-
+#' Shape variation along PC axes
+#' 
+#'  Calculates and plots shape variation along Principal Component axes.
+#'  
+#'  @param x a \code{\link{PCA}} object
+#'  @param nax a single or a range of PC axes
+#'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
+#'  @param main a title for the plot
+#'  @param xlab a title for the x-axis
+#'  @param ylab a title for the y-axis
+#'  @param ... additional parameter to pass to \code{\link{coo.draw}}
+#'  @examples
+#'  data(bot)
+#'  bot.p <- PCA(eFourier(bot, 12))
+#'  PC.contrib(bot.p)
+#'  PC.contrib(bot.p, nax=1:5, sd.r=c(-5, 2, 1, 0, 1, 2, 5),
+#'    main="A nice title", border="grey40", col="grey80")
+#'  @rdname PC.contrib
+#'  @export
+PC.contrib <- function(x, ...){UseMethod("PC.contrib")}
+#'  @rdname PC.contrib
+#'  @export
+PC.contrib.PCA <- function(x, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2), 
+                           main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
+  # we prepare the graphical windows
+  # same paradigm as coo.list.panel
+  xs <- 1:length(sd.r) - 0.5
+  ys <- rev(1:length(nax) - 0.5)
+  plot(NA, xlim=c(0, length(sd.r)), ylim=c(0, length(nax)),
+       asp=1, frame=FALSE, axes=FALSE,
+       main=main, xlab=xlab, ylab=ylab)
+  axis(1, at = xs, labels = sd.r)
+  axis(2, at = ys, labels = nax, las=1)
+  # we loop to reconstruct shapes
+  # we make it through .morphospacePCA + plot=FALSE
+  shp <- list()
+  for (i in seq(along=nax)){
+    sd.i <- sd(x$x[, nax[i]])
+    pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))  
+    shp.i <- .morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
+    shp <- c(shp, shp.i)}
+  # we template the size of the shapes
+  shp <- lapply(shp, coo.template, 0.95)
+  # here we prepare and apply the translation values
+  trans <- expand.grid(xs, ys)
+  colnames(trans) <- c("x", "y")
+  for (i in seq(along=shp)){
+    shp[[i]] <- coo.trans(shp[[i]], trans[i, 1], trans[i, 2])}
+  # we finally plot the shapes
+  gc <- lapply(shp, coo.draw, centroid = FALSE, first.point=FALSE, ...)
+  invisible(list(shp=shp, trans=trans))}
 
 
 ##### end PCA plotters

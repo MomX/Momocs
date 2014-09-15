@@ -13,7 +13,7 @@
 #' @export
 .morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
                             nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
-                            col.shp = "#00000011", border.shp = "#00000055", lwd.shp = 1) {
+                            col.shp = "#00000011", border.shp = "#00000055", lwd.shp = 1, plot = TRUE) {
   # we check here, though it shoudl have been before
   if (length(PCA$method)>4 | is.null(PCA$method)) {
     stop(" * .morphospacePCA needs a $method of length <= 5")}
@@ -96,7 +96,8 @@
     # we translate shapes
     for (s in 1:length(shp)) {
       shp[[s]] <- coo.trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
-    # we draw shapes
+    # we draw shapes or just return the shp
+    if (!plot) return(shp)
     if (plot.method == "poly") {
       garbage <- lapply(shp, coo.draw, col = col.shp, border = border.shp, lwd = lwd.shp,
                         points = FALSE, centroid = FALSE, first.point = FALSE)}
