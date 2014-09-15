@@ -329,7 +329,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
 #' 
 #'  Calculates and plots shape variation along Principal Component axes.
 #'  
-#'  @param x a \code{\link{PCA}} object
+#'  @param PCA a \code{\link{PCA}} object
 #'  @param nax a single or a range of PC axes
 #'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
 #'  @param main a title for the plot
@@ -344,13 +344,14 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
 #'    main="A nice title", border="grey40", col="grey80")
 #'  @rdname PC.contrib
 #'  @export
-PC.contrib <- function(x, ...){UseMethod("PC.contrib")}
+PC.contrib <- function(PCA, ...){UseMethod("PC.contrib")}
 #'  @rdname PC.contrib
 #'  @export
-PC.contrib.PCA <- function(x, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2), 
+PC.contrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2), 
                            main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
   # we prepare the graphical windows
   # same paradigm as coo.list.panel
+  x <- PCA
   xs <- 1:length(sd.r) - 0.5
   ys <- rev(1:length(nax) - 0.5)
   plot(NA, xlim=c(0, length(sd.r)), ylim=c(0, length(nax)),
