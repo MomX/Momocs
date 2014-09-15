@@ -13,9 +13,12 @@ library(devtools)
 install_github("vbonhomme/Momocs")
 library(Momocs)
 ````
+Have a look to the [tutorials (work in progress)](https://github.com/vbonhomme/Momocs-vignette/tree/master/vignettes/html)
+
 Note that you can find in `?Coo` the steps to import your former `Coo`objects.
 
-![Momocs functionnal architecture](https://raw.githubusercontent.com/vbonhomme/Momocs-vignette/master/v0.9/figures/Momocs-arch.png)
+![Momocs functionnal architecture](https://github.com/vbonhomme/Momocs-vignette/blob/master/vignettes/MomocsArch.png)
+
 
 Next big steps
 --------
