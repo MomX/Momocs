@@ -5,28 +5,43 @@
 \alias{Momocs-package}
 \title{Momocs}
 \description{
-Momocs is intended to ease and to popularize morphometrics, the quantitative analysis
-of form. It aims, eventually, at gathering the most common approaches: traditional
-morphometrics, global descriptors, open outlines, closed outlines and configuration of
-landmarks into the same, open-source, environment.
-It hinges on the core functions  developed in the book \emph{Morphometrics with R}
-by Julien Claude (2008), extend them graphically and statistically, using the same,
-unified and extendable, grammar.
-From import from other morphometrics format or data acquisition, to display, handling,
-calibration and calculations on morphometrics datasets on which to apply an array of
-statistical analyses, Momocs intends to provides a complete, convenient and extendable
-toolkit to specialists within every field that are, or may be, interested in integrating
- shape in their researches.
+Momocs is an R package which aims to provide a complete and convenient
+toolkit for morphometrics. It is intended for scientists interested in
+describing quantitatively the shape, and its variations, of the objects they
+study. In the last decade, R has become the open-source lingua franca
+for statistics, and morphometrics known its so-called 'revolution'.
+Nevertheless, morphometric analyses still have to be carried out using
+various software packages, for which source code is mostly unavailable
+or copyrighted. Moreover, existing software packages cannot be extended
+and their bugs are hard to detect and thus correct. This situation
+is detrimental to morphometrics; time is wasted, analyses are restricted
+to available methods, and last but not least, are poorly reproducible.
+This impedes collaborative effort both in software development and
+in morphometric studies. By gathering the common morphometric approaches
+in an open-source environment and welcoming contributions, Momocs is an
+(work-in-progress) attempt  to solve this twofold problem and to push morphometrics
+one step further. It hinges on the core functions published
+in the book \emph{Morphometrics using R} by one of us (Claude, 2008), but has been further
+extended to allow other shape description systems. So far, configurations
+of landmarks, outlines and open outline analyses, along with some facilities
+for traditional morphometrics have been implemented. Prior to analysis,
+Momocs can be used to acquire and manipulate data or to import/export
+from/to other formats. Momocs also has the facility for a wide range of
+multivariate analyses and production of the companion graphics.
+Thus a researcher will find that just a few lines of code will provide
+initial results, but the methods implemented can be finely tuned
+and extended according to the user's needs.
 }
 \details{
 To cite Momocs in publications: \code{citation('Momocs')}.
 }
 \section{Cheers}{
 
-We are very grateful to (in alphabetical order): Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Neus
-Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Norbert Telmon, Bill Venables,
-Daniele Ventura and Asher Wishkerman for their helpful contributions, ideas,
-bug reports, and much more.
+We are very grateful to (in alphabetical order): April Dinwiddie, Carl Lipo,
+Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont,
+Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
+Norbert Telmon, Bill Venables, Daniele Ventura and Asher Wishkerman
+for their helpful contributions, ideas, bug reports, and much more.
 }
 \references{
 \itemize{
