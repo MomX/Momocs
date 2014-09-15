@@ -10,7 +10,8 @@ chc2pix(chc)
 }
 \description{
 May be useful to convert chain-coded coordinates
-to (x; y) coordinates. The first point is set at the origin.
+to (x; y) coordinates. The first point is set at the origin. \link{chc2Out}
+does the job for an entire dataset produced by Shape/ChainCoder, etc.
 }
 \examples{
 data(shapes)
@@ -23,7 +24,7 @@ Elliptic Fourier features of a closed contour.
 \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
 }
 \seealso{
-\link{pix2chc}
+\link{pix2chc}, \link{chc2Out}
 }
 \keyword{Babel}
 

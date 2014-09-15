@@ -9,24 +9,33 @@ Coo(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coo} class is a 'super class' for \link{Out}, \code{\link{Opn}} and \link{Ldk} classes,
-for handling \bold{closed outlines}, \bold{open outlines} and \bold{configuration of landmarks}, respectively.
+\code{Coo} class is a 'super class' for \code{\link{Out}},
+\code{\link{Opn}} and \code{\link{Ldk}} classes,
+for handling \bold{closed outlines}, \bold{open outlines}
+and \bold{configuration of landmarks}, respectively.
 }
 \details{
-This class allows to recycle most of the methods, since all of them apply on
-(x; y) coordinates stored \code{$coo} slot. All of them also have a \code{$fac} component,
-yet not mandatory, to store grouping informations (also called classifiers). Others slots
+This class allows to recycle most of the methods,
+since all of them apply on
+(x; y) coordinates stored \code{$coo} slot.
+All of them also have a \code{$fac} component,
+yet not mandatory, to store grouping informations
+(also called classifiers). Others slots
 may be present in certain classes.
 
 In other words, \code{Out}, \code{Out} and \code{Ldk} classes
 are all, primarily, \code{Coo} objects on which we define generic \emph{and}
 specific methods.
 
-More, generally, see \link{Out}, \link{Opn} and \link{Ldk} for documentation on these classes.
-And Momocs' vignette for more detailed informations on the Momocs' 'architecture'.
+More, generally, see \link{Out}, \link{Opn} and \link{Ldk}
+for documentation on these classes.
+And Momocs' vignette for more detailed informations on
+the Momocs' 'architecture'.
 
-You can access all the methods available for Coo objects with \code{methods(class=Coo)}.
-Among them, some are not individually documented but you will find an exhaustive list
+You can access all the methods available for Coo objects
+with \code{methods(class=Coo)}.
+Among them, some are not individually documented
+but you will find an exhaustive list
 below, as well as in individual  Momocs' vignettes.
 }
 \note{
