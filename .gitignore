@@ -7,3 +7,6 @@
 .Rproj.user
 data/phoenix.R
 man/phoenix.Rd
+vignettes
+vignettes/*
+inst/doc
