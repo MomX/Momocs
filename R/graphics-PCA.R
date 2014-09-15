@@ -272,6 +272,7 @@ plot3.PCA <- function(PCA,  ... ){
 #' @param palette a color palette
 #' @param fixed.axes logical whether axes shoudl have the same scaled
 #' @param center.origin if TRUE before, whether to center the origin
+#' @param cex.legend a numeric to specify cex for the legend (if any)
 #' @param ...  further arguments to feed \link{boxplot}
 #' @examples
 #' data(bot)
@@ -280,8 +281,10 @@ plot3.PCA <- function(PCA,  ... ){
 #' boxplot(bot.p, 1)
 #' @export
 boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
-                        fixed.axes=TRUE, center.origin=TRUE, ...){
+                        fixed.axes=TRUE, center.origin=TRUE,
+                        cex.legend=1, ...){
   xy <- x$x[, nax]
+  xy <- as.matrix(xy) # cases where length(nax)=1
   if (missing(fac)){
     fac <- factor(rep("foo", nrow(xy)))
     no.fac <- TRUE
@@ -304,7 +307,8 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
     on.exit(par(op))
     for (i in seq(along=nax)){
       boxplot(xy[, nax[i]] ~ fac, ylim=yl, at=fn:1, horizontal=TRUE,
-              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=1,
+              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"),
+              whisklty=1, outpch=20, outcex=0.5,
               axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)}
     axis(1)
   } else {
@@ -316,7 +320,8 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
       axis(1)}
   }
   if (!no.fac) {
-    legend("topright", legend = levels(fac), fill = cols, bty="n", border = NA)
+    legend("topright", legend = levels(fac),
+           fill = cols, bty="n", border = NA, cex=cex.legend)
   }
 }
 

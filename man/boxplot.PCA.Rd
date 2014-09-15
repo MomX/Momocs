@@ -4,7 +4,7 @@
 \title{Boxplot on PCA objects}
 \usage{
 \method{boxplot}{PCA}(x, fac, nax = 1:4, cols, palette = col.qual,
-  fixed.axes = TRUE, center.origin = TRUE, ...)
+  fixed.axes = TRUE, center.origin = TRUE, cex.legend = 1, ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
@@ -20,6 +20,8 @@
 \item{fixed.axes}{logical whether axes shoudl have the same scaled}
 
 \item{center.origin}{if TRUE before, whether to center the origin}
+
+\item{cex.legend}{a numeric to specify cex for the legend (if any)}
 
 \item{...}{further arguments to feed \link{boxplot}}
 }
