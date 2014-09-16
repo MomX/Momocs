@@ -55,6 +55,9 @@
 #' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
 #' @param delaunay logical whether to add a delaunay 'mesh' between points
 #' @param loadings logical whether to add loadings for every variables
+#' @param labels logical whether to add point labels
+#' @param col.labels a color for these labels
+#' @param cex.labels a cex for these labels
 #' @param labelsgroups logical whether to add labels for groups
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
 #' @param rect.labelsgroups logical whether to add a rectangle behind groups names
@@ -119,6 +122,10 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      #loadings
                      loadings=FALSE,
                      #labels
+                     labels=FALSE,
+                     col.labels=par("bg"),
+                     cex.labels=0.6,
+                     #labelsgroups
                      labelsgroups=TRUE, cex.labelsgroups=0.8,
                      rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
                      #axisnames
@@ -214,6 +221,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
+  if (labels) text(xy[, 1], xy[, 2], col=col.labels, cex=cex.labels)
   if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)

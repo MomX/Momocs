@@ -13,7 +13,8 @@
   ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75, 0.9),
   lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
-  lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labelsgroups = TRUE,
+  lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labels = FALSE,
+  col.labels = par("bg"), cex.labels = 0.6, labelsgroups = TRUE,
   cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
   eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,
@@ -100,6 +101,12 @@ or a data.frame for \link{pos.shapes}}
 \item{n.kde2d}{the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel}
 
 \item{delaunay}{logical whether to add a delaunay 'mesh' between points}
+
+\item{labels}{logical whether to add point labels}
+
+\item{col.labels}{a color for these labels}
+
+\item{cex.labels}{a cex for these labels}
 
 \item{labelsgroups}{logical whether to add labels for groups}
 
