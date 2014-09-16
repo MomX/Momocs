@@ -104,7 +104,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   #loadings=FALSE,
   #labels
   labels=FALSE,
-  col.labels=par("bg"),
+  col.labels=par("fg"),
   cex.labels=0.6,
   #labelsgroups
   labelsgroups=TRUE, cex.labelsgroups=0.8, 
@@ -169,6 +169,9 @@ plot.LDA <- function(x, xax=1, yax=2,
   if ((density) & missing(ellipses)) ellipses <- FALSE
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
+  if (labels & missing(points)) points <- FALSE
+  if (missing(col.labels)) col.labels <- col.groups
+  
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
   if (old.par) on.exit(par(opar))

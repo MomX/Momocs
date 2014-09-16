@@ -14,7 +14,7 @@
   0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
-  labels = FALSE, col.labels = par("bg"), cex.labels = 0.6,
+  labels = FALSE, col.labels = par("fg"), cex.labels = 0.6,
   labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
   eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,

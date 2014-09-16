@@ -123,7 +123,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      loadings=FALSE,
                      #labels
                      labels=FALSE,
-                     col.labels=par("bg"),
+                     col.labels=par("fg"),
                      cex.labels=0.6,
                      #labelsgroups
                      labelsgroups=TRUE, cex.labelsgroups=0.8,
@@ -165,23 +165,23 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
       } else {
         col.groups <- rep(col[1], nlevels(fac))
         if (length(col) != nrow(xy)){
-        col <- rep(col[1], nrow(xy))}}
+          col <- rep(col[1], nrow(xy))}}
     } else {
       col.groups <- palette(nlevels(fac))
       if (length(col) != nrow(xy)){
-      col <- col.groups[fac]}
+        col <- col.groups[fac]}
     }
     # pch handling
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
     }
-#else {
-#       if (nlevels(fac) < 10) {
-#         pch <- .pch()[fac]
-#       } else {
-#         pch <- 20
-#       }
-#     }
+    #else {
+    #       if (nlevels(fac) < 10) {
+    #         pch <- .pch()[fac]
+    #       } else {
+    #         pch <- 20
+    #       }
+    #     }
   }
   # cosmectics
   if ((density) & missing(contour)) contour <- TRUE
@@ -189,7 +189,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
   if (!missing(chull.lty)) chull <- TRUE
-
+  if (labels & missing(points)) points <- FALSE
+  if (missing(col.labels)) col.labels <- col.groups
+  
   ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -299,7 +301,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
   } else {
     no.fac <- FALSE
   }
-
+  
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   fl <- levels(fac)
   fn <- nlevels(fac)
@@ -356,7 +358,7 @@ PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
 #'  @rdname PCcontrib
 #'  @export
 PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2), 
-                           main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
+                          main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
   # we prepare the graphical windows
   # same paradigm as coo.list.panel
   x <- PCA
