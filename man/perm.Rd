@@ -7,10 +7,9 @@
 \usage{
 perm(x, ...)
 
-\method{perm}{default}(x, margin = 2, size = dim(x)[ifelse(margin == 1, 2,
-  1)], replace = TRUE, ...)
+\method{perm}{default}(x, margin = 2, size, replace = TRUE, ...)
 
-\method{perm}{Coe}(x, size = nrow(x$coe), replace = TRUE, ...)
+\method{perm}{Coe}(x, size, replace = TRUE, ...)
 }
 \arguments{
 \item{x}{the object to permute}
@@ -19,14 +18,15 @@ perm(x, ...)
 
 \item{margin}{numeric whether 1 or 2 (rows or columns)}
 
-\item{size}{numeric the required size for the final object}
+\item{size}{numeric the required size for the final object, same size by default.}
 
 \item{replace}{logical, whether to use \link{sample} with replacement}
 }
 \description{
-This methods applies column-wise on the \code{coe} of any
-\link{Coe} object but relies on a function that can be used on any matrix. It
-simply uses \link{sample} on every column (or row).
+This methods applies permutations column-wise on the \code{coe} of any
+\link{Coe} object but relies on a function that can be used on any matrix.
+For a Coe object, it uses \link{sample} on every column (or row) with (or without)
+replacement.
 }
 \examples{
 m <- matrix(1:12, nrow=3)

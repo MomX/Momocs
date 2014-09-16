@@ -7,10 +7,9 @@
 \usage{
 mutate(x, ...)
 
-\method{mutate}{default}(x, margin = 2, size = dim(x)[ifelse(margin == 1, 2,
-  1)], ...)
+\method{mutate}{default}(x, margin = 2, size, rate = 1, ...)
 
-\method{mutate}{Coe}(x, size = nrow(x$coe), ...)
+\method{mutate}{Coe}(x, size, rate = 1, ...)
 }
 \arguments{
 \item{x}{the object to permute}
@@ -19,12 +18,17 @@ mutate(x, ...)
 
 \item{margin}{numeric whether 1 or 2 (rows or columns)}
 
-\item{size}{numeric the required size for the final object}
+\item{size}{numeric the required size for the final object, same size by default}
+
+\item{rate}{numeric the number of sd for \link{rnorm}, 1 by default.}
 }
 \description{
 This methods applies column-wise on the \code{coe} of any
 \link{Coe} object but relies on a function that can be used on any matrix. It
 simply uses \link{rnorm} with the mean and sd calculated for every column (or row).
+For a \code{Coe} object, on every colum, randomly generates coefficients values
+centered on the mean of the column, and with a sd equals to it standard deviates
+multiplied by \code{rate}.
 }
 \examples{
 m <- matrix(1:12, nrow=3)
