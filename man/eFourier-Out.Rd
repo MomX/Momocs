@@ -6,7 +6,7 @@
 eFourier(Out, nb.h, smooth.it, norm, start)
 }
 \arguments{
-\item{Out}{the Out object on which to calculate eft}
+\item{Out}{the \code{\link{Out}} object on which to calculate eft}
 
 \item{nb.h}{the number of harmonics to calculate}
 
@@ -18,6 +18,40 @@ eFourier(Out, nb.h, smooth.it, norm, start)
 }
 \description{
 A wrapper for \link{efourier} to be applied on Out objects.
+}
+\details{
+Normalization of coefficients has long been a matter of trouble,
+and not only for newcomers. There are two ways of normalizing outlines: the first,
+and by far the msot used, is to use a "numerical" alignment, directly on the
+matrix of coefficients. The coefficients of the first harmonic are consumed
+by this process but harmonics of higher rank are normalized in terms of size
+and rotation. This is sometimes referred as using the "first ellipse", as the
+harmonics define an ellipse in the plane, and the first one is the mother of all
+ellipses, on which all others "roll" along. This approach is really convenient
+as it is done easily by most software (if not the only option) and by Momocs too.
+It is the default option of \code{eFourier}.
+
+But here is the pitfall: if your shapes are prone to bad aligments among all
+the first ellipses, this will result in poorly (or even not at all) "homologous" coefficients.
+The shapes prone to this are either (at least roughly) circular and/or with a strong
+bilateral symmetry. You can try to use \code{\link{stack}} on the \code{\link{Coe}} object
+ returned by \code{eFourier}. Also, when plotting PCA using Momocs,
+this will be strikingly clear though. This phenomenon will result in two clusters,
+and more strikingly into upside-down (or 180 degrees rotated)
+shapes on the morphospace. If this happen, you should seriously consider
+aligning your shapes \emph{before} the \code{eFourier} step,
+and performing the latter with no normalization (\code{norm = FALSE}), since
+it has been done before.
+
+You have several options to align your shapes, using control points (or landmarks),
+of Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper
+length (see \code{\link{coo.aligncalliper}}), etc. You should also make the first
+point homologous either with \code{\link{coo.slide}} or \code{\link{coo.slidedirection}}
+to minimize any subsequent problems.
+
+I will dedicate one vignette to this problem
+asap (fall 2014). In the meantime, contact me should you think we could
+solve this with two brains.
 }
 \examples{
 data(bot)
