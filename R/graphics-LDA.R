@@ -1,7 +1,7 @@
 
 #' Plots Linear Discriminant Analysis
-#' 
-#' The Momocs' LCA plotter with many graphical options and morphospaces 
+#'
+#' The Momocs' LCA plotter with many graphical options and morphospaces
 #' (the latter being experimental so far).
 #' @method plot LDA
 #' @param x an object of class "LDA", typically obtained with \link{LDA}
@@ -20,7 +20,7 @@
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
 #' @param morphospace logical whether to add the morphological space
-#' @param pos.shp either "full", "range", "circle", "xy" 
+#' @param pos.shp either "full", "range", "circle", "xy"
 #' or a data.frame for \link{pos.shapes}
 #' @param amp.shp amplification factor for shape deformation
 #' @param size.shp the size of the shapes
@@ -33,7 +33,7 @@
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
-#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses 
+#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
 #' @param ellipsesax logical whether to draw ellipse axes
 #' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
 #' @param lwd.ellipsesax if yes, one or more numeric for the line widths
@@ -70,7 +70,7 @@
 #' bot.f <- eFourier(bot, 24)
 #' bot.l <- LDA(bot.f, "type")
 #' plot(bot.l)
-#' 
+#'
 #' bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
 #' bot.l <- LDA(bot.f, "fake")
 #' plot(bot.l)
@@ -91,8 +91,8 @@ plot.LDA <- function(x, xax=1, yax=2,
   #ellipses
   ellipses=FALSE, conf.ellipses=0.5,
   #ellipsesax
-  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9), 
-  lty.ellipsesax=1, lwd.ellipsesax=sqrt(2), 
+  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
+  lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
   #convexhulls
   chull=FALSE, chull.lty=3,
   #kde2d
@@ -107,7 +107,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   col.labels=par("fg"),
   cex.labels=0.6,
   #labelsgroups
-  labelsgroups=TRUE, cex.labelsgroups=0.8, 
+  labelsgroups=TRUE, cex.labelsgroups=0.8,
   rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
   #axisnames
   axisnames=TRUE,
@@ -124,7 +124,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   # we check and prepare
   if (nlevels(fac) <= 2) { # case of 2 levels and a single LD
     xy <- LDA$mod.pred$x[, 1]
-  } else {   
+  } else {
     xy <- LDA$mod.pred$x[, c(xax, yax)]
   }
   ### we check and prepare
@@ -139,7 +139,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   } else {
     col.groups <- palette(nlevels(fac))
     col <- col.groups[fac]
-  } 
+  }
   # pch handling
   if (!missing(pch)) {
     if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
@@ -156,7 +156,7 @@ plot.LDA <- function(x, xax=1, yax=2,
     on.exit(op)
     hist.range <- range(xy)
     hist(xy[fac==levels(fac)[1]], xlim=hist.range,
-         ylab=NA, xlab="LD1", main=levels(fac)[1], 
+         ylab=NA, xlab="LD1", main=levels(fac)[1],
          col=palette(2)[1], axes=FALSE); axis(1)
     hist(xy[fac==levels(fac)[2]], xlim=hist.range,
          ylab=NA, xlab="LD1", main=levels(fac)[2],
@@ -171,12 +171,13 @@ plot.LDA <- function(x, xax=1, yax=2,
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
   if (labels & missing(points)) points <- FALSE
   if (missing(col.labels)) col.labels <- col.groups
-  
+  if (stars & missing(ellipsesax)) ellipsesax <- FALSE
+
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
   if (old.par) on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
-  
+
   # we initate it
   .frame(xy, center.origin, zoom=zoom, bg=bg)
   # then the layers
@@ -197,7 +198,7 @@ plot.LDA <- function(x, xax=1, yax=2,
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
     if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
                                         cex=cex.labelsgroups, rect=rect.labelsgroups,
-                                        abbreviate=abbreviate.labelsgroups)     
+                                        abbreviate=abbreviate.labelsgroups)
     if (rug)        .rug(xy, fac, col.groups)
   } else {
     if (rug)        .rug(xy, NULL, col)
@@ -212,11 +213,11 @@ plot.LDA <- function(x, xax=1, yax=2,
   if (box) box()}
 
 #' Plots a cross-validation table as an heatmap
-#' 
+#'
 #' Either with frequencies (or percentages) plus marginal sums,
 #' and values as heatmaps. Used in Momocs for plotting cross-validation tables
 #' but may be used for any table (likely with \code{freq=FALSE}).
-#' 
+#'
 #' @param x a (typically cross-correlation) table to plot
 #' @param freq whether to use row-wise frequencies
 #' @param palette a color palette such as \link{col.heat} to use,
@@ -235,7 +236,7 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' tab <- bot.l$CV.tab
 #' tab
 #' plotCV(tab)
-#' 
+#'
 #' data(olea)
 #' ol <- LDA(PCA(rawPolynomials(olea, nb.pts=50)), "cep")
 #' plotCV(ol$CV.tab)
@@ -243,10 +244,10 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' plotCV(tab, freq=FALSE, palette=col.india)
 #' # any other count table
 #' m <- matrix(runif(120, 0, 6), 12)
-#' tab <- as.table(round(m)) 
+#' tab <- as.table(round(m))
 #' plotCV(tab, palette=terrain.colors, levels=5, cex=0.8)
 #' @export
-plotCV <- function(x, freq=TRUE, 
+plotCV <- function(x, freq=TRUE,
                     palette=col.heat, levels=20, cols,
                     pc=TRUE, margin=TRUE, cex=1){
   tab <- x
@@ -258,7 +259,7 @@ plotCV <- function(x, freq=TRUE,
   #   if (missing(freq) & sum(tab) < 50) freq <- FALSE
   if (freq) tab <- apply(tab, 2, function(x) x/ sum(x)) * ifelse(pc, 100, 1)
   #   if (freq) tab <- tab/sum(tab) * ifelse(pc, 100, 1)
-  
+
   # here start the graphics
   op <- par(xpd=NA, mar=c(5, 5, 4, 1))
   on.exit(par(op))
@@ -274,37 +275,37 @@ plotCV <- function(x, freq=TRUE,
   yn <- ncol(tab)
   segments(0:xn, 0, 0:xn, yn)
   segments(0, 0:yn, xn, 0:yn)
-  
+
   # if the table has names, we add them
   names <- names(dimnames(tab))
   if (length(names) != 0){
     text(yn/2, -0.5, labels=names[1], font=2)
     text(-0.5, xn/2, labels=names[2], srt=90, font=2)}
-  
-  text(-0.1, 1:yn - 0.5, rev(rownames(x)), 
+
+  text(-0.1, 1:yn - 0.5, rev(rownames(x)),
        cex=cex, adj = 1, font=2)
   text(1:xn - 0.5, yn+0.1, colnames(x),
        cex=cex, adj = c(0.5, 0), font=2)
-  
-  # if freq are used, from now on, we transform the table into a 
+
+  # if freq are used, from now on, we transform the table into a
   # reasonable number of digits to plot
-  
+
   # grand total
   if (TRUE){
     segments(xn, 0, xn+0.05, -0.05)
     text(xn+0.1, -0.1, sum(tab), cex=cex*0.8, adj=c(0, 1))
   }
   arrows(-0.1, yn+0.1, 0, yn, length=0.1)
-  
+
   # we plot the values
   xx <- rep(1:xn - 0.5, times=yn)
   yy <- rep(1:yn - 0.5, each=xn)
-  if (freq) 
+  if (freq)
     tab2 <- signif(tab, log10(sum(tab)))
   else
     tab2 <- tab
   text(xx, yy, tab2, cex=cex)
-  
+
   # marginal sums
   if (margin){
     text(1:xn - 0.5, - 0.1, rowSums(tab2), cex=cex*0.8, adj=c(0.5, 1))
@@ -313,10 +314,10 @@ plotCV <- function(x, freq=TRUE,
 }
 
 #' Plots a cross-correlation table
-#' 
+#'
 #' Or any contingency/confusion table. A simple graphic representation based on variable
 #' width and/or color for arrows or segments, based on the relative frequencies.
-#' 
+#'
 #' @param x an \link{LDA} object, a table or a squared matrix
 #' @param links.FUN a function to draw the links: eg \link{segments} (by default), \link{arrows}, etc.
 #' @param col logical whether to vary the color of the links
@@ -340,13 +341,13 @@ plotCV <- function(x, freq=TRUE,
 #' a <- sample(rep(letters[1:4], each=10))
 #' b <- sample(rep(letters[1:4], each=10))
 #' tab <- table(a, b)
-#' 
-#' # veryhuge + some structure 
+#'
+#' # veryhuge + some structure
 #' a <- sample(rep(letters[1:10], each=10))
 #' b <- sample(rep(letters[1:10], each=10))
 #' tab <- table(a, b)
 #' diag(tab) <- round(runif(10, 10, 20))
-#' 
+#'
 # more structure
 #' tab <- matrix(c(8, 3, 1, 0, 0,
 #'                 2, 7, 1, 2, 3,
@@ -362,8 +363,8 @@ plotCV <- function(x, freq=TRUE,
 #'                 1, 1, 1, 7, 1,
 #'                 0, 0, 0, 1, 8), 5, 5, byrow=TRUE)
 #' tab <- as.table(tab)
-#' 
-#' 
+#'
+#'
 #' plotCV2(tab)
 #' plotCV2(tab, arrows) # if you prefer arrows
 #' plotCV2(tab, lwd=FALSE, lwd0=1, palette=col.india) # if you like india but not lwds
@@ -374,28 +375,28 @@ plotCV <- function(x, freq=TRUE,
 #' plotCV2(tab, pch=NA) # if you do not like dots
 #' plotCV2(tab, gap.dots=0) # if you want to 'fill the gap'
 #' plotCV2(tab, gap.dots=1) # or not
-#' 
+#'
 #' #trilo examples
 #' data(trilo)
 #' trilo.f <- eFourier(trilo, 8)
 #' trilo.l <- LDA(trilo.f, 'onto')
 #' trilo.l$CV.tab
-#' plotCV2(trilo.l$CV.tab) 
-#' 
+#' plotCV2(trilo.l$CV.tab)
+#'
 #' # olea example
 #' data(olea)
 #' op <- orthoPolynomials(olea, 5)
 #' opl <- LDA(op, 'cep')$CV.tab
 #' plotCV2(opl)
 #' @export
-plotCV2 <- function(x, links.FUN = arrows, col = TRUE, 
-                    col0 = "black", col.breaks = 5, palette = col.heat, lwd = TRUE, 
-                    lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25, 
+plotCV2 <- function(x, links.FUN = arrows, col = TRUE,
+                    col0 = "black", col.breaks = 5, palette = col.heat, lwd = TRUE,
+                    lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25,
                     cex.names = 1, legend = TRUE, ...) {
   # to maintain the generic
   tab <- x
   # we check a bit
-  if (ncol(x) != nrow(x)) 
+  if (ncol(x) != nrow(x))
     stop(" * a table or a squared matrix must be passed.")
   # we deduce xy positions
   gap.mid <- 3
@@ -409,14 +410,14 @@ plotCV2 <- function(x, links.FUN = arrows, col = TRUE,
   # lines end
   op <- par(mar = rep(0, 4), lend = 1)
   leg.y1 <- ifelse(legend, 0, 0.5)
-  plot(NA, xlim = c(0.8, gap.mid + 1.2), ylim = c(leg.y1, n + 
+  plot(NA, xlim = c(0.8, gap.mid + 1.2), ylim = c(leg.y1, n +
                                                     0.5))
   # we deduce the 'lwd matrix'
   if (lwd) {
     tab.lwd <- apply(tab, 1, function(x) x/sum(x))
     tab.lwd <- tab.lwd * lwd0
   } else {
-    if (missing(lwd0)) 
+    if (missing(lwd0))
       lwd0 <- 1  # to avoid too puffy segments
     tab.lwd <- matrix(lwd0, nrow = n, ncol = n)
   }
@@ -432,18 +433,18 @@ plotCV2 <- function(x, links.FUN = arrows, col = TRUE,
   # the loop that draws the segments
   for (i in 1:n) {
     for (j in 1:n) {
-      links.FUN(x1.link[i], y.link[i], x2.link[j], y.link[j], 
+      links.FUN(x1.link[i], y.link[i], x2.link[j], y.link[j],
                 lwd = tab.lwd[i, j], col = tab.cols[i, j])
     }
   }
   # we add dots and classes names
   points(x.dots, y.dots, pch = pch.dots)
-  text(x.dots, y.dots + gap.names, labels = unlist(dimnames(tab)), 
+  text(x.dots, y.dots + gap.names, labels = unlist(dimnames(tab)),
        cex = cex.names)
   if (legend) {
-    text(1, 1/3, labels = names(dimnames(tab))[1], cex = cex.names, 
+    text(1, 1/3, labels = names(dimnames(tab))[1], cex = cex.names,
          font = 2)
-    text(1 + gap.mid, 1/3, labels = names(dimnames(tab))[2], 
+    text(1 + gap.mid, 1/3, labels = names(dimnames(tab))[2],
          cex = cex.names, font = 2)
   }
   # we restore the graphics parameters

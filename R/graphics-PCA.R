@@ -191,7 +191,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (!missing(chull.lty)) chull <- TRUE
   if (labels & missing(points)) points <- FALSE
   if (missing(col.labels)) col.labels <- col.groups
-  
+  if (stars & missing(ellipsesax)) ellipsesax <- FALSE
+
   ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -301,7 +302,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
   } else {
     no.fac <- FALSE
   }
-  
+
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   fl <- levels(fac)
   fn <- nlevels(fac)
@@ -336,9 +337,9 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
 }
 
 #' Shape variation along PC axes
-#' 
+#'
 #'  Calculates and plots shape variation along Principal Component axes.
-#'  
+#'
 #'  @param PCA a \code{\link{PCA}} object
 #'  @param nax a single or a range of PC axes
 #'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
@@ -357,7 +358,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
 PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
 #'  @rdname PCcontrib
 #'  @export
-PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2), 
+PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
                           main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
   # we prepare the graphical windows
   # same paradigm as coo.list.panel
@@ -374,7 +375,7 @@ PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
   shp <- list()
   for (i in seq(along=nax)){
     sd.i <- sd(x$x[, nax[i]])
-    pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))  
+    pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
     shp.i <- .morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
     shp <- c(shp, shp.i)}
   # we template the size of the shapes

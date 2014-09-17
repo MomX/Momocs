@@ -158,13 +158,14 @@
 # add 'stars'
 #' @export
 .stars <- function(xy, fac, col) {
-    col.i <- paste0(col, "55")
+    col.i <- .transp(col, 0.5)
     for (i in seq(along = levels(fac))) {
         pts.i <- xy[fac == levels(fac)[i], ]
         cent.i <- coo.centpos(pts.i)
         for (j in 1:nrow(pts.i)) {
-            segments(cent.i[1], cent.i[2], pts.i[j, 1], pts.i[j,
-                2], col = col.i[i])
+            segments(cent.i[1], cent.i[2],
+                     pts.i[j, 1], pts.i[j,2],
+                     col = col.i[i])
         }
     }
 }
@@ -249,7 +250,7 @@
   #on.exit(par(plt = plt0))
   g <- 0.015
   w <- min(c(plt0[2] - plt0[1]), plt0[4] - plt0[3]) * ratio
-  par(plt = c(plt0[2] - w - g, 
+  par(plt = c(plt0[2] - w - g,
               plt0[2] - g,
               plt0[3] + g * 1.5,
               plt0[3] + w + g * 1.5),
