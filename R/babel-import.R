@@ -2,14 +2,14 @@
 # particularly from raw images,
 
 #' Import coordinates from a .txt file
-#' 
+#'
 #' A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
-#' 
+#'
 #' By default, it works with the default arguments of \link{read.table}, e.g. assumes that the
 #' columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 #' Define the \link{read.table} arguments that allow to import a single file, and then
 #' pass them to this function.
-#' @param txt.paths a vector of paths corresponding to the .txt files to import. If not 
+#' @param txt.paths a vector of paths corresponding to the .txt files to import. If not
 #' provided (or \code{NULL}), switches to the automatic version, just as in\link{import.jpg}.
 #' See Details there.
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
@@ -34,7 +34,7 @@ import.txt <- function(txt.paths = NULL, ...) {
   for (i in seq(along = txt.paths)) {
     coo <- read.table(txt.paths[i], ...)
     res[[i]] <- as.matrix(coo)
-    if (t) 
+    if (t)
       setTxtProgressBar(pb, i)
   }
   # names(res) <- substr(txt.paths, start=1,
@@ -44,19 +44,19 @@ import.txt <- function(txt.paths = NULL, ...) {
 }
 
 #' Extract outlines coordinates from an image silhouette
-#' 
+#'
 #' Provided with an image 'mask' (i.e. black pixels on a white background),
 #' and a point form where to start the algorithm, returns the (x; y) coordinates of its outline.
-#' 
+#'
 #' Used internally by \link{import.jpg1} but may be useful for other purposes.
 #' @param img a matrix of a binary image mask.
 #' @param x numeric the (x; y) coordinates of a starting point within the shape.
 #' @return a matrix the (x; y) coordinates of the outline points.
 #' @references
 #' \itemize{
-#' \item The original algorithm is due to: Pavlidis, T. (1982). \emph{Algorithms 
+#' \item The original algorithm is due to: Pavlidis, T. (1982). \emph{Algorithms
 #' for graphics and image processing}. Computer science press.
-#' \item is detailed in: Rohlf, F. J. (1990). An overview of image processing and 
+#' \item is detailed in: Rohlf, F. J. (1990). An overview of image processing and
 #' analysis techniques for morphometrics. In \emph{Proceedings of the Michigan Morphometrics Workshop}. Special Publication No. 2 (pp. 47-60). University of Michigan Museum of Zoology: Ann Arbor.
 #' \item and translated in R by: Claude, J. (2008). \emph{Morphometrics with R}. (p. 316). Springer.
 #' }
@@ -71,7 +71,7 @@ import.Conte <- function(img, x) {
   # while (abs(img[x[1], x[2]] - img[x[1], x[2]-1]) < 0.1) {
   # x[2] <- x[2] -1 }
   a <- 1
-  M <- matrix(c(0, -1, -1, -1, 0, 1, 1, 1, 1, 1, 0, -1, -1, 
+  M <- matrix(c(0, -1, -1, -1, 0, 1, 1, 1, 1, 1, 0, -1, -1,
                 -1, 0, 1), nrow = 2, ncol = 8, byrow = TRUE)
   M <- cbind(M[, 8], M, M[, 1])
   X <- 0
@@ -81,7 +81,7 @@ import.Conte <- function(img, x) {
   SS <- NA
   S <- 6
   while ((any(c(X[a], Y[a]) != c(x1, x2)) | length(X) < 3)) {
-    if (abs(img[x[1] + M[1, S + 1], x[2] + M[2, S + 1]] - 
+    if (abs(img[x[1] + M[1, S + 1], x[2] + M[2, S + 1]] -
               img[x[1], x[2]]) < 0.1) {
       a <- a + 1
       X[a] <- x[1]
@@ -89,7 +89,7 @@ import.Conte <- function(img, x) {
       x <- x + M[, S + 1]
       SS[a] <- S + 1
       S <- (S + 7)%%8
-    } else if (abs(img[x[1] + M[1, S + 2], x[2] + M[2, S + 
+    } else if (abs(img[x[1] + M[1, S + 2], x[2] + M[2, S +
                                                       2]] - img[x[1], x[2]]) < 0.1) {
       a <- a + 1
       X[a] <- x[1]
@@ -97,7 +97,7 @@ import.Conte <- function(img, x) {
       x <- x + M[, S + 2]
       SS[a] <- S + 2
       S <- (S + 7)%%8
-    } else if (abs(img[x[1] + M[1, S + 3], x[2] + M[2, S + 
+    } else if (abs(img[x[1] + M[1, S + 3], x[2] + M[2, S +
                                                       3]] - img[x[1], x[2]]) < 0.1) {
       a <- a + 1
       X[a] <- x[1]
@@ -113,7 +113,7 @@ import.Conte <- function(img, x) {
 }
 
 #' Extract outline coordinates from a single .jpg file
-#' 
+#'
 #' Used to import outline coordinates from .jpg files. This function is used for
 #' single images and is wrapped by \link{import.jpg}. It relies itself on \link{import.Conte}
 #' @param jpg.path vector of paths corresponding to the .jpg files to import, such as
@@ -121,7 +121,7 @@ import.Conte <- function(img, x) {
 #' @param auto.notcentered logical if TRUE random locations will be used until
 #' one of them is (assumed) to be within the shape (because it corresponds to a black pixel) and only if
 #' the middle point is not black;
-#' if FALSE a \link{locator} will be called, and you will have to click on a 
+#' if FALSE a \link{locator} will be called, and you will have to click on a
 #' point within the shape.
 #' @param fun.notcentered NULL by default but can accept a function that, when passed with an imagematrix and returns
 #' a numeric of length two that corresponds to a starting point on the imagematrix for the Conte
@@ -137,19 +137,19 @@ import.Conte <- function(img, x) {
 #' the pixels. This point will be the first of the outlines. The latter may be useful
 #' if you align manually the images and if you want to retain this information
 #' in the consequent morphometric analyses.
-#' 
-#' If the point at the center of the 
+#'
+#' If the point at the center of the
 #' image is not within the shape, i.e. is 'white' you have two choices defined by
 #' the 'auto.notcentered' argument. If it's TRUE, some random starting points
 #' will be tried until on of them is 'black' and within the shape; if FALSE
 #' you will be asked to click on a point within the shape.
-#' 
+#'
 #' If some pixels on the borders are not white, this functions adds a 2-pixel
 #' border of white pixels; otherwise \link{import.Conte} would fail and return an error.
-#' 
+#'
 #' Finally, remember that if the images are not in your working directory,
 #' \link{list.files} must be called with the argument \code{full.names=TRUE}!
-#' 
+#'
 #' Note that the use of the \code{fun.notcentered} argument will probably leads to serious headaches
 #' and will probably imply the dissection of these functions: \link{import.Conte}, \link{img.plot} and
 #' \code{import.jpg} itself
@@ -158,7 +158,7 @@ import.Conte <- function(img, x) {
 #' @keywords Import
 #' @return a matrix of (x; y) coordinates that can be passed to Out
 #' @export
-import.jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NULL, 
+import.jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NULL,
                         threshold = 0.5) {
   img <- readJPEG(jpg.path)
   # if a RVB is provided by the way, apply (img, 1:2, mean) is
@@ -172,7 +172,7 @@ import.jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
   # we test for images with black pixels on their border which
   # causes Conte to fail. IF it is the case, we add a 1 pixel
   # white border around
-  borders <- c(img[1, ], img[nrow(img), ], img[, 1], img[, 
+  borders <- c(img[1, ], img[nrow(img), ], img[, 1], img[,
                                                          ncol(img)])
   if (any(borders != 1)) {
     img <- .mat.buffer(img, buff.size = 2, buff.fill = 1)
@@ -231,23 +231,23 @@ import.jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
 }
 
 #' Extract outline coordinates from multiple .jpg files
-#' 
-#' This function is used to import outline coordinates and is built around 
+#'
+#' This function is used to import outline coordinates and is built around
 #' \link{import.jpg1}.
-#' @param jpg.paths a vector of paths corresponding to the .jpg files to import. If not 
+#' @param jpg.paths a vector of paths corresponding to the .jpg files to import. If not
 #' provided (or \code{NULL}), switches to the automatic version. See Details below.
 #' @param auto.notcentered logical if TRUE random locations will be used until.
 #' one of them is (assumed) to be within the shape (because of a black pixel);
-#' if FALSE a \link{locator} will be called, and you will have to click on a 
+#' if FALSE a \link{locator} will be called, and you will have to click on a
 #' point within the shape.
 #' @param fun.notcentered NULL by default. Is your shapes are not centered and if a random pick of
 #' a black pixel is not satisfactory. See \link{import.jpg1} help and examples.
 #' @param threshold the threshold value use to binarize the images. Above, pixels
 #' are turned to 1, below to 0.
 #' @param verbose whether to print which file is being treated. Useful to detect problems.
-#' @details see \link{import.jpg1} for important informations about how the outlines are extracted, 
+#' @details see \link{import.jpg1} for important informations about how the outlines are extracted,
 #' and \link{import.Conte} for the algorithm itself.
-#' 
+#'
 #' If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
 #' file in the folder taht contains all your files. All the outlines should be imported then.
 #' @keywords Import
@@ -256,17 +256,17 @@ import.jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' # if your images are in the folder '/foo/jpgs/'
 #' lf <- list.files('/foo/jpegs', full.names=TRUE)
 #' coo <- import.jpg(lf)
 #' Out(coo)
-#' 
+#'
 #' # 'automatic' version
 #' coo <- import.jpg()
 #' }
 #' @export
-import.jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE, 
+import.jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
                        fun.notcentered = NULL, threshold = 0.5, verbose = TRUE) {
   # if not provided
   if (is.null(jpg.paths)) {
@@ -283,14 +283,17 @@ import.jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
   # .trim.path(.trim.ext(jpgs.paths))
   res <- list()
   for (i in seq(along = jpg.paths)) {
-    coo.i <- import.jpg1(jpg.paths[i], auto.notcentered = auto.notcentered, 
+    if (verbose) {
+      cat(jpg.paths[i])
+    }
+    coo.i <- import.jpg1(jpg.paths[i], auto.notcentered = auto.notcentered,
                          fun.notcentered = fun.notcentered, threshold = threshold)
     res[[i]] <- coo.i
     # if (export){coo.export(coo.i, jpg.paths[i])}
     if (verbose) {
-      cat(jpg.paths[i], "\n")
+      cat("   OK\n")
     } else {
-      if (t) 
+      if (t)
         setTxtProgressBar(pb, i)
     }
   }
@@ -300,14 +303,14 @@ import.jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
 }
 
 #' Plots a .jpg image
-#' 
+#'
 #' A very simple image plotter. If provided with a path,
 #' read the .jpg and plots it. If not provided with an imagematrix, will
 #' ask you to choose interactively a \code{.jpeg} image.
-#' 
+#'
 #' \code{img.plot} is used in import functions such as \link{import.jpg1};
 #' \code{img.plot0} does the same job but preserves the \code{par} and plots axes.
-#' 
+#'
 #' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
 #' @keywords Import
 #' @rdname img.plot
@@ -331,7 +334,7 @@ img.plot <- function(img) {
   # op <- par(mar=rep(4, 4))
   h <- nrow(img)
   w <- ncol(img)
-  plot(NA, xlim = c(1, w), ylim = c(1, h), asp = 1, frame = FALSE, 
+  plot(NA, xlim = c(1, w), ylim = c(1, h), asp = 1, frame = FALSE,
        axes = FALSE, ann = FALSE)
   # plot(NA, xlim=c(1, w), ylim=c(1, h), asp=1, frame=TRUE,
   # axes=TRUE, ann=TRUE)
@@ -361,8 +364,8 @@ img.plot0 <- function(img) {
   h <- nrow(img)
   w <- ncol(img)
   img <- img[h:1, ]
-  plot(NA, xlim = c(1, w), ylim = c(1, h), asp = 1, frame = TRUE, 
-       axes = TRUE, ann = TRUE, xlab = "imgmatrix COLs ids", 
+  plot(NA, xlim = c(1, w), ylim = c(1, h), asp = 1, frame = TRUE,
+       axes = TRUE, ann = TRUE, xlab = "imgmatrix COLs ids",
        ylab = "imgmatrix ROWs ids")
   # plot(NA, xlim=c(1, w), ylim=c(1, h), asp=1, frame=TRUE,
   # axes=TRUE, ann=TRUE)
@@ -373,14 +376,14 @@ img.plot0 <- function(img) {
 }
 
 #' Extract structure from filenames
-#' 
+#'
 #' If filenames are consistently named with the same character serating factors,
-#' and with every individual including its belonging levels, e.g.: 
+#' and with every individual including its belonging levels, e.g.:
 #' \itemize{
 #' \item \code{001_speciesI_siteA_ind1_dorsalview}
 #' \item \code{002_speciesI_siteA_ind2_lateralview} } etc., this function returns a \link{data.frame}
 #' from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
-#' 
+#'
 #' The number of groups must be consistent accross filenames.
 #' @param lf list of filenames, as characters, typically such as
 #' those obtained with \link{list.files}. Alternatively, a path to a folder
@@ -395,14 +398,14 @@ img.plot0 <- function(img) {
 #' for every group.
 #' @note This is, to my view, a good practice to 'store' the grouoing structure
 #' in filenames, but it is of course not mandatory.
-#' 
+#'
 #' Note also that you can: i) do a \link{import.jpg} and save is a list, say 'foo';
 #' then ii) pass 'names(foo)' to lf.structure. See Momocs' vignette for an illustration.
 #' @seealso \link{import.jpg1}, \link{import.Conte}, \link{import.txt}, \link{lf.structure}.
 #' See also Momocs' vignettes for data import.
 #' @keywords Import
 #' @export
-lf.structure <- function(lf, names = character(), split = "_", 
+lf.structure <- function(lf, names = character(), split = "_",
                          trim.extension = FALSE) {
   # allow to pass many thing, including $fac columns
   if (!is.character(lf)) lf <- as.character(lf)
@@ -420,7 +423,7 @@ lf.structure <- function(lf, names = character(), split = "_",
   if (length(nc) != 1) {
     most.ab <- as.numeric(names(sort(table(lfl), decreasing = TRUE)[1]))
     lfl.pb <- which(lfl != most.ab)
-    cat(" * Most of the filenames have", most.ab, "groups.\n", 
+    cat(" * Most of the filenames have", most.ab, "groups.\n",
         " * Maybe you should inspect these file(name)s:\n")
     cat(lf[lfl.pb], sep = "\n")
     stop("The files do not have the same filename structure.")
@@ -463,4 +466,4 @@ lf.structure <- function(lf, names = character(), split = "_",
 # <- matrix(NA, n, 2) spl <- NA ldk[1, ] <- l2m(locator(1))
 # for (i in 2:n){ grid.raster(x) points(ldk[1:i,], pch=20,
 # col='black') lines(spl, col='red') ldk[i, ] <-
-# l2m(locator(1)) cat(ldk) spl <- splines2(ldk[1:i,]) }} 
+# l2m(locator(1)) cat(ldk) spl <- splines2(ldk[1:i,]) }}
