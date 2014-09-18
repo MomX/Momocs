@@ -204,7 +204,8 @@ plot.LDA <- function(x, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) text(xy[, 1], xy[, 2], col=col.labels, cex=cex.labels)
+  if (labels) thigmophobe.labels(xy[, 1], xy[, 2], labels=rownames(xy),
+                                 col=col.labels, cex=cex.labels)
   #if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "LD")
   if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
@@ -227,29 +228,36 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' @param pc whether to use percentages
 #' @param margin whether to add marginal sums
 #' @param cex a cex for all values
+#' @param ... not used
 #' @seealso \link{LDA}, \link{plot.LDA}, \link{plotCV2}.
 #' @keywords Multivariate Graphics
 #' @examples
 #' data(bot)
 #' bot.p <- PCA(eFourier(bot, 12))
 #' bot.l <- LDA(bot.p, 1)
-#' tab <- bot.l$CV.tab
-#' tab
-#' plotCV(tab)
+#' plotCV(bot.l)
 #'
 #' data(olea)
 #' ol <- LDA(PCA(rawPolynomials(olea, nb.pts=50)), "cep")
-#' plotCV(ol$CV.tab)
+#' plotCV(ol)
 #' # raw counts
-#' plotCV(tab, freq=FALSE, palette=col.india)
+#' plotCV(ol, freq=FALSE, palette=col.india)
 #' # any other count table
 #' m <- matrix(runif(120, 0, 6), 12)
 #' tab <- as.table(round(m))
 #' plotCV(tab, palette=terrain.colors, levels=5, cex=0.8)
+#' @rdname plotCV
 #' @export
-plotCV <- function(x, freq=TRUE,
+plotCV <- function(x, ...){UseMethod("plotCV")}
+#' @rdname plotCV
+#' @export
+plotCV.LDA <- function(x, ...){
+  plotCV(x$CV.tab, ...)}
+#' @rdname plotCV
+#' @export
+plotCV.table <- function(x, freq=TRUE,
                     palette=col.heat, levels=20, cols,
-                    pc=TRUE, margin=TRUE, cex=1){
+                    pc=TRUE, margin=TRUE, cex=1, ...){
   tab <- x
   tab <- t(tab)
   tab <- tab[, ncol(tab):1 ]
