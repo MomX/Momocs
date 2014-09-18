@@ -42,7 +42,6 @@ data(bot)
 bot.p <- PCA(eFourier(bot, 12))
 bot.l <- LDA(bot.p, 1)
 plotCV(bot.l)
-
 data(olea)
 ol <- LDA(PCA(rawPolynomials(olea, nb.pts=50)), "cep")
 plotCV(ol)

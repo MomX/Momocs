@@ -236,7 +236,6 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' bot.p <- PCA(eFourier(bot, 12))
 #' bot.l <- LDA(bot.p, 1)
 #' plotCV(bot.l)
-#'
 #' data(olea)
 #' ol <- LDA(PCA(rawPolynomials(olea, nb.pts=50)), "cep")
 #' plotCV(ol)
@@ -388,16 +387,24 @@ plotCV.table <- function(x, freq=TRUE,
 #' data(trilo)
 #' trilo.f <- eFourier(trilo, 8)
 #' trilo.l <- LDA(trilo.f, 'onto')
-#' trilo.l$CV.tab
-#' plotCV2(trilo.l$CV.tab)
+#' trilo.l
+#' plotCV2(trilo.l)
 #'
 #' # olea example
 #' data(olea)
 #' op <- orthoPolynomials(olea, 5)
-#' opl <- LDA(op, 'cep')$CV.tab
+#' opl <- LDA(op, 'cep')
 #' plotCV2(opl)
+#' @rdname plotCV2
 #' @export
-plotCV2 <- function(x, links.FUN = arrows, col = TRUE,
+plotCV2 <- function(x, ...){UseMethod("plotCV2")}
+#' @rdname plotCV2
+#' @export
+plotCV2.LDA <- function(x, ...){
+  plotCV2(x$CV.tab, ...)}
+#' @rdname plotCV2
+#' @export
+plotCV2.table <- function(x, links.FUN = arrows, col = TRUE,
                     col0 = "black", col.breaks = 5, palette = col.heat, lwd = TRUE,
                     lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25,
                     cex.names = 1, legend = TRUE, ...) {
