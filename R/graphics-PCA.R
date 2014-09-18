@@ -224,7 +224,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) text(xy[, 1], xy[, 2], col=col.labels, cex=cex.labels)
+  if (labels) thigmophobe.labels(xy[, 1], xy[, 2], labels=rownames(xy),
+                                 col=col.labels, cex=cex.labels)
   if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
@@ -258,8 +259,8 @@ plot3.PCA <- function(PCA,  ... ){
   on.exit(par(op1))
   # The three plot.PCA plots
   plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), eigen=FALSE, ...)
-  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=FALSE, ...)
-  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=FALSE,  ...)
+  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=FALSE, ...)
+  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=FALSE,  ...)
   # The eigen value plot
   op2 <- par(mar=c(3, 8, 4, 8), xpd=NA)
   var <- PCA$sdev^2

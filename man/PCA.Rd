@@ -9,15 +9,15 @@
 \alias{as.PCA.default}
 \title{Principal component analysis on Coe objects}
 \usage{
-PCA(x, scale., center)
+PCA(x, scale., center, fac)
 
-\method{PCA}{OutCoe}(x, scale. = FALSE, center = TRUE)
+\method{PCA}{OutCoe}(x, scale. = FALSE, center = TRUE, fac)
 
-\method{PCA}{OpnCoe}(x, scale. = FALSE, center = TRUE)
+\method{PCA}{OpnCoe}(x, scale. = FALSE, center = TRUE, fac)
 
-\method{PCA}{LdkCoe}(x, scale. = FALSE, center = TRUE)
+\method{PCA}{LdkCoe}(x, scale. = FALSE, center = TRUE, fac)
 
-\method{PCA}{default}(x, scale. = TRUE, center = TRUE)
+\method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = NULL)
 
 as.PCA(x, fac)
 

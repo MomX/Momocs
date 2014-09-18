@@ -38,15 +38,16 @@ BugReports: https://github.com/vbonhomme/Momocs
 Depends:
     R(>= 3.0)
 Imports:
-    utils,
-    graphics,
-    methods,
-    jpeg,
-    sp,
-    MASS,
     ape,
+    colorspace,
+    graphics,
     geometry,
-    colorspace
+    jpeg,
+    MASS,
+    methods,
+    plotrix,
+    sp,
+    utils
 Suggests:
     knitr
 VignetteBuilder: knitr

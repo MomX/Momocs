@@ -43,13 +43,13 @@
 #' class(iris.p)
 #' plot(iris.p, 1)
 #' @export
-PCA <- function(x, scale., center) {
+PCA <- function(x, scale., center, fac) {
   UseMethod("PCA")
 }
 
 #' @rdname PCA
 #' @export
-PCA.OutCoe <- function(x, scale. = FALSE, center = TRUE) {
+PCA.OutCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
   OutCoe <- x
   PCA <- prcomp(OutCoe$coe, scale. = scale., center = center)
   PCA$fac <- OutCoe$fac
@@ -65,7 +65,7 @@ PCA.OutCoe <- function(x, scale. = FALSE, center = TRUE) {
 
 #' @rdname PCA
 #' @export
-PCA.OpnCoe <- function(x, scale. = FALSE, center = TRUE) {
+PCA.OpnCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
   OpnCoe <- x
   PCA <- prcomp(OpnCoe$coe, scale. = scale., center = center)
   PCA$fac <- OpnCoe$fac
@@ -81,7 +81,7 @@ PCA.OpnCoe <- function(x, scale. = FALSE, center = TRUE) {
 
 #' @rdname PCA
 #' @export
-PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE) {
+PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
   LdkCoe <- x
   # LdkCoe$coe <- a2m(l2a(Coe$coo))
   PCA <- prcomp(LdkCoe$coe, scale. = scale., center = center)
@@ -97,9 +97,10 @@ PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE) {
 
 #' @rdname PCA
 #' @export
-PCA.default <- function(x, scale. = TRUE, center = TRUE) {
+PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=NULL) {
   PCA <- prcomp(x, scale. = scale., center = center)
-  PCA$fac <- NULL
+  if (!is.null(fac)) fac <- as.data.frame(fac)
+  PCA$fac <- fac
   PCA$method <- NULL
   # PCA$baseline2 <- OpnCoe$baseline2
   class(PCA) <- c("PCA", class(PCA))

@@ -1,36 +1,36 @@
 ##### Package documentation and NAMESPACE import
 
 #' Momocs
-#' 
-#' Momocs is an R package which aims to provide a complete and convenient 
-#' toolkit for morphometrics. It is intended for scientists interested in 
-#' describing quantitatively the shape, and its variations, of the objects they 
-#' study. In the last decade, R has become the open-source lingua franca 
-#' for statistics, and morphometrics known its so-called 'revolution'. 
-#' Nevertheless, morphometric analyses still have to be carried out using 
-#' various software packages, for which source code is mostly unavailable 
-#' or copyrighted. Moreover, existing software packages cannot be extended 
-#' and their bugs are hard to detect and thus correct. This situation 
-#' is detrimental to morphometrics; time is wasted, analyses are restricted 
-#' to available methods, and last but not least, are poorly reproducible. 
-#' This impedes collaborative effort both in software development and 
-#' in morphometric studies. By gathering the common morphometric approaches 
-#' in an open-source environment and welcoming contributions, Momocs is an 
-#' (work-in-progress) attempt  to solve this twofold problem and to push morphometrics 
-#' one step further. It hinges on the core functions published 
-#' in the book \emph{Morphometrics using R} by one of us (Claude, 2008), but has been further 
-#' extended to allow other shape description systems. So far, configurations 
-#' of landmarks, outlines and open outline analyses, along with some facilities 
-#' for traditional morphometrics have been implemented. Prior to analysis, 
-#' Momocs can be used to acquire and manipulate data or to import/export 
-#' from/to other formats. Momocs also has the facility for a wide range of 
-#' multivariate analyses and production of the companion graphics. 
-#' Thus a researcher will find that just a few lines of code will provide 
-#' initial results, but the methods implemented can be finely tuned 
-#' and extended according to the user's needs. 
-#' 
+#'
+#' Momocs is an R package which aims to provide a complete and convenient
+#' toolkit for morphometrics. It is intended for scientists interested in
+#' describing quantitatively the shape, and its variations, of the objects they
+#' study. In the last decade, R has become the open-source lingua franca
+#' for statistics, and morphometrics known its so-called 'revolution'.
+#' Nevertheless, morphometric analyses still have to be carried out using
+#' various software packages, for which source code is mostly unavailable
+#' or copyrighted. Moreover, existing software packages cannot be extended
+#' and their bugs are hard to detect and thus correct. This situation
+#' is detrimental to morphometrics; time is wasted, analyses are restricted
+#' to available methods, and last but not least, are poorly reproducible.
+#' This impedes collaborative effort both in software development and
+#' in morphometric studies. By gathering the common morphometric approaches
+#' in an open-source environment and welcoming contributions, Momocs is an
+#' (work-in-progress) attempt  to solve this twofold problem and to push morphometrics
+#' one step further. It hinges on the core functions published
+#' in the book \emph{Morphometrics using R} by one of us (Claude, 2008), but has been further
+#' extended to allow other shape description systems. So far, configurations
+#' of landmarks, outlines and open outline analyses, along with some facilities
+#' for traditional morphometrics have been implemented. Prior to analysis,
+#' Momocs can be used to acquire and manipulate data or to import/export
+#' from/to other formats. Momocs also has the facility for a wide range of
+#' multivariate analyses and production of the companion graphics.
+#' Thus a researcher will find that just a few lines of code will provide
+#' initial results, but the methods implemented can be finely tuned
+#' and extended according to the user's needs.
+#'
 #' To cite Momocs in publications: \code{citation('Momocs')}.
-#' 
+#'
 #' @seealso
 #' \itemize{
 #'  \item \bold{Tutorial}: \code{browseVignettes("Momocs")} (work in progress...)
@@ -41,27 +41,28 @@
 #' \item \bold{Hotline, questions, requests, etc.}: Feel free to send me an email, should you need, report or
 #' request something about Momocs.
 #' }
-#' 
+#'
 #' @references
 #' \itemize{
-#' \item Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R. 
+#' \item Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R.
 #' \emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
 #' \item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 #' }
 #' @section Cheers:
-#' We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie, Carl Lipo, 
-#' Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, 
-#' Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman, 
-#' Norbert Telmon, Bill Venables, Daniele Ventura and Asher Wishkerman 
+#' We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie, Carl Lipo,
+#' Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont,
+#' Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
+#' Norbert Telmon, Bill Venables, Daniele Ventura and Asher Wishkerman
 #' for their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
-#' @import sp
 #' @import colorspace
-#' @importFrom MASS lda ginv kde2d
+#' @import sp
 #' @importFrom geometry delaunayn
-#' @importFrom jpeg readJPEG
-#' @importFrom methods showDefault
 #' @importFrom graphics boxplot
+#' @importFrom jpeg readJPEG
+#' @importFrom MASS lda ginv kde2d
+#' @importFrom methods showDefault
+#' @importFrom plotrix thigmophobe.labels
 #' @importFrom utils stack
 #' @docType package
 #' @name Momocs
@@ -71,4 +72,4 @@ NULL
 # .onAttach <- function(lib, pkg) {
 # packageStartupMessage('This is Momocs ',
 # utils::packageDescription('Momocs', field='Version'),
-# appendLF = TRUE) } 
+# appendLF = TRUE) }
