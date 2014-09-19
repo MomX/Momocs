@@ -7,8 +7,6 @@ Coe(...)
 }
 \arguments{
 \item{...}{anything and, anyway, this function will simply returns a message.}
-
-\item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
 \code{Coe} class is the 'parent' class of
