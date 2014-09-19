@@ -137,8 +137,7 @@ col.grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
 col.transp <- function(n, col = "#000000", ceiling = 1) {
     alpha.int <- as.integer(seq(0, 255 * ceiling, length = n))
     alpha.hex <- as.character(as.hexmode(alpha.int))
-    alpha.hex[nchar(alpha.hex) < 2] <- paste0("f", alpha.hex[nchar(alpha.hex) < 
-        2])
+    alpha.hex[nchar(alpha.hex) < 2] <- paste0("f", alpha.hex[nchar(alpha.hex) < 2])
     return(paste0(col, alpha.hex))
 }
 #' @rdname colors_transp
@@ -150,13 +149,12 @@ col.transp <- function(n, col = "#000000", ceiling = 1) {
         2])
     return(paste0(cols, alpha.hex))
 }
+#' @rdname colors_transp
+#' @export
+col.alpha <- .transp
 
 #' @export
 .cex <- function(x) {
     3/(log(x + 1) + 1)
-}
-#' @export
-.pch <- function() {
-    c(2, 6, 1, 3, 4, 5, 8, 7, 9, 10)
 }
 ##### end colors graphics 
