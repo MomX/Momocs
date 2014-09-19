@@ -6,7 +6,7 @@
 \method{plot}{LDA}(x, xax = 1, yax = 2, points = TRUE, col = "#000000",
   pch = 20, cex = 0.5, palette = col.solarized, center.origin = FALSE,
   zoom = 1, bg = par("bg"), grid = TRUE, nb.grids = 3,
-  morphospace = TRUE, pos.shp = "full", amp.shp = 1, size.shp = 1,
+  morphospace = FALSE, pos.shp = "full", amp.shp = 1, size.shp = 1,
   nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
   border.shp = "#00000032", lwd.shp = 1, col.shp = "#00000019",
   stars = FALSE, ellipses = FALSE, conf.ellipses = 0.5,
@@ -14,8 +14,8 @@
   lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labels = FALSE,
-  col.labels = par("fg"), cex.labels = 0.6, labelsgroups = TRUE,
-  cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
+  col.labels = par("fg"), cex.labels = 0.6, abbreviate.labels = FALSE,
+  labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
   abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
   eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,
   old.par = TRUE, ...)
@@ -108,6 +108,8 @@ or a data.frame for \link{pos.shapes}}
 
 \item{cex.labels}{a cex for these labels}
 
+\item{abbreviate.labels}{logical whether to abbreviate these labels}
+
 \item{labelsgroups}{logical whether to add labels for groups}
 
 \item{cex.labelsgroups}{ifyes, a numeric for the size of the labels}
@@ -133,12 +135,14 @@ or a data.frame for \link{pos.shapes}}
 \item{...}{useless here, just to fit the generic plot}
 }
 \description{
-The Momocs' LCA plotter with many graphical options and morphospaces
-(the latter being experimental so far).
+The Momocs' \code{\link{LDA}} plotter with morphospaces and many graphical options.
 }
 \details{
-Widely inspired by the philosophy behind graphical functions
+Widely inspired by the "layers" philosophy behind graphical functions
 of the ade4 R package.
+}
+\note{
+Morphospaces are still experimental.
 }
 \examples{
 data(bot)
@@ -151,7 +155,7 @@ bot.l <- LDA(bot.f, "fake")
 plot(bot.l)
 }
 \seealso{
-\link{LDA}, \link{plotCV}, \link{plot.PCA}.
+\link{LDA}, \link{plotCV}, \link{plotCV2}, \link{plot.PCA}.
 }
 \keyword{Graphics}
 \keyword{Multivariate,}

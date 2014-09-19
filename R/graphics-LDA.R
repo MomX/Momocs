@@ -1,8 +1,7 @@
 
 #' Plots Linear Discriminant Analysis
 #'
-#' The Momocs' LCA plotter with many graphical options and morphospaces
-#' (the latter being experimental so far).
+#' The Momocs' \code{\link{LDA}} plotter with morphospaces and many graphical options.
 #' @method plot LDA
 #' @param x an object of class "LDA", typically obtained with \link{LDA}
 #' @param xax the first PC axis
@@ -49,6 +48,7 @@
 #' @param labels logical whether to add point labels
 #' @param col.labels a color for these labels
 #' @param cex.labels a cex for these labels
+#' @param abbreviate.labels logical whether to abbreviate these labels
 #' @param labelsgroups logical whether to add labels for groups
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
 #' @param rect.labelsgroups logical whether to add a rectangle behind groups names
@@ -61,9 +61,10 @@
 #' @param box whether to draw a box around the plotting region
 #' @param old.par whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.
 #' @param ... useless here, just to fit the generic plot
-#' @details Widely inspired by the philosophy behind graphical functions
+#' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
-#' @seealso \link{LDA}, \link{plotCV}, \link{plot.PCA}.
+#' @note Morphospaces are still experimental.
+#' @seealso \link{LDA}, \link{plotCV}, \link{plotCV2}, \link{plot.PCA}.
 #' @keywords Multivariate, Graphics
 #' @examples
 #' data(bot)
@@ -83,7 +84,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   #.grid
   grid=TRUE, nb.grids=3,
   #shapes
-  morphospace=TRUE, pos.shp="full", amp.shp=1,
+  morphospace=FALSE, pos.shp="full", amp.shp=1,
   size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
   pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
   #stars
@@ -106,6 +107,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   labels=FALSE,
   col.labels=par("fg"),
   cex.labels=0.6,
+  abbreviate.labels=FALSE,
   #labelsgroups
   labelsgroups=TRUE, cex.labelsgroups=0.8,
   rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
@@ -204,7 +206,8 @@ plot.LDA <- function(x, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) thigmophobe.labels(xy[, 1], xy[, 2], labels=rownames(xy),
+  if (labels) thigmophobe.labels(xy[, 1], xy[, 2],
+                                 labels=ifelse(abbreviate.labels, abbreviate(rownames(xy)), rownames(xy)),
                                  col=col.labels, cex=cex.labels)
   #if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "LD")

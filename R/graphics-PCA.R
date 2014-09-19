@@ -8,8 +8,7 @@
 #todo: add deformation grids on the extreme PC axes (pos / meanshape)
 #' Plots Principal Component Analysis
 #'
-#' The Momocs' PCA plotter with many graphical options and morphospaces.
-#' @method plot PCA
+#' The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
 #' @param fac factor, or a name or the column id from the $fac slot, or a formula combining colum names
 #' from the $fac slot (cf. examples)
@@ -59,6 +58,7 @@
 #' @param col.labels a color for these labels
 #' @param cex.labels a cex for these labels
 #' @param labelsgroups logical whether to add labels for groups
+#' @param abbreviate.labels logical whether to abbreviate these labels
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
 #' @param rect.labelsgroups logical whether to add a rectangle behind groups names
 #' @param abbreviate.labelsgroups if yes, whether to abbreviate group names
@@ -70,10 +70,11 @@
 #' @param box whether to draw a box around the plotting region
 #' @param old.par whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.
 #' @param ... useless here, just to fit the generic plot
-#' @details Widely inspired by the philosophy behind graphical functions
+#' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
 #' @seealso \link{plot.LDA}
 #' @keywords Multivariate, Graphics
+#' @method plot PCA
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
@@ -125,6 +126,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      labels=FALSE,
                      col.labels=par("fg"),
                      cex.labels=0.6,
+                     abbreviate.labels=TRUE,
                      #labelsgroups
                      labelsgroups=TRUE, cex.labelsgroups=0.8,
                      rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
@@ -224,7 +226,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) thigmophobe.labels(xy[, 1], xy[, 2], labels=rownames(xy),
+  if (labels) thigmophobe.labels(xy[, 1], xy[, 2],
+                                 labels=ifelse(abbreviate.labels, abbreviate(rownames(xy)), rownames(xy)),
                                  col=col.labels, cex=cex.labels)
   if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")

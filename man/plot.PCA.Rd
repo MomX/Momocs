@@ -15,10 +15,10 @@
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
   labels = FALSE, col.labels = par("fg"), cex.labels = 0.6,
-  labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
-  abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
-  eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,
-  old.par = TRUE, ...)
+  abbreviate.labels = TRUE, labelsgroups = TRUE, cex.labelsgroups = 0.8,
+  rect.labelsgroups = FALSE, abbreviate.labelsgroups = FALSE,
+  axisnames = TRUE, axisvar = TRUE, eigen = TRUE, rug = TRUE,
+  title = substitute(x), box = TRUE, old.par = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
@@ -113,6 +113,8 @@ or a data.frame for \link{pos.shapes}}
 
 \item{cex.labels}{a cex for these labels}
 
+\item{abbreviate.labels}{logical whether to abbreviate these labels}
+
 \item{labelsgroups}{logical whether to add labels for groups}
 
 \item{cex.labelsgroups}{ifyes, a numeric for the size of the labels}
@@ -138,10 +140,10 @@ or a data.frame for \link{pos.shapes}}
 \item{...}{useless here, just to fit the generic plot}
 }
 \description{
-The Momocs' PCA plotter with many graphical options and morphospaces.
+The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.
 }
 \details{
-Widely inspired by the philosophy behind graphical functions
+Widely inspired by the "layers" philosophy behind graphical functions
 of the ade4 R package.
 }
 \examples{
