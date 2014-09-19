@@ -9,44 +9,36 @@ Coo(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coo} class is a 'super class' for \code{\link{Out}},
-\code{\link{Opn}} and \code{\link{Ldk}} classes,
-for handling \bold{closed outlines}, \bold{open outlines}
-and \bold{configuration of landmarks}, respectively.
+\code{Coo} class is the 'parent' class of
+\code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
 }
 \details{
-This class allows to recycle most of the methods,
-since all of them apply on
-(x; y) coordinates stored \code{$coo} slot.
-All of them also have a \code{$fac} component,
-yet not mandatory, to store grouping informations
-(also called classifiers). Others slots
-may be present in certain classes.
+\code{Coo} class is the 'parent' class of the following 'child' classes \itemize{
+\item \code{\link{Out}} for closed \bold{out}lines
+\item \code{\link{Opn}} for \bold{op}e\bold{n} outlines
+\item \code{\link{Ldk}} for configuration of \bold{l}an\bold{d}mar\bold{k}s
+}
 
-In other words, \code{Out}, \code{Out} and \code{Ldk} classes
+Since all 'child classes' of them handle $(x; y)$ coordinates among other generic methods,
+but also all have their specificity, this architecture allow to recycle generic methods and
+to use specific methods.
+
+In other words, \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes
 are all, primarily, \code{Coo} objects on which we define generic \emph{and}
-specific methods.
+specific methods. See their respective help pages for more help.
 
-More, generally, see \link{Out}, \link{Opn} and \link{Ldk}
-for documentation on these classes.
-And Momocs' vignette for more detailed informations on
-the Momocs' 'architecture'.
-
-You can access all the methods available for Coo objects
+You can access all the methods available for \code{Coo} objects
 with \code{methods(class=Coo)}.
-Among them, some are not individually documented
-but you will find an exhaustive list
-below, as well as in individual  Momocs' vignettes.
 }
 \note{
 If you used Momocs before version <0.9, and/or if you have read the JSS paper,
-you are probably looking for \link{Out}. If you have "old" Coo files, e.g. saved as \code{.rda} files,
+you are probably looking for \link{Out}. If you have "old" \code{Coo} files, e.g. saved as \code{.rda} files,
 no worry, you can import them:
 \enumerate{
 \item load your file: \code{load("foo.rda")}
 It may produce an error but the \code{.rda} has been loaded (see \code{ls()})
-\item type: \code{foo2 <- Out(foo@coo, fac=foo@fac)}, same thing for the \code{@ldk} slot and others, if any.
-\item et voila!
+\item type: \code{foo2 <- Out(foo@coo, fac=foo@fac)},
+same thing for the \code{@ldk} slot and others, if any.
 }
 }
 \examples{
@@ -57,6 +49,7 @@ methods(class='Coo')
 data(bot)
 # Primarily a 'Coo' objects, but also an 'Out'
 class(bot)
+inherits(bot, "Coo")
 panel(bot)
 stack(bot)
 \dontrun{

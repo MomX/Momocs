@@ -5,44 +5,38 @@
 
 #' Coo class
 #'
-#' \code{Coo} class is a 'super class' for \code{\link{Out}}, 
-#' \code{\link{Opn}} and \code{\link{Ldk}} classes,
-#' for handling \bold{closed outlines}, \bold{open outlines} 
-#' and \bold{configuration of landmarks}, respectively.
-#'
-#' This class allows to recycle most of the methods, 
-#' since all of them apply on
-#' (x; y) coordinates stored \code{$coo} slot. 
-#' All of them also have a \code{$fac} component,
-#' yet not mandatory, to store grouping informations 
-#' (also called classifiers). Others slots
-#' may be present in certain classes.
-#'
-#' In other words, \code{Out}, \code{Out} and \code{Ldk} classes
-#' are all, primarily, \code{Coo} objects on which we define generic \emph{and}
-#' specific methods.
-#'
-#' More, generally, see \link{Out}, \link{Opn} and \link{Ldk} 
-#' for documentation on these classes.
-#' And Momocs' vignette for more detailed informations on 
-#' the Momocs' 'architecture'.
-#'
-#' You can access all the methods available for Coo objects 
-#' with \code{methods(class=Coo)}.
-#' Among them, some are not individually documented 
-#' but you will find an exhaustive list
-#' below, as well as in individual  Momocs' vignettes.
-#'
+#' \code{Coo} class is the 'parent' class of 
+#' \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
+#' 
 #' @param ... anything and, anyway, this function will simply returns a message.
+#' 
+#'@details
+#' \code{Coo} class is the 'parent' class of the following 'child' classes \itemize{
+#' \item \code{\link{Out}} for closed \bold{out}lines
+#' \item \code{\link{Opn}} for \bold{op}e\bold{n} outlines
+#' \item \code{\link{Ldk}} for configuration of \bold{l}an\bold{d}mar\bold{k}s
+#' }
+#'
+#' Since all 'child classes' of them handle $(x; y)$ coordinates among other generic methods,
+#' but also all have their specificity, this architecture allow to recycle generic methods and
+#' to use specific methods.
+#'
+#' In other words, \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes
+#' are all, primarily, \code{Coo} objects on which we define generic \emph{and}
+#' specific methods. See their respective help pages for more help.
+#'
+#' You can access all the methods available for \code{Coo} objects 
+#' with \code{methods(class=Coo)}.
+#'
 #' @note
 #' If you used Momocs before version <0.9, and/or if you have read the JSS paper,
-#' you are probably looking for \link{Out}. If you have "old" Coo files, e.g. saved as \code{.rda} files,
+#' you are probably looking for \link{Out}. If you have "old" \code{Coo} files, e.g. saved as \code{.rda} files,
 #' no worry, you can import them:
 #' \enumerate{
 #' \item load your file: \code{load("foo.rda")}
 #' It may produce an error but the \code{.rda} has been loaded (see \code{ls()})
-#' \item type: \code{foo2 <- Out(foo@@coo, fac=foo@@fac)}, same thing for the \code{@@ldk} slot and others, if any.
-#' \item et voila!
+#' \item type: \code{foo2 <- Out(foo@@coo, fac=foo@@fac)}, 
+#' same thing for the \code{@@ldk} slot and others, if any.
 #'}
 #' @examples
 #' # to see all methods for Coo objects.
@@ -52,6 +46,7 @@
 #' data(bot)
 #' # Primarily a 'Coo' objects, but also an 'Out'
 #' class(bot)
+#' inherits(bot, "Coo")
 #' panel(bot)
 #' stack(bot)
 #' \dontrun{
@@ -80,28 +75,30 @@
 #' names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
 #' @export
 Coo <- function(...) {
-    cat(" * Coo constructor has been deprecated. You may be looking for Out(), Opn)() or Ldk(). See ?Coo")
+    cat(" * Coo constructor does not exist alone. See ?Coo")
 }
 
 #' Coe class
 #'
-#' \code{Coe} class is a 'super class' for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
-#' matrices of coefficients (in their \code{$coe} slot), along with other informations,
-#' (e.g. an inherited \code{$fac}) obtained with morphometrics methods on
-#' \link{Out}, \link{Opn} and \link{Ldk} objects.
-#'
-#' This classes allows to recycle most of the methods, since both of them apply on
-#' matrices of coefficients. In other words, \code{OutCoe}, \code{OpnCoe} and \code{LdkCoe}
-#' classes are all, primarily, \code{Coe} objects on which we define generic
-#' \emph{and} specific methods.
-#'
-#' All these classes contain a \code{$coe} slot where the coefficients are stored,
-#' and can be accessed.
-#'
-#' More, generally, see \link{OutCoe}, \link{OpnCoe} and \link{LdkCoe}
-#' for documentation on these classes.
-#'
+#'\code{Coe} class is the 'parent' class of 
+#' \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes.
+#' 
 #' @param ... anything and, anyway, this function will simply returns a message.
+#' 
+#'@details
+#' \code{Coe} class is the 'parent' class of the following 'child' classes \itemize{
+#' \item \code{\link{OutCoe}} for coefficients from closed \bold{out}lines morphometrics
+#' \item \code{\link{OpnCoe}} for coefficients from \bold{op}e\bold{n} outlines morphometrics
+#' \item \code{\link{LdkCoe}} for coefficients from configuration of \bold{l}an\bold{d}mar\bold{k}s morphometrics.
+#' }
+#' 
+#' In other words, \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes
+#' are all, primarily, \code{Coe} objects on which we define generic \emph{and}
+#' specific methods. See their respective help pages for more help.
+#'
+#' You can access all the methods available for \code{Coe} objects 
+#' with \code{methods(class=Coe)}.
+#'
 #' @examples
 #' # to see all methods for Coo objects.
 #' methods(class='Coe')
@@ -110,6 +107,7 @@ Coo <- function(...) {
 #' bot.f<- eFourier(bot, 12)
 #' bot.f
 #' class(bot.f)
+#' inherits(bot.f, "Coe")
 #'
 #' # if you want to work directly on the matrix of coefficients
 #' bot.f$coe

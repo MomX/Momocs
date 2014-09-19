@@ -7,24 +7,26 @@ Coe(...)
 }
 \arguments{
 \item{...}{anything and, anyway, this function will simply returns a message.}
+
+\item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coe} class is a 'super class' for \link{OutCoe} \link{OpnCoe} and \link{LdkCoe} classes,
-matrices of coefficients (in their \code{$coe} slot), along with other informations,
-(e.g. an inherited \code{$fac}) obtained with morphometrics methods on
-\link{Out}, \link{Opn} and \link{Ldk} objects.
+\code{Coe} class is the 'parent' class of
+\code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes.
 }
 \details{
-This classes allows to recycle most of the methods, since both of them apply on
-matrices of coefficients. In other words, \code{OutCoe}, \code{OpnCoe} and \code{LdkCoe}
-classes are all, primarily, \code{Coe} objects on which we define generic
-\emph{and} specific methods.
+\code{Coe} class is the 'parent' class of the following 'child' classes \itemize{
+\item \code{\link{OutCoe}} for coefficients from closed \bold{out}lines morphometrics
+\item \code{\link{OpnCoe}} for coefficients from \bold{op}e\bold{n} outlines morphometrics
+\item \code{\link{LdkCoe}} for coefficients from configuration of \bold{l}an\bold{d}mar\bold{k}s morphometrics.
+}
 
-All these classes contain a \code{$coe} slot where the coefficients are stored,
-and can be accessed.
+In other words, \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes
+are all, primarily, \code{Coe} objects on which we define generic \emph{and}
+specific methods. See their respective help pages for more help.
 
-More, generally, see \link{OutCoe}, \link{OpnCoe} and \link{LdkCoe}
-for documentation on these classes.
+You can access all the methods available for \code{Coe} objects
+with \code{methods(class=Coe)}.
 }
 \examples{
 # to see all methods for Coo objects.
@@ -34,6 +36,7 @@ data(bot)
 bot.f<- eFourier(bot, 12)
 bot.f
 class(bot.f)
+inherits(bot.f, "Coe")
 
 # if you want to work directly on the matrix of coefficients
 bot.f$coe
