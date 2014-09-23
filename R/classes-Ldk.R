@@ -15,9 +15,9 @@
 #' 
 #' @param x a \code{list} of matrices of (x; y) coordinates,
 #' or an array, an Ldk object.
-#' @param links a matrix of 'links' between landmarks, mainly for plotting
-#' @param fac (optionnal) a \code{data.frame} of factors, 
+#' @param fac (optionnal) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
+#' @param links a matrix of 'links' between landmarks, mainly for plotting
 #' @return an \code{Ldk} object
 #' @seealso \link{Coo}, \link{Out}, link{Opn}.
 #' @note \code{Ldk} methods must be, so far, considered as experimental in Momocs.
@@ -26,38 +26,37 @@
 #' @examples
 #' methods(class=Ldk)
 #' @export
-Ldk <- function(x, links = NULL, fac = data.frame()) {
+Ldk <- function(x, fac = data.frame(), links = NULL) {
   UseMethod("Ldk")
 }
 
 #' @export
-Ldk.default <- function(x, links = NULL, fac = data.frame()) {
+Ldk.default <- function(x, fac = data.frame(), links = NULL) {
   cat(" * an Ldk object can only be build from a list, an array or an Ldk object")
 }
 
 #' @export
-Ldk.list <- function(x, links = NULL, fac = data.frame()) {
-  Ldk <- list(coo = x, links = links, fac = fac)
+Ldk.list <- function(x, fac = data.frame(), links = NULL) {
+  Ldk <- structure(list(coo = x, fac = fac, links = links), class=c("Ldk", "Coo"))
   if (!is.null(Ldk$fac)) 
-    Ldk$fac <- .refactor(Ldk$fac)
+    Ldk$fac <- as.data.frame(Ldk$fac, stringsAsFactors = FALSE)
   class(Ldk) <- c("Ldk", "Coo")
   return(Ldk)
 }
 
 #' @export
-Ldk.array <- function(x, links = NULL, fac = data.frame()) {
+Ldk.array <- function(x, fac = data.frame(), links = NULL) {
   x <- a2l(x)
-  Ldk(x, links = links, fac = fac)
+  Ldk(x, fac = fac, links = links)
 }
 
 #' @export
-Ldk.Coo <- function(x, links = NULL, fac = data.frame()) {
+Ldk.Coo <- function(x, fac = data.frame(), links = NULL) {
   nb.ldk <- sapply(x$coo, length)
   if (length(unique(nb.ldk)) > 1) 
     stop(" * shapes do not have the same number of landmarks.")
-  Ldk(x = x$coo, links = x$links, fac = x$fac)
+  Ldk(x = x$coo, fac = x$fac, links = x$links)
 }
-
 
 # The print method for Ldk objects
 #' @export
@@ -88,28 +87,8 @@ print.Ldk <- function(x, ...) {
   cat(" - $coo:", coo.nb, "configuration of landmarks")
   # number of coordinates
   cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates)\n", sep="")
-  # number of grouping factors
-  df <- Ldk$fac
-  nf <- ncol(df)
-  if (nf == 0) {
-    #cat(" - $fac: No groups defined in $fac\n")
-  } else {
-    if (nf<2) {
-      cat(" - $fac:", nf, "grouping factor:\n")
-    } else {
-      cat(" - $fac:", nf, "grouping factors:\n")}
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      # cosmectics below
-      if (sum(nchar(lev.i))>60){
-        maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-            " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
-      } else {
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
-      }
-    }
-  }
+  # we print the fac
+  .print.fac(Ldk$fac)
 } 
 
 # The print method for LdkCoe objects
@@ -141,26 +120,6 @@ print.LdkCoe <- function(x, ...) {
   cat(" - $coo:", coo.nb, "configuration of landmarks")
   # number of coordinates
   cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates)\n", sep="")
-  # number of grouping factors
-  df <- Ldk$fac
-  nf <- ncol(df)
-  if (nf == 0) {
-    #cat(" - $fac: No groups defined in $fac\n")
-  } else {
-    if (nf<2) {
-      cat(" - $fac:", nf, "grouping factor:\n")
-    } else {
-      cat(" - $fac:", nf, "grouping factors:\n")}
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      # cosmectics below
-      if (sum(nchar(lev.i))>60){
-        maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-            " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
-      } else {
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
-      }
-    }
-  }
+  # we print the fac
+  .print.fac(Ldk$fac)
 } 

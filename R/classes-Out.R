@@ -9,9 +9,9 @@
 #'
 #' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
 #' or an array or an Out object or an Ldk object
-#' @param ldk (optionnal) \code{list} of landmarks as row number indices
-#' @param fac (optionnal) a \code{data.frame} of factors,
+#' @param fac (optionnal) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
+#' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @return an \code{Out} object
 #' @seealso \link{Coo}, \link{Opn}, link{Ldk}.
 #' @keywords Out
@@ -19,35 +19,32 @@
 #' @examples
 #' methods(class=Out)
 #' @export
-Out <- function(x, ldk = list(), fac = data.frame) {
+Out <- function(x, fac = data.frame, ldk = list()) {
   UseMethod("Out")
 }
 
 #' @export
-Out.default <- function(x, ldk = list(), fac = data.frame()) {
-  cat(" * an Ldk object can only be build from a list, an array or an Opn object")
+Out.default <- function(x, fac = data.frame(), ldk = list()) {
+  cat(" * an Out object can only be built from a list, an array or a Coo object")
 }
 
 #' @export
-Out.list <- function(x, ldk = list(), fac = data.frame()) {
-  coo.list <- x
-  Out <- list(coo = coo.list, ldk = ldk, fac = fac)
+Out.list <- function(x, fac = data.frame(), ldk = list()) {
+  Out <- structure(list(coo = x, fac = fac, ldk = ldk), class=c("Out", "Coo"))
   if (!is.null(Out$fac))
-    Out$fac <- .refactor(Out$fac)
-  class(Out) <- c("Out", "Coo")
+    Out$fac <- as.data.frame(Out$fac, stringsAsFactors = FALSE)
   return(Out)
 }
 
 #' @export
-Out.array <- function(x, ldk = list(), fac = data.frame()) {
+Out.array <- function(x, fac = data.frame(), ldk = list()) {
   x <- a2l(x)
-  Out(x, fac = fac)
+  Out(x, fac = fac, ldk = ldk)
 }
 
-# experimental below
 #' @export
-Out.Coo <- function(x, ldk = list(), fac = data.frame()) {
-  Out(x = x$coo, ldk = x$ldk, fac = x$fac)
+Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
+  Out(x = x$coo, fac = x$fac, ldk = x$ldk)
 }
 
 #' Convert an OutCoe object into an Out object
@@ -127,7 +124,7 @@ print.Out <- function(x, ...) {
   #     }
   # number of outlines
   cat(" - $coo:", coo.nb, "outlines")
-
+  
   # number of coordinates
   cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates, ", sep="")
   # outlines closed or not
@@ -146,28 +143,8 @@ print.Out <- function(x, ...) {
   } else {
     #cat(" - No landmark defined\n")
   }
-  # number of grouping factors
-  df <- Out$fac
-  nf <- ncol(df)
-  if (nf == 0) {
-    #cat(" - $fac: No groups defined in $fac\n")
-  } else {
-    if (nf<2) {
-      cat(" - $fac:", nf, "grouping factor:\n")
-    } else {
-      cat(" - $fac:", nf, "grouping factors:\n")}
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      # cosmectics below
-      if (sum(nchar(lev.i))>60){
-        maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-            " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
-      } else {
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
-      }
-    }
-  }
+  # we print the fac
+  .print.fac(Out$fac)
 }
 
 
@@ -228,7 +205,7 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
       method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
     }
   }
-
+  
   # check for too ambitious harm.range
   if (max(harm.range) > (min(sapply(Out$coo, nrow))/2 + 1)) {
     harm.range <- floor(seq(1, q/2 - 1, length = 6))
@@ -483,7 +460,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
                      xlim=c(drop+1, nb.h), ylim=c(0, 100),
                      title = "Harmonic power of coefficients",
                      lineat.y = c(90, 95, 99, 99.9), verbose=TRUE) {
-
+  
   # we swith among methods, with a messsage
   if (missing(method)) {
     if (verbose) cat(" * Method not provided. hpow | efourier is used.\n")
@@ -539,7 +516,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
     #abline(h = lineat.y, lty = 1, col = col.heat(length(lineat.y)))
     #         lines(x, res[2, ], col="grey50")
     #         segments(x, res[1, ], x, res[3, ])
-
+    
     devmat.plot <- function(q, x, cols.poly, med.col, opacity.max=0.5, ...){
       if (missing(x)) x <- 1:ncol(q)
       nq <- floor(nrow(q)/2)
@@ -554,9 +531,9 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
       if (nrow(q) %% 2) {
         lines(x, q[nq+1, ], col=med.col, ...)}
     }
-
+    
     devmat.plot(res, x, type="o", cex=2/3, pch=20, lty=3)
-
+    
     box()
   }
   if (verbose){
@@ -594,8 +571,7 @@ OutCoe <- function(coe = matrix(), fac = data.frame(), method,
                    norm) {
   if (missing(method))
     stop("a method must be provided to OutCoe")
-  OutCoe <- list(coe = coe, fac = fac, method = method, norm = norm)
-  class(OutCoe) <- c("OutCoe", "Coe")
+  OutCoe <- structure(list(coe = coe, fac = fac, method = method, norm = norm), class=c("OutCoe", "Coe"))
   return(OutCoe)
 }
 
@@ -621,37 +597,17 @@ print.OutCoe <- function(x, ...) {
     # number of outlines and harmonics
     cat(" - $coe:", coo.nb, "outlines described, ")
     cat(harm.nb, "harmonics\n")
-  # lets show some of them for a quick inspection
-  cat(" - $coe: 1st harmonic coefficients from random individuals: \n")
-  row.eg <- sort(sample(coo.nb, ifelse(coo.nb < 5, coo.nb, 5), replace = FALSE))
-  col.eg <- coeff.sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
-  print(round(OutCoe$coe[row.eg, col.eg], 3))
-  cat("etc.\n")
+    # lets show some of them for a quick inspection
+    cat(" - $coe: 1st harmonic coefficients from random individuals: \n")
+    row.eg <- sort(sample(coo.nb, ifelse(coo.nb < 5, coo.nb, 5), replace = FALSE))
+    col.eg <- coeff.sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
+    print(round(OutCoe$coe[row.eg, col.eg], 3))
+    cat("etc.\n")
   } else {
     cat(" - $coe: harmonic coefficients\n")
   }
-  # number of grouping factors
-  df <- OutCoe$fac
-  nf <- ncol(df)
-  if (nf == 0) {
-    #cat(" - $fac: No groups defined in $fac\n")
-  } else {
-    if (nf<2) {
-      cat(" - $fac:", nf, "grouping factor:\n")
-    } else {
-      cat(" - $fac:", nf, "grouping factors:\n")}
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      # cosmectics below
-      if (sum(nchar(lev.i))>60){
-        maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-            " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
-      } else {
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
-      }
-    }
-  }
+  # we print the fac
+  .print.fac(OutCoe$fac)
 }
 
 # 4. Out morphometrics ---------------------------------------------------------
