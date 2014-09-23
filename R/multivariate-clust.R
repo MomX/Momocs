@@ -41,7 +41,7 @@ clust <- function(x, fac, method, type, palette, ...) {
     UseMethod("clust")
 }
 #' @export
-clust.Coe <- function(x, fac, method = "euclidean", type = "unrooted", 
+clust.Coe <- function(x, fac, method = "euclidean", type = "fan", 
     palette = col.summer, ...) {
     Coe <- x
     if (missing(fac)) {
@@ -60,4 +60,26 @@ clust.Coe <- function(x, fac, method = "euclidean", type = "unrooted",
     invisible(list(dist.mat = dist.mat, hclust = Coe.hc))
 }
 
+#' @export
+clust.PCA <- function(x, fac, method = "euclidean", type = "fan", 
+                      palette = col.summer, ...) {
+  if (missing(fac)) {
+    cols <- rep("black", nrow(x$x))
+  } else {
+    facs <- x$fac[, fac]
+    cols <- palette(nlevels(facs))[facs]
+  }
+  dist.mat <- dist(x$x, method = method)
+  Coe.hc <- hclust(dist.mat)
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(oma = rep(0, 4), mar = rep(0, 4))
+  plot(as.phylo.hclust(Coe.hc), tip.color = cols, type = type, 
+       ...)
+  invisible(list(dist.mat = dist.mat, hclust = Coe.hc))
+}
+
 ##### end clust 
+
+
+
