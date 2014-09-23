@@ -177,13 +177,13 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (!missing(pch)) {
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
     }
-    #else {
-    #       if (nlevels(fac) < 10) {
-    #         pch <- .pch()[fac]
-    #       } else {
-    #         pch <- 20
-    #       }
-    #     }
+    else {
+          if (nlevels(fac) < 10) {
+            pch <- .pch()[fac]
+          } else {
+            pch <- 20
+          }
+        }
   }
   # cosmectics
   if ((density) & missing(contour)) contour <- TRUE
