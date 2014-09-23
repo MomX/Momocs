@@ -1,6 +1,55 @@
 ##### ShapeDescriptors (scalars mainly) used in traditional
 ##### morphometrics
 
+# todo: bouding box todo: based on svd cov mat
+#' Calculates length and width of a shape
+#'
+#' Returns the length and width of a shape based on their iniertia axis
+#' i.e. alignment to the x-axis. The length is defined as
+#' the range along the x-axis; the width as the range on the y-axis.
+#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @return a vector of two \code{numeric}: the length and the width.
+#' @keywords ShapeDescriptors
+#' @seealso \link{coo.length}, \link{coo.width}.
+#' @examples
+#' data(bot)
+#' coo.lw(bot[1])
+#' @export
+coo.lw <- function(coo) {
+  coo <- coo.check(coo)
+  d <- apply(coo.align(coo), 2, range)
+  return(abs(d[2, ] - d[1, ]))
+}
+
+#' Calculates the length of a shape
+#'
+#' Nothing more than \code{coo.lw(coo)[1]}.
+#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @return the length (in pixels) of the shape
+#' @keywords ShapeDescriptors
+#' @seealso \link{coo.lw}, \link{coo.width}
+#' @examples
+#' data(bot)
+#' coo.length(bot[1])
+#' @export
+coo.length <- function(coo) {
+  return(coo.lw(coo)[1])
+}
+
+#' Calculates the width of a shape
+#'
+#' Nothing more than \code{coo.lw(coo)[2]}.
+#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @return the width (in pixels) of the shape
+#' @keywords ShapeDescriptors
+#' @seealso \link{coo.lw}, \link{coo.length}.
+#' @examples
+#' data(bot)
+#' coo.width(bot[1])
+#' @export
+coo.width <- function(coo) {
+  return(coo.lw(coo)[2])}
+
 #' Calculates the area of a shape
 #' 
 #' Calculates the area for a (non-crossing) shape.
