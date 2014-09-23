@@ -1247,22 +1247,3 @@ coo.calliper <- function(coo, arr.ind = FALSE) {
     return(max(d))
   }
 }
-
-# todo: bouding box todo: based on svd cov mat
-#' Calculates length and width
-#'
-#' Returns the length and width of a shape based on their iniertia axis
-#' i.e. alignment to the x-axis. The length is defined as
-#' the range along the x-axis; the width as the range on the y-axis.
-#' @param coo a \code{matrix} of (x; y) coordinates.
-#' @return two \code{numeric}, the length and the width.
-#' @keywords ShapeDescriptors
-#' @examples
-#' data(bot)
-#' coo.lw(bot[1])
-#' @export
-coo.lw <- function(coo) {
-  coo <- coo.check(coo)
-  d <- apply(coo.align(coo), 2, range)
-  return(abs(d[2, ] - d[1, ]))
-}
