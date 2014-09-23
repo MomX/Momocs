@@ -266,11 +266,98 @@ vecs.param <- function(r1, i1, r2, i2) {
   } else {
     return(out)}}
 
-
+# Was used in $fac handling when creating Coo object, before numeric could be
+# accepted in it (as covariables)
 #'@export
 .refactor <- function(df) {
     data.frame(lapply(df, factor))
 }
+
+# Used in Coo/Coe printers
+#'@export
+.print.fac <- function(fac){
+  nf <- ncol(fac)
+  # here we print the number of classifiers
+  if (nf == 0) {
+    cat(" - $fac: No classifier defined in $fac\n")
+  } else {
+    if (nf<2) {
+      cat(" - $fac:", nf, "classifier:\n")
+    } else {
+      cat(" - $fac:", nf, "classifiers:\n")}
+    # here we print every classifier
+    for (i in 1:nf) {
+      if (is.numeric(fac[, i])){
+        xi <- fac[, i]
+        nas <- sum(is.na(xi))
+        xi  <- xi[!is.na(xi)]
+        xi.sum <- list(min=min(xi), med=median(xi), max=max(xi), mean=mean(xi), sd=sd(xi))
+        xi.sum <- lapply(xi.sum, signif, 3)
+        xi.sum$nas <- nas
+        cat("     '", colnames(fac)[i], "' (numeric): ",
+            #"min:", xi.sum$min,
+            #", med:", xi.sum$med,
+            #", max: ", xi.sum$max,
+            #"mean:", xi.sum$mean,
+            #", sd: ", xi.sum$sd,
+            "mean: ", xi.sum$mean, ", sd: ", xi.sum$sd,
+            ifelse(xi.sum$nas==0, ".\n", paste0(" (", xi.sum$nas, " NA).\n")), sep="")
+      } else {
+        # case where the column is a factor
+        lev.i <- levels(fac[, i])
+        # cosmectics below
+        if (sum(nchar(lev.i))>60){
+          maxprint <- which(cumsum(nchar(lev.i))>30)[1]
+          cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
+              " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
+        } else {
+          cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
+        }
+      }
+    }
+  }
+}
+
+### prepare a factor according to waht is passed to various methods,
+# notably multivariate plotters..prep.fac(bp, 1)
+# eg
+#  bp <- PCA(eFourier(bot))
+# .prep.fac(bp, 2)
+# .prep.fac(bp, "type")
+# .prep.fac(bp, factor(rep(letters[1:4], each=10)))
+# .prep.fac(bp, ~type)
+# .prep.fac(bp)
+#' @export
+.prep.fac <- function(x, fac){
+  ### missing case
+  if (missing(fac)) {
+    fac <- NULL
+  }
+  ### formula case (is.formula doesnt exist)
+  if (class(fac)=="formula"){
+    f0 <- x$fac[, attr(terms(fac), "term.labels")]
+    fac <- interaction(f0)
+  }
+  ### column id case
+  if (is.numeric(fac)) {
+    if (fac > ncol(x$fac)) 
+      stop(fac, " is not a valid column id")
+    fac <- factor(x$fac[, fac]) }
+  ### column name case
+  if (is.character(fac)) {
+    if (!any(colnames(x$fac) == fac)) 
+      stop(fac, " is not an existing column name")
+    fac <- factor(x$fac[, fac]) }
+  ### factor case
+  if (is.factor(fac)) {
+    if (length(fac) != nrow(x$fac)) 
+      stop("'fac' length and number of individuals differ")
+    # we need it to refactor in subset cases
+    fac <- factor(fac) 
+  }
+  return(fac)
+}
+
 
 #' @export
 .trim.ext <- function(lf, width = nchar(lf) - 4) {
