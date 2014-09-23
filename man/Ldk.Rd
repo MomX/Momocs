@@ -7,16 +7,16 @@
 \alias{LdkCoe}
 \title{Builds an Ldk object}
 \usage{
-Ldk(x, links = NULL, fac = data.frame())
+Ldk(x, fac = data.frame(), links = NULL)
 }
 \arguments{
 \item{x}{a \code{list} of matrices of (x; y) coordinates,
 or an array, an Ldk object.}
 
-\item{links}{a matrix of 'links' between landmarks, mainly for plotting}
-
-\item{fac}{(optionnal) a \code{data.frame} of factors,
+\item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
 specifying the grouping structure}
+
+\item{links}{a matrix of 'links' between landmarks, mainly for plotting}
 }
 \value{
 an \code{Ldk} object

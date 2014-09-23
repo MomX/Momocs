@@ -3,15 +3,15 @@
 \alias{Opn}
 \title{Builds an Opn object}
 \usage{
-Opn(x, ldk = NULL, fac = data.frame())
+Opn(x, fac = data.frame(), ldk = list())
 }
 \arguments{
 \item{x}{\code{list} of matrices of (x; y) coordinates}
 
-\item{ldk}{(optionnal) \code{list} of landmarks as row number indices}
-
-\item{fac}{(optionnal) a \code{data.frame} of factors,
+\item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
 specifying the grouping structure}
+
+\item{ldk}{(optionnal) \code{list} of landmarks as row number indices}
 }
 \value{
 an \code{Opn} object
