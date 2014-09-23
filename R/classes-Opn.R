@@ -11,9 +11,9 @@
 #'  \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 #'
 #' @param x \code{list} of matrices of (x; y) coordinates
-#' @param ldk (optionnal) \code{list} of landmarks as row number indices
-#' @param fac (optionnal) a \code{data.frame} of factors,
+#' @param fac (optionnal) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
+#' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @return an \code{Opn} object
 #' @seealso \link{Coo}, \link{Out}, \link{Ldk}.
 #' @keywords Opn
@@ -39,33 +39,33 @@
 #' olda
 #' plot(olda)
 #' @export
-Opn <- function(x, ldk = NULL, fac = data.frame()) {
+Opn <- function(x, fac = data.frame(), ldk = list()) {
   UseMethod("Opn")
 }
 
 #' @export
-Opn.default <- function(x, ldk = NULL, fac = data.frame()) {
+Opn.default <- function(x, fac = data.frame(), ldk = list()) {
   cat(" * an Opn object can only be build from a list, an array or a Coo object")
 }
 
 #' @export
-Opn.list <- function(x, ldk = NULL, fac = data.frame()) {
-  Opn <- list(coo = x, ldk = ldk, fac = fac)
+Opn.list <- function(x, fac = data.frame(), ldk = list()) {
+  Opn <- structure(list(coo = x, fac = fac, ldk = ldk), class=c("Opn", "Coo"))
   if (!is.null(Opn$fac))
-    Opn$fac <- .refactor(Opn$fac)
+    Opn$fac <- as.data.frame(Opn$fac, stringsAsFactors = FALSE)
   class(Opn) <- c("Opn", "Coo")
   return(Opn)
 }
 
 #' @export
-Opn.array <- function(x, ldk = NULL, fac = data.frame()) {
+Opn.array <- function(x, fac = data.frame(), ldk = list()) {
   x <- a2l(x)
-  Opn(x, ldk = x$ldk, fac = fac)
+  Opn(x, fac = fac, ldk = ldk)
 }
 
 #' @export
-Opn.Coo <- function(x, ldk = NULL, fac = data.frame()) {
-  Opn(x = x$coo, ldk = x$ldk, fac = x$fac)
+Opn.Coo <- function(x, fac = data.frame(), ldk = list()) {
+  Opn(x = x$coo, fac = x$fac, ldk = x$ldk)
 }
 
 # The print method for Out objects
@@ -93,7 +93,7 @@ print.Opn <- function(x, ...) {
   #     }
   # number of outlines
   cat(" - $coo:", coo.nb, "open outlines")
-
+  
   # number of coordinates
   cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates)\n", sep="")
   # number of landmarks
@@ -102,28 +102,8 @@ print.Opn <- function(x, ...) {
   } else {
     #     cat(" - No landmark defined\n")
   }
-  # number of grouping factors
-  df <- Opn$fac
-  nf <- ncol(df)
-  if (nf == 0) {
-    #cat(" - $fac: No groups defined in $fac\n")
-  } else {
-    if (nf<2) {
-      cat(" - $fac:", nf, "grouping factor:\n")
-    } else {
-      cat(" - $fac:", nf, "grouping factors:\n")}
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      # cosmectics below
-      if (sum(nchar(lev.i))>60){
-        maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-            " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
-      } else {
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
-      }
-    }
-  }
+  # we print the fac
+  .print.fac(Opn$fac)
 }
 
 # 2. Opn calibration
@@ -177,7 +157,6 @@ nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
       ortho <- switch(p, TRUE, FALSE)
     }
   }
-
   # check for too ambitious harm.range
   if (max(degree.range) > (min(sapply(Opn$coo, nrow)) - 1)) {
     degree.range <- (min(sapply(Opn$coo, nrow)) - 1)
@@ -270,8 +249,8 @@ print.OpnCoe <- function(x, ...) {
     met <- c(met, "analyses ]\n")
     combined <- TRUE
   } else {
-    p <- pmatch(OpnCoe$method, c("rawPolynomials", "orthoPolynomials"))
-    met <- switch(p, "raw Polynomials", "orthogonal Polynomials")
+    p <- pmatch(OpnCoe$method, c("rawPolynomials", "orthoPolynomials", "dct"))
+    met <- switch(p, "raw Polynomials", "orthogonal Polynomials", "discret cosine tansform")
     met <- c(met, "analysis ]\n")
     combined <- FALSE
   }
@@ -281,52 +260,47 @@ print.OpnCoe <- function(x, ...) {
   coo.nb <- nrow(OpnCoe$coe)  #nrow method ?
   if (!combined) {
     degree <- ncol(OpnCoe$coe)
+    # p==3 is the case for dct all along the method
+    if (p==3) degree <- degree/2 
     # number of outlines and harmonics
     cat(" - $coe:", coo.nb, "open outlines described, ")
-    cat(degree, "th degree (+Intercept)\n", sep="")
-  cat(" - Baseline registration: (x1=", OpnCoe$baseline1[1],
-      "; y1=", OpnCoe$baseline1[2], ") - (x2=", OpnCoe$baseline2[1],
-      "; y2=", OpnCoe$baseline2[2], ")\n", sep = "")
-  # lets show some of them for a quick inspection
-    cat(" - $coe: 1st polynomial coefficients from random open outlines: \n")
+    if (p==3){
+      cat(degree, " harmonics\n", sep="")
+    } else {
+      cat(degree, "th degree (+Intercept)\n", sep="")
+    }
+    # we print the baselines
+    cat(" - $baseline1: (", paste(x$baseline1, collapse="; "), ")\n", sep="")
+    cat(" - $baseline2: (", paste(x$baseline2, collapse="; "), ")\n", sep="")
+    # lets show some of the coefficients for a quick inspection
+    if (p==3){
+      cat(" - $coe: 1st harmonic coefficients from random open outlines: \n")
+    } else {
+      cat(" - $coe: 1st polynomial coefficients from random open outlines: \n")}
     row.eg <- sort(sample(coo.nb, ifelse(coo.nb < 5, coo.nb, 5), replace = FALSE))
-    print(round(OpnCoe$coe[row.eg, ], 3))
-  cat("etc.\n")
+    nc <- ncol(OpnCoe$coe)
+    if (nc > 10) {
+      if (p==3) { col.eg <- c(1:5, (nc/2)+1:5)
+      } else {
+        col.eg <- 1:nc}
+    } else {
+      col.eg <- 1:nc
+    }
+    print(round(OpnCoe$coe[row.eg, col.eg], 3))
+    cat("etc.\n")
   } else {
     cat(" - $baseline1, $baseline2: baselines registrations\n")
     cat(" - $coe: coefficients\n")}
-
-
-
-  # r2 quick summary
-  r2  <- OpnCoe$r2
-  cat(" - $r2: min=", signif(min(r2), 3),
-      ", median=",    signif(median(r2), 3),
-      ", mean=",      signif(mean(r2), 3),
-      ", sd=",        signif(mean(r2), 3),
-      ", max=",       signif(max(r2), 3), "\n", sep="")
-  # number of grouping factors
-  df <- OpnCoe$fac
-  nf <- ncol(df)
-  if (nf == 0) {
-    #cat(" - $fac: No groups defined\n")
-  } else {
-    if (nf<2) {
-      cat(" - $fac:", nf, "grouping factor:\n")
-    } else {
-      cat(" - $fac:", nf, "grouping factors:\n")}
-    for (i in 1:nf) {
-      lev.i <- levels(df[, i])
-      # cosmectics below
-      if (sum(nchar(lev.i))>60){
-        maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-            " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
-      } else {
-        cat("     '", colnames(df)[i], "' (", nlevels(df[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
-      }
-    }
-  }
+  if (p != 3) {
+    # r2 quick summary
+    r2  <- OpnCoe$r2
+    cat(" - $r2: min=", signif(min(r2), 3),
+        ", median=",    signif(median(r2), 3),
+        ", mean=",      signif(mean(r2), 3),
+        ", sd=",        signif(mean(r2), 3),
+        ", max=",       signif(max(r2), 3), "\n", sep="")}
+  # we print the fac
+  .print.fac(OpnCoe$fac)
 }
 
 # 3. Opn morphometrics
@@ -352,8 +326,7 @@ print.OpnCoe <- function(x, ...) {
 #' # and the standard deviation
 #' sd(op$r2)
 #' @export
-rawPolynomials <- function(Opn, degree, baseline1, baseline2,
-                           nb.pts) {
+rawPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts) {
   UseMethod("rawPolynomials")
 }
 #' @export

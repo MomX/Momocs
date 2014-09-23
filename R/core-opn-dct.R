@@ -4,6 +4,7 @@
 #' a shape (mainly open outlines).
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @param nb.h numeric the number of harmonics to calculate
+#' @param verbose whether to print messages
 #' @return a list with the following components:
 #' \itemize{
 #' \item A the A harmonic coefficients
@@ -44,29 +45,26 @@
 #' panel(Opn(coo), borders=col.india(12), names=TRUE)
 #' title('Discrete Cosine Transforms')
 #' @export
-dct <- function(coo, nb.h) {
-    # we cjeck a bit
+dct <- function(coo, nb.h, verbose = TRUE) {
+    # we check a bit
     coo <- coo.check(coo)
     if (missing(nb.h)) {
         nb.h <- 12
-        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
-    }
+        if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
     # preliminaries
     N <- nrow(coo)
-    pol <- coo[, 1] + (0 + (0 + (0 + (0 + (0 + (0+1i)))))) * 
-        coo[, 2]
+    pol <- coo[, 1] + (0+1i) * coo[, 2]
     # dct
     c <- rep(sqrt(2/N), N)
     c[1] <- 1/sqrt(N)
     Sv <- S <- rep(NA, N)
     for (k in 0:(N - 1)) {
         for (n in 0:(N - 1)) {
-            Sv[n + 1] <- pol[n + 1] * cos(((2 * n + 1) * k * 
-                pi)/(2 * N))
+            Sv[n + 1] <- pol[n + 1] * cos(((2 * n + 1) * k * pi)/(2 * N))
         }
         S[k + 1] <- c[k + 1] * sum(Sv)
     }
-    S <- S[2:nb.h]  #we remove the 1st harmonic
+    S <- S[2:(nb.h+1)]  #we remove the 1st harmonic
     return(list(A = Re(S)/N, B = Im(S)/N, mod = Mod(S)/N, phi = Arg(S)))
 }
 
@@ -117,16 +115,15 @@ dct.i <- function(df, nb.pts = 60) {
     c <- rep(sqrt(2/nb.pts), nb.pts)
     c[1] <- 1/sqrt(nb.pts)
     
-    S <- A + (0 + (0 + (0 + (0 + (0 + (0+1i)))))) * B
-    S <- c(0 + 0 * (0 + (0 + (0 + (0 + (0 + (0+1i)))))), S)  # we add a trivial harmonic corresponding to (0; 0)
+    S <- A + (0+1i) * B
+    S <- c(0+1i, S)  # we add a trivial harmonic corresponding to (0; 0)
     
     sv_r <- rep(NA, nb.h)
     s_r <- rep(NA, nb.pts)
     # idct pour le nombre d'harmonique spécifié
     for (n in 0:(nb.pts - 1)) {
         for (k in 0:(nb.h - 1)) {
-            sv_r[k + 1] <- c[k + 1] * S[k + 1] * cos(((2 * n + 
-                1) * k * pi)/(2 * nb.pts))
+            sv_r[k + 1] <- c[k + 1] * S[k + 1] * cos(((2 * n + 1) * k * pi)/(2 * nb.pts))
         }
         s_r[n + 1] <- sum(sv_r)
     }

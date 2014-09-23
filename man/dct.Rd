@@ -3,12 +3,14 @@
 \alias{dct}
 \title{Discrete cosinus transform}
 \usage{
-dct(coo, nb.h)
+dct(coo, nb.h, verbose = TRUE)
 }
 \arguments{
 \item{coo}{a matrix (or a list) of (x; y) coordinates}
 
 \item{nb.h}{numeric the number of harmonics to calculate}
+
+\item{verbose}{whether to print messages}
 }
 \value{
 a list with the following components:
