@@ -157,4 +157,10 @@ col.alpha <- .transp
 .cex <- function(x) {
     3/(log(x + 1) + 1)
 }
+
+# reorders default pchs
+#' export
+.pch <- function() { 
+  c(2, 6, 1, 3, 4, 5, 8, 7, 9, 10)}
+                  
 ##### end colors graphics 
