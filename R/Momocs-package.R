@@ -73,3 +73,4 @@ NULL
 # packageStartupMessage('This is Momocs ',
 # utils::packageDescription('Momocs', field='Version'),
 # appendLF = TRUE) }
+

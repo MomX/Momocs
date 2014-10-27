@@ -26,6 +26,9 @@ coo.check <- function(coo) {
   if (is.matrix(coo)) {
     return(coo)
   }
+  if (is.data.frame(coo)){
+    return(as.matrix(coo))
+  }
   if (is.list(coo)) {
     if (length(coo) == 1)
       return(l2m(coo))
