@@ -2,12 +2,7 @@
 title: "First steps with Momocs"
 author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    toc: true
-    number_sections: true
-    toc_depth: 3
-    css: vignette.css
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{First steps with Momocs}
   %\VignetteEngine{knitr::rmarkdown}

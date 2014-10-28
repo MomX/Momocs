@@ -5,5 +5,3 @@ out$
 NEWS.md
 ^.*\.Rproj$
 ^\.Rproj\.user$
-vignettes/*
-inst/doc
