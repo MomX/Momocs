@@ -31,11 +31,11 @@ Directly borrowed for Claude (2008), and also called \code{iefourier} there.
 \examples{
 data(bot)
 coo <- bot[1]
-coo.plot(coo)
+coo_plot(coo)
 ef  <- efourier(coo, 12)
 ef
 efi <- efourier.i(ef)
-coo.draw(efi, border='red', col=NA)
+coo_draw(efi, border='red', col=NA)
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,

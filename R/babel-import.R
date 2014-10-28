@@ -286,10 +286,10 @@ import.jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
     if (verbose) {
       cat(jpg.paths[i])
     }
-    coo.i <- import.jpg1(jpg.paths[i], auto.notcentered = auto.notcentered,
+    coo_i <- import.jpg1(jpg.paths[i], auto.notcentered = auto.notcentered,
                          fun.notcentered = fun.notcentered, threshold = threshold)
-    res[[i]] <- coo.i
-    # if (export){coo.export(coo.i, jpg.paths[i])}
+    res[[i]] <- coo_i
+    # if (export){coo_export(coo_i, jpg.paths[i])}
     if (verbose) {
       cat("   OK\n")
     } else {
@@ -447,11 +447,11 @@ lf.structure <- function(lf, names = character(), split = "_",
 # Fridge -------
 
 # splines <- function(coo, method='natural', deriv=2){ coo <-
-# coo.check(coo) z <- coo.perim.cum(coo) fx <- splinefun(z,
+# coo_check(coo) z <- coo_perim.cum(coo) fx <- splinefun(z,
 # coo[, 1], method=method) fy <- splinefun(z, coo[, 2],
 # method=method) xcoe <- fy(z, deriv=2) ycoe <- fy(z,
 # deriv=2) return(list(xcoe=xcoe, ycoe=ycoe))} splines2 <-
-# function(coo, nb.pts=100){ z <- coo.perim.cum(coo) x.i <-
+# function(coo, nb.pts=100){ z <- coo_perim.cum(coo) x.i <-
 # spline(z, coo[, 1], method='natural', n=100)$y y.i <-
 # spline(z, coo[, 2], method='natural', n=100)$y
 # return(cbind(x.i, y.i))} click.bez <- function(x, n=10){ x

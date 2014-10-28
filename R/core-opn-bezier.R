@@ -17,22 +17,22 @@
 #' @keywords Bezier
 #' @examples
 #' set.seed(34)
-#' x <- coo.sample(efourier.shape(), 5)
+#' x <- coo_sample(efourier.shape(), 5)
 #' plot(x, ylim=c(-3, 3), asp=1, type='b', pch=20)
 #' b <- bezier(x)
 #' bi <- bezier.i(b$B)
 #' lines(bi, col='red')
 #' @export
 bezier <- function(coo, n) {
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     if (missing(n)) 
         n <- nrow(coo)
     p <- nrow(coo)
     if (n != p) {
         n <- n + 1
     }
-    coo1 <- coo/coo.perim.cum(coo)[p]
-    t1 <- 1 - coo.perim.cum(coo1)
+    coo1 <- coo/coo_perim.cum(coo)[p]
+    t1 <- 1 - coo_perim.cum(coo1)
     J <- matrix(NA, p, p)
     for (i in 1:p) {
         for (j in 1:p) {
@@ -60,7 +60,7 @@ bezier <- function(coo, n) {
 #' @keywords Bezier
 #' @examples
 #' set.seed(34)
-#' x <- coo.sample(efourier.shape(), 5)
+#' x <- coo_sample(efourier.shape(), 5)
 #' plot(x, ylim=c(-3, 3), asp=1, type='b', pch=20)
 #' b <- bezier(x)
 #' bi <- bezier.i(b$B)

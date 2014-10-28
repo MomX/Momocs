@@ -49,12 +49,12 @@
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
-#' coo.plot(coo)
+#' coo_plot(coo)
 #' tf  <- tfourier(coo, 12)
 #' tf
 #' tfi <- tfourier.i(tf)
-#' coo.draw(tfi, border='red', col=NA) # the outline is not closed...
-#' coo.draw(tfourier.i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
+#' coo_draw(tfi, border='red', col=NA) # the outline is not closed...
+#' coo_draw(tfourier.i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
 #' @export
 tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
     verbose = TRUE) {
@@ -66,7 +66,7 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
         coo <- l2m(coo)
     }
     if (is.closed(coo)) {
-        coo <- coo.unclose(coo)
+        coo <- coo_unclose(coo)
     }
     if (nb.h * 2 > nrow(coo)) {
         nb.h = floor(nrow(coo)/2)
@@ -83,11 +83,11 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
         }
     }
     if (smooth.it != 0) {
-        coo <- coo.smooth(coo, smooth.it)
+        coo <- coo_smooth(coo, smooth.it)
     }
     if (norm) {
-        coo <- coo.scale(coo.center(coo))
-        coo <- coo.trans(coo, -coo[1, 1], -coo[1, 2])
+        coo <- coo_scale(coo_center(coo))
+        coo <- coo_trans(coo, -coo[1, 1], -coo[1, 2])
     }
     p <- nrow(coo)
     an <- bn <- numeric(nb.h)
@@ -121,7 +121,7 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
 #' @param nb.pts \code{integer}. The number of points to calculate
 #' @param force2close \code{logical}. Whether to force the outlines calculated
-#' to close (see \link{coo.force2close}).
+#' to close (see \link{coo_force2close}).
 #' @param rescale \code{logical}. Whether to rescale the points calculated so
 #' that their perimeter equals \code{perim}.
 #' @param perim The perimeter length to rescale shapes.
@@ -177,16 +177,16 @@ tfourier.i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
     Z1 <- cumsum(Z)
     coo <- cbind(Re(Z1), Im(Z1))
     if (force2close) {
-        coo <- coo.force2close(coo)
+        coo <- coo_force2close(coo)
     }
     if (rescale) {
         if (missing(perim)) {
             perim <- ifelse(is.null(tf$perim), 2 * pi, tf$perim)
         }
-        coo <- coo.scale(coo, coo.perim(coo)/perim)
+        coo <- coo_scale(coo, coo_perim(coo)/perim)
     }
     if (!all(is.null(tf$x1) & is.null(tf$x1))) {
-        coo <- coo.trans(coo, tf$x1, tf$y1)
+        coo <- coo_trans(coo, tf$x1, tf$y1)
     }
     # return(list(x=coo[, 1], y=coo[, 2], angle=theta, phi=phi))}
     colnames(coo) <- c("x", "y")
@@ -230,7 +230,7 @@ tfourier.i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' tfourier.shape()
 #' tfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
 #' panel(Out(a2l(replicate(100,
-#' coo.force2close(tfourier.shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
+#' coo_force2close(tfourier.shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
 #' @export
 tfourier.shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80, 
     alpha = 2, plot = TRUE) {
@@ -245,7 +245,7 @@ tfourier.shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80,
     tf <- list(an = an, bn = bn, ao = ao)
     shp <- tfourier.i(tf, nb.h = nb.h, nb.pts = nb.pts)
     if (plot) 
-        coo.plot(shp)
+        coo_plot(shp)
     return(shp)
 }
 

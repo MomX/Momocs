@@ -19,23 +19,23 @@ defined by the row of the matrix and uses a color to display an information.
 \examples{
 # we load some data
 data(bot)
-guinness <- coo.sample(bot[9], 100)
+guinness <- coo_sample(bot[9], 100)
 
 # we calculate the diff between 48 harm and one with 6 harm.
 out.6    <- efourier.i(efourier(guinness, nb.h=6), nb.pts=120)
 
 # we calculate deviations, you can also try 'edm'
-dev <- edm.nearest(out.6, guinness) / coo.centsize(out.6)
+dev <- edm.nearest(out.6, guinness) / coo_centsize(out.6)
 
 # we prepare the color scale
 d.cut <- cut(dev, breaks=20, labels=FALSE, include.lowest=TRUE)
 cols  <- paste0(col.summer(20)[d.cut], 'CC')
 
 # we draw the results
-coo.plot(guinness, main='Guiness fitted with 6 harm.', points=FALSE)
+coo_plot(guinness, main='Guiness fitted with 6 harm.', points=FALSE)
 par(xpd=NA)
 dev.segments(out.6, cols=cols, lwd=4)
-coo.draw(out.6, lty=2, points=FALSE, col=NA)
+coo_draw(out.6, lty=2, points=FALSE, col=NA)
 par(xpd=FALSE)
 }
 \keyword{Graphics}

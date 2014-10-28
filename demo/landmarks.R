@@ -11,7 +11,7 @@ stack(wp)
 
 # We calculate and add the meanshape (needs a proper 'links' handling)
 m <- mshape(wp)
-coo.draw(m)
+coo_draw(m)
 # plus some labels
 ldk.labels(m)
 

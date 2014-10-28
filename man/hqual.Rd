@@ -38,7 +38,7 @@ hqual(Out, method = c("efourier", "rfourier", "tfourier"), id,
 
 \item{shp.border}{a color for the border of the shape}
 
-\item{...}{additional parameters to fed \link{coo.plot}}
+\item{...}{additional parameters to fed \link{coo_plot}}
 }
 \description{
 Calculate and displays reconstructed shapes using a

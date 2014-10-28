@@ -67,8 +67,8 @@
     if (is.matrix(pts.i)) {
       if (nrow(pts.i) > 1) {
         ell.i <- conf.ell(x = pts.i, conf = conf)$ell
-        lines(coo.close(ell.i), col = col[i])
-        points(coo.centpos(pts.i)[1], coo.centpos(pts.i)[2],
+        lines(coo_close(ell.i), col = col[i])
+        points(coo_centpos(pts.i)[1], coo_centpos(pts.i)[2],
                pch = 3, cex = 0.3, col = col[i])
       }
     }
@@ -109,11 +109,11 @@
 #' @export
 .chull <- function(coo, fac, col, lty) {
   for (i in seq(along = levels(fac))) {
-    coo.i <- coo[fac == levels(fac)[i], ]
-    if (is.matrix(coo.i)) {
-      if (nrow(coo.i) > 1) {
-        chull.i <- coo.chull(coo.i)
-        lines(coo.close(chull.i), col = col[i], lty = lty)
+    coo_i <- coo[fac == levels(fac)[i], ]
+    if (is.matrix(coo_i)) {
+      if (nrow(coo_i) > 1) {
+        chull.i <- coo_chull(coo_i)
+        lines(coo_close(chull.i), col = col[i], lty = lty)
       }
     }
   }
@@ -127,7 +127,7 @@
   for (i in seq(along = levels(fac))) {
     cent.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(cent.i)) {
-      cent.i <- coo.centpos(xy[fac == levels(fac)[i], ])
+      cent.i <- coo_centpos(xy[fac == levels(fac)[i], ])
     }
     cent[i, ] <- cent.i
   }
@@ -163,7 +163,7 @@
   col.i <- .transp(col, 0.2)
   for (i in seq(along = levels(fac))) {
     pts.i <- xy[fac == levels(fac)[i], ]
-    cent.i <- coo.centpos(pts.i)
+    cent.i <- coo_centpos(pts.i)
     for (j in 1:nrow(pts.i)) {
       segments(cent.i[1], cent.i[2],
                pts.i[j, 1], pts.i[j,2],

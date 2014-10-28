@@ -21,7 +21,7 @@ uses \link{delaunayn} in the \code{geometry} package.
 \examples{
 data(wings)
 w <- wings[1]
-coo.plot(w, poly=FALSE)
+coo_plot(w, poly=FALSE)
 links <- links.delaunay(w)
 ldk.links(w, links)
 }

@@ -42,7 +42,7 @@ Most of the time this is due to a poor normalization on the matrix of coefficien
 variability you observe may mostly be due to the variability in the alignment of the
 'first' ellipsis which is defined by the first harmonic, used for the normalization. In that
 case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You
-have several options: \link{coo.align}, \link{coo.aligncalliper}, \link{fgProcrustes} either directly on
+have several options: \link{coo_align}, \link{coo_aligncalliper}, \link{fgProcrustes} either directly on
 the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of
 what shall provide a good alignment. Have a look to Momocs' vignette for some illustration of these pitfalls
 and how to manage them.

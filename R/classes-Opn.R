@@ -75,27 +75,27 @@ print.Opn <- function(x, ...) {
   ### Header
   cat("An Opn object with: \n")
   cat(rep("-", 20), "\n", sep = "")
-  coo.nb <- length(Opn)
-  coo.len <- sapply(Opn$coo, nrow)
-  coo.closed <- sapply(Opn$coo, is.closed)
+  coo_nb <- length(Opn)
+  coo_len <- sapply(Opn$coo, nrow)
+  coo_closed <- sapply(Opn$coo, is.closed)
   #     # one random outline
   #     eg <- sample(length(Opn$coo), 1)
-  #     coo.eg <- Opn$coo[[eg]]
-  #     colnames(coo.eg) <- c("x", "y")
+  #     coo_eg <- Opn$coo[[eg]]
+  #     colnames(coo_eg) <- c("x", "y")
   #     cat(" - One random open outline in $coo: '", names(Opn$coo)[eg],
   #         "':\n", sep = "")
-  #     if (nrow(coo.eg) > 5) {
-  #         print(coo.eg[1:5, ], print.gap = 2)
+  #     if (nrow(coo_eg) > 5) {
+  #         print(coo_eg[1:5, ], print.gap = 2)
   #         cat("etc.\n")
   #     } else {
-  #         print(coo.eg, print.gap = 2)
+  #         print(coo_eg, print.gap = 2)
   #         cat("\n\n")
   #     }
   # number of outlines
-  cat(" - $coo:", coo.nb, "open outlines")
+  cat(" - $coo:", coo_nb, "open outlines")
   
   # number of coordinates
-  cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates)\n", sep="")
+  cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n", sep="")
   # number of landmarks
   if (length(Opn$ldk) != 0) {
     cat(" - $ldk", length(Opn$ldk[[1]]), "landmark(s) defined\n")
@@ -165,8 +165,8 @@ nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
   }
   coo <- Opn$coo[[id]]
   if (smooth.it != 0)
-    coo <- coo.smoothcurve(coo, smooth.it)
-  coo <- coo.baseline(coo, ldk1 = 1, ldk2 = nrow(coo), t1 = baseline1,
+    coo <- coo_smoothcurve(coo, smooth.it)
+  coo <- coo_baseline(coo, ldk1 = 1, ldk2 = nrow(coo), t1 = baseline1,
                       t2 = baseline2)
   res <- list()
   for (i in seq(along = degree.range)) {
@@ -180,7 +180,7 @@ nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
   if (plot.method == "stack") {
     # to initiate the plot but stack may be a better option for
     # that part
-    coo.plot(coo, border = shp.border, lwd = 1)
+    coo_plot(coo, border = shp.border, lwd = 1)
     for (i in seq(along = degree.range)) {
       lines(res[[i]], col = cols[i])
     }
@@ -192,7 +192,7 @@ nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
   } else {
     if (plot.method == "panel") {
       # par(oma=c(1, 1, 3, 0))
-      pos <- coo.list.panel(res, borders = cols, cols = par("bg"),
+      pos <- coo_list.panel(res, borders = cols, cols = par("bg"),
                             poly = FALSE)
       if (legend) {
         text(x = pos[, 1], y = pos[, 2], as.character(degree.range))
@@ -257,13 +257,13 @@ print.OpnCoe <- function(x, ...) {
   ### Header
   cat("An OpnCoe object [", met)
   cat(rep("-", 20), "\n", sep = "")
-  coo.nb <- nrow(OpnCoe$coe)  #nrow method ?
+  coo_nb <- nrow(OpnCoe$coe)  #nrow method ?
   if (!combined) {
     degree <- ncol(OpnCoe$coe)
     # p==3 is the case for dct all along the method
     if (p==3) degree <- degree/2 
     # number of outlines and harmonics
-    cat(" - $coe:", coo.nb, "open outlines described, ")
+    cat(" - $coe:", coo_nb, "open outlines described, ")
     if (p==3){
       cat(degree, " harmonics\n", sep="")
     } else {
@@ -277,7 +277,7 @@ print.OpnCoe <- function(x, ...) {
       cat(" - $coe: 1st harmonic coefficients from random open outlines: \n")
     } else {
       cat(" - $coe: 1st polynomial coefficients from random open outlines: \n")}
-    row.eg <- sort(sample(coo.nb, ifelse(coo.nb < 5, coo.nb, 5), replace = FALSE))
+    row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
     nc <- ncol(OpnCoe$coe)
     if (nc > 10) {
       if (p==3) { col.eg <- c(1:5, (nc/2)+1:5)
@@ -349,9 +349,9 @@ rawPolynomials.Opn <- function(Opn, degree,
     cat(" * 'degree' missing and set to: ", degree, "\n")
   }
   # we normalize
-  Opn <- coo.sample(Opn, nb.pts)
+  Opn <- coo_sample(Opn, nb.pts)
   coo <- Opn$coo
-  coo <- lapply(coo, coo.baseline, ldk1 = 1, ldk2 = nb.pts,
+  coo <- lapply(coo, coo_baseline, ldk1 = 1, ldk2 = nb.pts,
                 t1 = baseline1, t2 = baseline2)
   # we prepare the coe matrix
   rn <- names(coo)
@@ -420,9 +420,9 @@ orthoPolynomials.Opn <- function(Opn, degree, baseline1 = c(-0.5, 0), baseline2 
     cat(" * 'degree' missing and set to: ", degree, "\n")
   }
   # we normalize
-  Opn <- coo.sample(Opn, nb.pts)
+  Opn <- coo_sample(Opn, nb.pts)
   coo <- Opn$coo
-  coo <- lapply(coo, coo.baseline, ldk1 = 1, ldk2 = nb.pts,
+  coo <- lapply(coo, coo_baseline, ldk1 = 1, ldk2 = nb.pts,
                 t1 = baseline1, t2 = baseline2)
   # we prepare the coe matrix
   rn <- names(coo)

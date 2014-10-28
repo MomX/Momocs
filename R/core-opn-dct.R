@@ -27,13 +27,13 @@
 #' # dct and inverse dct
 #' data(olea)
 #' o <- olea[1]
-#' o <- coo.bookstein(o)
-#' coo.plot(o)
+#' o <- coo_bookstein(o)
+#' coo_plot(o)
 #' o.dct <- dct(o, nb.h=12)
 #' o.dct
 #' o.i <- dct.i(o.dct)
-#' o.i <- coo.bookstein(o.i)
-#' coo.draw(o.i, border='red')
+#' o.i <- coo_bookstein(o.i)
+#' coo_draw(o.i, border='red')
 #'
 #' #future hqual
 #' o <- olea[1]
@@ -47,7 +47,7 @@
 #' @export
 dct <- function(coo, nb.h, verbose = TRUE) {
     # we check a bit
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     if (missing(nb.h)) {
         nb.h <- 12
         if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
@@ -90,13 +90,13 @@ dct <- function(coo, nb.h, verbose = TRUE) {
 #' # dct and inverse dct
 #' data(olea)
 #' o <- olea[1]
-#' o <- coo.bookstein(o)
-#' coo.plot(o)
+#' o <- coo_bookstein(o)
+#' coo_plot(o)
 #' o.dct <- dct(o, nb.h=12)
 #' o.dct
 #' o.i <- dct.i(o.dct)
-#' o.i <- coo.bookstein(o.i)
-#' coo.draw(o.i, border='red')
+#' o.i <- coo_bookstein(o.i)
+#' coo_draw(o.i, border='red')
 #'
 #' o <- olea[1]
 #' h.range <- 2:13
@@ -147,9 +147,9 @@ dct.i <- function(df, nb.pts = 60) {
 #' @param plot logical whether to plot the shape
 #' @examples 
 #' # some signatures
-#' panel(coo.align(Opn(replicate(48, dct.shape(alpha=0.5, nb.h=6)))))
+#' panel(coo_align(Opn(replicate(48, dct.shape(alpha=0.5, nb.h=6)))))
 #' # some worms
-#' panel(coo.align(Opn(replicate(48, dct.shape(alpha=2, nb.h=6)))))
+#' panel(coo_align(Opn(replicate(48, dct.shape(alpha=2, nb.h=6)))))
 #' @export
 dct.shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
     if (missing(nb.h) & missing(A)) 
@@ -163,7 +163,7 @@ dct.shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
     df <- list(A = A, B = B)
     shp <- dct.i(df, nb.pts = nb.pts)
     if (plot) 
-        coo.plot(shp)
+        coo_plot(shp)
     return(shp)
 }
 

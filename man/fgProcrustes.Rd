@@ -34,7 +34,7 @@ Directly borrowed from Claude (2008), called there the \code{fgpa2} function.
 \details{
 If performed on an \link{Out} or an \link{Opn} object, will try to use the \code{$ldk} slot,
 if landmarks have been previousy defined, then (with a message) on the \code{$coo} slot,
-but in that case, all shapes must have the same number of coordinates (\link{coo.sample} may help).
+but in that case, all shapes must have the same number of coordinates (\link{coo_sample} may help).
 }
 \note{
 Slightly less optimized than procGPA in the shapes package (~20% on my machine).

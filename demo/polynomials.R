@@ -8,7 +8,7 @@ stack(olea)
 
 # Let's reregister them with Booktein's coordinate to normalize them
 # (that's already the case, but it's for the example)
-olea <- coo.bookstein(olea)
+olea <- coo_bookstein(olea)
 
 # There are some ventral and dorsal views
 table(olea$fac[, 2:3])

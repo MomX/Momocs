@@ -13,7 +13,7 @@ PCcontrib(PCA, ...)
 \arguments{
 \item{PCA}{a \code{\link{PCA}} object}
 
-\item{...}{additional parameter to pass to \code{\link{coo.draw}}}
+\item{...}{additional parameter to pass to \code{\link{coo_draw}}}
 
 \item{nax}{a single or a range of PC axes}
 

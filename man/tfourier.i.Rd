@@ -15,7 +15,7 @@ tfourier}
 \item{nb.pts}{\code{integer}. The number of points to calculate}
 
 \item{force2close}{\code{logical}. Whether to force the outlines calculated
-to close (see \link{coo.force2close}).}
+to close (see \link{coo_force2close}).}
 
 \item{rescale}{\code{logical}. Whether to rescale the points calculated so
 that their perimeter equals \code{perim}.}

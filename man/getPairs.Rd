@@ -24,7 +24,7 @@ or coefficients for \link{Coe} objects.
 }
 \examples{
 data(bot)
-bot2 <- bot1 <- coo.scale(coo.center(coo.sample(bot, 60)))
+bot2 <- bot1 <- coo_scale(coo_center(coo_sample(bot, 60)))
 bot1$fac$session <- factor(rep("session1", 40))
 bot2$coo <- lapply(bot2$coo, function(x) x + rnorm(nrow(x)*2, sd=2e-3)) # we simulate an measurement error
 bot2$fac$session <- factor(rep("session2", 40))

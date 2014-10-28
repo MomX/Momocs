@@ -43,22 +43,22 @@
 #' @keywords rFourier
 #' @examples
 #' data(bot)
-#' coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
-#' coo.plot(coo)
+#' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
+#' coo_plot(coo)
 #' rf  <- rfourier(coo, 12)
 #' rf
 #' rfi <- rfourier.i(rf)
-#' coo.draw(rfi, border='red', col=NA)
+#' coo_draw(rfi, border='red', col=NA)
 #' @export
 rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
     verbose = TRUE) {
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     if (missing(nb.h)) {
         nb.h <- 12
         cat(" * 'nb.h' not provided and set to", nb.h, "\n")
     }
     if (is.closed(coo)) {
-        coo <- coo.unclose(coo)
+        coo <- coo_unclose(coo)
     }
     if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
         nb.h = floor(nrow(coo)/2)
@@ -75,12 +75,12 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
         }
     }
     if (smooth.it != 0) {
-        coo <- coo.smooth(coo, smooth.it)
+        coo <- coo_smooth(coo, smooth.it)
     }
     if (norm) {
-        coo <- coo.scale(coo.center(coo))
+        coo <- coo_scale(coo_center(coo))
         rsize <- mean(apply(coo, 1, function(x) sqrt(sum(x^2))))
-        coo <- coo.scale(coo, 1/rsize)
+        coo <- coo_scale(coo, 1/rsize)
     }
     # from Claude
     p <- nrow(coo)
@@ -120,12 +120,12 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' @keywords rFourier
 #' @examples
 #' data(bot)
-#' coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
-#' coo.plot(coo)
+#' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
+#' coo_plot(coo)
 #' rf  <- rfourier(coo, 12)
 #' rf
 #' rfi <- rfourier.i(rf)
-#' coo.draw(rfi, border='red', col=NA)
+#' coo_draw(rfi, border='red', col=NA)
 #' 
 #' @export
 rfourier.i <- function(rf, nb.h, nb.pts = 120) {
@@ -213,7 +213,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
     rf <- list(an = an, bn = bn, ao = 0)
     shp <- rfourier.i(rf, nb.h = nb.h, nb.pts = nb.pts)
     if (plot) 
-        coo.plot(shp)
+        coo_plot(shp)
     return(shp)
 }
 

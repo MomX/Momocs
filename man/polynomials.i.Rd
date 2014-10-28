@@ -23,10 +23,10 @@ Returns a matrix of (x; y) coordinates when passed with a list obtained with
 \examples{
 data(olea)
 o <- olea[5]
-coo.plot(o)
+coo_plot(o)
 for (i in 2:7){
 x <- polynomials.i(polynomials(o, i, ortho=TRUE))
-coo.draw(x, border=col.summer(7)[i], points=FALSE)  }
+coo_draw(x, border=col.summer(7)[i], points=FALSE)  }
 data(olea)
 o <- olea[1]
 op <- polynomials(o, degree=4)

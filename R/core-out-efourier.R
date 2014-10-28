@@ -74,16 +74,16 @@
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
-#' coo.plot(coo)
+#' coo_plot(coo)
 #' ef <- efourier(coo, 12)
 #' ef
 #' efi <- efourier.i(ef)
-#' coo.draw(efi, border='red', col=NA)
+#' coo_draw(efi, border='red', col=NA)
 #' @export
 efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     if (is.closed(coo)) 
-        coo <- coo.unclose(coo)
+        coo <- coo_unclose(coo)
     nr <- nrow(coo)
     if (missing(nb.h)) {
         nb.h <- 32
@@ -104,7 +104,7 @@ efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
         }
     }
     if (smooth.it != 0) {
-        coo <- coo.smooth(coo, smooth.it)
+        coo <- coo_smooth(coo, smooth.it)
     }
     Dx <- coo[, 1] - coo[, 1][c(nr, (1:(nr - 1)))]  # there was a bug there. check from claude? #todo
     Dy <- coo[, 2] - coo[, 2][c(nr, (1:(nr - 1)))]
@@ -157,11 +157,11 @@ efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
-#' coo.plot(coo)
+#' coo_plot(coo)
 #' ef  <- efourier(coo, 12)
 #' ef
 #' efi <- efourier.i(ef)
-#' coo.draw(efi, border='red', col=NA)
+#' coo_draw(efi, border='red', col=NA)
 #' @export
 efourier.i <- function(ef, nb.h, nb.pts = 120) {
     # if (any(names(ef) != c('an', 'bn', 'cn', 'dn'))) { stop('a
@@ -207,7 +207,7 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' variability you observe may mostly be due to the variability in the alignment of the
 #' 'first' ellipsis which is defined by the first harmonic, used for the normalization. In that
 #' case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You 
-#' have several options: \link{coo.align}, \link{coo.aligncalliper}, \link{fgProcrustes} either directly on
+#' have several options: \link{coo_align}, \link{coo_aligncalliper}, \link{fgProcrustes} either directly on
 #' the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of
 #' what shall provide a good alignment. Have a look to Momocs' vignette for some illustration of these pitfalls
 #' and how to manage them.
@@ -360,7 +360,7 @@ efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60,
     ef <- list(an = an, bn = bn, cn = cn, dn = dn, ao = 0, co = 0)
     shp <- efourier.i(ef, nb.h = nb.h, nb.pts = nb.pts)
     if (plot) 
-        coo.plot(shp)
+        coo_plot(shp)
     return(shp)
 }
 

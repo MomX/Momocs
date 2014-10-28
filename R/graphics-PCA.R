@@ -350,7 +350,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
 #'  @param main a title for the plot
 #'  @param xlab a title for the x-axis
 #'  @param ylab a title for the y-axis
-#'  @param ... additional parameter to pass to \code{\link{coo.draw}}
+#'  @param ... additional parameter to pass to \code{\link{coo_draw}}
 #'  @examples
 #'  data(bot)
 #'  bot.p <- PCA(eFourier(bot, 12))
@@ -365,7 +365,7 @@ PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
 PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
                           main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
   # we prepare the graphical windows
-  # same paradigm as coo.list.panel
+  # same paradigm as coo_list.panel
   x <- PCA
   xs <- 1:length(sd.r) - 0.5
   ys <- rev(1:length(nax) - 0.5)
@@ -383,14 +383,14 @@ PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
     shp.i <- .morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
     shp <- c(shp, shp.i)}
   # we template the size of the shapes
-  shp <- lapply(shp, coo.template, 0.95)
+  shp <- lapply(shp, coo_template, 0.95)
   # here we prepare and apply the translation values
   trans <- expand.grid(xs, ys)
   colnames(trans) <- c("x", "y")
   for (i in seq(along=shp)){
-    shp[[i]] <- coo.trans(shp[[i]], trans[i, 1], trans[i, 2])}
+    shp[[i]] <- coo_trans(shp[[i]], trans[i, 1], trans[i, 2])}
   # we finally plot the shapes
-  gc <- lapply(shp, coo.draw, centroid = FALSE, first.point=FALSE, ...)
+  gc <- lapply(shp, coo_draw, centroid = FALSE, first.point=FALSE, ...)
   invisible(list(shp=shp, trans=trans))}
 
 

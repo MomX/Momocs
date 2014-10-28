@@ -7,7 +7,7 @@ harm.pow(xf)
 }
 \arguments{
 \item{xf}{A list with an, bn (and cn, dn) components, typically from a
-e/r/tfourier passed on coo.}
+e/r/tfourier passed on coo_}
 }
 \value{
 Returns a \code{vector} of harmonic power

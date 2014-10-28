@@ -45,8 +45,8 @@ it has been done before.
 
 You have several options to align your shapes, using control points (or landmarks),
 of Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper
-length (see \code{\link{coo.aligncalliper}}), etc. You should also make the first
-point homologous either with \code{\link{coo.slide}} or \code{\link{coo.slidedirection}}
+length (see \code{\link{coo_aligncalliper}}), etc. You should also make the first
+point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
 to minimize any subsequent problems.
 
 I will dedicate one vignette to this problem

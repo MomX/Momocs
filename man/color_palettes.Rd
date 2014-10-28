@@ -2,6 +2,7 @@
 \name{col.summer}
 \alias{Palettes}
 \alias{col.autumn}
+\alias{col.black}
 \alias{col.bw}
 \alias{col.cold}
 \alias{col.gallus}
@@ -24,6 +25,8 @@ col.summer2(n)
 col.spring(n)
 
 col.autumn(n)
+
+col.black(n)
 
 col.solarized(n)
 
@@ -85,6 +88,9 @@ wheel <- function(palette, n=10){
  wheel(col.sari)
  wheel(col.bw)
  wheel(col.grey)
+
+ # Black only for pubs
+ wheel(col.black)
 }
 \keyword{Graphics}
 

@@ -19,10 +19,10 @@ Add landmarks labels
 }
 \examples{
 data(wings)
-coo.plot(wings[1])
+coo_plot(wings[1])
 ldk.labels(wings[1])
 # closer and smaller
-coo.plot(wings[1])
+coo_plot(wings[1])
 ldk.labels(wings[1], d=0.05, cex=0.5)
 }
 \keyword{Graphics}

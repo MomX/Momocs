@@ -31,7 +31,7 @@ ce095 <- conf.ell(x, y, conf=0.95) # no need for conf arg since it's .95 by defa
 ce090 <- conf.ell(x, y, conf=0.90)
 ce050 <- conf.ell(x, y, conf=0.50)
 cols <- col.hot(10)
-lines(ce050$ell, col=cols[5]) # you can also coo.close(ce050$ell)
+lines(ce050$ell, col=cols[5]) # you can also coo_close(ce050$ell)
 lines(ce090$ell, col=cols[8])
 lines(ce095$ell, col=cols[9])
 segments(ce095$seg[1, 1], ce095$seg[1, 2], ce095$seg[2, 1], ce095$seg[2, 2])

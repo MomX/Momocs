@@ -13,7 +13,7 @@ hcontrib(Coe, ...)
 \arguments{
 \item{Coe}{a \code{\link{Coe}} object (either \code{OutCoe} or (soon) \code{OpnCoe})}
 
-\item{...}{additional parameter to pass to \code{\link{coo.draw}}}
+\item{...}{additional parameter to pass to \code{\link{coo_draw}}}
 
 \item{id}{the id of a particular shape, otherwise working on the meanshape}
 

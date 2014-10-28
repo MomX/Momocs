@@ -26,7 +26,7 @@ Not implemented for open outlines but may be useful for other purposes.
 }
 \examples{
 set.seed(34)
-x <- coo.sample(efourier.shape(), 5)
+x <- coo_sample(efourier.shape(), 5)
 plot(x, ylim=c(-3, 3), asp=1, type='b', pch=20)
 b <- bezier(x)
 bi <- bezier.i(b$B)

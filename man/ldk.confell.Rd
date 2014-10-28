@@ -24,7 +24,7 @@ Draws confidence ellipses for landmark positions
 }
 \examples{
 data(wings)
-coo.plot(mshape(wings))
+coo_plot(mshape(wings))
 ldk.confell(wings$coo)
 }
 \seealso{

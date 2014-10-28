@@ -11,7 +11,7 @@
 #'  \code{Ldk} objects are primarily \code{\link{Coo}} objects.
 #' 
 #' All the shapes in x must have the same number of landmarks. If you are 
-#' trying to make an Ldk object from an Out or an Opn object, try \link{coo.sample}.
+#' trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample}.
 #' 
 #' @param x a \code{list} of matrices of (x; y) coordinates,
 #' or an array, an Ldk object.
@@ -65,28 +65,28 @@ print.Ldk <- function(x, ...) {
   ### Header
   cat("An Ldk object with: \n")
   cat(rep("-", 20), "\n", sep = "")
-  coo.nb <- length(Ldk)
-  coo.len <- sapply(Ldk$coo, nrow)
-  coo.closed <- sapply(Ldk$coo, is.closed)
+  coo_nb <- length(Ldk)
+  coo_len <- sapply(Ldk$coo, nrow)
+  coo_closed <- sapply(Ldk$coo, is.closed)
   #     # number of open outlines
-  #     cat(" -", coo.nb, "configurations of landmarks\n")
+  #     cat(" -", coo_nb, "configurations of landmarks\n")
   #     # one random outline
   #     eg <- sample(length(Ldk$coo), 1)
-  #     coo.eg <- Ldk$coo[[eg]]
-  #     colnames(coo.eg) <- c("x", "y")
+  #     coo_eg <- Ldk$coo[[eg]]
+  #     colnames(coo_eg) <- c("x", "y")
   #     cat(" - One random configuration in $coo: '", names(Ldk$coo)[eg], 
   #         "':\n", sep = "")
-  #     if (nrow(coo.eg) > 5) {
-  #         print(coo.eg[1:5, ], print.gap = 2)
+  #     if (nrow(coo_eg) > 5) {
+  #         print(coo_eg[1:5, ], print.gap = 2)
   #         cat("etc.\n")
   #     } else {
-  #         print(coo.eg, print.gap = 2)
+  #         print(coo_eg, print.gap = 2)
   #         cat("\n\n")
   #     }
   # number of conf landmarks
-  cat(" - $coo:", coo.nb, "configuration of landmarks")
+  cat(" - $coo:", coo_nb, "configuration of landmarks")
   # number of coordinates
-  cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates)\n", sep="")
+  cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n", sep="")
   # we print the fac
   .print.fac(Ldk$fac)
 } 
@@ -98,28 +98,28 @@ print.LdkCoe <- function(x, ...) {
   ### Header
   cat("An LdkCoe [full Generalized Procrustes] object with: \n")
   cat(rep("-", 20), "\n", sep = "")
-  coo.nb <- length(Ldk)
-  coo.len <- sapply(Ldk$coo, nrow)
-  coo.closed <- sapply(Ldk$coo, is.closed)
+  coo_nb <- length(Ldk)
+  coo_len <- sapply(Ldk$coo, nrow)
+  coo_closed <- sapply(Ldk$coo, is.closed)
   #     # number of open outlines
-  #     cat(" -", coo.nb, "configurations of landmarks\n")
+  #     cat(" -", coo_nb, "configurations of landmarks\n")
   #     # one random outline
   #     eg <- sample(length(Ldk$coo), 1)
-  #     coo.eg <- Ldk$coo[[eg]]
-  #     colnames(coo.eg) <- c("x", "y")
+  #     coo_eg <- Ldk$coo[[eg]]
+  #     colnames(coo_eg) <- c("x", "y")
   #     cat(" - One random configuration in $coo: '", names(Ldk$coo)[eg], 
   #         "':\n", sep = "")
-  #     if (nrow(coo.eg) > 5) {
-  #         print(coo.eg[1:5, ], print.gap = 2)
+  #     if (nrow(coo_eg) > 5) {
+  #         print(coo_eg[1:5, ], print.gap = 2)
   #         cat("etc.\n")
   #     } else {
-  #         print(coo.eg, print.gap = 2)
+  #         print(coo_eg, print.gap = 2)
   #         cat("\n\n")
   #     }
   # number of conf landmarks
-  cat(" - $coo:", coo.nb, "configuration of landmarks")
+  cat(" - $coo:", coo_nb, "configuration of landmarks")
   # number of coordinates
-  cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates)\n", sep="")
+  cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n", sep="")
   # we print the fac
   .print.fac(Ldk$fac)
 } 

@@ -71,7 +71,7 @@ Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
 #' @keywords Out
 #' @examples
 #' data(bot)
-#' bot <- coo.center(bot)
+#' bot <- coo_center(bot)
 #' bot.f <- rFourier(bot, 120)
 #' bot.fi <- as.Out(bot.f)
 #' op <- par(mfrow=c(1, 2))
@@ -106,35 +106,35 @@ print.Out <- function(x, ...) {
   ### Header
   cat("An Out object with: \n")
   cat(rep("-", 20), "\n", sep = "")
-  coo.nb <- length(Out)
-  coo.len <- sapply(Out$coo, nrow)
-  coo.closed <- sapply(Out$coo, is.closed)
+  coo_nb <- length(Out)
+  coo_len <- sapply(Out$coo, nrow)
+  coo_closed <- sapply(Out$coo, is.closed)
   #     # one random outline
   #     eg <- sample(length(Out$coo), 1)
-  #     coo.eg <- Out$coo[[eg]]
-  #     colnames(coo.eg) <- c("x", "y")
+  #     coo_eg <- Out$coo[[eg]]
+  #     colnames(coo_eg) <- c("x", "y")
   #     cat(" - One random outline in $coo: '", names(Out$coo)[eg],
   #         "':\n", sep = "")
-  #     if (nrow(coo.eg) > 5) {
-  #       print(coo.eg[1:5, ], print.gap = 2)
+  #     if (nrow(coo_eg) > 5) {
+  #       print(coo_eg[1:5, ], print.gap = 2)
   #       cat("etc.\n")
   #     } else {
-  #       print(coo.eg, print.gap = 2)
+  #       print(coo_eg, print.gap = 2)
   #       cat("\n\n")
   #     }
   # number of outlines
-  cat(" - $coo:", coo.nb, "outlines")
+  cat(" - $coo:", coo_nb, "outlines")
   
   # number of coordinates
-  cat(" (", round(mean(coo.len)), " +/- ", round(sd(coo.len)), " coordinates, ", sep="")
+  cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates, ", sep="")
   # outlines closed or not
-  if (all(coo.closed)) {
+  if (all(coo_closed)) {
     cat("all closed)\n")
   } else {
-    if (any(!coo.closed)) {
+    if (any(!coo_closed)) {
       cat("all unclosed)\n")
     } else {
-      cat(sum(coo.closed), " closed\n")
+      cat(sum(coo_closed), " closed\n")
     }
   }
   # number of landmarks
@@ -169,7 +169,7 @@ print.Out <- function(x, ...) {
 #' @param palette a color \link{palette}
 #' @param shp.col a color for the shape (\code{NA} by default)
 #' @param shp.border a color for the border of the shape
-#' @param ... additional parameters to fed \link{coo.plot}
+#' @param ... additional parameters to fed \link{coo_plot}
 #' @keywords Out
 #' @examples
 #' data(bot)
@@ -214,11 +214,11 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
   }
   coo <- Out$coo[[id]]
   if (scale)
-    coo <- coo.scale(coo)
+    coo <- coo_scale(coo)
   if (center)
-    coo <- coo.center(coo)
+    coo <- coo_center(coo)
   if (align)
-    coo <- coo.align(coo)
+    coo <- coo_align(coo)
   res <- list()
   for (i in seq(along = harm.range)) {
     res[[i]] <- method.i(method(coo, nb.h = max(harm.range),
@@ -229,8 +229,8 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
   on.exit(par(op))
   cols <- paste0(palette(length(harm.range)), "EE")
   if (plot.method == "stack") {
-    coo <- coo.smooth(coo, smooth.it)
-    coo.plot(coo, border = shp.border, col = shp.col, lwd = 2,
+    coo <- coo_smooth(coo, smooth.it)
+    coo_plot(coo, border = shp.border, col = shp.col, lwd = 2,
              points = FALSE, main = names(Out)[id], ...)
     for (i in seq(along = harm.range)) {
       lines(res[[i]], col = cols[i], lwd = 1)
@@ -243,7 +243,7 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
   } else {
     if (plot.method == "panel") {
       # par(oma=c(1, 1, 3, 0))
-      pos <- coo.list.panel(res, cols = cols)
+      pos <- coo_list.panel(res, cols = cols)
       if (legend) {
         text(x = pos[, 1], y = pos[, 2], as.character(harm.range))
       }
@@ -336,18 +336,18 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
   for (ind in seq(along = id)) {
     coo <- Coo$coo[[id[ind]]] #Coo[id]?
     # below, the best possible fit
-    coo.best <- method.i(method(coo, nb.h = nb.h.best, smooth.it = smooth.it),
+    coo_best <- method.i(method(coo, nb.h = nb.h.best, smooth.it = smooth.it),
                          nb.pts = nb.pts)
     for (i in seq(along = harm.range)) {
       # for each number of harmonics we calculate deviation with
       # the FUN=method
-      coo.i <- method.i(method(coo, nb.h = harm.range[i],
+      coo_i <- method.i(method(coo, nb.h = harm.range[i],
                                smooth.it = smooth.it), nb.pts = nb.pts)
-      res[i, , ind] <- dist.method(coo.best, coo.i)
+      res[i, , ind] <- dist.method(coo_best, coo_i)
     }
     # we normalize by the centroid size
     if (norm.centsize) {
-      res[, , ind] <- res[, , ind]/coo.centsize(coo)
+      res[, , ind] <- res[, , ind]/coo_centsize(coo)
     }
     if (t)
       setTxtProgressBar(pb, ind)
@@ -453,6 +453,7 @@ hpow <- function(Out, method = "efourier", id = 1:length(Out),
                  lineat.y = c(90, 95, 99, 99.9), verbose=TRUE) {
   UseMethod("hpow")
 }
+
 #' @export
 hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
                      nb.h, drop = 1, probs=seq(0, 1, 0.25),
@@ -478,7 +479,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
     nb.h <- floor(min(sapply(Out$coo, nrow))/2)}
   # if required, we smooth
   if (!missing(smooth.it)){
-    Out <- coo.smooth(Out, smooth.it)}
+    Out <- coo_smooth(Out, smooth.it)}
   # we prepare the result matrix
   res <- matrix(nrow = length(id), ncol = (nb.h - drop))
   x <- (drop + 1):nb.h
@@ -591,15 +592,15 @@ print.OutCoe <- function(x, ...) {
   ### Header
   cat("An OutCoe object [", met)
   cat(rep("-", 20), "\n", sep = "")
-  coo.nb <- nrow(OutCoe$coe)  #nrow method ?
+  coo_nb <- nrow(OutCoe$coe)  #nrow method ?
   if (!combined){
     harm.nb <- ncol(OutCoe$coe)/ifelse(p == 1, 4, 2)
     # number of outlines and harmonics
-    cat(" - $coe:", coo.nb, "outlines described, ")
+    cat(" - $coe:", coo_nb, "outlines described, ")
     cat(harm.nb, "harmonics\n")
     # lets show some of them for a quick inspection
     cat(" - $coe: 1st harmonic coefficients from random individuals: \n")
-    row.eg <- sort(sample(coo.nb, ifelse(coo.nb < 5, coo.nb, 5), replace = FALSE))
+    row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
     col.eg <- coeff.sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
     print(round(OutCoe$coe[row.eg, col.eg], 3))
     cat("etc.\n")
@@ -644,8 +645,8 @@ print.OutCoe <- function(x, ...) {
 #' 
 #' You have several options to align your shapes, using control points (or landmarks),
 #' of Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper 
-#' length (see \code{\link{coo.aligncalliper}}), etc. You should also make the first
-#' point homologous either with \code{\link{coo.slide}} or \code{\link{coo.slidedirection}}
+#' length (see \code{\link{coo_aligncalliper}}), etc. You should also make the first
+#' point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
 #' to minimize any subsequent problems.
 #' 
 #' I will dedicate one vignette to this problem
@@ -824,7 +825,7 @@ defLandmarks.Coo <- function(Coo, nb.ldk) {
     stop(" * 'nb.ldk' must be specified.")
   ldk <- list()
   for (i in seq(along = Coo$coo)) {
-    Coo$ldk[[i]] <- coo.ldk(Coo$coo[[i]], nb.ldk = nb.ldk)
+    Coo$ldk[[i]] <- coo_ldk(Coo$coo[[i]], nb.ldk = nb.ldk)
   }
   return(Coo)
 }

@@ -51,12 +51,12 @@ Directly borrowed for Claude (2008), and called \code{fourier1} there.
 }
 \examples{
 data(bot)
-coo <- coo.center(bot[1]) # centering is almost mandatory for rfourier family
-coo.plot(coo)
+coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
+coo_plot(coo)
 rf  <- rfourier(coo, 12)
 rf
 rfi <- rfourier.i(rf)
-coo.draw(rfi, border='red', col=NA)
+coo_draw(rfi, border='red', col=NA)
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,

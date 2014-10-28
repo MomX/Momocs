@@ -9,7 +9,7 @@
 #' @param id the id of the shape to plot, if not provided a
 #' random shape is plotted. If passed with \code{'all'} all shapes are plotted,
 #' one by one.
-#' @param ... further arguments to be passed to \link{coo.plot}
+#' @param ... further arguments to be passed to \link{coo_plot}
 #' @keywords Graphics Out Opn Ldk
 #' @seealso \link{panel.Coo}, \link{stack.Coo}.
 #' @examples
@@ -27,7 +27,7 @@ plot.Coo <- function(x, id, ...) {
   if (missing(id)) {
     repeat {
       id <- sample(length(Coo), 1)
-      coo.plot(Coo$coo[[id]], main = names(Coo)[id], ...)
+      coo_plot(Coo$coo[[id]], main = names(Coo)[id], ...)
       readline(prompt = "Press <Enter> to continue, <Esc> to quit...")
     }
   }
@@ -36,10 +36,10 @@ plot.Coo <- function(x, id, ...) {
   }
   if (is.numeric(id)) {
     if (length(id) == 1) {
-      coo.plot(Coo$coo[[id]], main = names(Coo)[id], ...)
+      coo_plot(Coo$coo[[id]], main = names(Coo)[id], ...)
     } else {
       for (i in seq(along = id)) {
-        coo.plot(Coo$coo[[id[i]]], main = names(Coo)[id[i]],
+        coo_plot(Coo$coo[[id[i]]], main = names(Coo)[id[i]],
                  ...)
         readline(prompt = "Press <Enter> to continue, <Esc> to quit...")
       }
@@ -75,7 +75,7 @@ plot.Coo <- function(x, id, ...) {
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param nb.pts the number of points to use for the shape reconstruction
-#' @param ... further arguments to be passed to \link{coo.plot} 
+#' @param ... further arguments to be passed to \link{coo_plot} 
 #' @seealso \link{panel.Coo}, \link{plot.Coo}.
 #' @note When applied on a \link{OutCoe} object, a wrapper 
 #' for \code{stack(as.Out(OutCoe), ...)}. In that case, 
@@ -125,7 +125,7 @@ stack.Coo <- function(x, cols, borders, points = FALSE, first.point = TRUE,
     abline(h = 0, v = 0, col = "grey80", lty = 2)
   }
   for (i in 1:length(Coo)) {
-    coo.draw(Coo$coo[[i]], col = cols[i], border = borders[i],
+    coo_draw(Coo$coo[[i]], col = cols[i], border = borders[i],
              points = points, first.point = TRUE, centroid = centroid)
     if (ldk & length(Coo$ldk) != 0) {
       points(Coo$coo[[i]][Coo$ldk[[i]], ], pch = ldk.pch,
@@ -269,7 +269,7 @@ panel.Out <- function(x, cols, borders, fac, reorder = NULL,
   }
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
-  pos <- coo.list.panel(Coo$coo, cols = cols, borders = borders,
+  pos <- coo_list.panel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = TRUE)
   if (!is.null(names)) {
     if (is.logical(names)) {
@@ -327,7 +327,7 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
   }
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
-  pos <- coo.list.panel(Coo$coo, cols = cols, borders = borders,
+  pos <- coo_list.panel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = FALSE)
   if (!is.null(names)) {
     if (is.logical(names)) {
@@ -371,7 +371,7 @@ panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
   }
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
-  pos <- coo.list.panel(Coo$coo, cols = cols, borders = borders,
+  pos <- coo_list.panel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = FALSE, points = points, points.pch = points.pch,
                         points.cex = points.cex, points.col = points.col)
   if (!is.null(names)) {

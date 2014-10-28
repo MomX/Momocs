@@ -22,16 +22,16 @@ pix2chc <- function(coo) {
     if (is.matrix(coo) & ncol(coo) != 2) {
         stop(" * A 2 col matrix must be provided")
     }
-    coo.d <- apply(coo, 2, diff)
-    if (!all(coo.d %in% -1:1)) {
+    coo_d <- apply(coo, 2, diff)
+    if (!all(coo_d %in% -1:1)) {
         stop(" * Matrix must contain only entire pixels indices")
     }
-    if (any(apply(coo.d, 1, function(x) all(x == rep(0, 2))))) {
+    if (any(apply(coo_d, 1, function(x) all(x == rep(0, 2))))) {
         stop(" * At least two succesive coordinates don't code for a displacement")
     }
     m <- as.matrix(expand.grid(-1:1, -1:1))[-5, ]
     g <- c(5, 6, 7, 4, 0, 3, 2, 1)
-    chc <- g[apply(coo.d, 1, function(x) which(x[1] == m[, 1] &
+    chc <- g[apply(coo_d, 1, function(x) which(x[1] == m[, 1] &
         x[2] == m[, 2]))]  #dirty
     return(chc)
 }
@@ -50,7 +50,7 @@ pix2chc <- function(coo) {
 #' @examples
 #' data(shapes)
 #' x <- pix2chc(shapes[1])
-#' coo.plot(chc2pix(x))
+#' coo_plot(chc2pix(x))
 #' @export
 chc2pix <- function(chc) {
     if (!all(chc %in% 0:7)) {
@@ -146,15 +146,15 @@ nef2Coe <- function(nef.path) {
     nb.h <- as.numeric(substring(nef[HARMO.l], 8))
     nef <- nef[-(1:HARMO.l)]
     nb.coo <- length(nef)/(nb.h + 1)
-    coo.i <- 1:nb.coo
-    coo.beg <- (coo.i - 1) * (nb.h + 1) + 1
-    coo.end <- coo.beg + nb.h
-    res <- matrix(NA, nrow = nb.coo, ncol = nb.h * 4, dimnames = list(nef[coo.beg],
+    coo_i <- 1:nb.coo
+    coo_beg <- (coo_i - 1) * (nb.h + 1) + 1
+    coo_end <- coo_beg + nb.h
+    res <- matrix(NA, nrow = nb.coo, ncol = nb.h * 4, dimnames = list(nef[coo_beg],
         paste0(rep(LETTERS[1:4], each = nb.h), 1:nb.h)))
     reorder <- c(1:nb.h * 4 - 3, 1:nb.h * 4 - 2, 1:nb.h * 4 -
         1, 1:nb.h * 4)
-    for (i in seq(along = coo.i)) {
-        nef.i <- nef[(coo.beg[i] + 1):coo.end[i]]
+    for (i in seq(along = coo_i)) {
+        nef.i <- nef[(coo_beg[i] + 1):coo_end[i]]
         x <- as.numeric(unlist(strsplit(nef.i, " ")))
         x <- x[!is.na(x)]
         res[i, ] <- x[reorder]
@@ -182,7 +182,7 @@ tps2Coo <- function(tps.path, sep = " ") {
             1, length(tps)))
     # we prepare a vector and a list to host the data
     img.names <- character()
-    coo.list <- list()
+    coo_list <- list()
     # and we loop over individuals
     for (i in 1:nrow(tps.pos)) {
         # first we pick one of the individuals
@@ -192,15 +192,15 @@ tps2Coo <- function(tps.path, sep = " ") {
         img.i <- gsub("image=", "", img.i, ignore.case = TRUE)
         img.names[i] <- gsub(".jpg", "", img.i, ignore.case = TRUE)
         # here we exclude every line that start with a letter
-        coo.i <- tps.i[-grep(pattern = "[[:alpha:]]", tps.i)]
+        coo_i <- tps.i[-grep(pattern = "[[:alpha:]]", tps.i)]
         # and convert it as a matrix of coordinates
-        coo.i <- unlist(strsplit(coo.i, sep))
-        coo.list[[i]] <- matrix(as.numeric(coo.i), ncol = 2,
+        coo_i <- unlist(strsplit(coo_i, sep))
+        coo_list[[i]] <- matrix(as.numeric(coo_i), ncol = 2,
             byrow = TRUE)
     }
-    coo.list <- lapply(coo.list, function(x) colnames())
-    names(coo.list) <- img.names
-    return(coo.list)
+    coo_list <- lapply(coo_list, function(x) colnames())
+    names(coo_list) <- img.names
+    return(coo_list)
 }
 
 #' From .nts to Coo objects
@@ -220,9 +220,9 @@ tps2Coo <- function(tps.path, sep = " ") {
 #' # That's how wings dataset was created
 #' # made a local copy from http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts
 #' # then :
-#' coo.list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
-#' fac       <- data.frame(fac=factor(substr(names(coo.list), 1, 2)))
-#' wings <- Ldk(coo.list, fac=fac)
+#' coo_list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
+#' fac       <- data.frame(fac=factor(substr(names(coo_list), 1, 2)))
+#' wings <- Ldk(coo_list, fac=fac)
 #' }
 #' @export
 ntsrow2Coo <- function(nts.path, sep = "\t") {
@@ -232,7 +232,7 @@ ntsrow2Coo <- function(nts.path, sep = "\t") {
     nts <- nts[-comments]
     # we prepare a vector and a list to store the data
     img.i <- character()
-    coo.list <- list()
+    coo_list <- list()
     # we loop over every individual
     for (i in 1:length(nts)) {
         # we pick every individual
@@ -240,12 +240,12 @@ ntsrow2Coo <- function(nts.path, sep = "\t") {
         # the first element is the name
         img.i[i] <- ind.i[1]
         # then we convert the rest as a matrix
-        coo.list[[i]] <- matrix(as.numeric(ind.i[-1]), ncol = 2,
+        coo_list[[i]] <- matrix(as.numeric(ind.i[-1]), ncol = 2,
             byrow = TRUE)
     }
     # we rename list components with image names
-    names(coo.list) <- img.i
-    return(coo.list)
+    names(coo_list) <- img.i
+    return(coo_list)
 }
 
 #' @export
@@ -265,13 +265,13 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
     start.id <- names.id + 1
     end.id <- start.id + nb.ldk - 1
     img.i <- nts[names.id]
-    coo.list <- list()
+    coo_list <- list()
     # we loop over every individual
     for (i in 1:nb.nts) {
-        coo.list[[i]] <- matrix(as.numeric(nts[start.id[i]:end.id[i]]),
+        coo_list[[i]] <- matrix(as.numeric(nts[start.id[i]:end.id[i]]),
             ncol = 2, byrow = TRUE)
     }
     # we rename list components with image names
-    names(coo.list) <- img.i
-    return(coo.list)
+    names(coo_list) <- img.i
+    return(coo_list)
 }

@@ -39,6 +39,9 @@
 #'  wheel(col.sari)
 #'  wheel(col.bw)
 #'  wheel(col.grey)
+#'  
+#'  # Black only for pubs
+#'  wheel(col.black)
 #' @export
 col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
 #' @rdname color_palettes
@@ -52,6 +55,10 @@ col.spring <- colorRampPalette(c("#a3baff", "#ffff7f", "#ff9797"))
 #' @rdname color_palettes
 #' @export
 col.autumn <- colorRampPalette(c("#3353b3", "#b1b100", "#b32222"))
+
+#' @rdname color_palettes
+#' @export
+col.black <- colorRampPalette(c("#000000", "#000000"))
 
 ### solarized
 #' @rdname color_palettes
@@ -158,8 +165,7 @@ col.alpha <- .transp
     3/(log(x + 1) + 1)
 }
 
-# reorders default pchs
-#' export
+#' @export
 .pch <- function() { 
   c(2, 6, 1, 3, 4, 5, 8, 7, 9, 10)}
                   

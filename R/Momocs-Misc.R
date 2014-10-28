@@ -184,7 +184,7 @@ coeff.split <- function(cs, nb.h = 8, cph = 4) {
 #' harmonic power.
 #'
 #' @param xf A list with an, bn (and cn, dn) components, typically from a
-#' e/r/tfourier passed on coo.
+#' e/r/tfourier passed on coo_
 #' @return Returns a \code{vector} of harmonic power
 #' @keywords Miscellaneous
 #' @examples

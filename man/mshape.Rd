@@ -35,10 +35,10 @@ data(wings)
 mshape(wings)
 mshape(wings$coo)
 data(bot)
-mshape(coo.sample(bot, 24)$coo)
+mshape(coo_sample(bot, 24)$coo)
 mshape(wings[1])
 stack(wings)
-coo.draw(mshape(wings))
+coo_draw(mshape(wings))
 }
 \seealso{
 \link{mshapes}

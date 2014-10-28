@@ -24,13 +24,13 @@ Only the core functions so far. Will be implemented as an \link{Opn} method soon
 # dct and inverse dct
 data(olea)
 o <- olea[1]
-o <- coo.bookstein(o)
-coo.plot(o)
+o <- coo_bookstein(o)
+coo_plot(o)
 o.dct <- dct(o, nb.h=12)
 o.dct
 o.i <- dct.i(o.dct)
-o.i <- coo.bookstein(o.i)
-coo.draw(o.i, border='red')
+o.i <- coo_bookstein(o.i)
+coo_draw(o.i, border='red')
 
 o <- olea[1]
 h.range <- 2:13

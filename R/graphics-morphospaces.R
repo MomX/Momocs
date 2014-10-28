@@ -63,17 +63,17 @@
     if (method[i] == "eFourier") {
       shp <- PCA2shp.efourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
-      shp <- lapply(shp, coo.close)
+      shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
     if (method[i] == "rFourier") {
       shp <- PCA2shp.rfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
-      shp <- lapply(shp, coo.close)
+      shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
     if (method[i] == "tFourier") {
       shp <- PCA2shp.tfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
-      shp <- lapply(shp, coo.close)
+      shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
     ### open outlines
     if (method[i] == "orthoPolynomials") {
@@ -92,14 +92,14 @@
                                 amp.shp = amp.shp)
       plot.method <- "points"}
     # we template shapes
-    shp <- lapply(shp, coo.template, size = size.shp.final[i])
+    shp <- lapply(shp, coo_template, size = size.shp.final[i])
     # we translate shapes
     for (s in 1:length(shp)) {
-      shp[[s]] <- coo.trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
+      shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
     # we draw shapes or just return the shp
     if (!plot) return(shp)
     if (plot.method == "poly") {
-      garbage <- lapply(shp, coo.draw, col = col.shp, border = border.shp, lwd = lwd.shp,
+      garbage <- lapply(shp, coo_draw, col = col.shp, border = border.shp, lwd = lwd.shp,
                         points = FALSE, centroid = FALSE, first.point = FALSE)}
     if (plot.method == "lines"){
       garbage <- lapply(shp, lines, col = border.shp, lwd = lwd.shp * 2)}
@@ -155,15 +155,15 @@
   # FALSE} if (method=='procrustes'){ shp <-
   # PCA2shp.procrustes(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp) cd <- FALSE} width <- (par('usr')[4] -
-  # par('usr')[3]) * size.shp shp <- lapply(shp, coo.scale,
+  # par('usr')[3]) * size.shp shp <- lapply(shp, coo_scale,
   # 1/width) not enough compact. #todo
-  shp <- lapply(shp, coo.template, size = (size.shp*max(.wdw())/14))
-  shp <- lapply(shp, coo.close)
+  shp <- lapply(shp, coo_template, size = (size.shp*max(.wdw())/14))
+  shp <- lapply(shp, coo_close)
   for (i in 1:length(shp)) {
-    shp[[i]] <- coo.trans(shp[[i]], pos[i, 1], pos[i, 2])
+    shp[[i]] <- coo_trans(shp[[i]], pos[i, 1], pos[i, 2])
   }
   if (cd) {
-    garbage <- lapply(shp, coo.draw, col = col.shp, border = border.shp,
+    garbage <- lapply(shp, coo_draw, col = col.shp, border = border.shp,
                       points = FALSE, centroid = FALSE, first.point = TRUE)
   } else {
     garbage <- lapply(shp, lines, col = border.shp)
@@ -194,7 +194,7 @@ pos.shapes <- function(xy, pos.shp = c("range", "circle", "xy")[1],
   if (pos.shp == "circle") {
     if (missing(circle.r.shp)) {
       # mean distance from origin
-      circle.r.shp <- coo.centdist(xy)
+      circle.r.shp <- coo_centdist(xy)
     }
     t <- seq(0, 2 * pi, len = nb.shp + 1)[-(nb.shp + 1)]
     pos <- cbind(circle.r.shp * cos(t), circle.r.shp * sin(t))
@@ -248,9 +248,9 @@ PCA2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
     coo <- efourier.i(xf, nb.h = nb.h, nb.pts = pts.shp)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
-    dx <- pos[i, 1] - coo.centpos(coo)[1]
-    dy <- pos[i, 2] - coo.centpos(coo)[2]
-    coo <- coo.trans(coo, dx, dy)
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
     # }
     res[[i]] <- coo
   }
@@ -275,9 +275,9 @@ PCA2shp.rfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
     coo <- rfourier.i(xf, nb.h = nb.h, nb.pts = pts.shp)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
-    dx <- pos[i, 1] - coo.centpos(coo)[1]
-    dy <- pos[i, 2] - coo.centpos(coo)[2]
-    coo <- coo.trans(coo, dx, dy)
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
     # }
     res[[i]] <- coo
   }
@@ -303,9 +303,9 @@ PCA2shp.tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
                       force2close = TRUE)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
-    dx <- pos[i, 1] - coo.centpos(coo)[1]
-    dy <- pos[i, 2] - coo.centpos(coo)[2]
-    coo <- coo.trans(coo, dx, dy)
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
     # }
     res[[i]] <- coo
   }
@@ -344,9 +344,9 @@ PCA2shp.polynomials <- function(pos, rot, mshape, amp.shp = 1,
     pol$coeff <- rep(NA, degree)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
-    dx <- pos[i, 1] - coo.centpos(coo)[1]
-    dy <- pos[i, 2] - coo.centpos(coo)[2]
-    coo <- coo.trans(coo, dx, dy)
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
     res[[i]] <- coo
   }
   # }
@@ -375,9 +375,9 @@ PCA2shp.procrustes <- function(pos, rot, mshape, amp.shp = 1) {
     coo <- matrix(shape.i, ncol = 2, byrow = FALSE)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
-    dx <- pos[i, 1] - coo.centpos(coo)[1]
-    dy <- pos[i, 2] - coo.centpos(coo)[2]
-    coo <- coo.trans(coo, dx, dy)
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
     res[[i]] <- coo
   }
   # }
@@ -411,9 +411,9 @@ lda2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
     coo <- efourier.i(xf, nb.h = nb.h, nb.pts = pts.shp)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
-    dx <- pos[i, 1] - coo.centpos(coo)[1]
-    dy <- pos[i, 2] - coo.centpos(coo)[2]
-    coo <- coo.trans(coo, dx, dy)
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
     # }
     res[[i]] <- coo
   }

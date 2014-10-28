@@ -4,7 +4,7 @@ data(bot)
 bot
 
 # How EFT works
-coo.oscillo(bot[1])
+coo_oscillo(bot[1])
 
 # a family picture
 panel(bot, fac="type", palette=col.india, names=TRUE)

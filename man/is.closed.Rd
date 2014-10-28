@@ -17,13 +17,13 @@ as the first one.
 }
 \examples{
 is.closed(matrix(1:10, ncol=2))
-is.closed(coo.close(matrix(1:10, ncol=2)))
+is.closed(coo_close(matrix(1:10, ncol=2)))
 data(bot)
 is.closed(bot)
-is.closed(coo.close(bot))
+is.closed(coo_close(bot))
 }
 \seealso{
-\link{coo.close}, \link{coo.unclose}
+\link{coo_close}, \link{coo_unclose}
 }
 \keyword{ShapeUtilities}
 

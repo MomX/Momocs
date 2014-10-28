@@ -20,8 +20,8 @@
 fProcrustes <- function(coo1, coo2) {
   # directly borrowed from Claude
   k <- ncol(coo1)
-  Z1 <- coo.center(coo.scale(coo1))
-  Z2 <- coo.center(coo.scale(coo2))
+  Z1 <- coo_center(coo_scale(coo1))
+  Z2 <- coo_center(coo_scale(coo2))
   sv <- svd(t(Z2) %*% Z1)
   U <- sv$v
   V <- sv$u
@@ -42,7 +42,7 @@ fProcrustes <- function(coo1, coo2) {
 #'
 #' If performed on an \link{Out} or an \link{Opn} object, will try to use the \code{$ldk} slot,
 #' if landmarks have been previousy defined, then (with a message) on the \code{$coo} slot,
-#' but in that case, all shapes must have the same number of coordinates (\link{coo.sample} may help).
+#' but in that case, all shapes must have the same number of coordinates (\link{coo_sample} may help).
 #' @param x an array, a list of configurations, or an \link{Out}, \link{Opn} or \link{Ldk} object
 #' @param tol numeric when to stop iterations
 #' @param verbose logical whether to print outputs (iteration number, and gain)
@@ -78,8 +78,8 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
   temp2 <- temp1 <- array(NA, dim = c(p, k, n))
   Siz <- numeric(n)
   for (i in 1:n) {
-    Siz[i] <- coo.centsize(A[, , i])
-    temp1[, , i] <- coo.center(coo.scale(A[, , i]))
+    Siz[i] <- coo_centsize(A[, , i])
+    temp1[, , i] <- coo_center(coo_scale(A[, , i]))
   }
   iter <- 0
   sf <- NA
@@ -130,7 +130,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
        iterationnumber = iter, Q = Q, Qi = Qi,
        Qd = Qd,
        intereuclidean.dist = Qm2,
-       mshape = coo.centsize(mshape(temp2)),
+       mshape = coo_centsize(mshape(temp2)),
        cent.size = Siz)
 }
 
@@ -149,10 +149,10 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
     Coo$coo <- Coo2$coo
     return(Coo)
   }
-  Coo2 <- coo.center(coo.scale(Coo))
+  Coo2 <- coo_center(coo_scale(Coo))
   ref <- getLandmarks(Coo2)
   tar <- fgProcrustes(ref, tol = tol, verbose = verbose)$rotated
-  # would benefit to be handled by coo.baseline ?
+  # would benefit to be handled by coo_baseline ?
   for (i in 1:length(Coo2)) {
     tari <- tar[, , i]
     refi <- ref[, , i]
@@ -166,19 +166,19 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
     r2y <- refi[2, 2]
     # translation
     t <- tari[1, ] - refi[1, ]
-    refi <- coo.trans(refi, t[1], t[2])
+    refi <- coo_trans(refi, t[1], t[2])
     # rotation
     tx <- t2x - t1x
     ty <- t2y - t1y
     rx <- r2x - r1x
     ry <- r2y - r1y
     vi <- vecs.param(rx, ry, tx, ty)
-    coo.i <- Coo2$coo[[i]]
-    coo.i <- coo.trans(coo.i, t[1] - t1x, t[2] - t1y)
-    coo.i <- coo.i/vi$r.norms
-    coo.i <- coo.rotate(coo.i, -vi$d.angle)
-    coo.i <- coo.trans(coo.i, t1x, t1y)
-    Coo2$coo[[i]] <- coo.i
+    coo_i <- Coo2$coo[[i]]
+    coo_i <- coo_trans(coo_i, t[1] - t1x, t[2] - t1y)
+    coo_i <- coo_i/vi$r.norms
+    coo_i <- coo_rotate(coo_i, -vi$d.angle)
+    coo_i <- coo_trans(coo_i, t1x, t1y)
+    Coo2$coo[[i]] <- coo_i
   }
   return(Coo2)
 }
@@ -219,8 +219,8 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = TRUE, coo=NULL) {
 pProcrustes <- function(coo1, coo2) {
   # directly borrowed from Claude
   k <- ncol(coo1)
-  Z1 <- coo.center(coo.scale(coo1))
-  Z2 <- coo.center(coo.scale(coo2))
+  Z1 <- coo_center(coo_scale(coo1))
+  Z2 <- coo_center(coo_scale(coo2))
   sv <- svd(t(Z2) %*% Z1)
   U <- sv$v
   V <- sv$u

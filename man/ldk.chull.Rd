@@ -13,15 +13,15 @@ ldk.chull(ldk, col = "grey40", lty = 1)
 \item{lty}{an lty for drawing the convex hulls}
 }
 \description{
-A wrapper that uses \link{coo.chull}
+A wrapper that uses \link{coo_chull}
 }
 \examples{
 data(wings)
-coo.plot(mshape(wings))
+coo_plot(mshape(wings))
 ldk.chull(wings$coo)
 }
 \seealso{
-\link{coo.chull}, \link{chull}, \link{ldk.confell}, \link{ldk.contour}
+\link{coo_chull}, \link{chull}, \link{ldk.confell}, \link{ldk.contour}
 }
 \keyword{Graphics}
 

@@ -28,8 +28,8 @@ Mainly intended to generate shapes and/or to understand how dct works.
 }
 \examples{
 # some signatures
-panel(coo.align(Opn(replicate(48, dct.shape(alpha=0.5, nb.h=6)))))
+panel(coo_align(Opn(replicate(48, dct.shape(alpha=0.5, nb.h=6)))))
 # some worms
-panel(coo.align(Opn(replicate(48, dct.shape(alpha=2, nb.h=6)))))
+panel(coo_align(Opn(replicate(48, dct.shape(alpha=2, nb.h=6)))))
 }
 

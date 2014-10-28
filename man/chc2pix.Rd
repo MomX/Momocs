@@ -16,7 +16,7 @@ does the job for an entire dataset produced by Shape/ChainCoder, etc.
 \examples{
 data(shapes)
 x <- pix2chc(shapes[1])
-coo.plot(chc2pix(x))
+coo_plot(chc2pix(x))
 }
 \references{
 Kuhl, F. P., & Giardina, C. R. (1982).

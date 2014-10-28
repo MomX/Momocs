@@ -229,7 +229,7 @@ hist.OpnCoe <- function(x, retain = 4, drop, palette = col.gallus,
 #'  @param main a title for the plot
 #'  @param xlab a title for the x-axis
 #'  @param ylab a title for the y-axis
-#'  @param ... additional parameter to pass to \code{\link{coo.draw}}
+#'  @param ... additional parameter to pass to \code{\link{coo_draw}}
 #'  @rdname harm.contrib
 #'  @examples
 #'  data(bot)
@@ -285,7 +285,7 @@ hcontrib.OutCoe <- function(Coe,
       p <- p+1}}
   # graphics start here
   # we borrow this block to PC.contrib
-  # except the expand.grid and coo.trans that needed to be "transposed"
+  # except the expand.grid and coo_trans that needed to be "transposed"
   xs <- 1:length(harm.r) - 0.5
   ys <- rev(1:length(amp.r) - 0.5)
   plot(NA, xlim=c(0, length(harm.r)), ylim=c(0, length(amp.r)),
@@ -294,15 +294,15 @@ hcontrib.OutCoe <- function(Coe,
   axis(1, at = xs, labels = harm.r)
   axis(2, at = ys, labels = amp.r, las=1)
   # we template the size of the shapes
-  shp <- lapply(shp, coo.close)
-  shp <- lapply(shp, coo.template, 0.95)
+  shp <- lapply(shp, coo_close)
+  shp <- lapply(shp, coo_template, 0.95)
   # here we prepare and apply the translation values
   trans <- expand.grid(ys, xs)
   colnames(trans) <- c("x", "y")
   for (i in seq(along=shp)){
-    shp[[i]] <- coo.trans(shp[[i]], trans[i, 2], trans[i, 1])}
+    shp[[i]] <- coo_trans(shp[[i]], trans[i, 2], trans[i, 1])}
   # we finally plot the shapes
-  gc <- lapply(shp, coo.draw, centroid = FALSE, first.point=FALSE, ...)
+  gc <- lapply(shp, coo_draw, centroid = FALSE, first.point=FALSE, ...)
   invisible(list(shp=shp, trans=trans))}
 
 # hcontrib.Opn (dct) # todo

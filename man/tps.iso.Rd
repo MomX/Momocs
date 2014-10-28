@@ -49,7 +49,7 @@ deformations}
 
 \item{legend.text}{some text for the legend}
 
-\item{...}{additional arguments to feed \link{coo.draw}}
+\item{...}{additional arguments to feed \link{coo_draw}}
 }
 \value{
 No returned value

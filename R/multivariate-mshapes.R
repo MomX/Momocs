@@ -22,8 +22,8 @@
 #' ms$Coe
 #' class(ms$Coe)
 #' ms <- ms$shp
-#' coo.plot(ms$beer)
-#' coo.draw(ms$whisky, border='forestgreen')
+#' coo_plot(ms$beer)
+#' coo_draw(ms$whisky, border='forestgreen')
 #' tps.arr(ms$whisky, ms$beer) #etc.
 #' 
 #' data(olea)

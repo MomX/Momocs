@@ -18,7 +18,7 @@ Create links (all pariwise combinations) between landmarks
 \examples{
 data(wings)
 w <- wings[1]
-coo.plot(w)
+coo_plot(w)
 links <- links.all(w)
 ldk.links(w, links)
 }

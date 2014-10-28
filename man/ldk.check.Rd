@@ -19,12 +19,12 @@ when passed with either a list, a matrix or an array of coordinates.
 If a list is provided, checks that the number of landmarks is consistent.
 }
 \examples{
-#coo.check('Not a shape')
-#coo.check(matrix(1:10, ncol=2))
-#coo.check(list(x=1:5, y=6:10))
+#coo_check('Not a shape')
+#coo_check(matrix(1:10, ncol=2))
+#coo_check(list(x=1:5, y=6:10))
 }
 \seealso{
-\link{coo.check}
+\link{coo_check}
 }
 \keyword{ShapeUtilities}
 

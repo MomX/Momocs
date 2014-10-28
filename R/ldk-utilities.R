@@ -11,12 +11,12 @@
 #'
 #' @param ldk a \code{matrix} of (x; y) coordinates, a list, or an array.
 #' @return an \code{array} of (x; y) coordinates.
-#' @seealso \link{coo.check}
+#' @seealso \link{coo_check}
 #' @keywords ShapeUtilities
 #' @examples
-#' #coo.check('Not a shape')
-#' #coo.check(matrix(1:10, ncol=2))
-#' #coo.check(list(x=1:5, y=6:10))
+#' #coo_check('Not a shape')
+#' #coo_check(matrix(1:10, ncol=2))
+#' #coo_check(list(x=1:5, y=6:10))
 #' @export
 ldk.check <- function(ldk) {
     if (is.array(ldk)) {
@@ -47,12 +47,12 @@ ldk.check <- function(ldk) {
 #' @examples
 #' data(wings)
 #' w <- wings[1]
-#' coo.plot(w)
+#' coo_plot(w)
 #' links <- links.all(w)
 #' ldk.links(w, links)
 #' @export
 links.all <- function(coo) {
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     links <- t(combn(1:nrow(coo), 2))
     return(links)
 }
@@ -66,12 +66,12 @@ links.all <- function(coo) {
 #' @examples
 #' data(wings)
 #' w <- wings[1]
-#' coo.plot(w, poly=FALSE)
+#' coo_plot(w, poly=FALSE)
 #' links <- links.delaunay(w)
 #' ldk.links(w, links)
 #' @export
 links.delaunay <- function(coo) {
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     links <- delaunayn(coo)
     links <- rbind(links[, -1], links[, -2], links[, -3])
     links <- links[-which(duplicated(links)), ]

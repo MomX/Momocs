@@ -30,7 +30,7 @@ and specific methods (e.g. todo-Procrustes can be applied.
 }
 \details{
 All the shapes in x must have the same number of landmarks. If you are
-trying to make an Ldk object from an Out or an Opn object, try \link{coo.sample}.
+trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample}.
 }
 \note{
 \code{Ldk} methods must be, so far, considered as experimental in Momocs.

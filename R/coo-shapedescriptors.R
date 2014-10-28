@@ -10,45 +10,45 @@
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return a vector of two \code{numeric}: the length and the width.
 #' @keywords ShapeDescriptors
-#' @seealso \link{coo.length}, \link{coo.width}.
+#' @seealso \link{coo_length}, \link{coo_width}.
 #' @examples
 #' data(bot)
-#' coo.lw(bot[1])
+#' coo_lw(bot[1])
 #' @export
-coo.lw <- function(coo) {
-  coo <- coo.check(coo)
-  d <- apply(coo.align(coo), 2, range)
+coo_lw <- function(coo) {
+  coo <- coo_check(coo)
+  d <- apply(coo_align(coo), 2, range)
   return(abs(d[2, ] - d[1, ]))
 }
 
 #' Calculates the length of a shape
 #'
-#' Nothing more than \code{coo.lw(coo)[1]}.
+#' Nothing more than \code{coo_lw(coo)[1]}.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return the length (in pixels) of the shape
 #' @keywords ShapeDescriptors
-#' @seealso \link{coo.lw}, \link{coo.width}
+#' @seealso \link{coo_lw}, \link{coo_width}
 #' @examples
 #' data(bot)
-#' coo.length(bot[1])
+#' coo_length(bot[1])
 #' @export
-coo.length <- function(coo) {
-  return(coo.lw(coo)[1])
+coo_length <- function(coo) {
+  return(coo_lw(coo)[1])
 }
 
 #' Calculates the width of a shape
 #'
-#' Nothing more than \code{coo.lw(coo)[2]}.
+#' Nothing more than \code{coo_lw(coo)[2]}.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return the width (in pixels) of the shape
 #' @keywords ShapeDescriptors
-#' @seealso \link{coo.lw}, \link{coo.length}.
+#' @seealso \link{coo_lw}, \link{coo_length}.
 #' @examples
 #' data(bot)
-#' coo.width(bot[1])
+#' coo_width(bot[1])
 #' @export
-coo.width <- function(coo) {
-  return(coo.lw(coo)[2])}
+coo_width <- function(coo) {
+  return(coo_lw(coo)[2])}
 
 #' Calculates the area of a shape
 #' 
@@ -61,13 +61,13 @@ coo.width <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.area(bot[1])
+#' coo_area(bot[1])
 #' # for the distribution of the area of the bottles dataset
-#' hist(sapply(bot$coo, coo.area), breaks=10)
+#' hist(sapply(bot$coo, coo_area), breaks=10)
 #' @export
-coo.area <- function(coo) {
-    coo <- coo.check(coo)
-    coo <- coo.close(coo)
+coo_area <- function(coo) {
+    coo <- coo_check(coo)
+    coo <- coo_close(coo)
     nr <- nrow(coo) - 1
     y <- x <- numeric(nr)
     for (i in 1:nr) {
@@ -89,12 +89,12 @@ coo.area <- function(coo) {
 #' @examples
 #' data(bot)
 #' b <- bot[1]
-#' phi  <- coo.tangle(b)
-#' phi2 <- coo.tangle(coo.smooth(b, 2))
+#' phi  <- coo_tangle(b)
+#' phi2 <- coo_tangle(coo_smooth(b, 2))
 #' plot(phi, type='l')
 #' plot(phi2, type='l', col='red') # ta is very sensible to noise
 #' @export
-coo.tangle <- function(coo) {
+coo_tangle <- function(coo) {
     p <- nrow(coo)
     tangvect <- coo - rbind(coo[p, ], coo[-p, ])
     tet1 <- Arg(complex(real = tangvect[, 1], imaginary = tangvect[, 
@@ -115,13 +115,13 @@ coo.tangle <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[1], 64)
+#' b <- coo_sample(bot[1], 64)
 #' b <- b[c(1, 14, 24), ]
-#' coo.plot(b)
-#' coo.theta3(b)
-#' coo.theta3(b, method='acos')
+#' coo_plot(b)
+#' coo_theta3(b)
+#' coo_theta3(b, method='acos')
 #' @export
-coo.theta3 <- function(m, method = c("atan2", "acos")[1]) {
+coo_theta3 <- function(m, method = c("atan2", "acos")[1]) {
     a <- c(m[1, 1] - m[2, 1], m[1, 2] - m[2, 2])
     b <- c(m[3, 1] - m[2, 1], m[3, 2] - m[2, 2])
     if (method == "atan2") {
@@ -138,23 +138,23 @@ coo.theta3 <- function(m, method = c("atan2", "acos")[1]) {
 #' 
 #' Returns the angle (in radians) of every edge of a shape,
 # either signed ('atan2') or not ('acos'). A wrapper for
-# \link{coo.theta3}
+# \link{coo_theta3}
 #' @param coo a \code{matrix} or a list of (x; y) coordinates.
 #' @param method one of 'atan2' or 'acos' for a signed or not angle.
 #' @return \code{numeric} the angles in radians for every edge.
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[1], 64)
-#' coo.theta.pts(b)
+#' b <- coo_sample(bot[1], 64)
+#' coo_theta.pts(b)
 #' @export
-coo.theta.pts <- function(coo, method = c("atan2", "acos")[1]) {
-    coo <- coo.check(coo)
-    coo <- coo.close(coo)
+coo_theta.pts <- function(coo, method = c("atan2", "acos")[1]) {
+    coo <- coo_check(coo)
+    coo <- coo_close(coo)
     coo <- rbind(coo[nrow(coo) - 1, ], coo)
     theta <- numeric()
     for (i in 1:(nrow(coo) - 2)) {
-        theta[i] <- coo.theta3(coo[i:(i + 2), ], method = method)
+        theta[i] <- coo_theta3(coo[i:(i + 2), ], method = method)
     }
     return(theta)
 }
@@ -171,17 +171,17 @@ coo.theta.pts <- function(coo, method = c("atan2", "acos")[1]) {
 #' IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 #' @examples
 #' data(bot)
-#' b <- coo.sample(bot[1], 32)
-#' coo.rectilinearity(b)
+#' b <- coo_sample(bot[1], 32)
+#' coo_rectilinearity(b)
 #' @export
-coo.rectilinearity <- function(coo) {
+coo_rectilinearity <- function(coo) {
     # some check
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     if (is.closed(coo)) {
-        coo.c <- coo
-        coo <- coo.unclose(coo)
+        coo_c <- coo
+        coo <- coo_unclose(coo)
     } else {
-        coo.c <- coo.close(coo)
+        coo_c <- coo_close(coo)
     }
     # we deduce it for the algo
     n <- nrow(coo)
@@ -195,18 +195,18 @@ coo.rectilinearity <- function(coo) {
         sqrt((x1 - x2)^2 + (y1 - y2)^2)
     }
     # l2 is redefined here for coherence with the paper, but is
-    # equivalent to coo.perim.pts(coo)
+    # equivalent to coo_perim.pts(coo)
     l2.e <- l1.e <- numeric(n)
     for (i in 1:n) {
-        x1 <- coo.c[i, 1]
-        y1 <- coo.c[i, 2]
-        x2 <- coo.c[i + 1, 1]
-        y2 <- coo.c[i + 1, 2]
+        x1 <- coo_c[i, 1]
+        y1 <- coo_c[i, 2]
+        x2 <- coo_c[i + 1, 1]
+        y2 <- coo_c[i + 1, 2]
         l1.e[i] <- l1(x1, y1, x2, y2)
         l2.e[i] <- l2(x1, y1, x2, y2)
-    }  # sum(l2.e) == coo.perim(coo)
+    }  # sum(l2.e) == coo_perim(coo)
     # 'step 1' as in Zunic and Rosin
-    theta <- coo.theta.pts(coo)
+    theta <- coo_theta.pts(coo)
     theta.k <- abs(c(theta - pi/2, theta - pi, theta - 3 * pi/2, 
         theta - 2 * pi))
     alpha.k <- sort(theta.k)
@@ -230,7 +230,7 @@ coo.rectilinearity <- function(coo) {
 #' Calculates the Haralick's circularity of a shape
 #' 
 #' Returns Haralick's circularity which is less sensible
-#' to digitalization noise than coo.circularity.
+#' to digitalization noise than coo_circularity.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the Haralick's circularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
@@ -238,10 +238,10 @@ coo.rectilinearity <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.circularity.haralick(bot[1])
+#' coo_circularity.haralick(bot[1])
 #' @export
-coo.circularity.haralick <- function(coo) {
-    cd <- coo.centdist(coo)
+coo_circularity.haralick <- function(coo) {
+    cd <- coo_centdist(coo)
     return(mean(cd)/sd(cd))
 }
 
@@ -249,16 +249,16 @@ coo.circularity.haralick <- function(coo) {
 #' 
 #' Returns the 'circularity measure'. Also called 'compactness'
 #' and 'shape factor' sometimes.
-#' @aliases coo.compactness coo.shapefactor
+#' @aliases coo_compactness coo_shapefactor
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the circularity.
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.circularity(bot[1])
+#' coo_circularity(bot[1])
 #' @export
-coo.circularity <- function(coo) {
-    return(coo.perim(coo)^2/coo.area(coo))
+coo_circularity <- function(coo) {
+    return(coo_perim(coo)^2/coo_area(coo))
 }
 
 #' Calculates the 'normalized' circularity of a shape
@@ -272,10 +272,10 @@ coo.circularity <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.circularity.norm(bot[1])
+#' coo_circularity.norm(bot[1])
 #' @export
-coo.circularity.norm <- function(coo) {
-    return(coo.perim(coo)^2/(coo.area(coo) * 4 * pi))
+coo_circularity.norm <- function(coo) {
+    return(coo_perim(coo)^2/(coo_area(coo) * 4 * pi))
 }
 
 #' Calculates the eccentricity (using eigenvalues) of a shape
@@ -285,34 +285,34 @@ coo.circularity.norm <- function(coo) {
 #' @return numeric, the eccentricity (eigenvalues)
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @seealso \link{coo.eccentricity.boundingbox}
+#' @seealso \link{coo_eccentricity.boundingbox}
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.eccentricity.eigen(bot[1])
+#' coo_eccentricity.eigen(bot[1])
 #' @export
-coo.eccentricity.eigen <- function(coo) {
-    coo <- coo.check(coo)
+coo_eccentricity.eigen <- function(coo) {
+    coo <- coo_check(coo)
     eig <- eigen(cov(coo))$values
     return(eig[2]/eig[1])
 }
 
 #' Calculates the eccentricity (bounding box) of a shape
 #' 
-#' Calculated using the width / length ratio. See \link{coo.lw}
+#' Calculated using the width / length ratio. See \link{coo_lw}
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the eccentricity (boundingbox)
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @seealso \link{coo.eccentricity.eigen}
+#' @seealso \link{coo_eccentricity.eigen}
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.eccentricity.boundingbox(bot[1])
+#' coo_eccentricity.boundingbox(bot[1])
 #' @export
-coo.eccentricity.boundingbox <- function(coo) {
-    coo <- coo.check(coo)
-    lw <- coo.lw(coo)
+coo_eccentricity.boundingbox <- function(coo) {
+    coo <- coo_check(coo)
+    lw <- coo_lw(coo)
     return(lw[2]/lw[1])
 }
 
@@ -325,11 +325,11 @@ coo.eccentricity.boundingbox <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.elongation(bot[1])
+#' coo_elongation(bot[1])
 #' @export
-coo.elongation <- function(coo) {
-    coo <- coo.check(coo)
-    lw <- coo.lw(coo)
+coo_elongation <- function(coo) {
+    coo <- coo_check(coo)
+    lw <- coo_lw(coo)
     return(1 - lw[2]/lw[1])
 }
 
@@ -342,12 +342,12 @@ coo.elongation <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.rectangularity(bot[1])
+#' coo_rectangularity(bot[1])
 #' @export
-coo.rectangularity <- function(coo) {
-    coo <- coo.check(coo)
-    abr <- prod(coo.lw(coo))
-    return(coo.area(coo)/abr)
+coo_rectangularity <- function(coo) {
+    coo <- coo_check(coo)
+    abr <- prod(coo_lw(coo))
+    return(coo_area(coo)/abr)
 }
 
 #' Calculates the convex hull of a shape
@@ -359,13 +359,13 @@ coo.rectangularity <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(hearts)
-#' h <- coo.sample(hearts[4], 32)
-#' coo.plot(h)
-#' ch <- coo.chull(h)
+#' h <- coo_sample(hearts[4], 32)
+#' coo_plot(h)
+#' ch <- coo_chull(h)
 #' lines(ch, col='red', lty=2)
 #' @export
-coo.chull <- function(coo) {
-    coo <- coo.check(coo)
+coo_chull <- function(coo) {
+    coo <- coo_check(coo)
     return(coo[chull(coo), ])
 }
 
@@ -379,11 +379,11 @@ coo.chull <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.convexity(bot[1])
+#' coo_convexity(bot[1])
 #' @export
-coo.convexity <- function(coo) {
-    coo <- coo.check(coo)
-    return(coo.perim(coo.chull(coo))/coo.perim(coo))
+coo_convexity <- function(coo) {
+    coo <- coo_check(coo)
+    return(coo_perim(coo_chull(coo))/coo_perim(coo))
 }
 
 #' Calculates the solidity of a shape
@@ -396,11 +396,11 @@ coo.convexity <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo.solidity(bot[1])
+#' coo_solidity(bot[1])
 #' @export
-coo.solidity <- function(coo) {
-    coo <- coo.check(coo)
-    return(coo.area(coo)/coo.area(coo.chull(coo)))
+coo_solidity <- function(coo) {
+    coo <- coo_check(coo)
+    return(coo_area(coo)/coo_area(coo_chull(coo)))
 }
 
 # Cannot be included since it relies on gpc.lib #todo: find
@@ -409,8 +409,8 @@ coo.solidity <- function(coo) {
 # area(union(coo1, coo2))) #' #' @param coo1 the first shape
 # #' @param coo2 the second shape #' @return the area of the
 # overlap #' @examples #' data(bot) #' b1 <- bot[1] #' b2 <-
-# coo.trans(b1, 50) #' coo.plot(b1) #' coo.draw(b2) #'
-# coo.overlap(b1, b2) #' @export coo.overlap <-
+# coo_trans(b1, 50) #' coo_plot(b1) #' coo_draw(b2) #'
+# coo_overlap(b1, b2) #' @export coo_overlap <-
 # function(coo1, coo2){ p1 <- as(coo1, 'gpc.poly') p2 <-
 # as(coo2, 'gpc.poly') p0 <- union(p1,p2) ov <- area.poly(p1)
 # + area.poly(p2) - area.poly(p0) return(ov)} #' Calculate
@@ -419,8 +419,8 @@ coo.solidity <- function(coo) {
 # NULL.  #' #' @param coo1 the first shape #' @param coo2 the
 # second shape #' @return the area of the overlap #'
 # @examples #' data(bot) #' b1 <- bot[1] #' ba <-
-# coo.union(b1, coo.trans(b1, 200)) #' coo.plot(ba) #'
-# coo.union(b1, coo.trans(b1, 1e3)) #' @export coo.union <-
+# coo_union(b1, coo_trans(b1, 200)) #' coo_plot(ba) #'
+# coo_union(b1, coo_trans(b1, 1e3)) #' @export coo_union <-
 # function(coo1, coo2){ p1 <- as(coo1, 'gpc.poly') p2 <-
 # as(coo2, 'gpc.poly') pu <- union(p1, p2) if (length(pu@pts)
 # > 1) return(NULL) pu <- cbind(pu@pts[[1]]$x, pu@pts[[1]]$y)
@@ -439,14 +439,14 @@ coo.solidity <- function(coo) {
 # global shape measures. In C. H. Chen and P. S. P. Wang
 # (Eds.), #' Handbook of Pattern Recognition and Computer
 # Vision (pp. 177-196).  #' @examples #' data(bot) #' x <-
-# coo.symmetry(bot[1]) #' w <- barplot(x$ov) #' axis(1, at=w,
+# coo_symmetry(bot[1]) #' w <- barplot(x$ov) #' axis(1, at=w,
 # labels=x$sym) #' segments(w, x$ov - x$sd, w, x$ov + x$sd)
-# #' @export coo.symmetry <- function(coo, order.max=12){ coo
-# <- coo.check(coo) coo <- coo.center(coo) coo.a <-
-# coo.area(coo) sym <- 2:order.max sd <- ov <-
+# #' @export coo_symmetry <- function(coo, order.max=12){ coo
+# <- coo_check(coo) coo <- coo_center(coo) coo_a <-
+# coo_area(coo) sym <- 2:order.max sd <- ov <-
 # numeric(length(sym)) #theta <- seq(0, 2*pi,
 # length=n+1)[-n+1] for (i in seq(along=sym)){ n <- sym[i]
 # ov.i <- numeric(n-1) for (j in 1:(n-1)) { ov.i[j] <-
-# coo.overlap(coo, coo.rotate(coo, j*2*pi/n)) } ov.i <-
-# ov.i/coo.a ov[i] <- mean(ov.i) sd[i] <- sd(ov.i) } sd[1] <-
+# coo_overlap(coo, coo_rotate(coo, j*2*pi/n)) } ov.i <-
+# ov.i/coo_a ov[i] <- mean(ov.i) sd[i] <- sd(ov.i) } sd[1] <-
 # 0 return(list(ov=ov, sd=sd, sym=sym))} 

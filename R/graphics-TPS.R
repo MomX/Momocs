@@ -17,9 +17,9 @@
 #' @export
 tps2d <- function(grid0, fr, to) {
   if (is.closed(fr)) 
-    fr <- coo.unclose(fr)
+    fr <- coo_unclose(fr)
   if (is.closed(to)) 
-    to <- coo.unclose(to)
+    to <- coo_unclose(to)
   if (!is.matrix(grid0)) 
     grid0 <- as.matrix(grid0)
   p <- nrow(fr)
@@ -75,7 +75,7 @@ tps2d <- function(grid0, fr, to) {
 #' @param shp.lty Two \code{lty} fro drawing the shapes
 #' @param legend logical whether to plot a legend
 #' @param legend.text some text for the legend
-#' @param ... additional arguments to feed \link{coo.draw}
+#' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing
 #' @seealso \link{tps.iso} and \link{tps.arr}.
 #' @keywords ThinPlateSplines
@@ -115,10 +115,10 @@ tps.grid <- function(fr, to, amp = 1,
   }
   if (shp) {
     points <- ifelse(poly, FALSE, TRUE)
-    coo.draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
+    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
              lty = shp.lty[1], points = points, first.point = FALSE, 
              centroid = FALSE, ...)
-    coo.draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
+    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
              lty = shp.lty[2], points = points, first.point = FALSE, 
              centroid = FALSE, ...)
     if (legend | !missing(legend.text)) {
@@ -159,7 +159,7 @@ tps.grid <- function(fr, to, amp = 1,
 #' @param shp.lty two \code{lty} fro drawing the shapes
 #' @param legend logical whether to plot a legend
 #' @param legend.text some text for the legend
-#' @param ... additional arguments to feed \link{coo.draw}
+#' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing.
 #' @seealso \link{tps.grid} and \link{tps.iso}.
 #' @keywords ThinPlateSplines
@@ -188,7 +188,7 @@ tps.arr <- function(fr, to, amp = 1,
     grid0 <- .grid.sample(fr, to, nside = round(sqrt(arr.nb)), over = over)
   }
   else {
-    grid0 <- spsample(Polygon(coo.close(fr)), arr.nb, type='regular')@coords
+    grid0 <- spsample(Polygon(coo_close(fr)), arr.nb, type='regular')@coords
   }
   grid1 <- tps2d(grid0, fr, to)
   # grille simple, on affiche d'abord les deux courbes
@@ -210,10 +210,10 @@ tps.arr <- function(fr, to, amp = 1,
          angle = arr.ang, lwd = arr.lwd, col = arr.cols)
   if (shp) {
     points <- ifelse(poly, FALSE, TRUE)
-    coo.draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
+    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
              lty = shp.lty[1], points = points, first.point = FALSE, 
              centroid = FALSE, ...)
-    coo.draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
+    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
              lty = shp.lty[2], points = points, first.point = FALSE, 
              centroid = FALSE, ...)
     if (legend | !missing(legend.text)) {
@@ -252,7 +252,7 @@ tps.arr <- function(fr, to, amp = 1,
 #' @param shp.lty Two \code{lty} fro drawing the shapes
 #' @param legend logical whether to plot a legend
 #' @param legend.text some text for the legend
-#' @param ... additional arguments to feed \link{coo.draw}
+#' @param ... additional arguments to feed \link{coo_draw}
 #' @return No returned value
 #' @seealso \link{tps.grid} and \link{tps.arr}
 #' @keywords ThinPlateSplines
@@ -279,7 +279,7 @@ tps.iso <- function(fr, to, amp = 1,
   if (grid) {
     grid0 <- .grid.sample(fr, to, nside = round(sqrt(iso.nb)), over = over)
   } else {
-    grid0 <- spsample(Polygon(coo.close(fr)), iso.nb, type='regular')@coords
+    grid0 <- spsample(Polygon(coo_close(fr)), iso.nb, type='regular')@coords
   }
   grid1 <- tps2d(grid0, fr, to)
   def <- edm(grid0, grid1)
@@ -304,10 +304,10 @@ tps.iso <- function(fr, to, amp = 1,
   }
   if (shp) {
     points <- ifelse(poly, FALSE, TRUE)
-    coo.draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
+    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
              lty = shp.lty[1], points = points, first.point = FALSE, 
              centroid = FALSE, ...)
-    coo.draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
+    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
              lty = shp.lty[2], points = points, first.point = FALSE, 
              centroid = FALSE, ...)
     if (legend | !missing(legend.text)) {

@@ -56,7 +56,7 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{title}{a title for the plot. The name of the \code{Coo} by default}
 
-\item{...}{further arguments to be passed to \link{coo.plot}}
+\item{...}{further arguments to be passed to \link{coo_plot}}
 
 \item{nb.pts}{the number of points to use for the shape reconstruction}
 }

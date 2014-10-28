@@ -12,7 +12,7 @@
 random shape is plotted. If passed with \code{'all'} all shapes are plotted,
 one by one.}
 
-\item{...}{further arguments to be passed to \link{coo.plot}}
+\item{...}{further arguments to be passed to \link{coo_plot}}
 }
 \description{
 Allows to plot shapes, individually, for \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.

@@ -35,7 +35,7 @@ functions/methods that use reconstructed outlines, e.g. \link{plot.PCA}).
 }
 \examples{
 data(bot)
-bot <- coo.center(bot)
+bot <- coo_center(bot)
 bot.f <- rFourier(bot, 120)
 bot.fi <- as.Out(bot.f)
 op <- par(mfrow=c(1, 2))

@@ -55,12 +55,12 @@ Directly borrowed for Claude (2008), and called \code{fourier2} there.
 \examples{
 data(bot)
 coo <- bot[1]
-coo.plot(coo)
+coo_plot(coo)
 tf  <- tfourier(coo, 12)
 tf
 tfi <- tfourier.i(tf)
-coo.draw(tfi, border='red', col=NA) # the outline is not closed...
-coo.draw(tfourier.i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
+coo_draw(tfi, border='red', col=NA) # the outline is not closed...
+coo_draw(tfourier.i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
 }
 \references{
 Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed

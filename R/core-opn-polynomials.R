@@ -37,7 +37,7 @@
 #' plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 #' @export
 polynomials <- function(coo, degree, ortho = TRUE) {
-    coo <- coo.check(coo)
+    coo <- coo_check(coo)
     if (missing(degree)) {
         degree <- 5
         cat(" * 'degree' not provided and set to", degree, ".\n")
@@ -63,10 +63,10 @@ polynomials <- function(coo, degree, ortho = TRUE) {
 #' @examples
 #' data(olea)
 #' o <- olea[5]
-#' coo.plot(o)
+#' coo_plot(o)
 #' for (i in 2:7){
 #' x <- polynomials.i(polynomials(o, i, ortho=TRUE))
-#' coo.draw(x, border=col.summer(7)[i], points=FALSE)  }
+#' coo_draw(x, border=col.summer(7)[i], points=FALSE)  }
 #' data(olea)
 #' o <- olea[1]
 #' op <- polynomials(o, degree=4)
@@ -96,7 +96,7 @@ polynomials.i <- function(pol, nb.pts = 120, reregister = TRUE) {
     }
     coo <- cbind(x.new, y.new)
     if (reregister) {
-        coo <- coo.baseline(coo, 1, nrow(coo), t1 = pol$baseline1, 
+        coo <- coo_baseline(coo, 1, nrow(coo), t1 = pol$baseline1, 
             t2 = pol$baseline2)
     }
     colnames(coo) <- c("x", "y")

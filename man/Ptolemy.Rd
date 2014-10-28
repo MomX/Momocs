@@ -17,11 +17,11 @@ Ptolemy(coo, t = seq(0, 2 * pi, length = 7)[-1], nb.h = 3, nb.pts = 360,
 
 \item{palette}{a color palette}
 
-\item{zoom}{numeric a zoom factor for \link{coo.plot}}
+\item{zoom}{numeric a zoom factor for \link{coo_plot}}
 
 \item{legend}{\code{logical}. Whether to plot the legend box}
 
-\item{...}{additional parameters to feed \link{coo.plot}}
+\item{...}{additional parameters to feed \link{coo_plot}}
 }
 \description{
 Calculate and display Ptolemaic ellipses which illustrates
