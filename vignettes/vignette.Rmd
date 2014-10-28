@@ -1,0 +1,172 @@
+---
+title: "First steps with Momocs"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    toc_depth: 3
+    css: vignette.css
+vignette: >
+  %\VignetteIndexEntry{First steps with Momocs}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+
+---
+# Preamble
+## About Momocs
+* Momocs is a work in progress.
+* Overall, long-term goals are :
+    + Gather all morphometrics in a single grammar
+    + Brige morphometrics softwares and analyses
+    + Delicious hackable graphics
+* If you use it, please cite it: `citation("Momocs")`. A second paper is in prep.
+* The last version is on [GitHub](https://github.com/vbonhomme/Momocs) and you should use it.
+* An extensive tutorial is on its way, in the meantime you can use the manual and examples plus the first vignettes : `?Momocs`.
+* You can collaborate to Momocs' development using GitHub. This is also the preferred place for bug reports. If you're not familiar with it, contact me directly.
+* I welcome bug reports, suggestions, data, questions, collaborations requests, etc. `bonhomme.vincent@gmail.com`. Your help will be duly credited.
+
+## Assumptions
+Momocs (and I) make the following assumptions:
+
+* You have a basic knowledge of R
+* You know what you want to do in statistics / morphometrics terms
+
+## Conventions
+* A *shape* is an ordinate set (id varies from 1 to shape_length) of 2D (so far) coordinates
+* *Collections* are shapes + (classifiers and/or covariates) + hypotheses + questions
+
+## Architecture
+![architecture](MomocsArch.png)
+
+# Using Momocs
+## Import data
+
+Raw data can be imported :
+
+What    | From | With
+------  | -----| -----
+extract outline coordinates from segmented images | `.jpg` | `import.jpg`
+any other coordinates | `.txt` | `import.txt`
+
+* Open-source softwares such as [Gimp](http://www.gimp.org/), to prepare images, and [ImageJ](http://imagej.nih.gov/ij/) to extract coordinates/landmarks/etc. to text files.
+
+Other morphometric formats can be imported with :
+
+What    |  To     | With
+------  | -----   | -----
+tps     | `Coo`   | `tps2Coo` 
+chc     | `Out`   | `chc2Out`
+
+* Two `.jpg` plotters are available : `img.plot` and `img.plot0`
+* Bridges from other morphometric formats are quite experimental. Contact me should you have any problem, need something.
+
+## Classes
+* Momocs defines and uses S3 classes. Not the most rigorous but familiar to most of us.
+* `Coo`rdinates -> Morphometrics -> `Coe`fficients.
+* `Coo` and `Coe` are "super-classes" for coordinates and coefficients.
+* Only appropriate morphometrics are allowed on each class and turn :
+    + `Out` for closed outlines, into `OutCoe`;
+    + `Opn` for open curves, into `OpnCoe`;
+    + `Ldk` for landmarks, into `LdkCoe`.
+* To see class definitions, eg `Out` : `?Out`.
+* To see attached methods, eg for `OpnCoe` : `methods(class = "OpnCoe")`
+* To see R code behind methods, eg for `hist.OpnCoe` : `Momocs:::hist.OpnCoe`
+* Constructors are available, eg `Out()`
+
+### `Coo` class
+`Coo` classes share most of their slots :
+
+`Coo`         | `Out` | `Opn` | `Ldk` | |
+------        |  ---  | ---   | ---   | ----
+`$coo`        | X     | X     | X     | list of matrices of coordinates
+`$fac`        | x     | x     | x     | data.frame of factors and covariable
+`$ldk`        | x     | x     | _     | list of numeric of the ids of the landmarks
+`$baseline`   | _     | x     | _     | list of baseline coordinates
+`$sliding`    | _     | _     | x     | list of the ids of the sliding landmarks
+`$links`      | _     | _     | x     | matrix of links between landmarks
+
+### From `Coo` to `Coe`: Morphometric methods
+Here are the methods implemented for every class that can be applied on the proper `Coo` object, and they create the proper `Coe` object.
+
+Coo           | method name     | what
+--------------| --------------- | --------------
+`Out`         | `eFourier`      | Elliptical Fourier Transforms
+ _            | `rFourier`      | Radii variation Fourier Transforms
+ _            | `tFourier`      | Tangent angle Fourier Transforms
+`Opn`         | `rawPoly`       | Natural polynomial fit
+ _            | `orthoPoly`     | Orthogonal polynomial fit
+ _            | `dCT`           | Discrete Cosinus Transform [planned]
+ `Ldk`        | `fProcrustes`   | Full Procrustes Superimposition [planned]
+_             | `fgProcrustes`  | Full Generalized Procrustes [planned]
+_             | _  | Both Procrustes with robust / sliding handling
+
+### `Coe` class
+For `$Coe`, we change the `$coo` for `$coe` and we add a `$method` :
+
+`Coe`         | `Out` | `Opn` | `Ldk` | |
+------        |  ---  | ---   | ---   | ----
+`$coe`        | X     | X     | X     | matrix of coefficients
+`$fac`        | x     | x     | x     | data.frame of factors and covariable
+`$ldk`        | x     | x     | _     | list of numeric of the ids of the landmarks
+`$baseline`   | _     | x     | _     | list of baseline coordinates
+`$sliding`    | _     | _     | x     | list of the ids of the sliding landmarks
+`$method`     | x     | x     | x     | details of the morphometric
+
+### Handling classes
+* indicing
+* combine
+* subset
+
+## Multivariate analyses
+Method    | What
+-------   | ---------
+`PCA`     | Principal Component Analysis
+`LDA`     | Linear Discriminant Analysis
+`RDA`     | Redundancy analysis
+`CLUST`   | Hierarchical clustering
+`MANOVA`  | Multivariate analysis of variance
+`LM`      | Multivariate regression
+
+* When possible, methods apply directly on the corresponding `Coe` object.
+* Otherwise, a dimensionnality reduction with `PCA`, then doing the analysis on the `PCA` object will be prefered/required.
+
+## Operations on coordinates
+* They are named with the pattern : `coo_something`
+* To get them all : ```ls("package=Momocs, pattern = "coo-")```
+* The most common functions have a `Coo` method.
+
+## Graphics
+* `coo.plot` a shape plotter
+* `stack` all shapes from any `Coo` object on the same plane
+* `panel` a family picture any `Coo` object
+* `plot` plots a particular shape from a `Coo` object
+
+# Method-dependent tools
+
+## Outline analysis
+* alignment
+* calibration
+* symmetry
+
+## Open outlines
+* alignment
+* calibration
+* symmetry
+
+## Configuration of landmarks
+* defining landmarks/links
+* alignment
+
+
+
+
+
+
+
+
+
+
+
+
