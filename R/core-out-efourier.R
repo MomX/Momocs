@@ -60,7 +60,7 @@
 #' \eqn{c_{1->n}} harmonic coefficients.} \item{dn }{\code{vector} of
 #' \eqn{d_{1->n}} harmonic coefficients.} \item{ao }{\code{ao} Harmonic
 #' coefficient.} \item{co }{\code{co} Harmonic coefficient.}
-#' @seealso \link{efourier.i} for the reverse operation and \link{eFourier} the
+#' @seealso \link{efourier_i} for the reverse operation and \link{eFourier} the
 #' method for \code{Out} objects. \link{Ptolemy} for an implementation of the
 #' Ptolemaic ellipses graph sometimes used to illustrate this approach.
 #' \link{rfourier}, \link{tfourier} for the other members
@@ -77,12 +77,12 @@
 #' coo_plot(coo)
 #' ef <- efourier(coo, 12)
 #' ef
-#' efi <- efourier.i(ef)
+#' efi <- efourier_i(ef)
 #' coo_draw(efi, border='red', col=NA)
 #' @export
 efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
     coo <- coo_check(coo)
-    if (is.closed(coo)) 
+    if (is_closed(coo)) 
         coo <- coo_unclose(coo)
     nr <- nrow(coo)
     if (missing(nb.h)) {
@@ -134,7 +134,7 @@ efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
 
 #' Inverse elliptical Fourier transform
 #' 
-#' \code{efourier.i} uses the inverse elliptical Fourier transformation to
+#' \code{efourier_i} uses the inverse elliptical Fourier transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
 #' obtained computed with \link{efourier}.
 #' 
@@ -147,7 +147,7 @@ efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' @param nb.pts \code{integer}. The number of points to calculate.
 #' @return A matrix of (x; y) coordinates.
 #' @seealso \link{efourier} for the reverse operation. \link{l2m},
-#' \link{coeff.split} may be useful.
+#' \link{coeff_split} may be useful.
 #' @note Directly borrowed for Claude (2008), and also called \code{iefourier} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
@@ -160,10 +160,10 @@ efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' coo_plot(coo)
 #' ef  <- efourier(coo, 12)
 #' ef
-#' efi <- efourier.i(ef)
+#' efi <- efourier_i(ef)
 #' coo_draw(efi, border='red', col=NA)
 #' @export
-efourier.i <- function(ef, nb.h, nb.pts = 120) {
+efourier_i <- function(ef, nb.h, nb.pts = 120) {
     # if (any(names(ef) != c('an', 'bn', 'cn', 'dn'))) { stop('a
     # list containing 'an', 'bn', 'cn' and 'dn' harmonic
     # coefficients must be provided')}
@@ -196,7 +196,7 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 
 #' Normalizes harmonic coefficients.
 #' 
-#' \code{efourier.norm} normalizes Fourier coefficients for rotation,
+#' \code{efourier_norm} normalizes Fourier coefficients for rotation,
 #' tranlation, size and orientation of the first ellipse.
 #' 
 #' See \link{efourier} for the mathematical background of the normalization.
@@ -231,7 +231,7 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' \item \code{co} co Harmonic coefficient
 #' \item \code{lnef} a list with A, B, C and D concatenated in a vector.
 #' }
-#' @seealso \link{efourier} and \link{efourier.i}. Also \link{eFourier} for
+#' @seealso \link{efourier} and \link{efourier_i}. Also \link{eFourier} for
 #' normalizing harmonic coefficients when calculating it for \code{Out}
 #' objects.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
@@ -243,12 +243,12 @@ efourier.i <- function(ef, nb.h, nb.pts = 120) {
 #' @examples
 #' data(bot)
 #' q <- efourier(bot[1], 24)
-#' efourier.i(q) # equivalent to efourier.shape(q$an, q$bn, q$cn, q$dn)
-#' efourier.norm(q)
-#' efourier.shape(nb.h=5, alpha=1.2)
-#' efourier.shape(nb.h=12, alpha=0.9)
+#' efourier_i(q) # equivalent to efourier_shape(q$an, q$bn, q$cn, q$dn)
+#' efourier_norm(q)
+#' efourier_shape(nb.h=5, alpha=1.2)
+#' efourier_shape(nb.h=12, alpha=0.9)
 #' @export
-efourier.norm <- function(ef, start = FALSE) {
+efourier_norm <- function(ef, start = FALSE) {
     A1 <- ef$an[1]
     B1 <- ef$bn[1]
     C1 <- ef$cn[1]
@@ -296,11 +296,11 @@ efourier.norm <- function(ef, start = FALSE) {
 
 #' Calculates and draw 'efourier' shapes.
 #' 
-#' \code{efourier.shape} calculates a 'Fourier elliptical shape' given Fourier
+#' \code{efourier_shape} calculates a 'Fourier elliptical shape' given Fourier
 #' coefficients (see \code{Details}) or can generate some 'efourier' shapes.
 #' Mainly intended to generate shapes and/or to understand how efourier works.
 #' 
-#' \code{efourier.shape} can be used by specifying \code{nb.h} and
+#' \code{efourier_shape} can be used by specifying \code{nb.h} and
 #' \code{alpha}. The coefficients are then sampled in an uniform distribution
 #' \eqn{(-\pi ; \pi)} and this amplitude is then divided by
 #' \eqn{harmonicrank^alpha}. If \code{alpha} is lower than 1, consecutive
@@ -326,7 +326,7 @@ efourier.norm <- function(ef, start = FALSE) {
 #'  \item \code{x} \code{vector} of x-coordinates
 #'  \item \code{y} \code{vector} of y-coordinates.
 #'  }
-#' @seealso \link{efourier.i}, \link{rfourier.shape}, \link{tfourier.shape}.
+#' @seealso \link{efourier_i}, \link{rfourier_shape}, \link{tfourier_shape}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' 
@@ -337,13 +337,13 @@ efourier.norm <- function(ef, start = FALSE) {
 #' 
 #' data(bot)
 #' ef <- efourier(bot[1], 24)
-#' efourier.shape(ef$an, ef$bn, ef$cn, ef$dn) # equivalent to efourier.i(ef)
-#' efourier.shape() # is autonomous
+#' efourier_shape(ef$an, ef$bn, ef$cn, ef$dn) # equivalent to efourier_i(ef)
+#' efourier_shape() # is autonomous
 #' 
 #' panel(Out(a2l(replicate(100, 
-#' efourier.shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
+#' efourier_shape(nb.h=6, alpha=2.5, plot=FALSE))))) # Bubble family
 #' @export
-efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60, 
+efourier_shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60, 
     alpha = 2, plot = TRUE) {
     if (missing(nb.h) & missing(an)) 
         nb.h <- 3
@@ -358,7 +358,7 @@ efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60,
     if (missing(dn)) 
         dn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
     ef <- list(an = an, bn = bn, cn = cn, dn = dn, ao = 0, co = 0)
-    shp <- efourier.i(ef, nb.h = nb.h, nb.pts = nb.pts)
+    shp <- efourier_i(ef, nb.h = nb.h, nb.pts = nb.pts)
     if (plot) 
         coo_plot(shp)
     return(shp)
@@ -384,12 +384,12 @@ efourier.shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60,
 # of the elliptical Fourier #' analysis and \link{Ptolemy}
 # for an illustration of the first #' ellipse/harmonic
 # defining the shape 'amplitude'.  #' @keywords eFourier #'
-# @examples #' shp <- efourier.shape() #' plot(shp,
+# @examples #' shp <- efourier_shape() #' plot(shp,
 # xlim=c(-20, 20), asp=1, type='l') #' shp.coe <-
 # efourier(shp, 12) #' amps <- seq(0.2, 2, 0.2) #' cols <-
-# col.summer(length(amps)) #' for (i in seq(along=amps)) { #'
+# col_summer(length(amps)) #' for (i in seq(along=amps)) { #'
 # shp.coe2 <- ef.amplify(shp.coe, amp=amps[i]) #' shp2 <-
-# efourier.i(shp.coe2) #' lines(shp2, col=cols[i])} #'
+# efourier_i(shp.coe2) #' lines(shp2, col=cols[i])} #'
 # @export ef.amplify <- function(ef, amp=rep(0.5, 4)){ if
 # (length(amp)==1) amp <- rep(amp, 4) ef$an <- ef$an*amp[1]
 # ef$bn <- ef$bn*amp[2] ef$cn <- ef$cn*amp[3] ef$dn <-

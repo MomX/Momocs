@@ -23,26 +23,26 @@
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
-#' clust(bot.f)
-#' bot.c <- clust(bot.f, 'type', cex=0.7)
+#' CLUST(bot.f)
+#' bot.c <- CLUST(bot.f, 'type', cex=0.7)
 #' #bot.c
 #' 
 #' data(olea)
 #' olea.VL <- subset(olea, view=='VL')
 #' op <- rawPolynomials(olea.VL, 5)
-#' clust(op, 1, type='cladogram', palette=col.autumn, cex=0.5)
+#' CLUST(op, 1, type='cladogram', palette=col_autumn, cex=0.5)
 #' 
 #' data(wings)
 #' wp <- fgProcrustes(wings)
-#' clust(wp, 1)
+#' CLUST(wp, 1)
 
 #' @export
-clust <- function(x, fac, method, type, palette, ...) {
+CLUST <- function(x, fac, method, type, palette, ...) {
     UseMethod("clust")
 }
 #' @export
-clust.Coe <- function(x, fac, method = "euclidean", type = "fan", 
-    palette = col.summer, ...) {
+CLUST.Coe <- function(x, fac, method = "euclidean", type = "fan", 
+    palette = col_summer, ...) {
     Coe <- x
     if (missing(fac)) {
         cols <- rep("black", nrow(Coe$coe))
@@ -61,8 +61,8 @@ clust.Coe <- function(x, fac, method = "euclidean", type = "fan",
 }
 
 #' @export
-clust.PCA <- function(x, fac, method = "euclidean", type = "fan", 
-                      palette = col.summer, ...) {
+CLUST.PCA <- function(x, fac, method = "euclidean", type = "fan", 
+                      palette = col_summer, ...) {
   if (missing(fac)) {
     cols <- rep("black", nrow(x$x))
   } else {

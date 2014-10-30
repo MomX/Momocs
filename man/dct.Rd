@@ -36,18 +36,18 @@ o <- coo_bookstein(o)
 coo_plot(o)
 o.dct <- dct(o, nb.h=12)
 o.dct
-o.i <- dct.i(o.dct)
+o.i <- dct_i(o.dct)
 o.i <- coo_bookstein(o.i)
 coo_draw(o.i, border='red')
 
-#future hqual
+#future cal_v
 o <- olea[1]
 h.range <- 2:13
 coo <- list()
 for (i in seq(along=h.range)){
-coo[[i]] <- dct.i(dct(o, nb.h=h.range[i]))}
+coo[[i]] <- dct_i(dct(o, nb.h=h.range[i]))}
 names(coo) <- paste0('h', h.range)
-panel(Opn(coo), borders=col.india(12), names=TRUE)
+panel(Opn(coo), borders=col_india(12), names=TRUE)
 title('Discrete Cosine Transforms')
 }
 \references{

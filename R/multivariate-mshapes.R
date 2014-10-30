@@ -24,7 +24,7 @@
 #' ms <- ms$shp
 #' coo_plot(ms$beer)
 #' coo_draw(ms$whisky, border='forestgreen')
-#' tps.arr(ms$whisky, ms$beer) #etc.
+#' tps_arr(ms$whisky, ms$beer) #etc.
 #' 
 #' data(olea)
 #' op <- rawPolynomials(subset(olea, view=='VL'), 5)
@@ -58,8 +58,8 @@ mshapes.OutCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")
         coe.mshape <- apply(OutCoe$coe, 2, FUN)
-        xf <- coeff.split(coe.mshape, nb.h, 4)
-        return(efourier.i(xf, nb.pts = nb.pts))
+        xf <- coeff_split(coe.mshape, nb.h, 4)
+        return(efourier_i(xf, nb.pts = nb.pts))
     }
     
     f <- OutCoe$fac[, fac]
@@ -73,8 +73,8 @@ mshapes.OutCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
             coe.i <- apply(coe.i, 2, FUN)
         }
         coe[i, ] <- coe.i
-        xf <- coeff.split(cs = coe.i, nb.h = nb.h, cph = 4)
-        shp[[i]] <- efourier.i(xf, nb.h = nb.h, nb.pts = nb.pts)
+        xf <- coeff_split(cs = coe.i, nb.h = nb.h, cph = 4)
+        shp[[i]] <- efourier_i(xf, nb.h = nb.h, nb.pts = nb.pts)
     }
     names(shp) <- fl
     Coe2 <- OutCoe
@@ -94,7 +94,7 @@ mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
         coe.mshape <- apply(OpnCoe$coe, 2, FUN)
         mod.mshape <- OpnCoe$mod
         mod.mshape$coefficients <- coe.mshape
-        return(polynomials.i(mod.mshape))
+        return(polynomials_i(mod.mshape))
     }
     
     f <- OpnCoe$fac[, fac]
@@ -110,7 +110,7 @@ mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
         }
         mod.mshape$coeff <- coe.i
         coe[i, ] <- coe.i
-        shp[[i]] <- polynomials.i(mod.mshape)
+        shp[[i]] <- polynomials_i(mod.mshape)
     }
     names(shp) <- fl
     Coe2 <- OpnCoe

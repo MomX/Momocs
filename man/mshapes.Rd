@@ -44,7 +44,7 @@ class(ms$Coe)
 ms <- ms$shp
 coo_plot(ms$beer)
 coo_draw(ms$whisky, border='forestgreen')
-tps.arr(ms$whisky, ms$beer) #etc.
+tps_arr(ms$whisky, ms$beer) #etc.
 
 data(olea)
 op <- rawPolynomials(subset(olea, view=='VL'), 5)

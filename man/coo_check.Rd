@@ -21,7 +21,7 @@ Returns a matrix of coordinates, when passed with either a list or a \code{matri
 #coo_check(list(x=1:5, y=6:10))
 }
 \seealso{
-\link{ldk.check}
+\link{ldk_check}
 }
 \keyword{ShapeUtilities}
 

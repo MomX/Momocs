@@ -41,7 +41,7 @@ bot.m
 panel(bot.m)
 }
 \seealso{
-\link{mutate}
+\link{breed}
 }
 \keyword{Coe}
 

@@ -12,7 +12,7 @@ eFourier(Out, nb.h, smooth.it, norm, start)
 
 \item{smooth.it}{the number of smoothing iterations to perform}
 
-\item{norm}{whether to normalize the coefficients using \link{efourier.norm}}
+\item{norm}{whether to normalize the coefficients using \link{efourier_norm}}
 
 \item{start}{logical whether to consider the first point as homologous}
 }
@@ -58,6 +58,6 @@ data(bot)
 eFourier(bot, 12)
 }
 \seealso{
-\link{efourier}, \link{efourier.norm}
+\link{efourier}, \link{efourier_norm}
 }
 

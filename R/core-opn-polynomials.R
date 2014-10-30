@@ -20,7 +20,7 @@
 #'  \item \code{mod} the raw lm model
 #' }
 #' @note Orthogonal polynomials are sometimes called Legendre's polynomials.
-#' @seealso \link{polynomials.i} and \link{rawPolynomials} and \link{orthoPolynomials} for methods
+#' @seealso \link{polynomials_i} and \link{rawPolynomials} and \link{orthoPolynomials} for methods
 #' on \link{Opn} objects.
 #' @keywords Polynomials
 #' @examples
@@ -29,7 +29,7 @@
 #' op <- polynomials(o, degree=4)
 #' op
 #' # shape reconstruction
-#' opi <- polynomials.i(op)
+#' opi <- polynomials_i(op)
 #' lines(opi, col='red')
 #' # R2 for degree 1 to 10
 #' r <- numeric()
@@ -65,21 +65,21 @@ polynomials <- function(coo, degree, ortho = TRUE) {
 #' o <- olea[5]
 #' coo_plot(o)
 #' for (i in 2:7){
-#' x <- polynomials.i(polynomials(o, i, ortho=TRUE))
-#' coo_draw(x, border=col.summer(7)[i], points=FALSE)  }
+#' x <- polynomials_i(polynomials(o, i, ortho=TRUE))
+#' coo_draw(x, border=col_summer(7)[i], points=FALSE)  }
 #' data(olea)
 #' o <- olea[1]
 #' op <- polynomials(o, degree=4)
 #' op
 #' # shape reconstruction
-#' opi <- polynomials.i(op)
+#' opi <- polynomials_i(op)
 #' lines(opi, col='red')
 #' # R2 for degree 1 to 10
 #' r <- numeric()
 #' for (i in 1:10) { r[i] <- polynomials(o, degree=i)$r2 }
 #' plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 #' @export
-polynomials.i <- function(pol, nb.pts = 120, reregister = TRUE) {
+polynomials_i <- function(pol, nb.pts = 120, reregister = TRUE) {
     x.new <- seq(pol$baseline1[1], pol$baseline2[1], length = nb.pts)
     degree <- length(pol$coeff) - 1
     if (pol$ortho) {

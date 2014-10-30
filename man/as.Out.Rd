@@ -18,7 +18,7 @@ an \link{Out} object.
 \description{
 Uses the \code{$method} to do the inverse corresponding function. For instance,
 an \link{OutCoe} object obtained with \link{eFourier}, will be converted to an \link{Out}
-object (outlines from harmonic coefficients), using \link{efourier.i}.
+object (outlines from harmonic coefficients), using \link{efourier_i}.
 }
 \details{
 Note that the 'positionnal' coefficients (\code{ao} and \code{co} if any) are lost, so for a proper

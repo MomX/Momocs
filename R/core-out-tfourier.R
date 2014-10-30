@@ -38,7 +38,7 @@
 #' }
 #' @seealso \link{tFourier} for analysis on \link{Out} objects. 
 #' \link{efourier}, \link{rfourier} for the other members of the
-#' Fourier's family. \link{tfourier.shape} to play around with this approach.
+#' Fourier's family. \link{tfourier_shape} to play around with this approach.
 #' @note Directly borrowed for Claude (2008), and called \code{fourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
@@ -52,9 +52,9 @@
 #' coo_plot(coo)
 #' tf  <- tfourier(coo, 12)
 #' tf
-#' tfi <- tfourier.i(tf)
+#' tfi <- tfourier_i(tf)
 #' coo_draw(tfi, border='red', col=NA) # the outline is not closed...
-#' coo_draw(tfourier.i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
+#' coo_draw(tfourier_i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
 #' @export
 tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
     verbose = TRUE) {
@@ -65,7 +65,7 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
     if (is.list(coo)) {
         coo <- l2m(coo)
     }
-    if (is.closed(coo)) {
+    if (is_closed(coo)) {
         coo <- coo_unclose(coo)
     }
     if (nb.h * 2 > nrow(coo)) {
@@ -110,7 +110,7 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 
 #' Inverse tangent angle Fourier transform
 #' 
-#' \code{tfourier.i} uses the inverse tangent angle Fourier transformation to
+#' \code{tfourier_i} uses the inverse tangent angle Fourier transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
 #' obtained computed with \link{tfourier}.
 #' 
@@ -131,7 +131,7 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' \item{phi }{\code{vector} of interpolated changes on the tangent angle.}
 #' \item{angle }{\code{vector} of position on the perimeter (in radians).}
 #' @seealso \link{tfourier} for the reverse operation and also
-#' \code{tfourier.shape}. \link{tFourier}. \link{l2m}, \link{coeff.split} may be useful.
+#' \code{tfourier_shape}. \link{tFourier}. \link{l2m}, \link{coeff_split} may be useful.
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
@@ -142,9 +142,9 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' @examples
 #' data(bot)
 #' tfourier(bot[1], 24)
-#' tfourier.shape()
+#' tfourier_shape()
 #' @export
-tfourier.i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE, 
+tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE, 
     rescale = TRUE, perim = 2 * pi, thetao = 0) {
     if (!all(c("an", "bn") %in% names(tf))) {
         stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")
@@ -196,11 +196,11 @@ tfourier.i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 
 #' Calculates and draws 'tfourier' shapes.
 #' 
-#' \code{tfourier.shape} calculates a 'Fourier tangent angle shape' given
+#' \code{tfourier_shape} calculates a 'Fourier tangent angle shape' given
 #' Fourier coefficients (see \code{Details}) or can generate some 'tfourier'
 #' shapes.
 #' 
-#' \code{tfourier.shape} can be used by specifying \code{nb.h} and
+#' \code{tfourier_shape} can be used by specifying \code{nb.h} and
 #' \code{alpha}. The coefficients are then sampled in an uniform distribution
 #' \eqn{(-\pi ; \pi)} and this amplitude is then divided by
 #' \eqn{harmonicrank^alpha}. If \code{alpha} is lower than 1, consecutive
@@ -219,20 +219,20 @@ tfourier.i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
 #' @return A matrix of (x; y) coordinates.
-#' @seealso \link{tfourier.i}, \link{tfourier}, link{tFourier}.
+#' @seealso \link{tfourier_i}, \link{tfourier}, link{tFourier}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' @keywords tFourier
 #' @examples
 #' data(bot)
 #' tf <- tfourier(bot[1], 24)
-#' tfourier.shape(tf$an, tf$bn) # equivalent to rfourier.i(rf)
-#' tfourier.shape()
-#' tfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
+#' tfourier_shape(tf$an, tf$bn) # equivalent to rfourier_i(rf)
+#' tfourier_shape()
+#' tfourier_shape(nb.h=6, alpha=0.4, nb.pts=500)
 #' panel(Out(a2l(replicate(100,
-#' coo_force2close(tfourier.shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
+#' coo_force2close(tfourier_shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
 #' @export
-tfourier.shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80, 
+tfourier_shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80, 
     alpha = 2, plot = TRUE) {
     if (missing(nb.h) & missing(an)) 
         nb.h <- 1
@@ -243,7 +243,7 @@ tfourier.shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80,
     if (missing(bn)) 
         bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
     tf <- list(an = an, bn = bn, ao = ao)
-    shp <- tfourier.i(tf, nb.h = nb.h, nb.pts = nb.pts)
+    shp <- tfourier_i(tf, nb.h = nb.h, nb.pts = nb.pts)
     if (plot) 
         coo_plot(shp)
     return(shp)

@@ -1,4 +1,4 @@
-##### Manova methods --------------------------------------
+##### MANOVA methods --------------------------------------
 
 # would need a good review. # todo
 
@@ -7,13 +7,13 @@
 #' Performs multivariate analysis of variance on \link{PCA} objects and on \link{Coe} objects.
 #'
 #' For outlines, checks if the matrix of coefficients is of full rank, and if not removes the
-#' higher order harmonics (for Out objects). If OutCoe objects have been normalized, the first harmonic will be removed with a message. If \link{removeAsymmetric} or \link{removeSymmetric}
+#' higher order harmonics (for Out objects). If OutCoe objects have been normalized, the first harmonic will be removed with a message. If \link{rm_Asym} or \link{rm_Sym}
 #' have been used on OutCoe object, the zero-ed harmonics will be removed with a message.
 #' 
 #' Overall it is probably a better idea to work on the PCA scores
 #' (and it should ultimately be the same results).
-#' @aliases Manova
-#' @rdname Manova
+#' @aliases MANOVA
+#' @rdname MANOVA
 #' @param x a \link{Coe} object
 #' @param fac a name of a colum in the \code{$fac} slot, or its id
 #' @param test a test for \link{manova} (\code{'Hotelling'} by default)
@@ -23,25 +23,25 @@
 #' @param verbose logical whether to print messages
 #' @return a list of matrices of (x,y) coordinates.
 #' @keywords Multivariate
-#' @seealso \link{ManovaPW}
+#' @seealso \link{MANOVA_PW}
 #' @note Needs a review and should be considered as experimental.
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
-#' Manova(bot.f, 'type')
+#' MANOVA(bot.f, 'type')
 #'
 #' data(olea)
 #' op <- rawPolynomials(olea, 5)
-#' Manova(op, 'domes')
+#' MANOVA(op, 'domes')
 #' @export
-Manova <- function(x, fac, test = "Hotelling", retain, drop,
+MANOVA <- function(x, fac, test = "Hotelling", retain, drop,
                    verbose) {
-  UseMethod("Manova")
+  UseMethod("MANOVA")
 }
 
-#' @rdname Manova
+#' @rdname MANOVA
 #' @export
-Manova.OpnCoe <- function(x, fac, test = "Hotelling", retain,
+MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
                           drop, verbose = TRUE) {
   OpnCoe <- x
   if (length(OpnCoe$method) > 1)
@@ -58,14 +58,14 @@ Manova.OpnCoe <- function(x, fac, test = "Hotelling", retain,
     retain <- ncol(x)
   keep <- (drop + 1):retain
   if (verbose)
-    cat(" * Manova done on:", colnames(x)[keep], "\n")
+    cat(" * MANOVA done on:", colnames(x)[keep], "\n")
   mod <- summary(manova(x[, keep] ~ fac), test = test)
   return(mod)
 }
 
-#' @rdname Manova
+#' @rdname MANOVA
 #' @export
-Manova.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TRUE) {
+MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TRUE) {
   OutCoe <- x
   if (length(OutCoe$method) > 1)
     stop(" * cannot yet be used on combined OutCoe. Do it manually.")
@@ -145,7 +145,7 @@ Manova.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
     }
   }
   
-  harm.sel <- coeff.sel(retain = retain, drop = drop, nb.h = nb.h,
+  harm.sel <- coeff_sel(retain = retain, drop = drop, nb.h = nb.h,
                         cph = cph)
   # cat(retain, drop, nb.h, cph)
   if (verbose)
@@ -154,9 +154,9 @@ Manova.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
   return(mod)
 }
 
-#' @rdname Manova
+#' @rdname MANOVA
 #' @export
-Manova.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = TRUE) {
+MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = TRUE) {
   if (missing(fac))
     stop(" * 'fac' must be provided")
   if (!is.factor(fac)) {
@@ -176,21 +176,21 @@ Manova.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
   return(mod)
 }
 
-# Manova PW -----------------------------------------------
+# MANOVA PW -----------------------------------------------
 
 #' Pairwise Multivariate analyses of variance
 #'
-#' A wrapper for pairwise \link{Manova}s on \link{Coe} objects. Calculates a Manova for every
+#' A wrapper for pairwise \link{MANOVA}s on \link{Coe} objects. Calculates a MANOVA for every
 #' pairwise combination of the factor provided.
 #' @param x a \link{Coe} or a \link{PCA} object
 #' @param fac a name (or its id) of a grouping factor in \code{$fac} or a factor
-#' @param verbose to feed \link{Manova}
+#' @param verbose to feed \link{MANOVA}
 #' @param retain the number of PC axis to retain (1:retain) or the proportion of variance to capture (0.99 par default). 
-#' @param ... more arguments to feed \link{Manova}
+#' @param ... more arguments to feed \link{MANOVA}
 #' @note Needs a review and should be considered as experimental.
 #' If the fac passed has only two levels, there is only pair and it is
-#' equivalent to \link{Manova}. \code{ManovaPW.PCA} works with the regular \link{manova}.
-#' @seealso \link{Manova}, \link{manova}.
+#' equivalent to \link{MANOVA}. \code{MANOVA_PW.PCA} works with the regular \link{manova}.
+#' @seealso \link{MANOVA}, \link{manova}.
 #' @keywords Multivariate
 #' @return a list with the following components is returned (invisibly because $manovas
 #' may be very long, see examples):
@@ -205,25 +205,25 @@ Manova.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
 #' # we create a fake factor with 4 levels
 #' bot$fac$fake <- factor(rep(letters[1:4], each=10))
 #' bot.f <- eFourier(bot, 8)
-#' ManovaPW(bot.f, 'fake') # or ManovaPW(bot.f, 2)
+#' MANOVA_PW(bot.f, 'fake') # or MANOVA_PW(bot.f, 2)
 #'
 #' # an example on open outlines
 #' data(olea)
 #' op <- rawPolynomials(olea)
-#' ManovaPW(op, 'domes')
+#' MANOVA_PW(op, 'domes')
 #' # to get the results
-#' res <- ManovaPW(op, 'domes')
+#' res <- MANOVA_PW(op, 'domes')
 #' res$manovas
 #' res$stars.tab
 #' res$summary
-#' @rdname ManovaPW
+#' @rdname MANOVA_PW
 #' @export
-ManovaPW <- function(x, fac, verbose, ...) {
-  UseMethod("ManovaPW")
+MANOVA_PW <- function(x, fac, verbose, ...) {
+  UseMethod("MANOVA_PW")
 }
-#' @rdname ManovaPW
+#' @rdname MANOVA_PW
 #' @export
-ManovaPW.Coe <- function(x, fac, verbose = FALSE, ...) {
+MANOVA_PW.Coe <- function(x, fac, verbose = FALSE, ...) {
   # preliminaries
   Coe <- x
   fac0 <- fac
@@ -237,16 +237,16 @@ ManovaPW.Coe <- function(x, fac, verbose = FALSE, ...) {
   # we get all combinations, and prepare the loop
   pws <- t(combn(levels(fac), 2))
   n <- nrow(pws)
-  cn <- colnames(Manova(Coe, fac, verbose = FALSE)$stats)
+  cn <- colnames(MANOVA(Coe, fac, verbose = FALSE)$stats)
   res <- matrix(NA, nrow = n, ncol = 6,
                 dimnames = list(paste(pws[, 1], pws[, 2], sep = " - "), cn))
   manovas <- list()
-  # we loop and do all the Manovas
+  # we loop and do all the MANOVAs
   for (i in 1:nrow(pws)) {
     if (verbose)
       cat(pws[i, ], "\n")
     Coe.i <- subset(Coe, fac == pws[i, ])
-    m <- Manova(Coe.i, fac0, verbose = verbose, ...)
+    m <- MANOVA(Coe.i, fac0, verbose = verbose, ...)
     manovas[[i]] <- m
     res[i, ] <- m$stats[1, ]
   }
@@ -276,9 +276,9 @@ ManovaPW.Coe <- function(x, fac, verbose = FALSE, ...) {
   invisible(list(manovas = manovas, summary = res, stars.tab = stars.tab))
 }
 
-#' @rdname ManovaPW
+#' @rdname MANOVA_PW
 #' @export
-ManovaPW.PCA <- function(x, fac, verbose = FALSE, retain=0.99,...) {
+MANOVA_PW.PCA <- function(x, fac, verbose = FALSE, retain=0.99,...) {
   # preliminaries
   PCA <- x
   
@@ -315,7 +315,7 @@ ManovaPW.PCA <- function(x, fac, verbose = FALSE, retain=0.99,...) {
   res <- matrix(NA, nrow = n, ncol = 6,
                 dimnames = list(paste(pws[, 1], pws[, 2], sep = " - "), cn))
   manovas <- list()
-  # we loop and do all the Manovas
+  # we loop and do all the MANOVAs
   for (i in 1:nrow(pws)) {
     x.i   <-   x[fac == pws[i, ], ]
     fac.i <- factor(fac[fac == pws[i, ]])
@@ -352,7 +352,7 @@ ManovaPW.PCA <- function(x, fac, verbose = FALSE, retain=0.99,...) {
 }
 
 
-# todo #' @rdname Manova #' @export Manova.LdkCoe <-
+# todo #' @rdname MANOVA #' @export MANOVA.LdkCoe <-
 # function(x, fac, test='Hotelling', retain, drop){ LdkCoe <-
 # x if (length(LdkCoe$method)>1) stop(' * cannot yet be used
 # on combined OutCoe. Do it manually.') if (missing(fac))
@@ -360,4 +360,4 @@ ManovaPW.PCA <- function(x, fac, verbose = FALSE, retain=0.99,...) {
 # <- LdkCoe$fac[, fac]} x <- LdkCoe$coe mod <-
 # summary(manova(x~fac), test=test) return(mod)}
 
-##### end Manova
+##### end MANOVA

@@ -21,7 +21,7 @@ deformations
 internally but might be useful elsewhere.
 }
 \seealso{
-\link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
+\link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
 \code{tps2d}
 }
 \keyword{ThinPlateSplines}

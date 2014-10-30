@@ -16,11 +16,11 @@
       becomes a "super class" encompassing the three others.
       \item S4 -> S3 OO rewriting. Maybe less orthodox but much more easy to
       understand, code, extend which is probably the most required for Momocs at this step.
+      \item Renaming of functions/methods in a more or less consistent taxonomy
       \item New multivariate methods: \link{Manova} (rewriting), \link{LDA} (new),
       \link{clust} (rewriting), and more to come.
       \item Graphics have been refreshed: \link{panel}, \link{stack}, \link{plot.PCA},
-      \link{plot.LDA} (along with morphospaces handling), the tps family, plus various
-      minor improvements.
+      \link{plot.LDA} (along with morphospaces handling), the tps family, plus various minor improvements.
       \item New datasets (oak, olea, molars, shapes, wings) to play around.
       }
   } % end general

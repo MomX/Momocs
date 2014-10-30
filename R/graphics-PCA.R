@@ -40,9 +40,9 @@
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
-#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
+#' @param conf_ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
 #' @param ellipsesax logical whether to draw ellipse axes
-#' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
+#' @param conf_ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
 #' @param lwd.ellipsesax if yes, one or more numeric for the line widths
 #' @param lty.ellipsesax if yes, the lty with which to draw these axes
 #' @param chull logical whether to draw a convex hull
@@ -74,7 +74,6 @@
 #' of the ade4 R package.
 #' @seealso \link{plot.LDA}
 #' @keywords Multivariate, Graphics
-#' @method plot PCA
 #' @examples
 #' data(bot)
 #' bot.f <- eFourier(bot, 12)
@@ -94,10 +93,11 @@
 #' wpp <- PCA(wp)
 #' wpp
 #' plot(wpp, 1)
+#' @method plot PCA
 #' @export
 plot.PCA <- function(x, fac, xax=1, yax=2,
                      #color choice
-                     points=TRUE, col="#000000", pch=20, cex=0.5, palette=col.solarized,
+                     points=TRUE, col="#000000", pch=20, cex=0.5, palette=col_solarized,
                      #.frame
                      center.origin=FALSE, zoom=1, bg=par("bg"),
                      #.grid
@@ -109,9 +109,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      #stars
                      stars=FALSE,
                      #ellipses
-                     ellipses=FALSE, conf.ellipses=0.5,
+                     ellipses=FALSE, conf_ellipses=0.5,
                      #ellipsesax
-                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
+                     ellipsesax=TRUE, conf_ellipsesax=c(0.5, 0.75, 0.9),
                      lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
                      #convexhulls
                      chull=FALSE, chull.lty=3,
@@ -209,14 +209,14 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
-    .morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+    morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
                     nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                     col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)}
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
-    if (ellipsesax) .ellipsesax(xy, fac, conf.ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
-    if (ellipses)   .ellipses(xy, fac, conf.ellipses, col.groups) #+conf
+    if (ellipsesax) .ellipsesax(xy, fac, conf_ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
+    if (ellipses)   .ellipses(xy, fac, conf_ellipses, col.groups) #+conf
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
     if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
                                         cex=cex.labelsgroups, rect=rect.labelsgroups,
@@ -279,7 +279,7 @@ plot3.PCA <- function(PCA,  ... ){
 
 #' Boxplot on PCA objects
 #'
-#' @method boxplot PCA
+# @method boxplot PCA
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
 #' @param fac factor, or a name or the column id from the $fac slot
 #' @param nax the range of PC axis
@@ -295,7 +295,7 @@ plot3.PCA <- function(PCA,  ... ){
 #' bot.p <- PCA(bot.f)
 #' boxplot(bot.p, 1)
 #' @export
-boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col.qual,
+boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col_qual,
                         fixed.axes=TRUE, center.origin=TRUE,
                         cex.legend=1, ...){
   xy <- x$x[, nax]
@@ -365,7 +365,7 @@ PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
 PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
                           main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
   # we prepare the graphical windows
-  # same paradigm as coo_list.panel
+  # same paradigm as coo_listpanel
   x <- PCA
   xs <- 1:length(sd.r) - 0.5
   ys <- rev(1:length(nax) - 0.5)
@@ -375,12 +375,12 @@ PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
   axis(1, at = xs, labels = sd.r)
   axis(2, at = ys, labels = nax, las=1)
   # we loop to reconstruct shapes
-  # we make it through .morphospacePCA + plot=FALSE
+  # we make it through morphospacePCA + plot=FALSE
   shp <- list()
   for (i in seq(along=nax)){
     sd.i <- sd(x$x[, nax[i]])
     pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
-    shp.i <- .morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
+    shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
     shp <- c(shp, shp.i)}
   # we template the size of the shapes
   shp <- lapply(shp, coo_template, 0.95)

@@ -51,7 +51,7 @@ Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
 #'
 #' Uses the \code{$method} to do the inverse corresponding function. For instance,
 #' an \link{OutCoe} object obtained with \link{eFourier}, will be converted to an \link{Out}
-#' object (outlines from harmonic coefficients), using \link{efourier.i}.
+#' object (outlines from harmonic coefficients), using \link{efourier_i}.
 #'
 #' Note that the 'positionnal' coefficients (\code{ao} and \code{co} if any) are lost, so for a proper
 #' comparison between a raw \code{Out} and a \code{Out} from \code{Out -> OutCoe -> Out},
@@ -86,14 +86,14 @@ as.Out <- function(object, OutCoe, nb.pts=120){
     stop(" * '$method' is missing. Not a regular Coe object.")
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-    method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
+    method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)
     cph      <- switch(p, 4, 2, 2)
   }
   coe <- object$coe
   nb.h <- ncol(coe)/cph
   coo <- list()
   for (i in 1:nrow(coe)){
-    ef.i <- coeff.split(coe[i, ], nb.h = nb.h, cph = cph)
+    ef.i <- coeff_split(coe[i, ], nb.h = nb.h, cph = cph)
     coo[[i]] <- method.i(ef.i, nb.pts = nb.pts)}
   names(coo) <- rownames(coe)
   return(Out(coo, fac=object$fac))}
@@ -108,7 +108,7 @@ print.Out <- function(x, ...) {
   cat(rep("-", 20), "\n", sep = "")
   coo_nb <- length(Out)
   coo_len <- sapply(Out$coo, nrow)
-  coo_closed <- sapply(Out$coo, is.closed)
+  coo_closed <- sapply(Out$coo, is_closed)
   #     # one random outline
   #     eg <- sample(length(Out$coo), 1)
   #     coo_eg <- Out$coo[[eg]]
@@ -154,11 +154,11 @@ print.Out <- function(x, ...) {
 #' Calculate and displays reconstructed shapes using a
 #' range of harmonic number.
 #'
-#' @aliases hqual
-#' @param Out the \code{Out} object on which to hqual
+#' @aliases cal_v
+#' @param Out the \code{Out} object on which to cal_v
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
-#' @param id the shape on which to perform hqual
-#' @param harm.range vector of harmonics on which to perform hqual
+#' @param id the shape on which to perform cal_v
+#' @param harm.range vector of harmonics on which to perform cal_v
 #' @param smooth.it numeric, number of smoothing iterations
 #' @param scale logical whether to scale the shape
 #' @param center logical whether to center the shape
@@ -173,28 +173,28 @@ print.Out <- function(x, ...) {
 #' @keywords Out
 #' @examples
 #' data(bot)
-#' hqual(bot)
+#' cal_v(bot)
 #' @export
-hqual <- function(Out, method = c("efourier", "rfourier", "tfourier"),
+cal_v <- function(Out, method = c("efourier", "rfourier", "tfourier"),
                   id, harm.range = c(1, 2, 4, 8, 16, 32), smooth.it = 0, scale = TRUE,
                   center = TRUE, align = TRUE, plot.method = c("panel", "stack")[1],
-                  legend = TRUE, legend.title = "Nb of harmonics", palette = col.india,
+                  legend = TRUE, legend.title = "Nb of harmonics", palette = col_india,
                   shp.col = NA, shp.border = "#1A1A1A", ...) {
-  UseMethod("hqual")
+  UseMethod("cal_v")
 }
 #' @export
-hqual.Out <- function(Out, method = c("efourier", "rfourier",
+cal_v.Out <- function(Out, method = c("efourier", "rfourier",
                                       "tfourier"), id, harm.range = c(1, 2, 4, 8, 16, 32), smooth.it = 0,
                       scale = TRUE, center = TRUE, align = TRUE, plot.method = c("panel",
                                                                                  "stack")[1], legend = TRUE, legend.title = "Nb of harmonics",
-                      palette = col.india, shp.col = NA, shp.border = "#1A1A1A",
+                      palette = col_india, shp.col = NA, shp.border = "#1A1A1A",
                       ...) {
   if (missing(id))
     id <- sample(length(Out$coo), 1)
   if (missing(method)) {
     cat(" * Method not provided. efourier is used.\n")
     method <- efourier
-    method.i <- efourier.i
+    method.i <- efourier_i
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier",
                                    "tfourier"))
@@ -202,7 +202,7 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
       warning(" * Unvalid method. efourier is used.\n")
     } else {
       method <- switch(p, efourier, rfourier, tfourier)
-      method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
+      method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)
     }
   }
   
@@ -243,7 +243,7 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
   } else {
     if (plot.method == "panel") {
       # par(oma=c(1, 1, 3, 0))
-      pos <- coo_list.panel(res, cols = cols)
+      pos <- coo_listpanel(res, cols = cols)
       if (legend) {
         text(x = pos[, 1], y = pos[, 2], as.character(harm.range))
       }
@@ -257,17 +257,17 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
 #' Calculate deviations from original and reconstructed shapes using a
 #' range of harmonic number.
 #'
-#' @aliases hquant
-#' @param Coo the \code{Out} object on which to hquant
+#' @aliases cal_d
+#' @param Coo the \code{Out} object on which to cal_d
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
-#' @param id the shape on which to perform hquant
-#' @param harm.range vector of harmonics on which to perform hquant
+#' @param id the shape on which to perform cal_d
+#' @param harm.range vector of harmonics on which to perform cal_d
 #' @param smooth.it numeric, number of smoothing iterations
 #' @param norm.centsize logical whether to normalize deviation by the centroid size
-#' @param dist.method a method such as \link{edm.nearest} to calculate deviations
+#' @param dist.method a method such as \link{edm_nearest} to calculate deviations
 #' @param dist.nbpts numeric the number of points to use for deviations calculations
 #' @param plot logical whether to plot the results
-#' @param dev.plot logical whether to plot deviations
+#' @param plot_dev logical whether to plot deviations
 #' @param title a title for the plot
 #' @param legend logical whether to plot a legend
 #' @param legend.title if TRUE above, its title
@@ -276,28 +276,28 @@ hqual.Out <- function(Out, method = c("efourier", "rfourier",
 #' @keywords Out
 #' @examples
 #' data(bot)
-#' hqual(bot)
+#' cal_v(bot)
 #' @export
-hquant <- function(Coo, method = c("efourier", "rfourier", "tfourier"),
+cal_d <- function(Coo, method = c("efourier", "rfourier", "tfourier"),
                    id = 1, harm.range = seq(4, 20, 4), smooth.it = 0, norm.centsize = TRUE,
-                   dist.method = edm.nearest, dist.nbpts = 120, plot = TRUE,
-                   dev.plot = TRUE, title = "Deviations along the outline",
-                   legend = TRUE, legend.title = "Nb of harmonics", palette = col.summer,
+                   dist.method = edm_nearest, dist.nbpts = 120, plot = TRUE,
+                   plot_dev = TRUE, title = "Deviations along the outline",
+                   legend = TRUE, legend.title = "Nb of harmonics", palette = col_summer,
                    lineat.y = c(0.5, 0.1, 0.01)) {
-  UseMethod("hquant")
+  UseMethod("cal_d")
 }
 
 #' @export
-hquant.Out <- function(Coo, method = c("efourier", "rfourier",
+cal_d.Out <- function(Coo, method = c("efourier", "rfourier",
                                        "tfourier"), id = 1, harm.range = seq(4, 20, 4), smooth.it = 0,
-                       norm.centsize = TRUE, dist.method = edm.nearest, dist.nbpts = 120,
-                       plot = TRUE, dev.plot = TRUE, title = "Deviations along the outline",
-                       legend = TRUE, legend.title = "Nb of harmonics", palette = col.summer,
+                       norm.centsize = TRUE, dist.method = edm_nearest, dist.nbpts = 120,
+                       plot = TRUE, plot_dev = TRUE, title = "Deviations along the outline",
+                       legend = TRUE, legend.title = "Nb of harmonics", palette = col_summer,
                        lineat.y = c(0.5, 0.1, 0.01)) {
   if (missing(method)) {
     cat("  * Method not provided. efourier is used.\n")
     method <- efourier
-    method.i <- efourier.i
+    method.i <- efourier_i
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier",
                                    "tfourier"))
@@ -305,7 +305,7 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
       warning("Unvalid method. efourier is used.")
     } else {
       method <- switch(p, efourier, rfourier, tfourier)
-      method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)
+      method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)
     }
   }
   # We define the highest possible nb.h along Coo@coo[id]
@@ -381,9 +381,9 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
     axis(2)
     abline(h = lineat.y, lty = 2, col = "grey90")
     # if you want deviations, here they are
-    if (dev.plot) {
+    if (plot_dev) {
       if (nk > 1) {
-        dev.plot(m, d, cols = cols)
+        plot_dev(m, d, cols = cols)
       } else {
         for (i in 1:nr) {
           lines(1:ncol(m), m[i, ], col = cols[i])
@@ -411,10 +411,10 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
 #' the first harmonic or not, and based and the maximum possible number
 #' of harmonics on the \code{Out} object.
 #'
-#' @aliases hpow
-#' @param Out the \code{Out} object on which to hpow
+#' @aliases cal_p
+#' @param Out the \code{Out} object on which to cal_p
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
-#' @param id the shape on which to perform hpow. All of them by default
+#' @param id the shape on which to perform cal_p. All of them by default
 #' @param nb.h numeric the maximum number of harmonic
 #' @param drop numeric the number of harmonics to drop for the cumulative sum
 #' @param probs a vector of quantiles to calculate, to be passed to \link{quantile}
@@ -441,21 +441,21 @@ hquant.Out <- function(Coo, method = c("efourier", "rfourier",
 #' @keywords Out
 #' @examples
 #' data(bot)
-#' hpow(bot)
-#' # if you want to do eFourier with 99% hpow in one step
-#' eFourier(bot, nb.h=hpow(bot, "efourier", plot=FALSE)$minh["99%"])
+#' cal_p(bot)
+#' # if you want to do eFourier with 99% cal_p in one step
+#' eFourier(bot, nb.h=cal_p(bot, "efourier", plot=FALSE)$minh["99%"])
 #' @export
-hpow <- function(Out, method = "efourier", id = 1:length(Out),
+cal_p <- function(Out, method = "efourier", id = 1:length(Out),
                  nb.h = 24, drop = 1, probs=seq(0, 1, 0.25),
                  smooth.it = 0, plot = TRUE,
                  xlim=c(drop+1, nb.h), ylim=c(0, 100),
                  title = "Fourier coefficients power spectrum",
                  lineat.y = c(90, 95, 99, 99.9), verbose=TRUE) {
-  UseMethod("hpow")
+  UseMethod("cal_p")
 }
 
 #' @export
-hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
+cal_p.Out <- function(Out, method = "efourier", id = 1:length(Out),
                      nb.h, drop = 1, probs=seq(0, 1, 0.25),
                      smooth.it = 0, plot = TRUE,
                      xlim=c(drop+1, nb.h), ylim=c(0, 100),
@@ -464,7 +464,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
   
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) cat(" * Method not provided. hpow | efourier is used.\n")
+    if (verbose) cat(" * Method not provided. cal_p | efourier is used.\n")
     method <- efourier
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
@@ -485,7 +485,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
   x <- (drop + 1):nb.h
   for (i in seq(along = id)) {
     xf <- method(Out$coo[[id[i]]], nb.h = nb.h)
-    pow <- harm.pow(xf)[x]
+    pow <- harm_pow(xf)[x]
     res[i, ] <- cumsum(pow)/sum(pow)}
   # we turn in to precentages
   res <- res * 100
@@ -514,7 +514,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
          axes = FALSE)
     axis(1, at = x, line=NA)
     axis(2, las=2, line=NA)
-    #abline(h = lineat.y, lty = 1, col = col.heat(length(lineat.y)))
+    #abline(h = lineat.y, lty = 1, col = col_heat(length(lineat.y)))
     #         lines(x, res[2, ], col="grey50")
     #         segments(x, res[1, ], x, res[3, ])
     
@@ -522,7 +522,7 @@ hpow.Out <- function(Out, method = "efourier", id = 1:length(Out),
       if (missing(x)) x <- 1:ncol(q)
       nq <- floor(nrow(q)/2)
       if (missing(cols.poly)) {
-        cols <- col.grey(nq*2)
+        cols <- col_grey(nq*2)
         cols.poly <- cols[1:nq]
         med.col   <- "#000000"}
       xi <- c(x, rev(x))
@@ -601,7 +601,7 @@ print.OutCoe <- function(x, ...) {
     # lets show some of them for a quick inspection
     cat(" - $coe: 1st harmonic coefficients from random individuals: \n")
     row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
-    col.eg <- coeff.sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
+    col.eg <- coeff_sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
     print(round(OutCoe$coe[row.eg, col.eg], 3))
     cat("etc.\n")
   } else {
@@ -618,7 +618,7 @@ print.OutCoe <- function(x, ...) {
 #' @param Out the \code{\link{Out}} object on which to calculate eft
 #' @param nb.h the number of harmonics to calculate
 #' @param smooth.it the number of smoothing iterations to perform
-#' @param norm whether to normalize the coefficients using \link{efourier.norm}
+#' @param norm whether to normalize the coefficients using \link{efourier_norm}
 #' @param start logical whether to consider the first point as homologous
 #' @details Normalization of coefficients has long been a matter of trouble,
 #' and not only for newcomers. There are two ways of normalizing outlines: the first,
@@ -652,7 +652,7 @@ print.OutCoe <- function(x, ...) {
 #' I will dedicate one vignette to this problem
 #' asap (fall 2014). In the meantime, contact me should you think we could 
 #' solve this with two brains.
-#' @seealso \link{efourier}, \link{efourier.norm}
+#' @seealso \link{efourier}, \link{efourier_norm}
 #' @examples
 #' data(bot)
 #' eFourier(bot, 12)
@@ -685,7 +685,7 @@ eFourier.Out <- function(Out, nb.h, smooth.it = 0, norm = TRUE,
     ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
                    verbose = TRUE)
     if (norm) {
-      ef <- efourier.norm(ef, start = start)
+      ef <- efourier_norm(ef, start = start)
       if (ef$A[1] < 0) {
         ef$A <- (-ef$A)
         ef$B <- (-ef$B)
@@ -810,17 +810,17 @@ tFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
 #' data(bot)
 #' bot <- bot[1:5] # to make it shorter to try
 #' # click on 3 points, 5 times.
-#' # Don't forget to save the object returned by defLandmarks...
-#' bot2 <- defLandmarks(bot, 3)
+#' # Don't forget to save the object returned by def_ldk...
+#' bot2 <- def_ldk(bot, 3)
 #' stack(bot2)
 #' bot2$ldk
 #' }
 #' @export
-defLandmarks <- function(Coo, nb.ldk) {
-  UseMethod("defLandmarks")
+def_ldk <- function(Coo, nb.ldk) {
+  UseMethod("def_ldk")
 }
 #' @export
-defLandmarks.Coo <- function(Coo, nb.ldk) {
+def_ldk.Coo <- function(Coo, nb.ldk) {
   if (missing(nb.ldk))
     stop(" * 'nb.ldk' must be specified.")
   ldk <- list()
@@ -836,19 +836,19 @@ defLandmarks.Coo <- function(Coo, nb.ldk) {
 #' row indices. This methods allows to retrieve the corresponding (x; y) coordinates.
 #' @param Coo a Coo object, either Out or Opn
 #' @return an array of coordinates X (x; y) coordinates X number of shapes.
-#' @seealso \link{defLandmarks}, \link{fgProcrustes}
+#' @seealso \link{def_ldk}, \link{fgProcrustes}
 #' @keywords Out Opn Ldk
 #' @examples
 #' data(hearts)
-#' ldk.h <- getLandmarks(hearts)
+#' ldk.h <- get_ldk(hearts)
 #' stack(Ldk(a2l(ldk.h)))
 #' ldk.h
 #' @export
-getLandmarks <- function(Coo) {
-  UseMethod("getLandmarks")
+get_ldk <- function(Coo) {
+  UseMethod("get_ldk")
 }
 #' @export
-getLandmarks.Out <- function(Coo) {
+get_ldk.Out <- function(Coo) {
   coo <- Coo$coo
   ldk <- Coo$ldk
   ref <- array(NA, dim = c(length(ldk[[1]]), ncol(coo[[1]]),
@@ -859,7 +859,7 @@ getLandmarks.Out <- function(Coo) {
   return(ref)
 }
 #' @export
-getLandmarks.Opn <- getLandmarks.Out
+get_ldk.Opn <- get_ldk.Out
 
 # 6. Out symmetry --------------------------------------------
 
@@ -885,7 +885,7 @@ getLandmarks.Opn <- getLandmarks.Out
 #' Analysis of petal shape variation of Primula sieboldii by elliptic fourier descriptors
 #' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
 #' }
-#' @seealso \link{removeAsymmetric} and \link{removeSymmetric}.
+#' @seealso \link{rm_Asym} and \link{rm_Sym}.
 #' @keywords eFourier
 #' @examples
 #' data(bot)
@@ -916,7 +916,7 @@ symmetry.OutCoe <- function(OutCoe) {
 #' Removes asymmetric and symmetric variation on OutCoe objects
 #'
 #' Only for those obtained with \link{eFourier}, otherwise a message is returned.
-#' \code{removeAsymmetric} sets all B and C coefficients to 0; \code{removeSymmetric} sets
+#' \code{rm_Asym} sets all B and C coefficients to 0; \code{rm_Sym} sets
 #' all A and D coefficients to 0.
 #' @param OutCoe an OutCoe object
 #' @return an OutCoe object
@@ -937,14 +937,14 @@ symmetry.OutCoe <- function(OutCoe) {
 #' @examples
 #' data(bot)
 #' botf <- eFourier(bot, 12)
-#' botSym <- removeAsymmetric(botf)
+#' botSym <- rm_Asym(botf)
 #' boxplot(botSym)
 #' botSymp <- PCA(botSym)
 #' plot(botSymp)
 #' plot(botSymp, amp.shp=5)
 #'
 #' # Asymmetric only
-#' botAsym <- removeSymmetric(botf)
+#' botAsym <- rm_Sym(botf)
 #' boxplot(botAsym)
 #' botAsymp <- PCA(botAsym)
 #' plot(botAsymp)
@@ -952,20 +952,20 @@ symmetry.OutCoe <- function(OutCoe) {
 #' # symmetric (eg its average) for a proper reconstruction. Should only be used like that:
 #' plot(botAsymp, morpho=FALSE)
 #' @keywords eFourier
-#' @rdname removeAsymmetric
-#' @aliases removeSymmetric
+#' @rdname rm_Asym
+#' @aliases rm_Sym
 #' @export
-removeAsymmetric <- function(OutCoe) {
-  UseMethod("removeAsymmetric")
+rm_Asym <- function(OutCoe) {
+  UseMethod("rm_Asym")
 }
-#' @rdname removeAsymmetric
+#' @rdname rm_Asym
 #' @export
-removeAsymmetric.default <- function(OutCoe) {
+rm_Asym.default <- function(OutCoe) {
   cat(" * Can only be applied on OutCoe objects.")
 }
-#' @rdname removeAsymmetric
+#' @rdname rm_Asym
 #' @export
-removeAsymmetric.OutCoe <- function(OutCoe) {
+rm_Asym.OutCoe <- function(OutCoe) {
   if (OutCoe$method != "eFourier")
     stop(" * Can only be applied on OutCoe [eFourier] objects.")
   x <- OutCoe$coe
@@ -975,19 +975,19 @@ removeAsymmetric.OutCoe <- function(OutCoe) {
   return(OutCoe)
 }
 
-#' @rdname removeAsymmetric
+#' @rdname rm_Asym
 #' @export
-removeSymmetric <- function(OutCoe) {
-  UseMethod("removeSymmetric")
+rm_Sym <- function(OutCoe) {
+  UseMethod("rm_Sym")
 }
-#' @rdname removeAsymmetric
+#' @rdname rm_Asym
 #' @export
-removeSymmetric.default <- function(OutCoe) {
+rm_Sym.default <- function(OutCoe) {
   cat(" * Can only be applied on OutCoe objects.")
 }
-#' @rdname removeAsymmetric
+#' @rdname rm_Asym
 #' @export
-removeSymmetric.OutCoe <- function(OutCoe) {
+rm_Sym.OutCoe <- function(OutCoe) {
   if (OutCoe$method != "eFourier")
     stop(" * Can only be applied on OutCoe [eFourier] objects.")
   x <- OutCoe$coe

@@ -21,7 +21,7 @@
 #' bot.f <- eFourier(bot, 24)
 #' boxplot(bot.f)
 #' @export
-boxplot.OutCoe <- function(x, retain, drop, palette = col.gallus, 
+boxplot.OutCoe <- function(x, retain, drop, palette = col_gallus, 
                            title = "Variation of harmonic coefficients", legend = TRUE, 
                            ...) {
   # we deduce and prepare
@@ -33,7 +33,7 @@ boxplot.OutCoe <- function(x, retain, drop, palette = col.gallus,
     retain <- 6
   if (missing(drop)) 
     drop <- 0
-  cs <- coeff.sel(retain = retain, drop = drop, nb.h = nb.h, 
+  cs <- coeff_sel(retain = retain, drop = drop, nb.h = nb.h, 
                   cph = cph)
   range <- (drop + 1):retain
   # we save the old par and prepare the plot
@@ -67,7 +67,7 @@ boxplot.OutCoe <- function(x, retain, drop, palette = col.gallus,
 #' @rdname boxplot.Coe
 #' @keywords Graphics
 #' @export
-boxplot.OpnCoe <- function(x, retain, drop, palette = col.gallus, 
+boxplot.OpnCoe <- function(x, retain, drop, palette = col_gallus, 
                            title = "Variation of polynomials coefficients", ...) {
   # we deduce and prepare OutCoe <- x x <- OutCoe$coe
   x <- x$coe
@@ -100,7 +100,7 @@ boxplot.OpnCoe <- function(x, retain, drop, palette = col.gallus,
 #' Histogram on OutCoe matrices of harmonic coefficients
 #' 
 #' Explores the distribution of harmonic coefficient values
-#' @method hist OutCoe
+# @method hist OutCoe
 #' @param x the \link{OutCoe} object
 #' @param retain numeric the number of harmonics to retain
 #' @param drop numeric the number of harmonics to drop
@@ -114,7 +114,7 @@ boxplot.OpnCoe <- function(x, retain, drop, palette = col.gallus,
 #' bot.f <- eFourier(bot, 24)
 #' hist(bot.f)
 #' @export
-hist.OutCoe <- function(x, retain, drop, palette = col.gallus, 
+hist.OutCoe <- function(x, retain, drop, palette = col_gallus, 
                         title = "Variation of harmonic coefficients", ...) {
   # we deduce and prepare OutCoe <- x x <- OutCoe$coe
   x <- x$coe
@@ -124,7 +124,7 @@ hist.OutCoe <- function(x, retain, drop, palette = col.gallus,
     retain <- 4
   if (missing(drop)) 
     drop <- 0
-  cs <- coeff.sel(retain = retain, drop = drop, nb.h = nb.h, 
+  cs <- coeff_sel(retain = retain, drop = drop, nb.h = nb.h, 
                   cph = cph)
   h.names <- colnames(x)[cs]
   # we save the old par and prepare the plot
@@ -176,7 +176,7 @@ hist.OutCoe <- function(x, retain, drop, palette = col.gallus,
 #' olea.p <- orthoPolynomials(olea, 5)
 #' hist(olea.p)
 #' @export
-hist.OpnCoe <- function(x, retain = 4, drop, palette = col.gallus, 
+hist.OpnCoe <- function(x, retain = 4, drop, palette = col_gallus, 
                         title = "Variation of polynomials coefficients", hist.per.row = 3, 
                         ...) {
   # we deduce and prepare OpnCoe <- x x <- OpnCoe$coe
@@ -254,7 +254,7 @@ hcontrib.OutCoe <- function(Coe,
   p <- pmatch(tolower(x$method), c("efourier", "rfourier", "tfourier"))
   if (is.na(p)) { warning("Unvalid method. efourier is used.")
   } else {
-    method.i <- switch(p, efourier.i, rfourier.i, tfourier.i)}
+    method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)}
   # we deduce the number of coefficient / harmonic, and their number
   cph <- ifelse(p==1, 4, 2)
   nb.h <- ncol(x$coe)/cph
@@ -267,7 +267,7 @@ hcontrib.OutCoe <- function(Coe,
   } else {
     coe <- x$coe[id, ]}
   # we prepare a xf to feed the method.i functions
-  xf <- coeff.split(coe, nb.h, cph)
+  xf <- coeff_split(coe, nb.h, cph)
   # we prepare a neutral amplification factor
   mult <- rep(1, nb.h)
   # the core below

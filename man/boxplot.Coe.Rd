@@ -5,10 +5,10 @@
 \alias{boxplot.OutCoe}
 \title{Boxplot on OutCoe matrices of harmonic coefficients}
 \usage{
-\method{boxplot}{OutCoe}(x, retain, drop, palette = col.gallus,
+\method{boxplot}{OutCoe}(x, retain, drop, palette = col_gallus,
   title = "Variation of harmonic coefficients", legend = TRUE, ...)
 
-\method{boxplot}{OpnCoe}(x, retain, drop, palette = col.gallus,
+\method{boxplot}{OpnCoe}(x, retain, drop, palette = col_gallus,
   title = "Variation of polynomials coefficients", ...)
 }
 \arguments{

@@ -6,7 +6,7 @@
 nqual(Opn, method = c("rawPolynomials", "orthoPolynomials"), id,
   degree.range = c(2, 3, 4, 6, 8, 10), smooth.it = 0, baseline1 = c(-1,
   0), baseline2 = c(1, 0), plot.method = c("panel", "stack")[1],
-  legend = TRUE, legend.title = "Degree", palette = col.india,
+  legend = TRUE, legend.title = "Degree", palette = col_india,
   shp.border = "#1A1A1A")
 }
 \arguments{

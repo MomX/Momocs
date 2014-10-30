@@ -3,7 +3,7 @@
 \alias{boxplot.PCA}
 \title{Boxplot on PCA objects}
 \usage{
-\method{boxplot}{PCA}(x, fac, nax = 1:4, cols, palette = col.qual,
+\method{boxplot}{PCA}(x, fac, nax = 1:4, cols, palette = col_qual,
   fixed.axes = TRUE, center.origin = TRUE, cex.legend = 1, ...)
 }
 \arguments{

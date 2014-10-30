@@ -11,7 +11,7 @@ chc2Out(chc, skip, names)
 \item{skip}{numeric how many informations before the first chain-coded information}
 
 \item{names}{an (optional) vector of (skip) names for the \code{fac} created.
-Somehow similar to \code{names} in \link{lf.structure}}
+Somehow similar to \code{names} in \link{lf_structure}}
 }
 \description{
 For Shape/ChainCoder files, a wrapper to convert chain-coded coordinates to

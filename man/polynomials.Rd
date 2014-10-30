@@ -38,7 +38,7 @@ o <- olea[1]
 op <- polynomials(o, degree=4)
 op
 # shape reconstruction
-opi <- polynomials.i(op)
+opi <- polynomials_i(op)
 lines(opi, col='red')
 # R2 for degree 1 to 10
 r <- numeric()
@@ -46,7 +46,7 @@ for (i in 1:10) { r[i] <- polynomials(o, degree=i)$r2 }
 plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 }
 \seealso{
-\link{polynomials.i} and \link{rawPolynomials} and \link{orthoPolynomials} for methods
+\link{polynomials_i} and \link{rawPolynomials} and \link{orthoPolynomials} for methods
 on \link{Opn} objects.
 }
 \keyword{Polynomials}

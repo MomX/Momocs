@@ -77,7 +77,7 @@ print.Opn <- function(x, ...) {
   cat(rep("-", 20), "\n", sep = "")
   coo_nb <- length(Opn)
   coo_len <- sapply(Opn$coo, nrow)
-  coo_closed <- sapply(Opn$coo, is.closed)
+  coo_closed <- sapply(Opn$coo, is_closed)
   #     # one random outline
   #     eg <- sample(length(Opn$coo), 1)
   #     coo_eg <- Opn$coo[[eg]]
@@ -134,7 +134,7 @@ print.Opn <- function(x, ...) {
 nqual <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
                   id, degree.range = c(2, 3, 4, 6, 8, 10), smooth.it = 0, baseline1 = c(-1,
                                                                                         0), baseline2 = c(1, 0), plot.method = c("panel", "stack")[1],
-                  legend = TRUE, legend.title = "Degree", palette = col.india,
+                  legend = TRUE, legend.title = "Degree", palette = col_india,
                   shp.border = "#1A1A1A") {
   UseMethod("nqual")
 }
@@ -142,7 +142,7 @@ nqual <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
 nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
                       id, degree.range = c(2, 3, 4, 6, 8, 10), smooth.it = 0, baseline1 = c(-1,
                                                                                             0), baseline2 = c(1, 0), plot.method = c("panel", "stack")[1],
-                      legend = TRUE, legend.title = "Degree", palette = col.india,
+                      legend = TRUE, legend.title = "Degree", palette = col_india,
                       shp.border = "#1A1A1A") {
   if (missing(id))
     id <- sample(length(Opn$coo), 1)
@@ -170,7 +170,7 @@ nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
                       t2 = baseline2)
   res <- list()
   for (i in seq(along = degree.range)) {
-    res[[i]] <- polynomials.i(polynomials(coo, degree = degree.range[i],
+    res[[i]] <- polynomials_i(polynomials(coo, degree = degree.range[i],
                                           ortho = ortho))
   }
   # plotting
@@ -192,7 +192,7 @@ nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
   } else {
     if (plot.method == "panel") {
       # par(oma=c(1, 1, 3, 0))
-      pos <- coo_list.panel(res, borders = cols, cols = par("bg"),
+      pos <- coo_listpanel(res, borders = cols, cols = par("bg"),
                             poly = FALSE)
       if (legend) {
         text(x = pos[, 1], y = pos[, 2], as.character(degree.range))

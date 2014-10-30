@@ -58,9 +58,9 @@ coo <- bot[1]
 coo_plot(coo)
 tf  <- tfourier(coo, 12)
 tf
-tfi <- tfourier.i(tf)
+tfi <- tfourier_i(tf)
 coo_draw(tfi, border='red', col=NA) # the outline is not closed...
-coo_draw(tfourier.i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
+coo_draw(tfourier_i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
 }
 \references{
 Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
@@ -72,7 +72,7 @@ pp.
 \seealso{
 \link{tFourier} for analysis on \link{Out} objects.
 \link{efourier}, \link{rfourier} for the other members of the
-Fourier's family. \link{tfourier.shape} to play around with this approach.
+Fourier's family. \link{tfourier_shape} to play around with this approach.
 }
 \keyword{tFourier}
 

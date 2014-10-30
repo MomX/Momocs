@@ -3,7 +3,7 @@
 \alias{hist.OpnCoe}
 \title{Histogram on OpnCoe matrices of polynomials coefficients}
 \usage{
-\method{hist}{OpnCoe}(x, retain = 4, drop, palette = col.gallus,
+\method{hist}{OpnCoe}(x, retain = 4, drop, palette = col_gallus,
   title = "Variation of polynomials coefficients", hist.per.row = 3, ...)
 }
 \arguments{

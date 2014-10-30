@@ -23,7 +23,7 @@
 #'  \item \code{mshape} mean values of coefficients in the original matrix
 #'  \item \code{method} inherited from the Coe object (if any)
 #' }
-#' @seealso \link{plot.LDA}, \link{plotCV}
+#' @seealso \link{plot.LDA}, \link{plot_CV}
 #' @keywords Multivariate
 #' @examples
 #' data(bot)
@@ -55,7 +55,7 @@ LDA.Coe <- function(x, fac, retain, ...) {
     X <- as.matrix(Coe$coe)
     if (!missing(retain) & length(Coe$method) == 1 & Coe$method[1] ==
         "eFourier") {
-        X <- X[, coeff.sel(retain = retain, nb.h = ncol(X)/4,
+        X <- X[, coeff_sel(retain = retain, nb.h = ncol(X)/4,
             cph = 4)]
     }
     remove <- which(apply(X, 2, sd) < 1e-10)

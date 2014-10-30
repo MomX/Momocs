@@ -40,7 +40,7 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
 }
 }
 \seealso{
-\link{removeAsymmetric} and \link{removeSymmetric}.
+\link{rm_Asym} and \link{rm_Sym}.
 }
 \keyword{eFourier}
 

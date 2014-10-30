@@ -35,6 +35,7 @@ License: GPL-2 | GPL-3
 Roxygen: list(wrap = FALSE)
 URL: http://www.vincentbonhomme.fr/Momocs
 BugReports: https://github.com/vbonhomme/Momocs
+VignetteBuilder: knitr
 Depends:
     R(>= 3.0)
 Imports:
@@ -50,4 +51,3 @@ Imports:
     utils
 Suggests:
     knitr
-VignetteBuilder: knitr

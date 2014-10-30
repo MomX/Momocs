@@ -33,14 +33,14 @@ mshape.default <- function(x) {
 #' @export
 mshape.Ldk <- function(x) {
     Ldk <- x
-    A <- ldk.check(Ldk$coo)
+    A <- ldk_check(Ldk$coo)
     return(apply(A, 1:2, mean, na.rm = TRUE))
 }
 
 #' @rdname mshape
 #' @export
 mshape.list <- function(x) {
-    A <- ldk.check(x)
+    A <- ldk_check(x)
     return(apply(A, 1:2, mean, na.rm = TRUE))
 }
 
@@ -48,7 +48,7 @@ mshape.list <- function(x) {
 #' @export
 mshape.array <- function(x) {
     if (length(dim(x)) == 3) {
-        A <- ldk.check(x)
+        A <- ldk_check(x)
         return(apply(A, 1:2, mean, na.rm = TRUE))
     }
 }

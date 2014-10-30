@@ -212,7 +212,7 @@ coo_arrows <- function(coo1, coo2, length = 0.1, angle = 20,
 #' 
 #' \code{coo_template} returns shape centered on the origin and inscribed in a \code{size}-side square
 #' 
-#' See \link{coo_list.panel} for an illustration of this function. The morphospaces
+#' See \link{coo_listpanel} for an illustration of this function. The morphospaces
 #' functions also take profit of this function. May be useful to develop other graphical functions.
 #' 
 #' @usage coo_template(coo, size)
@@ -220,7 +220,7 @@ coo_arrows <- function(coo1, coo2, length = 0.1, angle = 20,
 #' @param size \code{numeric}. Indicates the length of the side 'inscribing'
 #' the shape.
 #' @return Returns a matrix of \code{(x; y)}coordinates.
-#' @seealso \link{coo_list.panel}.
+#' @seealso \link{coo_listpanel}.
 #' @keywords Graphics
 #' @examples
 #' 
@@ -257,11 +257,11 @@ coo_template.Coo <- function(coo, size=1){
 
 #' Plots sets of shapes.
 #' 
-#' \code{coo_list.panel} plots a list of shapes if passed with a list of
+#' \code{coo_listpanel} plots a list of shapes if passed with a list of
 #' coordinates. Outlines are 'templated' (see \link{coo_template} and will be drawn
 #' the same graphical window. Mainly used by \link{panel.Coo} functions.
 #' 
-#' @param coo_list A \code{list} of coordinates
+#' @param coo.list A \code{list} of coordinates
 #' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
 #' the panel display. If missing, shapes are arranged in a square.
 #' @param byrow \code{logical}. Whether to succesive shape by row or by col.
@@ -283,25 +283,25 @@ coo_template.Coo <- function(coo, size=1){
 #' @keywords Graphics
 #' @examples
 #' data(bot)
-#' coo_list.panel(bot$coo) # equivalent to panel(bot)
-#' x <- coo_list.panel(bot$coo)
+#' coo_listpanel(bot$coo) # equivalent to panel(bot)
+#' x <- coo_listpanel(bot$coo)
 #' x # positions of shapes returned invisibly 
 #' # axis(1) ; axis(2) # that's a single graphical window
 #' data(bot)
 #' coo <- bot$coo
-#' ord <- sapply(coo, coo_eccentricity.eigen)
-#' pos <- coo_list.panel(coo, reorder=ord)
+#' ord <- sapply(coo, coo_eccentricityeigen)
+#' pos <- coo_listpanel(coo, reorder=ord)
 #' text(pos, labels=signif(ord[order(ord)], 3))
 #' @export
-coo_list.panel <- function(coo_list, dim, byrow = TRUE, fromtop = TRUE, 
+coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE, 
                            mar = rep(0, 4), cols, borders, reorder = NULL, poly = TRUE, 
                            points = FALSE, points.pch = 3, points.cex = 0.2, points.col = "#333333") {
-  coo_list <- lapply(coo_list, coo_check)
+  coo.list <- lapply(coo.list, coo_check)
   if (!is.null(reorder)) {
-    coo_list <- coo_list[order(reorder)]
+    coo.list <- coo.list[order(reorder)]
   }
   # if dim is missing, we define a square
-  n <- length(coo_list)
+  n <- length(coo.list)
   if (missing(dim)) {
     nc <- ceiling(sqrt(n))
     nr <- ceiling(n/nc)
@@ -309,7 +309,7 @@ coo_list.panel <- function(coo_list, dim, byrow = TRUE, fromtop = TRUE,
   }
   k <- dim[1] * dim[2]
   if (k < n) 
-    stop(" * dim[1]*dim[2] must be >= the length of coo_list")
+    stop(" * dim[1]*dim[2] must be >= the length of coo.list")
   pos <- matrix(1:k, dim[1], dim[2], byrow = byrow)
   if (fromtop & dim[1] > 1) {
     pos <- pos[dim[1]:1, ]
@@ -321,7 +321,7 @@ coo_list.panel <- function(coo_list, dim, byrow = TRUE, fromtop = TRUE,
   plot(NA, asp = 1, xlim = c(0, dim[2]), ylim = c(0, dim[1]), 
        xaxs = "i", yaxs = "i", frame = FALSE, ann = FALSE, axes = FALSE)
   # we template and plot shapes
-  coo_tp <- lapply(coo_list, coo_template, size = 0.95)
+  coo_tp <- lapply(coo.list, coo_template, size = 0.95)
   if (missing(cols)) {
     cols <- rep("grey95", n)
   }
@@ -350,7 +350,7 @@ coo_list.panel <- function(coo_list, dim, byrow = TRUE, fromtop = TRUE,
                                                      2] + trans[1], col = borders[i])
       if (points) {
         # if (!missing(points.col)) { col <- rep(points.col,
-        # length(coo_list)) }
+        # length(coo.list)) }
         points(coo_tp[[i]][, 1] + trans[2], coo_tp[[i]][, 
                                                         2] + trans[1], col = points.col, pch = points.pch, 
                cex = points.cex)
@@ -373,12 +373,12 @@ coo_list.panel <- function(coo_list, dim, byrow = TRUE, fromtop = TRUE,
 #' @examples
 #' data(wings)
 #' coo_plot(wings[1])
-#' ldk.labels(wings[1])
+#' ldk_labels(wings[1])
 #' # closer and smaller
 #' coo_plot(wings[1])
-#' ldk.labels(wings[1], d=0.05, cex=0.5)
+#' ldk_labels(wings[1], d=0.05, cex=0.5)
 #' @export
-ldk.labels <- function(ldk, d = 0.05, cex = 2/3, ...) {
+ldk_labels <- function(ldk, d = 0.05, cex = 2/3, ...) {
   op <- par(xpd = NA)
   on.exit(par(op))
   ldk <- coo_check(ldk)
@@ -402,8 +402,8 @@ ldk.labels <- function(ldk, d = 0.05, cex = 2/3, ...) {
 #' @keywords Graphics
 #' @export
 # todo
-ldk.links <- function(ldk, links, ...) {
-  ldk <- ldk.check(ldk)
+ldk_links <- function(ldk, links, ...) {
+  ldk <- ldk_check(ldk)
   links <- coo_check(links)
   for (i in 1:nrow(links)) {
     segments(ldk[links[i, 1], 1], ldk[links[i, 1], 2], ldk[links[i, 
@@ -419,20 +419,20 @@ ldk.links <- function(ldk, links, ...) {
 #' @param ell.lty an lty for the ellipse
 #' @param ax logical whether to draw ellipses axes
 #' @param ax.lty an lty for ellipses axes
-#' @seealso \link{ldk.contour}, \link{ldk.chull}
+#' @seealso \link{ldk_contour}, \link{ldk_chull}
 #' @keywords Graphics
 #' @examples
 #' data(wings)
 #' coo_plot(mshape(wings))
-#' ldk.confell(wings$coo)
+#' ldk_confell(wings$coo)
 #' @export
-ldk.confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1, 
+ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1, 
                         ax = TRUE, ax.lty = 2) {
-  ldk <- ldk.check(ldk)
+  ldk <- ldk_check(ldk)
   for (i in 1:dim(ldk)[1]) {
     if (all(apply(ldk[i, , ], 1, var) != 0)) {
       xy.i <- t(ldk[i, , ])
-      ell.i <- conf.ell(xy.i[, 1], xy.i[, 2], conf = conf, 
+      ell.i <- conf_ell(xy.i[, 1], xy.i[, 2], conf = conf, 
                         nb.pts = 360)
       lines(ell.i$ell, col = col, lty = ell.lty, lwd = 1)
       if (ax) {
@@ -454,15 +454,15 @@ ldk.confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' @param nlevels the number of contour lines
 #' @param grid.nb the grid.nb
 #' @param col a color for drawing the contour lines
-#' @seealso \link{kde2d}, \link{ldk.confell}, \link{ldk.chull}
+#' @seealso \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
 #' @keywords Graphics
 #' @examples
 #' data(wings)
 #' coo_plot(mshape(wings))
-#' ldk.contour(wings$coo)
+#' ldk_contour(wings$coo)
 #'  @export
-ldk.contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
-  ldk <- ldk.check(ldk)
+ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
+  ldk <- ldk_check(ldk)
   for (i in 1:dim(ldk)[1]) {
     kx <- ldk[i, 1, ]
     ky <- ldk[i, 2, ]
@@ -480,15 +480,15 @@ ldk.contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
 #' @param ldk an array (or a list) of landmarks
 #' @param col a color for drawing the convex hull
 #' @param lty an lty for drawing the convex hulls
-#' @seealso \link{coo_chull}, \link{chull}, \link{ldk.confell}, \link{ldk.contour}
+#' @seealso \link{coo_chull}, \link{chull}, \link{ldk_confell}, \link{ldk_contour}
 #' @keywords Graphics
 #' @examples
 #' data(wings)
 #' coo_plot(mshape(wings))
-#' ldk.chull(wings$coo)
+#' ldk_chull(wings$coo)
 #' @export
-ldk.chull <- function(ldk, col = "grey40", lty = 1) {
-  ldk <- ldk.check(ldk)
+ldk_chull <- function(ldk, col = "grey40", lty = 1) {
+  ldk <- ldk_check(ldk)
   nl <- dim(ldk)[1]
   for (i in 1:nl) {
     ind.i <- chull(ldk[i, 1, ], ldk[i, 2, ])
@@ -504,7 +504,7 @@ ldk.chull <- function(ldk, col = "grey40", lty = 1) {
 #' internally by methods based on deviations for one one many outlines.
 #' Yet, it provides a quick way to create plots of series, possibly with deviations, from scratch.
 #' 
-#' @usage dev.plot(mat, dev, cols, x=1:ncol(mat),
+#' @usage plot_dev(mat, dev, cols, x=1:ncol(mat),
 #' lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
 #' plot=FALSE, main='Deviation plot', xlab='', ylab='Deviations')
 #' @param mat A \code{matrix} containing one or many lines (as individuals) with the corresponding y values (as cols).
@@ -525,15 +525,15 @@ ldk.chull <- function(ldk, col = "grey40", lty = 1) {
 #' foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
 #' foo.mat  <- foo.mat + matrix(rep(c(0, 2, 5), each=10), 3, byrow=TRUE)
 #' foo.dev  <- matrix(abs(rnorm(30, sd=0.5)), nr=3, nc=10, byrow=TRUE)
-#' dev.plot(foo.mat, plot=TRUE)
-#' dev.plot(foo.mat, foo.dev, plot=TRUE)
+#' plot_dev(foo.mat, plot=TRUE)
+#' plot_dev(foo.mat, foo.dev, plot=TRUE)
 #' # some possible tuning
-#' dev.plot(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
-#' dev.plot(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
-#' dev.plot(foo.mat, foo.dev, cols=col.sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
-#' dev.plot(foo.mat, foo.dev, cols=col.summer(6)[4:6], plot=TRUE)
+#' plot_dev(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
+#' plot_dev(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
+#' plot_dev(foo.mat, foo.dev, cols=col_sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
+#' plot_dev(foo.mat, foo.dev, cols=col_summer(6)[4:6], plot=TRUE)
 #' @export
-dev.plot <- function(mat, dev, cols, x = 1:ncol(mat), lines = TRUE, 
+plot_dev <- function(mat, dev, cols, x = 1:ncol(mat), lines = TRUE, 
                      poly = TRUE, segments = FALSE, bw = 0.1, plot = FALSE, main = "Deviation plot", 
                      xlab = "", ylab = "Deviations") {
   # we prepare and check a bit
@@ -596,7 +596,7 @@ dev.plot <- function(mat, dev, cols, x = 1:ncol(mat), lines = TRUE,
 #' Given a matrix of (x; y) coordinates, draws segments between every points
 #' defined by the row of the matrix and uses a color to display an information.
 #' 
-#' @usage dev.segments(coo, cols, lwd = 1)
+#' @usage plot_devsegments(coo, cols, lwd = 1)
 #' @param coo A matrix of coordinates.
 #' @param cols A vector of color of \code{length = nrow(coo)}.
 #' @param lwd The \code{lwd} to use for drawing segments.
@@ -608,24 +608,24 @@ dev.plot <- function(mat, dev, cols, x = 1:ncol(mat), lines = TRUE,
 #' guinness <- coo_sample(bot[9], 100)
 #' 
 #' # we calculate the diff between 48 harm and one with 6 harm.
-#' out.6    <- efourier.i(efourier(guinness, nb.h=6), nb.pts=120)
+#' out.6    <- efourier_i(efourier(guinness, nb.h=6), nb.pts=120)
 #' 
 #' # we calculate deviations, you can also try 'edm'
-#' dev <- edm.nearest(out.6, guinness) / coo_centsize(out.6)
+#' dev <- edm_nearest(out.6, guinness) / coo_centsize(out.6)
 #' 
 #' # we prepare the color scale
 #' d.cut <- cut(dev, breaks=20, labels=FALSE, include.lowest=TRUE)
-#' cols  <- paste0(col.summer(20)[d.cut], 'CC')
+#' cols  <- paste0(col_summer(20)[d.cut], 'CC')
 #' 
 #' # we draw the results
 #' coo_plot(guinness, main='Guiness fitted with 6 harm.', points=FALSE)
 #' par(xpd=NA)
-#' dev.segments(out.6, cols=cols, lwd=4)
+#' plot_devsegments(out.6, cols=cols, lwd=4)
 #' coo_draw(out.6, lty=2, points=FALSE, col=NA)
 #' par(xpd=FALSE)
 #' 
 #' @export
-dev.segments <- function(coo, cols, lwd = 1) {
+plot_devsegments <- function(coo, cols, lwd = 1) {
   nr <- nrow(coo)
   coo <- rbind(coo, coo[1, ])
   for (i in 1:nr) {
@@ -649,17 +649,17 @@ dev.segments <- function(coo, cols, lwd = 1) {
 #' x <- rnorm(100, sd=3)
 #' y <- rnorm(100)
 #' plot(x, y, asp=1)
-#' ce095 <- conf.ell(x, y, conf=0.95) # no need for conf arg since it's .95 by default
-#' ce090 <- conf.ell(x, y, conf=0.90)
-#' ce050 <- conf.ell(x, y, conf=0.50)
-#' cols <- col.hot(10)
+#' ce095 <- conf_ell(x, y, conf=0.95) # no need for conf arg since it's .95 by default
+#' ce090 <- conf_ell(x, y, conf=0.90)
+#' ce050 <- conf_ell(x, y, conf=0.50)
+#' cols <- col_hot(10)
 #' lines(ce050$ell, col=cols[5]) # you can also coo_close(ce050$ell)
 #' lines(ce090$ell, col=cols[8])
 #' lines(ce095$ell, col=cols[9])
 #' segments(ce095$seg[1, 1], ce095$seg[1, 2], ce095$seg[2, 1], ce095$seg[2, 2])
 #' segments(ce095$seg[3, 1], ce095$seg[3, 2], ce095$seg[4, 1], ce095$seg[4, 2])
 #' @export
-conf.ell <- function(x, y, conf = 0.95, nb.pts = 60) {
+conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
   if (is.matrix(x)) {
     y <- x[, 2]
     x <- x[, 1]
@@ -819,7 +819,7 @@ coo_oscillo <- function(coo, method = c("efourier", "rfourier",
 #' Ptolemy(cat, main="An EFT cat")
 #' @export
 Ptolemy <- function(coo, t = seq(0, 2 * pi, length = 7)[-1],
-                    nb.h = 3, nb.pts = 360, palette = col.heat,
+                    nb.h = 3, nb.pts = 360, palette = col_heat,
                     zoom=5/4, legend = TRUE, ...) {
   coo <- coo_center(coo)
   # we prepare the plot
@@ -832,7 +832,7 @@ Ptolemy <- function(coo, t = seq(0, 2 * pi, length = 7)[-1],
   
   # now we calculate for every harmonic
   coo_ef <- efourier(coo, nb.h)
-  coo_efi <- efourier.i(coo_ef, nb.h, nb.pts)
+  coo_efi <- efourier_i(coo_ef, nb.h, nb.pts)
   vect <- matrix(nrow = nb.h, ncol = 2)
   vect <- rbind(c(0, 0), vect)
   for (i in seq(along = t)) {
@@ -844,11 +844,11 @@ Ptolemy <- function(coo, t = seq(0, 2 * pi, length = 7)[-1],
     }
     vs <- apply(vect, 2, cumsum)
     for (j in 1:nb.h) {
-      lh <- efourier.shape(coo_ef$an[1:j], coo_ef$bn[1:j],
+      lh <- efourier_shape(coo_ef$an[1:j], coo_ef$bn[1:j],
                            coo_ef$cn[1:j], coo_ef$dn[1:j],
                            nb.h = j, nb.pts = nb.pts,
                            plot = FALSE)
-      ellh <- efourier.shape(coo_ef$an[j], coo_ef$bn[j],
+      ellh <- efourier_shape(coo_ef$an[j], coo_ef$bn[j],
                              coo_ef$cn[j], coo_ef$dn[j],
                              nb.h = 1, nb.pts = nb.pts,
                              plot = FALSE)

@@ -82,7 +82,7 @@ coo <- bot[1]
 coo_plot(coo)
 ef <- efourier(coo, 12)
 ef
-efi <- efourier.i(ef)
+efi <- efourier_i(ef)
 coo_draw(efi, border='red', col=NA)
 }
 \references{
@@ -92,7 +92,7 @@ Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
-\link{efourier.i} for the reverse operation and \link{eFourier} the
+\link{efourier_i} for the reverse operation and \link{eFourier} the
 method for \code{Out} objects. \link{Ptolemy} for an implementation of the
 Ptolemaic ellipses graph sometimes used to illustrate this approach.
 \link{rfourier}, \link{tfourier} for the other members

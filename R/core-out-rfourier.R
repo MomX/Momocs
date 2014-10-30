@@ -33,7 +33,7 @@
 #'  \item \code{r} vector of radii lengths.
 #'  }
 #' @seealso \link{rFourier} for rfourier on \link{Out} objects.
-#' \link{rfourier.i} for the inverse operation, \link{rfourier.shape} to play around
+#' \link{rfourier_i} for the inverse operation, \link{rfourier_shape} to play around
 #' with this approach.
 #' \link{efourier}, \link{tfourier} for the other members of the Fourier's
 #' family.
@@ -47,7 +47,7 @@
 #' coo_plot(coo)
 #' rf  <- rfourier(coo, 12)
 #' rf
-#' rfi <- rfourier.i(rf)
+#' rfi <- rfourier_i(rf)
 #' coo_draw(rfi, border='red', col=NA)
 #' @export
 rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
@@ -57,7 +57,7 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
         nb.h <- 12
         cat(" * 'nb.h' not provided and set to", nb.h, "\n")
     }
-    if (is.closed(coo)) {
+    if (is_closed(coo)) {
         coo <- coo_unclose(coo)
     }
     if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
@@ -98,7 +98,7 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 
 #' Inverse radii variation Fourier transform
 #' 
-#' \code{rfourier.i} uses the inverse radii variation transformation to
+#' \code{rfourier_i} uses the inverse radii variation transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
 #' obtained computed with \link{rfourier}.
 #' 
@@ -113,7 +113,7 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' \item{angle}{\code{vector} of angles used.} \item{r}{\code{vector} of radii
 #' calculated.}
 #' @seealso \link{efourier} for the reverse operation and also
-#' \code{rfourier.shape}. \link{l2m}, \link{coeff.split} may be useful.
+#' \code{rfourier_shape}. \link{l2m}, \link{coeff_split} may be useful.
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
@@ -124,11 +124,11 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' coo_plot(coo)
 #' rf  <- rfourier(coo, 12)
 #' rf
-#' rfi <- rfourier.i(rf)
+#' rfi <- rfourier_i(rf)
 #' coo_draw(rfi, border='red', col=NA)
 #' 
 #' @export
-rfourier.i <- function(rf, nb.h, nb.pts = 120) {
+rfourier_i <- function(rf, nb.h, nb.pts = 120) {
     if (!all(c("an", "bn") %in% names(rf))) {
         stop("a list containing 'an' and 'bn' harmonic coefficients \n         must be provided")
     }
@@ -161,11 +161,11 @@ rfourier.i <- function(rf, nb.h, nb.pts = 120) {
 
 #' Calculates and draw 'rfourier' shapes.
 #' 
-#' \code{rfourier.shape} calculates a 'Fourier radii variation shape' given
+#' \code{rfourier_shape} calculates a 'Fourier radii variation shape' given
 #' Fourier coefficients (see \code{Details}) or can generate some 'rfourier'
 #' shapes.
 #' 
-#' \code{rfourier.shape} can be used by specifying \code{nb.h} and
+#' \code{rfourier_shape} can be used by specifying \code{nb.h} and
 #' \code{alpha}. The coefficients are then sampled in an uniform distribution
 #' \eqn{(-\pi ; \pi)} and this amplitude is then divided by
 #' \eqn{harmonicrank^alpha}. If \code{alpha} is lower than 1, consecutive
@@ -183,24 +183,24 @@ rfourier.i <- function(rf, nb.h, nb.pts = 120) {
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
 #' @return A matrix of (x; y) coordinates.
-#' @seealso \link{rfourier.i}, \link{efourier.shape}, \link{tfourier.shape}.
+#' @seealso \link{rfourier_i}, \link{efourier_shape}, \link{tfourier_shape}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' @keywords rFourier
 #' @examples
 #' data(bot)
 #' rf <- rfourier(bot[1], 24)
-#' rfourier.shape(rf$an, rf$bn) # equivalent to rfourier.i(rf)
-#' rfourier.shape() # not very interesting
+#' rfourier_shape(rf$an, rf$bn) # equivalent to rfourier_i(rf)
+#' rfourier_shape() # not very interesting
 #' 
-#' rfourier.shape(nb.h=12) # better
-#' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=500)
+#' rfourier_shape(nb.h=12) # better
+#' rfourier_shape(nb.h=6, alpha=0.4, nb.pts=500)
 #' 
 #' # Butterflies of the vignette' cover
 #' panel(Out(a2l(replicate(100,
-#' rfourier.shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
+#' rfourier_shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 #' @export
-rfourier.shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2, 
+rfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2, 
     plot = TRUE) {
     if (missing(nb.h) & missing(an)) 
         nb.h <- 6
@@ -211,7 +211,7 @@ rfourier.shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
     if (missing(bn)) 
         bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
     rf <- list(an = an, bn = bn, ao = 0)
-    shp <- rfourier.i(rf, nb.h = nb.h, nb.pts = nb.pts)
+    shp <- rfourier_i(rf, nb.h = nb.h, nb.pts = nb.pts)
     if (plot) 
         coo_plot(shp)
     return(shp)

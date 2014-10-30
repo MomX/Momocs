@@ -4,7 +4,6 @@
 #' Plots Coo objects: plot (quick review)
 #'
 #' Allows to plot shapes, individually, for \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
-#' @method plot Coo
 #' @param x the \link{Coo} object
 #' @param id the id of the shape to plot, if not provided a
 #' random shape is plotted. If passed with \code{'all'} all shapes are plotted,
@@ -19,8 +18,7 @@
 #' plot(bot)
 #' plot(bot, 5, pch=3, points=TRUE) # an example of '...' use
 #' }
-#' @rdname plot.Coo
-#' @aliases plot.Coo
+#' @method plot Coo
 #' @export
 plot.Coo <- function(x, id, ...) {
   Coo <- x
@@ -54,7 +52,7 @@ plot.Coo <- function(x, id, ...) {
 #'
 #' Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
 #' object.
-#' @method stack Coo
+# @method stack Coo
 #' @param x The \code{Coo} object to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equals to the number of coordinates.
@@ -67,11 +65,11 @@ plot.Coo <- function(x, id, ...) {
 #' @param ldk.pch A \code{pch} for these landmarks
 #' @param ldk.col A color for these landmarks
 #' @param ldk.cex A \code{cex} fro these landmarks
-#' @param ldk.links logical whether to draw links (of the mean shape)
-#' @param ldk.confell logical whether to draw conf ellipses
-#' @param ldk.contour logical whether to draw contour lines
-#' @param ldk.chull logical whether to draw convex hull
-#' @param ldk.labels logical whether to draw landmark labels
+#' @param ldk_links logical whether to draw links (of the mean shape)
+#' @param ldk_confell logical whether to draw conf ellipses
+#' @param ldk_contour logical whether to draw contour lines
+#' @param ldk_chull logical whether to draw convex hull
+#' @param ldk_labels logical whether to draw landmark labels
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param nb.pts the number of points to use for the shape reconstruction
@@ -92,15 +90,15 @@ plot.Coo <- function(x, id, ...) {
 #' data(hearts)
 #' stack(hearts)
 #' stack(hearts, ldk=FALSE)
-#' stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
+#' stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col_summer(4), ldk.pch=20)
 #' }
 #' @rdname stack.Coo
 #' @aliases stack.Coo
 #' @export
 stack.Coo <- function(x, cols, borders, points = FALSE, first.point = TRUE,
                       centroid = TRUE, ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055",
-                      ldk.cex = 0.5, ldk.links = FALSE, ldk.confell = FALSE, ldk.contour = FALSE,
-                      ldk.chull = FALSE, ldk.labels = FALSE, xy.axis = TRUE, title=substitute(x), ...) {
+                      ldk.cex = 0.5, ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
+                      ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE, title=substitute(x), ...) {
   Coo <- x
   if (missing(cols)) {
     cols <- rep(NA, length(Coo))
@@ -145,8 +143,8 @@ stack.OutCoe <- function(x, nb.pts=120, ...){
 #' @export
 stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
                       ldk = TRUE, ldk.pch = 20, ldk.col = "#33333333", ldk.cex = 0.3,
-                      ldk.links = FALSE, ldk.confell = FALSE, ldk.contour = FALSE,
-                      ldk.chull = FALSE, ldk.labels = FALSE, xy.axis = TRUE, title=substitute(x), ...) {
+                      ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
+                      ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE, title=substitute(x), ...) {
   Coo <- x
   if (missing(cols)) {
     cols <- rep(NA, length(Coo))
@@ -178,21 +176,21 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   mA <- mshape(A)
   points(mA, pch = 20, cex = ifelse(ldk.cex > 0.5, ldk.cex *
                                       1.5, 1), col = "grey20")
-  if (ldk.confell) {
-    ldk.confell(A, conf = 0.9)
+  if (ldk_confell) {
+    ldk_confell(A, conf = 0.9)
   }
-  if (ldk.contour) {
-    ldk.contour(A, nlevels = 3, col = "grey20")
+  if (ldk_contour) {
+    ldk_contour(A, nlevels = 3, col = "grey20")
   }
-  if (ldk.chull) {
-    ldk.chull(A)
+  if (ldk_chull) {
+    ldk_chull(A)
   }
-  if (ldk.links) {
+  if (ldk_links) {
     if (is.matrix(Coo$links))
-      ldk.links(mshape(A), Coo$links)
+      ldk_links(mshape(A), Coo$links)
   }
-  if (ldk.labels) {
-    ldk.labels(mshape(A))
+  if (ldk_labels) {
+    ldk_labels(mshape(A))
   }
 }
 
@@ -233,7 +231,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' bot.f <- eFourier(bot, 12)
 #' panel(bot.f)
 #' # an illustration of the use of fac
-#' panel(bot, fac='type', palette=col.spring, names=TRUE)
+#' panel(bot, fac='type', palette=col_spring, names=TRUE)
 #' @aliases panel.Coo
 #' @rdname panel.Coo
 #' @export
@@ -243,7 +241,7 @@ panel <- function(x, ...) {
 #' @rdname panel.Coo
 #' @export
 panel.Out <- function(x, cols, borders, fac, reorder = NULL,
-                      palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
+                      palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
   if (!missing(fac)) {
@@ -269,7 +267,7 @@ panel.Out <- function(x, cols, borders, fac, reorder = NULL,
   }
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
-  pos <- coo_list.panel(Coo$coo, cols = cols, borders = borders,
+  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = TRUE)
   if (!is.null(names)) {
     if (is.logical(names)) {
@@ -301,7 +299,7 @@ panel.OutCoe <- function(x, nb.pts=120, ...){
 #' @rdname panel.Coo
 #' @export
 panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
-                      palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
+                      palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
   if (!missing(fac)) {
@@ -327,7 +325,7 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
   }
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
-  pos <- coo_list.panel(Coo$coo, cols = cols, borders = borders,
+  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = FALSE)
   if (!is.null(names)) {
     if (is.logical(names)) {
@@ -351,7 +349,7 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
 #' @rdname panel.Coo
 #' @export
 panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
-                      palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
+                      palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col = "#333333",
                       ...) {
   Coo <- x
@@ -371,7 +369,7 @@ panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
   }
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
-  pos <- coo_list.panel(Coo$coo, cols = cols, borders = borders,
+  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
                         reorder = reorder, poly = FALSE, points = points, points.pch = points.pch,
                         points.cex = points.cex, points.col = points.col)
   if (!is.null(names)) {

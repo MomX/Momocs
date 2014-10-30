@@ -1,7 +1,7 @@
 ##### graphics cosmetics
 
 #' Colors, colors, colors.
-#' @name col.summer
+#' @name col_summer
 #' @title Some color palettes.
 #' @rdname color_palettes
 #' @aliases Palettes
@@ -9,9 +9,9 @@
 #' @return colors (hexadecimal format)
 #' @note 
 #' \itemize{
-#' \item \code{col.solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized}; 
+#' \item \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized}; 
 #' \item \code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/};
-#' \item \code{col.qual}, \code{col.heat}, \code{col.cold} and \code{col.gallus} use the colorspace package.
+#' \item \code{col_qual}, \code{col_heat}, \code{col_cold} and \code{col_gallus} use the colorspace package.
 #' }
 #' @keywords Graphics
 #' @examples
@@ -21,49 +21,49 @@
 #'  pie(rep(1, n), col=palette(n), labels=NA, clockwise=TRUE)}
 #'  
 #'  # Qualitative
-#'  wheel(col.qual)
-#'  wheel(col.solarized)
-#'  wheel(col.summer)
-#'  wheel(col.summer2)
-#'  wheel(col.spring)
-#'  wheel(col.autumn)
+#'  wheel(col_qual)
+#'  wheel(col_solarized)
+#'  wheel(col_summer)
+#'  wheel(col_summer2)
+#'  wheel(col_spring)
+#'  wheel(col_autumn)
 #'  
 #'  # Divergent
-#'  wheel(col.gallus)
-#'  wheel(col.india)
+#'  wheel(col_gallus)
+#'  wheel(col_india)
 #'  
 #'  # Sequential
-#'  wheel(col.heat)
-#'  wheel(col.hot)
-#'  wheel(col.cold)
-#'  wheel(col.sari)
-#'  wheel(col.bw)
-#'  wheel(col.grey)
+#'  wheel(col_heat)
+#'  wheel(col_hot)
+#'  wheel(col_cold)
+#'  wheel(col_sari)
+#'  wheel(col_bw)
+#'  wheel(col_grey)
 #'  
 #'  # Black only for pubs
-#'  wheel(col.black)
+#'  wheel(col_black)
 #' @export
-col.summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
+col_summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
 #' @rdname color_palettes
 #' @export
-col.summer2 <- colorRampPalette(c("#781C81", "#413B93", "#4065B1", 
+col_summer2 <- colorRampPalette(c("#781C81", "#413B93", "#4065B1", 
     "#488BC2", "#55A1B1", "#63AD99", "#7FB972", "#B5BD4C", "#D9AD3C", 
     "#E68E34", "#E6642C", "#D92120"))
 #' @rdname color_palettes
 #' @export
-col.spring <- colorRampPalette(c("#a3baff", "#ffff7f", "#ff9797"))
+col_spring <- colorRampPalette(c("#a3baff", "#ffff7f", "#ff9797"))
 #' @rdname color_palettes
 #' @export
-col.autumn <- colorRampPalette(c("#3353b3", "#b1b100", "#b32222"))
+col_autumn <- colorRampPalette(c("#3353b3", "#b1b100", "#b32222"))
 
 #' @rdname color_palettes
 #' @export
-col.black <- colorRampPalette(c("#000000", "#000000"))
+col_black <- colorRampPalette(c("#000000", "#000000"))
 
 ### solarized
 #' @rdname color_palettes
 #' @export
-col.solarized <- colorRampPalette(c(
+col_solarized <- colorRampPalette(c(
 # "#002b36", 
 # "#073642", 
 # "#586e75", 
@@ -84,37 +84,37 @@ col.solarized <- colorRampPalette(c(
 ### colorspace
 #' @rdname color_palettes
 #' @export
-col.gallus <- function(n) {
+col_gallus <- function(n) {
     return(diverge_hcl(n))
 }
 #' @rdname color_palettes
 #' @export
-col.qual <- function(n) {
+col_qual <- function(n) {
   rainbow_hcl(n, c = 90)}
 
 #' @rdname color_palettes
 #' @export
-col.heat <- function(n) {
+col_heat <- function(n) {
   return(rev(heat_hcl(n, h=c(10, 90), c.=c(160, 40))))
 }
 #' @rdname color_palettes
 #' @export
-col.hot <- colorRampPalette(c("#FFFFFF", "#8E063B"))
+col_hot <- colorRampPalette(c("#FFFFFF", "#8E063B"))
 #' @rdname color_palettes
 #' @export
-col.cold <- colorRampPalette(c("#FFFFFF", "#023FA5"))
+col_cold <- colorRampPalette(c("#FFFFFF", "#023FA5"))
 #' @rdname color_palettes
 #' @export
-col.sari <- colorRampPalette(c("#551A8B", "#47A23E", "#FF7F00"))
+col_sari <- colorRampPalette(c("#551A8B", "#47A23E", "#FF7F00"))
 #' @rdname color_palettes
 #' @export
-col.india <- colorRampPalette(c("#FF9933", "#FFFFFF", "#138808"))
+col_india <- colorRampPalette(c("#FF9933", "#FFFFFF", "#138808"))
 #' @rdname color_palettes
 #' @export
-col.bw <- colorRampPalette(c("#000000", "#FFFFFF"))
+col_bw <- colorRampPalette(c("#000000", "#FFFFFF"))
 #' @rdname color_palettes
 #' @export
-col.grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
+col_grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
 
 #' Transparency helpers and palettes
 #' 
@@ -127,11 +127,11 @@ col.grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
 #' @rdname colors_transp
 #' @keywords Graphics
 #' @examples
-#' x <- col.transp(10, col='#000000')
+#' x <- col_transp(10, col='#000000')
 #' x
 #' barplot(1:10, col=x, main='a transparent black is grey')
 #' 
-#' summer10 <- col.summer(10)
+#' summer10 <- col_summer(10)
 #' summer10
 #' summer10.transp8 <- .transp(summer10, 0.8)
 #' summer10.transp8
@@ -141,7 +141,7 @@ col.grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
 #' barplot(x, col=summer10.transp8)
 #' barplot(x/2, col=summer10.transp2, add=TRUE)
 #' @export
-col.transp <- function(n, col = "#000000", ceiling = 1) {
+col_transp <- function(n, col = "#000000", ceiling = 1) {
     alpha.int <- as.integer(seq(0, 255 * ceiling, length = n))
     alpha.hex <- as.character(as.hexmode(alpha.int))
     alpha.hex[nchar(alpha.hex) < 2] <- paste0("f", alpha.hex[nchar(alpha.hex) < 2])
@@ -158,7 +158,7 @@ col.transp <- function(n, col = "#000000", ceiling = 1) {
 }
 #' @rdname colors_transp
 #' @export
-col.alpha <- .transp
+col_alpha <- .transp
 
 #' @export
 .cex <- function(x) {

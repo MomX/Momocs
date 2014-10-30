@@ -15,7 +15,7 @@
 #'
 #' @param coo a \code{matrix} of (x; y) coordinates or a list.
 #' @return a \code{matrix} of (x; y) coordinates.
-#' @seealso \link{ldk.check}
+#' @seealso \link{ldk_check}
 #' @keywords ShapeUtilities
 #' @examples
 #' #coo_check('Not a shape')
@@ -464,10 +464,10 @@ coo_interpolate <- function(coo, n) {
 #' @export
 coo_interpolate.default <- function(coo, n) {
   coo <- coo_check(coo)
-  if (!is.closed(coo)) {
+  if (!is_closed(coo)) {
     coo <- coo_close(coo)
   }
-  orig <- coo_perim.cum(coo)
+  orig <- coo_perimcum(coo)
   targ <- seq(0, coo_perim(coo), length = n + 1)[-(n + 1)]
   coo2 <- matrix(c(coo[1, ], rep(NA, n * 2 - 2)), byrow = TRUE,
                  nrow = n, ncol = 2)
@@ -572,36 +572,36 @@ coo_smoothcurve.Opn <- function(coo, n) {
 #' Returns TRUE/FALSE whether the last coordinate of the shapes is the same
 #' as the first one.
 #'
-#' @aliases is.closed
+#' @aliases is_closed
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a boolean.
 #' @seealso \link{coo_close}, \link{coo_unclose}
 #' @keywords ShapeUtilities
 #' @examples
-#' is.closed(matrix(1:10, ncol=2))
-#' is.closed(coo_close(matrix(1:10, ncol=2)))
+#' is_closed(matrix(1:10, ncol=2))
+#' is_closed(coo_close(matrix(1:10, ncol=2)))
 #' data(bot)
-#' is.closed(bot)
-#' is.closed(coo_close(bot))
+#' is_closed(bot)
+#' is_closed(coo_close(bot))
 #' @export
-is.closed <- function(coo) {
-  UseMethod("is.closed")
+is_closed <- function(coo) {
+  UseMethod("is_closed")
 }
 #' @export
-is.closed.default <- function(coo) {
+is_closed.default <- function(coo) {
   coo <- coo_check(coo)
   identical(coo[1, ], coo[nrow(coo), ])
 }
 #' @export
-is.closed.Coo <- function(coo) {
+is_closed.Coo <- function(coo) {
   Coo <- coo
-  return(sapply(Coo$coo, is.closed))
+  return(sapply(Coo$coo, is_closed))
 }
 
 # # is.likelyopen tries to estimate is a matrix of
 # coordinates is likely to be a # closed polygon
 # is.likelyclosedpolygon <- function(coo) { x <-
-# coo_perim.pts(coo) d <- max(x) / median(x[-which.max(x)])
+# coo_perimpts(coo) d <- max(x) / median(x[-which.max(x)])
 # ifelse(d > 3, TRUE, FALSE)}
 
 #' Closes/'Uncloses' shapes
@@ -610,18 +610,18 @@ is.closed.Coo <- function(coo) {
 #'
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_unclose}, \link{is.closed}
+#' @seealso \link{coo_unclose}, \link{is_closed}
 #' @keywords ShapeUtilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo_close(x)
 #' x3 <- coo_unclose(x2)
 #' x
-#' is.closed(x)
+#' is_closed(x)
 #' x2
-#' is.closed(x2)
+#' is_closed(x2)
 #' x3
-#' is.closed(x3)
+#' is_closed(x3)
 #' @export
 coo_close <- function(coo) {
   UseMethod("coo_close")
@@ -629,7 +629,7 @@ coo_close <- function(coo) {
 #' @export
 coo_close.default <- function(coo) {
   coo <- coo_check(coo)
-  ifelse(is.closed(coo), return(coo), return(rbind(coo, coo[1,
+  ifelse(is_closed(coo), return(coo), return(rbind(coo, coo[1,
                                                             ])))
 }
 #' @export
@@ -646,18 +646,18 @@ coo_close.Coo <- function(coo) {
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo}
 #'   object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_close}, \link{is.closed}
+#' @seealso \link{coo_close}, \link{is_closed}
 #' @keywords ShapeUtilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo_close(x)
 #' x3 <- coo_unclose(x2)
 #' x
-#' is.closed(x)
+#' is_closed(x)
 #' x2
-#' is.closed(x2)
+#' is_closed(x2)
 #' x3
-#' is.closed(x3)
+#' is_closed(x3)
 #' @export
 coo_unclose <- function(coo) {
   UseMethod("coo_unclose")
@@ -665,7 +665,7 @@ coo_unclose <- function(coo) {
 #' @export
 coo_unclose.default <- function(coo) {
   coo <- coo_check(coo)
-  ifelse(is.closed(coo), return(coo[-nrow(coo), ]), return(coo))
+  ifelse(is_closed(coo), return(coo[-nrow(coo), ]), return(coo))
 }
 #' @export
 coo_unclose.Coo <- function(coo) {
@@ -732,7 +732,7 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
 coo_force2close <- function(coo) {
   coo <- coo_check(coo)
   xy <- coo_centpos(coo)
-  if (is.closed(coo)) {
+  if (is_closed(coo)) {
     return(coo)
   }
   n <- nrow(coo)
@@ -1067,7 +1067,7 @@ coo_baseline.default <- function(coo, ldk1 = 1, ldk2 = 2, t1 = c(-0.5,
   ty <- t2y - t1y
   # returns difference angle and norm ratios between two
   # vectors given as 4 numeric.
-  vi <- vecs.param(rx, ry, tx, ty)
+  vi <- vecs_param(rx, ry, tx, ty)
   # we rotate accordingly with a center defined as the first
   # landmark (trans, rot, untrans)
   ref <- coo_trans(ref, -t1x, -t1y)
@@ -1164,17 +1164,17 @@ coo_centdist <- function(coo) {
 
 #' Calculates the chordal distance along a shape.
 #'
-#' Calculates the euclidean distance between every points of a shape for coo_perim.pts.
-#' The cumulative sum for coo_perim.cum
+#' Calculates the euclidean distance between every points of a shape for coo_perimpts.
+#' The cumulative sum for coo_perimcum
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric} the distance between every point.
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo_sample(bot[1], 24)
-#' coo_perim.pts(b)
+#' coo_perimpts(b)
 #' @export
-coo_perim.pts <- function(coo) {
+coo_perimpts <- function(coo) {
   coo <- coo_check(coo)
   n <- nrow(coo)
   d <- sqrt(apply((coo - coo_slide(coo, n))^2, 1, sum))[-1]
@@ -1183,16 +1183,16 @@ coo_perim.pts <- function(coo) {
 
 #' Calculates the cumulative chrodal distance a shape.
 #'
-#' Just a wrapper for cumsum(coo_perim.pts). See \link{coo_perim.pts}.
+#' Just a wrapper for cumsum(coo_perimpts). See \link{coo_perimpts}.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return \code{numeric} the cumulate sum of chrodal distances
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo_sample(bot[1], 24)
-#' coo_perim.cum(b)
+#' coo_perimcum(b)
 #' @export
-coo_perim.cum <- function(coo) {
+coo_perimcum <- function(coo) {
   coo <- coo_check(coo)
   d <- cumsum(sqrt(apply((coo - rbind(coo[1, ], coo[-(dim(coo)[1]),
                                                     ]))^2, 1, sum)))
@@ -1209,7 +1209,7 @@ coo_perim.cum <- function(coo) {
 #' hist(sapply(bot$coo, coo_perim), breaks=10)
 #' @export
 coo_perim <- function(coo) {
-  return(sum(coo_perim.pts(coo)))
+  return(sum(coo_perimpts(coo)))
 }
 
 #' Calculates the calliper length

@@ -150,23 +150,24 @@ print.PCA <- function(x, ...){
 #' data(bot)
 #' bot2 <- bot1 <- coo_scale(coo_center(coo_sample(bot, 60)))
 #' bot1$fac$session <- factor(rep("session1", 40))
-#' bot2$coo <- lapply(bot2$coo, function(x) x + rnorm(nrow(x)*2, sd=2e-3)) # we simulate an measurement error
+#' # we simulate an measurement error
+#' bot2$coo <- lapply(bot2$coo, function(x) x + rnorm(nrow(x)*2, sd=2e-3)) 
 #' bot2$fac$session <- factor(rep("session2", 40))
 #' botc <- combine(bot1, bot2)
 #' botcf <- eFourier(botc, 12)
 #'
 #' # we gonna plot the PCA with the two measurement sessions and the two types
 #' botcp <- PCA(botcf)
-#' plot(botcp, "type", col=col.summer(2), pch=rep(c(1, 20), each=40), eigen=FALSE)
-#' bot.pairs <- getPairs(botcp, fac = "session", range=1:2)
+#' plot(botcp, "type", col=col_summer(2), pch=rep(c(1, 20), each=40), eigen=FALSE)
+#' bot.pairs <- get_pairs(botcp, fac = "session", range=1:2)
 # # with bot.pairs we can add segments between the two sessions
 #' segments(bot.pairs$session1[, 1], bot.pairs$session1[, 2],
 #'        bot.pairs$session2[, 1], bot.pairs$session2[, 2],
-#'        col=col.summer(2)[bot.pairs$fac$type])
+#'        col=col_summer(2)[bot.pairs$fac$type])
 #' @export
-getPairs <- function(x, fac, range){UseMethod("getPairs")}
+get_pairs <- function(x, fac, range){UseMethod("get_pairs")}
 #' @export
-getPairs.Coe <- function(x, fac, range){
+get_pairs.Coe <- function(x, fac, range){
   # we check and prepare
   if (missing(fac)) stop(" * a 'fac' mus be provided.")
   fac <- x$fac[, fac]
@@ -183,7 +184,7 @@ getPairs.Coe <- function(x, fac, range){
   return(res)
 }
 #' @export
-getPairs.PCA <- function(x, fac, range){
+get_pairs.PCA <- function(x, fac, range){
   # we check and prepare
   if (missing(fac)) stop(" * a 'fac' mus be provided.")
   fac <- x$fac[, fac]
@@ -200,7 +201,7 @@ getPairs.PCA <- function(x, fac, range){
   return(res)
 }
 #' @export
-getPairs.LDA <- getPairs.PCA
+get_pairs.LDA <- get_pairs.PCA
 
 
 ##### end PCA

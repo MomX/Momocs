@@ -55,7 +55,7 @@ coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
 coo_plot(coo)
 rf  <- rfourier(coo, 12)
 rf
-rfi <- rfourier.i(rf)
+rfi <- rfourier_i(rf)
 coo_draw(rfi, border='red', col=NA)
 }
 \references{
@@ -64,7 +64,7 @@ Springer 316 pp.
 }
 \seealso{
 \link{rFourier} for rfourier on \link{Out} objects.
-\link{rfourier.i} for the inverse operation, \link{rfourier.shape} to play around
+\link{rfourier_i} for the inverse operation, \link{rfourier_shape} to play around
 with this approach.
 \link{efourier}, \link{tfourier} for the other members of the Fourier's
 family.

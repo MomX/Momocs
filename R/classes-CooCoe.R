@@ -39,19 +39,18 @@
 #' same thing for the \code{@@ldk} slot and others, if any.
 #'}
 #' @examples
+#' \dontrun{
 #' # to see all methods for Coo objects.
 #' methods(class='Coo')
 #' # Let's take an Out example. But all methods shown here
 #' # work on Ldk (try data(wings) ) and on Opn (try data(olea))
 #' data(bot)
-#' # Primarily a 'Coo' objects, but also an 'Out'
+#' # Primarily a 'Coo' object, but also an 'Out'
 #' class(bot)
 #' inherits(bot, "Coo")
 #' panel(bot)
 #' stack(bot)
-#' \dontrun{
 #' plot(bot)
-#' }
 #' # Getters (you can also use it to set data)
 #' bot[1]
 #' # access the different components
@@ -73,6 +72,7 @@
 #' names(bot) # access all individual names
 #' bot2 <- bot
 #' names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
+#' }
 #' @export
 Coo <- function(...) {
     cat(" * Coo constructor does not exist alone. See ?Coo")

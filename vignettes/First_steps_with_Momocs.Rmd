@@ -1,18 +1,57 @@
 ---
-title: "First steps with Momocs"
+title: "Technical details"
 author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{First steps with Momocs}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Technical details}
   \usepackage[utf8]{inputenc}
 
 ---
+
+```{r, echo=FALSE}
+library("knitr")
+library(Momocs)
+
+library(Momocs)
+
+tab_met <- function(l){
+  met <- lapply(l, function(x) {
+    m <- methods(class=x)
+    m <- substr(m, 1, nchar(m) - nchar(x) - 1)})
+  all <- sort(unique(unlist(met)))
+  tab <- matrix("" , nrow=length(all), ncol=length(l),
+                dimnames=list(all, l))
+  avail <- lapply(met, function(x) match(x, all))
+  for (i in 1:length(avail)) {
+    tab[avail[[i]], i] <- "X"
+  }
+  as.table(tab)}
+
+
+tab_args <- function(l){
+  met <- lapply(l, function(x) names(as.list(args(x))))
+  all <- sort(unique(unlist(met)))
+  tab <- matrix(NA, nrow=length(all), ncol=length(l),
+                dimnames=list(all, l))
+  avail <- lapply(met, function(x) match(x, all))
+  for (i in 1:length(avail)) {
+    tab[avail[[i]], i] <- "X"
+  }
+  as.table(tab)}
+
+mc <- function(class){
+  x <- methods(class = class)
+  x <- substr(x, 1, nchar(x)-nchar(class)-1)
+  x <- c(" ", x )
+  cat(x, sep = "\n * ")
+}
+
+
+```
+
+
 # Preamble
 ## About Momocs
 * Momocs is a work in progress.
@@ -32,12 +71,24 @@ Momocs (and I) make the following assumptions:
 * You have a basic knowledge of R
 * You know what you want to do in statistics / morphometrics terms
 
-## Conventions
+It introduces/redefines some concepts:
 * A *shape* is an ordinate set (id varies from 1 to shape_length) of 2D (so far) coordinates
-* *Collections* are shapes + (classifiers and/or covariates) + hypotheses + questions
+* Collections or `Coo`dinates are shapes + (classifiers and/or covariates) + hypotheses + questions.
+* `Coo` objects are turned into `Coe`fficients with appropriate morphometric methods, and on which to apply multivariate analyses. A lot of intermediate steps can be done, but the overall architecture is as follows:
 
-## Architecture
+Graphically, this can be represented as:
 ![architecture](MomocsArch.png)
+
+# Naming conventions
+Momocs uses the following naming conventions :
+
+Pattern       | What                      | Example
+------------- | ------------------------- | ----------
+`coo_*`       | Operations on coordinates | `coo_sample`
+`CAPITALS`    | Multivariate method       | `PCA`
+`.*`          | Internal functions        | `.trim.path`
+`*.*`         | Methods or arguments      | `PCA.LDA` and `nb.pts`
+`[A-Z][a-z]`  | Class                     | `Out`
 
 # Using Momocs
 ## Import data
@@ -46,8 +97,8 @@ Raw data can be imported :
 
 What    | From | With
 ------  | -----| -----
-extract outline coordinates from segmented images | `.jpg` | `import.jpg`
-any other coordinates | `.txt` | `import.txt`
+extract outline coordinates from segmented images | `.jpg` | `import_jpg`
+any other coordinates | `.txt` | `import_txt`
 
 * Open-source softwares such as [Gimp](http://www.gimp.org/), to prepare images, and [ImageJ](http://imagej.nih.gov/ij/) to extract coordinates/landmarks/etc. to text files.
 
@@ -58,8 +109,23 @@ What    |  To     | With
 tps     | `Coo`   | `tps2Coo` 
 chc     | `Out`   | `chc2Out`
 
-* Two `.jpg` plotters are available : `img.plot` and `img.plot0`
+* Two `.jpg` plotters are available : `img_plot` and `img_plot0`
 * Bridges from other morphometric formats are quite experimental. Contact me should you have any problem, need something.
+* A dedicated vignette is on its way.
+
+## Operations on coordinates
+* They are named with the pattern : `coo_something`
+* All of them apply on shapes but the most common operations have a `Coo` method:
+
+Function        | What (single shapes or  any `Coo`)
+--------------- | ---------------
+coo_center      | center shape(s)
+coo_scale       | scale shape(s)
+coo_align       | align shape(s) (other options available)
+coo_sample      | sample shape(s) (other options available)
+coo_smooth      | smooth shape(s) (other options available)
+
+* To get the full list all : ```ls("package=Momocs, pattern = "coo-")```
 
 ## Classes
 * Momocs defines and uses S3 classes. Not the most rigorous but familiar to most of us.
@@ -74,7 +140,7 @@ chc     | `Out`   | `chc2Out`
 * To see R code behind methods, eg for `hist.OpnCoe` : `Momocs:::hist.OpnCoe`
 * Constructors are available, eg `Out()`
 
-### `Coo` class
+### `Coo` class : coordinates
 `Coo` classes share most of their slots :
 
 `Coo`         | `Out` | `Opn` | `Ldk` | |
@@ -86,7 +152,7 @@ chc     | `Out`   | `chc2Out`
 `$sliding`    | _     | _     | x     | list of the ids of the sliding landmarks
 `$links`      | _     | _     | x     | matrix of links between landmarks
 
-### From `Coo` to `Coe`: Morphometric methods
+### From `Coo` to `Coe`: morphometric methods
 Here are the methods implemented for every class that can be applied on the proper `Coo` object, and they create the proper `Coe` object.
 
 Coo           | method name     | what
@@ -101,7 +167,7 @@ Coo           | method name     | what
 _             | `fgProcrustes`  | Full Generalized Procrustes [planned]
 _             | _  | Both Procrustes with robust / sliding handling
 
-### `Coe` class
+### `Coe` class : morphometric coefficients
 For `$Coe`, we change the `$coo` for `$coe` and we add a `$method` :
 
 `Coe`         | `Out` | `Opn` | `Ldk` | |
@@ -114,40 +180,56 @@ For `$Coe`, we change the `$coo` for `$coe` and we add a `$method` :
 `$method`     | x     | x     | x     | details of the morphometric
 
 ### Handling classes
-* indicing
-* combine
-* subset
+* `Coo` objects can be indiced and return the corresponding shape, eg `bot[5]`
+* `Coo` and `Coe` objects can be subsetted using `subset` (see `subset.Coo`)
+* Similarly, they can be combined using `combine` (see `?combine`)
+* Different `Coo` objects can be combined (eg. open and closed outlines)
 
 ## Multivariate analyses
 Method    | What
 -------   | ---------
 `PCA`     | Principal Component Analysis
-`LDA`     | Linear Discriminant Analysis
-`RDA`     | Redundancy analysis
+`LDA`     | Linear Discriminant Analysis (+ CV leave-one-out)
+`RDA`     | Redundancy analysis [planned]
 `CLUST`   | Hierarchical clustering
 `MANOVA`  | Multivariate analysis of variance
-`LM`      | Multivariate regression
+`LM`      | Multivariate regression [planned]
 
 * When possible, methods apply directly on the corresponding `Coe` object.
 * Otherwise, a dimensionnality reduction with `PCA`, then doing the analysis on the `PCA` object will be prefered/required.
 
-## Operations on coordinates
-* They are named with the pattern : `coo_something`
-* To get them all : ```ls("package=Momocs, pattern = "coo-")```
-* The most common functions have a `Coo` method.
-
 ## Graphics
-* `coo.plot` a shape plotter
+* `img_plot`and `img_plot0` : two jpg plotters
+* `coo_plot` a shape plotter
 * `stack` all shapes from any `Coo` object on the same plane
 * `panel` a family picture any `Coo` object
+* `hist` and `boxplot` on `Coe` objects
 * `plot` plots a particular shape from a `Coo` object
+* `plot` and `boxplot` methods for PCA, LDA (and more to come) have many options, notably plotting morphospaces.
+* `plotCV` and `plotCV2` for cross-validation table on `LDA` objects
+* Thin plate splines are available in different flavors (see `?tps.arr` and others)
+* Note that in a future version, all graphics will be converted to their ggplot2 equivalent, and graphics methods will return a ggplot object.
+
+## Datasets
+The following datasets are bundled with Momocs :
+
+```{r, results='asis', echo=FALSE}
+p <- data(package = "Momocs")$results[, -(1:2)]
+p[, 2] <- substr(p[, 2], 7, nchar(p[, 2]))
+colnames(p) <- c("Name", "Description")
+knitr::kable(p)
+```
+
+* Each of them can be called with, eg : `data(bot)`
+* Details, credits and analyses examples can be found in their respective helpfiles, eg. `?bot`
+* Help it grow by sending me your published data !
 
 # Method-dependent tools
 
 ## Outline analysis
-* alignment
-* calibration
-* symmetry
+* Procrustes alignment can be used either on landmarks, previously defined with `def_ldk`, on on all coordinates. Then you will probably need to redefine the first point (see `coo_slide` and `coo_slidedirection`)
+* `cal_d`, `cal_e`, `cal_p` and `cal_v` for calibration using distances, error estimation between two sets, (harmonic) power, visual reconstruction.
+* `rm_Sym` and `rm_Asym` remove a/symmetric components for EFT
 
 ## Open outlines
 * alignment
@@ -158,14 +240,70 @@ Method    | What
 * defining landmarks/links
 * alignment
 
+## Traditional morphometrics
+* On its way into the integration.
+
+## Global shape descriptors
+The following list of global shape descriptors is available :
+
+Function                          | What
+---------------------             | -------------------
+coo_perim                         | perimeter 
+coo_area                          | area
+coo_calliper                      | calliper length
+coo_length                        | length
+coo_width                         | width
+coo_circularity                   | circularity
+coo_circularityharalick          | Haralick's circularity
+coo_circularitynorm              | compactness
+coo_convexity                     | convexity
+coo_eccentricityboundingbox      | eccentricity using a bounding box
+coo_eccentricityeigen            | eccentricity using inertia axes
+coo_elongation                    | elongation
+coo_rectangularity                | rectangularity
+coo_rectilinearity                | rectilinearity
+coo_solidity                      | solidity
+
+* They can be used like that :
+```{r, eval=FALSE}
+res <- sapply(bot$coo,function(x)
+        c(coo_width(x), coo_length(x), coo_elongation(x)))
+# etc., eg :
+pairs(t(res))
+resp <- PCA(t(res), fac=bot$fac)
+```
 
 
 
+## List of methods by class
+
+### `Out`, `Opn`, `Ldk`
+```{r, results='markup', echo=-1}
+kable(tab_met(c("Out", "Opn", "Ldk")))
+```
+
+And methods defined directly on `Coo` are also available:
+```{r, results='markup', echo=-1}
+kable(tab_met(c("Coo")))
+```
 
 
+### `OutCoe`,  `OpnCoe`, `LdkCoe`
+```{r, results='markup', echo=-1}
+kable(tab_met(c("OutCoe", "OpnCoe", "LdkCoe")))
+```
 
+And methods defined directly on `Coe` are also available:
+```{r, results='markup', echo=-1}
+kable(tab_met(c("OutCoe", "OpnCoe", "LdkCoe")))
+```
 
+### Multivariate analyses
+```{r, results='markup', echo=-1}
+kable(tab_met(c("PCA", "LDA")))
+```
 
+% tab_args(c("cal_d", "cal_p", "cal_v"))
 
 
 

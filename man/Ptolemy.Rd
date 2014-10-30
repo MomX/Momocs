@@ -4,7 +4,7 @@
 \title{Ptolemaic ellipses and illustration of eFourier}
 \usage{
 Ptolemy(coo, t = seq(0, 2 * pi, length = 7)[-1], nb.h = 3, nb.pts = 360,
-  palette = col.heat, zoom = 5/4, legend = TRUE, ...)
+  palette = col_heat, zoom = 5/4, legend = TRUE, ...)
 }
 \arguments{
 \item{coo}{a matrix of (x; y) coordinates}

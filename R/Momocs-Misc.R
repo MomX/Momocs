@@ -8,7 +8,7 @@
 #' @param pt1 (x; y) coordinates of the first point.
 #' @param pt2 (x; y) coordinates of the second point.
 #' @return Returns the euclidean distance between the two points.
-#' @seealso \link{edm}, \link{edm.nearest}, \link{dist}.
+#' @seealso \link{edm}, \link{edm_nearest}, \link{dist}.
 #' @keywords Miscellaneous
 #' @examples
 #' ed(c(0,1), c(1,0))
@@ -48,7 +48,7 @@ edi <- function(pt1, pt2, r = 0.5) {
 #' @param m2 The second \code{matrix} of coordinates.
 #' @return Returns a \code{vector} of euclidean distances between pairwise
 #' coordinates in the two matrices.
-#' @seealso \link{ed}, \link{edm.nearest}, \link{dist}.
+#' @seealso \link{ed}, \link{edm_nearest}, \link{dist}.
 #' @keywords Miscellaneous
 #' @examples
 #' x <- matrix(1:10, nc=2)
@@ -62,7 +62,7 @@ edm <- function(m1, m2) {
 #' Calculates the shortest euclidean distance found for every point of one
 #' matrix among those of a second.
 #'
-#' \code{edm.nearest} calculates the shortest euclidean distance found for
+#' \code{edm_nearest} calculates the shortest euclidean distance found for
 #' every point of one matrix among those of a second. In other words, if
 #' \code{m1, m2} have \code{n} rows, the result will be the shortest distance
 #' for the first point of \code{m1} to any point of \code{m2} and so on,
@@ -85,10 +85,10 @@ edm <- function(m1, m2) {
 #' @keywords Miscellaneous
 #' @examples
 #' x <- matrix(1:10, nc=2)
-#' edm.nearest(x, x+rnorm(10))
-#' edm.nearest(x, x+rnorm(10), full=TRUE)
+#' edm_nearest(x, x+rnorm(10))
+#' edm_nearest(x, x+rnorm(10), full=TRUE)
 #' @export
-edm.nearest <- function(m1, m2, full = FALSE) {
+edm_nearest <- function(m1, m2, full = FALSE) {
     if (!is.matrix(m1) | !is.matrix(m2))
         stop("Matrices must be provided")
     if (ncol(m1) != 2 | ncol(m2) != 2)
@@ -109,7 +109,7 @@ edm.nearest <- function(m1, m2, full = FALSE) {
 
 #' Helps to select a given number of harmonics from a numerical vector.
 #'
-#' \code{coeff.sel} helps to select a given number of harmonics by returning
+#' \code{coeff_sel} helps to select a given number of harmonics by returning
 #' their indices when arranged as a numeric vector. For instance, harmonic
 #' coefficients are arranged in the \code{$coe} slot of \code{\link{Coe}}-objects in
 #' that way: \deqn{A_1, \dots, A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1,
@@ -124,8 +124,8 @@ edm.nearest <- function(m1, m2, full = FALSE) {
 #' @param nb.h \code{numeric}. The maximum harmonic rank.
 #' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and
 #' \code{tfourier} were used.
-#' @return \code{coeff.sel} returns indices that can be used to select columns
-#' from an harmonic coefficient matrix. \code{coeff.split} returns a named list
+#' @return \code{coeff_sel} returns indices that can be used to select columns
+#' from an harmonic coefficient matrix. \code{coeff_split} returns a named list
 #' of coordinates.
 #' @keywords Miscellaneous
 #' @examples
@@ -134,10 +134,10 @@ edm.nearest <- function(m1, m2, full = FALSE) {
 #' coe <- bot.f$coe # the raw matrix
 #' coe
 #' # if you want, say the first 8 harmonics but not the first one
-#' retain <- coeff.sel(retain=8, drop=1, nb.h=32, cph=4)
+#' retain <- coeff_sel(retain=8, drop=1, nb.h=32, cph=4)
 #' head(coe[, retain])
 #' @export
-coeff.sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
+coeff_sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
     cs <- numeric()
     for (i in 1:cph) {
         cs <- c(cs, (1 + drop):retain + nb.h * (i - 1))
@@ -147,7 +147,7 @@ coeff.sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 
 #' Converts a numerical description of harmonic coefficients to a named list.
 #'
-#' \code{coeff.split} returns a named list of coordinates from a vector of
+#' \code{coeff_split} returns a named list of coordinates from a vector of
 #' harmonic coefficients. For instance, harmonic coefficients are arranged in
 #' the \code{$coe} slot of \code{Coe}-objects in that way: \deqn{A_1, \dots,
 #' A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1, \dots, D-n} after an elliptical
@@ -163,10 +163,10 @@ coeff.sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 #' @return Returns a named list of coordinates.
 #' @keywords Miscellaneous
 #' @examples
-#' coeff.split(1:128, nb.h=32, cph=4) # efourier
-#' coeff.split(1:64, nb.h=32, cph=2)  # t/r fourier
+#' coeff_split(1:128, nb.h=32, cph=4) # efourier
+#' coeff_split(1:64, nb.h=32, cph=2)  # t/r fourier
 #' @export
-coeff.split <- function(cs, nb.h = 8, cph = 4) {
+coeff_split <- function(cs, nb.h = 8, cph = 4) {
     if (missing(nb.h)) {
         nb.h <- length(cs)/cph
     }
@@ -192,15 +192,15 @@ coeff.split <- function(cs, nb.h = 8, cph = 4) {
 #' data(bot)
 #' ef <- efourier(bot[1], 24)
 #' rf <- efourier(bot[1], 24)
-#' harm.pow(ef)
-#' harm.pow(rf)
+#' harm_pow(ef)
+#' harm_pow(rf)
 #'
-#' plot(cumsum(harm.pow(ef)[-1]), type='o',
+#' plot(cumsum(harm_pow(ef)[-1]), type='o',
 #'   main='Cumulated harmonic power without the first harmonic',
 #'   ylab='Cumulated harmonic power', xlab='Harmonic rank')
 #'
 #' @export
-harm.pow <- function(xf) {
+harm_pow <- function(xf) {
     if (is.list(xf)) {
         if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
             hp <- (xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2
@@ -236,10 +236,10 @@ harm.pow <- function(xf) {
 #' first 'to' the second vector.
 #' @keywords Miscellaneous
 #' @examples
-#' vecs.param(1, 0, 0, 2)
+#' vecs_param(1, 0, 0, 2)
 #'
-#' @export vecs.param
-vecs.param <- function(r1, i1, r2, i2) {
+#' @export vecs_param
+vecs_param <- function(r1, i1, r2, i2) {
     x <- c(r1, i1, r2, i2)
     if (!is.numeric(x)) {
         stop("4 numeric must be passed.")

@@ -20,14 +20,14 @@ x <- (matrix(1:10, ncol=2))
 x2 <- coo_close(x)
 x3 <- coo_unclose(x2)
 x
-is.closed(x)
+is_closed(x)
 x2
-is.closed(x2)
+is_closed(x2)
 x3
-is.closed(x3)
+is_closed(x3)
 }
 \seealso{
-\link{coo_close}, \link{is.closed}
+\link{coo_close}, \link{is_closed}
 }
 \keyword{ShapeUtilities}
 
