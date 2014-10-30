@@ -81,7 +81,7 @@ tps2d <- function(grid0, fr, to) {
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
-#' botF <- eFourier(bot)
+#' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
@@ -165,7 +165,7 @@ tps_grid <- function(fr, to, amp = 1,
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
-#' botF <- eFourier(bot)
+#' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
@@ -258,7 +258,7 @@ tps_arr <- function(fr, to, amp = 1,
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
-#' botF <- eFourier(bot)
+#' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky

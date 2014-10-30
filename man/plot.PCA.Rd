@@ -148,7 +148,7 @@ of the ade4 R package.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 bot.p
 plot(bot.p, morpho=FALSE)

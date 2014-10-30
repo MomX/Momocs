@@ -50,7 +50,7 @@ Needs a review and should be considered as experimental.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 MANOVA(bot.f, 'type')
 
 data(olea)

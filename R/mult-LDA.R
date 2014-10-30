@@ -27,7 +27,7 @@
 #' @keywords Multivariate
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 24)
+#' bot.f <- efourier(bot, 24)
 #' bot.l <- LDA(bot.f, 'type')
 #' bot.l
 #' plot(bot.l)
@@ -54,7 +54,7 @@ LDA.Coe <- function(x, fac, retain, ...) {
 
     X <- as.matrix(Coe$coe)
     if (!missing(retain) & length(Coe$method) == 1 & Coe$method[1] ==
-        "eFourier") {
+        "efourier") {
         X <- X[, coeff_sel(retain = retain, nb.h = ncol(X)/4,
             cph = 4)]
     }

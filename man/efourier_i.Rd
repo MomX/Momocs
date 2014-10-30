@@ -47,5 +47,5 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 \link{efourier} for the reverse operation. \link{l2m},
 \link{coeff_split} may be useful.
 }
-\keyword{eFourier}
+\keyword{efourier}
 

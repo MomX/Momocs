@@ -64,8 +64,8 @@ HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}
 \examples{
 data(bot)
 cal_p(bot)
-# if you want to do eFourier with 99\% cal_p in one step
-eFourier(bot, nb.h=cal_p(bot, "efourier", plot=FALSE)$minh["99\%"])
+# if you want to do efourier with 99\% cal_p in one step
+efourier(bot, nb.h=cal_p(bot, "efourier", plot=FALSE)$minh["99\%"])
 }
 \keyword{Out}
 

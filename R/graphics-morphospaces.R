@@ -60,17 +60,17 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     plot.method <- NULL
     ids <- col.start[i]:col.end[i]
     # outlines
-    if (method[i] == "eFourier") {
+    if (method[i] == "efourier") {
       shp <- PCA2shp_efourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
-    if (method[i] == "rFourier") {
+    if (method[i] == "rfourier") {
       shp <- PCA2shp_rfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
-    if (method[i] == "tFourier") {
+    if (method[i] == "tfourier") {
       shp <- PCA2shp_tfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
@@ -134,14 +134,14 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
   # reconstruct shapes
   method <- LDA$method
   ## outlines
-  if (method == "eFourier") {
+  if (method == "efourier") {
     shp <- LDA2shp_efourier(pos = pos, rot = rot, mshape = mshape,
                             amp.shp = amp.shp, pts.shp = pts.shp)
     cd <- TRUE
   }
-  # if (method=='rFourier'){ shp <- PCA2shp_rfourier(pos=pos,
+  # if (method=='rfourier'){ shp <- PCA2shp_rfourier(pos=pos,
   # rot=rot, mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
-  # cd <- TRUE} if (method=='tFourier'){ shp <-
+  # cd <- TRUE} if (method=='tfourier'){ shp <-
   # PCA2shp_tfourier(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp, pts.shp=pts.shp) cd <- TRUE} ## open
   # outlines if (method=='orthoPolynomials'){ shp <-

@@ -5,7 +5,22 @@
 #' \code{efourier} computes Elliptical Fourier Analysis (or Transforms or EFT) 
 #' from a matrix (or a list) of (x; y) coordinates.
 #'
-#' These functions and their mathematical background detailed below are here
+#' @param x A \code{list} or a \code{matrix} of coordinates or a \code{Out} object
+#' @param nb.h \code{integer}. The number of harmonics to use
+#' @param smooth.it \code{integer}. The number of smoothing iterations to
+#' perform.
+#' @param verbose \code{logical}. Whether to print or not diagnosis messages.
+#' @param norm whether to normalize the coefficients using \link{efourier_norm}
+#' @param start logical whether to consider the first point as homologous
+#' @param ... useless here
+#' @return A list with these components: \item{an }{\code{vector} of
+#' \eqn{a_{1->n}} harmonic coefficients.} \item{bn }{\code{vector} of
+#' \eqn{b_{1->n}} harmonic coefficients.} \item{cn }{\code{vector} of
+#' \eqn{c_{1->n}} harmonic coefficients.} \item{dn }{\code{vector} of
+#' \eqn{d_{1->n}} harmonic coefficients.} \item{ao }{\code{ao} Harmonic
+#' coefficient.} \item{co }{\code{co} Harmonic coefficient.}
+#' @note Directly borrowed for Claude (2008), and also called \code{efourier} there.
+#' @details These functions and their mathematical background detailed below are here
 #' detailed to ease their use in new methods but are used internally by methods
 #' on \code{Out}-objects.
 #'
@@ -49,28 +64,48 @@
 #' astronomical Ptolemy's epicycles (see \link{Ptolemy}), and the
 #' reconstruction obtained from \eqn{N} harmonics is the best possible fit in a
 #' least-squares sense.
-#' @param coo A \code{list} or a \code{matrix} of coordinates.
-#' @param nb.h \code{integer}. The number of harmonics to use
-#' @param smooth.it \code{integer}. The number of smoothing iterations to
-#' perform.
-#' @param verbose \code{logical}. Whether to print or not diagnosis messages.
-#' @return A list with these components: \item{an }{\code{vector} of
-#' \eqn{a_{1->n}} harmonic coefficients.} \item{bn }{\code{vector} of
-#' \eqn{b_{1->n}} harmonic coefficients.} \item{cn }{\code{vector} of
-#' \eqn{c_{1->n}} harmonic coefficients.} \item{dn }{\code{vector} of
-#' \eqn{d_{1->n}} harmonic coefficients.} \item{ao }{\code{ao} Harmonic
-#' coefficient.} \item{co }{\code{co} Harmonic coefficient.}
-#' @seealso \link{efourier_i} for the reverse operation and \link{eFourier} the
-#' method for \code{Out} objects. \link{Ptolemy} for an implementation of the
+#' 
+#' Normalization of coefficients has long been a matter of trouble,
+#' and not only for newcomers. There are two ways of normalizing outlines: the first,
+#' and by far the msot used, is to use a "numerical" alignment, directly on the
+#' matrix of coefficients. The coefficients of the first harmonic are consumed
+#' by this process but harmonics of higher rank are normalized in terms of size 
+#' and rotation. This is sometimes referred as using the "first ellipse", as the
+#' harmonics define an ellipse in the plane, and the first one is the mother of all
+#' ellipses, on which all others "roll" along. This approach is really convenient
+#' as it is done easily by most software (if not the only option) and by Momocs too.
+#' It is the default option of \code{efourier}.
+#' 
+#' But here is the pitfall: if your shapes are prone to bad aligments among all
+#' the first ellipses, this will result in poorly (or even not at all) "homologous" coefficients. 
+#' The shapes prone to this are either (at least roughly) circular and/or with a strong 
+#' bilateral symmetry. You can try to use \code{\link{stack}} on the \code{\link{Coe}} object
+#'  returned by \code{efourier}. Also, when plotting PCA using Momocs,
+#' this will be strikingly clear though. This phenomenon will result in two clusters, 
+#' and more strikingly into upside-down (or 180 degrees rotated)
+#' shapes on the morphospace. If this happen, you should seriously consider
+#' aligning your shapes \emph{before} the \code{efourier} step, 
+#' and performing the latter with no normalization (\code{norm = FALSE}), since 
+#' it has been done before.
+#' 
+#' You have several options to align your shapes, using control points (or landmarks),
+#' of Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper 
+#' length (see \code{\link{coo_aligncalliper}}), etc. You should also make the first
+#' point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
+#' to minimize any subsequent problems.
+#' 
+#' I will dedicate one vignette to this problem
+#' asap (fall 2014). In the meantime, contact me should you think we could 
+#' solve this with two brains.
+#' @seealso \link{efourier_i} for the reverse operation. \link{Ptolemy} for an implementation of the
 #' Ptolemaic ellipses graph sometimes used to illustrate this approach.
 #' \link{rfourier}, \link{tfourier} for the other members
 #' of the Fourier's family.
-#' @note Directly borrowed for Claude (2008), and also called \code{efourier} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords eFourier
+#' @keywords efourier
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
@@ -79,8 +114,15 @@
 #' ef
 #' efi <- efourier_i(ef)
 #' coo_draw(efi, border='red', col=NA)
+#' @rdname efourier
 #' @export
-efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
+efourier <- function(x, ...){UseMethod("efourier")}
+eFourier <- efourier
+
+#' @rdname efourier
+#' @export
+efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
+    coo <- x
     coo <- coo_check(coo)
     if (is_closed(coo)) 
         coo <- coo_unclose(coo)
@@ -132,6 +174,49 @@ efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
         co = co))
 }
 
+#' @rdname efourier
+#' @export
+efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...) {
+  Out <- x
+  q <- floor(min(sapply(Out$coo, nrow)/2))
+  if (missing(nb.h)) {
+    nb.h <- ifelse(q >= 32, 32, q)
+    cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+  }
+  if (nb.h > q) {
+    nb.h <- q  # should not be 1 #todo
+    cat(" * at least one outline has no more than", q * 2,
+        "coordinates.\n", "* 'nb.h' has been set to", q,
+        "harmonics.\n")
+  }
+  coo <- Out$coo
+  col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h,
+                                                      times = 4))
+  coe <- matrix(ncol = 4 * nb.h, nrow = length(coo), dimnames = list(names(coo),
+                                                                     col.n))
+  for (i in seq(along = coo)) {
+    # todo: vectorize ?
+    ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
+                   verbose = TRUE)
+    if (norm) {
+      ef <- efourier_norm(ef, start = start)
+      if (ef$A[1] < 0) {
+        ef$A <- (-ef$A)
+        ef$B <- (-ef$B)
+        ef$C <- (-ef$C)
+        ef$D <- (-ef$D)
+        ef$lnef <- (-ef$lnef)
+      }
+      coe[i, ] <- c(ef$A, ef$B, ef$C, ef$D)
+    } else {
+      coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)
+    }
+  }
+  coe[abs(coe) < 1e-12] <- 0  #not elegant but round normalized values to 0
+  return(OutCoe(coe = coe, fac = Out$fac, method = "efourier",
+                norm = norm))
+}
+
 #' Inverse elliptical Fourier transform
 #' 
 #' \code{efourier_i} uses the inverse elliptical Fourier transformation to
@@ -153,7 +238,7 @@ efourier <- function(coo, nb.h, smooth.it = 0, verbose = TRUE) {
 #' Springer 316 pp.
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords eFourier
+#' @keywords efourier
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
@@ -206,7 +291,7 @@ efourier_i <- function(ef, nb.h, nb.pts = 120) {
 #' Most of the time this is due to a poor normalization on the matrix of coefficients, and the
 #' variability you observe may mostly be due to the variability in the alignment of the
 #' 'first' ellipsis which is defined by the first harmonic, used for the normalization. In that
-#' case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You 
+#' case, you should align shapes \emph{before} \link{efourier} and with \code{norm = FALSE}. You 
 #' have several options: \link{coo_align}, \link{coo_aligncalliper}, \link{fgProcrustes} either directly on
 #' the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of
 #' what shall provide a good alignment. Have a look to Momocs' vignette for some illustration of these pitfalls
@@ -231,7 +316,7 @@ efourier_i <- function(ef, nb.h, nb.pts = 120) {
 #' \item \code{co} co Harmonic coefficient
 #' \item \code{lnef} a list with A, B, C and D concatenated in a vector.
 #' }
-#' @seealso \link{efourier} and \link{efourier_i}. Also \link{eFourier} for
+#' @seealso \link{efourier} and \link{efourier_i}. Also \link{efourier} for
 #' normalizing harmonic coefficients when calculating it for \code{Out}
 #' objects.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
@@ -239,7 +324,7 @@ efourier_i <- function(ef, nb.h, nb.pts = 120) {
 #' 
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords eFourier
+#' @keywords efourier
 #' @examples
 #' data(bot)
 #' q <- efourier(bot[1], 24)
@@ -332,7 +417,7 @@ efourier_norm <- function(ef, start = FALSE) {
 #' 
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords eFourier
+#' @keywords efourier
 #' @examples
 #' 
 #' data(bot)
@@ -383,7 +468,7 @@ efourier_shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60,
 # harmonics.  #' @seealso \link{efourier} for a description
 # of the elliptical Fourier #' analysis and \link{Ptolemy}
 # for an illustration of the first #' ellipse/harmonic
-# defining the shape 'amplitude'.  #' @keywords eFourier #'
+# defining the shape 'amplitude'.  #' @keywords efourier #'
 # @examples #' shp <- efourier_shape() #' plot(shp,
 # xlim=c(-20, 20), asp=1, type='l') #' shp.coe <-
 # efourier(shp, 12) #' amps <- seq(0.2, 2, 0.2) #' cols <-
@@ -395,4 +480,4 @@ efourier_shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60,
 # ef$bn <- ef$bn*amp[2] ef$cn <- ef$cn*amp[3] ef$dn <-
 # ef$dn*amp[4] return(ef)}
 
-##### end eFourier 
+##### end efourier 

@@ -73,7 +73,7 @@
 ### prepare a factor according to waht is passed to various methods,
 # notably multivariate plotters..prep.fac(bp, 1)
 # eg
-#  bp <- PCA(eFourier(bot))
+#  bp <- PCA(efourier(bot))
 # .prep.fac(bp, 2)
 # .prep.fac(bp, "type")
 # .prep.fac(bp, factor(rep(letters[1:4], each=10)))

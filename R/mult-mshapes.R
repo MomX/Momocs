@@ -16,7 +16,7 @@
 #' @seealso \link{mshape} for operations on raw coordinates.
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' mshapes(bot.f) # the mean (global) shape
 #' ms <- mshapes(bot.f, 'type')
 #' ms$Coe

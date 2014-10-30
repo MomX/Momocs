@@ -76,7 +76,7 @@
 #' @keywords Multivariate, Graphics
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #' bot.p
 #' plot(bot.p, morpho=FALSE)
@@ -248,7 +248,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
 #' @rdname plot3.PCA
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #' plot3(bot.p) # no groups
 #' plot3(bot.p, 1) # groups
@@ -291,7 +291,7 @@ plot3.PCA <- function(PCA,  ... ){
 #' @param ...  further arguments to feed \link{boxplot}
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #' boxplot(bot.p, 1)
 #' @export
@@ -353,7 +353,7 @@ boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col_qual,
 #'  @param ... additional parameter to pass to \code{\link{coo_draw}}
 #'  @examples
 #'  data(bot)
-#'  bot.p <- PCA(eFourier(bot, 12))
+#'  bot.p <- PCA(efourier(bot, 12))
 #'  PCcontrib(bot.p)
 #'  PCcontrib(bot.p, nax=1:5, sd.r=c(-5, 2, 1, 0, 1, 2, 5),
 #'    main="A nice title", border="grey40", col="grey80")

@@ -44,7 +44,7 @@ Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 24)
+bot.f <- efourier(bot, 24)
 bot.l <- LDA(bot.f, 'type')
 bot.l
 plot(bot.l)

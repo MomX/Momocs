@@ -21,7 +21,7 @@ Returns a named list of coordinates.
 harmonic coefficients. For instance, harmonic coefficients are arranged in
 the \code{$coe} slot of \code{Coe}-objects in that way: \deqn{A_1, \dots,
 A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1, \dots, D-n} after an elliptical
-Fourier analysis (see \link{eFourier} and \link{efourier}) while \deqn{C_n
+Fourier analysis (see \link{efourier} and \link{efourier}) while \deqn{C_n
 and D_n} harmonic are absent for radii variation and tangent angle
 approaches (see \link{rfourier} and \link{tfourier} respectively). This
 function is used internally but might be of interest elwewhere.

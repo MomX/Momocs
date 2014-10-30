@@ -19,7 +19,7 @@ PC1-PC3, PC2-3, and the barplot of eigenvalues percentages.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 plot3(bot.p) # no groups
 plot3(bot.p, 1) # groups

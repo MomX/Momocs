@@ -27,7 +27,7 @@
 #' @note Needs a review and should be considered as experimental.
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' MANOVA(bot.f, 'type')
 #'
 #' data(olea)
@@ -77,7 +77,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
   x <- OutCoe$coe
   cph <- NULL
   # we check for (a)symetrization
-  if (OutCoe$method == "eFourier") {
+  if (OutCoe$method == "efourier") {
     nb.h <- ncol(x)/4
     BC <- (nb.h + 1):(nb.h * 3)
     AD <- c(1:nb.h, ((nb.h * 3 + 1):(nb.h * 4)))
@@ -107,7 +107,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
   }
   
   if (is.null(cph)) {
-    cph <- ifelse(OutCoe$method == "eFourier", 4, 2)
+    cph <- ifelse(OutCoe$method == "efourier", 4, 2)
   }
   nb.h <- ncol(x)/cph
   fr <- nrow(x) - nlevels(fac)
@@ -204,7 +204,7 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
 #' data(bot)
 #' # we create a fake factor with 4 levels
 #' bot$fac$fake <- factor(rep(letters[1:4], each=10))
-#' bot.f <- eFourier(bot, 8)
+#' bot.f <- efourier(bot, 8)
 #' MANOVA_PW(bot.f, 'fake') # or MANOVA_PW(bot.f, 2)
 #'
 #' # an example on open outlines

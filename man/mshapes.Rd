@@ -36,7 +36,7 @@ a 'fac') or globally (if not), and on \link{Coe} objects.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 mshapes(bot.f) # the mean (global) shape
 ms <- mshapes(bot.f, 'type')
 ms$Coe

@@ -24,7 +24,7 @@ Explores the distribution of harmonic coefficient values
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 24)
+bot.f <- efourier(bot, 24)
 hist(bot.f)
 }
 \seealso{

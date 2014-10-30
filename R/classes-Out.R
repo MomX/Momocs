@@ -4,7 +4,7 @@
 #'
 #' In Momocs, \code{Out}-classes objects are lists of closed \bold{out}lines,
 #' with optionnal components, and on which generic methods such as plotting methods (e.g. \link{stack})
-#' and specific methods (e.g. \link{eFourier} can be applied.
+#' and specific methods (e.g. \link{efourier} can be applied.
 #'  \code{Out} objects are primarily \code{\link{Coo}} objects.
 #'
 #' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
@@ -50,7 +50,7 @@ Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
 #' Convert an OutCoe object into an Out object
 #'
 #' Uses the \code{$method} to do the inverse corresponding function. For instance,
-#' an \link{OutCoe} object obtained with \link{eFourier}, will be converted to an \link{Out}
+#' an \link{OutCoe} object obtained with \link{efourier}, will be converted to an \link{Out}
 #' object (outlines from harmonic coefficients), using \link{efourier_i}.
 #'
 #' Note that the 'positionnal' coefficients (\code{ao} and \code{co} if any) are lost, so for a proper
@@ -72,7 +72,7 @@ Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
 #' @examples
 #' data(bot)
 #' bot <- coo_center(bot)
-#' bot.f <- rFourier(bot, 120)
+#' bot.f <- rfourier(bot, 120)
 #' bot.fi <- as.Out(bot.f)
 #' op <- par(mfrow=c(1, 2))
 #' stack(bot, title="raw bot")
@@ -442,8 +442,8 @@ cal_d.Out <- function(Coo, method = c("efourier", "rfourier",
 #' @examples
 #' data(bot)
 #' cal_p(bot)
-#' # if you want to do eFourier with 99% cal_p in one step
-#' eFourier(bot, nb.h=cal_p(bot, "efourier", plot=FALSE)$minh["99%"])
+#' # if you want to do efourier with 99% cal_p in one step
+#' efourier(bot, nb.h=cal_p(bot, "efourier", plot=FALSE)$minh["99%"])
 #' @export
 cal_p <- function(Out, method = "efourier", id = 1:length(Out),
                  nb.h = 24, drop = 1, probs=seq(0, 1, 0.25),
@@ -585,7 +585,7 @@ print.OutCoe <- function(x, ...) {
     met <- c(met, "analyses ]\n")
     combined <- TRUE
   } else {
-    p <- pmatch(OutCoe$method[1], c("eFourier", "rFourier", "tFourier"))
+    p <- pmatch(OutCoe$method[1], c("efourier", "rfourier", "tfourier"))
     met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
     met <- c(met, "analysis ]\n")
     combined <- FALSE}
@@ -611,187 +611,6 @@ print.OutCoe <- function(x, ...) {
   .print.fac(OutCoe$fac)
 }
 
-# 4. Out morphometrics ---------------------------------------------------------
-#' Calculates elliptical Fourier transforms on Out objects
-#'
-#' A wrapper for \link{efourier} to be applied on Out objects.
-#' @param Out the \code{\link{Out}} object on which to calculate eft
-#' @param nb.h the number of harmonics to calculate
-#' @param smooth.it the number of smoothing iterations to perform
-#' @param norm whether to normalize the coefficients using \link{efourier_norm}
-#' @param start logical whether to consider the first point as homologous
-#' @details Normalization of coefficients has long been a matter of trouble,
-#' and not only for newcomers. There are two ways of normalizing outlines: the first,
-#' and by far the msot used, is to use a "numerical" alignment, directly on the
-#' matrix of coefficients. The coefficients of the first harmonic are consumed
-#' by this process but harmonics of higher rank are normalized in terms of size 
-#' and rotation. This is sometimes referred as using the "first ellipse", as the
-#' harmonics define an ellipse in the plane, and the first one is the mother of all
-#' ellipses, on which all others "roll" along. This approach is really convenient
-#' as it is done easily by most software (if not the only option) and by Momocs too.
-#' It is the default option of \code{eFourier}.
-#' 
-#' But here is the pitfall: if your shapes are prone to bad aligments among all
-#' the first ellipses, this will result in poorly (or even not at all) "homologous" coefficients. 
-#' The shapes prone to this are either (at least roughly) circular and/or with a strong 
-#' bilateral symmetry. You can try to use \code{\link{stack}} on the \code{\link{Coe}} object
-#'  returned by \code{eFourier}. Also, when plotting PCA using Momocs,
-#' this will be strikingly clear though. This phenomenon will result in two clusters, 
-#' and more strikingly into upside-down (or 180 degrees rotated)
-#' shapes on the morphospace. If this happen, you should seriously consider
-#' aligning your shapes \emph{before} the \code{eFourier} step, 
-#' and performing the latter with no normalization (\code{norm = FALSE}), since 
-#' it has been done before.
-#' 
-#' You have several options to align your shapes, using control points (or landmarks),
-#' of Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper 
-#' length (see \code{\link{coo_aligncalliper}}), etc. You should also make the first
-#' point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
-#' to minimize any subsequent problems.
-#' 
-#' I will dedicate one vignette to this problem
-#' asap (fall 2014). In the meantime, contact me should you think we could 
-#' solve this with two brains.
-#' @seealso \link{efourier}, \link{efourier_norm}
-#' @examples
-#' data(bot)
-#' eFourier(bot, 12)
-#' @rdname eFourier-Out
-#' @export
-eFourier <- function(Out, nb.h, smooth.it, norm, start) {
-  UseMethod("eFourier")
-}
-#' @export
-eFourier.Out <- function(Out, nb.h, smooth.it = 0, norm = TRUE,
-                         start = FALSE) {
-  q <- floor(min(sapply(Out$coo, nrow)/2))
-  if (missing(nb.h)) {
-    nb.h <- ifelse(q >= 32, 32, q)
-    cat(" * 'nb.h' not provided and set to", nb.h, "\n")
-  }
-  if (nb.h > q) {
-    nb.h <- q  # should not be 1 #todo
-    cat(" * at least one outline has no more than", q * 2,
-        "coordinates.\n", "* 'nb.h' has been set to", q,
-        "harmonics.\n")
-  }
-  coo <- Out$coo
-  col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h,
-                                                      times = 4))
-  coe <- matrix(ncol = 4 * nb.h, nrow = length(coo), dimnames = list(names(coo),
-                                                                     col.n))
-  for (i in seq(along = coo)) {
-    # todo: vectorize ?
-    ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
-                   verbose = TRUE)
-    if (norm) {
-      ef <- efourier_norm(ef, start = start)
-      if (ef$A[1] < 0) {
-        ef$A <- (-ef$A)
-        ef$B <- (-ef$B)
-        ef$C <- (-ef$C)
-        ef$D <- (-ef$D)
-        ef$lnef <- (-ef$lnef)
-      }
-      coe[i, ] <- c(ef$A, ef$B, ef$C, ef$D)
-    } else {
-      coe[i, ] <- c(ef$an, ef$bn, ef$cn, ef$dn)
-    }
-  }
-  coe[abs(coe) < 1e-12] <- 0  #not elegant but round normalized values to 0
-  return(OutCoe(coe = coe, fac = Out$fac, method = "eFourier",
-                norm = norm))
-}
-
-#' Calculates radius lengths Fourier analysis on Out objects
-#'
-#' A wrapper for \link{rfourier} to be applied on Out objects.
-#' @rdname rFourier-Out
-#' @param Out the Out object on which to calculate eft
-#' @param nb.h the number of harmonics to calculate
-#' @param smooth.it the number of smoothing iterations to perform
-#' @param norm whether to normalize the matrix of coefficients.
-#' @seealso \link{rfourier}
-#' @examples
-#' data(bot)
-#' rFourier(bot, 12)
-#' @export
-rFourier <- function(Out, nb.h, smooth.it, norm) {
-  UseMethod("rFourier")
-}
-#' @export
-rFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
-  q <- floor(min(sapply(Out$coo, nrow)/2))
-  if (missing(nb.h)) {
-    nb.h <- ifelse(q >= 32, 32, q)
-    cat(" * nb.h not provided and set to", nb.h, "\n")
-  }
-  if (nb.h > q) {
-    nb.h <- q  # should not be 1 #todo
-    cat(" * at least one outline has no more than", q * 2,
-        "coordinates.\n", "* 'nb.h' has been set to", q,
-        "harmonics.\n")
-  }
-  coo <- Out$coo
-  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
-                                                      times = 2))
-  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo),
-                                                                     col.n))
-  for (i in seq(along = coo)) {
-    rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
-                   norm = norm, verbose = TRUE)  #todo: vectorize
-    coe[i, ] <- c(rf$an, rf$bn)
-  }
-  return(OutCoe(coe = coe, fac = Out$fac, method = "rFourier",
-                norm = norm))
-}
-
-#' Calculates tangent angle Fourier analysis on Out objects
-#'
-#' A wrapper for \link{tfourier} to be applied on Out objects.
-#' @rdname tFourier-Out
-#' @param Out the Out object on which to calculate eft
-#' @param nb.h the number of harmonics to calculate
-#' @param smooth.it the number of smoothing iterations to perform
-#' @param norm whether to normalize the matrix of coefficients. See Details.
-#' @seealso \link{tfourier}
-#' @examples
-#' data(bot)
-#' tFourier(bot, 12)
-#' @export
-tFourier <- function(Out, nb.h, smooth.it, norm) {
-  UseMethod("tFourier")
-}
-#' @export
-tFourier.Out <- function(Out, nb.h = 40, smooth.it = 0, norm = TRUE) {
-  q <- floor(min(sapply(Out$coo, nrow)/2))
-  if (missing(nb.h)) {
-    nb.h <- if (q >= 32) {
-      32
-    } else {
-      q
-    }
-    cat(paste("  * nb.h not provided and set to", nb.h, "\n"))
-  }
-  if (nb.h > q) {
-    nb.h <- q  # should not be 1
-    cat(" * At least one outline has no more than", q * 2,
-        "coordinates.\n", "* 'nb.h' has been set to", q,
-        "harmonics.\n")
-  }
-  coo <- Out$coo
-  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
-                                                      times = 2))
-  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo),
-                                                                     col.n))
-  for (i in seq(along = coo)) {
-    tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
-                   norm = norm, verbose = TRUE)
-    coe[i, ] <- c(tf$an, tf$bn)
-  }
-  return(OutCoe(coe = coe, fac = Out$fac, method = "tFourier",
-                norm = norm))
-}
 
 # 5. Out + landmarks --------------------------------------
 
@@ -861,11 +680,12 @@ get_ldk.Out <- function(Coo) {
 #' @export
 get_ldk.Opn <- get_ldk.Out
 
+
 # 6. Out symmetry --------------------------------------------
 
 #' Calcuates symmetry indices on OutCoe objects
 #'
-#' For \link{OutCoe} objects obtained with \link{eFourier}, calculates several
+#' For \link{OutCoe} objects obtained with \link{efourier}, calculates several
 #' indices on the matrix of coefficients: \code{AD}, the sum of absolute values of
 #' harmonic coefficients A and D; \code{BC} same thing for B and C; \code{amp} the
 #' sum of the absolute value of all harmonic coefficients and \code{sym} which is the ratio
@@ -886,10 +706,10 @@ get_ldk.Opn <- get_ldk.Out
 #' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
 #' }
 #' @seealso \link{rm_Asym} and \link{rm_Sym}.
-#' @keywords eFourier
+#' @keywords efourier
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' res <- symmetry(bot.f)
 #' hist(res[, 'sym'])
 #' @export
@@ -898,8 +718,8 @@ symmetry <- function(OutCoe) {
 }
 #' @export
 symmetry.OutCoe <- function(OutCoe) {
-  if (OutCoe$method != "eFourier")
-    stop(" * Can only be applied on OutCoe [eFourier] objects.")
+  if (OutCoe$method != "efourier")
+    stop(" * Can only be applied on OutCoe [efourier] objects.")
   x <- OutCoe$coe
   nb.h <- ncol(x)/4
   AD.ids <- c(1:nb.h, ((nb.h * 3 + 1):(nb.h * 4)))
@@ -915,7 +735,7 @@ symmetry.OutCoe <- function(OutCoe) {
 
 #' Removes asymmetric and symmetric variation on OutCoe objects
 #'
-#' Only for those obtained with \link{eFourier}, otherwise a message is returned.
+#' Only for those obtained with \link{efourier}, otherwise a message is returned.
 #' \code{rm_Asym} sets all B and C coefficients to 0; \code{rm_Sym} sets
 #' all A and D coefficients to 0.
 #' @param OutCoe an OutCoe object
@@ -936,7 +756,7 @@ symmetry.OutCoe <- function(OutCoe) {
 #' @seealso \link{symmetry}.
 #' @examples
 #' data(bot)
-#' botf <- eFourier(bot, 12)
+#' botf <- efourier(bot, 12)
 #' botSym <- rm_Asym(botf)
 #' boxplot(botSym)
 #' botSymp <- PCA(botSym)
@@ -951,7 +771,7 @@ symmetry.OutCoe <- function(OutCoe) {
 #' # strange shapes because the original shape was mainly symmetric and would need its
 #' # symmetric (eg its average) for a proper reconstruction. Should only be used like that:
 #' plot(botAsymp, morpho=FALSE)
-#' @keywords eFourier
+#' @keywords efourier
 #' @rdname rm_Asym
 #' @aliases rm_Sym
 #' @export
@@ -966,8 +786,8 @@ rm_Asym.default <- function(OutCoe) {
 #' @rdname rm_Asym
 #' @export
 rm_Asym.OutCoe <- function(OutCoe) {
-  if (OutCoe$method != "eFourier")
-    stop(" * Can only be applied on OutCoe [eFourier] objects.")
+  if (OutCoe$method != "efourier")
+    stop(" * Can only be applied on OutCoe [efourier] objects.")
   x <- OutCoe$coe
   nb.h <- ncol(OutCoe$coe)/4
   zeros <- (nb.h + 1):(nb.h * 3)
@@ -988,11 +808,12 @@ rm_Sym.default <- function(OutCoe) {
 #' @rdname rm_Asym
 #' @export
 rm_Sym.OutCoe <- function(OutCoe) {
-  if (OutCoe$method != "eFourier")
-    stop(" * Can only be applied on OutCoe [eFourier] objects.")
+  if (OutCoe$method != "efourier")
+    stop(" * Can only be applied on OutCoe [efourier] objects.")
   x <- OutCoe$coe
   nb.h <- ncol(OutCoe$coe)/4
   zeros <- c(1:nb.h, ((nb.h * 3 + 1):(nb.h * 4)))
   OutCoe$coe[, zeros] <- 0
   return(OutCoe)
 }
+

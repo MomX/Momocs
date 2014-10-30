@@ -17,13 +17,14 @@
 #' b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \deqn{
 #' a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
 #' 
-#' @param coo A list or matrix of coordinates
+#' @param x A list or matrix of coordinates or an \code{Out}
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform
 #' @param norm \code{logical}. Whether to scale and register new coordinates so
 #' that the first point used is sent on the origin.
 #' @param verbose \code{logical}. Whether to display diagnosis messages.
+#' @param ... useless here
 #' @return A list with the following components:
 #' \itemize{
 #' \item \code{ao} ao harmonic coefficient
@@ -36,7 +37,7 @@
 #' \item \code{x1} The x-coordinate of the first point
 #' \item \code{y1} The y-coordinate of the first point.
 #' }
-#' @seealso \link{tFourier} for analysis on \link{Out} objects. 
+#' @seealso \link{tfourier} for analysis on \link{Out} objects. 
 #' \link{efourier}, \link{rfourier} for the other members of the
 #' Fourier's family. \link{tfourier_shape} to play around with this approach.
 #' @note Directly borrowed for Claude (2008), and called \code{fourier2} there.
@@ -45,7 +46,7 @@
 #' 
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
-#' @keywords tFourier
+#' @keywords tfourier
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
@@ -55,10 +56,16 @@
 #' tfi <- tfourier_i(tf)
 #' coo_draw(tfi, border='red', col=NA) # the outline is not closed...
 #' coo_draw(tfourier_i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
+#' @rdname tfourier
 #' @export
-tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
-    verbose = TRUE) {
-    if (missing(nb.h)) {
+tfourier <- function(x, ...) {UseMethod("tfourier")}
+tFourier <- tfourier
+
+#' @rdname tfourier
+#' @export
+tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
+  coo <- x  
+  if (missing(nb.h)) {
         nb.h <- 12
         cat(" * 'nb.h' not provided and set to", nb.h, "\n")
     }
@@ -108,6 +115,39 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
         thetao = tet0, x1 = coo[1, 1], y1 = coo[1, 2])
 }
 
+#' @rdname tfourier
+#' @export
+tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...) {
+  Out <- x
+  q <- floor(min(sapply(Out$coo, nrow)/2))
+  if (missing(nb.h)) {
+    nb.h <- if (q >= 32) {
+      32
+    } else {
+      q
+    }
+    cat(paste("  * nb.h not provided and set to", nb.h, "\n"))
+  }
+  if (nb.h > q) {
+    nb.h <- q  # should not be 1
+    cat(" * At least one outline has no more than", q * 2,
+        "coordinates.\n", "* 'nb.h' has been set to", q,
+        "harmonics.\n")
+  }
+  coo <- Out$coo
+  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
+                                                      times = 2))
+  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo),
+                                                                     col.n))
+  for (i in seq(along = coo)) {
+    tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
+                   norm = norm, verbose = TRUE)
+    coe[i, ] <- c(tf$an, tf$bn)
+  }
+  return(OutCoe(coe = coe, fac = Out$fac, method = "tfourier",
+                norm = norm))
+}
+
 #' Inverse tangent angle Fourier transform
 #' 
 #' \code{tfourier_i} uses the inverse tangent angle Fourier transformation to
@@ -131,14 +171,14 @@ tfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' \item{phi }{\code{vector} of interpolated changes on the tangent angle.}
 #' \item{angle }{\code{vector} of position on the perimeter (in radians).}
 #' @seealso \link{tfourier} for the reverse operation and also
-#' \code{tfourier_shape}. \link{tFourier}. \link{l2m}, \link{coeff_split} may be useful.
+#' \code{tfourier_shape}. \link{tfourier}. \link{l2m}, \link{coeff_split} may be useful.
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
 #' 
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
-#' @keywords tFourier
+#' @keywords tfourier
 #' @examples
 #' data(bot)
 #' tfourier(bot[1], 24)
@@ -219,10 +259,10 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
 #' @return A matrix of (x; y) coordinates.
-#' @seealso \link{tfourier_i}, \link{tfourier}, link{tFourier}.
+#' @seealso \link{tfourier_i}, \link{tfourier}, link{tfourier}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords tFourier
+#' @keywords tfourier
 #' @examples
 #' data(bot)
 #' tf <- tfourier(bot[1], 24)
@@ -249,4 +289,4 @@ tfourier_shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80,
     return(shp)
 }
 
-##### end tFourier 
+##### end tfourier 

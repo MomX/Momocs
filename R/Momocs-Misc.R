@@ -113,7 +113,7 @@ edm_nearest <- function(m1, m2, full = FALSE) {
 #' their indices when arranged as a numeric vector. For instance, harmonic
 #' coefficients are arranged in the \code{$coe} slot of \code{\link{Coe}}-objects in
 #' that way: \deqn{A_1, \dots, A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1,
-#' \dots, D-n} after an elliptical Fourier analysis (see \link{eFourier} and
+#' \dots, D-n} after an elliptical Fourier analysis (see \link{efourier} and
 #' \link{efourier}) while \deqn{C_n and D_n} harmonic are absent for radii
 #' variation and tangent angle approaches (see \link{rfourier} and
 #' \link{tfourier} respectively). . This function is used internally but might
@@ -130,7 +130,7 @@ edm_nearest <- function(m1, m2, full = FALSE) {
 #' @keywords Miscellaneous
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 32)
+#' bot.f <- efourier(bot, 32)
 #' coe <- bot.f$coe # the raw matrix
 #' coe
 #' # if you want, say the first 8 harmonics but not the first one
@@ -151,7 +151,7 @@ coeff_sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 #' harmonic coefficients. For instance, harmonic coefficients are arranged in
 #' the \code{$coe} slot of \code{Coe}-objects in that way: \deqn{A_1, \dots,
 #' A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1, \dots, D-n} after an elliptical
-#' Fourier analysis (see \link{eFourier} and \link{efourier}) while \deqn{C_n
+#' Fourier analysis (see \link{efourier} and \link{efourier}) while \deqn{C_n
 #' and D_n} harmonic are absent for radii variation and tangent angle
 #' approaches (see \link{rfourier} and \link{tfourier} respectively). This
 #' function is used internally but might be of interest elwewhere.
@@ -321,7 +321,7 @@ vecs_param <- function(r1, i1, r2, i2) {
 ### prepare a factor according to waht is passed to various methods,
 # notably multivariate plotters..prep.fac(bp, 1)
 # eg
-#  bp <- PCA(eFourier(bot))
+#  bp <- PCA(efourier(bot))
 # .prep.fac(bp, 2)
 # .prep.fac(bp, "type")
 # .prep.fac(bp, factor(rep(letters[1:4], each=10)))

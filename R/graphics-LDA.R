@@ -67,7 +67,7 @@
 #' @keywords Multivariate, Graphics
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 24)
+#' bot.f <- efourier(bot, 24)
 #' bot.l <- LDA(bot.f, "type")
 #' plot(bot.l)
 #'
@@ -189,7 +189,7 @@ plot.LDA <- function(x, xax=1, yax=2,
   if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
   if (morphospace & length(LDA$method)<2) {
-    if(LDA$method=="eFourier") {
+    if(LDA$method=="efourier") {
       morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
                       amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                       col.shp=col.shp, border.shp=border.shp)}}
@@ -236,7 +236,7 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' @keywords Multivariate Graphics
 #' @examples
 #' data(bot)
-#' bot.p <- PCA(eFourier(bot, 12))
+#' bot.p <- PCA(efourier(bot, 12))
 #' bot.l <- LDA(bot.p, 1)
 #' plot_CV(bot.l)
 #' data(olea)
@@ -388,7 +388,7 @@ plot_CV.table <- function(x, freq=TRUE,
 #'
 #' #trilo examples
 #' data(trilo)
-#' trilo.f <- eFourier(trilo, 8)
+#' trilo.f <- efourier(trilo, 8)
 #' trilo.l <- LDA(trilo.f, 'onto')
 #' trilo.l
 #' plot_CV2(trilo.l)

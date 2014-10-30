@@ -27,13 +27,13 @@ rm_Sym(OutCoe)
 an OutCoe object
 }
 \description{
-Only for those obtained with \link{eFourier}, otherwise a message is returned.
+Only for those obtained with \link{efourier}, otherwise a message is returned.
 \code{rm_Asym} sets all B and C coefficients to 0; \code{rm_Sym} sets
 all A and D coefficients to 0.
 }
 \examples{
 data(bot)
-botf <- eFourier(bot, 12)
+botf <- efourier(bot, 12)
 botSym <- rm_Asym(botf)
 boxplot(botSym)
 botSymp <- PCA(botSym)
@@ -67,5 +67,5 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
 \seealso{
 \link{symmetry}.
 }
-\keyword{eFourier}
+\keyword{efourier}
 

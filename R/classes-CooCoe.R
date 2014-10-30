@@ -104,7 +104,7 @@ Coo <- function(...) {
 #' methods(class='Coe')
 #'
 #' data(bot)
-#' bot.f<- eFourier(bot, 12)
+#' bot.f<- efourier(bot, 12)
 #' bot.f
 #' class(bot.f)
 #' inherits(bot.f, "Coe")

@@ -41,7 +41,7 @@ on a morphospace on a regular PCA. You mat find 180 degrees rotated shapes or bi
 Most of the time this is due to a poor normalization on the matrix of coefficients, and the
 variability you observe may mostly be due to the variability in the alignment of the
 'first' ellipsis which is defined by the first harmonic, used for the normalization. In that
-case, you should align shapes \emph{before} \link{eFourier} and with \code{norm = FALSE}. You
+case, you should align shapes \emph{before} \link{efourier} and with \code{norm = FALSE}. You
 have several options: \link{coo_align}, \link{coo_aligncalliper}, \link{fgProcrustes} either directly on
 the coordinates or on some landmarks along the outline or elsewhere on your original shape, depending of
 what shall provide a good alignment. Have a look to Momocs' vignette for some illustration of these pitfalls
@@ -63,9 +63,9 @@ Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
-\link{efourier} and \link{efourier_i}. Also \link{eFourier} for
+\link{efourier} and \link{efourier_i}. Also \link{efourier} for
 normalizing harmonic coefficients when calculating it for \code{Out}
 objects.
 }
-\keyword{eFourier}
+\keyword{efourier}
 

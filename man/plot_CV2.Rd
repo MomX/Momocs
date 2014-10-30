@@ -90,7 +90,7 @@ plot_CV2(tab, gap.dots=1) # or not
 
 #trilo examples
 data(trilo)
-trilo.f <- eFourier(trilo, 8)
+trilo.f <- efourier(trilo, 8)
 trilo.l <- LDA(trilo.f, 'onto')
 trilo.l
 plot_CV2(trilo.l)

@@ -17,7 +17,7 @@ an \link{Out} object.
 }
 \description{
 Uses the \code{$method} to do the inverse corresponding function. For instance,
-an \link{OutCoe} object obtained with \link{eFourier}, will be converted to an \link{Out}
+an \link{OutCoe} object obtained with \link{efourier}, will be converted to an \link{Out}
 object (outlines from harmonic coefficients), using \link{efourier_i}.
 }
 \details{
@@ -36,7 +36,7 @@ functions/methods that use reconstructed outlines, e.g. \link{plot.PCA}).
 \examples{
 data(bot)
 bot <- coo_center(bot)
-bot.f <- rFourier(bot, 120)
+bot.f <- rfourier(bot, 120)
 bot.fi <- as.Out(bot.f)
 op <- par(mfrow=c(1, 2))
 stack(bot, title="raw bot")

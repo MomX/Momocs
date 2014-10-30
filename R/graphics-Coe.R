@@ -3,7 +3,7 @@
 #' Boxplot on OutCoe matrices of harmonic coefficients
 #' 
 #' Allows to explore diversity of coefficients from OutCoe objects,
-#' typically obtain after a eFourier, tFourier, rFourier on an Out object.
+#' typically obtain after a efourier, tfourier, rfourier on an Out object.
 #' 
 #' @param x the \link{OutCoe} object
 #' @param retain numeric the number of harmonics to retain
@@ -18,7 +18,7 @@
 #' @aliases boxplot.Coe
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 24)
+#' bot.f <- efourier(bot, 24)
 #' boxplot(bot.f)
 #' @export
 boxplot.OutCoe <- function(x, retain, drop, palette = col_gallus, 
@@ -111,7 +111,7 @@ boxplot.OpnCoe <- function(x, retain, drop, palette = col_gallus,
 #' @keywords Graphics Out
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 24)
+#' bot.f <- efourier(bot, 24)
 #' hist(bot.f)
 #' @export
 hist.OutCoe <- function(x, retain, drop, palette = col_gallus, 
@@ -233,7 +233,7 @@ hist.OpnCoe <- function(x, retain = 4, drop, palette = col_gallus,
 #'  @rdname harm.contrib
 #'  @examples
 #'  data(bot)
-#'  bot.f <- eFourier(bot, 12)
+#'  bot.f <- efourier(bot, 12)
 #'  hcontrib(bot.f)
 #'  hcontrib(bot.f, harm.r=3:10, amp.r=1:8, col="grey20",
 #'     main="A huge panel")

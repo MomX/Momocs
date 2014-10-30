@@ -39,7 +39,7 @@ but may be used for any table (likely with \code{freq=FALSE}).
 }
 \examples{
 data(bot)
-bot.p <- PCA(eFourier(bot, 12))
+bot.p <- PCA(efourier(bot, 12))
 bot.l <- LDA(bot.p, 1)
 plot_CV(bot.l)
 data(olea)

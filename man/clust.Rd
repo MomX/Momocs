@@ -34,7 +34,7 @@ package ape.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 CLUST(bot.f)
 bot.c <- CLUST(bot.f, 'type', cex=0.7)
 #bot.c

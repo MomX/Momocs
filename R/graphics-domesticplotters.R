@@ -790,7 +790,7 @@ coo_oscillo <- function(coo, method = c("efourier", "rfourier",
   layout(matrix(1))
 }
 
-#' Ptolemaic ellipses and illustration of eFourier
+#' Ptolemaic ellipses and illustration of efourier
 #'
 #' Calculate and display Ptolemaic ellipses which illustrates
 #' intuitively the principle behing elliptical Fourier analysis.

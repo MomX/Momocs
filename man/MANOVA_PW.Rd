@@ -45,7 +45,7 @@ equivalent to \link{MANOVA}. \code{MANOVA_PW.PCA} works with the regular \link{m
 data(bot)
 # we create a fake factor with 4 levels
 bot$fac$fake <- factor(rep(letters[1:4], each=10))
-bot.f <- eFourier(bot, 8)
+bot.f <- efourier(bot, 8)
 MANOVA_PW(bot.f, 'fake') # or MANOVA_PW(bot.f, 2)
 
 # an example on open outlines

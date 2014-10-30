@@ -32,7 +32,7 @@ Calculates and plots shape variation along Principal Component axes.
 }
 \examples{
 data(bot)
- bot.p <- PCA(eFourier(bot, 12))
+ bot.p <- PCA(efourier(bot, 12))
  PCcontrib(bot.p)
  PCcontrib(bot.p, nax=1:5, sd.r=c(-5, 2, 1, 0, 1, 2, 5),
    main="A nice title", border="grey40", col="grey80")

@@ -55,7 +55,7 @@ pp.
 }
 \seealso{
 \link{tfourier} for the reverse operation and also
-\code{tfourier_shape}. \link{tFourier}. \link{l2m}, \link{coeff_split} may be useful.
+\code{tfourier_shape}. \link{tfourier}. \link{l2m}, \link{coeff_split} may be useful.
 }
-\keyword{tFourier}
+\keyword{tfourier}
 

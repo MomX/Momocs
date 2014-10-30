@@ -146,7 +146,7 @@ Morphospaces are still experimental.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 24)
+bot.f <- efourier(bot, 24)
 bot.l <- LDA(bot.f, "type")
 plot(bot.l)
 

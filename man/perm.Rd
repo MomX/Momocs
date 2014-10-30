@@ -35,7 +35,7 @@ perm(m, margin=2, size=5)
 perm(m, margin=1, size=10)
 
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 bot.m <- perm(bot.f, 80)
 bot.m
 panel(bot.m)

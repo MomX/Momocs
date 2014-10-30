@@ -18,7 +18,7 @@
 #' @keywords Multivariate
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #' bot.p
 #' plot(bot.p, morpho=FALSE)
@@ -154,7 +154,7 @@ print.PCA <- function(x, ...){
 #' bot2$coo <- lapply(bot2$coo, function(x) x + rnorm(nrow(x)*2, sd=2e-3)) 
 #' bot2$fac$session <- factor(rep("session2", 40))
 #' botc <- combine(bot1, bot2)
-#' botcf <- eFourier(botc, 12)
+#' botcf <- efourier(botc, 12)
 #'
 #' # we gonna plot the PCA with the two measurement sessions and the two types
 #' botcp <- PCA(botcf)

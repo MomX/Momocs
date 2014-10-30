@@ -18,13 +18,14 @@
 #' 
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 #' individual shape, are then used for multivariate analyses.
-#' @param coo A \code{list} or \code{matrix} of coordinates.
+#' @param x A \code{list} or \code{matrix} of coordinates or an \code{Out} object
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform.
 #' @param norm \code{logical}. Whether to scale the outlines so that the mean
 #' length of the radii used equals 1.
 #' @param verbose \code{logical}. Whether to display diagnosis messages.
+#' @param ... useless here
 #' @return A list with following components:
 #' \itemize{
 #'  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients 
@@ -32,7 +33,7 @@
 #'  \item \code{ao} ao harmonic coefficient.
 #'  \item \code{r} vector of radii lengths.
 #'  }
-#' @seealso \link{rFourier} for rfourier on \link{Out} objects.
+#' @seealso \link{rfourier} for rfourier on \link{Out} objects.
 #' \link{rfourier_i} for the inverse operation, \link{rfourier_shape} to play around
 #' with this approach.
 #' \link{efourier}, \link{tfourier} for the other members of the Fourier's
@@ -40,7 +41,7 @@
 #' @note Directly borrowed for Claude (2008), and called \code{fourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords rFourier
+#' @keywords rfourier
 #' @examples
 #' data(bot)
 #' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
@@ -49,9 +50,15 @@
 #' rf
 #' rfi <- rfourier_i(rf)
 #' coo_draw(rfi, border='red', col=NA)
+#' @rdname rfourier
 #' @export
-rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE, 
-    verbose = TRUE) {
+rfourier <- function(x, ...){UseMethod("rfourier")}
+rFourier <- rfourier
+
+#' @rdname rfourier
+#' @export
+rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
+    coo <- x
     coo <- coo_check(coo)
     if (missing(nb.h)) {
         nb.h <- 12
@@ -96,6 +103,36 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
     list(an = an, bn = bn, ao = ao, r = r)
 }
 
+#' @rdname rfourier
+#' @export
+rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...) {
+  Out <- x
+  q <- floor(min(sapply(Out$coo, nrow)/2))
+  if (missing(nb.h)) {
+    nb.h <- ifelse(q >= 32, 32, q)
+    cat(" * nb.h not provided and set to", nb.h, "\n")
+  }
+  if (nb.h > q) {
+    nb.h <- q  # should not be 1 #todo
+    cat(" * at least one outline has no more than", q * 2,
+        "coordinates.\n", "* 'nb.h' has been set to", q,
+        "harmonics.\n")
+  }
+  coo <- Out$coo
+  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
+                                                      times = 2))
+  coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo),
+                                                                     col.n))
+  for (i in seq(along = coo)) {
+    rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
+                   norm = norm, verbose = TRUE)  #todo: vectorize
+    coe[i, ] <- c(rf$an, rf$bn)
+  }
+  return(OutCoe(coe = coe, fac = Out$fac, method = "rfourier", norm = norm))
+}
+
+
+
 #' Inverse radii variation Fourier transform
 #' 
 #' \code{rfourier_i} uses the inverse radii variation transformation to
@@ -117,7 +154,7 @@ rfourier <- function(coo, nb.h, smooth.it = 0, norm = FALSE,
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords rFourier
+#' @keywords rfourier
 #' @examples
 #' data(bot)
 #' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
@@ -186,7 +223,7 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
 #' @seealso \link{rfourier_i}, \link{efourier_shape}, \link{tfourier_shape}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords rFourier
+#' @keywords rfourier
 #' @examples
 #' data(bot)
 #' rf <- rfourier(bot[1], 24)
@@ -217,4 +254,4 @@ rfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
     return(shp)
 }
 
-##### end rFourier 
+##### end rfourier 

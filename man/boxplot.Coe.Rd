@@ -28,11 +28,11 @@
 }
 \description{
 Allows to explore diversity of coefficients from OutCoe objects,
-typically obtain after a eFourier, tFourier, rFourier on an Out object.
+typically obtain after a efourier, tfourier, rfourier on an Out object.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 24)
+bot.f <- efourier(bot, 24)
 boxplot(bot.f)
 }
 \seealso{

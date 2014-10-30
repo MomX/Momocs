@@ -73,7 +73,7 @@ for \code{stack(as.Out(OutCoe), ...)}. In that case,
 \dontrun{
 data(bot)
 stack(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 stack(bot.f)
 data(mosquito)
 stack(mosquito, borders='#1A1A1A22', first.point=FALSE)

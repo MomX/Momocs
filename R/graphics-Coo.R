@@ -83,7 +83,7 @@ plot.Coo <- function(x, id, ...) {
 #' \dontrun{
 #' data(bot)
 #' stack(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' stack(bot.f)
 #' data(mosquito)
 #' stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
@@ -228,7 +228,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' data(olea)
 #' panel(olea)
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' panel(bot.f)
 #' # an illustration of the use of fac
 #' panel(bot, fac='type', palette=col_spring, names=TRUE)

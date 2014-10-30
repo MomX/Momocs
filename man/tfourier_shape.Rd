@@ -55,7 +55,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-\link{tfourier_i}, \link{tfourier}, link{tFourier}.
+\link{tfourier_i}, \link{tfourier}, link{tfourier}.
 }
-\keyword{tFourier}
+\keyword{tfourier}
 

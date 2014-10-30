@@ -22,7 +22,7 @@
 #' @keywords Multivariate Graphics
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' CLUST(bot.f)
 #' bot.c <- CLUST(bot.f, 'type', cex=0.7)
 #' #bot.c
@@ -38,7 +38,7 @@
 
 #' @export
 CLUST <- function(x, fac, method, type, palette, ...) {
-    UseMethod("clust")
+    UseMethod("CLUST")
 }
 #' @export
 CLUST.Coe <- function(x, fac, method = "euclidean", type = "fan", 

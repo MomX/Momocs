@@ -67,5 +67,5 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 \seealso{
 \link{efourier_i}, \link{rfourier_shape}, \link{tfourier_shape}.
 }
-\keyword{eFourier}
+\keyword{efourier}
 

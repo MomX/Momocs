@@ -51,7 +51,7 @@ configurations.
 }
 \examples{
 data(bot)
-botF <- eFourier(bot)
+botF <- efourier(bot)
 x <- mshapes(botF, 'type', nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
