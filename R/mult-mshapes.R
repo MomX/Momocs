@@ -27,7 +27,7 @@
 #' tps_arr(ms$whisky, ms$beer) #etc.
 #' 
 #' data(olea)
-#' op <- rawPolynomials(subset(olea, view=='VL'), 5)
+#' op <- npoly(subset(olea, view=='VL'), 5)
 #' ms <- mshapes(op, 'cep') #etc
 #' ms$Coe
 #' panel(Opn(ms$shp), names=TRUE) 
@@ -88,13 +88,19 @@ mshapes.OutCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
 #' @export
 mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
     OpnCoe <- Coe
+        	p <- pmatch(tolower(OpnCoe$method), c("opoly", "npoly", "dfourier"))
+    	if (is.na(p)) {
+      		warning(" * Unvalid method. efourier is used.\n")
+    	} else {
+      method_i <- switch(p, opoly_i, npoly_i, dfourier_i)
+    }
     n <- length(OpnCoe$mshape)  #todo
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")
         coe.mshape <- apply(OpnCoe$coe, 2, FUN)
         mod.mshape <- OpnCoe$mod
         mod.mshape$coefficients <- coe.mshape
-        return(polynomials_i(mod.mshape))
+        return(method_i(mod.mshape))
     }
     
     f <- OpnCoe$fac[, fac]
@@ -110,7 +116,7 @@ mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
         }
         mod.mshape$coeff <- coe.i
         coe[i, ] <- coe.i
-        shp[[i]] <- polynomials_i(mod.mshape)
+        shp[[i]] <- method_i(mod.mshape)
     }
     names(shp) <- fl
     Coe2 <- OpnCoe

@@ -1,6 +1,6 @@
 ##### Core functions for Procrustes alignements
 
-# should DF be used for cal_d ? #todo
+# should DF be used for calibrate_deviations ? #todo
 #' Full Procrustes alignment between two shapes
 #'
 #' Directly borrowed from Claude (2008), called there the \code{fPsup} function.

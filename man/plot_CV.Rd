@@ -43,7 +43,7 @@ bot.p <- PCA(efourier(bot, 12))
 bot.l <- LDA(bot.p, 1)
 plot_CV(bot.l)
 data(olea)
-ol <- LDA(PCA(rawPolynomials(olea, nb.pts=50)), "cep")
+ol <- LDA(PCA(npoly(olea, nb.pts=50)), "cep")
 plot_CV(ol)
 # raw counts
 plot_CV(ol, freq=FALSE, palette=col_india)

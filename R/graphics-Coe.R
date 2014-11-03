@@ -173,7 +173,7 @@ hist.OutCoe <- function(x, retain, drop, palette = col_gallus,
 #' @seealso \link{hist.OutCoe}, \link{boxplot.Coe}
 #' @examples
 #' data(olea)
-#' olea.p <- orthoPolynomials(olea, 5)
+#' olea.p <- opoly(olea, 5)
 #' hist(olea.p)
 #' @export
 hist.OpnCoe <- function(x, retain = 4, drop, palette = col_gallus, 

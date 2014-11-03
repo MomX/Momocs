@@ -41,7 +41,7 @@ bot.c <- CLUST(bot.f, 'type', cex=0.7)
 
 data(olea)
 olea.VL <- subset(olea, view=='VL')
-op <- rawPolynomials(olea.VL, 5)
+op <- npoly(olea.VL, 5)
 CLUST(op, 1, type='cladogram', palette=col_autumn, cex=0.5)
 
 data(wings)

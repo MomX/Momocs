@@ -113,7 +113,7 @@ Coo <- function(...) {
 #' bot.f$coe
 #'
 #' data(olea)
-#' op <- orthoPolynomials(olea, 5)
+#' op <- opoly(olea, 5)
 #' op
 #' class(op)
 #' op$coe # same thing

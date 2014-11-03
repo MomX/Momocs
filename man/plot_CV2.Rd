@@ -97,7 +97,7 @@ plot_CV2(trilo.l)
 
 # olea example
 data(olea)
-op <- orthoPolynomials(olea, 5)
+op <- opoly(olea, 5)
 opl <- LDA(op, 'cep')
 plot_CV2(opl)
 }

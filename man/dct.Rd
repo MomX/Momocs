@@ -40,7 +40,7 @@ o.i <- dct_i(o.dct)
 o.i <- coo_bookstein(o.i)
 coo_draw(o.i, border='red')
 
-#future cal_v
+#future calibrate_reconstructions
 o <- olea[1]
 h.range <- 2:13
 coo <- list()

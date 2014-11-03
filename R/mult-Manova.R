@@ -31,7 +31,7 @@
 #' MANOVA(bot.f, 'type')
 #'
 #' data(olea)
-#' op <- rawPolynomials(olea, 5)
+#' op <- npoly(olea, 5)
 #' MANOVA(op, 'domes')
 #' @export
 MANOVA <- function(x, fac, test = "Hotelling", retain, drop,
@@ -209,7 +209,7 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
 #'
 #' # an example on open outlines
 #' data(olea)
-#' op <- rawPolynomials(olea)
+#' op <- npoly(olea)
 #' MANOVA_PW(op, 'domes')
 #' # to get the results
 #' res <- MANOVA_PW(op, 'domes')
@@ -221,60 +221,60 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
 MANOVA_PW <- function(x, fac, verbose, ...) {
   UseMethod("MANOVA_PW")
 }
-#' @rdname MANOVA_PW
-#' @export
-MANOVA_PW.Coe <- function(x, fac, verbose = FALSE, ...) {
-  # preliminaries
-  Coe <- x
-  fac0 <- fac
-  if (length(Coe$method) > 1)
-    stop(" * cannot yet be used on combined OutCoe. Do it manually.")
-  if (missing(fac))
-    stop("'fac' must be provided")
-  if (!is.factor(fac)) {
-    fac <- Coe$fac[, fac]
-  }
-  # we get all combinations, and prepare the loop
-  pws <- t(combn(levels(fac), 2))
-  n <- nrow(pws)
-  cn <- colnames(MANOVA(Coe, fac, verbose = FALSE)$stats)
-  res <- matrix(NA, nrow = n, ncol = 6,
-                dimnames = list(paste(pws[, 1], pws[, 2], sep = " - "), cn))
-  manovas <- list()
-  # we loop and do all the MANOVAs
-  for (i in 1:nrow(pws)) {
-    if (verbose)
-      cat(pws[i, ], "\n")
-    Coe.i <- subset(Coe, fac == pws[i, ])
-    m <- MANOVA(Coe.i, fac0, verbose = verbose, ...)
-    manovas[[i]] <- m
-    res[i, ] <- m$stats[1, ]
-  }
-  names(manovas) <- rownames(res)
-  # we prepare a 'signifance' table, with 'significant' stars
-  # (discutable but helpful) see stats:::print.summary.lm
-  stars <- symnum(res[, 6], corr = FALSE, na = FALSE, cutpoints = c(0,
-                                                                    0.001, 0.01, 0.05, 0.1, 1), symbols = c("***", "**",
-                                                                                                            "*", ".", "-"))
-  stars <- as.character(stars)
-  nl <- nlevels(fac)
-  # bloody ugly
-  stars.tab <- matrix(NA, nrow = nl - 1, ncol = nl, dimnames = list(levels(fac)[-nl],
-                                                                    levels(fac)))
-  stars.tab <- as.table(stars.tab)
-  k <- 1
-  for (i in 1:(nl - 1)) {
-    for (j in (i + 1):nl) {
-      stars.tab[i, j] <- stars[k]
-      k <- k + 1
-    }
-  }
-  cat("$stars.tab\n")
-  print(stars.tab)
-  cat("\n$summary (see also $manovas)\n")
-  print(res, digits=4)
-  invisible(list(manovas = manovas, summary = res, stars.tab = stars.tab))
-}
+# #' @rdname MANOVA_PW
+# #' @export
+# MANOVA_PW.Coe <- function(x, fac, verbose = FALSE, ...) {
+#   # preliminaries
+#   Coe <- x
+#   fac0 <- fac
+#   if (length(Coe$method) > 1)
+#     stop(" * cannot yet be used on combined OutCoe. Do it manually.")
+#   if (missing(fac))
+#     stop("'fac' must be provided")
+#   if (!is.factor(fac)) {
+#     fac <- Coe$fac[, fac]
+#   }
+#   # we get all combinations, and prepare the loop
+#   pws <- t(combn(levels(fac), 2))
+#   n <- nrow(pws)
+#   cn <- colnames(MANOVA(Coe, fac, verbose = FALSE)$stats)
+#   res <- matrix(NA, nrow = n, ncol = 6,
+#                 dimnames = list(paste(pws[, 1], pws[, 2], sep = " - "), cn))
+#   manovas <- list()
+#   # we loop and do all the MANOVAs
+#   for (i in 1:nrow(pws)) {
+#     if (verbose)
+#       cat(pws[i, ], "\n")
+#     Coe.i <- subset(Coe, fac == pws[i, ])
+#     m <- MANOVA(Coe.i, fac0, verbose = verbose, ...)
+#     manovas[[i]] <- m
+#     res[i, ] <- m$stats[1, ]
+#   }
+#   names(manovas) <- rownames(res)
+#   # we prepare a 'signifance' table, with 'significant' stars
+#   # (discutable but helpful) see stats:::print.summary.lm
+#   stars <- symnum(res[, 6], corr = FALSE, na = FALSE, cutpoints = c(0,
+#                                                                     0.001, 0.01, 0.05, 0.1, 1), symbols = c("***", "**",
+#                                                                                                             "*", ".", "-"))
+#   stars <- as.character(stars)
+#   nl <- nlevels(fac)
+#   # bloody ugly
+#   stars.tab <- matrix(NA, nrow = nl - 1, ncol = nl, dimnames = list(levels(fac)[-nl],
+#                                                                     levels(fac)))
+#   stars.tab <- as.table(stars.tab)
+#   k <- 1
+#   for (i in 1:(nl - 1)) {
+#     for (j in (i + 1):nl) {
+#       stars.tab[i, j] <- stars[k]
+#       k <- k + 1
+#     }
+#   }
+#   cat("$stars.tab\n")
+#   print(stars.tab)
+#   cat("\n$summary (see also $manovas)\n")
+#   print(res, digits=4)
+#   invisible(list(manovas = manovas, summary = res, stars.tab = stars.tab))
+# }
 
 #' @rdname MANOVA_PW
 #' @export

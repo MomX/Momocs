@@ -26,7 +26,7 @@ Explores the distribution of polynomials coefficient values
 }
 \examples{
 data(olea)
-olea.p <- orthoPolynomials(olea, 5)
+olea.p <- opoly(olea, 5)
 hist(olea.p)
 }
 \seealso{

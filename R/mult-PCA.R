@@ -25,7 +25,7 @@
 #' plot(bot.p, 'type')
 #'
 #' data(olea)
-#' op <- rawPolynomials(olea, 5)
+#' op <- npoly(olea, 5)
 #' op.p <- PCA(op)
 #' op.p
 #' plot(op.p, 1, morpho=TRUE)

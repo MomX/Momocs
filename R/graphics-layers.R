@@ -319,7 +319,7 @@
 
 # smart color grouping provided with a fac after interaction
 # data(olea)
-# op <- PCA(rawPolynomials(olea))
+# op <- PCA(npoly(olea))
 # f <- .combine.fac(op, ~view+domes)
 # cols <- .smartpalette(f)
 # plot(op, f, col=cols)

@@ -155,7 +155,7 @@ plot(bot.p, morpho=FALSE)
 plot(bot.p, "type")
 
 data(olea)
-op <- rawPolynomials(olea, 5)
+op <- npoly(olea, 5)
 op.p <- PCA(op)
 op.p
 plot(op.p, ~ domes + cep, morpho=TRUE) # use of formula

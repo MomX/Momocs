@@ -7,7 +7,7 @@
 #' In Momocs, \code{Opn} classes objects are
 #' lists of \bold{op}e\bold{n} outlines, with optionnal components,
 #' on which generic methods such as plotting methods (e.g. \link{stack})
-#' and specific methods (e.g. \link{rawPolynomials} can be applied.
+#' and specific methods (e.g. \link{npoly} can be applied.
 #'  \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 #'
 #' @param x \code{list} of matrices of (x; y) coordinates
@@ -24,9 +24,8 @@
 #' data(olea)
 #' olea
 #' panel(olea)
-#' nqual(olea)
 #' # orthogonal polynomials
-#' op <- orthoPolynomials(olea, degree=5)
+#' op <- opoly(olea, degree=5)
 #' # we print the Coe
 #' op
 #' # Let's do a PCA on it
@@ -106,103 +105,6 @@ print.Opn <- function(x, ...) {
   .print.fac(Opn$fac)
 }
 
-# 2. Opn calibration
-# -----------------------------------------------------------
-#' Graphical calibration for Opn objects
-#'
-#' Calculate and displays reconstructed shapes using a
-#' range of polynomial degrees.
-#'
-#' @aliases nqual
-#' @param Opn the \code{Opn} object on which to nqual
-#' @param method any method from \code{c('rawPolynomials', 'orthoPolynomials')}
-#' @param id the shape on which to perform nqual
-#' @param degree.range vector of polynomial degrees on which to perform nqual
-#' @param smooth.it numeric, number of smoothing iterations
-#' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
-#' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
-#' @param plot.method either \code{'\link{panel}'} or \code{'\link{stack}'}
-#' @param legend logical whether to plot a legend
-#' @param legend.title if TRUE above, its title
-#' @param palette a color \link{palette}
-#' @param shp.border a color for the border of the shape
-#' @keywords Opn
-#' @examples
-#' data(olea)
-#' nqual(olea, degree.range=1:9)
-#' @export
-nqual <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
-                  id, degree.range = c(2, 3, 4, 6, 8, 10), smooth.it = 0, baseline1 = c(-1,
-                                                                                        0), baseline2 = c(1, 0), plot.method = c("panel", "stack")[1],
-                  legend = TRUE, legend.title = "Degree", palette = col_india,
-                  shp.border = "#1A1A1A") {
-  UseMethod("nqual")
-}
-#' @export
-nqual.Opn <- function(Opn, method = c("rawPolynomials", "orthoPolynomials"),
-                      id, degree.range = c(2, 3, 4, 6, 8, 10), smooth.it = 0, baseline1 = c(-1,
-                                                                                            0), baseline2 = c(1, 0), plot.method = c("panel", "stack")[1],
-                      legend = TRUE, legend.title = "Degree", palette = col_india,
-                      shp.border = "#1A1A1A") {
-  if (missing(id))
-    id <- sample(length(Opn$coo), 1)
-  if (missing(method)) {
-    cat(" * Method not provided. orthoPolynomials is used.\n")
-    ortho <- TRUE
-  } else {
-    p <- pmatch(tolower(method), c("rawpolynomials", "orthopolynomials"))
-    if (is.na(p)) {
-      warning(" * Unvalid method. orthoPolynomials is used.\n")
-    } else {
-      ortho <- switch(p, TRUE, FALSE)
-    }
-  }
-  # check for too ambitious harm.range
-  if (max(degree.range) > (min(sapply(Opn$coo, nrow)) - 1)) {
-    degree.range <- (min(sapply(Opn$coo, nrow)) - 1)
-    cat(" * degree.range was too high and set to: ", degree.range,
-        ".\n")
-  }
-  coo <- Opn$coo[[id]]
-  if (smooth.it != 0)
-    coo <- coo_smoothcurve(coo, smooth.it)
-  coo <- coo_baseline(coo, ldk1 = 1, ldk2 = nrow(coo), t1 = baseline1,
-                      t2 = baseline2)
-  res <- list()
-  for (i in seq(along = degree.range)) {
-    res[[i]] <- polynomials_i(polynomials(coo, degree = degree.range[i],
-                                          ortho = ortho))
-  }
-  # plotting
-  op <- par(mar = c(3, 3, 2, 1))
-  on.exit(par(op))
-  cols <- paste0(palette(length(degree.range)), "EE")
-  if (plot.method == "stack") {
-    # to initiate the plot but stack may be a better option for
-    # that part
-    coo_plot(coo, border = shp.border, lwd = 1)
-    for (i in seq(along = degree.range)) {
-      lines(res[[i]], col = cols[i])
-    }
-    if (legend) {
-      legend("topright", legend = as.character(degree.range),
-             bty = "n", col = cols, lty = 1, lwd = 1, cex = 0.7,
-             title = legend.title)
-    }
-  } else {
-    if (plot.method == "panel") {
-      # par(oma=c(1, 1, 3, 0))
-      pos <- coo_listpanel(res, borders = cols, cols = par("bg"),
-                            poly = FALSE)
-      if (legend) {
-        text(x = pos[, 1], y = pos[, 2], as.character(degree.range))
-      }
-      title(names(Opn)[id], cex = 1.3)
-    }
-  }
-}
-
-# nquant npow
 
 # 3. OpnCoe definition
 # ---------------------------------------------------------
@@ -249,8 +151,8 @@ print.OpnCoe <- function(x, ...) {
     met <- c(met, "analyses ]\n")
     combined <- TRUE
   } else {
-    p <- pmatch(OpnCoe$method, c("rawPolynomials", "orthoPolynomials", "dct"))
-    met <- switch(p, "raw Polynomials", "orthogonal Polynomials", "discret cosine tansform")
+    p <- pmatch(OpnCoe$method, c("npoly", "opoly", "dfourier"))
+    met <- switch(p, "npoly", "opoly", "discrete cosine tansform")
     met <- c(met, "analysis ]\n")
     combined <- FALSE
   }
@@ -302,151 +204,5 @@ print.OpnCoe <- function(x, ...) {
   # we print the fac
   .print.fac(OpnCoe$fac)
 }
-
-# 3. Opn morphometrics
-# ---------------------------------------------------------
-#' Calculates raw (natural) polynomials on Opn
-#'
-#' @aliases rawPolynomials
-#' @param Opn an \link{Opn} object
-#' @param degree of the polynomial
-#' @param baseline1 numeric the (x; y) coordinates of the first baseline
-#' by default (x= -0.5; y=0)
-#' @param baseline2 numeric the (x; y) coordinates of the second baseline
-#' by default (x= 0.5; y=0)
-#' @param nb.pts number of points to sample and on which to calculate polynomials
-#' @return a \code{OpnCoe} object.
-#' @keywords Opn
-#' @examples
-#' data(olea)
-#' op <- rawPolynomials(olea, 5)
-#' op
-#' # a summary of the r2 (fit)
-#' hist(op$r2)
-#' # and the standard deviation
-#' sd(op$r2)
-#' @export
-rawPolynomials <- function(Opn, degree, baseline1, baseline2, nb.pts) {
-  UseMethod("rawPolynomials")
-}
-#' @export
-rawPolynomials.Opn <- function(Opn, degree,
-                               baseline1 = c(-0.5, 0), baseline2 = c(0.5, 0), nb.pts = 120) {
-  # we check a bit
-  min.pts <- min(sapply(Opn$coo, nrow))
-  if (nb.pts > min.pts) {
-    if (missing(nb.pts)) {
-      nb.pts <- min.pts
-      cat(" * 'nb.pts' missing and set to: ", nb.pts, "\n")
-    } else {
-      nb.pts <- min.pts
-      cat(" * at least one outline has less coordinates than 'nb.pts':",
-          nb.pts, "\n")
-    }
-  }
-  if (missing(degree)) {
-    degree <- 5
-    cat(" * 'degree' missing and set to: ", degree, "\n")
-  }
-  # we normalize
-  Opn <- coo_sample(Opn, nb.pts)
-  coo <- Opn$coo
-  coo <- lapply(coo, coo_baseline, ldk1 = 1, ldk2 = nb.pts,
-                t1 = baseline1, t2 = baseline2)
-  # we prepare the coe matrix
-  rn <- names(coo)
-  cn <- paste0("x", 1:degree)
-  cn <- c("Intercept", cn)
-  coe <- matrix(NA, nrow = length(Opn), ncol = degree + 1,
-                dimnames = list(rn, cn))
-  r2 <- numeric(length(Opn))
-  mod <- list()
-  # the loop
-  for (i in seq(along = coo)) {
-    mod <- polynomials(coo[[i]], degree = degree, ortho = FALSE)
-    # mod[[i]] <- pol
-    coe[i, ] <- mod$coeff
-    r2[i] <- mod$r2
-  }
-  # mod$coefficients <- rep(NA, length(mod$coefficients))
-  method <- "rawPolynomials"
-  return(OpnCoe(coe = coe, fac = Opn$fac, method = method,
-                baseline1 = baseline1, baseline2 = baseline2, r2 = r2,
-                mod = mod))
-}
-
-#' Calculates orthogonal polynomials on Opn
-#'
-#' @aliases orthoPolynomials
-#' @param Opn an \link{Opn} object
-#' @param degree of the polynomial
-#' @param baseline1 numeric the \eqn{(x; y)} coordinates of the first baseline
-#' by default \eqn{(x= -0.5; y=0)}
-#' @param baseline2 numeric the \eqn{(x; y)} coordinates of the second baseline
-#' by default \eqn{(x= 0.5; y=0)}
-#' @param nb.pts number of points to sample and on which to calculate polynomials
-#' @return a \code{OpnCoe} object.
-#' @keywords Opn
-#' @examples
-#' data(olea)
-#' op <- orthoPolynomials(olea, 5)
-#' op
-#' # a summary of the r2 (fit)
-#' hist(op$r2)
-#' summary(op$r2)
-#' # and the standard deviation
-#' sd(op$r2)
-#' @export
-orthoPolynomials <- function(Opn, degree, baseline1, baseline2,
-                             nb.pts) {
-  UseMethod("orthoPolynomials")
-}
-#' @export
-orthoPolynomials.Opn <- function(Opn, degree, baseline1 = c(-0.5, 0), baseline2 = c(0.5, 0), nb.pts = 120) {
-  # we check a bit
-  min.pts <- min(sapply(Opn$coo, nrow))
-  if (nb.pts > min.pts) {
-    if (missing(nb.pts)) {
-      nb.pts <- min.pts
-      cat(" * 'nb.pts' missing and set to: ", nb.pts, "\n")
-    } else {
-      nb.pts <- min.pts
-      cat(" * at least one outline has less coordinates than 'nb.pts':",
-          nb.pts, "\n")
-    }
-  }
-  if (missing(degree)) {
-    degree <- 5
-    cat(" * 'degree' missing and set to: ", degree, "\n")
-  }
-  # we normalize
-  Opn <- coo_sample(Opn, nb.pts)
-  coo <- Opn$coo
-  coo <- lapply(coo, coo_baseline, ldk1 = 1, ldk2 = nb.pts,
-                t1 = baseline1, t2 = baseline2)
-  # we prepare the coe matrix
-  rn <- names(coo)
-  cn <- paste0("x", 1:degree)
-  cn <- c("Intercept", cn)
-  coe <- matrix(NA, nrow = length(Opn), ncol = degree + 1,
-                dimnames = list(rn, cn))
-  r2 <- numeric(length(Opn))
-  mod <- list()
-  # the loop
-  for (i in seq(along = coo)) {
-    mod <- polynomials(coo[[i]], degree = degree, ortho = TRUE)
-    # mod[[i]] <- pol
-    coe[i, ] <- mod$coeff
-    r2[i] <- mod$r2
-  }
-  # mod$coefficients <- rep(NA, length(mod$coefficients))
-  method <- "orthoPolynomials"
-  return(OpnCoe(coe = coe, fac = Opn$fac, method = method,
-                baseline1 = baseline1, baseline2 = baseline2, r2 = r2,
-                mod = mod))
-}
-
-# nquant (n no longer pertinent) calib.xxx everywhere ?? npow
-# / nr2 natSplines cubicSplines Bezier
 
 ###### end Opn

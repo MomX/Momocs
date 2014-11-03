@@ -3,15 +3,15 @@
 
 hpow <- function(...){
   cat(" * Deprecated, use 'cal_p' instead.\n")
-  cal_p(...)}
+  calibrate_harmonicpower(...)}
 
 hquant <- function(...){
   cat(" * Deprecated, use 'cal_d' instead.\n")
-  cal_d(...)}
+  calibrate_deviations(...)}
 
 hqual <- function(...){
   cat(" * Deprecated, use 'cal_v' instead.\n")
-  cal_v(...)}
+  calibrate_reconstructions(...)}
 
 removeAsymmetry <- function(...){
   cat(" * Deprecated, use 'rm_Asym' instead.\n")

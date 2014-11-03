@@ -76,12 +76,12 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
     ### open outlines
-    if (method[i] == "orthoPolynomials") {
+    if (method[i] == "opoly") {
       shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = TRUE,
                                  baseline1 = PCA$baseline1, baseline2 = PCA$baseline2)
       plot.method <- "lines"}
-    if (method[i] == "rawPolynomials") {
+    if (method[i] == "npoly") {
       shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = FALSE,
                                  baseline1 = PCA$baseline1, baseline2 = PCA$baseline2)
@@ -144,11 +144,11 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
   # cd <- TRUE} if (method=='tfourier'){ shp <-
   # PCA2shp_tfourier(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp, pts.shp=pts.shp) cd <- TRUE} ## open
-  # outlines if (method=='orthoPolynomials'){ shp <-
+  # outlines if (method=='opoly'){ shp <-
   # PCA2shp_polynomials(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp, pts.shp=pts.shp, ortho=TRUE,
   # baseline1=PCA$baseline1, baseline2=PCA$baseline2) cd <-
-  # FALSE} if (method=='rawPolynomials'){ shp <-
+  # FALSE} if (method=='npoly'){ shp <-
   # PCA2shp_polynomials(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
   # baseline1=PCA$baseline1, baseline2=PCA$baseline2) cd <-
@@ -326,6 +326,7 @@ PCA2shp_tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
 # @export
 PCA2shp_polynomials <- function(pos, rot, mshape, amp.shp = 1,
                                 pts.shp = 60, ortho, baseline1, baseline2) {
+  method_i <- ifelse(ortho, opoly_i, npoly_i)
   if (ncol(pos) != ncol(rot))
     stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
@@ -333,14 +334,13 @@ PCA2shp_polynomials <- function(pos, rot, mshape, amp.shp = 1,
   degree <- length(mshape)
   n <- nrow(pos)
   # an empy pol object
-  pol <- list(coeff = rep(NA, degree), ortho = ortho, baseline1 = baseline1,
-              baseline2 = baseline2)
+  pol <- list(coeff = rep(NA, degree), ortho = ortho, baseline1 = baseline1, baseline2 = baseline2)
   # we prepare the array
   res <- list()
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
     pol$coeff <- mshape + apply(ax.contrib, 1, sum)
-    coo <- polynomials_i(pol, nb.pts = pts.shp, reregister = TRUE)
+    coo <- method_i(pol, nb.pts = pts.shp, reregister = TRUE)
     pol$coeff <- rep(NA, degree)
     # reconstructed shapes are translated on their centroid if
     # (trans) {

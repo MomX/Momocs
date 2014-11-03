@@ -54,7 +54,7 @@ bot.f <- efourier(bot, 12)
 MANOVA(bot.f, 'type')
 
 data(olea)
-op <- rawPolynomials(olea, 5)
+op <- npoly(olea, 5)
 MANOVA(op, 'domes')
 }
 \seealso{
