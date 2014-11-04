@@ -1,0 +1,68 @@
+
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Outline analysis}
+-->
+
+## Preamble
+*Note* : so far this vignette only addresses outline analysis using Elliptical Fourier analysis. Other approaches are included in Momocs but won't be treated here (see `?rFourier` and `?tFourier`)
+
+We load some data and print them:
+```{r}
+library(Momocs)
+data(bot)
+bot
+```
+
+## How EFT works
+For the maths, have a look to `?efourier` and to the [*JSS paper*](http://www.jstatsoft.org/v56/i13). Graphically, two useful functions:
+```{r}
+coo_oscillo(bot[1], method="efourier")
+Ptolemy(bot[1])
+```
+
+## Quick inspection of dataset
+```{r}
+# a family picture
+panel(bot, fac="type", names=TRUE)
+# all stacked
+stack(bot)
+````
+
+```{r}
+# Let's calibrate the number of harmonics
+
+calibrate_harmonicpower(bot)
+calibrate_reconstructions(bot)
+calibrate_deviations(bot)
+
+# Let's go for 10 harmonics
+bot.f <- efourier(bot, 10)
+
+# Note that efourier can also be called directly on a shape, eg :
+efourier(bot[1])
+
+# Let's calculate a PCA and plot it
+bot.p <- PCA(bot.f)
+plot(bot.p, "type")
+# some variation around PCA
+plot(bot.p, "type", xax=2, yax=3, pos="xy")
+
+# Let's test for differences
+MANOVA(bot.f, "type")
+
+# Let's try and LDA now
+bot.l <- LDA(bot.p, "type")
+bot.l
+plot(bot.l)
+
+# Hierachical clustering
+CLUST(bot.p, "type", palette=col_gallus)
+
+# Mean shapes and Thin Plate Splines
+ms <- mshapes(bot.f, "type")$shp
+tps_iso(ms$beer, ms$whisky)
+tps_arr(ms$beer, ms$whisky)
+tps_grid(ms$beer, ms$whisky)
+
+
