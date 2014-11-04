@@ -50,22 +50,12 @@ mc <- function(class){
 
 
 ```
-
-
 # Preamble
-## About
-* Momocs is a work in progress.
-* The last stable version is released on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html).
-* The last version is on [GitHub](https://github.com/vbonhomme/Momocs) and you should use it.
-* If you use it, please cite it: `citation("Momocs")`. A second paper is in prep.
+* This document is intended to provide technical details behind the curtain.
+* It also helps me to fill the gaps and as a development map.
+* If it is your first contact with Momocs, you'd rather use the other vignette "Introduction to Momocs"
 
-## Assumptions
-Momocs makes the following assumptions:
-
-* You have a basic knowledge of R
-* You know what you want to do in statistics / morphometrics terms
-
-## Aims
+## Development
 Overall, long-term goals are :
 
 * Gather all morphometrics in a single grammar
@@ -73,13 +63,27 @@ Overall, long-term goals are :
 * Easy to use/extend
 * Delicious hackable graphics
 
+But Momocs is a work in progress :
+
+* The last stable version is released on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html).
+* The last version is on [GitHub](https://github.com/vbonhomme/Momocs), along with how to use it (you should).
+* If you use it, please cite it: `citation("Momocs")`. A second paper is in prep.
+
 ## Help
-* Tutorial are on their way `?Momocs`.
+
+Momocs makes the following assumptions:
+
+* You have a basic knowledge of R
+* You know what you want to do in statistics / morphometrics terms
+
+* Tutorials are on their way `?Momocs`.
 * You can collaborate to Momocs' development using GitHub. This is also the preferred place for bug reports. If you're not familiar with it, contact me directly.
-* I welcome bug reports, suggestions, data, questions, collaborations requests, etc. `bonhomme.vincent@gmail.com`. Your help will be duly credited.
+* I welcome bug reports, suggestions, data, questions, collaborations requests, etc. **`bonhomme.vincent@gmail.com`**. Your help will be duly credited.
 
+## Architecture
 
-## Conventions
+And uses this vocabulary :
+
 * A *shape* is an ordinate set (id varies from 1 to shape_length) of 2D (so far) coordinates
 * `Coo`rdinates are shapes + (classifiers and/or covariates) + hypotheses + questions.
 * `Coo` objects are turned into `Coe`fficients with appropriate morphometric methods, and on which to apply multivariate analyses.
@@ -87,6 +91,84 @@ Overall, long-term goals are :
 * Graphically, this can be represented as:
 ![architecture](MomocsArch.png)
 
+
+# Classes and methods
+* Momocs defines and uses S3 classes. Not the most rigorous but familiar to most of us.
+* `Coo`rdinates -> Morphometrics -> `Coe`fficients.
+* `Coo` and `Coe` are "super-classes" for coordinates and coefficients.
+* Only appropriate morphometrics are allowed on each class and turn :
+    + `Out` for closed outlines, into `OutCoe`;
+    + `Opn` for open curves, into `OpnCoe`;
+    + `Ldk` for landmarks, into `LdkCoe`.
+* To see class definitions, eg `Out` : `?Out`.
+* To see attached methods, eg for `OpnCoe` : `methods(class = "OpnCoe")`
+* To see R code behind methods, eg for `hist.OpnCoe` : `Momocs:::hist.OpnCoe`
+* Constructors are available, eg `Out()`
+
+## `Coo` class : coordinates
+`Coo` classes share most of their slots :
+
+`Coo`         | `Out` | `Opn` | `Ldk` | |
+------        |  ---  | ---   | ---   | ----
+`$coo`        | X     | X     | X     | list of matrices of coordinates
+`$fac`        | x     | x     | x     | data.frame of factors and covariable
+`$ldk`        | x     | x     | _     | list of numeric of the ids of the landmarks
+`$baseline`   | _     | x     | _     | list of baseline coordinates
+`$sliding`    | _     | _     | x     | list of the ids of the sliding landmarks
+`$links`      | _     | _     | x     | matrix of links between landmarks
+
+* `X` denotes mandatory information, `x` optionnal, `-` not available.
+
+## From `Coo` to `Coe`: morphometric methods
+Here are the methods implemented for every class that can be applied on the proper `Coo` object, and they create the proper `Coe` object.
+
+Coo           | method name     | what
+--------------| --------------- | --------------
+`Out`         | `efourier`      | Elliptical Fourier Transforms
+ _            | `rfourier`      | Radii variation Fourier Transforms
+ _            | `tfourier`      | Tangent angle Fourier Transforms
+`Opn`         | `npoly`         | Natural polynomial fit
+ _            | `opoly`         | Orthogonal polynomial fit
+ _            | `dfourier`      | Discrete Cosinus Transform [planned]
+ `Ldk`        | `fproc`         | Full Procrustes Superimposition [planned]
+_             | `fgproc`        | Full Generalized Procrustes [planned]
+_             | _               | Both Procrustes with robust / sliding handling
+
+The same method can also be called on single shapes: eg `efourier(bot[1])`.
+
+## `Coe` class : morphometric coefficients
+For `$Coe`, we change the `$coo` for `$coe` and we add a `$method` :
+
+`Coe`         | `Out` | `Opn` | `Ldk` | |
+------        |  ---  | ---   | ---   | ----
+`$coe`        | X     | X     | X     | matrix of coefficients
+`$fac`        | x     | x     | x     | data.frame of factors and covariable
+`$ldk`        | x     | x     | _     | list of numeric of the ids of the landmarks
+`$baseline`   | _     | x     | _     | list of baseline coordinates
+`$sliding`    | _     | _     | x     | list of the ids of the sliding landmarks
+`$method`     | x     | x     | x     | details of the morphometric
+
+## Handling classes
+* `Coo` objects can be indiced and return the corresponding shape, eg `bot[5]`
+* `Coo` and `Coe` objects can be subsetted using `subset` (see `subset.Coo`)
+* Similarly, they can be combined using `combine` (see `?combine`)
+* Different `Coo` objects can be combined (eg. open and closed outlines)
+
+## `Coo`, `Out`, `Opn`, `Ldk` methods
+Methods defined on `Coo` apply to all classes.
+
+```{r, results='markup', echo=-1}
+kable(tab_met(c("Coo", "Out", "Opn", "Ldk")))
+```
+
+## `Coe`, `OutCoe`,  `OpnCoe`, `LdkCoe` methods
+Methods defined on `Coe` apply to all classes.
+```{r, results='markup', echo=-1}
+kable(tab_met(c("Coe", "OutCoe", "OpnCoe", "LdkCoe")))
+```
+
+# Various
+## Naming conventions
 Momocs uses the following naming conventions :
 
 Pattern       | What                      | Example
@@ -97,8 +179,6 @@ Pattern       | What                      | Example
 `coo_*`       | Operations on coordinates | `coo_sample`
 `.*`          | Internal functions        | `.trim.path`
 
-
-# Using Momocs
 ## Import data
 
 Raw data can be imported :
@@ -134,81 +214,6 @@ coo_smooth      | smooth shape(s) (other options available)
 
 * To get the full list all : ```ls("package=Momocs, pattern = "coo-")```
 
-## Classes
-* Momocs defines and uses S3 classes. Not the most rigorous but familiar to most of us.
-* `Coo`rdinates -> Morphometrics -> `Coe`fficients.
-* `Coo` and `Coe` are "super-classes" for coordinates and coefficients.
-* Only appropriate morphometrics are allowed on each class and turn :
-    + `Out` for closed outlines, into `OutCoe`;
-    + `Opn` for open curves, into `OpnCoe`;
-    + `Ldk` for landmarks, into `LdkCoe`.
-* To see class definitions, eg `Out` : `?Out`.
-* To see attached methods, eg for `OpnCoe` : `methods(class = "OpnCoe")`
-* To see R code behind methods, eg for `hist.OpnCoe` : `Momocs:::hist.OpnCoe`
-* Constructors are available, eg `Out()`
-
-### `Coo` class : coordinates
-`Coo` classes share most of their slots :
-
-`Coo`         | `Out` | `Opn` | `Ldk` | |
-------        |  ---  | ---   | ---   | ----
-`$coo`        | X     | X     | X     | list of matrices of coordinates
-`$fac`        | x     | x     | x     | data.frame of factors and covariable
-`$ldk`        | x     | x     | _     | list of numeric of the ids of the landmarks
-`$baseline`   | _     | x     | _     | list of baseline coordinates
-`$sliding`    | _     | _     | x     | list of the ids of the sliding landmarks
-`$links`      | _     | _     | x     | matrix of links between landmarks
-
-* `X` denotes mandatory information, `x` optionnal, `-` not available.
-
-### From `Coo` to `Coe`: morphometric methods
-Here are the methods implemented for every class that can be applied on the proper `Coo` object, and they create the proper `Coe` object.
-
-Coo           | method name     | what
---------------| --------------- | --------------
-`Out`         | `efourier`      | Elliptical Fourier Transforms
- _            | `rfourier`      | Radii variation Fourier Transforms
- _            | `tfourier`      | Tangent angle Fourier Transforms
-`Opn`         | `npoly`         | Natural polynomial fit
- _            | `opoly`         | Orthogonal polynomial fit
- _            | `dfourier`      | Discrete Cosinus Transform [planned]
- `Ldk`        | `fproc`         | Full Procrustes Superimposition [planned]
-_             | `fgproc`        | Full Generalized Procrustes [planned]
-_             | _               | Both Procrustes with robust / sliding handling
-
-The same method can also be called on single shapes: eg `efourier(bot[1])`.
-
-### `Coe` class : morphometric coefficients
-For `$Coe`, we change the `$coo` for `$coe` and we add a `$method` :
-
-`Coe`         | `Out` | `Opn` | `Ldk` | |
-------        |  ---  | ---   | ---   | ----
-`$coe`        | X     | X     | X     | matrix of coefficients
-`$fac`        | x     | x     | x     | data.frame of factors and covariable
-`$ldk`        | x     | x     | _     | list of numeric of the ids of the landmarks
-`$baseline`   | _     | x     | _     | list of baseline coordinates
-`$sliding`    | _     | _     | x     | list of the ids of the sliding landmarks
-`$method`     | x     | x     | x     | details of the morphometric
-
-### Handling classes
-* `Coo` objects can be indiced and return the corresponding shape, eg `bot[5]`
-* `Coo` and `Coe` objects can be subsetted using `subset` (see `subset.Coo`)
-* Similarly, they can be combined using `combine` (see `?combine`)
-* Different `Coo` objects can be combined (eg. open and closed outlines)
-
-## Multivariate analyses
-Method       | What
--------      | ---------
-`PCA`        | Principal Component Analysis
-`LDA`        | Linear Discriminant Analysis (+ CV leave-one-out)
-`RDA`        | Redundancy analysis [planned]
-`CLUST`      | Hierarchical clustering
-`MANOVA`     | Multivariate analysis of variance
-`MANOVA_PW`  | Pairwise Multivariate analysis of variance
-`LM`         | Multivariate regression [planned]
-
-* When possible, methods apply directly on the corresponding `Coe` object.
-* Otherwise, a dimensionnality reduction with `PCA`, then doing the analysis on the `PCA` object will be prefered/required.
 
 ## Graphics
 * `img_plot`and `img_plot0` : two jpg plotters
@@ -236,22 +241,23 @@ knitr::kable(p)
 * Details, credits and analyses examples can be found in their respective helpfiles, eg. `?bot`
 * Help it grow by sending me your published data !
 
-# Method-dependent tools
+## Multivariate analyses
+Method       | What
+-------      | ---------
+`PCA`        | Principal Component Analysis
+`LDA`        | Linear Discriminant Analysis (+ CV leave-one-out)
+`RDA`        | Redundancy analysis [planned]
+`CLUST`      | Hierarchical clustering
+`MANOVA`     | Multivariate analysis of variance
+`MANOVA_PW`  | Pairwise Multivariate analysis of variance
+`LM`         | Multivariate regression [planned]
 
-## Outline analysis
-* Procrustes alignment can be used either on landmarks, previously defined with `def_ldk`, on on all coordinates. Then you will probably need to redefine the first point (see `coo_slide` and `coo_slidedirection`)
-* `cal_d`, `cal_e`, `cal_p` and `cal_v` for calibration using distances, error estimation between two sets, (harmonic) power, visual reconstruction.
-* `rm_Sym` and `rm_Asym` remove a/symmetric components for EFT
+* When possible, methods apply directly on the corresponding `Coe` object.
+* Otherwise, a dimensionnality reduction with `PCA`, then doing the analysis on the `PCA` object will be prefered/required.
 
-## Open outlines
-* `cal_d`, `cal_e`, `cal_p` and `cal_v` for calibration using distances, error estimation between two sets, (harmonic) power, visual reconstruction.
-
-## Configuration of landmarks
-* defining landmarks/links
-* alignment
-
-## Traditional morphometrics
-* On its way into the integration.
+```{r, results='markup', echo=-1}
+kable(tab_met(c("PCA", "LDA")))
+```
 
 ## Global shape descriptors
 The following list of global shape descriptors is available :
@@ -283,38 +289,5 @@ pairs(t(res))
 resp <- PCA(t(res), fac=bot$fac)
 ```
 
-## List of methods by class
 
-### `Out`, `Opn`, `Ldk`
-```{r, results='markup', echo=-1}
-kable(tab_met(c("Out", "Opn", "Ldk")))
-```
-
-And methods defined directly on `Coo` are also available:
-```{r, results='markup', echo=-1}
-kable(tab_met(c("Coo")))
-```
-
-
-### `OutCoe`,  `OpnCoe`, `LdkCoe`
-```{r, results='markup', echo=-1}
-kable(tab_met(c("OutCoe", "OpnCoe", "LdkCoe")))
-```
-
-And methods defined directly on `Coe` are also available:
-```{r, results='markup', echo=-1}
-kable(tab_met(c("Coe")))
-```
-
-### Multivariate analyses
-```{r, results='markup', echo=-1}
-kable(tab_met(c("PCA", "LDA")))
-```
-
-# Todo
-* hcontrib devient coeff_contrib (Out, Opn)
-* mshapes + mshape
-* fProcrustes devient fproc
-* fgproc : écrire
-* calibrate_ retourne res + Out
 

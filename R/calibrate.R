@@ -13,10 +13,6 @@
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
 #' @param plot.method either \code{'\link{panel}'} or \code{'\link{stack}'}
-#' @param shp.col a color for the shape (\code{NA} by default)
-#' @param shp.border a color for the border of the shape
-#' @param legend logical whether to plot a legend
-#' @param legend.title if TRUE above, its title
 #' @param palette a color \link{palette}
 #' @param ... additional parameters to fed \link{coo_plot}
 #' @keywords Out
@@ -34,69 +30,54 @@ calibrate_reconstructions.Out <- function(x,
                                           id,
                                           range = 1:9,
                                           plot.method = c("panel", "stack")[1],
-                                          legend = TRUE,
-                                          legend.title = "Nb of harmonics",
                                           palette = col_heat,
-                                          shp.col = NA,
-                                          shp.border = "#1A1A1A",
                                           ...) {
   # we detect the method
+  # Out dispatcher
   Out <- x
-  if (missing(id))
-    id <- sample(length(Out$coo), 1)
   if (missing(method)) {
     cat(" * Method not provided. efourier is used.\n")
     method <- efourier
-    method.i <- efourier_i
+    method_i <- efourier_i
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
     if (is.na(p)) {
       warning(" * Unvalid method. efourier is used.\n")
     } else {
-      method <- switch(p, efourier, rfourier, tfourier)
-      method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)
+      method   <- switch(p, efourier, rfourier, tfourier)
+      method_i <- switch(p, efourier_i, rfourier_i, tfourier_i)
     }
   }
+  # we sample a shape
+  if (missing(id))
+    id <- sample(length(Out$coo), 1)
+  coo <- Out$coo[[id]]
+  coo <- coo_center(coo)
   
   # check for too ambitious harm.range
-  if (max(range) > (min(sapply(Out$coo, nrow))/2 + 1)) {
+  if (max(range) > floor(nrow(coo)/2)) {
     range <- floor(seq(1, q/2 - 1, length = 6))
     cat(" * range was too high and set to: ", range, ".\n")
   }
-  coo <- Out$coo[[id]]
-  coo <- coo_center(coo)
+  
+  # we calculate all shapes
   res <- list()
   for (i in seq(along = range)) {
-    res[[i]] <- method.i(method(coo, nb.h = max(range)), nb.h = range[i])
+    res[[i]] <- method_i(method(coo, nb.h = max(range)), nb.h = range[i])
   }
-  # plotting
-  op <- par(mar = c(3, 3, 4, 1))
-  on.exit(par(op))
-  cols <- paste0(palette(length(range)), "EE")
-  if (plot.method == "stack") {
-    coo_plot(coo, border = shp.border, col = shp.col, lwd = 2,
-             points = FALSE, main = names(Out)[id], ...)
-    for (i in seq(along = range)) {
-      lines(res[[i]], col = cols[i], lwd = 1)
-    }
-    if (legend) {
-      legend("topright", legend = as.character(range),
-             bty = "n", col = cols, lty = 1, lwd = 1, cex = 0.7,
-             title = legend.title)
-    }
-  } else {
-    if (plot.method == "panel") {
-      op <- par(mar=c(1, 1, 4, 1))
-      on.exit(par(op))
-      pos <- coo_listpanel(res, cols = cols)
-      if (legend) {
-        text(x = pos[, 1], y = pos[, 2], as.character(range))
-      }
-      title(names(Out)[id], cex = 1.3, outer = FALSE)
-    }
-  }
-  # we return res
+  # we prepare an Out
   names(res) <- range
+  res <- Out(res)
+  
+  # we plot it
+  cols <- paste0(palette(length(range)), "EE")
+  if (plot.method=="stack"){
+    stack(res, borders=cols, centroid=FALSE)
+  } else {
+    panel(res, col=cols, names=TRUE, cex.names=3/4)
+    title(names(Out)[id], line = -1)
+  }
+  # and we return it
   invisible(res)
 }
 
@@ -105,71 +86,65 @@ calibrate_reconstructions.Out <- function(x,
 calibrate_reconstructions.Opn <- function(x,
                                           method = c("npoly", "opoly"),
                                           id,
-                                          range = c(2, 3, 4, 6, 8, 10),
+                                          range = 2:10,
                                           baseline1 = c(-1, 0),
                                           baseline2 = c(1, 0),
                                           plot.method = c("panel", "stack")[1],
-                                          legend = TRUE,
-                                          legend.title = "Degree",
-                                          palette = col_india,
-                                          shp.border = "#1A1A1A",
+                                          palette = col_sari,
                                           ...) {
-  
+  # Opn dispatcher
   Opn <- x
-  if (missing(id))
-    id <- sample(length(Opn$coo), 1)
   if (missing(method)) {
     cat(" * Method not provided. opoly is used.\n")
-    ortho <- TRUE
+    method   <- opoly
+    method_i <- opoly_i
   } else {
     p <- pmatch(tolower(method), c("npoly", "opoly"))
     if (is.na(p)) {
       warning(" * Unvalid method. opoly is used.\n")
     } else {
-      method <- switch(p, npoly, opoly)
+      method   <- switch(p, npoly, opoly)
       method_i <- switch(p, npoly_i, opoly_i)
     }
   }
-  # check for too ambitious range
-  if (max(degree.range) > (min(sapply(Opn$coo, nrow)) - 1)) {
-    degree.range <- (min(sapply(Opn$coo, nrow)) - 1)
-    cat(" * degree.range was too high and set to: ", degree.range, ".\n")
-  }
+  
+  # we sample a shape
+  if (missing(id))
+    id <- sample(length(Opn$coo), 1)
   coo <- Opn$coo[[id]]
-  coo <- coo_baseline(coo, ldk1 = 1, ldk2 = nrow(coo), t1 = baseline1, t2 = baseline2)
+  coo <- coo_baseline(coo,
+                      ldk1 = 1, ldk2 = nrow(coo),
+                      t1 = baseline1, t2 = baseline2)
+
+  # we check for too ambitious range
+  # special case for opoly # todo
+  if ( p == 2) {
+    if (max(range) > 20) range <- 2:20
+  } 
+  if (max(range) > (nrow(coo) - 1)) {
+    range <- 2:10
+    cat(" * range was too high and set to: ", range, ".\n")
+  }
+
+  # we loop
   res <- list()
-  for (i in seq(along = degree.range)) {
-    res[[i]] <- method_i(method(coo, degree = degree.range[i]))
+  for (i in seq(along = range)) {
+    res[[i]] <- method_i(method(coo, degree = range[i]))
   }
-  # plotting
-  #   op <- par(mar = c(3, 3, 2, 1))
-  #   on.exit(par(op))
-  cols <- paste0(palette(length(degree.range)), "EE")
-  if (plot.method == "stack") {
-    # to initiate the plot but stack may be a better option for
-    # that part
-    coo_plot(coo, border = shp.border, lwd = 1)
-    for (i in seq(along = degree.range)) {
-      lines(res[[i]], col = cols[i])
-    }
-    if (legend) {
-      legend("topright", legend = as.character(degree.range),
-             bty = "n", col = cols, lty = 1, lwd = 1, cex = 0.7,
-             title = legend.title)
-    }
-  } else {
-    if (plot.method == "panel") {
-      # par(oma=c(1, 1, 3, 0))
-      pos <- coo_listpanel(res, borders = cols, cols = par("bg"),
-                           poly = FALSE)
-      if (legend) {
-        text(x = pos[, 1], y = pos[, 2], as.character(degree.range))
-      }
-      title(names(Opn)[id], cex = 1.3)
-    }
-  }
-  # we return res
+  
+  # we prepare an Out
   names(res) <- range
+  res <- Opn(res)
+  
+  # we plot it
+  cols <- paste0(palette(length(range)), "EE")
+  if (plot.method=="stack"){
+    stack(res, borders=cols, centroid=FALSE)
+  } else {
+    panel(res, borders=cols, names=TRUE, cex.names=3/4)
+    title(names(Opn)[id], line = -1)
+  }
+  # and we return it
   invisible(res)
 }
 

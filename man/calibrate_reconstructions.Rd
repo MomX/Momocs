@@ -9,14 +9,11 @@ calibrate_reconstructions(x, ...)
 
 \method{calibrate_reconstructions}{Out}(x, method = c("efourier", "rfourier",
   "tfourier"), id, range = 1:9, plot.method = c("panel", "stack")[1],
-  legend = TRUE, legend.title = "Nb of harmonics", palette = col_heat,
-  shp.col = NA, shp.border = "#1A1A1A", ...)
+  palette = col_heat, ...)
 
 \method{calibrate_reconstructions}{Opn}(x, method = c("npoly", "opoly"), id,
-  range = c(2, 3, 4, 6, 8, 10), baseline1 = c(-1, 0), baseline2 = c(1, 0),
-  plot.method = c("panel", "stack")[1], legend = TRUE,
-  legend.title = "Degree", palette = col_india, shp.border = "#1A1A1A",
-  ...)
+  range = 2:10, baseline1 = c(-1, 0), baseline2 = c(1, 0),
+  plot.method = c("panel", "stack")[1], palette = col_sari, ...)
 }
 \arguments{
 \item{x}{the \code{Coo} object on which to calibrate_reconstructions}
@@ -31,15 +28,7 @@ calibrate_reconstructions(x, ...)
 
 \item{plot.method}{either \code{'\link{panel}'} or \code{'\link{stack}'}}
 
-\item{legend}{logical whether to plot a legend}
-
-\item{legend.title}{if TRUE above, its title}
-
 \item{palette}{a color \link{palette}}
-
-\item{shp.col}{a color for the shape (\code{NA} by default)}
-
-\item{shp.border}{a color for the border of the shape}
 
 \item{baseline1}{\eqn{(x; y)} coordinates for the first point of the baseline}
 

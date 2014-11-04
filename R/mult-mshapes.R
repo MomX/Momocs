@@ -92,7 +92,7 @@ mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
     	if (is.na(p)) {
       		warning(" * Unvalid method. efourier is used.\n")
     	} else {
-      method_i <- switch(p, opoly_i, npoly_i, dfourier_i)
+      method_i <- switch(p, opoly_i, npoly_i, NA) # dfourier_i
     }
     n <- length(OpnCoe$mshape)  #todo
     if (missing(fac)) {
