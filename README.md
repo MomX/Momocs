@@ -13,7 +13,8 @@ library(devtools)
 install_github("vbonhomme/Momocs", build_vignettes=TRUE)
 library(Momocs)
 ````
-Have a look to the tutorials with `browseVignettes("Momocs")`. 
+* Have a look to the tutorials with `browseVignettes("Momocs")`.
+* Same thing, [here](https://github.com/vbonhomme/Momocs/tree/master/vignettes)
 
 ![Momocs functionnal architecture](https://github.com/vbonhomme/Momocs-vignette/blob/master/vignettes/MomocsArch.png)
 
