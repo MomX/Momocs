@@ -1,9 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Technical details}
--->
-
-
+---
+title: "Technical details"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Technical details}
+  \usepackage[utf8]{inputenc}
+---
 
 ```{r, echo=FALSE}
 library(knitr)

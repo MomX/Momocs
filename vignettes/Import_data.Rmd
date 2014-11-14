@@ -1,11 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Import data}
--->
-
-
-
-
+---
+title: "Import data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Import data}
+  \usepackage[utf8]{inputenc}
+---
 Most of the time, the longest and often more painful part of morphometrics is to acquire data, often pictures, and then convert it into lists $(x; y)$ coordinates.
 
 In Momocs, you have the choice to use the built-in utilities or third-party softwares, and then import their data. For instance, [tpsDig](http://life.bio.sunysb.edu/ee/rohlf/software.html) is dedicated to morphometrics (particularly landmarks) and is widely used but unfortunately, only available for Windows users. 

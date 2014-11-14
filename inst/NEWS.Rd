@@ -5,6 +5,14 @@
 
 \encoding{UTF-8}
 
+\section{Changes in version 0.99}{
+\itemize{
+  \item Review of the code
+  \item Consistent renaming
+  \item First vignettes on their way
+}
+}
+
 \section{Changes in version 0.9}{
 
   \subsection{GENERAL}{

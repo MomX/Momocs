@@ -1,7 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{About Momocs}
--->
+---
+title: "Introduction to Momocs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Introduction to Momocs}
+  \usepackage[utf8]{inputenc}
+---
 # About Momocs
 Overall, long-term goals are :
 

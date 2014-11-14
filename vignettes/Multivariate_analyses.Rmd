@@ -1,10 +1,10 @@
 
 ---
-title: "Vignette Title"
+title: "Multivariate analyses"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Multivariate analyses}
   \usepackage[utf8]{inputenc}
 ---
 

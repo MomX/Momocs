@@ -1,8 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Outline analysis}
--->
-
+---
+title: "Outline analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Outline analysis}
+  \usepackage[utf8]{inputenc}
+---
 ## Preamble
 *Note* : so far this vignette only addresses outline analysis using Elliptical Fourier analysis. Other approaches are included in Momocs but won't be treated here (see `?rFourier` and `?tFourier`)
 

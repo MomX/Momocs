@@ -1,7 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Graphics}
--->
+---
+title: "Graphics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Graphics}
+  \usepackage[utf8]{inputenc}
+---
 
 Morphometrics are, by essence, highly concerned with shape graphics and the multivariate statistics we can turn them into. Here I review the core graphical 
 functions. They are all derived from `base`graphics yet they may be turned into a `ggplot2` unified style at some point. They are presented in a "chronological" order, from operation on single shapes, to representation of `Coo` objects that are collections of shapes.
