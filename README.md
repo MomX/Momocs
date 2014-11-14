@@ -13,9 +13,7 @@ library(devtools)
 install_github("vbonhomme/Momocs", build_vignettes=TRUE)
 library(Momocs)
 ````
-Have a look to the [tutorials (work in progress)](https://github.com/vbonhomme/Momocs-vignette/tree/master/vignettes/html)
-
-Note that you can find in `?Coo` the steps to import your former `Coo`objects.
+Have a look to the tutorials with `browseVignettes("Momocs")`. 
 
 ![Momocs functionnal architecture](https://github.com/vbonhomme/Momocs-vignette/blob/master/vignettes/MomocsArch.png)
 
@@ -24,8 +22,8 @@ Next big steps
 --------
 * Fill the gaps (particularly for landmarks)
 * Unify all plots (design), function (arguments consistency), etc.
-* Review the helpfiles, finish the [tutorial](https://github.com/vbonhomme/Momocs-vignette/tree/master/v0.9) (a collection of vignettes)
-* Release Momocs 1.0 (September/October 2014)
+* Review the helpfiles, finish the vignettes work
+* Release Momocs 1.0 (Spring 2015)
 
 How can you help and find help ?
 --------
@@ -37,6 +35,7 @@ __You are welcome to:__
 * collaborate with me
 * just send me an email: bonhomme.vincent@gmail.com
 
+Enjoy Momocs!
 
 Features
 --------
