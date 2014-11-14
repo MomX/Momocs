@@ -27,7 +27,7 @@
 #' \dontrun{
 #' # Will write files on your machine!
 #' data(bot)
-#' bot.f <- eFourier(bot, 6)
+#' bot.f <- efourier(bot, 6)
 #' export(bot.f) # data.txt which can be opened by every software including MS Excel
 #' # If you are French, or another country that has not been invaded by anglo-american rules.
 #' # and for use in Excel.

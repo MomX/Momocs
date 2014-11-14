@@ -1,6 +1,6 @@
 ##### Core functions for Procrustes alignements
 
-# should DF be used for hquant ? #todo
+# should DF be used for calibrate_deviations ? #todo
 #' Full Procrustes alignment between two shapes
 #'
 #' Directly borrowed from Claude (2008), called there the \code{fPsup} function.
@@ -70,7 +70,7 @@ fgProcrustes <- function(x, tol, verbose, coo) {
 #' @export
 fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
   A <- x
-  A <- ldk.check(A)
+  A <- ldk_check(A)
   # directly borrowed from Claude
   p <- dim(A)[1]
   k <- dim(A)[2]
@@ -150,7 +150,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
     return(Coo)
   }
   Coo2 <- coo_center(coo_scale(Coo))
-  ref <- getLandmarks(Coo2)
+  ref <- get_ldk(Coo2)
   tar <- fgProcrustes(ref, tol = tol, verbose = verbose)$rotated
   # would benefit to be handled by coo_baseline ?
   for (i in 1:length(Coo2)) {
@@ -172,7 +172,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
     ty <- t2y - t1y
     rx <- r2x - r1x
     ry <- r2y - r1y
-    vi <- vecs.param(rx, ry, tx, ty)
+    vi <- vecs_param(rx, ry, tx, ty)
     coo_i <- Coo2$coo[[i]]
     coo_i <- coo_trans(coo_i, t[1] - t1x, t[2] - t1y)
     coo_i <- coo_i/vi$r.norms

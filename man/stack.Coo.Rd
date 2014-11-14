@@ -7,16 +7,16 @@
 \usage{
 \method{stack}{Coo}(x, cols, borders, points = FALSE, first.point = TRUE,
   centroid = TRUE, ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055",
-  ldk.cex = 0.5, ldk.links = FALSE, ldk.confell = FALSE,
-  ldk.contour = FALSE, ldk.chull = FALSE, ldk.labels = FALSE,
+  ldk.cex = 0.5, ldk_links = FALSE, ldk_confell = FALSE,
+  ldk_contour = FALSE, ldk_chull = FALSE, ldk_labels = FALSE,
   xy.axis = TRUE, title = substitute(x), ...)
 
 \method{stack}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
   ldk = TRUE, ldk.pch = 20, ldk.col = "#33333333", ldk.cex = 0.3,
-  ldk.links = FALSE, ldk.confell = FALSE, ldk.contour = FALSE,
-  ldk.chull = FALSE, ldk.labels = FALSE, xy.axis = TRUE,
+  ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
+  ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE,
   title = substitute(x), ...)
 }
 \arguments{
@@ -42,15 +42,15 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{ldk.cex}{A \code{cex} fro these landmarks}
 
-\item{ldk.links}{logical whether to draw links (of the mean shape)}
+\item{ldk_links}{logical whether to draw links (of the mean shape)}
 
-\item{ldk.confell}{logical whether to draw conf ellipses}
+\item{ldk_confell}{logical whether to draw conf ellipses}
 
-\item{ldk.contour}{logical whether to draw contour lines}
+\item{ldk_contour}{logical whether to draw contour lines}
 
-\item{ldk.chull}{logical whether to draw convex hull}
+\item{ldk_chull}{logical whether to draw convex hull}
 
-\item{ldk.labels}{logical whether to draw landmark labels}
+\item{ldk_labels}{logical whether to draw landmark labels}
 
 \item{xy.axis}{whether to draw or not the x and y axes}
 
@@ -73,14 +73,14 @@ for \code{stack(as.Out(OutCoe), ...)}. In that case,
 \dontrun{
 data(bot)
 stack(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 stack(bot.f)
 data(mosquito)
 stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
 data(hearts)
 stack(hearts)
 stack(hearts, ldk=FALSE)
-stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col.summer(4), ldk.pch=20)
+stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col_summer(4), ldk.pch=20)
 }
 }
 \seealso{

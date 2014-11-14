@@ -36,7 +36,7 @@ a 'fac') or globally (if not), and on \link{Coe} objects.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 mshapes(bot.f) # the mean (global) shape
 ms <- mshapes(bot.f, 'type')
 ms$Coe
@@ -44,10 +44,10 @@ class(ms$Coe)
 ms <- ms$shp
 coo_plot(ms$beer)
 coo_draw(ms$whisky, border='forestgreen')
-tps.arr(ms$whisky, ms$beer) #etc.
+tps_arr(ms$whisky, ms$beer) #etc.
 
 data(olea)
-op <- rawPolynomials(subset(olea, view=='VL'), 5)
+op <- npoly(subset(olea, view=='VL'), 5)
 ms <- mshapes(op, 'cep') #etc
 ms$Coe
 panel(Opn(ms$shp), names=TRUE)

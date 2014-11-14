@@ -29,7 +29,7 @@ edm(x, x)
 edm(x, x+1)
 }
 \seealso{
-\link{ed}, \link{edm.nearest}, \link{dist}.
+\link{ed}, \link{edm_nearest}, \link{dist}.
 }
 \keyword{Miscellaneous}
 

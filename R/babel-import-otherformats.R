@@ -69,7 +69,7 @@ chc2pix <- function(chc) {
 #' @param chc a path to the chc file
 #' @param skip numeric how many informations before the first chain-coded information
 #' @param names an (optional) vector of (skip) names for the \code{fac} created.
-#' Somehow similar to \code{names} in \link{lf.structure}
+#' Somehow similar to \code{names} in \link{lf_structure}
 #' @details
 #' Files from Shape/ChainCoder comes this way:
 #' \preformatted{
@@ -177,22 +177,22 @@ tps2Coo <- function(tps.path, sep = " ") {
     # we read all lines of the file
     tps <- readLines(tps.path)
     # we detect the beginning of every individual
-    tps.pos <- cbind(grep(pattern = "lm=", x = tps, ignore.case = TRUE),
+    tps_pos <- cbind(grep(pattern = "lm=", x = tps, ignore.case = TRUE),
         c(grep(pattern = "lm=", x = tps, ignore.case = TRUE)[-1] -
             1, length(tps)))
     # we prepare a vector and a list to host the data
     img.names <- character()
     coo_list <- list()
     # and we loop over individuals
-    for (i in 1:nrow(tps.pos)) {
+    for (i in 1:nrow(tps_pos)) {
         # first we pick one of the individuals
-        tps.i <- tps[tps.pos[i, 1]:tps.pos[i, 2]]
+        tps_i <- tps[tps_pos[i, 1]:tps_pos[i, 2]]
         # and we grab and clean the image name information
-        img.i <- tps.i[grep("image", tps.i, ignore.case = TRUE)]
+        img.i <- tps_i[grep("image", tps_i, ignore.case = TRUE)]
         img.i <- gsub("image=", "", img.i, ignore.case = TRUE)
         img.names[i] <- gsub(".jpg", "", img.i, ignore.case = TRUE)
         # here we exclude every line that start with a letter
-        coo_i <- tps.i[-grep(pattern = "[[:alpha:]]", tps.i)]
+        coo_i <- tps_i[-grep(pattern = "[[:alpha:]]", tps_i)]
         # and convert it as a matrix of coordinates
         coo_i <- unlist(strsplit(coo_i, sep))
         coo_list[[i]] <- matrix(as.numeric(coo_i), ncol = 2,

@@ -4,13 +4,13 @@
 \title{Plots Principal Component Analysis}
 \usage{
 \method{plot}{PCA}(x, fac, xax = 1, yax = 2, points = TRUE,
-  col = "#000000", pch = 20, cex = 0.5, palette = col.solarized,
+  col = "#000000", pch = 20, cex = 0.5, palette = col_solarized,
   center.origin = FALSE, zoom = 1, bg = par("bg"), grid = TRUE,
   nb.grids = 3, morphospace = TRUE, pos.shp = "full", amp.shp = 1,
   size.shp = 1, nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
   border.shp = .transp("#000000", 0.5), lwd.shp = 1,
   col.shp = .transp("#000000", 0.95), stars = FALSE, ellipses = FALSE,
-  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75,
+  conf_ellipses = 0.5, ellipsesax = TRUE, conf_ellipsesax = c(0.5, 0.75,
   0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
@@ -79,11 +79,11 @@ or a data.frame for \link{pos.shapes}}
 
 \item{ellipses}{logical whether to draw confidence ellipses}
 
-\item{conf.ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
+\item{conf_ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
 
 \item{ellipsesax}{logical whether to draw ellipse axes}
 
-\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
+\item{conf_ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
 
 \item{lty.ellipsesax}{if yes, the lty with which to draw these axes}
 
@@ -148,14 +148,14 @@ of the ade4 R package.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 bot.p
 plot(bot.p, morpho=FALSE)
 plot(bot.p, "type")
 
 data(olea)
-op <- rawPolynomials(olea, 5)
+op <- npoly(olea, 5)
 op.p <- PCA(op)
 op.p
 plot(op.p, ~ domes + cep, morpho=TRUE) # use of formula

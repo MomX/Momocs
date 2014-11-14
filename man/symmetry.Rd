@@ -12,7 +12,7 @@ symmetry(OutCoe)
 a matrix with 4 colums described above.
 }
 \description{
-For \link{OutCoe} objects obtained with \link{eFourier}, calculates several
+For \link{OutCoe} objects obtained with \link{efourier}, calculates several
 indices on the matrix of coefficients: \code{AD}, the sum of absolute values of
 harmonic coefficients A and D; \code{BC} same thing for B and C; \code{amp} the
 sum of the absolute value of all harmonic coefficients and \code{sym} which is the ratio
@@ -20,7 +20,7 @@ of \code{AD} over \code{amp}. See references below for more details.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 res <- symmetry(bot.f)
 hist(res[, 'sym'])
 }
@@ -40,7 +40,7 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
 }
 }
 \seealso{
-\link{removeAsymmetric} and \link{removeSymmetric}.
+\link{rm_Asym} and \link{rm_Sym}.
 }
-\keyword{eFourier}
+\keyword{efourier}
 

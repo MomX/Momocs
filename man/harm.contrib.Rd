@@ -36,7 +36,7 @@ shapes are reconstructed and plotted. Naturally, only works on Fourier-based met
 }
 \examples{
 data(bot)
- bot.f <- eFourier(bot, 12)
+ bot.f <- efourier(bot, 12)
  hcontrib(bot.f)
  hcontrib(bot.f, harm.r=3:10, amp.r=1:8, col="grey20",
     main="A huge panel")

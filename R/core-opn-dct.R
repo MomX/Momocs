@@ -31,18 +31,18 @@
 #' coo_plot(o)
 #' o.dct <- dct(o, nb.h=12)
 #' o.dct
-#' o.i <- dct.i(o.dct)
+#' o.i <- dct_i(o.dct)
 #' o.i <- coo_bookstein(o.i)
 #' coo_draw(o.i, border='red')
 #'
-#' #future hqual
+#' #future calibrate_reconstructions
 #' o <- olea[1]
 #' h.range <- 2:13
 #' coo <- list()
 #' for (i in seq(along=h.range)){
-#' coo[[i]] <- dct.i(dct(o, nb.h=h.range[i]))}
+#' coo[[i]] <- dct_i(dct(o, nb.h=h.range[i]))}
 #' names(coo) <- paste0('h', h.range)
-#' panel(Opn(coo), borders=col.india(12), names=TRUE)
+#' panel(Opn(coo), borders=col_india(12), names=TRUE)
 #' title('Discrete Cosine Transforms')
 #' @export
 dct <- function(coo, nb.h, verbose = TRUE) {
@@ -94,7 +94,7 @@ dct <- function(coo, nb.h, verbose = TRUE) {
 #' coo_plot(o)
 #' o.dct <- dct(o, nb.h=12)
 #' o.dct
-#' o.i <- dct.i(o.dct)
+#' o.i <- dct_i(o.dct)
 #' o.i <- coo_bookstein(o.i)
 #' coo_draw(o.i, border='red')
 #'
@@ -102,12 +102,12 @@ dct <- function(coo, nb.h, verbose = TRUE) {
 #' h.range <- 2:13
 #' coo <- list()
 #' for (i in seq(along=h.range)){
-#' coo[[i]] <- dct.i(dct(o, nb.h=h.range[i]))}
+#' coo[[i]] <- dct_i(dct(o, nb.h=h.range[i]))}
 #' names(coo) <- paste0('h', h.range)
-#' panel(Opn(coo), borders=col.india(12), names=TRUE)
+#' panel(Opn(coo), borders=col_india(12), names=TRUE)
 #' title('Discrete Cosine Transforms')
 #' @export
-dct.i <- function(df, nb.pts = 60) {
+dct_i <- function(df, nb.pts = 60) {
     A <- df$A
     B <- df$B
     nb.h <- length(A) + 1
@@ -143,15 +143,15 @@ dct.i <- function(df, nb.pts = 60) {
 #' @param nb.pts if \code{A} and/or \code{B} are not provided, 
 #' the number of points to use to reconstruct the shapes 
 #' @param alpha tThe power coefficient associated with the (usually decreasing) 
-#' amplitude of the harmonic coefficients (see \link{efourier.shape})
+#' amplitude of the harmonic coefficients (see \link{efourier_shape})
 #' @param plot logical whether to plot the shape
 #' @examples 
 #' # some signatures
-#' panel(coo_align(Opn(replicate(48, dct.shape(alpha=0.5, nb.h=6)))))
+#' panel(coo_align(Opn(replicate(48, dct_shape(alpha=0.5, nb.h=6)))))
 #' # some worms
-#' panel(coo_align(Opn(replicate(48, dct.shape(alpha=2, nb.h=6)))))
+#' panel(coo_align(Opn(replicate(48, dct_shape(alpha=2, nb.h=6)))))
 #' @export
-dct.shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
+dct_shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
     if (missing(nb.h) & missing(A)) 
         nb.h <- 3
     if (missing(nb.h) & !missing(A)) 
@@ -161,7 +161,7 @@ dct.shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
     if (missing(B)) 
         B <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
     df <- list(A = A, B = B)
-    shp <- dct.i(df, nb.pts = nb.pts)
+    shp <- dct_i(df, nb.pts = nb.pts)
     if (plot) 
         coo_plot(shp)
     return(shp)

@@ -1,7 +1,7 @@
 # 6. Morphospace functions
 # -----------------------------------------------------
 # stupid function
-#' @export
+# @export
 .mprod <- function(m, s) {
   res <- m
   for (i in 1:ncol(m)) {
@@ -10,13 +10,13 @@
   return(res)
 }
 
-#' @export
-.morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
+# @export
+morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
                             nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
                             col.shp = "#00000011", border.shp = "#00000055", lwd.shp = 1, plot = TRUE) {
   # we check here, though it shoudl have been before
   if (length(PCA$method)>4 | is.null(PCA$method)) {
-    stop(" * .morphospacePCA needs a $method of length <= 5")}
+    stop(" * morphospacePCA needs a $method of length <= 5")}
   # we retrive the values corresponding to the two plotted axes and the meanshape
   xy <- PCA$x[, c(xax, yax)]
   rot <- PCA$rotation[, c(xax, yax)]
@@ -60,35 +60,35 @@
     plot.method <- NULL
     ids <- col.start[i]:col.end[i]
     # outlines
-    if (method[i] == "eFourier") {
-      shp <- PCA2shp.efourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+    if (method[i] == "efourier") {
+      shp <- PCA2shp_efourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
-    if (method[i] == "rFourier") {
-      shp <- PCA2shp.rfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+    if (method[i] == "rfourier") {
+      shp <- PCA2shp_rfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
-    if (method[i] == "tFourier") {
-      shp <- PCA2shp.tfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+    if (method[i] == "tfourier") {
+      shp <- PCA2shp_tfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
     ### open outlines
-    if (method[i] == "orthoPolynomials") {
-      shp <- PCA2shp.polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+    if (method[i] == "opoly") {
+      shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = TRUE,
                                  baseline1 = PCA$baseline1, baseline2 = PCA$baseline2)
       plot.method <- "lines"}
-    if (method[i] == "rawPolynomials") {
-      shp <- PCA2shp.polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+    if (method[i] == "npoly") {
+      shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = FALSE,
                                  baseline1 = PCA$baseline1, baseline2 = PCA$baseline2)
       plot.method <- "lines"}
     ### configuration of landmarks
     if (method[i] == "procrustes") {
-      shp <- PCA2shp.procrustes(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+      shp <- PCA2shp_procrustes(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                 amp.shp = amp.shp)
       plot.method <- "points"}
     # we template shapes
@@ -109,8 +109,8 @@
   invisible(shp)
 }
 
-#' @export
-.morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
+# @export
+morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
                             nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
                             col.shp = "#00000011", border.shp = "#00000055") {
 
@@ -134,26 +134,26 @@
   # reconstruct shapes
   method <- LDA$method
   ## outlines
-  if (method == "eFourier") {
-    shp <- lda2shp.efourier(pos = pos, rot = rot, mshape = mshape,
+  if (method == "efourier") {
+    shp <- LDA2shp_efourier(pos = pos, rot = rot, mshape = mshape,
                             amp.shp = amp.shp, pts.shp = pts.shp)
     cd <- TRUE
   }
-  # if (method=='rFourier'){ shp <- PCA2shp.rfourier(pos=pos,
+  # if (method=='rfourier'){ shp <- PCA2shp_rfourier(pos=pos,
   # rot=rot, mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
-  # cd <- TRUE} if (method=='tFourier'){ shp <-
-  # PCA2shp.tfourier(pos=pos, rot=rot, mshape=mshape,
+  # cd <- TRUE} if (method=='tfourier'){ shp <-
+  # PCA2shp_tfourier(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp, pts.shp=pts.shp) cd <- TRUE} ## open
-  # outlines if (method=='orthoPolynomials'){ shp <-
-  # PCA2shp.polynomials(pos=pos, rot=rot, mshape=mshape,
+  # outlines if (method=='opoly'){ shp <-
+  # PCA2shp_polynomials(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp, pts.shp=pts.shp, ortho=TRUE,
   # baseline1=PCA$baseline1, baseline2=PCA$baseline2) cd <-
-  # FALSE} if (method=='rawPolynomials'){ shp <-
-  # PCA2shp.polynomials(pos=pos, rot=rot, mshape=mshape,
+  # FALSE} if (method=='npoly'){ shp <-
+  # PCA2shp_polynomials(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
   # baseline1=PCA$baseline1, baseline2=PCA$baseline2) cd <-
   # FALSE} if (method=='procrustes'){ shp <-
-  # PCA2shp.procrustes(pos=pos, rot=rot, mshape=mshape,
+  # PCA2shp_procrustes(pos=pos, rot=rot, mshape=mshape,
   # amp.shp=amp.shp) cd <- FALSE} width <- (par('usr')[4] -
   # par('usr')[3]) * size.shp shp <- lapply(shp, coo_scale,
   # 1/width) not enough compact. #todo
@@ -222,17 +222,17 @@ pos.shapes <- function(xy, pos.shp = c("range", "circle", "xy")[1],
   return(xy)
 }
 
-#' Calculates shapes from PC plane: e/r/tfourier
-#'
-#' @param pos the position on two PC axis
-#' @param rot the corresponding loadings
-#' @param mshape the meanshape
-#' @param amp.shp amplification factor for the shape deformation
-#' @param pts.shp number of points to reconstruct the shape
-#' @keywords Graphics
-#' @rdname PCA2shp.fourier
-#' @export
-PCA2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
+# Calculates shapes from PC plane: e/r/tfourier
+#
+# @param pos the position on two PC axis
+# @param rot the corresponding loadings
+# @param mshape the meanshape
+# @param amp.shp amplification factor for the shape deformation
+# @param pts.shp number of points to reconstruct the shape
+# @keywords Graphics
+# @rdname PCA2shp_fourier
+# @export
+PCA2shp_efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   if (ncol(pos) != ncol(rot))
     stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
@@ -244,8 +244,8 @@ PCA2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
     coe <- mshape + apply(ax.contrib, 1, sum)
-    xf <- coeff.split(coe)
-    coo <- efourier.i(xf, nb.h = nb.h, nb.pts = pts.shp)
+    xf <- coeff_split(coe)
+    coo <- efourier_i(xf, nb.h = nb.h, nb.pts = pts.shp)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
     dx <- pos[i, 1] - coo_centpos(coo)[1]
@@ -257,9 +257,9 @@ PCA2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   return(res)
 }
 
-#' @rdname PCA2shp.fourier
-#' @export
-PCA2shp.rfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
+# @rdname PCA2shp_fourier
+# @export
+PCA2shp_rfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   if (ncol(pos) != ncol(rot))
     stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
@@ -271,8 +271,8 @@ PCA2shp.rfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
     coe <- mshape + apply(ax.contrib, 1, sum)
-    xf <- coeff.split(coe, cph = 2)
-    coo <- rfourier.i(xf, nb.h = nb.h, nb.pts = pts.shp)
+    xf <- coeff_split(coe, cph = 2)
+    coo <- rfourier_i(xf, nb.h = nb.h, nb.pts = pts.shp)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
     dx <- pos[i, 1] - coo_centpos(coo)[1]
@@ -284,9 +284,9 @@ PCA2shp.rfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   return(res)
 }
 
-#' @rdname PCA2shp.fourier
-#' @export
-PCA2shp.tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
+# @rdname PCA2shp_fourier
+# @export
+PCA2shp_tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   if (ncol(pos) != ncol(rot))
     stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
@@ -298,8 +298,8 @@ PCA2shp.tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
     coe <- mshape + apply(ax.contrib, 1, sum)
-    xf <- coeff.split(coe, 2)
-    coo <- tfourier.i(xf, nb.h = nb.h, nb.pts = pts.shp,
+    xf <- coeff_split(coe, 2)
+    coo <- tfourier_i(xf, nb.h = nb.h, nb.pts = pts.shp,
                       force2close = TRUE)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
@@ -312,20 +312,21 @@ PCA2shp.tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   return(res)
 }
 
-#' Calculates shapes from PC plane: polynomials
-#'
-#' @param pos the position on two PC axis
-#' @param rot the corresponding loadings
-#' @param mshape the meanshape
-#' @param amp.shp amplification factor for the shape deformation
-#' @param pts.shp number of points to reconstruct the shape
-#' @param ortho logical whether working with raw or orthogonal polynomials
-#' @param baseline1 the (x; y) coordinates of the first baseline point
-#' @param baseline2 the (x; y) coordinates of the second baseline point
-#' @keywords Graphics
-#' @export
-PCA2shp.polynomials <- function(pos, rot, mshape, amp.shp = 1,
+# Calculates shapes from PC plane: polynomials
+#
+# @param pos the position on two PC axis
+# @param rot the corresponding loadings
+# @param mshape the meanshape
+# @param amp.shp amplification factor for the shape deformation
+# @param pts.shp number of points to reconstruct the shape
+# @param ortho logical whether working with raw or orthogonal polynomials
+# @param baseline1 the (x; y) coordinates of the first baseline point
+# @param baseline2 the (x; y) coordinates of the second baseline point
+# @keywords Graphics
+# @export
+PCA2shp_polynomials <- function(pos, rot, mshape, amp.shp = 1,
                                 pts.shp = 60, ortho, baseline1, baseline2) {
+  method_i <- ifelse(ortho, opoly_i, npoly_i)
   if (ncol(pos) != ncol(rot))
     stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
@@ -333,14 +334,13 @@ PCA2shp.polynomials <- function(pos, rot, mshape, amp.shp = 1,
   degree <- length(mshape)
   n <- nrow(pos)
   # an empy pol object
-  pol <- list(coeff = rep(NA, degree), ortho = ortho, baseline1 = baseline1,
-              baseline2 = baseline2)
+  pol <- list(coeff = rep(NA, degree), ortho = ortho, baseline1 = baseline1, baseline2 = baseline2)
   # we prepare the array
   res <- list()
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
     pol$coeff <- mshape + apply(ax.contrib, 1, sum)
-    coo <- polynomials.i(pol, nb.pts = pts.shp, reregister = TRUE)
+    coo <- method_i(pol, nb.pts = pts.shp, reregister = TRUE)
     pol$coeff <- rep(NA, degree)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
@@ -353,15 +353,15 @@ PCA2shp.polynomials <- function(pos, rot, mshape, amp.shp = 1,
   return(res)
 }
 
-#' Calculates shapes from PC plane: (aligned) landmarks
-#'
-#' @param pos the position on two PC axis
-#' @param rot the corresponding loadings
-#' @param mshape the meanshape
-#' @param amp.shp amplification factor for the shape deformation
-#' @keywords Graphics
-#' @export
-PCA2shp.procrustes <- function(pos, rot, mshape, amp.shp = 1) {
+# Calculates shapes from PC plane: (aligned) landmarks
+#
+# @param pos the position on two PC axis
+# @param rot the corresponding loadings
+# @param mshape the meanshape
+# @param amp.shp amplification factor for the shape deformation
+# @keywords Graphics
+# @export
+PCA2shp_procrustes <- function(pos, rot, mshape, amp.shp = 1) {
   if (ncol(pos) != ncol(rot))
     stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
@@ -385,17 +385,17 @@ PCA2shp.procrustes <- function(pos, rot, mshape, amp.shp = 1) {
 }
 
 # todo r/t
-#' Calculates shapes from LD plane: e/r/tfourier
-#'
-#' @param pos the position on two PC axis
-#' @param rot the (unstardized) loadings
-#' @param mshape the meanshape
-#' @param amp.shp amplification factor for the shape deformation
-#' @param pts.shp number of points to reconstruct the shape
-#' @keywords Graphics
-#' @rdname lda2shp.fourier
-#' @export
-lda2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
+# Calculates shapes from LD plane: e/r/tfourier
+#
+# @param pos the position on two PC axis
+# @param rot the (unstardized) loadings
+# @param mshape the meanshape
+# @param amp.shp amplification factor for the shape deformation
+# @param pts.shp number of points to reconstruct the shape
+# @keywords Graphics
+# @rdname LDA2shp_fourier
+# @export
+LDA2shp_efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   if (ncol(pos) != ncol(rot))
     stop(" * 'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
@@ -407,8 +407,8 @@ lda2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
     coe <- mshape + apply(ax.contrib, 1, sum)
-    xf <- coeff.split(coe)
-    coo <- efourier.i(xf, nb.h = nb.h, nb.pts = pts.shp)
+    xf <- coeff_split(coe)
+    coo <- efourier_i(xf, nb.h = nb.h, nb.pts = pts.shp)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
     dx <- pos[i, 1] - coo_centpos(coo)[1]
@@ -420,14 +420,14 @@ lda2shp.efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   return(res)
 }
 
-#' @rdname lda2shp.fourier
-#' @export
-lda2shp.rfourier <- function() {
+# @rdname LDA2shp_fourier
+# @export
+LDA2shp_rfourier <- function() {
 }
 
-#' @rdname lda2shp.fourier
-#' @export
-lda2shp.tfourier <- function() {
+# @rdname LDA2shp_fourier
+# @export
+LDA2shp_tfourier <- function() {
 }
 
 ##### end morphospaces

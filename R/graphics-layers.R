@@ -66,7 +66,7 @@
     pts.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(pts.i)) {
       if (nrow(pts.i) > 1) {
-        ell.i <- conf.ell(x = pts.i, conf = conf)$ell
+        ell.i <- conf_ell(x = pts.i, conf = conf)$ell
         lines(coo_close(ell.i), col = col[i])
         points(coo_centpos(pts.i)[1], coo_centpos(pts.i)[2],
                pch = 3, cex = 0.3, col = col[i])
@@ -91,7 +91,7 @@
     if (is.matrix(pts.i)) {
       if (nrow(pts.i) > 1) {
         for (j in seq(along = conf)) {
-          seg.i <- conf.ell(x = pts.i, conf = conf[j],
+          seg.i <- conf_ell(x = pts.i, conf = conf[j],
                             nb.pts = 720)$seg
           segments(seg.i[1, 1], seg.i[1, 2], seg.i[2,
                                                    1], seg.i[2, 2], lty = lty, col = col[i],
@@ -187,7 +187,7 @@
       # ki$z <- .normalize(ki$z, zmin, zmax)
       ki$z <- .normalize(ki$z)
       image(ki$x, ki$y, ki$z, add = TRUE, xlim = range(ki$x),
-            ylim = range(ki$y), col = col.transp(levels,
+            ylim = range(ki$y), col = col_transp(levels,
                                                  col[i], transp))
     }
   }
@@ -223,8 +223,8 @@
     xy.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(xy.i)) {
       if (nrow(xy.i) > 3) {
-        links.i <- links.delaunay(xy.i)
-        ldk.links(xy.i, links.i, col = .transp(col[i],
+        links.i <- links_delaunay(xy.i)
+        ldk_links(xy.i, links.i, col = .transp(col[i],
                                                2/3), lwd = 1.5)
       }
     }
@@ -319,12 +319,12 @@
 
 # smart color grouping provided with a fac after interaction
 # data(olea)
-# op <- PCA(rawPolynomials(olea))
+# op <- PCA(npoly(olea))
 # f <- .combine.fac(op, ~view+domes)
 # cols <- .smartpalette(f)
 # plot(op, f, col=cols)
 #' @export
-.smartpalette <- function(fac, gap.intra=1, gap.inter=5, palette=col.qual){
+.smartpalette <- function(fac, gap.intra=1, gap.inter=5, palette=col_qual){
   # determine ranking within a factor
   rank <- function(s){
     s <- as.numeric(factor(s))

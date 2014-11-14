@@ -67,7 +67,7 @@ print.Ldk <- function(x, ...) {
   cat(rep("-", 20), "\n", sep = "")
   coo_nb <- length(Ldk)
   coo_len <- sapply(Ldk$coo, nrow)
-  coo_closed <- sapply(Ldk$coo, is.closed)
+  coo_closed <- sapply(Ldk$coo, is_closed)
   #     # number of open outlines
   #     cat(" -", coo_nb, "configurations of landmarks\n")
   #     # one random outline
@@ -100,7 +100,7 @@ print.LdkCoe <- function(x, ...) {
   cat(rep("-", 20), "\n", sep = "")
   coo_nb <- length(Ldk)
   coo_len <- sapply(Ldk$coo, nrow)
-  coo_closed <- sapply(Ldk$coo, is.closed)
+  coo_closed <- sapply(Ldk$coo, is_closed)
   #     # number of open outlines
   #     cat(" -", coo_nb, "configurations of landmarks\n")
   #     # one random outline

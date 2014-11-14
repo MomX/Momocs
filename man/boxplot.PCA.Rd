@@ -3,7 +3,7 @@
 \alias{boxplot.PCA}
 \title{Boxplot on PCA objects}
 \usage{
-\method{boxplot}{PCA}(x, fac, nax = 1:4, cols, palette = col.qual,
+\method{boxplot}{PCA}(x, fac, nax = 1:4, cols, palette = col_qual,
   fixed.axes = TRUE, center.origin = TRUE, cex.legend = 1, ...)
 }
 \arguments{
@@ -30,7 +30,7 @@ Boxplot on PCA objects
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 boxplot(bot.p, 1)
 }

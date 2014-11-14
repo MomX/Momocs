@@ -3,7 +3,7 @@
 \alias{hist.OpnCoe}
 \title{Histogram on OpnCoe matrices of polynomials coefficients}
 \usage{
-\method{hist}{OpnCoe}(x, retain = 4, drop, palette = col.gallus,
+\method{hist}{OpnCoe}(x, retain = 4, drop, palette = col_gallus,
   title = "Variation of polynomials coefficients", hist.per.row = 3, ...)
 }
 \arguments{
@@ -26,7 +26,7 @@ Explores the distribution of polynomials coefficient values
 }
 \examples{
 data(olea)
-olea.p <- orthoPolynomials(olea, 5)
+olea.p <- opoly(olea, 5)
 hist(olea.p)
 }
 \seealso{

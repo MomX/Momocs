@@ -2,7 +2,6 @@
 #' Plots Linear Discriminant Analysis
 #'
 #' The Momocs' \code{\link{LDA}} plotter with morphospaces and many graphical options.
-#' @method plot LDA
 #' @param x an object of class "LDA", typically obtained with \link{LDA}
 #' @param xax the first PC axis
 #' @param yax the second PC axis
@@ -32,9 +31,9 @@
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
-#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
+#' @param conf_ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
 #' @param ellipsesax logical whether to draw ellipse axes
-#' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
+#' @param conf_ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
 #' @param lwd.ellipsesax if yes, one or more numeric for the line widths
 #' @param lty.ellipsesax if yes, the lty with which to draw these axes
 #' @param chull logical whether to draw a convex hull
@@ -64,21 +63,22 @@
 #' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
 #' @note Morphospaces are still experimental.
-#' @seealso \link{LDA}, \link{plotCV}, \link{plotCV2}, \link{plot.PCA}.
+#' @seealso \link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
 #' @keywords Multivariate, Graphics
 #' @examples
 #' data(bot)
-#' bot.f <- eFourier(bot, 24)
+#' bot.f <- efourier(bot, 24)
 #' bot.l <- LDA(bot.f, "type")
 #' plot(bot.l)
 #'
 #' bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
 #' bot.l <- LDA(bot.f, "fake")
 #' plot(bot.l)
+#' @method plot LDA
 #' @export
 plot.LDA <- function(x, xax=1, yax=2,
   #color choice
-  points=TRUE, col="#000000", pch=20, cex=0.5, palette=col.solarized,
+  points=TRUE, col="#000000", pch=20, cex=0.5, palette=col_solarized,
   #.frame
   center.origin=FALSE, zoom=1, bg=par("bg"),
   #.grid
@@ -90,9 +90,9 @@ plot.LDA <- function(x, xax=1, yax=2,
   #stars
   stars=FALSE,
   #ellipses
-  ellipses=FALSE, conf.ellipses=0.5,
+  ellipses=FALSE, conf_ellipses=0.5,
   #ellipsesax
-  ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
+  ellipsesax=TRUE, conf_ellipsesax=c(0.5, 0.75, 0.9),
   lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
   #convexhulls
   chull=FALSE, chull.lty=3,
@@ -189,14 +189,14 @@ plot.LDA <- function(x, xax=1, yax=2,
   if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
   if (morphospace & length(LDA$method)<2) {
-    if(LDA$method=="eFourier") {
-      .morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
+    if(LDA$method=="efourier") {
+      morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
                       amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                       col.shp=col.shp, border.shp=border.shp)}}
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
-    if (ellipsesax) .ellipsesax(xy, fac, conf.ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
-    if (ellipses)   .ellipses(xy, fac, conf.ellipses, col.groups) #+conf
+    if (ellipsesax) .ellipsesax(xy, fac, conf_ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
+    if (ellipses)   .ellipses(xy, fac, conf_ellipses, col.groups) #+conf
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
     if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
                                         cex=cex.labelsgroups, rect=rect.labelsgroups,
@@ -224,7 +224,7 @@ plot.LDA <- function(x, xax=1, yax=2,
 #'
 #' @param x a (typically cross-correlation) table to plot
 #' @param freq whether to use row-wise frequencies
-#' @param palette a color palette such as \link{col.heat} to use,
+#' @param palette a color palette such as \link{col_heat} to use,
 #' if \code{cols} is not used.
 #' @param levels number of levels, otherwise the highest cell in the table
 #' @param cols a vector of colors
@@ -232,33 +232,33 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' @param margin whether to add marginal sums
 #' @param cex a cex for all values
 #' @param ... not used
-#' @seealso \link{LDA}, \link{plot.LDA}, \link{plotCV2}.
+#' @seealso \link{LDA}, \link{plot.LDA}, \link{plot_CV2}.
 #' @keywords Multivariate Graphics
 #' @examples
 #' data(bot)
-#' bot.p <- PCA(eFourier(bot, 12))
+#' bot.p <- PCA(efourier(bot, 12))
 #' bot.l <- LDA(bot.p, 1)
-#' plotCV(bot.l)
+#' plot_CV(bot.l)
 #' data(olea)
-#' ol <- LDA(PCA(rawPolynomials(olea, nb.pts=50)), "cep")
-#' plotCV(ol)
+#' ol <- LDA(PCA(npoly(olea, nb.pts=50)), "cep")
+#' plot_CV(ol)
 #' # raw counts
-#' plotCV(ol, freq=FALSE, palette=col.india)
+#' plot_CV(ol, freq=FALSE, palette=col_india)
 #' # any other count table
 #' m <- matrix(runif(120, 0, 6), 12)
 #' tab <- as.table(round(m))
-#' plotCV(tab, palette=terrain.colors, levels=5, cex=0.8)
-#' @rdname plotCV
+#' plot_CV(tab, palette=terrain.colors, levels=5, cex=0.8)
+#' @rdname plot_CV
 #' @export
-plotCV <- function(x, ...){UseMethod("plotCV")}
-#' @rdname plotCV
+plot_CV <- function(x, ...){UseMethod("plot_CV")}
+#' @rdname plot_CV
 #' @export
-plotCV.LDA <- function(x, ...){
-  plotCV(x$CV.tab, ...)}
-#' @rdname plotCV
+plot_CV.LDA <- function(x, ...){
+  plot_CV(x$CV.tab, ...)}
+#' @rdname plot_CV
 #' @export
-plotCV.table <- function(x, freq=TRUE,
-                    palette=col.heat, levels=20, cols,
+plot_CV.table <- function(x, freq=TRUE,
+                    palette=col_heat, levels=20, cols,
                     pc=TRUE, margin=TRUE, cex=1, ...){
   tab <- x
   tab <- t(tab)
@@ -333,7 +333,7 @@ plotCV.table <- function(x, freq=TRUE,
 #' @param col logical whether to vary the color of the links
 #' @param col0 a color for the default link (when \code{col = FALSE})
 #' @param col.breaks the number of different colors
-#' @param palette a color palette, eg \link{col.summer}, \link{col.hot}, etc.
+#' @param palette a color palette, eg \link{col_summer}, \link{col_hot}, etc.
 #' @param lwd logical whether to vary the width of the links
 #' @param lwd0 a width for the default link (when \code{lwd = FALSE})
 #' @param gap.dots numeric to set space between the dots and the links
@@ -342,7 +342,7 @@ plotCV.table <- function(x, freq=TRUE,
 #' @param cex.names a cex for the names
 #' @param legend logical whether to add a legend
 #' @param ... useless here.
-#' @seealso \link{LDA}, \link{plot.LDA}, \link{plotCV}.
+#' @seealso \link{LDA}, \link{plot.LDA}, \link{plot_CV}.
 #' @keywords Multivariate Graphics
 #' @examples
 #' # Below various table that you can try. We will use the last one for the examples.
@@ -375,40 +375,40 @@ plotCV.table <- function(x, freq=TRUE,
 #' tab <- as.table(tab)
 #'
 #'
-#' plotCV2(tab)
-#' plotCV2(tab, arrows) # if you prefer arrows
-#' plotCV2(tab, lwd=FALSE, lwd0=1, palette=col.india) # if you like india but not lwds
-#' plotCV2(tab, col=FALSE, col0='pink') # only lwd
-#' plotCV2(tab, col=FALSE, lwd0=10, cex.names=2) # if you're getting old
-#' plotCV2(tab, col=FALSE, lwd=FALSE) # pretty but useless
-#' plotCV2(tab, col.breaks=2) # if you think it's either good or bad
-#' plotCV2(tab, pch=NA) # if you do not like dots
-#' plotCV2(tab, gap.dots=0) # if you want to 'fill the gap'
-#' plotCV2(tab, gap.dots=1) # or not
+#' plot_CV2(tab)
+#' plot_CV2(tab, arrows) # if you prefer arrows
+#' plot_CV2(tab, lwd=FALSE, lwd0=1, palette=col_india) # if you like india but not lwds
+#' plot_CV2(tab, col=FALSE, col0='pink') # only lwd
+#' plot_CV2(tab, col=FALSE, lwd0=10, cex.names=2) # if you're getting old
+#' plot_CV2(tab, col=FALSE, lwd=FALSE) # pretty but useless
+#' plot_CV2(tab, col.breaks=2) # if you think it's either good or bad
+#' plot_CV2(tab, pch=NA) # if you do not like dots
+#' plot_CV2(tab, gap.dots=0) # if you want to 'fill the gap'
+#' plot_CV2(tab, gap.dots=1) # or not
 #'
 #' #trilo examples
 #' data(trilo)
-#' trilo.f <- eFourier(trilo, 8)
+#' trilo.f <- efourier(trilo, 8)
 #' trilo.l <- LDA(trilo.f, 'onto')
 #' trilo.l
-#' plotCV2(trilo.l)
+#' plot_CV2(trilo.l)
 #'
 #' # olea example
 #' data(olea)
-#' op <- orthoPolynomials(olea, 5)
+#' op <- opoly(olea, 5)
 #' opl <- LDA(op, 'cep')
-#' plotCV2(opl)
-#' @rdname plotCV2
+#' plot_CV2(opl)
+#' @rdname plot_CV2
 #' @export
-plotCV2 <- function(x, ...){UseMethod("plotCV2")}
-#' @rdname plotCV2
+plot_CV2 <- function(x, ...){UseMethod("plot_CV2")}
+#' @rdname plot_CV2
 #' @export
-plotCV2.LDA <- function(x, ...){
-  plotCV2(x$CV.tab, ...)}
-#' @rdname plotCV2
+plot_CV2.LDA <- function(x, ...){
+  plot_CV2(x$CV.tab, ...)}
+#' @rdname plot_CV2
 #' @export
-plotCV2.table <- function(x, links.FUN = arrows, col = TRUE,
-                    col0 = "black", col.breaks = 5, palette = col.heat, lwd = TRUE,
+plot_CV2.table <- function(x, links.FUN = arrows, col = TRUE,
+                    col0 = "black", col.breaks = 5, palette = col_heat, lwd = TRUE,
                     lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25,
                     cex.names = 1, legend = TRUE, ...) {
   # to maintain the generic

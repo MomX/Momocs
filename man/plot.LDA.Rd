@@ -4,13 +4,13 @@
 \title{Plots Linear Discriminant Analysis}
 \usage{
 \method{plot}{LDA}(x, xax = 1, yax = 2, points = TRUE, col = "#000000",
-  pch = 20, cex = 0.5, palette = col.solarized, center.origin = FALSE,
+  pch = 20, cex = 0.5, palette = col_solarized, center.origin = FALSE,
   zoom = 1, bg = par("bg"), grid = TRUE, nb.grids = 3,
   morphospace = FALSE, pos.shp = "full", amp.shp = 1, size.shp = 1,
   nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
   border.shp = "#00000032", lwd.shp = 1, col.shp = "#00000019",
-  stars = FALSE, ellipses = FALSE, conf.ellipses = 0.5,
-  ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75, 0.9),
+  stars = FALSE, ellipses = FALSE, conf_ellipses = 0.5,
+  ellipsesax = TRUE, conf_ellipsesax = c(0.5, 0.75, 0.9),
   lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labels = FALSE,
@@ -76,11 +76,11 @@ or a data.frame for \link{pos.shapes}}
 
 \item{ellipses}{logical whether to draw confidence ellipses}
 
-\item{conf.ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
+\item{conf_ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
 
 \item{ellipsesax}{logical whether to draw ellipse axes}
 
-\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
+\item{conf_ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
 
 \item{lty.ellipsesax}{if yes, the lty with which to draw these axes}
 
@@ -146,7 +146,7 @@ Morphospaces are still experimental.
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 24)
+bot.f <- efourier(bot, 24)
 bot.l <- LDA(bot.f, "type")
 plot(bot.l)
 
@@ -155,7 +155,7 @@ bot.l <- LDA(bot.f, "fake")
 plot(bot.l)
 }
 \seealso{
-\link{LDA}, \link{plotCV}, \link{plotCV2}, \link{plot.PCA}.
+\link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
 }
 \keyword{Graphics}
 \keyword{Multivariate,}

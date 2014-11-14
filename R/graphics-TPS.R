@@ -11,14 +11,14 @@
 #' @param to the target \eqn{(x; y)} coordinates
 #' @return a matrix of \code{(x; y)} coordinates with TPS-interpolated
 #' deformations
-#' @seealso \link{tps.grid},\link{tps.iso}, \link{tps.arr} functions use
+#' @seealso \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
 #' \code{tps2d}
 #' @keywords ThinPlateSplines
 #' @export
 tps2d <- function(grid0, fr, to) {
-  if (is.closed(fr)) 
+  if (is_closed(fr)) 
     fr <- coo_unclose(fr)
-  if (is.closed(to)) 
+  if (is_closed(to)) 
     to <- coo_unclose(to)
   if (!is.matrix(grid0)) 
     grid0 <- as.matrix(grid0)
@@ -55,7 +55,7 @@ tps2d <- function(grid0, fr, to) {
 
 #' Deformation grids using Thin Plate Splines
 #' 
-#' \code{tps.grid} calculates and plots deformation grids between two
+#' \code{tps_grid} calculates and plots deformation grids between two
 #' configurations.
 #' 
 #' @param fr the reference \eqn{(x; y)} coordinates
@@ -77,21 +77,21 @@ tps2d <- function(grid0, fr, to) {
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing
-#' @seealso \link{tps.iso} and \link{tps.arr}.
+#' @seealso \link{tps_iso} and \link{tps_arr}.
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
-#' botF <- eFourier(bot)
+#' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
-#' tps.grid(fr, to, amp=3, grid.size=10)
+#' tps_grid(fr, to, amp=3, grid.size=10)
 #' @export
-tps.grid <- function(fr, to, amp = 1, 
+tps_grid <- function(fr, to, amp = 1, 
                      over = 1.2, grid.size = 15, 
                      grid.col = "grey80", poly = TRUE,
                      shp = TRUE, shp.col = rep(NA, 2), 
-                     shp.border = col.gallus(2), shp.lwd = c(1, 1), 
+                     shp.border = col_gallus(2), shp.lwd = c(1, 1), 
                      shp.lty = c(1, 1), legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
   to.n <- substitute(to)  # otherwise problems with substitute in legend below
@@ -131,7 +131,7 @@ tps.grid <- function(fr, to, amp = 1,
 
 #' Deformation 'vector field' using Thin Plate Splines
 #' 
-#' \code{tps.arr}(ows) calculates deformations between two configurations and
+#' \code{tps_arr}(ows) calculates deformations between two configurations and
 #' illustrate them using arrows.
 #' 
 #' @param fr the reference \eqn{(x; y)} coordinates
@@ -161,23 +161,23 @@ tps.grid <- function(fr, to, amp = 1,
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing.
-#' @seealso \link{tps.grid} and \link{tps.iso}.
+#' @seealso \link{tps_grid} and \link{tps_iso}.
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
-#' botF <- eFourier(bot)
+#' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
-#' tps.arr(fr, to, arr.nb=200, palette=col.sari, amp=3)
-#' tps.arr(fr, to, arr.nb=200, palette=col.sari, amp=3, grid=FALSE)
+#' tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3)
+#' tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3, grid=FALSE)
 #' @export
-tps.arr <- function(fr, to, amp = 1, 
-                    grid = TRUE, over = 1.2, palette = col.summer, 
+tps_arr <- function(fr, to, amp = 1, 
+                    grid = TRUE, over = 1.2, palette = col_summer, 
                     arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20, 
                     arr.lwd = 0.75, arr.col = "grey50", poly = TRUE, 
                     shp = TRUE, shp.col = rep(NA, 2),
-                    shp.border = col.gallus(2),
+                    shp.border = col_gallus(2),
                     shp.lwd = c(2, 2), shp.lty = c(1, 1),
                     legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
@@ -226,7 +226,7 @@ tps.arr <- function(fr, to, amp = 1,
 
 #' Deformation isolines using Thin Plate Splines.
 #' 
-#' \code{tps.iso} calculates deformations between two configurations and map
+#' \code{tps_iso} calculates deformations between two configurations and map
 #' them with or without isolines.
 #' 
 #' @param fr The reference \eqn{(x; y)} coordinates
@@ -254,22 +254,22 @@ tps.arr <- function(fr, to, amp = 1,
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return No returned value
-#' @seealso \link{tps.grid} and \link{tps.arr}
+#' @seealso \link{tps_grid} and \link{tps_arr}
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
-#' botF <- eFourier(bot)
+#' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
-#' tps.iso(fr, to, iso.nb=200, amp=3)
-#' tps.iso(fr, to, iso.nb=200, amp=3, grid=TRUE)
+#' tps_iso(fr, to, iso.nb=200, amp=3)
+#' tps_iso(fr, to, iso.nb=200, amp=3, grid=TRUE)
 #' @export
-tps.iso <- function(fr, to, amp = 1, 
-                    grid = FALSE, over = 1.2, palette = col.spring, 
+tps_iso <- function(fr, to, amp = 1, 
+                    grid = FALSE, over = 1.2, palette = col_spring, 
                     iso.nb = 1000, iso.levels = 12,
                     cont = TRUE, cont.col = "black", 
-                    poly = TRUE, shp = TRUE, shp.border = col.gallus(2), 
+                    poly = TRUE, shp = TRUE, shp.border = col_gallus(2), 
                     shp.lwd = c(2, 2), shp.lty = c(1, 1),
                     legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)

@@ -146,9 +146,9 @@ coo_theta3 <- function(m, method = c("atan2", "acos")[1]) {
 #' @examples
 #' data(bot)
 #' b <- coo_sample(bot[1], 64)
-#' coo_theta.pts(b)
+#' coo_thetapts(b)
 #' @export
-coo_theta.pts <- function(coo, method = c("atan2", "acos")[1]) {
+coo_thetapts <- function(coo, method = c("atan2", "acos")[1]) {
     coo <- coo_check(coo)
     coo <- coo_close(coo)
     coo <- rbind(coo[nrow(coo) - 1, ], coo)
@@ -177,7 +177,7 @@ coo_theta.pts <- function(coo, method = c("atan2", "acos")[1]) {
 coo_rectilinearity <- function(coo) {
     # some check
     coo <- coo_check(coo)
-    if (is.closed(coo)) {
+    if (is_closed(coo)) {
         coo_c <- coo
         coo <- coo_unclose(coo)
     } else {
@@ -195,7 +195,7 @@ coo_rectilinearity <- function(coo) {
         sqrt((x1 - x2)^2 + (y1 - y2)^2)
     }
     # l2 is redefined here for coherence with the paper, but is
-    # equivalent to coo_perim.pts(coo)
+    # equivalent to coo_perimpts(coo)
     l2.e <- l1.e <- numeric(n)
     for (i in 1:n) {
         x1 <- coo_c[i, 1]
@@ -206,7 +206,7 @@ coo_rectilinearity <- function(coo) {
         l2.e[i] <- l2(x1, y1, x2, y2)
     }  # sum(l2.e) == coo_perim(coo)
     # 'step 1' as in Zunic and Rosin
-    theta <- coo_theta.pts(coo)
+    theta <- coo_thetapts(coo)
     theta.k <- abs(c(theta - pi/2, theta - pi, theta - 3 * pi/2, 
         theta - 2 * pi))
     alpha.k <- sort(theta.k)
@@ -230,7 +230,7 @@ coo_rectilinearity <- function(coo) {
 #' Calculates the Haralick's circularity of a shape
 #' 
 #' Returns Haralick's circularity which is less sensible
-#' to digitalization noise than coo_circularity.
+#' to digitalization noise than coo_circularity
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the Haralick's circularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
@@ -238,9 +238,9 @@ coo_rectilinearity <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo_circularity.haralick(bot[1])
+#' coo_circularityharalick(bot[1])
 #' @export
-coo_circularity.haralick <- function(coo) {
+coo_circularityharalick <- function(coo) {
     cd <- coo_centdist(coo)
     return(mean(cd)/sd(cd))
 }
@@ -272,9 +272,9 @@ coo_circularity <- function(coo) {
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo_circularity.norm(bot[1])
+#' coo_circularitynorm(bot[1])
 #' @export
-coo_circularity.norm <- function(coo) {
+coo_circularitynorm <- function(coo) {
     return(coo_perim(coo)^2/(coo_area(coo) * 4 * pi))
 }
 
@@ -285,13 +285,13 @@ coo_circularity.norm <- function(coo) {
 #' @return numeric, the eccentricity (eigenvalues)
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @seealso \link{coo_eccentricity.boundingbox}
+#' @seealso \link{coo_eccentricityboundingbox}
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo_eccentricity.eigen(bot[1])
+#' coo_eccentricityeigen(bot[1])
 #' @export
-coo_eccentricity.eigen <- function(coo) {
+coo_eccentricityeigen <- function(coo) {
     coo <- coo_check(coo)
     eig <- eigen(cov(coo))$values
     return(eig[2]/eig[1])
@@ -304,13 +304,13 @@ coo_eccentricity.eigen <- function(coo) {
 #' @return numeric, the eccentricity (boundingbox)
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @seealso \link{coo_eccentricity.eigen}
+#' @seealso \link{coo_eccentricityeigen}
 #' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
-#' coo_eccentricity.boundingbox(bot[1])
+#' coo_eccentricityboundingbox(bot[1])
 #' @export
-coo_eccentricity.boundingbox <- function(coo) {
+coo_eccentricityboundingbox <- function(coo) {
     coo <- coo_check(coo)
     lw <- coo_lw(coo)
     return(lw[2]/lw[1])

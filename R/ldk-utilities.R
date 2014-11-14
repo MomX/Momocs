@@ -18,7 +18,7 @@
 #' #coo_check(matrix(1:10, ncol=2))
 #' #coo_check(list(x=1:5, y=6:10))
 #' @export
-ldk.check <- function(ldk) {
+ldk_check <- function(ldk) {
     if (is.array(ldk)) {
         if (length(dim(ldk) == 3)) {
             return(ldk)
@@ -42,16 +42,16 @@ ldk.check <- function(ldk) {
 #' Create links (all pariwise combinations) between landmarks
 #' 
 #' @param coo a matrix (or a list) of (x; y) coordinates
-#' @return a matrix that can be passed to \link{ldk.links}, etc. The columns
+#' @return a matrix that can be passed to \link{ldk_links}, etc. The columns
 #' are the row ids of the original shape.
 #' @examples
 #' data(wings)
 #' w <- wings[1]
 #' coo_plot(w)
-#' links <- links.all(w)
-#' ldk.links(w, links)
+#' links <- links_all(w)
+#' ldk_links(w, links)
 #' @export
-links.all <- function(coo) {
+links_all <- function(coo) {
     coo <- coo_check(coo)
     links <- t(combn(1:nrow(coo), 2))
     return(links)
@@ -60,17 +60,17 @@ links.all <- function(coo) {
 #' Create links (Delaunay triangulation) between landmarks
 #' 
 #' @param coo a matrix (or a list) of (x; y) coordinates
-#' @return a matrix that can be passed to \link{ldk.links}, etc. The columns
+#' @return a matrix that can be passed to \link{ldk_links}, etc. The columns
 #' are the row ids of the original shape.
 #' @details uses \link{delaunayn} in the \code{geometry} package.
 #' @examples
 #' data(wings)
 #' w <- wings[1]
 #' coo_plot(w, poly=FALSE)
-#' links <- links.delaunay(w)
-#' ldk.links(w, links)
+#' links <- links_delaunay(w)
+#' ldk_links(w, links)
 #' @export
-links.delaunay <- function(coo) {
+links_delaunay <- function(coo) {
     coo <- coo_check(coo)
     links <- delaunayn(coo)
     links <- rbind(links[, -1], links[, -2], links[, -3])

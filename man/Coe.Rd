@@ -31,7 +31,7 @@ with \code{methods(class=Coe)}.
 methods(class='Coe')
 
 data(bot)
-bot.f<- eFourier(bot, 12)
+bot.f<- efourier(bot, 12)
 bot.f
 class(bot.f)
 inherits(bot.f, "Coe")
@@ -40,7 +40,7 @@ inherits(bot.f, "Coe")
 bot.f$coe
 
 data(olea)
-op <- orthoPolynomials(olea, 5)
+op <- opoly(olea, 5)
 op
 class(op)
 op$coe # same thing

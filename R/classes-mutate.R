@@ -9,7 +9,7 @@
 #' @param size numeric the required size for the final object, same size by default.
 #' @param replace logical, whether to use \link{sample} with replacement
 #' @param ... useless here
-#' @seealso \link{mutate}
+#' @seealso \link{breed}
 #' @keywords Coe
 #' @examples
 #' m <- matrix(1:12, nrow=3)
@@ -18,7 +18,7 @@
 #' perm(m, margin=1, size=10)
 #' 
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' bot.m <- perm(bot.f, 80)
 #' bot.m
 #' panel(bot.m)
@@ -58,27 +58,27 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
 #' @keywords Coe
 #' @examples
 #' m <- matrix(1:12, nrow=3)
-#' mutate(m, margin=2, size=4)
-#' mutate(m, margin=1, size=10)
+#' breed(m, margin=2, size=4)
+#' breed(m, margin=1, size=10)
 #' 
 #' data(bot)
-#' bot.f <- eFourier(bot, 12)
-#' bot.m <- mutate(bot.f, 80)
+#' bot.f <- efourier(bot, 12)
+#' bot.m <- breed(bot.f, 80)
 #' bot.m
 #' panel(bot.m)
-#' @rdname mutate
+#' @rdname breed
 #' @export
-mutate <- function(x, ...){UseMethod("mutate")}
-#' @rdname mutate
+breed <- function(x, ...){UseMethod("breed")}
+#' @rdname breed
 #' @export
-mutate.default <- function(x, margin=2, size, rate=1, ...){
+breed.default <- function(x, margin=2, size, rate=1, ...){
   if (missing(size)) size <- dim(x)[ifelse(margin==1, 2, 1)]
   apply(x, margin, function(x) rnorm(size, mean(x), rate*sd(x)))}
-#' @rdname mutate
+#' @rdname breed
 #' @export
-mutate.Coe <- function(x, size, rate=1, ...){
+breed.Coe <- function(x, size, rate=1, ...){
   if (missing(size)) size <- nrow(x$coe)
-  coe <- mutate(x$coe, margin=2, size=size, rate=rate)
+  coe <- breed(x$coe, margin=2, size=size, rate=rate)
   rownames(coe) <- paste0("id", 1:size)
   x$coe <- coe
   x$fac <- data.frame()

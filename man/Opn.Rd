@@ -20,7 +20,7 @@ an \code{Opn} object
 In Momocs, \code{Opn} classes objects are
 lists of \bold{op}e\bold{n} outlines, with optionnal components,
 on which generic methods such as plotting methods (e.g. \link{stack})
-and specific methods (e.g. \link{rawPolynomials} can be applied.
+and specific methods (e.g. \link{npoly} can be applied.
  \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 }
 \examples{
@@ -29,9 +29,8 @@ methods(class=Opn)
 data(olea)
 olea
 panel(olea)
-nqual(olea)
 # orthogonal polynomials
-op <- orthoPolynomials(olea, degree=5)
+op <- opoly(olea, degree=5)
 # we print the Coe
 op
 # Let's do a PCA on it

@@ -44,14 +44,14 @@ There is also a generic method (eg for traditional morphometrics) that centers a
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 bot.p
 plot(bot.p, morpho=FALSE)
 plot(bot.p, 'type')
 
 data(olea)
-op <- rawPolynomials(olea, 5)
+op <- npoly(olea, 5)
 op.p <- PCA(op)
 op.p
 plot(op.p, 1, morpho=TRUE)

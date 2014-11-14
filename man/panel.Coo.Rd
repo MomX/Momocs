@@ -11,17 +11,17 @@
 panel(x, ...)
 
 \method{panel}{Out}(x, cols, borders, fac, reorder = NULL,
-  palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
+  palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col, ...)
 
 \method{panel}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{panel}{Opn}(x, cols, borders, fac, reorder = NULL,
-  palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
+  palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col, ...)
 
 \method{panel}{Ldk}(x, cols, borders, fac, reorder = NULL,
-  palette = col.summer, names = NULL, cex.names = 0.6, points = TRUE,
+  palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col = "#333333", ...)
 }
 \arguments{
@@ -71,10 +71,10 @@ panel(mosquito, names=TRUE, cex.names=0.5)
 data(olea)
 panel(olea)
 data(bot)
-bot.f <- eFourier(bot, 12)
+bot.f <- efourier(bot, 12)
 panel(bot.f)
 # an illustration of the use of fac
-panel(bot, fac='type', palette=col.spring, names=TRUE)
+panel(bot, fac='type', palette=col_spring, names=TRUE)
 }
 \seealso{
 \link{stack.Coo}, \link{plot.Coo}.

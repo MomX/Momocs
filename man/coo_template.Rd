@@ -18,7 +18,7 @@ Returns a matrix of \code{(x; y)}coordinates.
 \code{coo_template} returns shape centered on the origin and inscribed in a \code{size}-side square
 }
 \details{
-See \link{coo_list.panel} for an illustration of this function. The morphospaces
+See \link{coo_listpanel} for an illustration of this function. The morphospaces
 functions also take profit of this function. May be useful to develop other graphical functions.
 }
 \examples{
@@ -32,7 +32,7 @@ coo_plot(coo_template(coo, s))
 rect(-s/2, -s/2, s/2, s/2)
 }
 \seealso{
-\link{coo_list.panel}.
+\link{coo_listpanel}.
 }
 \keyword{Graphics}
 

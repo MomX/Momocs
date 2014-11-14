@@ -3,7 +3,7 @@
 \alias{hist.OutCoe}
 \title{Histogram on OutCoe matrices of harmonic coefficients}
 \usage{
-\method{hist}{OutCoe}(x, retain, drop, palette = col.gallus,
+\method{hist}{OutCoe}(x, retain, drop, palette = col_gallus,
   title = "Variation of harmonic coefficients", ...)
 }
 \arguments{
@@ -24,7 +24,7 @@ Explores the distribution of harmonic coefficient values
 }
 \examples{
 data(bot)
-bot.f <- eFourier(bot, 24)
+bot.f <- efourier(bot, 24)
 hist(bot.f)
 }
 \seealso{
