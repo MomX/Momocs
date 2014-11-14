@@ -10,7 +10,7 @@ Installation
 For the very last version: 
 ```
 library(devtools)
-install_github("vbonhomme/Momocs")
+install_github("vbonhomme/Momocs", build_vignettes=TRUE)
 library(Momocs)
 ````
 Have a look to the [tutorials (work in progress)](https://github.com/vbonhomme/Momocs-vignette/tree/master/vignettes/html)
