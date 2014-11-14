@@ -48,31 +48,6 @@ mc <- function(class){
 * It also helps me to fill the gaps and as a development map.
 * If it is your first contact with Momocs, you'd rather use the other vignette "Introduction to Momocs"
 
-## Development
-Overall, long-term goals are :
-
-* Gather all morphometrics in a single grammar
-* Brige morphometrics softwares and analyses
-* Easy to use/extend
-* Delicious hackable graphics
-
-But Momocs is a work in progress :
-
-* The last stable version is released on [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html).
-* The last version is on [GitHub](https://github.com/vbonhomme/Momocs), along with how to use it (you should).
-* If you use it, please cite it: `citation("Momocs")`. A second paper is in prep.
-
-## Help
-
-Momocs makes the following assumptions:
-
-* You have a basic knowledge of R
-* You know what you want to do in statistics / morphometrics terms
-
-* Tutorials are on their way `?Momocs`.
-* You can collaborate to Momocs' development using GitHub. This is also the preferred place for bug reports. If you're not familiar with it, contact me directly.
-* I welcome bug reports, suggestions, data, questions, collaborations requests, etc. **`bonhomme.vincent@gmail.com`**. Your help will be duly credited.
-
 ## Architecture
 
 And uses this vocabulary :
@@ -86,14 +61,25 @@ And uses this vocabulary :
 
 
 # Classes and methods
-* Momocs defines and uses S3 classes. Not the most rigorous but familiar to most of us.
-* `Coo`rdinates -> Morphometrics -> `Coe`fficients.
-* `Coo` and `Coe` are "super-classes" for coordinates and coefficients.
-* Only appropriate morphometrics are allowed on each class and turn :
-    + `Out` for closed outlines, into `OutCoe`;
-    + `Opn` for open curves, into `OpnCoe`;
-    + `Ldk` for landmarks, into `LdkCoe`.
-* To see class definitions, eg `Out` : `?Out`.
+
+Morphometrics is the statistical description of shapes, in other words methods that turn $(x, y)$ coordinates into quantitative variables.
+
+Of course, the raw data may differ in their nature: outlines, curves, configuration of landmarks, and once you have quantitative variables you have a bunch of multivariate analyses at your fingertips.
+
+Whatever the morphometric approach you are using (say outline analysis) you have very *generic* needs that you share with other approaches (say configuration of landmarks), for instance centering and plotting your shape dataset. But you have have very *specific* needs, for instance calculation Elliptical Fourier Transform, which makes no sense on configuration of landmarks.
+
+Momocs use a simple scheme of classes to handle the different morphometrics approaches and the methods associated with:
+
+* **Coo**rdinates are primarily `Coo` objects but also of class:
+    + `Out` for **out**lines
+    + `Opn` for **op**e**n** outlines
+    + `Ldk` for configurations of **l**an**d**mar**k**s
+* **Coe**fficients are primarily `Coe` objects but also of class:
+    + `OutCoe`
+    + `OpnCoe`
+    + `LdkCoe`
+    
+They are all described in their own helpfiles (*e.g.* `?Out`).
 * To see attached methods, eg for `OpnCoe` : `methods(class = "OpnCoe")`
 * To see R code behind methods, eg for `hist.OpnCoe` : `Momocs:::hist.OpnCoe`
 * Constructors are available, eg `Out()`
