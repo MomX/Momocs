@@ -57,6 +57,8 @@
 #' @import ape
 #' @import colorspace
 #' @import sp
+#' @import reshape2
+#' @import ggplot2
 #' @importFrom geometry delaunayn
 #' @importFrom graphics boxplot
 #' @importFrom jpeg readJPEG

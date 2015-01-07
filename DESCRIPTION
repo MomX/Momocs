@@ -42,10 +42,12 @@ Imports:
     colorspace,
     graphics,
     geometry,
+    ggplot2,
     jpeg,
     MASS,
     methods,
     plotrix,
+    reshape2,
     sp,
     utils
 Suggests:

@@ -57,7 +57,7 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
                              poly = TRUE, plot.new = TRUE, plot = TRUE, zoom = 1, ...) {
   # todo zoom
   coo <- coo_check(coo)
-  # if 'plot.new=TRUE' we have initiate the graphical window
+  # if 'plot.new=TRUE' we have initiated the graphical window
   if (plot.new) {
     # we setup coo_plot graphical parameters
     op <- par(mar = c(3, 3, 2, 1))

@@ -3,27 +3,19 @@
 \alias{boxplot.PCA}
 \title{Boxplot on PCA objects}
 \usage{
-\method{boxplot}{PCA}(x, fac, nax = 1:4, cols, palette = col_qual,
-  fixed.axes = TRUE, center.origin = TRUE, cex.legend = 1, ...)
+\method{boxplot}{PCA}(x, fac = NULL, PC.range = 1:5, ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
 
 \item{fac}{factor, or a name or the column id from the $fac slot}
 
-\item{nax}{the range of PC axis}
+\item{PC.range}{the range of PC to plot}
 
-\item{cols}{a vector of colors is palette is not provided}
-
-\item{palette}{a color palette}
-
-\item{fixed.axes}{logical whether axes shoudl have the same scaled}
-
-\item{center.origin}{if TRUE before, whether to center the origin}
-
-\item{cex.legend}{a numeric to specify cex for the legend (if any)}
-
-\item{...}{further arguments to feed \link{boxplot}}
+\item{...}{useless here}
+}
+\value{
+a ggplot object
 }
 \description{
 Boxplot on PCA objects
@@ -32,6 +24,9 @@ Boxplot on PCA objects
 data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
-boxplot(bot.p, 1)
+boxplot(bot.p)
+p <- boxplot(bot.p, 1)
+#p +  theme_minimal() + scale_fill_grey()
+#p + facet_wrap(~PC, scales = "free")
 }
 

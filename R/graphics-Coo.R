@@ -95,49 +95,61 @@ plot.Coo <- function(x, id, ...) {
 #' @rdname stack.Coo
 #' @aliases stack.Coo
 #' @export
-stack.Coo <- function(x, cols, borders, points = FALSE, first.point = TRUE,
-                      centroid = TRUE, ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055",
-                      ldk.cex = 0.5, ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-                      ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE, title=substitute(x), ...) {
-  Coo <- x
-  if (missing(cols)) {
-    cols <- rep(NA, length(Coo))
-  }
-  if (length(cols) != length(Coo)) {
-    cols <- rep(cols[1], length(Coo))
-  }
-  if (missing(borders)) {
-    borders <- rep("#0000003F", length(Coo))
-  }
-  if (length(borders) != length(Coo)) {
-    borders <- rep(borders[1], length(Coo))
-  }
-  op <- par(mar = c(3, 3, 2, 1))
-  on.exit(par(op))
-  wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2,
-                                                     range))), 2, range)
-  plot(NA, xlim = wdw[, 1], ylim = wdw[, 2], asp = 1, las = 1,
-       cex.axis = 2/3, ann = FALSE, frame = FALSE)
-  title(title)
-  if (xy.axis) {
-    abline(h = 0, v = 0, col = "grey80", lty = 2)
-  }
-  for (i in 1:length(Coo)) {
-    coo_draw(Coo$coo[[i]], col = cols[i], border = borders[i],
-             points = points, first.point = TRUE, centroid = centroid)
-    if (ldk & length(Coo$ldk) != 0) {
-      points(Coo$coo[[i]][Coo$ldk[[i]], ], pch = ldk.pch,
-             col = ldk.col, cex = ldk.cex)
+stack.Coo <- 
+  function(x,
+           cols, borders, points = FALSE,
+           first.point = TRUE, centroid = TRUE,
+           ldk = TRUE,
+           ldk.pch = 3, ldk.col = "#FF000055",
+           ldk.cex = 0.5, ldk_links = FALSE,
+           ldk_confell = FALSE, ldk_contour = FALSE,
+           ldk_chull = FALSE, ldk_labels = FALSE,
+           xy.axis = TRUE, title=substitute(x), ...) {
+    Coo <- x
+    # we handle for missing cols
+    if (missing(cols)) {
+      cols <- rep(NA, length(Coo))
+    }
+    # or when provided fro an irregular lenght
+    if (length(cols) != length(Coo)) {
+      cols <- rep(cols[1], length(Coo))
+    }
+    # same thing for borders
+    if (missing(borders)) {
+      borders <- rep("#0000003F", length(Coo))
+    }
+    if (length(borders) != length(Coo)) {
+      borders <- rep(borders[1], length(Coo))
+    }
+    # we define local par (margins)
+    op <- par(mar = c(3, 3, 2, 1))
+    on.exit(par(op))
+    # we calculate data range
+    wdw <- apply(do.call(rbind, Coo$coo), 2, range)
+    plot(NA, type = "n",
+         asp = 1, xlim = wdw[, 1], ylim = wdw[, 2],
+         las = 1, cex.axis = 2/3, 
+         ann = TRUE, frame = FALSE,  main=title)
+    if (xy.axis) {
+      abline(h = 0, v = 0, col = "grey80", lty = 2)
+    }
+    # should be lapply-ed but how to keep cols/borders ?
+    for (i in 1:length(Coo)) {
+      coo_draw(Coo$coo[[i]], col = cols[i], border = borders[i],
+               points = points, first.point = TRUE, centroid = centroid)
+      if (ldk & length(Coo$ldk) != 0) {
+        points(Coo$coo[[i]][Coo$ldk[[i]], ], pch = ldk.pch,
+               col = ldk.col, cex = ldk.cex)
+      }
     }
   }
-}
 
 #' @rdname stack.Coo
 #' @export
 stack.OutCoe <- function(x, nb.pts=120, ...){
   OutCoe <- x
   Out <- as.Out(x, nb.pts=nb.pts)
-  stack(Out, title=paste0(substitute(x),".i"),...)}
+  stack(Out, title=paste0(substitute(x),"_i"),...)}
 
 #' @rdname stack.Coo
 #' @export
@@ -268,7 +280,7 @@ panel.Out <- function(x, cols, borders, fac, reorder = NULL,
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
   pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
-                        reorder = reorder, poly = TRUE)
+                       reorder = reorder, poly = TRUE)
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
@@ -326,7 +338,7 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
   pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
-                        reorder = reorder, poly = FALSE)
+                       reorder = reorder, poly = FALSE)
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
@@ -370,8 +382,8 @@ panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
   pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
-                        reorder = reorder, poly = FALSE, points = points, points.pch = points.pch,
-                        points.cex = points.cex, points.col = points.col)
+                       reorder = reorder, poly = FALSE, points = points, points.pch = points.pch,
+                       points.cex = points.cex, points.col = points.col)
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)

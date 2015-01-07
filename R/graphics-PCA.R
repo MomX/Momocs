@@ -178,12 +178,12 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
       if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
     }
     else {
-          if (nlevels(fac) < 10) {
-            pch <- .pch()[fac]
-          } else {
-            pch <- 20
-          }
-        }
+      if (nlevels(fac) < 10) {
+        pch <- .pch()[fac]
+      } else {
+        pch <- 20
+      }
+    }
   }
   # cosmectics
   if ((density) & missing(contour)) contour <- TRUE
@@ -194,7 +194,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (labels & missing(points)) points <- FALSE
   if (missing(col.labels)) col.labels <- col.groups
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
-
+  
   ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -210,9 +210,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
     morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
-                    nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
-                    amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                    col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)}
+                   nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
+                   amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
+                   col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)}
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
     if (ellipsesax) .ellipsesax(xy, fac, conf_ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
@@ -235,7 +235,11 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   .title(title)
   if (eigen)     .eigen(PCA$sdev, xax, yax, ev.names="Eigenvalues")
   if (box) box()
-  invisible(list(xy=xy, fac=fac))
+  # we return a df
+  if (is.null(fac)) 
+    invisible(data.frame(x=xy[, 1], y=xy[, 2]))
+  else
+    invisible(data.frame(x=xy[, 1], y=xy[, 2], fac=fac))
 }
 
 #' Plots a combination of the three first PCs
@@ -260,8 +264,8 @@ plot3 <- function(PCA, ...){UseMethod("plot3")}
 plot3.PCA <- function(PCA,  ... ){
   op1 <- par(mfrow=c(2, 2))
   on.exit(par(op1))
-  # The three plot.PCA plots
-  plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), eigen=FALSE, ...)
+  # The three plot.PCA plots (we also prepare the df)
+  df <- plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), eigen=FALSE, ...)
   plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=FALSE, ...)
   plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=FALSE,  ...)
   # The eigen value plot
@@ -274,6 +278,11 @@ plot3.PCA <- function(PCA,  ... ){
   bp <- barplot(v, col=cols, border=NA, axes=FALSE, main="Eigenvalues")
   text(bp, v+2, labels = paste0(round(v, 1), "%"), cex=0.8)
   axis(1, at = bp, labels=paste0("PC", 1:5), line = -1, tick = FALSE, cex.axis=0.8)
+  # we return a df
+  if (is.null(df$fac))
+    invisible(data.frame(x=PCA$x[, 1], y=PCA$x[, 2], z=PCA$x[, 3]))
+  else
+    invisible(data.frame(x=PCA$x[, 1], y=PCA$x[, 2], z=PCA$x[, 3], fac=df$fac))
 }
 
 
@@ -282,63 +291,34 @@ plot3.PCA <- function(PCA,  ... ){
 # @method boxplot PCA
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
 #' @param fac factor, or a name or the column id from the $fac slot
-#' @param nax the range of PC axis
-#' @param cols a vector of colors is palette is not provided
-#' @param palette a color palette
-#' @param fixed.axes logical whether axes shoudl have the same scaled
-#' @param center.origin if TRUE before, whether to center the origin
-#' @param cex.legend a numeric to specify cex for the legend (if any)
-#' @param ...  further arguments to feed \link{boxplot}
+#' @param PC.range the range of PC to plot
+#' @param ... useless here
+#' @return a ggplot object
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
-#' boxplot(bot.p, 1)
+#' boxplot(bot.p)
+#' p <- boxplot(bot.p, 1)
+#' #p +  theme_minimal() + scale_fill_grey()
+#' #p + facet_wrap(~PC, scales = "free")
 #' @export
-boxplot.PCA <- function(x, fac, nax=1:4, cols, palette=col_qual,
-                        fixed.axes=TRUE, center.origin=TRUE,
-                        cex.legend=1, ...){
-  xy <- x$x[, nax]
-  xy <- as.matrix(xy) # cases where length(nax)=1
-  if (missing(fac)){
-    fac <- factor(rep("foo", nrow(xy)))
-    no.fac <- TRUE
-  } else {
-    no.fac <- FALSE
-  }
-
-  if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
-  fl <- levels(fac)
-  fn <- nlevels(fac)
-  if (missing(cols)){ cols <- palette(fn) }
-  if (no.fac) { cols <- "grey20" }
-  if (fixed.axes){
-    yl <- range(xy)
-    if (center.origin) {
-      yl <- max(abs(yl))
-      yl <- c(-yl, yl)
+boxplot.PCA <- function(x, fac=NULL, PC.range=1:5, ...){
+    PCA <- x
+    if (max(PC.range) > ncol(PCA$x)) PC.range <- 1:ncol(PCA$x)
+    if (is.null(fac)) {
+      df <- data.frame(PCA$x[, PC.range])
+      df <- melt(df, id.vars=ncol(df), variable.name="PC")
+      gg <- ggplot(df, aes(x=PC, y=value)) + 
+        geom_boxplot() + labs(x=NULL, y="score")
+    } else {
+      df <- data.frame(PCA$x[, PC.range], fac=PCA$fac[, fac])
+      df <- melt(df, id.vars=ncol(df), variable.name="PC")
+      gg <- ggplot(df, aes(x=PC, y=value, fill=fac)) +
+        geom_boxplot() + labs(x=NULL, y="score", fill=NULL)
     }
-    op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(1, 3, 2, 0), lend=2)
-    on.exit(par(op))
-    for (i in seq(along=nax)){
-      boxplot(xy[, nax[i]] ~ fac, ylim=yl, at=fn:1, horizontal=TRUE,
-              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"),
-              whisklty=1, outpch=20, outcex=0.5,
-              axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)}
-    axis(1)
-  } else {
-    op <- par(mfrow=c(length(nax), 1), oma=c(3, 0, 0, 3), mar=c(3, 3, 2, 0), lend=2)
-    for (i in seq(along=nax)){
-      boxplot(xy[, nax[i]] ~ fac, at=fn:1, horizontal=TRUE,
-              col=cols, boxcol=NA, medlwd=1, medcol=par("bg"), whisklty=1, outpch=1,
-              axes=FALSE, boxwex=1/3, main=paste0("PC", nax[i]), ...)
-      axis(1)}
+    return(gg)
   }
-  if (!no.fac) {
-    legend("topright", legend = levels(fac),
-           fill = cols, bty="n", border = NA, cex=cex.legend)
-  }
-}
 
 #' Shape variation along PC axes
 #'

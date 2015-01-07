@@ -10,6 +10,7 @@
   \item Review of the code
   \item Consistent renaming
   \item First vignettes on their way
+  \item ggplot2 graphs on their way
 }
 }
 
