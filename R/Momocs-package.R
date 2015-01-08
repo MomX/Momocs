@@ -56,8 +56,8 @@
 #' for their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
 #' @import colorspace
+#' @importFrom plyr ldply
 #' @import dplyr
-#' @import plyr
 #' @import sp
 #' @import reshape2
 #' @import ggplot2

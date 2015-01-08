@@ -291,7 +291,7 @@ plot3.PCA <- function(PCA,  ... ){
 # @method boxplot PCA
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
 #' @param fac factor, or a name or the column id from the $fac slot
-#' @param PC.range the range of PC to plot
+#' @param nax the range of PC to plot
 #' @param ... useless here
 #' @return a ggplot object
 #' @examples
@@ -303,22 +303,40 @@ plot3.PCA <- function(PCA,  ... ){
 #' #p +  theme_minimal() + scale_fill_grey()
 #' #p + facet_wrap(~PC, scales = "free")
 #' @export
-boxplot.PCA <- function(x, fac=NULL, PC.range=1:5, ...){
-    PCA <- x
-    if (max(PC.range) > ncol(PCA$x)) PC.range <- 1:ncol(PCA$x)
-    if (is.null(fac)) {
-      df <- data.frame(PCA$x[, PC.range])
-      df <- melt(df, id.vars=ncol(df), variable.name="PC")
-      gg <- ggplot(data=df, aes_string(x="PC", y="value")) + 
-        geom_boxplot() + labs(x=NULL, y="score")
+boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
+  PCA <- x
+  if (max(nax) > ncol(PCA$x)) nax <- 1:ncol(PCA$x)
+  if (is.null(fac)) {
+    df <- data.frame(PCA$x[, nax])
+    df <- melt(df, id.vars=ncol(df), variable.name="PC")
+    gg <- ggplot(data=df, aes_string(x="PC", y="value")) + 
+      geom_boxplot() + labs(x=NULL, y="score")
+    return(gg)
+  } else {
+    ### we check and prepare everything related to groups
+    ### fac not provided
+    if (missing(fac)) { # mainly for density and contour
+      fac <- NULL
+      col.groups <- col
     } else {
-      df <- data.frame(PCA$x[, PC.range], fac=PCA$fac[, fac])
+      ### fac provided
+      # fac provided, as formula
+      if (class(fac)=="formula"){
+        f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
+        fac <- interaction(f0)
+      }
+      # fac provided, as column name or id
+      if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
+      fac <- factor(fac) # I love R
+      df <- data.frame(PCA$x[, nax], fac=fac)
       df <- melt(df, id.vars=ncol(df), variable.name="PC")
-      gg <- ggplot(data=df, aes_string(x="PC", y="value", fill=fac)) +
+      gg <- ggplot(data=df, aes_string(x="PC", y="value", fill="fac")) +
         geom_boxplot() + labs(x=NULL, y="score", fill=NULL)
     }
     return(gg)
-  }
+  }}
+
+
 
 #' Shape variation along PC axes
 #'
@@ -385,8 +403,8 @@ PCcontrib.PCA <-
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
     
-    
-    gg <- ggplot(data=xx, aes(x=x, y=y)) + 
+    # we ggplot
+    gg <- ggplot(data=xx, aes_string(x="x", y="y")) + 
       geom_polygon(alpha=0.5) + coord_equal() +
       facet_grid(PC ~ sd) + labs(
         title="PC contribution to shape",

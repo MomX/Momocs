@@ -196,8 +196,8 @@ calibrate_deviations.Out <-
     # missing lineat.y 
     if (missing(harm.range)) {
       hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE, 
-                                    lineat.y = c(95, 99, 99.9))$minh
-      harm.range <- unique(hr)
+                                    lineat.y = c(95, 99, 99.9))
+      harm.range <- unique(hr$minh)
     }
     if (missing(method)) {
       cat(" * Method not provided. efourier is used.\n")
