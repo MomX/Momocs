@@ -7,8 +7,7 @@
 PCcontrib(PCA, ...)
 
 \method{PCcontrib}{PCA}(PCA, nax = 1:4, sd.r = c(-2, -1, -0.5, 0, 0.5, 1,
-  2), main = "PC contribution to shape", xlab = "(Mean + ) SD",
-  ylab = "PC axes", ...)
+  2), ...)
 }
 \arguments{
 \item{PCA}{a \code{\link{PCA}} object}
@@ -18,12 +17,6 @@ PCcontrib(PCA, ...)
 \item{nax}{a single or a range of PC axes}
 
 \item{sd.r}{a single or a range of mean +/- sd values (eg: c(-1, 0, 1))}
-
-\item{main}{a title for the plot}
-
-\item{xlab}{a title for the x-axis}
-
-\item{ylab}{a title for the y-axis}
 }
 \description{
 Calculates and plots shape variation along Principal Component axes.
@@ -34,7 +27,10 @@ Calculates and plots shape variation along Principal Component axes.
 data(bot)
  bot.p <- PCA(efourier(bot, 12))
  PCcontrib(bot.p)
- PCcontrib(bot.p, nax=1:5, sd.r=c(-5, 2, 1, 0, 1, 2, 5),
-   main="A nice title", border="grey40", col="grey80")
+ \dontrun{
+ library(ggplot2)
+ gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
+ gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
+ }
 }
 

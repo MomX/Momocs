@@ -40,6 +40,8 @@ calibrate_deviations(bot)
 library(ggplot2)
 gg <- calibrate_deviations(bot, id=1:20)$gg
 gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
+gg + labs(col="Number of harmonics", fill="Number of harmonics",
+           title="Harmonic power") + theme_bw()
 }
 }
 \keyword{Out}

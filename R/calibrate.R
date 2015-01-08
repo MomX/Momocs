@@ -85,70 +85,71 @@ calibrate_reconstructions.Out <-
 
 #' @rdname calibrate_reconstructions
 #' @export
-calibrate_reconstructions.Opn <- function(x,
-                                          method = c("npoly", "opoly"),
-                                          id,
-                                          range = 2:10,
-                                          baseline1 = c(-1, 0),
-                                          baseline2 = c(1, 0),
-                                          plot.method = c("panel", "stack")[1],
-                                          palette = col_sari,
-                                          ...) {
-  # Opn dispatcher
-  Opn <- x
-  if (missing(method)) {
-    cat(" * Method not provided. opoly is used.\n")
-    method   <- opoly
-    method_i <- opoly_i
-  } else {
-    p <- pmatch(tolower(method), c("npoly", "opoly"))
-    if (is.na(p)) {
-      warning(" * Unvalid method. opoly is used.\n")
+calibrate_reconstructions.Opn <- 
+  function(x,
+           method = c("npoly", "opoly"),
+           id,
+           range = 2:10,
+           baseline1 = c(-1, 0),
+           baseline2 = c(1, 0),
+           plot.method = c("panel", "stack")[1],
+           palette = col_sari,
+           ...) {
+    # Opn dispatcher
+    Opn <- x
+    if (missing(method)) {
+      cat(" * Method not provided. opoly is used.\n")
+      method   <- opoly
+      method_i <- opoly_i
     } else {
-      method   <- switch(p, npoly, opoly)
-      method_i <- switch(p, npoly_i, opoly_i)
+      p <- pmatch(tolower(method), c("npoly", "opoly"))
+      if (is.na(p)) {
+        warning(" * Unvalid method. opoly is used.\n")
+      } else {
+        method   <- switch(p, npoly, opoly)
+        method_i <- switch(p, npoly_i, opoly_i)
+      }
     }
+    
+    # we sample a shape
+    if (missing(id))
+      id <- sample(length(Opn$coo), 1)
+    coo <- Opn$coo[[id]]
+    coo <- coo_baseline(coo,
+                        ldk1 = 1, ldk2 = nrow(coo),
+                        t1 = baseline1, t2 = baseline2)
+    
+    # we check for too ambitious range
+    # special case for opoly # todo
+    if ( p == 2) {
+      if (max(range) > 20) range <- 2:20
+    } 
+    if (max(range) > (nrow(coo) - 1)) {
+      range <- 2:10
+      cat(" * range was too high and set to: ", range, ".\n")
+    }
+    
+    # we loop
+    res <- list()
+    for (i in seq(along = range)) {
+      res[[i]] <- method_i(method(coo, degree = range[i]))
+    }
+    
+    # we prepare an Out
+    names(res) <- range
+    res <- Opn(res)
+    
+    # we plot it
+    cols <- paste0(palette(length(range)), "EE")
+    if (plot.method=="stack"){
+      stack(res, borders=cols, centroid=FALSE)
+    } else {
+      panel(res, borders=cols, names=TRUE, cex.names=3/4)
+      title(names(Opn)[id], line = -1)
+    }
+    # and we return it
+    invisible(res)
   }
-  
-  # we sample a shape
-  if (missing(id))
-    id <- sample(length(Opn$coo), 1)
-  coo <- Opn$coo[[id]]
-  coo <- coo_baseline(coo,
-                      ldk1 = 1, ldk2 = nrow(coo),
-                      t1 = baseline1, t2 = baseline2)
-  
-  # we check for too ambitious range
-  # special case for opoly # todo
-  if ( p == 2) {
-    if (max(range) > 20) range <- 2:20
-  } 
-  if (max(range) > (nrow(coo) - 1)) {
-    range <- 2:10
-    cat(" * range was too high and set to: ", range, ".\n")
-  }
-  
-  # we loop
-  res <- list()
-  for (i in seq(along = range)) {
-    res[[i]] <- method_i(method(coo, degree = range[i]))
-  }
-  
-  # we prepare an Out
-  names(res) <- range
-  res <- Opn(res)
-  
-  # we plot it
-  cols <- paste0(palette(length(range)), "EE")
-  if (plot.method=="stack"){
-    stack(res, borders=cols, centroid=FALSE)
-  } else {
-    panel(res, borders=cols, names=TRUE, cex.names=3/4)
-    title(names(Opn)[id], line = -1)
-  }
-  # and we return it
-  invisible(res)
-}
 
 # 2. calibrate_deviations -------------------------
 #' Quantitative calibration, through deviations, for Out objects
@@ -174,6 +175,8 @@ calibrate_reconstructions.Opn <- function(x,
 #' library(ggplot2)
 #' gg <- calibrate_deviations(bot, id=1:20)$gg
 #' gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
+#' gg + labs(col="Number of harmonics", fill="Number of harmonics", 
+#'            title="Harmonic power") + theme_bw()
 #' }
 #' @aliases calibrate_deviations
 #' @rdname calibrate_deviations
@@ -187,20 +190,21 @@ calibrate_deviations <- function(Coo, ...) {
 calibrate_deviations.Out <- 
   function(Coo, method = c("efourier", "rfourier", "tfourier"), 
            id = 1, harm.range,
-           norm.centsize = TRUE, dist.method = edm_nearest, dist.nbpts = 120,
+           norm.centsize = TRUE,
+           dist.method = edm_nearest, dist.nbpts = 120,
            ...) {
     # missing lineat.y 
     if (missing(harm.range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE, lineat.y = c(95, 99, 99.9))$minh
+      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE, 
+                                    lineat.y = c(95, 99, 99.9))$minh
       harm.range <- unique(hr)
     }
     if (missing(method)) {
-      cat("  * Method not provided. efourier is used.\n")
+      cat(" * Method not provided. efourier is used.\n")
       method <- efourier
       method.i <- efourier_i
     } else {
-      p <- pmatch(tolower(method), c("efourier", "rfourier",
-                                     "tfourier"))
+      p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
       if (is.na(p)) {
         warning("Unvalid method. efourier is used.")
       } else {
@@ -246,7 +250,7 @@ calibrate_deviations.Out <-
       # we normalize by the centroid size and prepare the y.title
       if (norm.centsize) {
         res[, , ind] <- res[, , ind]/coo_centsize(coo)
-        y.title <- "Deviation (in % of the centroid size"
+        y.title <- "Deviation (in % of the centroid size)"
       } else {
         y.title <- "Deviation (in original units)"
       }
@@ -262,31 +266,34 @@ calibrate_deviations.Out <-
       xx <- melt(m)
       xx <- cbind(xx, melt(d)$value)
       xx$Var2 <- as.numeric(xx$Var2)
-      colnames(xx) <- c("harm", "pt", "mean", "sd")
+      colnames(xx) <- c("harm", "pt", "med", "sd")
+      # hideous but avoid the aes_string problem fro ribbon
+      xx$mmsd <- xx$med - xx$sd
+      xx$mpsd <- xx$med + xx$sd
       # we ggplot
-      gg <- ggplot(xx, aes(x=pt, y=mean, col=harm)) +
-        geom_ribbon(aes(ymin=mean-sd, ymax=mean+sd, fill=harm), alpha=0.1, linetype=0) +
-        geom_line(aes(y=mean, col=harm), linetype=1, alpha=1) +
-        labs(x="Points along the outline",
-             y=y.title) +
-        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$mean + xx$sd)))
+      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
+        geom_ribbon(aes_string(ymin="mmsd", ymax="mpsd",
+                               fill="harm"), linetype=0,  alpha=0.1) +
+        geom_line(aes_string(x="pt", y="med", col="harm")) +
+        labs(x="Points along the outline", y=y.title,
+             col=NULL, fill=NULL) +
+        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$mpsd)))
     } else {
       m <- res[, , 1]
       d <- NULL
       # we prepare a df
       xx <- melt(m)
       xx$Var2 <- as.numeric(xx$Var2)
-      colnames(xx) <- c("harm", "pt", "mean")
-      gg <- ggplot(xx, aes(x=pt, y=mean, col=harm)) + 
+      colnames(xx) <- c("harm", "pt", "med")
+      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) + 
         geom_line() + 
-        labs(x="Points along the outline",
-             y=y.title) +
-        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$mean)))
+        labs(x="Points along the outline", y=y.title, col=NULL) +
+        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
     }
-#     # horizontal lines
-#     if (!is.null(thres.h)) {
-#       gg <- gg + geom_hline(aes(yintercept=thres.h))
-#     }
+    #     # horizontal lines
+    #     if (!is.null(thres.h)) {
+    #       gg <- gg + geom_hline(aes(yintercept=thres.h))
+    #     }
     # we plot the ggplot
     print(gg) 
     ####
@@ -382,7 +389,7 @@ calibrate_harmonicpower.Out <- function(Out, method = "efourier", id = 1:length(
   h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmectics
   xx <- melt(res)
   colnames(xx) <- c("shp", "harm", "hp")
-  gg <- ggplot(xx, aes(x=harm, y=hp)) + geom_boxplot() +
+  gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
     labs(x="Harmonic rank", y="Cumulative sum harmonic power") + 
     coord_cartesian(xlim=c(0.5, h_display+0.5))
   if (plot) print(gg)

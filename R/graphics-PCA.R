@@ -309,12 +309,12 @@ boxplot.PCA <- function(x, fac=NULL, PC.range=1:5, ...){
     if (is.null(fac)) {
       df <- data.frame(PCA$x[, PC.range])
       df <- melt(df, id.vars=ncol(df), variable.name="PC")
-      gg <- ggplot(df, aes(x=PC, y=value)) + 
+      gg <- ggplot(data=df, aes_string(x="PC", y="value")) + 
         geom_boxplot() + labs(x=NULL, y="score")
     } else {
       df <- data.frame(PCA$x[, PC.range], fac=PCA$fac[, fac])
       df <- melt(df, id.vars=ncol(df), variable.name="PC")
-      gg <- ggplot(df, aes(x=PC, y=value, fill=fac)) +
+      gg <- ggplot(data=df, aes_string(x="PC", y="value", fill=fac)) +
         geom_boxplot() + labs(x=NULL, y="score", fill=NULL)
     }
     return(gg)
@@ -327,52 +327,73 @@ boxplot.PCA <- function(x, fac=NULL, PC.range=1:5, ...){
 #'  @param PCA a \code{\link{PCA}} object
 #'  @param nax a single or a range of PC axes
 #'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
-#'  @param main a title for the plot
-#'  @param xlab a title for the x-axis
-#'  @param ylab a title for the y-axis
 #'  @param ... additional parameter to pass to \code{\link{coo_draw}}
 #'  @examples
 #'  data(bot)
 #'  bot.p <- PCA(efourier(bot, 12))
 #'  PCcontrib(bot.p)
-#'  PCcontrib(bot.p, nax=1:5, sd.r=c(-5, 2, 1, 0, 1, 2, 5),
-#'    main="A nice title", border="grey40", col="grey80")
+#'  \dontrun{
+#'  library(ggplot2)
+#'  gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
+#'  gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
+#'  }
 #'  @rdname PCcontrib
 #'  @export
 PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
 #'  @rdname PCcontrib
 #'  @export
-PCcontrib.PCA <- function(PCA, nax=1:4, sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
-                          main="PC contribution to shape", xlab="(Mean + ) SD", ylab="PC axes", ...){
-  # we prepare the graphical windows
-  # same paradigm as coo_listpanel
-  x <- PCA
-  xs <- 1:length(sd.r) - 0.5
-  ys <- rev(1:length(nax) - 0.5)
-  plot(NA, xlim=c(0, length(sd.r)), ylim=c(0, length(nax)),
-       asp=1, frame=FALSE, axes=FALSE,
-       main=main, xlab=xlab, ylab=ylab)
-  axis(1, at = xs, labels = sd.r)
-  axis(2, at = ys, labels = nax, las=1)
-  # we loop to reconstruct shapes
-  # we make it through morphospacePCA + plot=FALSE
-  shp <- list()
-  for (i in seq(along=nax)){
-    sd.i <- sd(x$x[, nax[i]])
-    pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
-    shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
-    shp <- c(shp, shp.i)}
-  # we template the size of the shapes
-  shp <- lapply(shp, coo_template, 0.95)
-  # here we prepare and apply the translation values
-  trans <- expand.grid(xs, ys)
-  colnames(trans) <- c("x", "y")
-  for (i in seq(along=shp)){
-    shp[[i]] <- coo_trans(shp[[i]], trans[i, 1], trans[i, 2])}
-  # we finally plot the shapes
-  gc <- lapply(shp, coo_draw, centroid = FALSE, first.point=FALSE, ...)
-  invisible(list(shp=shp, trans=trans))}
-
+PCcontrib.PCA <- 
+  function(PCA,
+           nax=1:4,
+           sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
+           ...){
+    # we prepare the graphical windows
+    # same paradigm as coo_listpanel
+    x <- PCA
+    # we reconstruct shapes
+    shp <- list()
+    for (i in seq(along=nax)){
+      sd.i <- sd(x$x[, nax[i]])
+      pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
+      shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
+      shp <- c(shp, shp.i)}
+    # we template the size of the shapes
+    shp <- lapply(shp, coo_template, 0.95)
+    # we turn the list into a data.frame
+    names(shp) <- 1:length(shp)
+    coos <- ldply(shp, data.frame)
+    colnames(coos) <- c("id", "x", "y")
+    # we prepare the information data.frame
+    df <- expand.grid(nax, sd.r)
+    colnames(df) <- c("PC", "sd")
+    df <- apply(df, 2, rep, each=61)
+    # we merge the two df
+    xx <- cbind(coos, df)
+    # cosmectics
+    theme_empty <- theme(axis.line=element_blank(),
+                         axis.text.x=element_blank(),
+                         axis.text.y=element_blank(),
+                         axis.ticks=element_blank(),
+                         legend.position="none",
+                         panel.background=element_blank(),
+                         panel.border=element_blank(),
+                         panel.grid.major=element_blank(),
+                         panel.grid.minor=element_blank(),
+                         plot.background=element_blank(),
+                         strip.background=element_rect(fill="grey95"),
+                         strip.text=element_text(colour = "grey10"),
+                         strip.text.x=element_text(colour = "grey10"),
+                         strip.text.y=element_text(colour = "grey10"))
+    
+    
+    gg <- ggplot(data=xx, aes(x=x, y=y)) + 
+      geom_polygon(alpha=0.5) + coord_equal() +
+      facet_grid(PC ~ sd) + labs(
+        title="PC contribution to shape",
+        x="(Mean + ) SD",
+        y="PC axes") + theme_light() + theme_empty
+    return(gg)
+  }
 
 ##### end PCA plotters
 

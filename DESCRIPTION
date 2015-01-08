@@ -40,6 +40,7 @@ Depends:
 Imports:
     ape,
     colorspace,
+    dplyr,
     graphics,
     geometry,
     ggplot2,
@@ -47,6 +48,7 @@ Imports:
     MASS,
     methods,
     plotrix,
+    plyr,
     reshape2,
     sp,
     utils
