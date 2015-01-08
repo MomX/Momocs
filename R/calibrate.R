@@ -8,13 +8,12 @@
 #' @aliases calibrate_reconstructions
 #' @param x the \code{Coo} object on which to calibrate_reconstructions
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
+#'  for \code{Out}, or from \code{c('opoly', 'npoly')} for \code{Opn} 
 #' @param id the shape on which to perform calibrate_reconstructions
 #' @param range vector of harmonics on which to perform calibrate_reconstructions
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
-#' @param plot.method either \code{'\link{panel}'} or \code{'\link{stack}'}
-#' @param palette a color \link{palette}
-#' @param ... additional parameters to fed \link{coo_plot}
+#' @param ... only used for the generic
 #' @keywords Out
 #' @examples
 #' data(bot)
@@ -31,8 +30,6 @@ calibrate_reconstructions.Out <-
            method = c("efourier", "rfourier", "tfourier"),
            id,
            range = 1:9,
-           plot.method = c("panel", "stack")[1],
-           palette = col_heat,
            ...) {
     # we detect the method
     # Out dispatcher
@@ -55,7 +52,6 @@ calibrate_reconstructions.Out <-
       id <- sample(length(Out$coo), 1)
     coo <- Out$coo[[id]]
     coo <- coo_center(coo)
-    
     # check for too ambitious harm.range
     if (max(range) > floor(nrow(coo)/2)) {
       range <- floor(seq(1, q/2 - 1, length = 6))
@@ -67,20 +63,39 @@ calibrate_reconstructions.Out <-
     for (i in seq(along = range)) {
       res[[i]] <- method_i(method(coo, nb.h = max(range)), nb.h = range[i])
     }
-    # we prepare an Out
+    # we prepare the plot
     names(res) <- range
-    res <- Out(res)
+    coos <- ldply(res, data.frame)
+    colnames(coos) <- c("id", "x", "y")
+    coos$id <- as.numeric(coos$id)
+    best <- coo_close(res[[length(res)]])
+    best <- data.frame(x=best[, 1], y=best[, 2])
+    # cosmectics
+    theme_empty <- theme(axis.line=element_blank(),
+                         axis.text.x=element_blank(),
+                         axis.text.y=element_blank(),
+                         axis.ticks=element_blank(),
+                         axis.title.x=element_blank(),
+                         axis.title.y=element_blank(),
+                         legend.position="none",
+                         panel.background=element_blank(),
+                         panel.border=element_blank(),
+                         panel.grid.major=element_blank(),
+                         panel.grid.minor=element_blank(),
+                         plot.background=element_blank(),
+                         strip.background=element_rect(fill="grey95"),
+                         strip.text=element_text(colour = "grey10"),
+                         strip.text.x=element_text(colour = "grey10"),
+                         strip.text.y=element_text(colour = "grey10"))
     
-    # we plot it
-    cols <- paste0(palette(length(range)), "EE")
-    title <- names(Out)[id]
-    if (plot.method=="stack"){
-      stack(res, borders=cols, centroid=FALSE, title=title)
-    } else {
-      panel(res, col=cols, names=TRUE, cex.names=3/4, title=title)
-    }
-    # and we return it
-    invisible(res)
+    gg <- ggplot(data=coos, aes_string(x="x", y="y")) + 
+      coord_equal() + geom_polygon(aes(fill=id), alpha=0.5) + 
+      geom_path(data=best, aes_string(x="x", y="y")) + 
+      scale_fill_gradient2() +
+      facet_wrap(~ id) +
+      labs(x=NULL, y=NULL, title=names(Out)[id]) +
+      theme_light() + theme_empty
+    return(gg)
   }
 
 #' @rdname calibrate_reconstructions
@@ -92,8 +107,6 @@ calibrate_reconstructions.Opn <-
            range = 2:10,
            baseline1 = c(-1, 0),
            baseline2 = c(1, 0),
-           plot.method = c("panel", "stack")[1],
-           palette = col_sari,
            ...) {
     # Opn dispatcher
     Opn <- x
@@ -101,6 +114,7 @@ calibrate_reconstructions.Opn <-
       cat(" * Method not provided. opoly is used.\n")
       method   <- opoly
       method_i <- opoly_i
+      p <- 2
     } else {
       p <- pmatch(tolower(method), c("npoly", "opoly"))
       if (is.na(p)) {
@@ -121,7 +135,7 @@ calibrate_reconstructions.Opn <-
     
     # we check for too ambitious range
     # special case for opoly # todo
-    if ( p == 2) {
+    if (p == 2) {
       if (max(range) > 20) range <- 2:20
     } 
     if (max(range) > (nrow(coo) - 1)) {
@@ -135,20 +149,39 @@ calibrate_reconstructions.Opn <-
       res[[i]] <- method_i(method(coo, degree = range[i]))
     }
     
-    # we prepare an Out
+    # we prepare the plot
     names(res) <- range
-    res <- Opn(res)
+    coos <- ldply(res, data.frame)
+    colnames(coos) <- c("id", "x", "y")
+    coos$id <- as.numeric(coos$id)
+    best <- res[[length(res)]]
+    best <- data.frame(x=best[, 1], y=best[, 2])
+    # cosmectics
+    theme_empty <- theme(axis.line=element_blank(),
+                         axis.text.x=element_blank(),
+                         axis.text.y=element_blank(),
+                         axis.ticks=element_blank(),
+                         axis.title.x=element_blank(),
+                         axis.title.y=element_blank(),
+                         legend.position="none",
+                         panel.background=element_blank(),
+                         panel.border=element_blank(),
+                         panel.grid.major=element_blank(),
+                         panel.grid.minor=element_blank(),
+                         plot.background=element_blank(),
+                         strip.background=element_rect(fill="grey95"),
+                         strip.text=element_text(colour = "grey10"),
+                         strip.text.x=element_text(colour = "grey10"),
+                         strip.text.y=element_text(colour = "grey10"))
     
-    # we plot it
-    cols <- paste0(palette(length(range)), "EE")
-    if (plot.method=="stack"){
-      stack(res, borders=cols, centroid=FALSE)
-    } else {
-      panel(res, borders=cols, names=TRUE, cex.names=3/4)
-      title(names(Opn)[id], line = -1)
-    }
-    # and we return it
-    invisible(res)
+    gg <- ggplot(data=coos, aes_string(x="x", y="y")) + 
+      coord_equal() + geom_path(data=best, aes_string(x="x", y="y"), alpha=0.5) +
+      geom_path(aes(col=id)) + 
+     # scale_color_gradient2() +
+      facet_wrap(~ id) +
+      labs(x=NULL, y=NULL, title=names(Opn)[id]) +
+      theme_light() + theme_empty
+    return(gg)
   }
 
 # 2. calibrate_deviations -------------------------
@@ -177,6 +210,7 @@ calibrate_reconstructions.Opn <-
 #' gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
 #' gg + labs(col="Number of harmonics", fill="Number of harmonics", 
 #'            title="Harmonic power") + theme_bw()
+#' gg + coord_polar()
 #' }
 #' @aliases calibrate_deviations
 #' @rdname calibrate_deviations

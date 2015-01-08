@@ -8,27 +8,22 @@
 calibrate_reconstructions(x, ...)
 
 \method{calibrate_reconstructions}{Out}(x, method = c("efourier", "rfourier",
-  "tfourier"), id, range = 1:9, plot.method = c("panel", "stack")[1],
-  palette = col_heat, ...)
+  "tfourier"), id, range = 1:9, ...)
 
 \method{calibrate_reconstructions}{Opn}(x, method = c("npoly", "opoly"), id,
-  range = 2:10, baseline1 = c(-1, 0), baseline2 = c(1, 0),
-  plot.method = c("panel", "stack")[1], palette = col_sari, ...)
+  range = 2:10, baseline1 = c(-1, 0), baseline2 = c(1, 0), ...)
 }
 \arguments{
 \item{x}{the \code{Coo} object on which to calibrate_reconstructions}
 
-\item{...}{additional parameters to fed \link{coo_plot}}
+\item{...}{only used for the generic}
 
-\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
+\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}
+for \code{Out}, or from \code{c('opoly', 'npoly')} for \code{Opn}}
 
 \item{id}{the shape on which to perform calibrate_reconstructions}
 
 \item{range}{vector of harmonics on which to perform calibrate_reconstructions}
-
-\item{plot.method}{either \code{'\link{panel}'} or \code{'\link{stack}'}}
-
-\item{palette}{a color \link{palette}}
 
 \item{baseline1}{\eqn{(x; y)} coordinates for the first point of the baseline}
 

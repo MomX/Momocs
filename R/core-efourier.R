@@ -6,7 +6,7 @@
 #' from a matrix (or a list) of (x; y) coordinates.
 #'
 #' @param x A \code{list} or a \code{matrix} of coordinates or a \code{Out} object
-#' @param nb.h \code{integer}. The number of harmonics to use
+#' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform.
 #' @param verbose \code{logical}. Whether to print or not diagnosis messages.
@@ -180,8 +180,9 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...
   Out <- x
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
-    nb.h <- ifelse(q >= 32, 32, q)
-    cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+    #nb.h <- ifelse(q >= 32, 32, q)
+    nb.h <- calibrate_harmonicpower(Out, thres.h = 99, verbose=FALSE, plot=FALSE)$minh
+    cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1 #todo

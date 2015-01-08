@@ -8,22 +8,33 @@
 #' Pretty useful in morphometrics. Imagine you have a \link{Coo} or a \link{Coe} object,
 #' that combines several different \emph{groups}, whatever \emph{groups} are : species, views, etc.
 #' You may be interested in doing separated analyses (even if you could combine them later), then this
-#' function will ease the process. See the examples below.
+#' function will ease the process. \code{subset} needs to be passed with a logical subset;
+#' \code{slice} just needs the factor to use to make subsets. See the examples below.
 #' @rdname subset.Coo
-#' @param x a \code{Coo} or a \link{Coe} object
+#' @param x a \code{Coo} or a \link{Coe} object.
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
+#' @param fac the colum name in \code{fac} to use to slice your \code{Coo} or \code{Coe}.
 #' @param ... useless here but maintains consistence with the generic subset.
 #' @examples
 #' data(bot)
 #' bot$fac
-#' beers <- subset(bot, type=='beer')
-#' whisk <- subset(bot, type=='whisky')
+#' ##### subset
+#' # beers
+#' subset(bot, type=='beer')
+#' # whiskys
+#' subset(bot, type=='whisky')
 #' # or you may prefere indices
 #' subset(bot, c(1, 13, 34, 37))
-#' # and you can combine them :
+#' ##### and you can combine them :
 #' data(olea)
 #' olea$fac
 #' subset(olea, domes=='cult' & view=='VL')
+#' ##### slice
+#' slice(bot, "type")
+#' bp <- efourier(bot, 10)
+#' slice(bp, type)
+#' slice(olea, domes)
+#' 
 #' @export
 subset.Coo <- function(x, subset, ...) {
   Coo <- x
@@ -58,6 +69,61 @@ subset.Coe <- function(x, subset, ...) {
   }
   return(Coe2)
 }
+
+#' @rdname subset.Coo
+#' @export
+slice <- function(x, fac){
+  UseMethod("slice")
+}
+
+#' @rdname subset.Coo
+#' @export
+slice.Coo <- function(x, fac){
+  Coo <- x
+  # hideous but works
+  e <- substitute(fac)
+  f <- eval(e, Coo$fac, parent.frame())
+  fl <- levels(f)
+  res <- list()
+  for (i in fl) {
+    Coo2 <- Coo
+    retain <- which(f == i)
+    Coo2$coo <- Coo$coo[retain]
+    if (length(Coo$ldk) > 0) 
+      Coo2$ldk <- Coo$ldk[retain]
+    if (ncol(Coo$fac) > 0) {
+      Coo2$fac <- Coo$fac
+      Coo2$fac <- as.data.frame(Coo2$fac[retain, ])
+      names(Coo2$fac) <- names(Coo$fac)
+      Coo2$fac <- .refactor(Coo2$fac)
+    }
+    res[[i]] <- Coo2
+  }
+  return(res)}
+
+#' @rdname subset.Coo
+#' @export
+slice.Coe <- function(x, fac){
+  Coe <- x
+  # hideous but works
+  e <- substitute(fac)
+  f <- eval(e, Coe$fac, parent.frame())
+  fl <- levels(f)
+  res <- list()
+  for (i in fl) {
+    Coe2 <- Coe
+    retain <- which(f == i)
+    Coe2$coe <- Coe$coe[retain, ]
+    if (ncol(Coe$fac) > 0) {
+      Coe2$fac <- Coe$fac
+      Coe2$fac <- as.data.frame(Coe2$fac[retain, ])
+      names(Coe2$fac) <- names(Coe$fac)
+      Coe2$fac <- .refactor(Coe2$fac)
+    }
+    res[[i]] <- Coe2
+  }
+  return(res)}
+
 
 # merge method for Out objects (experimental)
 

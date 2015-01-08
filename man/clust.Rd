@@ -46,7 +46,7 @@ CLUST(op, 1, type='cladogram', palette=col_autumn, cex=0.5)
 
 data(wings)
 wp <- fgProcrustes(wings)
-CLUST(wp, 1)
+CLUST(wp, 1, cex=0.5)
 }
 \keyword{Graphics}
 \keyword{Multivariate}

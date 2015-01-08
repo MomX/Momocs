@@ -17,7 +17,7 @@ rfourier(x, ...)
 
 \item{...}{useless here}
 
-\item{nb.h}{\code{integer}. The number of harmonics to calculate/use.}
+\item{nb.h}{\code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.}
 
 \item{smooth.it}{\code{integer}. The number of smoothing iterations to
 perform.}

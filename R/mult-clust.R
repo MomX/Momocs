@@ -34,14 +34,14 @@
 #' 
 #' data(wings)
 #' wp <- fgProcrustes(wings)
-#' CLUST(wp, 1)
+#' CLUST(wp, 1, cex=0.5)
 
 #' @export
 CLUST <- function(x, fac, method, type, palette, ...) {
     UseMethod("CLUST")
 }
 #' @export
-CLUST.Coe <- function(x, fac, method = "euclidean", type = "fan", 
+CLUST.Coe <- function(x, fac, method = "euclidean", type = "unrooted", 
     palette = col_summer, ...) {
     Coe <- x
     if (missing(fac)) {
@@ -55,13 +55,13 @@ CLUST.Coe <- function(x, fac, method = "euclidean", type = "fan",
     op <- par(no.readonly = TRUE)
     on.exit(par(op))
     par(oma = rep(0, 4), mar = rep(0, 4))
-    plot(as.phylo.hclust(Coe.hc), tip.color = cols, type = type, 
-        ...)
+    phy <- as.phylo.hclust(Coe.hc)
+    plot(phy, tip.color = cols, type = type, ...)
     invisible(list(dist.mat = dist.mat, hclust = Coe.hc))
 }
 
 #' @export
-CLUST.PCA <- function(x, fac, method = "euclidean", type = "fan", 
+CLUST.PCA <- function(x, fac, method = "euclidean", type = "unrooted", 
                       palette = col_summer, ...) {
   if (missing(fac)) {
     cols <- rep("black", nrow(x$x))
@@ -74,7 +74,8 @@ CLUST.PCA <- function(x, fac, method = "euclidean", type = "fan",
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
   par(oma = rep(0, 4), mar = rep(0, 4))
-  plot(as.phylo.hclust(Coe.hc), tip.color = cols, type = type, 
+  phy <- as.phylo.hclust(Coe.hc)
+  plot(phy, tip.color = cols, type = type, 
        ...)
   invisible(list(dist.mat = dist.mat, hclust = Coe.hc))
 }

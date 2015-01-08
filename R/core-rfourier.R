@@ -19,7 +19,7 @@
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 #' individual shape, are then used for multivariate analyses.
 #' @param x A \code{list} or \code{matrix} of coordinates or an \code{Out} object
-#' @param nb.h \code{integer}. The number of harmonics to calculate/use.
+#' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform.
 #' @param norm \code{logical}. Whether to scale the outlines so that the mean
@@ -61,7 +61,6 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     coo <- x
     coo <- coo_check(coo)
     if (missing(nb.h)) {
-        nb.h <- 12
         cat(" * 'nb.h' not provided and set to", nb.h, "\n")
     }
     if (is_closed(coo)) {
@@ -109,8 +108,10 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...) {
   Out <- x
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
-    nb.h <- ifelse(q >= 32, 32, q)
-    cat(" * nb.h not provided and set to", nb.h, "\n")
+    # nb.h <- ifelse(q >= 32, 32, q)
+    nb.h <- calibrate_harmonicpower(Out, method="rfourier",
+                                    thres.h = 99, verbose=FALSE, plot=FALSE)$minh
+    cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1 #todo
