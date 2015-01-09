@@ -176,13 +176,13 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
 
 #' @rdname efourier
 #' @export
-efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...) {
+efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, verbose=TRUE, ...) {
   Out <- x
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     #nb.h <- ifelse(q >= 32, 32, q)
     nb.h <- calibrate_harmonicpower(Out, thres.h = 99, verbose=FALSE, plot=FALSE)$minh
-    cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
+    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1 #todo

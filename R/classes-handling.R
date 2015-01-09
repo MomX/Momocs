@@ -71,6 +71,23 @@ subset.Coe <- function(x, subset, ...) {
   return(Coe2)
 }
 
+# #' @rdname subset.Coo
+# #' @export
+# subset.PCA <- function(x, subset, ...){
+#   PCA <- x
+#   e <- substitute(subset)
+#   retain <- eval(e, PCA$fac, parent.frame())
+#   PCA2 <- PCA
+#   PCA2$x <- PCA$x[retain, ]
+#   if (ncol(PCA$fac) > 0) {
+#     PCA2$fac <- PCA$fac
+#     PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
+#     names(PCA2$fac) <- names(PCA$fac)
+#     PCA2$fac <- .refactor(PCA2$fac)
+#   }
+#   return(PCA2)
+# }
+
 #' @rdname subset.Coo
 #' @export
 slice <- function(x, fac){
@@ -130,21 +147,39 @@ slice.Coe <- function(x, fac){
 
 #' Combine Out objects
 #'
-#' @param ... a list of Out objects
+#' e.g. after a slicing, either manual or using \link{slice}. Note that on Coo object,
+#' it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
+#' (merges coefficients). In the latter case, Coe must ahve the same number of shapes (not
+#' necessarily the same number of coefficients). Also the $fac of the first Coe is retrieved.
+#' A separate version may come at some point.
+#' @param ... a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)
 #' @seealso \link{subset.Coo}
 #' @rdname combine.Coo
+#' @examples
+#' data(bot)
+#' w <- subset(bot, type=="whisky")
+#' b <- subset(bot, type=="beer")
+#' combine(w, b)
+#' # or, if you have many levels
+#' bot_s <- slice(bot, type)
+#'
+#'
 #' @export
 combine <- function(...) {
   UseMethod("combine")
 }
-
+#' @rdname combine.Coo
+#' @export
+combine.list <- function(...){
+  do.call(combine, ...)
+}
 #' @rdname combine.Coo
 #' @export
 combine.Out <- function(...) {
   args <- list(...)
   Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
-  Out$fac <- .refactor(Out$fac)
+  #Out$fac <- .refactor(Out$fac)
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
@@ -169,7 +204,6 @@ combine.Ldk <- function(...) {
   return(Ldk)
 }
 
-
 #' @rdname combine.Coo
 #' @export
 combine.OutCoe <- function(...) {
@@ -187,7 +221,6 @@ combine.OutCoe <- function(...) {
     OutCoe$baseline1 <- args[[opn.i]]$baseline1
     OutCoe$baseline2 <- args[[opn.i]]$baseline2
   }
-  
   cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   OutCoe$cuts <- cutS
   return(OutCoe)
@@ -204,7 +237,9 @@ combine.OpnCoe <- function(...) {
   baseline2S <- do.call(c, lapply(args, function(x) x$baseline2))
   r2S <- do.call(c, lapply(args, function(x) x$r2))
   modS <- do.call(c, lapply(args, function(x) x$mod))
-  OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS, baseline1=baseline1S, baseline2=baseline2S, mod=modS, r2=r2S)
+  OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS,
+                   baseline1=baseline1S, baseline2=baseline2S,
+                   mod=modS, r2=r2S)
   cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   OpnCoe$cuts <- cutS
   return(OpnCoe)
@@ -243,10 +278,15 @@ select.default <- function(.data, ...){
 #' @rdname select.Coo
 #' @export
 select.Coo <- function(.data, ...){
-  Coo <- .data
-  Coo$fac <- select(Coo$fac, ...)
-  Coo
+  .data$fac <- select(.data$fac, ...)
+  .data
 }
+#' @rdname select.Coo
+#' @export
+select.Coe <- select.Coo
+#' @rdname select.Coo
+#' @export
+select.PCA <- select.Coo
 
 #' Filter (ala dplyr) rows with matching conditions, using the $fac slot
 #'
@@ -273,11 +313,16 @@ filter.default <- function(.data, ...){
 #' @rdname filter.Coo
 #' @export
 filter.Coo <- function(.data, ...){
-  Coo <- .data
-  df <- Coo$fac
+  df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- filter(df, ...)
-  subset(Coo, df$.id)
+  subset(.data, df$.id)
 }
+#' @rdname filter.Coo
+#' @export
+filter.Coe <- filter.Coo
+#' @rdname filter.Coo
+#' @export
+filter.PCA <- filter.Coo
 
 ##### end subset-combine

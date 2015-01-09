@@ -10,7 +10,7 @@ efourier(x, ...)
 \method{efourier}{default}(x, nb.h, smooth.it = 0, verbose = TRUE, ...)
 
 \method{efourier}{Out}(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE,
-  ...)
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{list} or a \code{matrix} of coordinates or a \code{Out} object}

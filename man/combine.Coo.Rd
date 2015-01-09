@@ -6,9 +6,12 @@
 \alias{combine.OpnCoe}
 \alias{combine.Out}
 \alias{combine.OutCoe}
+\alias{combine.list}
 \title{Combine Out objects}
 \usage{
 combine(...)
+
+\method{combine}{list}(...)
 
 \method{combine}{Out}(...)
 
@@ -21,10 +24,22 @@ combine(...)
 \method{combine}{OpnCoe}(...)
 }
 \arguments{
-\item{...}{a list of Out objects}
+\item{...}{a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)}
 }
 \description{
-Combine Out objects
+e.g. after a slicing, either manual or using \link{slice}. Note that on Coo object,
+it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
+(merges coefficients). In the latter case, Coe must ahve the same number of shapes (not
+necessarily the same number of coefficients). Also the $fac of the first Coe is retrieved.
+A separate version may come at some point.
+}
+\examples{
+data(bot)
+w <- subset(bot, type=="whisky")
+b <- subset(bot, type=="beer")
+combine(w, b)
+# or, if you have many levels
+bot_s <- slice(bot, type)
 }
 \seealso{
 \link{subset.Coo}

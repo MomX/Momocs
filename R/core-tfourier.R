@@ -117,13 +117,13 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
 
 #' @rdname tfourier
 #' @export
-tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...) {
+tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE, ...) {
   Out <- x
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     nb.h <- calibrate_harmonicpower(Out, method="tfourier",
                                     thres.h = 99, verbose=FALSE, plot=FALSE)$minh
-    cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
+    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1

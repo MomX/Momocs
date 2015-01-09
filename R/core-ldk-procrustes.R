@@ -140,10 +140,12 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
   # if no $ldk defined, we convert Out into a Ldk and then
   # perform the fgProcrustes and return back an Out object.
   if (coo | length(Coo$ldk) == 0) {
-    if (coo){
-      cat (" * Using $coo, not $ldk.\n")
-    } else {
-      cat(" * No landmarks defined in $ldk, so trying to work on $coo directly.\n")}
+    if (verbose) {
+      if (coo){
+        cat (" * Using $coo, not $ldk.\n")
+      } else {
+        cat(" * No landmarks defined in $ldk, so trying to work on $coo directly.\n")}
+    }
     Coo2 <- Ldk(Coo$coo)
     Coo2 <- fgProcrustes(Coo2, tol = tol, verbose = verbose)
     Coo$coo <- Coo2$coo

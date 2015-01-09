@@ -10,7 +10,8 @@ tfourier(x, ...)
 \method{tfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE,
   verbose = TRUE, ...)
 
-\method{tfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...)
+\method{tfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE,
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{A list or matrix of coordinates or an \code{Out}}

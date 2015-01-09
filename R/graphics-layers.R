@@ -81,9 +81,8 @@
   if (length(conf) > 1) {
     conf <- sort(conf, decreasing = FALSE)
     if (missing(lwd) | length(lwd) != length(conf)) {
-      lwd <- rev(seq(0, max(lwd), length = (length(conf) +
-                                              1))[-1])
-      lwd <- lwd^1.5  # just to amplify things
+      lwd <- rev(seq(0, max(lwd), length = (length(conf) + 1))[-1])
+      lwd <- lwd^1.8  # just to amplify things
     }
   }
   for (i in seq(along = levels(fac))) {
@@ -93,11 +92,13 @@
         for (j in seq(along = conf)) {
           seg.i <- conf_ell(x = pts.i, conf = conf[j],
                             nb.pts = 720)$seg
-          segments(seg.i[1, 1], seg.i[1, 2], seg.i[2,
-                                                   1], seg.i[2, 2], lty = lty, col = col[i],
+          segments(seg.i[1, 1], seg.i[1, 2],
+                   seg.i[2, 1], seg.i[2, 2],
+                   lty = lty, col = col[i],
                    lwd = lwd[j])
-          segments(seg.i[3, 1], seg.i[3, 2], seg.i[4,
-                                                   1], seg.i[4, 2], lty = lty, col = col[i],
+          segments(seg.i[3, 1], seg.i[3, 2],
+                   seg.i[4, 1], seg.i[4, 2],
+                   lty = lty, col = col[i],
                    lwd = lwd[j])
         }
       }

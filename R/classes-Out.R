@@ -124,7 +124,7 @@ print.Out <- function(x, ...) {
   #     }
   # number of outlines
   cat(" - $coo:", coo_nb, "outlines")
-  
+
   # number of coordinates
   cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates, ", sep="")
   # outlines closed or not
@@ -208,6 +208,10 @@ print.OutCoe <- function(x, ...) {
     print(round(OutCoe$coe[row.eg, col.eg], 3))
     cat("etc.\n")
   } else {
+    harm.nb <- ncol(OutCoe$coe)
+    # number of outlines and harmonics
+    cat(" - $coe:", coo_nb, "outlines described, and (total) ")
+    cat(harm.nb, "coefficients\n")
     cat(" - $coe: harmonic coefficients\n")
   }
   # we print the fac

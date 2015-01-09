@@ -10,7 +10,8 @@ rfourier(x, ...)
 \method{rfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE,
   verbose = TRUE, ...)
 
-\method{rfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...)
+\method{rfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE,
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{list} or \code{matrix} of coordinates or an \code{Out} object}
