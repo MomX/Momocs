@@ -31,7 +31,8 @@ Pretty useful in morphometrics. Imagine you have a \link{Coo} or a \link{Coe} ob
 that combines several different \emph{groups}, whatever \emph{groups} are : species, views, etc.
 You may be interested in doing separated analyses (even if you could combine them later), then this
 function will ease the process. \code{subset} needs to be passed with a logical subset;
-\code{slice} just needs the factor to use to make subsets. See the examples below.
+\code{slice} just needs the factor to use to make subsets. Not to be confunded with
+the dplyr' slice verb. See the examples below.
 }
 \examples{
 data(bot)

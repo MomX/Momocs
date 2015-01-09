@@ -9,7 +9,8 @@
 #' that combines several different \emph{groups}, whatever \emph{groups} are : species, views, etc.
 #' You may be interested in doing separated analyses (even if you could combine them later), then this
 #' function will ease the process. \code{subset} needs to be passed with a logical subset;
-#' \code{slice} just needs the factor to use to make subsets. See the examples below.
+#' \code{slice} just needs the factor to use to make subsets. Not to be confunded with
+#' the dplyr' slice verb. See the examples below.
 #' @rdname subset.Coo
 #' @param x a \code{Coo} or a \link{Coe} object.
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
@@ -34,7 +35,7 @@
 #' bp <- efourier(bot, 10)
 #' slice(bp, type)
 #' slice(olea, domes)
-#' 
+#'
 #' @export
 subset.Coo <- function(x, subset, ...) {
   Coo <- x
@@ -89,7 +90,7 @@ slice.Coo <- function(x, fac){
     Coo2 <- Coo
     retain <- which(f == i)
     Coo2$coo <- Coo$coo[retain]
-    if (length(Coo$ldk) > 0) 
+    if (length(Coo$ldk) > 0)
       Coo2$ldk <- Coo$ldk[retain]
     if (ncol(Coo$fac) > 0) {
       Coo2$fac <- Coo$fac
@@ -131,13 +132,13 @@ slice.Coe <- function(x, fac){
 #'
 #' @param ... a list of Out objects
 #' @seealso \link{subset.Coo}
-#' @rdname combine
+#' @rdname combine.Coo
 #' @export
 combine <- function(...) {
   UseMethod("combine")
 }
 
-#' @rdname combine
+#' @rdname combine.Coo
 #' @export
 combine.Out <- function(...) {
   args <- list(...)
@@ -150,11 +151,11 @@ combine.Out <- function(...) {
   return(Out)
 }
 
-#' @rdname combine
+#' @rdname combine.Coo
 #' @export
 combine.Opn <- combine.Out
 
-#' @rdname combine
+#' @rdname combine.Coo
 #' @export
 combine.Ldk <- function(...) {
   args <- list(...)
@@ -169,7 +170,7 @@ combine.Ldk <- function(...) {
 }
 
 
-#' @rdname combine
+#' @rdname combine.Coo
 #' @export
 combine.OutCoe <- function(...) {
   args <- list(...)
@@ -181,33 +182,102 @@ combine.OutCoe <- function(...) {
   OutCoe <- OutCoe(coe = coeS, fac = facS, method = methodS, norm = normS)
   # bloody dirty #todo todo todo
   opn.i <- which(lapply(args, function(x) class(x)[1])=="OpnCoe")
-  if (length(opn.i)>0) { 
+  if (length(opn.i)>0) {
     opn.i <- opn.i[1]
     OutCoe$baseline1 <- args[[opn.i]]$baseline1
     OutCoe$baseline2 <- args[[opn.i]]$baseline2
   }
- 
-    cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
-    OutCoe$cuts <- cutS
-    return(OutCoe)
-  }
   
-  #' @rdname combine
-  #' @export
-  combine.OpnCoe <- function(...) {
-    args <- list(...)
-    coeS <- do.call("cbind", lapply(args, function(x) x$coe))
-    facS <- args[[1]]$fac
-    methodS <- do.call(c, lapply(args, function(x) x$method))
-    baseline1S <- do.call(c, lapply(args, function(x) x$baseline1))
-    baseline2S <- do.call(c, lapply(args, function(x) x$baseline2))
-    r2S <- do.call(c, lapply(args, function(x) x$r2))
-    modS <- do.call(c, lapply(args, function(x) x$mod))
-    OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS, baseline1=baseline1S, baseline2=baseline2S, mod=modS, r2=r2S)
-    cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
-    OpnCoe$cuts <- cutS
-    return(OpnCoe)
-  }
-  
-  ##### end subset-combine
-  
+  cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
+  OutCoe$cuts <- cutS
+  return(OutCoe)
+}
+
+#' @rdname combine.Coo
+#' @export
+combine.OpnCoe <- function(...) {
+  args <- list(...)
+  coeS <- do.call("cbind", lapply(args, function(x) x$coe))
+  facS <- args[[1]]$fac
+  methodS <- do.call(c, lapply(args, function(x) x$method))
+  baseline1S <- do.call(c, lapply(args, function(x) x$baseline1))
+  baseline2S <- do.call(c, lapply(args, function(x) x$baseline2))
+  r2S <- do.call(c, lapply(args, function(x) x$r2))
+  modS <- do.call(c, lapply(args, function(x) x$mod))
+  OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS, baseline1=baseline1S, baseline2=baseline2S, mod=modS, r2=r2S)
+  cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
+  OpnCoe$cuts <- cutS
+  return(OpnCoe)
+}
+
+#' Select/rename (ala dplyr) variables by name, using the $fac slot
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo} objects
+#' @param ... comma separated list of unquoted expressions
+#' @details dplyr verbs should be maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a Coo object
+#' @seealso \link{filter.Coo}
+#' @examples
+#' data(olea)
+#' olea
+#' select(olea, cep, view) # drops domes and ind
+#' select(olea, cepage=cep, domesticated_status=domes, view)
+#' # combine with filter with magrittr pipes
+#' \dontrun{
+#' library(magrittr)
+#' # only dorsal views, and 'cep' and 'domes' columns
+#' filter(olea, view=="VD") %>% select(cep, domes)
+#' }
+#' @rdname select.Coo
+#' @export
+select <- function(.data, ...){
+  UseMethod("select")
+}
+#' @rdname select.Coo
+#' @export
+select.default <- function(.data, ...){
+  dplyr::select(.data, ...)
+}
+#' @rdname select.Coo
+#' @export
+select.Coo <- function(.data, ...){
+  Coo <- .data
+  Coo$fac <- select(Coo$fac, ...)
+  Coo
+}
+
+#' Filter (ala dplyr) rows with matching conditions, using the $fac slot
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo} objects
+#' @param ... Logical conditions
+#' @details dplyr verbs are maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a Coo object
+#' @seealso \link{select.Coo}
+#' @examples
+#' data(bot)
+#' filter(bot, type=="whisky")
+#' @rdname filter.Coo
+#' @export
+filter <- function(.data, ...){
+  UseMethod("filter")
+}
+#' @rdname filter.Coo
+#' @export
+filter.default <- function(.data, ...){
+  dplyr::filter(.data, ...)
+}
+#' @rdname filter.Coo
+#' @export
+filter.Coo <- function(.data, ...){
+  Coo <- .data
+  df <- Coo$fac
+  df <- mutate(df, .id=1:nrow(df))
+  df <- filter(df, ...)
+  subset(Coo, df$.id)
+}
+
+##### end subset-combine
