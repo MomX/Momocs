@@ -12,8 +12,8 @@
 
 # @export
 morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
-                            nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
-                            col.shp = "#00000011", border.shp = "#00000055", lwd.shp = 1, plot = TRUE) {
+                           nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
+                           col.shp = "#00000011", border.shp = "#00000055", lwd.shp = 1, plot = TRUE) {
   # we check here, though it shoudl have been before
   if (length(PCA$method)>4 | is.null(PCA$method)) {
     stop(" * morphospacePCA needs a $method of length <= 5")}
@@ -60,27 +60,37 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     plot.method <- NULL
     ids <- col.start[i]:col.end[i]
     # outlines
+    # efourier
     if (method[i] == "efourier") {
       shp <- PCA2shp_efourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
+    # rfourier
     if (method[i] == "rfourier") {
       shp <- PCA2shp_rfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
+    # tfourier
     if (method[i] == "tfourier") {
       shp <- PCA2shp_tfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
     ### open outlines
+    # dfourier
+    if (method[i] == "dfourier") {
+      shp <- PCA2shp_dfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+                              amp.shp = amp.shp, pts.shp = pts.shp)
+      plot.method <- "lines"}
+    # opoly
     if (method[i] == "opoly") {
       shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = TRUE,
                                  baseline1 = PCA$baseline1, baseline2 = PCA$baseline2)
       plot.method <- "lines"}
+    # npoly
     if (method[i] == "npoly") {
       shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = FALSE,
@@ -91,6 +101,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
       shp <- PCA2shp_procrustes(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                 amp.shp = amp.shp)
       plot.method <- "points"}
+    ### Then...
     # we template shapes
     shp <- lapply(shp, coo_template, size = size.shp.final[i])
     # we translate shapes
@@ -111,13 +122,13 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
 
 # @export
 morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
-                            nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
-                            col.shp = "#00000011", border.shp = "#00000055") {
-
+                           nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
+                           col.shp = "#00000011", border.shp = "#00000055") {
+  
   xy <- LDA$mod.pred$x[, c(xax, yax)]
   rot <- LDA$LDs[, c(xax, yax)]
   mshape <- LDA$mshape
-
+  
   # we fill any removed variables with 0s
   r <- LDA$removed
   if (length(r) > 0) {
@@ -126,7 +137,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
     m3 <- rbind(rot, m2)
     rot <- m3[match(names(mshape), rownames(m3)), ]
   }
-
+  
   # we define the position of shapes
   pos <- pos.shapes(xy, pos.shp = pos.shp, nb.shp = nb.shp,
                     nr.shp = nr.shp, nc.shp = nc.shp)
@@ -298,9 +309,35 @@ PCA2shp_tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   for (i in 1:n) {
     ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
     coe <- mshape + apply(ax.contrib, 1, sum)
-    xf <- coeff_split(coe, 2)
+    xf <- coeff_split(coe, cph = 2)
     coo <- tfourier_i(xf, nb.h = nb.h, nb.pts = pts.shp,
                       force2close = TRUE)
+    # reconstructed shapes are translated on their centroid if
+    # (trans) {
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
+    # }
+    res[[i]] <- coo
+  }
+  return(res)
+}
+
+PCA2shp_dfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
+  if (ncol(pos) != ncol(rot))
+    stop("'rot' and 'pos' must have the same ncol")
+  if (length(mshape) != nrow(rot))
+    stop("'mshape' and ncol(rot) lengths differ")
+  nb.h <- length(mshape)/2
+  n <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
+    coe <- mshape + apply(ax.contrib, 1, sum)
+    xf <- coeff_split(coe, cph=2)
+    #     coo <- dfourier_i(xf, nb.h = nb.h, nb.pts = pts.shp)
+    coo <- dfourier_i(xf, nb.h = nb.h, nb.pts = pts.shp)
     # reconstructed shapes are translated on their centroid if
     # (trans) {
     dx <- pos[i, 1] - coo_centpos(coo)[1]

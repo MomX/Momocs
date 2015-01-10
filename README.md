@@ -55,7 +55,7 @@ __Note__: Momocs is being extensively rewritten (from v0.2 available on [CRAN](h
 * __Open-outlines__
  * Natural (raw) polynomials
  * Orthogonal (Legendre) polynomials
- * Discrete Cosinus Transform (core funct. available though)
+ * Discrete Cosinus Transform
  * Same calibration methods as above
 * __Configuration of landmarks__
  * Full Generalized Procrustes Adjustment

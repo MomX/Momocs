@@ -209,10 +209,11 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
-    morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
-                   nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
-                   amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                   col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)}
+      morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+                     nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
+                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
+                     col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)
+  }
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
     if (ellipsesax) .ellipsesax(xy, fac, conf_ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
