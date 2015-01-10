@@ -94,7 +94,7 @@
 #' point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
 #' to minimize any subsequent problems.
 #' 
-#' I will dedicate one vignette to this problem
+#' I will dedicate (some day) a vignette to this problem
 #' asap (fall 2014). In the meantime, contact me should you think we could 
 #' solve this with two brains.
 #' @seealso \link{efourier_i} for the reverse operation. \link{Ptolemy} for an implementation of the
@@ -159,14 +159,10 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
     for (i in 1:nb.h) {
         Ti <- (T/(2 * pi^2 * i^2))
         r <- 2 * i * pi
-        an[i] <- Ti * sum((Dx/Dt) * (cos(r * t1/T) - cos(r * 
-            t1m1/T)))
-        bn[i] <- Ti * sum((Dx/Dt) * (sin(r * t1/T) - sin(r * 
-            t1m1/T)))
-        cn[i] <- Ti * sum((Dy/Dt) * (cos(r * t1/T) - cos(r * 
-            t1m1/T)))
-        dn[i] <- Ti * sum((Dy/Dt) * (sin(r * t1/T) - sin(r * 
-            t1m1/T)))
+        an[i] <- Ti * sum((Dx/Dt) * (cos(r * t1/T) - cos(r * t1m1/T)))
+        bn[i] <- Ti * sum((Dx/Dt) * (sin(r * t1/T) - sin(r * t1m1/T)))
+        cn[i] <- Ti * sum((Dy/Dt) * (cos(r * t1/T) - cos(r * t1m1/T)))
+        dn[i] <- Ti * sum((Dy/Dt) * (sin(r * t1/T) - sin(r * t1m1/T)))
     }
     ao <- 2 * sum(coo[, 1] * Dt/T)
     co <- 2 * sum(coo[, 2] * Dt/T)

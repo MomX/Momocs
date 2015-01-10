@@ -71,22 +71,22 @@ subset.Coe <- function(x, subset, ...) {
   return(Coe2)
 }
 
-# #' @rdname subset.Coo
-# #' @export
-# subset.PCA <- function(x, subset, ...){
-#   PCA <- x
-#   e <- substitute(subset)
-#   retain <- eval(e, PCA$fac, parent.frame())
-#   PCA2 <- PCA
-#   PCA2$x <- PCA$x[retain, ]
-#   if (ncol(PCA$fac) > 0) {
-#     PCA2$fac <- PCA$fac
-#     PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
-#     names(PCA2$fac) <- names(PCA$fac)
-#     PCA2$fac <- .refactor(PCA2$fac)
-#   }
-#   return(PCA2)
-# }
+#' @rdname subset.Coo
+#' @export
+subset.PCA <- function(x, subset, ...){
+  PCA <- x
+  e <- substitute(subset)
+  retain <- eval(e, PCA$fac, parent.frame())
+  PCA2 <- PCA
+  PCA2$x <- PCA$x[retain, ]
+  if (ncol(PCA$fac) > 0) {
+    PCA2$fac <- PCA$fac
+    PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
+    names(PCA2$fac) <- names(PCA$fac)
+    PCA2$fac <- .refactor(PCA2$fac)
+  }
+  return(PCA2)
+}
 
 #' @rdname subset.Coo
 #' @export

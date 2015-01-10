@@ -162,7 +162,7 @@ print.OpnCoe <- function(x, ...) {
   coo_nb <- nrow(OpnCoe$coe)  #nrow method ?
   if (!combined) {
     degree <- ncol(OpnCoe$coe)
-    # p==3 is the case for dct all along the method
+    # p==3 is the case for dfourier all along the method
     if (p==3) degree <- degree/2 
     # number of outlines and harmonics
     cat(" - $coe:", coo_nb, "open outlines described, ")
@@ -172,8 +172,10 @@ print.OpnCoe <- function(x, ...) {
       cat(degree, "th degree (+Intercept)\n", sep="")
     }
     # we print the baselines
+    if (!is.null(c(x$baseline1, x$baseline2))) {
     cat(" - $baseline1: (", paste(x$baseline1, collapse="; "), ")\n", sep="")
     cat(" - $baseline2: (", paste(x$baseline2, collapse="; "), ")\n", sep="")
+    }
     # lets show some of the coefficients for a quick inspection
     if (p==3){
       cat(" - $coe: 1st harmonic coefficients from random open outlines: \n")

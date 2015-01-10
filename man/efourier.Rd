@@ -115,7 +115,7 @@ length (see \code{\link{coo_aligncalliper}}), etc. You should also make the firs
 point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
 to minimize any subsequent problems.
 
-I will dedicate one vignette to this problem
+I will dedicate (some day) a vignette to this problem
 asap (fall 2014). In the meantime, contact me should you think we could
 solve this with two brains.
 }

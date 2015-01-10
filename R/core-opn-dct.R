@@ -4,16 +4,19 @@
 #' a shape (mainly open outlines).
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @param nb.h numeric the number of harmonics to calculate
-#' @param verbose whether to print messages
+#' @param verbose whether to print messages and progress bar.
 #' @return a list with the following components:
 #' \itemize{
-#' \item A the A harmonic coefficients
-#' \item B the B harmonic coefficients
+#' \item an the A harmonic coefficients
+#' \item bn the B harmonic coefficients
 #' \item mod the modules of the points
 #' \item arg the arguments of the points
 #' }
-#' @note Only the core functions so far. Will be implemented as an \link{Opn} method soon.
-#' 
+#' @note This method has been only poorly tested in Momocs and should be considered as
+#' highly experimental. Also, this method may be long to execute (shall maybe be optimized later)
+#' which explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
+#' before performing the dct transform.
+#'  
 #' @references
 #' \itemize{
 #'  \item Dommergues, C. H., Dommergues, J.-L., & Verrecchia, E. P. (2007). 
@@ -24,14 +27,20 @@
 #' 
 #' @keywords discreteCosine
 #' @examples
-#' # dct and inverse dct
 #' data(olea)
+#' \dontrun{ # because it's long
+#' od <- dfourier(olea)
+#' od
+#' op <- PCA(od)
+#' plot(op, 1)
+#' }
+#' # dfourier and inverse dfourier
 #' o <- olea[1]
 #' o <- coo_bookstein(o)
 #' coo_plot(o)
-#' o.dct <- dct(o, nb.h=12)
-#' o.dct
-#' o.i <- dct_i(o.dct)
+#' o.dfourier <- dfourier(o, nb.h=12)
+#' o.dfourier
+#' o.i <- dfourier_i(o.dfourier)
 #' o.i <- coo_bookstein(o.i)
 #' coo_draw(o.i, border='red')
 #'
@@ -40,39 +49,83 @@
 #' h.range <- 2:13
 #' coo <- list()
 #' for (i in seq(along=h.range)){
-#' coo[[i]] <- dct_i(dct(o, nb.h=h.range[i]))}
+#' coo[[i]] <- dfourier_i(dfourier(o, nb.h=h.range[i]))}
 #' names(coo) <- paste0('h', h.range)
 #' panel(Opn(coo), borders=col_india(12), names=TRUE)
 #' title('Discrete Cosine Transforms')
+#' @rdname dfourier
 #' @export
-dct <- function(coo, nb.h, verbose = TRUE) {
-    # we check a bit
-    coo <- coo_check(coo)
-    if (missing(nb.h)) {
-        nb.h <- 12
-        if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
-    # preliminaries
-    N <- nrow(coo)
-    pol <- coo[, 1] + (0+1i) * coo[, 2]
-    # dct
-    c <- rep(sqrt(2/N), N)
-    c[1] <- 1/sqrt(N)
-    Sv <- S <- rep(NA, N)
-    for (k in 0:(N - 1)) {
-        for (n in 0:(N - 1)) {
-            Sv[n + 1] <- pol[n + 1] * cos(((2 * n + 1) * k * pi)/(2 * N))
-        }
-        S[k + 1] <- c[k + 1] * sum(Sv)
+dfourier <- function(coo, nb.h, verbose = TRUE) {
+  UseMethod("dfourier")
+}
+#' @rdname dfourier
+#' @export
+dfourier.default <- function(coo, nb.h, verbose = TRUE) {
+  # we check a bit
+  coo <- coo_check(coo)
+  if (missing(nb.h)) {
+    nb.h <- 12
+    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
+  # preliminaries
+  N <- nrow(coo)
+  pol <- coo[, 1] + (0+1i) * coo[, 2]
+  # dfourier
+  c <- rep(sqrt(2/N), N)
+  c[1] <- 1/sqrt(N)
+  Sv <- S <- rep(NA, N)
+  for (k in 0:(N - 1)) {
+    for (n in 0:(N - 1)) {
+      Sv[n + 1] <- pol[n + 1] * cos(((2 * n + 1) * k * pi)/(2 * N))
     }
-    S <- S[2:(nb.h+1)]  #we remove the 1st harmonic
-    return(list(A = Re(S)/N, B = Im(S)/N, mod = Mod(S)/N, phi = Arg(S)))
+    S[k + 1] <- c[k + 1] * sum(Sv)
+  }
+  S <- S[2:(nb.h+1)]  #we remove the 1st harmonic
+  #    return(list(A = Re(S)/N, B = Im(S)/N, mod = Mod(S)/N, phi = Arg(S)))
+  return(list(an = Re(S), bn = Im(S), mod = Mod(S), phi = Arg(S)))
+}
+
+#' @rdname dfourier
+#' @export
+dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
+  Opn <- coo
+  # we set nb.h if missing
+  if (missing(nb.h)) {
+    nb.h <- 12
+    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
+  col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
+  coo <- Opn$coo
+  nr <- length(coo)
+  # we prepare the matrix
+  coe <- matrix(ncol = 2 * nb.h, nrow = nr,
+                dimnames = list(names(coo), col.n))
+  if (verbose) {
+    pb <- txtProgressBar(1, nr)
+    t <- TRUE
+  } else {
+    t <- FALSE
+  }
+  # we loop
+  for (i in seq(along=coo)) {
+    dfourier_i <- dfourier(coo[[i]], nb.h = nb.h)
+    coe[i, ] <- c(dfourier_i$an, dfourier_i$bn)
+    # progress bar
+    if (t)
+      setTxtProgressBar(pb, i)
+  }
+  res <- OpnCoe(coe=coe,
+                fac=Opn$fac,
+                method = "dfourier",
+                baseline1 = Opn$baseline1,
+                baseline2 = Opn$baseline2)
+  return(res)
 }
 
 #' Investe discrete cosinus transform
 #' 
-#' Calculates inverse discrete cosine transforms (see \link{dct}), given a list of A and B harmonic coefficients,
-#' typically such as those produced by \link{dct}.
+#' Calculates inverse discrete cosine transforms (see \link{dfourier}), given a list of A and B harmonic coefficients,
+#' typically such as those produced by \link{dfourier}.
 #' @param df a list with \code{$A} and \code{$B} components, containing harmonic coefficients.
+#' @param nb.h a custom number of harmonics to use
 #' @param nb.pts numeric the number of pts for the shape reconstruction
 #' @return a matrix of (x; y) coordinates
 #' @note Only the core functions so far. Will be implemented as an \link{Opn} method soon.
@@ -87,14 +140,14 @@ dct <- function(coo, nb.h, verbose = TRUE) {
 #' 
 #' @keywords discreteCosine
 #' @examples
-#' # dct and inverse dct
+#' # dfourier and inverse dfourier
 #' data(olea)
 #' o <- olea[1]
 #' o <- coo_bookstein(o)
 #' coo_plot(o)
-#' o.dct <- dct(o, nb.h=12)
-#' o.dct
-#' o.i <- dct_i(o.dct)
+#' o.dfourier <- dfourier(o, nb.h=12)
+#' o.dfourier
+#' o.i <- dfourier_i(o.dfourier)
 #' o.i <- coo_bookstein(o.i)
 #' coo_draw(o.i, border='red')
 #'
@@ -102,40 +155,42 @@ dct <- function(coo, nb.h, verbose = TRUE) {
 #' h.range <- 2:13
 #' coo <- list()
 #' for (i in seq(along=h.range)){
-#' coo[[i]] <- dct_i(dct(o, nb.h=h.range[i]))}
+#' coo[[i]] <- dfourier_i(dfourier(o, nb.h=h.range[i]))}
 #' names(coo) <- paste0('h', h.range)
 #' panel(Opn(coo), borders=col_india(12), names=TRUE)
 #' title('Discrete Cosine Transforms')
 #' @export
-dct_i <- function(df, nb.pts = 60) {
-    A <- df$A
-    B <- df$B
+dfourier_i <- function(df, nb.h, nb.pts = 60) {
+  A <- df$an
+  B <- df$bn
+  if (missing(nb.h)) {
     nb.h <- length(A) + 1
-    
-    c <- rep(sqrt(2/nb.pts), nb.pts)
-    c[1] <- 1/sqrt(nb.pts)
-    
-    S <- A + (0+1i) * B
-    S <- c(0+1i, S)  # we add a trivial harmonic corresponding to (0; 0)
-    
-    sv_r <- rep(NA, nb.h)
-    s_r <- rep(NA, nb.pts)
-    # idct pour le nombre d'harmonique spécifié
-    for (n in 0:(nb.pts - 1)) {
-        for (k in 0:(nb.h - 1)) {
-            sv_r[k + 1] <- c[k + 1] * S[k + 1] * cos(((2 * n + 1) * k * pi)/(2 * nb.pts))
-        }
-        s_r[n + 1] <- sum(sv_r)
+  }
+  
+  c <- rep(sqrt(2/nb.pts), nb.pts)
+  c[1] <- 1/sqrt(nb.pts)
+  
+  S <- A + (0+1i) * B
+  S <- c(0+1i, S)  # we add a trivial harmonic corresponding to (0; 0)
+  
+  sv_r <- rep(NA, nb.h)
+  s_r <- rep(NA, nb.pts)
+  # idfourier pour le nombre d'harmonique spécifié
+  for (n in 0:(nb.pts - 1)) {
+    for (k in 0:(nb.h - 1)) {
+      sv_r[k + 1] <- c[k + 1] * S[k + 1] * cos(((2 * n + 1) * k * pi)/(2 * nb.pts))
     }
-    shp <- cbind(Re(s_r), Im(s_r))
-    return(shp)
+    s_r[n + 1] <- sum(sv_r)
+  }
+  shp <- cbind(Re(s_r), Im(s_r))
+  return(shp)
 }
 
-#' Calculates and draws 'dct' shapes
+#' Calculates and draws 'dfourier' shapes
 #' 
 #' Calculates shapes based on 'Discrete cosine transforms' given harmonic coefficients 
-#' (see \link{dct}) or can generate some random 'dct' shapes. 
-#' Mainly intended to generate shapes and/or to understand how dct works.
+#' (see \link{dfourier}) or can generate some random 'dfourier' shapes. 
+#' Mainly intended to generate shapes and/or to understand how dfourier works.
 #' @param A vector of harmonic coefficients
 #' @param B vector of harmonic coefficients
 #' @param nb.h if \code{A} and/or \code{B} are not provided, 
@@ -147,24 +202,24 @@ dct_i <- function(df, nb.pts = 60) {
 #' @param plot logical whether to plot the shape
 #' @examples 
 #' # some signatures
-#' panel(coo_align(Opn(replicate(48, dct_shape(alpha=0.5, nb.h=6)))))
+#' panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=0.5, nb.h=6)))))
 #' # some worms
-#' panel(coo_align(Opn(replicate(48, dct_shape(alpha=2, nb.h=6)))))
+#' panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=2, nb.h=6)))))
 #' @export
-dct_shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
-    if (missing(nb.h) & missing(A)) 
-        nb.h <- 3
-    if (missing(nb.h) & !missing(A)) 
-        nb.h <- length(A)
-    if (missing(A)) 
-        A <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
-    if (missing(B)) 
-        B <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
-    df <- list(A = A, B = B)
-    shp <- dct_i(df, nb.pts = nb.pts)
-    if (plot) 
-        coo_plot(shp)
-    return(shp)
+dfourier_shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
+  if (missing(nb.h) & missing(A)) 
+    nb.h <- 3
+  if (missing(nb.h) & !missing(A)) 
+    nb.h <- length(A)
+  if (missing(A)) 
+    A <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+  if (missing(B)) 
+    B <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+  df <- list(A = A, B = B)
+  shp <- dfourier_i(df, nb.pts = nb.pts)
+  if (plot) 
+    coo_plot(shp)
+  return(shp)
 }
 
-##### end core-dct 
+##### end core-dfourier 
