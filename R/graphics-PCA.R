@@ -347,6 +347,7 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
 #'  @param nax a single or a range of PC axes
 #'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
 #'  @param ... additional parameter to pass to \code{\link{coo_draw}}
+#'  @return a ggplot object
 #'  @examples
 #'  data(bot)
 #'  bot.p <- PCA(efourier(bot, 12))
@@ -383,7 +384,7 @@ PCcontrib.PCA <-
     coos <- ldply(shp, data.frame)
     colnames(coos) <- c("id", "x", "y")
     # we prepare the information data.frame
-    df <- expand.grid(nax, sd.r)
+    df <- expand.grid(sd.r, nax)
     colnames(df) <- c("PC", "sd")
     df <- apply(df, 2, rep, each=61)
     # we merge the two df
@@ -407,7 +408,7 @@ PCcontrib.PCA <-
     # we ggplot
     gg <- ggplot(data=xx, aes_string(x="x", y="y")) + 
       geom_polygon(alpha=0.5) + coord_equal() +
-      facet_grid(PC ~ sd) + labs(
+      facet_grid(sd ~ PC) + labs(
         title="PC contribution to shape",
         x="(Mean + ) SD",
         y="PC axes") + theme_light() + theme_empty

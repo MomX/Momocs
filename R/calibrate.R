@@ -14,6 +14,7 @@
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
 #' @param ... only used for the generic
+#' @return a ggplot object
 #' @keywords Out
 #' @examples
 #' data(bot)
@@ -200,6 +201,7 @@ calibrate_reconstructions.Opn <-
 #' @param dist.method a method such as \link{edm_nearest} to calculate deviations
 #' @param dist.nbpts numeric the number of points to use for deviations calculations
 #' @param ... only used for the generic
+#' @return a ggplot object
 #' @keywords Out
 #' @examples
 #' data(bot)
@@ -356,10 +358,12 @@ calibrate_deviations.Out <-
 #' @param plot logical whether to plot the result or simply return the matrix
 #' @param verbose whether to print results
 #' @param ... just for the generic
-#' @return a matrix containing cumulated harmonic power for each harmonic.
-#' @return returns a list with component \code{gg} a ggplot object, \code{q} the quantile matrix
-#' and \code{minh} a quick summary that returns the number of harmonics required to achieve
+#' @return returns a list with component:
+#' \itemize{
+#' \item \code{gg} a ggplot object, \code{q} the quantile matrix
+#' \item \code{minh} a quick summary that returns the number of harmonics required to achieve
 #' a certain proportion of the total harmonic power.
+#' }
 #' @details
 #' The power of a given harmonic \eqn{n} is calculated as follows for
 #' elliptical Fourier analysis and the n-th harmonic:

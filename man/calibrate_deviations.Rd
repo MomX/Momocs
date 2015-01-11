@@ -29,6 +29,9 @@ are used.}
 
 \item{dist.nbpts}{numeric the number of points to use for deviations calculations}
 }
+\value{
+a ggplot object
+}
 \description{
 Calculate deviations from original and reconstructed shapes using a
 range of harmonic number.

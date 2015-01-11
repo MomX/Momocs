@@ -31,11 +31,12 @@ calibrate_harmonicpower(Out, ...)
 \item{verbose}{whether to print results}
 }
 \value{
-a matrix containing cumulated harmonic power for each harmonic.
-
-returns a list with component \code{gg} a ggplot object, \code{q} the quantile matrix
-and \code{minh} a quick summary that returns the number of harmonics required to achieve
+returns a list with component:
+\itemize{
+\item \code{gg} a ggplot object, \code{q} the quantile matrix
+\item \code{minh} a quick summary that returns the number of harmonics required to achieve
 a certain proportion of the total harmonic power.
+}
 }
 \description{
 Estimates the number of harmonics required for the three Fourier methods

@@ -29,6 +29,9 @@ for \code{Out}, or from \code{c('opoly', 'npoly')} for \code{Opn}}
 
 \item{baseline2}{\eqn{(x; y)} coordinates for the second point of the baseline}
 }
+\value{
+a ggplot object
+}
 \description{
 Calculate and displays reconstructed shapes using a
 range of harmonic number.
