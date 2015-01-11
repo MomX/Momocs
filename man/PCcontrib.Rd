@@ -18,6 +18,9 @@ PCcontrib(PCA, ...)
 
 \item{sd.r}{a single or a range of mean +/- sd values (eg: c(-1, 0, 1))}
 }
+\value{
+a ggplot object
+}
 \description{
 Calculates and plots shape variation along Principal Component axes.
 
