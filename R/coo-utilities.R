@@ -273,7 +273,7 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' set.seed(123) # just for the reproducibility
 #' id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
 #' replace=TRUE)
-#' stack(coo_slide(hearts, id1=id1_random)) # bugged
+#' stack(coo_slide(hearts, id1=id1_random))
 #'
 #' @export
 coo_slide <- function(x, ...) {
@@ -309,7 +309,7 @@ coo_slide.Coo <- function(x, id1, ldk, ...) {
   # id1=1 just rep
   #
   # allows a vector of id1s to be passed
-   slide_ldk <- (length(Coo$ldk) < 0)
+   slide_ldk <- (length(Coo$ldk) > 0)
   for (i in seq(along = Coo$coo)) {
     Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id1[i])
      if (slide_ldk)

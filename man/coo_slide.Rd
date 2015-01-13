@@ -46,7 +46,7 @@ stack(coo_slide(hearts, id1=50))
 set.seed(123) # just for the reproducibility
 id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
 replace=TRUE)
-stack(coo_slide(hearts, id1=id1_random)) # bugged
+stack(coo_slide(hearts, id1=id1_random))
 }
 \keyword{ShapeUtilities}
 
