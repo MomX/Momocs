@@ -75,23 +75,26 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
   p <- dim(A)[1]
   k <- dim(A)[2]
   n <- dim(A)[3]
+  # we prepare an array to save results
   temp2 <- temp1 <- array(NA, dim = c(p, k, n))
   Siz <- numeric(n)
   for (i in 1:n) {
     Siz[i] <- coo_centsize(A[, , i])
     temp1[, , i] <- coo_center(coo_scale(A[, , i]))
   }
-  iter <- 0
   sf <- NA
   M <- temp1[, , 1]
+  # we do the procrustes alignment on every shape
   for (i in 1:n) {
     temp1[, , i] <- fProcrustes(temp1[, , i], M)$coo1
   }
   M <- mshape(temp1)
   Qm1 <- dist(t(matrix(temp1, k * p, n)))
   Qd <- Qi <- Q <- sum(Qm1)
+  # we initialize the counter
   iter <- 0
   sc <- rep(1, n)
+  # and we loop
   while (abs(Q) > tol) {
     for (i in 1:n) {
       Z1 <- temp1[, , i]
@@ -108,10 +111,9 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
     }
     M <- mshape(temp1)
     for (i in 1:n) {
-      sf[i] <- sqrt(sum(diag(temp1[, , i] %*% t(M))) /
-                      (sum(diag(M %*% t(M))) *
-                         sum(diag(temp1[, , i] %*%
-                                    t(temp1[, , i])))))
+      sf[i] <- sqrt(
+        sum(diag(temp1[, , i] %*% t(M))) / (sum(diag(M %*% t(M))) *
+            sum(diag(temp1[, , i] %*% t(temp1[, , i])))))
       temp2[, , i] <- sf[i] * temp1[, , i]
     }
     M <- mshape(temp2)
@@ -125,7 +127,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
       cat("iteration: ", iter, "\tgain:", signif(abs(Q), 5), "\n")
     }
     temp1 <- temp2
-  }
+  } # end of the big loop
   list(rotated = temp2,
        iterationnumber = iter, Q = Q, Qi = Qi,
        Qd = Qd,
@@ -151,9 +153,10 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
     Coo$coo <- Coo2$coo
     return(Coo)
   }
+  # case where coo=FALSE and we work on the ldk
   Coo2 <- coo_center(coo_scale(Coo))
   ref <- get_ldk(Coo2)
-  tar <- fgProcrustes(ref, tol = tol, verbose = verbose)$rotated
+  tar <- fgProcrustes.default(ref, tol = tol, verbose = verbose)$rotated
   # would benefit to be handled by coo_baseline ?
   for (i in 1:length(Coo2)) {
     tari <- tar[, , i]
