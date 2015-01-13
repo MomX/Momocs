@@ -243,23 +243,45 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #'
 #' Slides the coordinates so that the id1-th point become the first one.
 #' @aliases coo_slide
-#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @param id1 the id of the point that will become the new first point.
+#' @param x either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @param id1 the id(s) of the point that will become the new first point. See details below
+#' for the method on Coo objects.
+#' @param ldk the id of the ldk to use as id1.
+#' @param ... useless, only to maintain the generic
+#' @details For Coo objects, and in particular for Out and Opn three different ways of coo_sliding
+#' are available:
+#' \itemize{
+#' \item no ldk passed and a single id1 is passed: all id1-th points
+#' within the shapes will become the first points. $ldk will be slided accordingly.
+#' \item no ldk passed and a vector of ids matching the length of the Coo: for every shape,
+#' the id1-th point will be used as the id1-th point. $ldk will be slided accordingly.
+#' \item a single ldk is passed: the ldk-th ldk will be used to slide every shape. If an ldk is passed,
+#' id1 is ignored with a message.
+#' }
+#' See examples to make things clear. These methods have not been exhaustively tested, so triple
+#' check and do not hesitate to contact me if you detect a problem.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords ShapeUtilities
 #' @examples
 #' data(hearts)
 #' stack(hearts)
-#' stack(coo_slide(hearts, 1))
-#' coo_plot(hearts[4])
-#' coo_plot(coo_slide(hearts[4], 50))
+#' # set the first landmark as the starting point
+#' stack(coo_slide(hearts, ldk=1))
+#' # set the 50th point as the starting point (everywhere)
+#' stack(coo_slide(hearts, id1=50))
+#' # set the id1-random-th point as the starting point (everywhere)
+#' set.seed(123) # just for the reproducibility
+#' id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
+#' replace=TRUE)
+#' stack(coo_slide(hearts, id1=id1_random)) # bugged
+#'
 #' @export
-coo_slide <- function(coo, id1) {
+coo_slide <- function(x, ...) {
   UseMethod("coo_slide")
 }
 #' @export
-coo_slide.default <- function(coo, id1) {
-  coo <- coo_check(coo)
+coo_slide.default <- function(x, id1, ...) {
+  coo <- coo_check(x)
   if (id1 == 0) {
     return(coo)
   }
@@ -268,17 +290,33 @@ coo_slide.default <- function(coo, id1) {
   return(coo[slided.rows, ])
 }
 #' @export
-coo_slide.Coo <- function(coo, id1) {
-  Coo <- coo
-  if (length(Coo$ldk) == 0)
-    stop(" * No landmarks defined.")
+coo_slide.Coo <- function(x, id1, ldk, ...) {
+  Coo <- x
+  ##### ldk case #####
+  if (!missing(ldk)) {
+    if (length(Coo$ldk) == 0) stop(" * No landmarks defined.")
+    if (!missing(id1))        warning(" * id1 provided will be ignored.")
+    for (i in seq(along = Coo$coo)) {
+      Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], Coo$ldk[[i]][ldk])
+      Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][ldk] - 1))%%nrow(Coo$coo[[i]])
+    }
+    return(Coo)
+  } else {
+    ##### id1 case ######
+    if (length(id1)==1) id1 <- rep(id1, length(Coo))
+
+  # id1 case
+  # id1=1 just rep
+  #
+  # allows a vector of id1s to be passed
+   slide_ldk <- (length(Coo$ldk) < 0)
   for (i in seq(along = Coo$coo)) {
-    Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], Coo$ldk[[i]][id1])
-    Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][id1] -
-                                       1))%%nrow(Coo$coo[[i]])
+    Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id1[i])
+     if (slide_ldk)
+     Coo$ldk[[i]] <- (Coo$ldk[[i]] - id1[i] - 1) %% nrow(Coo$coo[[i]])
   }
   return(Coo)
-}
+}}
 
 #' Slides coordinates in a particular direction
 #'
@@ -286,6 +324,8 @@ coo_slide.Coo <- function(coo, id1) {
 #' eastwards or westwards the centroid, becomes the first point with \link{coo_slide}.
 #' @param coo a matrix (or a list) or (x; y) coordinates or a Coo object
 #' @param direction a character among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.
+#' @param center logical whether to center or not before sliding
+#' @param id whether to return the id of the point or the slided shapes
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @keywords ShapeUtilities
 #' @examples
@@ -301,13 +341,14 @@ coo_slide.Coo <- function(coo, id1) {
 #' stack(bot)
 #' stack(coo_slidedirection(bot, 'E'))
 #' @export
-coo_slidedirection <- function(coo, direction) {
+coo_slidedirection <- function(coo, direction, center, id) {
   UseMethod("coo_slidedirection")
 }
 #' @export
-coo_slidedirection.default <- function(coo, direction = "N") {
+coo_slidedirection.default <- function(coo, direction = "N",
+                                       center=TRUE, id = FALSE) {
   coo <- coo_check(coo)
-  coo <- coo_center(coo)
+  if (center) coo <- coo_center(coo)
   if (direction == "N") {
     x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
     id0 <- x0.ed[which(coo[x0.ed, 2] > 0)[1]]
@@ -324,14 +365,18 @@ coo_slidedirection.default <- function(coo, direction = "N") {
     y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
     id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
   }
-  coo <- coo_slide(coo, id0)
-  return(coo)
+
+  if (id) {
+    return(id0) }
+  else {
+    coo <- coo_slide(coo, id0)
+    return(coo) }
 }
 
 #' @export
-coo_slidedirection.Coo <- function(coo, direction) {
+coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = FALSE) {
   Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo_slidedirection, direction)
+  Coo$coo <- lapply(Coo$coo, coo_slidedirection, direction, center, id)
   return(Coo)
 }
 

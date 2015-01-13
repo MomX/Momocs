@@ -3,12 +3,16 @@
 \alias{coo_slidedirection}
 \title{Slides coordinates in a particular direction}
 \usage{
-coo_slidedirection(coo, direction)
+coo_slidedirection(coo, direction, center, id)
 }
 \arguments{
 \item{coo}{a matrix (or a list) or (x; y) coordinates or a Coo object}
 
 \item{direction}{a character among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.}
+
+\item{center}{logical whether to center or not before sliding}
+
+\item{id}{whether to return the id of the point or the slided shapes}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.

@@ -3,12 +3,17 @@
 \alias{coo_slide}
 \title{Slides coordinates}
 \usage{
-coo_slide(coo, id1)
+coo_slide(x, ...)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{x}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
 
-\item{id1}{the id of the point that will become the new first point.}
+\item{...}{useless, only to maintain the generic}
+
+\item{id1}{the id(s) of the point that will become the new first point. See details below
+for the method on Coo objects.}
+
+\item{ldk}{the id of the ldk to use as id1.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -16,12 +21,32 @@ a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 \description{
 Slides the coordinates so that the id1-th point become the first one.
 }
+\details{
+For Coo objects, and in particular for Out and Opn three different ways of coo_sliding
+are available:
+\itemize{
+\item no ldk passed and a single id1 is passed: all id1-th points
+within the shapes will become the first points. $ldk will be slided accordingly.
+\item no ldk passed and a vector of ids matching the length of the Coo: for every shape,
+the id1-th point will be used as the id1-th point. $ldk will be slided accordingly.
+\item a single ldk is passed: the ldk-th ldk will be used to slide every shape. If an ldk is passed,
+id1 is ignored with a message.
+}
+See examples to make things clear. These methods have not been exhaustively tested, so triple
+check and do not hesitate to contact me if you detect a problem.
+}
 \examples{
 data(hearts)
 stack(hearts)
-stack(coo_slide(hearts, 1))
-coo_plot(hearts[4])
-coo_plot(coo_slide(hearts[4], 50))
+# set the first landmark as the starting point
+stack(coo_slide(hearts, ldk=1))
+# set the 50th point as the starting point (everywhere)
+stack(coo_slide(hearts, id1=50))
+# set the id1-random-th point as the starting point (everywhere)
+set.seed(123) # just for the reproducibility
+id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
+replace=TRUE)
+stack(coo_slide(hearts, id1=id1_random)) # bugged
 }
 \keyword{ShapeUtilities}
 
