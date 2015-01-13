@@ -194,7 +194,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (labels & missing(points)) points <- FALSE
   if (missing(col.labels)) col.labels <- col.groups
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
-  
+
   ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -209,10 +209,10 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
-      morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
-                     nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
-                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                     col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)
+    morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+                   nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
+                   amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
+                   col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)
   }
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
@@ -237,7 +237,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (eigen)     .eigen(PCA$sdev, xax, yax, ev.names="Eigenvalues")
   if (box) box()
   # we return a df
-  if (is.null(fac)) 
+  if (is.null(fac))
     invisible(data.frame(x=xy[, 1], y=xy[, 2]))
   else
     invisible(data.frame(x=xy[, 1], y=xy[, 2], fac=fac))
@@ -310,7 +310,7 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
   if (is.null(fac)) {
     df <- data.frame(PCA$x[, nax])
     df <- melt(df, id.vars=ncol(df), variable.name="PC")
-    gg <- ggplot(data=df, aes_string(x="PC", y="value")) + 
+    gg <- ggplot(data=df, aes_string(x="PC", y="value")) +
       geom_boxplot() + labs(x=NULL, y="score")
     return(gg)
   } else {
@@ -346,6 +346,8 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
 #'  @param PCA a \code{\link{PCA}} object
 #'  @param nax a single or a range of PC axes
 #'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
+#'  @param gap for combined-Coe, an adjustment variable for gap between shapes. Default
+#'  to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.
 #'  @param ... additional parameter to pass to \code{\link{coo_draw}}
 #'  @return a ggplot object
 #'  @examples
@@ -362,33 +364,12 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
 PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
 #'  @rdname PCcontrib
 #'  @export
-PCcontrib.PCA <- 
+PCcontrib.PCA <-
   function(PCA,
            nax=1:4,
            sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
+           gap=1,
            ...){
-    # we prepare the graphical windows
-    # same paradigm as coo_listpanel
-    x <- PCA
-    # we reconstruct shapes
-    shp <- list()
-    for (i in seq(along=nax)){
-      sd.i <- sd(x$x[, nax[i]])
-      pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
-      shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
-      shp <- c(shp, shp.i)}
-    # we template the size of the shapes
-    shp <- lapply(shp, coo_template, 0.95)
-    # we turn the list into a data.frame
-    names(shp) <- 1:length(shp)
-    coos <- ldply(shp, data.frame)
-    colnames(coos) <- c("id", "x", "y")
-    # we prepare the information data.frame
-    df <- expand.grid(sd.r, nax)
-    colnames(df) <- c("PC", "sd")
-    df <- apply(df, 2, rep, each=61)
-    # we merge the two df
-    xx <- cbind(coos, df)
     # cosmectics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -404,14 +385,101 @@ PCcontrib.PCA <-
                          strip.text=element_text(colour = "grey10"),
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
-    
-    # we ggplot
-    gg <- ggplot(data=xx, aes_string(x="x", y="y")) + 
-      geom_polygon(alpha=0.5) + coord_equal() +
-      facet_grid(sd ~ PC) + labs(
-        title="PC contribution to shape",
-        x="(Mean + ) SD",
-        y="PC axes") + theme_light() + theme_empty
+    # we prepare the graphical windows
+    # same paradigm as coo_listpanel
+    x <- PCA
+    # we reconstruct shapes
+    shp <- list()
+    ############################################################
+    # case where we have a single-method Coe
+    ############################################################
+    if (length(x$method)==1) {
+      for (i in seq(along=nax)){
+        sd.i <- sd(x$x[, nax[i]])
+        pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
+        shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)[[1]]
+        shp <- c(shp, shp.i)}
+      # we template the size of the shapes
+      shp <- lapply(shp, coo_template, 0.95)
+      # we turn the list into a data.frame
+      names(shp) <- 1:length(shp)
+      coos <- ldply(shp, data.frame)
+      colnames(coos) <- c("id", "x", "y")
+      # we prepare the information data.frame
+      df <- expand.grid(sd.r, nax)
+      colnames(df) <- c("PC", "sd")
+      df <- apply(df, 2, rep, each=61)
+      # we merge the two df
+      xx <- cbind(coos, df)
+
+      # we ggplot
+      gg <- ggplot(data=xx, aes_string(x="x", y="y")) +
+        geom_polygon(fill="#00000011", col="#00000055") +
+        coord_equal() +
+        facet_grid(sd ~ PC) + labs(
+          title="PC contribution to shape",
+          x="(Mean + ) SD",
+          y="PC axes") + theme_light() + theme_empty
+    } else {
+      ############################################################
+      # case where we have a combined Coe
+      ############################################################
+      for (i in seq(along=nax)){
+        sd.i <- sd(x$x[, nax[i]])
+        pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
+        shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
+        shp <- c(shp, shp.i)}
+      # damn ugly trick to reorder and unlist
+      reorder <- vector()
+      for (i in seq(along=x$method)){
+        ord <- ((nax - 1) * length(x$method)) + i
+        reorder <- c(reorder, ord)}
+      # shp0 will be the ordered list
+      shp0 <- list()
+      for (i in seq(along=reorder)) {
+        shp0 <- c(shp0, shp[[reorder[i]]])
+      }
+      # we rename it shp
+      shp <- shp0
+      # we template the size of the shapes
+      shp <- lapply(shp, coo_template, 0.95)
+      # we turn the list into a data.frame
+      names(shp) <- 1:length(shp)
+      coos <- ldply(shp, data.frame)
+      colnames(coos) <- c("id", "x", "y")
+      # we manage the translations
+      lm <- length(x$method)
+      coos <- mutate(coos, lm = rep(1:lm, each=61 * length(sd.r), times=length(nax)))
+      # gap between shapes of different methods
+      d <- gap
+      if (lm==2){ #met1 over met2 - h center
+        dx <- c(0, 0)
+        dy <- c(d, -d)}
+      if (lm==3){ #podium arrangement
+        dx <- c(0, -d, d)
+        dy <- c(d, -d, -d)}
+      if (lm==4){ #form top left, clockwise
+        dx <- c(-d, d, -d, d)
+        dy <- c(d, d, -d, -d)}
+      # here, we do the translation itself
+      coos <- mutate(coos, dx = dx[lm], dy = dy[lm])
+      coos <- mutate(coos, x=x+dx, y=y+dy)
+      coos <- select(coos, id, x, y)
+      # we prepare the information data.frame
+      df <- expand.grid(sd.r, 1:lm, nax)
+      colnames(df) <- c("PC", "met", "sd")
+      df <- apply(df, 2, rep, each=61)
+      # we merge the two df
+      xx <- cbind(coos, df)
+      # we ggplot
+      gg <- ggplot(data=xx, aes_string(x="x", y="y", group="met")) +
+        geom_polygon(fill="#00000011", col="#00000055") +
+        coord_equal() +
+        facet_grid(sd ~ PC) + labs(
+          title="PC contribution to shape",
+          x="(Mean + ) SD",
+          y="PC axes") + theme_light() + theme_empty
+    }
     return(gg)
   }
 
