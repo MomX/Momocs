@@ -123,6 +123,7 @@ as.PCA.default <- function(x, fac){
 print.PCA <- function(x, ...){
   cat("A PCA object\n")
   cat(rep("-", 20), "\n", sep = "")
+  cat(" -", nrow(x$x), "shapes \n")
   # Method printer
   if (length(x$method)>1) {
     cat(" - $method: [", paste0(x$method, collapse=" + "), "analyses ]\n")
@@ -151,7 +152,7 @@ print.PCA <- function(x, ...){
 #' bot2 <- bot1 <- coo_scale(coo_center(coo_sample(bot, 60)))
 #' bot1$fac$session <- factor(rep("session1", 40))
 #' # we simulate an measurement error
-#' bot2$coo <- lapply(bot2$coo, function(x) x + rnorm(nrow(x)*2, sd=2e-3)) 
+#' bot2$coo <- lapply(bot2$coo, function(x) x + rnorm(nrow(x)*2, sd=2e-3))
 #' bot2$fac$session <- factor(rep("session2", 40))
 #' botc <- combine(bot1, bot2)
 #' botcf <- efourier(botc, 12)
