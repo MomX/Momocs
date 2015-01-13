@@ -12,8 +12,11 @@
 
 # @export
 morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
-                           nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
-                           col.shp = "#00000011", border.shp = "#00000055", lwd.shp = 1, plot = TRUE) {
+                           nr.shp = 6, nc.shp = 5, amp.shp = 1,
+                           size.shp = 1, wdw=max(.wdw()),
+                           pts.shp = 60,
+                           col.shp = "#00000011", border.shp = "#00000055",
+                           lwd.shp = 1, plot = TRUE) {
   # we check here, though it shoudl have been before
   if (length(PCA$method)>4 | is.null(PCA$method)) {
     stop(" * morphospacePCA needs a $method of length <= 5")}
@@ -31,7 +34,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
   method <- PCA$method
   lm <- length(method)
   if (length(size.shp)!=lm) size.shp <- rep(size.shp[1], lm)
-  size.shp.final <- (size.shp*max(.wdw())/14) / ifelse(lm<2, 1, 2)
+  size.shp.final <- (size.shp*wdw/14) / ifelse(lm<2, 1, 2)
   d <- mean(size.shp.final) / 2
   # here we define the translation x and y for every sub-morphoshape
   # and the coe to retrieve
@@ -55,6 +58,8 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     col.start <- cumsum(PCA$cuts) - PCA$cuts + 1
     col.end   <- cumsum(PCA$cuts)}
   # not very satisfactory...
+  # hack in case of multi
+  if (!plot) SHP <- list()
   for (i in seq(along=method)){
     shp <- NULL
     plot.method <- NULL
@@ -98,17 +103,21 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
       plot.method <- "lines"}
     ### configuration of landmarks
     if (method[i] == "procrustes") {
-      shp <- PCA2shp_procrustes(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+      shp <- PCA2shp_procrustes(pos = pos, rot = rot[ids, ],
+                                mshape = mshape[ids],
                                 amp.shp = amp.shp)
       plot.method <- "points"}
     ### Then...
     # we template shapes
     shp <- lapply(shp, coo_template, size = size.shp.final[i])
+    # since coo_template does not center shapes but the bounding box
+    shp <- lapply(shp, coo_center)
     # we translate shapes
     for (s in 1:length(shp)) {
-      shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
+      if (!plot) { # to prevent translation
+      shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}}
     # we draw shapes or just return the shp
-    if (!plot) return(shp)
+    if (!plot) SHP[[i]] <- shp
     if (plot.method == "poly") {
       garbage <- lapply(shp, coo_draw, col = col.shp, border = border.shp, lwd = lwd.shp,
                         points = FALSE, centroid = FALSE, first.point = FALSE)}
@@ -117,18 +126,18 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     if (plot.method == "points"){
       garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp)}
   }
-  invisible(shp)
+  if (!plot) SHP else invisible(shp)
 }
 
 # @export
 morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
                            nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
                            col.shp = "#00000011", border.shp = "#00000055") {
-  
+
   xy <- LDA$mod.pred$x[, c(xax, yax)]
   rot <- LDA$LDs[, c(xax, yax)]
   mshape <- LDA$mshape
-  
+
   # we fill any removed variables with 0s
   r <- LDA$removed
   if (length(r) > 0) {
@@ -137,7 +146,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
     m3 <- rbind(rot, m2)
     rot <- m3[match(names(mshape), rownames(m3)), ]
   }
-  
+
   # we define the position of shapes
   pos <- pos.shapes(xy, pos.shp = pos.shp, nb.shp = nb.shp,
                     nr.shp = nr.shp, nc.shp = nc.shp)
@@ -185,8 +194,8 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
 #' Calculates nice positions on a plane for drawing shapes
 #'
 #' @param xy todo
-#' @param pos.shp how shapes should be positionned: \code{range} of xy, 
-#' \code{full} extent of the plane, \code{circle} as a rosewind, 
+#' @param pos.shp how shapes should be positionned: \code{range} of xy,
+#' \code{full} extent of the plane, \code{circle} as a rosewind,
 #' on \code{xy} values provided.
 #' @param nb.shp the total number of shapes
 #' @param nr.shp the number of rows to position shapes
@@ -220,8 +229,6 @@ pos.shapes <- function(xy, pos.shp = c("range", "circle", "xy")[1],
     return(pos)
   }
   if (pos.shp == "full") {
-    # w <- par('usr') pos <- expand.grid(seq(w[1], w[2],
-    # len=nr.shp), seq(w[3], w[4], len=nc.shp))
     w <- par("usr")
     pos <- expand.grid(seq(w[1] * 0.85, w[2] * 0.85, len = nr.shp),
                        seq(w[3] * 0.85, w[4] * 0.85, len = nc.shp))

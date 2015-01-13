@@ -7,7 +7,7 @@
 PCcontrib(PCA, ...)
 
 \method{PCcontrib}{PCA}(PCA, nax = 1:4, sd.r = c(-2, -1, -0.5, 0, 0.5, 1,
-  2), ...)
+  2), gap = 1, ...)
 }
 \arguments{
 \item{PCA}{a \code{\link{PCA}} object}
@@ -17,6 +17,9 @@ PCcontrib(PCA, ...)
 \item{nax}{a single or a range of PC axes}
 
 \item{sd.r}{a single or a range of mean +/- sd values (eg: c(-1, 0, 1))}
+
+\item{gap}{for combined-Coe, an adjustment variable for gap between shapes. Default
+to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.}
 }
 \value{
 a ggplot object
