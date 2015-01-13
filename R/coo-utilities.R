@@ -374,9 +374,10 @@ coo_slidedirection.default <- function(coo, direction = "N",
 }
 
 #' @export
-coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = FALSE) {
+coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = TRUE) {
   Coo <- coo
-  Coo$coo <- lapply(Coo$coo, coo_slidedirection, direction, center, id)
+  id0 <- sapply(Coo$coo, coo_slidedirection, direction, center, id=TRUE)
+  Coo <- coo_slide(Coo, id1 = id0)
   return(Coo)
 }
 
