@@ -3,12 +3,12 @@
 #' Calibrate using reconstructed shapes
 #'
 #' Calculate and displays reconstructed shapes using a
-#' range of harmonic number.
+#' range of harmonic number. Compare them visually with the maximal fit.
 #'
 #' @aliases calibrate_reconstructions
 #' @param x the \code{Coo} object on which to calibrate_reconstructions
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
-#'  for \code{Out}, or from \code{c('opoly', 'npoly')} for \code{Opn} 
+#'  for \code{Out}, or from \code{c('opoly', 'npoly')} for \code{Opn}
 #' @param id the shape on which to perform calibrate_reconstructions
 #' @param range vector of harmonics on which to perform calibrate_reconstructions
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
@@ -21,12 +21,12 @@
 #' calibrate_reconstructions(bot)
 #' @rdname calibrate_reconstructions
 #' @export
-calibrate_reconstructions <- 
+calibrate_reconstructions <-
   function(x, ...) {UseMethod("calibrate_reconstructions")}
 
 #' @rdname calibrate_reconstructions
 #' @export
-calibrate_reconstructions.Out <- 
+calibrate_reconstructions.Out <-
   function(x,
            method = c("efourier", "rfourier", "tfourier"),
            id,
@@ -54,11 +54,12 @@ calibrate_reconstructions.Out <-
     coo <- Out$coo[[id]]
     coo <- coo_center(coo)
     # check for too ambitious harm.range
-    if (max(range) > floor(nrow(coo)/2)) {
-      range <- floor(seq(1, q/2 - 1, length = 6))
+    max.h <- nrow(coo)/2 - 1
+    if (max(range) > max.h) {
+      range <- floor(seq(1, max.h, length = 9))
       cat(" * range was too high and set to: ", range, ".\n")
     }
-    
+
     # we calculate all shapes
     res <- list()
     for (i in seq(along = range)) {
@@ -69,7 +70,8 @@ calibrate_reconstructions.Out <-
     coos <- ldply(res, data.frame)
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
-    best <- coo_close(res[[length(res)]])
+    best <- method_i(method(coo, nb.h = max.h))
+    best <- coo_close(best)
     best <- data.frame(x=best[, 1], y=best[, 2])
     # cosmectics
     theme_empty <- theme(axis.line=element_blank(),
@@ -88,10 +90,10 @@ calibrate_reconstructions.Out <-
                          strip.text=element_text(colour = "grey10"),
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
-    
-    gg <- ggplot(data=coos, aes_string(x="x", y="y")) + 
-      coord_equal() + geom_polygon(aes(fill=id), alpha=0.5) + 
-      geom_path(data=best, aes_string(x="x", y="y")) + 
+
+    gg <- ggplot(data=coos, aes_string(x="x", y="y")) +
+      coord_equal() + geom_polygon(aes(fill=id), alpha=0.5) +
+      geom_path(data=best, aes_string(x="x", y="y")) +
       scale_fill_gradient2() +
       facet_wrap(~ id) +
       labs(x=NULL, y=NULL, title=names(Out)[id]) +
@@ -101,7 +103,7 @@ calibrate_reconstructions.Out <-
 
 #' @rdname calibrate_reconstructions
 #' @export
-calibrate_reconstructions.Opn <- 
+calibrate_reconstructions.Opn <-
   function(x,
            method = c("npoly", "opoly"),
            id,
@@ -125,7 +127,7 @@ calibrate_reconstructions.Opn <-
         method_i <- switch(p, npoly_i, opoly_i)
       }
     }
-    
+
     # we sample a shape
     if (missing(id))
       id <- sample(length(Opn$coo), 1)
@@ -133,23 +135,23 @@ calibrate_reconstructions.Opn <-
     coo <- coo_baseline(coo,
                         ldk1 = 1, ldk2 = nrow(coo),
                         t1 = baseline1, t2 = baseline2)
-    
+
     # we check for too ambitious range
     # special case for opoly # todo
     if (p == 2) {
       if (max(range) > 20) range <- 2:20
-    } 
+    }
     if (max(range) > (nrow(coo) - 1)) {
       range <- 2:10
       cat(" * range was too high and set to: ", range, ".\n")
     }
-    
+
     # we loop
     res <- list()
     for (i in seq(along = range)) {
       res[[i]] <- method_i(method(coo, degree = range[i]))
     }
-    
+
     # we prepare the plot
     names(res) <- range
     coos <- ldply(res, data.frame)
@@ -174,10 +176,10 @@ calibrate_reconstructions.Opn <-
                          strip.text=element_text(colour = "grey10"),
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
-    
-    gg <- ggplot(data=coos, aes_string(x="x", y="y")) + 
+
+    gg <- ggplot(data=coos, aes_string(x="x", y="y")) +
       coord_equal() + geom_path(data=best, aes_string(x="x", y="y"), alpha=0.5) +
-      geom_path(aes(col=id)) + 
+      geom_path(aes(col=id)) +
      # scale_color_gradient2() +
       facet_wrap(~ id) +
       labs(x=NULL, y=NULL, title=names(Opn)[id]) +
@@ -194,7 +196,7 @@ calibrate_reconstructions.Opn <-
 #' @param Coo the \code{Out} object on which to calibrate_deviations
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
 #' @param id the shape on which to perform calibrate_deviations
-#' @param harm.range vector of harmonics on which to perform calibrate_deviations. 
+#' @param harm.range vector of harmonics on which to perform calibrate_deviations.
 #' If not provided, the harmonics corresponding to 0.9, 0.95 and 0.99% of harmonic power
 #' are used.
 #' @param norm.centsize logical whether to normalize deviation by the centroid size
@@ -210,7 +212,7 @@ calibrate_reconstructions.Opn <-
 #' library(ggplot2)
 #' gg <- calibrate_deviations(bot, id=1:20)$gg
 #' gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
-#' gg + labs(col="Number of harmonics", fill="Number of harmonics", 
+#' gg + labs(col="Number of harmonics", fill="Number of harmonics",
 #'            title="Harmonic power") + theme_bw()
 #' gg + coord_polar()
 #' }
@@ -223,15 +225,15 @@ calibrate_deviations <- function(Coo, ...) {
 
 #' @rdname calibrate_deviations
 #' @export
-calibrate_deviations.Out <- 
-  function(Coo, method = c("efourier", "rfourier", "tfourier"), 
+calibrate_deviations.Out <-
+  function(Coo, method = c("efourier", "rfourier", "tfourier"),
            id = 1, harm.range,
            norm.centsize = TRUE,
            dist.method = edm_nearest, dist.nbpts = 120,
            ...) {
-    # missing lineat.y 
+    # missing lineat.y
     if (missing(harm.range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE, 
+      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
                                     lineat.y = c(95, 99, 99.9))
       harm.range <- unique(hr$minh)
     }
@@ -321,8 +323,8 @@ calibrate_deviations.Out <-
       xx <- melt(m)
       xx$Var2 <- as.numeric(xx$Var2)
       colnames(xx) <- c("harm", "pt", "med")
-      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) + 
-        geom_line() + 
+      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
+        geom_line() +
         labs(x="Points along the outline", y=y.title, col=NULL) +
         coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
     }
@@ -331,7 +333,7 @@ calibrate_deviations.Out <-
     #       gg <- gg + geom_hline(aes(yintercept=thres.h))
     #     }
     # we plot the ggplot
-    print(gg) 
+    print(gg)
     ####
     invisible(list(gg=gg, res = res, m = m, d = d))
   }
@@ -378,8 +380,8 @@ calibrate_deviations.Out <-
 #' cal <- calibrate_harmonicpower(bot)
 #' \dontrun{
 #' library(ggplot2)
-#' cal$gg + theme_minimal() + 
-#' coord_cartesian(xlim=c(3.5, 12.5), ylim=c(90, 100)) + 
+#' cal$gg + theme_minimal() +
+#' coord_cartesian(xlim=c(3.5, 12.5), ylim=c(90, 100)) +
 #' ggtitle("Harmonic power calibration")
 #' }
 #' # if you want to do efourier with 99% calibrate_harmonicpower in one step
@@ -394,7 +396,7 @@ calibrate_harmonicpower <- function(Out, ...) {
 #' @rdname calibrate_harmonicpower
 #' @export
 calibrate_harmonicpower.Out <- function(Out, method = "efourier", id = 1:length(Out),
-                                        nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9), 
+                                        nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
                                         plot=TRUE, verbose=TRUE, ...) {
   # we swith among methods, with a messsage
   if (missing(method)) {
@@ -428,7 +430,7 @@ calibrate_harmonicpower.Out <- function(Out, method = "efourier", id = 1:length(
   xx <- melt(res)
   colnames(xx) <- c("shp", "harm", "hp")
   gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
-    labs(x="Harmonic rank", y="Cumulative sum harmonic power") + 
+    labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
     coord_cartesian(xlim=c(0.5, h_display+0.5))
   if (plot) print(gg)
   # we calculate quantiles and add nice rowcolnames

@@ -34,7 +34,7 @@ a ggplot object
 }
 \description{
 Calculate and displays reconstructed shapes using a
-range of harmonic number.
+range of harmonic number. Compare them visually with the maximal fit.
 }
 \examples{
 data(bot)
