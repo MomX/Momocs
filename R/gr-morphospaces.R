@@ -113,11 +113,13 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     # since coo_template does not center shapes but the bounding box
     shp <- lapply(shp, coo_center)
     # we translate shapes
+    if (plot) { # to translate only for morphospace PCA, not PCcontrib, etc.
     for (s in 1:length(shp)) {
-      if (!plot) { # to prevent translation
-      shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}}
-    # we draw shapes or just return the shp
-    if (!plot) SHP[[i]] <- shp
+      shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
+    } else {
+      SHP[[i]] <- shp
+    } 
+    # otherwise, we plot the morphospace
     if (plot.method == "poly") {
       garbage <- lapply(shp, coo_draw, col = col.shp, border = border.shp, lwd = lwd.shp,
                         points = FALSE, centroid = FALSE, first.point = FALSE)}

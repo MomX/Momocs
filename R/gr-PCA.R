@@ -212,7 +212,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
                    nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
                    amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                   col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp)
+                   col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp,
+                   plot=TRUE)
   }
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
