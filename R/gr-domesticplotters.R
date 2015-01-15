@@ -764,7 +764,6 @@ Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 # ggplot2 ######
 
 # from http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_%28ggplot2%29/
-#' @export
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   require(grid)
   
