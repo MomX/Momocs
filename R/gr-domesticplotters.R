@@ -1,6 +1,7 @@
 ##### The graphics R file for everyhting graphics. Some internals
 ##### used elsewhere.
 
+
 #' Plots a single shape
 #' 
 #' A simple wrapper around \link{plot} for plotting shapes. Widely used in Momocs
@@ -740,7 +741,7 @@ Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 
 ##### Graphics misc
 
-# #' @export
+#' @export
 .grid.sample <- function(..., nside = 10, over = 1) {
   wdw <- apply(rbind(...), 2, range)
   wdw <- coo_scale(wdw, scale = 1/over)
@@ -751,14 +752,56 @@ Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
   return(as.matrix(grid))
 }
 
-# #' @export
 # returns the size of the graphical window
+#' @export
 .wdw <- function() {
   wdw <- par("usr")
   x <- wdw[2] - wdw[1]
   y <- wdw[4] - wdw[3]
   return(c(x, y))
 }
+
+# ggplot2 ######
+
+# from http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_%28ggplot2%29/
+#' @export
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  require(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
+
 
 # Illustration / teaching ---------------------------------
 
