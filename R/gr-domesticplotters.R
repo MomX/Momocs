@@ -685,9 +685,62 @@ conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
   return(list(ell = ell, seg = seg))
 }
 
+#' Plots confusion matrix of sample sizes within $fac
+#' 
+#' An utility that plots a confusion matrix of sample size (or a barplot)
+#' for every object with a $fac. Useful to visually how large are sample sizes,
+#' how (un)balanced are designs, etc.
+#' 
+#' @param x any object with a $fac slot (Coo, Coe, PCA, etc.)
+#' @param fac1 the name or id of the first factor
+#' @param fac2 the name of id of the second factor
+#' @param rm0 logical whether to print zeros
+#' @return a ggplot2 object
+#' @examples
+#' data(olea)
+#' Ntable(olea, "cep")
+#' Ntable(olea, "domes", "cep")
+#' gg <- Ntable(olea, "domes", "cep", rm0 = TRUE)
+#' gg
+#' library(ggplot2)
+#' gg + coord_equal()
+#' gg + scale_fill_gradient(low="green", high = "red")
+#' gg + coord_flip()
+#' @export
+
+Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
+  # we check a bit
+  if (is.null(x$fac))
+    stop(" * Ntable must be called on an object with a $fac slot")
+  if (missing(fac1))
+    stop(" * 'fac1' must be specified")
+  df <- select_(x$fac, fac1, fac2)
+  # we return a barplot when a single fac is called (fac1 then)
+  if (missing(fac2) | identical(fac1, fac2)) { # | is justified by rm0 after
+    gg <- ggplot(df, aes_string(x=fac1)) + geom_bar()
+    return(gg)
+  }
+  # otherwise we prepare a table and a df
+  tab <- table(df)
+  df <- as.data.frame(tab)
+  colnames(df) <- c("fac1", "fac2", "count")
+  gg <- ggplot(df, aes(x=fac1, y=fac2, fill=count)) +
+    geom_tile()  +
+    scale_x_discrete(name=fac1) +
+    scale_y_discrete(name=fac2) +
+    scale_fill_gradient(low="white") +
+    theme_linedraw()
+  if (rm0) {
+    gg <- gg + geom_text(data=filter(df, count !=0), aes(label=count))
+  } else {
+    gg <- gg + geom_text(aes(label=count))
+  }
+  return(gg)}
+
+
 ##### Graphics misc
 
-#' @export
+# #' @export
 .grid.sample <- function(..., nside = 10, over = 1) {
   wdw <- apply(rbind(...), 2, range)
   wdw <- coo_scale(wdw, scale = 1/over)
@@ -698,7 +751,7 @@ conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
   return(as.matrix(grid))
 }
 
-#' @export
+# #' @export
 # returns the size of the graphical window
 .wdw <- function() {
   wdw <- par("usr")
