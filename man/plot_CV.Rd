@@ -2,35 +2,32 @@
 \name{plot_CV}
 \alias{plot_CV}
 \alias{plot_CV.LDA}
-\alias{plot_CV.table}
+\alias{plot_CV.default}
 \title{Plots a cross-validation table as an heatmap}
 \usage{
 plot_CV(x, ...)
 
-\method{plot_CV}{LDA}(x, ...)
+\method{plot_CV}{default}(x, freq = TRUE, rm0 = FALSE, cex = 5,
+  round = 2, ...)
 
-\method{plot_CV}{table}(x, freq = TRUE, palette = col_heat, levels = 20,
-  cols, pc = TRUE, margin = TRUE, cex = 1, ...)
+\method{plot_CV}{LDA}(x, freq = TRUE, rm0 = FALSE, cex = 5, round = 2,
+  ...)
 }
 \arguments{
-\item{x}{a (typically cross-correlation) table to plot}
+\item{x}{a (cross-validation table) or an LDA object}
 
-\item{...}{not used}
+\item{...}{only used for the generic}
 
-\item{freq}{whether to use row-wise frequencies}
+\item{freq}{logical whether to display frequencies or counts}
 
-\item{palette}{a color palette such as \link{col_heat} to use,
-if \code{cols} is not used.}
+\item{rm0}{logical whether to remove zeros}
 
-\item{levels}{number of levels, otherwise the highest cell in the table}
+\item{cex}{numeric to adjust labels in every cell}
 
-\item{cols}{a vector of colors}
-
-\item{pc}{whether to use percentages}
-
-\item{margin}{whether to add marginal sums}
-
-\item{cex}{a cex for all values}
+\item{round}{numeric, when freq=TRUE how many decimals should we display}
+}
+\value{
+a gg object
 }
 \description{
 Either with frequencies (or percentages) plus marginal sums,
@@ -38,22 +35,13 @@ and values as heatmaps. Used in Momocs for plotting cross-validation tables
 but may be used for any table (likely with \code{freq=FALSE}).
 }
 \examples{
-data(bot)
-bot.p <- PCA(efourier(bot, 12))
-bot.l <- LDA(bot.p, 1)
-plot_CV(bot.l)
 data(olea)
-ol <- LDA(PCA(npoly(olea, nb.pts=50)), "cep")
-plot_CV(ol)
-# raw counts
-plot_CV(ol, freq=FALSE, palette=col_india)
-# any other count table
-m <- matrix(runif(120, 0, 6), 12)
-tab <- as.table(round(m))
-plot_CV(tab, palette=terrain.colors, levels=5, cex=0.8)
+ol <- LDA(PCA(opoly(olea, 5)), "domes")
+gg <- plot_CV(ol) # just a wrapper for plot_CV(ol$CV.tab) though
+gg
 }
 \seealso{
-\link{LDA}, \link{plot.LDA}, \link{plot_CV2}.
+\link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
 }
 \keyword{Graphics}
 \keyword{Multivariate}

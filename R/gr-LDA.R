@@ -220,108 +220,51 @@ plot.LDA <- function(x, xax=1, yax=2,
 #'
 #' Either with frequencies (or percentages) plus marginal sums,
 #' and values as heatmaps. Used in Momocs for plotting cross-validation tables
-#' but may be used for any table (likely with \code{freq=FALSE}).
+#' but may be used for any table (likely with \code{freq=FALSE}). 
 #'
-#' @param x a (typically cross-correlation) table to plot
-#' @param freq whether to use row-wise frequencies
-#' @param palette a color palette such as \link{col_heat} to use,
-#' if \code{cols} is not used.
-#' @param levels number of levels, otherwise the highest cell in the table
-#' @param cols a vector of colors
-#' @param pc whether to use percentages
-#' @param margin whether to add marginal sums
-#' @param cex a cex for all values
-#' @param ... not used
-#' @seealso \link{LDA}, \link{plot.LDA}, \link{plot_CV2}.
+#' @param x a (cross-validation table) or an LDA object
+#' @param freq logical whether to display frequencies or counts
+#' @param rm0 logical whether to remove zeros
+#' @param cex numeric to adjust labels in every cell
+#' @param round numeric, when freq=TRUE how many decimals should we display
+#' @param ... only used for the generic
+#' @return a gg object
+#' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
 #' @keywords Multivariate Graphics
 #' @examples
-#' data(bot)
-#' bot.p <- PCA(efourier(bot, 12))
-#' bot.l <- LDA(bot.p, 1)
-#' plot_CV(bot.l)
 #' data(olea)
-#' ol <- LDA(PCA(npoly(olea, nb.pts=50)), "cep")
-#' plot_CV(ol)
-#' # raw counts
-#' plot_CV(ol, freq=FALSE, palette=col_india)
-#' # any other count table
-#' m <- matrix(runif(120, 0, 6), 12)
-#' tab <- as.table(round(m))
-#' plot_CV(tab, palette=terrain.colors, levels=5, cex=0.8)
+#' ol <- LDA(PCA(opoly(olea, 5)), "domes")
+#' gg <- plot_CV(ol) # just a wrapper for plot_CV(ol$CV.tab) though
+#' gg
 #' @rdname plot_CV
 #' @export
 plot_CV <- function(x, ...){UseMethod("plot_CV")}
 #' @rdname plot_CV
 #' @export
-plot_CV.LDA <- function(x, ...){
-  plot_CV(x$CV.tab, ...)}
+plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
+  tab <- x
+  df <- as.data.frame(tab)
+  colnames(df) <- c("actual", "classified", "count")
+  if (freq) {
+    df <- df %>% group_by(classified) %>% 
+      mutate(count=round(count/sum(count), round))
+  }
+  gg <- ggplot(df, aes(x=actual, y=classified, fill=count)) +
+    geom_tile()  +
+    scale_fill_gradient(low="white") +
+    theme_linedraw() + theme(legend.position="none")
+  if (rm0) {
+    gg <- gg + geom_text(data=filter(df, count !=0), aes(label=count), size=rel(cex))
+  } else {
+    gg <- gg + geom_text(aes(label=count), size=rel(cex))
+  }
+  return(gg)}
 #' @rdname plot_CV
 #' @export
-plot_CV.table <- function(x, freq=TRUE,
-                    palette=col_heat, levels=20, cols,
-                    pc=TRUE, margin=TRUE, cex=1, ...){
-  tab <- x
-  tab <- t(tab)
-  tab <- tab[, ncol(tab):1 ]
-  print(tab)
-  # if required, we return frequencies (and percentages)
-  # but by default we forbid freq on small samples
-  #   if (missing(freq) & sum(tab) < 50) freq <- FALSE
-  if (freq) tab <- apply(tab, 2, function(x) x/ sum(x)) * ifelse(pc, 100, 1)
-  #   if (freq) tab <- tab/sum(tab) * ifelse(pc, 100, 1)
-
-  # here start the graphics
-  op <- par(xpd=NA, mar=c(5, 5, 4, 1))
-  on.exit(par(op))
-  # cosmetics
-  if (missing(cols)) cols <- palette(levels)
-  if (any(tab==0)) cols[1] <- par("bg")
-  #breaks <- seq(0, sum(tab)/ncol(tab), length=length(cols)+1)
-  # the core piece
-  image(x=0:nrow(tab), y=0:ncol(tab), z=tab,
-        asp=1, ann=FALSE, axes=FALSE, col=cols, frame=FALSE)
-  # draw the grid
-  xn <- nrow(tab)
-  yn <- ncol(tab)
-  segments(0:xn, 0, 0:xn, yn)
-  segments(0, 0:yn, xn, 0:yn)
-
-  # if the table has names, we add them
-  names <- names(dimnames(tab))
-  if (length(names) != 0){
-    text(yn/2, -0.5, labels=names[1], font=2)
-    text(-0.5, xn/2, labels=names[2], srt=90, font=2)}
-
-  text(-0.1, 1:yn - 0.5, rev(rownames(x)),
-       cex=cex, adj = 1, font=2)
-  text(1:xn - 0.5, yn+0.1, colnames(x),
-       cex=cex, adj = c(0.5, 0), font=2)
-
-  # if freq are used, from now on, we transform the table into a
-  # reasonable number of digits to plot
-
-  # grand total
-  if (TRUE){
-    segments(xn, 0, xn+0.05, -0.05)
-    text(xn+0.1, -0.1, sum(tab), cex=cex*0.8, adj=c(0, 1))
-  }
-  arrows(-0.1, yn+0.1, 0, yn, length=0.1)
-
-  # we plot the values
-  xx <- rep(1:xn - 0.5, times=yn)
-  yy <- rep(1:yn - 0.5, each=xn)
-  if (freq)
-    tab2 <- signif(tab, log10(sum(tab)))
-  else
-    tab2 <- tab
-  text(xx, yy, tab2, cex=cex)
-
-  # marginal sums
-  if (margin){
-    text(1:xn - 0.5, - 0.1, rowSums(tab2), cex=cex*0.8, adj=c(0.5, 1))
-    text(xn+0.1, 1:yn - 0.5, colSums(tab), cex=cex*0.8, adj =0 )
-  }
+plot_CV.LDA <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
+  plot_CV(x$CV.tab, freq=freq, rm0=rm0, cex=cex, round=2, ...)
 }
+
 
 #' Plots a cross-correlation table
 #'
