@@ -1,6 +1,6 @@
-#' Permute Coe (and others) objects
-#' 
-#' This methods applies permutations column-wise on the \code{coe} of any 
+#' Permute and breed Coe (and others) objects
+#'
+#' This methods applies permutations column-wise on the \code{coe} of any
 #' \link{Coe} object but relies on a function that can be used on any matrix.
 #' For a Coe object, it uses \link{sample} on every column (or row) with (or without)
 #' replacement.
@@ -16,7 +16,7 @@
 #' m
 #' perm(m, margin=2, size=5)
 #' perm(m, margin=1, size=10)
-#' 
+#'
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.m <- perm(bot.f, 80)
@@ -42,8 +42,8 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
   x}
 
 #' Mutate Coe (and others) objects
-#' 
-#' This methods applies column-wise on the \code{coe} of any 
+#'
+#' This methods applies column-wise on the \code{coe} of any
 #' \link{Coe} object but relies on a function that can be used on any matrix. It
 #' simply uses \link{rnorm} with the mean and sd calculated for every column (or row).
 #' For a \code{Coe} object, on every colum, randomly generates coefficients values
@@ -60,7 +60,7 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
 #' m <- matrix(1:12, nrow=3)
 #' breed(m, margin=2, size=4)
 #' breed(m, margin=1, size=10)
-#' 
+#'
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.m <- breed(bot.f, 80)
