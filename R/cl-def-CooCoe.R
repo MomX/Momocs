@@ -198,3 +198,10 @@ names.Coe <- function(x) {
     rownames(x$coe) <- value
     return(x)
 }
+
+# utils ######
+
+is.fac <- function(x) length(x$fac) > 0
+
+
+

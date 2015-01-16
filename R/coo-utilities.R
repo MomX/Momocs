@@ -1185,7 +1185,8 @@ coo_centpos.Coo <- function(coo) {
 #' @export
 coo_centsize <- function(coo) {
   coo <- coo_check(coo)
-  return(sqrt(sum(apply(coo, 2, var)) * (nrow(coo) - 1)))
+  sq <- (xy - apply(xy, 2, mean))^2
+  mean(sqrt(rowSums(sq)))
 }
 
 #' Returns the distance between everypoints and the centroid
