@@ -368,7 +368,7 @@ vecs_param <- function(r1, i1, r2, i2) {
 .trim.path <- function(lf) {
     lf0 <- strsplit(lf, "/")
     lf0 <- sapply(lf0, function(x) x[length(x)])
-    lf0 <- substr(lf0, 1, nchar(lf0) - 4)
+#     lf0 <- substr(lf0, 1, nchar(lf0) - 4)
     return(lf0)
 }
 

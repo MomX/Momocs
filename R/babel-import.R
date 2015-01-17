@@ -39,7 +39,7 @@ import_txt <- function(txt.paths = NULL, ...) {
   }
   # names(res) <- substr(txt.paths, start=1,
   # stop=nchar(txt.paths)-4)
-  names(res) <- .trim.ext(txt.paths)
+  names(res) <- txt.paths %>% .trim.ext() %>% .trim.path()
   return(res)
 }
 
@@ -297,7 +297,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
         setTxtProgressBar(pb, i)
     }
   }
-  names(res) <- .trim.path(jpg.paths)
+  names(res) <- jpg.paths %>% .trim.ext() %>% .trim.path()
   cat(" * Done.")
   return(res)
 }
