@@ -410,13 +410,13 @@ coo_sample <- function(coo, n) {
 #' @export
 coo_sample.default <- function(coo, n) {
   coo <- coo_check(coo)
+  if (nrow(coo) < n) stop(" * less coordinates than n. Try coo_interpolate.")
   sampled <- round(seq(1, nrow(coo), len = n + 1)[-(n + 1)])
   return(coo[sampled, ])
 }
 #' @export
 coo_sample.Out <- function(coo, n) {
   Out <- coo
-
   # if an $ldk is present, we have to change it.
   if (length(Out$ldk)!=0) {
     coo_nb <- sapply(Out$coo, nrow)
@@ -460,6 +460,7 @@ coo_samplerr <- function(coo, n) {
 #' @export
 coo_samplerr.default <- function(coo, n) {
   coo <- coo_check(coo)
+  if (nrow(coo) < n) stop(" * less coordinates than n. Try coo_interpolate.")
   Rx <- coo[, 1]
   Ry <- coo[, 2]
   le <- length(Rx)
@@ -1134,13 +1135,11 @@ coo_baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2, t1 = c(-0.5,
 }
 
 # 3. coo shape descriptors
-# -----------------------------------------------------
 # Mainly intended for traditional morphometrics.  Convert to
 # methods ? Or an utility to get these descriptors ? #todo
 
 
 # a. centroid
-# -------------------------------------------------------------
 #' Returns the position of the centroid
 #'
 #' Returns the (x; y) centroid coordinates of a shape.
@@ -1185,7 +1184,7 @@ coo_centpos.Coo <- function(coo) {
 #' @export
 coo_centsize <- function(coo) {
   coo <- coo_check(coo)
-  sq <- (xy - apply(xy, 2, mean))^2
+  sq <- (coo - apply(coo, 2, mean))^2
   mean(sqrt(rowSums(sq)))
 }
 
