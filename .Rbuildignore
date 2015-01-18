@@ -5,3 +5,4 @@ out$
 NEWS.md
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
