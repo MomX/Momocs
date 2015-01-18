@@ -1,5 +1,41 @@
 ##### Main Coo (Out/Opn/Ldk) plotters
 
+#' A family picture of a Coo object: all shapes in the same plot
+#' 
+#' Will replace stack soon.
+#' @param Coo a Coo object
+#' @return a ggplot2 object
+#' @examples
+#' data(bot)
+#' stack2(bot)
+#' @export
+stack2 <- function(Coo){
+  df <- as_df(Coo)
+  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) + 
+    geom_path() +
+    coord_equal()
+  gg
+}
+
+#' A family picture of a Coo object: all shapes side by side
+#' 
+#' Will replace panel soon.
+#' @param Coo a Coo object
+#' @return a ggplot2 object
+#' @examples
+#' data(shapes)
+#' panel2(shapes)
+#' @export
+panel2 <- function(Coo){
+  df <- as_df(Coo)
+  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) + 
+    geom_path() +
+    coord_equal() + facet_wrap( ~ id)
+  gg
+}
+
+
+
 # plot ----------------------------------------------------
 #' Plots Coo objects: plot (quick review)
 #'
