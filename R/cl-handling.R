@@ -386,8 +386,8 @@ as_df.PCA <- function(x){
 
 #' @export
 as_df.LDA <- function(x){
-  fac <- data.frame(x$fac)
-  df <- bind_cols(df, as.data.frame(x$x))
+  fac <- data.frame(fac=x$fac)
+  df <- bind_cols(fac, as.data.frame(x$x))
   #as_data_frame(df)
   df
 }
