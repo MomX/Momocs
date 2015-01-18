@@ -1,7 +1,7 @@
 ##### Combining or subsetting Momocs' classes
 
-# bloody dirty todo particularly for combine
-# have to find a way to do it in a more generic way.
+# tests for the presence of a $fac slot
+is.fac <- function(x) length(x$fac) > 0
 
 #' Create subsets of Coo objects
 #'
@@ -324,5 +324,73 @@ filter.Coe <- filter.Coo
 #' @rdname filter.Coo
 #' @export
 filter.PCA <- filter.Coo
+
+#' Convert Momocs objects to data.frames
+#' 
+#' Used in particular for ggplot2 compatibility
+#' @param x an object, typically a Momocs class
+#' @return a data.frame
+#' @examples
+#' data(bot)
+#' head(as_df(bot))
+#' bot.f <- efourier(bot, 10)
+#' head(as_df(bot.f))
+#' bot.p <- PCA(bot.f)
+#' head(as_df(bot.p))
+#' bot.l <- LDA(bot.p, "type")
+#' head(as_df(bot.l))
+#' 
+#' @export
+as_df <- function(x){
+  UseMethod("as_df")
+}
+
+#' @export
+as_df.Coo <- function(x){
+  df_coo <- ldply(x$coo, data.frame)
+  colnames(df_coo) <- c("id", "x", "y")
+  # if a $fac is present
+  if (is.fac(x)) {
+    df_fac <- as_data_frame(x$fac)
+    n <- group_by(df_coo, id) %>% summarize(n = n())
+    i <- 1:nrow(df_fac)
+    i_n <- rep(i, times=n$n)
+    df_coo <- bind_cols(df_coo, df_fac[i_n, ])
+  }
+  df_coo
+}
+
+#' @export
+as_df.Coe <- function(x){  
+  df_coe <- melt(x$coe)
+  colnames(df_coe) <- c("id", "coefficient", "value")
+  # if a $fac is present
+  if (is.fac(x)) {
+    df_fac <- as_data_frame(x$fac)
+    n <- group_by(df_coe, id) %>% summarize(n = n())
+    i <- 1:nrow(df_fac)
+    i_n <- rep(i, times=n$n)
+    df_coe <- bind_cols(df_coe, df_fac[i_n, ])
+  }
+  df_coe
+}
+
+#' @export
+as_df.PCA <- function(x){
+  df <- bind_cols(data.frame(id=rownames(x$x)),
+                  x$fac,
+                  as.data.frame(x$x))
+  #as_data_frame(df)
+  df
+}
+
+#' @export
+as_df.LDA <- function(x){
+  fac <- data.frame(x$fac)
+  df <- bind_cols(df, as.data.frame(x$x))
+  #as_data_frame(df)
+  df
+}
+
 
 ##### end subset-combine
