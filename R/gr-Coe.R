@@ -27,11 +27,11 @@ boxplot.OutCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
   df <- as_df(x)
   # we retrive coefficient rank and names, and we filter
   df <- df %>%
-    mutate(coeN = substr(coefficient, 1, 1),
-           coeR = as.numeric(substr(coefficient, 2, 2))) %>%
-    filter(coeR > drop, coeR <= retain)
+    mutate_(coeN = "substr(coefficient, 1, 1)",
+           coeR = "as.numeric(substr(coefficient, 2, 2))")
+  df <- filter_(df, ~ coeR > drop, ~ coeR <= retain)
   # we ggplot
-  gg <- ggplot(df, aes_string(x=factor("coeR"), y="value", fill=factor("coeN"))) +
+  gg <- ggplot(df, aes_string(x="factor(coeR)", y="value", fill="factor(coeN)")) +
     geom_boxplot(outlier.size = 1) +
     labs(x="Harmonic rank", y="Coefficient amplitude", fill="Coefficient")
   if (center.y) gg <- gg + ylim(.center_range(df$value))
@@ -51,7 +51,7 @@ boxplot.OpnCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
   x$coe <- x$coe[, drop+1 : retain]
   df <- as_df(x)
   # we ggplot
-  gg <- ggplot(df, aes_string(x=factor("coefficient"), y="value")) +
+  gg <- ggplot(df, aes_string(x="coefficient", y="value")) +
     geom_boxplot(outlier.size = 1) +
     labs(x="Coefficient", y="Amplitude")
   if (center.y) gg <- gg + ylim(.center_range(df$value))
@@ -86,9 +86,9 @@ hist.OutCoe <- function(x, retain=4, drop=0, bw=20, ...){
   df <- as_df(x)
   # we retrive coefficient rank and names, and we filter
   df <- df %>%
-    mutate(coeN = substr(coefficient, 1, 1),
-           coeR = as.numeric(substr(coefficient, 2, 2))) %>%
-    filter(coeR > drop, coeR <= retain)
+    mutate(coeN = substr(df$coefficient, 1, 1),
+           coeR = as.numeric(substr(df$coefficient, 2, 2)))
+  df <- filter_(df, ~ coeR > drop, ~ coeR <= retain)
   # we ggplot
   gg <- ggplot(df, aes_string(x="value")) +
     geom_histogram(binwidth=diff(range(df$value))/bw) +

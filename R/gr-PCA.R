@@ -415,12 +415,12 @@ PCcontrib.PCA <-
 
       # we ggplot
       gg <- ggplot(data=xx, aes_string(x="x", y="y")) +
-        geom_polygon(fill="#00000011", col="#00000055") +
+        geom_polygon(fill=NA, colour="#000000") +
         coord_equal() +
         facet_grid(sd ~ PC) + labs(
           title="PC contribution to shape",
           x="(Mean + ) SD",
-          y="PC axes") + theme_light() + theme_empty
+          y="PC axes") + theme_light()  + theme_empty
     } else {
       ############################################################
       # case where we have a combined Coe
@@ -450,7 +450,9 @@ PCcontrib.PCA <-
       colnames(coos) <- c("id", "x", "y")
       # we manage the translations
       lm <- length(x$method)
-      coos <- mutate(coos, lm = rep(1:lm, each=61 * length(sd.r), times=length(nax)))
+      coos <- mutate(data=coos,
+                     lm = rep(1:lm, each=61 * length(sd.r),
+                              times=length(nax)))
       # gap between shapes of different methods
       d <- gap
       if (lm==2){ #met1 over met2 - h center
@@ -464,8 +466,8 @@ PCcontrib.PCA <-
         dy <- c(d, d, -d, -d)}
       # here, we do the translation itself
       coos <- mutate(coos, dx = dx[lm], dy = dy[lm])
-      coos <- mutate(coos, x=x+dx, y=y+dy)
-      coos <- select(coos, id, x, y)
+      coos <- mutate_(coos, x=x+dx, y=y+dy)
+      coos <- select_(coos, ~id, ~x, ~y)
       # we prepare the information data.frame
       df <- expand.grid(sd.r, 1:lm, nax)
       colnames(df) <- c("PC", "met", "sd")
@@ -474,7 +476,7 @@ PCcontrib.PCA <-
       xx <- cbind(coos, df)
       # we ggplot
       gg <- ggplot(data=xx, aes_string(x="x", y="y", group="met")) +
-        geom_polygon(fill="#00000011", col="#00000055") +
+        geom_polygon(fill=NA, colour="#000000") +
         coord_equal() +
         facet_grid(sd ~ PC) + labs(
           title="PC contribution to shape",

@@ -246,7 +246,7 @@ plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
   df <- as.data.frame(tab)
   colnames(df) <- c("actual", "classified", "count")
   if (freq) {
-    df <- df %>% group_by(classified) %>% 
+    df <- df %>% group_by_("classified") %>% 
       mutate(count=round(count/sum(count), round))
   }
   gg <- ggplot(df, aes_string(x="actual", y="classified", fill="count")) +
@@ -256,7 +256,7 @@ plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
   if (rm0) {
     gg <- gg + geom_text(data=filter(df, count !=0), aes_string(label="count"), size=rel(cex))
   } else {
-    gg <- gg + geom_text(aes(label=count), size=rel(cex))
+    gg <- gg + geom_text(aes_string(label="count"), size=rel(cex))
   }
   return(gg)}
 #' @rdname plot_CV
