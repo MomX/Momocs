@@ -274,11 +274,12 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
 #' replace=TRUE)
 #' stack(coo_slide(hearts, id1=id1_random))
-#'
+#' @rdname coo_slide
 #' @export
 coo_slide <- function(x, ...) {
   UseMethod("coo_slide")
 }
+#' @rdname coo_slide
 #' @export
 coo_slide.default <- function(x, id1, ...) {
   coo <- coo_check(x)
@@ -289,6 +290,7 @@ coo_slide.default <- function(x, id1, ...) {
   slided.rows <- c(id1:n, 1:(id1 - 1))
   return(coo[slided.rows, ])
 }
+#' @rdname coo_slide
 #' @export
 coo_slide.Coo <- function(x, id1, ldk, ...) {
   Coo <- x
