@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/vbonhomme/Momocs.png?branch=master)](https://travis-ci.org/vbonhomme/Momocs)
+
 Momocs, morphometrics using R
 ======
 
