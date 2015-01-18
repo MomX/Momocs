@@ -10,6 +10,7 @@
 #' @param center.y logical whether to center the y-axis
 #' @param ... useless here but maintain the consistency with generic boxplot
 #' @return a ggplot2 object
+#' @aliases boxplot.Coe
 #' @seealso \link{hist.Coe}
 #' @keywords Graphics
 #' @examples
@@ -30,7 +31,7 @@ boxplot.OutCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
            coeR = as.numeric(substr(coefficient, 2, 2))) %>%
     filter(coeR > drop, coeR <= retain)
   # we ggplot
-  gg <- ggplot(df, aes(x=factor(coeR), y=value, fill=factor(coeN))) +
+  gg <- ggplot(df, aes_string(x=factor("coeR"), y="value", fill=factor("coeN"))) +
     geom_boxplot(outlier.size = 1) +
     labs(x="Harmonic rank", y="Coefficient amplitude", fill="Coefficient")
   if (center.y) gg <- gg + ylim(.center_range(df$value))
@@ -50,7 +51,7 @@ boxplot.OpnCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
   x$coe <- x$coe[, drop+1 : retain]
   df <- as_df(x)
   # we ggplot
-  gg <- ggplot(df, aes(x=factor(coefficient), y=value)) +
+  gg <- ggplot(df, aes_string(x=factor("coefficient"), y="value")) +
     geom_boxplot(outlier.size = 1) +
     labs(x="Coefficient", y="Amplitude")
   if (center.y) gg <- gg + ylim(.center_range(df$value))
@@ -69,6 +70,7 @@ boxplot.OpnCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
 #' @param ... useless here but maintain the consistency with generic hist
 #' @return a ggplot2 object
 #' @seealso \link{boxplot.Coe}
+#' @aliases hist.Coe
 #' @keywords Graphics
 #' @examples
 #' data(bot)
@@ -88,7 +90,7 @@ hist.OutCoe <- function(x, retain=4, drop=0, bw=20, ...){
            coeR = as.numeric(substr(coefficient, 2, 2))) %>%
     filter(coeR > drop, coeR <= retain)
   # we ggplot
-  gg <- ggplot(df, aes(x=value)) +
+  gg <- ggplot(df, aes_string(x="value")) +
     geom_histogram(binwidth=diff(range(df$value))/bw) +
     facet_grid(coeR ~ coeN) + 
     labs(x="Coefficient amplitude", y="Freq")
@@ -107,7 +109,7 @@ hist.OpnCoe <- function(x, retain=4, drop=0, bw=20, ...){
   retain <- ifelse(retain<ncol(x$coe), retain, ncol(x$coe)) 
   x$coe <- x$coe[, drop+1 : retain]
   df <- as_df(x)
-  gg <- ggplot(df, aes(x=value)) +
+  gg <- ggplot(df, aes_string(x="value")) +
     geom_histogram(binwidth=diff(range(df$value))/bw) +
     facet_grid(coefficient ~ .) + 
     labs(x="Coefficient amplitude", y="Freq")
