@@ -120,6 +120,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
       SHP[[i]] <- shp
     } 
     # otherwise, we plot the morphospace
+    if (plot) {
     if (plot.method == "poly") {
       garbage <- lapply(shp, coo_draw, col = col.shp, border = border.shp, lwd = lwd.shp,
                         points = FALSE, centroid = FALSE, first.point = FALSE)}
@@ -127,6 +128,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
       garbage <- lapply(shp, lines, col = border.shp, lwd = lwd.shp * 2)}
     if (plot.method == "points"){
       garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp)}
+  }
   }
   if (!plot) SHP else invisible(shp)
 }
