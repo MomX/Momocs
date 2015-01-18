@@ -91,14 +91,14 @@ plot_CV2(tab, gap.dots=1) # or not
 #trilo examples
 data(trilo)
 trilo.f <- efourier(trilo, 8)
-trilo.l <- LDA(trilo.f, 'onto')
+trilo.l <- LDA(PCA(trilo.f), 'onto')
 trilo.l
 plot_CV2(trilo.l)
 
 # olea example
 data(olea)
 op <- opoly(olea, 5)
-opl <- LDA(op, 'cep')
+opl <- LDA(PCA(op), 'cep')
 plot_CV2(opl)
 }
 \seealso{

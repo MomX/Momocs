@@ -32,8 +32,8 @@
 #' op.p <- PCA(op)
 #' plot(op.p, 'domes')
 #' plot(op.p, 'cep')
-#' # and now an LDA
-#' olda <- LDA(op, 'cep')
+#' # and now an LDA after a PCA
+#' olda <- LDA(PCA(op), 'cep')
 #' # for CV table
 #' olda
 #' plot(olda)

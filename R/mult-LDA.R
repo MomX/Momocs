@@ -29,11 +29,11 @@
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)
-#' bot.l <- LDA(bot.f, 'type')
+#' bot.l <- LDA(PCA(bot.f), 'type')
 #' bot.l
 #' plot(bot.l)
 #' bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
-#' bot.l <- LDA(bot.f, 'plop')
+#' bot.l <- LDA(PCA(bot.f), 'plop')
 #' bot.l
 #' plot(bot.l)
 #' @export
@@ -79,6 +79,11 @@ LDA.default <- function(x, fac, retain, ...) {
               CV.correct = CV.correct, CV.ce = ce, LDs = LDs, mshape = NULL, method = "other")
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)
+}
+
+#' @export
+LDA.Coe <- function(x, fac, retain, ...) {
+  stop(" * LDA on Coe is deprecated. Try on a PCA object.")
 }
 
 #' @rdname LDA

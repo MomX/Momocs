@@ -147,11 +147,11 @@ Morphospaces are still experimental.
 \examples{
 data(bot)
 bot.f <- efourier(bot, 24)
-bot.l <- LDA(bot.f, "type")
+bot.l <- LDA(PCA(bot.f), "type")
 plot(bot.l)
 
 bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
-bot.l <- LDA(bot.f, "fake")
+bot.l <- LDA(PCA(bot.f), "fake")
 plot(bot.l)
 }
 \seealso{

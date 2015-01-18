@@ -68,11 +68,11 @@
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)
-#' bot.l <- LDA(bot.f, "type")
+#' bot.l <- LDA(PCA(bot.f), "type")
 #' plot(bot.l)
 #'
 #' bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
-#' bot.l <- LDA(bot.f, "fake")
+#' bot.l <- LDA(PCA(bot.f), "fake")
 #' plot(bot.l)
 #' @method plot LDA
 #' @export
@@ -332,14 +332,14 @@ plot_CV.LDA <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
 #' #trilo examples
 #' data(trilo)
 #' trilo.f <- efourier(trilo, 8)
-#' trilo.l <- LDA(trilo.f, 'onto')
+#' trilo.l <- LDA(PCA(trilo.f), 'onto')
 #' trilo.l
 #' plot_CV2(trilo.l)
 #'
 #' # olea example
 #' data(olea)
 #' op <- opoly(olea, 5)
-#' opl <- LDA(op, 'cep')
+#' opl <- LDA(PCA(op), 'cep')
 #' plot_CV2(opl)
 #' @rdname plot_CV2
 #' @export

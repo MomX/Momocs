@@ -73,7 +73,7 @@ plot(bot.p, 1, chull=TRUE, ellipsesax=FALSE, stars=TRUE, chull.lty = 1,
 
 Now, some variations on morphospaces.
 ```{r, fig.show='hold'}
-plot(bot.p, 1, pos.shp="circle", nb.shp=16, col_shp="gold")
+#plot(bot.p, 1, pos.shp="circle", nb.shp=16, col_shp="gold")
 plot(bot.p, 1, pos.shp="range", nr.shp=20, nc.shp=15, 
      size.shp = 1/3, amp.shp=2, border.shp="grey20")
 plot(bot.p, 1, pos.shp="xy", lwd.shp=3)
@@ -159,7 +159,7 @@ bot.l
 
 And on olea:
 ```{r, fig.show='hold'}
-olea.l <- LDA(olea.pol, "cep")
+olea.l <- LDA(PCA(olea.pol), "cep")
 plot(olea.l)
 plot_CV(olea.l$CV.tab)
 ```
@@ -167,11 +167,4 @@ plot_CV(olea.l$CV.tab)
 Note that almost all plotting options for PCA also work for LDA!
 
 # Hierarchical clustering
-```{r, fig.show='hold'}
-# todo: add shapes on hclust plots
-#CLUST(bot.f, "type", type = "fan")
-#CLUST(bot.f, "type", type = "cladogram")
-```
 
-Add RDA and multreg here.
-  
