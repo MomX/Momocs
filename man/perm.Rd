@@ -10,12 +10,6 @@ perm(x, ...)
 \method{perm}{default}(x, margin = 2, size, replace = TRUE, ...)
 
 \method{perm}{Coe}(x, size, replace = TRUE, ...)
-
-perm(x, ...)
-
-\method{perm}{default}(x, margin = 2, size, replace = TRUE, ...)
-
-\method{perm}{Coe}(x, size, replace = TRUE, ...)
 }
 \arguments{
 \item{x}{the object to permute}
@@ -27,23 +21,8 @@ perm(x, ...)
 \item{size}{numeric the required size for the final object, same size by default.}
 
 \item{replace}{logical, whether to use \link{sample} with replacement}
-
-\item{x}{the object to permute}
-
-\item{margin}{numeric whether 1 or 2 (rows or columns)}
-
-\item{size}{numeric the required size for the final object, same size by default.}
-
-\item{replace}{logical, whether to use \link{sample} with replacement}
-
-\item{...}{useless here}
 }
 \description{
-This methods applies permutations column-wise on the \code{coe} of any
-\link{Coe} object but relies on a function that can be used on any matrix.
-For a Coe object, it uses \link{sample} on every column (or row) with (or without)
-replacement.
-
 This methods applies permutations column-wise on the \code{coe} of any
 \link{Coe} object but relies on a function that can be used on any matrix.
 For a Coe object, it uses \link{sample} on every column (or row) with (or without)
@@ -60,20 +39,8 @@ bot.f <- efourier(bot, 12)
 bot.m <- perm(bot.f, 80)
 bot.m
 panel(bot.m)
-m <- matrix(1:12, nrow=3)
-m
-perm(m, margin=2, size=5)
-perm(m, margin=1, size=10)
-
-data(bot)
-bot.f <- efourier(bot, 12)
-bot.m <- perm(bot.f, 80)
-bot.m
-panel(bot.m)
 }
 \seealso{
-\link{breed}
-
 \link{breed}
 }
 \keyword{Coe}
