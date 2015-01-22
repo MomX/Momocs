@@ -347,7 +347,7 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
 #'  @param PCA a \code{\link{PCA}} object
 #'  @param nax a single or a range of PC axes
 #'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
-#'  @param gap for combined-Coe, an adjustment variable for gap between shapes. Default
+#'  @param gap for combined-Coe, an adjustment variable for gap between shapes. (bug)Default
 #'  to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.
 #'  @param ... additional parameter to pass to \code{\link{coo_draw}}
 #'  @return a ggplot object
@@ -360,130 +360,31 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
 #'  gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
 #'  gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
 #'  }
-#'  @rdname PCcontrib
-#'  @export
+#' @rdname PCcontrib
+#' @export
 PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
-#'  @rdname PCcontrib
-#'  @export
+#' @rdname PCcontrib
+#' @export
 PCcontrib.PCA <-
   function(PCA,
            nax=1:4,
            sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
            gap=1,
            ...){
-    # cosmectics
-    theme_empty <- theme(axis.line=element_blank(),
-                         axis.text.x=element_blank(),
-                         axis.text.y=element_blank(),
-                         axis.ticks=element_blank(),
-                         legend.position="none",
-                         panel.background=element_blank(),
-                         panel.border=element_blank(),
-                         panel.grid.major=element_blank(),
-                         panel.grid.minor=element_blank(),
-                         plot.background=element_blank(),
-                         strip.background=element_rect(fill="grey95"),
-                         strip.text=element_text(colour = "grey10"),
-                         strip.text.x=element_text(colour = "grey10"),
-                         strip.text.y=element_text(colour = "grey10"))
-    # we prepare the graphical windows
-    # same paradigm as coo_listpanel
     x <- PCA
-    # we reconstruct shapes
     shp <- list()
-    ############################################################
-    # case where we have a single-method Coe
-    ############################################################
-    if (length(x$method)==1) {
-      for (i in seq(along=nax)){
-        sd.i <- sd(x$x[, nax[i]])
-        pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
-        shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)[[1]]
-        shp <- c(shp, shp.i)}
-      # we template the size of the shapes
-      shp <- lapply(shp, coo_template, 0.95)
-      # we turn the list into a data.frame
-      names(shp) <- 1:length(shp)
-      coos <- ldply(shp, data.frame)
-      colnames(coos) <- c("id", "x", "y")
-      # we prepare the information data.frame
-      df <- expand.grid(sd.r, nax)
-      colnames(df) <- c("PC", "sd")
-      df <- apply(df, 2, rep, each=61)
-      # we merge the two df
-      xx <- cbind(coos, df)
-
-      # we ggplot
-      gg <- ggplot(data=xx, aes_string(x="x", y="y")) +
-        geom_polygon(fill=NA, colour="#000000") +
-        coord_equal() +
-        facet_grid(sd ~ PC) + labs(
-          title="PC contribution to shape",
-          x="(Mean + ) SD",
-          y="PC axes") + theme_light()  + theme_empty
-    } else {
-      ############################################################
-      # case where we have a combined Coe
-      ############################################################
-      for (i in seq(along=nax)){
-        sd.i <- sd(x$x[, nax[i]])
-        pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
-        shp.i <- morphospacePCA(x, xax=i, yax=1, pos.shp = pos.i, plot=FALSE)
-        shp <- c(shp, shp.i)}
-      # damn ugly trick to reorder and unlist
-      reorder <- vector()
-      for (i in seq(along=x$method)){
-        ord <- ((nax - 1) * length(x$method)) + i
-        reorder <- c(reorder, ord)}
-      # shp0 will be the ordered list
-      shp0 <- list()
-      for (i in seq(along=reorder)) {
-        shp0 <- c(shp0, shp[[reorder[i]]])
-      }
-      # we rename it shp
-      shp <- shp0
-      # we template the size of the shapes
-      shp <- lapply(shp, coo_template, 0.95)
-      # we turn the list into a data.frame
-      names(shp) <- 1:length(shp)
-      coos <- ldply(shp, data.frame)
-      colnames(coos) <- c("id", "x", "y")
-      # we manage the translations
-      lm <- length(x$method)
-      coos <- mutate(data=coos,
-                     lm = rep(1:lm, each=61 * length(sd.r),
-                              times=length(nax)))
-      # gap between shapes of different methods
-      d <- gap
-      if (lm==2){ #met1 over met2 - h center
-        dx <- c(0, 0)
-        dy <- c(d, -d)}
-      if (lm==3){ #podium arrangement
-        dx <- c(0, -d, d)
-        dy <- c(d, -d, -d)}
-      if (lm==4){ #form top left, clockwise
-        dx <- c(-d, d, -d, d)
-        dy <- c(d, d, -d, -d)}
-      # here, we do the translation itself
-      coos <- mutate(coos, dx = dx[lm], dy = dy[lm])
-      coos <- mutate_(coos, x=x+dx, y=y+dy)
-      coos <- select_(coos, ~id, ~x, ~y)
-      # we prepare the information data.frame
-      df <- expand.grid(sd.r, 1:lm, nax)
-      colnames(df) <- c("PC", "met", "sd")
-      df <- apply(df, 2, rep, each=61)
-      # we merge the two df
-      xx <- cbind(coos, df)
-      # we ggplot
-      gg <- ggplot(data=xx, aes_string(x="x", y="y", group="met")) +
-        geom_polygon(fill=NA, colour="#000000") +
-        coord_equal() +
-        facet_grid(sd ~ PC) + labs(
-          title="PC contribution to shape",
-          x="(Mean + ) SD",
-          y="PC axes") + theme_light() + theme_empty
-    }
-    return(gg)
+    for (i in seq(along=nax)){
+      sd.i <- sd(x$x[, nax[i]])
+      pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
+      shp.i <- morphospace2PCA(x, xax=i, yax=1, pos = pos.i)
+      shp[[i]] <- mutate(shp.i, nax=i) }
+    
+    shp <- bind_rows(shp)
+    
+    gg <- ggplot(data=shp, aes(x=x_c + x_d, y=y_c + y_d, group=shp1)) + 
+      geom_polygon(colour="grey50", fill="grey95") + coord_equal() +
+      facet_grid(nax ~ shp) + labs(x="Position", y="PC")
+    gg
   }
 
 ##### end PCA plotters

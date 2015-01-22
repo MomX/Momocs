@@ -13,6 +13,7 @@ is.fac <- function(x) length(x$fac) > 0
 #' the dplyr' slice verb. See the examples below.
 #' @rdname subset.Coo
 #' @param x a \code{Coo} or a \link{Coe} object.
+#' @param .data same
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
 #' @param fac the colum name in \code{fac} to use to slice your \code{Coo} or \code{Coe}.
 #' @param ... useless here but maintains consistence with the generic subset.
@@ -88,16 +89,24 @@ subset.PCA <- function(x, subset, ...){
   return(PCA2)
 }
 
+
 #' @rdname subset.Coo
 #' @export
-slice <- function(x, fac){
+slice <- function(.data, ...){
   UseMethod("slice")
 }
 
 #' @rdname subset.Coo
 #' @export
-slice.Coo <- function(x, fac){
-  Coo <- x
+slice.default <- function(.data, ...){
+  dplyr::slice(.data, ...)
+}
+
+
+#' @rdname subset.Coo
+#' @export
+slice.Coo <- function(.data, fac, ...){
+  Coo <- .data
   # hideous but works
   e <- substitute(fac)
   f <- eval(e, Coo$fac, parent.frame())
@@ -121,8 +130,8 @@ slice.Coo <- function(x, fac){
 
 #' @rdname subset.Coo
 #' @export
-slice.Coe <- function(x, fac){
-  Coe <- x
+slice.Coe <- function(.data, fac, ...){
+  Coe <- .data
   # hideous but works
   e <- substitute(fac)
   f <- eval(e, Coe$fac, parent.frame())
@@ -377,7 +386,7 @@ as_df.Coe <- function(x){
 
 #' @export
 as_df.PCA <- function(x){
-  df <- bind_cols(data.frame(id=rownames(x$x)),
+  df <- bind_cols(data.frame(.id=rownames(x$x)),
                   x$fac,
                   as.data.frame(x$x))
   #as_data_frame(df)
