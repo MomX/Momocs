@@ -8,3 +8,4 @@
 data/phoenix.R
 man/phoenix.Rd
 inst/doc
+vignettes/
