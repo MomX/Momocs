@@ -55,7 +55,6 @@
 #' Norbert Telmon, Bill Venables, Daniele Ventura and Asher Wishkerman
 #' for their helpful contributions, ideas, bug reports, and much more.
 #' @import ape
-#' @import colorspace
 #' @importFrom plyr ldply ddply
 #' @import dplyr
 #' @import sp

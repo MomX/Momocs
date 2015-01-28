@@ -59,11 +59,9 @@ colors (hexadecimal format)
 Colors, colors, colors.
 }
 \note{
-\itemize{
-\item \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
-\item \code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/};
-\item \code{col_qual}, \code{col_heat}, \code{col_cold} and \code{col_gallus} use the colorspace package.
-}
+Among available color palettes, \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
+\code{col_div}, \code{col_qual}, \code{col_heat}, \code{col_cold}
+and \code{col_gallus} are based on on ColorBrewer2: \url{http://colorbrewer2.org/}.
 }
 \examples{
 wheel <- function(palette, n=10){

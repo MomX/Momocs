@@ -8,11 +8,9 @@
 #' @param n the number of colors to generate from the color palette
 #' @return colors (hexadecimal format)
 #' @note 
-#' \itemize{
-#' \item \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized}; 
-#' \item \code{col.div} on ColorBrewer2: \url{http://colorbrewer2.org/};
-#' \item \code{col_qual}, \code{col_heat}, \code{col_cold} and \code{col_gallus} use the colorspace package.
-#' }
+#' Among available color palettes, \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized}; 
+#' \code{col_div}, \code{col_qual}, \code{col_heat}, \code{col_cold} 
+#' and \code{col_gallus} are based on on ColorBrewer2: \url{http://colorbrewer2.org/}.
 #' @keywords Graphics
 #' @examples
 #' 
@@ -43,78 +41,142 @@
 #'  # Black only for pubs
 #'  wheel(col_black)
 #' @export
-col_summer <- colorRampPalette(c("#4876FF", "#FFFF00", "#FF3030"))
+col_summer <- colorRampPalette(c(
+  "#4876FF", 
+  "#FFFF00", 
+  "#FF3030"
+))
 #' @rdname color_palettes
 #' @export
-col_summer2 <- colorRampPalette(c("#781C81", "#413B93", "#4065B1", 
-    "#488BC2", "#55A1B1", "#63AD99", "#7FB972", "#B5BD4C", "#D9AD3C", 
-    "#E68E34", "#E6642C", "#D92120"))
+col_summer2 <- colorRampPalette(c(
+  "#781C81", 
+  "#413B93", 
+  "#4065B1", 
+  "#488BC2", 
+  "#55A1B1", 
+  "#63AD99", 
+  "#7FB972", 
+  "#B5BD4C", 
+  "#D9AD3C", 
+  "#E68E34", 
+  "#E6642C", 
+  "#D92120"
+))
 #' @rdname color_palettes
 #' @export
-col_spring <- colorRampPalette(c("#a3baff", "#ffff7f", "#ff9797"))
-#' @rdname color_palettes
-#' @export
-col_autumn <- colorRampPalette(c("#3353b3", "#b1b100", "#b32222"))
+col_spring <- colorRampPalette(c(
+  "#a3baff", 
+  "#ffff7f", 
+  "#ff9797"
+))
 
 #' @rdname color_palettes
 #' @export
-col_black <- colorRampPalette(c("#000000", "#000000"))
+col_autumn <- colorRampPalette(c(
+  "#3353b3", 
+  "#b1b100", 
+  "#b32222"
+))
+
+#' @rdname color_palettes
+#' @export
+col_black <- colorRampPalette(c(
+  "#000000", 
+  "#000000"
+))
 
 ### solarized
 #' @rdname color_palettes
 #' @export
 col_solarized <- colorRampPalette(c(
-# "#002b36", 
-# "#073642", 
-# "#586e75", 
-# "#657b83", 
-# "#839496", 
-# "#93a1a1", 
-# "#eee8d5", 
-# "#fdf6e3", 
-# "#b58900",
-#"#cb4b16", 
-"#dc322f", 
-"#d33682", 
-"#6c71c4", 
-"#268bd2", 
-"#2aa198", 
-"#859900"))
-  
+  "#dc322f", 
+  "#d33682", 
+  "#6c71c4", 
+  "#268bd2", 
+  "#2aa198", 
+  "#859900"
+))
+
 ### colorspace
 #' @rdname color_palettes
 #' @export
-col_gallus <- function(n) {
-    return(diverge_hcl(n))
-}
-#' @rdname color_palettes
-#' @export
-col_qual <- function(n) {
-  rainbow_hcl(n, c = 90)}
+col_gallus <- colorRampPalette(c(
+  "#d7191c",
+  "#fdae61",
+  "#ffffbf",
+  "#abd9e9",
+  "#2c7bb6"
+))
 
 #' @rdname color_palettes
 #' @export
-col_heat <- function(n) {
-  return(rev(heat_hcl(n, h=c(10, 90), c.=c(160, 40))))
-}
+col_qual <- colorRampPalette(c(  
+  "#a6cee3",
+  "#1f78b4",
+  "#b2df8a",
+  "#33a02c",
+  "#fb9a99",
+  "#e31a1c",
+  "#fdbf6f",
+  "#ff7f00",
+  "#cab2d6",
+  "#6a3d9a"))
+
 #' @rdname color_palettes
 #' @export
-col_hot <- colorRampPalette(c("#FFFFFF", "#8E063B"))
+col_heat <- colorRampPalette(c(
+  "#ffffb2",
+  "#fecc5c",
+  "#fd8d3c",
+  "#f03b20",
+  "#bd0026"
+))
+
 #' @rdname color_palettes
 #' @export
-col_cold <- colorRampPalette(c("#FFFFFF", "#023FA5"))
+col_hot <- colorRampPalette(c(
+  "#fee5d9",
+  "#fcae91",
+  "#fb6a4a",
+  "#de2d26",
+  "#a50f15"))
+
 #' @rdname color_palettes
 #' @export
-col_sari <- colorRampPalette(c("#551A8B", "#47A23E", "#FF7F00"))
+col_cold <- colorRampPalette(c(
+  "#f2f0f7",
+  "#cbc9e2",
+  "#9e9ac8",
+  "#756bb1",
+  "#54278f"
+))
+
 #' @rdname color_palettes
 #' @export
-col_india <- colorRampPalette(c("#FF9933", "#FFFFFF", "#138808"))
+col_sari <- colorRampPalette(c(
+  "#551A8B", 
+  "#47A23E", 
+  "#FF7F00"
+))
 #' @rdname color_palettes
 #' @export
-col_bw <- colorRampPalette(c("#000000", "#FFFFFF"))
+col_india <- colorRampPalette(c(
+  "#FF9933",
+  "#FFFFFF",
+  "#138808"
+))
 #' @rdname color_palettes
 #' @export
-col_grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
+col_bw <- colorRampPalette(c(
+  "#000000", 
+  "#FFFFFF"
+))
+#' @rdname color_palettes
+#' @export
+col_grey <- colorRampPalette(c(
+  "#B3B3B3", 
+  "#4D4D4D"
+))
 
 #' Transparency helpers and palettes
 #' 
@@ -142,19 +204,19 @@ col_grey <- colorRampPalette(c("#B3B3B3", "#4D4D4D"))
 #' barplot(x/2, col=summer10.transp2, add=TRUE)
 #' @export
 col_transp <- function(n, col = "#000000", ceiling = 1) {
-    alpha.int <- as.integer(seq(0, 255 * ceiling, length = n))
-    alpha.hex <- as.character(as.hexmode(alpha.int))
-    alpha.hex[nchar(alpha.hex) < 2] <- paste0("f", alpha.hex[nchar(alpha.hex) < 2])
-    return(paste0(col, alpha.hex))
+  alpha.int <- as.integer(seq(0, 255 * ceiling, length = n))
+  alpha.hex <- as.character(as.hexmode(alpha.int))
+  alpha.hex[nchar(alpha.hex) < 2] <- paste0("f", alpha.hex[nchar(alpha.hex) < 2])
+  return(paste0(col, alpha.hex))
 }
 #' @rdname colors_transp
 #' @export
 .transp <- function(cols, transp = 0) {
-    alpha.int <- as.integer((1 - transp) * 255)
-    alpha.hex <- as.character(as.hexmode(alpha.int))
-    alpha.hex[nchar(alpha.hex) < 2] <- paste0("0", alpha.hex[nchar(alpha.hex) < 
-        2])
-    return(paste0(cols, alpha.hex))
+  alpha.int <- as.integer((1 - transp) * 255)
+  alpha.hex <- as.character(as.hexmode(alpha.int))
+  alpha.hex[nchar(alpha.hex) < 2] <- paste0("0", alpha.hex[nchar(alpha.hex) < 
+                                                             2])
+  return(paste0(cols, alpha.hex))
 }
 #' @rdname colors_transp
 #' @export
@@ -162,7 +224,7 @@ col_alpha <- .transp
 
 #' @export
 .cex <- function(x) {
-    3/(log(x + 1) + 1)
+  3/(log(x + 1) + 1)
 }
 
 #' @export
@@ -189,5 +251,5 @@ col_alpha <- .transp
 }
 
 
-                  
+
 ##### end colors graphics 
