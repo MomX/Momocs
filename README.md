@@ -28,46 +28,61 @@ __You are welcome to:__
 
 Features
 --------
-* __Data acquisition__
- * Outline extraction
- * Landmark definition on outlines* (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
- * Open curves digitization with bezier curves* (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
- * Import from `.nts`*, `.tps`*, `PAST`, `.txt`, etc.
+__Data acquisition + Babel__
+* Outline extraction
+* Landmark definition on outlines* (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Open curves digitization with bezier curves* (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Import from `.nts`, `.tps`, `PAST`, `.txt`, etc.
+* Export to `.txt`, etc.
 
-* __Outline analysis__
- * Elliptical Fourier analysis (`efourier`)
- * Radius Variation Fourier analysis (`rfourier`)
- * Tangent Angle Fourier analysis (`tfourier`)
- * Calibration for all methods (`calibrate_reconstructions`, `calibrate_deviations`, `calibrate_harmonicpower`)
-* __Open-outlines__
- * Natural (raw) polynomials (`npoly`)
- * Orthogonal (Legendre) polynomials (`opoly`)
- * Discrete Cosinus Transform (`dfourier`)
- * Same calibration methods as above
-* __Configuration of landmarks__
- * Full Generalized Procrustes Adjustment (`fgProcrustes`)
- * Resistant Fit Procrustes Adjustments*
- * Sliding semi-landmarks*
-* __Traditional morphometrics and global shape descriptors__
- * Some built-in facilities for multivariate analysis
- * A long list of shape scalars (eg. eccentricity, rectilinearity, etc.)
-* __Multivariate analysis__
- * Mean shape (groupwise) calculations
- * Principal component analysis
- * Multivariate analysis of variance + pairwise testing
- * Linear discriminant analysis
- * Hierarchical clustering
- * Regression trees*
- * K-means*
- * Multidimensional scaling*
- * Allometry / modularity testing*
+__Outline analysis__
+* Elliptical Fourier analysis (`efourier`)
+* Radius Variation Fourier analysis (`rfourier`)
+* Tangent Angle Fourier analysis (`tfourier`)
+* Calibration for all methods (`calibrate_reconstructions`, `calibrate_deviations`, `calibrate_harmonicpower`)
 
-* __Graphical methods__
- * Elegant ggplot2 plots (ongoing)
- * Morphological spaces for all morphometrics methods (and for combined views) : eg: PCA, LDA*, etc.
- * Thin plate splines and variation around deformation grids
- * Family pictures and quick inspection of whole datasets (`panel`, `stack`, `plot`, `radar`*)
- * Many other morphometrics plots such
+__Open-outlines__
+* Natural (raw) polynomials (`npoly`)
+* Orthogonal (Legendre) polynomials (`opoly`)
+* Discrete Cosinus Transform (`dfourier`)
+* Same calibration methods as above
+
+__Configuration of landmarks__
+* Full Generalized Procrustes Adjustment (`fgProcrustes`)
+* Resistant Fit Procrustes Adjustments*
+* Sliding semi-landmarks*
+
+__Traditional morphometrics and global shape descriptors__
+* Some built-in facilities for multivariate analysis*
+* A long list of shape scalars (eg. eccentricity, rectilinearity, etc.)
+
+__Data handling__
+* `filter`, `select`, `slice`, `mutate` ala [dplyr](https://github.com/hadley/dplyr/)
+* `split` according to a factor (eg. a 2D view)
+* `combine` several 2D views
+ 
+__Multivariate analysis__
+* Mean shape (groupwise) calculations (`mshapes`)
+* Principal component analysis (`PCA`)
+* Multivariate analysis of variance (`MANOVA` + pairwise testing `MANOVA_PW`)
+* Linear discriminant analysis (`LDA`)
+* Hierarchical clustering (`CLUST`)
+* Regression trees*
+* K-means*
+* Multidimensional scaling*
+* Allometry / modularity testing*
+
+__Graphical methods__
+* Elegant ggplot2 plots
+* Morphological spaces, when possible, for multivate analyses (and for combined views)
+* Thin plate splines and variation around deformation grids
+* Family pictures and quick inspection of whole datasets (`panel`, `stack`, `plot`, `radar`, etc.)
+
+__Various__
+* Toy and published datasets
+* Vignettes
+* [Shiny](http://shiny.rstudio.com/) demonstrators/helpers
+
 
 Architecture
 -------------
