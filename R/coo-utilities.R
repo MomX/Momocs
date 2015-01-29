@@ -66,6 +66,7 @@ coo_center.Coo <- function(coo) {
 }
 
 #' brittons...
+#' @export
 coo_centre <- coo_center
 
 #' Scales coordinates
