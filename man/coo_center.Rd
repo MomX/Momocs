@@ -2,6 +2,7 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_center}
 \alias{coo_center}
+\alias{coo_centre}
 \title{Centers coordinates}
 \usage{
 coo_center(coo)

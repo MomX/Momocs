@@ -46,6 +46,7 @@ coo_check <- function(coo) {
 #' @examples
 #' data(bot)
 #' b <- bot[1]
+#' @aliases coo_centre
 #' @export
 coo_center <- function(coo) {
   UseMethod("coo_center")
@@ -63,6 +64,9 @@ coo_center.Coo <- function(coo) {
   Coo$coo <- lapply(Coo$coo, coo_center)
   return(Coo)
 }
+
+#' brittons...
+coo_centre <- coo_center
 
 #' Scales coordinates
 #'
