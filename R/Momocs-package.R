@@ -64,8 +64,6 @@
 #' @importFrom graphics boxplot
 #' @importFrom jpeg readJPEG
 #' @importFrom MASS lda ginv kde2d cov.trob
-#' @importFrom methods showDefault
-#' @importFrom plotrix thigmophobe.labels
 #' @importFrom utils stack
 #' @docType package
 #' @name Momocs

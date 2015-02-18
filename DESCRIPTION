@@ -45,8 +45,6 @@ Imports:
     ggplot2,
     jpeg,
     MASS,
-    methods,
-    plotrix,
     plyr,
     reshape2,
     sp,

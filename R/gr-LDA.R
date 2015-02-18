@@ -206,7 +206,7 @@ plot.LDA <- function(x, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) thigmophobe.labels(xy[, 1], xy[, 2],
+  if (labels) text(xy[, 1], xy[, 2],
                                  labels=ifelse(abbreviate.labels, abbreviate(rownames(xy)), rownames(xy)),
                                  col=col.labels, cex=cex.labels)
   #if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])

@@ -148,7 +148,7 @@
          col = .transp("#FFFFFF", 0.5), border = NA)
   }
   if (nlevels(fac)>2) {
-    thigmophobe.labels(cent[, 1], cent[, 2] + p,
+    text(cent[, 1], cent[, 2] + p,
                        labels = labels, col = col,
                        cex = cex, font = 2)
   } else {
