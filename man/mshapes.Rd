@@ -2,40 +2,59 @@
 % Please edit documentation in R/mult-mshapes.R
 \name{mshapes}
 \alias{mshapes}
+\alias{mshapes.Ldk}
 \alias{mshapes.LdkCoe}
 \alias{mshapes.OpnCoe}
 \alias{mshapes.OutCoe}
-\alias{mshapes.default}
-\title{Mean shape calculation from Coe objects}
+\alias{mshapes.array}
+\alias{mshapes.list}
+\title{Mean shape calculation for Coo, Coe, etc.}
 \usage{
-mshapes(Coe, fac, FUN, nb.pts)
+mshapes(x, ...)
 
-\method{mshapes}{default}(Coe, fac, FUN, nb.pts)
+\method{mshapes}{list}(x, FUN = mean, ...)
 
-\method{mshapes}{OutCoe}(Coe, fac, FUN = mean, nb.pts = 120)
+\method{mshapes}{array}(x, FUN = mean, ...)
 
-\method{mshapes}{OpnCoe}(Coe, fac, FUN = mean, nb.pts = 120)
+\method{mshapes}{Ldk}(x, FUN = mean, ...)
 
-\method{mshapes}{LdkCoe}(Coe, fac, FUN = NULL, nb.pts = 120)
+\method{mshapes}{OutCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
+
+\method{mshapes}{OpnCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
+
+\method{mshapes}{LdkCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
 }
 \arguments{
-\item{Coe}{a \link{Coe} object}
+\item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe object}
 
-\item{fac}{factor from the $fac slot. See examples below.}
+\item{...}{useless here.}
 
 \item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
 
-\item{nb.pts}{numeric the number of points for calculated shapes}
+\item{fac}{factor from the $fac slot (only for Coe objects). See examples below.}
+
+\item{nb.pts}{numeric the number of points for calculated shapes (only Coe objects)}
 }
 \value{
-a list with two components: \code{$Coe} object of the same class, and
+the averaged shape; on Coe objects, a list with two components: \code{$Coe} object of the same class, and
 \code{$shp} a list of matrices of (x, y) coordinates.
 }
 \description{
-Calculates mean shapes on matrices of coefficients by groups (if passed with
-a 'fac') or globally (if not), and on \link{Coe} objects.
+Quite a versatile function that calculates mean (or median, or whatever function)
+on list or an array of shapes, an Ldk object. It can also be used on OutCoe and OpnCoe objects.
+In that case, the reverse transformation (from coefficients to shapes) is calculated, (within
+groups defined with the fac argument if provided) and the Coe object is returned.
 }
 \examples{
+#### on shapes
+data(wings)
+mshapes(wings)
+mshapes(wings$coo)
+data(bot)
+mshapes(coo_sample(bot, 24)$coo)
+stack(wings)
+coo_draw(mshapes(wings))
+
 data(bot)
 bot.f <- efourier(bot, 12)
 mshapes(bot.f) # the mean (global) shape
@@ -59,9 +78,6 @@ ms <- mshapes(wp, 1)
 ms$Coe
 panel(Ldk(ms$shp), names=TRUE) #etc.
 panel(ms$Coe) # equivalent (except the $fac slot)
-}
-\seealso{
-\link{mshape} for operations on raw coordinates.
 }
 \keyword{Multivariate}
 

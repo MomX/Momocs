@@ -221,7 +221,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   # Specific to Ldk not very clean below #todo
   A <- l2a(Coo$coo)
-  mA <- mshape(A)
+  mA <- mshapes(A)
   points(mA, pch = 20, cex = ifelse(ldk.cex > 0.5, ldk.cex *
                                       1.5, 1), col = "grey20")
   if (ldk_confell) {
@@ -235,10 +235,10 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   if (ldk_links) {
     if (is.matrix(Coo$links))
-      ldk_links(mshape(A), Coo$links)
+      ldk_links(mshapes(A), Coo$links)
   }
   if (ldk_labels) {
-    ldk_labels(mshape(A))
+    ldk_labels(mshapes(A))
   }
 }
 

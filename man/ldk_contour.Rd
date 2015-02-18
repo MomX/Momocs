@@ -20,7 +20,7 @@ Using \link{kde2d} in the MASS package.
 }
 \examples{
 data(wings)
-coo_plot(mshape(wings))
+coo_plot(mshapes(wings))
 ldk_contour(wings$coo)
 }
 \seealso{

@@ -18,7 +18,7 @@ A wrapper that uses \link{coo_chull}
 }
 \examples{
 data(wings)
-coo_plot(mshape(wings))
+coo_plot(mshapes(wings))
 ldk_chull(wings$coo)
 }
 \seealso{

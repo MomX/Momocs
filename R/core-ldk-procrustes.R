@@ -88,7 +88,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
   for (i in 1:n) {
     temp1[, , i] <- fProcrustes(temp1[, , i], M)$coo1
   }
-  M <- mshape(temp1)
+  M <- mshapes(temp1)
   Qm1 <- dist(t(matrix(temp1, k * p, n)))
   Qd <- Qi <- Q <- sum(Qm1)
   # we initialize the counter
@@ -109,14 +109,14 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
       beta <- sum(Delt)
       temp1[, , i] <- X <- sc[i] * Z1 %*% phi
     }
-    M <- mshape(temp1)
+    M <- mshapes(temp1)
     for (i in 1:n) {
       sf[i] <- sqrt(
         sum(diag(temp1[, , i] %*% t(M))) / (sum(diag(M %*% t(M))) *
             sum(diag(temp1[, , i] %*% t(temp1[, , i])))))
       temp2[, , i] <- sf[i] * temp1[, , i]
     }
-    M <- mshape(temp2)
+    M <- mshapes(temp2)
     sc <- sf * sc
     Qm2 <- dist(t(matrix(temp2, k * p, n)))
     Qd[iter] <- Q <- sum(Qm1) - sum(Qm2)
@@ -132,7 +132,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
        iterationnumber = iter, Q = Q, Qi = Qi,
        Qd = Qd,
        intereuclidean.dist = Qm2,
-       mshape = coo_centsize(mshape(temp2)),
+       mshape = coo_centsize(mshapes(temp2)),
        cent.size = Siz)
 }
 

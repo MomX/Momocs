@@ -424,7 +424,7 @@ ldk_links <- function(ldk, links, ...) {
 #' @keywords Graphics
 #' @examples
 #' data(wings)
-#' coo_plot(mshape(wings))
+#' coo_plot(mshapes(wings))
 #' ldk_confell(wings$coo)
 #' @export
 ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1, 
@@ -459,7 +459,7 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' @keywords Graphics
 #' @examples
 #' data(wings)
-#' coo_plot(mshape(wings))
+#' coo_plot(mshapes(wings))
 #' ldk_contour(wings$coo)
 #'  @export
 ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
@@ -485,7 +485,7 @@ ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
 #' @keywords Graphics
 #' @examples
 #' data(wings)
-#' coo_plot(mshape(wings))
+#' coo_plot(mshapes(wings))
 #' ldk_chull(wings$coo)
 #' @export
 ldk_chull <- function(ldk, col = "grey40", lty = 1) {

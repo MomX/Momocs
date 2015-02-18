@@ -1,20 +1,31 @@
 ##### mean shapes on coefficients todo: better handling of $slots
 ##### (eg r2 for Opn, etc.)
-#' Mean shape calculation from Coe objects
+#' Mean shape calculation for Coo, Coe, etc.
 #' 
-#' Calculates mean shapes on matrices of coefficients by groups (if passed with
-#' a 'fac') or globally (if not), and on \link{Coe} objects.
+#' Quite a versatile function that calculates mean (or median, or whatever function) 
+#' on list or an array of shapes, an Ldk object. It can also be used on OutCoe and OpnCoe objects.
+#' In that case, the reverse transformation (from coefficients to shapes) is calculated, (within
+#' groups defined with the fac argument if provided) and the Coe object is returned.
 #' 
-#' @param Coe a \link{Coe} object
-#' @param fac factor from the $fac slot. See examples below.
+#' @param x a list, array, Ldk, LdkCoe, OutCoe or OpnCoe object
+#' @param fac factor from the $fac slot (only for Coe objects). See examples below.
 #' @param FUN a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)
-#' @param nb.pts numeric the number of points for calculated shapes
-#' @return a list with two components: \code{$Coe} object of the same class, and
+#' @param nb.pts numeric the number of points for calculated shapes (only Coe objects)
+#' @param ... useless here.
+#' @return the averaged shape; on Coe objects, a list with two components: \code{$Coe} object of the same class, and
 #' \code{$shp} a list of matrices of (x, y) coordinates.
 #' @rdname mshapes
 #' @keywords Multivariate
-#' @seealso \link{mshape} for operations on raw coordinates.
 #' @examples
+#' #### on shapes
+#' data(wings)
+#' mshapes(wings)
+#' mshapes(wings$coo)
+#' data(bot)
+#' mshapes(coo_sample(bot, 24)$coo)
+#' stack(wings)
+#' coo_draw(mshapes(wings))
+#' 
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' mshapes(bot.f) # the mean (global) shape
@@ -40,20 +51,39 @@
 #' panel(ms$Coe) # equivalent (except the $fac slot)
 #' 
 #' @export
-mshapes <- function(Coe, fac, FUN, nb.pts) {
-    UseMethod("mshapes")
+mshapes <- function(x, ...) {
+  UseMethod("mshapes")
+}
+
+
+#' @rdname mshapes
+#' @export
+mshapes.list <- function(x, FUN=mean, ...) {
+  A <- ldk_check(x)
+  return(apply(A, 1:2, FUN, na.rm = TRUE))
 }
 
 #' @rdname mshapes
 #' @export
-mshapes.default <- function(Coe, fac, FUN, nb.pts) {
-  cat("* this method must be used on a Coe object.")
+mshapes.array <- function(x, FUN=mean, ...) {
+  if (length(dim(x)) == 3) {
+    A <- ldk_check(x)
+    return(apply(A, 1:2, FUN, na.rm = TRUE))
+  }
 }
 
 #' @rdname mshapes
 #' @export
-mshapes.OutCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
-    OutCoe <- Coe
+mshapes.Ldk <- function(x, FUN=mean, ...) {
+  Ldk <- x
+  A <- ldk_check(Ldk$coo)
+  return(apply(A, 1:2, mean, na.rm = TRUE))
+}
+
+#' @rdname mshapes
+#' @export
+mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
+    OutCoe <- x
     nb.h <- ncol(OutCoe$coe)/4  #todo
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")
@@ -86,8 +116,8 @@ mshapes.OutCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
 
 #' @rdname mshapes
 #' @export
-mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
-    OpnCoe <- Coe
+mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
+    OpnCoe <- x
         	p <- pmatch(tolower(OpnCoe$method), c("opoly", "npoly", "dfourier"))
     	if (is.na(p)) {
       		warning(" * Unvalid method. efourier is used.\n")
@@ -128,18 +158,19 @@ mshapes.OpnCoe <- function(Coe, fac, FUN=mean, nb.pts = 120) {
 
 #' @rdname mshapes
 #' @export
-mshapes.LdkCoe <- function(Coe, fac, FUN=NULL, nb.pts = 120) {
-    LdkCoe <- Coe
+mshapes.LdkCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
+    LdkCoe <- x
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")
-        return(mshape(LdkCoe))
+        LdkCoe$coo <- mshapes(LdkCoe$coo)
+        return(LdkCoe)
     }
     
     f <- LdkCoe$fac[, fac]
     fl <- levels(f)
     shp <- list()
     for (i in seq(along = fl)) {
-        shp[[i]] <- mshape(LdkCoe$coo[f == fl[i]])
+        shp[[i]] <- mshapes(LdkCoe$coo[f == fl[i]], FUN=FUN)
     }
     names(shp) <- fl
     Coe2 <- Ldk(shp)  # todo, probably wrong
