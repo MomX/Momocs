@@ -157,6 +157,9 @@ str.Coe <- function(object, ...) {
     if (is.numeric(i)) {
         return(x$coo[[i]])
     }
+    if (is.character(i)) {
+      return(x$coo[[i]])
+    }
 }
 
 
@@ -198,6 +201,25 @@ names.Coe <- function(x) {
     rownames(x$coe) <- value
     return(x)
 }
+
+#' @export
+"[.Coe" <- function(x, i, ...) {
+  if (missing(i)) {
+    return(x$coe[])
+  }
+  if (is.integer(i)) {
+    return(x$coe[i, ])
+  }
+  if (is.numeric(i)) {
+    return(x$coe[i, ])
+  }
+  if (is.character(i)) {
+    return(x$coe[i, ])
+  }
+}
+
+
+
 
 # utils ######
 
