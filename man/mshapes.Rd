@@ -22,7 +22,7 @@ mshapes(x, ...)
 
 \method{mshapes}{OpnCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
 
-\method{mshapes}{LdkCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
+\method{mshapes}{LdkCoe}(x, fac, FUN = mean, ...)
 }
 \arguments{
 \item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe object}
@@ -44,6 +44,11 @@ Quite a versatile function that calculates mean (or median, or whatever function
 on list or an array of shapes, an Ldk object. It can also be used on OutCoe and OpnCoe objects.
 In that case, the reverse transformation (from coefficients to shapes) is calculated, (within
 groups defined with the fac argument if provided) and the Coe object is returned.
+}
+\details{
+Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
+in that case, the other columns of the fac are also returned, usingthe first row within every level, but they may
+not be representive of the group.
 }
 \examples{
 #### on shapes

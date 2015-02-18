@@ -14,6 +14,9 @@
 #' @param ... useless here.
 #' @return the averaged shape; on Coe objects, a list with two components: \code{$Coe} object of the same class, and
 #' \code{$shp} a list of matrices of (x, y) coordinates.
+#' @details Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
+#' in that case, the other columns of the fac are also returned, usingthe first row within every level, but they may
+#' not be representive of the group.
 #' @rdname mshapes
 #' @keywords Multivariate
 #' @examples
@@ -95,10 +98,12 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     f <- OutCoe$fac[, fac]
     fl <- levels(f)
     shp <- list()
+    rows <- numeric()
     coe <- matrix(NA, nrow = nlevels(f), ncol = ncol(OutCoe$coe), 
         dimnames = list(fl, colnames(OutCoe$coe)))
     for (i in seq(along = fl)) {
         coe.i <- OutCoe$coe[f == fl[i], ]
+        rows[i] <- which(f == fl[i])[1]
         if (is.matrix(coe.i)) {
             coe.i <- apply(coe.i, 2, FUN)
         }
@@ -109,8 +114,7 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     names(shp) <- fl
     Coe2 <- OutCoe
     Coe2$coe <- coe
-    Coe2$fac <- data.frame(fac = fl)
-    names(Coe2$fac) <- as.character(fac)
+    Coe2$fac <- slice(Coe2$fac, rows)
     return(list(Coe = Coe2, shp = shp))
 }
 
@@ -136,11 +140,13 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     f <- OpnCoe$fac[, fac]
     fl <- levels(f)
     shp <- list()
+    rows <- numeric()
     coe <- matrix(NA, nrow = nlevels(f), ncol = ncol(OpnCoe$coe), 
         dimnames = list(fl, colnames(OpnCoe$coe)))
     mod.mshape <- OpnCoe$mod
     for (i in seq(along = fl)) {
         coe.i <- OpnCoe$coe[f == fl[i], ]
+        rows[i] <- which(f == fl[i])[1]
         if (is.matrix(coe.i)) {
             coe.i <- apply(coe.i, 2, FUN)
         }
@@ -151,14 +157,13 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     names(shp) <- fl
     Coe2 <- OpnCoe
     Coe2$coe <- coe
-    Coe2$fac <- data.frame(fac = fl)
-    names(Coe2$fac) <- as.character(fac)
+    Coe2$fac <- slice(Coe2$fac, rows)
     return(list(Coe = Coe2, shp = shp))
 }
 
 #' @rdname mshapes
 #' @export
-mshapes.LdkCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
+mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
     LdkCoe <- x
     if (missing(fac)) {
         cat("* no 'fac' provided. Returns meanshape.\n")
@@ -169,13 +174,13 @@ mshapes.LdkCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     f <- LdkCoe$fac[, fac]
     fl <- levels(f)
     shp <- list()
+    rows <- numeric()
     for (i in seq(along = fl)) {
         shp[[i]] <- mshapes(LdkCoe$coo[f == fl[i]], FUN=FUN)
+        rows[i] <- which(f == fl[i])[1]
     }
     names(shp) <- fl
-    Coe2 <- Ldk(shp)  # todo, probably wrong
-    Coe2$fac <- data.frame(fac = fl)
-    names(Coe2$fac) <- as.character(fac)
+    Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
     return(list(Coe = Coe2, shp = shp))
 }
 
