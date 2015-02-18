@@ -66,7 +66,7 @@ coo_center.Coo <- function(coo) {
 }
 
 #' brittons...
-#' @aliases coo_center
+#' @rdname coo_center
 #' @export
 coo_centre <- coo_center
 

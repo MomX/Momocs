@@ -6,6 +6,8 @@
 \title{Centers coordinates}
 \usage{
 coo_center(coo)
+
+coo_centre(coo)
 }
 \arguments{
 \item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
@@ -15,6 +17,8 @@ a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Returns a shape centered on the origin.
+
+brittons...
 }
 \examples{
 data(bot)
