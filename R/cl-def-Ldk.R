@@ -41,13 +41,16 @@ Ldk.list <- function(x, fac = data.frame(), links = NULL) {
   if (!is.null(Ldk$fac)) 
     Ldk$fac <- as.data.frame(Ldk$fac, stringsAsFactors = FALSE)
   class(Ldk) <- c("Ldk", "Coo")
+  if (is.null(names(Ldk))) names(Ldk) <- paste0("shp", 1:length(Ldk))
   return(Ldk)
 }
 
 #' @export
 Ldk.array <- function(x, fac = data.frame(), links = NULL) {
   x <- a2l(x)
-  Ldk(x, fac = fac, links = links)
+  Ldk <- Ldk(x, fac = fac, links = links)
+  if (is.null(names(Ldk))) names(Ldk) <- paste0("shp", 1:length(Ldk))
+  return(Ldk)
 }
 
 #' @export
@@ -55,7 +58,9 @@ Ldk.Coo <- function(x, fac = data.frame(), links = NULL) {
   nb.ldk <- sapply(x$coo, length)
   if (length(unique(nb.ldk)) > 1) 
     stop(" * shapes do not have the same number of landmarks.")
-  Ldk(x = x$coo, fac = x$fac, links = x$links)
+  Ldk <- Ldk(x = x$coo, fac = x$fac, links = x$links)
+  if (is.null(names(Ldk))) names(Ldk) <- paste0("shp", 1:length(Ldk))
+  return(Ldk)
 }
 
 # The print method for Ldk objects

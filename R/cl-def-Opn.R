@@ -53,18 +53,23 @@ Opn.list <- function(x, fac = data.frame(), ldk = list()) {
   if (!is.null(Opn$fac))
     Opn$fac <- as.data.frame(Opn$fac, stringsAsFactors = FALSE)
   class(Opn) <- c("Opn", "Coo")
+  if (is.null(names(Opn))) names(Opn) <- paste0("shp", 1:length(Opn))
   return(Opn)
 }
 
 #' @export
 Opn.array <- function(x, fac = data.frame(), ldk = list()) {
   x <- a2l(x)
-  Opn(x, fac = fac, ldk = ldk)
+  Opn <- Opn(x, fac = fac, ldk = ldk)
+  if (is.null(names(Opn))) names(Opn) <- paste0("shp", 1:length(Opn))
+  return(Opn)
 }
 
 #' @export
 Opn.Coo <- function(x, fac = data.frame(), ldk = list()) {
-  Opn(x = x$coo, fac = x$fac, ldk = x$ldk)
+  Opn <- Opn(x = x$coo, fac = x$fac, ldk = x$ldk)
+  if (is.null(names(Opn))) names(Opn) <- paste0("shp", 1:length(Opn))
+  return(Opn)
 }
 
 # The print method for Out objects

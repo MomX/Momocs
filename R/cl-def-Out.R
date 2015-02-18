@@ -33,18 +33,23 @@ Out.list <- function(x, fac = data.frame(), ldk = list()) {
   Out <- structure(list(coo = x, fac = fac, ldk = ldk), class=c("Out", "Coo"))
   if (!is.null(Out$fac))
     Out$fac <- as.data.frame(Out$fac, stringsAsFactors = FALSE)
+  if (is.null(names(Out))) names(Out) <- paste0("shp", 1:length(Out))
   return(Out)
 }
 
 #' @export
 Out.array <- function(x, fac = data.frame(), ldk = list()) {
   x <- a2l(x)
-  Out(x, fac = fac, ldk = ldk)
+  Out <- Out(x, fac = fac, ldk = ldk)
+  if (is.null(names(Out))) names(Out) <- paste0("shp", 1:length(Out))
+  return(Out)
 }
 
 #' @export
 Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
-  Out(x = x$coo, fac = x$fac, ldk = x$ldk)
+  Out <- Out(x = x$coo, fac = x$fac, ldk = x$ldk)
+  if (is.null(names(Out))) names(Out) <- paste0("shp", 1:length(Out))
+  return(Out)
 }
 
 #' Convert an OutCoe object into an Out object
