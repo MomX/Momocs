@@ -306,7 +306,7 @@ coo_slide.Coo <- function(x, id1, ldk, ...) {
     if (!missing(id1))        warning(" * id1 provided will be ignored.")
     for (i in seq(along = Coo$coo)) {
       Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], Coo$ldk[[i]][ldk])
-      Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][ldk] - 1))%%nrow(Coo$coo[[i]])
+      Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][ldk] - 1)) %% nrow(Coo$coo[[i]])
     }
     return(Coo)
   } else {
@@ -317,7 +317,7 @@ coo_slide.Coo <- function(x, id1, ldk, ...) {
   # id1=1 just rep
   #
   # allows a vector of id1s to be passed
-   slide_ldk <- (length(Coo$ldk) > 0)
+  slide_ldk <- (length(Coo$ldk) > 0)
   for (i in seq(along = Coo$coo)) {
     Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id1[i])
      if (slide_ldk)
@@ -1036,8 +1036,7 @@ coo_bookstein.default <- function(coo, ldk1 = 1, ldk2 = nrow(coo)) {
   ldk1 <- coo[ldk1, ]
   ldk2 <- coo[ldk2, ]
   coo2[, 1] <- (((ldk2[1] - ldk1[1]) * (coo[, 1] - ldk1[1]) +
-                   (ldk2[2] - ldk1[2]) * (coo[, 2] - ldk1[2]))/(D^2)) -
-    0.5
+                   (ldk2[2] - ldk1[2]) * (coo[, 2] - ldk1[2]))/(D^2)) - 0.5
   coo2[, 2] <- ((ldk2[1] - ldk1[1]) * (coo[, 2] - ldk1[2]) -
                   (ldk2[2] - ldk1[2]) * (coo[, 1] - ldk1[1]))/(D^2)
   return(coo2)
@@ -1047,9 +1046,9 @@ coo_bookstein.Out <- function(coo, ldk1=1, ldk2=2) {
   # id1 ?
   Out <- coo
   for (i in seq(along = Out$coo)) {
-    coo_i <- coo_bookstein(Out$coo[[i]], Out$ldk[[i]][ldk1], Out$ldk[[i]][ldk2])
-    coo_i <- coo_slide(coo_i, Out$ldk[[i]][ldk1])
+    Out$coo[[i]] <- coo_bookstein(Out$coo[[i]], Out$ldk[[i]][ldk1], Out$ldk[[i]][ldk2])
   }
+  #Out$coo <- coo_i
   return(Out)
 }
 
@@ -1062,8 +1061,7 @@ coo_bookstein.Opn <- function(coo, ldk1=1, ldk2=2) {
     Opn$coo <- lapply(Opn$coo, coo_bookstein)
   } else {
     for (i in seq(along = Opn$coo)) {
-      coo_i <- coo_bookstein(Opn$coo[[i]], Opn$ldk[[i]][ldk1], Opn$ldk[[i]][ldk2])
-      Opn$coo[[i]] <- coo_slide(coo_i, Opn$ldk[[i]][ldk1])
+      Opn$coo[[i]] <- coo_bookstein(Opn$coo[[i]], Opn$ldk[[i]][ldk1], Opn$ldk[[i]][ldk2])
     }
   }
   return(Opn)
@@ -1214,7 +1212,6 @@ coo_centdist <- function(coo) {
 }
 
 # b. length(s)
-# -----------------------------------------------------------------
 
 #' Calculates the chordal distance along a shape.
 #'
