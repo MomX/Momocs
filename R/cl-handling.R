@@ -1,42 +1,45 @@
 ##### Combining or subsetting Momocs' classes
 
-# tests for the presence of a $fac slot
-is.fac <- function(x) length(x$fac) > 0
-
+# subset -------------------------------
 #' Create subsets of Coo objects
 #'
-#' Pretty useful in morphometrics. Imagine you have a \link{Coo} or a \link{Coe} object,
-#' that combines several different \emph{groups}, whatever \emph{groups} are : species, views, etc.
-#' You may be interested in doing separated analyses (even if you could combine them later), then this
-#' function will ease the process. \code{subset} needs to be passed with a logical subset;
-#' \code{slice} just needs the factor to use to make subsets. Not to be confunded with
-#' the dplyr' slice verb. See the examples below.
-#' @rdname subset.Coo
+#' 
+#' Subset is a wrapper around dplyr's verbs and should not be used directly. 
+#' Use \link{slice}, \link{filter}, \link{chop} and \link{select} instead.
+#' 
+#' \itemize{
+#' \item \strong{select} is used to select columns from the $fac
+#' \item \strong{slice} is used to select shapes based on their ids
+#' \item \strong{chop} is a rougher slicing that accept a column of the $fac and return a list of Coo/Coe objects
+#' \item \strong{filter} is used to create subset based on logical values taken from the $fac
+#' \item \strong{mutate}
+#' }
+#' 
+#' @rdname subset
 #' @param x a \code{Coo} or a \link{Coe} object.
 #' @param .data same
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
-#' @param fac the colum name in \code{fac} to use to slice your \code{Coo} or \code{Coe}.
 #' @param ... useless here but maintains consistence with the generic subset.
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
 #' @examples
-#' data(bot)
-#' bot$fac
-#' ##### subset
-#' # beers
-#' subset(bot, type=='beer')
-#' # whiskys
-#' subset(bot, type=='whisky')
-#' # or you may prefere indices
-#' subset(bot, c(1, 13, 34, 37))
-#' ##### and you can combine them :
 #' data(olea)
-#' olea$fac
-#' subset(olea, domes=='cult' & view=='VL')
 #' ##### slice
-#' slice(bot, "type")
-#' bp <- efourier(bot, 10)
-#' slice(bp, type)
-#' slice(olea, domes)
-#'
+#' slice(olea, 1) # if you only want the coordinates, try bot[1]
+#' slice(olea, 1:20)
+#' slice(olea, 21:30) 
+#' 
+#' ##### chop (a rougher slicing)
+#' chop(olea, domes) # return a list that can be lapply-ed
+#' 
+#' ##### filter
+#' filter(olea, domes=="cult")
+#' filter(olea, domes=="cult", view=="VL")
+#' 
+#' ##### select
+#' head(olea$fac)
+#' select(olea, domes, view)
+#' select(olea, -ind)
+#' 
 #' @export
 subset.Coo <- function(x, subset, ...) {
   Coo <- x
@@ -55,7 +58,7 @@ subset.Coo <- function(x, subset, ...) {
   return(Coo2)
 }
 
-#' @rdname subset.Coo
+#' @rdname subset
 #' @export
 subset.Coe <- function(x, subset, ...) {
   Coe <- x
@@ -63,6 +66,7 @@ subset.Coe <- function(x, subset, ...) {
   retain <- eval(e, Coe$fac, parent.frame())
   Coe2 <- Coe
   Coe2$coe <- Coe$coe[retain, ]
+  if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
   if (ncol(Coe$fac) > 0) {
     Coe2$fac <- Coe$fac
     Coe2$fac <- as.data.frame(Coe2$fac[retain, ])
@@ -72,7 +76,7 @@ subset.Coe <- function(x, subset, ...) {
   return(Coe2)
 }
 
-#' @rdname subset.Coo
+#' @rdname subset
 #' @export
 subset.PCA <- function(x, subset, ...){
   PCA <- x
@@ -89,23 +93,209 @@ subset.PCA <- function(x, subset, ...){
   return(PCA2)
 }
 
+# select -------------------------------
+#' Select/rename (ala dplyr) variables by name, using the $fac slot on Momocs classes
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... comma separated list of unquoted expressions
+#' @details dplyr verbs should be maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a Coo object
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @examples
+#' data(olea)
+#' olea
+#' select(olea, cep, view) # drops domes and ind
+#' select(olea, cepage=cep, domesticated_status=domes, view)
+#' # combine with filter with magrittr pipes
+#' \dontrun{
+#' library(magrittr)
+#' # only dorsal views, and 'cep' and 'domes' columns
+#' filter(olea, view=="VD") %>% select(cep, domes)
+#' }
+#' @rdname select
+#' @examples
+#' data(olea)
+#' ##### slice
+#' slice(olea, 1) # if you only want the coordinates, try bot[1]
+#' slice(olea, 1:20)
+#' slice(olea, 21:30) 
+#' 
+#' ##### chop (a rougher slicing)
+#' chop(olea, domes) # return a list that can be lapply-ed
+#' 
+#' ##### filter
+#' filter(olea, domes=="cult")
+#' filter(olea, domes=="cult", view=="VL")
+#' 
+#' ##### select
+#' head(olea$fac)
+#' select(olea, domes, view)
+#' select(olea, -ind)
+#' 
+#' @export
+select <- function(.data, ...){
+  UseMethod("select")
+}
+#' @rdname select
+#' @export
+select.default <- function(.data, ...){
+  dplyr::select(.data, ...)
+}
+#' @rdname select
+#' @export
+select.Coo <- function(.data, ...){
+  .data$fac <- select(.data$fac, ...)
+  .data
+}
+#' @rdname select
+#' @export
+select.Coe <- select.Coo
+#' @rdname select
+#' @export
+select.PCA <- select.Coo
 
-#' @rdname subset.Coo
+# filter -------------------------------
+#' Filter (ala dplyr) rows with matching conditions, using the $fac slot  on Momocs classes
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... Logical conditions
+#' @details dplyr verbs are maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @examples
+#' data(olea)
+#' ##### slice
+#' slice(olea, 1) # if you only want the coordinates, try bot[1]
+#' slice(olea, 1:20)
+#' slice(olea, 21:30) 
+#' 
+#' ##### chop (a rougher slicing)
+#' chop(olea, domes) # return a list that can be lapply-ed
+#' 
+#' ##### filter
+#' filter(olea, domes=="cult")
+#' filter(olea, domes=="cult", view=="VL")
+#' 
+#' ##### select
+#' head(olea$fac)
+#' select(olea, domes, view)
+#' select(olea, -ind)
+#' 
+#' @rdname filter
+#' @export
+filter <- function(.data, ...){
+  UseMethod("filter")
+}
+#' @rdname filter
+#' @export
+filter.default <- function(.data, ...){
+  dplyr::filter(.data, ...)
+}
+#' @rdname filter
+#' @export
+filter.Coo <- function(.data, ...){
+  df <- .data$fac
+  df <- mutate(df, .id=1:nrow(df))
+  df <- filter(df, ...)
+  subset(.data, df$.id)
+}
+#' @rdname filter
+#' @export
+filter.Coe <- filter.Coo
+#' @rdname filter
+#' @export
+filter.PCA <- filter.Coo
+
+
+# slice ---------------------
+
+#' Slice (ala dplyr) Momocs classes using rows ids on Momocs classes
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... Logical conditions
+#' @details dplyr verbs are maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @return a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @examples
+#' 
+#' data(olea)
+#' ##### slice
+#' slice(olea, 1) # if you only want the coordinates, try bot[1]
+#' slice(olea, 1:20)
+#' slice(olea, 21:30) 
+#' 
+#' ##### chop (a rougher slicing)
+#' chop(olea, domes) # return a list that can be lapply-ed
+#' 
+#' ##### filter
+#' filter(olea, domes=="cult")
+#' filter(olea, domes=="cult", view=="VL")
+#' 
+#' ##### select
+#' head(olea$fac)
+#' select(olea, domes, view)
+#' select(olea, -ind)
+#' @rdname slice
 #' @export
 slice <- function(.data, ...){
   UseMethod("slice")
 }
 
-#' @rdname subset.Coo
+#' @rdname slice
 #' @export
 slice.default <- function(.data, ...){
   dplyr::slice(.data, ...)
 }
 
 
-#' @rdname subset.Coo
+#' @rdname slice
 #' @export
-slice.Coo <- function(.data, fac, ...){
+slice.Coo <- function(.data, ...){
+  subset(.data, ...)}
+
+#' @rdname slice
+#' @export
+slice.Coe <- function(.data, ...){
+  subset(.data, ...)}
+
+#' @rdname subset
+#' @export
+slice.PCA <- function(.data, ...){
+  subset(.data, ...)}
+
+# chop ----------------------
+
+#' Rougher slicing that accepts a classifier ie a column name from the $fac on Momocs classes
+#'
+#' Returns a named (after every level) list that can be lapply-ed and combined. See examples.
+#' @param .data a \code{Coo} or \code{Coe} object
+#' @param fac a column name from the $fac
+#' @return a named list of \code{Coo} or \code{Coe} objects
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @examples
+#' data(bot)
+#' @rdname chop
+#' @export
+chop <- function(.data, fac){
+  UseMethod("chop")
+}
+
+#' @rdname chop
+#' @export
+chop.default <- function(.data, fac){
+  warning("not defined")
+}
+
+
+#' @rdname chop
+#' @export
+chop.Coo <- function(.data, fac){
   Coo <- .data
   # hideous but works
   e <- substitute(fac)
@@ -128,9 +318,9 @@ slice.Coo <- function(.data, fac, ...){
   }
   return(res)}
 
-#' @rdname subset.Coo
+#' @rdname chop
 #' @export
-slice.Coe <- function(.data, fac, ...){
+chop.Coe <- function(.data, fac){
   Coe <- .data
   # hideous but works
   e <- substitute(fac)
@@ -152,18 +342,17 @@ slice.Coe <- function(.data, fac, ...){
   return(res)}
 
 
-# merge method for Out objects (experimental)
-
-#' Combine Out objects
+# combine --------------------------------------
+#' Combine Coo/Coe objects
 #'
-#' e.g. after a slicing, either manual or using \link{slice}. Note that on Coo object,
+#' Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
 #' it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
 #' (merges coefficients). In the latter case, Coe must ahve the same number of shapes (not
 #' necessarily the same number of coefficients). Also the $fac of the first Coe is retrieved.
 #' A separate version may come at some point.
 #' @param ... a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)
-#' @seealso \link{subset.Coo}
-#' @rdname combine.Coo
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @rdname combine
 #' @examples
 #' data(bot)
 #' w <- subset(bot, type=="whisky")
@@ -177,12 +366,12 @@ slice.Coe <- function(.data, fac, ...){
 combine <- function(...) {
   UseMethod("combine")
 }
-#' @rdname combine.Coo
+#' @rdname combine
 #' @export
 combine.list <- function(...){
   do.call(combine, ...)
 }
-#' @rdname combine.Coo
+#' @rdname combine
 #' @export
 combine.Out <- function(...) {
   args <- list(...)
@@ -195,11 +384,11 @@ combine.Out <- function(...) {
   return(Out)
 }
 
-#' @rdname combine.Coo
+#' @rdname combine
 #' @export
 combine.Opn <- combine.Out
 
-#' @rdname combine.Coo
+#' @rdname combine
 #' @export
 combine.Ldk <- function(...) {
   args <- list(...)
@@ -213,7 +402,7 @@ combine.Ldk <- function(...) {
   return(Ldk)
 }
 
-#' @rdname combine.Coo
+#' @rdname combine
 #' @export
 combine.OutCoe <- function(...) {
   args <- list(...)
@@ -235,7 +424,7 @@ combine.OutCoe <- function(...) {
   return(OutCoe)
 }
 
-#' @rdname combine.Coo
+#' @rdname combine
 #' @export
 combine.OpnCoe <- function(...) {
   args <- list(...)
@@ -254,152 +443,6 @@ combine.OpnCoe <- function(...) {
   return(OpnCoe)
 }
 
-#' Select/rename (ala dplyr) variables by name, using the $fac slot
-#'
-#' Extends this dplyr verb to \link{Coo} objects. See examples.
-#' @param .data a \code{Coo} objects
-#' @param ... comma separated list of unquoted expressions
-#' @details dplyr verbs should be maintained.
-#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
-#' @return a Coo object
-#' @seealso \link{filter.Coo}
-#' @examples
-#' data(olea)
-#' olea
-#' select(olea, cep, view) # drops domes and ind
-#' select(olea, cepage=cep, domesticated_status=domes, view)
-#' # combine with filter with magrittr pipes
-#' \dontrun{
-#' library(magrittr)
-#' # only dorsal views, and 'cep' and 'domes' columns
-#' filter(olea, view=="VD") %>% select(cep, domes)
-#' }
-#' @rdname select.Coo
-#' @export
-select <- function(.data, ...){
-  UseMethod("select")
-}
-#' @rdname select.Coo
-#' @export
-select.default <- function(.data, ...){
-  dplyr::select(.data, ...)
-}
-#' @rdname select.Coo
-#' @export
-select.Coo <- function(.data, ...){
-  .data$fac <- select(.data$fac, ...)
-  .data
-}
-#' @rdname select.Coo
-#' @export
-select.Coe <- select.Coo
-#' @rdname select.Coo
-#' @export
-select.PCA <- select.Coo
-
-#' Filter (ala dplyr) rows with matching conditions, using the $fac slot
-#'
-#' Extends this dplyr verb to \link{Coo} objects. See examples.
-#' @param .data a \code{Coo} objects
-#' @param ... Logical conditions
-#' @details dplyr verbs are maintained.
-#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
-#' @return a Coo object
-#' @seealso \link{select.Coo}
-#' @examples
-#' data(bot)
-#' filter(bot, type=="whisky")
-#' @rdname filter.Coo
-#' @export
-filter <- function(.data, ...){
-  UseMethod("filter")
-}
-#' @rdname filter.Coo
-#' @export
-filter.default <- function(.data, ...){
-  dplyr::filter(.data, ...)
-}
-#' @rdname filter.Coo
-#' @export
-filter.Coo <- function(.data, ...){
-  df <- .data$fac
-  df <- mutate(df, .id=1:nrow(df))
-  df <- filter(df, ...)
-  subset(.data, df$.id)
-}
-#' @rdname filter.Coo
-#' @export
-filter.Coe <- filter.Coo
-#' @rdname filter.Coo
-#' @export
-filter.PCA <- filter.Coo
-
-#' Convert Momocs objects to data.frames
-#' 
-#' Used in particular for ggplot2 compatibility
-#' @param x an object, typically a Momocs class
-#' @return a data.frame
-#' @examples
-#' data(bot)
-#' head(as_df(bot))
-#' bot.f <- efourier(bot, 10)
-#' head(as_df(bot.f))
-#' bot.p <- PCA(bot.f)
-#' head(as_df(bot.p))
-#' bot.l <- LDA(bot.p, "type")
-#' head(as_df(bot.l))
-#' 
-#' @export
-as_df <- function(x){
-  UseMethod("as_df")
-}
-
-#' @export
-as_df.Coo <- function(x){
-  df_coo <- ldply(x$coo, data.frame)
-  colnames(df_coo) <- c("id", "x", "y")
-  # if a $fac is present
-  if (is.fac(x)) {
-    df_fac <- as_data_frame(x$fac)
-    n <- group_by(df_coo, id) %>% summarize(n = n())
-    i <- 1:nrow(df_fac)
-    i_n <- rep(i, times=n$n)
-    df_coo <- bind_cols(df_coo, df_fac[i_n, ])
-  }
-  df_coo
-}
-
-#' @export
-as_df.Coe <- function(x){  
-  df_coe <- melt(x$coe)
-  colnames(df_coe) <- c("id", "coefficient", "value")
-  # if a $fac is present
-  if (is.fac(x)) {
-    df_fac <- as_data_frame(x$fac)
-    n <- group_by(df_coe, id) %>% summarize(n = n())
-    i <- 1:nrow(df_fac)
-    i_n <- rep(i, times=n$n)
-    df_coe <- bind_cols(df_coe, df_fac[i_n, ])
-  }
-  df_coe
-}
-
-#' @export
-as_df.PCA <- function(x){
-  df <- bind_cols(data.frame(.id=rownames(x$x)),
-                  x$fac,
-                  as.data.frame(x$x))
-  #as_data_frame(df)
-  df
-}
-
-#' @export
-as_df.LDA <- function(x){
-  fac <- data.frame(fac=x$fac)
-  df <- bind_cols(fac, as.data.frame(x$x))
-  #as_data_frame(df)
-  df
-}
 
 
 ##### end subset-combine

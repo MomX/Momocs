@@ -422,4 +422,11 @@ vecs_param <- function(r1, i1, r2, i2) {
         ncol(m), len = dm[2]))])
 }
 
+
+# tests for the presence of a $fac slot
+is.fac <- function(x) length(x$fac) > 0
+
+
+
+
 ##### End Miscellaneous

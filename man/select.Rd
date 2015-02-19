@@ -6,7 +6,7 @@
 \alias{select.Coo}
 \alias{select.PCA}
 \alias{select.default}
-\title{Select/rename (ala dplyr) variables by name, using the $fac slot}
+\title{Select/rename (ala dplyr) variables by name, using the $fac slot on Momocs classes}
 \usage{
 select(.data, ...)
 
@@ -19,7 +19,7 @@ select(.data, ...)
 \method{select}{PCA}(.data, ...)
 }
 \arguments{
-\item{.data}{a \code{Coo} objects}
+\item{.data}{a \code{Coo}, \code{Coe}, \code{PCA} object}
 
 \item{...}{comma separated list of unquoted expressions}
 }
@@ -48,6 +48,6 @@ filter(olea, view=="VD") \%>\% select(cep, domes)
 }
 }
 \seealso{
-\link{filter.Coo}
+\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
 }
 

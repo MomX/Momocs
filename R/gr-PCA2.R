@@ -16,12 +16,12 @@
 #' @param ellipse_level numeric the confidence level for ellipses
 #' @param stars logical whether to draw segments between every point and their group centroid
 #' @param chull logical whether to draw convex hull
-#' @param text numeric : 1 is for labelling every shape, 
+#' @param text numeric : 1 is for labelling every shape,
 #' 2 for group centroids, 3 is for evry shape using group names
 #' @param text_abbreviatemin numeric if not missing, the min.length sensu \link{abbreviate}
 #' @param text_size numeric to adjust the size of labels
 #' @param center logical whether to center the plot
-#' @param legend_position character for theme(legend.position), 
+#' @param legend_position character for theme(legend.position),
 #' either "none", "top", "bottom", "left", "right"
 #' @param title character a title for the plot
 #' @param return_df logical whether to return ggplot or the data_frames behind
@@ -42,7 +42,7 @@
 #' plot2(bp, "type")
 #' plot2(bp, "type", ellipse=TRUE)
 #' # data(bot)
-#' 
+#'
 #' # bot$fac$fake <- factor(rep(letters[1:4], 10))
 #' # bot$fac$fake2 <- c(runif(20), runif(20, 5, 10))
 #' # xx + stat_density2d(aes(fill = ..level..), geom="polygon", alpha=0.1)
@@ -64,7 +64,7 @@ plot2.PCA <- function(x,
                       stars = FALSE,
                       chull = FALSE,
                       text,
-                      text_abbreviatemin = 1, text_size = 5, 
+                      text_abbreviatemin = 1, text_size = 5,
                       center = TRUE,
                       legend_position = "bottom",
                       title = substitute(x),
@@ -83,12 +83,12 @@ plot2.PCA <- function(x,
   # we prepare for return_df
   df_shp <- df_ellipseax <- df_stars <- df_chull <- df_text <- NULL
   .f <- is.factor(df0$f) # just a flag
-  
+
   if (.f){
     if (missing(ellipseax)) ellipseax <- TRUE
     if (missing(text)) text <- 2
   }
-  
+
   ###### LAYERS
   # +points --------------------------------------------------------------------
   if (points) gg <- gg + geom_point()
@@ -113,7 +113,7 @@ plot2.PCA <- function(x,
     #+ellipseax -----------------------------------------------------------------
     if (ellipseax){
       df_ellipseax <- ddply(df0, ~f, function(x)
-       calculate_ellipse(x, 1:2, type =ellipse_type, level=ellipse_level, 360) %>% 
+       calculate_ellipse(x, 1:2, type =ellipse_type, level=ellipse_level, 360) %>%
           calculate_ellipseax())
       suppressWarnings(gg <- gg + geom_segment(data=df_ellipseax,
                               aes(x=x, xend=xend, y=y, yend=yend, col=f)))
@@ -127,7 +127,7 @@ plot2.PCA <- function(x,
     #+ chull
     if (chull){
       df_chull <- ddply(df0, ~f, function(x) coo_close(coo_chull(x[, 1:2])))
-      gg  <- gg + geom_path(data=df_chull, aes(x=x, y=y, col=f)) 
+      gg  <- gg + geom_path(data=df_chull, aes(x=x, y=y, col=f))
     }
   }
   #+ text ---------------------------------------------------------------------
@@ -136,7 +136,7 @@ plot2.PCA <- function(x,
       df_text <- df0
       if (!missing(text_abbreviatemin)) {
         df_text <- mutate(df_text,
-                          .id = abbreviate(.id, minlength = text_abbreviatemin)) 
+                          .id = abbreviate(.id, minlength = text_abbreviatemin))
       }
       gg <- gg + geom_text(data=df_text, aes(x=x, y=y, label=.id),
                            col="black", size=text_size, show_guide=FALSE)
@@ -149,11 +149,11 @@ plot2.PCA <- function(x,
         df_text <- mutate(df0, .id=f)}
       if (!missing(text_abbreviatemin)) {
         df_text <- mutate(df_text,
-                          .id = abbreviate(.id, minlength = text_abbreviatemin)) 
+                          .id = abbreviate(.id, minlength = text_abbreviatemin))
       }
       gg <- gg + geom_text(data=df_text, aes(x=x, y=y, label=.id, col=f),
-                           size=text_size, show_guide=FALSE)  
-    } 
+                           size=text_size, show_guide=FALSE)
+    }
   }
   ## Cosmetics
   # because shapes and points may be FALSE
@@ -163,9 +163,9 @@ plot2.PCA <- function(x,
     gg <- gg + coord_equal(xlim=c(-wdw, wdw), ylim=c(-wdw, wdw))
   }
 
-  if (missing(legend_position) || !missing(text)) legend_position <- "none"
-  gg <- gg + ggtitle(title) + 
-    theme_minimal() + 
+ if (missing(legend_position)) legend_position <- "none"
+  gg <- gg + ggtitle(title) +
+    theme_minimal() +
     theme(legend.position=legend_position)
   # here is the baby
   if (return_df) {
@@ -181,8 +181,8 @@ plot2.PCA <- function(x,
 
 
 
-# 
-# 
+#
+#
 # #+ eigen -------
 # if (eigen) {
 #   xr <- .x.range.gg(gg)
@@ -206,7 +206,7 @@ plot2.PCA <- function(x,
 # }
 
 # Screeplot of PCA variances
-# 
+#
 # screeplot.PCA <- function(x, range=1:10, selected=NULL, total = TRUE, ...){
 #   eig <- (x$sdev^2)
 #   if (total) eig <- eig / sum(eig)
@@ -215,7 +215,7 @@ plot2.PCA <- function(x,
 #   df <-  data_frame(x=ordered(1:length(eig)), y=eig, fill="black")
 #   fills <- rep("black", nrow(df))
 #   fills[selected] <- "red"
-#   gg <- ggplot(data=df, aes(x=x, y=y), fill=fill) + 
+#   gg <- ggplot(data=df, aes(x=x, y=y), fill=fill) +
 #     geom_bar(fill=fills, stat="identity") +
 #     labs(x="Components", y="Variances")
 #   gg
@@ -265,7 +265,7 @@ calculate_ellipseax <- function(ell){
     return(seg)
   }
   ell.al <- coo_align(ell)
-  ell.ids <- c(which.min(ell.al[, 1]), which.max(ell.al[, 1]), 
+  ell.ids <- c(which.min(ell.al[, 1]), which.max(ell.al[, 1]),
                which.min(ell.al[, 2]), which.max(ell.al[, 2]))
   seg <- ell[ell.ids, ]
   seg <- bind_cols(slice(seg, c(1, 3)), slice(seg, c(2, 4)))

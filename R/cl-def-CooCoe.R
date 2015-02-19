@@ -1,8 +1,6 @@
 ##### Coo and Coe classes declarations, domestic functions and
 ##### helpers.
 
-# 1. Coo -----------------------------------------------
-
 #' Coo class
 #'
 #' \code{Coo} class is the 'parent' class of 

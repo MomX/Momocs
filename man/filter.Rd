@@ -6,7 +6,7 @@
 \alias{filter.Coo}
 \alias{filter.PCA}
 \alias{filter.default}
-\title{Filter (ala dplyr) rows with matching conditions, using the $fac slot}
+\title{Filter (ala dplyr) rows with matching conditions, using the $fac slot  on Momocs classes}
 \usage{
 filter(.data, ...)
 
@@ -19,12 +19,12 @@ filter(.data, ...)
 \method{filter}{PCA}(.data, ...)
 }
 \arguments{
-\item{.data}{a \code{Coo} objects}
+\item{.data}{a \code{Coo}, \code{Coe}, \code{PCA} object}
 
 \item{...}{Logical conditions}
 }
 \value{
-a Coo object
+a a \code{Coo}, \code{Coe}, \code{PCA} object
 }
 \description{
 Extends this dplyr verb to \link{Coo} objects. See examples.
@@ -36,10 +36,25 @@ dplyr verbs are maintained.
 this method is quite experimental, check the result and do not hesitate to report a bug.
 }
 \examples{
-data(bot)
-filter(bot, type=="whisky")
+data(olea)
+##### slice
+slice(olea, 1) # if you only want the coordinates, try bot[1]
+slice(olea, 1:20)
+slice(olea, 21:30)
+
+##### chop (a rougher slicing)
+chop(olea, domes) # return a list that can be lapply-ed
+
+##### filter
+filter(olea, domes=="cult")
+filter(olea, domes=="cult", view=="VL")
+
+##### select
+head(olea$fac)
+select(olea, domes, view)
+select(olea, -ind)
 }
 \seealso{
-\link{select.Coo}
+\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
 }
 

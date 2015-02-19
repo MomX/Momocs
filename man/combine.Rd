@@ -8,7 +8,7 @@
 \alias{combine.Out}
 \alias{combine.OutCoe}
 \alias{combine.list}
-\title{Combine Out objects}
+\title{Combine Coo/Coe objects}
 \usage{
 combine(...)
 
@@ -28,7 +28,7 @@ combine(...)
 \item{...}{a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)}
 }
 \description{
-e.g. after a slicing, either manual or using \link{slice}. Note that on Coo object,
+Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
 it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
 (merges coefficients). In the latter case, Coe must ahve the same number of shapes (not
 necessarily the same number of coefficients). Also the $fac of the first Coe is retrieved.
@@ -43,6 +43,6 @@ combine(w, b)
 bot_s <- slice(bot, type)
 }
 \seealso{
-\link{subset.Coo}
+\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
 }
 
