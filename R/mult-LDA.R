@@ -7,7 +7,7 @@
 #' @rdname LDA
 #' @param x a  PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
-#' @param retain the number of PC axis to retain for LDA.PCA
+#' @param retain the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).
 #' @param ... additional arguments to feed \link{lda}
 #' @return a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:
 #' \itemize{
@@ -29,7 +29,10 @@
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)
-#' bot.l <- LDA(PCA(bot.f), 'type')
+#' bot.p <- PCA(bot.f)
+#' LDA(bot.p, 'type', retain=0.99) # retains 0.99 of the total variance
+#' LDA(bot.p, 'type', retain=5) # retain 5 axis
+#' bot.l <- LDA(bot.p, 'type', retain=0.99)
 #' bot.l
 #' plot(bot.l)
 #' bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
@@ -88,7 +91,7 @@ LDA.Coe <- function(x, fac, retain, ...) {
 
 #' @rdname LDA
 #' @export
-LDA.PCA <- function(x, fac, retain = 5, ...) {
+LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   PCA <- x
   #fac handling
   if (missing(fac))
@@ -98,9 +101,11 @@ LDA.PCA <- function(x, fac, retain = 5, ...) {
     fac <- interaction(f0)}
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   # PC number selection
-  if (missing(retain)) {
-    cat(" * the first", retain, "PC axes are used.\n")
+  if (retain <= 1)  {
+    cat(" *", retain, "total variance.\n")
+    retain <- scree_min(x, prop = retain)
   }
+  cat(" *", retain, "PC retained.\n")
   X <- PCA$x[, 1:retain]
   if (is.matrix(X)) {
     remove <- which(apply(X, 2, sd) < 1e-10)

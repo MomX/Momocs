@@ -10,14 +10,14 @@ LDA(x, fac, retain, ...)
 
 \method{LDA}{default}(x, fac, retain, ...)
 
-\method{LDA}{PCA}(x, fac, retain = 5, ...)
+\method{LDA}{PCA}(x, fac, retain = 0.99, ...)
 }
 \arguments{
 \item{x}{a  PCA object}
 
 \item{fac}{the grouping factor (names of one of the $fac column or column id)}
 
-\item{retain}{the number of PC axis to retain for LDA.PCA}
+\item{retain}{the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).}
 
 \item{...}{additional arguments to feed \link{lda}}
 }
@@ -44,7 +44,10 @@ Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 \examples{
 data(bot)
 bot.f <- efourier(bot, 24)
-bot.l <- LDA(PCA(bot.f), 'type')
+bot.p <- PCA(bot.f)
+LDA(bot.p, 'type', retain=0.99) # retains 0.99 of the total variance
+LDA(bot.p, 'type', retain=5) # retain 5 axis
+bot.l <- LDA(bot.p, 'type', retain=0.99)
 bot.l
 plot(bot.l)
 bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
