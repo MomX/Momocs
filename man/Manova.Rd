@@ -36,15 +36,11 @@ the highest number of PC axis to retain, or the proportion of the variance to ca
 a list of matrices of (x,y) coordinates.
 }
 \description{
-Performs multivariate analysis of variance on \link{PCA} objects and on \link{Coe} objects.
+Performs multivariate analysis of variance on \link{PCA} objects.
 }
 \details{
-For outlines, checks if the matrix of coefficients is of full rank, and if not removes the
-higher order harmonics (for Out objects). If OutCoe objects have been normalized, the first harmonic will be removed with a message. If \link{rm_Asym} or \link{rm_Sym}
-have been used on OutCoe object, the zero-ed harmonics will be removed with a message.
-
-Overall it is probably a better idea to work on the PCA scores
-(and it should ultimately be the same results).
+Performs a MANOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and
+\link{summary.manova} for more details and examples.
 }
 \note{
 Needs a review and should be considered as experimental.
@@ -57,6 +53,10 @@ MANOVA(bot.f, 'type')
 data(olea)
 op <- npoly(olea, 5)
 MANOVA(op, 'domes')
+
+ m <- manova(op$x[, 1:5] ~  op$fac$domes * op$fac$cep)
+ summary(m)
+ summary.aov(m)
 }
 \seealso{
 \link{MANOVA_PW}
