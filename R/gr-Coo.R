@@ -34,8 +34,6 @@ panel2 <- function(Coo){
   gg
 }
 
-
-
 # plot ----------------------------------------------------
 #' Plots Coo objects: plot (quick review)
 #'
@@ -94,6 +92,8 @@ plot.Coo <- function(x, id, ...) {
 #' Either a single value or of length exactly equals to the number of coordinates.
 #' @param borders A \code{vector} of colors for drawing the borders.
 #' Either a single value or of length exactly equals to the number of coordinates.
+#' @param fac a factor within the $fac slot for colors
+#' @param palette a color palette to use when fac is provided
 #' @param points logical whether to draw or not points
 #' @param first.point logical whether to draw or not the first point
 #' @param centroid logical whether to draw or not the centroid
@@ -127,14 +127,16 @@ plot.Coo <- function(x, id, ...) {
 #' stack(hearts)
 #' stack(hearts, ldk=FALSE)
 #' stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col_summer(4), ldk.pch=20)
+#' stack(hearts, fac="aut", palette=col_sari)
 #' }
 #' @rdname stack.Coo
 #' @aliases stack.Coo
 #' @export
 stack.Coo <- 
   function(x,
-           cols, borders, points = FALSE,
-           first.point = TRUE, centroid = TRUE,
+           cols, borders, 
+           fac, palette = col_summer,
+           points = FALSE, first.point = TRUE, centroid = TRUE,
            ldk = TRUE,
            ldk.pch = 3, ldk.col = "#FF000055",
            ldk.cex = 0.5, ldk_links = FALSE,
@@ -157,6 +159,13 @@ stack.Coo <-
     if (length(borders) != length(Coo)) {
       borders <- rep(borders[1], length(Coo))
     }
+    # but if fac is provided
+    if (!missing(fac)){
+      fac <- Coo$fac[, fac]
+      cols <- NA
+      borders <- palette(nlevels(fac))[fac]
+    }
+    
     # we define local par (margins)
     op <- par(mar = c(3, 3, 2, 1))
     on.exit(par(op))
