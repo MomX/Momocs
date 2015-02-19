@@ -205,21 +205,87 @@ plot2.PCA <- function(x,
 #                           size=2, alpha=0.8)
 # }
 
-# Screeplot of PCA variances
-#
-# screeplot.PCA <- function(x, range=1:10, selected=NULL, total = TRUE, ...){
-#   eig <- (x$sdev^2)
-#   if (total) eig <- eig / sum(eig)
-#   if (max(range)>length(eig)) range <- 1:length(eig)
-#   eig <- eig[range]
-#   df <-  data_frame(x=ordered(1:length(eig)), y=eig, fill="black")
-#   fills <- rep("black", nrow(df))
-#   fills[selected] <- "red"
-#   gg <- ggplot(data=df, aes(x=x, y=y), fill=fill) +
-#     geom_bar(fill=fills, stat="identity") +
-#     labs(x="Components", y="Variances")
-#   gg
-# }
+#' Methods for PCA eigen values
+#'
+#' A set of functions around PCA/LDA eigen/trace. \code{scree} calculates their proportion and cumulated proportion;
+#' \code{scree_min} returns the minimal number of axis to use to retain a given proportion; \code{scree_plot} displays a screeplot.
+#' 
+#' @param x a \link{PCA} object
+#' @param nax numeric range of axis to consider
+#' @param prop numeric how many axis are enough this proportion of variance, if too high then number of axis is returned.
+#' @return scree returns a data.frame, scree_min a numeric, scree_plot a ggplot.
+#' @examples
+#' data(bot)
+#' # On PCA
+#' bp <- PCA(efourier(bot))
+#' scree(bp)
+#' scree_min(bp, 0.99)
+#' scree_min(bp, 1)
+#' 
+#' scree_plot(bp)
+#' scree_plot(bp, 1:5)
+#'
+#' # on LDA, it uses svd
+#' data(olea)
+#' bl <- LDA(PCA(opoly(olea)), "cep")
+#' scree(bl)
+#' 
+#' @export
+#' @rdname scree
+scree <- function(x, nax) { 
+  UseMethod("scree")}
+
+#' @export
+#' @rdname scree
+scree.PCA <- function(x, nax=1:10){
+  eig <- (x$sdev^2)
+  eig <- eig / sum(eig)
+  if (max(nax)>length(eig)) nax <- 1:length(eig)
+  eig <- eig[nax]
+  df <-  data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
+df
+}
+
+#' @export
+#' @rdname scree
+scree.LDA <- function(x, nax=1:10){
+  eig <- (x$mod$svd^2)
+  eig <- eig / sum(eig)
+  if (max(nax)>length(eig)) nax <- 1:length(eig)
+  eig <- eig[nax]
+  df <-  data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
+  df
+}
+
+#' @export
+#' @rdname scree
+scree_min <- function(x, prop=0.99){
+  enough <- scree(x)$cumsum >= prop
+  ifelse(any(enough), min(which(enough)), length(enough))
+}
+
+#' @export
+#' @rdname scree
+scree_plot <- function(x, nax=1:10){
+  df <- scree(x, nax)
+  gg <- ggplot(df, aes_string(x="axis", y="proportion")) + 
+    geom_hline(yintercept=c(0.5, 0.90, 0.95, 0.99), linetype=2, alpha=0.5) +
+    geom_bar(stat="identity") + geom_text(label=round(df$cumsum, 3), vjust=0) +
+    labs(x="Components", y="Proportion")
+  gg
+}
+
+
+# selected=NULL, 
+# return(df)
+# fills <- rep("black", nrow(df))
+# fills[selected] <- "red"
+# gg <- ggplot(data=df, aes(x=x, y=y), fill=fill) +
+#   geom_bar(fill=fills, stat="identity") +
+#   labs(x="Components", y="Variances")
+# gg
+
+
 
 #### borrowed from ggplot2 by Hadley
 calculate_ellipse <- function(data, vars, type, level, segments){
