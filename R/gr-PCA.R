@@ -228,9 +228,11 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) text(xy[, 1], xy[, 2],
-                                 labels=ifelse(abbreviate.labels, abbreviate(rownames(xy)), rownames(xy)),
-                                 col=col.labels, cex=cex.labels)
+  if (labels) {
+    rn <- rownames(xy)
+    if (abbreviate.labels) rn <- abbreviate(rn)
+    text(xy[, 1], xy[, 2], labels=rn, col=col.labels, cex=cex.labels)
+  }
   if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
