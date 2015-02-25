@@ -887,6 +887,10 @@ coo_down <- function(coo) {
 #' @aliases coo_alignxax
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @details If some shapes are upside-down 
+#' (or mirror of each others), try redefining a new starting point (eg with coo_slidedirection) before
+#' the alignment step. This may solve your problem because coo_calliper orders the \code{$arr.ind} used by 
+#' coo_aligncalliper.
 #' @seealso \link{coo_align}, \link{coo_aligncalliper}
 #' @keywords ShapeUtilities
 #' @examples
