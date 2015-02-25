@@ -47,11 +47,11 @@ Needs a review and should be considered as experimental.
 }
 \examples{
 data(bot)
-bot.f <- efourier(bot, 12)
-MANOVA(bot.f, 'type')
+bot.p <- PCA(efourier(bot, 12))
+MANOVA(bot.p, 'type')
 
 data(olea)
-op <- npoly(olea, 5)
+op <- PCA(npoly(olea, 5))
 MANOVA(op, 'domes')
 
  m <- manova(op$x[, 1:5] ~  op$fac$domes * op$fac$cep)
