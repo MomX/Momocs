@@ -205,4 +205,59 @@ get_pairs.PCA <- function(x, fac, range){
 get_pairs.LDA <- get_pairs.PCA
 
 
+# 4. redo PCA ---------
+
+
+#' "Redo" a PCA on a new Coe
+#' 
+#' Basically reapply rotation to the new Coe object.
+#' @param Coe a Coe object
+#' @param PCA a PCA object
+#' @note Experimental. Dimensions of the matrices and methods must match.
+#' @examples
+#' data(bot)
+#' b <- filter(bot, type=="beer")
+#' w <- filter(bot, type=="whisky")
+#' 
+#' bf <- efourier(b, 8)
+#' bp <- PCA(bf)
+#' 
+#' wf <- efourier(w, 8)
+#' 
+#' # and we use the "beer" PCA on the whisky coefficients
+#' wp <- rePCA(wf, bp)
+#'
+#' plot(wp)
+#' 
+#' plot(bp, eig=FALSE)
+#' points(wp$x[, 1:2], col="red", pch=4)
+#' 
+#'@export 
+rePCA <- function(Coe, PCA){
+  if (missing(PCA) | !any(class(PCA) == "PCA"))
+    stop(" * a PCA object must be provided")
+  if (Coe$method != PCA$method)
+    warning(" * methods differ between Coe and PCA")
+  scores <- PCA$x
+  rot <- PCA$rotation
+  coe <- Coe$coe
+  if (any(colnames(coe) != rownames(rot)))
+    warning(" * Matrices coefficients must match")
+  # we copy / empty the PCA object
+  PCA2 <- PCA
+  PCA2$x[] <- NA
+  # we recenter
+  coe <- apply(coe, 2, function(x) x - mean(x))
+  # learn matrix calculus bitch
+  for (PC in 1:ncol(rot)){
+    for (ind in 1:nrow(coe)){
+      PCA2$x[ind, PC] <- sum(coe[ind, ] * rot[, PC])
+    }
+  }
+  return(PCA2)
+}
+
+
+
+
 ##### end PCA
