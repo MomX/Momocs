@@ -4,18 +4,18 @@
 \alias{rePCA}
 \title{"Redo" a PCA on a new Coe}
 \usage{
-rePCA(Coe, PCA)
+rePCA(PCA, Coe)
 }
 \arguments{
-\item{Coe}{a Coe object}
+\item{PCA}{a \link{PCA} object}
 
-\item{PCA}{a PCA object}
+\item{Coe}{a \link{Coe} object}
 }
 \description{
 Basically reapply rotation to the new Coe object.
 }
 \note{
-Experimental. Dimensions of the matrices and methods must match.
+Quite experimental. Dimensions of the matrices and methods must match.
 }
 \examples{
 data(bot)
@@ -28,7 +28,7 @@ bp <- PCA(bf)
 wf <- efourier(w, 8)
 
 # and we use the "beer" PCA on the whisky coefficients
-wp <- rePCA(wf, bp)
+wp <- rePCA(bp, wf)
 
 plot(wp)
 

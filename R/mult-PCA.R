@@ -211,9 +211,9 @@ get_pairs.LDA <- get_pairs.PCA
 #' "Redo" a PCA on a new Coe
 #' 
 #' Basically reapply rotation to the new Coe object.
-#' @param Coe a Coe object
-#' @param PCA a PCA object
-#' @note Experimental. Dimensions of the matrices and methods must match.
+#' @param PCA a \link{PCA} object
+#' @param Coe a \link{Coe} object
+#' @note Quite experimental. Dimensions of the matrices and methods must match.
 #' @examples
 #' data(bot)
 #' b <- filter(bot, type=="beer")
@@ -225,7 +225,7 @@ get_pairs.LDA <- get_pairs.PCA
 #' wf <- efourier(w, 8)
 #' 
 #' # and we use the "beer" PCA on the whisky coefficients
-#' wp <- rePCA(wf, bp)
+#' wp <- rePCA(bp, wf)
 #'
 #' plot(wp)
 #' 
@@ -233,9 +233,19 @@ get_pairs.LDA <- get_pairs.PCA
 #' points(wp$x[, 1:2], col="red", pch=4)
 #' 
 #'@export 
-rePCA <- function(Coe, PCA){
-  if (missing(PCA) | !any(class(PCA) == "PCA"))
-    stop(" * a PCA object must be provided")
+rePCA <- function(PCA, Coe){
+  UseMethod("rePCA")
+}
+
+
+#'@export 
+rePCA.default <- function(PCA, Coe){
+  stop(" * method only defined for PCA objetcs")
+}
+
+
+#'@export 
+rePCA.PCA <- function(PCA, Coe){
   if (Coe$method != PCA$method)
     warning(" * methods differ between Coe and PCA")
   scores <- PCA$x
