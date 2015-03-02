@@ -1,5 +1,67 @@
 ##### Combining or subsetting Momocs' classes
 
+# table --------------------------
+#' Cross tabulation of Momocs objects
+#' 
+#' Simply extends base \link{table} for a more convenient use on $fac slot.
+#' 
+#' @param ... a list of, first, a Momocs object (Coo, Coe, PCA, etc.), then, column names in the $fac slot. If not specified,
+#' returns a table on the entire $fac data.frame
+#' 
+#' @examples
+#' data(bot)
+#' table(bot)
+#' data(olea)
+#' table(olea, "cep", "domes")
+#' table(olea)
+#' @rdname table
+#' @export
+table <- function(...){
+  UseMethod("table")
+}
+
+#' @rdname table
+#' @export
+table.default <- function(...){
+  base::table(...)
+}
+
+#' @rdname table
+#' @export
+table.Coo <- function(...){
+  args <- list(...)
+  #    return(args)
+  x <- args[[1]]
+  if (length(x$fac)==0) stop(" * no $fac defined")
+  if (length(args)>1) {
+    # a little helper for mismatched colnames
+    cn <- unlist(args[-1])
+    matches <- match(cn, colnames(x$fac))
+    if (any(is.na(matches))) {
+      mispelled <- which(is.na(matches))
+      stop(" * '", cn[mispelled], "' mispelled or not defined in $fac")
+    }
+    matches <- match(cn, names(x$fac))
+    # single line avoids a title to be printed for the table
+    base::table(x$fac[, unlist(args[-1])])
+  } else {
+    base::table(x$fac)
+  }
+}
+
+#' @rdname table
+#' @export
+table.Coe <- table.Coo
+
+#' @rdname table
+#' @export
+table.PCA <- table.Coo
+
+#' @rdname table
+#' @export
+table.LDA <- table.Coo
+
+
 # subset -------------------------------
 #' Create subsets of Coo objects
 #'
@@ -268,6 +330,145 @@ slice.Coe <- function(.data, ...){
 #' @export
 slice.PCA <- function(.data, ...){
   subset(.data, ...)}
+
+# sample_n ---------------
+
+#' Samples n shapes in Momocs objects
+#' 
+#' Uses (and maintain) dplyr syntax and verb.
+#' 
+#' @param tbl a Momocs object (Coo, Coe)
+#' @param size numeric how many shapes should we sample
+#' @param replace logical whether sample should be done with ot without replacement
+#' @param fac a column name if a $fac is defined; size is then applied within levels of this factor
+#' @seealso \link{sample_frac}
+#' @param ... additional arguments to dplyr::sample_n and to maintain generic compatibility
+#' @examples
+#' 
+#' data(bot)
+#' bot
+#' # samples 5 bottles no matter their type
+#' sample_n(bot, 5)
+#' # 5 bottles of beer and of whisky
+#' table(sample_n(bot, 5, fac="type"))
+#' # many repetitions
+#' table(names(sample_n(bot, 400, replace=TRUE)))
+#' 
+#' @rdname sample_n
+#' @export
+sample_n <- function(tbl, size, replace, ...){
+  UseMethod("sample_n")
+}
+
+#' @rdname sample_n
+#' @export
+sample_n.default <- function(tbl, size, replace=FALSE, ...){
+  dplyr::sample_n(tbl, size, replace, ...)
+}
+
+#' @rdname sample_n
+#' @export
+sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
+  Coo <- tbl
+  if (missing(fac)) {
+    fac <- NULL
+    N <- length(Coo)
+    if (!replace & any(N)>size)  
+      stop(" * for at least one level, 'size' is too large for sampling without replacement")
+  } else {
+    fac <- Coo$fac[, fac]
+    N <- table(fac)
+    if (!replace & any(N)>size)  
+      stop(" * for at least one level, 'size' is too large for sampling without replacement")
+  }
+  
+  if (is.null(fac)) {
+    retain <- sample(N, size = size, replace = replace)
+  } else {
+    retain <- integer()
+    for (i in seq(along=N)){
+      x.i <- which(fac == levels(fac)[i])
+      retain.i <- sample(x.i, size=size, replace=replace)
+      retain <- append(retain, retain.i)
+    }
+  }
+#   return(retain)
+  return(subset(Coo, retain))
+}
+
+#' @rdname sample_n
+#' @export
+sample_n.Coe <- sample_n.Coo
+
+# sample_frac ---------------
+
+#' Samples a fraction of shapes in Momocs objects
+#' 
+#' Uses (and maintain) dplyr syntax and verb.
+#' 
+#' @param tbl a Momocs object (Coo, Coe)
+#' @param size numeric (0 < numeric <= 1) the fraction of shapes to select
+#' @param replace logical whether sample should be done with ot without replacement
+#' @param fac a column name if a $fac is defined; size is then applied within levels of this factor
+#' @note the resulting fraction is rounded with \link{ceiling}.
+#' @seealso \link{sample_n}
+#' @param ... additional arguments to dplyr::sample_frac and to maintain generic compatibility
+#' @examples
+#' 
+#' data(bot)
+#' bot
+#' # samples 50% of the bottles no matter their type
+#' sample_frac(bot, 0.5)
+#' # 80% bottles of beer and of whisky
+#' table(sample_frac(bot, 0.8, fac="type"))
+#' # bootstrap the same number of bootles of each type but with replacement
+#' table(names(sample_frac(bot, 1, replace=TRUE)))
+#' 
+#' @rdname sample_frac
+#' @export
+sample_frac <- function(tbl, size, replace, ...){
+  UseMethod("sample_frac")
+}
+
+#' @rdname sample_frac
+#' @export
+sample_frac.default <- function(tbl, size=1, replace=FALSE, ...){
+  dplyr::sample_frac(tbl, size, replace, ...)
+}
+
+#' @rdname sample_frac
+#' @export
+sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
+  if (size > 1 | size <= 0) 
+    stop(" * size must be >=0 and <= 1")
+  Coo <- tbl
+  if (missing(fac)) {
+    fac <- NULL
+    N <- length(Coo)
+  } else {
+    fac <- Coo$fac[, fac]
+    N <- table(fac)
+  }
+  size <- ceiling(N * size)
+  if (is.null(fac)) {
+    retain <- sample(N, size = size, replace = replace)
+  } else {
+    retain <- integer()
+    for (i in seq(along=N)){
+      x.i <- which(fac == levels(fac)[i])
+      retain.i <- sample(x.i, size=size[i], replace=replace)
+      retain <- append(retain, retain.i)
+    }
+  }
+  #   return(retain)
+  return(subset(Coo, retain))
+}
+
+#' @rdname sample_frac
+#' @export
+sample_frac.Coe <- sample_frac.Coo
+
+
 
 # chop ----------------------
 
