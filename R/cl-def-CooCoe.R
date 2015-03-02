@@ -216,11 +216,7 @@ names.Coe <- function(x) {
   }
 }
 
-
-
-
 # utils ######
-
 is.fac <- function(x) length(x$fac) > 0
 
 
