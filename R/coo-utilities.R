@@ -917,6 +917,12 @@ coo_up.default <- function(coo, slidegap=TRUE) {
 }
 
 #' @export
+coo_up.Out <- function(coo, slidegap=TRUE){
+  coo$coo <- lapply(coo$coo, coo_up, slidegap=slidegap)
+  Opn(coo)
+}
+
+#' @export
 coo_up.Coo <- function(coo, slidegap=TRUE){
   coo$coo <- lapply(coo$coo, coo_up, slidegap=slidegap)
   coo
@@ -951,6 +957,12 @@ coo_down.default <- function(coo, slidegap=TRUE) {
   down <- coo[coo[, 2] <= 0, ]
   if (slidegap) down <- coo_slidegap(down)
   return(down)
+}
+
+#' @export
+coo_down.Out <- function(coo, slidegap=TRUE){
+  coo$coo <- lapply(coo$coo, coo_down, slidegap=slidegap)
+  Opn(coo)
 }
 
 #' @export
