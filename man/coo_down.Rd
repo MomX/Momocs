@@ -4,17 +4,26 @@
 \alias{coo_down}
 \title{Retains coordinates with negative y-coordinates}
 \usage{
-coo_down(coo)
+coo_down(coo, slidegap = TRUE)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates.}
+\item{coo}{either a \code{matrix} of (x; y) coordinates or a \link{Coo} object}
+
+\item{slidegap}{logical whether to apply \link{coo_slidegap} after coo_down}
 }
 \value{
-a \code{matrix} of (x; y) coordinates.
+a \code{matrix} of (x; y) coordinates or a \link{Coo} object (\link{Out} are returned as \link{Opn})
 }
 \description{
 Useful when shapes are aligned along the x-axis (e.g. because of a
 bilateral symmetry) and when one wants to retain just the lower side.
+}
+\note{
+When shapes are "sliced" along the x-axis, it usually results on open curves and thus to huge/artefactual
+gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
+
+Also, when apply a coo_up or coo_down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+automatically.
 }
 \examples{
 data(bot)

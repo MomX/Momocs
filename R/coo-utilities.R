@@ -389,6 +389,47 @@ coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = TRUE) {
   return(Coo)
 }
 
+#' Slides coordinates using the widest gap
+#'
+#' When slicing a shape using two landmarks, or functions such as \link{coo_up},
+#' an open curve is obtained and the rank of points make wrong/artefactual results.
+#' This functions uses the widest gap between points and use the latter as starting
+#' and ending points. Examples are self-speaking.
+#'
+#' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object
+#' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
+#' @keywords ShapeUtilities
+#' @examples
+#' data(shapes)
+#' cat <- coo_center(shapes[4])
+#' coo_plot(cat)
+#'
+#' # we only retain the bottom of the cat
+#' cat_down <- coo_down(cat, slidegap=FALSE)
+#'
+#' # see? the segment on the x-axis coorespond to the widest gap.
+#' coo_plot(cat_down)
+#'
+#' # that's what we meant
+#' coo_plot(coo_slidegap(cat_down))
+#' @export
+coo_slidegap <- function(coo){
+  UseMethod("coo_slidegap")
+}
+
+#' @export
+coo_slidegap.default <- function(coo){
+  widest_gap <- which.max(coo_perimpts(coo))+1
+  return(coo_slide(coo, widest_gap))
+}
+
+#' @export
+coo_slidegap.Coo <- function(coo){
+  coo$coo <- lapply(coo$coo, coo_slidegap)
+  coo
+}
+
+
 #' Sample coordinates (among points)
 #'
 #' Sample n coordinates among existing points.
@@ -848,9 +889,15 @@ coo_dxy <- function(coo) {
 #' Retains coordinates with positive y-coordinates
 #'
 #' Useful when shapes are aligned along the x-axis (e.g. because of a
-#' bilateral symmetry) #' and when one wants to retain just the upper side.
-#' @param coo either a \code{matrix} of (x; y) coordinates.
-#' @return a \code{matrix} of (x; y) coordinates.
+#' bilateral symmetry) and when one wants to retain just the upper side.
+#' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object
+#' @param slidegap logical whether to apply \link{coo_slidegap} after coo_down
+#' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object (\link{Out} are returned as \link{Opn})
+#' @note When shapes are "sliced" along the x-axis, it usually results on open curves and thus to huge/artefactual
+#' gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
+#'
+#' Also, when apply a coo_up or coo_down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+#' automatically.
 #' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
@@ -858,17 +905,36 @@ coo_dxy <- function(coo) {
 #' coo_plot(b)
 #' coo_draw(coo_up(b), border='red')
 #' @export
-coo_up <- function(coo) {
+coo_up <- function(coo, slidegap=TRUE){
+  UseMethod("coo_up")
+}
+
+#' @export
+coo_up.default <- function(coo, slidegap=TRUE) {
   up <- coo[coo[, 2] >= 0, ]
+  if (slidegap) up <- coo_slidegap(up)
   return(up)
 }
+
+#' @export
+coo_up.Coo <- function(coo, slidegap=TRUE){
+  coo$coo <- lapply(coo$coo, coo_up, slidegap=slidegap)
+  coo
+}
+
 
 #' Retains coordinates with negative y-coordinates
 #'
 #' Useful when shapes are aligned along the x-axis (e.g. because of a
 #' bilateral symmetry) and when one wants to retain just the lower side.
-#' @param coo either a \code{matrix} of (x; y) coordinates.
-#' @return a \code{matrix} of (x; y) coordinates.
+#' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object
+#' @param slidegap logical whether to apply \link{coo_slidegap} after coo_down
+#' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object (\link{Out} are returned as \link{Opn})
+#' @note When shapes are "sliced" along the x-axis, it usually results on open curves and thus to huge/artefactual
+#' gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
+#'
+#' Also, when apply a coo_up or coo_down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+#' automatically.
 #' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
@@ -876,10 +942,23 @@ coo_up <- function(coo) {
 #' coo_plot(b)
 #' coo_draw(coo_down(b), border='red')
 #' @export
-coo_down <- function(coo) {
-  coo <- coo_check(coo)
-  return(coo[coo[, 2] <= 0, ])
+coo_down <- function(coo, slidegap=TRUE){
+  UseMethod("coo_down")
 }
+
+#' @export
+coo_down.default <- function(coo, slidegap=TRUE) {
+  down <- coo[coo[, 2] <= 0, ]
+  if (slidegap) down <- coo_slidegap(down)
+  return(down)
+}
+
+#' @export
+coo_down.Coo <- function(coo, slidegap=TRUE){
+  coo$coo <- lapply(coo$coo, coo_down, slidegap=slidegap)
+  coo
+}
+
 
 #' Aligns shapes along the x-axis
 #'
@@ -887,9 +966,9 @@ coo_down <- function(coo) {
 #' @aliases coo_alignxax
 #' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @details If some shapes are upside-down 
+#' @details If some shapes are upside-down
 #' (or mirror of each others), try redefining a new starting point (eg with coo_slidedirection) before
-#' the alignment step. This may solve your problem because coo_calliper orders the \code{$arr.ind} used by 
+#' the alignment step. This may solve your problem because coo_calliper orders the \code{$arr.ind} used by
 #' coo_aligncalliper.
 #' @seealso \link{coo_align}, \link{coo_aligncalliper}
 #' @keywords ShapeUtilities
