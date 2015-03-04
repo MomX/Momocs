@@ -313,18 +313,18 @@ coo_slide.Coo <- function(x, id1, ldk, ...) {
     ##### id1 case ######
     if (length(id1)==1) id1 <- rep(id1, length(Coo))
 
-  # id1 case
-  # id1=1 just rep
-  #
-  # allows a vector of id1s to be passed
-  slide_ldk <- (length(Coo$ldk) > 0)
-  for (i in seq(along = Coo$coo)) {
-    Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id1[i])
-     if (slide_ldk)
-     Coo$ldk[[i]] <- (Coo$ldk[[i]] - id1[i] - 1) %% nrow(Coo$coo[[i]])
-  }
-  return(Coo)
-}}
+    # id1 case
+    # id1=1 just rep
+    #
+    # allows a vector of id1s to be passed
+    slide_ldk <- (length(Coo$ldk) > 0)
+    for (i in seq(along = Coo$coo)) {
+      Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id1[i])
+      if (slide_ldk)
+        Coo$ldk[[i]] <- (Coo$ldk[[i]] - id1[i] - 1) %% nrow(Coo$coo[[i]])
+    }
+    return(Coo)
+  }}
 
 #' Slides coordinates in a particular direction
 #'
@@ -419,8 +419,8 @@ coo_slidegap <- function(coo){
 
 #' @export
 coo_slidegap.default <- function(coo){
-  widest_gap <- which.max(coo_perimpts(coo))+1
-  return(coo_slide(coo, widest_gap))
+  widest_gap <- which.max(coo_perimpts(coo))
+  return(coo_slide(coo, widest_gap+1))
 }
 
 #' @export
@@ -912,19 +912,21 @@ coo_up <- function(coo, slidegap=TRUE){
 #' @export
 coo_up.default <- function(coo, slidegap=TRUE) {
   up <- coo[coo[, 2] >= 0, ]
-  if (slidegap) up <- coo_slidegap(up)
+  if (slidegap) { up <- coo_slidegap(up)}
   return(up)
 }
 
 #' @export
 coo_up.Out <- function(coo, slidegap=TRUE){
-  coo$coo <- lapply(coo$coo, coo_up, slidegap=slidegap)
-  Opn(coo)
+  coo$coo <- lapply(coo$coo, coo_up)
+  if (slidegap) coo <- coo_slidegap(coo)
+  coo
 }
 
 #' @export
 coo_up.Coo <- function(coo, slidegap=TRUE){
-  coo$coo <- lapply(coo$coo, coo_up, slidegap=slidegap)
+  coo$coo <- lapply(coo$coo, coo_up)
+  if (slidegap) coo <- coo_slidegap(coo)
   coo
 }
 
