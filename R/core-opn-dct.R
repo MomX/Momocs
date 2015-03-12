@@ -112,12 +112,21 @@ dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
     if (t)
       setTxtProgressBar(pb, i)
   }
+  # still progress bar: skips a line
+  if (t) cat("\n")
+  # we prepare the list and return the results
   res <- OpnCoe(coe=coe,
                 fac=Opn$fac,
                 method = "dfourier",
                 baseline1 = Opn$baseline1,
                 baseline2 = Opn$baseline2)
   return(res)
+}
+
+#' @rdname dfourier
+#' @export
+dfourier.Coo <- function(coo, nb.h, verbose=TRUE) {
+  stop(" * dfourier can only be applied on Opn objects.")
 }
 
 #' Investe discrete cosinus transform

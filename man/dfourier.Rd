@@ -2,6 +2,7 @@
 % Please edit documentation in R/core-opn-dct.R
 \name{dfourier}
 \alias{dfourier}
+\alias{dfourier.Coo}
 \alias{dfourier.Opn}
 \alias{dfourier.default}
 \title{Discrete cosinus transform}
@@ -11,6 +12,8 @@ dfourier(coo, nb.h, verbose = TRUE)
 \method{dfourier}{default}(coo, nb.h, verbose = TRUE)
 
 \method{dfourier}{Opn}(coo, nb.h, verbose = TRUE)
+
+\method{dfourier}{Coo}(coo, nb.h, verbose = TRUE)
 }
 \arguments{
 \item{coo}{a matrix (or a list) of (x; y) coordinates}
