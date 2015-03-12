@@ -1,5 +1,5 @@
 #' Discrete cosinus transform
-#' 
+#'
 #' Calculates discrete cosine transforms, as introduced by Dommergues and colleagues, on
 #' a shape (mainly open outlines).
 #' @param coo a matrix (or a list) of (x; y) coordinates
@@ -13,18 +13,19 @@
 #' \item arg the arguments of the points
 #' }
 #' @note This method has been only poorly tested in Momocs and should be considered as
-#' highly experimental. Also, this method may be long to execute (shall maybe be optimized later)
-#' which explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
+#' highly experimental. Yet improved by a factor 10, this method is still long to execute.
+#' It will probably be improved in further releases but it should not be soi painful.
+#' It also explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
 #' before performing the dct transform.
-#'  
+#'
 #' @references
 #' \itemize{
-#'  \item Dommergues, C. H., Dommergues, J.-L., & Verrecchia, E. P. (2007). 
-#'  The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysis of Open Contours. 
+#'  \item Dommergues, C. H., Dommergues, J.-L., & Verrecchia, E. P. (2007).
+#'  The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysis of Open Contours.
 #'  \emph{Mathematical Geology}, 39(8), 749-763. doi:10.1007/s11004-007-9124-6
 #'  \item Many thanks to Remi Laffont for the translation in R).
 #' }
-#' 
+#'
 #' @keywords discreteCosine
 #' @examples
 #' data(olea)
@@ -60,6 +61,7 @@ dfourier <- function(coo, nb.h, verbose = TRUE) {
 }
 #' @rdname dfourier
 #' @export
+
 dfourier.default <- function(coo, nb.h, verbose = TRUE) {
   # we check a bit
   coo <- coo_check(coo)
@@ -73,14 +75,12 @@ dfourier.default <- function(coo, nb.h, verbose = TRUE) {
   c <- rep(sqrt(2/N), N)
   c[1] <- 1/sqrt(N)
   Sv <- S <- rep(NA, N)
-  for (k in 0:(N - 1)) {
-    for (n in 0:(N - 1)) {
-      Sv[n + 1] <- pol[n + 1] * cos(((2 * n + 1) * k * pi)/(2 * N))
-    }
-    S[k + 1] <- c[k + 1] * sum(Sv)
+  for (k in 0:(N-1)) {
+    Sv <- pol * cos(((2 * 0:(N-1)) * k * pi)/(2 * N))
+    S[k+1] <- c[k+1] * sum(Sv)
   }
-  S <- S[2:(nb.h+1)]  #we remove the 1st harmonic
-  #    return(list(A = Re(S)/N, B = Im(S)/N, mod = Mod(S)/N, phi = Arg(S)))
+  S <- S[2:(nb.h+1)] #we remove the 1st harmonic
+  # return(list(A = Re(S)/N, B = Im(S)/N, mod = Mod(S)/N, phi = Arg(S)))
   return(list(an = Re(S), bn = Im(S), mod = Mod(S), phi = Arg(S)))
 }
 
@@ -121,7 +121,7 @@ dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
 }
 
 #' Investe discrete cosinus transform
-#' 
+#'
 #' Calculates inverse discrete cosine transforms (see \link{dfourier}), given a list of A and B harmonic coefficients,
 #' typically such as those produced by \link{dfourier}.
 #' @param df a list with \code{$A} and \code{$B} components, containing harmonic coefficients.
@@ -129,15 +129,15 @@ dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
 #' @param nb.pts numeric the number of pts for the shape reconstruction
 #' @return a matrix of (x; y) coordinates
 #' @note Only the core functions so far. Will be implemented as an \link{Opn} method soon.
-#' 
+#'
 #' @references
 #' \itemize{
-#'  \item Dommergues, C. H., Dommergues, J.-L., & Verrecchia, E. P. (2007). 
-#'  The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysis of Open Contours. 
+#'  \item Dommergues, C. H., Dommergues, J.-L., & Verrecchia, E. P. (2007).
+#'  The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysis of Open Contours.
 #'  \emph{Mathematical Geology}, 39(8), 749-763. doi:10.1007/s11004-007-9124-6
 #'  \item Many thanks to Remi Laffont for the translation in R).
 #' }
-#' 
+#'
 #' @keywords discreteCosine
 #' @examples
 #' # dfourier and inverse dfourier
@@ -166,13 +166,13 @@ dfourier_i <- function(df, nb.h, nb.pts = 60) {
   if (missing(nb.h)) {
     nb.h <- length(A) + 1
   }
-  
+
   c <- rep(sqrt(2/nb.pts), nb.pts)
   c[1] <- 1/sqrt(nb.pts)
-  
+
   S <- A + (0+1i) * B
   S <- c(0+1i, S)  # we add a trivial harmonic corresponding to (0; 0)
-  
+
   sv_r <- rep(NA, nb.h)
   s_r <- rep(NA, nb.pts)
   # idfourier pour le nombre d'harmonique spécifié
@@ -187,39 +187,39 @@ dfourier_i <- function(df, nb.h, nb.pts = 60) {
 }
 
 #' Calculates and draws 'dfourier' shapes
-#' 
-#' Calculates shapes based on 'Discrete cosine transforms' given harmonic coefficients 
-#' (see \link{dfourier}) or can generate some random 'dfourier' shapes. 
+#'
+#' Calculates shapes based on 'Discrete cosine transforms' given harmonic coefficients
+#' (see \link{dfourier}) or can generate some random 'dfourier' shapes.
 #' Mainly intended to generate shapes and/or to understand how dfourier works.
 #' @param A vector of harmonic coefficients
 #' @param B vector of harmonic coefficients
-#' @param nb.h if \code{A} and/or \code{B} are not provided, 
+#' @param nb.h if \code{A} and/or \code{B} are not provided,
 #' the number of harmonics to generate
-#' @param nb.pts if \code{A} and/or \code{B} are not provided, 
-#' the number of points to use to reconstruct the shapes 
-#' @param alpha tThe power coefficient associated with the (usually decreasing) 
+#' @param nb.pts if \code{A} and/or \code{B} are not provided,
+#' the number of points to use to reconstruct the shapes
+#' @param alpha tThe power coefficient associated with the (usually decreasing)
 #' amplitude of the harmonic coefficients (see \link{efourier_shape})
 #' @param plot logical whether to plot the shape
-#' @examples 
+#' @examples
 #' # some signatures
 #' panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=0.5, nb.h=6)))))
 #' # some worms
 #' panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=2, nb.h=6)))))
 #' @export
 dfourier_shape <- function(A, B, nb.h, nb.pts = 60, alpha = 2, plot = TRUE) {
-  if (missing(nb.h) & missing(A)) 
+  if (missing(nb.h) & missing(A))
     nb.h <- 3
-  if (missing(nb.h) & !missing(A)) 
+  if (missing(nb.h) & !missing(A))
     nb.h <- length(A)
-  if (missing(A)) 
+  if (missing(A))
     A <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
-  if (missing(B)) 
+  if (missing(B))
     B <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
   df <- list(A = A, B = B)
   shp <- dfourier_i(df, nb.pts = nb.pts)
-  if (plot) 
+  if (plot)
     coo_plot(shp)
   return(shp)
 }
 
-##### end core-dfourier 
+##### end core-dfourier
