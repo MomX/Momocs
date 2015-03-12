@@ -920,7 +920,7 @@ coo_up.default <- function(coo, slidegap=TRUE) {
 coo_up.Out <- function(coo, slidegap=TRUE){
   coo$coo <- lapply(coo$coo, coo_up)
   if (slidegap) coo <- coo_slidegap(coo)
-  coo
+  Opn(coo)
 }
 
 #' @export
