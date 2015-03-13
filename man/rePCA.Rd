@@ -12,7 +12,7 @@ rePCA(PCA, Coe)
 \item{Coe}{a \link{Coe} object}
 }
 \description{
-Basically reapply rotation to the new Coe object.
+Basically reapply rotation to a new Coe object.
 }
 \note{
 Quite experimental. Dimensions of the matrices and methods must match.

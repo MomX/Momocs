@@ -18,8 +18,7 @@ reLDA(LDA, newdata)
 \item{newdata}{to use; only implemented for \link{PCA} object/scores.}
 }
 \value{
-a list with components (see ?predict.lda for the first three). If the model LDA was done using a single factor
-(not a formula), then additional informations are returned around actual vs. predicted classes :
+a list with components (from ?predict.lda ).
 \itemize{
 \item class factor of classification
 \item posterior posterior probabilities for the classes

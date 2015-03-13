@@ -69,13 +69,13 @@ LDA.default <- function(x, fac, retain, ...) {
   SSw <- var(lm.mod$residuals) * (n - 1)
   VCVw <- SSw/dfw
   LDs <- VCVw %*% mod$scaling
-  
+
   # class error
   tab <- CV.tab
   ce <- numeric(nrow(tab))
   for (i in 1:nrow(tab)) ce[i] <- sum(tab[i, -i])/sum(tab[i, ])
   names(ce) <- rownames(tab)
-  
+
   # we build the list to be returned
   LDA <- list(x = X, fac = fac, removed = remove, mod = mod,
               mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
@@ -143,10 +143,10 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   ce <- numeric(nrow(tab))
   for (i in 1:nrow(tab)) ce[i] <- sum(tab[i, -i])/sum(tab[i, ])
   names(ce) <- rownames(tab)
-  
+
   LDA <- list(x = X, fac = fac, f0 = f0, removed = remove, mod = mod,
               mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
-              CV.correct = CV.correct, CV.ce = ce, LDs = LDs, 
+              CV.correct = CV.correct, CV.ce = ce, LDs = LDs,
               mshape = NULL, method = "LDAPCA")  # may be interesting to add LDA on PCA here?
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)
@@ -155,13 +155,13 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
 #' @export
 print.LDA <- function(x, ...) {
   cat("Leave-one-out cross-validation ($CV.correct): (",
-      signif(x$CV.correct * 100, 3), "% - ", 
+      signif(x$CV.correct * 100, 3), "% - ",
       sum(diag(x$CV.tab)), "/", sum(x$CV.tab),
       "): \n", sep = "")
-  
+
   cat("\nCross-validation table ($CV.tab):\n")
   print(x$CV.tab)
-  
+
   cat("\nClass error ($CV.ce):\n")
   print(x$CV.ce)
 }
@@ -170,81 +170,80 @@ print.LDA <- function(x, ...) {
 
 
 #' "Redo" a LDA on new data
-#' 
+#'
 #' Basically a wrapper around \link{predict.lda} from the package MASS. Uses a LDA model
 #' to classify new data.
 #' @param LDA a \link{LDA} object
 #' @param newdata to use; only implemented for \link{PCA} object/scores.
-#' @return a list with components (see ?predict.lda for the first three). If the model LDA was done using a single factor
-#' (not a formula), then additional informations are returned around actual vs. predicted classes :
+#' @return a list with components (from ?predict.lda ).
 #' \itemize{
 #' \item class factor of classification
 #' \item posterior posterior probabilities for the classes
-#' \item x the scores of test cases 
+#' \item x the scores of test cases
 #' \item res data.frame of the results
 #' \item CV.tab a confusion matrix of the results
 #' \item CV.correct proportion of the diagonal of CV.tab
 #' \item newdata the data used to calculate passed to predict.lda
 #' }
-#' @note Uses the same number of PC axis as the LDA object provided. You should probably use \link{rePCA} in 
+#' @note Uses the same number of PC axis as the LDA object provided. You should probably use \link{rePCA} in
 #' conjonction with reLDA to get 'homologous' scores.
 #' @examples
 #' data(bot)
-#' # We select the first 10 individuals in bot, 
+#' # We select the first 10 individuals in bot,
 #' # for whisky and beer bottles. It will be our referential.
 #' bot1   <- slice(bot, c(1:10, 21:30))
-#' # Same thing for the other 10 individuals. 
+#' # Same thing for the other 10 individuals.
 #' # It will be our unknown dataset on which we want
 #' # to calculate classes.
 #' bot2   <- slice(bot, c(11:20, 31:40))
-#' 
+#'
 #' # We calculate efourier on these two datasets
 #' bot1.f <- efourier(bot1, 8)
 #' bot2.f <- efourier(bot2, 8)
-#' 
+#'
 #' # Here we obtain our LDA model: first, a PCA, then a LDA
 #' bot1.p <- PCA(bot1.f)
 #' bot1.l <- LDA(bot1.p, "type")
-#' 
+#'
 #' # we redo the same PCA since we worked with scores
 #' bot2.p <- rePCA(bot1.p, bot2.f)
-#' 
+#'
 #' # we finally "predict" with the model obtained before
 #' bot2.l <- reLDA(bot1.l, bot2.p)
-#' 
+#'
 #' # Note that we can use plot_CV and plot_CV2 as follows
 #' plot_CV(bot2.l$CV.tab)
-#' 
+#'
 #' @rdname reLDA
-#' @export 
+#' @export
 reLDA <- function(LDA, newdata){
   UseMethod("reLDA")
 }
 
 #' @rdname reLDA
-#' @export 
+#' @export
 reLDA.default <- function(LDA, newdata){
   stop(" * method only defined for LDA objects")
 }
 
 #' @rdname reLDA
-#' @export 
+#' @export
 reLDA.LDA <- function(LDA, newdata){
   if (missing(newdata) | !any(class(newdata) == "PCA"))
     stop(" * a PCA object must be provided")
   mod <- LDA$mod
-  nr <- ncol(LDA$x)
-  reLDA <- predict(mod, newdata$x[, 1:nr])
+  nc <- ncol(LDA$x)
+  reLDA <- predict(mod, newdata$x[, 1:nc])
   #   return(reLDA)
-  if (length(LDA$f0)==1) {
-    actual <- newdata$fac[, LDA$f0]
-    if (!is.null(actual)) {
-      reLDA$res <- data.frame(actual=actual, classified=reLDA$class)
-      reLDA$CV.tab <- table(reLDA$res)
-      reLDA$CV.correct <- sum(diag(reLDA$CV.tab)) / sum(reLDA$CV.tab)
-    }
-  }
-  reLDA$newdata <- newdata$x[, 1:nr]
+#   if (length(LDA$f0)==1) {
+#     actual <- newdata$fac[, LDA$f0]
+#     if (!is.null(actual)) {
+#       reLDA$res <- data.frame(actual=actual, classified=reLDA$class)
+#       reLDA$CV.tab <- table(reLDA$res)
+#       reLDA$CV.correct <- sum(diag(reLDA$CV.tab)) / sum(reLDA$CV.tab)
+#     }
+#   }
+  reLDA$newdata <- newdata$x[, 1:nc]
 #   class(reLDA) <- "LDA"
   return(reLDA)
 }

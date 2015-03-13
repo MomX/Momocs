@@ -209,8 +209,8 @@ get_pairs.LDA <- get_pairs.PCA
 
 
 #' "Redo" a PCA on a new Coe
-#' 
-#' Basically reapply rotation to the new Coe object.
+#'
+#' Basically reapply rotation to a new Coe object.
 #' @param PCA a \link{PCA} object
 #' @param Coe a \link{Coe} object
 #' @note Quite experimental. Dimensions of the matrices and methods must match.
@@ -218,33 +218,33 @@ get_pairs.LDA <- get_pairs.PCA
 #' data(bot)
 #' b <- filter(bot, type=="beer")
 #' w <- filter(bot, type=="whisky")
-#' 
+#'
 #' bf <- efourier(b, 8)
 #' bp <- PCA(bf)
-#' 
+#'
 #' wf <- efourier(w, 8)
-#' 
+#'
 #' # and we use the "beer" PCA on the whisky coefficients
 #' wp <- rePCA(bp, wf)
 #'
 #' plot(wp)
-#' 
+#'
 #' plot(bp, eig=FALSE)
 #' points(wp$x[, 1:2], col="red", pch=4)
-#' 
-#'@export 
+#'
+#'@export
 rePCA <- function(PCA, Coe){
   UseMethod("rePCA")
 }
 
 
-#'@export 
+#'@export
 rePCA.default <- function(PCA, Coe){
   stop(" * method only defined for PCA objetcs")
 }
 
 
-#'@export 
+#'@export
 rePCA.PCA <- function(PCA, Coe){
   if (Coe$method != PCA$method)
     warning(" * methods differ between Coe and PCA")
@@ -253,9 +253,9 @@ rePCA.PCA <- function(PCA, Coe){
   coe <- Coe$coe
   if (any(colnames(coe) != rownames(rot)))
     warning(" * Matrices coefficients must match")
-  # we copy / empty the PCA object
+  # we prepare a new PCA object
   PCA2 <- PCA
-  PCA2$x[] <- NA
+  PCA2$x <- matrix(NA, nrow(coe), ncol(rot), dimnames = list(rownames(coe), colnames(rot)))
   # we recenter
   coe <- apply(coe, 2, function(x) x - mean(x))
   # learn matrix calculus bitch
