@@ -2,12 +2,12 @@
 
 # table --------------------------
 #' Cross tabulation of Momocs objects
-#' 
+#'
 #' Simply extends base \link{table} for a more convenient use on $fac slot.
-#' 
+#'
 #' @param ... a list of, first, a Momocs object (Coo, Coe, PCA, etc.), then, column names in the $fac slot. If not specified,
 #' returns a table on the entire $fac data.frame
-#' 
+#'
 #' @examples
 #' data(bot)
 #' table(bot)
@@ -65,10 +65,10 @@ table.LDA <- table.Coo
 # subset -------------------------------
 #' Create subsets of Coo objects
 #'
-#' 
-#' Subset is a wrapper around dplyr's verbs and should not be used directly. 
+#'
+#' Subset is a wrapper around dplyr's verbs and should not be used directly.
 #' Use \link{slice}, \link{filter}, \link{chop} and \link{select} instead.
-#' 
+#'
 #' \itemize{
 #' \item \strong{select} is used to select columns from the $fac
 #' \item \strong{slice} is used to select shapes based on their ids
@@ -76,7 +76,7 @@ table.LDA <- table.Coo
 #' \item \strong{filter} is used to create subset based on logical values taken from the $fac
 #' \item \strong{mutate}
 #' }
-#' 
+#'
 #' @rdname subset
 #' @param x a \code{Coo} or a \link{Coe} object.
 #' @param .data same
@@ -88,20 +88,20 @@ table.LDA <- table.Coo
 #' ##### slice
 #' slice(olea, 1) # if you only want the coordinates, try bot[1]
 #' slice(olea, 1:20)
-#' slice(olea, 21:30) 
-#' 
+#' slice(olea, 21:30)
+#'
 #' ##### chop (a rougher slicing)
 #' chop(olea, domes) # return a list that can be lapply-ed
-#' 
+#'
 #' ##### filter
 #' filter(olea, domes=="cult")
 #' filter(olea, domes=="cult", view=="VL")
-#' 
+#'
 #' ##### select
 #' head(olea$fac)
 #' select(olea, domes, view)
 #' select(olea, -ind)
-#' 
+#'
 #' @export
 subset.Coo <- function(x, subset, ...) {
   Coo <- x
@@ -128,7 +128,7 @@ subset.Coe <- function(x, subset, ...) {
   retain <- eval(e, Coe$fac, parent.frame())
   Coe2 <- Coe
   Coe2$coe <- Coe$coe[retain, ]
-  if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
+#   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
   if (ncol(Coe$fac) > 0) {
     Coe2$fac <- Coe$fac
     Coe2$fac <- as.data.frame(Coe2$fac[retain, ])
@@ -182,20 +182,20 @@ subset.PCA <- function(x, subset, ...){
 #' ##### slice
 #' slice(olea, 1) # if you only want the coordinates, try bot[1]
 #' slice(olea, 1:20)
-#' slice(olea, 21:30) 
-#' 
+#' slice(olea, 21:30)
+#'
 #' ##### chop (a rougher slicing)
 #' chop(olea, domes) # return a list that can be lapply-ed
-#' 
+#'
 #' ##### filter
 #' filter(olea, domes=="cult")
 #' filter(olea, domes=="cult", view=="VL")
-#' 
+#'
 #' ##### select
 #' head(olea$fac)
 #' select(olea, domes, view)
 #' select(olea, -ind)
-#' 
+#'
 #' @export
 select <- function(.data, ...){
   UseMethod("select")
@@ -233,20 +233,20 @@ select.PCA <- select.Coo
 #' ##### slice
 #' slice(olea, 1) # if you only want the coordinates, try bot[1]
 #' slice(olea, 1:20)
-#' slice(olea, 21:30) 
-#' 
+#' slice(olea, 21:30)
+#'
 #' ##### chop (a rougher slicing)
 #' chop(olea, domes) # return a list that can be lapply-ed
-#' 
+#'
 #' ##### filter
 #' filter(olea, domes=="cult")
 #' filter(olea, domes=="cult", view=="VL")
-#' 
+#'
 #' ##### select
 #' head(olea$fac)
 #' select(olea, domes, view)
 #' select(olea, -ind)
-#' 
+#'
 #' @rdname filter
 #' @export
 filter <- function(.data, ...){
@@ -268,6 +268,7 @@ filter.Coo <- function(.data, ...){
 #' @rdname filter
 #' @export
 filter.Coe <- filter.Coo
+
 #' @rdname filter
 #' @export
 filter.PCA <- filter.Coo
@@ -285,20 +286,20 @@ filter.PCA <- filter.Coo
 #' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
 #' @return a \code{Coo}, \code{Coe}, \code{PCA} object
 #' @examples
-#' 
+#'
 #' data(olea)
 #' ##### slice
 #' slice(olea, 1) # if you only want the coordinates, try bot[1]
 #' slice(olea, 1:20)
-#' slice(olea, 21:30) 
-#' 
+#' slice(olea, 21:30)
+#'
 #' ##### chop (a rougher slicing)
 #' chop(olea, domes) # return a list that can be lapply-ed
-#' 
+#'
 #' ##### filter
 #' filter(olea, domes=="cult")
 #' filter(olea, domes=="cult", view=="VL")
-#' 
+#'
 #' ##### select
 #' head(olea$fac)
 #' select(olea, domes, view)
@@ -334,9 +335,9 @@ slice.PCA <- function(.data, ...){
 # sample_n ---------------
 
 #' Samples n shapes in Momocs objects
-#' 
+#'
 #' Uses (and maintain) dplyr syntax and verb.
-#' 
+#'
 #' @param tbl a Momocs object (Coo, Coe)
 #' @param size numeric how many shapes should we sample
 #' @param replace logical whether sample should be done with ot without replacement
@@ -344,7 +345,7 @@ slice.PCA <- function(.data, ...){
 #' @seealso \link{sample_frac}
 #' @param ... additional arguments to dplyr::sample_n and to maintain generic compatibility
 #' @examples
-#' 
+#'
 #' data(bot)
 #' bot
 #' # samples 5 bottles no matter their type
@@ -353,7 +354,7 @@ slice.PCA <- function(.data, ...){
 #' table(sample_n(bot, 5, fac="type"))
 #' # many repetitions
 #' table(names(sample_n(bot, 400, replace=TRUE)))
-#' 
+#'
 #' @rdname sample_n
 #' @export
 sample_n <- function(tbl, size, replace, ...){
@@ -373,15 +374,15 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
   if (missing(fac)) {
     fac <- NULL
     N <- length(Coo)
-    if (!replace & any(N)>size)  
+    if (!replace & any(N)>size)
       stop(" * for at least one level, 'size' is too large for sampling without replacement")
   } else {
     fac <- Coo$fac[, fac]
     N <- table(fac)
-    if (!replace & any(N)>size)  
+    if (!replace & any(N)>size)
       stop(" * for at least one level, 'size' is too large for sampling without replacement")
   }
-  
+
   if (is.null(fac)) {
     retain <- sample(N, size = size, replace = replace)
   } else {
@@ -403,9 +404,9 @@ sample_n.Coe <- sample_n.Coo
 # sample_frac ---------------
 
 #' Samples a fraction of shapes in Momocs objects
-#' 
+#'
 #' Uses (and maintain) dplyr syntax and verb.
-#' 
+#'
 #' @param tbl a Momocs object (Coo, Coe)
 #' @param size numeric (0 < numeric <= 1) the fraction of shapes to select
 #' @param replace logical whether sample should be done with ot without replacement
@@ -414,7 +415,7 @@ sample_n.Coe <- sample_n.Coo
 #' @seealso \link{sample_n}
 #' @param ... additional arguments to dplyr::sample_frac and to maintain generic compatibility
 #' @examples
-#' 
+#'
 #' data(bot)
 #' bot
 #' # samples 50% of the bottles no matter their type
@@ -423,7 +424,7 @@ sample_n.Coe <- sample_n.Coo
 #' table(sample_frac(bot, 0.8, fac="type"))
 #' # bootstrap the same number of bootles of each type but with replacement
 #' table(names(sample_frac(bot, 1, replace=TRUE)))
-#' 
+#'
 #' @rdname sample_frac
 #' @export
 sample_frac <- function(tbl, size, replace, ...){
@@ -439,7 +440,7 @@ sample_frac.default <- function(tbl, size=1, replace=FALSE, ...){
 #' @rdname sample_frac
 #' @export
 sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
-  if (size > 1 | size <= 0) 
+  if (size > 1 | size <= 0)
     stop(" * size must be >=0 and <= 1")
   Coo <- tbl
   if (missing(fac)) {
