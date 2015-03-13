@@ -38,7 +38,7 @@ a shape (mainly open outlines).
 \note{
 This method has been only poorly tested in Momocs and should be considered as
 highly experimental. Yet improved by a factor 10, this method is still long to execute.
-It will probably be improved in further releases but it should not be soi painful.
+It will probably be improved in further releases but it should not be so painful.
 It also explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
 before performing the dct transform.
 }
