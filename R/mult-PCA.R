@@ -97,7 +97,7 @@ PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
 
 #' @rdname PCA
 #' @export
-PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=NULL) {
+PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=data.frame()) {
   PCA <- prcomp(x, scale. = scale., center = center)
   if (!is.null(fac)) fac <- as.data.frame(fac)
   PCA$fac <- fac
