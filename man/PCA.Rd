@@ -18,7 +18,7 @@ PCA(x, scale., center, fac)
 
 \method{PCA}{LdkCoe}(x, scale. = FALSE, center = TRUE, fac)
 
-\method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = NULL)
+\method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = data.frame())
 
 as.PCA(x, fac)
 

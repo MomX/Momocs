@@ -60,8 +60,6 @@ bot2.p <- rePCA(bot1.p, bot2.f)
 
 # we finally "predict" with the model obtained before
 bot2.l <- reLDA(bot1.l, bot2.p)
-
-# Note that we can use plot_CV and plot_CV2 as follows
-plot_CV(bot2.l$CV.tab)
+bot2.l
 }
 
