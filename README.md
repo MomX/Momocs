@@ -19,7 +19,7 @@ __Note that:__
 * The current [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper)
 * Since then, Momocs has been almost entirely rewritten and considerably enlarged.
 * A CRAN version will be released when most of the features planned below (*) will be part of Momocs.
-* Also, some tutorials are on their way: `browseVignettes("Momocs")`. Same thing, [here](https://github.com/vbonhomme/Momocs/tree/master/vignettes)
+* Also, some tutorials are on their way
 
 __You are welcome to:__
 * [propose ideas and report bugs](https://github.com/vbonhomme/Momocs/issues)
