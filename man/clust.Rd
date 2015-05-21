@@ -14,8 +14,8 @@ CLUST(x, fac, method, type, palette, ...)
 \item{method}{the method to use among \code{'euclidean'}, \code{'maximum'},
 \code{'manhattan'}, \code{'canberra'}, \code{'binary'} or \code{'minkowski'} to feed \link{dist}}
 
-\item{type}{the type of plot among \code{'phylogram'} (the default), \code{'cladogram'},
-\code{'fan'}, \code{'unrooted'} and \code{'radial'} to feed \link{plot.phylo}}
+\item{type}{the type of plot among \code{'phylogram'} , \code{'cladogram'},
+\code{'fan'}, \code{'unrooted'} and \code{'radial'} (the default) to feed \link{plot.phylo}}
 
 \item{palette}{a color palette to use}
 

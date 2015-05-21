@@ -6,6 +6,7 @@
 \alias{mshapes.LdkCoe}
 \alias{mshapes.OpnCoe}
 \alias{mshapes.OutCoe}
+\alias{mshapes.PCA}
 \alias{mshapes.array}
 \alias{mshapes.list}
 \title{Mean shape calculation for Coo, Coe, etc.}
@@ -23,9 +24,11 @@ mshapes(x, ...)
 \method{mshapes}{OpnCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
 
 \method{mshapes}{LdkCoe}(x, fac, FUN = mean, ...)
+
+\method{mshapes}{PCA}(x, fac, ...)
 }
 \arguments{
-\item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe object}
+\item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe or PCA object}
 
 \item{...}{useless here.}
 
@@ -48,7 +51,9 @@ groups defined with the fac argument if provided) and the Coe object is returned
 \details{
 Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
 in that case, the other columns of the fac are also returned, usingthe first row within every level, but they may
-not be representive of the group.
+not be representive of the group. Also notice that for PCA objects, mean scores are returned
+within a PCA object (accesible with PCA$x) that can be plotted directly but other slots are left
+unchanged.
 }
 \examples{
 #### on shapes

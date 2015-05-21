@@ -6,7 +6,7 @@
 #' @param nax numeric the range of PC components to use (1:2 by default)
 #' @param ... additional arguments to be passed to \link{kmeans}
 #' @return the same thing as \link{kmeans}
-#' @example
+#' @examples
 #' data(bot)
 #' bp <- PCA(efourier(bot, 10))
 #' KMEANS(bp, 2)
