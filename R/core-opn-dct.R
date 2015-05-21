@@ -184,7 +184,7 @@ dfourier_i <- function(df, nb.h, nb.pts = 60) {
 
   sv_r <- rep(NA, nb.h)
   s_r <- rep(NA, nb.pts)
-  # idfourier pour le nombre d'harmonique spécifié
+  # idfourier pour le nombre d'harmonique specifie
   for (n in 0:(nb.pts - 1)) {
     for (k in 0:(nb.h - 1)) {
       sv_r[k + 1] <- c[k + 1] * S[k + 1] * cos(((2 * n + 1) * k * pi)/(2 * nb.pts))
