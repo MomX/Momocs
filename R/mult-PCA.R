@@ -268,6 +268,97 @@ rePCA.PCA <- function(PCA, Coe){
 }
 
 
+#' Calculates convex hull area/volume of PCA scores
+#' 
+#' May be useful to compare shape diversity. Expressed in PCA units that should
+#' only be compared within the same PCA.
+#' 
+#' @param x a PCA object
+#' @param fac (optionnal) column name or ID from the $fac slot. 
+#' @param xax the first PC axis to use (1 by default)
+#' @param yax the second PC axis (2 by default)
+#' @param zax the third PC axis (3 by default only for volume)
+#' 
+#' @return
+#' If fac is not provided global area/volume is returned; otherwise a named
+#' list for every level of fac
+#' 
+#' @examples
+#' data(bot)
+#' bp <- PCA(efourier(bot, 12))
+#' get_chull_area(bp)
+#' get_chull_area(bp, 1)
+#' 
+#' get_chull_volume(bp)
+#' get_chull_volume(bp, 1)
+#' @export
+get_chull_area <- function (x, fac, xax = 1, yax = 2) {
+  if (!is.PCA(x)) stop(" * 'x' must be a PCA object")
+  # no fac provided
+  if (missing(fac)){
+    xy <- x$x[, c(xax, yax)]
+    return(coo_area(coo_chull(xy)))
+  }
+  # else... if a fac is provided
+  fac <- x$fac[, fac]
+  x <- x$x[, c(xax, yax)]
+  # we prepare the list
+  res <- list()
+  # we loop over to extract subset of coordinates
+  for (i in seq(along = levels(fac))) {
+    xy.i <- x[fac == levels(fac)[i], ]
+    # boring but prevents the numeric/2rows matrices
+    if (is.matrix(xy.i)) {
+      if (nrow(xy.i) > 2) {
+        res[[i]] <- coo_chull(xy.i)
+      }  else {
+        res[[i]] <- NULL
+      }
+    } else {
+      res[[i]] <- NULL
+    }
+  }
+  # we calculate the area and return the results
+  names(res) <- levels(fac)
+  res <- lapply(res, coo_area)
+  return(res)
+}
+
+#' @rdname get_chull_area
+#' @export
+get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
+  if (!is.PCA(x)) stop(" * 'x' must be a PCA object")
+  
+  # no fac provided
+  if (missing(fac)){
+    xy <- x$x[, c(xax, yax, zax)]
+    res <- convhulln(xy, options="FA")$vol
+    return(res)
+  }
+  # else...fac provided
+  fac <- x$fac[, fac]
+  # we prepare the list
+  x <- x$x[, c(xax, yax, zax)]
+  res <- list()
+  # we loop over to extract subset of coordinates
+  for (i in seq(along = levels(fac))) {
+    xy.i <- x[fac == levels(fac)[i], ]
+    # boring but prevents the numeric/2rows matrices
+    if (is.matrix(xy.i)) {
+      if (nrow(xy.i) > 2) {
+        res[[i]] <- convhulln(xy.i, options="FA")$vol
+      }  else {
+        res[[i]] <- NULL
+      }
+    } else {
+      res[[i]] <- NULL
+    }
+  }
+  # we calculate the area and return the results
+  names(res) <- levels(fac)
+  return(res)
+}
+
 
 
 ##### end PCA
