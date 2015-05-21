@@ -2,7 +2,7 @@
 
 #' Momocs
 #'
-#' Momocs is an R package which aims to provide a complete and convenient
+#' Momocs aims to provide a complete and convenient
 #' toolkit for morphometrics. It is intended for scientists interested in
 #' describing quantitatively the shape, and its variations, of the objects they
 #' study. In the last decade, R has become the open-source lingua franca
@@ -60,7 +60,7 @@
 #' @import sp
 #' @import reshape2
 #' @import ggplot2
-#' @importFrom geometry delaunayn
+#' @importFrom geometry delaunayn convhulln
 #' @importFrom graphics boxplot
 #' @importFrom jpeg readJPEG
 #' @importFrom MASS lda ginv kde2d cov.trob
