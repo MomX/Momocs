@@ -77,3 +77,99 @@ links_delaunay <- function(coo) {
     links <- links[-which(duplicated(links)), ]
     return(links)
 } 
+
+#' An utility to define links between landmarks
+#' 
+#' Works on Ldk objects, on 2cols matrices, 3dim arrays (msshapes turns it into a matrix).
+#' @param x Ldk, matric or array
+#' @param nb.ldk numeric the iterative procedure is stopped when the 
+#' user click on the top of the graphical window.
+#' @examples
+#' \dontrun{
+#' data(wings)
+#' wm <- mshapes(wings)
+#' links <- def_links(wm, 3) # click to define pairs of landmarks
+#' ldk_links(wm, links)
+#' }
+#' @export
+def_links <- function(x, nb.ldk){
+  UseMethod("def_links")
+}
+
+
+#' @export
+def_links.matrix <- function(x, nb.ldk){
+  def_2ldk <- function(x, hmax){
+    res <- numeric(2)
+    # 1st point
+    cat("Click on the starting landmark...")
+    xy <- as.numeric(locator(1))
+    if (!missing(hmax)) { if (xy[2] >= hmax) return() }
+    d <- (x[, 1] - xy[1])^2 + (x[, 2] - xy[2])^2
+    res[1] <- which.min(d)
+    # 2nd point
+    cat(", on the ending landmark")
+    xy <- as.numeric(locator(1))
+    if (!missing(hmax)) { if (xy[2] >= hmax) return() }
+    d <- (x[, 1] - xy[1])^2 + (x[, 2] - xy[2])^2
+    res[2] <- which.min(d)
+    cat("\n")
+    return(res)
+  }
+  
+  
+  ldk_plot(x)
+  ldk_labels(x)
+  
+  links <- matrix(NA, nrow=ifelse(missing(nb.ldk), 0, nb.ldk), ncol=2)
+  
+  # case where nb.ldk is specified
+  if (!missing(nb.ldk)){
+    for (i in 1:nb.ldk){
+      cat(" * [", i, "/", nb.ldk, "] - ")
+      links[i, ] <- def_2ldk(x)
+    }
+    return(unique(links))
+  } else {
+    # case where nb.ldk is specified
+    hmax <- par("usr")[4]*0.99
+    abline(h=hmax)
+    text(x=mean(par("usr")[1:2]), y=hmax, pos = 3, labels = "end")
+    over = FALSE
+    while (!over){
+      cat(" *", nrow(links)+1, "th link - ")
+      links.i <- def_2ldk(x, hmax)
+      if (!is.null(links.i)) {
+        links <- rbind(links, links.i)
+      } else {
+        over = TRUE
+      }
+    }
+    rownames(links) <- NULL
+    return(unique(links))
+  }
+}
+
+#' @export
+def_links.Ldk <- function(x, nb.ldk){
+  m <- mshapes(x)
+  links <- def_links.matrix(m, nb.ldk)
+  x$links <- links
+  return(x)
+}
+
+#' @export
+def_links.array <- function(x, nb.ldk){
+  if (length(dim(x)) == 3){
+    x <- mshapes(x)
+    links <- def_links.matrix(x)
+  } else {
+    stop(" * def_links only works on Ldk objects, matrices or 3-dim arrays.")
+  }
+  return(links)
+}
+
+#' @export
+def_links.default <- function(x, nb.ldk){
+  stop(" * def_links only works on Ldk objects, matrices or 3-dim arrays.")
+}
