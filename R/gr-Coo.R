@@ -242,7 +242,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   if (ldk_chull) {
     ldk_chull(A)
   }
-  if (ldk_links) {
+  if (ldk_links | missing(ldk_links))  {
     if (is.matrix(Coo$links))
       ldk_links(mshapes(A), Coo$links)
   }
@@ -419,7 +419,7 @@ panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
     }
   }
   if (missing(borders)) {
-    borders <- rep("#333333", length(Coo))
+    borders <- rep(NA, length(Coo))
   }
   if (length(borders) != length(Coo)) {
     borders <- rep(borders[1], length(Coo))
@@ -435,11 +435,9 @@ panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
     } else {
       if (length(names) != length(Coo)) {
         if (is.null(reorder)) {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[,
-                                                    names], cex = cex.names)
+          text(pos[, 1], pos[, 2], labels = Coo$fac[, names], cex = cex.names)
         } else {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[,
-                                                    names][order(reorder)], cex = cex.names)
+          text(pos[, 1], pos[, 2], labels = Coo$fac[, names][order(reorder)], cex = cex.names)
         }
       } else {
         text(pos[, 1], pos[, 2], labels = names, cex = cex.names)

@@ -347,13 +347,15 @@ coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
     for (i in 1:n) {
       trans <- which(pos == i, arr.ind = TRUE) - 0.5
       res[i, ] <- c(trans[2], trans[1])
-      lines(coo_tp[[i]][, 1] + trans[2], coo_tp[[i]][, 
-                                                     2] + trans[1], col = borders[i])
+      lines(coo_tp[[i]][, 1] + trans[2],
+            coo_tp[[i]][, 2] + trans[1],
+            col = borders[i])
       if (points) {
         # if (!missing(points.col)) { col <- rep(points.col,
         # length(coo.list)) }
-        points(coo_tp[[i]][, 1] + trans[2], coo_tp[[i]][, 
-                                                        2] + trans[1], col = points.col, pch = points.pch, 
+        points(coo_tp[[i]][, 1] + trans[2],
+               coo_tp[[i]][, 2] + trans[1],
+               col = points.col, pch = points.pch, 
                cex = points.cex)
       }
     }
