@@ -33,7 +33,7 @@ NULL
 #' @rdname data_mosquito
 #' @keywords Datasets
 #' @format A \link{Out} object with the 126 mosquito wing outlines outlines
-#' used Rohlf and Archie (1984).
+#' used Rohlf and Archie (1984). Note that the links defined here are quite approximate.
 #' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
 #' description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic Biology}: 302-317.
 #' Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
