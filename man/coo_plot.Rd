@@ -3,7 +3,7 @@
 \name{coo_plot}
 \alias{coo_plot}
 \alias{coo_plot.default}
-\alias{coo_plot.ldk}
+\alias{ldk_plot}
 \title{Plots a single shape}
 \usage{
 coo_plot(coo, ...)
@@ -13,7 +13,7 @@ coo_plot(coo, ...)
   centroid = TRUE, xy.axis = TRUE, pch = 1, cex = 0.5, main = NA,
   poly = TRUE, plot.new = TRUE, plot = TRUE, zoom = 1, ...)
 
-\method{coo_plot}{ldk}(coo, cex = 1, poly = FALSE, ...)
+ldk_plot(coo, ...)
 }
 \arguments{
 \item{coo}{A \code{list} or a \code{matrix} of coordinates.}

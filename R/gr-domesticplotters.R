@@ -126,8 +126,8 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
 
 #' @rdname coo_plot
 #' @export
-coo_plot.ldk <- function(coo, cex = 1, poly = FALSE, ...) {
-  coo_plot.default(coo, cex = cex, poly = poly, ...)
+ldk_plot <- function(coo, ...){
+  coo_plot(coo, poly=FALSE, first.point = FALSE, ...)
 }
 
 #' Adds a shape to the current plot
