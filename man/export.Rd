@@ -3,11 +3,14 @@
 \name{export}
 \alias{export}
 \alias{export.Coe}
+\alias{export.PCA}
 \title{Export Coe objects and shapes}
 \usage{
 export(x, file, sep, dec)
 
 \method{export}{Coe}(x, file = "data.txt", sep = "\\t", dec = ".")
+
+\method{export}{PCA}(x, file = "data.txt", sep = "\\t", dec = ".")
 }
 \arguments{
 \item{x}{a Coe object}
@@ -21,7 +24,7 @@ tab by default}
 by default.}
 }
 \description{
-Writes a \code{.txt} or \code{.xls} or whatever readable from a \link{Coe}
+Writes a \code{.txt} or \code{.xls} or whatever readable from a \link{Coe}, or PCA
 object, along with individual names and grouping factors. A simple wrapper
 around \link{write.table}.
 }

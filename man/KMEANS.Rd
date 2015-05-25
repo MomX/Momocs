@@ -2,9 +2,12 @@
 % Please edit documentation in R/mult-KMEANS.R
 \name{KMEANS}
 \alias{KMEANS}
-\title{k-means}
+\alias{KMEANS.PCA}
+\title{KMEANS on PCA objects}
 \usage{
 KMEANS(x, ...)
+
+\method{KMEANS}{PCA}(x, centers, nax = 1:2, pch = 20, cex = 0.5, ...)
 }
 \arguments{
 \item{x}{PCA object}
@@ -14,12 +17,18 @@ KMEANS(x, ...)
 \item{centers}{numeric number of centers}
 
 \item{nax}{numeric the range of PC components to use (1:2 by default)}
+
+\item{pch}{to draw the points}
+
+\item{cex}{to draw the points}
 }
 \value{
 the same thing as \link{kmeans}
 }
 \description{
-A very basic and prototypic implementation of k-means
+A very basic and prototypic implementation of k-means.
+Beware that morphospaces are calculated so far for the 1st and 2nd
+component.
 }
 \examples{
 data(bot)

@@ -50,5 +50,6 @@ Imports:
     sp,
     utils
 Suggests:
-    knitr
-VignetteBuilder: knitr
+  devtools
+  
+
