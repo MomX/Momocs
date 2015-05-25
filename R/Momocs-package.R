@@ -75,6 +75,29 @@ NULL
 globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
                   "x_c", "x_d", "y_c", "y_d", ".id"))
 
+
+#' Install and load the last version of Momocs
+#' 
+#' Download the last version of Momocs from its GitHub account 
+#' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)})
+#' 
+#' You need devtools, but it is checked anyway.
+#' @examples
+#' \dontrun{
+#' # use it with:
+#' update_Momocs()
+#' }
+#' @export
+update_Momocs <- function() {
+  if (!requireNamespace("devtools", quietly = TRUE)) {
+    stop("devtools needed for this function to work. Please install it with install.packages('devtools')",
+         call. = FALSE)
+  }
+  devtools::install_github("vbonhomme/Momocs")
+  library(Momocs)
+  cat("Last version of Momocs has been installed from GitHub and loaded into R.\n")
+}
+
 # .onAttach <- function(lib, pkg) {
 # packageStartupMessage('This is Momocs ',
 # utils::packageDescription('Momocs', field='Version'),
