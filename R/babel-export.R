@@ -2,7 +2,7 @@
 
 #' Export Coe objects and shapes
 #' 
-#' Writes a \code{.txt} or \code{.xls} or whatever readable from a \link{Coe}
+#' Writes a \code{.txt} or \code{.xls} or whatever readable from a \link{Coe}, or PCA
 #' object, along with individual names and grouping factors. A simple wrapper
 #' around \link{write.table}.
 #' @param x a Coe object
@@ -49,6 +49,15 @@ export.Coe <- function(x, file = "data.txt", sep = "\t", dec = ".") {
     write.table(data, file = file, row.names = FALSE, col.names = TRUE, 
         quote = FALSE, sep = sep, dec = dec)
     cat(" * File written:", file, "\n")
+}
+
+#' @rdname export
+#' @export
+export.PCA <- function(x, file = "data.txt", sep = "\t", dec = ".") {
+  data <- cbind(name = rownames(x$x), x$fac, x$x)
+  write.table(data, file = file, row.names = FALSE, col.names = TRUE, 
+              quote = FALSE, sep = sep, dec = dec)
+  cat(" * File written:", file, "\n")
 }
 
 #' @export
