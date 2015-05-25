@@ -339,7 +339,7 @@ plot_CV.LDA <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
 #' # olea example
 #' data(olea)
 #' op <- opoly(olea, 5)
-#' opl <- LDA(PCA(op), 'cep')
+#' opl <- LDA(PCA(op), 'var')
 #' plot_CV2(opl)
 #' @rdname plot_CV2
 #' @export

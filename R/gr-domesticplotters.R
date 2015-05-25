@@ -699,9 +699,9 @@ conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
 #' @return a ggplot2 object
 #' @examples
 #' data(olea)
-#' Ntable(olea, "cep")
-#' Ntable(olea, "domes", "cep")
-#' gg <- Ntable(olea, "domes", "cep", rm0 = TRUE)
+#' Ntable(olea, "var")
+#' Ntable(olea, "domes", "var")
+#' gg <- Ntable(olea, "domes", "var", rm0 = TRUE)
 #' gg
 #' library(ggplot2)
 #' gg + coord_equal()

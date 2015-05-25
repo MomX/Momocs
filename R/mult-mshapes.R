@@ -44,7 +44,7 @@
 #'
 #' data(olea)
 #' op <- npoly(subset(olea, view=='VL'), 5)
-#' ms <- mshapes(op, 'cep') #etc
+#' ms <- mshapes(op, 'var') #etc
 #' ms$Coe
 #' panel(Opn(ms$shp), names=TRUE)
 #'

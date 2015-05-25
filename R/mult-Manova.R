@@ -31,7 +31,7 @@
 #' op <- PCA(npoly(olea, 5))
 #' MANOVA(op, 'domes')
 #' 
-#'  m <- manova(op$x[, 1:5] ~  op$fac$domes * op$fac$cep)
+#'  m <- manova(op$x[, 1:5] ~  op$fac$domes * op$fac$var)
 #'  summary(m)
 #'  summary.aov(m)
 #' @export

@@ -227,7 +227,7 @@ plot2.PCA <- function(x,
 #'
 #' # on LDA, it uses svd
 #' data(olea)
-#' bl <- LDA(PCA(opoly(olea)), "cep")
+#' bl <- LDA(PCA(opoly(olea)), "var")
 #' scree(bl)
 #' 
 #' @export
