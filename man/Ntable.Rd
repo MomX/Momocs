@@ -25,9 +25,9 @@ how (un)balanced are designs, etc.
 }
 \examples{
 data(olea)
-Ntable(olea, "cep")
-Ntable(olea, "domes", "cep")
-gg <- Ntable(olea, "domes", "cep", rm0 = TRUE)
+Ntable(olea, "var")
+Ntable(olea, "domes", "var")
+gg <- Ntable(olea, "domes", "var", rm0 = TRUE)
 gg
 library(ggplot2)
 gg + coord_equal()

@@ -45,7 +45,7 @@ scree_plot(bp, 1:5)
 
 # on LDA, it uses svd
 data(olea)
-bl <- LDA(PCA(opoly(olea)), "cep")
+bl <- LDA(PCA(opoly(olea)), "var")
 scree(bl)
 }
 

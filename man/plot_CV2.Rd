@@ -99,7 +99,7 @@ plot_CV2(trilo.l)
 # olea example
 data(olea)
 op <- opoly(olea, 5)
-opl <- LDA(PCA(op), 'cep')
+opl <- LDA(PCA(op), 'var')
 plot_CV2(opl)
 }
 \seealso{

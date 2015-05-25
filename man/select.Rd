@@ -38,13 +38,13 @@ this method is quite experimental, check the result and do not hesitate to repor
 \examples{
 data(olea)
 olea
-select(olea, cep, view) # drops domes and ind
-select(olea, cepage=cep, domesticated_status=domes, view)
+select(olea, var, view) # drops domes and ind
+select(olea, variety=var, domesticated_status=domes, view)
 # combine with filter with magrittr pipes
 \dontrun{
 library(magrittr)
-# only dorsal views, and 'cep' and 'domes' columns
-filter(olea, view=="VD") \%>\% select(cep, domes)
+# only dorsal views, and 'var' and 'domes' columns
+filter(olea, view=="VD") \%>\% select(var, domes)
 }
 }
 \seealso{

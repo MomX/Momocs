@@ -32,7 +32,7 @@ Simply extends base \link{table} for a more convenient use on $fac slot.
 data(bot)
 table(bot)
 data(olea)
-table(olea, "cep", "domes")
+table(olea, "var", "domes")
 table(olea)
 }
 

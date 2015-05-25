@@ -159,7 +159,7 @@ data(olea)
 op <- npoly(olea, 5)
 op.p <- PCA(op)
 op.p
-plot(op.p, ~ domes + cep, morpho=TRUE) # use of formula
+plot(op.p, ~ domes + var, morpho=TRUE) # use of formula
 
 data(wings)
 wp <- fgProcrustes(wings, tol=1e-4)
