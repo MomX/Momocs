@@ -848,7 +848,7 @@ coo_force2close <- function(coo) {
 #' @rdname coo_shear
 #' @param coo a matrix or a list of coordinates
 #' @param k shear factor
-#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates.
 #' @keywords ShapeUtilities
 #' @examples
 #' data(shapes)
@@ -856,6 +856,7 @@ coo_force2close <- function(coo) {
 #' coo_plot(coo)
 #' coo_draw(coo_shearx(coo, 0.5), border="blue")
 #' coo_draw(coo_sheary(coo, 0.5), border="red")
+#' 
 #' @export
 coo_shearx <- function(coo, k=1){
   smat <- matrix(c(1, 0, k, 1), nrow=2)
@@ -865,6 +866,38 @@ coo_shearx <- function(coo, k=1){
 coo_sheary <- function(coo, k){
   smat <- matrix(c(1, k, 0, 1), nrow=2)
   return(coo %*% smat)}
+
+#' Flips shapes
+#'
+#' \code{coo_flipx} flips shapes about the x-axis; \code{coo_flipy} about the y-axis.
+#' @rdname coo_flip
+#' @param coo a matrix or a list of coordinates
+#' @return a \code{matrix} of (x; y) coordinates
+#' @keywords ShapeUtilities
+#' @examples
+#' data(shapes)
+#' cat <- shapes[4]
+#' cat <- coo_center(cat)
+#' coo_plot(cat, ylim)
+#' coo_draw(coo_flipx(cat), border="red")
+#' coo_draw(coo_flipy(cat), border="blue")
+#' 
+#' #' # to flip an entire Coo:
+#' shapes2 <- shapes
+#' shapes$coo <- lapply(shapes2$coo, coo_flipx)
+#' @export
+#' @rdname coo_flip
+#' @export
+coo_flipx <- function(coo){
+  m <- matrix(c(1, 0, 0, -1), nrow = 2)
+  return(coo %*% m)
+}
+#' @rdname coo_flip
+#' @export
+coo_flipy <- function(coo){
+  m <- matrix(c(-1, 0, 0, 1), nrow = 2)
+  return(coo %*% m)
+}
 
 #' Calculate abscissa and ordinate on a shape
 #'
