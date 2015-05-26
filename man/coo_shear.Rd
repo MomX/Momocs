@@ -15,7 +15,7 @@ coo_sheary(coo, k)
 \item{k}{shear factor}
 }
 \value{
-a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates.
 }
 \description{
 \code{coo_shearx} applies a shear mapping on a matrix of (x; y) coordinates (or a list), parallel
