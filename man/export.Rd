@@ -8,9 +8,9 @@
 \usage{
 export(x, file, sep, dec)
 
-\method{export}{Coe}(x, file = "data.txt", sep = "\\t", dec = ".")
+\method{export}{Coe}(x, file = "coefficients.txt", sep = "\\t", dec = ".")
 
-\method{export}{PCA}(x, file = "data.txt", sep = "\\t", dec = ".")
+\method{export}{PCA}(x, file = "scores.txt", sep = "\\t", dec = ".")
 }
 \arguments{
 \item{x}{a Coe object}
