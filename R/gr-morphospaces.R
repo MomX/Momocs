@@ -127,7 +127,9 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     if (plot.method == "lines"){
       garbage <- lapply(shp, lines, col = border.shp, lwd = lwd.shp * 2)}
     if (plot.method == "points"){
-      garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp)}
+      garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp*0.5, pch=20)
+      if (!is.null(PCA$links)) lapply(shp, function(x) ldk_links(x, PCA$links))
+    }
   }
   }
   if (!plot) SHP else invisible(shp)

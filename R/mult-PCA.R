@@ -89,6 +89,7 @@ PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
   PCA$mshape <- apply(LdkCoe$coe, 2, mean)
   PCA$method <- "procrustes"
   PCA$cuts   <- LdkCoe$cuts
+  PCA$links <- LdkCoe$links
   # PCA$mod <- OpnCoe$mod #the only diff so far PCA$baseline1
   # <- OpnCoe$baseline1 PCA$baseline2 <- OpnCoe$baseline2
   class(PCA) <- c("PCA", class(PCA))
