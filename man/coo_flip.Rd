@@ -22,7 +22,7 @@ a \code{matrix} of (x; y) coordinates
 data(shapes)
 cat <- shapes[4]
 cat <- coo_center(cat)
-coo_plot(cat, ylim)
+coo_plot(cat)
 coo_draw(coo_flipx(cat), border="red")
 coo_draw(coo_flipy(cat), border="blue")
 
