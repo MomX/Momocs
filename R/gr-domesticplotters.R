@@ -1,7 +1,4 @@
-##### The graphics R file for everyhting graphics. Some internals
-##### used elsewhere.
-
-
+# coo plotters #######
 #' Plots a single shape
 #' 
 #' A simple wrapper around \link{plot} for plotting shapes. Widely used in Momocs
@@ -124,12 +121,6 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
   }
 }
 
-#' @rdname coo_plot
-#' @export
-ldk_plot <- function(coo, ...){
-  coo_plot(coo, poly=FALSE, first.point = FALSE, ...)
-}
-
 #' Adds a shape to the current plot
 #' 
 #' \code{coo_draw} is simply a \link{coo_plot} with \code{plot.new=FALSE}, ie 
@@ -153,18 +144,18 @@ coo_draw <- function(coo, ...) {
 #' Draws 'lollipops' between two configurations.
 #' @param coo1 A \code{list} or a \code{matrix} of coordinates.
 #' @param coo2 A \code{list} or a \code{matrix} of coordinates.
-#' @param pch a pch for the points
+#' @param pch a pch for the points (default to NA)
 #' @param cex a cex for the points
-#' @param main character a title for the plot
 #' @param ... optional parameters to fed \link{points} and \link{segments}.
-#' @seealso \link{coo_arrows}
+#' @seealso \link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
 #' @keywords Graphics
 #' @examples
 #' data(olea)
 #' coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
+#' title("A nice title !")
 #' @export
-coo_lolli <- function(coo1, coo2, pch = 20, cex = 0.5, main = NA, 
-                      ...) {
+coo_lolli <- function(coo1, coo2,
+                      pch = NA, cex = 0.5, ...) {
   coo_plot(rbind(coo1, coo2), plot = FALSE)
   coo1 <- coo_check(coo1)
   coo2 <- coo_check(coo2)
@@ -172,11 +163,10 @@ coo_lolli <- function(coo1, coo2, pch = 20, cex = 0.5, main = NA,
     stop(" * coo1 and coo2 have different number of coordinates.")
   }
   s <- seq(nrow(coo1) - 1)
-  segments(coo1[s, 1], coo1[s, 2], coo2[s, 1], coo2[s, 2], 
-           ...)
-  points(coo2[, 1], coo2[, 2], pch = pch, cex = cex, ...)
-  if (!missing(main)) 
-    title(main = main)
+  segments(coo1[s, 1], coo1[s, 2],
+           coo2[s, 1], coo2[s, 2],  ...)
+  points(coo2[, 1], coo2[, 2],
+         pch = pch, cex = cex, ...)
 }
 
 #' Plots (lollipop) differences between two configurations
@@ -186,17 +176,17 @@ coo_lolli <- function(coo1, coo2, pch = 20, cex = 0.5, main = NA,
 #' @param coo2 A \code{list} or a \code{matrix} of coordinates.
 #' @param length a length for the arrows.
 #' @param angle an angle for the arrows
-#' @param main character a title for the plot
 #' @param ... optional parameters to fed \link{arrows}.
-#' @seealso \link{coo_arrows}
+#' @seealso \link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
 #' @keywords Graphics
 #' @examples
 #' data(olea)
 #' coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
+#' title("Hi there !")
 #' @export
-coo_arrows <- function(coo1, coo2, length = 0.1, angle = 20, 
-                       main = NA, ...) {
-  coo_plot(rbind(coo1, coo2), plot = FALSE, main = main)
+coo_arrows <- function(coo1, coo2,
+                       length = coo_centsize(coo1)/15, angle = 20, ...) {
+  coo_plot(rbind(coo1, coo2), plot = FALSE)
   coo1 <- coo_check(coo1)
   coo2 <- coo_check(coo2)
   if (nrow(coo1) != nrow(coo2)) {
@@ -205,9 +195,51 @@ coo_arrows <- function(coo1, coo2, length = 0.1, angle = 20,
   s <- seq(nrow(coo1) - 1)
   arrows(coo1[s, 1], coo1[s, 2], coo2[s, 1], coo2[s, 2], length = length, 
          angle = angle, ...)
-  if (!missing(main)) 
-    title(main = main)
 }
+
+
+#' Plots differences as (colored) segments aka a ruban
+#' 
+#' Useful to display differences between shapes
+#' @param coo a shape, typically a mean shape
+#' @param dev numeric a vector of distances or anythinh relevant
+#' @param  palette the color palette to use or any palette
+#' @param normalize logical whether to normalize (TRUE by default) distances
+#' @param ... other paremeters to fed segments, eg lwd (see examples)
+#' @return nothing
+#' @examples 
+#' data(bot)
+#' ms <- mshapes(efourier(bot , 10), "type")
+#' b <- ms$shp$beer
+#' w <- ms$shp$whisky
+#' # we obtain the mean shape, then euclidean distances between points
+#' m <- mshapes(list(b, w))
+#' d <- edm(b, w)
+#' # First plot
+#' coo_plot(m, plot=FALSE)
+#' coo_draw(b)
+#' coo_draw(w)
+#' coo_ruban(m, d, lwd=5)
+#' 
+#' #Another example
+#' coo_plot(m, plot=FALSE)
+#' coo_ruban(m, d, palette=col_summer2, lwd=5)
+#' 
+#' #If you want linewidth rather than color
+#' coo_plot(m, plot=FALSE)
+#' coo_ruban(m, d, palette=col_black, lwd=.normalize(d)*10)
+#' @export
+coo_ruban <- function(coo, dev,
+                     palette=col_heat, normalize=TRUE, ...){
+  if (nrow(coo) != length(dev))
+    stop("'coo' and 'dev' must have the same number of rows")
+  if(normalize) dev <- .normalize(dev)
+  nr <- nrow(coo)
+  xy <- cbind(coo, coo_slide(coo, nr))
+  cols <- palette(nr)[cut(dev, breaks = nr)]
+  segments(xy[, 1], xy[, 2], xy[, 3], xy[, 4], col=cols, ...)
+}
+
 
 #' 'Templates' shapes
 #' 
@@ -363,8 +395,14 @@ coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
   invisible(res)
 }
 
-# ldk plotters
-# ---------------------------------------------------------
+# ldk plotters #######
+
+# we already have the rdfile above
+#' @rdname coo_plot
+#' @export
+ldk_plot <- function(coo, ...){
+  coo_plot(coo, poly=FALSE, first.point = FALSE, ...)
+}
 
 #' Add landmarks labels
 #' 
@@ -501,98 +539,7 @@ ldk_chull <- function(ldk, col = "grey40", lty = 1) {
   }
 }
 
-#' Plots deviation
-#' 
-#' Calculates and plots series with associated error bars. This function is used 
-#' internally by methods based on deviations for one one many outlines.
-#' Yet, it provides a quick way to create plots of series, possibly with deviations, from scratch.
-#' 
-#' @usage plot_dev(mat, dev, cols, x=1:ncol(mat),
-#' lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
-#' plot=FALSE, main='Deviation plot', xlab='', ylab='Deviations')
-#' @param mat A \code{matrix} containing one or many lines (as individuals) with the corresponding y values (as cols).
-#' @param dev A \code{matrix} of the same dimension as mat but containing the deviation from the \code{mat} matrix.
-#' @param cols {A \code{vector} of \code{ncol(mat)} colors.}
-#' @param x An alternative vector of values for every column of \code{mat}.
-#' @param lines \code{logical}. Whether to draw lines for mean values.
-#' @param poly \code{logical}. Whether to draw polygons for mean + dev values.
-#' @param segments \code{logical}. Whether to draw segments for these mean + dev values.
-#' @param bw \code{numeric}. The width of the errors bars to draw.
-#' @param plot \code{logical}. Whether to plot a new graphical window.
-#' @param main \code{character}. A title for the plot.
-#' @param xlab \code{character}. A title for the x-axis.
-#' @param ylab \code{character}. A title for the y-axis.
-#' @keywords Graphics
-#' @examples
-#' # we prepare some fake data
-#' foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
-#' foo.mat  <- foo.mat + matrix(rep(c(0, 2, 5), each=10), 3, byrow=TRUE)
-#' foo.dev  <- matrix(abs(rnorm(30, sd=0.5)), nr=3, nc=10, byrow=TRUE)
-#' plot_dev(foo.mat, plot=TRUE)
-#' plot_dev(foo.mat, foo.dev, plot=TRUE)
-#' # some possible tuning
-#' plot_dev(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
-#' plot_dev(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
-#' plot_dev(foo.mat, foo.dev, cols=col_sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
-#' plot_dev(foo.mat, foo.dev, cols=col_summer(6)[4:6], plot=TRUE)
-#' @export
-plot_dev <- function(mat, dev, cols, x = 1:ncol(mat), lines = TRUE, 
-                     poly = TRUE, segments = FALSE, bw = 0.1, plot = FALSE, main = "Deviation plot", 
-                     xlab = "", ylab = "Deviations") {
-  # we prepare and check a bit
-  r <- nrow(mat)
-  if (!missing(dev)) {
-    if (any(dim(mat) != dim(dev))) {
-      stop("mat and dev must be of the same dimension")
-    }
-  }
-  if (missing(cols)) {
-    cols <- rep("#000000", r)
-  }
-  if (length(cols) != r) {
-    cols <- rep("#000000", r)
-  }
-  # we call a new plot if required
-  if (plot) {
-    if (missing(dev)) {
-      ylim <- range(mat)
-    } else {
-      ylim <- c(min(mat + dev), max(mat + dev))
-    }
-    plot(NA, xlim = range(x), ylim = ylim, main = main, xlab = xlab, 
-         ylab = ylab, las = 1, xaxs = "i", yaxs = "i")
-    axis(1, at = 1:ncol(mat))
-  }
-  # if a deviation matrix is provided
-  if (!missing(dev)) {
-    for (i in 1:r) {
-      # if required, we draw the background polygons
-      if (poly) {
-        polygon(x = c(x, rev(x)), y = c(mat[i, ] - dev[i, 
-                                                       ], rev(c(mat[i, ] + dev[i, ]))), col = paste0(cols[i], 
-                                                                                                     "55"), border = NA)
-      }
-      # if required we draw the dev segments
-      if (segments) {
-        segments(x, mat[i, ] - dev[i, ], x, mat[i, ] + 
-                   dev[i, ], col = cols[i], lwd = 0.5)
-        segments(x - bw, mat[i, ] - dev[i, ], x + bw, 
-                 mat[i, ] - dev[i, ], col = cols[i], lwd = 0.5)
-        segments(x - bw, mat[i, ] + dev[i, ], x + bw, 
-                 mat[i, ] + dev[i, ], col = cols[i], lwd = 0.5)
-      }
-    }
-  }
-  # if a dev matrix is not provided, we simply draw lines
-  if (lines) {
-    for (i in 1:nrow(mat)) {
-      if (lines) {
-        lines(x, mat[i, ], col = cols[i], type = "o", 
-              cex = 0.25, pch = 20)
-      }
-    }
-  }
-}
+# random stuff ####### to be cleaned someday
 
 #' Draws colored segments from a matrix of coordinates.
 #' 
@@ -964,5 +911,100 @@ Ptolemy <- function(coo, t = seq(0, 2 * pi, length = 7)[-1],
     legend("topright", legend = as.character(1:nb.h), bty = "n",
            col = cols, lwd = 2, seg.len=1, title = "Harmonics", cex=3/4)}}
 
+
+
+# obsolete
+# #' Plots deviation
+# #' 
+# #' Calculates and plots series with associated error bars. This function is used 
+# #' internally by methods based on deviations for one one many outlines.
+# #' Yet, it provides a quick way to create plots of series, possibly with deviations, from scratch.
+# #' 
+# #' @usage plot_dev(mat, dev, cols, x=1:ncol(mat),
+# #' lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
+# #' plot=FALSE, main='Deviation plot', xlab='', ylab='Deviations')
+# #' @param mat A \code{matrix} containing one or many lines (as individuals) with the corresponding y values (as cols).
+# #' @param dev A \code{matrix} of the same dimension as mat but containing the deviation from the \code{mat} matrix.
+# #' @param cols {A \code{vector} of \code{ncol(mat)} colors.}
+# #' @param x An alternative vector of values for every column of \code{mat}.
+# #' @param lines \code{logical}. Whether to draw lines for mean values.
+# #' @param poly \code{logical}. Whether to draw polygons for mean + dev values.
+# #' @param segments \code{logical}. Whether to draw segments for these mean + dev values.
+# #' @param bw \code{numeric}. The width of the errors bars to draw.
+# #' @param plot \code{logical}. Whether to plot a new graphical window.
+# #' @param main \code{character}. A title for the plot.
+# #' @param xlab \code{character}. A title for the x-axis.
+# #' @param ylab \code{character}. A title for the y-axis.
+# #' @keywords Graphics
+# #' @examples
+# #' # we prepare some fake data
+# #' foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
+# #' foo.mat  <- foo.mat + matrix(rep(c(0, 2, 5), each=10), 3, byrow=TRUE)
+# #' foo.dev  <- matrix(abs(rnorm(30, sd=0.5)), nr=3, nc=10, byrow=TRUE)
+# #' plot_dev(foo.mat, plot=TRUE)
+# #' plot_dev(foo.mat, foo.dev, plot=TRUE)
+# #' # some possible tuning
+# #' plot_dev(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
+# #' plot_dev(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
+# #' plot_dev(foo.mat, foo.dev, cols=col_sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
+# #' plot_dev(foo.mat, foo.dev, cols=col_summer(6)[4:6], plot=TRUE)
+# #' @export
+# plot_dev <- function(mat, dev, cols, x = 1:ncol(mat), lines = TRUE, 
+#                      poly = TRUE, segments = FALSE, bw = 0.1, plot = FALSE, main = "Deviation plot", 
+#                      xlab = "", ylab = "Deviations") {
+#   # we prepare and check a bit
+#   r <- nrow(mat)
+#   if (!missing(dev)) {
+#     if (any(dim(mat) != dim(dev))) {
+#       stop("mat and dev must be of the same dimension")
+#     }
+#   }
+#   if (missing(cols)) {
+#     cols <- rep("#000000", r)
+#   }
+#   if (length(cols) != r) {
+#     cols <- rep("#000000", r)
+#   }
+#   # we call a new plot if required
+#   if (plot) {
+#     if (missing(dev)) {
+#       ylim <- range(mat)
+#     } else {
+#       ylim <- c(min(mat + dev), max(mat + dev))
+#     }
+#     plot(NA, xlim = range(x), ylim = ylim, main = main, xlab = xlab, 
+#          ylab = ylab, las = 1, xaxs = "i", yaxs = "i")
+#     axis(1, at = 1:ncol(mat))
+#   }
+#   # if a deviation matrix is provided
+#   if (!missing(dev)) {
+#     for (i in 1:r) {
+#       # if required, we draw the background polygons
+#       if (poly) {
+#         polygon(x = c(x, rev(x)), y = c(mat[i, ] - dev[i, 
+#                                                        ], rev(c(mat[i, ] + dev[i, ]))), col = paste0(cols[i], 
+#                                                                                                      "55"), border = NA)
+#       }
+#       # if required we draw the dev segments
+#       if (segments) {
+#         segments(x, mat[i, ] - dev[i, ], x, mat[i, ] + 
+#                    dev[i, ], col = cols[i], lwd = 0.5)
+#         segments(x - bw, mat[i, ] - dev[i, ], x + bw, 
+#                  mat[i, ] - dev[i, ], col = cols[i], lwd = 0.5)
+#         segments(x - bw, mat[i, ] + dev[i, ], x + bw, 
+#                  mat[i, ] + dev[i, ], col = cols[i], lwd = 0.5)
+#       }
+#     }
+#   }
+#   # if a dev matrix is not provided, we simply draw lines
+#   if (lines) {
+#     for (i in 1:nrow(mat)) {
+#       if (lines) {
+#         lines(x, mat[i, ], col = cols[i], type = "o", 
+#               cex = 0.25, pch = 20)
+#       }
+#     }
+#   }
+# }
 
 ##### end basic plotters 
