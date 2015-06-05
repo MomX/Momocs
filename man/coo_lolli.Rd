@@ -4,18 +4,16 @@
 \alias{coo_lolli}
 \title{Plots (lollipop) differences between two configurations}
 \usage{
-coo_lolli(coo1, coo2, pch = 20, cex = 0.5, main = NA, ...)
+coo_lolli(coo1, coo2, pch = NA, cex = 0.5, ...)
 }
 \arguments{
 \item{coo1}{A \code{list} or a \code{matrix} of coordinates.}
 
 \item{coo2}{A \code{list} or a \code{matrix} of coordinates.}
 
-\item{pch}{a pch for the points}
+\item{pch}{a pch for the points (default to NA)}
 
 \item{cex}{a cex for the points}
-
-\item{main}{character a title for the plot}
 
 \item{...}{optional parameters to fed \link{points} and \link{segments}.}
 }
@@ -25,9 +23,10 @@ Draws 'lollipops' between two configurations.
 \examples{
 data(olea)
 coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
+title("A nice title !")
 }
 \seealso{
-\link{coo_arrows}
+\link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
 }
 \keyword{Graphics}
 

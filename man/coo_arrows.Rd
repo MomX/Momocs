@@ -4,7 +4,7 @@
 \alias{coo_arrows}
 \title{Plots (lollipop) differences between two configurations}
 \usage{
-coo_arrows(coo1, coo2, length = 0.1, angle = 20, main = NA, ...)
+coo_arrows(coo1, coo2, length = coo_centsize(coo1)/15, angle = 20, ...)
 }
 \arguments{
 \item{coo1}{A \code{list} or a \code{matrix} of coordinates.}
@@ -15,8 +15,6 @@ coo_arrows(coo1, coo2, length = 0.1, angle = 20, main = NA, ...)
 
 \item{angle}{an angle for the arrows}
 
-\item{main}{character a title for the plot}
-
 \item{...}{optional parameters to fed \link{arrows}.}
 }
 \description{
@@ -25,9 +23,10 @@ Draws 'arrows' between two configurations.
 \examples{
 data(olea)
 coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
+title("Hi there !")
 }
 \seealso{
-\link{coo_arrows}
+\link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
 }
 \keyword{Graphics}
 
