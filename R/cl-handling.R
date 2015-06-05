@@ -70,11 +70,13 @@ table.LDA <- table.Coo
 #' Use \link{slice}, \link{filter}, \link{chop} and \link{select} instead.
 #'
 #' \itemize{
+#' \item \strong{rename} is used to rename columns from the $fac
+#' \item \strong{mutate} is used to add new columns to the $fac
 #' \item \strong{select} is used to select columns from the $fac
 #' \item \strong{slice} is used to select shapes based on their ids
 #' \item \strong{chop} is a rougher slicing that accept a column of the $fac and return a list of Coo/Coe objects
 #' \item \strong{filter} is used to create subset based on logical values taken from the $fac
-#' \item \strong{mutate}
+#' \item \strong{combine} not a dplyr verb but useful to combine after a subsetting
 #' }
 #'
 #' @rdname subset
@@ -83,25 +85,8 @@ table.LDA <- table.Coo
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
 #' @param ... useless here but maintains consistence with the generic subset.
 #' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
-#' @examples
-#' data(olea)
-#' ##### slice
-#' slice(olea, 1) # if you only want the coordinates, try bot[1]
-#' slice(olea, 1:20)
-#' slice(olea, 21:30)
-#'
-#' ##### chop (a rougher slicing)
-#' chop(olea, domes) # return a list that can be lapply-ed
-#'
-#' ##### filter
-#' filter(olea, domes=="cult")
-#' filter(olea, domes=="cult", view=="VL")
-#'
-#' ##### select
-#' head(olea$fac)
-#' select(olea, domes, view)
-#' select(olea, -ind)
-#'
+#' @examples 
+#' # Do not use subset directly
 #' @export
 subset.Coo <- function(x, subset, ...) {
   Coo <- x
@@ -218,6 +203,112 @@ select.Coe <- select.Coo
 #' @export
 select.PCA <- select.Coo
 
+# rename -------------------------------
+#' Rename (ala dplyr) variables by name, using the $fac slot on Momocs classes
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... comma separated list of unquoted expressions
+#' @details dplyr verbs should be maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a Coo object
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @examples
+#' data(olea)
+#' olea
+#' select(olea, var, view) # drops domes and ind
+#' select(olea, variety=var, domesticated_status=domes, view)
+#' # combine with filter with magrittr pipes
+#' \dontrun{
+#' library(magrittr)
+#' # only dorsal views, and 'var' and 'domes' columns
+#' filter(olea, view=="VD") %>% select(var, domes)
+#' }
+#' @rdname rename
+#' @examples
+#' data(olea)
+
+#' @export
+rename <- function(.data, ...){
+  UseMethod("rename")
+}
+#' @rdname rename
+#' @export
+rename.default <- function(.data, ...){
+  dplyr::rename(.data, ...)
+}
+#' @rdname rename
+#' @export
+rename.Coo <- function(.data, ...){
+  .data$fac <- rename(.data$fac, ...)
+  .data
+}
+#' @rdname rename
+#' @export
+rename.Coe <- rename.Coo
+
+#' @rdname rename
+#' @export
+rename.PCA <- rename.Coo
+
+
+# mutate -------------------------------
+#' mutate (ala dplyr) variables by name, using the $fac slot on Momocs classes
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... comma separated list of unquoted expressions
+#' @details dplyr verbs should be maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a Coo object
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @examples
+#' data(olea)
+#' olea
+#' select(olea, var, view) # drops domes and ind
+#' select(olea, variety=var, domesticated_status=domes, view)
+#' # combine with filter with magrittr pipes
+#' \dontrun{
+#' library(magrittr)
+#' # only dorsal views, and 'var' and 'domes' columns
+#' filter(olea, view=="VD") %>% select(var, domes)
+#' }
+#' @rdname mutate
+#' @examples
+#' data(bot)
+#' # let's extract the centroid size and add it as a new variable
+#' # this can be done in a single line:
+#' bot2 <- mutate(bot, cs=sapply(bot$coo, coo_centsize)) 
+#' bot2f <- efourier(bot2, 10) 
+#' bot2p <- PCA(bot2f)
+#' plot2(bot2p, "cs")
+#' @export
+mutate <- function(.data, ...){
+  UseMethod("mutate")
+}
+#' @rdname mutate
+#' @export
+mutate.default <- function(.data, ...){
+  dplyr::mutate(.data, ...)
+}
+#' @rdname mutate
+#' @export
+mutate.Coo <- function(.data, ...){
+  .data$fac <- mutate(.data$fac, ...)
+  .data
+}
+#' @rdname mutate
+#' @export
+mutate.Coe <- mutate.Coo
+
+#' @rdname mutate
+#' @export
+mutate.PCA <- mutate.Coo
+
+
+
+#######
+
 # filter -------------------------------
 #' Filter (ala dplyr) rows with matching conditions, using the $fac slot  on Momocs classes
 #'
@@ -315,7 +406,6 @@ slice <- function(.data, ...){
 slice.default <- function(.data, ...){
   dplyr::slice(.data, ...)
 }
-
 
 #' @rdname slice
 #' @export
@@ -557,13 +647,21 @@ chop.Coe <- function(.data, fac){
 #' @rdname combine
 #' @examples
 #' data(bot)
-#' w <- subset(bot, type=="whisky")
-#' b <- subset(bot, type=="beer")
+#' w <- filter(bot, type=="whisky")
+#' b <- filter(bot, type=="beer")
 #' combine(w, b)
 #' # or, if you have many levels
-#' bot_s <- slice(bot, type)
-#'
-#'
+#' bot_s <- chop(bot, type)
+#' bot_s$whisky
+#' # note that you can apply something (single function or a more 
+#' # complex pipe) then combine everyone, since combine also works on lists
+#' # eg:
+#' # bot_s2 <- lapply(bot_s, efourier, 10)
+#' # bot_sf <- combine(bot_s2)
+#' 
+#' # pipe style 
+#' # library(magrittr)
+#' # bot_sf <- lapply(bot_s, efourier, 10) %>% combine()
 #' @export
 combine <- function(...) {
   UseMethod("combine")
