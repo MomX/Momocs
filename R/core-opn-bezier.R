@@ -67,6 +67,7 @@ bezier <- function(coo, n) {
 #' lines(bi, col='red')
 #' @export
 bezier_i <- function(B, nb.pts = 120) {
+  if (any(names(B)=="B")) B <- B$B
     x <- y <- numeric(nb.pts)
     n <- nrow(B) - 1
     t1 <- seq(0, 1, length = nb.pts)
