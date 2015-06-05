@@ -7,7 +7,7 @@
 tps_arr(fr, to, amp = 1, grid = TRUE, over = 1.2, palette = col_summer,
   arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20,
   arr.lwd = 0.75, arr.col = "grey50", poly = TRUE, shp = TRUE,
-  shp.col = rep(NA, 2), shp.border = col_gallus(2), shp.lwd = c(2, 2),
+  shp.col = rep(NA, 2), shp.border = col_qual(2), shp.lwd = c(2, 2),
   shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
 }
 \arguments{
@@ -75,7 +75,8 @@ tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3)
 tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3, grid=FALSE)
 }
 \seealso{
-\link{tps_grid} and \link{tps_iso}.
+\link{tps_grid} and \link{tps_iso},
+\link{coo_lolli}, \link{coo_arrows}.
 }
 \keyword{ThinPlateSplines}
 

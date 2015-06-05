@@ -23,7 +23,7 @@ internally but might be useful elsewhere.
 }
 \seealso{
 \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
-\code{tps2d}
+\code{tps2d}.
 }
 \keyword{ThinPlateSplines}
 

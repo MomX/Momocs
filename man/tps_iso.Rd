@@ -6,8 +6,8 @@
 \usage{
 tps_iso(fr, to, amp = 1, grid = FALSE, over = 1.2, palette = col_spring,
   iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black",
-  poly = TRUE, shp = TRUE, shp.border = col_gallus(2), shp.lwd = c(2,
-  2), shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
+  poly = TRUE, shp = TRUE, shp.border = col_qual(2), shp.lwd = c(2, 2),
+  shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates}
@@ -69,7 +69,8 @@ tps_iso(fr, to, iso.nb=200, amp=3)
 tps_iso(fr, to, iso.nb=200, amp=3, grid=TRUE)
 }
 \seealso{
-\link{tps_grid} and \link{tps_arr}
+\link{tps_grid} and \link{tps_arr},
+\link{coo_lolli}, \link{coo_arrows}.
 }
 \keyword{ThinPlateSplines}
 

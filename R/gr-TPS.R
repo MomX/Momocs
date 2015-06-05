@@ -12,7 +12,7 @@
 #' @return a matrix of \code{(x; y)} coordinates with TPS-interpolated
 #' deformations
 #' @seealso \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
-#' \code{tps2d}
+#' \code{tps2d}.
 #' @keywords ThinPlateSplines
 #' @export
 tps2d <- function(grid0, fr, to) {
@@ -53,6 +53,53 @@ tps2d <- function(grid0, fr, to) {
   return(grid1)
 }
 
+#' Vanilla Thin Plate Splines
+#' 
+#' \code{tps_raw} calculates deformation grids and 
+#' returns position of sampled points on it.
+#' 
+#' @param fr the reference \eqn{(x; y)} coordinates
+#' @param to the target \eqn{(x; y)} coordinates
+#' @param amp an amplification factor of differences between \code{fr} and
+#' \code{to}
+#' @param over \code{numeric} that indicates how much the thin plate splines
+#' extends over the shapes
+#' @param grid.size \code{numeric} to specify the number of grid cells on the
+#' longer axis on the outlines
+#' @return a list with two components: \code{grid} the xy coordinates of sampled
+#' points along the grid; \code{dim} the dimension of the grid.
+#' @seealso \link{tps_grid}, \link{tps_iso} and \link{tps_arr},
+#' \link{coo_lolli}, \link{coo_arrows}.
+#' @keywords ThinPlateSplines
+#' @examples
+#' \dontrun{ 
+#' data(bot)
+#' ms <- mshapes(efourier(bot, 10), "type")
+#' b <- ms$shp$beer
+#' w <- ms$shp$whisky
+#' g <- tps_raw(b, w)
+#' ldk_plot(g$grid)
+#' 
+#' # a wavy plot
+#' ldk_plot(g$grid, pch=NA)
+#' cols_ids <- 1:g$dim[1]
+#' for (i in 1:g$dim[2]) lines(g$grid[cols_ids + (i-1)*g$dim[1], ])
+#' }
+#' @export
+tps_raw <- function(fr, to, amp = 1, 
+                    over = 1.2, grid.size = 15) {
+  fr.n <- substitute(fr)
+  to.n <- substitute(to)  # otherwise problems with substitute in legend below
+  # simple magnification
+  if (!missing(amp)) 
+    to <- to + (to - fr) * amp
+  grid0 <- .grid.sample(fr, to, nside = round(grid.size), over = over)
+  res <- list(grid=tps2d(grid0, fr, to),
+              dim=c(length(unique(grid0[, 1])), length(unique(grid0[, 2]))))
+  return(res)
+}
+
+
 #' Deformation grids using Thin Plate Splines
 #' 
 #' \code{tps_grid} calculates and plots deformation grids between two
@@ -77,7 +124,8 @@ tps2d <- function(grid0, fr, to) {
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing
-#' @seealso \link{tps_iso} and \link{tps_arr}.
+#' @seealso \link{tps_iso} and \link{tps_arr},
+#' \link{coo_lolli}, \link{coo_arrows}.
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
@@ -91,14 +139,15 @@ tps_grid <- function(fr, to, amp = 1,
                      over = 1.2, grid.size = 15, 
                      grid.col = "grey80", poly = TRUE,
                      shp = TRUE, shp.col = rep(NA, 2), 
-                     shp.border = col_gallus(2), shp.lwd = c(1, 1), 
+                     shp.border = col_qual(2), shp.lwd = c(1, 1), 
                      shp.lty = c(1, 1), legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
   to.n <- substitute(to)  # otherwise problems with substitute in legend below
   # simple magnification
-  if (!missing(amp)) 
+  if (!missing(amp)) { 
     to <- to + (to - fr) * amp
-    grid0 <- .grid.sample(fr, to, nside = round(grid.size), over = over)
+  }
+  grid0 <- .grid.sample(fr, to, nside = round(grid.size), over = over)
   grid1 <- tps2d(grid0, fr, to)
   dim.grid <- c(length(unique(grid0[, 1])), length(unique(grid0[, 2])))
   op <- par(mar = rep(0, 4))
@@ -161,7 +210,8 @@ tps_grid <- function(fr, to, amp = 1,
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing.
-#' @seealso \link{tps_grid} and \link{tps_iso}.
+#' @seealso \link{tps_grid} and \link{tps_iso},
+#' \link{coo_lolli}, \link{coo_arrows}.
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
@@ -177,7 +227,7 @@ tps_arr <- function(fr, to, amp = 1,
                     arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20, 
                     arr.lwd = 0.75, arr.col = "grey50", poly = TRUE, 
                     shp = TRUE, shp.col = rep(NA, 2),
-                    shp.border = col_gallus(2),
+                    shp.border = col_qual(2),
                     shp.lwd = c(2, 2), shp.lty = c(1, 1),
                     legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
@@ -254,7 +304,8 @@ tps_arr <- function(fr, to, amp = 1,
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return No returned value
-#' @seealso \link{tps_grid} and \link{tps_arr}
+#' @seealso \link{tps_grid} and \link{tps_arr},
+#' \link{coo_lolli}, \link{coo_arrows}.
 #' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
@@ -269,7 +320,7 @@ tps_iso <- function(fr, to, amp = 1,
                     grid = FALSE, over = 1.2, palette = col_spring, 
                     iso.nb = 1000, iso.levels = 12,
                     cont = TRUE, cont.col = "black", 
-                    poly = TRUE, shp = TRUE, shp.border = col_gallus(2), 
+                    poly = TRUE, shp = TRUE, shp.border = col_qual(2), 
                     shp.lwd = c(2, 2), shp.lty = c(1, 1),
                     legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
@@ -295,11 +346,14 @@ tps_iso <- function(fr, to, amp = 1,
   y <- sort(unique(grid0[, 2]))
   op <- par(mar = rep(1, 4))
   on.exit(par(op))
-  image(x, y, im, col = iso.cols, asp = 1, xlim = range(grid0[, 
-                                                              1]), ylim = range(grid0[, 2]), axes = FALSE, frame = FALSE, 
+  image(x, y, im, col = iso.cols, asp = 1,
+        xlim = range(grid0[, 1]),
+        ylim = range(grid0[, 2]),
+        axes = FALSE, frame = FALSE, 
         ann = FALSE)
   if (cont) {
-    contour(x, y, im, nlevels = iso.levels, add = TRUE, drawlabels = FALSE, 
+    contour(x, y, im, nlevels = iso.levels,
+            add = TRUE, drawlabels = FALSE, 
             col = cont.col, lty = 2)
   }
   if (shp) {
