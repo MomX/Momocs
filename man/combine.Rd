@@ -36,11 +36,21 @@ A separate version may come at some point.
 }
 \examples{
 data(bot)
-w <- subset(bot, type=="whisky")
-b <- subset(bot, type=="beer")
+w <- filter(bot, type=="whisky")
+b <- filter(bot, type=="beer")
 combine(w, b)
 # or, if you have many levels
-bot_s <- slice(bot, type)
+bot_s <- chop(bot, type)
+bot_s$whisky
+# note that you can apply something (single function or a more
+# complex pipe) then combine everyone, since combine also works on lists
+# eg:
+# bot_s2 <- lapply(bot_s, efourier, 10)
+# bot_sf <- combine(bot_s2)
+
+# pipe style
+# library(magrittr)
+# bot_sf <- lapply(bot_s, efourier, 10) \%>\% combine()
 }
 \seealso{
 \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.

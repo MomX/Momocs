@@ -28,7 +28,7 @@
 #' #bot.c
 #'
 #' data(olea)
-#' olea.VL <- subset(olea, view=='VL')
+#' olea.VL <- filter(olea, view=='VL')
 #' op <- npoly(olea.VL, 5)
 #' CLUST(op, 1, type='cladogram', palette=col_autumn, cex=0.5)
 #'

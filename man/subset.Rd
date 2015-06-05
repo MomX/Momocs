@@ -30,31 +30,17 @@ Use \link{slice}, \link{filter}, \link{chop} and \link{select} instead.
 }
 \details{
 \itemize{
+\item \strong{rename} is used to rename columns from the $fac
+\item \strong{mutate} is used to add new columns to the $fac
 \item \strong{select} is used to select columns from the $fac
 \item \strong{slice} is used to select shapes based on their ids
 \item \strong{chop} is a rougher slicing that accept a column of the $fac and return a list of Coo/Coe objects
 \item \strong{filter} is used to create subset based on logical values taken from the $fac
-\item \strong{mutate}
+\item \strong{combine} not a dplyr verb but useful to combine after a subsetting
 }
 }
 \examples{
-data(olea)
-##### slice
-slice(olea, 1) # if you only want the coordinates, try bot[1]
-slice(olea, 1:20)
-slice(olea, 21:30)
-
-##### chop (a rougher slicing)
-chop(olea, domes) # return a list that can be lapply-ed
-
-##### filter
-filter(olea, domes=="cult")
-filter(olea, domes=="cult", view=="VL")
-
-##### select
-head(olea$fac)
-select(olea, domes, view)
-select(olea, -ind)
+# Do not use subset directly
 }
 \seealso{
 \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
