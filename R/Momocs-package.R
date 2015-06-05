@@ -49,10 +49,11 @@
 #' \item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 #' }
 #' @section Cheers:
-#' We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie, Carl Lipo,
-#' Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
+#' We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie, 
+#' Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 #' Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
-#' Norbert Telmon, Bill Venables, Daniele Ventura, Asher Wishkerman, John Wood.
+#' Norbert Telmon, Bill Venables, Daniele Ventura, Michael Wallace, 
+#' Asher Wishkerman, John Wood.
 #' for their helpful ideas and bug reports.
 #' @import ape
 #' @importFrom plyr ldply ddply
