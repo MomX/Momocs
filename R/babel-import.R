@@ -309,7 +309,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
 #' Plots a .jpg image
 #'
 #' A very simple image plotter. If provided with a path,
-#' read the .jpg and plots it. If not provided with an imagematrix, will
+#' reads the .jpg and plots it. If not provided with an imagematrix, will
 #' ask you to choose interactively a \code{.jpeg} image.
 #'
 #' \code{img_plot} is used in import functions such as \link{import_jpg1};
