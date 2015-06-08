@@ -162,7 +162,7 @@ print.LDA <- function(x, ...) {
   cat("\nCross-validation table ($CV.tab):\n")
   print(x$CV.tab)
 
-  cat("\nClass error ($CV.ce):\n")
+  cat("\nClass correctness ($CV.ce):\n")
   print(x$CV.ce)
 }
 
