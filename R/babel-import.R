@@ -272,6 +272,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
   if (is.null(jpg.paths)) {
     jpg.paths <- .lf.auto()
   }
+  begin <- Sys.time()
   cat(" * Extracting", length(jpg.paths), ".jpg outlines...\n")
   if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
@@ -299,7 +300,9 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
     }
   }
   names(res) <- jpg.paths %>% .trim.ext() %>% .trim.path()
-  cat(" * Done.")
+  end <- Sys.time()
+  time <- end - begin
+  cat(" * Done in", as.numeric(time), units(time))
   return(res)
 }
 
