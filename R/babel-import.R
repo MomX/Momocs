@@ -282,6 +282,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
   # for a futurer safer import jpg.names <-
   # .trim.path(.trim.ext(jpgs.paths))
   res <- list()
+  n <- length(jpg.paths)
   for (i in seq(along = jpg.paths)) {
     if (verbose) {
       cat(jpg.paths[i])
@@ -291,7 +292,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
     res[[i]] <- coo_i
     # if (export){coo_export(coo_i, jpg.paths[i])}
     if (verbose) {
-      cat("   OK\n")
+      cat("\tOK - ", n-i, " remaining\n", sep = "")
     } else {
       if (t)
         setTxtProgressBar(pb, i)
