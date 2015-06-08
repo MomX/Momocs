@@ -389,7 +389,7 @@ img_plot0 <- function(img) {
 #' from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
 #'
 #' The number of groups must be consistent accross filenames.
-#' @param lf list of filenames, as characters, typically such as
+#' @param lf a list (its names are used) of a list of filenames, as characters, typically such as
 #' those obtained with \link{list.files}. Alternatively, a path to a folder
 #' containing the files. Actually, if lf is of length 1 (a single character),
 #' the function assumes it is a path and do a \link{list.files} on it.
@@ -411,6 +411,7 @@ img_plot0 <- function(img) {
 #' @export
 lf_structure <- function(lf, names = character(), split = "_",
                          trim.extension = FALSE) {
+  if (is.list(lf)) lf <- names(lf)
   # allow to pass many thing, including $fac columns
   if (!is.character(lf)) lf <- as.character(lf)
   if (length(lf) == 1) {

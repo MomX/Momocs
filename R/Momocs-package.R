@@ -1,3 +1,6 @@
+# run this one to update DESCRIPTION with no pain
+# source("~/Research/Momocs/update.R")
+
 ##### Package documentation and NAMESPACE import
 
 #' Momocs
@@ -103,4 +106,5 @@ update_Momocs <- function() {
 # packageStartupMessage('This is Momocs ',
 # utils::packageDescription('Momocs', field='Version'),
 # appendLF = TRUE) }
+
 

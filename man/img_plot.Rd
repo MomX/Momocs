@@ -14,7 +14,7 @@ img_plot0(img)
 }
 \description{
 A very simple image plotter. If provided with a path,
-read the .jpg and plots it. If not provided with an imagematrix, will
+reads the .jpg and plots it. If not provided with an imagematrix, will
 ask you to choose interactively a \code{.jpeg} image.
 }
 \details{
