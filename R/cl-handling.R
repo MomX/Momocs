@@ -85,7 +85,7 @@ table.LDA <- table.Coo
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
 #' @param ... useless here but maintains consistence with the generic subset.
 #' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
-#' @examples 
+#' @examples
 #' # Do not use subset directly
 #' @export
 subset.Coo <- function(x, subset, ...) {
@@ -278,8 +278,8 @@ rename.PCA <- rename.Coo
 #' data(bot)
 #' # let's extract the centroid size and add it as a new variable
 #' # this can be done in a single line:
-#' bot2 <- mutate(bot, cs=sapply(bot$coo, coo_centsize)) 
-#' bot2f <- efourier(bot2, 10) 
+#' bot2 <- mutate(bot, cs=sapply(bot$coo, coo_centsize))
+#' bot2f <- efourier(bot2, 10)
 #' bot2p <- PCA(bot2f)
 #' plot2(bot2p, "cs")
 #' @export
@@ -639,10 +639,13 @@ chop.Coe <- function(.data, fac){
 #'
 #' Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
 #' it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
-#' (merges coefficients). In the latter case, Coe must ahve the same number of shapes (not
-#' necessarily the same number of coefficients). Also the $fac of the first Coe is retrieved.
+#' (merges coefficients). In the latter case, Coe must have the same number of shapes (not
+#' necessarily the same number of coefficients).
+#' Also the $fac of the first Coe is retrieved.
 #' A separate version may come at some point.
 #' @param ... a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)
+#' @note Note that the order of shapes or their coefficients
+#' is not checked, so anything with the same number of rows will be merged.
 #' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
 #' @rdname combine
 #' @examples
@@ -653,13 +656,13 @@ chop.Coe <- function(.data, fac){
 #' # or, if you have many levels
 #' bot_s <- chop(bot, type)
 #' bot_s$whisky
-#' # note that you can apply something (single function or a more 
+#' # note that you can apply something (single function or a more
 #' # complex pipe) then combine everyone, since combine also works on lists
 #' # eg:
 #' # bot_s2 <- lapply(bot_s, efourier, 10)
 #' # bot_sf <- combine(bot_s2)
-#' 
-#' # pipe style 
+#'
+#' # pipe style
 #' # library(magrittr)
 #' # bot_sf <- lapply(bot_s, efourier, 10) %>% combine()
 #' @export
@@ -669,12 +672,19 @@ combine <- function(...) {
 #' @rdname combine
 #' @export
 combine.list <- function(...){
+  args <- list(...)
+  # we check
+  if (length(unique(sapply(args, length))) != 1)
+    stop("* objects to combine must have the same number of items")
   do.call(combine, ...)
 }
 #' @rdname combine
 #' @export
 combine.Out <- function(...) {
   args <- list(...)
+  # we check
+  if (length(unique(sapply(args, length))) != 1)
+    stop("* objects to combine must have the same number of items")
   Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
   #Out$fac <- .refactor(Out$fac)
@@ -692,6 +702,9 @@ combine.Opn <- combine.Out
 #' @export
 combine.Ldk <- function(...) {
   args <- list(...)
+  # we check
+  if (length(unique(sapply(args, length))) != 1)
+    stop("* objects to combine must have the same number of items")
   Ldk <- Ldk(do.call(c, lapply(args, function(x) c(x$coo))))
   Ldk$fac <- do.call("rbind", lapply(args, function(x) x$fac))
   if (any(lapply(args, function(x) length(x$links)) != 0)) {
@@ -706,6 +719,9 @@ combine.Ldk <- function(...) {
 #' @export
 combine.OutCoe <- function(...) {
   args <- list(...)
+  # we check
+  if (length(unique(sapply(args, length))) != 1)
+    stop("* objects to combine must have the same number of items")
   # Out <- Out(do.call( c, lapply( args, c )))
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
   facS <- args[[1]]$fac
@@ -728,6 +744,9 @@ combine.OutCoe <- function(...) {
 #' @export
 combine.OpnCoe <- function(...) {
   args <- list(...)
+  # we check
+  if (length(unique(sapply(args, length))) != 1)
+    stop("* objects to combine must have the same number of items")
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
   facS <- args[[1]]$fac
   methodS <- do.call(c, lapply(args, function(x) x$method))
@@ -742,7 +761,5 @@ combine.OpnCoe <- function(...) {
   OpnCoe$cuts <- cutS
   return(OpnCoe)
 }
-
-
 
 ##### end subset-combine

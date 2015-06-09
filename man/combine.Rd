@@ -30,9 +30,14 @@ combine(...)
 \description{
 Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
 it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
-(merges coefficients). In the latter case, Coe must ahve the same number of shapes (not
-necessarily the same number of coefficients). Also the $fac of the first Coe is retrieved.
+(merges coefficients). In the latter case, Coe must have the same number of shapes (not
+necessarily the same number of coefficients).
+Also the $fac of the first Coe is retrieved.
 A separate version may come at some point.
+}
+\note{
+Note that the order of shapes or their coefficients
+is not checked, so anything with the same number of rows will be merged.
 }
 \examples{
 data(bot)
