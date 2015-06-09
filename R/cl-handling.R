@@ -761,5 +761,49 @@ combine.OpnCoe <- function(...) {
   OpnCoe$cuts <- cutS
   return(OpnCoe)
 }
+#' Removes shapes with incomplete slices
+#'
+#' Imagine you take three views of every object you study. Then, you can \link{slice},
+#' \link{filter} or \link{chop} your entire dataset, do morphometrics on it,
+#' then want to \link{combine} it. But if you have forgotten one view, or if it
+#' was impossible to obtain, for one or more objects, combine will nto work.
+#' This function helps you to remove those ugly ducklings. See examples
+#' @param x the object on which to remove uncomplete "by"
+#' @param id of the objects, within the $fac slot
+#' @param by which column of the $fac should objects have complete views
+#' @examples
+#' # we load olea
+#' data(olea)
+#' # we select the var Aglan since it is the only one complete
+#' ol <- filter(olea, var == "Aglan")
+#' # everything seems fine
+#' table(ol, "view", "ind")
+#' # indeed
+#' rm_uncomplete(ol, id="ind", by="view")
+#'
+#' # we mess the ol object by removing a single shape
+#' ol.pb <- slice(ol, -1)
+#' table(ol.pb, "view", "ind")
+#' # the counterpart has been removed with a notice
+#' ol.ok <- rm_uncomplete(ol.pb, "ind", "view")
+#' # now you can combine them
+#' table(ol.ok, "view", "ind")
+#' @export
+rm_uncomplete <- function(x, id, by){
+  tab <- table(x$fac[, c(id, by)])
+  nb <- rowSums(tab)
+  nb.u <- unique(nb)
+  nb.tab <- table(nb)
+  if (length(nb.u) == 1) {
+    cat("* all ids have", nb.u, "slices\n")
+    return(x)
+  } else {
+    most_frequent <- as.numeric(names(nb.tab[which.max(nb.tab)]))
+    ugly_ducklings <- names(which(nb != most_frequent))
+    cat("* those shapes did not have", most_frequent, "slices and has been removed:",
+        paste(ugly_ducklings, collapse=", "), "\n")
+    return(subset(x, ! id %in% ugly_ducklings))
+  }
+}
 
 ##### end subset-combine
