@@ -7,7 +7,7 @@
 lf_structure(lf, names = character(), split = "_", trim.extension = FALSE)
 }
 \arguments{
-\item{lf}{list of filenames, as characters, typically such as
+\item{lf}{a list (its names are used) of a list of filenames, as characters, typically such as
 those obtained with \link{list.files}. Alternatively, a path to a folder
 containing the files. Actually, if lf is of length 1 (a single character),
 the function assumes it is a path and do a \link{list.files} on it.}
