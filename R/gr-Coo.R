@@ -258,6 +258,8 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 #'
 #' @param x The \code{Coo} (or \code{OutCoe}) object  to plot.
+#' @param  dim for \link{coo_listpanel}: a numeric of length 2 
+#' specifying the dimensions of the panel
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equal to the number of coordinates.
 #' @param borders A \code{vector} of colors for drawing the borders.
@@ -285,6 +287,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' data(olea)
 #' panel(olea)
 #' data(bot)
+#' panel(bot, c(4, 10))
 #' bot.f <- efourier(bot, 12)
 #' panel(bot.f)
 #' # an illustration of the use of fac
@@ -297,7 +300,7 @@ panel <- function(x, ...) {
 }
 #' @rdname panel.Coo
 #' @export
-panel.Out <- function(x, cols, borders, fac, reorder = NULL,
+panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
                       palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
@@ -324,7 +327,7 @@ panel.Out <- function(x, cols, borders, fac, reorder = NULL,
   }
   if (!missing(reorder))
     reorder <- Coo$fac[, reorder]
-  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
+  pos <- coo_listpanel(Coo$coo, dim=dim, cols = cols, borders = borders,
                        reorder = reorder, poly = TRUE)
   if (!is.null(names)) {
     if (is.logical(names)) {
