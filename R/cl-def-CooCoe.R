@@ -3,11 +3,11 @@
 
 #' Coo class
 #'
-#' \code{Coo} class is the 'parent' class of 
+#' \code{Coo} class is the 'parent' class of
 #' \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
-#' 
+#'
 #' @param ... anything and, anyway, this function will simply returns a message.
-#' 
+#'
 #'@details
 #' \code{Coo} class is the 'parent' class of the following 'child' classes \itemize{
 #' \item \code{\link{Out}} for closed \bold{out}lines
@@ -23,7 +23,7 @@
 #' are all, primarily, \code{Coo} objects on which we define generic \emph{and}
 #' specific methods. See their respective help pages for more help.
 #'
-#' You can access all the methods available for \code{Coo} objects 
+#' You can access all the methods available for \code{Coo} objects
 #' with \code{methods(class=Coo)}.
 #'
 #' @note
@@ -33,7 +33,7 @@
 #' \enumerate{
 #' \item load your file: \code{load("foo.rda")}
 #' It may produce an error but the \code{.rda} has been loaded (see \code{ls()})
-#' \item type: \code{foo2 <- Out(foo@@coo, fac=foo@@fac)}, 
+#' \item type: \code{foo2 <- Out(foo@@coo, fac=foo@@fac)},
 #' same thing for the \code{@@ldk} slot and others, if any.
 #'}
 #' @examples
@@ -78,23 +78,23 @@ Coo <- function(...) {
 
 #' Coe class
 #'
-#'\code{Coe} class is the 'parent' class of 
+#'\code{Coe} class is the 'parent' class of
 #' \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes.
-#' 
+#'
 #' @param ... anything and, anyway, this function will simply returns a message.
-#' 
+#'
 #'@details
 #' \code{Coe} class is the 'parent' class of the following 'child' classes \itemize{
 #' \item \code{\link{OutCoe}} for coefficients from closed \bold{out}lines morphometrics
 #' \item \code{\link{OpnCoe}} for coefficients from \bold{op}e\bold{n} outlines morphometrics
 #' \item \code{\link{LdkCoe}} for coefficients from configuration of \bold{l}an\bold{d}mar\bold{k}s morphometrics.
 #' }
-#' 
+#'
 #' In other words, \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes
 #' are all, primarily, \code{Coe} objects on which we define generic \emph{and}
 #' specific methods. See their respective help pages for more help.
 #'
-#' You can access all the methods available for \code{Coe} objects 
+#' You can access all the methods available for \code{Coe} objects
 #' with \code{methods(class=Coe)}.
 #'
 #' @examples
@@ -165,6 +165,11 @@ str.Coe <- function(object, ...) {
 length.Coo <- function(x) {
     Coo <- x
     return(length(Coo$coo))}
+
+#' @export
+length.Coe<- function(x) {
+  Coe <- x
+  return(nrow(Coe$coe))}
 
 #' @export
 dim.Coo <- function(x) {
