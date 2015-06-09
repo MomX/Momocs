@@ -766,7 +766,7 @@ combine.OpnCoe <- function(...) {
 #' Imagine you take three views of every object you study. Then, you can \link{slice},
 #' \link{filter} or \link{chop} your entire dataset, do morphometrics on it,
 #' then want to \link{combine} it. But if you have forgotten one view, or if it
-#' was impossible to obtain, for one or more objects, combine will nto work.
+#' was impossible to obtain, for one or more objects, combine will not work.
 #' This function helps you to remove those ugly ducklings. See examples
 #' @param x the object on which to remove uncomplete "by"
 #' @param id of the objects, within the $fac slot
