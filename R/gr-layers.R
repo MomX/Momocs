@@ -88,7 +88,7 @@
   for (i in seq(along = levels(fac))) {
     pts.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(pts.i)) {
-      if (nrow(pts.i) > 1) {
+      if (nrow(pts.i) > 2) {
         for (j in seq(along = conf)) {
           seg.i <- conf_ell(x = pts.i, conf = conf[j],
                             nb.pts = 720)$seg

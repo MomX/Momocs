@@ -151,9 +151,12 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   } else {
     ### fac provided
     # fac provided, as formula
-    if (class(fac)=="formula"){
-      f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
-      fac <- interaction(f0)
+    if (class(fac) == "formula") {
+      #f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
+      #fac <- interaction(f0)
+      fac <- PCA$fac[, attr(terms(fac), "term.labels")]
+      if (is.data.frame(fac))
+        fac <- factor(apply(fac, 1, paste, collapse="_"))
     }
     # fac provided, as column name or id
     if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
@@ -380,10 +383,10 @@ PCcontrib.PCA <-
       pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
       shp.i <- morphospace2PCA(x, xax=i, yax=1, pos = pos.i)
       shp[[i]] <- mutate(shp.i, nax=i) }
-    
+
     shp <- bind_rows(shp)
-    
-    gg <- ggplot(data=shp, aes(x=x_c + x_d, y=y_c + y_d, group=shp1)) + 
+
+    gg <- ggplot(data=shp, aes(x=x_c + x_d, y=y_c + y_d, group=shp1)) +
       geom_polygon(colour="grey50", fill="grey95") + coord_equal() +
       facet_grid(nax ~ shp) + labs(x="Position", y="PC")
     gg

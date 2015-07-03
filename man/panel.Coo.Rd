@@ -11,7 +11,7 @@
 \usage{
 panel(x, ...)
 
-\method{panel}{Out}(x, cols, borders, fac, reorder = NULL,
+\method{panel}{Out}(x, dim, cols, borders, fac, reorder = NULL,
   palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col, ...)
 
@@ -29,6 +29,9 @@ panel(x, ...)
 \item{x}{The \code{Coo} (or \code{OutCoe}) object  to plot.}
 
 \item{...}{further arguments to maintain consistency with the generic \link{plot}.}
+
+\item{dim}{for \link{coo_listpanel}: a numeric of length 2
+specifying the dimensions of the panel}
 
 \item{cols}{A \code{vector} of colors for drawing the outlines.
 Either a single value or of length exactly equal to the number of coordinates.}
@@ -72,6 +75,7 @@ panel(mosquito, names=TRUE, cex.names=0.5)
 data(olea)
 panel(olea)
 data(bot)
+panel(bot, c(4, 10))
 bot.f <- efourier(bot, 12)
 panel(bot.f)
 # an illustration of the use of fac
