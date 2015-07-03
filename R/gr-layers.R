@@ -65,7 +65,7 @@
   for (i in seq(along = levels(fac))) {
     pts.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(pts.i)) {
-      if (nrow(pts.i) > 1) {
+      if (nrow(pts.i) > 2) {
         ell.i <- conf_ell(x = pts.i, conf = conf)$ell
         lines(coo_close(ell.i), col = col[i])
         points(coo_centpos(pts.i)[1], coo_centpos(pts.i)[2],
