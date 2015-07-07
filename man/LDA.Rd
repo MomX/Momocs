@@ -10,7 +10,7 @@ LDA(x, fac, retain, ...)
 
 \method{LDA}{default}(x, fac, retain, ...)
 
-\method{LDA}{PCA}(x, fac, retain = 0.99, ...)
+\method{LDA}{PCA}(x, fac, retain = 0.99, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{a  PCA object}
@@ -20,6 +20,8 @@ LDA(x, fac, retain, ...)
 \item{retain}{the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).}
 
 \item{...}{additional arguments to feed \link{lda}}
+
+\item{verbose}{logical whether to print messages}
 }
 \value{
 a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:

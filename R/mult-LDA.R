@@ -8,6 +8,7 @@
 #' @param x a  PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
 #' @param retain the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).
+#' @param verbose logical whether to print messages
 #' @param ... additional arguments to feed \link{lda}
 #' @return a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:
 #' \itemize{
@@ -91,7 +92,7 @@ LDA.Coe <- function(x, fac, retain, ...) {
 
 #' @rdname LDA
 #' @export
-LDA.PCA <- function(x, fac, retain = 0.99, ...) {
+LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   PCA <- x
   f0 <- fac
   #fac handling
@@ -103,10 +104,10 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
   # PC number selection
   if (retain <= 1)  {
-    cat(" *", retain, "total variance.\n")
+    if (verbose) cat(" *", retain, "total variance.\n")
     retain <- scree_min(x, prop = retain)
   }
-  cat(" *", retain, "PC retained.\n")
+  if (verbose) cat(" *", retain, "PC retained.\n")
   X <- PCA$x[, 1:retain]
   if (is.matrix(X)) {
     remove <- which(apply(X, 2, sd) < 1e-10)
@@ -141,7 +142,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   # class error
   tab <- CV.tab
   ce <- numeric(nrow(tab))
-  for (i in 1:nrow(tab)) ce[i] <- sum(tab[i, -i])/sum(tab[i, ])
+  for (i in 1:nrow(tab)) ce[i] <- 1-(sum(tab[i, -i])/sum(tab[i, ]))
   names(ce) <- rownames(tab)
 
   LDA <- list(x = X, fac = fac, f0 = f0, removed = remove, mod = mod,
@@ -154,16 +155,17 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
 
 #' @export
 print.LDA <- function(x, ...) {
-  cat("Leave-one-out cross-validation ($CV.correct): (",
+  cat(" * Leave-one-out cross-validation ($CV.correct): (",
       signif(x$CV.correct * 100, 3), "% - ",
       sum(diag(x$CV.tab)), "/", sum(x$CV.tab),
       "): \n", sep = "")
 
-  cat("\nCross-validation table ($CV.tab):\n")
+  cat("\n * Class correctness ($CV.ce):\n")
+  print(x$CV.ce)
+  
+  cat("\n * Cross-validation table ($CV.tab):\n")
   print(x$CV.tab)
 
-  cat("\nClass correctness ($CV.ce):\n")
-  print(x$CV.ce)
 }
 
 # reLDA -----------
