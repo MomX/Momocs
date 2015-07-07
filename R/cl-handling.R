@@ -305,6 +305,58 @@ mutate.Coe <- mutate.Coo
 #' @export
 mutate.PCA <- mutate.Coo
 
+# transmute -------------------------------
+#' transmute (ala dplyr) variables by name, using the $fac slot on Momocs classes
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... comma separated list of unquoted expressions
+#' @details dplyr verbs should be maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a Coo object
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @examples
+#' data(olea)
+#' olea
+#' select(olea, var, view) # drops domes and ind
+#' select(olea, variety=var, domesticated_status=domes, view)
+#' # combine with filter with magrittr pipes
+#' \dontrun{
+#' library(magrittr)
+#' # only dorsal views, and 'var' and 'domes' columns
+#' filter(olea, view=="VD") %>% select(var, domes)
+#' }
+#' @rdname transmute
+#' @examples
+#' data(bot)
+#' # let's extract the centroid size and remove everything else
+#' bot2 <- transmute(bot, cs=sapply(bot$coo, coo_centsize))
+#' bot2f <- efourier(bot2, 10)
+#' bot2p <- PCA(bot2f)
+#' plot2(bot2p, "cs")
+#' @export
+transmute <- function(.data, ...){
+  UseMethod("transmute")
+}
+#' @rdname transmute
+#' @export
+transmute.default <- function(.data, ...){
+  dplyr::transmute(.data, ...)
+}
+#' @rdname transmute
+#' @export
+transmute.Coo <- function(.data, ...){
+  .data$fac <- transmute(.data$fac, ...)
+  .data
+}
+#' @rdname transmute
+#' @export
+transmute.Coe <- transmute.Coo
+
+#' @rdname transmute
+#' @export
+transmute.PCA <- transmute.Coo
+
 
 
 #######
