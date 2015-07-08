@@ -3,20 +3,21 @@
 
 # rw_rule ---------------------
 #' Rename levels with a rewriting rule
-#' rw_rule stands for 'rewriting rule'. Typically useful to correct typos 
+#' rw_rule stands for 'rewriting rule'. Typically useful to correct typos
 #' at the import, or merge some levels within covariates. Drops levels silently.
-#' 
+#'
 #' @param x any Momocs object
 #' @param fac the id of the name of the $fac column to look for
 #' @param from which level should be renamed
 #' @param to which name ?
 #' @return a Momocs object of the same type
-#' @examples 
+#' @examples
 #' data(bot)
 #' rw_rule(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
 #' @export
 rw_rule <- function(x, fac, from, to){
-  fac2 <- factor(x$fac[, fac], levels=c(levels(x$fac[, fac]), to))
+  new_levels <- unique(c(levels(x$fac[, fac]), to))
+  fac2 <- factor(x$fac[, fac], levels = new_levels)
   fac2[which(fac2==from)] <- to
   x$fac[, fac] <- droplevels(fac2)
   x}
@@ -24,14 +25,14 @@ rw_rule <- function(x, fac, from, to){
 
 # at_least ------------------------
 #' Retains group with at least a certain number of individuals within
-#' 
+#'
 #' Title and examples are self-speaking.
-#' 
+#'
 #' @param x any Momocs object
 #' @param y the id of name of the $fac column
 #' @param N minimal number of individuals to retain the group
 #' @note if N is too ambitious the original object is returned with a message
-#' @examples 
+#' @examples
 #' data(trilo)
 #' table(trilo, "onto")
 #' at_least(trilo, "onto", 9)
@@ -574,7 +575,7 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
     if (!replace & any(N)>size)
       stop(" * for at least one level, 'size' is too large for sampling without replacement")
   }
-  
+
   if (is.null(fac)) {
     retain <- sample(N, size = size, replace = replace)
   } else {
