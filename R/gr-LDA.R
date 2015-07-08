@@ -220,15 +220,15 @@ plot.LDA <- function(x, xax=1, yax=2,
 #'
 #' Either with frequencies (or percentages) plus marginal sums,
 #' and values as heatmaps. Used in Momocs for plotting cross-validation tables
-#' but may be used for any table (likely with \code{freq=FALSE}). 
+#' but may be used for any table (likely with \code{freq=FALSE}).
 #'
 #' @param x a (cross-validation table) or an LDA object
 #' @param freq logical whether to display frequencies or counts
 #' @param rm0 logical whether to remove zeros
-#' @param cex numeric to adjust labels in every cell
+#' @param cex numeric to adjust labels in every cell. NA to remove them
 #' @param round numeric, when freq=TRUE how many decimals should we display
 #' @param ... only used for the generic
-#' @return a gg object
+#' @return a ggplot object
 #' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
 #' @keywords Multivariate Graphics
 #' @examples
@@ -246,13 +246,16 @@ plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
   df <- as.data.frame(tab)
   colnames(df) <- c("actual", "classified", "count")
   if (freq) {
-    df <- df %>% group_by_("classified") %>% 
+    df <- df %>% group_by_("classified") %>%
       mutate(count=round(count/sum(count), round))
   }
   gg <- ggplot(df, aes_string(x="actual", y="classified", fill="count")) +
     geom_tile()  +
-    scale_fill_gradient(low="white") +
-    theme_linedraw() + theme(legend.position="none")
+    scale_fill_gradient(low="white", high="red", na.value="white") +
+    theme_linedraw() + theme(legend.position="none") +
+    theme(axis.text=element_text(size=10),
+          axis.text.x=element_text(angle=90, hjust=1),
+          axis.title=element_text(size=14, face="bold"))
   if (rm0) {
     gg <- gg + geom_text(data=filter(df, count !=0), aes_string(label="count"), size=rel(cex))
   } else {

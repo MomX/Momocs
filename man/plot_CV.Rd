@@ -23,12 +23,12 @@ plot_CV(x, ...)
 
 \item{rm0}{logical whether to remove zeros}
 
-\item{cex}{numeric to adjust labels in every cell}
+\item{cex}{numeric to adjust labels in every cell. NA to remove them}
 
 \item{round}{numeric, when freq=TRUE how many decimals should we display}
 }
 \value{
-a gg object
+a ggplot object
 }
 \description{
 Either with frequencies (or percentages) plus marginal sums,
