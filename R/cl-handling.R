@@ -1,5 +1,55 @@
 ##### Combining or subsetting Momocs' classes
 
+
+# rw_rule ---------------------
+#' Rename levels with a rewriting rule
+#' rw_rule stands for 'rewriting rule'. Typically useful to correct typos 
+#' at the import, or merge some levels within covariates. Drops levels silently.
+#' 
+#' @param x any Momocs object
+#' @param fac the id of the name of the $fac column to look for
+#' @param from which level should be renamed
+#' @param to which name ?
+#' @return a Momocs object of the same type
+#' @examples 
+#' data(bot)
+#' rw_rule(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
+#' @export
+rw_rule <- function(x, fac, from, to){
+  fac2 <- factor(x$fac[, fac], levels=c(levels(x$fac[, fac]), to))
+  fac2[which(fac2==from)] <- to
+  x$fac[, fac] <- droplevels(fac2)
+  x}
+
+
+# at_least ------------------------
+#' Retains group with at least a certain number of individuals within
+#' 
+#' Title and examples are self-speaking.
+#' 
+#' @param x any Momocs object
+#' @param y the id of name of the $fac column
+#' @param N minimal number of individuals to retain the group
+#' @note if N is too ambitious the original object is returned with a message
+#' @examples 
+#' data(trilo)
+#' table(trilo, "onto")
+#' at_least(trilo, "onto", 9)
+#' at_least(trilo, "onto", 16)
+#' at_least(trilo, "onto", 2000) # too ambitious !
+#' @export
+at_least <- function(x, fac, N){
+  retain <- x$fac[, fac] %in% names(which(table(x$fac[, fac]) >= N))
+  if (!any(retain)) {
+    cat(" * No group with at least", N, "indidivuals!\n\n")
+    return(x)
+  } else {
+    subset(x, retain)
+  }
+}
+
+
+
 # table --------------------------
 #' Cross tabulation of Momocs objects
 #'
@@ -113,7 +163,7 @@ subset.Coe <- function(x, subset, ...) {
   retain <- eval(e, Coe$fac, parent.frame())
   Coe2 <- Coe
   Coe2$coe <- Coe$coe[retain, ]
-#   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
+  #   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
   if (ncol(Coe$fac) > 0) {
     Coe2$fac <- Coe$fac
     Coe2$fac <- as.data.frame(Coe2$fac[retain, ])
@@ -524,7 +574,7 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
     if (!replace & any(N)>size)
       stop(" * for at least one level, 'size' is too large for sampling without replacement")
   }
-
+  
   if (is.null(fac)) {
     retain <- sample(N, size = size, replace = replace)
   } else {
@@ -535,7 +585,7 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
       retain <- append(retain, retain.i)
     }
   }
-#   return(retain)
+  #   return(retain)
   return(subset(Coo, retain))
 }
 
