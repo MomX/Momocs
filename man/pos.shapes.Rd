@@ -4,15 +4,18 @@
 \alias{pos.shapes}
 \title{Calculates nice positions on a plane for drawing shapes}
 \usage{
-pos.shapes(xy, pos.shp = c("range", "circle", "xy")[1], nb.shp = 12,
-  nr.shp = 6, nc.shp = 5, circle.r.shp)
+pos.shapes(xy, pos.shp = c("range", "full", "circle", "xy", "range_axes",
+  "full_axes")[1], nb.shp = 12, nr.shp = 6, nc.shp = 5, circle.r.shp)
 }
 \arguments{
 \item{xy}{todo}
 
 \item{pos.shp}{how shapes should be positionned: \code{range} of xy,
 \code{full} extent of the plane, \code{circle} as a rosewind,
-on \code{xy} values provided.}
+on \code{xy} values provided, \code{range_axes} on the range of xy
+but on the axes, \code{full_axes} same thing but on (0.85) range of the axes.
+You can also directly pass a matrix (or a data.frame)
+with columns named \code{("x", "y")}.}
 
 \item{nb.shp}{the total number of shapes}
 
@@ -24,6 +27,9 @@ on \code{xy} values provided.}
 }
 \description{
 Calculates nice positions on a plane for drawing shapes
+}
+\details{
+See \link{plot.PCA} for self-speaking examples
 }
 \keyword{Graphics}
 

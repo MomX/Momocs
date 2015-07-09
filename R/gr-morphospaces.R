@@ -202,14 +202,19 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
 #' @param xy todo
 #' @param pos.shp how shapes should be positionned: \code{range} of xy,
 #' \code{full} extent of the plane, \code{circle} as a rosewind,
-#' on \code{xy} values provided.
+#' on \code{xy} values provided, \code{range_axes} on the range of xy 
+#' but on the axes, \code{full_axes} same thing but on (0.85) range of the axes.
+#' You can also directly pass a matrix (or a data.frame) 
+#' with columns named \code{("x", "y")}.
 #' @param nb.shp the total number of shapes
 #' @param nr.shp the number of rows to position shapes
 #' @param nc.shp the number of cols to position shapes
 #' @param circle.r.shp if circle, its radius
+#' @details See \link{plot.PCA} for self-speaking examples
 #' @keywords Graphics
 #' @export
-pos.shapes <- function(xy, pos.shp = c("range", "circle", "xy")[1],
+pos.shapes <- function(xy, pos.shp = c("range", "full", "circle", "xy",
+                                       "range_axes", "full_axes")[1],
                        nb.shp = 12, nr.shp = 6, nc.shp = 5, circle.r.shp) {
   if (is.data.frame(pos.shp) | is.matrix(pos.shp)) {
     return(as.matrix(pos.shp))
@@ -220,7 +225,7 @@ pos.shapes <- function(xy, pos.shp = c("range", "circle", "xy")[1],
   if (pos.shp == "circle") {
     if (missing(circle.r.shp)) {
       # mean distance from origin
-      circle.r.shp <- coo_centdist(xy)
+      circle.r.shp <- coo_centsize(xy)
     }
     t <- seq(0, 2 * pi, len = nb.shp + 1)[-(nb.shp + 1)]
     pos <- cbind(circle.r.shp * cos(t), circle.r.shp * sin(t))
@@ -239,6 +244,27 @@ pos.shapes <- function(xy, pos.shp = c("range", "circle", "xy")[1],
     pos <- expand.grid(seq(w[1] * 0.85, w[2] * 0.85, len = nr.shp),
                        seq(w[3] * 0.85, w[4] * 0.85, len = nc.shp))
     pos <- as.matrix(pos)
+    colnames(pos) <- c("x", "y")  # pure cosmetics
+    return(pos)
+  }
+  if (pos.shp == "range_axes") {
+    pos <- matrix(c(0, 0,
+                    min(xy[, 1]), 0,
+                    max(xy[, 1]), 0,
+                    0, min(xy[, 2]),
+                    0, max(xy[, 2])), 
+                  byrow=TRUE, ncol=2)
+    colnames(pos) <- c("x", "y")  # pure cosmetics
+    return(pos)
+  }
+  if (pos.shp == "full_axes") {
+    w <- par("usr") * 0.85
+    pos <- matrix(c(0, 0,
+                    w[1], 0,
+                    w[2], 0,
+                    0, w[3],
+                    0, w[4]), 
+                  byrow=TRUE, ncol=2)
     colnames(pos) <- c("x", "y")  # pure cosmetics
     return(pos)
   }

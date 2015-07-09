@@ -27,8 +27,9 @@
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
 #' @param morphospace logical whether to add the morphological space
-#' @param pos.shp either "full", "range", "circle", "xy"
-#' or a data.frame for \link{pos.shapes}
+#' @param pos.shp passed to \link{pos.shp}, one of 
+#' \code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
+#' a matrix of positions. See \link{pos.shp}
 #' @param amp.shp amplification factor for shape deformation
 #' @param size.shp the size of the shapes
 #' @param nb.shp (pos.shp="circle") the number of shapes on the compass
@@ -78,7 +79,15 @@
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
-#' bot.p
+#' 
+#' # pos.shp
+#' plot(bot.p, pos.shp="full")
+#' plot(bot.p, pos.shp="range")
+#' plot(bot.p, pos.shp="xy")
+#' plot(bot.p, pos.shp="circle")
+#' plot(bot.p, pos.shp="range_axes")
+#' plot(bot.p, pos.shp="full_axes")
+#' 
 #' plot(bot.p, morpho=FALSE)
 #' plot(bot.p, "type")
 #'
@@ -103,9 +112,12 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      #.grid
                      grid=TRUE, nb.grids=3,
                      #shapes
-                     morphospace=TRUE, pos.shp="full", amp.shp=1,
+                     morphospace=TRUE,
+                     pos.shp=c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
+                     amp.shp=1,
                      size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
-                     pts.shp=60, border.shp=.transp("#000000", 0.5), lwd.shp=1, col.shp=.transp("#000000", 0.95),
+                     pts.shp=60, border.shp=.transp("#000000", 0.5),
+                     lwd.shp=1, col.shp=.transp("#000000", 0.95),
                      #stars
                      stars=FALSE,
                      #ellipses
@@ -206,9 +218,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   # we initate it
   .frame(xy, center.origin, zoom=zoom, bg=bg)
   # then the layers
-  if (grid)    .grid(nb.grids)
-  if (density) .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
-  if (contour) .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
+  if (grid)     .grid(nb.grids)
+  if (density)  .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
+  if (contour)  .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
   if (delaunay) .delaunay(xy, fac, col.groups)
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {

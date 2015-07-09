@@ -7,8 +7,9 @@
 \method{plot}{PCA}(x, fac, xax = 1, yax = 2, points = TRUE,
   col = "#000000", pch = 20, cex = 0.5, palette = col_solarized,
   center.origin = FALSE, zoom = 1, bg = par("bg"), grid = TRUE,
-  nb.grids = 3, morphospace = TRUE, pos.shp = "full", amp.shp = 1,
-  size.shp = 1, nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
+  nb.grids = 3, morphospace = TRUE, pos.shp = c("range", "full", "circle",
+  "xy", "range_axes", "full_axes")[1], amp.shp = 1, size.shp = 1,
+  nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
   border.shp = .transp("#000000", 0.5), lwd.shp = 1,
   col.shp = .transp("#000000", 0.95), stars = FALSE, ellipses = FALSE,
   conf_ellipses = 0.5, ellipsesax = TRUE, conf_ellipsesax = c(0.5, 0.75,
@@ -55,8 +56,9 @@ or for every individual, see examples)}
 
 \item{morphospace}{logical whether to add the morphological space}
 
-\item{pos.shp}{either "full", "range", "circle", "xy"
-or a data.frame for \link{pos.shapes}}
+\item{pos.shp}{passed to \link{pos.shp}, one of
+\code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
+a matrix of positions. See \link{pos.shp}}
 
 \item{amp.shp}{amplification factor for shape deformation}
 
@@ -151,7 +153,15 @@ of the ade4 R package.
 data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
-bot.p
+
+# pos.shp
+plot(bot.p, pos.shp="full")
+plot(bot.p, pos.shp="range")
+plot(bot.p, pos.shp="xy")
+plot(bot.p, pos.shp="circle")
+plot(bot.p, pos.shp="range_axes")
+plot(bot.p, pos.shp="full_axes")
+
 plot(bot.p, morpho=FALSE)
 plot(bot.p, "type")
 
