@@ -251,6 +251,79 @@ rm_harm <- function(x, drop=1){
   x
 }
 
+# rescale ------------------
+
+#' Rescale coordinates from pixels to real length units
+#' 
+#' Most of the time, (x, y) coordinates are recorded in pixels. If we want to have
+#' them in mm, cm, etc. we need to convert them and to rescale them. This functions
+#' does the job for the two cases: i) either an homogeneous rescaling factor, 
+#' e.g. if all pictures were taken using the very same magnification or ii) with various
+#' magnifications. More in the Details section
+#'
+#' @param x any \code{Coo} object
+#' @param scaling_factor numeric an homogeneous scaling factor. If all you (x, y) coordinates
+#' have the same scale
+#' @param scale_mapping either a data.frame or a path to read such a data.frame. It MUST contain
+#' three columns in that order: magnification found in $fac[, "magnification_col"], pixels, real length unit. 
+#' Column names do not matter but must be specified, as read.table reads with \code{header=TRUE} Every
+#' different magnification level found in $fac[, "magnification_col"] must have its row.
+#' @param magnification_col the name or id of the $fac column to look for magnification levels for every image
+#' @param ... additional arguments (besides header=TRUE) to pass to read.table if 'scale_mapping' is a path
+#' @details The i) case above is straightforward, if 1cm is 500pix long on all your pictures,
+#' just call \code{rescale(your_Coo, scaling_factor=1/500)} and all coordinates will be in cm.
+#' 
+#' The ii) second case is more subtle. First you need to code in your /link{Coo} object, in the fac
+#' slot, a column named, say "mag", for magnification. Imagine you have 4 magnifications: 0.5, 1, 2 and 5,
+#' we have to indicate for each magnification, how many pixels stands for how many units in the real world.
+#' 
+#' This information is passed as a data.frame, built externally or in R, that must look like this:
+#' \preformatted{
+#' mag   pix    cm
+#' 0.5   1304   10
+#' 1     921    10
+#' 2     816    5
+#' 5     1020   5
+#' }.
+#' 
+#' We have to do that because, for optical reasons, the ratio pix/real_unit, is not a linear
+#' function of the magnification.
+#' 
+#' All shapes will be centered to apply (the single or the different) scaling_factor.
+#' 
+#' @note This function is simple but quite complex to detail. Feel free to contact me should you have any
+#' problem with it. You can just access its code (type \code{rescale}) and reply it yourself.
+#' @export
+rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){
+  # homogeneous case
+  if (!missing(scaling_factor)){
+    x <- coo_center(x)
+    x$coo <- lapply(x$coo, function(x) x*scaling_factor)
+    return(x)
+  }
+  # multiple magnification case
+  # if a path is provided we read it
+  if (is.character(scale_mapping))
+    scale_mapping <- read.table(scale_mapping, header=TRUE, ...)
+  # we prepare the two cols and match
+  mag_orig <- x$fac[, magnification_col] %>% as.numeric()
+  mag_rule <- scale_mapping[, 1] %>% as.numeric()
+  mag_match <- match(mag_orig, mag_rule)
+  # we check a bit
+  match_found <- mag_orig %in% mag_rule
+  if (any(!(match_found))) {
+    stop(" * those magnification were absent from the file",
+         unique(mag_orig[which(!(match_found))]))
+  }
+  # we center x to be able to just apply a multiplying factor
+  x <- coo_center(x)
+  mag_factor <- (scale_mapping[, 3] / scale_mapping[, 2])[mag_match]
+  for (i in seq_along(x$coo)) {
+    x$coo[[i]] <- x$coo[[i]] * mag_factor[i]
+  }
+  return(x)
+}
+
 # class testers -------------
 #' Tests if an object is of a given class
 #'

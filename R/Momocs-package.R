@@ -52,10 +52,10 @@
 #' \item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 #' }
 #' @section Cheers:
-#' We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie, 
+#' We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie,
 #' Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 #' Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
-#' Norbert Telmon, Bill Venables, Daniele Ventura, Michael Wallace, 
+#' Norbert Telmon, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood.
 #' for their helpful ideas and bug reports.
 #' @import ape
@@ -81,10 +81,10 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
 
 
 #' Install and load the last version of Momocs
-#' 
-#' Download the last version of Momocs from its GitHub account 
+#'
+#' Download the last version of Momocs from its GitHub account
 #' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)})
-#' 
+#'
 #' You need devtools, but it is checked anyway.
 #' @examples
 #' \dontrun{
