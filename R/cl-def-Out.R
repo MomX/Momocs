@@ -287,7 +287,7 @@ get_ldk.Out <- function(Coo) {
   ref <- array(NA, dim = c(length(ldk[[1]]), ncol(coo[[1]]),
                            length(coo)))
   for (i in seq(along = coo)) {
-    ref[, , i] <- coo[[i]][ldk[[i]], ]
+    ref[, , i] <- coo[[i]][ldk[[1]], ]
   }
   return(ref)
 }
