@@ -1325,6 +1325,7 @@ coo_centsize <- function(coo) {
 }
 
 #' Returns the distance between everypoints and the centroid
+#' 
 #' For every point of the shape, returns the (centroid-points) distance.
 #' @aliases coo_centdist
 #' @param coo a \code{matrix} of (x; y) coordinates.

@@ -2,8 +2,7 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_centdist}
 \alias{coo_centdist}
-\title{Returns the distance between everypoints and the centroid
-For every point of the shape, returns the (centroid-points) distance.}
+\title{Returns the distance between everypoints and the centroid}
 \usage{
 coo_centdist(coo)
 }
@@ -14,7 +13,6 @@ coo_centdist(coo)
 a \code{matrix} of (x; y) coordinates.
 }
 \description{
-Returns the distance between everypoints and the centroid
 For every point of the shape, returns the (centroid-points) distance.
 }
 \examples{
