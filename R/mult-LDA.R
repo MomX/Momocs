@@ -102,16 +102,16 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
     fform <- x$fac[, attr(terms(fac), "term.labels")]
     fac <- interaction(fform)
   }
-  
+
   # case where fac is a standalone factor
   if (is.factor(fac)) {
-    fac <- factor(fac) 
+    fac <- factor(fac)
   }
   # case where an id or column name is provided
   if (!is.factor(fac)){
     fac <- x$fac[, fac]
   }
-  
+
   # PC number selection
   if (retain <= 1)  {
     if (verbose) cat(" *", retain, "total variance.\n")
@@ -211,26 +211,29 @@ classify.default <- function(x, fac, ref, unk){
 
 #' @export
 classify.Coe <- function(x, fac, ref, unk){
-  # so that we can directly pass a fac
-  if (!is.factor(fac)){
+#   # so that we can directly pass a fac
+#   if (!is.factor(fac)){
     fac <- x$fac[, fac]
-  }
-  # if any NAs, we remove them
-  if (any(is.na(fac))) {
-    x  <- x %>% slice(which(!is.na(fac)))
-   fac <- fac %>% na.omit() %>% factor() 
-  }
+#   }
+#   # if any NAs, we remove them
+#   if (any(is.na(fac))) {
+#     x  <- x %>% slice(which(!is.na(fac)))
+#    fac <- fac %>% na.omit() %>% factor()
+#   }
   # calculate a PCA using all taxa
-  P0 <- x %>%
-    slice(which(fac %in% c(ref, unk))) %>%
-    PCA()
+  all_id  <- which(fac %in% c(ref, unk))
+  x <- slice(x, all_id)
+  fac <- fac[all_id]
+  P0 <- PCA(x)
   # calculate an LDA using all but the unknown taxa
+  ref_id <- which(fac != unk)
   L0 <- P0 %>%
-    slice(which(fac != unk)) %>%
-    LDA(fac, retain=0.99, verbose=FALSE)
+    slice(ref_id) %>%
+    LDA(fac[ref_id], retain=0.99, verbose=FALSE)
   # extract and prepare scores of the unknown taxa
+  unk_id <- which(fac == unk)
   P1_all <- P0 %>%
-    slice(which(fac == unk))
+    slice(unk_id)
   P1 <- P1_all$x[, 1:ncol(L0$x)]
 
   # classify using the MASS::lda
