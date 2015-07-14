@@ -57,8 +57,7 @@ LDA.default <- function(x, fac, retain, ...) {
   mod <- lda(X, grouping = fac)
   mod.pred <- predict(mod, X)
   # leave-one-out cross validation
-  CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE,
-                ...)$class
+  CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
   # we build a nice table from it
   CV.tab <- table(fac, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")
@@ -98,10 +97,21 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   #fac handling
   if (missing(fac))
     stop(" * no 'fac' provided.")
+  # formula case
   if (class(fac)=="formula"){
     fform <- x$fac[, attr(terms(fac), "term.labels")]
-    fac <- interaction(fform)}
-  if (!is.factor(fac)) { fac <- factor(x$fac[, fac]) }
+    fac <- interaction(fform)
+  }
+  
+  # case where fac is a standalone factor
+  if (is.factor(fac)) {
+    fac <- factor(fac) 
+  }
+  # case where an id or column name is provided
+  if (!is.factor(fac)){
+    fac <- x$fac[, fac]
+  }
+  
   # PC number selection
   if (retain <= 1)  {
     if (verbose) cat(" *", retain, "total variance.\n")
@@ -123,8 +133,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   mod <- lda(X, grouping = fac, tol = 1e-08, ...)
   mod.pred <- predict(mod, X)
   # leave-one-out cross validation
-  CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE,
-                ...)$class
+  CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
   # we build a nice table from it
   CV.tab <- table(fac, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")
@@ -172,7 +181,8 @@ print.LDA <- function(x, ...) {
 #' Classify using LDA
 #'
 #' @param x a Coe
-#' @param fac the name or id of the $fac column to use
+#' @param fac a standalone factor, or the name or id of the $fac column to use.If it contains
+#' NAs, they will also be removed first from the x object
 #' @param ref at least two level names from $fac[, "fac"] to use as a training subset of x
 #' @param unk same as above for one level name to classify
 #'
@@ -201,17 +211,26 @@ classify.default <- function(x, fac, ref, unk){
 
 #' @export
 classify.Coe <- function(x, fac, ref, unk){
+  # so that we can directly pass a fac
+  if (!is.factor(fac)){
+    fac <- x$fac[, fac]
+  }
+  # if any NAs, we remove them
+  if (any(is.na(fac))) {
+    x  <- x %>% slice(which(!is.na(fac)))
+   fac <- fac %>% na.omit() %>% factor() 
+  }
   # calculate a PCA using all taxa
   P0 <- x %>%
-    slice(which(x$fac[, fac] %in% c(ref, unk))) %>%
+    slice(which(fac %in% c(ref, unk))) %>%
     PCA()
   # calculate an LDA using all but the unknown taxa
   L0 <- P0 %>%
-    slice(which(P0$fac[, fac] != unk)) %>%
+    slice(which(fac != unk)) %>%
     LDA(fac, retain=0.99, verbose=FALSE)
   # extract and prepare scores of the unknown taxa
   P1_all <- P0 %>%
-    slice(which(P0$fac[, fac] == unk))
+    slice(which(fac == unk))
   P1 <- P1_all$x[, 1:ncol(L0$x)]
 
   # classify using the MASS::lda
