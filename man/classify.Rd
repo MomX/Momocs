@@ -9,7 +9,8 @@ classify(x, fac, ref, unk)
 \arguments{
 \item{x}{a Coe}
 
-\item{fac}{the name or id of the $fac column to use}
+\item{fac}{a standalone factor, or the name or id of the $fac column to use.If it contains
+NAs, they will also be removed first from the x object}
 
 \item{ref}{at least two level names from $fac[, "fac"] to use as a training subset of x}
 

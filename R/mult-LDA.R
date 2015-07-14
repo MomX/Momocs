@@ -211,29 +211,31 @@ classify.default <- function(x, fac, ref, unk){
 
 #' @export
 classify.Coe <- function(x, fac, ref, unk){
-#   # so that we can directly pass a fac
-#   if (!is.factor(fac)){
+  # so that we can directly pass a fac
+  if (!is.factor(fac)){
     fac <- x$fac[, fac]
-#   }
-#   # if any NAs, we remove them
-#   if (any(is.na(fac))) {
-#     x  <- x %>% slice(which(!is.na(fac)))
-#    fac <- fac %>% na.omit() %>% factor()
-#   }
-  # calculate a PCA using all taxa
+  }
+  # if any NAs, we remove them
+  if (any(is.na(fac))) {
+    x  <- x %>% subset(which(!is.na(fac)))
+   fac <- fac %>% na.omit() %>% factor()
+  }
+ # we filter for levels of interest
   all_id  <- which(fac %in% c(ref, unk))
-  x <- slice(x, all_id)
+  cat(all_id)
+  x <- subset(x, all_id)
   fac <- fac[all_id]
+  # calculate a PCA using all taxa
   P0 <- PCA(x)
   # calculate an LDA using all but the unknown taxa
   ref_id <- which(fac != unk)
   L0 <- P0 %>%
-    slice(ref_id) %>%
+    subset(ref_id) %>%
     LDA(fac[ref_id], retain=0.99, verbose=FALSE)
   # extract and prepare scores of the unknown taxa
   unk_id <- which(fac == unk)
   P1_all <- P0 %>%
-    slice(unk_id)
+    subset(unk_id)
   P1 <- P1_all$x[, 1:ncol(L0$x)]
 
   # classify using the MASS::lda
