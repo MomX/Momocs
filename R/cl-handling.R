@@ -217,8 +217,6 @@ transmute.Coe <- transmute.Coo
 #' @export
 transmute.PCA <- transmute.Coo
 
-
-
 #######
 
 # filter -------------------------------
@@ -275,7 +273,6 @@ filter.Coe <- filter.Coo
 #' @rdname filter
 #' @export
 filter.PCA <- filter.Coo
-
 
 # slice ---------------------
 
