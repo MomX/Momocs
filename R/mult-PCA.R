@@ -124,7 +124,7 @@ as.PCA.default <- function(x, fac){
 print.PCA <- function(x, ...){
   cat("A PCA object\n")
   cat(rep("-", 20), "\n", sep = "")
-  cat(" -", nrow(x$x), "shapes \n")
+  cat(" -", ifelse(is.null(nrow(x$x)), 1, nrow(x$x)), "shapes \n")
   # Method printer
   if (length(x$method)>1) {
     cat(" - $method: [", paste0(x$method, collapse=" + "), "analyses ]\n")
@@ -270,26 +270,26 @@ rePCA.PCA <- function(PCA, Coe){
 
 
 #' Calculates convex hull area/volume of PCA scores
-#' 
+#'
 #' May be useful to compare shape diversity. Expressed in PCA units that should
 #' only be compared within the same PCA.
-#' 
+#'
 #' @param x a PCA object
-#' @param fac (optionnal) column name or ID from the $fac slot. 
+#' @param fac (optionnal) column name or ID from the $fac slot.
 #' @param xax the first PC axis to use (1 by default)
 #' @param yax the second PC axis (2 by default)
 #' @param zax the third PC axis (3 by default only for volume)
-#' 
+#'
 #' @return
 #' If fac is not provided global area/volume is returned; otherwise a named
 #' list for every level of fac
-#' 
+#'
 #' @examples
 #' data(bot)
 #' bp <- PCA(efourier(bot, 12))
 #' get_chull_area(bp)
 #' get_chull_area(bp, 1)
-#' 
+#'
 #' get_chull_volume(bp)
 #' get_chull_volume(bp, 1)
 #' @export
@@ -329,7 +329,7 @@ get_chull_area <- function (x, fac, xax = 1, yax = 2) {
 #' @export
 get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
   if (!is.PCA(x)) stop(" * 'x' must be a PCA object")
-  
+
   # no fac provided
   if (missing(fac)){
     xy <- x$x[, c(xax, yax, zax)]
