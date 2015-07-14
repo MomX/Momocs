@@ -162,10 +162,73 @@ print.LDA <- function(x, ...) {
 
   cat("\n * Class correctness ($CV.ce):\n")
   print(x$CV.ce)
-  
+
   cat("\n * Cross-validation table ($CV.tab):\n")
   print(x$CV.tab)
 
+}
+
+# classify --------
+#' Classify using LDA
+#'
+#' @param x a Coe
+#' @param fac the name or id of the $fac column to use
+#' @param ref at least two level names from $fac[, "fac"] to use as a training subset of x
+#' @param unk same as above for one level name to classify
+#'
+#' @return a list with components:
+#' \itemize{
+#' \item \code{$N_ref} the number of elements in the training set
+#' \item \code{$N_unk} the number of elements in the unknown set
+#' \item \code{$counts} counts of classification of 'unk' in each class of 'ref'
+#' \item \code{$pc} same thing as percentages
+#' \item \code{$probs} same thing as posterior probabilities
+#' }
+#'
+#' @examples
+#' data(olea)
+#' table(x, "var")
+#' x <- opoly(olea, 5, verbose=FALSE)
+#classify(x, fac="var", ref=c("Aglan","Cypre"), unk="PicMa")
+#' @export
+classify <- function(x, fac, ref, unk){
+  UseMethod("classify")
+}
+#' @export
+classify.default <- function(x, fac, ref, unk){
+  stop(" * Method only available for objects of class 'Coe'")
+}
+
+#' @export
+classify.Coe <- function(x, fac, ref, unk){
+  # calculate a PCA using all taxa
+  P0 <- x %>%
+    slice(which(x$fac[, fac] %in% c(ref, unk))) %>%
+    PCA()
+  # calculate an LDA using all but the unknown taxa
+  L0 <- P0 %>%
+    slice(which(P0$fac[, fac] != unk)) %>%
+    LDA(fac, retain=0.99, verbose=FALSE)
+  # extract and prepare scores of the unknown taxa
+  P1_all <- P0 %>%
+    slice(which(P0$fac[, fac] == unk))
+  P1 <- P1_all$x[, 1:ncol(L0$x)]
+
+  # classify using the MASS::lda
+  pred <- predict(L0$mod, P1)
+  # prepare the results as a list
+  counts <- table(pred$class)
+  N_unk  <- sum(counts)
+  pc     <- round((counts / sum(counts))*100, 2)
+  probs  <- pred$posterior
+
+  return(list(N_ref=nrow(L0$x),
+              N_ref_tab=table(L0$fac),
+              N_unk=N_unk,
+              counts=counts,
+              pc=pc,
+              probs=probs))#,
+  #probs_fac=probs_fac))
 }
 
 # reLDA -----------
