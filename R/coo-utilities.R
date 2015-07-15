@@ -1079,6 +1079,38 @@ coo_aligncalliper.Coo <- function(coo) {
   return(Coo)
 }
 
+#' Aligns shapes using their shortest radius
+#'
+#' And returns them slided with the first coordinate on the east.
+#' May be used as an aligning strategy on shapes with a clear 'invaginate' part.
+#' @aliases coo_alignminradius
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @seealso \link{coo_align}, \link{coo_alignxax}, \link{coo_calliper}
+#' @keywords ShapeUtilities
+#' @examples 
+#' \dontrun{
+#' data(hearts)
+#' stack(coo_alignminradius(hearts))
+#' }
+coo_alignminradius <- function(coo){
+  UseMethod("coo_alignminradius")
+}
+#' @export
+coo_alignminradius.default <- function(coo){
+  id_minrad <- which.min(coo_centdist(coo))
+  coo <- coo_slide(coo, id_minrad)
+  m <- matrix(c(coo[1, ],  0, 0, 1, 0), nrow=3, byrow=TRUE)
+  th <- coo_theta3(m)
+  coo_rotate(coo, -th)
+}
+#' @export
+coo_alignminradius.Coo <- function(coo){
+  Coo <- coo
+  Coo$coo <- lapply(Coo$coo, coo_alignminradius)
+  return(Coo)
+}
+
 #' Reverses coordinates
 #'
 #' Returns the reverse suite of coordinates, i.e. change shape's orientation
