@@ -24,6 +24,7 @@ a list with components:
 \item \code{$counts} counts of classification of 'unk' in each class of 'ref'
 \item \code{$pc} same thing as percentages
 \item \code{$probs} same thing as posterior probabilities
+\item \code{$probs} same thing as posterior but as a data.frame
 }
 }
 \description{

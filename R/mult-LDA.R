@@ -193,6 +193,7 @@ print.LDA <- function(x, ...) {
 #' \item \code{$counts} counts of classification of 'unk' in each class of 'ref'
 #' \item \code{$pc} same thing as percentages
 #' \item \code{$probs} same thing as posterior probabilities
+#' \item \code{$probs} same thing as posterior but as a data.frame
 #' }
 #'
 #' @examples
@@ -218,11 +219,11 @@ classify.Coe <- function(x, fac, ref, unk){
   # if any NAs, we remove them
   if (any(is.na(fac))) {
     x  <- x %>% subset(which(!is.na(fac)))
-   fac <- fac %>% na.omit() %>% factor()
+    fac <- fac %>% na.omit() %>% factor()
   }
- # we filter for levels of interest
+  # we filter for levels of interest
   all_id  <- which(fac %in% c(ref, unk))
-  cat(all_id)
+  # cat(all_id)
   x <- subset(x, all_id)
   fac <- fac[all_id]
   # calculate a PCA using all taxa
@@ -245,14 +246,20 @@ classify.Coe <- function(x, fac, ref, unk){
   N_unk  <- sum(counts)
   pc     <- round((counts / sum(counts))*100, 2)
   probs  <- pred$posterior
+#
+#   probs_fac <- cbind(pred$posterior, select(P1_all$fac, Site, Period)) %>%
+#     group_by(Site, Period) %>%
+#     summarise_each(funs(mean))
+#   probs_fac <- bind_cols(select(probs_fac, 1:2), round(select(probs_fac, 3)))
+  probs_fac <- NULL
 
   return(list(N_ref=nrow(L0$x),
               N_ref_tab=table(L0$fac),
               N_unk=N_unk,
               counts=counts,
               pc=pc,
-              probs=probs))#,
-  #probs_fac=probs_fac))
+              probs=probs,
+              probs_fac=probs_fac))
 }
 
 # reLDA -----------
@@ -322,16 +329,16 @@ reLDA.LDA <- function(LDA, newdata){
   nc <- ncol(LDA$x)
   reLDA <- predict(mod, newdata$x[, 1:nc])
   #   return(reLDA)
-#   if (length(LDA$f0)==1) {
-#     actual <- newdata$fac[, LDA$f0]
-#     if (!is.null(actual)) {
-#       reLDA$res <- data.frame(actual=actual, classified=reLDA$class)
-#       reLDA$CV.tab <- table(reLDA$res)
-#       reLDA$CV.correct <- sum(diag(reLDA$CV.tab)) / sum(reLDA$CV.tab)
-#     }
-#   }
+  #   if (length(LDA$f0)==1) {
+  #     actual <- newdata$fac[, LDA$f0]
+  #     if (!is.null(actual)) {
+  #       reLDA$res <- data.frame(actual=actual, classified=reLDA$class)
+  #       reLDA$CV.tab <- table(reLDA$res)
+  #       reLDA$CV.correct <- sum(diag(reLDA$CV.tab)) / sum(reLDA$CV.tab)
+  #     }
+  #   }
   reLDA$newdata <- newdata$x[, 1:nc]
-#   class(reLDA) <- "LDA"
+  #   class(reLDA) <- "LDA"
   return(reLDA)
 }
 
