@@ -198,9 +198,9 @@ print.LDA <- function(x, ...) {
 #'
 #' @examples
 #' data(olea)
-#' table(x, "var")
+#' table(olea, "var")
 #' x <- opoly(olea, 5, verbose=FALSE)
-#classify(x, fac="var", ref=c("Aglan","Cypre"), unk="PicMa")
+#' classify(x, fac="var", ref=c("Aglan","Cypre"), unk="PicMa")
 #' @export
 classify <- function(x, fac, ref, unk){
   UseMethod("classify")

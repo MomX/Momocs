@@ -27,9 +27,9 @@
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
 #' @param morphospace logical whether to add the morphological space
-#' @param pos.shp passed to \link{pos.shp}, one of 
+#' @param pos.shp passed to \link{pos.shapes}, one of 
 #' \code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
-#' a matrix of positions. See \link{pos.shp}
+#' a matrix of positions. See \link{pos.shapes}
 #' @param amp.shp amplification factor for shape deformation
 #' @param size.shp the size of the shapes
 #' @param nb.shp (pos.shp="circle") the number of shapes on the compass
