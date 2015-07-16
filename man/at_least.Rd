@@ -9,9 +9,9 @@ at_least(x, fac, N)
 \arguments{
 \item{x}{any Momocs object}
 
-\item{N}{minimal number of individuals to retain the group}
+\item{fac}{the id of name of the $fac column}
 
-\item{y}{the id of name of the $fac column}
+\item{N}{minimal number of individuals to retain the group}
 }
 \description{
 Title and examples are self-speaking.
