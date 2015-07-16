@@ -245,6 +245,36 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
   return(Coo)
 }
 
+#' Slices shapes between successive coordinates
+#' 
+#' Takes a shape with n coordinates. When you pass this function with at least
+#' two ids (<= n), the shape will be open on the corresponding coordinates and
+#' slices returned as a list
+#' @param coo a \code{matrix} of (x; y) coordinates
+#' @param ids numeric of length >= 2, where to slice the shape
+#' @examples 
+#' data(hearts)
+#' sh <- coo_slice(hearts[1], c(12, 24, 36, 48))
+#' panel(Opn(sh))
+#' @export
+coo_slice <- function(coo, ids){
+  n <- length(ids)
+  if (n<=1)
+    stop(" * 'ids' must contain at least 2 ids")
+  res <- list()
+  ids <- sort(ids)
+  if (max(ids) > nrow(coo))
+    stop(" * max(ids) must be lower than the number of coordinates")
+  
+  for (i in 1:(n-1)) {
+    res[[i]] <- coo[ids[i]:ids[i+1], ]
+  }
+  res[[n]] <- coo[ c(ids[n]:nrow(coo), 1:ids[1]) , ]
+  names(res) <- 1:length(ids)
+  res
+}
+
+
 #' Slides coordinates
 #'
 #' Slides the coordinates so that the id1-th point become the first one.
