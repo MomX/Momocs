@@ -646,6 +646,7 @@ combine.OutCoe <- function(...) {
   }
   cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   OutCoe$cuts <- cutS
+  names(OutCoe$method) <- names(args)
   return(OutCoe)
 }
 
@@ -669,6 +670,52 @@ combine.OpnCoe <- function(...) {
   cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   OpnCoe$cuts <- cutS
   return(OpnCoe)
+}
+
+#' Uncombine Coe objects
+#' 
+#' After a combine for instance. But not that the $fac slot may be wrong since 
+#' combine, well combines, this $fac
+#' 
+#' @param x a Coe object
+#' @param retain the partition id to retain. Or their name if the partitions are named
+#' (see x$method) eg after a chop
+#' 
+#' @examples 
+#' data(bot)
+#' w <- filter(bot, type=="whisky")
+#' b <- filter(bot, type=="beer")
+#' wf <- efourier(w, 10)
+#' bf <- efourier(b, 10)
+#' wbf <- combine(wf, bf)
+#' dissolve(wbf, 1)
+#' dissolve(wbf, 2)
+#' @export
+dissolve <- function(x, retain){
+  UseMethod("dissolve")
+}
+#' @export
+dissolve.default <- function(x, retain){
+  stop("* only implemented on Coe objects so far")
+}
+#' @export
+dissolve.Coe <- function(x, retain){
+  if (length(x$method) < 2) return(x)
+  partitions <- seq_along(x$method)
+  if(is.character(retain)) retain <- match(retain, names(x$method))
+  x2 <- x
+  x2$norm   <- x$norm[retain]
+  x2$method <- x$method[retain]
+  x2$cuts   <- x$cuts[retain]
+  x2$ldk    <- x2$ldk[retain]
+  cols_begin <- cumsum(c(1, x$cuts))[1:length(x$cuts)]
+  cols_end   <- cumsum(x$cuts)
+  cols_retain <- numeric()
+  for (i in retain){
+    cols_retain <- append(cols_retain, cols_begin[i]:cols_end[i])
+  }
+  x2$coe <- x$coe[, cols_retain]
+  return(x2)
 }
 
 ##### end subset-combine
