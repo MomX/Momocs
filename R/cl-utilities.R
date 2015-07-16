@@ -167,7 +167,7 @@ rw_rule <- function(x, fac, from, to){
 #' Title and examples are self-speaking.
 #'
 #' @param x any Momocs object
-#' @param y the id of name of the $fac column
+#' @param fac the id of name of the $fac column
 #' @param N minimal number of individuals to retain the group
 #' @note if N is too ambitious the original object is returned with a message
 #' @examples
