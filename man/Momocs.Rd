@@ -38,10 +38,10 @@ To cite Momocs in publications: \code{citation('Momocs')}.
 }
 \section{Cheers}{
 
-We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie,
+We are very grateful to (in alphabetical order): Laurent Bouby, Simon Crameri, April Dinwiddie,
 Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
-Norbert Telmon, Bill Venables, Daniele Ventura, Michael Wallace,
+Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 Asher Wishkerman, John Wood.
 for their helpful ideas and bug reports.
 }

@@ -52,10 +52,10 @@
 #' \item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 #' }
 #' @section Cheers:
-#' We are very grateful to (in alphabetical order): Simon Crameri, April Dinwiddie,
+#' We are very grateful to (in alphabetical order): Laurent Bouby, Simon Crameri, April Dinwiddie,
 #' Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 #' Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
-#' Norbert Telmon, Bill Venables, Daniele Ventura, Michael Wallace,
+#' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood.
 #' for their helpful ideas and bug reports.
 #' @import ape
@@ -64,6 +64,7 @@
 #' @import sp
 #' @import reshape2
 #' @import ggplot2
+#' @importFrom ggtree ggtree geom_tree theme_tree 
 #' @importFrom geometry delaunayn convhulln
 #' @importFrom graphics boxplot
 #' @importFrom jpeg readJPEG
@@ -77,8 +78,8 @@ NULL
 # prevents "no visible binding for global variable"
 # http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
-                  "x_c", "x_d", "y_c", "y_d", ".id"))
-
+                  "x_c", "x_d", "y_c", "y_d", ".id", 
+                  "node", "label", "angle", "hjust"))
 
 #' Install and load the last version of Momocs
 #'
