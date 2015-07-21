@@ -2,9 +2,7 @@
 % Please edit documentation in R/cl-utilities.R
 \name{rw_rule}
 \alias{rw_rule}
-\title{Rename levels with a rewriting rule
-rw_rule stands for 'rewriting rule'. Typically useful to correct typos
-at the import, or merge some levels within covariates. Drops levels silently.}
+\title{Rename levels with a rewriting rule}
 \usage{
 rw_rule(x, fac, from, to)
 }
@@ -21,7 +19,6 @@ rw_rule(x, fac, from, to)
 a Momocs object of the same type
 }
 \description{
-Rename levels with a rewriting rule
 rw_rule stands for 'rewriting rule'. Typically useful to correct typos
 at the import, or merge some levels within covariates. Drops levels silently.
 }

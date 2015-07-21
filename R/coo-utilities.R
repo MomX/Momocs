@@ -246,13 +246,13 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 }
 
 #' Slices shapes between successive coordinates
-#' 
+#'
 #' Takes a shape with n coordinates. When you pass this function with at least
 #' two ids (<= n), the shape will be open on the corresponding coordinates and
 #' slices returned as a list
 #' @param coo a \code{matrix} of (x; y) coordinates
 #' @param ids numeric of length >= 2, where to slice the shape
-#' @examples 
+#' @examples
 #' data(hearts)
 #' sh <- coo_slice(hearts[1], c(12, 24, 36, 48))
 #' panel(Opn(sh))
@@ -265,7 +265,7 @@ coo_slice <- function(coo, ids){
   ids <- sort(ids)
   if (max(ids) > nrow(coo))
     stop(" * max(ids) must be lower than the number of coordinates")
-  
+
   for (i in 1:(n-1)) {
     res[[i]] <- coo[ids[i]:ids[i+1], ]
   }
@@ -315,6 +315,7 @@ coo_slice <- function(coo, ids){
 coo_slide <- function(x, ...) {
   UseMethod("coo_slide")
 }
+
 #' @rdname coo_slide
 #' @export
 coo_slide.default <- function(x, id1, ...) {
@@ -326,6 +327,7 @@ coo_slide.default <- function(x, id1, ...) {
   slided.rows <- c(id1:n, 1:(id1 - 1))
   return(coo[slided.rows, ])
 }
+
 #' @rdname coo_slide
 #' @export
 coo_slide.Coo <- function(x, id1, ldk, ...) {
@@ -886,7 +888,7 @@ coo_force2close <- function(coo) {
 #' coo_plot(coo)
 #' coo_draw(coo_shearx(coo, 0.5), border="blue")
 #' coo_draw(coo_sheary(coo, 0.5), border="red")
-#' 
+#'
 #' @export
 coo_shearx <- function(coo, k=1){
   smat <- matrix(c(1, 0, k, 1), nrow=2)
@@ -911,7 +913,7 @@ coo_sheary <- function(coo, k){
 #' coo_plot(cat)
 #' coo_draw(coo_flipx(cat), border="red")
 #' coo_draw(coo_flipy(cat), border="blue")
-#' 
+#'
 #' #' # to flip an entire Coo:
 #' shapes2 <- shapes
 #' shapes$coo <- lapply(shapes2$coo, coo_flipx)
@@ -1118,7 +1120,7 @@ coo_aligncalliper.Coo <- function(coo) {
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo_align}, \link{coo_alignxax}, \link{coo_calliper}
 #' @keywords ShapeUtilities
-#' @examples 
+#' @examples
 #' \dontrun{
 #' data(hearts)
 #' stack(coo_alignminradius(hearts))
@@ -1159,6 +1161,7 @@ coo_rev <- function(coo) {
 }
 
 #' Defines interactively landmarks
+#'
 #' Allows to interactively define a 'nb.ldk' number of landarks on a shape.
 #' Used in other facilities to acquire/manipulate data.
 #' @aliases coo_ldk
@@ -1387,7 +1390,7 @@ coo_centsize <- function(coo) {
 }
 
 #' Returns the distance between everypoints and the centroid
-#' 
+#'
 #' For every point of the shape, returns the (centroid-points) distance.
 #' @aliases coo_centdist
 #' @param coo a \code{matrix} of (x; y) coordinates.

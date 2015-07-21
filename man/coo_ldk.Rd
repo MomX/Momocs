@@ -2,9 +2,7 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_ldk}
 \alias{coo_ldk}
-\title{Defines interactively landmarks
-Allows to interactively define a 'nb.ldk' number of landarks on a shape.
-Used in other facilities to acquire/manipulate data.}
+\title{Defines interactively landmarks}
 \usage{
 coo_ldk(coo, nb.ldk)
 }
@@ -18,7 +16,6 @@ coo_ldk(coo, nb.ldk)
 on the shape, from cliked points.
 }
 \description{
-Defines interactively landmarks
 Allows to interactively define a 'nb.ldk' number of landarks on a shape.
 Used in other facilities to acquire/manipulate data.
 }
