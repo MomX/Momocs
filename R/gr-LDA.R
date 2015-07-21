@@ -244,12 +244,12 @@ plot_CV <- function(x, ...){UseMethod("plot_CV")}
 plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
   tab <- x
   df <- as.data.frame(tab)
-  colnames(df) <- c("actual", "classified", "count")
+  #colnames(df) <- c("actual", "classified", "count")
   if (freq) {
-    df <- df %>% group_by_("classified") %>%
-      mutate(count=round(count/sum(count), round))
+    df <- df %>% group_by_(colnames(df)[2]) %>%
+      mutate(Freq=round(Freq/sum(Freq), round))
   }
-  gg <- ggplot(df, aes_string(x="actual", y="classified", fill="count")) +
+  gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], fill="Freq")) +
     geom_tile()  +
     scale_fill_gradient(low="white", high="red", na.value="white") +
     theme_linedraw() + theme(legend.position="none") +
@@ -257,9 +257,9 @@ plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
           axis.text.x=element_text(angle=90, hjust=1),
           axis.title=element_text(size=14, face="bold"))
   if (rm0) {
-    gg <- gg + geom_text(data=filter(df, count !=0), aes_string(label="count"), size=rel(cex))
+    gg <- gg + geom_text(data=filter(df, Freq !=0), aes_string(label="Freq"), size=rel(cex))
   } else {
-    gg <- gg + geom_text(aes_string(label="count"), size=rel(cex))
+    gg <- gg + geom_text(aes_string(label="Freq"), size=rel(cex))
   }
   return(gg)}
 #' @rdname plot_CV
