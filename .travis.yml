@@ -1,6 +1,7 @@
 language: r
 
 sudo: required
+bioc_required: true
 
 bioc_packages:
  - Biostrings
