@@ -1,7 +1,9 @@
 language: r
 
-sudo: required
 bioc_required: true
+
+apt_packages:
+ - libfftw3-dev
 
 bioc_packages:
  - Biostrings
