@@ -5,7 +5,7 @@ sudo: required
 r_github_packages:
  - GuangchuangYu/ggtree
  
- bioc_packages:
+bioc_packages:
  - Biostrings
  - EBImage
  - BiocStyle
