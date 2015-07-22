@@ -8,17 +8,15 @@ Momocs is an [R](http://cran.r-project.org/) package intended to ease and to pop
 Use Momocs
 --------
 __Get the last version:__
-* First get `devtools` with `install.packages("devtools")`
-* Then, download and load the very last version with:
+* First get `devtools` with `install.packages("devtools")` then, download and load the very last version with:
 ```
 devtools::install_github("vbonhomme/Momocs", build_vignettes=TRUE)
 library(Momocs)
 ````
-
-__Note that:__
-* The current [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper)
-* Since then, Momocs has been almost entirely rewritten and considerably enlarged.
-* A CRAN version will be released when most of the features planned below (*) will be part of Momocs.
+* Please note that the current [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) and is no longer supported.
+* Since then, Momocs has been entirely rewritten and considerably enlarged.
+* A CRAN version will be released in summer 2015
+* A visual manual can be found there [http://vbonhomme.github.io]
 * Also, some tutorials are on their way
 
 __You are welcome to:__
@@ -36,10 +34,10 @@ __Data acquisition + Babel__
 * Export to `.txt`, etc.
 
 __Outline analysis__
-* Elliptical Fourier analysis (`efourier`)
-* Radius Variation Fourier analysis (`rfourier`)
-* Tangent Angle Fourier analysis (`tfourier`)
-* Calibration for all methods (`calibrate_reconstructions`, `calibrate_deviations`, `calibrate_harmonicpower`)
+* Elliptical Fourier analysis
+* Radius Variation Fourier analysis
+* Tangent Angle Fourier analysis
+* Calibration for all methods
 
 __Open-outlines__
 * Natural (raw) polynomials (`npoly`)
@@ -53,13 +51,12 @@ __Configuration of landmarks__
 * Sliding semi-landmarks*
 
 __Traditional morphometrics and global shape descriptors__
-* Some built-in facilities for multivariate analysis*
+* Some built-in facilities for multivariate analysis
 * A long list of shape scalars (eg. eccentricity, rectilinearity, etc.)
 
 __Data handling__
-* `filter`, `select`, `slice`, `mutate` ala [dplyr](https://github.com/hadley/dplyr/)
-* `split` according to a factor (eg. a 2D view)
-* `combine` several 2D views
+* `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
+* New verbs useful for morphometrics such as `combine`, to handle several 2D views
  
 __Multivariate analysis__
 * Mean shape (groupwise) calculations (`mshapes`)
@@ -67,16 +64,13 @@ __Multivariate analysis__
 * Multivariate analysis of variance (`MANOVA` + pairwise testing `MANOVA_PW`)
 * Linear discriminant analysis (`LDA`)
 * Hierarchical clustering (`CLUST`)
-* Regression trees*
-* K-means*
-* Multidimensional scaling*
-* Allometry / modularity testing*
+* K-means
 
 __Graphical methods__
 * Elegant ggplot2 plots
-* Morphological spaces, when possible, for multivate analyses (and for combined views)
+* Morphological spaces for PCA
 * Thin plate splines and variation around deformation grids
-* Family pictures and quick inspection of whole datasets (`panel`, `stack`, `plot`, `radar`, etc.)
+* Family pictures and quick inspection of whole datasets
 
 __Various__
 * Toy and published datasets
