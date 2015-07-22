@@ -2,14 +2,9 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_harmonicpower}
 \alias{calibrate_harmonicpower}
-\alias{calibrate_harmonicpower.Out}
 \title{Quantitative calibration, through harmonic power, for Out objects}
 \usage{
 calibrate_harmonicpower(Out, ...)
-
-\method{calibrate_harmonicpower}{Out}(Out, method = "efourier",
-  id = 1:length(Out), nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
-  plot = TRUE, verbose = TRUE, ...)
 }
 \arguments{
 \item{Out}{the \code{Out} object on which to calibrate_harmonicpower}
@@ -51,11 +46,9 @@ of harmonics on the \code{Out} object.
 \details{
 The power of a given harmonic \eqn{n} is calculated as follows for
 elliptical Fourier analysis and the n-th harmonic:
-\deqn{HarmonicPower_n \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
+\eqn{HarmonicPower_n \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 and as follows for radii variation and tangent angle:
-\deqn{
-HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}
-}
+\eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 }
 \examples{
 data(bot)
@@ -67,7 +60,7 @@ coord_cartesian(xlim=c(3.5, 12.5), ylim=c(90, 100)) +
 ggtitle("Harmonic power calibration")
 }
 # if you want to do efourier with 99\% calibrate_harmonicpower in one step
-efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99\%"])
+# efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99\%"])
 }
 \keyword{Out}
 

@@ -369,11 +369,9 @@ calibrate_deviations.Out <-
 #' @details
 #' The power of a given harmonic \eqn{n} is calculated as follows for
 #' elliptical Fourier analysis and the n-th harmonic:
-#' \deqn{HarmonicPower_n \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
+#' \eqn{HarmonicPower_n \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 #' and as follows for radii variation and tangent angle:
-#' \deqn{
-#' HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}
-#' }
+#' \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 #' @keywords Out
 #' @examples
 #' data(bot)
@@ -385,15 +383,12 @@ calibrate_deviations.Out <-
 #' ggtitle("Harmonic power calibration")
 #' }
 #' # if you want to do efourier with 99% calibrate_harmonicpower in one step
-#' efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
-#' @aliases calibrate_harmonicpower
-#' @rdname calibrate_harmonicpower
+#' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
 #' @export
 calibrate_harmonicpower <- function(Out, ...) {
   UseMethod("calibrate_harmonicpower")
 }
 
-#' @rdname calibrate_harmonicpower
 #' @export
 calibrate_harmonicpower.Out <- function(Out, method = "efourier", id = 1:length(Out),
                                         nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),

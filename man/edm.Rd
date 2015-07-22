@@ -16,7 +16,7 @@ Returns a \code{vector} of euclidean distances between pairwise
 coordinates in the two matrices.
 }
 \description{
-\code{edm} returns the euclidean distances between points \deqn{1 -> n} of
+\code{edm} returns the euclidean distances between points \eqn{1 -> n} of
 two 2-col matrices of the same dimension. This function is used internally
 but may be of interest for other analyses.
 }

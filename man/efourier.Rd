@@ -50,29 +50,29 @@ Elliptic Fourier analysis and normalization are calculated as follows. Let
 \eqn{T} be the perimeter of a given closed outline, here considered as the
 period of the signal. One sets \eqn{\omega = 2\pi/T} to be the pulse. Then,
 the curvilinear abscissa, \eqn{t} varies from \eqn{0} to \eqn{T}. One can
-express \eqn{x(t)} and \eqn{y(t)} as: \deqn{ x(t) =
+express \eqn{x(t)} and \eqn{y(t)} as: \eqn{ x(t) =
 \frac{a_0}{2}+\sum\limits_{n=1}^{+\infty} a_n\cos n\omega t + b_n\sin
-n\omega t } with \deqn{ a_n = \frac{2}{T}+ \int\limits_{0}^{T} x(t)\cos
-(n\omega t) \mathrm{d} t } \deqn{ b_n = \frac{2}{T}+ \int\limits_{0}^{T}
+n\omega t } with \eqn{ a_n = \frac{2}{T}+ \int\limits_{0}^{T} x(t)\cos
+(n\omega t) \mathrm{d} t } \eqn{ b_n = \frac{2}{T}+ \int\limits_{0}^{T}
 x(t)\sin (n\omega t) \mathrm{d} t }
 
-similarly, \deqn{ y(t) = \frac{c_0}{2}+\sum\limits_{n=1}^{+\infty} c_n\cos
-n\omega t + d_n\sin n\omega t } with \deqn{ c_n = \frac{2}{T}+
-\int\limits_{0}^{T} y(t)\cos (n\omega t) \mathrm{d} t } \deqn{d_n =
+similarly, \eqn{ y(t) = \frac{c_0}{2}+\sum\limits_{n=1}^{+\infty} c_n\cos
+n\omega t + d_n\sin n\omega t } with \eqn{ c_n = \frac{2}{T}+
+\int\limits_{0}^{T} y(t)\cos (n\omega t) \mathrm{d} t } \eqn{d_n =
 \frac{2}{T}+ \int\limits_{0}^{T} y(t)\sin (n\omega t) \mathrm{d} t }
 
 Since the outline contains a \eqn{k} finite number of points, one can
 therefore calculate discrete estimators for every harmonic coefficient of
-the \eqn{n^{th}} harmonics: \deqn{
+the \eqn{n^{th}} harmonics: \eqn{
 a_n=\frac{T}{2\pi^2n^2}\sum\limits_{p=1}^k \frac{\Delta x_p}{\Delta
-t_p}(\cos\frac{2\pi nt_p}{T}-\cos\frac{2\pi nt_{p-1}}{T}) } \deqn{
+t_p}(\cos\frac{2\pi nt_p}{T}-\cos\frac{2\pi nt_{p-1}}{T}) } \eqn{
 b_n=\frac{T}{2\pi^2n^2}\sum\limits_{p=1}^k \frac{\Delta x_p}{\Delta
 t_p}(\sin\frac{2\pi nt_p}{T}-\sin\frac{2\pi nt_{p-1}}{T}) }
 
 \eqn{\Delta x_1=x_1-x_k} and \eqn{c_n} and \eqn{d_n} are calculated
 similarly. \eqn{a_0} and \eqn{c_0} correspond to the estimate of the
-coordinates of the centroid of original outline and are estimated by: \deqn{
-a_0=\frac{2}{T}\sum\limits_{i=1}^p x_i } and \deqn{
+coordinates of the centroid of original outline and are estimated by: \eqn{
+a_0=\frac{2}{T}\sum\limits_{i=1}^p x_i } and \eqn{
 c_0=\frac{2}{T}\sum\limits_{i=1}^p y_i }
 
 Intuitively, for all positive integers \eqn{n}, the sum of a cosine curve

@@ -31,7 +31,7 @@ for the first point of \code{m1} to any point of \code{m2} and so on,
 other analyses.
 }
 \details{
-So far this function is quite time consumming since it performs \deqn{ n
+So far this function is quite time consumming since it performs \eqn{ n
 \times n } euclidean distance computation.  If one wishes to align two (or
 more shapes) Procrustes surimposition may provide a better solution.
 }

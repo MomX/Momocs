@@ -10,10 +10,10 @@
 #' periodic function of the angle \eqn{\theta}. Harmonics from \eqn{0} to
 #' \eqn{k} approximate the function \eqn{r(\theta)}:
 #' 
-#' \deqn{r(\theta)= \frac{1}{2}a_0 + \sum\limits_{n=1}^{k}a_k\cos(w_k\theta +
-#' b_k\sin(w_k\theta)} with: \deqn{ a_n =
-#' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\cos(n\theta_i) } \deqn{ b_n =
-#' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\sin(n\theta_i) } with \deqn{ a_0 =
+#' \eqn{r(\theta)= \frac{1}{2}a_0 + \sum\limits_{n=1}^{k}a_k\cos(w_k\theta +
+#' b_k\sin(w_k\theta)} with: \eqn{ a_n =
+#' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\cos(n\theta_i) } \eqn{ b_n =
+#' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\sin(n\theta_i) } with \eqn{ a_0 =
 #' \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}r_i }
 #' 
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every

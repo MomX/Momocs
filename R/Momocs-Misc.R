@@ -38,7 +38,7 @@ edi <- function(pt1, pt2, r = 0.5) {
 
 #' Calculates euclidean distance every pairs of points in two matrices.
 #'
-#' \code{edm} returns the euclidean distances between points \deqn{1 -> n} of
+#' \code{edm} returns the euclidean distances between points \eqn{1 -> n} of
 #' two 2-col matrices of the same dimension. This function is used internally
 #' but may be of interest for other analyses.
 #'
@@ -69,7 +69,7 @@ edm <- function(m1, m2) {
 #' \code{n} times. This function is used internally but may be of interest for
 #' other analyses.
 #'
-#' So far this function is quite time consumming since it performs \deqn{ n
+#' So far this function is quite time consumming since it performs \eqn{ n
 #' \times n } euclidean distance computation.  If one wishes to align two (or
 #' more shapes) Procrustes surimposition may provide a better solution.
 #' @param m1 The first \code{list} or \code{matrix} of coordinates.
@@ -112,9 +112,9 @@ edm_nearest <- function(m1, m2, full = FALSE) {
 #' \code{coeff_sel} helps to select a given number of harmonics by returning
 #' their indices when arranged as a numeric vector. For instance, harmonic
 #' coefficients are arranged in the \code{$coe} slot of \code{\link{Coe}}-objects in
-#' that way: \deqn{A_1, \dots, A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1,
+#' that way: \eqn{A_1, \dots, A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1,
 #' \dots, D-n} after an elliptical Fourier analysis (see \link{efourier} and
-#' \link{efourier}) while \deqn{C_n and D_n} harmonic are absent for radii
+#' \link{efourier}) while \eqn{C_n and D_n} harmonic are absent for radii
 #' variation and tangent angle approaches (see \link{rfourier} and
 #' \link{tfourier} respectively). . This function is used internally but might
 #' be of interest elwewhere.
@@ -149,9 +149,9 @@ coeff_sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 #'
 #' \code{coeff_split} returns a named list of coordinates from a vector of
 #' harmonic coefficients. For instance, harmonic coefficients are arranged in
-#' the \code{$coe} slot of \code{Coe}-objects in that way: \deqn{A_1, \dots,
+#' the \code{$coe} slot of \code{Coe}-objects in that way: \eqn{A_1, \dots,
 #' A_n, B_1, \dots, B_n, C_1, \dots, C_n, D_1, \dots, D-n} after an elliptical
-#' Fourier analysis (see \link{efourier} and \link{efourier}) while \deqn{C_n
+#' Fourier analysis (see \link{efourier} and \link{efourier}) while \eqn{C_n
 #' and D_n} harmonic are absent for radii variation and tangent angle
 #' approaches (see \link{rfourier} and \link{tfourier} respectively). This
 #' function is used internally but might be of interest elwewhere.

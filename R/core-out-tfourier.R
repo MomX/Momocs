@@ -6,15 +6,15 @@
 #' list of coordinates.
 #' 
 #' Given a closed outline which the outline has been scaled to \eqn{2\pi},
-#' \eqn{\phi(t)} can be expressed as follows: \deqn{ \phi(t) = \theta(t) -
+#' \eqn{\phi(t)} can be expressed as follows: \eqn{ \phi(t) = \theta(t) -
 #' \theta(0) - t } where \eqn{t} is the distance along the outline,
 #' \eqn{\theta(t)} the angle of the tangent vector at \eqn{t} and
 #' \eqn{\theta(0)} the angle of the tangent vector taken for the first point.
 #' It can be removed for normalizing the coefficients obtained. Two
 #' coefficients per harmonics can be estimated as follow:
 #' 
-#' \deqn{ a_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\cos n \theta_i } \deqn{
-#' b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \deqn{
+#' \eqn{ a_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\cos n \theta_i } \eqn{
+#' b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \eqn{
 #' a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
 #' 
 #' @param x A list or matrix of coordinates or an \code{Out}
