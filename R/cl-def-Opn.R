@@ -165,49 +165,42 @@ print.OpnCoe <- function(x, ...) {
   cat("An OpnCoe object [", met)
   cat(rep("-", 20), "\n", sep = "")
   coo_nb <- nrow(OpnCoe$coe)  #nrow method ?
-  if (!combined) {
+  if (combined) {
     degree <- ncol(OpnCoe$coe)
     # p==3 is the case for dfourier all along the method
-    if (p==3) degree <- degree/2
+    # if (p==3) degree <- degree/2
     # number of outlines and harmonics
-    cat(" - $coe:", coo_nb, "open outlines described, ")
-    if (p==3){
-      cat(degree, " harmonics\n", sep="")
-    } else {
-      cat(degree, "th degree (+Intercept)\n", sep="")
-    }
+    cat(" - $coe:", coo_nb, "open outlines described\n")
+#     if (p==3){
+#       cat(degree, " harmonics\n", sep="")
+#     } else {
+#       cat(degree, "th degree (+Intercept)\n", sep="")
+#     }
     # we print the baselines
     if (!is.null(c(x$baseline1, x$baseline2))) {
-    cat(" - $baseline1: (", paste(x$baseline1, collapse="; "), ")\n", sep="")
-    cat(" - $baseline2: (", paste(x$baseline2, collapse="; "), ")\n", sep="")
+      cat(" - $baseline1: (", paste(x$baseline1, collapse="; "), ")\n", sep="")
+      cat(" - $baseline2: (", paste(x$baseline2, collapse="; "), ")\n", sep="")
     }
     # lets show some of the coefficients for a quick inspection
-    if (p==3){
-      cat(" - $coe: 1st harmonic coefficients from random open outlines: \n")
-    } else {
-      cat(" - $coe: 1st polynomial coefficients from random open outlines: \n")}
+    cat(" - $coe: 1st coefficients from random open outlines: \n")
     row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
     nc <- ncol(OpnCoe$coe)
-    if (nc > 10) {
-      if (p==3) { col.eg <- c(1:5, (nc/2)+1:5)
-      } else {
-        col.eg <- 1:nc}
-    } else {
-      col.eg <- 1:nc
-    }
+    if (nc > 6) nc <- 6
+    col.eg <- 1:nc
+
     print(round(OpnCoe$coe[row.eg, col.eg], 3))
     cat("etc.\n")
   } else {
     cat(" - $baseline1, $baseline2: baselines registrations\n")
     cat(" - $coe: coefficients\n")}
-  if (p != 3) {
-    # r2 quick summary
-    r2  <- OpnCoe$r2
-    cat(" - $r2: min=", signif(min(r2), 3),
-        ", median=",    signif(median(r2), 3),
-        ", mean=",      signif(mean(r2), 3),
-        ", sd=",        signif(mean(r2), 3),
-        ", max=",       signif(max(r2), 3), "\n", sep="")}
+#   if (p != 3) {
+#     # r2 quick summary
+#     r2  <- OpnCoe$r2
+#     cat(" - $r2: min=", signif(min(r2), 3),
+#         ", median=",    signif(median(r2), 3),
+#         ", mean=",      signif(mean(r2), 3),
+#         ", sd=",        signif(mean(r2), 3),
+#         ", max=",       signif(max(r2), 3), "\n", sep="")}
   # we print the fac
   .print.fac(OpnCoe$fac)
 }
