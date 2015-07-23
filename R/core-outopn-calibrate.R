@@ -352,7 +352,7 @@ calibrate_deviations.Out <-
 #'
 #' @param Out the \code{Out} object on which to calibrate_harmonicpower
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
-#' @param id the shape on which to perform calibrate_harmonicpower. All of them by default
+#' @param id the shapes on which to perform calibrate_harmonicpower. All of them by default
 #' @param nb.h numeric the maximum number of harmonic, on which to base the cumsum
 #' @param drop numeric the number of harmonics to drop for the cumulative sum
 #' @param thres.h vector of numeric for drawing horizontal lines, and also used for
@@ -385,10 +385,12 @@ calibrate_deviations.Out <-
 #' # if you want to do efourier with 99% calibrate_harmonicpower in one step
 #' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
 #' @export
-calibrate_harmonicpower <- function(Out, ...) {
+calibrate_harmonicpower <- function(Out, method = "efourier", id = 1:length(Out),
+                                    nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
+                                    plot=TRUE, verbose=TRUE, ...) {
   UseMethod("calibrate_harmonicpower")
 }
-
+#' @describeIn calibrate_harmonicpower Method for Out objects
 #' @export
 calibrate_harmonicpower.Out <- function(Out, method = "efourier", id = 1:length(Out),
                                         nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),

@@ -2,18 +2,23 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_harmonicpower}
 \alias{calibrate_harmonicpower}
+\alias{calibrate_harmonicpower.Out}
 \title{Quantitative calibration, through harmonic power, for Out objects}
 \usage{
-calibrate_harmonicpower(Out, ...)
+calibrate_harmonicpower(Out, method = "efourier", id = 1:length(Out), nb.h,
+  drop = 1, thres.h = c(90, 95, 99, 99.9), plot = TRUE, verbose = TRUE,
+  ...)
+
+\method{calibrate_harmonicpower}{Out}(Out, method = "efourier",
+  id = 1:length(Out), nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
+  plot = TRUE, verbose = TRUE, ...)
 }
 \arguments{
 \item{Out}{the \code{Out} object on which to calibrate_harmonicpower}
 
-\item{...}{just for the generic}
-
 \item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
 
-\item{id}{the shape on which to perform calibrate_harmonicpower. All of them by default}
+\item{id}{the shapes on which to perform calibrate_harmonicpower. All of them by default}
 
 \item{nb.h}{numeric the maximum number of harmonic, on which to base the cumsum}
 
@@ -25,6 +30,8 @@ calibrate_harmonicpower(Out, ...)
 \item{plot}{logical whether to plot the result or simply return the matrix}
 
 \item{verbose}{whether to print results}
+
+\item{...}{just for the generic}
 }
 \value{
 returns a list with component:
@@ -50,6 +57,10 @@ elliptical Fourier analysis and the n-th harmonic:
 and as follows for radii variation and tangent angle:
 \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{Out}: Method for Out objects
+}}
 \examples{
 data(bot)
 cal <- calibrate_harmonicpower(bot)
