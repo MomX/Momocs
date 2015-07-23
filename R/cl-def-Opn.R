@@ -97,12 +97,12 @@ print.Opn <- function(x, ...) {
   #     }
   # number of outlines
   cat(" - $coo:", coo_nb, "open outlines")
-  
+
   # number of coordinates
   cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n", sep="")
   # number of landmarks
   if (length(Opn$ldk) != 0) {
-    cat(" - $ldk", length(Opn$ldk[[1]]), "landmark(s) defined\n")
+    cat(" - $ldk:", length(Opn$ldk[[1]]), "landmark(s) defined\n")
   } else {
     #     cat(" - No landmark defined\n")
   }
@@ -168,7 +168,7 @@ print.OpnCoe <- function(x, ...) {
   if (!combined) {
     degree <- ncol(OpnCoe$coe)
     # p==3 is the case for dfourier all along the method
-    if (p==3) degree <- degree/2 
+    if (p==3) degree <- degree/2
     # number of outlines and harmonics
     cat(" - $coe:", coo_nb, "open outlines described, ")
     if (p==3){

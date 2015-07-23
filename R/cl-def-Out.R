@@ -144,7 +144,7 @@ print.Out <- function(x, ...) {
   }
   # number of landmarks
   if (length(Out$ldk) != 0) {
-    cat(" - $ldk", length(Out$ldk[[1]]), "landmark(s) defined\n")
+    cat(" - $ldk:", length(Out$ldk[[1]]), "landmark(s) defined\n")
   } else {
     #cat(" - No landmark defined\n")
   }
