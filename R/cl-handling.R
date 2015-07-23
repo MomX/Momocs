@@ -274,6 +274,47 @@ filter.Coe <- filter.Coo
 #' @export
 filter.PCA <- filter.Coo
 
+# arrange -------------------------------
+#' Arrange (ala dplyr) rows with matching conditions, using the $fac slot on Momocs classes
+#'
+#' Extends this dplyr verb to \link{Coo} objects. See examples.
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... Logical conditions
+#' @details dplyr verbs are maintained.
+#' @note this method is quite experimental, check the result and do not hesitate to report a bug.
+#' @return a a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+#' @examples
+#' data(olea)
+#' head(olea$fac)
+#' head(arrange(olea$fac, view, desc(domes)))
+#' @rdname arrange
+#' @export
+arrange <- function(.data, ...){
+  UseMethod("arrange")
+}
+#' @rdname arrange
+#' @export
+arrange.default <- function(.data, ...){
+  dplyr::arrange(.data, ...)
+}
+#' @rdname arrange
+#' @export
+arrange.Coo <- function(.data, ...){
+  df <- .data$fac
+  df <- mutate(df, .id=1:nrow(df))
+  df <- arrange(df, ...)
+  subset(.data, df$.id)
+}
+#' @rdname arrange
+#' @export
+arrange.Coe <- arrange.Coo
+
+#' @rdname arrange
+#' @export
+arrange.PCA <- arrange.Coo
+
+
 # slice ---------------------
 
 #' Slice (ala dplyr) Momocs classes using rows ids on Momocs classes
@@ -672,16 +713,17 @@ combine.OpnCoe <- function(...) {
   return(OpnCoe)
 }
 
+# dissolve --------------------
 #' Uncombine Coe objects
-#' 
-#' After a combine for instance. But not that the $fac slot may be wrong since 
+#'
+#' After a combine for instance. But not that the $fac slot may be wrong since
 #' combine, well combines, this $fac
-#' 
+#'
 #' @param x a Coe object
 #' @param retain the partition id to retain. Or their name if the partitions are named
 #' (see x$method) eg after a chop
-#' 
-#' @examples 
+#'
+#' @examples
 #' data(bot)
 #' w <- filter(bot, type=="whisky")
 #' b <- filter(bot, type=="beer")
