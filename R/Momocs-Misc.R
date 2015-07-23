@@ -14,7 +14,7 @@
 #' ed(c(0,1), c(1,0))
 #' @export
 ed <- function(pt1, pt2) {
-    return(sqrt((pt1[1] - pt2[1])^2 + (pt1[2] - pt2[2])^2))
+  return(sqrt((pt1[1] - pt2[1])^2 + (pt1[2] - pt2[2])^2))
 }
 
 #' Calculates euclidean intermediate between two points.
@@ -33,7 +33,7 @@ ed <- function(pt1, pt2) {
 #' edi(c(0,1), c(1,0), r = 0.5)
 #' @export
 edi <- function(pt1, pt2, r = 0.5) {
-    return(r * (pt2 - pt1) + pt1)
+  return(r * (pt2 - pt1) + pt1)
 }
 
 #' Calculates euclidean distance every pairs of points in two matrices.
@@ -56,7 +56,7 @@ edi <- function(pt1, pt2, r = 0.5) {
 #' edm(x, x+1)
 #' @export
 edm <- function(m1, m2) {
-    return(sqrt(apply((m1 - m2)^2, 1, sum)))
+  return(sqrt(apply((m1 - m2)^2, 1, sum)))
 }
 
 #' Calculates the shortest euclidean distance found for every point of one
@@ -89,20 +89,20 @@ edm <- function(m1, m2) {
 #' edm_nearest(x, x+rnorm(10), full=TRUE)
 #' @export
 edm_nearest <- function(m1, m2, full = FALSE) {
-    if (!is.matrix(m1) | !is.matrix(m2))
-        stop("Matrices must be provided")
-    if (ncol(m1) != 2 | ncol(m2) != 2)
-        stop("2-cols matrices must be provided")
-    nr <- nrow(m1)
-    pos <- d <- numeric(nr)
-    for (i in 1:nr) {
-        m1.i <- m1[i, ]
-        di <- apply(m2, 1, function(x) sqrt(sum((x - m1.i)^2)))
-        d[i] <- min(di)
-        pos[i] <- which.min(di)
-    }
-    if (full)
-        return(list(d = d, pos = pos)) else return(d)
+  if (!is.matrix(m1) | !is.matrix(m2))
+    stop("Matrices must be provided")
+  if (ncol(m1) != 2 | ncol(m2) != 2)
+    stop("2-cols matrices must be provided")
+  nr <- nrow(m1)
+  pos <- d <- numeric(nr)
+  for (i in 1:nr) {
+    m1.i <- m1[i, ]
+    di <- apply(m2, 1, function(x) sqrt(sum((x - m1.i)^2)))
+    d[i] <- min(di)
+    pos[i] <- which.min(di)
+  }
+  if (full)
+    return(list(d = d, pos = pos)) else return(d)
 }
 
 ##### Miscellaneous functions for Fourier-based approaches
@@ -138,11 +138,11 @@ edm_nearest <- function(m1, m2, full = FALSE) {
 #' head(coe[, retain])
 #' @export
 coeff_sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
-    cs <- numeric()
-    for (i in 1:cph) {
-        cs <- c(cs, (1 + drop):retain + nb.h * (i - 1))
-    }
-    return(cs)
+  cs <- numeric()
+  for (i in 1:cph) {
+    cs <- c(cs, (1 + drop):retain + nb.h * (i - 1))
+  }
+  return(cs)
 }
 
 #' Converts a numerical description of harmonic coefficients to a named list.
@@ -167,15 +167,15 @@ coeff_sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 #' coeff_split(1:64, nb.h=32, cph=2)  # t/r fourier
 #' @export
 coeff_split <- function(cs, nb.h = 8, cph = 4) {
-    if (missing(nb.h)) {
-        nb.h <- length(cs)/cph
-    }
-    cp <- list()
-    for (i in 1:cph) {
-        cp[[i]] <- cs[1:nb.h + (i - 1) * nb.h]
-    }
-    names(cp) <- paste(letters[1:cph], "n", sep = "")
-    return(cp)
+  if (missing(nb.h)) {
+    nb.h <- length(cs)/cph
+  }
+  cp <- list()
+  for (i in 1:cph) {
+    cp[[i]] <- cs[1:nb.h + (i - 1) * nb.h]
+  }
+  names(cp) <- paste(letters[1:cph], "n", sep = "")
+  return(cp)
 }
 
 #' Calculates harmonic power given a list from e/t/rfourier
@@ -201,19 +201,19 @@ coeff_split <- function(cs, nb.h = 8, cph = 4) {
 #'
 #' @export
 harm_pow <- function(xf) {
-    if (is.list(xf)) {
-        if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
-            hp <- (xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2
-        } else {
-            if (all(c("an", "bn") %in% names(xf))) {
-                hp <- (xf$an^2 + xf$bn^2)/2
-            }
-        }
-        names(hp) <- paste0("H", 1:length(hp))
-        return(hp)
+  if (is.list(xf)) {
+    if (all(c("an", "bn", "cn", "dn") %in% names(xf))) {
+      hp <- (xf$an^2 + xf$bn^2 + xf$cn^2 + xf$dn^2)/2
     } else {
-        stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")
+      if (all(c("an", "bn") %in% names(xf))) {
+        hp <- (xf$an^2 + xf$bn^2)/2
+      }
     }
+    names(hp) <- paste0("H", 1:length(hp))
+    return(hp)
+  } else {
+    stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")
+  }
 }
 
 ##### end misc Fourier
@@ -240,18 +240,18 @@ harm_pow <- function(xf) {
 #'
 #' @export vecs_param
 vecs_param <- function(r1, i1, r2, i2) {
-    x <- c(r1, i1, r2, i2)
-    if (!is.numeric(x)) {
-        stop("4 numeric must be passed.")
-    }
-    if (length(x) != 4) {
-        stop("4 numeric must be passed.")
-    }
-    r.norms <- sqrt((r2^2 + i2^2))/sqrt((r1^2 + i1^2))
-    d1 <- sqrt(sum(r1^2 + i1^2))
-    d2 <- sqrt(sum(r2^2 + i2^2))
-    return(list(r.norms = d1/d2, d.angle = atan2(i2, r2) - atan2(i1,
-        r1)))
+  x <- c(r1, i1, r2, i2)
+  if (!is.numeric(x)) {
+    stop("4 numeric must be passed.")
+  }
+  if (length(x) != 4) {
+    stop("4 numeric must be passed.")
+  }
+  r.norms <- sqrt((r2^2 + i2^2))/sqrt((r1^2 + i1^2))
+  d1 <- sqrt(sum(r1^2 + i1^2))
+  d2 <- sqrt(sum(r2^2 + i2^2))
+  return(list(r.norms = d1/d2, d.angle = atan2(i2, r2) - atan2(i1,
+                                                               r1)))
 }
 
 ##### Various utilities
@@ -270,7 +270,7 @@ vecs_param <- function(r1, i1, r2, i2) {
 # accepted in it (as covariables)
 #'@export
 .refactor <- function(df) {
-    data.frame(lapply(df, factor))
+  data.frame(lapply(df, factor))
 }
 
 # Used in Coo/Coe printers
@@ -294,7 +294,7 @@ vecs_param <- function(r1, i1, r2, i2) {
         xi.sum <- list(min=min(xi), med=median(xi), max=max(xi), mean=mean(xi), sd=sd(xi))
         xi.sum <- lapply(xi.sum, signif, 3)
         xi.sum$nas <- nas
-        cat("     '", colnames(fac)[i], "' (numeric): ",
+        cat("     '", colnames(fac)[i], "'\t (numeric):\t ",
             #"min:", xi.sum$min,
             #", med:", xi.sum$med,
             #", max: ", xi.sum$max,
@@ -302,78 +302,81 @@ vecs_param <- function(r1, i1, r2, i2) {
             #", sd: ", xi.sum$sd,
             "mean: ", xi.sum$mean, ", sd: ", xi.sum$sd,
             ifelse(xi.sum$nas==0, ".\n", paste0(" (", xi.sum$nas, " NA).\n")), sep="")
-      } else {
+      } else if (is.factor(fac[, i])){
         # case where the column is a factor
         lev.i <- levels(fac[, i])
         # cosmectics below
-        if (sum(nchar(lev.i))>60){
-          maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-          cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-              " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
+        if (sum(nchar(lev.i))>20){
+          maxprint <- which(cumsum(nchar(lev.i))>20)[1]
+          cat("     '", colnames(fac)[i], "'\t (factor - ", nlevels(fac[, i]), " lev.):\t ", paste(lev.i[1:maxprint], collapse=", "),
+              " and ", length(lev.i) - maxprint, " more.\n", sep="")
         } else {
-          cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
+          cat("     '", colnames(fac)[i], "'\t (factor - ", nlevels(fac[, i]), " lev.):\t ", paste(lev.i, collapse=", "), ".\n", sep="")
         }
+      } else {
+        # any other case (eg logical)
+        cat("     '", colnames(fac)[i], "'\t (", class(fac[, i]), ").\n", sep="")
       }
     }
   }
 }
 
-### prepare a factor according to waht is passed to various methods,
-# notably multivariate plotters..prep.fac(bp, 1)
-# eg
-#  bp <- PCA(efourier(bot))
-# .prep.fac(bp, 2)
-# .prep.fac(bp, "type")
-# .prep.fac(bp, factor(rep(letters[1:4], each=10)))
-# .prep.fac(bp, ~type)
-# .prep.fac(bp)
-#' @export
-.prep.fac <- function(x, fac){
-  ### missing case
-  if (missing(fac)) {
-    fac <- NULL
+  ### prepare a factor according to waht is passed to various methods,
+  # notably multivariate plotters..prep.fac(bp, 1)
+  # eg
+  #  bp <- PCA(efourier(bot))
+  # .prep.fac(bp, 2)
+  # .prep.fac(bp, "type")
+  # .prep.fac(bp, factor(rep(letters[1:4], each=10)))
+  # .prep.fac(bp, ~type)
+  # .prep.fac(bp)
+  #' @export
+  .prep.fac <- function(x, fac){
+    ### missing case
+    if (missing(fac)) {
+      fac <- NULL
+    }
+    ### formula case (is.formula doesnt exist)
+    if (class(fac)=="formula"){
+      f0 <- x$fac[, attr(terms(fac), "term.labels")]
+      fac <- interaction(f0)
+    }
+    ### column id case
+    if (is.numeric(fac)) {
+      if (fac > ncol(x$fac))
+        stop(fac, " is not a valid column id")
+      fac <- factor(x$fac[, fac]) }
+    ### column name case
+    if (is.character(fac)) {
+      if (!any(colnames(x$fac) == fac))
+        stop(fac, " is not an existing column name")
+      fac <- factor(x$fac[, fac]) }
+    ### factor case
+    if (is.factor(fac)) {
+      if (length(fac) != nrow(x$fac))
+        stop("'fac' length and number of individuals differ")
+      # we need it to refactor in subset cases
+      fac <- factor(fac)
+    }
+    return(fac)
   }
-  ### formula case (is.formula doesnt exist)
-  if (class(fac)=="formula"){
-    f0 <- x$fac[, attr(terms(fac), "term.labels")]
-    fac <- interaction(f0)
-  }
-  ### column id case
-  if (is.numeric(fac)) {
-    if (fac > ncol(x$fac)) 
-      stop(fac, " is not a valid column id")
-    fac <- factor(x$fac[, fac]) }
-  ### column name case
-  if (is.character(fac)) {
-    if (!any(colnames(x$fac) == fac)) 
-      stop(fac, " is not an existing column name")
-    fac <- factor(x$fac[, fac]) }
-  ### factor case
-  if (is.factor(fac)) {
-    if (length(fac) != nrow(x$fac)) 
-      stop("'fac' length and number of individuals differ")
-    # we need it to refactor in subset cases
-    fac <- factor(fac) 
-  }
-  return(fac)
-}
 
 
-#' @export
-.trim.ext <- function(lf, width = nchar(lf) - 4) {
+  #' @export
+  .trim.ext <- function(lf, width = nchar(lf) - 4) {
     return(strtrim(lf, width = width))
-}
+  }
 
-#' @export
-.trim.path <- function(lf) {
+  #' @export
+  .trim.path <- function(lf) {
     lf0 <- strsplit(lf, "/")
     lf0 <- sapply(lf0, function(x) x[length(x)])
-#     lf0 <- substr(lf0, 1, nchar(lf0) - 4)
+    #     lf0 <- substr(lf0, 1, nchar(lf0) - 4)
     return(lf0)
-}
+  }
 
-#' @export
-.lf.auto <- function() {
+  #' @export
+  .lf.auto <- function() {
     p <- file.choose()
     # damn ugly
     p <- strsplit(p, split = "/")
@@ -381,22 +384,22 @@ vecs_param <- function(r1, i1, r2, i2) {
     p <- paste0(p, collapse = "/")
     lf <- list.files(p, full.names = TRUE)
     return(lf)
-}
+  }
 
-#' @export
-.normalize <- function(x, min.x, max.x) {
+  #' @export
+  .normalize <- function(x, min.x, max.x) {
     # damn long but default arguments are not accepted
     if (missing(min.x))
-        min.x <- min(x)
+      min.x <- min(x)
     x <- x - min(x)
     if (missing(max.x))
-        max.x <- max(x)
+      max.x <- max(x)
     x <- x/max.x
     return(x)
-}
+  }
 
-#' @export
-.mat.buffer <- function(m, buff.size, buff.fill = 1) {
+  #' @export
+  .mat.buffer <- function(m, buff.size, buff.fill = 1) {
     nr <- nrow(m)
     c.buff <- matrix(buff.fill, nrow = nr, ncol = buff.size)
     m <- cbind(c.buff, m, c.buff)
@@ -404,29 +407,29 @@ vecs_param <- function(r1, i1, r2, i2) {
     r.buff <- matrix(buff.fill, nrow = buff.size, ncol = nc)
     m <- rbind(r.buff, m, r.buff)
     return(m)
-}
+  }
 
-#' @export
-.mat.unbuffer <- function(m, unbuff.size) {
+  #' @export
+  .mat.unbuffer <- function(m, unbuff.size) {
     nr <- nrow(m)
     m <- m[-c(1:unbuff.size, (nr - unbuff.size + 1):nr), ]
     nc <- ncol(m)
     m <- m[, -c(1:unbuff.size, (nc - unbuff.size + 1):nc)]
     return(m)
-}
+  }
 
-#' @export
-.mat.resize <- function(m, ratio) {
+  #' @export
+  .mat.resize <- function(m, ratio) {
     dm <- floor(dim(m)/ratio)
     return(m[round(seq(1, nrow(m), len = dm[1])), round(seq(1,
-        ncol(m), len = dm[2]))])
-}
+                                                            ncol(m), len = dm[2]))])
+  }
 
 
-# tests for the presence of a $fac slot
-is.fac <- function(x) length(x$fac) > 0
+  # tests for the presence of a $fac slot
+  is.fac <- function(x) length(x$fac) > 0
 
 
 
 
-##### End Miscellaneous
+  ##### End Miscellaneous
