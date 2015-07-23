@@ -5,22 +5,23 @@
 #'
 #' Performs hierarchical clustering through \link{dist} and \link{hclust}. So far it is mainly
 #' a wrapper around these two functions, plus plotting using \link{plot.phylo} from the
-#' package ape.
+#' package ape. You need to have ggtree installed from GitHub (not yet released on CRAN).
 #' @param x a PCA object (Coe method deprecated so far)
 #' @param fac the id or column name in $fac to use for colors and mono
-#' @param layout to pass to ggtree, one of 
-#' "cladogram", "phylogram", "dendrogram", "radial", "unrooted", "fan" (by default) 
-#' @param dist_method to feed \link{dist}'s method argument, one of 
+#' @param layout to pass to ggtree, one of
+#' "cladogram", "phylogram", "dendrogram", "radial", "unrooted", "fan" (by default)
+#' @param dist_method to feed \link{dist}'s method argument, one of
 #' "euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski".
-#' @param hclust_method to feed \link{hclust}'s method argument, one of 
+#' @param hclust_method to feed \link{hclust}'s method argument, one of
 #' "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
 #' @param mono logical whether to color branches according to their /fac mononophyly status
 #' @param abbreviate numeric, if specified passed as minlength argument to \link{abbreviate}
-#' @param tip_fac the id or column name in $fac to use as tip_labels rather than rownames 
+#' @param tip_fac the id or column name in $fac to use as tip_labels rather than rownames
 #' @param ... useless here
 #' @return a ggplot object
 #' @keywords Multivariate Graphics
-#' @examples 
+#' @examples
+#' \dontrun{
 #' data(bot)
 #' bp <- PCA(efourier(bot, 10))
 #' CLUST(bp)
@@ -28,18 +29,19 @@
 #' CLUST(bp, layout="cladogram")
 #' CLUST(bp, layout="dendrogram")
 #' CLUST(bp, layout="unrooted")
-#' CLUST(bp, layout="radial") 
+#' CLUST(bp, layout="radial")
 #' CLUST(bp, "type")
 #' CLUST(bp, 1, layout="cladogram", mono=FALSE) #no monophyly coloring
-#' 
+#'
 #' # styling with ggplot2 grammar
 #' library(ggplot2)
 #' CLUST(bp, 1) + scale_color_discrete(h=c(120, 240))
-#' 
+#'
 #' # tip_fac is useful !
 #' data(olea)
 #' op <- PCA(opoly(olea, 5))
 #' CLUST(op, "var", tip_fac="var")
+#' }
 #' @rdname CLUST
 #' @export
 CLUST <- function(x,  ...) {
@@ -72,7 +74,13 @@ CLUST.PCA <- function(x, fac, layout="fan",
                      dist_method="euclidean",
                      hclust_method="complete",
                      mono=TRUE, abbreviate=NULL, tip_fac = NULL, ...){
-    
+
+  if (!requireNamespace("ggtree", quietly = TRUE)) {
+    stop("ggtree needed for this function to work. Please install it with devtools::install_github('GuangchuangYu/ggtree')\n
+          You can install devtools itself with: install.packages(devtools)",
+         call. = FALSE)
+  }
+  requireNamespace("ggtree")
   # This methods owes a lot to phytools and, more importantly, to ggtree package.
   # Unfortunately, it's internally a mess. Due to R CMD CHECKs and others joys,
   # I copied inside this method bits of code that I have adapted just to make it work.
@@ -88,7 +96,7 @@ CLUST.PCA <- function(x, fac, layout="fan",
         curr<-getDescendants(tree,daughters[w[i]],curr)
       return(curr)
     }
-    
+
     geom_tree2 <-
       function (layout = "phylogram", color = "black", linetype = "solid",
                 size = 0.5, ...)
@@ -118,7 +126,7 @@ CLUST.PCA <- function(x, fac, layout="fan",
                        lineend = lineend, ...)
         }
       }
-    
+
     ggtree2 <-
       function (tr, showDistance = FALSE, layout = "phylogram", yscale = "none",
                 ladderize = TRUE, right = FALSE, branch.length = "branch.length",
@@ -143,9 +151,9 @@ CLUST.PCA <- function(x, fac, layout="fan",
                     ladderize = ladderize, right = right, branch.length = branch.length,
                     ndigits = ndigits, ...)
         if (mono){
-          p <- p + geom_tree2(layout, ...) + xlab("") + ylab("") + theme_tree()
+          p <- p + geom_tree2(layout, ...) + xlab("") + ylab("") + ggtree::theme_tree()
         } else {
-          p <- p + geom_tree(layout, ...) + xlab("") + ylab("") + theme_tree()
+          p <- p + ggtree::geom_tree(layout, ...) + xlab("") + ylab("") + ggtree::theme_tree()
         }
         if (type == "dendrogram") {
           p <- p + scale_x_reverse() + coord_flip()
@@ -155,7 +163,7 @@ CLUST.PCA <- function(x, fac, layout="fan",
           p <- p + scale_y_continuous(limits=c(0, sum(p$data$isTip)))
         }
         if (showDistance == FALSE) {
-          p <- p + theme_tree()
+          p <- p + ggtree::theme_tree()
         }
         attr(p, "param") <- list(layout = layout, yscale = yscale,
                                  ladderize = ladderize, right = right, branch.length = branch.length,
@@ -166,11 +174,11 @@ CLUST.PCA <- function(x, fac, layout="fan",
       rownames(x$x) <- as.character(x$fac[, tip_fac])
     if (!is.null(abbreviate))
       rownames(x$x) <- abbreviate(rownames(x$x), minlength = abbreviate)
-    
-    
-    fortify_phylo <- 
-    function (model, data, layout = "phylogram", ladderize = TRUE, 
-              right = FALSE, ...) 
+
+
+    fortify_phylo <-
+    function (model, data, layout = "phylogram", ladderize = TRUE,
+              right = FALSE, ...)
     {
       if (ladderize == TRUE) {
         tree <- ladderize(model, right = right)
@@ -189,13 +197,13 @@ CLUST.PCA <- function(x, fac, layout="fan",
       }
       return(df)
     }
-    
+
     add_angle_cladogram <-
-    function (res) 
+    function (res)
     {
-      dy <- (res[, "y"] - res[res$parent, "y"])/diff(range(res[, 
+      dy <- (res[, "y"] - res[res$parent, "y"])/diff(range(res[,
                                                                "y"]))
-      dx <- (res[, "x"] - res[res$parent, "x"])/diff(range(res[, 
+      dx <- (res[, "x"] - res[res$parent, "x"])/diff(range(res[,
                                                                "x"]))
       theta <- atan(dy/dx)
       theta[is.na(theta)] <- 0
@@ -206,7 +214,7 @@ CLUST.PCA <- function(x, fac, layout="fan",
       res[, "branch.y"] <- branch.y
       return(res)
     }
-    
+
     # clust <- function(x, fac, layout){
     phylo <- dist(x$x, method = dist_method) %>% hclust(method = hclust_method) %>% ape::as.phylo()
     if (missing(fac)){
@@ -218,7 +226,7 @@ CLUST.PCA <- function(x, fac, layout="fan",
     fac_long <- fac
     fac_long[(length(fac)+1):nrow(phylo_df)] <- NA
     phylo_df <- cbind(phylo_df, fac=fac_long)
-    
+
     if (mono){
       N <- fac
       for (i in phylo_df$node){
@@ -230,7 +238,7 @@ CLUST.PCA <- function(x, fac, layout="fan",
         ids <- phylo_df[children, ] %>% na.omit()
         ids <- ids$node
         tips <- fac[ids] %>% unique
-        
+
         if (length(tips)>1) {
           res <- NA
         } else {
@@ -243,11 +251,11 @@ CLUST.PCA <- function(x, fac, layout="fan",
       phylo_df$mono <- N
       gg <- ggtree2(phylo_df, layout=layout, mono=TRUE)
     } else if (layout=="unrooted") {
-      gg <- ggtree(phylo_df, layout=layout)
+      gg <- ggtree::ggtree(phylo_df, layout=layout)
     } else {
       gg <- ggtree2(phylo_df, layout=layout, mono=FALSE)
     }
-    
+
     if (any(layout=="unrooted", layout=="fan")) {
       # gg$data$angle <- abs(gg$data$angle)
       ang <- gg$data$angle

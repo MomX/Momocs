@@ -36,6 +36,6 @@ Roxygen: list(wrap = FALSE)
 URL: http://www.vincentbonhomme.fr/Momocs
 BugReports: https://github.com/vbonhomme/Momocs
 Depends: R(>= 3.1)
-Imports: ape, dplyr, graphics, geometry, ggplot2, ggtree, jpeg, MASS, plyr,
+Imports: ape, dplyr, graphics, geometry, ggplot2, jpeg, MASS, plyr,
          reshape2, sp, utils
-Suggests: devtools
+Suggests: devtools, ggtree

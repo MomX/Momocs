@@ -42,9 +42,10 @@ a ggplot object
 \description{
 Performs hierarchical clustering through \link{dist} and \link{hclust}. So far it is mainly
 a wrapper around these two functions, plus plotting using \link{plot.phylo} from the
-package ape.
+package ape. You need to have ggtree installed from GitHub (not yet released on CRAN).
 }
 \examples{
+\dontrun{
 data(bot)
 bp <- PCA(efourier(bot, 10))
 CLUST(bp)
@@ -64,6 +65,7 @@ CLUST(bp, 1) + scale_color_discrete(h=c(120, 240))
 data(olea)
 op <- PCA(opoly(olea, 5))
 CLUST(op, "var", tip_fac="var")
+}
 }
 \keyword{Graphics}
 \keyword{Multivariate}

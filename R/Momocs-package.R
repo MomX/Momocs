@@ -64,7 +64,6 @@
 #' @import sp
 #' @import reshape2
 #' @import ggplot2
-#' @importFrom ggtree ggtree geom_tree theme_tree 
 #' @importFrom geometry delaunayn convhulln
 #' @importFrom graphics boxplot
 #' @importFrom jpeg readJPEG
@@ -78,7 +77,7 @@ NULL
 # prevents "no visible binding for global variable"
 # http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
-                  "x_c", "x_d", "y_c", "y_d", ".id", 
+                  "x_c", "x_d", "y_c", "y_d", ".id",
                   "node", "label", "angle", "hjust", "Freq"))
 
 #' Install and load the last version of Momocs
