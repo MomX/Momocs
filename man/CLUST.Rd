@@ -19,7 +19,8 @@ CLUST(x, ...)
 
 \item{...}{useless here}
 
-\item{fac}{the id or column name in $fac to use for colors and mono}
+\item{fac}{the id or column name in $fac to use for colors and mono. Note that
+you can also pass a factor of length equal to the number of rows of x$x}
 
 \item{layout}{to pass to ggtree, one of
 "cladogram", "phylogram", "dendrogram", "radial", "unrooted", "fan" (by default)}
@@ -34,7 +35,8 @@ CLUST(x, ...)
 
 \item{abbreviate}{numeric, if specified passed as minlength argument to \link{abbreviate}}
 
-\item{tip_fac}{the id or column name in $fac to use as tip_labels rather than rownames}
+\item{tip_fac}{the id or column name in $fac to use as tip_labels rather than rownames. Note that
+you can also pass a character (or a factor) with the same number of rows of x$x}
 }
 \value{
 a ggplot object
@@ -65,6 +67,10 @@ CLUST(bp, 1) + scale_color_discrete(h=c(120, 240))
 data(olea)
 op <- PCA(opoly(olea, 5))
 CLUST(op, "var", tip_fac="var")
+
+# on the fly fac and tip_fac
+tip_fac2 <- interaction(op$fac$var, op$fac$domes)
+CLUST(op, fac=tip_fac2, tip_fac=tip_fac2)
 }
 }
 \keyword{Graphics}
