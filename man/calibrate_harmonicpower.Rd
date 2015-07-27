@@ -2,21 +2,27 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_harmonicpower}
 \alias{calibrate_harmonicpower}
+\alias{calibrate_harmonicpower.Opn}
 \alias{calibrate_harmonicpower.Out}
-\title{Quantitative calibration, through harmonic power, for Out objects}
+\title{Quantitative calibration, through harmonic power, for Out and Opn objects}
 \usage{
-calibrate_harmonicpower(Out, method = "efourier", id = 1:length(Out), nb.h,
+calibrate_harmonicpower(x, method = "efourier", id = 1:length(Out), nb.h,
   drop = 1, thres.h = c(90, 95, 99, 99.9), plot = TRUE, verbose = TRUE,
   ...)
 
-\method{calibrate_harmonicpower}{Out}(Out, method = "efourier",
+\method{calibrate_harmonicpower}{Out}(x, method = "efourier",
   id = 1:length(Out), nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
+  plot = TRUE, verbose = TRUE, ...)
+
+\method{calibrate_harmonicpower}{Opn}(x, method = "dfourier",
+  id = 1:length(Opn), nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
   plot = TRUE, verbose = TRUE, ...)
 }
 \arguments{
-\item{Out}{the \code{Out} object on which to calibrate_harmonicpower}
+\item{x}{a \code{Coo} object on which to calibrate_harmonicpower}
 
-\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
+\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')} for \code{Out}s and
+\code{dfourier} for \code{Out}s.}
 
 \item{id}{the shapes on which to perform calibrate_harmonicpower. All of them by default}
 
@@ -42,13 +48,14 @@ a certain proportion of the total harmonic power.
 }
 }
 \description{
-Estimates the number of harmonics required for the three Fourier methods
+Estimates the number of harmonics required for the four Fourier methods
 implemented in Momocs: elliptical Fourier analysis
 (see \link{efourier}), radii variation analysis (see \link{rfourier})
-and tangent angle analysis (see \link{tfourier}).
+and tangent angle analysis (see \link{tfourier}) and
+discrete Fourier transform (see \link{dfourier}).
 It returns and can plot cumulated harmonic power whether dropping
 the first harmonic or not, and based and the maximum possible number
-of harmonics on the \code{Out} object.
+of harmonics on the \code{Coo} object.
 }
 \details{
 The power of a given harmonic \eqn{n} is calculated as follows for
@@ -60,11 +67,18 @@ and as follows for radii variation and tangent angle:
 \section{Methods (by class)}{
 \itemize{
 \item \code{Out}: Method for Out objects
+
+\item \code{Opn}: Method for Opn objects
 }}
 \examples{
 data(bot)
 cal <- calibrate_harmonicpower(bot)
 \dontrun{
+# for Opn objects
+data(olea)
+calibrate_harmonicpower(olea, "dfourier")
+
+# let customize the ggplot
 library(ggplot2)
 cal$gg + theme_minimal() +
 coord_cartesian(xlim=c(3.5, 12.5), ylim=c(90, 100)) +

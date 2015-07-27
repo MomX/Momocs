@@ -340,18 +340,20 @@ calibrate_deviations.Out <-
 
 
 # 3. calibrate_harmonicpower ----------------
-#' Quantitative calibration, through harmonic power, for Out objects
+#' Quantitative calibration, through harmonic power, for Out and Opn objects
 #'
-#' Estimates the number of harmonics required for the three Fourier methods
+#' Estimates the number of harmonics required for the four Fourier methods
 #' implemented in Momocs: elliptical Fourier analysis
 #' (see \link{efourier}), radii variation analysis (see \link{rfourier})
-#' and tangent angle analysis (see \link{tfourier}).
+#' and tangent angle analysis (see \link{tfourier}) and 
+#' discrete Fourier transform (see \link{dfourier}).
 #' It returns and can plot cumulated harmonic power whether dropping
 #' the first harmonic or not, and based and the maximum possible number
-#' of harmonics on the \code{Out} object.
+#' of harmonics on the \code{Coo} object.
 #'
-#' @param Out the \code{Out} object on which to calibrate_harmonicpower
-#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
+#' @param x a \code{Coo} object on which to calibrate_harmonicpower
+#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')} for \code{Out}s and
+#' \code{dfourier} for \code{Out}s.
 #' @param id the shapes on which to perform calibrate_harmonicpower. All of them by default
 #' @param nb.h numeric the maximum number of harmonic, on which to base the cumsum
 #' @param drop numeric the number of harmonics to drop for the cumulative sum
@@ -377,6 +379,11 @@ calibrate_deviations.Out <-
 #' data(bot)
 #' cal <- calibrate_harmonicpower(bot)
 #' \dontrun{
+#' # for Opn objects
+#' data(olea)
+#' calibrate_harmonicpower(olea, "dfourier")
+#' 
+#' # let customize the ggplot
 #' library(ggplot2)
 #' cal$gg + theme_minimal() +
 #' coord_cartesian(xlim=c(3.5, 12.5), ylim=c(90, 100)) +
@@ -385,16 +392,18 @@ calibrate_deviations.Out <-
 #' # if you want to do efourier with 99% calibrate_harmonicpower in one step
 #' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
 #' @export
-calibrate_harmonicpower <- function(Out, method = "efourier", id = 1:length(Out),
+calibrate_harmonicpower <- function(x, method = "efourier", id = 1:length(Out),
                                     nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
                                     plot=TRUE, verbose=TRUE, ...) {
   UseMethod("calibrate_harmonicpower")
 }
+
 #' @describeIn calibrate_harmonicpower Method for Out objects
 #' @export
-calibrate_harmonicpower.Out <- function(Out, method = "efourier", id = 1:length(Out),
+calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Out),
                                         nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
                                         plot=TRUE, verbose=TRUE, ...) {
+  Out <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
     if (verbose) cat(" * Method not provided. calibrate_harmonicpower | efourier is used.\n")
@@ -448,5 +457,73 @@ calibrate_harmonicpower.Out <- function(Out, method = "efourier", id = 1:length(
   invisible(list(gg=gg, q=res, minh=minh))
 }
 
+#' @describeIn calibrate_harmonicpower Method for Opn objects
+#' @export
+calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Opn),
+                                        nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
+                                        plot=TRUE, verbose=TRUE, ...) {
+  Opn <- x
+  # we swith among methods, with a messsage
+  if (missing(method)) {
+    if (verbose) cat(" * Method not provided. calibrate_harmonicpower | dfourier is used.\n")
+    method <- dfourier
+  } else if (method != "dfourier"){
+    if (verbose) cat(" * Only available for dfourier | dfourier is used.\n")
+    method <- dfourier
+  } else {
+    method <- dfourier
+  }
+#   } else {
+#     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
+#     if (is.na(p)) {
+#       warning("Unvalid method. efourier is used.")
+#     } else {
+#       method <- switch(p, efourier, rfourier, tfourier)
+#     }
+#   }
+
+    
+    
+  # here we define the maximum nb.h, if missing
+  if (missing(nb.h)){
+    nb.h <- floor(min(sapply(Opn$coo, nrow))/2)
+    }
+  # we prepare the result matrix
+  res <- matrix(nrow = length(id), ncol = (nb.h - drop))
+  x <- (drop + 1):nb.h
+  for (i in seq(along = id)) {
+    xf <- method(Opn$coo[[id[i]]], nb.h = nb.h)
+    res[i, ] <- harm_pow(xf)[x]}
+  rownames(res) <- names(Opn)
+  colnames(res) <- paste0("h", 1:ncol(res))
+  # we remove dropped harmonics
+  #res <- res[, -drop]
+  # we calculte cumsum and percentages
+  res <- t(apply(res, 1, function(x) cumsum(x) / sum(x))) * 100
+  # we ggplot
+  h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmectics
+  xx <- melt(res)
+  colnames(xx) <- c("shp", "harm", "hp")
+  gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
+    labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
+    coord_cartesian(xlim=c(0.5, h_display+0.5))
+  if (plot) print(gg)
+  # we calculate quantiles and add nice rowcolnames
+  # also the median (independently of probs [0.5, etc]) since
+  # thres.h may change
+  med.res <- apply(res, 2, median)
+  minh <- numeric(length(thres.h))
+  names(minh) <- paste0(thres.h, "%")
+  for (i in seq(along=thres.h)){
+    wi <- which(med.res > thres.h[i])
+    minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
+  minh <- minh+drop
+  # talk to me
+  if (verbose){
+    #     cat("\n$minh:\n")
+    print(minh)}
+  # we return the full matrix, the ggplot and the thresholds
+  invisible(list(gg=gg, q=res, minh=minh))
+}
 # nquant npow
 
