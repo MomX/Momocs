@@ -2,12 +2,17 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_deviations}
 \alias{calibrate_deviations}
+\alias{calibrate_deviations.Opn}
 \alias{calibrate_deviations.Out}
-\title{Quantitative calibration, through deviations, for Out objects}
+\title{Quantitative calibration, through deviations, for Out and Opn objects}
 \usage{
 calibrate_deviations(Coo, ...)
 
 \method{calibrate_deviations}{Out}(Coo, method = c("efourier", "rfourier",
+  "tfourier"), id = 1, harm.range, norm.centsize = TRUE,
+  dist.method = edm_nearest, dist.nbpts = 120, ...)
+
+\method{calibrate_deviations}{Opn}(Coo, method = c("efourier", "rfourier",
   "tfourier"), id = 1, harm.range, norm.centsize = TRUE,
   dist.method = edm_nearest, dist.nbpts = 120, ...)
 }
@@ -16,7 +21,8 @@ calibrate_deviations(Coo, ...)
 
 \item{...}{only used for the generic}
 
-\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}}
+\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')} and
+\code{'dfourier'}.}
 
 \item{id}{the shape on which to perform calibrate_deviations}
 
@@ -41,6 +47,12 @@ range of harmonic number.
 data(bot)
 calibrate_deviations(bot)
 \dontrun{
+
+# on Opn
+data(olea)
+camibrate_deviations(olea)
+
+# lets customize the ggplot
 library(ggplot2)
 gg <- calibrate_deviations(bot, id=1:20)$gg
 gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)

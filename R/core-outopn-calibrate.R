@@ -188,13 +188,14 @@ calibrate_reconstructions.Opn <-
   }
 
 # 2. calibrate_deviations -------------------------
-#' Quantitative calibration, through deviations, for Out objects
+#' Quantitative calibration, through deviations, for Out and Opn objects
 #'
 #' Calculate deviations from original and reconstructed shapes using a
 #' range of harmonic number.
 #'
 #' @param Coo the \code{Out} object on which to calibrate_deviations
-#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
+#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')} and
+#' \code{'dfourier'}.
 #' @param id the shape on which to perform calibrate_deviations
 #' @param harm.range vector of harmonics on which to perform calibrate_deviations.
 #' If not provided, the harmonics corresponding to 0.9, 0.95 and 0.99% of harmonic power
@@ -209,6 +210,12 @@ calibrate_reconstructions.Opn <-
 #' data(bot)
 #' calibrate_deviations(bot)
 #' \dontrun{
+#' 
+#' # on Opn
+#' data(olea)
+#' camibrate_deviations(olea)
+#'
+#' # lets customize the ggplot
 #' library(ggplot2)
 #' gg <- calibrate_deviations(bot, id=1:20)$gg
 #' gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
@@ -338,6 +345,119 @@ calibrate_deviations.Out <-
     invisible(list(gg=gg, res = res, m = m, d = d))
   }
 
+#' @rdname calibrate_deviations
+#' @export
+calibrate_deviations.Opn<-
+  function(Coo, method = c("efourier", "rfourier", "tfourier"),
+           id = 1, harm.range,
+           norm.centsize = TRUE,
+           dist.method = edm_nearest, dist.nbpts = 120,
+           ...) {
+    # missing lineat.y
+    if (missing(harm.range)) {
+      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
+                                    lineat.y = c(95, 99, 99.9))
+      harm.range <- unique(hr$minh)
+    }
+    if (missing(method)) {
+      cat(" * Method not provided. calibrate_harmonicpower | dfourier is used.\n")
+      method <- dfourier
+      method.i <- dfourier_i
+    } else if (method != "dfourier"){
+      cat(" * Only available for dfourier | dfourier is used.\n")
+      method <- dfourier
+      method.i <- dfourier_i
+    } else {
+      method <- dfourier
+      method.i <- dfourier_i
+    }
+    # We define the highest possible nb.h along Coo@coo[id]
+    min.nb.pts <- min(sapply(Coo$coo[id], nrow))
+    nb.h.best <- floor(min.nb.pts/2) - 1
+    # we handle too ambitious harm.range
+    if (max(harm.range) > nb.h.best) {
+      harm.range <- floor(seq(4, nb.h.best, length = 6))
+      cat("  * 'harm.range' was too high and set to: ", harm.range,
+          ".\n")
+    }
+    # we prepare the results array
+    nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
+    nr <- length(harm.range)
+    nc <- nb.pts
+    nk <- length(id)
+    res <- array(NA, dim = c(nr, nc, nk),
+                 dimnames = list(paste0("h", harm.range),
+                                 paste("pt", 1:nb.pts), names(Coo)[id]))
+    # progressbar
+    if (nk > 5) {
+      pb <- txtProgressBar(1, nk)
+      t <- TRUE
+    } else {
+      t <- FALSE
+    }
+    # the core loops that will calculate deviations
+    for (ind in seq(along = id)) {
+      coo <- Coo$coo[[id[ind]]] #Coo[id]?
+      # below, the best possible fit
+      coo_best <- method.i(method(coo, nb.h = nb.h.best), nb.pts = nb.pts)
+      for (i in seq(along = harm.range)) {
+        # for each number of harmonics we calculate deviation with
+        # the FUN=method
+        coo_i <- method.i(method(coo, nb.h = harm.range[i]), nb.pts = nb.pts)
+        res[i, , ind] <- dist.method(coo_best, coo_i)
+      }
+      # we normalize by the centroid size and prepare the y.title
+      if (norm.centsize) {
+        res[, , ind] <- res[, , ind]/coo_centsize(coo)
+        y.title <- "Deviation (in % of the centroid size)"
+      } else {
+        y.title <- "Deviation (in original units)"
+      }
+      if (t)
+        setTxtProgressBar(pb, ind)
+    }
+    # below we manage for single/several individuals if more than
+    # 1, we calculate median and sd
+    if (nk > 1) {
+      m <- apply(res, 1:2, median)
+      d <- apply(res, 1:2, sd)
+      # we prepare a df
+      xx <- melt(m)
+      xx <- cbind(xx, melt(d)$value)
+      xx$Var2 <- as.numeric(xx$Var2)
+      colnames(xx) <- c("harm", "pt", "med", "sd")
+      # hideous but avoid the aes_string problem fro ribbon
+      xx$mmsd <- xx$med - xx$sd
+      xx$mpsd <- xx$med + xx$sd
+      # we ggplot
+      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
+        geom_ribbon(aes_string(ymin="mmsd", ymax="mpsd",
+                               fill="harm"), linetype=0,  alpha=0.1) +
+        geom_line(aes_string(x="pt", y="med", col="harm")) +
+        labs(x="Points along the open outline", y=y.title,
+             col=NULL, fill=NULL) +
+        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$mpsd)))
+    } else {
+      m <- res[, , 1]
+      d <- NULL
+      # we prepare a df
+      xx <- melt(m)
+      xx$Var2 <- as.numeric(xx$Var2)
+      colnames(xx) <- c("harm", "pt", "med")
+      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
+        geom_line() +
+        labs(x="Points along the open outline", y=y.title, col=NULL) +
+        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
+    }
+    #     # horizontal lines
+    #     if (!is.null(thres.h)) {
+    #       gg <- gg + geom_hline(aes(yintercept=thres.h))
+    #     }
+    # we plot the ggplot
+    print(gg)
+    ####
+    invisible(list(gg=gg, res = res, m = m, d = d))
+  }
 
 # 3. calibrate_harmonicpower ----------------
 #' Quantitative calibration, through harmonic power, for Out and Opn objects
