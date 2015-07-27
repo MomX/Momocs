@@ -1374,19 +1374,33 @@ coo_centpos.Coo <- function(coo) {
 
 #' Calculates the centroid size
 #' @aliases coo_centsize
-#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates or a Coo object
 #' @return \code{numeric}, the centroid size.
 #' @keywords ShapeDescriptors
+#' @details This function can be used to integrate size - if meaningful -
+#' to Coo objects. See also \link{coo_length} and \link{rescale}.
 #' @examples
 #' data(bot)
 #' coo_centsize(bot[1])
-#' cs <- sapply(bot$coo, coo_centsize)
+#' coo_centsize(bot)
+#' 
+#' mutate(bot, size=coo_centsize(bot))
 #' hist(cs, breaks=10)
+#' 
+#' 
 #' @export
-coo_centsize <- function(coo) {
+coo_centsize <- function(coo){
+  UseMethod("coo_centsize")
+}
+#' @export
+coo_centsize.default <- function(coo) {
   coo <- coo_check(coo)
   sq <- (coo - apply(coo, 2, mean))^2
   mean(sqrt(rowSums(sq)))
+}
+#' @export
+coo_centsize.Coo <- function(coo){
+  sapply(coo$coo, coo_centsize)
 }
 
 #' Returns the distance between everypoints and the centroid

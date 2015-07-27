@@ -7,7 +7,7 @@
 coo_centsize(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a Coo object}
 }
 \value{
 \code{numeric}, the centroid size.
@@ -15,10 +15,16 @@ coo_centsize(coo)
 \description{
 Calculates the centroid size
 }
+\details{
+This function can be used to integrate size - if meaningful -
+to Coo objects. See also \link{coo_length} and \link{rescale}.
+}
 \examples{
 data(bot)
 coo_centsize(bot[1])
-cs <- sapply(bot$coo, coo_centsize)
+coo_centsize(bot)
+
+mutate(bot, size=coo_centsize(bot))
 hist(cs, breaks=10)
 }
 \keyword{ShapeDescriptors}

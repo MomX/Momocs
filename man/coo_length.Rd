@@ -7,7 +7,7 @@
 coo_length(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a Coo object}
 }
 \value{
 the length (in pixels) of the shape
@@ -15,9 +15,15 @@ the length (in pixels) of the shape
 \description{
 Nothing more than \code{coo_lw(coo)[1]}.
 }
+\details{
+This function can be used to integrate size - if meaningful -
+to Coo objects. See also \link{coo_centsize} and \link{rescale}.
+}
 \examples{
 data(bot)
 coo_length(bot[1])
+coo_length(bot)
+mutate(bot, size=coo_length(bot))
 }
 \seealso{
 \link{coo_lw}, \link{coo_width}

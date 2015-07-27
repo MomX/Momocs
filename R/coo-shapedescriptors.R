@@ -24,16 +24,28 @@ coo_lw <- function(coo) {
 #' Calculates the length of a shape
 #'
 #' Nothing more than \code{coo_lw(coo)[1]}.
-#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates or a Coo object
 #' @return the length (in pixels) of the shape
 #' @keywords ShapeDescriptors
 #' @seealso \link{coo_lw}, \link{coo_width}
+#' @details This function can be used to integrate size - if meaningful -
+#' to Coo objects. See also \link{coo_centsize} and \link{rescale}.
 #' @examples
 #' data(bot)
 #' coo_length(bot[1])
+#' coo_length(bot)
+#' mutate(bot, size=coo_length(bot))
 #' @export
-coo_length <- function(coo) {
+coo_length <- function(coo){
+  UseMethod("coo_length")
+}
+#' @export
+coo_length.default <- function(coo) {
   return(coo_lw(coo)[1])
+}
+#' @export
+coo_length.Coo <- function(coo){
+  sapply(coo$coo, coo_length)
 }
 
 #' Calculates the width of a shape
