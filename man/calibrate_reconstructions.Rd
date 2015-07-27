@@ -11,8 +11,9 @@ calibrate_reconstructions(x, ...)
 \method{calibrate_reconstructions}{Out}(x, method = c("efourier", "rfourier",
   "tfourier"), id, range = 1:9, ...)
 
-\method{calibrate_reconstructions}{Opn}(x, method = c("npoly", "opoly"), id,
-  range = 2:10, baseline1 = c(-1, 0), baseline2 = c(1, 0), ...)
+\method{calibrate_reconstructions}{Opn}(x, method = c("npoly", "opoly",
+  "dfourier"), id, range = 2:10, baseline1 = c(-1, 0), baseline2 = c(1,
+  0), ...)
 }
 \arguments{
 \item{x}{the \code{Coo} object on which to calibrate_reconstructions}
@@ -20,7 +21,7 @@ calibrate_reconstructions(x, ...)
 \item{...}{only used for the generic}
 
 \item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}
-for \code{Out}, or from \code{c('opoly', 'npoly')} for \code{Opn}}
+for \code{Out}, or from \code{c('opoly', 'npoly', 'dfourier')} for \code{Opn}}
 
 \item{id}{the shape on which to perform calibrate_reconstructions}
 
@@ -39,7 +40,10 @@ range of harmonic number. Compare them visually with the maximal fit.
 }
 \examples{
 data(bot)
-calibrate_reconstructions(bot)
+calibrate_reconstructions(bot, "efourier")
+
+data(olea)
+calibrate_reconstructions(olea, "dfourier")
 }
 \keyword{Out}
 

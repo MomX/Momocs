@@ -8,7 +8,7 @@
 #' @aliases calibrate_reconstructions
 #' @param x the \code{Coo} object on which to calibrate_reconstructions
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
-#'  for \code{Out}, or from \code{c('opoly', 'npoly')} for \code{Opn}
+#'  for \code{Out}, or from \code{c('opoly', 'npoly', 'dfourier')} for \code{Opn}
 #' @param id the shape on which to perform calibrate_reconstructions
 #' @param range vector of harmonics on which to perform calibrate_reconstructions
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
@@ -18,7 +18,10 @@
 #' @keywords Out
 #' @examples
 #' data(bot)
-#' calibrate_reconstructions(bot)
+#' calibrate_reconstructions(bot, "efourier")
+#' 
+#' data(olea)
+#' calibrate_reconstructions(olea, "dfourier")
 #' @rdname calibrate_reconstructions
 #' @export
 calibrate_reconstructions <-
@@ -105,7 +108,7 @@ calibrate_reconstructions.Out <-
 #' @export
 calibrate_reconstructions.Opn <-
   function(x,
-           method = c("npoly", "opoly"),
+           method = c("npoly", "opoly", "dfourier"),
            id,
            range = 2:10,
            baseline1 = c(-1, 0),
@@ -119,12 +122,12 @@ calibrate_reconstructions.Opn <-
       method_i <- opoly_i
       p <- 2
     } else {
-      p <- pmatch(tolower(method), c("npoly", "opoly"))
+      p <- pmatch(tolower(method), c("npoly", "opoly",  "dfourier"))
       if (is.na(p)) {
         warning(" * Unvalid method. opoly is used.\n")
       } else {
-        method   <- switch(p, npoly, opoly)
-        method_i <- switch(p, npoly_i, opoly_i)
+        method   <- switch(p, npoly, opoly, dfourier)
+        method_i <- switch(p, npoly_i, opoly_i, dfourier_i)
       }
     }
 
@@ -149,7 +152,7 @@ calibrate_reconstructions.Opn <-
     # we loop
     res <- list()
     for (i in seq(along = range)) {
-      res[[i]] <- method_i(method(coo, degree = range[i]))
+      res[[i]] <- method_i(method(coo, range[i]))
     }
 
     # we prepare the plot
