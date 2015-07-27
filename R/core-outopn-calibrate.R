@@ -62,7 +62,7 @@ calibrate_reconstructions.Out <-
       range <- floor(seq(1, max.h, length = 9))
       cat(" * range was too high and set to: ", range, ".\n")
     }
-
+    
     # we calculate all shapes
     res <- list()
     for (i in seq(along = range)) {
@@ -93,7 +93,7 @@ calibrate_reconstructions.Out <-
                          strip.text=element_text(colour = "grey10"),
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
-
+    
     gg <- ggplot(data=coos, aes_string(x="x", y="y")) +
       coord_equal() + geom_polygon(aes(fill=id), alpha=0.5) +
       geom_path(data=best, aes_string(x="x", y="y")) +
@@ -130,7 +130,7 @@ calibrate_reconstructions.Opn <-
         method_i <- switch(p, npoly_i, opoly_i, dfourier_i)
       }
     }
-
+    
     # we sample a shape
     if (missing(id))
       id <- sample(length(Opn$coo), 1)
@@ -138,7 +138,7 @@ calibrate_reconstructions.Opn <-
     coo <- coo_baseline(coo,
                         ldk1 = 1, ldk2 = nrow(coo),
                         t1 = baseline1, t2 = baseline2)
-
+    
     # we check for too ambitious range
     # special case for opoly # todo
     if (p == 2) {
@@ -148,13 +148,13 @@ calibrate_reconstructions.Opn <-
       range <- 2:10
       cat(" * range was too high and set to: ", range, ".\n")
     }
-
+    
     # we loop
     res <- list()
     for (i in seq(along = range)) {
       res[[i]] <- method_i(method(coo, range[i]))
     }
-
+    
     # we prepare the plot
     names(res) <- range
     coos <- ldply(res, data.frame)
@@ -179,11 +179,11 @@ calibrate_reconstructions.Opn <-
                          strip.text=element_text(colour = "grey10"),
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
-
+    
     gg <- ggplot(data=coos, aes_string(x="x", y="y")) +
       coord_equal() + geom_path(data=best, aes_string(x="x", y="y"), alpha=0.5) +
       geom_path(aes(col=id)) +
-     # scale_color_gradient2() +
+      # scale_color_gradient2() +
       facet_wrap(~ id) +
       labs(x=NULL, y=NULL, title=names(Opn)[id]) +
       theme_light() + theme_empty
@@ -339,8 +339,8 @@ calibrate_deviations.Out <-
         coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
     }
     #     # horizontal lines
-    #     if (!is.null(thres.h)) {
-    #       gg <- gg + geom_hline(aes(yintercept=thres.h))
+    #     if (!is.null(thresh)) {
+    #       gg <- gg + geom_hline(aes(yintercept=thresh))
     #     }
     # we plot the ggplot
     print(gg)
@@ -363,11 +363,11 @@ calibrate_deviations.Opn<-
       harm.range <- unique(hr$minh)
     }
     if (missing(method)) {
-      cat(" * Method not provided. calibrate_harmonicpower | dfourier is used.\n")
+      cat(" * Method not provided. dfourier is used.\n")
       method <- dfourier
       method.i <- dfourier_i
     } else if (method != "dfourier"){
-      cat(" * Only available for dfourier | dfourier is used.\n")
+      cat(" * Only available for dfourier. dfourier is used.\n")
       method <- dfourier
       method.i <- dfourier_i
     } else {
@@ -453,8 +453,8 @@ calibrate_deviations.Opn<-
         coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
     }
     #     # horizontal lines
-    #     if (!is.null(thres.h)) {
-    #       gg <- gg + geom_hline(aes(yintercept=thres.h))
+    #     if (!is.null(thresh)) {
+    #       gg <- gg + geom_hline(aes(yintercept=thresh))
     #     }
     # we plot the ggplot
     print(gg)
@@ -480,7 +480,7 @@ calibrate_deviations.Opn<-
 #' @param id the shapes on which to perform calibrate_harmonicpower. All of them by default
 #' @param nb.h numeric the maximum number of harmonic, on which to base the cumsum
 #' @param drop numeric the number of harmonics to drop for the cumulative sum
-#' @param thres.h vector of numeric for drawing horizontal lines, and also used for
+#' @param thresh vector of numeric for drawing horizontal lines, and also used for
 #' \code{minh} below
 #' @param plot logical whether to plot the result or simply return the matrix
 #' @param verbose whether to print results
@@ -497,6 +497,7 @@ calibrate_deviations.Opn<-
 #' \eqn{HarmonicPower_n \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 #' and as follows for radii variation and tangent angle:
 #' \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
+#' @seealso \link{calibrate_r2}
 #' @keywords Out
 #' @examples
 #' data(bot)
@@ -516,7 +517,7 @@ calibrate_deviations.Opn<-
 #' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
 #' @export
 calibrate_harmonicpower <- function(x, method = "efourier", id = 1:length(Out),
-                                    nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
+                                    nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
                                     plot=TRUE, verbose=TRUE, ...) {
   UseMethod("calibrate_harmonicpower")
 }
@@ -524,12 +525,12 @@ calibrate_harmonicpower <- function(x, method = "efourier", id = 1:length(Out),
 #' @describeIn calibrate_harmonicpower Method for Out objects
 #' @export
 calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Out),
-                                        nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
+                                        nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
                                         plot=TRUE, verbose=TRUE, ...) {
   Out <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) cat(" * Method not provided. calibrate_harmonicpower | efourier is used.\n")
+    if (verbose) cat(" * Method not provided. efourier is used.\n")
     method <- efourier
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
@@ -564,12 +565,12 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Ou
   if (plot) print(gg)
   # we calculate quantiles and add nice rowcolnames
   # also the median (independently of probs [0.5, etc]) since
-  # thres.h may change
+  # thresh may change
   med.res <- apply(res, 2, median)
-  minh <- numeric(length(thres.h))
-  names(minh) <- paste0(thres.h, "%")
-  for (i in seq(along=thres.h)){
-    wi <- which(med.res > thres.h[i])
+  minh <- numeric(length(thresh))
+  names(minh) <- paste0(thresh, "%")
+  for (i in seq(along=thresh)){
+    wi <- which(med.res > thresh[i])
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
   minh <- minh+drop
   # talk to me
@@ -583,34 +584,34 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Ou
 #' @describeIn calibrate_harmonicpower Method for Opn objects
 #' @export
 calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Opn),
-                                        nb.h, drop = 1, thres.h = c(90, 95, 99, 99.9),
+                                        nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
                                         plot=TRUE, verbose=TRUE, ...) {
   Opn <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) cat(" * Method not provided. calibrate_harmonicpower | dfourier is used.\n")
+    if (verbose) cat(" * Method not provided. dfourier is used.\n")
     method <- dfourier
   } else if (method != "dfourier"){
-    if (verbose) cat(" * Only available for dfourier | dfourier is used.\n")
+    if (verbose) cat(" * Only available for dfourier. dfourier is used.\n")
     method <- dfourier
   } else {
     method <- dfourier
   }
-#   } else {
-#     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-#     if (is.na(p)) {
-#       warning("Unvalid method. efourier is used.")
-#     } else {
-#       method <- switch(p, efourier, rfourier, tfourier)
-#     }
-#   }
-
-    
-    
+  #   } else {
+  #     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
+  #     if (is.na(p)) {
+  #       warning("Unvalid method. efourier is used.")
+  #     } else {
+  #       method <- switch(p, efourier, rfourier, tfourier)
+  #     }
+  #   }
+  
+  
+  
   # here we define the maximum nb.h, if missing
   if (missing(nb.h)){
     nb.h <- floor(min(sapply(Opn$coo, nrow))/2)
-    }
+  }
   # we prepare the result matrix
   res <- matrix(nrow = length(id), ncol = (nb.h - drop))
   x <- (drop + 1):nb.h
@@ -624,7 +625,7 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Op
   # we calculte cumsum and percentages
   res <- t(apply(res, 1, function(x) cumsum(x) / sum(x))) * 100
   # we ggplot
-  h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmectics
+  h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmetics
   xx <- melt(res)
   colnames(xx) <- c("shp", "harm", "hp")
   gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
@@ -633,12 +634,12 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Op
   if (plot) print(gg)
   # we calculate quantiles and add nice rowcolnames
   # also the median (independently of probs [0.5, etc]) since
-  # thres.h may change
+  # thresh may change
   med.res <- apply(res, 2, median)
-  minh <- numeric(length(thres.h))
-  names(minh) <- paste0(thres.h, "%")
-  for (i in seq(along=thres.h)){
-    wi <- which(med.res > thres.h[i])
+  minh <- numeric(length(thresh))
+  names(minh) <- paste0(thresh, "%")
+  for (i in seq(along=thresh)){
+    wi <- which(med.res > thresh[i])
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
   minh <- minh+drop
   # talk to me
@@ -648,5 +649,86 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Op
   # we return the full matrix, the ggplot and the thresholds
   invisible(list(gg=gg, q=res, minh=minh))
 }
-# nquant npow
+
+# 4. calibrate_r2 ----------------
+#' Quantitative calibration, through r2, for Opn objects
+#'
+#' Estimates the r2 to calibrate the degree for \code{npoly} and \code{opoly} methods.
+#' Also returns a plot
+#' 
+#' @param x and Opn object
+#' @param method one of 'npoly' or 'opoly'
+#' @param id the ids of shapes on which to calculate r2 (all by default)
+#' @param degree.range on which to calculate r2
+#' @param thresh the threshold to return diagnostic
+#' @param plot logical whether to print the plot
+#' @param verbose logical whether to print messages
+#' @param ... useless here
+#' @details May be long, so you can estimate it on a sample.
+#' @seealso \link{calibrate_harmonicpower}
+#' @examples 
+#' \dontrun{
+#' data(olea)
+#' calibrate_r2(olea, "opoly", degree.range=1:12, thresh=c(0.9, 0.99)
+#' 
+#' }
+calibrate_r2 <- function(x, ...){
+  UseMethod("calibrate_r2")
+}
+
+
+#' @describeIn calibrate_harmonicpower Method for Opn objects
+#' @export
+calibrate_r2.Opn <- function(x, method = "opoly", id = 1:length(Opn),
+                             degree.range=1:8, thresh = c(0.90, 0.95, 0.99, 0.999),
+                             plot=TRUE, verbose=TRUE, ...) {
+  Opn <- x
+  # we swith among methods, with a messsage
+  if (missing(method)) {
+    if (verbose) cat(" * Method not provided. opoly is used.\n")
+    method <- opoly
+  } else {
+    p <- pmatch(tolower(method), c("npoly", "opoly"))
+    if (is.na(p)) {
+      warning("Unvalid method. opoly is used.\n")
+    } else {
+      method <- switch(p, npoly, opoly)
+    }
+  }
+  
+  # we prepare the result matrix
+  res <- matrix(nrow = length(id), ncol = length(degree.range))
+  for (i in id) {
+    for (j in degree.range) {
+      res[i, j] <- method(Opn$coo[[i]], degree = j)$r2
+    }
+  }
+  rownames(res) <- names(Opn)
+  colnames(res) <- paste0("degree", degree.range)
+
+  # we ggplot
+  h_display <- which(apply(res, 2, median) >= 0.99)[1] + 2 # cosmectics
+  xx <- melt(res)
+  colnames(xx) <- c("shp", "degree", "r2")
+  gg <- ggplot(xx, aes_string(x="degree", y="r2")) + geom_boxplot() +
+    labs(x="Degree", y="r2") +
+    coord_cartesian(xlim=c(0.5, h_display+0.5))
+  if (plot) print(gg)
+  # we calculate quantiles and add nice rowcolnames
+  # also the median (independently of probs [0.5, etc]) since
+  # thresh may change
+  med.res <- apply(res, 2, median)
+  minh <- numeric(length(thresh))
+  names(minh) <- thresh
+  for (i in seq(along=thresh)){
+    wi <- which(med.res > thresh[i])
+    minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
+  mind <- minh
+  # talk to me
+  if (verbose){
+    #     cat("\n$minh:\n")
+    print(mind)}
+  # we return the full matrix, the ggplot and the thresholds
+  invisible(list(gg=gg, q=res, mind=mind))
+}
 
