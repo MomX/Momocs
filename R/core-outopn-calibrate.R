@@ -5,7 +5,6 @@
 #' Calculate and displays reconstructed shapes using a
 #' range of harmonic number. Compare them visually with the maximal fit.
 #'
-#' @aliases calibrate_reconstructions
 #' @param x the \code{Coo} object on which to calibrate_reconstructions
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')}
 #'  for \code{Out}, or from \code{c('opoly', 'npoly', 'dfourier')} for \code{Opn}
@@ -22,12 +21,11 @@
 #' 
 #' data(olea)
 #' calibrate_reconstructions(olea, "dfourier")
-#' @rdname calibrate_reconstructions
 #' @export
 calibrate_reconstructions <-
   function(x, ...) {UseMethod("calibrate_reconstructions")}
 
-#' @rdname calibrate_reconstructions
+#' @describeIn calibrate_reconstructions Method for Out objects
 #' @export
 calibrate_reconstructions.Out <-
   function(x,
@@ -104,7 +102,7 @@ calibrate_reconstructions.Out <-
     return(gg)
   }
 
-#' @rdname calibrate_reconstructions
+#' @describeIn calibrate_reconstructions Method for Opn objects
 #' @export
 calibrate_reconstructions.Opn <-
   function(x,
@@ -200,13 +198,14 @@ calibrate_reconstructions.Opn <-
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')} and
 #' \code{'dfourier'}.
 #' @param id the shape on which to perform calibrate_deviations
-#' @param harm.range vector of harmonics on which to perform calibrate_deviations.
+#' @param range vector of harmonics (or degree for opoly and npoly on Opn) on which to perform calibrate_deviations.
 #' If not provided, the harmonics corresponding to 0.9, 0.95 and 0.99% of harmonic power
 #' are used.
 #' @param norm.centsize logical whether to normalize deviation by the centroid size
 #' @param dist.method a method such as \link{edm_nearest} to calculate deviations
 #' @param dist.nbpts numeric the number of points to use for deviations calculations
 #' @param ... only used for the generic
+#' @details For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
 #' @return a ggplot object
 #' @keywords Out
 #' @examples
@@ -226,26 +225,24 @@ calibrate_reconstructions.Opn <-
 #'            title="Harmonic power") + theme_bw()
 #' gg + coord_polar()
 #' }
-#' @aliases calibrate_deviations
-#' @rdname calibrate_deviations
 #' @export
 calibrate_deviations <- function(Coo, ...) {
   UseMethod("calibrate_deviations")
 }
 
-#' @rdname calibrate_deviations
+#' @describeIn calibrate_deviations Method for Out objects
 #' @export
 calibrate_deviations.Out <-
   function(Coo, method = c("efourier", "rfourier", "tfourier"),
-           id = 1, harm.range,
+           id = 1, range,
            norm.centsize = TRUE,
            dist.method = edm_nearest, dist.nbpts = 120,
            ...) {
     # missing lineat.y
-    if (missing(harm.range)) {
+    if (missing(range)) {
       hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
                                     lineat.y = c(95, 99, 99.9))
-      harm.range <- unique(hr$minh)
+      range <- unique(hr$minh)
     }
     if (missing(method)) {
       cat(" * Method not provided. efourier is used.\n")
@@ -263,19 +260,19 @@ calibrate_deviations.Out <-
     # We define the highest possible nb.h along Coo@coo[id]
     min.nb.pts <- min(sapply(Coo$coo[id], nrow))
     nb.h.best <- floor(min.nb.pts/2) - 1
-    # we handle too ambitious harm.range
-    if (max(harm.range) > nb.h.best) {
-      harm.range <- floor(seq(4, nb.h.best, length = 6))
-      cat("  * 'harm.range' was too high and set to: ", harm.range,
+    # we handle too ambitious range
+    if (max(range) > nb.h.best) {
+      range <- floor(seq(4, nb.h.best, length = 6))
+      cat("  * 'range' was too high and set to: ", range,
           ".\n")
     }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
-    nr <- length(harm.range)
+    nr <- length(range)
     nc <- nb.pts
     nk <- length(id)
     res <- array(NA, dim = c(nr, nc, nk),
-                 dimnames = list(paste0("h", harm.range),
+                 dimnames = list(paste0("h", range),
                                  paste("pt", 1:nb.pts), names(Coo)[id]))
     # progressbar
     if (nk > 5) {
@@ -289,10 +286,10 @@ calibrate_deviations.Out <-
       coo <- Coo$coo[[id[ind]]] #Coo[id]?
       # below, the best possible fit
       coo_best <- method.i(method(coo, nb.h = nb.h.best), nb.pts = nb.pts)
-      for (i in seq(along = harm.range)) {
+      for (i in seq(along = range)) {
         # for each number of harmonics we calculate deviation with
         # the FUN=method
-        coo_i <- method.i(method(coo, nb.h = harm.range[i]), nb.pts = nb.pts)
+        coo_i <- method.i(method(coo, nb.h = range[i]), nb.pts = nb.pts)
         res[i, , ind] <- dist.method(coo_best, coo_i)
       }
       # we normalize by the centroid size and prepare the y.title
@@ -348,49 +345,72 @@ calibrate_deviations.Out <-
     invisible(list(gg=gg, res = res, m = m, d = d))
   }
 
-#' @rdname calibrate_deviations
+#' @describeIn calibrate_deviations Method for Opn objects
 #' @export
 calibrate_deviations.Opn<-
-  function(Coo, method = c("efourier", "rfourier", "tfourier"),
-           id = 1, harm.range,
+  function(Coo, method = c("npoly", "opoly", "dfourier"),
+           id = 1, range,
            norm.centsize = TRUE,
            dist.method = edm_nearest, dist.nbpts = 120,
            ...) {
     # missing lineat.y
-    if (missing(harm.range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
-                                    lineat.y = c(95, 99, 99.9))
-      harm.range <- unique(hr$minh)
+    if (missing(range)) {
+      #       hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
+      #                                     lineat.y = c(95, 99, 99.9))
+      #       range <- unique(hr$minh)
+      #       
+      cat(" * range missing and set to 1:8.\n")
+      range <- 1:8
     }
+    
+    
     if (missing(method)) {
       cat(" * Method not provided. dfourier is used.\n")
       method <- dfourier
       method.i <- dfourier_i
-    } else if (method != "dfourier"){
-      cat(" * Only available for dfourier. dfourier is used.\n")
-      method <- dfourier
-      method.i <- dfourier_i
+      p <- 3
     } else {
-      method <- dfourier
-      method.i <- dfourier_i
+      p <- pmatch(tolower(method), c("npoly", "opoly", "dfourier"))
+      if (is.na(p)) {
+        warning("Unvalid method. dfourier is used.\n")
+        method <- dfourier
+        method.i <- dfourier_i
+        p <- 3
+      } else {
+        method <- switch(p, npoly, opoly, dfourier)
+        method.i <- switch(p, npoly_i, opoly_i, dfourier_i)
+      }
     }
-    # We define the highest possible nb.h along Coo@coo[id]
-    min.nb.pts <- min(sapply(Coo$coo[id], nrow))
-    nb.h.best <- floor(min.nb.pts/2) - 1
-    # we handle too ambitious harm.range
-    if (max(harm.range) > nb.h.best) {
-      harm.range <- floor(seq(4, nb.h.best, length = 6))
-      cat("  * 'harm.range' was too high and set to: ", harm.range,
-          ".\n")
-    }
+    if (p==3){ # dfourier
+      # We define the highest possible nb.h along Coo@coo[id]
+      min.nb.pts <- min(sapply(Coo$coo[id], nrow))
+      nb.h.best <- floor(min.nb.pts/2) - 1
+      # we handle too ambitious range
+      if (max(range) > nb.h.best) {
+        range <- floor(seq(4, nb.h.best, length = 6))
+        cat("  * 'range' was too high and set to: ", range,
+            ".\n")
+      }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
-    nr <- length(harm.range)
+    } else { #poly methods
+      nb.pts <- min.nb.pts <- min(sapply(Coo$coo[id], function(x) nrow(unique(x))))
+      nb.h.best <- 12
+      cat(" * deviations calculated from a degree 12 polynom")
+    }
+    nr <- length(range)
     nc <- nb.pts
     nk <- length(id)
+    if (p==3){
+      
     res <- array(NA, dim = c(nr, nc, nk),
-                 dimnames = list(paste0("h", harm.range),
+                 dimnames = list(paste0("h", range),
                                  paste("pt", 1:nb.pts), names(Coo)[id]))
+    } else {
+      res <- array(NA, dim = c(nr, nc, nk),
+                   dimnames = list(paste0("d", range),
+                                   paste("pt", 1:nb.pts), names(Coo)[id]))
+    }
     # progressbar
     if (nk > 5) {
       pb <- txtProgressBar(1, nk)
@@ -402,11 +422,11 @@ calibrate_deviations.Opn<-
     for (ind in seq(along = id)) {
       coo <- Coo$coo[[id[ind]]] #Coo[id]?
       # below, the best possible fit
-      coo_best <- method.i(method(coo, nb.h = nb.h.best), nb.pts = nb.pts)
-      for (i in seq(along = harm.range)) {
+      coo_best <- method.i(method(coo, nb.h.best), nb.pts = nb.pts)
+      for (i in seq(along = range)) {
         # for each number of harmonics we calculate deviation with
         # the FUN=method
-        coo_i <- method.i(method(coo, nb.h = harm.range[i]), nb.pts = nb.pts)
+        coo_i <- method.i(method(coo, range[i]), nb.pts = nb.pts)
         res[i, , ind] <- dist.method(coo_best, coo_i)
       }
       # we normalize by the centroid size and prepare the y.title
@@ -429,6 +449,7 @@ calibrate_deviations.Opn<-
       xx <- cbind(xx, melt(d)$value)
       xx$Var2 <- as.numeric(xx$Var2)
       colnames(xx) <- c("harm", "pt", "med", "sd")
+      
       # hideous but avoid the aes_string problem fro ribbon
       xx$mmsd <- xx$med - xx$sd
       xx$mpsd <- xx$med + xx$sd
@@ -446,7 +467,11 @@ calibrate_deviations.Opn<-
       # we prepare a df
       xx <- melt(m)
       xx$Var2 <- as.numeric(xx$Var2)
+      # if (p==3){
       colnames(xx) <- c("harm", "pt", "med")
+#       } else {
+#         colnames(xx) <- c("deg", "pt", "med")
+#       }
       gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
         geom_line() +
         labs(x="Points along the open outline", y=y.title, col=NULL) +
@@ -516,9 +541,7 @@ calibrate_deviations.Opn<-
 #' # if you want to do efourier with 99% calibrate_harmonicpower in one step
 #' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
 #' @export
-calibrate_harmonicpower <- function(x, method = "efourier", id = 1:length(Out),
-                                    nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
-                                    plot=TRUE, verbose=TRUE, ...) {
+calibrate_harmonicpower <- function(x, ...) {
   UseMethod("calibrate_harmonicpower")
 }
 
@@ -672,12 +695,12 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Op
 #' calibrate_r2(olea, "opoly", degree.range=1:12, thresh=c(0.9, 0.99)
 #' 
 #' }
+#' @export
 calibrate_r2 <- function(x, ...){
   UseMethod("calibrate_r2")
 }
 
-
-#' @describeIn calibrate_harmonicpower Method for Opn objects
+#' @describeIn calibrate_r2 Method for Opn objects
 #' @export
 calibrate_r2.Opn <- function(x, method = "opoly", id = 1:length(Opn),
                              degree.range=1:8, thresh = c(0.90, 0.95, 0.99, 0.999),
@@ -705,7 +728,7 @@ calibrate_r2.Opn <- function(x, method = "opoly", id = 1:length(Opn),
   }
   rownames(res) <- names(Opn)
   colnames(res) <- paste0("degree", degree.range)
-
+  
   # we ggplot
   h_display <- which(apply(res, 2, median) >= 0.99)[1] + 2 # cosmectics
   xx <- melt(res)
