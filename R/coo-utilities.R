@@ -1385,7 +1385,6 @@ coo_centpos.Coo <- function(coo) {
 #' coo_centsize(bot)
 #' 
 #' mutate(bot, size=coo_centsize(bot))
-#' hist(cs, breaks=10)
 #' 
 #' 
 #' @export
