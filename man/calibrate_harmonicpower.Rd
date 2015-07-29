@@ -4,12 +4,9 @@
 \alias{calibrate_harmonicpower}
 \alias{calibrate_harmonicpower.Opn}
 \alias{calibrate_harmonicpower.Out}
-\alias{calibrate_r2.Opn}
 \title{Quantitative calibration, through harmonic power, for Out and Opn objects}
 \usage{
-calibrate_harmonicpower(x, method = "efourier", id = 1:length(Out), nb.h,
-  drop = 1, thresh = c(90, 95, 99, 99.9), plot = TRUE, verbose = TRUE,
-  ...)
+calibrate_harmonicpower(x, ...)
 
 \method{calibrate_harmonicpower}{Out}(x, method = "efourier",
   id = 1:length(Out), nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
@@ -18,13 +15,11 @@ calibrate_harmonicpower(x, method = "efourier", id = 1:length(Out), nb.h,
 \method{calibrate_harmonicpower}{Opn}(x, method = "dfourier",
   id = 1:length(Opn), nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
   plot = TRUE, verbose = TRUE, ...)
-
-\method{calibrate_r2}{Opn}(x, method = "opoly", id = 1:length(Opn),
-  degree.range = 1:8, thresh = c(0.9, 0.95, 0.99, 0.999), plot = TRUE,
-  verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{a \code{Coo} object on which to calibrate_harmonicpower}
+
+\item{...}{just for the generic}
 
 \item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')} for \code{Out}s and
 \code{dfourier} for \code{Out}s.}
@@ -41,8 +36,6 @@ calibrate_harmonicpower(x, method = "efourier", id = 1:length(Out), nb.h,
 \item{plot}{logical whether to plot the result or simply return the matrix}
 
 \item{verbose}{whether to print results}
-
-\item{...}{just for the generic}
 }
 \value{
 returns a list with component:
@@ -72,8 +65,6 @@ and as follows for radii variation and tangent angle:
 \section{Methods (by class)}{
 \itemize{
 \item \code{Out}: Method for Out objects
-
-\item \code{Opn}: Method for Opn objects
 
 \item \code{Opn}: Method for Opn objects
 }}

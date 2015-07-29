@@ -38,6 +38,12 @@ a ggplot object
 Calculate and displays reconstructed shapes using a
 range of harmonic number. Compare them visually with the maximal fit.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{Out}: Method for Out objects
+
+\item \code{Opn}: Method for Opn objects
+}}
 \examples{
 data(bot)
 calibrate_reconstructions(bot, "efourier")

@@ -2,9 +2,14 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_r2}
 \alias{calibrate_r2}
+\alias{calibrate_r2.Opn}
 \title{Quantitative calibration, through r2, for Opn objects}
 \usage{
 calibrate_r2(x, ...)
+
+\method{calibrate_r2}{Opn}(x, method = "opoly", id = 1:length(Opn),
+  degree.range = 1:8, thresh = c(0.9, 0.95, 0.99, 0.999), plot = TRUE,
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{and Opn object}
@@ -30,6 +35,10 @@ Also returns a plot
 \details{
 May be long, so you can estimate it on a sample.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{Opn}: Method for Opn objects
+}}
 \examples{
 \dontrun{
 data(olea)

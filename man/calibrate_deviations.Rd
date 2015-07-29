@@ -9,11 +9,11 @@
 calibrate_deviations(Coo, ...)
 
 \method{calibrate_deviations}{Out}(Coo, method = c("efourier", "rfourier",
-  "tfourier"), id = 1, harm.range, norm.centsize = TRUE,
+  "tfourier"), id = 1, range, norm.centsize = TRUE,
   dist.method = edm_nearest, dist.nbpts = 120, ...)
 
-\method{calibrate_deviations}{Opn}(Coo, method = c("efourier", "rfourier",
-  "tfourier"), id = 1, harm.range, norm.centsize = TRUE,
+\method{calibrate_deviations}{Opn}(Coo, method = c("npoly", "opoly",
+  "dfourier"), id = 1, range, norm.centsize = TRUE,
   dist.method = edm_nearest, dist.nbpts = 120, ...)
 }
 \arguments{
@@ -26,7 +26,7 @@ calibrate_deviations(Coo, ...)
 
 \item{id}{the shape on which to perform calibrate_deviations}
 
-\item{harm.range}{vector of harmonics on which to perform calibrate_deviations.
+\item{range}{vector of harmonics (or degree for opoly and npoly on Opn) on which to perform calibrate_deviations.
 If not provided, the harmonics corresponding to 0.9, 0.95 and 0.99% of harmonic power
 are used.}
 
@@ -43,6 +43,15 @@ a ggplot object
 Calculate deviations from original and reconstructed shapes using a
 range of harmonic number.
 }
+\details{
+For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{Out}: Method for Out objects
+
+\item \code{Opn}: Method for Opn objects
+}}
 \examples{
 data(bot)
 calibrate_deviations(bot)

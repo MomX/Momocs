@@ -177,7 +177,7 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     #nb.h <- ifelse(q >= 32, 32, q)
-    nb.h <- calibrate_harmonicpower(Out, thres.h = 99, verbose=FALSE, plot=FALSE)$minh
+    nb.h <- calibrate_harmonicpower(Out, thresh = 99, verbose=FALSE, plot=FALSE)$minh
     if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
   }
   if (nb.h > q) {

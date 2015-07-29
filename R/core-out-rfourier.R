@@ -110,7 +110,7 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
   if (missing(nb.h)) {
     # nb.h <- ifelse(q >= 32, 32, q)
     nb.h <- calibrate_harmonicpower(Out, method="rfourier",
-                                    thres.h = 99, verbose=FALSE, plot=FALSE)$minh
+                                    thresh = 99, verbose=FALSE, plot=FALSE)$minh
     if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
   }
   if (nb.h > q) {
