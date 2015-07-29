@@ -17,7 +17,7 @@ __Get the last version:__
 devtools::install_github("vbonhomme/Momocs", build_vignettes=TRUE)
 library(Momocs)
 ````
-* Please note that the current [CRAN](http://cran.r-project.org/web/packages/Momocs/index.html) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) and is no longer supported.
+* Please note that the current [CRAN](http://cran.r-project.org/package=Momocs) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) and is no longer supported.
 * Since then, Momocs has been entirely rewritten and considerably enlarged.
 * Also, some tutorials are on their way
 
