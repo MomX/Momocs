@@ -7,3 +7,4 @@ NEWS.md
 ^\.Rproj\.user$
 ^\.travis\.yml$
 update.R
+README.md
