@@ -108,3 +108,16 @@ update_Momocs <- function() {
 # appendLF = TRUE) }
 
 
+#' Browse Momocs online doc
+#' 
+#' Launch a browser to an online version of the manual
+#' @param topic the function name to access. If not specified the homepage of
+#' the online manual is accessed.
+#' @export
+Momocs_help <- function(topic=NULL){
+  url <- "http://vbonhomme.github.io/Momocs/"
+  if (!is.null(topic)) url <- paste0(url, topic, ".html")
+  browseURL(url)
+}
+
+
