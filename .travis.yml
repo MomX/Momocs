@@ -7,7 +7,19 @@ apt_packages:
  
 bioc_required: true
 
-
+r_packages:
+  - ape
+  - plyr
+  - dplyr
+  - sp
+  - reshape2
+  - ggplot2
+  - geometry
+  - graphics
+  - jpeg
+  - MASS
+  - utils
+  - knitr
 
 bioc_packages:
  - Biostrings
@@ -17,5 +29,7 @@ bioc_packages:
 r_github_packages:
  - GuangchuangYu/ggtree
  
-
-
+notifications:
+  email:
+    on_success: change
+    on_failure: change
