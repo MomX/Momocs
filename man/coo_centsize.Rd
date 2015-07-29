@@ -25,7 +25,6 @@ coo_centsize(bot[1])
 coo_centsize(bot)
 
 mutate(bot, size=coo_centsize(bot))
-hist(cs, breaks=10)
 }
 \keyword{ShapeDescriptors}
 
