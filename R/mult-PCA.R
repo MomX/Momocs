@@ -98,6 +98,20 @@ PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
 
 #' @rdname PCA
 #' @export
+PCA.TraCoe <- function(x, scale. = TRUE, center = TRUE, fac) {
+  TraCoe <- x
+  # LdkCoe$coe <- a2m(l2a(Coe$coo))
+  PCA <- prcomp(TraCoe$coe, scale. = scale., center = center)
+  PCA$fac <- TraCoe$fac
+  PCA$mshape <- NULL
+  PCA$method <- NULL
+  
+  class(PCA) <- c("PCA", class(PCA))
+  return(PCA)
+}
+
+#' @rdname PCA
+#' @export
 PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=data.frame()) {
   PCA <- prcomp(x, scale. = scale., center = center)
   if (!is.null(fac)) fac <- as.data.frame(fac)

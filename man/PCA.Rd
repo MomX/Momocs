@@ -5,6 +5,7 @@
 \alias{PCA.LdkCoe}
 \alias{PCA.OpnCoe}
 \alias{PCA.OutCoe}
+\alias{PCA.TraCoe}
 \alias{PCA.default}
 \alias{as.PCA}
 \alias{as.PCA.default}
@@ -17,6 +18,8 @@ PCA(x, scale., center, fac)
 \method{PCA}{OpnCoe}(x, scale. = FALSE, center = TRUE, fac)
 
 \method{PCA}{LdkCoe}(x, scale. = FALSE, center = TRUE, fac)
+
+\method{PCA}{TraCoe}(x, scale. = TRUE, center = TRUE, fac)
 
 \method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = data.frame())
 
