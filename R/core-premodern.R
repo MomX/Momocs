@@ -1,3 +1,39 @@
+#' Calculates shape descriptors from Coo objects
+#' 
+#' Extracts descriptors from a list of functions and returns a TraCoe object
+#' @param Coo object on which to calculate descriptors
+#' @param ... functions that returns a scalar (a single value), see examples
+#' @details any function, including custom ones, that return a scalar can be passed.
+#' To access the list of 'coo_' functions - not all are suitable, see \code{apropos("coo_")}
+#' @examples 
+#' data(bot)
+#' desc <- shape_descriptors(bot, coo_circularity, coo_rectangularity, coo_area)
+#' desc
+#' desc$coe
+#' # a custom function the product of length*width
+#' pseudo_area <- function(x) prod(coo_lw(x))
+#' shape_descriptors(bot, pseudo_area)
+#' @export
+shape_descriptors <- function(Coo, ...){
+  desc <- eval(substitute(alist(...)))
+  coos <- Coo$coo
+  nr <- length(coos)
+  nc <- length(desc)
+  res <- matrix(NA, nrow=nr, ncol=nc,
+                dimnames=list(names(coos),
+                              gsub("coo.", "", as.character(desc))))
+  for (i in 1:nc){
+    res[, i] <- sapply(coos, desc[[i]])
+  }
+  if (ncol(Coo$fac)!=0){
+    fac <- Coo$fac
+  } else {
+    fac <- data.frame()
+  }
+  TraCoe <- TraCoe(coe=res, fac=fac)
+  return(TraCoe)}
+
+
 #' Truss measurement
 #' 
 #' A method to calculate on shapes or on Coo truss measurements,
