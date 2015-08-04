@@ -33,3 +33,9 @@ notifications:
   email:
     on_success: change
     on_failure: change
+
+install:
+  - ./travis-tool.sh github_package jimhester/covr
+ 
+after_success:
+  - Rscript -e 'covr::coveralls()'
