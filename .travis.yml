@@ -7,7 +7,7 @@ apt_packages:
  
 bioc_required: true
 
-r_packages:
+r_binary_packages:
   - ape
   - plyr
   - dplyr
