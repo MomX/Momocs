@@ -49,6 +49,7 @@ Opn.default <- function(x, fac = data.frame(), ldk = list()) {
 
 #' @export
 Opn.list <- function(x, fac = data.frame(), ldk = list()) {
+  x <- lapply(x, as.matrix)
   Opn <- structure(list(coo = x, fac = fac, ldk = ldk), class=c("Opn", "Coo"))
   if (!is.null(Opn$fac))
     Opn$fac <- as.data.frame(Opn$fac, stringsAsFactors = FALSE)
