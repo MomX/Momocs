@@ -2,9 +2,12 @@
 % Please edit documentation in R/gr-TPS.R
 \name{tps2d}
 \alias{tps2d}
+\alias{tps_apply}
 \title{Thin Plate Splines for 2D data}
 \usage{
 tps2d(grid0, fr, to)
+
+tps_apply(from, to, new)
 }
 \arguments{
 \item{grid0}{a matrix of coordinates on which to calculate deformations}
@@ -18,8 +21,10 @@ a matrix of \code{(x; y)} coordinates with TPS-interpolated
 deformations
 }
 \description{
-\code{tps2d} is the core function for Thin Plate Splines. It is used
-internally but might be useful elsewhere.
+\code{tps2d} is the core function for Thin Plate Splines. It is used internally for
+all TPS graphical functions.\code{tps_apply} is the very same function but with
+arguments properly named (I maintain tps2d as it is for historical reasons) when
+we want a apply a trasnformation grid.
 }
 \seealso{
 \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use

@@ -3,8 +3,10 @@
 # -----------------------------------------------
 #' Thin Plate Splines for 2D data
 #' 
-#' \code{tps2d} is the core function for Thin Plate Splines. It is used
-#' internally but might be useful elsewhere.
+#' \code{tps2d} is the core function for Thin Plate Splines. It is used internally for
+#' all TPS graphical functions.\code{tps_apply} is the very same function but with
+#' arguments properly named (I maintain tps2d as it is for historical reasons) when
+#' we want a apply a trasnformation grid.
 #' 
 #' @param grid0 a matrix of coordinates on which to calculate deformations
 #' @param fr the reference \eqn{(x; y)} coordinates
@@ -14,6 +16,7 @@
 #' @seealso \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
 #' \code{tps2d}.
 #' @keywords ThinPlateSplines
+#' @rdname tps2d
 #' @export
 tps2d <- function(grid0, fr, to) {
   if (is_closed(fr)) 
@@ -51,6 +54,12 @@ tps2d <- function(grid0, fr, to) {
   }
   grid1 <- cbind(fx(fr, grid0, coefx), fx(fr, grid0, coefy))
   return(grid1)
+}
+
+#' @rdname tps2d
+#' @export
+tps_apply <- function(from, to, new){
+  tps2d(from, to, new)
 }
 
 #' Vanilla Thin Plate Splines
