@@ -29,7 +29,7 @@ combine(...)
 }
 \description{
 Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
-it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
+it combines row-wise (ie, merges shapes as a \code{c} would do) ; but on Coe it combines column-wise
 (merges coefficients). In the latter case, Coe must have the same number of shapes (not
 necessarily the same number of coefficients).
 Also the $fac of the first Coe is retrieved.
