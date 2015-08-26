@@ -588,7 +588,7 @@ chop.Coe <- function(.data, fac){
 #' Combine Coo/Coe objects
 #'
 #' Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
-#' it combines row-wise (ie, merges shapes) ; but on Coe it combines column-wise
+#' it combines row-wise (ie, merges shapes as a \code{c} would do) ; but on Coe it combines column-wise
 #' (merges coefficients). In the latter case, Coe must have the same number of shapes (not
 #' necessarily the same number of coefficients).
 #' Also the $fac of the first Coe is retrieved.
@@ -632,9 +632,9 @@ combine.list <- function(...){
 #' @export
 combine.Out <- function(...) {
   args <- list(...)
-  # we check
-  if (length(unique(sapply(args, length))) != 1)
-    stop("* objects to combine must have the same number of items")
+#   # we check
+#   if (length(unique(sapply(args, length))) != 1)
+#     stop("* objects to combine must have the same number of items")
   Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
   #Out$fac <- .refactor(Out$fac)
