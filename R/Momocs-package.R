@@ -78,7 +78,8 @@ NULL
 # http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
                   "x_c", "x_d", "y_c", "y_d", ".id",
-                  "node", "label", "angle", "hjust", "Freq"))
+                  "node", "label", "angle", "hjust", "Freq",
+                  "locus", "name"))
 
 #' Install and load the last version of Momocs
 #'
