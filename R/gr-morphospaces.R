@@ -93,13 +93,15 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     if (method[i] == "opoly") {
       shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = TRUE,
-                                 baseline1 = PCA$baseline1, baseline2 = PCA$baseline2)
+                                 baseline1 = PCA$baseline1[1:2 + (i-1)*2],
+                                 baseline2 = PCA$baseline2[1:2 + (i-1)*2])
       plot.method <- "lines"}
     # npoly
     if (method[i] == "npoly") {
       shp <- PCA2shp_polynomials(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
                                  amp.shp = amp.shp, pts.shp = pts.shp, ortho = FALSE,
-                                 baseline1 = PCA$baseline1, baseline2 = PCA$baseline2)
+                                 baseline1 = PCA$baseline1[1:2 + (i-1)*2],
+                                 baseline2 = PCA$baseline2[1:2 + (i-1)*2])
       plot.method <- "lines"}
     ### configuration of landmarks
     if (method[i] == "procrustes") {
@@ -118,7 +120,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
       shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
     } else {
       SHP[[i]] <- shp
-    } 
+    }
     # otherwise, we plot the morphospace
     if (plot) {
     if (plot.method == "poly") {
@@ -202,9 +204,9 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
 #' @param xy todo
 #' @param pos.shp how shapes should be positionned: \code{range} of xy,
 #' \code{full} extent of the plane, \code{circle} as a rosewind,
-#' on \code{xy} values provided, \code{range_axes} on the range of xy 
+#' on \code{xy} values provided, \code{range_axes} on the range of xy
 #' but on the axes, \code{full_axes} same thing but on (0.85) range of the axes.
-#' You can also directly pass a matrix (or a data.frame) 
+#' You can also directly pass a matrix (or a data.frame)
 #' with columns named \code{("x", "y")}.
 #' @param nb.shp the total number of shapes
 #' @param nr.shp the number of rows to position shapes
@@ -252,7 +254,7 @@ pos.shapes <- function(xy, pos.shp = c("range", "full", "circle", "xy",
                     min(xy[, 1]), 0,
                     max(xy[, 1]), 0,
                     0, min(xy[, 2]),
-                    0, max(xy[, 2])), 
+                    0, max(xy[, 2])),
                   byrow=TRUE, ncol=2)
     colnames(pos) <- c("x", "y")  # pure cosmetics
     return(pos)
@@ -263,7 +265,7 @@ pos.shapes <- function(xy, pos.shp = c("range", "full", "circle", "xy",
                     w[1], 0,
                     w[2], 0,
                     0, w[3],
-                    0, w[4]), 
+                    0, w[4]),
                   byrow=TRUE, ncol=2)
     colnames(pos) <- c("x", "y")  # pure cosmetics
     return(pos)
