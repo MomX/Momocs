@@ -65,7 +65,7 @@ or a data.frame for \link{pos.shapes}}
 
 \item{nc.shp}{(pos.shp="full" or "range) the number of shapes per column}
 
-\item{pts.shp}{the number of points fro drawing shapes}
+\item{pts.shp}{the number of points for drawing shapes}
 
 \item{border.shp}{the border color of the shapes}
 

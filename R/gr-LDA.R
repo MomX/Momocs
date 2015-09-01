@@ -25,7 +25,7 @@
 #' @param nb.shp (pos.shp="circle") the number of shapes on the compass
 #' @param nc.shp (pos.shp="full" or "range) the number of shapes per column
 #' @param nr.shp (pos.shp="full" or "range) the number of shapes per row
-#' @param pts.shp the number of points fro drawing shapes
+#' @param pts.shp the number of points for drawing shapes
 #' @param border.shp the border color of the shapes
 #' @param lwd.shp the line width for these shapes
 #' @param col.shp the color of the shapes
@@ -241,7 +241,7 @@ plot.LDA <- function(x, xax=1, yax=2,
 plot_CV <- function(x, ...){UseMethod("plot_CV")}
 #' @rdname plot_CV
 #' @export
-plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
+plot_CV.default <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, ...){
   tab <- x
   df <- as.data.frame(tab)
   #colnames(df) <- c("actual", "classified", "count")
@@ -264,7 +264,7 @@ plot_CV.default <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
   return(gg)}
 #' @rdname plot_CV
 #' @export
-plot_CV.LDA <- function(x, freq=TRUE, rm0 = FALSE, cex=5, round=2, ...){
+plot_CV.LDA <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, ...){
   plot_CV(x$CV.tab, freq=freq, rm0=rm0, cex=cex, round=2, ...)
 }
 
