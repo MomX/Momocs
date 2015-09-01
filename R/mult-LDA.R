@@ -73,7 +73,7 @@ LDA.default <- function(x, fac, retain, ...) {
   # class error
   tab <- CV.tab
   ce <- numeric(nrow(tab))
-  for (i in 1:nrow(tab)) ce[i] <- sum(tab[i, -i])/sum(tab[i, ])
+  for (i in 1:nrow(tab)) ce[i] <- 1-(sum(tab[i, -i])/sum(tab[i, ]))
   names(ce) <- rownames(tab)
 
   # we build the list to be returned
@@ -85,8 +85,15 @@ LDA.default <- function(x, fac, retain, ...) {
 }
 
 #' @export
+LDA.OutCoe <- function(x, fac, retain, ...) {
+  #stop(" * LDA on Coe is deprecated. Try on a PCA object.")
+  LDA(x$coe, x$fac[, fac])
+}
+
+#' @export
 LDA.Coe <- function(x, fac, retain, ...) {
-  stop(" * LDA on Coe is deprecated. Try on a PCA object.")
+  stop(" * LDA on other Coe than OutCoe is deprecated. Try on a PCA object.")
+  # LDA(x$coe, x$fac[, fac])
 }
 
 #' @rdname LDA
@@ -264,7 +271,6 @@ classify.Coe <- function(x, fac, ref, unk){
 
 # reLDA -----------
 
-
 #' "Redo" a LDA on new data
 #'
 #' Basically a wrapper around \link{predict.lda} from the package MASS. Uses a LDA model
@@ -323,8 +329,8 @@ reLDA.default <- function(LDA, newdata){
 #' @rdname reLDA
 #' @export
 reLDA.LDA <- function(LDA, newdata){
-  if (missing(newdata) | !any(class(newdata) == "PCA"))
-    stop(" * a PCA object must be provided")
+#   if (missing(newdata) | !any(class(newdata) == "PCA"))
+#     stop(" * a PCA object must be provided")
   mod <- LDA$mod
   nc <- ncol(LDA$x)
   reLDA <- predict(mod, newdata$x[, 1:nc])
