@@ -13,8 +13,8 @@ dissolve(x, retain)
 (see x$method) eg after a chop}
 }
 \description{
-After a combine for instance. But not that the $fac slot may be wrong since
-combine, well combines, this $fac
+After a combine for instance. But note that the $fac slot may be wrong since
+combine...well combines... this $fac
 }
 \examples{
 data(bot)
