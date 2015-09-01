@@ -921,14 +921,41 @@ coo_sheary <- function(coo, k){
 #' @rdname coo_flip
 #' @export
 coo_flipx <- function(coo){
+  UseMethod("coo_flipx")
+}
+#' @rdname coo_flip
+#' @export
+coo_flipx.default <- function(coo){
   m <- matrix(c(1, 0, 0, -1), nrow = 2)
   return(coo %*% m)
 }
 #' @rdname coo_flip
 #' @export
+coo_flipx.Coo <- function(coo){
+  if (length(coo$ldk) != 0)
+    cat(" * note that $ldk has not been changed\n")
+  coo$coo <- lapply(coo$coo, coo_flipx)
+  coo
+}
+
+#' @rdname coo_flip
+#' @export
 coo_flipy <- function(coo){
+  UseMethod("coo_flipy")
+}
+#' @rdname coo_flip
+#' @export
+coo_flipy.default <- function(coo){
   m <- matrix(c(-1, 0, 0, 1), nrow = 2)
   return(coo %*% m)
+}
+#' @rdname coo_flip
+#' @export
+coo_flipy.Coo <- function(coo){
+  if (length(coo$ldk) != 0)
+    cat(" * note that $ldk has not been changed\n")
+  coo$coo <- lapply(coo$coo, coo_flipy)
+  coo
 }
 
 #' Calculate abscissa and ordinate on a shape
@@ -1383,10 +1410,10 @@ coo_centpos.Coo <- function(coo) {
 #' data(bot)
 #' coo_centsize(bot[1])
 #' coo_centsize(bot)
-#' 
+#'
 #' mutate(bot, size=coo_centsize(bot))
-#' 
-#' 
+#'
+#'
 #' @export
 coo_centsize <- function(coo){
   UseMethod("coo_centsize")
