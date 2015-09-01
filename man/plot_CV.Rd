@@ -8,10 +8,10 @@
 \usage{
 plot_CV(x, ...)
 
-\method{plot_CV}{default}(x, freq = TRUE, rm0 = FALSE, cex = 5,
+\method{plot_CV}{default}(x, freq = TRUE, rm0 = TRUE, cex = 5,
   round = 2, ...)
 
-\method{plot_CV}{LDA}(x, freq = TRUE, rm0 = FALSE, cex = 5, round = 2,
+\method{plot_CV}{LDA}(x, freq = TRUE, rm0 = TRUE, cex = 5, round = 2,
   ...)
 }
 \arguments{
