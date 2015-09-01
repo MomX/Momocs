@@ -217,8 +217,6 @@ transmute.Coe <- transmute.Coo
 #' @export
 transmute.PCA <- transmute.Coo
 
-#######
-
 # filter -------------------------------
 #' Filter (ala dplyr) rows with matching conditions, using the $fac slot  on Momocs classes
 #'
@@ -685,7 +683,7 @@ combine.OutCoe <- function(...) {
     OutCoe$baseline1 <- args[[opn.i]]$baseline1
     OutCoe$baseline2 <- args[[opn.i]]$baseline2
   }
-  cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
+  cutS <- do.call(c,  lapply(args, function(x) x$cuts))
   OutCoe$cuts <- cutS
   names(OutCoe$method) <- names(args)
   return(OutCoe)
@@ -708,7 +706,6 @@ combine.OpnCoe <- function(...) {
   OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS,
                    baseline1=baseline1S, baseline2=baseline2S,
                    mod=modS, r2=r2S)
-  cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   OpnCoe$cuts <- cutS
   return(OpnCoe)
 }
@@ -716,8 +713,8 @@ combine.OpnCoe <- function(...) {
 # dissolve --------------------
 #' Uncombine Coe objects
 #'
-#' After a combine for instance. But not that the $fac slot may be wrong since
-#' combine, well combines, this $fac
+#' After a combine for instance. But note that the $fac slot may be wrong since
+#' combine...well combines... this $fac
 #'
 #' @param x a Coe object
 #' @param retain the partition id to retain. Or their name if the partitions are named
