@@ -6,9 +6,9 @@
 #' A wrapper for pairwise \link{MANOVA}s on \link{Coe} objects. Calculates a MANOVA for every
 #' pairwise combination of the factor provided.
 #' @param x a \link{PCA} object
-#' @param fac a name (or its id) of a grouping factor in \code{$fac} or a factor
+#' @param fac a name (or its id) of a grouping factor in \code{$fac} or a factor or a formula.
 #' @param verbose to feed \link{MANOVA}
-#' @param retain the number of PC axis to retain (1:retain) or the proportion of variance to capture (0.99 par default). 
+#' @param retain the number of PC axis to retain (1:retain) or the proportion of variance to capture (0.99 par default).
 #' @param ... more arguments to feed \link{MANOVA}
 #' @note Needs a review and should be considered as experimental.
 #' If the fac passed has only two levels, there is only pair and it is
@@ -54,12 +54,23 @@ MANOVA_PW.PCA <- function(x,
                           ...) {
   # preliminaries
   PCA <- x
-  
+
   fac0 <- fac
   if (missing(fac))
     stop("'fac' must be provided")
+
+  if (class(fac) == "formula") {
+    #f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
+    #fac <- interaction(f0)
+    fac <- x$fac[, attr(terms(fac), "term.labels")]
+    if (is.data.frame(fac))
+      fac <- factor(apply(fac, 1, paste, collapse="_"))
+  }
+
   if (!is.factor(fac)) {
     fac <- factor(PCA$fac[, fac])
+  } else {
+    fac <- droplevels.factor(fac)
   }
 
   # we grab the PCs to capture retain% of the variance
@@ -67,17 +78,17 @@ MANOVA_PW.PCA <- function(x,
     vars <- PCA$sdev^2
     retain <- min(which((cumsum(vars)/sum(vars))>0.99))
   }
-  
+
   # we check all factors to avoid full rank
   tab <- table(fac)
   if (min(tab) < retain ) {
     retain <- min(tab)
     cat(" * '", names(which.min(tab)), "' has ", min(tab), " rows, and 'retain' is set accordingly.\n", sep="")}
-  
+
   cat(" * PC axes 1 to", retain, "were retained\n")
   retain <- 1:retain
-  x <- PCA$x[, retain]  
-  
+  x <- PCA$x[, retain]
+
   # we get all combinations, and prepare the loop
   pws <- t(combn(levels(fac), 2))
   n <- nrow(pws)
@@ -87,8 +98,8 @@ MANOVA_PW.PCA <- function(x,
   manovas <- list()
   # we loop and do all the MANOVAs
   for (i in 1:nrow(pws)) {
-    x.i   <-   x[fac == pws[i, ], ]
-    fac.i <- factor(fac[fac == pws[i, ]])
+    x.i   <-   x[fac %in% pws[i, ], ]
+    fac.i <- factor(fac[fac %in% pws[i, ]])
     if (nlevels(fac.i)>1){
       m <- summary(manova(x.i ~ fac.i))
       manovas[[i]] <- m

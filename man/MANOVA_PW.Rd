@@ -14,7 +14,7 @@ MANOVA_PW(x, ...)
 
 \item{...}{more arguments to feed \link{MANOVA}}
 
-\item{fac}{a name (or its id) of a grouping factor in \code{$fac} or a factor}
+\item{fac}{a name (or its id) of a grouping factor in \code{$fac} or a factor or a formula.}
 
 \item{verbose}{to feed \link{MANOVA}}
 
