@@ -630,9 +630,9 @@ combine.list <- function(...){
 #' @export
 combine.Out <- function(...) {
   args <- list(...)
-#   # we check
-#   if (length(unique(sapply(args, length))) != 1)
-#     stop("* objects to combine must have the same number of items")
+  #   # we check
+  #   if (length(unique(sapply(args, length))) != 1)
+  #     stop("* objects to combine must have the same number of items")
   Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
   #Out$fac <- .refactor(Out$fac)
@@ -683,7 +683,11 @@ combine.OutCoe <- function(...) {
     OutCoe$baseline1 <- args[[opn.i]]$baseline1
     OutCoe$baseline2 <- args[[opn.i]]$baseline2
   }
-  cutS <- do.call(c,  lapply(args, function(x) x$cuts))
+  if (is.null(args[1]$cuts)) {
+    cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
+  } else {
+    cutS <- do.call(c,  lapply(args, function(x) x$cuts))
+  }
   OutCoe$cuts <- cutS
   names(OutCoe$method) <- names(args)
   return(OutCoe)
@@ -703,6 +707,13 @@ combine.OpnCoe <- function(...) {
   baseline2S <- do.call(c, lapply(args, function(x) x$baseline2))
   r2S <- do.call(c, lapply(args, function(x) x$r2))
   modS <- do.call(c, lapply(args, function(x) x$mod))
+  if (is.null(args[[1]]$cuts)) {
+    cutS <- do.call(c, lapply(args, function(x) ncol(x$coe)))
+  } else {
+    cutS <- do.call(c, lapply(args, function(x) x$cuts))
+  }
+
+
   OpnCoe <- OpnCoe(coe = coeS, fac = facS, method = methodS,
                    baseline1=baseline1S, baseline2=baseline2S,
                    mod=modS, r2=r2S)

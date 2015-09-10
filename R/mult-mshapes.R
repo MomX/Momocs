@@ -124,7 +124,8 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
 #' @export
 mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     OpnCoe <- x
-        	p <- pmatch(tolower(OpnCoe$method), c("opoly", "npoly", "dfourier"))
+    #todo: check if method is all identical
+        	p <- pmatch(tolower(OpnCoe$method[1]), c("opoly", "npoly", "dfourier"))
     	if (is.na(p)) {
       		warning(" * Unvalid method. efourier is used.\n")
     	} else {

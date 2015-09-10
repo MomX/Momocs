@@ -75,7 +75,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
   p <- dim(A)[1]
   k <- dim(A)[2]
   n <- dim(A)[3]
-  if (p <= 2) 
+  if (p <= 2)
     stop(" * fgProcrustes makes sense with at least 3 points")
   # we prepare an array to save results
   temp2 <- temp1 <- array(NA, dim = c(p, k, n))
@@ -167,7 +167,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
     cat(" * Cannot apply fgProcrustes on less than three landmarks. coo_bookstein is returned. \n")
     return(coo_bookstein(Coo))
   }
-  
+
   tar <- fgProcrustes.default(ref, tol = tol, verbose = verbose)$rotated
   # would benefit to be handled by coo_baseline ?
   for (i in 1:length(Coo2)) {
@@ -214,6 +214,7 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = TRUE, coo=NULL) {
   Coo2$method <- "fgProcrustes"
   names(Coo2$coo) <- names(Coo$coo)
   class(Coo2) <- c("LdkCoe", "Coe", class(Coo2))
+  Coo2$cuts <- ncol(Coo2$coe)
   return(Coo2)
 }
 

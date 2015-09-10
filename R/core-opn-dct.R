@@ -120,6 +120,7 @@ dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
                 method = "dfourier",
                 baseline1 = Opn$baseline1,
                 baseline2 = Opn$baseline2)
+  res$cuts <- ncol(res$coe)
   return(res)
 }
 

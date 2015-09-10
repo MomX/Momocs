@@ -1,10 +1,10 @@
 ##### Core function for tangent angle Fourier analyses
 
 #' Tangent angle Fourier transform
-#' 
+#'
 #' \code{tfourier} computes tangent angle Fourier analysis from a matrix or a
 #' list of coordinates.
-#' 
+#'
 #' Given a closed outline which the outline has been scaled to \eqn{2\pi},
 #' \eqn{\phi(t)} can be expressed as follows: \eqn{ \phi(t) = \theta(t) -
 #' \theta(0) - t } where \eqn{t} is the distance along the outline,
@@ -12,11 +12,11 @@
 #' \eqn{\theta(0)} the angle of the tangent vector taken for the first point.
 #' It can be removed for normalizing the coefficients obtained. Two
 #' coefficients per harmonics can be estimated as follow:
-#' 
+#'
 #' \eqn{ a_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\cos n \theta_i } \eqn{
 #' b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \eqn{
 #' a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
-#' 
+#'
 #' @param x A list or matrix of coordinates or an \code{Out}
 #' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -37,13 +37,13 @@
 #' \item \code{x1} The x-coordinate of the first point
 #' \item \code{y1} The y-coordinate of the first point.
 #' }
-#' @seealso \link{tfourier} for analysis on \link{Out} objects. 
+#' @seealso \link{tfourier} for analysis on \link{Out} objects.
 #' \link{efourier}, \link{rfourier} for the other members of the
 #' Fourier's family. \link{tfourier_shape} to play around with this approach.
 #' @note Directly borrowed for Claude (2008), and called \code{fourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
-#' 
+#'
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
 #' @keywords tfourier
@@ -64,7 +64,7 @@ tFourier <- tfourier
 #' @rdname tfourier
 #' @export
 tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
-  coo <- x  
+  coo <- x
   if (missing(nb.h)) {
         nb.h <- 12
         cat(" * 'nb.h' not provided and set to", nb.h, "\n")
@@ -78,14 +78,14 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     if (nb.h * 2 > nrow(coo)) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", 
+            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ",
                 nb.h)
         }
     }
     if (nb.h == -1) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points.\n", 
+            cat(" * 'nb.h' must be lower than half the number of points.\n",
                 "* It has been set to", nb.h, "harmonics.\n")
         }
     }
@@ -101,7 +101,7 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     tangvect <- coo - rbind(coo[p, ], coo[-p, ])
     perim <- sum(sqrt(apply((tangvect)^2, 1, sum)))
     v0 <- coo[1, ] - coo[p, ]
-    tet1 <- Arg(complex(real = tangvect[, 1], imaginary = tangvect[, 
+    tet1 <- Arg(complex(real = tangvect[, 1], imaginary = tangvect[,
         2]))
     tet0 <- tet1[1]
     t1 <- seq(0, 2 * pi, length = (p + 1))[1:p]
@@ -111,7 +111,7 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
         an[i] <- (2/p) * sum(phi * cos(i * t1))
         bn[i] <- (2/p) * sum(phi * sin(i * t1))
     }
-    list(ao = ao, an = an, bn = bn, phi = phi, t = t1, perimeter = perim, 
+    list(ao = ao, an = an, bn = bn, phi = phi, t = t1, perimeter = perim,
         thetao = tet0, x1 = coo[1, 1], y1 = coo[1, 2])
 }
 
@@ -141,18 +141,19 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
                    norm = norm, verbose = TRUE)
     coe[i, ] <- c(tf$an, tf$bn)
   }
-  return(OutCoe(coe = coe, fac = Out$fac, method = "tfourier",
-                norm = norm))
+  res <- OutCoe(coe = coe, fac = Out$fac, method = "tfourier",norm = norm)
+  res$cuts <- ncol(res$coe)
+  return(res)
 }
 
 #' Inverse tangent angle Fourier transform
-#' 
+#'
 #' \code{tfourier_i} uses the inverse tangent angle Fourier transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
 #' obtained computed with \link{tfourier}.
-#' 
+#'
 #' See \link{tfourier} for the mathematical background.
-#' 
+#'
 #' @param tf a list with ao, an and bn components, typically as returned by
 #' tfourier
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use
@@ -172,7 +173,7 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
-#' 
+#'
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
 #' @keywords tfourier
@@ -181,7 +182,7 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' tfourier(bot[1], 24)
 #' tfourier_shape()
 #' @export
-tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE, 
+tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
     rescale = TRUE, perim = 2 * pi, thetao = 0) {
     if (!all(c("an", "bn") %in% names(tf))) {
         stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")
@@ -204,12 +205,12 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
     theta <- seq(0, 2 * pi, length = nb.pts)
     harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)
     for (i in 1:nb.h) {
-        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * 
+        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i *
             theta)
     }
     phi <- (ao/2) + apply(harm, 2, sum)
     vect <- matrix(NA, 2, nb.pts)
-    Z <- complex(modulus = (2 * pi)/nb.pts, argument = phi + 
+    Z <- complex(modulus = (2 * pi)/nb.pts, argument = phi +
         theta + thetao)
     Z1 <- cumsum(Z)
     coo <- cbind(Re(Z1), Im(Z1))
@@ -232,11 +233,11 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 
 
 #' Calculates and draws 'tfourier' shapes.
-#' 
+#'
 #' \code{tfourier_shape} calculates a 'Fourier tangent angle shape' given
 #' Fourier coefficients (see \code{Details}) or can generate some 'tfourier'
 #' shapes.
-#' 
+#'
 #' \code{tfourier_shape} can be used by specifying \code{nb.h} and
 #' \code{alpha}. The coefficients are then sampled in an uniform distribution
 #' \eqn{(-\pi ; \pi)} and this amplitude is then divided by
@@ -269,21 +270,21 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' panel(Out(a2l(replicate(100,
 #' coo_force2close(tfourier_shape(nb.h=6, alpha=2, nb.pts=200, plot=FALSE)))))) # biological shapes
 #' @export
-tfourier_shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80, 
+tfourier_shape <- function(an, bn, ao = 0, nb.h, nb.pts = 80,
     alpha = 2, plot = TRUE) {
-    if (missing(nb.h) & missing(an)) 
+    if (missing(nb.h) & missing(an))
         nb.h <- 1
-    if (missing(nb.h) & !missing(an)) 
+    if (missing(nb.h) & !missing(an))
         nb.h <- length(an)
-    if (missing(an)) 
+    if (missing(an))
         an <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
-    if (missing(bn)) 
+    if (missing(bn))
         bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
     tf <- list(an = an, bn = bn, ao = ao)
     shp <- tfourier_i(tf, nb.h = nb.h, nb.pts = nb.pts)
-    if (plot) 
+    if (plot)
         coo_plot(shp)
     return(shp)
 }
 
-##### end tfourier 
+##### end tfourier

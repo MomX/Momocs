@@ -1,21 +1,21 @@
 ##### Core function for radii variation Fourier analyses
 
 #' Radii variation Fourier transform
-#' 
+#'
 #' \code{rfourier} computes radii variation Fourier analysis from a matrix or a
 #' list of coordinates.
-#' 
+#'
 #' Given a closed outline, the radius \eqn{r}, taken as the distance from the
 #' outline barycentre and a given point of the outline, can be expressed as a
 #' periodic function of the angle \eqn{\theta}. Harmonics from \eqn{0} to
 #' \eqn{k} approximate the function \eqn{r(\theta)}:
-#' 
+#'
 #' \eqn{r(\theta)= \frac{1}{2}a_0 + \sum\limits_{n=1}^{k}a_k\cos(w_k\theta +
 #' b_k\sin(w_k\theta)} with: \eqn{ a_n =
 #' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\cos(n\theta_i) } \eqn{ b_n =
 #' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\sin(n\theta_i) } with \eqn{ a_0 =
 #' \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}r_i }
-#' 
+#'
 #' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
 #' individual shape, are then used for multivariate analyses.
 #' @param x A \code{list} or \code{matrix} of coordinates or an \code{Out} object
@@ -28,7 +28,7 @@
 #' @param ... useless here
 #' @return A list with following components:
 #' \itemize{
-#'  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients 
+#'  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
 #'  \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
 #'  \item \code{ao} ao harmonic coefficient.
 #'  \item \code{r} vector of radii lengths.
@@ -69,14 +69,14 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ", 
+            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ",
                 nb.h)
         }
     }
     if (nb.h == -1) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points and has been set to", 
+            cat(" * 'nb.h' must be lower than half the number of points and has been set to",
                 nb.h, "harmonics.\n")
         }
     }
@@ -129,19 +129,21 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
                    norm = norm, verbose = TRUE)  #todo: vectorize
     coe[i, ] <- c(rf$an, rf$bn)
   }
-  return(OutCoe(coe = coe, fac = Out$fac, method = "rfourier", norm = norm))
+  res <- OutCoe(coe = coe, fac = Out$fac, method = "rfourier", norm = norm)
+  res$cuts <- ncol(res$coe)
+  return(res)
 }
 
 
 
 #' Inverse radii variation Fourier transform
-#' 
+#'
 #' \code{rfourier_i} uses the inverse radii variation transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
 #' obtained computed with \link{rfourier}.
-#' 
+#'
 #' See \link{efourier} for the mathematical background.
-#' 
+#'
 #' @param rf A \code{list} with \code{ao}, \code{an} and \code{bn} components,
 #' typically as returned by \code{rfourier}.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
@@ -164,7 +166,7 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' rf
 #' rfi <- rfourier_i(rf)
 #' coo_draw(rfi, border='red', col=NA)
-#' 
+#'
 #' @export
 rfourier_i <- function(rf, nb.h, nb.pts = 120) {
     if (!all(c("an", "bn") %in% names(rf))) {
@@ -178,13 +180,13 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
     }
     if (nb.h > length(an)) {
         nb.h <- length(an)
-        cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ", 
+        cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ",
             nb.h)
     }
     theta <- seq(0, 2 * pi, length = nb.pts)
     harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)
     for (i in 1:nb.h) {
-        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * 
+        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i *
             theta)
     }
     r <- (ao/2) + apply(harm, 2, sum)
@@ -198,18 +200,18 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
 }
 
 #' Calculates and draw 'rfourier' shapes.
-#' 
+#'
 #' \code{rfourier_shape} calculates a 'Fourier radii variation shape' given
 #' Fourier coefficients (see \code{Details}) or can generate some 'rfourier'
 #' shapes.
-#' 
+#'
 #' \code{rfourier_shape} can be used by specifying \code{nb.h} and
 #' \code{alpha}. The coefficients are then sampled in an uniform distribution
 #' \eqn{(-\pi ; \pi)} and this amplitude is then divided by
 #' \eqn{harmonicrank^alpha}. If \code{alpha} is lower than 1, consecutive
 #' coefficients will thus increase. See \link{rfourier} for the mathematical
 #' background.
-#' 
+#'
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -230,29 +232,29 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
 #' rf <- rfourier(bot[1], 24)
 #' rfourier_shape(rf$an, rf$bn) # equivalent to rfourier_i(rf)
 #' rfourier_shape() # not very interesting
-#' 
+#'
 #' rfourier_shape(nb.h=12) # better
 #' rfourier_shape(nb.h=6, alpha=0.4, nb.pts=500)
-#' 
+#'
 #' # Butterflies of the vignette' cover
 #' panel(Out(a2l(replicate(100,
 #' rfourier_shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 #' @export
-rfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2, 
+rfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
     plot = TRUE) {
-    if (missing(nb.h) & missing(an)) 
+    if (missing(nb.h) & missing(an))
         nb.h <- 6
-    if (missing(nb.h) & !missing(an)) 
+    if (missing(nb.h) & !missing(an))
         nb.h <- length(an)
-    if (missing(an)) 
+    if (missing(an))
         an <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
-    if (missing(bn)) 
+    if (missing(bn))
         bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
     rf <- list(an = an, bn = bn, ao = 0)
     shp <- rfourier_i(rf, nb.h = nb.h, nb.pts = nb.pts)
-    if (plot) 
+    if (plot)
         coo_plot(shp)
     return(shp)
 }
 
-##### end rfourier 
+##### end rfourier
