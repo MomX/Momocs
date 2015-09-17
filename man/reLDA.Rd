@@ -2,20 +2,23 @@
 % Please edit documentation in R/mult-LDA.R
 \name{reLDA}
 \alias{reLDA}
-\alias{reLDA.LDA}
+\alias{reLDA.Coe}
+\alias{reLDA.PCA}
 \alias{reLDA.default}
 \title{"Redo" a LDA on new data}
 \usage{
-reLDA(LDA, newdata)
+reLDA(newdata, LDA)
 
-\method{reLDA}{default}(LDA, newdata)
+\method{reLDA}{default}(newdata, LDA)
 
-\method{reLDA}{LDA}(LDA, newdata)
+\method{reLDA}{PCA}(newdata, LDA)
+
+\method{reLDA}{Coe}(newdata, LDA)
 }
 \arguments{
-\item{LDA}{a \link{LDA} object}
+\item{newdata}{to use, a \link{PCA} or any \link{Coe} object}
 
-\item{newdata}{to use; only implemented for \link{PCA} object/scores.}
+\item{LDA}{a \link{LDA} object}
 }
 \value{
 a list with components (from ?predict.lda ).

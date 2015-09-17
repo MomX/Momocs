@@ -275,8 +275,8 @@ classify.Coe <- function(x, fac, ref, unk){
 #'
 #' Basically a wrapper around \link{predict.lda} from the package MASS. Uses a LDA model
 #' to classify new data.
+#' @param newdata to use, a \link{PCA} or any \link{Coe} object
 #' @param LDA a \link{LDA} object
-#' @param newdata to use; only implemented for \link{PCA} object/scores.
 #' @return a list with components (from ?predict.lda ).
 #' \itemize{
 #' \item class factor of classification
@@ -316,19 +316,19 @@ classify.Coe <- function(x, fac, ref, unk){
 #'
 #' @rdname reLDA
 #' @export
-reLDA <- function(LDA, newdata){
+reLDA <- function(newdata, LDA){
   UseMethod("reLDA")
 }
 
 #' @rdname reLDA
 #' @export
-reLDA.default <- function(LDA, newdata){
+reLDA.default <- function(newdata, LDA){
   stop(" * method only defined for LDA objects")
 }
 
 #' @rdname reLDA
 #' @export
-reLDA.LDA <- function(LDA, newdata){
+reLDA.PCA <- function(newdata, LDA){
 #   if (missing(newdata) | !any(class(newdata) == "PCA"))
 #     stop(" * a PCA object must be provided")
   mod <- LDA$mod
@@ -346,6 +346,17 @@ reLDA.LDA <- function(LDA, newdata){
   reLDA$newdata <- newdata$x[, 1:nc]
   #   class(reLDA) <- "LDA"
   return(reLDA)
+}
+
+#' @rdname reLDA
+#' @export
+reLDA.Coe <- function(newdata, LDA){
+  #   if (missing(newdata) | !any(class(newdata) == "PCA"))
+  #     stop(" * a PCA object must be provided")
+  mod <- LDA$mod
+  if (!identical(colnames(LDA$x),  colnames(newdata$coe)))
+    stop(" * LDA and newdata object do not have the same structure")
+  return(predict(mod, newdata$coe))
 }
 
 
