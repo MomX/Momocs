@@ -9,10 +9,10 @@
 plot_CV(x, ...)
 
 \method{plot_CV}{default}(x, freq = TRUE, rm0 = TRUE, cex = 5,
-  round = 2, ...)
+  round = 2, labels = TRUE, ...)
 
 \method{plot_CV}{LDA}(x, freq = TRUE, rm0 = TRUE, cex = 5, round = 2,
-  ...)
+  labels = TRUE, ...)
 }
 \arguments{
 \item{x}{a (cross-validation table) or an LDA object}
@@ -26,6 +26,8 @@ plot_CV(x, ...)
 \item{cex}{numeric to adjust labels in every cell. NA to remove them}
 
 \item{round}{numeric, when freq=TRUE how many decimals should we display}
+
+\item{labels}{logical whether to display freq or counts as text labels}
 }
 \value{
 a ggplot object

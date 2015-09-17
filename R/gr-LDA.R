@@ -77,49 +77,49 @@
 #' @method plot LDA
 #' @export
 plot.LDA <- function(x, xax=1, yax=2,
-  #color choice
-  points=TRUE, col="#000000", pch=20, cex=0.5, palette=col_solarized,
-  #.frame
-  center.origin=FALSE, zoom=1, bg=par("bg"),
-  #.grid
-  grid=TRUE, nb.grids=3,
-  #shapes
-  morphospace=FALSE, pos.shp="full", amp.shp=1,
-  size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
-  pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
-  #stars
-  stars=FALSE,
-  #ellipses
-  ellipses=FALSE, conf_ellipses=0.5,
-  #ellipsesax
-  ellipsesax=TRUE, conf_ellipsesax=c(0.5, 0.75, 0.9),
-  lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
-  #convexhulls
-  chull=FALSE, chull.lty=3,
-  #kde2d
-  density=FALSE, lev.density=20,
-  contour = FALSE, lev.contour=3, n.kde2d=100,
-  #delaunay
-  delaunay=FALSE,
-  #loadings
-  #loadings=FALSE,
-  #labels
-  labels=FALSE,
-  col.labels=par("fg"),
-  cex.labels=0.6,
-  abbreviate.labels=FALSE,
-  #labelsgroups
-  labelsgroups=TRUE, cex.labelsgroups=0.8,
-  rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
-  #axisnames
-  axisnames=TRUE,
-  #axisvar
-  axisvar=TRUE,
-  #eigen
-  eigen=TRUE,
-  #
-  rug=TRUE,
-  title=substitute(x), box=TRUE, old.par=TRUE, ...
+                     #color choice
+                     points=TRUE, col="#000000", pch=20, cex=0.5, palette=col_solarized,
+                     #.frame
+                     center.origin=FALSE, zoom=1, bg=par("bg"),
+                     #.grid
+                     grid=TRUE, nb.grids=3,
+                     #shapes
+                     morphospace=FALSE, pos.shp="full", amp.shp=1,
+                     size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
+                     pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
+                     #stars
+                     stars=FALSE,
+                     #ellipses
+                     ellipses=FALSE, conf_ellipses=0.5,
+                     #ellipsesax
+                     ellipsesax=TRUE, conf_ellipsesax=c(0.5, 0.75, 0.9),
+                     lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
+                     #convexhulls
+                     chull=FALSE, chull.lty=3,
+                     #kde2d
+                     density=FALSE, lev.density=20,
+                     contour = FALSE, lev.contour=3, n.kde2d=100,
+                     #delaunay
+                     delaunay=FALSE,
+                     #loadings
+                     #loadings=FALSE,
+                     #labels
+                     labels=FALSE,
+                     col.labels=par("fg"),
+                     cex.labels=0.6,
+                     abbreviate.labels=FALSE,
+                     #labelsgroups
+                     labelsgroups=TRUE, cex.labelsgroups=0.8,
+                     rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
+                     #axisnames
+                     axisnames=TRUE,
+                     #axisvar
+                     axisvar=TRUE,
+                     #eigen
+                     eigen=TRUE,
+                     #
+                     rug=TRUE,
+                     title=substitute(x), box=TRUE, old.par=TRUE, ...
 ){
   LDA <- x
   fac <- LDA$fac
@@ -191,8 +191,8 @@ plot.LDA <- function(x, xax=1, yax=2,
   if (morphospace & length(LDA$method)<2) {
     if(LDA$method=="efourier") {
       morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
-                      amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                      col.shp=col.shp, border.shp=border.shp)}}
+                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
+                     col.shp=col.shp, border.shp=border.shp)}}
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
     if (ellipsesax) .ellipsesax(xy, fac, conf_ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
@@ -207,8 +207,8 @@ plot.LDA <- function(x, xax=1, yax=2,
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
   if (labels) text(xy[, 1], xy[, 2],
-                                 labels=ifelse(abbreviate.labels, abbreviate(rownames(xy)), rownames(xy)),
-                                 col=col.labels, cex=cex.labels)
+                   labels=ifelse(abbreviate.labels, abbreviate(rownames(xy)), rownames(xy)),
+                   col=col.labels, cex=cex.labels)
   #if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "LD")
   if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
@@ -227,6 +227,7 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' @param rm0 logical whether to remove zeros
 #' @param cex numeric to adjust labels in every cell. NA to remove them
 #' @param round numeric, when freq=TRUE how many decimals should we display
+#' @param labels logical whether to display freq or counts as text labels
 #' @param ... only used for the generic
 #' @return a ggplot object
 #' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
@@ -241,7 +242,7 @@ plot.LDA <- function(x, xax=1, yax=2,
 plot_CV <- function(x, ...){UseMethod("plot_CV")}
 #' @rdname plot_CV
 #' @export
-plot_CV.default <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, ...){
+plot_CV.default <- function(x, freq=TRUE,rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
   tab <- x
   df <- as.data.frame(tab)
   #colnames(df) <- c("actual", "classified", "count")
@@ -256,16 +257,18 @@ plot_CV.default <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, ...){
     theme(axis.text=element_text(size=10),
           axis.text.x=element_text(angle=90, hjust=1),
           axis.title=element_text(size=14, face="bold"))
-  if (rm0) {
-    gg <- gg + geom_text(data=filter(df, Freq !=0), aes_string(label="Freq"), size=rel(cex))
-  } else {
-    gg <- gg + geom_text(aes_string(label="Freq"), size=rel(cex))
+  if (labels){
+    if (rm0) {
+      gg <- gg + geom_text(data=filter(df, Freq !=0), aes_string(label="Freq"), size=rel(cex))
+    } else {
+      gg <- gg + geom_text(aes_string(label="Freq"), size=rel(cex))
+    }
   }
   return(gg)}
 #' @rdname plot_CV
 #' @export
-plot_CV.LDA <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, ...){
-  plot_CV(x$CV.tab, freq=freq, rm0=rm0, cex=cex, round=2, ...)
+plot_CV.LDA <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
+  plot_CV(x$CV.tab, freq=freq, rm0=rm0, cex=cex, round=round, labels=labels, ...)
 }
 
 
@@ -354,9 +357,9 @@ plot_CV2.LDA <- function(x, ...){
 #' @rdname plot_CV2
 #' @export
 plot_CV2.table <- function(x, links.FUN = arrows, col = TRUE,
-                    col0 = "black", col.breaks = 5, palette = col_heat, lwd = TRUE,
-                    lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25,
-                    cex.names = 1, legend = TRUE, ...) {
+                           col0 = "black", col.breaks = 5, palette = col_heat, lwd = TRUE,
+                           lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25,
+                           cex.names = 1, legend = TRUE, ...) {
   # to maintain the generic
   tab <- x
   # we check a bit
