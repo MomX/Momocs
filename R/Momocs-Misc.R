@@ -266,11 +266,10 @@ vecs_param <- function(r1, i1, r2, i2) {
   } else {
     return(out)}}
 
-# Was used in $fac handling when creating Coo object, before numeric could be
-# accepted in it (as covariables)
+# refactor factors in a data.frame (mainly to drop levels) but respect anything else
 #'@export
 .refactor <- function(df) {
-  data.frame(lapply(df, factor))
+  data.frame(lapply(df, function(x) if (is.factor(x)) factor(x) else x))
 }
 
 # Used in Coo/Coe printers

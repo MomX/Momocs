@@ -96,8 +96,7 @@ subset.Coo <- function(x, subset, ...) {
   if (length(Coo$ldk) > 0)
     Coo2$ldk <- Coo$ldk[retain]
   if (ncol(Coo$fac) > 0) {
-    Coo2$fac <- Coo$fac
-    Coo2$fac <- as.data.frame(Coo2$fac[retain, ])
+    Coo2$fac <- Coo$fac[retain, ]
     names(Coo2$fac) <- names(Coo$fac)
     Coo2$fac <- .refactor(Coo2$fac)
   }
@@ -114,8 +113,7 @@ subset.Coe <- function(x, subset, ...) {
   Coe2$coe <- Coe$coe[retain, ]
   #   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
   if (ncol(Coe$fac) > 0) {
-    Coe2$fac <- Coe$fac
-    Coe2$fac <- as.data.frame(Coe2$fac[retain, ])
+    Coe2$fac <- Coe$fac[retain, ]
     names(Coe2$fac) <- names(Coe$fac)
     Coe2$fac <- .refactor(Coe2$fac)
   }
