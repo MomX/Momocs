@@ -1173,8 +1173,8 @@ coo_alignminradius.Coo <- function(coo){
 #' Reverses coordinates
 #'
 #' Returns the reverse suite of coordinates, i.e. change shape's orientation
-#' @param coo either a \code{matrix} of (x; y) coordinates.
-#' @return a \code{matrix} of (x; y) coordinates.
+#' @param coo either a \code{matrix} of (x; y) coordinates or a Coo object
+#' @return a \code{matrix} of (x; y) coordinates or a Coo object
 #' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
@@ -1183,10 +1183,28 @@ coo_alignminradius.Coo <- function(coo){
 #' coo_rev(b)
 #' @export
 coo_rev <- function(coo) {
+  UseMethod("coo_rev")
+}
+
+#' @export
+coo_rev.default <- function(coo) {
   coo <- coo_check(coo)
   return(coo[nrow(coo):1, ])
 }
 
+#' @export
+coo_rev.default <- function(coo) {
+  coo$coo <- lapply(coo$coo, coo_rev)
+  # ldk ids (if any) also have to be changed
+  if (length(coo$ldk)!=0){
+    for (i in 1:length(coo)){
+      coo$ldk[[i]] <- (nrow(coo[i])+1) - coo$ldk[[i]]
+    }
+    cat(" * $ldk has been changed accordingly.\n")
+    return(coo)
+  }
+}
+  
 #' Defines interactively landmarks
 #'
 #' Allows to interactively define a 'nb.ldk' number of landarks on a shape.
