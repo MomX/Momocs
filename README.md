@@ -1,8 +1,4 @@
 [![Travis-CI Build Status](https://travis-ci.org/vbonhomme/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)
-News
-======
-* A CRAN version (pre v1) will be released this summer (2015), the latter being dedicated to code/doc polishing.
-* A visual manual can be found there http://vbonhomme.github.io
 
 Momocs, morphometrics using R
 ======
@@ -14,7 +10,7 @@ Use Momocs
 __Get the last version:__
 * First get `devtools` with `install.packages("devtools")` then, download and load the very last version with:
 ```
-devtools::install_github("vbonhomme/Momocs", build_vignettes=TRUE)
+devtools::install_github("vbonhomme/Momocs")
 library(Momocs)
 ````
 * Please note that the current [CRAN](http://cran.r-project.org/package=Momocs) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) and is no longer supported.
