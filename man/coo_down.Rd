@@ -4,7 +4,7 @@
 \alias{coo_down}
 \title{Retains coordinates with negative y-coordinates}
 \usage{
-coo_down(coo, slidegap = TRUE)
+coo_down(coo, slidegap = FALSE)
 }
 \arguments{
 \item{coo}{either a \code{matrix} of (x; y) coordinates or a \link{Coo} object}

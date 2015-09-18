@@ -4,7 +4,7 @@
 \alias{coo_up}
 \title{Retains coordinates with positive y-coordinates}
 \usage{
-coo_up(coo, slidegap = TRUE)
+coo_up(coo, slidegap = FALSE)
 }
 \arguments{
 \item{coo}{either a \code{matrix} of (x; y) coordinates or a \link{Coo} object}
