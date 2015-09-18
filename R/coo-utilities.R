@@ -997,26 +997,26 @@ coo_dxy <- function(coo) {
 #' coo_plot(b)
 #' coo_draw(coo_up(b), border='red')
 #' @export
-coo_up <- function(coo, slidegap=TRUE){
+coo_up <- function(coo, slidegap=FALSE){
   UseMethod("coo_up")
 }
 
 #' @export
-coo_up.default <- function(coo, slidegap=TRUE) {
+coo_up.default <- function(coo, slidegap=FALSE) {
   up <- coo[coo[, 2] >= 0, ]
   if (slidegap) { up <- coo_slidegap(up)}
   return(up)
 }
 
 #' @export
-coo_up.Out <- function(coo, slidegap=TRUE){
+coo_up.Out <- function(coo, slidegap=FALSE){
   coo$coo <- lapply(coo$coo, coo_up)
   if (slidegap) coo <- coo_slidegap(coo)
   Opn(coo)
 }
 
 #' @export
-coo_up.Coo <- function(coo, slidegap=TRUE){
+coo_up.Coo <- function(coo, slidegap=FALSE){
   coo$coo <- lapply(coo$coo, coo_up)
   if (slidegap) coo <- coo_slidegap(coo)
   coo
@@ -1042,25 +1042,25 @@ coo_up.Coo <- function(coo, slidegap=TRUE){
 #' coo_plot(b)
 #' coo_draw(coo_down(b), border='red')
 #' @export
-coo_down <- function(coo, slidegap=TRUE){
+coo_down <- function(coo, slidegap=FALSE){
   UseMethod("coo_down")
 }
 
 #' @export
-coo_down.default <- function(coo, slidegap=TRUE) {
+coo_down.default <- function(coo, slidegap=FALSE) {
   down <- coo[coo[, 2] <= 0, ]
   if (slidegap) down <- coo_slidegap(down)
   return(down)
 }
 
 #' @export
-coo_down.Out <- function(coo, slidegap=TRUE){
+coo_down.Out <- function(coo, slidegap=FALSE){
   coo$coo <- lapply(coo$coo, coo_down, slidegap=slidegap)
   Opn(coo)
 }
 
 #' @export
-coo_down.Coo <- function(coo, slidegap=TRUE){
+coo_down.Coo <- function(coo, slidegap=FALSE){
   coo$coo <- lapply(coo$coo, coo_down, slidegap=slidegap)
   coo
 }
@@ -1337,7 +1337,7 @@ coo_baseline <- function(coo, ldk1, ldk2, t1, t2) {
   UseMethod("coo_baseline")
 }
 #' @export
-coo_baseline.default <- function(coo, ldk1 = 1, ldk2 = 2, t1 = c(-0.5,
+coo_baseline.default <- function(coo, ldk1 = 1, ldk2 = nrow(coo), t1 = c(-0.5,
                                                                  0), t2 = c(0.5, 0)) {
   if (is.list(coo)) {
     coo <- l2m(coo)
@@ -1370,13 +1370,18 @@ coo_baseline.default <- function(coo, ldk1 = 1, ldk2 = 2, t1 = c(-0.5,
   return(ref)
 }
 #' @export
-coo_baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2, t1 = c(-0.5,
-                                                             0), t2 = c(0.5, 0)) {
+coo_baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2,
+                             t1 = c(-0.5, 0), t2 = c(0.5, 0)) {
   Coo <- coo
+  if (length(Coo$ldk)>0) {
   for (i in seq(along = Coo$coo)) {
     Coo$coo[[i]] <- coo_baseline(Coo$coo[[i]], Coo$ldk[[i]][ldk1],
                                  Coo$ldk[[i]][ldk2], t1, t2)
   }
+  } else {
+    Coo$coo <- lapply(Coo$coo, coo_baseline, t1=t1, t2=t2)
+  }
+
   return(Coo)
 }
 
