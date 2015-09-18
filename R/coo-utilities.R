@@ -1201,10 +1201,10 @@ coo_rev.Coo <- function(coo) {
       coo$ldk[[i]] <- (nrow(coo[i])+1) - coo$ldk[[i]]
     }
     cat(" * $ldk has been changed accordingly.\n")
-    return(coo)
   }
+    return(coo)
 }
-  
+
 #' Defines interactively landmarks
 #'
 #' Allows to interactively define a 'nb.ldk' number of landarks on a shape.
