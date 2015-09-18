@@ -1,7 +1,7 @@
 ##### Main Coo (Out/Opn/Ldk) plotters
 
 #' A family picture of a Coo object: all shapes in the same plot
-#' 
+#'
 #' Will replace stack soon.
 #' @param Coo a Coo object
 #' @return a ggplot2 object
@@ -11,14 +11,14 @@
 #' @export
 stack2 <- function(Coo){
   df <- as_df(Coo)
-  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) + 
+  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
     geom_path() +
     coord_equal()
   gg
 }
 
 #' A family picture of a Coo object: all shapes side by side
-#' 
+#'
 #' Will replace panel soon.
 #' @param Coo a Coo object
 #' @return a ggplot2 object
@@ -28,7 +28,7 @@ stack2 <- function(Coo){
 #' @export
 panel2 <- function(Coo){
   df <- as_df(Coo)
-  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) + 
+  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
     geom_path() +
     coord_equal() + facet_wrap( ~ id)
   gg
@@ -60,6 +60,7 @@ plot.Coo <- function(x, id, ...) {
     repeat {
       id <- sample(length(Coo), 1)
       coo_plot(Coo$coo[[id]], main = names(Coo)[id], ...)
+      cat(id)
       readline(prompt = "Press <Enter> to continue, <Esc> to quit...")
     }
   }
@@ -109,10 +110,10 @@ plot.Coo <- function(x, id, ...) {
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param nb.pts the number of points to use for the shape reconstruction
-#' @param ... further arguments to be passed to \link{coo_plot} 
+#' @param ... further arguments to be passed to \link{coo_plot}
 #' @seealso \link{panel.Coo}, \link{plot.Coo}.
-#' @note When applied on a \link{OutCoe} object, a wrapper 
-#' for \code{stack(as.Out(OutCoe), ...)}. In that case, 
+#' @note When applied on a \link{OutCoe} object, a wrapper
+#' for \code{stack(as.Out(OutCoe), ...)}. In that case,
 #' \code{...} feeds \code{stack} itself. (same thing for \code{OpnCoe} to come)
 #' @keywords Graphics Out Opn Ldk
 #' @examples
@@ -132,9 +133,9 @@ plot.Coo <- function(x, id, ...) {
 #' @rdname stack.Coo
 #' @aliases stack.Coo
 #' @export
-stack.Coo <- 
+stack.Coo <-
   function(x,
-           cols, borders, 
+           cols, borders,
            fac, palette = col_summer,
            points = FALSE, first.point = TRUE, centroid = TRUE,
            ldk = TRUE,
@@ -165,7 +166,7 @@ stack.Coo <-
       cols <- NA
       borders <- palette(nlevels(fac))[fac]
     }
-    
+
     # we define local par (margins)
     op <- par(mar = c(3, 3, 2, 1))
     on.exit(par(op))
@@ -173,7 +174,7 @@ stack.Coo <-
     wdw <- apply(do.call(rbind, Coo$coo), 2, range)
     plot(NA, type = "n",
          asp = 1, xlim = wdw[, 1], ylim = wdw[, 2],
-         las = 1, cex.axis = 2/3, 
+         las = 1, cex.axis = 2/3,
          ann = TRUE, frame = FALSE,  main=title)
     if (xy.axis) {
       abline(h = 0, v = 0, col = "grey80", lty = 2)
@@ -258,7 +259,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 #'
 #' @param x The \code{Coo} (or \code{OutCoe}) object  to plot.
-#' @param  dim for \link{coo_listpanel}: a numeric of length 2 
+#' @param  dim for \link{coo_listpanel}: a numeric of length 2
 #' specifying the dimensions of the panel
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equal to the number of coordinates.
@@ -276,8 +277,8 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' @param points.col (for Ldk) and a col  for these points
 #' @param nb.pts the number of points to use for the shape reconstruction
 #' @param ... further arguments to maintain consistency with the generic \link{plot}.
-#' @note When applied on a \link{OutCoe} object, a wrapper 
-#' for \code{panel(as.Out(OutCoe), ...)}. In that case, 
+#' @note When applied on a \link{OutCoe} object, a wrapper
+#' for \code{panel(as.Out(OutCoe), ...)}. In that case,
 #' \code{...} feeds \code{panel} itself. (same thing for \code{OpnCoe} to come)
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
 #' @keywords Graphics Out Opn Ldk
@@ -305,7 +306,7 @@ panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
   if (!missing(fac)) {
-    
+
     if (missing(cols)) {
       cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[,
                                                        fac]]
@@ -363,7 +364,7 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
   if (!missing(fac)) {
-    
+
     if (missing(cols)) {
       cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[,
                                                        fac]]
