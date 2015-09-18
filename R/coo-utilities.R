@@ -1193,7 +1193,7 @@ coo_rev.default <- function(coo) {
 }
 
 #' @export
-coo_rev.default <- function(coo) {
+coo_rev.Coo <- function(coo) {
   coo$coo <- lapply(coo$coo, coo_rev)
   # ldk ids (if any) also have to be changed
   if (length(coo$ldk)!=0){
