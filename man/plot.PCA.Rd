@@ -112,7 +112,7 @@ a matrix of positions. See \link{pos.shapes}}
 
 \item{loadings}{logical whether to add loadings for every variables}
 
-\item{labels}{logical whether to add point labels}
+\item{labels}{if TRUE rownames are used as labels, a colname from $fac can also be passed}
 
 \item{col.labels}{a color for these labels}
 

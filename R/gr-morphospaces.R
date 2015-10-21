@@ -123,23 +123,23 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     shp <- lapply(shp, coo_rotate, rotate.shp[i])
     # we translate shapes
     if (plot) { # to translate only for morphospace PCA, not PCcontrib, etc.
-    for (s in 1:length(shp)) {
-      shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
+      for (s in 1:length(shp)) {
+        shp[[s]] <- coo_trans(shp[[s]], pos[s, 1] + dx[i], pos[s, 2] + dy[i])}
     } else {
       SHP[[i]] <- shp
     }
     # otherwise, we plot the morphospace
     if (plot) {
-    if (plot.method == "poly") {
-      garbage <- lapply(shp, coo_draw, col = col.shp, border = border.shp, lwd = lwd.shp,
-                        points = FALSE, centroid = FALSE, first.point = FALSE)}
-    if (plot.method == "lines"){
-      garbage <- lapply(shp, lines, col = border.shp, lwd = lwd.shp * 2)}
-    if (plot.method == "points"){
-      garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp*0.5, pch=20)
-      if (!is.null(PCA$links)) lapply(shp, function(x) ldk_links(x, PCA$links))
+      if (plot.method == "poly") {
+        garbage <- lapply(shp, coo_draw, col = col.shp, border = border.shp, lwd = lwd.shp,
+                          points = FALSE, centroid = FALSE, first.point = FALSE)}
+      if (plot.method == "lines"){
+        garbage <- lapply(shp, lines, col = border.shp, lwd = lwd.shp * 2)}
+      if (plot.method == "points"){
+        garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp*0.5, pch=20)
+        if (!is.null(PCA$links)) lapply(shp, function(x) ldk_links(x, PCA$links))
+      }
     }
-  }
   }
   if (!plot) SHP else invisible(shp)
 }
@@ -148,11 +148,11 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
 morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
                            nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
                            col.shp = "#00000011", border.shp = "#00000055") {
-
+  
   xy <- LDA$mod.pred$x[, c(xax, yax)]
   rot <- LDA$LDs[, c(xax, yax)]
   mshape <- LDA$mshape
-
+  
   # we fill any removed variables with 0s
   r <- LDA$removed
   if (length(r) > 0) {
@@ -161,7 +161,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
     m3 <- rbind(rot, m2)
     rot <- m3[match(names(mshape), rownames(m3)), ]
   }
-
+  
   # we define the position of shapes
   pos <- pos.shapes(xy, pos.shp = pos.shp, nb.shp = nb.shp,
                     nr.shp = nr.shp, nc.shp = nc.shp)
@@ -411,7 +411,11 @@ PCA2shp_dfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
 # @export
 PCA2shp_polynomials <- function(pos, rot, mshape, amp.shp = 1,
                                 pts.shp = 60, ortho, baseline1, baseline2) {
-  method_i <- ifelse(ortho, opoly_i, npoly_i)
+  if(ortho) { 
+    method_i <- opoly_i
+  } else {
+    method_i <- npoly_i
+  }
   if (ncol(pos) != ncol(rot))
     stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))

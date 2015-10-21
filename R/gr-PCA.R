@@ -56,7 +56,7 @@
 #' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
 #' @param delaunay logical whether to add a delaunay 'mesh' between points
 #' @param loadings logical whether to add loadings for every variables
-#' @param labels logical whether to add point labels
+#' @param labels if TRUE rownames are used as labels, a colname from $fac can also be passed
 #' @param col.labels a color for these labels
 #' @param cex.labels a cex for these labels
 #' @param labelsgroups logical whether to add labels for groups
@@ -208,10 +208,10 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
   if (!missing(chull.lty)) chull <- TRUE
-  if (labels & missing(points)) points <- FALSE
+  if (!missing(labels) & missing(points)) points <- FALSE
   if (missing(col.labels)) col.labels <- col.groups
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
-
+  
   ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -246,8 +246,12 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) {
-    rn <- rownames(xy)
+  if (!missing(labels)) {
+    if (any(colnames(PCA$fac)==labels)) {
+      rn <- PCA$fac[, labels]
+    } else {
+      rn <- rownames(xy)
+    }
     if (abbreviate.labels) rn <- abbreviate(rn)
     text(xy[, 1], xy[, 2], labels=rn, col=col.labels, cex=cex.labels)
   }
@@ -398,9 +402,9 @@ PCcontrib.PCA <-
       pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
       shp.i <- morphospace2PCA(x, xax=i, yax=1, pos = pos.i)
       shp[[i]] <- mutate(shp.i, nax=i) }
-
+    
     shp <- bind_rows(shp)
-
+    
     gg <- ggplot(data=shp, aes(x=x_c + x_d, y=y_c + y_d, group=shp1)) +
       geom_polygon(colour="grey50", fill="grey95") + coord_equal() +
       facet_grid(nax ~ shp) + labs(x="Position", y="PC")

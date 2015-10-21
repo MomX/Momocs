@@ -1,7 +1,7 @@
 Package: Momocs
 Type: Package
 Title: Morphometrics using R
-Version: 0.9.38
+Version: 0.9.39
 Date: 2015-10-21
 Author: Vincent Bonhomme, Sandrine Picq and Julien Claude
 Maintainer: Vincent Bonhomme <bonhomme.vincent@gmail.com>
