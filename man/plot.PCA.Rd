@@ -9,7 +9,7 @@
   center.origin = FALSE, zoom = 1, bg = par("bg"), grid = TRUE,
   nb.grids = 3, morphospace = TRUE, pos.shp = c("range", "full", "circle",
   "xy", "range_axes", "full_axes")[1], amp.shp = 1, size.shp = 1,
-  nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
+  nb.shp = 12, nr.shp = 6, nc.shp = 5, rotate.shp = 0, pts.shp = 60,
   border.shp = .transp("#000000", 0.5), lwd.shp = 1,
   col.shp = .transp("#000000", 0.95), stars = FALSE, ellipses = FALSE,
   conf_ellipses = 0.5, ellipsesax = TRUE, conf_ellipsesax = c(0.5, 0.75,
@@ -69,6 +69,8 @@ a matrix of positions. See \link{pos.shapes}}
 \item{nr.shp}{(pos.shp="full" or "range) the number of shapes per row}
 
 \item{nc.shp}{(pos.shp="full" or "range) the number of shapes per column}
+
+\item{rotate.shp}{angle in radians to rotate shapes (if several methods, a vector of angles)}
 
 \item{pts.shp}{the number of points fro drawing shapes}
 

@@ -13,6 +13,7 @@
 # @export
 morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
                            nr.shp = 6, nc.shp = 5, amp.shp = 1,
+                           rotate.shp = 0,
                            size.shp = 1, wdw=max(.wdw()),
                            pts.shp = 60,
                            col.shp = "#00000011", border.shp = "#00000055",
@@ -33,6 +34,10 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
   # their size is divided by 2 and the shapes and set (of d) around the (x; y) coordinates of pos.shp
   method <- PCA$method
   lm <- length(method)
+  if (length(rotate.shp) != lm){
+    rotate.shp <- rep(rotate.shp, lm)
+  }
+  
   if (length(size.shp)!=lm) size.shp <- rep(size.shp[1], lm)
   size.shp.final <- (size.shp*wdw/14) / ifelse(lm<2, 1, 2)
   d <- mean(size.shp.final) / 2
@@ -114,6 +119,8 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     shp <- lapply(shp, coo_template, size = size.shp.final[i])
     # since coo_template does not center shapes but the bounding box
     shp <- lapply(shp, coo_center)
+    # we rotate shapes
+    shp <- lapply(shp, coo_rotate, rotate.shp[i])
     # we translate shapes
     if (plot) { # to translate only for morphospace PCA, not PCcontrib, etc.
     for (s in 1:length(shp)) {
