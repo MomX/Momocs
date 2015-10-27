@@ -22,7 +22,7 @@ bilateral symmetry) and when one wants to retain just the upper side.
 When shapes are "sliced" along the x-axis, it usually results on open curves and thus to huge/artefactual
 gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
 
-Also, when apply a coo_up or coo_down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
 automatically.
 }
 \examples{
@@ -30,6 +30,9 @@ data(bot)
 b <- coo_alignxax(bot[1])
 coo_plot(b)
 coo_draw(coo_up(b), border='red')
+}
+\seealso{
+\link{coo_left}, \link{coo_right}, \link{coo_down}
 }
 \keyword{ShapeUtilities}
 

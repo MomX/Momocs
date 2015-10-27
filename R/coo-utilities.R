@@ -976,8 +976,9 @@ coo_dxy <- function(coo) {
 }
 
 # 2. Handling / baselines on coo and Coo
-# ------------------------------------- Some functions and
-# methods to ease alignments, grabbing part of shapes, etc.
+# ------------------------------------- 
+# Some functions and methods to ease alignments, grabbing part of shapes, etc.
+
 #' Retains coordinates with positive y-coordinates
 #'
 #' Useful when shapes are aligned along the x-axis (e.g. because of a
@@ -988,8 +989,9 @@ coo_dxy <- function(coo) {
 #' @note When shapes are "sliced" along the x-axis, it usually results on open curves and thus to huge/artefactual
 #' gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
 #'
-#' Also, when apply a coo_up or coo_down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+#' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
 #' automatically.
+#' @seealso \link{coo_left}, \link{coo_right}, \link{coo_down}
 #' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
@@ -1033,8 +1035,9 @@ coo_up.Coo <- function(coo, slidegap=FALSE){
 #' @note When shapes are "sliced" along the x-axis, it usually results on open curves and thus to huge/artefactual
 #' gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
 #'
-#' Also, when apply a coo_up or coo_down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+#' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
 #' automatically.
+#' @seealso \link{coo_left}, \link{coo_right}, \link{coo_up}
 #' @keywords ShapeUtilities
 #' @examples
 #' data(bot)
@@ -1065,6 +1068,94 @@ coo_down.Coo <- function(coo, slidegap=FALSE){
   coo
 }
 
+#' Retains coordinates with positive x-coordinates
+#'
+#' Useful when shapes are aligned along the y-axis (e.g. because of a
+#' bilateral symmetry) and when one wants to retain just the upper side.
+#' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object
+#' @param slidegap logical whether to apply \link{coo_slidegap} after coo_right
+#' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object (\link{Out} are returned as \link{Opn})
+#' @note When shapes are "sliced" along the y-axis, it usually results on open curves and thus to huge/artefactual
+#' gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
+#'
+#' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+#' automatically.
+#' @seealso  \link{coo_right}, \link{coo_up}, \link{coo_down}
+#' @keywords ShapeUtilities
+#' @examples
+#' data(bot)
+#' b <- coo_center(bot[1])
+#' coo_plot(b)
+#' coo_draw(coo_right(b), border='red')
+#' @export
+coo_right <- function(coo, slidegap=FALSE){
+  UseMethod("coo_right")
+}
+
+#' @export
+coo_right.default <- function(coo, slidegap=FALSE) {
+  right <- coo[coo[, 1] >= 0, ]
+  if (slidegap) { right <- coo_slidegap(rigth)}
+  return(right)
+}
+
+#' @export
+coo_right.Out <- function(coo, slidegap=FALSE){
+  coo$coo <- lapply(coo$coo, coo_right)
+  if (slidegap) coo <- coo_slidegap(coo)
+  Opn(coo)
+}
+
+#' @export
+coo_right.Coo <- function(coo, slidegap=FALSE){
+  coo$coo <- lapply(coo$coo, coo_right)
+  if (slidegap) coo <- coo_slidegap(coo)
+  coo
+}
+
+
+#' Retains coordinates with negative x-coordinates
+#'
+#' Useful when shapes are aligned along the y-axis (e.g. because of a
+#' bilateral symmetry) and when one wants to retain just the lower side.
+#' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object
+#' @param slidegap logical whether to apply \link{coo_slidegap} after coo_left
+#' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object (\link{Out} are returned as \link{Opn})
+#' @note When shapes are "sliced" along the y-axis, it usually results on open curves and thus to huge/artefactual
+#' gaps between points neighboring this axis. This is usually solved with \link{coo_slidegap}. See examples there.
+#'
+#' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
+#' automatically.
+#' @seealso \link{coo_right}, \link{coo_up}, \link{coo_down}
+#' @keywords ShapeUtilities
+#' @examples
+#' data(bot)
+#' b <- coo_center(bot[1])
+#' coo_plot(b)
+#' coo_draw(coo_left(b), border='red')
+#' @export
+coo_left <- function(coo, slidegap=FALSE){
+  UseMethod("coo_left")
+}
+
+#' @export
+coo_left.default <- function(coo, slidegap=FALSE) {
+  left <- coo[coo[, 1] <= 0, ]
+  if (slidegap) left <- coo_slidegap(left)
+  return(left)
+}
+
+#' @export
+coo_left.Out <- function(coo, slidegap=FALSE){
+  coo$coo <- lapply(coo$coo, coo_left, slidegap=slidegap)
+  Opn(coo)
+}
+
+#' @export
+coo_left.Coo <- function(coo, slidegap=FALSE){
+  coo$coo <- lapply(coo$coo, coo_left, slidegap=slidegap)
+  coo
+}
 
 #' Aligns shapes along the x-axis
 #'
