@@ -15,10 +15,10 @@ r_binary_packages:
   - reshape2
   - ggplot2
   - geometry
-  - graphics
+#  - graphics
   - jpeg
   - MASS
-  - utils
+#  - utils
   - knitr
 
 bioc_packages:
