@@ -14,6 +14,8 @@
 morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
                            nr.shp = 6, nc.shp = 5, amp.shp = 1,
                            rotate.shp = 0,
+                           flipx.shp = FALSE,
+                           flipy.shp = FALSE,
                            size.shp = 1, wdw=max(.wdw()),
                            pts.shp = 60,
                            col.shp = "#00000011", border.shp = "#00000055",
@@ -36,6 +38,12 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
   lm <- length(method)
   if (length(rotate.shp) != lm){
     rotate.shp <- rep(rotate.shp, lm)
+  }
+  if (length(flipx.shp) != lm){
+    flipx.shp <- rep(flipx.shp, lm)
+  }
+  if (length(flipy.shp) != lm){
+    flipy.shp <- rep(flipy.shp, lm)
   }
   
   if (length(size.shp)!=lm) size.shp <- rep(size.shp[1], lm)
@@ -121,6 +129,9 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
     shp <- lapply(shp, coo_center)
     # we rotate shapes
     shp <- lapply(shp, coo_rotate, rotate.shp[i])
+    # we flip (if required)
+    if (flipx.shp[i]) shp <- lapply(shp, coo_flipx)
+    if (flipy.shp[i]) shp <- lapply(shp, coo_flipy)
     # we translate shapes
     if (plot) { # to translate only for morphospace PCA, not PCcontrib, etc.
       for (s in 1:length(shp)) {

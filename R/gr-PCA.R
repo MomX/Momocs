@@ -36,6 +36,8 @@
 #' @param nc.shp (pos.shp="full" or "range) the number of shapes per column
 #' @param nr.shp (pos.shp="full" or "range) the number of shapes per row
 #' @param rotate.shp angle in radians to rotate shapes (if several methods, a vector of angles)
+#' @param flipx.shp same as above, whether to apply coo_flipx
+#' @param flipy.shp same as above, whether to apply coo_flipy
 #' @param pts.shp the number of points fro drawing shapes
 #' @param border.shp the border color of the shapes
 #' @param lwd.shp the line width for these shapes
@@ -117,7 +119,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      pos.shp=c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
                      amp.shp=1,
                      size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
-                     rotate.shp=0,
+                     rotate.shp=0, flipx.shp=FALSE, flipy.shp=FALSE,
                      pts.shp=60, border.shp=.transp("#000000", 0.5),
                      lwd.shp=1, col.shp=.transp("#000000", 0.95),
                      #stars
@@ -228,7 +230,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
     morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
                    nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
-                   rotate.shp=rotate.shp,
+                   rotate.shp=rotate.shp, flipx.shp=flipx.shp, flipy.shp=flipy.shp,
                    amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
                    col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp,
                    plot=TRUE)
