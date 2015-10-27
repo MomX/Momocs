@@ -1,34 +1,36 @@
-language: r
+language: c
 
-#sudo: required
-
-apt_packages:
- - libfftw3-dev
+before_install:
+  - curl -OL http://raw.github.com/lcolladotor/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - ./travis-tool.sh bootstrap
  
-bioc_required: true
+install:
+  - ./travis-tool.sh install_bioc Biostrings
+  - ./travis-tool.sh install_bioc EBImage
+  - ./travis-tool.sh install_bioc EBImage
+  - ./travis-tool.sh install_r ape
+  - ./travis-tool.sh install_r plyr
+  - ./travis-tool.sh install_r dplyr
+  - ./travis-tool.sh install_r sp
+  - ./travis-tool.sh install_r reshape2
+  - ./travis-tool.sh install_r ggplot2
+  - ./travis-tool.sh install_r geometry
+  - ./travis-tool.sh install_r jpeg
+  - ./travis-tool.sh install_r MASS
+  - ./travis-tool.sh install_r knitr
+  - ./travis-tool.sh install_github GuangchuangYu/ggtree
+  - ./travis-tool.sh install_bioc_deps
 
-r_binary_packages:
-  - ape
-  - plyr
-  - dplyr
-  - sp
-  - reshape2
-  - ggplot2
-  - geometry
-  - jpeg
-  - MASS
-  - knitr
 
-bioc_packages:
- - Biostrings
- - EBImage
- - BiocStyle
- 
-r_github_packages:
- - GuangchuangYu/ggtree
- 
+on_failure:
+  - ./travis-tool.sh dump_logs
+
+after_script:
+  - ./travis-tool.sh dump_logs_by_extension "timings"
+  - ./travis-tool.sh dump_sysinfo
+
 notifications:
   email:
     on_success: change
     on_failure: change
-
