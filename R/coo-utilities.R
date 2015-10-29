@@ -36,6 +36,31 @@ coo_check <- function(coo) {
   stop(" * a list or a matrix of (x; y) coordinates must be provided.")
 }
 
+#' Returns the number of coordinates
+#' 
+#' A simple wrapper: for a single shape, returns its nrow ; for a Coo object, return sapply + nrow.
+#' @param coo either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object. 
+#' @keywords ShapeUtilities
+#' @examples 
+#' data(bot)
+#' coo_nb(bot[1])
+#' coo_nb(bot)
+#' @export
+coo_nb <- function(coo){
+  UseMethod("coo_nb")
+}
+
+#' @export
+coo_nb.default <- function(coo){
+  nrow(coo)
+}
+
+#' @export
+coo_nb.Coo <- function(coo){
+  sapply(coo$coo, nrow)
+}
+
+
 #' Centers coordinates
 #'
 #' Returns a shape centered on the origin.
