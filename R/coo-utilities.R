@@ -290,7 +290,7 @@ coo_slice <- function(coo, ids){
   ids <- sort(ids)
   if (max(ids) > nrow(coo))
     stop(" * max(ids) must be lower than the number of coordinates")
-
+  
   for (i in 1:(n-1)) {
     res[[i]] <- coo[ids[i]:ids[i+1], ]
   }
@@ -369,7 +369,7 @@ coo_slide.Coo <- function(x, id1, ldk, ...) {
   } else {
     ##### id1 case ######
     if (length(id1)==1) id1 <- rep(id1, length(Coo))
-
+    
     # id1 case
     # id1=1 just rep
     #
@@ -430,7 +430,7 @@ coo_slidedirection.default <- function(coo, direction = "N",
     y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
     id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
   }
-
+  
   if (id) {
     return(id0) }
   else {
@@ -450,10 +450,13 @@ coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = TRUE) {
 #'
 #' When slicing a shape using two landmarks, or functions such as \link{coo_up},
 #' an open curve is obtained and the rank of points make wrong/artefactual results.
-#' This functions uses the widest gap between points and use the latter as starting
-#' and ending points. Examples are self-speaking.
+#' If the widest gap is > 5 * median of other gaps, then the couple of coordinates
+#' forming this widest gap is used as starting and ending points. This switch helps 
+#' to deal with open curves. Examples are self-speaking.
+#' Use \code{force=TRUE} to bypass this check
 #'
 #' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object
+#' @param force whether to use the widest gap, with no check, as the real gap
 #' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
 #' @keywords ShapeUtilities
 #' @examples
@@ -470,19 +473,26 @@ coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = TRUE) {
 #' # that's what we meant
 #' coo_plot(coo_slidegap(cat_down))
 #' @export
-coo_slidegap <- function(coo){
+coo_slidegap <- function(coo, force){
   UseMethod("coo_slidegap")
 }
 
 #' @export
-coo_slidegap.default <- function(coo){
-  widest_gap <- which.max(coo_perimpts(coo))
-  return(coo_slide(coo, widest_gap+1))
+coo_slidegap.default <- function(coo, force=FALSE){
+  gaps <- coo_perimpts(coo)
+  widest_gap <- which.max(gaps)
+  if (force) { 
+    return(coo_slide(coo, widest_gap+1))
+  }
+  if (gaps[widest_gap] > 5*median(gaps)) {
+    return(coo_slide(coo, widest_gap+1))
+  }
+return(coo)
 }
 
 #' @export
-coo_slidegap.Coo <- function(coo){
-  coo$coo <- lapply(coo$coo, coo_slidegap)
+coo_slidegap.Coo <- function(coo, force=FALSE){
+  coo$coo <- lapply(coo$coo, coo_slidegap, force=force)
   coo
 }
 
@@ -532,9 +542,9 @@ coo_sample.Out <- function(coo, n) {
     }
     cat(" * $ldk has been changed accordingly.\n")
   }
-
+  
   Out$coo <- lapply(Out$coo, coo_sample, n)
-
+  
   return(Out)
 }
 
@@ -1318,7 +1328,7 @@ coo_rev.Coo <- function(coo) {
     }
     cat(" * $ldk has been changed accordingly.\n")
   }
-    return(coo)
+  return(coo)
 }
 
 #' Defines interactively landmarks
@@ -1454,7 +1464,7 @@ coo_baseline <- function(coo, ldk1, ldk2, t1, t2) {
 }
 #' @export
 coo_baseline.default <- function(coo, ldk1 = 1, ldk2 = nrow(coo), t1 = c(-0.5,
-                                                                 0), t2 = c(0.5, 0)) {
+                                                                         0), t2 = c(0.5, 0)) {
   if (is.list(coo)) {
     coo <- l2m(coo)
   }
@@ -1490,14 +1500,14 @@ coo_baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2,
                              t1 = c(-0.5, 0), t2 = c(0.5, 0)) {
   Coo <- coo
   if (length(Coo$ldk)>0) {
-  for (i in seq(along = Coo$coo)) {
-    Coo$coo[[i]] <- coo_baseline(Coo$coo[[i]], Coo$ldk[[i]][ldk1],
-                                 Coo$ldk[[i]][ldk2], t1, t2)
-  }
+    for (i in seq(along = Coo$coo)) {
+      Coo$coo[[i]] <- coo_baseline(Coo$coo[[i]], Coo$ldk[[i]][ldk1],
+                                   Coo$ldk[[i]][ldk2], t1, t2)
+    }
   } else {
     Coo$coo <- lapply(Coo$coo, coo_baseline, t1=t1, t2=t2)
   }
-
+  
   return(Coo)
 }
 

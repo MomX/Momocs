@@ -4,10 +4,12 @@
 \alias{coo_slidegap}
 \title{Slides coordinates using the widest gap}
 \usage{
-coo_slidegap(coo)
+coo_slidegap(coo, force)
 }
 \arguments{
 \item{coo}{either a \code{matrix} of (x; y) coordinates or a \link{Coo} object}
+
+\item{force}{whether to use the widest gap, with no check, as the real gap}
 }
 \value{
 a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
@@ -15,8 +17,10 @@ a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
 \description{
 When slicing a shape using two landmarks, or functions such as \link{coo_up},
 an open curve is obtained and the rank of points make wrong/artefactual results.
-This functions uses the widest gap between points and use the latter as starting
-and ending points. Examples are self-speaking.
+If the widest gap is > 5 * median of other gaps, then the couple of coordinates
+forming this widest gap is used as starting and ending points. This switch helps
+to deal with open curves. Examples are self-speaking.
+Use \code{force=TRUE} to bypass this check
 }
 \examples{
 data(shapes)
