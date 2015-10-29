@@ -658,14 +658,12 @@ tps2Coo <- function(tps.path, sep = " ") {
 #' please let met know!
 #' @keywords Babel
 #' @examples
-#' \dontrun{
 #' # That's how wings dataset was created
 #' # made a local copy from http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts
 #' # then :
-#' coo_list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
-#' fac       <- data.frame(fac=factor(substr(names(coo_list), 1, 2)))
-#' wings <- Ldk(coo_list, fac=fac)
-#' }
+#' # coo_list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
+#' # fac       <- data.frame(fac=factor(substr(names(coo_list), 1, 2)))
+#' # wings <- Ldk(coo_list, fac=fac)
 #' @export
 ntsrow2Coo <- function(nts.path, sep = "\t") {
   # we read all lines and remove the first one

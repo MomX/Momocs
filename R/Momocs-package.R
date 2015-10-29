@@ -4,21 +4,19 @@
 ##### We include magrittr pipes when loading Momocs
 
 #' @export
-`%>%` <- dplyr::`%>%`
+dplyr::`%>%`
 
 #' @importFrom magrittr %<>%
 #' @export
-`%<>%` <- magrittr::`%<>%`
+magrittr::`%<>%`
 
 #' @importFrom magrittr %$%
 #' @export
-`%$%` <- magrittr::`%$%`
+magrittr::`%$%`
 
 #' @importFrom magrittr %T>%
 #' @export
-`%T>%` <- magrittr::`%T>%`
-
-
+magrittr::`%T>%`
 
 ##### Package documentation and NAMESPACE import
 
