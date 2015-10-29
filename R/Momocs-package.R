@@ -1,6 +1,25 @@
 # run this one to update DESCRIPTION with no pain
 # source("~/Research/Momocs/update.R")
 
+##### We include magrittr pipes when loading Momocs
+
+#' @export
+`%>%` <- dplyr::`%>%`
+
+#' @importFrom magrittr %<>%
+#' @export
+`%<>%` <- magrittr::`%<>%`
+
+#' @importFrom magrittr %$%
+#' @export
+`%$%` <- magrittr::`%$%`
+
+#' @importFrom magrittr %T>%
+#' @export
+`%T>%` <- magrittr::`%T>%`
+
+
+
 ##### Package documentation and NAMESPACE import
 
 #' Momocs
@@ -110,7 +129,7 @@ update_Momocs <- function() {
 
 
 #' Browse Momocs online doc
-#' 
+#'
 #' Launch a browser to an online version of the manual
 #' @param topic the function name to access. If not specified the homepage of
 #' the online manual is accessed.
