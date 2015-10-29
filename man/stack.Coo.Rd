@@ -7,10 +7,11 @@
 \title{Plots Coo objects: stack (all shapes in the same frame)}
 \usage{
 \method{stack}{Coo}(x, cols, borders, fac, palette = col_summer,
-  points = FALSE, first.point = TRUE, centroid = TRUE, ldk = TRUE,
-  ldk.pch = 3, ldk.col = "#FF000055", ldk.cex = 0.5, ldk_links = FALSE,
-  ldk_confell = FALSE, ldk_contour = FALSE, ldk_chull = FALSE,
-  ldk_labels = FALSE, xy.axis = TRUE, title = substitute(x), ...)
+  coo_sample = 120, points = FALSE, first.point = TRUE, centroid = TRUE,
+  ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055", ldk.cex = 0.5,
+  ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
+  ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE,
+  title = substitute(x), ...)
 
 \method{stack}{OutCoe}(x, nb.pts = 120, ...)
 
@@ -32,6 +33,8 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{fac}{a factor within the $fac slot for colors}
 
 \item{palette}{a color palette to use when fac is provided}
+
+\item{coo_sample}{if not NULL the number of point per shape to display (to plot quickly)}
 
 \item{points}{logical whether to draw or not points}
 

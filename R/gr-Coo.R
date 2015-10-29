@@ -95,6 +95,7 @@ plot.Coo <- function(x, id, ...) {
 #' Either a single value or of length exactly equals to the number of coordinates.
 #' @param fac a factor within the $fac slot for colors
 #' @param palette a color palette to use when fac is provided
+#' @param coo_sample if not NULL the number of point per shape to display (to plot quickly)
 #' @param points logical whether to draw or not points
 #' @param first.point logical whether to draw or not the first point
 #' @param centroid logical whether to draw or not the centroid
@@ -137,6 +138,7 @@ stack.Coo <-
   function(x,
            cols, borders,
            fac, palette = col_summer,
+           coo_sample=120,
            points = FALSE, first.point = TRUE, centroid = TRUE,
            ldk = TRUE,
            ldk.pch = 3, ldk.col = "#FF000055",
@@ -145,6 +147,9 @@ stack.Coo <-
            ldk_chull = FALSE, ldk_labels = FALSE,
            xy.axis = TRUE, title=substitute(x), ...) {
     Coo <- x
+    # downsize
+    if (is.numeric(coo_sample)) Coo <- coo_sample(Coo, coo_sample)
+
     # we handle for missing cols
     if (missing(cols)) {
       cols <- rep(NA, length(Coo))
@@ -268,6 +273,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' @param fac a factor within the $fac slot for colors
 #' @param reorder a factor or a numeric to reorder shapes
 #' @param palette a color \link{palette}
+#' @param coo_sample if not NULL the number of point per shape to display (to plot quickly)
 #' @param names whether to plot names or not. If TRUE uses shape names, otherwise
 #' pass a character for the names of the files
 #' @param cex.names a cex for the names
@@ -302,9 +308,10 @@ panel <- function(x, ...) {
 #' @rdname panel.Coo
 #' @export
 panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
-                      palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
+                      palette = col_summer, coo_sample=120, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
+  if (is.numeric(coo_sample)) Coo <- coo_sample(Coo, coo_sample)
   if (!missing(fac)) {
 
     if (missing(cols)) {
@@ -360,9 +367,10 @@ panel.OutCoe <- function(x, nb.pts=120, ...){
 #' @rdname panel.Coo
 #' @export
 panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
-                      palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
+                      palette = col_summer, coo_sample=120, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
+  if (is.numeric(coo_sample)) Coo <- coo_sample(Coo)
   if (!missing(fac)) {
 
     if (missing(cols)) {

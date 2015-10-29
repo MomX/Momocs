@@ -12,14 +12,14 @@
 panel(x, ...)
 
 \method{panel}{Out}(x, dim, cols, borders, fac, reorder = NULL,
-  palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
-  points.pch = 3, points.cex = 0.2, points.col, ...)
+  palette = col_summer, coo_sample = 120, names = NULL, cex.names = 0.6,
+  points = TRUE, points.pch = 3, points.cex = 0.2, points.col, ...)
 
 \method{panel}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{panel}{Opn}(x, cols, borders, fac, reorder = NULL,
-  palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
-  points.pch = 3, points.cex = 0.2, points.col, ...)
+  palette = col_summer, coo_sample = 120, names = NULL, cex.names = 0.6,
+  points = TRUE, points.pch = 3, points.cex = 0.2, points.col, ...)
 
 \method{panel}{Ldk}(x, cols, borders, fac, reorder = NULL,
   palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
@@ -44,6 +44,8 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{reorder}{a factor or a numeric to reorder shapes}
 
 \item{palette}{a color \link{palette}}
+
+\item{coo_sample}{if not NULL the number of point per shape to display (to plot quickly)}
 
 \item{names}{whether to plot names or not. If TRUE uses shape names, otherwise
 pass a character for the names of the files}
