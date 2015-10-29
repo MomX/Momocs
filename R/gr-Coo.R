@@ -370,7 +370,9 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
                       palette = col_summer, coo_sample=120, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   Coo <- x
-  if (is.numeric(coo_sample)) Coo <- coo_sample(Coo)
+  if (is.numeric(coo_sample)) {
+    Coo <- coo_sample(Coo, coo_sample)
+  }
   if (!missing(fac)) {
 
     if (missing(cols)) {
