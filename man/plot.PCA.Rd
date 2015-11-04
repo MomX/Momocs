@@ -17,11 +17,12 @@
   0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
   lev.contour = 3, n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
-  labels = FALSE, col.labels = par("fg"), cex.labels = 0.6,
-  abbreviate.labels = TRUE, labelsgroups = TRUE, cex.labelsgroups = 0.8,
-  rect.labelsgroups = FALSE, abbreviate.labelsgroups = FALSE,
-  axisnames = TRUE, axisvar = TRUE, eigen = TRUE, rug = TRUE,
-  title = substitute(x), box = TRUE, old.par = TRUE, ...)
+  labelspoints = FALSE, col.labelspoints = par("fg"),
+  cex.labelspoints = 0.6, abbreviate.labelspoints = TRUE,
+  labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
+  abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
+  eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,
+  old.par = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
@@ -117,13 +118,13 @@ a matrix of positions. See \link{pos.shapes}}
 
 \item{loadings}{logical whether to add loadings for every variables}
 
-\item{labels}{if TRUE rownames are used as labels, a colname from $fac can also be passed}
+\item{labelspoints}{if TRUE rownames are used as labels, a colname from $fac can also be passed}
 
-\item{col.labels}{a color for these labels}
+\item{col.labelspoints}{a color for these labels, otherwise inherited from fac}
 
-\item{cex.labels}{a cex for these labels}
+\item{cex.labelspoints}{a cex for these labels}
 
-\item{abbreviate.labels}{logical whether to abbreviate these labels}
+\item{abbreviate.labelspoints}{logical whether to abbrevia}
 
 \item{labelsgroups}{logical whether to add labels for groups}
 
@@ -131,7 +132,7 @@ a matrix of positions. See \link{pos.shapes}}
 
 \item{rect.labelsgroups}{logical whether to add a rectangle behind groups names}
 
-\item{abbreviate.labelsgroups}{if yes, whether to abbreviate group names}
+\item{abbreviate.labelsgroups}{logical, whether to abbreviate group names}
 
 \item{axisnames}{logical whether to add PC names}
 
@@ -148,6 +149,8 @@ a matrix of positions. See \link{pos.shapes}}
 \item{old.par}{whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.}
 
 \item{...}{useless here, just to fit the generic plot}
+
+\item{abbreviate.labels}{logical, whether to abbreviate group names}
 }
 \description{
 The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.

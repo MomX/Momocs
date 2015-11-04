@@ -58,14 +58,15 @@
 #' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
 #' @param delaunay logical whether to add a delaunay 'mesh' between points
 #' @param loadings logical whether to add loadings for every variables
-#' @param labels if TRUE rownames are used as labels, a colname from $fac can also be passed
-#' @param col.labels a color for these labels
-#' @param cex.labels a cex for these labels
+#' @param labelspoints if TRUE rownames are used as labels, a colname from $fac can also be passed
+#' @param col.labelspoints a color for these labels, otherwise inherited from fac
+#' @param cex.labelspoints a cex for these labels
+#' @param abbreviate.labelspoints logical whether to abbrevia
 #' @param labelsgroups logical whether to add labels for groups
-#' @param abbreviate.labels logical whether to abbreviate these labels
+#' @param abbreviate.labels logical, whether to abbreviate group names
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
 #' @param rect.labelsgroups logical whether to add a rectangle behind groups names
-#' @param abbreviate.labelsgroups if yes, whether to abbreviate group names
+#' @param abbreviate.labelsgroups logical, whether to abbreviate group names
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
 #' @param eigen logical whether to draw a plot of the eigen values
@@ -138,14 +139,16 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      delaunay=FALSE,
                      #loadings
                      loadings=FALSE,
-                     #labels
-                     labels=FALSE,
-                     col.labels=par("fg"),
-                     cex.labels=0.6,
-                     abbreviate.labels=TRUE,
+                     #labelspoint
+                     labelspoints=FALSE,
+                     col.labelspoints=par("fg"),
+                     cex.labelspoints=0.6,
+                     abbreviate.labelspoints=TRUE,
                      #labelsgroups
-                     labelsgroups=TRUE, cex.labelsgroups=0.8,
-                     rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
+                     labelsgroups=TRUE,
+                     cex.labelsgroups=0.8,
+                     rect.labelsgroups=FALSE,
+                     abbreviate.labelsgroups=FALSE,
                      #axisnames
                      axisnames=TRUE,
                      #axisvar
@@ -210,8 +213,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug <- FALSE
   if (!missing(chull.lty)) chull <- TRUE
-  if (!missing(labels) & missing(points)) points <- FALSE
-  if (missing(col.labels)) col.labels <- col.groups
+  if (!missing(labelspoints) & missing(points)) points <- FALSE
+  if (missing(col.labelspoints)) col.labelspoints <- col
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
   
   ##### Graphics start here
@@ -248,14 +251,17 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (rug)        .rug(xy, NULL, col)
   }
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (!missing(labels)) {
-    if (any(colnames(PCA$fac)==labels)) {
-      rn <- PCA$fac[, labels]
+  if (!missing(labelspoints)) {
+    if (any(colnames(PCA$fac)==labelspoints)) {
+      rn <- PCA$fac[, labelspoints]
     } else {
-      rn <- rownames(xy)
+      rn <- NULL
     }
-    if (abbreviate.labels) rn <- abbreviate(rn)
-    text(xy[, 1], xy[, 2], labels=rn, col=col.labels, cex=cex.labels)
+    if (!is.null(rn)){
+      if (abbreviate.labelspoints) rn <- abbreviate(rn)
+      text(xy[, 1], xy[, 2], labels=rn,
+           col=col.labelspoints, cex=cex.labelspoints)
+    }
   }
   if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
