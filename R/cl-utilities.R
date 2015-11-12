@@ -96,7 +96,7 @@ subset.Coo <- function(x, subset, ...) {
   if (length(Coo$ldk) > 0)
     Coo2$ldk <- Coo$ldk[retain]
   if (ncol(Coo$fac) > 0) {
-    Coo2$fac <- Coo$fac[retain, ]
+    Coo2$fac <- dplyr::slice(Coo$fac, retain)
     names(Coo2$fac) <- names(Coo$fac)
     Coo2$fac <- .refactor(Coo2$fac)
   }
@@ -245,6 +245,7 @@ rm_uncomplete <- function(x, id, by){
 #' colnames(rm_harm(bf, 1)$coe)
 #' @export
 rm_harm <- function(x, drop=1){
+  if (drop==0 | !is.numeric(drop)) return(x)
   regex <- paste0("[A-D][1-", drop,"]")
   x$coe <- x$coe[, -grep(regex, colnames(x$coe))]
   x
