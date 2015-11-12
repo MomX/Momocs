@@ -297,6 +297,9 @@ rePCA.PCA <- function(PCA, Coe){
 #' @return
 #' If fac is not provided global area/volume is returned; otherwise a named
 #' list for every level of fac
+#' 
+#' @details get_chull_area is calculated using \link{coo_chull} followed by \link{coo_area};
+#'  get_chull_volume is calculated using geometry::convexhulln
 #'
 #' @examples
 #' data(bot)
@@ -347,7 +350,7 @@ get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
   # no fac provided
   if (missing(fac)){
     xy <- x$x[, c(xax, yax, zax)]
-    res <- convhulln(xy, options="FA")$vol
+    res <- geometry::convhulln(xy, options="FA")$vol
     return(res)
   }
   # else...fac provided
@@ -360,8 +363,8 @@ get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
     xy.i <- x[fac == levels(fac)[i], ]
     # boring but prevents the numeric/2rows matrices
     if (is.matrix(xy.i)) {
-      if (nrow(xy.i) > 2) {
-        res[[i]] <- convhulln(xy.i, options="FA")$vol
+      if (nrow(xy.i) >= 4) {
+        res[[i]] <- geometry::convhulln(xy.i, options="FA")$vol
       }  else {
         res[[i]] <- NULL
       }

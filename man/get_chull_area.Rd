@@ -28,6 +28,10 @@ list for every level of fac
 May be useful to compare shape diversity. Expressed in PCA units that should
 only be compared within the same PCA.
 }
+\details{
+get_chull_area is calculated using \link{coo_chull} followed by \link{coo_area};
+ get_chull_volume is calculated using geometry::convexhulln
+}
 \examples{
 data(bot)
 bp <- PCA(efourier(bot, 12))

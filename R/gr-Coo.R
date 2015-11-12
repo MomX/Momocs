@@ -278,8 +278,8 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' @param reorder a factor or a numeric to reorder shapes
 #' @param palette a color \link{palette}
 #' @param coo_sample if not NULL the number of point per shape to display (to plot quickly)
-#' @param names whether to plot names or not. If TRUE uses shape names, otherwise
-#' pass a character for the names of the files
+#' @param names whether to plot names or not. If TRUE uses shape names, a column name or number from
+#'  $fac can be supllied, or even a character of the same length of the Coo
 #' @param cex.names a cex for the names
 #' @param points logical (for Ldk) whether to draw points
 #' @param points.pch (for Ldk) and a pch for these points
@@ -320,11 +320,13 @@ panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
       Coo <- coo_sample(Coo, coo_sample)
     }
   }
+  if (!missing(reorder)){
+    new_order <- order(Coo$fac[, reorder])
+    Coo <- Momocs::slice(Coo, new_order)
+  }
   if (!missing(fac)) {
-
     if (missing(cols)) {
-      cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[,
-                                                       fac]]
+      cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[, fac]]
     } else {
       cols <- cols[Coo$fac[, fac]]
     }
@@ -341,24 +343,22 @@ panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
   if (length(borders) != length(Coo)) {
     borders <- rep(borders[1], length(Coo))
   }
-  if (!missing(reorder))
-    reorder <- Coo$fac[, reorder]
+
+
+    #reorder <- Coo$fac[, reorder]
   pos <- coo_listpanel(Coo$coo, dim=dim, cols = cols, borders = borders,
-                       reorder = reorder, poly = TRUE)
+                       poly = TRUE)
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
       if (length(names) != length(Coo)) {
-        if (is.null(reorder)) {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[,
-                                                    names], cex = cex.names)
-        } else {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[,
-                                                    names][order(reorder)], cex = cex.names)
-        }
+          text(pos[, 1], pos[, 2],
+               labels = Coo$fac[, names], cex = cex.names)
+
       } else {
-        text(pos[, 1], pos[, 2], labels = names, cex = cex.names)
+        text(pos[, 1], pos[, 2],
+             labels = names, cex = cex.names)
       }
     }
   }
