@@ -1,0 +1,280 @@
+---
+title: "Introduction to Momocs"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Momocs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+## Abstract
+Momocs is an [R](http://cran.r-project.org/) package intended to ease and to popularize morphometrics, the quantitative analysis of form. It aims at gathering the most common approaches: traditional morphometrics, global descriptors, open outlines, closed outlines and configuration of landmarks into the same, open-source, environment. _And_ using the same, simple and easy-to-learn, open-source, and extendable grammar both for the user and programmers. Momocs hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008), wraps them into the same coding grammar, and extends them both graphically and statistically.
+
+* See Momocs [features](https://github.com/vbonhomme/Momocs/#features).
+* If you use it, please cite it: `citation("Momocs")`
+
+## Survival tips
+* This vignette gently introduces Momocs; more specific help can be find in function's helfiles, for instance `?efourier`.
+* There is an online (and much nicer) version of this manual that can be accessed with `Momocs_help("efourier")`.
+* Feel free to contribute to Momocs through [GitHub](http://www.github.com/vbonhomme/Momocs): share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that's definitely worth [a look](http://r-pkgs.had.co.nz/git.html).
+* GitHub repo is also the preferred place for reporting issues or asking for new features.
+
+## Contact
+Feel free to drop me a line, should you need a hand or would like to collaborate with me:   `bonhomme.vincent@gmail.com`.
+
+
+## Architecture
+Morphometrics is the ugly job of turning beautiful shapes into quantitative variables. Just kidding, that's pretty exciting. Whether you're working with landmarks, outlines, curves or even traditional morphometrics, this still applies. And indeed, centering a configuration of landmarks or an outline, or calculating their centroid size is, mathematically, the same _generic_ operation. Naturally, some operations are _specific_ to peculiar types of data, for instance calculating elliptical Fourier transforms on a configuration of landmarks would make no sense. 
+
+This can be summarized as follows:
+```
+Coo(rdinates) ---> Morphometric method ---> Coe(fficients)
+```
+
+Momocs implement this relation and defines _classes_ : `Coo` and `Coe` to handle collection of coordinates and coefficients, respectively. Within `Coo` (similarly for `Coe`) _subclasses_ are defined : `OutCoo` (`OutCoe`), `OpnCoo` (`OpnCoe`), `LdkCoo` (`LdkCoe`) whether you have outlines, open outlines or landmarks, respectively. When a particular `Coo` is passed to an allowed morphometric function it becomes a `Coe`, for instance if you apply `efourier` to an `OutCoo` (outlines coordinates), it then becomes an `OutCoe`
+. You will soon discover why this is practical and powerful.
+
+Essentially, coordinates and coefficients. $fac
+
+## Get, install and use it
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(eval = FALSE)
+```
+
+First, of all, let's download the last version of Momocs. You will need to install the `devtools` package to get it from my [GitHub](http://www.github.com/vbonhomme) repository :
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("vbonhomme/Momocs")
+```
+
+The typical `install_packages("Momocs")` is not recommended as Momocs is still under active development, not compatible with frequent, time-consuming, and overall boring CRAN submission.
+
+We can start using Momocs, as long as it has been loaded with :
+```{r, eval=TRUE, echo=FALSE, message=FALSE}
+library(Momocs)
+```
+
+## Basic shape operations
+Let's load one of the Momocs datasets, some various outlines (an `Out` object):
+
+```{r, marginfigure = TRUE}
+data(shapes)              # we load it
+shapes                    # a brief summary
+panel(shapes, names=TRUE) # base graphics
+panel2(shapes)            # ggplot2 graphics
+```
+
+Let's select the 4th shape, using the traditional syntax; then plot it. `coo_plot` comes with several options and display by defaut the centroid and the first point.
+```{r, marginfigure=TRUE}
+shp <- shapes[4]
+coo_plot(shp) # base plotter for shapes
+coo_plot(shp, col="grey80", border="black")
+```
+
+Let's now do some basic operations on this shape. They all named `coo_*` and you can have the full list with `apropos("coo_")`. `coo_*` family encompasses geometric operations (such as centering, scaling, etc.), scalar descriptors of shape (such as area, perimeter, circularity, rectilinearity, etc.) and various other operations on a single shape.
+
+```{r, marginfigure = TRUE}
+library(maggritr)
+coo_plot(coo_center(shp))
+coo_plot(coo_sample(shp, 64), points=TRUE, pch=20)
+```
+
+Using [maggritr](http://cran.r-project.org/package=magrittr)'s pipe makes things clearer, and pipes can be defined. The most common function also work on the `Coo` objects, e.g. `shapes`. Have a look to Momocs' architecture; you can start there: `?Coo`.
+
+```{r}
+library(magrittr)
+shp %>% coo_smooth(5) %>% coo_sample(64) %>% coo_scale() %>% coo_plot()
+cs64 <- function(x) x %>% coo_sample(64) %>% coo_scale() %>% coo_center()
+shapes %>% cs64 %>% plot(4)
+```
+
+If you prefer [ggplot2](http://ggplot2.org/) graphics. Have a look to `as_df` methods.
+```{r}
+library(ggplot2)
+ggplot(m2d(shp), aes(x, y)) + geom_path() + coord_equal() + labs(title="A shape")
+````
+
+## Outline analysis
+You can extract outlines from a list of jpg images with `import_jpg`. Have a look to helpfiles (`import_jpg` and `import_jpg1`) for more details. Here we do not bother with import since we will use the `bot`tles dataset bundled with Momocs.
+
+```{r}
+data(bot)
+bot
+panel(bot, fac="type", names=TRUE)
+stack(bot)
+````
+
+Just for the record, pipes can also be defined on `Coo` objects
+```{r}
+bot %>% 
+  coo_align() %>% 
+  coo_center() %>% 
+  coo_scale() %>% 
+  coo_slidedirection("S") %>%
+  stack()
+```
+
+Let's do some EFT (but `rfourier` and `tfourier` work the same way). The idea behind elliptical Fourier transforms:
+```{r}
+coo_oscillo(bot[1], "efourier")
+```
+
+Let's calibrate the number of harmonics required.
+```{r}
+calibrate_harmonicpower(bot)
+calibrate_deviations(bot)
+calibrate_reconstructions(bot)
+````
+
+10 harmonics seem a nice choice, they gather 99% of the harmonic power. If you're happy with this criteria, you can even omit `nb.h` in `efourier` : that's the default parameter.
+
+```{r}
+bot.f <- efourier(bot, nb.h=10)
+bot.f
+```
+
+`bot.f` is a `Coe` object (and even an `OutCoe`), you have have a look to the help files to go deeper into Momocs classes.
+
+Let's have a look to the amplitude of fitted coefficients. We can also reconstruct fitted outlines, directly.
+```{r}
+hist(bot.f, drop=0)
+boxplot(bot.f, drop=1)
+stack(bot.f)
+```
+
+Normalize: before or after?
+```{r}
+data(molars)
+stack(molars)
+mol.al <- fgProcrustes(molars)
+stack(mol.al)
+panel(mol.al, fac="type")
+stack(coo_slidedirection(mol.al, "W"))
+plot(PCA(efourier(molars)), "type")
+plot(PCA(efourier(mol.al, norm=FALSE)), "type")
+```
+
+## Multivariate statistics
+Let's see the main components of shape variability with a Principal Component Analysis.
+
+```{r}
+bot.p <- PCA(bot.f)
+plot(bot.p)
+````
+
+See morphological spaces are reconstructed on the flow. We can also display are two groups (defined in the slot `$fac`, here `bot$fac`).
+```{r}
+plot(bot.p, 1)
+plot(bot.p, 1, palette=col_sari, ellipses=TRUE, ellipsesax = FALSE)
+plot(bot.p, 1, pch=c(4, 5))
+plot3(bot.p)
+
+plot2(bot.p, "type") # on their way
+PCcontrib(bot.p)
+```
+
+We can also calculate a Linear Discriminant Analysis on the scores. Cross-validation is also calculated and can be plotted as well.
+```{r}
+bot.l <- LDA(bot.p, 1)
+bot.l # along with the cross-validation table. classification 
+plot_CV(bot.l)
+```
+
+We can also test for a difference in the distribution of those PC scores with a multivariate ANOVA:
+```{r}
+MANOVA(bot.p, "type")
+```
+
+A hierarchical classification now
+```{r}
+CLUST(bot.p, 1)
+```
+
+We can retrieve the mean shapes:
+```{r}
+bot.ms <- mshapes(bot.f, 1)
+beer   <- bot.ms$shp$beer
+whisky <- bot.ms$shp$whisky 
+tps_grid(beer, whisky)
+tps_arr(beer, whisky)
+tps_iso(beer, whisky)
+```
+
+And even export the coefficients.
+```{r, eval=FALSE}
+export(bot.f)
+```
+
+## Open outlines
+```{r}
+data(olea)
+stack(olea)
+panel(olea, names=TRUE)
+op <- opoly(olea)
+plot(PCA(op), ~domes+cep, palette=col_india)
+```
+
+## Configuration of landmarks
+```{r}
+data(wings)
+w.al <- fgProcrustes(wings)
+stack(w.al)
+ldk_confell(w.al$coo, col = "red")
+ldk_chull(w.al$coo)
+ldk_contour(w.al$coo)
+ldk_labels(mshape(w.al$coo))
+
+plot(PCA(w.al), 1, pch=20)
+```
+
+## Handling objects
+One common yet boring task of morphometrics consists in handling datasets: add new information, remove some individuals, etc. Momocs adapts [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) verbs to its objects, and add new ones. If you have never heard of dplyr, let's have a look to this [introduction](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html), this may change your (R) life.
+
+Basics verbs are implemented; try the following:
+```{r}
+data(olea)
+olea
+
+# slice: select individuals based on their position
+slice(olea, 1:5)
+slice(olea, -(1:100))
+
+# filter: select individual based on a logical condition
+filter(olea, domes=="cult", view!="VD")
+
+# select: pick, reorder columns from the $fac
+select(olea, 1, Ind=ind)
+
+# rename: rename columns (select can also do it)
+rename(olea, domesticated=domes)
+
+# mutate: add new columns
+mutate(olea, fake=factor(rep(letters[1:2], each=105)))
+
+# transmute: add new columns and drop others
+transmute(olea, fake=factor(rep(letters[1:2], each=105)))
+```
+
+And you can pipe those operations: say, we only want dorsal views from domesticated individuals, for a (renamed) 'status' column, and drop the 'ind' column:
+```{r}
+olea %>% 
+  filter(domes=="cult", view=="VD") %>% 
+  rename(domesticated=domes) %>% 
+  select(-ind)
+```
+
+This should save some headaches.
+
+New verbs are implemented: for instance, you can `chop` (a rougher slicing) according to a condition: this will create a list, on which you can apply further operations, then `combine` it back. This is particularly useful when you want to apply independant treatments to different partitions, eg orthogonal views of your model. Prior to this, we can use `table` to cross-tabulate data from `$fac`. We could have done the first step of what follows with `rm_uncomplete` that drops (if any) missing data.
+
+```{r}
+table(olea, "view", "var") # no VL fir 'Cypre' var
+olea %>% filter(var != "Cypre") %>%              # we drop 'Cypre'
+  chop(view) %>% lapply(opoly) %>% combine() %>% # split, do morphometrics, combine
+  PCA() %>% plot("var")                          # note the two views in the morphospace
+```
+Makes me want to listen to [this](https://www.youtube.com/watch?v=E2VCwBzGdPM).
+
