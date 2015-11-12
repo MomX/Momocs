@@ -1130,7 +1130,7 @@ coo_right <- function(coo, slidegap=FALSE){
 #' @export
 coo_right.default <- function(coo, slidegap=FALSE) {
   right <- coo[coo[, 1] >= 0, ]
-  if (slidegap) { right <- coo_slidegap(rigth)}
+  if (slidegap) { right <- coo_slidegap(right)}
   return(right)
 }
 

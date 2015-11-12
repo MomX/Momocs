@@ -22,7 +22,6 @@ Using \link{kde2d} in the MASS package.
 data(wings)
 coo_plot(mshapes(wings))
 ldk_contour(wings$coo)
- @export
 }
 \seealso{
 \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}

@@ -62,7 +62,7 @@ bot1.l <- LDA(bot1.p, "type")
 bot2.p <- rePCA(bot1.p, bot2.f)
 
 # we finally "predict" with the model obtained before
-bot2.l <- reLDA(bot1.l, bot2.p)
+bot2.l <- reLDA(bot2.p, bot1.l)
 bot2.l
 
 }

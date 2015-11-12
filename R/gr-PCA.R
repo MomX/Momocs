@@ -63,7 +63,6 @@
 #' @param cex.labelspoints a cex for these labels
 #' @param abbreviate.labelspoints logical whether to abbrevia
 #' @param labelsgroups logical whether to add labels for groups
-#' @param abbreviate.labels logical, whether to abbreviate group names
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
 #' @param rect.labelsgroups logical whether to add a rectangle behind groups names
 #' @param abbreviate.labelsgroups logical, whether to abbreviate group names
@@ -374,24 +373,24 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
 
 #' Shape variation along PC axes
 #'
-#'  Calculates and plots shape variation along Principal Component axes.
+#' Calculates and plots shape variation along Principal Component axes.
 #'
-#'  @param PCA a \code{\link{PCA}} object
-#'  @param nax a single or a range of PC axes
-#'  @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
-#'  @param gap for combined-Coe, an adjustment variable for gap between shapes. (bug)Default
-#'  to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.
-#'  @param ... additional parameter to pass to \code{\link{coo_draw}}
-#'  @return a ggplot object
-#'  @examples
-#'  data(bot)
-#'  bot.p <- PCA(efourier(bot, 12))
-#'  PCcontrib(bot.p)
-#'  \dontrun{
-#'  library(ggplot2)
-#'  gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
-#'  gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
-#'  }
+#' @param PCA a \code{\link{PCA}} object
+#' @param nax a single or a range of PC axes
+#' @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
+#' @param gap for combined-Coe, an adjustment variable for gap between shapes. (bug)Default
+#' to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.
+#' @param ... additional parameter to pass to \code{\link{coo_draw}}
+#' @return a ggplot object
+#' @examples
+#' data(bot)
+#' bot.p <- PCA(efourier(bot, 12))
+#' PCcontrib(bot.p)
+#' \dontrun{
+#' library(ggplot2)
+#' gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
+#' gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
+#' }
 #' @rdname PCcontrib
 #' @export
 PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}

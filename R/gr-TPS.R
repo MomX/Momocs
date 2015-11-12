@@ -11,6 +11,7 @@
 #' @param grid0 a matrix of coordinates on which to calculate deformations
 #' @param fr the reference \eqn{(x; y)} coordinates
 #' @param to the target \eqn{(x; y)} coordinates
+#' @param new the target coordinates (again)
 #' @return a matrix of \code{(x; y)} coordinates with TPS-interpolated
 #' deformations
 #' @seealso \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
@@ -58,8 +59,8 @@ tps2d <- function(grid0, fr, to) {
 
 #' @rdname tps2d
 #' @export
-tps_apply <- function(from, to, new){
-  tps2d(from, to, new)
+tps_apply <- function(fr, to, new){
+  tps2d(fr, to, new)
 }
 
 #' Vanilla Thin Plate Splines

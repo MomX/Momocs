@@ -7,7 +7,7 @@
 \usage{
 tps2d(grid0, fr, to)
 
-tps_apply(from, to, new)
+tps_apply(fr, to, new)
 }
 \arguments{
 \item{grid0}{a matrix of coordinates on which to calculate deformations}
@@ -15,6 +15,8 @@ tps_apply(from, to, new)
 \item{fr}{the reference \eqn{(x; y)} coordinates}
 
 \item{to}{the target \eqn{(x; y)} coordinates}
+
+\item{new}{the target coordinates (again)}
 }
 \value{
 a matrix of \code{(x; y)} coordinates with TPS-interpolated

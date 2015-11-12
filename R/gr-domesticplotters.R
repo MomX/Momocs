@@ -501,14 +501,14 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' data(wings)
 #' coo_plot(mshapes(wings))
 #' ldk_contour(wings$coo)
-#'  @export
+#' @export
 ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
   ldk <- ldk_check(ldk)
   for (i in 1:dim(ldk)[1]) {
     kx <- ldk[i, 1, ]
     ky <- ldk[i, 2, ]
     if (all(sd(kx) > 0, sd(ky) > 0)) {
-      k <- kde2d(kx, ky, n = grid.nb)
+      k <- MASS::kde2d(kx, ky, n = grid.nb)
       contour(k$x, k$y, k$z, nlevels = nlevels, add = TRUE, 
               drawlabels = FALSE, col = col)
     }

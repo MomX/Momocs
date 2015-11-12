@@ -149,8 +149,6 @@ a matrix of positions. See \link{pos.shapes}}
 \item{old.par}{whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.}
 
 \item{...}{useless here, just to fit the generic plot}
-
-\item{abbreviate.labels}{logical, whether to abbreviate group names}
 }
 \description{
 The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.

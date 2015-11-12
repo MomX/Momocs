@@ -121,26 +121,28 @@ hist.OpnCoe <- function(x, retain=4, drop=0, bw=20, ...){
 #' Calculates contribution of harmonics to shape. The amplitude of every coefficients
 #' of a given harmonic is multiplied by the coefficients provided and the resulting
 #' shapes are reconstructed and plotted. Naturally, only works on Fourier-based methods.
-#'  @param Coe a \code{\link{Coe}} object (either \code{OutCoe} or (soon) \code{OpnCoe})
-#'  @param id the id of a particular shape, otherwise working on the meanshape
-#'  @param harm.r range of harmonics on which to explore contributions
-#'  @param amp.r a vector of numeric for multiplying coefficients
-#'  @param main a title for the plot
-#'  @param xlab a title for the x-axis
-#'  @param ylab a title for the y-axis
-#'  @param ... additional parameter to pass to \code{\link{coo_draw}}
-#'  @rdname harm.contrib
-#'  @examples
-#'  data(bot)
-#'  bot.f <- efourier(bot, 12)
-#'  hcontrib(bot.f)
-#'  hcontrib(bot.f, harm.r=3:10, amp.r=1:8, col="grey20",
-#'     main="A huge panel")
-#'  @export
-hcontrib <- function(Coe, ...){UseMethod("hcontrib")}
+#' @param Coe a \code{\link{Coe}} object (either \code{OutCoe} or (soon) \code{OpnCoe})
+#' @param id the id of a particular shape, otherwise working on the meanshape
+#' @param harm.r range of harmonics on which to explore contributions
+#' @param amp.r a vector of numeric for multiplying coefficients
+#' @param main a title for the plot
+#' @param xlab a title for the x-axis
+#' @param ylab a title for the y-axis
+#' @param ... additional parameter to pass to \code{\link{coo_draw}}
+#' @rdname harm.contrib
+#' @examples
+#' data(bot)
+#' bot.f <- efourier(bot, 12)
+#' hcontrib(bot.f)
+#' hcontrib(bot.f, harm.r=3:10, amp.r=1:8, col="grey20",
+#'    main="A huge panel")
+#' @export
+hcontrib <- function(Coe, ...){
+  UseMethod("hcontrib")
+  }
 
-#'  @rdname harm.contrib
-#'  @export
+#' @rdname harm.contrib
+#' @export
 hcontrib.OutCoe <- function(Coe,
                             id,
                             harm.r,

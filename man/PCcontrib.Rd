@@ -10,25 +10,32 @@ PCcontrib(PCA, ...)
 \method{PCcontrib}{PCA}(PCA, nax = 1:4, sd.r = c(-2, -1, -0.5, 0, 0.5, 1,
   2), gap = 1, ...)
 }
+\arguments{
+\item{PCA}{a \code{\link{PCA}} object}
+
+\item{...}{additional parameter to pass to \code{\link{coo_draw}}}
+
+\item{nax}{a single or a range of PC axes}
+
+\item{sd.r}{a single or a range of mean +/- sd values (eg: c(-1, 0, 1))}
+
+\item{gap}{for combined-Coe, an adjustment variable for gap between shapes. (bug)Default
+to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.}
+}
+\value{
+a ggplot object
+}
 \description{
 Calculates and plots shape variation along Principal Component axes.
 }
-\details{
-@param PCA a \code{\link{PCA}} object
- @param nax a single or a range of PC axes
- @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
- @param gap for combined-Coe, an adjustment variable for gap between shapes. (bug)Default
- to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.
- @param ... additional parameter to pass to \code{\link{coo_draw}}
- @return a ggplot object
- @examples
- data(bot)
- bot.p <- PCA(efourier(bot, 12))
- PCcontrib(bot.p)
- \dontrun{
- library(ggplot2)
- gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
- gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
- }
+\examples{
+data(bot)
+bot.p <- PCA(efourier(bot, 12))
+PCcontrib(bot.p)
+\dontrun{
+library(ggplot2)
+gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
+gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
+}
 }
 

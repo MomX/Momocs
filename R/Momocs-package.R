@@ -1,6 +1,37 @@
 # run this one to update DESCRIPTION with no pain
 # source("~/Research/Momocs/update.R")
 
+# 'Online' functions
+
+#' Install and load the last version of Momocs
+#'
+#' Download the last version of Momocs from its GitHub account
+#' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)})
+#'
+#' You need devtools, but it is checked anyway.
+#' @export
+Momocs_update <- function() {
+  if (!requireNamespace("devtools", quietly = TRUE)) {
+    stop("devtools needed for this function to work. Please install it with install.packages('devtools')",
+         call. = FALSE)
+  }
+  devtools::install_github("vbonhomme/Momocs")
+  library(Momocs)
+  cat("Last version of Momocs has been installed from GitHub and loaded into R.\n")
+}
+
+#' Browse Momocs online doc
+#'
+#' Launch a browser to an online version of the manual
+#' @param topic the function name to access. If not specified the homepage of
+#' the online manual is accessed.
+#' @export
+Momocs_help <- function(topic=NULL){
+  url <- "http://vbonhomme.github.io/Momocs/"
+  if (!is.null(topic)) url <- paste0(url, topic, ".html")
+  browseURL(url)
+}
+
 ##### We include magrittr pipes when loading Momocs
 
 #' @export
@@ -98,44 +129,13 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
                   "node", "label", "angle", "hjust", "Freq",
                   "locus", "name"))
 
-#' Install and load the last version of Momocs
-#'
-#' Download the last version of Momocs from its GitHub account
-#' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)})
-#'
-#' You need devtools, but it is checked anyway.
-#' @examples
-#' \dontrun{
-#' # use it with:
-#' update_Momocs()
-#' }
-#' @export
-update_Momocs <- function() {
-  if (!requireNamespace("devtools", quietly = TRUE)) {
-    stop("devtools needed for this function to work. Please install it with install.packages('devtools')",
-         call. = FALSE)
-  }
-  devtools::install_github("vbonhomme/Momocs")
-  library(Momocs)
-  cat("Last version of Momocs has been installed from GitHub and loaded into R.\n")
-}
 
-# .onAttach <- function(lib, pkg) {
-# packageStartupMessage('This is Momocs ',
-# utils::packageDescription('Momocs', field='Version'),
-# appendLF = TRUE) }
+.onAttach <- function(lib, pkg) {
+  packageStartupMessage('This is Momocs ',
+                        utils::packageDescription('Momocs', field='Version'),
+                        appendLF = TRUE) }
 
 
-#' Browse Momocs online doc
-#'
-#' Launch a browser to an online version of the manual
-#' @param topic the function name to access. If not specified the homepage of
-#' the online manual is accessed.
-#' @export
-Momocs_help <- function(topic=NULL){
-  url <- "http://vbonhomme.github.io/Momocs/"
-  if (!is.null(topic)) url <- paste0(url, topic, ".html")
-  browseURL(url)
-}
+
 
 
