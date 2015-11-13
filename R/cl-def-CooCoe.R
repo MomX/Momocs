@@ -248,10 +248,6 @@ names.Coe <- function(x) {
 #' @export
 `$.PCA` <- `$.Coo`
 
-#' @export
-`$.` <- `$.Coo`
-
-
 # utils ######
 is.fac <- function(x) length(x$fac) > 0
 
