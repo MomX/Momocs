@@ -221,6 +221,37 @@ names.Coe <- function(x) {
   }
 }
 
+
+# $ can directly access to $fac colnames
+#' @export
+`$.Coo` <- 
+  function (x, name) 
+  {
+    a <- x[[name]]
+    if (!is.null(a)) 
+      return(a)
+    a <- x$fac[[name]]
+    if (!is.null(a)) 
+      return(a)
+    a <- x[[name, exact = FALSE]]
+    if (!is.null(a) && getOption("warnPartialMatchDollar", default = FALSE)) {
+      names <- names(x)
+      warning(gettextf("Partial match of '%s' to '%s' in data frame", 
+                       name, names[pmatch(name, names)]))
+    }
+    return(a)
+  }
+
+#' @export
+`$.Coe` <- `$.Coo`
+
+#' @export
+`$.PCA` <- `$.Coo`
+
+#' @export
+`$.` <- `$.Coo`
+
+
 # utils ######
 is.fac <- function(x) length(x$fac) > 0
 
