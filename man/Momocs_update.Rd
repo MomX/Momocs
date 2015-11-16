@@ -8,9 +8,7 @@ Momocs_update()
 }
 \description{
 Download the last version of Momocs from its GitHub account
-from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)})
-}
-\details{
+from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)}).
 You need devtools, but it is checked anyway.
 }
 

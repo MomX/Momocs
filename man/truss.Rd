@@ -30,7 +30,7 @@ data(wings)
 tx <- truss(wings)
 dim(tx)
 # we normalize and plot an heatmap
-txn <- apply(tx, 2, .normalize)
+txn <- apply(tx$coe, 2, .normalize)
 # heatmap(txn)
 
 txp <- PCA(tx, scale. = TRUE, center=TRUE, fac=wings$fac)

@@ -3,15 +3,11 @@
 # run this one to update DESCRIPTION with no pain
 # source("~/Research/Momocs/update.R")
 
-# 'Online' functions
-
 #' Install and load the last version of Momocs
 #'
 #' Download the last version of Momocs from its GitHub account
-#' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)})
-#'
+#' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)}).
 #' You need devtools, but it is checked anyway.
-#' @rdname Momocs_update
 #' @export
 Momocs_update <- function() {
   if (!requireNamespace("devtools", quietly = TRUE)) {
