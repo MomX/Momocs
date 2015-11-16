@@ -7,8 +7,9 @@
 #' @param fac a data.frame for covariates
 #' @examples
 #' data(iris)
-#' # let's (more or less) rebuidl the flower dataset
-#' TraCoe(iris[, 1:4], data.frame(sp=iris$Species))
+#' # let's (more or less) rebuild the flower dataset
+#' fl <- TraCoe(iris[, 1:4], data.frame(sp=iris$Species))
+#' fl %>% PCA() %>% plot("sp")
 #' @export
 TraCoe <- function(coe = matrix(), fac = data.frame()) {
   TraCoe <- list(coe = coe, fac = fac)
