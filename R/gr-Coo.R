@@ -1,39 +1,5 @@
 ##### Main Coo (Out/Opn/Ldk) plotters
 
-#' A family picture of a Coo object: all shapes in the same plot
-#'
-#' Will replace stack soon.
-#' @param Coo a Coo object
-#' @return a ggplot2 object
-#' @examples
-#' data(bot)
-#' stack2(bot)
-#' @export
-stack2 <- function(Coo){
-  df <- as_df(Coo)
-  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
-    geom_path() +
-    coord_equal()
-  gg
-}
-
-#' A family picture of a Coo object: all shapes side by side
-#'
-#' Will replace panel soon.
-#' @param Coo a Coo object
-#' @return a ggplot2 object
-#' @examples
-#' data(shapes)
-#' panel2(shapes)
-#' @export
-panel2 <- function(Coo){
-  df <- as_df(Coo)
-  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
-    geom_path() +
-    coord_equal() + facet_wrap( ~ id)
-  gg
-}
-
 # plot ----------------------------------------------------
 #' Plots Coo objects: plot (quick review)
 #'
@@ -241,8 +207,6 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   # Specific to Ldk not very clean below #todo
   A <- l2a(Coo$coo)
   mA <- mshapes(A)
-  points(mA, pch = 20, cex = ifelse(ldk.cex > 0.5, ldk.cex *
-                                      1.5, 1), col = "grey20")
   if (ldk_confell) {
     ldk_confell(A, conf = 0.9)
   }
@@ -254,11 +218,31 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   if (ldk_links | missing(ldk_links))  {
     if (is.matrix(Coo$links))
-      ldk_links(mshapes(A), Coo$links)
+      ldk_links(mshapes(A), Coo$links, col="grey90")
   }
   if (ldk_labels) {
     ldk_labels(mshapes(A))
   }
+  points(mA, pch = 20,
+         cex = ifelse(ldk.cex > 0.5, ldk.cex * 1.5, 1), col = "grey20")
+}
+
+
+#' A family picture of a Coo object: all shapes in the same plot
+#'
+#' Will replace stack soon.
+#' @param Coo a Coo object
+#' @return a ggplot2 object
+#' @examples
+#' data(bot)
+#' stack2(bot)
+#' @export
+stack2 <- function(Coo){
+  df <- as_df(Coo)
+  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
+    geom_path() +
+    coord_equal()
+  gg
 }
 
 # panel ---------------------------------------------------
@@ -468,6 +452,24 @@ panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
       }
     }
   }
+}
+
+
+#' A family picture of a Coo object: all shapes side by side
+#'
+#' Will replace panel soon.
+#' @param Coo a Coo object
+#' @return a ggplot2 object
+#' @examples
+#' data(shapes)
+#' panel2(shapes)
+#' @export
+panel2 <- function(Coo){
+  df <- as_df(Coo)
+  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
+    geom_path() +
+    coord_equal() + facet_wrap( ~ id)
+  gg
 }
 
 ##### end graphics Coo
