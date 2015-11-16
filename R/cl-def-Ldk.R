@@ -13,7 +13,7 @@
 #' All the shapes in x must have the same number of landmarks. If you are 
 #' trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample}.
 #' 
-#' @param x a \code{list} of matrices of (x; y) coordinates,
+#' @param coo a \code{list} of matrices of (x; y) coordinates,
 #' or an array, an Ldk object.
 #' @param fac (optionnal) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
@@ -26,18 +26,18 @@
 #' @examples
 #' methods(class=Ldk)
 #' @export
-Ldk <- function(x, fac = data.frame(), links = NULL) {
+Ldk <- function(coo, fac = data.frame(), links = NULL) {
   UseMethod("Ldk")
 }
 
 #' @export
-Ldk.default <- function(x, fac = data.frame(), links = NULL) {
+Ldk.default <- function(coo, fac = data.frame(), links = NULL) {
   cat(" * an Ldk object can only be build from a list, an array or an Ldk object")
 }
 
 #' @export
-Ldk.list <- function(x, fac = data.frame(), links = NULL) {
-  Ldk <- structure(list(coo = x, fac = fac, links = links), class=c("Ldk", "Coo"))
+Ldk.list <- function(coo, fac = data.frame(), links = NULL) {
+  Ldk <- structure(list(coo = coo, fac = fac, links = links), class=c("Ldk", "Coo"))
   if (!is.null(Ldk$fac)) 
     Ldk$fac <- as.data.frame(Ldk$fac, stringsAsFactors = FALSE)
   class(Ldk) <- c("Ldk", "Coo")
@@ -46,15 +46,15 @@ Ldk.list <- function(x, fac = data.frame(), links = NULL) {
 }
 
 #' @export
-Ldk.array <- function(x, fac = data.frame(), links = NULL) {
-  x <- a2l(x)
+Ldk.array <- function(coo, fac = data.frame(), links = NULL) {
+  x <- a2l(coo)
   Ldk <- Ldk(x, fac = fac, links = links)
   if (is.null(names(Ldk))) names(Ldk) <- paste0("shp", 1:length(Ldk))
   return(Ldk)
 }
 
 #' @export
-Ldk.Coo <- function(x, fac = data.frame(), links = NULL) {
+Ldk.Coo <- function(coo, fac = data.frame(), links = NULL) {
   nb.ldk <- sapply(x$coo, length)
   if (length(unique(nb.ldk)) > 1) 
     stop(" * shapes do not have the same number of landmarks.")

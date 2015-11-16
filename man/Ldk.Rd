@@ -8,10 +8,10 @@
 \alias{LdkCoe}
 \title{Builds an Ldk object}
 \usage{
-Ldk(x, fac = data.frame(), links = NULL)
+Ldk(coo, fac = data.frame(), links = NULL)
 }
 \arguments{
-\item{x}{a \code{list} of matrices of (x; y) coordinates,
+\item{coo}{a \code{list} of matrices of (x; y) coordinates,
 or an array, an Ldk object.}
 
 \item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
