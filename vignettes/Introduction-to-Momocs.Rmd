@@ -3,6 +3,7 @@ title: "Introduction to Momocs"
 author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+#output: [html_document, pdf_document]
 vignette: >
   %\VignetteIndexEntry{Introduction to Momocs}
   %\VignetteEngine{knitr::rmarkdown}
@@ -118,13 +119,15 @@ Last but not least, if you're familiar with modern R and the Hadley-verse, you s
 Let's load one of the Momocs datasets, some various outlines (an `Out` object):
 
 ```{r}
-data(shapes)              # we load it (it's alre)
 shapes                    # prints a brief summary
 panel(shapes, names=TRUE) # base graphics
 panel2(shapes)            # ggplot2 graphics
 ```
 
-Let's select the 4th shape, using the traditional syntax; then plot it. `coo_plot` comes with several options and display by defaut the centroid and the first point.
+`shapes` is one of the datasets bundled with Momocs. It's ("lazy") loaded in memory as soon as you call it, no need for `data(shapes)`. To see all Momocs' datasets, try `data(package="Momocs")`. These datasets are all `Coo` objects, ie collection of shapes. One can do many things on a `Coo` object, as above, eg printing a summary of it (just by typing its name), plotting a family picture with `panel` or `panel2`. Note the `2` that refers to a `ggplot2` variant of a given plot.
+
+So far, we're interested in single shapes so 
+let's extract the 4th shape from `shapes`, using the traditional syntax.  We plot it with `coo_plot` that comes with several options for plotting all families of shapes.
 
 ```{r}
 shp <- shapes[4]
@@ -139,23 +142,19 @@ library(maggritr)
 coo_plot(coo_center(shp))
 coo_plot(coo_sample(shp, 64), points=TRUE, pch=20)
 ```
+The most common function also work on the `Coo` objects, e.g. `shapes`. Have a look to Momocs' architecture; you can start there: `?Coo`.
 
-Using [maggritr](http://cran.r-project.org/package=magrittr)'s pipe makes things clearer, and pipes can be defined. The most common function also work on the `Coo` objects, e.g. `shapes`. Have a look to Momocs' architecture; you can start there: `?Coo`.
+Also, using [maggritr](http://cran.r-project.org/package=magrittr)'s pipe operator makes things clearer: it saves typing and reads from left to right. `magrittr`'s pipes are already loaded with Momocs.
 
 ```{r}
-library(magrittr)
-shp %>% coo_smooth(5) %>% coo_sample(64) %>% coo_scale() %>% coo_plot()
+shapes[4] %>% coo_smooth(5) %>% coo_sample(64) %>% coo_scale() %>% coo_plot()
 cs64 <- function(x) x %>% coo_sample(64) %>% coo_scale() %>% coo_center()
-shapes %>% cs64 %>% plot(4)
+shapes[4] %>% cs64 %>% coo_plot() # note the axes
 ```
 
-If you prefer [ggplot2](http://ggplot2.org/) graphics. Have a look to `as_df` methods.
-```{r}
-library(ggplot2)
-ggplot(m2d(shp), aes(x, y)) + geom_path() + coord_equal() + labs(title="A shape")
-````
-
 ## Outline analysis
+__Work in progess__
+
 You can extract outlines from a list of jpg images with `import_jpg`. Have a look to helpfiles (`import_jpg` and `import_jpg1`) for more details. Here we do not bother with import since we will use the `bot`tles dataset bundled with Momocs.
 
 ```{r}
@@ -216,6 +215,8 @@ plot(PCA(efourier(mol.al, norm=FALSE)), "type")
 ```
 
 ## Multivariate statistics
+__Work in progess__
+
 Let's see the main components of shape variability with a Principal Component Analysis.
 
 ```{r}
@@ -267,6 +268,8 @@ export(bot.f)
 ```
 
 ## Open outlines
+__Work in progess__
+
 ```{r}
 data(olea)
 stack(olea)
@@ -276,20 +279,34 @@ plot(PCA(op), ~domes+cep, palette=col_india)
 ```
 
 ## Configuration of landmarks
-```{r}
-data(wings)
+__Work in progess__
+
+Landmarks methods are being implemented in Momocs (as of nov 2015). Full generalized Procrustes methods are available, and sliding methods on semi landmarls will soon be.
+
+First, let's have a look to graphics facilities
+```{r, message=FALSE}
+stack(wings)
 w.al <- fgProcrustes(wings)
 stack(w.al)
 ldk_confell(w.al$coo, col = "red")
 ldk_chull(w.al$coo)
 ldk_contour(w.al$coo)
-ldk_labels(mshape(w.al$coo))
+ldk_labels(mshapes(w.al$coo))
+```
 
-plot(PCA(w.al), 1, pch=20)
+Multivariate methods are called using the same grammar
+```{r, eval=FALSE}
+w.p <- PCA(w.al)
+plot(w.p, "group", 
+     chull=TRUE, ellipsesax = FALSE, pos.shp = "full_axes", pch=20)
+
+LDA(w.p, "group") %T>% plot_CV()
 ```
 
 ## Handling objects
-One common yet boring task of morphometrics consists in handling datasets: add new information, remove some individuals, etc. Momocs adapts [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) verbs to its objects, and add new ones. If you have never heard of dplyr, let's have a look to this [introduction](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html), this may change your (R) life.
+One common yet boring task of morphometrics consists in handling datasets: add new information, remove some individuals, etc.
+
+Momocs adapts [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) verbs to its objects, and add new ones. If you have never heard of dplyr, let's have a look to this [introduction](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html), this may change your (R) life.
 
 Basics verbs are implemented; try the following:
 ```{r}
@@ -329,10 +346,79 @@ This should save some headaches.
 New verbs are implemented: for instance, you can `chop` (a rougher slicing) according to a condition: this will create a list, on which you can apply further operations, then `combine` it back. This is particularly useful when you want to apply independant treatments to different partitions, eg orthogonal views of your model. Prior to this, we can use `table` to cross-tabulate data from `$fac`. We could have done the first step of what follows with `rm_uncomplete` that drops (if any) missing data.
 
 ```{r}
-table(olea, "view", "var") # no VL fir 'Cypre' var
+table(olea, "view", "var") # no VL for 'Cypre' var
 olea %>% filter(var != "Cypre") %>%              # we drop 'Cypre'
   chop(view) %>% lapply(opoly) %>% combine() %>% # split, do morphometrics, combine
   PCA() %>% plot("var")                          # note the two views in the morphospace
 ```
-Makes me want to listen to [this](https://www.youtube.com/watch?v=E2VCwBzGdPM).
+
+Finally, several shortcuts are implemented on `Coo` and `Coe` objects:
+* `names` returns shape names;
+* `length` returns their number;
+* `table` cross-tabulates the`$fac` component;
+* `[]` extracts one (or more) shape;
+* `$` can access either a shape name or a column name for the `$fac`.
+
+Try the following:
+```{r, eval=FALSE}
+names(bot)
+length(bot)
+table(olea, "var", "domes")
+bot[1]
+bot[1:5]
+bot$brahma
+bot$type
+```
+
+## Babel import/export
+__Work in progress__
+There are various morphometrics formats in the wild, almost as much as softwares. Momocs tries to create bridges between them, all gathered in the **Babel** family. See `?Babel` for a full list.
+
+### Within R
+You can convert from/to array, matrix, list or data.frame with the functions `{a, m, l, d}2{a, m, l, d}`. For instance, `l2a` converts a list into an array that you can use with `geomorph`; `a2l` does the inverse operation
+
+Imagine you want to import pupfish from `geomorph` as a `Ldk` object:
+
+```{r}
+library(geomorph)
+data(pupfish)
+str(pupfish)
+# so $coords will become $coo, and
+# all other components will be turned into a data.frame to feed $fac
+# with a single line
+Ldk(coo=pupfish$coords %>% a2l,
+    fac=pupfish[-1] %>% as.data.frame())
+```
+
+### Save from R
+The best way to save a Momocs object is probably to use the base `save` function. You can call it back afterwards with `load`:
+
+```{r}
+save(bot, file="Bottles.rda")
+# closing R, going to the beach, back at work
+load("Bottles.rda") # bot is back
+```
+
+### Export from R
+Any Momocs object, `Coo`s, `Coe`s, `PCA`s, etc. can be turned into a `data.frame` with `as_df`. Work with `dplyr`, `ggplot2` is made easy and you can export it as `.txt`, `.csv` "by hand" or use the `export` function:
+
+```{r, eval=FALSE}
+bot %>% as_df # then %>% write.table
+bot %>% efourier %>% export
+bot %>% efourier %>% PCA %>% export
+```
+
+### Import in R
+__Work in progress__
+
+* `.tps` files can be read with `tps2Coo`
+* `.nts` files an be read with `nts2Coo`
+
+## Graphics
+__Work in progress__
+If you prefer [ggplot2](http://ggplot2.org/) graphics. Have a look to `as_df` methods.
+```{r}
+library(ggplot2)
+ggplot(m2d(shp), aes(x, y)) + geom_path() + coord_equal() + labs(title="A shape")
+````
 
