@@ -1,38 +1,134 @@
-#' Calculates shape descriptors from Coo objects
+#' A wrapper to calculates euclidean distances between two points
 #' 
-#' Extracts descriptors from a list of functions and returns a TraCoe object
-#' @param Coo object on which to calculate descriptors
-#' @param ... functions that returns a scalar (a single value), see examples
-#' @details any function, including custom ones, that return a scalar can be passed.
-#' To access the list of 'coo_' functions - not all are suitable, see \code{apropos("coo_")}
+#' The main advantage over \link{ed} is that it is a method that can
+#' be passed to different objects and used in combination with \link{measure}.
+#' See examples.
+#' 
+#' @param x a Ldk (typically), an Out or a matrix
+#' @param id1 id of the 1st row
+#' @param id2 id of the 2nd row
+#' @note On Out objects, we first \link{get_ldk}.
+#' @seealso if you want all pairwise combinations, see \link{truss}
 #' @examples 
-#' data(bot)
-#' desc <- shape_descriptors(bot, coo_circularity, coo_rectangularity, coo_area)
-#' desc
-#' desc$coe
-#' # a custom function the product of length*width
-#' pseudo_area <- function(x) prod(coo_lw(x))
-#' shape_descriptors(bot, pseudo_area)
+#' # single shape
+#' d(wings[1], 1, 4)
+#' # Ldk object
+#' d(wings, 1, 4)
+#' # Out object
+#' d(hearts, 2, 4)
 #' @export
-shape_descriptors <- function(Coo, ...){
-  desc <- eval(substitute(alist(...)))
-  coos <- Coo$coo
-  nr <- length(coos)
-  nc <- length(desc)
-  res <- matrix(NA, nrow=nr, ncol=nc,
-                dimnames=list(names(coos),
-                              gsub("coo.", "", as.character(desc))))
-  for (i in 1:nc){
-    res[, i] <- sapply(coos, desc[[i]])
-  }
-  if (ncol(Coo$fac)!=0){
-    fac <- Coo$fac
-  } else {
-    fac <- data.frame()
-  }
-  TraCoe <- TraCoe(coe=res, fac=fac)
-  return(TraCoe)}
+d <- function(x, id1, id2){
+  UseMethod("d")
+}
 
+#' @export
+d.default <- function(x, id1, id2){
+  if (length(id1)==2 & missing(id2)){
+    id2 <- id1[2]
+    id1 <- id1[1]
+  }
+  id1 %<>% as.numeric()
+  id2 %<>% as.numeric()
+  ed(x[id1, ], x[id2, ])
+}
+
+#' @export
+d.Ldk <- function(x, id1, id2){
+  sapply(x$coo, d, id1, id2)
+}
+
+#' @export
+d.Out <- function(x, id1, id2){
+  get_ldk(x) %>% Ldk() %>% d(id1, id2)
+}
+
+#' Measures shape descriptors
+#' 
+#' Calculates shape descriptors on Coo and other objects. 
+#' Any function that returns a scalar when fed coordinates can be passed 
+#' and naturally those of Momocs (pick some there \code{apropos("coo_")}). Functions
+#' without arguments (eg \link{coo_area}) have to be passed without brackets but 
+#' functions with arguments (eg \link{d}) have to be passed "entirely". See examples.
+#' @param x any \code{Coo} object, or a list of shapes, or a shape as a matrix.
+#' @param ... a list of functions. See examples.
+#' @return a \link{TraCoe} object, or a raw data.frame
+#' @examples 
+#' # lets write a custom function
+#' coo_ellipse_area <- function(x){
+#'   prod(coo_lw(x))*pi
+#' }
+#' bm <- measure(bot, coo_area, coo_perim, coo_ellipse_area)
+#' bm
+#' bm$coe
+#' 
+#' # how to use arguments, eg with the d() function
+#' measure(wings, coo_area, d(1, 3), d(4, 5))
+#' 
+#' # alternatively
+#' measure(bot$coo, coo_area, coo_perim, coo_ellipse_area)
+#' 
+#' # and also
+#' measure(bot[1], coo_area, coo_perim, coo_ellipse_area)
+#' @export
+measure <- function(x, ...){
+  UseMethod("measure")
+}
+
+#' @export
+measure.default <- function(x, ...){
+  stop("* only defined on Coo and lists objects")
+}
+
+#' @export
+measure.matrix <- function(x, ...){
+  x %>% coo_check %>% list() %>% measure(...)
+}
+
+#' @export
+measure.list <- function(x, ...){
+  funs <- as.character(substitute(list(...)))[-1L]
+  l <- vector("list", length(funs))
+  names(l) <- gsub("coo_", "", funs)
+  x %<>% lapply(coo_check)
+  for (i in seq_along(funs)){
+    l[[i]] <- sapply(x, funs[i])
+  }
+  l %>% as.data.frame() %>% return()
+}
+
+#' @export
+measure.Coo <- function(x, ...){
+  funs <- as.character(substitute(list(...)))[-1L]
+  l <- vector("list", length(funs))
+  # we remove coo_, (, ), commas and any space
+  names(l) <- gsub("coo_|[[:punct:]]", "", funs)
+  for (i in seq_along(funs)){
+    # case where a full function name is present
+    if (length(grep("\\(", funs[i])) > 0) {
+      fun_i <- measure_nse(funs[i])
+      l[[i]] <- sapply(x$coo, fun_i$fun, fun_i$args)
+      # otherwise, classical case
+    } else {
+      l[[i]] <- sapply(x$coo, funs[i])    
+    }
+  }
+  coe <- l %>% as.data.frame()
+  TraCoe(coe = l %>% as.data.frame,
+         fac = x$fac)
+}
+
+# dirty attemps at NSE-ishing
+# when passed a character (eg a substituted function name), returns the function name
+# otherwise returns a list with $fun function name and $args arguments as characters
+# see implementation in measure method.
+measure_nse <- function(ch){
+  ch <- gsub("[[:space:]]", "", ch)
+  open_par <- regexpr("\\(", ch)
+  if (open_par == -1) return(ch)
+  fun  <- substr(ch, 1, (open_par-1))
+  args <- substr(ch, open_par+1, nchar(ch)-1) %>% strsplit(",") 
+  list(fun=fun, args=args[[1]])
+}
 
 #' Truss measurement
 #' 
@@ -61,16 +157,18 @@ shape_descriptors <- function(Coo, ...){
 truss <- function(x){
   UseMethod("truss")
 }
+
 #' @export
 truss.default <- function(x){
   res <- as.numeric(dist(x))
   names(res) <- apply(combn(1:nrow(x), 2), 2, paste, collapse="-")
   return(res)
 }
+
 #' @export
 truss.Ldk <- function(x){
-  return(t(sapply(x$coo, truss)))
+  TraCoe(coe=x$coo %>% sapply(truss) %>% t(),
+         fac=x$fac)
 }
-
 
 
