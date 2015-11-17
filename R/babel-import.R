@@ -376,7 +376,7 @@ import_StereoMorph_ldk <- function(path, names){
 # returns a list of loci that contains individuals.
 # There must be a more elegant way to do it
 .rollup_list <- function(l){
-  locus_names <- sapply(l, names) %>% unlist() %>% unique()
+  locus_names <- sapply(l, names) %>% as.character() %>% unique()
   res <- vector("list", length(locus_names))
   names(res) <- locus_names
   for (i in seq_along(l)){
