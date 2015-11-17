@@ -414,6 +414,8 @@ __Work in progress__
 * `.tps` files can be read with `tps2Coo`
 * `.nts` files an be read with `nts2Coo`
 
+These functions are preliminary work since I do not use myself these formats. `readland.tps` and `readland.nts`, from the package `geomorph` by Adams, Collyer and Sherratt do a far better job.
+
 ## Graphics
 __Work in progress__
 If you prefer [ggplot2](http://ggplot2.org/) graphics. Have a look to `as_df` methods.
