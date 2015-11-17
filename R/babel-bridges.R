@@ -24,26 +24,6 @@ l2m <- function(l) {
     return(m)
 }
 
-#' Converts a matrix of coordinates to a list of coordinates.
-#'
-#' Converts a matrix of (x; y) coordinates to a list with
-#' x and y components.
-#'
-#' @usage m2l(m)
-#' @param m a two-columns \code{matrix} of x and y coordinates.
-#' @return a \code{list} with x and y components.
-#' @seealso \link{l2m}.
-#' @keywords Babel
-#' @examples
-#' data(wings)
-#' l <- m2l(wings[1])
-#' l
-#' m <- l2m(l)
-#' m
-#' @export
-m2l <- function(m) {
-    return(list(x = m[, 1], y = m[, 2]))
-}
 
 #' Converts a list of coordinates to an array of coordinates
 #'
@@ -66,6 +46,8 @@ m2l <- function(m) {
 #' a
 #' @export
 l2a <- function(l) {
+    .check(length(unique(sapply(l, length))) == 1,
+           "matrices in list must have the same dimensions")
     nr <- nrow(l[[1]])
     nc <- 2
     ni <- length(l)
@@ -95,8 +77,8 @@ l2a <- function(l) {
 #' a
 #' @export
 a2l <- function(a) {
-    if (!is.array(a))
-        stop(" * An array of dimension 3 must be provided")
+    .check(is.array(a) & length(dim(a)==3),
+          "An array of dimension 3 must be provided")
     k <- dim(a)[3]
     l <- list()
     for (i in 1:k) {
@@ -154,8 +136,9 @@ a2m <- function(a) {
 #' @export
 m2a <- function(m) {
     # ugly
-    a <- array(NA, dim = c(ncol(m)/2, 2, nrow(m)), dimnames = list(1:(ncol(m)/2),
-        c("x", "y"), rownames(m)))
+    a <- array(NA, 
+               dim = c(ncol(m)/2, 2, nrow(m)),
+               dimnames = list(1:(ncol(m)/2), c("x", "y"), rownames(m)))
     for (i in 1:nrow(m)) {
         a[, , i] <- matrix(m[i, ], ncol = 2)
     }
@@ -179,6 +162,28 @@ m2d <- function(m){
   df <- data.frame(x=m[, 1], y=m[, 2])
   df
 }
+
+#' Converts a matrix of coordinates to a list of coordinates.
+#'
+#' Converts a matrix of (x; y) coordinates to a list with
+#' x and y components.
+#'
+#' @usage m2l(m)
+#' @param m a two-columns \code{matrix} of x and y coordinates.
+#' @return a \code{list} with x and y components.
+#' @seealso \link{l2m}.
+#' @keywords Babel
+#' @examples
+#' data(wings)
+#' l <- m2l(wings[1])
+#' l
+#' m <- l2m(l)
+#' m
+#' @export
+m2l <- function(m) {
+  return(list(x = m[, 1], y = m[, 2]))
+}
+
 
 # as_df --------------------------------
 
@@ -230,6 +235,17 @@ as_df.Coe <- function(x){
     df_coe <- bind_cols(df_coe, df_fac[i_n, ])
   }
   df_coe
+}
+
+#' @export
+as_df.TraCoe <- function(x){  
+  df_coe <- as.data.frame(x$coe)
+  # if a $fac is present
+  if (is.fac(x)) {
+    return(dplyr::bind_cols(x$fac, df_coe))
+  } else {
+    return(df_coe)
+  }
 }
 
 #' @export
