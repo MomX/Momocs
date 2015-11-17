@@ -1686,3 +1686,28 @@ coo_calliper <- function(coo, arr.ind = FALSE) {
     return(max(d))
   }
 }
+
+
+#' Trims coordinates from shape
+#' 
+#' Removes \code{trim} coordinates at both ends of a shape, ie 
+#' from top and bottom of the shape matrix.
+#' @param coo matrix of (x; y) coordinates or Coo object
+#' @param trim numeric, the number of coordinates to trim
+#' @examples 
+#' olea[1] %>% coo_sample(12) %T>% 
+#'    print() %T>% ldk_plot() %>% 
+#'    coo_trim(1) %T>% print() %>% points(col="red")
+#' @export
+coo_trim <- function(coo, trim=1){
+  UseMethod("coo_trim")
+}
+#' @export
+coo_trim.default <- function(coo, trim=1){
+  coo %<>% coo_check()
+  return(coo[(trim+1):(nrow(coo)-trim),])
+}
+#' @export
+coo_trim.Coo <- function(coo, trim=1){
+  coo$coo %<>% lapply(coo_trim, trim)
+}
