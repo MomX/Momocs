@@ -1,6 +1,6 @@
 Package: Momocs
 Title: Morphometrics using R
-Version: 0.9.52
+Version: 0.9.53
 Date: 2015-11-17
 Authors@R: c( person("Vincent", "Bonhomme", ,
        "bonhomme.vincent@gmail.com", c("aut", "cre")),

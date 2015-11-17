@@ -390,6 +390,15 @@ Ldk(coo=pupfish$coords %>% a2l,
     fac=pupfish[-1] %>% as.data.frame())
 ```
 
+### Import from StereoMorph
+If you use this excellent package by Olsen to digitize landmarks and curves, you can import them, from the files produced with the functions `import_StereoMorph_ldk` and `import_StereoMorph_curve`.
+
+### Import from tps and other digitizing softwares
+* `.tps` files can be read with `tps2Coo`
+* `.nts` files an be read with `nts2Coo`
+
+These functions are preliminary work since I do not use myself these formats. `readland.tps` and `readland.nts`, from the package `geomorph` by Adams, Collyer and Sherratt do a far better job.
+
 ### Save from R
 The best way to save a Momocs object is probably to use the base `save` function. You can call it back afterwards with `load`:
 
@@ -407,14 +416,6 @@ bot %>% as_df # then %>% write.table
 bot %>% efourier %>% export
 bot %>% efourier %>% PCA %>% export
 ```
-
-### Import in R
-__Work in progress__
-
-* `.tps` files can be read with `tps2Coo`
-* `.nts` files an be read with `nts2Coo`
-
-These functions are preliminary work since I do not use myself these formats. `readland.tps` and `readland.nts`, from the package `geomorph` by Adams, Collyer and Sherratt do a far better job.
 
 ## Graphics
 __Work in progress__
