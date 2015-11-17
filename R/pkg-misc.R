@@ -9,7 +9,7 @@
 #' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)}).
 #' You need devtools, but it is checked anyway.
 #' @export
-Momocs_update <- function() {
+Momocs_last <- function() {
   if (!requireNamespace("devtools", quietly = TRUE)) {
     stop("devtools needed for this function to work. Please install it with install.packages('devtools')",
          call. = FALSE)
@@ -292,6 +292,12 @@ vecs_param <- function(r1, i1, r2, i2) {
 }
 
 ##### Various utilities
+
+# check a condition. if not satisfied, stops with a message
+.check <- function(cond_to_pass, msg_if_not) {
+  if (!cond_to_pass)
+    stop(msg_if_not, call. = FALSE)
+}
 
 # x = any vector
 # conf = gaussian quantile
