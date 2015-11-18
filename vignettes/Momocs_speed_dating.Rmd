@@ -431,8 +431,8 @@ MANOVA_PW(bot.p, "type")
 ```
 
 ### `CLUST`: Hierarchical clustering
-A hierarchical classification now:
-```{r}
+A hierarchical classification now. It relies on `ggtree` which is itself under active development. So you may have trouble to make this command work.
+```{r, eval=FALSE}
 CLUST(bot.p, 1)
 ```
 Monophyly is plotted by default. Many options can be found in `?CLUST`
