@@ -68,7 +68,7 @@ fgProcrustes <- function(x, tol, verbose, coo) {
 }
 
 #' @export
-fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
+fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
   A <- x
   A <- ldk_check(A)
   # directly borrowed from Claude
@@ -139,7 +139,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = TRUE, coo=NULL) {
 }
 
 #' @export
-fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
+fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
   Coo <- x
   # if no $ldk defined, we convert Out into a Ldk and then
   # perform the fgProcrustes and return back an Out object.
@@ -204,7 +204,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = TRUE, coo=FALSE) {
 fgProcrustes.Opn <- fgProcrustes.Out
 
 #' @export
-fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = TRUE, coo=NULL) {
+fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
   Coo <- x
   Coo2 <- Coo
   ref <- l2a(Coo2$coo)
