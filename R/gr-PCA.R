@@ -254,7 +254,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     if (any(colnames(PCA$fac)==labelspoints)) {
       rn <- PCA$fac[, labelspoints]
     } else {
-      rn <- NULL
+      rn <- rownames(x$x)
     }
     if (!is.null(rn)){
       if (abbreviate.labelspoints) rn <- abbreviate(rn)
