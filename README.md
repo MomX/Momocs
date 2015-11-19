@@ -10,7 +10,7 @@ Use Momocs
 __Get the last version:__
 * First get `devtools` with `install.packages("devtools")` then, download and load the very last version with:
 ```
-devtools::install_github("vbonhomme/Momocs")
+devtools::install_github("vbonhomme/Momocs", build_vignettes= TRUE)
 library(Momocs)
 ````
 * Please note that the current [CRAN](http://cran.r-project.org/package=Momocs) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) and is no longer supported.
