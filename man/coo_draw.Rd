@@ -22,5 +22,4 @@ b2 <- bot[5]
 coo_plot(b1)
 coo_draw(b2, border='red') # all coo_plot arguments will work for coo_draw
 }
-\keyword{Graphics}
 

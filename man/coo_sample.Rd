@@ -32,5 +32,4 @@ stack(coo_sample(bot, 24))
 coo_plot(b)
 coo_plot(coo_sample(b, 24))
 }
-\keyword{ShapeUtilities}
 

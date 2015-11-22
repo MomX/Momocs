@@ -27,5 +27,4 @@ Directly borrowed from Claude (2008), called there the \code{fPsup} function.
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
-\keyword{Procrustes}
 

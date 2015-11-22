@@ -2,24 +2,13 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_deviations}
 \alias{calibrate_deviations}
-\alias{calibrate_deviations.Opn}
-\alias{calibrate_deviations.Out}
 \title{Quantitative calibration, through deviations, for Out and Opn objects}
 \usage{
-calibrate_deviations(Coo, ...)
-
-\method{calibrate_deviations}{Out}(Coo, method = c("efourier", "rfourier",
-  "tfourier"), id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, dist.nbpts = 120, ...)
-
-\method{calibrate_deviations}{Opn}(Coo, method = c("npoly", "opoly",
-  "dfourier"), id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, dist.nbpts = 120, ...)
+calibrate_deviations(x, method, id, range, norm.centsize, dist.method,
+  dist.nbpts)
 }
 \arguments{
-\item{Coo}{the \code{Out} object on which to calibrate_deviations}
-
-\item{...}{only used for the generic}
+\item{x}{and \code{Out} or \code{Opn} object on which to calibrate_deviations}
 
 \item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')} and
 \code{'dfourier'}.}
@@ -46,12 +35,6 @@ range of harmonic number.
 \details{
 For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{Out}: Method for Out objects
-
-\item \code{Opn}: Method for Opn objects
-}}
 \examples{
 data(bot)
 calibrate_deviations(bot)
@@ -70,5 +53,4 @@ gg + labs(col="Number of harmonics", fill="Number of harmonics",
 gg + coord_polar()
 }
 }
-\keyword{Out}
 

@@ -33,5 +33,4 @@ stack(coo_baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
 \seealso{
 \link{coo_bookstein}
 }
-\keyword{ShapeUtilities}
 

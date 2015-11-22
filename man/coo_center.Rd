@@ -24,5 +24,4 @@ brittons...
 data(bot)
 b <- bot[1]
 }
-\keyword{ShapeUtilities}
 

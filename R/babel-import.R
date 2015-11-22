@@ -19,7 +19,6 @@
 #' \link{Out}, \link{Opn} and \link{Ldk}.
 #' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords Import
 #' @export
 import_txt <- function(txt.paths = NULL, ...) {
   if (is.null(txt.paths)) {
@@ -64,7 +63,6 @@ import_txt <- function(txt.paths = NULL, ...) {
 #' }
 #' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords Import
 #' @export
 import_Conte <- function(img, x) {
   while (abs(img[x[1], x[2]] - img[x[1] - 1, x[2]]) < 0.1) {
@@ -157,7 +155,6 @@ import_Conte <- function(img, x) {
 #' \code{import_jpg} itself
 #' @seealso \link{import_jpg}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords Import
 #' @return a matrix of (x; y) coordinates that can be passed to Out
 #' @export
 import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NULL,
@@ -252,7 +249,6 @@ import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
 #'
 #' If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
 #' file in the folder taht contains all your files. All the outlines should be imported then.
-#' @keywords Import
 #' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
@@ -452,7 +448,6 @@ tie_jpg_txt <- function(lf){
 #' @references Kuhl, F. P., & Giardina, C. R. (1982).
 #' Elliptic Fourier features of a closed contour.
 #' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
-#' @keywords Babel
 #' @examples
 #' data(shapes)
 #' pix2chc(shapes[1])
@@ -488,7 +483,6 @@ pix2chc <- function(coo) {
 #' @references Kuhl, F. P., & Giardina, C. R. (1982).
 #' Elliptic Fourier features of a closed contour.
 #' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
-#' @keywords Babel
 #' @examples
 #' data(shapes)
 #' x <- pix2chc(shapes[1])
@@ -539,7 +533,6 @@ chc2pix <- function(chc) {
 #' @references Kuhl, F. P., & Giardina, C. R. (1982).
 #' Elliptic Fourier features of a closed contour.
 #' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
-#' @keywords Babel
 #' @examples
 #' \dontrun{
 #' # if the file above was called 'coded.chc' in the 'data' folder:
@@ -579,7 +572,6 @@ chc2Out <- function(chc, skip, names){
 #' @note I'm not very familiar to other morphometric formats.
 #' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 #' please let met know!
-#' @keywords Babel
 #' @export
 nef2Coe <- function(nef.path) {
   # change nef to coe one day
@@ -613,7 +605,6 @@ nef2Coe <- function(nef.path) {
 #' @note I'm not very familiar to other morphometric formats.
 #' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 #' please let met know!
-#' @keywords Babel
 #' @export
 tps2Coo <- function(tps.path, sep = " ") {
   # we read all lines of the file
@@ -656,7 +647,6 @@ tps2Coo <- function(tps.path, sep = " ") {
 #' @note I'm not very familiar to other morphometric formats.
 #' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 #' please let met know!
-#' @keywords Babel
 #' @examples
 #' # That's how wings dataset was created
 #' # made a local copy from http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts
@@ -746,7 +736,6 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
 #' then ii) pass 'names(foo)' to lf_structure. See Momocs' vignette for an illustration.
 #' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
-#' @keywords Import
 #' @export
 lf_structure <- function(lf, names = character(), split = "_",
                          trim.extension = FALSE) {
@@ -799,7 +788,6 @@ lf_structure <- function(lf, names = character(), split = "_",
 #' \code{img_plot0} does the same job but preserves the \code{par} and plots axes.
 #'
 #' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
-#' @keywords Import
 #' @rdname img_plot
 #' @export
 img_plot <- function(img) {

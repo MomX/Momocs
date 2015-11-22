@@ -20,5 +20,4 @@ I'm not very familiar to other morphometric formats.
 So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 please let met know!
 }
-\keyword{Babel}
 

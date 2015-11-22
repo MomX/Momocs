@@ -59,5 +59,4 @@ res$summary
 \seealso{
 \link{MANOVA}, \link{manova}.
 }
-\keyword{Multivariate}
 

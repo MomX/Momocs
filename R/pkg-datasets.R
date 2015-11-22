@@ -5,7 +5,6 @@
 #' @docType data
 #' @name bot
 #' @rdname data_bot
-#' @keywords Datasets
 #' @format A \link{Out} object containing the outlines coordinates and a grouping factor
 #' for 20 beer and 20 whisky bottles
 #' @source  Images have been grabbed on the internet and prepared by the package's
@@ -18,7 +17,6 @@ NULL
 #' @docType data
 #' @name trilo
 #' @rdname data_trilo
-#' @keywords Datasets
 #' @format A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 #' ontogenetic stages of trilobite.
 #' @source  Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
@@ -31,7 +29,6 @@ NULL
 #' @docType data
 #' @name mosquito
 #' @rdname data_mosquito
-#' @keywords Datasets
 #' @format A \link{Out} object with the 126 mosquito wing outlines outlines
 #' used Rohlf and Archie (1984). Note that the links defined here are quite approximate.
 #' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
@@ -44,7 +41,6 @@ NULL
 #' @docType data
 #' @name hearts
 #' @rdname data_hearts
-#' @keywords Datasets
 #' @format A \link{Out} object with the outline coordinates of 240 hand-drawn hearts
 #' by 8 different persons, with 4 landmarks.
 #' @source We thank the fellows of the Ecology Department of the French Institute
@@ -56,7 +52,6 @@ NULL
 #' @docType data
 #' @name olea
 #' @rdname data_olea
-#' @keywords Datasets
 #' @format An \link{Opn} object with the outline coordinates of olive seeds.
 #' @source We thank Jean-Frederic Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
 #' from allowing us to share the data.
@@ -74,7 +69,6 @@ NULL
 #' @docType data
 #' @name shapes
 #' @rdname data_shapes
-#' @keywords Datasets
 #' @format An \link{Out} object with the outline coordinates of some various shapes.
 #' @source Borrowed from default shapes from (c) Adobe Photoshop.
 NULL
@@ -84,7 +78,6 @@ NULL
 #' @docType data
 #' @name wings
 #' @rdname data_wings
-#' @keywords Datasets
 #' @format A \link{Ldk} object containing 18 (x; y) landmarks  from 127 mosquito wings, from
 #' @source Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
 NULL
@@ -95,7 +88,6 @@ NULL
 #' @docType data
 #' @name oak
 #' @rdname data_oak
-#' @keywords Datasets
 #' @format A \link{Ldk} object containing 11 (x; y) landmarks  from 176 oak leaves wings, from
 #' @source Viscosi, V., & Cardini, A. (2011). Leaf morphology, taxonomy and
 #' geometric morphometrics: a simplified protocol for beginners.
@@ -108,7 +100,6 @@ NULL
 #' @docType data
 #' @name molars
 #' @rdname data_molars
-#' @keywords Datasets
 #' @format A \link{Out} object containing 79 equilinearly spaced (x; y)
 #' coordinates for 360 crown outlines, of modern human molars,
 #' along with their type (\code{$type}) - 90 first upper molars (UM1), 90 second upper molars (UM2),
@@ -127,7 +118,6 @@ NULL
 #' @docType data
 #' @name flower
 #' @rdname data_flower
-#' @keywords Datasets
 #' @format A \code{TraCoe} object with 150 measurements of 4 variables
 #' (petal + sepal) x (length x width) on 3 species of iris. This dataset is
 #' the classical \link{iris} formatted for Momocs.

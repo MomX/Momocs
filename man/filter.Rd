@@ -2,60 +2,39 @@
 % Please edit documentation in R/cl-handling.R
 \name{filter}
 \alias{filter}
-\alias{filter.Coe}
-\alias{filter.Coo}
-\alias{filter.PCA}
-\alias{filter.default}
-\title{Filter (ala dplyr) rows with matching conditions, using the $fac slot  on Momocs classes}
+\title{filter (ala dplyr) on Momocs classes}
 \usage{
 filter(.data, ...)
-
-\method{filter}{default}(.data, ...)
-
-\method{filter}{Coo}(.data, ...)
-
-\method{filter}{Coe}(.data, ...)
-
-\method{filter}{PCA}(.data, ...)
 }
 \arguments{
 \item{.data}{a \code{Coo}, \code{Coe}, \code{PCA} object}
 
-\item{...}{Logical conditions}
+\item{...}{logical conditions}
 }
 \value{
-a a \code{Coo}, \code{Coe}, \code{PCA} object
+a Momocs object of the same class.
 }
 \description{
-Extends this dplyr verb to \link{Coo} objects. See examples.
+Return shapes with matching conditions, from the \code{$fac}. See examples and \code{?dplyr::filter}.
 }
 \details{
 dplyr verbs are maintained.
 }
-\note{
-this method is quite experimental, check the result and do not hesitate to report a bug.
-}
 \examples{
-data(olea)
-##### slice
-slice(olea, 1) # if you only want the coordinates, try bot[1]
-slice(olea, 1:20)
-slice(olea, 21:30)
-
-##### chop (a rougher slicing)
-chop(olea, domes) # return a list that can be lapply-ed
-
-##### filter
-filter(olea, domes=="cult")
-filter(olea, domes=="cult", view=="VL")
-
-##### select
-head(olea$fac)
-select(olea, domes, view)
-select(olea, -ind)
-
+olea
+# we retain on dorsal views
+filter(olea, view=="VD")
+# only dorsal views and Aglan+PicMa varieties
+filter(olea, view=="VD", var \%in\% c("Aglan", "PicMa"))
+# we create an id column and retain the 120 first shapes
+olea \%>\% mutate(id=1:length(olea)) \%>\% filter(id > 120)
 }
 \seealso{
-\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{chop}}, \code{\link{combine}},
+  \code{\link{dissolve}}, \code{\link{mutate}},
+  \code{\link{rename}}, \code{\link{sample_frac}},
+  \code{\link{sample_n}}, \code{\link{select}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

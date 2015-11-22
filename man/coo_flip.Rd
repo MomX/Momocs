@@ -42,5 +42,4 @@ coo_draw(coo_flipy(cat), border="blue")
 shapes2 <- shapes
 shapes$coo <- lapply(shapes2$coo, coo_flipx)
 }
-\keyword{ShapeUtilities}
 

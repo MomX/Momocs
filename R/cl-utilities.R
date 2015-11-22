@@ -80,7 +80,6 @@ table.LDA <- table.Coo
 #'
 #' @rdname subset
 #' @param x a \code{Coo} or a \link{Coe} object.
-#' @param .data same
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
 #' @param ... useless here but maintains consistence with the generic subset.
 #' @seealso \link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
@@ -98,7 +97,7 @@ subset.Coo <- function(x, subset, ...) {
   if (ncol(Coo$fac) > 0) {
     Coo2$fac <- dplyr::slice(Coo$fac, retain)
     names(Coo2$fac) <- names(Coo$fac)
-    Coo2$fac <- .refactor(Coo2$fac)
+    #Coo2$fac <- .refactor(Coo2$fac)
   }
   return(Coo2)
 }

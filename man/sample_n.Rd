@@ -2,18 +2,9 @@
 % Please edit documentation in R/cl-handling.R
 \name{sample_n}
 \alias{sample_n}
-\alias{sample_n.Coe}
-\alias{sample_n.Coo}
-\alias{sample_n.default}
 \title{Samples n shapes in Momocs objects}
 \usage{
-sample_n(tbl, size, replace, ...)
-
-\method{sample_n}{default}(tbl, size, replace = FALSE, ...)
-
-\method{sample_n}{Coo}(tbl, size, replace = FALSE, fac = NULL, ...)
-
-\method{sample_n}{Coe}(tbl, size, replace = FALSE, fac = NULL, ...)
+sample_n(tbl, size, replace, fac, ...)
 }
 \arguments{
 \item{tbl}{a Momocs object (Coo, Coe)}
@@ -22,12 +13,12 @@ sample_n(tbl, size, replace, ...)
 
 \item{replace}{logical whether sample should be done with ot without replacement}
 
-\item{...}{additional arguments to dplyr::sample_n and to maintain generic compatibility}
+\item{fac}{a column name if a \code{$fac} is defined; size is then applied within levels of this factor}
 
-\item{fac}{a column name if a $fac is defined; size is then applied within levels of this factor}
+\item{...}{additional arguments to dplyr::sample_n and to maintain generic compatibility}
 }
 \description{
-Uses (and maintain) dplyr syntax and verb.
+Sample n shapes from a Momocs object. See examples and \code{?dplyr::sample_n}.
 }
 \examples{
 
@@ -42,6 +33,11 @@ table(names(sample_n(bot, 400, replace=TRUE)))
 
 }
 \seealso{
-\link{sample_frac}
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{chop}}, \code{\link{combine}},
+  \code{\link{dissolve}}, \code{\link{filter}},
+  \code{\link{mutate}}, \code{\link{rename}},
+  \code{\link{sample_frac}}, \code{\link{select}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

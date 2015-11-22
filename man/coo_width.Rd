@@ -22,5 +22,4 @@ coo_width(bot[1])
 \seealso{
 \link{coo_lw}, \link{coo_length}.
 }
-\keyword{ShapeDescriptors}
 

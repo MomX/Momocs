@@ -21,7 +21,6 @@
 #' @return an \code{Ldk} object
 #' @seealso \link{Coo}, \link{Out}, link{Opn}.
 #' @note \code{Ldk} methods must be, so far, considered as experimental in Momocs.
-#' @keywords Ldk
 #' @aliases Ldk Ldk.default Ldk.Ldk Ldk.list LdkCoe
 #' @examples
 #' methods(class=Ldk)

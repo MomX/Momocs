@@ -27,5 +27,4 @@ Elliptic Fourier features of a closed contour.
 \seealso{
 \link{pix2chc}, \link{chc2Out}
 }
-\keyword{Babel}
 

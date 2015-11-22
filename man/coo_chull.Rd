@@ -23,5 +23,4 @@ coo_plot(h)
 ch <- coo_chull(h)
 lines(ch, col='red', lty=2)
 }
-\keyword{ShapeDescriptors}
 

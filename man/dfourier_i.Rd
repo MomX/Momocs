@@ -52,5 +52,4 @@ title('Discrete Cosine Transforms')
  \item Many thanks to Remi Laffont for the translation in R).
 }
 }
-\keyword{discreteCosine}
 

@@ -8,7 +8,6 @@
 \alias{PCA.TraCoe}
 \alias{PCA.default}
 \alias{as.PCA}
-\alias{as.PCA.default}
 \title{Principal component analysis on Coe objects}
 \usage{
 PCA(x, scale., center, fac)
@@ -24,8 +23,6 @@ PCA(x, scale., center, fac)
 \method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = data.frame())
 
 as.PCA(x, fac)
-
-\method{as.PCA}{default}(x, fac)
 }
 \arguments{
 \item{x}{a \link{Coe} object or an appropriate object (eg \link{prcomp}) for \code{as.PCA}}
@@ -76,5 +73,4 @@ plot(iris.p, 1)
 \seealso{
 \link{plot.PCA}
 }
-\keyword{Multivariate}
 

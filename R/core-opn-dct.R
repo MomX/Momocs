@@ -26,7 +26,6 @@
 #'  \item Many thanks to Remi Laffont for the translation in R).
 #' }
 #'
-#' @keywords discreteCosine
 #' @examples
 #' data(olea)
 #' \dontrun{ # because it's long
@@ -148,7 +147,6 @@ dfourier.Coo <- function(coo, nb.h, verbose=TRUE) {
 #'  \item Many thanks to Remi Laffont for the translation in R).
 #' }
 #'
-#' @keywords discreteCosine
 #' @examples
 #' # dfourier and inverse dfourier
 #' data(olea)

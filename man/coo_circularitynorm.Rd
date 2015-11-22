@@ -24,5 +24,4 @@ and shape factor, but normalized to the unit circle.
 data(bot)
 coo_circularitynorm(bot[1])
 }
-\keyword{ShapeDescriptors}
 

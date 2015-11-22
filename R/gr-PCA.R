@@ -27,7 +27,7 @@
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
 #' @param morphospace logical whether to add the morphological space
-#' @param pos.shp passed to \link{pos.shapes}, one of 
+#' @param pos.shp passed to \link{pos.shapes}, one of
 #' \code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
 #' a matrix of positions. See \link{pos.shapes}
 #' @param amp.shp amplification factor for shape deformation
@@ -77,12 +77,11 @@
 #' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
 #' @seealso \link{plot.LDA}
-#' @keywords Multivariate, Graphics
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
-#' 
+#'
 #' # pos.shp
 #' plot(bot.p, pos.shp="full")
 #' plot(bot.p, pos.shp="range")
@@ -90,7 +89,7 @@
 #' plot(bot.p, pos.shp="circle")
 #' plot(bot.p, pos.shp="range_axes")
 #' plot(bot.p, pos.shp="full_axes")
-#' 
+#'
 #' plot(bot.p, morpho=FALSE)
 #' plot(bot.p, "type")
 #'
@@ -120,8 +119,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      amp.shp=1,
                      size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
                      rotate.shp=0, flipx.shp=FALSE, flipy.shp=FALSE,
-                     pts.shp=60, border.shp=.transp("#000000", 0.5),
-                     lwd.shp=1, col.shp=.transp("#000000", 0.95),
+                     pts.shp=60, border.shp=col_alpha("#000000", 0.5),
+                     lwd.shp=1, col.shp=col_alpha("#000000", 0.95),
                      #stars
                      stars=FALSE,
                      #ellipses
@@ -215,7 +214,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (!missing(labelspoints) & missing(points)) points <- FALSE
   if (missing(col.labelspoints)) col.labelspoints <- col
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
-  
+
   ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
@@ -281,7 +280,6 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
 #' PC1-PC3, PC2-3, and the barplot of eigenvalues percentages.
 #' @param PCA a \link{PCA} object
 #' @param ... additional arguments to fed \link{plot.PCA}
-#' @keywords Graphics
 #' @rdname plot3.PCA
 #' @examples
 #' data(bot)
@@ -409,9 +407,9 @@ PCcontrib.PCA <-
       pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
       shp.i <- morphospace2PCA(x, xax=i, yax=1, pos = pos.i)
       shp[[i]] <- mutate(shp.i, nax=i) }
-    
+
     shp <- bind_rows(shp)
-    
+
     gg <- ggplot(data=shp, aes(x=x_c + x_d, y=y_c + y_d, group=shp1)) +
       geom_polygon(colour="grey50", fill="grey95") + coord_equal() +
       facet_grid(nax ~ shp) + labs(x="Position", y="PC")

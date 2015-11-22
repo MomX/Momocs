@@ -105,7 +105,6 @@
 #' Springer 316 pp.
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords efourier
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
@@ -236,7 +235,6 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
 #' Springer 316 pp.
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords efourier
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
@@ -322,7 +320,6 @@ efourier_i <- function(ef, nb.h, nb.pts = 120) {
 #'
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords efourier
 #' @examples
 #' data(bot)
 #' q <- efourier(bot[1], 24)
@@ -415,7 +412,6 @@ efourier_norm <- function(ef, start = FALSE) {
 #'
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
-#' @keywords efourier
 #' @examples
 #'
 #' data(bot)
@@ -446,36 +442,5 @@ efourier_shape <- function(an, bn, cn, dn, nb.h, nb.pts = 60,
         coo_plot(shp)
     return(shp)
 }
-
-# exotic and useless #' Dilates shapes based on elliptical
-# Fourier decomposition.  #' #' Calculates dilated and eroded
-# shapes based on elliptical #' Fourier decomposition
-# \emph{i.e.} taking into account the shape as a whole.  #'
-# Lists created by \code{efourier} objects can be passed to
-# \code{ef.amplify} #' @param ef \code{list}. A list
-# containing \eqn{a_n}, \eqn{b_n}, \eqn{c_n} and #'
-# \eqn{d_n} Fourier coefficients, such as returned by
-# \code{efourier}.  #' @param amp A vector of
-# \code{numeric}. If \code{amp} is of length 4, the #'
-# value specify the multiplication factor for \eqn{a_1},
-# \eqn{b_1}, \eqn{c_1} #' and \eqn{d_1} ; if only one
-# value is provided, then the multiplication #' factor will
-# be the same for the four coefficients \eqn{abcd_1}.  #'
-# @return \code{ef.amplify} returns the \code{ef} provided
-# but with #' 'amplified' coefficients for the first
-# harmonics.  #' @seealso \link{efourier} for a description
-# of the elliptical Fourier #' analysis and \link{Ptolemy}
-# for an illustration of the first #' ellipse/harmonic
-# defining the shape 'amplitude'.  #' @keywords efourier #'
-# @examples #' shp <- efourier_shape() #' plot(shp,
-# xlim=c(-20, 20), asp=1, type='l') #' shp.coe <-
-# efourier(shp, 12) #' amps <- seq(0.2, 2, 0.2) #' cols <-
-# col_summer(length(amps)) #' for (i in seq(along=amps)) { #'
-# shp.coe2 <- ef.amplify(shp.coe, amp=amps[i]) #' shp2 <-
-# efourier_i(shp.coe2) #' lines(shp2, col=cols[i])} #'
-# @export ef.amplify <- function(ef, amp=rep(0.5, 4)){ if
-# (length(amp)==1) amp <- rep(amp, 4) ef$an <- ef$an*amp[1]
-# ef$bn <- ef$bn*amp[2] ef$cn <- ef$cn*amp[3] ef$dn <-
-# ef$dn*amp[4] return(ef)}
 
 ##### end efourier

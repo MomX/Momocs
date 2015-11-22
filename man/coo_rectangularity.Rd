@@ -23,5 +23,4 @@ Calculates the rectangularity of a shape
 data(bot)
 coo_rectangularity(bot[1])
 }
-\keyword{ShapeDescriptors}
 

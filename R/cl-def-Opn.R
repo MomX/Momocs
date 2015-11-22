@@ -16,7 +16,6 @@
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @return an \code{Opn} object
 #' @seealso \link{Coo}, \link{Out}, \link{Ldk}.
-#' @keywords Opn
 #' @aliases Opn
 #' @examples
 #' methods(class=Opn)
@@ -132,7 +131,6 @@ print.Opn <- function(x, ...) {
 #' @param r2 numeric, the r-squared from every model
 #' @return an \code{OpnCoe} object
 #' @seealso \link{Coe}, \link{OutCoe}
-#' @keywords Opn
 #' @examples
 #' # all OpnCoe classes
 #' methods(class='OpnCoe')

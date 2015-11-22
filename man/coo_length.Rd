@@ -28,5 +28,4 @@ mutate(bot, size=coo_length(bot))
 \seealso{
 \link{coo_lw}, \link{coo_width}
 }
-\keyword{ShapeDescriptors}
 

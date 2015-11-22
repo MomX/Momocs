@@ -45,5 +45,4 @@ panel(bot.m)
 \seealso{
 \link{perm}
 }
-\keyword{Coe}
 

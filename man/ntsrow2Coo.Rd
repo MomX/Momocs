@@ -30,5 +30,4 @@ please let met know!
 # fac       <- data.frame(fac=factor(substr(names(coo_list), 1, 2)))
 # wings <- Ldk(coo_list, fac=fac)
 }
-\keyword{Babel}
 

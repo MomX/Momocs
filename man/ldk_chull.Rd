@@ -24,5 +24,4 @@ ldk_chull(wings$coo)
 \seealso{
 \link{coo_chull}, \link{chull}, \link{ldk_confell}, \link{ldk_contour}
 }
-\keyword{Graphics}
 

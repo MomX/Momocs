@@ -31,7 +31,4 @@ stack(bot2)
 bot2$ldk
 }
 }
-\keyword{Ldk}
-\keyword{Opn}
-\keyword{Out}
 

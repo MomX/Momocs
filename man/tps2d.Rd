@@ -32,5 +32,4 @@ we want a apply a trasnformation grid.
 \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
 \code{tps2d}.
 }
-\keyword{ThinPlateSplines}
 

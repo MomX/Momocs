@@ -14,5 +14,4 @@ Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutline
 \description{
 Data: Outline coordinates of mosquito wings.
 }
-\keyword{Datasets}
 

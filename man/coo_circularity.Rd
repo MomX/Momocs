@@ -22,5 +22,4 @@ and 'shape factor' sometimes.
 data(bot)
 coo_circularity(bot[1])
 }
-\keyword{ShapeDescriptors}
 

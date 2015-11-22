@@ -41,5 +41,4 @@ coe
 retain <- coeff_sel(retain=8, drop=1, nb.h=32, cph=4)
 head(coe[, retain])
 }
-\keyword{Miscellaneous}
 

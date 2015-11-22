@@ -14,7 +14,6 @@
 #' If the fac passed has only two levels, there is only pair and it is
 #' equivalent to \link{MANOVA}. \code{MANOVA_PW.PCA} works with the regular \link{manova}.
 #' @seealso \link{MANOVA}, \link{manova}.
-#' @keywords Multivariate
 #' @return a list with the following components is returned (invisibly because $manovas
 #' may be very long, see examples):
 #' \itemize{

@@ -61,5 +61,4 @@ MANOVA(op, 'domes')
 \seealso{
 \link{MANOVA_PW}
 }
-\keyword{Multivariate}
 

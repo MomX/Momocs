@@ -28,5 +28,4 @@ data(bot)
 b <- coo_sample(bot[1], 32)
 coo_rectilinearity(b)
 }
-\keyword{ShapeDescriptors}
 

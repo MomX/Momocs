@@ -2,21 +2,9 @@
 % Please edit documentation in R/cl-handling.R
 \name{rename}
 \alias{rename}
-\alias{rename.Coe}
-\alias{rename.Coo}
-\alias{rename.PCA}
-\alias{rename.default}
-\title{Rename (ala dplyr) variables by name, using the $fac slot on Momocs classes}
+\title{Rename (ala dplyr) on Momocs classes}
 \usage{
 rename(.data, ...)
-
-\method{rename}{default}(.data, ...)
-
-\method{rename}{Coo}(.data, ...)
-
-\method{rename}{Coe}(.data, ...)
-
-\method{rename}{PCA}(.data, ...)
 }
 \arguments{
 \item{.data}{a \code{Coo}, \code{Coe}, \code{PCA} object}
@@ -24,30 +12,24 @@ rename(.data, ...)
 \item{...}{comma separated list of unquoted expressions}
 }
 \value{
-a Coo object
+a Momocs object of the same class.
 }
 \description{
-Extends this dplyr verb to \link{Coo} objects. See examples.
+Rename variables by name, from the \code{$fac}. See examples and \code{?dplyr::rename}.
 }
 \details{
-dplyr verbs should be maintained.
-}
-\note{
-this method is quite experimental, check the result and do not hesitate to report a bug.
+dplyr verbs are maintained.
 }
 \examples{
-data(olea)
 olea
-select(olea, var, view) # drops domes and ind
-select(olea, variety=var, domesticated_status=domes, view)
-# combine with filter with magrittr pipes
-\dontrun{
-library(magrittr)
-# only dorsal views, and 'var' and 'domes' columns
-filter(olea, view=="VD") \%>\% select(var, domes)
-}
+rename(olea, Ind=ind, View=view)
 }
 \seealso{
-\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{chop}}, \code{\link{combine}},
+  \code{\link{dissolve}}, \code{\link{filter}},
+  \code{\link{mutate}}, \code{\link{sample_frac}},
+  \code{\link{sample_n}}, \code{\link{select}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

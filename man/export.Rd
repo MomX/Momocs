@@ -55,5 +55,4 @@ export(bot.f, file='data.xls', dec=',')
  export(bot[1], file='bot1.txt')
 }
 }
-\keyword{Babel}
 

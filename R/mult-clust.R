@@ -21,7 +21,6 @@
 #' you can also pass a character (or a factor) with the same number of rows of x$x
 #' @param ... useless here
 #' @return a ggplot object
-#' @keywords Multivariate Graphics
 #' @examples
 #' \dontrun{
 #' data(bot)

@@ -62,5 +62,4 @@ tps_grid(fr, to, amp=3, grid.size=10)
 \link{tps_iso} and \link{tps_arr},
 \link{coo_lolli}, \link{coo_arrows}.
 }
-\keyword{ThinPlateSplines}
 

@@ -26,5 +26,4 @@ coo_eccentricityeigen(bot[1])
 \seealso{
 \link{coo_eccentricityboundingbox}
 }
-\keyword{ShapeDescriptors}
 

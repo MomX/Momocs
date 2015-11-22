@@ -47,5 +47,4 @@ plot(olda)
 \seealso{
 \link{Coo}, \link{Out}, \link{Ldk}.
 }
-\keyword{Opn}
 

@@ -59,8 +59,8 @@ colors (hexadecimal format)
 Colors, colors, colors.
 }
 \note{
-Among available color palettes, \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized}; 
-\code{col_div}, \code{col_qual}, \code{col_heat}, \code{col_cold} 
+Among available color palettes, \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
+\code{col_div}, \code{col_qual}, \code{col_heat}, \code{col_cold}
 and \code{col_gallus} are based on on ColorBrewer2: \url{http://colorbrewer2.org/}.
 }
 \examples{
@@ -68,7 +68,7 @@ and \code{col_gallus} are based on on ColorBrewer2: \url{http://colorbrewer2.org
 wheel <- function(palette, n=10){
  op <- par(mar=rep(0, 4)) ; on.exit(par(op))
  pie(rep(1, n), col=palette(n), labels=NA, clockwise=TRUE)}
- 
+
  # Qualitative
  wheel(col_qual)
  wheel(col_solarized)
@@ -76,11 +76,11 @@ wheel <- function(palette, n=10){
  wheel(col_summer2)
  wheel(col_spring)
  wheel(col_autumn)
- 
+
  # Divergent
  wheel(col_gallus)
  wheel(col_india)
- 
+
  # Sequential
  wheel(col_heat)
  wheel(col_hot)
@@ -88,9 +88,8 @@ wheel <- function(palette, n=10){
  wheel(col_sari)
  wheel(col_bw)
  wheel(col_grey)
- 
+
  # Black only for pubs
  wheel(col_black)
 }
-\keyword{Graphics}
 

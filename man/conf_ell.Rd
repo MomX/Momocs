@@ -38,5 +38,4 @@ lines(ce095$ell, col=cols[9])
 segments(ce095$seg[1, 1], ce095$seg[1, 2], ce095$seg[2, 1], ce095$seg[2, 2])
 segments(ce095$seg[3, 1], ce095$seg[3, 2], ce095$seg[4, 1], ce095$seg[4, 2])
 }
-\keyword{Graphics}
 

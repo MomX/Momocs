@@ -45,5 +45,4 @@ some practical considerations. \emph{Lethaia} \bold{28}: 179-186.
 An intuitive explanation of elliptic Fourier analysis can be found in
 the \bold{Details} section of the \link{efourier} function.
 }
-\keyword{Graphics}
 

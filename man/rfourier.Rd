@@ -80,5 +80,4 @@ with this approach.
 \link{efourier}, \link{tfourier} for the other members of the Fourier's
 family.
 }
-\keyword{rfourier}
 

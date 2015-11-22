@@ -15,7 +15,6 @@
 #' \item \code{DF} full Procrustes distance between coo1 and coo2.
 #' }
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
-#' @keywords Procrustes
 #' @export
 fProcrustes <- function(coo1, coo2) {
   # directly borrowed from Claude
@@ -61,7 +60,6 @@ fProcrustes <- function(coo1, coo2) {
 #' } or an \link{Out}, \link{Opn} or an \link{Ldk} object.
 #' @note Slightly less optimized than procGPA in the shapes package (~20% on my machine).
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
-#' @keywords Procrustes
 #' @export
 fgProcrustes <- function(x, tol, verbose, coo) {
   UseMethod("fgProcrustes")
@@ -232,7 +230,6 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
 #' \item \code{rho} trigonometric Procrustes distance.
 #' }
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
-#' @keywords Procrustes
 #' @export
 pProcrustes <- function(coo1, coo2) {
   # directly borrowed from Claude

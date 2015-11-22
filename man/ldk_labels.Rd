@@ -26,5 +26,4 @@ ldk_labels(wings[1])
 coo_plot(wings[1])
 ldk_labels(wings[1], d=0.05, cex=0.5)
 }
-\keyword{Graphics}
 

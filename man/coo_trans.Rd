@@ -27,5 +27,4 @@ stack(coo_trans(bot, 50, 100))
 coo_plot(b)
 coo_plot(coo_trans(b, 50, 100))
 }
-\keyword{ShapeUtilities}
 

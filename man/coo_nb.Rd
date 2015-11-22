@@ -17,5 +17,4 @@ data(bot)
 coo_nb(bot[1])
 coo_nb(bot)
 }
-\keyword{ShapeUtilities}
 

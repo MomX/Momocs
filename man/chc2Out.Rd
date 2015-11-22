@@ -58,5 +58,4 @@ Elliptic Fourier features of a closed contour.
 \seealso{
 \link{pix2chc}
 }
-\keyword{Babel}
 

@@ -14,7 +14,6 @@
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @return an \code{Out} object
 #' @seealso \link{Coo}, \link{Opn}, link{Ldk}.
-#' @keywords Out
 #' @aliases Out
 #' @examples
 #' methods(class=Out)
@@ -73,7 +72,6 @@ Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
 #' @param OutCoe used by \code{as}, useless for the front user
 #' @param nb.pts number of point for the reconstructed outlines
 #' @return an \link{Out} object.
-#' @keywords Out
 #' @examples
 #' data(bot)
 #' bot <- coo_center(bot)
@@ -171,7 +169,6 @@ print.Out <- function(x, ...) {
 #' @return an \code{OutCoe} object
 #' @details These methods can be applied on \code{Out} objects:
 #' @seealso \link{Coe}, \link{OpnCoe}
-#' @keywords Out
 #' @examples
 #' # all OutCoe methods
 #' methods(class='OutCoe')
@@ -235,7 +232,6 @@ print.OutCoe <- function(x, ...) {
 #' @param Coo an Out or Opn object
 #' @param nb.ldk the number of landmarks to define on every shape
 #' @return an Out or an Opn object with some landmarks defined
-#' @keywords Out Opn Ldk
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -270,7 +266,6 @@ def_ldk.Opn <- def_ldk.Out
 #' @param Coo a Coo object, either Out or Opn
 #' @return an array of coordinates X (x; y) coordinates X number of shapes.
 #' @seealso \link{def_ldk}, \link{fgProcrustes}
-#' @keywords Out Opn Ldk
 #' @examples
 #' data(hearts)
 #' ldk.h <- get_ldk(hearts)
@@ -320,7 +315,6 @@ get_ldk.Opn <- get_ldk.Out
 #' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
 #' }
 #' @seealso \link{rm_Asym} and \link{rm_Sym}.
-#' @keywords efourier
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
@@ -385,7 +379,6 @@ symmetry.OutCoe <- function(OutCoe) {
 #' # strange shapes because the original shape was mainly symmetric and would need its
 #' # symmetric (eg its average) for a proper reconstruction. Should only be used like that:
 #' plot(botAsymp, morpho=FALSE)
-#' @keywords efourier
 #' @rdname rm_Asym
 #' @aliases rm_Sym
 #' @export

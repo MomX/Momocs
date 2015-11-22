@@ -26,5 +26,4 @@ ldk_contour(wings$coo)
 \seealso{
 \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
 }
-\keyword{Graphics}
 

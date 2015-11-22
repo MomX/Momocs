@@ -62,5 +62,4 @@ text(pos, labels=signif(ord[order(ord)], 3))
 \seealso{
 \link{coo_plot} and \link{coo_template}.
 }
-\keyword{Graphics}
 

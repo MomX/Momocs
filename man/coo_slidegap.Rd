@@ -36,5 +36,4 @@ coo_plot(cat_down)
 # that's what we meant
 coo_plot(coo_slidegap(cat_down))
 }
-\keyword{ShapeUtilities}
 

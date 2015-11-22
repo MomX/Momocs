@@ -30,5 +30,4 @@ a
 \seealso{
 \link{l2a}
 }
-\keyword{Babel}
 

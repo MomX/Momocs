@@ -86,7 +86,6 @@ magrittr::`%T>%`
 #' @importFrom utils stack
 #' @docType package
 #' @name Momocs
-#' @keywords Abtract
 NULL
 
 # prevents "no visible binding for global variable"

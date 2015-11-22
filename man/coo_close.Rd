@@ -29,5 +29,4 @@ is_closed(x3)
 \seealso{
 \link{coo_unclose}, \link{is_closed}
 }
-\keyword{ShapeUtilities}
 

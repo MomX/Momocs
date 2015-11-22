@@ -28,5 +28,4 @@ mutate(bot, size=coo_centsize(bot))
 
 
 }
-\keyword{ShapeDescriptors}
 

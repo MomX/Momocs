@@ -26,5 +26,4 @@ coo_plot(b)
 coo_theta3(b)
 coo_theta3(b, method='acos')
 }
-\keyword{ShapeDescriptors}
 

@@ -29,5 +29,4 @@ coo_draw(coo_shearx(coo, 0.5), border="blue")
 coo_draw(coo_sheary(coo, 0.5), border="red")
 
 }
-\keyword{ShapeUtilities}
 

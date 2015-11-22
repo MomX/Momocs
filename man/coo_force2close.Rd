@@ -24,5 +24,4 @@ b <- b[1:40,]
 coo_plot(b)
 coo_draw(coo_force2close(b), border='red')
 }
-\keyword{ShapeUtilities}
 

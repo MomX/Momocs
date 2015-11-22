@@ -2,27 +2,9 @@
 % Please edit documentation in R/cl-handling.R
 \name{combine}
 \alias{combine}
-\alias{combine.Ldk}
-\alias{combine.Opn}
-\alias{combine.OpnCoe}
-\alias{combine.Out}
-\alias{combine.OutCoe}
-\alias{combine.list}
 \title{Combine Coo/Coe objects}
 \usage{
 combine(...)
-
-\method{combine}{list}(...)
-
-\method{combine}{Out}(...)
-
-\method{combine}{Opn}(...)
-
-\method{combine}{Ldk}(...)
-
-\method{combine}{OutCoe}(...)
-
-\method{combine}{OpnCoe}(...)
 }
 \arguments{
 \item{...}{a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)}
@@ -32,7 +14,7 @@ Combine \code{Coo} objects after a slicing, either manual or using \link{slice} 
 it combines row-wise (ie, merges shapes as a \code{c} would do) ; but on Coe it combines column-wise
 (merges coefficients). In the latter case, Coe must have the same number of shapes (not
 necessarily the same number of coefficients).
-Also the $fac of the first Coe is retrieved.
+Also the \code{$fac} of the first Coe is retrieved.
 A separate version may come at some point.
 }
 \note{
@@ -54,10 +36,14 @@ bot_s$whisky
 # bot_sf <- combine(bot_s2)
 
 # pipe style
-# library(magrittr)
-# bot_sf <- lapply(bot_s, efourier, 10) \%>\% combine()
+lapply(bot_s, efourier, 10) \%>\% combine()
 }
 \seealso{
-\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{chop}}, \code{\link{dissolve}},
+  \code{\link{filter}}, \code{\link{mutate}},
+  \code{\link{rename}}, \code{\link{sample_frac}},
+  \code{\link{sample_n}}, \code{\link{select}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

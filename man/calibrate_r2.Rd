@@ -2,19 +2,14 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_r2}
 \alias{calibrate_r2}
-\alias{calibrate_r2.Opn}
-\title{Quantitative calibration, through r2, for Opn objects}
+\title{Quantitative r2 calibration for Opn objects}
 \usage{
-calibrate_r2(x, ...)
-
-\method{calibrate_r2}{Opn}(x, method = "opoly", id = 1:length(Opn),
+calibrate_r2(Opn, method = "opoly", id = 1:length(Opn),
   degree.range = 1:8, thresh = c(0.9, 0.95, 0.99, 0.999), plot = TRUE,
   verbose = TRUE, ...)
 }
 \arguments{
-\item{x}{and Opn object}
-
-\item{...}{useless here}
+\item{Opn}{an Opn object}
 
 \item{method}{one of 'npoly' or 'opoly'}
 
@@ -27,24 +22,22 @@ calibrate_r2(x, ...)
 \item{plot}{logical whether to print the plot}
 
 \item{verbose}{logical whether to print messages}
+
+\item{...}{useless here}
 }
 \description{
-Estimates the r2 to calibrate the degree for \code{npoly} and \code{opoly} methods.
+Estimates the r2 to calibrate the degree for \link{npoly} and \link{opoly} methods.
 Also returns a plot
 }
 \details{
-May be long, so you can estimate it on a sample.
+May be long, so you can estimate it on a sample either with id here, or one of
+\link{sample_n} or \link{sample_frac}
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{Opn}: Method for Opn objects
-}}
 \examples{
 \dontrun{
-data(olea)
-calibrate_r2(olea, "opoly", degree.range=1:12, thresh=c(0.9, 0.99)
-
+calibrate_r2(olea, "opoly", degree.range=1:5, thresh=c(0.9, 0.99))
 }
+
 }
 \seealso{
 \link{calibrate_harmonicpower}

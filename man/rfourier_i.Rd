@@ -49,5 +49,4 @@ Springer 316 pp.
 \link{efourier} for the reverse operation and also
 \code{rfourier_shape}. \link{l2m}, \link{coeff_split} may be useful.
 }
-\keyword{rfourier}
 

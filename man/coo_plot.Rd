@@ -80,5 +80,4 @@ coo_plot(b, xy.axis=FALSE, lwd=2, col='#F2F2F2')
 \seealso{
 coo_draw
 }
-\keyword{Graphics}
 

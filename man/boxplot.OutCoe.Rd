@@ -36,5 +36,4 @@ boxplot(op)
 \seealso{
 \link{hist.Coe}
 }
-\keyword{Graphics}
 

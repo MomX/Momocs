@@ -31,5 +31,4 @@ stack(coo_interpolate(coo_sample(bot, 12), 120))
 coo_plot(bot[1])
 coo_plot(coo_interpolate(coo_sample(bot[1], 12), 120))
 }
-\keyword{ShapeUtilities}
 

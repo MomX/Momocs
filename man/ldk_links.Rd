@@ -17,5 +17,4 @@ on the second column the ending-id (id= the number of the coordinate)}
 \description{
 Cosmetics only but useful to visualize shape variation.
 }
-\keyword{Graphics}
 

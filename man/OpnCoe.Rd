@@ -41,5 +41,4 @@ methods(class='OpnCoe')
 \seealso{
 \link{Coe}, \link{OutCoe}
 }
-\keyword{Opn}
 

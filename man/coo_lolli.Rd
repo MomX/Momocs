@@ -28,5 +28,4 @@ title("A nice title !")
 \seealso{
 \link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
 }
-\keyword{Graphics}
 

@@ -32,5 +32,4 @@ coo_plot(coo_alignxax(b))
 \seealso{
 \link{coo_align}, \link{coo_aligncalliper}
 }
-\keyword{ShapeUtilities}
 

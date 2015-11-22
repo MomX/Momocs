@@ -22,5 +22,4 @@ m2d(wings[3])
 \seealso{
 \link{m2d} the reverse function.
 }
-\keyword{Babel}
 

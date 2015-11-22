@@ -58,5 +58,4 @@ pp.
 \link{tfourier} for the reverse operation and also
 \code{tfourier_shape}. \link{tfourier}. \link{l2m}, \link{coeff_split} may be useful.
 }
-\keyword{tfourier}
 

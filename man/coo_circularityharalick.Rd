@@ -24,5 +24,4 @@ to digitalization noise than coo_circularity
 data(bot)
 coo_circularityharalick(bot[1])
 }
-\keyword{ShapeDescriptors}
 

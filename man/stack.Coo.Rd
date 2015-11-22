@@ -95,8 +95,4 @@ stack(hearts, fac="aut", palette=col_sari)
 \seealso{
 \link{panel.Coo}, \link{plot.Coo}.
 }
-\keyword{Graphics}
-\keyword{Ldk}
-\keyword{Opn}
-\keyword{Out}
 

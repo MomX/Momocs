@@ -46,6 +46,4 @@ gg
 \seealso{
 \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
 }
-\keyword{Graphics}
-\keyword{Multivariate}
 

@@ -20,5 +20,4 @@ outlines as a standardization procedure for elliptic fourier analysis.
 \description{
 Courtesy of Julien Corny and Florent Detroit.
 }
-\keyword{Datasets}
 

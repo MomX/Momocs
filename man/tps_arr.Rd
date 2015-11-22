@@ -78,5 +78,4 @@ tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3, grid=FALSE)
 \link{tps_grid} and \link{tps_iso},
 \link{coo_lolli}, \link{coo_arrows}.
 }
-\keyword{ThinPlateSplines}
 

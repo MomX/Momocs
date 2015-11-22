@@ -27,5 +27,4 @@ coo_ldk(b, 3) # run this, and click 3 times
 coo_ldk(bot, 2) # this also works on Out
 }
 }
-\keyword{ShapeUtilities}
 

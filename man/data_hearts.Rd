@@ -13,5 +13,4 @@ of Pondicherry that drawn the hearts, that then have been smoothed, scaled, cent
 \description{
 Data: Outline coordinates of hand-drawn hearts
 }
-\keyword{Datasets}
 

@@ -10,7 +10,6 @@
 #' @param l a \code{list} with x and y coordinates as components.
 #' @return \code{matrix} of (x; y) coordinates.
 #' @seealso \link{m2l}.
-#' @keywords Babel
 #' @examples
 #' data(wings)
 #' l <- m2l(wings[1])
@@ -37,7 +36,6 @@ l2m <- function(l) {
 #' @param l \code{list} of matrices of the same dimension.
 #' @return an array of coordinates.
 #' @seealso \link{a2l}.
-#' @keywords Babel
 #' @examples
 #' data(wings)
 #' l <- wings$coo
@@ -68,7 +66,6 @@ l2a <- function(l) {
 #' @param a \code{array} of coordinates.
 #' @return \code{list} with 2-cols matrices of (x; y) coordinates.
 #' @seealso \link{l2a}
-#' @keywords Babel
 #' @examples
 #' data(wings)
 #' l <- wings$coo
@@ -98,7 +95,6 @@ a2l <- function(a) {
 #' @param a \code{array} of (x; y) coordinates.
 #' @return matrix (see above).
 #' @seealso \link{m2a} the reverse function.
-#' @keywords Babel
 #' @examples
 #' data(wings)
 #' a <- l2a(wings$coo)
@@ -128,7 +124,6 @@ a2m <- function(a) {
 #' @param m a matrix (see above).
 #' @return an array (see above).
 #' @seealso \link{a2m} the reverse function.
-#' @keywords Babel
 #' @examples
 #' data(wings)
 #' m <- a2m(l2a(wings$coo))
@@ -152,7 +147,6 @@ m2a <- function(m) {
 #' @param m a matrix (see above).
 #' @return a data.frame (see above).
 #' @seealso \link{m2d} the reverse function.
-#' @keywords Babel
 #' @examples
 #' data(wings)
 #' m2d(wings[3])
@@ -172,7 +166,6 @@ m2d <- function(m){
 #' @param m a two-columns \code{matrix} of x and y coordinates.
 #' @return a \code{list} with x and y components.
 #' @seealso \link{l2m}.
-#' @keywords Babel
 #' @examples
 #' data(wings)
 #' l <- m2l(wings[1])

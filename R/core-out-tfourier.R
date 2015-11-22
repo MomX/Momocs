@@ -46,7 +46,6 @@
 #'
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
-#' @keywords tfourier
 #' @examples
 #' data(bot)
 #' coo <- bot[1]
@@ -176,7 +175,6 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #'
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
-#' @keywords tfourier
 #' @examples
 #' data(bot)
 #' tfourier(bot[1], 24)
@@ -260,7 +258,6 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' @seealso \link{tfourier_i}, \link{tfourier}, link{tfourier}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords tfourier
 #' @examples
 #' data(bot)
 #' tf <- tfourier(bot[1], 24)

@@ -50,10 +50,10 @@
   } else {
     for (i in seq(along = levels(fac))) {
       rug(xy[fac == levels(fac)[i], 1], ticksize = g, pos = y0 +
-            (i - 1) * gy, side = 1, col = .transp(col[i],
+            (i - 1) * gy, side = 1, col = col_alpha(col[i],
                                                   0), lwd = 1.2, lend = 1, quiet = TRUE)
       rug(xy[fac == levels(fac)[i], 2], ticksize = g, pos = x0 +
-            (i - 1) * gx, side = 2, col = .transp(col[i],
+            (i - 1) * gx, side = 2, col = col_alpha(col[i],
                                                   0), lwd = 1.2, lend = 1, quiet = TRUE)
     }
   }
@@ -145,7 +145,7 @@
          ybottom = cent[, 2] - h/2 + p,
          xright = cent[, 1] + w/2 + p,
          ytop = cent[, 2] + h/2 + p,
-         col = .transp("#FFFFFF", 0.5), border = NA)
+         col = col_alpha("#FFFFFF", 0.5), border = NA)
   }
   if (nlevels(fac)>2) {
     text(cent[, 1], cent[, 2] + p,
@@ -161,7 +161,7 @@
 # add 'stars'
 #' @export
 .stars <- function(xy, fac, col) {
-  col.i <- .transp(col, 0.2)
+  col.i <- col_alpha(col, 0.2)
   for (i in seq(along = levels(fac))) {
     pts.i <- xy[fac == levels(fac)[i], ]
     cent.i <- coo_centpos(pts.i)
@@ -209,7 +209,7 @@
       # ki$z <- .normalize(ki$z, zmin, zmax)
       ki$z <- .normalize(ki$z)
       contour(ki$x, ki$y, ki$z, add = TRUE, nlevels = levels,
-              drawlabels = FALSE, col = .transp(rep(col[i],
+              drawlabels = FALSE, col = col_alpha(rep(col[i],
                                                     levels), transp))
     }
   }
@@ -225,7 +225,7 @@
     if (is.matrix(xy.i)) {
       if (nrow(xy.i) > 3) {
         links.i <- links_delaunay(xy.i)
-        ldk_links(xy.i, links.i, col = .transp(col[i],
+        ldk_links(xy.i, links.i, col = col_alpha(col[i],
                                                2/3), lwd = 1.5)
       }
     }

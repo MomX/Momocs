@@ -11,8 +11,8 @@
   "xy", "range_axes", "full_axes")[1], amp.shp = 1, size.shp = 1,
   nb.shp = 12, nr.shp = 6, nc.shp = 5, rotate.shp = 0,
   flipx.shp = FALSE, flipy.shp = FALSE, pts.shp = 60,
-  border.shp = .transp("#000000", 0.5), lwd.shp = 1,
-  col.shp = .transp("#000000", 0.95), stars = FALSE, ellipses = FALSE,
+  border.shp = col_alpha("#000000", 0.5), lwd.shp = 1,
+  col.shp = col_alpha("#000000", 0.95), stars = FALSE, ellipses = FALSE,
   conf_ellipses = 0.5, ellipsesax = TRUE, conf_ellipsesax = c(0.5, 0.75,
   0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
   chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
@@ -58,7 +58,7 @@ or for every individual, see examples)}
 
 \item{morphospace}{logical whether to add the morphological space}
 
-\item{pos.shp}{passed to \link{pos.shapes}, one of 
+\item{pos.shp}{passed to \link{pos.shapes}, one of
 \code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
 a matrix of positions. See \link{pos.shapes}}
 
@@ -188,6 +188,4 @@ plot(wpp, 1)
 \seealso{
 \link{plot.LDA}
 }
-\keyword{Graphics}
-\keyword{Multivariate,}
 

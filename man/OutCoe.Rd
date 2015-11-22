@@ -36,5 +36,4 @@ methods(class='OutCoe')
 \seealso{
 \link{Coe}, \link{OpnCoe}
 }
-\keyword{Out}
 

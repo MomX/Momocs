@@ -10,7 +10,6 @@
 #' @param replace logical, whether to use \link{sample} with replacement
 #' @param ... useless here
 #' @seealso \link{breed}
-#' @keywords Coe
 #' @examples
 #' m <- matrix(1:12, nrow=3)
 #' m
@@ -55,7 +54,6 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
 #' @param rate numeric the number of sd for \link{rnorm}, 1 by default.
 #' @param ... useless here
 #' @seealso \link{perm}
-#' @keywords Coe
 #' @examples
 #' m <- matrix(1:12, nrow=3)
 #' breed(m, margin=2, size=4)

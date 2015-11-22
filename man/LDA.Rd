@@ -60,5 +60,4 @@ plot(bot.l)
 \seealso{
 \link{plot.LDA}, \link{plot_CV}
 }
-\keyword{Multivariate}
 

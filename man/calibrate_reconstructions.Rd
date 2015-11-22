@@ -2,23 +2,12 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_reconstructions}
 \alias{calibrate_reconstructions}
-\alias{calibrate_reconstructions.Opn}
-\alias{calibrate_reconstructions.Out}
 \title{Calibrate using reconstructed shapes}
 \usage{
-calibrate_reconstructions(x, ...)
-
-\method{calibrate_reconstructions}{Out}(x, method = c("efourier", "rfourier",
-  "tfourier"), id, range = 1:9, ...)
-
-\method{calibrate_reconstructions}{Opn}(x, method = c("npoly", "opoly",
-  "dfourier"), id, range = 2:10, baseline1 = c(-1, 0), baseline2 = c(1,
-  0), ...)
+calibrate_reconstructions(x, method, id, range, baseline1, baseline2)
 }
 \arguments{
 \item{x}{the \code{Coo} object on which to calibrate_reconstructions}
-
-\item{...}{only used for the generic}
 
 \item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')}
 for \code{Out}, or from \code{c('opoly', 'npoly', 'dfourier')} for \code{Opn}}
@@ -30,6 +19,8 @@ for \code{Out}, or from \code{c('opoly', 'npoly', 'dfourier')} for \code{Opn}}
 \item{baseline1}{\eqn{(x; y)} coordinates for the first point of the baseline}
 
 \item{baseline2}{\eqn{(x; y)} coordinates for the second point of the baseline}
+
+\item{...}{only used for the generic}
 }
 \value{
 a ggplot object
@@ -38,12 +29,6 @@ a ggplot object
 Calculate and displays reconstructed shapes using a
 range of harmonic number. Compare them visually with the maximal fit.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{Out}: Method for Out objects
-
-\item \code{Opn}: Method for Opn objects
-}}
 \examples{
 data(bot)
 calibrate_reconstructions(bot, "efourier")
@@ -51,5 +36,4 @@ calibrate_reconstructions(bot, "efourier")
 data(olea)
 calibrate_reconstructions(olea, "dfourier")
 }
-\keyword{Out}
 

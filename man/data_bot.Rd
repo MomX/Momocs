@@ -14,5 +14,4 @@ images or the brands cited here.
 \description{
 Data: Outline coordinates of beer and whisky bottles.
 }
-\keyword{Datasets}
 

@@ -14,25 +14,24 @@
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
 #' @param ... only used for the generic
 #' @return a ggplot object
-#' @keywords Out
 #' @examples
 #' data(bot)
 #' calibrate_reconstructions(bot, "efourier")
-#' 
+#'
 #' data(olea)
 #' calibrate_reconstructions(olea, "dfourier")
 #' @export
 calibrate_reconstructions <-
-  function(x, ...) {UseMethod("calibrate_reconstructions")}
+  function(x, method, id, range, baseline1, baseline2) {
+    UseMethod("calibrate_reconstructions")
+    }
 
-#' @describeIn calibrate_reconstructions Method for Out objects
 #' @export
 calibrate_reconstructions.Out <-
   function(x,
            method = c("efourier", "rfourier", "tfourier"),
            id,
-           range = 1:9,
-           ...) {
+           range = 1:9, baseline1=NULL, baseline2=NULL) {
     # we detect the method
     # Out dispatcher
     Out <- x
@@ -60,7 +59,7 @@ calibrate_reconstructions.Out <-
       range <- floor(seq(1, max.h, length = 9))
       cat(" * range was too high and set to: ", range, ".\n")
     }
-    
+
     # we calculate all shapes
     res <- list()
     for (i in seq(along = range)) {
@@ -91,18 +90,16 @@ calibrate_reconstructions.Out <-
                          strip.text=element_text(colour = "grey10"),
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
-    
+
     gg <- ggplot(data=coos, aes_string(x="x", y="y")) +
       coord_equal() + geom_polygon(aes(fill=id), alpha=0.5) +
       geom_path(data=best, aes_string(x="x", y="y")) +
-      scale_fill_gradient2() +
       facet_wrap(~ id) +
       labs(x=NULL, y=NULL, title=names(Out)[id]) +
       theme_light() + theme_empty
     return(gg)
   }
 
-#' @describeIn calibrate_reconstructions Method for Opn objects
 #' @export
 calibrate_reconstructions.Opn <-
   function(x,
@@ -110,8 +107,7 @@ calibrate_reconstructions.Opn <-
            id,
            range = 2:10,
            baseline1 = c(-1, 0),
-           baseline2 = c(1, 0),
-           ...) {
+           baseline2 = c(1, 0)) {
     # Opn dispatcher
     Opn <- x
     if (missing(method)) {
@@ -128,7 +124,7 @@ calibrate_reconstructions.Opn <-
         method_i <- switch(p, npoly_i, opoly_i, dfourier_i)
       }
     }
-    
+
     # we sample a shape
     if (missing(id))
       id <- sample(length(Opn$coo), 1)
@@ -136,7 +132,7 @@ calibrate_reconstructions.Opn <-
     coo <- coo_baseline(coo,
                         ldk1 = 1, ldk2 = nrow(coo),
                         t1 = baseline1, t2 = baseline2)
-    
+
     # we check for too ambitious range
     # special case for opoly # todo
     if (p == 2) {
@@ -146,13 +142,13 @@ calibrate_reconstructions.Opn <-
       range <- 2:10
       cat(" * range was too high and set to: ", range, ".\n")
     }
-    
+
     # we loop
     res <- list()
     for (i in seq(along = range)) {
       res[[i]] <- method_i(method(coo, range[i]))
     }
-    
+
     # we prepare the plot
     names(res) <- range
     coos <- ldply(res, data.frame)
@@ -177,7 +173,7 @@ calibrate_reconstructions.Opn <-
                          strip.text=element_text(colour = "grey10"),
                          strip.text.x=element_text(colour = "grey10"),
                          strip.text.y=element_text(colour = "grey10"))
-    
+
     gg <- ggplot(data=coos, aes_string(x="x", y="y")) +
       coord_equal() + geom_path(data=best, aes_string(x="x", y="y"), alpha=0.5) +
       geom_path(aes(col=id)) +
@@ -194,7 +190,7 @@ calibrate_reconstructions.Opn <-
 #' Calculate deviations from original and reconstructed shapes using a
 #' range of harmonic number.
 #'
-#' @param Coo the \code{Out} object on which to calibrate_deviations
+#' @param x and \code{Out} or \code{Opn} object on which to calibrate_deviations
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')} and
 #' \code{'dfourier'}.
 #' @param id the shape on which to perform calibrate_deviations
@@ -204,15 +200,13 @@ calibrate_reconstructions.Opn <-
 #' @param norm.centsize logical whether to normalize deviation by the centroid size
 #' @param dist.method a method such as \link{edm_nearest} to calculate deviations
 #' @param dist.nbpts numeric the number of points to use for deviations calculations
-#' @param ... only used for the generic
 #' @details For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
 #' @return a ggplot object
-#' @keywords Out
 #' @examples
 #' data(bot)
 #' calibrate_deviations(bot)
 #' \dontrun{
-#' 
+#'
 #' # on Opn
 #' data(olea)
 #' camibrate_deviations(olea)
@@ -226,22 +220,20 @@ calibrate_reconstructions.Opn <-
 #' gg + coord_polar()
 #' }
 #' @export
-calibrate_deviations <- function(Coo, ...) {
+calibrate_deviations <- function(x, method, id, range, norm.centsize, dist.method, dist.nbpts) {
   UseMethod("calibrate_deviations")
 }
 
-#' @describeIn calibrate_deviations Method for Out objects
 #' @export
 calibrate_deviations.Out <-
-  function(Coo, method = c("efourier", "rfourier", "tfourier"),
+  function(x, method = c("efourier", "rfourier", "tfourier"),
            id = 1, range,
            norm.centsize = TRUE,
-           dist.method = edm_nearest, dist.nbpts = 120,
-           ...) {
+           dist.method = edm_nearest, dist.nbpts = 120) {
+    Coo <- x
     # missing lineat.y
     if (missing(range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
-                                    lineat.y = c(95, 99, 99.9))
+      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE)
       range <- unique(hr$minh)
     }
     if (missing(method)) {
@@ -345,25 +337,24 @@ calibrate_deviations.Out <-
     invisible(list(gg=gg, res = res, m = m, d = d))
   }
 
-#' @describeIn calibrate_deviations Method for Opn objects
 #' @export
 calibrate_deviations.Opn<-
-  function(Coo, method = c("npoly", "opoly", "dfourier"),
+  function(x, method = c("npoly", "opoly", "dfourier"),
            id = 1, range,
            norm.centsize = TRUE,
-           dist.method = edm_nearest, dist.nbpts = 120,
-           ...) {
+           dist.method = edm_nearest, dist.nbpts = 120) {
+    Coo <- x
     # missing lineat.y
     if (missing(range)) {
       #       hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
       #                                     lineat.y = c(95, 99, 99.9))
       #       range <- unique(hr$minh)
-      #       
+      #
       cat(" * range missing and set to 1:8.\n")
       range <- 1:8
     }
-    
-    
+
+
     if (missing(method)) {
       cat(" * Method not provided. dfourier is used.\n")
       method <- dfourier
@@ -402,7 +393,7 @@ calibrate_deviations.Opn<-
     nc <- nb.pts
     nk <- length(id)
     if (p==3){
-      
+
     res <- array(NA, dim = c(nr, nc, nk),
                  dimnames = list(paste0("h", range),
                                  paste("pt", 1:nb.pts), names(Coo)[id]))
@@ -449,7 +440,7 @@ calibrate_deviations.Opn<-
       xx <- cbind(xx, melt(d)$value)
       xx$Var2 <- as.numeric(xx$Var2)
       colnames(xx) <- c("harm", "pt", "med", "sd")
-      
+
       # hideous but avoid the aes_string problem fro ribbon
       xx$mmsd <- xx$med - xx$sd
       xx$mpsd <- xx$med + xx$sd
@@ -493,13 +484,13 @@ calibrate_deviations.Opn<-
 #' Estimates the number of harmonics required for the four Fourier methods
 #' implemented in Momocs: elliptical Fourier analysis
 #' (see \link{efourier}), radii variation analysis (see \link{rfourier})
-#' and tangent angle analysis (see \link{tfourier}) and 
+#' and tangent angle analysis (see \link{tfourier}) and
 #' discrete Fourier transform (see \link{dfourier}).
 #' It returns and can plot cumulated harmonic power whether dropping
 #' the first harmonic or not, and based and the maximum possible number
 #' of harmonics on the \code{Coo} object.
 #'
-#' @param x a \code{Coo} object on which to calibrate_harmonicpower
+#' @param x a \code{Coo} of \code{Opn} object
 #' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')} for \code{Out}s and
 #' \code{dfourier} for \code{Out}s.
 #' @param id the shapes on which to perform calibrate_harmonicpower. All of them by default
@@ -509,7 +500,6 @@ calibrate_deviations.Opn<-
 #' \code{minh} below
 #' @param plot logical whether to plot the result or simply return the matrix
 #' @param verbose whether to print results
-#' @param ... just for the generic
 #' @return returns a list with component:
 #' \itemize{
 #' \item \code{gg} a ggplot object, \code{q} the quantile matrix
@@ -523,7 +513,6 @@ calibrate_deviations.Opn<-
 #' and as follows for radii variation and tangent angle:
 #' \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 #' @seealso \link{calibrate_r2}
-#' @keywords Out
 #' @examples
 #' data(bot)
 #' cal <- calibrate_harmonicpower(bot)
@@ -531,7 +520,7 @@ calibrate_deviations.Opn<-
 #' # for Opn objects
 #' data(olea)
 #' calibrate_harmonicpower(olea, "dfourier")
-#' 
+#'
 #' # let customize the ggplot
 #' library(ggplot2)
 #' cal$gg + theme_minimal() +
@@ -540,16 +529,16 @@ calibrate_deviations.Opn<-
 #' }
 #' # if you want to do efourier with 99% calibrate_harmonicpower in one step
 #' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
+#'
 #' @export
-calibrate_harmonicpower <- function(x, ...) {
+calibrate_harmonicpower <- function(x, method, id, nb.h, drop, thresh, plot, verbose) {
   UseMethod("calibrate_harmonicpower")
 }
 
-#' @describeIn calibrate_harmonicpower Method for Out objects
 #' @export
-calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Out),
+calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x),
                                         nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
-                                        plot=TRUE, verbose=TRUE, ...) {
+                                        plot=TRUE, verbose=TRUE) {
   Out <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
@@ -565,14 +554,16 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Ou
   }
   # here we define the maximum nb.h, if missing
   if (missing(nb.h)){
-    nb.h <- floor(min(sapply(Out$coo, nrow))/2)}
+    nb.h <- floor(min(sapply(Out$coo, nrow))/2)
+    }
   # we prepare the result matrix
   res <- matrix(nrow = length(id), ncol = (nb.h - drop))
   x <- (drop + 1):nb.h
   for (i in seq(along = id)) {
     xf <- method(Out$coo[[id[i]]], nb.h = nb.h)
-    res[i, ] <- harm_pow(xf)[x]}
-  rownames(res) <- names(Out)
+    res[i, ] <- harm_pow(xf)[x]
+    }
+  rownames(res) <- names(Out)[id]
   colnames(res) <- paste0("h", 1:ncol(res))
   # we remove dropped harmonics
   #res <- res[, -drop]
@@ -582,9 +573,15 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Ou
   h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmectics
   xx <- melt(res)
   colnames(xx) <- c("shp", "harm", "hp")
+  if (length(id) > 2) {
   gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
     labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
     coord_cartesian(xlim=c(0.5, h_display+0.5))
+  } else {
+    gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_point() +
+      labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
+      coord_cartesian(xlim=c(0.5, h_display+0.5))
+  }
   if (plot) print(gg)
   # we calculate quantiles and add nice rowcolnames
   # also the median (independently of probs [0.5, etc]) since
@@ -604,11 +601,10 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(Ou
   invisible(list(gg=gg, q=res, minh=minh))
 }
 
-#' @describeIn calibrate_harmonicpower Method for Opn objects
 #' @export
-calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Opn),
+calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x),
                                         nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
-                                        plot=TRUE, verbose=TRUE, ...) {
+                                        plot=TRUE, verbose=TRUE) {
   Opn <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
@@ -628,9 +624,6 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Op
   #       method <- switch(p, efourier, rfourier, tfourier)
   #     }
   #   }
-  
-  
-  
   # here we define the maximum nb.h, if missing
   if (missing(nb.h)){
     nb.h <- floor(min(sapply(Opn$coo, nrow))/2)
@@ -674,12 +667,12 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Op
 }
 
 # 4. calibrate_r2 ----------------
-#' Quantitative calibration, through r2, for Opn objects
+#' Quantitative r2 calibration for Opn objects
 #'
-#' Estimates the r2 to calibrate the degree for \code{npoly} and \code{opoly} methods.
+#' Estimates the r2 to calibrate the degree for \link{npoly} and \link{opoly} methods.
 #' Also returns a plot
-#' 
-#' @param x and Opn object
+#'
+#' @param Opn an Opn object
 #' @param method one of 'npoly' or 'opoly'
 #' @param id the ids of shapes on which to calculate r2 (all by default)
 #' @param degree.range on which to calculate r2
@@ -687,25 +680,20 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(Op
 #' @param plot logical whether to print the plot
 #' @param verbose logical whether to print messages
 #' @param ... useless here
-#' @details May be long, so you can estimate it on a sample.
+#' @details May be long, so you can estimate it on a sample either with id here, or one of
+#' \link{sample_n} or \link{sample_frac}
 #' @seealso \link{calibrate_harmonicpower}
-#' @examples 
+#' @examples
 #' \dontrun{
-#' data(olea)
-#' calibrate_r2(olea, "opoly", degree.range=1:12, thresh=c(0.9, 0.99)
-#' 
+#' calibrate_r2(olea, "opoly", degree.range=1:5, thresh=c(0.9, 0.99))
 #' }
+#'
 #' @export
-calibrate_r2 <- function(x, ...){
-  UseMethod("calibrate_r2")
-}
-
-#' @describeIn calibrate_r2 Method for Opn objects
-#' @export
-calibrate_r2.Opn <- function(x, method = "opoly", id = 1:length(Opn),
+calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
                              degree.range=1:8, thresh = c(0.90, 0.95, 0.99, 0.999),
                              plot=TRUE, verbose=TRUE, ...) {
-  Opn <- x
+  if (!is.Opn(Opn))
+    stop("* only defined on Opn objects")
   # we swith among methods, with a messsage
   if (missing(method)) {
     if (verbose) cat(" * Method not provided. opoly is used.\n")
@@ -718,7 +706,7 @@ calibrate_r2.Opn <- function(x, method = "opoly", id = 1:length(Opn),
       method <- switch(p, npoly, opoly)
     }
   }
-  
+
   # we prepare the result matrix
   res <- matrix(nrow = length(id), ncol = length(degree.range))
   for (i in id) {
@@ -728,7 +716,7 @@ calibrate_r2.Opn <- function(x, method = "opoly", id = 1:length(Opn),
   }
   rownames(res) <- names(Opn)
   colnames(res) <- paste0("degree", degree.range)
-  
+
   # we ggplot
   h_display <- which(apply(res, 2, median) >= 0.99)[1] + 2 # cosmectics
   xx <- melt(res)

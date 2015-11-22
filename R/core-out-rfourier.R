@@ -41,7 +41,6 @@
 #' @note Directly borrowed for Claude (2008), and called \code{fourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords rfourier
 #' @examples
 #' data(bot)
 #' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
@@ -157,7 +156,6 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords rfourier
 #' @examples
 #' data(bot)
 #' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
@@ -226,7 +224,6 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
 #' @seealso \link{rfourier_i}, \link{efourier_shape}, \link{tfourier_shape}.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords rfourier
 #' @examples
 #' data(bot)
 #' rf <- rfourier(bot[1], 24)

@@ -25,7 +25,4 @@ ldk.h
 \seealso{
 \link{def_ldk}, \link{fgProcrustes}
 }
-\keyword{Ldk}
-\keyword{Opn}
-\keyword{Out}
 

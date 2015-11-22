@@ -68,5 +68,4 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 normalizing harmonic coefficients when calculating it for \code{Out}
 objects.
 }
-\keyword{efourier}
 

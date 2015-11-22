@@ -11,5 +11,4 @@ Borrowed from default shapes from (c) Adobe Photoshop.
 \description{
 Data: Outline coordinates of various shapes
 }
-\keyword{Datasets}
 

@@ -12,7 +12,6 @@
 #' @return a ggplot2 object
 #' @aliases boxplot.Coe
 #' @seealso \link{hist.Coe}
-#' @keywords Graphics
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)
@@ -71,7 +70,6 @@ boxplot.OpnCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
 #' @return a ggplot2 object
 #' @seealso \link{boxplot.Coe}
 #' @aliases hist.Coe
-#' @keywords Graphics
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)

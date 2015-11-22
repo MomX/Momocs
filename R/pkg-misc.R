@@ -46,7 +46,6 @@ Momocs_version <- function() packageVersion("Momocs")
 #' @param pt2 (x; y) coordinates of the second point.
 #' @return Returns the euclidean distance between the two points.
 #' @seealso \link{edm}, \link{edm_nearest}, \link{dist}.
-#' @keywords Miscellaneous
 #' @examples
 #' ed(c(0,1), c(1,0))
 #' @export
@@ -65,7 +64,6 @@ ed <- function(pt1, pt2) {
 #' @param r the relative distance from \code{pt1} to \code{pt2}.
 #' @return returns the \eqn{(x; y)} interpolated coordinates.
 #' @seealso \link{ed}, \link{edm}.
-#' @keywords Miscellaneous
 #' @examples
 #' edi(c(0,1), c(1,0), r = 0.5)
 #' @export
@@ -86,7 +84,6 @@ edi <- function(pt1, pt2, r = 0.5) {
 #' @return Returns a \code{vector} of euclidean distances between pairwise
 #' coordinates in the two matrices.
 #' @seealso \link{ed}, \link{edm_nearest}, \link{dist}.
-#' @keywords Miscellaneous
 #' @examples
 #' x <- matrix(1:10, nc=2)
 #' edm(x, x)
@@ -119,7 +116,6 @@ edm <- function(m1, m2) {
 #' (\code{m2}) row indices of these points. Otherwise returns \code{d} as a
 #' numeric vector of the shortest distances.
 #' @seealso \link{ed}, \link{edm}, \link{dist}.
-#' @keywords Miscellaneous
 #' @examples
 #' x <- matrix(1:10, nc=2)
 #' edm_nearest(x, x+rnorm(10))
@@ -164,7 +160,6 @@ edm_nearest <- function(m1, m2, full = FALSE) {
 #' @return \code{coeff_sel} returns indices that can be used to select columns
 #' from an harmonic coefficient matrix. \code{coeff_split} returns a named list
 #' of coordinates.
-#' @keywords Miscellaneous
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 32)
@@ -198,7 +193,6 @@ coeff_sel <- function(retain = 8, drop = 0, nb.h = 32, cph = 4) {
 #' @param cph \code{numeric}. Must be set to 2 for \code{rfourier} and
 #' \code{tfourier} were used.
 #' @return Returns a named list of coordinates.
-#' @keywords Miscellaneous
 #' @examples
 #' coeff_split(1:128, nb.h=32, cph=4) # efourier
 #' coeff_split(1:64, nb.h=32, cph=2)  # t/r fourier
@@ -223,7 +217,6 @@ coeff_split <- function(cs, nb.h = 8, cph = 4) {
 #' @param xf A list with an, bn (and cn, dn) components, typically from a
 #' e/r/tfourier passed on coo_
 #' @return Returns a \code{vector} of harmonic power
-#' @keywords Miscellaneous
 #' @examples
 #'
 #' data(bot)
@@ -271,7 +264,6 @@ harm_pow <- function(xf) {
 #' @return A list with two components: \code{r.norms} the ratio of (norm of
 #' vector 1)/(norm of vector 2) and \code{d.angle} the signed angle 'from' the
 #' first 'to' the second vector.
-#' @keywords Miscellaneous
 #' @examples
 #' vecs_param(1, 0, 0, 2)
 #'

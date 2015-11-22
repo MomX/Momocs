@@ -54,5 +54,4 @@ coo <- import_jpg()
 \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 See also Momocs' vignettes for data import.
 }
-\keyword{Import}
 

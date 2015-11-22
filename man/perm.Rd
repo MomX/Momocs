@@ -44,5 +44,4 @@ panel(bot.m)
 \seealso{
 \link{breed}
 }
-\keyword{Coe}
 

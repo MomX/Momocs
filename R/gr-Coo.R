@@ -9,7 +9,6 @@
 #' random shape is plotted. If passed with \code{'all'} all shapes are plotted,
 #' one by one.
 #' @param ... further arguments to be passed to \link{coo_plot}
-#' @keywords Graphics Out Opn Ldk
 #' @seealso \link{panel.Coo}, \link{stack.Coo}.
 #' @examples
 #' \dontrun{
@@ -82,7 +81,6 @@ plot.Coo <- function(x, id, ...) {
 #' @note When applied on a \link{OutCoe} object, a wrapper
 #' for \code{stack(as.Out(OutCoe), ...)}. In that case,
 #' \code{...} feeds \code{stack} itself. (same thing for \code{OpnCoe} to come)
-#' @keywords Graphics Out Opn Ldk
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -275,7 +273,6 @@ stack2 <- function(Coo){
 #' for \code{panel(as.Out(OutCoe), ...)}. In that case,
 #' \code{...} feeds \code{panel} itself. (same thing for \code{OpnCoe} to come)
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
-#' @keywords Graphics Out Opn Ldk
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)

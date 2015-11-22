@@ -90,5 +90,4 @@ panel(Ldk(ms$shp), names=TRUE) #etc.
 panel(ms$Coe) # equivalent (except the $fac slot)
 
 }
-\keyword{Multivariate}
 

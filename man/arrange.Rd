@@ -2,45 +2,37 @@
 % Please edit documentation in R/cl-handling.R
 \name{arrange}
 \alias{arrange}
-\alias{arrange.Coe}
-\alias{arrange.Coo}
-\alias{arrange.PCA}
-\alias{arrange.default}
-\title{Arrange (ala dplyr) rows with matching conditions, using the $fac slot on Momocs classes}
+\title{arrange (ala dplyr) on Momocs classes}
 \usage{
 arrange(.data, ...)
-
-\method{arrange}{default}(.data, ...)
-
-\method{arrange}{Coo}(.data, ...)
-
-\method{arrange}{Coe}(.data, ...)
-
-\method{arrange}{PCA}(.data, ...)
 }
 \arguments{
 \item{.data}{a \code{Coo}, \code{Coe}, \code{PCA} object}
 
-\item{...}{Logical conditions}
+\item{...}{logical conditions}
 }
 \value{
-a a \code{Coo}, \code{Coe}, \code{PCA} object
+a Momocs object of the same class.
 }
 \description{
-Extends this dplyr verb to \link{Coo} objects. See examples.
+Arange shapes by variables, from the \code{$fac}. See examples and \code{?dplyr::arrange}.
 }
 \details{
 dplyr verbs are maintained.
 }
-\note{
-this method is quite experimental, check the result and do not hesitate to report a bug.
-}
 \examples{
-data(olea)
-head(olea$fac)
-head(arrange(olea$fac, view, desc(domes)))
+olea
+# we create a new column
+olea \%>\% mutate(id=1:length(.)) \%$\% fac$id
+# same but now, shapes are arranged in a desc order, based on id
+olea \%>\% mutate(id=1:length(.)) \%>\% arrange(desc(id)) \%$\% fac$id
 }
 \seealso{
-\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+Other handling.functions: \code{\link{chop}},
+  \code{\link{combine}}, \code{\link{dissolve}},
+  \code{\link{filter}}, \code{\link{mutate}},
+  \code{\link{rename}}, \code{\link{sample_frac}},
+  \code{\link{sample_n}}, \code{\link{select}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

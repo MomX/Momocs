@@ -21,5 +21,4 @@ data(bot)
 b <- coo_sample(bot[1], 24)
 coo_perimpts(b)
 }
-\keyword{ShapeDescriptors}
 

@@ -16,7 +16,6 @@
 #' deformations
 #' @seealso \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
 #' \code{tps2d}.
-#' @keywords ThinPlateSplines
 #' @rdname tps2d
 #' @export
 tps2d <- function(grid0, fr, to) {
@@ -80,7 +79,6 @@ tps_apply <- function(fr, to, new){
 #' points along the grid; \code{dim} the dimension of the grid.
 #' @seealso \link{tps_grid}, \link{tps_iso} and \link{tps_arr},
 #' \link{coo_lolli}, \link{coo_arrows}.
-#' @keywords ThinPlateSplines
 #' @examples
 #' \dontrun{ 
 #' data(bot)
@@ -136,7 +134,6 @@ tps_raw <- function(fr, to, amp = 1,
 #' @return Nothing
 #' @seealso \link{tps_iso} and \link{tps_arr},
 #' \link{coo_lolli}, \link{coo_arrows}.
-#' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
 #' botF <- efourier(bot)
@@ -222,7 +219,6 @@ tps_grid <- function(fr, to, amp = 1,
 #' @return Nothing.
 #' @seealso \link{tps_grid} and \link{tps_iso},
 #' \link{coo_lolli}, \link{coo_arrows}.
-#' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
 #' botF <- efourier(bot)
@@ -316,7 +312,6 @@ tps_arr <- function(fr, to, amp = 1,
 #' @return No returned value
 #' @seealso \link{tps_grid} and \link{tps_arr},
 #' \link{coo_lolli}, \link{coo_arrows}.
-#' @keywords ThinPlateSplines
 #' @examples
 #' data(bot)
 #' botF <- efourier(bot)

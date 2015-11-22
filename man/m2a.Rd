@@ -28,5 +28,4 @@ m2a(m)
 \seealso{
 \link{a2m} the reverse function.
 }
-\keyword{Babel}
 

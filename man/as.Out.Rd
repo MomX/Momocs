@@ -44,5 +44,4 @@ stack(bot, title="raw bot")
 stack(bot.fi, title="outlines from bot.f")
 par(op)
 }
-\keyword{Out}
 

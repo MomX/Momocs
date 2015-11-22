@@ -32,5 +32,4 @@ for (i in 2:7){
 x <- opoly_i(opoly(o, i))
 coo_draw(x, border=col_summer(7)[i], points=FALSE)  }
 }
-\keyword{Polynomials}
 

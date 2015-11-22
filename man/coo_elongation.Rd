@@ -23,5 +23,4 @@ Calculates the elongation of a shape
 data(bot)
 coo_elongation(bot[1])
 }
-\keyword{ShapeDescriptors}
 

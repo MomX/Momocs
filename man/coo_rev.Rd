@@ -21,5 +21,4 @@ b <- coo_sample(bot[1], 4)
 b
 coo_rev(b)
 }
-\keyword{ShapeUtilities}
 

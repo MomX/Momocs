@@ -41,5 +41,4 @@ coo_draw(out.6, lty=2, points=FALSE, col=NA)
 par(xpd=FALSE)
 
 }
-\keyword{Graphics}
 

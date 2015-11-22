@@ -9,7 +9,6 @@
 #' the range along the x-axis; the width as the range on the y-axis.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return a vector of two \code{numeric}: the length and the width.
-#' @keywords ShapeDescriptors
 #' @seealso \link{coo_length}, \link{coo_width}.
 #' @examples
 #' data(bot)
@@ -26,7 +25,6 @@ coo_lw <- function(coo) {
 #' Nothing more than \code{coo_lw(coo)[1]}.
 #' @param coo a \code{matrix} of (x; y) coordinates or a Coo object
 #' @return the length (in pixels) of the shape
-#' @keywords ShapeDescriptors
 #' @seealso \link{coo_lw}, \link{coo_width}
 #' @details This function can be used to integrate size - if meaningful -
 #' to Coo objects. See also \link{coo_centsize} and \link{rescale}.
@@ -53,7 +51,6 @@ coo_length.Coo <- function(coo){
 #' Nothing more than \code{coo_lw(coo)[2]}.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return the width (in pixels) of the shape
-#' @keywords ShapeDescriptors
 #' @seealso \link{coo_lw}, \link{coo_length}.
 #' @examples
 #' data(bot)
@@ -70,7 +67,6 @@ coo_width <- function(coo) {
 #' @note Using \code{area.poly} in gpc package is a good idea, but their licence
 #' impedes Momocs to rely on it. but here is the function to do it, once gpc is loaded:
 #' \code{ area.poly(as(coo, 'gpc.poly')) }
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_area(bot[1])
@@ -124,7 +120,6 @@ coo_tangle <- function(coo) {
 #' @param m a 3x2 \code{matrix} of 3 points (rows) and (x; y) coordinates
 #' @param method one of 'atan2' or 'acos' for a signed or not angle.
 #' @return \code{numeric} the angle in radians.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo_sample(bot[1], 64)
@@ -154,7 +149,6 @@ coo_theta3 <- function(m, method = c("atan2", "acos")[1]) {
 #' @param coo a \code{matrix} or a list of (x; y) coordinates.
 #' @param method one of 'atan2' or 'acos' for a signed or not angle.
 #' @return \code{numeric} the angles in radians for every edge.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' b <- coo_sample(bot[1], 64)
@@ -178,7 +172,6 @@ coo_thetapts <- function(coo, method = c("atan2", "acos")[1]) {
 #' @return numeric, the rectilinearity
 #' @note due to the laborious nature of the algorithm (in nb.pts^2), 
 #' and of its implementation, it may be very long to compute.
-#' @keywords ShapeDescriptors
 #' @source Zunic J, Rosin PL. 2003. Rectilinearity measurements for polygons. 
 #' IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 #' @examples
@@ -247,7 +240,6 @@ coo_rectilinearity <- function(coo) {
 #' @return numeric, the Haralick's circularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_circularityharalick(bot[1])
@@ -264,7 +256,6 @@ coo_circularityharalick <- function(coo) {
 #' @aliases coo_compactness coo_shapefactor
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the circularity.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_circularity(bot[1])
@@ -281,7 +272,6 @@ coo_circularity <- function(coo) {
 #' @return numeric, the circularity normalized to the unit circle.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_circularitynorm(bot[1])
@@ -298,7 +288,6 @@ coo_circularitynorm <- function(coo) {
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @seealso \link{coo_eccentricityboundingbox}
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_eccentricityeigen(bot[1])
@@ -317,7 +306,6 @@ coo_eccentricityeigen <- function(coo) {
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @seealso \link{coo_eccentricityeigen}
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_eccentricityboundingbox(bot[1])
@@ -334,7 +322,6 @@ coo_eccentricityboundingbox <- function(coo) {
 #' @return numeric, the circularity normalized to the unit circle.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_elongation(bot[1])
@@ -351,7 +338,6 @@ coo_elongation <- function(coo) {
 #' @return numeric, the rectangularity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_rectangularity(bot[1])
@@ -368,7 +354,6 @@ coo_rectangularity <- function(coo) {
 #' around \link{chull}, mainly used in graphical functions.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return a \code{matrix} of ids defining the convex hull of the shape.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(hearts)
 #' h <- coo_sample(hearts[4], 32)
@@ -388,7 +373,6 @@ coo_chull <- function(coo) {
 #' @return numeric, the convexity.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_convexity(bot[1])
@@ -405,7 +389,6 @@ coo_convexity <- function(coo) {
 #' @return numeric, the solidity of a shape.
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
-#' @keywords ShapeDescriptors
 #' @examples
 #' data(bot)
 #' coo_solidity(bot[1])

@@ -74,6 +74,4 @@ CLUST(op, fac=tip_fac2, tip_fac=tip_fac2)
 }
 
 }
-\keyword{Graphics}
-\keyword{Multivariate}
 

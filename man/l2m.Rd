@@ -26,5 +26,4 @@ m
 \seealso{
 \link{m2l}.
 }
-\keyword{Babel}
 

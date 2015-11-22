@@ -34,5 +34,4 @@ coo_draw(coo_down(b), border='red')
 \seealso{
 \link{coo_left}, \link{coo_right}, \link{coo_up}
 }
-\keyword{ShapeUtilities}
 

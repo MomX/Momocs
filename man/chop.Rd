@@ -2,23 +2,14 @@
 % Please edit documentation in R/cl-handling.R
 \name{chop}
 \alias{chop}
-\alias{chop.Coe}
-\alias{chop.Coo}
-\alias{chop.default}
-\title{Rougher slicing that accepts a classifier ie a column name from the $fac on Momocs classes}
+\title{Rougher slicing that accepts a classifier ie a column name from the \code{$fac} on Momocs classes}
 \usage{
 chop(.data, fac)
-
-\method{chop}{default}(.data, fac)
-
-\method{chop}{Coo}(.data, fac)
-
-\method{chop}{Coe}(.data, fac)
 }
 \arguments{
 \item{.data}{a \code{Coo} or \code{Coe} object}
 
-\item{fac}{a column name from the $fac}
+\item{fac}{a column name from the \code{$fac}}
 }
 \value{
 a named list of \code{Coo} or \code{Coe} objects
@@ -30,6 +21,11 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
 data(bot)
 }
 \seealso{
-\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{combine}}, \code{\link{dissolve}},
+  \code{\link{filter}}, \code{\link{mutate}},
+  \code{\link{rename}}, \code{\link{sample_frac}},
+  \code{\link{sample_n}}, \code{\link{select}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

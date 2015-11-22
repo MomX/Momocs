@@ -37,5 +37,4 @@ lines(bi, col='red')
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
-\keyword{Bezier}
 

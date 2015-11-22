@@ -30,5 +30,4 @@ a
 \seealso{
 \link{a2l}.
 }
-\keyword{Babel}
 

@@ -11,7 +11,6 @@
 #' tab by default
 #' @param dec the string to use for decimal points (see \code{dec} in \link{write.table}). A dot
 #' by default.
-#' @keywords Babel
 #' @note Default parameters will write a \code{.txt} file, directly readable by MS Excel
 #' and other programs. With default parameters, numbers will dots as decimal points, which is
 #' considered as a character chain in Excel in many countries (locale versions.) this can be solved

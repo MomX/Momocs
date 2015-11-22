@@ -86,8 +86,4 @@ panel(bot, fac='type', palette=col_spring, names=TRUE)
 \seealso{
 \link{stack.Coo}, \link{plot.Coo}.
 }
-\keyword{Graphics}
-\keyword{Ldk}
-\keyword{Opn}
-\keyword{Out}
 

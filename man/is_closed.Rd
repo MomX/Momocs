@@ -26,5 +26,4 @@ is_closed(coo_close(bot))
 \seealso{
 \link{coo_close}, \link{coo_unclose}
 }
-\keyword{ShapeUtilities}
 

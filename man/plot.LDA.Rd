@@ -158,6 +158,4 @@ plot(bot.l)
 \seealso{
 \link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
 }
-\keyword{Graphics}
-\keyword{Multivariate,}
 

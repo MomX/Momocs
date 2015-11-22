@@ -231,7 +231,6 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
 #' @param nc.shp the number of cols to position shapes
 #' @param circle.r.shp if circle, its radius
 #' @details See \link{plot.PCA} for self-speaking examples
-#' @keywords Graphics
 #' @export
 pos.shapes <- function(xy, pos.shp = c("range", "full", "circle", "xy",
                                        "range_axes", "full_axes")[1],
@@ -299,7 +298,6 @@ pos.shapes <- function(xy, pos.shp = c("range", "full", "circle", "xy",
 # @param mshape the meanshape
 # @param amp.shp amplification factor for the shape deformation
 # @param pts.shp number of points to reconstruct the shape
-# @keywords Graphics
 # @rdname PCA2shp_fourier
 # @export
 PCA2shp_efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
@@ -418,7 +416,6 @@ PCA2shp_dfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
 # @param ortho logical whether working with raw or orthogonal polynomials
 # @param baseline1 the (x; y) coordinates of the first baseline point
 # @param baseline2 the (x; y) coordinates of the second baseline point
-# @keywords Graphics
 # @export
 PCA2shp_polynomials <- function(pos, rot, mshape, amp.shp = 1,
                                 pts.shp = 60, ortho, baseline1, baseline2) {
@@ -459,7 +456,6 @@ PCA2shp_polynomials <- function(pos, rot, mshape, amp.shp = 1,
 # @param rot the corresponding loadings
 # @param mshape the meanshape
 # @param amp.shp amplification factor for the shape deformation
-# @keywords Graphics
 # @export
 PCA2shp_procrustes <- function(pos, rot, mshape, amp.shp = 1) {
   if (ncol(pos) != ncol(rot))
@@ -492,7 +488,6 @@ PCA2shp_procrustes <- function(pos, rot, mshape, amp.shp = 1) {
 # @param mshape the meanshape
 # @param amp.shp amplification factor for the shape deformation
 # @param pts.shp number of points to reconstruct the shape
-# @keywords Graphics
 # @rdname LDA2shp_fourier
 # @export
 LDA2shp_efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {

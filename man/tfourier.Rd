@@ -85,5 +85,4 @@ pp.
 \link{efourier}, \link{rfourier} for the other members of the
 Fourier's family. \link{tfourier_shape} to play around with this approach.
 }
-\keyword{tfourier}
 

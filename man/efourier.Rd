@@ -144,5 +144,4 @@ Ptolemaic ellipses graph sometimes used to illustrate this approach.
 \link{rfourier}, \link{tfourier} for the other members
 of the Fourier's family.
 }
-\keyword{efourier}
 

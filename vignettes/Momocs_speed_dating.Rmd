@@ -657,9 +657,22 @@ bot.p %>% as_df() %>% ggplot() +
 ### Color palettes
  * Nice palettes are bundled with Momocs, see `?Palettes`.
  * Overall, [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html) is more than an option if you work with colors.
+
 ## Frequently asked questions
 
-
+  * __How to access all methods for a given class?__
+    + `methods(class="your_class")`, eg `methods(class="Opn")`
+    
+  * __How to access methods defined for a particular function?__
+    + `methods("your_function")`, eg `methods("fgProcrustes")`
+    
+  * __How can I access help for a particular methods?__
+    + `function.class`, eg `?plot.PCA`
+    
+  * __How can I access the code of a method?__
+    + For functions, just type its name, eg `lf_structure`; for methods add its class, eg `plot.PCA`
+  
+  
 ------
  * Done with love by Vincent Bonhomme `<bonhomme.vincent@gmail.com>`.
  * Sources are [there](https://github.com/vbonhomme/Momocs/tree/master/vignettes)

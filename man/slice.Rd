@@ -2,57 +2,36 @@
 % Please edit documentation in R/cl-handling.R
 \name{slice}
 \alias{slice}
-\alias{slice.Coe}
-\alias{slice.Coo}
-\alias{slice.default}
-\title{Slice (ala dplyr) Momocs classes using rows ids on Momocs classes}
+\title{Slice (ala dplyr) on Momocs classes}
 \usage{
 slice(.data, ...)
-
-\method{slice}{default}(.data, ...)
-
-\method{slice}{Coo}(.data, ...)
-
-\method{slice}{Coe}(.data, ...)
 }
 \arguments{
 \item{.data}{a \code{Coo}, \code{Coe}, \code{PCA} object}
 
-\item{...}{Logical conditions}
+\item{...}{logical conditions}
 }
 \value{
-a \code{Coo}, \code{Coe}, \code{PCA} object
+a Momocs object of the same class.
 }
 \description{
-Extends this dplyr verb to \link{Coo} objects. See examples.
+Select rows by position, based on \code{$fac}. See examples and \code{?dplyr::slice}.
 }
 \details{
 dplyr verbs are maintained.
 }
-\note{
-this method is quite experimental, check the result and do not hesitate to report a bug.
-}
 \examples{
-
-data(olea)
-##### slice
+olea
 slice(olea, 1) # if you only want the coordinates, try bot[1]
 slice(olea, 1:20)
 slice(olea, 21:30)
-
-##### chop (a rougher slicing)
-chop(olea, domes) # return a list that can be lapply-ed
-
-##### filter
-filter(olea, domes=="cult")
-filter(olea, domes=="cult", view=="VL")
-
-##### select
-head(olea$fac)
-select(olea, domes, view)
-select(olea, -ind)
 }
 \seealso{
-\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{chop}}, \code{\link{combine}},
+  \code{\link{dissolve}}, \code{\link{filter}},
+  \code{\link{mutate}}, \code{\link{rename}},
+  \code{\link{sample_frac}}, \code{\link{sample_n}},
+  \code{\link{select}}, \code{\link{transmute}}
 }
 

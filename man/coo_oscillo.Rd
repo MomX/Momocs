@@ -31,5 +31,4 @@ coo_oscillo(shapes[4], 'tfourier')
 #tfourier is prone to high-frequency noise but smoothing can help
 coo_oscillo(coo_smooth(shapes[4], 10), 'tfourier') 
 }
-\keyword{Graphics}
 

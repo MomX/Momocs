@@ -36,5 +36,4 @@ rect(-s/2, -s/2, s/2, s/2)
 \seealso{
 \link{coo_listpanel}.
 }
-\keyword{Graphics}
 

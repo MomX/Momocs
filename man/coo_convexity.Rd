@@ -23,5 +23,4 @@ Calculated using a ratio of the eigen values (inertia axis)
 data(bot)
 coo_convexity(bot[1])
 }
-\keyword{ShapeDescriptors}
 

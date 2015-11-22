@@ -19,7 +19,6 @@
 #' @param drop how many harmonics (or polynomials) to drop
 #' @param verbose logical whether to print messages
 #' @return a list of matrices of (x,y) coordinates.
-#' @keywords Multivariate
 #' @seealso \link{MANOVA_PW}
 #' @note Needs a review and should be considered as experimental.
 #' @examples

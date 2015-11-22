@@ -13,8 +13,8 @@ dissolve(x, retain)
 (see x$method) eg after a chop}
 }
 \description{
-After a combine for instance. But note that the $fac slot may be wrong since
-combine...well combines... this $fac
+After a combine for instance. But note that the \code{$fac} slot may be wrong since
+combine...well combines... this \code{$fac}
 }
 \examples{
 data(bot)
@@ -25,5 +25,13 @@ bf <- efourier(b, 10)
 wbf <- combine(wf, bf)
 dissolve(wbf, 1)
 dissolve(wbf, 2)
+}
+\seealso{
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{chop}}, \code{\link{combine}},
+  \code{\link{filter}}, \code{\link{mutate}},
+  \code{\link{rename}}, \code{\link{sample_frac}},
+  \code{\link{sample_n}}, \code{\link{select}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

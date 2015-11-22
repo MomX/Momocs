@@ -31,5 +31,4 @@ coo_draw(coo_scalex(coo, 1.2), border="blue", lty=2)
 coo_draw(coo_scaley(coo, 0.5), border="red")
 coo_draw(coo_scaley(coo, 1.2), border="red", lty=2)
 }
-\keyword{ShapeUtilities}
 

@@ -25,5 +25,4 @@ stack(coo_alignminradius(hearts))
 \seealso{
 \link{coo_align}, \link{coo_alignxax}, \link{coo_calliper}
 }
-\keyword{ShapeUtilities}
 

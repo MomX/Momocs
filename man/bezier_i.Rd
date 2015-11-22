@@ -32,5 +32,4 @@ lines(bi, col='red')
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 }
-\keyword{Bezier}
 

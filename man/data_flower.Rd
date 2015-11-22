@@ -13,5 +13,4 @@ see link{iris}
 \description{
 Data: Measurement of iris flowers
 }
-\keyword{Datasets}
 

@@ -30,5 +30,4 @@ methods(class=Out)
 \seealso{
 \link{Coo}, \link{Opn}, link{Ldk}.
 }
-\keyword{Out}
 

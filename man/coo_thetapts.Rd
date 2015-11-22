@@ -22,5 +22,4 @@ data(bot)
 b <- coo_sample(bot[1], 64)
 coo_thetapts(b)
 }
-\keyword{ShapeDescriptors}
 

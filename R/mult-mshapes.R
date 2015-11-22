@@ -20,7 +20,6 @@
 #' within a PCA object (accesible with PCA$x) that can be plotted directly but other slots are left
 #' unchanged.
 #' @rdname mshapes
-#' @keywords Multivariate
 #' @examples
 #' #### on shapes
 #' data(wings)

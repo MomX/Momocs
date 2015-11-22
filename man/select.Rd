@@ -2,21 +2,9 @@
 % Please edit documentation in R/cl-handling.R
 \name{select}
 \alias{select}
-\alias{select.Coe}
-\alias{select.Coo}
-\alias{select.PCA}
-\alias{select.default}
-\title{Select/rename (ala dplyr) variables by name, using the $fac slot on Momocs classes}
+\title{Select (ala dplyr) on Momocs classes}
 \usage{
 select(.data, ...)
-
-\method{select}{default}(.data, ...)
-
-\method{select}{Coo}(.data, ...)
-
-\method{select}{Coe}(.data, ...)
-
-\method{select}{PCA}(.data, ...)
 }
 \arguments{
 \item{.data}{a \code{Coo}, \code{Coe}, \code{PCA} object}
@@ -24,16 +12,13 @@ select(.data, ...)
 \item{...}{comma separated list of unquoted expressions}
 }
 \value{
-a Coo object
+a Momocs object of the same class.
 }
 \description{
-Extends this dplyr verb to \link{Coo} objects. See examples.
+Select variables by name, from the \code{$fac}. See examples and \code{?dplyr::select}.
 }
 \details{
-dplyr verbs should be maintained.
-}
-\note{
-this method is quite experimental, check the result and do not hesitate to report a bug.
+dplyr verbs are maintained.
 }
 \examples{
 data(olea)
@@ -48,6 +33,11 @@ filter(olea, view=="VD") \%>\% select(var, domes)
 }
 }
 \seealso{
-\link{select}, \link{filter}, \link{slice}, \link{chop}, \link{combine}.
+Other handling.functions: \code{\link{arrange}},
+  \code{\link{chop}}, \code{\link{combine}},
+  \code{\link{dissolve}}, \code{\link{filter}},
+  \code{\link{mutate}}, \code{\link{rename}},
+  \code{\link{sample_frac}}, \code{\link{sample_n}},
+  \code{\link{slice}}, \code{\link{transmute}}
 }
 

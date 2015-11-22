@@ -29,7 +29,6 @@
 #' @param ... further arguments for use in coo_plot methods. See examples.
 #' @return No returned value.
 #' @seealso coo_draw
-#' @keywords Graphics
 #' @examples
 #' data(bot)
 #' b <- bot[1]
@@ -127,7 +126,6 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
 #' that adds a shape on the active plot.
 #' @param coo a \code{list} or a \code{matrix} of coordinates.
 #' @param ... optional parameters for \link{coo_plot}
-#' @keywords Graphics
 #' @examples
 #' data(bot)
 #' b1 <- bot[4]
@@ -148,7 +146,6 @@ coo_draw <- function(coo, ...) {
 #' @param cex a cex for the points
 #' @param ... optional parameters to fed \link{points} and \link{segments}.
 #' @seealso \link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
-#' @keywords Graphics
 #' @examples
 #' data(olea)
 #' coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
@@ -178,7 +175,6 @@ coo_lolli <- function(coo1, coo2,
 #' @param angle an angle for the arrows
 #' @param ... optional parameters to fed \link{arrows}.
 #' @seealso \link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
-#' @keywords Graphics
 #' @examples
 #' data(olea)
 #' coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
@@ -254,7 +250,6 @@ coo_ruban <- function(coo, dev,
 #' the shape.
 #' @return Returns a matrix of \code{(x; y)}coordinates.
 #' @seealso \link{coo_listpanel}.
-#' @keywords Graphics
 #' @examples
 #' 
 #' data(bot)
@@ -313,7 +308,6 @@ coo_template.Coo <- function(coo, size=1){
 #' @return Returns (invisibly) a \code{data.frame} with position of shapes that
 #' can be used for other sophisticated plotting design.
 #' @seealso \link{coo_plot} and \link{coo_template}.
-#' @keywords Graphics
 #' @examples
 #' data(bot)
 #' coo_listpanel(bot$coo) # equivalent to panel(bot)
@@ -410,7 +404,6 @@ ldk_plot <- function(coo, ...){
 #' @param d how far from the coordinates, on a (centroid-landmark) segment
 #' @param cex the cex for the label
 #' @param ... additional parameters to fed \link{text}
-#' @keywords Graphics
 #' @examples
 #' data(wings)
 #' coo_plot(wings[1])
@@ -440,7 +433,6 @@ ldk_labels <- function(ldk, d = 0.05, cex = 2/3, ...) {
 #' @param links a matrix of links. On the first column the starting-id,
 #' on the second column the ending-id (id= the number of the coordinate)
 #' @param ... additional parameters to fed \link{segments}
-#' @keywords Graphics
 #' @export
 # todo
 ldk_links <- function(ldk, links, ...) {
@@ -461,7 +453,6 @@ ldk_links <- function(ldk, links, ...) {
 #' @param ax logical whether to draw ellipses axes
 #' @param ax.lty an lty for ellipses axes
 #' @seealso \link{ldk_contour}, \link{ldk_chull}
-#' @keywords Graphics
 #' @examples
 #' data(wings)
 #' coo_plot(mshapes(wings))
@@ -496,7 +487,6 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' @param grid.nb the grid.nb
 #' @param col a color for drawing the contour lines
 #' @seealso \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
-#' @keywords Graphics
 #' @examples
 #' data(wings)
 #' coo_plot(mshapes(wings))
@@ -522,7 +512,6 @@ ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
 #' @param col a color for drawing the convex hull
 #' @param lty an lty for drawing the convex hulls
 #' @seealso \link{coo_chull}, \link{chull}, \link{ldk_confell}, \link{ldk_contour}
-#' @keywords Graphics
 #' @examples
 #' data(wings)
 #' coo_plot(mshapes(wings))
@@ -550,7 +539,6 @@ ldk_chull <- function(ldk, col = "grey40", lty = 1) {
 #' @param coo A matrix of coordinates.
 #' @param cols A vector of color of \code{length = nrow(coo)}.
 #' @param lwd The \code{lwd} to use for drawing segments.
-#' @keywords Graphics
 #' @examples
 #' 
 #' # we load some data
@@ -593,7 +581,6 @@ plot_devsegments <- function(coo, cols, lwd = 1) {
 #' @param nb.pts the number of points to return, to draw the ellipsis
 #' @return a list with $ell coordinates of the ellipse and $seg coordinates
 #' of its vertices
-#' @keywords Graphics
 #' @return a matrix of (x; y) coordinates to draw the ellipsis
 #' @examples
 #' x <- rnorm(100, sd=3)
@@ -764,7 +751,6 @@ Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 #' @param nb.pts \code{integer}. The number or reference points, sampled
 #' equidistantly along the curvilinear abscissa and added on the oscillo
 #' curves.
-#' @keywords Graphics
 #' @examples 
 #' data(shapes)
 #' coo_oscillo(shapes[4])
@@ -847,7 +833,6 @@ coo_oscillo <- function(coo, method = c("efourier", "rfourier",
 #' @param palette a color palette
 #' @param legend \code{logical}. Whether to plot the legend box
 #' @param ... additional parameters to feed \link{coo_plot}
-#' @keywords Graphics
 #' @references
 #' This method has been inspired by the figures found in the followings papers.
 #' Kuhl FP, Giardina CR. 1982. Elliptic Fourier features of a closed contour.
@@ -912,99 +897,5 @@ Ptolemy <- function(coo, t = seq(0, 2 * pi, length = 7)[-1],
            col = cols, lwd = 2, seg.len=1, title = "Harmonics", cex=3/4)}}
 
 
-
-# obsolete
-# #' Plots deviation
-# #' 
-# #' Calculates and plots series with associated error bars. This function is used 
-# #' internally by methods based on deviations for one one many outlines.
-# #' Yet, it provides a quick way to create plots of series, possibly with deviations, from scratch.
-# #' 
-# #' @usage plot_dev(mat, dev, cols, x=1:ncol(mat),
-# #' lines=TRUE, poly=TRUE, segments=FALSE, bw=0.1,
-# #' plot=FALSE, main='Deviation plot', xlab='', ylab='Deviations')
-# #' @param mat A \code{matrix} containing one or many lines (as individuals) with the corresponding y values (as cols).
-# #' @param dev A \code{matrix} of the same dimension as mat but containing the deviation from the \code{mat} matrix.
-# #' @param cols {A \code{vector} of \code{ncol(mat)} colors.}
-# #' @param x An alternative vector of values for every column of \code{mat}.
-# #' @param lines \code{logical}. Whether to draw lines for mean values.
-# #' @param poly \code{logical}. Whether to draw polygons for mean + dev values.
-# #' @param segments \code{logical}. Whether to draw segments for these mean + dev values.
-# #' @param bw \code{numeric}. The width of the errors bars to draw.
-# #' @param plot \code{logical}. Whether to plot a new graphical window.
-# #' @param main \code{character}. A title for the plot.
-# #' @param xlab \code{character}. A title for the x-axis.
-# #' @param ylab \code{character}. A title for the y-axis.
-# #' @keywords Graphics
-# #' @examples
-# #' # we prepare some fake data
-# #' foo.mat  <- matrix(1:10, nr=3, nc=10, byrow=TRUE) + rnorm(30, sd=0.5)
-# #' foo.mat  <- foo.mat + matrix(rep(c(0, 2, 5), each=10), 3, byrow=TRUE)
-# #' foo.dev  <- matrix(abs(rnorm(30, sd=0.5)), nr=3, nc=10, byrow=TRUE)
-# #' plot_dev(foo.mat, plot=TRUE)
-# #' plot_dev(foo.mat, foo.dev, plot=TRUE)
-# #' # some possible tuning
-# #' plot_dev(foo.mat, foo.dev, lines=TRUE, plot=TRUE)
-# #' plot_dev(foo.mat, foo.dev, poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
-# #' plot_dev(foo.mat, foo.dev, cols=col_sari(3), poly=FALSE, segments=TRUE, lines=TRUE, plot=TRUE)
-# #' plot_dev(foo.mat, foo.dev, cols=col_summer(6)[4:6], plot=TRUE)
-# #' @export
-# plot_dev <- function(mat, dev, cols, x = 1:ncol(mat), lines = TRUE, 
-#                      poly = TRUE, segments = FALSE, bw = 0.1, plot = FALSE, main = "Deviation plot", 
-#                      xlab = "", ylab = "Deviations") {
-#   # we prepare and check a bit
-#   r <- nrow(mat)
-#   if (!missing(dev)) {
-#     if (any(dim(mat) != dim(dev))) {
-#       stop("mat and dev must be of the same dimension")
-#     }
-#   }
-#   if (missing(cols)) {
-#     cols <- rep("#000000", r)
-#   }
-#   if (length(cols) != r) {
-#     cols <- rep("#000000", r)
-#   }
-#   # we call a new plot if required
-#   if (plot) {
-#     if (missing(dev)) {
-#       ylim <- range(mat)
-#     } else {
-#       ylim <- c(min(mat + dev), max(mat + dev))
-#     }
-#     plot(NA, xlim = range(x), ylim = ylim, main = main, xlab = xlab, 
-#          ylab = ylab, las = 1, xaxs = "i", yaxs = "i")
-#     axis(1, at = 1:ncol(mat))
-#   }
-#   # if a deviation matrix is provided
-#   if (!missing(dev)) {
-#     for (i in 1:r) {
-#       # if required, we draw the background polygons
-#       if (poly) {
-#         polygon(x = c(x, rev(x)), y = c(mat[i, ] - dev[i, 
-#                                                        ], rev(c(mat[i, ] + dev[i, ]))), col = paste0(cols[i], 
-#                                                                                                      "55"), border = NA)
-#       }
-#       # if required we draw the dev segments
-#       if (segments) {
-#         segments(x, mat[i, ] - dev[i, ], x, mat[i, ] + 
-#                    dev[i, ], col = cols[i], lwd = 0.5)
-#         segments(x - bw, mat[i, ] - dev[i, ], x + bw, 
-#                  mat[i, ] - dev[i, ], col = cols[i], lwd = 0.5)
-#         segments(x - bw, mat[i, ] + dev[i, ], x + bw, 
-#                  mat[i, ] + dev[i, ], col = cols[i], lwd = 0.5)
-#       }
-#     }
-#   }
-#   # if a dev matrix is not provided, we simply draw lines
-#   if (lines) {
-#     for (i in 1:nrow(mat)) {
-#       if (lines) {
-#         lines(x, mat[i, ], col = cols[i], type = "o", 
-#               cex = 0.25, pch = 20)
-#       }
-#     }
-#   }
-# }
 
 ##### end basic plotters 

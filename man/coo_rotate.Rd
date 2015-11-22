@@ -30,5 +30,4 @@ coo_plot(coo_rotate(b, pi))
 \seealso{
 \link{coo_rotatecenter}
 }
-\keyword{ShapeUtilities}
 

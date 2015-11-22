@@ -2,24 +2,12 @@
 % Please edit documentation in R/core-outopn-calibrate.R
 \name{calibrate_harmonicpower}
 \alias{calibrate_harmonicpower}
-\alias{calibrate_harmonicpower.Opn}
-\alias{calibrate_harmonicpower.Out}
 \title{Quantitative calibration, through harmonic power, for Out and Opn objects}
 \usage{
-calibrate_harmonicpower(x, ...)
-
-\method{calibrate_harmonicpower}{Out}(x, method = "efourier",
-  id = 1:length(Out), nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
-  plot = TRUE, verbose = TRUE, ...)
-
-\method{calibrate_harmonicpower}{Opn}(x, method = "dfourier",
-  id = 1:length(Opn), nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
-  plot = TRUE, verbose = TRUE, ...)
+calibrate_harmonicpower(x, method, id, nb.h, drop, thresh, plot, verbose)
 }
 \arguments{
-\item{x}{a \code{Coo} object on which to calibrate_harmonicpower}
-
-\item{...}{just for the generic}
+\item{x}{a \code{Coo} of \code{Opn} object}
 
 \item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')} for \code{Out}s and
 \code{dfourier} for \code{Out}s.}
@@ -49,7 +37,7 @@ a certain proportion of the total harmonic power.
 Estimates the number of harmonics required for the four Fourier methods
 implemented in Momocs: elliptical Fourier analysis
 (see \link{efourier}), radii variation analysis (see \link{rfourier})
-and tangent angle analysis (see \link{tfourier}) and 
+and tangent angle analysis (see \link{tfourier}) and
 discrete Fourier transform (see \link{dfourier}).
 It returns and can plot cumulated harmonic power whether dropping
 the first harmonic or not, and based and the maximum possible number
@@ -62,12 +50,6 @@ elliptical Fourier analysis and the n-th harmonic:
 and as follows for radii variation and tangent angle:
 \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{Out}: Method for Out objects
-
-\item \code{Opn}: Method for Opn objects
-}}
 \examples{
 data(bot)
 cal <- calibrate_harmonicpower(bot)
@@ -84,9 +66,9 @@ ggtitle("Harmonic power calibration")
 }
 # if you want to do efourier with 99\% calibrate_harmonicpower in one step
 # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99\%"])
+
 }
 \seealso{
 \link{calibrate_r2}
 }
-\keyword{Out}
 

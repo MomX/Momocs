@@ -62,5 +62,4 @@ r <- numeric()
 for (i in 1:10) { r[i] <- opoly(o, degree=i)$r2 }
 plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 }
-\keyword{Polynomials}
 

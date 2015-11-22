@@ -11,5 +11,4 @@ Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice19
 \description{
 Data: Landmarks coordinates of mosquito wings
 }
-\keyword{Datasets}
 

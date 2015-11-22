@@ -59,5 +59,4 @@ Springer 316 pp.
 \seealso{
 \link{rfourier_i}, \link{efourier_shape}, \link{tfourier_shape}.
 }
-\keyword{rfourier}
 

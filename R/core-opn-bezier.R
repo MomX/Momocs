@@ -14,7 +14,6 @@
 #' Not implemented for open outlines but may be useful for other purposes.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
-#' @keywords Bezier
 #' @examples
 #' set.seed(34)
 #' x <- coo_sample(efourier_shape(), 5)
@@ -57,7 +56,6 @@ bezier <- function(coo, n) {
 #' @note Directly borrowed for Claude (2008), and called \code{beziercurve} there.
 #' Not implemented for open outlines but may be useful for other purposes.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
-#' @keywords Bezier
 #' @examples
 #' set.seed(34)
 #' x <- coo_sample(efourier_shape(), 5)

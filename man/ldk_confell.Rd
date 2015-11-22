@@ -31,5 +31,4 @@ ldk_confell(wings$coo)
 \seealso{
 \link{ldk_contour}, \link{ldk_chull}
 }
-\keyword{Graphics}
 

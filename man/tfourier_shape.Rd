@@ -58,5 +58,4 @@ Springer 316 pp.
 \seealso{
 \link{tfourier_i}, \link{tfourier}, link{tfourier}.
 }
-\keyword{tfourier}
 

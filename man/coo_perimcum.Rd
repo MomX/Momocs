@@ -20,5 +20,4 @@ data(bot)
 b <- coo_sample(bot[1], 24)
 coo_perimcum(b)
 }
-\keyword{ShapeDescriptors}
 

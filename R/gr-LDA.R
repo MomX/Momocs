@@ -64,7 +64,6 @@
 #' of the ade4 R package.
 #' @note Morphospaces are still experimental.
 #' @seealso \link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
-#' @keywords Multivariate, Graphics
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)
@@ -231,7 +230,6 @@ plot.LDA <- function(x, xax=1, yax=2,
 #' @param ... only used for the generic
 #' @return a ggplot object
 #' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
-#' @keywords Multivariate Graphics
 #' @examples
 #' data(olea)
 #' ol <- LDA(PCA(opoly(olea, 5)), "domes")
@@ -292,7 +290,6 @@ plot_CV.LDA <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, labels=TRUE,..
 #' @param legend logical whether to add a legend
 #' @param ... useless here.
 #' @seealso \link{LDA}, \link{plot.LDA}, \link{plot_CV}.
-#' @keywords Multivariate Graphics
 #' @examples
 #' # Below various table that you can try. We will use the last one for the examples.
 #' \dontrun{

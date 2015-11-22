@@ -43,5 +43,4 @@ Slightly less optimized than procGPA in the shapes package (~20% on my machine).
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
-\keyword{Procrustes}
 

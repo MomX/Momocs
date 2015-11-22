@@ -15,7 +15,6 @@
 #' @param center logical whether to center the input data
 #' @return a 'PCA' object on which to apply \link{plot.PCA}
 #' @seealso \link{plot.PCA}
-#' @keywords Multivariate
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
@@ -105,7 +104,7 @@ PCA.TraCoe <- function(x, scale. = TRUE, center = TRUE, fac) {
   PCA$fac <- TraCoe$fac
   PCA$mshape <- NULL
   PCA$method <- NULL
-  
+
   class(PCA) <- c("PCA", class(PCA))
   return(PCA)
 }
@@ -126,7 +125,7 @@ PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=data.frame()) {
 #' @rdname PCA
 #' @export
 as.PCA <- function(x, fac){UseMethod("as.PCA")}
-#' @rdname PCA
+
 #' @export
 as.PCA.default <- function(x, fac){
   if (class(x)[1] != "PCA"){
@@ -161,7 +160,6 @@ print.PCA <- function(x, ...){
 #' @return a list with components \code{x1} all coefficients/scores corresponding to the
 #' first level of the \code{fac} provided; \code{x2} same thing for the second level;
 #' \code{fac} the corresponding \code{fac}.
-#' @keywords Coe Multivariate
 #' @examples
 #' data(bot)
 #' bot2 <- bot1 <- coo_scale(coo_center(coo_sample(bot, 60)))
@@ -297,7 +295,7 @@ rePCA.PCA <- function(PCA, Coe){
 #' @return
 #' If fac is not provided global area/volume is returned; otherwise a named
 #' list for every level of fac
-#' 
+#'
 #' @details get_chull_area is calculated using \link{coo_chull} followed by \link{coo_area};
 #'  get_chull_volume is calculated using geometry::convexhulln
 #'

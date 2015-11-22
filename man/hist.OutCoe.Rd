@@ -36,5 +36,4 @@ hist(op)
 \seealso{
 \link{boxplot.Coe}
 }
-\keyword{Graphics}
 

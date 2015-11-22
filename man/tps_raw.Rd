@@ -47,5 +47,4 @@ for (i in 1:g$dim[2]) lines(g$grid[cols_ids + (i-1)*g$dim[1], ])
 \link{tps_grid}, \link{tps_iso} and \link{tps_arr},
 \link{coo_lolli}, \link{coo_arrows}.
 }
-\keyword{ThinPlateSplines}
 

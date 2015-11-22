@@ -31,5 +31,4 @@ Calculates nice positions on a plane for drawing shapes
 \details{
 See \link{plot.PCA} for self-speaking examples
 }
-\keyword{Graphics}
 

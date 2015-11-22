@@ -42,5 +42,4 @@ methods(class=Ldk)
 \seealso{
 \link{Coo}, \link{Out}, link{Opn}.
 }
-\keyword{Ldk}
 

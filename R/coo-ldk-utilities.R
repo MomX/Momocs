@@ -12,7 +12,6 @@
 #' @param ldk a \code{matrix} of (x; y) coordinates, a list, or an array.
 #' @return an \code{array} of (x; y) coordinates.
 #' @seealso \link{coo_check}
-#' @keywords ShapeUtilities
 #' @examples
 #' #coo_check('Not a shape')
 #' #coo_check(matrix(1:10, ncol=2))
