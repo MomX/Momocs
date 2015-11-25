@@ -20,4 +20,8 @@ The cumulative sum for coo_perimcum
 b <- coo_sample(bot[1], 24)
 coo_perimpts(b)
 }
+\seealso{
+Other perimeter functions: \code{\link{coo_perimcum}},
+  \code{\link{coo_perim}}
+}
 

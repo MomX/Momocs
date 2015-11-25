@@ -30,7 +30,7 @@ filter(olea, view=="VD", var \%in\% c("Aglan", "PicMa"))
 olea \%>\% mutate(id=1:length(olea)) \%>\% filter(id > 120)
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{combine}},
   \code{\link{dissolve}}, \code{\link{mutate}},
   \code{\link{rename}}, \code{\link{sample_frac}},

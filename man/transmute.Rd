@@ -25,7 +25,7 @@ olea
 transmute(olea, id=factor(1:length(olea)))
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{combine}},
   \code{\link{dissolve}}, \code{\link{filter}},
   \code{\link{mutate}}, \code{\link{rename}},

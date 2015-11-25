@@ -29,4 +29,7 @@ coo \%>\% coo_scaley(1.5) \%>\% coo_draw(border="red")
 coo \%>\% coo_scalex(0.5) \%>\% coo_draw(border="blue", lty=2)
 coo \%>\% coo_scaley(0.5) \%>\% coo_draw(border="red", lty=2)
 }
+\seealso{
+Other scaling functions: \code{\link{coo_scale}}
+}
 

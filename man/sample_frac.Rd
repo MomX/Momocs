@@ -36,7 +36,7 @@ table(names(sample_frac(bot, 1, replace=TRUE)))
 
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{combine}},
   \code{\link{dissolve}}, \code{\link{filter}},
   \code{\link{mutate}}, \code{\link{rename}},

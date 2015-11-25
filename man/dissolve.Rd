@@ -27,7 +27,7 @@ dissolve(wbf, 1)
 dissolve(wbf, 2)
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{combine}},
   \code{\link{filter}}, \code{\link{mutate}},
   \code{\link{rename}}, \code{\link{sample_frac}},

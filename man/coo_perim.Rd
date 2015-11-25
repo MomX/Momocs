@@ -19,4 +19,8 @@ Calculates the perimeter
 coo_perim(bot[1])
 hist(sapply(bot$coo, coo_perim), breaks=10)
 }
+\seealso{
+Other perimeter functions: \code{\link{coo_perimcum}},
+  \code{\link{coo_perimpts}}
+}
 

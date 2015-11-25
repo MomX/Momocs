@@ -133,6 +133,7 @@ coo_centre <- coo_center
 #' # on Coo objects
 #' stack(coo_center(bot))
 #' stack(coo_scale(coo_center(bot)))
+#' @family scaling functions
 #' @export
 coo_scale <- function(coo, scale) {
   UseMethod("coo_scale")
@@ -179,6 +180,7 @@ coo_scale.Coo <- function(coo, scale) {
 #' coo %>% coo_scaley(1.5) %>% coo_draw(border="red")
 #' coo %>% coo_scalex(0.5) %>% coo_draw(border="blue", lty=2)
 #' coo %>% coo_scaley(0.5) %>% coo_draw(border="red", lty=2)
+#' @family scaling functions
 #' @export
 coo_scalex <- function(coo, k=1){
   smat <- matrix(c(k, 0, 0, 1), nrow=2)
@@ -209,6 +211,7 @@ coo_scaley <- function(coo, k=1){
 #' # on Coo
 #' stack(bot)
 #' stack(coo_rotate(bot, pi/2))
+#' @family rotation functions
 #' @export
 coo_rotate <- function(coo, theta = 0) {
   UseMethod("coo_rotate")
@@ -242,6 +245,7 @@ coo_rotate.Coo <- function(coo, theta = 0) {
 #' b <- bot[1]
 #' coo_plot(b)
 #' coo_draw(coo_rotatecenter(b, -pi/2, c(200, 200)), border='red')
+#' @family rotation functions
 #' @export
 coo_rotatecenter <- function(coo, theta, center = c(0, 0)) {
   UseMethod("coo_rotatecenter")
@@ -279,6 +283,7 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
 #' # on a Coo
 #' stack(bot)
 #' stack(coo_align(bot))
+#' @family aligning functions
 #' @export
 coo_align <- function(coo) {
   UseMethod("coo_align")
@@ -315,6 +320,7 @@ coo_align.Coo <- function(coo) {
 #' coo_plot(b)
 #' coo_plot(coo_alignxax(b))
 #' }
+#' @family aligning functions
 #' @export
 coo_alignxax <- function(coo) {
   UseMethod("coo_alignxax")
@@ -352,6 +358,7 @@ coo_alignxax.Coo <- function(coo) {
 #' bot.al <- coo_aligncalliper(bot)
 #' stack(bot.al)
 #' }
+#' @family aligning functions
 #' @export
 coo_aligncalliper <- function(coo) {
   UseMethod("coo_aligncalliper")
@@ -385,6 +392,8 @@ coo_aligncalliper.Coo <- function(coo) {
 #' \dontrun{
 #' stack(coo_alignminradius(hearts))
 #' }
+#' @family aligning functions
+#' @export
 coo_alignminradius <- function(coo){
   UseMethod("coo_alignminradius")
 }
@@ -455,6 +464,7 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' # makes no sense if shapes are not normalized first
 #' sh2 <- coo_slice(hearts, c(12, 24, 36, 48))
 #' panel(sh2[[1]])
+#' @family slicing functions
 #' @export
 coo_slice <- function(coo, ids){
   UseMethod("coo_slice")
@@ -493,6 +503,7 @@ coo_slice.Coo <- function(coo, ids){
 }
 
 ###TODO: coo_slice_direction
+# #' @family slicing functions
 
 # coo_slide --------
 #' Slides coordinates
@@ -527,6 +538,7 @@ coo_slice.Coo <- function(coo, ids){
 #' id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
 #' replace=TRUE)
 #' stack(coo_slide(hearts, id1=id1_random))
+#' @family sliding functions
 #' @export
 coo_slide <- function(x, ...) {
   UseMethod("coo_slide")
@@ -593,6 +605,7 @@ coo_slide.Coo <- function(x, id1, ldk, ...) {
 #' # on Coo objects
 #' stack(bot)
 #' stack(coo_slidedirection(bot, 'E'))
+#' @family sliding functions
 #' @export
 coo_slidedirection <- function(coo, direction, center, id) {
   UseMethod("coo_slidedirection")
@@ -660,6 +673,7 @@ coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = TRUE) {
 #'
 #' # that's what we meant
 #' coo_plot(coo_slidegap(cat_down))
+#' @family sliding functions
 #' @export
 coo_slidegap <- function(coo, force){
   UseMethod("coo_slidegap")
@@ -702,6 +716,7 @@ coo_slidegap.Coo <- function(coo, force=FALSE){
 #' stack(coo_sample(bot, 24))
 #' coo_plot(b)
 #' coo_plot(coo_sample(b, 24))
+#' @family sampling functions
 #' @export
 coo_sample <- function(coo, n) {
   UseMethod("coo_sample")
@@ -754,6 +769,7 @@ coo_sample.Opn <- coo_sample.Out
 #' coo_plot(rr <- coo_samplerr(bot[1], 12))
 #' cpos <- coo_centpos(bot[1])
 #' segments(cpos[1], cpos[2], rr[, 1], rr[, 2])
+#' @family sampling functions
 #' @export
 coo_samplerr <- function(coo, n) {
   UseMethod("coo_samplerr")
@@ -804,6 +820,7 @@ coo_samplerr.Coo <- function(coo, n) {
 #' stack(coo_interpolate(coo_sample(bot, 12), 120))
 #' coo_plot(bot[1])
 #' coo_plot(coo_interpolate(coo_sample(bot[1], 12), 120))
+#' @family sampling functions
 #' @export
 coo_interpolate <- function(coo, n) {
   UseMethod("coo_interpolate")
@@ -849,6 +866,7 @@ coo_interpolate.Coo <- function(coo, n) {
 #' stack(coo_smooth(bot, 10))
 #' coo_plot(bot[1])
 #' coo_plot(coo_smooth(bot[1], 30))
+#' @family smoothing functions
 #' @export
 coo_smooth <- function(coo, n) {
   UseMethod("coo_smooth")
@@ -889,6 +907,7 @@ coo_smooth.Coo <- function(coo, n) {
 #' coo_plot(o, border='grey50', points=FALSE)
 #' coo_draw(coo_smooth(o, 24), border='blue', points=FALSE)
 #' coo_draw(coo_smoothcurve(o, 24), border='red', points=FALSE)
+#' @family smoothing functions
 #' @export
 coo_smoothcurve <- function(coo, n) {
   UseMethod("coo_smoothcurve")
@@ -1089,6 +1108,7 @@ coo_force2close.Coo <- function(coo){
 #' coo_draw(coo_shearx(coo, 0.5), border="blue")
 #' coo_draw(coo_sheary(coo, 0.5), border="red")
 #'
+#' @family trasnforming functions
 #' @export
 
 coo_shearx <- function(coo, k){
@@ -1139,6 +1159,7 @@ coo_sheary.Coo <- function(coo, k=1){
 #' #' # to flip an entire Coo:
 #' shapes2 <- shapes
 #' shapes$coo <- lapply(shapes2$coo, coo_flipx)
+#' @family trasnforming functions
 #' @export
 coo_flipx <- function(coo){
   UseMethod("coo_flipx")
@@ -1217,6 +1238,7 @@ coo_dxy <- function(coo) {
 #' b <- coo_alignxax(bot[1])
 #' coo_plot(b)
 #' coo_draw(coo_up(b), border='red')
+#' @family opening functions
 #' @export
 coo_up <- function(coo, slidegap=FALSE){
   UseMethod("coo_up")
@@ -1261,6 +1283,7 @@ coo_up.Coo <- function(coo, slidegap=FALSE){
 #' b <- coo_alignxax(bot[1])
 #' coo_plot(b)
 #' coo_draw(coo_down(b), border='red')
+#' @family opening functions
 #' @export
 coo_down <- function(coo, slidegap=FALSE){
   UseMethod("coo_down")
@@ -1303,6 +1326,7 @@ coo_down.Coo <- function(coo, slidegap=FALSE){
 #' b <- coo_center(bot[1])
 #' coo_plot(b)
 #' coo_draw(coo_right(b), border='red')
+#' @family opening functions
 #' @export
 coo_right <- function(coo, slidegap=FALSE){
   UseMethod("coo_right")
@@ -1347,6 +1371,7 @@ coo_right.Coo <- function(coo, slidegap=FALSE){
 #' b <- coo_center(bot[1])
 #' coo_plot(b)
 #' coo_draw(coo_left(b), border='red')
+#' @family opening functions
 #' @export
 coo_left <- function(coo, slidegap=FALSE){
   UseMethod("coo_left")
@@ -1459,6 +1484,7 @@ coo_ldk <- function(coo, nb.ldk) {
 #' h <- hearts[1]
 #' coo_plot(h)
 #' coo_plot(coo_bookstein(h, 20, 57), border='red')
+#' @family baselining functions
 #' @export
 coo_bookstein <- function(coo, ldk1, ldk2) {
   UseMethod("coo_bookstein")
@@ -1525,6 +1551,7 @@ coo_bookstein.Ldk <- function(coo, ldk1, ldk2) {
 #' @examples
 #' stack(hearts)
 #' stack(coo_baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
+#' @family baselining functions
 #' @export
 coo_baseline <- function(coo, ldk1, ldk2, t1, t2) {
   UseMethod("coo_baseline")
@@ -1582,7 +1609,6 @@ coo_baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2,
 }
 
 # 3. coo shape descriptors
-
 # coo_centpos --------------
 #' Calculate centroid coordinates
 #'
@@ -1596,6 +1622,7 @@ coo_baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2,
 #' points(xy[1], xy[2], cex=2, col='blue')
 #' # on a Coo
 #' coo_centpos(bot)
+#' @family centroid functions
 #' @export
 coo_centpos <- function(coo) {
   UseMethod("coo_centpos")
@@ -1627,6 +1654,7 @@ coo_centpos.Coo <- function(coo) {
 #' coo_centsize(bot)
 #' # add it to $fac
 #' mutate(bot, size=coo_centsize(bot))
+#' @family centroid functions
 #' @export
 coo_centsize <- function(coo){
   UseMethod("coo_centsize")
@@ -1655,6 +1683,7 @@ coo_centsize.Coo <- function(coo){
 #' b <- coo_sample(bot[1], 64)
 #' d <- coo_centdist(b)
 #' barplot(d, xlab="Points along the outline", ylab="Distance to the centroid (pixels)")
+#' @family centroid functions
 #' @export
 coo_centdist <- function(coo) {
   coo <- coo_check(coo)
@@ -1671,6 +1700,7 @@ coo_centdist <- function(coo) {
 #' @examples
 #' b <- coo_sample(bot[1], 24)
 #' coo_perimpts(b)
+#' @family perimeter functions
 #' @export
 coo_perimpts <- function(coo) {
   coo <- coo_check(coo)
@@ -1688,6 +1718,7 @@ coo_perimpts <- function(coo) {
 #' @examples
 #' b <- coo_sample(bot[1], 24)
 #' coo_perimcum(b)
+#' @family perimeter functions
 #' @export
 coo_perimcum <- function(coo) {
   coo <- coo_check(coo)
@@ -1703,6 +1734,7 @@ coo_perimcum <- function(coo) {
 #' @examples
 #' coo_perim(bot[1])
 #' hist(sapply(bot$coo, coo_perim), breaks=10)
+#' @family perimeter functions
 #' @export
 coo_perim <- function(coo) {
   return(sum(coo_perimpts(coo)))
@@ -1726,6 +1758,7 @@ coo_perim <- function(coo) {
 #' ids <- p$arr.ind
 #' coo_plot(b)
 #' segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
+#' @family calliper functions
 #' @export
 coo_calliper <- function(coo, arr.ind = FALSE) {
   coo <- coo_check(coo)

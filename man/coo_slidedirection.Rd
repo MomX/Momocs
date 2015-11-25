@@ -34,4 +34,8 @@ coo_plot(coo_slidedirection(b, 'S'))
 stack(bot)
 stack(coo_slidedirection(bot, 'E'))
 }
+\seealso{
+Other sliding functions: \code{\link{coo_slidegap}},
+  \code{\link{coo_slide}}
+}
 

@@ -26,4 +26,8 @@ coo_plot(rr <- coo_samplerr(bot[1], 12))
 cpos <- coo_centpos(bot[1])
 segments(cpos[1], cpos[2], rr[, 1], rr[, 2])
 }
+\seealso{
+Other sampling functions: \code{\link{coo_interpolate}},
+  \code{\link{coo_sample}}
+}
 

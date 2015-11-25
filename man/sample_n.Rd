@@ -33,7 +33,7 @@ table(names(sample_n(bot, 400, replace=TRUE)))
 
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{combine}},
   \code{\link{dissolve}}, \code{\link{filter}},
   \code{\link{mutate}}, \code{\link{rename}},

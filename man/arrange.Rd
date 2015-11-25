@@ -28,7 +28,7 @@ olea \%>\% mutate(id=1:length(.)) \%$\% fac$id
 olea \%>\% mutate(id=1:length(.)) \%>\% arrange(desc(id)) \%$\% fac$id
 }
 \seealso{
-Other handling.functions: \code{\link{chop}},
+Other handling functions: \code{\link{chop}},
   \code{\link{combine}}, \code{\link{dissolve}},
   \code{\link{filter}}, \code{\link{mutate}},
   \code{\link{rename}}, \code{\link{sample_frac}},

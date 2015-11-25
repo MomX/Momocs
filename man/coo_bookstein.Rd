@@ -34,4 +34,7 @@ h <- hearts[1]
 coo_plot(h)
 coo_plot(coo_bookstein(h, 20, 57), border='red')
 }
+\seealso{
+Other baselining functions: \code{\link{coo_baseline}}
+}
 

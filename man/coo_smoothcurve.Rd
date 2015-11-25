@@ -24,4 +24,7 @@ coo_plot(o, border='grey50', points=FALSE)
 coo_draw(coo_smooth(o, 24), border='blue', points=FALSE)
 coo_draw(coo_smoothcurve(o, 24), border='red', points=FALSE)
 }
+\seealso{
+Other smoothing functions: \code{\link{coo_smooth}}
+}
 

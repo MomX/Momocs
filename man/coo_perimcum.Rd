@@ -19,4 +19,8 @@ Just a wrapper for \code{cumsum(coo_perimpts)}. See \link{coo_perimpts}.
 b <- coo_sample(bot[1], 24)
 coo_perimcum(b)
 }
+\seealso{
+Other perimeter functions: \code{\link{coo_perimpts}},
+  \code{\link{coo_perim}}
+}
 

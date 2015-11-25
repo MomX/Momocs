@@ -29,4 +29,7 @@ By default it returns Bookstein's coordinates.
 stack(hearts)
 stack(coo_baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
 }
+\seealso{
+Other baselining functions: \code{\link{coo_bookstein}}
+}
 

@@ -20,4 +20,8 @@ b <- coo_sample(bot[1], 64)
 d <- coo_centdist(b)
 barplot(d, xlab="Points along the outline", ylab="Distance to the centroid (pixels)")
 }
+\seealso{
+Other centroid functions: \code{\link{coo_centpos}},
+  \code{\link{coo_centsize}}
+}
 

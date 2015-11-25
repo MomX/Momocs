@@ -26,4 +26,8 @@ coo_centsize(bot)
 # add it to $fac
 mutate(bot, size=coo_centsize(bot))
 }
+\seealso{
+Other centroid functions: \code{\link{coo_centdist}},
+  \code{\link{coo_centpos}}
+}
 

@@ -27,7 +27,7 @@ slice(olea, 1:20)
 slice(olea, 21:30)
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{combine}},
   \code{\link{dissolve}}, \code{\link{filter}},
   \code{\link{mutate}}, \code{\link{rename}},

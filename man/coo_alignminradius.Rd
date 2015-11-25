@@ -23,5 +23,8 @@ stack(coo_alignminradius(hearts))
 }
 \seealso{
 \link{coo_align}, \link{coo_alignxax}, \link{coo_calliper}
+
+Other aligning functions: \code{\link{coo_aligncalliper}},
+  \code{\link{coo_alignxax}}, \code{\link{coo_align}}
 }
 

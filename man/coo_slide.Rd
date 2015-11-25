@@ -45,4 +45,8 @@ id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
 replace=TRUE)
 stack(coo_slide(hearts, id1=id1_random))
 }
+\seealso{
+Other sliding functions: \code{\link{coo_slidedirection}},
+  \code{\link{coo_slidegap}}
+}
 

@@ -23,4 +23,8 @@ points(xy[1], xy[2], cex=2, col='blue')
 # on a Coo
 coo_centpos(bot)
 }
+\seealso{
+Other centroid functions: \code{\link{coo_centdist}},
+  \code{\link{coo_centsize}}
+}
 

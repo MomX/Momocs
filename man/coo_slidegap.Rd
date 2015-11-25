@@ -35,4 +35,8 @@ coo_plot(cat_down)
 # that's what we meant
 coo_plot(coo_slidegap(cat_down))
 }
+\seealso{
+Other sliding functions: \code{\link{coo_slidedirection}},
+  \code{\link{coo_slide}}
+}
 

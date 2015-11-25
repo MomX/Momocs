@@ -25,4 +25,7 @@ stack(coo_smooth(bot, 10))
 coo_plot(bot[1])
 coo_plot(coo_smooth(bot[1], 30))
 }
+\seealso{
+Other smoothing functions: \code{\link{coo_smoothcurve}}
+}
 

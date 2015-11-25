@@ -21,7 +21,7 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
 data(bot)
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{combine}}, \code{\link{dissolve}},
   \code{\link{filter}}, \code{\link{mutate}},
   \code{\link{rename}}, \code{\link{sample_frac}},

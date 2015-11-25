@@ -26,4 +26,7 @@ coo_plot(coo_scale(bot[1]))
 stack(coo_center(bot))
 stack(coo_scale(coo_center(bot)))
 }
+\seealso{
+Other scaling functions: \code{\link{coo_scalex}}
+}
 

@@ -26,5 +26,7 @@ coo_draw(coo_rotatecenter(b, -pi/2, c(200, 200)), border='red')
 }
 \seealso{
 \link{coo_rotate}
+
+Other rotation functions: \code{\link{coo_rotate}}
 }
 

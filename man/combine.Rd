@@ -39,7 +39,7 @@ bot_s$whisky
 lapply(bot_s, efourier, 10) \%>\% combine()
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{dissolve}},
   \code{\link{filter}}, \code{\link{mutate}},
   \code{\link{rename}}, \code{\link{sample_frac}},

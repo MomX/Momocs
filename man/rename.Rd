@@ -25,7 +25,7 @@ olea
 rename(olea, Ind=ind, View=view)
 }
 \seealso{
-Other handling.functions: \code{\link{arrange}},
+Other handling functions: \code{\link{arrange}},
   \code{\link{chop}}, \code{\link{combine}},
   \code{\link{dissolve}}, \code{\link{filter}},
   \code{\link{mutate}}, \code{\link{sample_frac}},
