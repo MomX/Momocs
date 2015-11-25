@@ -7,7 +7,7 @@
 coo_rev(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates or a Coo object}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates or a Coo object
@@ -16,7 +16,6 @@ a \code{matrix} of (x; y) coordinates or a Coo object
 Returns the reverse suite of coordinates, i.e. change shape's orientation
 }
 \examples{
-data(bot)
 b <- coo_sample(bot[1], 4)
 b
 coo_rev(b)

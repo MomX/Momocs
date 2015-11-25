@@ -2,31 +2,27 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_smooth}
 \alias{coo_smooth}
-\title{Smoothes coordinates (closed outlines)}
+\title{Smoothes coordinates}
 \usage{
 coo_smooth(coo, n)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{n}{an (integer) \code{numeric} to specify the number of smoothing iterations}
+\item{n}{\code{integer} the number of smoothing iterations}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Smoothes coordinates using a simple moving average.
-May be useful to remove digitization noise.
+May be useful to remove digitization noise, mainly on outlines and open outlines.
 }
 \examples{
-data(bot)
 b <- bot[1]
 stack(bot)
 stack(coo_smooth(bot, 10))
 coo_plot(bot[1])
 coo_plot(coo_smooth(bot[1], 30))
-}
-\seealso{
-\link{coo_smoothcurve}
 }
 

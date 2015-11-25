@@ -2,15 +2,15 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_check}
 \alias{coo_check}
-\title{Checks 'coo' shapes}
+\title{Checks shapes}
 \usage{
 coo_check(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or a list.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
-a \code{matrix} of (x; y) coordinates.
+a \code{matrix} of (x; y) coordinates or a Coo object.
 }
 \description{
 A simple utility, used internally, mostly in the coo functions and methods.

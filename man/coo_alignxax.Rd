@@ -7,10 +7,10 @@
 coo_alignxax(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
-a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates, or any \link{Coo} object.
 }
 \description{
 Align the longest axis of a shape along the x-axis.
@@ -23,7 +23,6 @@ coo_aligncalliper.
 }
 \examples{
 \dontrun{
-data(bot)
 b <- bot[1]
 coo_plot(b)
 coo_plot(coo_alignxax(b))

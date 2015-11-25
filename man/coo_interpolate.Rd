@@ -7,9 +7,9 @@
 coo_interpolate(coo, n)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{n}{an integer, the number fo points to interpolate.}
+\item{n}{code{integer}, the number fo points to interpolate.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -19,13 +19,11 @@ Interpolates n coordinates 'among existing points'between' existing points,
 along the perimeter of the coordinates provided and keeping the first point
 }
 \examples{
-data(bot)
 b <- bot[1]
 stack(bot)
 stack(coo_scale(bot))
 coo_plot(b)
 coo_plot(coo_scale(b))
-data(bot)
 stack(bot)
 stack(coo_interpolate(coo_sample(bot, 12), 120))
 coo_plot(bot[1])

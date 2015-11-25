@@ -7,24 +7,23 @@
 coo_trans(coo, x = 0, y = 0)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{x}{\code{numeric}translation along the x-axis.}
+\item{x}{\code{numeric} translation along the x-axis.}
 
-\item{y}{\code{numeric}translation along the y-axis.}
+\item{y}{\code{numeric} translation along the y-axis.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
-Translates the coordinatesby a 'x' and 'y' value
+Translates the coordinates by a 'x' and 'y' value
 }
 \examples{
-data(bot)
-b <- bot[1]
+coo_plot(bot[1])
+coo_plot(coo_trans(bot[1], 50, 100))
+# on Coo
 stack(bot)
 stack(coo_trans(bot, 50, 100))
-coo_plot(b)
-coo_plot(coo_trans(b, 50, 100))
 }
 

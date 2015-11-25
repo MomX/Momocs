@@ -2,25 +2,25 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_centpos}
 \alias{coo_centpos}
-\title{Returns the position of the centroid}
+\title{Calculate centroid coordinates}
 \usage{
 coo_centpos(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
-(x; y) coordinates as \code{numeric}.
+(x; y) coordinates of the centroid as a vector or a matrix.
 }
 \description{
 Returns the (x; y) centroid coordinates of a shape.
 }
 \examples{
-data(bot)
 b <- bot[1]
 coo_plot(b)
 xy <- coo_centpos(b)
 points(xy[1], xy[2], cex=2, col='blue')
-xy
+# on a Coo
+coo_centpos(bot)
 }
 

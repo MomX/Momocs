@@ -5,14 +5,14 @@
 \alias{coo_sheary}
 \title{Shears shapes}
 \usage{
-coo_shearx(coo, k = 1)
+coo_shearx(coo, k)
 
 coo_sheary(coo, k)
 }
 \arguments{
-\item{coo}{a matrix or a list of coordinates}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{k}{shear factor}
+\item{k}{\code{numeric} shear factor}
 }
 \value{
 a \code{matrix} of (x; y) coordinates.
@@ -22,7 +22,6 @@ a \code{matrix} of (x; y) coordinates.
 to the x-axis (i.e. x' = x + ky; y' = y + kx). \code{coo_sheary} does it parallel to the y-axis.
 }
 \examples{
-data(shapes)
 coo <- coo_template(shapes[11])
 coo_plot(coo)
 coo_draw(coo_shearx(coo, 0.5), border="blue")

@@ -7,10 +7,10 @@
 coo_aligncalliper(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
-a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+a \code{matrix} of (x; y) coordinates, or any \link{Coo} object.
 }
 \description{
 And returns them registered on bookstein coordinates.
@@ -18,7 +18,6 @@ See \link{coo_bookstein}.
 }
 \examples{
 \dontrun{
-data(bot)
 b <- bot[1]
 coo_plot(b)
 coo_plot(coo_aligncalliper(b))

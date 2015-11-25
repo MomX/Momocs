@@ -7,7 +7,7 @@
 coo_scale(coo, scale)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
 \item{scale}{the scaling factor, by default, the centroid size.}
 }
@@ -20,11 +20,10 @@ assumed to be the centroid size. It involves three steps: centering from current
 dividing coordinates by 'scale', pusing back to the original position.
 }
 \examples{
-data(bot)
-b <- bot[1]
-stack(bot)
-stack(coo_scale(bot))
-coo_plot(b)
-coo_plot(coo_scale(b))
+coo_plot(bot[1])
+coo_plot(coo_scale(bot[1]))
+# on Coo objects
+stack(coo_center(bot))
+stack(coo_scale(coo_center(bot)))
 }
 

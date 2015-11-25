@@ -14,6 +14,10 @@ Coe(...)
 \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes.
 }
 \details{
+Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
+a detail of the design behind Momocs' classes.
+
+
 \code{Coe} class is the 'parent' class of the following 'child' classes \itemize{
 \item \code{\link{OutCoe}} for coefficients from closed \bold{out}lines morphometrics
 \item \code{\link{OpnCoe}} for coefficients from \bold{op}e\bold{n} outlines morphometrics
@@ -40,6 +44,18 @@ inherits(bot.f, "Coe")
 # if you want to work directly on the matrix of coefficients
 bot.f$coe
 
+#getters
+bot.f[1]
+bot.f[1:5]
+
+#setters
+bot.f[1] <- 1:48
+bot.f[1]
+
+bot.f[1:5] <- matrix(1:48, nrow=5, ncol=48, byrow=TRUE)
+bot.f[1:5]
+
+# An illustration of Momocs desing. See also browseVignettes("Momocs")
 data(olea)
 op <- opoly(olea, 5)
 op

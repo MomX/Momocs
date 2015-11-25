@@ -2,19 +2,23 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_nb}
 \alias{coo_nb}
-\title{Returns the number of coordinates}
+\title{Counts coordinates}
 \usage{
 coo_nb(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
+}
+\value{
+either a single numeric or a vector of numeric
 }
 \description{
-A simple wrapper: for a single shape, returns its nrow ; for a Coo object, return sapply + nrow.
+Returns the number of coordinates, for a single shape or a Coo object
 }
 \examples{
-data(bot)
+# single shape
 coo_nb(bot[1])
+# Coo object
 coo_nb(bot)
 }
 

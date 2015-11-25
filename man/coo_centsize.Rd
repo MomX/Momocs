@@ -2,30 +2,28 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_centsize}
 \alias{coo_centsize}
-\title{Calculates the centroid size}
+\title{Calculates centroid size}
 \usage{
 coo_centsize(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or a Coo object}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
 \code{numeric}, the centroid size.
 }
 \description{
-Calculates the centroid size
+Calculates centroid size
 }
 \details{
 This function can be used to integrate size - if meaningful -
 to Coo objects. See also \link{coo_length} and \link{rescale}.
 }
 \examples{
-data(bot)
 coo_centsize(bot[1])
+# on a Coo
 coo_centsize(bot)
-
+# add it to $fac
 mutate(bot, size=coo_centsize(bot))
-
-
 }
 

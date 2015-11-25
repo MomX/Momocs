@@ -2,14 +2,15 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_down}
 \alias{coo_down}
-\title{Retains coordinates with negative y-coordinates}
+\title{coo_down -----------------
+Retains coordinates with negative y-coordinates}
 \usage{
 coo_down(coo, slidegap = FALSE)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates or a \link{Coo} object}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{slidegap}{logical whether to apply \link{coo_slidegap} after coo_down}
+\item{slidegap}{\code{logical} whether to apply \link{coo_slidegap} after coo_down}
 }
 \value{
 a \code{matrix} of (x; y) coordinates or a \link{Coo} object (\link{Out} are returned as \link{Opn})
@@ -26,7 +27,6 @@ Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obta
 automatically.
 }
 \examples{
-data(bot)
 b <- coo_alignxax(bot[1])
 coo_plot(b)
 coo_draw(coo_down(b), border='red')

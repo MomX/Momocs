@@ -2,27 +2,15 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_flipx}
 \alias{coo_flipx}
-\alias{coo_flipx.Coo}
-\alias{coo_flipx.default}
 \alias{coo_flipy}
-\alias{coo_flipy.Coo}
-\alias{coo_flipy.default}
 \title{Flips shapes}
 \usage{
 coo_flipx(coo)
 
-\method{coo_flipx}{default}(coo)
-
-\method{coo_flipx}{Coo}(coo)
-
 coo_flipy(coo)
-
-\method{coo_flipy}{default}(coo)
-
-\method{coo_flipy}{Coo}(coo)
 }
 \arguments{
-\item{coo}{a matrix or a list of coordinates}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates
@@ -31,7 +19,6 @@ a \code{matrix} of (x; y) coordinates
 \code{coo_flipx} flips shapes about the x-axis; \code{coo_flipy} about the y-axis.
 }
 \examples{
-data(shapes)
 cat <- shapes[4]
 cat <- coo_center(cat)
 coo_plot(cat)

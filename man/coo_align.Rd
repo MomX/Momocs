@@ -7,7 +7,7 @@
 coo_align(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -16,12 +16,11 @@ a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 Aligns the coordinates along their longer axis using var-cov matrix and eigen values.
 }
 \examples{
-data(bot)
-b <- bot[1]
+coo_plot(bot[1])
+coo_plot(coo_align(bot[1]))
+# on a Coo
 stack(bot)
 stack(coo_align(bot))
-coo_plot(b)
-coo_plot(coo_align(b))
 }
 \seealso{
 \link{coo_aligncalliper}, \link{coo_alignxax}

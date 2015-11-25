@@ -7,18 +7,17 @@
 coo_samplerr(coo, n)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{n}{integer, the number of points to sample.}
+\item{n}{\code{integer}, the number of points to sample.}
 }
 \value{
-a \code{matrix} of (x; y) coordinates or an Coo object.
+a \code{matrix} of (x; y) coordinates or a Coo object.
 }
 \description{
 Samples n coordinates with a regular angle.
 }
 \examples{
-data(bot)
 stack(bot)
 bot <- coo_center(bot)
 stack(coo_samplerr(bot, 12))

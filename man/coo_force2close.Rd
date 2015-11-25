@@ -7,7 +7,7 @@
 coo_force2close(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -18,7 +18,6 @@ of unclosed shapes, so that they become closed. May be useful (?) e.g. for t/rfo
 where reconstructed shapes may not be closed.
 }
 \examples{
-data(bot)
 b <- coo_sample(bot[1], 64)
 b <- b[1:40,]
 coo_plot(b)

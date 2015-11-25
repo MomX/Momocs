@@ -7,11 +7,11 @@
 coo_bookstein(coo, ldk1, ldk2)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{ldk1}{the id of the first point of the new baseline (the first, by default)}
+\item{ldk1}{\code{numeric} the id of the first point of the new baseline (the first, by default)}
 
-\item{ldk2}{the id of the second point of the new baseline (the last, by default)}
+\item{ldk2}{\code{numeric} the id of the second point of the new baseline (the last, by default)}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -28,14 +28,10 @@ For \code{Out} and \code{Opn} defines the first landmark as the first point of t
 new shapes with \link{coo_slide}.
 }
 \examples{
-data(hearts)
 stack(hearts)
 stack(coo_bookstein(hearts, 2, 4))
 h <- hearts[1]
 coo_plot(h)
 coo_plot(coo_bookstein(h, 20, 57), border='red')
-}
-\seealso{
-\link{coo_baseline}
 }
 

@@ -3,32 +3,30 @@
 \name{coo_scalex}
 \alias{coo_scalex}
 \alias{coo_scaley}
-\title{Scales coordinates in one direction}
+\title{Shrinks coordinates in one direction}
 \usage{
 coo_scalex(coo, k = 1)
 
 coo_scaley(coo, k = 1)
 }
 \arguments{
-\item{coo}{a matrix or a list of coordinates}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{k}{scaling factor}
+\item{k}{\code{numeric} scaling factor}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
-\code{coo_scalex} applies a scaling a matrix of (x; y) (or a list),
-parallel to the x-axis,
-\code{coo_scaley} does it parallel to the y-axis.
+\code{coo_scalex} applies a scaling parallel to the x-axis to a matrix of (x; y)
+or a list of coordinates or any Coo object, \code{coo_scaley} does it parallel to the y-axis.
 }
 \examples{
-data(shapes)
-coo <- coo_template(shapes[11])
+coo <- shapes[11] \%>\% coo_template()
 coo_plot(coo, xlim=c(-1, 1))
-coo_draw(coo_scalex(coo, 0.5), border="blue")
-coo_draw(coo_scalex(coo, 1.2), border="blue", lty=2)
-coo_draw(coo_scaley(coo, 0.5), border="red")
-coo_draw(coo_scaley(coo, 1.2), border="red", lty=2)
+coo \%>\% coo_scalex(1.5) \%>\% coo_draw(border="blue")
+coo \%>\% coo_scaley(1.5) \%>\% coo_draw(border="red")
+coo \%>\% coo_scalex(0.5) \%>\% coo_draw(border="blue", lty=2)
+coo \%>\% coo_scaley(0.5) \%>\% coo_draw(border="red", lty=2)
 }
 

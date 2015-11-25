@@ -7,7 +7,7 @@
 coo_perimpts(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{\code{matrix} of (x; y) coordinates.}
 }
 \value{
 \code{numeric} the distance between every point.
@@ -17,7 +17,6 @@ Calculates the euclidean distance between every points of a shape for coo_perimp
 The cumulative sum for coo_perimcum
 }
 \examples{
-data(bot)
 b <- coo_sample(bot[1], 24)
 coo_perimpts(b)
 }

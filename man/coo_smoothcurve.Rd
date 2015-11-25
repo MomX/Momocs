@@ -2,30 +2,26 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_smoothcurve}
 \alias{coo_smoothcurve}
-\title{Smoothes coordinates (open outlines)}
+\title{Smoothes coordinates on curves}
 \usage{
 coo_smoothcurve(coo, n)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{n}{an (integer) \code{numeric} to specify the number of smoothing iterations}
+\item{n}{\code{integer} to specify the number of smoothing iterations}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Smoothes coordinates using a simple moving average but let the first and last points unchanged.
-May be useful to remove digitization noise.
+May be useful to remove digitization noise on curves.
 }
 \examples{
-data(olea)
 o <- olea[1]
 coo_plot(o, border='grey50', points=FALSE)
 coo_draw(coo_smooth(o, 24), border='blue', points=FALSE)
 coo_draw(coo_smoothcurve(o, 24), border='red', points=FALSE)
-}
-\seealso{
-\link{coo_smooth}
 }
 

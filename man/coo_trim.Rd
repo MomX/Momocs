@@ -7,17 +7,17 @@
 coo_trim(coo, trim = 1)
 }
 \arguments{
-\item{coo}{matrix of (x; y) coordinates or Coo object}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{trim}{numeric, the number of coordinates to trim}
+\item{trim}{\code{numeric}, the number of coordinates to trim}
 }
 \description{
-Removes \code{trim} coordinates at both ends of a shape, ie 
+Removes \code{trim} coordinates at both ends of a shape, ie
 from top and bottom of the shape matrix.
 }
 \examples{
-olea[1] \%>\% coo_sample(12) \%T>\% 
-   print() \%T>\% ldk_plot() \%>\% 
+olea[1] \%>\% coo_sample(12) \%T>\%
+   print() \%T>\% ldk_plot() \%>\%
    coo_trim(1) \%T>\% print() \%>\% points(col="red")
 }
 

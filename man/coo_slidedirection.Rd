@@ -7,13 +7,13 @@
 coo_slidedirection(coo, direction, center, id)
 }
 \arguments{
-\item{coo}{a matrix (or a list) or (x; y) coordinates or a Coo object}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{direction}{a character among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.}
+\item{direction}{\code{character} among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.}
 
-\item{center}{logical whether to center or not before sliding}
+\item{center}{\code{logical} whether to center or not before sliding}
 
-\item{id}{whether to return the id of the point or the slided shapes}
+\item{id}{\code{numeric} whether to return the id of the point or the slided shapes}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -23,7 +23,6 @@ Shapes are centered and then, according to direction, the point northwards, sout
 eastwards or westwards the centroid, becomes the first point with \link{coo_slide}.
 }
 \examples{
-data(bot)
 b <- coo_rotate(bot[1], pi/6) # dummy example just to make it obvious
 coo_plot(b) # not the first point
 coo_plot(coo_slidedirection(b, 'N'))

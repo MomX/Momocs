@@ -2,20 +2,36 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_close}
 \alias{coo_close}
-\title{Closes/'Uncloses' shapes}
+\alias{coo_unclose}
+\title{Closes/uncloses shapes}
 \usage{
 coo_close(coo)
+
+coo_unclose(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
+a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
 Returns a closed shape from (un)closed shapes. See also \link{coo_unclose}.
+
+Returns a unclosed shape from (un)closed shapes. See also \link{coo_close}.
 }
 \examples{
+x <- (matrix(1:10, ncol=2))
+x2 <- coo_close(x)
+x3 <- coo_unclose(x2)
+x
+is_closed(x)
+x2
+is_closed(x2)
+x3
+is_closed(x3)
 x <- (matrix(1:10, ncol=2))
 x2 <- coo_close(x)
 x3 <- coo_unclose(x2)
@@ -28,5 +44,7 @@ is_closed(x3)
 }
 \seealso{
 \link{coo_unclose}, \link{is_closed}
+
+\link{coo_close}, \link{is_closed}
 }
 

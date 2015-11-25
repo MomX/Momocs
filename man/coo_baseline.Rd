@@ -7,11 +7,11 @@
 coo_baseline(coo, ldk1, ldk2, t1, t2)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{ldk1}{the id of the first point of the new baseline}
+\item{ldk1}{\code{numeric} the id of the first point of the new baseline}
 
-\item{ldk2}{the id of the second point of the new baseline}
+\item{ldk2}{\code{numeric} the id of the second point of the new baseline}
 
 \item{t1}{\code{numeric} the (x; y) coordinates of the 1st point of the new baseline}
 
@@ -26,11 +26,7 @@ for the \code{ldk1}-th and \code{ldk2}-th points.
 By default it returns Bookstein's coordinates.
 }
 \examples{
-data(hearts)
 stack(hearts)
 stack(coo_baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
-}
-\seealso{
-\link{coo_bookstein}
 }
 

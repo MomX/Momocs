@@ -14,13 +14,17 @@ Coo(...)
 \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
 }
 \details{
+Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
+a detail of the design behind Momocs' classes.
+
+
 \code{Coo} class is the 'parent' class of the following 'child' classes \itemize{
 \item \code{\link{Out}} for closed \bold{out}lines
 \item \code{\link{Opn}} for \bold{op}e\bold{n} outlines
 \item \code{\link{Ldk}} for configuration of \bold{l}an\bold{d}mar\bold{k}s
 }
 
-Since all 'child classes' of them handle $(x; y)$ coordinates among other generic methods,
+Since all 'child classes' of them handle \eqn{(x; y)} coordinates among other generic methods,
 but also all have their specificity, this architecture allow to recycle generic methods and
 to use specific methods.
 
@@ -49,29 +53,41 @@ methods(class='Coo')
 # Let's take an Out example. But all methods shown here
 # work on Ldk (try data(wings) ) and on Opn (try data(olea))
 data(bot)
+
 # Primarily a 'Coo' object, but also an 'Out'
 class(bot)
 inherits(bot, "Coo")
 panel(bot)
 stack(bot)
 plot(bot)
+
 # Getters (you can also use it to set data)
-bot[1]
+bot[1] \%>\% coo_plot()
+bot[1:5] \%>\% str()
+
+# Setters
+bot[1] <- shapes[4]
+panel(bot)
+
+bot[1:5] <- shapes[4:8]
+panel(bot)
+
 # access the different components
 # $coo coordinates
 head(bot$coo)
 # $fac grouping factors
 head(bot$fac)
+# or if you know the name of the column of interest
+bot$type
 # table
 table(bot$fac)
 # an internal view of an Out object
 str(bot)
+
 # subsetting
-w <- subset(bot, type=='whisky') # if you dont like beer
-b <- subset(bot, type=='beer')   # if you don't like whisky
-w # an example of Momocs:::print.Out
-b # same thing for beers
-combine(b, w) # if, eventually, you want to mix them
+# see ?filter, ?select, and their 'see also' section for the
+# complete list of dplyr-like verbs implemented in Momocs
+
 length(bot) # the number of shapes
 names(bot) # access all individual names
 bot2 <- bot

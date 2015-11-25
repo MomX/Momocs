@@ -2,7 +2,7 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_perimcum}
 \alias{coo_perimcum}
-\title{Calculates the cumulative chrodal distance a shape.}
+\title{Calculates the cumulative chordal distance along a shape.}
 \usage{
 coo_perimcum(coo)
 }
@@ -13,10 +13,9 @@ coo_perimcum(coo)
 \code{numeric} the cumulate sum of chrodal distances
 }
 \description{
-Just a wrapper for cumsum(coo_perimpts). See \link{coo_perimpts}.
+Just a wrapper for \code{cumsum(coo_perimpts)}. See \link{coo_perimpts}.
 }
 \examples{
-data(bot)
 b <- coo_sample(bot[1], 24)
 coo_perimcum(b)
 }

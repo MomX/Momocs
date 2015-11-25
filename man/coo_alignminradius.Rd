@@ -7,7 +7,7 @@
 coo_alignminradius(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -18,7 +18,6 @@ May be used as an aligning strategy on shapes with a clear 'invaginate' part.
 }
 \examples{
 \dontrun{
-data(hearts)
 stack(coo_alignminradius(hearts))
 }
 }

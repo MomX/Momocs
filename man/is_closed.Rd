@@ -7,10 +7,10 @@
 is_closed(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
-a boolean.
+a single or a vector of \code{logical}.
 }
 \description{
 Returns TRUE/FALSE whether the last coordinate of the shapes is the same
@@ -19,11 +19,7 @@ as the first one.
 \examples{
 is_closed(matrix(1:10, ncol=2))
 is_closed(coo_close(matrix(1:10, ncol=2)))
-data(bot)
 is_closed(bot)
 is_closed(coo_close(bot))
-}
-\seealso{
-\link{coo_close}, \link{coo_unclose}
 }
 

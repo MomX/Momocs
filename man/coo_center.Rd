@@ -10,18 +10,22 @@ coo_center(coo)
 coo_centre(coo)
 }
 \arguments{
-\item{coo}{either a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 }
 \description{
-Returns a shape centered on the origin.
-
-brittons...
+Returns a shape centered on the origin. The two functions are strictly equivalent.
 }
 \examples{
-data(bot)
-b <- bot[1]
+coo_plot(bot[1])
+# same as
+coo_plot(coo_centre(bot[1]))
+# this
+coo_plot(coo_center(bot[1]))
+# on Coo objects
+stack(bot)
+stack(coo_center(bot))
 }
 

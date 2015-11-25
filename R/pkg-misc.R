@@ -32,7 +32,7 @@ Momocs_help <- function(topic=NULL){
 }
 
 #' Get Momocs version
-#' 
+#'
 #' A simple wrapper around \code{packageVersion("Momocs")}.
 #' @export
 Momocs_version <- function() packageVersion("Momocs")
@@ -291,6 +291,21 @@ vecs_param <- function(r1, i1, r2, i2) {
     stop(msg_if_not, call. = FALSE)
 }
 
+# can be used is combination with try()
+# TRUE/FALSE
+is.error <- function(x) {
+  if (is.list(x))
+    return(any(sapply(x, is.error)))
+  any(class(x)=="try-error")
+}
+
+#id
+which.is.error <- function(x){
+  if (is.list(x))
+    return(which(sapply(x, is.error)))
+  which(class(x)=="try-error")
+}
+
 # x = any vector
 # conf = gaussian quantile
 #' @export
@@ -464,7 +479,7 @@ vecs_param <- function(r1, i1, r2, i2) {
   is.fac <- function(x) length(x$fac) > 0
 
 
-  
+
   .mprod <- function(m, s) {
     res <- m
     for (i in 1:ncol(m)) {
@@ -472,25 +487,25 @@ vecs_param <- function(r1, i1, r2, i2) {
     }
     return(res)
   }
-  
-  
+
+
   # x = any vector
   # conf = gaussian quantile
-  
+
   .which.out <- function(x, conf=1e-4){
     out <- which(dnorm(x, mean(x), sd(x))< conf)
     if(length(out)==0) {
       return(NA)
     } else {
       return(out)}}
-  
+
   # Was used in $fac handling when creating Coo object, before numeric could be
   # accepted in it (as covariables)
-  
+
   .refactor <- function(df) {
     data.frame(lapply(df, factor))
   }
-  
+
   # Used in Coo/Coe printers
   #'@export
   .print.fac <- function(fac){
@@ -535,7 +550,7 @@ vecs_param <- function(r1, i1, r2, i2) {
       }
     }
   }
-  
+
   ### prepare a factor according to waht is passed to various methods,
   # notably multivariate plotters..prep.fac(bp, 1)
   # eg
@@ -545,7 +560,7 @@ vecs_param <- function(r1, i1, r2, i2) {
   # .prep.fac(bp, factor(rep(letters[1:4], each=10)))
   # .prep.fac(bp, ~type)
   # .prep.fac(bp)
-  
+
   .prep.fac <- function(x, fac){
     ### missing case
     if (missing(fac)) {
@@ -558,38 +573,38 @@ vecs_param <- function(r1, i1, r2, i2) {
     }
     ### column id case
     if (is.numeric(fac)) {
-      if (fac > ncol(x$fac)) 
+      if (fac > ncol(x$fac))
         stop(fac, " is not a valid column id")
       fac <- factor(x$fac[, fac]) }
     ### column name case
     if (is.character(fac)) {
-      if (!any(colnames(x$fac) == fac)) 
+      if (!any(colnames(x$fac) == fac))
         stop(fac, " is not an existing column name")
       fac <- factor(x$fac[, fac]) }
     ### factor case
     if (is.factor(fac)) {
-      if (length(fac) != nrow(x$fac)) 
+      if (length(fac) != nrow(x$fac))
         stop("'fac' length and number of individuals differ")
       # we need it to refactor in subset cases
-      fac <- factor(fac) 
+      fac <- factor(fac)
     }
     return(fac)
   }
-  
-  
-  
+
+
+
   .trim.ext <- function(lf, width = nchar(lf) - 4) {
     return(strtrim(lf, width = width))
   }
-  
-  
+
+
   .trim.path <- function(lf) {
     lf0 <- strsplit(lf, "/")
     lf0 <- sapply(lf0, function(x) x[length(x)])
     return(lf0)
   }
-  
-  
+
+
   .lf.auto <- function() {
     p <- file.choose()
     # damn ugly
@@ -599,8 +614,8 @@ vecs_param <- function(r1, i1, r2, i2) {
     lf <- list.files(p, full.names = TRUE)
     return(lf)
   }
-  
-  
+
+
   .normalize <- function(x, min.x, max.x) {
     # damn long but default arguments are not accepted
     if (missing(min.x))
@@ -611,8 +626,8 @@ vecs_param <- function(r1, i1, r2, i2) {
     x <- x/max.x
     return(x)
   }
-  
-  
+
+
   .mat.buffer <- function(m, buff.size, buff.fill = 1) {
     nr <- nrow(m)
     c.buff <- matrix(buff.fill, nrow = nr, ncol = buff.size)
@@ -622,8 +637,8 @@ vecs_param <- function(r1, i1, r2, i2) {
     m <- rbind(r.buff, m, r.buff)
     return(m)
   }
-  
-  
+
+
   .mat.unbuffer <- function(m, unbuff.size) {
     nr <- nrow(m)
     m <- m[-c(1:unbuff.size, (nr - unbuff.size + 1):nr), ]
@@ -631,14 +646,14 @@ vecs_param <- function(r1, i1, r2, i2) {
     m <- m[, -c(1:unbuff.size, (nc - unbuff.size + 1):nc)]
     return(m)
   }
-  
-  
+
+
   .mat.resize <- function(m, ratio) {
     dm <- floor(dim(m)/ratio)
     return(m[round(seq(1, nrow(m), len = dm[1])), round(seq(1,
                                                             ncol(m), len = dm[2]))])
   }
-  
-  
+
+
 
   ##### End Miscellaneous
