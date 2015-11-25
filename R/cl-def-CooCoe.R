@@ -6,6 +6,9 @@
 #' \code{Coo} class is the 'parent' class of
 #' \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
 #'
+#' Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
+#' a detail of the design behind Momocs' classes.
+#'
 #' @param ... anything and, anyway, this function will simply returns a message.
 #'
 #'@details
@@ -15,7 +18,7 @@
 #' \item \code{\link{Ldk}} for configuration of \bold{l}an\bold{d}mar\bold{k}s
 #' }
 #'
-#' Since all 'child classes' of them handle $(x; y)$ coordinates among other generic methods,
+#' Since all 'child classes' of them handle \eqn{(x; y)} coordinates among other generic methods,
 #' but also all have their specificity, this architecture allow to recycle generic methods and
 #' to use specific methods.
 #'
@@ -43,29 +46,41 @@
 #' # Let's take an Out example. But all methods shown here
 #' # work on Ldk (try data(wings) ) and on Opn (try data(olea))
 #' data(bot)
+#'
 #' # Primarily a 'Coo' object, but also an 'Out'
 #' class(bot)
 #' inherits(bot, "Coo")
 #' panel(bot)
 #' stack(bot)
 #' plot(bot)
+#'
 #' # Getters (you can also use it to set data)
-#' bot[1]
+#' bot[1] %>% coo_plot()
+#' bot[1:5] %>% str()
+#'
+#' # Setters
+#' bot[1] <- shapes[4]
+#' panel(bot)
+#'
+#' bot[1:5] <- shapes[4:8]
+#' panel(bot)
+#'
 #' # access the different components
 #' # $coo coordinates
 #' head(bot$coo)
 #' # $fac grouping factors
 #' head(bot$fac)
+#' # or if you know the name of the column of interest
+#' bot$type
 #' # table
 #' table(bot$fac)
 #' # an internal view of an Out object
 #' str(bot)
+#'
 #' # subsetting
-#' w <- subset(bot, type=='whisky') # if you dont like beer
-#' b <- subset(bot, type=='beer')   # if you don't like whisky
-#' w # an example of Momocs:::print.Out
-#' b # same thing for beers
-#' combine(b, w) # if, eventually, you want to mix them
+#' # see ?filter, ?select, and their 'see also' section for the
+#' # complete list of dplyr-like verbs implemented in Momocs
+#'
 #' length(bot) # the number of shapes
 #' names(bot) # access all individual names
 #' bot2 <- bot
@@ -80,6 +95,9 @@ Coo <- function(...) {
 #'
 #'\code{Coe} class is the 'parent' class of
 #' \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes.
+#'
+#' Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
+#' a detail of the design behind Momocs' classes.
 #'
 #' @param ... anything and, anyway, this function will simply returns a message.
 #'
@@ -110,6 +128,18 @@ Coo <- function(...) {
 #' # if you want to work directly on the matrix of coefficients
 #' bot.f$coe
 #'
+#' #getters
+#' bot.f[1]
+#' bot.f[1:5]
+#'
+#' #setters
+#' bot.f[1] <- 1:48
+#' bot.f[1]
+#'
+#' bot.f[1:5] <- matrix(1:48, nrow=5, ncol=48, byrow=TRUE)
+#' bot.f[1:5]
+#'
+#' # An illustration of Momocs desing. See also browseVignettes("Momocs")
 #' data(olea)
 #' op <- opoly(olea, 5)
 #' op
@@ -128,6 +158,57 @@ Coe <- function(...) {
     cat(" * Coe constructor does not exist alone. See ?Coe")
 }
 
+#' Validates Coo objects
+#' No validation for S3 objects, so this method is a (very tolerant) attempt at checking
+#' \link{Coo} objects, \link{Out}, \link{Opn} and \link{Ldk} objects.
+#'
+#' This methods checks \enumerate{
+#'    \item if coordinates do all pass \link{coo_check}
+#'    \item that \code{$fac}, if any, is a {data.frame}, with the same number of rows and coordinates.
+#'    Copies the name of \code{$coo} to th rownames
+#'    \item that \code{$ldk}, if any, has a the same number of landmarks, for all shapes
+#' } and finally returns the \code{Coo}. This method is used in \code{Coo} constructor, and before applying
+#' any method on thos object.
+#' @param Coo any Coo object
+#' @return a Coo object.
+#' @examples
+#' validate(bot)
+#' bot[12] <- NA
+#' validate(bot)
+#'
+#' validate(hearts)
+#' hearts$ldk[[4]] <- c(1, 2)
+#' validate(hearts)
+#' @export
+validate <- function(Coo){
+  UseMethod("validate")
+}
+
+#' @export
+validate.Coo <- function(Coo){
+  # checks coo
+  Coo <- coo_check(Coo)
+  n <- length(Coo$coo)
+  # checks fac
+  if (is.fac(Coo)) {
+    .check(is.data.frame(Coo$fac),
+           " $fac must be a data.frame")
+    .check(identical(nrow(Coo$fac), n),
+           " the number of rows in $fac must equal the number of shapes")
+    # rename rows of fac
+    rownames(Coo$fac) <- names(Coo)
+  }
+  # checks ldk if any
+  if (is.ldk(Coo)){
+    .check(identical(length(Coo$ldk), n),
+           " the number of $ldk must equal the number of shapes")
+    .check(length(unique(sapply(Coo$ldk, length)))==1,
+           " the number of $ldk defined must be the same accross shapes")
+  }
+  Coo
+}
+
+# str.* ----------------------
 # allows to maintain the traditionnal str() behaviour
 # actually useless but dont remember why/where
 #' @export
@@ -141,8 +222,7 @@ str.Coe <- function(object, ...) {
     ls.str(Coe)
 }
 
-# Coo can be indexing both to [ ] and [[ ]] and returns the
-# corresponding coordinate(s) We define some getters
+# getters ---------------
 
 #' @export
 "[.Coo" <- function(x, i, ...) {
@@ -158,51 +238,6 @@ str.Coe <- function(object, ...) {
     if (is.character(i)) {
       return(x$coo[[i]])
     }
-}
-
-
-#' @export
-length.Coo <- function(x) {
-    Coo <- x
-    return(length(Coo$coo))}
-
-#' @export
-length.Coe<- function(x) {
-  Coe <- x
-  return(nrow(Coe$coe))}
-
-#' @export
-dim.Coo <- function(x) {
-    return(length(Coo$coo))
-}
-
-#' @export
-dim.Coe <- function(x) {
-    return(dim(x$coe))
-}
-
-# names() on a Coo retrieves the names of the Coo$coo
-#' @export
-names.Coo <- function(x) {
-    Coo <- x
-    return(names(Coo$coo))
-}
-#' @export
-names.Coe <- function(x) {
-    Coe <- x
-    return(rownames(Coe$coe))
-}
-
-# which can in return may be named using names(Coo) <-
-#' @export
-"names<-.Coo" <- function(x, value) {
-    names(x$coo) <- value
-    return(x)
-}
-#' @export
-"names<-.Coe" <- function(x, value) {
-    rownames(x$coe) <- value
-    return(x)
 }
 
 #' @export
@@ -221,22 +256,105 @@ names.Coe <- function(x) {
   }
 }
 
+# setters -------------------
+
+#' @export
+"[<-.Coo" <- function(x, i, ..., value) {
+  if (is.integer(i)) {
+    x$coo[i] <- value
+    return(x)
+  }
+  if (is.numeric(i)) {
+    x$coo[[i]] <- value
+    return(x)
+  }
+  if (is.character(i)) {
+    x$coo[[i]] <- value
+    return(x)
+  }
+}
+
+#' @export
+"[<-.Coe" <- function(x, i, ..., value) {
+  if (is.integer(i)) {
+    x$coe[i, ] <- value
+    return(x)
+  }
+  if (is.numeric(i)) {
+    x$coe[i, ] <- value
+    return(x)
+  }
+  if (is.character(i)) {
+    x$coo[i, ] <- value
+    return(x)
+  }
+}
+
+
+# length.* --------------------
+
+#' @export
+length.Coo <- function(x) {
+    Coo <- x
+    return(length(Coo$coo))}
+
+#' @export
+length.Coe<- function(x) {
+  Coe <- x
+  return(nrow(Coe$coe))}
+
+# dim.* ---------------------
+#' @export
+dim.Coo <- function(x) {
+    return(length(Coo$coo))
+}
+
+#' @export
+dim.Coe <- function(x) {
+    return(dim(x$coe))
+}
+
+# names.* -------------------
+#' @export
+names.Coo <- function(x) {
+    Coo <- x
+    return(names(Coo$coo))
+}
+#' @export
+names.Coe <- function(x) {
+    Coe <- x
+    return(rownames(Coe$coe))
+}
+
+# names<-.* -----------------
+#' @export
+"names<-.Coo" <- function(x, value) {
+    names(x$coo) <- value
+    return(x)
+}
+#' @export
+"names<-.Coe" <- function(x, value) {
+    rownames(x$coe) <- value
+    return(x)
+}
+
+# $.* -----------------------
 
 # $ can directly access to $fac colnames
 #' @export
-`$.Coo` <- 
-  function (x, name) 
+`$.Coo` <-
+  function (x, name)
   {
     a <- x[[name]]
-    if (!is.null(a)) 
+    if (!is.null(a))
       return(a)
     a <- x$fac[[name]]
-    if (!is.null(a)) 
+    if (!is.null(a))
       return(a)
     a <- x[[name, exact = FALSE]]
     if (!is.null(a) && getOption("warnPartialMatchDollar", default = FALSE)) {
       names <- names(x)
-      warning(gettextf("Partial match of '%s' to '%s' in data frame", 
+      warning(gettextf("Partial match of '%s' to '%s' in data frame",
                        name, names[pmatch(name, names)]))
     }
     return(a)
@@ -248,8 +366,11 @@ names.Coe <- function(x) {
 #' @export
 `$.PCA` <- `$.Coo`
 
-# utils ######
+# is.fac --------------------
 is.fac <- function(x) length(x$fac) > 0
+
+# is.ldk --------------------
+is.ldk <- function(x) length(x$ldk) > 0
 
 
 
