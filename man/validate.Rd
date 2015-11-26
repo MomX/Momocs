@@ -24,6 +24,7 @@ This methods checks \enumerate{
 any method on thos object.
 }
 \examples{
+\dontrun{
 validate(bot)
 bot[12] <- NA
 validate(bot)
@@ -31,5 +32,6 @@ validate(bot)
 validate(hearts)
 hearts$ldk[[4]] <- c(1, 2)
 validate(hearts)
+}
 }
 

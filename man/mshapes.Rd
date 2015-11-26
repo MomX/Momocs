@@ -2,18 +2,39 @@
 % Please edit documentation in R/mult-mshapes.R
 \name{mshapes}
 \alias{mshapes}
+\alias{mshapes.Ldk}
+\alias{mshapes.LdkCoe}
+\alias{mshapes.OpnCoe}
+\alias{mshapes.OutCoe}
+\alias{mshapes.PCA}
+\alias{mshapes.array}
+\alias{mshapes.list}
 \title{Mean shape calculation for Coo, Coe, etc.}
 \usage{
 mshapes(x, ...)
+
+\method{mshapes}{list}(x, FUN = mean, ...)
+
+\method{mshapes}{array}(x, FUN = mean, ...)
+
+\method{mshapes}{Ldk}(x, FUN = mean, ...)
+
+\method{mshapes}{OutCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
+
+\method{mshapes}{OpnCoe}(x, fac, FUN = mean, nb.pts = 120, ...)
+
+\method{mshapes}{LdkCoe}(x, fac, FUN = mean, ...)
+
+\method{mshapes}{PCA}(x, fac, ...)
 }
 \arguments{
 \item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe or PCA object}
 
 \item{...}{useless here.}
 
-\item{fac}{factor from the $fac slot (only for Coe objects). See examples below.}
-
 \item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
+
+\item{fac}{factor from the $fac slot (only for Coe objects). See examples below.}
 
 \item{nb.pts}{numeric the number of points for calculated shapes (only Coe objects)}
 }
@@ -67,6 +88,5 @@ ms <- mshapes(wp, 1)
 ms$Coe
 panel(Ldk(ms$shp), names=TRUE) #etc.
 panel(ms$Coe) # equivalent (except the $fac slot)
-
 }
 

@@ -52,18 +52,20 @@
 #' ms$Coe
 #' panel(Ldk(ms$shp), names=TRUE) #etc.
 #' panel(ms$Coe) # equivalent (except the $fac slot)
-#'
+#' @rdname mshapes
 #' @export
 mshapes <- function(x, ...) {
   UseMethod("mshapes")
 }
 
+#' @rdname mshapes
 #' @export
 mshapes.list <- function(x, FUN=mean, ...) {
   A <- ldk_check(x)
   return(apply(A, 1:2, FUN, na.rm = TRUE))
 }
 
+#' @rdname mshapes
 #' @export
 mshapes.array <- function(x, FUN=mean, ...) {
   if (length(dim(x)) == 3) {
@@ -72,6 +74,7 @@ mshapes.array <- function(x, FUN=mean, ...) {
   }
 }
 
+#' @rdname mshapes
 #' @export
 mshapes.Ldk <- function(x, FUN=mean, ...) {
   Ldk <- x
@@ -79,6 +82,7 @@ mshapes.Ldk <- function(x, FUN=mean, ...) {
   return(apply(A, 1:2, mean, na.rm = TRUE))
 }
 
+#' @rdname mshapes
 #' @export
 mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     OutCoe <- x
@@ -113,6 +117,7 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     return(list(Coe = Coe2, shp = shp))
 }
 
+#' @rdname mshapes
 #' @export
 mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     OpnCoe <- x
@@ -156,6 +161,7 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     return(list(Coe = Coe2, shp = shp))
 }
 
+#' @rdname mshapes
 #' @export
 mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
     LdkCoe <- x
@@ -176,6 +182,7 @@ mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
     return(list(Coe = Coe2, shp = shp))
 }
 
+#' @rdname mshapes
 #' @export
 mshapes.PCA <- function(x, fac, ...){
   # cehck for single individuals within a group..
