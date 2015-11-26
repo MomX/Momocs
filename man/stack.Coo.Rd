@@ -18,8 +18,8 @@
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
   ldk = TRUE, ldk.pch = 3, ldk.col = "#333333", ldk.cex = 0.5,
   ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-  ldk_chull = FALSE, ldk_labels = FALSE, cur.pch = ".", xy.axis = TRUE,
-  title = substitute(x), ...)
+  ldk_chull = FALSE, ldk_labels = FALSE, cur = TRUE, cur.pch = ".",
+  xy.axis = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{The \code{Coo} object to plot.}
@@ -36,29 +36,29 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{coo_sample}{if not NULL the number of point per shape to display (to plot quickly)}
 
-\item{points}{logical whether to draw or not points}
+\item{points}{\code{logical} whether to draw or not points}
 
-\item{first.point}{logical whether to draw or not the first point}
+\item{first.point}{\code{logical} whether to draw or not the first point}
 
-\item{centroid}{logical whether to draw or not the centroid}
+\item{centroid}{\code{logical} whether to draw or not the centroid}
 
 \item{ldk}{\code{logical}. Whether to display landmarks (if any).}
 
-\item{ldk.pch}{A \code{pch} for these landmarks}
+\item{ldk.pch}{\code{pch} for these landmarks}
 
-\item{ldk.col}{A color for these landmarks}
+\item{ldk.col}{color for these landmarks}
 
-\item{ldk.cex}{A \code{cex} fro these landmarks}
+\item{ldk.cex}{\code{cex} fro these landmarks}
 
-\item{ldk_links}{logical whether to draw links (of the mean shape)}
+\item{ldk_links}{\code{logical} whether to draw links (of the mean shape)}
 
-\item{ldk_confell}{logical whether to draw conf ellipses}
+\item{ldk_confell}{\code{logical} whether to draw conf ellipses}
 
-\item{ldk_contour}{logical whether to draw contour lines}
+\item{ldk_contour}{\code{logical} whether to draw contour lines}
 
-\item{ldk_chull}{logical whether to draw convex hull}
+\item{ldk_chull}{\code{logical} whether to draw convex hull}
 
-\item{ldk_labels}{logical whether to draw landmark labels}
+\item{ldk_labels}{\code{logical} whether to draw landmark labels}
 
 \item{cur.pch}{\code{pch} for semi landmarks}
 
@@ -69,6 +69,8 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{...}{further arguments to be passed to \link{coo_plot}}
 
 \item{nb.pts}{the number of points to use for the shape reconstruction}
+
+\item{cur}{\code{logical} whether to draw curves, based on semi landmarks}
 }
 \description{
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})

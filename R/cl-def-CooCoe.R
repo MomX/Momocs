@@ -426,7 +426,7 @@ names.Coe <- function(x) {
 is.fac <- function(x) length(x$fac) > 0
 is.ldk <- function(x) length(x$ldk) > 0
 is.cur <- function(x) length(x$cur) > 0
-
+is.links <- function(x) is.matrix(x$links)
 
 
 

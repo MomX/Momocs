@@ -52,7 +52,7 @@ $fac can be supllied, or even a character of the same length of the Coo}
 
 \item{cex.names}{a cex for the names}
 
-\item{points}{logical (for Ldk) whether to draw points}
+\item{points}{\code{logical} (for Ldk) whether to draw points}
 
 \item{points.pch}{(for Ldk) and a pch for these points}
 

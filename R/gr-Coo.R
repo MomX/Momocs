@@ -60,18 +60,19 @@ plot.Coo <- function(x, id, ...) {
 #' @param fac a factor within the $fac slot for colors
 #' @param palette a color palette to use when fac is provided
 #' @param coo_sample if not NULL the number of point per shape to display (to plot quickly)
-#' @param points logical whether to draw or not points
-#' @param first.point logical whether to draw or not the first point
-#' @param centroid logical whether to draw or not the centroid
+#' @param points \code{logical} whether to draw or not points
+#' @param first.point \code{logical} whether to draw or not the first point
+#' @param centroid \code{logical} whether to draw or not the centroid
 #' @param ldk \code{logical}. Whether to display landmarks (if any).
-#' @param ldk.pch A \code{pch} for these landmarks
-#' @param ldk.col A color for these landmarks
-#' @param ldk.cex A \code{cex} fro these landmarks
-#' @param ldk_links logical whether to draw links (of the mean shape)
-#' @param ldk_confell logical whether to draw conf ellipses
-#' @param ldk_contour logical whether to draw contour lines
-#' @param ldk_chull logical whether to draw convex hull
-#' @param ldk_labels logical whether to draw landmark labels
+#' @param ldk.pch \code{pch} for these landmarks
+#' @param ldk.col color for these landmarks
+#' @param ldk.cex \code{cex} fro these landmarks
+#' @param ldk_links \code{logical} whether to draw links (of the mean shape)
+#' @param ldk_confell \code{logical} whether to draw conf ellipses
+#' @param ldk_contour \code{logical} whether to draw contour lines
+#' @param ldk_chull \code{logical} whether to draw convex hull
+#' @param ldk_labels \code{logical} whether to draw landmark labels
+#' @param cur \code{logical} whether to draw curves, based on semi landmarks
 #' @param cur.pch \code{pch} for semi landmarks
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
@@ -176,7 +177,7 @@ stack.OutCoe <- function(x, nb.pts=120, ...){
 stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
                       ldk = TRUE, ldk.pch = 3, ldk.col = "#333333", ldk.cex = 0.5,
                       ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-                      ldk_chull = FALSE, ldk_labels = FALSE, cur.pch=".", xy.axis = TRUE, title=substitute(x), ...) {
+                      ldk_chull = FALSE, ldk_labels = FALSE, cur=TRUE, cur.pch=".", xy.axis = TRUE, title=substitute(x), ...) {
   Coo <- x
   if (missing(cols)) {
     cols <- rep(NA, length(Coo))
@@ -200,6 +201,11 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   if (xy.axis) {
     abline(h = 0, v = 0, col = "grey80", lty = 2)
   }
+  if (cur | (is.cur(Coo) & missing(cur))){
+    for (i in 1:length(Coo)) {
+      lapply(Coo$cur[[i]], lines, col=col_alpha("#000000", 0.95))
+    }
+  }
   for (i in 1:length(Coo)) {
     points(Coo$coo[[i]], pch = ldk.pch, col = ldk.col, cex = ldk.cex)
   }
@@ -222,7 +228,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
     ldk_chull(A)
   }
   if (ldk_links | missing(ldk_links))  {
-    if (is.matrix(Coo$links))
+    if (is.links(Coo))
       ldk_links(mshapes(A), Coo$links, col="grey90")
   }
   if (ldk_labels) {
@@ -270,7 +276,7 @@ stack2 <- function(Coo){
 #' @param names whether to plot names or not. If TRUE uses shape names, a column name or number from
 #'  $fac can be supllied, or even a character of the same length of the Coo
 #' @param cex.names a cex for the names
-#' @param points logical (for Ldk) whether to draw points
+#' @param points \code{logical} (for Ldk) whether to draw points
 #' @param points.pch (for Ldk) and a pch for these points
 #' @param points.cex (for Ldk) and a cex for these points
 #' @param points.col (for Ldk) and a col  for these points
