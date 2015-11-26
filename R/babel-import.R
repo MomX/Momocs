@@ -1,8 +1,4 @@
-# Functions and utilities to import data in Momocs,
-# particularly from raw images,
-
-# Momocs natives ###############################################################
-
+# txt -----------------------
 #' Import coordinates from a .txt file
 #'
 #' A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
@@ -17,8 +13,7 @@
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
 #' \link{Out}, \link{Opn} and \link{Ldk}.
-#' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
-#' See also Momocs' vignettes for data import.
+#' @seealso babel functions.
 #' @export
 import_txt <- function(txt.paths = NULL, ...) {
   if (is.null(txt.paths)) {
@@ -44,6 +39,7 @@ import_txt <- function(txt.paths = NULL, ...) {
   return(res)
 }
 
+# outlines ------------------
 #' Extract outlines coordinates from an image silhouette
 #'
 #' Provided with an image 'mask' (i.e. black pixels on a white background),
@@ -61,8 +57,7 @@ import_txt <- function(txt.paths = NULL, ...) {
 #' analysis techniques for morphometrics. In \emph{Proceedings of the Michigan Morphometrics Workshop}. Special Publication No. 2 (pp. 47-60). University of Michigan Museum of Zoology: Ann Arbor.
 #' \item and translated in R by: Claude, J. (2008). \emph{Morphometrics with R}. (p. 316). Springer.
 #' }
-#' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
-#' See also Momocs' vignettes for data import.
+#' @seealso babel functions.
 #' @export
 import_Conte <- function(img, x) {
   while (abs(img[x[1], x[2]] - img[x[1] - 1, x[2]]) < 0.1) {
@@ -156,6 +151,7 @@ import_Conte <- function(img, x) {
 #' @seealso \link{import_jpg}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
 #' @return a matrix of (x; y) coordinates that can be passed to Out
+#' @seealso babel functions.
 #' @export
 import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NULL,
                         threshold = 0.5) {
@@ -249,8 +245,6 @@ import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
 #'
 #' If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
 #' file in the folder taht contains all your files. All the outlines should be imported then.
-#' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
-#' See also Momocs' vignettes for data import.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 #' @examples
 #' \dontrun{
@@ -263,6 +257,7 @@ import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
 #' # 'automatic' version
 #' coo <- import_jpg()
 #' }
+#' @family babel functions
 #' @export
 import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
                        fun.notcentered = NULL, threshold = 0.5, verbose = TRUE) {
@@ -304,23 +299,24 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
   return(res)
 }
 
-# StereoMorph ##################################################################
+# StereoMorph ---------------
 #' Import files creates by StereoMorph into Momocs
-#' 
+#'
 #' Helps to read \code{.txt} files created by StereoMorph into (x; y) coordinates
 #' or Momocs objects. Can be applied to 'curves' or 'ldk' text files.
 #' @param path toward a single file or a folder containing \code{.txt} files produced by StereoMorph
 #' @param names to feed \link{lf_structure}
-#' 
+#'
 #' @details *1 functions import a single \code{.txt} file. Their counterpart (no '1')
 #' work when path indicates the folder, i.e. 'curves' or 'ldk'. They then return a list
 #' of \link{Opn} or \link{Ldk} objects, respectively. Please do not hesitate to contact me
 #' should you have a particular case or need something.
 #' @rdname import_StereoMorph
+#' @family babel functions
 #' @export
 import_StereoMorph_curve1 <- function(path){
   # we split the loci contained in the first column
-  df <- read.table(path, header=FALSE, stringsAsFactors = FALSE) %>% 
+  df <- read.table(path, header=FALSE, stringsAsFactors = FALSE) %>%
     select(locus=1, x=2, y=3) %>%
     mutate(name=substr(locus, 1, nchar(locus)-4)) %>%
     select(name, x, y)
@@ -328,6 +324,7 @@ import_StereoMorph_curve1 <- function(path){
 }
 
 #' @rdname import_StereoMorph
+#' @family babel functions
 #' @export
 import_StereoMorph_curve <- function(path, names){
   # we extract filenames and import them
@@ -349,7 +346,8 @@ import_StereoMorph_curve <- function(path, names){
 #' @export
 import_StereoMorph_ldk1 <- function(path){
   # a cousin of import_txt
-  read.table(path, header=FALSE, row.names=1, col.names=c("l", "x", "y"), stringsAsFactors = FALSE)
+  read.table(path, header=FALSE,
+             row.names=1, col.names=c("l", "x", "y"), stringsAsFactors = FALSE)
 }
 
 #' @rdname import_StereoMorph
@@ -368,77 +366,113 @@ import_StereoMorph_ldk <- function(path, names){
   return(res)
 }
 
-# Given a list with individuals containing loci,
-# returns a list of loci that contains individuals.
-# There must be a more elegant way to do it
-.rollup_list <- function(l){
-  locus_names <- sapply(l, names) %>% as.character() %>% unique()
-  res <- vector("list", length(locus_names))
-  names(res) <- locus_names
-  for (i in seq_along(l)){
-    for (j in seq_along(l[[i]])){
-      picked <- names(l[[i]][j])
-      res[[picked]] <- append(res[[picked]], l[[i]][j])
-      names(res[[picked]])[length(res[[picked]])] <- names(l)[[i]]
+# tps -----------------------
+#' Imports a tps file
+#'
+#' And returns a list of coordinates, curves, scale
+#' @param tps lines, typically from \link{readLines}, describing a single shape in tps-like format
+#' @param curves \code{logical} whether to read curves, if any
+#' @return a list with components:
+#' \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
+#' @family babel functions
+#' @export
+import_tps <- function(tps.path, curves=TRUE){
+  # we import the tps, line by line
+  tps <- readLines(tps.path)
+  # we remove empty lines, if any
+  tps <- tps[nchar(tps) != 0]
+  # we detect the position of 'LM'
+  LM.pos <- grep("LM", tps)
+  # we extract shape names, if IMAGE is present, use it; else ID, else we create them
+  if (length(grep("IMAGE", tps))>0){
+    shp.names <- .trim.ext(gsub("IMAGE=", "", grep("IMAGE", tps, value=TRUE)))
+  } else {
+    if(length(grep("ID", tps))>0){
+      shp.names <- gsub("ID=", "",    grep("ID", tps, value=TRUE))
+    } else {
+      shp.names <-  paste0("id", 1:length(LM.pos))
     }
   }
-  return(res)
+  # we prepare the blocks of shapes
+  shp.pos <- data.frame(start = LM.pos, end = c(LM.pos[-1]-1, length(tps)))
+  res <- vector("list", nrow(shp.pos))
+  for (i in seq_along(res)){
+    res[[i]] <- tps[shp.pos$start[i]:shp.pos$end[i]] %>% tps2coo(curves=curves)
+  }
+  names(res) <- shp.names
+  # if only landmarks, we return a list of matrices
+  classes <- sapply(res, class) %>% unique()
+  if (!curves)
+    return(res)
+  # curves=FALSE case
+  # also we check a bit for case where curves=TRUE but some curves are missing
+  classes <- sapply(res, class)
+  # in such a case, lists are expected to be returned by tps2coo
+  if (any(classes!="list")){
+    stop("these shapes do not have curves:", shp.names[which(classes != "list")])
+  }
+  return(.rollup_list(res))
 }
 
-#' Binds .jpg outlines and .txt landmarks on them
-#' 
-#' Given a list of files (lf) that includes matching filenames with .jpg (black masks)
-#' and .txt (landmark positions on them as .txt), returns an Out with $ldk defined.
-#' Typically be useful if you use ImageJ to define landmarks on your outlines.
-#' @param lf a list of filenames
-#' @note Not optimized (images are read twice). Please do not hesitate to contact me
-#' should you have a particular case or need something.
+#' Reads a single tps-like shape as lines
+#'
+#' Internal function used in \link{tps_import} that may be useful for data import. When provided
+#' with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
+#' coordinates, curves, etc.
+#' @param tps lines, typically from \link{readLines}, describing a single shape in tps-like format
+#' @param curves \code{logical} whether to read curves, if any
+#' @return a list with components:
+#' \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
+#' @family babel functions
+#' @examples
+#' \dontrun{
+#' # let's imagien this command works fine
+#' coo <- import_tps(...)
+#' # then you can
+#' Ldk(coo)
+#' # if curves are present this is strictly equivalent
+#' Ldk(coo=coo$coo, cur=coo$cur)
+#' }
 #' @export
-tie_jpg_txt <- function(lf){
-  tbl <- table(.trim.ext(.trim.path(lf)))
-  if ((length(unique(tbl)) != 1) | (unique(tbl) !=2))
-    stop("* Mismatches in filenames", which(tbl!=2))
-  
-  # we retrieve the list of .txt et.jpg
-  out.lf <- lf[grep(".jpg", lf)]
-  ldk.lf <- lf[grep(".txt", lf)]
-  
-  # we extract outline coordinates
-  out.xy <- import_jpg(out.lf)
-  
-  # and landmark coordinates
-  ldk.xy <- import_txt(ldk.lf)
-  
-  # below, we bind together landmarks and outlines but we need to 'invert' y-coordinates
-  
-  # here we extract the nb of pixels in y (nrow)
-  nrs <- numeric()
-  for (i in seq_along(out.lf)){
-    nrs[i] <- nrow(jpeg::readJPEG(out.lf[i]))
+tps2coo <- function(tps, curves=TRUE){
+  scale  <- NULL
+  cur <- NULL
+  # we read the nb of landmarks
+  coo.nb <- as.numeric(gsub("LM=", "", tps[1]))
+  # we read "SCALE=", if any
+  scale  <- as.numeric(gsub("SCALE=", "", grep("SCALE=", tps, value=TRUE)))
+  # removes the first line "LM=" and, if any, "IMAGE=", "ID=" and "SCALE=" lines
+  rm.ids <- c(1, grep("IMAGE|ID|SCALE", tps))
+  tps <- tps[-rm.ids]
+  # this function turns lines of coordinates into a shp
+  lines2shp <- function(l) {
+    l %>% strsplit(" ") %>% unlist() %>% as.numeric() %>%
+      matrix(nrow=length(l), byrow=TRUE)
   }
-  
-  # here, the loop that 'inverts'
-  res.pos <- list()
-  for (i in seq_along(out.xy)){
-    out1 <- out.xy[[i]]
-    ldk1 <- ldk.xy[[i]]
-    ldk1[, 2] <- round(nrs[i] - ldk1[, 2])
-    res.pos[[i]] <- edm_nearest(ldk1, out1, TRUE)$pos
+  # here we extract coos and check a bit
+  coo <- tps[1:coo.nb] %>% lines2shp()
+  .check(nrow(coo)==coo.nb,
+         "the number of landmarks seems to differ from LM=")
+  # no curve case
+  if (!curves)
+    return(list(coo=coo, cur=cur, scale=scale))
+  # curve case
+  # we check that curves are really present, if not we return coo
+  if (length(grep("CURVE", tps))==0)
+    return(list(coo=coo, cur=cur, scale=scale))
+  # we get rid of landmarks and "CURVES" lines
+  tps <- tps[-c(1:coo.nb, coo.nb+1)]
+  # we extract POINTS ids and deduce curves ids
+  cur.start <- grep("POINTS", tps)+1
+  cur.end   <- c(cur.start[-1]-2, length(tps))
+  # we create a list to store curves coordinates
+  cur <- vector("list", length(cur.start))
+  for (i in seq_along(cur.start)){
+    cur[[i]] <- tps[cur.start[i]:cur.end[i]] %>% lines2shp
   }
-  
-  # we now create a Out with all information
-  Out <- Out(out.xy, ldk = res.pos)
-  
-  # we align it and then save it
-  # Out <- coo_slide(Out, ldk=1) 
-  # Out <- coo_bookstein(Out)
-  return(Out)
+  return(list(coo=coo, cur=cur, scale=scale))
 }
-
-# Other morphometric formats ###################################################
-
-##### Import/Export morphometrics formats More or less
-##### experimental so far.
+# other formats -------------
 
 #' Convert (x; y) coordinates to chaincoded coordinates
 #'
@@ -451,6 +485,7 @@ tie_jpg_txt <- function(lf){
 #' @examples
 #' data(shapes)
 #' pix2chc(shapes[1])
+#' @family babel functions
 #' @export
 pix2chc <- function(coo) {
   if (is.list(coo)) {
@@ -487,6 +522,7 @@ pix2chc <- function(coo) {
 #' data(shapes)
 #' x <- pix2chc(shapes[1])
 #' coo_plot(chc2pix(x))
+#' @family babel functions
 #' @export
 chc2pix <- function(chc) {
   if (!all(chc %in% 0:7)) {
@@ -538,6 +574,7 @@ chc2pix <- function(chc) {
 #' # if the file above was called 'coded.chc' in the 'data' folder:
 #' chc2Out("data/coded.chc", skip=4)
 #' }
+#' @family babel functions
 #' @export
 chc2Out <- function(chc, skip, names){
   # read the file and break spaces
@@ -572,6 +609,7 @@ chc2Out <- function(chc, skip, names){
 #' @note I'm not very familiar to other morphometric formats.
 #' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 #' please let met know!
+#' @family babel functions
 #' @export
 nef2Coe <- function(nef.path) {
   # change nef to coe one day
@@ -596,45 +634,47 @@ nef2Coe <- function(nef.path) {
   return(res)
 }
 
-#' From .tps to Coo objects
-#'
-#' Useful to convert .tps files into Coo objects.
-#' It returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
-#' @param tps.path the path to the .tps file
-#' @param sep the separator between data
-#' @note I'm not very familiar to other morphometric formats.
-#' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
-#' please let met know!
-#' @export
-tps2Coo <- function(tps.path, sep = " ") {
-  # we read all lines of the file
-  tps <- readLines(tps.path)
-  # we detect the beginning of every individual
-  tps_pos <- cbind(grep(pattern = "lm=", x = tps, ignore.case = TRUE),
-                   c(grep(pattern = "lm=", x = tps, ignore.case = TRUE)[-1] -
-                       1, length(tps)))
-  # we prepare a vector and a list to host the data
-  img.names <- character()
-  coo_list <- list()
-  # and we loop over individuals
-  for (i in 1:nrow(tps_pos)) {
-    # first we pick one of the individuals
-    tps_i <- tps[tps_pos[i, 1]:tps_pos[i, 2]]
-    # and we grab and clean the image name information
-    img.i <- tps_i[grep("image", tps_i, ignore.case = TRUE)]
-    img.i <- gsub("image=", "", img.i, ignore.case = TRUE)
-    img.names[i] <- gsub(".jpg", "", img.i, ignore.case = TRUE)
-    # here we exclude every line that start with a letter
-    coo_i <- tps_i[-grep(pattern = "[[:alpha:]]", tps_i)]
-    # and convert it as a matrix of coordinates
-    coo_i <- unlist(strsplit(coo_i, sep))
-    coo_list[[i]] <- matrix(as.numeric(coo_i), ncol = 2,
-                            byrow = TRUE)
-  }
-  coo_list <- lapply(coo_list, function(x) colnames())
-  names(coo_list) <- img.names
-  return(coo_list)
-}
+# deprecated see import_tps
+# #' From .tps to Coo objects
+# #'
+# #' Useful to convert .tps files into Coo objects.
+# #' It returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
+# #' @param tps.path the path to the .tps file
+# #' @param sep the separator between data
+# #' @note I'm not very familiar to other morphometric formats.
+# #' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
+# #' please let met know!
+# #' @family babel functions
+# #' @export
+# tps2Coo <- function(tps.path, sep = " ") {
+#   # we read all lines of the file
+#   tps <- readLines(tps.path)
+#   # we detect the beginning of every individual
+#   tps_pos <- cbind(grep(pattern = "lm=", x = tps, ignore.case = TRUE),
+#                    c(grep(pattern = "lm=", x = tps, ignore.case = TRUE)[-1] -
+#                        1, length(tps)))
+#   # we prepare a vector and a list to host the data
+#   img.names <- character()
+#   coo_list <- list()
+#   # and we loop over individuals
+#   for (i in 1:nrow(tps_pos)) {
+#     # first we pick one of the individuals
+#     tps_i <- tps[tps_pos[i, 1]:tps_pos[i, 2]]
+#     # and we grab and clean the image name information
+#     img.i <- tps_i[grep("image", tps_i, ignore.case = TRUE)]
+#     img.i <- gsub("image=", "", img.i, ignore.case = TRUE)
+#     img.names[i] <- gsub(".jpg", "", img.i, ignore.case = TRUE)
+#     # here we exclude every line that start with a letter
+#     coo_i <- tps_i[-grep(pattern = "[[:alpha:]]", tps_i)]
+#     # and convert it as a matrix of coordinates
+#     coo_i <- unlist(strsplit(coo_i, sep))
+#     coo_list[[i]] <- matrix(as.numeric(coo_i), ncol = 2,
+#                             byrow = TRUE)
+#   }
+#   coo_list <- lapply(coo_list, function(x) colnames())
+#   names(coo_list) <- img.names
+#   return(coo_list)
+# }
 
 #' From .nts to Coo objects
 #'
@@ -654,6 +694,7 @@ tps2Coo <- function(tps.path, sep = " ") {
 #' # coo_list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
 #' # fac       <- data.frame(fac=factor(substr(names(coo_list), 1, 2)))
 #' # wings <- Ldk(coo_list, fac=fac)
+#' @family babel functions
 #' @export
 ntsrow2Coo <- function(nts.path, sep = "\t") {
   # we read all lines and remove the first one
@@ -706,7 +747,7 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
   return(coo_list)
 }
 
-# Helpers ######################################################################
+# helpers ######################################################################
 
 #' Extract structure from filenames
 #'
@@ -718,7 +759,8 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
 #' from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
 #'
 #' The number of groups must be consistent accross filenames.
-#' @param lf a list (its names are used) of a list of filenames, as characters, typically such as
+#' @param lf a list (its names are used, except if it is a list from \link{tps_import}
+#' in this case \code{names(lf$coo)} is used) of a list of filenames, as characters, typically such as
 #' those obtained with \link{list.files}. Alternatively, a path to a folder
 #' containing the files. Actually, if lf is of length 1 (a single character),
 #' the function assumes it is a path and do a \link{list.files} on it.
@@ -739,9 +781,17 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
 #' @export
 lf_structure <- function(lf, names = character(), split = "_",
                          trim.extension = FALSE) {
-  if (is.list(lf)) lf <- names(lf)
+  # after tps_import case
+  if (is.list(lf)) {
+    # we handle the import_tps case
+    if (identical(names(lf), c("coo", "cur", "scale")))
+      lf <- names(lf$coo)
+    else
+      lf <- names(lf)
+  }
   # allow to pass many thing, including $fac columns
   if (!is.character(lf)) lf <- as.character(lf)
+  # eg a path
   if (length(lf) == 1) {
     lf <- list.files(lf, full.names = FALSE)
   }
@@ -777,7 +827,58 @@ lf_structure <- function(lf, names = character(), split = "_",
   return(fac)
 }
 
+#' Binds .jpg outlines and .txt landmarks on them
+#'
+#' Given a list of files (lf) that includes matching filenames with .jpg (black masks)
+#' and .txt (landmark positions on them as .txt), returns an Out with $ldk defined.
+#' Typically be useful if you use ImageJ to define landmarks on your outlines.
+#' @param lf a list of filenames
+#' @note Not optimized (images are read twice). Please do not hesitate to contact me
+#' should you have a particular case or need something.
+#' @family babel functions
+#' @export
+tie_jpg_txt <- function(lf){
+  tbl <- table(.trim.ext(.trim.path(lf)))
+  if ((length(unique(tbl)) != 1) | (unique(tbl) !=2))
+    stop("* Mismatches in filenames", which(tbl!=2))
 
+  # we retrieve the list of .txt et.jpg
+  out.lf <- lf[grep(".jpg", lf)]
+  ldk.lf <- lf[grep(".txt", lf)]
+
+  # we extract outline coordinates
+  out.xy <- import_jpg(out.lf)
+
+  # and landmark coordinates
+  ldk.xy <- import_txt(ldk.lf)
+
+  # below, we bind together landmarks and outlines but we need to 'invert' y-coordinates
+
+  # here we extract the nb of pixels in y (nrow)
+  nrs <- numeric()
+  for (i in seq_along(out.lf)){
+    nrs[i] <- nrow(jpeg::readJPEG(out.lf[i]))
+  }
+
+  # here, the loop that 'inverts'
+  res.pos <- list()
+  for (i in seq_along(out.xy)){
+    out1 <- out.xy[[i]]
+    ldk1 <- ldk.xy[[i]]
+    ldk1[, 2] <- round(nrs[i] - ldk1[, 2])
+    res.pos[[i]] <- edm_nearest(ldk1, out1, TRUE)$pos
+  }
+
+  # we now create a Out with all information
+  Out <- Out(out.xy, ldk = res.pos)
+
+  # we align it and then save it
+  # Out <- coo_slide(Out, ldk=1)
+  # Out <- coo_bookstein(Out)
+  return(Out)
+}
+
+# .jpg plotters -------------
 #' Plots a .jpg image
 #'
 #' A very simple image plotter. If provided with a path,
@@ -850,8 +951,26 @@ img_plot0 <- function(img) {
   box()
 }
 
+# misc ----------------------
+# Given a list with individuals containing loci,
+# returns a list of loci that contains individuals.
+# There must be a more elegant way to do it
+.rollup_list <- function(l){
+  locus_names <- sapply(l, names) %>% as.character() %>% unique()
+  res <- vector("list", length(locus_names))
+  names(res) <- locus_names
+  for (i in seq_along(l)){
+    for (j in seq_along(l[[i]])){
+      picked <- names(l[[i]][j])
+      res[[picked]] <- append(res[[picked]], l[[i]][j])
+      names(res[[picked]])[length(res[[picked]])] <- names(l)[[i]]
+    }
+  }
+  return(res)
+}
 
-# Fridge -------
+
+# fridge but todo --------------------
 
 # splines <- function(coo, method='natural', deriv=2){ coo <-
 # coo_check(coo) z <- coo_perimcum(coo) fx <- splinefun(z,
