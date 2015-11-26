@@ -16,7 +16,7 @@ a list with components:
 \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
 }
 \description{
-Internal function used in \link{tps_import} that may be useful for data import. When provided
+Internal function used in \link{import_tps} that may be useful for data import. When provided
 with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
 coordinates, curves, etc.
 }

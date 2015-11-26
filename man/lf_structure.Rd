@@ -7,7 +7,7 @@
 lf_structure(lf, names = character(), split = "_", trim.extension = FALSE)
 }
 \arguments{
-\item{lf}{a list (its names are used, except if it is a list from \link{tps_import}
+\item{lf}{a list (its names are used, except if it is a list from \link{import_tps}
 in this case \code{names(lf$coo)} is used) of a list of filenames, as characters, typically such as
 those obtained with \link{list.files}. Alternatively, a path to a folder
 containing the files. Actually, if lf is of length 1 (a single character),

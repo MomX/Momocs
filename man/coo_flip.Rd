@@ -30,6 +30,6 @@ shapes2 <- shapes
 shapes$coo <- lapply(shapes2$coo, coo_flipx)
 }
 \seealso{
-Other trasnforming functions: \code{\link{coo_shearx}}
+Other transforming functions: \code{\link{coo_shearx}}
 }
 

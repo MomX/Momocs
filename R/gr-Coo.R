@@ -52,7 +52,6 @@ plot.Coo <- function(x, id, ...) {
 #'
 #' Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
 #' object.
-# @method stack Coo
 #' @param x The \code{Coo} object to plot.
 #' @param cols A \code{vector} of colors for drawing the outlines.
 #' Either a single value or of length exactly equals to the number of coordinates.
@@ -73,6 +72,7 @@ plot.Coo <- function(x, id, ...) {
 #' @param ldk_contour logical whether to draw contour lines
 #' @param ldk_chull logical whether to draw convex hull
 #' @param ldk_labels logical whether to draw landmark labels
+#' @param cur.pch \code{pch} for semi landmarks
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param nb.pts the number of points to use for the shape reconstruction
@@ -109,6 +109,7 @@ stack.Coo <-
            ldk.cex = 0.5, ldk_links = FALSE,
            ldk_confell = FALSE, ldk_contour = FALSE,
            ldk_chull = FALSE, ldk_labels = FALSE,
+           cur.pch = ".",
            xy.axis = TRUE, title=substitute(x), ...) {
     Coo <- x
     # downsize
@@ -173,9 +174,9 @@ stack.OutCoe <- function(x, nb.pts=120, ...){
 #' @rdname stack.Coo
 #' @export
 stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
-                      ldk = TRUE, ldk.pch = 20, ldk.col = "#33333333", ldk.cex = 0.3,
+                      ldk = TRUE, ldk.pch = 3, ldk.col = "#333333", ldk.cex = 0.5,
                       ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-                      ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE, title=substitute(x), ...) {
+                      ldk_chull = FALSE, ldk_labels = FALSE, cur.pch=".", xy.axis = TRUE, title=substitute(x), ...) {
   Coo <- x
   if (missing(cols)) {
     cols <- rep(NA, length(Coo))
@@ -191,8 +192,8 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   op <- par(mar = c(3, 3, 2, 1))
   on.exit(par(op))
-  wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2,
-                                                     range))), 2, range)
+  wdw <- apply(l2a(lapply(Coo$coo,
+                          function(x) apply(x, 2, range))), 2, range)
   plot(NA, xlim = wdw[, 1], ylim = wdw[, 2], asp = 1, las = 1,
        cex.axis = 2/3, ann = FALSE, frame = FALSE)
   title(title)
@@ -201,6 +202,12 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   for (i in 1:length(Coo)) {
     points(Coo$coo[[i]], pch = ldk.pch, col = ldk.col, cex = ldk.cex)
+  }
+  if (is.cur(Coo)){
+    cur_binded <- get_cur_binded(Coo)
+    for (i in 1:length(Coo)) {
+      points(cur_binded[[i]], pch = cur.pch, col = ldk.col, cex = ldk.cex)
+    }
   }
   # Specific to Ldk not very clean below #todo
   A <- l2a(Coo$coo)
@@ -326,7 +333,7 @@ panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
   }
 
 
-    #reorder <- Coo$fac[, reorder]
+  #reorder <- Coo$fac[, reorder]
   pos <- coo_listpanel(Coo$coo, dim=dim, cols = cols, borders = borders,
                        poly = TRUE)
   if (!is.null(names)) {
@@ -334,8 +341,8 @@ panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
       if (length(names) != length(Coo)) {
-          text(pos[, 1], pos[, 2],
-               labels = Coo$fac[, names], cex = cex.names)
+        text(pos[, 1], pos[, 2],
+             labels = Coo$fac[, names], cex = cex.names)
 
       } else {
         text(pos[, 1], pos[, 2],
@@ -361,7 +368,7 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
   Coo <- x
   if (is.numeric(coo_sample)) {
     if (all(coo_nb(Coo) >= coo_sample)) {
-    Coo <- coo_sample(Coo, coo_sample)
+      Coo <- coo_sample(Coo, coo_sample)
     }
   }
   if (!missing(fac)) {

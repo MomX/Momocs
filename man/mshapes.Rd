@@ -2,21 +2,18 @@
 % Please edit documentation in R/mult-mshapes.R
 \name{mshapes}
 \alias{mshapes}
-\alias{mshapes.list}
 \title{Mean shape calculation for Coo, Coe, etc.}
 \usage{
 mshapes(x, ...)
-
-\method{mshapes}{list}(x, FUN = mean, ...)
 }
 \arguments{
 \item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe or PCA object}
 
 \item{...}{useless here.}
 
-\item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
-
 \item{fac}{factor from the $fac slot (only for Coe objects). See examples below.}
+
+\item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
 
 \item{nb.pts}{numeric the number of points for calculated shapes (only Coe objects)}
 }

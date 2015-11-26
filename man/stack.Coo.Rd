@@ -10,15 +10,15 @@
   coo_sample = 120, points = FALSE, first.point = TRUE, centroid = TRUE,
   ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055", ldk.cex = 0.5,
   ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-  ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE,
+  ldk_chull = FALSE, ldk_labels = FALSE, cur.pch = ".", xy.axis = TRUE,
   title = substitute(x), ...)
 
 \method{stack}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
-  ldk = TRUE, ldk.pch = 20, ldk.col = "#33333333", ldk.cex = 0.3,
+  ldk = TRUE, ldk.pch = 3, ldk.col = "#333333", ldk.cex = 0.5,
   ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-  ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE,
+  ldk_chull = FALSE, ldk_labels = FALSE, cur.pch = ".", xy.axis = TRUE,
   title = substitute(x), ...)
 }
 \arguments{
@@ -59,6 +59,8 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{ldk_chull}{logical whether to draw convex hull}
 
 \item{ldk_labels}{logical whether to draw landmark labels}
+
+\item{cur.pch}{\code{pch} for semi landmarks}
 
 \item{xy.axis}{whether to draw or not the x and y axes}
 

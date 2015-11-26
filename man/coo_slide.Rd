@@ -4,15 +4,15 @@
 \alias{coo_slide}
 \title{Slides coordinates}
 \usage{
-coo_slide(x, ...)
+coo_slide(coo, id1, ldk)
 }
 \arguments{
-\item{...}{useless, only to maintain the generic}
+\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
 \item{id1}{\code{numeric} the id(s) of the point that will become the new first point. See details below
 for the method on Coo objects.}
 
-\item{ldk}{\code{numeric} the id of the ldk to use as id1.}
+\item{ldk}{\code{numeric} the id of the ldk to use as id1, only on \code{Out}}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.

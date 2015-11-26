@@ -21,7 +21,7 @@
 #' specifying the grouping structure
 #' @return an \code{Ldk} object
 #' @seealso \link{Coo}, \link{Out}, link{Opn}.
-#' @note You can pass directly as coo, the list returned by \link{tps_import} when curves are set \code{TRUE}.
+#' @note You can pass directly as coo, the list returned by \link{import_tps} when curves are set \code{TRUE}.
 #' The \code{$coo} will be passed to \code{coo} and the \code{$cur} to \code{cur}.
 #' \code{Ldk} methods must be, so far, considered as experimental in Momocs.
 #' @examples

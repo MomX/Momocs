@@ -32,7 +32,7 @@ All the shapes in x must have the same number of landmarks. If you are
 trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample}.
 }
 \note{
-You can pass directly as coo, the list returned by \link{tps_import} when curves are set \code{TRUE}.
+You can pass directly as coo, the list returned by \link{import_tps} when curves are set \code{TRUE}.
 The \code{$coo} will be passed to \code{coo} and the \code{$cur} to \code{cur}.
 \code{Ldk} methods must be, so far, considered as experimental in Momocs.
 }

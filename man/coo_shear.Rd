@@ -29,6 +29,6 @@ coo_draw(coo_sheary(coo, 0.5), border="red")
 
 }
 \seealso{
-Other trasnforming functions: \code{\link{coo_flipx}}
+Other transforming functions: \code{\link{coo_flipx}}
 }
 

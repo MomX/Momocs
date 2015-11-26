@@ -555,8 +555,7 @@ coo_slice.Coo <- function(coo, ids){
 #' @inheritParams coo_check
 #' @param id1 \code{numeric} the id(s) of the point that will become the new first point. See details below
 #' for the method on Coo objects.
-#' @param ldk \code{numeric} the id of the ldk to use as id1.
-#' @param ... useless, only to maintain the generic
+#' @param ldk \code{numeric} the id of the ldk to use as id1, only on \code{Out}
 #' @details For Coo objects, and in particular for Out and Opn three different ways of coo_sliding
 #' are available:
 #' \itemize{
@@ -582,13 +581,13 @@ coo_slice.Coo <- function(coo, ids){
 #' stack(coo_slide(hearts, id1=id1_random))
 #' @family sliding functions
 #' @export
-coo_slide <- function(x, ...) {
+coo_slide <- function(coo, id1, ldk) {
   UseMethod("coo_slide")
 }
 
 #' @export
-coo_slide.default <- function(x, id1, ...) {
-  coo <- coo_check(x)
+coo_slide.default <- function(coo, id1, ldk) {
+  coo <- coo_check(coo)
   if (id1 == 0) {
     return(coo)
   }
@@ -598,8 +597,8 @@ coo_slide.default <- function(x, id1, ...) {
 }
 
 #' @export
-coo_slide.Coo <- function(x, id1, ldk, ...) {
-  Coo <- x
+coo_slide.Coo <- function(coo, id1, ldk) {
+  Coo <- coo
   ##### ldk case #####
   if (!missing(ldk)) {
     if (length(Coo$ldk) == 0) stop(" * No landmarks defined.")
@@ -1148,9 +1147,8 @@ coo_force2close.Coo <- function(coo){
 #' coo_draw(coo_shearx(coo, 0.5), border="blue")
 #' coo_draw(coo_sheary(coo, 0.5), border="red")
 #'
-#' @family trasnforming functions
+#' @family transforming functions
 #' @export
-
 coo_shearx <- function(coo, k){
   UseMethod("coo_shearx")
 }
@@ -1169,7 +1167,7 @@ coo_shearx.Coo <-function(coo, k=1){
 #' @rdname coo_shear
 #' @export
 coo_sheary <- function(coo, k){
-  UseMethod("coo_sheary()")
+  UseMethod("coo_sheary")
 }
 
 #' @export
@@ -1199,7 +1197,7 @@ coo_sheary.Coo <- function(coo, k=1){
 #' #' # to flip an entire Coo:
 #' shapes2 <- shapes
 #' shapes$coo <- lapply(shapes2$coo, coo_flipx)
-#' @family trasnforming functions
+#' @family transforming functions
 #' @export
 coo_flipx <- function(coo){
   UseMethod("coo_flipx")

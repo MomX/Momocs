@@ -94,7 +94,7 @@ Coo <- function(...) {
 #' Coe class
 #'
 #'\code{Coe} class is the 'parent' class of
-#' \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes.
+#' \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{LdkCoe} classes.
 #'
 #' Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
 #' a detail of the design behind Momocs' classes.

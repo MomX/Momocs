@@ -19,7 +19,6 @@
 #' not be representive of the group. Also notice that for PCA objects, mean scores are returned
 #' within a PCA object (accesible with PCA$x) that can be plotted directly but other slots are left
 #' unchanged.
-#' @rdname mshapes
 #' @examples
 #' #### on shapes
 #' data(wings)
@@ -59,7 +58,6 @@ mshapes <- function(x, ...) {
   UseMethod("mshapes")
 }
 
-#' @rdname mshapes
 #' @export
 mshapes.list <- function(x, FUN=mean, ...) {
   A <- ldk_check(x)
@@ -159,27 +157,25 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
 }
 
 #' @export
-mshapes.LdkCoe <- mshapes.Ldk
-# mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
-#     LdkCoe <- x
-#     if (missing(fac)) {
-#         cat("* no 'fac' provided. Returns meanshape.\n")
-#         LdkCoe$coo <- mshapes(LdkCoe$coo)
-#         return(LdkCoe)
-#     }
-#
-#     f <- LdkCoe$fac[, fac]
-#     fl <- levels(f)
-#     shp <- list()
-#     rows <- numeric()
-#     for (i in seq(along = fl)) {
-#         shp[[i]] <- mshapes(LdkCoe$coo[f == fl[i]], FUN=FUN)
-#         rows[i] <- which(f == fl[i])[1]
-#     }
-#     names(shp) <- fl
-#     Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
-#     return(list(Coe = Coe2, shp = shp))
-# }
+mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
+    LdkCoe <- x
+    if (missing(fac)) {
+        cat("* no 'fac' provided. Returns meanshape.\n")
+        return(mshapes(LdkCoe$coo))
+    }
+
+    f <- LdkCoe$fac[, fac]
+    fl <- levels(f)
+    shp <- list()
+    rows <- numeric()
+    for (i in seq(along = fl)) {
+        shp[[i]] <- mshapes(LdkCoe$coo[f == fl[i]], FUN=FUN)
+        rows[i] <- which(f == fl[i])[1]
+    }
+    names(shp) <- fl
+    Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
+    return(list(Coe = Coe2, shp = shp))
+}
 
 #' @export
 mshapes.PCA <- function(x, fac, ...){

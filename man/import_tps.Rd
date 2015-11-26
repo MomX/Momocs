@@ -7,9 +7,9 @@
 import_tps(tps.path, curves = TRUE)
 }
 \arguments{
-\item{curves}{\code{logical} whether to read curves, if any}
+\item{tps.path}{lines, typically from \link{readLines}, describing a single shape in tps-like format}
 
-\item{tps}{lines, typically from \link{readLines}, describing a single shape in tps-like format}
+\item{curves}{\code{logical} whether to read curves, if any}
 }
 \value{
 a list with components:

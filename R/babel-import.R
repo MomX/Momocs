@@ -370,7 +370,7 @@ import_StereoMorph_ldk <- function(path, names){
 #' Imports a tps file
 #'
 #' And returns a list of coordinates, curves, scale
-#' @param tps lines, typically from \link{readLines}, describing a single shape in tps-like format
+#' @param tps.path lines, typically from \link{readLines}, describing a single shape in tps-like format
 #' @param curves \code{logical} whether to read curves, if any
 #' @return a list with components:
 #' \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
@@ -416,7 +416,7 @@ import_tps <- function(tps.path, curves=TRUE){
 
 #' Reads a single tps-like shape as lines
 #'
-#' Internal function used in \link{tps_import} that may be useful for data import. When provided
+#' Internal function used in \link{import_tps} that may be useful for data import. When provided
 #' with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
 #' coordinates, curves, etc.
 #' @param tps lines, typically from \link{readLines}, describing a single shape in tps-like format
@@ -759,7 +759,7 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
 #' from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
 #'
 #' The number of groups must be consistent accross filenames.
-#' @param lf a list (its names are used, except if it is a list from \link{tps_import}
+#' @param lf a list (its names are used, except if it is a list from \link{import_tps}
 #' in this case \code{names(lf$coo)} is used) of a list of filenames, as characters, typically such as
 #' those obtained with \link{list.files}. Alternatively, a path to a folder
 #' containing the files. Actually, if lf is of length 1 (a single character),
@@ -781,7 +781,7 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
 #' @export
 lf_structure <- function(lf, names = character(), split = "_",
                          trim.extension = FALSE) {
-  # after tps_import case
+  # after import_tps case
   if (is.list(lf)) {
     # we handle the import_tps case
     if (identical(names(lf), c("coo", "cur", "scale")))

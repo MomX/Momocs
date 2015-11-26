@@ -11,7 +11,7 @@ Coe(...)
 }
 \description{
 \code{Coe} class is the 'parent' class of
-\code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{\link{LdkCoe}} classes.
+\code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{LdkCoe} classes.
 }
 \details{
 Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
