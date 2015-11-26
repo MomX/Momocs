@@ -26,8 +26,6 @@ stack(bot.al)
 }
 }
 \seealso{
-\link{coo_align}, \link{coo_alignxax}, \link{coo_calliper}
-
 Other aligning functions: \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}}
 }

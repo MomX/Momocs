@@ -17,7 +17,7 @@
 \alias{col_spring}
 \alias{col_summer}
 \alias{col_summer2}
-\title{Some color palettes.}
+\title{Some color palettes}
 \usage{
 col_summer(n)
 

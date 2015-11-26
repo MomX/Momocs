@@ -17,4 +17,9 @@ on the second column the ending-id (id= the number of the coordinate)}
 \description{
 Cosmetics only but useful to visualize shape variation.
 }
+\seealso{
+Other ldk functions: \code{\link{ldk_chull}},
+  \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
+  \code{\link{plot_devsegments}}
+}
 

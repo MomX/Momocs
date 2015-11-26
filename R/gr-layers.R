@@ -355,4 +355,28 @@
   cols <- palette(max(ids))[ids]
   return(cols)}
 
-# text(0, 0, 'plop')} end layers
+
+# .* ------------------------
+.cex <- function(x) {
+  3/(log(x + 1) + 1)
+}
+
+.pch <- function() {
+  c(2, 6, 1, 3, 4, 5, 8, 7, 9, 10)}
+
+.center_range <- function(x){
+  m <- max(abs(x))
+  c(-m, m)
+}
+.x.range.gg <- function(gg){
+  ggplot_build(gg)$panel$ranges[[1]]$x.range
+}
+
+.y.range.gg <- function(gg){
+  ggplot_build(gg)$panel$ranges[[1]]$y.range
+}
+
+.wdw.gg <- function(gg){
+  c(diff(.x.range.gg(gg)),
+    diff(.y.range.gg(gg)))
+}

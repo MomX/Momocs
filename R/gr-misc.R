@@ -1,9 +1,8 @@
 ##### graphics cosmetics
 
+#' Some color palettes
+#'
 #' Colors, colors, colors.
-#' @name col_summer
-#' @title Some color palettes.
-#' @rdname color_palettes
 #' @aliases Palettes
 #' @param n the number of colors to generate from the color palette
 #' @return colors (hexadecimal format)
@@ -39,6 +38,7 @@
 #'
 #'  # Black only for pubs
 #'  wheel(col_black)
+#' @rdname color_palettes
 #' @export
 col_summer <- colorRampPalette(c(
   "#4876FF",
@@ -226,26 +226,6 @@ col_alpha <- function(cols, transp = 0) {
 #' @export
 .pch <- function() {
   c(2, 6, 1, 3, 4, 5, 8, 7, 9, 10)}
-
-###### Momocs 1.0
-
-.center_range <- function(x){
-  m <- max(abs(x))
-  c(-m, m)
-}
-.x.range.gg <- function(gg){
-  ggplot_build(gg)$panel$ranges[[1]]$x.range
-}
-
-.y.range.gg <- function(gg){
-  ggplot_build(gg)$panel$ranges[[1]]$y.range
-}
-
-.wdw.gg <- function(gg){
-  c(diff(.x.range.gg(gg)),
-    diff(.y.range.gg(gg)))
-}
-
 
 
 ##### end colors graphics

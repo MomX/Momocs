@@ -29,8 +29,6 @@ coo_plot(coo_alignxax(b))
 }
 }
 \seealso{
-\link{coo_align}, \link{coo_aligncalliper}
-
 Other aligning functions: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}}, \code{\link{coo_align}}
 }

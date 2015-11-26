@@ -23,5 +23,9 @@ ldk_chull(wings$coo)
 }
 \seealso{
 \link{coo_chull}, \link{chull}, \link{ldk_confell}, \link{ldk_contour}
+
+Other ldk functions: \code{\link{ldk_confell}},
+  \code{\link{ldk_contour}}, \code{\link{ldk_links}},
+  \code{\link{plot_devsegments}}
 }
 

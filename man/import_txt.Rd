@@ -27,7 +27,6 @@ Define the \link{read.table} arguments that allow to import a single file, and t
 pass them to this function.
 }
 \seealso{
-\link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
-See also Momocs' vignettes for data import.
+babel functions.
 }
 

@@ -51,7 +51,7 @@ the same graphical window. Mainly used by \link{panel.Coo} functions.
 data(bot)
 coo_listpanel(bot$coo) # equivalent to panel(bot)
 x <- coo_listpanel(bot$coo)
-x # positions of shapes returned invisibly 
+x # positions of shapes returned invisibly
 # axis(1) ; axis(2) # that's a single graphical window
 data(bot)
 coo <- bot$coo
@@ -60,6 +60,8 @@ pos <- coo_listpanel(coo, reorder=ord)
 text(pos, labels=signif(ord[order(ord)], 3))
 }
 \seealso{
-\link{coo_plot} and \link{coo_template}.
+Other plotting functions: \code{\link{Ntable}},
+  \code{\link{coo_arrows}}, \code{\link{coo_plot}},
+  \code{\link{coo_ruban}}
 }
 

@@ -23,5 +23,15 @@ Elliptic Fourier features of a closed contour.
 }
 \seealso{
 \link{chc2pix}
+
+Other babel functions: \code{\link{a2l}},
+  \code{\link{a2m}}, \code{\link{as_df}},
+  \code{\link{chc2Out}}, \code{\link{chc2pix}},
+  \code{\link{import_StereoMorph_curve1}},
+  \code{\link{import_jpg}}, \code{\link{import_tps}},
+  \code{\link{l2a}}, \code{\link{l2m}}, \code{\link{m2a}},
+  \code{\link{m2d}}, \code{\link{m2l}},
+  \code{\link{nef2Coe}}, \code{\link{ntsrow2Coo}},
+  \code{\link{tie_jpg_txt}}, \code{\link{tps2coo}}
 }
 

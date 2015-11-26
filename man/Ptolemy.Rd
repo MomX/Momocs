@@ -41,8 +41,9 @@ Crampton JS. 1995. Elliptical Fourier shape analysis of fossil bivalves:
 some practical considerations. \emph{Lethaia} \bold{28}: 179-186.
 }
 \seealso{
-\link{efourier}.
 An intuitive explanation of elliptic Fourier analysis can be found in
 the \bold{Details} section of the \link{efourier} function.
+
+exemplifying functions
 }
 

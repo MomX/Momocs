@@ -70,7 +70,7 @@ in other graphical functions, in methods, etc.
 data(bot)
 b <- bot[1]
 coo_plot(b)
-coo_plot(bot[2], plot.new=FALSE) # equivalent to coo_draw(bot[2]) 
+coo_plot(bot[2], plot.new=FALSE) # equivalent to coo_draw(bot[2])
 coo_plot(b, zoom=2)
 coo_plot(b, border='blue')
 coo_plot(b, first.point=FALSE, centroid=FALSE)
@@ -78,6 +78,8 @@ coo_plot(b, points=TRUE, pch=20)
 coo_plot(b, xy.axis=FALSE, lwd=2, col='#F2F2F2')
 }
 \seealso{
-coo_draw
+Other plotting functions: \code{\link{Ntable}},
+  \code{\link{coo_arrows}}, \code{\link{coo_listpanel}},
+  \code{\link{coo_ruban}}
 }
 

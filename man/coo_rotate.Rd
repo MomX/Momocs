@@ -28,8 +28,6 @@ stack(bot)
 stack(coo_rotate(bot, pi/2))
 }
 \seealso{
-\link{coo_rotatecenter}
-
 Other rotation functions: \code{\link{coo_rotatecenter}}
 }
 

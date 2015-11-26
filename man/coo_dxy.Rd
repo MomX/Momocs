@@ -18,7 +18,4 @@ A simple wrapper to calculate dxi - dx1 and dyi - dx1.
 \examples{
 coo_dxy(bot[1])
 }
-\seealso{
-\link{coo_oscillo}
-}
 

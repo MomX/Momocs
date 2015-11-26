@@ -39,6 +39,10 @@ par(xpd=NA)
 plot_devsegments(out.6, cols=cols, lwd=4)
 coo_draw(out.6, lty=2, points=FALSE, col=NA)
 par(xpd=FALSE)
-
+}
+\seealso{
+Other ldk functions: \code{\link{ldk_chull}},
+  \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
+  \code{\link{ldk_links}}
 }
 

@@ -45,4 +45,9 @@ coo_ruban(m, d, palette=col_summer2, lwd=5)
 coo_plot(m, plot=FALSE)
 coo_ruban(m, d, palette=col_black, lwd=.normalize(d)*10)
 }
+\seealso{
+Other plotting functions: \code{\link{Ntable}},
+  \code{\link{coo_arrows}}, \code{\link{coo_listpanel}},
+  \code{\link{coo_plot}}
+}
 

@@ -16,6 +16,7 @@
 #' l
 #' m <- l2m(l)
 #' m
+#' @family babel functions
 #' @export
 l2m <- function(l) {
     m <- cbind(l$x, l$y)
@@ -42,6 +43,7 @@ l2m <- function(l) {
 #' l
 #' a <- l2a(l)
 #' a
+#' @family babel functions
 #' @export
 l2a <- function(l) {
     .check(length(unique(sapply(l, length))) == 1,
@@ -65,13 +67,13 @@ l2a <- function(l) {
 #' @usage a2l(a)
 #' @param a \code{array} of coordinates.
 #' @return \code{list} with 2-cols matrices of (x; y) coordinates.
-#' @seealso \link{l2a}
 #' @examples
 #' data(wings)
 #' l <- wings$coo
 #' l
 #' a <- l2a(l)
 #' a
+#' @family babel functions
 #' @export
 a2l <- function(a) {
     .check(is.array(a) & length(dim(a)==3),
@@ -99,7 +101,7 @@ a2l <- function(a) {
 #' data(wings)
 #' a <- l2a(wings$coo)
 #' a
-#' a2m(a)
+#' @family babel functions
 #' @export
 a2m <- function(a) {
     # ugly
@@ -128,10 +130,11 @@ a2m <- function(a) {
 #' data(wings)
 #' m <- a2m(l2a(wings$coo))
 #' m2a(m)
+#' @family babel functions
 #' @export
 m2a <- function(m) {
     # ugly
-    a <- array(NA, 
+    a <- array(NA,
                dim = c(ncol(m)/2, 2, nrow(m)),
                dimnames = list(1:(ncol(m)/2), c("x", "y"), rownames(m)))
     for (i in 1:nrow(m)) {
@@ -150,6 +153,7 @@ m2a <- function(m) {
 #' @examples
 #' data(wings)
 #' m2d(wings[3])
+#' @family babel functions
 #' @export
 m2d <- function(m){
   m <- coo_check(m)
@@ -172,6 +176,7 @@ m2d <- function(m){
 #' l
 #' m <- l2m(l)
 #' m
+#' @family babel functions
 #' @export
 m2l <- function(m) {
   return(list(x = m[, 1], y = m[, 2]))
@@ -181,7 +186,7 @@ m2l <- function(m) {
 # as_df --------------------------------
 
 #' Convert Momocs objects to data.frames
-#' 
+#'
 #' Used in particular for ggplot2 compatibility
 #' @param x an object, typically a Momocs class
 #' @return a data.frame
@@ -194,7 +199,7 @@ m2l <- function(m) {
 #' head(as_df(bot.p))
 #' bot.l <- LDA(bot.p, "type")
 #' head(as_df(bot.l))
-#' 
+#' @family babel functions
 #' @export
 as_df <- function(x){
   UseMethod("as_df")
@@ -216,7 +221,7 @@ as_df.Coo <- function(x){
 }
 
 #' @export
-as_df.Coe <- function(x){  
+as_df.Coe <- function(x){
   df_coe <- melt(x$coe)
   colnames(df_coe) <- c("id", "coefficient", "value")
   # if a $fac is present
@@ -231,7 +236,7 @@ as_df.Coe <- function(x){
 }
 
 #' @export
-as_df.TraCoe <- function(x){  
+as_df.TraCoe <- function(x){
   df_coe <- as.data.frame(x$coe)
   # if a $fac is present
   if (is.fac(x)) {

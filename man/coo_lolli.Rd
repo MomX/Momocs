@@ -25,7 +25,4 @@ data(olea)
 coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 title("A nice title !")
 }
-\seealso{
-\link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
-}
 

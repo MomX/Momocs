@@ -34,4 +34,9 @@ gg + coord_equal()
 gg + scale_fill_gradient(low="green", high = "red")
 gg + coord_flip()
 }
+\seealso{
+Other plotting functions: \code{\link{coo_arrows}},
+  \code{\link{coo_listpanel}}, \code{\link{coo_plot}},
+  \code{\link{coo_ruban}}
+}
 

@@ -59,7 +59,6 @@ mshapes <- function(x, ...) {
   UseMethod("mshapes")
 }
 
-
 #' @rdname mshapes
 #' @export
 mshapes.list <- function(x, FUN=mean, ...) {
@@ -67,7 +66,6 @@ mshapes.list <- function(x, FUN=mean, ...) {
   return(apply(A, 1:2, FUN, na.rm = TRUE))
 }
 
-#' @rdname mshapes
 #' @export
 mshapes.array <- function(x, FUN=mean, ...) {
   if (length(dim(x)) == 3) {
@@ -76,7 +74,6 @@ mshapes.array <- function(x, FUN=mean, ...) {
   }
 }
 
-#' @rdname mshapes
 #' @export
 mshapes.Ldk <- function(x, FUN=mean, ...) {
   Ldk <- x
@@ -84,7 +81,6 @@ mshapes.Ldk <- function(x, FUN=mean, ...) {
   return(apply(A, 1:2, mean, na.rm = TRUE))
 }
 
-#' @rdname mshapes
 #' @export
 mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     OutCoe <- x
@@ -119,7 +115,6 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     return(list(Coe = Coe2, shp = shp))
 }
 
-#' @rdname mshapes
 #' @export
 mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     OpnCoe <- x
@@ -163,30 +158,29 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     return(list(Coe = Coe2, shp = shp))
 }
 
-#' @rdname mshapes
 #' @export
-mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
-    LdkCoe <- x
-    if (missing(fac)) {
-        cat("* no 'fac' provided. Returns meanshape.\n")
-        LdkCoe$coo <- mshapes(LdkCoe$coo)
-        return(LdkCoe)
-    }
+mshapes.LdkCoe <- mshapes.Ldk
+# mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
+#     LdkCoe <- x
+#     if (missing(fac)) {
+#         cat("* no 'fac' provided. Returns meanshape.\n")
+#         LdkCoe$coo <- mshapes(LdkCoe$coo)
+#         return(LdkCoe)
+#     }
+#
+#     f <- LdkCoe$fac[, fac]
+#     fl <- levels(f)
+#     shp <- list()
+#     rows <- numeric()
+#     for (i in seq(along = fl)) {
+#         shp[[i]] <- mshapes(LdkCoe$coo[f == fl[i]], FUN=FUN)
+#         rows[i] <- which(f == fl[i])[1]
+#     }
+#     names(shp) <- fl
+#     Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
+#     return(list(Coe = Coe2, shp = shp))
+# }
 
-    f <- LdkCoe$fac[, fac]
-    fl <- levels(f)
-    shp <- list()
-    rows <- numeric()
-    for (i in seq(along = fl)) {
-        shp[[i]] <- mshapes(LdkCoe$coo[f == fl[i]], FUN=FUN)
-        rows[i] <- which(f == fl[i])[1]
-    }
-    names(shp) <- fl
-    Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
-    return(list(Coe = Coe2, shp = shp))
-}
-
-#' @rdname mshapes
 #' @export
 mshapes.PCA <- function(x, fac, ...){
   # cehck for single individuals within a group..

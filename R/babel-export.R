@@ -36,12 +36,12 @@
 #' # for shapes (matrices)
 #'  export(bot[1], file='bot1.txt')
 #' }
-#' @rdname export
+#' @seealso babel functions
 #' @export
 export <- function(x, file, sep, dec) {
     UseMethod("export")
 }
-#' @rdname export
+
 #' @export
 export.Coe <- function(x, file = "coefficients.txt", sep = "\t", dec = ".") {
     data <- cbind(name = rownames(x$coe), x$fac, x$coe)
@@ -50,7 +50,6 @@ export.Coe <- function(x, file = "coefficients.txt", sep = "\t", dec = ".") {
     cat(" * File written:", file, "\n")
 }
 
-#' @rdname export
 #' @export
 export.PCA <- function(x, file = "scores.txt", sep = "\t", dec = ".") {
   data <- cbind(name = rownames(x$x), x$fac, x$x)

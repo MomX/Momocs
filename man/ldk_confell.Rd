@@ -29,6 +29,8 @@ coo_plot(mshapes(wings))
 ldk_confell(wings$coo)
 }
 \seealso{
-\link{ldk_contour}, \link{ldk_chull}
+Other ldk functions: \code{\link{ldk_chull}},
+  \code{\link{ldk_contour}}, \code{\link{ldk_links}},
+  \code{\link{plot_devsegments}}
 }
 

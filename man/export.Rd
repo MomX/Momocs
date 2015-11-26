@@ -2,15 +2,9 @@
 % Please edit documentation in R/babel-export.R
 \name{export}
 \alias{export}
-\alias{export.Coe}
-\alias{export.PCA}
 \title{Export Coe objects and shapes}
 \usage{
 export(x, file, sep, dec)
-
-\method{export}{Coe}(x, file = "coefficients.txt", sep = "\\t", dec = ".")
-
-\method{export}{PCA}(x, file = "scores.txt", sep = "\\t", dec = ".")
 }
 \arguments{
 \item{x}{a Coe object}
@@ -54,5 +48,8 @@ export(bot.f, file='data.xls', dec=',')
 # for shapes (matrices)
  export(bot[1], file='bot1.txt')
 }
+}
+\seealso{
+babel functions
 }
 

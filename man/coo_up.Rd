@@ -31,8 +31,6 @@ coo_plot(b)
 coo_draw(coo_up(b), border='red')
 }
 \seealso{
-\link{coo_left}, \link{coo_right}, \link{coo_down}
-
 Other opening functions: \code{\link{coo_down}},
   \code{\link{coo_left}}, \code{\link{coo_right}}
 }

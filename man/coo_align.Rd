@@ -23,8 +23,6 @@ stack(bot)
 stack(coo_align(bot))
 }
 \seealso{
-\link{coo_aligncalliper}, \link{coo_alignxax}
-
 Other aligning functions: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}

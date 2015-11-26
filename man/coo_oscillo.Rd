@@ -10,7 +10,7 @@ coo_oscillo(coo, method = c("efourier", "rfourier", "tfourier", "all")[4],
 \arguments{
 \item{coo}{A list or a matrix of coordinates.}
 
-\item{method}{character among \code{c('efourier', 'rfourier', 'tfourier', 'all')}. 
+\item{method}{character among \code{c('efourier', 'rfourier', 'tfourier', 'all')}.
 \code{'all'} by default}
 
 \item{nb.pts}{\code{integer}. The number or reference points, sampled
@@ -29,6 +29,9 @@ coo_oscillo(shapes[4], 'efourier')
 coo_oscillo(shapes[4], 'rfourier')
 coo_oscillo(shapes[4], 'tfourier')
 #tfourier is prone to high-frequency noise but smoothing can help
-coo_oscillo(coo_smooth(shapes[4], 10), 'tfourier') 
+coo_oscillo(coo_smooth(shapes[4], 10), 'tfourier')
+}
+\seealso{
+exemplifying functions
 }
 

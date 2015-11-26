@@ -15,7 +15,6 @@
 #'
 #' @param coo a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.
 #' @return a \code{matrix} of (x; y) coordinates or a Coo object.
-#' @seealso \link{ldk_check}
 #' @examples
 #' #coo_check('Not a shape')
 #' #coo_check(matrix(1:10, ncol=2))
@@ -192,6 +191,55 @@ coo_scaley <- function(coo, k=1){
   smat <- matrix(c(1, 0, 0, k), nrow=2)
   return(coo %*% smat)}
 
+# coo_template --------------
+#' 'Templates' shapes
+#'
+#' \code{coo_template} returns shape centered on the origin and inscribed in a \code{size}-side square
+#'
+#' See \link{coo_listpanel} for an illustration of this function. The morphospaces
+#' functions also take profit of this function. May be useful to develop other graphical functions.
+#'
+#' @usage coo_template(coo, size)
+#' @param coo A \code{list} or a \code{matrix} of coordinates.
+#' @param size \code{numeric}. Indicates the length of the side 'inscribing'
+#' the shape.
+#' @return Returns a matrix of \code{(x; y)}coordinates.
+#' @examples
+#'
+#' data(bot)
+#' coo <- bot[1]
+#' coo_plot(coo_template(coo), xlim=c(-1, 1), ylim=c(-1, 1))
+#' rect(-0.5, -0.5, 0.5, 0.5)
+#'
+#' s <- 0.01
+#' coo_plot(coo_template(coo, s))
+#' rect(-s/2, -s/2, s/2, s/2)
+#' @family scaling functions
+#' @export
+coo_template <- function(coo, size){
+  UseMethod("coo_template")
+  }
+
+#' @export
+coo_template.default <- function(coo, size = 1) {
+  # only for matrices
+  coo <- coo * min(size/apply(coo, 2, function(x) diff(range(x))))
+  expected <- apply(coo, 2, function(x) diff(range(x)))/2
+  observed <- apply(coo, 2, range)[2, ]
+  shift <- expected - observed
+  coo <- coo_trans(coo, shift[1], shift[2])
+  # if (keep.pos) {coo2 <- coo_trans(coo2, coo_centpos(coo)[1],
+  # coo_centpos(coo)[2])}
+  return(coo)
+}
+
+#' @export
+coo_template.Coo <- function(coo, size=1){
+  Coo <- coo
+  Coo$coo <- lapply(Coo$coo, coo_template, size=size)
+  return(Coo)
+}
+
 # coo_rotate -----------------
 #' Rotates coordinates
 #'
@@ -204,7 +252,6 @@ coo_scaley <- function(coo, k=1){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or any \link{Coo} object.
 #' @param theta \code{numeric}the angle (in radians) to rotate shapes.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_rotatecenter}
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_rotate(bot[1], pi/2))
@@ -240,7 +287,6 @@ coo_rotate.Coo <- function(coo, theta = 0) {
 #' @param theta \code{numeric} the angle (in radians) to rotate shapes.
 #' @param center \code{numeric} the (x; y) position of the center
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_rotate}
 #' @examples
 #' b <- bot[1]
 #' coo_plot(b)
@@ -276,7 +322,6 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
 #'
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_aligncalliper}, \link{coo_alignxax}
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_align(bot[1]))
@@ -313,7 +358,6 @@ coo_align.Coo <- function(coo) {
 #' (or mirror of each others), try redefining a new starting point (eg with coo_slidedirection) before
 #' the alignment step. This may solve your problem because coo_calliper orders the \code{$arr.ind} used by
 #' coo_aligncalliper.
-#' @seealso \link{coo_align}, \link{coo_aligncalliper}
 #' @examples
 #' \dontrun{
 #' b <- bot[1]
@@ -349,7 +393,6 @@ coo_alignxax.Coo <- function(coo) {
 #' @aliases coo_aligncalliper
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or any \link{Coo} object.
-#' @seealso \link{coo_align}, \link{coo_alignxax}, \link{coo_calliper}
 #' @examples
 #' \dontrun{
 #' b <- bot[1]
@@ -387,7 +430,6 @@ coo_aligncalliper.Coo <- function(coo) {
 #' @aliases coo_alignminradius
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_align}, \link{coo_alignxax}, \link{coo_calliper}
 #' @examples
 #' \dontrun{
 #' stack(coo_alignminradius(hearts))
@@ -979,7 +1021,6 @@ is_closed.Coo <- function(coo) {
 #'
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_unclose}, \link{is_closed}
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo_close(x)
@@ -1016,7 +1057,6 @@ coo_close.Coo <- function(coo) {
 #'
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @seealso \link{coo_close}, \link{is_closed}
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo_close(x)
@@ -1206,7 +1246,7 @@ coo_flipy.Coo <- function(coo){
 #' A simple wrapper to calculate dxi - dx1 and dyi - dx1.
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @return a list with two components \code{dx} and \code{dy}
-#' @seealso \link{coo_oscillo}
+#' @family exemplifying functions
 #' @examples
 #' coo_dxy(bot[1])
 #' @export
@@ -1233,7 +1273,6 @@ coo_dxy <- function(coo) {
 #'
 #' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
 #' automatically.
-#' @seealso \link{coo_left}, \link{coo_right}, \link{coo_down}
 #' @examples
 #' b <- coo_alignxax(bot[1])
 #' coo_plot(b)
@@ -1278,7 +1317,6 @@ coo_up.Coo <- function(coo, slidegap=FALSE){
 #'
 #' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
 #' automatically.
-#' @seealso \link{coo_left}, \link{coo_right}, \link{coo_up}
 #' @examples
 #' b <- coo_alignxax(bot[1])
 #' coo_plot(b)
@@ -1321,7 +1359,6 @@ coo_down.Coo <- function(coo, slidegap=FALSE){
 #'
 #' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
 #' automatically.
-#' @seealso  \link{coo_right}, \link{coo_up}, \link{coo_down}
 #' @examples
 #' b <- coo_center(bot[1])
 #' coo_plot(b)
@@ -1366,7 +1403,6 @@ coo_right.Coo <- function(coo, slidegap=FALSE){
 #'
 #' Also, when apply a coo_left/right/up/down on an \link{Out} object, you then obtain an \link{Opn} object, which is done
 #' automatically.
-#' @seealso \link{coo_right}, \link{coo_up}, \link{coo_down}
 #' @examples
 #' b <- coo_center(bot[1])
 #' coo_plot(b)

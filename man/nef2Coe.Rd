@@ -18,4 +18,15 @@ I'm not very familiar to other morphometric formats.
 So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 please let met know!
 }
+\seealso{
+Other babel functions: \code{\link{a2l}},
+  \code{\link{a2m}}, \code{\link{as_df}},
+  \code{\link{chc2Out}}, \code{\link{chc2pix}},
+  \code{\link{import_StereoMorph_curve1}},
+  \code{\link{import_jpg}}, \code{\link{import_tps}},
+  \code{\link{l2a}}, \code{\link{l2m}}, \code{\link{m2a}},
+  \code{\link{m2d}}, \code{\link{m2l}},
+  \code{\link{ntsrow2Coo}}, \code{\link{pix2chc}},
+  \code{\link{tie_jpg_txt}}, \code{\link{tps2coo}}
+}
 

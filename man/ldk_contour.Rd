@@ -25,5 +25,9 @@ ldk_contour(wings$coo)
 }
 \seealso{
 \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
+
+Other ldk functions: \code{\link{ldk_chull}},
+  \code{\link{ldk_confell}}, \code{\link{ldk_links}},
+  \code{\link{plot_devsegments}}
 }
 

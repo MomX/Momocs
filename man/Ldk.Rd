@@ -2,38 +2,38 @@
 % Please edit documentation in R/cl-def-Ldk.R
 \name{Ldk}
 \alias{Ldk}
-\alias{Ldk.Ldk}
-\alias{Ldk.default}
-\alias{Ldk.list}
-\alias{LdkCoe}
 \title{Builds an Ldk object}
 \usage{
-Ldk(coo, fac = data.frame(), links = NULL)
+Ldk(coo, links = NULL, cur = NULL, fac = data.frame())
 }
 \arguments{
 \item{coo}{a \code{list} of matrices of (x; y) coordinates,
 or an array, an Ldk object.}
 
+\item{links}{a matrix of 'links' between landmarks, mainly for plotting}
+
+\item{cur}{a \code{list} of \code{list} of matrices of (x; y) coordinates}
+
 \item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
 specifying the grouping structure}
-
-\item{links}{a matrix of 'links' between landmarks, mainly for plotting}
 }
 \value{
 an \code{Ldk} object
 }
 \description{
-In Momocs, \code{Ldk} classes objects are 
+In Momocs, \code{Ldk} classes objects are
 lists of configurations of \bold{l}an\bold{d}mar\bold{k}s, with optionnal components,
-on which generic methods such as plotting methods (e.g. \link{stack}) 
+on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. todo-Procrustes can be applied.
  \code{Ldk} objects are primarily \code{\link{Coo}} objects.
 }
 \details{
-All the shapes in x must have the same number of landmarks. If you are 
+All the shapes in x must have the same number of landmarks. If you are
 trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample}.
 }
 \note{
+You can pass directly as coo, the list returned by \link{tps_import} when curves are set \code{TRUE}.
+The \code{$coo} will be passed to \code{coo} and the \code{$cur} to \code{cur}.
 \code{Ldk} methods must be, so far, considered as experimental in Momocs.
 }
 \examples{

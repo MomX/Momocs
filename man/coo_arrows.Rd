@@ -26,6 +26,8 @@ coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 title("Hi there !")
 }
 \seealso{
-\link{coo_arrows}, and thin plate splines plotters eg \link{tps_grid}
+Other plotting functions: \code{\link{Ntable}},
+  \code{\link{coo_listpanel}}, \code{\link{coo_plot}},
+  \code{\link{coo_ruban}}
 }
 
