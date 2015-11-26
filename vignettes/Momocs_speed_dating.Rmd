@@ -561,10 +561,8 @@ fac=pupfish[-1] %>% as.data.frame())
 If you use this excellent package by Olsen to digitize landmarks and curves, you can import them, from the files produced with the functions `import_StereoMorph_ldk` and `import_StereoMorph_curve`.
 
 ### Import from tps and other digitizing softwares
-* `.tps` files can be read with `tps2Coo`
-* `.nts` files an be read with `nts2Coo`
-
-These functions are preliminary work since I do not use myself these formats. `readland.tps` and `readland.nts`, from the package `geomorph` by Adams, Collyer and Sherratt do a far better job.
+* `.tps` files can be read with `import_tps`
+* `.nts` files an be read with `nts2Coo` (will be turned into `import_nts` soon)
 
 ### Import misc
 * If covariables are encoded in filenames, which is a good practice, eg if you have files named `spA_group7_ind4_VL.{txt|jpg|etc.}`, use `lf_structure`;
