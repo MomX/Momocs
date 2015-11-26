@@ -105,7 +105,7 @@ Coo <- function(...) {
 #' \code{Coe} class is the 'parent' class of the following 'child' classes \itemize{
 #' \item \code{\link{OutCoe}} for coefficients from closed \bold{out}lines morphometrics
 #' \item \code{\link{OpnCoe}} for coefficients from \bold{op}e\bold{n} outlines morphometrics
-#' \item \code{\code{LdkCoe}} for coefficients from configuration of \bold{l}an\bold{d}mar\bold{k}s morphometrics.
+#' \item \code{LdkCoe} for coefficients from configuration of \bold{l}an\bold{d}mar\bold{k}s morphometrics.
 #' }
 #'
 #' In other words, \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{LdkCoe} classes
