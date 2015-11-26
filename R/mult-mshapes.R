@@ -163,7 +163,6 @@ mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
         cat("* no 'fac' provided. Returns meanshape.\n")
         return(mshapes(LdkCoe$coo))
     }
-
     f <- LdkCoe$fac[, fac]
     fl <- levels(f)
     shp <- list()
