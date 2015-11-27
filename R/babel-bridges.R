@@ -16,14 +16,13 @@
 #' l
 #' m <- l2m(l)
 #' m
-#' @family babel functions
+#' @family bridges functions
 #' @export
 l2m <- function(l) {
     m <- cbind(l$x, l$y)
     colnames(m) <- c("x", "y")
     return(m)
 }
-
 
 #' Converts a list of coordinates to an array of coordinates
 #'
@@ -36,14 +35,14 @@ l2m <- function(l) {
 #' @usage l2a(l)
 #' @param l \code{list} of matrices of the same dimension.
 #' @return an array of coordinates.
-#' @seealso \link{a2l}.
+#' @family bridges functions
 #' @examples
 #' data(wings)
 #' l <- wings$coo
 #' l
 #' a <- l2a(l)
 #' a
-#' @family babel functions
+#' @family bridges functions
 #' @export
 l2a <- function(l) {
     .check(length(unique(sapply(l, length))) == 1,
@@ -73,7 +72,7 @@ l2a <- function(l) {
 #' l
 #' a <- l2a(l)
 #' a
-#' @family babel functions
+#' @family bridges functions
 #' @export
 a2l <- function(a) {
     .check(is.array(a) & length(dim(a)==3),
@@ -101,7 +100,7 @@ a2l <- function(a) {
 #' data(wings)
 #' a <- l2a(wings$coo)
 #' a
-#' @family babel functions
+#' @family bridges functions
 #' @export
 a2m <- function(a) {
     # ugly
@@ -130,7 +129,7 @@ a2m <- function(a) {
 #' data(wings)
 #' m <- a2m(l2a(wings$coo))
 #' m2a(m)
-#' @family babel functions
+#' @family bridges functions
 #' @export
 m2a <- function(m) {
     # ugly
@@ -153,7 +152,7 @@ m2a <- function(m) {
 #' @examples
 #' data(wings)
 #' m2d(wings[3])
-#' @family babel functions
+#' @family bridges functions
 #' @export
 m2d <- function(m){
   m <- coo_check(m)
@@ -176,12 +175,37 @@ m2d <- function(m){
 #' l
 #' m <- l2m(l)
 #' m
-#' @family babel functions
+#' @family bridges functions
 #' @export
 m2l <- function(m) {
   return(list(x = m[, 1], y = m[, 2]))
 }
 
+#’ Converts a matrix of coordinates into a list of matrices
+#'
+#' Used internally to hanle coo and cur in \code{Ldk} objects but may be
+#' useful elsewhere
+#' @param m \code{matrix}, typically of (x; y) coordinates
+#' @param index \code{numeric}, the number of coordinates for every slice.
+#' @examples
+#' m2ll(wings[1], c(6, 4, 3, 5))
+#' @family bridges functions
+#' @export
+m2ll <- function(m, index=NULL){
+  # no slicing case, we return a matrix
+  if (is.null(index))
+    return(m)
+  # slicing case, we slices
+  .check(sum(index)==nrow(m),
+         "nrow(m) and sum(index) must match")
+  start <- cumsum(c(1, index[-length(index)]))
+  end   <- cumsum(index)
+  ll <- vector("list", length(start))
+  for (i in seq_along(start)){
+    ll[[i]] <- m[start[i]:end[i], ]
+  }
+  return(ll)
+}
 
 # as_df --------------------------------
 
@@ -199,7 +223,7 @@ m2l <- function(m) {
 #' head(as_df(bot.p))
 #' bot.l <- LDA(bot.p, "type")
 #' head(as_df(bot.l))
-#' @family babel functions
+#' @family bridges functions
 #' @export
 as_df <- function(x){
   UseMethod("as_df")

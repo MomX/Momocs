@@ -489,6 +489,7 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
   return(Coo)
 }
 
+# coo_slice------------------
 #' Slices shapes between successive coordinates
 #'
 #' Takes a shape with n coordinates. When you pass this function with at least

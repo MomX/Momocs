@@ -541,8 +541,8 @@ bot$type
 ## Babel import/export
 There are various morphometrics formats in the wild, almost as much as softwares. Momocs tries to create bridges between them, all gathered in the **Babel** family.
 
-### Within R
-You can convert from/to array, matrix, list or data.frame with the functions `{a, m, l, d}2{a, m, l, d}`. For instance, `l2a` converts a list into an array that you can use with `geomorph`; `a2l` does the inverse operation
+### Bridges within R
+You can convert from/to array, matrix, list or data.frame with the functions `{a, m, l, d}2{a, m, l, d}`. For instance, `l2a` converts a list into an array that you can use with `geomorph`; `a2l` does the inverse operation.
 
 Imagine you want to import pupfish from `geomorph` as a `Ldk` object:
 

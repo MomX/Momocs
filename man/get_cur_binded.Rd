@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-utilities.R
 \name{get_cur_binded}
 \alias{get_cur_binded}
-\title{Retrieves semi-landmarks coordinates from Ldk objects}
+\title{Binds semi-landmarks coordinates from Ldk objects}
 \usage{
 get_cur_binded(Ldk)
 }
@@ -15,5 +15,8 @@ a list of matrices
 \description{
 Binds groups (if any) of landmarks from the \code{$cur}
 on \link{Ldk} objects
+}
+\seealso{
+Other get_cur functions: \code{\link{get_curcoo_binded}}
 }
 

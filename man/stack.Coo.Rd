@@ -16,10 +16,10 @@
 \method{stack}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
-  ldk = TRUE, ldk.pch = 3, ldk.col = "#333333", ldk.cex = 0.5,
-  ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-  ldk_chull = FALSE, ldk_labels = FALSE, cur = TRUE, cur.pch = ".",
-  xy.axis = TRUE, title = substitute(x), ...)
+  ldk = TRUE, ldk.pch = 20, ldk.col = col_alpha("#000000", 0.3),
+  ldk.cex = 0.3, ldk_links = FALSE, ldk_confell = FALSE,
+  ldk_contour = FALSE, ldk_chull = FALSE, ldk_labels = FALSE,
+  cur = TRUE, cur_pch = 20, xy.axis = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{The \code{Coo} object to plot.}

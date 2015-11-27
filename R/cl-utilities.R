@@ -399,12 +399,13 @@ get_ldk.Out <- function(Coo) {
 #' @export
 get_ldk.Opn <- get_ldk.Out
 
-#' Retrieves semi-landmarks coordinates from Ldk objects
+#' Binds semi-landmarks coordinates from Ldk objects
 #'
 #' Binds groups (if any) of landmarks from the \code{$cur}
 #' on \link{Ldk} objects
 #' @param Ldk an \link{Ldk} object
 #' @return a list of matrices
+#' @family get_cur functions
 #' @export
 get_cur_binded <- function(Ldk){
   UseMethod("get_cur_binded")
@@ -422,6 +423,36 @@ function(Ldk){
          "no curves")
   lapply(Ldk$cur, function(x) do.call(rbind, x))
 }
+
+#' Binds landmarks and semi-landmarks coordinates from Ldk objects
+#'
+#' Binds \code{$coo} with groups (if any) of landmarks from the \code{$cur}
+#' on \link{Ldk} objects
+#' @param Ldk an \link{Ldk} object
+#' @family get_cur functions
+#' @return a list of matrices
+#' @export
+get_curcoo_binded <- function(x){
+  UseMethod("get_curcoo_binded")
+}
+
+#' @export
+get_curcoo_binded.default <- function(x){
+  cat("* only defined on Ldk objects")
+}
+
+#' @export
+get_curcoo_binded.Ldk <- function(x){
+  # if there are cur, we bind them after Coo
+  if (is.cur(x)){
+    x$nb_cur <- c(nrow(x$coo[[1]]), sapply(x$cur[[1]], nrow))
+    x$coo <- mapply("rbind", x$coo, get_cur_binded(x), SIMPLIFY=FALSE)
+    x$cur    <- NULL
+  }
+  return(x)
+  # curve case. we bind
+}
+
 
 # class testers -------------
 #' Tests if an object is of a given class

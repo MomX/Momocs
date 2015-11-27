@@ -22,14 +22,9 @@ m2d(wings[3])
 \seealso{
 \link{m2d} the reverse function.
 
-Other babel functions: \code{\link{a2l}},
+Other bridges functions: \code{\link{a2l}},
   \code{\link{a2m}}, \code{\link{as_df}},
-  \code{\link{chc2Out}}, \code{\link{chc2pix}},
-  \code{\link{import_StereoMorph_curve1}},
-  \code{\link{import_jpg}}, \code{\link{import_tps}},
   \code{\link{l2a}}, \code{\link{l2m}}, \code{\link{m2a}},
-  \code{\link{m2l}}, \code{\link{nef2Coe}},
-  \code{\link{ntsrow2Coo}}, \code{\link{pix2chc}},
-  \code{\link{tie_jpg_txt}}, \code{\link{tps2coo}}
+  \code{\link{m2ll}}, \code{\link{m2l}}
 }
 

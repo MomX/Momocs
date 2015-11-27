@@ -175,9 +175,9 @@ stack.OutCoe <- function(x, nb.pts=120, ...){
 #' @rdname stack.Coo
 #' @export
 stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
-                      ldk = TRUE, ldk.pch = 3, ldk.col = "#333333", ldk.cex = 0.5,
+                      ldk = TRUE, ldk.pch = 20, ldk.col=col_alpha("#000000", 0.3), ldk.cex = 0.3,
                       ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-                      ldk_chull = FALSE, ldk_labels = FALSE, cur=TRUE, cur.pch=".", xy.axis = TRUE, title=substitute(x), ...) {
+                      ldk_chull = FALSE, ldk_labels = FALSE, cur=TRUE, cur_pch=20, xy.axis = TRUE, title=substitute(x), ...) {
   Coo <- x
   if (missing(cols)) {
     cols <- rep(NA, length(Coo))
@@ -193,26 +193,32 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   op <- par(mar = c(3, 3, 2, 1))
   on.exit(par(op))
-  wdw <- apply(l2a(lapply(Coo$coo,
-                          function(x) apply(x, 2, range))), 2, range)
+  if (is.cur(Coo)){
+    wdw <- apply(l2a(lapply(get_curcoo_binded(Coo)$coo, function(x) apply(x, 2, range))), 2, range)
+  } else {
+    wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2, range))), 2, range)
+  }
   plot(NA, xlim = wdw[, 1], ylim = wdw[, 2], asp = 1, las = 1,
        cex.axis = 2/3, ann = FALSE, frame = FALSE)
   title(title)
   if (xy.axis) {
     abline(h = 0, v = 0, col = "grey80", lty = 2)
   }
+  # semilandmarks lines
   if (cur | (is.cur(Coo) & missing(cur))){
     for (i in 1:length(Coo)) {
       lapply(Coo$cur[[i]], lines, col=col_alpha("#000000", 0.95))
     }
   }
+  # points
   for (i in 1:length(Coo)) {
     points(Coo$coo[[i]], pch = ldk.pch, col = ldk.col, cex = ldk.cex)
   }
+  # semilandmarks
   if (is.cur(Coo)){
     cur_binded <- get_cur_binded(Coo)
     for (i in 1:length(Coo)) {
-      points(cur_binded[[i]], pch = cur.pch, col = ldk.col, cex = ldk.cex)
+      points(cur_binded[[i]], pch = cur_pch, col = ldk.col, cex = ldk.cex*0.25)
     }
   }
   # Specific to Ldk not very clean below #todo
@@ -234,8 +240,8 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   if (ldk_labels) {
     ldk_labels(mshapes(A))
   }
-  points(mA, pch = 20,
-         cex = ifelse(ldk.cex > 0.5, ldk.cex * 1.5, 1), col = "grey20")
+  points(mA, pch = 3,
+         cex = ifelse(ldk.cex > 0.5, ldk.cex * 1.5, 2), col = "grey50")
 }
 
 
