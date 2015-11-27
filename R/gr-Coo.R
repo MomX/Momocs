@@ -110,7 +110,7 @@ stack.Coo <-
            ldk.cex = 0.5, ldk_links = FALSE,
            ldk_confell = FALSE, ldk_contour = FALSE,
            ldk_chull = FALSE, ldk_labels = FALSE,
-           cur.pch = ".",
+           cur_pch = ".",
            xy.axis = TRUE, title=substitute(x), ...) {
     Coo <- x
     # downsize
