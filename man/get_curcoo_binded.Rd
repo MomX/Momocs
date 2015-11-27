@@ -7,7 +7,7 @@
 get_curcoo_binded(x)
 }
 \arguments{
-\item{Ldk}{an \link{Ldk} object}
+\item{x}{an \link{Ldk} object}
 }
 \value{
 a list of matrices

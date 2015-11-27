@@ -73,7 +73,7 @@ plot.Coo <- function(x, id, ...) {
 #' @param ldk_chull \code{logical} whether to draw convex hull
 #' @param ldk_labels \code{logical} whether to draw landmark labels
 #' @param cur \code{logical} whether to draw curves, based on semi landmarks
-#' @param cur.pch \code{pch} for semi landmarks
+#' @param cur_pch \code{pch} for semi landmarks
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param nb.pts the number of points to use for the shape reconstruction

@@ -428,7 +428,7 @@ function(Ldk){
 #'
 #' Binds \code{$coo} with groups (if any) of landmarks from the \code{$cur}
 #' on \link{Ldk} objects
-#' @param Ldk an \link{Ldk} object
+#' @param x an \link{Ldk} object
 #' @family get_cur functions
 #' @return a list of matrices
 #' @export

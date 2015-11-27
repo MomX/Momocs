@@ -60,8 +60,6 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{ldk_labels}{\code{logical} whether to draw landmark labels}
 
-\item{cur.pch}{\code{pch} for semi landmarks}
-
 \item{xy.axis}{whether to draw or not the x and y axes}
 
 \item{title}{a title for the plot. The name of the \code{Coo} by default}
@@ -71,6 +69,8 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{nb.pts}{the number of points to use for the shape reconstruction}
 
 \item{cur}{\code{logical} whether to draw curves, based on semi landmarks}
+
+\item{cur_pch}{\code{pch} for semi landmarks}
 }
 \description{
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
