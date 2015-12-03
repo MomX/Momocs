@@ -114,7 +114,7 @@ subset.Coe <- function(x, subset, ...) {
   if (ncol(Coe$fac) > 0) {
     Coe2$fac <- Coe$fac[retain, ]
     names(Coe2$fac) <- names(Coe$fac)
-    Coe2$fac <- .refactor(Coe2$fac)
+    #Coe2$fac <- .refactor(Coe2$fac)
   }
   return(Coe2)
 }
@@ -131,7 +131,7 @@ subset.PCA <- function(x, subset, ...){
     PCA2$fac <- PCA$fac
     PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
     names(PCA2$fac) <- names(PCA$fac)
-    PCA2$fac <- .refactor(PCA2$fac)
+    # PCA2$fac <- .refactor(PCA2$fac)
   }
   return(PCA2)
 }
