@@ -92,12 +92,14 @@ subset.Coo <- function(x, subset, ...) {
   retain <- eval(e, Coo$fac, parent.frame())
   Coo2 <- Coo
   Coo2$coo <- Coo$coo[retain]
-  if (length(Coo$ldk) > 0)
+  if (is.ldk(Coo))
     Coo2$ldk <- Coo$ldk[retain]
-  if (ncol(Coo$fac) > 0) {
+  if (is.fac(Coo)) {
+    #     if (is.logical(retain))
+    #       retain <- which(retain)
     Coo2$fac <- dplyr::slice(Coo$fac, retain)
     names(Coo2$fac) <- names(Coo$fac)
-    #Coo2$fac <- .refactor(Coo2$fac)
+    Coo2$fac <- .refactor(Coo2$fac)
   }
   return(Coo2)
 }
@@ -114,7 +116,7 @@ subset.Coe <- function(x, subset, ...) {
   if (ncol(Coe$fac) > 0) {
     Coe2$fac <- Coe$fac[retain, ]
     names(Coe2$fac) <- names(Coe$fac)
-    #Coe2$fac <- .refactor(Coe2$fac)
+    Coe2$fac <- .refactor(Coe2$fac)
   }
   return(Coe2)
 }
@@ -131,7 +133,7 @@ subset.PCA <- function(x, subset, ...){
     PCA2$fac <- PCA$fac
     PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
     names(PCA2$fac) <- names(PCA$fac)
-    # PCA2$fac <- .refactor(PCA2$fac)
+    PCA2$fac <- .refactor(PCA2$fac)
   }
   return(PCA2)
 }
@@ -220,14 +222,16 @@ rm_uncomplete <- function(x, id, by){
   nb.u <- unique(nb)
   nb.tab <- table(nb)
   if (length(nb.u) == 1) {
-    cat("* all ids have", nb.u, "slices\n")
+    message("* all ids have ", nb.u, " slices\n")
     return(x)
   } else {
     most_frequent <- as.numeric(names(nb.tab[which.max(nb.tab)]))
     ugly_ducklings <- names(which(nb != most_frequent))
-    cat("* those shapes did not have", most_frequent, "slices and has been removed:",
-        paste(ugly_ducklings, collapse=", "), "\n")
-    return(subset(x, ! id %in% ugly_ducklings))
+    remove_rows <- which(x$fac[, id] %in% ugly_ducklings)
+    message("* those shapes did not have ", most_frequent,
+            " slices and has been removed:",
+            paste(ugly_ducklings, collapse=", "), "\n")
+    return(subset(x, -remove_rows))
   }
 }
 
@@ -418,11 +422,11 @@ get_cur_binded.Coo <- function(Ldk){
 
 #' @export
 get_cur_binded.Ldk <-
-function(Ldk){
-  .check(is.cur(Ldk),
-         "no curves")
-  lapply(Ldk$cur, function(x) do.call(rbind, x))
-}
+  function(Ldk){
+    .check(is.cur(Ldk),
+           "no curves")
+    lapply(Ldk$cur, function(x) do.call(rbind, x))
+  }
 
 #' Binds landmarks and semi-landmarks coordinates from Ldk objects
 #'

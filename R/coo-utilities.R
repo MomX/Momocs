@@ -782,7 +782,7 @@ coo_sample.Out <- function(coo, n) {
       ratio.i <- n / coo_nb[i]
       Out$ldk[[i]] <- ceiling(Out$ldk[[i]] * ratio.i)
     }
-    cat(" * $ldk has been changed accordingly.\n")
+    message(" * $ldk has been changed accordingly.\n")
   }
 
   Out$coo <- lapply(Out$coo, coo_sample, n)
