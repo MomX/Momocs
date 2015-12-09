@@ -206,6 +206,8 @@ validate.Coo <- function(Coo){
            " the number of $ldk must equal the number of shapes")
     .check(length(unique(sapply(Coo$ldk, length)))==1,
            " the number of $ldk defined must be the same accross shapes")
+    .check(all(sapply(Coo$coo, nrow) >= sapply(Coo$ldk, max)),
+           " at least one shape as a $ldk id higher than its number of coordinates")
   }
   Coo
 }
