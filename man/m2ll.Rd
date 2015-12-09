@@ -2,8 +2,7 @@
 % Please edit documentation in R/babel-bridges.R
 \name{m2ll}
 \alias{m2ll}
-\title{Used internally to hanle coo and cur in \code{Ldk} objects but may be
-useful elsewhere}
+\title{Converts a matrix of coordinates into a list of matrices}
 \usage{
 m2ll(m, index = NULL)
 }

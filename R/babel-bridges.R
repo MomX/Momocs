@@ -181,7 +181,7 @@ m2l <- function(m) {
   return(list(x = m[, 1], y = m[, 2]))
 }
 
-#’ Converts a matrix of coordinates into a list of matrices
+#' Converts a matrix of coordinates into a list of matrices
 #'
 #' Used internally to hanle coo and cur in \code{Ldk} objects but may be
 #' useful elsewhere
