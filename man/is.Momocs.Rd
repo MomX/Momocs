@@ -11,7 +11,11 @@
 \alias{is.Out}
 \alias{is.OutCoe}
 \alias{is.PCA}
-\title{Tests if an object is of a given class}
+\alias{is.cur}
+\alias{is.fac}
+\alias{is.ldk}
+\alias{is.links}
+\title{Tests if an object is of a given class or has a particular component}
 \usage{
 is.Coo(x)
 
@@ -32,6 +36,14 @@ is.OutCoe(x)
 is.OpnCoe(x)
 
 is.LdkCoe(x)
+
+is.fac(x)
+
+is.ldk(x)
+
+is.cur(x)
+
+is.links(x)
 }
 \arguments{
 \item{x}{the object to test}
@@ -40,8 +52,9 @@ is.LdkCoe(x)
 TRUE/FALSE
 }
 \description{
-Tests if any of the classes of an object is of a given class. For instance
-is.PCA on a PCA object (both 'PCA' and 'prcomp') will return TRUE
+Class testers test if any of the classes of an object is of a given class. For instance
+is.PCA on a PCA object (both 'PCA' and 'prcomp') will return TRUE.
+Component testers check if a particular component (eg $fac, etc.) is present.
 }
 \examples{
 data(bot)

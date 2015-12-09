@@ -391,6 +391,8 @@ get_ldk.Ldk <- function(Coo){
 
 #' @export
 get_ldk.Out <- function(Coo) {
+  .check(is.ldk(Coo),
+         "this object has no $ldk")
   coo <- Coo$coo
   ldk <- Coo$ldk
   ref <- array(NA, dim = c(length(ldk[[1]]), ncol(coo[[1]]),
@@ -459,10 +461,11 @@ get_curcoo_binded.Ldk <- function(x){
 
 
 # class testers -------------
-#' Tests if an object is of a given class
+#' Tests if an object is of a given class or has a particular component
 #'
-#' Tests if any of the classes of an object is of a given class. For instance
-#' is.PCA on a PCA object (both 'PCA' and 'prcomp') will return TRUE
+#' Class testers test if any of the classes of an object is of a given class. For instance
+#' is.PCA on a PCA object (both 'PCA' and 'prcomp') will return TRUE.
+#' Component testers check if a particular component (eg $fac, etc.) is present.
 #' @param x the object to test
 #' @return TRUE/FALSE
 #' @examples
@@ -520,3 +523,22 @@ is.OpnCoe <- function(x){
 is.LdkCoe <- function(x){
   ifelse(any(class(x) == "LdkCoe"), TRUE, FALSE)
 }
+
+# component testers ---------
+#' @rdname is.Momocs
+#' @export
+is.fac   <- function(x) length(x$fac) > 0
+
+#' @rdname is.Momocs
+#' @export
+is.ldk   <- function(x) length(x$ldk) > 0
+
+#' @rdname is.Momocs
+#' @export
+is.cur   <- function(x) length(x$cur) > 0
+
+#' @rdname is.Momocs
+#' @export
+is.links <- function(x) is.matrix(x$links)
+
+
