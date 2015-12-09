@@ -24,7 +24,7 @@ plot.Coo <- function(x, id, ...) {
   if (missing(id)) {
     repeat {
       Coo1 <- sample_n(x, 1)
-      Coo1 %>% stack(title=names(.), coo_sample=NULL)
+      Coo1 %>% stack(title=names(Coo1), coo_sample=NULL)
       readline(prompt = "Press <Enter> to continue, <Esc> to quit...")
     }
   }
