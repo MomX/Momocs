@@ -23,9 +23,8 @@ plot.Coo <- function(x, id, ...) {
   Coo <- x
   if (missing(id)) {
     repeat {
-      id <- sample(length(Coo), 1)
-      coo_plot(Coo$coo[[id]], main = names(Coo)[id], ...)
-      cat(id)
+      Coo1 <- sample_n(x, 1)
+      Coo1 %>% stack(title=names(.), coo_sample=NULL)
       readline(prompt = "Press <Enter> to continue, <Esc> to quit...")
     }
   }
@@ -34,11 +33,10 @@ plot.Coo <- function(x, id, ...) {
   }
   if (is.numeric(id)) {
     if (length(id) == 1) {
-      coo_plot(Coo$coo[[id]], main = names(Coo)[id], ...)
+      slice(Coo, id) %>% stack(main = names(Coo)[id], ...)
     } else {
       for (i in seq(along = id)) {
-        coo_plot(Coo$coo[[id[i]]], main = names(Coo)[id[i]],
-                 ...)
+        slice(Coo, id) %>% stack(main = names(Coo)[id], ...)
         readline(prompt = "Press <Enter> to continue, <Esc> to quit...")
       }
     }
@@ -116,7 +114,7 @@ stack.Coo <-
     # downsize
     if (is.numeric(coo_sample)) {
       if (all(coo_nb(Coo) >= coo_sample)) {
-        Coo <- coo_sample(Coo, coo_sample)
+        Coo <- suppressMessages(coo_sample(Coo, coo_sample))
       }
     }
 
@@ -155,11 +153,14 @@ stack.Coo <-
       abline(h = 0, v = 0, col = "grey80", lty = 2)
     }
     # should be lapply-ed but how to keep cols/borders ?
+    if (ldk & length(Coo$ldk) != 0){
+      ldks <- get_ldk(Coo)
+    }
     for (i in 1:length(Coo)) {
       coo_draw(Coo$coo[[i]], col = cols[i], border = borders[i],
                points = points, first.point = TRUE, centroid = centroid)
       if (ldk & length(Coo$ldk) != 0) {
-        points(Coo$coo[[i]][Coo$ldk[[i]], ], pch = ldk.pch,
+        points(ldks[,1,i], ldks[,2,i], pch = ldk.pch,
                col = ldk.col, cex = ldk.cex)
       }
     }
@@ -317,7 +318,7 @@ panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
   Coo <- x
   if (is.numeric(coo_sample)) {
     if (all(coo_nb(Coo) >= coo_sample)) {
-      Coo <- coo_sample(Coo, coo_sample)
+      Coo <- suppressMessages(coo_sample(Coo, coo_sample))
     }
   }
   if (!missing(reorder)){
@@ -380,7 +381,7 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
   Coo <- x
   if (is.numeric(coo_sample)) {
     if (all(coo_nb(Coo) >= coo_sample)) {
-      Coo <- coo_sample(Coo, coo_sample)
+      Coo <- suppressMessages(coo_sample(Coo, coo_sample))
     }
   }
   if (!missing(fac)) {
