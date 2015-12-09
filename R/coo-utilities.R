@@ -602,7 +602,8 @@ coo_slide.Coo <- function(coo, id1, ldk) {
   Coo <- coo
   ##### ldk case #####
   if (!missing(ldk)) {
-    if (length(Coo$ldk) == 0) stop(" * No landmarks defined.")
+    .check(is.ldk(Coo),
+           "this object has no $ldk")
     if (!missing(id1))        warning(" * id1 provided will be ignored.")
     for (i in seq(along = Coo$coo)) {
       Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], Coo$ldk[[i]][ldk])
@@ -620,8 +621,11 @@ coo_slide.Coo <- function(coo, id1, ldk) {
     slide_ldk <- (length(Coo$ldk) > 0)
     for (i in seq(along = Coo$coo)) {
       Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id1[i])
-      if (slide_ldk)
-        Coo$ldk[[i]] <- (Coo$ldk[[i]] - id1[i] - 1) %% nrow(Coo$coo[[i]])
+      if (slide_ldk){
+        new_ldk <- (Coo$ldk[[i]] - id1[i]) %% nrow(Coo$coo[[i]])
+        Coo$ldk[[i]] <- ifelse(new_ldk==0, 1, new_ldk)
+      }
+
     }
     return(Coo)
   }}
