@@ -424,15 +424,4 @@ names.Coe <- function(x) {
   }
 }
 
-# component testers ---------
-#' @export
-is.fac   <- function(x) length(x$fac) > 0
-#' @export
-is.ldk   <- function(x) length(x$ldk) > 0
-#' @export
-is.cur   <- function(x) length(x$cur) > 0
-#' @export
-is.links <- function(x) is.matrix(x$links)
-
-
 
