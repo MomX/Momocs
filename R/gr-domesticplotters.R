@@ -109,7 +109,7 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
     }
     if (first.point) {
         angle <- atan2(coo[2, 2] - coo[1, 2], coo[2, 1] - coo[1, 1]) * (180 / pi) - 90
-        text(coo[1, 1], coo[1, 2], labels = "^", cex=1, srt=angle)
+        text(coo[1, 1], coo[1, 2], labels = "^", cex=0.5, srt=angle)
     }
     if (centroid) {
       cent <- coo_centpos(coo)

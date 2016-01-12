@@ -551,6 +551,23 @@ combine.Ldk <- function(...) {
   return(Ldk)
 }
 
+# #' @export
+# combine.LdkCoe <- function(...) {
+#   args <- list(...)
+#   # we check
+#   if (length(unique(sapply(args, length))) != 1)
+#     stop("* objects to combine must have the same number of items")
+#   # Out <- Out(do.call( c, lapply( args, c )))
+#   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
+#   facS <- args[[1]]$fac
+#   # bloody dirty, todo
+#   LdkCoe <- Ldk(args[[1]]$coo, fac=facS)
+#   LdkCoe$coo <- coeS
+#   class(LdkCoe) <- c("LdkCoe", class(LdkCoe))
+#   return(LdkCoe)
+# }
+
+
 #' @export
 combine.OutCoe <- function(...) {
   args <- list(...)
