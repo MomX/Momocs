@@ -147,19 +147,26 @@ subset.PCA <- function(x, subset, ...){
 #'
 #' @param x any Momocs object
 #' @param fac the id of the name of the $fac column to look for
-#' @param from which level should be renamed
+#' @param from which level(s) should be renamed; passed as a single or several characters
 #' @param to which name ?
 #' @return a Momocs object of the same type
 #' @examples
 #' data(bot)
+#' # single renaming
 #' rw_rule(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
+#' # several renaming
+#' bot2 <- mutate(bot, fake=factor(rep(letters[1:4], 10)))
+#' rw_rule(bot2, "fake", c("a", "e"), "ae")$fake
 #' @export
 rw_rule <- function(x, fac, from, to){
   new_levels <- unique(c(levels(x$fac[, fac]), to))
   fac2 <- factor(x$fac[, fac], levels = new_levels)
-  fac2[which(fac2==from)] <- to
+  for (i in seq_along(from)) {
+    fac2[which(fac2==from[i])] <- to
+  }
   x$fac[, fac] <- droplevels(fac2)
-  x}
+  x
+}
 
 # at_least ------------------------
 #' Retains group with at least a certain number of individuals within
@@ -310,7 +317,7 @@ rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){
     scale_mapping <- read.table(scale_mapping, header=TRUE, ...)
   # we prepare the two cols and match
   mag_orig <- x$fac[, magnification_col] %>% as.numeric()
-  mag_rule <- scale_mapping[, 1] %>% as.numeric()
+  mag_rule <- scale_mapping[, 1] %>% as.character %>% as.numeric()
   mag_match <- match(mag_orig, mag_rule)
   # we check a bit
   match_found <- mag_orig %in% mag_rule

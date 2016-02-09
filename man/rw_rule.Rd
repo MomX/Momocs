@@ -11,7 +11,7 @@ rw_rule(x, fac, from, to)
 
 \item{fac}{the id of the name of the $fac column to look for}
 
-\item{from}{which level should be renamed}
+\item{from}{which level(s) should be renamed; passed as a single or several characters}
 
 \item{to}{which name ?}
 }
@@ -24,6 +24,10 @@ at the import, or merge some levels within covariates. Drops levels silently.
 }
 \examples{
 data(bot)
+# single renaming
 rw_rule(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
+# several renaming
+bot2 <- mutate(bot, fake=factor(rep(letters[1:4], 10)))
+rw_rule(bot2, "fake", c("a", "e"), "ae")$fake
 }
 
