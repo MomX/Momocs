@@ -10,8 +10,9 @@
 #'
 #' The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
-#' @param fac factor, or a name or the column id from the $fac slot, or a formula combining colum names
-#' from the $fac slot (cf. examples)
+#' @param fac name or the column id from the $fac slot, or a formula combining colum names
+#' from the $fac slot (cf. examples). A factor or a numeric of the same length
+#' can also be passed on the fly.
 #' @param xax the first PC axis
 #' @param yax the second PC axis
 #' @param points logical whether to plot points
@@ -44,13 +45,15 @@
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
-#' @param conf_ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
+#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
 #' @param ellipsesax logical whether to draw ellipse axes
-#' @param conf_ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
+#' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
 #' @param lwd.ellipsesax if yes, one or more numeric for the line widths
 #' @param lty.ellipsesax if yes, the lty with which to draw these axes
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
+#' @param chull.filled logical whether to add filled convex hulls
+#' @param chull.filled.alpha numeric alpha transparency
 #' @param density whether to add a 2d density kernel estimation (based on \link{kde2d})
 #' @param lev.density if yes, the number of levels to plot (through \link{image})
 #' @param contour whether to add contour lines based on 2d density kernel
@@ -61,11 +64,12 @@
 #' @param labelspoints if TRUE rownames are used as labels, a colname from $fac can also be passed
 #' @param col.labelspoints a color for these labels, otherwise inherited from fac
 #' @param cex.labelspoints a cex for these labels
-#' @param abbreviate.labelspoints logical whether to abbrevia
+#' @param abbreviate.labelspoints logical whether to abbreviate
 #' @param labelsgroups logical whether to add labels for groups
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
 #' @param rect.labelsgroups logical whether to add a rectangle behind groups names
 #' @param abbreviate.labelsgroups logical, whether to abbreviate group names
+#' @param color.legend logical whether to add a (cheap) color legend for numeric fac
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
 #' @param eigen logical whether to draw a plot of the eigen values
@@ -82,7 +86,7 @@
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #'
-#' # pos.shp
+#' ### Morphospace options
 #' plot(bot.p, pos.shp="full")
 #' plot(bot.p, pos.shp="range")
 #' plot(bot.p, pos.shp="xy")
@@ -91,23 +95,99 @@
 #' plot(bot.p, pos.shp="full_axes")
 #'
 #' plot(bot.p, morpho=FALSE)
-#' plot(bot.p, "type")
 #'
+#' ### Passing factors to plot.PCA
+#' # 3 equivalent methods
+#' plot(bot.p, "type")
+#' plot(bot.p, 1)
+#' plot(bot.p, ~type)
+#'
+#' # let's create a dummy factor of the correct length
+#' # and another added to the $fac with mutate
+#' # and a numeric of the correct length
+#' data(bot)
+#' f <- factor(rep(letters[1:2], 20))
+#' z <- factor(rep(LETTERS[1:2], 20))
+#' bot %<>% mutate(cs=coo_centsize(.), z=z)
+#' bp <- bot %>% efourier %>% PCA
+#' # so bp contains type, cs (numeric) and z; not f
+#' # yet f can be passed on the fly
+#' plot(bp, f)
+#' # numeric fac are allowed
+#' plot(bp, "cs", cex=3, color.legend=TRUE)
+#' # numeric can also be passed on the fly
+#' plot(bp, 1:40, cex=2)
+#' # formula allows combinations of factors
+#' plot(bp, ~type+z)
+#'
+#' ### other morphometric approaches works the same
+#' # open curves
 #' data(olea)
 #' op <- npoly(olea, 5)
 #' op.p <- PCA(op)
 #' op.p
 #' plot(op.p, ~ domes + var, morpho=TRUE) # use of formula
 #'
+#' # landmarks
 #' data(wings)
 #' wp <- fgProcrustes(wings, tol=1e-4)
 #' wpp <- PCA(wp)
 #' wpp
 #' plot(wpp, 1)
+#'
+#' # traditionnal measurements
+#' data(flower)
+#' flower %>% PCA %>% plot(1)
+#'
+#' # plot.PCA can be used after a PCA
+#' data(iris)
+#' PCA(iris[, 1:4], fac=iris$Species)  %>% plot(1)
+#'
+#' ### Cosmetic options
+#' # window
+#' plot(bp, 1, zoom=2)
+#' plot(bp, zoom=0.5)
+#' plot(bp, center.origin=FALSE, grid=FALSE)
+#'
+#' # ellipses
+#' plot(bp, 1, conf.ellipsesax=2/3)
+#' plot(bp, 1, ellipsesax=FALSE)
+#' plot(bp, 1, ellipsesax=TRUE, ellipses=TRUE)
+#'
+#' # stars
+#' plot(bp, 1, stars=TRUE, ellipsesax=FALSE)
+#'
+#' # convex hulls
+#' plot(bp, 1, chull=TRUE)
+#' plot(bp, 1, chull.lty=3)
+#'
+#' # filled convex hulls
+#' plot(bp, 1, chull.filled=TRUE)
+#' plot(bp, 1, chull.filled.alpha = 0.8, chull.lty =1) # you can omit chull.filled=TRUE
+#'
+#' # density kernel
+#' plot(bp, 1, density=TRUE, contour=TRUE, lev.contour=10)
+#'
+#' # delaunay
+#' plot(bp, 1, delaunay=TRUE)
+#'
+#' # loadings
+#' flower %>% PCA %>% plot(1, loadings=TRUE)
+#'
+#' # point/group labelling
+#' plot(bp, 1, labelspoint=TRUE) # see options for abbreviations
+#' plot(bp, 1, labelsgroup=TRUE) # see options for abbreviations
+#'
+#' # clean axes, no rug, no border, random title
+#' plot(bp, axisvar=FALSE, axisnames=FALSE, rug=FALSE, box=FALSE, title="random")
+#'
+#' # no eigen
+#' plot(bp, eigen=FALSE) # eigen cause troubles to graphical window
+#' # eigen may causes troubles to the graphical window. you can try old.par = TRUE
 #' @method plot PCA
 #' @export
 plot.PCA <- function(x, fac, xax=1, yax=2,
-                     #color choice
+                     #points arguments
                      points=TRUE, col="#000000", pch=20, cex=0.5, palette=col_solarized,
                      #.frame
                      center.origin=FALSE, zoom=1, bg=par("bg"),
@@ -124,12 +204,14 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      #stars
                      stars=FALSE,
                      #ellipses
-                     ellipses=FALSE, conf_ellipses=0.5,
+                     ellipses=FALSE, conf.ellipses=0.5,
                      #ellipsesax
-                     ellipsesax=TRUE, conf_ellipsesax=c(0.5, 0.75, 0.9),
+                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
                      lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
                      #convexhulls
-                     chull=FALSE, chull.lty=3,
+                     chull=FALSE, chull.lty=1,
+                     #filled convex hulls,
+                     chull.filled=FALSE, chull.filled.alpha=0.92,
                      #kde2d
                      density=FALSE, lev.density=20,
                      contour = FALSE, lev.contour=3, n.kde2d=100,
@@ -147,6 +229,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      cex.labelsgroups=0.8,
                      rect.labelsgroups=FALSE,
                      abbreviate.labelsgroups=FALSE,
+                     # legend for numeric fac
+                     color.legend=FALSE,
                      #axisnames
                      axisnames=TRUE,
                      #axisvar
@@ -166,47 +250,68 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     fac <- NULL
     col.groups <- col
   } else {
-    ### fac provided
-    # fac provided, as formula
+    # fac provided ------------------------
+    # fac provided, as formula ============
     if (class(fac) == "formula") {
-      #f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
-      #fac <- interaction(f0)
-      fac <- PCA$fac[, attr(terms(fac), "term.labels")]
+      column_name <- attr(terms(fac), "term.labels")
+      # we check for wrong formula
+      if (any(is.na(match(column_name, colnames(PCA$fac)))))
+        stop(" * formula provided must match with $fac column names")
+      # otherwise we retrive the column(s)
+      fac <- PCA$fac[, column_name]
+      # multicolumn/fac case
       if (is.data.frame(fac))
         fac <- factor(apply(fac, 1, paste, collapse="_"))
     }
     # fac provided, as column name or id
-    if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-    fac <- factor(fac) # I love R
-    # if 'fac' has been provided, we now have a valid fac
-    # col handling
-    if (!missing(col)){
-      if (length(col)==nlevels(fac)) {
-        col.groups <- col
-        col <- col.groups[fac]
+    if (length(fac)==1){
+      fac <- PCA$fac[, fac]
+    }
+
+    # if fac is a factor
+    if (is.factor(fac)){
+      if (!missing(col)){
+        if (length(col)==nlevels(fac)) {
+          col.groups <- col
+          col <- col.groups[fac]
+        } else {
+          col.groups <- rep(col[1], nlevels(fac))
+          if (length(col) != nrow(xy)){
+            col <- rep(col[1], nrow(xy))}}
       } else {
-        col.groups <- rep(col[1], nlevels(fac))
+        col.groups <- palette(nlevels(fac))
         if (length(col) != nrow(xy)){
-          col <- rep(col[1], nrow(xy))}}
-    } else {
-      col.groups <- palette(nlevels(fac))
-      if (length(col) != nrow(xy)){
-        col <- col.groups[fac]}
-    }
-    # pch handling
-    if (!missing(pch)) {
-      if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
-    }
-    else {
+          col <- col.groups[fac]}
+      }
+      # pch handling
+      if (!missing(pch)) {
+        if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
+      }
+      else {
         pch <- 20
+      }
     }
   }
-  # cosmectics
-  if ((density) & missing(contour)) contour <- TRUE
+
+  # if fac is a numeric
+  if (is.numeric(fac)){
+    if (missing(col)){
+      if (missing(palette)){
+        palette <- col_gallus
+      }
+      cols_breaks = 1000
+      cols_all <- palette(cols_breaks)
+      cols_id <- fac  %>% .normalize()  %>% cut(breaks = cols_breaks)  %>% as.numeric()
+      col <- cols_all[cols_id]
+    }
+  }
+  # cosmetics
+  if ((density) & missing(contour)) contour   <- TRUE
   if ((density) & missing(ellipses)) ellipses <- FALSE
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
-  if (missing(rug) & nlevels(fac)>6) rug <- FALSE
-  if (!missing(chull.lty)) chull <- TRUE
+  if (missing(rug) & nlevels(fac)>6) rug      <- FALSE
+  if (!missing(chull.lty)) chull              <- TRUE
+  if (!missing(chull.filled.alpha)) chull.filled <- TRUE
   if (!missing(labelspoints) & missing(points)) points <- FALSE
   if (missing(col.labelspoints)) col.labelspoints <- col
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
@@ -218,11 +323,22 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   par(mar = rep(0.1, 4)) #0.1
   # we initate it
   .frame(xy, center.origin, zoom=zoom, bg=bg)
-  # then the layers
   if (grid)     .grid(nb.grids)
+
+  # if numeric fac, we add the (cheap) legend
+  if (is.numeric(fac) & color.legend) {
+    legend_labels <- round(c(max(fac), mean(range(fac)), min(fac)), 2)
+    legend_cols <- col[c(length(col), round(length(col)/2), 1)]
+    legend("topright", fill=legend_cols,
+           legend=legend_labels, bty="n",
+           y.intersp = 0.8, cex=0.8, adj=0, xjust=1)
+  }
+
+  # then the layers
   if (density)  .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
   if (contour)  .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
   if (delaunay) .delaunay(xy, fac, col.groups)
+
   # morphospace handling - a big baby
   if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
     morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
@@ -234,8 +350,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   }
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
-    if (ellipsesax) .ellipsesax(xy, fac, conf_ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
-    if (ellipses)   .ellipses(xy, fac, conf_ellipses, col.groups) #+conf
+    if (ellipsesax) .ellipsesax(xy, fac, conf.ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
+    if (ellipses)   .ellipses(xy, fac, conf.ellipses, col.groups) #+conf
+    if (chull.filled) .chullfilled(xy, fac, col_alpha(col.groups, chull.filled.alpha))
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
     if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
                                         cex=cex.labelsgroups, rect=rect.labelsgroups,
@@ -244,6 +361,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   } else {
     if (rug)        .rug(xy, NULL, col)
   }
+  # return(col)
+
   if (points) points(xy, pch=pch, col=col, cex=cex)
   if (!missing(labelspoints)) {
     if (labelspoints==FALSE) {

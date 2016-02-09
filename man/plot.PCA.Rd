@@ -13,22 +13,24 @@
   flipx.shp = FALSE, flipy.shp = FALSE, pts.shp = 60,
   border.shp = col_alpha("#000000", 0.5), lwd.shp = 1,
   col.shp = col_alpha("#000000", 0.95), stars = FALSE, ellipses = FALSE,
-  conf_ellipses = 0.5, ellipsesax = TRUE, conf_ellipsesax = c(0.5, 0.75,
+  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.75,
   0.9), lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
-  chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
-  lev.contour = 3, n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
+  chull.lty = 1, chull.filled = FALSE, chull.filled.alpha = 0.92,
+  density = FALSE, lev.density = 20, contour = FALSE, lev.contour = 3,
+  n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
   labelspoints = FALSE, col.labelspoints = par("fg"),
   cex.labelspoints = 0.6, abbreviate.labelspoints = TRUE,
   labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
-  abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
-  eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,
-  old.par = TRUE, ...)
+  abbreviate.labelsgroups = FALSE, color.legend = FALSE, axisnames = TRUE,
+  axisvar = TRUE, eigen = TRUE, rug = TRUE, title = substitute(x),
+  box = TRUE, old.par = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
 
-\item{fac}{factor, or a name or the column id from the $fac slot, or a formula combining colum names
-from the $fac slot (cf. examples)}
+\item{fac}{name or the column id from the $fac slot, or a formula combining colum names
+from the $fac slot (cf. examples). A factor or a numeric of the same length
+can also be passed on the fly.}
 
 \item{xax}{the first PC axis}
 
@@ -90,11 +92,11 @@ a matrix of positions. See \link{pos.shapes}}
 
 \item{ellipses}{logical whether to draw confidence ellipses}
 
-\item{conf_ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
+\item{conf.ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
 
 \item{ellipsesax}{logical whether to draw ellipse axes}
 
-\item{conf_ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
+\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
 
 \item{lty.ellipsesax}{if yes, the lty with which to draw these axes}
 
@@ -103,6 +105,10 @@ a matrix of positions. See \link{pos.shapes}}
 \item{chull}{logical whether to draw a convex hull}
 
 \item{chull.lty}{if yes, its linetype}
+
+\item{chull.filled}{logical whether to add filled convex hulls}
+
+\item{chull.filled.alpha}{numeric alpha transparency}
 
 \item{density}{whether to add a 2d density kernel estimation (based on \link{kde2d})}
 
@@ -124,7 +130,7 @@ a matrix of positions. See \link{pos.shapes}}
 
 \item{cex.labelspoints}{a cex for these labels}
 
-\item{abbreviate.labelspoints}{logical whether to abbrevia}
+\item{abbreviate.labelspoints}{logical whether to abbreviate}
 
 \item{labelsgroups}{logical whether to add labels for groups}
 
@@ -133,6 +139,8 @@ a matrix of positions. See \link{pos.shapes}}
 \item{rect.labelsgroups}{logical whether to add a rectangle behind groups names}
 
 \item{abbreviate.labelsgroups}{logical, whether to abbreviate group names}
+
+\item{color.legend}{logical whether to add a (cheap) color legend for numeric fac}
 
 \item{axisnames}{logical whether to add PC names}
 
@@ -162,7 +170,7 @@ data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 
-# pos.shp
+### Morphospace options
 plot(bot.p, pos.shp="full")
 plot(bot.p, pos.shp="range")
 plot(bot.p, pos.shp="xy")
@@ -171,19 +179,95 @@ plot(bot.p, pos.shp="range_axes")
 plot(bot.p, pos.shp="full_axes")
 
 plot(bot.p, morpho=FALSE)
-plot(bot.p, "type")
 
+### Passing factors to plot.PCA
+# 3 equivalent methods
+plot(bot.p, "type")
+plot(bot.p, 1)
+plot(bot.p, ~type)
+
+# let's create a dummy factor of the correct length
+# and another added to the $fac with mutate
+# and a numeric of the correct length
+data(bot)
+f <- factor(rep(letters[1:2], 20))
+z <- factor(rep(LETTERS[1:2], 20))
+bot \%<>\% mutate(cs=coo_centsize(.), z=z)
+bp <- bot \%>\% efourier \%>\% PCA
+# so bp contains type, cs (numeric) and z; not f
+# yet f can be passed on the fly
+plot(bp, f)
+# numeric fac are allowed
+plot(bp, "cs", cex=3, color.legend=TRUE)
+# numeric can also be passed on the fly
+plot(bp, 1:40, cex=2)
+# formula allows combinations of factors
+plot(bp, ~type+z)
+
+### other morphometric approaches works the same
+# open curves
 data(olea)
 op <- npoly(olea, 5)
 op.p <- PCA(op)
 op.p
 plot(op.p, ~ domes + var, morpho=TRUE) # use of formula
 
+# landmarks
 data(wings)
 wp <- fgProcrustes(wings, tol=1e-4)
 wpp <- PCA(wp)
 wpp
 plot(wpp, 1)
+
+# traditionnal measurements
+data(flower)
+flower \%>\% PCA \%>\% plot(1)
+
+# plot.PCA can be used after a PCA
+data(iris)
+PCA(iris[, 1:4], fac=iris$Species)  \%>\% plot(1)
+
+### Cosmetic options
+# window
+plot(bp, 1, zoom=2)
+plot(bp, zoom=0.5)
+plot(bp, center.origin=FALSE, grid=FALSE)
+
+# ellipses
+plot(bp, 1, conf.ellipsesax=2/3)
+plot(bp, 1, ellipsesax=FALSE)
+plot(bp, 1, ellipsesax=TRUE, ellipses=TRUE)
+
+# stars
+plot(bp, 1, stars=TRUE, ellipsesax=FALSE)
+
+# convex hulls
+plot(bp, 1, chull=TRUE)
+plot(bp, 1, chull.lty=3)
+
+# filled convex hulls
+plot(bp, 1, chull.filled=TRUE)
+plot(bp, 1, chull.filled.alpha = 0.8, chull.lty =1) # you can omit chull.filled=TRUE
+
+# density kernel
+plot(bp, 1, density=TRUE, contour=TRUE, lev.contour=10)
+
+# delaunay
+plot(bp, 1, delaunay=TRUE)
+
+# loadings
+flower \%>\% PCA \%>\% plot(1, loadings=TRUE)
+
+# point/group labelling
+plot(bp, 1, labelspoint=TRUE) # see options for abbreviations
+plot(bp, 1, labelsgroup=TRUE) # see options for abbreviations
+
+# clean axes, no rug, no border, random title
+plot(bp, axisvar=FALSE, axisnames=FALSE, rug=FALSE, box=FALSE, title="random")
+
+# no eigen
+plot(bp, eigen=FALSE) # eigen cause troubles to graphical window
+# eigen may causes troubles to the graphical window. you can try old.par = TRUE
 }
 \seealso{
 \link{plot.LDA}

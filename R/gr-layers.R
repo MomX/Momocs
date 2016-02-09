@@ -120,6 +120,21 @@
   }
 }
 
+# filled convex hulls
+#' @export
+.chullfilled <- function(coo, fac, col) {
+  for (i in seq(along = levels(fac))) {
+    coo_i <- coo[fac == levels(fac)[i], ]
+    if (is.matrix(coo_i)) {
+      if (nrow(coo_i) > 1) {
+        chull.i <- coo_chull(coo_i)
+        polygon(coo_close(chull.i), col = col[i], border=col[i])
+      }
+    }
+  }
+}
+
+
 # add labels
 #' @export
 .labelsgroups <- function(xy, fac,
