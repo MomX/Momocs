@@ -1,6 +1,6 @@
 Package: Momocs
 Title: Morphometrics using R
-Version: 0.9.67
+Version: 0.9.68
 Date: 2016-02-10
 Authors@R: c( person("Vincent", "Bonhomme", , "bonhomme.vincent@gmail.com", c("aut", "cre")), person("Julien", "Claude", , , c("aut")) )
 Description: Aiming to provide a complete and convenient toolkit for morphometrics, Momocs is intended for scientists interested in
