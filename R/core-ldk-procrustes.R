@@ -217,11 +217,11 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
   class(Coo2) <- c("LdkCoe", "Coe", class(Coo2))
   Coo2$cuts <- ncol(Coo2$coe)
   #we reseperate coo and cur
-  if (is.slidings(x)){
-    coos <- lapply(Coo2$coo, m2ll, Coo2$nb_cur)
-    Coo2$coo <- lapply(coos, "[[", 1)
-    Coo2$cur <- lapply(coos, "[", -1)
-  }
+  # if (is.slidings(x)){
+  #   coos <- lapply(Coo2$coo, m2ll, Coo2$nb_cur)
+  #   Coo2$coo <- lapply(coos, "[[", 1)
+  #   Coo2$cur <- lapply(coos, "[", -1)
+  # }
   return(Coo2)
 }
 

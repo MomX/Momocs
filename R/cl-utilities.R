@@ -372,18 +372,31 @@ def_ldk.Out <- function(Coo, nb.ldk) {
 #' @export
 def_ldk.Opn <- def_ldk.Out
 
-#' Retrieve landmarks coordinates from Opn and Out objects
+#' Retrieve landmarks coordinates
 #'
-#' In \link{Out} and \link{Opn} classes, landmarks (if any) are stored as
-#' row indices. This methods allows to retrieve the corresponding (x; y) coordinates.
-#' @param Coo a Coo object, either Out or Opn
-#' @return an array of coordinates X (x; y) coordinates X number of shapes.
-#' @seealso \link{def_ldk}, \link{fgProcrustes}
+#' See Details for the different behaviors implemented.
+#'
+#' @param Coo an Out, Opn or Ldk object
+#' @return a list of shapes
+#' @details Different behaviors depending on the class of the object:
+#' \itemize{
+#' \item \link{Ldk}: retrieves landmarks.
+#' \item Ldk with slidings defined: retrieves only the fixed landmarks, not the sliding ones.
+#' See also \link{get_slidings}.
+#' \item \link{Out} landmarks from \code{$ldk} and \code{$coo}, if any.
+#' \item \link{Opn}: same as above.
+#' }
+#' @seealso \link{def_ldk}, \link{get_slidings}, \link{fgProcrustes}
 #' @examples
-#' data(hearts)
+#' # Out example
 #' ldk.h <- get_ldk(hearts)
-#' stack(Ldk(a2l(ldk.h)))
-#' ldk.h
+#' stack(Ldk(ldk.h))
+#'
+#' # on Ldk (no slidings)
+#' get_ldk(wings) # equivalent to wings$coo
+#'
+#' # on Ldk (slidings)
+#' # waiting for chaff, todo
 #' @export
 get_ldk <- function(Coo) {
   UseMethod("get_ldk")
@@ -391,8 +404,19 @@ get_ldk <- function(Coo) {
 
 #' @export
 get_ldk.Ldk <- function(Coo){
-  cat("* Use $coo directly")
-  Coo$coo
+  # sliding case
+  # we need to retrieve all sliding landmarks
+  # (including first and last from all partitions)
+  if (is.slidings(Coo)){
+    all_ids <- 1:unique(coo_nb(Coo))
+    sliding_ids <- Coo %>% slidings_scheme() %$% id %>%
+      apply(1, function(x) x[1]:x[2])  %>% as.numeric()
+    fixed_ids   <- all_ids[-sliding_ids]
+    ldk <- lapply(Coo$coo, function(x) x[fixed_ids, ])
+    return(ldk)
+  } else {
+    Coo$coo
+  }
 }
 
 #' @export
@@ -406,7 +430,7 @@ get_ldk.Out <- function(Coo) {
   for (i in seq(along = coo)) {
     ref[, , i] <- coo[[i]][ldk[[i]], ]
   }
-  return(ref)
+  return(a2l(ref))
 }
 #' @export
 get_ldk.Opn <- get_ldk.Out
@@ -465,6 +489,34 @@ get_ldk.Opn <- get_ldk.Out
   return(list(n=n, id=id))
 }
 
+
+#' Extract partition of sliding coordinates
+#'
+#' Helper function that deduces (likely to be a reminder)
+#' partition scheme from \code{$slidings} of \code{Ldk} objects.
+#'
+#' @param Coo an Ldk object
+#' @value a list with two components: \code{n} the number of partition; \code{id}
+#' their position.
+#'
+#' @examples
+#' # waiting for chaff, todo
+#' @export
+slidings_scheme <- function(Coo){
+  UseMethod("slidings_scheme")
+}
+
+#' @export
+slidings_scheme.default <- function(Coo){
+  stop("only defined on Ldk")
+}
+
+#' @export
+slidings_scheme.Ldk <- function(Coo){
+  .check(is.slidings(Coo), "no sliding defined")
+  .slidings_scheme(Coo$slidings)
+}
+
 #' Define sliding landmarks matrix
 #' @param Coo an \link{Ldk} object
 #' @param slidings a matrix, a numeric or a list of numeric. See Details
@@ -510,8 +562,48 @@ def_slidings.Ldk <- function(Coo, slidings){
   return(Coo)
 }
 
-# get_slidings
+#' Extract sliding landmarks coordinates
+#'
+#' From an \link{Ldk} object.
+#'
+#' @param Coo an Ldk object
+#' @param partition numeric which one(s) to get.
+#' @value a list of list(s) of coordinates.
+#' @examples
+#' #waiting for chaff todo
+#'
+#' @export
+get_slidings <- function(Coo, partition){
+  UseMethod("get_slidings")
+}
 
+#' @export
+get_slidings.default <- function(Coo, partition){
+  stop("only defined on Ldk")
+}
+
+#' @export
+get_slidings.Ldk <- function(Coo, partition){
+  .check(is.slidings(Coo), "no slidings defined")
+  # we retrieve the scheme
+  scheme <- .slidings_scheme(Coo$slidings)
+  n  <- scheme$n
+  id <- scheme$id
+  # all by default
+  if (missing(partition))
+    partition <- 1:n
+  # nice try
+  .check(all(partition<=n), "some partition do not exist")
+  # prepare the nest
+  slidings <- vector("list", length(partition))
+  names(slidings) <- rownames(id)
+  # loop and grab
+  for (i in 1:nrow(id)){
+    ids_i <- id[i, 1] : id[i, 2]
+    slidings[[i]] <- lapply(Coo$coo, function(x) x[ids_i,  ])
+  }
+  return(slidings)
+}
 
 # class testers -------------
 #' Tests if an object is of a given class or has a particular component

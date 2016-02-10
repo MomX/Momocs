@@ -13,7 +13,7 @@ as_df(x)
 a data.frame
 }
 \description{
-Used in particular for ggplot2 compatibility
+Used in particular for ggplot2 compatibility.
 }
 \examples{
 data(bot)

@@ -2,27 +2,41 @@
 % Please edit documentation in R/cl-utilities.R
 \name{get_ldk}
 \alias{get_ldk}
-\title{Retrieve landmarks coordinates from Opn and Out objects}
+\title{Retrieve landmarks coordinates}
 \usage{
 get_ldk(Coo)
 }
 \arguments{
-\item{Coo}{a Coo object, either Out or Opn}
+\item{Coo}{an Out, Opn or Ldk object}
 }
 \value{
-an array of coordinates X (x; y) coordinates X number of shapes.
+a list of shapes
 }
 \description{
-In \link{Out} and \link{Opn} classes, landmarks (if any) are stored as
-row indices. This methods allows to retrieve the corresponding (x; y) coordinates.
+See Details for the different behaviors implemented.
+}
+\details{
+Different behaviors depending on the class of the object:
+\itemize{
+\item \link{Ldk}: retrieves landmarks.
+\item Ldk with slidings defined: retrieves only the fixed landmarks, not the sliding ones.
+See also \link{get_slidings}.
+\item \link{Out} landmarks from \code{$ldk} and \code{$coo}, if any.
+\item \link{Opn}: same as above.
+}
 }
 \examples{
-data(hearts)
+# Out example
 ldk.h <- get_ldk(hearts)
-stack(Ldk(a2l(ldk.h)))
-ldk.h
+stack(Ldk(ldk.h))
+
+# on Ldk (no slidings)
+get_ldk(wings) # equivalent to wings$coo
+
+# on Ldk (slidings)
+# waiting for chaff, todo
 }
 \seealso{
-\link{def_ldk}, \link{fgProcrustes}
+\link{def_ldk}, \link{get_slidings}, \link{fgProcrustes}
 }
 

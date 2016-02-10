@@ -159,8 +159,8 @@ stack.Coo <-
     for (i in 1:length(Coo)) {
       coo_draw(Coo$coo[[i]], col = cols[i], border = borders[i],
                points = points, first.point = TRUE, centroid = centroid)
-      if (ldk & length(Coo$ldk) != 0) {
-        points(ldks[,1,i], ldks[,2,i], pch = ldk.pch,
+      if (ldk & is.ldk(Coo)) {
+        points(ldks[[i]][, 1], ldks[[i]][ ,2], pch = ldk.pch,
                col = ldk.col, cex = ldk.cex)
       }
     }
@@ -194,11 +194,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   op <- par(mar = c(3, 3, 2, 1))
   on.exit(par(op))
-  # if (is.slidings(Coo)){
-  #   wdw <- apply(l2a(lapply(get_curcoo_binded(Coo)$coo, function(x) apply(x, 2, range))), 2, range)
-  # } else {
-    wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2, range))), 2, range)
-  # }
+  wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2, range))), 2, range)
   plot(NA, xlim = wdw[, 1], ylim = wdw[, 2], asp = 1, las = 1,
        cex.axis = 2/3, ann = FALSE, frame = FALSE)
   title(title)
