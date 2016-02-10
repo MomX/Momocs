@@ -206,7 +206,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      #ellipses
                      ellipses=FALSE, conf.ellipses=0.5,
                      #ellipsesax
-                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.75, 0.9),
+                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.9),
                      lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
                      #convexhulls
                      chull=FALSE, chull.lty=1,
