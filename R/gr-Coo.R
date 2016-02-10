@@ -194,34 +194,34 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
   op <- par(mar = c(3, 3, 2, 1))
   on.exit(par(op))
-  if (is.cur(Coo)){
-    wdw <- apply(l2a(lapply(get_curcoo_binded(Coo)$coo, function(x) apply(x, 2, range))), 2, range)
-  } else {
+  # if (is.slidings(Coo)){
+  #   wdw <- apply(l2a(lapply(get_curcoo_binded(Coo)$coo, function(x) apply(x, 2, range))), 2, range)
+  # } else {
     wdw <- apply(l2a(lapply(Coo$coo, function(x) apply(x, 2, range))), 2, range)
-  }
+  # }
   plot(NA, xlim = wdw[, 1], ylim = wdw[, 2], asp = 1, las = 1,
        cex.axis = 2/3, ann = FALSE, frame = FALSE)
   title(title)
   if (xy.axis) {
     abline(h = 0, v = 0, col = "grey80", lty = 2)
   }
-  # semilandmarks lines
-  if (cur | (is.cur(Coo) & missing(cur))){
-    for (i in 1:length(Coo)) {
-      lapply(Coo$cur[[i]], lines, col=col_alpha("#000000", 0.95))
-    }
-  }
+  # # semilandmarks lines
+  # if (cur | (is.slidings(Coo) & missing(cur))){
+  #   for (i in 1:length(Coo)) {
+  #     lapply(Coo$cur[[i]], lines, col=col_alpha("#000000", 0.95))
+  #   }
+  # }
   # points
   for (i in 1:length(Coo)) {
     points(Coo$coo[[i]], pch = ldk.pch, col = ldk.col, cex = ldk.cex)
   }
   # semilandmarks
-  if (is.cur(Coo)){
-    cur_binded <- get_cur_binded(Coo)
-    for (i in 1:length(Coo)) {
-      points(cur_binded[[i]], pch = cur_pch, col = ldk.col, cex = ldk.cex*0.25)
-    }
-  }
+  # if (is.slidings(Coo)){
+  #   cur_binded <- get_cur_binded(Coo)
+  #   for (i in 1:length(Coo)) {
+  #     points(cur_binded[[i]], pch = cur_pch, col = ldk.col, cex = ldk.cex*0.25)
+  #   }
+  # }
   # Specific to Ldk not very clean below #todo
   A <- l2a(Coo$coo)
   mA <- mshapes(A)
