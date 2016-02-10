@@ -4,15 +4,15 @@
 \alias{Ldk}
 \title{Builds an Ldk object}
 \usage{
-Ldk(coo, links = NULL, cur = NULL, fac = data.frame())
+Ldk(coo, links = NULL, slidings = NULL, fac = data.frame())
 }
 \arguments{
 \item{coo}{a \code{list} of matrices of (x; y) coordinates,
 or an array, an Ldk object.}
 
-\item{links}{a matrix of 'links' between landmarks, mainly for plotting}
+\item{links}{(optionnal) a 2-columns \code{matrix} of 'links' between landmarks, mainly for plotting}
 
-\item{cur}{a \code{list} of \code{list} of matrices of (x; y) coordinates}
+\item{slidings}{(optionnal) a 3-columns \code{matrix} defining (if any) sliding landmarks}
 
 \item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
 specifying the grouping structure}
@@ -29,17 +29,16 @@ and specific methods (e.g. todo-Procrustes can be applied.
 }
 \details{
 All the shapes in x must have the same number of landmarks. If you are
-trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample}.
-}
-\note{
-You can pass directly as coo, the list returned by \link{import_tps} when curves are set \code{TRUE}.
-The \code{$coo} will be passed to \code{coo} and the \code{$cur} to \code{cur}.
-\code{Ldk} methods must be, so far, considered as experimental in Momocs.
+trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample} beforehand
+to homogeneize the number of coordinates among shapes.
+
+implementation of \code{$slidings} is inspired by \code{geomorph}
 }
 \examples{
 methods(class=Ldk)
 }
 \seealso{
 \link{Coo}, \link{Out}, link{Opn}.
+\code{Ldk} methods must be, so far, considered as experimental in Momocs.
 }
 

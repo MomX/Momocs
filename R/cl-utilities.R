@@ -334,8 +334,7 @@ rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){
   return(x)
 }
 
-# getters -------------------
-# 5. Out + landmarks --------------------------------------
+# ldk setters/getters ----------------------------------------------------------
 
 #' Define landmarks on Out and Opn objects
 #'
@@ -412,59 +411,106 @@ get_ldk.Out <- function(Coo) {
 #' @export
 get_ldk.Opn <- get_ldk.Out
 
-#' Binds semi-landmarks coordinates from Ldk objects
-#'
-#' Binds groups (if any) of landmarks from the \code{$cur}
-#' on \link{Ldk} objects
-#' @param Ldk an \link{Ldk} object
-#' @return a list of matrices
-#' @family get_cur functions
-#' @export
-get_cur_binded <- function(Ldk){
-  UseMethod("get_cur_binded")
+# sliding getters/setters ------------------------------------------------------
+
+# prepare a matrix for sliding landmarks ($slidings in Ldk)
+.slidings_matrix <- function(nrow=0){
+  matrix(NA, nrow=nrow, ncol=3, dimnames = list(NULL, c("before", "slide", "after")))
 }
 
-#' @export
-get_cur_binded.Coo <- function(Ldk){
-  cat("* only defined on Ldk objects")
-}
-
-#' @export
-get_cur_binded.Ldk <-
-  function(Ldk){
-    .check(is.cur(Ldk),
-           "no curves")
-    lapply(Ldk$cur, function(x) do.call(rbind, x))
+# given a partition, create and fill a $slidings matrix
+# partition can be passed as numeric, or list of numeric
+# for both cases, the first and last points are considered fixed
+# and not allowed to slide
+# .slidings_def_from_partition(4:9)
+# .slidings_def_from_partition(list(4:9, 34:45))
+# .slidings_def_from_partition("error")
+.slidings_def_from_partition <- function(x){
+  .check(is.numeric(x) | is.list(x), "partition(s) must be a numeric or a list of numeric")
+  # single partition passed as a numeric
+  if (is.numeric(x)){
+    .check(length(x)>=3, "partition(s) must contain at least 3 points")
+    # first and last points are fixed
+    x_sliding <- x[2]:x[length(x)-1]
+    # prepare the slidings matrix
+    slidings <- .slidings_matrix(length(x_sliding))
+    # fill it
+    for (i in seq_along(x_sliding))
+      slidings[i, ] <- x_sliding[i] + c(-1, 0, 1)
   }
-
-#' Binds landmarks and semi-landmarks coordinates from Ldk objects
-#'
-#' Binds \code{$coo} with groups (if any) of landmarks from the \code{$cur}
-#' on \link{Ldk} objects
-#' @param x an \link{Ldk} object
-#' @family get_cur functions
-#' @return a list of matrices
-#' @export
-get_curcoo_binded <- function(x){
-  UseMethod("get_curcoo_binded")
-}
-
-#' @export
-get_curcoo_binded.default <- function(x){
-  cat("* only defined on Ldk objects")
-}
-
-#' @export
-get_curcoo_binded.Ldk <- function(x){
-  # if there are cur, we bind them after Coo
-  if (is.cur(x)){
-    x$nb_cur <- c(nrow(x$coo[[1]]), sapply(x$cur[[1]], nrow))
-    x$coo <- mapply("rbind", x$coo, get_cur_binded(x), SIMPLIFY=FALSE)
-    x$cur    <- NULL
+  # multi partition cased, passed as a list
+  if (is.list(x)){
+    .check(all(sapply(x, is.numeric)),
+           "all partitions must be numeric")
+    slidings_list <- vector("list", length(x))
+    for (i in seq_along(x))
+      slidings_list[[i]] <- .slidings_def_from_partition(x[[i]])
+    slidings <- do.call(rbind, slidings_list)
   }
-  return(x)
-  # curve case. we bind
+  # return this beauty
+  return(slidings)
 }
+
+# deduces partition scheme from sliding matrix
+.slidings_scheme <- function(x){
+  .check(is.matrix(x), "slidings must be a matrix")
+  .check(ncol(x)==3,   "slidings must be a 3-columns matrix")
+  d <- diff(x[, 1])>1
+  # nb of partitions
+  n <- sum(d)+1
+  # deduce their position
+  id <- cbind(c(1, which(d)+1), c(which(d), nrow(x)))
+  # cosmetics
+  dimnames(id) <- list(paste0("partition", 1:nrow(id)), c("start", "end"))
+  return(list(n=n, id=id))
+}
+
+#' Define sliding landmarks matrix
+#' @param Coo an \link{Ldk} object
+#' @param slidings a matrix, a numeric or a list of numeric. See Details
+#' @details \code{$slidings} in \link{Ldk} must be a 'valid' matrix: containing
+#' ids of coordinates, none of them being lower than 1 and higher the number of coordinates
+#' in \code{$coo}.
+#'
+#' \code{slidings} matrix contains 3 columns (\code{before}, \code{slide}, \code{after}).
+#' It is inspired by \code{geomorph} and should be compatible with it.
+#'
+#' This matrix can be passed directly if the \code{slidings} argument is a matrix. Of course,
+#' it is strictly equivalent to \code{Ldk$slidings <- slidings}.
+#'
+#' \code{slidings} can also be passed as "partition(s)", when sliding landmarks
+#' identified by their ids (which are a row number) are consecutive in the \code{$coo}.
+#'
+#' A single partition can be passed either as a numeric (eg \code{4:12}), if points
+#' 5 to 11 must be considered as sliding landmarks (4 and 12 being fixed); or as a list of numeric.
+#'
+#' See examples below.
+#' @examples
+#' #waiting for a sliding dataset...
+#'
+#' @export
+def_slidings <- function(Coo, slidings){
+  UseMethod("def_slidings")
+}
+
+#' @export
+def_slidings.default <- function(Coo, slidings){
+  stop("only defined on Ldk")
+}
+
+#' @export
+def_slidings.Ldk <- function(Coo, slidings){
+  .check((is.numeric(slidings) | is.matrix(slidings) | is.list(slidings)),
+         "sliding must be a matrix, a numeric or a list of numeric")
+  # matrix case
+  if (is.matrix(slidings))
+    Coo$slidings <- slidings
+  else
+    Coo$slidings <- .slidings_def_from_partition(slidings)
+  return(Coo)
+}
+
+# get_slidings
 
 
 # class testers -------------
@@ -542,7 +588,7 @@ is.ldk   <- function(x) length(x$ldk) > 0
 
 #' @rdname is.Momocs
 #' @export
-is.cur   <- function(x) length(x$cur) > 0
+is.slidings   <- function(x) length(x$slidings) > 0
 
 #' @rdname is.Momocs
 #' @export

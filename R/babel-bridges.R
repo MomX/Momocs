@@ -211,7 +211,7 @@ m2ll <- function(m, index=NULL){
 
 #' Convert Momocs objects to data.frames
 #'
-#' Used in particular for ggplot2 compatibility
+#' Used in particular for ggplot2 compatibility.
 #' @param x an object, typically a Momocs class
 #' @return a data.frame
 #' @examples

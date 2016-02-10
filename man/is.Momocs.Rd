@@ -11,10 +11,10 @@
 \alias{is.Out}
 \alias{is.OutCoe}
 \alias{is.PCA}
-\alias{is.cur}
 \alias{is.fac}
 \alias{is.ldk}
 \alias{is.links}
+\alias{is.slidings}
 \title{Tests if an object is of a given class or has a particular component}
 \usage{
 is.Coo(x)
@@ -41,7 +41,7 @@ is.fac(x)
 
 is.ldk(x)
 
-is.cur(x)
+is.slidings(x)
 
 is.links(x)
 }

@@ -20,14 +20,16 @@ Internal function used in \link{import_tps} that may be useful for data import. 
 with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
 coordinates, curves, etc.
 }
+\details{
+if curves are present add them to \code{$coo} (with the proper combination
+of \link{do.call}, \link{rbind}, then use \link{def_slidings} or define a slidings matrix (see \link{Ldk}).
+}
 \examples{
 \dontrun{
-# let's imagien this command works fine
+# let's imagine this command works fine
 coo <- import_tps(...)
 # then you can
 Ldk(coo)
-# if curves are present this is strictly equivalent
-Ldk(coo=coo$coo, cur=coo$cur)
 }
 }
 \seealso{

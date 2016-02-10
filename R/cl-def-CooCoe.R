@@ -213,7 +213,7 @@ validate.Coo <- function(Coo){
 }
 #
 # validate.Ldk <-
-# if (is.cur(Ldk)){
+# if (is.slidings(Ldk)){
 #   sapply(L$cur[[1]], nrow)
 # }
 

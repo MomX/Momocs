@@ -204,8 +204,9 @@ fgProcrustes.Opn <- fgProcrustes.Out
 
 #' @export
 fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
-  if (is.cur(x))
-    x %<>% get_curcoo_binded()
+  # sliding support, todo
+  # if (is.slidings(x))
+  #   x %<>% get_curcoo_binded()
   Coo2 <- Coo <- x
   ref <- l2a(Coo2$coo)
   tar <- fgProcrustes(ref, tol = tol, verbose = verbose)$rotated
@@ -216,7 +217,7 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
   class(Coo2) <- c("LdkCoe", "Coe", class(Coo2))
   Coo2$cuts <- ncol(Coo2$coe)
   #we reseperate coo and cur
-  if (is.cur(x)){
+  if (is.slidings(x)){
     coos <- lapply(Coo2$coo, m2ll, Coo2$nb_cur)
     Coo2$coo <- lapply(coos, "[[", 1)
     Coo2$cur <- lapply(coos, "[", -1)
