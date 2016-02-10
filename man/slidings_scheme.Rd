@@ -9,6 +9,10 @@ slidings_scheme(Coo)
 \arguments{
 \item{Coo}{an Ldk object}
 }
+\value{
+a list with two components: \code{n} the number of partition; \code{id}
+their position.
+}
 \description{
 Helper function that deduces (likely to be a reminder)
 partition scheme from \code{$slidings} of \code{Ldk} objects.

@@ -91,6 +91,8 @@ Coo <- function(...) {
     cat(" * Coo constructor does not exist alone. See ?Coo")
 }
 
+
+
 #' Coe class
 #'
 #'\code{Coe} class is the 'parent' class of
@@ -157,65 +159,6 @@ Coo <- function(...) {
 Coe <- function(...) {
     cat(" * Coe constructor does not exist alone. See ?Coe")
 }
-
-#' Validates Coo objects
-#' No validation for S3 objects, so this method is a (very tolerant) attempt at checking
-#' \link{Coo} objects, \link{Out}, \link{Opn} and \link{Ldk} objects.
-#'
-#' This methods checks \enumerate{
-#'    \item if coordinates do all pass \link{coo_check}
-#'    \item that \code{$fac}, if any, is a {data.frame}, with the same number of rows and coordinates.
-#'    Copies the name of \code{$coo} to th rownames
-#'    \item that \code{$ldk}, if any, has a the same number of landmarks, for all shapes
-#' } and finally returns the \code{Coo}. This method is used in \code{Coo} constructor, and before applying
-#' any method on thos object.
-#' @param Coo any Coo object
-#' @return a Coo object.
-#' @examples
-#' \dontrun{
-#' validate(bot)
-#' bot[12] <- NA
-#' validate(bot)
-#'
-#' validate(hearts)
-#' hearts$ldk[[4]] <- c(1, 2)
-#' validate(hearts)
-#' }
-#' @export
-validate <- function(Coo){
-  UseMethod("validate")
-}
-
-#' @export
-validate.Coo <- function(Coo){
-  # checks coo
-  Coo <- coo_check(Coo)
-  n <- length(Coo$coo)
-  # checks fac
-  if (is.fac(Coo)) {
-    .check(is.data.frame(Coo$fac),
-           " $fac must be a data.frame")
-    .check(identical(nrow(Coo$fac), n),
-           " the number of rows in $fac must equal the number of shapes")
-    # rename rows of fac
-    rownames(Coo$fac) <- names(Coo)
-  }
-  # checks ldk if any
-  if (is.ldk(Coo)){
-    .check(identical(length(Coo$ldk), n),
-           " the number of $ldk must equal the number of shapes")
-    .check(length(unique(sapply(Coo$ldk, length)))==1,
-           " the number of $ldk defined must be the same accross shapes")
-    .check(all(sapply(Coo$coo, nrow) >= sapply(Coo$ldk, max)),
-           " at least one shape as a $ldk id higher than its number of coordinates")
-  }
-  Coo
-}
-#
-# validate.Ldk <-
-# if (is.slidings(Ldk)){
-#   sapply(L$cur[[1]], nrow)
-# }
 
 # str.* ----------------------
 # allows to maintain the traditionnal str() behaviour
@@ -423,5 +366,4 @@ names.Coe <- function(x) {
     }
   }
 }
-
 

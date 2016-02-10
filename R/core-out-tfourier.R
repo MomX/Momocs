@@ -118,6 +118,8 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
 #' @export
 tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE, ...) {
   Out <- x
+  # validates
+  Out %<>% validate()
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     nb.h <- calibrate_harmonicpower(Out, method="tfourier",

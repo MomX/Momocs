@@ -173,6 +173,8 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
 #' @export
 efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, verbose=TRUE, ...) {
   Out <- x
+  # validates
+  Out %<>% validate()
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     #nb.h <- ifelse(q >= 32, 32, q)

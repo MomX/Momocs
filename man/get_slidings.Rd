@@ -11,6 +11,9 @@ get_slidings(Coo, partition)
 
 \item{partition}{numeric which one(s) to get.}
 }
+\value{
+a list of list(s) of coordinates.
+}
 \description{
 From an \link{Ldk} object.
 }

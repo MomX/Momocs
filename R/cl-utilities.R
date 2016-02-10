@@ -496,7 +496,7 @@ get_ldk.Opn <- get_ldk.Out
 #' partition scheme from \code{$slidings} of \code{Ldk} objects.
 #'
 #' @param Coo an Ldk object
-#' @value a list with two components: \code{n} the number of partition; \code{id}
+#' @return a list with two components: \code{n} the number of partition; \code{id}
 #' their position.
 #'
 #' @examples
@@ -568,7 +568,7 @@ def_slidings.Ldk <- function(Coo, slidings){
 #'
 #' @param Coo an Ldk object
 #' @param partition numeric which one(s) to get.
-#' @value a list of list(s) of coordinates.
+#' @return a list of list(s) of coordinates.
 #' @examples
 #' #waiting for chaff todo
 #'

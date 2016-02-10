@@ -105,6 +105,8 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
 #' @export
 rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE, ...) {
   Out <- x
+  # validates
+  Out %<>% validate()
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     # nb.h <- ifelse(q >= 32, 32, q)

@@ -87,6 +87,8 @@ dfourier.default <- function(coo, nb.h, verbose = TRUE) {
 #' @export
 dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
   Opn <- coo
+  # validates
+  Opn %<>% validate()
   # we set nb.h if missing
   if (missing(nb.h)) {
     nb.h <- 12
