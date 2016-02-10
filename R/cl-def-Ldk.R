@@ -35,7 +35,7 @@ Ldk <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
 
 #' @export
 Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
-  cat(" * an Ldk object can only be build from a list, an array or an Ldk object")
+  message("do not know how to build an Ldk from this")
 }
 
 #' @export

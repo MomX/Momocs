@@ -47,7 +47,7 @@ export.Coe <- function(x, file = "coefficients.txt", sep = "\t", dec = ".") {
     data <- cbind(name = rownames(x$coe), x$fac, x$coe)
     write.table(data, file = file, row.names = FALSE, col.names = TRUE,
         quote = FALSE, sep = sep, dec = dec)
-    cat(" * File written:", file, "\n")
+    message("File written: ", file)
 }
 
 #' @export
@@ -55,7 +55,7 @@ export.PCA <- function(x, file = "scores.txt", sep = "\t", dec = ".") {
   data <- cbind(name = rownames(x$x), x$fac, x$x)
   write.table(data, file = file, row.names = FALSE, col.names = TRUE,
               quote = FALSE, sep = sep, dec = dec)
-  cat(" * File written:", file, "\n")
+  message("File written: ", file)
 }
 
 #' @export

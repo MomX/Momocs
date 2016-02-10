@@ -75,7 +75,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
   k <- dim(A)[2]
   n <- dim(A)[3]
   if (p <= 2)
-    stop(" * fgProcrustes makes sense with at least 3 points")
+    stop("fgProcrustes makes sense with at least 3 points")
   # we prepare an array to save results
   temp2 <- temp1 <- array(NA, dim = c(p, k, n))
   Siz <- numeric(n)
@@ -125,7 +125,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
     Qi[iter] <- sum(Qm2)
     iter <- iter + 1
     if (verbose) {
-      cat("iteration: ", iter, "\tgain:", signif(abs(Q), 5), "\n")
+      message("iteration: ", iter, "\tgain:", signif(abs(Q), 5))
     }
     temp1 <- temp2
   } # end of the big loop
@@ -145,9 +145,9 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
   if (coo | (length(Coo$ldk) == 0)) {
     if (verbose) {
       if (coo){
-        cat (" * Using $coo, not $ldk.\n")
+        message("using $coo, not $ldk")
       } else {
-        cat(" * No landmarks defined in $ldk, so trying to work on $coo directly.\n")}
+        message("no landmarks defined in $ldk, so trying to work on $coo directly")}
     }
     Coo2 <- Ldk(Coo$coo)
     Coo2 <- fgProcrustes(Coo2, tol = tol, verbose = verbose)
@@ -160,10 +160,10 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
   nb_ldk <- dim(ref)[1]
   # case with one ldk
   if (nb_ldk == 1)
-    stop(" * Cannot apply fgProcrustes on less than three landmarks")
+    stop("cannot apply fgProcrustes on less than three landmarks")
   # case with two ldks
   if (nb_ldk == 2) {
-    cat(" * Cannot apply fgProcrustes on less than three landmarks. coo_bookstein is returned. \n")
+    message("cannot apply fgProcrustes on less than three landmarks. coo_bookstein is returned")
     return(coo_bookstein(Coo))
   }
 

@@ -82,9 +82,9 @@ MANOVA_PW.PCA <- function(x,
   tab <- table(fac)
   if (min(tab) < retain ) {
     retain <- min(tab)
-    cat(" * '", names(which.min(tab)), "' has ", min(tab), " rows, and 'retain' is set accordingly.\n", sep="")}
+    message("'", names(which.min(tab)), "' has ", min(tab), " rows, and 'retain' is set accordingly")}
 
-  cat(" * PC axes 1 to", retain, "were retained\n")
+  message("PC axes 1 to ", retain, " were retained")
   retain <- 1:retain
   x <- PCA$x[, retain]
 
@@ -103,7 +103,8 @@ MANOVA_PW.PCA <- function(x,
       m <- summary(manova(x.i ~ fac.i))
       manovas[[i]] <- m
       res[i, ] <- m$stats[1, ]}
-    if (verbose) cat(pws[i, ], "\n")
+    if (verbose) 
+    message(pws[i, ])
   }
   names(manovas) <- rownames(res)
   # we prepare a 'signifance' table, with 'significant' stars

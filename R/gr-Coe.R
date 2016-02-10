@@ -151,7 +151,7 @@ hcontrib.OutCoe <- function(Coe,
   x <- Coe
   # we handle the method
   p <- pmatch(tolower(x$method), c("efourier", "rfourier", "tfourier"))
-  if (is.na(p)) { warning("Unvalid method. efourier is used.")
+  if (is.na(p)) { warning("unvalid method. efourier is used")
   } else {
     method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)}
   # we deduce the number of coefficient / harmonic, and their number
@@ -162,7 +162,7 @@ hcontrib.OutCoe <- function(Coe,
   # if id is provided, we work on it, otherwise, on the average shape
   if (missing(id)){
     coe <- apply(x$coe, 2, mean)
-    cat(" * no 'id' provided, working on the meanshape.\n")
+    message("no 'id' provided, working on the meanshape")
   } else {
     coe <- x$coe[id, ]}
   # we prepare a xf to feed the method.i functions

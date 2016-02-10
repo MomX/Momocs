@@ -88,7 +88,7 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     OutCoe <- x
     nb.h <- ncol(OutCoe$coe)/4  #todo
     if (missing(fac)) {
-        cat("* no 'fac' provided. Returns meanshape.\n")
+        message("no 'fac' provided, returns meanshape")
         coe.mshape <- apply(OutCoe$coe, 2, FUN)
         xf <- coeff_split(coe.mshape, nb.h, 4)
         return(efourier_i(xf, nb.pts = nb.pts))
@@ -124,13 +124,13 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     #todo: check if method is all identical
         	p <- pmatch(tolower(OpnCoe$method[1]), c("opoly", "npoly", "dfourier"))
     	if (is.na(p)) {
-      		warning(" * Unvalid method. efourier is used.\n")
+      		warning("unvalid method. efourier is used.\n")
     	} else {
       method_i <- switch(p, opoly_i, npoly_i, dfourier_i) # dfourier_i
     }
     n <- length(OpnCoe$mshape)  #todo
     if (missing(fac)) {
-        cat("* no 'fac' provided. Returns meanshape.\n")
+        message("no 'fac' provided, returns meanshape")
         coe.mshape <- apply(OpnCoe$coe, 2, FUN)
         mod.mshape <- OpnCoe$mod
         mod.mshape$coefficients <- coe.mshape
@@ -166,7 +166,7 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
 mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
     LdkCoe <- x
     if (missing(fac)) {
-        cat("* no 'fac' provided. Returns meanshape.\n")
+        message("no 'fac' provided. Returns meanshape")
         return(mshapes(LdkCoe$coo))
     }
     f <- LdkCoe$fac[, fac]

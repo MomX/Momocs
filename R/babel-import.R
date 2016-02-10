@@ -199,7 +199,7 @@ import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
     if (is.null(fun.notcentered) & !auto.notcentered) {
       img_plot(img)
       while (img[x[1], x[2]] != 0) {
-        cat(" * Click a point within the shape\n")
+        message("Click a point within the shape")
         xy <- unlist(locator(1))
         x <- round(c(nrow(img) - xy[2], xy[1]))
         if (x[1] > dim(img)[1]) {
@@ -266,7 +266,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
     jpg.paths <- .lf.auto()
   }
   begin <- Sys.time()
-  cat(" * Extracting", length(jpg.paths), ".jpg outlines...\n")
+  message("Extracting", length(jpg.paths), ".jpg outlines...")
   if (length(jpg.paths) > 10) {
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE
@@ -492,14 +492,14 @@ pix2chc <- function(coo) {
     coo <- l2m(coo)
   }
   if (is.matrix(coo) & ncol(coo) != 2) {
-    stop(" * A 2 col matrix must be provided")
+    stop("a 2-col matrix must be provided")
   }
   coo_d <- apply(coo, 2, diff)
   if (!all(coo_d %in% -1:1)) {
-    stop(" * Matrix must contain only entire pixels indices")
+    stop("matrix must contain only entire pixels indices")
   }
   if (any(apply(coo_d, 1, function(x) all(x == rep(0, 2))))) {
-    stop(" * At least two succesive coordinates don't code for a displacement")
+    stop("at least two succesive coordinates don't code for a displacement")
   }
   m <- as.matrix(expand.grid(-1:1, -1:1))[-5, ]
   g <- c(5, 6, 7, 4, 0, 3, 2, 1)
@@ -526,7 +526,7 @@ pix2chc <- function(coo) {
 #' @export
 chc2pix <- function(chc) {
   if (!all(chc %in% 0:7)) {
-    stop(" * chc string must only contain integers between 0 and 7")
+    stop("chc string must only contain integers between 0 and 7")
   }
   m <- matrix(c(1, 0, 1, 1, 0, 1, -1, 1, -1, 0, -1, -1, 0,
                 -1, 1, -1), ncol = 2, byrow = TRUE)
@@ -809,12 +809,12 @@ lf_structure <- function(lf, names = character(), split = "_",
     cat(" * Most of the filenames have", most.ab, "groups.\n",
         " * Maybe you should inspect these file(name)s:\n")
     cat(lf[lfl.pb], sep = "\n")
-    stop("The files do not have the same filename structure.")
+    stop("the files do not have the same filename structure.")
   }
   fac <- as.data.frame(matrix(NA, nrow = length(lf), ncol = nc))  # dirty
   if (!missing(names)) {
     if (length(names) != nc) {
-      stop(" * The number of 'names' is different from the number of groups.")
+      stop("the number of 'names' is different from the number of groups.")
     }
     names(fac) <- names
   }
@@ -840,7 +840,7 @@ lf_structure <- function(lf, names = character(), split = "_",
 tie_jpg_txt <- function(lf){
   tbl <- table(.trim.ext(.trim.path(lf)))
   if ((length(unique(tbl)) != 1) | (unique(tbl) !=2))
-    stop("* Mismatches in filenames", which(tbl!=2))
+    stop("mismatches in filenames", which(tbl!=2))
 
   # we retrieve the list of .txt et.jpg
   out.lf <- lf[grep(".jpg", lf)]

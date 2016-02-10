@@ -66,7 +66,7 @@ dfourier.default <- function(coo, nb.h, verbose = TRUE) {
   coo <- coo_check(coo)
   if (missing(nb.h)) {
     nb.h <- 12
-    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
+    if (verbose) message("'nb.h' not provided and set to " , nb.h)}
   # preliminaries
   N <- nrow(coo)
   pol <- coo[, 1] + (0+1i) * coo[, 2]
@@ -92,7 +92,7 @@ dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
   # we set nb.h if missing
   if (missing(nb.h)) {
     nb.h <- 12
-    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "\n")}
+    if (verbose) message("'nb.h' not provided and set to ", nb.h)}
   col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
   coo <- Opn$coo
   nr <- length(coo)
@@ -128,7 +128,7 @@ dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
 #' @rdname dfourier
 #' @export
 dfourier.Coo <- function(coo, nb.h, verbose=TRUE) {
-  stop(" * dfourier can only be applied on Opn objects.")
+  stop("dfourier can only be applied on Opn objects")
 }
 
 #' Investe discrete cosinus transform

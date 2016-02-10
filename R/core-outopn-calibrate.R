@@ -36,13 +36,13 @@ calibrate_reconstructions.Out <-
     # Out dispatcher
     Out <- x
     if (missing(method)) {
-      cat(" * Method not provided. efourier is used.\n")
+      message("method not provided. efourier is used")
       method <- efourier
       method_i <- efourier_i
     } else {
       p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
       if (is.na(p)) {
-        warning(" * Unvalid method. efourier is used.\n")
+        warning("unvalid method. efourier is used")
       } else {
         method   <- switch(p, efourier, rfourier, tfourier)
         method_i <- switch(p, efourier_i, rfourier_i, tfourier_i)
@@ -57,7 +57,7 @@ calibrate_reconstructions.Out <-
     max.h <- nrow(coo)/2 - 1
     if (max(range) > max.h) {
       range <- floor(seq(1, max.h, length = 9))
-      cat(" * range was too high and set to: ", range, ".\n")
+      message("range was too high and set to ", range)
     }
 
     # we calculate all shapes
@@ -111,14 +111,14 @@ calibrate_reconstructions.Opn <-
     # Opn dispatcher
     Opn <- x
     if (missing(method)) {
-      cat(" * Method not provided. opoly is used.\n")
+      message("method not provided. opoly is used")
       method   <- opoly
       method_i <- opoly_i
       p <- 2
     } else {
       p <- pmatch(tolower(method), c("npoly", "opoly",  "dfourier"))
       if (is.na(p)) {
-        warning(" * Unvalid method. opoly is used.\n")
+        warning("unvalid method. opoly is used.\n")
       } else {
         method   <- switch(p, npoly, opoly, dfourier)
         method_i <- switch(p, npoly_i, opoly_i, dfourier_i)
@@ -140,7 +140,7 @@ calibrate_reconstructions.Opn <-
     }
     if (max(range) > (nrow(coo) - 1)) {
       range <- 2:10
-      cat(" * range was too high and set to: ", range, ".\n")
+      message("range was too high and set to ", range)
     }
 
     # we loop
@@ -237,13 +237,13 @@ calibrate_deviations.Out <-
       range <- unique(hr$minh)
     }
     if (missing(method)) {
-      cat(" * Method not provided. efourier is used.\n")
+      message("method not provided. efourier is used")
       method <- efourier
       method.i <- efourier_i
     } else {
       p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
       if (is.na(p)) {
-        warning("Unvalid method. efourier is used.")
+        warning("unvalid method. efourier is used")
       } else {
         method <- switch(p, efourier, rfourier, tfourier)
         method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)
@@ -255,8 +255,7 @@ calibrate_deviations.Out <-
     # we handle too ambitious range
     if (max(range) > nb.h.best) {
       range <- floor(seq(4, nb.h.best, length = 6))
-      cat("  * 'range' was too high and set to: ", range,
-          ".\n")
+      message("'range' was too high and set to ", range)
     }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
@@ -350,20 +349,20 @@ calibrate_deviations.Opn<-
       #                                     lineat.y = c(95, 99, 99.9))
       #       range <- unique(hr$minh)
       #
-      cat(" * range missing and set to 1:8.\n")
+      message("range missing and set to 1:8")
       range <- 1:8
     }
 
 
     if (missing(method)) {
-      cat(" * Method not provided. dfourier is used.\n")
+      message("method not provided. dfourier is used")
       method <- dfourier
       method.i <- dfourier_i
       p <- 3
     } else {
       p <- pmatch(tolower(method), c("npoly", "opoly", "dfourier"))
       if (is.na(p)) {
-        warning("Unvalid method. dfourier is used.\n")
+        warning("unvalid method. dfourier is used.\n")
         method <- dfourier
         method.i <- dfourier_i
         p <- 3
@@ -379,15 +378,14 @@ calibrate_deviations.Opn<-
       # we handle too ambitious range
       if (max(range) > nb.h.best) {
         range <- floor(seq(4, nb.h.best, length = 6))
-        cat("  * 'range' was too high and set to: ", range,
-            ".\n")
+        message("'range' was too high and set to ", range)
       }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
     } else { #poly methods
       nb.pts <- min.nb.pts <- min(sapply(Coo$coo[id], function(x) nrow(unique(x))))
       nb.h.best <- 12
-      cat(" * deviations calculated from a degree 12 polynom")
+      message("deviations calculated from a degree 12 polynom")
     }
     nr <- length(range)
     nc <- nb.pts
@@ -542,12 +540,12 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x)
   Out <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) cat(" * Method not provided. efourier is used.\n")
+    if (verbose) message("method not provided. efourier is used")
     method <- efourier
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
     if (is.na(p)) {
-      warning("Unvalid method. efourier is used.")
+      warning("unvalid method. efourier is used")
     } else {
       method <- switch(p, efourier, rfourier, tfourier)
     }
@@ -608,10 +606,10 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
   Opn <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) cat(" * Method not provided. dfourier is used.\n")
+    if (verbose) message("Method not provided. dfourier is used")
     method <- dfourier
   } else if (method != "dfourier"){
-    if (verbose) cat(" * Only available for dfourier. dfourier is used.\n")
+    if (verbose) message("only available for dfourier. dfourier is used")
     method <- dfourier
   } else {
     method <- dfourier
@@ -693,15 +691,15 @@ calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
                              degree.range=1:8, thresh = c(0.90, 0.95, 0.99, 0.999),
                              plot=TRUE, verbose=TRUE, ...) {
   if (!is.Opn(Opn))
-    stop("* only defined on Opn objects")
+    stop("only defined on Opn objects")
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) cat(" * Method not provided. opoly is used.\n")
+    if (verbose) message("method not provided. opoly is used")
     method <- opoly
   } else {
     p <- pmatch(tolower(method), c("npoly", "opoly"))
     if (is.na(p)) {
-      warning("Unvalid method. opoly is used.\n")
+      warning("unvalid method. opoly is used.\n")
     } else {
       method <- switch(p, npoly, opoly)
     }

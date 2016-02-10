@@ -31,14 +31,14 @@ table.Coo <- function(...){
   args <- list(...)
   #    return(args)
   x <- args[[1]]
-  if (length(x$fac)==0) stop(" * no $fac defined")
+  if (length(x$fac)==0) stop("no $fac defined")
   if (length(args)>1) {
     # a little helper for mismatched colnames
     cn <- unlist(args[-1])
     matches <- match(cn, colnames(x$fac))
     if (any(is.na(matches))) {
       mispelled <- which(is.na(matches))
-      stop(" * '", cn[mispelled], "' mispelled or not defined in $fac")
+      stop(cn[mispelled], "' mispelled or not defined in $fac")
     }
     matches <- match(cn, names(x$fac))
     # single line avoids a title to be printed for the table
@@ -187,7 +187,7 @@ rw_rule <- function(x, fac, from, to){
 at_least <- function(x, fac, N){
   retain <- x$fac[, fac] %in% names(which(table(x$fac[, fac]) >= N))
   if (!any(retain)) {
-    cat(" * No group with at least", N, "indidivuals!\n\n")
+    message("no group with at least ", N, " indidivuals")
     return(x)
   } else {
     subset(x, retain)
@@ -229,15 +229,15 @@ rm_uncomplete <- function(x, id, by){
   nb.u <- unique(nb)
   nb.tab <- table(nb)
   if (length(nb.u) == 1) {
-    message("* all ids have ", nb.u, " slices\n")
+    message("* all ids have ", nb.u, " slices")
     return(x)
   } else {
     most_frequent <- as.numeric(names(nb.tab[which.max(nb.tab)]))
     ugly_ducklings <- names(which(nb != most_frequent))
     remove_rows <- which(x$fac[, id] %in% ugly_ducklings)
-    message("* those shapes did not have ", most_frequent,
-            " slices and has been removed:",
-            paste(ugly_ducklings, collapse=", "), "\n")
+    message("those shapes did not have ", most_frequent,
+            " slices and has been removed: ",
+            paste(ugly_ducklings, collapse=", "))
     return(subset(x, -remove_rows))
   }
 }
@@ -322,7 +322,7 @@ rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){
   # we check a bit
   match_found <- mag_orig %in% mag_rule
   if (any(!(match_found))) {
-    stop(" * those magnification were absent from the file",
+    stop("those magnification were absent from the file",
          unique(mag_orig[which(!(match_found))]))
   }
   # we center x to be able to just apply a multiplying factor
@@ -362,7 +362,7 @@ def_ldk <- function(Coo, nb.ldk) {
 #' @export
 def_ldk.Out <- function(Coo, nb.ldk) {
   if (missing(nb.ldk))
-    stop(" * 'nb.ldk' must be specified.")
+    stop("'nb.ldk' must be specified")
   ldk <- list()
   for (i in seq(along = Coo$coo)) {
     Coo$ldk[[i]] <- coo_ldk(Coo$coo[[i]], nb.ldk = nb.ldk)

@@ -325,12 +325,12 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
     fac <- NULL
     N <- length(Coo)
     if (!replace & any(N)>size)
-      stop(" * for at least one level, 'size' is too large for sampling without replacement")
+      stop("for one level at least, 'size' is too large for sampling without replacement")
   } else {
     fac <- Coo$fac[, fac]
     N <- table(fac)
     if (!replace & any(N)>size)
-      stop(" * for at least one level, 'size' is too large for sampling without replacement")
+      stop("for one level at least, 'size' is too large for sampling without replacement")
   }
 
   if (is.null(fac)) {
@@ -387,7 +387,7 @@ sample_frac.default <- function(tbl, size=1, replace=FALSE, ...){
 #' @export
 sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
   if (size > 1 | size <= 0)
-    stop(" * size must be >=0 and <= 1")
+    stop("size must be >=0 and <= 1")
   Coo <- tbl
   Coo %<>% validate()
   if (missing(fac)) {
@@ -523,7 +523,7 @@ combine.list <- function(...){
   args <- list(...)
   # we check
   if (length(unique(sapply(args, length))) != 1)
-    stop("* objects to combine must have the same number of items")
+    stop("objects to combine must have the same number of items")
   do.call(combine, ...)
 }
 
@@ -532,7 +532,7 @@ combine.Out <- function(...) {
   args <- list(...)
   #   # we check
   #   if (length(unique(sapply(args, length))) != 1)
-  #     stop("* objects to combine must have the same number of items")
+  #     stop("objects to combine must have the same number of items")
   Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
   #Out$fac <- .refactor(Out$fac)
@@ -551,7 +551,7 @@ combine.Ldk <- function(...) {
   args <- list(...)
   # we check
   if (length(unique(sapply(args, length))) != 1)
-    stop("* objects to combine must have the same number of items")
+    stop("objects to combine must have the same number of items")
   Ldk <- Ldk(do.call(c, lapply(args, function(x) c(x$coo))))
   Ldk$fac <- do.call("rbind", lapply(args, function(x) x$fac))
   if (any(lapply(args, function(x) length(x$links)) != 0)) {
@@ -568,7 +568,7 @@ combine.Ldk <- function(...) {
 #   args <- list(...)
 #   # we check
 #   if (length(unique(sapply(args, length))) != 1)
-#     stop("* objects to combine must have the same number of items")
+#     stop("objects to combine must have the same number of items")
 #   # Out <- Out(do.call( c, lapply( args, c )))
 #   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
 #   facS <- args[[1]]$fac
@@ -585,7 +585,7 @@ combine.OutCoe <- function(...) {
   args <- list(...)
   # we check
   if (length(unique(sapply(args, length))) != 1)
-    stop("* objects to combine must have the same number of items")
+    stop("objects to combine must have the same number of items")
   # Out <- Out(do.call( c, lapply( args, c )))
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
   facS <- args[[1]]$fac
@@ -614,7 +614,7 @@ combine.OpnCoe <- function(...) {
   args <- list(...)
   # we check
   if (length(unique(sapply(args, length))) != 1)
-    stop("* objects to combine must have the same number of items")
+    stop("objects to combine must have the same number of items")
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
   facS <- args[[1]]$fac
   methodS <- do.call(c, lapply(args, function(x) x$method))
@@ -661,7 +661,7 @@ dissolve <- function(x, retain){
 }
 #' @export
 dissolve.default <- function(x, retain){
-  stop("* only implemented on Coe objects so far")
+  stop("only implemented on Coe objects so far")
 }
 #' @export
 dissolve.Coe <- function(x, retain){

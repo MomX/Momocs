@@ -51,7 +51,7 @@ LDA.default <- function(x, fac, retain, ...) {
   if (!is.matrix(X))
     X <- as.matrix(X)
   if (missing(fac))
-    stop(" * no fac provided")
+    stop("no fac provided")
   # now we calculate two lda models with MASS::lda one with
   mod <- lda(X, grouping = fac)
   mod.pred <- predict(mod, X)
@@ -85,13 +85,13 @@ LDA.default <- function(x, fac, retain, ...) {
 
 #' @export
 LDA.OutCoe <- function(x, fac, retain, ...) {
-  #stop(" * LDA on Coe is deprecated. Try on a PCA object.")
+  #  stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
   LDA(x$coe, x$fac[, fac])
 }
 
 #' @export
 LDA.Coe <- function(x, fac, retain, ...) {
-  stop(" * LDA on other Coe than OutCoe is deprecated. Try on a PCA object.")
+  stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
   # LDA(x$coe, x$fac[, fac])
 }
 
@@ -102,7 +102,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   f0 <- fac
   #fac handling
   if (missing(fac))
-    stop(" * no 'fac' provided.")
+    stop("no 'fac' provided")
   # formula case
   if (class(fac)=="formula"){
     fform <- x$fac[, attr(terms(fac), "term.labels")]
@@ -120,10 +120,10 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
 
   # PC number selection
   if (retain <= 1)  {
-    if (verbose) cat(" *", retain, "total variance.\n")
+    if (verbose) message(retain, " total variance")
     retain <- scree_min(x, prop = retain)
   }
-  if (verbose) cat(" *", retain, "PC retained.\n")
+  if (verbose) message(retain, " PC retained")
   X <- PCA$x[, 1:retain]
   if (is.matrix(X)) {
     remove <- which(apply(X, 2, sd) < 1e-10)
@@ -213,7 +213,7 @@ classify <- function(x, fac, ref, unk){
 }
 #' @export
 classify.default <- function(x, fac, ref, unk){
-  stop(" * Method only available for objects of class 'Coe'")
+  stop("method only available for objects of class 'Coe'")
 }
 
 #' @export
@@ -322,7 +322,7 @@ reLDA <- function(newdata, LDA){
 #' @rdname reLDA
 #' @export
 reLDA.default <- function(newdata, LDA){
-  stop(" * method only defined for LDA objects")
+  stop("method only defined for LDA objects")
 }
 
 #' @rdname reLDA
@@ -354,7 +354,7 @@ reLDA.Coe <- function(newdata, LDA){
   #     stop(" * a PCA object must be provided")
   mod <- LDA$mod
   if (!identical(colnames(LDA$x),  colnames(newdata$coe)))
-    stop(" * LDA and newdata object do not have the same structure")
+    stop("LDA and newdata object do not have the same structure")
   return(predict(mod, newdata$coe))
 }
 

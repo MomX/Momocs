@@ -60,7 +60,7 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     coo <- x
     coo <- coo_check(coo)
     if (missing(nb.h)) {
-        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+        message("'nb.h' not provided and set to ", nb.h)
     }
     if (is_closed(coo)) {
         coo <- coo_unclose(coo)
@@ -68,14 +68,14 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ",
+            message("'nb.h' must be lower than half the number of points and has been set to: ",
                 nb.h)
         }
     }
     if (nb.h == -1) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points and has been set to",
+            message("'nb.h' must be lower than half the number of points and has been set to",
                 nb.h, "harmonics.\n")
         }
     }
@@ -112,13 +112,13 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
     # nb.h <- ifelse(q >= 32, 32, q)
     nb.h <- calibrate_harmonicpower(Out, method="rfourier",
                                     thresh = 99, verbose=FALSE, plot=FALSE)$minh
-    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
+    if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1 #todo
-    cat(" * at least one outline has no more than", q * 2,
-        "coordinates.\n", "* 'nb.h' has been set to", q,
-        "harmonics.\n")
+    message("at least one outline has no more than ", q * 2,
+        " coordinates. 'nb.h' has been set to ", q,
+        " harmonics")
   }
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
@@ -170,7 +170,7 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' @export
 rfourier_i <- function(rf, nb.h, nb.pts = 120) {
     if (!all(c("an", "bn") %in% names(rf))) {
-        stop("a list containing 'an' and 'bn' harmonic coefficients \n         must be provided")
+        stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")
     }
     ao <- ifelse(is.null(rf$ao), 1, rf$ao)
     an <- rf$an
@@ -180,8 +180,7 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
     }
     if (nb.h > length(an)) {
         nb.h <- length(an)
-        cat(" * nb.h cannot be higher than length(rf$an) and has been set to: ",
-            nb.h)
+        message("nb.h cannot be higher than length(rf$an) and has been set to ", nb.h)
     }
     theta <- seq(0, 2 * pi, length = nb.pts)
     harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)

@@ -22,7 +22,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
                            lwd.shp = 1, plot = TRUE) {
   # we check here, though it shoudl have been before
   if (length(PCA$method)>4 | is.null(PCA$method)) {
-    stop(" * morphospacePCA needs a $method of length <= 5")}
+    stop("morphospacePCA needs a $method of length <= 5")}
   # we retrive the values corresponding to the two plotted axes and the meanshape
   xy <- PCA$x[, c(xax, yax)]
   rot <- PCA$rotation[, c(xax, yax)]
@@ -492,9 +492,9 @@ PCA2shp_procrustes <- function(pos, rot, mshape, amp.shp = 1) {
 # @export
 LDA2shp_efourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   if (ncol(pos) != ncol(rot))
-    stop(" * 'rot' and 'pos' must have the same ncol")
+    stop("'rot' and 'pos' must have the same ncol")
   if (length(mshape) != nrow(rot))
-    stop(" * 'mshape' and ncol(rot) lengths differ")
+    stop("'mshape' and ncol(rot) lengths differ")
   nb.h <- length(mshape)/4
   n <- nrow(pos)
   # we prepare the array

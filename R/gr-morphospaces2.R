@@ -61,7 +61,7 @@ morphospace2PCA <- function(PCA, xax, yax, pos,
   pos <- as.matrix(pos)
   # we check here, though it shoudl have been before
   if (length(PCA$method)>4 | is.null(PCA$method)) {
-    stop(" * morphospacePCA needs a $method of length <= 5")}
+    stop("morphospacePCA needs a $method of length <= 5")}
   # we retrive the values corresponding to the two plotted axes and the meanshape
   xy  <- PCA$x[, c(xax, yax)]
   rot <- PCA$rotation[, c(xax, yax)]

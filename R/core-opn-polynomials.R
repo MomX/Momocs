@@ -52,7 +52,7 @@ opoly.default <- function(x,
   coo <- coo_check(coo)
   if (missing(degree)) {
     degree <- 5
-    cat(" * 'degree' not provided and set to", degree, ".\n")
+    message("'degree' not provided and set to ", degree)
   }
   x <- poly(coo[, 1], degree = degree, raw = FALSE)
   mod <- lm(coo[, 2] ~ x)
@@ -78,16 +78,15 @@ opoly.Opn <- function(x,
   if (nb.pts > min.pts) {
     if (missing(nb.pts)) {
       nb.pts <- min.pts
-      cat(" * 'nb.pts' missing and set to: ", nb.pts, "\n")
+      message("'nb.pts' missing and set to ", nb.pts)
     } else {
       nb.pts <- min.pts
-      cat(" * at least one outline has less coordinates than 'nb.pts':",
-          nb.pts, "\n")
+      message("at least one outline has less coordinates than 'nb.pts' ", nb.pts, "points")
     }
   }
   if (missing(degree)) {
     degree <- 5
-    cat(" * 'degree' missing and set to: ", degree, "\n")
+    message("'degree' missing and set to ", degree)
   }
   # we normalize
   Opn <- coo_sample(Opn, nb.pts)
@@ -167,7 +166,7 @@ npoly.default <- function(x, degree, ...) {
   coo <- coo_check(coo)
   if (missing(degree)) {
     degree <- 5
-    cat(" * 'degree' not provided and set to", degree, ".\n")
+    message("'degree' not provided and set to: ", degree)
   }
   x <- poly(coo[, 1], degree = degree, raw = TRUE)
   mod <- lm(coo[, 2] ~ x)
@@ -192,16 +191,15 @@ npoly.Opn <- function(x,
   if (nb.pts > min.pts) {
     if (missing(nb.pts)) {
       nb.pts <- min.pts
-      cat(" * 'nb.pts' missing and set to: ", nb.pts, "\n")
+      message("'nb.pts' missing and set to: ", nb.pts)
     } else {
       nb.pts <- min.pts
-      cat(" * at least one outline has less coordinates than 'nb.pts':",
-          nb.pts, "\n")
+      message("at least one outline has less coordinates than 'nb.pts': ", nb.pts)
     }
   }
   if (missing(degree)) {
     degree <- 5
-    cat(" * 'degree' missing and set to: ", degree, "\n")
+    message("'degree' missing and set to: ", degree)
   }
   # we normalize
   Opn <- coo_sample(Opn, nb.pts)

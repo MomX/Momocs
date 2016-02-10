@@ -88,7 +88,7 @@
 #' }
 #' @export
 Coo <- function(...) {
-    cat(" * Coo constructor does not exist alone. See ?Coo")
+    message("Coo constructor does not exist alone. See ?Coo")
 }
 
 
@@ -157,7 +157,7 @@ Coo <- function(...) {
 #'
 #' @export
 Coe <- function(...) {
-    cat(" * Coe constructor does not exist alone. See ?Coe")
+    message("Coe constructor does not exist alone. See ?Coe") #todo
 }
 
 # str.* ----------------------

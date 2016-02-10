@@ -256,7 +256,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
       column_name <- attr(terms(fac), "term.labels")
       # we check for wrong formula
       if (any(is.na(match(column_name, colnames(PCA$fac)))))
-        stop(" * formula provided must match with $fac column names")
+        stop("formula provided must match with $fac column names")
       # otherwise we retrive the column(s)
       fac <- PCA$fac[, column_name]
       # multicolumn/fac case

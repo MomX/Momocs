@@ -361,7 +361,7 @@ plot_CV2.table <- function(x, links.FUN = arrows, col = TRUE,
   tab <- x
   # we check a bit
   if (ncol(x) != nrow(x))
-    stop(" * a table or a squared matrix must be passed.")
+    stop("a table or a squared matrix must be passed")
   # we deduce xy positions
   gap.mid <- 3
   n <- nrow(tab)

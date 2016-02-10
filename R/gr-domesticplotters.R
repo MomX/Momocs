@@ -157,7 +157,7 @@ coo_lolli <- function(coo1, coo2,
   coo1 <- coo_check(coo1)
   coo2 <- coo_check(coo2)
   if (nrow(coo1) != nrow(coo2)) {
-    stop(" * coo1 and coo2 have different number of coordinates.")
+    stop("'coo1' and 'coo2' have different number of coordinates")
   }
   s <- seq(nrow(coo1) - 1)
   segments(coo1[s, 1], coo1[s, 2],
@@ -186,7 +186,7 @@ coo_arrows <- function(coo1, coo2,
   coo1 <- coo_check(coo1)
   coo2 <- coo_check(coo2)
   if (nrow(coo1) != nrow(coo2)) {
-    stop(" * coo1 and coo2 have different number of coordinates.")
+    stop("'coo1' and 'coo2' have different number of coordinates")
   }
   s <- seq(nrow(coo1) - 1)
   arrows(coo1[s, 1], coo1[s, 2], coo2[s, 1], coo2[s, 2], length = length,
@@ -293,7 +293,7 @@ coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
   }
   k <- dim[1] * dim[2]
   if (k < n)
-    stop(" * dim[1]*dim[2] must be >= the length of coo.list")
+    stop("dim[1]*dim[2] must be >= the length of coo.list")
   pos <- matrix(1:k, dim[1], dim[2], byrow = byrow)
   if (fromtop & dim[1] > 1) {
     pos <- pos[dim[1]:1, ]
@@ -608,9 +608,9 @@ conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
 Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
   # we check a bit
   if (is.null(x$fac))
-    stop(" * Ntable must be called on an object with a $fac slot")
+    stop("Ntable must be called on an object with a $fac slot")
   if (missing(fac1))
-    stop(" * 'fac1' must be specified")
+    stop("'fac1' must be specified")
   df <- select_(x$fac, fac1, fac2)
   # we return a barplot when a single fac is called (fac1 then)
   if (missing(fac2) | identical(fac1, fac2)) { # | is justified by rm0 after

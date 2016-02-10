@@ -76,7 +76,7 @@ measure <- function(x, ...){
 
 #' @export
 measure.default <- function(x, ...){
-  stop("* only defined on Coo and lists objects")
+  stop("only defined on Coo and lists objects")
 }
 
 #' @export

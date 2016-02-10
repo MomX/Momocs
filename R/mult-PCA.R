@@ -183,11 +183,11 @@ get_pairs <- function(x, fac, range){UseMethod("get_pairs")}
 #' @export
 get_pairs.Coe <- function(x, fac, range){
   # we check and prepare
-  if (missing(fac)) stop(" * a 'fac' mus be provided.")
+  if (missing(fac)) stop("'fac' must be provided")
   fac <- x$fac[, fac]
-  if (nlevels(fac) != 2) stop(" * more than two levels for the 'fac' provided.")
+  if (nlevels(fac) != 2) stop("more than two levels for the 'fac' provided")
   tab <- table(fac)
-  if (length(unique(tab))!=1) stop(" * some mismatches between pairs.")
+  if (length(unique(tab))!=1) stop("some mismatches between pairs")
   # we get paired individuals
   if (missing(range)) range <- 1:ncol(x$coe)
   fl  <- levels(fac)
@@ -200,11 +200,11 @@ get_pairs.Coe <- function(x, fac, range){
 #' @export
 get_pairs.PCA <- function(x, fac, range){
   # we check and prepare
-  if (missing(fac)) stop(" * a 'fac' mus be provided.")
+  if (missing(fac)) stop("'fac' mus be provided")
   fac <- x$fac[, fac]
-  if (nlevels(fac) != 2) stop(" * more than two levels for the 'fac' provided.")
+  if (nlevels(fac) != 2) stop("more than two levels for the 'fac' provided")
   tab <- table(fac)
-  if (length(unique(tab))!=1) stop(" * some mismatches between pairs.")
+  if (length(unique(tab))!=1) stop("some mismatches between pairs")
   # we get paired individuals
   if (missing(range)) range <- 1:ncol(x$x)
   fl  <- levels(fac)
@@ -253,19 +253,18 @@ rePCA <- function(PCA, Coe){
 
 #'@export
 rePCA.default <- function(PCA, Coe){
-  stop(" * method only defined for PCA objetcs")
+  stop("method only defined for PCA objetcs")
 }
 
 
 #'@export
 rePCA.PCA <- function(PCA, Coe){
   if (Coe$method != PCA$method)
-    warning(" * methods differ between Coe and PCA")
+    warning("methods differ between Coe and PCA")
   scores <- PCA$x
   rot <- PCA$rotation
   coe <- Coe$coe
-  if (any(colnames(coe) != rownames(rot)))
-    warning(" * Matrices coefficients must match")
+  if (any(colnames(coe) != rownames(rot)))    warning("matrices coefficients must match")
   # we prepare a new PCA object
   PCA2 <- PCA
   PCA2$x <- matrix(NA, nrow(coe), ncol(rot), dimnames = list(rownames(coe), colnames(rot)))
@@ -309,7 +308,7 @@ rePCA.PCA <- function(PCA, Coe){
 #' get_chull_volume(bp, 1)
 #' @export
 get_chull_area <- function (x, fac, xax = 1, yax = 2) {
-  if (!is.PCA(x)) stop(" * 'x' must be a PCA object")
+  if (!is.PCA(x)) stop("'x' must be a PCA object")
   # no fac provided
   if (missing(fac)){
     xy <- x$x[, c(xax, yax)]
@@ -343,7 +342,7 @@ get_chull_area <- function (x, fac, xax = 1, yax = 2) {
 #' @rdname get_chull_area
 #' @export
 get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
-  if (!is.PCA(x)) stop(" * 'x' must be a PCA object")
+  if (!is.PCA(x)) stop("'x' must be a PCA object")
 
   # no fac provided
   if (missing(fac)){

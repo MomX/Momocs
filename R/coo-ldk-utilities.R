@@ -25,16 +25,16 @@ ldk_check <- function(ldk) {
         if (length(dim(ldk) == 2)) {
             return(array(ldk, dim = c(nrow(ldk), ncol(ldk), 1)))
         }
-        stop("A matrix an array (dim=3) must be provided.")
+        stop("a matrix an array (dim=3) must be provided")
     }
     if (is.list(ldk)) {
         l <- sapply(ldk, length)
         if (length(unique(l)) == 1) {
             return(l2a(ldk))
         }
-        stop("A list of matrices with the same number of coordinates must be provided.")
+        stop("a list of matrices with the same number of coordinates must be provided")
     }
-    stop("A list, a matrix or a dim=3 array must be provided.")
+    stop("a list, a matrix or a dim=3 array must be provided")
 }
 
 
@@ -101,18 +101,17 @@ def_links.matrix <- function(x, nb.ldk){
   def_2ldk <- function(x, hmax){
     res <- numeric(2)
     # 1st point
-    cat("Click on the starting landmark...")
+    message("Click on the starting landmark...")
     xy <- as.numeric(locator(1))
     if (!missing(hmax)) { if (xy[2] >= hmax) return() }
     d <- (x[, 1] - xy[1])^2 + (x[, 2] - xy[2])^2
     res[1] <- which.min(d)
     # 2nd point
-    cat(", on the ending landmark")
+    message("...on the ending landmark")
     xy <- as.numeric(locator(1))
     if (!missing(hmax)) { if (xy[2] >= hmax) return() }
     d <- (x[, 1] - xy[1])^2 + (x[, 2] - xy[2])^2
     res[2] <- which.min(d)
-    cat("\n")
     return(res)
   }
   
@@ -163,12 +162,12 @@ def_links.array <- function(x, nb.ldk){
     x <- mshapes(x)
     links <- def_links.matrix(x)
   } else {
-    stop(" * def_links only works on Ldk objects, matrices or 3-dim arrays.")
+    stop("only defined on Ldk objects, matrices and 3-dim arrays")
   }
   return(links)
 }
 
 #' @export
 def_links.default <- function(x, nb.ldk){
-  stop(" * def_links only works on Ldk objects, matrices or 3-dim arrays.")
+    stop("only defined on Ldk objects, matrices and 3-dim arrays")
 }

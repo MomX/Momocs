@@ -43,7 +43,7 @@ Opn <- function(x, fac = data.frame(), ldk = list()) {
 
 #' @export
 Opn.default <- function(x, fac = data.frame(), ldk = list()) {
-  cat(" * an Opn object can only be build from a list, an array or a Coo object")
+  message("an Opn object can only be build from a list, an array or a Coo object")
 }
 
 #' @export

@@ -57,7 +57,7 @@ CLUST <- function(x,  ...) {
 #' @rdname CLUST
 #' @export
 CLUST.Coe <- function(x,  ...) {
-  stop(" * deprecated for the moment")}
+  stop("deprecated for the moment")}
 #     Coe <- x
 #     if (missing(fac)) {
 #         cols <- rep("black", nrow(Coe$coe))

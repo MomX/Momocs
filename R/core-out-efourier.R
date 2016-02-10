@@ -128,20 +128,18 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
     nr <- nrow(coo)
     if (missing(nb.h)) {
         nb.h <- 32
-        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+        message("'nb.h' not provided and set to ", nb.h)
     }
     if (nb.h * 2 > nr) {
         nb.h = floor(nr/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points, and has been set to",
-                nb.h, "harmonics.\n")
+            message("'nb.h' must be lower than half the number of points, and has been set to ", nb.h, "harmonics")
         }
     }
     if (nb.h == -1) {
         nb.h = floor(nr/2)
         if (verbose) {
-            cat(" * The number of harmonics used has been set to: ",
-                nb.h)
+            message("The number of harmonics used has been set to: ", nb.h)
         }
     }
     if (smooth.it != 0) {
@@ -179,13 +177,12 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
   if (missing(nb.h)) {
     #nb.h <- ifelse(q >= 32, 32, q)
     nb.h <- calibrate_harmonicpower(Out, thresh = 99, verbose=FALSE, plot=FALSE)$minh
-    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
+    if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1 #todo
-    cat(" * at least one outline has no more than", q * 2,
-        "coordinates.\n", "* 'nb.h' has been set to", q,
-        "harmonics.\n")
+    message("at least one outline has no more than ", q * 2,
+        " coordinates. 'nb.h' has been set to ", q, " harmonics")
   }
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h,

@@ -16,7 +16,7 @@ Momocs_last <- function() {
   }
   devtools::install_github("vbonhomme/Momocs")
   library(Momocs)
-  cat("Last version of Momocs has been installed from GitHub and loaded into R.\n")
+  message("Last version of Momocs has been installed from GitHub and loaded into R")
 }
 
 #' Browse Momocs online doc
@@ -242,7 +242,7 @@ harm_pow <- function(xf) {
     names(hp) <- paste0("H", 1:length(hp))
     return(hp)
   } else {
-    stop(" * a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")
+    stop("a list containing 'an', 'bn' ('cn', 'dn') harmonic coefficients must be provided")
   }
 }
 
@@ -271,10 +271,10 @@ harm_pow <- function(xf) {
 vecs_param <- function(r1, i1, r2, i2) {
   x <- c(r1, i1, r2, i2)
   if (!is.numeric(x)) {
-    stop("4 numeric must be passed.")
+    stop("4 numeric must be passed")
   }
   if (length(x) != 4) {
-    stop("4 numeric must be passed.")
+    stop("4 numeric must be passed")
   }
   r.norms <- sqrt((r2^2 + i2^2))/sqrt((r1^2 + i1^2))
   d1 <- sqrt(sum(r1^2 + i1^2))

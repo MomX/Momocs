@@ -24,7 +24,7 @@ Out <- function(x, fac = data.frame, ldk = list()) {
 
 #' @export
 Out.default <- function(x, fac = data.frame(), ldk = list()) {
-  cat(" * an Out object can only be built from a list, an array or a Coo object")
+  message("do not know how to build an Out from this")
 }
 
 #' @export
@@ -86,7 +86,7 @@ as.Out <- function(object, OutCoe, nb.pts=120){
   # we swith among methods, with a messsage
   method <- object$method
   if (is.null(method)) {
-    stop(" * '$method' is missing. Not a regular Coe object.")
+    stop("'$method' is missing. Not a regular Coe object")
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
     method.i <- switch(p, efourier_i, rfourier_i, tfourier_i)
@@ -258,7 +258,7 @@ symmetry <- function(OutCoe) {
 #' @export
 symmetry.OutCoe <- function(OutCoe) {
   if (OutCoe$method != "efourier")
-    stop(" * Can only be applied on OutCoe [efourier] objects.")
+    stop("can only be applied on OutCoe [efourier] objects")
   x <- OutCoe$coe
   nb.h <- ncol(x)/4
   AD.ids <- c(1:nb.h, ((nb.h * 3 + 1):(nb.h * 4)))
@@ -319,13 +319,13 @@ rm_Asym <- function(OutCoe) {
 #' @rdname rm_Asym
 #' @export
 rm_Asym.default <- function(OutCoe) {
-  cat(" * Can only be applied on OutCoe objects.")
+  cat("can only be applied on OutCoe objects")
 }
 #' @rdname rm_Asym
 #' @export
 rm_Asym.OutCoe <- function(OutCoe) {
   if (OutCoe$method != "efourier")
-    stop(" * Can only be applied on OutCoe [efourier] objects.")
+    stop("can only be applied on OutCoe [efourier] objects")
   x <- OutCoe$coe
   nb.h <- ncol(OutCoe$coe)/4
   zeros <- (nb.h + 1):(nb.h * 3)
@@ -341,13 +341,13 @@ rm_Sym <- function(OutCoe) {
 #' @rdname rm_Asym
 #' @export
 rm_Sym.default <- function(OutCoe) {
-  cat(" * Can only be applied on OutCoe objects.")
+  stop("can only be applied on OutCoe objects")
 }
 #' @rdname rm_Asym
 #' @export
 rm_Sym.OutCoe <- function(OutCoe) {
   if (OutCoe$method != "efourier")
-    stop(" * Can only be applied on OutCoe [efourier] objects.")
+    stop("can only be applied on OutCoe [efourier] objects")
   x <- OutCoe$coe
   nb.h <- ncol(OutCoe$coe)/4
   zeros <- c(1:nb.h, ((nb.h * 3 + 1):(nb.h * 4)))

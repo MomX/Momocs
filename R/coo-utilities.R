@@ -36,14 +36,14 @@ coo_check.default <- function(coo) {
     if (length(coo) == 1)
       return(l2m(coo))
   }
-  stop(" * a list or a matrix of (x; y) coordinates must be provided.")
+  stop("a list or a matrix of (x; y) coordinates must be provided")
 }
 
 #' @export
 coo_check.Coo <- function(coo){
   res <- sapply(coo$coo, function(x) try(coo_check(x), silent=TRUE))
   if (is.error(res)){
-    stop(" * ", paste(names(coo)[which.is.error(res)], collapse=", "), " do not pass coo_check")
+    stop(paste(names(coo)[which.is.error(res)], collapse=", "), " do not pass coo_check")
   }
   return(coo)
 }
@@ -517,11 +517,11 @@ coo_slice <- function(coo, ids){
 coo_slice.default <- function(coo, ids){
   n <- length(ids)
   if (n<=1)
-    stop(" * 'ids' must contain at least 2 ids")
+    stop("'ids' must contain at least 2 ids")
   res <- list()
   ids <- sort(ids)
   if (max(ids) > nrow(coo))
-    stop(" * max(ids) must be lower than the number of coordinates")
+    stop("max(ids) must be lower than the number of coordinates")
 
   for (i in 1:(n-1)) {
     res[[i]] <- coo[ids[i]:ids[i+1], ]
@@ -604,7 +604,7 @@ coo_slide.Coo <- function(coo, id1, ldk) {
   if (!missing(ldk)) {
     .check(is.ldk(Coo),
            "this object has no $ldk")
-    if (!missing(id1))        warning(" * id1 provided will be ignored.")
+    if (!missing(id1))        warning("'id1' provided will be ignored")
     for (i in seq(along = Coo$coo)) {
       Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], Coo$ldk[[i]][ldk])
       Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][ldk] - 1)) %% nrow(Coo$coo[[i]])
@@ -771,7 +771,7 @@ coo_sample <- function(coo, n) {
 #' @export
 coo_sample.default <- function(coo, n) {
   coo <- coo_check(coo)
-  if (nrow(coo) < n) stop(" * less coordinates than n. Try coo_interpolate.")
+  if (nrow(coo) < n) stop("less coordinates than n, try coo_interpolate")
   sampled <- round(seq(1, nrow(coo), len = n + 1)[-(n + 1)])
   return(coo[sampled, ])
 }
@@ -786,7 +786,7 @@ coo_sample.Out <- function(coo, n) {
       ratio.i <- n / coo_nb[i]
       Out$ldk[[i]] <- ceiling(Out$ldk[[i]] * ratio.i)
     }
-    message(" * $ldk has been changed accordingly.\n")
+    message("$ldk has been changed accordingly")
   }
 
   Out$coo <- lapply(Out$coo, coo_sample, n)
@@ -824,7 +824,7 @@ coo_samplerr <- function(coo, n) {
 #' @export
 coo_samplerr.default <- function(coo, n) {
   coo <- coo_check(coo)
-  if (nrow(coo) < n) stop(" * less coordinates than n. Try coo_interpolate.")
+  if (nrow(coo) < n) stop("less coordinates than n, try coo_interpolate")
   Rx <- coo[, 1]
   Ry <- coo[, 2]
   le <- length(Rx)
@@ -1217,7 +1217,7 @@ coo_flipx.default <- function(coo){
 #' @export
 coo_flipx.Coo <- function(coo){
   if (length(coo$ldk) != 0)
-    cat(" * note that $ldk has not been changed\n")
+    message("note that $ldk has not been changed")
   coo$coo <- lapply(coo$coo, coo_flipx)
   coo
 }
@@ -1238,7 +1238,7 @@ coo_flipy.default <- function(coo){
 #' @export
 coo_flipy.Coo <- function(coo){
   if (length(coo$ldk) != 0)
-    cat(" * note that $ldk has not been changed\n")
+    message("note that $ldk has not been changed")
   coo$coo <- lapply(coo$coo, coo_flipy)
   coo
 }
@@ -1464,7 +1464,7 @@ coo_rev.Coo <- function(coo) {
     for (i in 1:length(coo)){
       coo$ldk[[i]] <- (nrow(coo[i])+1) - coo$ldk[[i]]
     }
-    cat(" * $ldk has been changed accordingly.\n")
+    message("$ldk has been changed accordingly")
   }
   return(coo)
 }
@@ -1805,7 +1805,7 @@ coo_calliper <- function(coo, arr.ind = FALSE) {
   # we check if there is no ex aequo
   ea <- length(which(d == max(d), arr.ind = TRUE))
   if (length(ea) > 1) {
-    cat(" * coo_length: at least two lengths are ex aequo.")
+    message("coo_length: at least two lengths are ex aequo")
   }
   if (arr.ind) {
     arr.ind <- which(as.matrix(d) == max(d), arr.ind = TRUE)

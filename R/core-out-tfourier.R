@@ -66,7 +66,7 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
   coo <- x
   if (missing(nb.h)) {
         nb.h <- 12
-        cat(" * 'nb.h' not provided and set to", nb.h, "\n")
+        message("'nb.h' not provided and set to ", nb.h)
     }
     if (is.list(coo)) {
         coo <- l2m(coo)
@@ -77,15 +77,14 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     if (nb.h * 2 > nrow(coo)) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points and has been set to: ",
+            message("'nb.h' must be lower than half the number of points and has been set to ",
                 nb.h)
         }
     }
     if (nb.h == -1) {
         nb.h = floor(nrow(coo)/2)
         if (verbose) {
-            cat(" * 'nb.h' must be lower than half the number of points.\n",
-                "* It has been set to", nb.h, "harmonics.\n")
+            message("'nb.h' must be lower than half the number of points. It has been set to ", nb.h, " harmonics")
         }
     }
     if (smooth.it != 0) {
@@ -124,13 +123,13 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
   if (missing(nb.h)) {
     nb.h <- calibrate_harmonicpower(Out, method="tfourier",
                                     thresh = 99, verbose=FALSE, plot=FALSE)$minh
-    if (verbose) cat(" * 'nb.h' not provided and set to", nb.h, "(99% harmonic power).\n")
+    if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1
-    cat(" * At least one outline has no more than", q * 2,
-        "coordinates.\n", "* 'nb.h' has been set to", q,
-        "harmonics.\n")
+    message("At least one outline has no more than ", q * 2,
+        " coordinates. 'nb.h' has been set to ", q,
+        " harmonics")
   }
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
@@ -198,10 +197,7 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
     }
     if (nb.h > length(an)) {
         nb.h <- length(an)
-        # cat(' * nb.h cannot be higher than length(rf$an) and has
-        # been set to: ', nb.h)}
     }
-    # if (missing(nb.pts)) {nb.pts=nb.h*2}
     theta <- seq(0, 2 * pi, length = nb.pts)
     harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)
     for (i in 1:nb.h) {

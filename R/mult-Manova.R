@@ -45,9 +45,9 @@ MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
                           drop, verbose = TRUE) {
   OpnCoe <- x
   if (length(OpnCoe$method) > 1)
-    stop(" * cannot yet be used on combined OutCoe. Do it manually.")
+    stop("cannot yet be used on combined OutCoe, do it manually")
   if (missing(fac))
-    stop(" * 'fac' must be provided")
+    stop("'fac' must be provided")
   if (!is.factor(fac)) {
     fac <- OpnCoe$fac[, fac]
   }
@@ -58,7 +58,7 @@ MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
     retain <- ncol(x)
   keep <- (drop + 1):retain
   if (verbose)
-    cat(" * MANOVA done on:", colnames(x)[keep], "\n")
+    message("MANOVA done on:", colnames(x)[keep])
   mod <- summary(manova(x[, keep] ~ fac), test = test)
   return(mod)
 }
@@ -68,7 +68,7 @@ MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
 MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TRUE) {
   OutCoe <- x
   if (length(OutCoe$method) > 1)
-    stop(" * cannot yet be used on combined OutCoe. Do it manually.")
+    stop("cannot yet be used on combined OutCoe. Do it manually")
   if (missing(fac))
     stop("'fac' must be provided")
   if (!is.factor(fac)) {
@@ -85,13 +85,13 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
       x <- x[, -BC]
       cph <- 2
       if (verbose)
-        cat(" * B and C harmonics removed (because of removeAsymetric)\n")
+        message("B and C harmonics removed (because of removeAsymetric)")
     } else {
       if (sum(x[, AD]) == 0) {
         x <- x[, -AD]
         cph <- 2
         if (verbose)
-          cat(" * A and D harmonics removed (because of removeSymetric)\n")
+          message("A and D harmonics removed (because of removeSymetric)")
       }
     }
   }
@@ -100,7 +100,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
     if (OutCoe$norm) {
       drop <- 1
       if (verbose)
-        cat(" * 1st harmonic removed (because of normalization)\n")
+        message("1st harmonic removed (because of normalization)")
     } else {
       drop <- 0
     }
@@ -118,13 +118,10 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
       retain <- nb.h
     }
     if (verbose) {
-      cat(" * 'retain' was missing. MANOVA done with",
-          retain, "harmonics ")
+      message("'retain' was missing. MANOVA done with", retain, "harmonics ")
       if (drop > 0) {
-        cat("and the first", drop, "dropped\n")
-      } else {
-        cat("\n")
-      }
+        message("and the first", drop, "dropped")
+      } 
     }
   } else {
     if ((retain - drop) > max.h) {
@@ -133,13 +130,13 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
         retain <- nb.h
       }
       if (verbose)
-        cat(" * 'retain' was too ambitious. MANOVA done with",
-            retain, "harmonics ")
+        message("'retain' was too ambitious. MANOVA done with ",
+            retain, " harmonics ")
       if (verbose) {
         if (drop > 0) {
-          cat("and the first", drop, "dropped\n")
+          message("and the first ", drop, " were dropped")
         } else {
-          cat("\n")
+          message("\n")
         }
       }
     }
@@ -147,9 +144,8 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
   
   harm.sel <- coeff_sel(retain = retain, drop = drop, nb.h = nb.h,
                         cph = cph)
-  # cat(retain, drop, nb.h, cph)
   if (verbose)
-    cat("\n")
+    message("\n")
   mod <- summary(manova(x[, harm.sel] ~ fac), test = test)
   return(mod)
 }
@@ -158,7 +154,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
 #' @export
 MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = TRUE) {
   if (missing(fac))
-    stop(" * 'fac' must be provided")
+    stop("'fac' must be provided")
   if (!is.factor(fac)) {
     fac <- x$fac[, fac]
   }
@@ -169,7 +165,7 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
   }  
   if (retain>nrow(x$x))
     retain <- nrow(x$x)
-  cat(" * PC axes 1 to", retain, "were retained.\n")
+  message("PC axes 1 to ", retain, " were retained")
   retain <- 1:retain
   x <- x$x[, retain]
   mod <- summary(manova(x ~ fac), test = test)
