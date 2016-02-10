@@ -328,7 +328,7 @@ which.is.error <- function(x){
 # eg
 #  olea %<>% mutate(fake=rnorm(length(olea)))
 #  summary(olea$fac)
-# # Valid ways ----------------
+# # Valid ways
 # # nothing
 # .prep.fac(olea)
 # # column id
@@ -344,7 +344,7 @@ which.is.error <- function(x){
 # # passing a numeric on the fly
 # .prep.fac(olea, rnorm(length(olea)))
 #
-# # Non valid ways ------------
+# # Non valid ways
 # # column beyond defined columns
 # .prep.fac(olea, 84)
 # # non existing column name
