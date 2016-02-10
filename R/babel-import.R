@@ -423,15 +423,15 @@ import_tps <- function(tps.path, curves=TRUE){
 #' @param curves \code{logical} whether to read curves, if any
 #' @return a list with components:
 #' \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
+#' @details if curves are present add them to \code{$coo} (with the proper combination
+#' of \link{do.call}, \link{rbind}, then use \link{def_slidings} or define a slidings matrix (see \link{Ldk}).
 #' @family babel functions
 #' @examples
 #' \dontrun{
-#' # let's imagien this command works fine
+#' # let's imagine this command works fine
 #' coo <- import_tps(...)
 #' # then you can
 #' Ldk(coo)
-#' # if curves are present this is strictly equivalent
-#' Ldk(coo=coo$coo, cur=coo$cur)
 #' }
 #' @export
 tps2coo <- function(tps, curves=TRUE){
