@@ -430,7 +430,9 @@ get_ldk.Out <- function(Coo) {
   for (i in seq(along = coo)) {
     ref[, , i] <- coo[[i]][ldk[[i]], ]
   }
-  return(a2l(ref))
+  # cases where single ldk (otherwise converted to a numeric)
+  res <- lapply(a2l(ref), function(x) matrix(x, ncol=2))
+  return(res)
 }
 #' @export
 get_ldk.Opn <- get_ldk.Out
