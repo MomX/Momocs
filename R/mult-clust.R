@@ -304,7 +304,7 @@ CLUST.PCA <- function(x,
                       hclust_method="complete",
                       mono=TRUE,
                       abbreviate=NULL,
-                      tip_fac=NULL){
+                      tip_fac=NULL, ...){
 
 
   if (!requireNamespace("ggtree", quietly = TRUE)) {
@@ -332,12 +332,12 @@ CLUST.PCA <- function(x,
   if (!is.null(abbreviate))
     phylo_df$label %<>% abbreviate(minlength = abbreviate)
 
-  gg <- ggtree(phylo_df, layout=layout)
-  if (layout %in% c("circular", "radial")){
-    gg <- gg + geom_text(aes(label=label, angle=angle, colour=fac), hjust=0)
-  } else {
+  gg <- ggtree::ggtree(phylo_df, layout=layout)
+  # if (layout %in% c("circular", "radial")){
+  #   gg <- gg + geom_text(aes(label=label, angle=angle, colour=fac), hjust=0)
+  # } else {
     gg <- gg + geom_text(aes(label=label, colour=fac), hjust=0)
-  }
+  # }
   suppressWarnings(gg)
 }
 

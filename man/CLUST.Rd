@@ -12,7 +12,7 @@ CLUST(x, ...)
 
 \method{CLUST}{PCA}(x, fac, layout = "circular", dist_method = "euclidean",
   hclust_method = "complete", mono = TRUE, abbreviate = NULL,
-  tip_fac = NULL)
+  tip_fac = NULL, ...)
 }
 \arguments{
 \item{x}{a PCA object (Coe method deprecated so far)}
