@@ -10,6 +10,8 @@
 #' @param retain the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).
 #' @param verbose logical whether to print messages
 #' @param ... additional arguments to feed \link{lda}
+#' @note For LDA.PCA, retain can be passed as a vector (eg: 1:5, and retain=1, retain=2, ...,
+#' retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_axes is used).
 #' @return a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:
 #' \itemize{
 #'  \item \code{x} any \link{Coe} object (or a matrix)
@@ -98,6 +100,21 @@ LDA.Coe <- function(x, fac, retain, ...) {
 #' @rdname LDA
 #' @export
 LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
+
+  if (length(retain)==1) {
+    if (retain=="best")
+    retain <- 1:ncol(x$x)
+  }
+  # select best case
+  if (length(retain)>1){
+    discri <- numeric(length(retain))
+    names(discri) <- paste0("PC1:", retain)
+    for (i in seq_along(discri)){
+      discri[i] <- LDA(x=x, fac=fac, retain = retain[i], verbose=FALSE)$CV.correct
+    }
+    return(discri)
+  }
+
   PCA <- x
   f0 <- fac
   #fac handling
@@ -123,6 +140,8 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
     if (verbose) message(retain, " total variance")
     retain <- scree_min(x, prop = retain)
   }
+
+
   if (verbose) message(retain, " PC retained")
   X <- PCA$x[, 1:retain]
   if (is.matrix(X)) {
