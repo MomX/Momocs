@@ -10,9 +10,9 @@ CLUST(x, ...)
 
 \method{CLUST}{Coe}(x, ...)
 
-\method{CLUST}{PCA}(x, fac, layout = "fan", dist_method = "euclidean",
+\method{CLUST}{PCA}(x, fac, layout = "circular", dist_method = "euclidean",
   hclust_method = "complete", mono = TRUE, abbreviate = NULL,
-  tip_fac = NULL, ...)
+  tip_fac = NULL)
 }
 \arguments{
 \item{x}{a PCA object (Coe method deprecated so far)}
@@ -46,29 +46,31 @@ Performs hierarchical clustering through \link{dist} and \link{hclust}. So far i
 a wrapper around these two functions, plus plotting using \link{plot.phylo} from the
 package ape. You need to have ggtree installed from GitHub (not yet released on CRAN).
 }
+\note{
+This method tries to adapt to ggtree changes but may require some ggplot customization,
+eg some xlim. See examples.
+}
 \examples{
 \dontrun{
 data(bot)
 bp <- PCA(efourier(bot, 10))
 CLUST(bp)
-CLUST(bp, layout="phylogram")
-CLUST(bp, layout="cladogram")
-CLUST(bp, layout="dendrogram")
-CLUST(bp, layout="unrooted")
+CLUST(bp, layout="rectangular") + xlim(c(NA, 0.15))
+CLUST(bp, layout="slanted") + xlim(c(NA, 0.15))
+CLUST(bp, layout="unrooted") +  xlim(c(NA, 0.15))
 CLUST(bp, layout="radial")
 CLUST(bp, "type")
-CLUST(bp, 1, layout="cladogram", mono=FALSE) #no monophyly coloring
+CLUST(bp, 1)
 
 # styling with ggplot2 grammar
 library(ggplot2)
 CLUST(bp, 1) + scale_color_discrete(h=c(120, 240))
 
-# tip_fac is useful !
+# tip_fac is useful
 data(olea)
 op <- PCA(opoly(olea, 5))
+CLUST(op, "var")
 CLUST(op, "var", tip_fac="var")
-
-# on the fly fac and tip_fac
 tip_fac2 <- interaction(op$fac$var, op$fac$domes)
 CLUST(op, fac=tip_fac2, tip_fac=tip_fac2)
 }
