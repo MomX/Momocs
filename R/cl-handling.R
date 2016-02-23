@@ -42,7 +42,7 @@ select.default <- function(.data, ...){
 
 #' @export
 select.Coo <- function(.data, ...){
-  .data %<>% validate()
+  #.data %<>% validate()
   .data$fac <- select(.data$fac, ...)
   .data
 }
@@ -77,7 +77,7 @@ rename.default <- function(.data, ...){
 
 #' @export
 rename.Coo <- function(.data, ...){
-  .data %<>% validate()
+  #.data %<>% validate()
   .data$fac <- rename(.data$fac, ...)
   .data
 }
@@ -113,7 +113,7 @@ mutate.default <- function(.data, ...){
 
 #' @export
 mutate.Coo <- function(.data, ...){
-  .data %<>% validate()
+  #.data %<>% validate()
   .data$fac <- mutate(.data$fac, ...)
   .data
 }
@@ -149,7 +149,7 @@ transmute.default <- function(.data, ...){
 
 #' @export
 transmute.Coo <- function(.data, ...){
-  .data %<>% validate()
+  #.data %<>% validate()
   .data$fac <- transmute(.data$fac, ...)
   .data
 }
@@ -190,7 +190,7 @@ filter.default <- function(.data, ...){
 
 #' @export
 filter.Coo <- function(.data, ...){
-  .data %<>% validate()
+  #.data %<>% validate()
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- filter(df, ...)
@@ -231,7 +231,7 @@ arrange.default <- function(.data, ...){
 
 #' @export
 arrange.Coo <- function(.data, ...){
-  .data %<>% validate()
+  #.data %<>% validate()
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- arrange(df, ...)
@@ -273,7 +273,7 @@ slice.default <- function(.data, ...){
 
 #' @export
 slice.Coo <- function(.data, ...){
-  .data %<>% validate()
+  #.data %<>% validate()
   subset(.data, ...)}
 
 #' @export
@@ -320,7 +320,7 @@ sample_n.default <- function(tbl, size, replace=FALSE, ...){
 #' @export
 sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
   Coo <- tbl
-  Coo %<>% validate()
+  #Coo %<>% validate()
   if (missing(fac)) {
     fac <- NULL
     N <- length(Coo)
@@ -389,7 +389,7 @@ sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
   if (size > 1 | size <= 0)
     stop("size must be >=0 and <= 1")
   Coo <- tbl
-  Coo %<>% validate()
+  #Coo %<>% validate()
   if (missing(fac)) {
     fac <- NULL
     N <- length(Coo)
@@ -441,7 +441,7 @@ chop.default <- function(.data, fac){
 #' @export
 chop.Coo <- function(.data, fac){
   Coo <- .data
-  Coo %<>% validate()
+  #Coo %<>% validate()
   # hideous but works
   e <- substitute(fac)
   f <- eval(e, Coo$fac, parent.frame())
@@ -539,7 +539,7 @@ combine.Out <- function(...) {
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
-  Out %<>% validate()
+  #Out %<>% validate()
   return(Out)
 }
 
@@ -559,7 +559,7 @@ combine.Ldk <- function(...) {
   }
   cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   Ldk$cuts <- cutS
-  Ldk %<>% validate()
+  #Ldk %<>% validate()
   return(Ldk)
 }
 
