@@ -43,6 +43,10 @@ a 'LDA' object on which to apply \link{plot.LDA}, which is a list with component
 \description{
 Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
 }
+\note{
+For LDA.PCA, retain can be passed as a vector (eg: 1:5, and retain=1, retain=2, ...,
+retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_axes is used).
+}
 \examples{
 data(bot)
 bot.f <- efourier(bot, 24)
