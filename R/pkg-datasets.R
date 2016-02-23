@@ -124,3 +124,15 @@ NULL
 #' @source see link{iris}
 NULL
 
+#' Data: Landmark and semilandmark coordinates on cereal glumes
+#'
+#' @docType data
+#' @name chaff
+#' @rdname data_chaff
+#' @format An \link{Ldk} object with 50 configuration of landmarks and semi-landmarks (4 partitions)
+#' sampled on cereal glumes
+#' @source Research support was provided by the European Research Council
+#' (Evolutionary Origins of Agriculture (grant no. 269830-EOA)
+#' PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Forster after some discussion
+#' with Andreas Pares.
+NULL
