@@ -396,7 +396,8 @@ def_ldk.Opn <- def_ldk.Out
 #' get_ldk(wings) # equivalent to wings$coo
 #'
 #' # on Ldk (slidings)
-#' # waiting for chaff, todo
+#' get_ldk(chaff)
+#' get_ldk(chaff) %>% Ldk %>% fgProcrustes(tol=0.1) %>% stack
 #' @export
 get_ldk <- function(Coo) {
   UseMethod("get_ldk")
@@ -481,11 +482,11 @@ get_ldk.Opn <- get_ldk.Out
 .slidings_scheme <- function(x){
   .check(is.matrix(x), "slidings must be a matrix")
   .check(ncol(x)==3,   "slidings must be a 3-columns matrix")
-  d <- diff(x[, 1])>1
+  d <- which(diff(x[, 1])>1)
   # nb of partitions
-  n <- sum(d)+1
+  n <- length(d)+1
   # deduce their position
-  id <- cbind(c(1, which(d)+1), c(which(d), nrow(x)))
+  id <- cbind(c(x[1, 1], x[d+1, 1]), c(x[d, 3], x[nrow(x), 3]))
   # cosmetics
   dimnames(id) <- list(paste0("partition", 1:nrow(id)), c("start", "end"))
   return(list(n=n, id=id))
@@ -499,10 +500,15 @@ get_ldk.Opn <- get_ldk.Out
 #'
 #' @param Coo an Ldk object
 #' @return a list with two components: \code{n} the number of partition; \code{id}
-#' their position.
+#' their position. Or a NULL if no slidings are defined
 #'
 #' @examples
-#' # waiting for chaff, todo
+#' # no slidings defined a NULL is returned with a message
+#' slidings_scheme(wings)
+#'
+#' # slidings defined
+#' slidings_scheme(chaff)
+#'
 #' @export
 slidings_scheme <- function(Coo){
   UseMethod("slidings_scheme")
@@ -515,7 +521,9 @@ slidings_scheme.default <- function(Coo){
 
 #' @export
 slidings_scheme.Ldk <- function(Coo){
-  .check(is.slidings(Coo), "no sliding defined")
+  if(!is.slidings(Coo)){
+    message("no sliding defined")
+    return(NULL)}
   .slidings_scheme(Coo$slidings)
 }
 
@@ -572,8 +580,15 @@ def_slidings.Ldk <- function(Coo, slidings){
 #' @param partition numeric which one(s) to get.
 #' @return a list of list(s) of coordinates.
 #' @examples
-#' #waiting for chaff todo
-#'
+#' # for each example below a list with partition containign shapes is returned
+#' # extracts the first partition
+#' get_slidings(chaff, 1) %>% names()
+#' # the first and the fourth
+#' get_slidings(chaff, c(1, 4)) %>%  names()
+#' # all of them
+#' get_slidings(chaff) %>%  names
+#' # here we want to see it
+#' get_slidings(chaff, 1)[[1]] %>%  Ldk %>% stack
 #' @export
 get_slidings <- function(Coo, partition){
   UseMethod("get_slidings")
@@ -590,19 +605,19 @@ get_slidings.Ldk <- function(Coo, partition){
   # we retrieve the scheme
   scheme <- .slidings_scheme(Coo$slidings)
   n  <- scheme$n
-  id <- scheme$id
   # all by default
   if (missing(partition))
     partition <- 1:n
+  id <- scheme$id[partition, ]
+  if (is.numeric(id)) id <- matrix(id, ncol=2)
   # nice try
   .check(all(partition<=n), "some partition do not exist")
   # prepare the nest
   slidings <- vector("list", length(partition))
-  names(slidings) <- rownames(id)
+  names(slidings) <- rownames(scheme$id)[partition]
   # loop and grab
   for (i in 1:nrow(id)){
-    ids_i <- id[i, 1] : id[i, 2]
-    slidings[[i]] <- lapply(Coo$coo, function(x) x[ids_i,  ])
+    slidings[[i]] <- lapply(Coo$coo, coo_extract, id[i, 1]:id[i, 2])
   }
   return(slidings)
 }
