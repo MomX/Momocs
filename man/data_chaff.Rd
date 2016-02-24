@@ -9,8 +9,7 @@ sampled on cereal glumes}
 \source{
 Research support was provided by the European Research Council
 (Evolutionary Origins of Agriculture (grant no. 269830-EOA)
-PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Forster after some discussion
-with Andreas Pares.
+PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Forster.
 }
 \description{
 Data: Landmark and semilandmark coordinates on cereal glumes
