@@ -221,11 +221,12 @@ bot.f
 
 `bot.f` is a `Coe` object (and even an `OutCoe`), you have have a look to the help files to go deeper into Momocs classes.
 
-Let's have a look to the amplitude of fitted coefficients. We can also reconstruct fitted outlines, directly.
+Let's have a look to the amplitude of fitted coefficients. We can also draw reconstructed shapes.
 ```{r}
 hist(bot.f, drop=0)
 boxplot(bot.f, drop=1)
-stack(bot.f)
+bot.f %>% as.Out %>% stack
+bot.f %>% as.Out %>% panel
 ```
 
 Now, we can calculate a PCA on the `Coe` object and plot it, along with morphospaces, calculated on the fly.
