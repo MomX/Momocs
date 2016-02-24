@@ -30,7 +30,7 @@ coo_plot(bot[1])
 coo_plot(coo_interpolate(coo_sample(bot[1], 12), 120))
 }
 \seealso{
-Other sampling functions: \code{\link{coo_samplerr}},
-  \code{\link{coo_sample}}
+Other sampling functions: \code{\link{coo_extract}},
+  \code{\link{coo_samplerr}}, \code{\link{coo_sample}}
 }
 

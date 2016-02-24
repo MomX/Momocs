@@ -27,7 +27,7 @@ cpos <- coo_centpos(bot[1])
 segments(cpos[1], cpos[2], rr[, 1], rr[, 2])
 }
 \seealso{
-Other sampling functions: \code{\link{coo_interpolate}},
-  \code{\link{coo_sample}}
+Other sampling functions: \code{\link{coo_extract}},
+  \code{\link{coo_interpolate}}, \code{\link{coo_sample}}
 }
 
