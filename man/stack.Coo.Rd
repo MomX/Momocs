@@ -3,7 +3,6 @@
 \name{stack.Coo}
 \alias{stack.Coo}
 \alias{stack.Ldk}
-\alias{stack.OutCoe}
 \title{Plots Coo objects: stack (all shapes in the same frame)}
 \usage{
 \method{stack}{Coo}(x, cols, borders, fac, palette = col_summer,
@@ -12,8 +11,6 @@
   ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
   ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE,
   title = substitute(x), ...)
-
-\method{stack}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
   ldk = TRUE, ldk_pch = 20, ldk_col = col_alpha("#000000", 0.5),
@@ -67,8 +64,6 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{...}{further arguments to be passed to \link{coo_plot}}
 
-\item{nb.pts}{the number of points to use for the shape reconstruction}
-
 \item{meanshape}{\code{logical} whether to add meanshape related stuff (below)}
 
 \item{meanshape_col}{a color for everything meanshape}
@@ -76,6 +71,8 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{slidings}{\code{logical} whether to draw slidings semi landmarks}
 
 \item{slidings_pch}{\code{pch} for semi landmarks}
+
+\item{nb.pts}{the number of points to use for the shape reconstruction}
 }
 \description{
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
@@ -99,6 +96,10 @@ stack(hearts)
 stack(hearts, ldk=FALSE)
 stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk_col=col_summer(4), ldk_pch=20)
 stack(hearts, fac="aut", palette=col_sari)
+
+chaffal <- fgProcrustes(chaff)
+stack(chaffal, slidings=FALSE)
+stack(chaffal, meanshape=TRUE, meanshape_col="blue")
 }
 }
 \seealso{
