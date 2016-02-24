@@ -24,12 +24,13 @@ __You are welcome to:__
 
 Features
 --------
+(* = on its way)
+
 __Data acquisition + Babel__
 * Outline extraction
-* Landmark definition on outlines* (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
-* Open curves digitization with bezier curves* (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
-* Import from `.nts`, `.tps`, `PAST`, `.txt`, etc.
-* Export to `.txt`, etc.
+* Landmark definition on outlines (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Open curves digitization with bezier curves (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Import/Export from/to `.nts`, `.tps`, `PAST`, `.txt`, etc.*
 
 __Outline analysis__
 * Elliptical Fourier analysis
@@ -41,7 +42,8 @@ __Open-outlines__
 * Natural (raw) polynomials (`npoly`)
 * Orthogonal (Legendre) polynomials (`opoly`)
 * Discrete Cosinus Transform (`dfourier`)
-* Same calibration methods as above
+* Calibration for all methods*
+* `bezier` core functions
 
 __Configuration of landmarks__
 * Full Generalized Procrustes Adjustment (`fgProcrustes`)
@@ -49,31 +51,32 @@ __Configuration of landmarks__
 * Sliding semi-landmarks*
 
 __Traditional morphometrics and global shape descriptors__
-* Some built-in facilities for multivariate analysis
-* A long list of shape scalars (eg. eccentricity, rectilinearity, etc.)
+* Facilities for multivariate analysis (see `flowers`)
+* A long list of shape scalars (eg. `coo_eccentricity`, `coo_rectilinearity`, etc.)
 
 __Data handling__
 * `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
-* New verbs useful for morphometrics such as `combine`, to handle several 2D views
+* New verbs useful for morphometrics such as `combine` and `chop`, to handle several 2D views
+* Permutation methods to resample data (`perm`, `breed`)
  
 __Multivariate analysis__
 * Mean shape (groupwise) calculations (`mshapes`)
 * Principal component analysis (`PCA`)
 * Multivariate analysis of variance (`MANOVA` + pairwise testing `MANOVA_PW`)
-* Linear discriminant analysis (`LDA`)
+* Linear discriminant analysis and screening (`LDA`)
 * Hierarchical clustering (`CLUST`)
-* K-means
+* K-means (`KMEANS`)
 
 __Graphical methods__
-* Elegant ggplot2 plots
+* Family pictures and quick inspection of whole datasets
+* Some ggplot2 plots, when useful
 * Morphological spaces for PCA
 * Thin plate splines and variation around deformation grids
-* Family pictures and quick inspection of whole datasets
 
 __Various__
-* Toy and published datasets
-* Vignettes
-* [Shiny](http://shiny.rstudio.com/) demonstrators/helpers
+* Datasets for all types of data (`bot`, `trilo`, `mosquito`, `hearts`, `olea`, `shapes`, `wings`, `oak`, `molars`, `flower`, `chaff`)
+* Vignettes (`browseVignettes("Momocs")`)
+* [Shiny](http://shiny.rstudio.com/) demonstrators/helpers*
 
 
 Architecture
