@@ -218,7 +218,7 @@ coo_scaley <- function(coo, k=1){
 #' @export
 coo_template <- function(coo, size){
   UseMethod("coo_template")
-  }
+}
 
 #' @export
 coo_template.default <- function(coo, size = 1) {
@@ -741,6 +741,53 @@ coo_slidegap.default <- function(coo, force=FALSE){
 #' @export
 coo_slidegap.Coo <- function(coo, force=FALSE){
   coo$coo <- lapply(coo$coo, coo_slidegap, force=force)
+  coo
+}
+
+# coo_extract -------------
+#' Extract coordinates from a shape
+#'
+#' Extract ids coordinates from a single shape or a Coo object.
+#'
+#' It probably only make sense for Coo objects with the same number of coordinates
+#' and them being homologous, typically on Ldk.
+#'
+#' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
+#' @param ids \code{integer}, the ids of points to sample.
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @examples
+#' b <- bot[1]
+#' stack(bot)
+#' stack(coo_sample(bot, 24))
+#' coo_plot(b)
+#' coo_plot(coo_sample(b, 24))
+#' @family sampling functions
+#' @examples
+#' coo_extract(bot[1], c(3, 9, 12) # or :
+#' bot[1] %>% coo_extract(c(3, 9, 12))
+#'
+#' coo_extract(bot, c(3, 5, 7))
+#' @export
+coo_extract <- function(coo, ids){
+  UseMethod("coo_extract")
+}
+
+#' @export
+coo_extract.default <- function(coo, ids){
+  .check(!missing(ids),
+         "ids must be provided")
+  .check(is.numeric(ids),
+         "ids must be numeric")
+  coo[ids, ]
+}
+
+#' @export
+coo_extract.Coo <- function(coo, ids){
+  .check(all(coo_nb(coo) > length(ids)),
+         "at least one shape has less coordinates than ids length")
+  .check(all(coo_nb(coo) > max(ids)),
+         "at least one shape has less coordinates than max(ids)")
+  coo$coo <- lapply(coo$coo, coo_extract, ids)
   coo
 }
 
