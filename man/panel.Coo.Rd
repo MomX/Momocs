@@ -11,22 +11,22 @@
 \usage{
 panel(x, ...)
 
-\method{panel}{Out}(x, dim, cols, borders, fac, reorder = NULL,
-  palette = col_summer, coo_sample = 120, names = NULL, cex.names = 0.6,
-  points = TRUE, points.pch = 3, points.cex = 0.2, points.col, ...)
+\method{panel}{Out}(x, dim, cols, borders, fac, palette = col_summer,
+  coo_sample = 120, names = NULL, cex.names = 0.6, points = TRUE,
+  points.pch = 3, points.cex = 0.2, points.col, ...)
 
 \method{panel}{OutCoe}(x, nb.pts = 120, ...)
 
-\method{panel}{Opn}(x, cols, borders, fac, reorder = NULL,
-  palette = col_summer, coo_sample = 120, names = NULL, cex.names = 0.6,
-  points = TRUE, points.pch = 3, points.cex = 0.2, points.col, ...)
+\method{panel}{Opn}(x, cols, borders, fac, palette = col_summer,
+  coo_sample = 120, names = NULL, cex.names = 0.6, points = TRUE,
+  points.pch = 3, points.cex = 0.2, points.col, ...)
 
-\method{panel}{Ldk}(x, cols, borders, fac, reorder = NULL,
-  palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
-  points.pch = 3, points.cex = 0.2, points.col = "#333333", ...)
+\method{panel}{Ldk}(x, cols, borders, fac, palette = col_summer,
+  names = NULL, cex.names = 0.6, points = TRUE, points.pch = 3,
+  points.cex = 0.2, points.col = "#333333", ...)
 }
 \arguments{
-\item{x}{The \code{Coo} (or \code{OutCoe}) object  to plot.}
+\item{x}{The \code{Coo} object to plot.}
 
 \item{...}{further arguments to maintain consistency with the generic \link{plot}.}
 
@@ -40,8 +40,6 @@ Either a single value or of length exactly equal to the number of coordinates.}
 Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{fac}{a factor within the $fac slot for colors}
-
-\item{reorder}{a factor or a numeric to reorder shapes}
 
 \item{palette}{a color \link{palette}}
 
@@ -67,9 +65,7 @@ Plots all the outlines, side by side, from
 a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 }
 \note{
-When applied on a \link{OutCoe} object, a wrapper
-for \code{panel(as.Out(OutCoe), ...)}. In that case,
-\code{...} feeds \code{panel} itself. (same thing for \code{OpnCoe} to come)
+If you want to reorder shapes according to a factor, use \link{arrange}.
 }
 \examples{
 data(mosquito)

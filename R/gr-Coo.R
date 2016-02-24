@@ -173,13 +173,6 @@ stack.Coo <-
 
 #' @rdname stack.Coo
 #' @export
-stack.OutCoe <- function(x, nb.pts=120, ...){
-  OutCoe <- x
-  Out <- as.Out(x, nb.pts=nb.pts)
-  stack(Out, title=paste0(substitute(x),"_i"),...)}
-
-#' @rdname stack.Coo
-#' @export
 stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
                       ldk = TRUE, ldk_pch = 20, ldk_col=col_alpha("#000000", 0.5), ldk_cex = 0.3,
                       meanshape = FALSE, meanshape_col="#FF0000",
@@ -235,24 +228,24 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   if (meanshape){
     A <- l2a(get_ldk(Coo))
     mA <- mshapes(A)
-  if (ldk_confell) {
-    ldk_confell(A, conf = 0.9, col=meanshape_col)
-  }
-  if (ldk_contour) {
-    ldk_contour(A, nlevels = 3, col = meanshape_col)
-  }
-  if (ldk_chull) {
-    ldk_chull(A, col = meanshape_col)
-  }
-  if (ldk_links | missing(ldk_links))  {
-    if (is.links(Coo))
-      ldk_links(mshapes(A), Coo$links, col=ldk_col)
-  }
-  if (ldk_labels) {
-    ldk_labels(mshapes(A), col=meanshape_col)
-  }
-  points(mA, pch = ldk_pch,
-         cex = ifelse(ldk_cex > 0.5, ldk_cex * 1.5, 0.5), col = meanshape_col)
+    if (ldk_confell) {
+      ldk_confell(A, conf = 0.9, col=meanshape_col)
+    }
+    if (ldk_contour) {
+      ldk_contour(A, nlevels = 3, col = meanshape_col)
+    }
+    if (ldk_chull) {
+      ldk_chull(A, col = meanshape_col)
+    }
+    if (ldk_links | missing(ldk_links))  {
+      if (is.links(Coo))
+        ldk_links(mshapes(A), Coo$links, col=ldk_col)
+    }
+    if (ldk_labels) {
+      ldk_labels(mshapes(A), col=meanshape_col)
+    }
+    points(mA, pch = ldk_pch,
+           cex = ifelse(ldk_cex > 0.5, ldk_cex * 1.5, 0.5), col = meanshape_col)
   }
 }
 
@@ -280,7 +273,7 @@ stack2 <- function(Coo){
 #' Plots all the outlines, side by side, from
 #' a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 #'
-#' @param x The \code{Coo} (or \code{OutCoe}) object  to plot.
+#' @param x The \code{Coo} object to plot.
 #' @param  dim for \link{coo_listpanel}: a numeric of length 2
 #' specifying the dimensions of the panel
 #' @param cols A \code{vector} of colors for drawing the outlines.
@@ -288,7 +281,6 @@ stack2 <- function(Coo){
 #' @param borders A \code{vector} of colors for drawing the borders.
 #' Either a single value or of length exactly equals to the number of coordinates.
 #' @param fac a factor within the $fac slot for colors
-#' @param reorder a factor or a numeric to reorder shapes
 #' @param palette a color \link{palette}
 #' @param coo_sample if not NULL the number of point per shape to display (to plot quickly)
 #' @param names whether to plot names or not. If TRUE uses shape names, a column name or number from
@@ -300,9 +292,7 @@ stack2 <- function(Coo){
 #' @param points.col (for Ldk) and a col  for these points
 #' @param nb.pts the number of points to use for the shape reconstruction
 #' @param ... further arguments to maintain consistency with the generic \link{plot}.
-#' @note When applied on a \link{OutCoe} object, a wrapper
-#' for \code{panel(as.Out(OutCoe), ...)}. In that case,
-#' \code{...} feeds \code{panel} itself. (same thing for \code{OpnCoe} to come)
+#' @note If you want to reorder shapes according to a factor, use \link{arrange}.
 #' @seealso \link{stack.Coo}, \link{plot.Coo}.
 #' @examples
 #' data(mosquito)
@@ -323,19 +313,21 @@ panel <- function(x, ...) {
 }
 #' @rdname panel.Coo
 #' @export
-panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
+panel.Out <- function(x, dim, cols, borders, fac,
                       palette = col_summer, coo_sample=120, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
+  op <- par("mar", "oma")
+  on.exit(par(op))
+  par(mar = rep(0, 4), oma = rep(0.2, 4))
+
   Coo <- x
+  Coo <- coo_template(Coo, size = 0.95)
   if (is.numeric(coo_sample)) {
     if (all(coo_nb(Coo) >= coo_sample)) {
       Coo <- suppressMessages(coo_sample(Coo, coo_sample))
     }
   }
-  if (!missing(reorder)){
-    new_order <- order(Coo$fac[, reorder])
-    Coo <- Momocs::slice(Coo, new_order)
-  }
+
   if (!missing(fac)) {
     if (missing(cols)) {
       cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[, fac]]
@@ -356,8 +348,6 @@ panel.Out <- function(x, dim, cols, borders, fac, reorder = NULL,
     borders <- rep(borders[1], length(Coo))
   }
 
-
-  #reorder <- Coo$fac[, reorder]
   pos <- coo_listpanel(Coo$coo, dim=dim, cols = cols, borders = borders,
                        poly = TRUE)
   if (!is.null(names)) {
@@ -386,10 +376,15 @@ panel.OutCoe <- function(x, nb.pts=120, ...){
 
 #' @rdname panel.Coo
 #' @export
-panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
+panel.Opn <- function(x, cols, borders, fac,
                       palette = col_summer, coo_sample=120, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
+  op <- par("mar", "oma")
+  on.exit(par(op))
+  par(mar = rep(0, 4), oma = rep(0.2, 4))
+
   Coo <- x
+  Coo <- coo_template(Coo, size = 0.95)
   if (is.numeric(coo_sample)) {
     if (all(coo_nb(Coo) >= coo_sample)) {
       Coo <- suppressMessages(coo_sample(Coo, coo_sample))
@@ -416,22 +411,15 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
   if (length(borders) != length(Coo)) {
     cols <- rep(borders[1], length(Coo))
   }
-  if (!missing(reorder))
-    reorder <- Coo$fac[, reorder]
-  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
-                       reorder = reorder, poly = FALSE)
+
+  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders, poly = FALSE)
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
       if (length(names) != length(Coo)) {
-        if (is.null(reorder)) {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[,
-                                                    names], cex = cex.names)
-        } else {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[,
-                                                    names][order(reorder)], cex = cex.names)
-        }
+        text(pos[, 1], pos[, 2], labels = Coo$fac[,
+                                                  names], cex = cex.names)
       } else {
         text(pos[, 1], pos[, 2], labels = names, cex = cex.names)
       }
@@ -441,11 +429,21 @@ panel.Opn <- function(x, cols, borders, fac, reorder = NULL,
 
 #' @rdname panel.Coo
 #' @export
-panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
+panel.Ldk <- function(x, cols, borders, fac,
                       palette = col_summer, names = NULL, cex.names = 0.6, points = TRUE,
                       points.pch = 3, points.cex = 0.2, points.col = "#333333",
                       ...) {
+  op <- par("mar", "oma")
+  on.exit(par(op))
+  par(mar = rep(0, 4), oma = rep(0.2, 4))
+
   Coo <- x
+  Coo <- coo_template(Coo, size = 0.95)
+
+  # patch, dirty, todo
+  if (missing(cols) & !missing(borders))
+    borders <- cols
+
   if (!missing(fac)) {
     if (missing(borders)) {
       borders <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[,
@@ -455,26 +453,55 @@ panel.Ldk <- function(x, cols, borders, fac, reorder = NULL,
     }
   }
   if (missing(borders)) {
-    borders <- rep(NA, length(Coo))
+    borders <- rep("#000000", length(Coo))
   }
   if (length(borders) != length(Coo)) {
     borders <- rep(borders[1], length(Coo))
   }
-  if (!missing(reorder))
-    reorder <- Coo$fac[, reorder]
-  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders,
-                       reorder = reorder, poly = FALSE, points = points, points.pch = points.pch,
+
+  pos <- coo_listpanel(Coo$coo, cols = NULL, borders = NULL,
+                       poly = FALSE, points = points, points.pch = "",
                        points.cex = points.cex, points.col = points.col)
+
+  ### quick and dirty patch for slidings, links, etc.
+
+  # links
+  if (is.links(Coo)){
+    links <- Coo$links
+    ldk_all <- get_ldk(Coo)
+    for (i in seq_along(Coo)){
+      ldk_i <- coo_trans(ldk_all[[i]], pos[i, 1], pos[i, 2])
+      for (j in 1:nrow(links))
+        segments(ldk_i[links[j, 1], 1], ldk_i[links[j, 1], 2],
+                 ldk_i[links[j, 2], 1], ldk_i[links[j, 2], 2],
+                 #col=col_alpha("#000000", 0.75))
+                 col=col_alpha(borders[i], 0.9))
+    }
+  }
+
+  # slidings
+  if (is.slidings(Coo)){
+    slidings_all <- get_slidings(Coo)
+    for (i in seq_along(slidings_all))
+      for (j in seq_along(slidings_all[[i]]))
+        lines(coo_trans(slidings_all[[i]][[j]], pos[j, 1], pos[j, 2]),
+              col=col_alpha(borders[j], 0.75))
+  }
+
+  # ldk
+  ldk_all <- get_ldk(Coo)
+  for (i in seq_along(Coo)){
+    ldk_i <- coo_trans(ldk_all[[i]], pos[i, 1], pos[i, 2])
+    for (j in 1:nrow(ldk_i))
+      points(ldk_i[j, 1], ldk_i[j, 2], col=borders[i], pch=points.pch, cex=points.cex)
+  }
+
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
       if (length(names) != length(Coo)) {
-        if (is.null(reorder)) {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[, names], cex = cex.names)
-        } else {
-          text(pos[, 1], pos[, 2], labels = Coo$fac[, names][order(reorder)], cex = cex.names)
-        }
+        text(pos[, 1], pos[, 2], labels = Coo$fac[, names], cex = cex.names)
       } else {
         text(pos[, 1], pos[, 2], labels = names, cex = cex.names)
       }
