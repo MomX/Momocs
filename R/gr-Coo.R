@@ -62,16 +62,18 @@ plot.Coo <- function(x, id, ...) {
 #' @param first.point \code{logical} whether to draw or not the first point
 #' @param centroid \code{logical} whether to draw or not the centroid
 #' @param ldk \code{logical}. Whether to display landmarks (if any).
-#' @param ldk.pch \code{pch} for these landmarks
-#' @param ldk.col color for these landmarks
-#' @param ldk.cex \code{cex} fro these landmarks
+#' @param ldk_pch \code{pch} for these landmarks
+#' @param ldk_col color for these landmarks
+#' @param ldk_cex \code{cex} for these landmarks
+#' @param meanshape \code{logical} whether to add meanshape related stuff (below)
+#' @param meanshape_col a color for everything meanshape
 #' @param ldk_links \code{logical} whether to draw links (of the mean shape)
 #' @param ldk_confell \code{logical} whether to draw conf ellipses
 #' @param ldk_contour \code{logical} whether to draw contour lines
 #' @param ldk_chull \code{logical} whether to draw convex hull
 #' @param ldk_labels \code{logical} whether to draw landmark labels
-#' @param cur \code{logical} whether to draw curves, based on semi landmarks
-#' @param cur_pch \code{pch} for semi landmarks
+#' @param slidings \code{logical} whether to draw slidings semi landmarks
+#' @param slidings_pch \code{pch} for semi landmarks
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param nb.pts the number of points to use for the shape reconstruction
@@ -91,8 +93,12 @@ plot.Coo <- function(x, id, ...) {
 #' data(hearts)
 #' stack(hearts)
 #' stack(hearts, ldk=FALSE)
-#' stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col_summer(4), ldk.pch=20)
+#' stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk_col=col_summer(4), ldk_pch=20)
 #' stack(hearts, fac="aut", palette=col_sari)
+#'
+#' chaffal <- fgProcrustes(chaff)
+#' stack(chaffal, slidings=FALSE)
+#' stack(chaffal, meanshape=TRUE, meanshape_col="blue")
 #' }
 #' @rdname stack.Coo
 #' @aliases stack.Coo
@@ -104,11 +110,10 @@ stack.Coo <-
            coo_sample=120,
            points = FALSE, first.point = TRUE, centroid = TRUE,
            ldk = TRUE,
-           ldk.pch = 3, ldk.col = "#FF000055",
-           ldk.cex = 0.5, ldk_links = FALSE,
+           ldk_pch = 3, ldk_col = "#FF000055",
+           ldk_cex = 0.5, ldk_links = FALSE,
            ldk_confell = FALSE, ldk_contour = FALSE,
            ldk_chull = FALSE, ldk_labels = FALSE,
-           cur_pch = ".",
            xy.axis = TRUE, title=substitute(x), ...) {
     Coo <- x
     # downsize
@@ -160,8 +165,8 @@ stack.Coo <-
       coo_draw(Coo$coo[[i]], col = cols[i], border = borders[i],
                points = points, first.point = TRUE, centroid = centroid)
       if (ldk & is.ldk(Coo)) {
-        points(ldks[[i]][, 1], ldks[[i]][ ,2], pch = ldk.pch,
-               col = ldk.col, cex = ldk.cex)
+        points(ldks[[i]][, 1], ldks[[i]][ ,2], pch = ldk_pch,
+               col = ldk_col, cex = ldk_cex)
       }
     }
   }
@@ -176,9 +181,11 @@ stack.OutCoe <- function(x, nb.pts=120, ...){
 #' @rdname stack.Coo
 #' @export
 stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
-                      ldk = TRUE, ldk.pch = 20, ldk.col=col_alpha("#000000", 0.3), ldk.cex = 0.3,
+                      ldk = TRUE, ldk_pch = 20, ldk_col=col_alpha("#000000", 0.5), ldk_cex = 0.3,
+                      meanshape = FALSE, meanshape_col="#FF0000",
                       ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-                      ldk_chull = FALSE, ldk_labels = FALSE, cur=TRUE, cur_pch=20, xy.axis = TRUE, title=substitute(x), ...) {
+                      ldk_chull = FALSE, ldk_labels = FALSE,
+                      slidings=TRUE, slidings_pch="", xy.axis = TRUE, title=substitute(x), ...) {
   Coo <- x
   if (missing(cols)) {
     cols <- rep(NA, length(Coo))
@@ -201,44 +208,52 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   if (xy.axis) {
     abline(h = 0, v = 0, col = "grey80", lty = 2)
   }
-  # # semilandmarks lines
-  # if (cur | (is.slidings(Coo) & missing(cur))){
-  #   for (i in 1:length(Coo)) {
-  #     lapply(Coo$cur[[i]], lines, col=col_alpha("#000000", 0.95))
-  #   }
-  # }
-  # points
-  for (i in 1:length(Coo)) {
-    points(Coo$coo[[i]], pch = ldk.pch, col = ldk.col, cex = ldk.cex)
+  # semilandmarks lines
+  if (slidings & is.slidings(Coo)){
+    sl <- get_slidings(Coo)
+    for (i in 1:length(sl)) {
+      lapply(sl[[i]], lines, col=col_alpha("#000000", 0.9))
+      lapply(sl[[i]], points, col=col_alpha("#000000", 0.5), pch=slidings_pch)
+    }
   }
+  # points
+  # for (i in 1:length(Coo)) {
+  #   points(Coo$coo[[i]], pch = ldk_pch, col = ldk_col, cex = ldk_cex)
+  # }
+  lapply(get_ldk(Coo), points, pch = ldk_pch, col = ldk_col, cex = ldk_cex)
   # semilandmarks
   # if (is.slidings(Coo)){
   #   cur_binded <- get_cur_binded(Coo)
   #   for (i in 1:length(Coo)) {
-  #     points(cur_binded[[i]], pch = cur_pch, col = ldk.col, cex = ldk.cex*0.25)
+  #     points(cur_binded[[i]], pch = cur_pch, col = ldk_col, cex = ldk_cex*0.25)
   #   }
   # }
   # Specific to Ldk not very clean below #todo
-  A <- l2a(Coo$coo)
-  mA <- mshapes(A)
+  # A <- l2a(Coo$coo)
+  # mA <- mshapes(A)
+
+  if (meanshape){
+    A <- l2a(get_ldk(Coo))
+    mA <- mshapes(A)
   if (ldk_confell) {
-    ldk_confell(A, conf = 0.9)
+    ldk_confell(A, conf = 0.9, col=meanshape_col)
   }
   if (ldk_contour) {
-    ldk_contour(A, nlevels = 3, col = "grey20")
+    ldk_contour(A, nlevels = 3, col = meanshape_col)
   }
   if (ldk_chull) {
-    ldk_chull(A)
+    ldk_chull(A, col = meanshape_col)
   }
   if (ldk_links | missing(ldk_links))  {
     if (is.links(Coo))
-      ldk_links(mshapes(A), Coo$links, col="grey90")
+      ldk_links(mshapes(A), Coo$links, col=ldk_col)
   }
   if (ldk_labels) {
-    ldk_labels(mshapes(A))
+    ldk_labels(mshapes(A), col=meanshape_col)
   }
-  points(mA, pch = 3,
-         cex = ifelse(ldk.cex > 0.5, ldk.cex * 1.5, 2), col = "grey50")
+  points(mA, pch = ldk_pch,
+         cex = ifelse(ldk_cex > 0.5, ldk_cex * 1.5, 0.5), col = meanshape_col)
+  }
 }
 
 

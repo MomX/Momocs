@@ -8,18 +8,19 @@
 \usage{
 \method{stack}{Coo}(x, cols, borders, fac, palette = col_summer,
   coo_sample = 120, points = FALSE, first.point = TRUE, centroid = TRUE,
-  ldk = TRUE, ldk.pch = 3, ldk.col = "#FF000055", ldk.cex = 0.5,
+  ldk = TRUE, ldk_pch = 3, ldk_col = "#FF000055", ldk_cex = 0.5,
   ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-  ldk_chull = FALSE, ldk_labels = FALSE, cur_pch = ".", xy.axis = TRUE,
+  ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE,
   title = substitute(x), ...)
 
 \method{stack}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
-  ldk = TRUE, ldk.pch = 20, ldk.col = col_alpha("#000000", 0.3),
-  ldk.cex = 0.3, ldk_links = FALSE, ldk_confell = FALSE,
-  ldk_contour = FALSE, ldk_chull = FALSE, ldk_labels = FALSE,
-  cur = TRUE, cur_pch = 20, xy.axis = TRUE, title = substitute(x), ...)
+  ldk = TRUE, ldk_pch = 20, ldk_col = col_alpha("#000000", 0.5),
+  ldk_cex = 0.3, meanshape = FALSE, meanshape_col = "#FF0000",
+  ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
+  ldk_chull = FALSE, ldk_labels = FALSE, slidings = TRUE,
+  slidings_pch = "", xy.axis = TRUE, title = substitute(x), ...)
 }
 \arguments{
 \item{x}{The \code{Coo} object to plot.}
@@ -44,11 +45,11 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{ldk}{\code{logical}. Whether to display landmarks (if any).}
 
-\item{ldk.pch}{\code{pch} for these landmarks}
+\item{ldk_pch}{\code{pch} for these landmarks}
 
-\item{ldk.col}{color for these landmarks}
+\item{ldk_col}{color for these landmarks}
 
-\item{ldk.cex}{\code{cex} fro these landmarks}
+\item{ldk_cex}{\code{cex} for these landmarks}
 
 \item{ldk_links}{\code{logical} whether to draw links (of the mean shape)}
 
@@ -60,8 +61,6 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{ldk_labels}{\code{logical} whether to draw landmark labels}
 
-\item{cur_pch}{\code{pch} for semi landmarks}
-
 \item{xy.axis}{whether to draw or not the x and y axes}
 
 \item{title}{a title for the plot. The name of the \code{Coo} by default}
@@ -70,7 +69,13 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{nb.pts}{the number of points to use for the shape reconstruction}
 
-\item{cur}{\code{logical} whether to draw curves, based on semi landmarks}
+\item{meanshape}{\code{logical} whether to add meanshape related stuff (below)}
+
+\item{meanshape_col}{a color for everything meanshape}
+
+\item{slidings}{\code{logical} whether to draw slidings semi landmarks}
+
+\item{slidings_pch}{\code{pch} for semi landmarks}
 }
 \description{
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
@@ -92,7 +97,7 @@ stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
 data(hearts)
 stack(hearts)
 stack(hearts, ldk=FALSE)
-stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk.col=col_summer(4), ldk.pch=20)
+stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk_col=col_summer(4), ldk_pch=20)
 stack(hearts, fac="aut", palette=col_sari)
 }
 }
