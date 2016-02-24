@@ -11,13 +11,18 @@ slidings_scheme(Coo)
 }
 \value{
 a list with two components: \code{n} the number of partition; \code{id}
-their position.
+their position. Or a NULL if no slidings are defined
 }
 \description{
 Helper function that deduces (likely to be a reminder)
 partition scheme from \code{$slidings} of \code{Ldk} objects.
 }
 \examples{
-# waiting for chaff, todo
+# no slidings defined a NULL is returned with a message
+slidings_scheme(wings)
+
+# slidings defined
+slidings_scheme(chaff)
+
 }
 

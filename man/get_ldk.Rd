@@ -34,7 +34,8 @@ stack(Ldk(ldk.h))
 get_ldk(wings) # equivalent to wings$coo
 
 # on Ldk (slidings)
-# waiting for chaff, todo
+get_ldk(chaff)
+get_ldk(chaff) \%>\% Ldk \%>\% fgProcrustes(tol=0.1) \%>\% stack
 }
 \seealso{
 \link{def_ldk}, \link{get_slidings}, \link{fgProcrustes}
