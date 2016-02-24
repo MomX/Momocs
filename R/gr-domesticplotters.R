@@ -243,8 +243,9 @@ coo_ruban <- function(coo, dev,
 #' Plots sets of shapes.
 #'
 #' \code{coo_listpanel} plots a list of shapes if passed with a list of
-#' coordinates. Outlines are 'templated' (see \link{coo_template} and will be drawn
-#' the same graphical window. Mainly used by \link{panel.Coo} functions.
+#' coordinates. Mainly used by \link{panel.Coo} functions. If used outside the latter,
+#' shapes must be "templated", see \link{coo_template}. If you want to reorder shapes
+#' according to a factor, use \link{arrange}.
 #'
 #' @param coo.list A \code{list} of coordinates
 #' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
@@ -252,10 +253,8 @@ coo_ruban <- function(coo, dev,
 #' @param byrow \code{logical}. Whether to succesive shape by row or by col.
 #' @param fromtop \code{logical}. Whether to display shapes from the top of the
 #' plotting region.
-#' @param mar A \code{vector} to define margins.
 #' @param cols A \code{vector} of colors to fill shapes.
 #' @param borders A \code{vector} of colors to draw shape borders.
-#' @param reorder a factor or a numeric to reorder shapes, colors and borders.
 #' @param poly logical whether to use polygon or lines to draw shapes.
 #' mainly for use for outlines and open outlines.
 #' @param points logical if poly is set to FALSE whether to add points
@@ -265,25 +264,13 @@ coo_ruban <- function(coo, dev,
 #' @return Returns (invisibly) a \code{data.frame} with position of shapes that
 #' can be used for other sophisticated plotting design.
 #' @examples
-#' data(bot)
 #' coo_listpanel(bot$coo) # equivalent to panel(bot)
-#' x <- coo_listpanel(bot$coo)
-#' x # positions of shapes returned invisibly
-#' # axis(1) ; axis(2) # that's a single graphical window
-#' data(bot)
-#' coo <- bot$coo
-#' ord <- sapply(coo, coo_eccentricityeigen)
-#' pos <- coo_listpanel(coo, reorder=ord)
-#' text(pos, labels=signif(ord[order(ord)], 3))
 #' @family plotting functions
 #' @export
 coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
-                           mar = rep(0, 4), cols, borders, reorder = NULL, poly = TRUE,
+                           cols, borders, poly = TRUE,
                            points = FALSE, points.pch = 3, points.cex = 0.2, points.col = "#333333") {
   coo.list <- lapply(coo.list, coo_check)
-  if (!is.null(reorder)) {
-    coo.list <- coo.list[order(reorder)]
-  }
   # if dim is missing, we define a square
   n <- length(coo.list)
   if (missing(dim)) {
@@ -299,23 +286,19 @@ coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
     pos <- pos[dim[1]:1, ]
   }
   # we prepare the panel
-  op <- par("mar", "oma")
-  on.exit(par(op))
-  par(mar = mar, oma = rep(0.2, 4))
+  # op <- par("mar", "oma")
+  # on.exit(par(op))
+  # par(mar = mar, oma = rep(0.2, 4))
   plot(NA, asp = 1, xlim = c(0, dim[2]), ylim = c(0, dim[1]),
        xaxs = "i", yaxs = "i", frame = FALSE, ann = FALSE, axes = FALSE)
   # we template and plot shapes
-  coo_tp <- lapply(coo.list, coo_template, size = 0.95)
+  #coo_tp <- lapply(coo.list, coo_template, size = 0.95)
+  coo_tp <- coo.list
   if (missing(cols)) {
     cols <- rep("grey95", n)
   }
   if (missing(borders)) {
     borders <- rep("grey20", n)
-  }
-
-  if (!is.null(reorder)) {
-    cols <- cols[order(reorder)]
-    borders <- borders[order(reorder)]
   }
 
   res <- data.frame(pos.x = numeric(), pos.y = numeric())

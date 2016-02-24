@@ -4,9 +4,9 @@
 \alias{coo_listpanel}
 \title{Plots sets of shapes.}
 \usage{
-coo_listpanel(coo.list, dim, byrow = TRUE, fromtop = TRUE, mar = rep(0,
-  4), cols, borders, reorder = NULL, poly = TRUE, points = FALSE,
-  points.pch = 3, points.cex = 0.2, points.col = "#333333")
+coo_listpanel(coo.list, dim, byrow = TRUE, fromtop = TRUE, cols, borders,
+  poly = TRUE, points = FALSE, points.pch = 3, points.cex = 0.2,
+  points.col = "#333333")
 }
 \arguments{
 \item{coo.list}{A \code{list} of coordinates}
@@ -19,13 +19,9 @@ the panel display. If missing, shapes are arranged in a square.}
 \item{fromtop}{\code{logical}. Whether to display shapes from the top of the
 plotting region.}
 
-\item{mar}{A \code{vector} to define margins.}
-
 \item{cols}{A \code{vector} of colors to fill shapes.}
 
 \item{borders}{A \code{vector} of colors to draw shape borders.}
-
-\item{reorder}{a factor or a numeric to reorder shapes, colors and borders.}
 
 \item{poly}{logical whether to use polygon or lines to draw shapes.
 mainly for use for outlines and open outlines.}
@@ -44,20 +40,12 @@ can be used for other sophisticated plotting design.
 }
 \description{
 \code{coo_listpanel} plots a list of shapes if passed with a list of
-coordinates. Outlines are 'templated' (see \link{coo_template} and will be drawn
-the same graphical window. Mainly used by \link{panel.Coo} functions.
+coordinates. Mainly used by \link{panel.Coo} functions. If used outside the latter,
+shapes must be "templated", see \link{coo_template}. If you want to reorder shapes
+according to a factor, use \link{arrange}.
 }
 \examples{
-data(bot)
 coo_listpanel(bot$coo) # equivalent to panel(bot)
-x <- coo_listpanel(bot$coo)
-x # positions of shapes returned invisibly
-# axis(1) ; axis(2) # that's a single graphical window
-data(bot)
-coo <- bot$coo
-ord <- sapply(coo, coo_eccentricityeigen)
-pos <- coo_listpanel(coo, reorder=ord)
-text(pos, labels=signif(ord[order(ord)], 3))
 }
 \seealso{
 Other plotting functions: \code{\link{Ntable}},
