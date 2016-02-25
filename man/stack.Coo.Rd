@@ -71,8 +71,6 @@ Either a single value or of length exactly equals to the number of coordinates.}
 \item{slidings}{\code{logical} whether to draw slidings semi landmarks}
 
 \item{slidings_pch}{\code{pch} for semi landmarks}
-
-\item{nb.pts}{the number of points to use for the shape reconstruction}
 }
 \description{
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})

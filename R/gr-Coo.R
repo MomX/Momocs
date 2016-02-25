@@ -76,7 +76,6 @@ plot.Coo <- function(x, id, ...) {
 #' @param slidings_pch \code{pch} for semi landmarks
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
-#' @param nb.pts the number of points to use for the shape reconstruction
 #' @param ... further arguments to be passed to \link{coo_plot}
 #' @seealso \link{panel.Coo}, \link{plot.Coo}.
 #' @note When applied on a \link{OutCoe} object, a wrapper
