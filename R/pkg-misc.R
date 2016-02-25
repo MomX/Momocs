@@ -306,18 +306,8 @@ which.is.error <- function(x){
   which(class(x)=="try-error")
 }
 
-# x = any vector
-# conf = gaussian quantile
-#' @export
-.which.out <- function(x, conf=1e-4){
-  out <- which(dnorm(x, mean(x), sd(x))< conf)
-  if(length(out)==0) {
-    return(NA)
-  } else {
-    return(out)}}
-
 # refactor factors in a data.frame (mainly to drop levels) but respect anything else
-#'@export
+#' @export
 .refactor <- function(df) {
   data.frame(lapply(df, function(x) if (is.factor(x)) factor(x) else x))
 }
