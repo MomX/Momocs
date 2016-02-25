@@ -1516,7 +1516,40 @@ coo_rev.Coo <- function(coo) {
   return(coo)
 }
 
-#' Defines interactively landmarks
+#' Jitters shapes
+#'
+#' A simple wrapper around \link{jitter}.
+#'
+#' @inheritParams coo_check
+#' @param ... additional parameter for \link{jitter}
+#' @return a \code{matrix} of (x; y) coordinates or a Coo object
+#' @seealso \link{get_pairs}
+#' @examples
+#' b <-bot[1]
+#' coo_plot(b, zoom=0.2)
+#' coo_draw(coo_jitter(b, amount=3), border="red")
+#'
+#' # for a Coo example, see \link{get_pairs}
+#' @export
+coo_jitter <- function(coo, ...){
+  UseMethod("coo_jitter")
+}
+
+#' @export
+coo_jitter.default <- function(coo, ...){
+  coo_check(coo)
+  jitter(coo, ...)
+}
+
+#' @export
+coo_jitter.Coo <- function(coo, ...){
+  coo$coo <- lapply(coo$coo, coo_jitter, ...)
+  coo
+}
+
+
+
+#' Defines landmarks interactively
 #'
 #' Allows to interactively define a \code{nb.ldk} number of landarks on a shape.
 #' Used in other facilities to acquire/manipulate data.

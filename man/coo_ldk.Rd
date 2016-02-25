@@ -2,7 +2,7 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_ldk}
 \alias{coo_ldk}
-\title{Defines interactively landmarks}
+\title{Defines landmarks interactively}
 \usage{
 coo_ldk(coo, nb.ldk)
 }
