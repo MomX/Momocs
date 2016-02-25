@@ -747,6 +747,81 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
   return(coo_list)
 }
 
+# bind_db ######################################################################
+
+#' Binds with a database
+#'
+#' Adds columns to a \link{Coo} or \link{Coe} object from a data base. Data base must
+#' be provided as a data.frame or as a path which will be \link{read.table}d with \code{...}
+#' arguments.
+#'
+#' Many checks are done on the binding and this is the main advantage of using this method.
+#' It requires an "id" on both the Coo/Coe and the database. There is no assumption
+#' that shapes/coefficients are in the right order in the Coo/Coe
+#' (but a mutate(your_object, id=1:length(your_object)) would do the trick, see examples).
+#'
+#' @param x Coo or Coe object
+#' @param fac_col \code{character} (no numeric here) where to find ids in the fac
+#' @param db \code{data.frame} with the right number of rows, or a path as \code{character}. Then use ... to pass arguments to \link{read.table}
+#' @param db_col \code{character} where to fin ids in db
+#' @param ... more parameters passed to \link{read.table}
+#' @examples
+#' # Coo example
+#' df <- data.frame(foo_id=40:1, fake1=rnorm(40), fake2=factor(rep(letters[1:4], 10)))
+#' bot <- mutate(bot, hello=1:length(bot))
+#' bind_db(bot, "hello", df, "foo_id")
+#'
+#' # example on a Coe
+#' bf <- efourier(bot, 12)
+#' bind_db(bf, "hello", df, "foo_id")
+#' @export
+bind_db <- function(x, fac_col="id", db, db_col="id", ...){
+  UseMethod("bind_db")
+}
+
+#' @export
+bind_db.default <- function(x, ...){
+  message("only implemented on Coo and Coe objects")
+}
+
+#' @export
+bind_db.Coo <- function(x, fac_col="id", db, db_col="id", ...){
+  # checks a bit on x if its a Coo (waiting for validate.Coe todo)
+  if (is.Coo(x))
+    x <- validate(x)
+  .check(!missing(db),
+         "db must be provided")
+  # if db is provided as a path
+  if (is.character(db))
+    db <- read.table(db, ...)
+  # lots of check
+  .check(is.data.frame(db),
+         "db must be a data.frame")
+  .check(nrow(db)==length(x),
+         "nrow(db) does not match")
+  .check(any(colnames(df)==db_col),
+         "db_col not found in db")
+  .check(any(colnames(x$fac)==fac_col),
+         "fac_col not found")
+  x_id <- x$fac[, fac_col]
+  db_id <- db[, db_col]
+  .check(length(unique(x_id))==length(unique(db_id)),
+         "number of unique id must match")
+  map_id <- match(db_id, x_id)
+  .check(all(!is.na(map_id)),
+         "ids mismatch")
+  # finally prepare the db
+  db_lite <- db[map_id, ] # reorders
+  db_lite <- db_lite[,  -which(colnames(db_lite)==db_col)] #wtf -dbcol doesnt work?
+  # and adds it to fac
+  x$fac <- cbind(x$fac, db_lite)
+  x
+}
+
+#' @export
+bind_db.Coe <- bind_db.Coo
+
+
 # helpers ######################################################################
 
 #' Extract structure from filenames
