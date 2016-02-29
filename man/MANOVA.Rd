@@ -21,11 +21,11 @@ MANOVA(x, fac, test = "Hotelling", retain, drop, verbose)
 \arguments{
 \item{x}{a \link{Coe} object}
 
-\item{fac}{a name of a colum in the \code{$fac} slot, or its id}
+\item{fac}{a name of a colum in the \code{$fac} slot, or its id, or a formula}
 
 \item{test}{a test for \link{manova} (\code{'Hotelling'} by default)}
 
-\item{retain}{how many harmonics (or polynomials) to retain, for PCA 
+\item{retain}{how many harmonics (or polynomials) to retain, for PCA
 the highest number of PC axis to retain, or the proportion of the variance to capture.}
 
 \item{drop}{how many harmonics (or polynomials) to drop}
@@ -39,7 +39,7 @@ a list of matrices of (x,y) coordinates.
 Performs multivariate analysis of variance on \link{PCA} objects.
 }
 \details{
-Performs a MANOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and 
+Performs a MANOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and
 \link{summary.manova} for more details and examples.
 }
 \note{

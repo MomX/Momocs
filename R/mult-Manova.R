@@ -5,16 +5,16 @@
 #' Multivariate analysis of variance on Coe objects
 #'
 #' Performs multivariate analysis of variance on \link{PCA} objects.
-#' 
-#' Performs a MANOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and 
+#'
+#' Performs a MANOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and
 #' \link{summary.manova} for more details and examples.
 #'
 #' @aliases MANOVA
 #' @rdname MANOVA
 #' @param x a \link{Coe} object
-#' @param fac a name of a colum in the \code{$fac} slot, or its id
+#' @param fac a name of a colum in the \code{$fac} slot, or its id, or a formula
 #' @param test a test for \link{manova} (\code{'Hotelling'} by default)
-#' @param retain how many harmonics (or polynomials) to retain, for PCA 
+#' @param retain how many harmonics (or polynomials) to retain, for PCA
 #' the highest number of PC axis to retain, or the proportion of the variance to capture.
 #' @param drop how many harmonics (or polynomials) to drop
 #' @param verbose logical whether to print messages
@@ -29,7 +29,7 @@
 #' data(olea)
 #' op <- PCA(npoly(olea, 5))
 #' MANOVA(op, 'domes')
-#' 
+#'
 #'  m <- manova(op$x[, 1:5] ~  op$fac$domes * op$fac$var)
 #'  summary(m)
 #'  summary.aov(m)
@@ -105,7 +105,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
       drop <- 0
     }
   }
-  
+
   if (is.null(cph)) {
     cph <- ifelse(OutCoe$method == "efourier", 4, 2)
   }
@@ -121,7 +121,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
       message("'retain' was missing. MANOVA done with", retain, "harmonics ")
       if (drop > 0) {
         message("and the first", drop, "dropped")
-      } 
+      }
     }
   } else {
     if ((retain - drop) > max.h) {
@@ -141,7 +141,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
       }
     }
   }
-  
+
   harm.sel <- coeff_sel(retain = retain, drop = drop, nb.h = nb.h,
                         cph = cph)
   if (verbose)
@@ -155,18 +155,37 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
 MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = TRUE) {
   if (missing(fac))
     stop("'fac' must be provided")
+
+  if (class(fac) == "formula") {
+    column_name <- attr(terms(fac), "term.labels")
+    # we check for wrong formula
+    if (any(is.na(match(column_name, colnames(x$fac)))))
+      stop("formula provided must match with $fac column names")
+    # otherwise we retrive the column(s)
+    fac <- x$fac[, column_name]
+    # multicolumn/fac case
+    if (is.data.frame(fac))
+      fac <- factor(apply(fac, 1, paste, collapse="_"))
+  }
+
   if (!is.factor(fac)) {
     fac <- x$fac[, fac]
   }
+
+
+
   # we grab the PCs to capture retain% of the variance
   if (retain<1){
     vars <- x$sdev^2
     retain <- min(which((cumsum(vars)/sum(vars))>retain))
-  }  
+  }
+
   if (retain>nrow(x$x))
     retain <- nrow(x$x)
   message("PC axes 1 to ", retain, " were retained")
   retain <- 1:retain
+  if (length(retain)==1)
+    stop("needs more than a single response")
   x <- x$x[, retain]
   mod <- summary(manova(x ~ fac), test = test)
   return(mod)
