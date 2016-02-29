@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-utilities.R
 \name{def_ldk}
 \alias{def_ldk}
-\title{Define landmarks on Out and Opn objects}
+\title{Defines landmarks on Out and Opn objects}
 \usage{
 def_ldk(Coo, nb.ldk)
 }
@@ -30,5 +30,10 @@ bot2 <- def_ldk(bot, 3)
 stack(bot2)
 bot2$ldk
 }
+}
+\seealso{
+Other ldk/slidings methods: \code{\link{def_slidings}},
+  \code{\link{get_ldk}}, \code{\link{get_slidings}},
+  \code{\link{slidings_scheme}}
 }
 

@@ -4,7 +4,7 @@
 \alias{breed}
 \alias{breed.Coe}
 \alias{breed.default}
-\title{Mutate Coe (and others) objects}
+\title{Jitters Coe (and others) objects}
 \usage{
 breed(x, ...)
 
@@ -43,6 +43,6 @@ bot.m
 panel(bot.m)
 }
 \seealso{
-\link{perm}
+Other farming: \code{\link{perm}}
 }
 

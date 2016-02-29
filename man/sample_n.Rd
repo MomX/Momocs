@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-handling.R
 \name{sample_n}
 \alias{sample_n}
-\title{Samples n shapes in Momocs objects}
+\title{Samples n shapes on Momocs objects}
 \usage{
 sample_n(tbl, size, replace, fac, ...)
 }
@@ -34,10 +34,12 @@ table(names(sample_n(bot, 400, replace=TRUE)))
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},
-  \code{\link{chop}}, \code{\link{combine}},
-  \code{\link{dissolve}}, \code{\link{filter}},
-  \code{\link{mutate}}, \code{\link{rename}},
-  \code{\link{sample_frac}}, \code{\link{select}},
-  \code{\link{slice}}, \code{\link{transmute}}
+  \code{\link{at_least}}, \code{\link{chop}},
+  \code{\link{combine}}, \code{\link{dissolve}},
+  \code{\link{filter}}, \code{\link{mutate}},
+  \code{\link{rename}}, \code{\link{rm_uncomplete}},
+  \code{\link{rw_rule}}, \code{\link{sample_frac}},
+  \code{\link{select}}, \code{\link{slice}},
+  \code{\link{subset.Coo}}, \code{\link{transmute}}
 }
 

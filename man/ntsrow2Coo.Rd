@@ -3,7 +3,7 @@
 \name{ntsrow2Coo}
 \alias{ntscol2Coo}
 \alias{ntsrow2Coo}
-\title{From .nts to Coo objects}
+\title{Imports .nts to Coo objects}
 \usage{
 ntsrow2Coo(nts.path, sep = "\\t")
 }

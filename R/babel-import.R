@@ -1,5 +1,5 @@
 # txt -----------------------
-#' Import coordinates from a .txt file
+#' Imports coordinates from a .txt file
 #'
 #' A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
 #'
@@ -40,7 +40,7 @@ import_txt <- function(txt.paths = NULL, ...) {
 }
 
 # outlines ------------------
-#' Extract outlines coordinates from an image silhouette
+#' Extracts outlines coordinates from an image silhouette
 #'
 #' Provided with an image 'mask' (i.e. black pixels on a white background),
 #' and a point form where to start the algorithm, returns the (x; y) coordinates of its outline.
@@ -107,7 +107,7 @@ import_Conte <- function(img, x) {
   return(cbind((Y[-1]), ((dim(img)[1] - X))[-1]))
 }
 
-#' Extract outline coordinates from a single .jpg file
+#' Extracts outline coordinates from a single .jpg file
 #'
 #' Used to import outline coordinates from .jpg files. This function is used for
 #' single images and is wrapped by \link{import_jpg}. It relies itself on \link{import_Conte}
@@ -225,7 +225,7 @@ import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
   return(out)
 }
 
-#' Extract outline coordinates from multiple .jpg files
+#' Extracts outline coordinates from multiple .jpg files
 #'
 #' This function is used to import outline coordinates and is built around
 #' \link{import_jpg1}.
@@ -300,7 +300,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
 }
 
 # StereoMorph ---------------
-#' Import files creates by StereoMorph into Momocs
+#' Imports files creates by StereoMorph into Momocs
 #'
 #' Helps to read \code{.txt} files created by StereoMorph into (x; y) coordinates
 #' or Momocs objects. Can be applied to 'curves' or 'ldk' text files.
@@ -474,7 +474,7 @@ tps2coo <- function(tps, curves=TRUE){
 }
 # other formats -------------
 
-#' Convert (x; y) coordinates to chaincoded coordinates
+#' Converts (x; y) coordinates to chaincoded coordinates
 #'
 #' Useful to convert (x; y) coordinates to chain-coded coordinates.
 #' @param coo (x; y) coordinates passed as a matrix
@@ -508,7 +508,7 @@ pix2chc <- function(coo) {
   return(chc)
 }
 
-#' Convert chain-coded coordinates to (x; y) coordinates
+#' Converts chain-coded coordinates to (x; y) coordinates
 #'
 #' May be useful to convert chain-coded coordinates
 #' to (x; y) coordinates. The first point is set at the origin. \link{chc2Out}
@@ -534,7 +534,7 @@ chc2pix <- function(chc) {
   return(pix)
 }
 
-#' Convert chain-coded coordinates to Out object
+#' Converts chain-coded coordinates to Out object
 #'
 #' For Shape/ChainCoder files, a wrapper to convert chain-coded coordinates to
 #' \code{\link{Out}} objects.
@@ -601,7 +601,7 @@ chc2Out <- function(chc, skip, names){
   names(coo) <- fac[, 1]
   Out(coo, fac=fac)}
 
-#' From .nef to Coe objects
+#' Imports .nef to Coe objects
 #'
 #' Useful to convert .nef files into Coe objects.
 #' It returns a matrix of coefficients that can be passed to \link{Coe}.
@@ -676,7 +676,7 @@ nef2Coe <- function(nef.path) {
 #   return(coo_list)
 # }
 
-#' From .nts to Coo objects
+#' Imports .nts to Coo objects
 #'
 #' Useful to convert .nts files into \link{Coo} objects. For .nts provided as rows, use
 #' ntsrow2Coo; for .nts provided as columns of coordinates, try ntscol2Coo. It
@@ -825,7 +825,7 @@ bind_db.Coe <- bind_db.Coo
 
 # helpers ######################################################################
 
-#' Extract structure from filenames
+#' Extracts structure from filenames
 #'
 #' If filenames are consistently named with the same character serating factors,
 #' and with every individual including its belonging levels, e.g.:
@@ -903,7 +903,7 @@ lf_structure <- function(lf, names = character(), split = "_",
   return(fac)
 }
 
-#' Binds .jpg outlines and .txt landmarks on them
+#' Binds .jpg outlines from .txt landmarks taken on them
 #'
 #' Given a list of files (lf) that includes matching filenames with .jpg (black masks)
 #' and .txt (landmark positions on them as .txt), returns an Out with $ldk defined.

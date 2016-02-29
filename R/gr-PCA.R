@@ -436,6 +436,8 @@ plot3.PCA <- function(PCA,  ... ){
     invisible(data.frame(x=PCA$x[, 1], y=PCA$x[, 2], z=PCA$x[, 3], fac=df$fac))
 }
 
+#' @export
+mplot <- plot.PCA
 
 #' Boxplot on PCA objects
 #'

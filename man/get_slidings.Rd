@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-utilities.R
 \name{get_slidings}
 \alias{get_slidings}
-\title{Extract sliding landmarks coordinates}
+\title{Extracts sliding landmarks coordinates}
 \usage{
 get_slidings(Coo, partition)
 }
@@ -27,5 +27,10 @@ get_slidings(chaff, c(1, 4)) \%>\%  names()
 get_slidings(chaff) \%>\%  names
 # here we want to see it
 get_slidings(chaff, 1)[[1]] \%>\%  Ldk \%>\% stack
+}
+\seealso{
+Other ldk/slidings methods: \code{\link{def_ldk}},
+  \code{\link{def_slidings}}, \code{\link{get_ldk}},
+  \code{\link{slidings_scheme}}
 }
 

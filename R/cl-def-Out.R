@@ -1,4 +1,4 @@
-# 1. Out builders ---------------------------------------------
+# Out ---------------
 
 #' Builds an Out object
 #'
@@ -13,7 +13,7 @@
 #' specifying the grouping structure
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @return an \code{Out} object
-#' @seealso \link{Coo}, \link{Opn}, link{Ldk}.
+#' @family Coo objects
 #' @aliases Out
 #' @examples
 #' methods(class=Out)
@@ -152,7 +152,7 @@ print.Out <- function(x, ...) {
 
 
 
-#  3. OutCoe builders -----------------------------------------------
+#  OutCoe -----------------------------------------------
 #' Builds an OutCoe object
 #'
 #' In Momocs, \code{OutCoe} classes objects are wrapping around
@@ -168,7 +168,7 @@ print.Out <- function(x, ...) {
 #' @param norm the normalisation used to obtain these coefficients
 #' @return an \code{OutCoe} object
 #' @details These methods can be applied on \code{Out} objects:
-#' @seealso \link{Coe}, \link{OpnCoe}
+#' @family Coe objects
 #' @examples
 #' # all OutCoe methods
 #' methods(class='OutCoe')
@@ -181,7 +181,7 @@ OutCoe <- function(coe = matrix(), fac = data.frame(), method,
   return(OutCoe)
 }
 
-##### TO FIX FOR Combined OutCoe The print method for Out objects
+
 #' @export
 print.OutCoe <- function(x, ...) {
   OutCoe <- x
@@ -221,7 +221,7 @@ print.OutCoe <- function(x, ...) {
 }
 
 
-# 6. Out symmetry --------------------------------------------
+# Out symmetry methods ---------
 
 #' Calcuates symmetry indices on OutCoe objects
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-handling.R
 \name{chop}
 \alias{chop}
-\title{Rougher slicing that accepts a classifier ie a column name from the \code{$fac} on Momocs classes}
+\title{Chops (rough slicing) Momocs objects}
 \usage{
 chop(.data, fac)
 }
@@ -15,6 +15,8 @@ chop(.data, fac)
 a named list of \code{Coo} or \code{Coe} objects
 }
 \description{
+Rougher slicing that accepts a classifier
+ie a column name from the \code{$fac} on Momocs classes.
 Returns a named (after every level) list that can be lapply-ed and combined. See examples.
 }
 \examples{
@@ -22,10 +24,12 @@ data(bot)
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},
-  \code{\link{combine}}, \code{\link{dissolve}},
-  \code{\link{filter}}, \code{\link{mutate}},
-  \code{\link{rename}}, \code{\link{sample_frac}},
-  \code{\link{sample_n}}, \code{\link{select}},
-  \code{\link{slice}}, \code{\link{transmute}}
+  \code{\link{at_least}}, \code{\link{combine}},
+  \code{\link{dissolve}}, \code{\link{filter}},
+  \code{\link{mutate}}, \code{\link{rename}},
+  \code{\link{rm_uncomplete}}, \code{\link{rw_rule}},
+  \code{\link{sample_frac}}, \code{\link{sample_n}},
+  \code{\link{select}}, \code{\link{slice}},
+  \code{\link{subset.Coo}}, \code{\link{transmute}}
 }
 

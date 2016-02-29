@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{nef2Coe}
 \alias{nef2Coe}
-\title{From .nef to Coe objects}
+\title{Imports .nef to Coe objects}
 \usage{
 nef2Coe(nef.path)
 }

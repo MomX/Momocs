@@ -1,4 +1,6 @@
-#' Permute and breed Coe (and others) objects
+# perm ----------
+
+#' Permutes and breed Coe (and others) objects
 #'
 #' This methods applies permutations column-wise on the \code{coe} of any
 #' \link{Coe} object but relies on a function that can be used on any matrix.
@@ -9,7 +11,7 @@
 #' @param size numeric the required size for the final object, same size by default.
 #' @param replace logical, whether to use \link{sample} with replacement
 #' @param ... useless here
-#' @seealso \link{breed}
+#' @family farming
 #' @examples
 #' m <- matrix(1:12, nrow=3)
 #' m
@@ -40,7 +42,8 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
   x$fac <- data.frame()
   x}
 
-#' Mutate Coe (and others) objects
+# breed --------
+#' Jitters Coe (and others) objects
 #'
 #' This methods applies column-wise on the \code{coe} of any
 #' \link{Coe} object but relies on a function that can be used on any matrix. It
@@ -53,7 +56,7 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
 #' @param size numeric the required size for the final object, same size by default
 #' @param rate numeric the number of sd for \link{rnorm}, 1 by default.
 #' @param ... useless here
-#' @seealso \link{perm}
+#' @family farming
 #' @examples
 #' m <- matrix(1:12, nrow=3)
 #' breed(m, margin=2, size=4)

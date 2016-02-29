@@ -1,7 +1,7 @@
 ##### Combining or subsetting Momocs' classes
 
 # select -------------------------------
-#' Select (ala dplyr) on Momocs classes
+#' Selects (ala dplyr) on Momocs objects
 #'
 #' Select variables by name, from the \code{$fac}. See examples and \code{?dplyr::select}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -15,11 +15,8 @@
 #' select(olea, var, view) # drops domes and ind
 #' select(olea, variety=var, domesticated_status=domes, view)
 #' # combine with filter with magrittr pipes
-#' \dontrun{
-#' library(magrittr)
 #' # only dorsal views, and 'var' and 'domes' columns
 #' filter(olea, view=="VD") %>% select(var, domes)
-#' }
 #' @examples
 #' head(olea$fac)
 #' # select some columns
@@ -54,7 +51,7 @@ select.Coe <- select.Coo
 select.PCA <- select.Coo
 
 # rename -------------------------------
-#' Rename (ala dplyr) on Momocs classes
+#' Renames (ala dplyr) on Momocs objects
 #'
 #' Rename variables by name, from the \code{$fac}. See examples and \code{?dplyr::rename}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -90,7 +87,7 @@ rename.PCA <- rename.Coo
 
 
 # mutate -------------------------------
-#' mutate (ala dplyr) on Momocs classes
+#' Mutates (ala dplyr) on Momocs objects
 #'
 #' Add new variables to the \code{$fac}. See examples and \code{?dplyr::mutate}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -126,7 +123,7 @@ mutate.Coe <- mutate.Coo
 mutate.PCA <- mutate.Coo
 
 # transmute -------------------------------
-#' transmute (ala dplyr) on Momocs classes
+#' Transmutes (ala dplyr) on Momocs objects
 #'
 #' Add new variables to the \code{$fac} and drop existing ones. See examples and \code{?dplyr::transmute}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -162,7 +159,7 @@ transmute.Coe <- transmute.Coo
 transmute.PCA <- transmute.Coo
 
 # filter -------------------------------
-#' filter (ala dplyr) on Momocs classes
+#' Filters (ala dplyr) on Momocs objects
 #'
 #' Return shapes with matching conditions, from the \code{$fac}. See examples and \code{?dplyr::filter}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -205,7 +202,7 @@ filter.Coe <- filter.Coo
 filter.PCA <- filter.Coo
 
 # arrange -------------------------------
-#' arrange (ala dplyr) on Momocs classes
+#' Arranges (ala dplyr) on Momocs objects
 #'
 #' Arange shapes by variables, from the \code{$fac}. See examples and \code{?dplyr::arrange}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -248,7 +245,7 @@ arrange.PCA <- arrange.Coo
 
 # slice ---------------------
 
-#' Slice (ala dplyr) on Momocs classes
+#' Slices (ala dplyr) on Momocs objects
 #'
 #' Select rows by position, based on \code{$fac}. See examples and \code{?dplyr::slice}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -286,7 +283,7 @@ slice.PCA <- function(.data, ...){
 
 # sample_n ---------------
 
-#' Samples n shapes in Momocs objects
+#' Samples n shapes on Momocs objects
 #'
 #' Sample n shapes from a Momocs object. See examples and \code{?dplyr::sample_n}.
 #'
@@ -419,9 +416,12 @@ sample_frac.Coe <- sample_frac.Coo
 
 # chop ----------------------
 
-#' Rougher slicing that accepts a classifier ie a column name from the \code{$fac} on Momocs classes
+#' Chops (rough slicing) Momocs objects
 #'
+#' Rougher slicing that accepts a classifier
+#' ie a column name from the \code{$fac} on Momocs classes.
 #' Returns a named (after every level) list that can be lapply-ed and combined. See examples.
+#'
 #' @param .data a \code{Coo} or \code{Coe} object
 #' @param fac a column name from the \code{$fac}
 #' @return a named list of \code{Coo} or \code{Coe} objects
@@ -485,7 +485,7 @@ chop.Coe <- function(.data, fac){
 
 
 # combine --------------------------------------
-#' Combine Coo/Coe objects
+#' Combines Momocs objects
 #'
 #' Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
 #' it combines row-wise (ie, merges shapes as a \code{c} would do) ; but on Coe it combines column-wise
@@ -637,10 +637,10 @@ combine.OpnCoe <- function(...) {
 }
 
 # dissolve --------------------
-#' Uncombine Coe objects
+#' Dissolves Coe objects
 #'
-#' After a combine for instance. But note that the \code{$fac} slot may be wrong since
-#' combine...well combines... this \code{$fac}
+#' the opposite of combine, typically used after it. Note that the \code{$fac} slot may be wrong since
+#' combine...well combines... this \code{$fac}. See examples.
 #'
 #' @param x a Coe object
 #' @param retain the partition id to retain. Or their name if the partitions are named
@@ -659,10 +659,12 @@ combine.OpnCoe <- function(...) {
 dissolve <- function(x, retain){
   UseMethod("dissolve")
 }
+
 #' @export
 dissolve.default <- function(x, retain){
   stop("only implemented on Coe objects so far")
 }
+
 #' @export
 dissolve.Coe <- function(x, retain){
   if (length(x$method) < 2) return(x)
@@ -681,6 +683,271 @@ dissolve.Coe <- function(x, retain){
   }
   x2$coe <- x$coe[, cols_retain]
   return(x2)
+}
+
+# subset -------------------------------
+#' Subsets on Momocs objects
+#'
+#'
+#' Subset is a wrapper around dplyr's verbs and should NOT be used directly.
+#'
+#' @rdname subset
+#' @param x a \code{Coo} or a \link{Coe} object.
+#' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
+#' @param ... useless here but maintains consistence with the generic subset.
+#' @family handling functions
+#' @examples
+#' # Do not use subset directly
+#' @export
+subset.Coo <- function(x, subset, ...) {
+  Coo <- x
+  e <- substitute(subset)
+  retain <- eval(e, Coo$fac, parent.frame())
+  Coo2 <- Coo
+  Coo2$coo <- Coo$coo[retain]
+  if (is.ldk(Coo))
+    Coo2$ldk <- Coo$ldk[retain]
+  if (is.fac(Coo)) {
+    #     if (is.logical(retain))
+    #       retain <- which(retain)
+    Coo2$fac <- dplyr::slice(Coo$fac, retain)
+    names(Coo2$fac) <- names(Coo$fac)
+    Coo2$fac <- .refactor(Coo2$fac)
+  }
+  return(Coo2)
+}
+
+#' @rdname subset
+#' @export
+subset.Coe <- function(x, subset, ...) {
+  Coe <- x
+  e <- substitute(subset)
+  retain <- eval(e, Coe$fac, parent.frame())
+  Coe2 <- Coe
+  Coe2$coe <- Coe$coe[retain, ]
+  #   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
+  if (ncol(Coe$fac) > 0) {
+    Coe2$fac <- Coe$fac[retain, ]
+    names(Coe2$fac) <- names(Coe$fac)
+    Coe2$fac <- .refactor(Coe2$fac)
+  }
+  return(Coe2)
+}
+
+#' @rdname subset
+#' @export
+subset.PCA <- function(x, subset, ...){
+  PCA <- x
+  e <- substitute(subset)
+  retain <- eval(e, PCA$fac, parent.frame())
+  PCA2 <- PCA
+  PCA2$x <- PCA$x[retain, ]
+  if (ncol(PCA$fac) > 0) {
+    PCA2$fac <- PCA$fac
+    PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
+    names(PCA2$fac) <- names(PCA$fac)
+    PCA2$fac <- .refactor(PCA2$fac)
+  }
+  return(PCA2)
+}
+
+
+# rw_rule ---------------------
+#' Renames levels on Momocs objects
+#'
+#' rw_rule stands for 'rewriting rule'. Typically useful to correct typos
+#' at the import, or merge some levels within covariates. Drops levels silently.
+#'
+#' @param x any Momocs object
+#' @param fac the id of the name of the $fac column to look for
+#' @param from which level(s) should be renamed; passed as a single or several characters
+#' @param to which name ?
+#' @return a Momocs object of the same type
+#' @family handling functions
+#' @examples
+#' data(bot)
+#' # single renaming
+#' rw_rule(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
+#' # several renaming
+#' bot2 <- mutate(bot, fake=factor(rep(letters[1:4], 10)))
+#' rw_rule(bot2, "fake", c("a", "e"), "ae")$fake
+#' @export
+rw_rule <- function(x, fac, from, to){
+  new_levels <- unique(c(levels(x$fac[, fac]), to))
+  fac2 <- factor(x$fac[, fac], levels = new_levels)
+  for (i in seq_along(from)) {
+    fac2[which(fac2==from[i])] <- to
+  }
+  x$fac[, fac] <- droplevels(fac2)
+  x
+}
+
+# at_least ------------------------
+#' Retains group with at least a certain number of individuals
+#'
+#' Examples are self-speaking.
+#'
+#' @param x any Momocs object
+#' @param fac the id of name of the $fac column
+#' @param N minimal number of individuals to retain the group
+#' @note if N is too ambitious the original object is returned with a message
+#' @family handling functions
+#' @examples
+#' data(trilo)
+#' table(trilo, "onto")
+#' at_least(trilo, "onto", 9)
+#' at_least(trilo, "onto", 16)
+#' at_least(trilo, "onto", 2000) # too ambitious !
+#' @export
+at_least <- function(x, fac, N){
+  retain <- x$fac[, fac] %in% names(which(table(x$fac[, fac]) >= N))
+  if (!any(retain)) {
+    message("no group with at least ", N, " indidivuals")
+    return(x)
+  } else {
+    subset(x, retain)
+  }
+}
+
+# rm ------------
+#' Removes shapes with incomplete slices
+#'
+#' Imagine you take three views of every object you study. Then, you can \link{slice},
+#' \link{filter} or \link{chop} your entire dataset, do morphometrics on it,
+#' then want to \link{combine} it. But if you have forgotten one view, or if it
+#' was impossible to obtain, for one or more objects, combine will not work.
+#' This function helps you to remove those ugly ducklings. See examples
+#' @param x the object on which to remove uncomplete "by"
+#' @param id of the objects, within the $fac slot
+#' @param by which column of the $fac should objects have complete views
+#' @family handling functions
+#' @examples
+#' # we load olea
+#' data(olea)
+#' # we select the var Aglan since it is the only one complete
+#' ol <- filter(olea, var == "Aglan")
+#' # everything seems fine
+#' table(ol, "view", "ind")
+#' # indeed
+#' rm_uncomplete(ol, id="ind", by="view")
+#'
+#' # we mess the ol object by removing a single shape
+#' ol.pb <- slice(ol, -1)
+#' table(ol.pb, "view", "ind")
+#' # the counterpart has been removed with a notice
+#' ol.ok <- rm_uncomplete(ol.pb, "ind", "view")
+#' # now you can combine them
+#' table(ol.ok, "view", "ind")
+#' @export
+rm_uncomplete <- function(x, id, by){
+  tab <- table(x$fac[, c(id, by)])
+  nb <- rowSums(tab)
+  nb.u <- unique(nb)
+  nb.tab <- table(nb)
+  if (length(nb.u) == 1) {
+    message("* all ids have ", nb.u, " slices")
+    return(x)
+  } else {
+    most_frequent <- as.numeric(names(nb.tab[which.max(nb.tab)]))
+    ugly_ducklings <- names(which(nb != most_frequent))
+    remove_rows <- which(x$fac[, id] %in% ugly_ducklings)
+    message("those shapes did not have ", most_frequent,
+            " slices and has been removed: ",
+            paste(ugly_ducklings, collapse=", "))
+    return(subset(x, -remove_rows))
+  }
+}
+
+#' Removes harmonics from Coe objects
+#'
+#' Useful to drop harmonics on Coe objects. Should only work for
+#' Fourier-based approached since it looks for \code{[A-D][1-drop]} pattern.
+#'
+#' @param x Coe object
+#' @param drop numeric number of harmonics to drop
+#' @examples
+#' data(bot)
+#' bf <- efourier(bot)
+#' colnames(rm_harm(bf, 1)$coe)
+#' @export
+rm_harm <- function(x, drop=1){
+  if (drop==0 | !is.numeric(drop)) return(x)
+  regex <- paste0("[A-D][1-", drop,"]")
+  x$coe <- x$coe[, -grep(regex, colnames(x$coe))]
+  x
+}
+
+# rescale ------------------
+
+#' Rescale coordinates from pixels to real length units
+#'
+#' Most of the time, (x, y) coordinates are recorded in pixels. If we want to have
+#' them in mm, cm, etc. we need to convert them and to rescale them. This functions
+#' does the job for the two cases: i) either an homogeneous rescaling factor,
+#' e.g. if all pictures were taken using the very same magnification or ii) with various
+#' magnifications. More in the Details section
+#'
+#' @param x any \code{Coo} object
+#' @param scaling_factor numeric an homogeneous scaling factor. If all you (x, y) coordinates
+#' have the same scale
+#' @param scale_mapping either a data.frame or a path to read such a data.frame. It MUST contain
+#' three columns in that order: magnification found in $fac[, "magnification_col"], pixels, real length unit.
+#' Column names do not matter but must be specified, as read.table reads with \code{header=TRUE} Every
+#' different magnification level found in $fac[, "magnification_col"] must have its row.
+#' @param magnification_col the name or id of the $fac column to look for magnification levels for every image
+#' @param ... additional arguments (besides header=TRUE) to pass to read.table if 'scale_mapping' is a path
+#' @details The i) case above is straightforward, if 1cm is 500pix long on all your pictures,
+#' just call \code{rescale(your_Coo, scaling_factor=1/500)} and all coordinates will be in cm.
+#'
+#' The ii) second case is more subtle. First you need to code in your /link{Coo} object, in the fac
+#' slot, a column named, say "mag", for magnification. Imagine you have 4 magnifications: 0.5, 1, 2 and 5,
+#' we have to indicate for each magnification, how many pixels stands for how many units in the real world.
+#'
+#' This information is passed as a data.frame, built externally or in R, that must look like this:
+#' \preformatted{
+#' mag   pix    cm
+#' 0.5   1304   10
+#' 1     921    10
+#' 2     816    5
+#' 5     1020   5
+#' }.
+#'
+#' We have to do that because, for optical reasons, the ratio pix/real_unit, is not a linear
+#' function of the magnification.
+#'
+#' All shapes will be centered to apply (the single or the different) scaling_factor.
+#'
+#' @note This function is simple but quite complex to detail. Feel free to contact me should you have any
+#' problem with it. You can just access its code (type \code{rescale}) and reply it yourself.
+#' @export
+rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){
+  # homogeneous case
+  if (!missing(scaling_factor)){
+    x <- coo_center(x)
+    x$coo <- lapply(x$coo, function(x) x*scaling_factor)
+    return(x)
+  }
+  # multiple magnification case
+  # if a path is provided we read it
+  if (is.character(scale_mapping))
+    scale_mapping <- read.table(scale_mapping, header=TRUE, ...)
+  # we prepare the two cols and match
+  mag_orig <- x$fac[, magnification_col] %>% as.numeric()
+  mag_rule <- scale_mapping[, 1] %>% as.character %>% as.numeric()
+  mag_match <- match(mag_orig, mag_rule)
+  # we check a bit
+  match_found <- mag_orig %in% mag_rule
+  if (any(!(match_found))) {
+    stop("those magnification were absent from the file",
+         unique(mag_orig[which(!(match_found))]))
+  }
+  # we center x to be able to just apply a multiplying factor
+  x <- coo_center(x)
+  mag_factor <- (scale_mapping[, 3] / scale_mapping[, 2])[mag_match]
+  for (i in seq_along(x$coo)) {
+    x$coo[[i]] <- x$coo[[i]] * mag_factor[i]
+  }
+  return(x)
 }
 
 ##### end subset-combine

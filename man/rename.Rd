@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-handling.R
 \name{rename}
 \alias{rename}
-\title{Rename (ala dplyr) on Momocs classes}
+\title{Renames (ala dplyr) on Momocs objects}
 \usage{
 rename(.data, ...)
 }
@@ -26,10 +26,12 @@ rename(olea, Ind=ind, View=view)
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},
-  \code{\link{chop}}, \code{\link{combine}},
-  \code{\link{dissolve}}, \code{\link{filter}},
-  \code{\link{mutate}}, \code{\link{sample_frac}},
-  \code{\link{sample_n}}, \code{\link{select}},
-  \code{\link{slice}}, \code{\link{transmute}}
+  \code{\link{at_least}}, \code{\link{chop}},
+  \code{\link{combine}}, \code{\link{dissolve}},
+  \code{\link{filter}}, \code{\link{mutate}},
+  \code{\link{rm_uncomplete}}, \code{\link{rw_rule}},
+  \code{\link{sample_frac}}, \code{\link{sample_n}},
+  \code{\link{select}}, \code{\link{slice}},
+  \code{\link{subset.Coo}}, \code{\link{transmute}}
 }
 

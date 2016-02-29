@@ -35,10 +35,7 @@ to homogeneize the number of coordinates among shapes.
 implementation of \code{$slidings} is inspired by \code{geomorph}
 }
 \examples{
+#Methods on Ldk
 methods(class=Ldk)
-}
-\seealso{
-\link{Coo}, \link{Out}, link{Opn}.
-\code{Ldk} methods must be, so far, considered as experimental in Momocs.
 }
 

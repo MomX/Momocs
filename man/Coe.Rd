@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-def-CooCoe.R
 \name{Coe}
 \alias{Coe}
-\title{Coe class}
+\title{Coe "super" class}
 \usage{
 Coe(...)
 }
@@ -10,7 +10,7 @@ Coe(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coe} class is the 'parent' class of
+\code{Coe} class is the 'parent' or 'super' class of
 \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{LdkCoe} classes.
 }
 \details{
@@ -69,5 +69,9 @@ class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo object
 # so you can apply all Ldk methods available.
 wp$coe # Procrustes aligned coordinates
 
+}
+\seealso{
+Other Coe objects: \code{\link{OpnCoe}},
+  \code{\link{OutCoe}}
 }
 

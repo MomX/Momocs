@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-utilities.R
 \name{slidings_scheme}
 \alias{slidings_scheme}
-\title{Extract partition of sliding coordinates}
+\title{Extracts partitions of sliding coordinates}
 \usage{
 slidings_scheme(Coo)
 }
@@ -24,5 +24,10 @@ slidings_scheme(wings)
 # slidings defined
 slidings_scheme(chaff)
 
+}
+\seealso{
+Other ldk/slidings methods: \code{\link{def_ldk}},
+  \code{\link{def_slidings}}, \code{\link{get_ldk}},
+  \code{\link{get_slidings}}
 }
 

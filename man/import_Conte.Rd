@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{import_Conte}
 \alias{import_Conte}
-\title{Extract outlines coordinates from an image silhouette}
+\title{Extracts outlines coordinates from an image silhouette}
 \usage{
 import_Conte(img, x)
 }

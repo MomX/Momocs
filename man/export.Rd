@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-export.R
 \name{export}
 \alias{export}
-\title{Export Coe objects and shapes}
+\title{Exports Coe objects and shapes}
 \usage{
 export(x, file, sep, dec)
 }

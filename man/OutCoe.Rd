@@ -34,6 +34,6 @@ These methods can be applied on \code{Out} objects:
 methods(class='OutCoe')
 }
 \seealso{
-\link{Coe}, \link{OpnCoe}
+Other Coe objects: \code{\link{Coe}}, \code{\link{OpnCoe}}
 }
 

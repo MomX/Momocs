@@ -1,6 +1,5 @@
 
-# 1. Opn builder and domestic functions
-# -------------------------------------------
+# Opn -------------------------------------------
 
 #' Builds an Opn object
 #'
@@ -15,9 +14,10 @@
 #' specifying the grouping structure
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @return an \code{Opn} object
-#' @seealso \link{Coo}, \link{Out}, \link{Ldk}.
+#' @family Coo objects
 #' @aliases Opn
 #' @examples
+#' #Methods on Opn
 #' methods(class=Opn)
 #' # we load some open outlines. See ?olea for credits
 #' data(olea)
@@ -111,8 +111,7 @@ print.Opn <- function(x, ...) {
 }
 
 
-# 3. OpnCoe definition
-# ---------------------------------------------------------
+# OpnCoe ---------------------------------------------------------
 #' Builds an OpnCoe object
 #'
 #' In Momocs, \code{OpnCoe} classes objects are wrapping around
@@ -130,7 +129,7 @@ print.Opn <- function(x, ...) {
 #' @param mod an R \link{lm} object, used to reconstruct shapes
 #' @param r2 numeric, the r-squared from every model
 #' @return an \code{OpnCoe} object
-#' @seealso \link{Coe}, \link{OutCoe}
+#' @family Coe objects
 #' @examples
 #' # all OpnCoe classes
 #' methods(class='OpnCoe')

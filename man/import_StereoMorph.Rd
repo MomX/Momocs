@@ -5,7 +5,7 @@
 \alias{import_StereoMorph_curve1}
 \alias{import_StereoMorph_ldk}
 \alias{import_StereoMorph_ldk1}
-\title{Import files creates by StereoMorph into Momocs}
+\title{Imports files creates by StereoMorph into Momocs}
 \usage{
 import_StereoMorph_curve1(path)
 

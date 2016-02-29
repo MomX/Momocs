@@ -1,6 +1,6 @@
 ##### export functions and methods for use in foreign programs
 
-#' Export Coe objects and shapes
+#' Exports Coe objects and shapes
 #'
 #' Writes a \code{.txt} or \code{.xls} or whatever readable from a \link{Coe}, or PCA
 #' object, along with individual names and grouping factors. A simple wrapper

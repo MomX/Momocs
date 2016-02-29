@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{import_txt}
 \alias{import_txt}
-\title{Import coordinates from a .txt file}
+\title{Imports coordinates from a .txt file}
 \usage{
 import_txt(txt.paths = NULL, ...)
 }

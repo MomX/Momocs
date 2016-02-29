@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{chc2pix}
 \alias{chc2pix}
-\title{Convert chain-coded coordinates to (x; y) coordinates}
+\title{Converts chain-coded coordinates to (x; y) coordinates}
 \usage{
 chc2pix(chc)
 }

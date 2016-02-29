@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-handling.R
 \name{mutate}
 \alias{mutate}
-\title{mutate (ala dplyr) on Momocs classes}
+\title{Mutates (ala dplyr) on Momocs objects}
 \usage{
 mutate(.data, ...)
 }
@@ -26,10 +26,12 @@ mutate(olea, id=factor(1:length(olea)))
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},
-  \code{\link{chop}}, \code{\link{combine}},
-  \code{\link{dissolve}}, \code{\link{filter}},
-  \code{\link{rename}}, \code{\link{sample_frac}},
-  \code{\link{sample_n}}, \code{\link{select}},
-  \code{\link{slice}}, \code{\link{transmute}}
+  \code{\link{at_least}}, \code{\link{chop}},
+  \code{\link{combine}}, \code{\link{dissolve}},
+  \code{\link{filter}}, \code{\link{rename}},
+  \code{\link{rm_uncomplete}}, \code{\link{rw_rule}},
+  \code{\link{sample_frac}}, \code{\link{sample_n}},
+  \code{\link{select}}, \code{\link{slice}},
+  \code{\link{subset.Coo}}, \code{\link{transmute}}
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-def-CooCoe.R
 \name{Coo}
 \alias{Coo}
-\title{Coo class}
+\title{Coo "super" class}
 \usage{
 Coo(...)
 }
@@ -10,7 +10,7 @@ Coo(...)
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
 \description{
-\code{Coo} class is the 'parent' class of
+\code{Coo} class is the 'parent' or 'super' class of
 \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
 }
 \details{
@@ -34,17 +34,6 @@ specific methods. See their respective help pages for more help.
 
 You can access all the methods available for \code{Coo} objects
 with \code{methods(class=Coo)}.
-}
-\note{
-If you used Momocs before version <0.9, and/or if you have read the JSS paper,
-you are probably looking for \link{Out}. If you have "old" \code{Coo} files, e.g. saved as \code{.rda} files,
-no worry, you can import them:
-\enumerate{
-\item load your file: \code{load("foo.rda")}
-It may produce an error but the \code{.rda} has been loaded (see \code{ls()})
-\item type: \code{foo2 <- Out(foo@coo, fac=foo@fac)},
-same thing for the \code{@ldk} slot and others, if any.
-}
 }
 \examples{
 \dontrun{
@@ -93,5 +82,8 @@ names(bot) # access all individual names
 bot2 <- bot
 names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
 }
+}
+\seealso{
+Other Coo objects: \code{\link{Opn}}, \code{\link{Out}}
 }
 

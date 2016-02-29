@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-utilities.R
 \name{get_ldk}
 \alias{get_ldk}
-\title{Retrieve landmarks coordinates}
+\title{Retrieves landmarks coordinates}
 \usage{
 get_ldk(Coo)
 }
@@ -38,6 +38,8 @@ get_ldk(chaff)
 get_ldk(chaff) \%>\% Ldk \%>\% fgProcrustes(tol=0.1) \%>\% stack
 }
 \seealso{
-\link{def_ldk}, \link{get_slidings}, \link{fgProcrustes}
+Other ldk/slidings methods: \code{\link{def_ldk}},
+  \code{\link{def_slidings}}, \code{\link{get_slidings}},
+  \code{\link{slidings_scheme}}
 }
 

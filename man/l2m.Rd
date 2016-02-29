@@ -7,7 +7,7 @@
 l2m(l)
 }
 \arguments{
-\item{l}{a \code{list} with x and y coordinates as components.}
+\item{l}{\code{list} with x and y coordinates as components.}
 }
 \value{
 \code{matrix} of (x; y) coordinates.

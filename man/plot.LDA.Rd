@@ -4,25 +4,33 @@
 \alias{plot.LDA}
 \title{Plots Linear Discriminant Analysis}
 \usage{
-\method{plot}{LDA}(x, xax = 1, yax = 2, points = TRUE, col = "#000000",
-  pch = 20, cex = 0.5, palette = col_solarized, center.origin = FALSE,
-  zoom = 1, bg = par("bg"), grid = TRUE, nb.grids = 3,
-  morphospace = FALSE, pos.shp = "full", amp.shp = 1, size.shp = 1,
-  nb.shp = 12, nr.shp = 6, nc.shp = 5, pts.shp = 60,
-  border.shp = "#00000032", lwd.shp = 1, col.shp = "#00000019",
-  stars = FALSE, ellipses = FALSE, conf_ellipses = 0.5,
-  ellipsesax = TRUE, conf_ellipsesax = c(0.5, 0.75, 0.9),
+\method{plot}{LDA}(x, fac = x$fac, xax = 1, yax = 2, points = TRUE,
+  col = "#000000", pch = 20, cex = 0.5, palette = col_solarized,
+  center.origin = FALSE, zoom = 1, bg = par("bg"), grid = TRUE,
+  nb.grids = 3, morphospace = FALSE, pos.shp = c("range", "full",
+  "circle", "xy", "range_axes", "full_axes")[1], amp.shp = 1, size.shp = 1,
+  nb.shp = 12, nr.shp = 6, nc.shp = 5, rotate.shp = 0,
+  flipx.shp = FALSE, flipy.shp = FALSE, pts.shp = 60,
+  border.shp = col_alpha("#000000", 0.5), lwd.shp = 1,
+  col.shp = col_alpha("#000000", 0.95), stars = FALSE, ellipses = FALSE,
+  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.9),
   lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
-  chull.lty = 3, density = FALSE, lev.density = 20, contour = FALSE,
-  lev.contour = 3, n.kde2d = 100, delaunay = FALSE, labels = FALSE,
-  col.labels = par("fg"), cex.labels = 0.6, abbreviate.labels = FALSE,
+  chull.lty = 1, chull.filled = FALSE, chull.filled.alpha = 0.92,
+  density = FALSE, lev.density = 20, contour = FALSE, lev.contour = 3,
+  n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
+  labelspoints = FALSE, col.labelspoints = par("fg"),
+  cex.labelspoints = 0.6, abbreviate.labelspoints = TRUE,
   labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
-  abbreviate.labelsgroups = FALSE, axisnames = TRUE, axisvar = TRUE,
-  eigen = TRUE, rug = TRUE, title = substitute(x), box = TRUE,
-  old.par = TRUE, ...)
+  abbreviate.labelsgroups = FALSE, color.legend = FALSE, axisnames = TRUE,
+  axisvar = TRUE, eigen = TRUE, rug = TRUE, title = substitute(x),
+  box = TRUE, old.par = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class "LDA", typically obtained with \link{LDA}}
+
+\item{fac}{name or the column id from the $fac slot, or a formula combining colum names
+from the $fac slot (cf. examples). A factor or a numeric of the same length
+can also be passed on the fly.}
 
 \item{xax}{the first PC axis}
 
@@ -52,8 +60,9 @@ or for every individual, see examples)}
 
 \item{morphospace}{logical whether to add the morphological space}
 
-\item{pos.shp}{either "full", "range", "circle", "xy"
-or a data.frame for \link{pos.shapes}}
+\item{pos.shp}{passed to \link{pos.shapes}, one of
+\code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
+a matrix of positions. See \link{pos.shapes}}
 
 \item{amp.shp}{amplification factor for shape deformation}
 
@@ -65,7 +74,13 @@ or a data.frame for \link{pos.shapes}}
 
 \item{nc.shp}{(pos.shp="full" or "range) the number of shapes per column}
 
-\item{pts.shp}{the number of points for drawing shapes}
+\item{rotate.shp}{angle in radians to rotate shapes (if several methods, a vector of angles)}
+
+\item{flipx.shp}{same as above, whether to apply coo_flipx}
+
+\item{flipy.shp}{same as above, whether to apply coo_flipy}
+
+\item{pts.shp}{the number of points fro drawing shapes}
 
 \item{border.shp}{the border color of the shapes}
 
@@ -77,11 +92,11 @@ or a data.frame for \link{pos.shapes}}
 
 \item{ellipses}{logical whether to draw confidence ellipses}
 
-\item{conf_ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
+\item{conf.ellipses}{numeric the quantile for the (bivariate gaussian) confidence ellipses}
 
 \item{ellipsesax}{logical whether to draw ellipse axes}
 
-\item{conf_ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
+\item{conf.ellipsesax}{one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes}
 
 \item{lty.ellipsesax}{if yes, the lty with which to draw these axes}
 
@@ -90,6 +105,10 @@ or a data.frame for \link{pos.shapes}}
 \item{chull}{logical whether to draw a convex hull}
 
 \item{chull.lty}{if yes, its linetype}
+
+\item{chull.filled}{logical whether to add filled convex hulls}
+
+\item{chull.filled.alpha}{numeric alpha transparency}
 
 \item{density}{whether to add a 2d density kernel estimation (based on \link{kde2d})}
 
@@ -103,13 +122,15 @@ or a data.frame for \link{pos.shapes}}
 
 \item{delaunay}{logical whether to add a delaunay 'mesh' between points}
 
-\item{labels}{logical whether to add point labels}
+\item{loadings}{logical whether to add loadings for every variables}
 
-\item{col.labels}{a color for these labels}
+\item{labelspoints}{if TRUE rownames are used as labels, a colname from $fac can also be passed}
 
-\item{cex.labels}{a cex for these labels}
+\item{col.labelspoints}{a color for these labels, otherwise inherited from fac}
 
-\item{abbreviate.labels}{logical whether to abbreviate these labels}
+\item{cex.labelspoints}{a cex for these labels}
+
+\item{abbreviate.labelspoints}{logical whether to abbreviate}
 
 \item{labelsgroups}{logical whether to add labels for groups}
 
@@ -117,7 +138,9 @@ or a data.frame for \link{pos.shapes}}
 
 \item{rect.labelsgroups}{logical whether to add a rectangle behind groups names}
 
-\item{abbreviate.labelsgroups}{if yes, whether to abbreviate group names}
+\item{abbreviate.labelsgroups}{logical, whether to abbreviate group names}
+
+\item{color.legend}{logical whether to add a (cheap) color legend for numeric fac}
 
 \item{axisnames}{logical whether to add PC names}
 
@@ -136,14 +159,16 @@ or a data.frame for \link{pos.shapes}}
 \item{...}{useless here, just to fit the generic plot}
 }
 \description{
-The Momocs' \code{\link{LDA}} plotter with morphospaces and many graphical options.
+The Momocs' \code{\link{LDA}} plotter with many graphical options.
 }
 \details{
 Widely inspired by the "layers" philosophy behind graphical functions
 of the ade4 R package.
 }
 \note{
-Morphospaces are still experimental.
+Morphospaces are deprecated so far. 99% of the code
+is shared with \link{plot.PCA} waiting for a general rewriting of a multivariate plotter.
+See https://github.com/vbonhomme/Momocs/issues/121
 }
 \examples{
 data(bot)

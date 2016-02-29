@@ -28,6 +28,6 @@ and specific methods (e.g. \link{efourier} can be applied.
 methods(class=Out)
 }
 \seealso{
-\link{Coo}, \link{Opn}, link{Ldk}.
+Other Coo objects: \code{\link{Coo}}, \code{\link{Opn}}
 }
 

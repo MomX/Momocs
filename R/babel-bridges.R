@@ -7,7 +7,7 @@
 #' (colnamed) \code{matrix} of coordinates.
 #'
 #' @usage l2m(l)
-#' @param l a \code{list} with x and y coordinates as components.
+#' @param l \code{list} with x and y coordinates as components.
 #' @return \code{matrix} of (x; y) coordinates.
 #' @seealso \link{m2l}.
 #' @examples
@@ -207,9 +207,9 @@ m2ll <- function(m, index=NULL){
   return(ll)
 }
 
-# as_df --------------------------------
+# as_df methods ------------------
 
-#' Convert Momocs objects to data.frames
+#' Converts Momocs objects to data.frames
 #'
 #' Used in particular for ggplot2 compatibility.
 #' @param x an object, typically a Momocs class

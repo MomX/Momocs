@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-bridges.R
 \name{as_df}
 \alias{as_df}
-\title{Convert Momocs objects to data.frames}
+\title{Converts Momocs objects to data.frames}
 \usage{
 as_df(x)
 }

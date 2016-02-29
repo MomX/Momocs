@@ -25,6 +25,7 @@ and specific methods (e.g. \link{npoly} can be applied.
  \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 }
 \examples{
+#Methods on Opn
 methods(class=Opn)
 # we load some open outlines. See ?olea for credits
 data(olea)
@@ -45,6 +46,6 @@ olda
 plot(olda)
 }
 \seealso{
-\link{Coo}, \link{Out}, \link{Ldk}.
+Other Coo objects: \code{\link{Coo}}, \code{\link{Out}}
 }
 

@@ -1,8 +1,11 @@
 
 #' Plots Linear Discriminant Analysis
 #'
-#' The Momocs' \code{\link{LDA}} plotter with morphospaces and many graphical options.
+#' The Momocs' \code{\link{LDA}} plotter with many graphical options.
 #' @param x an object of class "LDA", typically obtained with \link{LDA}
+#' @param fac name or the column id from the $fac slot, or a formula combining colum names
+#' from the $fac slot (cf. examples). A factor or a numeric of the same length
+#' can also be passed on the fly.
 #' @param xax the first PC axis
 #' @param yax the second PC axis
 #' @param points logical whether to plot points
@@ -18,40 +21,48 @@
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
 #' @param morphospace logical whether to add the morphological space
-#' @param pos.shp either "full", "range", "circle", "xy"
-#' or a data.frame for \link{pos.shapes}
+#' @param pos.shp passed to \link{pos.shapes}, one of
+#' \code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
+#' a matrix of positions. See \link{pos.shapes}
 #' @param amp.shp amplification factor for shape deformation
 #' @param size.shp the size of the shapes
 #' @param nb.shp (pos.shp="circle") the number of shapes on the compass
 #' @param nc.shp (pos.shp="full" or "range) the number of shapes per column
 #' @param nr.shp (pos.shp="full" or "range) the number of shapes per row
-#' @param pts.shp the number of points for drawing shapes
+#' @param rotate.shp angle in radians to rotate shapes (if several methods, a vector of angles)
+#' @param flipx.shp same as above, whether to apply coo_flipx
+#' @param flipy.shp same as above, whether to apply coo_flipy
+#' @param pts.shp the number of points fro drawing shapes
 #' @param border.shp the border color of the shapes
 #' @param lwd.shp the line width for these shapes
 #' @param col.shp the color of the shapes
 #' @param stars logical whether to draw "stars"
 #' @param ellipses logical whether to draw confidence ellipses
-#' @param conf_ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
+#' @param conf.ellipses numeric the quantile for the (bivariate gaussian) confidence ellipses
 #' @param ellipsesax logical whether to draw ellipse axes
-#' @param conf_ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
+#' @param conf.ellipsesax one or more numeric, the quantiles for the (bivariate gaussian) ellipses axes
 #' @param lwd.ellipsesax if yes, one or more numeric for the line widths
 #' @param lty.ellipsesax if yes, the lty with which to draw these axes
 #' @param chull logical whether to draw a convex hull
 #' @param chull.lty if yes, its linetype
+#' @param chull.filled logical whether to add filled convex hulls
+#' @param chull.filled.alpha numeric alpha transparency
 #' @param density whether to add a 2d density kernel estimation (based on \link{kde2d})
 #' @param lev.density if yes, the number of levels to plot (through \link{image})
 #' @param contour whether to add contour lines based on 2d density kernel
 #' @param lev.contour if yes, the (approximate) number of lines to draw
 #' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
 #' @param delaunay logical whether to add a delaunay 'mesh' between points
-#' @param labels logical whether to add point labels
-#' @param col.labels a color for these labels
-#' @param cex.labels a cex for these labels
-#' @param abbreviate.labels logical whether to abbreviate these labels
+#' @param loadings logical whether to add loadings for every variables
+#' @param labelspoints if TRUE rownames are used as labels, a colname from $fac can also be passed
+#' @param col.labelspoints a color for these labels, otherwise inherited from fac
+#' @param cex.labelspoints a cex for these labels
+#' @param abbreviate.labelspoints logical whether to abbreviate
 #' @param labelsgroups logical whether to add labels for groups
 #' @param cex.labelsgroups ifyes, a numeric for the size of the labels
 #' @param rect.labelsgroups logical whether to add a rectangle behind groups names
-#' @param abbreviate.labelsgroups if yes, whether to abbreviate group names
+#' @param abbreviate.labelsgroups logical, whether to abbreviate group names
+#' @param color.legend logical whether to add a (cheap) color legend for numeric fac
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
 #' @param eigen logical whether to draw a plot of the eigen values
@@ -62,7 +73,9 @@
 #' @param ... useless here, just to fit the generic plot
 #' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
-#' @note Morphospaces are still experimental.
+#' @note Morphospaces are deprecated so far. 99% of the code
+#' is shared with \link{plot.PCA} waiting for a general rewriting of a multivariate plotter.
+#' See https://github.com/vbonhomme/Momocs/issues/121
 #' @seealso \link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
 #' @examples
 #' data(bot)
@@ -75,127 +88,178 @@
 #' plot(bot.l)
 #' @method plot LDA
 #' @export
-plot.LDA <- function(x, xax=1, yax=2,
-                     #color choice
+plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
+                     #points arguments
                      points=TRUE, col="#000000", pch=20, cex=0.5, palette=col_solarized,
                      #.frame
                      center.origin=FALSE, zoom=1, bg=par("bg"),
                      #.grid
                      grid=TRUE, nb.grids=3,
                      #shapes
-                     morphospace=FALSE, pos.shp="full", amp.shp=1,
+                     morphospace=FALSE,
+                     pos.shp=c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
+                     amp.shp=1,
                      size.shp=1, nb.shp=12, nr.shp=6, nc.shp=5,
-                     pts.shp=60, border.shp="#00000032", lwd.shp=1, col.shp="#00000019",
+                     rotate.shp=0, flipx.shp=FALSE, flipy.shp=FALSE,
+                     pts.shp=60, border.shp=col_alpha("#000000", 0.5),
+                     lwd.shp=1, col.shp=col_alpha("#000000", 0.95),
                      #stars
                      stars=FALSE,
                      #ellipses
-                     ellipses=FALSE, conf_ellipses=0.5,
+                     ellipses=FALSE, conf.ellipses=0.5,
                      #ellipsesax
-                     ellipsesax=TRUE, conf_ellipsesax=c(0.5, 0.75, 0.9),
+                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.9),
                      lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
                      #convexhulls
-                     chull=FALSE, chull.lty=3,
+                     chull=FALSE, chull.lty=1,
+                     #filled convex hulls,
+                     chull.filled=FALSE, chull.filled.alpha=0.92,
                      #kde2d
                      density=FALSE, lev.density=20,
                      contour = FALSE, lev.contour=3, n.kde2d=100,
                      #delaunay
                      delaunay=FALSE,
                      #loadings
-                     #loadings=FALSE,
-                     #labels
-                     labels=FALSE,
-                     col.labels=par("fg"),
-                     cex.labels=0.6,
-                     abbreviate.labels=FALSE,
+                     loadings=FALSE,
+                     #labelspoint
+                     labelspoints=FALSE,
+                     col.labelspoints=par("fg"),
+                     cex.labelspoints=0.6,
+                     abbreviate.labelspoints=TRUE,
                      #labelsgroups
-                     labelsgroups=TRUE, cex.labelsgroups=0.8,
-                     rect.labelsgroups=FALSE, abbreviate.labelsgroups=FALSE,
+                     labelsgroups=TRUE,
+                     cex.labelsgroups=0.8,
+                     rect.labelsgroups=FALSE,
+                     abbreviate.labelsgroups=FALSE,
+                     # legend for numeric fac
+                     color.legend=FALSE,
                      #axisnames
                      axisnames=TRUE,
                      #axisvar
                      axisvar=TRUE,
                      #eigen
                      eigen=TRUE,
-                     #
+                     # various
                      rug=TRUE,
                      title=substitute(x), box=TRUE, old.par=TRUE, ...
 ){
-  LDA <- x
-  fac <- LDA$fac
-  # we check and prepare
-  if (nlevels(fac) <= 2) { # case of 2 levels and a single LD
-    xy <- LDA$mod.pred$x[, 1]
+  ##### Preliminaries
+  # morphospace deprecated
+  morphospace=FALSE
+  fac <- x$fac
+
+  # because copied from plot.PCA see https://github.com/vbonhomme/Momocs/issues/121
+  PCA <- x
+  xy <- PCA$x[, c(xax, yax)]
+  ### we check and prepare everything related to groups
+  ### fac not provided
+  if (missing(fac)) { # mainly for density and contour
+    fac <- NULL
+    col.groups <- col
   } else {
-    xy <- LDA$mod.pred$x[, c(xax, yax)]
-  }
-  ### we check and prepare
-  # col handling
-  if (!missing(col)){
-    if (length(col)==nlevels(fac)) {
-      col.groups <- col
-      col <- col.groups[fac]
-    } else {
-      col.groups <- rep(col[1], nlevels(fac))
-      col <- rep(col[1], nrow(xy))}
-  } else {
-    col.groups <- palette(nlevels(fac))
-    col <- col.groups[fac]
-  }
-  # pch handling
-  if (!missing(pch)) {
-    if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
-  } else {
-    if (nlevels(fac) < 10) {
-      pch <- .pch()[fac]
-    } else {
-      pch <- 20
+    # fac provided ------------------------
+    # fac provided, as formula ============
+    if (class(fac) == "formula") {
+      column_name <- attr(terms(fac), "term.labels")
+      # we check for wrong formula
+      if (any(is.na(match(column_name, colnames(PCA$fac)))))
+        stop("formula provided must match with $fac column names")
+      # otherwise we retrive the column(s)
+      fac <- PCA$fac[, column_name]
+      # multicolumn/fac case
+      if (is.data.frame(fac))
+        fac <- factor(apply(fac, 1, paste, collapse="_"))
+    }
+    # fac provided, as column name or id
+    if (length(fac)==1){
+      fac <- PCA$fac[, fac]
+    }
+
+    # if fac is a factor
+    if (is.factor(fac)){
+      if (!missing(col)){
+        if (length(col)==nlevels(fac)) {
+          col.groups <- col
+          col <- col.groups[fac]
+        } else {
+          col.groups <- rep(col[1], nlevels(fac))
+          if (length(col) != nrow(xy)){
+            col <- rep(col[1], nrow(xy))}}
+      } else {
+        col.groups <- palette(nlevels(fac))
+        if (length(col) != nrow(xy)){
+          col <- col.groups[fac]}
+      }
+      # pch handling
+      if (!missing(pch)) {
+        if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
+      }
+      else {
+        pch <- 20
+      }
     }
   }
-  # case of 2 levels and a single LD
-  if (nlevels(fac) <= 2){
-    op <- par(mfrow=c(2, 1), oma=c(0, 0, 0, 0), mar=c(4, 1, 3, 1 ))
-    on.exit(op)
-    hist.range <- range(xy)
-    hist(xy[fac==levels(fac)[1]], xlim=hist.range,
-         ylab=NA, xlab="LD1", main=levels(fac)[1],
-         col=palette(2)[1], axes=FALSE); axis(1)
-    hist(xy[fac==levels(fac)[2]], xlim=hist.range,
-         ylab=NA, xlab="LD1", main=levels(fac)[2],
-         col=palette(2)[2], axes=FALSE); axis(1)
-    par(mfrow=c(1, 1))
-    return()
+
+  # if fac is a numeric
+  if (is.numeric(fac)){
+    if (missing(col)){
+      if (missing(palette)){
+        palette <- col_gallus
+      }
+      cols_breaks = 1000
+      cols_all <- palette(cols_breaks)
+      cols_id <- fac  %>% .normalize()  %>% cut(breaks = cols_breaks)  %>% as.numeric()
+      col <- cols_all[cols_id]
+    }
   }
-  # cosmectics
-  if ((density) & missing(contour)) contour <- TRUE
+  # cosmetics
+  if ((density) & missing(contour)) contour   <- TRUE
   if ((density) & missing(ellipses)) ellipses <- FALSE
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
-  if (missing(rug) & nlevels(fac)>6) rug <- FALSE
-  if (labels & missing(points)) points <- FALSE
-  if (missing(col.labels)) col.labels <- col.groups
+  if (missing(rug) & nlevels(fac)>6) rug      <- FALSE
+  if (!missing(chull.lty)) chull              <- TRUE
+  if (!missing(chull.filled.alpha)) chull.filled <- TRUE
+  if (!missing(labelspoints) & missing(points)) points <- FALSE
+  if (missing(col.labelspoints)) col.labelspoints <- col
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
 
+  ##### Graphics start here
   # we prepare the graphic window
   opar <- par(mar = par("mar"), xpd=FALSE)
   if (old.par) on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
-
   # we initate it
   .frame(xy, center.origin, zoom=zoom, bg=bg)
+  if (grid)     .grid(nb.grids)
+
+  # if numeric fac, we add the (cheap) legend
+  if (is.numeric(fac) & color.legend) {
+    legend_labels <- round(c(max(fac), mean(range(fac)), min(fac)), 2)
+    legend_cols <- col[c(length(col), round(length(col)/2), 1)]
+    legend("topright", fill=legend_cols,
+           legend=legend_labels, bty="n",
+           y.intersp = 0.8, cex=0.8, adj=0, xjust=1)
+  }
+
   # then the layers
-  if (grid)    .grid(nb.grids)
-  if (density) .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
-  if (contour) .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
+  if (density)  .density(xy, fac, levels= lev.density, col=col.groups, transp=0.3, n.kde2d=n.kde2d)
+  if (contour)  .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
   if (delaunay) .delaunay(xy, fac, col.groups)
+
   # morphospace handling - a big baby
-  if (morphospace & length(LDA$method)<2) {
-    if(LDA$method=="efourier") {
-      morphospaceLDA(LDA, xax=xax, yax=yax, pos.shp=pos.shp,
-                     amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                     col.shp=col.shp, border.shp=border.shp)}}
+  if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
+    morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
+                   nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
+                   rotate.shp=rotate.shp, flipx.shp=flipx.shp, flipy.shp=flipy.shp,
+                   amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
+                   col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp,
+                   plot=TRUE)
+  }
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
-    if (ellipsesax) .ellipsesax(xy, fac, conf_ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
-    if (ellipses)   .ellipses(xy, fac, conf_ellipses, col.groups) #+conf
+    if (ellipsesax) .ellipsesax(xy, fac, conf.ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
+    if (ellipses)   .ellipses(xy, fac, conf.ellipses, col.groups) #+conf
+    if (chull.filled) .chullfilled(xy, fac, col_alpha(col.groups, chull.filled.alpha))
     if (chull)      .chull(xy, fac, col.groups, chull.lty)
     if (labelsgroups)     .labelsgroups(xy, fac, col.groups,
                                         cex=cex.labelsgroups, rect=rect.labelsgroups,
@@ -204,16 +268,39 @@ plot.LDA <- function(x, xax=1, yax=2,
   } else {
     if (rug)        .rug(xy, NULL, col)
   }
+  # return(col)
+
   if (points) points(xy, pch=pch, col=col, cex=cex)
-  if (labels) text(xy[, 1], xy[, 2],
-                   labels=ifelse(abbreviate.labels, abbreviate(rownames(xy)), rownames(xy)),
-                   col=col.labels, cex=cex.labels)
-  #if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
+  if (!missing(labelspoints)) {
+    if (labelspoints==FALSE) {
+      rn <- NULL
+    } else {
+
+      if (any(colnames(PCA$fac)==labelspoints)) {
+        rn <- PCA$fac[, labelspoints]
+      } else {
+        rn <- rownames(x$x)
+      }
+    }
+    if (!is.null(rn)){
+      if (abbreviate.labelspoints) rn <- abbreviate(rn)
+      text(xy[, 1], xy[, 2], labels=rn,
+           col=col.labelspoints, cex=cex.labelspoints)
+    }
+  }
+  if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "LD")
-  if (axisvar)    .axisvar(LDA$mod$svd, xax, yax)
+  if (axisvar)    .axisvar(PCA$mod$svd, xax, yax)
   .title(title)
-  if (eigen)     .eigen(LDA$mod$svd, xax, yax, ev.names="Proportion of trace")
-  if (box) box()}
+  if (eigen)     .eigen(PCA$mod$svd, xax, yax, ev.names="Prop. of trace")
+  if (box) box()
+  # we return a df
+  if (is.null(fac))
+    invisible(data.frame(x=xy[, 1], y=xy[, 2]))
+  else
+    invisible(data.frame(x=xy[, 1], y=xy[, 2], fac=fac))
+}
+
 
 #' Plots a cross-validation table as an heatmap
 #'

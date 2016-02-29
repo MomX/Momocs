@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-utilities.R
 \name{def_slidings}
 \alias{def_slidings}
-\title{Define sliding landmarks matrix}
+\title{Defines sliding landmarks matrix}
 \usage{
 def_slidings(Coo, slidings)
 }
@@ -12,7 +12,7 @@ def_slidings(Coo, slidings)
 \item{slidings}{a matrix, a numeric or a list of numeric. See Details}
 }
 \description{
-Define sliding landmarks matrix
+Defines sliding landmarks matrix
 }
 \details{
 \code{$slidings} in \link{Ldk} must be a 'valid' matrix: containing
@@ -36,5 +36,10 @@ See examples below.
 \examples{
 #waiting for a sliding dataset...
 
+}
+\seealso{
+Other ldk/slidings methods: \code{\link{def_ldk}},
+  \code{\link{get_ldk}}, \code{\link{get_slidings}},
+  \code{\link{slidings_scheme}}
 }
 

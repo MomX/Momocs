@@ -4,7 +4,7 @@
 \alias{perm}
 \alias{perm.Coe}
 \alias{perm.default}
-\title{Permute and breed Coe (and others) objects}
+\title{Permutes and breed Coe (and others) objects}
 \usage{
 perm(x, ...)
 
@@ -42,6 +42,6 @@ bot.m
 panel(bot.m)
 }
 \seealso{
-\link{breed}
+Other farming: \code{\link{breed}}
 }
 

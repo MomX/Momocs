@@ -7,7 +7,7 @@
 \alias{table.LDA}
 \alias{table.PCA}
 \alias{table.default}
-\title{Cross tabulation of Momocs objects}
+\title{Cross-tabulates objects}
 \usage{
 table(...)
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{lf_structure}
 \alias{lf_structure}
-\title{Extract structure from filenames}
+\title{Extracts structure from filenames}
 \usage{
 lf_structure(lf, names = character(), split = "_", trim.extension = FALSE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{chc2Out}
 \alias{chc2Out}
-\title{Convert chain-coded coordinates to Out object}
+\title{Converts chain-coded coordinates to Out object}
 \usage{
 chc2Out(chc, skip, names)
 }

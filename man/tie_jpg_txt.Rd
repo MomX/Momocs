@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{tie_jpg_txt}
 \alias{tie_jpg_txt}
-\title{Binds .jpg outlines and .txt landmarks on them}
+\title{Binds .jpg outlines from .txt landmarks taken on them}
 \usage{
 tie_jpg_txt(lf)
 }

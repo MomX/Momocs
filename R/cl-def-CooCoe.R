@@ -1,9 +1,9 @@
 ##### Coo and Coe classes declarations, domestic functions and
 ##### helpers.
 
-#' Coo class
+#' Coo "super" class
 #'
-#' \code{Coo} class is the 'parent' class of
+#' \code{Coo} class is the 'parent' or 'super' class of
 #' \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
 #'
 #' Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
@@ -29,16 +29,7 @@
 #' You can access all the methods available for \code{Coo} objects
 #' with \code{methods(class=Coo)}.
 #'
-#' @note
-#' If you used Momocs before version <0.9, and/or if you have read the JSS paper,
-#' you are probably looking for \link{Out}. If you have "old" \code{Coo} files, e.g. saved as \code{.rda} files,
-#' no worry, you can import them:
-#' \enumerate{
-#' \item load your file: \code{load("foo.rda")}
-#' It may produce an error but the \code{.rda} has been loaded (see \code{ls()})
-#' \item type: \code{foo2 <- Out(foo@@coo, fac=foo@@fac)},
-#' same thing for the \code{@@ldk} slot and others, if any.
-#'}
+#' @family Coo objects
 #' @examples
 #' \dontrun{
 #' # to see all methods for Coo objects.
@@ -91,11 +82,9 @@ Coo <- function(...) {
     message("Coo constructor does not exist alone. See ?Coo")
 }
 
-
-
-#' Coe class
+#' Coe "super" class
 #'
-#'\code{Coe} class is the 'parent' class of
+#'\code{Coe} class is the 'parent' or 'super' class of
 #' \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{LdkCoe} classes.
 #'
 #' Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
@@ -117,6 +106,7 @@ Coo <- function(...) {
 #' You can access all the methods available for \code{Coe} objects
 #' with \code{methods(class=Coe)}.
 #'
+#' @family Coe objects
 #' @examples
 #' # to see all methods for Coo objects.
 #' methods(class='Coe')
@@ -352,8 +342,8 @@ names.Coe <- function(x) {
         # case where the column is a factor
         lev.i <- levels(fac[, i])
         # cosmectics below
-        if (sum(nchar(lev.i))>20){
-          maxprint <- which(cumsum(nchar(lev.i))>20)[1]
+        if (sum(nchar(lev.i))>15){
+          maxprint <- which(cumsum(nchar(lev.i))>15)[1]
           cat("     '", colnames(fac)[i], "'\t (factor - ", nlevels(fac[, i]), " lev.):\t ", paste(lev.i[1:maxprint], collapse=", "),
               " and ", length(lev.i) - maxprint, " more.\n", sep="")
         } else {

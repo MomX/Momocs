@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{import_jpg}
 \alias{import_jpg}
-\title{Extract outline coordinates from multiple .jpg files}
+\title{Extracts outline coordinates from multiple .jpg files}
 \usage{
 import_jpg(jpg.paths = NULL, auto.notcentered = TRUE,
   fun.notcentered = NULL, threshold = 0.5, verbose = TRUE)
