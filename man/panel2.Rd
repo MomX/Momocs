@@ -2,7 +2,7 @@
 % Please edit documentation in R/gr-Coo.R
 \name{panel2}
 \alias{panel2}
-\title{A family picture of a Coo object: all shapes side by side}
+\title{Family picture of shapes (ggplot2)}
 \usage{
 panel2(Coo)
 }
@@ -13,10 +13,14 @@ panel2(Coo)
 a ggplot2 object
 }
 \description{
-Will replace panel soon.
+May replace panel one day.
 }
 \examples{
 data(shapes)
 panel2(shapes)
+}
+\seealso{
+Other Coo_graphics: \code{\link{panel}},
+  \code{\link{plot.Coo}}, \code{\link{stack.Coo}}
 }
 

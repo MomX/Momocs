@@ -1,6 +1,6 @@
 #' KMEANS on PCA objects
 #'
-#' A very basic and prototypic implementation of k-means.
+#' A very basic implementation of k-means.
 #' Beware that morphospaces are calculated so far for the 1st and 2nd
 #' component.
 #' @param x PCA object
@@ -15,6 +15,7 @@
 #' bp <- PCA(efourier(bot, 10))
 #' KMEANS(bp, 2)
 #' @rdname KMEANS
+#' @family multivariate
 #' @export
 KMEANS <- function(x, ...){
   UseMethod("KMEANS")

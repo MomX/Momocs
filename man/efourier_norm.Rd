@@ -64,8 +64,7 @@ Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
-\link{efourier} and \link{efourier_i}. Also \link{efourier} for
-normalizing harmonic coefficients when calculating it for \code{Out}
-objects.
+Other efourier: \code{\link{efourier_i}},
+  \code{\link{efourier_shape}}, \code{\link{efourier}}
 }
 

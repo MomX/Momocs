@@ -3,7 +3,7 @@
 \name{stack.Coo}
 \alias{stack.Coo}
 \alias{stack.Ldk}
-\title{Plots Coo objects: stack (all shapes in the same frame)}
+\title{Family picture of shapes}
 \usage{
 \method{stack}{Coo}(x, cols, borders, fac, palette = col_summer,
   coo_sample = 120, points = FALSE, first.point = TRUE, centroid = TRUE,
@@ -76,11 +76,6 @@ Either a single value or of length exactly equals to the number of coordinates.}
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
 object.
 }
-\note{
-When applied on a \link{OutCoe} object, a wrapper
-for \code{stack(as.Out(OutCoe), ...)}. In that case,
-\code{...} feeds \code{stack} itself. (same thing for \code{OpnCoe} to come)
-}
 \examples{
 \dontrun{
 data(bot)
@@ -101,6 +96,7 @@ stack(chaffal, meanshape=TRUE, meanshape_col="blue")
 }
 }
 \seealso{
-\link{panel.Coo}, \link{plot.Coo}.
+Other Coo_graphics: \code{\link{panel2}},
+  \code{\link{panel}}, \code{\link{plot.Coo}}
 }
 

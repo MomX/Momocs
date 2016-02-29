@@ -40,4 +40,8 @@ hcontrib(bot.f)
 hcontrib(bot.f, harm.r=3:10, amp.r=1:8, col="grey20",
    main="A huge panel")
 }
+\seealso{
+Other Coe_graphics: \code{\link{boxplot.OutCoe}},
+  \code{\link{hist.OutCoe}}
+}
 

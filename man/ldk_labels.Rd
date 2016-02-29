@@ -26,4 +26,17 @@ ldk_labels(wings[1])
 coo_plot(wings[1])
 ldk_labels(wings[1], d=0.05, cex=0.5)
 }
+\seealso{
+Other ldk plotters: \code{\link{ldk_chull}},
+  \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
+  \code{\link{ldk_links}}
+
+Other plotting functions: \code{\link{Ntable}},
+  \code{\link{conf_ell}}, \code{\link{coo_arrows}},
+  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
+  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
+  \code{\link{coo_ruban}}, \code{\link{ldk_chull}},
+  \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
+  \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
+}
 

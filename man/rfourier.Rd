@@ -43,19 +43,7 @@ A list with following components:
 list of coordinates.
 }
 \details{
-Given a closed outline, the radius \eqn{r}, taken as the distance from the
-outline barycentre and a given point of the outline, can be expressed as a
-periodic function of the angle \eqn{\theta}. Harmonics from \eqn{0} to
-\eqn{k} approximate the function \eqn{r(\theta)}:
-
-\eqn{r(\theta)= \frac{1}{2}a_0 + \sum\limits_{n=1}^{k}a_k\cos(w_k\theta +
-b_k\sin(w_k\theta)} with: \eqn{ a_n =
-\frac{2}{p}\sum\limits_{n=1}^{p}r_i\cos(n\theta_i) } \eqn{ b_n =
-\frac{2}{p}\sum\limits_{n=1}^{p}r_i\sin(n\theta_i) } with \eqn{ a_0 =
-\sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}r_i }
-
-The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
-individual shape, are then used for multivariate analyses.
+see the JSS paper for the maths behind.
 }
 \note{
 Directly borrowed for Claude (2008), and called \code{fourier1} there.
@@ -74,10 +62,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-\link{rfourier} for rfourier on \link{Out} objects.
-\link{rfourier_i} for the inverse operation, \link{rfourier_shape} to play around
-with this approach.
-\link{efourier}, \link{tfourier} for the other members of the Fourier's
-family.
+Other rfourier: \code{\link{rfourier_i}},
+  \code{\link{rfourier_shape}}
 }
 

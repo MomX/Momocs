@@ -5,18 +5,6 @@
 #' \code{tfourier} computes tangent angle Fourier analysis from a matrix or a
 #' list of coordinates.
 #'
-#' Given a closed outline which the outline has been scaled to \eqn{2\pi},
-#' \eqn{\phi(t)} can be expressed as follows: \eqn{ \phi(t) = \theta(t) -
-#' \theta(0) - t } where \eqn{t} is the distance along the outline,
-#' \eqn{\theta(t)} the angle of the tangent vector at \eqn{t} and
-#' \eqn{\theta(0)} the angle of the tangent vector taken for the first point.
-#' It can be removed for normalizing the coefficients obtained. Two
-#' coefficients per harmonics can be estimated as follow:
-#'
-#' \eqn{ a_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\cos n \theta_i } \eqn{
-#' b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \eqn{
-#' a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
-#'
 #' @param x A list or matrix of coordinates or an \code{Out}
 #' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -37,9 +25,7 @@
 #' \item \code{x1} The x-coordinate of the first point
 #' \item \code{y1} The y-coordinate of the first point.
 #' }
-#' @seealso \link{tfourier} for analysis on \link{Out} objects.
-#' \link{efourier}, \link{rfourier} for the other members of the
-#' Fourier's family. \link{tfourier_shape} to play around with this approach.
+#' @family tfourier
 #' @note Directly borrowed for Claude (2008), and called \code{fourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
@@ -168,8 +154,7 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
 #' \item{phi }{\code{vector} of interpolated changes on the tangent angle.}
 #' \item{angle }{\code{vector} of position on the perimeter (in radians).}
-#' @seealso \link{tfourier} for the reverse operation and also
-#' \code{tfourier_shape}. \link{tfourier}. \link{l2m}, \link{coeff_split} may be useful.
+#' @family tfourier
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier2} there.
 #' @references Zahn CT, Roskies RZ. 1972. Fourier Descriptors for Plane Closed
 #' Curves. \emph{IEEE Transactions on Computers} \bold{C-21}: 269-281.
@@ -234,13 +219,6 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' Fourier coefficients (see \code{Details}) or can generate some 'tfourier'
 #' shapes.
 #'
-#' \code{tfourier_shape} can be used by specifying \code{nb.h} and
-#' \code{alpha}. The coefficients are then sampled in an uniform distribution
-#' \eqn{(-\pi ; \pi)} and this amplitude is then divided by
-#' \eqn{harmonicrank^alpha}. If \code{alpha} is lower than 1, consecutive
-#' coefficients will thus increase. See \link{tfourier} for the mathematical
-#' background.
-#'
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
 #' calculate a shape.
 #' @param bn \code{numeric}. The \eqn{b_n} Fourier coefficients on which to
@@ -253,7 +231,7 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
 #' @return A matrix of (x; y) coordinates.
-#' @seealso \link{tfourier_i}, \link{tfourier}, link{tfourier}.
+#' @family tfourier
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' @examples

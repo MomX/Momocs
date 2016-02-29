@@ -29,7 +29,8 @@ arguments properly named (I maintain tps2d as it is for historical reasons) when
 we want a apply a trasnformation grid.
 }
 \seealso{
-\link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
-\code{tps2d}.
+Other thin plate splines: \code{\link{tps_arr}},
+  \code{\link{tps_grid}}, \code{\link{tps_iso}},
+  \code{\link{tps_raw}}
 }
 

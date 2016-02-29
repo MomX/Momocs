@@ -36,4 +36,7 @@ txn <- apply(tx$coe, 2, .normalize)
 txp <- PCA(tx, scale. = TRUE, center=TRUE, fac=wings$fac)
 plot(txp, 1)
 }
+\seealso{
+Other premodern: \code{\link{measure}}
+}
 

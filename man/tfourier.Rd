@@ -47,19 +47,6 @@ A list with the following components:
 \code{tfourier} computes tangent angle Fourier analysis from a matrix or a
 list of coordinates.
 }
-\details{
-Given a closed outline which the outline has been scaled to \eqn{2\pi},
-\eqn{\phi(t)} can be expressed as follows: \eqn{ \phi(t) = \theta(t) -
-\theta(0) - t } where \eqn{t} is the distance along the outline,
-\eqn{\theta(t)} the angle of the tangent vector at \eqn{t} and
-\eqn{\theta(0)} the angle of the tangent vector taken for the first point.
-It can be removed for normalizing the coefficients obtained. Two
-coefficients per harmonics can be estimated as follow:
-
-\eqn{ a_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\cos n \theta_i } \eqn{
-b_n = \frac{2}{p}\sum\limits_{n=1}^{p}\phi(t)\sin n \theta_i } with \eqn{
-a_0 = \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}\phi(t) }
-}
 \note{
 Directly borrowed for Claude (2008), and called \code{fourier2} there.
 }
@@ -81,8 +68,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 pp.
 }
 \seealso{
-\link{tfourier} for analysis on \link{Out} objects.
-\link{efourier}, \link{rfourier} for the other members of the
-Fourier's family. \link{tfourier_shape} to play around with this approach.
+Other tfourier: \code{\link{tfourier_i}},
+  \code{\link{tfourier_shape}}
 }
 

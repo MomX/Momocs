@@ -6,8 +6,11 @@
 \encoding{UTF-8}
 
 \section{Changes in version 1.0 "Mataa" (CRAN + GitHub)}{
-\code{Mataa} release (\code{>=1.0}) on CRAN replaces the now completely obsolete \code{0.2.6}. It consists of \code{Barley} pushed to CRAN. Development continues on GitHub.
-
+  \itemize{
+    \item \code{Mataa} release (\code{>=1.0}) on CRAN replaces the now completely obsolete \code{0.2.6}.
+    \item It consists of \code{Barley} pushed to CRAN.
+    \item Development continues on GitHub.
+  }
 }
 
 \section{Changes in version 0.9 "Barley" (GitHub only)}{

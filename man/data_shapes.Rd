@@ -6,9 +6,16 @@
 \title{Data: Outline coordinates of various shapes}
 \format{An \link{Out} object with the outline coordinates of some various shapes.}
 \source{
-Borrowed from default shapes from (c) Adobe Photoshop.
+Borrowed default shapes from (c) Adobe Photoshop. Do not send me to jail.
 }
 \description{
 Data: Outline coordinates of various shapes
+}
+\seealso{
+Other datasets: \code{\link{bot}}, \code{\link{chaff}},
+  \code{\link{flower}}, \code{\link{hearts}},
+  \code{\link{molars}}, \code{\link{mosquito}},
+  \code{\link{oak}}, \code{\link{olea}},
+  \code{\link{trilo}}, \code{\link{wings}}
 }
 

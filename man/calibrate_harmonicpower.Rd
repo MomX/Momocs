@@ -69,6 +69,8 @@ ggtitle("Harmonic power calibration")
 
 }
 \seealso{
-\link{calibrate_r2}
+Other calibration: \code{\link{calibrate_deviations}},
+  \code{\link{calibrate_r2}},
+  \code{\link{calibrate_reconstructions}}
 }
 

@@ -69,7 +69,8 @@ tps_iso(fr, to, iso.nb=200, amp=3)
 tps_iso(fr, to, iso.nb=200, amp=3, grid=TRUE)
 }
 \seealso{
-\link{tps_grid} and \link{tps_arr},
-\link{coo_lolli}, \link{coo_arrows}.
+Other thin plate splines: \code{\link{tps2d}},
+  \code{\link{tps_arr}}, \code{\link{tps_grid}},
+  \code{\link{tps_raw}}
 }
 

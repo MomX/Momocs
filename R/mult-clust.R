@@ -23,6 +23,7 @@
 #' @note This method tries to adapt to ggtree changes but may require some ggplot customization,
 #' eg some xlim. See examples.
 #' @return a ggplot object
+#' @family multivariate
 #' @examples
 #' \dontrun{
 #' data(bot)

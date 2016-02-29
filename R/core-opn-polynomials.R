@@ -24,8 +24,10 @@
 #'  \item \code{r2} the r2 from the fit
 #'  \item \code{mod} the raw lm model
 #' }
-#' otehrwise an \link{OpnCoe} object.
-#' @note Orthogonal polynomials are sometimes called Legendre's polynomials.
+#' otherwise an \link{OpnCoe} object.
+#' @note Orthogonal polynomials are sometimes called Legendre's polynomials. They are
+#' preferred over natural polynomials since adding a degree do not change lower orders coefficients.
+#' @family polynomials
 #' @examples
 #' data(olea)
 #' o <- olea[1]
@@ -144,6 +146,7 @@ opoly.Opn <- function(x,
 #' }
 #'
 #' otherwise, an \link{OpnCoe} object.
+#' @family polynomials
 #' @examples
 #' data(olea)
 #' o <- olea[1]
@@ -239,6 +242,7 @@ npoly.Opn <- function(x,
 #' the number of points in the original shape.
 #' @param reregister logical whether to reregister the shape with the original baseline.
 #' @return a matrix of (x; y) coordinates.
+#' @family polynomials
 #' @examples
 #' data(olea)
 #' o <- olea[5]

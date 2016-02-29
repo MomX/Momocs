@@ -8,9 +8,17 @@
 by 8 different persons, with 4 landmarks.}
 \source{
 We thank the fellows of the Ecology Department of the French Institute
-of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and degraded to 80 coordinates per outline.
+of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered,
+and downsampled to 80 coordinates per outline.
 }
 \description{
 Data: Outline coordinates of hand-drawn hearts
+}
+\seealso{
+Other datasets: \code{\link{bot}}, \code{\link{chaff}},
+  \code{\link{flower}}, \code{\link{molars}},
+  \code{\link{mosquito}}, \code{\link{oak}},
+  \code{\link{olea}}, \code{\link{shapes}},
+  \code{\link{trilo}}, \code{\link{wings}}
 }
 

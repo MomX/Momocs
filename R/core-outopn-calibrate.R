@@ -14,6 +14,7 @@
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
 #' @param ... only used for the generic
 #' @return a ggplot object
+#' @family calibration
 #' @examples
 #' data(bot)
 #' calibrate_reconstructions(bot, "efourier")
@@ -202,6 +203,7 @@ calibrate_reconstructions.Opn <-
 #' @param dist.nbpts numeric the number of points to use for deviations calculations
 #' @details For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
 #' @return a ggplot object
+#' @family calibration
 #' @examples
 #' data(bot)
 #' calibrate_deviations(bot)
@@ -510,7 +512,7 @@ calibrate_deviations.Opn<-
 #' \eqn{HarmonicPower_n \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 #' and as follows for radii variation and tangent angle:
 #' \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
-#' @seealso \link{calibrate_r2}
+#' @family calibration
 #' @examples
 #' data(bot)
 #' cal <- calibrate_harmonicpower(bot)
@@ -680,7 +682,7 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
 #' @param ... useless here
 #' @details May be long, so you can estimate it on a sample either with id here, or one of
 #' \link{sample_n} or \link{sample_frac}
-#' @seealso \link{calibrate_harmonicpower}
+#' @family calibration
 #' @examples
 #' \dontrun{
 #' calibrate_r2(olea, "opoly", degree.range=1:5, thresh=c(0.9, 0.99))

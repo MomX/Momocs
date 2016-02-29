@@ -28,6 +28,7 @@ Directly borrowed from Claude (2008), and called \code{pPsup} there.
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
 \seealso{
-Other procrustes functions:: \code{\link{fgProcrustes}}
+Other procrustes functions: \code{\link{fProcrustes}},
+  \code{\link{fgProcrustes}}, \code{\link{fgsProcrustes}}
 }
 

@@ -2,12 +2,13 @@
 % Please edit documentation in R/gr-Coo.R
 \name{stack2}
 \alias{stack2}
-\title{A family picture of a Coo object: all shapes in the same plot}
+\title{Family picture of shapes (ggplot2)}
 \usage{
 stack2(Coo)
 }
 \arguments{
-\item{Coo}{a Coo object}
+\item{Coo}{a Coo object
+Family picture of shapes}
 }
 \value{
 a ggplot2 object

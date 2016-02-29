@@ -26,7 +26,7 @@ calculate a shape, when given a list with Fourier coefficients, typically
 obtained computed with \link{rfourier}.
 }
 \details{
-See \link{efourier} for the mathematical background.
+See the JSS paper for the maths behind.
 }
 \note{
 Directly borrowed for Claude (2008), and called \code{ifourier1} there.
@@ -46,7 +46,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-\link{efourier} for the reverse operation and also
-\code{rfourier_shape}. \link{l2m}, \link{coeff_split} may be useful.
+Other rfourier: \code{\link{rfourier_shape}},
+  \code{\link{rfourier}}
 }
 

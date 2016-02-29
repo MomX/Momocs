@@ -45,7 +45,7 @@ Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
-\link{efourier} for the reverse operation. \link{l2m},
-\link{coeff_split} may be useful.
+Other efourier: \code{\link{efourier_norm}},
+  \code{\link{efourier_shape}}, \code{\link{efourier}}
 }
 

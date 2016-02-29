@@ -15,10 +15,10 @@ measure(x, ...)
 a \link{TraCoe} object, or a raw data.frame
 }
 \description{
-Calculates shape descriptors on Coo and other objects. 
-Any function that returns a scalar when fed coordinates can be passed 
+Calculates shape descriptors on Coo and other objects.
+Any function that returns a scalar when fed coordinates can be passed
 and naturally those of Momocs (pick some there \code{apropos("coo_")}). Functions
-without arguments (eg \link{coo_area}) have to be passed without brackets but 
+without arguments (eg \link{coo_area}) have to be passed without brackets but
 functions with arguments (eg \link{d}) have to be passed "entirely". See examples.
 }
 \examples{
@@ -38,5 +38,8 @@ measure(bot$coo, coo_area, coo_perim, coo_ellipse_area)
 
 # and also
 measure(bot[1], coo_area, coo_perim, coo_ellipse_area)
+}
+\seealso{
+Other premodern: \code{\link{truss}}
 }
 

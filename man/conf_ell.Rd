@@ -38,4 +38,13 @@ lines(ce095$ell, col=cols[9])
 segments(ce095$seg[1, 1], ce095$seg[1, 2], ce095$seg[2, 1], ce095$seg[2, 2])
 segments(ce095$seg[3, 1], ce095$seg[3, 2], ce095$seg[4, 1], ce095$seg[4, 2])
 }
+\seealso{
+Other plotting functions: \code{\link{Ntable}},
+  \code{\link{coo_arrows}}, \code{\link{coo_draw}},
+  \code{\link{coo_listpanel}}, \code{\link{coo_lolli}},
+  \code{\link{coo_plot}}, \code{\link{coo_ruban}},
+  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
+  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
+  \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
+}
 

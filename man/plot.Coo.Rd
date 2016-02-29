@@ -2,7 +2,7 @@
 % Please edit documentation in R/gr-Coo.R
 \name{plot.Coo}
 \alias{plot.Coo}
-\title{Plots Coo objects: plot (quick review)}
+\title{Graphical inspection of shapes}
 \usage{
 \method{plot}{Coo}(x, id, ...)
 }
@@ -27,6 +27,7 @@ plot(bot, 5, pch=3, points=TRUE) # an example of '...' use
 }
 }
 \seealso{
-\link{panel.Coo}, \link{stack.Coo}.
+Other Coo_graphics: \code{\link{panel2}},
+  \code{\link{panel}}, \code{\link{stack.Coo}}
 }
 

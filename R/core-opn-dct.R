@@ -13,8 +13,8 @@
 #' \item arg the arguments of the points
 #' }
 #' @note This method has been only poorly tested in Momocs and should be considered as
-#' highly experimental. Yet improved by a factor 10, this method is still long to execute.
-#' It will probably be improved in further releases but it should not be so painful.
+#' experimental. Yet improved by a factor 10, this method is still long to execute.
+#' It will be improved in further releases but it should not be so painful right now.
 #' It also explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
 #' before performing the dct transform.
 #'
@@ -26,6 +26,7 @@
 #'  \item Many thanks to Remi Laffont for the translation in R).
 #' }
 #'
+#' @family dfourier
 #' @examples
 #' data(olea)
 #' \dontrun{ # because it's long
@@ -149,6 +150,7 @@ dfourier.Coo <- function(coo, nb.h, verbose=TRUE) {
 #'  \item Many thanks to Remi Laffont for the translation in R).
 #' }
 #'
+#' @family dfourier
 #' @examples
 #' # dfourier and inverse dfourier
 #' data(olea)
@@ -210,6 +212,7 @@ dfourier_i <- function(df, nb.h, nb.pts = 60) {
 #' @param alpha tThe power coefficient associated with the (usually decreasing)
 #' amplitude of the harmonic coefficients (see \link{efourier_shape})
 #' @param plot logical whether to plot the shape
+#' @family dfourier
 #' @examples
 #' # some signatures
 #' panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=0.5, nb.h=6)))))

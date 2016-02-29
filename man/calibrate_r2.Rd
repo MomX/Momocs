@@ -40,6 +40,8 @@ calibrate_r2(olea, "opoly", degree.range=1:5, thresh=c(0.9, 0.99))
 
 }
 \seealso{
-\link{calibrate_harmonicpower}
+Other calibration: \code{\link{calibrate_deviations}},
+  \code{\link{calibrate_harmonicpower}},
+  \code{\link{calibrate_reconstructions}}
 }
 

@@ -59,7 +59,8 @@ to <- x$whisky
 tps_grid(fr, to, amp=3, grid.size=10)
 }
 \seealso{
-\link{tps_iso} and \link{tps_arr},
-\link{coo_lolli}, \link{coo_arrows}.
+Other thin plate splines: \code{\link{tps2d}},
+  \code{\link{tps_arr}}, \code{\link{tps_iso}},
+  \code{\link{tps_raw}}
 }
 

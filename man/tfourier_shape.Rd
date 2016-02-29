@@ -34,14 +34,6 @@ A matrix of (x; y) coordinates.
 Fourier coefficients (see \code{Details}) or can generate some 'tfourier'
 shapes.
 }
-\details{
-\code{tfourier_shape} can be used by specifying \code{nb.h} and
-\code{alpha}. The coefficients are then sampled in an uniform distribution
-\eqn{(-\pi ; \pi)} and this amplitude is then divided by
-\eqn{harmonicrank^alpha}. If \code{alpha} is lower than 1, consecutive
-coefficients will thus increase. See \link{tfourier} for the mathematical
-background.
-}
 \examples{
 data(bot)
 tf <- tfourier(bot[1], 24)
@@ -56,6 +48,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-\link{tfourier_i}, \link{tfourier}, link{tfourier}.
+Other tfourier: \code{\link{tfourier_i}},
+  \code{\link{tfourier}}
 }
 

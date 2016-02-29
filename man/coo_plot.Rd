@@ -79,7 +79,11 @@ coo_plot(b, xy.axis=FALSE, lwd=2, col='#F2F2F2')
 }
 \seealso{
 Other plotting functions: \code{\link{Ntable}},
-  \code{\link{coo_arrows}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_ruban}}
+  \code{\link{conf_ell}}, \code{\link{coo_arrows}},
+  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
+  \code{\link{coo_lolli}}, \code{\link{coo_ruban}},
+  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
+  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
+  \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
 }
 

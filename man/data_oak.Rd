@@ -13,4 +13,11 @@ PloS One, 6(10), e25630. doi:10.1371/journal.pone.0025630
 \description{
 From Viscosi and Cardini (2001).
 }
+\seealso{
+Other datasets: \code{\link{bot}}, \code{\link{chaff}},
+  \code{\link{flower}}, \code{\link{hearts}},
+  \code{\link{molars}}, \code{\link{mosquito}},
+  \code{\link{olea}}, \code{\link{shapes}},
+  \code{\link{trilo}}, \code{\link{wings}}
+}
 

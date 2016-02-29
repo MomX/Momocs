@@ -26,7 +26,7 @@ KMEANS(x, ...)
 the same thing as \link{kmeans}
 }
 \description{
-A very basic and prototypic implementation of k-means.
+A very basic implementation of k-means.
 Beware that morphospaces are calculated so far for the 1st and 2nd
 component.
 }
@@ -34,5 +34,10 @@ component.
 data(bot)
 bp <- PCA(efourier(bot, 10))
 KMEANS(bp, 2)
+}
+\seealso{
+Other multivariate: \code{\link{CLUST}}, \code{\link{LDA}},
+  \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
+  \code{\link{PCA}}
 }
 

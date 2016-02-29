@@ -39,7 +39,7 @@ a list with components when applied on a single shape:
  \item \code{r2} the r2 from the fit
  \item \code{mod} the raw lm model
 }
-otehrwise an \link{OpnCoe} object.
+otherwise an \link{OpnCoe} object.
 }
 \description{
 Calculates orthogonal polynomial coefficients,
@@ -47,7 +47,8 @@ through a linear model fit (see \link{lm}), from a matrix of (x; y) coordinates 
 a \link{Opn} object
 }
 \note{
-Orthogonal polynomials are sometimes called Legendre's polynomials.
+Orthogonal polynomials are sometimes called Legendre's polynomials. They are
+preferred over natural polynomials since adding a degree do not change lower orders coefficients.
 }
 \examples{
 data(olea)
@@ -61,5 +62,9 @@ lines(opi, col='red')
 r <- numeric()
 for (i in 1:10) { r[i] <- opoly(o, degree=i)$r2 }
 plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
+}
+\seealso{
+Other polynomials: \code{\link{npoly}},
+  \code{\link{opoly_i}}
 }
 

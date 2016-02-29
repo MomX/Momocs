@@ -1,8 +1,4 @@
-##### Functions for graphical layers The loops for the fac
-##### handling are neither the most orthodox nor the fastest
-##### option but are pretty readable and easy to write as a first
-##### approach.
-
+# layers ------
 # create an empty frame
 #' @export
 .frame <- function(xy, center.origin = FALSE, zoom = 1, bg="white") {
@@ -327,7 +323,6 @@
 # Experimental and maybe useless --------------------
 # combine factor (a quick wrapper around interaction)
 # for PCA, LDA or any data.frame
-#' @export
 .combine.fac <- function(x, formula){
   if (any(c("LDA", "PCA")==class(x)[1])) x <- x$fac
   f0 <- x[, attr(terms(formula), "term.labels")]
@@ -339,7 +334,6 @@
 # f <- .combine.fac(op, ~view+domes)
 # cols <- .smartpalette(f)
 # plot(op, f, col=cols)
-#' @export
 .smartpalette <- function(fac, gap.intra=1, gap.inter=5, palette=col_qual){
   # determine ranking within a factor
   rank <- function(s){
@@ -371,13 +365,7 @@
   return(cols)}
 
 
-# .* ------------------------
-.cex <- function(x) {
-  3/(log(x + 1) + 1)
-}
-
-.pch <- function() {
-  c(2, 6, 1, 3, 4, 5, 8, 7, 9, 10)}
+# misc ------------------------
 
 .center_range <- function(x){
   m <- max(abs(x))

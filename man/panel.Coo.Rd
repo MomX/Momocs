@@ -7,7 +7,7 @@
 \alias{panel.Opn}
 \alias{panel.Out}
 \alias{panel.OutCoe}
-\title{Plots Coo objects: panel (family picture)}
+\title{Family picture of shapes}
 \usage{
 panel(x, ...)
 
@@ -80,6 +80,7 @@ panel(bot.f)
 panel(bot, fac='type', palette=col_spring, names=TRUE)
 }
 \seealso{
-\link{stack.Coo}, \link{plot.Coo}.
+Other Coo_graphics: \code{\link{panel2}},
+  \code{\link{plot.Coo}}, \code{\link{stack.Coo}}
 }
 

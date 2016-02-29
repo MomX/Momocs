@@ -34,6 +34,7 @@ op <- opoly(olea)
 hist(op)
 }
 \seealso{
-\link{boxplot.Coe}
+Other Coe_graphics: \code{\link{boxplot.OutCoe}},
+  \code{\link{hcontrib}}
 }
 

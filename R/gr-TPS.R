@@ -2,28 +2,27 @@
 # 8. Thin plate splines plotters
 # -----------------------------------------------
 #' Thin Plate Splines for 2D data
-#' 
+#'
 #' \code{tps2d} is the core function for Thin Plate Splines. It is used internally for
 #' all TPS graphical functions.\code{tps_apply} is the very same function but with
 #' arguments properly named (I maintain tps2d as it is for historical reasons) when
 #' we want a apply a trasnformation grid.
-#' 
+#'
 #' @param grid0 a matrix of coordinates on which to calculate deformations
 #' @param fr the reference \eqn{(x; y)} coordinates
 #' @param to the target \eqn{(x; y)} coordinates
 #' @param new the target coordinates (again)
 #' @return a matrix of \code{(x; y)} coordinates with TPS-interpolated
 #' deformations
-#' @seealso \link{tps_grid},\link{tps_iso}, \link{tps_arr} functions use
-#' \code{tps2d}.
 #' @rdname tps2d
+#' @family thin plate splines
 #' @export
 tps2d <- function(grid0, fr, to) {
-  if (is_closed(fr)) 
+  if (is_closed(fr))
     fr <- coo_unclose(fr)
-  if (is_closed(to)) 
+  if (is_closed(to))
     to <- coo_unclose(to)
-  if (!is.matrix(grid0)) 
+  if (!is.matrix(grid0))
     grid0 <- as.matrix(grid0)
   p <- nrow(fr)
   q <- nrow(grid0)
@@ -44,10 +43,10 @@ tps2d <- function(grid0, fr, to) {
     Xn <- numeric(nrow(grid0))
     p <- nrow(fr)
     for (i in 1:q) {
-      Z <- apply((fr - matrix(grid0[i, ], p, 2, byrow = TRUE))^2, 
+      Z <- apply((fr - matrix(grid0[i, ], p, 2, byrow = TRUE))^2,
                  1, sum)
-      Xn[i] <- coef[p + 1] + coef[p + 2] * grid0[i, 1] + 
-        coef[p + 3] * grid0[i, 2] + sum(coef[1:p] * (Z * 
+      Xn[i] <- coef[p + 1] + coef[p + 2] * grid0[i, 1] +
+        coef[p + 3] * grid0[i, 2] + sum(coef[1:p] * (Z *
                                                        log(Z)))
     }
     return(Xn)
@@ -63,10 +62,10 @@ tps_apply <- function(fr, to, new){
 }
 
 #' Vanilla Thin Plate Splines
-#' 
-#' \code{tps_raw} calculates deformation grids and 
+#'
+#' \code{tps_raw} calculates deformation grids and
 #' returns position of sampled points on it.
-#' 
+#'
 #' @param fr the reference \eqn{(x; y)} coordinates
 #' @param to the target \eqn{(x; y)} coordinates
 #' @param amp an amplification factor of differences between \code{fr} and
@@ -77,29 +76,28 @@ tps_apply <- function(fr, to, new){
 #' longer axis on the outlines
 #' @return a list with two components: \code{grid} the xy coordinates of sampled
 #' points along the grid; \code{dim} the dimension of the grid.
-#' @seealso \link{tps_grid}, \link{tps_iso} and \link{tps_arr},
-#' \link{coo_lolli}, \link{coo_arrows}.
+#' @family thin plate splines
 #' @examples
-#' \dontrun{ 
+#' \dontrun{
 #' data(bot)
 #' ms <- mshapes(efourier(bot, 10), "type")
 #' b <- ms$shp$beer
 #' w <- ms$shp$whisky
 #' g <- tps_raw(b, w)
 #' ldk_plot(g$grid)
-#' 
+#'
 #' # a wavy plot
 #' ldk_plot(g$grid, pch=NA)
 #' cols_ids <- 1:g$dim[1]
 #' for (i in 1:g$dim[2]) lines(g$grid[cols_ids + (i-1)*g$dim[1], ])
 #' }
 #' @export
-tps_raw <- function(fr, to, amp = 1, 
+tps_raw <- function(fr, to, amp = 1,
                     over = 1.2, grid.size = 15) {
   fr.n <- substitute(fr)
   to.n <- substitute(to)  # otherwise problems with substitute in legend below
   # simple magnification
-  if (!missing(amp)) 
+  if (!missing(amp))
     to <- to + (to - fr) * amp
   grid0 <- .grid.sample(fr, to, nside = round(grid.size), over = over)
   res <- list(grid=tps2d(grid0, fr, to),
@@ -109,10 +107,10 @@ tps_raw <- function(fr, to, amp = 1,
 
 
 #' Deformation grids using Thin Plate Splines
-#' 
+#'
 #' \code{tps_grid} calculates and plots deformation grids between two
 #' configurations.
-#' 
+#'
 #' @param fr the reference \eqn{(x; y)} coordinates
 #' @param to the target \eqn{(x; y)} coordinates
 #' @param amp an amplification factor of differences between \code{fr} and
@@ -132,8 +130,7 @@ tps_raw <- function(fr, to, amp = 1,
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing
-#' @seealso \link{tps_iso} and \link{tps_arr},
-#' \link{coo_lolli}, \link{coo_arrows}.
+#' @family thin plate splines
 #' @examples
 #' data(bot)
 #' botF <- efourier(bot)
@@ -142,16 +139,16 @@ tps_raw <- function(fr, to, amp = 1,
 #' to <- x$whisky
 #' tps_grid(fr, to, amp=3, grid.size=10)
 #' @export
-tps_grid <- function(fr, to, amp = 1, 
-                     over = 1.2, grid.size = 15, 
+tps_grid <- function(fr, to, amp = 1,
+                     over = 1.2, grid.size = 15,
                      grid.col = "grey80", poly = TRUE,
-                     shp = TRUE, shp.col = rep(NA, 2), 
-                     shp.border = col_qual(2), shp.lwd = c(1, 1), 
+                     shp = TRUE, shp.col = rep(NA, 2),
+                     shp.border = col_qual(2), shp.lwd = c(1, 1),
                      shp.lty = c(1, 1), legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
   to.n <- substitute(to)  # otherwise problems with substitute in legend below
   # simple magnification
-  if (!missing(amp)) { 
+  if (!missing(amp)) {
     to <- to + (to - fr) * amp
   }
   grid0 <- .grid.sample(fr, to, nside = round(grid.size), over = over)
@@ -159,37 +156,37 @@ tps_grid <- function(fr, to, amp = 1,
   dim.grid <- c(length(unique(grid0[, 1])), length(unique(grid0[, 2])))
   op <- par(mar = rep(0, 4))
   on.exit(par(op))
-  plot(NA, xlim = range(grid1[, 1]), ylim = range(grid1[, 2]), 
+  plot(NA, xlim = range(grid1[, 1]), ylim = range(grid1[, 2]),
        asp = 1, ann = FALSE, axes = FALSE, mar = rep(0, 4))
   for (i in 1:dim.grid[2]) {
-    lines(grid1[(1:dim.grid[1]) + (i - 1) * dim.grid[1], 
+    lines(grid1[(1:dim.grid[1]) + (i - 1) * dim.grid[1],
                 ], col = grid.col)
   }
   for (i in 1:dim.grid[1]) {
-    lines(grid1[(1:dim.grid[2]) * dim.grid[1] - i + 1, ], 
+    lines(grid1[(1:dim.grid[2]) * dim.grid[1] - i + 1, ],
           col = grid.col)
   }
   if (shp) {
     points <- ifelse(poly, FALSE, TRUE)
-    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
-             lty = shp.lty[1], points = points, first.point = FALSE, 
+    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1],
+             lty = shp.lty[1], points = points, first.point = FALSE,
              centroid = FALSE, ...)
-    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
-             lty = shp.lty[2], points = points, first.point = FALSE, 
+    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2],
+             lty = shp.lty[2], points = points, first.point = FALSE,
              centroid = FALSE, ...)
     if (legend | !missing(legend.text)) {
       if (missing(legend.text)) legend.text <- c(fr.n, to.n)
-      legend("topright", legend = legend.text, col = shp.border, 
+      legend("topright", legend = legend.text, col = shp.border,
              lwd = shp.lwd, bty = "n")
     }
   }
 }
 
 #' Deformation 'vector field' using Thin Plate Splines
-#' 
+#'
 #' \code{tps_arr}(ows) calculates deformations between two configurations and
 #' illustrate them using arrows.
-#' 
+#'
 #' @param fr the reference \eqn{(x; y)} coordinates
 #' @param to the target \eqn{(x; y)} coordinates
 #' @param amp an amplification factor of differences between \code{fr} and
@@ -217,8 +214,7 @@ tps_grid <- function(fr, to, amp = 1,
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return Nothing.
-#' @seealso \link{tps_grid} and \link{tps_iso},
-#' \link{coo_lolli}, \link{coo_arrows}.
+#' @family thin plate splines
 #' @examples
 #' data(bot)
 #' botF <- efourier(bot)
@@ -228,17 +224,17 @@ tps_grid <- function(fr, to, amp = 1,
 #' tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3)
 #' tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3, grid=FALSE)
 #' @export
-tps_arr <- function(fr, to, amp = 1, 
-                    grid = TRUE, over = 1.2, palette = col_summer, 
-                    arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20, 
-                    arr.lwd = 0.75, arr.col = "grey50", poly = TRUE, 
+tps_arr <- function(fr, to, amp = 1,
+                    grid = TRUE, over = 1.2, palette = col_summer,
+                    arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20,
+                    arr.lwd = 0.75, arr.col = "grey50", poly = TRUE,
                     shp = TRUE, shp.col = rep(NA, 2),
                     shp.border = col_qual(2),
                     shp.lwd = c(2, 2), shp.lty = c(1, 1),
                     legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
   to.n <- substitute(to)  # otherwise problems with substitute in legend below
-  if (!missing(amp)) 
+  if (!missing(amp))
     to <- to + (to - fr) * amp
   if (grid){
     grid0 <- .grid.sample(fr, to, nside = round(sqrt(arr.nb)), over = over)
@@ -250,41 +246,41 @@ tps_arr <- function(fr, to, amp = 1,
   # grille simple, on affiche d'abord les deux courbes
   op <- par(mar = rep(0, 4))
   on.exit(par(op))
-  plot(NA, xlim = range(grid0[, 1]), ylim = range(grid0[, 2]), 
+  plot(NA, xlim = range(grid0[, 1]), ylim = range(grid0[, 2]),
        asp = 1, axes = FALSE, ann = FALSE, mar = rep(0, 4))
   if (missing(arr.levels)) {
     arr.levels = arr.nb
   }
   if (!missing(palette)) {
-    q.lev <- cut(edm(grid0, grid1), breaks = arr.levels, 
+    q.lev <- cut(edm(grid0, grid1), breaks = arr.levels,
                  labels = FALSE)
     arr.cols <- palette(arr.levels)[q.lev]
   } else {
     arr.cols <- rep(arr.col, nrow(grid0))
   }
-  arrows(grid0[, 1], grid0[, 2], grid1[, 1], grid1[, 2], length = arr.len, 
+  arrows(grid0[, 1], grid0[, 2], grid1[, 1], grid1[, 2], length = arr.len,
          angle = arr.ang, lwd = arr.lwd, col = arr.cols)
   if (shp) {
     points <- ifelse(poly, FALSE, TRUE)
-    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
-             lty = shp.lty[1], points = points, first.point = FALSE, 
+    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1],
+             lty = shp.lty[1], points = points, first.point = FALSE,
              centroid = FALSE, ...)
-    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
-             lty = shp.lty[2], points = points, first.point = FALSE, 
+    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2],
+             lty = shp.lty[2], points = points, first.point = FALSE,
              centroid = FALSE, ...)
     if (legend | !missing(legend.text)) {
       if (missing(legend.text)) legend.text <- c(fr.n, to.n)
-      legend("topright", legend = legend.text, col = shp.border, 
+      legend("topright", legend = legend.text, col = shp.border,
              lwd = shp.lwd, bty = "n")
     }
   }
 }
 
 #' Deformation isolines using Thin Plate Splines.
-#' 
+#'
 #' \code{tps_iso} calculates deformations between two configurations and map
 #' them with or without isolines.
-#' 
+#'
 #' @param fr The reference \eqn{(x; y)} coordinates
 #' @param to The target \eqn{(x; y)} coordinates
 #' @param amp An amplification factor of differences between \code{fr} and
@@ -310,8 +306,7 @@ tps_arr <- function(fr, to, amp = 1,
 #' @param legend.text some text for the legend
 #' @param ... additional arguments to feed \link{coo_draw}
 #' @return No returned value
-#' @seealso \link{tps_grid} and \link{tps_arr},
-#' \link{coo_lolli}, \link{coo_arrows}.
+#' @family thin plate splines
 #' @examples
 #' data(bot)
 #' botF <- efourier(bot)
@@ -321,16 +316,16 @@ tps_arr <- function(fr, to, amp = 1,
 #' tps_iso(fr, to, iso.nb=200, amp=3)
 #' tps_iso(fr, to, iso.nb=200, amp=3, grid=TRUE)
 #' @export
-tps_iso <- function(fr, to, amp = 1, 
-                    grid = FALSE, over = 1.2, palette = col_spring, 
+tps_iso <- function(fr, to, amp = 1,
+                    grid = FALSE, over = 1.2, palette = col_spring,
                     iso.nb = 1000, iso.levels = 12,
-                    cont = TRUE, cont.col = "black", 
-                    poly = TRUE, shp = TRUE, shp.border = col_qual(2), 
+                    cont = TRUE, cont.col = "black",
+                    poly = TRUE, shp = TRUE, shp.border = col_qual(2),
                     shp.lwd = c(2, 2), shp.lty = c(1, 1),
                     legend = TRUE, legend.text, ...) {
   fr.n <- substitute(fr)
   to.n <- substitute(to)  # otherwise problems with substitute in legend below
-  if (!missing(amp)) 
+  if (!missing(amp))
     to <- to + (to - fr) * amp
   if (grid) {
     grid0 <- .grid.sample(fr, to, nside = round(sqrt(iso.nb)), over = over)
@@ -354,25 +349,25 @@ tps_iso <- function(fr, to, amp = 1,
   image(x, y, im, col = iso.cols, asp = 1,
         xlim = range(grid0[, 1]),
         ylim = range(grid0[, 2]),
-        axes = FALSE, frame = FALSE, 
+        axes = FALSE, frame = FALSE,
         ann = FALSE)
   if (cont) {
     contour(x, y, im, nlevels = iso.levels,
-            add = TRUE, drawlabels = FALSE, 
+            add = TRUE, drawlabels = FALSE,
             col = cont.col, lty = 2)
   }
   if (shp) {
     points <- ifelse(poly, FALSE, TRUE)
-    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1], 
-             lty = shp.lty[1], points = points, first.point = FALSE, 
+    coo_draw(fr, border = shp.border[1], col = NA, lwd = shp.lwd[1],
+             lty = shp.lty[1], points = points, first.point = FALSE,
              centroid = FALSE, ...)
-    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2], 
-             lty = shp.lty[2], points = points, first.point = FALSE, 
+    coo_draw(to, border = shp.border[2], col = NA, lwd = shp.lwd[2],
+             lty = shp.lty[2], points = points, first.point = FALSE,
              centroid = FALSE, ...)
     if (legend | !missing(legend.text)) {
       if (missing(legend.text)) legend.text <- c(fr.n, to.n)
-      legend("topright", legend = legend.text, col = shp.border, 
+      legend("topright", legend = legend.text, col = shp.border,
              lwd = shp.lwd, bty = "n")
     }
   }
-} 
+}

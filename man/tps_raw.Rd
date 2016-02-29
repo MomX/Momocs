@@ -25,11 +25,11 @@ a list with two components: \code{grid} the xy coordinates of sampled
 points along the grid; \code{dim} the dimension of the grid.
 }
 \description{
-\code{tps_raw} calculates deformation grids and 
+\code{tps_raw} calculates deformation grids and
 returns position of sampled points on it.
 }
 \examples{
-\dontrun{ 
+\dontrun{
 data(bot)
 ms <- mshapes(efourier(bot, 10), "type")
 b <- ms$shp$beer
@@ -44,7 +44,8 @@ for (i in 1:g$dim[2]) lines(g$grid[cols_ids + (i-1)*g$dim[1], ])
 }
 }
 \seealso{
-\link{tps_grid}, \link{tps_iso} and \link{tps_arr},
-\link{coo_lolli}, \link{coo_arrows}.
+Other thin plate splines: \code{\link{tps2d}},
+  \code{\link{tps_arr}}, \code{\link{tps_grid}},
+  \code{\link{tps_iso}}
 }
 

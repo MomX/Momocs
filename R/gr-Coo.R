@@ -1,7 +1,7 @@
 ##### Main Coo (Out/Opn/Ldk) plotters
 
 # plot ----------------------------------------------------
-#' Plots Coo objects: plot (quick review)
+#' Graphical inspection of shapes
 #'
 #' Allows to plot shapes, individually, for \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 #' @param x the \link{Coo} object
@@ -9,7 +9,7 @@
 #' random shape is plotted. If passed with \code{'all'} all shapes are plotted,
 #' one by one.
 #' @param ... further arguments to be passed to \link{coo_plot}
-#' @seealso \link{panel.Coo}, \link{stack.Coo}.
+#' @family Coo_graphics
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -43,10 +43,8 @@ plot.Coo <- function(x, id, ...) {
   }
 }
 
-# todo: gestion links plot.Ldk <- plot.Coo
-
 # stack ----------------------------------------------------
-#' Plots Coo objects: stack (all shapes in the same frame)
+#' Family picture of shapes
 #'
 #' Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
 #' object.
@@ -77,10 +75,7 @@ plot.Coo <- function(x, id, ...) {
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param ... further arguments to be passed to \link{coo_plot}
-#' @seealso \link{panel.Coo}, \link{plot.Coo}.
-#' @note When applied on a \link{OutCoe} object, a wrapper
-#' for \code{stack(as.Out(OutCoe), ...)}. In that case,
-#' \code{...} feeds \code{stack} itself. (same thing for \code{OpnCoe} to come)
+#' @family Coo_graphics
 #' @examples
 #' \dontrun{
 #' data(bot)
@@ -248,11 +243,12 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   }
 }
 
-
-#' A family picture of a Coo object: all shapes in the same plot
+# stack2 ----
+#' Family picture of shapes (ggplot2)
 #'
 #' Will replace stack soon.
 #' @param Coo a Coo object
+#' Family picture of shapes
 #' @return a ggplot2 object
 #' @examples
 #' data(bot)
@@ -267,7 +263,7 @@ stack2 <- function(Coo){
 }
 
 # panel ---------------------------------------------------
-#' Plots Coo objects: panel (family picture)
+#' Family picture of shapes
 #'
 #' Plots all the outlines, side by side, from
 #' a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
@@ -292,7 +288,7 @@ stack2 <- function(Coo){
 #' @param nb.pts the number of points to use for the shape reconstruction
 #' @param ... further arguments to maintain consistency with the generic \link{plot}.
 #' @note If you want to reorder shapes according to a factor, use \link{arrange}.
-#' @seealso \link{stack.Coo}, \link{plot.Coo}.
+#' @family Coo_graphics
 #' @examples
 #' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)
@@ -508,15 +504,16 @@ panel.Ldk <- function(x, cols, borders, fac,
   }
 }
 
-
-#' A family picture of a Coo object: all shapes side by side
+# panel2 -----
+#' Family picture of shapes (ggplot2)
 #'
-#' Will replace panel soon.
+#' May replace panel one day.
 #' @param Coo a Coo object
 #' @return a ggplot2 object
 #' @examples
 #' data(shapes)
 #' panel2(shapes)
+#' @family Coo_graphics
 #' @export
 panel2 <- function(Coo){
   df <- as_df(Coo)

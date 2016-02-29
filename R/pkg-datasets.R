@@ -10,6 +10,7 @@
 #' @source  Images have been grabbed on the internet and prepared by the package's
 #' authors. No particular choice has been made on the dimension of the original
 #' images or the brands cited here.
+#' @family datasets
 NULL
 
 #' Data: Outline coordinates of cephalic outlines of trilobite
@@ -22,6 +23,7 @@ NULL
 #' @source  Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
 #' The original data included 51 outlines and 5 ontogenetic stages,
 #' but one of them has just a single outline thas has been removed.
+#' @family datasets
 NULL
 
 #' Data: Outline coordinates of mosquito wings.
@@ -34,6 +36,7 @@ NULL
 #' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
 #' description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic Biology}: 302-317.
 #' Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
+#' @family datasets
 NULL
 
 #' Data: Outline coordinates of hand-drawn hearts
@@ -44,7 +47,9 @@ NULL
 #' @format A \link{Out} object with the outline coordinates of 240 hand-drawn hearts
 #' by 8 different persons, with 4 landmarks.
 #' @source We thank the fellows of the Ecology Department of the French Institute
-#' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered, and degraded to 80 coordinates per outline.
+#' of Pondicherry that drawn the hearts, that then have been smoothed, scaled, centered,
+#' and downsampled to 80 coordinates per outline.
+#' @family datasets
 NULL
 
 #' Data: Outline coordinates of olive seeds open outlines.
@@ -62,6 +67,7 @@ NULL
 #' Historical biogeography of olive domestication (\emph{Olea europaea} L.)
 #' as revealed by geometrical morphometry applied to biological and
 #' archaeological material. \emph{Journal of Biogeography} \bold{31}: 63-77.
+#' @family datasets
 NULL
 
 #' Data: Outline coordinates of various shapes
@@ -70,7 +76,8 @@ NULL
 #' @name shapes
 #' @rdname data_shapes
 #' @format An \link{Out} object with the outline coordinates of some various shapes.
-#' @source Borrowed from default shapes from (c) Adobe Photoshop.
+#' @source Borrowed default shapes from (c) Adobe Photoshop. Do not send me to jail.
+#' @family datasets
 NULL
 
 #' Data: Landmarks coordinates of mosquito wings
@@ -80,6 +87,7 @@ NULL
 #' @rdname data_wings
 #' @format A \link{Ldk} object containing 18 (x; y) landmarks  from 127 mosquito wings, from
 #' @source Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
+#' @family datasets
 NULL
 
 #' Data: Configuration of landmarks of oak leaves
@@ -92,6 +100,7 @@ NULL
 #' @source Viscosi, V., & Cardini, A. (2011). Leaf morphology, taxonomy and
 #' geometric morphometrics: a simplified protocol for beginners.
 #' PloS One, 6(10), e25630. doi:10.1371/journal.pone.0025630
+#' @family datasets
 NULL
 
 #' Data: Outline coordinates of 360 molars
@@ -111,6 +120,7 @@ NULL
 #' outlines as a standardization procedure for elliptic fourier analysis.
 #' \emph{American Journal of Physical Anthropology}, 153(2), 314-22. doi:10.1002/ajpa.22428
 #' \url{http://onlinelibrary.wiley.com/doi/10.1002/ajpa.22428/abstract}
+#' @family datasets
 NULL
 
 #' Data: Measurement of iris flowers
@@ -122,6 +132,7 @@ NULL
 #' (petal + sepal) x (length x width) on 3 species of iris. This dataset is
 #' the classical \link{iris} formatted for Momocs.
 #' @source see link{iris}
+#' @family datasets
 NULL
 
 #' Data: Landmark and semilandmark coordinates on cereal glumes
@@ -134,4 +145,5 @@ NULL
 #' @source Research support was provided by the European Research Council
 #' (Evolutionary Origins of Agriculture (grant no. 269830-EOA)
 #' PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Forster.
+#' @family datasets
 NULL

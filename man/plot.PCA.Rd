@@ -166,6 +166,7 @@ Widely inspired by the "layers" philosophy behind graphical functions
 of the ade4 R package.
 }
 \examples{
+\dontrun{
 data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
@@ -268,6 +269,7 @@ plot(bp, axisvar=FALSE, axisnames=FALSE, rug=FALSE, box=FALSE, title="random")
 # no eigen
 plot(bp, eigen=FALSE) # eigen cause troubles to graphical window
 # eigen may causes troubles to the graphical window. you can try old.par = TRUE
+}
 }
 \seealso{
 \link{plot.LDA}

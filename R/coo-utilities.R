@@ -1,11 +1,4 @@
 ##### Come various coo utility a family of functions that do
-##### simple functions on 2d coordinates (further abbreviated as
-##### 'shape' (either outlines, open outlines or lanfmarks) they
-##### can be passed either as two-column matrices colnames ('x'
-##### and 'y' colnaming is not mandatory) or as a list with $x
-##### and $y components.  and returns a (named) \code{matrix} of
-##### coordinates.  Some of them, likely the most used, have also
-##### Coo methods.
 
 # coo_check ----------------
 #' Checks shapes
@@ -54,6 +47,7 @@ coo_check.Coo <- function(coo){
 #' Returns the number of coordinates, for a single shape or a Coo object
 #' @inheritParams coo_check
 #' @return either a single numeric or a vector of numeric
+#' @family coo_ utilities
 #' @examples
 #' # single shape
 #' coo_nb(bot[1])
@@ -81,6 +75,7 @@ coo_nb.Coo <- function(coo){
 #'
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family coo_ utilities
 #' @examples
 #' coo_plot(bot[1])
 #' # same as
@@ -126,6 +121,7 @@ coo_centre <- coo_center
 #' @inheritParams coo_check
 #' @param scale the scaling factor, by default, the centroid size.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family coo_ utilities
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_scale(bot[1]))
@@ -172,6 +168,7 @@ coo_scale.Coo <- function(coo, scale) {
 #' @inheritParams coo_check
 #' @param k \code{numeric} scaling factor
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family coo_ utilities
 #' @examples
 #' coo <- shapes[11] %>% coo_template()
 #' coo_plot(coo, xlim=c(-1, 1))
@@ -204,6 +201,7 @@ coo_scaley <- function(coo, k=1){
 #' @param size \code{numeric}. Indicates the length of the side 'inscribing'
 #' the shape.
 #' @return Returns a matrix of \code{(x; y)}coordinates.
+#' @family coo_ utilities
 #' @examples
 #'
 #' data(bot)
@@ -252,6 +250,7 @@ coo_template.Coo <- function(coo, size=1){
 #' @param coo either a \code{matrix} of (x; y) coordinates, or any \link{Coo} object.
 #' @param theta \code{numeric}the angle (in radians) to rotate shapes.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family coo_ utilities
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_rotate(bot[1], pi/2))
@@ -287,6 +286,8 @@ coo_rotate.Coo <- function(coo, theta = 0) {
 #' @param theta \code{numeric} the angle (in radians) to rotate shapes.
 #' @param center \code{numeric} the (x; y) position of the center
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family rotation functions
+#' @family coo_ utilities
 #' @examples
 #' b <- bot[1]
 #' coo_plot(b)
@@ -298,8 +299,7 @@ coo_rotatecenter <- function(coo, theta, center = c(0, 0)) {
 }
 
 #' @export
-coo_rotatecenter.default <- function(coo, theta, center = c(0,
-                                                            0)) {
+coo_rotatecenter.default <- function(coo, theta, center = c(0,0)) {
   coo <- coo_trans(coo, -center[1], -center[2])
   coo <- coo_rotate(coo, theta)
   return(coo_trans(coo, center[1], center[2]))
@@ -329,6 +329,7 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
 #' stack(bot)
 #' stack(coo_align(bot))
 #' @family aligning functions
+#' @family coo_ utilities
 #' @export
 coo_align <- function(coo) {
   UseMethod("coo_align")
@@ -365,6 +366,7 @@ coo_align.Coo <- function(coo) {
 #' coo_plot(coo_alignxax(b))
 #' }
 #' @family aligning functions
+#' @family coo_ utilities
 #' @export
 coo_alignxax <- function(coo) {
   UseMethod("coo_alignxax")
@@ -402,6 +404,7 @@ coo_alignxax.Coo <- function(coo) {
 #' stack(bot.al)
 #' }
 #' @family aligning functions
+#' @family coo_ utilities
 #' @export
 coo_aligncalliper <- function(coo) {
   UseMethod("coo_aligncalliper")
@@ -435,6 +438,7 @@ coo_aligncalliper.Coo <- function(coo) {
 #' stack(coo_alignminradius(hearts))
 #' }
 #' @family aligning functions
+#' @family coo_ utilities
 #' @export
 coo_alignminradius <- function(coo){
   UseMethod("coo_alignminradius")
@@ -465,6 +469,7 @@ coo_alignminradius.Coo <- function(coo){
 #' @param x \code{numeric} translation along the x-axis.
 #' @param y \code{numeric} translation along the y-axis.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family coo_ utilities
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_trans(bot[1], 50, 100))
@@ -508,6 +513,7 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' sh2 <- coo_slice(hearts, c(12, 24, 36, 48))
 #' panel(sh2[[1]])
 #' @family slicing functions
+#' @family coo_ utilities
 #' @export
 coo_slice <- function(coo, ids){
   UseMethod("coo_slice")
@@ -581,6 +587,7 @@ coo_slice.Coo <- function(coo, ids){
 #' replace=TRUE)
 #' stack(coo_slide(hearts, id1=id1_random))
 #' @family sliding functions
+#' @family coo_ utilities
 #' @export
 coo_slide <- function(coo, id1, ldk) {
   UseMethod("coo_slide")
@@ -651,7 +658,9 @@ coo_slide.Coo <- function(coo, id1, ldk) {
 #' # on Coo objects
 #' stack(bot)
 #' stack(coo_slidedirection(bot, 'E'))
+#'
 #' @family sliding functions
+#' @family coo_ utilities
 #' @export
 coo_slidedirection <- function(coo, direction, center, id) {
   UseMethod("coo_slidedirection")
@@ -720,6 +729,7 @@ coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = TRUE) {
 #' # that's what we meant
 #' coo_plot(coo_slidegap(cat_down))
 #' @family sliding functions
+#' @family coo_ utilities
 #' @export
 coo_slidegap <- function(coo, force){
   UseMethod("coo_slidegap")
@@ -762,6 +772,7 @@ coo_slidegap.Coo <- function(coo, force=FALSE){
 #' coo_plot(b)
 #' coo_plot(coo_sample(b, 24))
 #' @family sampling functions
+#' @family coo_ utilities
 #' @examples
 #' coo_extract(bot[1], c(3, 9, 12) # or :
 #' bot[1] %>% coo_extract(c(3, 9, 12))
@@ -810,6 +821,7 @@ coo_extract.Coo <- function(coo, ids){
 #' coo_plot(b)
 #' coo_plot(coo_sample(b, 24))
 #' @family sampling functions
+#' @family coo_ utilities
 #' @export
 coo_sample <- function(coo, n) {
   UseMethod("coo_sample")
@@ -863,6 +875,7 @@ coo_sample.Opn <- coo_sample.Out
 #' cpos <- coo_centpos(bot[1])
 #' segments(cpos[1], cpos[2], rr[, 1], rr[, 2])
 #' @family sampling functions
+#' @family coo_ utilities
 #' @export
 coo_samplerr <- function(coo, n) {
   UseMethod("coo_samplerr")
@@ -914,6 +927,7 @@ coo_samplerr.Coo <- function(coo, n) {
 #' coo_plot(bot[1])
 #' coo_plot(coo_interpolate(coo_sample(bot[1], 12), 120))
 #' @family sampling functions
+#' @family coo_ utilities
 #' @export
 coo_interpolate <- function(coo, n) {
   UseMethod("coo_interpolate")
@@ -960,6 +974,7 @@ coo_interpolate.Coo <- function(coo, n) {
 #' coo_plot(bot[1])
 #' coo_plot(coo_smooth(bot[1], 30))
 #' @family smoothing functions
+#' @family coo_ utilities
 #' @export
 coo_smooth <- function(coo, n) {
   UseMethod("coo_smooth")
@@ -1001,6 +1016,7 @@ coo_smooth.Coo <- function(coo, n) {
 #' coo_draw(coo_smooth(o, 24), border='blue', points=FALSE)
 #' coo_draw(coo_smoothcurve(o, 24), border='red', points=FALSE)
 #' @family smoothing functions
+#' @family coo_ utilities
 #' @export
 coo_smoothcurve <- function(coo, n) {
   UseMethod("coo_smoothcurve")
@@ -1037,6 +1053,7 @@ coo_smoothcurve.Opn <- function(coo, n) {
 #' @aliases is_closed
 #' @inheritParams coo_check
 #' @return a single or a vector of \code{logical}.
+#' @family coo_ utilities
 #' @examples
 #' is_closed(matrix(1:10, ncol=2))
 #' is_closed(coo_close(matrix(1:10, ncol=2)))
@@ -1072,6 +1089,7 @@ is_closed.Coo <- function(coo) {
 #'
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family coo_ utilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo_close(x)
@@ -1108,6 +1126,7 @@ coo_close.Coo <- function(coo) {
 #'
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @family coo_ utilities
 #' @examples
 #' x <- (matrix(1:10, ncol=2))
 #' x2 <- coo_close(x)
@@ -1158,6 +1177,7 @@ coo_unclose.Coo <- function(coo) {
 #' b <- b[1:40,]
 #' coo_plot(b)
 #' coo_draw(coo_force2close(b), border='red')
+#' @family coo_ utilities
 #' @export
 coo_force2close <- function(coo){
   UseMethod("coo_force2close")
@@ -1200,6 +1220,7 @@ coo_force2close.Coo <- function(coo){
 #' coo_draw(coo_sheary(coo, 0.5), border="red")
 #'
 #' @family transforming functions
+#' @family coo_ utilities
 #' @export
 coo_shearx <- function(coo, k){
   UseMethod("coo_shearx")
@@ -1250,6 +1271,7 @@ coo_sheary.Coo <- function(coo, k=1){
 #' shapes2 <- shapes
 #' shapes$coo <- lapply(shapes2$coo, coo_flipx)
 #' @family transforming functions
+#' @family coo_ utilities
 #' @export
 coo_flipx <- function(coo){
   UseMethod("coo_flipx")
@@ -1297,6 +1319,7 @@ coo_flipy.Coo <- function(coo){
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @return a list with two components \code{dx} and \code{dy}
 #' @family exemplifying functions
+#' @family coo_ utilities
 #' @examples
 #' coo_dxy(bot[1])
 #' @export
@@ -1328,6 +1351,7 @@ coo_dxy <- function(coo) {
 #' coo_plot(b)
 #' coo_draw(coo_up(b), border='red')
 #' @family opening functions
+#' @family coo_ utilities
 #' @export
 coo_up <- function(coo, slidegap=FALSE){
   UseMethod("coo_up")
@@ -1372,6 +1396,7 @@ coo_up.Coo <- function(coo, slidegap=FALSE){
 #' coo_plot(b)
 #' coo_draw(coo_down(b), border='red')
 #' @family opening functions
+#' @family coo_ utilities
 #' @export
 coo_down <- function(coo, slidegap=FALSE){
   UseMethod("coo_down")
@@ -1414,6 +1439,7 @@ coo_down.Coo <- function(coo, slidegap=FALSE){
 #' coo_plot(b)
 #' coo_draw(coo_right(b), border='red')
 #' @family opening functions
+#' @family coo_ utilities
 #' @export
 coo_right <- function(coo, slidegap=FALSE){
   UseMethod("coo_right")
@@ -1458,6 +1484,7 @@ coo_right.Coo <- function(coo, slidegap=FALSE){
 #' coo_plot(b)
 #' coo_draw(coo_left(b), border='red')
 #' @family opening functions
+#' @family coo_ utilities
 #' @export
 coo_left <- function(coo, slidegap=FALSE){
   UseMethod("coo_left")
@@ -1488,6 +1515,7 @@ coo_left.Coo <- function(coo, slidegap=FALSE){
 #' Returns the reverse suite of coordinates, i.e. change shape's orientation
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates or a Coo object
+#' @family coo_ utilities
 #' @examples
 #' b <- coo_sample(bot[1], 4)
 #' b
@@ -1524,6 +1552,7 @@ coo_rev.Coo <- function(coo) {
 #' @param ... additional parameter for \link{jitter}
 #' @return a \code{matrix} of (x; y) coordinates or a Coo object
 #' @seealso \link{get_pairs}
+#' @family coo_ utilities
 #' @examples
 #' b <-bot[1]
 #' coo_plot(b, zoom=0.2)
@@ -1545,41 +1574,6 @@ coo_jitter.default <- function(coo, ...){
 coo_jitter.Coo <- function(coo, ...){
   coo$coo <- lapply(coo$coo, coo_jitter, ...)
   coo
-}
-
-
-
-#' Defines landmarks interactively
-#'
-#' Allows to interactively define a \code{nb.ldk} number of landarks on a shape.
-#' Used in other facilities to acquire/manipulate data.
-#' @param coo a \code{matrix} or a list of (x; y) coordinates.
-#' @param nb.ldk \code{integer}, the number of landmarks to define
-#' @return \code{numeric} that corresponds to the closest ids,
-#' on the shape, from cliked points.
-#' @examples
-#' \dontrun{
-#' b <- bot[1]
-#' coo_ldk(b, 3) # run this, and click 3 times
-#' coo_ldk(bot, 2) # this also works on Out
-#' }
-#' @export
-coo_ldk <- function(coo, nb.ldk) {
-  if (is.list(coo))
-    coo <- l2m(coo)
-  coo_plot(coo)
-  ldk <- numeric(nb.ldk)
-  cat("[")
-  for (i in 1:nb.ldk) {
-    p <- l2m(locator(1))
-    l <- apply(coo, 1, function(y) sqrt(sum((p - y)^2)))
-    ldk[i] <- which.min(l)
-    points(coo[ldk[i], 1], coo[ldk[i], 2], pch = 20, col = "red",
-           cex = 0.5)
-    cat("*")
-  }
-  cat("]\n")
-  return(ldk)
 }
 
 # coo_bookstein -------------
@@ -1604,6 +1598,7 @@ coo_ldk <- function(coo, nb.ldk) {
 #' coo_plot(h)
 #' coo_plot(coo_bookstein(h, 20, 57), border='red')
 #' @family baselining functions
+#' @family coo_ utilities
 #' @export
 coo_bookstein <- function(coo, ldk1, ldk2) {
   UseMethod("coo_bookstein")
@@ -1671,6 +1666,7 @@ coo_bookstein.Ldk <- function(coo, ldk1, ldk2) {
 #' stack(hearts)
 #' stack(coo_baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
 #' @family baselining functions
+#' @family coo_ utilities
 #' @export
 coo_baseline <- function(coo, ldk1, ldk2, t1, t2) {
   UseMethod("coo_baseline")
@@ -1742,6 +1738,7 @@ coo_baseline.Coo <- function(coo, ldk1 = 1, ldk2 = 2,
 #' # on a Coo
 #' coo_centpos(bot)
 #' @family centroid functions
+#' @family coo_ utilities
 #' @export
 coo_centpos <- function(coo) {
   UseMethod("coo_centpos")
@@ -1774,6 +1771,7 @@ coo_centpos.Coo <- function(coo) {
 #' # add it to $fac
 #' mutate(bot, size=coo_centsize(bot))
 #' @family centroid functions
+#' @family coo_ utilities
 #' @export
 coo_centsize <- function(coo){
   UseMethod("coo_centsize")
@@ -1803,6 +1801,7 @@ coo_centsize.Coo <- function(coo){
 #' d <- coo_centdist(b)
 #' barplot(d, xlab="Points along the outline", ylab="Distance to the centroid (pixels)")
 #' @family centroid functions
+#' @family coo_ utilities
 #' @export
 coo_centdist <- function(coo) {
   coo <- coo_check(coo)
@@ -1820,6 +1819,7 @@ coo_centdist <- function(coo) {
 #' b <- coo_sample(bot[1], 24)
 #' coo_perimpts(b)
 #' @family perimeter functions
+#' @family coo_ utilities
 #' @export
 coo_perimpts <- function(coo) {
   coo <- coo_check(coo)
@@ -1838,6 +1838,7 @@ coo_perimpts <- function(coo) {
 #' b <- coo_sample(bot[1], 24)
 #' coo_perimcum(b)
 #' @family perimeter functions
+#' @family coo_ utilities
 #' @export
 coo_perimcum <- function(coo) {
   coo <- coo_check(coo)
@@ -1854,6 +1855,7 @@ coo_perimcum <- function(coo) {
 #' coo_perim(bot[1])
 #' hist(sapply(bot$coo, coo_perim), breaks=10)
 #' @family perimeter functions
+#' @family coo_ utilities
 #' @export
 coo_perim <- function(coo) {
   return(sum(coo_perimpts(coo)))
@@ -1878,6 +1880,7 @@ coo_perim <- function(coo) {
 #' coo_plot(b)
 #' segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
 #' @family calliper functions
+#' @family coo_ utilities
 #' @export
 coo_calliper <- function(coo, arr.ind = FALSE) {
   coo <- coo_check(coo)
@@ -1905,6 +1908,7 @@ coo_calliper <- function(coo, arr.ind = FALSE) {
 #' from top and bottom of the shape matrix.
 #' @inheritParams coo_check
 #' @param trim \code{numeric}, the number of coordinates to trim
+#' @family coo_ utilities
 #' @examples
 #' olea[1] %>% coo_sample(12) %T>%
 #'    print() %T>% ldk_plot() %>%

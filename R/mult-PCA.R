@@ -14,7 +14,7 @@
 #' @param scale. logical whether to scale the input data
 #' @param center logical whether to center the input data
 #' @return a 'PCA' object on which to apply \link{plot.PCA}
-#' @seealso \link{plot.PCA}
+#' @family multivariate
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 12)

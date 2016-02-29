@@ -22,4 +22,19 @@ and 'shape factor' sometimes.
 data(bot)
 coo_circularity(bot[1])
 }
+\seealso{
+Other coo_ descriptors: \code{\link{coo_area}},
+  \code{\link{coo_chull}},
+  \code{\link{coo_circularityharalick}},
+  \code{\link{coo_circularitynorm}},
+  \code{\link{coo_convexity}},
+  \code{\link{coo_eccentricityboundingbox}},
+  \code{\link{coo_eccentricityeigen}},
+  \code{\link{coo_elongation}}, \code{\link{coo_length}},
+  \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
+  \code{\link{coo_rectilinearity}},
+  \code{\link{coo_solidity}}, \code{\link{coo_tangle}},
+  \code{\link{coo_theta3}}, \code{\link{coo_thetapts}},
+  \code{\link{coo_width}}
+}
 

@@ -126,6 +126,7 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
 #' that adds a shape on the active plot.
 #' @param coo a \code{list} or a \code{matrix} of coordinates.
 #' @param ... optional parameters for \link{coo_plot}
+#' @family plotting functions
 #' @examples
 #' data(bot)
 #' b1 <- bot[4]
@@ -145,7 +146,7 @@ coo_draw <- function(coo, ...) {
 #' @param pch a pch for the points (default to NA)
 #' @param cex a cex for the points
 #' @param ... optional parameters to fed \link{points} and \link{segments}.
-#' @family thin plate splines functions
+#' @family plotting functions
 #' @examples
 #' data(olea)
 #' coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
@@ -203,6 +204,7 @@ coo_arrows <- function(coo1, coo2,
 #' @param normalize logical whether to normalize (TRUE by default) distances
 #' @param ... other paremeters to fed segments, eg lwd (see examples)
 #' @return nothing
+#' @family plotting functions
 #' @examples
 #' data(bot)
 #' ms <- mshapes(efourier(bot , 10), "type")
@@ -344,6 +346,8 @@ ldk_plot <- function(coo, ...){
 #' @param d how far from the coordinates, on a (centroid-landmark) segment
 #' @param cex the cex for the label
 #' @param ... additional parameters to fed \link{text}
+#' @family plotting functions
+#' @family ldk plotters
 #' @examples
 #' data(wings)
 #' coo_plot(wings[1])
@@ -373,7 +377,8 @@ ldk_labels <- function(ldk, d = 0.05, cex = 2/3, ...) {
 #' @param links a matrix of links. On the first column the starting-id,
 #' on the second column the ending-id (id= the number of the coordinate)
 #' @param ... additional parameters to fed \link{segments}
-#' @family ldk functions
+#' @family plotting functions
+#' @family ldk plotters
 #' @export
 ldk_links <- function(ldk, links, ...) {
   ldk <- ldk_check(ldk)
@@ -396,7 +401,8 @@ ldk_links <- function(ldk, links, ...) {
 #' data(wings)
 #' coo_plot(mshapes(wings))
 #' ldk_confell(wings$coo)
-#' @family ldk functions
+#' @family plotting functions
+#' @family ldk plotters
 #' @export
 ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
                         ax = TRUE, ax.lty = 2) {
@@ -431,7 +437,8 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' data(wings)
 #' coo_plot(mshapes(wings))
 #' ldk_contour(wings$coo)
-#' @family ldk functions
+#' @family plotting functions
+#' @family ldk plotters
 #' @export
 ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
   ldk <- ldk_check(ldk)
@@ -457,7 +464,8 @@ ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
 #' data(wings)
 #' coo_plot(mshapes(wings))
 #' ldk_chull(wings$coo)
-#' @family ldk functions
+#' @family plotting functions
+#' @family ldk plotters
 #' @export
 ldk_chull <- function(ldk, col = "grey40", lty = 1) {
   ldk <- ldk_check(ldk)
@@ -503,7 +511,7 @@ ldk_chull <- function(ldk, col = "grey40", lty = 1) {
 #' plot_devsegments(out.6, cols=cols, lwd=4)
 #' coo_draw(out.6, lty=2, points=FALSE, col=NA)
 #' par(xpd=FALSE)
-#' @family ldk functions
+#' @family plotting functions
 #' @export
 plot_devsegments <- function(coo, cols, lwd = 1) {
   nr <- nrow(coo)
@@ -525,6 +533,7 @@ plot_devsegments <- function(coo, cols, lwd = 1) {
 #' @return a list with $ell coordinates of the ellipse and $seg coordinates
 #' of its vertices
 #' @return a matrix of (x; y) coordinates to draw the ellipsis
+#' @family plotting functions
 #' @examples
 #' x <- rnorm(100, sd=3)
 #' y <- rnorm(100)

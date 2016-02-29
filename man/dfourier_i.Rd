@@ -52,4 +52,8 @@ title('Discrete Cosine Transforms')
  \item Many thanks to Remi Laffont for the translation in R).
 }
 }
+\seealso{
+Other dfourier: \code{\link{dfourier_shape}},
+  \code{\link{dfourier}}
+}
 

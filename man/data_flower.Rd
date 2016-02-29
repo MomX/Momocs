@@ -13,4 +13,11 @@ see link{iris}
 \description{
 Data: Measurement of iris flowers
 }
+\seealso{
+Other datasets: \code{\link{bot}}, \code{\link{chaff}},
+  \code{\link{hearts}}, \code{\link{molars}},
+  \code{\link{mosquito}}, \code{\link{oak}},
+  \code{\link{olea}}, \code{\link{shapes}},
+  \code{\link{trilo}}, \code{\link{wings}}
+}
 

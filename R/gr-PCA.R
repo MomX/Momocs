@@ -9,6 +9,7 @@
 #' Plots Principal Component Analysis
 #'
 #' The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.
+#'
 #' @param x an object of class "PCA", typically obtained with \link{PCA}
 #' @param fac name or the column id from the $fac slot, or a formula combining colum names
 #' from the $fac slot (cf. examples). A factor or a numeric of the same length
@@ -82,6 +83,7 @@
 #' of the ade4 R package.
 #' @seealso \link{plot.LDA}
 #' @examples
+#' \dontrun{
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
@@ -184,7 +186,9 @@
 #' # no eigen
 #' plot(bp, eigen=FALSE) # eigen cause troubles to graphical window
 #' # eigen may causes troubles to the graphical window. you can try old.par = TRUE
+#' }
 #' @method plot PCA
+#' @name plot.PCA
 #' @export
 plot.PCA <- function(x, fac, xax=1, yax=2,
                      #points arguments
@@ -394,6 +398,10 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     invisible(data.frame(x=xy[, 1], y=xy[, 2], fac=fac))
 }
 
+#' #' @describeIn plot.PCA
+#' #' @export
+#' mplot <- plot.PCA
+
 #' Plots a combination of the three first PCs
 #'
 #' Creates a 2 x 3 layout with, from top to bottom and form left to right: PC1-PC2,
@@ -436,8 +444,6 @@ plot3.PCA <- function(PCA,  ... ){
     invisible(data.frame(x=PCA$x[, 1], y=PCA$x[, 2], z=PCA$x[, 3], fac=df$fac))
 }
 
-#' @export
-mplot <- plot.PCA
 
 #' Boxplot on PCA objects
 #'

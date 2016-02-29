@@ -33,4 +33,8 @@ panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=0.5, nb.h=6)))))
 # some worms
 panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=2, nb.h=6)))))
 }
+\seealso{
+Other dfourier: \code{\link{dfourier_i}},
+  \code{\link{dfourier}}
+}
 

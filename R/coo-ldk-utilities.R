@@ -11,7 +11,7 @@
 #'
 #' @param ldk a \code{matrix} of (x; y) coordinates, a list, or an array.
 #' @return an \code{array} of (x; y) coordinates.
-#' @seealso \link{coo_check}
+#' @family ldk helpers
 #' @examples
 #' #coo_check('Not a shape')
 #' #coo_check(matrix(1:10, ncol=2))
@@ -38,11 +38,12 @@ ldk_check <- function(ldk) {
 }
 
 
-#' Create links (all pariwise combinations) between landmarks
-#' 
+#' Creates links (all pariwise combinations) between landmarks
+#'
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @return a matrix that can be passed to \link{ldk_links}, etc. The columns
 #' are the row ids of the original shape.
+#' @family ldk helpers
 #' @examples
 #' data(wings)
 #' w <- wings[1]
@@ -56,12 +57,13 @@ links_all <- function(coo) {
     return(links)
 }
 
-#' Create links (Delaunay triangulation) between landmarks
-#' 
+#' Creates links (Delaunay triangulation) between landmarks
+#'
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @return a matrix that can be passed to \link{ldk_links}, etc. The columns
 #' are the row ids of the original shape.
 #' @details uses \link{delaunayn} in the \code{geometry} package.
+#' @family ldk helpers
 #' @examples
 #' data(wings)
 #' w <- wings[1]
@@ -75,14 +77,49 @@ links_delaunay <- function(coo) {
     links <- rbind(links[, -1], links[, -2], links[, -3])
     links <- links[-which(duplicated(links)), ]
     return(links)
-} 
+}
 
-#' An utility to define links between landmarks
-#' 
+
+#' Defines landmarks interactively
+#'
+#' Allows to interactively define a \code{nb.ldk} number of landarks on a shape.
+#' Used in other facilities to acquire/manipulate data.
+#' @param coo a \code{matrix} or a list of (x; y) coordinates.
+#' @param nb.ldk \code{integer}, the number of landmarks to define
+#' @return \code{numeric} that corresponds to the closest ids,
+#' on the shape, from cliked points.
+#' @examples
+#' \dontrun{
+#' b <- bot[1]
+#' coo_ldk(b, 3) # run this, and click 3 times
+#' coo_ldk(bot, 2) # this also works on Out
+#' }
+#' @export
+coo_ldk <- function(coo, nb.ldk) {
+  if (is.list(coo))
+    coo <- l2m(coo)
+  coo_plot(coo)
+  ldk <- numeric(nb.ldk)
+  cat("[")
+  for (i in 1:nb.ldk) {
+    p <- l2m(locator(1))
+    l <- apply(coo, 1, function(y) sqrt(sum((p - y)^2)))
+    ldk[i] <- which.min(l)
+    points(coo[ldk[i], 1], coo[ldk[i], 2], pch = 20, col = "red",
+           cex = 0.5)
+    cat("*")
+  }
+  cat("]\n")
+  return(ldk)
+}
+
+#' Defines links between landmarks
+#'
 #' Works on Ldk objects, on 2cols matrices, 3dim arrays (msshapes turns it into a matrix).
 #' @param x Ldk, matric or array
-#' @param nb.ldk numeric the iterative procedure is stopped when the 
+#' @param nb.ldk numeric the iterative procedure is stopped when the
 #' user click on the top of the graphical window.
+#' @family ldk helpers
 #' @examples
 #' \dontrun{
 #' data(wings)
@@ -114,13 +151,13 @@ def_links.matrix <- function(x, nb.ldk){
     res[2] <- which.min(d)
     return(res)
   }
-  
-  
+
+
   ldk_plot(x)
   ldk_labels(x)
-  
+
   links <- matrix(NA, nrow=ifelse(missing(nb.ldk), 0, nb.ldk), ncol=2)
-  
+
   # case where nb.ldk is specified
   if (!missing(nb.ldk)){
     for (i in 1:nb.ldk){

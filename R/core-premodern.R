@@ -1,15 +1,15 @@
 #' A wrapper to calculates euclidean distances between two points
-#' 
+#'
 #' The main advantage over \link{ed} is that it is a method that can
 #' be passed to different objects and used in combination with \link{measure}.
 #' See examples.
-#' 
+#'
 #' @param x a Ldk (typically), an Out or a matrix
 #' @param id1 id of the 1st row
 #' @param id2 id of the 2nd row
 #' @note On Out objects, we first \link{get_ldk}.
 #' @seealso if you want all pairwise combinations, see \link{truss}
-#' @examples 
+#' @examples
 #' # single shape
 #' d(wings[1], 1, 4)
 #' # Ldk object
@@ -43,16 +43,17 @@ d.Out <- function(x, id1, id2){
 }
 
 #' Measures shape descriptors
-#' 
-#' Calculates shape descriptors on Coo and other objects. 
-#' Any function that returns a scalar when fed coordinates can be passed 
+#'
+#' Calculates shape descriptors on Coo and other objects.
+#' Any function that returns a scalar when fed coordinates can be passed
 #' and naturally those of Momocs (pick some there \code{apropos("coo_")}). Functions
-#' without arguments (eg \link{coo_area}) have to be passed without brackets but 
+#' without arguments (eg \link{coo_area}) have to be passed without brackets but
 #' functions with arguments (eg \link{d}) have to be passed "entirely". See examples.
 #' @param x any \code{Coo} object, or a list of shapes, or a shape as a matrix.
 #' @param ... a list of functions. See examples.
 #' @return a \link{TraCoe} object, or a raw data.frame
-#' @examples 
+#' @family premodern
+#' @examples
 #' # lets write a custom function
 #' coo_ellipse_area <- function(x){
 #'   prod(coo_lw(x))*pi
@@ -60,13 +61,13 @@ d.Out <- function(x, id1, id2){
 #' bm <- measure(bot, coo_area, coo_perim, coo_ellipse_area)
 #' bm
 #' bm$coe
-#' 
+#'
 #' # how to use arguments, eg with the d() function
 #' measure(wings, coo_area, d(1, 3), d(4, 5))
-#' 
+#'
 #' # alternatively
 #' measure(bot$coo, coo_area, coo_perim, coo_ellipse_area)
-#' 
+#'
 #' # and also
 #' measure(bot[1], coo_area, coo_perim, coo_ellipse_area)
 #' @export
@@ -109,7 +110,7 @@ measure.Coo <- function(x, ...){
       l[[i]] <- sapply(x$coo, fun_i$fun, fun_i$args)
       # otherwise, classical case
     } else {
-      l[[i]] <- sapply(x$coo, funs[i])    
+      l[[i]] <- sapply(x$coo, funs[i])
     }
   }
   coe <- l %>% as.data.frame()
@@ -126,23 +127,24 @@ measure_nse <- function(ch){
   open_par <- regexpr("\\(", ch)
   if (open_par == -1) return(ch)
   fun  <- substr(ch, 1, (open_par-1))
-  args <- substr(ch, open_par+1, nchar(ch)-1) %>% strsplit(",") 
+  args <- substr(ch, open_par+1, nchar(ch)-1) %>% strsplit(",")
   list(fun=fun, args=args[[1]])
 }
 
 #' Truss measurement
-#' 
+#'
 #' A method to calculate on shapes or on Coo truss measurements,
 #' which is all pairwise combinations of euclidean distances
 #' @param x a shape or an Ldk object
 #' @return a named numeric or matrix
 #' @note Mainly implemented for historical/didactical reasons.
+#' @family premodern
 #' @examples
 #' # example on a single shape
 #' data(shapes)
 #' cat <- coo_sample(shapes[4], 6)
 #' truss(cat)
-#' 
+#'
 #' # example on wings dataset
 #' data(wings)
 #' tx <- truss(wings)
@@ -150,7 +152,7 @@ measure_nse <- function(ch){
 #' # we normalize and plot an heatmap
 #' txn <- apply(tx$coe, 2, .normalize)
 #' # heatmap(txn)
-#' 
+#'
 #' txp <- PCA(tx, scale. = TRUE, center=TRUE, fac=wings$fac)
 #' plot(txp, 1)
 #' @export

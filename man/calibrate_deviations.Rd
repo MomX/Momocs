@@ -53,4 +53,9 @@ gg + labs(col="Number of harmonics", fill="Number of harmonics",
 gg + coord_polar()
 }
 }
+\seealso{
+Other calibration: \code{\link{calibrate_harmonicpower}},
+  \code{\link{calibrate_r2}},
+  \code{\link{calibrate_reconstructions}}
+}
 

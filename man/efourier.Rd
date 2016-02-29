@@ -42,50 +42,7 @@ coefficient.} \item{co }{\code{co} Harmonic coefficient.}
 from a matrix (or a list) of (x; y) coordinates.
 }
 \details{
-These functions and their mathematical background detailed below are here
-detailed to ease their use in new methods but are used internally by methods
-on \code{Out}-objects.
-
-Elliptic Fourier analysis and normalization are calculated as follows. Let
-\eqn{T} be the perimeter of a given closed outline, here considered as the
-period of the signal. One sets \eqn{\omega = 2\pi/T} to be the pulse. Then,
-the curvilinear abscissa, \eqn{t} varies from \eqn{0} to \eqn{T}. One can
-express \eqn{x(t)} and \eqn{y(t)} as: \eqn{ x(t) =
-\frac{a_0}{2}+\sum\limits_{n=1}^{+\infty} a_n\cos n\omega t + b_n\sin
-n\omega t } with \eqn{ a_n = \frac{2}{T}+ \int\limits_{0}^{T} x(t)\cos
-(n\omega t) \mathrm{d} t } \eqn{ b_n = \frac{2}{T}+ \int\limits_{0}^{T}
-x(t)\sin (n\omega t) \mathrm{d} t }
-
-similarly, \eqn{ y(t) = \frac{c_0}{2}+\sum\limits_{n=1}^{+\infty} c_n\cos
-n\omega t + d_n\sin n\omega t } with \eqn{ c_n = \frac{2}{T}+
-\int\limits_{0}^{T} y(t)\cos (n\omega t) \mathrm{d} t } \eqn{d_n =
-\frac{2}{T}+ \int\limits_{0}^{T} y(t)\sin (n\omega t) \mathrm{d} t }
-
-Since the outline contains a \eqn{k} finite number of points, one can
-therefore calculate discrete estimators for every harmonic coefficient of
-the \eqn{n^{th}} harmonics: \eqn{
-a_n=\frac{T}{2\pi^2n^2}\sum\limits_{p=1}^k \frac{\Delta x_p}{\Delta
-t_p}(\cos\frac{2\pi nt_p}{T}-\cos\frac{2\pi nt_{p-1}}{T}) } \eqn{
-b_n=\frac{T}{2\pi^2n^2}\sum\limits_{p=1}^k \frac{\Delta x_p}{\Delta
-t_p}(\sin\frac{2\pi nt_p}{T}-\sin\frac{2\pi nt_{p-1}}{T}) }
-
-\eqn{\Delta x_1=x_1-x_k} and \eqn{c_n} and \eqn{d_n} are calculated
-similarly. \eqn{a_0} and \eqn{c_0} correspond to the estimate of the
-coordinates of the centroid of original outline and are estimated by: \eqn{
-a_0=\frac{2}{T}\sum\limits_{i=1}^p x_i } and \eqn{
-c_0=\frac{2}{T}\sum\limits_{i=1}^p y_i }
-
-Intuitively, for all positive integers \eqn{n}, the sum of a cosine curve
-and a sine curve represent the \eqn{n^{th}} harmonic content of the \eqn{x}
-and \eqn{y} projections of the \eqn{k}-edged polygon, and for any \eqn{n},
-these two curves define an ellipse in the plane. Ferson and colleagues
-noticed that in the 'time' it takes the \eqn{n^{th}} harmonic to traverse
-its ellipse \eqn{n} times, the \eqn{(n+1)^{th}} harmonic has traversed its
-own ellipse \eqn{n+1} times. The reconstruction of the original polygon is
-done by vector adding these ellipses for all harmonics, which echoes
-astronomical Ptolemy's epicycles (see \link{Ptolemy}), and the
-reconstruction obtained from \eqn{N} harmonics is the best possible fit in a
-least-squares sense.
+For the maths behind see the paper in JSS.
 
 Normalization of coefficients has long been a matter of trouble,
 and not only for newcomers. There are two ways of normalizing outlines: the first,
@@ -116,9 +73,7 @@ length (see \code{\link{coo_aligncalliper}}), etc. You should also make the firs
 point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
 to minimize any subsequent problems.
 
-I will dedicate (some day) a vignette to this problem
-asap (fall 2014). In the meantime, contact me should you think we could
-solve this with two brains.
+I will dedicate (some day) a vignette or a paper to this problem.
 }
 \note{
 Directly borrowed for Claude (2008), and also called \code{efourier} there.
@@ -139,9 +94,7 @@ Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
-\link{efourier_i} for the reverse operation. \link{Ptolemy} for an implementation of the
-Ptolemaic ellipses graph sometimes used to illustrate this approach.
-\link{rfourier}, \link{tfourier} for the other members
-of the Fourier's family.
+Other efourier: \code{\link{efourier_i}},
+  \code{\link{efourier_norm}}, \code{\link{efourier_shape}}
 }
 

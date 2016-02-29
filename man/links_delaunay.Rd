@@ -2,7 +2,7 @@
 % Please edit documentation in R/coo-ldk-utilities.R
 \name{links_delaunay}
 \alias{links_delaunay}
-\title{Create links (Delaunay triangulation) between landmarks}
+\title{Creates links (Delaunay triangulation) between landmarks}
 \usage{
 links_delaunay(coo)
 }
@@ -14,7 +14,7 @@ a matrix that can be passed to \link{ldk_links}, etc. The columns
 are the row ids of the original shape.
 }
 \description{
-Create links (Delaunay triangulation) between landmarks
+Creates links (Delaunay triangulation) between landmarks
 }
 \details{
 uses \link{delaunayn} in the \code{geometry} package.
@@ -25,5 +25,9 @@ w <- wings[1]
 coo_plot(w, poly=FALSE)
 links <- links_delaunay(w)
 ldk_links(w, links)
+}
+\seealso{
+Other ldk helpers: \code{\link{def_links}},
+  \code{\link{ldk_check}}, \code{\link{links_all}}
 }
 

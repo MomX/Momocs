@@ -3,7 +3,10 @@
 \name{plot3}
 \alias{plot3}
 \alias{plot3.PCA}
-\title{Plots a combination of the three first PCs}
+\title{#' @describeIn plot.PCA
+#' @export
+mplot <- plot.PCA
+Plots a combination of the three first PCs}
 \usage{
 plot3(PCA, ...)
 

@@ -40,10 +40,22 @@ but in that case, all shapes must have the same number of coordinates (\link{coo
 \note{
 Slightly less optimized than procGPA in the shapes package (~20% on my machine).
 }
+\examples{
+\dontrun{
+# on Ldk
+stack(wings)
+fgProcrustes(wings, tol=0.1) \%>\% stack()
+
+# on Out
+stack(hearts)
+fgProcrustes(hearts) \%>\%  stack()
+}
+}
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
 \seealso{
-Other procrustes functions:: \code{\link{pProcrustes}}
+Other procrustes functions: \code{\link{fProcrustes}},
+  \code{\link{fgsProcrustes}}, \code{\link{pProcrustes}}
 }
 

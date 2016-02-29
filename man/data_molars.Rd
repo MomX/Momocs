@@ -20,4 +20,11 @@ outlines as a standardization procedure for elliptic fourier analysis.
 \description{
 Courtesy of Julien Corny and Florent Detroit.
 }
+\seealso{
+Other datasets: \code{\link{bot}}, \code{\link{chaff}},
+  \code{\link{flower}}, \code{\link{hearts}},
+  \code{\link{mosquito}}, \code{\link{oak}},
+  \code{\link{olea}}, \code{\link{shapes}},
+  \code{\link{trilo}}, \code{\link{wings}}
+}
 

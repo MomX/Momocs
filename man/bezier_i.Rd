@@ -31,5 +31,9 @@ lines(bi, col='red')
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
+Springer 316 pp.
+}
+\seealso{
+Other bezier functions: \code{\link{bezier}}
 }
 

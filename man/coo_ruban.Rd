@@ -47,7 +47,19 @@ coo_ruban(m, d, palette=col_black, lwd=.normalize(d)*10)
 }
 \seealso{
 Other plotting functions: \code{\link{Ntable}},
-  \code{\link{coo_arrows}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_plot}}
+  \code{\link{conf_ell}}, \code{\link{coo_arrows}},
+  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
+  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
+  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
+  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
+  \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
+
+Other plotting functions: \code{\link{Ntable}},
+  \code{\link{conf_ell}}, \code{\link{coo_arrows}},
+  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
+  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
+  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
+  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
+  \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
 }
 

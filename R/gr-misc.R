@@ -218,12 +218,10 @@ col_alpha <- function(cols, transp = 0) {
 }
 
 
-#' @export
 .cex <- function(x) {
   3/(log(x + 1) + 1)
 }
 
-#' @export
 .pch <- function() {
   c(2, 6, 1, 3, 4, 5, 8, 7, 9, 10)}
 

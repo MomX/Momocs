@@ -1,9 +1,9 @@
 # 5. Coe / OutCoe / OpnCoe plotters
 # ------------------------------------------
 #' Boxplot of morphometric coefficients
-#' 
+#'
 #' Explores the distribution of coefficient values.
-#' 
+#'
 #' @param x the \link{Coe} object
 #' @param retain numeric the number of harmonics to retain
 #' @param drop numeric the number of harmonics to drop
@@ -11,12 +11,12 @@
 #' @param ... useless here but maintain the consistency with generic boxplot
 #' @return a ggplot2 object
 #' @aliases boxplot.Coe
-#' @seealso \link{hist.Coe}
+#' @family Coe_graphics
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)
 #' boxplot(bot.f)
-#' 
+#'
 #' data(olea)
 #' op <- opoly(olea)
 #' boxplot(op)
@@ -46,7 +46,7 @@ boxplot.OpnCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
   }
   # otherwise...
   # retain drop is easier to do before the as_df
-  retain <- ifelse(retain<ncol(x$coe), retain, ncol(x$coe)) 
+  retain <- ifelse(retain<ncol(x$coe), retain, ncol(x$coe))
   x$coe <- x$coe[, drop+1 : retain]
   df <- as_df(x)
   # we ggplot
@@ -59,22 +59,22 @@ boxplot.OpnCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
 
 
 #' Histogram of morphometric coefficients
-#' 
+#'
 #' Explores the distribution of coefficient values.
-#' 
+#'
 #' @param x the \link{Coe} object
 #' @param retain numeric the number of harmonics to retain
 #' @param drop numeric the number of harmonics to drop
 #' @param bw the number of bins (range/bw) to display
 #' @param ... useless here but maintain the consistency with generic hist
 #' @return a ggplot2 object
-#' @seealso \link{boxplot.Coe}
+#' @family Coe_graphics
 #' @aliases hist.Coe
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)
 #' hist(bot.f)
-#' 
+#'
 #' data(olea)
 #' op <- opoly(olea)
 #' hist(op)
@@ -90,7 +90,7 @@ hist.OutCoe <- function(x, retain=4, drop=0, bw=20, ...){
   # we ggplot
   gg <- ggplot(df, aes_string(x="value")) +
     geom_histogram(binwidth=diff(range(df$value))/bw) +
-    facet_grid(coeR ~ coeN) + 
+    facet_grid(coeR ~ coeN) +
     labs(x="Coefficient amplitude", y="Freq")
   gg
 }
@@ -104,18 +104,18 @@ hist.OpnCoe <- function(x, retain=4, drop=0, bw=20, ...){
   }
   # otherwise...
   # retain drop is easier to do before the as_df
-  retain <- ifelse(retain<ncol(x$coe), retain, ncol(x$coe)) 
+  retain <- ifelse(retain<ncol(x$coe), retain, ncol(x$coe))
   x$coe <- x$coe[, drop+1 : retain]
   df <- as_df(x)
   gg <- ggplot(df, aes_string(x="value")) +
     geom_histogram(binwidth=diff(range(df$value))/bw) +
-    facet_grid(coefficient ~ .) + 
+    facet_grid(coefficient ~ .) +
     labs(x="Coefficient amplitude", y="Freq")
   gg
 }
 
 #' Harmonic contribution to shape
-#' 
+#'
 #' Calculates contribution of harmonics to shape. The amplitude of every coefficients
 #' of a given harmonic is multiplied by the coefficients provided and the resulting
 #' shapes are reconstructed and plotted. Naturally, only works on Fourier-based methods.
@@ -128,6 +128,7 @@ hist.OpnCoe <- function(x, retain=4, drop=0, bw=20, ...){
 #' @param ylab a title for the y-axis
 #' @param ... additional parameter to pass to \code{\link{coo_draw}}
 #' @rdname harm.contrib
+#' @family Coe_graphics
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
@@ -210,4 +211,4 @@ hcontrib.OutCoe <- function(Coe,
 
 
 
-##### end graphics Coe 
+##### end graphics Coe

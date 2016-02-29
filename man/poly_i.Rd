@@ -32,4 +32,7 @@ for (i in 2:7){
 x <- opoly_i(opoly(o, i))
 coo_draw(x, border=col_summer(7)[i], points=FALSE)  }
 }
+\seealso{
+Other polynomials: \code{\link{npoly}}, \code{\link{opoly}}
+}
 

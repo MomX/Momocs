@@ -27,7 +27,7 @@
 #'  \item \code{mshape} mean values of coefficients in the original matrix
 #'  \item \code{method} inherited from the Coe object (if any)
 #' }
-#' @seealso \link{plot.LDA}, \link{plot_CV}
+#' @family multivariate
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 24)

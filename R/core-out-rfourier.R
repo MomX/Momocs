@@ -5,19 +5,6 @@
 #' \code{rfourier} computes radii variation Fourier analysis from a matrix or a
 #' list of coordinates.
 #'
-#' Given a closed outline, the radius \eqn{r}, taken as the distance from the
-#' outline barycentre and a given point of the outline, can be expressed as a
-#' periodic function of the angle \eqn{\theta}. Harmonics from \eqn{0} to
-#' \eqn{k} approximate the function \eqn{r(\theta)}:
-#'
-#' \eqn{r(\theta)= \frac{1}{2}a_0 + \sum\limits_{n=1}^{k}a_k\cos(w_k\theta +
-#' b_k\sin(w_k\theta)} with: \eqn{ a_n =
-#' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\cos(n\theta_i) } \eqn{ b_n =
-#' \frac{2}{p}\sum\limits_{n=1}^{p}r_i\sin(n\theta_i) } with \eqn{ a_0 =
-#' \sqrt{\frac{2}{p}}\sum\limits_{n=1}^{p}r_i }
-#'
-#' The \eqn{a_n} and \eqn{b_n} harmonic coefficients, extracted for every
-#' individual shape, are then used for multivariate analyses.
 #' @param x A \code{list} or \code{matrix} of coordinates or an \code{Out} object
 #' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
@@ -33,11 +20,8 @@
 #'  \item \code{ao} ao harmonic coefficient.
 #'  \item \code{r} vector of radii lengths.
 #'  }
-#' @seealso \link{rfourier} for rfourier on \link{Out} objects.
-#' \link{rfourier_i} for the inverse operation, \link{rfourier_shape} to play around
-#' with this approach.
-#' \link{efourier}, \link{tfourier} for the other members of the Fourier's
-#' family.
+#' @details see the JSS paper for the maths behind.
+#' @family rfourier
 #' @note Directly borrowed for Claude (2008), and called \code{fourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
@@ -52,7 +36,6 @@
 #' @rdname rfourier
 #' @export
 rfourier <- function(x, ...){UseMethod("rfourier")}
-rFourier <- rfourier
 
 #' @rdname rfourier
 #' @export
@@ -135,15 +118,12 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
   return(res)
 }
 
-
-
 #' Inverse radii variation Fourier transform
 #'
 #' \code{rfourier_i} uses the inverse radii variation transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
 #' obtained computed with \link{rfourier}.
 #'
-#' See \link{efourier} for the mathematical background.
 #'
 #' @param rf A \code{list} with \code{ao}, \code{an} and \code{bn} components,
 #' typically as returned by \code{rfourier}.
@@ -153,8 +133,8 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
 #' \item{angle}{\code{vector} of angles used.} \item{r}{\code{vector} of radii
 #' calculated.}
-#' @seealso \link{efourier} for the reverse operation and also
-#' \code{rfourier_shape}. \link{l2m}, \link{coeff_split} may be useful.
+#' @family rfourier
+#' @details See the JSS paper for the maths behind.
 #' @note Directly borrowed for Claude (2008), and called \code{ifourier1} there.
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
@@ -222,7 +202,7 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
 #' @return A matrix of (x; y) coordinates.
-#' @seealso \link{rfourier_i}, \link{efourier_shape}, \link{tfourier_shape}.
+#' @family rfourier
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' @examples

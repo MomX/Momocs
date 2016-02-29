@@ -60,4 +60,8 @@ r <- numeric()
 for (i in 1:10) { r[i] <- npoly(o, degree=i)$r2 }
 plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 }
+\seealso{
+Other polynomials: \code{\link{opoly_i}},
+  \code{\link{opoly}}
+}
 

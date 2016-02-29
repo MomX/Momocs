@@ -75,7 +75,8 @@ tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3)
 tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3, grid=FALSE)
 }
 \seealso{
-\link{tps_grid} and \link{tps_iso},
-\link{coo_lolli}, \link{coo_arrows}.
+Other thin plate splines: \code{\link{tps2d}},
+  \code{\link{tps_grid}}, \code{\link{tps_iso}},
+  \code{\link{tps_raw}}
 }
 

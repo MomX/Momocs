@@ -55,7 +55,7 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 pp.
 }
 \seealso{
-\link{tfourier} for the reverse operation and also
-\code{tfourier_shape}. \link{tfourier}. \link{l2m}, \link{coeff_split} may be useful.
+Other tfourier: \code{\link{tfourier_shape}},
+  \code{\link{tfourier}}
 }
 

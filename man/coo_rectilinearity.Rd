@@ -4,7 +4,7 @@
 \alias{coo_rectilinearity}
 \title{Calculates the rectilinearity of a shape}
 \source{
-Zunic J, Rosin PL. 2003. Rectilinearity measurements for polygons. 
+Zunic J, Rosin PL. 2003. Rectilinearity measurements for polygons.
 IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 }
 \usage{
@@ -20,12 +20,27 @@ numeric, the rectilinearity
 As proposed by Zunic and Rosin (see below). May need some testing/review.
 }
 \note{
-due to the laborious nature of the algorithm (in nb.pts^2), 
+due to the laborious nature of the algorithm (in nb.pts^2),
 and of its implementation, it may be very long to compute.
 }
 \examples{
 data(bot)
 b <- coo_sample(bot[1], 32)
 coo_rectilinearity(b)
+}
+\seealso{
+Other coo_ descriptors: \code{\link{coo_area}},
+  \code{\link{coo_chull}},
+  \code{\link{coo_circularityharalick}},
+  \code{\link{coo_circularitynorm}},
+  \code{\link{coo_circularity}},
+  \code{\link{coo_convexity}},
+  \code{\link{coo_eccentricityboundingbox}},
+  \code{\link{coo_eccentricityeigen}},
+  \code{\link{coo_elongation}}, \code{\link{coo_length}},
+  \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
+  \code{\link{coo_solidity}}, \code{\link{coo_tangle}},
+  \code{\link{coo_theta3}}, \code{\link{coo_thetapts}},
+  \code{\link{coo_width}}
 }
 

@@ -1,9 +1,10 @@
 #' Validates Coo objects
+#'
 #' No validation for S3 objects, so this method is a (cheap) attempt at checking
 #' \link{Coo} objects, \link{Out}, \link{Opn} and \link{Ldk} objects.
 #'
 #' Implemented before all morphometric methods and handling verbs.
-#' To see what is checked, \code{Momocs:::validate.Coo}
+#' To see what is checked, try eg \code{Momocs:::validate.Coo}
 #' @param Coo any Coo object
 #' @return a Coo object.
 #' @examples

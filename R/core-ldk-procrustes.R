@@ -13,7 +13,7 @@
 #' \item \code{rho} trigonometric Procrustes distance.
 #' }
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
-#' @family procrustes functions:
+#' @family procrustes functions
 #' @export
 pProcrustes <- function(coo1, coo2) {
   # directly borrowed from Claude
@@ -48,6 +48,7 @@ pProcrustes <- function(coo1, coo2) {
 #' \item \code{scale} scale parameter
 #' \item \code{DF} full Procrustes distance between coo1 and coo2.
 #' }
+#' @family procrustes functions
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 #' @export
 fProcrustes <- function(coo1, coo2) {
@@ -95,7 +96,17 @@ fProcrustes <- function(coo1, coo2) {
 #' } or an \link{Out}, \link{Opn} or an \link{Ldk} object.
 #' @note Slightly less optimized than procGPA in the shapes package (~20% on my machine).
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
-#' @family procrustes functions:
+#' @family procrustes functions
+#' @examples
+#' \dontrun{
+#' # on Ldk
+#' stack(wings)
+#' fgProcrustes(wings, tol=0.1) %>% stack()
+#'
+#' # on Out
+#' stack(hearts)
+#' fgProcrustes(hearts) %>%  stack()
+#' }
 #' @export
 fgProcrustes <- function(x, tol, verbose, coo) {
   UseMethod("fgProcrustes")
@@ -174,7 +185,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
 
 #' @export
 fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
-  Coo <- x
+  Coo <- validate(x)
   # if no $ldk defined, we convert Out into a Ldk and then
   # perform the fgProcrustes and return back an Out object.
   if (coo | (length(Coo$ldk) == 0)) {
@@ -191,7 +202,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
   }
   # case where coo=FALSE and we work on the ldk
   Coo2 <- coo_center(coo_scale(Coo))
-  ref <- get_ldk(Coo2)
+  ref <- l2a(get_ldk(Coo2))
   nb_ldk <- dim(ref)[1]
   # case with one ldk
   if (nb_ldk == 1)
@@ -227,7 +238,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
     coo_i <- Coo2$coo[[i]]
     coo_i <- coo_trans(coo_i, t[1] - t1x, t[2] - t1y)
     coo_i <- coo_i/vi$r.norms
-    coo_i <- coo_rotate(coo_i, -vi$d.angle)
+    coo_i <- coo_rotate(coo_i, vi$d.angle)
     coo_i <- coo_trans(coo_i, t1x, t1y)
     Coo2$coo[[i]] <- coo_i
   }
@@ -269,6 +280,7 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
 #' @source See \code{?gpagen} in \code{geomorph} package
 #' @note Landmarks methods are the less tested in Momocs. Keep in mind that some features
 #' are still experimental and that your help is welcome.
+#' @family procrustes functions
 #' @examples
 #' chaffp <- fgsProcrustes(chaff)
 #' chaffp

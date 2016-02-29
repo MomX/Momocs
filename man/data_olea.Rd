@@ -19,4 +19,11 @@ archaeological material. \emph{Journal of Biogeography} \bold{31}: 63-77.
 \description{
 Data: Outline coordinates of olive seeds open outlines.
 }
+\seealso{
+Other datasets: \code{\link{bot}}, \code{\link{chaff}},
+  \code{\link{flower}}, \code{\link{hearts}},
+  \code{\link{molars}}, \code{\link{mosquito}},
+  \code{\link{oak}}, \code{\link{shapes}},
+  \code{\link{trilo}}, \code{\link{wings}}
+}
 

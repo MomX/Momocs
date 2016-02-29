@@ -2,9 +2,7 @@
 % Please edit documentation in R/cl-validate.R
 \name{validate}
 \alias{validate}
-\title{Validates Coo objects
-No validation for S3 objects, so this method is a (cheap) attempt at checking
-\link{Coo} objects, \link{Out}, \link{Opn} and \link{Ldk} objects.}
+\title{Validates Coo objects}
 \usage{
 validate(Coo)
 }
@@ -15,8 +13,12 @@ validate(Coo)
 a Coo object.
 }
 \description{
+No validation for S3 objects, so this method is a (cheap) attempt at checking
+\link{Coo} objects, \link{Out}, \link{Opn} and \link{Ldk} objects.
+}
+\details{
 Implemented before all morphometric methods and handling verbs.
-To see what is checked, \code{Momocs:::validate.Coo}
+To see what is checked, try eg \code{Momocs:::validate.Coo}
 }
 \examples{
 \dontrun{
