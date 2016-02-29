@@ -1,51 +1,34 @@
 \name{NEWS}
 \title{Momocs News}
-% Borrowed from to the inspiring vegan.
+% Borrowed from the inspiring vegan.
 % Cheers to Jari Oksanen and others!
 
 \encoding{UTF-8}
 
-\section{Changes in version 0.99}{
-\itemize{
-  \item Review of the code
-  \item Consistent renaming
-  \item First vignettes on their way
-  \item ggplot2 graphs on their way
-}
+\section{Changes in version 1.0 "Mataa" (CRAN + GitHub)}{
+\code{Mataa} release (\code{>=1.0}) on CRAN replaces the now completely obsolete \code{0.2.6}. It consists of \code{Barley} pushed to CRAN. Development continues on GitHub.
+
 }
 
-\section{Changes in version 0.9}{
-
-  \subsection{GENERAL}{
-    \itemize{
-      \item "Barley" release with a complete rewriting of the package, and the inclusion of 
-      new morphometrics approches (open outlines, configuration of landmarks, global shape descriptors).
-      \item New design with classes \link{Out}, \link{Opn} and \link{Ldk} to handle
+\section{Changes in version 0.9 "Barley" (GitHub only)}{
+  \itemize{
+    \item \code{Barley} release with a complete rewriting of the package, and the inclusion of new morphometrics approches (open outlines, configuration of landmarks, global shape descriptors).
+    \item New design with classes \link{Out}, \link{Opn} and \link{Ldk} to handle
       (closed) outlines, open outlines and configuration of landmarks. \link{Coo}
       becomes a "super class" encompassing the three others.
-      \item S4 -> S3 OO rewriting. Maybe less orthodox but much more easy to
+    \item S4 -> S3 rewriting. Maybe less orthodox but much more easy to
       understand, code, extend which is probably the most required for Momocs at this step.
-      \item Renaming of functions/methods in a more or less consistent taxonomy
-      \item New multivariate methods: \link{Manova} (rewriting), \link{LDA} (new),
-      \link{clust} (rewriting), and more to come.
-      \item Graphics have been refreshed: \link{panel}, \link{stack}, \link{plot.PCA},
-      \link{plot.LDA} (along with morphospaces handling), the tps family, plus various minor improvements.
-      \item New datasets (oak, olea, molars, shapes, wings) to play around.
-      }
-  } % end general
-  
-  \subsection{ROAD TO 1.0}{
-    \itemize{
-      \item Test, test, test get users' feedback.
-      \item Fill the gaps in the multivariate methods, documentations,
-     manage the #todo tags and add comments everywhere in the code.
-      \item Add other multivariate methods: multidimensional scaling, K-means,
-      testing for allometry, modularity, multivariate regression, redundancy analysis,
-      and multivariate regression.
-      \item Procrustes resistant-fit, sliding semi-landmarks, discrete cosine transform and maybe eigen analysis.
-      \item Finish to write Momocs' vignette(s)
-  }
+    \item Renaming of functions/methods in a more consistent scheme
+    \item New/partial rewriting of multivariate methods: MANOVA, MANOVA_PW, LDA, KMEANS, CLUST.
+    \item Graphics have been refreshed: \link{panel}, \link{stack}, \link{plot.PCA},
+    \item New datasets (chaff, flowers, oak, olea, molars, shapes, wings, etc.) to play around.
+    \item More checking, tests, etc.
+    \item A general review of the helpfiles
+    \item Many issues fixed, see \code{https://github.com/vbonhomme/Momocs/issues}
+    \item A tutorial as a vignette (see \code{browseVignette("Momocs")})
 }
+
+
 
 %  \subsection{BUG FIXES}{
 %
@@ -55,12 +38,12 @@
 %    }
 %  } % bug fixes
 
-%  \subsection{NEW FEATURES}{ 
-%    \itemize{ 
+%  \subsection{NEW FEATURES}{
+%    \itemize{
 %      \item item 1
 %      \item item 2
 %      }
-%  } % new features 
+%  } % new features
 
 }
 
