@@ -1,4 +1,5 @@
 <!--[![Travis-CI Build Status](https://travis-ci.org/vbonhomme/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)-->
+:moyai: Momocs version 1.0 "Mataa" release on CRAN is planned for March 2016.
 
 Momocs, morphometrics using R
 ======
@@ -17,7 +18,7 @@ Use Momocs
 devtools::install_github("vbonhomme/Momocs", build_vignettes= TRUE)
 library(Momocs)
 ````
-* Next release on CRAN version (v1.0) is planned for March 2016. Please note that the current [CRAN](http://cran.r-project.org/package=Momocs) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) and is no longer supported. Since then, Momocs has been entirely rewritten and considerably enlarged.
+* Please note that the current [CRAN](http://cran.r-project.org/package=Momocs) version (0.2) has been published in [_Journal of Statistical Software_](http://www.jstatsoft.org/v56/i13/paper) and is no longer supported. Since then, Momocs has been entirely rewritten and considerably enlarged.
 
 Features
 --------
