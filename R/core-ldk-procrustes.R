@@ -1,6 +1,40 @@
+# pProcrustes-----------------
+#' Partial Procrustes alignment between two shapes
+#'
+#' Directly borrowed from Claude (2008), and called \code{pPsup} there.
+#' @param coo1 Configuration matrix to be superimposed onto the centered preshape of coo2.
+#' @param coo2 Reference configuration matrix.
+#' @return a list with components
+#' \itemize{
+#' \item \code{coo1} superimposed centered preshape of coo1 onto the centered preshape of coo2
+#' \item \code{coo2} centered preshape of coo2
+#' \item \code{rotation} rotation matrix
+#' \item \code{DP} partial Procrustes distance between coo1 and coo2
+#' \item \code{rho} trigonometric Procrustes distance.
+#' }
+#' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
+#' @family procrustes functions:
+#' @export
+pProcrustes <- function(coo1, coo2) {
+  # directly borrowed from Claude
+  k <- ncol(coo1)
+  Z1 <- coo_center(coo_scale(coo1))
+  Z2 <- coo_center(coo_scale(coo2))
+  sv <- svd(t(Z2) %*% Z1)
+  U <- sv$v
+  V <- sv$u
+  Delt <- sv$d
+  sig <- sign(det(t(Z2) %*% Z1))
+  Delt[k] <- sig * abs(Delt[k])
+  V[, k] <- sig * V[, k]
+  Gam <- U %*% t(V)
+  beta <- sum(Delt)
+  list(coo1 = Z1 %*% Gam, coo2 = Z2, rotation = Gam, DP = sqrt(sum(edm(Z1 %*%
+                                                                         Gam, Z2)^2)), rho = acos(beta))
+}
 
 # fProcrustes-----------------
-# should DF be used for calibrate_deviations ? #todo
+
 #' Full Procrustes alignment between two shapes
 #'
 #' Directly borrowed from Claude (2008), called there the \code{fPsup} function.
@@ -35,6 +69,7 @@ fProcrustes <- function(coo1, coo2) {
        scale = beta, DF = DF)
 }
 
+# fgProcrustes-----------------
 #' Full Generalized Procrustes alignment between shapes
 #'
 #' Directly borrowed from Claude (2008), called there the \code{fgpa2} function.
@@ -225,39 +260,45 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
   return(Coo2)
 }
 
-# pProcrustes-----------------
-#' Partial Procrustes alignment between two shapes
+# fgsProcrustes-----------------
+#' Full Generalized Procrustes alignment between shapes with sliding landmarks
 #'
-#' Directly borrowed from Claude (2008), and called \code{pPsup} there.
-#' @param coo1 Configuration matrix to be superimposed onto the centered preshape of coo2.
-#' @param coo2 Reference configuration matrix.
-#' @return a list with components
-#' \itemize{
-#' \item \code{coo1} superimposed centered preshape of coo1 onto the centered preshape of coo2
-#' \item \code{coo2} centered preshape of coo2
-#' \item \code{rotation} rotation matrix
-#' \item \code{DP} partial Procrustes distance between coo1 and coo2
-#' \item \code{rho} trigonometric Procrustes distance.
-#' }
-#' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
-#' @family procrustes functions:
+#' Directly wrapped around \code{geomorph::gpagen}.
+#'
+#' @param x Ldk object with some \code{$slidings}
+#' @source See \code{?gpagen} in \code{geomorph} package
+#' @note Landmarks methods are the less tested in Momocs. Keep in mind that some features
+#' are still experimental and that your help is welcome.
+#' @examples
+#' chaffp <- fgsProcrustes(chaff)
+#' chaffp
+#' chaffp %>% PCA() %>% plot("taxa")
+#'
 #' @export
-pProcrustes <- function(coo1, coo2) {
-  # directly borrowed from Claude
-  k <- ncol(coo1)
-  Z1 <- coo_center(coo_scale(coo1))
-  Z2 <- coo_center(coo_scale(coo2))
-  sv <- svd(t(Z2) %*% Z1)
-  U <- sv$v
-  V <- sv$u
-  Delt <- sv$d
-  sig <- sign(det(t(Z2) %*% Z1))
-  Delt[k] <- sig * abs(Delt[k])
-  V[, k] <- sig * V[, k]
-  Gam <- U %*% t(V)
-  beta <- sum(Delt)
-  list(coo1 = Z1 %*% Gam, coo2 = Z2, rotation = Gam, DP = sqrt(sum(edm(Z1 %*%
-                                                                         Gam, Z2)^2)), rho = acos(beta))
+fgsProcrustes <- function(x){
+  UseMethod("fgsProcrustes")
+}
+
+#' @export
+fgsProcrustes.default <- function(x){
+  message("only defined on Ldk objects")
+}
+
+#' @export
+fgsProcrustes.Ldk <- function(x){
+  x2 <- x <- validate(x)
+  .check(is.slidings(x),
+        "no slidings defined")
+  g <- geomorph::gpagen(A=l2a(x$coo),
+                        curves=x$slidings,
+                        ShowPlot = FALSE)
+  x2$fac <- mutate(x2$fac, centsize=g$Csize)
+  x2$coo <- a2l(g$coords)
+  x2$coe <- a2m(g$coords)
+  x2$method <- "fgsProcrustes"
+  class(x2) <- c("LdkCoe", "Coe", class(x2))
+  x2$cuts <- ncol(x2$coe)
+  return(x2)
 }
 
 ##### end Procrustes

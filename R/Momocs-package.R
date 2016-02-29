@@ -80,6 +80,7 @@ magrittr::`%T>%`
 #' @import reshape2
 #' @import ggplot2
 #' @importFrom geometry delaunayn convhulln
+#' @importFrom geomorph gpagen
 #' @importFrom graphics boxplot
 #' @importFrom jpeg readJPEG
 #' @importFrom MASS lda ginv kde2d cov.trob

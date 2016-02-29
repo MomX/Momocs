@@ -45,7 +45,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
   if (length(flipy.shp) != lm){
     flipy.shp <- rep(flipy.shp, lm)
   }
-  
+
   if (length(size.shp)!=lm) size.shp <- rep(size.shp[1], lm)
   size.shp.final <- (size.shp*wdw/14) / ifelse(lm<2, 1, 2)
   d <- mean(size.shp.final) / 2
@@ -147,7 +147,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
       if (plot.method == "lines"){
         garbage <- lapply(shp, lines, col = border.shp, lwd = lwd.shp * 2)}
       if (plot.method == "points"){
-        garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp*0.5, pch=20)
+        garbage <- lapply(shp, points, col = border.shp, cex = lwd.shp*0.25, pch=20)
         if (!is.null(PCA$links)) lapply(shp, function(x) ldk_links(x, PCA$links, col="grey90"))
       }
     }
@@ -159,11 +159,11 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
 morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
                            nr.shp = 6, nc.shp = 5, amp.shp = 1, size.shp = 1, pts.shp = 60,
                            col.shp = "#00000011", border.shp = "#00000055") {
-  
+
   xy <- LDA$mod.pred$x[, c(xax, yax)]
   rot <- LDA$LDs[, c(xax, yax)]
   mshape <- LDA$mshape
-  
+
   # we fill any removed variables with 0s
   r <- LDA$removed
   if (length(r) > 0) {
@@ -172,7 +172,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
     m3 <- rbind(rot, m2)
     rot <- m3[match(names(mshape), rownames(m3)), ]
   }
-  
+
   # we define the position of shapes
   pos <- pos.shapes(xy, pos.shp = pos.shp, nb.shp = nb.shp,
                     nr.shp = nr.shp, nc.shp = nc.shp)
@@ -419,7 +419,7 @@ PCA2shp_dfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
 # @export
 PCA2shp_polynomials <- function(pos, rot, mshape, amp.shp = 1,
                                 pts.shp = 60, ortho, baseline1, baseline2) {
-  if(ortho) { 
+  if(ortho) {
     method_i <- opoly_i
   } else {
     method_i <- npoly_i
