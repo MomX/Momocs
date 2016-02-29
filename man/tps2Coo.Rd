@@ -33,8 +33,8 @@ Ldk(coo)
 }
 }
 \seealso{
-Other babel functions: \code{\link{chc2Out}},
-  \code{\link{chc2pix}},
+Other babel functions: \code{\link{bind_db}},
+  \code{\link{chc2Out}}, \code{\link{chc2pix}},
   \code{\link{import_StereoMorph_curve1}},
   \code{\link{import_jpg}}, \code{\link{import_tps}},
   \code{\link{nef2Coe}}, \code{\link{ntsrow2Coo}},

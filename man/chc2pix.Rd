@@ -27,7 +27,8 @@ Elliptic Fourier features of a closed contour.
 \seealso{
 \link{pix2chc}, \link{chc2Out}
 
-Other babel functions: \code{\link{chc2Out}},
+Other babel functions: \code{\link{bind_db}},
+  \code{\link{chc2Out}},
   \code{\link{import_StereoMorph_curve1}},
   \code{\link{import_jpg}}, \code{\link{import_tps}},
   \code{\link{nef2Coe}}, \code{\link{ntsrow2Coo}},

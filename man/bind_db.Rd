@@ -38,4 +38,13 @@ bind_db(bot, "hello", df, "foo_id")
 bf <- efourier(bot, 12)
 bind_db(bf, "hello", df, "foo_id")
 }
+\seealso{
+Other babel functions: \code{\link{chc2Out}},
+  \code{\link{chc2pix}},
+  \code{\link{import_StereoMorph_curve1}},
+  \code{\link{import_jpg}}, \code{\link{import_tps}},
+  \code{\link{nef2Coe}}, \code{\link{ntsrow2Coo}},
+  \code{\link{pix2chc}}, \code{\link{tie_jpg_txt}},
+  \code{\link{tps2coo}}
+}
 

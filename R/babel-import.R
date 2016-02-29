@@ -765,6 +765,7 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
 #' @param db \code{data.frame} with the right number of rows, or a path as \code{character}. Then use ... to pass arguments to \link{read.table}
 #' @param db_col \code{character} where to fin ids in db
 #' @param ... more parameters passed to \link{read.table}
+#' @family babel functions
 #' @examples
 #' # Coo example
 #' df <- data.frame(foo_id=40:1, fake1=rnorm(40), fake2=factor(rep(letters[1:4], 10)))
