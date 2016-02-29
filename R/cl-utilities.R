@@ -623,7 +623,7 @@ get_slidings.Ldk <- function(Coo, partition){
 }
 
 # class testers -------------
-#' Tests if an object is of a given class or has a particular component
+#' Various class/component testers
 #'
 #' Class testers test if any of the classes of an object is of a given class. For instance
 #' is.PCA on a PCA object (both 'PCA' and 'prcomp') will return TRUE.
@@ -635,71 +635,74 @@ get_slidings.Ldk <- function(Coo, partition){
 #' is.Coo(bot)
 #' is.Out(bot)
 #' is.Ldk(bot)
-#' @rdname is.Momocs
 #' @export
 is.Coo <- function(x){
   ifelse(any(class(x) == "Coo"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.PCA <- function(x){
   ifelse(any(class(x) == "PCA"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.LDA <- function(x){
   ifelse(any(class(x) == "LDA"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.Out <- function(x){
   ifelse(any(class(x) == "Out"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.Opn <- function(x){
   ifelse(any(class(x) == "Opn"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.Ldk <- function(x){
   ifelse(any(class(x) == "Ldk"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.Coe <- function(x){
   ifelse(any(class(x) == "Coe"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.OutCoe <- function(x){
   ifelse(any(class(x) == "OutCoe"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.OpnCoe <- function(x){
   ifelse(any(class(x) == "OpnCoe"), TRUE, FALSE)
 }
-#' @rdname is.Momocs
+
 #' @export
 is.LdkCoe <- function(x){
   ifelse(any(class(x) == "LdkCoe"), TRUE, FALSE)
 }
 
-# component testers ---------
-#' @rdname is.Momocs
+#' @export
+is.shp <- function(x){
+  if (is.matrix(x))
+    if (ncol(x)==2 & all(!is.na(x)))
+      return(TRUE)
+  FALSE
+}
+
+
 #' @export
 is.fac   <- function(x) length(x$fac) > 0
 
-#' @rdname is.Momocs
 #' @export
 is.ldk   <- function(x) length(x$ldk) > 0
 
-#' @rdname is.Momocs
 #' @export
 is.slidings   <- function(x) length(x$slidings) > 0
 
-#' @rdname is.Momocs
 #' @export
 is.links <- function(x) is.matrix(x$links)
 
