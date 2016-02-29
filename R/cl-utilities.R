@@ -635,56 +635,67 @@ get_slidings.Ldk <- function(Coo, partition){
 #' is.Coo(bot)
 #' is.Out(bot)
 #' is.Ldk(bot)
+#' @name is
 #' @export
 is.Coo <- function(x){
   ifelse(any(class(x) == "Coo"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.PCA <- function(x){
   ifelse(any(class(x) == "PCA"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.LDA <- function(x){
   ifelse(any(class(x) == "LDA"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.Out <- function(x){
   ifelse(any(class(x) == "Out"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.Opn <- function(x){
   ifelse(any(class(x) == "Opn"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.Ldk <- function(x){
   ifelse(any(class(x) == "Ldk"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.Coe <- function(x){
   ifelse(any(class(x) == "Coe"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.OutCoe <- function(x){
   ifelse(any(class(x) == "OutCoe"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.OpnCoe <- function(x){
   ifelse(any(class(x) == "OpnCoe"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.LdkCoe <- function(x){
   ifelse(any(class(x) == "LdkCoe"), TRUE, FALSE)
 }
 
+#' @rdname is
 #' @export
 is.shp <- function(x){
   if (is.matrix(x))
@@ -693,17 +704,19 @@ is.shp <- function(x){
   FALSE
 }
 
-
+#' @rdname is
 #' @export
 is.fac   <- function(x) length(x$fac) > 0
 
+#' @rdname is
 #' @export
 is.ldk   <- function(x) length(x$ldk) > 0
 
+#' @rdname is
 #' @export
 is.slidings   <- function(x) length(x$slidings) > 0
 
+#' @rdname is
 #' @export
 is.links <- function(x) is.matrix(x$links)
-
 
