@@ -122,6 +122,8 @@ edm <- function(m1, m2) {
 #' edm_nearest(x, x+rnorm(10), full=TRUE)
 #' @export
 edm_nearest <- function(m1, m2, full = FALSE) {
+  m1 <- coo_check(m1)
+  m2 <- coo_check(m2)
   if (!is.matrix(m1) | !is.matrix(m2))
     stop("Matrices must be provided")
   if (ncol(m1) != 2 | ncol(m2) != 2)
