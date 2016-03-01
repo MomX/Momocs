@@ -20,7 +20,7 @@ to available methods, and last but not least, are poorly reproducible.
 This impedes collaborative effort both in software development and
 in morphometric studies. By gathering the common morphometric approaches
 in an open-source environment and welcoming contributions, Momocs is an
-(work-in-progress) attempt  to solve this twofold problem and to push morphometrics
+(work-in-progress) attempt to solve this twofold problem and to push morphometrics
 one step further. It hinges on the core functions published
 in the book \emph{Morphometrics using R} by one of us (Claude, 2008), but has been further
 extended to allow other shape description systems. So far, configurations
@@ -42,8 +42,7 @@ We are very grateful to (in alphabetical order): Laurent Bouby, Simon Crameri, A
 Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
-Asher Wishkerman, John Wood.
-for their helpful ideas and bug reports.
+Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 }
 \references{
 \itemize{
@@ -54,13 +53,10 @@ for their helpful ideas and bug reports.
 }
 \seealso{
 \itemize{
- \item \bold{Tutorial}: \code{browseVignettes("Momocs")} (work in progress...)
- \item \bold{Homepage}: \url{http://www.vincentbonhomme.fr/Momocs} with tutorials
-and hotline
- \item \bold{GitHub repo}: \url{https://github.com/vbonhomme/Momocs} to contribute,
-get the last version, etc.
-\item \bold{Hotline, questions, requests, etc.}: Feel free to send me an email, should you need, report or
-request something about Momocs.
+ \item \bold{Tutorial}: \code{browseVignettes("Momocs")}
+ \item \bold{Homepage}: \url{http://www.vincentbonhomme.fr/Momocs}
+ \item \bold{GitHub repo}: \url{https://github.com/vbonhomme/Momocs}
+ to contribute to dev, report a bug, ask for something, etc.
 }
 }
 
