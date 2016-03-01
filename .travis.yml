@@ -1,3 +1,3 @@
 language: R
 cache: packages
-r_github_packages: GuangchuangYu/ggtree
+bioc_packages: GuangchuangYu/ggtree
