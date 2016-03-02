@@ -1,5 +1,9 @@
 <!--[![Travis-CI Build Status](https://travis-ci.org/vbonhomme/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)-->
-:moyai: Momocs version 1.0 "Mataa" release on CRAN is planned for March 2016.
+
+News
+======
+* Momocs' documentation also lives [there](http://vbonhomme.github.io/Momocs/)
+* :moyai: Momocs version 1.0 "Mataa" release on CRAN is planned for March 2016.
 
 Momocs, morphometrics using R
 ======
@@ -41,7 +45,7 @@ __Open-outlines__
 * Natural (raw) polynomials (`npoly`)
 * Orthogonal (Legendre) polynomials (`opoly`)
 * Discrete Cosinus Transform (`dfourier`)
-* Calibration for all methods*
+* Calibration for all methods
 * `bezier` core functions
 
 __Configuration of landmarks__
@@ -76,6 +80,7 @@ __Various__
 * Datasets for all types of data (`bot`, `trilo`, `mosquito`, `hearts`, `olea`, `shapes`, `wings`, `oak`, `molars`, `flower`, `chaff`)
 * Vignettes (`browseVignettes("Momocs")`)
 * [Shiny](http://shiny.rstudio.com/) demonstrators/helpers*
+* [Online documentation](http://vbonhomme.github.io/Momocs/)
 
 <!--
 Architecture
