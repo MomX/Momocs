@@ -2,7 +2,7 @@
 
 News
 ======
-* Momocs' documentation also lives [there](http://vbonhomme.github.io/Momocs/)
+* Momocs' documentation (also) lives [there](http://vbonhomme.github.io/Momocs/)
 * :moyai: Momocs version 1.0 "Mataa" release on CRAN is planned for March 2016.
 
 Momocs, morphometrics using R
