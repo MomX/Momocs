@@ -137,9 +137,8 @@ coo_scale <- function(coo, scale) {
 #' @export
 coo_scale.default <- function(coo, scale = coo_centsize(coo)) {
   coo <- coo_check(coo)
-  cp <- coo_centpos(coo)
-  coo <- coo_trans(coo_trans(coo, -cp[1], -cp[2])/scale, cp[1],
-                   cp[2])
+  cp  <- coo_centpos(coo)
+  coo <- coo_trans(coo_trans(coo, -cp[1], -cp[2])/scale, cp[1], cp[2])
   return(coo)
 }
 
@@ -1780,8 +1779,8 @@ coo_centsize <- function(coo){
 #' @export
 coo_centsize.default <- function(coo) {
   coo <- coo_check(coo)
-  sq <- (coo - apply(coo, 2, mean))^2
-  mean(sqrt(rowSums(sq)))
+  cp <- coo_centpos(coo)
+  mean(sqrt((coo[, 1] - cp[1])^2 + (coo[, 2] - cp[2])^2))
 }
 
 #' @export
