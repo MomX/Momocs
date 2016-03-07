@@ -147,3 +147,16 @@ NULL
 #' PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Forster.
 #' @family datasets
 NULL
+
+#' Data: Outline coordinates from an experimental charring on cereal grains
+#'
+#' @docType data
+#' @name charring
+#' @rdname data_charring
+#' @format An \link{Out} object with 18 grains, 3 views on each, for 2 cereal species, charred at
+#' different temperatures for 6 hours (0C (no charring), 230C and 260C).
+#' @source Research support was provided by the European Research Council
+#' (Evolutionary Origins of Agriculture (grant no. 269830-EOA)
+#' PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Forster.
+#' @family datasets
+NULL
