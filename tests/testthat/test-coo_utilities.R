@@ -35,12 +35,75 @@ test_that("coo_center works fine", {
   expect_equal(sum(sapply(coo_center(bot)$coo, function(x) apply(x, 2, mean))), 0)
 })
 
+# coo_scale ----
+test_that("coo_scale works fine", {
+  expect_equal(coo_centsize(coo_scale(bot[1])), 1)
+  expect_equal(sum(coo_centsize(coo_scale(bot))), length(bot))
+
+})
+
+# coo_scalex -----
+test_that("coo_scalex works fine", {
+  expect_equal(diff(range(coo_scalex(coo_template(bot[1]), 1.5)[, 1])), diff(range(coo_template(bot[1])[, 1]))*1.5)
+  expect_equal(diff(range(coo_scalex(coo_template(olea[1]), 1/3)[, 1])), diff(range(coo_template(olea[1])[, 1]))*1/3)
+})
+
+# coo_scalex -----
+test_that("coo_scaley works fine", {
+  expect_equal(diff(range(coo_scaley(coo_template(bot[1]), 1.5)[, 2])), diff(range(coo_template(bot[1])[, 2]))*1.5)
+  expect_equal(diff(range(coo_scaley(coo_template(olea[1]), 1/3)[, 2])), diff(range(coo_template(olea[1])[, 2]))*1/3)
+})
+
+# coo_template -----
+test_that("coo_template works fine", {
+  expect_equal(max(coo_template(bot[1])), 0.5)
+  expect_equal(max(coo_template(olea[1])), 0.5)
+  expect_equal(max(coo_template(wings[1])), 0.5)
+  expect_equal(max(coo_template(wings[1], 5)), 5/2)
+  expect_equal(max(coo_template(wings[1], 0.01)), 0.01/2)
+  expect_equal(max(sapply(coo_template(bot)$coo, max)), 0.5)
+  expect_equal(max(sapply(coo_template(bot)$coo, min)), -0.5)
+})
+
+# coo_rotate ----
+test_that("coo_rotate works fine", {
+  shp <- bot[1]
+  shp.rot <- coo_rotate(shp, pi/7)
+  nr <- nrow(shp)
+  expect_equal(coo_theta3(rbind(shp[24,], c(0, 0), c(1e3, 0))) - pi/7,
+               coo_theta3(rbind(shp.rot[24,], c(0, 0), c(1e3, 0))))
+})
+
+# coo_rotatecenter ------
+#todo
+
+# coo_align -----
+#todo
+
+# coo_alignxax -----
+#todo
+
+# coo_aligncalliper -----
+#todo
+
+# coo_alignminradius -----
+#todo
+
+# coo_translate -----
+test_that("coo_translate works fine", {
+  cp <- coo_centpos(bot[1])
+  cpt <- coo_centpos(coo_trans(bot[1], 123, -321))
+  expect_equal(cpt[1] - cp[1], 123)
+  expect_equal(cpt[2] - cp[2], -321)
+})
+
 # coo_centsize ----
 test_that("coo_centsize works fine", {
   expect_equal(coo_centsize(bot[1]), coo_centsize(coo_trans(bot[1], runif(1, -1e3, 1e3), runif(1, -1e3, 1e3))))
   expect_equal(sum(coo_centsize(olea) -
                      coo_centsize(coo_trans(olea, runif(1, -1e3, 1e3), runif(1, -1e3, 1e3)))), 0)
 })
+
 
 # coo_area -----
 test_that("coo_area returns a scalar", {
