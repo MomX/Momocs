@@ -15,10 +15,11 @@ PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Fo
 Data: Landmark and semilandmark coordinates on cereal glumes
 }
 \seealso{
-Other datasets: \code{\link{bot}}, \code{\link{flower}},
-  \code{\link{hearts}}, \code{\link{molars}},
-  \code{\link{mosquito}}, \code{\link{oak}},
-  \code{\link{olea}}, \code{\link{shapes}},
-  \code{\link{trilo}}, \code{\link{wings}}
+Other datasets: \code{\link{bot}}, \code{\link{charring}},
+  \code{\link{flower}}, \code{\link{hearts}},
+  \code{\link{molars}}, \code{\link{mosquito}},
+  \code{\link{oak}}, \code{\link{olea}},
+  \code{\link{shapes}}, \code{\link{trilo}},
+  \code{\link{wings}}
 }
 

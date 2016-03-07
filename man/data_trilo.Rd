@@ -16,9 +16,10 @@ Data: Outline coordinates of cephalic outlines of trilobite
 }
 \seealso{
 Other datasets: \code{\link{bot}}, \code{\link{chaff}},
-  \code{\link{flower}}, \code{\link{hearts}},
-  \code{\link{molars}}, \code{\link{mosquito}},
-  \code{\link{oak}}, \code{\link{olea}},
-  \code{\link{shapes}}, \code{\link{wings}}
+  \code{\link{charring}}, \code{\link{flower}},
+  \code{\link{hearts}}, \code{\link{molars}},
+  \code{\link{mosquito}}, \code{\link{oak}},
+  \code{\link{olea}}, \code{\link{shapes}},
+  \code{\link{wings}}
 }
 

@@ -13,9 +13,10 @@ Data: Outline coordinates of various shapes
 }
 \seealso{
 Other datasets: \code{\link{bot}}, \code{\link{chaff}},
-  \code{\link{flower}}, \code{\link{hearts}},
-  \code{\link{molars}}, \code{\link{mosquito}},
-  \code{\link{oak}}, \code{\link{olea}},
-  \code{\link{trilo}}, \code{\link{wings}}
+  \code{\link{charring}}, \code{\link{flower}},
+  \code{\link{hearts}}, \code{\link{molars}},
+  \code{\link{mosquito}}, \code{\link{oak}},
+  \code{\link{olea}}, \code{\link{trilo}},
+  \code{\link{wings}}
 }
 
