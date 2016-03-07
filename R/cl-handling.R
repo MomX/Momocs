@@ -710,7 +710,7 @@ subset.Coo <- function(x, subset, ...) {
   if (is.fac(Coo)) {
     #     if (is.logical(retain))
     #       retain <- which(retain)
-    Coo2$fac <- dplyr::slice(Coo$fac, retain)
+    Coo2$fac <- Coo$fac[retain, ]
     names(Coo2$fac) <- names(Coo$fac)
     Coo2$fac <- .refactor(Coo2$fac)
   }
@@ -808,6 +808,10 @@ at_least <- function(x, fac, N){
     subset(x, retain)
   }
 }
+
+# x=charring
+# fac="taxa"
+# N=40
 
 # rm ------------
 #' Removes shapes with incomplete slices
