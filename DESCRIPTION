@@ -1,6 +1,6 @@
 Package: Momocs
 Title: Morphometrics using R
-Version: 0.9.82
+Version: 0.9.83
 Date: 2016-03-07
 Authors@R: c( person("Vincent", "Bonhomme", , "bonhomme.vincent@gmail.com", c("aut",
          "cre")), person("Julien", "Claude", , , c("aut")) )
@@ -36,6 +36,6 @@ Depends: R(>= 3.1)
 LazyData: true
 Imports: ape, dplyr, magrittr, graphics, geometry, geomorph, ggplot2, jpeg, MASS,
          plyr, reshape2, sp, utils
-Suggests: devtools, ggtree, knitr, rmarkdown
+Suggests: devtools, ggtree, knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
