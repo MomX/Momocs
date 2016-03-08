@@ -4,7 +4,7 @@
 #' Converts a list of coordinates to a matrix of coordinates.
 #'
 #' Converts a \code{list} with x and y components to a two-columns
-#' (colnamed) \code{matrix} of coordinates.
+#' (colnamed) \code{matrix} of coordinates. Also, if l is a list with a single matrix, then l[[1]] is returned.
 #'
 #' @usage l2m(l)
 #' @param l \code{list} with x and y coordinates as components.
@@ -19,6 +19,8 @@
 #' @family bridges functions
 #' @export
 l2m <- function(l) {
+  if (length(l) == 1 && is.shp(l[[1]]))
+    return(l[[1]])
     m <- cbind(l$x, l$y)
     colnames(m) <- c("x", "y")
     return(m)

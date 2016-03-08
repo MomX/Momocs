@@ -14,7 +14,7 @@ l2m(l)
 }
 \description{
 Converts a \code{list} with x and y components to a two-columns
-(colnamed) \code{matrix} of coordinates.
+(colnamed) \code{matrix} of coordinates. Also, if l is a list with a single matrix, then l[[1]] is returned.
 }
 \examples{
 data(wings)
