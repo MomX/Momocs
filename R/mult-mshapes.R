@@ -19,6 +19,7 @@
 #' not be representive of the group. Also notice that for PCA objects, mean scores are returned
 #' within a PCA object (accesible with PCA$x) that can be plotted directly but other slots are left
 #' unchanged.
+#' @rdname mshapes
 #' @examples
 #' #### on shapes
 #' data(wings)
@@ -203,5 +204,9 @@ mshapes.PCA <- function(x, fac, ...){
   x0$fac <- data.frame(fac=f)
   x0
 }
+
+#' @export
+#' @rdname mshapes
+MSHAPES <- mshapes
 
 ##### end mshapes
