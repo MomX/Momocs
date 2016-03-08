@@ -12,7 +12,7 @@ currDCF[1,"Version"] <- newVersion
 currDCF[1, "Date"] <- strftime(as.POSIXlt(Sys.Date()), "%Y-%m-%d")
 write.dcf(currDCF, "DESCRIPTION")
 system("git add DESCRIPTION")
-cat("Incremented package version and added to commit!\n")
+cat("Incremented package version\n")
 
 #### number of lines
 nl <- numeric()

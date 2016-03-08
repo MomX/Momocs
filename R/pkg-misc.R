@@ -9,12 +9,12 @@
 #' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)}).
 #' You need devtools, but it is checked anyway.
 #' @export
-Momocs_last <- function() {
+Momocs_lastversion <- function() {
   if (!requireNamespace("devtools", quietly = TRUE)) {
     stop("devtools needed for this function to work. Please install it with install.packages('devtools')",
          call. = FALSE)
   }
-  devtools::install_github("vbonhomme/Momocs")
+  devtools::install_github("vbonhomme/Momocs", build_vignettes= TRUE)
   library(Momocs)
   message("Last version of Momocs has been installed from GitHub and loaded into R")
 }
@@ -26,7 +26,7 @@ Momocs_last <- function() {
 #' the online manual is accessed.
 #' @export
 Momocs_help <- function(topic=NULL){
-  url <- "http://vbonhomme.github.io/Momocs/"
+  url <- "http://vbonhomme.github.io/Momocsdoc/"
   if (!is.null(topic)) url <- paste0(url, topic, ".html")
   browseURL(url)
 }
