@@ -203,18 +203,19 @@ print.OutCoe <- function(x, ...) {
     # number of outlines and harmonics
     cat(" - $coe:", coo_nb, "outlines described, ")
     cat(harm.nb, "harmonics\n")
-    # lets show some of them for a quick inspection
-    cat(" - $coe: 1st harmonic coefficients from random individuals: \n")
-    row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
-    col.eg <- coeff_sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
-    print(round(OutCoe$coe[row.eg, col.eg], 3))
-    cat("etc.\n")
+    # lets show some of them for a quick inspection.
+    # boring, removed it
+    # cat(" - $coe: 1st harmonic coefficients from random individuals: \n")
+    # row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
+    # col.eg <- coeff_sel(retain = ifelse(harm.nb > 3, 3, harm.nb), drop = 0, nb.h = harm.nb, cph = ifelse(p == 1, 4, 2))
+    # print(round(OutCoe$coe[row.eg, col.eg], 3))
+    # cat("etc.\n")
   } else {
     harm.nb <- ncol(OutCoe$coe)
     # number of outlines and harmonics
     cat(" - $coe:", coo_nb, "outlines described, and (total) ")
     cat(harm.nb, "coefficients\n")
-    cat(" - $coe: harmonic coefficients\n")
+    #cat(" - $coe: harmonic coefficients\n")
   }
   # we print the fac
   .print.fac(OutCoe$fac)

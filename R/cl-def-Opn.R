@@ -180,14 +180,15 @@ print.OpnCoe <- function(x, ...) {
       cat(" - $baseline2: (", paste(x$baseline2, collapse="; "), ")\n", sep="")
     }
     # lets show some of the coefficients for a quick inspection
-    cat(" - $coe: 1st coefficients from random open outlines: \n")
-    row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
-    nc <- ncol(OpnCoe$coe)
-    if (nc > 6) nc <- 6
-    col.eg <- 1:nc
-
-    print(round(OpnCoe$coe[row.eg, col.eg], 3))
-    cat("etc.\n")
+    # boring removed it
+    # cat(" - $coe: 1st coefficients from random open outlines: \n")
+    # row.eg <- sort(sample(coo_nb, ifelse(coo_nb < 5, coo_nb, 5), replace = FALSE))
+    # nc <- ncol(OpnCoe$coe)
+    # if (nc > 6) nc <- 6
+    # col.eg <- 1:nc
+    #
+    # print(round(OpnCoe$coe[row.eg, col.eg], 3))
+    # cat("etc.\n")
   } else {
     # we print the baselines
     if (!is.null(c(x$baseline1, x$baseline2))) {
