@@ -714,7 +714,6 @@ subset.Coo <- function(x, subset, ...) {
     # bloody dirty case where a factor is returned
     if (ncol(Coo$fac)==1 & is.factor(Coo2$fac)) {
       Coo2$fac <- data.frame(Coo2$fac)
-      colnames(Coo2$fac) <- colnames(Coo$fac)
     }
     names(Coo2$fac) <- names(Coo$fac)
     Coo2$fac <- .refactor(Coo2$fac)
@@ -733,6 +732,10 @@ subset.Coe <- function(x, subset, ...) {
   #   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
   if (ncol(Coe$fac) > 0) {
     Coe2$fac <- Coe$fac[retain, ]
+    # bloody dirty case where a factor is returned
+    if (ncol(Coe$fac)==1 & is.factor(Coe2$fac)) {
+      Coe2$fac <- data.frame(Coe2$fac)
+    }
     names(Coe2$fac) <- names(Coe$fac)
     Coe2$fac <- .refactor(Coe2$fac)
   }
