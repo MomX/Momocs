@@ -711,6 +711,11 @@ subset.Coo <- function(x, subset, ...) {
     #     if (is.logical(retain))
     #       retain <- which(retain)
     Coo2$fac <- Coo$fac[retain, ]
+    # bloody dirty case where a factor is returned
+    if (ncol(Coo$fac)==1 & is.factor(Coo2$fac)) {
+      Coo2$fac <- data.frame(Coo2$fac)
+      colnames(Coo2$fac) <- colnames(Coo$fac)
+    }
     names(Coo2$fac) <- names(Coo$fac)
     Coo2$fac <- .refactor(Coo2$fac)
   }
