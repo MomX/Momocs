@@ -315,7 +315,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if ((density) & missing(rect.labelsgroups)) rect.labelsgroups <- FALSE
   if (missing(rug) & nlevels(fac)>6) rug      <- FALSE
   if (!missing(chull.lty)) chull              <- TRUE
-  if (!missing(chull.filled.alpha)) chull.filled <- TRUE
+  if (!missing(chull.filled.alpha) & missing(chull.filled)) chull.filled <- TRUE
   if (!missing(labelspoints) & missing(points)) points <- FALSE
   if (missing(col.labelspoints)) col.labelspoints <- col
   if (stars & missing(ellipsesax)) ellipsesax <- FALSE
