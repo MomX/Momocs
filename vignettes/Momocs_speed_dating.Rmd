@@ -430,7 +430,7 @@ MANOVA_PW(bot.p, "type")
 ```
 
 ### `CLUST`: Hierarchical clustering
-A hierarchical classification now. It relies on `ggtree` which is itself under active development. So you may have trouble to make this command work.
+A hierarchical classification now. It relies on `dist` + `hclust` + `ape::plot.phylo`.
 ```{r, eval=FALSE}
 CLUST(bot.p, 1)
 ```

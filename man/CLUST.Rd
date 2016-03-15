@@ -2,79 +2,86 @@
 % Please edit documentation in R/mult-clust.R
 \name{CLUST}
 \alias{CLUST}
-\alias{CLUST.Coe}
-\alias{CLUST.PCA}
+\alias{CLUST.default}
 \title{Hierarchical clustering}
 \usage{
-CLUST(x, ...)
+CLUST(x, fac, type = "fan", dist_method = "euclidean",
+  hclust_method = "complete", retain = 0.99, tip_labels,
+  palette = col_qual, ...)
 
-\method{CLUST}{Coe}(x, ...)
-
-\method{CLUST}{PCA}(x, fac, layout = "circular", dist_method = "euclidean",
-  hclust_method = "complete", mono = TRUE, abbreviate = NULL,
-  tip_fac = NULL, ...)
+\method{CLUST}{default}(x, ...)
 }
 \arguments{
 \item{x}{a PCA object (Coe method deprecated so far)}
 
-\item{...}{useless here}
+\item{fac}{the id or column name or formula for columns to use from $fac.}
 
-\item{fac}{the id or column name in $fac to use for colors and mono. Note that
-you can also pass a factor of length equal to the number of rows of x$x}
+\item{type}{to pass to \code{ape::plot.phylo}'s \code{type} argument, one of
+"cladogram", "phylogram", "radial", "unrooted" or "fan" (by default)}
 
-\item{layout}{to pass to ggtree, one of
-"cladogram", "phylogram", "dendrogram", "radial", "unrooted", "fan" (by default)}
-
-\item{dist_method}{to feed \link{dist}'s method argument, one of
+\item{dist_method}{to feed \link{dist}'s \code{method} argument, one of
 "euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski".}
 
 \item{hclust_method}{to feed \link{hclust}'s method argument, one of
 "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
 
-\item{mono}{logical whether to color branches according to their /fac mononophyly status}
+\item{retain}{number of axis to retain from the PCA as a range of number eg \code{1:5} to retain
+the first 5 PCs. If a number <= 1 is passed, then the number of PCs retained
+will be enough to capture this proportion of variance.}
 
-\item{abbreviate}{numeric, if specified passed as minlength argument to \link{abbreviate}}
-
-\item{tip_fac}{the id or column name in $fac to use as tip_labels rather than rownames. Note that
+\item{tip_labels}{the id or column name in $fac to use as tip_labels rather than rownames. Note that
 you can also pass a character (or a factor) with the same number of rows of x$x}
+
+\item{palette}{a color palette to use (\code{col_qual} by default).
+If \code{NULL}, \code{par("fg")} is used}
+
+\item{...}{additional parameters to feed \code{plot.phylo}}
 }
 \value{
-a ggplot object
+the \code{phylo} object, invisibly
 }
 \description{
 Performs hierarchical clustering through \link{dist} and \link{hclust}. So far it is mainly
 a wrapper around these two functions, plus plotting using \link{plot.phylo} from the
-package ape. You need to have ggtree installed from GitHub (not yet released on CRAN).
-}
-\note{
-This method tries to adapt to ggtree changes but may require some ggplot customization,
-eg some xlim. See examples.
+package ape.
 }
 \examples{
 \dontrun{
-data(bot)
-bp <- PCA(efourier(bot, 10))
-CLUST(bp)
-CLUST(bp, layout="rectangular") + xlim(c(NA, 0.15))
-CLUST(bp, layout="slanted") + xlim(c(NA, 0.15))
-CLUST(bp, layout="unrooted") +  xlim(c(NA, 0.15))
-CLUST(bp, layout="radial")
-CLUST(bp, "type")
-CLUST(bp, 1)
 
-# styling with ggplot2 grammar
-library(ggplot2)
-CLUST(bp, 1) + scale_color_discrete(h=c(120, 240))
+# we prepare a PCA with shorter names
+olea_lite <- olea
+names(olea_lite) <- as.character(olea$fac$var)
+x <- olea_lite \%>\% opoly(5) \%>\% PCA()
 
-# tip_fac is useful
-data(olea)
-op <- PCA(opoly(olea, 5))
-CLUST(op, "var")
-CLUST(op, "var", tip_fac="var")
-tip_fac2 <- interaction(op$fac$var, op$fac$domes)
-CLUST(op, fac=tip_fac2, tip_fac=tip_fac2)
+# By default
+CLUST(x)
+
+# With a fac
+CLUST(x, 1)
+
+# plot.phylo types
+CLUST(x, "var", type="cladogram")
+CLUST(x, "var", type="phylogram")
+CLUST(x, "var", type="radial")
+CLUST(x, "var", type="unrooted")
+
+# other dist/hclust methods
+CLUST(x, "var", layout="cladogram", dist_method="minkowski", hclust_method="average")
+
+# With another
+CLUST(x, "domes", tip_labels="var", palette=col_india)
+
+# Alternative ways to pass a factor
+CLUST(x, 1)
+CLUST(x, "var")
+CLUST(x, ~var)
+# Strict equivalent before but formula allows this:
+CLUST(x, ~ domes + var, tip_labels = ~ domes + var)
+
+# More arguments to plot.phylo
+CLUST(x, cex=0.5)
+
 }
-
 }
 \seealso{
 Other multivariate: \code{\link{KMEANS}},
