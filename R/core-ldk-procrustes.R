@@ -302,8 +302,7 @@ fgsProcrustes.Ldk <- function(x){
   .check(is.slidings(x),
         "no slidings defined")
   g <- geomorph::gpagen(A=l2a(x$coo),
-                        curves=x$slidings,
-                        ShowPlot = FALSE)
+                        curves=x$slidings)
   x2$fac <- mutate(x2$fac, centsize=g$Csize)
   x2$coo <- a2l(g$coords)
   x2$coe <- a2m(g$coords)
