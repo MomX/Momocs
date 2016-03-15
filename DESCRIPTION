@@ -35,6 +35,6 @@ Depends: R(>= 3.1)
 LazyData: true
 Imports: ape, dplyr, magrittr, graphics, geometry, geomorph, ggplot2, jpeg, MASS, plyr,
           reshape2, sp, utils
-Suggests: devtools, knitr, rmarkdown, testthat
+Suggests: devtools, knitr, rmarkdown, testthat, covr
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
