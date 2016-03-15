@@ -1,8 +1,8 @@
-<!--[![Travis-CI Build Status](https://travis-ci.org/vbonhomme/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)-->
+[![Travis-CI Build Status](https://travis-ci.org/vbonhomme/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)
 
 News
 ======
-* Momocs' documentation (also) lives [there](http://vbonhomme.github.io/Momocs/)
+* Momocs' documentation (also) lives [there](http://vbonhomme.github.io/Momocsdoc/)
 * :moyai: Momocs version 1.0 "Mataa" release on CRAN is planned for March 2016.
 
 Momocs, morphometrics using R
