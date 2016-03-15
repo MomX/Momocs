@@ -1,5 +1,3 @@
-language: R
+language: r
+sudo: false
 cache: packages
-bioc_packages:
-  - ggtree
-
