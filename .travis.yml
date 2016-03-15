@@ -5,3 +5,8 @@ warnings_are_errors: false
  
 after_success:
 - Rscript -e 'covr::codecov()'
+
+notifications:
+  email:
+    on_success: always
+    on_failure: always
