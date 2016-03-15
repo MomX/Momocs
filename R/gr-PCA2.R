@@ -71,18 +71,19 @@ plot2.PCA <- function(x,
                       return_df = FALSE,
                       ...){
   ### Preliminaries
-  df <- as_df(x) %>% as.tbl()
+  df <- as_df(x) #%>% as.tbl()
   # initialize the gg
   if (!is.null(fac)){
+    .f <- TRUE
     df0 <- select_(df, x=xax, y=yax, f=fac, .id=quote(.id))
     gg <- ggplot(data=df, aes_string(x=xax, y=yax, col=fac))
   } else {
+    .f <- FALSE
     df0 <- select_(df, x=xax, y=yax, .id=quote(.id))
     gg <- ggplot(data=df, aes_string(x=xax, y=yax))
   }
   # we prepare for return_df
   df_shp <- df_ellipseax <- df_stars <- df_chull <- df_text <- NULL
-  .f <- is.factor(df0$f) # just a flag
 
   if (.f){
     if (missing(ellipseax)) ellipseax <- TRUE
@@ -109,7 +110,8 @@ plot2.PCA <- function(x,
   if (.f) {
     #+ellipse -------------------------------------------------------------------
     if (ellipse) {
-      suppressWarnings(gg <- gg + stat_ellipse(type=ellipse_type, level = ellipse_level))}
+      suppressWarnings(gg <- gg + stat_ellipse(type=ellipse_type, level = ellipse_level))
+      }
     #+ellipseax -----------------------------------------------------------------
     if (ellipseax){
       df_ellipseax <- ddply(df0, ~f, function(x)
@@ -209,7 +211,7 @@ plot2.PCA <- function(x,
 #'
 #' A set of functions around PCA/LDA eigen/trace. \code{scree} calculates their proportion and cumulated proportion;
 #' \code{scree_min} returns the minimal number of axis to use to retain a given proportion; \code{scree_plot} displays a screeplot.
-#' 
+#'
 #' @param x a \link{PCA} object
 #' @param nax numeric range of axis to consider
 #' @param prop numeric how many axis are enough this proportion of variance, if too high then number of axis is returned.
@@ -221,7 +223,7 @@ plot2.PCA <- function(x,
 #' scree(bp)
 #' scree_min(bp, 0.99)
 #' scree_min(bp, 1)
-#' 
+#'
 #' scree_plot(bp)
 #' scree_plot(bp, 1:5)
 #'
@@ -229,10 +231,10 @@ plot2.PCA <- function(x,
 #' data(olea)
 #' bl <- LDA(PCA(opoly(olea)), "var")
 #' scree(bl)
-#' 
+#'
 #' @export
 #' @rdname scree
-scree <- function(x, nax) { 
+scree <- function(x, nax) {
   UseMethod("scree")}
 
 #' @export
@@ -268,7 +270,7 @@ scree_min <- function(x, prop=0.99){
 #' @rdname scree
 scree_plot <- function(x, nax=1:10){
   df <- scree(x, nax)
-  gg <- ggplot(df, aes_string(x="axis", y="proportion")) + 
+  gg <- ggplot(df, aes_string(x="axis", y="proportion")) +
     geom_hline(yintercept=c(0.5, 0.90, 0.95, 0.99), linetype=2, alpha=0.5) +
     geom_bar(stat="identity") + geom_text(label=round(df$cumsum, 3), vjust=0) +
     labs(x="Components", y="Proportion")
@@ -276,7 +278,7 @@ scree_plot <- function(x, nax=1:10){
 }
 
 
-# selected=NULL, 
+# selected=NULL,
 # return(df)
 # fills <- rep("black", nrow(df))
 # fills[selected] <- "red"
