@@ -41,6 +41,6 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
 }
 }
 \seealso{
-\link{rm_Asym} and \link{rm_Sym}.
+\link{rm_asym} and \link{rm_sym}.
 }
 
