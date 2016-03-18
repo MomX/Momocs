@@ -246,7 +246,7 @@ print.OutCoe <- function(x, ...) {
 #' Analysis of petal shape variation of Primula sieboldii by elliptic fourier descriptors
 #' and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/aob/mch190
 #' }
-#' @seealso \link{rm_Asym} and \link{rm_Sym}.
+#' @seealso \link{rm_asym} and \link{rm_sym}.
 #' @examples
 #' data(bot)
 #' bot.f <- efourier(bot, 12)
@@ -276,7 +276,7 @@ symmetry.OutCoe <- function(OutCoe) {
 #' Removes asymmetric and symmetric variation on OutCoe objects
 #'
 #' Only for those obtained with \link{efourier}, otherwise a message is returned.
-#' \code{rm_Asym} sets all B and C coefficients to 0; \code{rm_Sym} sets
+#' \code{rm_asym} sets all B and C coefficients to 0; \code{rm_sym} sets
 #' all A and D coefficients to 0.
 #' @param OutCoe an OutCoe object
 #' @return an OutCoe object
@@ -297,34 +297,34 @@ symmetry.OutCoe <- function(OutCoe) {
 #' @examples
 #' data(bot)
 #' botf <- efourier(bot, 12)
-#' botSym <- rm_Asym(botf)
+#' botSym <- rm_asym(botf)
 #' boxplot(botSym)
 #' botSymp <- PCA(botSym)
 #' plot(botSymp)
 #' plot(botSymp, amp.shp=5)
 #'
 #' # Asymmetric only
-#' botAsym <- rm_Sym(botf)
+#' botAsym <- rm_sym(botf)
 #' boxplot(botAsym)
 #' botAsymp <- PCA(botAsym)
 #' plot(botAsymp)
 #' # strange shapes because the original shape was mainly symmetric and would need its
 #' # symmetric (eg its average) for a proper reconstruction. Should only be used like that:
 #' plot(botAsymp, morpho=FALSE)
-#' @rdname rm_Asym
-#' @aliases rm_Sym
+#' @rdname rm_asym
+#' @aliases rm_sym
 #' @export
-rm_Asym <- function(OutCoe) {
-  UseMethod("rm_Asym")
+rm_asym <- function(OutCoe) {
+  UseMethod("rm_asym")
 }
-#' @rdname rm_Asym
+#' @rdname rm_asym
 #' @export
-rm_Asym.default <- function(OutCoe) {
+rm_asym.default <- function(OutCoe) {
   cat("can only be applied on OutCoe objects")
 }
-#' @rdname rm_Asym
+#' @rdname rm_asym
 #' @export
-rm_Asym.OutCoe <- function(OutCoe) {
+rm_asym.OutCoe <- function(OutCoe) {
   if (OutCoe$method != "efourier")
     stop("can only be applied on OutCoe [efourier] objects")
   x <- OutCoe$coe
@@ -334,19 +334,19 @@ rm_Asym.OutCoe <- function(OutCoe) {
   return(OutCoe)
 }
 
-#' @rdname rm_Asym
+#' @rdname rm_asym
 #' @export
-rm_Sym <- function(OutCoe) {
-  UseMethod("rm_Sym")
+rm_sym <- function(OutCoe) {
+  UseMethod("rm_sym")
 }
-#' @rdname rm_Asym
+#' @rdname rm_asym
 #' @export
-rm_Sym.default <- function(OutCoe) {
+rm_sym.default <- function(OutCoe) {
   stop("can only be applied on OutCoe objects")
 }
-#' @rdname rm_Asym
+#' @rdname rm_asym
 #' @export
-rm_Sym.OutCoe <- function(OutCoe) {
+rm_sym.OutCoe <- function(OutCoe) {
   if (OutCoe$method != "efourier")
     stop("can only be applied on OutCoe [efourier] objects")
   x <- OutCoe$coe

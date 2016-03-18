@@ -26,23 +26,23 @@ opts_chunk$set(eval = TRUE, message=FALSE,
 
 ## Preliminaries
 ### Abstract
-Momocs aims to provide a complete and convenient toolkit for morphometrics. It is intended for scientists interested in describing quantitatively the shape, and its variations, of the objects they study.
+Momocs aims to provide a complete and convenient toolkit for morphometrics. It is intended for scientists interested in describing quantitatively the shape, and its (co)variations, of the objects they study.
 
-In the last decade, R has become the open-source lingua franca for statistics, and morphometrics known its so-called 'revolution'. Nevertheless, morphometric analyses still have to be carried out using various software packages, for which source code is mostly unavailable or copyrighted. Moreover, most of existing software packages cannot be extended and their bugs are hard to detect and thus correct. This situation is detrimental to morphometrics; time is wasted, analyses are restricted to available methods, and last but not least, are poorly reproducible. This impedes collaborative effort both in software development and in morphometric studies.
+In the last decade, R has become the open-source _lingua franca_ for statistics, and morphometrics known its so-called "revolution". Nevertheless, morphometric analyses still have to be carried out using various software packages either dedicated to a particular morphometric and/or for which source code is mostly unavailable and/or copyrighted. Moreover, most of existing software packages cannot be extended and their bugs are hard to detect and thus correct. This situation is detrimental to morphometrics: time is wasted, analyses are restricted to available methods, and last but not least, are poorly reproducible. This impedes collaborative effort both in software development and in morphometric studies.
 
-By gathering the common morphometric approaches in an open-source environment and welcoming contributions, Momocs is an (work-in-progress) attempt to solve this twofold problem and to push morphometrics one step further.
+By gathering the common morphometric approaches in an open-source environment and welcoming contributions, Momocs is an attempt to solve this twofold problem.
 
-It hinges on the core functions published in the must-have _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008), but has been further extended to allow other shape description systems. So far, configurations of landmarks, outlines and open outline analyses, along with some facilities for traditional morphometrics have been implemented.
+Momocs hinges on the core functions published in the must-have _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008), but has been further extended to allow other shape description systems. So far, configurations of landmarks, outlines and open outline analyses, along with some facilities for traditional morphometrics are implemented.
 
 Prior to analysis, Momocs can be used to acquire and manipulate data or to import/export from/to other formats. Momocs also has the facility for a wide range of multivariate analyses and production of the companion graphics. Thus a researcher will find that just a few lines of code will provide initial results, but the methods implemented can be finely tuned and extended according to the user's needs.
 
 * See Momocs [features](https://github.com/vbonhomme/Momocs/#features).
 * If you use it, cite it: `citation("Momocs")`.
-* This citation refers to an obsolete version of Momocs, only handling outline analyses. The next one is in preparation.
+* This citation refers to an obsolete version of Momocs, only handling outline analyses. The next companion and seminal paper is submitted.
 
 ### Survival tips
-* This vignette gently introduces Momocs; more specific help can be find in function's helfiles, for instance `?efourier`.
-* There is an online (and much nicer) version of this manual that can be accessed with `Momocs_help("efourier")`.
+* This vignette introduces Momocs; more specific help can be find in function's helfiles, for instance `?efourier`.
+* There is a much nicer [onlineversion of this manual](http://vbonhomme.github.io/Momocsdoc/) that can be accessed from the console with, e.g. `Momocs_help("efourier")`.
 * Feel free to contribute to Momocs through [GitHub](http://www.github.com/vbonhomme/Momocs): report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that's definitely worth [a look](http://r-pkgs.had.co.nz/git.html).
 * Feel free to drop me a line, should you need a hand or would like to collaborate with me:   `bonhomme.vincent@gmail.com`.
 
@@ -54,9 +54,9 @@ install.packages("devtools")
 devtools::install_github("vbonhomme/Momocs")
 ```
 
-The typical `install_packages("Momocs")` is not recommended as Momocs is still under active development, not compatible with frequent, time-consuming, and overall boring CRAN submission.
+The typical `install_packages("Momocs")` will get you the last CRAN version of Momocs, but the GitHub version is preferred as Momocs is still under active development.
 
-We can start using Momocs, as long as it has been loaded with :
+We can start using Momocs, as long as it has been loaded using:
 
 ```{r, eval=TRUE, echo=TRUE, message=FALSE}
 library(Momocs)
@@ -80,32 +80,32 @@ They are all single shapes defined by a matrix of `(x; y)` coordinates; here are
 ```{r}
 shapes[18] %>% head()
 ```
-A few dozens of operations on single shapes are implemented such as: plotting, centering, calculating areas, etc. They can be accessed with `apropos("coo_")`. But working on single shapes is quite boring.
+A few dozens of operations on single shapes are implemented such as: plotting, centering, calculating areas, etc. These 70+ operations can be accessed with `apropos("coo_")`. But working on single shapes is quite boring.
 
 Shapes can be organized into a __collection__ of coordinates: a `Coo` object that carries:
 
-* always, a component named `$coo`, a `list` of shapes (as `matrix`.ces);
-* most of the time, a component named `$fac`, a `data.frame`;
-* possibly, other components of interest (thier inventory can be accessed with `ls()`).
+* a component named `$coo`, a `list` of shapes (as `matrix`.ces);
+* most of the time, a component named `$fac`, a `data.frame` to store covariates, either `factor`s or `numeric`s;
+* possibly, other components of interest.
 
-One can do several things with a `Coo` object: visualize it, apply morphometric operations, handle the data it contains, but in the end, a __ morphometric method__ to turn coordinates into coefficients.
+One can do several things with a `Coo` object: visualize it, apply morphometric operations, handle the data it contains, but in the end, a __ morphometric method__ will turn coordinates into coefficients.
 
-Morphometrics on coordinates produce a collection __collections__ of coefficients: a `Coe` objects that carries:
+Such morphometric operation on coordinates produce a collection of coefficients: a `Coe` object that carries:
 
-* always, a component named `$coe`, a `matrix` of coefficients;
-* if present in `Coo`, `$fac` is copied;
-* possibly, other components of insterest (their inventory can be accessed with `ls()`).
+* a component named `$coe`, a `matrix` of coefficients;
+* if present in `Coo`, `$fac` is inherited;
+* possibly, other components of interest.
 
 This can be summarized as follows:
 
 `Coo`                      | + | Morphometric method  | = | `Coe`
 ---------------------------|----|----------------------|----|---------------
-`(x;y)` coordinates        | +  | appropriate method   | =  |quantitative variables
+`(x; y)` coordinates        | +  | appropriate method   | =  |quantitative variables
 
 
-Thus `Coo` objects are collections of coordinates that become `Coe` objects when an appropriate morphometric method is applied on them.
+`Coo` objects are collections of coordinates that become `Coe` objects when an appropriate morphometric method is applied on them.
 
-The different families of shape sometimes implies or requires particular operations on them. Some operations on shapes are __generic__ in that they do not depend of the family. For instance, centering a configuration of landmarks or an outline, or calculating their centroid size is, mathematically, the same __generic__ operation. But some operations on shapes are __specific__ to a peculiar family. For instance, calculating elliptical Fourier transforms on a configuration of landmarks makes no sense. 
+ Some operations on `Coo`/`Coe` are __generic__ in that they do not depend of the nature of the shape. For instance, centering a configuration of landmarks or an outline, or calculating their centroid size is, mathematically, the same __generic__ operation. But some operations on shapes are __specific__ to a peculiar family. For instance, calculating elliptical Fourier transforms on a configuration of landmarks would make no sense. 
 
 Momocs implement this desirable behavior and defines __classes__ and __subclasses__, as S3 objects.
 
@@ -115,17 +115,18 @@ Momocs implement this desirable behavior and defines __classes__ and __subclasse
 `OpnCoo` (open outlines)             | `npoly`, `opoly`, `dfourier`       | `OpnCoe`  
 `LdkCoo` (configuration of landmarks)|`fgProcrustes`, `slide`             | `LdkCoe`
 
+You can see this table as a scheme [there](https://raw.githubusercontent.com/vbonhomme/Momocs/master/Momocs_arch.jpg).
+
 In other words:
 
-* any collection of shapes belong to: primarily (pick one) `{OutCoo, OpnCoo, LdkCoo}`; and `Coo` classes
-* generic and specific methods (typically morphometrics methods) can be applied to it
-* it results in a collection of coefficients that belong to: primarily (pick one) `{OutCoe, OpnCoe, LdkCoe}`; and `Coe` classes
+* any collection of shapes belongs to (pick one) `{OutCoo, OpnCoo, LdkCoo}` and is also a `Coo` object;
+* generic and specific methods can be applied to it
+* a collection of coefficients is obtain and belongs to (pick one) `{OutCoe, OpnCoe, LdkCoe}` and is also a `Coe` object.
 
-Finally, generic and specific operations can be applied to the `Coe` objects, chiefly multivariate methods, capitalicized: `PCA`, `LDA`, `CLUST`, `MANOVA`, etc.
+Finally, generic and specific operations can be applied to the `Coe` objects, chiefly multivariate methods, capitalicized: `PCA`, `LDA`, `CLUST`, `MANOVA`, `MSHAPES`, `KMEANS`, etc.
 
 Overall, Momocs implements a simple and consistent grammar that is detailed below. 
-
-Last but not least, if you're familiar with modern R and the Hadley-verse, you should feel home as `ggplot2` graphics, `dplyr` verbs and `magrittr` pipes are implemented available.
+Also, if you're familiar with modern R and the Hadley-verse, you should feel home as `ggplot2` graphics, `dplyr` verbs and `magrittr` pipes are implemented.
 
 ## Single shapes
 Let's load one of the Momocs datasets, some various outlines (an `Out` object):
@@ -136,7 +137,9 @@ panel(shapes, names=TRUE) # base graphics
 panel2(shapes)            # ggplot2 graphics
 ```
 
-`shapes` is one of the datasets bundled with Momocs. It's ("lazy") loaded in memory as soon as you call it, no need for `data(shapes)`. To see all Momocs' datasets, try `data(package="Momocs")`. These datasets are all `Coo` objects (try `class(bot)`), ie collection of shapes. One can do many things on a `Coo` object, as above, eg printing a summary of it (just by typing its name), plotting a family picture with `panel` or `panel2`. Note the `2` that refers to a `ggplot2` variant of a given plot.
+`shapes` is one of the datasets bundled with Momocs. It's ("lazy") loaded in memory as soon as you call it, no need for `data(shapes)`. To see all Momocs' datasets, try `data(package="Momocs")`. These datasets are all `Coo` objects (try `class(bot)`), ie collection of shapes.
+
+One can do many things on a `Coo` object, as above, e.g. printing a summary of it (just by typing its name in the console), plotting a family picture with `panel` or `panel2`. Note the `2` that refers to a `ggplot2` variant of a given plot.
 
 So far, we're interested in single shapes so 
 let's extract the 4th shape from `shapes`, using the traditional syntax.  We plot it with `coo_plot` that comes with several options for plotting all families of shapes.
@@ -161,11 +164,10 @@ coo_plot(coo_center(shp), main="centered Meow")
 coo_plot(coo_sample(shp, 64), points=TRUE, pch=20, main="64-pts Meow")
 ```
 
-Momocs makes use of [maggritr](http://cran.r-project.org/package=magrittr)'s pipe operators. A nice introduction can be found [there](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html). `magrittr` requires a (very small) cerebral gymnastics at the beginning but the benefits are huge, for R as a whole. It makes things clearer, it: saves typing; reduces intermediate variable assignation; reads from left to right; substantiates the pipe we (should) have in mind. `magrittr`'s pipes are already loaded with Momocs.
+Momocs makes use of [maggritr](http://cran.r-project.org/package=magrittr)'s pipe operators. A nice introduction can be found [there](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html). `magrittr` requires a (very small) cerebral gymnastics at the beginning but the benefits are huge, for defining moprhometric pipelines in Momocs but also for R as a whole. It makes things clearer, it: saves typing; reduces intermediate variable assignation; reads from left to right; substantiates the pipe we (should) have in mind. `magrittr`'s pipes are already loaded with Momocs.
 
 ```{r}
 shapes[4] %>% coo_smooth(5) %>% coo_sample(64) %>% coo_scale() %>% coo_plot()
-
 # pipes can be turned into custom function
 cs64 <- function(x) x %>% coo_sample(64) %>% coo_scale() %>% coo_center()
 shapes[4] %>% cs64 %>% coo_plot() # note the axes
@@ -178,7 +180,6 @@ bot %>%
   coo_alignxax() %>% coo_slidedirection("N") %T>% 
   print() %>% stack()
 ```
-Notice that before the `stack` operation, we still have a `Coo` object. And by the way, pipes can also be defined on Momocs objects.
 
 ## Morphometrics
 ### Outline analysis
@@ -212,7 +213,7 @@ calibrate_deviations(bot)
 calibrate_reconstructions(bot)
 ````
 
-Here, 10 harmonics gather 99% of the harmonic power. If you're happy with this criterium, you can even omit `nb.h` in `efourier` : that's the default parameter.
+Here, 10 harmonics gather 99% of the harmonic power. If you're happy with this criterium, you can even omit `nb.h` in `efourier`: that's the default parameter, returned with a message.
 
 ```{r}
 bot.f <- efourier(bot, nb.h=10)
@@ -237,7 +238,7 @@ plot(bot.p)
 
 Amazing but we will do much better afterwards.
 
-The question of normalization in elliptical Fourier transforms is central. Normalization can either be done beforehand, with geometric operations, or afterhand, directly on the matrix of Fourier coefficients and consuming the first harmonic. In brief, I'm not a big fan of the "us the first harmonics and see what happens" strategy, as some biases can be introduced (and actually quite hard to detect), particularly on rounded/ellipsoid shapes. More can be found in `?efourier`.
+The question of normalization in elliptical Fourier transforms is central. Normalization can either be done beforehand, with geometric operations, or afterhand, directly on the matrix of Fourier coefficients and consuming the first harmonic. In brief, I'm not a big fan of the "use the first harmonics and see what happens" strategy, as some biases can be introduced (and actually quite hard to detect), particularly on rounded/ellipsoid shapes. More can be found in `?efourier`.
 
 Here is an example of such bias from the `molars` dataset generously shared by Cornu and Detroit.
 
@@ -254,7 +255,7 @@ molars %>% efourier(norm=TRUE) %>% PCA() %>% plot("type")
 molars %>% efourier(norm=FALSE) %>% PCA() %>% plot("type")
 ```
 
-Finally, you can drop some harmonics with `rm_harm`. And methods that removes the bilateral (a)symmetry are implemented: `rm_Asym` and `rm_Sym`, while `symmetry` calculates some related indices.
+Finally, you can drop some harmonics with `rm_harm`. And methods that removes the bilateral (a)symmetry are implemented: `rm_asym` and `rm_sym`, while `symmetry` calculates some related indices.
 
 ### Open outlines
 Open outlines are curves. Methods actually implemented are:
