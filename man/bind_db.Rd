@@ -37,6 +37,7 @@ bind_db(bot, "hello", df, "foo_id")
 # example on a Coe
 bf <- efourier(bot, 12)
 bind_db(bf, "hello", df, "foo_id")
+
 }
 \seealso{
 Other babel functions: \code{\link{chc2Out}},

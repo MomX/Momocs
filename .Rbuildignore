@@ -8,3 +8,6 @@ NEWS.md
 ^\.travis\.yml$
 update.R
 README.md
+^cran-comments\.md$
+^revdep$
+*.jpg

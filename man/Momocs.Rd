@@ -6,40 +6,23 @@
 \alias{Momocs-package}
 \title{Momocs}
 \description{
-Momocs aims to provide a complete and convenient
-toolkit for morphometrics. It is intended for scientists interested in
-describing quantitatively the shape, and its variations, of the objects they
-study. In the last decade, R has become the open-source lingua franca
-for statistics, and morphometrics known its so-called 'revolution'.
-Nevertheless, morphometric analyses still have to be carried out using
-various software packages, for which source code is mostly unavailable
-or copyrighted. Moreover, existing software packages cannot be extended
-and their bugs are hard to detect and thus correct. This situation
-is detrimental to morphometrics; time is wasted, analyses are restricted
-to available methods, and last but not least, are poorly reproducible.
-This impedes collaborative effort both in software development and
-in morphometric studies. By gathering the common morphometric approaches
-in an open-source environment and welcoming contributions, Momocs is an
-(work-in-progress) attempt to solve this twofold problem and to push morphometrics
-one step further. It hinges on the core functions published
-in the book \emph{Morphometrics using R} by one of us (Claude, 2008), but has been further
-extended to allow other shape description systems. So far, configurations
-of landmarks, outlines and open outline analyses, along with some facilities
-for traditional morphometrics have been implemented. Prior to analysis,
-Momocs can be used to acquire and manipulate data or to import/export
-from/to other formats. Momocs also has the facility for a wide range of
-multivariate analyses and production of the companion graphics.
-Thus a researcher will find that just a few lines of code will provide
-initial results, but the methods implemented can be finely tuned
-and extended according to the user's needs.
+A complete toolkit for morphometrics, from data extraction to multivariate analyses.
+Most common 2D morphometrics approaches are included:
+outlines, open outlines, configurations of landmarks, traditional morphometrics,
+and facilities for data preparation, manipulation and visualization
+with a consistent grammar throughout.
+Momocs allows reproducible, complex morphometric analyses,
+paves the way for a pure open-source workflow in R,
+and other morphometrics approaches should be easy to plug in,
+or develop from, on top of this canvas.
 }
 \details{
-To cite Momocs in publications: \code{citation('Momocs')}.
+To cite Momocs in publications: \code{citation("Momocs")}.
 }
 \section{Cheers}{
 
 We are very grateful to (in alphabetical order): Laurent Bouby, Simon Crameri, April Dinwiddie,
-Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
+Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Glynis Jones, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 Asher Wishkerman, John Wood for their helpful ideas and bug reports.
@@ -53,10 +36,10 @@ Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 }
 \seealso{
 \itemize{
+ \item \bold{Homepage}: \url{https://github.com/vbonhomme/Momocs}
+ \item \bold{Issues}: \url{https://github.com/vbonhomme/Momocs/issues}
  \item \bold{Tutorial}: \code{browseVignettes("Momocs")}
- \item \bold{Homepage}: \url{http://www.vincentbonhomme.fr/Momocs}
- \item \bold{GitHub repo}: \url{https://github.com/vbonhomme/Momocs}
- to contribute to dev, report a bug, ask for something, etc.
+ \item \bold{Email}: \code{bonhomme.vincent@gmail.com} to contribute to dev, ask for something, share your data, etc.
 }
 }
 
