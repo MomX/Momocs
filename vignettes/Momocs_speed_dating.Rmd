@@ -164,7 +164,7 @@ coo_plot(coo_center(shp), main="centered Meow")
 coo_plot(coo_sample(shp, 64), points=TRUE, pch=20, main="64-pts Meow")
 ```
 
-Momocs makes use of [maggritr](http://cran.r-project.org/package=magrittr)'s pipe operators. A nice introduction can be found [there](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html). `magrittr` requires a (very small) cerebral gymnastics at the beginning but the benefits are huge, for defining moprhometric pipelines in Momocs but also for R as a whole. It makes things clearer, it: saves typing; reduces intermediate variable assignation; reads from left to right; substantiates the pipe we (should) have in mind. `magrittr`'s pipes are already loaded with Momocs.
+Momocs makes use of [maggritr](http://cran.r-project.org/package=magrittr)'s pipe operators. A nice introduction can be found [there](http://cran.r-project.org/package=magrittr). `magrittr` requires a (very small) cerebral gymnastics at the beginning but the benefits are huge, for defining moprhometric pipelines in Momocs but also for R as a whole. It makes things clearer, it: saves typing; reduces intermediate variable assignation; reads from left to right; substantiates the pipe we (should) have in mind. `magrittr`'s pipes are already loaded with Momocs.
 
 ```{r}
 shapes[4] %>% coo_smooth(5) %>% coo_sample(64) %>% coo_scale() %>% coo_plot()
@@ -474,7 +474,7 @@ legend("topright", lwd=1,
 ### `dplyr` verbs
 One common yet boring task of morphometrics consists in handling datasets: add new information, remove some individuals, etc.
 
-Momocs adapts [dplyr](http://cran.r-project.org/package=dplyr) verbs to its objects, and add new ones. If you have never heard of dplyr, let's have a look to this [introduction](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html), this may change your (R) life.
+Momocs adapts [dplyr](http://cran.r-project.org/package=dplyr) verbs to its objects, and add new ones. If you have never heard of dplyr, let's have a look to its introduction [there](http://cran.r-project.org/package=dplyr), this may change your (R) life.
 
 Basics verbs are implemented; try the following:
 ```{r, results="markup"}
