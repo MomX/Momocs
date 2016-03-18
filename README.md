@@ -4,32 +4,42 @@
 
 News
 ======
-* Momocs version 1.0 "Mataa" :moyai: is now on CRAN
+* Momocs version 1.0 "Mataa" :moyai: will be released on CRAN in March 2016
 * Momocs' online documentation lives [there](http://vbonhomme.github.io/Momocsdoc/)
 
 
-Momocs, morphometrics using R
+Momocs, morphometrics using [R](http://cran.r-project.org/)
 ======
 
+Momocs is a complete toolkit for morphometrics, from data extraction to multivariate analyses. Most common 2D morphometrics approaches are included: outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.
 
-Momocs is an [R](http://cran.r-project.org/) package intended to ease and to popularize morphometrics, the quantitative analysis of form. It aims at gathering the most common approaches: traditional morphometrics, global descriptors, open outlines, closed outlines and configuration of landmarks into the same, open-source, environment. _And_ using the same, simple and easy-to-learn, open-source, and extendable grammar both for the user and programmers. Momocs hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008), wraps them into the same coding grammar, and extends them both graphically and statistically.
+Momocs allows reproducible, complex morphometric analyses, paves the way for a pure open-source workflow in R, and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.
 
-__You are welcome to:__
+Momocs hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
+
+
+Use it
+--------
+
+__CRAN version__
+
+`install.packages("Momocs")`
+
+__Last version__
+
+That's always a good idea to use the last version. Be sure to have `devtools` installed (`install.packages("devtools")`), then:
+
+`devtools::install_github("vbonhomme/Momocs", build_vignettes= TRUE)`
+
+__How to cite it__ 
+
+`citation("Momocs")`
+
+__You are welcome to__   
 
 * [propose ideas and report bugs](https://github.com/vbonhomme/Momocs/issues)
 * offer your published data to the world
 * ask for hotline and/or collaborate and/or hire me: `bonhomme.vincent@gmail.com`
-
-Use Momocs
---------
-
-### CRAN version
-```install.packages("Momocs")```
-
-### Last version
-That's always a good idea to use the last version. Be sure to have `devtools` installed (`install.packages("devtools")`), then:
-
-```devtools::install_github("vbonhomme/Momocs", build_vignettes= TRUE)```
 
 
 
@@ -45,12 +55,14 @@ __Data acquisition + Babel__
 * Import/Export from/to `.nts`, `.tps`, `PAST`, `.txt`, etc.*
 
 __Outline analysis__
+
 * Elliptical Fourier analysis
 * Radius Variation Fourier analysis
 * Tangent Angle Fourier analysis
 * Calibration for all methods
 
 __Open-outlines__
+
 * Natural (raw) polynomials (`npoly`)
 * Orthogonal (Legendre) polynomials (`opoly`)
 * Discrete Cosinus Transform (`dfourier`)
@@ -58,6 +70,7 @@ __Open-outlines__
 * `bezier` core functions
 
 __Configuration of landmarks__
+
 * Full Generalized Procrustes Adjustment (`fgProcrustes`)
 * Resistant Fit Procrustes Adjustments*
 * Sliding semi-landmarks
@@ -90,7 +103,8 @@ __Graphical methods__
 * Thin plate splines and variation around deformation grids
 
 __Various__
-* Datasets for all types of data (`bot`, `trilo`, `mosquito`, `hearts`, `olea`, `shapes`, `wings`, `oak`, `molars`, `flower`, `chaff`)
+
+* Datasets for all types of data (`bot`, `trilo`, `mosquito`, `hearts`, `olea`, `shapes`, `wings`, `oak`, `molars`, `flower`, `chaff`, `charring`)
 * Vignettes (`browseVignettes("Momocs")`)
 * [Shiny](http://shiny.rstudio.com/) demonstrators/helpers. See [Momecs](https://github.com/vbonhomme/Momecs/)
 * [Online documentation](http://vbonhomme.github.io/Momocs/)
@@ -99,6 +113,6 @@ __Various__
 Architecture
 -------------
 Here is a scheme of the Momocs' architecture:
-![Momocs functionnal architecture](https://github.com/vbonhomme/Momocs/Momocs_arch.jpg)
+![Momocs architecture](https://raw.githubusercontent.com/vbonhomme/Momocs/master/Momocs_arch.jpg)
 
 
