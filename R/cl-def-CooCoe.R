@@ -147,7 +147,7 @@ Coo <- function(...) {
 #'
 #' @export
 Coe <- function(...) {
-    message("Coe constructor does not exist alone. See ?Coe") #todo
+    message("Coe constructor does not exist alone. See ?Coe")
 }
 
 # str.* ----------------------

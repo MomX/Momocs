@@ -13,7 +13,7 @@
 #' @param dist_method to feed \link{dist}'s \code{method} argument, one of
 #' "euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski".
 #' @param hclust_method to feed \link{hclust}'s method argument, one of
-#' "ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".
+#' "ward.D", "ward.D2", "single", "complete" (default), "average", "mcquitty", "median" or "centroid".
 # #' @param mono logical whether to color branches according to their /fac mononophyly status
 # #' @param abbreviate numeric, if specified passed as minlength argument to \link{abbreviate}
 #' @param retain number of axis to retain from the PCA as a range of number eg \code{1:5} to retain

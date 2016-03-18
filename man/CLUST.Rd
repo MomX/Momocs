@@ -23,7 +23,7 @@ CLUST(x, fac, type = "fan", dist_method = "euclidean",
 "euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski".}
 
 \item{hclust_method}{to feed \link{hclust}'s method argument, one of
-"ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median" or "centroid".}
+"ward.D", "ward.D2", "single", "complete" (default), "average", "mcquitty", "median" or "centroid".}
 
 \item{retain}{number of axis to retain from the PCA as a range of number eg \code{1:5} to retain
 the first 5 PCs. If a number <= 1 is passed, then the number of PCs retained
