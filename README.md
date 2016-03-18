@@ -28,7 +28,8 @@ __CRAN version__
 
 __Last version__
 
-That's always a good idea to use the last version. Be sure to have `devtools` installed (`install.packages("devtools")`), then:
+That's always a good idea to use the last version.  
+Be sure to have `devtools` installed (`install.packages("devtools")`), then:
 
 `devtools::install_github("vbonhomme/Momocs", build_vignettes= TRUE)`
 
