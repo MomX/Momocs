@@ -4,8 +4,11 @@
 * win-builder (release)
 
 ## R CMD check --as-cran results
-* Status: OK
-* R CMD check succeeded
+```
+Status: OK
+R CMD check succeeded
+```
+On my machine.
 
 ## Reverse dependencies
 No reverse dependencies.
