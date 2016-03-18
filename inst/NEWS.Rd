@@ -8,7 +8,7 @@
 \section{Changes in version 1.0 "Mataa" (CRAN + GitHub)}{
   \itemize{
     \item \code{Mataa} release (\code{>=1.0}) on CRAN replaces the now completely obsolete \code{0.2.6}.
-    \item It consists of \code{Barley} pushed to CRAN.
+    \item It consists of the last version of \code{Barley} pushed to CRAN.
     \item Development continues on GitHub.
   }
 }
@@ -28,7 +28,8 @@
     \item More checking, tests, etc.
     \item A general review of the helpfiles
     \item Many issues fixed, see \code{https://github.com/vbonhomme/Momocs/issues}
-    \item A tutorial as a vignette (see \code{browseVignette("Momocs")})
+    \item A tutorial as a vignette (see \code{browseVignette("Momocs")} is available
+    \item A companion paper is on its way)
 }
 
 

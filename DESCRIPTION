@@ -1,7 +1,7 @@
 Package: Momocs
 Title: Morphometrics using R
-Version: 0.9.90
-Date: 2016-03-15
+Version: 1.0
+Date: 2016-03-18
 Authors@R: c( person("Vincent", "Bonhomme", , "bonhomme.vincent@gmail.com",
         c("aut", "cre")), person("Julien", "Claude", , , c("aut")) )
 Description: Aiming to provide a complete and convenient toolkit for
@@ -33,8 +33,8 @@ Description: Aiming to provide a complete and convenient toolkit for
         initial results, but the methods implemented can be finely tuned and
         extended according to the user's needs.
 License: GPL-2 | GPL-3
-URL: http://www.vincentbonhomme.fr/Momocs
-BugReports: https://github.com/vbonhomme/Momocs
+URL: https://github.com/vbonhomme/Momocs/
+BugReports: https://github.com/vbonhomme/Momocs/issues
 Depends: R(>= 3.1)
 LazyData: true
 Imports: ape, dplyr, magrittr, graphics, geometry, geomorph, ggplot2, jpeg,
