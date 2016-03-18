@@ -536,11 +536,15 @@ PCcontrib.PCA <-
       shp.i <- morphospace2PCA(x, xax=i, yax=1, pos = pos.i)
       shp[[i]] <- mutate(shp.i, nax=i) }
 
-    shp <- bind_rows(shp)
+    shp <- dplyr::bind_rows(shp)
+    shp$shp <- sd.r[shp$shp]
 
     gg <- ggplot(data=shp, aes(x=x_c + x_d, y=y_c + y_d, group=shp1)) +
       geom_polygon(colour="grey50", fill="grey95") + coord_equal() +
-      facet_grid(nax ~ shp) + labs(x="Position", y="PC")
+      facet_grid(nax ~ shp) + labs(x="Mean + SD", y="PC") +
+      theme(axis.text.x=element_blank(),
+            axis.text.y=element_blank(),
+            axis.ticks=element_blank())
     gg
   }
 
