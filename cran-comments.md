@@ -3,12 +3,12 @@
 * ubuntu (on travis-ci), R 3.2.4
 * win-builder (release)
 
-## R CMD check --as-cran results
+## R CMD check results
 ```
 Status: OK
 R CMD check succeeded
 ```
-On my machine.
+With --as-cran on my machine.
 
 ## Reverse dependencies
 No reverse dependencies.
