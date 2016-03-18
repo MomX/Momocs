@@ -775,6 +775,7 @@ ntscol2Coo <- function(nts.path, sep = "\t") {
 #' # example on a Coe
 #' bf <- efourier(bot, 12)
 #' bind_db(bf, "hello", df, "foo_id")
+#'
 #' @export
 bind_db <- function(x, fac_col="id", db, db_col="id", ...){
   UseMethod("bind_db")
@@ -800,7 +801,7 @@ bind_db.Coo <- function(x, fac_col="id", db, db_col="id", ...){
          "db must be a data.frame")
   .check(nrow(db)==length(x),
          "nrow(db) does not match")
-  .check(any(colnames(df)==db_col),
+  .check(any(colnames(db)==db_col),
          "db_col not found in db")
   .check(any(colnames(x$fac)==fac_col),
          "fac_col not found")
@@ -813,7 +814,7 @@ bind_db.Coo <- function(x, fac_col="id", db, db_col="id", ...){
          "ids mismatch")
   # finally prepare the db
   db_lite <- db[map_id, ] # reorders
-  db_lite <- db_lite[,  -which(colnames(db_lite)==db_col)] #wtf -dbcol doesnt work?
+  db_lite <- db_lite[,  -which(colnames(db_lite)==db_col)] # -dbcol doesnt work!?
   # and adds it to fac
   x$fac <- cbind(x$fac, db_lite)
   x
