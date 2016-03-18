@@ -264,7 +264,7 @@ Open outlines are curves. Methods actually implemented are:
 * `opoly` that fit orthogonal (also called Legendre's) polynomials;
 * `dfourier` for the discrete cosine transform.
 
-Note that `opoly` and `npoly` can only be used on _simple_ curves, curves that have at most one `y` for any `x` coordinates, at least under a given orientation. `dfourier` can fit _complex_ curves, curves "that bak on their feets".
+Note that `opoly` and `npoly` can only be used on _simple_ curves, curves that have at most one `y` for any `x` coordinates, at least under a given orientation. `dfourier` can fit _complex_ curves, curves "that back on their feets".
 
 Here, we will work on the fertile valves of olive stones, a (very partial) dataset provided by my colleagues Terral, Ivorra, and others.
 
@@ -303,18 +303,33 @@ olea %>% filter(var != "Cypre") %>%
 Now the PCA is done on the combination of two `OpnCoe` objects, each one resulting from an independant `opoly` call. That is the meaning of the `[ combined: opoly + opoly analyses ]` printed by the pipe above. Momocs can combine up to four different views.
 
 ### Configuration of landmarks
-_Landmarks methods are being implemented in Momocs (as of nov 2015). Full generalized Procrustes methods are available, and sliding methods on semi landmarls will soon be. Here is a first glimpse._
+_Landmarks methods are still quite experimental (i.e. not tested extensively)
 
-First, let's have a look to graphics facilities
-```{r, message=FALSE, echo=FALSE}
-stack(wings)
+Let's have a look to graphics facilities and apply a full generalized Procrustes adjustment:
+```{r, message=FALSE, echo=TRUE}
+stack(wings, title = "Raw wings")
 w.al <- fgProcrustes(wings)
-stack(w.al)
-ldk_confell(w.al$coo, col = "red")
+stack(w.al, title = "Aligned wings")
 ldk_chull(w.al$coo)
-ldk_contour(w.al$coo)
 ldk_labels(mshapes(w.al$coo))
+# try those as well
+#ldk_confell(w.al$coo, col = "red")
+#ldk_contour(w.al$coo)
+
+# PCA
+PCA(w.al) %>% plot(1)
 ```
+
+Sliding landmarks are supported and rely on `geomorph` package by D.C. Adams and E. Otarola-Castillo.
+
+```{r, message=FALSE, echo=TRUE}
+stack(chaff, title="Raw chaff")
+chaff.al <- fgsProcrustes(chaff)
+stack(chaff.al, title="Aligned chaff")
+chaff.al %>% PCA() %>% plot(~taxa, chull.filled=TRUE)
+```
+
+Again, the grammar is consistent for landmarks.
 
 ### Traditionnal morphometrics
 Traditional morphometrics lose geometries: from the variables, you can't unambiguously reconstruct the shape. Every shape is described by a combination of measurements, (inter landmark distance, quantitative variables, scalar descriptor, etc.)
@@ -341,11 +356,10 @@ Such a `TraCoe` is provided in the `flower` dataset which is simply a rearranged
 
 ```{r}
 flower
-flower %>% PCA() %>% plot("sp", loadings=TRUE)
+flower %>% PCA() %>% plot("sp", loadings=TRUE, contour=TRUE, lev.contour=5)
 ```
 
 Note that, by default, PCA on `TraCoe` object first centers and scales variables. This can be changed, see `?PCA`.
-
 
 ## Multivariate statistics
 
@@ -374,7 +388,7 @@ plot(bot.p, "type") # equivalent to plot(bot.p, 1)
 ```{r}
 plot(bot.p, 1, ellipses=TRUE, ellipsesax = FALSE, pch=c(4, 5))
 plot(bot.p, 1, chull=TRUE, pos.shp = "full_axes", abbreviate.labelsgroups = TRUE, points=FALSE, labelspoints = TRUE)
-plot(bot.p, 1, pos.shp="circle", stars=TRUE, palette=col_qual)
+plot(bot.p, 1, pos.shp="circle", stars=TRUE, chull.filled=TRUE, palette=col_spring)
 ```
 
 You have a `ggplot2` alternative, that is not completely consistent:
@@ -512,7 +526,8 @@ olea %>% filter(var != "Cypre") %>%
 
 ### Various helpers
 Some methods help, on `Coe` objects to:
-
+ * select groups with at least a certain number of individuals in them: `at_least`
+ * removes outliers : `which_out`
  * sample a given number: `sample_n`;
  * sample a given proportion: `sample_frac`;
  * generate new individuals based on calibrated Gaussian coefficient generation: `breed`;
@@ -616,9 +631,20 @@ tps_grid(beer, whisky)
 tps_arr(beer, whisky)
 tps_iso(beer, whisky)
 ```
-
 Again, plenty options in `?tps_*`.
 
+You may also like lolliplots and friends:
+
+```{r}
+coo_lolli(beer, whisky); title("coo_lolli")
+coo_arrows(beer, whisky); title("coo_arrow")
+
+# an example with coo_ruban
+coo_plot(beer) # to get the first plot 
+coo_ruban(beer, edm(beer, whisky), lwd=8) # we add ruban based from deviations
+coo_draw(whisky)
+title("coo_ruban")
+```
 
 ### `ggplot2`
 Many graphical function have their `ggplot2` counterpart:
@@ -674,4 +700,5 @@ bot.p %>% as_df() %>% ggplot() +
   
 ------
  * Done with love by Vincent Bonhomme `<bonhomme.vincent@gmail.com>`.
+ * Help/suggestions/review/critics are welcome.
  * Sources are [there](https://github.com/vbonhomme/Momocs/tree/master/vignettes)
