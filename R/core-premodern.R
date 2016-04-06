@@ -29,7 +29,7 @@ d.default <- function(x, id1, id2){
   }
   id1 %<>% as.numeric()
   id2 %<>% as.numeric()
-  ed(x[id1, ], x[id2, ])
+  ed(x[id1,, drop=FALSE], x[id2,, drop=FALSE])
 }
 
 #' @export
