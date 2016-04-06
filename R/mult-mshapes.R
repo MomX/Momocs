@@ -196,12 +196,13 @@ mshapes.PCA <- function(x, fac, ...){
     x.i <- x[f == levels(f)[i], ]
     if (!is.matrix(x.i)) {
       res[i, ] <- x.i
+      next()
     }
     res[i, ] <- apply(x.i, 2, mean)
   }
   x0$x <- res
   # should retain the true name and not "fac"
-  x0$fac <- data.frame(fac=f)
+  x0$fac <- data.frame(fac=levels(f))
   x0
 }
 
