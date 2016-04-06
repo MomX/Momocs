@@ -148,35 +148,31 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
   morphospace=FALSE
   fac <- x$fac
 
-  # because copied from plot.PCA see https://github.com/vbonhomme/Momocs/issues/121
-  PCA <- x
-  xy <- PCA$x[, c(xax, yax)]
-  ### we check and prepare everything related to groups
-  ### fac not provided
-  if (missing(fac)) { # mainly for density and contour
-    fac <- NULL
-    col.groups <- col
-  } else {
+  # most of it copied from plot.PCA
     # fac provided ------------------------
     # fac provided, as formula ============
     if (class(fac) == "formula") {
       column_name <- attr(terms(fac), "term.labels")
       # we check for wrong formula
-      if (any(is.na(match(column_name, colnames(PCA$fac)))))
+      if (any(is.na(match(column_name, colnames(x$fac)))))
         stop("formula provided must match with $fac column names")
       # otherwise we retrive the column(s)
-      fac <- PCA$fac[, column_name]
+      fac <- x$fac[, column_name]
       # multicolumn/fac case
       if (is.data.frame(fac))
         fac <- factor(apply(fac, 1, paste, collapse="_"))
     }
     # fac provided, as column name or id
     if (length(fac)==1){
-      fac <- PCA$fac[, fac]
+      fac <- x$fac[, fac]
     }
 
-    # if fac is a factor
-    if (is.factor(fac)){
+  if (nlevels(fac) <= 2) { # case of 2 levels and a single LD
+    xy <- x$mod.pred$x[, 1]
+  } else {
+    xy <- x$mod.pred$x[, c(xax, yax)]
+  }
+
       if (!missing(col)){
         if (length(col)==nlevels(fac)) {
           col.groups <- col
@@ -197,8 +193,7 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
       else {
         pch <- 20
       }
-    }
-  }
+
 
   # # if fac is a numeric
   # if (is.numeric(fac)){
@@ -261,15 +256,6 @@ if (nlevels(fac) <= 2){
   if (contour)  .contour(xy, fac, levels= lev.contour, col=col.groups, transp=ifelse(density, 0.5, 0.3), n.kde2d=n.kde2d)
   if (delaunay) .delaunay(xy, fac, col.groups)
 
-  # morphospace handling - a big baby
-  if (morphospace & !is.null(PCA$method) & length(PCA$method)<=4) {
-    morphospacePCA(PCA, xax=xax, yax=yax, pos.shp=pos.shp,
-                   nb.shp=nb.shp, nr.shp=nr.shp, nc.shp=nc.shp,
-                   rotate.shp=rotate.shp, flipx.shp=flipx.shp, flipy.shp=flipy.shp,
-                   amp.shp=amp.shp, size.shp=size.shp, pts.shp=pts.shp,
-                   col.shp=col.shp, border.shp=border.shp, lwd.shp=lwd.shp,
-                   plot=TRUE)
-  }
   if (is.factor(fac)) {
     if (stars)      .stars(xy, fac, col.groups)
     if (ellipsesax) .ellipsesax(xy, fac, conf.ellipsesax, col.groups, lty.ellipsesax, lwd.ellipsesax)
@@ -291,8 +277,8 @@ if (nlevels(fac) <= 2){
       rn <- NULL
     } else {
 
-      if (any(colnames(PCA$fac)==labelspoints)) {
-        rn <- PCA$fac[, labelspoints]
+      if (any(colnames(x$fac)==labelspoints)) {
+        rn <- x$fac[, labelspoints]
       } else {
         rn <- rownames(x$x)
       }
@@ -303,11 +289,11 @@ if (nlevels(fac) <= 2){
            col=col.labelspoints, cex=cex.labelspoints)
     }
   }
-  if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
+  if (loadings)   .loadings(x$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "LD")
-  if (axisvar)    .axisvar(PCA$mod$svd, xax, yax)
+  if (axisvar)    .axisvar(x$mod$svd, xax, yax)
   .title(title)
-  if (eigen)     .eigen(PCA$mod$svd, xax, yax, ev.names="Prop. of trace")
+  if (eigen)     .eigen(x$mod$svd, xax, yax, ev.names="Prop. of trace")
   if (box) box()
   # we return a df
   if (is.null(fac))
