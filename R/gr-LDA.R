@@ -200,18 +200,33 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
     }
   }
 
-  # if fac is a numeric
-  if (is.numeric(fac)){
-    if (missing(col)){
-      if (missing(palette)){
-        palette <- col_gallus
-      }
-      cols_breaks = 1000
-      cols_all <- palette(cols_breaks)
-      cols_id <- fac  %>% .normalize()  %>% cut(breaks = cols_breaks)  %>% as.numeric()
-      col <- cols_all[cols_id]
-    }
-  }
+  # # if fac is a numeric
+  # if (is.numeric(fac)){
+  #   if (missing(col)){
+  #     if (missing(palette)){
+  #       palette <- col_gallus
+  #     }
+  #     cols_breaks = 1000
+  #     cols_all <- palette(cols_breaks)
+  #     cols_id <- fac  %>% .normalize()  %>% cut(breaks = cols_breaks)  %>% as.numeric()
+  #     col <- cols_all[cols_id]
+  #   }
+  # }
+
+if (nlevels(fac) <= 2){
+    op <- par(mfrow=c(2, 1), oma=c(0, 0, 0, 0), mar=c(4, 1, 3, 1 ))
+    on.exit(op)
+    hist.range <- range(xy)
+    hist(xy[fac==levels(fac)[1]], xlim=hist.range,
+                   ylab=NA, xlab="LD1", main=levels(fac)[1],
+                   col=palette(2)[1], axes=FALSE); axis(1)
+    hist(xy[fac==levels(fac)[2]], xlim=hist.range,
+                   ylab=NA, xlab="LD1", main=levels(fac)[2],
+                   col=palette(2)[2], axes=FALSE); axis(1)
+    par(mfrow=c(1, 1))
+    return()
+}
+
   # cosmetics
   if ((density) & missing(contour)) contour   <- TRUE
   if ((density) & missing(ellipses)) ellipses <- FALSE
