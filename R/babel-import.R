@@ -10,17 +10,18 @@
 #' @param txt.paths a vector of paths corresponding to the .txt files to import. If not
 #' provided (or \code{NULL}), switches to the automatic version, just as in\link{import_jpg}.
 #' See Details there.
+#' @param verbose logical whether to print progress in the console
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
 #' \link{Out}, \link{Opn} and \link{Ldk}.
 #' @seealso babel functions.
 #' @export
-import_txt <- function(txt.paths = NULL, ...) {
+import_txt <- function(txt.paths = NULL, verbose=FALSE, ...) {
   if (is.null(txt.paths)) {
     txt.paths <- .lf.auto()
   }
-  cat(" * Extracting", length(txt.paths), "..txt coordinates...\n")
-  if (length(txt.paths) > 10) {
+  cat(" * Extracting ", length(txt.paths), "..txt coordinates...\n")
+  if (length(txt.paths) > 10 & verbose) {
     pb <- txtProgressBar(1, length(txt.paths))
     t <- TRUE
   } else {
@@ -266,8 +267,8 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
     jpg.paths <- .lf.auto()
   }
   begin <- Sys.time()
-  message("Extracting", length(jpg.paths), ".jpg outlines...")
-  if (length(jpg.paths) > 10) {
+  message("Extracting ", length(jpg.paths), ".jpg outlines...")
+  if (length(jpg.paths) > 10 & verbose) {
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE
   } else {
