@@ -4,12 +4,14 @@
 \alias{import_txt}
 \title{Imports coordinates from a .txt file}
 \usage{
-import_txt(txt.paths = NULL, ...)
+import_txt(txt.paths = NULL, verbose = FALSE, ...)
 }
 \arguments{
 \item{txt.paths}{a vector of paths corresponding to the .txt files to import. If not
 provided (or \code{NULL}), switches to the automatic version, just as in\link{import_jpg}.
 See Details there.}
+
+\item{verbose}{logical whether to print progress in the console}
 
 \item{...}{arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.}
 }
