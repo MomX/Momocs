@@ -2,11 +2,16 @@ language: r
 sudo: false
 cache: packages
 warnings_are_errors: false
+
+env:
+- RGL_USE_NULL=TRUE
  
 after_success:
 - Rscript -e 'covr::codecov()'
 
 notifications:
   email:
+    - bonhomme.vincent@gmail.com
     on_success: always
     on_failure: always
+    
