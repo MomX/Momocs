@@ -78,7 +78,7 @@ import_Conte <- function(img, x) {
   S <- 6
   while ((any(c(X[a], Y[a]) != c(x1, x2)) | length(X) < 3)) {
     if (abs(img[x[1] + M[1, S + 1], x[2] + M[2, S + 1]] -
-              img[x[1], x[2]]) < 0.1) {
+            img[x[1], x[2]]) < 0.1) {
       a <- a + 1
       X[a] <- x[1]
       Y[a] <- x[2]
@@ -86,7 +86,7 @@ import_Conte <- function(img, x) {
       SS[a] <- S + 1
       S <- (S + 7)%%8
     } else if (abs(img[x[1] + M[1, S + 2], x[2] + M[2, S +
-                                                      2]] - img[x[1], x[2]]) < 0.1) {
+                                                    2]] - img[x[1], x[2]]) < 0.1) {
       a <- a + 1
       X[a] <- x[1]
       Y[a] <- x[2]
@@ -94,7 +94,7 @@ import_Conte <- function(img, x) {
       SS[a] <- S + 2
       S <- (S + 7)%%8
     } else if (abs(img[x[1] + M[1, S + 3], x[2] + M[2, S +
-                                                      3]] - img[x[1], x[2]]) < 0.1) {
+                                                    3]] - img[x[1], x[2]]) < 0.1) {
       a <- a + 1
       X[a] <- x[1]
       Y[a] <- x[2]
@@ -294,9 +294,11 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
     }
   }
   names(res) <- jpg.paths %>% .trim.ext() %>% .trim.path()
-  end <- Sys.time()
-  time <- end - begin
-  cat(" * Done in", as.numeric(time), units(time))
+  if (verbose) {
+    end <- Sys.time()
+    time <- end - begin
+    message("Done in", as.numeric(time), units(time))
+  }
   return(res)
 }
 
