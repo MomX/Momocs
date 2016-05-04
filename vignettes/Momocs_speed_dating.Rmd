@@ -331,7 +331,7 @@ chaff.al %>% PCA() %>% plot(~taxa, chull.filled=TRUE)
 
 Again, the grammar is consistent for landmarks.
 
-### Traditionnal morphometrics
+### Traditional morphometrics
 Traditional morphometrics lose geometries: from the variables, you can't unambiguously reconstruct the shape. Every shape is described by a combination of measurements, (inter landmark distance, quantitative variables, scalar descriptor, etc.)
 
 Momocs provides some basics utilities to work with such objects in the `TraCoe` class. There is not `TraCoo` per se but it can be obtained from any `Coo` with the `measure` method. Let's take the `hearts` dataset that comes from handdrawn heart shapes from my former colleagues at the French Intitute of Pondicherry:
