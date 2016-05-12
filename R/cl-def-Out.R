@@ -3,15 +3,15 @@
 #' Builds an Out object
 #'
 #' In Momocs, \code{Out}-classes objects are lists of closed \bold{out}lines,
-#' with optionnal components, and on which generic methods such as plotting methods (e.g. \link{stack})
+#' with optional components, and on which generic methods such as plotting methods (e.g. \link{stack})
 #' and specific methods (e.g. \link{efourier} can be applied.
 #'  \code{Out} objects are primarily \code{\link{Coo}} objects.
 #'
 #' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
 #' or an array or an Out object or an Ldk object
-#' @param fac (optionnal) a \code{data.frame} of factors and/or numerics
+#' @param fac (optional) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
-#' @param ldk (optionnal) \code{list} of landmarks as row number indices
+#' @param ldk (optional) \code{list} of landmarks as row number indices
 #' @return an \code{Out} object
 #' @family Coo objects
 #' @aliases Out
@@ -162,7 +162,7 @@ print.Out <- function(x, ...) {
 #'  \code{OutCoe} objects are primarily \code{\link{Coe}} objects.
 #'
 #' @param coe \code{matrix} of harmonic coefficients
-#' @param fac (optionnal) a \code{data.frame} of factors,
+#' @param fac (optional) a \code{data.frame} of factors,
 #' specifying the grouping structure
 #' @param method used to obtain these coefficients
 #' @param norm the normalisation used to obtain these coefficients
