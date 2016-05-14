@@ -851,7 +851,7 @@ bind_db.Coe <- bind_db.Coo
 #' filenames, typically their extension, e.g. '.jpg'.
 #' @return data.frame with, for every individual, the corresponding level
 #' for every group.
-#' @note This is, to my view, a good practice to 'store' the grouoing structure
+#' @note This is, to my view, a good practice to 'store' the grouping structure
 #' in filenames, but it is of course not mandatory.
 #'
 #' Note also that you can: i) do a \link{import_jpg} and save is a list, say 'foo';
