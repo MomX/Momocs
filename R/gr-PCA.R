@@ -73,6 +73,7 @@
 #' @param color.legend logical whether to add a (cheap) color legend for numeric fac
 #' @param axisnames logical whether to add PC names
 #' @param axisvar logical whether to draw the variance they explain
+#' @param unit logical whether to add plane unit
 #' @param eigen logical whether to draw a plot of the eigen values
 #' @param rug logical whether to add rug to margins
 #' @param title character a name for the plot
@@ -239,6 +240,8 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      axisnames=TRUE,
                      #axisvar
                      axisvar=TRUE,
+                     # unit
+                     unit=FALSE,
                      #eigen
                      eigen=TRUE,
                      # various
@@ -388,6 +391,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (loadings)   .loadings(PCA$rotation[, c(xax, yax)])
   if (axisnames)  .axisnames(xax, yax, "PC")
   if (axisvar)    .axisvar(PCA$sdev, xax, yax)
+  if (unit)       .unit(nb.grids)
   .title(title)
   if (eigen)     .eigen(PCA$sdev, xax, yax, ev.names="Eigenvalues")
   if (box) box()

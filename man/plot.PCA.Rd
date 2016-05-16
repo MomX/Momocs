@@ -22,8 +22,8 @@
   cex.labelspoints = 0.6, abbreviate.labelspoints = TRUE,
   labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
   abbreviate.labelsgroups = FALSE, color.legend = FALSE, axisnames = TRUE,
-  axisvar = TRUE, eigen = TRUE, rug = TRUE, title = substitute(x),
-  box = TRUE, old.par = TRUE, ...)
+  axisvar = TRUE, unit = FALSE, eigen = TRUE, rug = TRUE,
+  title = substitute(x), box = TRUE, old.par = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}
@@ -145,6 +145,8 @@ a matrix of positions. See \link{pos.shapes}}
 \item{axisnames}{logical whether to add PC names}
 
 \item{axisvar}{logical whether to draw the variance they explain}
+
+\item{unit}{logical whether to add plane unit}
 
 \item{eigen}{logical whether to draw a plot of the eigen values}
 
