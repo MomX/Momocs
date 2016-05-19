@@ -37,7 +37,7 @@ from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
 The number of groups must be consistent accross filenames.
 }
 \note{
-This is, to my view, a good practice to 'store' the grouoing structure
+This is, to my view, a good practice to 'store' the grouping structure
 in filenames, but it is of course not mandatory.
 
 Note also that you can: i) do a \link{import_jpg} and save is a list, say 'foo';
