@@ -56,7 +56,8 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_slidedirection}},
   \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},
-  \code{\link{coo_trans}}, \code{\link{coo_trim}},
+  \code{\link{coo_trans}}, \code{\link{coo_trimbottom}},
+  \code{\link{coo_trimtop}}, \code{\link{coo_trim}},
   \code{\link{coo_up}}, \code{\link{is_closed}}
 
 Other scaling functions: \code{\link{coo_scalex}},
