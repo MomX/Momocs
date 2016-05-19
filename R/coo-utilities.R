@@ -1928,4 +1928,58 @@ coo_trim.Coo <- function(coo, trim=1){
   coo$coo %<>% lapply(coo_trim, trim)
 }
 
+#' Trims top coordinates from shape
+#'
+#' Removes \code{trim} coordinates from the top of a shape.
+#' @inheritParams coo_check
+#' @param trim \code{numeric}, the number of coordinates to trim
+#' @aliases coo_trim
+#' @family coo_ utilities
+#' @examples
+#' olea[1] %>% coo_sample(12) %T>%
+#'    print() %T>% ldk_plot() %>%
+#'    coo_trimtop(4) %T>% print() %>% points(col="red")
+#' @export
+coo_trimtop <- function(coo, trim=1){
+  UseMethod("coo_trimtop")
+}
+
+#' @export
+coo_trimtop.default <- function(coo, trim=1){
+  coo %<>% coo_check()
+  return(coo[(trim+1):nrow(coo),])
+}
+
+#' @export
+coo_trimtop.Coo <- function(coo, trim=1){
+  coo$coo %<>% lapply(coo_trimtop, trim)
+}
+
+#' Trims bottom coordinates from shape
+#'
+#' Removes \code{trim} coordinates from the bottom of a shape.
+#' @inheritParams coo_check
+#' @param trim \code{numeric}, the number of coordinates to trim
+#' @aliases coo_trim
+#' @family coo_ utilities
+#' @examples
+#' olea[1] %>% coo_sample(12) %T>%
+#'    print() %T>% ldk_plot() %>%
+#'    coo_trimbottom(4) %T>% print() %>% points(col="red")
+#' @export
+coo_trimbottom <- function(coo, trim=1){
+  UseMethod("coo_trimbottom")
+}
+
+#' @export
+coo_trimbottom.default <- function(coo, trim=1){
+  coo %<>% coo_check()
+  return(coo[1:(nrow(coo)-trim),])
+}
+
+#' @export
+coo_trimbottom.Coo <- function(coo, trim=1){
+  coo$coo %<>% lapply(coo_trimbottom, trim)
+}
+
 # end of coo_utilities
