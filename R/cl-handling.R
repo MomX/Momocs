@@ -41,6 +41,7 @@ select.default <- function(.data, ...){
 select.Coo <- function(.data, ...){
   #.data %<>% validate()
   .data$fac <- select(.data$fac, ...)
+  .data$fac %<>% .refactor()
   .data
 }
 
@@ -76,6 +77,7 @@ rename.default <- function(.data, ...){
 rename.Coo <- function(.data, ...){
   #.data %<>% validate()
   .data$fac <- rename(.data$fac, ...)
+  .data$fac %<>% .refactor()
   .data
 }
 
@@ -112,6 +114,7 @@ mutate.default <- function(.data, ...){
 mutate.Coo <- function(.data, ...){
   #.data %<>% validate()
   .data$fac <- mutate(.data$fac, ...)
+  .data$fac %<>% .refactor()
   .data
 }
 
@@ -148,6 +151,7 @@ transmute.default <- function(.data, ...){
 transmute.Coo <- function(.data, ...){
   #.data %<>% validate()
   .data$fac <- transmute(.data$fac, ...)
+  .data$fac %<>% .refactor()
   .data
 }
 
@@ -191,7 +195,9 @@ filter.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- filter(df, ...)
-  subset(.data, df$.id)
+  .data <- subset(.data, df$.id)
+  .data$fac %<>% .refactor()
+  .data
 }
 
 #' @export
@@ -232,7 +238,9 @@ arrange.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- arrange(df, ...)
-  subset(.data, df$.id)
+  .data <- subset(.data, df$.id)
+  .data$fac %<>% .refactor()
+  .data
 }
 
 #' @export
@@ -271,15 +279,18 @@ slice.default <- function(.data, ...){
 #' @export
 slice.Coo <- function(.data, ...){
   #.data %<>% validate()
-  subset(.data, ...)}
+  subset(.data, ...)
+  }
 
 #' @export
 slice.Coe <- function(.data, ...){
-  subset(.data, ...)}
+  subset(.data, ...)
+  }
 
 #' @export
 slice.PCA <- function(.data, ...){
-  subset(.data, ...)}
+  subset(.data, ...)
+  }
 
 # sample_n ---------------
 
@@ -535,7 +546,7 @@ combine.Out <- function(...) {
   #     stop("objects to combine must have the same number of items")
   Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
-  #Out$fac <- .refactor(Out$fac)
+  Out$fac <- .refactor(Out$fac)
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
