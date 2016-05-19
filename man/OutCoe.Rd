@@ -9,7 +9,7 @@ OutCoe(coe = matrix(), fac = data.frame(), method, norm)
 \arguments{
 \item{coe}{\code{matrix} of harmonic coefficients}
 
-\item{fac}{(optionnal) a \code{data.frame} of factors,
+\item{fac}{(optional) a \code{data.frame} of factors,
 specifying the grouping structure}
 
 \item{method}{used to obtain these coefficients}

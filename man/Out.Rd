@@ -10,17 +10,17 @@ Out(x, fac = data.frame, ldk = list())
 \item{x}{a \code{list} of matrices of \eqn{(x; y)} coordinates,
 or an array or an Out object or an Ldk object}
 
-\item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
+\item{fac}{(optional) a \code{data.frame} of factors and/or numerics
 specifying the grouping structure}
 
-\item{ldk}{(optionnal) \code{list} of landmarks as row number indices}
+\item{ldk}{(optional) \code{list} of landmarks as row number indices}
 }
 \value{
 an \code{Out} object
 }
 \description{
 In Momocs, \code{Out}-classes objects are lists of closed \bold{out}lines,
-with optionnal components, and on which generic methods such as plotting methods (e.g. \link{stack})
+with optional components, and on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. \link{efourier} can be applied.
  \code{Out} objects are primarily \code{\link{Coo}} objects.
 }
