@@ -171,7 +171,7 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
     }
 
   if (nlevels(fac) <= 2) { # case of 2 levels and a single LD
-    xy <- x$mod.pred$x[, 1]
+    xy <- x$mod.pred$x[, 1, drop=FALSE]
   } else {
     xy <- x$mod.pred$x[, c(xax, yax)]
   }
