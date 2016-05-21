@@ -11,6 +11,8 @@ after_success:
 
 notifications:
   email:
+    recipients:
+      - bonhomme.vincent@gmail.com
     on_success: always
     on_failure: always
     
