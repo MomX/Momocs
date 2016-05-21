@@ -1,8 +1,8 @@
 [![Travis-CI Build Status](https://travis-ci.org/vbonhomme/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
 [![Coverage Status](https://img.shields.io/codecov/c/github/vbonhomme/Momocs/master.svg)](https://codecov.io/github/vbonhomme/Momocs?branch=master)
-[![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)]
-[![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)]
+CRAN downloads: ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)
+![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
 News
 ======
