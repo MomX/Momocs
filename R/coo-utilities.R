@@ -1901,7 +1901,7 @@ coo_calliper <- function(coo, arr.ind = FALSE) {
 }
 
 # coo_trim ------------------
-#' Trims coordinates from shape
+#' Trims both ends coordinates from shape
 #'
 #' Removes \code{trim} coordinates at both ends of a shape, ie
 #' from top and bottom of the shape matrix.

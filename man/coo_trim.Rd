@@ -2,7 +2,7 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_trim}
 \alias{coo_trim}
-\title{Trims coordinates from shape}
+\title{Trims both ends coordinates from shape}
 \usage{
 coo_trim(coo, trim = 1)
 }
