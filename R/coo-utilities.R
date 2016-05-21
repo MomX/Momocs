@@ -1536,7 +1536,7 @@ coo_rev.Coo <- function(coo) {
   # ldk ids (if any) also have to be changed
   if (length(coo$ldk)!=0){
     for (i in 1:length(coo)){
-      coo$ldk[[i]] <- (nrow(coo[i])+1) - coo$ldk[[i]]
+      coo$ldk[[i]] <- (nrow(coo$coo[[i]])+1) - coo$ldk[[i]]
     }
     message("$ldk has been changed accordingly")
   }
@@ -1908,6 +1908,7 @@ coo_calliper <- function(coo, arr.ind = FALSE) {
 #' @inheritParams coo_check
 #' @param trim \code{numeric}, the number of coordinates to trim
 #' @family coo_ utilities
+#' @family coo_trimming functions
 #' @examples
 #' olea[1] %>% coo_sample(12) %T>%
 #'    print() %T>% ldk_plot() %>%
@@ -1933,8 +1934,8 @@ coo_trim.Coo <- function(coo, trim=1){
 #' Removes \code{trim} coordinates from the top of a shape.
 #' @inheritParams coo_check
 #' @param trim \code{numeric}, the number of coordinates to trim
-#' @aliases coo_trim
 #' @family coo_ utilities
+#' @family coo_trimming functions
 #' @examples
 #' olea[1] %>% coo_sample(12) %T>%
 #'    print() %T>% ldk_plot() %>%
@@ -1960,8 +1961,8 @@ coo_trimtop.Coo <- function(coo, trim=1){
 #' Removes \code{trim} coordinates from the bottom of a shape.
 #' @inheritParams coo_check
 #' @param trim \code{numeric}, the number of coordinates to trim
-#' @aliases coo_trim
 #' @family coo_ utilities
+#' @family coo_trimming functions
 #' @examples
 #' olea[1] %>% coo_sample(12) %T>%
 #'    print() %T>% ldk_plot() %>%
