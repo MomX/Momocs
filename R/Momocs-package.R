@@ -69,7 +69,7 @@ magrittr::`%T>%`
 #' @importFrom grDevices chull
 #' @importFrom grDevices chull
 #' @importFrom graphics abline arrows axis barplot box
-#' contour image layout legend lines locator
+#' contour hist image layout legend lines locator
 #' par points polygon rasterImage rect rug
 #' segments strheight strwidth text title
 #' @importFrom stats cor cov cov.wt df dist dnorm
