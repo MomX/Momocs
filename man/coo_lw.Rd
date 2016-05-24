@@ -7,7 +7,7 @@
 coo_lw(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or Coo object}
 }
 \value{
 a vector of two \code{numeric}: the length and the width.
