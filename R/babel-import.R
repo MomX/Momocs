@@ -318,6 +318,9 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
 #' @family babel functions
 #' @export
 import_StereoMorph_curve1 <- function(path){
+  # tem fix
+  stop("deprecated due to major update in StereoMorph export file format. You can try the solution by Stas Malavin before this being fixed in Momocs: https://github.com/stas-malavin/Momocs/blob/master/R/importSM.r")
+
   # we split the loci contained in the first column
   df <- read.table(path, header=FALSE, stringsAsFactors = FALSE) %>%
     select(locus=1, x=2, y=3) %>%
@@ -330,6 +333,9 @@ import_StereoMorph_curve1 <- function(path){
 #' @family babel functions
 #' @export
 import_StereoMorph_curve <- function(path, names){
+  # tem fix
+  stop("deprecated due to major update in StereoMorph export file format. You can try the solution by Stas Malavin before this being fixed in Momocs: https://github.com/stas-malavin/Momocs/blob/master/R/importSM.r")
+
   # we extract filenames and import them
   lf <- list.files(path, full.names=TRUE)
   res <- lapply(lf, import_StereoMorph_curve1)
@@ -348,6 +354,9 @@ import_StereoMorph_curve <- function(path, names){
 #' @rdname import_StereoMorph
 #' @export
 import_StereoMorph_ldk1 <- function(path){
+  # tem fix
+  stop("deprecated due to major update in StereoMorph export file format. You can try the solution by Stas Malavin before this being fixed in Momocs: https://github.com/stas-malavin/Momocs/blob/master/R/importSM.r")
+
   # a cousin of import_txt
   read.table(path, header=FALSE,
              row.names=1, col.names=c("l", "x", "y"), stringsAsFactors = FALSE)
@@ -356,6 +365,9 @@ import_StereoMorph_ldk1 <- function(path){
 #' @rdname import_StereoMorph
 #' @export
 import_StereoMorph_ldk <- function(path, names){
+  # tem fix
+  stop("deprecated due to major update in StereoMorph export file format. You can try the solution by Stas Malavin before this being fixed in Momocs: https://github.com/stas-malavin/Momocs/blob/master/R/importSM.r")
+
   # we extract filenames and import them
   lf <- list.files(path, full.names=TRUE)
   res <- lapply(lf, import_StereoMorph_ldk1)
