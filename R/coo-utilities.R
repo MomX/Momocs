@@ -1954,7 +1954,11 @@ coo_trimtop.default <- function(coo, trim=1){
 #' @export
 coo_trimtop.Coo <- function(coo, trim=1){
   coo$coo %<>% lapply(coo_trimtop, trim)
+  # we also trim landmarks
+  coo$ldk %<>% lapply(function(x) x[x > trim] - trim)
+  coo
 }
+
 
 #' Trims bottom coordinates from shape
 #'
