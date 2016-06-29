@@ -280,14 +280,14 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
   n <- length(jpg.paths)
   for (i in seq(along = jpg.paths)) {
     if (verbose) {
-      cat(jpg.paths[i])
+      cat("[", i, "/", n, "] ", .trim.path(jpg.paths[i]))
     }
     coo_i <- import_jpg1(jpg.paths[i], auto.notcentered = auto.notcentered,
                          fun.notcentered = fun.notcentered, threshold = threshold)
     res[[i]] <- coo_i
     # if (export){coo_export(coo_i, jpg.paths[i])}
     if (verbose) {
-      cat("\tOK - ", n-i, " remaining\n", sep = "")
+      cat("\n")
     } else {
       if (t)
         setTxtProgressBar(pb, i)
@@ -621,10 +621,14 @@ chc2Out <- function(chc, skip, names){
 #' Useful to convert .nef files into Coe objects.
 #' It returns a matrix of coefficients that can be passed to \link{Coe}.
 #' @param nef.path the path to the .nef file
-#' @note I'm not very familiar to other morphometric formats.
+#' @note nef2Coe cannot really deduces some components of the \code{OutCoe} constructor.
+#' Most of the time working around \code{x <- nef2Coe(); OutCoe(x, method="efourier", norm=TRUE/FALSE)}
+#' shoudl do the job. Overall, I'm not very familiar to other morphometric formats.
 #' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 #' please let met know!
 #' @family babel functions
+#' @examples
+#' # nef2Coe cannot really deduces some components of the
 #' @export
 nef2Coe <- function(nef.path) {
   # change nef to coe one day

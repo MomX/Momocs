@@ -14,9 +14,14 @@ Useful to convert .nef files into Coe objects.
 It returns a matrix of coefficients that can be passed to \link{Coe}.
 }
 \note{
-I'm not very familiar to other morphometric formats.
+nef2Coe cannot really deduces some components of the \code{OutCoe} constructor.
+Most of the time working around \code{x <- nef2Coe(); OutCoe(x, method="efourier", norm=TRUE/FALSE)}
+shoudl do the job. Overall, I'm not very familiar to other morphometric formats.
 So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
 please let met know!
+}
+\examples{
+# nef2Coe cannot really deduces some components of the
 }
 \seealso{
 Other babel functions: \code{\link{bind_db}},
