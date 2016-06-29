@@ -337,7 +337,7 @@ plot_CV.default <- function(x, freq=TRUE,rm0 = TRUE, cex=5, round=2, labels=TRUE
   df <- as.data.frame(tab)
   #colnames(df) <- c("actual", "classified", "count")
   if (freq) {
-    df <- df %>% group_by_(colnames(df)[2]) %>%
+    df <- df %>% group_by_(colnames(df)[1]) %>%
       mutate(Freq=round(Freq/sum(Freq), round))
   }
   gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], fill="Freq")) +
