@@ -4,7 +4,7 @@
 \alias{boxplot.PCA}
 \title{Boxplot on PCA objects}
 \usage{
-\method{boxplot}{PCA}(x, fac = NULL, nax = 1:5, ...)
+\method{boxplot}{PCA}(x, fac = NULL, nax = 1:3, ...)
 }
 \arguments{
 \item{x}{an object of class "PCA", typically obtained with \link{PCA}}

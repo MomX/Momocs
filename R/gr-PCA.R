@@ -466,7 +466,7 @@ plot3.PCA <- function(PCA,  ... ){
 #' #p +  theme_minimal() + scale_fill_grey()
 #' #p + facet_wrap(~PC, scales = "free")
 #' @export
-boxplot.PCA <- function(x, fac=NULL, nax=1:5, ...){
+boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
   PCA <- x
   if (max(nax) > ncol(PCA$x)) nax <- 1:ncol(PCA$x)
   if (is.null(fac)) {
