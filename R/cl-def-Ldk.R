@@ -73,7 +73,7 @@ Ldk.Coo <- function(coo, links = NULL, slidings = NULL, fac = coo$fac) {
 # The print method for Ldk objects
 #' @export
 print.Ldk <- function(x, ...) {
-  Ldk <- x
+  Ldk <- validate(x)
   ### Header
   cat("An Ldk object with: \n")
   cat(rep("-", 20), "\n", sep = "")

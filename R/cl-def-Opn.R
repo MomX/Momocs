@@ -75,7 +75,7 @@ Opn.Coo <- function(x, fac = data.frame(), ldk = list()) {
 # The print method for Out objects
 #' @export
 print.Opn <- function(x, ...) {
-  Opn <- x
+  Opn <- validate(x)
   ### Header
   cat("An Opn object with: \n")
   cat(rep("-", 20), "\n", sep = "")

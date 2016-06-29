@@ -105,7 +105,7 @@ as.Out <- function(object, OutCoe, nb.pts=120){
 # The print method for Out objects
 #' @export
 print.Out <- function(x, ...) {
-  Out <- x
+  Out <- validate(x)
   ### Header
   cat("An Out object with: \n")
   cat(rep("-", 20), "\n", sep = "")
