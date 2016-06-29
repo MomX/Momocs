@@ -47,7 +47,7 @@ magrittr::`%T>%`
 #' \item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 #' }
 #' @section Cheers:
-#' We are very grateful to (in alphabetical order): Laurent Bouby, Simon Crameri, April Dinwiddie,
+#' We are very grateful to (in alphabetical order): Sean Asselin, Laurent Bouby, Simon Crameri, April Dinwiddie,
 #' Carl Lipo, Cedric Gaucherel, Sarah Ivorra, Glynis Jones, Nathalie Keller, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 #' Stas Malavin, Neus Martinez, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 #' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
