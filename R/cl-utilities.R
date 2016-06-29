@@ -63,7 +63,7 @@ table.LDA <- table.Coo
 
 # ldk setters/getters ----------------------------------------------------------
 
-#' Defines landmarks on Out and Opn objects
+#' Defines new landmarks on Out and Opn objects
 #'
 #' Helps to define landmarks on a \code{Coo} object.
 #' The number of landmarks must be specified and rows indices that
@@ -84,6 +84,7 @@ table.LDA <- table.Coo
 #' bot2$ldk
 #' }
 #' @export
+#' @export
 def_ldk <- function(Coo, nb.ldk) {
   UseMethod("def_ldk")
 }
@@ -93,12 +94,54 @@ def_ldk.Out <- function(Coo, nb.ldk) {
     stop("'nb.ldk' must be specified")
   ldk <- list()
   for (i in seq(along = Coo$coo)) {
+    cat(i, "/", length(Coo$coo), " ")
     Coo$ldk[[i]] <- coo_ldk(Coo$coo[[i]], nb.ldk = nb.ldk)
   }
   return(Coo)
 }
 #' @export
 def_ldk.Opn <- def_ldk.Out
+
+#' Adds new landmarks on Out and Opn objects
+#'
+#' Helps to add new landmarks on a \code{Coo} object on top of existing ones.
+#' The number of landmarks must be specified and rows indices that
+#' correspond to the nearest points clicked on every outlines are
+#' stored in the \code{$ldk} slot of the \code{Coo} object.
+#' @param Coo an Out or Opn object
+#' @param nb.ldk the number of landmarks to add on every shape
+#' @return an Out or an Opn object with some landmarks defined
+#' @details Note that if no landmarks are already defined,
+#' then this function is equivalent to \link{def_ldk}.
+#' @family ldk/slidings methods
+#' @examples
+#' \dontrun{
+#' data(hearts)
+#' hearts <- slice(hearts, 1:5) # to make it shorter to try
+#' # click on 3 points, 5 times.
+#' # Don't forget to save the object returned by def_ldk...
+#' hearts2 <- add_ldk(hearts, 3)
+#' stack(hearts2)
+#' hearts2$ldk
+#' }
+#' @export
+add_ldk <- function(Coo, nb.ldk) {
+  UseMethod("add_ldk")
+}
+#' @export
+add_ldk.Out <- function(Coo, nb.ldk) {
+  if (missing(nb.ldk))
+    stop("'nb.ldk' must be specified")
+  ldk <- list()
+  for (i in seq(along = Coo$coo)) {
+    cat(i, "/", length(Coo$coo), " ")
+    Coo$ldk[[i]] <- c(Coo$ldk[[i]], coo_ldk(Coo$coo[[i]], nb.ldk = nb.ldk))
+  }
+  return(Coo)
+}
+#' @export
+add_ldk.Opn <- add_ldk.Out
+
 
 #' Retrieves landmarks coordinates
 #'

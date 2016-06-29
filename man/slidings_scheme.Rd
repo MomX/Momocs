@@ -26,8 +26,8 @@ slidings_scheme(chaff)
 
 }
 \seealso{
-Other ldk/slidings methods: \code{\link{def_ldk}},
-  \code{\link{def_slidings}}, \code{\link{get_ldk}},
-  \code{\link{get_slidings}}
+Other ldk/slidings methods: \code{\link{add_ldk}},
+  \code{\link{def_ldk}}, \code{\link{def_slidings}},
+  \code{\link{get_ldk}}, \code{\link{get_slidings}}
 }
 

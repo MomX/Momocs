@@ -38,8 +38,8 @@ See examples below.
 
 }
 \seealso{
-Other ldk/slidings methods: \code{\link{def_ldk}},
-  \code{\link{get_ldk}}, \code{\link{get_slidings}},
-  \code{\link{slidings_scheme}}
+Other ldk/slidings methods: \code{\link{add_ldk}},
+  \code{\link{def_ldk}}, \code{\link{get_ldk}},
+  \code{\link{get_slidings}}, \code{\link{slidings_scheme}}
 }
 
