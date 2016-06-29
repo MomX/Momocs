@@ -376,6 +376,18 @@ get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
   return(res)
 }
 
+# # FLips PCA
+# flip <- function(x, axs){
+#   UseMethod("flip")
+# }
+#
+# flip.PCA <- function(x, axs){
+#   x$x[, axs] %<>% `*`(-1)
+#   x$rotation[, axs] %<>% `*`(-1)
+#   x
+# }
+
+
 #5 . Remove outliers on the fly
 
 #' Remove outliers on Coe
