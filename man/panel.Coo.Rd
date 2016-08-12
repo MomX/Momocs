@@ -28,7 +28,7 @@ panel(x, ...)
 \arguments{
 \item{x}{The \code{Coo} object to plot.}
 
-\item{...}{further arguments to maintain consistency with the generic \link{plot}.}
+\item{...}{additional arguments to feed generic \code{plot}}
 
 \item{dim}{for \link{coo_listpanel}: a numeric of length 2
 specifying the dimensions of the panel}

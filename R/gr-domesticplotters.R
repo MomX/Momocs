@@ -263,6 +263,7 @@ coo_ruban <- function(coo, dev,
 #' @param points.pch if points is TRUE, a pch for these points
 #' @param points.cex if points is TRUE, a cex for these points
 #' @param points.col if points is TRUE, a col  for these points
+#' @param ... additional arguments to feed generic \code{plot}
 #' @return Returns (invisibly) a \code{data.frame} with position of shapes that
 #' can be used for other sophisticated plotting design.
 #' @examples
@@ -271,7 +272,7 @@ coo_ruban <- function(coo, dev,
 #' @export
 coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
                            cols, borders, poly = TRUE,
-                           points = FALSE, points.pch = 3, points.cex = 0.2, points.col = "#333333") {
+                           points = FALSE, points.pch = 3, points.cex = 0.2, points.col = "#333333", ...) {
   coo.list <- lapply(coo.list, coo_check)
   # if dim is missing, we define a square
   n <- length(coo.list)
@@ -292,10 +293,11 @@ coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
   # on.exit(par(op))
   # par(mar = mar, oma = rep(0.2, 4))
   plot(NA, asp = 1, xlim = c(0, dim[2]), ylim = c(0, dim[1]),
-       xaxs = "i", yaxs = "i", frame = FALSE, ann = FALSE, axes = FALSE)
+       xlab="", ylab="",
+       xaxs = "i", yaxs = "i", frame = FALSE, axes = FALSE, ...)
   # we template and plot shapes
-  #coo_tp <- lapply(coo.list, coo_template, size = 0.95)
-  coo_tp <- coo.list
+  coo_tp <- lapply(coo.list, coo_template, size = 0.95)
+  # coo_tp <- coo.list
   if (missing(cols)) {
     cols <- rep("grey95", n)
   }
@@ -308,8 +310,9 @@ coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
     for (i in 1:n) {
       trans <- which(pos == i, arr.ind = TRUE) - 0.5
       res[i, ] <- c(trans[2], trans[1])
-      polygon(coo_tp[[i]][, 1] + trans[2], coo_tp[[i]][,
-                                                       2] + trans[1], col = cols[i], border = borders[i])
+      polygon(coo_tp[[i]][, 1] + trans[2],
+              coo_tp[[i]][,2] + trans[1],
+              col = cols[i], border = borders[i])
     }
   } else {
     for (i in 1:n) {

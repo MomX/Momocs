@@ -286,7 +286,7 @@ stack2 <- function(Coo){
 #' @param points.cex (for Ldk) and a cex for these points
 #' @param points.col (for Ldk) and a col  for these points
 #' @param nb.pts the number of points to use for the shape reconstruction
-#' @param ... further arguments to maintain consistency with the generic \link{plot}.
+#' @param ... additional arguments to feed generic \code{plot}
 #' @note If you want to reorder shapes according to a factor, use \link{arrange}.
 #' @family Coo_graphics
 #' @examples
@@ -313,7 +313,7 @@ panel.Out <- function(x, dim, cols, borders, fac,
                       points.pch = 3, points.cex = 0.2, points.col, ...) {
   op <- par("mar", "oma")
   on.exit(par(op))
-  par(mar = rep(0, 4), oma = rep(0.2, 4))
+  par(mar = rep(1.2, 4), oma = rep(0.2, 4))
 
   Coo <- x
   Coo <- coo_template(Coo, size = 0.95)
@@ -344,7 +344,7 @@ panel.Out <- function(x, dim, cols, borders, fac,
   }
 
   pos <- coo_listpanel(Coo$coo, dim=dim, cols = cols, borders = borders,
-                       poly = TRUE)
+                       poly = TRUE, ...)
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
@@ -407,7 +407,7 @@ panel.Opn <- function(x, cols, borders, fac,
     cols <- rep(borders[1], length(Coo))
   }
 
-  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders, poly = FALSE)
+  pos <- coo_listpanel(Coo$coo, cols = cols, borders = borders, poly = FALSE, ...)
   if (!is.null(names)) {
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
@@ -456,7 +456,7 @@ panel.Ldk <- function(x, cols, borders, fac,
 
   pos <- coo_listpanel(Coo$coo, cols = NULL, borders = NULL,
                        poly = FALSE, points = points, points.pch = "",
-                       points.cex = points.cex, points.col = points.col)
+                       points.cex = points.cex, points.col = points.col, ...)
 
   ### quick and dirty patch for slidings, links, etc.
 

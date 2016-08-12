@@ -6,7 +6,7 @@
 \usage{
 coo_listpanel(coo.list, dim, byrow = TRUE, fromtop = TRUE, cols, borders,
   poly = TRUE, points = FALSE, points.pch = 3, points.cex = 0.2,
-  points.col = "#333333")
+  points.col = "#333333", ...)
 }
 \arguments{
 \item{coo.list}{A \code{list} of coordinates}
@@ -33,6 +33,8 @@ mainly for use for outlines and open outlines.}
 \item{points.cex}{if points is TRUE, a cex for these points}
 
 \item{points.col}{if points is TRUE, a col  for these points}
+
+\item{...}{additional arguments to feed generic \code{plot}}
 }
 \value{
 Returns (invisibly) a \code{data.frame} with position of shapes that

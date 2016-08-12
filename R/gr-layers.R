@@ -392,3 +392,5 @@
   c(diff(.x.range.gg(gg)),
     diff(.y.range.gg(gg)))
 }
+
+
