@@ -431,7 +431,7 @@ coo_convexity <- function(coo) {
 # coo_solidity -------
 #' Calculates the solidity of a shape
 #'
-#' Returns the ids of points that define the convex hull of a shape.
+#' Calculated using the ratio of the shape area and the convex hull area.
 #' @param coo a \code{matrix} of (x; y) coordinates.
 #' @return numeric, the solidity of a shape.
 #' @source Rosin PL. 2005. Computing global shape measures.

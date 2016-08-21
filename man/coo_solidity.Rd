@@ -17,7 +17,7 @@ coo_solidity(coo)
 numeric, the solidity of a shape.
 }
 \description{
-Returns the ids of points that define the convex hull of a shape.
+Calculated using the ratio of the shape area and the convex hull area.
 }
 \examples{
 data(bot)
