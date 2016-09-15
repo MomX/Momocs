@@ -123,7 +123,7 @@ In other words:
 * generic and specific methods can be applied to it
 * a collection of coefficients is obtain and belongs to (pick one) `{OutCoe, OpnCoe, LdkCoe}` and is also a `Coe` object.
 
-Finally, generic and specific operations can be applied to the `Coe` objects, chiefly multivariate methods, capitalicized: `PCA`, `LDA`, `CLUST`, `MANOVA`, `MSHAPES`, `KMEANS`, etc.
+Finally, generic and specific operations can be applied to the `Coe` objects, chiefly multivariate methods, capitalicized: `PCA`, `LDA`, `CLUST`, `MANOVA`(and MANCOVA), `MSHAPES`, `KMEANS`, etc.
 
 Overall, Momocs implements a simple and consistent grammar that is detailed below. 
 Also, if you're familiar with modern R and the Hadley-verse, you should feel home as `ggplot2` graphics, `dplyr` verbs and `magrittr` pipes are implemented.
@@ -432,7 +432,7 @@ plot_CV2(bot.l) # arrays version
 
 Finally, if you need to classify using LDA methods, see `classify`.
 
-### `MANOVA`: Multivariate Analysis of variace
+### `MANOVA`: Multivariate Analysis of (co)variace
 We can test for a difference in the distribution of PC scores with:
 ```{r}
 MANOVA(bot.p, "type")
@@ -443,6 +443,14 @@ We can also calculate pairwise combination between every levels of a `fac`. Here
 ```{r}
 MANOVA_PW(bot.p, "type")
 ```
+
+If we want a MANCOVA instead : 
+
+```{r}
+bot %<>% mutate(cs=coo_centsize(.))
+bot %>% efourier %>% PCA %>% MANOVA("cs")
+```
+
 
 ### `CLUST`: Hierarchical clustering
 A hierarchical classification now. It relies on `dist` + `hclust` + `ape::plot.phylo`.

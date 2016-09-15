@@ -5,7 +5,7 @@
 \alias{MANOVA.OpnCoe}
 \alias{MANOVA.OutCoe}
 \alias{MANOVA.PCA}
-\title{Multivariate analysis of variance on Coe objects}
+\title{Multivariate analysis of (co)variance on Coe objects}
 \usage{
 MANOVA(x, fac, test = "Hotelling", retain, drop, verbose)
 
@@ -39,13 +39,14 @@ a list of matrices of (x,y) coordinates.
 Performs multivariate analysis of variance on \link{PCA} objects.
 }
 \details{
-Performs a MANOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and
+Performs a MANOVA/MANCOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and
 \link{summary.manova} for more details and examples.
 }
 \note{
 Needs a review and should be considered as experimental.
 }
 \examples{
+# MANOVA
 data(bot)
 bot.p <- PCA(efourier(bot, 12))
 MANOVA(bot.p, 'type')
@@ -57,6 +58,13 @@ MANOVA(op, 'domes')
  m <- manova(op$x[, 1:5] ~  op$fac$domes * op$fac$var)
  summary(m)
  summary.aov(m)
+
+ # MANCOVA example
+ # we create a numeric variable, based on centroid size
+ bot \%<>\% mutate(cs=coo_centsize(.))
+ # same pipe
+ bot \%>\% efourier \%>\% PCA \%>\% MANOVA("cs")
+
 }
 \seealso{
 Other multivariate: \code{\link{CLUST}},

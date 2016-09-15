@@ -2,11 +2,11 @@
 
 # would need a good review. # todo
 
-#' Multivariate analysis of variance on Coe objects
+#' Multivariate analysis of (co)variance on Coe objects
 #'
 #' Performs multivariate analysis of variance on \link{PCA} objects.
 #'
-#' Performs a MANOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and
+#' Performs a MANOVA/MANCOVA on PC scores. Just a wrapper around \link{manova}. See examples for multifactorial manova and
 #' \link{summary.manova} for more details and examples.
 #'
 #' @aliases MANOVA
@@ -22,6 +22,7 @@
 #' @family multivariate
 #' @note Needs a review and should be considered as experimental.
 #' @examples
+#' # MANOVA
 #' data(bot)
 #' bot.p <- PCA(efourier(bot, 12))
 #' MANOVA(bot.p, 'type')
@@ -33,6 +34,13 @@
 #'  m <- manova(op$x[, 1:5] ~  op$fac$domes * op$fac$var)
 #'  summary(m)
 #'  summary.aov(m)
+#'
+#'  # MANCOVA example
+#'  # we create a numeric variable, based on centroid size
+#'  bot %<>% mutate(cs=coo_centsize(.))
+#'  # same pipe
+#'  bot %>% efourier %>% PCA %>% MANOVA("cs")
+#'
 #' @export
 MANOVA <- function(x, fac, test = "Hotelling", retain, drop,
                    verbose) {
