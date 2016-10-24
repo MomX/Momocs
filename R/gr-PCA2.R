@@ -51,10 +51,10 @@
 
 
 #' @rdname plot2.PCA
-#' @export
+# #' @export
 plot2 <- function(x, ...){ UseMethod("plot2")}
 #' @rdname plot2.PCA
-#' @export
+# #' @export
 plot2.PCA <- function(x,
                       fac=NULL, xax="PC1", yax="PC2",
                       points = TRUE,
