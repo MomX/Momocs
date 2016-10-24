@@ -36,18 +36,18 @@
 #' }
 #' @details Detail the df_s. Detail the calculations.
 #' @examples
-#' data(bot)
-#' bp <- PCA(efourier(bot, 8))
-#' plot2(bp)
-#' plot2(bp, "type")
-#' plot2(bp, "type", ellipse=TRUE)
+#' #data(bot)
+#' #bp <- PCA(efourier(bot, 8))
+#' #plot2(bp)
+#' #plot2(bp, "type")
+#' #plot2(bp, "type", ellipse=TRUE)
 #' # data(bot)
 #'
 #' # bot$fac$fake <- factor(rep(letters[1:4], 10))
 #' # bot$fac$fake2 <- c(runif(20), runif(20, 5, 10))
 #' # xx + stat_density2d(aes(fill = ..level..), geom="polygon", alpha=0.1)
 # # xx + stat_density2d(geom="tile", aes(fill = ..density..), contour = FALSE, alpha=0.2) +geom_point()
-#  legend.position = c(0.14, 0.80),
+#  #legend.position = c(0.14, 0.80),
 
 
 #' @rdname plot2.PCA
