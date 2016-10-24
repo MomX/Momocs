@@ -7,6 +7,7 @@
 .Rproj.user
 data/phoenix.R
 man/phoenix.Rd
+R/_ready.R
 inst/doc
 *.DS_Store
 
