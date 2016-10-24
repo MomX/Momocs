@@ -357,7 +357,7 @@ coo_eccentricityboundingbox <- function(coo) {
 #' Calculates the elongation of a shape
 #'
 #' @param coo a \code{matrix} of (x; y) coordinates.
-#' @return numeric, the circularity normalized to the unit circle.
+#' @return numeric, the eccentricity of the bounding box
 #' @source Rosin PL. 2005. Computing global shape measures.
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @family coo_ descriptors

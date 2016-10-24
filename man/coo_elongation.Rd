@@ -14,7 +14,7 @@ coo_elongation(coo)
 \item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
-numeric, the circularity normalized to the unit circle.
+numeric, the eccentricity of the bounding box
 }
 \description{
 Calculates the elongation of a shape
