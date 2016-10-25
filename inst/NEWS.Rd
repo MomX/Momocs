@@ -4,6 +4,13 @@
 % Cheers to Jari Oksanen and others!
 
 \encoding{UTF-8}
+\section{Changes in version 1.1.0}{
+  \itemize{
+    \item plot2.PCA deprecated due to ggplot2 2.2.0 breaking changes
+    \item Few minor changes that can be followed on GitHub commits
+    \item Development continues on GitHub.
+  }
+}
 
 \section{Changes in version 1.0 "Mataa" (CRAN + GitHub)}{
   \itemize{

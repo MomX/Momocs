@@ -197,6 +197,7 @@ filter.Coo <- function(.data, ...){
   df <- filter(df, ...)
   .data <- subset(.data, df$.id)
   .data$fac %<>% data.frame()
+  .data$fac %<>% .refactor()
   .data
 }
 
@@ -279,17 +280,23 @@ slice.default <- function(.data, ...){
 #' @export
 slice.Coo <- function(.data, ...){
   #.data %<>% validate()
-  subset(.data, ...)
+  .data %<>% subset(...)
+  .data$fac %<>% .refactor()
+  .data
   }
 
 #' @export
 slice.Coe <- function(.data, ...){
-  subset(.data, ...)
+  .data %<>% subset(...)
+  .data$fac %<>% .refactor()
+  .data
   }
 
 #' @export
 slice.PCA <- function(.data, ...){
-  subset(.data, ...)
+  .data %<>% subset(...)
+  .data$fac %<>% .refactor()
+  .data
   }
 
 # sample_n ---------------
@@ -471,7 +478,8 @@ chop.Coo <- function(.data, fac){
     }
     res[[i]] <- Coo2
   }
-  return(res)}
+  return(res)
+  }
 
 #' @export
 chop.Coe <- function(.data, fac){
@@ -728,6 +736,7 @@ subset.Coo <- function(x, subset, ...) {
     }
     names(Coo2$fac) <- names(Coo$fac)
     Coo2$fac %<>% data.frame()
+    Coo2$fac %<>% .refactor()
   }
   return(Coo2)
 }
@@ -749,6 +758,7 @@ subset.Coe <- function(x, subset, ...) {
     }
     names(Coe2$fac) <- names(Coe$fac)
     Coe2$fac %<>% data.frame()
+    Coe2$fac %<>% .refactor()
   }
   return(Coe2)
 }
@@ -766,6 +776,7 @@ subset.PCA <- function(x, subset, ...){
     PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
     names(PCA2$fac) <- names(PCA$fac)
     PCA2$fac %<>% data.frame()
+    PCA2$fac %<>% .refactor()
   }
   return(PCA2)
 }
