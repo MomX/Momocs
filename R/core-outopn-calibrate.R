@@ -58,7 +58,7 @@ calibrate_reconstructions.Out <-
     max.h <- nrow(coo)/2 - 1
     if (max(range) > max.h) {
       range <- floor(seq(1, max.h, length = 9))
-      message("range was too high and set to ", range)
+      message("'range' was too high and set to ", paste(range, collapse=" "))
     }
 
     # we calculate all shapes
@@ -141,7 +141,7 @@ calibrate_reconstructions.Opn <-
     }
     if (max(range) > (nrow(coo) - 1)) {
       range <- 2:10
-      message("range was too high and set to ", range)
+      message("'range' was too high and set to ", paste(range, collapse=" "))
     }
 
     # we loop
@@ -257,7 +257,7 @@ calibrate_deviations.Out <-
     # we handle too ambitious range
     if (max(range) > nb.h.best) {
       range <- floor(seq(4, nb.h.best, length = 6))
-      message("'range' was too high and set to ", range)
+      message("'range' was too high and set to ", paste(range, collapse=" "))
     }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
@@ -351,7 +351,7 @@ calibrate_deviations.Opn<-
       #                                     lineat.y = c(95, 99, 99.9))
       #       range <- unique(hr$minh)
       #
-      message("range missing and set to 1:8")
+      message("'range' was missing and set to 1:8")
       range <- 1:8
     }
 
@@ -380,7 +380,7 @@ calibrate_deviations.Opn<-
       # we handle too ambitious range
       if (max(range) > nb.h.best) {
         range <- floor(seq(4, nb.h.best, length = 6))
-        message("'range' was too high and set to ", range)
+        message("'range' was too high and set to ", paste(range, collapse=" "))
       }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
@@ -608,7 +608,7 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
   Opn <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) message("Method not provided. dfourier is used")
+    if (verbose) message("method not provided. dfourier is used")
     method <- dfourier
   } else if (method != "dfourier"){
     if (verbose) message("only available for dfourier. dfourier is used")
