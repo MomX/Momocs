@@ -49,8 +49,6 @@ calibrate_reconstructions.Out <-
         method_i <- switch(p, efourier_i, rfourier_i, tfourier_i)
       }
     }
-    # whether to show reconstruct (efourier) or not (others) best outlines
-    alpha_best <- c(0.5, 0, 0)[p]
     # we sample a shape
     if (missing(id))
       id <- sample(length(Out$coo), 1)
@@ -60,7 +58,7 @@ calibrate_reconstructions.Out <-
     max.h <- nrow(coo)/2 - 1
     if (max(range) > max.h) {
       range <- floor(seq(1, max.h, length = 9))
-      message("'range' was too high and set to ", paste(range, collapse=" "))
+      message("range was too high and set to ", range)
     }
 
     # we calculate all shapes
@@ -96,7 +94,7 @@ calibrate_reconstructions.Out <-
 
     gg <- ggplot(data=coos, aes_string(x="x", y="y")) +
       coord_equal() + geom_polygon(aes(fill=id), alpha=0.5) +
-      geom_path(data=best, aes_string(x="x", y="y"), alpha=alpha_best) +
+      geom_path(data=best, aes_string(x="x", y="y")) +
       facet_wrap(~ id) +
       labs(x=NULL, y=NULL, title=names(Out)[id]) +
       theme_light() + theme_empty
@@ -143,7 +141,7 @@ calibrate_reconstructions.Opn <-
     }
     if (max(range) > (nrow(coo) - 1)) {
       range <- 2:10
-      message("'range' was too high and set to ", paste(range, collapse=" "))
+      message("range was too high and set to ", range)
     }
 
     # we loop
@@ -259,7 +257,7 @@ calibrate_deviations.Out <-
     # we handle too ambitious range
     if (max(range) > nb.h.best) {
       range <- floor(seq(4, nb.h.best, length = 6))
-      message("'range' was too high and set to ", paste(range, collapse=" "))
+      message("'range' was too high and set to ", range)
     }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
