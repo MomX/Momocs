@@ -17,7 +17,7 @@
 #' @family calibration
 #' @examples
 #' data(bot)
-#' x <- calibrate_reconstructions(bot, "efourier")
+#' x <- calibrate_deviations(bot, "efourier", range=1:12)
 #' # intermediate results can be accessed eg with:
 #' x$res %>% apply(1, mean) %>% plot(type="b") # mean deviation plot
 #'
