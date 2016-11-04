@@ -23,7 +23,7 @@ for \code{Out}, or from \code{c('opoly', 'npoly', 'dfourier')} for \code{Opn}}
 \item{...}{only used for the generic}
 }
 \value{
-a ggplot object
+a ggplot object and the full list of intermediate results. See examples.
 }
 \description{
 Calculate and displays reconstructed shapes using a
@@ -31,7 +31,9 @@ range of harmonic number. Compare them visually with the maximal fit.
 }
 \examples{
 data(bot)
-calibrate_reconstructions(bot, "efourier")
+x <- calibrate_reconstructions(bot, "efourier")
+# intermediate results can be accessed eg with:
+x$res \%>\% apply(1, mean) \%>\% plot(type="b") # mean deviation plot
 
 data(olea)
 calibrate_reconstructions(olea, "dfourier")

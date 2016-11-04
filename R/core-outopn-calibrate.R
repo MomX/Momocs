@@ -13,11 +13,13 @@
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
 #' @param ... only used for the generic
-#' @return a ggplot object
+#' @return a ggplot object and the full list of intermediate results. See examples.
 #' @family calibration
 #' @examples
 #' data(bot)
-#' calibrate_reconstructions(bot, "efourier")
+#' x <- calibrate_reconstructions(bot, "efourier")
+#' # intermediate results can be accessed eg with:
+#' x$res %>% apply(1, mean) %>% plot(type="b") # mean deviation plot
 #'
 #' data(olea)
 #' calibrate_reconstructions(olea, "dfourier")
