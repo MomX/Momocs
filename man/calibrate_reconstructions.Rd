@@ -31,9 +31,7 @@ range of harmonic number. Compare them visually with the maximal fit.
 }
 \examples{
 data(bot)
-x <- calibrate_reconstructions(bot, "efourier")
-# intermediate results can be accessed eg with:
-x$res \%>\% apply(1, mean) \%>\% plot(type="b") # mean deviation plot
+calibrate_reconstructions(bot, "efourier", range=1:12)
 
 data(olea)
 calibrate_reconstructions(olea, "dfourier")
