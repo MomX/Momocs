@@ -5,7 +5,7 @@
 \title{Quantitative calibration, through deviations, for Out and Opn objects}
 \usage{
 calibrate_deviations(x, method, id, range, norm.centsize, dist.method,
-  dist.nbpts)
+  interpolate.factor, dist.nbpts, plot)
 }
 \arguments{
 \item{x}{and \code{Out} or \code{Opn} object on which to calibrate_deviations}
@@ -23,26 +23,45 @@ are used.}
 
 \item{dist.method}{a method such as \link{edm_nearest} to calculate deviations}
 
+\item{interpolate.factor}{a numeric to increase the number of points on the original shape (1 by default)}
+
 \item{dist.nbpts}{numeric the number of points to use for deviations calculations}
+
+\item{plot}{logical whether to print the graph (FALSE is you just want the calculations)}
 }
 \value{
-a ggplot object
+a ggplot object and the full list of intermediate results. See examples.
 }
 \description{
 Calculate deviations from original and reconstructed shapes using a
 range of harmonic number.
 }
 \details{
+Note that from version 1.1, the calculation changed and fixed a problem. Before,
+the 'best' possible shape was calculated using the highest possible number of harmonics.
+This worked well for efourier but not for others (eg rfourier, tfourier) as they
+are known to be unstable with high number of harmonics. From now on, Momocs uses
+the 'real' shape, as it is (so it must be centered) and uses \link{coo_interpolate}
+to produce \code{interpolate.factor} times more coordinates as the shape
+has and using the default \code{dist.method}, eg \link{edm_nearest},
+the latter finds the euclidean distance, for each point on the reconstructed shape,
+the closest point on this interpolated shape. \code{interpolate.factor} being set
+to 1 by default, no interpolation will be made in you do not ask for it. Note,
+that interpolation to decrease artefactual errors may also be done outside
+\code{calibrate_deviations} and will be probably be removed from it
+in further versions.
+
 For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
 }
 \examples{
 data(bot)
 calibrate_deviations(bot)
+
 \dontrun{
 
 # on Opn
 data(olea)
-camibrate_deviations(olea)
+calibrate_deviations(olea)
 
 # lets customize the ggplot
 library(ggplot2)
@@ -51,6 +70,30 @@ gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
 gg + labs(col="Number of harmonics", fill="Number of harmonics",
            title="Harmonic power") + theme_bw()
 gg + coord_polar()
+
+### intermediate results can be accessed eg with:
+shp <- hearts[1] \%>\% coo_interpolate(360) \%>\% coo_samplerr(60) \%>\% Out()
+calibrate_deviations(shp, id=1, range=1:24, method="efourier") \%$\%
+   res \%>\% apply(1, mean) \%>\% plot(type="b")
+calibrate_deviations(shp, id=1, range=1:24, method="rfourier") \%$\%
+   res \%>\% apply(1, mean) \%>\% plot(type="b")
+calibrate_deviations(shp, id=1, range=1:24, method="tfourier") \%$\%
+   res \%>\% apply(1, mean) \%>\% plot(type="b")
+
+# ... providing an illustration of the e vs r/t fourier approaches developped in the help page.
+
+### illustration of interpolate.factor
+interp <- c(1, 5, 25)
+res <- list()
+for (i in seq_along(interp))
+calibrate_deviations(shp, id=1, range=1:24,
+   method="tfourier", interpolate.factor=interp[i], plot=FALSE) \%$\%
+   res \%>\% apply(1, mean) -> res[[i]]
+
+ ### int_5 is more accurate than no inteprolation
+ sign(res[[2]] - res[[1]])
+ ### int 25 is more accurate than int_5, etc.
+ sign(res[[3]] - res[[2]])
 }
 }
 \seealso{
