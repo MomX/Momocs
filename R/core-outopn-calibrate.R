@@ -254,7 +254,7 @@ calibrate_deviations.Out <-
       }
     }
     # We define the highest possible nb.h along Coo@coo[id]
-    min.nb.pts <- min(sapply(Coo$coo[id], nrow))
+    min.nb.pts <- min(coo_nb(Coo))
     nb.h.best <- floor(min.nb.pts/2) - 1
     # we handle too ambitious range
     if (max(range) > nb.h.best) {
