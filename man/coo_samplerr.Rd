@@ -47,10 +47,10 @@ sd_theta_diff <- function(shp)
 
 # no interpolation: all points are sampled from existing points but the
 # angles are not equal
-shp \%>\% coo_plot(points=T, main="no interpolation")
+shp \%>\% coo_plot(points=TRUE, main="no interpolation")
 shp \%>\% coo_samplerr(64) \%T>\% draw_rads(col="red") \%>\% sd_theta_diff
 # with interpolation: much more homogeneous angles
-shp \%>\% coo_plot(points=T)
+shp \%>\% coo_plot(points=TRUE)
 shp \%>\% coo_interpolate(360) \%>\% coo_samplerr(64) \%T>\% draw_rads(col="blue") \%>\% sd_theta_diff
 }
 \seealso{
