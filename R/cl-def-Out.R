@@ -24,7 +24,10 @@ Out <- function(x, fac = data.frame, ldk = list()) {
 
 #' @export
 Out.default <- function(x, fac = data.frame(), ldk = list()) {
-  message("do not know how to build an Out from this")
+  if (is.shp(x))
+    Out(list(x))
+  else
+    message("an Out object can only be build from a shape, a list, an array or a Coo object")
 }
 
 #' @export

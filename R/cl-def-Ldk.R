@@ -33,7 +33,11 @@ Ldk <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
 
 #' @export
 Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
-  message("do not know how to build an Ldk from this")
+  if (is.shp(x))
+    Ldk(list(x))
+  else
+    message("an Ldk object can only be build from a shape, a list, an array or a Coo object")
+
 }
 
 #' @export

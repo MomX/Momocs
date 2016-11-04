@@ -43,7 +43,10 @@ Opn <- function(x, fac = data.frame(), ldk = list()) {
 
 #' @export
 Opn.default <- function(x, fac = data.frame(), ldk = list()) {
-  message("an Opn object can only be build from a list, an array or a Coo object")
+  if (is.shp(x))
+    Opn(list(x))
+  else
+    message("an Opn object can only be build from a shape, a list, an array or a Coo object")
 }
 
 #' @export
