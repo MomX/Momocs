@@ -6,7 +6,8 @@
 #' list of coordinates.
 #'
 #' @param x A \code{list} or \code{matrix} of coordinates or an \code{Out} object
-#' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
+#' @param nb.h \code{integer}. The number of harmonics to use. If missing, 12 is used on shapes;
+#' 99 percent of harmonic power on Out objects, both with messages.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform.
 #' @param norm \code{logical}. Whether to scale the outlines so that the mean
@@ -43,7 +44,8 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     coo <- x
     coo <- coo_check(coo)
     if (missing(nb.h)) {
-        message("'nb.h' not provided and set to ", nb.h)
+      nb.h <- 12
+      message("'nb.h' not provided and set to ", nb.h)
     }
     if (is_closed(coo)) {
         coo <- coo_unclose(coo)
@@ -165,12 +167,10 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
     theta <- seq(0, 2 * pi, length = nb.pts)
     harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)
     for (i in 1:nb.h) {
-        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i *
-            theta)
+        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * theta)
     }
     r <- (ao/2) + apply(harm, 2, sum)
     Z <- complex(modulus = r, argument = theta)
-    # list(x=Re(Z), y=Im(Z), angle=theta, r=r)}
     x <- Re(Z)
     y <- Im(Z)
     coo <- cbind(x, y)
