@@ -6,7 +6,8 @@
 #' from a matrix (or a list) of (x; y) coordinates.
 #'
 #' @param x A \code{list} or a \code{matrix} of coordinates or a \code{Out} object
-#' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
+#' @param nb.h \code{integer}. The number of harmonics to use. If missing, 12 is used on shapes;
+#' 99 percent of harmonic power on Out objects, both with messages.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform.
 #' @param verbose \code{logical}. Whether to print or not diagnosis messages.
@@ -79,7 +80,7 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
         coo <- coo_unclose(coo)
     nr <- nrow(coo)
     if (missing(nb.h)) {
-        nb.h <- 32
+        nb.h <- 12
         message("'nb.h' not provided and set to ", nb.h)
     }
     if (nb.h * 2 > nr) {
@@ -195,9 +196,6 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
 #' coo_draw(efi, border='red', col=NA)
 #' @export
 efourier_i <- function(ef, nb.h, nb.pts = 120) {
-    # if (any(names(ef) != c('an', 'bn', 'cn', 'dn'))) { stop('a
-    # list containing 'an', 'bn', 'cn' and 'dn' harmonic
-    # coefficients must be provided')}
     if (is.null(ef$ao))
         ef$ao <- 0
     if (is.null(ef$co))

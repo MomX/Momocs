@@ -6,7 +6,8 @@
 #' list of coordinates.
 #'
 #' @param x A list or matrix of coordinates or an \code{Out}
-#' @param nb.h \code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.
+#' @param nb.h \code{integer}. The number of harmonics to use. If missing, 12 is used on shapes;
+#' 99 percent of harmonic power on Out objects, both with messages.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform
 #' @param norm \code{logical}. Whether to scale and register new coordinates so

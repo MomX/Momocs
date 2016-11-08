@@ -19,7 +19,8 @@ tfourier(x, ...)
 
 \item{...}{useless here}
 
-\item{nb.h}{\code{integer}. The number of harmonics to use. If missing 99pc harmonic power is used.}
+\item{nb.h}{\code{integer}. The number of harmonics to use. If missing, 12 is used on shapes;
+99 percent of harmonic power on Out objects, both with messages.}
 
 \item{smooth.it}{\code{integer}. The number of smoothing iterations to
 perform}
