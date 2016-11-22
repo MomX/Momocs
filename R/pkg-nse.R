@@ -119,7 +119,7 @@ do_with_args <- function(what, dots, with=NULL){
 ### prepare a factor according to waht is passed to various methods,
 # notably multivariate plotters.prepare_fac(bp, 1)
 # eg
-#  olea %<>% mutate(fake=rnorm(length(olea)))
+#  olea$fac$fake <-  rnorm(length(olea))
 #  summary(olea$fac)
 #
 # # Valid ways
@@ -151,7 +151,6 @@ do_with_args <- function(what, dots, with=NULL){
 # prepare_fac(olea, factor(rep(letters[1:7], each=10)))
 # # passing a numeric of the wrong length
 # prepare_fac(olea, rnorm(210))
-#' @export
 prepare_fac <- function(x, fac){
   ### missing case
   if (missing(fac)){
@@ -161,9 +160,9 @@ prepare_fac <- function(x, fac){
 
   # raw column name case, use NSE with the help of dplyr's select
   if (is.name(substitute(fac))){
-    x <- try(dplyr::select_(x$fac, substitute(fac))[[1]])
-    if (class(x) != "try-error")
-      return(x)
+    x_try <- try(dplyr::select_(x$fac, substitute(fac))[[1]], silent=TRUE)
+    if (class(x_try) != "try-error")
+      return(x_try)
   }
 
   ### formula case (is.formula doesnt exist)
