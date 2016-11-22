@@ -1,4 +1,5 @@
 # layers ------
+
 # create an empty frame
 #' @export
 .frame <- function(xy, center.origin = FALSE, zoom = 1, bg="white") {
@@ -13,6 +14,43 @@
     plot(xy, xlim = c(-w[1], w[1]), ylim = c(-w[2], w[2]),
          type = "n", asp = 1, axes = FALSE, frame = FALSE)
   }
+}
+
+#' @export
+.chessboard <- function(n=50, col="grey98", w){
+  # grabs window parameters if not provided
+  if (missing(w)) w <- par("usr")
+  # max dimension
+  wm <-   max(w[2] - w[1], w[4] - w[3])
+  side <- wm/n
+  # generates xleft coordinates (1/2 is picked)
+  xl <- seq(w[1], w[2], side)[seq(0, n, 2)+1]
+  # generates all ybottom coordinates
+  yb <- seq(w[3], w[4], side)
+  # handles g(ap) through modulus
+  g <- c(0, side)[(1:n %% 2)+1]
+  # loop and draw rectangles
+  for (j in 1:n)
+    rect(xl + g[j], yb[j], xl + g[j] + side, yb[j]+side, col=col, border=NA)
+}
+
+#' @export
+.axes_corner <- function(bb, w, col="grey20", signif=2, lwd=0.5, cex=0.5){
+  # if required we prettify bb coordinates
+  if (is.numeric(signif))
+    pretty_bb <- sapply(bb, signif, signif)
+  else
+    pretty_bb <- bb
+  # ticks
+  segments(bb$x0, bb$y0, bb$x0, bb$y0-w, lwd=lwd, col=col)
+  segments(bb$x1, bb$y1, bb$x1, bb$y1+w, lwd=lwd, col=col)
+  segments(bb$x0, bb$y0, bb$x0-w, bb$y0, lwd=lwd, col=col)
+  segments(bb$x1, bb$y1, bb$x1+w, bb$y1, lwd=lwd, col=col)
+  # and their legend
+  text(bb$x0,   bb$y0-w, pretty_bb[1], cex=cex, col=col, adj=c(0.5,  5/3))
+  text(bb$x1,   bb$y1+w, pretty_bb[2], cex=cex, col=col, adj=c(0.5, -2/3))
+  text(bb$x0-w, bb$y0,   pretty_bb[3], cex=cex, col=col, adj=c(5/3,  0.5))
+  text(bb$x1+1, bb$y1,   pretty_bb[4], cex=cex, col=col, adj=c(-2/3, 0.5))
 }
 
 # grid layer
