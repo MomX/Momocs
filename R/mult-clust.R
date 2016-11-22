@@ -104,7 +104,7 @@ CLUST.PCA <- function(x,
 
   # we grab the fac
   if (!missing(fac))
-    fac <- .prep.fac(x, fac)
+    fac <- prepare_fac(x, fac)
 
   # and color it if palette is not null
   if (is.null(palette) | missing(fac)){
