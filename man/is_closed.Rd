@@ -2,9 +2,12 @@
 % Please edit documentation in R/coo-utilities.R
 \name{is_closed}
 \alias{is_closed}
+\alias{is_open}
 \title{Tests if shapes are closed}
 \usage{
 is_closed(coo)
+
+is_open(coo)
 }
 \arguments{
 \item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}

@@ -1102,6 +1102,7 @@ is_closed.Coo <- function(coo) {
   return(sapply(Coo$coo, is_closed))
 }
 
+#' @rdname is_closed
 #' @export
 is_open <- function(coo) !is_closed(coo)
 
@@ -1144,6 +1145,7 @@ is_clockwise.Coo <- function(coo){
   sapply(coo$coo, is_clockwise)
 }
 
+#' @rdname is_clockwise
 #' @export
 is_anticlockwise <- function(coo){
   !is_clockwise(coo)
