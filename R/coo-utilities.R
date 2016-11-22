@@ -10,6 +10,7 @@
 #' @return a \code{matrix} of (x; y) coordinates or a Coo object.
 #' @examples
 #' #coo_check('Not a shape')
+#' #coo_check(iris)
 #' #coo_check(matrix(1:10, ncol=2))
 #' #coo_check(list(x=1:5, y=6:10))
 #' @export
@@ -22,14 +23,14 @@ coo_check.default <- function(coo) {
   if (is.matrix(coo)) {
     return(coo)
   }
-  if (is.data.frame(coo)){
+  if (is.data.frame(coo) && all(sapply(coo, class)=="numeric")){
     return(as.matrix(coo))
   }
   if (is.list(coo)) {
     if (length(coo) == 1)
       return(l2m(coo))
   }
-  stop("a list or a matrix of (x; y) coordinates must be provided")
+  stop("do not know how to turn into a coo")
 }
 
 #' @export
@@ -1101,12 +1102,52 @@ is_closed.Coo <- function(coo) {
   return(sapply(Coo$coo, is_closed))
 }
 
+#' @export
+is_open <- function(coo) !is_closed(coo)
+
 # # is.likelyopen tries to estimate is a matrix of
 # coordinates is likely to be a # closed polygon
 # is.likelyclosedpolygon <- function(coo) { x <-
 # coo_perimpts(coo) d <- max(x) / median(x[-which.max(x)])
 # ifelse(d > 3, TRUE, FALSE)}
 
+# coo_clockwise
+# see http://en.wikipedia.org/wiki/Shoelace_formula
+
+#' Tests if shapes are developping clockwise or anticlockwise
+#'
+#' @inheritParams coo_check
+#' @return a single or a vector of \code{logical}.
+#' @family coo_ utilities
+#' @examples
+#' shapes[4] %>% coo_sample(64) %>% coo_plot()  #clockwise cat
+#' shapes[4] %>% is_clockwise()
+#' shapes[4] %>% coo_rev() %>% is_clockwise()
+#'
+#' # on Coo
+#' shapes %>% is_clockwise %>% `[`(4)
+#' @export
+is_clockwise <- function(coo)
+  UseMethod("is_clockwise")
+
+#' @export
+is_clockwise.default <- function(coo){
+  res <- numeric(nrow(coo)-1)
+  for (i in seq_along(res)){
+    res[i] <- (coo[i+1, 1] - coo[i, 1]) * (coo[i+1, 2] - coo[i, 2])
+  }
+  sum(res)>0
+}
+
+#' @export
+is_clockwise.Coo <- function(coo){
+  sapply(coo$coo, is_clockwise)
+}
+
+#' @export
+is_anticlockwise <- function(coo){
+  !is_clockwise(coo)
+}
 # coo_close -----------------
 #' Closes/uncloses shapes
 #'
@@ -1796,7 +1837,7 @@ coo_centpos.Coo <- function(coo) {
 #' # add it to $fac
 #' mutate(bot, size=coo_centsize(bot))
 #' @family centroid functions
-#' @family coo_ utilities
+#' @family coo_utilities
 #' @export
 coo_centsize <- function(coo){
   UseMethod("coo_centsize")
