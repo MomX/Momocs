@@ -115,7 +115,7 @@ CLUST.PCA <- function(x,
 
   # prepares tip.label
   if (!missing(tip_labels))
-    phylo$tip.label <- as.character(.prep.fac(x, tip_labels))
+    phylo$tip.label <- as.character(prepare_fac(x, tip_labels))
 
   # plot the phylo
   plot(phylo, type=type, tip.color=tip.colors, ...)
