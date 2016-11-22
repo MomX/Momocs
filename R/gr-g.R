@@ -1,6 +1,4 @@
-
-# working section --------
-
+# g is the new plot ----------
 
 g <- function(x, axes_corner=TRUE, ...){
   # dots <- as.list(sys.call())[-(1:2)]
