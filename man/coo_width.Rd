@@ -23,7 +23,7 @@ coo_width(bot[1])
 \link{coo_lw}, \link{coo_length}.
 
 Other coo_ descriptors: \code{\link{coo_area}},
-  \code{\link{coo_chull}},
+  \code{\link{coo_boundingbox}}, \code{\link{coo_chull}},
   \code{\link{coo_circularityharalick}},
   \code{\link{coo_circularitynorm}},
   \code{\link{coo_circularity}},
