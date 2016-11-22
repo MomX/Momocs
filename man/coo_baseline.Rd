@@ -35,10 +35,9 @@ Other baselining functions: \code{\link{coo_bookstein}}
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
-  \code{\link{coo_bookstein}},
-  \code{\link{coo_boundingbox}},
-  \code{\link{coo_calliper}}, \code{\link{coo_centdist}},
-  \code{\link{coo_center}}, \code{\link{coo_centpos}},
+  \code{\link{coo_bookstein}}, \code{\link{coo_calliper}},
+  \code{\link{coo_centdist}}, \code{\link{coo_center}},
+  \code{\link{coo_centpos}}, \code{\link{coo_centsize}},
   \code{\link{coo_close}}, \code{\link{coo_down}},
   \code{\link{coo_dxy}}, \code{\link{coo_extract}},
   \code{\link{coo_flipx}}, \code{\link{coo_force2close}},
@@ -57,6 +56,6 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_template}}, \code{\link{coo_trans}},
   \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
-  \code{\link{is_clockwise}}, \code{\link{is_closed}}
+  \code{\link{is_closed}}
 }
 

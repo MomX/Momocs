@@ -27,8 +27,7 @@ coo_area(bot[1])
 hist(sapply(bot$coo, coo_area), breaks=10)
 }
 \seealso{
-Other coo_ descriptors: \code{\link{coo_boundingbox}},
-  \code{\link{coo_chull}},
+Other coo_ descriptors: \code{\link{coo_chull}},
   \code{\link{coo_circularityharalick}},
   \code{\link{coo_circularitynorm}},
   \code{\link{coo_circularity}},

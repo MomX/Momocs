@@ -24,7 +24,7 @@ coo_circularity(bot[1])
 }
 \seealso{
 Other coo_ descriptors: \code{\link{coo_area}},
-  \code{\link{coo_boundingbox}}, \code{\link{coo_chull}},
+  \code{\link{coo_chull}},
   \code{\link{coo_circularityharalick}},
   \code{\link{coo_circularitynorm}},
   \code{\link{coo_convexity}},
