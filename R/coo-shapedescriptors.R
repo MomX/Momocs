@@ -81,6 +81,21 @@ coo_width.Coo <- function(coo){
   sapply(coo$coo, coo_width)
 }
 
+# coo_boundingbox -----------
+#' Calculates coordinates of the bounding box
+#' @inheritParams coo_check
+#' @return named \code{list} with coordinates of the bounding box
+#' @examples
+#' bot[1] %>% coo_boundingbox()
+#' @family coo_ utilities
+#' @family coo_ descriptors
+#' @export
+coo_boundingbox <- function(coo){
+  coo %>% apply(2, range) %>% as.numeric() %>%
+    sapply(list) %>% `names<-`(c("x0", "x1", "y0", "y1"))
+}
+
+
 # coo_area ------
 #' Calculates the area of a shape
 #'
