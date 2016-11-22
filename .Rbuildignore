@@ -11,5 +11,5 @@ README.md
 ^cran-comments\.md$
 ^revdep$
 Momocs_arch.jpg
-R/_ready.R
+ready.R
 r-hub.R
