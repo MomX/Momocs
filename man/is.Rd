@@ -12,6 +12,7 @@
 \alias{is.Out}
 \alias{is.OutCoe}
 \alias{is.PCA}
+\alias{is.TraCoe}
 \alias{is.fac}
 \alias{is.ldk}
 \alias{is.links}
@@ -38,6 +39,8 @@ is.OutCoe(x)
 is.OpnCoe(x)
 
 is.LdkCoe(x)
+
+is.TraCoe(x)
 
 is.shp(x)
 
