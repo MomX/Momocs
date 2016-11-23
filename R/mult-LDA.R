@@ -55,10 +55,10 @@ LDA.default <- function(x, fac, retain, ...) {
   if (missing(fac))
     stop("no fac provided")
   # now we calculate two lda models with MASS::lda one with
-  mod <- lda(X, grouping = fac)
+  mod <- MASS::lda(X, grouping = fac)
   mod.pred <- predict(mod, X)
   # leave-one-out cross validation
-  CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
+  CV.fac <- MASS::lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
   # we build a nice table from it
   CV.tab <- table(fac, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")
@@ -116,24 +116,24 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   }
 
   PCA <- x
-  f0 <- fac
-  #fac handling
-  if (missing(fac))
-    stop("no 'fac' provided")
-  # formula case
-  if (class(fac)=="formula"){
-    fform <- x$fac[, attr(terms(fac), "term.labels")]
-    fac <- interaction(fform)
-  }
-
-  # case where fac is a standalone factor
-  if (is.factor(fac)) {
-    fac <- factor(fac)
-  }
-  # case where an id or column name is provided
-  if (!is.factor(fac)){
-    fac <- x$fac[, fac]
-  }
+  f0 <- fac <- prepare_fac(x, fac)
+  # #fac handling
+  # if (missing(fac))
+  #   stop("no 'fac' provided")
+  # # formula case
+  # if (class(fac)=="formula"){
+  #   fform <- x$fac[, attr(terms(fac), "term.labels")]
+  #   fac <- interaction(fform)
+  # }
+  #
+  # # case where fac is a standalone factor
+  # if (is.factor(fac)) {
+  #   fac <- factor(fac)
+  # }
+  # # case where an id or column name is provided
+  # if (!is.factor(fac)){
+  #   fac <- x$fac[, fac]
+  # }
 
   # PC number selection
   if (retain <= 1)  {
@@ -155,10 +155,10 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   }
   X <- as.matrix(X)
   # now we calculate two lda models with MASS::lda one with
-  mod <- lda(X, grouping = fac, tol = 1e-08, ...)
+  mod <- MASS::lda(X, grouping = fac, tol = 1e-08, ...)
   mod.pred <- predict(mod, X)
   # leave-one-out cross validation
-  CV.fac <- lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
+  CV.fac <- MASS::lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
   # we build a nice table from it
   CV.tab <- table(fac, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")

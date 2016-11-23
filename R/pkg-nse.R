@@ -161,6 +161,7 @@ prepare_fac <- function(x, fac){
   # raw column name case, use NSE with the help of dplyr's select
   if (is.name(substitute(fac))){
     x_try <- try(dplyr::select_(x$fac, substitute(fac))[[1]], silent=TRUE)
+    # x_try <- try(x$fac[[substitute(fac)]], silent=TRUE)
     if (class(x_try) != "try-error")
       return(x_try)
   }
