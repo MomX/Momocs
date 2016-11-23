@@ -233,7 +233,7 @@ as_df <- function(x){
 
 #' @export
 as_df.Coo <- function(x){
-  df_coo <- ldply(x$coo, data.frame)
+  df_coo <- plyr::ldply(x$coo, data.frame)
   colnames(df_coo) <- c("id", "x", "y")
   # if a $fac is present
   if (is.fac(x)) {
@@ -245,6 +245,8 @@ as_df.Coo <- function(x){
   }
   df_coo
 }
+# adding a synonym
+as.data.frame.Coo <- as_df
 
 #' @export
 as_df.Coe <- function(x){
@@ -256,10 +258,12 @@ as_df.Coe <- function(x){
     n <- group_by(df_coe, id) %>% summarize(n = n())
     i <- 1:nrow(df_fac)
     i_n <- rep(i, times=n$n)
-    df_coe <- bind_cols(df_coe, df_fac[i_n, ])
+    df_coe <- dplyr::bind_cols(df_coe, df_fac[i_n, ])
   }
   df_coe
 }
+# adding a synonym
+as.data.frame.Coe <- as_df
 
 #' @export
 as_df.TraCoe <- function(x){
@@ -271,23 +275,29 @@ as_df.TraCoe <- function(x){
     return(df_coe)
   }
 }
+# adding a synonym
+as.data.frame.TraCoe <- as_df
 
 #' @export
 as_df.PCA <- function(x){
-  df <- bind_cols(data.frame(.id=rownames(x$x)),
+  df <- dplyr::bind_cols(data.frame(.id=rownames(x$x)),
                   x$fac,
                   as.data.frame(x$x))
   #as_data_frame(df)
   df
 }
+# adding a synonym
+as.data.frame.PCA <- as_df
 
 #' @export
 as_df.LDA <- function(x){
   fac <- data.frame(fac=x$fac)
-  df <- bind_cols(fac, as.data.frame(x$x))
+  df <- dplyr::bind_cols(fac, as.data.frame(x$x))
   #as_data_frame(df)
   df
 }
+# adding a synonym
+as.data.frame.LDA <- as_df
 
 
 ##### end bridges
