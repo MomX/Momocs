@@ -325,21 +325,28 @@ if (nlevels(fac) <= 2){
 #' @examples
 #' data(olea)
 #' ol <- LDA(PCA(opoly(olea, 5)), "domes")
-#' gg <- plot_CV(ol) # just a wrapper for plot_CV(ol$CV.tab) though
+#' # freq=FALSE inspired by Chitwood et al. New Phytol fig. 4
+#' gg <- plot_CV(ol, freq=FALSE)
 #' gg
+#'
+#' # and you can tune the gg object wit regular ggplot2 syntax eg
+#' gg + ggplot2::scale_color_discrete(h = c(120, 240))
+#'
+#' # freq=TRUE
+#' plot_CV(ol, freq=TRUE)
 #' @rdname plot_CV
 #' @export
 plot_CV <- function(x, ...){UseMethod("plot_CV")}
+
 #' @rdname plot_CV
 #' @export
-plot_CV.default <- function(x, freq=TRUE,rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
+plot_CV.default <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
   tab <- x
   df <- as.data.frame(tab)
   #colnames(df) <- c("actual", "classified", "count")
   if (freq) {
     df <- df %>% group_by_(colnames(df)[1]) %>%
       mutate(Freq=round(Freq/sum(Freq), round))
-  }
   gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], fill="Freq")) +
     geom_tile()  +
     scale_fill_gradient(low="white", high="red", na.value="white") +
@@ -347,6 +354,16 @@ plot_CV.default <- function(x, freq=TRUE,rm0 = TRUE, cex=5, round=2, labels=TRUE
     theme(axis.text=element_text(size=10),
           axis.text.x=element_text(angle=90, hjust=1),
           axis.title=element_text(size=14, face="bold"))
+  } else {
+    df %<>% filter(Freq!=0)
+    df <- df[rep(row.names(df), df$Freq), ]
+    df <- mutate(df, col=c("wrong", "correct")[(actual==classified)+1])
+    gg <- ggplot(df, aes(x=actual, y=classified, col=col)) + geom_jitter(width = 0.25, height = 0.25, alpha=0.5) +
+      theme_linedraw() + theme(legend.position="none") +
+      theme(axis.text=element_text(size=10),
+            axis.text.x=element_text(angle=90, hjust=1),
+            axis.title=element_text(size=14, face="bold"))
+  }
   if (labels){
     if (rm0) {
       gg <- gg + geom_text(data=filter(df, Freq !=0), aes_string(label="Freq"), size=rel(cex))
@@ -355,9 +372,10 @@ plot_CV.default <- function(x, freq=TRUE,rm0 = TRUE, cex=5, round=2, labels=TRUE
     }
   }
   return(gg)}
+
 #' @rdname plot_CV
 #' @export
-plot_CV.LDA <- function(x, freq=TRUE, rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
+plot_CV.LDA <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
   plot_CV(x$CV.tab, freq=freq, rm0=rm0, cex=cex, round=round, labels=labels, ...)
 }
 

@@ -8,10 +8,10 @@
 \usage{
 plot_CV(x, ...)
 
-\method{plot_CV}{default}(x, freq = TRUE, rm0 = TRUE, cex = 5,
+\method{plot_CV}{default}(x, freq = FALSE, rm0 = TRUE, cex = 5,
   round = 2, labels = TRUE, ...)
 
-\method{plot_CV}{LDA}(x, freq = TRUE, rm0 = TRUE, cex = 5, round = 2,
+\method{plot_CV}{LDA}(x, freq = FALSE, rm0 = TRUE, cex = 5, round = 2,
   labels = TRUE, ...)
 }
 \arguments{
@@ -40,8 +40,15 @@ but may be used for any table (likely with \code{freq=FALSE}).
 \examples{
 data(olea)
 ol <- LDA(PCA(opoly(olea, 5)), "domes")
-gg <- plot_CV(ol) # just a wrapper for plot_CV(ol$CV.tab) though
+# freq=FALSE inspired by Chitwood et al. New Phytol fig. 4
+gg <- plot_CV(ol, freq=FALSE)
 gg
+
+# and you can tune the gg object wit regular ggplot2 syntax eg
+gg + ggplot2::scale_color_discrete(h = c(120, 240))
+
+# freq=TRUE
+plot_CV(ol, freq=TRUE)
 }
 \seealso{
 \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
