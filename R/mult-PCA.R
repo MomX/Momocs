@@ -376,15 +376,31 @@ get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
   return(res)
 }
 
-# # FLips PCA
-# flip <- function(x, axs){
-#   UseMethod("flip")
-# }
-#
-# flip.PCA <- function(x, axs){
-#   x$x[, axs] %<>% `*`(-1)
-#   x$rotation[, axs] %<>% `*`(-1)
-#   x
-# }
+#' Flips PCA axes
+#'
+#' Simply multiply by -1, corresponding scores and rotation vectors for PCA objects.
+#' PC orientation being arbitrary, this may help to have a better display.
+#' @param x a PCA object
+#' @param axs numeric which PC(s) to flip
+#' @examples
+#' bp <- bot %>% efourier(6) %>% PCA
+#' bp %>% plot
+#' bp %>% flip_PCaxes(1) %>% plot()
+#' @export
+flip_PCaxes <- function(x, axs){
+  UseMethod("flip_PCaxes")
+}
+
+#' @export
+flip_PCaxes.default <- function(x, axs){
+  message("only defined on PCA objects")
+}
+
+#' @export
+flip_PCaxes.PCA <- function(x, axs){
+  x$x[, axs] %<>% `*`(-1)
+  x$rotation[, axs] %<>% `*`(-1)
+  x
+}
 
 #### end PCA
