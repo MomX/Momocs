@@ -79,28 +79,17 @@ Opn.Coo <- function(x, fac = data.frame(), ldk = list()) {
 #' @export
 print.Opn <- function(x, ...) {
   Opn <- validate(x)
+  coo_nb <- length(Opn)
+  if (coo_nb==0){
+    cat("An empty Opn object")
+    return()
+  }
   ### Header
   cat("An Opn object with: \n")
-  cat(rep("-", 20), "\n", sep = "")
-  coo_nb <- length(Opn)
   coo_len <- sapply(Opn$coo, nrow)
   coo_closed <- sapply(Opn$coo, is_closed)
-  #     # one random outline
-  #     eg <- sample(length(Opn$coo), 1)
-  #     coo_eg <- Opn$coo[[eg]]
-  #     colnames(coo_eg) <- c("x", "y")
-  #     cat(" - One random open outline in $coo: '", names(Opn$coo)[eg],
-  #         "':\n", sep = "")
-  #     if (nrow(coo_eg) > 5) {
-  #         print(coo_eg[1:5, ], print.gap = 2)
-  #         cat("etc.\n")
-  #     } else {
-  #         print(coo_eg, print.gap = 2)
-  #         cat("\n\n")
-  #     }
   # number of outlines
   cat(" - $coo:", coo_nb, "open outlines")
-
   # number of coordinates
   cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n", sep="")
   # number of landmarks

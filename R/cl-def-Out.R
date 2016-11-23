@@ -109,25 +109,15 @@ as.Out <- function(object, OutCoe, nb.pts=120){
 #' @export
 print.Out <- function(x, ...) {
   Out <- validate(x)
+  coo_nb <- length(Out)
+  if (coo_nb==0){
+    cat("An empty Out object")
+    return()
+  }
   ### Header
   cat("An Out object with: \n")
-  cat(rep("-", 20), "\n", sep = "")
-  coo_nb <- length(Out)
   coo_len <- sapply(Out$coo, nrow)
   coo_closed <- sapply(Out$coo, is_closed)
-  #     # one random outline
-  #     eg <- sample(length(Out$coo), 1)
-  #     coo_eg <- Out$coo[[eg]]
-  #     colnames(coo_eg) <- c("x", "y")
-  #     cat(" - One random outline in $coo: '", names(Out$coo)[eg],
-  #         "':\n", sep = "")
-  #     if (nrow(coo_eg) > 5) {
-  #       print(coo_eg[1:5, ], print.gap = 2)
-  #       cat("etc.\n")
-  #     } else {
-  #       print(coo_eg, print.gap = 2)
-  #       cat("\n\n")
-  #     }
   # number of outlines
   cat(" - $coo:", coo_nb, "outlines")
 

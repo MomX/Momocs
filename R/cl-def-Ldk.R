@@ -78,19 +78,18 @@ Ldk.Coo <- function(coo, links = NULL, slidings = NULL, fac = coo$fac) {
 #' @export
 print.Ldk <- function(x, ...) {
   Ldk <- validate(x)
+  coo_nb <- length(Ldk)
+  if (coo_nb==0){
+    cat("An empty Ldk object")
+    return()
+  }
   ### Header
   cat("An Ldk object with: \n")
-  cat(rep("-", 20), "\n", sep = "")
   coo_nb <- length(Ldk)
   coo_len <- sapply(Ldk$coo, nrow)
   coo_closed <- sapply(Ldk$coo, is_closed)
-  # # number of open outlines cat(' -', coo_nb, 'configurations of landmarks\n') #
-  # one random outline eg <- sample(length(Ldk$coo), 1) coo_eg <- Ldk$coo[[eg]]
-  # colnames(coo_eg) <- c('x', 'y') cat(' - One random configuration in $coo: '',
-  # names(Ldk$coo)[eg], '':\n', sep = '') if (nrow(coo_eg) > 5) {
-  # print(coo_eg[1:5, ], print.gap = 2) cat('etc.\n') } else { print(coo_eg,
-  # print.gap = 2) cat('\n\n') } number of conf landmarks
   cat(" - $coo:", coo_nb, "configurations of landmarks")
+
   # number of coordinates
   cat(" (", unique(coo_len), " coordinates)\n", sep = "")
   # slidings partitions
