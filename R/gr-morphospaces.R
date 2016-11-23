@@ -1,14 +1,4 @@
-# 6. Morphospace functions
-# -----------------------------------------------------
-# stupid function
-# @export
-.mprod <- function(m, s) {
-  res <- m
-  for (i in 1:ncol(m)) {
-    res[, i] <- m[, i] * s[i]
-  }
-  return(res)
-}
+# Morphospace functions -------
 
 # @export
 morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
@@ -289,6 +279,17 @@ pos.shapes <- function(xy, pos.shp = c("range", "full", "circle", "xy",
   }
   # if a non-valid method is passed
   return(xy)
+}
+
+# Domestic -----------
+# stupid function
+# @export
+.mprod <- function(m, s) {
+  res <- m
+  for (i in 1:ncol(m)) {
+    res[, i] <- m[, i] * s[i]
+  }
+  return(res)
 }
 
 # Calculates shapes from PC plane: e/r/tfourier
