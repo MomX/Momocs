@@ -1,4 +1,4 @@
-
+# plot.LDA ---------
 #' Plots Linear Discriminant Analysis
 #'
 #' The Momocs' \code{\link{LDA}} plotter with many graphical options.
@@ -307,6 +307,7 @@ if (nlevels(fac) <= 2){
 }
 
 
+# plot_CV ---------
 #' Plots a cross-validation table as an heatmap
 #'
 #' Either with frequencies (or percentages) plus marginal sums,
@@ -380,6 +381,7 @@ plot_CV.LDA <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,.
 }
 
 
+# plot_CV2 ---------
 #' Plots a cross-correlation table
 #'
 #' Or any contingency/confusion table. A simple graphic representation based on variable

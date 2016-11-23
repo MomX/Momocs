@@ -116,24 +116,24 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   }
 
   PCA <- x
-  f0 <- fac <- prepare_fac(x, fac)
-  # #fac handling
-  # if (missing(fac))
-  #   stop("no 'fac' provided")
-  # # formula case
-  # if (class(fac)=="formula"){
-  #   fform <- x$fac[, attr(terms(fac), "term.labels")]
-  #   fac <- interaction(fform)
-  # }
-  #
-  # # case where fac is a standalone factor
-  # if (is.factor(fac)) {
-  #   fac <- factor(fac)
-  # }
-  # # case where an id or column name is provided
-  # if (!is.factor(fac)){
-  #   fac <- x$fac[, fac]
-  # }
+  f0 <- fac #<- prepare_fac(x, fac)
+  #fac handling
+  if (missing(fac))
+    stop("no 'fac' provided")
+  # formula case
+  if (class(fac)=="formula"){
+    fform <- x$fac[, attr(terms(fac), "term.labels")]
+    fac <- interaction(fform)
+  }
+
+  # case where fac is a standalone factor
+  if (is.factor(fac)) {
+    fac <- factor(fac)
+  }
+  # case where an id or column name is provided
+  if (!is.factor(fac)){
+    fac <- x$fac[, fac]
+  }
 
   # PC number selection
   if (retain <= 1)  {
@@ -237,11 +237,11 @@ classify.default <- function(x, fac, ref, unk){
 
 #' @export
 classify.Coe <- function(x, fac, ref, unk){
-  # # so that we can directly pass a fac
-  # if (!is.factor(fac)){
-  #   fac <- x$fac[, fac]
-  # }
-  fac <- prepare_fac(x, fac)
+  # so that we can directly pass a fac
+  if (!is.factor(fac)){
+    fac <- x$fac[, fac]
+  }
+  # fac <- prepare_fac(x, fac)
   # if any NAs, we remove them
   if (any(is.na(fac))) {
     x  <- x %>% subset(which(!is.na(fac)))
