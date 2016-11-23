@@ -1,4 +1,4 @@
-##### PCA plotters
+# PCA plotters ------
 
 ### if high nb of group or if long, abbreviate auto
 ### change labelsgroups in lda
@@ -448,7 +448,7 @@ plot3.PCA <- function(PCA,  ... ){
     invisible(data.frame(x=PCA$x[, 1], y=PCA$x[, 2], z=PCA$x[, 3], fac=df$fac))
 }
 
-
+# Boxplot ---------
 #' Boxplot on PCA objects
 #'
 # @method boxplot PCA
@@ -500,7 +500,7 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
   }}
 
 
-
+# PCcontrib ----------
 #' Shape variation along PC axes
 #'
 #' Calculates and plots shape variation along Principal Component axes.
@@ -511,7 +511,7 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
 #' @param gap for combined-Coe, an adjustment variable for gap between shapes. (bug)Default
 #' to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.
 #' @param ... additional parameter to pass to \code{\link{coo_draw}}
-#' @return a ggplot object
+#' @return (invisibly) a list with \code{gg} the ggplot object and \code{shp} the list of shapes.
 #' @examples
 #' data(bot)
 #' bot.p <- PCA(efourier(bot, 12))
@@ -549,7 +549,16 @@ PCcontrib.PCA <-
       theme(axis.text.x=element_blank(),
             axis.text.y=element_blank(),
             axis.ticks=element_blank())
-    gg
+
+    print(gg)
+
+    shp <- gg$data %>%
+      # we dont want all columns
+      select(x=x_c, y=y_c, shp1, nax) %>%
+      # we split for each pair of nax x shp1
+      split(f=list(.$shp1, .$nax))
+
+    list(gg=gg, shp=shp) %>% invisible()
   }
 
 ##### end PCA plotters

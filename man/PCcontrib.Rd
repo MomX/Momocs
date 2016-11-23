@@ -23,7 +23,7 @@ PCcontrib(PCA, ...)
 to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.}
 }
 \value{
-a ggplot object
+(invisibly) a list with \code{gg} the ggplot object and \code{shp} the list of shapes.
 }
 \description{
 Calculates and plots shape variation along Principal Component axes.
