@@ -2,7 +2,7 @@
 
 g <- function(x, axes_corner=TRUE, ...){
   # dots <- as.list(sys.call())[-(1:2)]
-  dots <- cook_dots()
+  dots <- Momocs:::cook_dots()
   # return(dots)
   # preliminaries ------------------
   # defines a new par, saves old one and restore it on exit
