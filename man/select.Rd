@@ -35,7 +35,7 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{combine}}, \code{\link{dissolve}},
   \code{\link{filter}}, \code{\link{mutate}},
   \code{\link{rename}}, \code{\link{rm_uncomplete}},
-  \code{\link{rw_rule}}, \code{\link{sample_frac}},
+  \code{\link{rw_fac}}, \code{\link{sample_frac}},
   \code{\link{sample_n}}, \code{\link{slice}},
   \code{\link{subset.Coo}}, \code{\link{transmute}}
 }

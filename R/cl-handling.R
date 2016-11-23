@@ -335,6 +335,7 @@ sample_n.default <- function(tbl, size, replace=FALSE, ...){
 #' @export
 sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
   Coo <- tbl
+  if (size==0) return(slice(Coo, 0))
   #Coo %<>% validate()
   if (missing(fac)) {
     fac <- NULL
@@ -401,9 +402,10 @@ sample_frac.default <- function(tbl, size=1, replace=FALSE, ...){
 
 #' @export
 sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
-  if (size > 1 | size <= 0)
-    stop("size must be >=0 and <= 1")
+  if (size > 1 | size < 0)
+    stop("size must be >0 and <= 1")
   Coo <- tbl
+  if (size==0) return(slice(Coo, 0))
   #Coo %<>% validate()
   if (missing(fac)) {
     fac <- NULL
@@ -782,27 +784,27 @@ subset.PCA <- function(x, subset, ...){
 }
 
 
-# rw_rule ---------------------
+# rw_fac ---------------------
 #' Renames levels on Momocs objects
 #'
-#' rw_rule stands for 'rewriting rule'. Typically useful to correct typos
+#' rw_fac stands for 'rewriting rule'. Typically useful to correct typos
 #' at the import, or merge some levels within covariates. Drops levels silently.
 #'
 #' @param x any Momocs object
 #' @param fac the id of the name of the $fac column to look for
 #' @param from which level(s) should be renamed; passed as a single or several characters
-#' @param to which name ?
+#' @param to which name should be used to rename this/these levels
 #' @return a Momocs object of the same type
 #' @family handling functions
 #' @examples
 #' data(bot)
 #' # single renaming
-#' rw_rule(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
+#' rw_fac(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
 #' # several renaming
 #' bot2 <- mutate(bot, fake=factor(rep(letters[1:4], 10)))
-#' rw_rule(bot2, "fake", c("a", "e"), "ae")$fake
+#' rw_fac(bot2, "fake", c("a", "e"), "ae")$fake
 #' @export
-rw_rule <- function(x, fac, from, to){
+rw_fac <- function(x, fac, from, to){
   new_levels <- unique(c(levels(x$fac[, fac]), to))
   fac2 <- factor(x$fac[, fac], levels = new_levels)
   for (i in seq_along(from)) {
@@ -810,6 +812,12 @@ rw_rule <- function(x, fac, from, to){
   }
   x$fac[, fac] <- droplevels(fac2)
   x
+}
+#' @rdname rw_fac
+#' @export
+rw_rule <- function(x, fac, from, to){
+  message("will be deprecated soon, use `rw_fac` instead")
+  rw_fac(x, fac, from, to)
 }
 
 # at_least ------------------------
@@ -833,7 +841,7 @@ at_least <- function(x, fac, N){
   retain <- x$fac[, fac] %in% names(which(table(x$fac[, fac]) >= N))
   if (!any(retain)) {
     message("no group with at least ", N, " indidivuals")
-    return(x)
+    return(slice(x, 0))
   } else {
     subset(x, retain)
   }
