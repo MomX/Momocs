@@ -376,6 +376,7 @@ get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
   return(res)
 }
 
+# 5. Flip PCA axes -------------
 #' Flips PCA axes
 #'
 #' Simply multiply by -1, corresponding scores and rotation vectors for PCA objects.
