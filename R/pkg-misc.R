@@ -140,6 +140,77 @@ edm_nearest <- function(m1, m2, full = FALSE) {
     return(list(d = d, pos = pos)) else return(d)
 }
 
+#' Identify outliers
+#'
+#' A simple wrapper around \link{dnorm} that helps identify outliers. In particular,
+#' it may be useful on \link{Coe} object (in this case a PCA is first calculated) and also
+#' on \link{Ldk} for detecting possible outliers on freshly digitized/imported datasets.
+#'
+#' @param x object, either Coe or a numeric on which to search for outliers
+#' @param conf confidence for dnorm
+#' @param nax number of axes to retain (only for Coe),
+#' if <1 retain enough axes to retain this proportion of the variance
+#' @param ... additional parameters to be passed to PCA (only for Coe)
+#' @note experimental. dnorm parameters used are \code{median(x), sd(x)}
+#' @examples
+#' # on a numeric
+#' x <- rnorm(10)
+#' x[4] <- 99
+#' which_out(x)
+#'
+#' # on a Coe
+#' bf <- bot %>% efourier(6)
+#' bf$coe[c(1, 6), 1] <- 5
+#' which_out(bf)
+#'
+#' # on Ldk
+#' w_no <- w_ok <- wings
+#' w_no$coo[[2]][1, 1] <- 2
+#' w_no$coo[[6]][2, 2] <- 2
+#' which_out(w_ok, conf=1e-12) # with low conf, no outliers
+#' which_out(w_no, conf=1e-12) # as expected
+#' @export
+which_out <- function(x, conf, nax, ...){
+  UseMethod("which_out")
+}
+
+#' @export
+which_out.default <- function(x, conf=1e-3, ...){
+  out <- which(dnorm(x, median(x), sd(x)) < conf)
+  if(length(out)==0) {
+    return(NA)
+  } else {
+    return(out)}
+}
+
+#' @export
+which_out.Coe <- function(x, conf=1e-3, nax=0.99, ...){
+  p <- PCA(x, ...)
+  if (length(nax)==1)
+    if (nax < 1)
+      nax <- scree_min(p, nax)
+    m <- p$x[, 1:nax]
+    m <- matrix(m, ncol=nax)
+    outliers <- apply(m, 2, which_out, conf=conf)
+    outliers <- unlist(outliers)
+    return(unique(as.numeric(outliers)))
+}
+
+#' @export
+which_out.Ldk <- function(x, conf=1e-3, ...){
+  arr <- x$coo %>% l2a %>% apply(1:2, function(.) dnorm(., mean(.), sd(.)))
+  out <- which(arr < conf, arr.ind=TRUE)
+  if (nrow(out)==0){
+    return(NA)
+  } else {
+    message("found ", nrow(arr), " possible outliers")
+    data.frame(shape=names(x)[out[, 1]],
+               id=out[, 1],
+               row=out[, 2],
+               coordinate=c("x", "y")[out[, 3]], row.names = NULL)
+  }
+}
+
 ##### Miscellaneous functions for Fourier-based approaches
 
 #' Helps to select a given number of harmonics from a numerical vector.
