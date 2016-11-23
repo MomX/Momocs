@@ -2,7 +2,7 @@
 % Please edit documentation in R/mult-PCA.R
 \name{which_out}
 \alias{which_out}
-\title{Remove outliers on Coe}
+\title{Identify outliers}
 \usage{
 which_out(x, conf, nax, ...)
 }
@@ -17,14 +17,29 @@ if <1 retain enough axes to retain this proportion of the variance}
 \item{...}{additional parameters to be passed to PCA (only for Coe)}
 }
 \description{
-First performs a PCA, then searches for outliers using \link{dnorm}
+A simple wrapper around \link{dnorm} that helps identify outliers. In particular,
+it may be useful on \link{Coe} object (in this case a PCA is first calculated) and also
+on \link{Ldk} for detecting possible outliers on freshly digitized/imported datasets.
 }
 \note{
 experimental. dnorm parameters used are \code{median(x), sd(x)}
 }
 \examples{
+# on a numeric
 x <- rnorm(10)
 x[4] <- 99
 which_out(x)
+
+# on a Coe
+bf <- bot \%>\% efourier(6)
+bf$coe[c(1, 6), 1] <- 5
+which_out(bf)
+
+# on Ldk
+w_no <- w_ok <- wings
+w_no$coo[[2]][1, 1] <- 2
+w_no$coo[[6]][2, 2] <- 2
+which_out(w_ok, conf=1e-12) # with low conf, no outliers
+which_out(w_no, conf=1e-12) # as expected
 }
 
