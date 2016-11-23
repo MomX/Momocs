@@ -1,5 +1,13 @@
 context("babel")
 
+test_that("unary bridges work fine", {
+  expect_true(bot[1] %>% m2l %>% is.list())
+  expect_true(bot[1] %>% m2l %>% l2m() %>% is.matrix())
+  expect_equal(wings$coo %>% l2a %>%  dim %>% length, 3)
+  expect_true(wings$coo %>% l2a %>%  a2l %>% Ldk() %>% validate() %>% is.Ldk())
+})
+
+
 test_that("as_df and as.data.frame work fine",{
   idf <- is.data.frame
   #Coo

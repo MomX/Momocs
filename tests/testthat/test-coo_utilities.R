@@ -106,7 +106,7 @@ test_that("coo_centsize works fine", {
 
 
 # coo_area -----
-test_that("coo_area returns a scalar", {
+test_that("coo_area works fine", {
   expect_equal(coo_area(matrix(c(0, 0, 0, 1, 1, 1, 1, 0, 0, 0), nc=2, byrow=TRUE)), 1)
 })
 

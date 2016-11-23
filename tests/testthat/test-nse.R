@@ -103,8 +103,24 @@ test_that("combine works fine", {
   expect_true(chop(x, a) %>% combine %>% is.Out())
   expect_equal(chop(x, a) %>% combine %>% length(), length(x))
 })
+
 # dissolve
-# subset(?)
+test_that("dissolve works fine", {
+  bw <- bot %>% chop(type) %>% lapply(efourier, 10) %>% combine
+  expect_true(bw %>% is.OutCoe())
+  expect_equal(ncol(bw$coe), 80)
+  expect_true(bw %>% dissolve(1) %>% is.OutCoe())
+  expect_equal(bw %>% dissolve(1) %$% ncol(coe), 40)
+})
+
+# subset
+test_that("subset works fine", {
+  expect_equal(subset(bot, type=="whisky") %>% length, 20)
+  expect_equal(subset(bot, type!="whisky") %>% length, 20)
+  expect_equal(subset(bot, 1:5) %>% length, 5)
+  expect_equal(subset(bot, -(1:5)) %>% length, 35)
+})
+
 # rw
 test_that("rw_rule works fine", {
   expect_equal(rw_fac(x, "b", "C", "foo")$b %>% levels(), c("A", "B", "D", "E", "foo"))
