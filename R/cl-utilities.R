@@ -31,7 +31,7 @@ table.Coo <- function(...){
   args <- list(...)
   #    return(args)
   x <- args[[1]]
-  if (length(x$fac)==0) stop("no $fac defined")
+  if (!is.fac(x)) stop("no $fac defined")
   if (length(args)>1) {
     # a little helper for mismatched colnames
     cn <- unlist(args[-1])
@@ -466,6 +466,12 @@ is.OpnCoe <- function(x){
 #' @export
 is.LdkCoe <- function(x){
   ifelse(any(class(x) == "LdkCoe"), TRUE, FALSE)
+}
+
+#' @rdname is
+#' @export
+is.TraCoe <- function(x){
+  ifelse(any(class(x) == "TraCoe"), TRUE, FALSE)
 }
 
 #' @rdname is
