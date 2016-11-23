@@ -1,5 +1,9 @@
 context("nse")
 
+x <- Out(a2l(replicate(50, matrix(1:4, 2, 2))),
+         fac=data.frame(a=rep(letters[1:5], 10),
+                        b=rep(LETTERS[1:5], each=10)))
+
 # prepare_fac -----
 test_that("prepare_fac works fine", {
   olea$fac$fake <-  rnorm(length(olea))
@@ -48,10 +52,6 @@ test_that("select works fine",{
 
 
 test_that("filter works fine",{
-  x <- Out(a2l(replicate(50, matrix(1:4, 2, 2))),
-           fac=data.frame(a=rep(letters[1:5], 10),
-                          b=rep(LETTERS[1:5], each=10)))
-
   expect_equal(length(filter(x, a=="a")) , 10)
   expect_equal(length(filter(x, a %in% c("a", "b"))) , 20)
   expect_equal(length(filter(x, !(a %in% c("a", "b")))) , 30)
@@ -67,14 +67,61 @@ test_that("filter works fine",{
 #  trnsmute
 # arrange
 # slice
+
+test_that("slice works fine",{
+  expect_true(x %>% slice(0) %>% validate %>% is.Out())
+  expect_true(x %>% slice(1) %>% validate %>% is.Out())
+  expect_true(x %>% slice(-1) %>% validate %>% is.Out())
+  expect_true(x %>% slice(1:5) %>% validate %>% is.Out())
+  expect_true(x %>% slice(-(1:5)) %>% validate %>% is.Out())
+  expect_true(x %>% slice(sample(c(TRUE, FALSE), length(.), rep=T)) %>% is.Out())
+})
+
 # sample_n
+test_that("sample_n works fine", {
+  expect_equal(sample_n(x, 0) %>% length(), 0)
+  expect_equal(sample_n(x, 5) %>% length(), 5)
+})
+
 # sample_frac
+test_that("sample_frac works fine", {
+  expect_equal(sample_frac(x, 0) %>% length(), 0)
+  expect_equal(sample_frac(x, 0.5) %>% length(), length(x)/2)
+  expect_equal(sample_frac(x, 1) %>% length(), length(x))
+})
+
+
 # chop
+test_that("chop works fine",{
+  expect_true(chop(x, a) %>% is.list())
+  expect_equal(chop(x, a) %>% length, 5)
+  expect_true(chop(x, a) %>% sapply(is.Out) %>% all)
+})
+
 # combine
+test_that("combine works fine", {
+  expect_true(chop(x, a) %>% combine %>% is.Out())
+  expect_equal(chop(x, a) %>% combine %>% length(), length(x))
+})
 # dissolve
 # subset(?)
 # rw
+test_that("rw_rule works fine", {
+  expect_equal(rw_fac(x, "b", "C", "foo")$b %>% levels(), c("A", "B", "D", "E", "foo"))
+})
+
 # at_least
-
-
+xx <- Out(a2l(replicate(50, matrix(1:4, 2, 2))),
+         fac=data.frame(a=rep(letters[1:5], 10),
+                        b=c(rep(LETTERS[1], 5),
+                            rep(LETTERS[2], 10),
+                            rep(LETTERS[3], 15),
+                            rep(LETTERS[4], 20))))
+test_that("at_least works fine", {
+  expect_equal(at_least(xx, "b", 5)$b %>% nlevels(), 4)
+  expect_equal(at_least(xx, "b", 6)$b %>% nlevels(), 3)
+  expect_equal(at_least(xx, "b", 20)$b %>% nlevels(), 1)
+  expect_equal(at_least(xx, "b", 50)$b %>% nlevels(), 0)
+  expect_message(at_least(xx, "b", 50)$b %>% nlevels())
+})
 
