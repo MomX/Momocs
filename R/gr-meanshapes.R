@@ -14,6 +14,7 @@
 #' leaves <- shapes %>% slice(grep("leaf", names(shapes))) %$% coo
 #' class(leaves)
 #' leaves %>% plot_mshapes(col2="#0000FF")
+#' @export
 plot_mshapes <- function(x, size=3/4, col2="#FF0000"){
   ms <- x
   # so that the result of mshapes can directly be passed
