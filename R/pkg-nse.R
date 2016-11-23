@@ -158,6 +158,9 @@ prepare_fac <- function(x, fac){
     return(fac)
   }
 
+  if (is.factor(fac))
+    return(fac)
+
   # raw column name case, use NSE with the help of dplyr's select
   if (is.name(substitute(fac))){
     x_try <- try(dplyr::select_(x$fac, substitute(fac))[[1]], silent=TRUE)

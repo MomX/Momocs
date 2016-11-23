@@ -237,10 +237,11 @@ classify.default <- function(x, fac, ref, unk){
 
 #' @export
 classify.Coe <- function(x, fac, ref, unk){
-  # so that we can directly pass a fac
-  if (!is.factor(fac)){
-    fac <- x$fac[, fac]
-  }
+  # # so that we can directly pass a fac
+  # if (!is.factor(fac)){
+  #   fac <- x$fac[, fac]
+  # }
+  fac <- prepare_fac(x, fac)
   # if any NAs, we remove them
   if (any(is.na(fac))) {
     x  <- x %>% subset(which(!is.na(fac)))
