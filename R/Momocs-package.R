@@ -86,7 +86,7 @@ NULL
 globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
                   "x_c", "x_d", "y_c", "y_d", ".id",
                   "node", "label", "angle", "hjust", "Freq",
-                  "locus", "name", ".", "acutal", "classified"))
+                  "locus", "name", ".", "actual", "classified"))
 
 
 .onAttach <- function(lib, pkg) {
