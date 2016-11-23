@@ -25,6 +25,11 @@ bf <- efourier(b, 10)
 wbf <- combine(wf, bf)
 dissolve(wbf, 1)
 dissolve(wbf, 2)
+
+# or using chop (yet combine here makes no sense)
+bw <- bot \%>\% chop(type) \%>\% lapply(efourier, 10) \%>\% combine
+bw \%>\% dissolve(1)
+bw \%>\% dissolve(2)
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},
