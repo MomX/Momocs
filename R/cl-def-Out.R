@@ -170,7 +170,8 @@ OutCoe <- function(coe = matrix(), fac = data.frame(), method,
                    norm) {
   if (missing(method))
     stop("a method must be provided to OutCoe")
-  OutCoe <- structure(list(coe = coe, fac = fac, method = method, norm = norm), class=c("OutCoe", "Coe"))
+  OutCoe <- structure(list(coe = coe, fac = fac, method = method, norm = norm),
+                      class=c("OutCoe", "Coe"))
   return(OutCoe)
 }
 
@@ -183,8 +184,9 @@ print.OutCoe <- function(x, ...) {
     met <- c(met, "analyses ]\n")
     combined <- TRUE
   } else {
-    p <- pmatch(OutCoe$method[1], c("efourier", "rfourier", "tfourier"))
-    met <- switch(p, "elliptical Fourier", "radii variation", "tangent angle")
+    p <- pmatch(OutCoe$method[1], c("efourier", "rfourier", "sfourier", "tfourier"))
+    met <- switch(p, "elliptical Fourier", "radii variation (equally spaced radii)",
+                  "radii variation (equally spaced curvilinear abscissa)", "tangent angle")
     met <- c(met, "analysis ]\n")
     combined <- FALSE}
   ### Header

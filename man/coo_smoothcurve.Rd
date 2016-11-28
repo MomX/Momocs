@@ -50,7 +50,8 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trans}}, \code{\link{coo_trimbottom}},
   \code{\link{coo_trimtop}}, \code{\link{coo_trim}},
   \code{\link{coo_up}}, \code{\link{is_clockwise}},
-  \code{\link{is_closed}}
+  \code{\link{is_closed}},
+  \code{\link{is_equallyspacedradii}}
 
 Other smoothing functions: \code{\link{coo_smooth}}
 }

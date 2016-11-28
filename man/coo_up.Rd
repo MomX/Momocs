@@ -56,7 +56,8 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_template}}, \code{\link{coo_trans}},
   \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
   \code{\link{coo_trim}}, \code{\link{is_clockwise}},
-  \code{\link{is_closed}}
+  \code{\link{is_closed}},
+  \code{\link{is_equallyspacedradii}}
 
 Other opening functions: \code{\link{coo_down}},
   \code{\link{coo_left}}, \code{\link{coo_right}}

@@ -1106,6 +1106,50 @@ is_closed.Coo <- function(coo) {
 #' @export
 is_open <- function(coo) !is_closed(coo)
 
+# is_equallyspacedradii ----------
+#' Tests if coordinates likely have equally spaced radii
+#'
+#' Returns TRUE/FALSE whether the sd of angles between all successive
+#' radii is below/above \code{thesh}
+#'
+#' @aliases is_closed
+#' @inheritParams coo_check
+#' @param thresh numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)
+#' @return a single or a vector of \code{logical}. If \code{NA} are returned, they
+#' are produced by \link{coo_theta3} and some coordinates are likely identical, at least
+#' for x or y.
+#' @family coo_ utilities
+#' @examples
+#' bot[1] %>% is_equallyspacedradii
+#' bot[1] %>% coo_samplerr(36) %>% is_equallyspacedradii
+#' # higher tolerance but wrong
+#' bot[1] %>% coo_samplerr(36) %>% is_equallyspacedradii(thres=5*2*pi/360)
+#' # coo_interpolate is a better option
+#' bot[1] %>% coo_interpolate(1200) %>% coo_samplerr(36) %>% is_equallyspacedradii
+#' # Coo method
+#' bot %>% coo_interpolate(360) %>% coo_samplerr(36) %>% is_equallyspacedradii
+#' @export
+is_equallyspacedradii <- function(coo, thres) {
+  UseMethod("is_equallyspacedradii")
+}
+
+#' @export
+is_equallyspacedradii.default <- function(coo, thres=pi/90){
+  coo1 <- coo_slide(coo, id1 = 2)
+  cent <- coo_centpos(coo)
+  res <- vector("numeric", nrow(coo))
+  for (i in 1:nrow(coo)){
+    res[i] <- rbind(coo[i, ], cent, coo1[i, ]) %>% coo_theta3("acos")
+  }
+  sd(res) < thres
+}
+
+#' @export
+is_equallyspacedradii.Coo <- function(coo, thres=pi/90){
+  Coo <- coo
+  suppressWarnings(sapply(Coo$coo, is_equallyspacedradii, thres=thres))
+}
+
 # # is.likelyopen tries to estimate is a matrix of
 # coordinates is likely to be a # closed polygon
 # is.likelyclosedpolygon <- function(coo) { x <-

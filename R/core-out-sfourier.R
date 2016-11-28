@@ -1,9 +1,9 @@
 ##### Core function for radii variation Fourier analyses
 
-#' Radii variation Fourier transform (equally spaced radii)
+#' Radii variation Fourier transform (equally spaced curvilinear abscissa)
 #'
-#' \code{rfourier} computes radii variation Fourier analysis from a matrix or a
-#' list of coordinates where points are equally spaced radii.
+#' \code{sfourier} computes radii variation Fourier analysis from a matrix or a
+#' list of coordinates where points are equally spaced aong the curvilinear abscissa.
 #'
 #' @param x A \code{list} or \code{matrix} of coordinates or an \code{Out} object
 #' @param nb.h \code{integer}. The number of harmonics to use. If missing, 12 is used on shapes;
@@ -12,7 +12,6 @@
 #' perform.
 #' @param norm \code{logical}. Whether to scale the outlines so that the mean
 #' length of the radii used equals 1.
-#' @param thres \code{numeric} a tolerance to feed \link{is_equallyspacedradii}
 #' @param verbose \code{logical}. Whether to display diagnosis messages.
 #' @param ... useless here
 #' @return A list with following components:
@@ -22,31 +21,22 @@
 #'  \item \code{ao} ao harmonic coefficient.
 #'  \item \code{r} vector of radii lengths.
 #'  }
-#' @details see the JSS paper for the maths behind. The methods for \code{Out} objects
-#'  tests if coordinates have equally spaced radii using \link{is_equallyspacedradii}. A
-#'  message is printed if this is not the case.
-#' @family rfourier
-#' @note Directly borrowed for Claude (2008), and called \code{fourier1} there.
-#' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
-#' Springer 316 pp.
+#' @family sfourier
+#' @note The implementation is still quite experimental (as of Dec. 2016)
+#' @references Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
+#' of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 #' @examples
-#' data(bot)
-#' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
-#' coo_plot(coo)
-#' rf  <- rfourier(coo, 12)
-#' rf
-#' rfi <- rfourier_i(rf)
-#' coo_draw(rfi, border='red', col=NA)
-#'
-#' # Out method
-#' bot %>% rfourier()
-#' @rdname rfourier
+#' molars[4] %>% coo_center %>% coo_scale %>% coo_interpolate(1080) %>% coo_slidedirection("E") %>%
+#'    coo_sample(360) %T>% coo_plot(zoom=2) %>% sfourier(16) %>%
+#'    sfourier_i() %>% coo_draw(bor="red", points=TRUE)
+#' @rdname sfourier
 #' @export
-rfourier <- function(x, ...){UseMethod("rfourier")}
+sfourier <- function(x, ...){UseMethod("sfourier")}
 
-#' @rdname rfourier
+#' @rdname sfourier
 #' @export
-rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
+sfourier.default <-
+  function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
     coo <- x
     coo <- coo_check(coo)
     if (missing(nb.h)) {
@@ -54,60 +44,55 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
       message("'nb.h' not provided and set to ", nb.h)
     }
     if (is_closed(coo)) {
-        coo <- coo_unclose(coo)
+      coo <- coo_unclose(coo)
     }
     if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
-        nb.h = floor(nrow(coo)/2)
-        if (verbose) {
-            message("'nb.h' must be lower than half the number of points and has been set to: ",
+      nb.h = floor(nrow(coo)/2)
+      if (verbose) {
+        message("'nb.h' must be lower than half the number of points and has been set to: ",
                 nb.h)
-        }
+      }
     }
     if (nb.h == -1) {
-        nb.h = floor(nrow(coo)/2)
-        if (verbose) {
-            message("'nb.h' must be lower than half the number of points and has been set to",
+      nb.h = floor(nrow(coo)/2)
+      if (verbose) {
+        message("'nb.h' must be lower than half the number of points and has been set to",
                 nb.h, "harmonics.\n")
-        }
+      }
     }
     if (smooth.it != 0) {
-        coo <- coo_smooth(coo, smooth.it)
+      coo <- coo_smooth(coo, smooth.it)
     }
     if (norm) {
-        coo <- coo_scale(coo_center(coo))
-        rsize <- mean(apply(coo, 1, function(x) sqrt(sum(x^2))))
-        coo <- coo_scale(coo, 1/rsize)
+      coo <- coo_scale(coo_center(coo))
+      rsize <- mean(apply(coo, 1, function(x) sqrt(sum(x^2))))
+      coo <- coo_scale(coo, 1/rsize)
     }
     # from Claude
     p <- nrow(coo)
     an <- bn <- numeric(nb.h)
     Z <- complex(real = coo[, 1], imaginary = coo[, 2])
     r <- Mod(Z)
-    angle <- Arg(Z)
+    # angle <- Arg(Z)
+    s <- 2*pi*coo_perimcum(coo)[-length(coo)]/coo_perim(coo)
     ao <- 2 * sum(r)/p
     for (i in 1:nb.h) {
-        an[i] <- (2/p) * sum(r * cos(i * angle))
-        bn[i] <- (2/p) * sum(r * sin(i * angle))
+      an[i] <- (2/p) * sum(r * cos(i * s))
+      bn[i] <- (2/p) * sum(r * sin(i * s))
     }
     list(an = an, bn = bn, ao = ao, r = r)
-}
+  }
 
-#' @rdname rfourier
+#' @rdname sfourier
 #' @export
-rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, verbose=TRUE, ...) {
+sfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE, ...) {
   Out <- x
   # validates
   Out %<>% validate()
-  # tests if we actually have equally spaced radii
-  esr <- Out %>% is_equallyspacedradii(thres=thres)
-  if (any(is.na(esr)))
-    message("some shapes seem(s) to have some identical coordinates\n")
-  if (any(!na.omit(esr)))
-    message("some shape(s) seem(s) to have non equally spaced radii\n")
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     # nb.h <- ifelse(q >= 32, 32, q)
-    nb.h <- calibrate_harmonicpower(Out, method="rfourier",
+    nb.h <- calibrate_harmonicpower(Out, method="sfourier",
                                     thresh = 99, verbose=FALSE, plot=FALSE)$minh
     if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
@@ -123,46 +108,44 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, 
   coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo),
                                                                      col.n))
   for (i in seq(along = coo)) {
-    rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
+    rf <- sfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
                    norm = norm, verbose = TRUE)  #todo: vectorize
     coe[i, ] <- c(rf$an, rf$bn)
   }
-  res <- OutCoe(coe = coe, fac = Out$fac, method = "rfourier", norm = norm)
+  res <- OutCoe(coe = coe, fac = Out$fac, method = "sfourier", norm = norm)
   res$cuts <- ncol(res$coe)
   return(res)
 }
 
 #' Inverse radii variation Fourier transform
 #'
-#' \code{rfourier_i} uses the inverse radii variation (equally spaced radii) transformation to
+#' \code{sfourier_i} uses the inverse radii variation (equally spaced curvilinear abscissa) transformation to
 #' calculate a shape, when given a list with Fourier coefficients, typically
-#' obtained computed with \link{rfourier}.
+#' obtained computed with \link{sfourier}.
 #'
 #'
 #' @param rf A \code{list} with \code{ao}, \code{an} and \code{bn} components,
-#' typically as returned by \code{rfourier}.
+#' typically as returned by \code{sfourier}.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
 #' @param nb.pts \code{integer}. The number of points to calculate.
 #' @return A list with components: \item{x }{\code{vector} of
 #' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
 #' \item{angle}{\code{vector} of angles used.} \item{r}{\code{vector} of radii
 #' calculated.}
-#' @family rfourier
-#' @details See the JSS paper for the maths behind.
-#' @note Directly borrowed for Claude (2008), and called \code{ifourier1} there.
-#' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
-#' Springer 316 pp.
+#' @family sfourier
+#' @references Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
+#' of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 #' @examples
 #' data(bot)
-#' coo <- coo_center(bot[1]) # centering is almost mandatory for rfourier family
+#' coo <- coo_center(bot[1]) # centering is almost mandatory for sfourier family
 #' coo_plot(coo)
-#' rf  <- rfourier(coo, 12)
+#' rf  <- sfourier(coo, 12)
 #' rf
-#' rfi <- rfourier_i(rf)
+#' rfi <- sfourier_i(rf)
 #' coo_draw(rfi, border='red', col=NA)
 #'
 #' @export
-rfourier_i <- function(rf, nb.h, nb.pts = 120) {
+sfourier_i <- function(rf, nb.h, nb.pts = 120) {
     if (!all(c("an", "bn") %in% names(rf))) {
         stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")
     }
@@ -190,17 +173,17 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
     return(coo)
 }
 
-#' Calculates and draw 'rfourier' shapes.
+#' Calculates and draw 'sfourier' shapes.
 #'
-#' \code{rfourier_shape} calculates a 'Fourier radii variation shape' given
-#' Fourier coefficients (see \code{Details}) or can generate some 'rfourier'
+#' \code{sfourier_shape} calculates a 'Fourier radii variation shape' given
+#' Fourier coefficients (see \code{Details}) or can generate some 'sfourier'
 #' shapes.
 #'
-#' \code{rfourier_shape} can be used by specifying \code{nb.h} and
+#' \code{sfourier_shape} can be used by specifying \code{nb.h} and
 #' \code{alpha}. The coefficients are then sampled in an uniform distribution
 #' \eqn{(-\pi ; \pi)} and this amplitude is then divided by
 #' \eqn{harmonicrank^alpha}. If \code{alpha} is lower than 1, consecutive
-#' coefficients will thus increase. See \link{rfourier} for the mathematical
+#' coefficients will thus increase. See \link{sfourier} for the mathematical
 #' background.
 #'
 #' @param an \code{numeric}. The \eqn{a_n} Fourier coefficients on which to
@@ -214,23 +197,23 @@ rfourier_i <- function(rf, nb.h, nb.pts = 120) {
 #' \bold{Details}).
 #' @param plot \code{logical}. Whether to plot or not the shape.
 #' @return A matrix of (x; y) coordinates.
-#' @family rfourier
-#' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
-#' Springer 316 pp.
+#' @family sfourier
+#' @references Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
+#' of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 #' @examples
 #' data(bot)
-#' rf <- rfourier(bot[1], 24)
-#' rfourier_shape(rf$an, rf$bn) # equivalent to rfourier_i(rf)
-#' rfourier_shape() # not very interesting
+#' rf <- sfourier(bot[1], 24)
+#' sfourier_shape(rf$an, rf$bn) # equivalent to sfourier_i(rf)
+#' sfourier_shape() # not very interesting
 #'
-#' rfourier_shape(nb.h=12) # better
-#' rfourier_shape(nb.h=6, alpha=0.4, nb.pts=500)
+#' sfourier_shape(nb.h=12) # better
+#' sfourier_shape(nb.h=6, alpha=0.4, nb.pts=500)
 #'
 #' # Butterflies of the vignette' cover
 #' panel(Out(a2l(replicate(100,
-#' rfourier_shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
+#' sfourier_shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 #' @export
-rfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
+sfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
     plot = TRUE) {
     if (missing(nb.h) & missing(an))
         nb.h <- 6
@@ -241,10 +224,10 @@ rfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
     if (missing(bn))
         bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
     rf <- list(an = an, bn = bn, ao = 0)
-    shp <- rfourier_i(rf, nb.h = nb.h, nb.pts = nb.pts)
+    shp <- sfourier_i(rf, nb.h = nb.h, nb.pts = nb.pts)
     if (plot)
         coo_plot(shp)
     return(shp)
 }
 
-##### end rfourier
+##### end sfourier

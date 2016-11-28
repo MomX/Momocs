@@ -80,6 +80,12 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
                               amp.shp = amp.shp, pts.shp = pts.shp)
       shp <- lapply(shp, coo_close)
       plot.method <- "poly"}
+    # sfourier
+    if (method[i] == "sfourier") {
+      shp <- PCA2shp_sfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
+                              amp.shp = amp.shp, pts.shp = pts.shp)
+      shp <- lapply(shp, coo_close)
+      plot.method <- "poly"}
     # tfourier
     if (method[i] == "tfourier") {
       shp <- PCA2shp_tfourier(pos = pos, rot = rot[ids, ], mshape = mshape[ids],
@@ -353,6 +359,32 @@ PCA2shp_rfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
   return(res)
 }
 
+# @rdname PCA2shp_fourier
+# @export
+PCA2shp_sfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {
+  if (ncol(pos) != ncol(rot))
+    stop("'rot' and 'pos' must have the same ncol")
+  if (length(mshape) != nrow(rot))
+    stop("'mshape' and ncol(rot) lengths differ")
+  nb.h <- length(mshape)/2
+  n <- nrow(pos)
+  # we prepare the array
+  res <- list()
+  for (i in 1:n) {
+    ax.contrib <- .mprod(rot, pos[i, ]) * amp.shp
+    coe <- mshape + apply(ax.contrib, 1, sum)
+    xf <- coeff_split(coe, cph = 2)
+    coo <- sfourier_i(xf, nb.h = nb.h, nb.pts = pts.shp)
+    # reconstructed shapes are translated on their centroid if
+    # (trans) {
+    dx <- pos[i, 1] - coo_centpos(coo)[1]
+    dy <- pos[i, 2] - coo_centpos(coo)[2]
+    coo <- coo_trans(coo, dx, dy)
+    # }
+    res[[i]] <- coo
+  }
+  return(res)
+}
 # @rdname PCA2shp_fourier
 # @export
 PCA2shp_tfourier <- function(pos, rot, mshape, amp.shp = 1, pts.shp = 60) {

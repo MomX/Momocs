@@ -554,7 +554,7 @@ calibrate_deviations.Opn<-
 #' of harmonics on the \code{Coo} object.
 #'
 #' @param x a \code{Coo} of \code{Opn} object
-#' @param method any method from \code{c('efourier', 'rfourier', 'tfourier')} for \code{Out}s and
+#' @param method any method from \code{c('efourier', 'rfourier', 'sfourier', 'tfourier')} for \code{Out}s and
 #' \code{dfourier} for \code{Out}s.
 #' @param id the shapes on which to perform calibrate_harmonicpower. All of them by default
 #' @param nb.h numeric the maximum number of harmonic, on which to base the cumsum
@@ -608,11 +608,11 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x)
     if (verbose) message("method not provided. efourier is used")
     method <- efourier
   } else {
-    p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
+    p <- pmatch(tolower(method), c("efourier", "rfourier", "sfourier", "tfourier"))
     if (is.na(p)) {
       warning("unvalid method. efourier is used")
     } else {
-      method <- switch(p, efourier, rfourier, tfourier)
+      method <- switch(p, efourier, rfourier, sfourier, tfourier)
     }
   }
   # here we define the maximum nb.h, if missing

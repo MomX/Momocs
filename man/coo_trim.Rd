@@ -46,7 +46,8 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_template}}, \code{\link{coo_trans}},
   \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
   \code{\link{coo_up}}, \code{\link{is_clockwise}},
-  \code{\link{is_closed}}
+  \code{\link{is_closed}},
+  \code{\link{is_equallyspacedradii}}
 
 Other coo_trimming functions: \code{\link{coo_trimbottom}},
   \code{\link{coo_trimtop}}
