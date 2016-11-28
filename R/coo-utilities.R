@@ -1112,9 +1112,8 @@ is_open <- function(coo) !is_closed(coo)
 #' Returns TRUE/FALSE whether the sd of angles between all successive
 #' radii is below/above \code{thesh}
 #'
-#' @aliases is_closed
 #' @inheritParams coo_check
-#' @param thresh numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)
+#' @param thres numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)
 #' @return a single or a vector of \code{logical}. If \code{NA} are returned, they
 #' are produced by \link{coo_theta3} and some coordinates are likely identical, at least
 #' for x or y.
