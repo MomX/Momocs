@@ -9,7 +9,7 @@ calibrate_harmonicpower(x, method, id, nb.h, drop, thresh, plot, verbose)
 \arguments{
 \item{x}{a \code{Coo} of \code{Opn} object}
 
-\item{method}{any method from \code{c('efourier', 'rfourier', 'tfourier')} for \code{Out}s and
+\item{method}{any method from \code{c('efourier', 'rfourier', 'sfourier', 'tfourier')} for \code{Out}s and
 \code{dfourier} for \code{Out}s.}
 
 \item{id}{the shapes on which to perform calibrate_harmonicpower. All of them by default}
