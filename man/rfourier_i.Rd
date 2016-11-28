@@ -21,7 +21,7 @@ A list with components: \item{x }{\code{vector} of
 calculated.}
 }
 \description{
-\code{rfourier_i} uses the inverse radii variation transformation to
+\code{rfourier_i} uses the inverse radii variation (equally spaced radii) transformation to
 calculate a shape, when given a list with Fourier coefficients, typically
 obtained computed with \link{rfourier}.
 }

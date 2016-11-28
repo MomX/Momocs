@@ -4,7 +4,7 @@
 \alias{rfourier}
 \alias{rfourier.Out}
 \alias{rfourier.default}
-\title{Radii variation Fourier transform}
+\title{Radii variation Fourier transform (equally spaced radii)}
 \usage{
 rfourier(x, ...)
 
@@ -12,7 +12,7 @@ rfourier(x, ...)
   verbose = TRUE, ...)
 
 \method{rfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE,
-  verbose = TRUE, ...)
+  thres = pi/90, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{list} or \code{matrix} of coordinates or an \code{Out} object}
@@ -29,6 +29,8 @@ perform.}
 length of the radii used equals 1.}
 
 \item{verbose}{\code{logical}. Whether to display diagnosis messages.}
+
+\item{thres}{\code{numeric} a tolerance to feed \link{is_equallyspacedradii}}
 }
 \value{
 A list with following components:
@@ -41,10 +43,12 @@ A list with following components:
 }
 \description{
 \code{rfourier} computes radii variation Fourier analysis from a matrix or a
-list of coordinates.
+list of coordinates where points are equally spaced radii.
 }
 \details{
-see the JSS paper for the maths behind.
+see the JSS paper for the maths behind. The methods for \code{Out} objects
+ tests if coordinates have equally spaced radii using \link{is_equallyspacedradii}. A
+ message is printed if this is not the case.
 }
 \note{
 Directly borrowed for Claude (2008), and called \code{fourier1} there.
@@ -57,6 +61,9 @@ rf  <- rfourier(coo, 12)
 rf
 rfi <- rfourier_i(rf)
 coo_draw(rfi, border='red', col=NA)
+
+# Out method
+bot \%>\% rfourier()
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
