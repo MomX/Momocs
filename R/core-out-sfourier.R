@@ -18,8 +18,9 @@
 #' \itemize{
 #'  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
 #'  \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
-#'  \item \code{ao} ao harmonic coefficient.
-#'  \item \code{r} vector of radii lengths.
+#'  \item \code{ao} ao harmonic coefficient
+#'  \item \code{r} vector of radii lengths
+#'  \item \code{ao} vector of ao's
 #'  }
 #' @family sfourier
 #' @note The implementation is still quite experimental (as of Dec. 2016)
@@ -106,14 +107,17 @@ sfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
   col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
                                                       times = 2))
   coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo),
-                                                                     col.n))
+                                                                      col.n))
+  ao <- vector("numeric", length=length(coo))
   for (i in seq(along = coo)) {
     rf <- sfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
                    norm = norm, verbose = TRUE)  #todo: vectorize
     coe[i, ] <- c(rf$an, rf$bn)
+    ao[i] <- rf$ao
   }
   res <- OutCoe(coe = coe, fac = Out$fac, method = "sfourier", norm = norm)
   res$cuts <- ncol(res$coe)
+  res$ao <- ao
   return(res)
 }
 

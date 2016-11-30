@@ -35,8 +35,9 @@ A list with following components:
 \itemize{
  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
  \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
- \item \code{ao} ao harmonic coefficient.
- \item \code{r} vector of radii lengths.
+ \item \code{ao} ao harmonic coefficient
+ \item \code{r} vector of radii lengths
+ \item \code{ao} vector of ao's
  }
 }
 \description{
