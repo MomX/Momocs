@@ -11,3 +11,4 @@ R/_ready.R
 inst/doc
 *.DS_Store
 r-hub.R
+*.R
