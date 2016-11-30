@@ -104,7 +104,7 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     for (i in seq(along = fl)) {
         coe.i <- OutCoe$coe[f == fl[i], ]
         rows[i] <- which(f == fl[i])[1]
-        if (is.matrix(coe.i)) {
+        if (is.matrix(coe.i) | is.data.frame(coe.i)) {
             coe.i <- apply(coe.i, 2, FUN)
         }
         coe[i, ] <- coe.i
