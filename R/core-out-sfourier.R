@@ -72,9 +72,7 @@ sfourier.default <-
     # from Claude
     p <- nrow(coo)
     an <- bn <- numeric(nb.h)
-    Z <- complex(real = coo[, 1], imaginary = coo[, 2])
-    r <- Mod(Z)
-    # angle <- Arg(Z)
+    r <- coo_centdist(coo)
     s <- 2*pi*coo_perimcum(coo)[-length(coo)]/coo_perim(coo)
     ao <- 2 * sum(r)/p
     for (i in 1:nb.h) {
