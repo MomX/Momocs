@@ -10,4 +10,4 @@ man/phoenix.Rd
 inst/doc
 *.DS_Store
 r-hub.R
-*.R
+[^\\ ]*.R
