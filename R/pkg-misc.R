@@ -282,6 +282,42 @@ coeff_split <- function(cs, nb.h = 8, cph = 4) {
   return(cp)
 }
 
+#' Rearrange a matrix of (typically Fourier) coefficients
+#'
+#' Momocs uses colnamed matrices to store (typically) Fourier coefficients
+#' in \link{Coe} objects (typically \link{OutCoe}). They are arranged as rank-wise:
+#' \code{A1, A2, ..., An, B1, ..., Bn, C1, ..., Cn, D1, ..., Dn}. From other softwares they may arrive
+#' as \code{A1, B1, C1, D1, ..., An, Bn, Cn, Dn}, this functions helps to go
+#' from one to the other format. In short, this function rearranges column order. See examples.
+#'
+#' @param x matrix (with colnames)
+#' @param by character either "name" (\code{A1, A2, ..}) or "rank" (\code{A1, B1, ...})
+#' @examples
+#' m_name <- m_rank <- matrix(1:32, 2, 16)
+#' # this one is order by name
+#' colnames(m_name) <- paste0(rep(letters[1:4], each=4), 1:4)
+#' # this one is order by rank
+#' colnames(m_rank) <- paste0(letters[1:4], rep(1:4, each=4))
+#'
+#' m_rank
+#' m_rank %>% coeff_rearrange(by="name")
+#' m_rank %>% coeff_rearrange(by="rank") #no change
+#'
+#' m_name
+#' m_name %>% coeff_rearrange(by="name") # no change
+#' m_name %>% coeff_rearrange(by="rank")
+#' @export
+coeff_rearrange <- function(x, by=c("name", "rank")[1]){
+  map <- data.frame(old_id=1:ncol(x),
+                    old_cn=colnames(x),
+                    name=x %>% colnames %>% substr(1, 1),
+                    rank=x %>% colnames %>% substr(2, nchar(.)) %>% as.numeric) %>%
+    dplyr::arrange_(by) %>%
+    mutate(new_cn=paste0(name, rank))
+  return(x[, map$old_id])
+}
+
+
 #' Calculates harmonic power given a list from e/t/rfourier
 #'
 #' Given a list with \code{an, bn (and eventually cn and dn)}, returns the
