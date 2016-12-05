@@ -914,8 +914,8 @@ lf_structure <- function(lf, names = character(), split = "_",
     }
     names(fac) <- names
   }
-  # nice rownames
-  rownames(fac) <- lf
+  # no rownames
+  rownames(fac) <- NULL
   for (i in 1:nc) {
     # really ugly way to fill the df
     fac[, i] <- factor(sapply(lf0, function(x) x[i]))
