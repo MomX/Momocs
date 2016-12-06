@@ -22,9 +22,7 @@ Momocs
 Use it
 --------
 
-From CRAN: 
-
-`install.packages("Momocs")`
+From CRAN: `install.packages("Momocs")`
 
 But I recommend using the last version:  
 
@@ -35,9 +33,7 @@ if (!require(devtools)) {
 devtools::install_github('vbonhomme/Momocs')
 ```
 
-You can cite it with:
-
-`citation("Momocs")`
+You can cite it with: `citation("Momocs")`
 
 Features
 --------
