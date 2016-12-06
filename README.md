@@ -44,8 +44,8 @@ __Matrices of xy-coordinates__
 
 __Data acquisition + Babel__
 
-* Outline extraction
-* Landmark definition on outlines (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Outline extraction from black mask/silhouettes `.jpgs`
+* Landmark definition on outlines (`def_ldk` or via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
 * Open curves digitization with bezier curves (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
 * Import/Export from/to `.nts`, `.tps`, `PAST`, `.txt`, etc.
 
