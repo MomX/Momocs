@@ -38,6 +38,10 @@ You can cite it with: `citation("Momocs")`
 Features
 --------
 
+__Matrices of xy-coordinates__
+* ~100 generic tools like centering, scaling, rotating, calculating area, perimeter, etc. Full list with `apropos("coo_")`
+* generic plotters: `coo_plot` and `g` (work in progress)
+
 __Data acquisition + Babel__
 
 * Outline extraction
