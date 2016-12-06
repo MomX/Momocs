@@ -1,19 +1,22 @@
 [![Travis-CI Build Status](https://travis-ci.org/vbonhomme/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
-[![Coverage Status](https://img.shields.io/codecov/c/github/vbonhomme/Momocs/master.svg)](https://codecov.io/github/vbonhomme/Momocs?branch=master)    
-CRAN downloads:    
-![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)
-![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
+[![Coverage Status](https://img.shields.io/codecov/c/github/vbonhomme/Momocs/master.svg)](https://codecov.io/github/vbonhomme/Momocs?branch=master)
+CRAN downloads: ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
-Momocs:
-========
+Momocs
+--------
 
 * is a complete toolkit for morphometrics, from data extraction to multivariate analyses.
 * includes most common 2D morphometrics approaches : outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.
 * allows reproducible, pipeable, complex morphometric analyses and paves the way for a pure open-source workflow in R, and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.
 * hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
 
-There is an exhaustive tutorial tha can be accessed [there](https://rawgit.com/vbonhomme/Momocs/master/inst/doc/Momocs_speed_dating.html) or with `browseVignettes("Momocs")`, directly on your machine.
+<b>
+
+* Check the tutorial [there](https://rawgit.com/vbonhomme/Momocs/master/inst/doc/Momocs_speed_dating.html) or with `browseVignettes("Momocs")`
+* You're welcome to implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
+
+</b>
 
 Use it
 --------
@@ -34,8 +37,6 @@ devtools::install_github('vbonhomme/Momocs')
 You can cite it with:
 
 `citation("Momocs")`
-
-**Please feel free to implement ideas, propose new ones, review helpfiles, write vignettes, report bugs, ask for help : [just fill an issue](https://github.com/vbonhomme/Momocs/issues)**.
 
 Features
 --------
