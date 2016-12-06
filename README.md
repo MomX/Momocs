@@ -27,9 +27,7 @@ From CRAN: `install.packages("Momocs")`
 But I recommend using the last version:  
 
 ```
-if (!require(devtools)) {
-    install.packages('devtools')
-}
+if (!requireNamespace("devtools")) install.packages("devtools")
 devtools::install_github('vbonhomme/Momocs')
 ```
 
