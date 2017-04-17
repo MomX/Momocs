@@ -6,29 +6,17 @@
 \alias{sfourier.default}
 \title{Radii variation Fourier transform (equally spaced curvilinear abscissa)}
 \usage{
-sfourier(x, ...)
+sfourier(x, nb.h)
 
-\method{sfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE,
-  verbose = TRUE, ...)
+\method{sfourier}{default}(x, nb.h)
 
-\method{sfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE,
-  verbose = TRUE, ...)
+\method{sfourier}{Out}(x, nb.h)
 }
 \arguments{
 \item{x}{A \code{list} or \code{matrix} of coordinates or an \code{Out} object}
 
-\item{...}{useless here}
-
 \item{nb.h}{\code{integer}. The number of harmonics to use. If missing, 12 is used on shapes;
 99 percent of harmonic power on Out objects, both with messages.}
-
-\item{smooth.it}{\code{integer}. The number of smoothing iterations to
-perform.}
-
-\item{norm}{\code{logical}. Whether to scale the outlines so that the mean
-length of the radii used equals 1.}
-
-\item{verbose}{\code{logical}. Whether to display diagnosis messages.}
 }
 \value{
 A list with following components:
@@ -37,7 +25,6 @@ A list with following components:
  \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
  \item \code{ao} ao harmonic coefficient
  \item \code{r} vector of radii lengths
- \item \code{ao} vector of ao's
  }
 }
 \description{

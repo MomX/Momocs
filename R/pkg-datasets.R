@@ -20,7 +20,8 @@ NULL
 #' @rdname data_trilo
 #' @format A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 #' ontogenetic stages of trilobite.
-#' @source  Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
+#' @source  Arranged from: \url{http://folk.uio.no} (used to be in \code{ohammer} website but
+#' seems to be deprecated now).
 #' The original data included 51 outlines and 5 ontogenetic stages,
 #' but one of them has just a single outline thas has been removed.
 #' @family datasets
@@ -158,5 +159,29 @@ NULL
 #' @source Research support was provided by the European Research Council
 #' (Evolutionary Origins of Agriculture (grant no. 269830-EOA)
 #' PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Forster.
+#' @family datasets
+NULL
+
+#' Data: Outline coordinates of mouse molars
+#'
+#' @docType data
+#' @name mouse
+#' @rdname data_mouse
+#' @format A \link{Out} object 64 coordinates of 30 wood molar outlines.
+#' @source  Renaud S, Dufour AB, Hardouin EA, Ledevin R, Auffray JC (2015):
+#' Once upon multivariate analyses: When they tell several stories about biological evolution.
+#' \emph{PLoS One} 10:1-18 \url{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0132801}
+#' @family datasets
+NULL
+
+#' Data: Outline coordinates of Apodemus (wood mouse) mandibles
+#'
+#' @docType data
+#' @name apodemus
+#' @rdname data_apodemus
+#' @format A \link{Out} object 64 coordinates of 30 wood molar outlines.
+#' @source  Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in
+#'  the mandible shape of \emph{Apodemus} wood mice. \emph{Journal of Biogeography} 30:1617-1628.
+#' \url{http://onlinelibrary.wiley.com/doi/10.1046/j.1365-2699.2003.00932.x/full}
 #' @family datasets
 NULL

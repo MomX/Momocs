@@ -4,6 +4,14 @@
 % Cheers to Jari Oksanen and others!
 
 \encoding{UTF-8}
+
+\section{Changes in version 1.1.6}{
+  \itemize{
+    \item sfourier family implementation
+    \item new datasets: apodemus and mouse
+  }
+}
+
 \section{Changes in version 1.1.0}{
   \itemize{
     \item plot2.PCA deprecated due to ggplot2 2.2.0 breaking changes

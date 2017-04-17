@@ -7,7 +7,8 @@
 \format{A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 ontogenetic stages of trilobite.}
 \source{
-Arranged from: \url{http://folk.uio.no/ohammer/past/outlines.dat}.
+Arranged from: \url{http://folk.uio.no} (used to be in \code{ohammer} website but
+seems to be deprecated now).
 The original data included 51 outlines and 5 ontogenetic stages,
 but one of them has just a single outline thas has been removed.
 }
@@ -15,10 +16,11 @@ but one of them has just a single outline thas has been removed.
 Data: Outline coordinates of cephalic outlines of trilobite
 }
 \seealso{
-Other datasets: \code{\link{bot}}, \code{\link{chaff}},
-  \code{\link{charring}}, \code{\link{flower}},
-  \code{\link{hearts}}, \code{\link{molars}},
-  \code{\link{mosquito}}, \code{\link{oak}},
+Other datasets: \code{\link{apodemus}}, \code{\link{bot}},
+  \code{\link{chaff}}, \code{\link{charring}},
+  \code{\link{flower}}, \code{\link{hearts}},
+  \code{\link{molars}}, \code{\link{mosquito}},
+  \code{\link{mouse}}, \code{\link{oak}},
   \code{\link{olea}}, \code{\link{shapes}},
   \code{\link{wings}}
 }

@@ -111,7 +111,7 @@ Momocs implement this desirable behavior and defines __classes__ and __subclasse
 
 `Coo`                                | Morphometrics methods              | `Coe`  
 -------------------------------------|------------------------------------|----------  
-`OutCoo` (outlines)                  | `efourier`, `rfourier`, `tfourier` | `OutCoe`
+`OutCoo` (outlines)                  | `efourier`, `rfourier`, `sfourier`, `tfourier` | `OutCoe`
 `OpnCoo` (open outlines)             | `npoly`, `opoly`, `dfourier`       | `OpnCoe`  
 `LdkCoo` (configuration of landmarks)|`fgProcrustes`, `slide`             | `LdkCoe`
 
@@ -192,7 +192,7 @@ panel(bot, fac="type", names=TRUE)
 stack(bot)
 ````
 
-Here we will illustrate outline analysis with some elliptical Fourier transforms (but the less used - and tested - radii variation Fourier transforms and tangent angle Fourier transforms are also implemented with `rfourier` and `tfourier`).
+Here we will illustrate outline analysis with some elliptical Fourier transforms (but the less used - and tested - radii variation Fourier transforms, its variant used by Renaud et al., and tangent angle Fourier transforms are also implemented with `rfourier`, `sfourier` and `tfourier` respectively).
 
 The idea behind elliptical Fourier transforms is to fit the x and y coordinates separately, that is the blue and red curves below:
 ```{r}

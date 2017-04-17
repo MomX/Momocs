@@ -8,19 +8,12 @@
 #' @param x A \code{list} or \code{matrix} of coordinates or an \code{Out} object
 #' @param nb.h \code{integer}. The number of harmonics to use. If missing, 12 is used on shapes;
 #' 99 percent of harmonic power on Out objects, both with messages.
-#' @param smooth.it \code{integer}. The number of smoothing iterations to
-#' perform.
-#' @param norm \code{logical}. Whether to scale the outlines so that the mean
-#' length of the radii used equals 1.
-#' @param verbose \code{logical}. Whether to display diagnosis messages.
-#' @param ... useless here
 #' @return A list with following components:
 #' \itemize{
 #'  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
 #'  \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
 #'  \item \code{ao} ao harmonic coefficient
 #'  \item \code{r} vector of radii lengths
-#'  \item \code{ao} vector of ao's
 #'  }
 #' @family sfourier
 #' @note The implementation is still quite experimental (as of Dec. 2016)
@@ -32,59 +25,43 @@
 #'    sfourier_i() %>% coo_draw(bor="red", points=TRUE)
 #' @rdname sfourier
 #' @export
-sfourier <- function(x, ...){UseMethod("sfourier")}
+sfourier <- function(x, nb.h){
+  UseMethod("sfourier")
+}
 
 #' @rdname sfourier
 #' @export
-sfourier.default <-
-  function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
-    coo <- x
-    coo <- coo_check(coo)
-    if (missing(nb.h)) {
-      nb.h <- 12
-      message("'nb.h' not provided and set to ", nb.h)
-    }
-    if (is_closed(coo)) {
-      coo <- coo_unclose(coo)
-    }
-    if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
-      nb.h = floor(nrow(coo)/2)
-      if (verbose) {
-        message("'nb.h' must be lower than half the number of points and has been set to: ",
-                nb.h)
-      }
-    }
-    if (nb.h == -1) {
-      nb.h = floor(nrow(coo)/2)
-      if (verbose) {
-        message("'nb.h' must be lower than half the number of points and has been set to",
-                nb.h, "harmonics.\n")
-      }
-    }
-    if (smooth.it != 0) {
-      coo <- coo_smooth(coo, smooth.it)
-    }
-    if (norm) {
-      coo <- coo_scale(coo_center(coo))
-      rsize <- mean(apply(coo, 1, function(x) sqrt(sum(x^2))))
-      coo <- coo_scale(coo, 1/rsize)
-    }
-    # from Claude
-    p <- nrow(coo)
-    an <- bn <- numeric(nb.h)
-    r <- coo_centdist(coo)
-    s <- 2*pi*coo_perimcum(coo)[-length(coo)]/coo_perim(coo)
-    ao <- 2 * sum(r)/p
-    for (i in 1:nb.h) {
-      an[i] <- (2/p) * sum(r * cos(i * s))
-      bn[i] <- (2/p) * sum(r * sin(i * s))
-    }
-    list(an = an, bn = bn, ao = ao, r = r)
-  }
+sfourier.default <- function(x, nb.h){
+  shp <- x
+  # deduces the number of points
+  N <- coo_nb(shp)
+  # if missing, nb.h will be set to max (calibrate this)
+  if (missing(nb.h))
+    nb.h <- floor(N/2)
+
+  # calculates radii lengths
+  r <- coo_centdist(shp)
+  # extract an and bn coefficients using a discrete fft
+  an <- (Re(fft(r))/N)[1:(nb.h+1)]
+  bn <- (Im(fft(r))/N)[1:(nb.h+1)]
+  # grabs size and normalize with it
+  ao <- an[1]
+  # an[-1] <- an[-1]/ao
+  an <- an[-1]/ao
+  bn <- bn[-1]/ao
+  # return results
+  res <- list(an=an,
+              bn=bn,
+              ao=ao,
+              r=r)
+  # removes remaining names
+  res <- lapply(res, function(x) {names(x) <- NULL; x})
+  return(res)
+}
 
 #' @rdname sfourier
 #' @export
-sfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE, ...) {
+sfourier.Out <- function(x, nb.h){
   Out <- x
   # validates
   Out %<>% validate()
@@ -93,31 +70,31 @@ sfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
     # nb.h <- ifelse(q >= 32, 32, q)
     nb.h <- calibrate_harmonicpower(Out, method="sfourier",
                                     thresh = 99, verbose=FALSE, plot=FALSE)$minh
-    if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
+    # if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1 #todo
     message("at least one outline has no more than ", q * 2,
-        " coordinates. 'nb.h' has been set to ", q,
-        " harmonics")
+            " coordinates. 'nb.h' has been set to ", q,
+            " harmonics")
   }
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h,
                                                       times = 2))
   coe <- matrix(ncol = 2 * nb.h, nrow = length(coo), dimnames = list(names(coo),
-                                                                      col.n))
+                                                                     col.n))
   ao <- vector("numeric", length=length(coo))
   for (i in seq(along = coo)) {
-    rf <- sfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
-                   norm = norm, verbose = TRUE)  #todo: vectorize
+    rf <- sfourier(coo[[i]], nb.h = nb.h)  #todo: vectorize
     coe[i, ] <- c(rf$an, rf$bn)
     ao[i] <- rf$ao
   }
-  res <- OutCoe(coe = coe, fac = Out$fac, method = "sfourier", norm = norm)
+  res <- OutCoe(coe = coe, fac = Out$fac, method = "sfourier", norm = TRUE)
   res$cuts <- ncol(res$coe)
   res$ao <- ao
   return(res)
 }
+
 
 #' Inverse radii variation Fourier transform
 #'
@@ -130,6 +107,9 @@ sfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' typically as returned by \code{sfourier}.
 #' @param nb.h \code{integer}. The number of harmonics to calculate/use.
 #' @param nb.pts \code{integer}. The number of points to calculate.
+#' @param dtheta \code{logical}. Whether to use the dtheta correction method.
+#' \code{FALSE} by default. When \code{TRUE}, tries to correct the angular difference between
+#' reconstructed points; otherwise equal angles are used.
 #' @return A list with components: \item{x }{\code{vector} of
 #' \code{x}-coordinates.} \item{y }{\code{vector} of \code{y}-coordinates.}
 #' \item{angle}{\code{vector} of angles used.} \item{r}{\code{vector} of radii
@@ -147,33 +127,43 @@ sfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' coo_draw(rfi, border='red', col=NA)
 #'
 #' @export
-sfourier_i <- function(rf, nb.h, nb.pts = 120) {
+sfourier_i <-
+  function(rf, nb.h, nb.pts = 120, dtheta=FALSE) {
     if (!all(c("an", "bn") %in% names(rf))) {
-        stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")
+      stop("a list containing 'an' and 'bn' harmonic coefficients must be provided")
     }
     ao <- ifelse(is.null(rf$ao), 1, rf$ao)
     an <- rf$an
     bn <- rf$bn
     if (missing(nb.h)) {
-        nb.h <- length(an)
+      nb.h <- length(an)
     }
     if (nb.h > length(an)) {
-        nb.h <- length(an)
-        message("nb.h cannot be higher than length(rf$an) and has been set to ", nb.h)
+      nb.h <- length(an)
+      message("nb.h cannot be higher than length(rf$an) and has been set to ", nb.h)
     }
     theta <- seq(0, 2 * pi, length = nb.pts)
     harm <- matrix(NA, nrow = nb.h, ncol = nb.pts)
     for (i in 1:nb.h) {
-        harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * theta)
+      harm[i, ] <- an[i] * cos(i * theta) + bn[i] * sin(i * theta)
     }
-    r <- (ao/2) + apply(harm, 2, sum)
-    Z <- complex(modulus = r, argument = theta)
-    x <- Re(Z)
-    y <- Im(Z)
-    coo <- cbind(x, y)
+    r <- ao/2 + apply(harm, 2, sum)
+    # theta corrected using ds/dtheta method
+    if (dtheta){
+      ds <- (2*pi)/sum(1/r)
+      theta <- numeric(length(r))
+      for (i in 2:nb.pts){
+        theta[i] <- theta[i-1] + ds/r[i]
+      }
+      coo <- cbind(r*cos(theta), r*sin(theta))
+    } else {
+      # theta based on the circle
+      Z <- complex(modulus = r, argument = theta)
+      coo <- cbind(Re(Z), Im(Z))
+    }
     colnames(coo) <- c("x", "y")
     return(coo)
-}
+  }
 
 #' Calculates and draw 'sfourier' shapes.
 #'

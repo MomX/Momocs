@@ -4,7 +4,7 @@
 \alias{sfourier_i}
 \title{Inverse radii variation Fourier transform}
 \usage{
-sfourier_i(rf, nb.h, nb.pts = 120)
+sfourier_i(rf, nb.h, nb.pts = 120, dtheta = FALSE)
 }
 \arguments{
 \item{rf}{A \code{list} with \code{ao}, \code{an} and \code{bn} components,
@@ -13,6 +13,10 @@ typically as returned by \code{sfourier}.}
 \item{nb.h}{\code{integer}. The number of harmonics to calculate/use.}
 
 \item{nb.pts}{\code{integer}. The number of points to calculate.}
+
+\item{dtheta}{\code{logical}. Whether to use the dtheta correction method.
+\code{FALSE} by default. When \code{TRUE}, tries to correct the angular difference between
+reconstructed points; otherwise equal angles are used.}
 }
 \value{
 A list with components: \item{x }{\code{vector} of

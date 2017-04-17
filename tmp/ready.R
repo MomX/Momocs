@@ -1,3 +1,11 @@
+Momocs_currentversion <- function(){
+  "https://raw.githubusercontent.com/vbonhomme/Momocs/master/DESCRIPTION" %>% 
+    readLines(n=3) %>% 
+    `[`(3) %>% 
+    gsub("Version: ", "", .)
+}
+
+
 # ready -------
 rm(list=ls())
 devtools::load_all("~/Research/Momocs")

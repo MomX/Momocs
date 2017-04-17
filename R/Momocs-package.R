@@ -72,7 +72,7 @@ magrittr::`%T>%`
 #' contour hist image layout legend lines locator
 #' par points polygon rasterImage rect rug
 #' segments strheight strwidth text title
-#' @importFrom stats cor cov cov.wt df dist dnorm
+#' @importFrom stats cor cov cov.wt df dist dnorm fft
 #' hclust kmeans lm manova median na.omit
 #' poly prcomp predict qf qnorm rnorm
 #' runif sd symnum terms var

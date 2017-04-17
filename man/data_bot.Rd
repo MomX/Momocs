@@ -15,10 +15,11 @@ images or the brands cited here.
 Data: Outline coordinates of beer and whisky bottles.
 }
 \seealso{
-Other datasets: \code{\link{chaff}},
-  \code{\link{charring}}, \code{\link{flower}},
-  \code{\link{hearts}}, \code{\link{molars}},
-  \code{\link{mosquito}}, \code{\link{oak}},
+Other datasets: \code{\link{apodemus}},
+  \code{\link{chaff}}, \code{\link{charring}},
+  \code{\link{flower}}, \code{\link{hearts}},
+  \code{\link{molars}}, \code{\link{mosquito}},
+  \code{\link{mouse}}, \code{\link{oak}},
   \code{\link{olea}}, \code{\link{shapes}},
   \code{\link{trilo}}, \code{\link{wings}}
 }

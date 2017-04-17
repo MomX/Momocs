@@ -1914,9 +1914,18 @@ coo_centsize.Coo <- function(coo){
 #' @family centroid functions
 #' @family coo_ utilities
 #' @export
-coo_centdist <- function(coo) {
+coo_centdist <- function(coo){
+  UseMethod("coo_centdist")
+}
+#' @export
+coo_centdist.default <- function(coo) {
   coo <- coo_check(coo)
   return(apply(coo, 1, function(x) ed(coo_centpos(coo), x)))
+}
+
+#' @export
+coo_centdist.Coo <- function(coo){
+  lapply(coo$coo, coo_centdist)
 }
 
 # coo_perimpts --------------
