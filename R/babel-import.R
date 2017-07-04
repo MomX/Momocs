@@ -3,7 +3,6 @@
 #'
 #' A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
 #'
-#' By default, it works with the default arguments of \link{read.table}, e.g. assumes that the
 #' columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 #' Define the \link{read.table} arguments that allow to import a single file, and then
 #' pass them to this function.
@@ -297,7 +296,7 @@ import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
   if (verbose) {
     end <- Sys.time()
     time <- end - begin
-    message("Done in", as.numeric(time), units(time))
+    message("Done in ", round(as.numeric(time), 1), " ", units(time))
   }
   return(res)
 }
@@ -385,7 +384,9 @@ import_StereoMorph_ldk <- function(path, names){
 #' Imports a tps file
 #'
 #' And returns a list of coordinates, curves, scale
-#' @param tps.path lines, typically from \link{readLines}, describing a single shape in tps-like format
+#' @param tps.path lines, typically from \link{readLines}, describing a single shape in tps-like format.
+#'
+#' You will need to manually build your \code{Coo} object from it: eg \code{Out(coo=your_list$coo)}.
 #' @param curves \code{logical} whether to read curves, if any
 #' @return a list with components:
 #' \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
