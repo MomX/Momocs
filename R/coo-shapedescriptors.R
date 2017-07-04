@@ -112,7 +112,11 @@ coo_boundingbox <- function(coo){
 #' # for the distribution of the area of the bottles dataset
 #' hist(sapply(bot$coo, coo_area), breaks=10)
 #' @export
-coo_area <- function(coo) {
+coo_area <- function(coo){
+  UseMethod("coo_area")
+}
+#' @export
+coo_area.default <- function(coo) {
     coo <- coo_check(coo)
     coo <- coo_close(coo)
     nr <- nrow(coo) - 1
@@ -123,6 +127,11 @@ coo_area <- function(coo) {
     }
     area <- (0.5 * (sum(x) - sum(y)))
     return(abs(area))
+}
+
+#' @export
+coo_area.Coo <- function(coo){
+  sapply(coo$coo, coo_area)
 }
 # area.poly(as(coo, 'gpc.poly'))}
 
