@@ -123,6 +123,28 @@ CLUST.PCA <- function(x,
   # returns it, invisibly
   invisible(phylo)
 }
+
+#' @export
+CLUST.Coe <-
+  function (x, fac, type = "fan", dist_method = "euclidean", hclust_method = "complete",
+            retain = 0.99, tip_labels, palette = col_qual, ...)
+  {
+    phylo <- x$coe %>% dist(method = dist_method) %>%
+      hclust(method = hclust_method) %>% ape::as.phylo()
+    if (!missing(fac))
+      fac <- prepare_fac(x, fac)
+    if (is.null(palette) | missing(fac)) {
+      tip.colors <- rep(par("fg"), nrow(x$coe))
+    }
+    else {
+      tip.colors <- palette(nlevels(fac))[fac]
+    }
+    if (!missing(tip_labels))
+      phylo$tip.label <- as.character(prepare_fac(x, tip_labels))
+    plot(phylo, type = type, tip.color = tip.colors, ...)
+    invisible(phylo)
+  }
+
 ##### end clust
 
 
