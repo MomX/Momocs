@@ -17,7 +17,7 @@
 #'  }
 #' @family sfourier
 #' @note The implementation is still quite experimental (as of Dec. 2016)
-#' @references Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
+#' @references Renaud S, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
 #' of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 #' @examples
 #' molars[4] %>% coo_center %>% coo_scale %>% coo_interpolate(1080) %>% coo_slidedirection("E") %>%
