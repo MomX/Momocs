@@ -23,7 +23,6 @@ a list of matrix(ces) of (x; y) coordinates that can be passed to
 A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
 }
 \details{
-By default, it works with the default arguments of \link{read.table}, e.g. assumes that the
 columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 Define the \link{read.table} arguments that allow to import a single file, and then
 pass them to this function.

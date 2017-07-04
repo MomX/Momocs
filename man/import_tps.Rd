@@ -7,7 +7,9 @@
 import_tps(tps.path, curves = TRUE)
 }
 \arguments{
-\item{tps.path}{lines, typically from \link{readLines}, describing a single shape in tps-like format}
+\item{tps.path}{lines, typically from \link{readLines}, describing a single shape in tps-like format.
+
+You will need to manually build your \code{Coo} object from it: eg \code{Out(coo=your_list$coo)}.}
 
 \item{curves}{\code{logical} whether to read curves, if any}
 }
