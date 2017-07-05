@@ -125,42 +125,42 @@ mutate.Coe <- mutate.Coo
 #' @export
 mutate.PCA <- mutate.Coo
 
-# transmute -------------------------------
-#' Transmutes (ala dplyr) on Momocs objects
-#'
-#' Add new variables to the \code{$fac} and drop existing ones. See examples and \code{?dplyr::transmute}.
-#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
-#' @param ... comma separated list of unquoted expressions
-#' @details dplyr verbs are maintained.
-#' @return a Momocs object of the same class.
-#' @family handling functions
-#' @examples
-#' olea
-#' transmute(olea, id=factor(1:length(olea)))
-#' @export
-transmute <- function(.data, ...){
-  UseMethod("transmute")
-}
-
-#' @export
-transmute.default <- function(.data, ...){
-  dplyr::transmute(.data, ...)
-}
-
-#' @export
-transmute.Coo <- function(.data, ...){
-  #.data %<>% validate()
-  .data$fac <- transmute(.data$fac, ...)
-  .data$fac %<>% data.frame()
-  .data
-}
-
-#' @export
-transmute.Coe <- transmute.Coo
-
-
-#' @export
-transmute.PCA <- transmute.Coo
+# # transmute -------------------------------
+# #' Transmutes (ala dplyr) on Momocs objects
+# #'
+# #' Add new variables to the \code{$fac} and drop existing ones. See examples and \code{?dplyr::transmute}.
+# #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+# #' @param ... comma separated list of unquoted expressions
+# #' @details dplyr verbs are maintained.
+# #' @return a Momocs object of the same class.
+# #' @family handling functions
+# #' @examples
+# #' olea
+# #' transmute(olea, id=factor(1:length(olea)))
+# #' @export
+# transmute <- function(.data, ...){
+#   UseMethod("transmute")
+# }
+#
+# #' @export
+# transmute.default <- function(.data, ...){
+#   dplyr::transmute(.data, ...)
+# }
+#
+# #' @export
+# transmute.Coo <- function(.data, ...){
+#   #.data %<>% validate()
+#   .data$fac <- transmute(.data$fac, ...)
+#   .data$fac %<>% data.frame()
+#   .data
+# }
+#
+# #' @export
+# transmute.Coe <- transmute.Coo
+#
+#
+# #' @export
+# transmute.PCA <- transmute.Coo
 
 # filter -------------------------------
 #' Filters (ala dplyr) on Momocs objects

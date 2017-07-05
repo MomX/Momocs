@@ -40,6 +40,6 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{rename}}, \code{\link{rm_uncomplete}},
   \code{\link{rw_fac}}, \code{\link{sample_frac}},
   \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subset.Coo}}, \code{\link{transmute}}
+  \code{\link{subset.Coo}}
 }
 
