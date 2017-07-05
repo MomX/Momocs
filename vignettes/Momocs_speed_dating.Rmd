@@ -541,6 +541,19 @@ olea %>% filter(var != "Cypre") %>%
   PCA() %>% plot("var")
 ```
 
+Also if you need some `group_by` operation, you can use the `fac` `data.frame`. For instance if you want to `arrange` based on a column and retain the top 10 shapes, then you can:
+
+```{r, eval=FALSE}
+retain <- x$fac %>% 
+  # here we sort and create an id
+  arrange(your_column) %>% mutate(.id=1:n()) %>% 
+  dplyr::group_by(taxa) %>% slice(1:10) %$% .id
+# it worked!
+x %>% slice(retain) %$% table(fac$taxa)
+```
+
+
+
 ### Various helpers
 Some methods help, on `Coe` objects to:
  * select groups with at least a certain number of individuals in them: `at_least`
