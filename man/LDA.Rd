@@ -64,6 +64,7 @@ plot(bot.l)
 \seealso{
 Other multivariate: \code{\link{CLUST}},
   \code{\link{KMEANS}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{PCA}}
+  \code{\link{MANOVA}}, \code{\link{PCA}},
+  \code{\link{summary.LDA}}
 }
 
