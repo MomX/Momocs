@@ -34,7 +34,23 @@ as.PCA(x, fac)
 \item{fac}{any factor or data.frame to be passed to \code{as.PCA} and for use with \link{plot.PCA}}
 }
 \value{
-a 'PCA' object on which to apply \link{plot.PCA}
+a 'PCA' object on which to apply \link{plot.PCA}, among others. This list has several
+components, most of them inherited from the \code{prcomp} object:
+\enumerate{
+  \item \code{sdev} the standard deviations of the principal components
+   (i.e., the square roots of the eigenvalues of the
+   covariance/correlation matrix, though the calculation
+   is actually done with the singular values of the data matrix)
+   \item \code{eig} the cumulated proportion of variance along the PC axes
+  \item \code{rotation} the matrix of variable loadings (i.e., a matrix whose columns contain the eigenvectors).
+  The function princomp returns this in the element loadings.
+  \item \code{center}, scale the centering and scaling used
+  \item \code{x} PCA scores (the value of the rotated data (the centred (and scaled if requested)
+  data multiplied by the rotation matrix))
+  \item other components are inherited from the \code{Coe} object passed to \code{PCA},
+  eg \code{fac}, \code{mshape}, \code{method}, \code{baseline1} and \code{baseline2}, etc. They
+  are documented in the corresponding \coe{*Coe} file.
+}
 }
 \description{
 Performs a PCA on \link{Coe} objects, using \link{prcomp}.

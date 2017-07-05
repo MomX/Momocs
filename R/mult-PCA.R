@@ -13,7 +13,23 @@
 #' @param fac any factor or data.frame to be passed to \code{as.PCA} and for use with \link{plot.PCA}
 #' @param scale. logical whether to scale the input data
 #' @param center logical whether to center the input data
-#' @return a 'PCA' object on which to apply \link{plot.PCA}
+#' @return a 'PCA' object on which to apply \link{plot.PCA}, among others. This list has several
+#' components, most of them inherited from the \code{prcomp} object:
+#' \enumerate{
+#'   \item \code{sdev} the standard deviations of the principal components
+#'    (i.e., the square roots of the eigenvalues of the
+#'    covariance/correlation matrix, though the calculation
+#'    is actually done with the singular values of the data matrix)
+#'    \item \code{eig} the cumulated proportion of variance along the PC axes
+#'   \item \code{rotation} the matrix of variable loadings (i.e., a matrix whose columns contain the eigenvectors).
+#'   The function princomp returns this in the element loadings.
+#'   \item \code{center}, scale the centering and scaling used
+#'   \item \code{x} PCA scores (the value of the rotated data (the centred (and scaled if requested)
+#'   data multiplied by the rotation matrix))
+#'   \item other components are inherited from the \code{Coe} object passed to \code{PCA},
+#'   eg \code{fac}, \code{mshape}, \code{method}, \code{baseline1} and \code{baseline2}, etc. They
+#'   are documented in the corresponding \coe{*Coe} file.
+#' }
 #' @family multivariate
 #' @examples
 #' data(bot)
@@ -51,6 +67,8 @@ PCA <- function(x, scale., center, fac) {
 PCA.OutCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
   OutCoe <- x
   PCA <- prcomp(OutCoe$coe, scale. = scale., center = center)
+  eig <- (PCA$sdev^2)
+  PCA$eig <- eig/sum(eig)
   PCA$fac <- OutCoe$fac
   PCA$mshape <- apply(OutCoe$coe, 2, mean)
   PCA$method <- OutCoe$method
@@ -67,6 +85,8 @@ PCA.OutCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
 PCA.OpnCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
   OpnCoe <- x
   PCA <- prcomp(OpnCoe$coe, scale. = scale., center = center)
+  eig <- (PCA$sdev^2)
+  PCA$eig <- eig/sum(eig)
   PCA$fac <- OpnCoe$fac
   PCA$mshape <- apply(OpnCoe$coe, 2, mean)
   PCA$method <- OpnCoe$method
@@ -84,6 +104,8 @@ PCA.LdkCoe <- function(x, scale. = FALSE, center = TRUE, fac) {
   LdkCoe <- x
   # LdkCoe$coe <- a2m(l2a(Coe$coo))
   PCA <- prcomp(LdkCoe$coe, scale. = scale., center = center)
+  eig <- (PCA$sdev^2)
+  PCA$eig <- eig/sum(eig)
   PCA$fac <- LdkCoe$fac
   PCA$mshape <- apply(LdkCoe$coe, 2, mean)
   PCA$method <- "procrustes"
@@ -101,6 +123,8 @@ PCA.TraCoe <- function(x, scale. = TRUE, center = TRUE, fac) {
   TraCoe <- x
   # LdkCoe$coe <- a2m(l2a(Coe$coo))
   PCA <- prcomp(TraCoe$coe, scale. = scale., center = center)
+  eig <- (PCA$sdev^2)
+  PCA$eig <- eig/sum(eig)
   PCA$fac <- TraCoe$fac
   PCA$mshape <- NULL
   PCA$method <- NULL
@@ -113,6 +137,8 @@ PCA.TraCoe <- function(x, scale. = TRUE, center = TRUE, fac) {
 #' @export
 PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=data.frame()) {
   PCA <- prcomp(x, scale. = scale., center = center)
+  eig <- (PCA$sdev^2)
+  PCA$eig <- eig/sum(eig)
   if (!is.null(fac)) fac <- as.data.frame(fac)
   PCA$fac <- fac
   PCA$method <- NULL
