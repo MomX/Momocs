@@ -516,8 +516,6 @@ rename(olea, domesticated=domes)
 # mutate: add new columns
 mutate(olea, fake=factor(rep(letters[1:2], each=105)))
 
-# transmute: add new columns and drop others
-transmute(olea, fake=factor(rep(letters[1:2], each=105)))
 ```
 
 And you can pipe those operations: say, we only want dorsal views from domesticated individuals, for a (renamed) 'status' column, and drop the 'ind' column:
