@@ -133,6 +133,7 @@ OpnCoe <- function(coe = matrix(), fac = data.frame(), method = character(),
     stop("a method must be provided to OpnCoe")
   OpnCoe <- list(coe = coe, fac = fac, method = method, baseline1 = baseline1,
                  baseline2 = baseline2, mod = mod, r2 = r2)
+  OpnCoe$coe %<>% as.matrix()
   class(OpnCoe) <- c("OpnCoe", "Coe")
   return(OpnCoe)
 }

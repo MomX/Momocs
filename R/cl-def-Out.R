@@ -172,6 +172,7 @@ OutCoe <- function(coe = matrix(), fac = data.frame(), method,
     stop("a method must be provided to OutCoe")
   OutCoe <- structure(list(coe = coe, fac = fac, method = method, norm = norm),
                       class=c("OutCoe", "Coe"))
+  OutCoe$coe %<>% as.matrix()
   return(OutCoe)
 }
 
