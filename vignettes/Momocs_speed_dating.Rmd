@@ -415,13 +415,15 @@ PCA(iris[, -5], fac=data.frame(sp=iris$Species)) %>%
 ```
 
 ### `LDA`: Linear Discriminant Analysis
-We can also calculate a Linear Discriminant Analysis on the PCA scores, or on the `Coe` object, directly on the matrix of coefficients but we may encounter collinearity between variables. Try the following:
+We can also calculate a Linear Discriminant Analysis on the PCA scores, or on the `Coe` object, directly on the matrix of coefficients (and results may be better yet we may encounter collinearity between variables). Try the following:
 ```{r, eval=FALSE}
 #LDA(bot.f, 1)
 # we work on PCA scores
 bot.l <- LDA(bot.p, 1)
 # print a summary, along with the leave-one-out cross-validation table. 
 bot.l 
+# a much more detailed summary
+bot.l %>% summary
 # plot.LDA works pretty much with the same grammar as plot.PCA
 # here we only have one LD
 plot(bot.l)
