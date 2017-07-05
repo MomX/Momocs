@@ -220,13 +220,14 @@ get_ldk.Opn <- get_ldk.Out
 #' with landmarks inside
 #' @param new_ldk_ids a vector of numeric with the ldk to retain \emph{and}
 #' in the right order (see below)
+#' @family ldk/slidings methods
 #' @examples
 #' # Out example
 #' hearts %>% slice(1) %T>% stack %$% ldk
 #' hearts %>% rearrange_ldk(c(4, 1)) %>%
 #'        slice(1) %T>%stack %$% ldk
 #'
-#'Ldk example
+#' # Ldk example
 #' wings %>% slice(1) %T>% stack %$% coo
 #' wings %>% rearrange_ldk(c(1, 3, 12:15)) %>%
 #'       slice(1) %T>% stack %$% coo

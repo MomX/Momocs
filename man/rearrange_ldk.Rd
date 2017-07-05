@@ -25,9 +25,15 @@ hearts \%>\% slice(1) \%T>\% stack \%$\% ldk
 hearts \%>\% rearrange_ldk(c(4, 1)) \%>\%
        slice(1) \%T>\%stack \%$\% ldk
 
-Ldk example
+# Ldk example
 wings \%>\% slice(1) \%T>\% stack \%$\% coo
 wings \%>\% rearrange_ldk(c(1, 3, 12:15)) \%>\%
       slice(1) \%T>\% stack \%$\% coo
+}
+\seealso{
+Other ldk/slidings methods: \code{\link{add_ldk}},
+  \code{\link{def_ldk}}, \code{\link{def_slidings}},
+  \code{\link{get_ldk}}, \code{\link{get_slidings}},
+  \code{\link{slidings_scheme}}
 }
 

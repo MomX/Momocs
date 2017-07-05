@@ -31,6 +31,7 @@ get_slidings(chaff, 1)[[1]] \%>\%  Ldk \%>\% stack
 \seealso{
 Other ldk/slidings methods: \code{\link{add_ldk}},
   \code{\link{def_ldk}}, \code{\link{def_slidings}},
-  \code{\link{get_ldk}}, \code{\link{slidings_scheme}}
+  \code{\link{get_ldk}}, \code{\link{rearrange_ldk}},
+  \code{\link{slidings_scheme}}
 }
 
