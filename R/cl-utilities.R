@@ -193,8 +193,8 @@ get_ldk.Ldk <- function(Coo){
 
 #' @export
 get_ldk.Out <- function(Coo) {
-  .check(is.ldk(Coo),
-         "this object has no $ldk")
+  if (!is.ldk(Coo))
+         return(NULL)
   coo <- Coo$coo
   ldk <- Coo$ldk
   ref <- array(NA, dim = c(length(ldk[[1]]), ncol(coo[[1]]),
@@ -208,6 +208,60 @@ get_ldk.Out <- function(Coo) {
 }
 #' @export
 get_ldk.Opn <- get_ldk.Out
+
+#' Rearrange, (select and reorder) landmarks to retain
+#'
+#' Helps reorder and retain landmarks by simply changing the order in which they
+#' are recorded in the \code{Coo} objects. Note that for \code{Out} and \code{Opn}
+#'  objects, this rearranges the \code{$ldk} component. For \code{Ldk}, it rearranges
+#'   the \code{$coo} directly.
+#'
+#' @param Coo any appropriate \code{Coo} object (typically an \code{Ldk})
+#' with landmarks inside
+#' @param new_ldk_ids a vector of numeric with the ldk to retain \emph{and}
+#' in the right order (see below)
+#' @examples
+#' # Out example
+#' hearts %>% slice(1) %T>% stack %$% ldk
+#' hearts %>% rearrange_ldk(c(4, 1)) %>%
+#'        slice(1) %T>%stack %$% ldk
+#'
+#'Ldk example
+#' wings %>% slice(1) %T>% stack %$% coo
+#' wings %>% rearrange_ldk(c(1, 3, 12:15)) %>%
+#'       slice(1) %T>% stack %$% coo
+#' @export
+rearrange_ldk <- function(Coo, new_ldk_ids){
+  UseMethod("rearrange_ldk")
+}
+
+#' @export
+rearrange_ldk.default <- function(Coo, new_ldk_ids){
+  message("* only defined on Coo objects")
+}
+
+#' @export
+rearrange_ldk.Out <- function(Coo, new_ldk_ids){
+  if (is.null(get_ldk(Coo))){
+    message("* no ldk to arrange")
+    return(Coo)
+  }
+  Coo$ldk %<>% lapply(function(.) .[new_ldk_ids])
+  return(Coo)
+}
+
+#' @export
+rearrange_ldk.Opn <- rearrange_ldk.Out
+
+#' @export
+rearrange_ldk.Ldk <- function(Coo, new_ldk_ids){
+  if (is.null(get_ldk(Coo))){
+    message("* no ldk to arrange")
+    stop()
+  }
+  Coo$coo %<>% lapply(function(.) .[new_ldk_ids, ])
+  return(Coo)
+}
 
 # sliding getters/setters ------------------------------------------------------
 
