@@ -596,6 +596,16 @@ If you use this excellent package by Olsen to digitize landmarks and curves, you
 * `.tps` files can be read with `import_tps`
 * `.nts` files an be read with `nts2Coo` (will be turned into `import_nts` soon)
 
+### Direct build of *Coe objects
+* You're not bound with Momocs from the "shapes" step, ie you do not have to start from `Coo` objects. For instance if you have a matrix of coefficients, you can directly build an `OutCoe` with the builder (see below). Same approach for `OpnCoe` and `TraCoe`; have a look to the help files of these builders.
+
+```{r}
+# we simulate an imported matrix of coordinates, eg from a .csv
+coeffs_from_the_wild <- bot %>% efourier(6) %$% coe
+coeffs_in_Momocs <- OutCoe(coe=coeffs_from_the_wild, method="efourier", norm=TRUE)
+coeffs_in_Momocs %>% PCA %>% plot
+```
+
 ### Import misc
 * If covariables are encoded in filenames, which is a good practice, eg if you have files named `spA_group7_ind4_VL.{txt|jpg|etc.}`, use `lf_structure`;
 * If you need rewriting rules on your `$fac`, `rw_rule` is your friend;
