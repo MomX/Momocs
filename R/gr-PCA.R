@@ -211,12 +211,12 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
                      #ellipses
                      ellipses=FALSE, conf.ellipses=0.5,
                      #ellipsesax
-                     ellipsesax=TRUE, conf.ellipsesax=c(0.5, 0.9),
+                     ellipsesax=FALSE, conf.ellipsesax=c(0.5, 0.9),
                      lty.ellipsesax=1, lwd.ellipsesax=sqrt(2),
                      #convexhulls
                      chull=FALSE, chull.lty=1,
                      #filled convex hulls,
-                     chull.filled=FALSE, chull.filled.alpha=0.92,
+                     chull.filled=TRUE, chull.filled.alpha=0.92,
                      #kde2d
                      density=FALSE, lev.density=20,
                      contour = FALSE, lev.contour=3, n.kde2d=100,
