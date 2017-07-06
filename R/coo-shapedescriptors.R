@@ -434,6 +434,50 @@ coo_chull <- function(coo) {
     return(coo[chull(coo), ])
 }
 
+# coo_chull_onion -----------
+#' Peeling points by recursively removing their convex hulls
+#'
+#' Given a population of points, recursively find their
+#'  convex hull, and removed them, until less than 3 points are left.
+#'  See examples below.
+#'
+#'@param coo any 2-col `matrix` or `data.frame`
+#'@param close logical, TRUE by default, whether to close or not each onion ring
+#'@return a list with two components: \code{ids} and \code{coo},
+#'  ids and coordinates of the successive chull rings removed.
+#'@family coo_ utilities
+#'@examples
+#' x <- bot %>% efourier(6) %>% PCA
+#' all_whisky_points <- x %>% as_df() %>% filter(type=="whisky") %>% select(PC1, PC2)
+#' plot(x, ~type, eig=FALSE)
+#' peeling_the_whisky_onion <- all_whisky_points %>% as.matrix %>% coo_chull_onion()
+#' # you may need to par(xpd=NA) to ensure all segments
+#' # even those outside the graphical window are drawn
+#' peeling_the_whisky_onion$coo %>% lapply(coo_draw)
+#' # simulated data
+#' xy <- replicate(2, rnorm(50))
+#' coo_plot(xy, poly=F)
+#' xy %>% coo_chull_onion() %$% coo %>% lapply(coo_draw)
+#'@export
+coo_chull_onion <- function(coo, close=TRUE){
+  coo %<>% as.matrix()
+  res <- list()
+  i <- 1
+  while(is.matrix(coo) && nrow(coo) > 3){
+    chi_ids <- chull(coo[, 1], coo[, 2])
+    # if asked to close, then close ids and coos will follow
+    if(close)
+      chi_ids <- c(chi_ids, chi_ids[1])
+
+    res$ids[[i]] <- chi_ids
+    res$coo[[i]] <- coo[chi_ids, ]
+    coo <- coo[-chi_ids, ]
+    i <- i + 1
+  }
+  res
+}
+
+
 # coo_convexity -------
 #' Calculates the convexity of a shape
 #'
