@@ -30,7 +30,7 @@ peeling_the_whisky_onion <- all_whisky_points \%>\% as.matrix \%>\% coo_chull_on
 peeling_the_whisky_onion$coo \%>\% lapply(coo_draw)
 # simulated data
 xy <- replicate(2, rnorm(50))
-coo_plot(xy, poly=F)
+coo_plot(xy, poly=FALSE)
 xy \%>\% coo_chull_onion() \%$\% coo \%>\% lapply(coo_draw)
 }
 \seealso{
