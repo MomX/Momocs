@@ -62,6 +62,6 @@ res$summary
 Other multivariate: \code{\link{CLUST}},
   \code{\link{KMEANS}}, \code{\link{LDA}},
   \code{\link{MANOVA}}, \code{\link{PCA}},
-  \code{\link{summary.LDA}}
+  \code{\link{classification_metrics}}
 }
 

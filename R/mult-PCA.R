@@ -28,7 +28,7 @@
 #'   data multiplied by the rotation matrix))
 #'   \item other components are inherited from the \code{Coe} object passed to \code{PCA},
 #'   eg \code{fac}, \code{mshape}, \code{method}, \code{baseline1} and \code{baseline2}, etc. They
-#'   are documented in the corresponding \coe{*Coe} file.
+#'   are documented in the corresponding \code{*Coe} file.
 #' }
 #' @family multivariate
 #' @examples

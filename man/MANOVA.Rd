@@ -70,6 +70,6 @@ MANOVA(op, 'domes')
 Other multivariate: \code{\link{CLUST}},
   \code{\link{KMEANS}}, \code{\link{LDA}},
   \code{\link{MANOVA_PW}}, \code{\link{PCA}},
-  \code{\link{summary.LDA}}
+  \code{\link{classification_metrics}}
 }
 

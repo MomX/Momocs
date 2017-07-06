@@ -49,7 +49,7 @@ components, most of them inherited from the \code{prcomp} object:
   data multiplied by the rotation matrix))
   \item other components are inherited from the \code{Coe} object passed to \code{PCA},
   eg \code{fac}, \code{mshape}, \code{method}, \code{baseline1} and \code{baseline2}, etc. They
-  are documented in the corresponding \coe{*Coe} file.
+  are documented in the corresponding \code{*Coe} file.
 }
 }
 \description{
@@ -90,6 +90,6 @@ plot(iris.p, 1)
 Other multivariate: \code{\link{CLUST}},
   \code{\link{KMEANS}}, \code{\link{LDA}},
   \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
-  \code{\link{summary.LDA}}
+  \code{\link{classification_metrics}}
 }
 

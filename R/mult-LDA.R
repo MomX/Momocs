@@ -203,14 +203,16 @@ print.LDA <- function(x, ...) {
 }
 
 # LDA metrics -------
-#' Calculate summary statistics on a confusion matrix
+
+#' Calculate classification metrics on a confusion matrix
 #'
-#' Sometimes, the class correctness or the proportion of correctly classified
+#' In some cases, the class correctness or the proportion of correctly classified
 #'  individuals is not enough, so here are more detailed metrics when working on
-#'   classification. This method extends the generic \link{summary}.
-#'   @param object an \link{LDA} object
-#'   @param ... just to fit with the generic
-#'   @return a list with the following components is returned:
+#'   classification.
+#'
+#'   @param x a \code{table} or an \link{LDA} object
+#'
+#'   @return  a list with the following components is returned:
 #' \enumerate{
 #'   \item \code{accuracy}  the fraction of instances that are correctly classified
 #'   \item \code{macro_prf} data.frame containing \code{precision}
@@ -233,12 +235,17 @@ print.LDA <- function(x, ...) {
 #' @examples
 #' # some morphometrics on 'hearts'
 #' hearts %>% fgProcrustes(tol=1) %>%
-#' coo_slide(ldk=1) %>% efourier(norm=F) %>% PCA() %>%
+#' coo_slide(ldk=1) %>% efourier(norm=FALSE) %>% PCA() %>%
 #' # now the LDA and its summary
-#' LDA(~aut) %>% summary()
+#' LDA(~aut) %>% classification_metrics()
 #' @export
-summary.LDA <- function(object, ...){
-  tab <- object$CV.tab
+classification_metrics <- function(x){
+  UseMethod("classification_metrics")
+}
+
+#' @export
+classification_metrics.table <- function(x){
+  tab <- x
   # check that a table is passed
   .check(is.table(tab),
          "only defined on 'table's")
@@ -285,16 +292,21 @@ summary.LDA <- function(object, ...){
   # micro <- data.frame(accuracy=sum(diag(ova_sum)) / sum(ova_sum),
   # prf=(diag(ova_sum) / apply(ova_sum, 1, sum))[1])
 
-expAccuracy = sum(p*q)
-kappa = (accuracy - expAccuracy) / (1 - expAccuracy)
+  expAccuracy = sum(p*q)
+  kappa = (accuracy - expAccuracy) / (1 - expAccuracy)
 
-list(accuracy=accuracy,
-     macro_prf=macro_prf,
-     macro_avg=macro_avg,
-     ova = ova,
-     ova_sum = ova_sum,
-     kappa=kappa
-)
+  list(accuracy=accuracy,
+       macro_prf=macro_prf,
+       macro_avg=macro_avg,
+       ova = ova,
+       ova_sum = ova_sum,
+       kappa=kappa
+  )
+}
+
+#' @export
+classification_metrics.LDA <- function(x){
+  classification_metrics(x$CV.tab)
 }
 
 # classify --------

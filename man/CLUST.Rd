@@ -87,6 +87,6 @@ CLUST(x, cex=0.5)
 Other multivariate: \code{\link{KMEANS}},
   \code{\link{LDA}}, \code{\link{MANOVA_PW}},
   \code{\link{MANOVA}}, \code{\link{PCA}},
-  \code{\link{summary.LDA}}
+  \code{\link{classification_metrics}}
 }
 
