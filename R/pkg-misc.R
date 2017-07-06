@@ -8,6 +8,12 @@
 #' Download the last version of Momocs from its GitHub account
 #' from \code{http://www.github.com/vbonhomme/Momocs}), install it and load it (\code{library(Momocs)}).
 #' You need devtools, but it is checked anyway.
+#' @rdname Momocs_version
+#' @examples
+#' \dontrun{
+#' Momocs_currentGitHubversion()
+#' Momocs_currentCRANversion()
+#' }
 #' @export
 Momocs_lastversion <- function() {
   if (!requireNamespace("devtools", quietly = TRUE)) {
@@ -18,6 +24,24 @@ Momocs_lastversion <- function() {
   library(Momocs)
   message("Last version of Momocs has been installed from GitHub and loaded into R")
 }
+
+#' @rdname Momocs_version
+#' @export
+Momocs_currentGitHubversion <- function(){
+  "https://raw.githubusercontent.com/vbonhomme/Momocs/master/DESCRIPTION" %>%
+    readLines(n=3) %>%
+    `[`(3) %>%
+    gsub("Version: ", "", .)
+}
+
+#' @rdname Momocs_version
+#' @export
+Momocs_currentCRANversion <- function(){
+  x <- readLines("https://cran.r-project.org/web/packages/Momocs/index.html")
+  x[grep("<td>Version:</td>", x)+1] %>%
+    gsub("<td>", "", .) %>% gsub("</td>", "", .)
+}
+
 
 #' Browse Momocs online doc
 #'
@@ -31,11 +55,70 @@ Momocs_help <- function(topic=NULL){
   browseURL(url)
 }
 
-#' Get Momocs version
+#' Get Momocs installed, CRAN and GitHubversions
 #'
-#' A simple wrapper around \code{packageVersion("Momocs")}.
+#' Simple wrappers to check installed and available Momocs versions.
 #' @export
 Momocs_version <- function() packageVersion("Momocs")
+
+## ' @export
+# Momocs_currentCRANversion <- function(){
+#   "https://raw.githubusercontent.com/vbonhomme/Momocs/master/DESCRIPTION" %>%
+#     readLines(n=3) %>%
+#     `[`(3) %>%
+#     gsub("Version: ", "", .)
+# }
+
+#' @export
+Momocs_currentGitHubversion <- function(){
+  "https://raw.githubusercontent.com/vbonhomme/Momocs/master/DESCRIPTION" %>%
+    readLines(n=3) %>%
+    `[`(3) %>%
+    gsub("Version: ", "", .)
+}
+
+#' List available methods for any object and other classes for a method
+#'
+#' Given any object
+#' returns all available methods for its class, or given a method
+#' list all other supported classes
+#'
+#' @param x any object
+#' @examples
+#' #methods for data.frame
+#' list_methods_for_this_class(iris)
+#'
+#' #methods for Coo objects
+#' list_methods_for_this_class(bot)
+#'
+#' #methods for Coe objects
+#' list_methods_for_this_class(bot %>% efourier)
+#'
+#' #methods for PCA objects
+#' list_methods_for_this_class(bot %>% efourier %>% PCA)
+#'
+#' # classes supported for
+#' list_classes_for_this_method(PCAAA) # nothing
+#' list_classes_for_this_method(PCA)
+#' list_classes_for_this_method(sum) # nothing
+#' @rdname list_classes
+#' @export
+list_methods_for_this_class <- function(x){
+  for (i in class(x)){
+    cat("* '", i, "' class:\n", sep="")
+    cat(paste0("  - ", methods(class=i), "\n"), sep="")
+  }
+}
+
+#' @rdname list_classes
+#' @export
+list_classes_for_this_method <- function(x) {
+  m <- try(suppressWarnings(methods(x)), silent=TRUE)
+  if (!("try-error" %in% class(m)) && length(m)!=0)
+    cat(paste0("  - ", m, "\n"), sep="")
+  else
+    NULL
+}
 
 #' Calculates euclidean distance between two points.
 #'
