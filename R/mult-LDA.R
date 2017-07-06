@@ -207,12 +207,11 @@ print.LDA <- function(x, ...) {
 #' Calculate classification metrics on a confusion matrix
 #'
 #' In some cases, the class correctness or the proportion of correctly classified
-#'  individuals is not enough, so here are more detailed metrics when working on
-#'   classification.
+#' individuals is not enough, so here are more detailed metrics when working on classification.
 #'
-#'   @param x a \code{table} or an \link{LDA} object
+#' @param x a \code{table} or an \link{LDA} object
 #'
-#'   @return  a list with the following components is returned:
+#' @return  a list with the following components is returned:
 #' \enumerate{
 #'   \item \code{accuracy}  the fraction of instances that are correctly classified
 #'   \item \code{macro_prf} data.frame containing \code{precision}

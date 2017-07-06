@@ -6,15 +6,11 @@
 \usage{
 classification_metrics(x)
 }
-\description{
-In some cases, the class correctness or the proportion of correctly classified
- individuals is not enough, so here are more detailed metrics when working on
-  classification.
+\arguments{
+\item{x}{a \code{table} or an \link{LDA} object}
 }
-\details{
-@param x a \code{table} or an \link{LDA} object
-
-@return  a list with the following components is returned:
+\value{
+a list with the following components is returned:
 \enumerate{
   \item \code{accuracy}  the fraction of instances that are correctly classified
   \item \code{macro_prf} data.frame containing \code{precision}
@@ -26,6 +22,10 @@ In some cases, the class correctness or the proportion of correctly classified
   \item \code{ova_sum} a single of all ova matrices
   \item \code{kappa} measure of agreement between the predictions and the actual labels
 }
+}
+\description{
+In some cases, the class correctness or the proportion of correctly classified
+individuals is not enough, so here are more detailed metrics when working on classification.
 }
 \examples{
 # some morphometrics on 'hearts'

@@ -456,7 +456,7 @@ coo_chull <- function(coo) {
 #' peeling_the_whisky_onion$coo %>% lapply(coo_draw)
 #' # simulated data
 #' xy <- replicate(2, rnorm(50))
-#' coo_plot(xy, poly=F)
+#' coo_plot(xy, poly=FALSE)
 #' xy %>% coo_chull_onion() %$% coo %>% lapply(coo_draw)
 #'@export
 coo_chull_onion <- function(coo, close=TRUE){
