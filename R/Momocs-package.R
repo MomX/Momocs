@@ -63,10 +63,9 @@ magrittr::`%T>%`
 #' @importFrom graphics boxplot
 #' @importFrom jpeg readJPEG
 #' @importFrom MASS lda ginv kde2d cov.trob
-#' @importFrom utils stack browseURL combn ls.str modifyList
+#' @importFrom utils stack browseURL combn ls.str modifyList methods
 #' packageVersion read.table setTxtProgressBar
 #' txtProgressBar write.table
-#' @importFrom grDevices chull
 #' @importFrom grDevices chull
 #' @importFrom graphics abline arrows axis barplot box
 #' contour hist image layout legend lines locator
