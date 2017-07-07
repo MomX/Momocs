@@ -450,6 +450,19 @@ get_slidings.Ldk <- function(Coo, partition){
   return(slidings)
 }
 
+# class append/prependers ------------
+# app/pre-pend classes
+.prepend_class <- function(x, class_to_add){
+  if (!(class_to_add %in% class(x)))
+    class(x) %<>% c(class_to_add, .)
+  x
+}
+
+.append_class <- function(x, class_to_add){
+  if (!(class_to_add %in% class(x)))
+    class(x) %<>% c(., class_to_add)
+  x
+}
 # class testers -------------
 #' Various class/component testers
 #'
