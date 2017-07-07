@@ -31,7 +31,8 @@ peeling_the_whisky_onion$coo \%>\% lapply(coo_draw)
 # simulated data
 xy <- replicate(2, rnorm(50))
 coo_plot(xy, poly=FALSE)
-xy \%>\% coo_chull_onion() \%$\% coo \%>\% lapply(coo_draw)
+xy \%>\% coo_chull_onion() \%$\% coo \%>\%
+lapply(polygon, col="#00000022")
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
