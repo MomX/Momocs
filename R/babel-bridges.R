@@ -1,5 +1,32 @@
 ##### Simple bridges between R classes
 
+# coordinates -------------
+#' Converts complex to cartesian coordinates
+#'
+#' @param Z coordinates expressed in the complex form
+#' @return coordinates expressed in the cartesian form
+#' @examples
+#' shapes[4] %>% coo_sample(24) %>% coo2cpx()
+#' shapes[4] %>% coo_sample(24) %>% coo2cpx() %>% cpx2coo()
+#' @export
+cpx2coo <- function(Z){
+  cbind(Re(Z), Im(Z)) %>% `colnames<-`(c("x", "y")) %>% return()
+}
+
+#' Converts cartesian to complex coordinates
+#'
+#' @param coo coordinates expressed in the cartesian form
+#' @return coordinates expressed in the complex form
+#' @examples
+#' shapes[4] %>% coo_sample(24) %>% coo2cpx()
+#' shapes[4] %>% coo_sample(24) %>% coo2cpx() %>% cpx2coo()
+#' @export
+coo2cpx <- function(coo){
+  if (!is.matrix(coo) & length(coo)==2)
+    coo %<>% matrix(nrow=1)
+  complex(real = coo[, 1], imaginary = coo[, 2], length.out=nrow(coo))
+}
+
 # shp methods -------------
 #' Converts a list of coordinates to a matrix of coordinates.
 #'
