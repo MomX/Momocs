@@ -1,5 +1,5 @@
 <b>
-
+* Check the online doc [there](http://vbonhomme.github.io/Momocs/)
 * Check the tutorial [there](https://rawgit.com/vbonhomme/Momocs/master/inst/doc/Momocs_speed_dating.html) or with `browseVignettes("Momocs")`
 * You're welcome to implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
 
@@ -96,6 +96,6 @@ __Graphical methods__
 
 __Misc__
 
-* Datasets for all types of data (`bot`, `trilo`, `mosquito`, `hearts`, `olea`, `shapes`, `wings`, `oak`, `molars`, `flower`, `chaff`, `charring`)
+* Datasets for all types of data (`apodemus`, `bot`, `chaff`, `charring`, `flower`,  `hearts`, `molars`, `mosquito`, `mouse`, `oak`, `olea`, `shapes`, `trilo`, `wings`)
 * [Shiny](http://shiny.rstudio.com/) demonstrators/helpers. See [Momecs](https://github.com/vbonhomme/Momecs/)
 * [Online documentation](http://vbonhomme.github.io/Momocs/)
