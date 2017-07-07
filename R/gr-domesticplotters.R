@@ -138,6 +138,24 @@ coo_draw <- function(coo, ...) {
   coo_plot(coo, plot.new = FALSE, ...)
 }
 
+#' Draw radii to the current plot
+#'
+#' Given a shape, all centroid-points radii are drawn using \link{segments}
+#' that can be passed with options
+#'
+#' @param coo a shape
+#' @param ... arguments to feed \link{segments}
+#'
+#' @examples
+#' shp <- shapes[4] %>% coo_sample(24) %T>% coo_plot
+#' coo_draw_rads(shp, col=col_summer(24))
+#'
+#' @export
+coo_draw_rads <- function(coo, ...){
+  cxy <- coo_centpos(coo)
+  segments(coo[, 1], coo[, 2], cxy[1], cxy[2], ...)
+}
+
 #' Plots (lollipop) differences between two configurations
 #'
 #' Draws 'lollipops' between two configurations.
