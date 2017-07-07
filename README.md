@@ -1,11 +1,9 @@
 <b>
-
-* Check the online doc [there](http://vbonhomme.github.io/Momocs/)    
-
-* Check the tutorial [there](https://rawgit.com/vbonhomme/Momocs/master/inst/doc/Momocs_speed_dating.html) or with `browseVignettes("Momocs")`
-
-* You're welcome to implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
-
+<ul>
+<li>Check the online doc [there](http://vbonhomme.github.io/Momocs/)
+<li>Check the tutorial [there](https://rawgit.com/vbonhomme/Momocs/master/inst/doc/Momocs_speed_dating.html) or with `browseVignettes("Momocs")`
+<li>You're welcome to implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
+</ul>
 </b>
 
 Momocs
