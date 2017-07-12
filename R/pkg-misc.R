@@ -705,6 +705,15 @@ is.fac <- function(x) length(x$fac) > 0
                                                           ncol(m), len = dm[2]))])
 }
 
+.rcolors2hex <- function(x){
+  x <- x %>% grDevices::col2rgb()
+  if ("alpha" %in% rownames(x)){
+    apply(x, 2, function(.) rgb(.[1], .[2], .[3], alpha=.[4], maxColorValue = 255))
+  } else {
+    apply(x, 2, function(.) rgb(.[1], .[2], .[3], maxColorValue = 255))
+  }
+}
+
 
 
 ##### End Miscellaneous

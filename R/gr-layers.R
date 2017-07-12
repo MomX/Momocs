@@ -94,10 +94,10 @@
     for (i in seq(along = levels(fac))) {
       rug(xy[fac == levels(fac)[i], 1], ticksize = g, pos = y0 +
             (i - 1) * gy, side = 1, col = col_alpha(col[i],
-                                                  0), lwd = 1.2, lend = 1, quiet = TRUE)
+                                                    0), lwd = 1.2, lend = 1, quiet = TRUE)
       rug(xy[fac == levels(fac)[i], 2], ticksize = g, pos = x0 +
             (i - 1) * gx, side = 2, col = col_alpha(col[i],
-                                                  0), lwd = 1.2, lend = 1, quiet = TRUE)
+                                                    0), lwd = 1.2, lend = 1, quiet = TRUE)
     }
   }
 }
@@ -167,12 +167,10 @@
 #' @export
 .chullfilled <- function(coo, fac, col) {
   for (i in seq(along = levels(fac))) {
-    coo_i <- coo[fac == levels(fac)[i], ]
-    if (is.matrix(coo_i)) {
-      if (nrow(coo_i) > 1) {
-        chull.i <- coo_chull(coo_i)
-        polygon(coo_close(chull.i), col = col[i], border=col[i])
-      }
+    coo_i <- coo[fac == levels(fac)[i],, drop=FALSE]
+    if (nrow(coo_i) > 1) {
+      chull.i <- coo_chull(coo_i)
+      polygon(coo_close(chull.i), col = col[i], border=col[i])
     }
   }
 }
@@ -207,8 +205,8 @@
   }
   if (nlevels(fac)>2) {
     text(cent[, 1], cent[, 2] + p,
-                       labels = labels, col = col,
-                       cex = cex, font = 2)
+         labels = labels, col = col,
+         cex = cex, font = 2)
   } else {
     text(cent[, 1], cent[, 2] + p,
          labels = labels, col = col,
@@ -268,7 +266,7 @@
       ki$z <- .normalize(ki$z)
       contour(ki$x, ki$y, ki$z, add = TRUE, nlevels = levels,
               drawlabels = FALSE, col = col_alpha(rep(col[i],
-                                                    levels), transp))
+                                                      levels), transp))
     }
   }
 }
@@ -284,7 +282,7 @@
       if (nrow(xy.i) > 3) {
         links.i <- links_delaunay(xy.i)
         ldk_links(xy.i, links.i, col = col_alpha(col[i],
-                                               2/3), lwd = 1.5)
+                                                 2/3), lwd = 1.5)
       }
     }
   }
