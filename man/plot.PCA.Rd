@@ -169,7 +169,6 @@ of the ade4 R package.
 }
 \examples{
 \dontrun{
-data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 
@@ -235,6 +234,15 @@ PCA(iris[, 1:4], fac=iris$Species)  \%>\% plot(1)
 plot(bp, 1, zoom=2)
 plot(bp, zoom=0.5)
 plot(bp, center.origin=FALSE, grid=FALSE)
+
+# colors
+plot(bp, col="red") # globally
+plot(bp, 1, col=c("#00FF00", "#0000FF")) # for every level
+# a color vector of the right length
+plot(bp, 1, col=rep(c("#00FF00", "#0000FF"), each=20))
+# a color vector of the right length, mixign Rcolor names (not a good idea though)
+plot(bp, 1, col=rep(c("#00FF00", "forestgreen"), each=20))
+
 
 # ellipses
 plot(bp, 1, conf.ellipsesax=2/3)
