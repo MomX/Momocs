@@ -2,8 +2,8 @@
 % Please edit documentation in R/gr-PCA2.R
 \name{scree}
 \alias{scree}
-\alias{scree.LDA}
 \alias{scree.PCA}
+\alias{scree.LDA}
 \alias{scree_min}
 \alias{scree_plot}
 \title{Methods for PCA eigen values}
@@ -49,4 +49,3 @@ bl <- LDA(PCA(opoly(olea)), "var")
 scree(bl)
 
 }
-

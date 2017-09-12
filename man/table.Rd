@@ -2,11 +2,11 @@
 % Please edit documentation in R/cl-utilities.R
 \name{table}
 \alias{table}
-\alias{table.Coe}
-\alias{table.Coo}
-\alias{table.LDA}
-\alias{table.PCA}
 \alias{table.default}
+\alias{table.Coo}
+\alias{table.Coe}
+\alias{table.PCA}
+\alias{table.LDA}
 \title{Cross-tabulates objects}
 \usage{
 table(...)
@@ -35,4 +35,3 @@ data(olea)
 table(olea, "var", "domes")
 table(olea)
 }
-

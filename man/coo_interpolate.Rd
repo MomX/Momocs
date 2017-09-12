@@ -30,6 +30,9 @@ coo_plot(bot[1])
 coo_plot(coo_interpolate(coo_sample(bot[1], 12), 120))
 }
 \seealso{
+Other sampling functions: \code{\link{coo_extract}},
+  \code{\link{coo_samplerr}}, \code{\link{coo_sample}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -57,8 +60,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other sampling functions: \code{\link{coo_extract}},
-  \code{\link{coo_samplerr}}, \code{\link{coo_sample}}
 }
-

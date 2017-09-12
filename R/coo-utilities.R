@@ -774,7 +774,7 @@ coo_slidegap.Coo <- function(coo, force=FALSE){
 #' @family sampling functions
 #' @family coo_ utilities
 #' @examples
-#' coo_extract(bot[1], c(3, 9, 12) # or :
+#' coo_extract(bot[1], c(3, 9, 12)) # or :
 #' bot[1] %>% coo_extract(c(3, 9, 12))
 #'
 #' coo_extract(bot, c(3, 5, 7))

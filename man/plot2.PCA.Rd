@@ -89,4 +89,3 @@ Detail the df_s. Detail the calculations.
 # bot$fac$fake2 <- c(runif(20), runif(20, 5, 10))
 # xx + stat_density2d(aes(fill = ..level..), geom="polygon", alpha=0.1)
 }
-

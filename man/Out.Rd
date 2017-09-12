@@ -30,4 +30,3 @@ methods(class=Out)
 \seealso{
 Other Coo objects: \code{\link{Coo}}, \code{\link{Opn}}
 }
-

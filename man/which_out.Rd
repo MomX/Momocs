@@ -42,4 +42,3 @@ w_no$coo[[6]][2, 2] <- 2
 which_out(w_ok, conf=1e-12) # with low conf, no outliers
 which_out(w_no, conf=1e-12) # as expected
 }
-

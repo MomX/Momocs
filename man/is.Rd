@@ -2,55 +2,55 @@
 % Please edit documentation in R/cl-utilities.R
 \name{is}
 \alias{is}
-\alias{is.Coe}
-\alias{is.Coo}
-\alias{is.LDA}
-\alias{is.Ldk}
-\alias{is.LdkCoe}
-\alias{is.Opn}
-\alias{is.OpnCoe}
-\alias{is.Out}
-\alias{is.OutCoe}
-\alias{is.PCA}
-\alias{is.TraCoe}
-\alias{is.fac}
-\alias{is.ldk}
-\alias{is.links}
-\alias{is.shp}
-\alias{is.slidings}
+\alias{is_Coo}
+\alias{is_PCA}
+\alias{is_LDA}
+\alias{is_Out}
+\alias{is_Opn}
+\alias{is_Ldk}
+\alias{is_Coe}
+\alias{is_OutCoe}
+\alias{is_OpnCoe}
+\alias{is_LdkCoe}
+\alias{is_TraCoe}
+\alias{is_shp}
+\alias{is_fac}
+\alias{is_ldk}
+\alias{is_slidings}
+\alias{is_links}
 \title{Various class/component testers}
 \usage{
-is.Coo(x)
+is_Coo(x)
 
-is.PCA(x)
+is_PCA(x)
 
-is.LDA(x)
+is_LDA(x)
 
-is.Out(x)
+is_Out(x)
 
-is.Opn(x)
+is_Opn(x)
 
-is.Ldk(x)
+is_Ldk(x)
 
-is.Coe(x)
+is_Coe(x)
 
-is.OutCoe(x)
+is_OutCoe(x)
 
-is.OpnCoe(x)
+is_OpnCoe(x)
 
-is.LdkCoe(x)
+is_LdkCoe(x)
 
-is.TraCoe(x)
+is_TraCoe(x)
 
-is.shp(x)
+is_shp(x)
 
-is.fac(x)
+is_fac(x)
 
-is.ldk(x)
+is_ldk(x)
 
-is.slidings(x)
+is_slidings(x)
 
-is.links(x)
+is_links(x)
 }
 \arguments{
 \item{x}{the object to test}
@@ -63,10 +63,14 @@ Class testers test if any of the classes of an object is of a given class. For i
 is.PCA on a PCA object (both 'PCA' and 'prcomp') will return TRUE.
 Component testers check if a particular component (eg $fac, etc.) is present.
 }
+\note{
+all \code{is_*} have an \code{is.*} alias
+(eg \code{is_Coo} is the same as \code{is.Coo}) but the \code{.} alias will
+be deprecated at some point.
+}
 \examples{
 data(bot)
-is.Coo(bot)
-is.Out(bot)
-is.Ldk(bot)
+is_Coo(bot)
+is_Out(bot)
+is_Ldk(bot)
 }
-

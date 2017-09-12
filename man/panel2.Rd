@@ -23,4 +23,3 @@ panel2(shapes)
 Other Coo_graphics: \code{\link{panel}},
   \code{\link{plot.Coo}}, \code{\link{stack.Coo}}
 }
-

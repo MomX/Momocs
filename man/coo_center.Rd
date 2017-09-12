@@ -3,6 +3,7 @@
 \name{coo_center}
 \alias{coo_center}
 \alias{coo_centre}
+\alias{coo_centre}
 \title{Centers coordinates}
 \usage{
 coo_center(coo)
@@ -57,4 +58,3 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
 }
-

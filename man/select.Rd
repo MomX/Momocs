@@ -28,6 +28,15 @@ select(olea, variety=var, domesticated_status=domes, view)
 # combine with filter with magrittr pipes
 # only dorsal views, and 'var' and 'domes' columns
 filter(olea, view=="VD") \%>\% select(var, domes)
+head(olea$fac)
+# select some columns
+select(olea, domes, view)
+# remove some columns
+select(olea, -ind)
+# rename on the fly and select some columns
+# you can use rename instead
+select(olea, foo=domes)
+
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},
@@ -39,4 +48,3 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{sample_n}}, \code{\link{slice}},
   \code{\link{subset.Coo}}
 }
-

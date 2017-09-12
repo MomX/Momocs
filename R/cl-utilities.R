@@ -471,99 +471,118 @@ get_slidings.Ldk <- function(Coo, partition){
 #' Component testers check if a particular component (eg $fac, etc.) is present.
 #' @param x the object to test
 #' @return TRUE/FALSE
+#' @note all \code{is_*} have an \code{is.*} alias
+#' (eg \code{is_Coo} is the same as \code{is.Coo}) but the \code{.} alias will
+#' be deprecated at some point.
 #' @examples
 #' data(bot)
-#' is.Coo(bot)
-#' is.Out(bot)
-#' is.Ldk(bot)
+#' is_Coo(bot)
+#' is_Out(bot)
+#' is_Ldk(bot)
 #' @name is
 #' @export
-is.Coo <- function(x){
+is_Coo <- function(x){
   ifelse(any(class(x) == "Coo"), TRUE, FALSE)
 }
+is.Coo <- is_Coo
 
 #' @rdname is
 #' @export
-is.PCA <- function(x){
+is_PCA <- function(x){
   ifelse(any(class(x) == "PCA"), TRUE, FALSE)
 }
+is.PCA <- is_PCA
 
 #' @rdname is
 #' @export
-is.LDA <- function(x){
+is_LDA <- function(x){
   ifelse(any(class(x) == "LDA"), TRUE, FALSE)
 }
+is.LDA <- is_LDA
 
 #' @rdname is
 #' @export
-is.Out <- function(x){
+is_Out <- function(x){
   ifelse(any(class(x) == "Out"), TRUE, FALSE)
 }
+is.Out <- is_Out
 
 #' @rdname is
 #' @export
-is.Opn <- function(x){
+is_Opn <- function(x){
   ifelse(any(class(x) == "Opn"), TRUE, FALSE)
 }
+is.Opn <- is_Opn
 
 #' @rdname is
 #' @export
-is.Ldk <- function(x){
+is_Ldk <- function(x){
   ifelse(any(class(x) == "Ldk"), TRUE, FALSE)
 }
+is.Ldk <- is_Ldk
 
 #' @rdname is
 #' @export
-is.Coe <- function(x){
+is_Coe <- function(x){
   ifelse(any(class(x) == "Coe"), TRUE, FALSE)
 }
+is.Coe <- is_Coe
 
 #' @rdname is
 #' @export
-is.OutCoe <- function(x){
+is_OutCoe <- function(x){
   ifelse(any(class(x) == "OutCoe"), TRUE, FALSE)
 }
+is.OutCoe <- is_OutCoe
 
 #' @rdname is
 #' @export
-is.OpnCoe <- function(x){
+is_OpnCoe <- function(x){
   ifelse(any(class(x) == "OpnCoe"), TRUE, FALSE)
 }
+is.OpnCoe <- is_OpnCoe
 
 #' @rdname is
 #' @export
-is.LdkCoe <- function(x){
+is_LdkCoe <- function(x){
   ifelse(any(class(x) == "LdkCoe"), TRUE, FALSE)
 }
+is.LdkCoe <- is_LdkCoe
 
 #' @rdname is
 #' @export
-is.TraCoe <- function(x){
+is_TraCoe <- function(x){
   ifelse(any(class(x) == "TraCoe"), TRUE, FALSE)
 }
+is.TraCoe <- is_TraCoe
+
 
 #' @rdname is
 #' @export
-is.shp <- function(x){
+is_shp <- function(x){
   if (is.matrix(x))
     if (ncol(x)==2 & all(!is.na(x)))
       return(TRUE)
   FALSE
 }
+is.shp <- is_shp
 
 #' @rdname is
 #' @export
-is.fac   <- function(x) length(x$fac) > 0
+is_fac <- function(x) length(x$fac) > 0
+is.fac <- is_fac
 
 #' @rdname is
 #' @export
-is.ldk   <- function(x) length(x$ldk) > 0
+is_ldk   <- function(x) length(x$ldk) > 0
+is.ldk <- is_ldk
 
 #' @rdname is
 #' @export
-is.slidings   <- function(x) length(x$slidings) > 0
+is_slidings   <- function(x) length(x$slidings) > 0
+is.slidings <- is_slidings
 
 #' @rdname is
 #' @export
-is.links <- function(x) is.matrix(x$links)
-
+is_links <- function(x) is.matrix(x$links)
+is.links <- is_links

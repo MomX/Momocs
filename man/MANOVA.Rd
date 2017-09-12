@@ -72,4 +72,3 @@ Other multivariate: \code{\link{CLUST}},
   \code{\link{MANOVA_PW}}, \code{\link{PCA}},
   \code{\link{classification_metrics}}
 }
-

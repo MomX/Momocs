@@ -73,4 +73,3 @@ Other thin plate splines: \code{\link{tps2d}},
   \code{\link{tps_arr}}, \code{\link{tps_grid}},
   \code{\link{tps_raw}}
 }
-

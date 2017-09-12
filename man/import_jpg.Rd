@@ -4,7 +4,7 @@
 \alias{import_jpg}
 \title{Extracts outline coordinates from multiple .jpg files}
 \usage{
-import_jpg(jpg.paths = NULL, auto.notcentered = TRUE,
+import_jpg(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
   fun.notcentered = NULL, threshold = 0.5, verbose = TRUE)
 }
 \arguments{
@@ -58,4 +58,3 @@ Other babel functions: \code{\link{bind_db}},
   \code{\link{ntsrow2Coo}}, \code{\link{pix2chc}},
   \code{\link{tie_jpg_txt}}, \code{\link{tps2coo}}
 }
-

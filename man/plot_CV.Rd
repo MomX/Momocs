@@ -2,8 +2,8 @@
 % Please edit documentation in R/gr-LDA.R
 \name{plot_CV}
 \alias{plot_CV}
-\alias{plot_CV.LDA}
 \alias{plot_CV.default}
+\alias{plot_CV.LDA}
 \title{Plots a cross-validation table as an heatmap}
 \usage{
 plot_CV(x, ...)
@@ -53,4 +53,3 @@ plot_CV(ol, freq=TRUE)
 \seealso{
 \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
 }
-

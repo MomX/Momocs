@@ -2,12 +2,16 @@
 % Please edit documentation in R/Momocs-package.R
 \docType{import}
 \name{reexports}
-\alias{\%$\%}
-\alias{\%<>\%}
-\alias{\%>\%}
-\alias{\%T>\%}
 \alias{reexports}
+\alias{\%>\%}
+\alias{reexports}
+\alias{\%<>\%}
+\alias{reexports}
+\alias{\%$\%}
+\alias{reexports}
+\alias{\%T>\%}
 \title{Objects exported from other packages}
+\keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
@@ -17,5 +21,4 @@ below to see their documentation.
 
   \item{magrittr}{\code{\link[magrittr]{\%<>\%}}, \code{\link[magrittr]{\%$\%}}, \code{\link[magrittr]{\%T>\%}}}
 }}
-\keyword{internal}
 

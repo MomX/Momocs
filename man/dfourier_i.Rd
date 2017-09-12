@@ -56,4 +56,3 @@ title('Discrete Cosine Transforms')
 Other dfourier: \code{\link{dfourier_shape}},
   \code{\link{dfourier}}
 }
-

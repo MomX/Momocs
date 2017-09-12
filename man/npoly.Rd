@@ -2,8 +2,8 @@
 % Please edit documentation in R/core-opn-polynomials.R
 \name{npoly}
 \alias{npoly}
-\alias{npoly.Opn}
 \alias{npoly.default}
+\alias{npoly.Opn}
 \title{Calculate natural polynomial fits on open outlines}
 \usage{
 npoly(x, ...)
@@ -64,4 +64,3 @@ plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 Other polynomials: \code{\link{opoly_i}},
   \code{\link{opoly}}
 }
-

@@ -73,4 +73,3 @@ Other calibration: \code{\link{calibrate_deviations}},
   \code{\link{calibrate_r2}},
   \code{\link{calibrate_reconstructions}}
 }
-

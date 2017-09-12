@@ -31,4 +31,3 @@ hearts$ldk[[4]] <- c(1, 2)
 validate(hearts)
 }
 }
-

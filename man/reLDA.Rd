@@ -2,9 +2,9 @@
 % Please edit documentation in R/mult-LDA.R
 \name{reLDA}
 \alias{reLDA}
-\alias{reLDA.Coe}
-\alias{reLDA.PCA}
 \alias{reLDA.default}
+\alias{reLDA.PCA}
+\alias{reLDA.Coe}
 \title{"Redo" a LDA on new data}
 \usage{
 reLDA(newdata, LDA)
@@ -66,4 +66,3 @@ bot2.l <- reLDA(bot2.p, bot1.l)
 bot2.l
 
 }
-

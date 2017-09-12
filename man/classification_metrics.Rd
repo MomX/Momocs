@@ -48,4 +48,3 @@ Other multivariate: \code{\link{CLUST}},
   \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
   \code{\link{PCA}}
 }
-

@@ -37,4 +37,3 @@ Other handling functions: \code{\link{at_least}},
   \code{\link{select}}, \code{\link{slice}},
   \code{\link{subset.Coo}}
 }
-

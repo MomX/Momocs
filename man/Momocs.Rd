@@ -27,6 +27,7 @@ Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, Davi
 Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 }
+
 \references{
 \itemize{
 \item Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R.
@@ -42,4 +43,3 @@ Asher Wishkerman, John Wood for their helpful ideas and bug reports.
  \item \bold{Email}: \code{bonhomme.vincent@gmail.com} to contribute to dev, ask for something, share your data, etc.
 }
 }
-

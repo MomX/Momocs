@@ -20,6 +20,9 @@ coo_perim(bot[1])
 hist(sapply(bot$coo, coo_perim), breaks=10)
 }
 \seealso{
+Other perimeter functions: \code{\link{coo_perimcum}},
+  \code{\link{coo_perimpts}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -47,8 +50,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other perimeter functions: \code{\link{coo_perimcum}},
-  \code{\link{coo_perimpts}}
 }
-

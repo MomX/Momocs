@@ -24,10 +24,6 @@ ldk_chull(wings$coo)
 \seealso{
 \link{coo_chull}, \link{chull}, \link{ldk_confell}, \link{ldk_contour}
 
-Other ldk plotters: \code{\link{ldk_confell}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}
-
 Other plotting functions: \code{\link{Ntable}},
   \code{\link{conf_ell}}, \code{\link{coo_arrows}},
   \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
@@ -35,5 +31,8 @@ Other plotting functions: \code{\link{Ntable}},
   \code{\link{coo_ruban}}, \code{\link{ldk_confell}},
   \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
   \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
-}
 
+Other ldk plotters: \code{\link{ldk_confell}},
+  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
+  \code{\link{ldk_links}}
+}

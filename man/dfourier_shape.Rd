@@ -37,4 +37,3 @@ panel(coo_align(Opn(replicate(48, dfourier_shape(alpha=2, nb.h=6)))))
 Other dfourier: \code{\link{dfourier_i}},
   \code{\link{dfourier}}
 }
-

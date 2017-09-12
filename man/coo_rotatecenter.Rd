@@ -25,6 +25,8 @@ coo_plot(b)
 coo_draw(coo_rotatecenter(b, -pi/2, c(200, 200)), border='red')
 }
 \seealso{
+Other rotation functions: \code{\link{coo_rotate}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -54,7 +56,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{is_equallyspacedradii}}
 
 Other rotation functions: \code{\link{coo_rotate}}
-
-Other rotation functions: \code{\link{coo_rotate}}
 }
-

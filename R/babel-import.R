@@ -5,9 +5,10 @@
 #'
 #' columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 #' Define the \link{read.table} arguments that allow to import a single file, and then
-#' pass them to this function.
+#' pass them to this function, ie if your \code{.txt} file
+#' has a header (eg ('x', 'y')), do not forget \code{header=TRUE}.
 #' @param txt.paths a vector of paths corresponding to the .txt files to import. If not
-#' provided (or \code{NULL}), switches to the automatic version, just as in\link{import_jpg}.
+#' provided (or \code{NULL}), switches to the automatic version, just as in \link{import_jpg}.
 #' See Details there.
 #' @param verbose logical whether to print progress in the console
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
@@ -15,11 +16,12 @@
 #' \link{Out}, \link{Opn} and \link{Ldk}.
 #' @seealso babel functions.
 #' @export
-import_txt <- function(txt.paths = NULL, verbose=FALSE, ...) {
-  if (is.null(txt.paths)) {
-    txt.paths <- .lf.auto()
-  }
-  cat(" * Extracting ", length(txt.paths), "..txt coordinates...\n")
+import_txt <- function(txt.paths = .lf.auto(), verbose=FALSE, ...) {
+  # if (is.null(txt.paths)) {
+  #   txt.paths <- .lf.auto()
+  # }
+  if (verbose)
+    cat(" * Extracting ", length(txt.paths), "..txt coordinates...\n")
   if (length(txt.paths) > 10 & verbose) {
     pb <- txtProgressBar(1, length(txt.paths))
     t <- TRUE
@@ -153,7 +155,9 @@ import_Conte <- function(img, x) {
 #' @return a matrix of (x; y) coordinates that can be passed to Out
 #' @seealso babel functions.
 #' @export
-import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NULL,
+import_jpg1 <- function(jpg.path,
+                        auto.notcentered = TRUE,
+                        fun.notcentered = NULL,
                         threshold = 0.5) {
   img <- readJPEG(jpg.path)
   # if a RVB is provided by the way, apply (img, 1:2, mean) is
@@ -259,12 +263,12 @@ import_jpg1 <- function(jpg.path, auto.notcentered = TRUE, fun.notcentered = NUL
 #' }
 #' @family babel functions
 #' @export
-import_jpg <- function(jpg.paths = NULL, auto.notcentered = TRUE,
+import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
                        fun.notcentered = NULL, threshold = 0.5, verbose = TRUE) {
   # if not provided
-  if (is.null(jpg.paths)) {
-    jpg.paths <- .lf.auto()
-  }
+  # if (is.null(jpg.paths)) {
+  #   jpg.paths <- .lf.auto()
+  # }
   begin <- Sys.time()
   message("Extracting ", length(jpg.paths), ".jpg outlines...")
   if (length(jpg.paths) > 10 & verbose) {

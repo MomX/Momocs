@@ -24,4 +24,3 @@ ed(c(0,1), c(1,0))
 \seealso{
 \link{edm}, \link{edm_nearest}, \link{dist}.
 }
-

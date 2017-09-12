@@ -42,4 +42,3 @@ measure(bot[1], coo_area, coo_perim, coo_ellipse_area)
 \seealso{
 Other premodern: \code{\link{truss}}
 }
-

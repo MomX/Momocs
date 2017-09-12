@@ -30,6 +30,9 @@ coo_plot(b)
 coo_plot(coo_sample(b, 24))
 }
 \seealso{
+Other sampling functions: \code{\link{coo_extract}},
+  \code{\link{coo_interpolate}}, \code{\link{coo_samplerr}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -57,8 +60,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other sampling functions: \code{\link{coo_extract}},
-  \code{\link{coo_interpolate}}, \code{\link{coo_samplerr}}
 }
-

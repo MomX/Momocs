@@ -30,4 +30,3 @@ plot(cumsum(harm_pow(ef)[-1]), type='o',
   ylab='Cumulated harmonic power', xlab='Harmonic rank')
 
 }
-

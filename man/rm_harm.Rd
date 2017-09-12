@@ -20,4 +20,3 @@ data(bot)
 bf <- efourier(bot)
 colnames(rm_harm(bf, 1)$coe)
 }
-

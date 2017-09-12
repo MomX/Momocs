@@ -284,4 +284,3 @@ plot(bp, eigen=FALSE) # eigen cause troubles to graphical window
 \seealso{
 \link{plot.LDA}
 }
-

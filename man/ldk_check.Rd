@@ -28,4 +28,3 @@ If a list is provided, checks that the number of landmarks is consistent.
 Other ldk helpers: \code{\link{def_links}},
   \code{\link{links_all}}, \code{\link{links_delaunay}}
 }
-

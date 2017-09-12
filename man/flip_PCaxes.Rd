@@ -20,4 +20,3 @@ bp <- bot \%>\% efourier(6) \%>\% PCA
 bp \%>\% plot
 bp \%>\% flip_PCaxes(1) \%>\% plot()
 }
-

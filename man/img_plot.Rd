@@ -21,4 +21,3 @@ ask you to choose interactively a \code{.jpeg} image.
 \code{img_plot} is used in import functions such as \link{import_jpg1};
 \code{img_plot0} does the same job but preserves the \code{par} and plots axes.
 }
-

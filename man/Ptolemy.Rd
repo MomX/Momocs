@@ -46,4 +46,3 @@ the \bold{Details} section of the \link{efourier} function.
 
 exemplifying functions
 }
-

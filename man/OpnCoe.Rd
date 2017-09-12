@@ -41,4 +41,3 @@ methods(class='OpnCoe')
 \seealso{
 Other Coe objects: \code{\link{Coe}}, \code{\link{OutCoe}}
 }
-

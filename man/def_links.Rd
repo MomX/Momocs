@@ -27,4 +27,3 @@ ldk_links(wm, links)
 Other ldk helpers: \code{\link{ldk_check}},
   \code{\link{links_all}}, \code{\link{links_delaunay}}
 }
-

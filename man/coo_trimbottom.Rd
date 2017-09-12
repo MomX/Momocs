@@ -52,4 +52,3 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
 Other coo_trimming functions: \code{\link{coo_trimtop}},
   \code{\link{coo_trim}}
 }
-

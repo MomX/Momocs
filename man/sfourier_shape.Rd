@@ -60,4 +60,3 @@ of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 Other sfourier: \code{\link{sfourier_i}},
   \code{\link{sfourier}}
 }
-

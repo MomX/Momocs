@@ -60,4 +60,3 @@ Springer 316 pp.
 Other rfourier: \code{\link{rfourier_i}},
   \code{\link{rfourier}}
 }
-

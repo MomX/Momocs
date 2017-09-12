@@ -43,4 +43,3 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{select}}, \code{\link{slice}},
   \code{\link{subset.Coo}}
 }
-

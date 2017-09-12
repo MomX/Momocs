@@ -41,4 +41,3 @@ Other ldk/slidings methods: \code{\link{def_ldk}},
   \code{\link{get_slidings}}, \code{\link{rearrange_ldk}},
   \code{\link{slidings_scheme}}
 }
-

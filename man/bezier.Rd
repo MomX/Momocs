@@ -40,4 +40,3 @@ Springer 316 pp.
 \seealso{
 Other bezier functions: \code{\link{bezier_i}}
 }
-

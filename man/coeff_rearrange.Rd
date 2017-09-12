@@ -33,4 +33,3 @@ m_name
 m_name \%>\% coeff_rearrange(by="name") # no change
 m_name \%>\% coeff_rearrange(by="rank")
 }
-

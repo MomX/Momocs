@@ -2,8 +2,8 @@
 % Please edit documentation in R/core-out-tfourier.R
 \name{tfourier}
 \alias{tfourier}
-\alias{tfourier.Out}
 \alias{tfourier.default}
+\alias{tfourier.Out}
 \title{Tangent angle Fourier transform}
 \usage{
 tfourier(x, ...)
@@ -72,4 +72,3 @@ pp.
 Other tfourier: \code{\link{tfourier_i}},
   \code{\link{tfourier_shape}}
 }
-

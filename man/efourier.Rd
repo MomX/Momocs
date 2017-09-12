@@ -2,8 +2,8 @@
 % Please edit documentation in R/core-out-efourier.R
 \name{efourier}
 \alias{efourier}
-\alias{efourier.Out}
 \alias{efourier.default}
+\alias{efourier.Out}
 \title{Elliptical Fourier transform}
 \usage{
 efourier(x, ...)
@@ -98,4 +98,3 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 Other efourier: \code{\link{efourier_i}},
   \code{\link{efourier_norm}}, \code{\link{efourier_shape}}
 }
-

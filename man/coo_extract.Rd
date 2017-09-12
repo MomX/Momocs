@@ -27,8 +27,15 @@ stack(bot)
 stack(coo_sample(bot, 24))
 coo_plot(b)
 coo_plot(coo_sample(b, 24))
+coo_extract(bot[1], c(3, 9, 12)) # or :
+bot[1] \%>\% coo_extract(c(3, 9, 12))
+
+coo_extract(bot, c(3, 5, 7))
 }
 \seealso{
+Other sampling functions: \code{\link{coo_interpolate}},
+  \code{\link{coo_samplerr}}, \code{\link{coo_sample}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -56,8 +63,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other sampling functions: \code{\link{coo_interpolate}},
-  \code{\link{coo_samplerr}}, \code{\link{coo_sample}}
 }
-

@@ -52,4 +52,3 @@ export(bot.f, file='data.xls', dec=',')
 \seealso{
 babel functions
 }
-

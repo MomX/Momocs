@@ -30,4 +30,3 @@ ldk_links(w, links)
 Other ldk helpers: \code{\link{def_links}},
   \code{\link{ldk_check}}, \code{\link{links_all}}
 }
-

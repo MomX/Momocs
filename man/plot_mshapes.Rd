@@ -28,4 +28,3 @@ leaves <- shapes \%>\% slice(grep("leaf", names(shapes))) \%$\% coo
 class(leaves)
 leaves \%>\% plot_mshapes(col2="#0000FF")
 }
-

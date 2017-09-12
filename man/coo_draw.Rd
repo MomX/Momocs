@@ -31,4 +31,3 @@ Other plotting functions: \code{\link{Ntable}},
   \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
   \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
 }
-

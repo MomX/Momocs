@@ -48,4 +48,3 @@ Other babel functions: \code{\link{chc2Out}},
   \code{\link{pix2chc}}, \code{\link{tie_jpg_txt}},
   \code{\link{tps2coo}}
 }
-

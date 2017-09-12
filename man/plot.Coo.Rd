@@ -30,4 +30,3 @@ plot(bot, 5, pch=3, points=TRUE) # an example of '...' use
 Other Coo_graphics: \code{\link{panel2}},
   \code{\link{panel}}, \code{\link{stack.Coo}}
 }
-

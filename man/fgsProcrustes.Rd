@@ -29,4 +29,3 @@ chaffp \%>\% PCA() \%>\% plot("taxa")
 Other procrustes functions: \code{\link{fProcrustes}},
   \code{\link{fgProcrustes}}, \code{\link{pProcrustes}}
 }
-

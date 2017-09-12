@@ -2,9 +2,9 @@
 % Please edit documentation in R/core-opn-dct.R
 \name{dfourier}
 \alias{dfourier}
-\alias{dfourier.Coo}
-\alias{dfourier.Opn}
 \alias{dfourier.default}
+\alias{dfourier.Opn}
+\alias{dfourier.Coo}
 \title{Discrete cosinus transform}
 \usage{
 dfourier(coo, nb.h, verbose = TRUE)
@@ -82,4 +82,3 @@ title('Discrete Cosine Transforms')
 Other dfourier: \code{\link{dfourier_i}},
   \code{\link{dfourier_shape}}
 }
-

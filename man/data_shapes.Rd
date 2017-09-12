@@ -20,4 +20,3 @@ Other datasets: \code{\link{apodemus}}, \code{\link{bot}},
   \code{\link{olea}}, \code{\link{trilo}},
   \code{\link{wings}}
 }
-

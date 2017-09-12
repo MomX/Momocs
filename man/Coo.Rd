@@ -86,4 +86,3 @@ names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
 \seealso{
 Other Coo objects: \code{\link{Opn}}, \code{\link{Out}}
 }
-

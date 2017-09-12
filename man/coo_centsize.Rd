@@ -30,4 +30,3 @@ mutate(bot, size=coo_centsize(bot))
 Other centroid functions: \code{\link{coo_centdist}},
   \code{\link{coo_centpos}}
 }
-

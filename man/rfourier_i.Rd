@@ -49,4 +49,3 @@ Springer 316 pp.
 Other rfourier: \code{\link{rfourier_shape}},
   \code{\link{rfourier}}
 }
-

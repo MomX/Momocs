@@ -30,4 +30,3 @@ p <- boxplot(bot.p, 1)
 #p +  theme_minimal() + scale_fill_grey()
 #p + facet_wrap(~PC, scales = "free")
 }
-

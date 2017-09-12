@@ -21,6 +21,9 @@ b <- coo_sample(bot[1], 24)
 coo_perimpts(b)
 }
 \seealso{
+Other perimeter functions: \code{\link{coo_perimcum}},
+  \code{\link{coo_perim}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -48,8 +51,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other perimeter functions: \code{\link{coo_perimcum}},
-  \code{\link{coo_perim}}
 }
-

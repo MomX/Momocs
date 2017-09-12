@@ -55,4 +55,3 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
 }
-

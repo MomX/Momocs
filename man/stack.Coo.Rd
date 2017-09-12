@@ -99,4 +99,3 @@ stack(chaffal, meanshape=TRUE, meanshape_col="blue")
 Other Coo_graphics: \code{\link{panel2}},
   \code{\link{panel}}, \code{\link{plot.Coo}}
 }
-

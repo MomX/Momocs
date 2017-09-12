@@ -2,8 +2,8 @@
 % Please edit documentation in R/core-out-sfourier.R
 \name{sfourier}
 \alias{sfourier}
-\alias{sfourier.Out}
 \alias{sfourier.default}
+\alias{sfourier.Out}
 \title{Radii variation Fourier transform (equally spaced curvilinear abscissa)}
 \usage{
 sfourier(x, nb.h)
@@ -47,4 +47,3 @@ of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 Other sfourier: \code{\link{sfourier_i}},
   \code{\link{sfourier_shape}}
 }
-

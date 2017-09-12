@@ -2,8 +2,8 @@
 % Please edit documentation in R/cl-farming.R
 \name{perm}
 \alias{perm}
-\alias{perm.Coe}
 \alias{perm.default}
+\alias{perm.Coe}
 \title{Permutes and breed Coe (and others) objects}
 \usage{
 perm(x, ...)
@@ -44,4 +44,3 @@ panel(bot.m)
 \seealso{
 Other farming: \code{\link{breed}}
 }
-

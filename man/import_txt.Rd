@@ -4,11 +4,11 @@
 \alias{import_txt}
 \title{Imports coordinates from a .txt file}
 \usage{
-import_txt(txt.paths = NULL, verbose = FALSE, ...)
+import_txt(txt.paths = .lf.auto(), verbose = FALSE, ...)
 }
 \arguments{
 \item{txt.paths}{a vector of paths corresponding to the .txt files to import. If not
-provided (or \code{NULL}), switches to the automatic version, just as in\link{import_jpg}.
+provided (or \code{NULL}), switches to the automatic version, just as in \link{import_jpg}.
 See Details there.}
 
 \item{verbose}{logical whether to print progress in the console}
@@ -25,9 +25,9 @@ A wrapper around \link{read.table} that can be used to import outline/landmark c
 \details{
 columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 Define the \link{read.table} arguments that allow to import a single file, and then
-pass them to this function.
+pass them to this function, ie if your \code{.txt} file
+has a header (eg ('x', 'y')), do not forget \code{header=TRUE}.
 }
 \seealso{
 babel functions.
 }
-

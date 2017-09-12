@@ -2,8 +2,8 @@
 % Please edit documentation in R/cl-farming.R
 \name{breed}
 \alias{breed}
-\alias{breed.Coe}
 \alias{breed.default}
+\alias{breed.Coe}
 \title{Jitters Coe (and others) objects}
 \usage{
 breed(x, ...)
@@ -45,4 +45,3 @@ panel(bot.m)
 \seealso{
 Other farming: \code{\link{perm}}
 }
-

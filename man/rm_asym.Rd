@@ -2,11 +2,12 @@
 % Please edit documentation in R/cl-def-Out.R
 \name{rm_asym}
 \alias{rm_asym}
-\alias{rm_asym.OutCoe}
-\alias{rm_asym.default}
 \alias{rm_sym}
-\alias{rm_sym.OutCoe}
+\alias{rm_asym.default}
+\alias{rm_asym.OutCoe}
+\alias{rm_sym}
 \alias{rm_sym.default}
+\alias{rm_sym.OutCoe}
 \title{Removes asymmetric and symmetric variation on OutCoe objects}
 \usage{
 rm_asym(OutCoe)
@@ -68,4 +69,3 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
 \seealso{
 \link{symmetry}.
 }
-

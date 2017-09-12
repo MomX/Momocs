@@ -63,6 +63,7 @@ export.matrix <- function(x, file = "data.txt", sep = "\t", dec = ".") {
     colnames(x) <- c("x", "y")
     write.table(x = x, file = file, quote = FALSE, row.names = FALSE,
         col.names = TRUE, sep = "\t", dec = ".")
+    message("File written: ", file)
 }
 
 ##### end export

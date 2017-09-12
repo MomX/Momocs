@@ -58,4 +58,3 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
 
 Other rotation functions: \code{\link{coo_rotatecenter}}
 }
-

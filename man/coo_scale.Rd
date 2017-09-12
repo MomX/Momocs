@@ -58,4 +58,3 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
 Other scaling functions: \code{\link{coo_scalex}},
   \code{\link{coo_template}}
 }
-

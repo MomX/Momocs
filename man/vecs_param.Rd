@@ -32,4 +32,3 @@ numeric.
 vecs_param(1, 0, 0, 2)
 
 }
-

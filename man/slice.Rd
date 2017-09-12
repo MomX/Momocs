@@ -36,4 +36,3 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{sample_n}}, \code{\link{select}},
   \code{\link{subset.Coo}}
 }
-

@@ -41,4 +41,3 @@ Other coo_ descriptors: \code{\link{coo_area}},
   \code{\link{coo_solidity}}, \code{\link{coo_theta3}},
   \code{\link{coo_thetapts}}, \code{\link{coo_width}}
 }
-

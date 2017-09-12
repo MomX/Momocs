@@ -22,4 +22,3 @@ Other datasets: \code{\link{apodemus}}, \code{\link{bot}},
   \code{\link{shapes}}, \code{\link{trilo}},
   \code{\link{wings}}
 }
-

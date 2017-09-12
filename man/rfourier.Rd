@@ -2,8 +2,8 @@
 % Please edit documentation in R/core-out-rfourier.R
 \name{rfourier}
 \alias{rfourier}
-\alias{rfourier.Out}
 \alias{rfourier.default}
+\alias{rfourier.Out}
 \title{Radii variation Fourier transform (equally spaced radii)}
 \usage{
 rfourier(x, ...)
@@ -73,4 +73,3 @@ Springer 316 pp.
 Other rfourier: \code{\link{rfourier_i}},
   \code{\link{rfourier_shape}}
 }
-

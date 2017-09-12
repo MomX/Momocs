@@ -65,4 +65,3 @@ See also Momocs' vignettes for data import.
 
 babel functions.
 }
-

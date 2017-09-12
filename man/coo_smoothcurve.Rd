@@ -25,6 +25,8 @@ coo_draw(coo_smooth(o, 24), border='blue', points=FALSE)
 coo_draw(coo_smoothcurve(o, 24), border='red', points=FALSE)
 }
 \seealso{
+Other smoothing functions: \code{\link{coo_smooth}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -53,7 +55,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_up}}, \code{\link{is_clockwise}},
   \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other smoothing functions: \code{\link{coo_smooth}}
 }
-

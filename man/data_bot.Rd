@@ -23,4 +23,3 @@ Other datasets: \code{\link{apodemus}},
   \code{\link{olea}}, \code{\link{shapes}},
   \code{\link{trilo}}, \code{\link{wings}}
 }
-

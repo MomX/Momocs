@@ -20,4 +20,3 @@ Will replace stack soon.
 data(bot)
 stack2(bot)
 }
-

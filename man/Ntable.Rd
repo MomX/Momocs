@@ -43,4 +43,3 @@ Other plotting functions: \code{\link{conf_ell}},
   \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
   \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
 }
-

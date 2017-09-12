@@ -36,6 +36,9 @@ coo_plot(cat_down)
 coo_plot(coo_slidegap(cat_down))
 }
 \seealso{
+Other sliding functions: \code{\link{coo_slidedirection}},
+  \code{\link{coo_slide}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -64,8 +67,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_up}}, \code{\link{is_clockwise}},
   \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other sliding functions: \code{\link{coo_slidedirection}},
-  \code{\link{coo_slide}}
 }
-

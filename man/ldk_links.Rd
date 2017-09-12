@@ -18,10 +18,6 @@ on the second column the ending-id (id= the number of the coordinate)}
 Cosmetics only but useful to visualize shape variation.
 }
 \seealso{
-Other ldk plotters: \code{\link{ldk_chull}},
-  \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
-  \code{\link{ldk_labels}}
-
 Other plotting functions: \code{\link{Ntable}},
   \code{\link{conf_ell}}, \code{\link{coo_arrows}},
   \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
@@ -29,5 +25,8 @@ Other plotting functions: \code{\link{Ntable}},
   \code{\link{coo_ruban}}, \code{\link{ldk_chull}},
   \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
   \code{\link{ldk_labels}}, \code{\link{plot_devsegments}}
-}
 
+Other ldk plotters: \code{\link{ldk_chull}},
+  \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
+  \code{\link{ldk_labels}}
+}

@@ -58,4 +58,3 @@ pp.
 Other tfourier: \code{\link{tfourier_shape}},
   \code{\link{tfourier}}
 }
-

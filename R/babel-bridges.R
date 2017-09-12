@@ -5,18 +5,20 @@
 #'
 #' @param Z coordinates expressed in the complex form
 #' @return coordinates expressed in the cartesian form
+#' @family bridges functions
 #' @examples
 #' shapes[4] %>% coo_sample(24) %>% coo2cpx()
 #' shapes[4] %>% coo_sample(24) %>% coo2cpx() %>% cpx2coo()
 #' @export
 cpx2coo <- function(Z){
-  cbind(Re(Z), Im(Z)) %>% `colnames<-`(c("x", "y")) %>% return()
+    cbind(Re(Z), Im(Z)) %>% `colnames<-`(c("x", "y")) %>% return()
 }
 
 #' Converts cartesian to complex coordinates
 #'
 #' @param coo coordinates expressed in the cartesian form
 #' @return coordinates expressed in the complex form
+#' @family bridges functions
 #' @examples
 #' shapes[4] %>% coo_sample(24) %>% coo2cpx()
 #' shapes[4] %>% coo_sample(24) %>% coo2cpx() %>% cpx2coo()
@@ -33,10 +35,9 @@ coo2cpx <- function(coo){
 #' Converts a \code{list} with x and y components to a two-columns
 #' (colnamed) \code{matrix} of coordinates. Also, if l is a list with a single matrix, then l[[1]] is returned.
 #'
-#' @usage l2m(l)
 #' @param l \code{list} with x and y coordinates as components.
 #' @return \code{matrix} of (x; y) coordinates.
-#' @seealso \link{m2l}.
+#' @family bridges functions
 #' @examples
 #' data(wings)
 #' l <- m2l(wings[1])
@@ -53,6 +54,49 @@ l2m <- function(l) {
     return(m)
 }
 
+#' Converts a data.frame of coordinates to a matrix of coordinates.
+#'
+#' Converts a \code{data.frame} with two columns
+#' (colnamed) \code{matrix} of coordinates.
+#'
+#' @param d \code{data.frame} with two columns.
+#' @return \code{matrix} of (x; y) coordinates.
+#' @family bridges functions
+#' @examples
+#' data(wings)
+#' d <- d2m(wings[1])
+#' d
+#' m <- m2d(d)
+#' m
+#' @family bridges functions
+#' @export
+d2m <- function(d) {
+      .check(ncol(d) == 2,
+         "data.frame must have two columns")
+  d %>% as.matrix() %>% `colnames<-`(c("x", "y"))
+}
+
+#' Converts a matrix of coordinates to a two-columns data.frame
+#'
+#' Converts a \code{matrix} of coordinates to a (colnamed) \code{data.frame}
+#' with two columns.
+#'
+#' @param m \code{matrix} of (x; y) coordinates.
+#' @return \code{data.frame} with two columns.
+#' @examples
+#' data(wings)
+#' d <- d2m(wings[1])
+#' d
+#' m <- m2d(d)
+#' m
+#' @family bridges functions
+#' @export
+m2d <- function(m) {
+  .check(is.shp(m),
+         "matrix must be a shp")
+  data.frame(x=m[, 1], y=m[, 2])
+}
+
 #' Converts a list of coordinates to an array of coordinates
 #'
 #' l2a converts a list of \code{k} matrices with \code{m} rows
@@ -61,7 +105,6 @@ l2m <- function(l) {
 #' May be useful to communicate with other morphometrics packages that use
 #' array of coordinates when handling configurations of landmarks.
 #'
-#' @usage l2a(l)
 #' @param l \code{list} of matrices of the same dimension.
 #' @return an array of coordinates.
 #' @family bridges functions
@@ -92,7 +135,6 @@ l2a <- function(l) {
 #' May be useful to communicate with other morphometrics packages that use
 #' array of coordinates when handling configurations of landmarks.
 #'
-#' @usage a2l(a)
 #' @param a \code{array} of coordinates.
 #' @return \code{list} with 2-cols matrices of (x; y) coordinates.
 #' @examples
@@ -171,30 +213,11 @@ m2a <- function(m) {
     return(a)
 }
 
-#' Converts a matrix of coordinates to a data.frame
-#'
-#' Converts a \code{m x 2} matrix of coordinates named data.frame.
-#'
-#' @param m a matrix (see above).
-#' @return a data.frame (see above).
-#' @seealso \link{m2d} the reverse function.
-#' @examples
-#' data(wings)
-#' m2d(wings[3])
-#' @family bridges functions
-#' @export
-m2d <- function(m){
-  m <- coo_check(m)
-  df <- data.frame(x=m[, 1], y=m[, 2])
-  df
-}
-
 #' Converts a matrix of coordinates to a list of coordinates.
 #'
 #' Converts a matrix of (x; y) coordinates to a list with
 #' x and y components.
 #'
-#' @usage m2l(m)
 #' @param m a two-columns \code{matrix} of x and y coordinates.
 #' @return a \code{list} with x and y components.
 #' @seealso \link{l2m}.
@@ -299,7 +322,7 @@ as_df.TraCoe <- function(x){
   if (is.fac(x)) {
     return(dplyr::bind_cols(x$fac, df_coe))
   } else {
-    return(df_coe)
+return(df_coe)
   }
 }
 # adding a synonym
@@ -307,6 +330,8 @@ as.data.frame.TraCoe <- as_df
 
 #' @export
 as_df.PCA <- function(x){
+  if(is.null(rownames(x$x)))
+    rownames(x$x) <- 1:nrow(x$x)
   df <- dplyr::bind_cols(data.frame(.id=rownames(x$x)),
                   x$fac,
                   as.data.frame(x$x))

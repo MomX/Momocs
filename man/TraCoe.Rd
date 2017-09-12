@@ -22,4 +22,3 @@ data(iris)
 fl <- TraCoe(iris[, 1:4], data.frame(sp=iris$Species))
 fl \%>\% PCA() \%>\% plot("sp")
 }
-

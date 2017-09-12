@@ -54,4 +54,3 @@ All shapes will be centered to apply (the single or the different) scaling_facto
 This function is simple but quite complex to detail. Feel free to contact me should you have any
 problem with it. You can just access its code (type \code{rescale}) and reply it yourself.
 }
-

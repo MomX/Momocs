@@ -105,4 +105,3 @@ plot_CV2(opl)
 \seealso{
 \link{LDA}, \link{plot.LDA}, \link{plot_CV}.
 }
-

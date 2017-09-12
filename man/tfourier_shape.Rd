@@ -51,4 +51,3 @@ Springer 316 pp.
 Other tfourier: \code{\link{tfourier_i}},
   \code{\link{tfourier}}
 }
-

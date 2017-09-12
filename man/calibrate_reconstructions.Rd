@@ -41,4 +41,3 @@ Other calibration: \code{\link{calibrate_deviations}},
   \code{\link{calibrate_harmonicpower}},
   \code{\link{calibrate_r2}}
 }
-

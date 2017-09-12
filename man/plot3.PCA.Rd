@@ -29,4 +29,3 @@ plot3(bot.p) # no groups
 plot3(bot.p, 1) # groups
 plot3(bot.p, "type", pos.shp="circle") # all plot.PCA args should work
 }
-

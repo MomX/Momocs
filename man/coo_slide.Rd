@@ -46,6 +46,9 @@ replace=TRUE)
 stack(coo_slide(hearts, id1=id1_random))
 }
 \seealso{
+Other sliding functions: \code{\link{coo_slidedirection}},
+  \code{\link{coo_slidegap}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -74,8 +77,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other sliding functions: \code{\link{coo_slidedirection}},
-  \code{\link{coo_slidegap}}
 }
-

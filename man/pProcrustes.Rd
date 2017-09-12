@@ -31,4 +31,3 @@ Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 Other procrustes functions: \code{\link{fProcrustes}},
   \code{\link{fgProcrustes}}, \code{\link{fgsProcrustes}}
 }
-

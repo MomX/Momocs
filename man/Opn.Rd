@@ -48,4 +48,3 @@ plot(olda)
 \seealso{
 Other Coo objects: \code{\link{Coo}}, \code{\link{Out}}
 }
-

@@ -34,4 +34,3 @@ coo_oscillo(coo_smooth(shapes[4], 10), 'tfourier')
 \seealso{
 exemplifying functions
 }
-

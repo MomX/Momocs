@@ -33,4 +33,3 @@ analysis techniques for morphometrics. In \emph{Proceedings of the Michigan Morp
 \seealso{
 babel functions.
 }
-

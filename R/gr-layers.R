@@ -425,8 +425,8 @@
 }
 
 .wdw.gg <- function(gg){
-  c(diff(.x.range.gg(gg)),
-    diff(.y.range.gg(gg)))
+  c(diff(gg$layout$panel_scales_x[[1]]$range$range),
+    diff(gg$layout$panel_scales_y[[1]]$range$range))
 }
 
 

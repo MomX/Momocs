@@ -47,4 +47,3 @@ then ii) pass 'names(foo)' to lf_structure. See Momocs' vignette for an illustra
 \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 See also Momocs' vignettes for data import.
 }
-

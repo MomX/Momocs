@@ -39,4 +39,3 @@ plot(txp, 1)
 \seealso{
 Other premodern: \code{\link{measure}}
 }
-

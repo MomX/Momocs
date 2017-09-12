@@ -26,6 +26,8 @@ coo_plot(bot[1])
 coo_plot(coo_smooth(bot[1], 30))
 }
 \seealso{
+Other smoothing functions: \code{\link{coo_smoothcurve}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -54,7 +56,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other smoothing functions: \code{\link{coo_smoothcurve}}
 }
-

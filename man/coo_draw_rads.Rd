@@ -20,4 +20,3 @@ shp <- shapes[4] \%>\% coo_sample(24) \%T>\% coo_plot
 coo_draw_rads(shp, col=col_summer(24))
 
 }
-

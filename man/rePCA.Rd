@@ -36,4 +36,3 @@ plot(bp, eig=FALSE)
 points(wp$x[, 1:2], col="red", pch=4)
 
 }
-

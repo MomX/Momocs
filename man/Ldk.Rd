@@ -38,4 +38,3 @@ implementation of \code{$slidings} is inspired by \code{geomorph}
 #Methods on Ldk
 methods(class=Ldk)
 }
-

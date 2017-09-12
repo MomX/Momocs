@@ -2,9 +2,9 @@
 % Please edit documentation in R/mult-PCA.R
 \name{PCA}
 \alias{PCA}
-\alias{PCA.LdkCoe}
-\alias{PCA.OpnCoe}
 \alias{PCA.OutCoe}
+\alias{PCA.OpnCoe}
+\alias{PCA.LdkCoe}
 \alias{PCA.TraCoe}
 \alias{PCA.default}
 \alias{as.PCA}
@@ -92,4 +92,3 @@ Other multivariate: \code{\link{CLUST}},
   \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
   \code{\link{classification_metrics}}
 }
-

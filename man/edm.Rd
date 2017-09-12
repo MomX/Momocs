@@ -32,4 +32,3 @@ edm(x, x+1)
 \seealso{
 \link{ed}, \link{edm_nearest}, \link{dist}.
 }
-

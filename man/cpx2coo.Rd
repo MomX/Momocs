@@ -19,4 +19,10 @@ Converts complex to cartesian coordinates
 shapes[4] \%>\% coo_sample(24) \%>\% coo2cpx()
 shapes[4] \%>\% coo_sample(24) \%>\% coo2cpx() \%>\% cpx2coo()
 }
-
+\seealso{
+Other bridges functions: \code{\link{a2l}},
+  \code{\link{a2m}}, \code{\link{as_df}},
+  \code{\link{coo2cpx}}, \code{\link{d2m}},
+  \code{\link{l2a}}, \code{\link{l2m}}, \code{\link{m2a}},
+  \code{\link{m2d}}, \code{\link{m2ll}}, \code{\link{m2l}}
+}

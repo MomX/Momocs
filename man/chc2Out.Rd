@@ -66,4 +66,3 @@ Other babel functions: \code{\link{bind_db}},
   \code{\link{pix2chc}}, \code{\link{tie_jpg_txt}},
   \code{\link{tps2coo}}
 }
-

@@ -43,4 +43,3 @@ segments(bot.pairs$session1[, 1], bot.pairs$session1[, 2],
 
 
 }
-

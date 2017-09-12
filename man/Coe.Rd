@@ -74,4 +74,3 @@ wp$coe # Procrustes aligned coordinates
 Other Coe objects: \code{\link{OpnCoe}},
   \code{\link{OutCoe}}
 }
-

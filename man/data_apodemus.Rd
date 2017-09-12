@@ -22,4 +22,3 @@ Other datasets: \code{\link{bot}}, \code{\link{chaff}},
   \code{\link{shapes}}, \code{\link{trilo}},
   \code{\link{wings}}
 }
-

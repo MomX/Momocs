@@ -26,4 +26,3 @@ Other babel functions: \code{\link{bind_db}},
   \code{\link{nef2Coe}}, \code{\link{ntsrow2Coo}},
   \code{\link{pix2chc}}, \code{\link{tps2coo}}
 }
-

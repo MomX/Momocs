@@ -29,6 +29,8 @@ coo_draw(coo_sheary(coo, 0.5), border="red")
 
 }
 \seealso{
+Other transforming functions: \code{\link{coo_flipx}}
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -56,7 +58,4 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
-
-Other transforming functions: \code{\link{coo_flipx}}
 }
-

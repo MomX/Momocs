@@ -29,8 +29,8 @@ a
 \link{m2a} the reverse function.
 
 Other bridges functions: \code{\link{a2l}},
-  \code{\link{as_df}}, \code{\link{l2a}},
-  \code{\link{l2m}}, \code{\link{m2a}}, \code{\link{m2d}},
-  \code{\link{m2ll}}, \code{\link{m2l}}
+  \code{\link{as_df}}, \code{\link{coo2cpx}},
+  \code{\link{cpx2coo}}, \code{\link{d2m}},
+  \code{\link{l2a}}, \code{\link{l2m}}, \code{\link{m2a}},
+  \code{\link{m2d}}, \code{\link{m2ll}}, \code{\link{m2l}}
 }
-
