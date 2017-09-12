@@ -52,6 +52,10 @@ magrittr::`%T>%`
 #' Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 #' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
+#' @importFrom stats cor cov cov.wt df dist dnorm fft
+#' hclust kmeans lm manova median na.omit
+#' poly prcomp predict qf qnorm rnorm
+#' runif sd symnum terms var
 #' @import ape
 #' @importFrom plyr ldply ddply
 #' @import dplyr
@@ -71,11 +75,6 @@ magrittr::`%T>%`
 #' contour hist image layout legend lines locator
 #' par points polygon rasterImage rect rug
 #' segments strheight strwidth text title
-#' @importFrom stats cor cov cov.wt df dist dnorm fft
-#' hclust kmeans lm manova median na.omit
-#' poly prcomp predict qf qnorm rnorm
-#' runif sd symnum terms var
-
 #' @docType package
 #' @name Momocs
 NULL
