@@ -458,15 +458,23 @@ tps2coo <- function(tps, curves=TRUE){
   scale  <- NULL
   cur <- NULL
   # we read the nb of landmarks
-  coo.nb <- as.numeric(gsub("LM=", "", tps[1]))
+  # some tps files (for outlines?) have a special
+  # format with no LM= but POINTS=
+  gPOINTS <- grep("POINTS=", tps)
+  if (length(gPOINTS)>0){
+    coo.nb <- tps[gPOINTS] %>% gsub("POINTS=", "", .) %>% as.numeric()
+  } else {
+    coo.nb <- as.numeric(gsub("LM=", "", tps[1]))
+  }
   # we read "SCALE=", if any
   scale  <- as.numeric(gsub("SCALE=", "", grep("SCALE=", tps, value=TRUE)))
   # removes the first line "LM=" and, if any, "IMAGE=", "ID=" and "SCALE=" lines
-  rm.ids <- c(1, grep("IMAGE|ID|SCALE", tps))
+  rm.ids <- c(1, grep("IMAGE|ID|SCALE|OUTLINES|POINTS", tps))
   tps <- tps[-rm.ids]
   # this function turns lines of coordinates into a shp
   lines2shp <- function(l) {
-    l %>% strsplit(" ") %>% unlist() %>% as.numeric() %>%
+    l %>% strsplit(" ") %>% unlist() %>%
+      as.numeric() %>%
       matrix(nrow=length(l), byrow=TRUE)
   }
   # here we extract coos and check a bit
