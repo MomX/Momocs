@@ -5,6 +5,21 @@
 
 \encoding{UTF-8}
 
+\section{Changes in version 1.2.2}{
+  \itemize{
+    \item MANOVA_PW now returns p-values
+    \item new datasets: nsfishes
+    \item minor debugging, see GitHub
+  }
+}
+
+\section{Changes in version 1.2.1}{
+  \itemize{
+    \item some testing with testthat
+    \item minor debugging, see GitHub
+  }
+}
+
 \section{Changes in version 1.1.6}{
   \itemize{
     \item sfourier family implementation

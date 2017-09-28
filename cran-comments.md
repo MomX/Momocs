@@ -1,7 +1,7 @@
 ## Test environments
-* local OS X 10.10.5 install, R 3.3.2
-* ubuntu (on travis-ci), R 3.3.2
-* win-builder (release)
+* local OS X 10.12.6 install, R 3.4.1
+* ubuntu (on travis-ci), R 3.4.1
+* win-builder (devtools::release)
 
 ## R CMD check results
 ```
