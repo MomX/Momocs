@@ -18,7 +18,7 @@ Other datasets: \code{\link{apodemus}}, \code{\link{bot}},
   \code{\link{chaff}}, \code{\link{charring}},
   \code{\link{flower}}, \code{\link{hearts}},
   \code{\link{molars}}, \code{\link{mosquito}},
-  \code{\link{mouse}}, \code{\link{olea}},
-  \code{\link{shapes}}, \code{\link{trilo}},
-  \code{\link{wings}}
+  \code{\link{mouse}}, \code{\link{nsfishes}},
+  \code{\link{olea}}, \code{\link{shapes}},
+  \code{\link{trilo}}, \code{\link{wings}}
 }

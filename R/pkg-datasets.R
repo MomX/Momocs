@@ -185,3 +185,14 @@ NULL
 #' \url{http://onlinelibrary.wiley.com/doi/10.1046/j.1365-2699.2003.00932.x/full}
 #' @family datasets
 NULL
+
+#' Data: Outline coordinates of North Sea fishes
+#'
+#' @docType data
+#' @name nsfishes
+#' @rdname data_nsfishes
+#' @format A \link{Out} object containing the outlines coordinates for 218 fishes from
+#' the North Sea along with taxonomical cofactors.
+#' @source Caillon F, Frelat R, Mollmann C, Bonhomme V (in prep.)
+#' @family datasets
+NULL
