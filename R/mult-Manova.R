@@ -316,13 +316,14 @@ MANOVA_PW.PCA <- function(x,
   stars <- as.character(stars)
   nl <- nlevels(fac)
   # bloody ugly
-  stars.tab <- matrix(NA, nrow = nl - 1, ncol = nl,
+  pvalue.tab <- stars.tab <- matrix(NA, nrow = nl - 1, ncol = nl,
                       dimnames = list(levels(fac)[-nl], levels(fac)))
   stars.tab <- as.table(stars.tab)
   k <- 1
   for (i in 1:(nl - 1)) {
     for (j in (i + 1):nl) {
       stars.tab[i, j] <- stars[k]
+      pvalue.tab[i, j] <- res[, 6][k]
       k <- k + 1
     }
   }
@@ -330,7 +331,8 @@ MANOVA_PW.PCA <- function(x,
   print(stars.tab)
   cat("\n$summary (see also $manovas)\n")
   print(res, digits=4)
-  invisible(list(manovas = manovas, summary = res, stars.tab = stars.tab))
+  invisible(list(manovas = manovas, summary = res,
+                 stars.tab = stars.tab, pvalue.tab = pvalue.tab))
 }
 
 # #' @rdname MANOVA_PW
