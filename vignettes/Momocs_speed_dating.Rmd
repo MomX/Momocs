@@ -32,7 +32,7 @@ In the last decade, R has become the open-source _lingua franca_ for statistics,
 
 By gathering the common morphometric approaches in an open-source environment and welcoming contributions, Momocs is an attempt to solve this twofold problem.
 
-Momocs hinges on the core functions published in the must-have _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/macroevolution-et-developpement/personnel/claude-julien/) (2008), but has been further extended to allow other shape description systems. So far, configurations of landmarks, outlines and open outline analyses, along with some facilities for traditional morphometrics are implemented.
+Momocs hinges on the core functions published in the must-have _[Morphometrics with R](http://www.springer.com/us/book/9780387777894)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/macroevolution-et-developpement/personnel/claude-julien/) (2008), but has been further extended to allow other shape description systems. So far, configurations of landmarks, outlines and open outline analyses, along with some facilities for traditional morphometrics are implemented.
 
 Prior to analysis, Momocs can be used to acquire and manipulate data or to import/export from/to other formats. Momocs also has the facility for a wide range of multivariate analyses and production of the companion graphics. Thus a researcher will find that just a few lines of code will provide initial results, but the methods implemented can be finely tuned and extended according to the user's needs.
 
