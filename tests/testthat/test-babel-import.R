@@ -41,3 +41,12 @@ test_that("import_tps works fine",{
   expect_true(x$scale %>% is.list)
   expect_true(x$scale %>% sapply(is.numeric) %>% all)
 })
+
+# expect_that("bind_db works fine", {
+#   df <- data.frame(foo_id=40:1,
+#                    fake1=rnorm(40),
+#                    fake2=factor(rep(letters[1:4], 10)))
+#   bot <- mutate(bot, hello=1:length(bot))
+#   x <- bind_db(bot, "hello", df, "foo_id")
+#   expect_true(ncol(x$fac)==4)
+# })
