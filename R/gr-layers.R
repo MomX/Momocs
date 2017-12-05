@@ -2,17 +2,30 @@
 
 # create an empty frame
 #' @export
-.frame <- function(xy, center.origin = FALSE, zoom = 1, bg="white") {
+.frame <- function(xy, xlim=NULL, ylim=NULL, center.origin = FALSE, zoom = 1, bg="white") {
   op <- par(bg=bg)
   on.exit(par(op))
-  if (center.origin) {
-    w <- (1/zoom) * max(abs(xy))
-    plot(NA, xlim = c(-w, w), ylim = c(-w, w), asp = 1, axes = FALSE,
-         frame = FALSE)
+
+  if (!is.null(xlim) | !is.null(xlim)){
+    if (is.null(xlim)){
+      plot(NA, ylim=ylim, asp=1, axes = FALSE, frame = FALSE)
+    }
+    if (is.null(ylim)){
+      plot(NA, xlim=xlim, asp=1, axes = FALSE, frame = FALSE)
+    }
+    if (!is.null(xlim) & !is.null(xlim)){
+      plot(NA, xlim=xlim, ylim=ylim, asp=1, axes = FALSE, frame = FALSE)
+    }
   } else {
-    w <- (1/zoom) * apply(abs(xy), 2, max)
-    plot(xy, xlim = c(-w[1], w[1]), ylim = c(-w[2], w[2]),
-         type = "n", asp = 1, axes = FALSE, frame = FALSE)
+    if (center.origin) {
+      w <- (1/zoom) * max(abs(xy))
+      plot(NA, xlim = c(-w, w), ylim = c(-w, w), asp = 1, axes = FALSE,
+           frame = FALSE)
+    } else {
+      w <- (1/zoom) * apply(abs(xy), 2, max)
+      plot(xy, xlim = c(-w[1], w[1]), ylim = c(-w[2], w[2]),
+           type = "n", asp = 1, axes = FALSE, frame = FALSE)
+    }
   }
 }
 

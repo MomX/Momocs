@@ -17,6 +17,8 @@
 #' @param palette a \link{palette}
 #' @param center.origin logical whether to center the plot onto the origin
 #' @param zoom to keep your distances
+#' @param xlim numeric of length two ; if provided along with ylim, the x and y lims to use
+#' @param ylim numeric of length two ; if provided along with xlim, the x and y lims to use
 #' @param bg color for the background
 #' @param grid logical whether to draw a grid
 #' @param nb.grids and how many of them
@@ -93,7 +95,7 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
                      #points arguments
                      points=TRUE, col="#000000", pch=20, cex=0.5, palette=col_solarized,
                      #.frame
-                     center.origin=FALSE, zoom=1, bg=par("bg"),
+                     center.origin=FALSE, zoom=1, xlim=NULL, ylim=NULL, bg=par("bg"),
                      #.grid
                      grid=TRUE, nb.grids=3,
                      #shapes
@@ -242,7 +244,7 @@ if (nlevels(fac) <= 2){
   if (old.par) on.exit(par(opar))
   par(mar = rep(0.1, 4)) #0.1
   # we initate it
-  .frame(xy, center.origin, zoom=zoom, bg=bg)
+  .frame(xy, xlim=xlim, ylim=ylim, center.origin, zoom=zoom, bg=bg)
   if (grid)     .grid(nb.grids)
 
   # if numeric fac, we add the (cheap) legend
