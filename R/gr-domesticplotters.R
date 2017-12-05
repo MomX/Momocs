@@ -108,8 +108,8 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
       points(coo, pch = pch, cex = cex, col = border)
     }
     if (first.point) {
-        angle <- atan2(coo[2, 2] - coo[1, 2], coo[2, 1] - coo[1, 1]) * (180 / pi) - 90
-        text(coo[1, 1], coo[1, 2], labels = "^", cex=0.5, srt=angle)
+      angle <- atan2(coo[2, 2] - coo[1, 2], coo[2, 1] - coo[1, 1]) * (180 / pi) - 90
+      text(coo[1, 1], coo[1, 2], labels = "^", cex=0.5, srt=angle)
     }
     if (centroid) {
       cent <- coo_centpos(coo)
@@ -247,7 +247,7 @@ coo_arrows <- function(coo1, coo2,
 #' @family plotting functions
 #' @export
 coo_ruban <- function(coo, dev,
-                     palette=col_heat, normalize=TRUE, ...){
+                      palette=col_heat, normalize=TRUE, ...){
   if (nrow(coo) != length(dev))
     stop("'coo' and 'dev' must have the same number of rows")
   if(normalize) dev <- .normalize(dev)
@@ -289,8 +289,8 @@ coo_ruban <- function(coo, dev,
 #' @family plotting functions
 #' @export
 coo_listpanel <- function(coo.list, dim, byrow = TRUE, fromtop = TRUE,
-                           cols, borders, poly = TRUE,
-                           points = FALSE, points.pch = 3, points.cex = 0.2, points.col = "#333333", ...) {
+                          cols, borders, poly = TRUE,
+                          points = FALSE, points.pch = 3, points.cex = 0.2, points.col = "#333333", ...) {
   coo.list <- lapply(coo.list, coo_check)
   # if dim is missing, we define a square
   n <- length(coo.list)
@@ -701,7 +701,7 @@ Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 #     # Make each plot, in the correct location
 #     for (i in 1:numPlots) {
 #       # Get the i,j matrix positions of the regions that contain this subplot
-#       matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+#       matchidx <- as.dataa.frame(which(layout == i, arr.ind = TRUE))
 #
 #       print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
 #                                       layout.pos.col = matchidx$col))
@@ -719,9 +719,11 @@ Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 #' @param coo A list or a matrix of coordinates.
 #' @param method character among \code{c('efourier', 'rfourier', 'tfourier', 'all')}.
 #' \code{'all'} by default
+#' @param shape \code{logical} whether to plot the original shape
 #' @param nb.pts \code{integer}. The number or reference points, sampled
 #' equidistantly along the curvilinear abscissa and added on the oscillo
 #' curves.
+#' @return the plotted values
 #' @examples
 #' data(shapes)
 #' coo_oscillo(shapes[4])
@@ -732,35 +734,39 @@ Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 #' coo_oscillo(coo_smooth(shapes[4], 10), 'tfourier')
 #' @seealso exemplifying functions
 #' @export
-coo_oscillo <- function(coo, method = c("efourier", "rfourier",
-                                        "tfourier", "all")[4], nb.pts = 24) {
+coo_oscillo <- function(coo,
+                        method = c("efourier", "rfourier", "tfourier", "all")[4],
+                        shape = TRUE,
+                        nb.pts = 12) {
   # we preapre a couple of things for coming graphics
   labels <- 1:nb.pts
-  sampled <- round(seq(1, nrow(coo), len = nb.pts + 1)[-(nb.pts +
-                                                           1)])
+  sampled <- round(seq(1, nrow(coo), len = nb.pts + 1)[-(nb.pts + 1)])
   coo_lite <- coo[sampled, ]  # equivalent to coo_sample
   # we define a layout
   if (method == "all") {
     layout(matrix(1:4, ncol = 2, byrow = TRUE))
   } else {
-    layout(matrix(1:2, ncol = 2, byrow = TRUE))
+    if (shape)
+      layout(matrix(1:2, ncol = 2, byrow = TRUE))
   }
 
   # the original shape
-  coo_plot(coo, first.point = FALSE)
-  text(coo_lite, labels = labels, cex = 0.7, font = 2)
+  if (shape & method != "all") {
+    coo_plot(coo, first.point = FALSE)
+    text(coo_lite, labels = labels, cex = 0.7, font = 2)
+  }
 
   if (any(method == c("all", "efourier"))) {
     # efourier
-    dxy <- coo_dxy(coo)
-    plot(NA, xlim = c(1, nrow(coo)), ylim = c(range(unlist(dxy))),
+    d <- coo_dxy(coo)
+    plot(NA, xlim = c(1, nrow(coo)), ylim = c(range(unlist(d))),
          main = "Elliptical analysis", xlab = "Points along the outline",
-         ylab = "Deviation from the first point (pixels)")
-    lines(dxy$dx, col = "red")
-    text(sampled, dxy$dx[sampled], labels = labels, col = "red",
+         ylab = "Deviation from the first point")
+    lines(d$dx, col = "red")
+    text(sampled, d$dx[sampled], labels = labels, col = "red",
          cex = 0.7, font = 2)
-    lines(dxy$dy, col = "blue")
-    text(sampled, dxy$dy[sampled], labels = labels, col = "blue",
+    lines(d$dy, col = "blue")
+    text(sampled, d$dy[sampled], labels = labels, col = "blue",
          cex = 0.7, font = 2)
     legend("bottomright", legend = c(expression(x[i] - x[0]),
                                      expression(y[i] - y[0])), col = c("red", "blue"),
@@ -770,26 +776,27 @@ coo_oscillo <- function(coo, method = c("efourier", "rfourier",
 
   if (any(method == c("all", "rfourier"))) {
     # rfourier
-    dr <- coo_centdist(coo)
-    plot(NA, xlim = c(1, nrow(coo)), ylim = range(dr), main = "Radius variation",
+    d <- coo_centdist(coo)
+    plot(NA, xlim = c(1, nrow(coo)), ylim = range(d), main = "Radius variation",
          xlab = "Points along the outline", ylab = "Radius length (pixels)")
-    lines(dr, col = "black")
-    text(sampled, dr[sampled], labels = labels, col = "black",
+    lines(d, col = "black")
+    text(sampled, d[sampled], labels = labels, col = "black",
          cex = 0.7, font = 2)
   }
   # tfourier
   if (any(method == c("all", "tfourier"))) {
-    dt <- coo_tangle(coo)
-    plot(NA, xlim = c(1, nrow(coo)), ylim = range(dt), main = "Tangent angle",
+    d <- coo_tangle(coo)
+    plot(NA, xlim = c(1, nrow(coo)), ylim = range(d), main = "Tangent angle",
          xlab = "Points along the outline", ylab = "Tangent angle (radians)")
-    # lines((1:nrow(coo))[sampled], dt[sampled], lty=2,
+    # lines((1:nrow(coo))[sampled], d[sampled], lty=2,
     # col='black')
-    lines(dt, col = "black")
-    text(sampled, dt[sampled], labels = labels, col = "black",
+    lines(d, col = "black")
+    text(sampled, d[sampled], labels = labels, col = "black",
          cex = 0.7, font = 2)
   }
   # we restore the layout
   layout(matrix(1))
+  return(d)
 }
 
 #' Ptolemaic ellipses and illustration of efourier
