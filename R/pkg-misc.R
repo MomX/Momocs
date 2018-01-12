@@ -230,7 +230,7 @@ edm_nearest <- function(m1, m2, full = FALSE) {
 #' on \link{Ldk} for detecting possible outliers on freshly digitized/imported datasets.
 #'
 #' @param x object, either Coe or a numeric on which to search for outliers
-#' @param conf confidence for dnorm
+#' @param conf confidence for dnorm (1e-3 by default)
 #' @param nax number of axes to retain (only for Coe),
 #' if <1 retain enough axes to retain this proportion of the variance
 #' @param ... additional parameters to be passed to PCA (only for Coe)
@@ -252,6 +252,24 @@ edm_nearest <- function(m1, m2, full = FALSE) {
 #' w_no$coo[[6]][2, 2] <- 2
 #' which_out(w_ok, conf=1e-12) # with low conf, no outliers
 #' which_out(w_no, conf=1e-12) # as expected
+#'
+#' # a way to illustrate, filter outliers
+#' # conf has been chosen deliberately low to show some outliers
+#'x_f <- bot %>% efourier
+#'x_p <- PCA(x_f)
+#'# which are outliers (conf is ridiculously low here)
+#'which_out(x_p$x[, 1], 0.5)
+#'cols <- rep("black", nrow(x_p$x))
+#'outliers <- which_out(x_p$x[, 1], 0.5)
+#'cols[outliers] <- "red"
+#'plot(x_p, col=cols)
+#'# remove them for Coe, rePCA, replot
+#'x_f %>% slice(-outliers) %>% PCA %>% plot
+#'
+#'# or directly with which_out.Coe
+#'# which relies on a PCA
+#'outliers <- x_f %>% which_out(0.5, nax=0.95) %>% na.omit()
+#'x_f %>% slice(-outliers) %>% PCA %>% plot
 #' @export
 which_out <- function(x, conf, nax, ...){
   UseMethod("which_out")
@@ -269,14 +287,16 @@ which_out.default <- function(x, conf=1e-3, ...){
 #' @export
 which_out.Coe <- function(x, conf=1e-3, nax=0.99, ...){
   p <- PCA(x, ...)
-  if (length(nax)==1)
+  if (length(nax)==1){
     if (nax < 1)
       nax <- scree_min(p, nax)
+  }
     m <- p$x[, 1:nax]
     m <- matrix(m, ncol=nax)
     outliers <- apply(m, 2, which_out, conf=conf)
     outliers <- unlist(outliers)
-    return(unique(as.numeric(outliers)))
+    outliers %>% as.numeric %>%
+      na.omit %>% unique %>% return()
 }
 
 #' @export
