@@ -447,7 +447,13 @@ sample_frac.Coe <- sample_frac.Coo
 #' @return a named list of \code{Coo} or \code{Coe} objects
 #' @family handling functions
 #' @examples
-#' data(bot)
+#' #' olea %>%
+#'       filter(var == "Aglan") %>% # to have a balanced nb of 'view'
+#'       chop(view) %>%    # split into a list of 2
+#'       lapply(npoly) %>% # separately apply npoly
+#'       combine %>%       # recombine
+#'       PCA %>% plot      # an illustration of the 2 views
+#'       # treated separately
 #' @export
 chop <- function(.data, fac){
   UseMethod("chop")
