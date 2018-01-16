@@ -447,7 +447,7 @@ sample_frac.Coe <- sample_frac.Coo
 #' @return a named list of \code{Coo} or \code{Coe} objects
 #' @family handling functions
 #' @examples
-#' #' olea %>%
+#'  olea %>%
 #'       filter(var == "Aglan") %>% # to have a balanced nb of 'view'
 #'       chop(view) %>%    # split into a list of 2
 #'       lapply(npoly) %>% # separately apply npoly
