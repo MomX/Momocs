@@ -50,7 +50,7 @@ magrittr::`%T>%`
 #' We are very grateful to (in alphabetical order): Sean Asselin, Laurent Bouby, Matt Bulbert, Simon Crameri, Julia Cooke, April Dinwiddie,
 #' Carl Lipo, Cedric Gaucherel, Catherine Girard, Christian Steven Hoggard,
 #' Sarah Ivorra, Glynis Jones, Nathalie Keller, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
-#' Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
+#' Matthías Macé, Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 #' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 #' @import ape
