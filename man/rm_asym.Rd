@@ -67,5 +67,5 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
 }
 }
 \seealso{
-\link{symmetry}.
+\link{symmetry} and the note there.
 }

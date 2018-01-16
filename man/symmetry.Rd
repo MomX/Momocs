@@ -19,6 +19,15 @@ harmonic coefficients A and D; \code{BC} same thing for B and C; \code{amp} the
 sum of the absolute value of all harmonic coefficients and \code{sym} which is the ratio
 of \code{AD} over \code{amp}. See references below for more details.
 }
+\note{
+What we call symmetry here is bilateral symmetry.
+By comparing coefficients resulting from \link{efourier},
+with AD responsible for amplitude of the Fourier functions,
+ and BC for their phase, it results in the plane and for
+ fitted/reconstructed shapes that symmetry. As long as your shapes are
+  aligned along their bilateral symmetry axis, you can use the approach
+  coined by Iwata et al., and here implemented in Momocs.
+}
 \examples{
 data(bot)
 bot.f <- efourier(bot, 12)
