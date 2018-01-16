@@ -1,7 +1,4 @@
 # ready -------
-rm(list=ls())
-devtools::load_all("~/Research/Momocs")
-
 
 #' Tests the accuracy of LDAs as a function of the number of classes
 #'
