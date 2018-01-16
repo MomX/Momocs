@@ -9,7 +9,7 @@ which_out(x, conf, nax, ...)
 \arguments{
 \item{x}{object, either Coe or a numeric on which to search for outliers}
 
-\item{conf}{confidence for dnorm}
+\item{conf}{confidence for dnorm (1e-3 by default)}
 
 \item{nax}{number of axes to retain (only for Coe),
 if <1 retain enough axes to retain this proportion of the variance}
@@ -41,4 +41,22 @@ w_no$coo[[2]][1, 1] <- 2
 w_no$coo[[6]][2, 2] <- 2
 which_out(w_ok, conf=1e-12) # with low conf, no outliers
 which_out(w_no, conf=1e-12) # as expected
+
+# a way to illustrate, filter outliers
+# conf has been chosen deliberately low to show some outliers
+x_f <- bot \%>\% efourier
+x_p <- PCA(x_f)
+# which are outliers (conf is ridiculously low here)
+which_out(x_p$x[, 1], 0.5)
+cols <- rep("black", nrow(x_p$x))
+outliers <- which_out(x_p$x[, 1], 0.5)
+cols[outliers] <- "red"
+plot(x_p, col=cols)
+# remove them for Coe, rePCA, replot
+x_f \%>\% slice(-outliers) \%>\% PCA \%>\% plot
+
+# or directly with which_out.Coe
+# which relies on a PCA
+outliers <- x_f \%>\% which_out(0.5, nax=0.95) \%>\% na.omit()
+x_f \%>\% slice(-outliers) \%>\% PCA \%>\% plot
 }
