@@ -6,11 +6,11 @@
 \usage{
 \method{plot}{PCA}(x, fac, xax = 1, yax = 2, points = TRUE,
   col = "#000000", pch = 20, cex = 0.5, palette = col_solarized,
-  center.origin = FALSE, zoom = 1, bg = par("bg"), grid = TRUE,
-  nb.grids = 3, morphospace = TRUE, pos.shp = c("range", "full", "circle",
-  "xy", "range_axes", "full_axes")[1], amp.shp = 1, size.shp = 1,
-  nb.shp = 12, nr.shp = 6, nc.shp = 5, rotate.shp = 0,
-  flipx.shp = FALSE, flipy.shp = FALSE, pts.shp = 60,
+  center.origin = FALSE, zoom = 1, xlim = NULL, ylim = NULL,
+  bg = par("bg"), grid = TRUE, nb.grids = 3, morphospace = TRUE,
+  pos.shp = c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
+  amp.shp = 1, size.shp = 1, nb.shp = 12, nr.shp = 6, nc.shp = 5,
+  rotate.shp = 0, flipx.shp = FALSE, flipy.shp = FALSE, pts.shp = 60,
   border.shp = col_alpha("#000000", 0.5), lwd.shp = 1,
   col.shp = col_alpha("#000000", 0.95), stars = FALSE, ellipses = FALSE,
   conf.ellipses = 0.5, ellipsesax = FALSE, conf.ellipsesax = c(0.5, 0.9),
@@ -51,6 +51,10 @@ or for every individual, see examples)}
 \item{center.origin}{logical whether to center the plot onto the origin}
 
 \item{zoom}{to keep your distances}
+
+\item{xlim}{numeric of length two ; if provided along with ylim, the x and y lims to use}
+
+\item{ylim}{numeric of length two ; if provided along with xlim, the x and y lims to use}
 
 \item{bg}{color for the background}
 
