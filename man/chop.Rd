@@ -20,7 +20,13 @@ ie a column name from the \code{$fac} on Momocs classes.
 Returns a named (after every level) list that can be lapply-ed and combined. See examples.
 }
 \examples{
-data(bot)
+#' olea \%>\%
+      filter(var == "Aglan") \%>\% # to have a balanced nb of 'view'
+      chop(view) \%>\%    # split into a list of 2
+      lapply(npoly) \%>\% # separately apply npoly
+      combine \%>\%       # recombine
+      PCA \%>\% plot      # an illustration of the 2 views
+      # treated separately
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},
