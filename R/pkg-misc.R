@@ -734,6 +734,30 @@ is.fac <- function(x) length(x$fac) > 0
   }
 }
 
-
-
+# handles fac grabbing via formula or $fac column name
+.fac_dispatcher <- function(x, fac){
+  # factor case
+  if (is.factor(fac))
+    return(fac)
+  # formula case
+  if (class(fac) == "formula") {
+    column_name <- attr(terms(fac), "term.labels")
+    if (any(is.na(match(column_name, colnames(x$fac)))))
+      stop("formula provided must match with $fac column names")
+    fac <- x$fac[, column_name]
+    if (is.data.frame(fac))
+      fac <- factor(apply(fac, 1, paste, collapse = "_"))
+  }
+  # column case
+  if (length(fac) == 1) {
+    if (!(fac %in% colnames(fac)))
+        stop("invalid column name")
+    fac <- x$fac[, fac]
+  }
+  return(fac)
+}
+# .fac_dispatcher(bot, "bot") # expect invalid
+# .fac_dispatcher(bot, 1)
+# .fac_dispatcher(bot, "type")
+# .fac_dispatcher(bot, ~type)
 ##### End Miscellaneous
