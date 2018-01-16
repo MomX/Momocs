@@ -5,7 +5,7 @@
 \title{Momocs' 'oscilloscope' for Fourier-based approaches}
 \usage{
 coo_oscillo(coo, method = c("efourier", "rfourier", "tfourier", "all")[4],
-  nb.pts = 24)
+  shape = TRUE, nb.pts = 12)
 }
 \arguments{
 \item{coo}{A list or a matrix of coordinates.}
@@ -13,9 +13,14 @@ coo_oscillo(coo, method = c("efourier", "rfourier", "tfourier", "all")[4],
 \item{method}{character among \code{c('efourier', 'rfourier', 'tfourier', 'all')}.
 \code{'all'} by default}
 
+\item{shape}{\code{logical} whether to plot the original shape}
+
 \item{nb.pts}{\code{integer}. The number or reference points, sampled
 equidistantly along the curvilinear abscissa and added on the oscillo
 curves.}
+}
+\value{
+the plotted values
 }
 \description{
 Shape analysis deals with curve fitting, whether \eqn{x(t)} and \eqn{y(t)}
