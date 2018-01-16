@@ -37,7 +37,7 @@ LDA_accuracy_vs_nbOfClasses <- function(x,
          "only works on Coe objects")
 
   # levels of fac, where to sample
-  levs <- levels(x$fac[, fac])
+  levs <- levels(factor(x$fac[, fac]))
 
   # if 'range' is provided
   if (length(nbOfClasses)==1 && nbOfClasses=="range")
@@ -59,14 +59,27 @@ LDA_accuracy_vs_nbOfClasses <- function(x,
   # loop along all nbOfClasses, and sample some levels, filter the Coe,
   # PCA and LDA. accuracy only is saved.
   for (i in seq_along(nbOfClasses)){
-    res1 <- replicate(replicates_per_nbOfClasses, {
+    # no idea why below doest work
+    # res1 <- replicate(replicates_per_nbOfClasses, {
+    #   levs1 <- sample(levs, size = nbOfClasses[i], replace=FALSE)
+    #   x %>%
+    #     subset(x$fac[, fac] %in% levs1) %>%
+    #     PCA %>%
+    #     LDA(fac, verbose=FALSE, ...) %$%
+    #     CV.correct })
+    # good old while
+    k<-0
+    while (k < replicates_per_nbOfClasses){
       levs1 <- sample(levs, size = nbOfClasses[i], replace=FALSE)
-      x %>%
-        subset(x$fac[, fac] %in% levs1) %>%
-        PCA %>%
-        LDA(fac, verbose=FALSE, ...) %$%
-        CV.correct })
-    res <- append(res, res1)
+      res <- c(res,
+               x %>%
+                 subset(x$fac[, fac] %in% levs1) %>%
+                 PCA %>%
+                 LDA(fac, verbose=FALSE, ...) %$%
+                 CV.correct)
+      k <- k+1
+      cat(".")
+    }
   }
   # combines results into a data.frame
   df <- dplyr::data_frame(nbOfClasses=rep(nbOfClasses, each=replicates_per_nbOfClasses),
@@ -80,3 +93,30 @@ LDA_accuracy_vs_nbOfClasses <- function(x,
     return(df)
   }
 }
+
+#######
+
+
+#' Calculates the LDA accuracy expected when reshuffling groups
+#'
+#' Given a \code{Coe} object and a factor to use with \code{LDA}, one
+#' obtains an accuracy (ie \code{$CV.correct} on the resulting object).$
+#' To judge how good it is, it may be useful to compare it to the accuracies
+#' obtained using permutations. This function shuffles the factor of interest,
+#' and calculate the distribution of the accuracy under this null hypothesis.
+#' It may take long to calculate but may hel provide a more realistic information than
+#' the rough comparison of obtained accuracy with \code{1/number_of_classes}.
+LDA_null_accuracy <- function(x, fac, replicates=10, ...){
+  obs <- x %>% PCA %>% LDA(fac, verbose=FALSE, ...) %$% CV.correct
+
+  f0 <- .fac_dispatcher(x, fac)
+  null <- vector("numeric", replicates)
+
+  for (i in 1:replicates){
+    null[i] <- x %>% PCA %>% LDA(factor(sample(f0)), verbose=FALSE, ...) %$% CV.correct
+    cat(".")
+  }
+  list(null=null, obs=obs)
+}
+
+a <- x %>% LDA_null_accuracy("var", replicates = 5)
