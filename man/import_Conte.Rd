@@ -21,6 +21,10 @@ and a point form where to start the algorithm, returns the (x; y) coordinates of
 \details{
 Used internally by \link{import_jpg1} but may be useful for other purposes.
 }
+\note{
+If you have an image with more than a single shape, then
+you may want to try `imager::highlight` function. Momocs may use this at some point.
+}
 \references{
 \itemize{
 \item The original algorithm is due to: Pavlidis, T. (1982). \emph{Algorithms

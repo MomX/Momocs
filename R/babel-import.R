@@ -59,6 +59,9 @@ import_txt <- function(txt.paths = .lf.auto(), verbose=FALSE, ...) {
 #' analysis techniques for morphometrics. In \emph{Proceedings of the Michigan Morphometrics Workshop}. Special Publication No. 2 (pp. 47-60). University of Michigan Museum of Zoology: Ann Arbor.
 #' \item and translated in R by: Claude, J. (2008). \emph{Morphometrics with R}. (p. 316). Springer.
 #' }
+#'
+#' @note If you have an image with more than a single shape, then
+#' you may want to try `imager::highlight` function. Momocs may use this at some point.
 #' @seealso babel functions.
 #' @export
 import_Conte <- function(img, x) {
