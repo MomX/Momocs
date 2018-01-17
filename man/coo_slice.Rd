@@ -31,6 +31,26 @@ panel(Opn(sh))
 # makes no sense if shapes are not normalized first
 sh2 <- coo_slice(hearts, c(12, 24, 36, 48))
 panel(sh2[[1]])
+
+# Use coo_slice with `ldk` instead:
+# hearts as an example
+x <- hearts \%>\% fgProcrustes()
+# 4 landmarks
+stack(x)
+x$ldk[1:5]
+
+# here we slice
+y <- coo_slice(x, ldk=1:4)
+
+# plotting
+stack(y[[1]])
+stack(y[[2]])
+
+# domestic operations
+y[[3]] \%>\% coo_area()
+# shape analysis of a slice
+y[[1]] \%>\% coo_bookstein() \%>\% npoly \%>\% PCA \%>\% plot(~aut)
+
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
