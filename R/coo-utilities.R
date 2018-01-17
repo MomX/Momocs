@@ -502,6 +502,8 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' slices returned as a list
 #' @inheritParams coo_check
 #' @param ids \code{numeric} of length >= 2, where to slice the shape(s)
+#' @param ldk \code{numeric} the id of the ldk to use as id1, only on \code{Out}.
+#' If provided, \code{ids} will be ignored.
 #' @return a list of shapes or a list of \link{Opn}
 #' @examples
 #' # single shape, a list of matrices is returned
@@ -515,12 +517,12 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' @family slicing functions
 #' @family coo_ utilities
 #' @export
-coo_slice <- function(coo, ids){
+coo_slice <- function(coo, ids, ldk){
   UseMethod("coo_slice")
 }
 
 #' @export
-coo_slice.default <- function(coo, ids){
+coo_slice.default <- function(coo, ids, ldk){
   n <- length(ids)
   if (n<=1)
     stop("'ids' must contain at least 2 ids")
@@ -538,7 +540,7 @@ coo_slice.default <- function(coo, ids){
 }
 
 #' @export
-coo_slice.Coo <- function(coo, ids){
+coo_slice.Opn <- function(coo, ids){
   .check(all(coo_nb(coo) > max(ids)),
          " * max(ids) must be lower than any number of coordinates")
   RES <- vector("list", length(ids))
@@ -548,7 +550,55 @@ coo_slice.Coo <- function(coo, ids){
       RES[[j]][[i]] <- res[[j]]
     }
   }
-  return(lapply(RES, Opn))
+  return(lapply(RES, Opn, fac=coo$fac))
+}
+
+#' @export
+coo_slice.Ldk <- function(coo, ids){
+  .check(all(coo_nb(coo) > max(ids)),
+         " * max(ids) must be lower than any number of coordinates")
+  RES <- vector("list", length(ids))
+  for (i in seq_along(coo)){
+    res <- coo_slice(coo$coo[[i]], ids)
+    for (j in seq_along(ids)){
+      RES[[j]][[i]] <- res[[j]]
+    }
+  }
+  return(lapply(RES, Ldk, fac=coo$fac))
+}
+
+#' @export
+coo_slice.Out <- function(coo, ids, ldk){
+  # ldk case
+  if (!missing(ldk)){
+    n_ldk <- unique(sapply(coo$ldk, length))
+    .check(length(n_ldk == 1),
+           " * $ldk number must be homegeneous")
+    .check(length(ldk)<=n_ldk,
+           " * ldk must be <= the number of $ldk")
+
+    RES <- vector("list", length(ldk))
+    for (i in seq_along(coo)){
+      res <- coo_slice(coo$coo[[i]], coo$ldk[[i]][ldk])
+      for (j in seq_along(ldk)){
+        RES[[j]][[i]] <- res[[j]]
+      }
+    }
+  } else { # coo case
+    # some checks
+    .check(all(coo_nb(coo) > max(ids)),
+           " * max(ids) must be lower than any number of coordinates")
+
+    RES <- vector("list", length(ids))
+
+    for (i in seq_along(coo)){
+      res <- coo_slice(coo$coo[[i]], ids)
+      for (j in seq_along(ids)){
+        RES[[j]][[i]] <- res[[j]]
+      }
+    }
+  }
+  return(lapply(RES, Opn, fac=coo$fac))
 }
 
 ###TODO: coo_slice_direction

@@ -4,12 +4,15 @@
 \alias{coo_slice}
 \title{Slices shapes between successive coordinates}
 \usage{
-coo_slice(coo, ids)
+coo_slice(coo, ids, ldk)
 }
 \arguments{
 \item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
 \item{ids}{\code{numeric} of length >= 2, where to slice the shape(s)}
+
+\item{ldk}{\code{numeric} the id of the ldk to use as id1, only on \code{Out}.
+If provided, \code{ids} will be ignored.}
 }
 \value{
 a list of shapes or a list of \link{Opn}
