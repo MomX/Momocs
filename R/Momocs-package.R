@@ -20,15 +20,17 @@ magrittr::`%T>%`
 
 #' Momocs
 #'
-#' A complete toolkit for morphometrics, from data extraction to multivariate analyses.
-#' Most common 2D morphometrics approaches are included:
-#' outlines, open outlines, configurations of landmarks, traditional morphometrics,
-#' and facilities for data preparation, manipulation and visualization
-#' with a consistent grammar throughout.
-#' Momocs allows reproducible, complex morphometric analyses,
-#' paves the way for a pure open-source workflow in R,
-#' and other morphometrics approaches should be easy to plug in,
-#' or develop from, on top of this canvas.
+#' A complete toolkit for 2D morphometrics,
+#' from data extraction to multivariate
+#' analyses. Most common morphometrics
+#' approaches are included: outlines, curves, landmarks,
+#' "traditional" morphometrics, and facilities for
+#' data preparation, manipulation and
+#' visualization with a consistent grammar
+#' throughout. Momocs allows reproducible and
+#' complex morphometric analyses, other approaches to
+#' be plugged in or developped from those existing, and
+#' paves the way for a pure open-source workflow in R.
 #'
 #' To cite Momocs in publications: \code{citation("Momocs")}.
 #'
@@ -50,7 +52,7 @@ magrittr::`%T>%`
 #' We are very grateful to (in alphabetical order): Sean Asselin, Laurent Bouby, Matt Bulbert, Simon Crameri, Julia Cooke, April Dinwiddie,
 #' Carl Lipo, Cedric Gaucherel, Catherine Girard, Christian Steven Hoggard,
 #' Sarah Ivorra, Glynis Jones, Nathalie Keller, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
-#' Matthías Macé, Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
+#' Matthias Mace, Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 #' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 #' @import ape
