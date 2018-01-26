@@ -2,24 +2,20 @@ Package: Momocs
 Title: Morphometrics using R
 Version: 1.2.3
 Date: 2017-11-15
-Authors@R: c( person("Vincent", "Bonhomme", ,
-     "bonhomme.vincent@gmail.com", c("aut",
-     "cre")), person("Julien", "Claude", , ,
-     c("aut")) )
-Description: A complete toolkit for morphometrics,
+Authors@R: c(person("Vincent", "Bonhomme", ,
+     "bonhomme.vincent@gmail.com", c("aut", "cre")),
+     person("Julien", "Claude",,,c("aut")) )
+Description: A complete toolkit for 2D morphometrics,
      from data extraction to multivariate
-     analyses. Most common 2D morphometrics
-     approaches are included: outlines, open
-     outlines, configurations of landmarks,
-     traditional morphometrics, and facilities for
+     analyses. Most common morphometrics
+     approaches are included: outlines, curves, landmarks,
+     "traditional" morphometrics, and facilities for
      data preparation, manipulation and
      visualization with a consistent grammar
-     throughout. Momocs allows reproducible,
-     complex morphometric analyses, paves the way
-     for a pure open-source workflow in R, and
-     other morphometrics approaches should be easy
-     to plug in, or develop from, on top of this
-     canvas.
+     throughout. Momocs allows reproducible and
+     complex morphometric analyses, other approaches to 
+     be plugged in or developped from those existing, and 
+     paves the way for a pure open-source workflow in R.
 License: GPL-2 | GPL-3
 URL: https://github.com/vbonhomme/Momocs/
 BugReports:
