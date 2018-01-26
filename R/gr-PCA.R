@@ -85,6 +85,10 @@
 #' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
 #' @seealso \link{plot.LDA}
+#' @note  NAs is \code{$fac} are handled quite experimentally.
+#' More importantly, as of early 2018, I plan I complete rewrite of
+#' \code{plot.PCA} and other multivariate plotters.
+#'
 #' @examples
 #' \dontrun{
 #' bot.f <- efourier(bot, 12)
@@ -285,8 +289,21 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
       fac <- PCA$fac[, fac]
     }
 
+
+
+
     # if fac is a factor
     if (is.factor(fac)){
+
+
+      # handles NAs
+      nas <- which(is.na(fac))
+      if (length(nas)>0){
+        fac <- factor(fac[-nas])
+        xy <- xy[-nas,]
+      }
+      # end NA patch
+
       if (!missing(col)){
         if (length(col)==nlevels(fac)) {
           col.groups <- col

@@ -171,6 +171,11 @@ The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical optio
 Widely inspired by the "layers" philosophy behind graphical functions
 of the ade4 R package.
 }
+\note{
+NAs is \code{$fac} are handled quite experimentally.
+More importantly, as of early 2018, I plan I complete rewrite of
+\code{plot.PCA} and other multivariate plotters.
+}
 \examples{
 \dontrun{
 bot.f <- efourier(bot, 12)

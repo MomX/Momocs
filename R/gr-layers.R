@@ -90,6 +90,7 @@
 # rug
 #' @export
 .rug <- function(xy, fac, col) {
+
   xy <- jitter(xy, 5)
   g <- 0.0075
   y0 <- par("usr")[3]
@@ -118,6 +119,12 @@
 # confidence ellipses
 #' @export
 .ellipses <- function(xy, fac, conf, col) {
+  nas <- which(is.na(fac))
+  if (length(nas)>0){
+    fac <- factor(fac[-nas])
+    xy <- xy[-nas,]
+    col <- col[nas]
+  }
   for (i in seq(along = levels(fac))) {
     pts.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(pts.i)) {
@@ -134,6 +141,13 @@
 # confidence ellipses
 #' @export
 .ellipsesax <- function(xy, fac, conf, col, lty = 1, lwd = 1) {
+
+  nas <- which(is.na(fac))
+  if (length(nas)>0){
+    fac <- factor(fac[-nas])
+    xy <- xy[-nas,]
+  }
+
   if (length(conf) > 1) {
     conf <- sort(conf, decreasing = FALSE)
     if (missing(lwd) | length(lwd) != length(conf)) {
@@ -165,7 +179,15 @@
 # convex hulls
 #' @export
 .chull <- function(coo, fac, col, lty) {
+  nas <- which(is.na(fac))
+  if (length(nas)>0){
+    fac <- factor(fac[-nas])
+    coo <- coo[-nas,]
+    col <- col[nas]
+    lty <- lty[nas]
+  }
   for (i in seq(along = levels(fac))) {
+    cat(i, "\n")
     coo_i <- coo[fac == levels(fac)[i], ]
     if (is.matrix(coo_i)) {
       if (nrow(coo_i) > 1) {
@@ -179,6 +201,13 @@
 # filled convex hulls
 #' @export
 .chullfilled <- function(coo, fac, col) {
+  nas <- which(is.na(fac))
+  if (length(nas)>0){
+    fac <- factor(fac[-nas])
+    coo <- coo[-nas,]
+    col <- col[nas]
+    lty <- lty[nas]
+  }
   for (i in seq(along = levels(fac))) {
     coo_i <- coo[fac == levels(fac)[i],, drop=FALSE]
     if (nrow(coo_i) > 1) {
