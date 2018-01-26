@@ -560,7 +560,7 @@ coo_slice.default <- function(coo, ids, ldk){
 }
 
 #' @export
-coo_slice.Opn <- function(coo, ids){
+coo_slice.Opn <- function(coo, ids, ldk){
   .check(all(coo_nb(coo) > max(ids)),
          " * max(ids) must be lower than any number of coordinates")
   RES <- vector("list", length(ids))
@@ -574,7 +574,7 @@ coo_slice.Opn <- function(coo, ids){
 }
 
 #' @export
-coo_slice.Ldk <- function(coo, ids){
+coo_slice.Ldk <- function(coo, ids, ldk){
   .check(all(coo_nb(coo) > max(ids)),
          " * max(ids) must be lower than any number of coordinates")
   RES <- vector("list", length(ids))
