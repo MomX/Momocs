@@ -177,7 +177,7 @@ The most familiar operation can directly be applied on `Coo` objects:
 ```{r}
 bot %>% 
   coo_center %>% coo_scale %>% 
-  coo_alignxax() %>% coo_slidedirection("N") %T>% 
+  coo_alignxax() %>% coo_slidedirection("up") %T>% 
   print() %>% stack()
 ```
 
@@ -246,7 +246,7 @@ Here is an example of such bias from the `molars` dataset generously shared by C
 # raw molars dataset
 stack(molars, title = "Non-aligned molars")
 # Procrustes-aligned and slided molars
-mol.al <- fgProcrustes(molars, tol = 1e-4) %>% coo_slidedirection("W")
+mol.al <- fgProcrustes(molars, tol = 1e-4) %>% coo_slidedirection("left")
 stack(mol.al, title="Aligned molars")
 
 # Now compare PCA and morphospace using the 1st harmonic alignment
