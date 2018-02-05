@@ -20,9 +20,13 @@
 #' @references Renaud S, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
 #' of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 #' @examples
-#' molars[4] %>% coo_center %>% coo_scale %>% coo_interpolate(1080) %>% coo_slidedirection("E") %>%
-#'    coo_sample(360) %T>% coo_plot(zoom=2) %>% sfourier(16) %>%
-#'    sfourier_i() %>% coo_draw(bor="red", points=TRUE)
+#' molars[4] %>%
+#' coo_center %>% coo_scale %>% coo_interpolate(1080) %>%
+#' coo_slidedirection("right") %>%
+#'    coo_sample(360) %T>% coo_plot(zoom=2) %>%
+#'    sfourier(16) %>%
+#'    sfourier_i() %>%
+#'    coo_draw(bor="red", points=TRUE)
 #' @rdname sfourier
 #' @export
 sfourier <- function(x, nb.h){
@@ -206,20 +210,20 @@ sfourier_i <-
 #' sfourier_shape(nb.h=6, alpha=0.4, nb.pts=200, plot=FALSE)))))
 #' @export
 sfourier_shape <- function(an, bn, nb.h, nb.pts = 80, alpha = 2,
-    plot = TRUE) {
-    if (missing(nb.h) & missing(an))
-        nb.h <- 6
-    if (missing(nb.h) & !missing(an))
-        nb.h <- length(an)
-    if (missing(an))
-        an <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
-    if (missing(bn))
-        bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
-    rf <- list(an = an, bn = bn, ao = 0)
-    shp <- sfourier_i(rf, nb.h = nb.h, nb.pts = nb.pts)
-    if (plot)
-        coo_plot(shp)
-    return(shp)
+                           plot = TRUE) {
+  if (missing(nb.h) & missing(an))
+    nb.h <- 6
+  if (missing(nb.h) & !missing(an))
+    nb.h <- length(an)
+  if (missing(an))
+    an <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+  if (missing(bn))
+    bn <- runif(nb.h, -pi, pi)/(1:nb.h)^alpha
+  rf <- list(an = an, bn = bn, ao = 0)
+  shp <- sfourier_i(rf, nb.h = nb.h, nb.pts = nb.pts)
+  if (plot)
+    coo_plot(shp)
+  return(shp)
 }
 
 ##### end sfourier
