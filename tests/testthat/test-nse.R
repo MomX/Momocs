@@ -55,11 +55,11 @@ test_that("filter works fine",{
   expect_equal(length(filter(x, a=="a")) , 10)
   expect_equal(length(filter(x, a %in% c("a", "b"))) , 20)
   expect_equal(length(filter(x, !(a %in% c("a", "b")))) , 30)
-  # onley two rows in the fac, both with {a; B}
-  x_lite <- filter(x, a=="a", b=="B")
-  expect_equal(length(x_lite) , 2)
+  # only two rows in the fac, both with {a; B}
+  x_lite <-filter(x, a=="a", b=="B")
+  expect_equal(length(x_lite), 2)
   # test for the dropping of factor levels
-  expect_true(x_lite$fac %>% sapply(nlevels) %>% `==`(1) %>% all)
+  expect_true(all(sapply(x_lite$fac, nlevels)==1))
 })
 
 # rename
