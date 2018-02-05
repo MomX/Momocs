@@ -187,7 +187,6 @@
     lty <- lty[nas]
   }
   for (i in seq(along = levels(fac))) {
-    cat(i, "\n")
     coo_i <- coo[fac == levels(fac)[i], ]
     if (is.matrix(coo_i)) {
       if (nrow(coo_i) > 1) {
@@ -410,6 +409,7 @@
 # Experimental and maybe useless --------------------
 # combine factor (a quick wrapper around interaction)
 # for PCA, LDA or any data.frame
+# TODO : .fac_dispatcher does the job
 .combine.fac <- function(x, formula){
   if (any(c("LDA", "PCA")==class(x)[1])) x <- x$fac
   f0 <- x[, attr(terms(formula), "term.labels")]
