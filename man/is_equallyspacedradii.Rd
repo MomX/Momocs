@@ -13,7 +13,7 @@ is_equallyspacedradii(coo, thres)
 }
 \value{
 a single or a vector of \code{logical}. If \code{NA} are returned, they
-are produced by \link{coo_theta3} and some coordinates are likely identical, at least
+are produced by \link{coo_angle_edge1} and some coordinates are likely identical, at least
 for x or y.
 }
 \description{
@@ -47,10 +47,10 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_perimcum}}, \code{\link{coo_perimpts}},
   \code{\link{coo_perim}}, \code{\link{coo_rev}},
   \code{\link{coo_right}}, \code{\link{coo_rotatecenter}},
-  \code{\link{coo_rotate}}, \code{\link{coo_samplerr}},
-  \code{\link{coo_sample}}, \code{\link{coo_scalex}},
-  \code{\link{coo_scale}}, \code{\link{coo_shearx}},
-  \code{\link{coo_slice}},
+  \code{\link{coo_rotate}}, \code{\link{coo_sample_prop}},
+  \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
+  \code{\link{coo_scalex}}, \code{\link{coo_scale}},
+  \code{\link{coo_shearx}}, \code{\link{coo_slice}},
   \code{\link{coo_slidedirection}},
   \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},

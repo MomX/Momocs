@@ -34,6 +34,7 @@ coo_extract(bot, c(3, 5, 7))
 }
 \seealso{
 Other sampling functions: \code{\link{coo_interpolate}},
+  \code{\link{coo_sample_prop}},
   \code{\link{coo_samplerr}}, \code{\link{coo_sample}}
 
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
@@ -51,10 +52,10 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_perimcum}}, \code{\link{coo_perimpts}},
   \code{\link{coo_perim}}, \code{\link{coo_rev}},
   \code{\link{coo_right}}, \code{\link{coo_rotatecenter}},
-  \code{\link{coo_rotate}}, \code{\link{coo_samplerr}},
-  \code{\link{coo_sample}}, \code{\link{coo_scalex}},
-  \code{\link{coo_scale}}, \code{\link{coo_shearx}},
-  \code{\link{coo_slice}},
+  \code{\link{coo_rotate}}, \code{\link{coo_sample_prop}},
+  \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
+  \code{\link{coo_scalex}}, \code{\link{coo_scale}},
+  \code{\link{coo_shearx}}, \code{\link{coo_slice}},
   \code{\link{coo_slidedirection}},
   \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},

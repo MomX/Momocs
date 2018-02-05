@@ -11,7 +11,7 @@ coo_slice(coo, ids, ldk)
 
 \item{ids}{\code{numeric} of length >= 2, where to slice the shape(s)}
 
-\item{ldk}{\code{numeric} the id of the ldk to use as id1, only on \code{Out}.
+\item{ldk}{\code{numeric} the id of the ldk to use as ids, only on \code{Out} and \code{Opn}.
 If provided, \code{ids} will be ignored.}
 }
 \value{
@@ -46,6 +46,13 @@ y <- coo_slice(x, ldk=1:4)
 stack(y[[1]])
 stack(y[[2]])
 
+# new ldks from tipping points, new ldks from angle
+olea \%>\% def_ldk_tips \%>\%
+def_ldk_angle(0.75*pi) \%>\% def_ldk_angle(0.25*pi) \%>\%
+coo_slice(ldk =1:4) -> oleas
+oleas[[1]] \%>\% stack
+oleas[[2]] \%>\% stack # etc.
+
 # domestic operations
 y[[3]] \%>\% coo_area()
 # shape analysis of a slice
@@ -69,9 +76,10 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_perimcum}}, \code{\link{coo_perimpts}},
   \code{\link{coo_perim}}, \code{\link{coo_rev}},
   \code{\link{coo_right}}, \code{\link{coo_rotatecenter}},
-  \code{\link{coo_rotate}}, \code{\link{coo_samplerr}},
-  \code{\link{coo_sample}}, \code{\link{coo_scalex}},
-  \code{\link{coo_scale}}, \code{\link{coo_shearx}},
+  \code{\link{coo_rotate}}, \code{\link{coo_sample_prop}},
+  \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
+  \code{\link{coo_scalex}}, \code{\link{coo_scale}},
+  \code{\link{coo_shearx}},
   \code{\link{coo_slidedirection}},
   \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},

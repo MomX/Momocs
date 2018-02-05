@@ -35,9 +35,13 @@ list of coordinates where points are equally spaced aong the curvilinear absciss
 The implementation is still quite experimental (as of Dec. 2016)
 }
 \examples{
-molars[4] \%>\% coo_center \%>\% coo_scale \%>\% coo_interpolate(1080) \%>\% coo_slidedirection("E") \%>\%
-   coo_sample(360) \%T>\% coo_plot(zoom=2) \%>\% sfourier(16) \%>\%
-   sfourier_i() \%>\% coo_draw(bor="red", points=TRUE)
+molars[4] \%>\%
+coo_center \%>\% coo_scale \%>\% coo_interpolate(1080) \%>\%
+coo_slidedirection("right") \%>\%
+   coo_sample(360) \%T>\% coo_plot(zoom=2) \%>\%
+   sfourier(16) \%>\%
+   sfourier_i() \%>\%
+   coo_draw(bor="red", points=TRUE)
 }
 \references{
 Renaud S, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape

@@ -4,12 +4,13 @@
 \alias{coo_slidedirection}
 \title{Slides coordinates in a particular direction}
 \usage{
-coo_slidedirection(coo, direction, center, id)
+coo_slidedirection(coo, direction = c("down", "left", "up", "right")[4],
+  center, id)
 }
 \arguments{
 \item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
 
-\item{direction}{\code{character} among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.}
+\item{direction}{\code{character} one of \code{"down", "left", "up", "right"} ("right" by default)}
 
 \item{center}{\code{logical} whether to center or not before sliding}
 
@@ -25,14 +26,14 @@ eastwards or westwards the centroid, becomes the first point with \link{coo_slid
 \examples{
 b <- coo_rotate(bot[1], pi/6) # dummy example just to make it obvious
 coo_plot(b) # not the first point
-coo_plot(coo_slidedirection(b, 'N'))
-coo_plot(coo_slidedirection(b, 'E'))
-coo_plot(coo_slidedirection(b, 'W'))
-coo_plot(coo_slidedirection(b, 'S'))
+coo_plot(coo_slidedirection(b, "up"))
+coo_plot(coo_slidedirection(b, "right"))
+coo_plot(coo_slidedirection(b, "left"))
+coo_plot(coo_slidedirection(b, "down"))
 
 # on Coo objects
 stack(bot)
-stack(coo_slidedirection(bot, 'E'))
+stack(coo_slidedirection(bot, "left"))
 
 }
 \seealso{
@@ -55,15 +56,15 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_perimcum}}, \code{\link{coo_perimpts}},
   \code{\link{coo_perim}}, \code{\link{coo_rev}},
   \code{\link{coo_right}}, \code{\link{coo_rotatecenter}},
-  \code{\link{coo_rotate}}, \code{\link{coo_samplerr}},
-  \code{\link{coo_sample}}, \code{\link{coo_scalex}},
-  \code{\link{coo_scale}}, \code{\link{coo_shearx}},
-  \code{\link{coo_slice}}, \code{\link{coo_slidegap}},
-  \code{\link{coo_slide}}, \code{\link{coo_smoothcurve}},
-  \code{\link{coo_smooth}}, \code{\link{coo_template}},
-  \code{\link{coo_trans}}, \code{\link{coo_trimbottom}},
-  \code{\link{coo_trimtop}}, \code{\link{coo_trim}},
-  \code{\link{coo_up}}, \code{\link{is_clockwise}},
-  \code{\link{is_closed}},
+  \code{\link{coo_rotate}}, \code{\link{coo_sample_prop}},
+  \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
+  \code{\link{coo_scalex}}, \code{\link{coo_scale}},
+  \code{\link{coo_shearx}}, \code{\link{coo_slice}},
+  \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
+  \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},
+  \code{\link{coo_template}}, \code{\link{coo_trans}},
+  \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
+  \code{\link{coo_trim}}, \code{\link{coo_up}},
+  \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
 }

@@ -28,7 +28,9 @@ mutate(bot, size=coo_length(bot))
 \seealso{
 \link{coo_lw}, \link{coo_width}
 
-Other coo_ descriptors: \code{\link{coo_area}},
+Other coo_ descriptors: \code{\link{coo_angle_edge1}},
+  \code{\link{coo_angle_edges}},
+  \code{\link{coo_angle_tangent}}, \code{\link{coo_area}},
   \code{\link{coo_boundingbox}}, \code{\link{coo_chull}},
   \code{\link{coo_circularityharalick}},
   \code{\link{coo_circularitynorm}},
@@ -39,7 +41,5 @@ Other coo_ descriptors: \code{\link{coo_area}},
   \code{\link{coo_elongation}}, \code{\link{coo_lw}},
   \code{\link{coo_rectangularity}},
   \code{\link{coo_rectilinearity}},
-  \code{\link{coo_solidity}}, \code{\link{coo_tangle}},
-  \code{\link{coo_theta3}}, \code{\link{coo_thetapts}},
-  \code{\link{coo_width}}
+  \code{\link{coo_solidity}}, \code{\link{coo_width}}
 }
