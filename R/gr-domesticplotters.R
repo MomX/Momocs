@@ -785,7 +785,7 @@ coo_oscillo <- function(coo,
   }
   # tfourier
   if (any(method == c("all", "tfourier"))) {
-    d <- coo_tangle(coo)
+    d <- coo_angle_tangent(coo)
     plot(NA, xlim = c(1, nrow(coo)), ylim = range(d), main = "Tangent angle",
          xlab = "Points along the outline", ylab = "Tangent angle (radians)")
     # lines((1:nrow(coo))[sampled], d[sampled], lty=2,
