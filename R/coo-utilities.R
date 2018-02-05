@@ -449,7 +449,7 @@ coo_alignminradius.default <- function(coo){
   id_minrad <- which.min(coo_centdist(coo))
   coo <- coo_slide(coo, id_minrad)
   m <- matrix(c(coo[1, ],  0, 0, 1, 0), nrow=3, byrow=TRUE)
-  th <- coo_theta3(m)
+  th <- coo_angle_edge1(m)
   coo_rotate(coo, -th)
 }
 
@@ -502,7 +502,7 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' slices returned as a list
 #' @inheritParams coo_check
 #' @param ids \code{numeric} of length >= 2, where to slice the shape(s)
-#' @param ldk \code{numeric} the id of the ldk to use as id1, only on \code{Out}.
+#' @param ldk \code{numeric} the id of the ldk to use as ids, only on \code{Out} and \code{Opn}.
 #' If provided, \code{ids} will be ignored.
 #' @return a list of shapes or a list of \link{Opn}
 #' @examples
@@ -528,6 +528,13 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' # plotting
 #' stack(y[[1]])
 #' stack(y[[2]])
+#'
+#' # new ldks from tipping points, new ldks from angle
+#' olea %>% def_ldk_tips %>%
+#' def_ldk_angle(0.75*pi) %>% def_ldk_angle(0.25*pi) %>%
+#' coo_slice(ldk =1:4) -> oleas
+#' oleas[[1]] %>% stack
+#' oleas[[2]] %>% stack # etc.
 #'
 #' # domestic operations
 #' y[[3]] %>% coo_area()
@@ -557,34 +564,6 @@ coo_slice.default <- function(coo, ids, ldk){
   res[[n]] <- coo[ c(ids[n]:nrow(coo)) , ]
   names(res) <- 1:length(ids)
   res
-}
-
-#' @export
-coo_slice.Opn <- function(coo, ids, ldk){
-  .check(all(coo_nb(coo) > max(ids)),
-         " * max(ids) must be lower than any number of coordinates")
-  RES <- vector("list", length(ids))
-  for (i in seq_along(coo)){
-    res <- coo_slice(coo$coo[[i]], ids)
-    for (j in seq_along(ids)){
-      RES[[j]][[i]] <- res[[j]]
-    }
-  }
-  return(lapply(RES, Opn, fac=coo$fac))
-}
-
-#' @export
-coo_slice.Ldk <- function(coo, ids, ldk){
-  .check(all(coo_nb(coo) > max(ids)),
-         " * max(ids) must be lower than any number of coordinates")
-  RES <- vector("list", length(ids))
-  for (i in seq_along(coo)){
-    res <- coo_slice(coo$coo[[i]], ids)
-    for (j in seq_along(ids)){
-      RES[[j]][[i]] <- res[[j]]
-    }
-  }
-  return(lapply(RES, Ldk, fac=coo$fac))
 }
 
 #' @export
@@ -621,91 +600,216 @@ coo_slice.Out <- function(coo, ids, ldk){
   return(lapply(RES, Opn, fac=coo$fac))
 }
 
-###TODO: coo_slice_direction
-# #' @family slicing functions
+#' @export
+coo_slice.Opn <- coo_slice.Out
+
+#' @export
+coo_slice.Ldk <- function(coo, ids, ldk){
+  .check(all(coo_nb(coo) > max(ids)),
+         " * max(ids) must be lower than any number of coordinates")
+  RES <- vector("list", length(ids))
+  for (i in seq_along(coo)){
+    res <- coo_slice(coo$coo[[i]], ids)
+    for (j in seq_along(ids)){
+      RES[[j]][[i]] <- res[[j]]
+    }
+  }
+  return(lapply(RES, Ldk, fac=coo$fac))
+}
+
 
 # coo_slide --------
 #' Slides coordinates
 #'
-#' Slides the coordinates so that the id1-th point become the first one.
+#' Slides the coordinates so that the id-th point become the first one.
 #' @aliases coo_slide
 #' @inheritParams coo_check
-#' @param id1 \code{numeric} the id(s) of the point that will become the new first point. See details below
+#' @param id \code{numeric} the id of the point that will become the new first point. See details below
 #' for the method on Coo objects.
-#' @param ldk \code{numeric} the id of the ldk to use as id1, only on \code{Out}
+#' @param ldk \code{numeric} the id of the ldk to use as id, only on \code{Out}
 #' @details For Coo objects, and in particular for Out and Opn three different ways of coo_sliding
 #' are available:
 #' \itemize{
-#' \item \strong{no ldk passed and a single id1 is passed}: all id1-th points
+#' \item \strong{no ldk passed and a single id is passed}: all id-th points
 #' within the shapes will become the first points. $ldk will be slided accordingly.
 #' \item \strong{no ldk passed and a vector of ids matching the length of the Coo}: for every shape,
-#' the id1-th point will be used as the id1-th point. $ldk will be slided accordingly.
+#' the id-th point will be used as the id-th point. $ldk will be slided accordingly.
 #' \item \strong{a single ldk is passed}: the ldk-th ldk will be used to slide every shape. If an ldk is passed,
-#' id1 is ignored with a message.
+#' id is ignored with a message.
 #' }
 #' See examples.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @seealso \link{coo_slice} and friends.
 #' @examples
 #' stack(hearts)
 #' # set the first landmark as the starting point
 #' stack(coo_slide(hearts, ldk=1))
 #' # set the 50th point as the starting point (everywhere)
-#' stack(coo_slide(hearts, id1=50))
-#' # set the id1-random-th point as the starting point (everywhere)
+#' stack(coo_slide(hearts, id=50))
+#' # set the id-random-th point as the starting point (everywhere)
 #' set.seed(123) # just for the reproducibility
-#' id1_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
+#' id_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
 #' replace=TRUE)
-#' stack(coo_slide(hearts, id1=id1_random))
+#' stack(coo_slide(hearts, id=id_random))
 #' @family sliding functions
 #' @family coo_ utilities
 #' @export
-coo_slide <- function(coo, id1, ldk) {
+coo_slide <- function(coo, id, ldk) {
   UseMethod("coo_slide")
 }
 
 #' @export
-coo_slide.default <- function(coo, id1, ldk) {
+coo_slide.default <- function(coo, id, ldk) {
   coo <- coo_check(coo)
-  if (id1 == 0) {
+  if (id == 0) {
     return(coo)
   }
   n <- nrow(coo)
-  slided.rows <- c(id1:n, 1:(id1 - 1))
+  slided.rows <- c(id:n, 1:(id - 1))
   return(coo[slided.rows, ])
 }
 
 #' @export
-coo_slide.Coo <- function(coo, id1, ldk) {
+coo_slide.Coo <- function(coo, id, ldk) {
   Coo <- coo
   ##### ldk case #####
   if (!missing(ldk)) {
     .check(is.ldk(Coo),
            "this object has no $ldk")
-    if (!missing(id1))        warning("'id1' provided will be ignored")
+    if (!missing(id))        warning("'id' provided will be ignored")
     for (i in seq(along = Coo$coo)) {
       Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], Coo$ldk[[i]][ldk])
       Coo$ldk[[i]] <- (Coo$ldk[[i]] - (Coo$ldk[[i]][ldk] - 1)) %% nrow(Coo$coo[[i]])
     }
     return(Coo)
   } else {
-    ##### id1 case ######
-    if (length(id1)==1) id1 <- rep(id1, length(Coo))
+    ##### id case ######
+    if (length(id)==1) id <- rep(id, length(Coo))
 
-    # id1 case
-    # id1=1 just rep
+    # id case
+    # id=1 just rep
     #
-    # allows a vector of id1s to be passed
+    # allows a vector of ids to be passed
     slide_ldk <- (length(Coo$ldk) > 0)
     for (i in seq(along = Coo$coo)) {
-      Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id1[i])
+      Coo$coo[[i]] <- coo_slide(Coo$coo[[i]], id[i])
       if (slide_ldk){
-        new_ldk <- (Coo$ldk[[i]] - id1[i]) %% nrow(Coo$coo[[i]])
+        new_ldk <- (Coo$ldk[[i]] - id[i]) %% nrow(Coo$coo[[i]])
         Coo$ldk[[i]] <- ifelse(new_ldk==0, 1, new_ldk)
       }
 
     }
     return(Coo)
-  }}
+  }
+}
+
+# coo_intersect_segment -----------
+
+#' Nearest intersection between a shape and a segment
+#'
+#' Take a shape, and an intersecting segment, which point is the nearest
+#' of where the segment intersects with the shape? Most of the time,
+#' centering before makes more sense.
+#' @inheritParams coo_check
+#' @param seg a 2x2 \code{matrix} defining the starting and ending points;
+#' or a list or a numeric of length 4.
+#' @param center \code{logical} whether to center the shape (TRUE by default)
+#' @return \code{numeric} the id of the nearest point. See examples.
+#' @family coo_ intersect
+#' @examples
+#' coo <- bot[1] %>% coo_center %>% coo_scale
+#' seg <- c(0, 0, 2, 2) # passed as a numeric of length(4)
+#' coo_plot(coo)
+#' segments(seg[1], seg[2], seg[3], seg[4])
+#' coo %>% coo_intersect_segment(seg) %T>% print %>%
+#' # prints on the console and draw it
+#'    coo[., , drop=FALSE] %>% points(col="red")
+#' @export
+coo_intersect_segment <- function(coo, seg, center=TRUE){
+  # in most cases, centering first is useful
+  if (center)
+    coo <- coo_center(coo)
+  # if seg is provided as a list, first unlist
+  if (is.list(seg) && length(seg)==4){
+    seg <- as.numeric(seg)
+  }
+  # if seg is now a numeric, then turn it into a shape
+  if (!is.matrix(seg) && length(seg)==4){
+    seg <- matrix(seg, ncol=2, byrow = TRUE)
+  }
+  # turns outlines into a SpatialPolygons
+  # and seg into a SpatialLines
+  sp_out <- coo %>%
+    sp::Polygon() %>% list %>%
+    sp::Polygons(ID="useless_yet_required") %>% list %>%
+    sp::SpatialPolygons()
+  sp_seg  <- seg %>%
+    sp::Line() %>% list %>%
+    sp::Lines(ID="useless_yet_required") %>% list %>%
+    sp::SpatialLines()
+  # rgeos function that returns another sp object
+  inter <- rgeos::gIntersection(sp_out, sp_seg)
+  # extract coordinates of intersection points
+  inter_xy <- inter@lines[[1]]@Lines[[1]]@coords
+  # find the if of the closest point on the coo
+  # and return its id
+  edm_nearest(inter_xy[2,, drop=FALSE], coo, full=TRUE)$pos
+}
+
+#' Nearest intersection between a shape and a segment specified with an angle
+#'
+#' Take a shape, and segment starting on the centroid and having a particular angle, which point is the nearest
+#' where the segment intersects with the shape?
+#' @inheritParams coo_check
+#' @param angle \code{numeric} an angle in radians (0 by default).
+#' @param direction \code{character} one of \code{"down", "left", "up", "right"} ("right" by default)
+#' @note shapes are always centered before this operation.
+#' @return \code{numeric} the id of the nearest point. See examples.
+#' @family coo_ intersect
+#' @examples
+#' coo <- bot[1] %>% coo_center %>% coo_scale
+#' coo %>% coo_intersect_angle(pi/7) %>%
+#'    coo[., , drop=FALSE] %>% points(col="red")
+#'
+#'  # many angles
+#'  coo_plot(coo)
+#'  sapply(seq(0, pi, pi/12),
+#'        function(x) coo %>% coo_intersect_angle(x)) -> ids
+#'  coo[ids, ] %>% points(col="blue")
+#'
+#'  coo %>%
+#'  coo_intersect_direction("down") %>%
+#'  coo[.,, drop=FALSE] %>% points(col="orange")
+#'
+#' @export
+coo_intersect_angle <- function(coo, angle=0){
+  # only defined on centered coo
+  coo <- coo_center(coo)
+  origin <- matrix(0, nrow=1, ncol=2)
+  # calculate a landing point "outside" the shape (modulus)
+  # in the right direction (argument)
+  # using complex numbers / polar coordinates
+  # below the "outside" (modulus) part
+  coo_centdist(coo) %>% max %>% `*`(2) %>%
+    complex(modulus = ., argument = angle) %>% cpx2coo() %>%
+    # add the origin
+    rbind(origin, .) %>%
+    coo_intersect_segment(coo, ., center=TRUE)
+}
+
+#' @rdname coo_intersect_angle
+#' @export
+coo_intersect_direction <- function(coo,
+                                    direction=c("down", "left", "up", "right")[4]){
+  # switch from direction to angle in radians
+  angle <- switch(direction,
+                  "down" = -pi/2,
+                  "left"   = pi,
+                  "up"     = pi/2,
+                  "right"  = 0)
+  coo_intersect_angle(coo, angle)
+}
+
 
 # coo_slidedirection --------
 #' Slides coordinates in a particular direction
@@ -713,65 +817,84 @@ coo_slide.Coo <- function(coo, id1, ldk) {
 #' Shapes are centered and then, according to direction, the point northwards, southwards,
 #' eastwards or westwards the centroid, becomes the first point with \link{coo_slide}.
 #' @inheritParams coo_check
-#' @param direction \code{character} among \code{'N'} (by default), \code{'S'}, \code{'E'}, or \code{'W'}.
+#' @param direction \code{character} one of \code{"down", "left", "up", "right"} ("right" by default)
 #' @param center \code{logical} whether to center or not before sliding
 #' @param id \code{numeric} whether to return the id of the point or the slided shapes
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @examples
 #' b <- coo_rotate(bot[1], pi/6) # dummy example just to make it obvious
 #' coo_plot(b) # not the first point
-#' coo_plot(coo_slidedirection(b, 'N'))
-#' coo_plot(coo_slidedirection(b, 'E'))
-#' coo_plot(coo_slidedirection(b, 'W'))
-#' coo_plot(coo_slidedirection(b, 'S'))
+#' coo_plot(coo_slidedirection(b, "up"))
+#' coo_plot(coo_slidedirection(b, "right"))
+#' coo_plot(coo_slidedirection(b, "left"))
+#' coo_plot(coo_slidedirection(b, "down"))
 #'
 #' # on Coo objects
 #' stack(bot)
-#' stack(coo_slidedirection(bot, 'E'))
+#' stack(coo_slidedirection(bot, "left"))
 #'
 #' @family sliding functions
 #' @family coo_ utilities
 #' @export
-coo_slidedirection <- function(coo, direction, center, id) {
-  UseMethod("coo_slidedirection")
-}
+coo_slidedirection <-
+  function(coo, direction=c("down", "left", "up", "right")[4], center, id) {
+    UseMethod("coo_slidedirection")
+  }
 
 #' @export
-coo_slidedirection.default <- function(coo, direction = "N",
-                                       center=TRUE, id = FALSE) {
-  coo <- coo_check(coo)
-  if (center) coo <- coo_center(coo)
-  if (direction == "N") {
-    x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
-    id0 <- x0.ed[which(coo[x0.ed, 2] > 0)[1]]
-  }
-  if (direction == "S") {
-    x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
-    id0 <- x0.ed[which(coo[x0.ed, 2] < 0)[1]]
-  }
-  if (direction == "E") {
-    y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
-    id0 <- y0.ed[which(coo[y0.ed, 1] > 0)[1]]
-  }
-  if (direction == "W") {
-    y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
-    id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
-  }
+coo_slidedirection.default <-
+  function(coo, direction=c("down", "left", "up", "right")[4],
+           center=TRUE, id = FALSE) {
+    # for the sake of compatibility
+    if (any(direction %in% c("S", "W", "N", "E"))){
+      message("direction specification has changed and retrocompatibility
+               wil be removed in future version. See ?coo_slidedirection")
+    }
+    if (direction=="S") direction <- "down"
+    if (direction=="W") direction <- "left"
+    if (direction=="N") direction <- "up"
+    if (direction=="E") direction <- "right"
 
-  if (id) {
-    return(id0) }
-  else {
-    coo <- coo_slide(coo, id0)
-    return(coo) }
-}
+    coo <- coo_check(coo)
+    if (center) coo <- coo_center(coo)
+
+    if (direction == "down") {
+      x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+      id0 <- x0.ed[which(coo[x0.ed, 2] < 0)[1]]
+    }
+
+    if (direction == "left") {
+      y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+      id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
+    }
+
+    if (direction == "up") {
+      x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+      id0 <- x0.ed[which(coo[x0.ed, 2] > 0)[1]]
+    }
+
+    if (direction == "right") {
+      y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+      id0 <- y0.ed[which(coo[y0.ed, 1] > 0)[1]]
+    }
+
+    if (id) {
+      return(id0)
+    } else {
+      coo <- coo_slide(coo, id=id0)
+      return(coo)
+    }
+  }
 
 #' @export
-coo_slidedirection.Coo <- function(coo, direction, center = TRUE, id = TRUE) {
-  Coo <- coo
-  id0 <- sapply(Coo$coo, coo_slidedirection, direction, center, id=TRUE)
-  Coo <- coo_slide(Coo, id1 = id0)
-  return(Coo)
-}
+coo_slidedirection.Coo <-
+  function(coo, direction=c("down", "left", "up", "right")[4],
+           center = TRUE, id = TRUE) {
+    Coo <- coo
+    id0 <- sapply(Coo$coo, coo_slidedirection, direction, center, id=TRUE)
+    Coo <- coo_slide(Coo, id = id0)
+    return(Coo)
+  }
 
 # coo_slidegap ---------
 #' Slides coordinates using the widest gap
@@ -909,7 +1032,7 @@ coo_sample.default <- function(coo, n) {
 coo_sample.Out <- function(coo, n) {
   Out <- coo
   # if an $ldk is present, we have to change it.
-  if (length(Out$ldk)!=0) {
+  if (is_ldk(Out)) {
     coo_nb <- sapply(Out$coo, nrow)
     for (i in 1:length(Out)){
       ratio.i <- n / coo_nb[i]
@@ -926,7 +1049,55 @@ coo_sample.Out <- function(coo, n) {
 #' @export
 coo_sample.Opn <- coo_sample.Out
 
-## TODO: adapt $ldk for Out and Opn, deprecate for Ldk
+# coo_sample -------------
+#' Sample a proportion of coordinates (among points)
+#'
+#' A simple wrapper around \link{coo_sample}
+#'
+#' As for \link{coo_sample} if an \code{$ldk} component is defined,
+#' it is changed accordingly by multiplying the ids by n over the number of coordinates.
+#'
+#' @param coo either a \code{matrix} of (x; y) coordinates or an \link{Out} or an \link{Opn} object.
+#' @param prop \code{numeric}, the proportion of points to sample
+#' @return a \code{matrix} of (x; y) coordinates, or an \link{Out} or an \link{Opn} object.
+#' @examples
+#' # single shape
+#' bot[1] %>% coo_nb()
+#' bot[1] %>% coo_sample_prop(0.5) %>% coo_nb()
+#' @family sampling functions
+#' @family coo_ utilities
+#' @export
+coo_sample_prop <- function(coo, prop=1) {
+  UseMethod("coo_sample_prop")
+}
+
+#' @export
+coo_sample_prop.default <- function(coo, prop=1) {
+  coo <- coo_check(coo)
+  coo_sample(coo, round(nrow(coo)*prop))
+}
+
+#' @export
+coo_sample_prop.Out <- function(coo, prop=1) {
+  Out <- coo
+  # if an $ldk is present, we have to change it.
+  if (is_ldk(Out)) {
+    N <- coo_nb(Out)
+    n <- round(N*prop)
+    for (i in 1:length(Out)){
+      ratio.i <- n[i] / N[i]
+      Out$ldk[[i]] <- ceiling(Out$ldk[[i]] * (n[i] / N[i]))
+    }
+    message("$ldk has been changed accordingly")
+  }
+  # now sample $coo
+  Out$coo <- lapply(Out$coo, coo_sample_prop, prop)
+  return(Out)
+}
+
+#' @export
+coo_sample_prop.Opn <- coo_sample_prop.Out
+
 
 # coo_samplerr --------------
 #' Samples coordinates (regular radius)
@@ -1185,7 +1356,7 @@ is_open <- function(coo) !is_closed(coo)
 #' @inheritParams coo_check
 #' @param thres numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)
 #' @return a single or a vector of \code{logical}. If \code{NA} are returned, they
-#' are produced by \link{coo_theta3} and some coordinates are likely identical, at least
+#' are produced by \link{coo_angle_edge1} and some coordinates are likely identical, at least
 #' for x or y.
 #' @family coo_ utilities
 #' @examples
@@ -1204,11 +1375,12 @@ is_equallyspacedradii <- function(coo, thres) {
 
 #' @export
 is_equallyspacedradii.default <- function(coo, thres=pi/90){
-  coo1 <- coo_slide(coo, id1 = 2)
+  coo1 <- coo_slide(coo, id = 2)
   cent <- coo_centpos(coo)
   res <- vector("numeric", nrow(coo))
   for (i in 1:nrow(coo)){
-    res[i] <- rbind(coo[i, ], cent, coo1[i, ]) %>% coo_theta3("acos")
+    res[i] <- rbind(coo[i, ], cent, coo1[i, ]) %>%
+      coo_angle_edge1("acos")
   }
   sd(res) < thres
 }
@@ -1800,7 +1972,6 @@ coo_bookstein.default <- function(coo, ldk1 = 1, ldk2 = nrow(coo)) {
 
 #' @export
 coo_bookstein.Out <- function(coo, ldk1=1, ldk2=2) {
-  # id1 ?
   Out <- coo
   for (i in seq(along = Out$coo)) {
     Out$coo[[i]] <- coo_bookstein(Out$coo[[i]], Out$ldk[[i]][ldk1], Out$ldk[[i]][ldk2])
@@ -1811,7 +1982,6 @@ coo_bookstein.Out <- function(coo, ldk1=1, ldk2=2) {
 
 #' @export
 coo_bookstein.Opn <- function(coo, ldk1=1, ldk2=2) {
-  # id1 ?
   Opn <- coo
   # by default, using the first and last coordinate
   if (length(Opn$ldk) == 0) {
