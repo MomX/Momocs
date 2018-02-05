@@ -5,6 +5,24 @@
 
 \encoding{UTF-8}
 
+
+\section{Changes in version 1.2.4}{
+  \itemize{
+    \item New functions/methods: coo_intersect_segment, coo_intersect_direction, coo_intersect_angle, def_ldk_direction, def_ldk_angle, def_ldk, tips, coo_sample_prop
+    \item coo_slice.Opn now supports ldk.
+    \item Dependencies: now depends rgeos for intersecting methods.
+    \item Data: lightened nsfishes and charring to comply R CMD CHECK.
+  }
+}
+
+\section{Changes in version 1.2.3}{
+  \itemize{
+    \item Built with 3.4.3
+    \item coo_slice now suports ldks
+    \item various minor bugs fixes, see GitHub
+  }
+}
+
 \section{Changes in version 1.2.2}{
   \itemize{
     \item MANOVA_PW now returns p-values
