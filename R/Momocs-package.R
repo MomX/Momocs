@@ -74,6 +74,7 @@ magrittr::`%T>%`
 #' contour hist image layout legend lines locator
 #' par points polygon rasterImage rect rug
 #' segments strheight strwidth text title
+#' @importFrom progress progress_bar
 #' @importFrom rgeos gIntersection
 #' @importFrom stats cor cov cov.wt df dist dnorm fft
 #' hclust kmeans lm manova median na.omit
