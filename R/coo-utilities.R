@@ -763,7 +763,9 @@ coo_intersect_segment <- function(coo, seg, center=TRUE){
 #' @inheritParams coo_check
 #' @param angle \code{numeric} an angle in radians (0 by default).
 #' @param direction \code{character} one of \code{"down", "left", "up", "right"} ("right" by default)
-#' @note shapes are always centered before this operation.
+#' @note shapes are always centered before this operation. If you need a simple
+#' direction such as \code{(down, left, up, right)ward}, then use \link{coo_intersect_direction} which
+#' does not need to find an intersection but relies on coordinates and is about 1000.
 #' @return \code{numeric} the id of the nearest point. See examples.
 #' @family coo_ intersect
 #' @examples
@@ -801,13 +803,30 @@ coo_intersect_angle <- function(coo, angle=0){
 #' @export
 coo_intersect_direction <- function(coo,
                                     direction=c("down", "left", "up", "right")[4]){
-  # switch from direction to angle in radians
-  angle <- switch(direction,
-                  "down" = -pi/2,
-                  "left"   = pi,
-                  "up"     = pi/2,
-                  "right"  = 0)
-  coo_intersect_angle(coo, angle)
+
+  coo <- coo_check(coo)
+
+  if (direction == "down") {
+    x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+    id0 <- x0.ed[which(coo[x0.ed, 2] < 0)[1]]
+  }
+
+  if (direction == "left") {
+    y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+    id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
+  }
+
+  if (direction == "up") {
+    x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+    id0 <- x0.ed[which(coo[x0.ed, 2] > 0)[1]]
+  }
+
+  if (direction == "right") {
+    y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+    id0 <- y0.ed[which(coo[y0.ed, 1] > 0)[1]]
+  }
+  # return the id
+  id0
 }
 
 

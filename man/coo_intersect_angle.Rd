@@ -24,7 +24,9 @@ Take a shape, and segment starting on the centroid and having a particular angle
 where the segment intersects with the shape?
 }
 \note{
-shapes are always centered before this operation.
+shapes are always centered before this operation. If you need a simple
+direction such as \code{(down, left, up, right)ward}, then use \link{coo_intersect_direction} which
+does not need to find an intersection but relies on coordinates and is about 1000.
 }
 \examples{
 coo <- bot[1] \%>\% coo_center \%>\% coo_scale
