@@ -571,7 +571,20 @@ combine.Out <- function(...) {
 }
 
 #' @export
-combine.Opn <- combine.Out
+combine.Opn <- function(...) {
+  args <- list(...)
+  #   # we check
+  #   if (length(unique(sapply(args, length))) != 1)
+  #     stop("objects to combine must have the same number of items")
+  Opn <- Opn(do.call(c, lapply(args, function(x) c(x$coo))))
+  Opn$fac <- do.call("rbind", lapply(args, function(x) x$fac))
+  Opn$fac %<>% data.frame()
+  if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
+    Opn$ldk <- do.call("c", lapply(args, function(x) x$ldk))
+  }
+  #Opn %<>% validate()
+  return(Opn)
+}
 
 #' @export
 combine.Ldk <- function(...) {
