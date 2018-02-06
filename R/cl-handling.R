@@ -871,10 +871,6 @@ at_least <- function(x, fac, N){
   }
 }
 
-# x=charring
-# fac="taxa"
-# N=40
-
 # rm ------------
 #' Removes shapes with incomplete slices
 #'
