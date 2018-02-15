@@ -152,7 +152,7 @@ draw_axes <- function(coo, col="#999999", lwd=1/2,...){
 
 #' @export
 #' @rdname cheapbabi_drawers
-#' @param labels \code(character) name of labels to draw (defaut to \code{1:nrow(coo)})
+#' @param labels \code{character} name of labels to draw (defaut to \code{1:nrow(coo)})
 #' @param d \code{numeric} how far away on a segment should the labels be displayed
 #' (on a centroid-point) segment.
 draw_labels <- function(coo, labels=1:nrow(coo), d=1/20, cex=1/2, ...){

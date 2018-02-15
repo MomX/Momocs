@@ -51,7 +51,7 @@ number of majors lines, and the number of minor lines within two major ones}
 
 \item{cex}{to draw components}
 
-\item{labels}{\code(character) name of labels to draw (defaut to \code{1:nrow(coo)})}
+\item{labels}{\code{character} name of labels to draw (defaut to \code{1:nrow(coo)})}
 
 \item{d}{\code{numeric} how far away on a segment should the labels be displayed
 (on a centroid-point) segment.}
