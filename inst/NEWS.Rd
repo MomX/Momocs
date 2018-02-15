@@ -5,7 +5,10 @@
 
 \encoding{UTF-8}
 
-
+\section{Changes in version 1.2.5}
+\itemize{
+  \item cheap base biplots (aka cheapbabi): pipe-friendly base layers for biplots and shape drawing on cartesian coordinates.
+}
 \section{Changes in version 1.2.4}{
   \itemize{
     \item New functions/methods: coo_intersect_segment, coo_intersect_direction, coo_intersect_angle, def_ldk_direction, def_ldk_angle, def_ldk, tips, coo_sample_prop
