@@ -6,7 +6,7 @@
 #' Multivariate plots using cheapbabi layers
 #'
 #' Quickly vizualize \link{PCA} objects and build customs plots
-#' using the layering approach. See examples.
+#' using the \link{cheapbabi} layers. See examples.
 #'
 #' @note This method will replace \link{plot.PCA} in further versions.
 #' This \code{cheap base biplot} may be packaged at some point.
@@ -685,7 +685,7 @@ layer_labelgroups <- function(x, col=par("fg"), cex=3/4, font=2,
 # meta layers ----------------------------------------------
 #' @export
 #' @rdname cheapbabi
-layer_rug <- function(x, size=1/200, ..){
+layer_rug <- function(x, size=1/200, ...){
   # if numeric, apply with a local trick on f
   if (!is.factor(x$f)){
     f <- factor(rep(1, length(x$f)))

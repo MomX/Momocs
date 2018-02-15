@@ -66,7 +66,7 @@ layer_labelpoints(x, col = par("fg"), cex = 2/3, font = 1,
 layer_labelgroups(x, col = par("fg"), cex = 3/4, font = 2, rect = TRUE,
   alpha = 1/4, abbreviate = FALSE, ...)
 
-layer_rug(x, size = 1/200, ..)
+layer_rug(x, size = 1/200, ...)
 
 layer_title(x, title = "", cex = 3/4, ...)
 
