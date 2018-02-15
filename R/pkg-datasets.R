@@ -193,6 +193,6 @@ NULL
 #' @rdname data_nsfishes
 #' @format A \link{Out} object containing the outlines coordinates for 218 fishes from
 #' the North Sea along with taxonomical cofactors.
-#' @source Caillon F, Frelat R, Mollmann C, Bonhomme V (in prep.)
+#' @source Caillon F, Frelat R, Mollmann C, Bonhomme V (submitted)
 #' @family datasets
 NULL
