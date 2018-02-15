@@ -19,10 +19,10 @@ or a factor can directly be passed. Accept \code{numeric} as well.}
 }
 \description{
 Quickly vizualize \link{PCA} objects and build customs plots
-using the \link{cheapbabi} layers. See examples.
+using the \link{cheapbabi_layers} layers. See examples.
 }
 \note{
-This method will replace \link{plot.PCA} in further versions.
+This approach will replace \link{plot.PCA} in further versions.
 This \code{cheap base biplot} may be packaged at some point.
 All comments are welcome.
 }

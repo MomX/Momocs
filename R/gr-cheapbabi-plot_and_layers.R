@@ -6,9 +6,9 @@
 #' Multivariate plots using cheapbabi layers
 #'
 #' Quickly vizualize \link{PCA} objects and build customs plots
-#' using the \link{cheapbabi} layers. See examples.
+#' using the \link{cheapbabi_layers} layers. See examples.
 #'
-#' @note This method will replace \link{plot.PCA} in further versions.
+#' @note This approach will replace \link{plot.PCA} in further versions.
 #' This \code{cheap base biplot} may be packaged at some point.
 #' All comments are welcome.
 #'
@@ -105,8 +105,9 @@ plot_PCA <- function(x, f, axes=c(1, 2), palette=col_summer){
 #' Useful layers for building custom
 #' mutivariate plots using the cheapbabi approach. See examples.
 #'
-#' @name cheapbabi
-#' @rdname cheapbabi
+#' @name cheapbabi_layers
+#' @rdname cheapbabi_layers
+#' @seealso cheapbabi_drawers
 #' @family graphics cheapbabi
 #'
 #' @param x a list, typically returned by \link{plot_PCA}
@@ -133,7 +134,7 @@ layer_frame <- function(x, center_origin = TRUE, zoom = 0.9){
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param col color (hexadecimal) to use for drawing components
 #' @param lwd linewidth for drawing components
 #' @param ... additional options to feed core functions for each layer
@@ -148,7 +149,7 @@ layer_axes <- function(x, col="#999999", lwd=1/2, ...){
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param lty linetype for drawing components
 #' @param grid \code{numeric} number of grid to draw
 layer_grid <- function(x, col="#999999", lty=3, grid = 3, ...) {
@@ -164,7 +165,7 @@ layer_grid <- function(x, col="#999999", lty=3, grid = 3, ...) {
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param border color (hexadecimal) to use to draw border
 layer_box <- function(x, border="#e5e5e5", ...){
   # neater par
@@ -178,7 +179,7 @@ layer_box <- function(x, border="#e5e5e5", ...){
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_fullframe <- function(x, ...){
   x %>%
     layer_frame(...) %>%
@@ -191,7 +192,7 @@ layer_fullframe <- function(x, ...){
 
 # shapes ---------------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param pch to use for drawing components
 #' @param cex to use for drawing components
 layer_points <- function(x, pch=20, cex=4/log1p(nrow(x$xy)), ...){
@@ -202,7 +203,7 @@ layer_points <- function(x, pch=20, cex=4/log1p(nrow(x$xy)), ...){
 
 # morphospace ----------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param position one of \code{range, full, circle,
 #' xy, range_axes, full_axes)} to feed \link{pos.shapes} (default \code{range})
 #' @param nb \code{numeric} total number of shapes when \code{position="circle"} (default \code{12})
@@ -377,7 +378,7 @@ layer_morphospace <-
 
 # ellipses layers ------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param conf \code{numeric} between 0 and 1 for confidence ellipses
 #' @param alpha \code{numeric} between 0 and 1 for the transparency of components
 layer_ellipses <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
@@ -410,7 +411,7 @@ layer_ellipses <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_ellipsesfilled <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
   # if numeric, do not apply this layer but still propagate
   if (!is.factor(x$f))
@@ -443,7 +444,7 @@ layer_ellipsesfilled <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_ellipsesaxes <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
   # if numeric, do not apply this layer but still propagate
   if (!is.factor(x$f))
@@ -484,7 +485,7 @@ layer_ellipsesaxes <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
 
 # chull layers ---------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_chull <- function(x, ...){
   # if numeric, do not apply this layer but still propagate
   if (!is.factor(x$f))
@@ -504,7 +505,7 @@ layer_chull <- function(x, ...){
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_chullfilled <- function(x, alpha=0.8, ...){
   # if numeric, do not apply this layer but still propagate
   if (!is.factor(x$f))
@@ -525,7 +526,7 @@ layer_chullfilled <- function(x, alpha=0.8, ...){
 
 # stars layers ---------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_stars <- function(x, alpha=0.5, ...) {
   # if numeric, apply with a local trick on f
   if (!is.factor(x$f)){
@@ -551,7 +552,7 @@ layer_stars <- function(x, alpha=0.5, ...) {
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_delaunay <- function(x, ...){
   # if numeric, apply with a local trick on f
   if (!is.factor(x$f)){
@@ -581,7 +582,7 @@ layer_delaunay <- function(x, ...){
 
 # density layers -------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param levels_density \code{numeric} number of levels to use to feed \code{MASS::kde2d}
 #' @param levels_contour \code{numeric} number of levels to use to feed \code{graphics::contour}
 #' @param n \code{numeric} number of grid points to feed \code{MASS::kde2d}
@@ -622,7 +623,7 @@ layer_density <- function(x, levels_density=20,
 
 # label layers ---------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param font to feed \link{text}
 #' @param abbreviate \code{logical} whether to abbreviate names
 layer_labelpoints <- function(x, col=par("fg"), cex=2/3,
@@ -644,7 +645,7 @@ layer_labelpoints <- function(x, col=par("fg"), cex=2/3,
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param rect \code{logical} whether to draw a rectangle below names
 layer_labelgroups <- function(x, col=par("fg"), cex=3/4, font=2,
                               rect=TRUE, alpha=1/4, abbreviate=FALSE, ...){
@@ -684,7 +685,7 @@ layer_labelgroups <- function(x, col=par("fg"), cex=3/4, font=2,
 
 # meta layers ----------------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_rug <- function(x, size=1/200, ...){
   # if numeric, apply with a local trick on f
   if (!is.factor(x$f)){
@@ -712,7 +713,7 @@ layer_rug <- function(x, size=1/200, ...){
 
 # cosmetics layers -----------------------------------------
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param title to add to the plot (default \code{""})
 layer_title <- function(x, title="", cex=3/4, ...) {
   # neater par
@@ -725,7 +726,7 @@ layer_title <- function(x, title="", cex=3/4, ...) {
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param name to use on axes (default \code{"Axis"})
 layer_axesnames <- function(x, cex=3/4, name="Axis", ...){
   # neater par
@@ -746,7 +747,7 @@ layer_axesnames <- function(x, cex=3/4, name="Axis", ...){
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param nb_max \code{numeric} number of eigen values to display (default \code{5})
 layer_eigen <- function(x, nb_max=5, cex=1/2, ...){
   # if non pertinent, propagate
@@ -791,7 +792,7 @@ layer_eigen <- function(x, nb_max=5, cex=1/2, ...){
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 layer_axesvar <- function(x, cex=3/4, ...){
   # neater par
   old <- par(mar=rep(1/8, 4), xpd=NA)
@@ -814,7 +815,7 @@ layer_axesvar <- function(x, cex=3/4, ...){
 }
 
 #' @export
-#' @rdname cheapbabi
+#' @rdname cheapbabi_layers
 #' @param probs \code{numeric} sequence to feed \code{stats::quantile}
 #' and to indicate where to draw ticks and legend labels
 layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
