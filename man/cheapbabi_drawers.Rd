@@ -4,10 +4,13 @@
 \alias{paper_white}
 \alias{paper_grid}
 \alias{cheapbabi_drawers}
+\alias{draw_polygon}
 \alias{draw_outline}
+\alias{draw_points}
 \alias{draw_landmarks}
-\alias{draw_curve}
+\alias{draw_lines}
 \alias{draw_centroid}
+\alias{draw_curve}
 \alias{draw_firstpoint}
 \alias{draw_axes}
 \alias{draw_labels}
@@ -19,13 +22,19 @@ paper_white(coo)
 
 paper_grid(coo, grid = c(10, 5), cols = c("#ffa500", "#e5e5e5"), ...)
 
+draw_polygon(coo, border = par("fg"), col = NA, ...)
+
 draw_outline(coo, border = par("fg"), col = NA, ...)
+
+draw_points(coo, col = par("fg"), pch = 20, ...)
 
 draw_landmarks(coo, col = par("fg"), pch = 20, ...)
 
-draw_curve(coo, col = par("fg"), ...)
+draw_lines(coo, col = par("fg"), ...)
 
 draw_centroid(coo, pch = 3, cex = 0.5, ...)
+
+draw_curve(coo, col = par("fg"), ...)
 
 draw_firstpoint(coo, cex = 1, ...)
 
@@ -41,6 +50,8 @@ draw_links(coo, links, lwd = 1/2, col = par("fg"), ...)
 \item{grid}{\code{numeric} of length 2 to (roughly) specify the
 number of majors lines, and the number of minor lines within two major ones}
 
+\item{cols}{colors (hexadecimal) to use for grid drawing}
+
 \item{...}{additional options to feed core functions for each drawer}
 
 \item{border}{color (hexadecimal) to draw components}
@@ -50,6 +61,8 @@ number of majors lines, and the number of minor lines within two major ones}
 \item{pch}{to draw components}
 
 \item{cex}{to draw components}
+
+\item{lwd}{to draw components}
 
 \item{labels}{\code{character} name of labels to draw (defaut to \code{1:nrow(coo)})}
 

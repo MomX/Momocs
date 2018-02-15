@@ -41,6 +41,7 @@ paper_white <- function(coo){
 #' @rdname cheapbabi_drawers
 #' @param grid \code{numeric} of length 2 to (roughly) specify the
 #' number of majors lines, and the number of minor lines within two major ones
+#' @param cols colors (hexadecimal) to use for grid drawing
 paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
   # no margins
   old <- par(mar=rep(0, 4), xpd=NA)
@@ -83,6 +84,7 @@ paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
 #' @param col color (hexadecimal) to draw components
 #' @param pch to draw components
 #' @param cex to draw components
+#' @param lwd to draw components
 #' @param ... additional options to feed core functions for each drawer
 #'
 #' @examples
@@ -94,7 +96,7 @@ paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
 #'   coo_sample(24) %>% draw_landmarks %>% draw_labels() %>%
 #'   draw_links(replicate(2, sample(1:24, 8)))
 #' @export
-draw_outline <- draw_polygon <- function(coo, border=par("fg"), col=NA, ...){
+draw_polygon <- function(coo, border=par("fg"), col=NA, ...){
   # draw the outline as a polygon
   polygon(coo[, 1], coo[, 2], border=border, col=col, ...)
   # propagate
@@ -103,7 +105,11 @@ draw_outline <- draw_polygon <- function(coo, border=par("fg"), col=NA, ...){
 
 #' @export
 #' @rdname cheapbabi_drawers
-draw_landmarks <- draw_points <- function(coo, col=par("fg"), pch=20, ...){
+draw_outline <- draw_polygon
+
+#' @export
+#' @rdname cheapbabi_drawers
+draw_points <- function(coo, col=par("fg"), pch=20, ...){
   # draw landmarks as points
   points(coo[, 1], coo[, 2], col=col, pch=pch, ...)
   # propagate
@@ -112,12 +118,17 @@ draw_landmarks <- draw_points <- function(coo, col=par("fg"), pch=20, ...){
 
 #' @export
 #' @rdname cheapbabi_drawers
-draw_curve <- draw_lines <- function(coo, col=par("fg"), ...){
+draw_landmarks <- draw_points
+
+#' @export
+#' @rdname cheapbabi_drawers
+draw_lines <- function(coo, col=par("fg"), ...){
   # draw curve as line
   lines(coo[, 1], coo[, 2], col=col, ...)
   # propagate
   invisible(coo)
 }
+
 
 #' @export
 #' @rdname cheapbabi_drawers
@@ -128,6 +139,10 @@ draw_centroid <- function(coo, pch=3, cex=0.5, ...){
   # propagate
   invisible(coo)
 }
+
+#' @export
+#' @rdname cheapbabi_drawers
+draw_curve <- draw_lines
 
 #' @export
 #' @rdname cheapbabi_drawers
