@@ -649,16 +649,16 @@ But, of course, you can directly access information within the Momocs objects; t
 
 ```{r, eval=FALSE}
 # from Coo objects
-bot$coo
-bot$fac
+bot$coo # list of matrices (of xy coordinates)
+bot$fac # data.frame for covariates
 
 # from Coe objects
-bot.f$coe
-bot.f$fac
+bot.f$coe # matrix of coefficients
+bot.f$fac # data.frame for covariates
 as_df(bot.f)
 
 # from PCA objects
-bot.p$x # scores
+bot.p$x        # scores
 bot.p$rotation # rotation matrix
 ```
 
