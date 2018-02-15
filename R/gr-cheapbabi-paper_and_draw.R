@@ -1,9 +1,28 @@
 
-# .orange   <- "#ffa500"
-# .grey90   <- "#e5e5e5"
-# .grey60   <- "#999999"
+#' # todo
+#' #paper_chessboard
+#'
+#' #' @export
+#' .chessboard <- function(n=50, col="grey98", w){
+#'   # grabs window parameters if not provided
+#'   if (missing(w)) w <- par("usr")
+#'   # max dimension
+#'   wm <-   max(w[2] - w[1], w[4] - w[3])
+#'   side <- wm/n
+#'   # generates xleft coordinates (1/2 is picked)
+#'   xl <- seq(w[1], w[2], side)[seq(0, n, 2)+1]
+#'   # generates all ybottom coordinates
+#'   yb <- seq(w[3], w[4], side)
+#'   # handles g(ap) through modulus
+#'   g <- c(0, side)[(1:n %% 2)+1]
+#'   # loop and draw rectangles
+#'   for (j in 1:n)
+#'     rect(xl + g[j], yb[j], xl + g[j] + side, yb[j]+side, col=col, border=NA)
+#' }
 
 # _____ paper _____ ----------------------------------------
+#' @export
+#' @rdname cheapbabi_drawers
 paper_white <- function(coo){
   # no margins
   old <- par(mar=rep(0, 4))
@@ -18,7 +37,10 @@ paper_white <- function(coo){
   invisible(coo)
 }
 
-
+#' @export
+#' @rdname cheapbabi_drawers
+#' @param grid \code{numeric} of length 2 to (roughly) specify the
+#' number of majors lines, and the number of minor lines within two major ones
 paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
   # no margins
   old <- par(mar=rep(0, 4), xpd=NA)
@@ -43,7 +65,35 @@ paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
 }
 
 # _____ draw _____ -----------------------------------------
-# shapes
+#' Cheapbabi drawers for shape plots
+#'
+#' Useful drawers for building custom
+#' shape plots using the cheapbabi approach. See examples.
+#'
+#' @note This appriach will replace \link{coo_plot} and friends in further versions.
+#' All comments are welcome.
+#'
+#' @name cheapbabi_drawers
+#' @rdname cheapbabi_drawers
+#' @seealso cheapbabi_layers
+#' @family graphics cheapbabi
+#'
+#' @param coo \code{matrix} of 2 columns for (x, y) coordinates
+#' @param border color (hexadecimal) to draw components
+#' @param col color (hexadecimal) to draw components
+#' @param pch to draw components
+#' @param cex to draw components
+#' @param ... additional options to feed core functions for each drawer
+#'
+#' @examples
+#' bot[1] %>% paper_grid() %>% draw_polygon() %>% draw_centroid() %>% draw_axes()
+#' hearts[240] %>% paper_white() %>% draw_polygon() %>%
+#'   draw_firstpoint(cex=1)
+#'
+#' hearts[240] %>% paper_white() %>% draw_outline() %>%
+#'   coo_sample(24) %>% draw_landmarks %>% draw_labels() %>%
+#'   draw_links(replicate(2, sample(1:24, 8)))
+#' @export
 draw_outline <- draw_polygon <- function(coo, border=par("fg"), col=NA, ...){
   # draw the outline as a polygon
   polygon(coo[, 1], coo[, 2], border=border, col=col, ...)
@@ -51,6 +101,8 @@ draw_outline <- draw_polygon <- function(coo, border=par("fg"), col=NA, ...){
   invisible(coo)
 }
 
+#' @export
+#' @rdname cheapbabi_drawers
 draw_landmarks <- draw_points <- function(coo, col=par("fg"), pch=20, ...){
   # draw landmarks as points
   points(coo[, 1], coo[, 2], col=col, pch=pch, ...)
@@ -58,6 +110,8 @@ draw_landmarks <- draw_points <- function(coo, col=par("fg"), pch=20, ...){
   invisible(coo)
 }
 
+#' @export
+#' @rdname cheapbabi_drawers
 draw_curve <- draw_lines <- function(coo, col=par("fg"), ...){
   # draw curve as line
   lines(coo[, 1], coo[, 2], col=col, ...)
@@ -65,7 +119,8 @@ draw_curve <- draw_lines <- function(coo, col=par("fg"), ...){
   invisible(coo)
 }
 
-# meta
+#' @export
+#' @rdname cheapbabi_drawers
 draw_centroid <- function(coo, pch=3, cex=0.5, ...){
   # calculate centroid position
   cxy <- coo_centpos(coo)
@@ -74,6 +129,8 @@ draw_centroid <- function(coo, pch=3, cex=0.5, ...){
   invisible(coo)
 }
 
+#' @export
+#' @rdname cheapbabi_drawers
 draw_firstpoint <- function(coo, cex=1, ...){
   # calculate the tangent angle (in degrees) between the first 2 points
   angle <- atan2(coo[2, 2] - coo[1, 2], coo[2, 1] - coo[1, 1]) * (180/pi) - 90
@@ -83,6 +140,8 @@ draw_firstpoint <- function(coo, cex=1, ...){
   invisible(coo)
 }
 
+#' @export
+#' @rdname cheapbabi_drawers
 # cosmetics
 draw_axes <- function(coo, col="#999999", lwd=1/2,...){
   # add x=0 and y=0 lines for axes
@@ -91,6 +150,11 @@ draw_axes <- function(coo, col="#999999", lwd=1/2,...){
   invisible(coo)
 }
 
+#' @export
+#' @rdname cheapbabi_drawers
+#' @param labels \code(character) name of labels to draw (defaut to \code{1:nrow(coo)})
+#' @param d \code{numeric} how far away on a segment should the labels be displayed
+#' (on a centroid-point) segment.
 draw_labels <- function(coo, labels=1:nrow(coo), d=1/20, cex=1/2, ...){
   # centrifugate labels positions of d*median(distance centroid)
   # away from centroid
@@ -106,6 +170,9 @@ draw_labels <- function(coo, labels=1:nrow(coo), d=1/20, cex=1/2, ...){
   invisible(coo)
 }
 
+#' @export
+#' @rdname cheapbabi_drawers
+#' @param links \code{matrix} of links
 draw_links <- function(coo, links, lwd=1/2, col=par("fg"), ...){
   for (i in 1:nrow(links)) {
     segments(coo[links[i, 1], 1],
@@ -117,32 +184,3 @@ draw_links <- function(coo, links, lwd=1/2, col=par("fg"), ...){
   # propagate
   invisible(coo)
 }
-#'
-#' bot[1] %>% paper_grid() %>% add_polygon() %>% add_centroid() %>% add_axes()
-#' hearts[240] %>% paper_white() %>% add_polygon() %>%
-#'   add_firstpoint(cex=1)
-#'
-#' hearts[240] %>% paper_white() %>% add_outline() %>%
-#'   coo_sample(24) %>% add_landmarks %>% add_labels() %>%
-#'   add_links(replicate(2, sample(1:24, 8)))
-#'
-#' # todo
-#' #paper_chessboard
-#'
-#' #' @export
-#' .chessboard <- function(n=50, col="grey98", w){
-#'   # grabs window parameters if not provided
-#'   if (missing(w)) w <- par("usr")
-#'   # max dimension
-#'   wm <-   max(w[2] - w[1], w[4] - w[3])
-#'   side <- wm/n
-#'   # generates xleft coordinates (1/2 is picked)
-#'   xl <- seq(w[1], w[2], side)[seq(0, n, 2)+1]
-#'   # generates all ybottom coordinates
-#'   yb <- seq(w[3], w[4], side)
-#'   # handles g(ap) through modulus
-#'   g <- c(0, side)[(1:n %% 2)+1]
-#'   # loop and draw rectangles
-#'   for (j in 1:n)
-#'     rect(xl + g[j], yb[j], xl + g[j] + side, yb[j]+side, col=col, border=NA)
-#' }
