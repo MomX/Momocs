@@ -98,6 +98,7 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
                         utils::packageDescription('Momocs', field='Version'),
                         appendLF = TRUE)
 }
+
 #
 # .onLoad <- function(libname, pkgname){
 #   Momocs_options <- list(
