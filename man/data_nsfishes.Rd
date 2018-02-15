@@ -7,7 +7,7 @@
 \format{A \link{Out} object containing the outlines coordinates for 218 fishes from
 the North Sea along with taxonomical cofactors.}
 \source{
-Caillon F, Frelat R, Mollmann C, Bonhomme V (in prep.)
+Caillon F, Frelat R, Mollmann C, Bonhomme V (submitted)
 }
 \description{
 Data: Outline coordinates of North Sea fishes
