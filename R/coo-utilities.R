@@ -506,18 +506,19 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' If provided, \code{ids} will be ignored.
 #' @return a list of shapes or a list of \link{Opn}
 #' @examples
+#' h <- slice(hearts, 1:50)
 #' # single shape, a list of matrices is returned
-#' sh <- coo_slice(hearts[1], c(12, 24, 36, 48))
+#' sh <- coo_slice(h[1], c(12, 24, 36, 48))
 #' coo_plot(sh[[1]])
 #' panel(Opn(sh))
 #' # on a Coo, a list of Opn is returned
 #' # makes no sense if shapes are not normalized first
-#' sh2 <- coo_slice(hearts, c(12, 24, 36, 48))
+#' sh2 <- coo_slice(h, c(12, 24, 36, 48))
 #' panel(sh2[[1]])
 #'
 #' # Use coo_slice with `ldk` instead:
 #' # hearts as an example
-#' x <- hearts %>% fgProcrustes()
+#' x <- h %>% fgProcrustes(tol=1)
 #' # 4 landmarks
 #' stack(x)
 #' x$ldk[1:5]

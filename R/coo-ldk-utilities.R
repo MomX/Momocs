@@ -266,14 +266,17 @@ def_ldk.Opn <- def_ldk.Out
 #' @examples
 #' # adds a new landmark towards south east
 #' hearts %>%
-#' coo_center() %>%
-#'   def_ldk_angle(-pi/6) %>%
+#'    slice(1:20) %>% # for speed purpose only
+#'    coo_center() %>%
+#'    def_ldk_angle(-pi/6) %>%
 #' stack()
 #'
 #' # on Out and towards NW and NE here
 #' olea %>%
-#'     def_ldk_angle(3*pi/4) %>% def_ldk_angle(pi/4) %>%
-#'     stack
+#'    slice(1:20) %>% #for speed purpose only
+#'    def_ldk_angle(3*pi/4) %>%
+#'    def_ldk_angle(pi/4) %>%
+#'    stack
 #'
 #' @export
 def_ldk_angle <- function(coo, angle){
