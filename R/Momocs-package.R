@@ -96,9 +96,36 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
 .onAttach <- function(lib, pkg) {
   packageStartupMessage('This is Momocs ',
                         utils::packageDescription('Momocs', field='Version'),
-                        appendLF = TRUE) }
-
-
-
-
+                        appendLF = TRUE)
+}
+#
+# .onLoad <- function(libname, pkgname){
+#   Momocs_options <- list(
+#     Momocs_verbose = TRUE,
+#     Momocs_message = TRUE)
+#   options(Momocs_options)
+# }
+#
+#
+# Momocs_options <- function(...){
+#   args <- list(...)
+#   p <- "^Momocs_.*$"
+#   # see
+#   if (length(args)==0){
+#     return(options()[grep(p, names(options()))])
+#   }
+#   # set
+#   if (all(sapply(args, is.character))){
+#     .check(all(sapply(args,
+#                       function(.x) length(grep(p, .x))>0)),
+#            "Momocs' options names must begin with 'Momocs_'")
+#     options(unlist(args))
+#   } else {
+#     #get
+#     .check(all(sapply(names(args),
+#                       function(.x) length(grep(p, .x))>0)),
+#            "Momocs' options names must begin with 'Momocs_'")
+#     options(args)
+#   }
+# }
 
