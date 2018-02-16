@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{import_jpg}
 \alias{import_jpg}
-\title{Extracts outline coordinates from multiple .jpg files}
+\title{Extract outline coordinates from multiple .jpg files}
 \usage{
 import_jpg(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
   fun.notcentered = NULL, threshold = 0.5, verbose = TRUE)
@@ -38,23 +38,24 @@ and \link{import_Conte} for the algorithm itself.
 If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
 file in the folder taht contains all your files. All the outlines should be imported then.
 }
+\note{
+Note this function will be deprecated from Momocs
+when \code{Momacs} and \code{Momit}
+will be fully operationnal.
+}
 \examples{
 \dontrun{
 
-# if your images are in the folder '/foo/jpgs/'
 lf <- list.files('/foo/jpegs', full.names=TRUE)
 coo <- import_jpg(lf)
 Out(coo)
 
-# 'automatic' version
 coo <- import_jpg()
 }
 }
 \seealso{
-Other babel functions: \code{\link{bind_db}},
-  \code{\link{chc2Out}}, \code{\link{chc2pix}},
+Other import functions: \code{\link{import_Conte}},
   \code{\link{import_StereoMorph_curve1}},
-  \code{\link{import_tps}}, \code{\link{nef2Coe}},
-  \code{\link{ntsrow2Coo}}, \code{\link{pix2chc}},
-  \code{\link{tie_jpg_txt}}, \code{\link{tps2coo}}
+  \code{\link{import_jpg1}}, \code{\link{import_tps}},
+  \code{\link{import_txt}}, \code{\link{pix2chc}}
 }

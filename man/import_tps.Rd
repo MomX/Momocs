@@ -2,16 +2,22 @@
 % Please edit documentation in R/babel-import.R
 \name{import_tps}
 \alias{import_tps}
-\title{Imports a tps file}
+\alias{tps2coo}
+\title{Import a tps file}
 \usage{
 import_tps(tps.path, curves = TRUE)
+
+tps2coo(tps, curves = TRUE)
 }
 \arguments{
 \item{tps.path}{lines, typically from \link{readLines}, describing a single shape in tps-like format.
 
 You will need to manually build your \code{Coo} object from it: eg \code{Out(coo=your_list$coo)}.}
 
-\item{curves}{\code{logical} whether to read curves, if any}
+\item{curves}{\code{logical} whether to read curves, if any
+\code{tps2coo} is used in \link{import_tps} and may be useful for data import. When provided
+with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
+coordinates, curves, etc.}
 }
 \value{
 a list with components:
@@ -20,11 +26,19 @@ a list with components:
 \description{
 And returns a list of coordinates, curves, scale
 }
+\note{
+Note this function will be deprecated from Momocs
+when \code{Momacs} and \code{Momit}
+will be fully operationnal.
+}
 \seealso{
-Other babel functions: \code{\link{bind_db}},
-  \code{\link{chc2Out}}, \code{\link{chc2pix}},
+Other import functions: \code{\link{import_Conte}},
   \code{\link{import_StereoMorph_curve1}},
-  \code{\link{import_jpg}}, \code{\link{nef2Coe}},
-  \code{\link{ntsrow2Coo}}, \code{\link{pix2chc}},
-  \code{\link{tie_jpg_txt}}, \code{\link{tps2coo}}
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_txt}}, \code{\link{pix2chc}}
+
+Other import functions: \code{\link{import_Conte}},
+  \code{\link{import_StereoMorph_curve1}},
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_txt}}, \code{\link{pix2chc}}
 }
