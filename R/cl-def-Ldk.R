@@ -21,7 +21,7 @@
 #' specifying the grouping structure
 #' @return an \code{Ldk} object
 #' @details implementation of \code{$slidings} is inspired by \code{geomorph}
-#' @family Coo objects
+#' @family classes
 #' \code{Ldk} methods must be, so far, considered as experimental in Momocs.
 #' @examples
 #' #Methods on Ldk

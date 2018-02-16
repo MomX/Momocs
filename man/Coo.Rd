@@ -39,6 +39,10 @@ with \code{methods(class=Coo)}.
 \dontrun{
 # to see all methods for Coo objects.
 methods(class='Coo')
+
+# to see all methods for Out objects.
+methods(class='Out') # same for Opn and Ldk
+
 # Let's take an Out example. But all methods shown here
 # work on Ldk (try data(wings) ) and on Opn (try data(olea))
 data(bot)
@@ -84,5 +88,7 @@ names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
 }
 }
 \seealso{
-Other Coo objects: \code{\link{Opn}}, \code{\link{Out}}
+Other classes: \code{\link{Coe}}, \code{\link{OpnCoe}},
+  \code{\link{Opn}}, \code{\link{OutCoe}},
+  \code{\link{Out}}, \code{\link{TraCoe}}
 }

@@ -46,5 +46,7 @@ olda
 plot(olda)
 }
 \seealso{
-Other Coo objects: \code{\link{Coo}}, \code{\link{Out}}
+Other classes: \code{\link{Coe}}, \code{\link{Coo}},
+  \code{\link{OpnCoe}}, \code{\link{OutCoe}},
+  \code{\link{Out}}, \code{\link{TraCoe}}
 }

@@ -29,11 +29,15 @@
 #' You can access all the methods available for \code{Coo} objects
 #' with \code{methods(class=Coo)}.
 #'
-#' @family Coo objects
+#' @family classes
 #' @examples
 #' \dontrun{
 #' # to see all methods for Coo objects.
 #' methods(class='Coo')
+#'
+#' # to see all methods for Out objects.
+#' methods(class='Out') # same for Opn and Ldk
+#'
 #' # Let's take an Out example. But all methods shown here
 #' # work on Ldk (try data(wings) ) and on Opn (try data(olea))
 #' data(bot)
@@ -85,7 +89,7 @@ Coo <- function(...) {
 #' Coe "super" class
 #'
 #'\code{Coe} class is the 'parent' or 'super' class of
-#' \code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{LdkCoe} classes.
+#' \code{\link{OutCoe}}, \code{\link{OpnCoe}}, \code{LdkCoe} and \code{TraCoe} classes.
 #'
 #' Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
 #' a detail of the design behind Momocs' classes.
@@ -106,10 +110,12 @@ Coo <- function(...) {
 #' You can access all the methods available for \code{Coe} objects
 #' with \code{methods(class=Coe)}.
 #'
-#' @family Coe objects
+#' @family classes
 #' @examples
-#' # to see all methods for Coo objects.
+#' # to see all methods for Coe objects.
 #' methods(class='Coe')
+#' # to see all methods for OutCoe objects.
+#' methods(class='OutCoe') # same for OpnCoe, LdkCoe, TraCoe
 #'
 #' data(bot)
 #' bot.f<- efourier(bot, 12)
