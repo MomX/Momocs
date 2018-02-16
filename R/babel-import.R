@@ -424,9 +424,9 @@ import_StereoMorph_ldk <- function(path, names){
 #'
 #' And returns a list of coordinates, curves, scale
 #' @param tps.path lines, typically from \link{readLines}, describing a single shape in tps-like format.
-#'
 #' You will need to manually build your \code{Coo} object from it: eg \code{Out(coo=your_list$coo)}.
 #' @param curves \code{logical} whether to read curves, if any
+#' @param tps lines for a single tps file
 #' \code{tps2coo} is used in \link{import_tps} and may be useful for data import. When provided
 #' with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
 #' coordinates, curves, etc.
@@ -534,6 +534,7 @@ tps2coo <- function(tps, curves=TRUE){
 #'
 #' Useful to convert (x; y) coordinates to chain-coded coordinates.
 #' @param coo (x; y) coordinates passed as a matrix
+#' @param chc chain coordinates
 #' @seealso \link{chc2pix}
 #'
 #' @note Note this function will be deprecated from Momocs

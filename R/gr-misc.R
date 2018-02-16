@@ -38,6 +38,7 @@
 #'
 #'  # Black only for pubs
 #'  wheel(col_black)
+#' @name color_palettes
 #' @rdname color_palettes
 #' @export
 col_summer <- colorRampPalette(c(
@@ -185,7 +186,7 @@ col_grey <- colorRampPalette(c(
 #' @param ceiling the maximal opacity (from 0 to 1)
 #' @param cols on or more colors, provided as hexadecimal values
 #' @param transp numeric between 0 and 1, the value of the transparency to obtain
-#' @rdname colors_transp
+#' @rdname color_transparency
 #' @examples
 #' x <- col_transp(10, col='#000000')
 #' x
@@ -207,7 +208,8 @@ col_transp <- function(n, col = "#000000", ceiling = 1) {
   alpha.hex[nchar(alpha.hex) < 2] <- paste0("f", alpha.hex[nchar(alpha.hex) < 2])
   return(paste0(col, alpha.hex))
 }
-#' @rdname colors_transp
+
+#' @rdname color_transparency
 #' @export
 col_alpha <- function(cols, transp = 0) {
   alpha.int <- as.integer((1 - transp) * 255)

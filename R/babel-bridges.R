@@ -255,7 +255,7 @@ as_df.PCA <- function(x){
 #' @rdname as_df
 #' @export
 as_df.LDA <- function(x){
-  dplyr::bind_cols(x$fac, as.data.frame(x$x))
+  dplyr::bind_cols(data.frame(f=x$fac), as.data.frame(x$x))
 }
 
 ##### end bridges

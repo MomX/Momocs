@@ -11,6 +11,8 @@ chc2pix(chc)
 }
 \arguments{
 \item{coo}{(x; y) coordinates passed as a matrix}
+
+\item{chc}{chain coordinates}
 }
 \description{
 Useful to convert (x; y) coordinates to chain-coded coordinates.

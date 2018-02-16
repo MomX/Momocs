@@ -11,10 +11,11 @@ tps2coo(tps, curves = TRUE)
 }
 \arguments{
 \item{tps.path}{lines, typically from \link{readLines}, describing a single shape in tps-like format.
-
 You will need to manually build your \code{Coo} object from it: eg \code{Out(coo=your_list$coo)}.}
 
-\item{curves}{\code{logical} whether to read curves, if any
+\item{curves}{\code{logical} whether to read curves, if any}
+
+\item{tps}{lines for a single tps file
 \code{tps2coo} is used in \link{import_tps} and may be useful for data import. When provided
 with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
 coordinates, curves, etc.}
