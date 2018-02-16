@@ -8,22 +8,18 @@ test_that("unary bridges work fine", {
 })
 
 
-test_that("as_df and as.data.frame work fine",{
+test_that("as_df work fine",{
   idf <- is.data.frame
   #Coo
   expect_true(bot %>% as_df %>% idf)
-  expect_true(bot %>% as.data.frame %>% idf)
   #Coe
   bf <- bot %>% efourier
   expect_true(bf %>% as_df %>% idf)
-  expect_true(bf %>% as.data.frame %>% idf)
   # TraCoe
   expect_true(flower %>% as_df %>% idf)
-  expect_true(flower %>% as.data.frame %>% idf)
   #PCA
   bp <- bf %>% PCA
   expect_true(bp %>% as_df %>% idf)
-  expect_true(bp %>% as.data.frame %>% idf)
 })
 
 test_that("cpx2coo and coo2cpx work fine",{
@@ -42,6 +38,12 @@ test_that("a2m and m2a work fine", {
   m <- array(1:24, dim = c(3, 2, 4)) %>% a2m
   expect_true(is.matrix(m))
   expect_true(length(dim(m2a(m)))==3)
+})
+
+test_that("m2ll works fine", {
+  x <- m2ll(wings[1], c(6, 4, 3, 5))
+  expect_true(is.list(x))
+  expect_length(x, 4)
 })
 
 test_that("as_df converts all classes to data.frames", {
@@ -68,8 +70,4 @@ test_that("as_df converts all classes to data.frames", {
   expect_true(is.data.frame(flower %>% as_df))
 })
 
-test_that("m2ll works fine", {
-  x <- m2ll(wings[1], c(6, 4, 3, 5))
-  expect_true(is.list(x))
-  expect_length(x, 4)
-})
+

@@ -2,33 +2,47 @@
 % Please edit documentation in R/babel-bridges.R
 \name{as_df}
 \alias{as_df}
+\alias{as_df.Coo}
+\alias{as_df.Coe}
+\alias{as_df.TraCoe}
+\alias{as_df.PCA}
+\alias{as_df.LDA}
 \title{Converts Momocs objects to data.frames}
 \usage{
 as_df(x)
+
+\method{as_df}{Coo}(x)
+
+\method{as_df}{Coe}(x)
+
+\method{as_df}{TraCoe}(x)
+
+\method{as_df}{PCA}(x)
+
+\method{as_df}{LDA}(x)
 }
 \arguments{
-\item{x}{an object, typically a Momocs class}
+\item{x}{an object, typically a Momocs object}
 }
 \value{
-a data.frame
+a \code{data.frame}
 }
 \description{
-Used in particular for ggplot2 compatibility.
+Used in particular for compatibility with the \code{tidyverse}
 }
 \examples{
-data(bot)
-head(as_df(bot))
-bot.f <- efourier(bot, 10)
-head(as_df(bot.f))
-bot.p <- PCA(bot.f)
-head(as_df(bot.p))
-bot.l <- LDA(bot.p, "type")
-head(as_df(bot.l))
+# smaller Out
+lite_bot <- bot \%>\% slice(c(1, 2, 21, 22)) \%>\% coo_sample(12)
+# Coo object
+lite_bot \%>\% as_df \%>\% head
+# Coe object
+lite_bot \%>\% efourier(2) \%>\% as_df \%>\% head
+# PCA object
+lite_bot \%>\% efourier(2) \%>\% PCA \%>\% as_df \%>\% head
+# LDA object
+lite_bot \%>\% efourier(2) \%>\% PCA \%>\% LDA(~type) \%>\% as_df \%>\% head
 }
 \seealso{
-Other bridges functions: \code{\link{a2l}},
-  \code{\link{a2m}}, \code{\link{coo2cpx}},
-  \code{\link{cpx2coo}}, \code{\link{d2m}},
-  \code{\link{l2a}}, \code{\link{l2m}}, \code{\link{m2a}},
-  \code{\link{m2d}}, \code{\link{m2ll}}, \code{\link{m2l}}
+Other bridges functions: \code{\link{bridges}},
+  \code{\link{complex}}
 }
