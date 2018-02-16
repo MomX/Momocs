@@ -29,5 +29,5 @@ shapes[4] \%>\%            # from cartesian
 }
 \seealso{
 Other bridges functions: \code{\link{as_df}},
-  \code{\link{bridges}}
+  \code{\link{bridges}}, \code{\link{export}}
 }

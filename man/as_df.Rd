@@ -44,5 +44,5 @@ lite_bot \%>\% efourier(2) \%>\% PCA \%>\% LDA(~type) \%>\% as_df \%>\% head
 }
 \seealso{
 Other bridges functions: \code{\link{bridges}},
-  \code{\link{complex}}
+  \code{\link{complex}}, \code{\link{export}}
 }
