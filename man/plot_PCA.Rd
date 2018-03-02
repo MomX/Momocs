@@ -18,8 +18,8 @@ or a factor can directly be passed. Accept \code{numeric} as well.}
 \item{palette}{\code{color palette} to use \code{col_summer} by default}
 }
 \description{
-Quickly vizualize \link{PCA} objects and build customs plots
-using the \link{cheapbabi_layers} layers. See examples.
+Quickly vizualize [PCA] objects and build customs plots
+using the [layers]. See examples.
 }
 \note{
 This approach will replace \link{plot.PCA} in further versions.
@@ -62,4 +62,8 @@ op \%>\% plot_PCA(~var) \%>\% myplot() \%>\%
    layer_rug \%>\% layer_eigen \%>\% layer_legend
 
 # You get the idea.
+}
+\seealso{
+Other cheapbabi: \code{\link{drawers}},
+  \code{\link{layers}}, \code{\link{papers}}
 }
