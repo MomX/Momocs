@@ -1,5 +1,6 @@
 ##### graphics cosmetics
 
+# Palettes -------------------------------------------------
 #' Some color palettes
 #'
 #' Colors, colors, colors.
@@ -10,6 +11,7 @@
 #' Among available color palettes, \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
 #' \code{col_div}, \code{col_qual}, \code{col_heat}, \code{col_cold}
 #' and \code{col_gallus} are based on on ColorBrewer2: \url{http://colorbrewer2.org/}.
+#'
 #' @examples
 #'
 #' wheel <- function(palette, n=10){
@@ -46,6 +48,7 @@ col_summer <- colorRampPalette(c(
   "#FFFF00",
   "#FF3030"
 ))
+
 #' @rdname color_palettes
 #' @export
 col_summer2 <- colorRampPalette(c(
@@ -62,6 +65,7 @@ col_summer2 <- colorRampPalette(c(
   "#E6642C",
   "#D92120"
 ))
+
 #' @rdname color_palettes
 #' @export
 col_spring <- colorRampPalette(c(
@@ -219,6 +223,15 @@ col_alpha <- function(cols, transp = 0) {
   return(paste0(cols, alpha.hex))
 }
 
+# utils ----------------------------------------------------
+# is_palette <- function(x){
+#   any(class(x)=="palette")
+# }
+#
+# as_palette <- function(x){
+#   class(x) <- unique(c(class(x), "palette"))
+#   x
+# }
 
 .cex <- function(x) {
   3/(log(x + 1) + 1)
