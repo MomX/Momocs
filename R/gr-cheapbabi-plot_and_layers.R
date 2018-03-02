@@ -832,8 +832,8 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
   # factor case
   # simple legend
   if (is.factor(x$f)){
-    w <- levels(x$f) %>% strwidth(cex=cex) %>% max
-    x0 <- u[2] - w[1]*(range_padding+range_width) - w*1.2
+    wid_leg <- levels(x$f) %>% strwidth(cex=cex) %>% max
+    x0 <- u[2] - w[1]*(range_padding+range_width) - wid_leg*1.5
     y0 <- u[4] - w[2]*range_padding
     legend(x0, y0, legend = levels(x$f), fill = x$colors_groups,
            border=par("fg"), bty="n", cex = cex)
