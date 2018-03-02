@@ -26,13 +26,13 @@ ldk_contour(wings$coo)
 \seealso{
 \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
 
-Other plotting functions: \code{\link{Ntable}},
-  \code{\link{conf_ell}}, \code{\link{coo_arrows}},
-  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
-  \code{\link{coo_ruban}}, \code{\link{ldk_chull}},
-  \code{\link{ldk_confell}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}, \code{\link{plot_devsegments}}
+Other plotting functions: \code{\link{conf_ell}},
+  \code{\link{coo_arrows}}, \code{\link{coo_draw}},
+  \code{\link{coo_listpanel}}, \code{\link{coo_lolli}},
+  \code{\link{coo_plot}}, \code{\link{coo_ruban}},
+  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
+  \code{\link{ldk_labels}}, \code{\link{ldk_links}},
+  \code{\link{plot_devsegments}}, \code{\link{plot_table}}
 
 Other ldk plotters: \code{\link{ldk_chull}},
   \code{\link{ldk_confell}}, \code{\link{ldk_labels}},
