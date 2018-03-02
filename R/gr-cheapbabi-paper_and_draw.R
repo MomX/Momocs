@@ -30,16 +30,19 @@ this_dispatch <- function(f, this){
 # Papers ---------------------------------------------------
 #' Cheapbabi papers for shape plots
 #'
-#' Papers on which to use [cheapbabi_drawers] for building custom
+#' Papers on which to use [drawers] for building custom
 #' shape plots using the cheapbabi approach. See examples and vignettes.
 #'
+#' @param coo a single shape or any [Coo] object
+#' @param ... more arguments to feed `plot` function within each `paper` function
 #' @note This approach will (soon) replace [coo_plot] and friends in further versions.
 #' All comments are welcome.
 #'
 #' @details `paper` is `paper_white %>% draw_axes`.
 #'
-#' @name cheapbabi_papers
-#' @rdname cheapbabi_papers
+#' @family cheapbabi
+#' @name papers
+#' @rdname papers
 #' @export
 paper_white <- function(coo, ...){
   # smaller margins
@@ -56,13 +59,13 @@ paper_white <- function(coo, ...){
   invisible(coo)
 }
 
-#' @rdname cheapbabi_papers
+#' @rdname papers
 #' @export
 paper <- function(coo, ...){
   coo %>% paper_white(...) %>% draw_axes()
 }
 
-#' @rdname cheapbabi_papers
+#' @rdname papers
 #' @param grid \code{numeric} of length 2 to (roughly) specify the
 #' number of majors lines, and the number of minor lines within two major ones
 #' @param cols colors (hexadecimal) to use for grid drawing
@@ -92,7 +95,7 @@ paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
 }
 
 #' @export
-#' @rdname cheapbabi_papers
+#' @rdname papers
 #' @param n \code{numeric} number of squares for the chessboard
 #' @param col color (hexadecimal) to use for chessboard drawing
 #' @export
@@ -130,7 +133,7 @@ paper_chess <- function(coo, n=50, col="#e5e5e5"){
 }
 
 #' @export
-#' @rdname cheapbabi_papers
+#' @rdname papers
 paper_dots <- function(coo, n=50, col="#e5e5e5"){
   # smaller margins
   old <- par(mar=c(1.2, 1.2, 0, 0), xpd=NA)
@@ -170,18 +173,20 @@ paper_dots <- function(coo, n=50, col="#e5e5e5"){
 #' @note This approach will (soon) replace [coo_plot] and friends in further versions.
 #' All comments are welcome.
 #'
-#' @name cheapbabi_drawers
-#' @rdname cheapbabi_drawers
+#' @name drawers
+#' @rdname drawers
 #' @seealso cheapbabi_layers
-#' @family graphics cheapbabi
+#' @family cheapbabi
 #'
 #' @param coo \code{matrix} of 2 columns for (x, y) coordinates
+#' @param f an optionnal factor specification to feed. See examples and vignettes.
 #' @param border color (hexadecimal) to draw components
 #' @param col color (hexadecimal) to draw components
 #' @param pch to draw components
 #' @param cex to draw components
 #' @param lwd to draw components
 #' @param label to indicate first point
+#' @param labels \code{character} name of labels to draw (defaut to \code{1:nrow(coo)})
 #' @param d `numeric` proportion of `d(centroid-each_point)` to add when centrifugating landmarks
 #' @param links `matrix` of links to use to draw segments between landmarks. See `wings$ldk` for an example
 #' @param ... additional options to feed core functions for each drawer
@@ -230,11 +235,14 @@ draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, ...){
 
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 draw_outline <- draw_polygon
+#' @export
+#' @rdname drawers
+draw_outlines <- draw_polygon
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, ...){
   # shape case
   if (is_shp(coo))
@@ -268,11 +276,11 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, ...){
 }
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 draw_landmarks <- draw_points
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, ...){
 
   # shape case
@@ -309,7 +317,7 @@ draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, ...){
 
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, ...){
   # shape case
   if (is_shp(coo))
@@ -346,11 +354,14 @@ draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, ...){
 }
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 draw_curve <- draw_lines
+#' @export
+#' @rdname drawers
+draw_curves <- draw_lines
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, ...){
   # shape case
   if (is_shp(coo))
@@ -389,7 +400,7 @@ draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, ...){
 }
 
 #' @export
-#' @rdname cheapbabi_drawers
+#' @rdname drawers
 # cosmetics
 draw_axes <- function(coo, col="#333333", cex=3/4, lwd=3/4, ...){
   at <- function(x) signif(c(min(x), mean(x), max(x)), 3)
@@ -423,10 +434,7 @@ draw_axes <- function(coo, col="#333333", cex=3/4, lwd=3/4, ...){
 }
 
 #' @export
-#' @rdname cheapbabi_drawers
-#' @param labels \code{character} name of labels to draw (defaut to \code{1:nrow(coo)})
-#' @param d \code{numeric} how far away on a segment should the labels be displayed
-#' (on a centroid-point) segment.
+#' @rdname drawers
 draw_labels <- function(coo, labels=1:nrow(coo), cex=1/2, d=1/20, ...){
   # this one does not support f and,
   # if a Coo is provided turn it into the mean shape
@@ -449,8 +457,7 @@ draw_labels <- function(coo, labels=1:nrow(coo), cex=1/2, d=1/20, ...){
 }
 
 #' @export
-#' @rdname cheapbabi_drawers
-#' @param links \code{matrix} of links
+#' @rdname drawers
 draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, ...){
 
 
