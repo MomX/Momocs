@@ -185,6 +185,7 @@ paper_dots <- function(coo, n=50, col="#e5e5e5"){
 #' @param pch to draw components
 #' @param cex to draw components
 #' @param lwd to draw components
+#' @param lty to draw components
 #' @param label to indicate first point
 #' @param labels \code{character} name of labels to draw (defaut to \code{1:nrow(coo)})
 #' @param d `numeric` proportion of `d(centroid-each_point)` to add when centrifugating landmarks
