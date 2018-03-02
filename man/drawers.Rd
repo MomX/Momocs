@@ -87,7 +87,7 @@ olea \%>\% paper_chess \%>\% draw_lines(~var)
 
 hearts[240] \%>\% paper_white() \%>\% draw_outline() \%>\%
   coo_sample(24) \%>\% draw_landmarks \%>\% draw_labels() \%>\%
-  draw_links(replicate(2, sample(1:24, 8)))
+  draw_links(links=replicate(2, sample(1:24, 8)))
 }
 \seealso{
 cheapbabi_layers

@@ -198,7 +198,7 @@ paper_dots <- function(coo, n=50, col="#e5e5e5"){
 #'
 #' hearts[240] %>% paper_white() %>% draw_outline() %>%
 #'   coo_sample(24) %>% draw_landmarks %>% draw_labels() %>%
-#'   draw_links(replicate(2, sample(1:24, 8)))
+#'   draw_links(links=replicate(2, sample(1:24, 8)))
 #' @export
 draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, ...){
   # shape case
