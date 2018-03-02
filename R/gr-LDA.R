@@ -324,7 +324,7 @@ if (nlevels(fac) <= 2){
 #' @param labels logical whether to display freq or counts as text labels
 #' @param ... only used for the generic
 #' @return a ggplot object
-#' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
+#' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{plot_table}.
 #' @examples
 #' data(olea)
 #' ol <- LDA(PCA(opoly(olea, 5)), "domes")

@@ -1,27 +1,26 @@
 ##### Simple bridges between R classes
 
 # coordinates -------------
-#' Converts complex to cartesian coordinates
-#'
-#' @param Z coordinates expressed in the complex form
-#' @return coordinates expressed in the cartesian form
-#' @family bridges functions
-#' @examples
-#' shapes[4] %>% coo_sample(24) %>% coo2cpx()
-#' shapes[4] %>% coo_sample(24) %>% coo2cpx() %>% cpx2coo()
-#' @export
-cpx2coo <- function(Z){
-    cbind(Re(Z), Im(Z)) %>% `colnames<-`(c("x", "y")) %>% return()
-}
-
-#' Converts cartesian to complex coordinates
+#' Convert complex to/from cartesian coordinates
 #'
 #' @param coo coordinates expressed in the cartesian form
-#' @return coordinates expressed in the complex form
+#' @param Z coordinates expressed in the complex form
+#' @return coordinates expressed in the cartesian/complex form
 #' @family bridges functions
 #' @examples
-#' shapes[4] %>% coo_sample(24) %>% coo2cpx()
-#' shapes[4] %>% coo_sample(24) %>% coo2cpx() %>% cpx2coo()
+#' shapes[4] %>%            # from cartesian
+#'     coo_sample(24) %>%
+#'     coo2cpx() %T>%       # to complex
+#'     cpx2coo()            # and back
+#' @name complex
+#' @aliases complex
+#' @rdname complex
+#' @export
+cpx2coo <- function(Z){
+  cbind(Re(Z), Im(Z)) %>% `colnames<-`(c("x", "y")) %>% return()
+}
+
+#' @rdname complex
 #' @export
 coo2cpx <- function(coo){
   if (!is.matrix(coo) & length(coo)==2)
@@ -30,66 +29,71 @@ coo2cpx <- function(coo){
 }
 
 # shp methods -------------
-#' Converts a list of coordinates to a matrix of coordinates.
+#' Convert between different classes
 #'
-#' Converts a \code{list} with x and y components to a two-columns
-#' (colnamed) \code{matrix} of coordinates. Also, if l is a list with a single matrix, then l[[1]] is returned.
+#' @param a \code{array} of (x; y) coordinates
+#' @param d \code{data.frame} with two columns
+#' @param l \code{list} with x and y coordinates as components
+#' @param m \code{matrix} of (x; y) coordinates
+#' @param index \code{numeric}, the number of coordinates for every slice
 #'
-#' @param l \code{list} with x and y coordinates as components.
-#' @return \code{matrix} of (x; y) coordinates.
-#' @family bridges functions
+#'
+#' @note \code{a2m}/\code{m2a} change, by essence, the dimension of the data.
+#' \code{m2ll} is used internally to hanle coo and cur in \code{Ldk} objects but may be
+#' useful elsewhere
+#' @return the data in the required class
 #' @examples
-#' data(wings)
-#' l <- m2l(wings[1])
-#' l
-#' m <- l2m(l)
-#' m
+#' # matrix/list
+#' wings[1] %>% coo_sample(4) %>%
+#'    m2l() %T>% print %>%        # matrix to list
+#'    l2m()                       # and back
+#'
+#' # data.frame/matrix
+#' wings[1] %>% coo_sample(4) %>%
+#'    m2d() %T>% print %>%        # matrix to data.frame
+#'    d2m                         # and back
+#'
+#'  # list/array
+#'  wings %>% slice(1:2) %$%
+#'  coo %>% l2a %T>% print %>%    # list to array
+#'  a2l                           # and back
+#'
+#'  # array/matrix
+#'  wings %>% slice(1:2) %$%
+#'  l2a(coo) %>%                  # and array (from a list)
+#'  a2m %T>% print %>%            # to matrix
+#'  m2a                           # and back
+#'
+#'  # m2ll
+#' m2ll(wings[1], c(6, 4, 3, 5)) # grab slices and coordinates
 #' @family bridges functions
+#' @name bridges
+#' @aliases bridges
+#' @rdname bridges
 #' @export
 l2m <- function(l) {
   if (length(l) == 1 && is.shp(l[[1]]))
     return(l[[1]])
-    m <- cbind(l$x, l$y)
-    colnames(m) <- c("x", "y")
-    return(m)
+  m <- cbind(l$x, l$y)
+  colnames(m) <- c("x", "y")
+  return(m)
 }
 
-#' Converts a data.frame of coordinates to a matrix of coordinates.
-#'
-#' Converts a \code{data.frame} with two columns
-#' (colnamed) \code{matrix} of coordinates.
-#'
-#' @param d \code{data.frame} with two columns.
-#' @return \code{matrix} of (x; y) coordinates.
-#' @family bridges functions
-#' @examples
-#' data(wings)
-#' d <- d2m(wings[1])
-#' d
-#' m <- m2d(d)
-#' m
-#' @family bridges functions
+#' @rdname bridges
+#' @export
+m2l <- function(m) {
+  return(list(x = m[, 1], y = m[, 2]))
+}
+
+#' @rdname bridges
 #' @export
 d2m <- function(d) {
-      .check(ncol(d) == 2,
+  .check(ncol(d) == 2,
          "data.frame must have two columns")
   d %>% as.matrix() %>% `colnames<-`(c("x", "y"))
 }
 
-#' Converts a matrix of coordinates to a two-columns data.frame
-#'
-#' Converts a \code{matrix} of coordinates to a (colnamed) \code{data.frame}
-#' with two columns.
-#'
-#' @param m \code{matrix} of (x; y) coordinates.
-#' @return \code{data.frame} with two columns.
-#' @examples
-#' data(wings)
-#' d <- d2m(wings[1])
-#' d
-#' m <- m2d(d)
-#' m
-#' @family bridges functions
+#' @rdname bridges
 #' @export
 m2d <- function(m) {
   .check(is.shp(m),
@@ -97,151 +101,61 @@ m2d <- function(m) {
   data.frame(x=m[, 1], y=m[, 2])
 }
 
-#' Converts a list of coordinates to an array of coordinates
-#'
-#' l2a converts a list of \code{k} matrices with \code{m} rows
-#' and \code{n} columns matrices to a \code{m x n x k} array.
-#'
-#' May be useful to communicate with other morphometrics packages that use
-#' array of coordinates when handling configurations of landmarks.
-#'
-#' @param l \code{list} of matrices of the same dimension.
-#' @return an array of coordinates.
-#' @family bridges functions
-#' @examples
-#' data(wings)
-#' l <- wings$coo
-#' l
-#' a <- l2a(l)
-#' a
-#' @family bridges functions
+#' @rdname bridges
 #' @export
 l2a <- function(l) {
-    .check(length(unique(sapply(l, length))) == 1,
-           "matrices in list must have the same dimensions")
-    nr <- nrow(l[[1]])
-    nc <- 2
-    ni <- length(l)
-    a <- array(unlist(l), dim = c(nr, nc, ni), dimnames = list(1:nr,
-        c("x", "y"), names(l)))
-    return(a)
+  .check(length(unique(sapply(l, length))) == 1,
+         "matrices in list must have the same dimensions")
+  nr <- nrow(l[[1]])
+  nc <- 2
+  ni <- length(l)
+  a <- array(unlist(l), dim = c(nr, nc, ni), dimnames = list(1:nr,
+                                                             c("x", "y"), names(l)))
+  return(a)
 }
 
-#' Converts an array of coordinates to a list of matrices
-#'
-#' Converts a \code{m x n x k} array of coordinates to a list of
-#' \code{k} matrices with \code{m} rows and \code{n} columns matrices.
-#'
-#' May be useful to communicate with other morphometrics packages that use
-#' array of coordinates when handling configurations of landmarks.
-#'
-#' @param a \code{array} of coordinates.
-#' @return \code{list} with 2-cols matrices of (x; y) coordinates.
-#' @examples
-#' data(wings)
-#' l <- wings$coo
-#' l
-#' a <- l2a(l)
-#' a
-#' @family bridges functions
+#' @rdname bridges
 #' @export
 a2l <- function(a) {
-    .check(is.array(a) & length(dim(a)==3),
-          "An array of dimension 3 must be provided")
-    k <- dim(a)[3]
-    l <- list()
-    for (i in 1:k) {
-        l[[i]] <- a[, , i]
-    }
-    return(l)
+  .check(is.array(a) & length(dim(a)==3),
+         "An array of dimension 3 must be provided")
+  k <- dim(a)[3]
+  l <- list()
+  for (i in 1:k) {
+    l[[i]] <- a[, , i]
+  }
+  return(l)
 }
 
-#' Converts an array of coordinates to a matrix
-#'
-#' All the individuals (the 3rd dimension of the array) becomes rows, and
-#' columns are (all the) x coordinates and (all the) y coordinates, so that we have
-#' x1, x2, ..., xn, y1, y2, ..., yn columns. Rows and colums are named anyway.
-#'
-#' Used in landmarks methods, e.g. for multivariate analysis after a Procrustes alignment.
-#'
-#' @param a \code{array} of (x; y) coordinates.
-#' @return matrix (see above).
-#' @seealso \link{m2a} the reverse function.
-#' @examples
-#' data(wings)
-#' a <- l2a(wings$coo)
-#' a
-#' @family bridges functions
+
+#' @rdname bridges
 #' @export
 a2m <- function(a) {
-    # ugly
-    m <- sapply(a, as.numeric)
-    nc <- dim(a)[1]
-    m <- matrix(m, nrow = dim(a)[3], ncol = nc * 2, byrow = TRUE)
-    colnames(m) <- paste0(rep(c("x", "y"), each = nc), 1:nc)
-    if (!is.null(dimnames(a))) {
-        rownames(m) <- dimnames(a)[[3]]
-    }
-    return(m)
+  # ugly
+  m <- sapply(a, as.numeric)
+  nc <- dim(a)[1]
+  m <- matrix(m, nrow = dim(a)[3], ncol = nc * 2, byrow = TRUE)
+  colnames(m) <- paste0(rep(c("x", "y"), each = nc), 1:nc)
+  if (!is.null(dimnames(a))) {
+    rownames(m) <- dimnames(a)[[3]]
+  }
+  return(m)
 }
 
-#' Converts a matrix of coordinates to an array of coordinates
-#'
-#' Converts a matrix arranged with the individuals (the 3rd dimension of the array) as rows,
-#' and (all) x coordinates and (all) y coordinates as columns, into an array built as follows:
-#' nb.of.landmarks x 2 (x; y) x nb.of.individuals.
-#'
-#' Used in landmarks methods.
-#'
-#' @param m a matrix (see above).
-#' @return an array (see above).
-#' @seealso \link{a2m} the reverse function.
-#' @examples
-#' data(wings)
-#' m <- a2m(l2a(wings$coo))
-#' m2a(m)
-#' @family bridges functions
+#' @rdname bridges
 #' @export
 m2a <- function(m) {
-    # ugly
-    a <- array(NA,
-               dim = c(ncol(m)/2, 2, nrow(m)),
-               dimnames = list(1:(ncol(m)/2), c("x", "y"), rownames(m)))
-    for (i in 1:nrow(m)) {
-        a[, , i] <- matrix(m[i, ], ncol = 2)
-    }
-    return(a)
+  # ugly
+  a <- array(NA,
+             dim = c(ncol(m)/2, 2, nrow(m)),
+             dimnames = list(1:(ncol(m)/2), c("x", "y"), rownames(m)))
+  for (i in 1:nrow(m)) {
+    a[, , i] <- matrix(m[i, ], ncol = 2)
+  }
+  return(a)
 }
 
-#' Converts a matrix of coordinates to a list of coordinates.
-#'
-#' Converts a matrix of (x; y) coordinates to a list with
-#' x and y components.
-#'
-#' @param m a two-columns \code{matrix} of x and y coordinates.
-#' @return a \code{list} with x and y components.
-#' @seealso \link{l2m}.
-#' @examples
-#' data(wings)
-#' l <- m2l(wings[1])
-#' l
-#' m <- l2m(l)
-#' m
-#' @family bridges functions
-#' @export
-m2l <- function(m) {
-  return(list(x = m[, 1], y = m[, 2]))
-}
-
-#' Converts a matrix of coordinates into a list of matrices
-#'
-#' Used internally to hanle coo and cur in \code{Ldk} objects but may be
-#' useful elsewhere
-#' @param m \code{matrix}, typically of (x; y) coordinates
-#' @param index \code{numeric}, the number of coordinates for every slice.
-#' @examples
-#' m2ll(wings[1], c(6, 4, 3, 5))
-#' @family bridges functions
+#' @rdname bridges
 #' @export
 m2ll <- function(m, index=NULL){
   # no slicing case, we return a matrix
@@ -263,24 +177,28 @@ m2ll <- function(m, index=NULL){
 
 #' Converts Momocs objects to data.frames
 #'
-#' Used in particular for ggplot2 compatibility.
-#' @param x an object, typically a Momocs class
-#' @return a data.frame
+#' Used in particular for compatibility with the \code{tidyverse}
+#' @param x an object, typically a Momocs object
+#' @return a \code{data.frame}
 #' @examples
-#' data(bot)
-#' head(as_df(bot))
-#' bot.f <- efourier(bot, 10)
-#' head(as_df(bot.f))
-#' bot.p <- PCA(bot.f)
-#' head(as_df(bot.p))
-#' bot.l <- LDA(bot.p, "type")
-#' head(as_df(bot.l))
+#' # smaller Out
+#' lite_bot <- bot %>% slice(c(1, 2, 21, 22)) %>% coo_sample(12)
+#' # Coo object
+#' lite_bot %>% as_df %>% head
+#' # Coe object
+#' lite_bot %>% efourier(2) %>% as_df %>% head
+#' # PCA object
+#' lite_bot %>% efourier(2) %>% PCA %>% as_df %>% head
+#' # LDA object
+#' lite_bot %>% efourier(2) %>% PCA %>% LDA(~type) %>% as_df %>% head
 #' @family bridges functions
+#' @rdname as_df
 #' @export
 as_df <- function(x){
   UseMethod("as_df")
 }
 
+#' @rdname as_df
 #' @export
 as_df.Coo <- function(x){
   df_coo <- plyr::ldply(x$coo, data.frame)
@@ -295,9 +213,8 @@ as_df.Coo <- function(x){
   }
   df_coo
 }
-# adding a synonym
-as.data.frame.Coo <- as_df
 
+#' @rdname as_df
 #' @export
 as_df.Coe <- function(x){
   df_coe <- melt(x$coe)
@@ -312,44 +229,33 @@ as_df.Coe <- function(x){
   }
   df_coe
 }
-# adding a synonym
-as.data.frame.Coe <- as_df
 
+#' @rdname as_df
 #' @export
 as_df.TraCoe <- function(x){
   df_coe <- as.data.frame(x$coe)
   # if a $fac is present
   if (is.fac(x)) {
-    return(dplyr::bind_cols(x$fac, df_coe))
+    dplyr::bind_cols(x$fac, df_coe)
   } else {
-return(df_coe)
+    df_coe
   }
 }
-# adding a synonym
-as.data.frame.TraCoe <- as_df
 
+#' @rdname as_df
 #' @export
 as_df.PCA <- function(x){
   if(is.null(rownames(x$x)))
     rownames(x$x) <- 1:nrow(x$x)
-  df <- dplyr::bind_cols(data.frame(.id=rownames(x$x)),
-                  x$fac,
-                  as.data.frame(x$x))
-  #as_data_frame(df)
-  df
+  dplyr::bind_cols(data.frame(.id=rownames(x$x)),
+                   x$fac,
+                   as.data.frame(x$x))
 }
-# adding a synonym
-as.data.frame.PCA <- as_df
 
+#' @rdname as_df
 #' @export
 as_df.LDA <- function(x){
-  fac <- data.frame(fac=x$fac)
-  df <- dplyr::bind_cols(fac, as.data.frame(x$x))
-  #as_data_frame(df)
-  df
+  dplyr::bind_cols(data.frame(f=x$fac), as.data.frame(x$x))
 }
-# adding a synonym
-as.data.frame.LDA <- as_df
-
 
 ##### end bridges

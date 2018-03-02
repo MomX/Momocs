@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{import_txt}
 \alias{import_txt}
-\title{Imports coordinates from a .txt file}
+\title{Import coordinates from a .txt file}
 \usage{
 import_txt(txt.paths = .lf.auto(), verbose = FALSE, ...)
 }
@@ -20,14 +20,23 @@ a list of matrix(ces) of (x; y) coordinates that can be passed to
 \link{Out}, \link{Opn} and \link{Ldk}.
 }
 \description{
-A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
+A wrapper around \link{read.table}
+that can be used to import outline/landmark coordinates.
 }
 \details{
-columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
+Columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 Define the \link{read.table} arguments that allow to import a single file, and then
 pass them to this function, ie if your \code{.txt} file
 has a header (eg ('x', 'y')), do not forget \code{header=TRUE}.
 }
+\note{
+Note this function will be deprecated from Momocs
+when \code{Momacs} and \code{Momit}
+will be fully operationnal.
+}
 \seealso{
-babel functions.
+Other import functions: \code{\link{import_Conte}},
+  \code{\link{import_StereoMorph_curve1}},
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_tps}}, \code{\link{pix2chc}}
 }

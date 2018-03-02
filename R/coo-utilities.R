@@ -42,6 +42,65 @@ coo_check.Coo <- function(coo){
   return(coo)
 }
 
+# coo_check ----------------
+#' Calculate coordinates range
+#'
+#' `coo_range` simply returns the range,
+#' `coo_range_enlarge` enlarges it by a `k` proportion.
+#'
+#' @inheritParams  coo_check
+#' @param k `numeric` proportion by which to enlarge it
+#'
+#' @return a matrix of range such as `(min, max) x (x, y)`
+#' @family coo_ utilities
+#' @name coo_enlarge
+#' @rdname coo_enlarge
+#' @examples
+#' bot[1] %>% coo_range # single shape
+#' bot    %>% coo_range # Coo object
+#'
+#' bot[1] %>% coo_range_enlarge(1/50) # single shape
+#' bot    %>% coo_range_enlarge(1/50) # Coo object
+#' @export
+coo_range <- function(coo){
+  UseMethod("coo_range")
+}
+
+#' @rdname coo_enlarge
+#' @export
+coo_range.default <- function(coo){
+  apply(coo, 2, range)
+}
+
+#' @rdname coo_enlarge
+#' @export
+coo_range.Coo <- function(coo){
+  lapply(coo$coo, coo_range) %>%
+    do.call("rbind", .) %>%
+    coo_range
+}
+
+
+#' @rdname coo_enlarge
+#' @export
+coo_range_enlarge <- function(coo, k){
+  UseMethod("coo_range_enlarge")
+}
+
+#' @rdname coo_enlarge
+#' @export
+coo_range_enlarge.default <- function(coo, k=0){
+  m <- coo_range(coo)
+  g <- apply(m, 2, diff)*k
+  m[1, ] <- m[1, ] - g
+  m[2, ] <- m[2, ] + g
+  m
+}
+
+#' @rdname coo_enlarge
+#' @export
+coo_range_enlarge.Coo <- coo_range_enlarge.default
+
 # coo_nb ----------------
 #' Counts coordinates
 #'

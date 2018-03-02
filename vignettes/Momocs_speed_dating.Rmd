@@ -13,7 +13,7 @@ output:
 #    highlight: tango
     
 vignette: >
-  %\VignetteIndexEntry{Momocs speed dating}
+  %\VignetteIndexEntry{introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

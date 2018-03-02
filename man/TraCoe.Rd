@@ -22,3 +22,8 @@ data(iris)
 fl <- TraCoe(iris[, 1:4], data.frame(sp=iris$Species))
 fl \%>\% PCA() \%>\% plot("sp")
 }
+\seealso{
+Other classes: \code{\link{Coe}}, \code{\link{Coo}},
+  \code{\link{OpnCoe}}, \code{\link{Opn}},
+  \code{\link{OutCoe}}, \code{\link{Out}}
+}

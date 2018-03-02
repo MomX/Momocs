@@ -20,3 +20,8 @@ for (i in list.files("R", full=TRUE)){
   nl <- append(nl, length(readLines(i)))
 }
 cat("now", sum(nl), "lines")
+
+
+#### staticdocs
+pkgdown::build_site(path="../Momocsdoc/")
+#goodpractice::gp()

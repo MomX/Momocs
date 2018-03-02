@@ -2,7 +2,8 @@
 % Please edit documentation in R/babel-import.R
 \name{lf_structure}
 \alias{lf_structure}
-\title{Extracts structure from filenames}
+\title{bind_db.Coe <- bind_db.Coo
+Extracts structure from filenames}
 \usage{
 lf_structure(lf, names = character(), split = "_", trim.extension = FALSE)
 }
@@ -42,8 +43,14 @@ in filenames, but it is of course not mandatory.
 
 Note also that you can: i) do a \link{import_jpg} and save is a list, say 'foo';
 then ii) pass 'names(foo)' to lf_structure. See Momocs' vignette for an illustration.
+
+Note this function will be deprecated from Momocs
+when \code{Momacs} and \code{Momit}
+will be fully operationnal.
 }
 \seealso{
 \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 See also Momocs' vignettes for data import.
+
+Other babel functions: \code{\link{tie_jpg_txt}}
 }

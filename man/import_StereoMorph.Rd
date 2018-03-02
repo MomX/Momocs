@@ -5,7 +5,7 @@
 \alias{import_StereoMorph_curve}
 \alias{import_StereoMorph_ldk1}
 \alias{import_StereoMorph_ldk}
-\title{Imports files creates by StereoMorph into Momocs}
+\title{Import files creates by StereoMorph into Momocs}
 \usage{
 import_StereoMorph_curve1(path)
 
@@ -30,18 +30,29 @@ work when path indicates the folder, i.e. 'curves' or 'ldk'. They then return a 
 of \link{Opn} or \link{Ldk} objects, respectively. Please do not hesitate to contact me
 should you have a particular case or need something.
 }
+\note{
+Note this function will be deprecated from Momocs
+when \code{Momacs} and \code{Momit}
+will be fully operationnal.
+}
 \seealso{
-Other babel functions: \code{\link{bind_db}},
-  \code{\link{chc2Out}}, \code{\link{chc2pix}},
-  \code{\link{import_jpg}}, \code{\link{import_tps}},
-  \code{\link{nef2Coe}}, \code{\link{ntsrow2Coo}},
-  \code{\link{pix2chc}}, \code{\link{tie_jpg_txt}},
-  \code{\link{tps2coo}}
+Other import functions: \code{\link{import_Conte}},
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_tps}}, \code{\link{import_txt}},
+  \code{\link{pix2chc}}
 
-Other babel functions: \code{\link{bind_db}},
-  \code{\link{chc2Out}}, \code{\link{chc2pix}},
-  \code{\link{import_jpg}}, \code{\link{import_tps}},
-  \code{\link{nef2Coe}}, \code{\link{ntsrow2Coo}},
-  \code{\link{pix2chc}}, \code{\link{tie_jpg_txt}},
-  \code{\link{tps2coo}}
+Other import functions: \code{\link{import_Conte}},
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_tps}}, \code{\link{import_txt}},
+  \code{\link{pix2chc}}
+
+Other import functions: \code{\link{import_Conte}},
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_tps}}, \code{\link{import_txt}},
+  \code{\link{pix2chc}}
+
+Other import functions: \code{\link{import_Conte}},
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_tps}}, \code{\link{import_txt}},
+  \code{\link{pix2chc}}
 }

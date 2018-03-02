@@ -14,7 +14,7 @@
 #' specifying the grouping structure
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
 #' @return an \code{Opn} object
-#' @family Coo objects
+#' @family classes
 #' @aliases Opn
 #' @examples
 #' #Methods on Opn
@@ -121,7 +121,7 @@ print.Opn <- function(x, ...) {
 #' @param mod an R \link{lm} object, used to reconstruct shapes
 #' @param r2 numeric, the r-squared from every model
 #' @return an \code{OpnCoe} object
-#' @family Coe objects
+#' @family classes
 #' @examples
 #' # all OpnCoe classes
 #' methods(class='OpnCoe')

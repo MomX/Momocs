@@ -13,7 +13,7 @@
 #' specifying the grouping structure
 #' @param ldk (optional) \code{list} of landmarks as row number indices
 #' @return an \code{Out} object
-#' @family Coo objects
+#' @family classes
 #' @aliases Out
 #' @examples
 #' methods(class=Out)
@@ -161,7 +161,7 @@ print.Out <- function(x, ...) {
 #' @param norm the normalisation used to obtain these coefficients
 #' @return an \code{OutCoe} object
 #' @details These methods can be applied on \code{Out} objects:
-#' @family Coe objects
+#' @family classes
 #' @examples
 #' # all OutCoe methods
 #' methods(class='OutCoe')

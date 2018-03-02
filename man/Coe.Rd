@@ -11,7 +11,7 @@ Coe(...)
 }
 \description{
 \code{Coe} class is the 'parent' or 'super' class of
-\code{\link{OutCoe}}, \code{\link{OpnCoe}} and \code{LdkCoe} classes.
+\code{\link{OutCoe}}, \code{\link{OpnCoe}}, \code{LdkCoe} and \code{TraCoe} classes.
 }
 \details{
 Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
@@ -32,8 +32,10 @@ You can access all the methods available for \code{Coe} objects
 with \code{methods(class=Coe)}.
 }
 \examples{
-# to see all methods for Coo objects.
+# to see all methods for Coe objects.
 methods(class='Coe')
+# to see all methods for OutCoe objects.
+methods(class='OutCoe') # same for OpnCoe, LdkCoe, TraCoe
 
 data(bot)
 bot.f<- efourier(bot, 12)
@@ -71,6 +73,7 @@ wp$coe # Procrustes aligned coordinates
 
 }
 \seealso{
-Other Coe objects: \code{\link{OpnCoe}},
-  \code{\link{OutCoe}}
+Other classes: \code{\link{Coo}}, \code{\link{OpnCoe}},
+  \code{\link{Opn}}, \code{\link{OutCoe}},
+  \code{\link{Out}}, \code{\link{TraCoe}}
 }

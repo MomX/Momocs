@@ -1,26 +1,31 @@
 \name{NEWS}
 \title{Momocs News}
 % Borrowed from the inspiring vegan.
-% Cheers to Jari Oksanen and others!
+% Cheers to Jari Oksanen and others for the format!
 
 \encoding{UTF-8}
 
-\section{Changes in version 1.2.5}{
+\section{Changes in version 1.2.5 (CRAN + GitHub)}{
   \itemize{
     \item cheap base biplots (aka cheapbabi): pipe-friendly base layers for biplots and shape drawing on cartesian coordinates.
+    \item vignette for `cheapbabi`
+    \item new `coo_*` methods: `coo_range` and `coo_range_enlarge`
+    \item `Ntable` deprecated/splitted into of `plot_table` + `table`
+    \item various minor bugs fixes, see GitHub
   }
 }
 
-\section{Changes in version 1.2.4}{
+\section{Changes in version 1.2.4 (GitHub only)}{
   \itemize{
     \item New functions/methods: coo_intersect_segment, coo_intersect_direction, coo_intersect_angle, def_ldk_direction, def_ldk_angle, def_ldk, tips, coo_sample_prop
     \item coo_slice.Opn now supports ldk.
     \item Dependencies: now depends rgeos for intersecting methods.
-    \item Data: lightened nsfishes and charring to comply R CMD CHECK.
+    \item Data: lightened `nsfishes` and charring to comply R CMD CHECK.
+    \item various minor bugs fixes, see GitHub
   }
 }
 
-\section{Changes in version 1.2.3}{
+\section{Changes in version 1.2.3 (GitHub only)}{
   \itemize{
     \item Built with 3.4.3
     \item coo_slice now suports ldks
@@ -28,7 +33,7 @@
   }
 }
 
-\section{Changes in version 1.2.2}{
+\section{Changes in version 1.2.2 (CRAN + GitHub)}{
   \itemize{
     \item MANOVA_PW now returns p-values
     \item new datasets: nsfishes
@@ -36,7 +41,7 @@
   }
 }
 
-\section{Changes in version 1.2.1}{
+\section{Changes in version 1.2.1 (GitHub only)}{
   \itemize{
     \item some testing with testthat
     \item minor debugging, see GitHub
@@ -45,8 +50,8 @@
 
 \section{Changes in version 1.1.6}{
   \itemize{
-    \item sfourier family implementation
-    \item new datasets: apodemus and mouse
+    \item `sfourier` family implementation
+    \item new datasets: `apodemus` and `mouse`
   }
 }
 

@@ -2,12 +2,9 @@
 % Please edit documentation in R/cl-handling.R
 \name{rw_fac}
 \alias{rw_fac}
-\alias{rw_rule}
 \title{Renames levels on Momocs objects}
 \usage{
 rw_fac(x, fac, from, to)
-
-rw_rule(x, fac, from, to)
 }
 \arguments{
 \item{x}{any Momocs object}
@@ -38,8 +35,9 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{at_least}}, \code{\link{chop}},
   \code{\link{combine}}, \code{\link{dissolve}},
   \code{\link{filter}}, \code{\link{mutate}},
-  \code{\link{rename}}, \code{\link{rm_uncomplete}},
+  \code{\link{rename}}, \code{\link{rescale}},
+  \code{\link{rm_harm}}, \code{\link{rm_uncomplete}},
   \code{\link{sample_frac}}, \code{\link{sample_n}},
   \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subset.Coo}}
+  \code{\link{subset.Coo}}, \code{\link{table}}
 }

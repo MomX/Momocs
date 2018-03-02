@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{import_jpg1}
 \alias{import_jpg1}
-\title{Extracts outline coordinates from a single .jpg file}
+\title{Extract outline coordinates from a single .jpg file}
 \usage{
 import_jpg1(jpg.path, auto.notcentered = TRUE, fun.notcentered = NULL,
   threshold = 0.5)
@@ -59,9 +59,17 @@ Note that the use of the \code{fun.notcentered} argument will probably leads to 
 and will probably imply the dissection of these functions: \link{import_Conte}, \link{img_plot} and
 \code{import_jpg} itself
 }
+\note{
+Note this function will be deprecated from Momocs
+when \code{Momacs} and \code{Momit}
+will be fully operationnal.
+}
 \seealso{
 \link{import_jpg}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 See also Momocs' vignettes for data import.
 
-babel functions.
+Other import functions: \code{\link{import_Conte}},
+  \code{\link{import_StereoMorph_curve1}},
+  \code{\link{import_jpg}}, \code{\link{import_tps}},
+  \code{\link{import_txt}}, \code{\link{pix2chc}}
 }

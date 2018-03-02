@@ -5,6 +5,7 @@
 #' just ad the other Momocs' classes
 #' @param coe a matrix of measurements
 #' @param fac a data.frame for covariates
+#' @family classes
 #' @examples
 #' data(iris)
 #' # let's (more or less) rebuild the flower dataset

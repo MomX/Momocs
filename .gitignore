@@ -10,3 +10,4 @@ man/phoenix.Rd
 *.DS_Store
 r-hub.R
 tmp/
+.Rd2pdf*

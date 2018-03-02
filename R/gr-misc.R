@@ -1,5 +1,6 @@
 ##### graphics cosmetics
 
+# Palettes -------------------------------------------------
 #' Some color palettes
 #'
 #' Colors, colors, colors.
@@ -10,6 +11,7 @@
 #' Among available color palettes, \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
 #' \code{col_div}, \code{col_qual}, \code{col_heat}, \code{col_cold}
 #' and \code{col_gallus} are based on on ColorBrewer2: \url{http://colorbrewer2.org/}.
+#'
 #' @examples
 #'
 #' wheel <- function(palette, n=10){
@@ -38,6 +40,7 @@
 #'
 #'  # Black only for pubs
 #'  wheel(col_black)
+#' @name color_palettes
 #' @rdname color_palettes
 #' @export
 col_summer <- colorRampPalette(c(
@@ -45,6 +48,7 @@ col_summer <- colorRampPalette(c(
   "#FFFF00",
   "#FF3030"
 ))
+
 #' @rdname color_palettes
 #' @export
 col_summer2 <- colorRampPalette(c(
@@ -61,6 +65,7 @@ col_summer2 <- colorRampPalette(c(
   "#E6642C",
   "#D92120"
 ))
+
 #' @rdname color_palettes
 #' @export
 col_spring <- colorRampPalette(c(
@@ -185,7 +190,7 @@ col_grey <- colorRampPalette(c(
 #' @param ceiling the maximal opacity (from 0 to 1)
 #' @param cols on or more colors, provided as hexadecimal values
 #' @param transp numeric between 0 and 1, the value of the transparency to obtain
-#' @rdname colors_transp
+#' @rdname color_transparency
 #' @examples
 #' x <- col_transp(10, col='#000000')
 #' x
@@ -207,7 +212,8 @@ col_transp <- function(n, col = "#000000", ceiling = 1) {
   alpha.hex[nchar(alpha.hex) < 2] <- paste0("f", alpha.hex[nchar(alpha.hex) < 2])
   return(paste0(col, alpha.hex))
 }
-#' @rdname colors_transp
+
+#' @rdname color_transparency
 #' @export
 col_alpha <- function(cols, transp = 0) {
   alpha.int <- as.integer((1 - transp) * 255)
@@ -217,6 +223,15 @@ col_alpha <- function(cols, transp = 0) {
   return(paste0(cols, alpha.hex))
 }
 
+# utils ----------------------------------------------------
+# is_palette <- function(x){
+#   any(class(x)=="palette")
+# }
+#
+# as_palette <- function(x){
+#   class(x) <- unique(c(class(x), "palette"))
+#   x
+# }
 
 .cex <- function(x) {
   3/(log(x + 1) + 1)

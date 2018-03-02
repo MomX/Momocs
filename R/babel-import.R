@@ -1,9 +1,13 @@
+### Todo : most of it will move to Momit/Momacs
+
+
 # txt -----------------------
-#' Imports coordinates from a .txt file
+#' Import coordinates from a .txt file
 #'
-#' A wrapper around \link{read.table} that can be used to import outline/landmark coordinates.
+#' A wrapper around \link{read.table}
+#' that can be used to import outline/landmark coordinates.
 #'
-#' columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
+#' Columns are not named in the \code{.txt} files. You can tune this using the \code{...} argument.
 #' Define the \link{read.table} arguments that allow to import a single file, and then
 #' pass them to this function, ie if your \code{.txt} file
 #' has a header (eg ('x', 'y')), do not forget \code{header=TRUE}.
@@ -12,9 +16,14 @@
 #' See Details there.
 #' @param verbose logical whether to print progress in the console
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
+#'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
 #' \link{Out}, \link{Opn} and \link{Ldk}.
-#' @seealso babel functions.
+#' @family import functions
 #' @export
 import_txt <- function(txt.paths = .lf.auto(), verbose=FALSE, ...) {
   # if (is.null(txt.paths)) {
@@ -42,7 +51,7 @@ import_txt <- function(txt.paths = .lf.auto(), verbose=FALSE, ...) {
 }
 
 # outlines ------------------
-#' Extracts outlines coordinates from an image silhouette
+#' Extract outlines coordinates from an image silhouette
 #'
 #' Provided with an image 'mask' (i.e. black pixels on a white background),
 #' and a point form where to start the algorithm, returns the (x; y) coordinates of its outline.
@@ -51,6 +60,11 @@ import_txt <- function(txt.paths = .lf.auto(), verbose=FALSE, ...) {
 #' @param img a matrix of a binary image mask.
 #' @param x numeric the (x; y) coordinates of a starting point within the shape.
 #' @return a matrix the (x; y) coordinates of the outline points.
+#'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
 #' @references
 #' \itemize{
 #' \item The original algorithm is due to: Pavlidis, T. (1982). \emph{Algorithms
@@ -62,7 +76,7 @@ import_txt <- function(txt.paths = .lf.auto(), verbose=FALSE, ...) {
 #'
 #' @note If you have an image with more than a single shape, then
 #' you may want to try `imager::highlight` function. Momocs may use this at some point.
-#' @seealso babel functions.
+#' @family import functions
 #' @export
 import_Conte <- function(img, x) {
   while (abs(img[x[1], x[2]] - img[x[1] - 1, x[2]]) < 0.1) {
@@ -112,7 +126,7 @@ import_Conte <- function(img, x) {
   return(cbind((Y[-1]), ((dim(img)[1] - X))[-1]))
 }
 
-#' Extracts outline coordinates from a single .jpg file
+#' Extract outline coordinates from a single .jpg file
 #'
 #' Used to import outline coordinates from .jpg files. This function is used for
 #' single images and is wrapped by \link{import_jpg}. It relies itself on \link{import_Conte}
@@ -130,6 +144,12 @@ import_Conte <- function(img, x) {
 #' @param threshold the threshold value use to binarize the images. Above, pixels
 #' are turned to 1, below to 0.
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
+#'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
+#'
 #' @details jpegs can be provided either as RVB or as 8-bit greylevels or monochrome.
 #' The function binarizes pixels values using the 'threshold' argument. It will try to start to
 #' apply the \link{import_Conte} algorithm from the center of
@@ -156,7 +176,7 @@ import_Conte <- function(img, x) {
 #' @seealso \link{import_jpg}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
 #' @return a matrix of (x; y) coordinates that can be passed to Out
-#' @seealso babel functions.
+#' @family import functions
 #' @export
 import_jpg1 <- function(jpg.path,
                         auto.notcentered = TRUE,
@@ -232,7 +252,7 @@ import_jpg1 <- function(jpg.path,
   return(out)
 }
 
-#' Extracts outline coordinates from multiple .jpg files
+#' Extract outline coordinates from multiple .jpg files
 #'
 #' This function is used to import outline coordinates and is built around
 #' \link{import_jpg1}.
@@ -247,6 +267,11 @@ import_jpg1 <- function(jpg.path,
 #' @param threshold the threshold value use to binarize the images. Above, pixels
 #' are turned to 1, below to 0.
 #' @param verbose whether to print which file is being treated. Useful to detect problems.
+#'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
 #' @details see \link{import_jpg1} for important informations about how the outlines are extracted,
 #' and \link{import_Conte} for the algorithm itself.
 #'
@@ -256,15 +281,15 @@ import_jpg1 <- function(jpg.path,
 #' @examples
 #' \dontrun{
 #'
-#' # if your images are in the folder '/foo/jpgs/'
+# # if your images are in the folder '/foo/jpgs/'
 #' lf <- list.files('/foo/jpegs', full.names=TRUE)
 #' coo <- import_jpg(lf)
 #' Out(coo)
 #'
-#' # 'automatic' version
+# # 'automatic' version
 #' coo <- import_jpg()
 #' }
-#' @family babel functions
+#' @family import functions
 #' @export
 import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
                        fun.notcentered = NULL, threshold = 0.5, verbose = TRUE) {
@@ -309,19 +334,24 @@ import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
 }
 
 # StereoMorph ---------------
-#' Imports files creates by StereoMorph into Momocs
+#' Import files creates by StereoMorph into Momocs
 #'
 #' Helps to read \code{.txt} files created by StereoMorph into (x; y) coordinates
 #' or Momocs objects. Can be applied to 'curves' or 'ldk' text files.
 #' @param path toward a single file or a folder containing \code{.txt} files produced by StereoMorph
 #' @param names to feed \link{lf_structure}
 #'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
+#'
 #' @details *1 functions import a single \code{.txt} file. Their counterpart (no '1')
 #' work when path indicates the folder, i.e. 'curves' or 'ldk'. They then return a list
 #' of \link{Opn} or \link{Ldk} objects, respectively. Please do not hesitate to contact me
 #' should you have a particular case or need something.
 #' @rdname import_StereoMorph
-#' @family babel functions
+#' @family import functions
 #' @export
 import_StereoMorph_curve1 <- function(path){
   # tem fix
@@ -336,7 +366,7 @@ import_StereoMorph_curve1 <- function(path){
 }
 
 #' @rdname import_StereoMorph
-#' @family babel functions
+#' @family import functions
 #' @export
 import_StereoMorph_curve <- function(path, names){
   # tem fix
@@ -358,6 +388,7 @@ import_StereoMorph_curve <- function(path, names){
 }
 
 #' @rdname import_StereoMorph
+#' @family import functions
 #' @export
 import_StereoMorph_ldk1 <- function(path){
   # tem fix
@@ -369,6 +400,7 @@ import_StereoMorph_ldk1 <- function(path){
 }
 
 #' @rdname import_StereoMorph
+#' @family import functions
 #' @export
 import_StereoMorph_ldk <- function(path, names){
   # tem fix
@@ -388,16 +420,25 @@ import_StereoMorph_ldk <- function(path, names){
 }
 
 # tps -----------------------
-#' Imports a tps file
+#' Import a tps file
 #'
 #' And returns a list of coordinates, curves, scale
 #' @param tps.path lines, typically from \link{readLines}, describing a single shape in tps-like format.
-#'
 #' You will need to manually build your \code{Coo} object from it: eg \code{Out(coo=your_list$coo)}.
 #' @param curves \code{logical} whether to read curves, if any
+#' @param tps lines for a single tps file
+#' \code{tps2coo} is used in \link{import_tps} and may be useful for data import. When provided
+#' with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
+#' coordinates, curves, etc.
+#'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
 #' @return a list with components:
 #' \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
-#' @family babel functions
+#' @rdname import_tps
+#' @family import functions
 #' @export
 import_tps <- function(tps.path, curves=TRUE){
   # we import the tps, line by line
@@ -437,25 +478,8 @@ import_tps <- function(tps.path, curves=TRUE){
   return(.rollup_list(res))
 }
 
-#' Reads a single tps-like shape as lines
-#'
-#' Internal function used in \link{import_tps} that may be useful for data import. When provided
-#' with lines (eg after \link{readLines}) from a tps-like description (with "LM", "CURVES", etc.) returns a list of
-#' coordinates, curves, etc.
-#' @param tps lines, typically from \link{readLines}, describing a single shape in tps-like format
-#' @param curves \code{logical} whether to read curves, if any
-#' @return a list with components:
-#' \code{coo} a matrix of coordinates; \code{cur} a list of matrices; \code{scale} the scale as a numeric.
-#' @details if curves are present add them to \code{$coo} (with the proper combination
-#' of \link{do.call}, \link{rbind}, then use \link{def_slidings} or define a slidings matrix (see \link{Ldk}).
-#' @family babel functions
-#' @examples
-#' \dontrun{
-#' # let's imagine this command works fine
-#' coo <- import_tps(...)
-#' # then you can
-#' Ldk(coo)
-#' }
+#' @rdname import_tps
+#' @family import functions
 #' @export
 tps2coo <- function(tps, curves=TRUE){
   scale  <- NULL
@@ -503,20 +527,28 @@ tps2coo <- function(tps, curves=TRUE){
   }
   return(list(coo=coo, cur=cur, scale=scale))
 }
+
 # other formats -------------
 
-#' Converts (x; y) coordinates to chaincoded coordinates
+#' Convert (x; y) coordinates to chaincoded coordinates
 #'
 #' Useful to convert (x; y) coordinates to chain-coded coordinates.
 #' @param coo (x; y) coordinates passed as a matrix
+#' @param chc chain coordinates
 #' @seealso \link{chc2pix}
+#'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
 #' @references Kuhl, F. P., & Giardina, C. R. (1982).
 #' Elliptic Fourier features of a closed contour.
 #' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
 #' @examples
-#' data(shapes)
-#' pix2chc(shapes[1])
-#' @family babel functions
+#' pix2chc(shapes[1]) %T>% print %>% # from pix to chc
+#' chc2pix()                         # and back
+#' @rdname babel
+#' @family import functions
 #' @export
 pix2chc <- function(coo) {
   if (is.list(coo)) {
@@ -539,21 +571,8 @@ pix2chc <- function(coo) {
   return(chc)
 }
 
-#' Converts chain-coded coordinates to (x; y) coordinates
-#'
-#' May be useful to convert chain-coded coordinates
-#' to (x; y) coordinates. The first point is set at the origin. \link{chc2Out}
-#' does the job for an entire dataset produced by Shape/ChainCoder, etc.
-#' @param chc a vector of chain-coded coordinates
-#' @seealso \link{pix2chc}, \link{chc2Out}
-#' @references Kuhl, F. P., & Giardina, C. R. (1982).
-#' Elliptic Fourier features of a closed contour.
-#' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
-#' @examples
-#' data(shapes)
-#' x <- pix2chc(shapes[1])
-#' coo_plot(chc2pix(x))
-#' @family babel functions
+#' @rdname babel
+#' @family import functions
 #' @export
 chc2pix <- function(chc) {
   if (!all(chc %in% 0:7)) {
@@ -565,109 +584,121 @@ chc2pix <- function(chc) {
   return(pix)
 }
 
-#' Converts chain-coded coordinates to Out object
-#'
-#' For Shape/ChainCoder files, a wrapper to convert chain-coded coordinates to
-#' \code{\link{Out}} objects.
-#' @param chc a path to the chc file
-#' @param skip numeric how many informations before the first chain-coded information
-#' @param names an (optional) vector of (skip) names for the \code{fac} created.
-#' Somehow similar to \code{names} in \link{lf_structure}
-#' @details
-#' Files from Shape/ChainCoder comes this way:
-#' \preformatted{
-#' Name_1 fac1 fac2 fac3 [...] 6 6 6 6 6 6 6 6 7 6 [...] -1
-#' Name_2 fac1 fac2 fac3 [...] 6 6 6 6 5 5 7 6 7 6 [...] -1
-#' }
-#' This function does the following:
-#' \enumerate{
-#' \item take everything before the first chain-coded
-#' coordinate (here a "6") and transform it into a \code{data.frame}, later used
-#' as a \code{fac}
-#' \item convert all the chain-coded coordinates into (x; y) coordinates
-#' using \link{chc2pix}
-#' (and removes) the "-1" that mark the end of coordinates
-#' \item returns an \code{\link{Out}} object with the corresponding \code{fac}
-#' and with outlines named after the first \code{fac} column
-#' (here with Name_1, Name_2, etc.)
-#' }
-#' This function needs to know how many information (space-separated there is
-#' before) the first coordinate. On the example above, would be 4 id [...] was empty.
-#' @note I'm not very familiar to other morphometric formats.
-#' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
-#' please let met know!
-#' @seealso \link{pix2chc}
-#' @references Kuhl, F. P., & Giardina, C. R. (1982).
-#' Elliptic Fourier features of a closed contour.
-#' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
-#' @examples
-#' \dontrun{
-#' # if the file above was called 'coded.chc' in the 'data' folder:
-#' chc2Out("data/coded.chc", skip=4)
-#' }
-#' @family babel functions
-#' @export
-chc2Out <- function(chc, skip, names){
-  # read the file and break spaces
-  chc <- readLines(chc)
-  chc <- strsplit(chc, " ")
-  # retrieve the first columns and create a fac
-  df <- sapply(chc, function(x) x[1:skip])
-  fac <- data.frame(t(df))
-  # nice fac names
-  if (!missing(names)){
-    if (length(names)!=skip) {
-      cat(" * names and skip length differ\n")
-      names <- paste0("col", 1:skip)
-    }
-  } else {
-    names <- paste0("col", 1:skip)
-  }
-  colnames(fac) <- names
-  # remove these columns from the chc
-  chc <- lapply(chc, function(x) x[-(1:skip)])
-  # loop over the list: remove the (last) -1, pass it to chc2pix
-  coo <- lapply(chc, function(x) chc2pix(as.numeric(x[-length(x)])))
-  # prepare and return an Out
-  names(coo) <- fac[, 1]
-  Out(coo, fac=fac)}
-
-#' Imports .nef to Coe objects
-#'
-#' Useful to convert .nef files into Coe objects.
-#' It returns a matrix of coefficients that can be passed to \link{Coe}.
-#' @param nef.path the path to the .nef file
-#' @note nef2Coe cannot really deduces some components of the \code{OutCoe} constructor.
-#' Most of the time working around \code{x <- nef2Coe(); OutCoe(x, method="efourier", norm=TRUE/FALSE)}
-#' shoudl do the job. Overall, I'm not very familiar to other morphometric formats.
-#' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
-#' please let met know!
-#' @family babel functions
-#' @examples
-#' # nef2Coe cannot really deduces some components of the
-#' @export
-nef2Coe <- function(nef.path) {
-  # change nef to coe one day
-  nef <- readLines(nef.path)
-  HARMO.l <- grep(pattern = "HARMO", nef)
-  nb.h <- as.numeric(substring(nef[HARMO.l], 8))
-  nef <- nef[-(1:HARMO.l)]
-  nb.coo <- length(nef)/(nb.h + 1)
-  coo_i <- 1:nb.coo
-  coo_beg <- (coo_i - 1) * (nb.h + 1) + 1
-  coo_end <- coo_beg + nb.h
-  res <- matrix(NA, nrow = nb.coo, ncol = nb.h * 4, dimnames = list(nef[coo_beg],
-                                                                    paste0(rep(LETTERS[1:4], each = nb.h), 1:nb.h)))
-  reorder <- c(1:nb.h * 4 - 3, 1:nb.h * 4 - 2, 1:nb.h * 4 -
-                 1, 1:nb.h * 4)
-  for (i in seq(along = coo_i)) {
-    nef.i <- nef[(coo_beg[i] + 1):coo_end[i]]
-    x <- as.numeric(unlist(strsplit(nef.i, " ")))
-    x <- x[!is.na(x)]
-    res[i, ] <- x[reorder]
-  }
-  return(res)
-}
+# #' Converts chain-coded coordinates to Out object
+# #'
+# #' For Shape/ChainCoder files, a wrapper to convert chain-coded coordinates to
+# #' \code{\link{Out}} objects.
+# #' @param chc a path to the chc file
+# #' @param skip numeric how many informations before the first chain-coded information
+# #' @param names an (optional) vector of (skip) names for the \code{fac} created.
+# #' Somehow similar to \code{names} in \link{lf_structure}
+# #'
+# #' @note Note this function will be deprecated from Momocs
+# #' when \code{Momacs} and \code{Momit}
+# #' will be fully operationnal.
+# #'
+# #' @details
+# #' Files from Shape/ChainCoder comes this way:
+# #' \preformatted{
+# #' Name_1 fac1 fac2 fac3 [...] 6 6 6 6 6 6 6 6 7 6 [...] -1
+# #' Name_2 fac1 fac2 fac3 [...] 6 6 6 6 5 5 7 6 7 6 [...] -1
+# #' }
+# #' This function does the following:
+# #' \enumerate{
+# #' \item take everything before the first chain-coded
+# #' coordinate (here a "6") and transform it into a \code{data.frame}, later used
+# #' as a \code{fac}
+# #' \item convert all the chain-coded coordinates into (x; y) coordinates
+# #' using \link{chc2pix}
+# #' (and removes) the "-1" that mark the end of coordinates
+# #' \item returns an \code{\link{Out}} object with the corresponding \code{fac}
+# #' and with outlines named after the first \code{fac} column
+# #' (here with Name_1, Name_2, etc.)
+# #' }
+# #' This function needs to know how many information (space-separated there is
+# #' before) the first coordinate. On the example above, would be 4 id [...] was empty.
+# #'
+# #' @note Note this function will be deprecated from Momocs
+# #' when \code{Momacs} and \code{Momit}
+# #' will be fully operationnal.
+# #'
+# #' @seealso \link{pix2chc}
+# #' @references Kuhl, F. P., & Giardina, C. R. (1982).
+# #' Elliptic Fourier features of a closed contour.
+# #' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
+# #' @examples
+# #' \dontrun{
+# #' # if the file above was called 'coded.chc' in the 'data' folder:
+# #' chc2Out("data/coded.chc", skip=4)
+# #' }
+# #' @family babel functions
+# #' @export
+# #' chc2Out <- function(chc, skip, names){
+# #'   # read the file and break spaces
+# #'   chc <- readLines(chc)
+# #'   chc <- strsplit(chc, " ")
+# #'   # retrieve the first columns and create a fac
+# #'   df <- sapply(chc, function(x) x[1:skip])
+# #'   fac <- data.frame(t(df))
+# #'   # nice fac names
+# #'   if (!missing(names)){
+# #'     if (length(names)!=skip) {
+# #'       cat(" * names and skip length differ\n")
+# #'       names <- paste0("col", 1:skip)
+# #'     }
+# #'   } else {
+# #'     names <- paste0("col", 1:skip)
+# #'   }
+# #'   colnames(fac) <- names
+# #'   # remove these columns from the chc
+# #'   chc <- lapply(chc, function(x) x[-(1:skip)])
+# #'   # loop over the list: remove the (last) -1, pass it to chc2pix
+# #'   coo <- lapply(chc, function(x) chc2pix(as.numeric(x[-length(x)])))
+# #'   # prepare and return an Out
+# #'   names(coo) <- fac[, 1]
+# #'   Out(coo, fac=fac)}
+# #'
+# #' Imports .nef to Coe objects
+# #'
+# #' Useful to convert .nef files into Coe objects.
+# #' It returns a matrix of coefficients that can be passed to \link{Coe}.
+# #' @param nef.path the path to the .nef file
+# #' @note nef2Coe cannot really deduces some components of the \code{OutCoe} constructor.
+# #' Most of the time working around \code{x <- nef2Coe(); OutCoe(x, method="efourier", norm=TRUE/FALSE)}
+# #' shoudl do the job. Overall, I'm not very familiar to other morphometric formats.
+# #' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
+# #' please let met know!
+# #'
+# #' Note this function will be deprecated from Momocs
+# #' when \code{Momacs} and \code{Momit}
+# #' will be fully operationnal.
+# #'
+# #' @family babel functions
+# #' @examples
+# #' # nef2Coe cannot really deduces some components of the
+# #' @export
+# nef2Coe <- function(nef.path) {
+#   # change nef to coe one day
+#   nef <- readLines(nef.path)
+#   HARMO.l <- grep(pattern = "HARMO", nef)
+#   nb.h <- as.numeric(substring(nef[HARMO.l], 8))
+#   nef <- nef[-(1:HARMO.l)]
+#   nb.coo <- length(nef)/(nb.h + 1)
+#   coo_i <- 1:nb.coo
+#   coo_beg <- (coo_i - 1) * (nb.h + 1) + 1
+#   coo_end <- coo_beg + nb.h
+#   res <- matrix(NA, nrow = nb.coo, ncol = nb.h * 4, dimnames = list(nef[coo_beg],
+#                                                                     paste0(rep(LETTERS[1:4], each = nb.h), 1:nb.h)))
+#   reorder <- c(1:nb.h * 4 - 3, 1:nb.h * 4 - 2, 1:nb.h * 4 -
+#                  1, 1:nb.h * 4)
+#   for (i in seq(along = coo_i)) {
+#     nef.i <- nef[(coo_beg[i] + 1):coo_end[i]]
+#     x <- as.numeric(unlist(strsplit(nef.i, " ")))
+#     x <- x[!is.na(x)]
+#     res[i, ] <- x[reorder]
+#   }
+#   return(res)
+# }
 
 # deprecated see import_tps
 # #' From .tps to Coo objects
@@ -711,152 +742,155 @@ nef2Coe <- function(nef.path) {
 #   return(coo_list)
 # }
 
-#' Imports .nts to Coo objects
-#'
-#' Useful to convert .nts files into \link{Coo} objects. For .nts provided as rows, use
-#' ntsrow2Coo; for .nts provided as columns of coordinates, try ntscol2Coo. It
-#' returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
-#' @aliases ntscol2Coo ntsrow2Coo
-#' @param nts.path the path to the .nts file
-#' @param sep the separator between data
-#' @note I'm not very familiar to other morphometric formats.
-#' So if you have troubles importing your datasets, contact me, I can help. Or if you fix something,
-#' please let met know!
-#' @examples
-#' # That's how wings dataset was created
-#' # made a local copy from http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts
-#' # then :
-#' # coo_list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
-#' # fac       <- data.frame(fac=factor(substr(names(coo_list), 1, 2)))
-#' # wings <- Ldk(coo_list, fac=fac)
-#' @family babel functions
-#' @export
-ntsrow2Coo <- function(nts.path, sep = "\t") {
-  # we read all lines and remove the first one
-  nts <- readLines(nts.path, warn = FALSE)
-  comments <- grep(pattern = "\"", nts)
-  nts <- nts[-comments]
-  # we prepare a vector and a list to store the data
-  img.i <- character()
-  coo_list <- list()
-  # we loop over every individual
-  for (i in 1:length(nts)) {
-    # we pick every individual
-    ind.i <- unlist(strsplit(nts[i], sep))
-    # the first element is the name
-    img.i[i] <- ind.i[1]
-    # then we convert the rest as a matrix
-    coo_list[[i]] <- matrix(as.numeric(ind.i[-1]), ncol = 2,
-                            byrow = TRUE)
-  }
-  # we rename list components with image names
-  names(coo_list) <- img.i
-  return(coo_list)
-}
+# #' Imports .nts to Coo objects
+# #'
+# #' Useful to convert .nts files into \link{Coo} objects. For .nts provided as rows, use
+# #' ntsrow2Coo; for .nts provided as columns of coordinates, try ntscol2Coo. It
+# #' returns a list of matrices of coordinates that can be passed to \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}).
+# #' @aliases ntscol2Coo ntsrow2Coo
+# #' @param nts.path the path to the .nts file
+# #' @param sep the separator between data
+# #'
+# #' @note Note this function will be deprecated from Momocs
+# #' when \code{Momacs} and \code{Momit}
+# #' will be fully operationnal.
+# #'
+# #' @examples
+# #' # That's how wings dataset was created
+# #' # made a local copy from http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts
+# #' # then :
+# #' # coo_list  <- ntscol2Coo('~/Desktop/mosquitowings.nts)
+# #' # fac       <- data.frame(fac=factor(substr(names(coo_list), 1, 2)))
+# #' # wings <- Ldk(coo_list, fac=fac)
+# #' @family babel functions
+# #' @export
+# ntsrow2Coo <- function(nts.path, sep = "\t") {
+#   # we read all lines and remove the first one
+#   nts <- readLines(nts.path, warn = FALSE)
+#   comments <- grep(pattern = "\"", nts)
+#   nts <- nts[-comments]
+#   # we prepare a vector and a list to store the data
+#   img.i <- character()
+#   coo_list <- list()
+#   # we loop over every individual
+#   for (i in 1:length(nts)) {
+#     # we pick every individual
+#     ind.i <- unlist(strsplit(nts[i], sep))
+#     # the first element is the name
+#     img.i[i] <- ind.i[1]
+#     # then we convert the rest as a matrix
+#     coo_list[[i]] <- matrix(as.numeric(ind.i[-1]), ncol = 2,
+#                             byrow = TRUE)
+#   }
+#   # we rename list components with image names
+#   names(coo_list) <- img.i
+#   return(coo_list)
+# }
+#
+# #' @export
+# ntscol2Coo <- function(nts.path, sep = "\t") {
+#   # candidate for the most ugly function ever?  we read all
+#   # lines and remove the skip one
+#   nts <- readLines(nts.path, warn = FALSE)
+#   comments <- grep(pattern = "\"", nts)
+#   nts <- nts[-comments]
+#   nb.ldk <- as.numeric(strsplit(nts[1], " ")[[1]][3])
+#   nts <- nts[-1]
+#   nts <- unlist(strsplit(nts, " "))
+#   nts <- nts[-which(nchar(nts) == 0)]
+#   nb.nts <- length(nts)/(nb.ldk + 1)
+#   # we prepare a vector and a list to store the data
+#   names.id <- 1 + (nb.ldk + 1) * (0:(nb.nts - 1))
+#   start.id <- names.id + 1
+#   end.id <- start.id + nb.ldk - 1
+#   img.i <- nts[names.id]
+#   coo_list <- list()
+#   # we loop over every individual
+#   for (i in 1:nb.nts) {
+#     coo_list[[i]] <- matrix(as.numeric(nts[start.id[i]:end.id[i]]),
+#                             ncol = 2, byrow = TRUE)
+#   }
+#   # we rename list components with image names
+#   names(coo_list) <- img.i
+#   return(coo_list)
+# }
 
-#' @export
-ntscol2Coo <- function(nts.path, sep = "\t") {
-  # candidate for the most ugly function ever?  we read all
-  # lines and remove the skip one
-  nts <- readLines(nts.path, warn = FALSE)
-  comments <- grep(pattern = "\"", nts)
-  nts <- nts[-comments]
-  nb.ldk <- as.numeric(strsplit(nts[1], " ")[[1]][3])
-  nts <- nts[-1]
-  nts <- unlist(strsplit(nts, " "))
-  nts <- nts[-which(nchar(nts) == 0)]
-  nb.nts <- length(nts)/(nb.ldk + 1)
-  # we prepare a vector and a list to store the data
-  names.id <- 1 + (nb.ldk + 1) * (0:(nb.nts - 1))
-  start.id <- names.id + 1
-  end.id <- start.id + nb.ldk - 1
-  img.i <- nts[names.id]
-  coo_list <- list()
-  # we loop over every individual
-  for (i in 1:nb.nts) {
-    coo_list[[i]] <- matrix(as.numeric(nts[start.id[i]:end.id[i]]),
-                            ncol = 2, byrow = TRUE)
-  }
-  # we rename list components with image names
-  names(coo_list) <- img.i
-  return(coo_list)
-}
+# bind_db
+# TODO: implement a proper join method
 
-# bind_db ######################################################################
-
-#' Binds with a database
+# #' Binds with a database
+# #'
+# #' Adds columns to a \link{Coo} or \link{Coe} object from a data base. Data base must
+# #' be provided as a data.frame or as a path which will be \link{read.table}d with \code{...}
+# #' arguments.
+# #'
+# #' Many checks are done on the binding and this is the main advantage of using this method.
+# #' It requires an "id" on both the Coo/Coe and the database. There is no assumption
+# #' that shapes/coefficients are in the right order in the Coo/Coe
+# #' (but a mutate(your_object, id=1:length(your_object)) would do the trick, see examples).
+# #'
+# #' @param x Coo or Coe object
+# #' @param fac_col \code{character} (no numeric here) where to find ids in the fac
+# #' @param db \code{data.frame} with the right number of rows, or a path as \code{character}. Then use ... to pass arguments to \link{read.table}
+# #' @param db_col \code{character} where to fin ids in db
+# #' @param ... more parameters passed to \link{read.table}
+# #' @family babel functions
+# #' @examples
+# #' # Coo example
+# #' df <- data.frame(foo_id=40:1, fake1=rnorm(40), fake2=factor(rep(letters[1:4], 10)))
+# #' bot <- mutate(bot, hello=1:length(bot))
+# #' bind_db(bot, "hello", df, "foo_id")
+# #'
+# #' # example on a Coe
+# #' bf <- efourier(bot, 12)
+# #' bind_db(bf, "hello", df, "foo_id")
+# #'
+# #' @export
+# bind_db <- function(x, fac_col="id", db, db_col="id", ...){
+#   UseMethod("bind_db")
+# }
+#
+# #' @export
+# bind_db.default <- function(x, ...){
+#   message("only implemented on Coo and Coe objects")
+# }
 #'
-#' Adds columns to a \link{Coo} or \link{Coe} object from a data base. Data base must
-#' be provided as a data.frame or as a path which will be \link{read.table}d with \code{...}
-#' arguments.
-#'
-#' Many checks are done on the binding and this is the main advantage of using this method.
-#' It requires an "id" on both the Coo/Coe and the database. There is no assumption
-#' that shapes/coefficients are in the right order in the Coo/Coe
-#' (but a mutate(your_object, id=1:length(your_object)) would do the trick, see examples).
-#'
-#' @param x Coo or Coe object
-#' @param fac_col \code{character} (no numeric here) where to find ids in the fac
-#' @param db \code{data.frame} with the right number of rows, or a path as \code{character}. Then use ... to pass arguments to \link{read.table}
-#' @param db_col \code{character} where to fin ids in db
-#' @param ... more parameters passed to \link{read.table}
-#' @family babel functions
-#' @examples
-#' # Coo example
-#' df <- data.frame(foo_id=40:1, fake1=rnorm(40), fake2=factor(rep(letters[1:4], 10)))
-#' bot <- mutate(bot, hello=1:length(bot))
-#' bind_db(bot, "hello", df, "foo_id")
-#'
-#' # example on a Coe
-#' bf <- efourier(bot, 12)
-#' bind_db(bf, "hello", df, "foo_id")
-#'
-#' @export
-bind_db <- function(x, fac_col="id", db, db_col="id", ...){
-  UseMethod("bind_db")
-}
-
-#' @export
-bind_db.default <- function(x, ...){
-  message("only implemented on Coo and Coe objects")
-}
-
-#' @export
-bind_db.Coo <- function(x, fac_col="id", db, db_col="id", ...){
-  # checks a bit on x if its a Coo (waiting for validate.Coe todo)
-  if (is.Coo(x))
-    x <- validate(x)
-  .check(!missing(db),
-         "db must be provided")
-  # if db is provided as a path
-  if (is.character(db))
-    db <- read.table(db, ...)
-  # lots of check
-  .check(is.data.frame(db),
-         "db must be a data.frame")
-  .check(nrow(db)==length(x),
-         "nrow(db) does not match")
-  .check(any(colnames(db)==db_col),
-         "db_col not found in db")
-  .check(any(colnames(x$fac)==fac_col),
-         "fac_col not found")
-  x_id <- x$fac[, fac_col]
-  db_id <- db[, db_col]
-  .check(length(unique(x_id))==length(unique(db_id)),
-         "number of unique id must match")
-  map_id <- match(db_id, x_id)
-  .check(all(!is.na(map_id)),
-         "ids mismatch")
-  # finally prepare the db
-  db_lite <- db[map_id, ] # reorders
-  db_lite <- db_lite[,  -which(colnames(db_lite)==db_col)] # -dbcol doesnt work!?
-  # and adds it to fac
-  x$fac <- cbind(x$fac, db_lite)
-  x
-}
-
-#' @export
-bind_db.Coe <- bind_db.Coo
+# #' @export
+# bind_db.Coo <- function(x, fac_col="id", db, db_col="id", ...){
+#   # checks a bit on x if its a Coo (waiting for validate.Coe todo)
+#   if (is.Coo(x))
+#     x <- validate(x)
+#   .check(!missing(db),
+#          "db must be provided")
+#   # if db is provided as a path
+#   if (is.character(db))
+#     db <- read.table(db, ...)
+#   # lots of check
+#   .check(is.data.frame(db),
+#          "db must be a data.frame")
+#   .check(nrow(db)==length(x),
+#          "nrow(db) does not match")
+#   .check(any(colnames(db)==db_col),
+#          "db_col not found in db")
+#   .check(any(colnames(x$fac)==fac_col),
+#          "fac_col not found")
+#   x_id <- x$fac[, fac_col]
+#   db_id <- db[, db_col]
+#   .check(length(unique(x_id))==length(unique(db_id)),
+#          "number of unique id must match")
+#   map_id <- match(db_id, x_id)
+#   .check(all(!is.na(map_id)),
+#          "ids mismatch")
+#   # finally prepare the db
+#   db_lite <- db[map_id, ] # reorders
+#   db_lite <- db_lite[,  -which(colnames(db_lite)==db_col)] # -dbcol doesnt work!?
+#   # and adds it to fac
+#   x$fac <- cbind(x$fac, db_lite)
+#   x
+# }
+#
+# #' @export
+#' bind_db.Coe <- bind_db.Coo
 
 
 # helpers ######################################################################
@@ -888,8 +922,14 @@ bind_db.Coe <- bind_db.Coo
 #'
 #' Note also that you can: i) do a \link{import_jpg} and save is a list, say 'foo';
 #' then ii) pass 'names(foo)' to lf_structure. See Momocs' vignette for an illustration.
+#'
+#' @note Note this function will be deprecated from Momocs
+#' when \code{Momacs} and \code{Momit}
+#' will be fully operationnal.
+#'
 #' @seealso \link{import_jpg1}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 #' See also Momocs' vignettes for data import.
+#' @family babel functions
 #' @export
 lf_structure <- function(lf, names = character(), split = "_",
                          trim.extension = FALSE) {
@@ -990,7 +1030,6 @@ tie_jpg_txt <- function(lf){
   return(Out)
 }
 
-# .jpg plotters -------------
 #' Plots a .jpg image
 #'
 #' A very simple image plotter. If provided with a path,
@@ -1080,28 +1119,3 @@ img_plot0 <- function(img) {
   }
   return(res)
 }
-
-
-# fridge but todo --------------------
-
-# splines <- function(coo, method='natural', deriv=2){ coo <-
-# coo_check(coo) z <- coo_perimcum(coo) fx <- splinefun(z,
-# coo[, 1], method=method) fy <- splinefun(z, coo[, 2],
-# method=method) xcoe <- fy(z, deriv=2) ycoe <- fy(z,
-# deriv=2) return(list(xcoe=xcoe, ycoe=ycoe))} splines2 <-
-# function(coo, nb.pts=100){ z <- coo_perimcum(coo) x.i <-
-# spline(z, coo[, 1], method='natural', n=100)$y y.i <-
-# spline(z, coo[, 2], method='natural', n=100)$y
-# return(cbind(x.i, y.i))} click.bez <- function(x, n=10){ x
-# <- as.raster(x) plot(NA, xlim=c(1, dim(x)[1]), ylim=c(1,
-# dim(x)[2]), asp=1) grid.raster(x) ldk <- matrix(NA, n, 2)
-# bez <- NA ldk[1, ] <- l2m(locator(1)) for (i in 2:n){
-# grid.raster(x) lines(bez, col='red') ldk[i, ] <-
-# l2m(locator(1)) cat(ldk) bez <-
-# bezier_i(bezier(ldk[1:i,])$B) }} click.splines <-
-# function(x, n=20){ x <- as.raster(x) plot(NA, xlim=c(1,
-# dim(x)[1]), ylim=c(1, dim(x)[2]), asp=1) grid.raster(x) ldk
-# <- matrix(NA, n, 2) spl <- NA ldk[1, ] <- l2m(locator(1))
-# for (i in 2:n){ grid.raster(x) points(ldk[1:i,], pch=20,
-# col='black') lines(spl, col='red') ldk[i, ] <-
-# l2m(locator(1)) cat(ldk) spl <- splines2(ldk[1:i,]) }}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/babel-import.R
 \name{import_Conte}
 \alias{import_Conte}
-\title{Extracts outlines coordinates from an image silhouette}
+\title{Extract outlines coordinates from an image silhouette}
 \usage{
 import_Conte(img, x)
 }
@@ -22,6 +22,10 @@ and a point form where to start the algorithm, returns the (x; y) coordinates of
 Used internally by \link{import_jpg1} but may be useful for other purposes.
 }
 \note{
+Note this function will be deprecated from Momocs
+when \code{Momacs} and \code{Momit}
+will be fully operationnal.
+
 If you have an image with more than a single shape, then
 you may want to try `imager::highlight` function. Momocs may use this at some point.
 }
@@ -35,5 +39,8 @@ analysis techniques for morphometrics. In \emph{Proceedings of the Michigan Morp
 }
 }
 \seealso{
-babel functions.
+Other import functions: \code{\link{import_StereoMorph_curve1}},
+  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
+  \code{\link{import_tps}}, \code{\link{import_txt}},
+  \code{\link{pix2chc}}
 }
