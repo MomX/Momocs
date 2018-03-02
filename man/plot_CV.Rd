@@ -51,5 +51,5 @@ gg + ggplot2::scale_color_discrete(h = c(120, 240))
 plot_CV(ol, freq=TRUE)
 }
 \seealso{
-\link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{Ntable}.
+\link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{plot_table}.
 }
