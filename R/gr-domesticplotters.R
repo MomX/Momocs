@@ -568,7 +568,7 @@ plot_devsegments <- function(coo, cols, lwd = 1) {
 #' lines(ce095$ell, col=cols[9])
 #' segments(ce095$seg[1, 1], ce095$seg[1, 2], ce095$seg[2, 1], ce095$seg[2, 2])
 #' segments(ce095$seg[3, 1], ce095$seg[3, 2], ce095$seg[4, 1], ce095$seg[4, 2])
-#' @export
+# #' @export # no need to export this
 conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
   if (is.matrix(x)) {
     y <- x[, 2]
@@ -608,9 +608,9 @@ conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
 #' @return a ggplot2 object
 #' @examples
 #' data(olea)
-#' Ntable(olea, "var")
-#' Ntable(olea, "domes", "var")
-#' gg <- Ntable(olea, "domes", "var", rm0 = TRUE)
+#' plot_table(olea, "var")
+#' plot_table(olea, "domes", "var")
+#' gg <- plot_table(olea, "domes", "var", rm0 = TRUE)
 #' gg
 #' library(ggplot2)
 #' gg + coord_equal()
@@ -618,10 +618,10 @@ conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
 #' gg + coord_flip()
 #' @family plotting functions
 #' @export
-Ntable <- function(x, fac1, fac2=fac1, rm0 = FALSE){
+plot_table <- function(x, fac1, fac2=fac1, rm0 = FALSE){
   # we check a bit
   if (is.null(x$fac))
-    stop("Ntable must be called on an object with a $fac slot")
+    stop("plot_table must be called on an object with a $fac slot")
   if (missing(fac1))
     stop("'fac1' must be specified")
   df <- select_(x$fac, fac1, fac2)
