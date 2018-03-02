@@ -2,16 +2,16 @@
 % Please edit documentation in R/gr-cheapbabi-paper_and_draw.R
 \name{papers}
 \alias{papers}
-\alias{paper_white}
 \alias{paper}
+\alias{paper_white}
 \alias{paper_grid}
 \alias{paper_chess}
 \alias{paper_dots}
 \title{Cheapbabi papers for shape plots}
 \usage{
-paper_white(coo, ...)
-
 paper(coo, ...)
+
+paper_white(coo, ...)
 
 paper_grid(coo, grid = c(10, 5), cols = c("#ffa500", "#e5e5e5"), ...)
 

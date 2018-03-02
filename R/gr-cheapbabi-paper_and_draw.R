@@ -44,6 +44,12 @@ this_dispatch <- function(f, this){
 #' @name papers
 #' @rdname papers
 #' @export
+paper <- function(coo, ...){
+  coo %>% paper_white(...) %>% draw_axes()
+}
+
+#' @rdname papers
+#' @export
 paper_white <- function(coo, ...){
   # smaller margins
   old <- par(mar=c(1.2, 1.2, 0, 0))
@@ -57,12 +63,6 @@ paper_white <- function(coo, ...){
 
   # propagate
   invisible(coo)
-}
-
-#' @rdname papers
-#' @export
-paper <- function(coo, ...){
-  coo %>% paper_white(...) %>% draw_axes()
 }
 
 #' @rdname papers
