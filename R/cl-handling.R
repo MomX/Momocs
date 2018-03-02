@@ -808,7 +808,68 @@ subset.PCA <- function(x, subset, ...){
 }
 
 
+# table --------------------------
+#' Cross-tabulates objects
+#'
+#' Simply extends base \link{table} for a more convenient use on $fac slot.
+#'
+#' @param ... a list of, first, a Momocs object (Coo, Coe, PCA, etc.), then, column names in the $fac slot. If not specified,
+#' returns a table on the entire $fac data.frame
+#'
+#' @family handling functions
+#' @examples
+#' table(olea, "var", "domes")
+#' table(olea)
+#' @rdname table
+#' @export
+table <- function(...){
+  UseMethod("table")
+}
+
+#' @rdname table
+#' @export
+table.default <- function(...){
+  base::table(...)
+}
+
+#' @rdname table
+#' @export
+table.Coo <- function(...){
+  args <- list(...)
+  #    return(args)
+  x <- args[[1]]
+  if (!is.fac(x)) stop("no $fac defined")
+  if (length(args)>1) {
+    # a little helper for mismatched colnames
+    cn <- unlist(args[-1])
+    matches <- match(cn, colnames(x$fac))
+    if (any(is.na(matches))) {
+      mispelled <- which(is.na(matches))
+      stop(cn[mispelled], "' mispelled or not defined in $fac")
+    }
+    matches <- match(cn, names(x$fac))
+    # single line avoids a title to be printed for the table
+    base::table(x$fac[, unlist(args[-1])])
+  } else {
+    base::table(x$fac)
+  }
+}
+
+#' @rdname table
+#' @export
+table.Coe <- table.Coo
+
+#' @rdname table
+#' @export
+table.PCA <- table.Coo
+
+#' @rdname table
+#' @export
+table.LDA <- table.Coo
+
+
 # rw_fac ---------------------
+# TODO replace with forcats
 #' Renames levels on Momocs objects
 #'
 #' rw_fac stands for 'rewriting rule'. Typically useful to correct typos
@@ -836,12 +897,6 @@ rw_fac <- function(x, fac, from, to){
   }
   x$fac[, fac] <- droplevels(fac2)
   x
-}
-#' @rdname rw_fac
-#' @export
-rw_rule <- function(x, fac, from, to){
-  message("will be deprecated soon, use `rw_fac` instead")
-  rw_fac(x, fac, from, to)
 }
 
 # at_least ------------------------
@@ -927,6 +982,7 @@ rm_uncomplete <- function(x, id, by){
 #'
 #' @param x Coe object
 #' @param drop numeric number of harmonics to drop
+#' @family handling functions
 #' @examples
 #' data(bot)
 #' bf <- efourier(bot)
@@ -981,6 +1037,7 @@ rm_harm <- function(x, drop=1){
 #'
 #' @note This function is simple but quite complex to detail. Feel free to contact me should you have any
 #' problem with it. You can just access its code (type \code{rescale}) and reply it yourself.
+#' @family handling functions
 #' @export
 rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){
   # homogeneous case
