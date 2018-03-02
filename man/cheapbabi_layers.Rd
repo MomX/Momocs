@@ -157,5 +157,5 @@ mutivariate plots using the cheapbabi approach. See examples.
 \seealso{
 cheapbabi_drawers
 
-Other graphics cheapbabi: \code{\link{paper_white}}
+Other graphics cheapbabi: \code{\link{cheapbabi_drawers}}
 }
