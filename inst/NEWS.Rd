@@ -8,6 +8,7 @@
 \section{Changes in version 1.2.5}{
   \itemize{
     \item cheap base biplots (aka cheapbabi): pipe-friendly base layers for biplots and shape drawing on cartesian coordinates.
+    \item vignette for `cheapbabi`
     \item new `coo_*` methods: `coo_range` and `coo_range_enlarge`
     \item `Ntable` deprecated/splitted into of `plot_table` + `table`
   }
