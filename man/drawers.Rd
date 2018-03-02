@@ -57,6 +57,8 @@ draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1, ...)
 
 \item{lwd}{to draw components}
 
+\item{lty}{to draw components}
+
 \item{...}{additional options to feed core functions for each drawer}
 
 \item{cex}{to draw components}
