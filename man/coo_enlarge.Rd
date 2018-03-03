@@ -8,6 +8,7 @@
 \alias{coo_range_enlarge}
 \alias{coo_range_enlarge.default}
 \alias{coo_range_enlarge.Coo}
+\alias{coo_range_enlarge.list}
 \title{Calculate coordinates range}
 \usage{
 coo_range(coo)
@@ -21,6 +22,8 @@ coo_range_enlarge(coo, k)
 \method{coo_range_enlarge}{default}(coo, k = 0)
 
 \method{coo_range_enlarge}{Coo}(coo, k = 0)
+
+\method{coo_range_enlarge}{list}(coo, k = 0)
 }
 \arguments{
 \item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}

@@ -101,6 +101,17 @@ coo_range_enlarge.default <- function(coo, k=0){
 #' @export
 coo_range_enlarge.Coo <- coo_range_enlarge.default
 
+#' @rdname coo_enlarge
+#' @export
+coo_range_enlarge.list <- function(coo, k=0){
+  m <- lapply(coo, coo_range) %>%
+    do.call("rbind", .) %>%
+    coo_range
+  g <- apply(m, 2, diff)*k
+  m[1, ] <- m[1, ] - g
+  m[2, ] <- m[2, ] + g
+  m
+}
 # coo_nb ----------------
 #' Counts coordinates
 #'
