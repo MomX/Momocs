@@ -99,7 +99,7 @@ paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
 #' @param n \code{numeric} number of squares for the chessboard
 #' @param col color (hexadecimal) to use for chessboard drawing
 #' @export
-paper_chess <- function(coo, n=50, col="#e5e5e5"){
+paper_chess <- function(coo, n=50, col="#E5E5E5"){
   # smaller margins
   old <- par(mar=c(1.2, 1.2, 0, 0), xpd=NA)
   on.exit(par(old))
@@ -134,6 +134,7 @@ paper_chess <- function(coo, n=50, col="#e5e5e5"){
 
 #' @export
 #' @rdname papers
+#' @param pch to use for dots
 paper_dots <- function(coo, pch=20, n=50, col="#7F7F7F"){
   # smaller margins
   old <- par(mar=c(1.2, 1.2, 0, 0), xpd=NA)
