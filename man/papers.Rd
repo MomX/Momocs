@@ -17,7 +17,7 @@ paper_grid(coo, grid = c(10, 5), cols = c("#ffa500", "#e5e5e5"), ...)
 
 paper_chess(coo, n = 50, col = "#e5e5e5")
 
-paper_dots(coo, n = 50, col = "#e5e5e5")
+paper_dots(coo, pch = 20, n = 50, col = "#7F7F7F")
 }
 \arguments{
 \item{coo}{a single shape or any [Coo] object}
