@@ -134,7 +134,7 @@ paper_chess <- function(coo, n=50, col="#e5e5e5"){
 
 #' @export
 #' @rdname papers
-paper_dots <- function(coo, n=50, col="#e5e5e5"){
+paper_dots <- function(coo, pch=20, n=50, col="#7F7F7F"){
   # smaller margins
   old <- par(mar=c(1.2, 1.2, 0, 0), xpd=NA)
   on.exit(par(old))
@@ -159,7 +159,7 @@ paper_dots <- function(coo, n=50, col="#e5e5e5"){
   # generates all ybottom coordinates
   ys <- seq(w[3], w[4], side)
   # draw dots
-  points(expand.grid(xs, ys), pch=20, col="#E5E5E5", cex=1/4)
+  points(expand.grid(xs, ys), pch=pch, col=col, cex=1/4)
   # propagate
   invisible(coo)
 }
@@ -204,16 +204,21 @@ draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
-  # Coo case
-  if (is_Coo(coo))
-    x <- coo$coo
+  # list and Coo case
+  if (is.list(coo)){
+    if (is_Coo(coo))
+      x <- coo$coo
+    else
+      x <- coo
+  }
 
   # handle factor
-  if (is_Coo(coo) && !missing(f))
-    f <- .fac_dispatcher(coo, f)
-  else
+  if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
+    if (is_Coo(coo))
+      f <- .fac_dispatcher(coo, f)
+  } else {
     f <- factor(rep(1, length(x)))
-
+  }
   # dispath drawer argument
   borders <- this_dispatch(f, border)
   cols    <- this_dispatch(f, col)
@@ -248,15 +253,21 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
-  # Coo case
-  if (is_Coo(coo))
-    x <- coo$coo
+  # list and Coo case
+  if (is.list(coo)){
+    if (is_Coo(coo))
+      x <- coo$coo
+    else
+      x <- coo
+  }
 
   # handle factor
-  if (is_Coo(coo) && !missing(f))
-    f <- .fac_dispatcher(coo, f)
-  else
+  if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
+    if (is_Coo(coo))
+      f <- .fac_dispatcher(coo, f)
+  } else {
     f <- factor(rep(1, length(x)))
+  }
 
   # dispath drawer argument
   cols    <- this_dispatch(f, col)
@@ -283,19 +294,24 @@ draw_landmarks <- draw_points
 #' @export
 #' @rdname drawers
 draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, ...){
-
   # shape case
   if (is_shp(coo))
     x <- list(coo)
-  # Coo case
-  if (is_Coo(coo))
-    x <- coo$coo
+  # list and Coo case
+  if (is.list(coo)){
+    if (is_Coo(coo))
+      x <- coo$coo
+    else
+      x <- coo
+  }
 
   # handle factor
-  if (is_Coo(coo) && !missing(f))
-    f <- .fac_dispatcher(coo, f)
-  else
+  if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
+    if (is_Coo(coo))
+      f <- .fac_dispatcher(coo, f)
+  } else {
     f <- factor(rep(1, length(x)))
+  }
 
   # dispath drawer argument
   cols    <- this_dispatch(f, col)
@@ -323,15 +339,21 @@ draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
-  # Coo case
-  if (is_Coo(coo))
-    x <- coo$coo
+  # list and Coo case
+  if (is.list(coo)){
+    if (is_Coo(coo))
+      x <- coo$coo
+    else
+      x <- coo
+  }
 
   # handle factor
-  if (is_Coo(coo) && !missing(f))
-    f <- .fac_dispatcher(coo, f)
-  else
+  if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
+    if (is_Coo(coo))
+      f <- .fac_dispatcher(coo, f)
+  } else {
     f <- factor(rep(1, length(x)))
+  }
 
   # dispath drawer argument
   cols    <- this_dispatch(f, col)
@@ -367,15 +389,21 @@ draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
-  # Coo case
-  if (is_Coo(coo))
-    x <- coo$coo
+  # list and Coo case
+  if (is.list(coo)){
+    if (is_Coo(coo))
+      x <- coo$coo
+    else
+      x <- coo
+  }
 
   # handle factor
-  if (is_Coo(coo) && !missing(f))
-    f <- .fac_dispatcher(coo, f)
-  else
+  if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
+    if (is_Coo(coo))
+      f <- .fac_dispatcher(coo, f)
+  } else {
     f <- factor(rep(1, length(x)))
+  }
 
   # dispath drawer argument
   labels  <- this_dispatch(f, label)
@@ -410,9 +438,13 @@ draw_axes <- function(coo, col="#333333", cex=3/4, lwd=3/4, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
-  # Coo case
-  if (is_Coo(coo))
-    x <- coo$coo
+  # list and Coo case
+  if (is.list(coo)){
+    if (is_Coo(coo))
+      x <- coo$coo
+    else
+      x <- coo
+  }
 
   x <- do.call("rbind", x)
 
@@ -460,21 +492,24 @@ draw_labels <- function(coo, labels=1:nrow(coo), cex=1/2, d=1/20, ...){
 #' @export
 #' @rdname drawers
 draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, ...){
-
-
   # shape case
   if (is_shp(coo))
     x <- list(coo)
-  # Coo case
-  if (is_Coo(coo)){
-    x <- coo$coo
-    links <- coo$links
+  # list and Coo case
+  if (is.list(coo)){
+    if (is_Coo(coo))
+      x <- coo$coo
+    else
+      x <- coo
   }
+
   # handle factor
-  if (is_Coo(coo) && !missing(f))
-    f <- .fac_dispatcher(coo, f)
-  else
+  if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
+    if (is_Coo(coo))
+      f <- .fac_dispatcher(coo, f)
+  } else {
     f <- factor(rep(1, length(x)))
+  }
 
   # dispath drawer argument
   cols    <- this_dispatch(f, col)
