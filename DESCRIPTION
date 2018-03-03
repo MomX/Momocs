@@ -21,6 +21,6 @@ Depends: R(>= 3.2)
 LazyData: true
 Imports: ape, dplyr, magrittr, graphics, geometry, geomorph, ggplot2,
        jpeg, MASS, progress, plyr, reshape2, rgeos, sp, utils
-Suggests: devtools, knitr, rmarkdown, testthat, covr
+Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
