@@ -15,7 +15,7 @@ paper_white(coo, ...)
 
 paper_grid(coo, grid = c(10, 5), cols = c("#ffa500", "#e5e5e5"), ...)
 
-paper_chess(coo, n = 50, col = "#e5e5e5")
+paper_chess(coo, n = 50, col = "#E5E5E5")
 
 paper_dots(coo, pch = 20, n = 50, col = "#7F7F7F")
 }
@@ -32,6 +32,8 @@ number of majors lines, and the number of minor lines within two major ones}
 \item{n}{\code{numeric} number of squares for the chessboard}
 
 \item{col}{color (hexadecimal) to use for chessboard drawing}
+
+\item{pch}{to use for dots}
 }
 \description{
 Papers on which to use [drawers] for building custom
