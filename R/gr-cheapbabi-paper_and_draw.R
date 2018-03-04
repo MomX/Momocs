@@ -535,3 +535,7 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, ...){
   invisible(coo)
 }
 # wings %>% mshapes %>% paper %>% draw_links(links=wings$links) %>% draw_landmarks %>% draw_labels(d=1/5)
+
+
+# draw_text
+# draw_radii
