@@ -100,13 +100,13 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
 }
 
 # on load add Momocs' options
-.onLoad <- function(libname, pkgname){
-  Momocs_options <- list(
-    Momocs_verbose = TRUE,
-    Momocs_message = TRUE,
-    Momocs_pal_qual=pal_qual_Paired,
-    Momocs_pal_seq=pal_seq_YlGnBu,
-    Momocs_pal_div=pal_div_Spectral)
-  options(Momocs_options)
-}
+# .onLoad <- function(libname, pkgname){
+#   Momocs_options <- list(
+#     Momocs_verbose = TRUE,
+#     Momocs_message = TRUE,
+#     Momocs_pal_qual=pal_qual_Paired,
+#     Momocs_pal_seq=pal_seq_YlGnBu,
+#     Momocs_pal_div=pal_div_Spectral)
+#   options(Momocs_options)
+# }
 
