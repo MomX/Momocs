@@ -250,3 +250,8 @@ pal_seq_YlOrRd <- function(n, transp=0){
   .pal_brewer(n, 'YlOrRd') %>%
     pal_alpha(transp=transp)
 }
+
+#TODO
+# col_grey
+# col_solarized()
+# col_viridis() viridisLite::viridis.map
