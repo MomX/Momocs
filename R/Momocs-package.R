@@ -92,41 +92,21 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
                   "node", "label", "angle", "hjust", "Freq",
                   "locus", "name", ".", "actual", "classified"))
 
-
+# welcome message
 .onAttach <- function(lib, pkg) {
   packageStartupMessage('This is Momocs ',
                         utils::packageDescription('Momocs', field='Version'),
                         appendLF = TRUE)
 }
 
-#
-# .onLoad <- function(libname, pkgname){
-#   Momocs_options <- list(
-#     Momocs_verbose = TRUE,
-#     Momocs_message = TRUE)
-#   options(Momocs_options)
-# }
-#
-#
-# Momocs_options <- function(...){
-#   args <- list(...)
-#   p <- "^Momocs_.*$"
-#   # see
-#   if (length(args)==0){
-#     return(options()[grep(p, names(options()))])
-#   }
-#   # set
-#   if (all(sapply(args, is.character))){
-#     .check(all(sapply(args,
-#                       function(.x) length(grep(p, .x))>0)),
-#            "Momocs' options names must begin with 'Momocs_'")
-#     options(unlist(args))
-#   } else {
-#     #get
-#     .check(all(sapply(names(args),
-#                       function(.x) length(grep(p, .x))>0)),
-#            "Momocs' options names must begin with 'Momocs_'")
-#     options(args)
-#   }
-# }
+# on load add Momocs' options
+.onLoad <- function(libname, pkgname){
+  Momocs_options <- list(
+    Momocs_verbose = TRUE,
+    Momocs_message = TRUE,
+    Momocs_pal_qual=pal_qual_Paired,
+    Momocs_pal_seq=pal_seq_YlGnBu,
+    Momocs_pal_div=pal_div_Spectral)
+  options(Momocs_options)
+}
 
