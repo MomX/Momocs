@@ -19,7 +19,6 @@ ldk_labels(ldk, d = 0.05, cex = 2/3, ...)
 Add landmarks labels
 }
 \examples{
-data(wings)
 coo_plot(wings[1])
 ldk_labels(wings[1])
 # closer and smaller

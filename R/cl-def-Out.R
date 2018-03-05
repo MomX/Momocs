@@ -76,7 +76,6 @@ Out.Coo <- function(x, fac = data.frame(), ldk = list()) {
 #' @param nb.pts number of point for the reconstructed outlines
 #' @return an \link{Out} object.
 #' @examples
-#' data(bot)
 #' bot <- coo_center(bot)
 #' bot.f <- rfourier(bot, 120)
 #' bot.fi <- as.Out(bot.f)
@@ -251,7 +250,6 @@ print.OutCoe <- function(x, ...) {
 #'   coined by Iwata et al., and here implemented in Momocs.
 #' @seealso \link{rm_asym} and \link{rm_sym}.
 #' @examples
-#' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' res <- symmetry(bot.f)
 #' hist(res[, 'sym'])
@@ -298,7 +296,6 @@ symmetry.OutCoe <- function(OutCoe) {
 #' }
 #' @seealso \link{symmetry} and the note there.
 #' @examples
-#' data(bot)
 #' botf <- efourier(bot, 12)
 #' botSym <- rm_asym(botf)
 #' boxplot(botSym)

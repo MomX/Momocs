@@ -33,7 +33,6 @@ A set of functions around PCA/LDA eigen/trace. \code{scree} calculates their pro
 \code{scree_min} returns the minimal number of axis to use to retain a given proportion; \code{scree_plot} displays a screeplot.
 }
 \examples{
-data(bot)
 # On PCA
 bp <- PCA(efourier(bot))
 scree(bp)
@@ -44,7 +43,6 @@ scree_plot(bp)
 scree_plot(bp, 1:5)
 
 # on LDA, it uses svd
-data(olea)
 bl <- LDA(PCA(opoly(olea)), "var")
 scree(bl)
 

@@ -78,12 +78,10 @@ notably morphological space.
 Detail the df_s. Detail the calculations.
 }
 \examples{
-#data(bot)
 #bp <- PCA(efourier(bot, 8))
 #plot2(bp)
 #plot2(bp, "type")
 #plot2(bp, "type", ellipse=TRUE)
-# data(bot)
 
 # bot$fac$fake <- factor(rep(letters[1:4], 10))
 # bot$fac$fake2 <- c(runif(20), runif(20, 5, 10))

@@ -34,7 +34,6 @@ Only for those obtained with \link{efourier}, otherwise a message is returned.
 all A and D coefficients to 0.
 }
 \examples{
-data(bot)
 botf <- efourier(bot, 12)
 botSym <- rm_asym(botf)
 boxplot(botSym)

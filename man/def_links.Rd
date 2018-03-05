@@ -17,7 +17,6 @@ Works on Ldk objects, on 2cols matrices, 3dim arrays (msshapes turns it into a m
 }
 \examples{
 \dontrun{
-data(wings)
 wm <- mshapes(wings)
 links <- def_links(wm, 3) # click to define pairs of landmarks
 ldk_links(wm, links)

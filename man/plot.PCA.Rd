@@ -200,7 +200,6 @@ plot(bot.p, ~type)
 # let's create a dummy factor of the correct length
 # and another added to the $fac with mutate
 # and a numeric of the correct length
-data(bot)
 f <- factor(rep(letters[1:2], 20))
 z <- factor(rep(LETTERS[1:2], 20))
 bot \%<>\% mutate(cs=coo_centsize(.), z=z)
@@ -217,25 +216,21 @@ plot(bp, ~type+z)
 
 ### other morphometric approaches works the same
 # open curves
-data(olea)
 op <- npoly(olea, 5)
 op.p <- PCA(op)
 op.p
 plot(op.p, ~ domes + var, morpho=TRUE) # use of formula
 
 # landmarks
-data(wings)
 wp <- fgProcrustes(wings, tol=1e-4)
 wpp <- PCA(wp)
 wpp
 plot(wpp, 1)
 
 # traditionnal measurements
-data(flower)
 flower \%>\% PCA \%>\% plot(1)
 
 # plot.PCA can be used after a PCA
-data(iris)
 PCA(iris[, 1:4], fac=iris$Species)  \%>\% plot(1)
 
 ### Cosmetic options

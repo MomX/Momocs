@@ -52,7 +52,6 @@ list of coordinates.
 Directly borrowed for Claude (2008), and called \code{fourier2} there.
 }
 \examples{
-data(bot)
 coo <- bot[1]
 coo_plot(coo)
 tf  <- tfourier(coo, 12)

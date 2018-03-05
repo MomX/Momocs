@@ -19,7 +19,6 @@ ldk_contour(ldk, nlevels = 5, grid.nb = 50, col = "grey60")
 Using \link{kde2d} in the MASS package.
 }
 \examples{
-data(wings)
 coo_plot(mshapes(wings))
 ldk_contour(wings$coo)
 }

@@ -36,7 +36,6 @@ m <- matrix(1:12, nrow=3)
 breed(m, margin=2, size=4)
 breed(m, margin=1, size=10)
 
-data(bot)
 bot.f <- efourier(bot, 12)
 bot.m <- breed(bot.f, 80)
 bot.m

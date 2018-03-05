@@ -177,7 +177,6 @@ is shared with \link{plot.PCA} waiting for a general rewriting of a multivariate
 See https://github.com/vbonhomme/Momocs/issues/121
 }
 \examples{
-data(bot)
 bot.f <- efourier(bot, 24)
 bot.l <- LDA(PCA(bot.f), "type")
 plot(bot.l)

@@ -25,7 +25,6 @@ minus the first one (modulo 2*pi).
 in future releases.
 }
 \examples{
-data(bot)
 b <- bot[1]
 phi  <- coo_angle_tangent(b)
 phi2 <- coo_angle_tangent(coo_smooth(b, 2))

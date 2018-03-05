@@ -38,7 +38,6 @@ and values as heatmaps. Used in Momocs for plotting cross-validation tables
 but may be used for any table (likely with \code{freq=FALSE}).
 }
 \examples{
-data(olea)
 ol <- LDA(PCA(opoly(olea, 5)), "domes")
 # freq=FALSE inspired by Chitwood et al. New Phytol fig. 4
 gg <- plot_CV(ol, freq=FALSE)

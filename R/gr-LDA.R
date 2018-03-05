@@ -81,7 +81,6 @@
 #' See https://github.com/vbonhomme/Momocs/issues/121
 #' @seealso \link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
 #' @examples
-#' data(bot)
 #' bot.f <- efourier(bot, 24)
 #' bot.l <- LDA(PCA(bot.f), "type")
 #' plot(bot.l)
@@ -326,7 +325,6 @@ if (nlevels(fac) <= 2){
 #' @return a ggplot object
 #' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{plot_table}.
 #' @examples
-#' data(olea)
 #' ol <- LDA(PCA(opoly(olea, 5)), "domes")
 #' # freq=FALSE inspired by Chitwood et al. New Phytol fig. 4
 #' gg <- plot_CV(ol, freq=FALSE)
@@ -447,14 +445,12 @@ plot_CV.LDA <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,.
 #' plot_CV2(tab, gap.dots=1) # or not
 #'
 #' #trilo examples
-#' data(trilo)
 #' trilo.f <- efourier(trilo, 8)
 #' trilo.l <- LDA(PCA(trilo.f), 'onto')
 #' trilo.l
 #' plot_CV2(trilo.l)
 #'
 #' # olea example
-#' data(olea)
 #' op <- opoly(olea, 5)
 #' opl <- LDA(PCA(op), 'var')
 #' plot_CV2(opl)

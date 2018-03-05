@@ -30,10 +30,8 @@ Calculate and displays reconstructed shapes using a
 range of harmonic number. Compare them visually with the maximal fit.
 }
 \examples{
-data(bot)
 calibrate_reconstructions(bot, "efourier", range=1:12)
 
-data(olea)
 calibrate_reconstructions(olea, "dfourier")
 }
 \seealso{

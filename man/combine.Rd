@@ -22,7 +22,6 @@ Note that the order of shapes or their coefficients
 is not checked, so anything with the same number of rows will be merged.
 }
 \examples{
-data(bot)
 w <- filter(bot, type=="whisky")
 b <- filter(bot, type=="beer")
 combine(w, b)

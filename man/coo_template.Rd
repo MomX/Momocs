@@ -24,7 +24,6 @@ functions also take profit of this function. May be useful to develop other grap
 }
 \examples{
 
-data(bot)
 coo <- bot[1]
 coo_plot(coo_template(coo), xlim=c(-1, 1), ylim=c(-1, 1))
 rect(-0.5, -0.5, 0.5, 0.5)

@@ -23,7 +23,7 @@ two ids (<= n), the shape will be open on the corresponding coordinates and
 slices returned as a list
 }
 \examples{
-h <- slice(hearts, 1:50)
+h <- slice(hearts, 1:5)  # speed purpose only
 # single shape, a list of matrices is returned
 sh <- coo_slice(h[1], c(12, 24, 36, 48))
 coo_plot(sh[[1]])

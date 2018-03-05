@@ -274,7 +274,6 @@ coo_scaley <- function(coo, k=1){
 #' @family coo_ utilities
 #' @examples
 #'
-#' data(bot)
 #' coo <- bot[1]
 #' coo_plot(coo_template(coo), xlim=c(-1, 1), ylim=c(-1, 1))
 #' rect(-0.5, -0.5, 0.5, 0.5)
@@ -576,7 +575,7 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' If provided, \code{ids} will be ignored.
 #' @return a list of shapes or a list of \link{Opn}
 #' @examples
-#' h <- slice(hearts, 1:50)
+#' h <- slice(hearts, 1:5)  # speed purpose only
 #' # single shape, a list of matrices is returned
 #' sh <- coo_slice(h[1], c(12, 24, 36, 48))
 #' coo_plot(sh[[1]])

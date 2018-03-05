@@ -17,7 +17,6 @@ Is is intended to ease calculations, data handling and multivariate statistics
 just ad the other Momocs' classes
 }
 \examples{
-data(iris)
 # let's (more or less) rebuild the flower dataset
 fl <- TraCoe(iris[, 1:4], data.frame(sp=iris$Species))
 fl \%>\% PCA() \%>\% plot("sp")

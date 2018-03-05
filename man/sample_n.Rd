@@ -22,8 +22,6 @@ Sample n shapes from a Momocs object. See examples and \code{?dplyr::sample_n}.
 }
 \examples{
 
-data(bot)
-bot
 # samples 5 bottles no matter their type
 sample_n(bot, 5)
 # 5 bottles of beer and of whisky

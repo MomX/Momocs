@@ -17,7 +17,6 @@ Returns the ids of points that define the convex hull of a shape. A simple wrapp
 around \link{chull}, mainly used in graphical functions.
 }
 \examples{
-data(hearts)
 h <- coo_sample(hearts[4], 32)
 coo_plot(h)
 ch <- coo_chull(h)

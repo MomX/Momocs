@@ -22,7 +22,6 @@ stored in the \code{$ldk} slot of the \code{Coo} object.
 }
 \examples{
 \dontrun{
-data(bot)
 bot <- bot[1:5] # to make it shorter to try
 # click on 3 points, 5 times.
 # Don't forget to save the object returned by def_ldk...

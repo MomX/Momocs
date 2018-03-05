@@ -59,7 +59,6 @@
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 #' @examples
-#' data(bot)
 #' coo <- bot[1]
 #' coo_plot(coo)
 #' ef <- efourier(coo, 12)
@@ -187,7 +186,6 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 #' @family efourier
 #' @examples
-#' data(bot)
 #' coo <- bot[1]
 #' coo_plot(coo)
 #' ef  <- efourier(coo, 12)
@@ -267,7 +265,6 @@ efourier_i <- function(ef, nb.h, nb.pts = 120) {
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 #' @examples
-#' data(bot)
 #' q <- efourier(bot[1], 24)
 #' efourier_i(q) # equivalent to efourier_shape(q$an, q$bn, q$cn, q$dn)
 #' efourier_norm(q)
@@ -359,8 +356,6 @@ efourier_norm <- function(ef, start = FALSE) {
 #' Ferson S, Rohlf FJ, Koehn RK. 1985. Measuring shape variation of
 #' two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 #' @examples
-#'
-#' data(bot)
 #' ef <- efourier(bot[1], 24)
 #' efourier_shape(ef$an, ef$bn, ef$cn, ef$dn) # equivalent to efourier_i(ef)
 #' efourier_shape() # is autonomous

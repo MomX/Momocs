@@ -24,7 +24,6 @@ and if you have coded coded it into \code{$fac}, this methods allows you to retr
 or coefficients for \link{Coe} objects.
 }
 \examples{
-data(bot)
 bot2 <- bot1 <- coo_scale(coo_center(coo_sample(bot, 60)))
 bot1$fac$session <- factor(rep("session1", 40))
 # we simulate an measurement error

@@ -32,20 +32,17 @@
 #' }
 #' @family multivariate
 #' @examples
-#' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #' bot.p
 #' plot(bot.p, morpho=FALSE)
 #' plot(bot.p, 'type')
 #'
-#' data(olea)
 #' op <- npoly(olea, 5)
 #' op.p <- PCA(op)
 #' op.p
 #' plot(op.p, 1, morpho=TRUE)
 #'
-#' data(wings)
 #' wp <- fgProcrustes(wings, tol=1e-4)
 #' wpp <- PCA(wp)
 #' wpp
@@ -187,7 +184,6 @@ print.PCA <- function(x, ...){
 #' first level of the \code{fac} provided; \code{x2} same thing for the second level;
 #' \code{fac} the corresponding \code{fac}.
 #' @examples
-#' data(bot)
 #' bot2 <- bot1 <- coo_scale(coo_center(coo_sample(bot, 60)))
 #' bot1$fac$session <- factor(rep("session1", 40))
 #' # we simulate an measurement error
@@ -256,7 +252,6 @@ get_pairs.LDA <- get_pairs.PCA
 #' @param Coe a \link{Coe} object
 #' @note Quite experimental. Dimensions of the matrices and methods must match.
 #' @examples
-#' data(bot)
 #' b <- filter(bot, type=="beer")
 #' w <- filter(bot, type=="whisky")
 #'
@@ -327,7 +322,6 @@ rePCA.PCA <- function(PCA, Coe){
 #'  get_chull_volume is calculated using geometry::convexhulln
 #'
 #' @examples
-#' data(bot)
 #' bp <- PCA(efourier(bot, 12))
 #' get_chull_area(bp)
 #' get_chull_area(bp, 1)

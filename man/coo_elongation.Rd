@@ -20,7 +20,6 @@ numeric, the eccentricity of the bounding box
 Calculates the elongation of a shape
 }
 \examples{
-data(bot)
 coo_elongation(bot[1])
 }
 \seealso{

@@ -47,11 +47,9 @@ Needs a review and should be considered as experimental.
 }
 \examples{
 # MANOVA
-data(bot)
 bot.p <- PCA(efourier(bot, 12))
 MANOVA(bot.p, 'type')
 
-data(olea)
 op <- PCA(npoly(olea, 5))
 MANOVA(op, 'domes')
 

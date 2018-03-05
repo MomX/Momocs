@@ -122,7 +122,6 @@ sfourier.Out <- function(x, nb.h){
 #' @references Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
 #' of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 #' @examples
-#' data(bot)
 #' coo <- coo_center(bot[1]) # centering is almost mandatory for sfourier family
 #' coo_plot(coo)
 #' rf  <- sfourier(coo, 12)
@@ -197,7 +196,6 @@ sfourier_i <-
 #' @references Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in the mandible shape
 #' of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 #' @examples
-#' data(bot)
 #' rf <- sfourier(bot[1], 24)
 #' sfourier_shape(rf$an, rf$bn) # equivalent to sfourier_i(rf)
 #' sfourier_shape() # not very interesting

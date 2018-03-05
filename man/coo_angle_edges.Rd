@@ -25,7 +25,6 @@ Returns the angle (in radians) of every edge of a shape,
 in future releases.
 }
 \examples{
-data(bot)
 b <- coo_sample(bot[1], 64)
 coo_angle_edges(b)
 }

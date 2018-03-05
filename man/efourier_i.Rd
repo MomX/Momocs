@@ -30,7 +30,6 @@ See \link{efourier} for the mathematical background.
 Directly borrowed for Claude (2008), and also called \code{iefourier} there.
 }
 \examples{
-data(bot)
 coo <- bot[1]
 coo_plot(coo)
 ef  <- efourier(coo, 12)

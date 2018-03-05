@@ -30,7 +30,6 @@
 #' @return No returned value.
 #' @family plotting functions
 #' @examples
-#' data(bot)
 #' b <- bot[1]
 #' coo_plot(b)
 #' coo_plot(bot[2], plot.new=FALSE) # equivalent to coo_draw(bot[2])
@@ -128,7 +127,6 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
 #' @param ... optional parameters for \link{coo_plot}
 #' @family plotting functions
 #' @examples
-#' data(bot)
 #' b1 <- bot[4]
 #' b2 <- bot[5]
 #' coo_plot(b1)
@@ -166,7 +164,6 @@ coo_draw_rads <- function(coo, ...){
 #' @param ... optional parameters to fed \link{points} and \link{segments}.
 #' @family plotting functions
 #' @examples
-#' data(olea)
 #' coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 #' title("A nice title !")
 #' @export
@@ -195,7 +192,6 @@ coo_lolli <- function(coo1, coo2,
 #' @param ... optional parameters to fed \link{arrows}.
 #' @family plotting functions
 #' @examples
-#' data(olea)
 #' coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 #' title("Hi there !")
 #' @export
@@ -224,7 +220,6 @@ coo_arrows <- function(coo1, coo2,
 #' @return nothing
 #' @family plotting functions
 #' @examples
-#' data(bot)
 #' ms <- mshapes(efourier(bot , 10), "type")
 #' b <- ms$shp$beer
 #' w <- ms$shp$whisky
@@ -370,7 +365,6 @@ ldk_plot <- function(coo, ...){
 #' @family plotting functions
 #' @family ldk plotters
 #' @examples
-#' data(wings)
 #' coo_plot(wings[1])
 #' ldk_labels(wings[1])
 #' # closer and smaller
@@ -419,7 +413,6 @@ ldk_links <- function(ldk, links, ...) {
 #' @param ax logical whether to draw ellipses axes
 #' @param ax.lty an lty for ellipses axes
 #' @examples
-#' data(wings)
 #' coo_plot(mshapes(wings))
 #' ldk_confell(wings$coo)
 #' @family plotting functions
@@ -455,7 +448,6 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' @param col a color for drawing the contour lines
 #' @seealso \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
 #' @examples
-#' data(wings)
 #' coo_plot(mshapes(wings))
 #' ldk_contour(wings$coo)
 #' @family plotting functions
@@ -482,7 +474,6 @@ ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
 #' @param lty an lty for drawing the convex hulls
 #' @seealso \link{coo_chull}, \link{chull}, \link{ldk_confell}, \link{ldk_contour}
 #' @examples
-#' data(wings)
 #' coo_plot(mshapes(wings))
 #' ldk_chull(wings$coo)
 #' @family plotting functions
@@ -513,7 +504,6 @@ ldk_chull <- function(ldk, col = "grey40", lty = 1) {
 #' @examples
 #'
 #' # we load some data
-#' data(bot)
 #' guinness <- coo_sample(bot[9], 100)
 #'
 #' # we calculate the diff between 48 harm and one with 6 harm.
@@ -607,7 +597,6 @@ conf_ell <- function(x, y, conf = 0.95, nb.pts = 60) {
 #' @param rm0 logical whether to print zeros
 #' @return a ggplot2 object
 #' @examples
-#' data(olea)
 #' plot_table(olea, "var")
 #' plot_table(olea, "domes", "var")
 #' gg <- plot_table(olea, "domes", "var", rm0 = TRUE)
@@ -725,7 +714,6 @@ plot_table <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 #' curves.
 #' @return the plotted values
 #' @examples
-#' data(shapes)
 #' coo_oscillo(shapes[4])
 #' coo_oscillo(shapes[4], 'efourier')
 #' coo_oscillo(shapes[4], 'rfourier')
@@ -821,7 +809,6 @@ coo_oscillo <- function(coo,
 #' @seealso An intuitive explanation of elliptic Fourier analysis can be found in
 #' the \bold{Details} section of the \link{efourier} function.
 #' @examples
-#' data(shapes)
 #' cat <- shapes[4]
 #' Ptolemy(cat, main="An EFT cat")
 #' @seealso exemplifying functions

@@ -37,7 +37,6 @@ methods(class='Coe')
 # to see all methods for OutCoe objects.
 methods(class='OutCoe') # same for OpnCoe, LdkCoe, TraCoe
 
-data(bot)
 bot.f<- efourier(bot, 12)
 bot.f
 class(bot.f)
@@ -58,13 +57,11 @@ bot.f[1:5] <- matrix(1:48, nrow=5, ncol=48, byrow=TRUE)
 bot.f[1:5]
 
 # An illustration of Momocs desing. See also browseVignettes("Momocs")
-data(olea)
 op <- opoly(olea, 5)
 op
 class(op)
 op$coe # same thing
 
-data(wings)
 wp <- fgProcrustes(wings, tol=1e-4)
 wp
 class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects

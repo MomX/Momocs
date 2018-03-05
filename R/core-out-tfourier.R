@@ -34,7 +34,6 @@
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
 #' @examples
-#' data(bot)
 #' coo <- bot[1]
 #' coo_plot(coo)
 #' tf  <- tfourier(coo, 12)
@@ -163,7 +162,6 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
 #' Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 #' pp.
 #' @examples
-#' data(bot)
 #' tfourier(bot[1], 24)
 #' tfourier_shape()
 #' @export
@@ -236,7 +234,6 @@ tfourier_i <- function(tf, nb.h, nb.pts = 120, force2close = FALSE,
 #' @references Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 #' Springer 316 pp.
 #' @examples
-#' data(bot)
 #' tf <- tfourier(bot[1], 24)
 #' tfourier_shape(tf$an, tf$bn) # equivalent to rfourier_i(rf)
 #' tfourier_shape()

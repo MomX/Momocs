@@ -28,7 +28,6 @@ positions along the curvilinear abscissa and/or radius/tangent angle variation.
 These functions are mainly intended for (self-)teaching of Fourier-based methods.
 }
 \examples{
-data(shapes)
 coo_oscillo(shapes[4])
 coo_oscillo(shapes[4], 'efourier')
 coo_oscillo(shapes[4], 'rfourier')

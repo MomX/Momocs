@@ -20,7 +20,6 @@ numeric, the eccentricity (eigenvalues)
 Calculated using a ratio of the eigen values (inertia axes oof coordinates.)
 }
 \examples{
-data(bot)
 coo_eccentricityeigen(bot[1])
 }
 \seealso{

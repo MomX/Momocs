@@ -79,7 +79,6 @@ tps_apply <- function(fr, to, new){
 #' @family thin plate splines
 #' @examples
 #' \dontrun{
-#' data(bot)
 #' ms <- mshapes(efourier(bot, 10), "type")
 #' b <- ms$shp$beer
 #' w <- ms$shp$whisky
@@ -132,7 +131,6 @@ tps_raw <- function(fr, to, amp = 1,
 #' @return Nothing
 #' @family thin plate splines
 #' @examples
-#' data(bot)
 #' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
@@ -216,7 +214,6 @@ tps_grid <- function(fr, to, amp = 1,
 #' @return Nothing.
 #' @family thin plate splines
 #' @examples
-#' data(bot)
 #' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
@@ -308,7 +305,6 @@ tps_arr <- function(fr, to, amp = 1,
 #' @return No returned value
 #' @family thin plate splines
 #' @examples
-#' data(bot)
 #' botF <- efourier(bot)
 #' x <- mshapes(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer

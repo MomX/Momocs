@@ -29,7 +29,6 @@ to 1 (whish should never superimpose shapes), reduce it to get a more compact pl
 Calculates and plots shape variation along Principal Component axes.
 }
 \examples{
-data(bot)
 bot.p <- PCA(efourier(bot, 12))
 PCcontrib(bot.p)
 \dontrun{

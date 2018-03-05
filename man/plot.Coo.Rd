@@ -20,7 +20,6 @@ Allows to plot shapes, individually, for \link{Coo} (\link{Out}, \link{Opn} or \
 }
 \examples{
 \dontrun{
-data(bot)
 plot(bot, 5)
 plot(bot)
 plot(bot, 5, pch=3, points=TRUE) # an example of '...' use

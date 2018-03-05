@@ -25,8 +25,6 @@ the resulting fraction is rounded with \link{ceiling}.
 }
 \examples{
 
-data(bot)
-bot
 # samples 50\% of the bottles no matter their type
 sample_frac(bot, 0.5)
 # 80\% bottles of beer and of whisky

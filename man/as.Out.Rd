@@ -35,7 +35,6 @@ yet neutral for further analysis (and that can be manage with the argument \code
 functions/methods that use reconstructed outlines, e.g. \link{plot.PCA}).
 }
 \examples{
-data(bot)
 bot <- coo_center(bot)
 bot.f <- rfourier(bot, 120)
 bot.fi <- as.Out(bot.f)

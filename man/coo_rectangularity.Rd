@@ -20,7 +20,6 @@ numeric, the rectangularity.
 Calculates the rectangularity of a shape
 }
 \examples{
-data(bot)
 coo_rectangularity(bot[1])
 }
 \seealso{

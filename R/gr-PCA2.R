@@ -36,12 +36,10 @@
 #' }
 #' @details Detail the df_s. Detail the calculations.
 #' @examples
-#' #data(bot)
 #' #bp <- PCA(efourier(bot, 8))
 #' #plot2(bp)
 #' #plot2(bp, "type")
 #' #plot2(bp, "type", ellipse=TRUE)
-#' # data(bot)
 #'
 #' # bot$fac$fake <- factor(rep(letters[1:4], 10))
 #' # bot$fac$fake2 <- c(runif(20), runif(20, 5, 10))
@@ -217,7 +215,6 @@ plot2.PCA <- function(x,
 #' @param prop numeric how many axis are enough this proportion of variance, if too high then number of axis is returned.
 #' @return scree returns a data.frame, scree_min a numeric, scree_plot a ggplot.
 #' @examples
-#' data(bot)
 #' # On PCA
 #' bp <- PCA(efourier(bot))
 #' scree(bp)
@@ -228,7 +225,6 @@ plot2.PCA <- function(x,
 #' scree_plot(bp, 1:5)
 #'
 #' # on LDA, it uses svd
-#' data(olea)
 #' bl <- LDA(PCA(opoly(olea)), "var")
 #' scree(bl)
 #'

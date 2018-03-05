@@ -26,7 +26,6 @@ either signed ('atan2') or not ('acos').
 in future releases.
 }
 \examples{
-data(bot)
 b <- coo_sample(bot[1], 64)
 b <- b[c(1, 14, 24), ]
 coo_plot(b)

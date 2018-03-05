@@ -21,7 +21,6 @@ Select variables by name, from the \code{$fac}. See examples and \code{?dplyr::s
 dplyr verbs are maintained.
 }
 \examples{
-data(olea)
 olea
 select(olea, var, view) # drops domes and ind
 select(olea, variety=var, domesticated_status=domes, view)

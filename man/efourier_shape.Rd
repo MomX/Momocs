@@ -50,8 +50,6 @@ coefficients will thus increase. See \link{efourier} for the mathematical
 background.
 }
 \examples{
-
-data(bot)
 ef <- efourier(bot[1], 24)
 efourier_shape(ef$an, ef$bn, ef$cn, ef$dn) # equivalent to efourier_i(ef)
 efourier_shape() # is autonomous

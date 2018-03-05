@@ -19,7 +19,6 @@ Returns the 'circularity measure'. Also called 'compactness'
 and 'shape factor' sometimes.
 }
 \examples{
-data(bot)
 coo_circularity(bot[1])
 }
 \seealso{

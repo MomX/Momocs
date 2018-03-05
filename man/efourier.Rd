@@ -80,7 +80,6 @@ I will dedicate (some day) a vignette or a paper to this problem.
 Directly borrowed for Claude (2008), and also called \code{efourier} there.
 }
 \examples{
-data(bot)
 coo <- bot[1]
 coo_plot(coo)
 ef <- efourier(coo, 12)

@@ -10,7 +10,6 @@
 #' @return a Momocs object of the same class.
 #' @family handling functions
 #' @examples
-#' data(olea)
 #' olea
 #' select(olea, var, view) # drops domes and ind
 #' select(olea, variety=var, domesticated_status=domes, view)
@@ -313,8 +312,6 @@ slice.PCA <- function(.data, ...){
 #' @family handling functions
 #' @examples
 #'
-#' data(bot)
-#' bot
 #' # samples 5 bottles no matter their type
 #' sample_n(bot, 5)
 #' # 5 bottles of beer and of whisky
@@ -381,8 +378,6 @@ sample_n.Coe <- sample_n.Coo
 #' @family handling functions
 #' @examples
 #'
-#' data(bot)
-#' bot
 #' # samples 50% of the bottles no matter their type
 #' sample_frac(bot, 0.5)
 #' # 80% bottles of beer and of whisky
@@ -525,7 +520,6 @@ chop.Coe <- function(.data, fac){
 #' is not checked, so anything with the same number of rows will be merged.
 #' @family handling functions
 #' @examples
-#' data(bot)
 #' w <- filter(bot, type=="whisky")
 #' b <- filter(bot, type=="beer")
 #' combine(w, b)
@@ -882,7 +876,6 @@ table.LDA <- table.Coo
 #' @return a Momocs object of the same type
 #' @family handling functions
 #' @examples
-#' data(bot)
 #' # single renaming
 #' rw_fac(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
 #' # several renaming

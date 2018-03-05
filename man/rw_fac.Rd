@@ -23,7 +23,6 @@ rw_fac stands for 'rewriting rule'. Typically useful to correct typos
 at the import, or merge some levels within covariates. Drops levels silently.
 }
 \examples{
-data(bot)
 # single renaming
 rw_fac(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
 # several renaming

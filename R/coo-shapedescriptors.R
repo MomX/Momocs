@@ -10,7 +10,6 @@
 #' @seealso \link{coo_length}, \link{coo_width}.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_lw(bot[1])
 #' @export
 coo_lw <- function(coo){
@@ -39,7 +38,6 @@ coo_lw.Coo <- function(coo){
 #' to Coo objects. See also \link{coo_centsize} and \link{rescale}.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_length(bot[1])
 #' coo_length(bot)
 #' mutate(bot, size=coo_length(bot))
@@ -64,7 +62,6 @@ coo_length.Coo <- function(coo){
 #' @seealso \link{coo_lw}, \link{coo_length}.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_width(bot[1])
 #' @export
 coo_width <- function(coo) {
@@ -107,7 +104,6 @@ coo_boundingbox <- function(coo){
 #' \code{ area.poly(as(coo, 'gpc.poly')) }
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_area(bot[1])
 #' # for the distribution of the area of the bottles dataset
 #' hist(sapply(bot$coo, coo_area), breaks=10)
@@ -147,7 +143,6 @@ coo_area.Coo <- function(coo){
 #' in future releases.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' b <- coo_sample(bot[1], 64)
 #' b <- b[c(1, 14, 24), ]
 #' coo_plot(b)
@@ -188,7 +183,6 @@ coo_theta3 <- function(coo, method = c("atan2", "acos")[1]){
 #' in future releases.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' b <- coo_sample(bot[1], 64)
 #' coo_angle_edges(b)
 #' @rdname coo_angle_edges
@@ -221,7 +215,6 @@ coo_thetapts <- function(coo, method = c("atan2", "acos")[1]){
 #' in future releases.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' b <- bot[1]
 #' phi  <- coo_angle_tangent(b)
 #' phi2 <- coo_angle_tangent(coo_smooth(b, 2))
@@ -259,7 +252,6 @@ coo_tangle <- function(coo){
 #' IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' b <- coo_sample(bot[1], 32)
 #' coo_rectilinearity(b)
 #' @export
@@ -327,7 +319,6 @@ coo_rectilinearity <- function(coo) {
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_circularityharalick(bot[1])
 #' @export
 coo_circularityharalick <- function(coo) {
@@ -344,7 +335,6 @@ coo_circularityharalick <- function(coo) {
 #' @return numeric, the circularity.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_circularity(bot[1])
 #' @export
 coo_circularity <- function(coo) {
@@ -361,7 +351,6 @@ coo_circularity <- function(coo) {
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_circularitynorm(bot[1])
 #' @export
 coo_circularitynorm <- function(coo) {
@@ -379,7 +368,6 @@ coo_circularitynorm <- function(coo) {
 #' @seealso \link{coo_eccentricityboundingbox}
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_eccentricityeigen(bot[1])
 #' @export
 coo_eccentricityeigen <- function(coo) {
@@ -398,7 +386,6 @@ coo_eccentricityeigen <- function(coo) {
 #' @seealso \link{coo_eccentricityeigen}
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_eccentricityboundingbox(bot[1])
 #' @export
 coo_eccentricityboundingbox <- function(coo) {
@@ -415,7 +402,6 @@ coo_eccentricityboundingbox <- function(coo) {
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_elongation(bot[1])
 #' @export
 coo_elongation <- function(coo) {
@@ -434,7 +420,6 @@ coo_elongation <- function(coo) {
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_rectangularity(bot[1])
 #' @export
 coo_rectangularity <- function(coo) {
@@ -452,7 +437,6 @@ coo_rectangularity <- function(coo) {
 #' @return a \code{matrix} of ids defining the convex hull of the shape.
 #' @family coo_ descriptors
 #' @examples
-#' data(hearts)
 #' h <- coo_sample(hearts[4], 32)
 #' coo_plot(h)
 #' ch <- coo_chull(h)
@@ -518,7 +502,6 @@ coo_chull_onion <- function(coo, close=TRUE){
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_convexity(bot[1])
 #' @export
 coo_convexity <- function(coo) {
@@ -536,7 +519,6 @@ coo_convexity <- function(coo) {
 #' Handbook of Pattern Recognition and Computer Vision. 177-196.
 #' @family coo_ descriptors
 #' @examples
-#' data(bot)
 #' coo_solidity(bot[1])
 #' @export
 coo_solidity <- function(coo) {

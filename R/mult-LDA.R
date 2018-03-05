@@ -29,7 +29,6 @@
 #' }
 #' @family multivariate
 #' @examples
-#' data(bot)
 #' bot.f <- efourier(bot, 24)
 #' bot.p <- PCA(bot.f)
 #' LDA(bot.p, 'type', retain=0.99) # retains 0.99 of the total variance
@@ -328,7 +327,6 @@ classification_metrics.LDA <- function(x){
 #' }
 #'
 #' @examples
-#' data(olea)
 #' table(olea, "var")
 #' x <- opoly(olea, 5, verbose=FALSE)
 #' classify(x, fac="var", ref=c("Aglan","Cypre"), unk="PicMa")
@@ -415,7 +413,6 @@ classify.Coe <- function(x, fac, ref, unk){
 #' @note Uses the same number of PC axis as the LDA object provided. You should probably use \link{rePCA} in
 #' conjonction with reLDA to get 'homologous' scores.
 #' @examples
-#' data(bot)
 #' # We select the first 10 individuals in bot,
 #' # for whisky and beer bottles. It will be our referential.
 #' bot1   <- slice(bot, c(1:10, 21:30))

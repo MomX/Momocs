@@ -20,7 +20,6 @@ Creates links (Delaunay triangulation) between landmarks
 uses \link{delaunayn} in the \code{geometry} package.
 }
 \examples{
-data(wings)
 w <- wings[1]
 coo_plot(w, poly=FALSE)
 links <- links_delaunay(w)

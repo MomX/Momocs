@@ -29,7 +29,6 @@ Calculate and display Ptolemaic ellipses which illustrates
 intuitively the principle behing elliptical Fourier analysis.
 }
 \examples{
-data(shapes)
 cat <- shapes[4]
 Ptolemy(cat, main="An EFT cat")
 }

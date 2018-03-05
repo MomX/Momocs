@@ -17,7 +17,6 @@ are the row ids of the original shape.
 Creates links (all pariwise combinations) between landmarks
 }
 \examples{
-data(wings)
 w <- wings[1]
 coo_plot(w)
 links <- links_all(w)

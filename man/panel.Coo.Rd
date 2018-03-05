@@ -68,11 +68,8 @@ a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.
 If you want to reorder shapes according to a factor, use \link{arrange}.
 }
 \examples{
-data(mosquito)
 panel(mosquito, names=TRUE, cex.names=0.5)
-data(olea)
 panel(olea)
-data(bot)
 panel(bot, c(4, 10))
 bot.f <- efourier(bot, 12)
 panel(bot.f)

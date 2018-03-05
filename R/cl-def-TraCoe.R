@@ -7,7 +7,6 @@
 #' @param fac a data.frame for covariates
 #' @family classes
 #' @examples
-#' data(iris)
 #' # let's (more or less) rebuild the flower dataset
 #' fl <- TraCoe(iris[, 1:4], data.frame(sp=iris$Species))
 #' fl %>% PCA() %>% plot("sp")

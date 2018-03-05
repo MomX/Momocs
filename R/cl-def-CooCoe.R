@@ -39,8 +39,8 @@
 #' methods(class='Out') # same for Opn and Ldk
 #'
 #' # Let's take an Out example. But all methods shown here
-#' # work on Ldk (try data(wings) ) and on Opn (try data(olea))
-#' data(bot)
+#' # work on Ldk (try on 'wings') and on Opn ('olea')
+#' bot
 #'
 #' # Primarily a 'Coo' object, but also an 'Out'
 #' class(bot)
@@ -117,7 +117,6 @@ Coo <- function(...) {
 #' # to see all methods for OutCoe objects.
 #' methods(class='OutCoe') # same for OpnCoe, LdkCoe, TraCoe
 #'
-#' data(bot)
 #' bot.f<- efourier(bot, 12)
 #' bot.f
 #' class(bot.f)
@@ -138,13 +137,11 @@ Coo <- function(...) {
 #' bot.f[1:5]
 #'
 #' # An illustration of Momocs desing. See also browseVignettes("Momocs")
-#' data(olea)
 #' op <- opoly(olea, 5)
 #' op
 #' class(op)
 #' op$coe # same thing
 #'
-#' data(wings)
 #' wp <- fgProcrustes(wings, tol=1e-4)
 #' wp
 #' class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects

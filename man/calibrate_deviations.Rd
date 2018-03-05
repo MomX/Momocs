@@ -54,13 +54,11 @@ in further versions.
 For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
 }
 \examples{
-data(bot)
 calibrate_deviations(bot)
 
 \dontrun{
 
 # on Opn
-data(olea)
 calibrate_deviations(olea)
 
 # lets customize the ggplot

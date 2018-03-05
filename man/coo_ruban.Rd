@@ -24,7 +24,6 @@ nothing
 Useful to display differences between shapes
 }
 \examples{
-data(bot)
 ms <- mshapes(efourier(bot , 10), "type")
 b <- ms$shp$beer
 w <- ms$shp$whisky

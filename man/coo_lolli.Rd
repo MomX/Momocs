@@ -21,7 +21,6 @@ coo_lolli(coo1, coo2, pch = NA, cex = 0.5, ...)
 Draws 'lollipops' between two configurations.
 }
 \examples{
-data(olea)
 coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 title("A nice title !")
 }

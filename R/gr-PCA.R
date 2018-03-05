@@ -113,7 +113,6 @@
 #' # let's create a dummy factor of the correct length
 #' # and another added to the $fac with mutate
 #' # and a numeric of the correct length
-#' data(bot)
 #' f <- factor(rep(letters[1:2], 20))
 #' z <- factor(rep(LETTERS[1:2], 20))
 #' bot %<>% mutate(cs=coo_centsize(.), z=z)
@@ -130,25 +129,21 @@
 #'
 #' ### other morphometric approaches works the same
 #' # open curves
-#' data(olea)
 #' op <- npoly(olea, 5)
 #' op.p <- PCA(op)
 #' op.p
 #' plot(op.p, ~ domes + var, morpho=TRUE) # use of formula
 #'
 #' # landmarks
-#' data(wings)
 #' wp <- fgProcrustes(wings, tol=1e-4)
 #' wpp <- PCA(wp)
 #' wpp
 #' plot(wpp, 1)
 #'
 #' # traditionnal measurements
-#' data(flower)
 #' flower %>% PCA %>% plot(1)
 #'
 #' # plot.PCA can be used after a PCA
-#' data(iris)
 #' PCA(iris[, 1:4], fac=iris$Species)  %>% plot(1)
 #'
 #' ### Cosmetic options
@@ -450,7 +445,6 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
 #' @param ... additional arguments to fed \link{plot.PCA}
 #' @rdname plot3.PCA
 #' @examples
-#' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #' plot3(bot.p) # no groups
@@ -494,7 +488,6 @@ plot3.PCA <- function(PCA,  ... ){
 #' @param ... useless here
 #' @return a ggplot object
 #' @examples
-#' data(bot)
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #' boxplot(bot.p)
@@ -549,7 +542,6 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
 #' @param ... additional parameter to pass to \code{\link{coo_draw}}
 #' @return (invisibly) a list with \code{gg} the ggplot object and \code{shp} the list of shapes.
 #' @examples
-#' data(bot)
 #' bot.p <- PCA(efourier(bot, 12))
 #' PCcontrib(bot.p)
 #' \dontrun{

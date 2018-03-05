@@ -21,7 +21,6 @@ Returns Haralick's circularity which is less sensible
 to digitalization noise than coo_circularity
 }
 \examples{
-data(bot)
 coo_circularityharalick(bot[1])
 }
 \seealso{

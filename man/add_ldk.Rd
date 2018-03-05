@@ -26,7 +26,6 @@ then this function is equivalent to \link{def_ldk}.
 }
 \examples{
 \dontrun{
-data(hearts)
 hearts <- slice(hearts, 1:5) # to make it shorter to try
 # click on 3 points, 5 times.
 hearts <- def_ldk(hearts, 3)

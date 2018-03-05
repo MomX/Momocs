@@ -60,7 +60,6 @@ No returned value
 them with or without isolines.
 }
 \examples{
-data(bot)
 botF <- efourier(bot)
 x <- mshapes(botF, 'type', nb.pts=80)$shp
 fr <- x$beer

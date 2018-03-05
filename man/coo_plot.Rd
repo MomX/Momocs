@@ -67,7 +67,6 @@ A simple wrapper around \link{plot} for plotting shapes. Widely used in Momocs
 in other graphical functions, in methods, etc.
 }
 \examples{
-data(bot)
 b <- bot[1]
 coo_plot(b)
 coo_plot(bot[2], plot.new=FALSE) # equivalent to coo_draw(bot[2])

@@ -21,7 +21,6 @@ coo_arrows(coo1, coo2, length = coo_centsize(coo1)/15, angle = 20, ...)
 Draws 'arrows' between two configurations.
 }
 \examples{
-data(olea)
 coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 title("Hi there !")
 }

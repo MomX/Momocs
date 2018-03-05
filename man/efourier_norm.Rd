@@ -49,7 +49,6 @@ what shall provide a good alignment. Have a look to Momocs' vignette for some il
 and how to manage them.
 }
 \examples{
-data(bot)
 q <- efourier(bot[1], 24)
 efourier_i(q) # equivalent to efourier_shape(q$an, q$bn, q$cn, q$dn)
 efourier_norm(q)

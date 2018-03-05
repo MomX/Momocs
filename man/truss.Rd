@@ -21,12 +21,10 @@ Mainly implemented for historical/didactical reasons.
 }
 \examples{
 # example on a single shape
-data(shapes)
 cat <- coo_sample(shapes[4], 6)
 truss(cat)
 
 # example on wings dataset
-data(wings)
 tx <- truss(wings)
 dim(tx)
 # we normalize and plot an heatmap

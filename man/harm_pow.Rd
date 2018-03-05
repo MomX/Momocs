@@ -19,7 +19,6 @@ harmonic power.
 }
 \examples{
 
-data(bot)
 ef <- efourier(bot[1], 24)
 rf <- efourier(bot[1], 24)
 harm_pow(ef)

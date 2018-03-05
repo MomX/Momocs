@@ -16,10 +16,8 @@
 #' @return a ggplot object and the full list of intermediate results. See examples.
 #' @family calibration
 #' @examples
-#' data(bot)
 #' calibrate_reconstructions(bot, "efourier", range=1:12)
 #'
-#' data(olea)
 #' calibrate_reconstructions(olea, "dfourier")
 #' @export
 calibrate_reconstructions <-
@@ -221,13 +219,11 @@ calibrate_reconstructions.Opn <-
 #' @return a ggplot object and the full list of intermediate results. See examples.
 #' @family calibration
 #' @examples
-#' data(bot)
 #' calibrate_deviations(bot)
 #'
 #' \dontrun{
 #'
 #' # on Opn
-#' data(olea)
 #' calibrate_deviations(olea)
 #'
 #' # lets customize the ggplot
@@ -577,11 +573,9 @@ calibrate_deviations.Opn<-
 #' \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 #' @family calibration
 #' @examples
-#' data(bot)
 #' cal <- calibrate_harmonicpower(bot)
 #' \dontrun{
 #' # for Opn objects
-#' data(olea)
 #' calibrate_harmonicpower(olea, "dfourier")
 #'
 #' # let customize the ggplot

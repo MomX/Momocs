@@ -28,7 +28,6 @@ and specific methods (e.g. \link{npoly} can be applied.
 #Methods on Opn
 methods(class=Opn)
 # we load some open outlines. See ?olea for credits
-data(olea)
 olea
 panel(olea)
 # orthogonal polynomials

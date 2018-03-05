@@ -337,7 +337,6 @@ which_out.Ldk <- function(x, conf=1e-3, ...){
 #' from an harmonic coefficient matrix. \code{coeff_split} returns a named list
 #' of coordinates.
 #' @examples
-#' data(bot)
 #' bot.f <- efourier(bot, 32)
 #' coe <- bot.f$coe # the raw matrix
 #' coe
@@ -431,7 +430,6 @@ coeff_rearrange <- function(x, by=c("name", "rank")[1]){
 #' @return Returns a \code{vector} of harmonic power
 #' @examples
 #'
-#' data(bot)
 #' ef <- efourier(bot[1], 24)
 #' rf <- efourier(bot[1], 24)
 #' harm_pow(ef)
@@ -793,7 +791,6 @@ is.fac <- function(x) length(x$fac) > 0
 #' (eg \code{is_Coo} is the same as \code{is.Coo}) but the \code{.} alias will
 #' be deprecated at some point.
 #' @examples
-#' data(bot)
 #' is_Coo(bot)
 #' is_Out(bot)
 #' is_Ldk(bot)

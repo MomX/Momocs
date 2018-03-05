@@ -35,7 +35,6 @@ Fourier coefficients (see \code{Details}) or can generate some 'tfourier'
 shapes.
 }
 \examples{
-data(bot)
 tf <- tfourier(bot[1], 24)
 tfourier_shape(tf$an, tf$bn) # equivalent to rfourier_i(rf)
 tfourier_shape()

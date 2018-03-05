@@ -44,8 +44,8 @@ methods(class='Coo')
 methods(class='Out') # same for Opn and Ldk
 
 # Let's take an Out example. But all methods shown here
-# work on Ldk (try data(wings) ) and on Opn (try data(olea))
-data(bot)
+# work on Ldk (try on 'wings') and on Opn ('olea')
+bot
 
 # Primarily a 'Coo' object, but also an 'Out'
 class(bot)

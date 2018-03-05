@@ -20,7 +20,6 @@ defined by the row of the matrix and uses a color to display an information.
 \examples{
 
 # we load some data
-data(bot)
 guinness <- coo_sample(bot[9], 100)
 
 # we calculate the diff between 48 harm and one with 6 harm.

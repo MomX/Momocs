@@ -24,7 +24,6 @@ due to the laborious nature of the algorithm (in nb.pts^2),
 and of its implementation, it may be very long to compute.
 }
 \examples{
-data(bot)
 b <- coo_sample(bot[1], 32)
 coo_rectilinearity(b)
 }

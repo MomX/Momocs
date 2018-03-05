@@ -43,7 +43,6 @@ It also explains that a progress bar is printed when 'verbose' is TRUE. Shapes s
 before performing the dct transform.
 }
 \examples{
-data(olea)
 \dontrun{ # because it's long
 od <- dfourier(olea)
 od

@@ -16,7 +16,6 @@ coo_draw(coo, ...)
 that adds a shape on the active plot.
 }
 \examples{
-data(bot)
 b1 <- bot[4]
 b2 <- bot[5]
 coo_plot(b1)

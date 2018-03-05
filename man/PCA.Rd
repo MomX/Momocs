@@ -60,20 +60,17 @@ By default, methods on \link{Coe} object do not scale the input data but center 
 There is also a generic method (eg for traditional morphometrics) that centers and scales data.
 }
 \examples{
-data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 bot.p
 plot(bot.p, morpho=FALSE)
 plot(bot.p, 'type')
 
-data(olea)
 op <- npoly(olea, 5)
 op.p <- PCA(op)
 op.p
 plot(op.p, 1, morpho=TRUE)
 
-data(wings)
 wp <- fgProcrustes(wings, tol=1e-4)
 wpp <- PCA(wp)
 wpp

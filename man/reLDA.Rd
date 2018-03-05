@@ -41,7 +41,6 @@ Uses the same number of PC axis as the LDA object provided. You should probably 
 conjonction with reLDA to get 'homologous' scores.
 }
 \examples{
-data(bot)
 # We select the first 10 individuals in bot,
 # for whisky and beer bottles. It will be our referential.
 bot1   <- slice(bot, c(1:10, 21:30))

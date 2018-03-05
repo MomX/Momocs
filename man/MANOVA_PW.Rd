@@ -40,14 +40,12 @@ If the fac passed has only two levels, there is only pair and it is
 equivalent to \link{MANOVA}. \code{MANOVA_PW.PCA} works with the regular \link{manova}.
 }
 \examples{
-data(bot)
 # we create a fake factor with 4 levels
 bot$fac$fake <- factor(rep(letters[1:4], each=10))
 bot.p <- PCA(efourier(bot, 8))
 MANOVA_PW(bot.p, 'fake') # or MANOVA_PW(bot.p, 2)
 
 # an example on open outlines
-data(olea)
 op <- PCA(npoly(olea))
 MANOVA_PW(op, 'domes')
 # to get the results

@@ -539,3 +539,4 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, ...){
 
 # draw_text
 # draw_radii
+# draw_contour

@@ -20,7 +20,6 @@ numeric, the eccentricity (boundingbox)
 Calculated using the width / length ratio. See \link{coo_lw}
 }
 \examples{
-data(bot)
 coo_eccentricityboundingbox(bot[1])
 }
 \seealso{

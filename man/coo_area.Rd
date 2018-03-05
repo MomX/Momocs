@@ -21,7 +21,6 @@ impedes Momocs to rely on it. but here is the function to do it, once gpc is loa
 \code{ area.poly(as(coo, 'gpc.poly')) }
 }
 \examples{
-data(bot)
 coo_area(bot[1])
 # for the distribution of the area of the bottles dataset
 hist(sapply(bot$coo, coo_area), breaks=10)

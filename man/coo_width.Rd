@@ -16,7 +16,6 @@ the width (in pixels) of the shape
 Nothing more than \code{coo_lw(coo)[2]}.
 }
 \examples{
-data(bot)
 coo_width(bot[1])
 }
 \seealso{

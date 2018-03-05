@@ -51,11 +51,9 @@ and as follows for radii variation and tangent angle:
 \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 }
 \examples{
-data(bot)
 cal <- calibrate_harmonicpower(bot)
 \dontrun{
 # for Opn objects
-data(olea)
 calibrate_harmonicpower(olea, "dfourier")
 
 # let customize the ggplot

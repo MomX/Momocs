@@ -29,7 +29,6 @@ with AD responsible for amplitude of the Fourier functions,
   coined by Iwata et al., and here implemented in Momocs.
 }
 \examples{
-data(bot)
 bot.f <- efourier(bot, 12)
 res <- symmetry(bot.f)
 hist(res[, 'sym'])

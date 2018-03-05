@@ -17,6 +17,5 @@ a ggplot2 object
 Will replace stack soon.
 }
 \examples{
-data(bot)
 stack2(bot)
 }

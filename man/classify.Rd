@@ -31,7 +31,6 @@ a list with components:
 Classify using LDA
 }
 \examples{
-data(olea)
 table(olea, "var")
 x <- opoly(olea, 5, verbose=FALSE)
 classify(x, fac="var", ref=c("Aglan","Cypre"), unk="PicMa")

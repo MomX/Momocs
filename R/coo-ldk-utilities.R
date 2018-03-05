@@ -44,7 +44,6 @@ ldk_check <- function(ldk) {
 #' are the row ids of the original shape.
 #' @family ldk helpers
 #' @examples
-#' data(wings)
 #' w <- wings[1]
 #' coo_plot(w)
 #' links <- links_all(w)
@@ -64,7 +63,6 @@ links_all <- function(coo) {
 #' @details uses \link{delaunayn} in the \code{geometry} package.
 #' @family ldk helpers
 #' @examples
-#' data(wings)
 #' w <- wings[1]
 #' coo_plot(w, poly=FALSE)
 #' links <- links_delaunay(w)
@@ -121,7 +119,6 @@ coo_ldk <- function(coo, nb.ldk) {
 #' @family ldk helpers
 #' @examples
 #' \dontrun{
-#' data(wings)
 #' wm <- mshapes(wings)
 #' links <- def_links(wm, 3) # click to define pairs of landmarks
 #' ldk_links(wm, links)
@@ -223,7 +220,6 @@ def_links.default <- function(x, nb.ldk){
 #' @family ldk/slidings methods
 #' @examples
 #' \dontrun{
-#' data(bot)
 #' bot <- bot[1:5] # to make it shorter to try
 #' # click on 3 points, 5 times.
 #' # Don't forget to save the object returned by def_ldk...
@@ -266,14 +262,14 @@ def_ldk.Opn <- def_ldk.Out
 #' @examples
 #' # adds a new landmark towards south east
 #' hearts %>%
-#'    slice(1:20) %>% # for speed purpose only
+#'    slice(1:5) %>% # for speed purpose only
 #'    coo_center() %>%
 #'    def_ldk_angle(-pi/6) %>%
 #' stack()
 #'
 #' # on Out and towards NW and NE here
 #' olea %>%
-#'    slice(1:20) %>% #for speed purpose only
+#'    slice(1:5) %>% #for speed purpose only
 #'    def_ldk_angle(3*pi/4) %>%
 #'    def_ldk_angle(pi/4) %>%
 #'    stack
@@ -386,7 +382,6 @@ def_ldk_tips.Opn <- function(coo){
 #' @family ldk/slidings methods
 #' @examples
 #' \dontrun{
-#' data(hearts)
 #' hearts <- slice(hearts, 1:5) # to make it shorter to try
 #' # click on 3 points, 5 times.
 #' hearts <- def_ldk(hearts, 3)

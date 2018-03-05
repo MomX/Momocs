@@ -20,7 +20,6 @@ numeric, the convexity.
 Calculated using a ratio of the eigen values (inertia axis)
 }
 \examples{
-data(bot)
 coo_convexity(bot[1])
 }
 \seealso{

@@ -20,7 +20,6 @@ numeric, the solidity of a shape.
 Calculated using the ratio of the shape area and the convex hull area.
 }
 \examples{
-data(bot)
 coo_solidity(bot[1])
 }
 \seealso{

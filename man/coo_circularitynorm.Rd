@@ -21,7 +21,6 @@ Returns the 'circularity', also called compactness
 and shape factor, but normalized to the unit circle.
 }
 \examples{
-data(bot)
 coo_circularitynorm(bot[1])
 }
 \seealso{

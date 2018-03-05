@@ -24,7 +24,6 @@ ldk_confell(ldk, conf = 0.5, col = "grey40", ell.lty = 1, ax = TRUE,
 Draws confidence ellipses for landmark positions
 }
 \examples{
-data(wings)
 coo_plot(mshapes(wings))
 ldk_confell(wings$coo)
 }

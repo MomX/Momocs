@@ -22,7 +22,6 @@ a ggplot object
 Boxplot on PCA objects
 }
 \examples{
-data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 boxplot(bot.p)

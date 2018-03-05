@@ -28,7 +28,6 @@
 #'
 #' @family dfourier
 #' @examples
-#' data(olea)
 #' \dontrun{ # because it's long
 #' od <- dfourier(olea)
 #' od
@@ -153,7 +152,6 @@ dfourier.Coo <- function(coo, nb.h, verbose=TRUE) {
 #' @family dfourier
 #' @examples
 #' # dfourier and inverse dfourier
-#' data(olea)
 #' o <- olea[1]
 #' o <- coo_bookstein(o)
 #' coo_plot(o)

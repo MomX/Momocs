@@ -24,7 +24,6 @@ for every object with a $fac. Useful to visually how large are sample sizes,
 how (un)balanced are designs, etc.
 }
 \examples{
-data(olea)
 plot_table(olea, "var")
 plot_table(olea, "domes", "var")
 gg <- plot_table(olea, "domes", "var", rm0 = TRUE)

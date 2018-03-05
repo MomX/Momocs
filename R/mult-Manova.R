@@ -23,11 +23,9 @@
 #' @note Needs a review and should be considered as experimental.
 #' @examples
 #' # MANOVA
-#' data(bot)
 #' bot.p <- PCA(efourier(bot, 12))
 #' MANOVA(bot.p, 'type')
 #'
-#' data(olea)
 #' op <- PCA(npoly(olea, 5))
 #' MANOVA(op, 'domes')
 #'
@@ -224,14 +222,12 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
 #'  '***' if Pr(>F) < 0.001; '**' of < 0.01; '*' if < 0.05; '.' if < 0.10 and '-' if above.
 #' }
 #' @examples
-#' data(bot)
 #' # we create a fake factor with 4 levels
 #' bot$fac$fake <- factor(rep(letters[1:4], each=10))
 #' bot.p <- PCA(efourier(bot, 8))
 #' MANOVA_PW(bot.p, 'fake') # or MANOVA_PW(bot.p, 2)
 #'
 #' # an example on open outlines
-#' data(olea)
 #' op <- PCA(npoly(olea))
 #' MANOVA_PW(op, 'domes')
 #' # to get the results

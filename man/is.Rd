@@ -69,7 +69,6 @@ all \code{is_*} have an \code{is.*} alias
 be deprecated at some point.
 }
 \examples{
-data(bot)
 is_Coo(bot)
 is_Out(bot)
 is_Ldk(bot)

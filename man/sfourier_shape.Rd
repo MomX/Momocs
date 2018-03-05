@@ -40,7 +40,6 @@ coefficients will thus increase. See \link{sfourier} for the mathematical
 background.
 }
 \examples{
-data(bot)
 rf <- sfourier(bot[1], 24)
 sfourier_shape(rf$an, rf$bn) # equivalent to sfourier_i(rf)
 sfourier_shape() # not very interesting

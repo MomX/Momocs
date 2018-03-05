@@ -78,13 +78,10 @@ object.
 }
 \examples{
 \dontrun{
-data(bot)
 stack(bot)
 bot.f <- efourier(bot, 12)
 stack(bot.f)
-data(mosquito)
 stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
-data(hearts)
 stack(hearts)
 stack(hearts, ldk=FALSE)
 stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk_col=col_summer(4), ldk_pch=20)

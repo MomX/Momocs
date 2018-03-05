@@ -416,7 +416,6 @@
   return(interaction(f0))}
 
 # smart color grouping provided with a fac after interaction
-# data(olea)
 # op <- PCA(npoly(olea))
 # f <- .combine.fac(op, ~view+domes)
 # cols <- .smartpalette(f)

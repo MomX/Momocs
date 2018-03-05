@@ -22,7 +22,6 @@ Creates a 2 x 3 layout with, from top to bottom and form left to right: PC1-PC2,
 PC1-PC3, PC2-3, and the barplot of eigenvalues percentages.
 }
 \examples{
-data(bot)
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 plot3(bot.p) # no groups

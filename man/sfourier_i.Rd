@@ -30,7 +30,6 @@ calculate a shape, when given a list with Fourier coefficients, typically
 obtained computed with \link{sfourier}.
 }
 \examples{
-data(bot)
 coo <- coo_center(bot[1]) # centering is almost mandatory for sfourier family
 coo_plot(coo)
 rf  <- sfourier(coo, 12)

@@ -25,7 +25,6 @@ Only the core functions so far. Will be implemented as an \link{Opn} method soon
 }
 \examples{
 # dfourier and inverse dfourier
-data(olea)
 o <- olea[1]
 o <- coo_bookstein(o)
 coo_plot(o)

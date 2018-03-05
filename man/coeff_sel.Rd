@@ -33,7 +33,6 @@ variation and tangent angle approaches (see \link{rfourier} and
 be of interest elwewhere.
 }
 \examples{
-data(bot)
 bot.f <- efourier(bot, 32)
 coe <- bot.f$coe # the raw matrix
 coe

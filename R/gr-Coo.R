@@ -12,7 +12,6 @@
 #' @family Coo_graphics
 #' @examples
 #' \dontrun{
-#' data(bot)
 #' plot(bot, 5)
 #' plot(bot)
 #' plot(bot, 5, pch=3, points=TRUE) # an example of '...' use
@@ -78,13 +77,10 @@ plot.Coo <- function(x, id, ...) {
 #' @family Coo_graphics
 #' @examples
 #' \dontrun{
-#' data(bot)
 #' stack(bot)
 #' bot.f <- efourier(bot, 12)
 #' stack(bot.f)
-#' data(mosquito)
 #' stack(mosquito, borders='#1A1A1A22', first.point=FALSE)
-#' data(hearts)
 #' stack(hearts)
 #' stack(hearts, ldk=FALSE)
 #' stack(hearts, borders='#1A1A1A22', ldk=TRUE, ldk_col=col_summer(4), ldk_pch=20)
@@ -251,7 +247,6 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' Family picture of shapes
 #' @return a ggplot2 object
 #' @examples
-#' data(bot)
 #' stack2(bot)
 #' @export
 stack2 <- function(Coo){
@@ -290,11 +285,8 @@ stack2 <- function(Coo){
 #' @note If you want to reorder shapes according to a factor, use \link{arrange}.
 #' @family Coo_graphics
 #' @examples
-#' data(mosquito)
 #' panel(mosquito, names=TRUE, cex.names=0.5)
-#' data(olea)
 #' panel(olea)
-#' data(bot)
 #' panel(bot, c(4, 10))
 #' bot.f <- efourier(bot, 12)
 #' panel(bot.f)
@@ -511,7 +503,6 @@ panel.Ldk <- function(x, cols, borders, fac,
 #' @param Coo a Coo object
 #' @return a ggplot2 object
 #' @examples
-#' data(shapes)
 #' panel2(shapes)
 #' @family Coo_graphics
 #' @export

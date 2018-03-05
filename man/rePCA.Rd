@@ -18,7 +18,6 @@ Basically reapply rotation to a new Coe object.
 Quite experimental. Dimensions of the matrices and methods must match.
 }
 \examples{
-data(bot)
 b <- filter(bot, type=="beer")
 w <- filter(bot, type=="whisky")
 

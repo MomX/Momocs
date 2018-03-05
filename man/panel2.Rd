@@ -16,7 +16,6 @@ a ggplot2 object
 May replace panel one day.
 }
 \examples{
-data(shapes)
 panel2(shapes)
 }
 \seealso{
