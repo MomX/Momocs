@@ -25,6 +25,8 @@
 #' All colorblind friendly RColorBrewer palettes
 #' recreated without the number of colors limitation
 #' and with transparency support thanks to `pal_alpha` that can be used alone.
+#' Also, `pal_qual_solarized` based on Solarized: \url{http://ethanschoonover.com/solarized}
+#' and `pal_seq_grey` only shades of grey from `grey10` to `grey90`.
 #'
 #' @param n `numeric` number of colors
 #' @param cols color(s) as hexadecimal values
@@ -46,6 +48,26 @@ pal_alpha <- function(cols, transp = 0) {
   alpha.hex[nchar(alpha.hex) < 2] <- paste0("0", alpha.hex[nchar(alpha.hex) < 2])
   alpha.hex <- toupper(alpha.hex) # pure cosmetics
   return(paste0(cols, alpha.hex))
+}
+
+#' @rdname palettes
+#' @export
+pal_qual_solarized <- function(n, transp=0){
+  colorRampPalette(c("#dc322f",
+    "#d33682",
+    "#6c71c4",
+    "#268bd2",
+    "#2aa198",
+    "#859900"))(n) %>%
+    pal_alpha(transp)
+}
+
+#' @rdname palettes
+#' @export
+pal_seq_grey <- function(n, transp=0){
+  colorRampPalette(c("#E5E5E5",
+                     "#1A1A1A"))(n) %>%
+    pal_alpha(transp)
 }
 
 # # below, generated with

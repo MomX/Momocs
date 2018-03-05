@@ -69,7 +69,7 @@ magrittr::`%T>%`
 #' @importFrom utils stack browseURL combn ls.str modifyList methods
 #' packageVersion read.table setTxtProgressBar
 #' txtProgressBar write.table
-#' @importFrom grDevices chull colors rgb
+#' @importFrom grDevices chull colors rgb colorRampPalette
 #' @importFrom graphics abline arrows axis barplot box
 #' contour hist image layout legend lines locator
 #' par points polygon rasterImage rect rug

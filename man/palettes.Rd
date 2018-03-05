@@ -5,6 +5,8 @@
 \alias{pal_alpha}
 \alias{pal}
 \alias{palette}
+\alias{pal_qual_solarized}
+\alias{pal_seq_grey}
 \alias{pal_div_BrBG}
 \alias{pal_div_PiYG}
 \alias{pal_div_PRGn}
@@ -35,6 +37,10 @@
 \title{Color palettes}
 \usage{
 pal_alpha(cols, transp = 0)
+
+pal_qual_solarized(n, transp = 0)
+
+pal_seq_grey(n, transp = 0)
 
 pal_div_BrBG(n, transp = 0)
 
@@ -101,6 +107,8 @@ pal_seq_YlOrRd(n, transp = 0)
 All colorblind friendly RColorBrewer palettes
 recreated without the number of colors limitation
 and with transparency support thanks to `pal_alpha` that can be used alone.
+Also, `pal_qual_solarized` based on Solarized: \url{http://ethanschoonover.com/solarized}
+and `pal_seq_grey` only shades of grey from `grey10` to `grey90`.
 }
 \note{
 RColorBrewer palettes are not happy when `n` is lower than 3 and above
