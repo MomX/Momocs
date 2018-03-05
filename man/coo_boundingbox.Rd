@@ -7,7 +7,7 @@
 coo_boundingbox(coo)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 }
 \value{
 \code{data.frame} with coordinates of the bounding box

@@ -7,7 +7,7 @@
 coo_baseline(coo, ldk1, ldk2, t1, t2)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{ldk1}{\code{numeric} the id of the first point of the new baseline}
 

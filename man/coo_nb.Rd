@@ -7,7 +7,7 @@
 coo_nb(coo)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 }
 \value{
 either a single numeric or a vector of numeric

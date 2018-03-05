@@ -7,7 +7,7 @@
 coo_samplerr(coo, n)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{n}{\code{integer}, the number of points to sample.}
 }

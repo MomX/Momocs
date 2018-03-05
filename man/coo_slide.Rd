@@ -7,7 +7,7 @@
 coo_slide(coo, id, ldk)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{id}{\code{numeric} the id of the point that will become the new first point. See details below
 for the method on Coo objects.}

@@ -7,7 +7,7 @@
 coo_trans(coo, x = 0, y = 0)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{x}{\code{numeric} translation along the x-axis.}
 

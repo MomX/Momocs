@@ -7,7 +7,7 @@
 coo_rotatecenter(coo, theta, center = c(0, 0))
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{theta}{\code{numeric} the angle (in radians) to rotate shapes.}
 

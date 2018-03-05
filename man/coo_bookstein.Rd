@@ -7,7 +7,7 @@
 coo_bookstein(coo, ldk1, ldk2)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{ldk1}{\code{numeric} the id of the first point of the new baseline (the first, by default)}
 

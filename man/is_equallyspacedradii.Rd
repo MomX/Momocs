@@ -7,7 +7,7 @@
 is_equallyspacedradii(coo, thres)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{thres}{numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)}
 }

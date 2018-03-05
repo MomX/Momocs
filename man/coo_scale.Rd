@@ -39,7 +39,7 @@ coo_scaley(coo, scale = 1)
 \method{coo_scaley}{Coo}(coo, scale = 1)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{scale}{the scaling factor,
 by default, the centroid size for \code{coo_scale}; 1 for \code{scalex} and \code{scaley}.}

@@ -8,7 +8,7 @@ Retains coordinates with negative y-coordinates}
 coo_down(coo, slidegap = FALSE)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{slidegap}{\code{logical} whether to apply \link{coo_slidegap} after coo_down}
 }
