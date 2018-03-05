@@ -205,7 +205,7 @@ coo_centre <- coo_center
 #' stack(bot)
 #' bot %>% coo_center %>% coo_scale %>% stack
 #' bot %>% coo_center %>% coo_scaley(0.5) %>% stack
-#' equivalent to:
+#' #equivalent to:
 #' #bot %>% coo_center %>% coo_scalex(2) %>% stack
 #' @family scaling functions
 #' @rdname coo_scale
