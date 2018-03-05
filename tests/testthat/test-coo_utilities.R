@@ -70,8 +70,8 @@ test_that("coo_rotate works fine", {
   shp <- bot[1]
   shp.rot <- coo_rotate(shp, pi/7)
   nr <- nrow(shp)
-  expect_equal(coo_angle_edge1(rbind(shp[24,], c(0, 0), c(1e3, 0))) - pi/7,
-               coo_angle_edge1(rbind(shp.rot[24,], c(0, 0), c(1e3, 0))))
+  expect_equal(.coo_angle_edge1(rbind(shp[24,], c(0, 0), c(1e3, 0))) - pi/7,
+               .coo_angle_edge1(rbind(shp.rot[24,], c(0, 0), c(1e3, 0))))
 })
 
 # coo_rotatecenter ------
