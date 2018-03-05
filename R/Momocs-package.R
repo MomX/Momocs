@@ -75,6 +75,7 @@ magrittr::`%T>%`
 #' par points polygon rasterImage rect rug
 #' segments strheight strwidth text title
 #' @importFrom progress progress_bar
+#' @importFrom RColorBrewer brewer.pal brewer.pal.info
 #' @importFrom rgeos gIntersection
 #' @importFrom stats cor cov cov.wt df dist dnorm fft
 #' hclust kmeans lm manova median na.omit
