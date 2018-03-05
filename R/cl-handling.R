@@ -1002,9 +1002,9 @@ rm_harm <- function(x, drop=1){
 #' @param scaling_factor numeric an homogeneous scaling factor. If all you (x, y) coordinates
 #' have the same scale
 #' @param scale_mapping either a data.frame or a path to read such a data.frame. It MUST contain
-#' three columns in that order: magnification found in $fac[, "magnification_col"], pixels, real length unit.
+#' three columns in that order: magnification found in `$fac`, column `"magnification_col"`, pixels, real length unit.
 #' Column names do not matter but must be specified, as read.table reads with \code{header=TRUE} Every
-#' different magnification level found in $fac[, "magnification_col"] must have its row.
+#' different magnification level found in `$fac`, column `"magnification_col"` must have its row.
 #' @param magnification_col the name or id of the $fac column to look for magnification levels for every image
 #' @param ... additional arguments (besides header=TRUE) to pass to read.table if 'scale_mapping' is a path
 #' @details The i) case above is straightforward, if 1cm is 500pix long on all your pictures,
