@@ -313,7 +313,7 @@ classification_metrics.LDA <- function(x){
 #' @param x a Coe
 #' @param fac a standalone factor, or the name or id of the $fac column to use.If it contains
 #' NAs, they will also be removed first from the x object
-#' @param ref at least two level names from $fac[, "fac"] to use as a training subset of x
+#' @param ref at least two level names from `$fac` to use as a training subset of x
 #' @param unk same as above for one level name to classify
 #'
 #' @return a list with components:
