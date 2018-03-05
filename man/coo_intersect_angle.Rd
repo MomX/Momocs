@@ -10,7 +10,7 @@ coo_intersect_angle(coo, angle = 0)
 coo_intersect_direction(coo, direction = c("down", "left", "up", "right")[4])
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
+\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
 
 \item{angle}{\code{numeric} an angle in radians (0 by default).}
 

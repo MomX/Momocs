@@ -8,7 +8,7 @@ coo_slidedirection(coo, direction = c("down", "left", "up", "right")[4],
   center, id)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
+\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
 
 \item{direction}{\code{character} one of \code{"down", "left", "up", "right"} ("right" by default)}
 
@@ -58,13 +58,13 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_right}}, \code{\link{coo_rotatecenter}},
   \code{\link{coo_rotate}}, \code{\link{coo_sample_prop}},
   \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
-  \code{\link{coo_scalex}}, \code{\link{coo_scale}},
-  \code{\link{coo_shearx}}, \code{\link{coo_slice}},
-  \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
-  \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},
-  \code{\link{coo_template}}, \code{\link{coo_trans}},
-  \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
-  \code{\link{coo_trim}}, \code{\link{coo_up}},
-  \code{\link{is_clockwise}}, \code{\link{is_closed}},
+  \code{\link{coo_scale}}, \code{\link{coo_shearx}},
+  \code{\link{coo_slice}}, \code{\link{coo_slidegap}},
+  \code{\link{coo_slide}}, \code{\link{coo_smoothcurve}},
+  \code{\link{coo_smooth}}, \code{\link{coo_template}},
+  \code{\link{coo_trans}}, \code{\link{coo_trimbottom}},
+  \code{\link{coo_trimtop}}, \code{\link{coo_trim}},
+  \code{\link{coo_up}}, \code{\link{is_clockwise}},
+  \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
 }

@@ -6,8 +6,8 @@
 #' A simple utility, used internally, mostly in the coo functions and methods.
 #' Returns a matrix of coordinates, when passed with either a list or a \code{matrix} of coordinates.
 #'
-#' @param coo a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.
-#' @return a \code{matrix} of (x; y) coordinates or a Coo object.
+#' @param coo `matrix` of `(x; y)` coordinates or or any [Coo] object.
+#' @return `matrix` of `(x; y)` coordinates or a [Coo] object.
 #' @examples
 #' #coo_check('Not a shape')
 #' #coo_check(iris)
@@ -184,35 +184,48 @@ coo_centre <- coo_center
 # coo_scale -----------------
 #' Scales coordinates
 #'
-#' Scales the coordinates by a 'scale' factor. If not provided,
+#' `coo_scale` scales the coordinates by a 'scale' factor. If not provided,
 #' assumed to be the centroid size. It involves three steps: centering from current position,
-#' dividing coordinates by 'scale', pusing back to the original position.
+#' dividing coordinates by 'scale', pushing back to the original position.
+#' `coo_scalex` applies a scaling (or shrinking) parallel to the x-axis,
+#'  `coo_scaley` does the same for the y axis.
 #'
-#' @aliases coo_scale
 #' @inheritParams coo_check
-#' @param scale the scaling factor, by default, the centroid size.
-#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @param scale the scaling factor,
+#' by default, the centroid size for `coo_scale`; 1 for `scalex` and `scaley`.
+#' @return a single shape or a `Coo` object
 #' @family coo_ utilities
 #' @examples
-#' coo_plot(bot[1])
-#' coo_plot(coo_scale(bot[1]))
-#' # on Coo objects
-#' stack(coo_center(bot))
-#' stack(coo_scale(coo_center(bot)))
+#' # on a single shape
+#' b <- bot[1] %>% coo_center %>% coo_scale
+#' coo_plot(b, lwd=2)
+#' coo_draw(coo_scalex(b, 1.5), bor="blue")
+#' coo_draw(coo_scaley(b, 0.5), bor="red")
+#' # this also works on Coo objects:
+#' stack(bot)
+#' bot %>% coo_center %>% coo_scale %>% stack
+#' bot %>% coo_center %>% coo_scaley(0.5) %>% stack
+#' equivalent to:
+#' #bot %>% coo_center %>% coo_scalex(2) %>% stack
 #' @family scaling functions
+#' @rdname coo_scale
+#' @name coo_scale
 #' @export
 coo_scale <- function(coo, scale) {
   UseMethod("coo_scale")
 }
 
+#' @rdname coo_scale
+#' @name coo_scale
 #' @export
 coo_scale.default <- function(coo, scale = coo_centsize(coo)) {
   coo <- coo_check(coo)
   cp  <- coo_centpos(coo)
-  coo <- coo_trans(coo_trans(coo, -cp[1], -cp[2])/scale, cp[1], cp[2])
-  return(coo)
+  coo %>% coo_center %>% `/`(scale) %>% coo_trans(cp[1], cp[2])
 }
 
+#' @rdname coo_scale
+#' @name coo_scale
 #' @export
 coo_scale.Coo <- function(coo, scale) {
   Coo <- coo
@@ -229,34 +242,51 @@ coo_scale.Coo <- function(coo, scale) {
   return(Coo)
 }
 
-# coo_scalexy -----------------
-#' Shrinks coordinates in one direction
-#'
-#' \code{coo_scalex} applies a scaling parallel to the x-axis to a matrix of (x; y)
-#' or a list of coordinates or any Coo object, \code{coo_scaley} does it parallel to the y-axis.
-#' @rdname coo_scalexy
-#' @inheritParams coo_check
-#' @param k \code{numeric} scaling factor
-#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @family coo_ utilities
-#' @examples
-#' coo <- shapes[11] %>% coo_template()
-#' coo_plot(coo, xlim=c(-1, 1))
-#' coo %>% coo_scalex(1.5) %>% coo_draw(border="blue")
-#' coo %>% coo_scaley(1.5) %>% coo_draw(border="red")
-#' coo %>% coo_scalex(0.5) %>% coo_draw(border="blue", lty=2)
-#' coo %>% coo_scaley(0.5) %>% coo_draw(border="red", lty=2)
-#' @family scaling functions
+#' @rdname coo_scale
+#' @name coo_scale
 #' @export
-coo_scalex <- function(coo, k=1){
-  smat <- matrix(c(k, 0, 0, 1), nrow=2)
-  return(coo %*% smat)}
+coo_scalex <- function(coo, scale=1){
+  UseMethod("coo_scalex")
+}
 
-#' @rdname coo_scalexy
+#' @rdname coo_scale
+#' @name coo_scale
 #' @export
-coo_scaley <- function(coo, k=1){
-  smat <- matrix(c(1, 0, 0, k), nrow=2)
-  return(coo %*% smat)}
+coo_scalex.default <- function(coo, scale=1){
+  smat <- matrix(c(scale, 0, 0, 1), nrow=2)
+  return(coo %*% smat)
+}
+
+#' @rdname coo_scale
+#' @name coo_scale
+#' @export
+coo_scalex.Coo <- function(coo, scale=1){
+  coo$coo <- lapply(coo$coo, coo_scalex, scale=scale)
+  coo
+}
+
+#' @rdname coo_scale
+#' @name coo_scale
+#' @export
+coo_scaley <- function(coo, scale=1){
+  UseMethod("coo_scaley")
+}
+
+#' @rdname coo_scale
+#' @name coo_scale
+#' @export
+coo_scaley.default <- function(coo, scale=1){
+  smat <- matrix(c(1, 0, 0, scale), nrow=2)
+  return(coo %*% smat)
+}
+
+#' @rdname coo_scale
+#' @name coo_scale
+#' @export
+coo_scaley.Coo <- function(coo, scale=1){
+  coo$coo <- lapply(coo$coo, coo_scaley, scale=scale)
+  coo
+}
 
 # coo_template --------------
 #' 'Templates' shapes

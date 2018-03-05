@@ -7,7 +7,7 @@
 is_equallyspacedradii(coo, thres)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
+\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
 
 \item{thres}{numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)}
 }
@@ -49,8 +49,8 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_right}}, \code{\link{coo_rotatecenter}},
   \code{\link{coo_rotate}}, \code{\link{coo_sample_prop}},
   \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
-  \code{\link{coo_scalex}}, \code{\link{coo_scale}},
-  \code{\link{coo_shearx}}, \code{\link{coo_slice}},
+  \code{\link{coo_scale}}, \code{\link{coo_shearx}},
+  \code{\link{coo_slice}},
   \code{\link{coo_slidedirection}},
   \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},

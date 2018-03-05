@@ -7,7 +7,7 @@
 coo_rotatecenter(coo, theta, center = c(0, 0))
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
+\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
 
 \item{theta}{\code{numeric} the angle (in radians) to rotate shapes.}
 
@@ -45,8 +45,8 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_right}}, \code{\link{coo_rotate}},
   \code{\link{coo_sample_prop}},
   \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
-  \code{\link{coo_scalex}}, \code{\link{coo_scale}},
-  \code{\link{coo_shearx}}, \code{\link{coo_slice}},
+  \code{\link{coo_scale}}, \code{\link{coo_shearx}},
+  \code{\link{coo_slice}},
   \code{\link{coo_slidedirection}},
   \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},

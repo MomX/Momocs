@@ -2,29 +2,70 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_scale}
 \alias{coo_scale}
+\alias{coo_scale}
+\alias{coo_scale.default}
+\alias{coo_scale}
+\alias{coo_scale.Coo}
+\alias{coo_scale}
+\alias{coo_scalex}
+\alias{coo_scale}
+\alias{coo_scalex.default}
+\alias{coo_scale}
+\alias{coo_scalex.Coo}
+\alias{coo_scale}
+\alias{coo_scaley}
+\alias{coo_scale}
+\alias{coo_scaley.default}
+\alias{coo_scale}
+\alias{coo_scaley.Coo}
 \title{Scales coordinates}
 \usage{
 coo_scale(coo, scale)
+
+\method{coo_scale}{default}(coo, scale = coo_centsize(coo))
+
+\method{coo_scale}{Coo}(coo, scale)
+
+coo_scalex(coo, scale = 1)
+
+\method{coo_scalex}{default}(coo, scale = 1)
+
+\method{coo_scalex}{Coo}(coo, scale = 1)
+
+coo_scaley(coo, scale = 1)
+
+\method{coo_scaley}{default}(coo, scale = 1)
+
+\method{coo_scaley}{Coo}(coo, scale = 1)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or a \code{list}, or any \link{Coo} object.}
+\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
 
-\item{scale}{the scaling factor, by default, the centroid size.}
+\item{scale}{the scaling factor,
+by default, the centroid size for `coo_scale`; 1 for `scalex` and `scaley`.}
 }
 \value{
-a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+a single shape or a `Coo` object
 }
 \description{
-Scales the coordinates by a 'scale' factor. If not provided,
+`coo_scale` scales the coordinates by a 'scale' factor. If not provided,
 assumed to be the centroid size. It involves three steps: centering from current position,
-dividing coordinates by 'scale', pusing back to the original position.
+dividing coordinates by 'scale', pushing back to the original position.
+`coo_scalex` applies a scaling (or shrinking) parallel to the x-axis,
+ `coo_scaley` does the same for the y axis.
 }
 \examples{
-coo_plot(bot[1])
-coo_plot(coo_scale(bot[1]))
-# on Coo objects
-stack(coo_center(bot))
-stack(coo_scale(coo_center(bot)))
+# on a single shape
+b <- bot[1] \%>\% coo_center \%>\% coo_scale
+coo_plot(b, lwd=2)
+coo_draw(coo_scalex(b, 1.5), bor="blue")
+coo_draw(coo_scaley(b, 0.5), bor="red")
+# this also works on Coo objects:
+stack(bot)
+bot \%>\% coo_center \%>\% coo_scale \%>\% stack
+bot \%>\% coo_center \%>\% coo_scaley(0.5) \%>\% stack
+equivalent to:
+#bot \%>\% coo_center \%>\% coo_scalex(2) \%>\% stack
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
@@ -45,8 +86,7 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_right}}, \code{\link{coo_rotatecenter}},
   \code{\link{coo_rotate}}, \code{\link{coo_sample_prop}},
   \code{\link{coo_samplerr}}, \code{\link{coo_sample}},
-  \code{\link{coo_scalex}}, \code{\link{coo_shearx}},
-  \code{\link{coo_slice}},
+  \code{\link{coo_shearx}}, \code{\link{coo_slice}},
   \code{\link{coo_slidedirection}},
   \code{\link{coo_slidegap}}, \code{\link{coo_slide}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},
@@ -56,6 +96,5 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
 
-Other scaling functions: \code{\link{coo_scalex}},
-  \code{\link{coo_template}}
+Other scaling functions: \code{\link{coo_template}}
 }
