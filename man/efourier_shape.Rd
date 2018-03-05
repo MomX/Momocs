@@ -32,9 +32,9 @@ calculate a shape.}
 \value{
 A list with components:
 \itemize{
- \item \code{x} \code{vector} of x-coordinates
- \item \code{y} \code{vector} of y-coordinates.
- }
+\item \code{x} \code{vector} of x-coordinates
+\item \code{y} \code{vector} of y-coordinates.
+}
 }
 \description{
 \code{efourier_shape} calculates a 'Fourier elliptical shape' given Fourier

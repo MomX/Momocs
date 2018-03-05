@@ -26,16 +26,16 @@ coo_range_enlarge(coo, k)
 \method{coo_range_enlarge}{list}(coo, k = 0)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
-\item{k}{`numeric` proportion by which to enlarge it}
+\item{k}{\code{numeric} proportion by which to enlarge it}
 }
 \value{
-a matrix of range such as `(min, max) x (x, y)`
+a matrix of range such as \code{(min, max) x (x, y)}
 }
 \description{
-`coo_range` simply returns the range,
-`coo_range_enlarge` enlarges it by a `k` proportion.
+\code{coo_range} simply returns the range,
+\code{coo_range_enlarge} enlarges it by a \code{k} proportion.
 }
 \examples{
 bot[1] \%>\% coo_range # single shape

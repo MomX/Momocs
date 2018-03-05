@@ -7,10 +7,10 @@
 coo_boundingbox(coo)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 }
 \value{
-`data.frame` with coordinates of the bounding box
+\code{data.frame} with coordinates of the bounding box
 }
 \description{
 Calculates coordinates of the bounding box

@@ -7,7 +7,7 @@
 coo_jitter(coo, ...)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
 \item{...}{additional parameter for \link{jitter}}
 }

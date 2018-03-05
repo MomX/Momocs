@@ -16,11 +16,11 @@ point of the outline.}
 \value{
 A list with the following components:
 \itemize{
- \item \code{A} vector of \eqn{A_{1->n}} \emph{normalized} harmonic coefficients
- \item \code{B} vector of \eqn{B_{1->n}} \emph{normalized} harmonic coefficients
- \item \code{C} vector of \eqn{C_{1->n}} \emph{normalized} harmonic coefficients
- \item \code{D} vector of \eqn{D_{1->n}} \emph{normalized} harmonic coefficients
- \item \code{size} Magnitude of the semi-major axis of the first
+\item \code{A} vector of \eqn{A_{1->n}} \emph{normalized} harmonic coefficients
+\item \code{B} vector of \eqn{B_{1->n}} \emph{normalized} harmonic coefficients
+\item \code{C} vector of \eqn{C_{1->n}} \emph{normalized} harmonic coefficients
+\item \code{D} vector of \eqn{D_{1->n}} \emph{normalized} harmonic coefficients
+\item \code{size} Magnitude of the semi-major axis of the first
 fitting ellipse
 \item \code{theta} angle, in radians, between the starting
 point and the semi-major axis of the first fitting ellipse

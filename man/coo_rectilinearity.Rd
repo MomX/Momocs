@@ -11,10 +11,10 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 coo_rectilinearity(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any \code{Coo}}
 }
 \value{
-`numeric` for a single shape, `list` for `Coo`
+\code{numeric} for a single shape, \code{list} for \code{Coo}
 }
 \description{
 As proposed by Zunic and Rosin (see below). May need some testing/review.

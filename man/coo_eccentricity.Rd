@@ -32,15 +32,15 @@ coo_eccentricityboundingbox(coo)
 \method{coo_eccentricityboundingbox}{Coo}(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any \code{Coo}}
 }
 \value{
-`numeric` for single shapes, `list` for `Coo`.
+\code{numeric} for single shapes, \code{list} for \code{Coo}.
 }
 \description{
-`coo_eccentricityeigen` uses the ratio of
+\code{coo_eccentricityeigen} uses the ratio of
 the eigen values (inertia axes of coordinates).
-`coo_eccentricityboundingbox` uses the width/length ratio (see [coo_lw]).
+\code{coo_eccentricityboundingbox} uses the width/length ratio (see \link{coo_lw}).
 }
 \examples{
 # coo_eccentricityeigen

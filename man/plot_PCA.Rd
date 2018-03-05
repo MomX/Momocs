@@ -18,8 +18,8 @@ or a factor can directly be passed. Accept \code{numeric} as well.}
 \item{palette}{\code{color palette} to use \code{col_summer} by default}
 }
 \description{
-Quickly vizualize [PCA] objects and build customs plots
-using the [layers]. See examples.
+Quickly vizualize \link{PCA} objects and build customs plots
+using the \link{layers}. See examples.
 }
 \note{
 This approach will replace \link{plot.PCA} in further versions.

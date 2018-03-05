@@ -17,7 +17,6 @@ Coe(...)
 Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
 a detail of the design behind Momocs' classes.
 
-
 \code{Coe} class is the 'parent' class of the following 'child' classes \itemize{
 \item \code{\link{OutCoe}} for coefficients from closed \bold{out}lines morphometrics
 \item \code{\link{OpnCoe}} for coefficients from \bold{op}e\bold{n} outlines morphometrics

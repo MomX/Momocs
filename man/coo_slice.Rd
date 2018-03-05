@@ -7,7 +7,7 @@
 coo_slice(coo, ids, ldk)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
 \item{ids}{\code{numeric} of length >= 2, where to slice the shape(s)}
 

@@ -53,5 +53,5 @@ olea \%>\%
 }
 \seealso{
 Typically used before \link{coo_slice} and \link{coo_slide}.
- See \link{def_ldk_tips} as well.
+See \link{def_ldk_tips} as well.
 }

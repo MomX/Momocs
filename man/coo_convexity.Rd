@@ -14,7 +14,7 @@ coo_convexity(coo)
 \item{coo}{a \code{matrix} of (x; y) coordinates.}
 }
 \value{
-`numeric` for a single shape, `list` for a `Coo`
+\code{numeric} for a single shape, \code{list} for a \code{Coo}
 }
 \description{
 Calculated using a ratio of the eigen values (inertia axis)

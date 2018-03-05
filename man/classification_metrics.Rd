@@ -12,15 +12,15 @@ classification_metrics(x)
 \value{
 a list with the following components is returned:
 \enumerate{
-  \item \code{accuracy}  the fraction of instances that are correctly classified
-  \item \code{macro_prf} data.frame containing \code{precision}
-  (the fraction of correct predictions for a certain class);
-  \code{recall}, the fraction of instances of a class that were correctly predicted;
-  \code{f1} the harmonic mean (or a weighted average) of precision and recall.
-  \item \code{macro_avg}, just the average of the three \code{macro_prf} indices
-  \item \code{ova} a list of one-vs-all confusion matrices for each class
-  \item \code{ova_sum} a single of all ova matrices
-  \item \code{kappa} measure of agreement between the predictions and the actual labels
+\item \code{accuracy}  the fraction of instances that are correctly classified
+\item \code{macro_prf} data.frame containing \code{precision}
+(the fraction of correct predictions for a certain class);
+\code{recall}, the fraction of instances of a class that were correctly predicted;
+\code{f1} the harmonic mean (or a weighted average) of precision and recall.
+\item \code{macro_avg}, just the average of the three \code{macro_prf} indices
+\item \code{ova} a list of one-vs-all confusion matrices for each class
+\item \code{ova_sum} a single of all ova matrices
+\item \code{kappa} measure of agreement between the predictions and the actual labels
 }
 }
 \description{

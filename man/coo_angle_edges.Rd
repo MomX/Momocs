@@ -16,7 +16,7 @@ coo_angle_edges(coo, method = c("atan2", "acos")[1])
 coo_thetapts(coo, method = c("atan2", "acos")[1])
 }
 \arguments{
-\item{coo}{a \code{matrix} or a list of (x; y) coordinates or any `Coo`}
+\item{coo}{a \code{matrix} or a list of (x; y) coordinates or any \code{Coo}}
 
 \item{method}{'atan2' (or 'acos') for a signed (or not) angle.}
 }

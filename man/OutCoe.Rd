@@ -24,7 +24,7 @@ In Momocs, \code{OutCoe} classes objects are wrapping around
 lists of morphometric coefficients, along with other informations,
 on which generic methods such as plotting methods (e.g. \link{boxplot})
 and specific methods can be applied.
- \code{OutCoe} objects are primarily \code{\link{Coe}} objects.
+\code{OutCoe} objects are primarily \code{\link{Coe}} objects.
 }
 \details{
 These methods can be applied on \code{Out} objects:

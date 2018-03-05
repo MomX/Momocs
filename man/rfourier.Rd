@@ -35,11 +35,11 @@ length of the radii used equals 1.}
 \value{
 A list with following components:
 \itemize{
- \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
- \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
- \item \code{ao} ao harmonic coefficient.
- \item \code{r} vector of radii lengths.
- }
+\item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
+\item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
+\item \code{ao} ao harmonic coefficient.
+\item \code{r} vector of radii lengths.
+}
 }
 \description{
 \code{rfourier} computes radii variation Fourier analysis from a matrix or a
@@ -47,8 +47,8 @@ list of coordinates where points are equally spaced radii.
 }
 \details{
 see the JSS paper for the maths behind. The methods for \code{Out} objects
- tests if coordinates have equally spaced radii using \link{is_equallyspacedradii}. A
- message is printed if this is not the case.
+tests if coordinates have equally spaced radii using \link{is_equallyspacedradii}. A
+message is printed if this is not the case.
 }
 \note{
 Directly borrowed for Claude (2008), and called \code{fourier1} there.

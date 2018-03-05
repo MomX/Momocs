@@ -71,10 +71,10 @@ title('Discrete Cosine Transforms')
 }
 \references{
 \itemize{
- \item Dommergues, C. H., Dommergues, J.-L., & Verrecchia, E. P. (2007).
- The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysis of Open Contours.
- \emph{Mathematical Geology}, 39(8), 749-763. doi:10.1007/s11004-007-9124-6
- \item Many thanks to Remi Laffont for the translation in R).
+\item Dommergues, C. H., Dommergues, J.-L., & Verrecchia, E. P. (2007).
+The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysis of Open Contours.
+\emph{Mathematical Geology}, 39(8), 749-763. doi:10.1007/s11004-007-9124-6
+\item Many thanks to Remi Laffont for the translation in R).
 }
 }
 \seealso{

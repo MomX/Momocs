@@ -25,7 +25,7 @@ In Momocs, \code{Ldk} classes objects are
 lists of configurations of \bold{l}an\bold{d}mar\bold{k}s, with optionnal components,
 on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. todo-Procrustes can be applied.
- \code{Ldk} objects are primarily \code{\link{Coo}} objects.
+\code{Ldk} objects are primarily \code{\link{Coo}} objects.
 }
 \details{
 All the shapes in x must have the same number of landmarks. If you are

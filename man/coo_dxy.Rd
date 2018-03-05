@@ -7,11 +7,11 @@
 coo_dxy(coo)
 }
 \arguments{
-\item{coo}{a matrix (or a list) of (x; y) coordinates or any `Coo`}
+\item{coo}{a matrix (or a list) of (x; y) coordinates or any \code{Coo}}
 }
 \value{
-a `data.frame` with two components \code{dx} and \code{dy} for single shapes
-or a `list` of such `data.frame`s for `Coo`
+a \code{data.frame} with two components \code{dx} and \code{dy} for single shapes
+or a \code{list} of such \code{data.frame}s for \code{Coo}
 }
 \description{
 A simple wrapper to calculate dxi - dx1 and dyi - dx1.

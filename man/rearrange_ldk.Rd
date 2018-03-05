@@ -16,8 +16,8 @@ in the right order (see below)}
 \description{
 Helps reorder and retain landmarks by simply changing the order in which they
 are recorded in the \code{Coo} objects. Note that for \code{Out} and \code{Opn}
- objects, this rearranges the \code{$ldk} component. For \code{Ldk}, it rearranges
-  the \code{$coo} directly.
+objects, this rearranges the \code{$ldk} component. For \code{Ldk}, it rearranges
+the \code{$coo} directly.
 }
 \examples{
 # Out example

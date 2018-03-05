@@ -27,22 +27,22 @@ coo_chull_onion(coo, close = TRUE)
 \method{coo_chull_onion}{Coo}(coo, close = TRUE)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any \code{Coo}.}
 
-\item{close}{`logical` whether to close onion rings (`TRUE` by default)}
+\item{close}{\code{logical} whether to close onion rings (\code{TRUE} by default)}
 }
 \value{
-`coo_chull` returns a `matrix` of points defining
-the convex hull of the shape; a `list` for `Coo`.
-`coo_chull_onion` returns a `list` of successive onions rings,
- and a `list` of `list`s for `Coo`.
+\code{coo_chull} returns a \code{matrix} of points defining
+the convex hull of the shape; a \code{list} for \code{Coo}.
+\code{coo_chull_onion} returns a \code{list} of successive onions rings,
+and a \code{list} of \code{list}s for \code{Coo}.
 }
 \description{
-`coo_chull` returns the ids of points that define the convex hull of a shape. A simple wrapper
+\code{coo_chull} returns the ids of points that define the convex hull of a shape. A simple wrapper
 around \link{chull}, mainly used in graphical functions.
 }
 \details{
-`coo_chull_onion` recursively find their convex hull,
+\code{coo_chull_onion} recursively find their convex hull,
 remove them, until less than 3 points are left.
 }
 \examples{

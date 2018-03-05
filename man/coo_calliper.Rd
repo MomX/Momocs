@@ -7,12 +7,12 @@
 coo_calliper(coo, arr.ind = FALSE)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any \code{Coo}}
 
 \item{arr.ind}{\code{logical}, see below.}
 }
 \value{
-\code{numeric}, the centroid size. If \code{arr.ind=TRUE}, a `data_frame`.
+\code{numeric}, the centroid size. If \code{arr.ind=TRUE}, a \code{data_frame}.
 }
 \description{
 Also called the Feret's diameter, the longest distance between two points of

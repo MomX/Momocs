@@ -39,20 +39,20 @@ coo_scaley(coo, scale = 1)
 \method{coo_scaley}{Coo}(coo, scale = 1)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
 \item{scale}{the scaling factor,
-by default, the centroid size for `coo_scale`; 1 for `scalex` and `scaley`.}
+by default, the centroid size for \code{coo_scale}; 1 for \code{scalex} and \code{scaley}.}
 }
 \value{
-a single shape or a `Coo` object
+a single shape or a \code{Coo} object
 }
 \description{
-`coo_scale` scales the coordinates by a 'scale' factor. If not provided,
+\code{coo_scale} scales the coordinates by a 'scale' factor. If not provided,
 assumed to be the centroid size. It involves three steps: centering from current position,
 dividing coordinates by 'scale', pushing back to the original position.
-`coo_scalex` applies a scaling (or shrinking) parallel to the x-axis,
- `coo_scaley` does the same for the y axis.
+\code{coo_scalex} applies a scaling (or shrinking) parallel to the x-axis,
+\code{coo_scaley} does the same for the y axis.
 }
 \examples{
 # on a single shape

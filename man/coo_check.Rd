@@ -7,10 +7,10 @@
 coo_check(coo)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 }
 \value{
-`matrix` of `(x; y)` coordinates or a [Coo] object.
+\code{matrix} of \code{(x; y)} coordinates or a \link{Coo} object.
 }
 \description{
 A simple utility, used internally, mostly in the coo functions and methods.

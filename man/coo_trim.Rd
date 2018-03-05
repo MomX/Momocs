@@ -7,7 +7,7 @@
 coo_trim(coo, trim = 1)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
 \item{trim}{\code{numeric}, the number of coordinates to trim}
 }

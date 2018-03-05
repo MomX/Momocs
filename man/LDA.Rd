@@ -26,18 +26,18 @@ LDA(x, fac, retain, ...)
 \value{
 a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:
 \itemize{
- \item \code{x} any \link{Coe} object (or a matrix)
- \item \code{fac} grouping factor used
- \item \code{removed} ids of columns in the original matrix that have been removed since constant (if any)
- \item \code{mod} the raw lda mod from \link{lda}
- \item \code{mod.pred} the predicted model using x and mod
- \item \code{CV.fac} cross-validated classification
- \item \code{CV.tab} cross-validation tabke
- \item \code{CV.correct} proportion of correctly classified individuals
- \item \code{CV.ce} class error
- \item \code{LDs} unstandardized LD scores see Claude (2008)
- \item \code{mshape} mean values of coefficients in the original matrix
- \item \code{method} inherited from the Coe object (if any)
+\item \code{x} any \link{Coe} object (or a matrix)
+\item \code{fac} grouping factor used
+\item \code{removed} ids of columns in the original matrix that have been removed since constant (if any)
+\item \code{mod} the raw lda mod from \link{lda}
+\item \code{mod.pred} the predicted model using x and mod
+\item \code{CV.fac} cross-validated classification
+\item \code{CV.tab} cross-validation tabke
+\item \code{CV.correct} proportion of correctly classified individuals
+\item \code{CV.ce} class error
+\item \code{LDs} unstandardized LD scores see Claude (2008)
+\item \code{mshape} mean values of coefficients in the original matrix
+\item \code{method} inherited from the Coe object (if any)
 }
 }
 \description{

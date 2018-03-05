@@ -60,7 +60,7 @@ But here is the pitfall: if your shapes are prone to bad aligments among all
 the first ellipses, this will result in poorly (or even not at all) "homologous" coefficients.
 The shapes prone to this are either (at least roughly) circular and/or with a strong
 bilateral symmetry. You can try to use \code{\link{stack}} on the \code{\link{Coe}} object
- returned by \code{efourier}. Also, when plotting PCA using Momocs,
+returned by \code{efourier}. Also, when plotting PCA using Momocs,
 this will be strikingly clear though. This phenomenon will result in two clusters,
 and more strikingly into upside-down (or 180 degrees rotated)
 shapes on the morphospace. If this happen, you should seriously consider

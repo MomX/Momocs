@@ -7,7 +7,7 @@
 coo_slidegap(coo, force)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
 \item{force}{\code{logical} whether to use the widest gap, with no check, as the real gap}
 }

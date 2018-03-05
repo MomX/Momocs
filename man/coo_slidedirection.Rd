@@ -8,7 +8,7 @@ coo_slidedirection(coo, direction = c("down", "left", "up", "right")[4],
   center, id)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
 \item{direction}{\code{character} one of \code{"down", "left", "up", "right"} ("right" by default)}
 

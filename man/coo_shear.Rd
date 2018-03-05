@@ -10,7 +10,7 @@ coo_shearx(coo, k)
 coo_sheary(coo, k)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 
 \item{k}{\code{numeric} shear factor}
 }

@@ -40,9 +40,9 @@ Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 }
 \seealso{
 \itemize{
- \item \bold{Homepage}: \url{https://github.com/vbonhomme/Momocs}
- \item \bold{Issues}: \url{https://github.com/vbonhomme/Momocs/issues}
- \item \bold{Tutorial}: \code{browseVignettes("Momocs")}
- \item \bold{Email}: \code{bonhomme.vincent@gmail.com} to contribute to dev, ask for something, share your data, etc.
+\item \bold{Homepage}: \url{https://github.com/vbonhomme/Momocs}
+\item \bold{Issues}: \url{https://github.com/vbonhomme/Momocs/issues}
+\item \bold{Tutorial}: \code{browseVignettes("Momocs")}
+\item \bold{Email}: \code{bonhomme.vincent@gmail.com} to contribute to dev, ask for something, share your data, etc.
 }
 }

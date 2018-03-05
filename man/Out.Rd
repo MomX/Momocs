@@ -22,7 +22,7 @@ an \code{Out} object
 In Momocs, \code{Out}-classes objects are lists of closed \bold{out}lines,
 with optional components, and on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. \link{efourier} can be applied.
- \code{Out} objects are primarily \code{\link{Coo}} objects.
+\code{Out} objects are primarily \code{\link{Coo}} objects.
 }
 \examples{
 methods(class=Out)

@@ -20,14 +20,14 @@ paper_chess(coo, n = 50, col = "#E5E5E5")
 paper_dots(coo, pch = 20, n = 50, col = "#7F7F7F")
 }
 \arguments{
-\item{coo}{a single shape or any [Coo] object}
+\item{coo}{a single shape or any \link{Coo} object}
 
-\item{...}{more arguments to feed `plot` function within each `paper` function}
+\item{...}{more arguments to feed \code{plot} function within each \code{paper} function}
 
 \item{grid}{\code{numeric} of length 2 to (roughly) specify the
 number of majors lines, and the number of minor lines within two major ones}
 
-\item{cols}{colors (hexadecimal) to use for grid drawing}
+\item{cols}{colors (hexadecimal preferred) to use for grid drawing}
 
 \item{n}{\code{numeric} number of squares for the chessboard}
 
@@ -36,14 +36,11 @@ number of majors lines, and the number of minor lines within two major ones}
 \item{pch}{to use for dots}
 }
 \description{
-Papers on which to use [drawers] for building custom
+Papers on which to use \link{drawers} for building custom
 shape plots using the cheapbabi approach. See examples and vignettes.
 }
-\details{
-`paper` is `paper_white %>% draw_axes`.
-}
 \note{
-This approach will (soon) replace [coo_plot] and friends in further versions.
+This approach will (soon) replace \link{coo_plot} and friends in further versions.
 All comments are welcome.
 }
 \seealso{

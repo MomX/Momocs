@@ -27,7 +27,7 @@ when \code{Momacs} and \code{Momit}
 will be fully operationnal.
 
 If you have an image with more than a single shape, then
-you may want to try `imager::highlight` function. Momocs may use this at some point.
+you may want to try \code{imager::highlight} function. Momocs may use this at some point.
 }
 \references{
 \itemize{

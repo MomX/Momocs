@@ -22,7 +22,7 @@ In Momocs, \code{Opn} classes objects are
 lists of \bold{op}e\bold{n} outlines, with optionnal components,
 on which generic methods such as plotting methods (e.g. \link{stack})
 and specific methods (e.g. \link{npoly} can be applied.
- \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
+\code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 }
 \examples{
 #Methods on Opn

@@ -21,11 +21,11 @@ sfourier(x, nb.h)
 \value{
 A list with following components:
 \itemize{
- \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
- \item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
- \item \code{ao} ao harmonic coefficient
- \item \code{r} vector of radii lengths
- }
+\item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
+\item \code{bn} vector of \eqn{b_{1->n}} harmonic coefficients
+\item \code{ao} ao harmonic coefficient
+\item \code{r} vector of radii lengths
+}
 }
 \description{
 \code{sfourier} computes radii variation Fourier analysis from a matrix or a

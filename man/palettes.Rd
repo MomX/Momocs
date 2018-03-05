@@ -99,21 +99,21 @@ pal_seq_YlOrRd(n, transp = 0)
 \arguments{
 \item{cols}{color(s) as hexadecimal values}
 
-\item{transp}{`numeric` between 0 and 1 (0, eg opaque, by default)}
+\item{transp}{\code{numeric} between 0 and 1 (0, eg opaque, by default)}
 
-\item{n}{`numeric` number of colors}
+\item{n}{\code{numeric} number of colors}
 }
 \description{
 All colorblind friendly RColorBrewer palettes
 recreated without the number of colors limitation
-and with transparency support thanks to `pal_alpha` that can be used alone.
-Also, `pal_qual_solarized` based on Solarized: \url{http://ethanschoonover.com/solarized}
-and `pal_seq_grey` only shades of grey from `grey10` to `grey90`.
+and with transparency support thanks to \code{pal_alpha} that can be used alone.
+Also, \code{pal_qual_solarized} based on Solarized: \url{http://ethanschoonover.com/solarized}
+and \code{pal_seq_grey} only shades of grey from \code{grey10} to \code{grey90}.
 }
 \note{
-RColorBrewer palettes are not happy when `n` is lower than 3 and above
+RColorBrewer palettes are not happy when \code{n} is lower than 3 and above
 a given number for each palette. If this is the case, these functions will
-create a color palette with [colorRampPalette] and return colors even so.
+create a color palette with \link{colorRampPalette} and return colors even so.
 }
 \examples{
 pal_div_BrBG(5) \%>\% barplot(rep(1, 5), col=.)

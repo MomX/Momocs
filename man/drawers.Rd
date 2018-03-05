@@ -69,16 +69,16 @@ draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1, ...)
 
 \item{labels}{\code{character} name of labels to draw (defaut to \code{1:nrow(coo)})}
 
-\item{d}{`numeric` proportion of `d(centroid-each_point)` to add when centrifugating landmarks}
+\item{d}{\code{numeric} proportion of \code{d(centroid-each_point)} to add when centrifugating landmarks}
 
-\item{links}{`matrix` of links to use to draw segments between landmarks. See `wings$ldk` for an example}
+\item{links}{\code{matrix} of links to use to draw segments between landmarks. See \code{wings$ldk} for an example}
 }
 \description{
 Useful drawers for building custom
 shape plots using the cheapbabi approach. See examples and vignettes.
 }
 \note{
-This approach will (soon) replace [coo_plot] and friends in further versions.
+This approach will (soon) replace \link{coo_plot} and friends in further versions.
 All comments are welcome.
 }
 \examples{

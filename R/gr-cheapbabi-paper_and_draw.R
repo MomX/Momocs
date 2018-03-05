@@ -38,7 +38,7 @@ this_dispatch <- function(f, this){
 #' @note This approach will (soon) replace [coo_plot] and friends in further versions.
 #' All comments are welcome.
 #'
-#' @details `paper` is `paper_white %>% draw_axes`.
+#' @details `paper` is `paper_white` `%>%` `draw_axes`
 #'
 #' @family cheapbabi
 #' @name papers
@@ -66,9 +66,9 @@ paper_white <- function(coo, ...){
 }
 
 #' @rdname papers
-#' @param grid \code{numeric} of length 2 to (roughly) specify the
+#' @param grid `numeric` of length 2 to (roughly) specify the
 #' number of majors lines, and the number of minor lines within two major ones
-#' @param cols colors (hexadecimal) to use for grid drawing
+#' @param cols colors (hexadecimal preferred) to use for grid drawing
 #' @export
 paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
   # smaller margins

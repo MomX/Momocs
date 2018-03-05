@@ -6,7 +6,7 @@
 #' A simple utility, used internally, mostly in the coo functions and methods.
 #' Returns a matrix of coordinates, when passed with either a list or a \code{matrix} of coordinates.
 #'
-#' @param coo `matrix` of `(x; y)` coordinates or or any [Coo] object.
+#' @param coo `matrix` of `(x; y)` coordinates or any [Coo] object.
 #' @return `matrix` of `(x; y)` coordinates or a [Coo] object.
 #' @examples
 #' #coo_check('Not a shape')

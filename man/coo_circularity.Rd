@@ -43,17 +43,17 @@ coo_circularitynorm(coo)
 \method{coo_circularitynorm}{Coo}(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any \code{Coo}}
 }
 \value{
-`numeric` for single shapes, `list` for `Coo` of
+\code{numeric} for single shapes, \code{list} for \code{Coo} of
 the corresponding circularity measurement.
 }
 \description{
-`coo_circularity` calculates the 'circularity measure'. Also called 'compactness'
-and 'shape factor' sometimes. `coo_circularityharalick` calculates Haralick's circularity which is less sensible
-to digitalization noise than `coo_circularity`.
-`coo_circularitynorm` calculates 'circularity', also called compactness
+\code{coo_circularity} calculates the 'circularity measure'. Also called 'compactness'
+and 'shape factor' sometimes. \code{coo_circularityharalick} calculates Haralick's circularity which is less sensible
+to digitalization noise than \code{coo_circularity}.
+\code{coo_circularitynorm} calculates 'circularity', also called compactness
 and shape factor, but normalized to the unit circle.
 }
 \examples{

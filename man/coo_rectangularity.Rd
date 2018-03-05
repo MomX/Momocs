@@ -11,10 +11,10 @@ Handbook of Pattern Recognition and Computer Vision. 177-196.
 coo_rectangularity(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any \code{Coo}}
 }
 \value{
-`numeric` for a single shape, `list` for `Coo`
+\code{numeric} for a single shape, \code{list} for \code{Coo}
 }
 \description{
 Calculates the rectangularity of a shape

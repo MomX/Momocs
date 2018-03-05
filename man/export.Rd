@@ -31,7 +31,7 @@ considered as a character chain in Excel in many countries (locale versions).
 This can be solved by using \code{dec=','} as in the examples below.
 
 If you are looking for your file, and did not specified \code{file},
- \code{getwd()} will help.
+\code{getwd()} will help.
 
 I have to mention that everytime you use this function,
 and cowardly run from R to Excel and

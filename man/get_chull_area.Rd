@@ -30,7 +30,7 @@ only be compared within the same PCA.
 }
 \details{
 get_chull_area is calculated using \link{coo_chull} followed by \link{coo_area};
- get_chull_volume is calculated using geometry::convexhulln
+get_chull_volume is calculated using geometry::convexhulln
 }
 \examples{
 bp <- PCA(efourier(bot, 12))

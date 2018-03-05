@@ -10,7 +10,7 @@ is_closed(coo)
 is_open(coo)
 }
 \arguments{
-\item{coo}{`matrix` of `(x; y)` coordinates or or any [Coo] object.}
+\item{coo}{\code{matrix} of \code{(x; y)} coordinates or or any \link{Coo} object.}
 }
 \value{
 a single or a vector of \code{logical}.

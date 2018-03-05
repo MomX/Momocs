@@ -31,13 +31,13 @@ by default \eqn{(x= 0.5; y=0)}}
 \value{
 when applied on a single shape, a list with components:
 \itemize{
- \item \code{coeff} the coefficients (includint the intercept)
- \item \code{ortho} whether orthogonal or natural polynomials were fitted
- \item \code{degree} degree of the fit (could be retrieved through \code{coeff} though)
- \item \code{baseline1} the first baseline point (so far the first point)
- \item \code{baseline2} the second baseline point (so far the last point)
- \item \code{r2} the r2 from the fit
- \item \code{mod} the raw lm model
+\item \code{coeff} the coefficients (includint the intercept)
+\item \code{ortho} whether orthogonal or natural polynomials were fitted
+\item \code{degree} degree of the fit (could be retrieved through \code{coeff} though)
+\item \code{baseline1} the first baseline point (so far the first point)
+\item \code{baseline2} the second baseline point (so far the last point)
+\item \code{r2} the r2 from the fit
+\item \code{mod} the raw lm model
 }
 
 otherwise, an \link{OpnCoe} object.

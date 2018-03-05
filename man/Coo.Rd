@@ -17,7 +17,6 @@ Coo(...)
 Useful shortcuts are described below. See \code{browseVignettes("Momocs")} for
 a detail of the design behind Momocs' classes.
 
-
 \code{Coo} class is the 'parent' class of the following 'child' classes \itemize{
 \item \code{\link{Out}} for closed \bold{out}lines
 \item \code{\link{Opn}} for \bold{op}e\bold{n} outlines
