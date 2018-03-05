@@ -7,16 +7,21 @@
 coo_dxy(coo)
 }
 \arguments{
-\item{coo}{a matrix (or a list) of (x; y) coordinates}
+\item{coo}{a matrix (or a list) of (x; y) coordinates or any `Coo`}
 }
 \value{
-a list with two components \code{dx} and \code{dy}
+a `data.frame` with two components \code{dx} and \code{dy} for single shapes
+or a `list` of such `data.frame`s for `Coo`
 }
 \description{
 A simple wrapper to calculate dxi - dx1 and dyi - dx1.
 }
 \examples{
-coo_dxy(bot[1])
+coo_dxy(coo_sample(bot[1], 12))
+
+bot \%>\%
+    slice(1:5) \%>\% coo_sample(12) \%>\%  # for readability and speed only
+    coo_dxy()
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
@@ -26,10 +31,9 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_boundingbox}},
   \code{\link{coo_calliper}}, \code{\link{coo_centdist}},
   \code{\link{coo_center}}, \code{\link{coo_centpos}},
-  \code{\link{coo_chull_onion}}, \code{\link{coo_close}},
-  \code{\link{coo_down}}, \code{\link{coo_enlarge}},
-  \code{\link{coo_extract}}, \code{\link{coo_flipx}},
-  \code{\link{coo_force2close}},
+  \code{\link{coo_close}}, \code{\link{coo_down}},
+  \code{\link{coo_enlarge}}, \code{\link{coo_extract}},
+  \code{\link{coo_flipx}}, \code{\link{coo_force2close}},
   \code{\link{coo_interpolate}}, \code{\link{coo_jitter}},
   \code{\link{coo_left}}, \code{\link{coo_nb}},
   \code{\link{coo_perimcum}}, \code{\link{coo_perimpts}},

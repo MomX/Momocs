@@ -1758,18 +1758,33 @@ coo_flipy.Coo <- function(coo){
 #' Calculate abscissa and ordinate on a shape
 #'
 #' A simple wrapper to calculate dxi - dx1 and dyi - dx1.
-#' @param coo a matrix (or a list) of (x; y) coordinates
-#' @return a list with two components \code{dx} and \code{dy}
+#' @param coo a matrix (or a list) of (x; y) coordinates or any `Coo`
+#' @return a `data.frame` with two components \code{dx} and \code{dy} for single shapes
+#' or a `list` of such `data.frame`s for `Coo`
 #' @family exemplifying functions
 #' @family coo_ utilities
 #' @examples
-#' coo_dxy(bot[1])
+#' coo_dxy(coo_sample(bot[1], 12))
+#'
+#' bot %>%
+#'     slice(1:5) %>% coo_sample(12) %>%  # for readability and speed only
+#'     coo_dxy()
 #' @export
 coo_dxy <- function(coo) {
+  UseMethod("coo_dxy")
+}
+
+#' @export
+coo_dxy.default <- function(coo) {
   coo <- coo_check(coo)
   dx <- coo[, 1] - coo[1, 1]
   dy <- coo[, 2] - coo[1, 2]
-  return(list(dx = dx, dy = dy))
+  return(data.frame(dx = dx, dy = dy))
+}
+
+#' @export
+coo_dxy.Coo <- function(coo) {
+  lapply(coo$coo, coo_dxy)
 }
 
 # 2. Handling / baselines on coo and Coo
@@ -2316,22 +2331,37 @@ coo_perim <- function(coo) {
 #' Also called the Feret's diameter, the longest distance between two points of
 #' the shape provided.
 #' @aliases coo_calliper
-#' @param coo a \code{matrix} of (x; y) coordinates.
+#' @param coo a \code{matrix} of (x; y) coordinates or any `Coo`
 #' @param arr.ind \code{logical}, see below.
-#' @return \code{numeric}, the centroid size. If \code{arr.ind=TRUE}, a list with the calliper length \code{$length}
-#' and the two points \code{$arr.ind}. If \code{arr.ind=TRUE}, only the calliper length as a numeric.
+#' @return \code{numeric}, the centroid size. If \code{arr.ind=TRUE}, a `data_frame`.
 #' @examples
 #' b <- bot[1]
 #' coo_calliper(b)
 #' p <- coo_calliper(b, arr.ind=TRUE)
+#' p
 #' p$length
-#' ids <- p$arr.ind
+#' ids <- p$arr_ind[[1]]
 #' coo_plot(b)
 #' segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
+#'
+#' # on a Coo
+#' bot %>%
+#' coo_sample(32) %>% # for speed sake
+#' coo_calliper()
+#'
+#' bot %>%
+#' coo_sample(32) %>% # for speed sake
+#' coo_calliper(arr.ind=TRUE)
+#'
 #' @family calliper functions
 #' @family coo_ utilities
 #' @export
-coo_calliper <- function(coo, arr.ind = FALSE) {
+coo_calliper <- function(coo, arr.ind=FALSE){
+  UseMethod("coo_calliper")
+}
+
+#' @export
+coo_calliper.default <- function(coo, arr.ind = FALSE) {
   coo <- coo_check(coo)
   d <- dist(coo, method = "euclidean")
   # we check if there is no ex aequo
@@ -2344,10 +2374,19 @@ coo_calliper <- function(coo, arr.ind = FALSE) {
     # to return a vector (numeric and sorted) of the rows between
     # which the max length has been found
     arr.ind <- sort(as.numeric(arr.ind[1, ]))
-    return(list(length = max(d), arr.ind = arr.ind))
+    return(dplyr::data_frame(length = max(d), arr_ind = list(arr.ind)))
   } else {
     return(max(d))
   }
+}
+
+#' @export
+coo_calliper.Coo <- function(coo, arr.ind = FALSE) {
+  if (arr.ind)
+    lapply(coo$coo, coo_calliper, arr.ind=arr.ind) %>%
+    do.call("rbind", .)
+  else
+    lapply(coo$coo, coo_calliper, arr.ind=arr.ind)
 }
 
 # coo_trim ------------------

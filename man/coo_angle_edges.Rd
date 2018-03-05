@@ -2,15 +2,21 @@
 % Please edit documentation in R/coo-shapedescriptors.R
 \name{coo_angle_edges}
 \alias{coo_angle_edges}
+\alias{coo_angle_edges.default}
+\alias{coo_angle_edges.Coo}
 \alias{coo_thetapts}
 \title{Calculates the angle of every edge of a shape}
 \usage{
 coo_angle_edges(coo, method = c("atan2", "acos")[1])
 
+\method{coo_angle_edges}{default}(coo, method = c("atan2", "acos")[1])
+
+\method{coo_angle_edges}{Coo}(coo, method = c("atan2", "acos")[1])
+
 coo_thetapts(coo, method = c("atan2", "acos")[1])
 }
 \arguments{
-\item{coo}{a \code{matrix} or a list of (x; y) coordinates.}
+\item{coo}{a \code{matrix} or a list of (x; y) coordinates or any `Coo`}
 
 \item{method}{'atan2' (or 'acos') for a signed (or not) angle.}
 }
@@ -32,12 +38,9 @@ coo_angle_edges(b)
 Other coo_ descriptors: \code{\link{coo_angle_edge1}},
   \code{\link{coo_angle_tangent}}, \code{\link{coo_area}},
   \code{\link{coo_boundingbox}}, \code{\link{coo_chull}},
-  \code{\link{coo_circularityharalick}},
-  \code{\link{coo_circularitynorm}},
   \code{\link{coo_circularity}},
   \code{\link{coo_convexity}},
-  \code{\link{coo_eccentricityboundingbox}},
-  \code{\link{coo_eccentricityeigen}},
+  \code{\link{coo_eccentricity}},
   \code{\link{coo_elongation}}, \code{\link{coo_length}},
   \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
   \code{\link{coo_rectilinearity}},

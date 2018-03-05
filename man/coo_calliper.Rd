@@ -7,13 +7,12 @@
 coo_calliper(coo, arr.ind = FALSE)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
 
 \item{arr.ind}{\code{logical}, see below.}
 }
 \value{
-\code{numeric}, the centroid size. If \code{arr.ind=TRUE}, a list with the calliper length \code{$length}
-and the two points \code{$arr.ind}. If \code{arr.ind=TRUE}, only the calliper length as a numeric.
+\code{numeric}, the centroid size. If \code{arr.ind=TRUE}, a `data_frame`.
 }
 \description{
 Also called the Feret's diameter, the longest distance between two points of
@@ -23,10 +22,21 @@ the shape provided.
 b <- bot[1]
 coo_calliper(b)
 p <- coo_calliper(b, arr.ind=TRUE)
+p
 p$length
-ids <- p$arr.ind
+ids <- p$arr_ind[[1]]
 coo_plot(b)
 segments(b[ids[1], 1], b[ids[1], 2], b[ids[2], 1], b[ids[2], 2], lty=2)
+
+# on a Coo
+bot \%>\%
+coo_sample(32) \%>\% # for speed sake
+coo_calliper()
+
+bot \%>\%
+coo_sample(32) \%>\% # for speed sake
+coo_calliper(arr.ind=TRUE)
+
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
@@ -35,11 +45,10 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_baseline}}, \code{\link{coo_bookstein}},
   \code{\link{coo_boundingbox}},
   \code{\link{coo_centdist}}, \code{\link{coo_center}},
-  \code{\link{coo_centpos}}, \code{\link{coo_chull_onion}},
-  \code{\link{coo_close}}, \code{\link{coo_down}},
-  \code{\link{coo_dxy}}, \code{\link{coo_enlarge}},
-  \code{\link{coo_extract}}, \code{\link{coo_flipx}},
-  \code{\link{coo_force2close}},
+  \code{\link{coo_centpos}}, \code{\link{coo_close}},
+  \code{\link{coo_down}}, \code{\link{coo_dxy}},
+  \code{\link{coo_enlarge}}, \code{\link{coo_extract}},
+  \code{\link{coo_flipx}}, \code{\link{coo_force2close}},
   \code{\link{coo_interpolate}}, \code{\link{coo_jitter}},
   \code{\link{coo_left}}, \code{\link{coo_nb}},
   \code{\link{coo_perimcum}}, \code{\link{coo_perimpts}},

@@ -2,35 +2,87 @@
 % Please edit documentation in R/coo-shapedescriptors.R
 \name{coo_circularity}
 \alias{coo_circularity}
-\alias{coo_compactness}
-\alias{coo_shapefactor}
-\title{Calculates the circularity of a shape}
+\alias{coo_circularity}
+\alias{coo_circularity.default}
+\alias{coo_circularity}
+\alias{coo_circularity.Coo}
+\alias{coo_circularity}
+\alias{coo_circularityharalick}
+\alias{coo_circularity}
+\alias{coo_circularityharalick.default}
+\alias{coo_circularity}
+\alias{coo_circularityharalick.Coo}
+\alias{coo_circularity}
+\alias{coo_circularitynorm}
+\alias{coo_circularity}
+\alias{coo_circularitynorm.default}
+\alias{coo_circularity}
+\alias{coo_circularitynorm.Coo}
+\title{Calculates the Haralick's circularity of a shape}
+\source{
+Rosin PL. 2005. Computing global shape measures.
+Handbook of Pattern Recognition and Computer Vision. 177-196.
+}
 \usage{
 coo_circularity(coo)
+
+\method{coo_circularity}{default}(coo)
+
+\method{coo_circularity}{Coo}(coo)
+
+coo_circularityharalick(coo)
+
+\method{coo_circularityharalick}{default}(coo)
+
+\method{coo_circularityharalick}{Coo}(coo)
+
+coo_circularitynorm(coo)
+
+\method{coo_circularitynorm}{default}(coo)
+
+\method{coo_circularitynorm}{Coo}(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
 }
 \value{
-numeric, the circularity.
+`numeric` for single shapes, `list` for `Coo` of
+the corresponding circularity measurement.
 }
 \description{
-Returns the 'circularity measure'. Also called 'compactness'
-and 'shape factor' sometimes.
+`coo_circularity` calculates the 'circularity measure'. Also called 'compactness'
+and 'shape factor' sometimes. `coo_circularityharalick` calculates Haralick's circularity which is less sensible
+to digitalization noise than `coo_circularity`.
+`coo_circularitynorm` calculates 'circularity', also called compactness
+and shape factor, but normalized to the unit circle.
 }
 \examples{
-coo_circularity(bot[1])
+
+# coo_circularity
+bot[1] \%>\% coo_circularity()
+bot \%>\%
+    slice(1:5) \%>\% # for speed sake only
+    coo_circularity
+
+# coo_circularityharalick
+bot[1] \%>\% coo_circularityharalick()
+bot \%>\%
+    slice(1:5) \%>\% # for speed sake only
+    coo_circularityharalick
+
+# coo_circularitynorm
+bot[1] \%>\% coo_circularitynorm()
+bot \%>\%
+    slice(1:5) \%>\% # for speed sake only
+    coo_circularitynorm
 }
 \seealso{
 Other coo_ descriptors: \code{\link{coo_angle_edge1}},
   \code{\link{coo_angle_edges}},
   \code{\link{coo_angle_tangent}}, \code{\link{coo_area}},
   \code{\link{coo_boundingbox}}, \code{\link{coo_chull}},
-  \code{\link{coo_circularityharalick}},
-  \code{\link{coo_circularitynorm}},
   \code{\link{coo_convexity}},
-  \code{\link{coo_eccentricityboundingbox}},
-  \code{\link{coo_eccentricityeigen}},
+  \code{\link{coo_eccentricity}},
   \code{\link{coo_elongation}}, \code{\link{coo_length}},
   \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
   \code{\link{coo_rectilinearity}},

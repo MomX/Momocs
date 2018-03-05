@@ -11,10 +11,10 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence 25: 1193-1200.
 coo_rectilinearity(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`}
 }
 \value{
-numeric, the rectilinearity
+`numeric` for a single shape, `list` for `Coo`
 }
 \description{
 As proposed by Zunic and Rosin (see below). May need some testing/review.
@@ -24,20 +24,22 @@ due to the laborious nature of the algorithm (in nb.pts^2),
 and of its implementation, it may be very long to compute.
 }
 \examples{
-b <- coo_sample(bot[1], 32)
-coo_rectilinearity(b)
+bot[1] \%>\%
+    coo_sample(32) \%>\% # for speed sake only
+    coo_rectilinearity
+
+bot \%>\%
+    slice(1:3) \%>\% coo_sample(32) \%>\% # for speed sake only
+    coo_rectilinearity
 }
 \seealso{
 Other coo_ descriptors: \code{\link{coo_angle_edge1}},
   \code{\link{coo_angle_edges}},
   \code{\link{coo_angle_tangent}}, \code{\link{coo_area}},
   \code{\link{coo_boundingbox}}, \code{\link{coo_chull}},
-  \code{\link{coo_circularityharalick}},
-  \code{\link{coo_circularitynorm}},
   \code{\link{coo_circularity}},
   \code{\link{coo_convexity}},
-  \code{\link{coo_eccentricityboundingbox}},
-  \code{\link{coo_eccentricityeigen}},
+  \code{\link{coo_eccentricity}},
   \code{\link{coo_elongation}}, \code{\link{coo_length}},
   \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
   \code{\link{coo_solidity}}, \code{\link{coo_width}}

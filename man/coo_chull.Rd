@@ -2,37 +2,80 @@
 % Please edit documentation in R/coo-shapedescriptors.R
 \name{coo_chull}
 \alias{coo_chull}
-\title{Calculates the convex hull of a shape}
+\alias{coo_chull}
+\alias{coo_chull.default}
+\alias{coo_chull}
+\alias{coo_chull.Coo}
+\alias{coo_chull}
+\alias{coo_chull_onion}
+\alias{coo_chull}
+\alias{coo_chull_onion.default}
+\alias{coo_chull}
+\alias{coo_chull_onion.Coo}
+\title{Calculates the (recursive) convex hull of a shape}
 \usage{
 coo_chull(coo)
+
+\method{coo_chull}{default}(coo)
+
+\method{coo_chull}{Coo}(coo)
+
+coo_chull_onion(coo, close = TRUE)
+
+\method{coo_chull_onion}{default}(coo, close = TRUE)
+
+\method{coo_chull_onion}{Coo}(coo, close = TRUE)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{a \code{matrix} of (x; y) coordinates or any `Coo`.}
+
+\item{close}{`logical` whether to close onion rings (`TRUE` by default)}
 }
 \value{
-a \code{matrix} of ids defining the convex hull of the shape.
+`coo_chull` returns a `matrix` of points defining
+the convex hull of the shape; a `list` for `Coo`.
+`coo_chull_onion` returns a `list` of successive onions rings,
+ and a `list` of `list`s for `Coo`.
 }
 \description{
-Returns the ids of points that define the convex hull of a shape. A simple wrapper
+`coo_chull` returns the ids of points that define the convex hull of a shape. A simple wrapper
 around \link{chull}, mainly used in graphical functions.
 }
+\details{
+`coo_chull_onion` recursively find their convex hull,
+remove them, until less than 3 points are left.
+}
 \examples{
+# coo_chull
 h <- coo_sample(hearts[4], 32)
 coo_plot(h)
 ch <- coo_chull(h)
 lines(ch, col='red', lty=2)
+
+bot \%>\% coo_chull
+
+coo_chull_onion
+x <- bot \%>\% efourier(6) \%>\% PCA
+all_whisky_points <- x \%>\% as_df() \%>\% filter(type=="whisky") \%>\% select(PC1, PC2)
+plot(x, ~type, eig=FALSE)
+peeling_the_whisky_onion <- all_whisky_points \%>\% as.matrix \%>\% coo_chull_onion()
+# you may need to par(xpd=NA) to ensure all segments
+# even those outside the graphical window are drawn
+peeling_the_whisky_onion$coo \%>\% lapply(coo_draw)
+# simulated data
+xy <- replicate(2, rnorm(50))
+coo_plot(xy, poly=FALSE)
+xy \%>\% coo_chull_onion() \%$\% coo \%>\%
+lapply(polygon, col="#00000022")
 }
 \seealso{
 Other coo_ descriptors: \code{\link{coo_angle_edge1}},
   \code{\link{coo_angle_edges}},
   \code{\link{coo_angle_tangent}}, \code{\link{coo_area}},
   \code{\link{coo_boundingbox}},
-  \code{\link{coo_circularityharalick}},
-  \code{\link{coo_circularitynorm}},
   \code{\link{coo_circularity}},
   \code{\link{coo_convexity}},
-  \code{\link{coo_eccentricityboundingbox}},
-  \code{\link{coo_eccentricityeigen}},
+  \code{\link{coo_eccentricity}},
   \code{\link{coo_elongation}}, \code{\link{coo_length}},
   \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
   \code{\link{coo_rectilinearity}},
