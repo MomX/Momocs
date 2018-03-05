@@ -64,7 +64,7 @@ coo_draw(coo_scaley(b, 0.5), bor="red")
 stack(bot)
 bot \%>\% coo_center \%>\% coo_scale \%>\% stack
 bot \%>\% coo_center \%>\% coo_scaley(0.5) \%>\% stack
-equivalent to:
+#equivalent to:
 #bot \%>\% coo_center \%>\% coo_scalex(2) \%>\% stack
 }
 \seealso{

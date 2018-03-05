@@ -12,7 +12,7 @@ classify(x, fac, ref, unk)
 \item{fac}{a standalone factor, or the name or id of the $fac column to use.If it contains
 NAs, they will also be removed first from the x object}
 
-\item{ref}{at least two level names from $fac\link{, "fac"} to use as a training subset of x}
+\item{ref}{at least two level names from \code{$fac} to use as a training subset of x}
 
 \item{unk}{same as above for one level name to classify}
 }

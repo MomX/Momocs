@@ -13,9 +13,9 @@ rescale(x, scaling_factor, scale_mapping, magnification_col, ...)
 have the same scale}
 
 \item{scale_mapping}{either a data.frame or a path to read such a data.frame. It MUST contain
-three columns in that order: magnification found in $fac\link{, "magnification_col"}, pixels, real length unit.
+three columns in that order: magnification found in \code{$fac}, column \code{"magnification_col"}, pixels, real length unit.
 Column names do not matter but must be specified, as read.table reads with \code{header=TRUE} Every
-different magnification level found in $fac\link{, "magnification_col"} must have its row.}
+different magnification level found in \code{$fac}, column \code{"magnification_col"} must have its row.}
 
 \item{magnification_col}{the name or id of the $fac column to look for magnification levels for every image}
 
