@@ -8,14 +8,16 @@
 \usage{
 breed(x, ...)
 
-\method{breed}{default}(x, margin = 2, size, rate = 1, ...)
+\method{breed}{default}(x, fac, margin = 2, size, rate = 1, ...)
 
-\method{breed}{Coe}(x, size, rate = 1, ...)
+\method{breed}{Coe}(x, fac, size, rate = 1, ...)
 }
 \arguments{
 \item{x}{the object to permute}
 
 \item{...}{useless here}
+
+\item{fac}{a column, a formula or a column id from \code{$fac}}
 
 \item{margin}{numeric whether 1 or 2 (rows or columns)}
 
@@ -37,9 +39,11 @@ breed(m, margin=2, size=4)
 breed(m, margin=1, size=10)
 
 bot.f <- efourier(bot, 12)
-bot.m <- breed(bot.f, 80)
-bot.m
-panel(bot.m)
+bot.m <- breed(bot.f, size=80)
+bot.m \%>\% PCA \%>\% plot
+
+# breed fac wise
+bot.f \%>\%  breed(~type, size=50) \%>\% PCA \%>\% plot(~type)
 }
 \seealso{
 Other farming: \code{\link{perm}}
