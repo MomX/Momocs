@@ -7,15 +7,15 @@
 \usage{
 PCcontrib(PCA, ...)
 
-\method{PCcontrib}{PCA}(PCA, nax = 1:4, sd.r = c(-2, -1, -0.5, 0, 0.5, 1,
-  2), gap = 1, ...)
+\method{PCcontrib}{PCA}(PCA, nax, sd.r = c(-2, -1, -0.5, 0, 0.5, 1, 2),
+  gap = 1, ...)
 }
 \arguments{
-\item{PCA}{a \code{\link{PCA}} object}
+\item{PCA}{a \code{PCA} object}
 
 \item{...}{additional parameter to pass to \code{\link{coo_draw}}}
 
-\item{nax}{a single or a range of PC axes}
+\item{nax}{the range of PCs to plot (1 to 99pc total variance by default)}
 
 \item{sd.r}{a single or a range of mean +/- sd values (eg: c(-1, 0, 1))}
 

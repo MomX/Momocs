@@ -4,14 +4,14 @@
 \alias{boxplot.PCA}
 \title{Boxplot on PCA objects}
 \usage{
-\method{boxplot}{PCA}(x, fac = NULL, nax = 1:3, ...)
+\method{boxplot}{PCA}(x, fac = NULL, nax, ...)
 }
 \arguments{
-\item{x}{an object of class "PCA", typically obtained with \link{PCA}}
+\item{x}{\code{PCA}, typically obtained with \link{PCA}}
 
 \item{fac}{factor, or a name or the column id from the $fac slot}
 
-\item{nax}{the range of PC to plot}
+\item{nax}{the range of PC to plot (1 to 99pc total variance by default)}
 
 \item{...}{useless here}
 }

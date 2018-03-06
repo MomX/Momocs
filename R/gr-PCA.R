@@ -10,7 +10,7 @@
 #'
 #' The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.
 #'
-#' @param x an object of class "PCA", typically obtained with \link{PCA}
+#' @param x `PCA`, typically obtained with [PCA]
 #' @param fac name or the column id from the $fac slot, or a formula combining colum names
 #' from the $fac slot (cf. examples). A factor or a numeric of the same length
 #' can also be passed on the fly.
@@ -433,58 +433,13 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     invisible(data.frame(x=xy[, 1], y=xy[, 2], fac=fac))
 }
 
-#' #' @describeIn plot.PCA
-#' #' @export
-#' mplot <- plot.PCA
-
-#' Plots a combination of the three first PCs
-#'
-#' Creates a 2 x 3 layout with, from top to bottom and form left to right: PC1-PC2,
-#' PC1-PC3, PC2-3, and the barplot of eigenvalues percentages.
-#' @param PCA a \link{PCA} object
-#' @param ... additional arguments to fed \link{plot.PCA}
-#' @rdname plot3.PCA
-#' @examples
-#' bot.f <- efourier(bot, 12)
-#' bot.p <- PCA(bot.f)
-#' plot3(bot.p) # no groups
-#' plot3(bot.p, 1) # groups
-#' plot3(bot.p, "type", pos.shp="circle") # all plot.PCA args should work
-#' @export
-plot3 <- function(PCA, ...){UseMethod("plot3")}
-#' @rdname plot3.PCA
-#' @export
-plot3.PCA <- function(PCA,  ... ){
-  op1 <- par(mfrow=c(2, 2))
-  on.exit(par(op1))
-  # The three plot.PCA plots (we also prepare the df)
-  df <- plot(PCA, xax=1, yax=2, title=paste0(substitute(PCA),": ", "PC1-PC2"), eigen=FALSE, ...)
-  plot(PCA, xax=2, yax=3, title=paste0(substitute(PCA),": ", "PC2-PC3"), eigen=FALSE, ...)
-  plot(PCA, xax=1, yax=3, title=paste0(substitute(PCA),": ", "PC1-PC3"), eigen=FALSE,  ...)
-  # The eigen value plot
-  op2 <- par(mar=c(3, 8, 4, 8), xpd=NA)
-  var <- PCA$sdev^2
-  pc <- 100*var/sum(var)
-  cols <- rep("grey80", 5)
-  cols[1:3] <- "grey40"
-  v <- pc[1:5]
-  bp <- barplot(v, col=cols, border=NA, axes=FALSE, main="Eigenvalues")
-  text(bp, v+2, labels = paste0(round(v, 1), "%"), cex=0.8)
-  axis(1, at = bp, labels=paste0("PC", 1:5), line = -1, tick = FALSE, cex.axis=0.8)
-  # we return a df
-  if (is.null(df$fac))
-    invisible(data.frame(x=PCA$x[, 1], y=PCA$x[, 2], z=PCA$x[, 3]))
-  else
-    invisible(data.frame(x=PCA$x[, 1], y=PCA$x[, 2], z=PCA$x[, 3], fac=df$fac))
-}
-
 # Boxplot ---------
 #' Boxplot on PCA objects
 #'
 # @method boxplot PCA
-#' @param x an object of class "PCA", typically obtained with \link{PCA}
+#' @param x `PCA`, typically obtained with [PCA]
 #' @param fac factor, or a name or the column id from the $fac slot
-#' @param nax the range of PC to plot
+#' @param nax the range of PC to plot (1 to 99pc total variance by default)
 #' @param ... useless here
 #' @return a ggplot object
 #' @examples
@@ -495,12 +450,20 @@ plot3.PCA <- function(PCA,  ... ){
 #' #p +  theme_minimal() + scale_fill_grey()
 #' #p + facet_wrap(~PC, scales = "free")
 #' @export
-boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
+boxplot.PCA <- function(x, fac=NULL, nax, ...){
   PCA <- x
+  if (missing(nax))
+    nax <- 1:scree_min(x)
   if (max(nax) > ncol(PCA$x)) nax <- 1:ncol(PCA$x)
   if (is.null(fac)) {
     df <- data.frame(PCA$x[, nax])
-    df <- melt(df, id.vars=ncol(df), variable.name="PC")
+    df <- df %>% seq_along %>%
+      lapply(function(i) data.frame(Var1=rownames(df),
+                                    Var2=colnames(df)[i],
+                                    value=df[,i])) %>%
+      do.call("rbind", .) %>%
+      `rownames<-`(NULL) %>%
+      `colnames<-`(c("score", "PC", "value"))
     gg <- ggplot(data=df, aes_string(x="PC", y="value")) +
       geom_boxplot() + labs(x=NULL, y="score")
     return(gg)
@@ -520,13 +483,21 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
       # fac provided, as column name or id
       if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
       fac <- factor(fac) # I love R
-      df <- data.frame(PCA$x[, nax], fac=fac)
-      df <- melt(df, id.vars=ncol(df), variable.name="PC")
+      df <- data.frame(PCA$x[, nax])
+      df <- df %>% seq_along %>%
+        lapply(function(i) data.frame(fac=fac,
+                                      Var1=rownames(df),
+                                      Var2=colnames(df)[i],
+                                      value=df[,i])) %>%
+        do.call("rbind", .) %>%
+        `rownames<-`(NULL) %>%
+        `colnames<-`(c("fac", "name", "PC", "value"))
       gg <- ggplot(data=df, aes_string(x="PC", y="value", fill="fac")) +
         geom_boxplot() + labs(x=NULL, y="score", fill=NULL)
     }
     return(gg)
-  }}
+  }
+}
 
 
 # PCcontrib ----------
@@ -534,8 +505,8 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
 #'
 #' Calculates and plots shape variation along Principal Component axes.
 #'
-#' @param PCA a \code{\link{PCA}} object
-#' @param nax a single or a range of PC axes
+#' @param PCA a `PCA` object
+#' @param nax the range of PCs to plot (1 to 99pc total variance by default)
 #' @param sd.r a single or a range of mean +/- sd values (eg: c(-1, 0, 1))
 #' @param gap for combined-Coe, an adjustment variable for gap between shapes. (bug)Default
 #' to 1 (whish should never superimpose shapes), reduce it to get a more compact plot.
@@ -551,17 +522,22 @@ boxplot.PCA <- function(x, fac=NULL, nax=1:3, ...){
 #' }
 #' @rdname PCcontrib
 #' @export
-PCcontrib <- function(PCA, ...){UseMethod("PCcontrib")}
+PCcontrib <- function(PCA, ...){
+  UseMethod("PCcontrib")
+}
+
 #' @rdname PCcontrib
 #' @export
 PCcontrib.PCA <-
   function(PCA,
-           nax=1:4,
+           nax,
            sd.r=c(-2, -1, -0.5, 0, 0.5, 1, 2),
            gap=1,
            ...){
     x <- PCA
     shp <- list()
+    if (missing(nax))
+      nax <- 1:scree_min(x)
     for (i in seq(along=nax)){
       sd.i <- sd(x$x[, nax[i]])
       pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
