@@ -9,12 +9,12 @@
   \itemize{
     \item cheap base biplots (aka cheapbabi): pipe-friendly base layers for biplots and shape drawing on cartesian coordinates. Is used to replace all multivariate plotters (eg `plot.PCA`), family pictures (eg `stack`, `panel`) and single shape plotters (eg `ldk_plot`, `coo_plot`). This strategy is faster, much more generic and will ease further development and maintenance.
     \item vignette for `cheapbabi`
+    \item release `reshape2`, `plyr` dependencies
     \item new `coo_*` methods: `coo_range` and `coo_range_enlarge`
     \item `Ntable` deprecated/splitted into of `plot_table` + `table`
     \item various minor bugs fixes, see GitHub
-    \item Deprecated `plot3.PCA` (will be replaced)
-    \item Deprecated `` now in...
-    \item `.Coo` methods for: ...
+    \item Deprecated `plot3.PCA` (will be replaced in further versions); `Ntable` splitted into of `plot_table` + `table`; `coo_tangle` now in `coo_angle_tangent`; `coo_theta3` now in `coo_angle_edges`;  `coo_angle_edge1` is now an internal (`.coo_angle_edge1).
+    \item `coo` function ported to methods and now supporting `.Coo` directly: `coo_angle_edges`, `coo_angle_tangent`, `coo_boundingbox`, `coo_calliper`, `coo_chull`, `coo_chull_onion`, `coo_circularity`, `coo_circularityharalick`, `coo_circularity_norm`, `coo_convexity`, `coo_dxy`, `coo_eccentricityboundingbox`, `coo_eccentricityeigen`, `coo_elongation`, `coo_intersect_angle`, `coo_intersect_direction`, `coo_intersect_segment`, `coo_perim`, `coo_perimcum`, `coo_perimpts`, `coo_rectangularity`, `coo_rectilinearity`, `coo_scalex`, `coo_scaley`, `coo_solidity`.
   }
 }
 
