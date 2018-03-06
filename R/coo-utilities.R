@@ -829,7 +829,7 @@ coo_slide.Coo <- function(coo, id, ldk) {
 #' bot %>%
 #'     slice(1:3) %>% # for the sake of speed
 #'     coo_center %>%
-#'     coo_intersect_segment(matrix(c(0, 0, 1000, 1000), ncol=2, byrow=T))
+#'     coo_intersect_segment(matrix(c(0, 0, 1000, 1000), ncol=2, byrow=TRUE))
 #' @export
 coo_intersect_segment <- function(coo, seg, center=TRUE){
   UseMethod("coo_intersect_segment")

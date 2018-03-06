@@ -35,7 +35,7 @@ coo \%>\% coo_intersect_segment(seg) \%T>\% print \%>\%
 bot \%>\%
     slice(1:3) \%>\% # for the sake of speed
     coo_center \%>\%
-    coo_intersect_segment(matrix(c(0, 0, 1000, 1000), ncol=2, byrow=T))
+    coo_intersect_segment(matrix(c(0, 0, 1000, 1000), ncol=2, byrow=TRUE))
 }
 \seealso{
 Other coo_ intersect: \code{\link{coo_intersect_angle}}
