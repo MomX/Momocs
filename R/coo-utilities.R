@@ -548,7 +548,7 @@ coo_alignminradius.default <- function(coo){
   id_minrad <- which.min(coo_centdist(coo))
   coo <- coo_slide(coo, id_minrad)
   m <- matrix(c(coo[1, ],  0, 0, 1, 0), nrow=3, byrow=TRUE)
-  th <- coo_angle_edge1(m)
+  th <- .coo_angle_edge1(m)
   coo_rotate(coo, -th)
 }
 
@@ -1474,9 +1474,8 @@ is_open <- function(coo) !is_closed(coo)
 #'
 #' @inheritParams coo_check
 #' @param thres numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)
-#' @return a single or a vector of \code{logical}. If \code{NA} are returned, they
-#' are produced by \link{coo_angle_edge1} and some coordinates are likely identical, at least
-#' for x or y.
+#' @return a single or a vector of \code{logical}. If \code{NA} are returned,
+#' some coordinates are likely identical, at least for x or y.
 #' @family coo_ utilities
 #' @examples
 #' bot[1] %>% is_equallyspacedradii
@@ -1499,7 +1498,7 @@ is_equallyspacedradii.default <- function(coo, thres=pi/90){
   res <- vector("numeric", nrow(coo))
   for (i in 1:nrow(coo)){
     res[i] <- rbind(coo[i, ], cent, coo1[i, ]) %>%
-      coo_angle_edge1("acos")
+      .coo_angle_edge1("acos")
   }
   sd(res) < thres
 }

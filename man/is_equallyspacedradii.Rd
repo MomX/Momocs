@@ -12,9 +12,8 @@ is_equallyspacedradii(coo, thres)
 \item{thres}{numeric a threshold (arbitrarily \code{pi/90}, eg 2 degrees, by default)}
 }
 \value{
-a single or a vector of \code{logical}. If \code{NA} are returned, they
-are produced by \link{coo_angle_edge1} and some coordinates are likely identical, at least
-for x or y.
+a single or a vector of \code{logical}. If \code{NA} are returned,
+some coordinates are likely identical, at least for x or y.
 }
 \description{
 Returns TRUE/FALSE whether the sd of angles between all successive
