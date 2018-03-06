@@ -258,6 +258,7 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
   tar <- fgProcrustes(ref, tol = tol, verbose = verbose)$rotated
   Coo2$coo <- a2l(tar)
   Coo2$coe <- a2m(l2a(Coo2$coo))
+  rownames(Coo2$coe) <- names(x)
   Coo2$method <- "fgProcrustes"
   names(Coo2$coo) <- names(Coo$coo)
   class(Coo2) <- c("LdkCoe", "Coe", class(Coo2))
