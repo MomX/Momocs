@@ -21,6 +21,9 @@ Calculates the elongation of a shape
 }
 \examples{
 coo_elongation(bot[1])
+# on Coo
+# for speed sake
+bot \%>\% slice(1:3) \%>\% coo_elongation
 }
 \seealso{
 Other coo_ descriptors: \code{\link{coo_angle_edge1}},

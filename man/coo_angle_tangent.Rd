@@ -2,27 +2,30 @@
 % Please edit documentation in R/coo-shapedescriptors.R
 \name{coo_angle_tangent}
 \alias{coo_angle_tangent}
+\alias{coo_angle_tangent.default}
+\alias{coo_angle_tangent.Coo}
 \alias{coo_tangle}
 \title{Calculates the tangent angle along the perimeter of a
 shape}
 \usage{
 coo_angle_tangent(coo)
 
+\method{coo_angle_tangent}{default}(coo)
+
+\method{coo_angle_tangent}{Coo}(coo)
+
 coo_tangle(coo)
 }
 \arguments{
-\item{coo}{a matrix of coordinates}
+\item{coo}{a matrix of coordinates or any \code{Coo}}
 }
 \value{
-a numeric, the tangent angle along the perimeter
+\code{numeric}, the tangent angle along the perimeter, or a
+\code{list} of those for \code{Coo}
 }
 \description{
 Calculated using complex numbers and returned in radians
 minus the first one (modulo 2*pi).
-}
-\note{
-\code{coo_tangle} is deprecated and will be removed
-in future releases.
 }
 \examples{
 b <- bot[1]
@@ -30,6 +33,9 @@ phi  <- coo_angle_tangent(b)
 phi2 <- coo_angle_tangent(coo_smooth(b, 2))
 plot(phi, type='l')
 plot(phi2, type='l', col='red') # ta is very sensible to noise
+
+# on Coo
+bot \%>\% coo_angle_tangent
 }
 \seealso{
 \link{tfourier}

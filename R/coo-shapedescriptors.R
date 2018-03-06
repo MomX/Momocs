@@ -243,11 +243,10 @@ coo_thetapts <- function(coo, method = c("atan2", "acos")[1]){
 #'
 #' Calculated using complex numbers and returned in radians
 #' minus the first one (modulo 2*pi).
-#' @param coo a matrix of coordinates
-#' @return a numeric, the tangent angle along the perimeter
+#' @param coo a matrix of coordinates or any `Coo`
+#' @return `numeric`, the tangent angle along the perimeter, or a
+#' `list` of those for `Coo`
 #' @seealso \link{tfourier}
-#' @note \code{coo_tangle} is deprecated and will be removed
-#' in future releases.
 #' @family coo_ descriptors
 #' @examples
 #' b <- bot[1]
@@ -255,9 +254,18 @@ coo_thetapts <- function(coo, method = c("atan2", "acos")[1]){
 #' phi2 <- coo_angle_tangent(coo_smooth(b, 2))
 #' plot(phi, type='l')
 #' plot(phi2, type='l', col='red') # ta is very sensible to noise
+#'
+#' # on Coo
+#' bot %>% coo_angle_tangent
 #' @rdname coo_angle_tangent
 #' @export
 coo_angle_tangent <- function(coo) {
+  UseMethod("coo_angle_tangent")
+}
+
+#' @rdname coo_angle_tangent
+#' @export
+coo_angle_tangent.default <- function(coo) {
   p <- nrow(coo)
   tangvect <- coo - rbind(coo[p, ], coo[-p, ])
   tet1 <- Arg(complex(real = tangvect[, 1], imaginary = tangvect[,
@@ -266,6 +274,12 @@ coo_angle_tangent <- function(coo) {
   t1 <- seq(0, 2 * pi, length = (p + 1))[1:p]
   phi <- (tet1 - tet0 - t1)%%(2 * pi)
   return(phi)
+}
+
+#' @rdname coo_angle_tangent
+#' @export
+coo_angle_tangent.Coo <- function(coo) {
+  lapply(coo$coo, coo_angle_tangent)
 }
 
 #' @rdname coo_angle_tangent
@@ -535,11 +549,24 @@ coo_eccentricityboundingbox.Coo <- function(coo) {
 #' @family coo_ descriptors
 #' @examples
 #' coo_elongation(bot[1])
+#' # on Coo
+#' # for speed sake
+#' bot %>% slice(1:3) %>% coo_elongation
 #' @export
 coo_elongation <- function(coo) {
+  UseMethod("coo_elongation")
+}
+
+#' @export
+coo_elongation.default <- function(coo) {
   coo <- coo_check(coo)
   lw <- coo_lw(coo)
   return(1 - lw[2]/lw[1])
+}
+
+#' @export
+coo_elongation.Coo <- function(coo) {
+  lapply(coo$coo, coo_elongation)
 }
 
 # coo_rectangularity -----
