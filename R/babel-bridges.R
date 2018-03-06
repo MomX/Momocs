@@ -217,17 +217,22 @@ as_df.Coo <- function(x){
 #' @rdname as_df
 #' @export
 as_df.Coe <- function(x){
-  df_coe <- melt(x$coe)
-  colnames(df_coe) <- c("id", "coefficient", "value")
-  # if a $fac is present
-  if (is.fac(x)) {
-    df_fac <- as_data_frame(x$fac)
-    n <- group_by(df_coe, id) %>% summarize(n = n())
-    i <- 1:nrow(df_fac)
-    i_n <- rep(i, times=n$n)
-    df_coe <- dplyr::bind_cols(df_coe, df_fac[i_n, ])
+  # shortcut
+  coe <- x$coe
+  # ala tidyr::gather
+  res <- lapply(1:nrow(coe),
+                function(i) data.frame(id=rownames(coe)[i],
+                                       coefficient=colnames(coe),
+                                       value=as.numeric(coe[i, ])))
+  # if there is a fac
+  if (is_fac(x)){
+  # create a list of data.frames, each row repeated (number of coefficients) times
+  fac <- lapply(seq_along(res), function(i) x$fac[rep(i, ncol(coe)),, drop=FALSE])
+  # and cbind them
+  res <- lapply(seq_along(res), function(i) dplyr::bind_cols(res[[i]], fac[[i]]))
   }
-  df_coe
+  #rbind them all and return
+  do.call("rbind", res) %>% return()
 }
 
 #' @rdname as_df

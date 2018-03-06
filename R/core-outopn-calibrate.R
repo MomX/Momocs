@@ -323,7 +323,7 @@ calibrate_deviations.Out <-
       t <- FALSE
     }
     # the core loops that will calculate deviations
-    for (ind in seq(along = id)) {
+    for (ind in seq_along(id)) {
       coo <- Coo$coo[[id[ind]]] #Coo[id]?
       # below, the best possible fit
       # coo_best <- method.i(method(coo, nb.h = nb.h.best), nb.pts = nb.pts)
@@ -350,13 +350,24 @@ calibrate_deviations.Out <-
       m <- apply(res, 1:2, median)
       d <- apply(res, 1:2, sd)
       # we prepare a df
-      xx <- melt(m)
-      xx <- cbind(xx, melt(d)$value)
-      xx$Var2 <- as.numeric(xx$Var2)
+      # we prepare a df
+      m %>% as.data.frame() %>% seq_along %>%
+        lapply(function(i) data.frame(Var1=rownames(m),
+                                      Var2=colnames(m)[i],
+                                      value=m[,i])) %>%
+        do.call("rbind", .) %>%
+        cbind(as.numeric(d)) -> xx
       colnames(xx) <- c("harm", "pt", "med", "sd")
+      # hideous but avoid the aes_string problem fro ribbon todo
+      xx$mmsd <- xx$med - xx$sd
+      xx$mpsd <- xx$med + xx$sd
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
       # hideous but avoid the aes_string problem fro ribbon
       xx$mmsd <- xx$med - xx$sd
       xx$mpsd <- xx$med + xx$sd
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
       # we ggplot
       gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
         geom_ribbon(aes_string(ymin="mmsd", ymax="mpsd",
@@ -369,9 +380,14 @@ calibrate_deviations.Out <-
       m <- res[, , 1]
       d <- NULL
       # we prepare a df
-      xx <- melt(m)
-      xx$Var2 <- as.numeric(xx$Var2)
+      xx <- m %>% as.data.frame() %>% seq_along %>%
+        lapply(function(i) data.frame(Var1=rownames(m),
+                                      Var2=colnames(m)[i],
+                                      value=m[,i])) %>%
+        do.call("rbind", .)
       colnames(xx) <- c("harm", "pt", "med")
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
       gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
         geom_line() +
         labs(x="Points along the outline", y=y.title, col=NULL) +
@@ -493,12 +509,20 @@ calibrate_deviations.Opn<-
       m <- apply(res, 1:2, median)
       d <- apply(res, 1:2, sd)
       # we prepare a df
-      xx <- melt(m)
-      xx <- cbind(xx, melt(d)$value)
-      xx$Var2 <- as.numeric(xx$Var2)
+      # we prepare a df
+      m %>% as.data.frame() %>% seq_along %>%
+        lapply(function(i) data.frame(Var1=rownames(m),
+                                      Var2=colnames(m)[i],
+                                      value=m[,i])) %>%
+        do.call("rbind", .) %>%
+        cbind(as.numeric(d)) -> xx
       colnames(xx) <- c("harm", "pt", "med", "sd")
-
       # hideous but avoid the aes_string problem fro ribbon
+      xx$mmsd <- xx$med - xx$sd
+      xx$mpsd <- xx$med + xx$sd
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
+      # hideous but avoid the aes_string problem fro ribbon todo
       xx$mmsd <- xx$med - xx$sd
       xx$mpsd <- xx$med + xx$sd
       # we ggplot
@@ -513,13 +537,18 @@ calibrate_deviations.Opn<-
       m <- res[, , 1]
       d <- NULL
       # we prepare a df
-      xx <- melt(m)
-      xx$Var2 <- as.numeric(xx$Var2)
-      # if (p==3){
-      colnames(xx) <- c("harm", "pt", "med")
-      #       } else {
-      #         colnames(xx) <- c("deg", "pt", "med")
-      #       }
+      # we prepare a df
+      m %>% as.data.frame() %>% seq_along %>%
+        lapply(function(i) data.frame(Var1=rownames(m),
+                                      Var2=colnames(m)[i],
+                                      value=m[,i])) %>%
+        do.call("rbind", .)  -> xx
+      colnames(xx) <- c("harm", "pt", "med", "sd")
+      # hideous but avoid the aes_string problem fro ribbon
+      xx$mmsd <- xx$med - xx$sd
+      xx$mpsd <- xx$med + xx$sd
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
       gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
         geom_line() +
         labs(x="Points along the open outline", y=y.title, col=NULL) +
@@ -628,8 +657,13 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x)
   res <- t(apply(res, 1, function(x) cumsum(x) / sum(x))) * 100
   # we ggplot
   h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmectics
-  xx <- melt(res)
-  colnames(xx) <- c("shp", "harm", "hp")
+  res %>% as.data.frame() %>% seq_along %>%
+    lapply(function(i) data.frame(Var1=rownames(res),
+                                  Var2=colnames(res)[i],
+                                  value=res[,i])) %>%
+    do.call("rbind", .) %>%
+    `rownames<-`(NULL) %>%
+    `colnames<-`(c("shp", "harm", "hp")) -> xx
   if (length(id) > 2) {
     gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
       labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
@@ -699,8 +733,13 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
   res <- t(apply(res, 1, function(x) cumsum(x) / sum(x))) * 100
   # we ggplot
   h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmetics
-  xx <- melt(res)
-  colnames(xx) <- c("shp", "harm", "hp")
+  res %>% as.data.frame() %>% seq_along %>%
+    lapply(function(i) data.frame(Var1=rownames(res),
+                                  Var2=colnames(res)[i],
+                                  value=res[,i])) %>%
+    do.call("rbind", .) %>%
+    `rownames<-`(NULL) %>%
+    `colnames<-`(c("shp", "harm", "hp")) -> xx
   gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
     labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
     coord_cartesian(xlim=c(0.5, h_display+0.5))
@@ -776,8 +815,13 @@ calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
 
   # we ggplot
   h_display <- which(apply(res, 2, median) >= 0.99)[1] + 2 # cosmectics
-  xx <- melt(res)
-  colnames(xx) <- c("shp", "degree", "r2")
+  res %>% as.data.frame() %>% seq_along %>%
+    lapply(function(i) data.frame(Var1=rownames(res),
+                                  Var2=colnames(res)[i],
+                                  value=res[,i])) %>%
+    do.call("rbind", .) %>%
+    `rownames<-`(NULL) %>%
+    `colnames<-`(c("shp", "degree", "r2")) -> xx
   gg <- ggplot(xx, aes_string(x="degree", y="r2")) + geom_boxplot() +
     labs(x="Degree", y="r2") +
     coord_cartesian(xlim=c(0.5, h_display+0.5))
