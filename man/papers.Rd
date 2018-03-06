@@ -22,7 +22,7 @@ paper_dots(coo, pch = 20, n = 50, col = "#7F7F7F")
 \arguments{
 \item{coo}{a single shape or any \link{Coo} object}
 
-\item{...}{more arguments to feed \code{plot} function within each \code{paper} function}
+\item{...}{more arguments to feed the plotting function within each \code{paper} function}
 
 \item{grid}{\code{numeric} of length 2 to (roughly) specify the
 number of majors lines, and the number of minor lines within two major ones}

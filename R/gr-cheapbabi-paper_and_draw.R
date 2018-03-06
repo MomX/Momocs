@@ -34,11 +34,9 @@ this_dispatch <- function(f, this){
 #' shape plots using the cheapbabi approach. See examples and vignettes.
 #'
 #' @param coo a single shape or any [Coo] object
-#' @param ... more arguments to feed `plot` function within each `paper` function
+#' @param ... more arguments to feed the plotting function within each `paper` function
 #' @note This approach will (soon) replace [coo_plot] and friends in further versions.
 #' All comments are welcome.
-#'
-#' @details `paper` is `paper_white` `%>%` `draw_axes`
 #'
 #' @family cheapbabi
 #' @name papers
