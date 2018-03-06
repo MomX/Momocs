@@ -814,7 +814,7 @@ coo_slide.Coo <- function(coo, id, ldk) {
 #' @param seg a 2x2 \code{matrix} defining the starting and ending points;
 #' or a list or a numeric of length 4.
 #' @param center \code{logical} whether to center the shape (TRUE by default)
-#' @return \code{numeric} the id of the nearest point. See examples.
+#' @return \code{numeric} the id of the nearest point, a `list` for `Coo`. See examples.
 #' @family coo_ intersect
 #' @examples
 #' coo <- bot[1] %>% coo_center %>% coo_scale
@@ -824,8 +824,19 @@ coo_slide.Coo <- function(coo, id, ldk) {
 #' coo %>% coo_intersect_segment(seg) %T>% print %>%
 #' # prints on the console and draw it
 #'    coo[., , drop=FALSE] %>% points(col="red")
+#'
+#' # on Coo
+#' bot %>%
+#'     slice(1:3) %>% # for the sake of speed
+#'     coo_center %>%
+#'     coo_intersect_segment(matrix(c(0, 0, 1000, 1000), ncol=2, byrow=T))
 #' @export
 coo_intersect_segment <- function(coo, seg, center=TRUE){
+  UseMethod("coo_intersect_segment")
+}
+
+#' @export
+coo_intersect_segment.default <- function(coo, seg, center=TRUE){
   # in most cases, centering first is useful
   if (center)
     coo <- coo_center(coo)
@@ -856,6 +867,11 @@ coo_intersect_segment <- function(coo, seg, center=TRUE){
   edm_nearest(inter_xy[2,, drop=FALSE], coo, full=TRUE)$pos
 }
 
+#' @export
+coo_intersect_segment.Coo <- function(coo, seg, center=TRUE){
+  lapply(coo$coo, coo_intersect_segment, seg=seg, center=center)
+}
+
 #' Nearest intersection between a shape and a segment specified with an angle
 #'
 #' Take a shape, and segment starting on the centroid and having a particular angle, which point is the nearest
@@ -866,7 +882,7 @@ coo_intersect_segment <- function(coo, seg, center=TRUE){
 #' @note shapes are always centered before this operation. If you need a simple
 #' direction such as \code{(down, left, up, right)ward}, then use \link{coo_intersect_direction} which
 #' does not need to find an intersection but relies on coordinates and is about 1000.
-#' @return \code{numeric} the id of the nearest point. See examples.
+#' @return \code{numeric} the id of the nearest point or a `list` for `Coo` See examples.
 #' @family coo_ intersect
 #' @examples
 #' coo <- bot[1] %>% coo_center %>% coo_scale
@@ -883,8 +899,14 @@ coo_intersect_segment <- function(coo, seg, center=TRUE){
 #'  coo_intersect_direction("down") %>%
 #'  coo[.,, drop=FALSE] %>% points(col="orange")
 #'
+
 #' @export
 coo_intersect_angle <- function(coo, angle=0){
+  UseMethod("coo_intersect_angle")
+}
+
+#' @export
+coo_intersect_angle.default <- function(coo, angle=0){
   # only defined on centered coo
   coo <- coo_center(coo)
   origin <- matrix(0, nrow=1, ncol=2)
@@ -899,36 +921,59 @@ coo_intersect_angle <- function(coo, angle=0){
     coo_intersect_segment(coo, ., center=TRUE)
 }
 
+#' @export
+coo_intersect_angle.Coo <-
+  function(coo, angle=0){
+    lapply(coo$coo, coo_intersect_angle, angle=angle)
+  }
+
 #' @rdname coo_intersect_angle
 #' @export
-coo_intersect_direction <- function(coo,
-                                    direction=c("down", "left", "up", "right")[4]){
-
-  coo <- coo_check(coo)
-
-  if (direction == "down") {
-    x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
-    id0 <- x0.ed[which(coo[x0.ed, 2] < 0)[1]]
+coo_intersect_direction <-
+  function(coo,
+           direction=c("down", "left", "up", "right")[4]){
+    UseMethod("coo_intersect_direction")
   }
 
-  if (direction == "left") {
-    y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
-    id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
+
+#' @rdname coo_intersect_angle
+#' @export
+coo_intersect_direction.default <-
+  function(coo,
+           direction=c("down", "left", "up", "right")[4]){
+
+    coo <- coo_check(coo)
+
+    if (direction == "down") {
+      x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+      id0 <- x0.ed[which(coo[x0.ed, 2] < 0)[1]]
+    }
+
+    if (direction == "left") {
+      y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+      id0 <- y0.ed[which(coo[y0.ed, 1] < 0)[1]]
+    }
+
+    if (direction == "up") {
+      x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
+      id0 <- x0.ed[which(coo[x0.ed, 2] > 0)[1]]
+    }
+
+    if (direction == "right") {
+      y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
+      id0 <- y0.ed[which(coo[y0.ed, 1] > 0)[1]]
+    }
+    # return the id
+    id0
   }
 
-  if (direction == "up") {
-    x0.ed <- order(abs(coo[, 1]), decreasing = FALSE)
-    id0 <- x0.ed[which(coo[x0.ed, 2] > 0)[1]]
+#' @rdname coo_intersect_angle
+#' @export
+coo_intersect_direction.Coo <-
+  function(coo,
+           direction=c("down", "left", "up", "right")[4]){
+    lapply(coo$coo, coo_intersect_direction, direction=direction)
   }
-
-  if (direction == "right") {
-    y0.ed <- order(abs(coo[, 2]), decreasing = FALSE)
-    id0 <- y0.ed[which(coo[y0.ed, 1] > 0)[1]]
-  }
-  # return the id
-  id0
-}
-
 
 # coo_slidedirection --------
 #' Slides coordinates in a particular direction
@@ -2302,57 +2347,101 @@ coo_centdist.Coo <- function(coo){
 }
 
 # coo_perimpts --------------
-#' Calculates the chordal distance along a shape.
+#' Calculates perimeter and variations
 #'
-#' Calculates the euclidean distance between every points of a shape for coo_perimpts.
-#' The cumulative sum for coo_perimcum
-#' @param coo \code{matrix} of (x; y) coordinates.
-#' @return \code{numeric} the distance between every point.
+#' `coo_perim` calculates the perimeter;
+#' `coo_perimpts` calculates the euclidean distance between every points of a shape;
+#'`coo_perimcum` does the same and calculates and cumulative sum.
+#' @param coo \code{matrix} of (x; y) coordinates or any `Coo`
+#' @return \code{numeric} the distance between every point or
+#' a `list` of those.
 #' @examples
-#' b <- coo_sample(bot[1], 24)
-#' coo_perimpts(b)
+#' # for speed sake
+#' b1 <- coo_sample(bot[1], 12)
+#' b5 <- bot %>% slice(1:5) %>% coo_sample(12)
+#'
+#' # coo_perim
+#' coo_perim(b1)
+#' coo_perim(b5)
+#'
+#' # coo_perimpts
+#' coo_perimpts(b1)
+#' b5 %>% coo_perimpts()
+#'
+#' # coo_perimcum
+#' b1 %>% coo_perimcum()
+#' b5 %>% coo_perimcum()
 #' @family perimeter functions
 #' @family coo_ utilities
+#' @rdname coo_perim
+#' @name coo_perim
 #' @export
 coo_perimpts <- function(coo) {
+  UseMethod("coo_perimpts")
+}
+
+#' @rdname coo_perim
+#' @name coo_perim
+#' @export
+coo_perimpts.default <- function(coo) {
   coo <- coo_check(coo)
   n <- nrow(coo)
   d <- sqrt(apply((coo - coo_slide(coo, n))^2, 1, sum))[-1]
   return(d)
 }
 
-# coo_perimcum --------------
-#' Calculates the cumulative chordal distance along a shape.
-#'
-#' Just a wrapper for \code{cumsum(coo_perimpts)}. See \link{coo_perimpts}.
-#' @param coo a \code{matrix} of (x; y) coordinates.
-#' @return \code{numeric} the cumulate sum of chrodal distances
-#' @examples
-#' b <- coo_sample(bot[1], 24)
-#' coo_perimcum(b)
-#' @family perimeter functions
-#' @family coo_ utilities
+#' @rdname coo_perim
+#' @name coo_perim
+#' @export
+coo_perimpts.Coo <- function(coo) {
+  lapply(coo$coo, coo_perimpts)
+}
+
+#' @rdname coo_perim
+#' @name coo_perim
 #' @export
 coo_perimcum <- function(coo) {
+  UseMethod("coo_perimcum")
+}
+
+#' @rdname coo_perim
+#' @name coo_perim
+#' @export
+coo_perimcum.default <- function(coo) {
   coo <- coo_check(coo)
   d <- cumsum(sqrt(apply((coo - rbind(coo[1, ], coo[-(dim(coo)[1]),
                                                     ]))^2, 1, sum)))
   return(d)
 }
 
-# coo_perim -----------------
-#' Calculates the perimeter
-#' @param coo a \code{matrix} of (x; y) coordinates.
-#' @return \code{numeric}, the perimeter.
-#' @examples
-#' coo_perim(bot[1])
-#' hist(sapply(bot$coo, coo_perim), breaks=10)
-#' @family perimeter functions
-#' @family coo_ utilities
+#' @rdname coo_perim
+#' @name coo_perim
+#' @export
+coo_perimcum.Coo <- function(coo) {
+  lapply(coo$coo, coo_perimcum)
+}
+
+#' @rdname coo_perim
+#' @name coo_perim
 #' @export
 coo_perim <- function(coo) {
+  UseMethod("coo_perim")
+}
+
+#' @rdname coo_perim
+#' @name coo_perim
+#' @export
+coo_perim.default <- function(coo) {
   return(sum(coo_perimpts(coo)))
 }
+
+#' @rdname coo_perim
+#' @name coo_perim
+#' @export
+coo_perim.Coo <- function(coo) {
+  lapply(coo$coo, coo_perim)
+}
+
 
 # coo_calliper --------------
 #' Calculates the calliper length

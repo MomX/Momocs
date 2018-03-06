@@ -2,27 +2,72 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_perim}
 \alias{coo_perim}
-\title{Calculates the perimeter}
+\alias{coo_perimpts}
+\alias{coo_perim}
+\alias{coo_perimpts.default}
+\alias{coo_perim}
+\alias{coo_perimpts.Coo}
+\alias{coo_perim}
+\alias{coo_perimcum}
+\alias{coo_perim}
+\alias{coo_perimcum.default}
+\alias{coo_perim}
+\alias{coo_perimcum.Coo}
+\alias{coo_perim}
+\alias{coo_perim}
+\alias{coo_perim.default}
+\alias{coo_perim}
+\alias{coo_perim.Coo}
+\title{Calculates perimeter and variations}
 \usage{
+coo_perimpts(coo)
+
+\method{coo_perimpts}{default}(coo)
+
+\method{coo_perimpts}{Coo}(coo)
+
+coo_perimcum(coo)
+
+\method{coo_perimcum}{default}(coo)
+
+\method{coo_perimcum}{Coo}(coo)
+
 coo_perim(coo)
+
+\method{coo_perim}{default}(coo)
+
+\method{coo_perim}{Coo}(coo)
 }
 \arguments{
-\item{coo}{a \code{matrix} of (x; y) coordinates.}
+\item{coo}{\code{matrix} of (x; y) coordinates or any \code{Coo}}
 }
 \value{
-\code{numeric}, the perimeter.
+\code{numeric} the distance between every point or
+a \code{list} of those.
 }
 \description{
-Calculates the perimeter
+\code{coo_perim} calculates the perimeter;
+\code{coo_perimpts} calculates the euclidean distance between every points of a shape;
+\code{coo_perimcum} does the same and calculates and cumulative sum.
 }
 \examples{
-coo_perim(bot[1])
-hist(sapply(bot$coo, coo_perim), breaks=10)
+# for speed sake
+b1 <- coo_sample(bot[1], 12)
+b5 <- bot \%>\% slice(1:5) \%>\% coo_sample(12)
+
+# coo_perim
+coo_perim(b1)
+coo_perim(b5)
+
+# coo_perimpts
+coo_perimpts(b1)
+b5 \%>\% coo_perimpts()
+
+# coo_perimcum
+b1 \%>\% coo_perimcum()
+b5 \%>\% coo_perimcum()
 }
 \seealso{
-Other perimeter functions: \code{\link{coo_perimcum}},
-  \code{\link{coo_perimpts}}
-
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},
@@ -36,7 +81,6 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_force2close}},
   \code{\link{coo_interpolate}}, \code{\link{coo_jitter}},
   \code{\link{coo_left}}, \code{\link{coo_nb}},
-  \code{\link{coo_perimcum}}, \code{\link{coo_perimpts}},
   \code{\link{coo_rev}}, \code{\link{coo_right}},
   \code{\link{coo_rotatecenter}}, \code{\link{coo_rotate}},
   \code{\link{coo_sample_prop}},

@@ -3,11 +3,19 @@
 \name{coo_intersect_angle}
 \alias{coo_intersect_angle}
 \alias{coo_intersect_direction}
+\alias{coo_intersect_direction.default}
+\alias{coo_intersect_direction.Coo}
 \title{Nearest intersection between a shape and a segment specified with an angle}
 \usage{
 coo_intersect_angle(coo, angle = 0)
 
 coo_intersect_direction(coo, direction = c("down", "left", "up", "right")[4])
+
+\method{coo_intersect_direction}{default}(coo, direction = c("down", "left",
+  "up", "right")[4])
+
+\method{coo_intersect_direction}{Coo}(coo, direction = c("down", "left", "up",
+  "right")[4])
 }
 \arguments{
 \item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
@@ -17,7 +25,7 @@ coo_intersect_direction(coo, direction = c("down", "left", "up", "right")[4])
 \item{direction}{\code{character} one of \code{"down", "left", "up", "right"} ("right" by default)}
 }
 \value{
-\code{numeric} the id of the nearest point. See examples.
+\code{numeric} the id of the nearest point or a \code{list} for \code{Coo} See examples.
 }
 \description{
 Take a shape, and segment starting on the centroid and having a particular angle, which point is the nearest

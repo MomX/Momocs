@@ -15,7 +15,7 @@ or a list or a numeric of length 4.}
 \item{center}{\code{logical} whether to center the shape (TRUE by default)}
 }
 \value{
-\code{numeric} the id of the nearest point. See examples.
+\code{numeric} the id of the nearest point, a \code{list} for \code{Coo}. See examples.
 }
 \description{
 Take a shape, and an intersecting segment, which point is the nearest
@@ -30,6 +30,12 @@ segments(seg[1], seg[2], seg[3], seg[4])
 coo \%>\% coo_intersect_segment(seg) \%T>\% print \%>\%
 # prints on the console and draw it
    coo[., , drop=FALSE] \%>\% points(col="red")
+
+# on Coo
+bot \%>\%
+    slice(1:3) \%>\% # for the sake of speed
+    coo_center \%>\%
+    coo_intersect_segment(matrix(c(0, 0, 1000, 1000), ncol=2, byrow=T))
 }
 \seealso{
 Other coo_ intersect: \code{\link{coo_intersect_angle}}
