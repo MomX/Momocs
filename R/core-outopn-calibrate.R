@@ -66,7 +66,7 @@ calibrate_reconstructions.Out <-
     }
     # we prepare the plot
     names(res) <- range
-    coos <- ldply(res, data.frame)
+    coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>% do.call("rbind", .)
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- method_i(method(coo, nb.h = max.h))
@@ -150,7 +150,7 @@ calibrate_reconstructions.Opn <-
 
     # we prepare the plot
     names(res) <- range
-    coos <- ldply(res, data.frame)
+    coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>% do.call("rbind", .)
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- res[[length(res)]]

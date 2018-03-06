@@ -56,7 +56,6 @@ magrittr::`%T>%`
 #' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 #' @import ape
-#' @importFrom plyr ldply ddply
 #' @import dplyr
 #' @import sp
 #' @import reshape2

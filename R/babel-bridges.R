@@ -201,7 +201,7 @@ as_df <- function(x){
 #' @rdname as_df
 #' @export
 as_df.Coo <- function(x){
-  df_coo <- plyr::ldply(x$coo, data.frame)
+  df_coo <- lapply(seq_along(x$coo), function(i) data.frame(names(x)[i], x$coo[[i]])) %>% do.call("rbind", .)
   colnames(df_coo) <- c("id", "x", "y")
   # if a $fac is present
   if (is.fac(x)) {
