@@ -201,17 +201,20 @@ as_df <- function(x){
 #' @rdname as_df
 #' @export
 as_df.Coo <- function(x){
-  df_coo <- lapply(seq_along(x$coo), function(i) data.frame(names(x)[i], x$coo[[i]])) %>% do.call("rbind", .)
-  colnames(df_coo) <- c("id", "x", "y")
-  # if a $fac is present
-  if (is.fac(x)) {
-    df_fac <- as_data_frame(x$fac)
-    n <- group_by(df_coo, id) %>% summarize(n = n())
-    i <- 1:nrow(df_fac)
-    i_n <- rep(i, times=n$n)
-    df_coo <- bind_cols(df_coo, df_fac[i_n, ])
+  res <- lapply(seq_along(x$coo),
+                function(i) data.frame(id=names(x$coo)[i],
+                                       x=x$coo[[i]][, 1],
+                                       y=x$coo[[i]][, 2]))
+
+  # if there is a fac
+  if (is_fac(x)){
+    # create a list of data.frames, each row repeated (number of coefficients) times
+    fac <- lapply(seq_along(res), function(i) x$fac[rep(i, nrow(res[[i]])),, drop=FALSE])
+    # and cbind them
+    res <- lapply(seq_along(res), function(i) dplyr::bind_cols(res[[i]], fac[[i]]))
   }
-  df_coo
+  #rbind them all and return
+  do.call("rbind", res) %>% return()
 }
 
 #' @rdname as_df
