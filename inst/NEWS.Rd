@@ -12,6 +12,9 @@
     \item new `coo_*` methods: `coo_range` and `coo_range_enlarge`
     \item `Ntable` deprecated/splitted into of `plot_table` + `table`
     \item various minor bugs fixes, see GitHub
+    \item Deprecated `plot3.PCA` (will be replaced)
+    \item Deprecated `` now in...
+    \item `.Coo` methods for: ...
   }
 }
 
