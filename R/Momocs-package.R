@@ -58,7 +58,6 @@ magrittr::`%T>%`
 #' @import ape
 #' @import dplyr
 #' @import sp
-#' @import reshape2
 #' @import ggplot2
 #' @importFrom geometry delaunayn convhulln
 #' @importFrom geomorph gpagen
