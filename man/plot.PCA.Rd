@@ -26,7 +26,7 @@
   title = substitute(x), box = TRUE, old.par = TRUE, ...)
 }
 \arguments{
-\item{x}{an object of class "PCA", typically obtained with \link{PCA}}
+\item{x}{\code{PCA}, typically obtained with \link{PCA}}
 
 \item{fac}{name or the column id from the $fac slot, or a formula combining colum names
 from the $fac slot (cf. examples). A factor or a numeric of the same length
