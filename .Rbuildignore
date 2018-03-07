@@ -7,6 +7,8 @@ NEWS.md
 ^\.Rproj\.user$
 ^\.travis\.yml$
 update.R
+build_doc.R
+_pkgdown.yaml
 README.md
 ^cran-comments\.md$
 ^revdep$
