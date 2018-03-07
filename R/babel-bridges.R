@@ -243,7 +243,7 @@ as_df.Coe <- function(x){
 as_df.TraCoe <- function(x){
   df_coe <- as.data.frame(x$coe)
   # if a $fac is present
-  if (is.fac(x)) {
+  if (is_fac(x)) {
     dplyr::bind_cols(x$fac, df_coe)
   } else {
     df_coe

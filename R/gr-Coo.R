@@ -154,7 +154,7 @@ stack.Coo <-
     for (i in 1:length(Coo)) {
       coo_draw(Coo$coo[[i]], col = cols[i], border = borders[i],
                points = points, first.point = TRUE, centroid = centroid)
-      if (ldk & is.ldk(Coo)) {
+      if (ldk & is_ldk(Coo)) {
         points(ldks[[i]][, 1], ldks[[i]][ ,2], pch = ldk_pch,
                col = ldk_col, cex = ldk_cex)
       }
@@ -192,7 +192,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
     abline(h = 0, v = 0, col = "grey80", lty = 2)
   }
   # semilandmarks lines
-  if (slidings & is.slidings(Coo)){
+  if (slidings & is_slidings(Coo)){
     sl <- get_slidings(Coo)
     for (i in 1:length(sl)) {
       lapply(sl[[i]], lines, col=col_alpha("#000000", 0.9))
@@ -205,7 +205,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   # }
   lapply(get_ldk(Coo), points, pch = ldk_pch, col = ldk_col, cex = ldk_cex)
   # semilandmarks
-  # if (is.slidings(Coo)){
+  # if (is_slidings(Coo)){
   #   cur_binded <- get_cur_binded(Coo)
   #   for (i in 1:length(Coo)) {
   #     points(cur_binded[[i]], pch = cur_pch, col = ldk_col, cex = ldk_cex*0.25)
@@ -228,7 +228,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
       ldk_chull(A, col = meanshape_col)
     }
     if (ldk_links | missing(ldk_links))  {
-      if (is.links(Coo))
+      if (is_links(Coo))
         ldk_links(mshapes(A), Coo$links, col=ldk_col)
     }
     if (ldk_labels) {
@@ -453,7 +453,7 @@ panel.Ldk <- function(x, cols, borders, fac,
   ### quick and dirty patch for slidings, links, etc.
 
   # links
-  if (is.links(Coo)){
+  if (is_links(Coo)){
     links <- Coo$links
     ldk_all <- get_ldk(Coo)
     for (i in seq_along(Coo)){
@@ -467,7 +467,7 @@ panel.Ldk <- function(x, cols, borders, fac,
   }
 
   # slidings
-  if (is.slidings(Coo)){
+  if (is_slidings(Coo)){
     slidings_all <- get_slidings(Coo)
     for (i in seq_along(slidings_all))
       for (j in seq_along(slidings_all[[i]]))

@@ -34,7 +34,7 @@ validate.Coo <- function(Coo){
   n <- length(Coo$coo)
 
   # checks fac
-  if (is.fac(Coo)) {
+  if (is_fac(Coo)) {
     fac <- Coo$fac
     .check(is.data.frame(fac),
            "$fac must be a data.frame")
@@ -43,7 +43,7 @@ validate.Coo <- function(Coo){
   }
 
   # checks ldk if any
-  if (is.ldk(Coo)){
+  if (is_ldk(Coo)){
     ldk <- Coo$ldk
     .check(identical(length(ldk), n),
            "the number of $ldk must equal the number of shapes")
@@ -54,12 +54,12 @@ validate.Coo <- function(Coo){
   }
 
   # ldk
-  if (is.Ldk(Coo))
+  if (is_Ldk(Coo))
     .check(length(unique(coo_nb(Coo)))==1,
            "number of coordinates must be the same for Ldk")
 
   #checks slidings if any
-  if (is.slidings(Coo)){
+  if (is_slidings(Coo)){
     .check(is.matrix(Coo$slidings),
            "slidings must be a matrix")
     .check(ncol(Coo$slidings)==3,

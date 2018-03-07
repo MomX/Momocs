@@ -234,7 +234,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
     ty <- t2y - t1y
     rx <- r2x - r1x
     ry <- r2y - r1y
-    vi <- vecs_param(rx, ry, tx, ty)
+    vi <- .vecs_param(rx, ry, tx, ty)
     coo_i <- Coo2$coo[[i]]
     coo_i <- coo_trans(coo_i, t[1] - t1x, t[2] - t1y)
     coo_i <- coo_i/vi$r.norms
@@ -251,7 +251,7 @@ fgProcrustes.Opn <- fgProcrustes.Out
 #' @export
 fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
   # sliding support, todo
-  # if (is.slidings(x))
+  # if (is_slidings(x))
   #   x %<>% get_curcoo_binded()
   Coo2 <- Coo <- x
   ref <- l2a(Coo2$coo)
@@ -263,8 +263,8 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
   names(Coo2$coo) <- names(Coo$coo)
   class(Coo2) <- c("LdkCoe", "Coe", class(Coo2))
   Coo2$cuts <- ncol(Coo2$coe)
-  #we reseperate coo and cur
-  # if (is.slidings(x)){
+  #we reseparate coo and cur
+  # if (is_slidings(x)){
   #   coos <- lapply(Coo2$coo, m2ll, Coo2$nb_cur)
   #   Coo2$coo <- lapply(coos, "[[", 1)
   #   Coo2$cur <- lapply(coos, "[", -1)
@@ -300,7 +300,7 @@ fgsProcrustes.default <- function(x){
 #' @export
 fgsProcrustes.Ldk <- function(x){
   x2 <- x <- validate(x)
-  .check(is.slidings(x),
+  .check(is_slidings(x),
         "no slidings defined")
   g <- geomorph::gpagen(A=l2a(x$coo),
                         curves=x$slidings)

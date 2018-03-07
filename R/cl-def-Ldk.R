@@ -93,7 +93,7 @@ print.Ldk <- function(x, ...) {
   # number of coordinates
   cat(" (", unique(coo_len), " coordinates)\n", sep = "")
   # slidings partitions
-  if (is.slidings(Ldk)) {
+  if (is_slidings(Ldk)) {
     scheme <- .slidings_scheme(Ldk$slidings)
     n <- scheme$n
     if (scheme$n == 1) {

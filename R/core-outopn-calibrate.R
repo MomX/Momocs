@@ -788,7 +788,7 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
 calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
                          degree.range=1:8, thresh = c(0.90, 0.95, 0.99, 0.999),
                          plot=TRUE, verbose=TRUE, ...) {
-  if (!is.Opn(Opn))
+  if (!is_Opn(Opn))
     stop("only defined on Opn objects")
   # we swith among methods, with a messsage
   if (missing(method)) {

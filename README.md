@@ -6,7 +6,7 @@ Momocs
 [![Coverage Status](https://img.shields.io/codecov/c/github/vbonhomme/Momocs/master.svg)](https://codecov.io/github/vbonhomme/Momocs?branch=master)
 ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
-__:love_letter::love_letter::love_letter: Momocs is in a phase of very active development (see [#184](https://github.com/vbonhomme/Momocs/issues/184)). I will restore features here once stabilized.__
+__:love_letter::love_letter::love_letter: Momocs is in a phase of very active development (see [#184](https://github.com/vbonhomme/Momocs/issues/184)).__
 
 * is a complete toolkit for morphometrics, from data extraction to multivariate analyses.
 * includes most common 2D morphometrics approaches : outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.
@@ -14,7 +14,7 @@ __:love_letter::love_letter::love_letter: Momocs is in a phase of very active de
 * hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
 
 
-* __Check__ the online docand the tutorials [there](http://vbonhomme.github.io/Momocs/)
+* __Check__ the online doc and the tutorials [there](http://vbonhomme.github.io/Momocs/)
 * __You're welcome to__ implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
 </b>
 

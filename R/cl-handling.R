@@ -744,9 +744,9 @@ subset.Coo <- function(x, subset, ...) {
   retain <- eval(e, Coo$fac, parent.frame())
   Coo2 <- Coo
   Coo2$coo <- Coo$coo[retain]
-  if (is.ldk(Coo))
+  if (is_ldk(Coo))
     Coo2$ldk <- Coo$ldk[retain]
-  if (is.fac(Coo)) {
+  if (is_fac(Coo)) {
     #     if (is.logical(retain))
     #       retain <- which(retain)
     Coo2$fac <- Coo$fac[retain, ]
@@ -832,7 +832,7 @@ table.Coo <- function(...){
   args <- list(...)
   #    return(args)
   x <- args[[1]]
-  if (!is.fac(x)) stop("no $fac defined")
+  if (!is_fac(x)) stop("no $fac defined")
   if (length(args)>1) {
     # a little helper for mismatched colnames
     cn <- unlist(args[-1])

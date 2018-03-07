@@ -445,7 +445,7 @@ get_ldk.Ldk <- function(Coo){
   # sliding case
   # we need to retrieve all sliding landmarks
   # (including first and last from all partitions)
-  if (is.slidings(Coo)){
+  if (is_slidings(Coo)){
     all_ids <- 1:unique(coo_nb(Coo))
     sliding_ids <- Coo %>% slidings_scheme() %$% id %>%
       apply(1, function(x) x[1]:x[2])  %>% as.numeric()
@@ -459,7 +459,7 @@ get_ldk.Ldk <- function(Coo){
 
 #' @export
 get_ldk.Out <- function(Coo) {
-  if (!is.ldk(Coo))
+  if (!is_ldk(Coo))
     return(NULL)
   coo <- Coo$coo
   ldk <- Coo$ldk
@@ -613,7 +613,7 @@ slidings_scheme.default <- function(Coo){
 
 #' @export
 slidings_scheme.Ldk <- function(Coo){
-  if(!is.slidings(Coo)){
+  if(!is_slidings(Coo)){
     message("no sliding defined")
     return(NULL)}
   .slidings_scheme(Coo$slidings)
@@ -695,7 +695,7 @@ get_slidings.default <- function(Coo, partition){
 
 #' @export
 get_slidings.Ldk <- function(Coo, partition){
-  .check(is.slidings(Coo), "no slidings defined")
+  .check(is_slidings(Coo), "no slidings defined")
   # we retrieve the scheme
   scheme <- .slidings_scheme(Coo$slidings)
   n  <- scheme$n
