@@ -1,0 +1,19 @@
+url: http://vbonhomme.github.io/Momocs
+
+template:
+  package: tidytemplate
+  default_assets: false
+
+home:
+  strip_header: true
+
+navbar:
+  type: default
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/tidyverse/dplyr
+
+authors:
+  Vincent Bonhomme:
+    href: http://www.vincentbonhomme.fr
+ 
