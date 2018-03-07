@@ -21,6 +21,7 @@
     \item Deprecated `plot3.PCA` (will be replaced in further versions); `Ntable` splitted into of `plot_table` + `table`; `coo_tangle` now in `coo_angle_tangent`; `coo_theta3` now in `coo_angle_edges`.
     \item Deprecated all `is.*` aliases for `is_*` methods
     \item largely reorganized `.R` files
+    \item fixed a bug in `LDA` when `retain=1` (#e7704eb)
     \item various minor bugs fixes, see GitHub
   }
 }
