@@ -4,7 +4,7 @@ Version: 1.2.5
 Date: 2018-02-15
 Authors@R: c(person("Vincent", "Bonhomme", ,
        "bonhomme.vincent@gmail.com", c("aut", "cre")),
-       person("Julien", "Claude",,,c("aut")) )
+       person("Julien", "Claude",,,c("aut")))
 Description: A complete toolkit for 2D morphometrics, from data
        extraction to multivariate analyses. Most common
        morphometrics approaches are included: outlines, curves,
