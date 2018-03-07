@@ -72,7 +72,7 @@ coo2cpx <- function(coo){
 #' @rdname bridges
 #' @export
 l2m <- function(l) {
-  if (length(l) == 1 && is.shp(l[[1]]))
+  if (length(l) == 1 && is_shp(l[[1]]))
     return(l[[1]])
   m <- cbind(l$x, l$y)
   colnames(m) <- c("x", "y")
@@ -96,7 +96,7 @@ d2m <- function(d) {
 #' @rdname bridges
 #' @export
 m2d <- function(m) {
-  .check(is.shp(m),
+  .check(is_shp(m),
          "matrix must be a shp")
   data.frame(x=m[, 1], y=m[, 2])
 }

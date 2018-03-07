@@ -16,7 +16,7 @@
 #' Class and component testers
 #'
 #' Class testers test if any of the classes of an object _is_ of a given class. For instance
-#' `is.PCA` on a [PCA] object (of classes `PCA` and `prcomp`) will return `TRUE`.
+#' `is_PCA` on a [PCA] object (of classes `PCA` and `prcomp`) will return `TRUE`.
 #' Component testers check if _there_is_ a particular component (eg `$fac`, etc.) in an object.
 #' @param x the object to test
 #' @return `logical`

@@ -24,5 +24,8 @@ andnow(iris)
 andnow(bot)
 
 #classes supported by efourier
-andnow_class(efourier)
+andnow_method("efourier")
+
+# methods for plot
+andnow_method("plot")
 }

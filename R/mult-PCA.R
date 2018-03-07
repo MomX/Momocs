@@ -330,7 +330,7 @@ rePCA.PCA <- function(PCA, Coe){
 #' get_chull_volume(bp, 1)
 #' @export
 get_chull_area <- function (x, fac, xax = 1, yax = 2) {
-  if (!is.PCA(x)) stop("'x' must be a PCA object")
+  if (!is_PCA(x)) stop("'x' must be a PCA object")
   # no fac provided
   if (missing(fac)){
     xy <- x$x[, c(xax, yax)]
@@ -364,7 +364,7 @@ get_chull_area <- function (x, fac, xax = 1, yax = 2) {
 #' @rdname get_chull_area
 #' @export
 get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
-  if (!is.PCA(x)) stop("'x' must be a PCA object")
+  if (!is_PCA(x)) stop("'x' must be a PCA object")
 
   # no fac provided
   if (missing(fac)){

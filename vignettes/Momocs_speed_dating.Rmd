@@ -42,7 +42,7 @@ Prior to analysis, Momocs can be used to acquire and manipulate data or to impor
 
 ### Survival tips
 * This vignette introduces Momocs; more specific help can be find in function's help files, for instance `?efourier`.
-* There is a much nicer [onlineversion of this manual](http://vbonhomme.github.io/Momocsdoc/) that can be accessed from the console with, e.g. `Momocs_help("efourier")`.
+* There is a much nicer [online version of this manual](http://vbonhomme.github.io/Momocs/) that can be accessed from the console with, e.g. `Momocs_help("efourier")`.
 * Feel free to contribute to Momocs through [GitHub](http://www.github.com/vbonhomme/Momocs): report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that's definitely worth [a look](http://r-pkgs.had.co.nz/git.html).
 * Feel free to drop me a line, should you need a hand or would like to collaborate with me:   `bonhomme.vincent@gmail.com`.
 
@@ -134,7 +134,7 @@ Let's load one of the Momocs datasets, some various outlines (an `Out` object):
 ```{r}
 shapes                    # prints a brief summary
 panel(shapes, names=TRUE) # base graphics
-panel2(shapes)            # ggplot2 graphics
+panel2(slice(shapes, 1:4)) # ggplot2 graphics on a subset (for speed sake)
 ```
 
 `shapes` is one of the datasets bundled with Momocs. It's ("lazy") loaded in memory as soon as you call it, no need for `data(shapes)`. To see all Momocs' datasets, try `data(package="Momocs")`. These datasets are all `Coo` objects (try `class(bot)`), ie collection of shapes.
@@ -693,14 +693,14 @@ Many graphical function have their `ggplot2` counterpart:
 
 ```{r}
 panel(bot)
-panel2(bot)
+panel2(slice(bot, 1:4)) # for speed sake
 ```
 
 And the classical `ggplot2` grammar applies:
 
 ```{r}
 library(ggplot2)
-gg <- panel2(bot)
+gg <- panel2(slice(bot, 1:4)) # for speed sake
 gg + theme_minimal()
 ```
 
