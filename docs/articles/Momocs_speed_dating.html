@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Momocs speed dating • Momocs</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -55,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/vbonhomme/Momocs/">
+  <a href="https://github.com/vbonhomme/Momocs">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -75,7 +75,7 @@
       <h1>Momocs speed dating</h1>
                         <h4 class="author">Vincent Bonhomme</h4>
             
-            <h4 class="date">2018-03-06</h4>
+            <h4 class="date">2018-03-07</h4>
           </div>
 
     
@@ -103,7 +103,7 @@
 <a href="#survival-tips" class="anchor"></a>Survival tips</h3>
 <ul>
 <li>This vignette introduces Momocs; more specific help can be find in function’s help files, for instance <code><a href="../reference/efourier.html">?efourier</a></code>.</li>
-<li>There is a much nicer <a href="http://vbonhomme.github.io/Momocsdoc/">onlineversion of this manual</a> that can be accessed from the console with, e.g. <code><a href="../reference/Momocs_help.html">Momocs_help("efourier")</a></code>.</li>
+<li>There is a much nicer <a href="http://vbonhomme.github.io/Momocs/">online version of this manual</a> that can be accessed from the console with, e.g. <code><a href="../reference/Momocs_help.html">Momocs_help("efourier")</a></code>.</li>
 <li>Feel free to contribute to Momocs through <a href="http://www.github.com/vbonhomme/Momocs">GitHub</a>: report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that’s definitely worth <a href="http://r-pkgs.had.co.nz/git.html">a look</a>.</li>
 <li>Feel free to drop me a line, should you need a hand or would like to collaborate with me: <code>bonhomme.vincent@gmail.com</code>.</li>
 </ul>
@@ -220,7 +220,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">shapes                    <span class="co"># prints a brief summary</span>
 <span class="kw"><a href="../reference/panel.Coo.html">panel</a></span>(shapes, <span class="dt">names=</span><span class="ot">TRUE</span>) <span class="co"># base graphics</span></code></pre></div>
 <p><img src="Momocs_speed_dating_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/panel2.html">panel2</a></span>(shapes)            <span class="co"># ggplot2 graphics</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/panel2.html">panel2</a></span>(<span class="kw"><a href="../reference/slice.html">slice</a></span>(shapes, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)) <span class="co"># ggplot2 graphics on a subset (for speed sake)</span></code></pre></div>
 <p><img src="Momocs_speed_dating_files/figure-html/unnamed-chunk-6-2.png" width="672"></p>
 <pre><code>## An Out object with: 
 ##  - $coo: 30 outlines (836 +/- 255 coordinates, all closed)
@@ -722,37 +722,37 @@ bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class=
 <p>A very minimal k-means clustering is implemented:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/KMEANS.html">KMEANS</a></span>(bot.p, <span class="dt">centers =</span> <span class="dv">5</span>)</code></pre></div>
 <p><img src="Momocs_speed_dating_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
-<pre><code>## K-means clustering with 5 clusters of sizes 6, 5, 23, 4, 2
+<pre><code>## K-means clustering with 5 clusters of sizes 6, 6, 5, 5, 18
 ## 
 ## Cluster means:
 ##           PC1          PC2
 ## 1  0.10184224 -0.028875902
-## 2  0.02497106 -0.006671549
-## 3 -0.04614169 -0.004035307
-## 4  0.07569706  0.047543490
-## 5  0.01128098  0.054625628
+## 2 -0.02673158  0.017713990
+## 3  0.06730453  0.050371247
+## 4  0.02497106 -0.006671549
+## 5 -0.05066899 -0.008418168
 ## 
 ## Clustering vector:
 ##         brahma          caney         chimay         corona    deusventrue 
-##              3              3              1              3              5 
+##              5              2              1              5              2 
 ##          duvel   franziskaner     grimbergen        guiness     hoegardeen 
-##              1              3              2              2              3 
+##              1              5              4              4              5 
 ##        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe 
-##              3              3              1              3              3 
+##              5              5              1              2              2 
 ##     pecheresse   sierranevada     tanglefoot          tauro      westmalle 
-##              3              2              1              3              3 
+##              5              4              1              5              5 
 ##          amrut    ballantines      bushmills         chivas        dalmore 
-##              3              1              3              4              4 
+##              5              1              5              3              3 
 ##   famousgrouse    glendronach   glenmorangie   highlandpark    jackdaniels 
-##              3              3              3              1              2 
+##              5              5              5              1              4 
 ##             jb  johnniewalker       magallan     makersmark           oban 
-##              3              3              3              4              3 
+##              2              5              5              3              5 
 ##     oldpotrero      redbreast         tamdhu     wildturkey         yoichi 
-##              5              4              3              3              2 
+##              3              3              5              2              4 
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 0.006121728 0.001916822 0.011719347 0.001152212 0.001107903
-##  (between_SS / total_SS =  87.8 %)
+## [1] 0.006121728 0.001886406 0.002720829 0.001916822 0.007905382
+##  (between_SS / total_SS =  88.6 %)
 ## 
 ## Available components:
 ## 
@@ -1021,11 +1021,11 @@ tps_iso(beer, whisky)</a></code></pre>
 <p>Many graphical function have their <code>ggplot2</code> counterpart:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/panel.Coo.html">panel</a></span>(bot)</code></pre></div>
 <p><img src="Momocs_speed_dating_files/figure-html/unnamed-chunk-53-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/panel2.html">panel2</a></span>(bot)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/panel2.html">panel2</a></span>(<span class="kw"><a href="../reference/slice.html">slice</a></span>(bot, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)) <span class="co"># for speed sake</span></code></pre></div>
 <p><img src="Momocs_speed_dating_files/figure-html/unnamed-chunk-53-2.png" width="672"></p>
 <p>And the classical <code>ggplot2</code> grammar applies:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-gg &lt;-<span class="st"> </span><span class="kw"><a href="../reference/panel2.html">panel2</a></span>(bot)
+gg &lt;-<span class="st"> </span><span class="kw"><a href="../reference/panel2.html">panel2</a></span>(<span class="kw"><a href="../reference/slice.html">slice</a></span>(bot, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)) <span class="co"># for speed sake</span>
 gg <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_minimal</a></span>()</code></pre></div>
 <p><img src="Momocs_speed_dating_files/figure-html/unnamed-chunk-54-1.png" width="672"></p>
 <p>Otherwise, you can build your own plots. Let’s begin with a simple example:</p>
@@ -1119,7 +1119,7 @@ shapes[<span class="dv">4</span>] <span class="op">%&gt;%</span><span class="st"
 
 
       <footer><div class="copyright">
-  <p>Developed by Vincent Bonhomme, Julien Claude.</p>
+  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

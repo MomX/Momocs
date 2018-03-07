@@ -1,8 +1,8 @@
 url: http://vbonhomme.github.io/Momocs
 
 template:
-  package: tidytemplate
-  default_assets: false
+  params:
+    bootswatch: flatly
 
 home:
   strip_header: true
@@ -11,7 +11,7 @@ navbar:
   type: default
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/tidyverse/dplyr
+    href: https://github.com/vbonhomme/Momocs
 
 authors:
   Vincent Bonhomme:

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Morphometrics using R • Momocs</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -55,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/vbonhomme/Momocs/">
+  <a href="https://github.com/vbonhomme/Momocs">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -76,18 +76,16 @@
 <h2 class="hasAnchor">
 <a href="#momocs" class="anchor"></a>Momocs</h2>
 <p><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="maturing"><a href="https://travis-ci.org/vbonhomme/Momocs"><img src="https://travis-ci.org/vbonhomme/Momocs.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="http://cran.r-project.org/package=Momocs"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/github/vbonhomme/Momocs?branch=master"><img src="https://img.shields.io/codecov/c/github/vbonhomme/Momocs/master.svg" alt="Coverage Status"></a> <img src="http://cranlogs.r-pkg.org/badges/Momocs" alt="CRAN downloads last month"><img src="http://cranlogs.r-pkg.org/badges/grand-total/Momocs" alt="CRAN downloads grand total"></p>
+<p><strong>💌💌💌 Momocs is in a phase of very active development (see <a href="https://github.com/vbonhomme/Momocs/issues/184">#184</a>).</strong></p>
 <ul>
 <li>is a complete toolkit for morphometrics, from data extraction to multivariate analyses.</li>
 <li>includes most common 2D morphometrics approaches : outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.</li>
 <li>allows reproducible, pipeable, complex morphometric analyses and paves the way for a pure open-source workflow in R, and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.</li>
 <li><p>hinges on the core functions developed in the must-have book <em><a href="http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4">Morphometrics with R</a></em> by <a href="http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/">Julien Claude</a> (2008).</p></li>
 <li>
-<strong>Check</strong> the online doc <a href="http://vbonhomme.github.io/Momocsdoc/">there</a>
+<strong>Check</strong> the online doc and the tutorials <a href="http://vbonhomme.github.io/Momocs/">there</a>
 </li>
-<li>
-<strong>Check</strong> the tutorial <a href="https://rawgit.com/vbonhomme/Momocs/master/inst/doc/Momocs_speed_dating.html">there</a> or with <code>browseVignettes("Momocs")</code>
-</li>
-<li><p><strong>You’re welcome to</strong> implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help: <a href="https://github.com/vbonhomme/Momocs/issues">here on GitHub</a> or there: <code>bonhomme.vincent@gmail.com</code>. </p></li>
+<li><p><strong>You’re welcome to</strong> implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: <a href="https://github.com/vbonhomme/Momocs/issues">here on GitHub</a> or there: <code>bonhomme.vincent@gmail.com</code>. </p></li>
 </ul>
 </div>
 <div id="use-it" class="section level2">
@@ -98,80 +96,75 @@
 <pre><code>if (!requireNamespace("devtools")) install.packages("devtools")
 devtools::install_github('vbonhomme/Momocs')</code></pre>
 <p>You can cite it with: <code>citation("Momocs")</code></p>
-</div>
-<div id="features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
-<p><strong>Matrices of xy-coordinates</strong></p>
-<ul>
-<li>~100 generic tools like centering, scaling, rotating, calculating area, perimeter, etc. Full list with <code>apropos("coo_")</code>
-</li>
-<li>generic plotters: <code>coo_plot</code> and <code>g</code> (work in progress)</li>
-</ul>
-<p><strong>Data acquisition + Babel</strong></p>
-<ul>
-<li>Outline extraction from black mask/silhouettes <code>.jpgs</code>
-</li>
-<li>Landmark definition on outlines (<code>def_ldk</code> or via <a href="https://github.com/aaronolsen/StereoMorph">StereoMorph</a>)</li>
-<li>Open curves digitization with bezier curves (via <a href="https://github.com/aaronolsen/StereoMorph">StereoMorph</a>)</li>
-<li>Import/Export from/to <code>.nts</code>, <code>.tps</code>, <code>PAST</code>, <code>.txt</code>, etc.</li>
-</ul>
-<p><strong>Outline analysis</strong></p>
-<ul>
-<li>Elliptical Fourier analysis (<code>efourier</code>)</li>
-<li>Radii variation (<code>rfourier</code>)</li>
-<li>Radii variation - curvilinear abscissa (<code>sfourier</code>)</li>
-<li>Tangent Angle Fourier analysis (<code>tfourier</code>)</li>
-</ul>
-<p><strong>Open-outlines</strong></p>
-<ul>
-<li>Natural (raw) polynomials (<code>npoly</code>)</li>
-<li>Orthogonal (Legendre) polynomials (<code>opoly</code>)</li>
-<li>Discrete Cosinus Transform (<code>dfourier</code>)</li>
-<li>
-<code>bezier</code> core functions</li>
-</ul>
-<p><strong>Configuration of landmarks</strong></p>
-<ul>
-<li>Full Generalized Procrustes Adjustment (<code>fgProcrustes</code>)</li>
-<li>Sliding semi-landmarks (<code>fgsProcrustes</code>)</li>
-</ul>
-<p><strong>Traditional morphometrics and global shape descriptors</strong></p>
-<ul>
-<li>Facilities for multivariate analysis (see <code>flowers</code>)</li>
-<li>A long list of shape scalars (eg. <code>coo_eccentricity</code>, <code>coo_rectilinearity</code>, etc.)</li>
-</ul>
-<p><strong>Data handling</strong></p>
-<ul>
-<li>Easy data manipulation with <code>filter</code>, <code>select</code>, <code>slice</code>, <code>mutate</code> and other verbs ala <a href="https://github.com/hadley/dplyr/">dplyr</a>
-</li>
-<li>New verbs useful for morphometrics such as <code>combine</code> and <code>chop</code>, to handle several 2D views</li>
-<li>Permutation methods to resample data (<code>perm</code>, <code>breed</code>)</li>
-</ul>
-<p><strong>Multivariate analysis</strong></p>
-<ul>
-<li>Mean shape (groupwise) calculations (<code>mshapes</code>)</li>
-<li>Principal component analysis (<code>PCA</code>)</li>
-<li>Multivariate analysis of variance (<code>MANOVA</code> + pairwise testing <code>MANOVA_PW</code>)</li>
-<li>Linear discriminant analysis and screening (<code>LDA</code>)</li>
-<li>Hierarchical clustering (<code>CLUST</code>)</li>
-<li>K-means (<code>KMEANS</code>)</li>
-</ul>
-<p><strong>Graphical methods</strong></p>
-<ul>
-<li>Family pictures and quick inspection of whole datasets (<code>stack</code> and <code>panel</code>)</li>
-<li>Some <code>ggplot2</code> plots, when useful (and convet Momocs’ objects into <code>data.frames it with</code>as_df`)</li>
-<li>Morphological spaces for PCA</li>
-<li>Thin plate splines and variation around deformation grids</li>
-</ul>
-<p><strong>Misc</strong></p>
-<ul>
-<li>Datasets for all types of data (<code>apodemus</code>, <code>bot</code>, <code>chaff</code>, <code>charring</code>, <code>flower</code>, <code>hearts</code>, <code>molars</code>, <code>mosquito</code>, <code>mouse</code>, <code>oak</code>, <code>olea</code>, <code>shapes</code>, <code>trilo</code>, <code>wings</code>)</li>
-<li>
-<a href="http://shiny.rstudio.com/">Shiny</a> demonstrators/helpers. See <a href="https://github.com/vbonhomme/Momecs/">Momecs</a>
-</li>
-<li><a href="http://vbonhomme.github.io/Momocs/">Online documentation</a></li>
-</ul>
+<!--
+Features
+--------
+
+__Matrices of xy-coordinates__
+* ~100 generic tools like centering, scaling, rotating, calculating area, perimeter, etc. Full list with `apropos("coo_")`
+* generic plotters: `coo_plot` and `g` (work in progress)
+
+__Data acquisition + Babel__
+
+* Outline extraction from black mask/silhouettes `.jpgs`
+* Landmark definition on outlines (`def_ldk` or via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Open curves digitization with bezier curves (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Import/Export from/to `.nts`, `.tps`, `PAST`, `.txt`, etc.
+
+__Outline analysis__
+
+* Elliptical Fourier analysis (`efourier`)
+* Radii variation (`rfourier`)
+* Radii variation - curvilinear abscissa (`sfourier`)
+* Tangent Angle Fourier analysis (`tfourier`)
+
+__Open-outlines__
+
+* Natural (raw) polynomials (`npoly`)
+* Orthogonal (Legendre) polynomials (`opoly`)
+* Discrete Cosinus Transform (`dfourier`)
+* `bezier` core functions
+
+__Configuration of landmarks__
+
+* Full Generalized Procrustes Adjustment (`fgProcrustes`)
+* Sliding semi-landmarks (`fgsProcrustes`)
+
+__Traditional morphometrics and global shape descriptors__
+
+* Facilities for multivariate analysis (see `flowers`)
+* A long list of shape scalars (eg. `coo_eccentricity`, `coo_rectilinearity`, etc.)
+
+__Data handling__
+
+* Easy data manipulation with `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
+* New verbs useful for morphometrics such as `combine` and `chop`, to handle several 2D views
+* Permutation methods to resample data (`perm`, `breed`)
+ 
+__Multivariate analysis__
+
+* Mean shape (groupwise) calculations (`mshapes`)
+* Principal component analysis (`PCA`)
+* Multivariate analysis of variance (`MANOVA` + pairwise testing `MANOVA_PW`)
+* Linear discriminant analysis and screening (`LDA`)
+* Hierarchical clustering (`CLUST`)
+* K-means (`KMEANS`)
+
+__Graphical methods__
+
+* Family pictures and quick inspection of whole datasets (`stack` and `panel`)
+* Some `ggplot2` plots, when useful (and convet Momocs' objects into `data.frames it with `as_df`)
+* Morphological spaces for PCA
+* Thin plate splines and variation around deformation grids
+
+
+__Misc__
+
+* Datasets for all types of data (`apodemus`, `bot`, `chaff`, `charring`, `flower`,  `hearts`, `molars`, `mosquito`, `mouse`, `oak`, `olea`, `shapes`, `trilo`, `wings`)
+* [Shiny](http://shiny.rstudio.com/) demonstrators/helpers. See [Momecs](https://github.com/vbonhomme/Momecs/)
+* [Online documentation](http://vbonhomme.github.io/Momocs/)
+
+-->
 </div>
 
   </div>
@@ -194,7 +187,8 @@ devtools::install_github('vbonhomme/Momocs')</code></pre>
 </ul>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Vincent Bonhomme <br><small class="roles"> Author, maintainer </small> </li>
+<li>
+<a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a> <br><small class="roles"> Author, maintainer </small> </li>
 <li>Julien Claude <br><small class="roles"> Author </small> </li>
 </ul>
 </div>
@@ -202,7 +196,7 @@ devtools::install_github('vbonhomme/Momocs')</code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Vincent Bonhomme, Julien Claude.</p>
+  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

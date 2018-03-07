@@ -6,13 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Various class/component testers — is • Momocs</title>
+<title>Class and component testers — is • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -79,7 +79,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/vbonhomme/Momocs/">
+  <a href="https://github.com/vbonhomme/Momocs">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -95,13 +95,13 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Various class/component testers</h1>
+    <h1>Class and component testers</h1>
     </div>
 
     
-    <p>Class testers test if any of the classes of an object is of a given class. For instance
-is.PCA on a PCA object (both 'PCA' and 'prcomp') will return TRUE.
-Component testers check if a particular component (eg $fac, etc.) is present.</p>
+    <p>Class testers test if any of the classes of an object <em>is</em> of a given class. For instance
+<code>is_PCA</code> on a <a href='PCA.html'>PCA</a> object (of classes <code>PCA</code> and <code>prcomp</code>) will return <code>TRUE</code>.
+Component testers check if <em>there_is</em> a particular component (eg <code>$fac</code>, etc.) in an object.</p>
     
 
     <pre class="usage"><span class='fu'>is_Coo</span>(<span class='no'>x</span>)
@@ -147,17 +147,11 @@ Component testers check if a particular component (eg $fac, etc.) is present.</p
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>TRUE/FALSE</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>all <code>is_*</code> have an <code>is.*</code> alias
-(eg <code>is_Coo</code> is the same as <code>is.Coo</code>) but the <code>.</code> alias will
-be deprecated at some point.</p>
+    <p><code>logical</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>is_Coo</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_Out</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_Ldk</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; [1] FALSE</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>is_Coo</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_Out</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_Ldk</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>is_ldk</span>(<span class='no'>hearts</span>) <span class='co'># mind the capitals!</span></div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -165,8 +159,6 @@ be deprecated at some point.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#note">Note</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -176,7 +168,7 @@ be deprecated at some point.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Vincent Bonhomme, Julien Claude.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">
