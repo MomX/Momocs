@@ -100,10 +100,12 @@ LDA.Coe <- function(x, fac, retain, ...) {
 #' @export
 LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
 
+  # best case
   if (length(retain)==1) {
     if (retain=="best")
     retain <- 1:ncol(x$x)
   }
+
   # select best case
   if (length(retain)>1){
     discri <- numeric(length(retain))
@@ -135,11 +137,10 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
   }
 
   # PC number selection
-  if (retain <= 1)  {
+  if (retain < 1)  {
     if (verbose) message(retain, " total variance")
     retain <- scree_min(x, prop = retain)
   }
-
 
   if (verbose) message(retain, " PC retained")
   X <- PCA$x[, 1:retain]
@@ -188,16 +189,17 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
 
 #' @export
 print.LDA <- function(x, ...) {
-  cat(" * Leave-one-out cross-validation ($CV.correct): (",
-      signif(x$CV.correct * 100, 3), "% - ",
-      sum(diag(x$CV.tab)), "/", sum(x$CV.tab),
-      "): \n", sep = "")
+
+  cat(" * Cross-validation table ($CV.tab):\n")
+  print(x$CV.tab)
 
   cat("\n * Class correctness ($CV.ce):\n")
   print(x$CV.ce)
 
-  cat("\n * Cross-validation table ($CV.tab):\n")
-  print(x$CV.tab)
+  cat("\n * Leave-one-out cross-validation ($CV.correct): (",
+      signif(x$CV.correct * 100, 3), "% - ",
+      sum(diag(x$CV.tab)), "/", sum(x$CV.tab),
+      "): \n", sep = "")
 
 }
 
