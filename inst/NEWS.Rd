@@ -11,8 +11,9 @@
     \item vignette for `cheapbabi`
     \item ongoing complete review of code
     \item ongoing complete review of manual pages: lots of grouping, more and better examples, default values in `param`s
-    \item release `reshape2`, `plyr` dependencies
+    \item released `reshape2`, `plyr` dependencies
     \item `dispatch_fac` is now behind all `fac` arguments
+    \item `fgProcrustes` now accepts lists
     \item new functions: `andnow` and `andnow_method` class tells you what to do with this object, and which classes are supported by this function/method.
     \item new `coo_*` methods: `coo_range` and `coo_range_enlarge`
     \item `coo` function ported to methods and now supporting `.Coo` directly: `coo_angle_edges`, `coo_angle_tangent`, `coo_boundingbox`, `coo_calliper`, `coo_chull`, `coo_chull_onion`, `coo_circularity`, `coo_circularityharalick`, `coo_circularity_norm`, `coo_convexity`, `coo_dxy`, `coo_eccentricityboundingbox`, `coo_eccentricityeigen`, `coo_elongation`, `coo_intersect_angle`, `coo_intersect_direction`, `coo_intersect_segment`, `coo_perim`, `coo_perimcum`, `coo_perimpts`, `coo_rectangularity`, `coo_rectilinearity`, `coo_scalex`, `coo_scaley`, `coo_solidity`.

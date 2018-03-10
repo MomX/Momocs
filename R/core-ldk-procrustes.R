@@ -114,7 +114,10 @@ fgProcrustes <- function(x, tol, verbose, coo) {
 
 #' @export
 fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
-  A <- x
+  if (is.list(x))
+    A <- l2a(x)
+  else
+    A <- x
   A <- ldk_check(A)
   # directly borrowed from Claude
   p <- dim(A)[1]
