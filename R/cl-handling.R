@@ -194,7 +194,7 @@ filter.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- filter(df, ...)
-  .data <- Momocs::.subset_Momocs(.data, df$.id)
+  .data <- Momocs::subsetize(.data, df$.id)
   .data$fac %<>% data.frame()
   .data$fac %<>% .refactor()
   .data
@@ -238,7 +238,7 @@ arrange.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- arrange(df, ...)
-  .data <- Momocs::.subset_Momocs(.data, df$.id)
+  .data <- Momocs::subsetize(.data, df$.id)
   .data$fac %<>% data.frame()
   .data
 }
@@ -279,21 +279,21 @@ slice.default <- function(.data, ...){
 #' @export
 slice.Coo <- function(.data, ...){
   #.data %<>% validate()
-  .data %<>% Momocs::.subset_Momocs(...)
+  .data %<>% Momocs::subsetize(...)
   .data$fac %<>% .refactor()
   .data
   }
 
 #' @export
 slice.Coe <- function(.data, ...){
-  .data %<>% Momocs::.subset_Momocs(...)
+  .data %<>% Momocs::subsetize(...)
   .data$fac %<>% .refactor()
   .data
   }
 
 #' @export
 slice.PCA <- function(.data, ...){
-  .data %<>% Momocs::.subset_Momocs(...)
+  .data %<>% Momocs::subsetize(...)
   .data$fac %<>% .refactor()
   .data
   }
@@ -357,7 +357,7 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
     }
   }
   #   return(retain)
-  return(Momocs::.subset_Momocs(Coo, retain))
+  return(Momocs::subsetize(Coo, retain))
 }
 
 #' @export
@@ -421,7 +421,7 @@ sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
     }
   }
   #   return(retain)
-  return(Momocs::.subset_Momocs(Coo, retain))
+  return(Momocs::subsetize(Coo, retain))
 }
 
 #' @export
@@ -737,12 +737,12 @@ dissolve.Coe <- function(x, retain){
 # #' @family handling functions
 # #' @examples
 # #' # Do not use subset directly
-# #' @export
-.subset_Momocs <- function(x, subset, ...){
-  UseMethod(".subset_Momocs")
+#' @export
+subsetize <- function(x, subset, ...){
+  UseMethod("subsetize")
 }
 
-.subset_Momocs.Coo <- function(x, subset, ...) {
+subsetize.Coo <- function(x, subset, ...) {
   Coo <- x
   e <- substitute(subset)
   retain <- eval(e, Coo$fac, parent.frame())
@@ -767,7 +767,7 @@ dissolve.Coe <- function(x, retain){
 
 # #' @rdname subset
 # #' @export
-.subset_Momocs.Coe <- function(x, subset, ...) {
+subsetize.Coe <- function(x, subset, ...) {
   Coe <- x
   e <- substitute(subset)
   retain <- eval(e, Coe$fac, parent.frame())
@@ -789,7 +789,7 @@ dissolve.Coe <- function(x, retain){
 
 # #' @rdname subset
 # #' @export
-.subset_Momocs.PCA <- function(x, subset, ...){
+subsetize.PCA <- function(x, subset, ...){
   PCA <- x
   e <- substitute(subset)
   retain <- eval(e, PCA$fac, parent.frame())
@@ -919,7 +919,7 @@ at_least <- function(x, fac, N){
     message("no group with at least ", N, " indidivuals")
     return(slice(x, 0))
   } else {
-    Momocs::.subset_Momocs(x, retain)
+    Momocs::subsetize(x, retain)
   }
 }
 
@@ -968,7 +968,7 @@ rm_uncomplete <- function(x, id, by){
     message("those shapes did not have ", most_frequent,
             " slices and has been removed: ",
             paste(ugly_ducklings, collapse=", "))
-    return(Momocs::.subset_Momocs(x, -remove_rows))
+    return(Momocs::subsetize(x, -remove_rows))
   }
 }
 
