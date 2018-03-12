@@ -106,12 +106,14 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(Momocs)
-hearts %T>%  # a built in dataset
-  stack() %>% # family picture on raw outlines
-  fgProcrustes() %T>% # full generalized Procrustes alignment
-  stack() %>% # # another family picture after fgProcrustes
-  efourier(6, norm=FALSE) %>% # elliptical Fourier transforms
-  PCA() %>% plot(~aut) # a PCA and a PC1:2 plot
+hearts %T>%                    # a built in dataset
+  stack() %>%                  # family picture on raw outlines
+  fgProcrustes() %T>%          # full generalized Procrustes alignment
+  coo_slide(ldk=1) %T>%        # redefine an homologous 1st point
+  stack() %>%                  # another family picture after fgProcrustes
+  efourier(6, norm=FALSE) %>%  # elliptical Fourier transforms
+  PCA() %T>% plot(~aut) %>%    # a PCA and a PC1:2 plot
+  LDA(~aut) %>% plot_CV()      # an LDA and confusion matrix
 ```
 
-![](README-example-1.png)![](README-example-2.png)![](README-example-3.png)
+![](README-example-1.png)![](README-example-2.png)![](README-example-3.png)![](README-example-4.png)
