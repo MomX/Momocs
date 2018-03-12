@@ -36,22 +36,21 @@ Momocs hinges on the core functions published in the must-have _[Morphometrics w
 
 Prior to analysis, Momocs can be used to acquire and manipulate data or to import/export from/to other formats. Momocs also has the facility for a wide range of multivariate analyses and production of the companion graphics. Thus a researcher will find that just a few lines of code will provide initial results, but the methods implemented can be finely tuned and extended according to the user's needs.
 
-* See Momocs [features](https://github.com/vbonhomme/Momocs/#features).
 * If you use it, cite it: `citation("Momocs")`.
 * This citation refers to an obsolete version of Momocs, only handling outline analyses. The next companion and seminal paper is submitted.
 
 ### Survival tips
 * This vignette introduces Momocs; more specific help can be find in function's help files, for instance `?efourier`.
-* There is a much nicer [online version of this manual](http://vbonhomme.github.io/Momocs/) that can be accessed from the console with, e.g. `Momocs_help("efourier")`.
-* Feel free to contribute to Momocs through [GitHub](http://www.github.com/vbonhomme/Momocs): report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that's definitely worth [a look](http://r-pkgs.had.co.nz/git.html).
+* There is a much nicer [online version of this manual](http://momx.github.io/Momocs/) that can be accessed from the console with, e.g. `Momocs_help("efourier")`.
+* Feel free to contribute to Momocs through [GitHub](http://www.github.com/MomX/Momocs): report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that's definitely worth [a look](http://r-pkgs.had.co.nz/git.html).
 * Feel free to drop me a line, should you need a hand or would like to collaborate with me:   `bonhomme.vincent@gmail.com`.
 
 ### Get, install and use it
-First, of all, let's download the last version of Momocs. You will need to install the `devtools` package to get it from my [GitHub](http://www.github.com/vbonhomme) repository :
+First, of all, let's download the last version of Momocs. You will need to install the `devtools` package to get it from my [GitHub](http://www.github.com/MomX/Momocs) repository :
 
 ```{r, eval=FALSE}
 install.packages("devtools")
-devtools::install_github("vbonhomme/Momocs")
+devtools::install_github("MomX/Momocs")
 ```
 
 The typical `install_packages("Momocs")` will get you the last CRAN version of Momocs, but the GitHub version is preferred as Momocs is still under active development.
@@ -115,7 +114,6 @@ Momocs implement this desirable behavior and defines __classes__ and __subclasse
 `OpnCoo` (open outlines)             | `npoly`, `opoly`, `dfourier`       | `OpnCoe`  
 `LdkCoo` (configuration of landmarks)|`fgProcrustes`, `slide`             | `LdkCoe`
 
-You can see this table as a scheme [there](https://raw.githubusercontent.com/vbonhomme/Momocs/master/Momocs_arch.jpg).
 
 In other words:
 
@@ -743,4 +741,4 @@ bot.p %>% as_df() %>% ggplot() +
 ------
  * Done with love by Vincent Bonhomme `<bonhomme.vincent@gmail.com>`.
  * Help/suggestions/review/critics are welcome.
- * Sources are [there](https://github.com/vbonhomme/Momocs/tree/master/vignettes)
+ * Sources are [there](https://github.com/MomX/Momocs/tree/master/vignettes)

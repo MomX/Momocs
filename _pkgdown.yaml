@@ -1,4 +1,4 @@
-url: http://vbonhomme.github.io/Momocs
+url: http://momx.github.io/Momocs/
 
 template:
   params:
@@ -11,7 +11,7 @@ navbar:
   type: default
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/vbonhomme/Momocs
+    href: https://github.com/MomX/Momocs
 
 authors:
   Vincent Bonhomme:

@@ -6,17 +6,15 @@
 \alias{Momocs-package}
 \title{Momocs}
 \description{
-A complete toolkit for 2D morphometrics,
-from data extraction to multivariate
-analyses. Most common morphometrics
-approaches are included: outlines, curves, landmarks,
-"traditional" morphometrics, and facilities for
-data preparation, manipulation and
-visualization with a consistent grammar
-throughout. Momocs allows reproducible and
-complex morphometric analyses, other approaches to
-be plugged in or developped from those existing, and
-paves the way for a pure open-source workflow in R.
+The goal of Momocs is to provide a complete, convenient,
+reproducible and open-source toolkit for 2D morphometrics.
+It includes most common 2D morphometrics approaches on outlines,
+open outlines, configurations of landmarks, traditional
+morphometrics, and facilities for data preparation,
+manipulation and visualization with a consistent grammar throughout.
+It allows reproducible, pipeable, complex morphometric analyses
+and other morphometrics approaches should be easy to
+plug in, or develop from, on top of this canvas.
 }
 \details{
 To cite Momocs in publications: \code{citation("Momocs")}.
@@ -40,9 +38,9 @@ Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 }
 \seealso{
 \itemize{
-\item \bold{Homepage}: \url{https://github.com/vbonhomme/Momocs}
-\item \bold{Issues}: \url{https://github.com/vbonhomme/Momocs/issues}
-\item \bold{Tutorial}: \code{browseVignettes("Momocs")}
+\item \bold{Homepage}: \url{https://github.com/MomX/Momocs}
+\item \bold{Issues}: \url{https://github.com/MomX/Momocs/issues}
+\item \bold{Tutorial}: \code{browseVignettes("Momocs")} or \url{http://momx.github.io/Momocs/}
 \item \bold{Email}: \code{bonhomme.vincent@gmail.com} to contribute to dev,
 ask for something, propose collaboration, share your data, etc.
 }

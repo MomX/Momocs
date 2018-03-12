@@ -13,7 +13,7 @@ output:
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
 ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
-__:love_letter::love_letter::love_letter: Momocs is in a phase of very active development (see [#184](https://github.com/vbonhomme/MomX/issues/184)).__
+__:love_letter::love_letter::love_letter: Momocs is in a phase of very active development (see [#184](https://github.com/MomX/Momocs/issues/184)).__
 
 
 ```{r, echo = FALSE}
@@ -34,8 +34,8 @@ It allows reproducible, pipeable, complex morphometric analyses and other morpho
 
 Its core functions are borrowed from hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
 
-* __Check__ the online doc and the tutorials [there](http://vbonhomme.github.io/Momocs/)
-* __You're welcome to__ implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
+* __Check__ the online doc and the tutorials [there](http://momx.github.io/Momocs/)
+* __You're welcome to__ implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/MomX/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
 
 
 ### Installation
