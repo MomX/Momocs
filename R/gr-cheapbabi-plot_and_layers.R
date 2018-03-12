@@ -823,8 +823,8 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
   old <- par(mar=rep(0, 4), xpd=NA)
   on.exit(par(old))
   # default dimensions
-  range_padding = 1/50
-  range_width   = 1/50
+  range_padding = 1/60
+  range_width   = 1/60
   range_height  = 1/8
   # window dimensions
   u <- par("usr")
@@ -842,15 +842,18 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
   # redraw continuous scale manually
   if (is.numeric(x$f)){
     qf <- stats::quantile(x$f, probs = probs) %>% signif(2)
-    w <- qf %>% strwidth(cex=cex) %>% max()
+    wid_leg <- qf %>% strwidth(cex=cex) %>% max()
+    # scale position
     s_y0 <- u[4] - w[2]*(range_padding+range_height)
     s_y1 <- u[4] - w[2]*range_padding
-    s_x0 <- u[2] - w[1]*(range_padding+range_width) - w*1.2
-    s_x1 <- u[2] - w[1]*range_padding - w*1.2
+    s_x0 <- u[2] - w[1]*(range_padding+range_width) - wid_leg
+    s_x1 <- u[2] - w[1]*range_padding - wid_leg
+    # scale_bars positions
     s_ys <- seq(s_y0, s_y1, length.out = 100)
     s_yg <- diff(s_ys[1:2])
-    t_x0 <-     s_x1 <- u[2] - w[1]*range_padding - w
-    t_ys <- s_y0 + probs*w[2]*range_height
+    # legend text position
+    t_x0 <- s_x1 + w[2]*(range_padding + range_width) - wid_leg*0.9
+    t_ys <- s_y0 + probs*(range_height*w[2])
     rect(s_x0, s_ys,
          s_x1, s_ys+s_yg,
          col=x$palette(100), lwd=0)
@@ -858,7 +861,7 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
          s_x1, (s_ys+s_yg)[length(s_ys)],
          lwd=1/2, col=NA, border=par("fg"))
     segments(s_x1, t_ys + s_yg*0.5,
-             s_x1 + range_width*w[2]/6, t_ys + s_yg*0.5, lwd=1/2)
+             s_x1 + range_width*w[2]/4, t_ys + s_yg*0.5, lwd=1/2)
     text(t_x0, t_ys,
          qf, cex=cex, pos=4)
   }
