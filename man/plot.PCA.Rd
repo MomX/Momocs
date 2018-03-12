@@ -64,9 +64,9 @@ or for every individual, see examples)}
 
 \item{morphospace}{logical whether to add the morphological space}
 
-\item{pos.shp}{passed to \link{pos.shapes}, one of
+\item{pos.shp}{passed to \link{morphospace_positions}, one of
 \code{"range", "full", "circle", "xy", "range_axes", "full_axes"}. Or directly
-a matrix of positions. See \link{pos.shapes}}
+a matrix of positions. See \link{morphospace_positions}}
 
 \item{amp.shp}{amplification factor for shape deformation}
 

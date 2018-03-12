@@ -77,6 +77,6 @@ panel(bot.f)
 panel(bot, fac='type', palette=col_spring, names=TRUE)
 }
 \seealso{
-Other Coo_graphics: \code{\link{panel2}},
-  \code{\link{plot.Coo}}, \code{\link{stack.Coo}}
+Other Coo_graphics: \code{\link{inspect}},
+  \code{\link{stack.Coo}}
 }

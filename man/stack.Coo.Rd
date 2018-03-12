@@ -93,6 +93,6 @@ stack(chaffal, meanshape=TRUE, meanshape_col="blue")
 }
 }
 \seealso{
-Other Coo_graphics: \code{\link{panel2}},
-  \code{\link{panel}}, \code{\link{plot.Coo}}
+Other Coo_graphics: \code{\link{inspect}},
+  \code{\link{panel}}
 }

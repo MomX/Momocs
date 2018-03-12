@@ -4,7 +4,8 @@
 \alias{efourier}
 \alias{efourier.default}
 \alias{efourier.Out}
-\title{Elliptical Fourier transform}
+\alias{efourier_norm}
+\title{Elliptical Fourier transform (and its normalization)}
 \usage{
 efourier(x, ...)
 
@@ -12,6 +13,8 @@ efourier(x, ...)
 
 \method{efourier}{Out}(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE,
   verbose = TRUE, ...)
+
+efourier_norm(ef, start = FALSE)
 }
 \arguments{
 \item{x}{A \code{list} or a \code{matrix} of coordinates or a \code{Out} object}
@@ -28,19 +31,30 @@ perform.}
 
 \item{norm}{whether to normalize the coefficients using \link{efourier_norm}}
 
-\item{start}{logical whether to consider the first point as homologous}
+\item{start}{\code{logical}. For \code{efourier} whether to consider the first point as homologous;
+for \code{efourier_norm} whether to conserve the position of the first
+point of the outline.}
+
+\item{ef}{\code{list} with \code{a_n}, \code{b_n}, \code{c_n} and
+\code{d_n} Fourier coefficients, typically returned by \link{efourier}}
+
+\item{start}{\code{logical}, whether to conserve the position of the first
+point of the outline.}
 }
 \value{
-A list with these components: \item{an }{\code{vector} of
-\eqn{a_{1->n}} harmonic coefficients.} \item{bn }{\code{vector} of
-\eqn{b_{1->n}} harmonic coefficients.} \item{cn }{\code{vector} of
-\eqn{c_{1->n}} harmonic coefficients.} \item{dn }{\code{vector} of
-\eqn{d_{1->n}} harmonic coefficients.} \item{ao }{\code{ao} Harmonic
-coefficient.} \item{co }{\code{co} Harmonic coefficient.}
+For \code{efourier}, a list with components: \code{an}, \code{bn}, \code{cn}, \code{dn} harmonic coefficients, plus \code{ao} and \code{co}.
+The latter should have been named \code{a0} and \code{c0} in Claude (2008) but I (intentionnaly) propagated the error.
+
+For \code{efourier_norm}, a list with components: \code{A}, \code{B}, \code{C}, \code{D}
+for harmonic coefficients, plus \code{size}, the magnitude of the semi-major axis of the first
+fitting ellipse, \code{theta} angle, in radians, between the starting and the semi-major axis
+of the first fitting ellipse, \code{psi} orientation of the first fitting ellipse, \code{ao} and \code{do}, same as above,
+and \code{lnef} that is the concatenation of coefficients.
 }
 \description{
 \code{efourier} computes Elliptical Fourier Analysis (or Transforms or EFT)
-from a matrix (or a list) of (x; y) coordinates.
+from a matrix (or a list) of (x; y) coordinates. \code{efourier_norm} normalizes Fourier coefficients.
+Read Details carefully.
 }
 \details{
 For the maths behind see the paper in JSS.
@@ -77,15 +91,19 @@ to minimize any subsequent problems.
 I will dedicate (some day) a vignette or a paper to this problem.
 }
 \note{
-Directly borrowed for Claude (2008), and also called \code{efourier} there.
+Directly borrowed for Claude (2008).
 }
 \examples{
+# single shape
 coo <- bot[1]
 coo_plot(coo)
 ef <- efourier(coo, 12)
 ef
 efi <- efourier_i(ef)
 coo_draw(efi, border='red', col=NA)
+
+# on Out
+bot \%>\% slice(1:5) \%>\% efourier
 }
 \references{
 Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
@@ -95,5 +113,5 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
 Other efourier: \code{\link{efourier_i}},
-  \code{\link{efourier_norm}}, \code{\link{efourier_shape}}
+  \code{\link{efourier_shape}}
 }

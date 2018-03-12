@@ -102,7 +102,7 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 \item{cex}{to use for drawing components}
 
 \item{position}{one of \code{range, full, circle,
-xy, range_axes, full_axes)} to feed \link{pos.shapes} (default \code{range})}
+xy, range_axes, full_axes)} to feed \link{morphospace_positions} (default \code{range})}
 
 \item{nb}{\code{numeric} total number of shapes when \code{position="circle"} (default \code{12})}
 

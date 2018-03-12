@@ -18,7 +18,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
   rot <- PCA$rotation[, c(xax, yax)]
   mshape <- PCA$mshape
   # we define the position of shapes
-  pos <- pos.shapes(xy, pos.shp = pos.shp, nb.shp = nb.shp,
+  pos <- morphospace_positions(xy, pos.shp = pos.shp, nb.shp = nb.shp,
                     nr.shp = nr.shp, nc.shp = nc.shp)
   # according to the type of morphometrics applied, we switch the method
   # and the way we plot reconstruct shapes (polygon, lines, points for Out, Opn, Ldk)
@@ -170,7 +170,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
   }
 
   # we define the position of shapes
-  pos <- pos.shapes(xy, pos.shp = pos.shp, nb.shp = nb.shp,
+  pos <- morphospace_positions(xy, pos.shp = pos.shp, nb.shp = nb.shp,
                     nr.shp = nr.shp, nc.shp = nc.shp)
   # according to the type of morphometrics applied, we
   # reconstruct shapes
@@ -228,7 +228,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
 #' @param circle.r.shp if circle, its radius
 #' @details See \link{plot.PCA} for self-speaking examples
 #' @export
-pos.shapes <- function(xy, pos.shp = c("range", "full", "circle", "xy",
+morphospace_positions <- function(xy, pos.shp = c("range", "full", "circle", "xy",
                                        "range_axes", "full_axes")[1],
                        nb.shp = 12, nr.shp = 6, nc.shp = 5, circle.r.shp) {
   if (is.data.frame(pos.shp) | is.matrix(pos.shp)) {

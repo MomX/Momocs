@@ -194,7 +194,7 @@ filter.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- filter(df, ...)
-  .data <- subset(.data, df$.id)
+  .data <- Momocs::subset(.data, df$.id)
   .data$fac %<>% data.frame()
   .data$fac %<>% .refactor()
   .data
@@ -238,7 +238,7 @@ arrange.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- arrange(df, ...)
-  .data <- subset(.data, df$.id)
+  .data <- Momocs::subset(.data, df$.id)
   .data$fac %<>% data.frame()
   .data
 }
@@ -279,21 +279,21 @@ slice.default <- function(.data, ...){
 #' @export
 slice.Coo <- function(.data, ...){
   #.data %<>% validate()
-  .data %<>% subset(...)
+  .data %<>% Momocs::subset(...)
   .data$fac %<>% .refactor()
   .data
   }
 
 #' @export
 slice.Coe <- function(.data, ...){
-  .data %<>% subset(...)
+  .data %<>% Momocs::subset(...)
   .data$fac %<>% .refactor()
   .data
   }
 
 #' @export
 slice.PCA <- function(.data, ...){
-  .data %<>% subset(...)
+  .data %<>% Momocs::subset(...)
   .data$fac %<>% .refactor()
   .data
   }
@@ -357,7 +357,7 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
     }
   }
   #   return(retain)
-  return(subset(Coo, retain))
+  return(Momocs::subset(Coo, retain))
 }
 
 #' @export
@@ -421,7 +421,7 @@ sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
     }
   }
   #   return(retain)
-  return(subset(Coo, retain))
+  return(Momocs::subset(Coo, retain))
 }
 
 #' @export
@@ -728,16 +728,16 @@ dissolve.Coe <- function(x, retain){
 #' Subsets on Momocs objects
 #'
 #'
-#' Subset is a wrapper around dplyr's verbs and should NOT be used directly.
-#'
-#' @rdname subset
-#' @param x a \code{Coo} or a \link{Coe} object.
-#' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
-#' @param ... useless here but maintains consistence with the generic subset.
-#' @family handling functions
-#' @examples
-#' # Do not use subset directly
-#' @export
+# #' Subset is a wrapper around dplyr's verbs and should NOT be used directly.
+# #'
+# #' @rdname subset
+# #' @param x a \code{Coo} or a \link{Coe} object.
+# #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
+# #' @param ... useless here but maintains consistence with the generic subset.
+# #' @family handling functions
+# #' @examples
+# #' # Do not use subset directly
+# #' @export
 subset.Coo <- function(x, subset, ...) {
   Coo <- x
   e <- substitute(subset)
@@ -761,8 +761,8 @@ subset.Coo <- function(x, subset, ...) {
   return(Coo2)
 }
 
-#' @rdname subset
-#' @export
+# #' @rdname subset
+# #' @export
 subset.Coe <- function(x, subset, ...) {
   Coe <- x
   e <- substitute(subset)
@@ -915,7 +915,7 @@ at_least <- function(x, fac, N){
     message("no group with at least ", N, " indidivuals")
     return(slice(x, 0))
   } else {
-    subset(x, retain)
+    Momocs::subset(x, retain)
   }
 }
 
@@ -964,7 +964,7 @@ rm_uncomplete <- function(x, id, by){
     message("those shapes did not have ", most_frequent,
             " slices and has been removed: ",
             paste(ugly_ducklings, collapse=", "))
-    return(subset(x, -remove_rows))
+    return(Momocs::subset(x, -remove_rows))
   }
 }
 

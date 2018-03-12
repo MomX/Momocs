@@ -1909,7 +1909,8 @@ coo_up.Coo <- function(coo, slidegap=FALSE){
   coo
 }
 
-#' coo_down -----------------
+# coo_donw --------
+#' coo_down
 #' Retains coordinates with negative y-coordinates
 #'
 #' Useful when shapes are aligned along the x-axis (e.g. because of a

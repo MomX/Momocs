@@ -7,7 +7,7 @@
 \alias{PCA.LdkCoe}
 \alias{PCA.TraCoe}
 \alias{PCA.default}
-\alias{as.PCA}
+\alias{as_PCA}
 \title{Principal component analysis on Coe objects}
 \usage{
 PCA(x, scale., center, fac)
@@ -22,16 +22,16 @@ PCA(x, scale., center, fac)
 
 \method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = data.frame())
 
-as.PCA(x, fac)
+as_PCA(x, fac)
 }
 \arguments{
-\item{x}{a \link{Coe} object or an appropriate object (eg \link{prcomp}) for \code{as.PCA}}
+\item{x}{a \link{Coe} object or an appropriate object (eg \link{prcomp}) for \code{as_PCA}}
 
 \item{scale.}{logical whether to scale the input data}
 
 \item{center}{logical whether to center the input data}
 
-\item{fac}{any factor or data.frame to be passed to \code{as.PCA} and for use with \link{plot.PCA}}
+\item{fac}{any factor or data.frame to be passed to \code{as_PCA} and for use with \link{plot.PCA}}
 }
 \value{
 a 'PCA' object on which to apply \link{plot.PCA}, among others. This list has several
@@ -79,7 +79,7 @@ plot(wpp, 1)
 # "foreign prcomp"
 head(iris)
 iris.p <- prcomp(iris[, 1:4])
-iris.p <- as.PCA(iris.p, iris[, 5])
+iris.p <- as_PCA(iris.p, iris[, 5])
 class(iris.p)
 plot(iris.p, 1)
 }

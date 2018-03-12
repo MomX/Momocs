@@ -2,7 +2,8 @@
 
 #' Linear Discriminant Analysis on Coe objects
 #'
-#' Performs a LDA on Coe objects. Relies on \link{lda} in MASS.
+#' Calculates a LDA on [Coe] on top of [MASS::lda].
+#'
 #' @aliases LDA
 #' @rdname LDA
 #' @param x a  PCA object

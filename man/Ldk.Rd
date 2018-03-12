@@ -2,6 +2,7 @@
 % Please edit documentation in R/cl-def-Ldk.R
 \name{Ldk}
 \alias{Ldk}
+\alias{LdkCoe}
 \title{Builds an Ldk object}
 \usage{
 Ldk(coo, links = NULL, slidings = NULL, fac = data.frame())
@@ -24,8 +25,9 @@ an \code{Ldk} object
 In Momocs, \code{Ldk} classes objects are
 lists of configurations of \bold{l}an\bold{d}mar\bold{k}s, with optionnal components,
 on which generic methods such as plotting methods (e.g. \link{stack})
-and specific methods (e.g. todo-Procrustes can be applied.
-\code{Ldk} objects are primarily \code{\link{Coo}} objects.
+and specific methods (e.g. \link{fgProcrustes}).
+\code{Ldk} objects are primarily \code{\link{Coo}} objects. In a sense, morphometrics methods
+on Ldk objects preserves (x, y) coordinates and \code{LdkCoe} are also \code{Ldk} objects.
 }
 \details{
 All the shapes in x must have the same number of landmarks. If you are

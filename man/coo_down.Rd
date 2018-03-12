@@ -2,7 +2,7 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_down}
 \alias{coo_down}
-\title{coo_down -----------------
+\title{coo_down
 Retains coordinates with negative y-coordinates}
 \usage{
 coo_down(coo, slidegap = FALSE)

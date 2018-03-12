@@ -9,7 +9,7 @@
   \itemize{
     \item Moved everything to `github.com/MomX/Momocs`
     \item graphics is not dead (aka grindr): pipe-friendly base layers for biplots and shape drawing on cartesian coordinates. Is used to replace all multivariate plotters (eg `plot.PCA`), family pictures (eg `stack`, `panel`) and single shape plotters (eg `ldk_plot`, `coo_plot`). This strategy is faster, much more generic and will ease further development and maintenance compared to previous Momocs graphs.
-    \item vignette for `cheapbabi`
+    \item vignette for `grindr`
     \item ongoing complete review of code
     \item ongoing complete review of manual pages: lots of grouping, more and better examples, default values in `param`s
     \item released `reshape2`, `plyr` dependencies
@@ -18,10 +18,15 @@
     \item `fgProcrustes` now accepts lists
     \item new functions: `andnow` and `andnow_method` class tells you what to do with this object, and which classes are supported by this function/method.
     \item new `coo_*` methods: `coo_range` and `coo_range_enlarge`
-    \item `coo` function ported to methods and now supporting `.Coo` directly: `coo_angle_edges`, `coo_angle_tangent`, `coo_boundingbox`, `coo_calliper`, `coo_chull`, `coo_chull_onion`, `coo_circularity`, `coo_circularityharalick`, `coo_circularity_norm`, `coo_convexity`, `coo_dxy`, `coo_eccentricityboundingbox`, `coo_eccentricityeigen`, `coo_elongation`, `coo_intersect_angle`, `coo_intersect_direction`, `coo_intersect_segment`, `coo_perim`, `coo_perimcum`, `coo_perimpts`, `coo_rectangularity`, `coo_rectilinearity`, `coo_scalex`, `coo_scaley`, `coo_solidity`.
+    \item `coo` function ported to methods and now supporting `.Coo` directly: `coo_angle_edges`, `coo_angle_tangent`, `coo_boundingbox`, `coo_calliper`, `coo_chull`, `coo_chull_onion`, `coo_circularity`, `coo_circularityharalick`, `coo_circularity_norm`, `coo_convexity`, `coo_dxy`, `coo_eccentricityboundingbox`, `coo_eccentricityeigen`, `coo_elongation`, `coo_intersect_angle`, `coo_intersect_direction`, `coo_intersect_segment`, `coo_perim`, `coo_perimcum`, `coo_perimpts`, `coo_rectangularity`, `coo_rectilinearity`, `coo_scalex`, `coo_scaley`, `coo_solidity`, `coo_truss`.
+    \item `truss` is now `coo_truss` and a method of it own.
     \item some non-exported functions (ie internals) are now homegeneously begin with a `.`, eg `.is.error` (try `Momocs:::. + <Tab>` for a complete list).
     \item some previously exported functions are now internals (`function_foo` renamed to `.function_foo`): `.coo_angle_edge1`, `.vecs_param`, `.refactor`
-    \item Deprecated `plot3.PCA` (will be replaced in further versions); `Ntable` splitted into of `plot_table` + `table`; `coo_tangle` now in `coo_angle_tangent`; `coo_theta3` now in `coo_angle_edges`.
+    \item Deprecated `plot3.PCA` (will be replaced in further versions); `Ntable` splitted into of `plot_table` + `table`; `coo_tangle` now in `coo_angle_tangent`; `coo_theta3` now in `coo_angle_edges`, `truss` now in `coo_truss` ; `plot.Coo` is now `inspect`
+    \item Deprecated `stack2` and `panel2` before their rewriting.
+    \item Deprecated `as_Out`, that should have been `efourier_i.OutCoe` anyway. May be back as this in further versions.
+    \item
+
     \item Deprecated all `is.*` aliases for `is_*` methods
     \item largely reorganized `.R` files
     \item fixed a bug in `LDA` when `retain=1` (#e7704eb)

@@ -8,7 +8,7 @@
 #' @param id1 id of the 1st row
 #' @param id2 id of the 2nd row
 #' @note On Out objects, we first \link{get_ldk}.
-#' @seealso if you want all pairwise combinations, see \link{truss}
+#' @seealso if you want all pairwise combinations, see \link{coo_truss}
 #' @examples
 #' # single shape
 #' d(wings[1], 1, 4)
@@ -133,8 +133,8 @@ measure_nse <- function(ch){
 
 #' Truss measurement
 #'
-#' A method to calculate on shapes or on Coo truss measurements,
-#' which is all pairwise combinations of euclidean distances
+#' A method to calculate on shapes or on [Coo] truss measurements,
+#' that is all pairwise combinations of euclidean distances
 #' @param x a shape or an Ldk object
 #' @return a named numeric or matrix
 #' @note Mainly implemented for historical/didactical reasons.
@@ -142,11 +142,11 @@ measure_nse <- function(ch){
 #' @examples
 #' # example on a single shape
 #' cat <- coo_sample(shapes[4], 6)
-#' truss(cat)
+#' coo_truss(cat)
 #'
 #' # example on wings dataset
 
-#' tx <- truss(wings)
+#' tx <- coo_truss(wings)
 #' dim(tx)
 #' # we normalize and plot an heatmap
 #' txn <- apply(tx$coe, 2, .normalize)
@@ -155,21 +155,25 @@ measure_nse <- function(ch){
 #' txp <- PCA(tx, scale. = TRUE, center=TRUE, fac=wings$fac)
 #' plot(txp, 1)
 #' @export
-truss <- function(x){
-  UseMethod("truss")
+coo_truss <- function(x){
+  UseMethod("coo_truss")
 }
 
 #' @export
-truss.default <- function(x){
+coo_truss.default <- function(x){
   res <- as.numeric(dist(x))
   names(res) <- apply(combn(1:nrow(x), 2), 2, paste, collapse="-")
   return(res)
 }
 
 #' @export
-truss.Ldk <- function(x){
-  TraCoe(coe=x$coo %>% sapply(truss) %>% t(),
+coo_truss.Coo <- function(x){
+  .check(length(unique(coo_nb(x)))==1,
+         "all shapes must have the same number of coordinates. See ?coo_sample")
+  TraCoe(coe=x$coo %>% sapply(coo_truss) %>% t(),
          fac=x$fac)
 }
+
+
 
 

@@ -205,7 +205,7 @@ layer_points <- function(x, pch=20, cex=4/log1p(nrow(x$xy)), ...){
 #' @export
 #' @rdname layers
 #' @param position one of \code{range, full, circle,
-#' xy, range_axes, full_axes)} to feed \link{pos.shapes} (default \code{range})
+#' xy, range_axes, full_axes)} to feed \link{morphospace_positions} (default \code{range})
 #' @param nb \code{numeric} total number of shapes when \code{position="circle"} (default \code{12})
 #' @param nr \code{numeric} number of rows to position shapes (default \code{6})
 #' @param nc \code{numeric} number of columns to position shapes (default \code{5})
@@ -236,7 +236,7 @@ layer_morphospace <-
     }
 
     # position of shapes to reconstruct
-    pos <- pos.shapes(xy=xy, pos.shp = position,
+    pos <- morphospace_positions(xy=xy, pos.shp = position,
                       nb.shp = nb, nr.shp = nr, nc.shp = nc)
 
     # according to the type of morphometric method,

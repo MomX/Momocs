@@ -42,5 +42,5 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{rm_harm}}, \code{\link{rm_uncomplete}},
   \code{\link{rw_fac}}, \code{\link{sample_n}},
   \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subset.Coo}}, \code{\link{table}}
+  \code{\link{table}}
 }

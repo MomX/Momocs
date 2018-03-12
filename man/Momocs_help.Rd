@@ -13,3 +13,8 @@ the online manual is accessed.}
 \description{
 Launch a browser to an online version of the manual
 }
+\examples{
+\dontrun{
+Momocs_help("efourier")
+}
+}

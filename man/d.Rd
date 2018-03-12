@@ -30,5 +30,5 @@ d(wings, 1, 4)
 d(hearts, 2, 4)
 }
 \seealso{
-if you want all pairwise combinations, see \link{truss}
+if you want all pairwise combinations, see \link{coo_truss}
 }

@@ -12,13 +12,17 @@
 #' @family Coo_graphics
 #' @examples
 #' \dontrun{
-#' plot(bot, 5)
-#' plot(bot)
-#' plot(bot, 5, pch=3, points=TRUE) # an example of '...' use
+#' inspect(bot, 5)
+#' inspect(bot)
+#' inspect(bot, 5, pch=3, points=TRUE) # an example of '...' use
 #' }
-#' @method plot Coo
 #' @export
-plot.Coo <- function(x, id, ...) {
+inspect <- function(x, id, ...){
+  UseMethod("inspect")
+}
+
+#' @export
+inspect.Coo <- function(x, id, ...) {
   Coo <- x
   if (missing(id)) {
     repeat {
@@ -240,22 +244,22 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 }
 
 # stack2 ----
-#' Family picture of shapes (ggplot2)
-#'
-#' Will replace stack soon.
-#' @param Coo a Coo object
-#' Family picture of shapes
-#' @return a ggplot2 object
-#' @examples
-#' stack2(bot)
-#' @export
-stack2 <- function(Coo){
-  df <- as_df(Coo)
-  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
-    geom_path() +
-    coord_equal()
-  gg
-}
+# #' Family picture of shapes (ggplot2)
+# #'
+# #' Will replace stack soon.
+# #' @param Coo a Coo object
+# #' Family picture of shapes
+# #' @return a ggplot2 object
+# #' @examples
+# #' stack2(bot)
+# #' @export
+# stack2 <- function(Coo){
+#   df <- as_df(Coo)
+#   gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
+#     geom_path() +
+#     coord_equal()
+#   gg
+# }
 
 # panel ---------------------------------------------------
 #' Family picture of shapes
@@ -497,21 +501,21 @@ panel.Ldk <- function(x, cols, borders, fac,
 }
 
 # panel2 -----
-#' Family picture of shapes (ggplot2)
-#'
-#' May replace panel one day.
-#' @param Coo a Coo object
-#' @return a ggplot2 object
-#' @examples
-#' panel2(shapes)
-#' @family Coo_graphics
-#' @export
-panel2 <- function(Coo){
-  df <- as_df(Coo)
-  gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
-    geom_path() +
-    coord_equal() + facet_wrap( ~ id)
-  gg
-}
+# #' Family picture of shapes (ggplot2)
+# #'
+# #' May replace panel one day.
+# #' @param Coo a Coo object
+# #' @return a ggplot2 object
+# #' @examples
+# #' panel2(shapes)
+# #' @family Coo_graphics
+# #' @export
+# panel2 <- function(Coo){
+#   df <- as_df(Coo)
+#   gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
+#     geom_path() +
+#     coord_equal() + facet_wrap( ~ id)
+#   gg
+# }
 
 ##### end graphics Coo

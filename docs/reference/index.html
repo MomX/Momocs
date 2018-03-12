@@ -112,52 +112,114 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+            <h2 id="section-morphometrics-methods" class="hasAnchor"><a href="#section-morphometrics-methods" class="anchor"></a>Morphometrics methods</h2>
             <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="add_ldk.html">add_ldk</a></code> </p>
+            <p><code><a href="efourier.html">efourier</a></code> <code><a href="efourier.html">efourier_norm</a></code> </p>
           </td>
-          <td><p>Adds new landmarks on Out and Opn objects</p></td>
+          <td><p>Elliptical Fourier transform (and its normalization)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="andnow.html">andnow</a></code> <code><a href="andnow.html">andnow_method</a></code> </p>
+            <p><code><a href="rfourier.html">rfourier</a></code> </p>
           </td>
-          <td><p>And now, what to do?</p></td>
+          <td><p>Radii variation Fourier transform (equally spaced radii)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="arrange.html">arrange</a></code> </p>
+            <p><code><a href="tfourier.html">tfourier</a></code> </p>
           </td>
-          <td><p>Arranges (ala dplyr) on Momocs objects</p></td>
+          <td><p>Tangent angle Fourier transform</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="as_df.html">as_df</a></code> </p>
+            <p><code><a href="sfourier.html">sfourier</a></code> </p>
           </td>
-          <td><p>Converts Momocs objects to data.frames</p></td>
+          <td><p>Radii variation Fourier transform (equally spaced curvilinear abscissa)</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="as.Out.html">as.Out</a></code> </p>
+            <p><code><a href="dfourier.html">dfourier</a></code> </p>
           </td>
-          <td><p>Convert an OutCoe object into an Out object</p></td>
+          <td><p>Discrete cosinus transform</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="at_least.html">at_least</a></code> </p>
+            <p><code><a href="opoly.html">opoly</a></code> </p>
           </td>
-          <td><p>Retains group with at least a certain number of individuals</p></td>
+          <td><p>Calculate orthogonal polynomial fits on open outlines</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="babel.html">pix2chc</a></code> <code><a href="babel.html">chc2pix</a></code> </p>
+            <p><code><a href="npoly.html">npoly</a></code> </p>
           </td>
-          <td><p>Convert (x; y) coordinates to chaincoded coordinates</p></td>
+          <td><p>Calculate natural polynomial fits on open outlines</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fgProcrustes.html">fgProcrustes</a></code> </p>
+          </td>
+          <td><p>Full Generalized Procrustes alignment between shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fgsProcrustes.html">fgsProcrustes</a></code> </p>
+          </td>
+          <td><p>Full Generalized Procrustes alignment between shapes with sliding landmarks</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="bezier.html">bezier</a></code> </p>
+          </td>
+          <td><p>Calculates Bezier coefficients from a shape</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-more-morphometrics-methods" class="hasAnchor"><a href="#section-more-morphometrics-methods" class="anchor"></a>More morphometrics methods</h2>
+            <p class="section-desc"><p>Inverse functions and some others internally used by the main ones</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="efourier_i.html">efourier_i</a></code> </p>
+          </td>
+          <td><p>Inverse elliptical Fourier transform</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rfourier_i.html">rfourier_i</a></code> </p>
+          </td>
+          <td><p>Inverse radii variation Fourier transform</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tfourier_i.html">tfourier_i</a></code> </p>
+          </td>
+          <td><p>Inverse tangent angle Fourier transform</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="sfourier_i.html">sfourier_i</a></code> </p>
+          </td>
+          <td><p>Inverse radii variation Fourier transform</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="dfourier_i.html">dfourier_i</a></code> </p>
+          </td>
+          <td><p>Investe discrete cosinus transform</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="poly_i.html">opoly_i</a></code> <code><a href="poly_i.html">npoly_i</a></code> </p>
+          </td>
+          <td><p>Calculates shape from a polynomial model</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -167,34 +229,24 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="bezier.html">bezier</a></code> </p>
+            <p><code><a href="fProcrustes.html">fProcrustes</a></code> </p>
           </td>
-          <td><p>Calculates Bezier coefficients from a shape</p></td>
+          <td><p>Full Procrustes alignment between two shapes</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="boxplot.OutCoe.html">boxplot</a></code> </p>
+            <p><code><a href="pProcrustes.html">pProcrustes</a></code> </p>
           </td>
-          <td><p>Boxplot of morphometric coefficients</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="boxplot.PCA.html">boxplot</a></code> </p>
-          </td>
-          <td><p>Boxplot on PCA objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="breed.html">breed</a></code> </p>
-          </td>
-          <td><p>Jitters Coe (and others) objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="bridges.html">l2m</a></code> <code><a href="bridges.html">m2l</a></code> <code><a href="bridges.html">d2m</a></code> <code><a href="bridges.html">m2d</a></code> <code><a href="bridges.html">l2a</a></code> <code><a href="bridges.html">a2l</a></code> <code><a href="bridges.html">a2m</a></code> <code><a href="bridges.html">m2a</a></code> <code><a href="bridges.html">m2ll</a></code> </p>
-          </td>
-          <td><p>Convert between different classes</p></td>
-        </tr><tr>
+          <td><p>Partial Procrustes alignment between two shapes</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-calibration-and-other-helpers" class="hasAnchor"><a href="#section-calibration-and-other-helpers" class="anchor"></a>Calibration and other helpers</h2>
+            <p class="section-desc"><p>When defined</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="calibrate_deviations.html">calibrate_deviations</a></code> </p>
@@ -209,45 +261,21 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="calibrate_r2.html">calibrate_r2</a></code> </p>
-          </td>
-          <td><p>Quantitative r2 calibration for Opn objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="calibrate_reconstructions.html">calibrate_reconstructions</a></code> </p>
           </td>
           <td><p>Calibrate using reconstructed shapes</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="chop.html">chop</a></code> </p>
+            <p><code><a href="harm_pow.html">harm_pow</a></code> </p>
           </td>
-          <td><p>Chops (rough slicing) Momocs objects</p></td>
+          <td><p>Calculates harmonic power given a list from e/t/rfourier</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="classification_metrics.html">classification_metrics</a></code> </p>
+            <p><code><a href="harm.contrib.html">hcontrib</a></code> </p>
           </td>
-          <td><p>Calculate classification metrics on a confusion matrix</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="classify.html">classify</a></code> </p>
-          </td>
-          <td><p>Classify using LDA</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="CLUST.html">CLUST</a></code> </p>
-          </td>
-          <td><p>Hierarchical clustering</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Coe.html">Coe</a></code> </p>
-          </td>
-          <td><p>Coe "super" class</p></td>
+          <td><p>Harmonic contribution to shape</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -269,15 +297,121 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="color_palettes.html">col_summer</a></code> <code><a href="color_palettes.html">col_summer2</a></code> <code><a href="color_palettes.html">col_spring</a></code> <code><a href="color_palettes.html">col_autumn</a></code> <code><a href="color_palettes.html">col_black</a></code> <code><a href="color_palettes.html">col_solarized</a></code> <code><a href="color_palettes.html">col_gallus</a></code> <code><a href="color_palettes.html">col_qual</a></code> <code><a href="color_palettes.html">col_heat</a></code> <code><a href="color_palettes.html">col_hot</a></code> <code><a href="color_palettes.html">col_cold</a></code> <code><a href="color_palettes.html">col_sari</a></code> <code><a href="color_palettes.html">col_india</a></code> <code><a href="color_palettes.html">col_bw</a></code> <code><a href="color_palettes.html">col_grey</a></code> </p>
+            <p><code><a href="rm_asym.html">rm_asym</a></code> <code><a href="rm_asym.html">rm_sym</a></code> </p>
           </td>
-          <td><p>Some color palettes</p></td>
+          <td><p>Removes asymmetric and symmetric variation on OutCoe objects</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="color_transparency.html">col_transp</a></code> <code><a href="color_transparency.html">col_alpha</a></code> </p>
+            <p><code><a href="symmetry.html">symmetry</a></code> </p>
           </td>
-          <td><p>Transparency helpers and palettes</p></td>
+          <td><p>Calcuates symmetry indices on OutCoe objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="calibrate_r2.html">calibrate_r2</a></code> </p>
+          </td>
+          <td><p>Quantitative r2 calibration for Opn objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Ptolemy.html">Ptolemy</a></code> </p>
+          </td>
+          <td><p>Ptolemaic ellipses and illustration of efourier</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="morphospace_positions.html">morphospace_positions</a></code> </p>
+          </td>
+          <td><p>Calculates nice positions on a plane for drawing shapes</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-classes" class="hasAnchor"><a href="#section-classes" class="anchor"></a>Classes</h2>
+            <p class="section-desc"><p>Their description and rationale</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Coo.html">Coo</a></code> </p>
+          </td>
+          <td><p>Coo "super" class</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Out.html">Out</a></code> </p>
+          </td>
+          <td><p>Builds an Out object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Opn.html">Opn</a></code> </p>
+          </td>
+          <td><p>Builds an Opn object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Ldk.html">Ldk</a></code> </p>
+          </td>
+          <td><p>Builds an Ldk object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Coe.html">Coe</a></code> </p>
+          </td>
+          <td><p>Coe "super" class</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="OutCoe.html">OutCoe</a></code> </p>
+          </td>
+          <td><p>Builds an OutCoe object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="OpnCoe.html">OpnCoe</a></code> </p>
+          </td>
+          <td><p>Builds an OpnCoe object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="TraCoe.html">TraCoe</a></code> </p>
+          </td>
+          <td><p>Traditional morphometrics class</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="is.html">is_Coo</a></code> <code><a href="is.html">is_PCA</a></code> <code><a href="is.html">is_LDA</a></code> <code><a href="is.html">is_Out</a></code> <code><a href="is.html">is_Opn</a></code> <code><a href="is.html">is_Ldk</a></code> <code><a href="is.html">is_Coe</a></code> <code><a href="is.html">is_OutCoe</a></code> <code><a href="is.html">is_OpnCoe</a></code> <code><a href="is.html">is_LdkCoe</a></code> <code><a href="is.html">is_TraCoe</a></code> <code><a href="is.html">is_shp</a></code> <code><a href="is.html">is_fac</a></code> <code><a href="is.html">is_ldk</a></code> <code><a href="is.html">is_slidings</a></code> <code><a href="is.html">is_links</a></code> </p>
+          </td>
+          <td><p>Class and component testers</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-classes-manipulation" class="hasAnchor"><a href="#section-classes-manipulation" class="anchor"></a>Classes manipulation</h2>
+            <p class="section-desc"><p>Largely inspired from dplyr’s verbs</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="arrange.html">arrange</a></code> </p>
+          </td>
+          <td><p>Arranges (ala dplyr) on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="at_least.html">at_least</a></code> </p>
+          </td>
+          <td><p>Retains group with at least a certain number of individuals</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="chop.html">chop</a></code> </p>
+          </td>
+          <td><p>Chops (rough slicing) Momocs objects</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -287,10 +421,659 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="complex.html">cpx2coo</a></code> <code><a href="complex.html">coo2cpx</a></code> </p>
+            <p><code><a href="dissolve.html">dissolve</a></code> </p>
           </td>
-          <td><p>Convert complex to/from cartesian coordinates</p></td>
+          <td><p>Dissolves Coe objects</p></td>
         </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="filter.html">filter</a></code> </p>
+          </td>
+          <td><p>Filters (ala dplyr) on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mutate.html">mutate</a></code> </p>
+          </td>
+          <td><p>Mutates (ala dplyr) on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rename.html">rename</a></code> </p>
+          </td>
+          <td><p>Renames (ala dplyr) on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rescale.html">rescale</a></code> </p>
+          </td>
+          <td><p>Rescale coordinates from pixels to real length units</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="select.html">select</a></code> </p>
+          </td>
+          <td><p>Selects (ala dplyr) on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rm_harm.html">rm_harm</a></code> </p>
+          </td>
+          <td><p>Removes harmonics from Coe objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rm_uncomplete.html">rm_uncomplete</a></code> </p>
+          </td>
+          <td><p>Removes shapes with incomplete slices</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rw_fac.html">rw_fac</a></code> </p>
+          </td>
+          <td><p>Renames levels on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="sample_frac.html">sample_frac</a></code> </p>
+          </td>
+          <td><p>Samples a fraction of shapes in Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="sample_n.html">sample_n</a></code> </p>
+          </td>
+          <td><p>Samples n shapes on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="slice.html">slice</a></code> </p>
+          </td>
+          <td><p>Slices (ala dplyr) on Momocs objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="table.html">table</a></code> </p>
+          </td>
+          <td><p>Cross-tabulates objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="validate.html">validate</a></code> </p>
+          </td>
+          <td><p>Validates Coo objects</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-import-export" class="hasAnchor"><a href="#section-import-export" class="anchor"></a>Import/Export</h2>
+            <p class="section-desc"><p>Will be all moved to <a href="http://www.github.com/MomX/Momit">Momit</a> soon</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="export.html">export</a></code> </p>
+          </td>
+          <td><p>Exports Coe objects and shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="as_df.html">as_df</a></code> </p>
+          </td>
+          <td><p>Converts Momocs objects to data.frames</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="import_Conte.html">import_Conte</a></code> </p>
+          </td>
+          <td><p>Extract outlines coordinates from an image silhouette</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="import_jpg.html">import_jpg</a></code> </p>
+          </td>
+          <td><p>Extract outline coordinates from multiple .jpg files</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="import_jpg1.html">import_jpg1</a></code> </p>
+          </td>
+          <td><p>Extract outline coordinates from a single .jpg file</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="import_StereoMorph.html">import_StereoMorph_curve1</a></code> <code><a href="import_StereoMorph.html">import_StereoMorph_curve</a></code> <code><a href="import_StereoMorph.html">import_StereoMorph_ldk1</a></code> <code><a href="import_StereoMorph.html">import_StereoMorph_ldk</a></code> </p>
+          </td>
+          <td><p>Import files creates by StereoMorph into Momocs</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="import_tps.html">import_tps</a></code> <code><a href="import_tps.html">tps2coo</a></code> </p>
+          </td>
+          <td><p>Import a tps file</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="import_txt.html">import_txt</a></code> </p>
+          </td>
+          <td><p>Import coordinates from a .txt file</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tie_jpg_txt.html">tie_jpg_txt</a></code> </p>
+          </td>
+          <td><p>Binds .jpg outlines from .txt landmarks taken on them</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="img_plot.html">img_plot</a></code> <code><a href="img_plot.html">img_plot0</a></code> </p>
+          </td>
+          <td><p>Plots a .jpg image</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="lf_structure.html">lf_structure</a></code> </p>
+          </td>
+          <td><p>bind_db.Coe &lt;- bind_db.Coo
+Extracts structure from filenames</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-multivariate-methods" class="hasAnchor"><a href="#section-multivariate-methods" class="anchor"></a>Multivariate methods</h2>
+            <p class="section-desc"><p>Will be in <a href="http://www.github.com/MomX/Momecs">Momecs</a> at some point</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="PCA.html">PCA</a></code> <code><a href="PCA.html">as_PCA</a></code> </p>
+          </td>
+          <td><p>Principal component analysis on Coe objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="LDA.html">LDA</a></code> </p>
+          </td>
+          <td><p>Linear Discriminant Analysis on Coe objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mshapes.html">mshapes</a></code> <code><a href="mshapes.html">MSHAPES</a></code> </p>
+          </td>
+          <td><p>Mean shape calculation for Coo, Coe, etc.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="MANOVA.html">MANOVA</a></code> </p>
+          </td>
+          <td><p>Multivariate analysis of (co)variance on Coe objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="MANOVA_PW.html">MANOVA_PW</a></code> </p>
+          </td>
+          <td><p>Pairwise Multivariate analyses of variance</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="KMEANS.html">KMEANS</a></code> </p>
+          </td>
+          <td><p>KMEANS on PCA objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="CLUST.html">CLUST</a></code> </p>
+          </td>
+          <td><p>Hierarchical clustering</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-more-on-multivariate" class="hasAnchor"><a href="#section-more-on-multivariate" class="anchor"></a>More on multivariate</h2>
+            <p class="section-desc"><p>Will be in <a href="http://www.github.com/MomX/Momecs">Momecs</a> at some point</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="PCcontrib.html">PCcontrib</a></code> </p>
+          </td>
+          <td><p>Shape variation along PC axes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="flip_PCaxes.html">flip_PCaxes</a></code> </p>
+          </td>
+          <td><p>Flips PCA axes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="scree.html">scree</a></code> <code><a href="scree.html">scree_min</a></code> <code><a href="scree.html">scree_plot</a></code> </p>
+          </td>
+          <td><p>Methods for PCA eigen values</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rePCA.html">rePCA</a></code> </p>
+          </td>
+          <td><p>"Redo" a PCA on a new Coe</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="reLDA.html">reLDA</a></code> </p>
+          </td>
+          <td><p>"Redo" a LDA on new data</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="classify.html">classify</a></code> </p>
+          </td>
+          <td><p>Classify using LDA</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="classification_metrics.html">classification_metrics</a></code> </p>
+          </td>
+          <td><p>Calculate classification metrics on a confusion matrix</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="which_out.html">which_out</a></code> </p>
+          </td>
+          <td><p>Identify outliers</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-graphics" class="hasAnchor"><a href="#section-graphics" class="anchor"></a>Graphics</h2>
+            <p class="section-desc"><p>We all love graphics, don’t we?</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="panel.Coo.html">panel</a></code> </p>
+          </td>
+          <td><p>Family picture of shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="stack.Coo.html">stack</a></code> </p>
+          </td>
+          <td><p>Family picture of shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="inspect.html">inspect</a></code> </p>
+          </td>
+          <td><p>Graphical inspection of shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="papers.html">paper</a></code> <code><a href="papers.html">paper_white</a></code> <code><a href="papers.html">paper_grid</a></code> <code><a href="papers.html">paper_chess</a></code> <code><a href="papers.html">paper_dots</a></code> </p>
+          </td>
+          <td><p>grindr papers for shape plots</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="drawers.html">draw_polygon</a></code> <code><a href="drawers.html">draw_outline</a></code> <code><a href="drawers.html">draw_outlines</a></code> <code><a href="drawers.html">draw_points</a></code> <code><a href="drawers.html">draw_landmarks</a></code> <code><a href="drawers.html">draw_lines</a></code> <code><a href="drawers.html">draw_centroid</a></code> <code><a href="drawers.html">draw_curve</a></code> <code><a href="drawers.html">draw_curves</a></code> <code><a href="drawers.html">draw_firstpoint</a></code> <code><a href="drawers.html">draw_axes</a></code> <code><a href="drawers.html">draw_labels</a></code> <code><a href="drawers.html">draw_links</a></code> </p>
+          </td>
+          <td><p>grindr drawers for shape plots</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="layers.html">layer_frame</a></code> <code><a href="layers.html">layer_axes</a></code> <code><a href="layers.html">layer_grid</a></code> <code><a href="layers.html">layer_box</a></code> <code><a href="layers.html">layer_fullframe</a></code> <code><a href="layers.html">layer_points</a></code> <code><a href="layers.html">layer_morphospace</a></code> <code><a href="layers.html">layer_ellipses</a></code> <code><a href="layers.html">layer_ellipsesfilled</a></code> <code><a href="layers.html">layer_ellipsesaxes</a></code> <code><a href="layers.html">layer_chull</a></code> <code><a href="layers.html">layer_chullfilled</a></code> <code><a href="layers.html">layer_stars</a></code> <code><a href="layers.html">layer_delaunay</a></code> <code><a href="layers.html">layer_density</a></code> <code><a href="layers.html">layer_labelpoints</a></code> <code><a href="layers.html">layer_labelgroups</a></code> <code><a href="layers.html">layer_rug</a></code> <code><a href="layers.html">layer_title</a></code> <code><a href="layers.html">layer_axesnames</a></code> <code><a href="layers.html">layer_eigen</a></code> <code><a href="layers.html">layer_axesvar</a></code> <code><a href="layers.html">layer_legend</a></code> </p>
+          </td>
+          <td><p>grindr layers for multivariate plots</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="plot_CV.html">plot_CV</a></code> </p>
+          </td>
+          <td><p>Plots a cross-validation table as an heatmap</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="plot_CV2.html">plot_CV2</a></code> </p>
+          </td>
+          <td><p>Plots a cross-correlation table</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="plot_devsegments.html">plot_devsegments</a></code> </p>
+          </td>
+          <td><p>Draws colored segments from a matrix of coordinates.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="plot_mshapes.html">plot_mshapes</a></code> </p>
+          </td>
+          <td><p>Pairwise comparison of a list of shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="plot_PCA.html">plot_PCA</a></code> </p>
+          </td>
+          <td><p>Multivariate plots using grindr layers</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="plot_table.html">plot_table</a></code> </p>
+          </td>
+          <td><p>Plots confusion matrix of sample sizes within $fac</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tps_arr.html">tps_arr</a></code> </p>
+          </td>
+          <td><p>Deformation 'vector field' using Thin Plate Splines</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tps_grid.html">tps_grid</a></code> </p>
+          </td>
+          <td><p>Deformation grids using Thin Plate Splines</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tps_iso.html">tps_iso</a></code> </p>
+          </td>
+          <td><p>Deformation isolines using Thin Plate Splines.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tps_raw.html">tps_raw</a></code> </p>
+          </td>
+          <td><p>Vanilla Thin Plate Splines</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tps2d.html">tps2d</a></code> <code><a href="tps2d.html">tps_apply</a></code> </p>
+          </td>
+          <td><p>Thin Plate Splines for 2D data</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-bridges" class="hasAnchor"><a href="#section-bridges" class="anchor"></a>Bridges</h2>
+            <p class="section-desc"><p>Convert between different classes</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="bridges.html">l2m</a></code> <code><a href="bridges.html">m2l</a></code> <code><a href="bridges.html">d2m</a></code> <code><a href="bridges.html">m2d</a></code> <code><a href="bridges.html">l2a</a></code> <code><a href="bridges.html">a2l</a></code> <code><a href="bridges.html">a2m</a></code> <code><a href="bridges.html">m2a</a></code> <code><a href="bridges.html">m2ll</a></code> </p>
+          </td>
+          <td><p>Convert between different classes</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-landmark-helpers" class="hasAnchor"><a href="#section-landmark-helpers" class="anchor"></a>Landmark helpers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="add_ldk.html">add_ldk</a></code> </p>
+          </td>
+          <td><p>Adds new landmarks on Out and Opn objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="coo_plot.html">coo_plot</a></code> <code><a href="coo_plot.html">ldk_plot</a></code> </p>
+          </td>
+          <td><p>Plots a single shape</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ldk_check.html">ldk_check</a></code> </p>
+          </td>
+          <td><p>Checks 'ldk' shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ldk_chull.html">ldk_chull</a></code> </p>
+          </td>
+          <td><p>Draws convex hulls around landmark positions</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ldk_confell.html">ldk_confell</a></code> </p>
+          </td>
+          <td><p>Draws confidence ellipses for landmark positions</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ldk_contour.html">ldk_contour</a></code> </p>
+          </td>
+          <td><p>Draws kernel density contours around landmark</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ldk_labels.html">ldk_labels</a></code> </p>
+          </td>
+          <td><p>Add landmarks labels</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ldk_links.html">ldk_links</a></code> </p>
+          </td>
+          <td><p>Draws links between landmarks</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="def_ldk_angle.html">def_ldk_angle</a></code> <code><a href="def_ldk_angle.html">def_ldk_direction</a></code> </p>
+          </td>
+          <td><p>Add new landmarks based on angular positions</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="def_ldk_tips.html">def_ldk_tips</a></code> </p>
+          </td>
+          <td><p>Define tips as new landmarks</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="def_ldk.html">def_ldk</a></code> </p>
+          </td>
+          <td><p>Defines new landmarks on Out and Opn objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="def_links.html">def_links</a></code> </p>
+          </td>
+          <td><p>Defines links between landmarks</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="def_slidings.html">def_slidings</a></code> </p>
+          </td>
+          <td><p>Defines sliding landmarks matrix</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="links_all.html">links_all</a></code> </p>
+          </td>
+          <td><p>Creates links (all pariwise combinations) between landmarks</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="links_delaunay.html">links_delaunay</a></code> </p>
+          </td>
+          <td><p>Creates links (Delaunay triangulation) between landmarks</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="d.html">d</a></code> </p>
+          </td>
+          <td><p>A wrapper to calculates euclidean distances between two points</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="measure.html">measure</a></code> </p>
+          </td>
+          <td><p>Measures shape descriptors</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="coo_truss.html">coo_truss</a></code> </p>
+          </td>
+          <td><p>Truss measurement</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="slidings_scheme.html">slidings_scheme</a></code> </p>
+          </td>
+          <td><p>Extracts partitions of sliding coordinates</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rearrange_ldk.html">rearrange_ldk</a></code> </p>
+          </td>
+          <td><p>Rearrange, (select and reorder) landmarks to retain</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-getters-setters-for-components-of-interest" class="hasAnchor"><a href="#section-getters-setters-for-components-of-interest" class="anchor"></a>Getters/Setters for components of interest</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_chull_area.html">get_chull_area</a></code> <code><a href="get_chull_area.html">get_chull_volume</a></code> </p>
+          </td>
+          <td><p>Calculates convex hull area/volume of PCA scores</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_ldk.html">get_ldk</a></code> </p>
+          </td>
+          <td><p>Retrieves landmarks coordinates</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_pairs.html">get_pairs</a></code> </p>
+          </td>
+          <td><p>Get paired individual on a Coe, PCA or LDA objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_slidings.html">get_slidings</a></code> </p>
+          </td>
+          <td><p>Extracts sliding landmarks coordinates</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
+            <p class="section-desc"><p>To play around with various data types</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_apodemus.html">apodemus</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of Apodemus (wood mouse) mandibles</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_bot.html">bot</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of beer and whisky bottles.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_chaff.html">chaff</a></code> </p>
+          </td>
+          <td><p>Data: Landmark and semilandmark coordinates on cereal glumes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_charring.html">charring</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates from an experimental charring on cereal grains</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_flower.html">flower</a></code> </p>
+          </td>
+          <td><p>Data: Measurement of iris flowers</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_hearts.html">hearts</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of hand-drawn hearts</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_molars.html">molars</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of 360 molars</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_mosquito.html">mosquito</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of mosquito wings.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_mouse.html">mouse</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of mouse molars</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_nsfishes.html">nsfishes</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of North Sea fishes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_oak.html">oak</a></code> </p>
+          </td>
+          <td><p>Data: Configuration of landmarks of oak leaves</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_olea.html">olea</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of olive seeds open outlines.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_shapes.html">shapes</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of various shapes</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_trilo.html">trilo</a></code> </p>
+          </td>
+          <td><p>Data: Outline coordinates of cephalic outlines of trilobite</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="data_wings.html">wings</a></code> </p>
+          </td>
+          <td><p>Data: Landmarks coordinates of mosquito wings</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-coo-toolbox" class="hasAnchor"><a href="#section-coo-toolbox" class="anchor"></a>coo_ toolbox</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="coo_align.html">coo_align</a></code> </p>
@@ -428,7 +1211,7 @@ shape</p></td>
           <td>
             <p><code><a href="coo_down.html">coo_down</a></code> </p>
           </td>
-          <td><p>coo_down -----------------
+          <td><p>coo_down
 Retains coordinates with negative y-coordinates</p></td>
         </tr><tr>
           <!--  -->
@@ -715,6 +1498,12 @@ Retains coordinates with negative y-coordinates</p></td>
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="coo_truss.html">coo_truss</a></code> </p>
+          </td>
+          <td><p>Truss measurement</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="coo_up.html">coo_up</a></code> </p>
           </td>
           <td><p>Retains coordinates with positive y-coordinates</p></td>
@@ -724,145 +1513,15 @@ Retains coordinates with negative y-coordinates</p></td>
             <p><code><a href="coo_width.html">coo_width</a></code> </p>
           </td>
           <td><p>Calculates the width of a shape</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Coo.html">Coo</a></code> </p>
-          </td>
-          <td><p>Coo "super" class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="d.html">d</a></code> </p>
-          </td>
-          <td><p>A wrapper to calculates euclidean distances between two points</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_apodemus.html">apodemus</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of Apodemus (wood mouse) mandibles</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_bot.html">bot</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of beer and whisky bottles.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_chaff.html">chaff</a></code> </p>
-          </td>
-          <td><p>Data: Landmark and semilandmark coordinates on cereal glumes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_charring.html">charring</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates from an experimental charring on cereal grains</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_flower.html">flower</a></code> </p>
-          </td>
-          <td><p>Data: Measurement of iris flowers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_hearts.html">hearts</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of hand-drawn hearts</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_molars.html">molars</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of 360 molars</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_mosquito.html">mosquito</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of mosquito wings.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_mouse.html">mouse</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of mouse molars</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_nsfishes.html">nsfishes</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of North Sea fishes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_oak.html">oak</a></code> </p>
-          </td>
-          <td><p>Data: Configuration of landmarks of oak leaves</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_olea.html">olea</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of olive seeds open outlines.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_shapes.html">shapes</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of various shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_trilo.html">trilo</a></code> </p>
-          </td>
-          <td><p>Data: Outline coordinates of cephalic outlines of trilobite</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="data_wings.html">wings</a></code> </p>
-          </td>
-          <td><p>Data: Landmarks coordinates of mosquito wings</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="def_ldk_angle.html">def_ldk_angle</a></code> <code><a href="def_ldk_angle.html">def_ldk_direction</a></code> </p>
-          </td>
-          <td><p>Add new landmarks based on angular positions</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="def_ldk_tips.html">def_ldk_tips</a></code> </p>
-          </td>
-          <td><p>Define tips as new landmarks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="def_ldk.html">def_ldk</a></code> </p>
-          </td>
-          <td><p>Defines new landmarks on Out and Opn objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="def_links.html">def_links</a></code> </p>
-          </td>
-          <td><p>Defines links between landmarks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="def_slidings.html">def_slidings</a></code> </p>
-          </td>
-          <td><p>Defines sliding landmarks matrix</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dfourier_i.html">dfourier_i</a></code> </p>
-          </td>
-          <td><p>Investe discrete cosinus transform</p></td>
-        </tr><tr>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-farming-shapes" class="hasAnchor"><a href="#section-farming-shapes" class="anchor"></a>Farming shapes</h2>
+            <p class="section-desc"><p>Most of them will move to <a href="http://www.github.com/MomX/Momfarm">Momfarm</a> soon</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="dfourier_shape.html">dfourier_shape</a></code> </p>
@@ -871,21 +1530,85 @@ Retains coordinates with negative y-coordinates</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="dfourier.html">dfourier</a></code> </p>
+            <p><code><a href="efourier_shape.html">efourier_shape</a></code> </p>
           </td>
-          <td><p>Discrete cosinus transform</p></td>
+          <td><p>Calculates and draw 'efourier' shapes.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="dissolve.html">dissolve</a></code> </p>
+            <p><code><a href="rfourier_shape.html">rfourier_shape</a></code> </p>
           </td>
-          <td><p>Dissolves Coe objects</p></td>
+          <td><p>Calculates and draw 'rfourier' shapes.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="drawers.html">draw_polygon</a></code> <code><a href="drawers.html">draw_outline</a></code> <code><a href="drawers.html">draw_outlines</a></code> <code><a href="drawers.html">draw_points</a></code> <code><a href="drawers.html">draw_landmarks</a></code> <code><a href="drawers.html">draw_lines</a></code> <code><a href="drawers.html">draw_centroid</a></code> <code><a href="drawers.html">draw_curve</a></code> <code><a href="drawers.html">draw_curves</a></code> <code><a href="drawers.html">draw_firstpoint</a></code> <code><a href="drawers.html">draw_axes</a></code> <code><a href="drawers.html">draw_labels</a></code> <code><a href="drawers.html">draw_links</a></code> </p>
+            <p><code><a href="sfourier_shape.html">sfourier_shape</a></code> </p>
           </td>
-          <td><p>grindr drawers for shape plots</p></td>
+          <td><p>Calculates and draw 'sfourier' shapes.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tfourier_shape.html">tfourier_shape</a></code> </p>
+          </td>
+          <td><p>Calculates and draws 'tfourier' shapes.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="breed.html">breed</a></code> </p>
+          </td>
+          <td><p>Jitters Coe (and others) objects</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="perm.html">perm</a></code> </p>
+          </td>
+          <td><p>Permutes and breed Coe (and others) objects</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-color-palettes" class="hasAnchor"><a href="#section-color-palettes" class="anchor"></a>Color palettes</h2>
+            <p class="section-desc"><p>Based from RColorBrewer, viridis and more.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="palettes.html">pal_alpha</a></code> <code><a href="palettes.html">pal_manual</a></code> <code><a href="palettes.html">pal_qual_solarized</a></code> <code><a href="palettes.html">pal_seq_grey</a></code> <code><a href="palettes.html">pal_div_BrBG</a></code> <code><a href="palettes.html">pal_div_PiYG</a></code> <code><a href="palettes.html">pal_div_PRGn</a></code> <code><a href="palettes.html">pal_div_PuOr</a></code> <code><a href="palettes.html">pal_div_RdBu</a></code> <code><a href="palettes.html">pal_div_RdYlBu</a></code> <code><a href="palettes.html">pal_qual_Dark2</a></code> <code><a href="palettes.html">pal_qual_Paired</a></code> <code><a href="palettes.html">pal_qual_Set2</a></code> <code><a href="palettes.html">pal_seq_Blues</a></code> <code><a href="palettes.html">pal_seq_BuGn</a></code> <code><a href="palettes.html">pal_seq_BuPu</a></code> <code><a href="palettes.html">pal_seq_GnBu</a></code> <code><a href="palettes.html">pal_seq_Greens</a></code> <code><a href="palettes.html">pal_seq_Greys</a></code> <code><a href="palettes.html">pal_seq_Oranges</a></code> <code><a href="palettes.html">pal_seq_OrRd</a></code> <code><a href="palettes.html">pal_seq_PuBu</a></code> <code><a href="palettes.html">pal_seq_PuBuGn</a></code> <code><a href="palettes.html">pal_seq_PuRd</a></code> <code><a href="palettes.html">pal_seq_Purples</a></code> <code><a href="palettes.html">pal_seq_RdPu</a></code> <code><a href="palettes.html">pal_seq_Reds</a></code> <code><a href="palettes.html">pal_seq_YlGn</a></code> <code><a href="palettes.html">pal_seq_YlGnBu</a></code> <code><a href="palettes.html">pal_seq_YlOrBr</a></code> <code><a href="palettes.html">pal_seq_YlOrRd</a></code> <code><a href="palettes.html">pal_seq_magma</a></code> <code><a href="palettes.html">pal_seq_inferno</a></code> <code><a href="palettes.html">pal_seq_plasma</a></code> <code><a href="palettes.html">pal_seq_viridis</a></code> </p>
+          </td>
+          <td><p>Color palettes</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-misc" class="hasAnchor"><a href="#section-misc" class="anchor"></a>Misc</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="andnow.html">andnow</a></code> <code><a href="andnow.html">andnow_method</a></code> </p>
+          </td>
+          <td><p>And now, what to do?</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Momocs_version.html">Momocs_lastversion</a></code> <code><a href="Momocs_version.html">Momocs_currentGitHubversion</a></code> <code><a href="Momocs_version.html">Momocs_currentCRANversion</a></code> <code><a href="Momocs_version.html">Momocs_installedversion</a></code> </p>
+          </td>
+          <td><p>Install last version of Momocs</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Momocs_help.html">Momocs_help</a></code> </p>
+          </td>
+          <td><p>Browse Momocs online doc</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="complex.html">cpx2coo</a></code> <code><a href="complex.html">coo2cpx</a></code> </p>
+          </td>
+          <td><p>Convert complex to/from cartesian coordinates</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -895,9 +1618,9 @@ Retains coordinates with negative y-coordinates</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="edi.html">edi</a></code> </p>
+            <p><code><a href="edm.html">edm</a></code> </p>
           </td>
-          <td><p>Calculates euclidean intermediate between two points.</p></td>
+          <td><p>Calculates euclidean distance every pairs of points in two matrices.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -908,153 +1631,9 @@ matrix among those of a second.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="edm.html">edm</a></code> </p>
+            <p><code><a href="edi.html">edi</a></code> </p>
           </td>
-          <td><p>Calculates euclidean distance every pairs of points in two matrices.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="efourier_i.html">efourier_i</a></code> </p>
-          </td>
-          <td><p>Inverse elliptical Fourier transform</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="efourier_norm.html">efourier_norm</a></code> </p>
-          </td>
-          <td><p>Normalizes harmonic coefficients.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="efourier_shape.html">efourier_shape</a></code> </p>
-          </td>
-          <td><p>Calculates and draw 'efourier' shapes.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="efourier.html">efourier</a></code> </p>
-          </td>
-          <td><p>Elliptical Fourier transform</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="export.html">export</a></code> </p>
-          </td>
-          <td><p>Exports Coe objects and shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fgProcrustes.html">fgProcrustes</a></code> </p>
-          </td>
-          <td><p>Full Generalized Procrustes alignment between shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fgsProcrustes.html">fgsProcrustes</a></code> </p>
-          </td>
-          <td><p>Full Generalized Procrustes alignment between shapes with sliding landmarks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="filter.html">filter</a></code> </p>
-          </td>
-          <td><p>Filters (ala dplyr) on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="flip_PCaxes.html">flip_PCaxes</a></code> </p>
-          </td>
-          <td><p>Flips PCA axes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fProcrustes.html">fProcrustes</a></code> </p>
-          </td>
-          <td><p>Full Procrustes alignment between two shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_chull_area.html">get_chull_area</a></code> <code><a href="get_chull_area.html">get_chull_volume</a></code> </p>
-          </td>
-          <td><p>Calculates convex hull area/volume of PCA scores</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_ldk.html">get_ldk</a></code> </p>
-          </td>
-          <td><p>Retrieves landmarks coordinates</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_pairs.html">get_pairs</a></code> </p>
-          </td>
-          <td><p>Get paired individual on a Coe, PCA or LDA objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_slidings.html">get_slidings</a></code> </p>
-          </td>
-          <td><p>Extracts sliding landmarks coordinates</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="harm_pow.html">harm_pow</a></code> </p>
-          </td>
-          <td><p>Calculates harmonic power given a list from e/t/rfourier</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="harm.contrib.html">hcontrib</a></code> </p>
-          </td>
-          <td><p>Harmonic contribution to shape</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="hist.OutCoe.html">hist</a></code> </p>
-          </td>
-          <td><p>Histogram of morphometric coefficients</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="img_plot.html">img_plot</a></code> <code><a href="img_plot.html">img_plot0</a></code> </p>
-          </td>
-          <td><p>Plots a .jpg image</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="import_Conte.html">import_Conte</a></code> </p>
-          </td>
-          <td><p>Extract outlines coordinates from an image silhouette</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="import_jpg.html">import_jpg</a></code> </p>
-          </td>
-          <td><p>Extract outline coordinates from multiple .jpg files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="import_jpg1.html">import_jpg1</a></code> </p>
-          </td>
-          <td><p>Extract outline coordinates from a single .jpg file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="import_StereoMorph.html">import_StereoMorph_curve1</a></code> <code><a href="import_StereoMorph.html">import_StereoMorph_curve</a></code> <code><a href="import_StereoMorph.html">import_StereoMorph_ldk1</a></code> <code><a href="import_StereoMorph.html">import_StereoMorph_ldk</a></code> </p>
-          </td>
-          <td><p>Import files creates by StereoMorph into Momocs</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="import_tps.html">import_tps</a></code> <code><a href="import_tps.html">tps2coo</a></code> </p>
-          </td>
-          <td><p>Import a tps file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="import_txt.html">import_txt</a></code> </p>
-          </td>
-          <td><p>Import coordinates from a .txt file</p></td>
+          <td><p>Calculates euclidean intermediate between two points.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -1073,529 +1652,6 @@ matrix among those of a second.</p></td>
             <p><code><a href="is_equallyspacedradii.html">is_equallyspacedradii</a></code> </p>
           </td>
           <td><p>Tests if coordinates likely have equally spaced radii</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="is.html">is_Coo</a></code> <code><a href="is.html">is_PCA</a></code> <code><a href="is.html">is_LDA</a></code> <code><a href="is.html">is_Out</a></code> <code><a href="is.html">is_Opn</a></code> <code><a href="is.html">is_Ldk</a></code> <code><a href="is.html">is_Coe</a></code> <code><a href="is.html">is_OutCoe</a></code> <code><a href="is.html">is_OpnCoe</a></code> <code><a href="is.html">is_LdkCoe</a></code> <code><a href="is.html">is_TraCoe</a></code> <code><a href="is.html">is_shp</a></code> <code><a href="is.html">is_fac</a></code> <code><a href="is.html">is_ldk</a></code> <code><a href="is.html">is_slidings</a></code> <code><a href="is.html">is_links</a></code> </p>
-          </td>
-          <td><p>Class and component testers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="KMEANS.html">KMEANS</a></code> </p>
-          </td>
-          <td><p>KMEANS on PCA objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="layers.html">layer_frame</a></code> <code><a href="layers.html">layer_axes</a></code> <code><a href="layers.html">layer_grid</a></code> <code><a href="layers.html">layer_box</a></code> <code><a href="layers.html">layer_fullframe</a></code> <code><a href="layers.html">layer_points</a></code> <code><a href="layers.html">layer_morphospace</a></code> <code><a href="layers.html">layer_ellipses</a></code> <code><a href="layers.html">layer_ellipsesfilled</a></code> <code><a href="layers.html">layer_ellipsesaxes</a></code> <code><a href="layers.html">layer_chull</a></code> <code><a href="layers.html">layer_chullfilled</a></code> <code><a href="layers.html">layer_stars</a></code> <code><a href="layers.html">layer_delaunay</a></code> <code><a href="layers.html">layer_density</a></code> <code><a href="layers.html">layer_labelpoints</a></code> <code><a href="layers.html">layer_labelgroups</a></code> <code><a href="layers.html">layer_rug</a></code> <code><a href="layers.html">layer_title</a></code> <code><a href="layers.html">layer_axesnames</a></code> <code><a href="layers.html">layer_eigen</a></code> <code><a href="layers.html">layer_axesvar</a></code> <code><a href="layers.html">layer_legend</a></code> </p>
-          </td>
-          <td><p>grindr layers for multivariate plots</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="LDA.html">LDA</a></code> </p>
-          </td>
-          <td><p>Linear Discriminant Analysis on Coe objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ldk_check.html">ldk_check</a></code> </p>
-          </td>
-          <td><p>Checks 'ldk' shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ldk_chull.html">ldk_chull</a></code> </p>
-          </td>
-          <td><p>Draws convex hulls around landmark positions</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ldk_confell.html">ldk_confell</a></code> </p>
-          </td>
-          <td><p>Draws confidence ellipses for landmark positions</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ldk_contour.html">ldk_contour</a></code> </p>
-          </td>
-          <td><p>Draws kernel density contours around landmark</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ldk_labels.html">ldk_labels</a></code> </p>
-          </td>
-          <td><p>Add landmarks labels</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ldk_links.html">ldk_links</a></code> </p>
-          </td>
-          <td><p>Draws links between landmarks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Ldk.html">Ldk</a></code> </p>
-          </td>
-          <td><p>Builds an Ldk object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="lf_structure.html">lf_structure</a></code> </p>
-          </td>
-          <td><p>bind_db.Coe &lt;- bind_db.Coo
-Extracts structure from filenames</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="links_all.html">links_all</a></code> </p>
-          </td>
-          <td><p>Creates links (all pariwise combinations) between landmarks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="links_delaunay.html">links_delaunay</a></code> </p>
-          </td>
-          <td><p>Creates links (Delaunay triangulation) between landmarks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MANOVA_PW.html">MANOVA_PW</a></code> </p>
-          </td>
-          <td><p>Pairwise Multivariate analyses of variance</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MANOVA.html">MANOVA</a></code> </p>
-          </td>
-          <td><p>Multivariate analysis of (co)variance on Coe objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="measure.html">measure</a></code> </p>
-          </td>
-          <td><p>Measures shape descriptors</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Momocs_help.html">Momocs_help</a></code> </p>
-          </td>
-          <td><p>Browse Momocs online doc</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Momocs_version.html">Momocs_lastversion</a></code> <code><a href="Momocs_version.html">Momocs_currentGitHubversion</a></code> <code><a href="Momocs_version.html">Momocs_currentCRANversion</a></code> <code><a href="Momocs_version.html">Momocs_version</a></code> </p>
-          </td>
-          <td><p>Install and load the last version of Momocs</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Momocs.html">Momocs</a></code> </p>
-          </td>
-          <td><p>Momocs</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mshapes.html">mshapes</a></code> <code><a href="mshapes.html">MSHAPES</a></code> </p>
-          </td>
-          <td><p>Mean shape calculation for Coo, Coe, etc.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mutate.html">mutate</a></code> </p>
-          </td>
-          <td><p>Mutates (ala dplyr) on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="npoly.html">npoly</a></code> </p>
-          </td>
-          <td><p>Calculate natural polynomial fits on open outlines</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Opn.html">Opn</a></code> </p>
-          </td>
-          <td><p>Builds an Opn object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="OpnCoe.html">OpnCoe</a></code> </p>
-          </td>
-          <td><p>Builds an OpnCoe object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="opoly.html">opoly</a></code> </p>
-          </td>
-          <td><p>Calculate orthogonal polynomial fits on open outlines</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Out.html">Out</a></code> </p>
-          </td>
-          <td><p>Builds an Out object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="OutCoe.html">OutCoe</a></code> </p>
-          </td>
-          <td><p>Builds an OutCoe object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="palettes.html">pal_alpha</a></code> <code><a href="palettes.html">pal_manual</a></code> <code><a href="palettes.html">pal_qual_solarized</a></code> <code><a href="palettes.html">pal_seq_grey</a></code> <code><a href="palettes.html">pal_div_BrBG</a></code> <code><a href="palettes.html">pal_div_PiYG</a></code> <code><a href="palettes.html">pal_div_PRGn</a></code> <code><a href="palettes.html">pal_div_PuOr</a></code> <code><a href="palettes.html">pal_div_RdBu</a></code> <code><a href="palettes.html">pal_div_RdYlBu</a></code> <code><a href="palettes.html">pal_qual_Dark2</a></code> <code><a href="palettes.html">pal_qual_Paired</a></code> <code><a href="palettes.html">pal_qual_Set2</a></code> <code><a href="palettes.html">pal_seq_Blues</a></code> <code><a href="palettes.html">pal_seq_BuGn</a></code> <code><a href="palettes.html">pal_seq_BuPu</a></code> <code><a href="palettes.html">pal_seq_GnBu</a></code> <code><a href="palettes.html">pal_seq_Greens</a></code> <code><a href="palettes.html">pal_seq_Greys</a></code> <code><a href="palettes.html">pal_seq_Oranges</a></code> <code><a href="palettes.html">pal_seq_OrRd</a></code> <code><a href="palettes.html">pal_seq_PuBu</a></code> <code><a href="palettes.html">pal_seq_PuBuGn</a></code> <code><a href="palettes.html">pal_seq_PuRd</a></code> <code><a href="palettes.html">pal_seq_Purples</a></code> <code><a href="palettes.html">pal_seq_RdPu</a></code> <code><a href="palettes.html">pal_seq_Reds</a></code> <code><a href="palettes.html">pal_seq_YlGn</a></code> <code><a href="palettes.html">pal_seq_YlGnBu</a></code> <code><a href="palettes.html">pal_seq_YlOrBr</a></code> <code><a href="palettes.html">pal_seq_YlOrRd</a></code> <code><a href="palettes.html">pal_seq_magma</a></code> <code><a href="palettes.html">pal_seq_inferno</a></code> <code><a href="palettes.html">pal_seq_plasma</a></code> <code><a href="palettes.html">pal_seq_viridis</a></code> </p>
-          </td>
-          <td><p>Color palettes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="panel.Coo.html">panel</a></code> </p>
-          </td>
-          <td><p>Family picture of shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="panel2.html">panel2</a></code> </p>
-          </td>
-          <td><p>Family picture of shapes (ggplot2)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="papers.html">paper</a></code> <code><a href="papers.html">paper_white</a></code> <code><a href="papers.html">paper_grid</a></code> <code><a href="papers.html">paper_chess</a></code> <code><a href="papers.html">paper_dots</a></code> </p>
-          </td>
-          <td><p>grindr papers for shape plots</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="PCA.html">PCA</a></code> <code><a href="PCA.html">as.PCA</a></code> </p>
-          </td>
-          <td><p>Principal component analysis on Coe objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="PCcontrib.html">PCcontrib</a></code> </p>
-          </td>
-          <td><p>Shape variation along PC axes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="perm.html">perm</a></code> </p>
-          </td>
-          <td><p>Permutes and breed Coe (and others) objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_CV.html">plot_CV</a></code> </p>
-          </td>
-          <td><p>Plots a cross-validation table as an heatmap</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_CV2.html">plot_CV2</a></code> </p>
-          </td>
-          <td><p>Plots a cross-correlation table</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_devsegments.html">plot_devsegments</a></code> </p>
-          </td>
-          <td><p>Draws colored segments from a matrix of coordinates.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_mshapes.html">plot_mshapes</a></code> </p>
-          </td>
-          <td><p>Pairwise comparison of a list of shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_PCA.html">plot_PCA</a></code> </p>
-          </td>
-          <td><p>Multivariate plots using grindr layers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_table.html">plot_table</a></code> </p>
-          </td>
-          <td><p>Plots confusion matrix of sample sizes within $fac</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot.Coo.html">plot</a></code> </p>
-          </td>
-          <td><p>Graphical inspection of shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot.LDA.html">plot</a></code> </p>
-          </td>
-          <td><p>Plots Linear Discriminant Analysis</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot.PCA.html">plot</a></code> </p>
-          </td>
-          <td><p>Plots Principal Component Analysis</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="poly_i.html">opoly_i</a></code> <code><a href="poly_i.html">npoly_i</a></code> </p>
-          </td>
-          <td><p>Calculates shape from a polynomial model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pos.shapes.html">pos.shapes</a></code> </p>
-          </td>
-          <td><p>Calculates nice positions on a plane for drawing shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pProcrustes.html">pProcrustes</a></code> </p>
-          </td>
-          <td><p>Partial Procrustes alignment between two shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Ptolemy.html">Ptolemy</a></code> </p>
-          </td>
-          <td><p>Ptolemaic ellipses and illustration of efourier</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rearrange_ldk.html">rearrange_ldk</a></code> </p>
-          </td>
-          <td><p>Rearrange, (select and reorder) landmarks to retain</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="reLDA.html">reLDA</a></code> </p>
-          </td>
-          <td><p>"Redo" a LDA on new data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rename.html">rename</a></code> </p>
-          </td>
-          <td><p>Renames (ala dplyr) on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rePCA.html">rePCA</a></code> </p>
-          </td>
-          <td><p>"Redo" a PCA on a new Coe</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rescale.html">rescale</a></code> </p>
-          </td>
-          <td><p>Rescale coordinates from pixels to real length units</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rfourier_i.html">rfourier_i</a></code> </p>
-          </td>
-          <td><p>Inverse radii variation Fourier transform</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rfourier_shape.html">rfourier_shape</a></code> </p>
-          </td>
-          <td><p>Calculates and draw 'rfourier' shapes.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rfourier.html">rfourier</a></code> </p>
-          </td>
-          <td><p>Radii variation Fourier transform (equally spaced radii)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_asym.html">rm_asym</a></code> <code><a href="rm_asym.html">rm_sym</a></code> </p>
-          </td>
-          <td><p>Removes asymmetric and symmetric variation on OutCoe objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_harm.html">rm_harm</a></code> </p>
-          </td>
-          <td><p>Removes harmonics from Coe objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_uncomplete.html">rm_uncomplete</a></code> </p>
-          </td>
-          <td><p>Removes shapes with incomplete slices</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rw_fac.html">rw_fac</a></code> </p>
-          </td>
-          <td><p>Renames levels on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sample_frac.html">sample_frac</a></code> </p>
-          </td>
-          <td><p>Samples a fraction of shapes in Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sample_n.html">sample_n</a></code> </p>
-          </td>
-          <td><p>Samples n shapes on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="scree.html">scree</a></code> <code><a href="scree.html">scree_min</a></code> <code><a href="scree.html">scree_plot</a></code> </p>
-          </td>
-          <td><p>Methods for PCA eigen values</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="select.html">select</a></code> </p>
-          </td>
-          <td><p>Selects (ala dplyr) on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sfourier_i.html">sfourier_i</a></code> </p>
-          </td>
-          <td><p>Inverse radii variation Fourier transform</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sfourier_shape.html">sfourier_shape</a></code> </p>
-          </td>
-          <td><p>Calculates and draw 'sfourier' shapes.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sfourier.html">sfourier</a></code> </p>
-          </td>
-          <td><p>Radii variation Fourier transform (equally spaced curvilinear abscissa)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="slice.html">slice</a></code> </p>
-          </td>
-          <td><p>Slices (ala dplyr) on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="slidings_scheme.html">slidings_scheme</a></code> </p>
-          </td>
-          <td><p>Extracts partitions of sliding coordinates</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="stack.Coo.html">stack</a></code> </p>
-          </td>
-          <td><p>Family picture of shapes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="stack2.html">stack2</a></code> </p>
-          </td>
-          <td><p>Family picture of shapes (ggplot2)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="subset.html">subset</a></code> </p>
-          </td>
-          <td><p>Subsets on Momocs objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="symmetry.html">symmetry</a></code> </p>
-          </td>
-          <td><p>Calcuates symmetry indices on OutCoe objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="table.html">table</a></code> </p>
-          </td>
-          <td><p>Cross-tabulates objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tfourier_i.html">tfourier_i</a></code> </p>
-          </td>
-          <td><p>Inverse tangent angle Fourier transform</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tfourier_shape.html">tfourier_shape</a></code> </p>
-          </td>
-          <td><p>Calculates and draws 'tfourier' shapes.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tfourier.html">tfourier</a></code> </p>
-          </td>
-          <td><p>Tangent angle Fourier transform</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tie_jpg_txt.html">tie_jpg_txt</a></code> </p>
-          </td>
-          <td><p>Binds .jpg outlines from .txt landmarks taken on them</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tps_arr.html">tps_arr</a></code> </p>
-          </td>
-          <td><p>Deformation 'vector field' using Thin Plate Splines</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tps_grid.html">tps_grid</a></code> </p>
-          </td>
-          <td><p>Deformation grids using Thin Plate Splines</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tps_iso.html">tps_iso</a></code> </p>
-          </td>
-          <td><p>Deformation isolines using Thin Plate Splines.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tps_raw.html">tps_raw</a></code> </p>
-          </td>
-          <td><p>Vanilla Thin Plate Splines</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tps2d.html">tps2d</a></code> <code><a href="tps2d.html">tps_apply</a></code> </p>
-          </td>
-          <td><p>Thin Plate Splines for 2D data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="TraCoe.html">TraCoe</a></code> </p>
-          </td>
-          <td><p>Traditional morphometrics class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="truss.html">truss</a></code> </p>
-          </td>
-          <td><p>Truss measurement</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="validate.html">validate</a></code> </p>
-          </td>
-          <td><p>Validates Coo objects</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="which_out.html">which_out</a></code> </p>
-          </td>
-          <td><p>Identify outliers</p></td>
         </tr>
       </tbody>
       </table>
@@ -1605,7 +1661,23 @@ Extracts structure from filenames</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-morphometrics-methods">Morphometrics methods</a></li>
+      <li><a href="#section-more-morphometrics-methods">More morphometrics methods</a></li>
+      <li><a href="#section-calibration-and-other-helpers">Calibration and other helpers</a></li>
+      <li><a href="#section-classes">Classes</a></li>
+      <li><a href="#section-classes-manipulation">Classes manipulation</a></li>
+      <li><a href="#section-import-export">Import/Export</a></li>
+      <li><a href="#section-multivariate-methods">Multivariate methods</a></li>
+      <li><a href="#section-more-on-multivariate">More on multivariate</a></li>
+      <li><a href="#section-graphics">Graphics</a></li>
+      <li><a href="#section-bridges">Bridges</a></li>
+      <li><a href="#section-landmark-helpers">Landmark helpers</a></li>
+      <li><a href="#section-getters-setters-for-components-of-interest">Getters/Setters for components of interest</a></li>
+      <li><a href="#section-data">Data</a></li>
+      <li><a href="#section-coo-toolbox">coo_ toolbox</a></li>
+      <li><a href="#section-farming-shapes">Farming shapes</a></li>
+      <li><a href="#section-color-palettes">Color palettes</a></li>
+      <li><a href="#section-misc">Misc</a></li>
     </ul>
   </div>
 </div>
