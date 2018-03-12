@@ -27,5 +27,5 @@ inspect(bot, 5, pch=3, points=TRUE) # an example of '...' use
 }
 \seealso{
 Other Coo_graphics: \code{\link{panel}},
-  \code{\link{stack.Coo}}
+  \code{\link{stack}}
 }

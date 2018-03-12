@@ -43,12 +43,39 @@ this_dispatch <- function(f, this){
 #' @rdname papers
 #' @export
 paper <- function(coo, ...){
-  coo %>% paper_white(...) %>% draw_axes()
+  UseMethod("paper")
+}
+#' @name papers
+#' @rdname papers
+#' @export
+paper.default <- function(coo, ...){
+  coo %>% paper_white() %>% draw_axes()
+}
+#' @name papers
+#' @rdname papers
+#' @export
+paper.Out <- function(coo, ...){
+    coo %>% paper_white() %>% draw_axes() %>%
+      draw_firstpoint() %>% draw_outlines(...)
+}
+#' @name papers
+#' @rdname papers
+#' @export
+paper.Opn <- function(coo, ...){
+    coo %>% paper_white() %>% draw_axes() %>%
+      draw_firstpoint() %>% draw_curves(...)
+}
+#' @name papers
+#' @rdname papers
+#' @export
+paper.Ldk <- function(coo, ...){
+    coo %>% paper_white() %>% draw_axes() %>%
+      draw_landmarks(...)
 }
 
 #' @rdname papers
 #' @export
-paper_white <- function(coo, ...){
+paper_white <- function(coo){
   # smaller margins
   old <- par(mar=c(1.2, 1.2, 0, 0))
   on.exit(par(old))
@@ -182,13 +209,18 @@ paper_dots <- function(coo, pch=20, n=50, col="#7F7F7F"){
 #' @param border color (hexadecimal) to draw components
 #' @param col color (hexadecimal) to draw components
 #' @param pch to draw components
-#' @param cex to draw components
+#' @param cex to draw components ((`c(2, 1)` by default) for `draw_title`)
 #' @param lwd to draw components
 #' @param lty to draw components
+#' @param transp `numeric` transparency (default:0, min:0, max:1)
 #' @param label to indicate first point
 #' @param labels \code{character} name of labels to draw (defaut to \code{1:nrow(coo)})
 #' @param d `numeric` proportion of `d(centroid-each_point)` to add when centrifugating landmarks
 #' @param links `matrix` of links to use to draw segments between landmarks. See `wings$ldk` for an example
+#' @param main `character` title (empty by default)
+#' @param sub `character` subtitle (empty by default)
+#' @param font `numeric` to feed [text] (`c(2, 1)` by default)
+#' @param padding `numeric` a fraction of the graphical window (`1/200` by default)
 #' @param ... additional options to feed core functions for each drawer
 #'
 #' @examples
@@ -198,8 +230,14 @@ paper_dots <- function(coo, pch=20, n=50, col="#7F7F7F"){
 #' hearts[240] %>% paper_white() %>% draw_outline() %>%
 #'   coo_sample(24) %>% draw_landmarks %>% draw_labels() %>%
 #'   draw_links(links=replicate(2, sample(1:24, 8)))
+#'
+#' bot %>%
+#'     paper_grid() %>%
+#'     draw_outlines() %>%
+#'     draw_title("Alcohol abuse \nis dangerous for health", "Drink responsibly")
+
 #' @export
-draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, ...){
+draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, transp=0, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -219,8 +257,8 @@ draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, ...){
     f <- factor(rep(1, length(x)))
   }
   # dispath drawer argument
-  borders <- this_dispatch(f, border)
-  cols    <- this_dispatch(f, col)
+  borders <- this_dispatch(f, border) %>% pal_alpha(transp)
+  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   lwds    <- this_dispatch(f, lwd)
   ltys    <- this_dispatch(f, lty)
 
@@ -248,7 +286,7 @@ draw_outlines <- draw_polygon
 
 #' @export
 #' @rdname drawers
-draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, ...){
+draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -269,7 +307,7 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, ...){
   }
 
   # dispath drawer argument
-  cols    <- this_dispatch(f, col)
+  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   cexs    <- this_dispatch(f, cex)
   pchs    <- this_dispatch(f, pch)
 
@@ -292,7 +330,7 @@ draw_landmarks <- draw_points
 
 #' @export
 #' @rdname drawers
-draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, ...){
+draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, transp=0, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -313,7 +351,7 @@ draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, ...){
   }
 
   # dispath drawer argument
-  cols    <- this_dispatch(f, col)
+  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   lwds    <- this_dispatch(f, lwd)
   ltys    <- this_dispatch(f, lty)
 
@@ -334,7 +372,7 @@ draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, ...){
 
 #' @export
 #' @rdname drawers
-draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, ...){
+draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, transp=0, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -355,7 +393,7 @@ draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, ...){
   }
 
   # dispath drawer argument
-  cols    <- this_dispatch(f, col)
+  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   cexs    <- this_dispatch(f, cex)
   pchs    <- this_dispatch(f, pch)
 
@@ -384,7 +422,7 @@ draw_curves <- draw_lines
 
 #' @export
 #' @rdname drawers
-draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, ...){
+draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, transp=0, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -406,7 +444,7 @@ draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, ...){
 
   # dispath drawer argument
   labels  <- this_dispatch(f, label)
-  cols    <- this_dispatch(f, col)
+  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   cexs    <- this_dispatch(f, cex)
 
   # gr parameters
@@ -490,7 +528,7 @@ draw_labels <- function(coo, labels=1:nrow(coo), cex=1/2, d=1/20, ...){
 
 #' @export
 #' @rdname drawers
-draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, ...){
+draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, transp=0, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -511,7 +549,7 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, ...){
   }
 
   # dispath drawer argument
-  cols    <- this_dispatch(f, col)
+  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   lwds    <- this_dispatch(f, lwd)
   ltys    <- this_dispatch(f, lty)
 
@@ -534,7 +572,24 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, ...){
 }
 # wings %>% mshapes %>% paper %>% draw_links(links=wings$links) %>% draw_landmarks %>% draw_labels(d=1/5)
 
-
+#' @export
+#' @rdname drawers
+draw_title <- function(coo, main="", sub="", cex=c(1, 3/4), font=c(2, 1), padding=1/200, ...){
+  # preserve the par
+  old <- par(xpd=NA)
+  on.exit(par(old))
+  # deduce coordinates
+  u <- par("usr")
+  w <- .wdw()
+  x_left <- u[1] + w[1]*padding
+  y_top_main  <- u[4] - w[2]*padding - strheight(main, cex=cex)
+  y_top_sub   <- y_top_main - w[2]*padding*2 - strheight(sub, cex=cex)
+  # draw title and sub
+  text(x_left, y_top_main, main, cex=cex[1], adj=c(0, 0), font=font[1], ...)
+  text(x_left, y_top_sub,  sub,  cex=cex[2], adj=c(0, 0), font=font[2], ...)
+  # propagate
+  invisible(coo)
+}
 # draw_text
 # draw_radii
 # draw_contour

@@ -15,36 +15,44 @@
 \alias{draw_axes}
 \alias{draw_labels}
 \alias{draw_links}
+\alias{draw_title}
 \title{grindr drawers for shape plots}
 \usage{
 draw_polygon(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
-  ...)
+  transp = 0, ...)
 
 draw_outline(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
-  ...)
+  transp = 0, ...)
 
 draw_outlines(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
+  transp = 0, ...)
+
+draw_points(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0, ...)
+
+draw_landmarks(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0,
   ...)
 
-draw_points(coo, f, col = par("fg"), cex = 1, pch = 20, ...)
+draw_lines(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0, ...)
 
-draw_landmarks(coo, f, col = par("fg"), cex = 1, pch = 20, ...)
+draw_centroid(coo, f, col = par("fg"), pch = 3, cex = 0.5, transp = 0,
+  ...)
 
-draw_lines(coo, f, col = par("fg"), lwd = 1, lty = 1, ...)
+draw_curve(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0, ...)
 
-draw_centroid(coo, f, col = par("fg"), pch = 3, cex = 0.5, ...)
+draw_curves(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0, ...)
 
-draw_curve(coo, f, col = par("fg"), lwd = 1, lty = 1, ...)
-
-draw_curves(coo, f, col = par("fg"), lwd = 1, lty = 1, ...)
-
-draw_firstpoint(coo, f, label = "^", col = par("fg"), cex = 1, ...)
+draw_firstpoint(coo, f, label = "^", col = par("fg"), cex = 1,
+  transp = 0, ...)
 
 draw_axes(coo, col = "#333333", cex = 3/4, lwd = 3/4, ...)
 
 draw_labels(coo, labels = 1:nrow(coo), cex = 1/2, d = 1/20, ...)
 
-draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1, ...)
+draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1,
+  transp = 0, ...)
+
+draw_title(coo, main = "", sub = "", cex = c(1, 3/4), font = c(2, 1),
+  padding = 1/200, ...)
 }
 \arguments{
 \item{coo}{\code{matrix} of 2 columns for (x, y) coordinates}
@@ -59,9 +67,11 @@ draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1, ...)
 
 \item{lty}{to draw components}
 
+\item{transp}{\code{numeric} transparency (default:0, min:0, max:1)}
+
 \item{...}{additional options to feed core functions for each drawer}
 
-\item{cex}{to draw components}
+\item{cex}{to draw components ((\code{c(2, 1)} by default) for \code{draw_title})}
 
 \item{pch}{to draw components}
 
@@ -72,6 +82,14 @@ draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1, ...)
 \item{d}{\code{numeric} proportion of \code{d(centroid-each_point)} to add when centrifugating landmarks}
 
 \item{links}{\code{matrix} of links to use to draw segments between landmarks. See \code{wings$ldk} for an example}
+
+\item{main}{\code{character} title (empty by default)}
+
+\item{sub}{\code{character} subtitle (empty by default)}
+
+\item{font}{\code{numeric} to feed \link{text} (\code{c(2, 1)} by default)}
+
+\item{padding}{\code{numeric} a fraction of the graphical window (\code{1/200} by default)}
 }
 \description{
 Useful drawers for building custom
@@ -88,6 +106,11 @@ olea \%>\% paper_chess \%>\% draw_lines(~var)
 hearts[240] \%>\% paper_white() \%>\% draw_outline() \%>\%
   coo_sample(24) \%>\% draw_landmarks \%>\% draw_labels() \%>\%
   draw_links(links=replicate(2, sample(1:24, 8)))
+
+bot \%>\%
+    paper_grid() \%>\%
+    draw_outlines() \%>\%
+    draw_title("Alcohol abuse \\nis dangerous for health", "Drink responsibly")
 }
 \seealso{
 grindr_layers

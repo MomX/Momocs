@@ -3,6 +3,14 @@
 \name{papers}
 \alias{papers}
 \alias{paper}
+\alias{papers}
+\alias{paper.default}
+\alias{papers}
+\alias{paper.Out}
+\alias{papers}
+\alias{paper.Opn}
+\alias{papers}
+\alias{paper.Ldk}
 \alias{paper_white}
 \alias{paper_grid}
 \alias{paper_chess}
@@ -11,7 +19,15 @@
 \usage{
 paper(coo, ...)
 
-paper_white(coo, ...)
+\method{paper}{default}(coo, ...)
+
+\method{paper}{Out}(coo, ...)
+
+\method{paper}{Opn}(coo, ...)
+
+\method{paper}{Ldk}(coo, ...)
+
+paper_white(coo)
 
 paper_grid(coo, grid = c(10, 5), cols = c("#ffa500", "#e5e5e5"), ...)
 

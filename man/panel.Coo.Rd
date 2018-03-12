@@ -78,5 +78,5 @@ panel(bot, fac='type', palette=col_spring, names=TRUE)
 }
 \seealso{
 Other Coo_graphics: \code{\link{inspect}},
-  \code{\link{stack.Coo}}
+  \code{\link{stack}}
 }

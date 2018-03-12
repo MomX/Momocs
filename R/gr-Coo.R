@@ -96,6 +96,8 @@ inspect.Coo <- function(x, id, ...) {
 #' }
 #' @rdname stack.Coo
 #' @aliases stack.Coo
+#' @aliases stack
+#' @name stack
 #' @export
 stack.Coo <-
   function(x,

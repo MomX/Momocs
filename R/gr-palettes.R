@@ -29,7 +29,11 @@ pal_alpha <- function(cols, transp = 0) {
   alpha.hex <- as.character(as.hexmode(alpha.int))
   alpha.hex[nchar(alpha.hex) < 2] <- paste0("0", alpha.hex[nchar(alpha.hex) < 2])
   alpha.hex <- toupper(alpha.hex) # pure cosmetics
-  return(paste0(cols, alpha.hex))
+  # handle NA
+  nas <- is.na(cols)
+  cols <- paste0(.rcolors2hex(cols), alpha.hex)
+  cols[nas] <- NA
+  return(cols)
 }
 
 #' @name palettes
