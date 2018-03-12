@@ -37,9 +37,6 @@ point of the outline.}
 
 \item{ef}{\code{list} with \code{a_n}, \code{b_n}, \code{c_n} and
 \code{d_n} Fourier coefficients, typically returned by \link{efourier}}
-
-\item{start}{\code{logical}, whether to conserve the position of the first
-point of the outline.}
 }
 \value{
 For \code{efourier}, a list with components: \code{an}, \code{bn}, \code{cn}, \code{dn} harmonic coefficients, plus \code{ao} and \code{co}.

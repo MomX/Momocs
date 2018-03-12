@@ -18,8 +18,6 @@
 #' point of the outline.
 #' @param ef `list` with `a_n`, `b_n`, `c_n` and
 #' `d_n` Fourier coefficients, typically returned by [efourier]
-#' @param start `logical`, whether to conserve the position of the first
-#' point of the outline.
 #' @param ... useless here
 #' @return For `efourier`, a list with components: `an`, `bn`, `cn`, `dn` harmonic coefficients, plus `ao` and `co`.
 #' The latter should have been named `a0` and `c0` in Claude (2008) but I (intentionnaly) propagated the error.
