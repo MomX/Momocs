@@ -3,7 +3,7 @@
 <!--Badges -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs) [![Coverage Status](https://img.shields.io/codecov/c/MomX/vbonhomme/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs) ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
-**:love\_letter::love\_letter::love\_letter: Momocs is in a phase of very active development (see [\#184](https://github.com/vbonhomme/MomX/issues/184)).**
+**:love\_letter::love\_letter::love\_letter: Momocs is in a phase of very active development (see [\#184](https://github.com/MomX/Momocs/issues/184)).**
 
 Momocs
 ------
@@ -16,8 +16,8 @@ It allows reproducible, pipeable, complex morphometric analyses and other morpho
 
 Its core functions are borrowed from hinges on the core functions developed in the must-have book *[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)* by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
 
--   **Check** the online doc and the tutorials [there](http://vbonhomme.github.io/Momocs/)
--   **You're welcome to** implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
+-   **Check** the online doc and the tutorials [there](http://momx.github.io/Momocs/)
+-   **You're welcome to** implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/MomX/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
 
 ### Installation
 

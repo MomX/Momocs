@@ -68,7 +68,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Momocs_cheapbabi.html">Momocs cheapbabi</a>
+      <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
     <li>
       <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
@@ -79,7 +79,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/vbonhomme/Momocs">
+  <a href="https://github.com/MomX/Momocs">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -171,19 +171,19 @@ specifying the grouping structure</p></td>
 <span class='no'>op.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>)
 <span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'domes'</span>)</div><div class='img'><img src='Opn-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'var'</span>)</div><div class='img'><img src='Opn-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># and now an LDA after a PCA</span>
 <span class='no'>olda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)</div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='co'># for CV table</span>
-<span class='no'>olda</span></div><div class='output co'>#&gt;  * Leave-one-out cross-validation ($CV.correct): (54.3% - 114/210): 
-#&gt; 
-#&gt;  * Class correctness ($CV.ce):
-#&gt;     Aglan     Cypre    MouBo1     PicMa 
-#&gt; 0.3500000 0.1333333 0.9000000 0.5833333 
-#&gt; 
-#&gt;  * Cross-validation table ($CV.tab):
+<span class='no'>olda</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;         classified
 #&gt; actual   Aglan Cypre MouBo1 PicMa
 #&gt;   Aglan     21     2     17    20
 #&gt;   Cypre     12     4     14     0
 #&gt;   MouBo1     4     2     54     0
-#&gt;   PicMa     22     1      2    35</div><div class='input'><span class='fu'>plot</span>(<span class='no'>olda</span>)</div><div class='img'><img src='Opn-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
+#&gt;   PicMa     22     1      2    35
+#&gt; 
+#&gt;  * Class correctness ($CV.ce):
+#&gt;     Aglan     Cypre    MouBo1     PicMa 
+#&gt; 0.3500000 0.1333333 0.9000000 0.5833333 
+#&gt; 
+#&gt;  * Leave-one-out cross-validation ($CV.correct): (54.3% - 114/210): </div><div class='input'><span class='fu'>plot</span>(<span class='no'>olda</span>)</div><div class='img'><img src='Opn-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -202,7 +202,7 @@ specifying the grouping structure</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
 </div>
 
 <div class="pkgdown">

@@ -68,7 +68,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Momocs_cheapbabi.html">Momocs cheapbabi</a>
+      <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
     <li>
       <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
@@ -79,7 +79,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/vbonhomme/Momocs">
+  <a href="https://github.com/MomX/Momocs">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -154,6 +154,9 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - coerce,data.frame,gpc.poly-method
 #&gt;   - coerce,dgCMatrix,vector-method
 #&gt;   - coerce,dsCMatrix,vector-method
+#&gt;   - coerce,git_commit,data.frame-method
+#&gt;   - coerce,git_repository,data.frame-method
+#&gt;   - coerce,git_tree,data.frame-method
 #&gt;   - coerce,GridTopology,data.frame-method
 #&gt;   - coerce,list,indMatrix-method
 #&gt;   - coerce,Matrix,vector-method
@@ -210,6 +213,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - inner_join.data.frame
 #&gt;   - intersect.data.frame
 #&gt;   - is.na.data.frame
+#&gt;   - knit_print.data.frame
 #&gt;   - lda.data.frame
 #&gt;   - left_join.data.frame
 #&gt;   - Math.data.frame
@@ -406,6 +410,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 <span class='co'># methods for plot</span>
 <span class='fu'>andnow_method</span>(<span class='st'>"plot"</span>)</div><div class='output co'>#&gt;   - plot,ANY,ANY-method
 #&gt;   - plot,color,ANY-method
+#&gt;   - plot,git_repository,ANY-method
 #&gt;   - plot,gpc.poly,ANY-method
 #&gt;   - plot,Spatial,missing-method
 #&gt;   - plot,SpatialCollections,missing-method
@@ -520,7 +525,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
 </div>
 
 <div class="pkgdown">

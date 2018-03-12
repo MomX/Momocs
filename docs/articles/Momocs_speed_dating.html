@@ -45,7 +45,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Momocs_cheapbabi.html">Momocs cheapbabi</a>
+      <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
     <li>
       <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
@@ -55,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/vbonhomme/Momocs">
+  <a href="https://github.com/MomX/Momocs">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -75,7 +75,7 @@
       <h1>Momocs speed dating</h1>
                         <h4 class="author">Vincent Bonhomme</h4>
             
-            <h4 class="date">2018-03-07</h4>
+            <h4 class="date">2018-03-12</h4>
           </div>
 
     
@@ -93,7 +93,6 @@
 <p>Momocs hinges on the core functions published in the must-have <em><a href="http://www.springer.com/us/book/9780387777894">Morphometrics with R</a></em> by <a href="http://www.isem.univ-montp2.fr/recherche/equipes/macroevolution-et-developpement/personnel/claude-julien/">Julien Claude</a> (2008), but has been further extended to allow other shape description systems. So far, configurations of landmarks, outlines and open outline analyses, along with some facilities for traditional morphometrics are implemented.</p>
 <p>Prior to analysis, Momocs can be used to acquire and manipulate data or to import/export from/to other formats. Momocs also has the facility for a wide range of multivariate analyses and production of the companion graphics. Thus a researcher will find that just a few lines of code will provide initial results, but the methods implemented can be finely tuned and extended according to the user’s needs.</p>
 <ul>
-<li>See Momocs <a href="https://github.com/vbonhomme/Momocs/#features">features</a>.</li>
 <li>If you use it, cite it: <code>citation("Momocs")</code>.</li>
 <li>This citation refers to an obsolete version of Momocs, only handling outline analyses. The next companion and seminal paper is submitted.</li>
 </ul>
@@ -103,17 +102,17 @@
 <a href="#survival-tips" class="anchor"></a>Survival tips</h3>
 <ul>
 <li>This vignette introduces Momocs; more specific help can be find in function’s help files, for instance <code><a href="../reference/efourier.html">?efourier</a></code>.</li>
-<li>There is a much nicer <a href="http://vbonhomme.github.io/Momocs/">online version of this manual</a> that can be accessed from the console with, e.g. <code><a href="../reference/Momocs_help.html">Momocs_help("efourier")</a></code>.</li>
-<li>Feel free to contribute to Momocs through <a href="http://www.github.com/vbonhomme/Momocs">GitHub</a>: report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that’s definitely worth <a href="http://r-pkgs.had.co.nz/git.html">a look</a>.</li>
+<li>There is a much nicer <a href="http://momx.github.io/Momocs/">online version of this manual</a> that can be accessed from the console with, e.g. <code><a href="../reference/Momocs_help.html">Momocs_help("efourier")</a></code>.</li>
+<li>Feel free to contribute to Momocs through <a href="http://www.github.com/MomX/Momocs">GitHub</a>: report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that’s definitely worth <a href="http://r-pkgs.had.co.nz/git.html">a look</a>.</li>
 <li>Feel free to drop me a line, should you need a hand or would like to collaborate with me: <code>bonhomme.vincent@gmail.com</code>.</li>
 </ul>
 </div>
 <div id="get-install-and-use-it" class="section level3">
 <h3 class="hasAnchor">
 <a href="#get-install-and-use-it" class="anchor"></a>Get, install and use it</h3>
-<p>First, of all, let’s download the last version of Momocs. You will need to install the <code>devtools</code> package to get it from my <a href="http://www.github.com/vbonhomme">GitHub</a> repository :</p>
+<p>First, of all, let’s download the last version of Momocs. You will need to install the <code>devtools</code> package to get it from my <a href="http://www.github.com/MomX/Momocs">GitHub</a> repository :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"vbonhomme/Momocs"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"MomX/Momocs"</span>)</code></pre></div>
 <p>The typical <code>install_packages("Momocs")</code> will get you the last CRAN version of Momocs, but the GitHub version is preferred as Momocs is still under active development.</p>
 <p>We can start using Momocs, as long as it has been loaded using:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Momocs)</code></pre></div>
@@ -203,7 +202,6 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 </tr>
 </tbody>
 </table>
-<p>You can see this table as a scheme <a href="https://raw.githubusercontent.com/vbonhomme/Momocs/master/Momocs_arch.jpg">there</a>.</p>
 <p>In other words:</p>
 <ul>
 <li>any collection of shapes belongs to (pick one) <code>{OutCoo, OpnCoo, LdkCoo}</code> and is also a <code>Coo</code> object;</li>
@@ -722,37 +720,37 @@ bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class=
 <p>A very minimal k-means clustering is implemented:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/KMEANS.html">KMEANS</a></span>(bot.p, <span class="dt">centers =</span> <span class="dv">5</span>)</code></pre></div>
 <p><img src="Momocs_speed_dating_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
-<pre><code>## K-means clustering with 5 clusters of sizes 6, 6, 5, 5, 18
+<pre><code>## K-means clustering with 5 clusters of sizes 6, 5, 5, 18, 6
 ## 
 ## Cluster means:
 ##           PC1          PC2
 ## 1  0.10184224 -0.028875902
-## 2 -0.02673158  0.017713990
+## 2  0.02497106 -0.006671549
 ## 3  0.06730453  0.050371247
-## 4  0.02497106 -0.006671549
-## 5 -0.05066899 -0.008418168
+## 4 -0.04433327  0.008000365
+## 5 -0.04573875 -0.031541607
 ## 
 ## Clustering vector:
 ##         brahma          caney         chimay         corona    deusventrue 
-##              5              2              1              5              2 
+##              5              4              1              4              4 
 ##          duvel   franziskaner     grimbergen        guiness     hoegardeen 
-##              1              5              4              4              5 
+##              1              5              2              2              4 
 ##        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe 
-##              5              5              1              2              2 
+##              4              4              1              4              4 
 ##     pecheresse   sierranevada     tanglefoot          tauro      westmalle 
-##              5              4              1              5              5 
+##              4              2              1              4              4 
 ##          amrut    ballantines      bushmills         chivas        dalmore 
-##              5              1              5              3              3 
+##              4              1              5              3              3 
 ##   famousgrouse    glendronach   glenmorangie   highlandpark    jackdaniels 
-##              5              5              5              1              4 
+##              5              4              4              1              2 
 ##             jb  johnniewalker       magallan     makersmark           oban 
-##              2              5              5              3              5 
+##              4              5              5              3              4 
 ##     oldpotrero      redbreast         tamdhu     wildturkey         yoichi 
-##              3              3              5              2              4 
+##              3              3              4              4              2 
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 0.006121728 0.001886406 0.002720829 0.001916822 0.007905382
-##  (between_SS / total_SS =  88.6 %)
+## [1] 0.006121728 0.001916822 0.002720829 0.006537571 0.001860776
+##  (between_SS / total_SS =  89.4 %)
 ## 
 ## Available components:
 ## 
@@ -1090,7 +1088,7 @@ shapes[<span class="dv">4</span>] <span class="op">%&gt;%</span><span class="st"
 <ul>
 <li>Done with love by Vincent Bonhomme <code>&lt;bonhomme.vincent@gmail.com&gt;</code>.</li>
 <li>Help/suggestions/review/critics are welcome.</li>
-<li>Sources are <a href="https://github.com/vbonhomme/Momocs/tree/master/vignettes">there</a>
+<li>Sources are <a href="https://github.com/MomX/Momocs/tree/master/vignettes">there</a>
 </li>
 </ul>
 </div>
@@ -1119,7 +1117,7 @@ shapes[<span class="dv">4</span>] <span class="op">%&gt;%</span><span class="st"
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>, Julien Claude.</p>
+  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>.</p>
 </div>
 
 <div class="pkgdown">

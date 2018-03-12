@@ -13,9 +13,6 @@ output:
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
 ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
-__:love_letter::love_letter::love_letter: Momocs is in a phase of very active development (see [#184](https://github.com/MomX/Momocs/issues/184)).__
-
-
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

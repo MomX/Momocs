@@ -68,7 +68,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Momocs_cheapbabi.html">Momocs cheapbabi</a>
+      <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
     <li>
       <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
@@ -79,7 +79,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/vbonhomme/Momocs">
+  <a href="https://github.com/MomX/Momocs">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,11 +102,15 @@
     <p>All colorblind friendly RColorBrewer palettes
 recreated without the number of colors limitation
 and with transparency support thanks to <code>pal_alpha</code> that can be used alone.
+Also, all viridis palettes (see the <a href='https://cran.r-project.org/web/packages/viridis/index.html'>package on CRAN</a>),
+yet color ramps are borrowed and Momocs does not depend on it.
 Also, <code>pal_qual_solarized</code> based on Solarized: <a href='http://ethanschoonover.com/solarized'>http://ethanschoonover.com/solarized</a>
 and <code>pal_seq_grey</code> only shades of grey from <code>grey10</code> to <code>grey90</code>.</p>
     
 
     <pre class="usage"><span class='fu'>pal_alpha</span>(<span class='no'>cols</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_manual</span>(<span class='no'>cols</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='fu'>pal_qual_solarized</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
@@ -164,7 +168,15 @@ and <code>pal_seq_grey</code> only shades of grey from <code>grey10</code> to <c
 
 <span class='fu'>pal_seq_YlOrBr</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
-<span class='fu'>pal_seq_YlOrRd</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+<span class='fu'>pal_seq_YlOrRd</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_seq_magma</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_seq_inferno</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_seq_plasma</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_seq_viridis</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -208,7 +220,7 @@ create a color palette with colorRampPalette and return colors even so.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
 </div>
 
 <div class="pkgdown">
