@@ -16,4 +16,209 @@ navbar:
 authors:
   Vincent Bonhomme:
     href: http://www.vincentbonhomme.fr
- 
+
+
+reference:
+- title: Morphometrics methods
+  contents:
+  - efourier
+  - rfourier
+  - tfourier
+  - sfourier
+  - dfourier
+  - opoly
+  - npoly
+  - fgProcrustes
+  - fgsProcrustes
+  - bezier
+
+- title: More morphometrics methods
+  desc: Inverse functions and some others internally used by the main ones
+  contents:
+  - efourier_i
+  - rfourier_i
+  - tfourier_i
+  - sfourier_i
+  - dfourier_i
+  - opoly_i
+  - npoly_i
+  - bezier_i
+  - fProcrustes
+  - pProcrustes
+
+
+- title: Calibration and other helpers
+  desc: When defined
+  contents:
+  - calibrate_deviations
+  - calibrate_harmonicpower
+  - calibrate_reconstructions
+  - harm_pow
+  - hcontrib
+  - coeff_rearrange
+  - coeff_sel
+  - coeff_split
+  - rm_asym
+  - symmetry
+  - calibrate_r2
+  - Ptolemy
+  - morphospace_positions
+
+- title: Classes
+  desc: Their description and rationale
+  contents:
+  - Coo
+  - Out
+  - Opn
+  - Ldk
+  - Coe
+  - OutCoe
+  - OpnCoe
+  - LdkCoe
+  - TraCoe
+  - is
+
+
+- title: Classes manipulation
+  desc: Largely inspired from dplyr's verbs
+  contents:
+  - arrange
+  - at_least
+  - chop
+  - combine
+  - dissolve
+  - filter
+  - mutate
+  - rename
+  - rescale
+  - select
+  - rm_harm
+  - rm_uncomplete
+  - rw_fac
+  - sample_frac
+  - sample_n
+  - slice
+  - table
+  - validate
+
+- title: Import/Export
+  desc: Will be all moved to [Momit](http://www.github.com/MomX/Momit) soon
+  contents:
+  - export
+  - as_df
+  - import_Conte
+  - import_jpg
+  - import_jpg1
+  - import_StereoMorph_curve1
+  - import_tps
+  - import_txt
+  - tie_jpg_txt
+  - img_plot
+  - img_plot0
+  - lf_structure
+  - pix2chc
+
+- title: Multivariate methods
+  desc: Will be in [Momecs](http://www.github.com/MomX/Momecs) at some point
+  contents:
+  - PCA
+  - LDA
+  - MSHAPES
+  - MANOVA
+  - MANOVA_PW
+  - KMEANS
+  - CLUST
+
+- title: More on multivariate
+  desc: Will be in [Momecs](http://www.github.com/MomX/Momecs) at some point
+  contents:
+  - PCcontrib
+  - flip_PCaxes
+  - scree
+  - rePCA
+  - reLDA
+  - classify
+  - classification_metrics
+  - which_out
+
+- title: Graphics
+  desc: We all love graphics, don't we?
+  contents:
+  - panel
+  - stack.Coo
+  - inspect
+  - papers
+  - drawers
+  - layers
+  - starts_with("plot_")
+  - starts_with("tps_")
+
+- title: Bridges
+  desc: Convert between different classes
+  contents:
+  - bridges
+
+- title: Landmark helpers
+  contents:
+  - add_ldk
+  - starts_with("ldk_")
+  - starts_with("def_")
+  - starts_with("links")
+  - d
+  - measure
+  - coo_truss
+  - slidings_scheme
+  - rearrange_ldk
+
+- title: Getters/Setters for components of interest
+  contents:
+  - starts_with("get")
+
+- title: Data
+  desc: To play around with various data types
+  contents:
+  - apodemus
+  - bot
+  - chaff
+  - charring
+  - flower
+  - hearts
+  - molars
+  - mosquito
+  - mouse
+  - nsfishes
+  - oak
+  - olea
+  - shapes
+  - trilo
+  - wings
+
+- title: coo_ toolbox
+  contents:
+  - starts_with("coo_")
+
+- title: Farming shapes
+  desc: Most of them will move to [Momfarm](http://www.github.com/MomX/Momfarm) soon
+  contents:
+  - ends_with("shape")
+  - breed
+  - perm
+
+- title: Color palettes
+  desc: Based from RColorBrewer, viridis and more.
+  contents:
+  - starts_with("pal_")
+
+- title: Misc
+  contents:
+  - andnow
+  - Momocs_version
+  - Momocs_help
+  - complex
+  - ed
+  - edm
+  - edm_nearest
+  - edi
+  - is_clockwise
+  - is_closed
+  - is_equallyspacedradii
