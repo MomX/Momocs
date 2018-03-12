@@ -102,7 +102,7 @@ __Misc__
 -->
 ### Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example of a complete analysis doing: inspection, normalization of raw outlines, elliptical Fourier transforms, dimmensionality reduction and classification, using a single line.
 
 ``` r
 library(Momocs)
