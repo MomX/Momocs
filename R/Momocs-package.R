@@ -44,6 +44,7 @@
 #' @importFrom geometry delaunayn convhulln
 #' @importFrom geomorph gpagen
 #' @importFrom graphics boxplot
+#' @importFrom grDevices colorRamp
 #' @importFrom jpeg readJPEG
 #' @importFrom MASS lda ginv kde2d cov.trob
 #' @importFrom utils stack browseURL combn ls.str modifyList methods
