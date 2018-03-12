@@ -36,6 +36,10 @@
 \alias{pal_seq_YlGnBu}
 \alias{pal_seq_YlOrBr}
 \alias{pal_seq_YlOrRd}
+\alias{pal_seq_magma}
+\alias{pal_seq_inferno}
+\alias{pal_seq_plasma}
+\alias{pal_seq_viridis}
 \title{Color palettes}
 \usage{
 pal_alpha(cols, transp = 0)
@@ -99,6 +103,14 @@ pal_seq_YlGnBu(n, transp = 0)
 pal_seq_YlOrBr(n, transp = 0)
 
 pal_seq_YlOrRd(n, transp = 0)
+
+pal_seq_magma(n, transp = 0)
+
+pal_seq_inferno(n, transp = 0)
+
+pal_seq_plasma(n, transp = 0)
+
+pal_seq_viridis(n, transp = 0)
 }
 \arguments{
 \item{cols}{color(s) as hexadecimal values}
@@ -111,6 +123,8 @@ pal_seq_YlOrRd(n, transp = 0)
 All colorblind friendly RColorBrewer palettes
 recreated without the number of colors limitation
 and with transparency support thanks to \code{pal_alpha} that can be used alone.
+Also, all viridis palettes (see the \href{https://cran.r-project.org/web/packages/viridis/index.html}{package on CRAN}),
+yet color ramps are borrowed and Momocs does not depend on it.
 Also, \code{pal_qual_solarized} based on Solarized: \url{http://ethanschoonover.com/solarized}
 and \code{pal_seq_grey} only shades of grey from \code{grey10} to \code{grey90}.
 }
