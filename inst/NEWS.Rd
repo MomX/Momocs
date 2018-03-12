@@ -12,7 +12,7 @@
     \item ongoing complete review of code
     \item ongoing complete review of manual pages: lots of grouping, more and better examples, default values in `param`s
     \item released `reshape2`, `plyr` dependencies
-    \item palettes are now those colorblind-friendly from RColorBrewer. See also `pal_manual`, `pal_qual_solarized`
+    \item palettes are now those colorblind-friendly from RColorBrewer and those, state of the art, virids palettes. See also `pal_manual`, `pal_qual_solarized` and `pal_seq_grey`.
     \item `dispatch_fac` is now behind all `fac` arguments
     \item `fgProcrustes` now accepts lists
     \item new functions: `andnow` and `andnow_method` class tells you what to do with this object, and which classes are supported by this function/method.
