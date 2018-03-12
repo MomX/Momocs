@@ -5,6 +5,8 @@
 \alias{pal_alpha}
 \alias{pal}
 \alias{palette}
+\alias{palettes}
+\alias{pal_manual}
 \alias{pal_qual_solarized}
 \alias{pal_seq_grey}
 \alias{pal_div_BrBG}
@@ -37,6 +39,8 @@
 \title{Color palettes}
 \usage{
 pal_alpha(cols, transp = 0)
+
+pal_manual(cols, transp = 0)
 
 pal_qual_solarized(n, transp = 0)
 
