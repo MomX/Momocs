@@ -15,3 +15,5 @@ README.md
 Momocs_arch.jpg
 tmp/.*
 ^docs$
+^README\.Rmd$
+^README-.*\.png$

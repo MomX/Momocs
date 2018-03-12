@@ -1,14 +1,31 @@
+---
+output:
+  github_document:
+    html_preview: false
+---
 
 <!--README.md is generated from README.Rmd. Please edit that file -->
+
 <!--Badges -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs) [![Coverage Status](https://img.shields.io/codecov/c/MomX/vbonhomme/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs)
+[![Coverage Status](https://img.shields.io/codecov/c/MomX/vbonhomme/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs) ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
+![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
-**:love\_letter::love\_letter::love\_letter: Momocs is in a phase of very active development (see [\#184](https://github.com/vbonhomme/MomX/issues/184)).**
+__:love_letter::love_letter::love_letter: Momocs is in a phase of very active development (see [#184](https://github.com/vbonhomme/MomX/issues/184)).__
 
-Momocs
-------
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "tmp/README-"
+)
+```
+
+## Momocs
 
 The goal of Momocs is to provide a complete toolkit for 2D morphometrics, from data extraction to multivariate analyses.
 
@@ -16,22 +33,21 @@ It includes most common 2D morphometrics approaches on outlines, open outlines, 
 
 It allows reproducible, pipeable, complex morphometric analyses and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.
 
-Its core functions are borrowed from hinges on the core functions developed in the must-have book *[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)* by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
+Its core functions are borrowed from hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
 
--   **Check** the online doc and the tutorials [there](http://vbonhomme.github.io/Momocs/)
--   **You're welcome to** implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
+* __Check__ the online doc and the tutorials [there](http://vbonhomme.github.io/Momocs/)
+* __You're welcome to__ implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/vbonhomme/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
+
 
 ### Installation
+The last released version can be installed from [CRAN](https://CRAN.R-project.org/package=Momocs ) with:
 
-The last released version can be installed from [CRAN](https://CRAN.R-project.org/package=Momocs) with:
-
-``` r
+```{r cran-installation, eval = FALSE}
 install.packages("Momocs")
 ```
 
 But I recommend using the development version from GitHub with:
-
-``` r
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("MomX/Momocs")
 ```
@@ -102,11 +118,11 @@ __Misc__
 * [Shiny](http://shiny.rstudio.com/) demonstrators/helpers. See [Momecs](https://github.com/vbonhomme/Momecs/)
 * [Online documentation](http://vbonhomme.github.io/Momocs/)
 -->
-### Example
 
+### Example
 This is a basic example which shows you how to solve a common problem:
 
-``` r
+```{r example, message=FALSE}
 library(Momocs)
 hearts %T>%  # a built in dataset
   stack() %>% # family picture on raw outlines
@@ -114,6 +130,5 @@ hearts %T>%  # a built in dataset
   stack() %>% # # another family picture after fgProcrustes
   efourier(6, norm=FALSE) %>% # elliptical Fourier transforms
   PCA() %>% plot(~aut) # a PCA and a PC1:2 plot
-```
 
-![](tmp/README-example-1.png)![](tmp/README-example-2.png)![](tmp/README-example-3.png)
+```
