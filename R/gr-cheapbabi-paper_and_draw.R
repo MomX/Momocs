@@ -28,17 +28,17 @@ this_dispatch <- function(f, this){
   message("bad length for 'this' argument")
 }
 # Papers ---------------------------------------------------
-#' Cheapbabi papers for shape plots
+#' grindr papers for shape plots
 #'
 #' Papers on which to use [drawers] for building custom
-#' shape plots using the cheapbabi approach. See examples and vignettes.
+#' shape plots using the grindr approach. See examples and vignettes.
 #'
 #' @param coo a single shape or any [Coo] object
 #' @param ... more arguments to feed the plotting function within each `paper` function
 #' @note This approach will (soon) replace [coo_plot] and friends in further versions.
 #' All comments are welcome.
 #'
-#' @family cheapbabi
+#' @family grindr
 #' @name papers
 #' @rdname papers
 #' @export
@@ -164,18 +164,18 @@ paper_dots <- function(coo, pch=20, n=50, col="#7F7F7F"){
 }
 
 # Drawers -------------------------------------------------
-#' Cheapbabi drawers for shape plots
+#' grindr drawers for shape plots
 #'
 #' Useful drawers for building custom
-#' shape plots using the cheapbabi approach. See examples and vignettes.
+#' shape plots using the grindr approach. See examples and vignettes.
 #'
 #' @note This approach will (soon) replace [coo_plot] and friends in further versions.
 #' All comments are welcome.
 #'
 #' @name drawers
 #' @rdname drawers
-#' @seealso cheapbabi_layers
-#' @family cheapbabi
+#' @seealso grindr_layers
+#' @family grindr
 #'
 #' @param coo \code{matrix} of 2 columns for (x, y) coordinates
 #' @param f an optionnal factor specification to feed. See examples and vignettes.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gr-cheapbabi-plot_and_layers.R
 \name{plot_PCA}
 \alias{plot_PCA}
-\title{Multivariate plots using cheapbabi layers}
+\title{Multivariate plots using grindr layers}
 \usage{
 plot_PCA(x, f, axes = c(1, 2), palette = col_summer)
 }
@@ -64,6 +64,6 @@ op \%>\% plot_PCA(~var) \%>\% myplot() \%>\%
 # You get the idea.
 }
 \seealso{
-Other cheapbabi: \code{\link{drawers}},
-  \code{\link{layers}}, \code{\link{papers}}
+Other grindr: \code{\link{drawers}}, \code{\link{layers}},
+  \code{\link{papers}}
 }

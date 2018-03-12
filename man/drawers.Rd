@@ -15,7 +15,7 @@
 \alias{draw_axes}
 \alias{draw_labels}
 \alias{draw_links}
-\title{Cheapbabi drawers for shape plots}
+\title{grindr drawers for shape plots}
 \usage{
 draw_polygon(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
   ...)
@@ -75,7 +75,7 @@ draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1, ...)
 }
 \description{
 Useful drawers for building custom
-shape plots using the cheapbabi approach. See examples and vignettes.
+shape plots using the grindr approach. See examples and vignettes.
 }
 \note{
 This approach will (soon) replace \link{coo_plot} and friends in further versions.
@@ -90,8 +90,8 @@ hearts[240] \%>\% paper_white() \%>\% draw_outline() \%>\%
   draw_links(links=replicate(2, sample(1:24, 8)))
 }
 \seealso{
-cheapbabi_layers
+grindr_layers
 
-Other cheapbabi: \code{\link{layers}},
-  \code{\link{papers}}, \code{\link{plot_PCA}}
+Other grindr: \code{\link{layers}}, \code{\link{papers}},
+  \code{\link{plot_PCA}}
 }

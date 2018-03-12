@@ -7,7 +7,7 @@
 
 \section{Changes in version 1.2.5 (CRAN + GitHub)}{
   \itemize{
-    \item cheap base biplots (aka cheapbabi): pipe-friendly base layers for biplots and shape drawing on cartesian coordinates. Is used to replace all multivariate plotters (eg `plot.PCA`), family pictures (eg `stack`, `panel`) and single shape plotters (eg `ldk_plot`, `coo_plot`). This strategy is faster, much more generic and will ease further development and maintenance.
+    \item graphics is not dead (aka grindr): pipe-friendly base layers for biplots and shape drawing on cartesian coordinates. Is used to replace all multivariate plotters (eg `plot.PCA`), family pictures (eg `stack`, `panel`) and single shape plotters (eg `ldk_plot`, `coo_plot`). This strategy is faster, much more generic and will ease further development and maintenance compared to previous Momocs graphs.
     \item vignette for `cheapbabi`
     \item ongoing complete review of code
     \item ongoing complete review of manual pages: lots of grouping, more and better examples, default values in `param`s

@@ -3,7 +3,7 @@
 # .grey60   <- "#999999"
 
 ### ____plot____ -------------------------------------------
-#' Multivariate plots using cheapbabi layers
+#' Multivariate plots using grindr layers
 #'
 #' Quickly vizualize [PCA] objects and build customs plots
 #' using the [layers]. See examples.
@@ -18,7 +18,7 @@
 #' @param axes \code{numeric} of length two to select PCs to use
 #' (\code{c(1, 2)} by default)
 #' @param palette \code{color palette} to use \code{col_summer} by default
-#' @family cheapbabi
+#' @family grindr
 #'
 #' @examples
 #' ### First prepare two PCA objects.
@@ -100,15 +100,15 @@ plot_PCA <- function(x, f, axes=c(1, 2), palette=col_summer){
 ### _____Layers_____ ---------------------------------------
 # frame and options ----------------------------------------
 
-#' Cheapbabi layers for multivariate plots
+#' grindr layers for multivariate plots
 #'
 #' Useful layers for building custom
 #' mutivariate plots using the cheapbabi approach. See examples.
 #'
 #' @name layers
 #' @rdname layers
-#' @seealso cheapbabi_drawers
-#' @family cheapbabi
+#' @seealso grindr_drawers
+#' @family grindr
 #'
 #' @param x a list, typically returned by \link{plot_PCA}
 #' @param center_origin \code{logical} whether to center the origin (default \code{TRUE})

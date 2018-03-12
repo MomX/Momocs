@@ -7,7 +7,7 @@
 \alias{paper_grid}
 \alias{paper_chess}
 \alias{paper_dots}
-\title{Cheapbabi papers for shape plots}
+\title{grindr papers for shape plots}
 \usage{
 paper(coo, ...)
 
@@ -37,13 +37,13 @@ number of majors lines, and the number of minor lines within two major ones}
 }
 \description{
 Papers on which to use \link{drawers} for building custom
-shape plots using the cheapbabi approach. See examples and vignettes.
+shape plots using the grindr approach. See examples and vignettes.
 }
 \note{
 This approach will (soon) replace \link{coo_plot} and friends in further versions.
 All comments are welcome.
 }
 \seealso{
-Other cheapbabi: \code{\link{drawers}},
-  \code{\link{layers}}, \code{\link{plot_PCA}}
+Other grindr: \code{\link{drawers}}, \code{\link{layers}},
+  \code{\link{plot_PCA}}
 }

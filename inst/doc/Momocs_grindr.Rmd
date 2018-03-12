@@ -1,0 +1,112 @@
+---
+title: "Layered shape and multivariate plots with grindr"
+author: "Vincent Bonhomme"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+#output: 
+#  html_document:
+#    toc: true
+#    toc_depth: 3
+#    highlight: tango
+    
+vignette: >
+  %\VignetteIndexEntry{grindr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(eval = TRUE, message=FALSE, 
+               warnings=FALSE, results="hold")
+```
+
+## Rationale
+When it comes to complex graphics, a grammar has proven powerful and `ggplot2` is mastering them all. "Base graphics" provided by the base package `graphics` has still some merits to me yet it may be boring to build exactly what you want. In particular, working with a grouping structure is boring, and using `magrittr`'s pipes is impossible since all graphical primitives are deadends.
+
+Working with a grouping structure is done with `Momocs:::.fac_dispatcher` and piping drawers/layers is solved b systematically (invisibly) propagating the object used for plotting whether it is a single shape, a `Coo` object or something with more components like a `PCA` object.
+
+Here I briefly introduce `grindr` (short for __gr__aphics __i__s __n__ot __d__ead) drawers and layers that helped rewrite graphical functions of Momocs since version `1.2.5` (one released on CRAN). They are still quite experimental and I'm not fully happy yet with the `drawers` (used for plotting shapes) /`layers` (used for multivariate cartesian planes) dichotomy but it may end up as an independant package at some point.
+
+## Drawers
+
+Papers and drawers are used to represent a shape (as a `matrix` of coordinates) or a collection of shapes (as any `Coo` object, namely `Out`, `Opn` or `Ldk`). It all starts with a `paper*` function, the simplest one being `paper`.
+
+```{r, echo=FALSE}
+library(Momocs)
+devtools::load_all()
+```
+
+```{r}
+bot[1] %>% paper # single shape
+olea %>% paper   # Coo (here Opn) object
+```
+
+Close to nothing is obtained but a graph with coordinates is obtained and ready for plotting more shape elements.
+
+```{r}
+bot[1] %>% paper %>% draw_outline
+olea %>% paper %>% draw_curve
+```
+
+Here we start to see shapes and that's pretty much what the `stack` function does. This behaviour is possible since all `grindr` functions propagate the object they use(d):
+
+```{r}
+bot %>% paper_chess %>% draw_outline -> x
+x
+```
+
+Here we used a different paper, and at the exit of the `cheapbabi` pipe we assigned the (otherwise invisibly) returned value to `x`, here the _untouched_  `bot`.
+
+All available papers are listed below:
+
+```{r}
+apropos("paper")
+```
+
+Most of the time, we are interested in representing a grouping structure, eg using color. With `cheapbabi` it can be done easily by specifying a column from the `$fac` (see the vignette `Momocs speed dating`, section Architecture). Also more drawers can be add on top of `draw_outline`:
+
+```{r}
+bot %>% paper_grid %>% 
+    draw_outline(~type, bor=col_qual) %>% 
+    draw_axes %>% draw_centroid %>% draw_firstpoint
+```
+
+Let's come back to grouping specification. It's quite versatile, you can pass a formula, a factor on the fly, and for colors and others drawers a vectorof the proper length (eg the right number of levels), a palette, etc. See below:
+```{r}
+paper(bot) %>% draw_outlines(~type, bor=col_qual)
+paper(bot) %>% 
+    draw_outlines(factor(rep(1:5, 8)), bor=col_qual) %>% 
+    draw_centroid(~type, pch=c(1, 3))
+```
+
+For now, I won't write too much about it, in case large parts are modified, but you should be able to navigate among drawers with `?papers` and `?drawers`
+
+## Layers
+
+When working with multivariate euclidean (eg when `asp=1`) we often need to do again and again the same plot to explore the resulting data, for instance drawing convex hulls, confidence ellipses, etc. I implemented this layered strategy mostly to generalize former `plot.PCA` and reuse large parts.
+
+So far, you can easily customize plots with:
+
+```{r}
+x <- bot %>% efourier(6) %>% PCA
+plot_PCA(x, ~type) %>% 
+    layer_fullframe %>% 
+    layer_morphospace %>% 
+    layer_points %>% layer_chull %>% 
+    layer_eigen %>% layer_legend
+```
+
+It works pretty much the same way as `drawers`, you can access the full list with `apropos("layer_")` and `?layers`. 
+
+Here again, I'll write more once `cheapbabi` development will become stable.
+
+__All suggestions and comments are welcome!__
+
+------
+ * Done with love by Vincent Bonhomme `<bonhomme.vincent@gmail.com>`.
+ * Help/suggestions/review/critics are welcome.
+ * Sources are [there](https://github.com/vbonhomme/Momocs/tree/master/vignettes)

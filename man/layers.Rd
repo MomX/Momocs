@@ -25,7 +25,7 @@
 \alias{layer_eigen}
 \alias{layer_axesvar}
 \alias{layer_legend}
-\title{Cheapbabi layers for multivariate plots}
+\title{grindr layers for multivariate plots}
 \usage{
 layer_frame(x, center_origin = TRUE, zoom = 0.9)
 
@@ -155,8 +155,8 @@ Useful layers for building custom
 mutivariate plots using the cheapbabi approach. See examples.
 }
 \seealso{
-cheapbabi_drawers
+grindr_drawers
 
-Other cheapbabi: \code{\link{drawers}},
-  \code{\link{papers}}, \code{\link{plot_PCA}}
+Other grindr: \code{\link{drawers}}, \code{\link{papers}},
+  \code{\link{plot_PCA}}
 }

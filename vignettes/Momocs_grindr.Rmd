@@ -1,5 +1,5 @@
 ---
-title: "Momocs cheapbabi"
+title: "Layered shape and multivariate plots with grindr"
 author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
 output: 
@@ -13,7 +13,7 @@ output:
 #    highlight: tango
     
 vignette: >
-  %\VignetteIndexEntry{cheapbabi}
+  %\VignetteIndexEntry{grindr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -29,7 +29,7 @@ When it comes to complex graphics, a grammar has proven powerful and `ggplot2` i
 
 Working with a grouping structure is done with `Momocs:::.fac_dispatcher` and piping drawers/layers is solved b systematically (invisibly) propagating the object used for plotting whether it is a single shape, a `Coo` object or something with more components like a `PCA` object.
 
-Here I briefly introduce `cheapbabi` (short for __cheap ba__se __bi__plots) drawers and layers that helped rewrite graphical functions of Momocs since version `1.2.5` (one released on CRAN). They are still quite experimental and I'm not fully happy yet with the `drawers` (used for plotting shapes) /`layers` (used for multivariate cartesian planes) dichotomy but it may end up as an independant package at some point.
+Here I briefly introduce `grindr` (short for __gr__aphics __i__s __n__ot __d__ead) drawers and layers that helped rewrite graphical functions of Momocs since version `1.2.5` (one released on CRAN). They are still quite experimental and I'm not fully happy yet with the `drawers` (used for plotting shapes) /`layers` (used for multivariate cartesian planes) dichotomy but it may end up as an independant package at some point.
 
 ## Drawers
 
@@ -52,7 +52,7 @@ bot[1] %>% paper %>% draw_outline
 olea %>% paper %>% draw_curve
 ```
 
-Here we start to see shapes and that's pretty much what the `stack` function does. This behaviour is possible since all `cheapbabi` functions propagate the object they use(d):
+Here we start to see shapes and that's pretty much what the `stack` function does. This behaviour is possible since all `grindr` functions propagate the object they use(d):
 
 ```{r}
 bot %>% paper_chess %>% draw_outline -> x
