@@ -1,16 +1,14 @@
 
 <!--README.md is generated from README.Rmd. Please edit that file -->
 <!--Badges -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs) [![Coverage Status](https://img.shields.io/codecov/c/MomX/vbonhomme/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
-
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs) ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/vbonhomme/Momocs) [![Coverage Status](https://img.shields.io/codecov/c/MomX/vbonhomme/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs) ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
 **:love\_letter::love\_letter::love\_letter: Momocs is in a phase of very active development (see [\#184](https://github.com/vbonhomme/MomX/issues/184)).**
 
 Momocs
 ------
 
-The goal of Momocs is to provide a complete toolkit for 2D morphometrics, from data extraction to multivariate analyses.
+The goal of Momocs is to provide a complete, convenient, reproducible and open-source toolkit for 2D morphometrics.
 
 It includes most common 2D morphometrics approaches on outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.
 
@@ -116,4 +114,4 @@ hearts %T>%  # a built in dataset
   PCA() %>% plot(~aut) # a PCA and a PC1:2 plot
 ```
 
-![](tmp/README-example-1.png)![](tmp/README-example-2.png)![](tmp/README-example-3.png)
+![](README-example-1.png)![](README-example-2.png)![](README-example-3.png)
