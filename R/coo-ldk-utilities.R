@@ -263,7 +263,6 @@ def_ldk.Opn <- def_ldk.Out
 #' # adds a new landmark towards south east
 #' hearts %>%
 #'    slice(1:5) %>% # for speed purpose only
-#'    coo_center() %>%
 #'    def_ldk_angle(-pi/6) %>%
 #' stack()
 #'
@@ -340,6 +339,7 @@ def_ldk_direction.Opn <- def_ldk_direction.Out
 #' @examples
 #' is_ldk(olea) # no ldk for olea
 #' olea %>%
+#' slice(1:3) %>% #for the sake of speed
 #' def_ldk_tips %>%
 #' def_ldk_angle(3*pi/4) %>% def_ldk_angle(pi/4) %T>% stack %>%
 #' coo_slice(ldk=1:4) -> oleas

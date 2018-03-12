@@ -70,9 +70,6 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -119,14 +116,14 @@
 <span class='co'># S3 method for default</span>
 <span class='fu'>PCA</span>(<span class='no'>x</span>, <span class='kw'>scale.</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>())
 
-<span class='fu'>as.PCA</span>(<span class='no'>x</span>, <span class='no'>fac</span>)</pre>
+<span class='fu'>as_PCA</span>(<span class='no'>x</span>, <span class='no'>fac</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a <a href='Coe.html'>Coe</a> object or an appropriate object (eg prcomp) for <code>as.PCA</code></p></td>
+      <td><p>a <a href='Coe.html'>Coe</a> object or an appropriate object (eg prcomp) for <code>as_PCA</code></p></td>
     </tr>
     <tr>
       <th>scale.</th>
@@ -138,7 +135,7 @@
     </tr>
     <tr>
       <th>fac</th>
-      <td><p>any factor or data.frame to be passed to <code>as.PCA</code> and for use with <a href='plot.PCA.html'>plot.PCA</a></p></td>
+      <td><p>any factor or data.frame to be passed to <code>as_PCA</code> and for use with <a href='plot.PCA.html'>plot.PCA</a></p></td>
     </tr>
     </table>
     
@@ -177,8 +174,7 @@ There is also a generic method (eg for traditional morphometrics) that centers a
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)
-<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>bot.f</span>)
+    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>bot.f</span>)
 <span class='no'>bot.p</span></div><div class='output co'>#&gt; A PCA object
 #&gt; --------------------
 #&gt;  - 40 shapes 
@@ -214,7 +210,7 @@ There is also a generic method (eg for traditional morphometrics) that centers a
 #&gt; 4          4.6         3.1          1.5         0.2  setosa
 #&gt; 5          5.0         3.6          1.4         0.2  setosa
 #&gt; 6          5.4         3.9          1.7         0.4  setosa</div><div class='input'><span class='no'>iris.p</span> <span class='kw'>&lt;-</span> <span class='fu'>prcomp</span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>iris.p</span> <span class='kw'>&lt;-</span> <span class='fu'>as.PCA</span>(<span class='no'>iris.p</span>, <span class='no'>iris</span>[, <span class='fl'>5</span>])
+<span class='no'>iris.p</span> <span class='kw'>&lt;-</span> <span class='fu'>as_PCA</span>(<span class='no'>iris.p</span>, <span class='no'>iris</span>[, <span class='fl'>5</span>])
 <span class='fu'>class</span>(<span class='no'>iris.p</span>)</div><div class='output co'>#&gt; [1] "PCA"    "prcomp"</div><div class='input'><span class='fu'>plot</span>(<span class='no'>iris.p</span>, <span class='fl'>1</span>)</div><div class='img'><img src='PCA-5.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

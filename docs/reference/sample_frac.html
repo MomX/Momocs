@@ -70,9 +70,6 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -143,30 +140,32 @@
   <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
   <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_n.html'>sample_n</a></code>,
   <code><a href='select.html'>select</a></code>, <code><a href='slice.html'>slice</a></code>,
-  <code><a href='subset.html'>subset.Coo</a></code>, <code><a href='table.html'>table</a></code></p>
+  <code><a href='table.html'>table</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># samples 50% of the bottles no matter their type</span>
 <span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 20 outlines (162 +/- 20 coordinates, all unclosed)
+#&gt;  - $coo: 20 outlines (159 +/- 21 coordinates, all unclosed)
 #&gt;  - $fac: 1 classifier:
 #&gt;      'type' (factor 2): beer, whisky.</div><div class='input'><span class='co'># 80% bottles of beer and of whisky</span>
 <span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.8</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>))</div><div class='output co'>#&gt; 
 #&gt;   beer whisky 
 #&gt;     16     16 </div><div class='input'><span class='co'># bootstrap the same number of bootles of each type but with replacement</span>
 <span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>names</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>1</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
-#&gt;        amrut  ballantines       brahma    bushmills        caney       corona 
-#&gt;            1            2            3            2            2            1 
-#&gt;      dalmore  deusventrue        duvel glenmorangie      guiness highlandpark 
-#&gt;            2            1            2            3            1            2 
-#&gt;   hoegardeen  jackdaniels           jb   makersmark         oban   oldpotrero 
-#&gt;            2            1            1            1            1            1 
-#&gt;   pecheresse sierranevada       tamdhu        tauro    westmalle   wildturkey 
-#&gt;            1            2            2            2            2            1 
-#&gt;       yoichi 
-#&gt;            1 </div><div class='input'>
+#&gt;         amrut   ballantines        brahma         caney        chimay 
+#&gt;             2             1             2             1             2 
+#&gt;        chivas        corona       dalmore   deusventrue  franziskaner 
+#&gt;             1             2             2             1             2 
+#&gt;   glendronach  glenmorangie       guiness  highlandpark    hoegardeen 
+#&gt;             1             1             2             1             1 
+#&gt;   jackdaniels johnniewalker      magallan    makersmark   nicechouffe 
+#&gt;             1             1             1             4             1 
+#&gt;          oban    oldpotrero     redbreast        tamdhu         tauro 
+#&gt;             2             2             1             1             1 
+#&gt;     westmalle    wildturkey 
+#&gt;             1             2 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

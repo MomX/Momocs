@@ -70,9 +70,6 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -156,9 +153,7 @@ conjonction with reLDA to get 'homologous' scores.</p>
 <span class='no'>bot2</span>   <span class='kw'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='no'>bot</span>, <span class='fu'>c</span>(<span class='fl'>11</span>:<span class='fl'>20</span>, <span class='fl'>31</span>:<span class='fl'>40</span>))
 
 <span class='co'># We calculate efourier on these two datasets</span>
-<span class='no'>bot1.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot1</span>, <span class='fl'>8</span>)
-<span class='no'>bot2.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot2</span>, <span class='fl'>8</span>)
-
+<span class='no'>bot1.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot1</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot2.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot2</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'>
 <span class='co'># Here we obtain our LDA model: first, a PCA, then a LDA</span>
 <span class='no'>bot1.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot1.f</span>)
 <span class='no'>bot1.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='no'>bot1.p</span>, <span class='st'>"type"</span>)</div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>6 PC retained</span></div><div class='input'>

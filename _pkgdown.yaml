@@ -5,7 +5,7 @@ template:
     bootswatch: flatly
 
 home:
-  strip_header: true
+  strip_header: false
 
 navbar:
   type: default

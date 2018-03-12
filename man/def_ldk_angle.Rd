@@ -39,7 +39,6 @@ any existing ldk will be preserved.
 # adds a new landmark towards south east
 hearts \%>\%
    slice(1:5) \%>\% # for speed purpose only
-   coo_center() \%>\%
    def_ldk_angle(-pi/6) \%>\%
 stack()
 

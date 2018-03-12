@@ -70,9 +70,6 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -166,8 +163,7 @@ multiplied by <code>rate</code>.</p>
 #&gt;  [8,] 10.02364430 6.407625 10.4446975
 #&gt;  [9,]  2.40882230 3.826442 11.5882377
 #&gt; [10,] 10.19002487 4.197451  3.2041191</div><div class='input'>
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)
-<span class='no'>bot.m</span> <span class='kw'>&lt;-</span> <span class='fu'>breed</span>(<span class='no'>bot.f</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>80</span>)
+<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.m</span> <span class='kw'>&lt;-</span> <span class='fu'>breed</span>(<span class='no'>bot.f</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>80</span>)
 <span class='no'>bot.m</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='img'><img src='breed-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># breed fac wise</span>
 <span class='no'>bot.f</span> <span class='kw'>%&gt;%</span>  <span class='fu'>breed</span>(~<span class='no'>type</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>50</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(~<span class='no'>type</span>)</div><div class='img'><img src='breed-2.png' alt='' width='700' height='432.632880098887' /></div></pre>

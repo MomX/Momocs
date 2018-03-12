@@ -18,6 +18,7 @@ any existing ldk will be preserved.
 \examples{
 is_ldk(olea) # no ldk for olea
 olea \%>\%
+slice(1:3) \%>\% #for the sake of speed
 def_ldk_tips \%>\%
 def_ldk_angle(3*pi/4) \%>\% def_ldk_angle(pi/4) \%T>\% stack \%>\%
 coo_slice(ldk=1:4) -> oleas

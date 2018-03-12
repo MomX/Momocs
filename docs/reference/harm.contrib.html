@@ -70,9 +70,6 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -156,8 +153,7 @@ shapes are reconstructed and plotted. Naturally, only works on Fourier-based met
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>bot</span>)
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)
-<span class='fu'>hcontrib</span>(<span class='no'>bot.f</span>)</div><div class='output co'>#&gt; <span class='message'>no 'id' provided, working on the meanshape</span></div><div class='img'><img src='harm.contrib-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>hcontrib</span>(<span class='no'>bot.f</span>, <span class='kw'>harm.r</span><span class='kw'>=</span><span class='fl'>3</span>:<span class='fl'>10</span>, <span class='kw'>amp.r</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>8</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"grey20"</span>,
+<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>hcontrib</span>(<span class='no'>bot.f</span>)</div><div class='output co'>#&gt; <span class='message'>no 'id' provided, working on the meanshape</span></div><div class='img'><img src='harm.contrib-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>hcontrib</span>(<span class='no'>bot.f</span>, <span class='kw'>harm.r</span><span class='kw'>=</span><span class='fl'>3</span>:<span class='fl'>10</span>, <span class='kw'>amp.r</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>8</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"grey20"</span>,
    <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"A huge panel"</span>)</div><div class='output co'>#&gt; <span class='message'>no 'id' provided, working on the meanshape</span></div><div class='img'><img src='harm.contrib-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

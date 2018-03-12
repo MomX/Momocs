@@ -70,9 +70,6 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -102,8 +99,9 @@
     <p>In Momocs, <code>Ldk</code> classes objects are
 lists of configurations of <b>l</b>an<b>d</b>mar<b>k</b>s, with optionnal components,
 on which generic methods such as plotting methods (e.g. stack)
-and specific methods (e.g. todo-Procrustes can be applied.
-<code>Ldk</code> objects are primarily <code><a href='Coo.html'>Coo</a></code> objects.</p>
+and specific methods (e.g. <a href='fgProcrustes.html'>fgProcrustes</a>).
+<code>Ldk</code> objects are primarily <code><a href='Coo.html'>Coo</a></code> objects. In a sense, morphometrics methods
+on Ldk objects preserves (x, y) coordinates and <code>LdkCoe</code> are also <code>Ldk</code> objects.</p>
     
 
     <pre class="usage"><span class='fu'>Ldk</span>(<span class='no'>coo</span>, <span class='kw'>links</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>slidings</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>())</pre>
@@ -149,7 +147,7 @@ to homogeneize the number of coordinates among shapes.</p>
 #&gt;  [5] def_links       def_slidings    fgProcrustes    fgsProcrustes  
 #&gt;  [9] get_ldk         get_slidings    mshapes         panel          
 #&gt; [13] print           rearrange_ldk   slidings_scheme stack          
-#&gt; [17] truss           which_out      
+#&gt; [17] which_out      
 #&gt; see '?methods' for accessing help and source code</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

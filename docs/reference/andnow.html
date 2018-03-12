@@ -70,9 +70,6 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -154,9 +151,6 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - coerce,data.frame,gpc.poly-method
 #&gt;   - coerce,dgCMatrix,vector-method
 #&gt;   - coerce,dsCMatrix,vector-method
-#&gt;   - coerce,git_commit,data.frame-method
-#&gt;   - coerce,git_repository,data.frame-method
-#&gt;   - coerce,git_tree,data.frame-method
 #&gt;   - coerce,GridTopology,data.frame-method
 #&gt;   - coerce,list,indMatrix-method
 #&gt;   - coerce,Matrix,vector-method
@@ -376,12 +370,14 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - coo_trim.Coo
 #&gt;   - coo_trimbottom.Coo
 #&gt;   - coo_trimtop.Coo
+#&gt;   - coo_truss.Coo
 #&gt;   - coo_unclose.Coo
 #&gt;   - coo_up.Coo
 #&gt;   - coo_width.Coo
 #&gt;   - dfourier.Coo
 #&gt;   - dim.Coo
 #&gt;   - filter.Coo
+#&gt;   - inspect.Coo
 #&gt;   - is_clockwise.Coo
 #&gt;   - is_closed.Coo
 #&gt;   - is_equallyspacedradii.Coo
@@ -410,7 +406,6 @@ andnow_method, given a function/method name, return supported classes.</p>
 <span class='co'># methods for plot</span>
 <span class='fu'>andnow_method</span>(<span class='st'>"plot"</span>)</div><div class='output co'>#&gt;   - plot,ANY,ANY-method
 #&gt;   - plot,color,ANY-method
-#&gt;   - plot,git_repository,ANY-method
 #&gt;   - plot,gpc.poly,ANY-method
 #&gt;   - plot,Spatial,missing-method
 #&gt;   - plot,SpatialCollections,missing-method
