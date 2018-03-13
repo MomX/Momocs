@@ -19,37 +19,41 @@
 \title{grindr drawers for shape plots}
 \usage{
 draw_polygon(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
-  transp = 0, ...)
+  transp = 0, pal = pal_qual, ...)
 
 draw_outline(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
-  transp = 0, ...)
+  transp = 0, pal = pal_qual, ...)
 
 draw_outlines(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
-  transp = 0, ...)
+  transp = 0, pal = pal_qual, ...)
 
-draw_points(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0, ...)
+draw_points(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0,
+  pal = pal_qual, ...)
 
 draw_landmarks(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0,
-  ...)
+  pal = pal_qual, ...)
 
-draw_lines(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0, ...)
+draw_lines(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0,
+  pal = pal_qual, ...)
 
 draw_centroid(coo, f, col = par("fg"), pch = 3, cex = 0.5, transp = 0,
-  ...)
+  pal = pal_qual, ...)
 
-draw_curve(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0, ...)
+draw_curve(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0,
+  pal = pal_qual, ...)
 
-draw_curves(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0, ...)
+draw_curves(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0,
+  pal = pal_qual, ...)
 
 draw_firstpoint(coo, f, label = "^", col = par("fg"), cex = 1,
-  transp = 0, ...)
+  transp = 0, pal = pal_qual, ...)
 
 draw_axes(coo, col = "#333333", cex = 3/4, lwd = 3/4, ...)
 
 draw_labels(coo, labels = 1:nrow(coo), cex = 1/2, d = 1/20, ...)
 
 draw_links(coo, f, links, col = "#99999955", lwd = 1/2, lty = 1,
-  transp = 0, ...)
+  transp = 0, pal = pal_qual, ...)
 
 draw_title(coo, main = "", sub = "", cex = c(1, 3/4), font = c(2, 1),
   padding = 1/200, ...)
@@ -68,6 +72,8 @@ draw_title(coo, main = "", sub = "", cex = c(1, 3/4), font = c(2, 1),
 \item{lty}{to draw components}
 
 \item{transp}{\code{numeric} transparency (default:0, min:0, max:1)}
+
+\item{pal}{a palette to use if no col/border/etc. are provided. See \code{[palettes]}}
 
 \item{...}{additional options to feed core functions for each drawer}
 

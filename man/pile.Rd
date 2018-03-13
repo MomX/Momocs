@@ -16,16 +16,27 @@ pile(coo, ...)
 
 \method{pile}{default}(coo, ...)
 
-\method{pile}{Out}(coo, ...)
+\method{pile}{Out}(coo, f, pal = pal_qual, paper_fun = paper, transp = 0,
+  ...)
 
-\method{pile}{Opn}(coo, ...)
+\method{pile}{Opn}(coo, f, pal = pal_qual, paper_fun = paper, transp = 0,
+  ...)
 
-\method{pile}{Ldk}(coo, ...)
+\method{pile}{Ldk}(coo, f, pal = pal_qual, paper_fun = paper, transp = 0,
+  ...)
 }
 \arguments{
 \item{coo}{a single shape or any  \link{Coo} object}
 
 \item{...}{more arguments to feed the core drawer, depending on the object}
+
+\item{f}{factor specification}
+
+\item{pal}{palette among \link{palettes} (default: pal_qual)}
+
+\item{transp}{\code{numeric} for transparency (default:adjusted, min:0, max=0)}
+
+\item{`paper_fun`}{a \link{papers} function (default: \code{paper})}
 }
 \description{
 Pile all shapes in the same graphical window. Useful to check
@@ -38,7 +49,7 @@ A variation of this plot was called \code{stack} before \code{Momocs 1.2.5}
 \examples{
 # all Coo are supported wtih sensible defaults
 pile(bot)    # outlines
-pile(olea)   # curves
+pile(olea, ~var, pal=pal_qual_Dark2, paper_fun=paper_grid)   # curves
 pile(wings)  # landmarks
 
 # you can continue the pipe with compatible drawers
@@ -47,15 +58,16 @@ pile(bot, trans=0.9) \%>\% draw_centroid
 # if you are not happy with this, build your own !
 # eg see Momocs::pile.Out
 
-my_pile <- function(x, transp=0.5){
+my_pile <- function(x, col_labels="red", transp=0.5){
     x \%>\% paper_chess(n=100) \%>\%
-          draw_outlines(transp=transp) \%>\%
-          draw_centroid(col="red", pch=20, trans=transp) \%>\%
-          draw_firstpoint(transp=transp)
+          draw_landmarks(transp=transp) \%>\%
+          draw_labels(col=col_labels)
 }
+# using it
+wings \%>\% my_pile(transp=3/4)
 
-bot \%>\% my_pile(transp=1/4)
-
+ # and as gridr functions propagate, you can even continue:
+ wings \%>\% my_pile() \%>\% draw_centroid(col="blue", cex=5)
 }
 \seealso{
 Other grindr: \code{\link{drawers}}, \code{\link{layers}},

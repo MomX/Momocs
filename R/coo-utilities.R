@@ -42,19 +42,20 @@ coo_check.Coo <- function(coo){
   return(coo)
 }
 
-# coo_check ----------------
+# coo_range ----------------
 #' Calculate coordinates range
 #'
 #' `coo_range` simply returns the range,
 #' `coo_range_enlarge` enlarges it by a `k` proportion.
+#' `coo_diffrange` return the amplitude (ie diff after `coo_range`)
 #'
 #' @inheritParams  coo_check
 #' @param k `numeric` proportion by which to enlarge it
 #'
 #' @return a matrix of range such as `(min, max) x (x, y)`
 #' @family coo_ utilities
-#' @name coo_enlarge
-#' @rdname coo_enlarge
+#' @name coo_range
+#' @rdname coo_range
 #' @examples
 #' bot[1] %>% coo_range # single shape
 #' bot    %>% coo_range # Coo object
@@ -66,13 +67,15 @@ coo_range <- function(coo){
   UseMethod("coo_range")
 }
 
-#' @rdname coo_enlarge
+#' @rdname coo_range
 #' @export
 coo_range.default <- function(coo){
-  apply(coo, 2, range)
+  res <- apply(coo, 2, range)
+  dimnames(res) <- list(c("min", "max"), c("x", "y"))
+  res
 }
 
-#' @rdname coo_enlarge
+#' @rdname coo_range
 #' @export
 coo_range.Coo <- function(coo){
   lapply(coo$coo, coo_range) %>%
@@ -81,13 +84,13 @@ coo_range.Coo <- function(coo){
 }
 
 
-#' @rdname coo_enlarge
+#' @rdname coo_range
 #' @export
 coo_range_enlarge <- function(coo, k){
   UseMethod("coo_range_enlarge")
 }
 
-#' @rdname coo_enlarge
+#' @rdname coo_range
 #' @export
 coo_range_enlarge.default <- function(coo, k=0){
   m <- coo_range(coo)
@@ -97,11 +100,11 @@ coo_range_enlarge.default <- function(coo, k=0){
   m
 }
 
-#' @rdname coo_enlarge
+#' @rdname coo_range
 #' @export
 coo_range_enlarge.Coo <- coo_range_enlarge.default
 
-#' @rdname coo_enlarge
+#' @rdname coo_range
 #' @export
 coo_range_enlarge.list <- function(coo, k=0){
   m <- lapply(coo, coo_range) %>%
@@ -112,6 +115,36 @@ coo_range_enlarge.list <- function(coo, k=0){
   m[2, ] <- m[2, ] + g
   m
 }
+
+#' @rdname coo_range
+#' @export
+coo_diffrange <- function(coo){
+  UseMethod("coo_diffrange")
+}
+
+#' @rdname coo_range
+#' @export
+coo_diffrange.default <- function(coo){
+  res <- apply(coo, 2, function(x) diff(range(x)))
+  names(res) <- c("x", "y")
+  res
+}
+
+#' @rdname coo_range
+#' @export
+coo_diffrange.Coo <- function(coo){
+  lapply(x$coo, coo_diffrange) %>%
+    do.call("rbind", .)
+}
+
+
+#' @rdname coo_range
+#' @export
+coo_diffrange.list <- function(coo){
+  lapply(coo, coo_diffrange) %>%
+    do.call("rbind", .)
+}
+
 # coo_nb ----------------
 #' Counts coordinates
 #'
