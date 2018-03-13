@@ -2,9 +2,29 @@
 % Please edit documentation in R/coo-utilities.R
 \name{coo_template}
 \alias{coo_template}
+\alias{coo_template}
+\alias{coo_template.default}
+\alias{coo_template}
+\alias{coo_template.Coo}
+\alias{coo_template}
+\alias{coo_template_relatively.default}
+\alias{coo_template}
+\alias{coo_template_relatively.list}
+\alias{coo_template}
+\alias{coo_template_relatively.Coo}
 \title{'Templates' shapes}
 \usage{
 coo_template(coo, size)
+
+\method{coo_template}{default}(coo, size = 1)
+
+\method{coo_template}{Coo}(coo, size = 1)
+
+coo_template_relatively.default(coo, size = 1)
+
+coo_template_relatively.list(coo, size = 1)
+
+coo_template_relatively.Coo(coo, size = 1)
 }
 \arguments{
 \item{coo}{A \code{list} or a \code{matrix} of coordinates.}
@@ -16,7 +36,10 @@ the shape.}
 Returns a matrix of \code{(x; y)}coordinates.
 }
 \description{
-\code{coo_template} returns shape centered on the origin and inscribed in a \code{size}-side square
+\code{coo_template} returns shape centered on the origin
+and inscribed in a \code{size}-side square. \code{coo_template_relatively}
+does the same but the biggest shape (as \code{prod(coo_diffrange)}) will
+be of \code{size=size} and consequently not defined on single shapes.
 }
 \details{
 See \link{coo_listpanel} for an illustration of this function. The morphospaces

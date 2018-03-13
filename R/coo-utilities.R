@@ -324,7 +324,10 @@ coo_scaley.Coo <- function(coo, scale=1){
 # coo_template --------------
 #' 'Templates' shapes
 #'
-#' \code{coo_template} returns shape centered on the origin and inscribed in a \code{size}-side square
+#' \code{coo_template} returns shape centered on the origin
+#' and inscribed in a \code{size}-side square. `coo_template_relatively`
+#' does the same but the biggest shape (as `prod(coo_diffrange)`) will
+#' be of `size=size` and consequently not defined on single shapes.
 #'
 #' See \link{coo_listpanel} for an illustration of this function. The morphospaces
 #' functions also take profit of this function. May be useful to develop other graphical functions.
@@ -345,11 +348,15 @@ coo_scaley.Coo <- function(coo, scale=1){
 #' coo_plot(coo_template(coo, s))
 #' rect(-s/2, -s/2, s/2, s/2)
 #' @family scaling functions
+#' @rdname coo_template
+#' @name coo_template
 #' @export
 coo_template <- function(coo, size){
   UseMethod("coo_template")
 }
 
+#' @rdname coo_template
+#' @name coo_template
 #' @export
 coo_template.default <- function(coo, size = 1) {
   # only for matrices
@@ -363,11 +370,39 @@ coo_template.default <- function(coo, size = 1) {
   return(coo)
 }
 
+#' @rdname coo_template
+#' @name coo_template
 #' @export
 coo_template.Coo <- function(coo, size=1){
   Coo <- coo
   Coo$coo <- lapply(Coo$coo, coo_template, size=size)
   return(Coo)
+}
+
+#' @rdname coo_template
+#' @name coo_template
+#' @export
+coo_template_relatively.default <- function(coo, size=1){
+  UseMethod("coo_template_relatively")
+}
+
+#' @rdname coo_template
+#' @name coo_template
+#' @export
+coo_template_relatively.list <- function(coo, size = 1) {
+  how_big <- coo_diffrange(coo) %>% apply(1, prod)
+  rel_big <- size / (how_big/(max(how_big)))
+  res <- lapply(seq_along(coo),
+                function(i) coo_template(coo[[i]], size = rel_big[i]))
+  names(res) <- names(coo)
+  res
+}
+
+#' @rdname coo_template
+#' @name coo_template
+#' @export
+coo_template_relatively.Coo <- function(coo, size = 1) {
+  coo %>% coo_template_relatively()
 }
 
 # coo_rotate -----------------
