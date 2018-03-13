@@ -4,7 +4,6 @@
 \alias{panel}
 \alias{panel.Coo}
 \alias{panel.Out}
-\alias{panel.OutCoe}
 \alias{panel.Opn}
 \alias{panel.Ldk}
 \title{Family picture of shapes}
@@ -14,8 +13,6 @@ panel(x, ...)
 \method{panel}{Out}(x, dim, cols, borders, fac, palette = col_summer,
   coo_sample = 120, names = NULL, cex.names = 0.6, points = TRUE,
   points.pch = 3, points.cex = 0.2, points.col, ...)
-
-\method{panel}{OutCoe}(x, nb.pts = 120, ...)
 
 \method{panel}{Opn}(x, cols, borders, fac, palette = col_summer,
   coo_sample = 120, names = NULL, cex.names = 0.6, points = TRUE,

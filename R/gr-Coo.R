@@ -359,12 +359,12 @@ panel.Out <- function(x, dim, cols, borders, fac,
   }
 }
 
-#' @rdname panel.Coo
-#' @export
-panel.OutCoe <- function(x, nb.pts=120, ...){
-  OutCoe <- x
-  Out <- as.Out(x, nb.pts=nb.pts)
-  panel(Out, title=paste0(substitute(x),".i"),...)}
+# #' @rdname panel.Coo
+# #' @export
+# panel.OutCoe <- function(x, nb.pts=120, ...){
+#   OutCoe <- x
+#   Out <- as.Out(x, nb.pts=nb.pts)
+#   panel(Out, title=paste0(substitute(x),".i"),...)}
 
 
 #' @rdname panel.Coo

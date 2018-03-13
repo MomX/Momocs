@@ -158,5 +158,5 @@ mutivariate plots using the cheapbabi approach. See examples.
 grindr_drawers
 
 Other grindr: \code{\link{drawers}}, \code{\link{papers}},
-  \code{\link{plot_PCA}}
+  \code{\link{pile}}, \code{\link{plot_PCA}}
 }

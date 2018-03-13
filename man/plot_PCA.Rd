@@ -65,5 +65,5 @@ op \%>\% plot_PCA(~var) \%>\% myplot() \%>\%
 }
 \seealso{
 Other grindr: \code{\link{drawers}}, \code{\link{layers}},
-  \code{\link{papers}}
+  \code{\link{papers}}, \code{\link{pile}}
 }

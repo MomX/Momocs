@@ -281,7 +281,7 @@ filter.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- filter(df, ...)
-  .data <- Momocs::subsetize(.data, df$.id)
+  .data <- subsetize(.data, df$.id)
   .data$fac %<>% data.frame()
   .data$fac %<>% .refactor()
   .data
@@ -325,7 +325,7 @@ arrange.Coo <- function(.data, ...){
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- arrange(df, ...)
-  .data <- Momocs::subsetize(.data, df$.id)
+  .data <- subsetize(.data, df$.id)
   .data$fac %<>% data.frame()
   .data
 }
@@ -366,21 +366,21 @@ slice.default <- function(.data, ...){
 #' @export
 slice.Coo <- function(.data, ...){
   #.data %<>% validate()
-  .data %<>% Momocs::subsetize(...)
+  .data %<>% subsetize(...)
   .data$fac %<>% .refactor()
   .data
   }
 
 #' @export
 slice.Coe <- function(.data, ...){
-  .data %<>% Momocs::subsetize(...)
+  .data %<>% subsetize(...)
   .data$fac %<>% .refactor()
   .data
   }
 
 #' @export
 slice.PCA <- function(.data, ...){
-  .data %<>% Momocs::subsetize(...)
+  .data %<>% subsetize(...)
   .data$fac %<>% .refactor()
   .data
   }
@@ -444,7 +444,7 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
     }
   }
   #   return(retain)
-  return(Momocs::subsetize(Coo, retain))
+  return(subsetize(Coo, retain))
 }
 
 #' @export
@@ -508,7 +508,7 @@ sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
     }
   }
   #   return(retain)
-  return(Momocs::subsetize(Coo, retain))
+  return(subsetize(Coo, retain))
 }
 
 #' @export
@@ -924,7 +924,7 @@ at_least <- function(x, fac, N){
     message("no group with at least ", N, " indidivuals")
     return(slice(x, 0))
   } else {
-    Momocs::subsetize(x, retain)
+    subsetize(x, retain)
   }
 }
 
@@ -973,7 +973,7 @@ rm_uncomplete <- function(x, id, by){
     message("those shapes did not have ", most_frequent,
             " slices and has been removed: ",
             paste(ugly_ducklings, collapse=", "))
-    return(Momocs::subsetize(x, -remove_rows))
+    return(subsetize(x, -remove_rows))
   }
 }
 
