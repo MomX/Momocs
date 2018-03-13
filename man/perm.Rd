@@ -38,7 +38,6 @@ perm(m, margin=1, size=10)
 bot.f <- efourier(bot, 12)
 bot.m <- perm(bot.f, 80)
 bot.m
-panel(bot.m)
 }
 \seealso{
 Other farming: \code{\link{breed}}
