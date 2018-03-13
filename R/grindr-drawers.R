@@ -14,8 +14,9 @@
 #'
 #' @param coo \code{matrix} of 2 columns for (x, y) coordinates
 #' @param f an optionnal factor specification to feed. See examples and vignettes.
-#' @param border color (hexadecimal) to draw components
 #' @param col color (hexadecimal) to draw components
+#' @param fill color (hexadecimal) to draw components
+#' @param pal a palette to use if no col/border/etc. are provided. See `[palettes]`
 #' @param pch to draw components
 #' @param cex to draw components ((`c(2, 1)` by default) for `draw_title`)
 #' @param lwd to draw components
@@ -45,7 +46,7 @@
 #'     draw_title("Alcohol abuse \nis dangerous for health", "Drink responsibly")
 
 #' @export
-draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, transp=0, ...){
+draw_polygon <- function(coo, f, col=par("fg"), fill=NA,  lwd=1, lty=1, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -61,11 +62,23 @@ draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, transp=
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
       f <- .fac_dispatcher(coo, f)
+
+    # handle palette
+    if (missing(col)){
+      col <- pal(nlevels(f))
+    }
+
   } else {
     f <- factor(rep(1, length(x)))
   }
-  # dispath drawer argument
-  borders <- this_dispatch(f, border) %>% pal_alpha(transp)
+
+
+
+  # dispatch drawer argument
+  if (missing(fill))
+    fills <- this_dispatch(f, pal_alpha(par("bg"), 1))
+  else
+    fills <- this_dispatch(f, fill) %>% pal_alpha(transp)
   cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   lwds    <- this_dispatch(f, lwd)
   ltys    <- this_dispatch(f, lty)
@@ -77,7 +90,7 @@ draw_polygon <- function(coo, f, border=par("fg"), col=NA, lwd=1, lty=1, transp=
   # draw the outlines as a polygon
   for (i in seq_along(x))
     polygon(x[[i]][, 1], x[[i]][, 2],
-            border=borders[i], col=cols[i],
+            border=cols[i], col=fills[i],
             lty=ltys[i], lwd=lwds[i], ...)
 
   # propagate
@@ -94,7 +107,7 @@ draw_outlines <- draw_polygon
 
 #' @export
 #' @rdname drawers
-draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, ...){
+draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -110,11 +123,17 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, ...){
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
       f <- .fac_dispatcher(coo, f)
+
+    # handle palette
+    if (missing(col)){
+      col <- pal(nlevels(f))
+    }
+
   } else {
     f <- factor(rep(1, length(x)))
   }
 
-  # dispath drawer argument
+  # dispatch drawer argument
   cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   cexs    <- this_dispatch(f, cex)
   pchs    <- this_dispatch(f, pch)
@@ -138,7 +157,7 @@ draw_landmarks <- draw_points
 
 #' @export
 #' @rdname drawers
-draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, transp=0, ...){
+draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -154,11 +173,17 @@ draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, transp=0, ...){
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
       f <- .fac_dispatcher(coo, f)
+
+    # handle palette
+    if (missing(col)){
+      col <- pal(nlevels(f))
+    }
+
   } else {
     f <- factor(rep(1, length(x)))
   }
 
-  # dispath drawer argument
+  # dispatch drawer argument
   cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   lwds    <- this_dispatch(f, lwd)
   ltys    <- this_dispatch(f, lty)
@@ -180,7 +205,7 @@ draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, transp=0, ...){
 
 #' @export
 #' @rdname drawers
-draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, transp=0, ...){
+draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -196,11 +221,17 @@ draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, transp=0, ...){
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
       f <- .fac_dispatcher(coo, f)
+
+    # handle palette
+    if (missing(col)){
+      col <- pal(nlevels(f))
+    }
+
   } else {
     f <- factor(rep(1, length(x)))
   }
 
-  # dispath drawer argument
+  # dispatch drawer argument
   cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   cexs    <- this_dispatch(f, cex)
   pchs    <- this_dispatch(f, pch)
@@ -230,7 +261,7 @@ draw_curves <- draw_lines
 
 #' @export
 #' @rdname drawers
-draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, transp=0, ...){
+draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -246,11 +277,17 @@ draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, transp=0, .
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
       f <- .fac_dispatcher(coo, f)
+
+    # handle palette
+    if (missing(col)){
+      col <- pal(nlevels(f))
+    }
+
   } else {
     f <- factor(rep(1, length(x)))
   }
 
-  # dispath drawer argument
+  # dispatch drawer argument
   labels  <- this_dispatch(f, label)
   cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   cexs    <- this_dispatch(f, cex)
@@ -336,7 +373,7 @@ draw_labels <- function(coo, labels=1:nrow(coo), cex=1/2, d=1/20, ...){
 
 #' @export
 #' @rdname drawers
-draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, transp=0, ...){
+draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -352,11 +389,17 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, transp=0,
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
       f <- .fac_dispatcher(coo, f)
+
+    # handle palette
+    if (missing(col)){
+      col <- pal(nlevels(f))
+    }
+
   } else {
     f <- factor(rep(1, length(x)))
   }
 
-  # dispath drawer argument
+  # dispatch drawer argument
   cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   lwds    <- this_dispatch(f, lwd)
   ltys    <- this_dispatch(f, lty)
