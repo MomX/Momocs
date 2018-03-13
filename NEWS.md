@@ -9,7 +9,7 @@
 
 ### New
 * new functions: `andnow` and `andnow_method` class tells you what to do with this object, and which classes are supported by this function/method.
-* new `coo_*` methods: `coo_range`, `coo_range_enlarge`, `coo_diffrange`
+* new `coo_*` methods: `coo_range`, `coo_range_enlarge`, `coo_diffrange`, `coo_template_relatively`. The latter will prepare ground for proper size handling, notably for morphospaces.
 * Many `coo` functions ported to methods and now supporting `.Coo` directly: `coo_angle_edges`, `coo_angle_tangent`, `coo_boundingbox`, `coo_calliper`, `coo_chull`, `coo_chull_onion`, `coo_circularity`, `coo_circularityharalick`, `coo_circularity_norm`, `coo_convexity`, `coo_dxy`, `coo_eccentricityboundingbox`, `coo_eccentricityeigen`, `coo_elongation`, `coo_intersect_angle`, `coo_intersect_direction`, `coo_intersect_segment`, `coo_perim`, `coo_perimcum`, `coo_perimpts`, `coo_rectangularity`, `coo_rectilinearity`, `coo_scalex`, `coo_scaley`, `coo_solidity`, `coo_truss`.
 * Palettes are now those colorblind-friendly from RColorBrewer and those, state of the art, virids palettes. See also `pal_manual`, `pal_qual_solarized` and `pal_seq_grey`.
 * `dispatch_fac` is now behind all `fac` arguments
@@ -30,10 +30,13 @@
 * Consequently deprecated `panel.OutCoe` method that was additionnaly the only `Coe` method. May be back in further versions.
 * Some non-exported functions (ie internals) now homegeneously begin with a `.`, eg `.is.error` (try `Momocs:::. + <Tab>` for a complete list).
 * Some previously exported functions are now internals (`function_foo` renamed to `.function_foo`): `.coo_angle_edge1`, `.vecs_param`, `.refactor`
+* `NEWS` is now a decent NEWS file
+* Online doc has been moved to [http://momx.github.io/Momocs/]
 
 ### Dependencies
 * Released `reshape2`, `plyr` dependencies
 * Now depends `RColorBrewer`
+* Proper indications of external functions with `::`
 
 ### Breaking changes
 * Besides deprecated/renamed functions there should be no breaking changes.
