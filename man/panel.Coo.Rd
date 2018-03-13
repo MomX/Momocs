@@ -66,8 +66,6 @@ If you want to reorder shapes according to a factor, use \link{arrange}.
 panel(mosquito, names=TRUE, cex.names=0.5)
 panel(olea)
 panel(bot, c(4, 10))
-bot.f <- efourier(bot, 12)
-panel(bot.f)
 # an illustration of the use of fac
 panel(bot, fac='type', palette=col_spring, names=TRUE)
 }

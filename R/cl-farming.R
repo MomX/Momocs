@@ -21,7 +21,6 @@
 #' bot.f <- efourier(bot, 12)
 #' bot.m <- perm(bot.f, 80)
 #' bot.m
-#' panel(bot.m)
 #' @rdname perm
 #' @export
 perm <- function(x, ...){UseMethod("perm")}
