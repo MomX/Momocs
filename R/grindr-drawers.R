@@ -142,11 +142,18 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, pal=pal
   old <- par(xpd=NA)
   on.exit(par(old))
 
-  # draw the outlines as a polygon
+  # single shape case (eg for PCA$x)
+  if (length(x)==1){
+      points(x[[1]][, 1], x[[1]][, 2],
+             col=cols,
+             cex=cexs, pch=pchs, ...)
+  } else {
+  # otherwise, draw the points
   for (i in seq_along(x))
     points(x[[i]][, 1], x[[i]][, 2],
            col=cols[i],
            cex=cexs[i], pch=pchs[i], ...)
+  }
   # propagate
   invisible(coo)
 }
