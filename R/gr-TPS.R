@@ -100,7 +100,9 @@ tps_raw <- function(fr, to, amp = 1,
     to <- to + (to - fr) * amp
   grid0 <- .grid.sample(fr, to, nside = round(grid.size), over = over)
   res <- list(grid=tps2d(grid0, fr, to),
-              dim=c(length(unique(grid0[, 1])), length(unique(grid0[, 2]))))
+              dim=c(length(unique(grid0[, 1])), length(unique(grid0[, 2]))),
+              fr=fr,
+              to=to)
   return(res)
 }
 
@@ -154,7 +156,7 @@ tps_grid <- function(fr, to, amp = 1,
   dim.grid <- c(length(unique(grid0[, 1])), length(unique(grid0[, 2])))
   op <- par(mar = rep(0, 4))
   on.exit(par(op))
-  plot(NA, xlim = range(grid1[, 1]), ylim = range(grid1[, 2]),
+  plot(NA, xlim = range(grid1[, 1])*over, ylim = range(grid1[, 2])*over,
        asp = 1, ann = FALSE, axes = FALSE, mar = rep(0, 4))
   for (i in 1:dim.grid[2]) {
     lines(grid1[(1:dim.grid[1]) + (i - 1) * dim.grid[1],
@@ -243,7 +245,7 @@ tps_arr <- function(fr, to, amp = 1,
   # grille simple, on affiche d'abord les deux courbes
   op <- par(mar = rep(0, 4))
   on.exit(par(op))
-  plot(NA, xlim = range(grid0[, 1]), ylim = range(grid0[, 2]),
+  plot(NA, xlim = range(grid0[, 1])*over, ylim = range(grid0[, 2])*over,
        asp = 1, axes = FALSE, ann = FALSE, mar = rep(0, 4))
   if (missing(arr.levels)) {
     arr.levels = arr.nb
@@ -343,8 +345,8 @@ tps_iso <- function(fr, to, amp = 1,
   op <- par(mar = rep(1, 4))
   on.exit(par(op))
   image(x, y, im, col = iso.cols, asp = 1,
-        xlim = range(grid0[, 1]),
-        ylim = range(grid0[, 2]),
+        xlim = range(grid0[, 1])*over,
+        ylim = range(grid0[, 2])*over,
         axes = FALSE, frame = FALSE,
         ann = FALSE)
   if (cont) {
