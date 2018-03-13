@@ -5,6 +5,10 @@
 \alias{pile}
 \alias{pile.default}
 \alias{pile}
+\alias{pile.list}
+\alias{pile}
+\alias{pile.array}
+\alias{pile}
 \alias{pile.Out}
 \alias{pile}
 \alias{pile.Opn}
@@ -15,6 +19,12 @@
 pile(coo, ...)
 
 \method{pile}{default}(coo, ...)
+
+\method{pile}{list}(coo, f, pal = pal_qual, paper_fun = paper,
+  draw_fun = draw_curves, transp = 0, ...)
+
+\method{pile}{array}(coo, f, pal = pal_qual, paper_fun = paper,
+  draw_fun = draw_landmarks, transp = 0, ...)
 
 \method{pile}{Out}(coo, f, pal = pal_qual, paper_fun = paper, transp = 0,
   ...)
@@ -37,6 +47,8 @@ pile(coo, ...)
 \item{transp}{\code{numeric} for transparency (default:adjusted, min:0, max=0)}
 
 \item{`paper_fun`}{a \link{papers} function (default: \code{paper})}
+
+\item{`draw_fun`}{one of \link{drawers} for \code{pile.list}}
 }
 \description{
 Pile all shapes in the same graphical window. Useful to check
@@ -68,6 +80,16 @@ wings \%>\% my_pile(transp=3/4)
 
  # and as gridr functions propagate, you can even continue:
  wings \%>\% my_pile() \%>\% draw_centroid(col="blue", cex=5)
+
+ # method on lists
+ bot$coo \%>\% pile
+
+ # it can be tuned when we have a list of landmarks with:
+ wings$coo \%>\% pile(draw_fun=draw_landmarks)
+
+ # or on arrays (turn for draw_landmarks)
+ wings$coo \%>\% l2a \%>\% #we now have an array
+     pile
 }
 \seealso{
 Other grindr: \code{\link{drawers}}, \code{\link{layers}},

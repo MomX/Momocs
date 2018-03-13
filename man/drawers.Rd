@@ -18,13 +18,13 @@
 \alias{draw_title}
 \title{grindr drawers for shape plots}
 \usage{
-draw_polygon(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
+draw_polygon(coo, f, col = par("fg"), fill = NA, lwd = 1, lty = 1,
   transp = 0, pal = pal_qual, ...)
 
-draw_outline(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
+draw_outline(coo, f, col = par("fg"), fill = NA, lwd = 1, lty = 1,
   transp = 0, pal = pal_qual, ...)
 
-draw_outlines(coo, f, border = par("fg"), col = NA, lwd = 1, lty = 1,
+draw_outlines(coo, f, col = par("fg"), fill = NA, lwd = 1, lty = 1,
   transp = 0, pal = pal_qual, ...)
 
 draw_points(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0,
@@ -63,9 +63,9 @@ draw_title(coo, main = "", sub = "", cex = c(1, 3/4), font = c(2, 1),
 
 \item{f}{an optionnal factor specification to feed. See examples and vignettes.}
 
-\item{border}{color (hexadecimal) to draw components}
-
 \item{col}{color (hexadecimal) to draw components}
+
+\item{fill}{color (hexadecimal) to draw components}
 
 \item{lwd}{to draw components}
 
