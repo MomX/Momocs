@@ -286,7 +286,6 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' @param points.pch (for Ldk) and a pch for these points
 #' @param points.cex (for Ldk) and a cex for these points
 #' @param points.col (for Ldk) and a col  for these points
-#' @param nb.pts the number of points to use for the shape reconstruction
 #' @param ... additional arguments to feed generic \code{plot}
 #' @note If you want to reorder shapes according to a factor, use \link{arrange}.
 #' @family Coo_graphics

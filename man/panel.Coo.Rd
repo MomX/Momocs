@@ -54,8 +54,6 @@ $fac can be supllied, or even a character of the same length of the Coo}
 \item{points.cex}{(for Ldk) and a cex for these points}
 
 \item{points.col}{(for Ldk) and a col  for these points}
-
-\item{nb.pts}{the number of points to use for the shape reconstruction}
 }
 \description{
 Plots all the outlines, side by side, from
