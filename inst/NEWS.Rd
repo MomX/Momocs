@@ -25,6 +25,7 @@
     \item Deprecated `plot3.PCA` (will be replaced in further versions); `Ntable` splitted into of `plot_table` + `table`; `coo_tangle` now in `coo_angle_tangent`; `coo_theta3` now in `coo_angle_edges`, `truss` now in `coo_truss` ; `plot.Coo` is now `inspect`
     \item Deprecated `stack2` and `panel2` before their rewriting.
     \item Deprecated `as_Out`, that should have been `efourier_i.OutCoe` anyway. Consequently deprecated `panel.OutCoe` method that was additionnaly the only `Coe` method. May be back in further versions.
+    \item Deprecated `classify` for a while
     \item Waiting for a cleaner fix, `subset` is now `subsetize`...
 
     \item Deprecated all `is.*` aliases for `is_*` methods
