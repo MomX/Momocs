@@ -10,6 +10,11 @@
 #' Also, `pal_qual_solarized` based on Solarized: \url{http://ethanschoonover.com/solarized}
 #' and `pal_seq_grey` only shades of grey from `grey10` to `grey90`.
 #'
+#' Default color palettes are currently:
+#' * `pal_qual=pal_qual_Set2`
+#' * `pal_seq=pal_seq_viridis`
+#' * `pal_div=pal_div_RdBu`
+#'
 #' @param n `numeric` number of colors
 #' @param cols color(s) as hexadecimal values
 #' @param transp `numeric` between 0 and 1 (0, eg opaque, by default)
@@ -59,7 +64,7 @@ pal_manual <- function(cols, transp=0){
 .pal_brewer <- function(n, name){
   # RColorBrewer always want at least 3 levels
   if (n<3){
-    return(colorRampPalette(RColorBrewer::brewer.pal(3, name))(n))
+    return(colorRampPalette(RColorBrewer::brewer.pal(3, name)[1:2])(n))
   }
   # But no more than a given value given in brewer.pal.info
   mc <- RColorBrewer::brewer.pal.info[name, "maxcolors"]
@@ -572,3 +577,16 @@ pal_seq_viridis <- function(n, transp=0){
   }
   f(n, transp)
 }
+
+#' @rdname palettes
+#' @export
+pal_qual <- pal_qual_Set2
+
+#' @rdname palettes
+#' @export
+pal_seq  <- pal_seq_viridis
+
+#' @rdname palettes
+#' @export
+pal_div  <- pal_div_RdBu
+#'

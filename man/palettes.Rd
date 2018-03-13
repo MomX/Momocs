@@ -40,6 +40,9 @@
 \alias{pal_seq_inferno}
 \alias{pal_seq_plasma}
 \alias{pal_seq_viridis}
+\alias{pal_qual}
+\alias{pal_seq}
+\alias{pal_div}
 \title{Color palettes}
 \usage{
 pal_alpha(cols, transp = 0)
@@ -111,6 +114,12 @@ pal_seq_inferno(n, transp = 0)
 pal_seq_plasma(n, transp = 0)
 
 pal_seq_viridis(n, transp = 0)
+
+pal_qual(n, transp = 0)
+
+pal_seq(n, transp = 0)
+
+pal_div(n, transp = 0)
 }
 \arguments{
 \item{cols}{color(s) as hexadecimal values}
@@ -127,6 +136,14 @@ Also, all viridis palettes (see the \href{https://CRAN.R-project.org/package=vir
 yet color ramps are borrowed and Momocs does not depend on it.
 Also, \code{pal_qual_solarized} based on Solarized: \url{http://ethanschoonover.com/solarized}
 and \code{pal_seq_grey} only shades of grey from \code{grey10} to \code{grey90}.
+}
+\details{
+Default color palettes are currently:
+\itemize{
+\item \code{pal_qual=pal_qual_Set2}
+\item \code{pal_seq=pal_seq_viridis}
+\item \code{pal_div=pal_div_RdBu}
+}
 }
 \note{
 RColorBrewer palettes are not happy when \code{n} is lower than 3 and above
