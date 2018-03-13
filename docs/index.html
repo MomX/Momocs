@@ -49,6 +49,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="news/index.html">News</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -74,11 +77,11 @@
     
 <div class="contents">
 <!--README.md is generated from README.Rmd. Please edit that file -->
-<!--Badges -->
-<p><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://travis-ci.org/vbonhomme/Momocs"><img src="https://travis-ci.org/MomX/Momocs.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/MomX/Momocs?branch=master"><img src="https://img.shields.io/codecov/c/MomX/vbonhomme/Momocs/master.svg" alt="Coverage Status"></a> <a href="http://cran.r-project.org/package=Momocs"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a> <img src="http://cranlogs.r-pkg.org/badges/Momocs" alt="CRAN downloads last month"><img src="http://cranlogs.r-pkg.org/badges/grand-total/Momocs" alt="CRAN downloads grand total"></p>
 <div id="momocs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#momocs" class="anchor"></a>Momocs</h2>
+<!--Badges -->
+<p><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://travis-ci.org/MomX/Momocs"><img src="https://travis-ci.org/MomX/Momocs.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/MomX/Momocs?branch=master"><img src="https://img.shields.io/codecov/c/MomX/Momocs/master.svg" alt="Coverage Status"></a> <a href="http://cran.r-project.org/package=Momocs"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a> <img src="http://cranlogs.r-pkg.org/badges/Momocs" alt="CRAN downloads last month"><img src="http://cranlogs.r-pkg.org/badges/grand-total/Momocs" alt="CRAN downloads grand total"></p>
 <p>The goal of Momocs is to provide a complete, convenient, reproducible and open-source toolkit for 2D morphometrics.</p>
 <p>It includes most common 2D morphometrics approaches on outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.</p>
 <p>It allows reproducible, pipeable, complex morphometric analyses and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.</p>
@@ -171,10 +174,10 @@ __Misc__
 <p>This is a basic example of a complete analysis doing: inspection, normalization of raw outlines, elliptical Fourier transforms, dimmensionality reduction and classification, using a single line.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Momocs)
 hearts <span class="op">%T&gt;%</span><span class="st">                    </span><span class="co"># a built in dataset</span>
-<span class="st">  </span><span class="kw">stack</span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># family picture on raw outlines</span>
+<span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># family picture on raw outlines</span>
 <span class="st">  </span><span class="kw"><a href="reference/fgProcrustes.html">fgProcrustes</a></span>() <span class="op">%T&gt;%</span><span class="st">          </span><span class="co"># full generalized Procrustes alignment</span>
 <span class="st">  </span><span class="kw"><a href="reference/coo_slide.html">coo_slide</a></span>(<span class="dt">ldk=</span><span class="dv">1</span>) <span class="op">%T&gt;%</span><span class="st">        </span><span class="co"># redefine an homologous 1st point</span>
-<span class="st">  </span><span class="kw">stack</span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># another family picture after fgProcrustes</span>
+<span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># another family picture after fgProcrustes</span>
 <span class="st">  </span><span class="kw"><a href="reference/efourier.html">efourier</a></span>(<span class="dv">6</span>, <span class="dt">norm=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># elliptical Fourier transforms</span>
 <span class="st">  </span><span class="kw"><a href="reference/PCA.html">PCA</a></span>() <span class="op">%T&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># a PCA and a PC1:2 plot</span>
 <span class="st">  </span><span class="kw"><a href="reference/LDA.html">LDA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/plot_CV.html">plot_CV</a></span>()      <span class="co"># an LDA and confusion matrix</span></code></pre></div>

@@ -1,10 +1,10 @@
 
 <!--README.md is generated from README.Rmd. Please edit that file -->
-<!--Badges -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/MomX/Momocs) [![Coverage Status](https://img.shields.io/codecov/c/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs) ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
-
 Momocs
 ------
+
+<!--Badges -->
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/MomX/Momocs) [![Coverage Status](https://img.shields.io/codecov/c/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs) ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
 The goal of Momocs is to provide a complete, convenient, reproducible and open-source toolkit for 2D morphometrics.
 
