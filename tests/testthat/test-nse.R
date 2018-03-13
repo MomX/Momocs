@@ -113,12 +113,12 @@ test_that("dissolve works fine", {
   expect_equal(bw %>% dissolve(1) %$% ncol(coe), 40)
 })
 
-# subset
-test_that("subset works fine", {
-  expect_equal(subset(bot, type=="whisky") %>% length, 20)
-  expect_equal(subset(bot, type!="whisky") %>% length, 20)
-  expect_equal(subset(bot, 1:5) %>% length, 5)
-  expect_equal(subset(bot, -(1:5)) %>% length, 35)
+# subsetize
+test_that("subsetize works fine", {
+  expect_equal(subsetize(bot, type=="whisky") %>% length, 20)
+  expect_equal(subsetize(bot, type!="whisky") %>% length, 20)
+  expect_equal(subsetize(bot, 1:5) %>% length, 5)
+  expect_equal(subsetize(bot, -(1:5)) %>% length, 35)
 })
 
 # rw

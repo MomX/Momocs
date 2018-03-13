@@ -1,5 +1,92 @@
 ##### Combining or subsetting Momocs' classes
 
+
+# subsetize -------------------------------
+# #' Subsetize various Momocs objects
+# #'
+# #'
+# #' Subsetize is a wrapper around dplyr's verbs and should NOT be used directly.
+# #'
+# #' @rdname subset
+# #' @param x a \code{Coo} or a \link{Coe} object.
+# #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
+# #' @param ... useless here but maintains consistence with the generic subset.
+# #' @family handling functions
+# #' @examples
+# #' # Do not use subset directly
+# #' @rdname subset
+# #' @export
+subsetize <- function(x, subset, ...){
+  UseMethod("subsetize")
+}
+
+# #' @rdname subset
+# #' @export
+subsetize.Coo <- function(x, subset, ...) {
+  Coo <- x
+  e <- substitute(subset)
+  retain <- eval(e, Coo$fac, parent.frame())
+  Coo2 <- Coo
+  Coo2$coo <- Coo$coo[retain]
+  if (is_ldk(Coo))
+    Coo2$ldk <- Coo$ldk[retain]
+  if (is_fac(Coo)) {
+    #     if (is.logical(retain))
+    #       retain <- which(retain)
+    Coo2$fac <- Coo$fac[retain, ]
+    # bloody dirty case where a factor is returned
+    if (ncol(Coo$fac)==1 & is.factor(Coo2$fac)) {
+      Coo2$fac <- data.frame(Coo2$fac)
+    }
+    names(Coo2$fac) <- names(Coo$fac)
+    Coo2$fac %<>% data.frame()
+    Coo2$fac %<>% .refactor()
+  }
+  return(Coo2)
+}
+
+# #' @rdname subset
+# #' @export
+subsetize.Coe <- function(x, subset, ...) {
+  Coe <- x
+  e <- substitute(subset)
+  retain <- eval(e, Coe$fac, parent.frame())
+  Coe2 <- Coe
+  Coe2$coe <- Coe$coe[retain, ]
+  #   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
+  if (ncol(Coe$fac) > 0) {
+    Coe2$fac <- Coe$fac[retain, ]
+    # bloody dirty case where a factor is returned
+    if (ncol(Coe$fac)==1 & is.factor(Coe2$fac)) {
+      Coe2$fac <- data.frame(Coe2$fac)
+    }
+    names(Coe2$fac) <- names(Coe$fac)
+    Coe2$fac %<>% data.frame()
+    Coe2$fac %<>% .refactor()
+  }
+  return(Coe2)
+}
+
+# #' @rdname subset
+# #' @export
+subsetize.PCA <- function(x, subset, ...){
+  PCA <- x
+  e <- substitute(subset)
+  retain <- eval(e, PCA$fac, parent.frame())
+  PCA2 <- PCA
+  PCA2$x <- PCA$x[retain, ]
+  if (ncol(PCA$fac) > 0) {
+    PCA2$fac <- PCA$fac
+    PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
+    names(PCA2$fac) <- names(PCA$fac)
+    PCA2$fac %<>% data.frame()
+    PCA2$fac %<>% .refactor()
+  }
+  return(PCA2)
+}
+
+
+
 # select -------------------------------
 #' Selects (ala dplyr) on Momocs objects
 #'
@@ -723,88 +810,6 @@ dissolve.Coe <- function(x, retain){
   x2$coe <- x$coe[, cols_retain]
   return(x2)
 }
-
-# subset -------------------------------
-#' Subsets on Momocs objects
-#'
-#'
-# #' Subset is a wrapper around dplyr's verbs and should NOT be used directly.
-# #'
-# #' @rdname subset
-# #' @param x a \code{Coo} or a \link{Coe} object.
-# #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
-# #' @param ... useless here but maintains consistence with the generic subset.
-# #' @family handling functions
-# #' @examples
-# #' # Do not use subset directly
-#' @export
-subsetize <- function(x, subset, ...){
-  UseMethod("subsetize")
-}
-
-subsetize.Coo <- function(x, subset, ...) {
-  Coo <- x
-  e <- substitute(subset)
-  retain <- eval(e, Coo$fac, parent.frame())
-  Coo2 <- Coo
-  Coo2$coo <- Coo$coo[retain]
-  if (is_ldk(Coo))
-    Coo2$ldk <- Coo$ldk[retain]
-  if (is_fac(Coo)) {
-    #     if (is.logical(retain))
-    #       retain <- which(retain)
-    Coo2$fac <- Coo$fac[retain, ]
-    # bloody dirty case where a factor is returned
-    if (ncol(Coo$fac)==1 & is.factor(Coo2$fac)) {
-      Coo2$fac <- data.frame(Coo2$fac)
-    }
-    names(Coo2$fac) <- names(Coo$fac)
-    Coo2$fac %<>% data.frame()
-    Coo2$fac %<>% .refactor()
-  }
-  return(Coo2)
-}
-
-# #' @rdname subset
-# #' @export
-subsetize.Coe <- function(x, subset, ...) {
-  Coe <- x
-  e <- substitute(subset)
-  retain <- eval(e, Coe$fac, parent.frame())
-  Coe2 <- Coe
-  Coe2$coe <- Coe$coe[retain, ]
-  #   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
-  if (ncol(Coe$fac) > 0) {
-    Coe2$fac <- Coe$fac[retain, ]
-    # bloody dirty case where a factor is returned
-    if (ncol(Coe$fac)==1 & is.factor(Coe2$fac)) {
-      Coe2$fac <- data.frame(Coe2$fac)
-    }
-    names(Coe2$fac) <- names(Coe$fac)
-    Coe2$fac %<>% data.frame()
-    Coe2$fac %<>% .refactor()
-  }
-  return(Coe2)
-}
-
-# #' @rdname subset
-# #' @export
-subsetize.PCA <- function(x, subset, ...){
-  PCA <- x
-  e <- substitute(subset)
-  retain <- eval(e, PCA$fac, parent.frame())
-  PCA2 <- PCA
-  PCA2$x <- PCA$x[retain, ]
-  if (ncol(PCA$fac) > 0) {
-    PCA2$fac <- PCA$fac
-    PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
-    names(PCA2$fac) <- names(PCA$fac)
-    PCA2$fac %<>% data.frame()
-    PCA2$fac %<>% .refactor()
-  }
-  return(PCA2)
-}
-
 
 # table --------------------------
 #' Cross-tabulates objects

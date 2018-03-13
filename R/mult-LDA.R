@@ -357,19 +357,19 @@ classify.Coe <- function(x, fac, ref, unk){
   # we filter for levels of interest
   all_id  <- which(fac %in% c(ref, unk))
   # cat(all_id)
-  x <- subset(x, all_id)
+  x <- slice(x, all_id)
   fac <- fac[all_id]
   # calculate a PCA using all taxa
   P0 <- PCA(x)
   # calculate an LDA using all but the unknown taxa
   ref_id <- which(fac != unk)
   L0 <- P0 %>%
-    subset(ref_id) %>%
+    slice(ref_id) %>%
     LDA(fac[ref_id], retain=0.99, verbose=FALSE)
   # extract and prepare scores of the unknown taxa
   unk_id <- which(fac == unk)
   P1_all <- P0 %>%
-    subset(unk_id)
+    slice(unk_id)
   P1 <- P1_all$x[, 1:ncol(L0$x)]
 
   # classify using the MASS::lda
