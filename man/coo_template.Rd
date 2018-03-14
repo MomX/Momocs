@@ -7,7 +7,7 @@
 \alias{coo_template}
 \alias{coo_template.Coo}
 \alias{coo_template}
-\alias{coo_template_relatively.default}
+\alias{coo_template_relatively}
 \alias{coo_template}
 \alias{coo_template_relatively.list}
 \alias{coo_template}
@@ -20,11 +20,11 @@ coo_template(coo, size)
 
 \method{coo_template}{Coo}(coo, size = 1)
 
-coo_template_relatively.default(coo, size = 1)
+coo_template_relatively(coo, size = 1)
 
-coo_template_relatively.list(coo, size = 1)
+\method{coo_template_relatively}{list}(coo, size = 1)
 
-coo_template_relatively.Coo(coo, size = 1)
+\method{coo_template_relatively}{Coo}(coo, size = 1)
 }
 \arguments{
 \item{coo}{A \code{list} or a \code{matrix} of coordinates.}
