@@ -14,7 +14,7 @@ BugReports: https://github.com/MomX/Momocs/issues
 Depends: R(>= 3.2)
 LazyData: true
 Imports: ape, dplyr, magrittr, graphics, geometry, geomorph, ggplot2,
-       grDevices, jpeg, MASS, progress, RColorBrewer, rgeos, sp, utils
+       grDevices, jpeg, MASS, progress, RColorBrewer, rgeos, sp, utils, tibble
 Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
