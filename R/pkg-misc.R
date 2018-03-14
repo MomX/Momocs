@@ -62,7 +62,7 @@ Momocs_lastversion <- function() {
   }
   devtools::install_github("MomX/Momocs", build_vignettes= TRUE)
   library(Momocs)
-  message("Last version of Momocs has been installed from GitHub and loaded into R")
+  message("last Momocs version has been installed from GitHub. Loaded into R")
 }
 
 #' @rdname Momocs_version

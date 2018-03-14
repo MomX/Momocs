@@ -103,7 +103,7 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
   if (nb.h == -1) {
     nb.h = floor(nr/2)
     if (verbose) {
-      message("The number of harmonics used has been set to: ", nb.h)
+      message("the number of harmonics used has been set to: ", nb.h)
     }
   }
   if (smooth.it != 0) {

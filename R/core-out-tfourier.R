@@ -113,7 +113,7 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1
-    message("At least one outline has no more than ", q * 2,
+    message("at least one outline has no more than ", q * 2,
         " coordinates. 'nb.h' has been set to ", q,
         " harmonics")
   }

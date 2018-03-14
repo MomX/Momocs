@@ -651,10 +651,9 @@ calculate_ellipse <- function(data, vars, type, level, segments){
   dfn <- 2
   dfd <- nrow(data) - 1
   if (!type %in% c("t", "norm", "euclid")){
-    message("Unrecognized ellipse type")
+    message("unrecognized ellipse type")
     ellipse <- rbind(as.numeric(c(NA, NA)))
   } else if (dfd < 3){
-    #message("Too few points to calculate an ellipse")
     ellipse <- rbind(as.numeric(c(NA, NA)))
   } else {
     if (type == "t"){

@@ -134,7 +134,7 @@ def_links.matrix <- function(x, nb.ldk){
   def_2ldk <- function(x, hmax){
     res <- numeric(2)
     # 1st point
-    message("Click on the starting landmark...")
+    message("click on the starting landmark...")
     xy <- as.numeric(locator(1))
     if (!missing(hmax)) { if (xy[2] >= hmax) return() }
     d <- (x[, 1] - xy[1])^2 + (x[, 2] - xy[2])^2
