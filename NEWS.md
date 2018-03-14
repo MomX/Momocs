@@ -46,6 +46,8 @@
 ### Minor
 * Waiting for a cleaner fix, `subset` is now `subsetize`...
 * Fixed a bug in `LDA` when `retain=1` (#e7704eb)
+* Messages homogeneity
+* Internals have been lightened
 * Various minor bugs fixes, see GitHub
 
 

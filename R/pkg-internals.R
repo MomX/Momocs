@@ -112,26 +112,22 @@
   return(lf)
 }
 
-#' @export
 .trim.ext <- function(lf) {
   gsub("\\.[[:alnum:]]+$", "", lf)
 }
 
-#' @export
 .trim.path <- function(lf) {
   lf %>%
     strsplit("/") %>%
     sapply(lf0, function(x) x[length(x)])
 }
 
-#' @export
 .trim.both <- function(lf) {
   lf %>% .trim.path() %>% .trim.ext()
 }
 
 # numbers misc ----
 
-#' @export
 .normalize <- function(x, min.x, max.x) {
   # damn long but default arguments are not accepted
   if (missing(min.x))
