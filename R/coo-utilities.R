@@ -382,7 +382,7 @@ coo_template.Coo <- function(coo, size=1){
 #' @rdname coo_template
 #' @name coo_template
 #' @export
-coo_template_relatively.default <- function(coo, size=1){
+coo_template_relatively <- function(coo, size=1){
   UseMethod("coo_template_relatively")
 }
 
