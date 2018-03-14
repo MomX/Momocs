@@ -1,47 +1,73 @@
 # fac -------
-# Used in Coo/Coe printers
-.print.fac <- function(fac){
-  nf <- ncol(fac)
-  # here we print the number of classifiers
-  if (nf == 0) {
-    cat(" - $fac: No classifier defined in $fac\n")
-  } else {
-    if (nf<2) {
-      cat(" - $fac:", nf, "classifier:\n")
-    } else {
-      cat(" - $fac:", nf, "classifiers:\n")}
-    # here we print every classifier
-    for (i in 1:nf) {
-      if (is.numeric(fac[, i])){
-        xi <- fac[, i]
-        nas <- sum(is.na(xi))
-        xi  <- xi[!is.na(xi)]
-        xi.sum <- list(min=min(xi), med=median(xi), max=max(xi), mean=mean(xi), sd=sd(xi))
-        xi.sum <- lapply(xi.sum, signif, 3)
-        xi.sum$nas <- nas
-        cat("     '", colnames(fac)[i], "' (numeric): ",
-            #"min:", xi.sum$min,
-            #", med:", xi.sum$med,
-            #", max: ", xi.sum$max,
-            #"mean:", xi.sum$mean,
-            #", sd: ", xi.sum$sd,
-            "mean: ", xi.sum$mean, ", sd: ", xi.sum$sd,
-            ifelse(xi.sum$nas==0, ".\n", paste0(" (", xi.sum$nas, " NA).\n")), sep="")
-      } else {
-        # case where the column is a factor
-        lev.i <- levels(fac[, i])
-        # cosmectics below
-        if (sum(nchar(lev.i))>60){
-          maxprint <- which(cumsum(nchar(lev.i))>30)[1]
-          cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
-              " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
-        } else {
-          cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
-        }
-      }
-    }
-  }
+.print_fac <- function(x, n=4){
+  # # remove dim
+  # pre <- format(x, n=n) %>% `[`(-1)
+  # # remove 'more rows'
+  # pre <- pre[-length(pre)]
+  # # add dollars in front of column names
+  # #pre[1] <- gsub("( )([[:alnum:]]{1})", " $\\2", pre[1])
+  # # trim col numbers and add 2 spaces
+  # c(paste0("- ", ncol(x), " classifiers (in $fac): "), pre) %>%
+  #   gsub("(^\033.*\033\\[39m )", "  ", .) %>%
+  #   paste0("  ", .) %>%
+  #   # nicely cat
+  #   cat(sep="\n")
+  print(x)
 }
+
+.print.fac <- .print_fac
+# # Used in Coo/Coe printers
+# .print.fac <- function(fac){
+#   nf <- ncol(fac)
+#   # here we print the number of classifiers
+#   if (nf == 0) {
+#     cat(" - $fac: No classifier defined in $fac\n")
+#   } else {
+#     if (nf<2) {
+#       cat(" - $fac:", nf, "classifier:\n")
+#     } else {
+#       cat(" - $fac:", nf, "classifiers:\n")}
+#     # here we print every classifier
+#     for (i in 1:nf) {
+#       if (is.numeric(fac[, i])){
+#         xi <- fac[, i]
+#         nas <- sum(is.na(xi))
+#         xi  <- xi[!is.na(xi)]
+#         xi.sum <- list(min=min(xi), med=median(xi), max=max(xi), mean=mean(xi), sd=sd(xi))
+#         xi.sum <- lapply(xi.sum, signif, 3)
+#         xi.sum$nas <- nas
+#         cat("     '", colnames(fac)[i], "' (numeric): ",
+#             #"min:", xi.sum$min,
+#             #", med:", xi.sum$med,
+#             #", max: ", xi.sum$max,
+#             #"mean:", xi.sum$mean,
+#             #", sd: ", xi.sum$sd,
+#             "mean: ", xi.sum$mean, ", sd: ", xi.sum$sd,
+#             ifelse(xi.sum$nas==0, ".\n", paste0(" (", xi.sum$nas, " NA).\n")), sep="")
+#       } else {
+#         # case where the column is a factor
+#         lev.i <- levels(fac[, i])
+#         # cosmectics below
+#         if (sum(nchar(lev.i))>60){
+#           maxprint <- which(cumsum(nchar(lev.i))>30)[1]
+#           cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i[1:maxprint], collapse=", "),
+#               " ... + ", length(lev.i) - maxprint, " more.\n", sep="")
+#         } else {
+#           cat("     '", colnames(fac)[i], "' (factor ", nlevels(fac[, i]), "): ", paste(lev.i, collapse=", "), ".\n", sep="")
+#         }
+#       }
+#     }
+#   }
+# }
+
+.other_components <- function(x, not=c("coo", "fac")){
+  ot <- ls(x)[!(ls(x) %in% not)]
+  ot <- paste0("$", ot)
+  if (length(ot)>1)
+    ot <- paste(ot, sep=", ")
+  paste0("  - also: ", ot) %>% cat
+}
+
 
 # handles fac grabbing via formula or $fac column name
 .fac_dispatcher <- function(x, fac){
