@@ -21,14 +21,14 @@ pile(coo, f, pal, paper_fun, draw_fun, transp, ...)
 \method{pile}{array}(coo, f, pal = pal_qual, paper_fun = paper,
   draw_fun = draw_landmarks, transp = 0, ...)
 
-\method{pile}{Out}(coo, f, pal = pal_qual, paper_fun = paper, transp = 0,
-  ...)
+\method{pile}{Out}(coo, f, pal = pal_qual, paper_fun = paper,
+  draw_fun = draw_outlines, transp = 0, ...)
 
-\method{pile}{Opn}(coo, f, pal = pal_qual, paper_fun = paper, transp = 0,
-  ...)
+\method{pile}{Opn}(coo, f, pal = pal_qual, paper_fun = paper,
+  draw_fun = draw_curves, transp = 0, ...)
 
-\method{pile}{Ldk}(coo, f, pal = pal_qual, paper_fun = paper, transp = 0,
-  ...)
+\method{pile}{Ldk}(coo, f, pal = pal_qual, paper_fun = paper,
+  draw_fun = draw_landmarks, transp = 0, ...)
 }
 \arguments{
 \item{coo}{a single shape or any  \link{Coo} object}
@@ -37,13 +37,13 @@ pile(coo, f, pal, paper_fun, draw_fun, transp, ...)
 
 \item{pal}{palette among \link{palettes} (default: pal_qual)}
 
+\item{paper_fun}{a \link{papers} function (default: \code{paper})}
+
+\item{draw_fun}{one of \link{drawers} for \code{pile.list}}
+
 \item{transp}{\code{numeric} for transparency (default:adjusted, min:0, max=0)}
 
 \item{...}{more arguments to feed the core drawer, depending on the object}
-
-\item{`paper_fun`}{a \link{papers} function (default: \code{paper})}
-
-\item{`draw_fun`}{one of \link{drawers} for \code{pile.list}}
 }
 \description{
 Pile all shapes in the same graphical window. Useful to check

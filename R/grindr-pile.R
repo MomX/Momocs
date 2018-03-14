@@ -6,9 +6,9 @@
 #'
 #' @param coo a single shape or any  [Coo] object
 #' @param f factor specification
-#' @param `paper_fun` a [papers] function (default: `paper`)
-#' @param `draw_fun` one of [drawers] for `pile.list`
 #' @param pal palette among [palettes] (default: pal_qual)
+#' @param paper_fun a [papers] function (default: `paper`)
+#' @param draw_fun one of [drawers] for `pile.list`
 #' @param transp `numeric` for transparency (default:adjusted, min:0, max=0)
 #' @param ... more arguments to feed the core drawer, depending on the object
 #' @family grindr
@@ -84,35 +84,34 @@ pile.array <- function(coo, f, pal=pal_qual, paper_fun=paper,
 #' @rdname pile
 #' @export
 pile.Out <- function(coo, f, pal=pal_qual,
-                     paper_fun=paper, transp=0, ...){
+                     paper_fun=paper, draw_fun=draw_outlines, transp=0, ...){
   coo <- coo %>% paper_fun
   if (!missing(f))
-    coo %>% draw_outlines(f=f, pal=pal, transp=transp, ...) %>% draw_firstpoint(transp=transp)
+    coo %>% draw_fun(f=f, pal=pal, transp=transp, ...) %>% draw_firstpoint(transp=transp)
   else
-    coo %>% draw_outlines(transp=transp, ...) %>% draw_firstpoint(transp=transp)
+    coo %>% draw_fun(transp=transp, ...) %>% draw_firstpoint(transp=transp)
 }
 
 #' @rdname pile
 #' @export
 pile.Opn <- function(coo, f, pal=pal_qual,
-                     paper_fun=paper, transp=0, ...){
+                     paper_fun=paper, draw_fun=draw_curves, transp=0, ...){
   coo <- coo %>% paper_fun
   if (!missing(f))
-    coo %>% draw_curves(f=f, pal=pal, transp=transp, ...) %>% draw_firstpoint(transp=transp)
+    coo %>% draw_fun(f=f, pal=pal, transp=transp, ...) %>% draw_firstpoint(transp=transp)
   else
-    coo %>% draw_curves(transp=transp, ...) %>% draw_firstpoint(transp=transp)
+    coo %>% draw_fun(transp=transp, ...) %>% draw_firstpoint(transp=transp)
 
 }
 
 #' @rdname pile
 #' @export
 pile.Ldk <- function(coo, f, pal=pal_qual,
-                     paper_fun=paper, transp=0, ...){
+                     paper_fun=paper, draw_fun=draw_landmarks, transp=0, ...){
   coo <- coo %>% paper_fun
   if (!missing(f))
-    coo %>% draw_landmarks(f=f, pal=pal, transp=transp, ...)
+    coo %>% draw_fun(f=f, pal=pal, transp=transp, ...)
   else
-    coo %>% draw_landmarks(transp=transp, ...)
-
+    coo %>% draw_fun(transp=transp, ...)
 }
 
