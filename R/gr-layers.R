@@ -406,51 +406,6 @@
   text(pos[1], pos[3] + gy, pos = 4, labels = title, font = 2, cex = 0.8)
 }
 
-# Experimental and maybe useless --------------------
-# combine factor (a quick wrapper around interaction)
-# for PCA, LDA or any data.frame
-# TODO : .fac_dispatcher does the job
-.combine.fac <- function(x, formula){
-  if (any(c("LDA", "PCA")==class(x)[1])) x <- x$fac
-  f0 <- x[, attr(terms(formula), "term.labels")]
-  return(interaction(f0))}
-
-# smart color grouping provided with a fac after interaction
-# op <- PCA(npoly(olea))
-# f <- .combine.fac(op, ~view+domes)
-# cols <- .smartpalette(f)
-# plot(op, f, col=cols)
-.smartpalette <- function(fac, gap.intra=1, gap.inter=5, palette=col_qual){
-  # determine ranking within a factor
-  rank <- function(s){
-    s <- as.numeric(factor(s))
-    rank <- (1:length(unique(s)))
-    rank[match(s, unique(s))]}
-  # adds gaps between the levels of a factor
-  gap.that <- function(s, gap.intra=1){
-    s <- as.numeric(factor(s))
-    add <- (1:length(unique(s))) + (0:(length(unique(s))-1))*gap.intra
-    add[match(s, unique(s))]}
-  # we start here
-  fac0 <- factor(unique(fac))
-  # we resplit the factors
-  df <- t(data.frame(strsplit(as.character(fac0), ".", fixed=TRUE), row.names=NULL))
-  #df <- df[, ncol(df):1]
-  # we calculate ranks
-  df.rank <- apply(df, 2, rank)
-  df.rank[, 1] <- gap.that(df.rank[, 1], gap.intra=gap.intra)
-  # we gap.that consecutive levels
-  if (ncol(df.rank)>1){
-    for (i in 2:ncol(df.rank)){
-      gap.i <- length(unique(df.rank[, (i-1)])) * (gap.inter*i+gap.intra)
-      df.rank[, i] <- gap.that(df.rank[, i], gap.intra=gap.i)}}
-  # we add ranks and eventually have our indices
-  ids <- apply(df.rank, 1, sum)
-  ids <- ids-min(ids)+1
-  cols <- palette(max(ids))[ids]
-  return(cols)}
-
-
 # misc ------------------------
 
 .center_range <- function(x){
