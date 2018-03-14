@@ -1,11 +1,5 @@
 # PCA plotters ------
 
-### if high nb of group or if long, abbreviate auto
-### change labelsgroups in lda
-### cahnge confell in lda
-### integrate .cex
-
-#todo: add deformation grids on the extreme PC axes (pos / meanshape)
 #' Plots Principal Component Analysis
 #'
 #' The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.

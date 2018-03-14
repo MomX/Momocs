@@ -386,13 +386,5 @@ MANOVA_PW.PCA <- function(x,
 #   invisible(list(manovas = manovas, summary = res, stars.tab = stars.tab))
 # }
 
-# todo #' @rdname MANOVA #' @export MANOVA.LdkCoe <-
-# function(x, fac, test='Hotelling', retain, drop){ LdkCoe <-
-# x if (length(LdkCoe$method)>1) stop(' * cannot yet be used
-# on combined OutCoe. Do it manually.') if (missing(fac))
-# stop(' * 'fac' must be provided') if (!is.factor(fac)) {fac
-# <- LdkCoe$fac[, fac]} x <- LdkCoe$coe mod <-
-# summary(manova(x~fac), test=test) return(mod)}
-
 ##### end MANOVA
 

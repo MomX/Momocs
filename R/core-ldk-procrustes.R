@@ -253,7 +253,6 @@ fgProcrustes.Opn <- fgProcrustes.Out
 
 #' @export
 fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
-  # sliding support, todo
   # if (is_slidings(x))
   #   x %<>% get_curcoo_binded()
   Coo2 <- Coo <- x

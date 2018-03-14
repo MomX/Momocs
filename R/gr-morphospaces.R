@@ -181,24 +181,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
                             amp.shp = amp.shp, pts.shp = pts.shp)
     cd <- TRUE
   }
-  # if (method=='rfourier'){ shp <- PCA2shp_rfourier(pos=pos,
-  # rot=rot, mshape=mshape, amp.shp=amp.shp, pts.shp=pts.shp)
-  # cd <- TRUE} if (method=='tfourier'){ shp <-
-  # PCA2shp_tfourier(pos=pos, rot=rot, mshape=mshape,
-  # amp.shp=amp.shp, pts.shp=pts.shp) cd <- TRUE} ## open
-  # outlines if (method=='opoly'){ shp <-
-  # PCA2shp_polynomials(pos=pos, rot=rot, mshape=mshape,
-  # amp.shp=amp.shp, pts.shp=pts.shp, ortho=TRUE,
-  # baseline1=PCA$baseline1, baseline2=PCA$baseline2) cd <-
-  # FALSE} if (method=='npoly'){ shp <-
-  # PCA2shp_polynomials(pos=pos, rot=rot, mshape=mshape,
-  # amp.shp=amp.shp, pts.shp=pts.shp, ortho=FALSE,
-  # baseline1=PCA$baseline1, baseline2=PCA$baseline2) cd <-
-  # FALSE} if (method=='procrustes'){ shp <-
-  # PCA2shp_procrustes(pos=pos, rot=rot, mshape=mshape,
-  # amp.shp=amp.shp) cd <- FALSE} width <- (par('usr')[4] -
-  # par('usr')[3]) * size.shp shp <- lapply(shp, coo_scale,
-  # 1/width) not enough compact. #todo
+
   shp <- lapply(shp, coo_template, size = (size.shp*max(.wdw())/14))
   shp <- lapply(shp, coo_close)
   for (i in 1:length(shp)) {

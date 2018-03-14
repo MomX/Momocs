@@ -207,8 +207,4 @@ hcontrib.OutCoe <- function(Coe,
 
 # hcontrib.Opn (dct) # todo
 
-
-
-
-
 ##### end graphics Coe

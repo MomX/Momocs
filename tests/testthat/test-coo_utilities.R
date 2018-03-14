@@ -74,21 +74,6 @@ test_that("coo_rotate works fine", {
                .coo_angle_edge1(rbind(shp.rot[24,], c(0, 0), c(1e3, 0))))
 })
 
-# coo_rotatecenter ------
-#todo
-
-# coo_align -----
-#todo
-
-# coo_alignxax -----
-#todo
-
-# coo_aligncalliper -----
-#todo
-
-# coo_alignminradius -----
-#todo
-
 # coo_translate -----
 test_that("coo_translate works fine", {
   cp <- coo_centpos(bot[1])

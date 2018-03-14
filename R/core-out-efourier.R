@@ -109,7 +109,7 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
   if (smooth.it != 0) {
     coo <- coo_smooth(coo, smooth.it)
   }
-  Dx <- coo[, 1] - coo[, 1][c(nr, (1:(nr - 1)))]  # there was a bug there. check from claude? #todo
+  Dx <- coo[, 1] - coo[, 1][c(nr, (1:(nr - 1)))]
   Dy <- coo[, 2] - coo[, 2][c(nr, (1:(nr - 1)))]
   Dt <- sqrt(Dx^2 + Dy^2)
   Dt[Dt < 1e-10] <- 1e-10  # to avoid Nan
@@ -146,7 +146,7 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
     if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
-    nb.h <- q  # should not be 1 #todo
+    nb.h <- q
     message("at least one outline has no more than ", q * 2,
             " coordinates. 'nb.h' has been set to ", q, " harmonics")
   }
@@ -156,7 +156,7 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
   coe <- matrix(ncol = 4 * nb.h, nrow = length(coo), dimnames = list(names(coo),
                                                                      col.n))
   for (i in seq(along = coo)) {
-    # todo: vectorize ?
+    # todo: vectorize
     ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
                    verbose = TRUE)
     if (norm) {

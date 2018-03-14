@@ -9,7 +9,8 @@ morphospace_positions(xy, pos.shp = c("range", "full", "circle", "xy",
   circle.r.shp)
 }
 \arguments{
-\item{xy}{todo}
+\item{xy}{a matrix of points typically from a PCA or other multivariate method on
+which morphospace can be calculated}
 
 \item{pos.shp}{how shapes should be positionned: \code{range} of xy,
 \code{full} extent of the plane, \code{circle} as a rosewind,

@@ -1751,8 +1751,6 @@ coo_unclose.Coo <- function(coo) {
 # on monday mornings.
 
 
-## TODO coo_closesharp # actuel force2close
-## TODO coo_closesmooth # distribuer la difference
 
 # coo_force2close -----------
 #' Forces shapes to close

@@ -294,7 +294,6 @@ npoly_i <- function(pol, nb.pts = 120, reregister = TRUE) {
   return(coo)
 }
 
-
 #opoly_shape #TODO
 #npoly_shape #TODO
 

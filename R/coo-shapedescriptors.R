@@ -1,5 +1,4 @@
 # coo_lw ------
-# todo: bouding box todo: based on svd cov mat
 #' Calculates length and width of a shape
 #'
 #' Returns the length and width of a shape based on their iniertia axis

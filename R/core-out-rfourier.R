@@ -112,7 +112,7 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, 
     if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
-    nb.h <- q  # should not be 1 #todo
+    nb.h <- q
     message("at least one outline has no more than ", q * 2,
         " coordinates. 'nb.h' has been set to ", q,
         " harmonics")

@@ -1,5 +1,4 @@
-##### Hierarchical methods for Coe objects.  todo (to a certain
-##### exten)
+##### Hierarchical methods for Coe objects.
 
 #' Hierarchical clustering
 #'

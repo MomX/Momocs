@@ -219,7 +219,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   #     points(cur_binded[[i]], pch = cur_pch, col = ldk_col, cex = ldk_cex*0.25)
   #   }
   # }
-  # Specific to Ldk not very clean below #todo
+  # Specific to Ldk not very clean below
   # A <- l2a(Coo$coo)
   # mA <- mshapes(A)
 
@@ -432,7 +432,6 @@ panel.Ldk <- function(x, cols, borders, fac,
   Coo <- x
   Coo <- coo_template(Coo, size = 0.95)
 
-  # patch, dirty, todo
   if (missing(cols) & !missing(borders))
     borders <- cols
 

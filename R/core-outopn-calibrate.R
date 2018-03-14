@@ -133,7 +133,7 @@ calibrate_reconstructions.Opn <-
                         t1 = baseline1, t2 = baseline2)
 
     # we check for too ambitious range
-    # special case for opoly # todo
+    # special case for opoly
     if (p == 2) {
       if (max(range) > 20) range <- 2:20
     }
