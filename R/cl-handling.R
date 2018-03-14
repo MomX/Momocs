@@ -964,7 +964,7 @@ rm_uncomplete <- function(x, id, by){
   nb.u <- unique(nb)
   nb.tab <- table(nb)
   if (length(nb.u) == 1) {
-    message("* all ids have ", nb.u, " slices")
+    message("all ids have ", nb.u, " slices")
     return(x)
   } else {
     most_frequent <- as.numeric(names(nb.tab[which.max(nb.tab)]))

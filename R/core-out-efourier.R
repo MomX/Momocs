@@ -135,7 +135,7 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
 #' @export
 efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, verbose=TRUE, ...) {
   if (norm)
-    message("* you selected `norm=TRUE`, which is not recommended. See ?efourier")
+    message("you selected `norm=TRUE`, which is not recommended. See ?efourier")
   Out <- x
   # validates
   Out %<>% validate()

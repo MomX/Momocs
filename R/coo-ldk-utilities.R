@@ -504,13 +504,13 @@ rearrange_ldk <- function(Coo, new_ldk_ids){
 
 #' @export
 rearrange_ldk.default <- function(Coo, new_ldk_ids){
-  message("* only defined on Coo objects")
+  message("only defined on Coo objects")
 }
 
 #' @export
 rearrange_ldk.Out <- function(Coo, new_ldk_ids){
   if (is.null(get_ldk(Coo))){
-    message("* no ldk to arrange")
+    message("no ldk to arrange")
     return(Coo)
   }
   Coo$ldk %<>% lapply(function(.) .[new_ldk_ids])
@@ -523,7 +523,7 @@ rearrange_ldk.Opn <- rearrange_ldk.Out
 #' @export
 rearrange_ldk.Ldk <- function(Coo, new_ldk_ids){
   if (is.null(get_ldk(Coo))){
-    message("* no ldk to arrange")
+    message("no ldk to arrange")
     stop()
   }
   Coo$coo %<>% lapply(function(.) .[new_ldk_ids, ])
