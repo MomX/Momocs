@@ -37,7 +37,7 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
   coe <- perm(x$coe, margin=2, sample, size=size, replace=replace)
   rownames(coe) <- paste0("id", 1:size)
   x$coe <- coe
-  x$fac <- data.frame()
+  x$fac <- dplyr::data_frame()
   x}
 
 # breed --------
@@ -88,7 +88,7 @@ breed.Coe <- function(x, fac, size, rate=1, ...){
     coe <- breed(x$coe, margin=2, size=size, rate=rate)
     rownames(coe) <- paste0("id", 1:size)
     x$coe <- coe
-    x$fac <- data.frame()
+    x$fac <- dplyr::data_frame()
     return(x)
   } else {
     f <- .fac_dispatcher(x, fac)
@@ -101,7 +101,7 @@ breed.Coe <- function(x, fac, size, rate=1, ...){
       x2[[i]]$fac <- data.frame(group=rep(names(x2)[i], length(x2[[i]])))
     }
     # retrieves all $fac (freshly created) and rbind them
-    facs <- lapply(x2, function(.) `$`(., fac)) %>% do.call("rbind", .)
+    facs <- lapply(x2, function(.) `$`(., fac)) %>% do.call("rbind", .) %>% dplyr::as_data_frame
     colnames(facs) <- colnames(x$fac)
     final <- x2[[1]] # final OutCoe shoudl looks like any other Coes in the list
     final$coe <- coes

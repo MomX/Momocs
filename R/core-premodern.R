@@ -94,7 +94,7 @@ measure.list <- function(x, ...){
   for (i in seq_along(funs)){
     l[[i]] <- sapply(x, funs[i])
   }
-  l %>% as.data.frame() %>% return()
+  l %>% dplyr::as_data_frame() %>% return()
 }
 
 #' @export
@@ -113,9 +113,10 @@ measure.Coo <- function(x, ...){
       l[[i]] <- sapply(x$coo, funs[i])
     }
   }
-  coe <- l %>% as.data.frame()
-  TraCoe(coe = l %>% as.data.frame,
-         fac = x$fac)
+  coe <- l %>% dplyr::as_data_frame
+  fac <- dplyr::as_data_frame(x$fac)
+  TraCoe(coe = l,
+         fac = fac)
 }
 
 # dirty attemps at NSE-ishing

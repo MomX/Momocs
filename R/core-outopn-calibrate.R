@@ -66,12 +66,13 @@ calibrate_reconstructions.Out <-
     }
     # we prepare the plot
     names(res) <- range
-    coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>% do.call("rbind", .)
+    coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>%
+      do.call("rbind", .) %>% dplyr::as_data_frame()
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- method_i(method(coo, nb.h = max.h))
     best <- coo_close(best)
-    best <- data.frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
     # cosmectics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -150,11 +151,12 @@ calibrate_reconstructions.Opn <-
 
     # we prepare the plot
     names(res) <- range
-    coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>% do.call("rbind", .)
+    coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>%
+      do.call("rbind", .) %>% dplyr::as_data_frame()
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- res[[length(res)]]
-    best <- data.frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
     # cosmectics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -351,7 +353,7 @@ calibrate_deviations.Out <-
       d <- apply(res, 1:2, sd)
       # we prepare a df
       # we prepare a df
-      m %>% as.data.frame() %>% seq_along %>%
+      m %>% dplyr::as_data_frame() %>% seq_along %>%
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%
@@ -384,7 +386,7 @@ calibrate_deviations.Out <-
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%
-        do.call("rbind", .)
+        do.call("rbind", .) %>% dplyr::as_data_frame()
       colnames(xx) <- c("harm", "pt", "med")
       # hideous - todo
       xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
@@ -658,7 +660,7 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x)
                                   Var2=colnames(res)[i],
                                   value=res[,i])) %>%
     do.call("rbind", .) %>%
-    `rownames<-`(NULL) %>%
+    dplyr::as_data_frame() %>%
     `colnames<-`(c("shp", "harm", "hp")) -> xx
   if (length(id) > 2) {
     gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
@@ -727,7 +729,7 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
                                   Var2=colnames(res)[i],
                                   value=res[,i])) %>%
     do.call("rbind", .) %>%
-    `rownames<-`(NULL) %>%
+    dplyr::as_data_frame() %>%
     `colnames<-`(c("shp", "harm", "hp")) -> xx
   gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
     labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
@@ -809,7 +811,7 @@ calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
                                   Var2=colnames(res)[i],
                                   value=res[,i])) %>%
     do.call("rbind", .) %>%
-    `rownames<-`(NULL) %>%
+    dplyr::as_data_frame() %>%
     `colnames<-`(c("shp", "degree", "r2")) -> xx
   gg <- ggplot(xx, aes_string(x="degree", y="r2")) + geom_boxplot() +
     labs(x="Degree", y="r2") +

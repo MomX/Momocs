@@ -198,7 +198,7 @@ mshapes.PCA <- function(x, fac, ...){
   }
   x0$x <- res
   # should retain the true name and not "fac"
-  x0$fac <- data.frame(fac=levels(f))
+  x0$fac <- dplyr::data_frame(fac=levels(f))
   x0
 }
 

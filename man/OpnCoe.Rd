@@ -4,7 +4,7 @@
 \alias{OpnCoe}
 \title{Builds an OpnCoe object}
 \usage{
-OpnCoe(coe = matrix(), fac = data.frame(), method = character(),
+OpnCoe(coe = matrix(), fac = dplyr::data_frame(), method = character(),
   baseline1 = numeric(), baseline2 = numeric(), mod = list(),
   r2 = numeric())
 }

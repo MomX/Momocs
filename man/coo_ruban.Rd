@@ -42,7 +42,7 @@ coo_ruban(m, d, palette=col_summer2, lwd=5)
 
 #If you want linewidth rather than color
 coo_plot(m, plot=FALSE)
-coo_ruban(m, d, palette=col_black, lwd=.normalize(d)*10)
+coo_ruban(m, d, palette=col_black)
 }
 \seealso{
 Other plotting functions: \code{\link{coo_arrows}},

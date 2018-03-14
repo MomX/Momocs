@@ -67,5 +67,7 @@ validate.Coo <- function(Coo){
     .check(min(coo_nb(Coo)) >= nrow(unique(Coo$slidings)), # >?
            "number of sliding must be lower than number of coordinates")
   }
+  # ensure data_frame
+  Coo$fac <- Coo$fac %>% dplyr::as_data_frame()
   return(Coo)
 }

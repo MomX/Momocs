@@ -4,7 +4,7 @@
 \alias{TraCoe}
 \title{Traditional morphometrics class}
 \usage{
-TraCoe(coe = matrix(), fac = data.frame())
+TraCoe(coe = matrix(), fac = dplyr::data_frame())
 }
 \arguments{
 \item{coe}{a matrix of measurements}
@@ -18,7 +18,7 @@ just ad the other Momocs' classes
 }
 \examples{
 # let's (more or less) rebuild the flower dataset
-fl <- TraCoe(iris[, 1:4], data.frame(sp=iris$Species))
+fl <- TraCoe(iris[, 1:4], dplyr::data_frame(sp=iris$Species))
 fl \%>\% PCA() \%>\% plot("sp")
 }
 \seealso{

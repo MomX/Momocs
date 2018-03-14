@@ -29,12 +29,12 @@
 #' #Methods on Ldk
 #' methods(class=Ldk)
 #' @export
-Ldk <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
+Ldk <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
   UseMethod("Ldk")
 }
 
 #' @export
-Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
+Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
   if (is_shp(x))
     Ldk(list(x))
   else
@@ -43,7 +43,7 @@ Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) 
 }
 
 #' @export
-Ldk.list <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
+Ldk.list <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
   if (missing(slidings) & identical(names(coo), c("coo", "slidings", "scale"))) {
     slidings <- coo$slidings
     coo <- coo$coo
@@ -59,7 +59,7 @@ Ldk.list <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
 }
 
 #' @export
-Ldk.array <- function(coo, links = NULL, slidings = NULL, fac = data.frame()) {
+Ldk.array <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
   x <- a2l(coo)
   Ldk <- Ldk(x, links = links, slidings = slidings, fac = fac)
   if (is.null(names(Ldk)))

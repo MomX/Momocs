@@ -4,8 +4,8 @@ test_that("import .txt", {
   fns <- c("butterfly.txt", "cat.txt")
   export(shapes[3], file=fns[1])
   export(shapes[4], file=fns[2])
-  expect_true(is_shp(import_txt(fns[1], header=TRUE, verbose = FALSE)$butterfly))
-  expect_s3_class(import_txt(rep(fns, 6), header=TRUE, verbose = FALSE) %>% Out(), "Out")
+  expect_true(is_shp(import_txt(fns[1], header=TRUE)$butterfly))
+  expect_s3_class(import_txt(rep(fns, 6), header=TRUE) %>% Out(), "Out")
   shut_up <- file.remove(fns)
 })
 
@@ -27,7 +27,7 @@ test_that("import_jpg1 works fine",{
 test_that("import_jpg works fine",{
   paths <- c(system.file("extdata/beer_chimay.jpg", package="Momocs"),
              system.file("extdata/whisky_jb.jpg", package="Momocs"))
-  expect_true(paths %>% import_jpg(verbose = FALSE) %>% Out %>% is_Out)
+  expect_true(paths %>% import_jpg() %>% Out %>% is_Out)
 })
 
 test_that("import_tps works fine",{

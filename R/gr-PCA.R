@@ -422,9 +422,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (box) box()
   # we return a df
   if (is.null(fac))
-    invisible(data.frame(x=xy[, 1], y=xy[, 2]))
+    invisible(dplyr::data_frame(x=xy[, 1], y=xy[, 2]))
   else
-    invisible(data.frame(x=xy[, 1], y=xy[, 2], fac=fac))
+    invisible(dplyr::data_frame(x=xy[, 1], y=xy[, 2], fac=fac))
 }
 
 # Boxplot ---------
@@ -456,7 +456,7 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
                                     Var2=colnames(df)[i],
                                     value=df[,i])) %>%
       do.call("rbind", .) %>%
-      `rownames<-`(NULL) %>%
+      dplyr::as_data_frame %>%
       `colnames<-`(c("score", "PC", "value"))
     gg <- ggplot(data=df, aes_string(x="PC", y="value")) +
       geom_boxplot() + labs(x=NULL, y="score")
@@ -484,7 +484,7 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
                                       Var2=colnames(df)[i],
                                       value=df[,i])) %>%
         do.call("rbind", .) %>%
-        `rownames<-`(NULL) %>%
+        dplyr::as_data_frame %>%
         `colnames<-`(c("fac", "name", "PC", "value"))
       gg <- ggplot(data=df, aes_string(x="PC", y="value", fill="fac")) +
         geom_boxplot() + labs(x=NULL, y="score", fill=NULL)
@@ -534,7 +534,7 @@ PCcontrib.PCA <-
       nax <- 1:scree_min(x)
     for (i in seq(along=nax)){
       sd.i <- sd(x$x[, nax[i]])
-      pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
+      pos.i <- dplyr::data_frame(x=sd.r*sd.i, y=rep(0, length(sd)))
       shp.i <- morphospace2PCA(x, xax=i, yax=1, pos = pos.i)
       shp[[i]] <- mutate(shp.i, nax=i) }
 
@@ -595,7 +595,7 @@ scree.PCA <- function(x, nax=1:10){
   eig <- eig / sum(eig)
   if (max(nax)>length(eig)) nax <- 1:length(eig)
   eig <- eig[nax]
-  df <-  data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
+  df <-  dplyr::data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
   df
 }
 
@@ -606,7 +606,7 @@ scree.LDA <- function(x, nax=1:10){
   eig <- eig / sum(eig)
   if (max(nax)>length(eig)) nax <- 1:length(eig)
   eig <- eig[nax]
-  df <-  data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
+  df <-  dplyr::data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
   df
 }
 
@@ -670,7 +670,7 @@ calculate_ellipse <- function(data, vars, type, level, segments){
     unit.circle <- cbind(cos(angles), sin(angles))
     ellipse <- t(center + radius * t(unit.circle %*% chol_decomp))
   }
-  ellipse <- as.data.frame(ellipse)
+  ellipse <- dplyr::as_data_frame(ellipse)
   colnames(ellipse) <- vars
   return(ellipse)
 }
@@ -686,7 +686,7 @@ calculate_ellipseax <- function(ell){
   ell.ids <- c(which.min(ell.al[, 1]), which.max(ell.al[, 1]),
                which.min(ell.al[, 2]), which.max(ell.al[, 2]))
   seg <- ell[ell.ids, ]
-  seg <- bind_cols(slice(seg, c(1, 3)), slice(seg, c(2, 4)))
+  seg <- dplyr::bind_cols(slice(seg, c(1, 3)), slice(seg, c(2, 4)))
   colnames(seg) <- c("x", "y", "xend", "yend")
   seg
 }

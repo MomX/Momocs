@@ -1925,7 +1925,7 @@ coo_dxy.default <- function(coo) {
   coo <- coo_check(coo)
   dx <- coo[, 1] - coo[1, 1]
   dy <- coo[, 2] - coo[1, 2]
-  return(data.frame(dx = dx, dy = dy))
+  return(dplyr::data_frame(dx = dx, dy = dy))
 }
 
 #' @export

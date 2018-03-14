@@ -78,9 +78,9 @@
 
 
 # refactor factors in a data.frame (mainly to drop levels) but respect anything else
-.refactor <- function(df) {
-  data.frame(lapply(df, function(x) if (is.factor(x)) factor(x) else x))
-}
+# .refactor <- function(df) {
+#   data.frame(lapply(df, function(x) if (is.factor(x)) factor(x) else x))
+# }
 
 ##### Various utilities
 
@@ -119,7 +119,7 @@
 .trim.path <- function(lf) {
   lf %>%
     strsplit("/") %>%
-    sapply(lf0, function(x) x[length(x)])
+    sapply(function(x) x[length(x)])
 }
 
 .trim.both <- function(lf) {

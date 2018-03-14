@@ -10,7 +10,7 @@
 \alias{pile.Ldk}
 \title{Graphical pile of shapes}
 \usage{
-pile(coo, ...)
+pile(coo, f, pal, paper_fun, draw_fun, transp, ...)
 
 \method{pile}{default}(coo, f, pal = pal_qual, paper_fun = paper,
   draw_fun = draw_curves, transp = 0, ...)
@@ -33,13 +33,13 @@ pile(coo, ...)
 \arguments{
 \item{coo}{a single shape or any  \link{Coo} object}
 
-\item{...}{more arguments to feed the core drawer, depending on the object}
-
 \item{f}{factor specification}
 
 \item{pal}{palette among \link{palettes} (default: pal_qual)}
 
 \item{transp}{\code{numeric} for transparency (default:adjusted, min:0, max=0)}
+
+\item{...}{more arguments to feed the core drawer, depending on the object}
 
 \item{`paper_fun`}{a \link{papers} function (default: \code{paper})}
 

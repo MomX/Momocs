@@ -36,12 +36,12 @@
 #' olda
 #' plot(olda)
 #' @export
-Opn <- function(x, fac = data.frame(), ldk = list()) {
+Opn <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   UseMethod("Opn")
 }
 
 #' @export
-Opn.default <- function(x, fac = data.frame(), ldk = list()) {
+Opn.default <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   if (is_shp(x))
     Opn(list(x))
   else
@@ -49,7 +49,7 @@ Opn.default <- function(x, fac = data.frame(), ldk = list()) {
 }
 
 #' @export
-Opn.list <- function(x, fac = data.frame(), ldk = list()) {
+Opn.list <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   x <- lapply(x, as.matrix)
   Opn <- structure(list(coo = x, fac = fac, ldk = ldk), class=c("Opn", "Coo"))
   if (!is.null(Opn$fac))
@@ -60,7 +60,7 @@ Opn.list <- function(x, fac = data.frame(), ldk = list()) {
 }
 
 #' @export
-Opn.array <- function(x, fac = data.frame(), ldk = list()) {
+Opn.array <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   x <- a2l(x)
   Opn <- Opn(x, fac = fac, ldk = ldk)
   if (is.null(names(Opn))) names(Opn) <- paste0("shp", 1:length(Opn))
@@ -68,7 +68,7 @@ Opn.array <- function(x, fac = data.frame(), ldk = list()) {
 }
 
 #' @export
-Opn.Coo <- function(x, fac = data.frame(), ldk = list()) {
+Opn.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   Opn <- Opn(x = x$coo, fac = x$fac, ldk = x$ldk)
   if (is.null(names(Opn))) names(Opn) <- paste0("shp", 1:length(Opn))
   return(Opn)
@@ -125,7 +125,7 @@ print.Opn <- function(x, ...) {
 #' # all OpnCoe classes
 #' methods(class='OpnCoe')
 #' @export
-OpnCoe <- function(coe = matrix(), fac = data.frame(), method = character(),
+OpnCoe <- function(coe = matrix(), fac = dplyr::data_frame(), method = character(),
                    baseline1 = numeric(), baseline2 = numeric(), mod = list(),
                    r2 = numeric()) {
   if (missing(method))

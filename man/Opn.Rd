@@ -4,7 +4,7 @@
 \alias{Opn}
 \title{Builds an Opn object}
 \usage{
-Opn(x, fac = data.frame(), ldk = list())
+Opn(x, fac = dplyr::data_frame(), ldk = list())
 }
 \arguments{
 \item{x}{\code{list} of matrices of (x; y) coordinates}

@@ -98,7 +98,7 @@ d2m <- function(d) {
 m2d <- function(m) {
   .check(is_shp(m),
          "matrix must be a shp")
-  data.frame(x=m[, 1], y=m[, 2])
+  dplyr::data_frame(x=m[, 1], y=m[, 2])
 }
 
 #' @rdname bridges
@@ -214,7 +214,9 @@ as_df.Coo <- function(x){
     res <- lapply(seq_along(res), function(i) dplyr::bind_cols(res[[i]], fac[[i]]))
   }
   #rbind them all and return
-  do.call("rbind", res) %>% return()
+  do.call("rbind", res) %>%
+    dplyr::as_data_frame() %>%
+    return()
 }
 
 #' @rdname as_df
@@ -235,7 +237,9 @@ as_df.Coe <- function(x){
   res <- lapply(seq_along(res), function(i) dplyr::bind_cols(res[[i]], fac[[i]]))
   }
   #rbind them all and return
-  do.call("rbind", res) %>% return()
+  do.call("rbind", res) %>%
+    dplyr::as_data_frame() %>%
+    return()
 }
 
 #' @rdname as_df

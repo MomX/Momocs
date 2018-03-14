@@ -1,13 +1,13 @@
-morphospace.pos <- 
+morphospace.pos <-
   function(xy,
            pos.shp=c("axes", "circle", "confell", "full", "range", "xy")[4],
            nb.shp = 12, nr.shp = 6, nc.shp = 5,
            r.shp = 1, conf.shp = 0.5,
            gg){
-    # if a matrix or a data.frame is passed 
+    # if a matrix or a data.frame is passed
     if (!is.character(pos.shp)) return(pos.shp)
-    
-    # shapes along axes 
+
+    # shapes along axes
     if (pos.shp == "axes") {
       xr <- .x.range.gg(gg) * 0.9
       yr <- .y.range.gg(gg) * 0.9
@@ -16,8 +16,8 @@ morphospace.pos <-
       pos <- bind_rows(dfx, dfy) %>% unique()
       return(pos)
     }
-    
-    # shapes arranged on a circle 
+
+    # shapes arranged on a circle
     if (pos.shp == "circle") {
       if (missing(r.shp)) {
         circle.r.shp <- coo_centsize(xy)
@@ -26,7 +26,7 @@ morphospace.pos <-
       pos <- data.frame(x=circle.r.shp * cos(t),
                         y=circle.r.shp * sin(t))
       return(pos)}
-    
+
     # shapes arranged on a confidence ellipse
     if (pos.shp == "confell"){
       pos <- m2d(conf_ell(x=xy[, 1], y=xy[, 2],
@@ -35,7 +35,7 @@ morphospace.pos <-
     # shapes covering the entire graph
     if (pos.shp == "full") {
       # because of coord_equal in plot.PCA
-      w <- max(.wdw.gg(gg)) * 0.45 
+      w <- max(.wdw.gg(gg)) * 0.45
       pos <- expand.grid(seq(-w, w, len = nr.shp),
                          seq(-w, w, len = nc.shp))
       colnames(pos) <- c("x", "y")  # pure cosmetics
@@ -137,10 +137,10 @@ morphospace2PCA <- function(PCA, xax, yax, pos,
                                 amp.shp = amp.shp)}
     ### Then...
     # we template and center shapes
-    shp <- lapply(shp, 
-                  function(x) x %>% 
+    shp <- lapply(shp,
+                  function(x) x %>%
                     coo_template(size = size.shp.final[i]) %>%
-                    coo_center() %>% 
+                    coo_center() %>%
                     coo_close() %>%
                     coo_sample(pts.shp))
     # thus pts.shp must be +1
@@ -166,9 +166,11 @@ morphospace2PCA <- function(PCA, xax, yax, pos,
   i_n <- rep(i, each=pts.shp)
   df_trans <- select(pos0, x_t=x, y_t=y) %>% dplyr::slice(rep(i_n, nb.met))
   # we bind together and apply the translation
-  df <- bind_cols(df_shp, df_trans) %>% 
+  df <- bind_cols(df_shp, df_trans) %>%
     # we add the two translations
-    mutate_(x = quote(x_c + x_t + x_d), y = quote(y_c + y_t + y_d))# %>% 
+    mutate_(x = quote(x_c + x_t + x_d), y = quote(y_c + y_t + y_d)) %>%
+    dplyr::as_data_frame
+  # %>%
     # and rearrange the columsn (pure cosmetics)
     #select(SHP, shp, shp1, x, y,
     #        x_c, y_c, x_t, y_t, x_d, y_d)

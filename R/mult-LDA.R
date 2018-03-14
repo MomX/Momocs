@@ -265,10 +265,10 @@ classification_metrics.table <- function(x){
   precision <- diag / colsums
   recall <- diag / rowsums
   f1 <- 2 * precision * recall / (precision + recall)
-  macro_prf <- data.frame(precision, recall, f1)
+  macro_prf <- dplyr::data_frame(precision, recall, f1)
 
   # macro precision, recall, f1
-  macro_avg <- data.frame(avg_precision=mean(precision),
+  macro_avg <- dplyr::data_frame(avg_precision=mean(precision),
                           avg_recall=mean(recall),
                           avg_f1=mean(f1))
 
@@ -290,7 +290,7 @@ classification_metrics.table <- function(x){
   # we add all these matrices
   ova_sum <- Reduce("+", ova)
   dimnames(ova_sum) %<>% lapply(`[<-`, 1, "relevant")
-  # micro <- data.frame(accuracy=sum(diag(ova_sum)) / sum(ova_sum),
+  # micro <- dplyr::data_frame(accuracy=sum(diag(ova_sum)) / sum(ova_sum),
   # prf=(diag(ova_sum) / apply(ova_sum, 1, sum))[1])
 
   expAccuracy = sum(p*q)
@@ -463,7 +463,7 @@ reLDA.PCA <- function(newdata, LDA){
   #   if (length(LDA$f0)==1) {
   #     actual <- newdata$fac[, LDA$f0]
   #     if (!is.null(actual)) {
-  #       reLDA$res <- data.frame(actual=actual, classified=reLDA$class)
+  #       reLDA$res <- dplyr::data_frame(actual=actual, classified=reLDA$class)
   #       reLDA$CV.tab <- table(reLDA$res)
   #       reLDA$CV.correct <- sum(diag(reLDA$CV.tab)) / sum(reLDA$CV.tab)
   #     }

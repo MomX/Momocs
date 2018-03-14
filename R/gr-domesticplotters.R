@@ -238,7 +238,7 @@ coo_arrows <- function(coo1, coo2,
 #'
 #' #If you want linewidth rather than color
 #' coo_plot(m, plot=FALSE)
-#' coo_ruban(m, d, palette=col_black, lwd=.normalize(d)*10)
+#' coo_ruban(m, d, palette=col_black)
 #' @family plotting functions
 #' @export
 coo_ruban <- function(coo, dev,

@@ -47,7 +47,8 @@
 #'      pile
 #' @rdname pile
 #' @export
-pile <- function(coo, ...){
+pile <- function(coo, f, pal, paper_fun,
+                 draw_fun, transp, ...){
   UseMethod("pile")
 }
 

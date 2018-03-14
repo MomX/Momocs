@@ -5,7 +5,7 @@
 \alias{LdkCoe}
 \title{Builds an Ldk object}
 \usage{
-Ldk(coo, links = NULL, slidings = NULL, fac = data.frame())
+Ldk(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame())
 }
 \arguments{
 \item{coo}{a \code{list} of matrices of (x; y) coordinates,

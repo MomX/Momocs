@@ -202,7 +202,7 @@ which_out.Ldk <- function(x, conf=1e-3, ...){
     return(NA)
   } else {
     message("found ", nrow(arr), " possible outliers")
-    data.frame(shape=names(x)[out[, 1]],
+    dplyr::data_frame(shape=names(x)[out[, 1]],
                id=out[, 1],
                row=out[, 2],
                coordinate=c("x", "y")[out[, 3]], row.names = NULL)
