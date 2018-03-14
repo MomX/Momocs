@@ -36,7 +36,7 @@
 
 ### Dependencies
 * Released `reshape2`, `plyr` dependencies
-* Now depends `RColorBrewer`
+* Now depends `RColorBrewer` and `progress`
 * Proper indications of external functions with `::`
 
 ### Breaking changes
@@ -48,6 +48,7 @@
 * Fixed a bug in `LDA` when `retain=1` (#e7704eb)
 * Messages homogeneity
 * Internals have been lightened
+* verbosity and progress bar are now handled via `options("verbose")`
 * Various minor bugs fixes, see GitHub
 
 
