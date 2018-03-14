@@ -45,21 +45,19 @@
 #'  # or on arrays (turn for draw_landmarks)
 #'  wings$coo %>% l2a %>% #we now have an array
 #'      pile
-#' @name pile
 #' @rdname pile
 #' @export
 pile <- function(coo, ...){
   UseMethod("pile")
 }
 
-#' @name pile
 #' @rdname pile
 #' @export
-pile.default <- function(coo, ...){
+pile.default <- function(coo, f, pal=pal_qual, paper_fun=paper,
+                         draw_fun=draw_curves, transp=0, ...){
   message("only defined for Coo classes")
 }
 
-#' @name pile
 #' @rdname pile
 #' @export
 pile.list <- function(coo, f, pal=pal_qual, paper_fun=paper,
@@ -71,11 +69,10 @@ pile.list <- function(coo, f, pal=pal_qual, paper_fun=paper,
     coo %>% draw_fun(transp=transp, ...)
 }
 
-#' @name pile
 #' @rdname pile
 #' @export
 pile.array <- function(coo, f, pal=pal_qual, paper_fun=paper,
-                      draw_fun=draw_landmarks, transp=0, ...){
+                       draw_fun=draw_landmarks, transp=0, ...){
   coo <- coo %>% a2l %>%  paper_fun
   if (!missing(f))
     coo %>% draw_fun(f=f, pal=pal, transp=transp, ...)
@@ -83,7 +80,6 @@ pile.array <- function(coo, f, pal=pal_qual, paper_fun=paper,
     coo %>% draw_fun(transp=transp, ...)
 }
 
-#' @name pile
 #' @rdname pile
 #' @export
 pile.Out <- function(coo, f, pal=pal_qual,
@@ -95,7 +91,6 @@ pile.Out <- function(coo, f, pal=pal_qual,
     coo %>% draw_outlines(transp=transp, ...) %>% draw_firstpoint(transp=transp)
 }
 
-#' @name pile
 #' @rdname pile
 #' @export
 pile.Opn <- function(coo, f, pal=pal_qual,
@@ -108,7 +103,6 @@ pile.Opn <- function(coo, f, pal=pal_qual,
 
 }
 
-#' @name pile
 #' @rdname pile
 #' @export
 pile.Ldk <- function(coo, f, pal=pal_qual,
@@ -120,5 +114,4 @@ pile.Ldk <- function(coo, f, pal=pal_qual,
     coo %>% draw_landmarks(transp=transp, ...)
 
 }
-
 

@@ -2,23 +2,18 @@
 % Please edit documentation in R/grindr-pile.R
 \name{pile}
 \alias{pile}
-\alias{pile}
 \alias{pile.default}
-\alias{pile}
 \alias{pile.list}
-\alias{pile}
 \alias{pile.array}
-\alias{pile}
 \alias{pile.Out}
-\alias{pile}
 \alias{pile.Opn}
-\alias{pile}
 \alias{pile.Ldk}
 \title{Graphical pile of shapes}
 \usage{
 pile(coo, ...)
 
-\method{pile}{default}(coo, ...)
+\method{pile}{default}(coo, f, pal = pal_qual, paper_fun = paper,
+  draw_fun = draw_curves, transp = 0, ...)
 
 \method{pile}{list}(coo, f, pal = pal_qual, paper_fun = paper,
   draw_fun = draw_curves, transp = 0, ...)
