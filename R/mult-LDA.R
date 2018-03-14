@@ -101,11 +101,10 @@ LDA.Coe <- function(x, fac, retain, ...) {
 #' @export
 LDA.PCA <- function(x, fac, retain = 0.99, ...) {
 
-  # best case
-  if (length(retain)==1) {
-    if (retain=="best")
+  if (length(retain)==1 && retain < 1)
+      retain <- scree_min(x, retain)
+  if (length(retain)==1 && retain == "best")
     retain <- 1:ncol(x$x)
-  }
 
   # select best case
   if (length(retain)>1){
@@ -120,28 +119,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   PCA <- x
   f0 <- fac #<- prepare_fac(x, fac)
   #fac handling
-  if (missing(fac))
-    stop("no 'fac' provided")
-  # formula case
-  if (class(fac)=="formula"){
-    fform <- x$fac[, attr(terms(fac), "term.labels")]
-    fac <- interaction(fform)
-  }
-
-  # case where fac is a standalone factor
-  if (is.factor(fac)) {
-    fac <- factor(fac)
-  }
-  # case where an id or column name is provided
-  if (!is.factor(fac)){
-    fac <- x$fac[, fac]
-  }
-
-  # PC number selection
-  if (retain < 1)  {
-    if (.is_verbose()) message(retain, " total variance")
-    retain <- scree_min(x, prop = retain)
-  }
+  fac <- .fac_dispatcher(x, fac)
 
   if (.is_verbose()) message(retain, " PC retained")
   X <- PCA$x[, 1:retain]
@@ -156,7 +134,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   }
   X <- as.matrix(X)
   # now we calculate two lda models with MASS::lda one with
-  mod <- MASS::lda(X, grouping = fac, tol = 1e-08, ...)
+  mod <- MASS::lda(X, grouping=fac, tol = 1e-08, ...)
   mod.pred <- predict(mod, X)
   # leave-one-out cross validation
   CV.fac <- MASS::lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class

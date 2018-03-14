@@ -60,9 +60,12 @@
   }
   # column case as character
   if (is.character(fac) && length(fac)==1) {
-    if (!(fac %in% colnames(fac)))
+    if (!(fac %in% colnames(x$fac)))
       stop("invalid column name")
-    return(x$fac[, fac])
+    fac <- x$fac[, fac]
+    if (is.data.frame(fac)) #dplyr data_frame do not drop
+      fac <- unlist(fac)
+    return(fac)
   }
   # column case as numeric for column id
   if (is.numeric(fac) && length(fac)==1){

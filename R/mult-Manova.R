@@ -53,9 +53,9 @@ MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
     stop("cannot yet be used on combined OutCoe, do it manually")
   if (missing(fac))
     stop("'fac' must be provided")
-  if (!is.factor(fac)) {
-    fac <- OpnCoe$fac[, fac]
-  }
+
+  fac <- .fac_dispatcher(x, fac)
+
   x <- OpnCoe$coe
   if (missing(drop))
     drop <- 0
@@ -76,9 +76,9 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop) {
     stop("cannot yet be used on combined OutCoe. Do it manually")
   if (missing(fac))
     stop("'fac' must be provided")
-  if (!is.factor(fac)) {
-    fac <- OutCoe$fac[, fac]
-  }
+
+  fac <- .fac_dispatcher(x, fac)
+
   x <- OutCoe$coe
   cph <- NULL
   # we check for (a)symetrization
@@ -161,23 +161,7 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop) {
   if (missing(fac))
     stop("'fac' must be provided")
 
-  if (class(fac) == "formula") {
-    column_name <- attr(terms(fac), "term.labels")
-    # we check for wrong formula
-    if (any(is.na(match(column_name, colnames(x$fac)))))
-      stop("formula provided must match with $fac column names")
-    # otherwise we retrive the column(s)
-    fac <- x$fac[, column_name]
-    # multicolumn/fac case
-    if (is.data.frame(fac))
-      fac <- factor(apply(fac, 1, paste, collapse="_"))
-  }
-
-  if (!is.factor(fac)) {
-    fac <- x$fac[, fac]
-  }
-
-
+  fac <- .fac_dispatcher(x, fac)
 
   # we grab the PCs to capture retain% of the variance
   if (retain<1){
@@ -249,22 +233,11 @@ MANOVA_PW.PCA <- function(x,
   PCA <- x
 
   fac0 <- fac
+
   if (missing(fac))
     stop("'fac' must be provided")
 
-  if (class(fac) == "formula") {
-    #f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
-    #fac <- interaction(f0)
-    fac <- x$fac[, attr(terms(fac), "term.labels")]
-    if (is.data.frame(fac))
-      fac <- factor(apply(fac, 1, paste, collapse="_"))
-  }
-
-  if (!is.factor(fac)) {
-    fac <- factor(PCA$fac[, fac])
-  } else {
-    fac <- droplevels.factor(fac)
-  }
+  fac <- .fac_dispatcher(x, fac)
 
   # we grab the PCs to capture retain% of the variance
   if (retain<1){
