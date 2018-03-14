@@ -197,6 +197,16 @@ import_jpg1 <- function(jpg.path,
   borders <- c(img[1, ], img[nrow(img), ], img[, 1], img[,
                                                          ncol(img)])
   if (any(borders != 1)) {
+    .mat.buffer <- function(m, buff.size, buff.fill = 1) {
+      nr <- nrow(m)
+      c.buff <- matrix(buff.fill, nrow = nr, ncol = buff.size)
+      m <- cbind(c.buff, m, c.buff)
+      nc <- ncol(m)
+      r.buff <- matrix(buff.fill, nrow = buff.size, ncol = nc)
+      m <- rbind(r.buff, m, r.buff)
+      return(m)
+    }
+
     img <- .mat.buffer(img, buff.size = 2, buff.fill = 1)
   }
   # img <- x[dim(x)[1]:1,] #Conte/readJPEG, etc.  we initialize

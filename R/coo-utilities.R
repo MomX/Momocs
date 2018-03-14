@@ -35,6 +35,12 @@ coo_check.default <- function(coo) {
 
 #' @export
 coo_check.Coo <- function(coo){
+  .which.is.error <- function(x){
+  if (is.list(x))
+    return(which(sapply(x, .is.error)))
+  which(class(x)=="try-error")
+}
+
   res <- sapply(coo$coo, function(x) try(coo_check(x), silent=TRUE))
   if (.is.error(res)){
     stop(paste(names(coo)[.which.is.error(res)], collapse=", "), " do not pass coo_check")
