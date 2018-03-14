@@ -260,23 +260,25 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     fac <- NULL
     col.groups <- col
   } else {
-    # fac provided ------------------------
-    # fac provided, as formula ============
-    if (class(fac) == "formula") {
-      column_name <- attr(terms(fac), "term.labels")
-      # we check for wrong formula
-      if (any(is.na(match(column_name, colnames(PCA$fac)))))
-        stop("formula provided must match with $fac column names")
-      # otherwise we retrive the column(s)
-      fac <- PCA$fac[, column_name]
-      # multicolumn/fac case
-      if (is.data.frame(fac))
-        fac <- factor(apply(fac, 1, paste, collapse="_"))
-    }
-    # fac provided, as column name or id
-    if (length(fac)==1){
-      fac <- PCA$fac[, fac]
-    }
+    # # fac provided ------------------------
+    # # fac provided, as formula ============
+    # if (class(fac) == "formula") {
+    #   column_name <- attr(terms(fac), "term.labels")
+    #   # we check for wrong formula
+    #   if (any(is.na(match(column_name, colnames(PCA$fac)))))
+    #     stop("formula provided must match with $fac column names")
+    #   # otherwise we retrive the column(s)
+    #   fac <- PCA$fac[, column_name]
+    #   # multicolumn/fac case
+    #   if (is.data.frame(fac))
+    #     fac <- factor(apply(fac, 1, paste, collapse="_"))
+    # }
+    # # fac provided, as column name or id
+    # if (length(fac)==1){
+    #   fac <- PCA$fac[, fac]
+    # }
+
+    fac <- .fac_dispatcher(x, fac)
 
 
 
