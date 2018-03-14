@@ -215,7 +215,8 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
 
 #' Calculates nice positions on a plane for drawing shapes
 #'
-#' @param xy todo
+#' @param xy a matrix of points typically from a PCA or other multivariate method on
+#' which morphospace can be calculated
 #' @param pos.shp how shapes should be positionned: \code{range} of xy,
 #' \code{full} extent of the plane, \code{circle} as a rosewind,
 #' on \code{xy} values provided, \code{range_axes} on the range of xy
