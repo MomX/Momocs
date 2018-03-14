@@ -15,6 +15,7 @@
 * `dispatch_fac` is now behind all `fac` arguments
 * `fgProcrustes` now accepts lists
 * `efourier` with default `norm=TRUE` now messages about how wrong it may be
+* `dplyr::data_frame` everywhere pertinent
 
 ### Deprecated
 * All `is.*` aliases for `is_*` methods
@@ -36,7 +37,7 @@
 
 ### Dependencies
 * Released `reshape2`, `plyr` dependencies
-* Now depends `RColorBrewer` and `progress`
+* Now depends `RColorBrewer`, `progress`, `tibble`
 * Proper indications of external functions with `::`
 
 ### Breaking changes
