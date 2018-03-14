@@ -32,7 +32,7 @@ import_txt <- function(txt.paths = .lf.auto(), ...) {
   if (.is_verbose())
     cat(" * Extracting ", length(txt.paths), "..txt coordinates...\n")
   if (length(txt.paths) > 10 & .is_verbose()) {
-    pb <- txtProgressBar(1, length(txt.paths))
+    pb <- progress::progress_bar$new(total = length(txt.paths))
     t <- TRUE
   } else {
     t <- FALSE
@@ -42,7 +42,7 @@ import_txt <- function(txt.paths = .lf.auto(), ...) {
     coo <- read.table(txt.paths[i], ...)
     res[[i]] <- as.matrix(coo)
     if (t)
-      setTxtProgressBar(pb, i)
+      pb$tick()
   }
   # names(res) <- substr(txt.paths, start=1,
   # stop=nchar(txt.paths)-4)
@@ -311,7 +311,7 @@ import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
   begin <- Sys.time()
   message("Extracting ", length(jpg.paths), ".jpg outlines...")
   if (length(jpg.paths) > 10 & .is_verbose()) {
-    pb <- txtProgressBar(1, length(jpg.paths))
+    pb <- progress::progress_bar$new(total = length(jpg.paths))
     t <- TRUE
   } else {
     t <- FALSE
@@ -332,7 +332,7 @@ import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
       cat("\n")
     } else {
       if (t)
-        setTxtProgressBar(pb, i)
+        pb$tick()
     }
   }
   names(res) <- jpg.paths %>% .trim.ext() %>% .trim.path()

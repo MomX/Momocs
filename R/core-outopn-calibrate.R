@@ -317,7 +317,7 @@ calibrate_deviations.Out <-
                                  paste("pt", 1:nb.pts), names(Coo)[id]))
     # progressbar
     if (nk > 5) {
-      pb <- txtProgressBar(1, nk)
+      pb <- progress::progress_bar$new(total = nk)
       t <- TRUE
     } else {
       t <- FALSE
@@ -342,7 +342,7 @@ calibrate_deviations.Out <-
         y.title <- "Deviation (in original units)"
       }
       if (t)
-        setTxtProgressBar(pb, ind)
+        pb$tick()
     }
     # below we manage for single/several individuals if more than
     # 1, we calculate median and sd
@@ -472,7 +472,7 @@ calibrate_deviations.Opn<-
     }
     # progressbar
     if (nk > 5) {
-      pb <- txtProgressBar(1, nk)
+      pb <- progress::progress_bar$new(total = nk)
       t <- TRUE
     } else {
       t <- FALSE
@@ -497,7 +497,7 @@ calibrate_deviations.Opn<-
         y.title <- "Deviation (in original units)"
       }
       if (t)
-        setTxtProgressBar(pb, ind)
+        pb$tick()
     }
     # below we manage for single/several individuals if more than
     # 1, we calculate median and sd

@@ -100,8 +100,8 @@ dfourier.Opn <- function(coo, nb.h) {
   # we prepare the matrix
   coe <- matrix(ncol = 2 * nb.h, nrow = nr,
                 dimnames = list(names(coo), col.n))
-  if (.is_verbose()) {
-    pb <- txtProgressBar(1, nr)
+  if (.is_verbose()){
+    pb <- progress::progress_bar$new(total = nr)
     t <- TRUE
   } else {
     t <- FALSE
@@ -112,7 +112,7 @@ dfourier.Opn <- function(coo, nb.h) {
     coe[i, ] <- c(dfourier_i$an, dfourier_i$bn)
     # progress bar
     if (t)
-      setTxtProgressBar(pb, i)
+      pb$tick()
   }
   # still progress bar: skips a line
   if (t) cat("\n")
