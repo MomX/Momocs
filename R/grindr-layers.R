@@ -22,9 +22,11 @@
 #'
 #' @examples
 #' ### First prepare two PCA objects.
+#'
 #' # Some outlines with bot
 #' bp <- bot %>% mutate(fake=sample(letters[1:5], 40, replace=TRUE)) %>%
 #' efourier(6) %>% PCA
+#'
 #' # Some curves with olea
 #' op <- olea %>%
 #' mutate(s=coo_area(.)) %>%
@@ -65,7 +67,6 @@ plot_PCA <- function(x, f, axes=c(1, 2), palette=col_summer){
     f <- factor(rep(1, nrow(x$x)))
     colors_groups <- rep(par("fg"), nlevels(f))
     colors_rows   <- colors_groups[f]
-
   } else {         # something provided, handle with .fac_dispatcher
     f <- x %>% .fac_dispatcher(f)
     if (is.numeric(f)){
@@ -433,7 +434,7 @@ layer_ellipsesfilled <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
       for (j in seq_along(conf)){
         conf_ell(x = xy_i, conf = conf[j])$ell %>%
           coo_close %>%
-          draw_polygon(border=NA,
+          draw_polygon(fill=NA,
                        col=x$colors_groups[i] %>%
                          col_alpha(alpha[j]), ...)
       }
@@ -517,7 +518,7 @@ layer_chullfilled <- function(x, alpha=0.8, ...){
       # with less than 3 points in a group,
       # coo_chull would fail
       coo %>% coo_chull() %>% coo_close %>%
-        draw_polygon(border=NA, col=col_alpha(x$colors_groups[i], alpha), ...)
+        draw_polygon(fill=NA, col=col_alpha(x$colors_groups[i], alpha), ...)
     }
   }
   # propagate
