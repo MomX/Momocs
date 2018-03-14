@@ -80,7 +80,6 @@ fProcrustes <- function(coo1, coo2) {
 #' but in that case, all shapes must have the same number of coordinates (\link{coo_sample} may help).
 #' @param x an array, a list of configurations, or an \link{Out}, \link{Opn} or \link{Ldk} object
 #' @param tol numeric when to stop iterations
-#' @param verbose logical whether to print outputs (iteration number, and gain)
 #' @param coo logical, when working on \code{Out} or \code{Opn}, whether to use \code{$coo} rather than \code{$ldk}
 #' @return a list with components:
 #' \itemize{
@@ -95,6 +94,8 @@ fProcrustes <- function(coo1, coo2) {
 #' \item \code{cent.size} vector of centroid sizes.
 #' } or an \link{Out}, \link{Opn} or an \link{Ldk} object.
 #' @note Slightly less optimized than procGPA in the shapes package (~20% on my machine).
+#' Will be optimized when performance will be the last thing to improve!
+#' Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 #' @family procrustes functions
 #' @examples
@@ -108,12 +109,12 @@ fProcrustes <- function(coo1, coo2) {
 #' fgProcrustes(hearts) %>%  stack()
 #' }
 #' @export
-fgProcrustes <- function(x, tol, verbose, coo) {
+fgProcrustes <- function(x, tol, coo) {
   UseMethod("fgProcrustes")
 }
 
 #' @export
-fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
+fgProcrustes.default <- function(x, tol = 1e-05,  coo=NULL) {
   if (is.list(x))
     A <- l2a(x)
   else
@@ -173,7 +174,7 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
     Qm1 <- Qm2
     Qi[iter] <- sum(Qm2)
     iter <- iter + 1
-    if (verbose) {
+    if (.is_verbose()) {
       message("iteration: ", iter, "\tgain:", signif(abs(Q), 5))
     }
     temp1 <- temp2
@@ -187,19 +188,19 @@ fgProcrustes.default <- function(x, tol = 1e-05, verbose = FALSE, coo=NULL) {
 }
 
 #' @export
-fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
+fgProcrustes.Out <- function(x, tol = 1e-10, coo=FALSE) {
   Coo <- validate(x)
   # if no $ldk defined, we convert Out into a Ldk and then
   # perform the fgProcrustes and return back an Out object.
   if (coo | (length(Coo$ldk) == 0)) {
-    if (verbose) {
+    if (.is_verbose()) {
       if (coo){
         message("using $coo, not $ldk")
       } else {
         message("no landmarks defined in $ldk, so trying to work on $coo directly")}
     }
     Coo2 <- Ldk(Coo$coo)
-    Coo2 <- fgProcrustes(Coo2, tol = tol, verbose = verbose)
+    Coo2 <- fgProcrustes(Coo2, tol = tol)
     Coo$coo <- Coo2$coo
     return(Coo)
   }
@@ -216,7 +217,7 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
     return(coo_bookstein(Coo))
   }
 
-  tar <- fgProcrustes.default(ref, tol = tol, verbose = verbose)$rotated
+  tar <- fgProcrustes.default(ref, tol = tol)$rotated
   # would benefit to be handled by coo_baseline ?
   for (i in 1:length(Coo2)) {
     tari <- tar[, , i]
@@ -252,12 +253,12 @@ fgProcrustes.Out <- function(x, tol = 1e-10, verbose = FALSE, coo=FALSE) {
 fgProcrustes.Opn <- fgProcrustes.Out
 
 #' @export
-fgProcrustes.Ldk <- function(x, tol = 1e-10, verbose = FALSE, coo=NULL) {
+fgProcrustes.Ldk <- function(x, tol = 1e-10, coo=NULL) {
   # if (is_slidings(x))
   #   x %<>% get_curcoo_binded()
   Coo2 <- Coo <- x
   ref <- l2a(Coo2$coo)
-  tar <- fgProcrustes(ref, tol = tol, verbose = verbose)$rotated
+  tar <- fgProcrustes(ref, tol = tol)$rotated
   Coo2$coo <- a2l(tar)
   Coo2$coe <- a2m(l2a(Coo2$coo))
   rownames(Coo2$coe) <- names(x)

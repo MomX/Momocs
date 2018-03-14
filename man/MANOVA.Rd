@@ -7,16 +7,13 @@
 \alias{MANOVA.PCA}
 \title{Multivariate analysis of (co)variance on Coe objects}
 \usage{
-MANOVA(x, fac, test = "Hotelling", retain, drop, verbose)
+MANOVA(x, fac, test = "Hotelling", retain, drop)
 
-\method{MANOVA}{OpnCoe}(x, fac, test = "Hotelling", retain, drop,
-  verbose = TRUE)
+\method{MANOVA}{OpnCoe}(x, fac, test = "Hotelling", retain, drop)
 
-\method{MANOVA}{OutCoe}(x, fac, test = "Hotelling", retain, drop,
-  verbose = TRUE)
+\method{MANOVA}{OutCoe}(x, fac, test = "Hotelling", retain, drop)
 
-\method{MANOVA}{PCA}(x, fac, test = "Hotelling", retain = 0.99, drop,
-  verbose = TRUE)
+\method{MANOVA}{PCA}(x, fac, test = "Hotelling", retain = 0.99, drop)
 }
 \arguments{
 \item{x}{a \link{Coe} object}
@@ -29,8 +26,6 @@ MANOVA(x, fac, test = "Hotelling", retain, drop, verbose)
 the highest number of PC axis to retain, or the proportion of the variance to capture.}
 
 \item{drop}{how many harmonics (or polynomials) to drop}
-
-\item{verbose}{logical whether to print messages}
 }
 \value{
 a list of matrices of (x,y) coordinates.
@@ -44,6 +39,7 @@ Performs a MANOVA/MANCOVA on PC scores. Just a wrapper around \link{manova}. See
 }
 \note{
 Needs a review and should be considered as experimental.
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
 # MANOVA

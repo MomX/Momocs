@@ -212,3 +212,11 @@
   }
 }
 
+# options like ------
+
+.is_verbose <- function()
+  options("verbose")[[1]]
+
+# options("verbose"=F)
+# .is_verbose()
+# options("verbose"=T)

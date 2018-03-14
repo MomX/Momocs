@@ -8,11 +8,10 @@
 \usage{
 rfourier(x, ...)
 
-\method{rfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE,
-  verbose = TRUE, ...)
+\method{rfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE, ...)
 
 \method{rfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE,
-  thres = pi/90, verbose = TRUE, ...)
+  thres = pi/90, ...)
 }
 \arguments{
 \item{x}{A \code{list} or \code{matrix} of coordinates or an \code{Out} object}
@@ -27,8 +26,6 @@ perform.}
 
 \item{norm}{\code{logical}. Whether to scale the outlines so that the mean
 length of the radii used equals 1.}
-
-\item{verbose}{\code{logical}. Whether to display diagnosis messages.}
 
 \item{thres}{\code{numeric} a tolerance to feed \link{is_equallyspacedradii}}
 }
@@ -51,6 +48,8 @@ tests if coordinates have equally spaced radii using \link{is_equallyspacedradii
 message is printed if this is not the case.
 }
 \note{
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
+
 Directly borrowed for Claude (2008), and called \code{fourier1} there.
 }
 \examples{

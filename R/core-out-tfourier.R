@@ -12,8 +12,8 @@
 #' perform
 #' @param norm \code{logical}. Whether to scale and register new coordinates so
 #' that the first point used is sent on the origin.
-#' @param verbose \code{logical}. Whether to display diagnosis messages.
 #' @param ... useless here
+#' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @return A list with the following components:
 #' \itemize{
 #' \item \code{ao} ao harmonic coefficient
@@ -43,12 +43,13 @@
 #' coo_draw(tfourier_i(tf, force2close=TRUE), border='blue', col=NA) # we force it to close.
 #' @rdname tfourier
 #' @export
-tfourier <- function(x, ...) {UseMethod("tfourier")}
-tFourier <- tfourier
+tfourier <- function(x, ...) {
+  UseMethod("tfourier")
+}
 
 #' @rdname tfourier
 #' @export
-tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
+tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, ...) {
   coo <- x
   if (missing(nb.h)) {
         nb.h <- 12
@@ -62,14 +63,14 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     }
     if (nb.h * 2 > nrow(coo)) {
         nb.h = floor(nrow(coo)/2)
-        if (verbose) {
+        if (.is_verbose()) {
             message("'nb.h' must be lower than half the number of points and has been set to ",
                 nb.h)
         }
     }
     if (nb.h == -1) {
         nb.h = floor(nrow(coo)/2)
-        if (verbose) {
+        if (.is_verbose()) {
             message("'nb.h' must be lower than half the number of points. It has been set to ", nb.h, " harmonics")
         }
     }
@@ -101,15 +102,15 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
 
 #' @rdname tfourier
 #' @export
-tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE, ...) {
+tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...) {
   Out <- x
   # validates
   Out %<>% validate()
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     nb.h <- calibrate_harmonicpower(Out, method="tfourier",
-                                    thresh = 99, verbose=FALSE, plot=FALSE)$minh
-    if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
+                                    thresh = 99, plot=FALSE)$minh
+    if (.is_verbose()) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q  # should not be 1
@@ -124,7 +125,7 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, verbose=TRUE,
                                                                      col.n))
   for (i in seq(along = coo)) {
     tf <- tfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
-                   norm = norm, verbose = TRUE)
+                   norm = norm)
     coe[i, ] <- c(tf$an, tf$bn)
   }
   res <- OutCoe(coe = coe, fac = Out$fac, method = "tfourier",norm = norm)

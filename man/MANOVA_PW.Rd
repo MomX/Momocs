@@ -7,7 +7,7 @@
 \usage{
 MANOVA_PW(x, ...)
 
-\method{MANOVA_PW}{PCA}(x, fac, verbose = FALSE, retain = 0.99, ...)
+\method{MANOVA_PW}{PCA}(x, fac, retain = 0.99, ...)
 }
 \arguments{
 \item{x}{a \link{PCA} object}
@@ -15,8 +15,6 @@ MANOVA_PW(x, ...)
 \item{...}{more arguments to feed \link{MANOVA}}
 
 \item{fac}{a name (or its id) of a grouping factor in \code{$fac} or a factor or a formula.}
-
-\item{verbose}{to feed \link{MANOVA}}
 
 \item{retain}{the number of PC axis to retain (1:retain) or the proportion of variance to capture (0.99 par default).}
 }

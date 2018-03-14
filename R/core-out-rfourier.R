@@ -13,8 +13,8 @@
 #' @param norm \code{logical}. Whether to scale the outlines so that the mean
 #' length of the radii used equals 1.
 #' @param thres \code{numeric} a tolerance to feed \link{is_equallyspacedradii}
-#' @param verbose \code{logical}. Whether to display diagnosis messages.
 #' @param ... useless here
+#' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @return A list with following components:
 #' \itemize{
 #'  \item \code{an} vector of \eqn{a_{1->n}} harmonic coefficients
@@ -46,7 +46,7 @@ rfourier <- function(x, ...){UseMethod("rfourier")}
 
 #' @rdname rfourier
 #' @export
-rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRUE, ...) {
+rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, ...) {
     coo <- x
     coo <- coo_check(coo)
     if (missing(nb.h)) {
@@ -58,14 +58,14 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
     }
     if (nb.h * 2 > nrow(coo) | missing(nb.h)) {
         nb.h = floor(nrow(coo)/2)
-        if (verbose) {
+        if (.is_verbose()) {
             message("'nb.h' must be lower than half the number of points and has been set to: ",
                 nb.h)
         }
     }
     if (nb.h == -1) {
         nb.h = floor(nrow(coo)/2)
-        if (verbose) {
+        if (.is_verbose()) {
             message("'nb.h' must be lower than half the number of points and has been set to",
                 nb.h, "harmonics.\n")
         }
@@ -94,7 +94,7 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, verbose = TRU
 
 #' @rdname rfourier
 #' @export
-rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, verbose=TRUE, ...) {
+rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, ...) {
   Out <- x
   # validates
   Out %<>% validate()
@@ -108,8 +108,8 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, 
   if (missing(nb.h)) {
     # nb.h <- ifelse(q >= 32, 32, q)
     nb.h <- calibrate_harmonicpower(Out, method="rfourier",
-                                    thresh = 99, verbose=FALSE, plot=FALSE)$minh
-    if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
+                                    thresh = 99, plot=FALSE)$minh
+    if (.is_verbose()) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q
@@ -124,7 +124,7 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, 
                                                                      col.n))
   for (i in seq(along = coo)) {
     rf <- rfourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
-                   norm = norm, verbose = TRUE)  #todo: vectorize
+                   norm = norm)  #todo: vectorize
     coe[i, ] <- c(rf$an, rf$bn)
   }
   res <- OutCoe(coe = coe, fac = Out$fac, method = "rfourier", norm = norm)

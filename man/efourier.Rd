@@ -9,10 +9,10 @@
 \usage{
 efourier(x, ...)
 
-\method{efourier}{default}(x, nb.h, smooth.it = 0, verbose = TRUE, ...)
+\method{efourier}{default}(x, nb.h, smooth.it = 0, ...)
 
 \method{efourier}{Out}(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE,
-  verbose = TRUE, ...)
+  ...)
 
 efourier_norm(ef, start = FALSE)
 }
@@ -26,8 +26,6 @@ efourier_norm(ef, start = FALSE)
 
 \item{smooth.it}{\code{integer}. The number of smoothing iterations to
 perform.}
-
-\item{verbose}{\code{logical}. Whether to print or not diagnosis messages.}
 
 \item{norm}{whether to normalize the coefficients using \link{efourier_norm}}
 
@@ -80,7 +78,9 @@ and performing the latter with no normalization (\code{norm = FALSE}), since
 it has been done before.
 
 You have several options to align your shapes, using control points (or landmarks),
-of Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper
+by far the most time consuming (and less reproducible) but possibly the best one too
+when alignment is too tricky to automate.
+You can also try Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper
 length (see \code{\link{coo_aligncalliper}}), etc. You should also make the first
 point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
 to minimize any subsequent problems.
@@ -89,6 +89,8 @@ I will dedicate (some day) a vignette or a paper to this problem.
 }
 \note{
 Directly borrowed for Claude (2008).
+
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
 # single shape

@@ -11,7 +11,6 @@
 #' 99 percent of harmonic power on Out objects, both with messages.
 #' @param smooth.it \code{integer}. The number of smoothing iterations to
 #' perform.
-#' @param verbose \code{logical}. Whether to print or not diagnosis messages.
 #' @param norm whether to normalize the coefficients using \link{efourier_norm}
 #' @param start `logical`. For `efourier` whether to consider the first point as homologous;
 #' for `efourier_norm` whether to conserve the position of the first
@@ -29,6 +28,9 @@
 #' and `lnef` that is the concatenation of coefficients.
 #'
 #' @note Directly borrowed for Claude (2008).
+#'
+#' Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
+#'
 #' @details For the maths behind see the paper in JSS.
 #'
 #' Normalization of coefficients has long been a matter of trouble,
@@ -55,7 +57,9 @@
 #' it has been done before.
 #'
 #' You have several options to align your shapes, using control points (or landmarks),
-#' of Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper
+#' by far the most time consuming (and less reproducible) but possibly the best one too
+#' when alignment is too tricky to automate.
+#' You can also try Procrustes alignment (see \code{\link{fgProcrustes}}) through their calliper
 #' length (see \code{\link{coo_aligncalliper}}), etc. You should also make the first
 #' point homologous either with \code{\link{coo_slide}} or \code{\link{coo_slidedirection}}
 #' to minimize any subsequent problems.
@@ -84,7 +88,7 @@ eFourier <- efourier
 
 #' @rdname efourier
 #' @export
-efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
+efourier.default <- function(x, nb.h, smooth.it = 0, ...) {
   coo <- x
   coo <- coo_check(coo)
   if (is_closed(coo))
@@ -96,13 +100,13 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
   }
   if (nb.h * 2 > nr) {
     nb.h = floor(nr/2)
-    if (verbose) {
+    if (.is_verbose()) {
       message("'nb.h' must be lower than half the number of points, and has been set to ", nb.h, "harmonics")
     }
   }
   if (nb.h == -1) {
     nb.h = floor(nr/2)
-    if (verbose) {
+    if (.is_verbose()) {
       message("the number of harmonics used has been set to: ", nb.h)
     }
   }
@@ -133,7 +137,7 @@ efourier.default <- function(x, nb.h, smooth.it = 0, verbose = TRUE, ...) {
 
 #' @rdname efourier
 #' @export
-efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, verbose=TRUE, ...) {
+efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...) {
   if (norm)
     message("you selected `norm=TRUE`, which is not recommended. See ?efourier")
   Out <- x
@@ -142,8 +146,8 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     #nb.h <- ifelse(q >= 32, 32, q)
-    nb.h <- calibrate_harmonicpower(Out, thresh = 99, verbose=FALSE, plot=FALSE)$minh
-    if (verbose) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
+    nb.h <- calibrate_harmonicpower(Out, thresh = 99, plot=FALSE)$minh
+    if (.is_verbose()) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q
@@ -157,8 +161,7 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ver
                                                                      col.n))
   for (i in seq(along = coo)) {
     # todo: vectorize
-    ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it,
-                   verbose = TRUE)
+    ef <- efourier(coo[[i]], nb.h = nb.h, smooth.it = smooth.it)
     if (norm) {
       ef <- efourier_norm(ef, start = start)
       if (ef$A[1] < 0) {

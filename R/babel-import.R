@@ -14,24 +14,24 @@
 #' @param txt.paths a vector of paths corresponding to the .txt files to import. If not
 #' provided (or \code{NULL}), switches to the automatic version, just as in \link{import_jpg}.
 #' See Details there.
-#' @param verbose logical whether to print progress in the console
 #' @param ... arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.
 #'
 #' @note Note this function will be deprecated from Momocs
 #' when \code{Momacs} and \code{Momit}
 #' will be fully operationnal.
 #'
+#' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @return a list of matrix(ces) of (x; y) coordinates that can be passed to
 #' \link{Out}, \link{Opn} and \link{Ldk}.
 #' @family import functions
 #' @export
-import_txt <- function(txt.paths = .lf.auto(), verbose=FALSE, ...) {
+import_txt <- function(txt.paths = .lf.auto(), ...) {
   # if (is.null(txt.paths)) {
   #   txt.paths <- .lf.auto()
   # }
-  if (verbose)
+  if (.is_verbose())
     cat(" * Extracting ", length(txt.paths), "..txt coordinates...\n")
-  if (length(txt.paths) > 10 & verbose) {
+  if (length(txt.paths) > 10 & .is_verbose()) {
     pb <- txtProgressBar(1, length(txt.paths))
     t <- TRUE
   } else {
@@ -276,11 +276,12 @@ import_jpg1 <- function(jpg.path,
 #' a black pixel is not satisfactory. See \link{import_jpg1} help and examples.
 #' @param threshold the threshold value use to binarize the images. Above, pixels
 #' are turned to 1, below to 0.
-#' @param verbose whether to print which file is being treated. Useful to detect problems.
 #'
 #' @note Note this function will be deprecated from Momocs
 #' when \code{Momacs} and \code{Momit}
 #' will be fully operationnal.
+#'
+#' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #'
 #' @details see \link{import_jpg1} for important informations about how the outlines are extracted,
 #' and \link{import_Conte} for the algorithm itself.
@@ -302,14 +303,14 @@ import_jpg1 <- function(jpg.path,
 #' @family import functions
 #' @export
 import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
-                       fun.notcentered = NULL, threshold = 0.5, verbose = TRUE) {
+                       fun.notcentered = NULL, threshold = 0.5) {
   # if not provided
   # if (is.null(jpg.paths)) {
   #   jpg.paths <- .lf.auto()
   # }
   begin <- Sys.time()
   message("Extracting ", length(jpg.paths), ".jpg outlines...")
-  if (length(jpg.paths) > 10 & verbose) {
+  if (length(jpg.paths) > 10 & .is_verbose()) {
     pb <- txtProgressBar(1, length(jpg.paths))
     t <- TRUE
   } else {
@@ -320,14 +321,14 @@ import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
   res <- list()
   n <- length(jpg.paths)
   for (i in seq(along = jpg.paths)) {
-    if (verbose) {
+    if (.is_verbose()) {
       cat("[", i, "/", n, "] ", .trim.path(jpg.paths[i]))
     }
     coo_i <- import_jpg1(jpg.paths[i], auto.notcentered = auto.notcentered,
                          fun.notcentered = fun.notcentered, threshold = threshold)
     res[[i]] <- coo_i
     # if (export){coo_export(coo_i, jpg.paths[i])}
-    if (verbose) {
+    if (.is_verbose()) {
       cat("\n")
     } else {
       if (t)
@@ -335,7 +336,7 @@ import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
     }
   }
   names(res) <- jpg.paths %>% .trim.ext() %>% .trim.path()
-  if (verbose) {
+  if (.is_verbose()) {
     end <- Sys.time()
     time <- end - begin
     message("Done in ", round(as.numeric(time), 1), " ", units(time))

@@ -6,7 +6,7 @@
 \usage{
 calibrate_r2(Opn, method = "opoly", id = 1:length(Opn),
   degree.range = 1:8, thresh = c(0.9, 0.95, 0.99, 0.999), plot = TRUE,
-  verbose = TRUE, ...)
+  ...)
 }
 \arguments{
 \item{Opn}{an Opn object}
@@ -21,8 +21,6 @@ calibrate_r2(Opn, method = "opoly", id = 1:length(Opn),
 
 \item{plot}{logical whether to print the plot}
 
-\item{verbose}{logical whether to print messages}
-
 \item{...}{useless here}
 }
 \description{
@@ -32,6 +30,9 @@ Also returns a plot
 \details{
 May be long, so you can estimate it on a sample either with id here, or one of
 \link{sample_n} or \link{sample_frac}
+}
+\note{
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
 \dontrun{

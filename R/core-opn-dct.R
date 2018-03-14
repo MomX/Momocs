@@ -4,7 +4,6 @@
 #' a shape (mainly open outlines).
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @param nb.h numeric the number of harmonics to calculate
-#' @param verbose whether to print messages and progress bar.
 #' @return a list with the following components:
 #' \itemize{
 #' \item an the A harmonic coefficients
@@ -15,8 +14,10 @@
 #' @note This method has been only poorly tested in Momocs and should be considered as
 #' experimental. Yet improved by a factor 10, this method is still long to execute.
 #' It will be improved in further releases but it should not be so painful right now.
-#' It also explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
+#' It also explains the progress bar. Shapes should be aligned
 #' before performing the dct transform.
+#'
+#' Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #'
 #' @references
 #' \itemize{
@@ -55,18 +56,18 @@
 #' title('Discrete Cosine Transforms')
 #' @rdname dfourier
 #' @export
-dfourier <- function(coo, nb.h, verbose = TRUE) {
+dfourier <- function(coo, nb.h) {
   UseMethod("dfourier")
 }
 #' @rdname dfourier
 #' @export
 
-dfourier.default <- function(coo, nb.h, verbose = TRUE) {
+dfourier.default <- function(coo, nb.h) {
   # we check a bit
   coo <- coo_check(coo)
   if (missing(nb.h)) {
     nb.h <- 12
-    if (verbose) message("'nb.h' not provided and set to " , nb.h)}
+    if (.is_verbose()) message("'nb.h' not provided and set to " , nb.h)}
   # preliminaries
   N <- nrow(coo)
   pol <- coo[, 1] + (0+1i) * coo[, 2]
@@ -85,21 +86,21 @@ dfourier.default <- function(coo, nb.h, verbose = TRUE) {
 
 #' @rdname dfourier
 #' @export
-dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
+dfourier.Opn <- function(coo, nb.h) {
   Opn <- coo
   # validates
   Opn %<>% validate()
   # we set nb.h if missing
   if (missing(nb.h)) {
     nb.h <- 12
-    if (verbose) message("'nb.h' not provided and set to ", nb.h)}
+    if (.is_verbose()) message("'nb.h' not provided and set to ", nb.h)}
   col.n <- paste0(rep(LETTERS[1:2], each = nb.h), rep(1:nb.h, times = 2))
   coo <- Opn$coo
   nr <- length(coo)
   # we prepare the matrix
   coe <- matrix(ncol = 2 * nb.h, nrow = nr,
                 dimnames = list(names(coo), col.n))
-  if (verbose) {
+  if (.is_verbose()) {
     pb <- txtProgressBar(1, nr)
     t <- TRUE
   } else {
@@ -127,7 +128,7 @@ dfourier.Opn <- function(coo, nb.h, verbose=TRUE) {
 
 #' @rdname dfourier
 #' @export
-dfourier.Coo <- function(coo, nb.h, verbose=TRUE) {
+dfourier.Coo <- function(coo, nb.h) {
   stop("dfourier can only be applied on Opn objects")
 }
 

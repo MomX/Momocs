@@ -7,20 +7,18 @@
 \alias{dfourier.Coo}
 \title{Discrete cosinus transform}
 \usage{
-dfourier(coo, nb.h, verbose = TRUE)
+dfourier(coo, nb.h)
 
-\method{dfourier}{default}(coo, nb.h, verbose = TRUE)
+\method{dfourier}{default}(coo, nb.h)
 
-\method{dfourier}{Opn}(coo, nb.h, verbose = TRUE)
+\method{dfourier}{Opn}(coo, nb.h)
 
-\method{dfourier}{Coo}(coo, nb.h, verbose = TRUE)
+\method{dfourier}{Coo}(coo, nb.h)
 }
 \arguments{
 \item{coo}{a matrix (or a list) of (x; y) coordinates}
 
 \item{nb.h}{numeric the number of harmonics to calculate}
-
-\item{verbose}{whether to print messages and progress bar.}
 }
 \value{
 a list with the following components:
@@ -39,8 +37,10 @@ a shape (mainly open outlines).
 This method has been only poorly tested in Momocs and should be considered as
 experimental. Yet improved by a factor 10, this method is still long to execute.
 It will be improved in further releases but it should not be so painful right now.
-It also explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
+It also explains the progress bar. Shapes should be aligned
 before performing the dct transform.
+
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
 \dontrun{ # because it's long

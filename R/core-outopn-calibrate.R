@@ -283,7 +283,7 @@ calibrate_deviations.Out <-
     Coo <- x
     # missing lineat.y
     if (missing(range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE)
+      hr <- calibrate_harmonicpower(Coo, plot=FALSE)
       range <- unique(hr$minh)
     }
     if (missing(method)) {
@@ -420,10 +420,6 @@ calibrate_deviations.Opn<-
     Coo <- x
     # missing lineat.y
     if (missing(range)) {
-      #       hr <- calibrate_harmonicpower(Coo, plot=FALSE, verbose=FALSE,
-      #                                     lineat.y = c(95, 99, 99.9))
-      #       range <- unique(hr$minh)
-      #
       message("'range' was missing and set to 1:8")
       range <- 1:8
     }
@@ -587,7 +583,7 @@ calibrate_deviations.Opn<-
 #' @param thresh vector of numeric for drawing horizontal lines, and also used for
 #' \code{minh} below
 #' @param plot logical whether to plot the result or simply return the matrix
-#' @param verbose whether to print results
+#' Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @return returns a list with component:
 #' \itemize{
 #' \item \code{gg} a ggplot object, \code{q} the quantile matrix
@@ -617,23 +613,23 @@ calibrate_deviations.Opn<-
 #' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
 #'
 #' @export
-calibrate_harmonicpower <- function(x, method, id, nb.h, drop, thresh, plot, verbose) {
+calibrate_harmonicpower <- function(x, method, id, nb.h, drop, thresh, plot) {
   UseMethod("calibrate_harmonicpower")
 }
 
 #' @export
 calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x),
                                         nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
-                                        plot=TRUE, verbose=TRUE) {
+                                        plot=TRUE) {
   Out <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) message("method not provided. efourier is used")
+    if (.is_verbose()) message("method not provided. efourier is used")
     method <- efourier
   } else {
     p <- pmatch(tolower(method), c("efourier", "rfourier", "sfourier", "tfourier"))
     if (is.na(p)) {
-      warning("unvalid method. efourier is used")
+      message("unvalid method. efourier is used")
     } else {
       method <- switch(p, efourier, rfourier, sfourier, tfourier)
     }
@@ -685,7 +681,7 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x)
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
   minh <- minh+drop
   # talk to me
-  if (verbose){
+  if (.is_verbose()){
     #     cat("\n$minh:\n")
     print(minh)}
   # we return the full matrix, the ggplot and the thresholds
@@ -695,26 +691,19 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x)
 #' @export
 calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x),
                                         nb.h, drop = 1, thresh = c(90, 95, 99, 99.9),
-                                        plot=TRUE, verbose=TRUE) {
+                                        plot=TRUE) {
   Opn <- x
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) message("method not provided. dfourier is used")
+    if (.is_verbose()) message("method not provided. dfourier is used")
     method <- dfourier
   } else if (method != "dfourier"){
-    if (verbose) message("only available for dfourier. dfourier is used")
+    if (.is_verbose()) message("only available for dfourier. dfourier is used")
     method <- dfourier
   } else {
     method <- dfourier
   }
-  #   } else {
-  #     p <- pmatch(tolower(method), c("efourier", "rfourier", "tfourier"))
-  #     if (is.na(p)) {
-  #       warning("Unvalid method. efourier is used.")
-  #     } else {
-  #       method <- switch(p, efourier, rfourier, tfourier)
-  #     }
-  #   }
+
   # here we define the maximum nb.h, if missing
   if (missing(nb.h)){
     nb.h <- floor(min(sapply(Opn$coo, nrow))/2)
@@ -755,7 +744,7 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
   minh <- minh+drop
   # talk to me
-  if (verbose){
+  if (.is_verbose()){
     #     cat("\n$minh:\n")
     print(minh)}
   # we return the full matrix, the ggplot and the thresholds
@@ -774,10 +763,10 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
 #' @param degree.range on which to calculate r2
 #' @param thresh the threshold to return diagnostic
 #' @param plot logical whether to print the plot
-#' @param verbose logical whether to print messages
 #' @param ... useless here
 #' @details May be long, so you can estimate it on a sample either with id here, or one of
 #' \link{sample_n} or \link{sample_frac}
+#' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @family calibration
 #' @examples
 #' \dontrun{
@@ -787,12 +776,12 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
 #' @export
 calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
                          degree.range=1:8, thresh = c(0.90, 0.95, 0.99, 0.999),
-                         plot=TRUE, verbose=TRUE, ...) {
+                         plot=TRUE, ...) {
   if (!is_Opn(Opn))
     stop("only defined on Opn objects")
   # we swith among methods, with a messsage
   if (missing(method)) {
-    if (verbose) message("method not provided. opoly is used")
+    if (.is_verbose()) message("method not provided. opoly is used")
     method <- opoly
   } else {
     p <- pmatch(tolower(method), c("npoly", "opoly"))
@@ -837,7 +826,7 @@ calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
   mind <- minh
   # talk to me
-  if (verbose){
+  if (.is_verbose()){
     #     cat("\n$minh:\n")
     print(mind)}
   # we return the full matrix, the ggplot and the thresholds

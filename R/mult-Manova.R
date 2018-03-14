@@ -17,10 +17,10 @@
 #' @param retain how many harmonics (or polynomials) to retain, for PCA
 #' the highest number of PC axis to retain, or the proportion of the variance to capture.
 #' @param drop how many harmonics (or polynomials) to drop
-#' @param verbose logical whether to print messages
 #' @return a list of matrices of (x,y) coordinates.
 #' @family multivariate
 #' @note Needs a review and should be considered as experimental.
+#' Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @examples
 #' # MANOVA
 #' bot.p <- PCA(efourier(bot, 12))
@@ -40,15 +40,14 @@
 #'  bot %>% efourier %>% PCA %>% MANOVA("cs")
 #'
 #' @export
-MANOVA <- function(x, fac, test = "Hotelling", retain, drop,
-                   verbose) {
+MANOVA <- function(x, fac, test = "Hotelling", retain, drop) {
   UseMethod("MANOVA")
 }
 
 #' @rdname MANOVA
 #' @export
 MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
-                          drop, verbose = TRUE) {
+                          drop) {
   OpnCoe <- x
   if (length(OpnCoe$method) > 1)
     stop("cannot yet be used on combined OutCoe, do it manually")
@@ -63,7 +62,7 @@ MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
   if (missing(retain))
     retain <- ncol(x)
   keep <- (drop + 1):retain
-  if (verbose)
+  if (.is_verbose())
     message("MANOVA done on:", colnames(x)[keep])
   mod <- summary(manova(x[, keep] ~ fac), test = test)
   return(mod)
@@ -71,7 +70,7 @@ MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
 
 #' @rdname MANOVA
 #' @export
-MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TRUE) {
+MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop) {
   OutCoe <- x
   if (length(OutCoe$method) > 1)
     stop("cannot yet be used on combined OutCoe. Do it manually")
@@ -90,13 +89,13 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
     if (sum(x[, BC]) == 0) {
       x <- x[, -BC]
       cph <- 2
-      if (verbose)
+      if (.is_verbose())
         message("B and C harmonics removed (because of removeAsymetric)")
     } else {
       if (sum(x[, AD]) == 0) {
         x <- x[, -AD]
         cph <- 2
-        if (verbose)
+        if (.is_verbose())
           message("A and D harmonics removed (because of removeSymetric)")
       }
     }
@@ -105,7 +104,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
   if (missing(drop)) {
     if (OutCoe$norm) {
       drop <- 1
-      if (verbose)
+      if (.is_verbose())
         message("1st harmonic removed (because of normalization)")
     } else {
       drop <- 0
@@ -123,7 +122,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
     if (retain > nb.h) {
       retain <- nb.h
     }
-    if (verbose) {
+    if (.is_verbose()) {
       message("'retain' was missing. MANOVA done with", retain, "harmonics ")
       if (drop > 0) {
         message("and the first", drop, "dropped")
@@ -135,10 +134,10 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
       if (retain > nb.h) {
         retain <- nb.h
       }
-      if (verbose)
+      if (.is_verbose())
         message("'retain' was too ambitious. MANOVA done with ",
             retain, " harmonics ")
-      if (verbose) {
+      if (.is_verbose()) {
         if (drop > 0) {
           message("and the first ", drop, " were dropped")
         } else {
@@ -150,7 +149,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
 
   harm.sel <- coeff_sel(retain = retain, drop = drop, nb.h = nb.h,
                         cph = cph)
-  if (verbose)
+  if (.is_verbose())
     message("\n")
   mod <- summary(manova(x[, harm.sel] ~ fac), test = test)
   return(mod)
@@ -158,7 +157,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop, verbose = TR
 
 #' @rdname MANOVA
 #' @export
-MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = TRUE) {
+MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop) {
   if (missing(fac))
     stop("'fac' must be provided")
 
@@ -205,7 +204,6 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop, verbose = 
 #' pairwise combination of the factor provided.
 #' @param x a \link{PCA} object
 #' @param fac a name (or its id) of a grouping factor in \code{$fac} or a factor or a formula.
-#' @param verbose to feed \link{MANOVA}
 #' @param retain the number of PC axis to retain (1:retain) or the proportion of variance to capture (0.99 par default).
 #' @param ... more arguments to feed \link{MANOVA}
 #' @note Needs a review and should be considered as experimental.
@@ -245,7 +243,6 @@ MANOVA_PW <- function(x, ...) {
 #' @export
 MANOVA_PW.PCA <- function(x,
                           fac,
-                          verbose = FALSE,
                           retain=0.99,
                           ...) {
   # preliminaries
@@ -300,7 +297,7 @@ MANOVA_PW.PCA <- function(x,
       m <- summary(manova(x.i ~ fac.i))
       manovas[[i]] <- m
       res[i, ] <- m$stats[1, ]}
-    if (verbose)
+    if (.is_verbose())
       message(pws[i, ])
   }
   names(manovas) <- rownames(res)
@@ -333,7 +330,7 @@ MANOVA_PW.PCA <- function(x,
 
 # #' @rdname MANOVA_PW
 # #' @export
-# MANOVA_PW.Coe <- function(x, fac, verbose = FALSE, ...) {
+# MANOVA_PW.Coe <- function(x, fac, ...) {
 #   # preliminaries
 #   Coe <- x
 #   fac0 <- fac
@@ -347,16 +344,16 @@ MANOVA_PW.PCA <- function(x,
 #   # we get all combinations, and prepare the loop
 #   pws <- t(combn(levels(fac), 2))
 #   n <- nrow(pws)
-#   cn <- colnames(MANOVA(Coe, fac, verbose = FALSE)$stats)
+#   cn <- colnames(MANOVA(Coe, fac)$stats)
 #   res <- matrix(NA, nrow = n, ncol = 6,
 #                 dimnames = list(paste(pws[, 1], pws[, 2], sep = " - "), cn))
 #   manovas <- list()
 #   # we loop and do all the MANOVAs
 #   for (i in 1:nrow(pws)) {
-#     if (verbose)
+#     if (.is_verbose())
 #       cat(pws[i, ], "\n")
 #     Coe.i <- subset(Coe, fac == pws[i, ])
-#     m <- MANOVA(Coe.i, fac0, verbose = verbose, ...)
+#     m <- MANOVA(Coe.i, fac0, ...)
 #     manovas[[i]] <- m
 #     res[i, ] <- m$stats[1, ]
 #   }

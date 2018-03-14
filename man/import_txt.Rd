@@ -4,14 +4,12 @@
 \alias{import_txt}
 \title{Import coordinates from a .txt file}
 \usage{
-import_txt(txt.paths = .lf.auto(), verbose = FALSE, ...)
+import_txt(txt.paths = .lf.auto(), ...)
 }
 \arguments{
 \item{txt.paths}{a vector of paths corresponding to the .txt files to import. If not
 provided (or \code{NULL}), switches to the automatic version, just as in \link{import_jpg}.
 See Details there.}
-
-\item{verbose}{logical whether to print progress in the console}
 
 \item{...}{arguments to be passed to \link{read.table}, eg. 'skip', 'dec', etc.}
 }
@@ -33,6 +31,8 @@ has a header (eg ('x', 'y')), do not forget \code{header=TRUE}.
 Note this function will be deprecated from Momocs
 when \code{Momacs} and \code{Momit}
 will be fully operationnal.
+
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \seealso{
 Other import functions: \code{\link{import_Conte}},

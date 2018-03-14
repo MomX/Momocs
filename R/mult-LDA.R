@@ -9,10 +9,10 @@
 #' @param x a  PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
 #' @param retain the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).
-#' @param verbose logical whether to print messages
 #' @param ... additional arguments to feed \link{lda}
 #' @note For LDA.PCA, retain can be passed as a vector (eg: 1:5, and retain=1, retain=2, ...,
 #' retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_axes is used).
+#' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @return a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:
 #' \itemize{
 #'  \item \code{x} any \link{Coe} object (or a matrix)
@@ -99,7 +99,7 @@ LDA.Coe <- function(x, fac, retain, ...) {
 
 #' @rdname LDA
 #' @export
-LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
+LDA.PCA <- function(x, fac, retain = 0.99, ...) {
 
   # best case
   if (length(retain)==1) {
@@ -112,7 +112,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
     discri <- numeric(length(retain))
     names(discri) <- paste0("PC1:", retain)
     for (i in seq_along(discri)){
-      discri[i] <- LDA(x=x, fac=fac, retain = retain[i], verbose=FALSE)$CV.correct
+      discri[i] <- LDA(x=x, fac=fac, retain = retain[i])$CV.correct
     }
     return(discri)
   }
@@ -139,11 +139,11 @@ LDA.PCA <- function(x, fac, retain = 0.99, verbose=TRUE, ...) {
 
   # PC number selection
   if (retain < 1)  {
-    if (verbose) message(retain, " total variance")
+    if (.is_verbose()) message(retain, " total variance")
     retain <- scree_min(x, prop = retain)
   }
 
-  if (verbose) message(retain, " PC retained")
+  if (.is_verbose()) message(retain, " PC retained")
   X <- PCA$x[, 1:retain]
   if (is.matrix(X)) {
     remove <- which(apply(X, 2, sd) < 1e-10)
@@ -365,7 +365,7 @@ classification_metrics.LDA <- function(x){
 # #'   ref_id <- fac != unk
 # #'   L0 <- P0 %>%
 # #'     slice(ref_id) %>%
-# #'     LDA(fac[ref_id], retain=0.99, verbose=FALSE)
+# #'     LDA(fac[ref_id], retain=0.99)
 # #'   # extract and prepare scores of the unknown taxa
 # #'   unk_id <- fac == unk
 # #'   P1_all <- P0 %>%

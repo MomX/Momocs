@@ -8,11 +8,9 @@
 \usage{
 tfourier(x, ...)
 
-\method{tfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE,
-  verbose = TRUE, ...)
+\method{tfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE, ...)
 
-\method{tfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE,
-  verbose = TRUE, ...)
+\method{tfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...)
 }
 \arguments{
 \item{x}{A list or matrix of coordinates or an \code{Out}}
@@ -27,8 +25,6 @@ perform}
 
 \item{norm}{\code{logical}. Whether to scale and register new coordinates so
 that the first point used is sent on the origin.}
-
-\item{verbose}{\code{logical}. Whether to display diagnosis messages.}
 }
 \value{
 A list with the following components:
@@ -49,6 +45,8 @@ A list with the following components:
 list of coordinates.
 }
 \note{
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
+
 Directly borrowed for Claude (2008), and called \code{fourier2} there.
 }
 \examples{

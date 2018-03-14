@@ -4,7 +4,7 @@
 \alias{calibrate_harmonicpower}
 \title{Quantitative calibration, through harmonic power, for Out and Opn objects}
 \usage{
-calibrate_harmonicpower(x, method, id, nb.h, drop, thresh, plot, verbose)
+calibrate_harmonicpower(x, method, id, nb.h, drop, thresh, plot)
 }
 \arguments{
 \item{x}{a \code{Coo} of \code{Opn} object}
@@ -21,9 +21,8 @@ calibrate_harmonicpower(x, method, id, nb.h, drop, thresh, plot, verbose)
 \item{thresh}{vector of numeric for drawing horizontal lines, and also used for
 \code{minh} below}
 
-\item{plot}{logical whether to plot the result or simply return the matrix}
-
-\item{verbose}{whether to print results}
+\item{plot}{logical whether to plot the result or simply return the matrix
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.}
 }
 \value{
 returns a list with component:

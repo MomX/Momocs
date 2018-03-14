@@ -5,7 +5,7 @@
 \title{Extract outline coordinates from multiple .jpg files}
 \usage{
 import_jpg(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
-  fun.notcentered = NULL, threshold = 0.5, verbose = TRUE)
+  fun.notcentered = NULL, threshold = 0.5)
 }
 \arguments{
 \item{jpg.paths}{a vector of paths corresponding to the .jpg files to import. If not
@@ -21,8 +21,6 @@ a black pixel is not satisfactory. See \link{import_jpg1} help and examples.}
 
 \item{threshold}{the threshold value use to binarize the images. Above, pixels
 are turned to 1, below to 0.}
-
-\item{verbose}{whether to print which file is being treated. Useful to detect problems.}
 }
 \value{
 a list of matrices of (x; y) coordinates that can be passed to \link{Out}
@@ -42,6 +40,8 @@ file in the folder taht contains all your files. All the outlines should be impo
 Note this function will be deprecated from Momocs
 when \code{Momacs} and \code{Momit}
 will be fully operationnal.
+
+Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
 \dontrun{
