@@ -153,6 +153,43 @@ Coe <- function(...) {
     message("Coe constructor does not exist alone. See ?Coe")
 }
 
+# print ----------
+
+# The print method for Out objects
+#' @export
+print.Coo <- function(x, n=4, ...) {
+  x <- validate(x)
+  coo_nb <- length(x)
+  if (coo_nb==0){
+    cat("empty", class(x)[1])
+    return()
+  }
+  ### Header
+  if (is_Out(x)){
+    what <- "outlines"
+    cat("Out (outlines)\n")
+  }
+  if (is_Opn(x)){
+    what <- "curves"
+    cat("Opn (curves)\n")
+  }
+  if (is_Ldk(x)){
+    what <- "landmarks"
+    cat("Ldk (landmarks)\n")
+  }
+  coo_len <- sapply(x$coo, nrow)
+  coo_closed <- sapply(x$coo, is_closed)
+  # number of outlines
+  cat("  - ", coo_nb, " ", what, ", ",
+      round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coords (in $coo)\n", sep="")
+  # we print the fac
+  #.print_fac(x$fac, n)
+  paste0("  - ", ncol(x$fac), " classifiers (in $fac): \n") %>% cat
+  # summary(x$fac) %>% print
+  .print_fac(x$fac, n=n)
+  .other_components(x)
+}
+
 # str.* ----------------------
 # allows to maintain the traditionnal str() behaviour
 # actually useless but dont remember why/where

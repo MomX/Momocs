@@ -76,40 +76,40 @@ Ldk.Coo <- function(coo, links = NULL, slidings = NULL, fac = coo$fac) {
   return(Ldk)
 }
 
-# The print method for Ldk objects
-#' @export
-print.Ldk <- function(x, ...) {
-  Ldk <- validate(x)
-  coo_nb <- length(Ldk)
-  if (coo_nb==0){
-    cat("An empty Ldk object")
-    return()
-  }
-  ### Header
-  cat("An Ldk object with: \n")
-  coo_nb <- length(Ldk)
-  coo_len <- sapply(Ldk$coo, nrow)
-  coo_closed <- sapply(Ldk$coo, is_closed)
-  cat(" - $coo:", coo_nb, "configurations of landmarks")
-
-  # number of coordinates
-  cat(" (", unique(coo_len), " coordinates)\n", sep = "")
-  # slidings partitions
-  if (is_slidings(Ldk)) {
-    scheme <- .slidings_scheme(Ldk$slidings)
-    n <- scheme$n
-    if (scheme$n == 1) {
-      cat(" - $slidings: ", 1, " partition of sliding landmarks (",
-          scheme$id[[1]][1], ":", scheme$id[[1]][2], ")\n", sep = "")
-    } else {
-      cat(" - $slidings: ", scheme$n, " partitions of sliding landmarks (",
-          paste(apply(scheme$id, 1, function(x) paste(x[1], x[2], sep=":")), collapse="; "),
-          ")\n", sep = "")
-    }
-  }
-  # we print the fac
-  .print.fac(Ldk$fac)
-}
+# # The print method for Ldk objects
+# #' @export
+# print.Ldk <- function(x, ...) {
+#   Ldk <- validate(x)
+#   coo_nb <- length(Ldk)
+#   if (coo_nb==0){
+#     cat("An empty Ldk object")
+#     return()
+#   }
+#   ### Header
+#   cat("An Ldk object with: \n")
+#   coo_nb <- length(Ldk)
+#   coo_len <- sapply(Ldk$coo, nrow)
+#   coo_closed <- sapply(Ldk$coo, is_closed)
+#   cat(" - $coo:", coo_nb, "configurations of landmarks")
+#
+#   # number of coordinates
+#   cat(" (", unique(coo_len), " coordinates)\n", sep = "")
+#   # slidings partitions
+#   if (is_slidings(Ldk)) {
+#     scheme <- .slidings_scheme(Ldk$slidings)
+#     n <- scheme$n
+#     if (scheme$n == 1) {
+#       cat(" - $slidings: ", 1, " partition of sliding landmarks (",
+#           scheme$id[[1]][1], ":", scheme$id[[1]][2], ")\n", sep = "")
+#     } else {
+#       cat(" - $slidings: ", scheme$n, " partitions of sliding landmarks (",
+#           paste(apply(scheme$id, 1, function(x) paste(x[1], x[2], sep=":")), collapse="; "),
+#           ")\n", sep = "")
+#     }
+#   }
+#   # we print the fac
+#   .print.fac(Ldk$fac)
+# }
 
 # The print method for LdkCoe objects
 #' @export

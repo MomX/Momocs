@@ -104,43 +104,43 @@ Out.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 #   return(Out(coo, fac=object$fac))}
 
 
-# The print method for Out objects
-#' @export
-print.Out <- function(x, ...) {
-  Out <- validate(x)
-  coo_nb <- length(Out)
-  if (coo_nb==0){
-    cat("An empty Out object")
-    return()
-  }
-  ### Header
-  cat("An Out object with: \n")
-  coo_len <- sapply(Out$coo, nrow)
-  coo_closed <- sapply(Out$coo, is_closed)
-  # number of outlines
-  cat(" - $coo:", coo_nb, "outlines")
-
-  # number of coordinates
-  cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates, ", sep="")
-  # outlines closed or not
-  if (all(coo_closed)) {
-    cat("all closed)\n")
-  } else {
-    if (any(!coo_closed)) {
-      cat("all unclosed)\n")
-    } else {
-      cat(sum(coo_closed), " closed\n")
-    }
-  }
-  # number of landmarks
-  if (length(Out$ldk) != 0) {
-    cat(" - $ldk:", length(Out$ldk[[1]]), "landmark(s) defined\n")
-  } else {
-    #cat(" - No landmark defined\n")
-  }
-  # we print the fac
-  .print.fac(Out$fac)
-}
+# # The print method for Out objects
+# #' @export
+# print.Out <- function(x, ...) {
+#   Out <- validate(x)
+#   coo_nb <- length(Out)
+#   if (coo_nb==0){
+#     cat("An empty Out object")
+#     return()
+#   }
+#   ### Header
+#   cat("An Out object with: \n")
+#   coo_len <- sapply(Out$coo, nrow)
+#   coo_closed <- sapply(Out$coo, is_closed)
+#   # number of outlines
+#   cat(" - $coo:", coo_nb, "outlines")
+#
+#   # number of coordinates
+#   cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates, ", sep="")
+#   # outlines closed or not
+#   if (all(coo_closed)) {
+#     cat("all closed)\n")
+#   } else {
+#     if (any(!coo_closed)) {
+#       cat("all unclosed)\n")
+#     } else {
+#       cat(sum(coo_closed), " closed\n")
+#     }
+#   }
+#   # number of landmarks
+#   if (length(Out$ldk) != 0) {
+#     cat(" - $ldk:", length(Out$ldk[[1]]), "landmark(s) defined\n")
+#   } else {
+#     #cat(" - No landmark defined\n")
+#   }
+#   # we print the fac
+#   .print.fac(Out$fac)
+# }
 
 
 

@@ -74,33 +74,32 @@ Opn.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   return(Opn)
 }
 
-# The print method for Out objects
-#' @export
-print.Opn <- function(x, ...) {
-  Opn <- validate(x)
-  coo_nb <- length(Opn)
-  if (coo_nb==0){
-    cat("An empty Opn object")
-    return()
-  }
-  ### Header
-  cat("An Opn object with: \n")
-  coo_len <- sapply(Opn$coo, nrow)
-  coo_closed <- sapply(Opn$coo, is_closed)
-  # number of outlines
-  cat(" - $coo:", coo_nb, "open outlines")
-  # number of coordinates
-  cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n", sep="")
-  # number of landmarks
-  if (length(Opn$ldk) != 0) {
-    cat(" - $ldk:", length(Opn$ldk[[1]]), "landmark(s) defined\n")
-  } else {
-    #     cat(" - No landmark defined\n")
-  }
-  # we print the fac
-  .print.fac(Opn$fac)
-}
-
+# # The print method for Out objects
+# #' @export
+# print.Opn <- function(x, ...) {
+#   Opn <- validate(x)
+#   coo_nb <- length(Opn)
+#   if (coo_nb==0){
+#     cat("An empty Opn object")
+#     return()
+#   }
+#   ### Header
+#   cat("An Opn object with: \n")
+#   coo_len <- sapply(Opn$coo, nrow)
+#   coo_closed <- sapply(Opn$coo, is_closed)
+#   # number of outlines
+#   cat(" - $coo:", coo_nb, "open outlines")
+#   # number of coordinates
+#   cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n", sep="")
+#   # number of landmarks
+#   if (length(Opn$ldk) != 0) {
+#     cat(" - $ldk:", length(Opn$ldk[[1]]), "landmark(s) defined\n")
+#   } else {
+#     #     cat(" - No landmark defined\n")
+#   }
+#   # we print the fac
+#   .print.fac(Opn$fac)
+# }
 
 # OpnCoe ---------------------------------------------------------
 #' Builds an OpnCoe object
