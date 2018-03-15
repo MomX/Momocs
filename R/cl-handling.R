@@ -615,7 +615,7 @@ chop.Coe <- function(.data, fac){
 #' b <- filter(bot, type=="beer")
 #' combine(w, b)
 #' # or, if you have many levels
-#' bot_s <- chop(bot, type)
+#' bot_s <- chop(bot, ~type)
 #' bot_s$whisky
 #' # note that you can apply something (single function or a more
 #' # complex pipe) then combine everyone, since combine also works on lists
