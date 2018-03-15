@@ -137,7 +137,7 @@ stack.Coo <-
     }
     # but if fac is provided
     if (!missing(fac)){
-      fac <- Coo$fac[, fac]
+      fac <- fac_dispatcher(Coo, fac)
       cols <- NA
       borders <- palette(nlevels(fac))[fac]
     }
@@ -281,8 +281,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' @param fac a factor within the $fac slot for colors
 #' @param palette a color \link{palette}
 #' @param coo_sample if not NULL the number of point per shape to display (to plot quickly)
-#' @param names whether to plot names or not. If TRUE uses shape names, a column name or number from
-#'  $fac can be supllied, or even a character of the same length of the Coo
+#' @param names whether to plot names or not. If TRUE uses shape names, or something for [fac_dispatcher]
 #' @param cex.names a cex for the names
 #' @param points \code{logical} (for Ldk) whether to draw points
 #' @param points.pch (for Ldk) and a pch for these points
@@ -321,10 +320,11 @@ panel.Out <- function(x, dim, cols, borders, fac,
   }
 
   if (!missing(fac)) {
+    f <- fac_dispatcher(Coo, fac)
     if (missing(cols)) {
-      cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[, fac]]
+      cols <- palette(nlevels(f))[f]
     } else {
-      cols <- cols[Coo$fac[, fac]]
+      cols <- cols[f]
     }
   }
   if (missing(cols)) {
@@ -346,14 +346,9 @@ panel.Out <- function(x, dim, cols, borders, fac,
     if (is.logical(names)) {
       text(pos[, 1], pos[, 2], labels = names(Coo), cex = cex.names)
     } else {
-      if (length(names) != length(Coo)) {
-        text(pos[, 1], pos[, 2],
-             labels = Coo$fac[, names], cex = cex.names)
-
-      } else {
-        text(pos[, 1], pos[, 2],
-             labels = names, cex = cex.names)
-      }
+      names <- fac_dispatcher(Coo, names) %>% as.character()
+      text(pos[, 1], pos[, 2],
+           labels = names, cex = cex.names)
     }
   }
 }
@@ -383,12 +378,11 @@ panel.Opn <- function(x, cols, borders, fac,
     }
   }
   if (!missing(fac)) {
-
+    f <- fac_dispatcher(Coo, fac)
     if (missing(cols)) {
-      cols <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[,
-                                                       fac]]
+      cols <- palette(nlevels(f))[f]
     } else {
-      cols <- cols[Coo$fac[, fac]]
+      cols <- cols[f]
     }
   }
   if (missing(cols)) {
@@ -436,11 +430,11 @@ panel.Ldk <- function(x, cols, borders, fac,
     borders <- cols
 
   if (!missing(fac)) {
+    f <- fac_dispatcher(Coo, fac)
     if (missing(borders)) {
-      borders <- palette(nlevels(Coo$fac[, fac]))[Coo$fac[,
-                                                          fac]]
+      borders <- palette(nlevels(f))[f]
     } else {
-      borders <- borders[Coo$fac[, fac]]
+      borders <- borders[f]
     }
   }
   if (missing(borders)) {

@@ -337,7 +337,7 @@ get_chull_area <- function (x, fac, xax = 1, yax = 2) {
     return(coo_area(coo_chull(xy)))
   }
   # else... if a fac is provided
-  fac <- x$fac[, fac]
+  fac <- fac_dispatcher(x, fac)
   x <- x$x[, c(xax, yax)]
   # we prepare the list
   res <- list()
@@ -373,7 +373,7 @@ get_chull_volume <- function (x, fac, xax = 1, yax = 2, zax = 3) {
     return(res)
   }
   # else...fac provided
-  fac <- x$fac[, fac]
+  fac <- fac_dispatcher(x, fac)
   # we prepare the list
   x <- x$x[, c(xax, yax, zax)]
   res <- list()

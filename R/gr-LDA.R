@@ -155,21 +155,24 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
   # most of it copied from plot.PCA
     # fac provided ------------------------
     # fac provided, as formula ============
-    if (class(fac) == "formula") {
-      column_name <- attr(terms(fac), "term.labels")
-      # we check for wrong formula
-      if (any(is.na(match(column_name, colnames(x$fac)))))
-        stop("formula provided must match with $fac column names")
-      # otherwise we retrive the column(s)
-      fac <- x$fac[, column_name]
-      # multicolumn/fac case
-      if (is.data.frame(fac))
-        fac <- factor(apply(fac, 1, paste, collapse="_"))
-    }
-    # fac provided, as column name or id
-    if (length(fac)==1){
-      fac <- x$fac[, fac]
-    }
+    # if (class(fac) == "formula") {
+    #   column_name <- attr(terms(fac), "term.labels")
+    #   # we check for wrong formula
+    #   if (any(is.na(match(column_name, colnames(x$fac)))))
+    #     stop("formula provided must match with $fac column names")
+    #   # otherwise we retrive the column(s)
+    #   fac <- fac_dispatcher(x, fac)
+    #   fac <- x$fac[, column_name]
+    #   # multicolumn/fac case
+    #   if (is.data.frame(fac))
+    #     fac <- factor(apply(fac, 1, paste, collapse="_"))
+    # }
+    # # fac provided, as column name or id
+    # if (length(fac)==1){
+    #   fac <- x$fac[, fac]
+    # }
+
+  fac <- fac_dispatcher(x, fac)
 
   if (nlevels(fac) <= 2) { # case of 2 levels and a single LD
     xy <- x$mod.pred$x[, 1, drop=FALSE]

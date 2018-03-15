@@ -187,7 +187,7 @@ mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
 mshapes.PCA <- function(x, fac, ...){
   # cehck for single individuals within a group..
   x0 <- x
-  f <- x$fac[, fac]
+  f <- fac_dispatcher(x, fac)
   x <- x$x
   res <- matrix(NA, nrow=nlevels(f), ncol=ncol(x),
                 dimnames=list(levels(f), colnames(x)))

@@ -42,8 +42,7 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{coo_sample}{if not NULL the number of point per shape to display (to plot quickly)}
 
-\item{names}{whether to plot names or not. If TRUE uses shape names, a column name or number from
-$fac can be supllied, or even a character of the same length of the Coo}
+\item{names}{whether to plot names or not. If TRUE uses shape names, or something for \link{fac_dispatcher}}
 
 \item{cex.names}{a cex for the names}
 

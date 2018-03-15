@@ -88,13 +88,13 @@ LDA.default <- function(x, fac, retain, ...) {
 #' @export
 LDA.OutCoe <- function(x, fac, retain, ...) {
   #  stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
-  LDA(x$coe, x$fac[, fac])
+  LDA(x$coe, fac_dispatcher(x, fac))
 }
 
 #' @export
 LDA.Coe <- function(x, fac, retain, ...) {
-  stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
-  # LDA(x$coe, x$fac[, fac])
+  # stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
+  LDA(x$coe, fac_dispatcher(x, fac))
 }
 
 #' @rdname LDA

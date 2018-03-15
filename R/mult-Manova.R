@@ -312,7 +312,7 @@ MANOVA_PW.PCA <- function(x,
 #   if (missing(fac))
 #     stop("'fac' must be provided")
 #   if (!is.factor(fac)) {
-#     fac <- Coe$fac[, fac]
+#     fac <- fac_dispatcher(Coe, fac)
 #   }
 #   # we get all combinations, and prepare the loop
 #   pws <- t(combn(levels(fac), 2))
