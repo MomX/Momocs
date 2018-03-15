@@ -209,8 +209,6 @@ bp <- bot \%>\% efourier \%>\% PCA
 plot(bp, f)
 # numeric fac are allowed
 plot(bp, "cs", cex=3, color.legend=TRUE)
-# numeric can also be passed on the fly
-plot(bp, 1:40, cex=2)
 # formula allows combinations of factors
 plot(bp, ~type+z)
 

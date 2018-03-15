@@ -116,8 +116,6 @@
 #' plot(bp, f)
 #' # numeric fac are allowed
 #' plot(bp, "cs", cex=3, color.legend=TRUE)
-#' # numeric can also be passed on the fly
-#' plot(bp, 1:40, cex=2)
 #' # formula allows combinations of factors
 #' plot(bp, ~type+z)
 #'
@@ -325,12 +323,13 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
   if (is.numeric(fac)){
     if (missing(col)){
       if (missing(palette)){
-        palette <- col_gallus
+        palette <- pal_qual
       }
       cols_breaks = 1000
       cols_all <- palette(cols_breaks)
       cols_id <- fac  %>% .normalize()  %>% cut(breaks = cols_breaks)  %>% as.numeric()
       col <- cols_all[cols_id]
+      col.groups <- pal_qual(1)
     }
   }
   # if Rcolors are passed...

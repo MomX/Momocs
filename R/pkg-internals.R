@@ -97,7 +97,7 @@
   if (is.numeric(fac) && length(fac)==1){
     if (fac > ncol(x$fac))
       stop("invalid column id")
-    return(x$fac[, fac])
+    return(x$fac[, fac] %>% unlist)
   }
 }
 # .fac_dispatcher(bot, "bot") # expect invalid
