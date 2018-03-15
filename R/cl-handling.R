@@ -916,7 +916,6 @@ rw_fac <- function(x, fac, from, to){
 #' @note if N is too ambitious the original object is returned with a message
 #' @family handling functions
 #' @examples
-#' data(trilo)
 #' table(trilo, "onto")
 #' at_least(trilo, "onto", 9)
 #' at_least(trilo, "onto", 16)

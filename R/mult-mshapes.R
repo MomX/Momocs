@@ -91,7 +91,7 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
         return(efourier_i(xf, nb.pts = nb.pts))
     }
 
-    f <- OutCoe$fac[, fac]
+    f <- .fac_dispatcher(x, fac)
     fl <- levels(f)
     shp <- list()
     rows <- numeric()

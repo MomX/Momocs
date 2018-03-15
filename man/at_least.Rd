@@ -20,7 +20,6 @@ Examples are self-speaking.
 if N is too ambitious the original object is returned with a message
 }
 \examples{
-data(trilo)
 table(trilo, "onto")
 at_least(trilo, "onto", 9)
 at_least(trilo, "onto", 16)
