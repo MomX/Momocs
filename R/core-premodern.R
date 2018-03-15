@@ -54,22 +54,18 @@ d.Out <- function(x, id1, id2){
 #' @return a \link{TraCoe} object, or a raw data.frame
 #' @family premodern
 #' @examples
-#' # lets write a custom function
-#' coo_ellipse_area <- function(x){
-#'   prod(coo_lw(x))*pi
-#' }
-#' bm <- measure(bot, coo_area, coo_perim, coo_ellipse_area)
+#' bm <- measure(bot, coo_area, coo_perim)
 #' bm
 #' bm$coe
 #'
 #' # how to use arguments, eg with the d() function
 #' measure(wings, coo_area, d(1, 3), d(4, 5))
 #'
-#' # alternatively
-#' measure(bot$coo, coo_area, coo_perim, coo_ellipse_area)
+#' # alternatively, to get a data_frame
+#' measure(bot$coo, coo_area, coo_perim)
 #'
-#' # and also
-#' measure(bot[1], coo_area, coo_perim, coo_ellipse_area)
+#' # and also, to get a data_frame (one row)
+#' measure(bot[1], coo_area, coo_perim)
 #' @export
 measure <- function(x, ...){
   UseMethod("measure")
@@ -94,7 +90,7 @@ measure.list <- function(x, ...){
   for (i in seq_along(funs)){
     l[[i]] <- sapply(x, funs[i])
   }
-  l %>% dplyr::as_data_frame() %>% return()
+  data.frame(l) %>% dplyr::as_data_frame() %>% return
 }
 
 #' @export
@@ -113,9 +109,9 @@ measure.Coo <- function(x, ...){
       l[[i]] <- sapply(x$coo, funs[i])
     }
   }
-  coe <- l %>% dplyr::as_data_frame
-  fac <- dplyr::as_data_frame(x$fac)
-  TraCoe(coe = l,
+  coe <- data.frame(l) %>% dplyr::as_data_frame()
+  fac <- x$fac
+  TraCoe(coe = coe,
          fac = fac)
 }
 

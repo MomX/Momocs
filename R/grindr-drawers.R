@@ -134,8 +134,8 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, pal=pal
   }
 
   # dispatch drawer argument
-  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
-  cexs    <- this_dispatch(f, cex)
+  cols    <- this_dispatcher(f, col) %>% pal_alpha(transp)
+  cexs    <- this_dispatcher(f, cex)
   pchs    <- this_dispatcher(f, pch)
 
   # gr parameters

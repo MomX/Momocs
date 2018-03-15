@@ -22,22 +22,18 @@ without arguments (eg \link{coo_area}) have to be passed without brackets but
 functions with arguments (eg \link{d}) have to be passed "entirely". See examples.
 }
 \examples{
-# lets write a custom function
-coo_ellipse_area <- function(x){
-  prod(coo_lw(x))*pi
-}
-bm <- measure(bot, coo_area, coo_perim, coo_ellipse_area)
+bm <- measure(bot, coo_area, coo_perim)
 bm
 bm$coe
 
 # how to use arguments, eg with the d() function
 measure(wings, coo_area, d(1, 3), d(4, 5))
 
-# alternatively
-measure(bot$coo, coo_area, coo_perim, coo_ellipse_area)
+# alternatively, to get a data_frame
+measure(bot$coo, coo_area, coo_perim)
 
-# and also
-measure(bot[1], coo_area, coo_perim, coo_ellipse_area)
+# and also, to get a data_frame (one row)
+measure(bot[1], coo_area, coo_perim)
 }
 \seealso{
 Other premodern: \code{\link{coo_truss}}
