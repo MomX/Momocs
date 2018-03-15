@@ -960,6 +960,7 @@ coo_intersect_segment.Coo <- function(coo, seg, center=TRUE){
 #' @family coo_ intersect
 #' @examples
 #' coo <- bot[1] %>% coo_center %>% coo_scale
+#' coo_plot(coo)
 #' coo %>% coo_intersect_angle(pi/7) %>%
 #'    coo[., , drop=FALSE] %>% points(col="red")
 #'
