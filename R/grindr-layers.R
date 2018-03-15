@@ -31,7 +31,7 @@
 #' op <- olea %>%
 #' mutate(s=coo_area(.)) %>%
 #' filter(var != "Cypre") %>%
-#' chop(view) %>% lapply(opoly, 5, nb.pts=90) %>%
+#' chop(~view) %>% lapply(opoly, 5, nb.pts=90) %>%
 #' combine %>% PCA
 #' op$fac$s %<>% as.character() %>% as.numeric()
 #'
@@ -67,8 +67,8 @@ plot_PCA <- function(x, f, axes=c(1, 2), palette=col_summer){
     f <- factor(rep(1, nrow(x$x)))
     colors_groups <- rep(par("fg"), nlevels(f))
     colors_rows   <- colors_groups[f]
-  } else {         # something provided, handle with .fac_dispatcher
-    f <- x %>% .fac_dispatcher(f)
+  } else {         # something provided, handle with fac_dispatcher
+    f <- x %>% fac_dispatcher(f)
     if (is.numeric(f)){
       colors_groups <- NA
       colors_rows <- f %>% .normalize()  %>%

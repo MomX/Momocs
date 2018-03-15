@@ -54,7 +54,7 @@ MANOVA.OpnCoe <- function(x, fac, test = "Hotelling", retain,
   if (missing(fac))
     stop("'fac' must be provided")
 
-  fac <- .fac_dispatcher(x, fac)
+  fac <- fac_dispatcher(x, fac)
 
   x <- OpnCoe$coe
   if (missing(drop))
@@ -77,7 +77,7 @@ MANOVA.OutCoe <- function(x, fac, test = "Hotelling", retain, drop) {
   if (missing(fac))
     stop("'fac' must be provided")
 
-  fac <- .fac_dispatcher(x, fac)
+  fac <- fac_dispatcher(x, fac)
 
   x <- OutCoe$coe
   cph <- NULL
@@ -161,7 +161,7 @@ MANOVA.PCA <- function(x, fac, test = "Hotelling", retain=0.99, drop) {
   if (missing(fac))
     stop("'fac' must be provided")
 
-  fac <- .fac_dispatcher(x, fac)
+  fac <- fac_dispatcher(x, fac)
 
   # we grab the PCs to capture retain% of the variance
   if (retain<1){
@@ -237,7 +237,7 @@ MANOVA_PW.PCA <- function(x,
   if (missing(fac))
     stop("'fac' must be provided")
 
-  fac <- .fac_dispatcher(x, fac)
+  fac <- fac_dispatcher(x, fac)
 
   # we grab the PCs to capture retain% of the variance
   if (retain<1){

@@ -61,7 +61,7 @@ draw_polygon <- function(coo, f, col=par("fg"), fill=NA,  lwd=1, lty=1, transp=0
   # handle factor
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
-      f <- .fac_dispatcher(coo, f)
+      f <- fac_dispatcher(coo, f)
 
     # handle palette
     if (missing(col)){
@@ -76,12 +76,12 @@ draw_polygon <- function(coo, f, col=par("fg"), fill=NA,  lwd=1, lty=1, transp=0
 
   # dispatch drawer argument
   if (missing(fill))
-    fills <- this_dispatch(f, pal_alpha(par("bg"), 1))
+    fills <- this_dispatcher(f, pal_alpha(par("bg"), 1))
   else
-    fills <- this_dispatch(f, fill) %>% pal_alpha(transp)
-  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
-  lwds    <- this_dispatch(f, lwd)
-  ltys    <- this_dispatch(f, lty)
+    fills <- this_dispatcher(f, fill) %>% pal_alpha(transp)
+  cols    <- this_dispatcher(f, col) %>% pal_alpha(transp)
+  lwds    <- this_dispatcher(f, lwd)
+  ltys    <- this_dispatcher(f, lty)
 
   # gr parameters
   old <- par(xpd=NA)
@@ -122,7 +122,7 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, pal=pal
   # handle factor
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
-      f <- .fac_dispatcher(coo, f)
+      f <- fac_dispatcher(coo, f)
 
     # handle palette
     if (missing(col)){
@@ -136,7 +136,7 @@ draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, pal=pal
   # dispatch drawer argument
   cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
   cexs    <- this_dispatch(f, cex)
-  pchs    <- this_dispatch(f, pch)
+  pchs    <- this_dispatcher(f, pch)
 
   # gr parameters
   old <- par(xpd=NA)
@@ -179,7 +179,7 @@ draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, transp=0, pal=pal_q
   # handle factor
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
-      f <- .fac_dispatcher(coo, f)
+      f <- fac_dispatcher(coo, f)
 
     # handle palette
     if (missing(col)){
@@ -191,9 +191,9 @@ draw_lines <- function(coo,  f, col=par("fg"), lwd=1, lty=1, transp=0, pal=pal_q
   }
 
   # dispatch drawer argument
-  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
-  lwds    <- this_dispatch(f, lwd)
-  ltys    <- this_dispatch(f, lty)
+  cols    <- this_dispatcher(f, col) %>% pal_alpha(transp)
+  lwds    <- this_dispatcher(f, lwd)
+  ltys    <- this_dispatcher(f, lty)
 
   # gr parameters
   old <- par(xpd=NA)
@@ -227,7 +227,7 @@ draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, transp=0, pal=p
   # handle factor
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
-      f <- .fac_dispatcher(coo, f)
+      f <- fac_dispatcher(coo, f)
 
     # handle palette
     if (missing(col)){
@@ -239,9 +239,9 @@ draw_centroid <- function(coo, f, col=par("fg"), pch=3, cex=0.5, transp=0, pal=p
   }
 
   # dispatch drawer argument
-  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
-  cexs    <- this_dispatch(f, cex)
-  pchs    <- this_dispatch(f, pch)
+  cols    <- this_dispatcher(f, col) %>% pal_alpha(transp)
+  cexs    <- this_dispatcher(f, cex)
+  pchs    <- this_dispatcher(f, pch)
 
   # gr parameters
   old <- par(xpd=NA)
@@ -283,7 +283,7 @@ draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, transp=0, p
   # handle factor
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
-      f <- .fac_dispatcher(coo, f)
+      f <- fac_dispatcher(coo, f)
 
     # handle palette
     if (missing(col)){
@@ -295,9 +295,9 @@ draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, transp=0, p
   }
 
   # dispatch drawer argument
-  labels  <- this_dispatch(f, label)
-  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
-  cexs    <- this_dispatch(f, cex)
+  labels  <- this_dispatcher(f, label)
+  cols    <- this_dispatcher(f, col) %>% pal_alpha(transp)
+  cexs    <- this_dispatcher(f, cex)
 
   # gr parameters
   old <- par(xpd=NA)
@@ -395,7 +395,7 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, transp=0,
   # handle factor
   if (!missing(f)){ # factor case for f is native: if (is.factor(f)) f <- f
     if (is_Coo(coo))
-      f <- .fac_dispatcher(coo, f)
+      f <- fac_dispatcher(coo, f)
 
     # handle palette
     if (missing(col)){
@@ -407,9 +407,9 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, transp=0,
   }
 
   # dispatch drawer argument
-  cols    <- this_dispatch(f, col) %>% pal_alpha(transp)
-  lwds    <- this_dispatch(f, lwd)
-  ltys    <- this_dispatch(f, lty)
+  cols    <- this_dispatcher(f, col) %>% pal_alpha(transp)
+  lwds    <- this_dispatcher(f, lwd)
+  ltys    <- this_dispatcher(f, lty)
 
   # gr parameters
   old <- par(xpd=NA)

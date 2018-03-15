@@ -91,7 +91,7 @@ breed.Coe <- function(x, fac, size, rate=1, ...){
     x$fac <- dplyr::data_frame()
     return(x)
   } else {
-    f <- .fac_dispatcher(x, fac)
+    f <- fac_dispatcher(x, fac)
     # breed group wise
     x2 <- x %>% chop(f) %>% lapply(breed, size=size, rate=rate, ...)
     # retrieves all matrices of coefficients and rbind them

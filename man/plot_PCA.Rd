@@ -37,7 +37,7 @@ efourier(6) \%>\% PCA
 op <- olea \%>\%
 mutate(s=coo_area(.)) \%>\%
 filter(var != "Cypre") \%>\%
-chop(view) \%>\% lapply(opoly, 5, nb.pts=90) \%>\%
+chop(~view) \%>\% lapply(opoly, 5, nb.pts=90) \%>\%
 combine \%>\% PCA
 op$fac$s \%<>\% as.character() \%>\% as.numeric()
 

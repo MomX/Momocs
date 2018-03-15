@@ -68,49 +68,6 @@
   paste0("  - also: ", ot) %>% cat
 }
 
-
-# handles fac grabbing via formula or $fac column name
-.fac_dispatcher <- function(x, fac){
-  # factor case
-  if (is.factor(fac))
-    return(fac)
-  # formula case
-  if (class(fac) == "formula") {
-    column_name <- attr(terms(fac), "term.labels")
-    if (any(is.na(match(column_name, colnames(x$fac)))))
-      stop("formula provided must match with $fac column names")
-    fac <- x$fac[, column_name]
-    if (is.data.frame(fac))
-      fac <- factor(apply(fac, 1, paste, collapse = "_"))
-    return(fac)
-  }
-  # column case as character
-  if (is.character(fac) && length(fac)==1) {
-    if (!(fac %in% colnames(x$fac)))
-      stop("invalid column name")
-    fac <- x$fac[, fac]
-    if (is.data.frame(fac)) #dplyr data_frame do not drop
-      fac <- unlist(fac)
-    return(fac)
-  }
-  # column case as numeric for column id
-  if (is.numeric(fac) && length(fac)==1){
-    if (fac > ncol(x$fac))
-      stop("invalid column id")
-    return(x$fac[, fac] %>% unlist)
-  }
-}
-# .fac_dispatcher(bot, "bot") # expect invalid
-# .fac_dispatcher(bot, 1)
-# .fac_dispatcher(bot, "type")
-# .fac_dispatcher(bot, ~type)
-
-
-# refactor factors in a data.frame (mainly to drop levels) but respect anything else
-# .refactor <- function(df) {
-#   data.frame(lapply(df, function(x) if (is.factor(x)) factor(x) else x))
-# }
-
 ##### Various utilities
 
 # check and errors -----

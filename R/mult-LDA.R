@@ -119,7 +119,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   PCA <- x
   f0 <- fac #<- prepare_fac(x, fac)
   #fac handling
-  fac <- .fac_dispatcher(x, fac)
+  fac <- fac_dispatcher(x, fac)
 
   if (.is_verbose()) message(retain, " PC retained")
   X <- PCA$x[, 1:retain]

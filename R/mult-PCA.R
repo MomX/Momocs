@@ -209,8 +209,7 @@ get_pairs <- function(x, fac, range){UseMethod("get_pairs")}
 #' @export
 get_pairs.Coe <- function(x, fac, range){
   # we check and prepare
-  if (missing(fac)) stop("'fac' must be provided")
-  fac <- x$fac[, fac]
+  fac <- fac_dispatcher(x, fac)
   if (nlevels(fac) != 2) stop("more than two levels for the 'fac' provided")
   tab <- table(fac)
   if (length(unique(tab))!=1) stop("some mismatches between pairs")
@@ -226,8 +225,7 @@ get_pairs.Coe <- function(x, fac, range){
 #' @export
 get_pairs.PCA <- function(x, fac, range){
   # we check and prepare
-  if (missing(fac)) stop("'fac' mus be provided")
-  fac <- x$fac[, fac]
+  fac <- fac_dispatcher(x, fac)
   if (nlevels(fac) != 2) stop("more than two levels for the 'fac' provided")
   tab <- table(fac)
   if (length(unique(tab))!=1) stop("some mismatches between pairs")

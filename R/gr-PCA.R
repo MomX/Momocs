@@ -276,10 +276,7 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     #   fac <- PCA$fac[, fac]
     # }
 
-    fac <- .fac_dispatcher(x, fac)
-
-
-
+    fac <- fac_dispatcher(x, fac)
 
     # if fac is a factor
     if (is.factor(fac)){
@@ -471,7 +468,7 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
       ### fac provided
       # fac provided, as formula
 
-      fac <- .fac_dispatcher(x, fac)
+      fac <- fac_dispatcher(x, fac)
 
       df <- data.frame(PCA$x[, nax])
       df <- df %>% seq_along %>%

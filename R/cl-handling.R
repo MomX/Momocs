@@ -1,5 +1,75 @@
 ##### Combining or subsetting Momocs' classes
 
+# fac_dispatcher
+#' Brew and serve fac from Momocs object
+#'
+#' Ease various specifications for fac specification
+#' when passed to Momocs objects. Intensively used (internally).
+#'
+#' `fac` can be:
+#'  * a factor, passed on the fly
+#'  * a column id from `$fac`
+#'  * a column name from `fac`
+#'  * a formula (preferred) in the form: `~column_name` (from `$fac`, no quotes)
+#'
+#'
+#' @param x a Momocs object (any `Coo`, `Coe`, `PCA`, etc.)
+#' @param fac a specification to extract from `fac`
+#'
+#' @return a prepared `factor` (or a `numeric`). See examples
+#' @family handling functions
+#' @examples
+#'
+#' bot <- mutate(bot, s=rnorm(40), fake=factor(rep(letters[1:4], 10)))
+#'
+#' # factor, on the fly
+#' fac_dispatcher(bot, factor(rep(letters[1:4], 10)))
+#'
+#' # column id
+#' fac_dispatcher(bot, 1)
+#'
+#' # column name
+#' fac_dispatcher(bot, "type")
+#' # same, numeric case
+#' fac_dispatcher(bot, "s")
+#'
+#' # formula interface
+#' fac_dispatcher(bot, ~type)
+#'
+#' # formula interface + interaction on the fly
+#' fac_dispatcher(bot, ~type+fake)
+#' @export
+fac_dispatcher <- function(x, fac){
+  # factor case
+  if (is.factor(fac))
+    return(fac)
+  # formula case
+  if (class(fac) == "formula") {
+    column_name <- attr(terms(fac), "term.labels")
+    if (any(is.na(match(column_name, colnames(x$fac)))))
+      stop("formula provided must match with $fac column names")
+    fac <- x$fac[, column_name]
+    if (is.data.frame(fac))
+      fac <- factor(apply(fac, 1, paste, collapse = "_"))
+    return(fac)
+  }
+  # column case as character
+  if (is.character(fac) && length(fac)==1) {
+    if (!(fac %in% colnames(x$fac)))
+      stop("invalid column name")
+    fac <- x$fac[, fac]
+    if (is.data.frame(fac)) #dplyr data_frame do not drop
+      fac <- unlist(fac)
+    return(fac)
+  }
+  # column case as numeric for column id
+  if (is.numeric(fac) && length(fac)==1){
+    if (fac > ncol(x$fac))
+      stop("invalid column id")
+    return(x$fac[, fac] %>% unlist)
+  }
+}
+
 
 # subsetize -------------------------------
 # #' Subsetize various Momocs objects
@@ -554,7 +624,7 @@ chop.Coo <- function(.data, fac){
   # e <- substitute(fac)
   # f <- eval(e, Coo$fac, parent.frame())
   if (!is.factor(fac))
-    f <- .fac_dispatcher(.data, fac)
+    f <- fac_dispatcher(.data, fac)
   else
     f <- fac
   fl <- levels(f)
@@ -782,7 +852,7 @@ combine.OpnCoe <- function(...) {
 #' dissolve(wbf, 2)
 #'
 #' # or using chop (yet combine here makes no sense)
-#' bw <- bot %>% chop(type) %>% lapply(efourier, 10) %>% combine
+#' bw <- bot %>% chop(~type) %>% lapply(efourier, 10) %>% combine
 #' bw %>% dissolve(1)
 #' bw %>% dissolve(2)
 #' @export
@@ -922,7 +992,7 @@ rw_fac <- function(x, fac, from, to){
 #' at_least(trilo, "onto", 2000) # too ambitious !
 #' @export
 at_least <- function(x, fac, N){
-  n <- .fac_dispatcher(x, fac)
+  n <- fac_dispatcher(x, fac)
   retain <- n %in% names(which(table(n) >= N))
   if (!any(retain)) {
     message("no group with at least ", N, " indidivuals")

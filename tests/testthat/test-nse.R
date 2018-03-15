@@ -2,7 +2,29 @@ context("nse")
 
 x <- Out(a2l(replicate(50, matrix(1:4, 2, 2))),
          fac=dplyr::data_frame(a=rep(letters[1:5], 10),
-                        b=rep(LETTERS[1:5], each=10)))
+                               b=rep(LETTERS[1:5], each=10)))
+
+
+
+test_that("fac_dispatcher works fine", {
+  bot <- mutate(bot, s=rnorm(40), fake=factor(rep(letters[1:4], 10)))
+  # factor, on the fly
+  expect_true(fac_dispatcher(bot, factor(rep(letters[1:4], 10))) %>% is.factor)
+
+  # column id
+  expect_true(fac_dispatcher(bot, 1) %>% is.factor)
+
+  # column name
+  expect_true(fac_dispatcher(bot, "type") %>% is.factor)
+  # same, numeric case
+  expect_true(fac_dispatcher(bot, "s") %>% is.numeric)
+
+  # formula interface
+  expect_true(fac_dispatcher(bot, ~type) %>% is.factor)
+
+  # formula interface + interaction on the fly
+  expect_true(fac_dispatcher(bot, ~type+fake) %>% is.factor)
+})
 
 # prepare_fac -----
 # test_that("prepare_fac works fine", {
@@ -128,11 +150,11 @@ test_that("subsetize works fine", {
 
 # at_least
 xx <- Out(a2l(replicate(50, matrix(1:4, 2, 2))),
-         fac=dplyr::data_frame(a=rep(letters[1:5], 10),
-                        b=factor(c(rep(LETTERS[1], 5),
-                            rep(LETTERS[2], 10),
-                            rep(LETTERS[3], 15),
-                            rep(LETTERS[4], 20)))))
+          fac=dplyr::data_frame(a=rep(letters[1:5], 10),
+                                b=factor(c(rep(LETTERS[1], 5),
+                                           rep(LETTERS[2], 10),
+                                           rep(LETTERS[3], 15),
+                                           rep(LETTERS[4], 20)))))
 test_that("at_least works fine", {
   expect_equal(at_least(xx, "b", 5)$b %>% unique() %>% length(), 4)
   expect_equal(at_least(xx, "b", 6)$b %>% unique() %>% length(), 3)

@@ -8,7 +8,7 @@ as_palette <- function(x){
   x
 }
 
-this_dispatch <- function(f, this){
+this_dispatcher <- function(f, this){
   # non factor case
   if (!is.factor(f) && length(f)==length(this))
     return(this)
