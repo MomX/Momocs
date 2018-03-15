@@ -156,7 +156,7 @@
 }
 
 # numbers misc ----
-
+#' @export
 .normalize <- function(x, min.x, max.x) {
   # damn long but default arguments are not accepted
   if (missing(min.x))
@@ -177,6 +177,7 @@
   return(res)
 }
 
+#' @export
 .which.out <- function(x, conf=1e-4){
   out <- which(dnorm(x, mean(x), sd(x))< conf)
   if(length(out)==0) {
