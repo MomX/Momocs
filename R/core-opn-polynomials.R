@@ -35,6 +35,8 @@
 #' op
 #' # shape reconstruction
 #' opi <- opoly_i(op)
+#' coo_plot(o)
+#' coo_draw(opi)
 #' lines(opi, col='red')
 #' # R2 for degree 1 to 10
 #' r <- numeric()
