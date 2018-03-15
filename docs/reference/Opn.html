@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -98,12 +101,12 @@
     
     <p>In Momocs, <code>Opn</code> classes objects are
 lists of <b>op</b>e<b>n</b> outlines, with optionnal components,
-on which generic methods such as plotting methods (e.g. stack)
+on which generic methods such as plotting methods (e.g. <a href='stack.Coo.html'>stack</a>)
 and specific methods (e.g. <a href='npoly.html'>npoly</a> can be applied.
 <code>Opn</code> objects are primarily <code><a href='Coo.html'>Coo</a></code> objects.</p>
     
 
-    <pre class="usage"><span class='fu'>Opn</span>(<span class='no'>x</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(), <span class='kw'>ldk</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
+    <pre class="usage"><span class='fu'>Opn</span>(<span class='no'>x</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>(), <span class='kw'>ldk</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -146,28 +149,49 @@ specifying the grouping structure</p></td>
 #&gt; [15] dfourier                  fgProcrustes             
 #&gt; [17] get_ldk                   npoly                    
 #&gt; [19] opoly                     panel                    
-#&gt; [21] print                     rearrange_ldk            
+#&gt; [21] pile                      rearrange_ldk            
 #&gt; see '?methods' for accessing help and source code</div><div class='input'><span class='co'># we load some open outlines. See ?olea for credits</span>
-<span class='no'>olea</span></div><div class='output co'>#&gt; An Opn object with: 
-#&gt;  - $coo: 210 open outlines (99 +/- 4 coordinates)
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 4): Aglan, Cypre, MouBo1, PicMa.
-#&gt;      'domes' (factor 2): cult, wild.
-#&gt;      'view' (factor 2): VD, VL.
-#&gt;      'ind' (factor 30): O1, O10, O11, O12, O13, O14, O15, O16, O17, O18, O19 ... + 19 more.</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>olea</span>)</div><div class='img'><img src='Opn-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># orthogonal polynomials</span>
+<span class='no'>olea</span></div><div class='output co'>#&gt; Opn (curves)
+#&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
+#&gt;   - 4 classifiers (in $fac): 
+#&gt; # A tibble: 210 x 4
+#&gt;    var   domes view  ind  
+#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt;  1 Aglan cult  VD    O10  
+#&gt;  2 Aglan cult  VL    O10  
+#&gt;  3 Aglan cult  VD    O11  
+#&gt;  4 Aglan cult  VL    O11  
+#&gt;  5 Aglan cult  VD    O12  
+#&gt;  6 Aglan cult  VL    O12  
+#&gt;  7 Aglan cult  VD    O13  
+#&gt;  8 Aglan cult  VL    O13  
+#&gt;  9 Aglan cult  VD    O14  
+#&gt; 10 Aglan cult  VL    O14  
+#&gt; # ... with 200 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>olea</span>)</div><div class='img'><img src='Opn-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># orthogonal polynomials</span>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>, <span class='kw'>degree</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='input'><span class='co'># we print the Coe</span>
 <span class='no'>op</span></div><div class='output co'>#&gt; An OpnCoe object [ opoly analysis ]
 #&gt; --------------------
 #&gt;  - $coe: 210 open outlines described
 #&gt;  - $baseline1: (-0.5; 0), $baseline2: (0.5; 0)
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 4): Aglan, Cypre, MouBo1, PicMa.
-#&gt;      'domes' (factor 2): cult, wild.
-#&gt;      'view' (factor 2): VD, VL.
-#&gt;      'ind' (factor 30): O1, O10, O11, O12, O13, O14, O15, O16, O17, O18, O19 ... + 19 more.</div><div class='input'><span class='co'># Let's do a PCA on it</span>
+#&gt; # A tibble: 210 x 4
+#&gt;    var   domes view  ind  
+#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt;  1 Aglan cult  VD    O10  
+#&gt;  2 Aglan cult  VL    O10  
+#&gt;  3 Aglan cult  VD    O11  
+#&gt;  4 Aglan cult  VL    O11  
+#&gt;  5 Aglan cult  VD    O12  
+#&gt;  6 Aglan cult  VL    O12  
+#&gt;  7 Aglan cult  VD    O13  
+#&gt;  8 Aglan cult  VL    O13  
+#&gt;  9 Aglan cult  VD    O14  
+#&gt; 10 Aglan cult  VL    O14  
+#&gt; # ... with 200 more rows</div><div class='input'><span class='co'># Let's do a PCA on it</span>
 <span class='no'>op.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>)
 <span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'domes'</span>)</div><div class='img'><img src='Opn-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'var'</span>)</div><div class='img'><img src='Opn-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># and now an LDA after a PCA</span>
-<span class='no'>olda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)</div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='co'># for CV table</span>
+<span class='no'>olda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)
+<span class='co'># for CV table</span>
 <span class='no'>olda</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;         classified
 #&gt; actual   Aglan Cypre MouBo1 PicMa

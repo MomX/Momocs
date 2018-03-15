@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -99,19 +102,16 @@
     <p>Performs multivariate analysis of variance on <a href='PCA.html'>PCA</a> objects.</p>
     
 
-    <pre class="usage"><span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='no'>retain</span>, <span class='no'>drop</span>, <span class='no'>verbose</span>)
+    <pre class="usage"><span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='no'>retain</span>, <span class='no'>drop</span>)
 
 <span class='co'># S3 method for OpnCoe</span>
-<span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='no'>retain</span>, <span class='no'>drop</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='no'>retain</span>, <span class='no'>drop</span>)
 
 <span class='co'># S3 method for OutCoe</span>
-<span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='no'>retain</span>, <span class='no'>drop</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='no'>retain</span>, <span class='no'>drop</span>)
 
 <span class='co'># S3 method for PCA</span>
-<span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='kw'>retain</span> <span class='kw'>=</span> <span class='fl'>0.99</span>, <span class='no'>drop</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>MANOVA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Hotelling"</span>, <span class='kw'>retain</span> <span class='kw'>=</span> <span class='fl'>0.99</span>, <span class='no'>drop</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -137,10 +137,6 @@ the highest number of PC axis to retain, or the proportion of the variance to ca
       <th>drop</th>
       <td><p>how many harmonics (or polynomials) to drop</p></td>
     </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>logical whether to print messages</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -154,7 +150,8 @@ summary.manova for more details and examples.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Needs a review and should be considered as experimental.</p>
+    <p>Needs a review and should be considered as experimental.
+Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -167,7 +164,7 @@ summary.manova for more details and examples.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># MANOVA</span>
-<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>MANOVA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>)</div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 7 were retained</span></div><div class='output co'>#&gt;           Df Hotelling-Lawley approx F num Df den Df    Pr(&gt;F)    
+<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>MANOVA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>)</div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 7 were retained</span></div><div class='output co'>#&gt;           Df Hotelling-Lawley approx F num Df den Df    Pr(&gt;F)    
 #&gt; fac        1           2.7631   12.631      7     32 1.202e-07 ***
 #&gt; Residuals 38                                                      
 #&gt; ---
@@ -225,7 +222,7 @@ summary.manova for more details and examples.</p>
  <span class='co'># we create a numeric variable, based on centroid size</span>
  <span class='no'>bot</span> <span class='kw'>%&lt;&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>cs</span><span class='kw'>=</span><span class='fu'><a href='coo_centsize.html'>coo_centsize</a></span>(<span class='no'>.</span>))
  <span class='co'># same pipe</span>
- <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'>MANOVA</span>(<span class='st'>"cs"</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' not provided and set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 7 were retained</span></div><div class='output co'>#&gt;           Df Hotelling-Lawley approx F num Df den Df Pr(&gt;F)
+ <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'>MANOVA</span>(<span class='st'>"cs"</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 7 were retained</span></div><div class='output co'>#&gt;           Df Hotelling-Lawley approx F num Df den Df Pr(&gt;F)
 #&gt; fac        1          0.32229   1.4733      7     32  0.212
 #&gt; Residuals 38                                               </div><div class='input'>
 </div></pre>

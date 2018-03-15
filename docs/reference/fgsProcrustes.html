@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -129,10 +132,20 @@ are still experimental and that your help is welcome.</p>
     <pre class="examples"><div class='input'><span class='no'>chaffp</span> <span class='kw'>&lt;-</span> <span class='fu'>fgsProcrustes</span>(<span class='no'>chaff</span>)</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==============                                                        |  20%  |                                                                              |============================                                          |  40%  |                                                                              |==========================================                            |  60%  |                                                                              |========================================================              |  80%  |                                                                              |======================================================================| 100%</div><div class='input'><span class='no'>chaffp</span></div><div class='output co'>#&gt; An LdkCoe [full Generalized Procrustes] object with: 
 #&gt; --------------------
 #&gt;  - $coo: 21 configuration of landmarks (172 +/- 0 coordinates)
-#&gt;  - $fac: 3 classifiers:
-#&gt;      'id' (factor 21): 571, 572, 573, 581, 582, 583, 590, 592, 594, 602, 604 ... + 10 more.
-#&gt;      'taxa' (factor 3): tax1, tax2, tax3.
-#&gt;      'centsize' (numeric): mean: 1480, sd: 207.</div><div class='input'><span class='no'>chaffp</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(<span class='st'>"taxa"</span>)</div><div class='img'><img src='fgsProcrustes-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+#&gt; # A tibble: 21 x 3
+#&gt;    id    taxa  centsize
+#&gt;    &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;
+#&gt;  1 571   tax1     1343.
+#&gt;  2 572   tax1     1279.
+#&gt;  3 573   tax1     1232.
+#&gt;  4 581   tax1     1296.
+#&gt;  5 582   tax1     1274.
+#&gt;  6 583   tax1     1189.
+#&gt;  7 590   tax1     1392.
+#&gt;  8 592   tax1     1313.
+#&gt;  9 594   tax1     1285.
+#&gt; 10 602   tax2     1520.
+#&gt; # ... with 11 more rows</div><div class='input'><span class='no'>chaffp</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(<span class='st'>"taxa"</span>)</div><div class='img'><img src='fgsProcrustes-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

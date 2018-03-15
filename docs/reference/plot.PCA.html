@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -198,9 +201,9 @@ or for every individual, see examples)</p></td>
     </tr>
     <tr>
       <th>pos.shp</th>
-      <td><p>passed to morphospace_positions, one of
+      <td><p>passed to <a href='morphospace_positions.html'>morphospace_positions</a>, one of
 <code>"range", "full", "circle", "xy", "range_axes", "full_axes"</code>. Or directly
-a matrix of positions. See morphospace_positions</p></td>
+a matrix of positions. See <a href='morphospace_positions.html'>morphospace_positions</a></p></td>
     </tr>
     <tr>
       <th>amp.shp</th>
@@ -445,8 +448,6 @@ More importantly, as of early 2018, I plan I complete rewrite of
 <span class='fu'>plot</span>(<span class='no'>bp</span>, <span class='no'>f</span>)
 <span class='co'># numeric fac are allowed</span>
 <span class='fu'>plot</span>(<span class='no'>bp</span>, <span class='st'>"cs"</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>color.legend</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='co'># numeric can also be passed on the fly</span>
-<span class='fu'>plot</span>(<span class='no'>bp</span>, <span class='fl'>1</span>:<span class='fl'>40</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>2</span>)
 <span class='co'># formula allows combinations of factors</span>
 <span class='fu'>plot</span>(<span class='no'>bp</span>, ~<span class='no'>type</span>+<span class='no'>z</span>)
 

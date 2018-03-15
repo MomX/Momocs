@@ -137,7 +137,6 @@ reference:
   - scree
   - rePCA
   - reLDA
-  - classify
   - classification_metrics
   - which_out
 

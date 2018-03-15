@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -123,21 +126,21 @@
   <code><a href='coo_calliper.html'>coo_calliper</a></code>, <code><a href='coo_centdist.html'>coo_centdist</a></code>,
   <code><a href='coo_center.html'>coo_center</a></code>, <code><a href='coo_centpos.html'>coo_centpos</a></code>,
   <code><a href='coo_close.html'>coo_close</a></code>, <code><a href='coo_down.html'>coo_down</a></code>,
-  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_enlarge.html'>coo_enlarge</a></code>,
-  <code><a href='coo_extract.html'>coo_extract</a></code>, <code><a href='coo_flip.html'>coo_flipx</a></code>,
-  <code><a href='coo_force2close.html'>coo_force2close</a></code>,
+  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_extract.html'>coo_extract</a></code>,
+  <code><a href='coo_flip.html'>coo_flipx</a></code>, <code><a href='coo_force2close.html'>coo_force2close</a></code>,
   <code><a href='coo_interpolate.html'>coo_interpolate</a></code>, <code><a href='coo_jitter.html'>coo_jitter</a></code>,
   <code><a href='coo_left.html'>coo_left</a></code>, <code><a href='coo_nb.html'>coo_nb</a></code>,
-  <code>coo_perim</code>, <code><a href='coo_rev.html'>coo_rev</a></code>,
-  <code><a href='coo_right.html'>coo_right</a></code>, <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>,
-  <code><a href='coo_rotate.html'>coo_rotate</a></code>, <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
+  <code>coo_perim</code>, <code><a href='coo_range.html'>coo_range</a></code>,
+  <code><a href='coo_rev.html'>coo_rev</a></code>, <code><a href='coo_right.html'>coo_right</a></code>,
+  <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>, <code><a href='coo_rotate.html'>coo_rotate</a></code>,
+  <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
   <code><a href='coo_samplerr.html'>coo_samplerr</a></code>, <code><a href='coo_sample.html'>coo_sample</a></code>,
   <code>coo_scale</code>, <code><a href='coo_shear.html'>coo_shearx</a></code>,
   <code><a href='coo_slice.html'>coo_slice</a></code>,
   <code><a href='coo_slidedirection.html'>coo_slidedirection</a></code>,
   <code><a href='coo_slidegap.html'>coo_slidegap</a></code>, <code><a href='coo_slide.html'>coo_slide</a></code>,
   <code><a href='coo_smoothcurve.html'>coo_smoothcurve</a></code>, <code><a href='coo_smooth.html'>coo_smooth</a></code>,
-  <code><a href='coo_template.html'>coo_template</a></code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
+  <code>coo_template</code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
   <code><a href='coo_trimbottom.html'>coo_trimbottom</a></code>, <code><a href='coo_trimtop.html'>coo_trimtop</a></code>,
   <code><a href='coo_trim.html'>coo_trim</a></code>, <code><a href='coo_up.html'>coo_up</a></code>,
   <code><a href='is_clockwise.html'>is_clockwise</a></code>, <code><a href='is_closed.html'>is_closed</a></code>,
@@ -155,48 +158,23 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_boundingbox</span>()</div><div class='output co'>#&gt;   x0  x1 y0   y1
-#&gt; 1 33 316 14 1102</div><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_boundingbox</span>()</div><div class='output co'>#&gt;                 x0  x1 y0   y1
-#&gt; brahma          33 316 14 1102
-#&gt; caney           51 312 26 1020
-#&gt; chimay          48 291 11  654
-#&gt; corona          90 277 16  822
-#&gt; deusventrue     36 323 53  939
-#&gt; duvel           58 298 11  617
-#&gt; franziskaner    54 268  5  870
-#&gt; grimbergen      40 292 25  790
-#&gt; guiness         67 297 17  759
-#&gt; hoegardeen      40 307 21 1069
-#&gt; jupiler         47 295 34 1018
-#&gt; kingfisher      71 258 18  736
-#&gt; latrappe        25 326 11  748
-#&gt; lindemanskriek  53 275 14  835
-#&gt; nicechouffe     74 267 17  703
-#&gt; pecheresse      54 290 36  964
-#&gt; sierranevada    59 275 26  680
-#&gt; tanglefoot      47 301 32  712
-#&gt; tauro           48 295 34 1018
-#&gt; westmalle       66 259 11  779
-#&gt; amrut           54 269 11  875
-#&gt; ballantines     35 313  3  710
-#&gt; bushmills       68 292 11  893
-#&gt; chivas          29 333 43  836
-#&gt; dalmore         32 325 34  706
-#&gt; famousgrouse    96 254 11  619
-#&gt; glendronach     72 275 19  841
-#&gt; glenmorangie    53 300 25 1011
-#&gt; highlandpark    39 295 16  722
-#&gt; jackdaniels     60 301 17  810
-#&gt; jb              40 305 29 1037
-#&gt; johnniewalker  132 218  5  343
-#&gt; magallan        75 258 20  779
-#&gt; makersmark       8 345  5  856
-#&gt; oban            72 280 37  899
-#&gt; oldpotrero      57 273  7  603
-#&gt; redbreast       97 256  7  433
-#&gt; tamdhu          44 304 49 1057
-#&gt; wildturkey      15 333 23 1120
-#&gt; yoichi          68 294 26  738</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_boundingbox</span>()</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt;      x0    x1    y0    y1
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1   33.  316.   14. 1102.</div><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_boundingbox</span>()</div><div class='output co'>#&gt; # A tibble: 40 x 4
+#&gt;       x0    x1    y0    y1
+#&gt;  * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1   33.  316.   14. 1102.
+#&gt;  2   51.  312.   26. 1020.
+#&gt;  3   48.  291.   11.  654.
+#&gt;  4   90.  277.   16.  822.
+#&gt;  5   36.  323.   53.  939.
+#&gt;  6   58.  298.   11.  617.
+#&gt;  7   54.  268.    5.  870.
+#&gt;  8   40.  292.   25.  790.
+#&gt;  9   67.  297.   17.  759.
+#&gt; 10   40.  307.   21. 1069.
+#&gt; # ... with 30 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

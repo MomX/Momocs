@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -100,34 +103,45 @@
 shape plots using the grindr approach. See examples and vignettes.</p>
     
 
-    <pre class="usage"><span class='fu'>draw_polygon</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>draw_polygon</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_outline</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='no'>...</span>)
+<span class='fu'>draw_outline</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_outlines</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='no'>...</span>)
+<span class='fu'>draw_outlines</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_points</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='no'>...</span>)
+<span class='fu'>draw_points</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_landmarks</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='no'>...</span>)
+<span class='fu'>draw_landmarks</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_lines</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
+<span class='fu'>draw_lines</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_centroid</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='no'>...</span>)
+<span class='fu'>draw_centroid</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_curve</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
+<span class='fu'>draw_curve</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_curves</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
+<span class='fu'>draw_curves</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_firstpoint</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"^"</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
+<span class='fu'>draw_firstpoint</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"^"</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
 
 <span class='fu'>draw_axes</span>(<span class='no'>coo</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#333333"</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='no'>...</span>)
 
 <span class='fu'>draw_labels</span>(<span class='no'>coo</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>nrow</span>(<span class='no'>coo</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>20</span>, <span class='no'>...</span>)
 
-<span class='fu'>draw_links</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='no'>links</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#99999955"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>draw_links</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='no'>links</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#99999955"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
+
+<span class='fu'>draw_title</span>(<span class='no'>coo</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>sub</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>/<span class='fl'>4</span>), <span class='kw'>font</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>1</span>),
+  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>200</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -141,11 +155,11 @@ shape plots using the grindr approach. See examples and vignettes.</p>
       <td><p>an optionnal factor specification to feed. See examples and vignettes.</p></td>
     </tr>
     <tr>
-      <th>border</th>
+      <th>col</th>
       <td><p>color (hexadecimal) to draw components</p></td>
     </tr>
     <tr>
-      <th>col</th>
+      <th>fill</th>
       <td><p>color (hexadecimal) to draw components</p></td>
     </tr>
     <tr>
@@ -157,12 +171,20 @@ shape plots using the grindr approach. See examples and vignettes.</p>
       <td><p>to draw components</p></td>
     </tr>
     <tr>
+      <th>transp</th>
+      <td><p><code>numeric</code> transparency (default:0, min:0, max:1)</p></td>
+    </tr>
+    <tr>
+      <th>pal</th>
+      <td><p>a palette to use if no col/border/etc. are provided. See <code>[palettes]</code></p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>additional options to feed core functions for each drawer</p></td>
     </tr>
     <tr>
       <th>cex</th>
-      <td><p>to draw components</p></td>
+      <td><p>to draw components ((<code>c(2, 1)</code> by default) for <code>draw_title</code>)</p></td>
     </tr>
     <tr>
       <th>pch</th>
@@ -184,6 +206,22 @@ shape plots using the grindr approach. See examples and vignettes.</p>
       <th>links</th>
       <td><p><code>matrix</code> of links to use to draw segments between landmarks. See <code>wings$ldk</code> for an example</p></td>
     </tr>
+    <tr>
+      <th>main</th>
+      <td><p><code>character</code> title (empty by default)</p></td>
+    </tr>
+    <tr>
+      <th>sub</th>
+      <td><p><code>character</code> subtitle (empty by default)</p></td>
+    </tr>
+    <tr>
+      <th>font</th>
+      <td><p><code>numeric</code> to feed text (<code>c(2, 1)</code> by default)</p></td>
+    </tr>
+    <tr>
+      <th>padding</th>
+      <td><p><code>numeric</code> a fraction of the graphical window (<code>1/200</code> by default)</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -195,14 +233,18 @@ All comments are welcome.</p>
 
     <p>grindr_layers</p>
 <p>Other grindr: <code><a href='layers.html'>layers</a></code>, <code><a href='papers.html'>papers</a></code>,
-  <code><a href='plot_PCA.html'>plot_PCA</a></code></p>
+  <code><a href='pile.html'>pile</a></code>, <code><a href='plot_PCA.html'>plot_PCA</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='papers.html'>paper_grid</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>draw_polygon</span>()</div><div class='img'><img src='drawers-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='no'>paper_chess</span> <span class='kw'>%&gt;%</span> <span class='fu'>draw_lines</span>(~<span class='no'>var</span>)</div><div class='img'><img src='drawers-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='no'>hearts</span>[<span class='fl'>240</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='papers.html'>paper_white</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>draw_outline</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>24</span>) <span class='kw'>%&gt;%</span> <span class='no'>draw_landmarks</span> <span class='kw'>%&gt;%</span> <span class='fu'>draw_labels</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>draw_links</span>(<span class='kw'>links</span><span class='kw'>=</span><span class='fu'>replicate</span>(<span class='fl'>2</span>, <span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>24</span>, <span class='fl'>8</span>)))</div><div class='img'><img src='drawers-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
+  <span class='fu'>draw_links</span>(<span class='kw'>links</span><span class='kw'>=</span><span class='fu'>replicate</span>(<span class='fl'>2</span>, <span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>24</span>, <span class='fl'>8</span>)))</div><div class='img'><img src='drawers-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>bot</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='papers.html'>paper_grid</a></span>() <span class='kw'>%&gt;%</span>
+    <span class='fu'>draw_outlines</span>() <span class='kw'>%&gt;%</span>
+    <span class='fu'>draw_title</span>(<span class='st'>"Alcohol abuse \nis dangerous for health"</span>, <span class='st'>"Drink responsibly"</span>)</div><div class='img'><img src='drawers-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

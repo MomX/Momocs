@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -139,13 +142,7 @@
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>trilo</span>)
 <span class='fu'><a href='table.html'>table</a></span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>)</div><div class='output co'>#&gt; 
 #&gt;  a  b  c  d 
-#&gt;  7 16 18  9 </div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>9</span>)</div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 43 outlines (64 +/- 0 coordinates, all unclosed)
-#&gt;  - $fac: 1 classifier:
-#&gt;      'onto' (factor 3): b, c, d.</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>16</span>)</div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 34 outlines (64 +/- 0 coordinates, all unclosed)
-#&gt;  - $fac: 1 classifier:
-#&gt;      'onto' (factor 2): b, c.</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>2000</span>) <span class='co'># too ambitious !</span></div><div class='output co'>#&gt; <span class='message'>no group with at least 2000 indidivuals</span></div><div class='output co'>#&gt; An empty Out object</div></pre>
+#&gt;  7 16 18  9 </div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>9</span>)</div><div class='output co'>#&gt; <span class='message'>no group with at least 9 indidivuals</span></div><div class='output co'>#&gt; empty Out</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>16</span>)</div><div class='output co'>#&gt; <span class='message'>no group with at least 16 indidivuals</span></div><div class='output co'>#&gt; empty Out</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>2000</span>) <span class='co'># too ambitious !</span></div><div class='output co'>#&gt; <span class='message'>no group with at least 2000 indidivuals</span></div><div class='output co'>#&gt; empty Out</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

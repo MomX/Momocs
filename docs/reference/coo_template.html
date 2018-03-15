@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -96,10 +99,27 @@
     </div>
 
     
-    <p><code>coo_template</code> returns shape centered on the origin and inscribed in a <code>size</code>-side square</p>
+    <p><code>coo_template</code> returns shape centered on the origin
+and inscribed in a <code>size</code>-side square. <code>coo_template_relatively</code>
+does the same but the biggest shape (as <code>prod(coo_diffrange)</code>) will
+be of <code>size=size</code> and consequently not defined on single shapes.</p>
     
 
-    <pre class="usage"><span class='fu'>coo_template</span>(<span class='no'>coo</span>, <span class='no'>size</span>)</pre>
+    <pre class="usage"><span class='fu'>coo_template</span>(<span class='no'>coo</span>, <span class='no'>size</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>coo_template</span>(<span class='no'>coo</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='co'># S3 method for Coo</span>
+<span class='fu'>coo_template</span>(<span class='no'>coo</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='fu'>coo_template_relatively</span>(<span class='no'>coo</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='co'># S3 method for list</span>
+<span class='fu'>coo_template_relatively</span>(<span class='no'>coo</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='co'># S3 method for Coo</span>
+<span class='fu'>coo_template_relatively</span>(<span class='no'>coo</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -134,14 +154,14 @@ functions also take profit of this function. May be useful to develop other grap
   <code><a href='coo_calliper.html'>coo_calliper</a></code>, <code><a href='coo_centdist.html'>coo_centdist</a></code>,
   <code><a href='coo_center.html'>coo_center</a></code>, <code><a href='coo_centpos.html'>coo_centpos</a></code>,
   <code><a href='coo_close.html'>coo_close</a></code>, <code><a href='coo_down.html'>coo_down</a></code>,
-  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_enlarge.html'>coo_enlarge</a></code>,
-  <code><a href='coo_extract.html'>coo_extract</a></code>, <code><a href='coo_flip.html'>coo_flipx</a></code>,
-  <code><a href='coo_force2close.html'>coo_force2close</a></code>,
+  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_extract.html'>coo_extract</a></code>,
+  <code><a href='coo_flip.html'>coo_flipx</a></code>, <code><a href='coo_force2close.html'>coo_force2close</a></code>,
   <code><a href='coo_interpolate.html'>coo_interpolate</a></code>, <code><a href='coo_jitter.html'>coo_jitter</a></code>,
   <code><a href='coo_left.html'>coo_left</a></code>, <code><a href='coo_nb.html'>coo_nb</a></code>,
-  <code>coo_perim</code>, <code><a href='coo_rev.html'>coo_rev</a></code>,
-  <code><a href='coo_right.html'>coo_right</a></code>, <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>,
-  <code><a href='coo_rotate.html'>coo_rotate</a></code>, <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
+  <code>coo_perim</code>, <code><a href='coo_range.html'>coo_range</a></code>,
+  <code><a href='coo_rev.html'>coo_rev</a></code>, <code><a href='coo_right.html'>coo_right</a></code>,
+  <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>, <code><a href='coo_rotate.html'>coo_rotate</a></code>,
+  <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
   <code><a href='coo_samplerr.html'>coo_samplerr</a></code>, <code><a href='coo_sample.html'>coo_sample</a></code>,
   <code>coo_scale</code>, <code><a href='coo_shear.html'>coo_shearx</a></code>,
   <code><a href='coo_slice.html'>coo_slice</a></code>,

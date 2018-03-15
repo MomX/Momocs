@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -136,20 +139,41 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; An Opn object with: 
-#&gt;  - $coo: 210 open outlines (99 +/- 4 coordinates)
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 4): Aglan, Cypre, MouBo1, PicMa.
-#&gt;      'domes' (factor 2): cult, wild.
-#&gt;      'view' (factor 2): VD, VL.
-#&gt;      'ind' (factor 30): O1, O10, O11, O12, O13, O14, O15, O16, O17, O18, O19 ... + 19 more.</div><div class='input'><span class='fu'>mutate</span>(<span class='no'>olea</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fu'>factor</span>(<span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>olea</span>)))</div><div class='output co'>#&gt; An Opn object with: 
-#&gt;  - $coo: 210 open outlines (99 +/- 4 coordinates)
-#&gt;  - $fac: 5 classifiers:
-#&gt;      'var' (factor 4): Aglan, Cypre, MouBo1, PicMa.
-#&gt;      'domes' (factor 2): cult, wild.
-#&gt;      'view' (factor 2): VD, VL.
-#&gt;      'ind' (factor 30): O1, O10, O11, O12, O13, O14, O15, O16, O17, O18, O19 ... + 19 more.
-#&gt;      'id' (factor 210): 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ... + 190 more.</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; Opn (curves)
+#&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
+#&gt;   - 4 classifiers (in $fac): 
+#&gt; # A tibble: 210 x 4
+#&gt;    var   domes view  ind  
+#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt;  1 Aglan cult  VD    O10  
+#&gt;  2 Aglan cult  VL    O10  
+#&gt;  3 Aglan cult  VD    O11  
+#&gt;  4 Aglan cult  VL    O11  
+#&gt;  5 Aglan cult  VD    O12  
+#&gt;  6 Aglan cult  VL    O12  
+#&gt;  7 Aglan cult  VD    O13  
+#&gt;  8 Aglan cult  VL    O13  
+#&gt;  9 Aglan cult  VD    O14  
+#&gt; 10 Aglan cult  VL    O14  
+#&gt; # ... with 200 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='fu'>mutate</span>(<span class='no'>olea</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fu'>factor</span>(<span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>olea</span>)))</div><div class='output co'>#&gt; Opn (curves)
+#&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
+#&gt;   - 5 classifiers (in $fac): 
+#&gt; # A tibble: 210 x 5
+#&gt;    var   domes view  ind   id   
+#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt;  1 Aglan cult  VD    O10   1    
+#&gt;  2 Aglan cult  VL    O10   2    
+#&gt;  3 Aglan cult  VD    O11   3    
+#&gt;  4 Aglan cult  VL    O11   4    
+#&gt;  5 Aglan cult  VD    O12   5    
+#&gt;  6 Aglan cult  VL    O12   6    
+#&gt;  7 Aglan cult  VD    O13   7    
+#&gt;  8 Aglan cult  VL    O13   8    
+#&gt;  9 Aglan cult  VD    O14   9    
+#&gt; 10 Aglan cult  VL    O14   10   
+#&gt; # ... with 200 more rows
+#&gt;   - also: $ldk</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -142,14 +145,29 @@ at the import, or merge some levels within covariates. Drops levels silently.</p
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># single renaming</span>
-<span class='fu'>rw_fac</span>(<span class='no'>bot</span>, <span class='st'>"type"</span>, <span class='st'>"whisky"</span>, <span class='st'>"agua_de_fuego"</span>) <span class='co'># 1 instead of "type" is fine too</span></div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 40 outlines (162 +/- 21 coordinates, all unclosed)
-#&gt;  - $fac: 1 classifier:
-#&gt;      'type' (factor 2): beer, agua_de_fuego.</div><div class='input'><span class='co'># several renaming</span>
+<span class='fu'>rw_fac</span>(<span class='no'>bot</span>, <span class='st'>"type"</span>, <span class='st'>"whisky"</span>, <span class='st'>"agua_de_fuego"</span>) <span class='co'># 1 instead of "type" is fine too</span></div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 40 outlines, 162 +/- 21 coords (in $coo)
+#&gt;   - 2 classifiers (in $fac): 
+#&gt; # A tibble: 40 x 2
+#&gt;    type  fake 
+#&gt;    &lt;fct&gt; &lt;fct&gt;
+#&gt;  1 &lt;NA&gt;  a    
+#&gt;  2 &lt;NA&gt;  a    
+#&gt;  3 &lt;NA&gt;  a    
+#&gt;  4 &lt;NA&gt;  a    
+#&gt;  5 &lt;NA&gt;  a    
+#&gt;  6 &lt;NA&gt;  a    
+#&gt;  7 &lt;NA&gt;  a    
+#&gt;  8 &lt;NA&gt;  a    
+#&gt;  9 &lt;NA&gt;  a    
+#&gt; 10 &lt;NA&gt;  a    
+#&gt; # ... with 30 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='co'># several renaming</span>
 <span class='no'>bot2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='no'>bot</span>, <span class='kw'>fake</span><span class='kw'>=</span><span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='fl'>10</span>)))
-<span class='fu'>rw_fac</span>(<span class='no'>bot2</span>, <span class='st'>"fake"</span>, <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>), <span class='st'>"ae"</span>)$<span class='no'>fake</span></div><div class='output co'>#&gt;  [1] ae b  c  d  ae b  c  d  ae b  c  d  ae b  c  d  ae b  c  d  ae b  c  d  ae
-#&gt; [26] b  c  d  ae b  c  d  ae b  c  d  ae b  c  d 
-#&gt; Levels: b c d ae</div></pre>
+<span class='fu'>rw_fac</span>(<span class='no'>bot2</span>, <span class='st'>"fake"</span>, <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>), <span class='st'>"ae"</span>)$<span class='no'>fake</span></div><div class='output co'>#&gt;  [1] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
+#&gt; [16] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
+#&gt; [31] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
+#&gt; Levels: </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

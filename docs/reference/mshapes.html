@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -235,8 +238,8 @@ unchanged.</p>
 #&gt; 21 128.475 739.425
 #&gt; 22 123.650 663.775
 #&gt; 23 109.650 590.000
-#&gt; 24  83.625 514.500</div><div class='input'><span class='fu'>stack</span>(<span class='no'>wings</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'>mshapes</span>(<span class='no'>wings</span>))</div><div class='img'><img src='mshapes-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>mshapes</span>(<span class='no'>bot.f</span>) <span class='co'># the mean (global) shape</span></div><div class='output co'>#&gt; <span class='message'>no 'fac' provided, returns meanshape</span></div><div class='output co'>#&gt;                   x             y
+#&gt; 24  83.625 514.500</div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>wings</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'>mshapes</span>(<span class='no'>wings</span>))</div><div class='img'><img src='mshapes-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>mshapes</span>(<span class='no'>bot.f</span>) <span class='co'># the mean (global) shape</span></div><div class='output co'>#&gt; <span class='message'>no 'fac' provided, returns meanshape</span></div><div class='output co'>#&gt;                   x             y
 #&gt;   [1,]  1.168906286 -0.0001651753
 #&gt;   [2,]  1.163078247  0.0421600553
 #&gt;   [3,]  1.145987931  0.0791545836
@@ -359,26 +362,24 @@ unchanged.</p>
 #&gt; [120,]  1.162963747 -0.0425396294</div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>mshapes</span>(<span class='no'>bot.f</span>, <span class='st'>'type'</span>)
 <span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------
-#&gt;  - $coe: 2 outlines described, 12 harmonics
-#&gt;  - $fac: 1 classifier:
-#&gt;      'type' (factor 0): .</div><div class='input'><span class='fu'>class</span>(<span class='no'>ms</span>$<span class='no'>Coe</span>)</div><div class='output co'>#&gt; [1] "OutCoe" "Coe"   </div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='no'>ms</span>$<span class='no'>shp</span>
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='img'><img src='mshapes-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='tps_arr.html'>tps_arr</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='no'>ms</span>$<span class='no'>beer</span>) <span class='co'>#etc.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='img'><img src='mshapes-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+#&gt;  - $coe: 0 outlines described, 12 harmonics
+#&gt; # A tibble: 0 x 2
+#&gt; # ... with 2 variables: type &lt;fct&gt;, fake &lt;fct&gt;</div><div class='input'><span class='fu'>class</span>(<span class='no'>ms</span>$<span class='no'>Coe</span>)</div><div class='output co'>#&gt; [1] "OutCoe" "Coe"   </div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='no'>ms</span>$<span class='no'>shp</span>
+<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='output co'>#&gt; <span class='error'>Error in coo_check.default(coo): do not know how to turn into a coo</span></div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in coo_check.default(coo): do not know how to turn into a coo</span></div><div class='input'><span class='fu'><a href='tps_arr.html'>tps_arr</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='no'>ms</span>$<span class='no'>beer</span>) <span class='co'>#etc.</span></div><div class='output co'>#&gt; <span class='error'>Error in apply(rbind(...), 2, range): dim(X) must have a positive length</span></div><div class='input'>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>'VL'</span>), <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>mshapes</span>(<span class='no'>op</span>, <span class='st'>'var'</span>) <span class='co'>#etc</span>
 <span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; An OpnCoe object [ npoly analysis ]
 #&gt; --------------------
-#&gt;  - $coe: 3 open outlines described
+#&gt;  - $coe: 0 open outlines described
 #&gt;  - $baseline1: (-0.5; 0), $baseline2: (0.5; 0)
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 0): .
-#&gt;      'domes' (factor 0): .
-#&gt;      'view' (factor 0): .
-#&gt;      'ind' (factor 0): .</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='mshapes-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+#&gt; # A tibble: 0 x 4
+#&gt; # ... with 4 variables: var &lt;fct&gt;, domes &lt;fct&gt;, view &lt;fct&gt;, ind &lt;fct&gt;</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in names(x$coo) &lt;- value: 'names' attribute [2] must be the same length as the vector [0]</span></div><div class='input'>
 <span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
-<span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>mshapes</span>(<span class='no'>wp</span>, <span class='fl'>1</span>)
-<span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; An Ldk object with: 
-#&gt;  - $coo: 11 configurations of landmarks (18 coordinates)
-#&gt;  - $fac: 1 classifier:
-#&gt;      'group' (factor 11): AE, AN, CA, CX, DE, MA, OR, PS, TO, UR, WY.</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Ldk.html'>Ldk</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='co'>#etc.</span></div><div class='img'><img src='mshapes-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>ms</span>$<span class='no'>Coe</span>) <span class='co'># equivalent (except the $fac slot)</span></div><div class='img'><img src='mshapes-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>mshapes</span>(<span class='no'>wp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in names(x$coo) &lt;- value: 'names' attribute [2] must be the same length as the vector [0]</span></div><div class='input'><span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; An OpnCoe object [ npoly analysis ]
+#&gt; --------------------
+#&gt;  - $coe: 0 open outlines described
+#&gt;  - $baseline1: (-0.5; 0), $baseline2: (0.5; 0)
+#&gt; # A tibble: 0 x 4
+#&gt; # ... with 4 variables: var &lt;fct&gt;, domes &lt;fct&gt;, view &lt;fct&gt;, ind &lt;fct&gt;</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Ldk.html'>Ldk</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='co'>#etc.</span></div><div class='output co'>#&gt; <span class='error'>Error in names(x$coo) &lt;- value: 'names' attribute [2] must be the same length as the vector [0]</span></div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>ms</span>$<span class='no'>Coe</span>) <span class='co'># equivalent (except the $fac slot)</span></div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("panel"): no applicable method for 'panel' applied to an object of class "c('OpnCoe', 'Coe')"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

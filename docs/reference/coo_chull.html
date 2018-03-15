@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -1475,7 +1478,7 @@ remove them, until less than 3 points are left.</p>
 <span class='no'>coo_chull_onion</span></div><div class='output co'>#&gt; function(coo, close=TRUE){
 #&gt;   UseMethod("coo_chull_onion")
 #&gt; }
-#&gt; &lt;environment: namespace:Momocs&gt;</div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>all_whisky_points</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='as_df.html'>as_df</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>type</span><span class='kw'>==</span><span class='st'>"whisky"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='select.html'>select</a></span>(<span class='no'>PC1</span>, <span class='no'>PC2</span>)
+#&gt; &lt;environment: namespace:Momocs&gt;</div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>all_whisky_points</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='as_df.html'>as_df</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>type</span><span class='kw'>==</span><span class='st'>"whisky"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='select.html'>select</a></span>(<span class='no'>PC1</span>, <span class='no'>PC2</span>)
 <span class='fu'>plot</span>(<span class='no'>x</span>, ~<span class='no'>type</span>, <span class='kw'>eig</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='input'><span class='no'>peeling_the_whisky_onion</span> <span class='kw'>&lt;-</span> <span class='no'>all_whisky_points</span> <span class='kw'>%&gt;%</span> <span class='no'>as.matrix</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_chull_onion</span>()
 <span class='co'># you may need to par(xpd=NA) to ensure all segments</span>
 <span class='co'># even those outside the graphical window are drawn</span>
@@ -1506,9 +1509,6 @@ remove them, until less than 3 points are left.</p>
 #&gt; NULL
 #&gt; 
 #&gt; [[6]]
-#&gt; NULL
-#&gt; 
-#&gt; [[7]]
 #&gt; NULL
 #&gt; </div></pre>
   </div>

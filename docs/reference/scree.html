@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -136,7 +139,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># On PCA</span>
-<span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>))</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' not provided and set to 10 (99% harmonic power)</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
+<span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
 #&gt;    axis  proportion cumsum
 #&gt;    &lt;ord&gt;      &lt;dbl&gt;  &lt;dbl&gt;
 #&gt;  1 1        0.761    0.761
@@ -151,7 +154,7 @@
 #&gt; 10 10       0.00122  0.997</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>0.99</span>)</div><div class='output co'>#&gt; [1] 7</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 10</div><div class='input'>
 <span class='fu'>scree_plot</span>(<span class='no'>bp</span>)</div><div class='img'><img src='scree-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>scree_plot</span>(<span class='no'>bp</span>, <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='img'><img src='scree-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># on LDA, it uses svd</span>
-<span class='no'>bl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>)), <span class='st'>"var"</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to 5</span></div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bl</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 3
+<span class='no'>bl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>)), <span class='st'>"var"</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to 5</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bl</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 3
 #&gt;   axis  proportion cumsum
 #&gt;   &lt;ord&gt;      &lt;dbl&gt;  &lt;dbl&gt;
 #&gt; 1 1         0.913   0.913

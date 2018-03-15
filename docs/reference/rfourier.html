@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -103,12 +106,11 @@ list of coordinates where points are equally spaced radii.</p>
     <pre class="usage"><span class='fu'>rfourier</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>rfourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>rfourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for Out</span>
 <span class='fu'>rfourier</span>(<span class='no'>x</span>, <span class='kw'>nb.h</span> <span class='kw'>=</span> <span class='fl'>40</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>thres</span> <span class='kw'>=</span> <span class='no'>pi</span>/<span class='fl'>90</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>thres</span> <span class='kw'>=</span> <span class='no'>pi</span>/<span class='fl'>90</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -137,10 +139,6 @@ perform.</p></td>
 length of the radii used equals 1.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p><code>logical</code>. Whether to display diagnosis messages.</p></td>
-    </tr>
-    <tr>
       <th>thres</th>
       <td><p><code>numeric</code> a tolerance to feed <a href='is_equallyspacedradii.html'>is_equallyspacedradii</a></p></td>
     </tr>
@@ -164,7 +162,8 @@ message is printed if this is not the case.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Directly borrowed for Claude (2008), and called <code>fourier1</code> there.</p>
+    <p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
+<p>Directly borrowed for Claude (2008), and called <code>fourier1</code> there.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -216,11 +215,23 @@ Springer 316 pp.</p>
 #&gt; </div><div class='input'><span class='no'>rfi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rfourier_i.html'>rfourier_i</a></span>(<span class='no'>rf</span>)
 <span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>rfi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>)</div><div class='img'><img src='rfourier-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Out method</span>
-<span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'>rfourier</span>()</div><div class='output co'>#&gt; <span class='message'>some shapes seem(s) to have some identical coordinates</span></div><div class='output co'>#&gt; <span class='message'>some shape(s) seem(s) to have non equally spaced radii</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' not provided and set to 60 (99% harmonic power)</span></div><div class='output co'>#&gt; An OutCoe object [ radii variation (equally spaced radii) analysis ]
+<span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'>rfourier</span>()</div><div class='output co'>#&gt; <span class='message'>some shapes seem(s) to have some identical coordinates</span></div><div class='output co'>#&gt; <span class='message'>some shape(s) seem(s) to have non equally spaced radii</span></div><div class='output co'>#&gt; An OutCoe object [ radii variation (equally spaced radii) analysis ]
 #&gt; --------------------
 #&gt;  - $coe: 40 outlines described, 60 harmonics
-#&gt;  - $fac: 1 classifier:
-#&gt;      'type' (factor 2): beer, whisky.</div></pre>
+#&gt; # A tibble: 40 x 2
+#&gt;    type   fake 
+#&gt;    &lt;fct&gt;  &lt;fct&gt;
+#&gt;  1 whisky a    
+#&gt;  2 whisky a    
+#&gt;  3 whisky a    
+#&gt;  4 whisky a    
+#&gt;  5 whisky a    
+#&gt;  6 whisky a    
+#&gt;  7 whisky a    
+#&gt;  8 whisky a    
+#&gt;  9 whisky a    
+#&gt; 10 whisky a    
+#&gt; # ... with 30 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

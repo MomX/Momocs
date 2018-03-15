@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -106,7 +109,7 @@ the first harmonic or not, and based and the maximum possible number
 of harmonics on the <code>Coo</code> object.</p>
     
 
-    <pre class="usage"><span class='fu'>calibrate_harmonicpower</span>(<span class='no'>x</span>, <span class='no'>method</span>, <span class='no'>id</span>, <span class='no'>nb.h</span>, <span class='no'>drop</span>, <span class='no'>thresh</span>, <span class='no'>plot</span>, <span class='no'>verbose</span>)</pre>
+    <pre class="usage"><span class='fu'>calibrate_harmonicpower</span>(<span class='no'>x</span>, <span class='no'>method</span>, <span class='no'>id</span>, <span class='no'>nb.h</span>, <span class='no'>drop</span>, <span class='no'>thresh</span>, <span class='no'>plot</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -139,11 +142,8 @@ of harmonics on the <code>Coo</code> object.</p>
     </tr>
     <tr>
       <th>plot</th>
-      <td><p>logical whether to plot the result or simply return the matrix</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>whether to print results</p></td>
+      <td><p>logical whether to plot the result or simply return the matrix
+Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p></td>
     </tr>
     </table>
     
@@ -172,8 +172,7 @@ and as follows for radii variation and tangent angle:
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>cal</span> <span class='kw'>&lt;-</span> <span class='fu'>calibrate_harmonicpower</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>method not provided. efourier is used</span></div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
-#&gt;     5     5    10    17 </div><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='no'>cal</span> <span class='kw'>&lt;-</span> <span class='fu'>calibrate_harmonicpower</span>(<span class='no'>bot</span>)</div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='432.632880098887' /></div><span class='co'># NOT RUN {</span>
 <span class='co'># for Opn objects</span>
 <span class='fu'>calibrate_harmonicpower</span>(<span class='no'>olea</span>, <span class='st'>"dfourier"</span>)
 

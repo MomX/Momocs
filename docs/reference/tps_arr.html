@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -212,10 +215,10 @@ arrows</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>botF</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' not provided and set to 10 (99% harmonic power)</span></div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mshapes.html'>mshapes</a></span>(<span class='no'>botF</span>, <span class='st'>'type'</span>, <span class='kw'>nb.pts</span><span class='kw'>=</span><span class='fl'>80</span>)$<span class='no'>shp</span>
+    <pre class="examples"><div class='input'><span class='no'>botF</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mshapes.html'>mshapes</a></span>(<span class='no'>botF</span>, <span class='st'>'type'</span>, <span class='kw'>nb.pts</span><span class='kw'>=</span><span class='fl'>80</span>)$<span class='no'>shp</span>
 <span class='no'>fr</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>$<span class='no'>beer</span>
 <span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>$<span class='no'>whisky</span>
-<span class='fu'>tps_arr</span>(<span class='no'>fr</span>, <span class='no'>to</span>, <span class='kw'>arr.nb</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_sari</span>, <span class='kw'>amp</span><span class='kw'>=</span><span class='fl'>3</span>)</div><div class='img'><img src='tps_arr-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>tps_arr</span>(<span class='no'>fr</span>, <span class='no'>to</span>, <span class='kw'>arr.nb</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_sari</span>, <span class='kw'>amp</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>grid</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='img'><img src='tps_arr-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>tps_arr</span>(<span class='no'>fr</span>, <span class='no'>to</span>, <span class='kw'>arr.nb</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_sari</span>, <span class='kw'>amp</span><span class='kw'>=</span><span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='error'>Error in coo_check.default(coo): do not know how to turn into a coo</span></div><div class='input'><span class='fu'>tps_arr</span>(<span class='no'>fr</span>, <span class='no'>to</span>, <span class='kw'>arr.nb</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_sari</span>, <span class='kw'>amp</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>grid</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in coo_check.default(coo): do not know how to turn into a coo</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

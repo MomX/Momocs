@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -101,7 +104,7 @@
     
 
     <pre class="usage"><span class='fu'>import_jpg</span>(<span class='kw'>jpg.paths</span> <span class='kw'>=</span> <span class='fu'>.lf.auto</span>(), <span class='kw'>auto.notcentered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>fun.notcentered</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>fun.notcentered</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -128,10 +131,6 @@ a black pixel is not satisfactory. See <a href='import_jpg1.html'>import_jpg1</a
       <td><p>the threshold value use to binarize the images. Above, pixels
 are turned to 1, below to 0.</p></td>
     </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>whether to print which file is being treated. Useful to detect problems.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -150,6 +149,7 @@ file in the folder taht contains all your files. All the outlines should be impo
     <p>Note this function will be deprecated from Momocs
 when <code>Momacs</code> and <code>Momit</code>
 will be fully operationnal.</p>
+<p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -125,20 +128,21 @@ or a <code>list</code> of such <code>data.frame</code>s for <code>Coo</code></p>
   <code><a href='coo_calliper.html'>coo_calliper</a></code>, <code><a href='coo_centdist.html'>coo_centdist</a></code>,
   <code><a href='coo_center.html'>coo_center</a></code>, <code><a href='coo_centpos.html'>coo_centpos</a></code>,
   <code><a href='coo_close.html'>coo_close</a></code>, <code><a href='coo_down.html'>coo_down</a></code>,
-  <code><a href='coo_enlarge.html'>coo_enlarge</a></code>, <code><a href='coo_extract.html'>coo_extract</a></code>,
-  <code><a href='coo_flip.html'>coo_flipx</a></code>, <code><a href='coo_force2close.html'>coo_force2close</a></code>,
+  <code><a href='coo_extract.html'>coo_extract</a></code>, <code><a href='coo_flip.html'>coo_flipx</a></code>,
+  <code><a href='coo_force2close.html'>coo_force2close</a></code>,
   <code><a href='coo_interpolate.html'>coo_interpolate</a></code>, <code><a href='coo_jitter.html'>coo_jitter</a></code>,
   <code><a href='coo_left.html'>coo_left</a></code>, <code><a href='coo_nb.html'>coo_nb</a></code>,
-  <code>coo_perim</code>, <code><a href='coo_rev.html'>coo_rev</a></code>,
-  <code><a href='coo_right.html'>coo_right</a></code>, <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>,
-  <code><a href='coo_rotate.html'>coo_rotate</a></code>, <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
+  <code>coo_perim</code>, <code><a href='coo_range.html'>coo_range</a></code>,
+  <code><a href='coo_rev.html'>coo_rev</a></code>, <code><a href='coo_right.html'>coo_right</a></code>,
+  <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>, <code><a href='coo_rotate.html'>coo_rotate</a></code>,
+  <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
   <code><a href='coo_samplerr.html'>coo_samplerr</a></code>, <code><a href='coo_sample.html'>coo_sample</a></code>,
   <code>coo_scale</code>, <code><a href='coo_shear.html'>coo_shearx</a></code>,
   <code><a href='coo_slice.html'>coo_slice</a></code>,
   <code><a href='coo_slidedirection.html'>coo_slidedirection</a></code>,
   <code><a href='coo_slidegap.html'>coo_slidegap</a></code>, <code><a href='coo_slide.html'>coo_slide</a></code>,
   <code><a href='coo_smoothcurve.html'>coo_smoothcurve</a></code>, <code><a href='coo_smooth.html'>coo_smooth</a></code>,
-  <code><a href='coo_template.html'>coo_template</a></code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
+  <code>coo_template</code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
   <code><a href='coo_trimbottom.html'>coo_trimbottom</a></code>, <code><a href='coo_trimtop.html'>coo_trimtop</a></code>,
   <code><a href='coo_trim.html'>coo_trim</a></code>, <code><a href='coo_up.html'>coo_up</a></code>,
   <code><a href='is_clockwise.html'>is_clockwise</a></code>, <code><a href='is_closed.html'>is_closed</a></code>,
@@ -146,95 +150,107 @@ or a <code>list</code> of such <code>data.frame</code>s for <code>Coo</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>coo_dxy</span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>12</span>))</div><div class='output co'>#&gt;     dx   dy
-#&gt; 1    0    0
-#&gt; 2   26 -200
-#&gt; 3    5 -411
-#&gt; 4  106 -546
-#&gt; 5  279 -448
-#&gt; 6  268 -259
-#&gt; 7  258  -38
-#&gt; 8  259  152
-#&gt; 9  203  351
-#&gt; 10 168  540
-#&gt; 11  73  441
-#&gt; 12  45  220</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>coo_dxy</span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>12</span>))</div><div class='output co'>#&gt; # A tibble: 12 x 2
+#&gt;       dx    dy
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1    0.    0.
+#&gt;  2   26. -200.
+#&gt;  3    5. -411.
+#&gt;  4  106. -546.
+#&gt;  5  279. -448.
+#&gt;  6  268. -259.
+#&gt;  7  258.  -38.
+#&gt;  8  259.  152.
+#&gt;  9  203.  351.
+#&gt; 10  168.  540.
+#&gt; 11   73.  441.
+#&gt; 12   45.  220.</div><div class='input'>
 <span class='no'>bot</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>12</span>) <span class='kw'>%&gt;%</span>  <span class='co'># for readability and speed only</span>
     <span class='fu'>coo_dxy</span>()</div><div class='output co'>#&gt; $brahma
-#&gt;     dx   dy
-#&gt; 1    0    0
-#&gt; 2   26 -200
-#&gt; 3    5 -411
-#&gt; 4  106 -546
-#&gt; 5  279 -448
-#&gt; 6  268 -259
-#&gt; 7  258  -38
-#&gt; 8  259  152
-#&gt; 9  203  351
-#&gt; 10 168  540
-#&gt; 11  73  441
-#&gt; 12  45  220
+#&gt; # A tibble: 12 x 2
+#&gt;       dx    dy
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1    0.    0.
+#&gt;  2   26. -200.
+#&gt;  3    5. -411.
+#&gt;  4  106. -546.
+#&gt;  5  279. -448.
+#&gt;  6  268. -259.
+#&gt;  7  258.  -38.
+#&gt;  8  259.  152.
+#&gt;  9  203.  351.
+#&gt; 10  168.  540.
+#&gt; 11   73.  441.
+#&gt; 12   45.  220.
 #&gt; 
 #&gt; $caney
-#&gt;     dx   dy
-#&gt; 1    0    0
-#&gt; 2    0 -192
-#&gt; 3    0 -373
-#&gt; 4   91 -507
-#&gt; 5  251 -436
-#&gt; 6  258 -244
-#&gt; 7  258  -73
-#&gt; 8  219  109
-#&gt; 9  193  299
-#&gt; 10 182  474
-#&gt; 11  76  392
-#&gt; 12  58  211
+#&gt; # A tibble: 12 x 2
+#&gt;       dx    dy
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1    0.    0.
+#&gt;  2    0. -192.
+#&gt;  3    0. -373.
+#&gt;  4   91. -507.
+#&gt;  5  251. -436.
+#&gt;  6  258. -244.
+#&gt;  7  258.  -73.
+#&gt;  8  219.  109.
+#&gt;  9  193.  299.
+#&gt; 10  182.  474.
+#&gt; 11   76.  392.
+#&gt; 12   58.  211.
 #&gt; 
 #&gt; $chimay
-#&gt;     dx   dy
-#&gt; 1    0    0
-#&gt; 2    3 -131
-#&gt; 3    7 -254
-#&gt; 4   99 -320
-#&gt; 5  227 -304
-#&gt; 6  242 -185
-#&gt; 7  239  -54
-#&gt; 8  209   83
-#&gt; 9  163  204
-#&gt; 10 145  321
-#&gt; 11  65  265
-#&gt; 12  49  145
+#&gt; # A tibble: 12 x 2
+#&gt;       dx    dy
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1    0.    0.
+#&gt;  2    3. -131.
+#&gt;  3    7. -254.
+#&gt;  4   99. -320.
+#&gt;  5  227. -304.
+#&gt;  6  242. -185.
+#&gt;  7  239.  -54.
+#&gt;  8  209.   83.
+#&gt;  9  163.  204.
+#&gt; 10  145.  321.
+#&gt; 11   65.  265.
+#&gt; 12   49.  145.
 #&gt; 
 #&gt; $corona
-#&gt;     dx   dy
-#&gt; 1    0    0
-#&gt; 2    0 -155
-#&gt; 3    3 -298
-#&gt; 4   73 -409
-#&gt; 5  184 -346
-#&gt; 6  185 -201
-#&gt; 7  185  -46
-#&gt; 8  155  106
-#&gt; 9  145  246
-#&gt; 10 125  396
-#&gt; 11  53  309
-#&gt; 12  33  171
+#&gt; # A tibble: 12 x 2
+#&gt;       dx    dy
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1    0.    0.
+#&gt;  2    0. -155.
+#&gt;  3    3. -298.
+#&gt;  4   73. -409.
+#&gt;  5  184. -346.
+#&gt;  6  185. -201.
+#&gt;  7  185.  -46.
+#&gt;  8  155.  106.
+#&gt;  9  145.  246.
+#&gt; 10  125.  396.
+#&gt; 11   53.  309.
+#&gt; 12   33.  171.
 #&gt; 
 #&gt; $deusventrue
-#&gt;     dx   dy
-#&gt; 1    0    0
-#&gt; 2  -38 -171
-#&gt; 3  -28 -334
-#&gt; 4   86 -427
-#&gt; 5  231 -384
-#&gt; 6  245 -209
-#&gt; 7  234  -47
-#&gt; 8  168  123
-#&gt; 9  151  294
-#&gt; 10 137  451
-#&gt; 11  56  347
-#&gt; 12  57  197
+#&gt; # A tibble: 12 x 2
+#&gt;       dx    dy
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1    0.    0.
+#&gt;  2  -38. -171.
+#&gt;  3  -28. -334.
+#&gt;  4   86. -427.
+#&gt;  5  231. -384.
+#&gt;  6  245. -209.
+#&gt;  7  234.  -47.
+#&gt;  8  168.  123.
+#&gt;  9  151.  294.
+#&gt; 10  137.  451.
+#&gt; 11   56.  347.
+#&gt; 12   57.  197.
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

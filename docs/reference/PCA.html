@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -114,7 +117,8 @@
 <span class='fu'>PCA</span>(<span class='no'>x</span>, <span class='kw'>scale.</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>fac</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>PCA</span>(<span class='no'>x</span>, <span class='kw'>scale.</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>())
+<span class='fu'>PCA</span>(<span class='no'>x</span>, <span class='kw'>scale.</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>())
 
 <span class='fu'>as_PCA</span>(<span class='no'>x</span>, <span class='no'>fac</span>)</pre>
     
@@ -174,24 +178,45 @@ There is also a generic method (eg for traditional morphometrics) that centers a
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>bot.f</span>)
+    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>bot.f</span>)
 <span class='no'>bot.p</span></div><div class='output co'>#&gt; A PCA object
 #&gt; --------------------
 #&gt;  - 40 shapes 
 #&gt;  - $method: [ efourier analysis ]
-#&gt;  - $fac: 1 classifier:
-#&gt;      'type' (factor 2): beer, whisky.
+#&gt; # A tibble: 40 x 2
+#&gt;    type   fake 
+#&gt;    &lt;fct&gt;  &lt;fct&gt;
+#&gt;  1 whisky a    
+#&gt;  2 whisky a    
+#&gt;  3 whisky a    
+#&gt;  4 whisky a    
+#&gt;  5 whisky a    
+#&gt;  6 whisky a    
+#&gt;  7 whisky a    
+#&gt;  8 whisky a    
+#&gt;  9 whisky a    
+#&gt; 10 whisky a    
+#&gt; # ... with 30 more rows
 #&gt;  - All components: sdev, rotation, center, scale, x, eig, fac, mshape, method, cuts.</div><div class='input'><span class='fu'>plot</span>(<span class='no'>bot.p</span>, <span class='kw'>morpho</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='img'><img src='PCA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>)</div><div class='img'><img src='PCA-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='no'>olea</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='input'><span class='no'>op.p</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>op</span>)
 <span class='no'>op.p</span></div><div class='output co'>#&gt; A PCA object
 #&gt; --------------------
 #&gt;  - 210 shapes 
 #&gt;  - $method: [ npoly analysis ]
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 4): Aglan, Cypre, MouBo1, PicMa.
-#&gt;      'domes' (factor 2): cult, wild.
-#&gt;      'view' (factor 2): VD, VL.
-#&gt;      'ind' (factor 30): O1, O10, O11, O12, O13, O14, O15, O16, O17, O18, O19 ... + 19 more.
+#&gt; # A tibble: 210 x 4
+#&gt;    var   domes view  ind  
+#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt;  1 Aglan cult  VD    O10  
+#&gt;  2 Aglan cult  VL    O10  
+#&gt;  3 Aglan cult  VD    O11  
+#&gt;  4 Aglan cult  VL    O11  
+#&gt;  5 Aglan cult  VD    O12  
+#&gt;  6 Aglan cult  VL    O12  
+#&gt;  7 Aglan cult  VD    O13  
+#&gt;  8 Aglan cult  VL    O13  
+#&gt;  9 Aglan cult  VD    O14  
+#&gt; 10 Aglan cult  VL    O14  
+#&gt; # ... with 200 more rows
 #&gt;  - All components: sdev, rotation, center, scale, x, eig, fac, mshape, method, mod, baseline1, baseline2, cuts.</div><div class='input'><span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='fl'>1</span>, <span class='kw'>morpho</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='PCA-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
 <span class='no'>wpp</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>wp</span>)
@@ -199,8 +224,20 @@ There is also a generic method (eg for traditional morphometrics) that centers a
 #&gt; --------------------
 #&gt;  - 127 shapes 
 #&gt;  - $method: [ procrustes analysis ]
-#&gt;  - $fac: 1 classifier:
-#&gt;      'group' (factor 11): AE, AN, CA, CX, DE, MA, OR, PS, TO, UR, WY.
+#&gt; # A tibble: 127 x 1
+#&gt;    group
+#&gt;    &lt;fct&gt;
+#&gt;  1 AN   
+#&gt;  2 AN   
+#&gt;  3 AN   
+#&gt;  4 AN   
+#&gt;  5 AN   
+#&gt;  6 AN   
+#&gt;  7 AN   
+#&gt;  8 AN   
+#&gt;  9 AN   
+#&gt; 10 AN   
+#&gt; # ... with 117 more rows
 #&gt;  - All components: sdev, rotation, center, scale, x, eig, fac, mshape, method, cuts, links.</div><div class='input'><span class='fu'>plot</span>(<span class='no'>wpp</span>, <span class='fl'>1</span>)</div><div class='img'><img src='PCA-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># "foreign prcomp"</span>
 <span class='fu'>head</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species

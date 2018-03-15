@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -142,30 +145,36 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># samples 5 bottles no matter their type</span>
-<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 5 outlines (167 +/- 13 coordinates, all unclosed)
-#&gt;  - $fac: 1 classifier:
-#&gt;      'type' (factor 2): beer, whisky.</div><div class='input'><span class='co'># 5 bottles of beer and of whisky</span>
-<span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>))</div><div class='output co'>#&gt; 
-#&gt;   beer whisky 
-#&gt;      5      5 </div><div class='input'><span class='co'># many repetitions</span>
+<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 5 outlines, 162 +/- 28 coords (in $coo)
+#&gt;   - 2 classifiers (in $fac): 
+#&gt; # A tibble: 5 x 2
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 beer   d    
+#&gt; 2 beer   d    
+#&gt; 3 beer   c    
+#&gt; 4 whisky a    
+#&gt; 5 beer   d    
+#&gt;   - also: $ldk</div><div class='input'><span class='co'># 5 bottles of beer and of whisky</span>
+<span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: is.na() applied to non-(list or vector) of type 'NULL'</span></div><div class='output co'>#&gt; <span class='error'>Error in matrix(unlist(value, recursive = FALSE, use.names = FALSE), nrow = nr,     dimnames = list(rn, cn)): length of 'dimnames' [2] not equal to array extent</span></div><div class='input'><span class='co'># many repetitions</span>
 <span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>names</span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>400</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
 #&gt;          amrut    ballantines         brahma      bushmills          caney 
-#&gt;             13             17             10              9             10 
+#&gt;             11             16             11             10             13 
 #&gt;         chimay         chivas         corona        dalmore    deusventrue 
-#&gt;             13             10              8             17             13 
+#&gt;             13              8              9             16             13 
 #&gt;          duvel   famousgrouse   franziskaner    glendronach   glenmorangie 
-#&gt;              9              8             12              4             15 
+#&gt;             10              9             13              5             15 
 #&gt;     grimbergen        guiness   highlandpark     hoegardeen    jackdaniels 
-#&gt;              7              9             11             20             13 
+#&gt;              7              7             12             20             13 
 #&gt;             jb  johnniewalker        jupiler     kingfisher       latrappe 
-#&gt;              7              7             11              8             11 
+#&gt;              6              6             10              6              9 
 #&gt; lindemanskriek       magallan     makersmark    nicechouffe           oban 
-#&gt;              7             11             10             11              5 
+#&gt;              6             10             12             13              7 
 #&gt;     oldpotrero     pecheresse      redbreast   sierranevada         tamdhu 
-#&gt;              9              9              9              5              7 
+#&gt;             11              8             10              4              8 
 #&gt;     tanglefoot          tauro      westmalle     wildturkey         yoichi 
-#&gt;              8              9              9              7             12 </div><div class='input'>
+#&gt;              5             11              9              8             10 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

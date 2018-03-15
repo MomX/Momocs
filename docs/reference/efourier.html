@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -104,13 +107,13 @@ Read Details carefully.</p>
     <pre class="usage"><span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for Out</span>
 <span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='no'>...</span>)
 
-<span class='fu'><a href='efourier_norm.html'>efourier_norm</a></span>(<span class='no'>ef</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>efourier_norm</span>(<span class='no'>ef</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -134,12 +137,8 @@ Read Details carefully.</p>
 perform.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p><code>logical</code>. Whether to print or not diagnosis messages.</p></td>
-    </tr>
-    <tr>
       <th>norm</th>
-      <td><p>whether to normalize the coefficients using <a href='efourier_norm.html'>efourier_norm</a></p></td>
+      <td><p>whether to normalize the coefficients using efourier_norm</p></td>
     </tr>
     <tr>
       <th>start</th>
@@ -180,7 +179,7 @@ It is the default option of <code>efourier</code>.</p>
 <p>But here is the pitfall: if your shapes are prone to bad aligments among all
 the first ellipses, this will result in poorly (or even not at all) "homologous" coefficients.
 The shapes prone to this are either (at least roughly) circular and/or with a strong
-bilateral symmetry. You can try to use <code>stack</code> on the <code><a href='Coe.html'>Coe</a></code> object
+bilateral symmetry. You can try to use <code><a href='stack.Coo.html'>stack</a></code> on the <code><a href='Coe.html'>Coe</a></code> object
 returned by <code>efourier</code>. Also, when plotting PCA using Momocs,
 this will be strikingly clear though. This phenomenon will result in two clusters,
 and more strikingly into upside-down (or 180 degrees rotated)
@@ -189,7 +188,9 @@ aligning your shapes <em>before</em> the <code>efourier</code> step,
 and performing the latter with no normalization (<code>norm = FALSE</code>), since
 it has been done before.</p>
 <p>You have several options to align your shapes, using control points (or landmarks),
-of Procrustes alignment (see <code><a href='fgProcrustes.html'>fgProcrustes</a></code>) through their calliper
+by far the most time consuming (and less reproducible) but possibly the best one too
+when alignment is too tricky to automate.
+You can also try Procrustes alignment (see <code><a href='fgProcrustes.html'>fgProcrustes</a></code>) through their calliper
 length (see <code><a href='coo_aligncalliper.html'>coo_aligncalliper</a></code>), etc. You should also make the first
 point homologous either with <code><a href='coo_slide.html'>coo_slide</a></code> or <code><a href='coo_slidedirection.html'>coo_slidedirection</a></code>
 to minimize any subsequent problems.</p>
@@ -198,6 +199,7 @@ to minimize any subsequent problems.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Directly borrowed for Claude (2008).</p>
+<p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -243,11 +245,17 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 #&gt; </div><div class='input'><span class='no'>efi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier_i.html'>efourier_i</a></span>(<span class='no'>ef</span>)
 <span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>efi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>)</div><div class='img'><img src='efourier-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># on Out</span>
-<span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' not provided and set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
+<span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------
 #&gt;  - $coe: 5 outlines described, 10 harmonics
-#&gt;  - $fac: 1 classifier:
-#&gt;      'type' (factor 1): whisky.</div></pre>
+#&gt; # A tibble: 5 x 2
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

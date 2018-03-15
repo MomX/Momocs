@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -98,13 +101,13 @@
     
     <p>In Momocs, <code>Ldk</code> classes objects are
 lists of configurations of <b>l</b>an<b>d</b>mar<b>k</b>s, with optionnal components,
-on which generic methods such as plotting methods (e.g. stack)
+on which generic methods such as plotting methods (e.g. <a href='stack.Coo.html'>stack</a>)
 and specific methods (e.g. <a href='fgProcrustes.html'>fgProcrustes</a>).
 <code>Ldk</code> objects are primarily <code><a href='Coo.html'>Coo</a></code> objects. In a sense, morphometrics methods
 on Ldk objects preserves (x, y) coordinates and <code>LdkCoe</code> are also <code>Ldk</code> objects.</p>
     
 
-    <pre class="usage"><span class='fu'>Ldk</span>(<span class='no'>coo</span>, <span class='kw'>links</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>slidings</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>())</pre>
+    <pre class="usage"><span class='fu'>Ldk</span>(<span class='no'>coo</span>, <span class='kw'>links</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>slidings</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -146,7 +149,7 @@ to homogeneize the number of coordinates among shapes.</p>
 <span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='no'>Ldk</span>)</div><div class='output co'>#&gt;  [1] combine         coo_bookstein   coo_slice       d              
 #&gt;  [5] def_links       def_slidings    fgProcrustes    fgsProcrustes  
 #&gt;  [9] get_ldk         get_slidings    mshapes         panel          
-#&gt; [13] print           rearrange_ldk   slidings_scheme stack          
+#&gt; [13] pile            rearrange_ldk   slidings_scheme stack          
 #&gt; [17] which_out      
 #&gt; see '?methods' for accessing help and source code</div></pre>
   </div>

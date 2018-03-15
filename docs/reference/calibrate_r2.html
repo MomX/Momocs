@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -102,7 +105,7 @@ Also returns a plot</p>
 
     <pre class="usage"><span class='fu'>calibrate_r2</span>(<span class='no'>Opn</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"opoly"</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>Opn</span>),
   <span class='kw'>degree.range</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>8</span>, <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.9</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span>, <span class='fl'>0.999</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -132,10 +135,6 @@ Also returns a plot</p>
       <td><p>logical whether to print the plot</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>logical whether to print messages</p></td>
-    </tr>
-    <tr>
       <th>...</th>
       <td><p>useless here</p></td>
     </tr>
@@ -145,6 +144,10 @@ Also returns a plot</p>
 
     <p>May be long, so you can estimate it on a sample either with id here, or one of
 <a href='sample_n.html'>sample_n</a> or <a href='sample_frac.html'>sample_frac</a></p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -165,6 +168,8 @@ Also returns a plot</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

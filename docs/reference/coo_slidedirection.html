@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -140,19 +143,19 @@ eastwards or westwards the centroid, becomes the first point with <a href='coo_s
   <code><a href='coo_calliper.html'>coo_calliper</a></code>, <code><a href='coo_centdist.html'>coo_centdist</a></code>,
   <code><a href='coo_center.html'>coo_center</a></code>, <code><a href='coo_centpos.html'>coo_centpos</a></code>,
   <code><a href='coo_close.html'>coo_close</a></code>, <code><a href='coo_down.html'>coo_down</a></code>,
-  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_enlarge.html'>coo_enlarge</a></code>,
-  <code><a href='coo_extract.html'>coo_extract</a></code>, <code><a href='coo_flip.html'>coo_flipx</a></code>,
-  <code><a href='coo_force2close.html'>coo_force2close</a></code>,
+  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_extract.html'>coo_extract</a></code>,
+  <code><a href='coo_flip.html'>coo_flipx</a></code>, <code><a href='coo_force2close.html'>coo_force2close</a></code>,
   <code><a href='coo_interpolate.html'>coo_interpolate</a></code>, <code><a href='coo_jitter.html'>coo_jitter</a></code>,
   <code><a href='coo_left.html'>coo_left</a></code>, <code><a href='coo_nb.html'>coo_nb</a></code>,
-  <code>coo_perim</code>, <code><a href='coo_rev.html'>coo_rev</a></code>,
-  <code><a href='coo_right.html'>coo_right</a></code>, <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>,
-  <code><a href='coo_rotate.html'>coo_rotate</a></code>, <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
+  <code>coo_perim</code>, <code><a href='coo_range.html'>coo_range</a></code>,
+  <code><a href='coo_rev.html'>coo_rev</a></code>, <code><a href='coo_right.html'>coo_right</a></code>,
+  <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>, <code><a href='coo_rotate.html'>coo_rotate</a></code>,
+  <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
   <code><a href='coo_samplerr.html'>coo_samplerr</a></code>, <code><a href='coo_sample.html'>coo_sample</a></code>,
   <code>coo_scale</code>, <code><a href='coo_shear.html'>coo_shearx</a></code>,
   <code><a href='coo_slice.html'>coo_slice</a></code>, <code><a href='coo_slidegap.html'>coo_slidegap</a></code>,
   <code><a href='coo_slide.html'>coo_slide</a></code>, <code><a href='coo_smoothcurve.html'>coo_smoothcurve</a></code>,
-  <code><a href='coo_smooth.html'>coo_smooth</a></code>, <code><a href='coo_template.html'>coo_template</a></code>,
+  <code><a href='coo_smooth.html'>coo_smooth</a></code>, <code>coo_template</code>,
   <code><a href='coo_trans.html'>coo_trans</a></code>, <code><a href='coo_trimbottom.html'>coo_trimbottom</a></code>,
   <code><a href='coo_trimtop.html'>coo_trimtop</a></code>, <code><a href='coo_trim.html'>coo_trim</a></code>,
   <code><a href='coo_up.html'>coo_up</a></code>, <code><a href='is_clockwise.html'>is_clockwise</a></code>,
@@ -164,7 +167,7 @@ eastwards or westwards the centroid, becomes the first point with <a href='coo_s
     <pre class="examples"><div class='input'><span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='coo_rotate.html'>coo_rotate</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='no'>pi</span>/<span class='fl'>6</span>) <span class='co'># dummy example just to make it obvious</span>
 <span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>) <span class='co'># not the first point</span></div><div class='img'><img src='coo_slidedirection-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_slidedirection</span>(<span class='no'>b</span>, <span class='st'>"up"</span>))</div><div class='img'><img src='coo_slidedirection-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_slidedirection</span>(<span class='no'>b</span>, <span class='st'>"right"</span>))</div><div class='img'><img src='coo_slidedirection-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_slidedirection</span>(<span class='no'>b</span>, <span class='st'>"left"</span>))</div><div class='img'><img src='coo_slidedirection-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_slidedirection</span>(<span class='no'>b</span>, <span class='st'>"down"</span>))</div><div class='img'><img src='coo_slidedirection-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># on Coo objects</span>
-<span class='fu'>stack</span>(<span class='no'>bot</span>)</div><div class='img'><img src='coo_slidedirection-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>stack</span>(<span class='fu'>coo_slidedirection</span>(<span class='no'>bot</span>, <span class='st'>"left"</span>))</div><div class='img'><img src='coo_slidedirection-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slidedirection-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'>coo_slidedirection</span>(<span class='no'>bot</span>, <span class='st'>"left"</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slidedirection-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

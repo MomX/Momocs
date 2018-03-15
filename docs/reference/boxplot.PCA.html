@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -129,10 +132,11 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>)
-<span class='fu'>boxplot</span>(<span class='no'>bot.p</span>)</div><div class='img'><img src='boxplot.PCA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>boxplot</span>(<span class='no'>bot.p</span>, <span class='fl'>1</span>)
-<span class='co'>#p +  theme_minimal() + scale_fill_grey()</span>
-<span class='co'>#p + facet_wrap(~PC, scales = "free")</span></div></pre>
+    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>)
+<span class='fu'>boxplot</span>(<span class='no'>bot.p</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .::dplyr: unused argument (as_data_frame)</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>boxplot</span>(<span class='no'>bot.p</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in sort.list(y): 'x' must be atomic for 'sort.list'</span>
+#&gt; <span class='error'>Have you called 'sort' on a list?</span></div><div class='input'>#p +  theme_minimal() + scale_fill_grey()
+#p + facet_wrap(~PC, scales = "free")
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

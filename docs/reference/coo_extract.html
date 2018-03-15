@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -136,20 +139,21 @@ and them being homologous, typically on Ldk.</p>
   <code><a href='coo_calliper.html'>coo_calliper</a></code>, <code><a href='coo_centdist.html'>coo_centdist</a></code>,
   <code><a href='coo_center.html'>coo_center</a></code>, <code><a href='coo_centpos.html'>coo_centpos</a></code>,
   <code><a href='coo_close.html'>coo_close</a></code>, <code><a href='coo_down.html'>coo_down</a></code>,
-  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_enlarge.html'>coo_enlarge</a></code>,
-  <code><a href='coo_flip.html'>coo_flipx</a></code>, <code><a href='coo_force2close.html'>coo_force2close</a></code>,
+  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_flip.html'>coo_flipx</a></code>,
+  <code><a href='coo_force2close.html'>coo_force2close</a></code>,
   <code><a href='coo_interpolate.html'>coo_interpolate</a></code>, <code><a href='coo_jitter.html'>coo_jitter</a></code>,
   <code><a href='coo_left.html'>coo_left</a></code>, <code><a href='coo_nb.html'>coo_nb</a></code>,
-  <code>coo_perim</code>, <code><a href='coo_rev.html'>coo_rev</a></code>,
-  <code><a href='coo_right.html'>coo_right</a></code>, <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>,
-  <code><a href='coo_rotate.html'>coo_rotate</a></code>, <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
+  <code>coo_perim</code>, <code><a href='coo_range.html'>coo_range</a></code>,
+  <code><a href='coo_rev.html'>coo_rev</a></code>, <code><a href='coo_right.html'>coo_right</a></code>,
+  <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>, <code><a href='coo_rotate.html'>coo_rotate</a></code>,
+  <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
   <code><a href='coo_samplerr.html'>coo_samplerr</a></code>, <code><a href='coo_sample.html'>coo_sample</a></code>,
   <code>coo_scale</code>, <code><a href='coo_shear.html'>coo_shearx</a></code>,
   <code><a href='coo_slice.html'>coo_slice</a></code>,
   <code><a href='coo_slidedirection.html'>coo_slidedirection</a></code>,
   <code><a href='coo_slidegap.html'>coo_slidegap</a></code>, <code><a href='coo_slide.html'>coo_slide</a></code>,
   <code><a href='coo_smoothcurve.html'>coo_smoothcurve</a></code>, <code><a href='coo_smooth.html'>coo_smooth</a></code>,
-  <code><a href='coo_template.html'>coo_template</a></code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
+  <code>coo_template</code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
   <code><a href='coo_trimbottom.html'>coo_trimbottom</a></code>, <code><a href='coo_trimtop.html'>coo_trimtop</a></code>,
   <code><a href='coo_trim.html'>coo_trim</a></code>, <code><a href='coo_up.html'>coo_up</a></code>,
   <code><a href='is_clockwise.html'>is_clockwise</a></code>, <code><a href='is_closed.html'>is_closed</a></code>,
@@ -158,17 +162,31 @@ and them being homologous, typically on Ldk.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
-<span class='fu'>stack</span>(<span class='no'>bot</span>)</div><div class='img'><img src='coo_extract-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>stack</span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>bot</span>, <span class='fl'>24</span>))</div><div class='img'><img src='coo_extract-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>)</div><div class='img'><img src='coo_extract-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>b</span>, <span class='fl'>24</span>))</div><div class='img'><img src='coo_extract-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>coo_extract</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>9</span>, <span class='fl'>12</span>)) <span class='co'># or :</span></div><div class='output co'>#&gt;      [,1] [,2]
+<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_extract-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>bot</span>, <span class='fl'>24</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_extract-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>)</div><div class='img'><img src='coo_extract-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>b</span>, <span class='fl'>24</span>))</div><div class='img'><img src='coo_extract-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>coo_extract</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>9</span>, <span class='fl'>12</span>)) <span class='co'># or :</span></div><div class='output co'>#&gt;      [,1] [,2]
 #&gt; [1,]   40  529
 #&gt; [2,]   57  414
 #&gt; [3,]   63  361</div><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_extract</span>(<span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>9</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt;      [,1] [,2]
 #&gt; [1,]   40  529
 #&gt; [2,]   57  414
 #&gt; [3,]   63  361</div><div class='input'>
-<span class='fu'>coo_extract</span>(<span class='no'>bot</span>, <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 40 outlines (3 +/- 0 coordinates, all unclosed)
-#&gt;  - $fac: 1 classifier:
-#&gt;      'type' (factor 2): beer, whisky.</div></pre>
+<span class='fu'>coo_extract</span>(<span class='no'>bot</span>, <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 40 outlines, 3 +/- 0 coords (in $coo)
+#&gt;   - 2 classifiers (in $fac): 
+#&gt; # A tibble: 40 x 2
+#&gt;    type   fake 
+#&gt;    &lt;fct&gt;  &lt;fct&gt;
+#&gt;  1 whisky a    
+#&gt;  2 whisky a    
+#&gt;  3 whisky a    
+#&gt;  4 whisky a    
+#&gt;  5 whisky a    
+#&gt;  6 whisky a    
+#&gt;  7 whisky a    
+#&gt;  8 whisky a    
+#&gt;  9 whisky a    
+#&gt; 10 whisky a    
+#&gt; # ... with 30 more rows
+#&gt;   - also: $ldk</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

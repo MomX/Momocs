@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -145,23 +148,27 @@ used is partley derived from the Revolution Analytics blog post (with their auth
 <span class='no'>hearts</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
 <span class='fu'><a href='coo_slide.html'>coo_slide</a></span>(<span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='kw'>norm</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>() <span class='kw'>%&gt;%</span>
 <span class='co'># now the LDA and its summary</span>
-<span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>aut</span>) <span class='kw'>%&gt;%</span> <span class='fu'>classification_metrics</span>()</div><div class='output co'>#&gt; <span class='message'>'nb.h' not provided and set to 7 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>10 PC retained</span></div><div class='output co'>#&gt; $accuracy
+<span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>aut</span>) <span class='kw'>%&gt;%</span> <span class='fu'>classification_metrics</span>()</div><div class='output co'>#&gt; $accuracy
 #&gt; [1] 0.775
 #&gt; 
 #&gt; $macro_prf
-#&gt;       precision    recall        f1
-#&gt; ced   0.8666667 0.8666667 0.8666667
-#&gt; jeya  0.7500000 0.8000000 0.7741935
-#&gt; mat   0.5833333 0.4666667 0.5185185
-#&gt; ponnu 0.9259259 0.8333333 0.8771930
-#&gt; remi  0.8620690 0.8333333 0.8474576
-#&gt; rom   0.8387097 0.8666667 0.8524590
-#&gt; ruks  0.8709677 0.9000000 0.8852459
-#&gt; vince 0.5277778 0.6333333 0.5757576
+#&gt; # A tibble: 8 x 3
+#&gt;   precision recall    f1
+#&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     0.867  0.867 0.867
+#&gt; 2     0.750  0.800 0.774
+#&gt; 3     0.583  0.467 0.519
+#&gt; 4     0.926  0.833 0.877
+#&gt; 5     0.862  0.833 0.847
+#&gt; 6     0.839  0.867 0.852
+#&gt; 7     0.871  0.900 0.885
+#&gt; 8     0.528  0.633 0.576
 #&gt; 
 #&gt; $macro_avg
-#&gt;   avg_precision avg_recall    avg_f1
-#&gt; 1     0.7781813      0.775 0.7746865
+#&gt; # A tibble: 1 x 3
+#&gt;   avg_precision avg_recall avg_f1
+#&gt;           &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1         0.778      0.775  0.775
 #&gt; 
 #&gt; $ova
 #&gt; $ova$ced

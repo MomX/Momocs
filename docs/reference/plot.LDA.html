@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -198,9 +201,9 @@ or for every individual, see examples)</p></td>
     </tr>
     <tr>
       <th>pos.shp</th>
-      <td><p>passed to morphospace_positions, one of
+      <td><p>passed to <a href='morphospace_positions.html'>morphospace_positions</a>, one of
 <code>"range", "full", "circle", "xy", "range_axes", "full_axes"</code>. Or directly
-a matrix of positions. See morphospace_positions</p></td>
+a matrix of positions. See <a href='morphospace_positions.html'>morphospace_positions</a></p></td>
     </tr>
     <tr>
       <th>amp.shp</th>
@@ -413,9 +416,11 @@ See https://github.com/vbonhomme/Momocs/issues/121</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>24</span>)</div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>), <span class='st'>"type"</span>)</div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='fu'>plot</span>(<span class='no'>bot.l</span>)</div><div class='img'><img src='plot.LDA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; NULL</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>24</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>), <span class='st'>"type"</span>)
+<span class='fu'>plot</span>(<span class='no'>bot.l</span>)</div><div class='img'><img src='plot.LDA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='no'>bot.f</span>$<span class='no'>fac</span>$<span class='no'>fake</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
-<span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>), <span class='st'>"fake"</span>)</div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='fu'>plot</span>(<span class='no'>bot.l</span>)</div><div class='img'><img src='plot.LDA-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>), <span class='st'>"fake"</span>)
+<span class='fu'>plot</span>(<span class='no'>bot.l</span>)</div><div class='img'><img src='plot.LDA-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

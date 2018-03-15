@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -100,16 +103,16 @@
 a shape (mainly open outlines).</p>
     
 
-    <pre class="usage"><span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)
 
 <span class='co'># S3 method for Opn</span>
-<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)
 
 <span class='co'># S3 method for Coo</span>
-<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -121,10 +124,6 @@ a shape (mainly open outlines).</p>
     <tr>
       <th>nb.h</th>
       <td><p>numeric the number of harmonics to calculate</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>whether to print messages and progress bar.</p></td>
     </tr>
     </table>
     
@@ -143,8 +142,9 @@ a shape (mainly open outlines).</p>
     <p>This method has been only poorly tested in Momocs and should be considered as
 experimental. Yet improved by a factor 10, this method is still long to execute.
 It will be improved in further releases but it should not be so painful right now.
-It also explains that a progress bar is printed when 'verbose' is TRUE. Shapes should be aligned
+It also explains the progress bar. Shapes should be aligned
 before performing the dct transform.</p>
+<p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 

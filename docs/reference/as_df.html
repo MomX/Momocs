@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -139,26 +142,30 @@
     <pre class="examples"><div class='input'><span class='co'># smaller Out</span>
 <span class='no'>lite_bot</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>21</span>, <span class='fl'>22</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>12</span>)
 <span class='co'># Coo object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt;       id   x   y   type
-#&gt; 1 brahma  37 561 whisky
-#&gt; 2 brahma  63 361 whisky
-#&gt; 3 brahma  42 150 whisky
-#&gt; 4 brahma 143  15 whisky
-#&gt; 5 brahma 316 113 whisky
-#&gt; 6 brahma 305 302 whisky</div><div class='input'><span class='co'># Coe object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt;       id coefficient        value   type
-#&gt; 1 brahma          A1  1.000000000 whisky
-#&gt; 2 brahma          A2  0.011981787 whisky
-#&gt; 3 brahma          B1  0.000000000 whisky
-#&gt; 4 brahma          B2 -0.001124918 whisky
-#&gt; 5 brahma          C1  0.000000000 whisky
-#&gt; 6 brahma          C2 -0.004341232 whisky</div><div class='input'><span class='co'># PCA object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt;           .id   type         PC1           PC2           PC3          PC4
-#&gt; 1      brahma whisky -0.04488046  0.0168529232  4.544783e-05 5.614897e-17
-#&gt; 2       caney whisky -0.03300353 -0.0081976554  4.283401e-03 5.093717e-17
-#&gt; 3       amrut   beer -0.05172598 -0.0088654471 -3.884884e-03 4.245244e-17
-#&gt; 4 ballantines   beer  0.12960997  0.0002101794 -4.439654e-04 7.247341e-17</div><div class='input'><span class='co'># LDA object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>* you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>0.99 total variance</span></div><div class='output co'>#&gt; <span class='message'>2 PC retained</span></div><div class='output co'>#&gt;        f         PC1           PC2
+<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; # A tibble: 6 x 5
+#&gt;   id         x     y type   fake 
+#&gt;   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 brahma   37.  561. whisky a    
+#&gt; 2 brahma   63.  361. whisky a    
+#&gt; 3 brahma   42.  150. whisky a    
+#&gt; 4 brahma  143.   15. whisky a    
+#&gt; 5 brahma  316.  113. whisky a    
+#&gt; 6 brahma  305.  302. whisky a    </div><div class='input'><span class='co'># Coe object</span>
+<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; # A tibble: 6 x 5
+#&gt;   id     coefficient    value type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 brahma A1           1.00    whisky a    
+#&gt; 2 brahma A2           0.0120  whisky a    
+#&gt; 3 brahma B1           0.      whisky a    
+#&gt; 4 brahma B2          -0.00112 whisky a    
+#&gt; 5 brahma C1           0.      whisky a    
+#&gt; 6 brahma C2          -0.00434 whisky a    </div><div class='input'><span class='co'># PCA object</span>
+<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt;           .id   type fake         PC1           PC2           PC3          PC4
+#&gt; 1      brahma whisky    a -0.04488046  0.0168529232  4.544783e-05 5.614897e-17
+#&gt; 2       caney whisky    a -0.03300353 -0.0081976554  4.283401e-03 5.093717e-17
+#&gt; 3       amrut   beer    c -0.05172598 -0.0088654471 -3.884884e-03 4.245244e-17
+#&gt; 4 ballantines   beer    c  0.12960997  0.0002101794 -4.439654e-04 7.247341e-17</div><div class='input'><span class='co'># LDA object</span>
+<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt;        f         PC1           PC2
 #&gt; 1 whisky -0.04488046  0.0168529232
 #&gt; 2 whisky -0.03300353 -0.0081976554
 #&gt; 3   beer -0.05172598 -0.0088654471

@@ -121,8 +121,7 @@
 <a href="#new" class="anchor"></a>New</h3>
 <ul>
 <li>new functions: <code>andnow</code> and <code>andnow_method</code> class tells you what to do with this object, and which classes are supported by this function/method.</li>
-<li>new <code>coo_*</code> methods: <code>coo_range</code>, <code>coo_range_enlarge</code>, <code>coo_diffrange</code>
-</li>
+<li>new <code>coo_*</code> methods: <code>coo_range</code>, <code>coo_range_enlarge</code>, <code>coo_diffrange</code>, <code>coo_template_relatively</code>. The latter will prepare ground for proper size handling, notably for morphospaces.</li>
 <li>Many <code>coo</code> functions ported to methods and now supporting <code>.Coo</code> directly: <code>coo_angle_edges</code>, <code>coo_angle_tangent</code>, <code>coo_boundingbox</code>, <code>coo_calliper</code>, <code>coo_chull</code>, <code>coo_chull_onion</code>, <code>coo_circularity</code>, <code>coo_circularityharalick</code>, <code>coo_circularity_norm</code>, <code>coo_convexity</code>, <code>coo_dxy</code>, <code>coo_eccentricityboundingbox</code>, <code>coo_eccentricityeigen</code>, <code>coo_elongation</code>, <code>coo_intersect_angle</code>, <code>coo_intersect_direction</code>, <code>coo_intersect_segment</code>, <code>coo_perim</code>, <code>coo_perimcum</code>, <code>coo_perimpts</code>, <code>coo_rectangularity</code>, <code>coo_rectilinearity</code>, <code>coo_scalex</code>, <code>coo_scaley</code>, <code>coo_solidity</code>, <code>coo_truss</code>.</li>
 <li>Palettes are now those colorblind-friendly from RColorBrewer and those, state of the art, virids palettes. See also <code>pal_manual</code>, <code>pal_qual_solarized</code> and <code>pal_seq_grey</code>.</li>
 <li>
@@ -131,6 +130,8 @@
 <code>fgProcrustes</code> now accepts lists</li>
 <li>
 <code>efourier</code> with default <code>norm=TRUE</code> now messages about how wrong it may be</li>
+<li>
+<code><a href="http://dplyr.tidyverse.org/reference/reexports.html">dplyr::data_frame</a></code> everywhere pertinent</li>
 </ul>
 </div>
 <div id="deprecated" class="section level3">
@@ -154,6 +155,9 @@
 <li>
 <code>plot.Coo</code> is now <code>inspect</code>
 </li>
+<li>
+<code>pos.shapes</code> is now <code>morphospace_positions</code>
+</li>
 <li>Deprecated <code>stack2</code> and <code>panel2</code> before their rewriting</li>
 <li>Deprecated <code>as_Out</code>, that should have been <code>efourier_i.OutCoe</code> anyway.</li>
 <li>Consequently deprecated <code>panel.OutCoe</code> method that was additionnaly the only <code>Coe</code> method. May be back in further versions.</li>
@@ -170,7 +174,7 @@
 <a href="#dependencies" class="anchor"></a>Dependencies</h3>
 <ul>
 <li>Released <code>reshape2</code>, <code>plyr</code> dependencies</li>
-<li>Now depends <code>RColorBrewer</code>
+<li>Now depends <code>RColorBrewer</code>, <code>progress</code>, <code>tibble</code>
 </li>
 <li>Proper indications of external functions with <code>::</code>
 </li>
@@ -190,6 +194,10 @@
 <ul>
 <li>Waiting for a cleaner fix, <code>subset</code> is now <code>subsetize</code>…</li>
 <li>Fixed a bug in <code>LDA</code> when <code>retain=1</code> (#e7704eb)</li>
+<li>Messages homogeneity</li>
+<li>Internals have been lightened</li>
+<li>verbosity and progress bar are now handled via <code>options("verbose")</code>
+</li>
 <li>Various minor bugs fixes, see GitHub</li>
 </ul>
 </div>

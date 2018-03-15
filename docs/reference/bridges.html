@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -175,11 +178,13 @@ useful elsewhere</p>
 <span class='co'># data.frame/matrix</span>
 <span class='no'>wings</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
    <span class='fu'>m2d</span>() <span class='kw'>%T&gt;%</span> <span class='no'>print</span> <span class='kw'>%&gt;%</span>        <span class='co'># matrix to data.frame</span>
-   <span class='no'>d2m</span>                         <span class='co'># and back</span></div><div class='output co'>#&gt;         x       y
-#&gt; 1 -0.4933  0.0130
-#&gt; 2  0.2645  0.0261
+   <span class='no'>d2m</span>                         <span class='co'># and back</span></div><div class='output co'>#&gt; # A tibble: 4 x 2
+#&gt;         x       y
+#&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 -0.493   0.0130
+#&gt; 2  0.264   0.0261
 #&gt; 3  0.0424 -0.0966
-#&gt; 4 -0.1768  0.0341</div><div class='output co'>#&gt;            x       y
+#&gt; 4 -0.177   0.0341</div><div class='output co'>#&gt;            x       y
 #&gt; [1,] -0.4933  0.0130
 #&gt; [2,]  0.2645  0.0261
 #&gt; [3,]  0.0424 -0.0966

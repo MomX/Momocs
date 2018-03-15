@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -103,7 +106,7 @@ and specific methods can be applied.
 <code>OutCoe</code> objects are primarily <code><a href='Coe.html'>Coe</a></code> objects.</p>
     
 
-    <pre class="usage"><span class='fu'>OutCoe</span>(<span class='kw'>coe</span> <span class='kw'>=</span> <span class='fu'>matrix</span>(), <span class='kw'>fac</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(), <span class='no'>method</span>, <span class='no'>norm</span>)</pre>
+    <pre class="usage"><span class='fu'>OutCoe</span>(<span class='kw'>coe</span> <span class='kw'>=</span> <span class='fu'>matrix</span>(), <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>(), <span class='no'>method</span>, <span class='no'>norm</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -144,8 +147,8 @@ specifying the grouping structure</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># all OutCoe methods</span>
-<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>)</div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib hist     LDA      MANOVA   mshapes  panel   
-#&gt;  [9] PCA      print    rm_asym  rm_sym   symmetry
+<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>)</div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib hist     LDA      MANOVA   mshapes  PCA     
+#&gt;  [9] print    rm_asym  rm_sym   symmetry
 #&gt; see '?methods' for accessing help and source code</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -173,7 +176,13 @@ and <code>pal_seq_grey</code> only shades of grey from <code>grey10</code> to <c
 
 <span class='fu'>pal_seq_plasma</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
-<span class='fu'>pal_seq_viridis</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+<span class='fu'>pal_seq_viridis</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_qual</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_seq</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>pal_div</span>(<span class='no'>n</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -192,6 +201,14 @@ and <code>pal_seq_grey</code> only shades of grey from <code>grey10</code> to <c
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Default color palettes are currently:</p><ul>
+<li><p><code>pal_qual=pal_qual_Set2</code></p></li>
+<li><p><code>pal_seq=pal_seq_viridis</code></p></li>
+<li><p><code>pal_div=pal_div_RdBu</code></p></li>
+</ul>
+    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>RColorBrewer palettes are not happy when <code>n</code> is lower than 3 and above
@@ -207,6 +224,8 @@ create a color palette with colorRampPalette and return colors even so.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#note">Note</a></li>
       
       <li><a href="#examples">Examples</a></li>

@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -130,21 +133,21 @@ May be useful to remove digitization noise, mainly on outlines and open outlines
   <code><a href='coo_calliper.html'>coo_calliper</a></code>, <code><a href='coo_centdist.html'>coo_centdist</a></code>,
   <code><a href='coo_center.html'>coo_center</a></code>, <code><a href='coo_centpos.html'>coo_centpos</a></code>,
   <code><a href='coo_close.html'>coo_close</a></code>, <code><a href='coo_down.html'>coo_down</a></code>,
-  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_enlarge.html'>coo_enlarge</a></code>,
-  <code><a href='coo_extract.html'>coo_extract</a></code>, <code><a href='coo_flip.html'>coo_flipx</a></code>,
-  <code><a href='coo_force2close.html'>coo_force2close</a></code>,
+  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_extract.html'>coo_extract</a></code>,
+  <code><a href='coo_flip.html'>coo_flipx</a></code>, <code><a href='coo_force2close.html'>coo_force2close</a></code>,
   <code><a href='coo_interpolate.html'>coo_interpolate</a></code>, <code><a href='coo_jitter.html'>coo_jitter</a></code>,
   <code><a href='coo_left.html'>coo_left</a></code>, <code><a href='coo_nb.html'>coo_nb</a></code>,
-  <code>coo_perim</code>, <code><a href='coo_rev.html'>coo_rev</a></code>,
-  <code><a href='coo_right.html'>coo_right</a></code>, <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>,
-  <code><a href='coo_rotate.html'>coo_rotate</a></code>, <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
+  <code>coo_perim</code>, <code><a href='coo_range.html'>coo_range</a></code>,
+  <code><a href='coo_rev.html'>coo_rev</a></code>, <code><a href='coo_right.html'>coo_right</a></code>,
+  <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>, <code><a href='coo_rotate.html'>coo_rotate</a></code>,
+  <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
   <code><a href='coo_samplerr.html'>coo_samplerr</a></code>, <code><a href='coo_sample.html'>coo_sample</a></code>,
   <code>coo_scale</code>, <code><a href='coo_shear.html'>coo_shearx</a></code>,
   <code><a href='coo_slice.html'>coo_slice</a></code>,
   <code><a href='coo_slidedirection.html'>coo_slidedirection</a></code>,
   <code><a href='coo_slidegap.html'>coo_slidegap</a></code>, <code><a href='coo_slide.html'>coo_slide</a></code>,
   <code><a href='coo_smoothcurve.html'>coo_smoothcurve</a></code>,
-  <code><a href='coo_template.html'>coo_template</a></code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
+  <code>coo_template</code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
   <code><a href='coo_trimbottom.html'>coo_trimbottom</a></code>, <code><a href='coo_trimtop.html'>coo_trimtop</a></code>,
   <code><a href='coo_trim.html'>coo_trim</a></code>, <code><a href='coo_up.html'>coo_up</a></code>,
   <code><a href='is_clockwise.html'>is_clockwise</a></code>, <code><a href='is_closed.html'>is_closed</a></code>,
@@ -153,7 +156,7 @@ May be useful to remove digitization noise, mainly on outlines and open outlines
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
-<span class='fu'>stack</span>(<span class='no'>bot</span>)</div><div class='img'><img src='coo_smooth-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>stack</span>(<span class='fu'>coo_smooth</span>(<span class='no'>bot</span>, <span class='fl'>10</span>))</div><div class='img'><img src='coo_smooth-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>])</div><div class='img'><img src='coo_smooth-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_smooth</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>30</span>))</div><div class='img'><img src='coo_smooth-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_smooth-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'>coo_smooth</span>(<span class='no'>bot</span>, <span class='fl'>10</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_smooth-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>])</div><div class='img'><img src='coo_smooth-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_smooth</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>30</span>))</div><div class='img'><img src='coo_smooth-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

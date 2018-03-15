@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -100,7 +103,7 @@
 that can be used to import outline/landmark coordinates.</p>
     
 
-    <pre class="usage"><span class='fu'>import_txt</span>(<span class='kw'>txt.paths</span> <span class='kw'>=</span> <span class='fu'>.lf.auto</span>(), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>import_txt</span>(<span class='kw'>txt.paths</span> <span class='kw'>=</span> <span class='fu'>.lf.auto</span>(), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -110,10 +113,6 @@ that can be used to import outline/landmark coordinates.</p>
       <td><p>a vector of paths corresponding to the .txt files to import. If not
 provided (or <code>NULL</code>), switches to the automatic version, just as in <a href='import_jpg.html'>import_jpg</a>.
 See Details there.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>logical whether to print progress in the console</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -138,6 +137,7 @@ has a header (eg ('x', 'y')), do not forget <code>header=TRUE</code>.</p>
     <p>Note this function will be deprecated from Momocs
 when <code>Momacs</code> and <code>Momit</code>
 will be fully operationnal.</p>
+<p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

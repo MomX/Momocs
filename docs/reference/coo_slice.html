@@ -72,6 +72,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -135,20 +138,20 @@ If provided, <code>ids</code> will be ignored.</p></td>
   <code><a href='coo_calliper.html'>coo_calliper</a></code>, <code><a href='coo_centdist.html'>coo_centdist</a></code>,
   <code><a href='coo_center.html'>coo_center</a></code>, <code><a href='coo_centpos.html'>coo_centpos</a></code>,
   <code><a href='coo_close.html'>coo_close</a></code>, <code><a href='coo_down.html'>coo_down</a></code>,
-  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_enlarge.html'>coo_enlarge</a></code>,
-  <code><a href='coo_extract.html'>coo_extract</a></code>, <code><a href='coo_flip.html'>coo_flipx</a></code>,
-  <code><a href='coo_force2close.html'>coo_force2close</a></code>,
+  <code><a href='coo_dxy.html'>coo_dxy</a></code>, <code><a href='coo_extract.html'>coo_extract</a></code>,
+  <code><a href='coo_flip.html'>coo_flipx</a></code>, <code><a href='coo_force2close.html'>coo_force2close</a></code>,
   <code><a href='coo_interpolate.html'>coo_interpolate</a></code>, <code><a href='coo_jitter.html'>coo_jitter</a></code>,
   <code><a href='coo_left.html'>coo_left</a></code>, <code><a href='coo_nb.html'>coo_nb</a></code>,
-  <code>coo_perim</code>, <code><a href='coo_rev.html'>coo_rev</a></code>,
-  <code><a href='coo_right.html'>coo_right</a></code>, <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>,
-  <code><a href='coo_rotate.html'>coo_rotate</a></code>, <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
+  <code>coo_perim</code>, <code><a href='coo_range.html'>coo_range</a></code>,
+  <code><a href='coo_rev.html'>coo_rev</a></code>, <code><a href='coo_right.html'>coo_right</a></code>,
+  <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a></code>, <code><a href='coo_rotate.html'>coo_rotate</a></code>,
+  <code><a href='coo_sample_prop.html'>coo_sample_prop</a></code>,
   <code><a href='coo_samplerr.html'>coo_samplerr</a></code>, <code><a href='coo_sample.html'>coo_sample</a></code>,
   <code>coo_scale</code>, <code><a href='coo_shear.html'>coo_shearx</a></code>,
   <code><a href='coo_slidedirection.html'>coo_slidedirection</a></code>,
   <code><a href='coo_slidegap.html'>coo_slidegap</a></code>, <code><a href='coo_slide.html'>coo_slide</a></code>,
   <code><a href='coo_smoothcurve.html'>coo_smoothcurve</a></code>, <code><a href='coo_smooth.html'>coo_smooth</a></code>,
-  <code><a href='coo_template.html'>coo_template</a></code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
+  <code>coo_template</code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
   <code><a href='coo_trimbottom.html'>coo_trimbottom</a></code>, <code><a href='coo_trimtop.html'>coo_trimtop</a></code>,
   <code><a href='coo_trim.html'>coo_trim</a></code>, <code><a href='coo_up.html'>coo_up</a></code>,
   <code><a href='is_clockwise.html'>is_clockwise</a></code>, <code><a href='is_closed.html'>is_closed</a></code>,
@@ -167,7 +170,7 @@ If provided, <code>ids</code> will be ignored.</p></td>
 <span class='co'># hearts as an example</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>h</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1</span>)
 <span class='co'># 4 landmarks</span>
-<span class='fu'>stack</span>(<span class='no'>x</span>)</div><div class='img'><img src='coo_slice-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>x</span>$<span class='no'>ldk</span>[<span class='fl'>1</span>:<span class='fl'>5</span>]</div><div class='output co'>#&gt; [[1]]
+<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slice-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>x</span>$<span class='no'>ldk</span>[<span class='fl'>1</span>:<span class='fl'>5</span>]</div><div class='output co'>#&gt; [[1]]
 #&gt; [1] 65 56 50 19
 #&gt; 
 #&gt; [[2]]
@@ -186,12 +189,12 @@ If provided, <code>ids</code> will be ignored.</p></td>
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>coo_slice</span>(<span class='no'>x</span>, <span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>4</span>)
 
 <span class='co'># plotting</span>
-<span class='fu'>stack</span>(<span class='no'>y</span><span class='kw'>[[</span><span class='fl'>1</span>]])</div><div class='img'><img src='coo_slice-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>stack</span>(<span class='no'>y</span><span class='kw'>[[</span><span class='fl'>2</span>]])</div><div class='img'><img src='coo_slice-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>y</span><span class='kw'>[[</span><span class='fl'>1</span>]])</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slice-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>y</span><span class='kw'>[[</span><span class='fl'>2</span>]])</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slice-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># new ldks from tipping points, new ldks from angle</span>
 <span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='no'>def_ldk_tips</span> <span class='kw'>%&gt;%</span>
 <span class='fu'><a href='def_ldk_angle.html'>def_ldk_angle</a></span>(<span class='fl'>0.75</span>*<span class='no'>pi</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='def_ldk_angle.html'>def_ldk_angle</a></span>(<span class='fl'>0.25</span>*<span class='no'>pi</span>) <span class='kw'>%&gt;%</span>
 <span class='fu'>coo_slice</span>(<span class='kw'>ldk</span> <span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>4</span>) <span class='kw'>-&gt;</span> <span class='no'>oleas</span>
-<span class='no'>oleas</span><span class='kw'>[[</span><span class='fl'>1</span>]] <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='img'><img src='coo_slice-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>oleas</span><span class='kw'>[[</span><span class='fl'>2</span>]] <span class='kw'>%&gt;%</span> <span class='no'>stack</span> <span class='co'># etc.</span></div><div class='img'><img src='coo_slice-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>oleas</span><span class='kw'>[[</span><span class='fl'>1</span>]] <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slice-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>oleas</span><span class='kw'>[[</span><span class='fl'>2</span>]] <span class='kw'>%&gt;%</span> <span class='no'>stack</span> <span class='co'># etc.</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slice-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># domestic operations</span>
 <span class='no'>y</span><span class='kw'>[[</span><span class='fl'>3</span>]] <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_area.html'>coo_area</a></span>()</div><div class='output co'>#&gt;        shp1        shp2        shp3        shp4        shp5 
 #&gt; 0.001685074 0.007028611 0.010968832 0.009963151 0.016916559 </div><div class='input'><span class='co'># shape analysis of a slice</span>
