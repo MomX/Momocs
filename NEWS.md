@@ -37,7 +37,7 @@
 
 ### Dependencies
 * Released `reshape2`, `plyr` dependencies
-* Now depends `RColorBrewer`, `progress`, `tibble`
+* Now depends `RColorBrewer`, `progress`
 * Proper indications of external functions with `::`
 
 ### Breaking changes
