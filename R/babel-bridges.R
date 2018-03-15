@@ -215,7 +215,6 @@ as_df.Coo <- function(x){
   }
   #rbind them all and return
   do.call("rbind", res) %>%
-    dplyr::as_data_frame() %>%
     return()
 }
 
@@ -238,7 +237,6 @@ as_df.Coe <- function(x){
   }
   #rbind them all and return
   do.call("rbind", res) %>%
-    dplyr::as_data_frame() %>%
     return()
 }
 

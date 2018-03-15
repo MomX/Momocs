@@ -892,7 +892,7 @@ table.LDA <- table.Coo
 #' rw_fac(bot2, "fake", c("a", "e"), "ae")$fake
 #' @export
 rw_fac <- function(x, fac, from, to){
-  new_levels <- unique(c(levels(x$fac[, fac]), to))
+  new_levels <- unique(c(levels(x$fac[, fac] %>% unlist), to))
   fac2 <- factor(x$fac[, fac], levels = new_levels)
   for (i in seq_along(from)) {
     fac2[which(fac2==from[i])] <- to
@@ -919,7 +919,8 @@ rw_fac <- function(x, fac, from, to){
 #' at_least(trilo, "onto", 2000) # too ambitious !
 #' @export
 at_least <- function(x, fac, N){
-  retain <- x$fac[, fac] %in% names(which(table(x$fac[, fac]) >= N))
+  n <- .fac_dispatcher(x, fac)
+  retain <- n %in% names(which(table(n) >= N))
   if (!any(retain)) {
     message("no group with at least ", N, " indidivuals")
     return(slice(x, 0))

@@ -457,7 +457,6 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
                                     Var2=colnames(df)[i],
                                     value=df[,i])) %>%
       do.call("rbind", .) %>%
-      dplyr::as_data_frame %>%
       `colnames<-`(c("score", "PC", "value"))
     gg <- ggplot(data=df, aes_string(x="PC", y="value")) +
       geom_boxplot() + labs(x=NULL, y="score")
@@ -471,13 +470,9 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
     } else {
       ### fac provided
       # fac provided, as formula
-      if (class(fac)=="formula"){
-        f0 <- PCA$fac[, attr(terms(fac), "term.labels")]
-        fac <- interaction(f0)
-      }
-      # fac provided, as column name or id
-      if (!is.factor(fac)) { fac <- factor(PCA$fac[, fac]) }
-      fac <- factor(fac) # I love R
+
+      fac <- .fac_dispatcher(x, fac)
+
       df <- data.frame(PCA$x[, nax])
       df <- df %>% seq_along %>%
         lapply(function(i) data.frame(fac=fac,
@@ -485,7 +480,6 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
                                       Var2=colnames(df)[i],
                                       value=df[,i])) %>%
         do.call("rbind", .) %>%
-        dplyr::as_data_frame %>%
         `colnames<-`(c("fac", "name", "PC", "value"))
       gg <- ggplot(data=df, aes_string(x="PC", y="value", fill="fac")) +
         geom_boxplot() + labs(x=NULL, y="score", fill=NULL)
@@ -671,7 +665,7 @@ calculate_ellipse <- function(data, vars, type, level, segments){
     unit.circle <- cbind(cos(angles), sin(angles))
     ellipse <- t(center + radius * t(unit.circle %*% chol_decomp))
   }
-  ellipse <- dplyr::as_data_frame(ellipse)
+  ellipse <- as.data.frame(ellipse)
   colnames(ellipse) <- vars
   return(ellipse)
 }

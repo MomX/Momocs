@@ -67,7 +67,7 @@ calibrate_reconstructions.Out <-
     # we prepare the plot
     names(res) <- range
     coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>%
-      do.call("rbind", .) %>% dplyr::as_data_frame()
+      do.call("rbind", .)
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- method_i(method(coo, nb.h = max.h))
@@ -152,7 +152,7 @@ calibrate_reconstructions.Opn <-
     # we prepare the plot
     names(res) <- range
     coos <- lapply(seq_along(res), function(i) data.frame(i, res[[i]])) %>%
-      do.call("rbind", .) %>% dplyr::as_data_frame()
+      do.call("rbind", .)
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- res[[length(res)]]
@@ -386,7 +386,7 @@ calibrate_deviations.Out <-
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%
-        do.call("rbind", .) %>% dplyr::as_data_frame()
+        do.call("rbind", .)
       colnames(xx) <- c("harm", "pt", "med")
       # hideous - todo
       xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
@@ -660,7 +660,6 @@ calibrate_harmonicpower.Out <- function(x, method = "efourier", id = 1:length(x)
                                   Var2=colnames(res)[i],
                                   value=res[,i])) %>%
     do.call("rbind", .) %>%
-    dplyr::as_data_frame() %>%
     `colnames<-`(c("shp", "harm", "hp")) -> xx
   if (length(id) > 2) {
     gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
@@ -729,7 +728,6 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
                                   Var2=colnames(res)[i],
                                   value=res[,i])) %>%
     do.call("rbind", .) %>%
-    dplyr::as_data_frame() %>%
     `colnames<-`(c("shp", "harm", "hp")) -> xx
   gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
     labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
@@ -811,7 +809,6 @@ calibrate_r2 <- function(Opn, method = "opoly", id = 1:length(Opn),
                                   Var2=colnames(res)[i],
                                   value=res[,i])) %>%
     do.call("rbind", .) %>%
-    dplyr::as_data_frame() %>%
     `colnames<-`(c("shp", "degree", "r2")) -> xx
   gg <- ggplot(xx, aes_string(x="degree", y="r2")) + geom_boxplot() +
     labs(x="Degree", y="r2") +

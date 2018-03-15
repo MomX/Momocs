@@ -101,7 +101,7 @@ breed.Coe <- function(x, fac, size, rate=1, ...){
       x2[[i]]$fac <- data.frame(group=rep(names(x2)[i], length(x2[[i]])))
     }
     # retrieves all $fac (freshly created) and rbind them
-    facs <- lapply(x2, function(.) `$`(., fac)) %>% do.call("rbind", .) %>% dplyr::as_data_frame
+    facs <- lapply(x2, function(.) `$`(., fac)) %>% do.call("rbind", .)
     colnames(facs) <- colnames(x$fac)
     final <- x2[[1]] # final OutCoe shoudl looks like any other Coes in the list
     final$coe <- coes
