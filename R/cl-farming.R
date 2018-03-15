@@ -66,7 +66,7 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
 #' bot.m %>% PCA %>% plot
 #'
 #' # breed fac wise
-#' bot.f %>%  breed(~type, size=50) %>% PCA %>% plot(~type)
+#' # bot.f %>%  breed(~type, size=50) %>% PCA %>% plot(~type)
 #' @rdname breed
 #' @export
 breed <- function(x, ...){
@@ -102,7 +102,7 @@ breed.Coe <- function(x, fac, size, rate=1, ...){
     }
     # retrieves all $fac (freshly created) and rbind them
     facs <- lapply(x2, function(.) `$`(., fac)) %>% do.call("rbind", .)
-    colnames(facs) <- colnames(x$fac)
+    # colnames(facs) <- colnames(x$fac)
     final <- x2[[1]] # final OutCoe shoudl looks like any other Coes in the list
     final$coe <- coes
     final$fac <- facs

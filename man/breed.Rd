@@ -43,7 +43,7 @@ bot.m <- breed(bot.f, size=80)
 bot.m \%>\% PCA \%>\% plot
 
 # breed fac wise
-bot.f \%>\%  breed(~type, size=50) \%>\% PCA \%>\% plot(~type)
+# bot.f \%>\%  breed(~type, size=50) \%>\% PCA \%>\% plot(~type)
 }
 \seealso{
 Other farming: \code{\link{perm}}
