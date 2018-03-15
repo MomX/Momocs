@@ -30,9 +30,11 @@ Calculate and displays reconstructed shapes using a
 range of harmonic number. Compare them visually with the maximal fit.
 }
 \examples{
-calibrate_reconstructions(bot, "efourier", range=1:12)
+bot \%>\% slice(1:5) \%>\% #for the sake of speed
+    calibrate_reconstructions("efourier", range=1:12)
 
-calibrate_reconstructions(olea, "dfourier")
+olea \%>\% slice(1:5) \%>\% #for the sake of speed
+    calibrate_reconstructions("dfourier")
 }
 \seealso{
 Other calibration: \code{\link{calibrate_deviations}},

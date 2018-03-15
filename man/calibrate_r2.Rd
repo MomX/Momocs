@@ -36,7 +36,8 @@ Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
 \dontrun{
-calibrate_r2(olea, "opoly", degree.range=1:5, thresh=c(0.9, 0.99))
+olea \%>\% slice(1:5) \%>\% #for the sake of spped
+    calibrate_r2("opoly", degree.range=1:5, thresh=c(0.9, 0.99))
 }
 
 }

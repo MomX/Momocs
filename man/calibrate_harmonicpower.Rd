@@ -50,10 +50,11 @@ and as follows for radii variation and tangent angle:
 \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 }
 \examples{
-cal <- calibrate_harmonicpower(bot)
+cal <- bot \%>\% slice(1:5) \%>\% #for the sake of speed
+    calibrate_harmonicpower()
 \dontrun{
 # for Opn objects
-calibrate_harmonicpower(olea, "dfourier")
+olea \%>\% slice(1:5) \%>\% calibrate_harmonicpower("dfourier")
 
 # let customize the ggplot
 library(ggplot2)
@@ -61,9 +62,6 @@ cal$gg + theme_minimal() +
 coord_cartesian(xlim=c(3.5, 12.5), ylim=c(90, 100)) +
 ggtitle("Harmonic power calibration")
 }
-# if you want to do efourier with 99\% calibrate_harmonicpower in one step
-# efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99\%"])
-
 }
 \seealso{
 Other calibration: \code{\link{calibrate_deviations}},

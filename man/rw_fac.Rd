@@ -9,7 +9,7 @@ rw_fac(x, fac, from, to)
 \arguments{
 \item{x}{any Momocs object}
 
-\item{fac}{the id of the name of the $fac column to look for}
+\item{fac}{the id of the name of the $fac column to look for (\link{fac_dispatcher} not yet supported)}
 
 \item{from}{which level(s) should be renamed; passed as a single or several characters}
 

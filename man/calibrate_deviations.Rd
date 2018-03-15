@@ -54,16 +54,18 @@ in further versions.
 For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.
 }
 \examples{
-calibrate_deviations(bot)
+bot \%>\% slice(1:5) \%>\% #for the sake of speed
+   calibrate_deviations()
 
 \dontrun{
 
 # on Opn
-calibrate_deviations(olea)
+olea \%>\% slice(1:5) \%>\% #for the sake of speed
+   calibrate_deviations()
 
 # lets customize the ggplot
 library(ggplot2)
-gg <- calibrate_deviations(bot, id=1:20)$gg
+gg <- calibrate_deviations(bot, id=1:10)$gg
 gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
 gg + labs(col="Number of harmonics", fill="Number of harmonics",
            title="Harmonic power") + theme_bw()

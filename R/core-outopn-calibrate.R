@@ -16,9 +16,11 @@
 #' @return a ggplot object and the full list of intermediate results. See examples.
 #' @family calibration
 #' @examples
-#' calibrate_reconstructions(bot, "efourier", range=1:12)
+#' bot %>% slice(1:5) %>% #for the sake of speed
+#'     calibrate_reconstructions("efourier", range=1:12)
 #'
-#' calibrate_reconstructions(olea, "dfourier")
+#' olea %>% slice(1:5) %>% #for the sake of speed
+#'     calibrate_reconstructions("dfourier")
 #' @export
 calibrate_reconstructions <-
   function(x, method, id, range, baseline1, baseline2) {
@@ -221,16 +223,18 @@ calibrate_reconstructions.Opn <-
 #' @return a ggplot object and the full list of intermediate results. See examples.
 #' @family calibration
 #' @examples
-#' calibrate_deviations(bot)
+#' bot %>% slice(1:5) %>% #for the sake of speed
+#'    calibrate_deviations()
 #'
 #' \dontrun{
 #'
 #' # on Opn
-#' calibrate_deviations(olea)
+#' olea %>% slice(1:5) %>% #for the sake of speed
+#'    calibrate_deviations()
 #'
 #' # lets customize the ggplot
 #' library(ggplot2)
-#' gg <- calibrate_deviations(bot, id=1:20)$gg
+#' gg <- calibrate_deviations(bot, id=1:10)$gg
 #' gg + geom_hline(yintercept=c(0.001, 0.005), linetype=3)
 #' gg + labs(col="Number of harmonics", fill="Number of harmonics",
 #'            title="Harmonic power") + theme_bw()
@@ -600,10 +604,11 @@ calibrate_deviations.Opn<-
 #' \eqn{HarmonicPower_n= \frac{A^2_n+B^2_n+C^2_n+D^2_n}{2}}
 #' @family calibration
 #' @examples
-#' cal <- calibrate_harmonicpower(bot)
+#' cal <- bot %>% slice(1:5) %>% #for the sake of speed
+#'     calibrate_harmonicpower()
 #' \dontrun{
 #' # for Opn objects
-#' calibrate_harmonicpower(olea, "dfourier")
+#' olea %>% slice(1:5) %>% calibrate_harmonicpower("dfourier")
 #'
 #' # let customize the ggplot
 #' library(ggplot2)
@@ -611,9 +616,6 @@ calibrate_deviations.Opn<-
 #' coord_cartesian(xlim=c(3.5, 12.5), ylim=c(90, 100)) +
 #' ggtitle("Harmonic power calibration")
 #' }
-#' # if you want to do efourier with 99% calibrate_harmonicpower in one step
-#' # efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
-#'
 #' @export
 calibrate_harmonicpower <- function(x, method, id, nb.h, drop, thresh, plot) {
   UseMethod("calibrate_harmonicpower")
@@ -770,7 +772,8 @@ calibrate_harmonicpower.Opn <- function(x, method = "dfourier", id = 1:length(x)
 #' @family calibration
 #' @examples
 #' \dontrun{
-#' calibrate_r2(olea, "opoly", degree.range=1:5, thresh=c(0.9, 0.99))
+#' olea %>% slice(1:5) %>% #for the sake of spped
+#'     calibrate_r2("opoly", degree.range=1:5, thresh=c(0.9, 0.99))
 #' }
 #'
 #' @export
