@@ -172,19 +172,17 @@ and as follows for radii variation and tangent angle:
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>cal</span> <span class='kw'>&lt;-</span> <span class='fu'>calibrate_harmonicpower</span>(<span class='no'>bot</span>)</div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='432.632880098887' /></div><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='no'>cal</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
+    <span class='fu'>calibrate_harmonicpower</span>()</div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='432.632880098887' /></div><span class='co'># NOT RUN {</span>
 <span class='co'># for Opn objects</span>
-<span class='fu'>calibrate_harmonicpower</span>(<span class='no'>olea</span>, <span class='st'>"dfourier"</span>)
+<span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower</span>(<span class='st'>"dfourier"</span>)
 
 <span class='co'># let customize the ggplot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='no'>cal</span>$<span class='no'>gg</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_minimal</a></span>() +
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a></span>(<span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>3.5</span>, <span class='fl'>12.5</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>100</span>)) +
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggtitle</a></span>(<span class='st'>"Harmonic power calibration"</span>)
-<span class='co'># }</span><div class='input'># if you want to do efourier with 99% calibrate_harmonicpower in one step
-# efourier(bot, nb.h=calibrate_harmonicpower(bot, "efourier", plot=FALSE)$minh["99%"])
-
-</div></pre>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

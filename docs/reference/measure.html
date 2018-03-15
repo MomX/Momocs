@@ -131,17 +131,73 @@ functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># lets write a custom function</span>
-<span class='no'>coo_ellipse_area</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>){
-  <span class='fu'>prod</span>(<span class='fu'><a href='coo_lw.html'>coo_lw</a></span>(<span class='no'>x</span>))*<span class='no'>pi</span>
-}
-<span class='no'>bm</span> <span class='kw'>&lt;-</span> <span class='fu'>measure</span>(<span class='no'>bot</span>, <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>, <span class='no'>coo_ellipse_area</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(as.character(FUN), mode = "function", envir = envir): object 'coo_ellipse_area' of mode 'function' was not found</span></div><div class='input'><span class='no'>bm</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'bm' not found</span></div><div class='input'><span class='no'>bm</span>$<span class='no'>coe</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'bm' not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>bm</span> <span class='kw'>&lt;-</span> <span class='fu'>measure</span>(<span class='no'>bot</span>, <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)
+<span class='no'>bm</span></div><div class='output co'>#&gt; A TraCoe object --------------------
+#&gt;  - $coe: 40 shapes described with 2 variables
+#&gt; # A tibble: 40 x 2
+#&gt;    type   fake 
+#&gt;    &lt;fct&gt;  &lt;fct&gt;
+#&gt;  1 whisky a    
+#&gt;  2 whisky a    
+#&gt;  3 whisky a    
+#&gt;  4 whisky a    
+#&gt;  5 whisky a    
+#&gt;  6 whisky a    
+#&gt;  7 whisky a    
+#&gt;  8 whisky a    
+#&gt;  9 whisky a    
+#&gt; 10 whisky a    
+#&gt; # ... with 30 more rows</div><div class='input'><span class='no'>bm</span>$<span class='no'>coe</span></div><div class='output co'>#&gt; # A tibble: 40 x 2
+#&gt;       area perim
+#&gt;  *   &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 234515. 2482.
+#&gt;  2 201056. 2269.
+#&gt;  3 119460. 1578.
+#&gt;  4 119568. 1817.
+#&gt;  5 165736. 2066.
+#&gt;  6 114015. 1487.
+#&gt;  7 149503. 1954.
+#&gt;  8 147642. 1826.
+#&gt;  9 130178. 1751.
+#&gt; 10 219548. 2399.
+#&gt; # ... with 30 more rows</div><div class='input'>
 <span class='co'># how to use arguments, eg with the d() function</span>
-<span class='fu'>measure</span>(<span class='no'>wings</span>, <span class='no'>coo_area</span>, <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>), <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))</div><div class='output co'>#&gt; <span class='error'>Error in .::dplyr: unused argument (as_data_frame)</span></div><div class='input'>
-<span class='co'># alternatively</span>
-<span class='fu'>measure</span>(<span class='no'>bot</span>$<span class='no'>coo</span>, <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>, <span class='no'>coo_ellipse_area</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(as.character(FUN), mode = "function", envir = envir): object 'coo_ellipse_area' of mode 'function' was not found</span></div><div class='input'>
-<span class='co'># and also</span>
-<span class='fu'>measure</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>, <span class='no'>coo_ellipse_area</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(as.character(FUN), mode = "function", envir = envir): object 'coo_ellipse_area' of mode 'function' was not found</span></div></pre>
+<span class='fu'>measure</span>(<span class='no'>wings</span>, <span class='no'>coo_area</span>, <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>), <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))</div><div class='output co'>#&gt; A TraCoe object --------------------
+#&gt;  - $coe: 127 shapes described with 3 variables
+#&gt; # A tibble: 127 x 1
+#&gt;    group
+#&gt;    &lt;fct&gt;
+#&gt;  1 AN   
+#&gt;  2 AN   
+#&gt;  3 AN   
+#&gt;  4 AN   
+#&gt;  5 AN   
+#&gt;  6 AN   
+#&gt;  7 AN   
+#&gt;  8 AN   
+#&gt;  9 AN   
+#&gt; 10 AN   
+#&gt; # ... with 117 more rows</div><div class='input'>
+<span class='co'># alternatively, to get a data_frame</span>
+<span class='fu'>measure</span>(<span class='no'>bot</span>$<span class='no'>coo</span>, <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)</div><div class='output co'>#&gt; # A tibble: 40 x 2
+#&gt;       area perim
+#&gt;  *   &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 234515. 2482.
+#&gt;  2 201056. 2269.
+#&gt;  3 119460. 1578.
+#&gt;  4 119568. 1817.
+#&gt;  5 165736. 2066.
+#&gt;  6 114015. 1487.
+#&gt;  7 149503. 1954.
+#&gt;  8 147642. 1826.
+#&gt;  9 130178. 1751.
+#&gt; 10 219548. 2399.
+#&gt; # ... with 30 more rows</div><div class='input'>
+<span class='co'># and also, to get a data_frame (one row)</span>
+<span class='fu'>measure</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;      area perim
+#&gt;     &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 234515. 2482.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

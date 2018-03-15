@@ -114,7 +114,7 @@ at the import, or merge some levels within covariates. Drops levels silently.</p
     </tr>
     <tr>
       <th>fac</th>
-      <td><p>the id of the name of the $fac column to look for</p></td>
+      <td><p>the id of the name of the $fac column to look for (<a href='fac_dispatcher.html'>fac_dispatcher</a> not yet supported)</p></td>
     </tr>
     <tr>
       <th>from</th>
@@ -135,39 +135,29 @@ at the import, or merge some levels within covariates. Drops levels silently.</p
     <p>Other handling functions: <code><a href='arrange.html'>arrange</a></code>,
   <code><a href='at_least.html'>at_least</a></code>, <code><a href='chop.html'>chop</a></code>,
   <code><a href='combine.html'>combine</a></code>, <code><a href='dissolve.html'>dissolve</a></code>,
-  <code><a href='filter.html'>filter</a></code>, <code><a href='mutate.html'>mutate</a></code>,
-  <code><a href='rename.html'>rename</a></code>, <code><a href='rescale.html'>rescale</a></code>,
-  <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
-  <code><a href='sample_frac.html'>sample_frac</a></code>, <code><a href='sample_n.html'>sample_n</a></code>,
-  <code><a href='select.html'>select</a></code>, <code><a href='slice.html'>slice</a></code>,
-  <code><a href='table.html'>table</a></code></p>
+  <code><a href='fac_dispatcher.html'>fac_dispatcher</a></code>, <code><a href='filter.html'>filter</a></code>,
+  <code><a href='mutate.html'>mutate</a></code>, <code><a href='rename.html'>rename</a></code>,
+  <code><a href='rescale.html'>rescale</a></code>, <code><a href='rm_harm.html'>rm_harm</a></code>,
+  <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>, <code><a href='sample_frac.html'>sample_frac</a></code>,
+  <code><a href='sample_n.html'>sample_n</a></code>, <code><a href='select.html'>select</a></code>,
+  <code><a href='slice.html'>slice</a></code>, <code><a href='table.html'>table</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># single renaming</span>
-<span class='fu'>rw_fac</span>(<span class='no'>bot</span>, <span class='st'>"type"</span>, <span class='st'>"whisky"</span>, <span class='st'>"agua_de_fuego"</span>) <span class='co'># 1 instead of "type" is fine too</span></div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 40 outlines, 162 +/- 21 coords (in $coo)
-#&gt;   - 2 classifiers (in $fac): 
-#&gt; # A tibble: 40 x 2
-#&gt;    type  fake 
-#&gt;    &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 &lt;NA&gt;  a    
-#&gt;  2 &lt;NA&gt;  a    
-#&gt;  3 &lt;NA&gt;  a    
-#&gt;  4 &lt;NA&gt;  a    
-#&gt;  5 &lt;NA&gt;  a    
-#&gt;  6 &lt;NA&gt;  a    
-#&gt;  7 &lt;NA&gt;  a    
-#&gt;  8 &lt;NA&gt;  a    
-#&gt;  9 &lt;NA&gt;  a    
-#&gt; 10 &lt;NA&gt;  a    
-#&gt; # ... with 30 more rows
-#&gt;   - also: $ldk</div><div class='input'><span class='co'># several renaming</span>
+<span class='fu'>rw_fac</span>(<span class='no'>bot</span>, <span class='st'>"type"</span>, <span class='st'>"whisky"</span>, <span class='st'>"agua_de_fuego"</span>)$<span class='no'>type</span> <span class='co'># 1 instead of "type" is fine too</span></div><div class='output co'>#&gt;  [1] beer          beer          beer          beer          beer         
+#&gt;  [6] beer          beer          beer          beer          beer         
+#&gt; [11] beer          beer          beer          beer          beer         
+#&gt; [16] beer          beer          beer          beer          beer         
+#&gt; [21] agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego
+#&gt; [26] agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego
+#&gt; [31] agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego
+#&gt; [36] agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego agua_de_fuego
+#&gt; Levels: agua_de_fuego beer</div><div class='input'><span class='co'># several renaming</span>
 <span class='no'>bot2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='no'>bot</span>, <span class='kw'>fake</span><span class='kw'>=</span><span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='fl'>10</span>)))
-<span class='fu'>rw_fac</span>(<span class='no'>bot2</span>, <span class='st'>"fake"</span>, <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>), <span class='st'>"ae"</span>)$<span class='no'>fake</span></div><div class='output co'>#&gt;  [1] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
-#&gt; [16] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
-#&gt; [31] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
-#&gt; Levels: </div></pre>
+<span class='fu'>rw_fac</span>(<span class='no'>bot2</span>, <span class='st'>"fake"</span>, <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>), <span class='st'>"ae"</span>)$<span class='no'>fake</span></div><div class='output co'>#&gt;  [1] ae ae b  c  ae ae b  c  ae ae b  c  ae ae b  c  ae ae b  c  ae ae b  c  ae
+#&gt; [26] ae b  c  ae ae b  c  ae ae b  c  ae ae b  c 
+#&gt; Levels: ae b c</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

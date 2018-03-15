@@ -129,20 +129,53 @@
 
     <p>Other handling functions: <code><a href='arrange.html'>arrange</a></code>,
   <code><a href='chop.html'>chop</a></code>, <code><a href='combine.html'>combine</a></code>,
-  <code><a href='dissolve.html'>dissolve</a></code>, <code><a href='filter.html'>filter</a></code>,
-  <code><a href='mutate.html'>mutate</a></code>, <code><a href='rename.html'>rename</a></code>,
-  <code><a href='rescale.html'>rescale</a></code>, <code><a href='rm_harm.html'>rm_harm</a></code>,
-  <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>, <code><a href='rw_fac.html'>rw_fac</a></code>,
-  <code><a href='sample_frac.html'>sample_frac</a></code>, <code><a href='sample_n.html'>sample_n</a></code>,
-  <code><a href='select.html'>select</a></code>, <code><a href='slice.html'>slice</a></code>,
-  <code><a href='table.html'>table</a></code></p>
+  <code><a href='dissolve.html'>dissolve</a></code>, <code><a href='fac_dispatcher.html'>fac_dispatcher</a></code>,
+  <code><a href='filter.html'>filter</a></code>, <code><a href='mutate.html'>mutate</a></code>,
+  <code><a href='rename.html'>rename</a></code>, <code><a href='rescale.html'>rescale</a></code>,
+  <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
+  <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_frac.html'>sample_frac</a></code>,
+  <code><a href='sample_n.html'>sample_n</a></code>, <code><a href='select.html'>select</a></code>,
+  <code><a href='slice.html'>slice</a></code>, <code><a href='table.html'>table</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>trilo</span>)
-<span class='fu'><a href='table.html'>table</a></span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>)</div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='fu'><a href='table.html'>table</a></span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>)</div><div class='output co'>#&gt; 
 #&gt;  a  b  c  d 
-#&gt;  7 16 18  9 </div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>9</span>)</div><div class='output co'>#&gt; <span class='message'>no group with at least 9 indidivuals</span></div><div class='output co'>#&gt; empty Out</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>16</span>)</div><div class='output co'>#&gt; <span class='message'>no group with at least 16 indidivuals</span></div><div class='output co'>#&gt; empty Out</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>2000</span>) <span class='co'># too ambitious !</span></div><div class='output co'>#&gt; <span class='message'>no group with at least 2000 indidivuals</span></div><div class='output co'>#&gt; empty Out</div></pre>
+#&gt;  7 16 18  9 </div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>9</span>)</div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 43 outlines, 64 +/- 0 coords (in $coo)
+#&gt;   - 1 classifiers (in $fac): 
+#&gt; # A tibble: 43 x 1
+#&gt;    onto 
+#&gt;    &lt;fct&gt;
+#&gt;  1 b    
+#&gt;  2 b    
+#&gt;  3 b    
+#&gt;  4 b    
+#&gt;  5 b    
+#&gt;  6 b    
+#&gt;  7 b    
+#&gt;  8 b    
+#&gt;  9 b    
+#&gt; 10 b    
+#&gt; # ... with 33 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>16</span>)</div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 34 outlines, 64 +/- 0 coords (in $coo)
+#&gt;   - 1 classifiers (in $fac): 
+#&gt; # A tibble: 34 x 1
+#&gt;    onto 
+#&gt;    &lt;fct&gt;
+#&gt;  1 b    
+#&gt;  2 b    
+#&gt;  3 b    
+#&gt;  4 b    
+#&gt;  5 b    
+#&gt;  6 b    
+#&gt;  7 b    
+#&gt;  8 b    
+#&gt;  9 b    
+#&gt; 10 b    
+#&gt; # ... with 24 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>2000</span>) <span class='co'># too ambitious !</span></div><div class='output co'>#&gt; <span class='message'>no group with at least 2000 indidivuals</span></div><div class='output co'>#&gt; empty Out</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

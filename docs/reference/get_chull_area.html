@@ -144,8 +144,18 @@ get_chull_volume is calculated using geometry::convexhulln</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>get_chull_area</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; [1] 0.01968577</div><div class='input'><span class='fu'>get_chull_area</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; list()</div><div class='input'>
-<span class='fu'>get_chull_volume</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; [1] 0.0005563784</div><div class='input'><span class='fu'>get_chull_volume</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; list()</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>get_chull_area</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; [1] 0.01968577</div><div class='input'><span class='fu'>get_chull_area</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; $beer
+#&gt; [1] 0.01802331
+#&gt; 
+#&gt; $whisky
+#&gt; [1] 0.008768242
+#&gt; </div><div class='input'>
+<span class='fu'>get_chull_volume</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; [1] 0.0005563784</div><div class='input'><span class='fu'>get_chull_volume</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; $beer
+#&gt; [1] 0.0004506466
+#&gt; 
+#&gt; $whisky
+#&gt; [1] 0.0001181342
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

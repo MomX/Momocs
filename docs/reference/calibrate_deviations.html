@@ -179,14 +179,16 @@ in further versions.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>calibrate_deviations</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>method not provided. efourier is used</span></div><div class='img'><img src='calibrate_deviations-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
+   <span class='fu'>calibrate_deviations</span>()</div><div class='output co'>#&gt; <span class='message'>method not provided. efourier is used</span></div><div class='output co'>#&gt; <span class='error'>Error in grid.Call.graphics(C_setviewport, vp, TRUE): non-finite location and/or size for viewport</span></div><div class='img'><img src='calibrate_deviations-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='co'># on Opn</span>
-<span class='fu'>calibrate_deviations</span>(<span class='no'>olea</span>)
+<span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
+   <span class='fu'>calibrate_deviations</span>()
 
 <span class='co'># lets customize the ggplot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fu'>calibrate_deviations</span>(<span class='no'>bot</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>20</span>)$<span class='no'>gg</span>
+<span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fu'>calibrate_deviations</span>(<span class='no'>bot</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>10</span>)$<span class='no'>gg</span>
 <span class='no'>gg</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_hline</a></span>(<span class='kw'>yintercept</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0.001</span>, <span class='fl'>0.005</span>), <span class='kw'>linetype</span><span class='kw'>=</span><span class='fl'>3</span>)
 <span class='no'>gg</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>labs</a></span>(<span class='kw'>col</span><span class='kw'>=</span><span class='st'>"Number of harmonics"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='st'>"Number of harmonics"</span>,
            <span class='kw'>title</span><span class='kw'>=</span><span class='st'>"Harmonic power"</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_bw</a></span>()

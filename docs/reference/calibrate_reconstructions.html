@@ -151,8 +151,10 @@ for <code>Out</code>, or from <code>c('opoly', 'npoly', 'dfourier')</code> for <
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>calibrate_reconstructions</span>(<span class='no'>bot</span>, <span class='st'>"efourier"</span>, <span class='kw'>range</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>12</span>)</div><div class='img'><img src='calibrate_reconstructions-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='fu'>calibrate_reconstructions</span>(<span class='no'>olea</span>, <span class='st'>"dfourier"</span>)</div><div class='img'><img src='calibrate_reconstructions-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
+    <pre class="examples"><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
+    <span class='fu'>calibrate_reconstructions</span>(<span class='st'>"efourier"</span>, <span class='kw'>range</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>12</span>)</div><div class='img'><img src='calibrate_reconstructions-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
+    <span class='fu'>calibrate_reconstructions</span>(<span class='st'>"dfourier"</span>)</div><div class='img'><img src='calibrate_reconstructions-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
