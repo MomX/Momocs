@@ -535,7 +535,7 @@ PCcontrib.PCA <-
       nax <- 1:scree_min(x)
     for (i in seq(along=nax)){
       sd.i <- sd(x$x[, nax[i]])
-      pos.i <- dplyr::data_frame(x=sd.r*sd.i, y=rep(0, length(sd)))
+      pos.i <- data.frame(x=sd.r*sd.i, y=rep(0, length(sd)))
       shp.i <- morphospace2PCA(x, xax=i, yax=1, pos = pos.i)
       shp[[i]] <- mutate(shp.i, nax=i) }
 
