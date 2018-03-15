@@ -531,7 +531,7 @@ sample_frac.Coe <- sample_frac.Coo
 #' @examples
 #'  olea %>%
 #'       filter(var == "Aglan") %>% # to have a balanced nb of 'view'
-#'       chop(view) %>%    # split into a list of 2
+#'       chop(~view) %>%    # split into a list of 2
 #'       lapply(npoly) %>% # separately apply npoly
 #'       combine %>%       # recombine
 #'       PCA %>% plot      # an illustration of the 2 views
@@ -551,8 +551,12 @@ chop.Coo <- function(.data, fac){
   Coo <- .data
   #Coo %<>% validate()
   # hideous but works
-  e <- substitute(fac)
-  f <- eval(e, Coo$fac, parent.frame())
+  # e <- substitute(fac)
+  # f <- eval(e, Coo$fac, parent.frame())
+  if (!is.factor(fac))
+    f <- .fac_dispatcher(.data, fac)
+  else
+    f <- fac
   fl <- levels(f)
   res <- list()
   for (i in fl) {

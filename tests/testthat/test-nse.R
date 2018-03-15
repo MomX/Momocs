@@ -93,20 +93,20 @@ test_that("sample_frac works fine", {
 
 # chop
 test_that("chop works fine",{
-  expect_true(chop(x, a) %>% is.list())
-  expect_equal(chop(x, a) %>% length, 5)
-  expect_true(chop(x, a) %>% sapply(is_Out) %>% all)
+  expect_true(chop(x, ~a) %>% is.list())
+  expect_equal(chop(x, ~a) %>% length, 5)
+  expect_true(chop(x, "a") %>% sapply(is_Out) %>% all)
 })
 
 # combine
 test_that("combine works fine", {
-  expect_true(chop(x, a) %>% combine %>% is_Out())
-  expect_equal(chop(x, a) %>% combine %>% length(), length(x))
+  expect_true(chop(x, ~a) %>% combine %>% is_Out())
+  expect_equal(chop(x, ~a) %>% combine %>% length(), length(x))
 })
 
 # dissolve
 test_that("dissolve works fine", {
-  bw <- bot %>% chop(type) %>% lapply(efourier, 10) %>% combine
+  bw <- bot %>% chop(~type) %>% lapply(efourier, 10) %>% combine
   expect_true(bw %>% is_OutCoe())
   expect_equal(ncol(bw$coe), 80)
   expect_true(bw %>% dissolve(1) %>% is_OutCoe())
