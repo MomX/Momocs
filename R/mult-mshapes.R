@@ -134,7 +134,8 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
         return(method_i(mod.mshape))
     }
 
-    f <- OpnCoe$fac[, fac]
+    f <- fac_dispatcher(x, fac)
+
     fl <- levels(f)
     shp <- list()
     rows <- numeric()
@@ -166,7 +167,9 @@ mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
         message("no 'fac' provided. Returns meanshape")
         return(mshapes(LdkCoe$coo))
     }
-    f <- LdkCoe$fac[, fac]
+
+    f <- fac_dispatcher(x, fac)
+
     fl <- levels(f)
     shp <- list()
     rows <- numeric()

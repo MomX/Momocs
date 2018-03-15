@@ -154,7 +154,8 @@ opoly.Opn <- function(x,
 #' op
 #' # shape reconstruction
 #' opi <- opoly_i(op)
-#' lines(opi, col='red')
+#' coo_plot(o)
+#' coo_draw(opi, border="red")
 #' # R2 for degree 1 to 10
 #' r <- numeric()
 #' for (i in 1:10) { r[i] <- npoly(o, degree=i)$r2 }
