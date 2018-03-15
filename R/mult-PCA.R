@@ -169,7 +169,7 @@ print.PCA <- function(x, ...){
   } else {
     cat(" - $method: [", x$method, "analysis ]\n")}
   # we print the fac
-  .print.fac(x$fac)
+  .print_fac(x$fac)
   cat(" - All components: ",  paste(names(x), collapse=", "), ".\n", sep="")
 }
 

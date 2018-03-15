@@ -196,7 +196,7 @@ print.OpnCoe <- function(x, ...) {
   #         ", sd=",        signif(mean(r2), 3),
   #         ", max=",       signif(max(r2), 3), "\n", sep="")}
   # we print the fac
-  .print.fac(OpnCoe$fac)
+  .print_fac(OpnCoe$fac)
 }
 
 ###### end Opn

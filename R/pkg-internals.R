@@ -1,4 +1,5 @@
 # fac -------
+#' @export
 .print_fac <- function(x, n=4){
   # # remove dim
   # pre <- format(x, n=n) %>% `[`(-1)
@@ -15,7 +16,6 @@
   print(x)
 }
 
-.print.fac <- .print_fac
 # # Used in Coo/Coe printers
 # .print.fac <- function(fac){
 #   nf <- ncol(fac)

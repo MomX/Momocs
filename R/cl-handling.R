@@ -131,7 +131,7 @@ subsetize.Coe <- function(x, subset, ...) {
       Coe2$fac <- dplyr::as_data_frame(Coe2$fac)
     }
     names(Coe2$fac) <- names(Coe$fac)
-    Coe2$fac %<>% dplyr::as_data_frame
+    Coe2$fac %<>% dplyr::as_data_frame()
     # Coe2$fac %<>% .refactor()
   }
   return(Coe2)
@@ -497,7 +497,7 @@ sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
     if (!replace & any(N)>size)
       stop("for one level at least, 'size' is too large for sampling without replacement")
   } else {
-    fac <- Coo$fac[, fac]
+    fac <- fac_dispatcher(Coo, fac)
     N <- table(fac)
     if (!replace & any(N)>size)
       stop("for one level at least, 'size' is too large for sampling without replacement")
@@ -538,7 +538,7 @@ sample_n.Coe <- sample_n.Coo
 #' # samples 50% of the bottles no matter their type
 #' sample_frac(bot, 0.5)
 #' # 80% bottles of beer and of whisky
-#' table(sample_frac(bot, 0.8, fac="type"))
+#' table(sample_frac(bot, 0.8, fac="type")$fac)
 #' # bootstrap the same number of bootles of each type but with replacement
 #' table(names(sample_frac(bot, 1, replace=TRUE)))
 #'
@@ -563,7 +563,7 @@ sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
     fac <- NULL
     N <- length(Coo)
   } else {
-    fac <- Coo$fac[, fac]
+    fac <- fac_dispatcher(Coo, fac)
     N <- table(fac)
   }
   size <- ceiling(N * size)
@@ -953,21 +953,21 @@ table.LDA <- table.Coo
 #' at the import, or merge some levels within covariates. Drops levels silently.
 #'
 #' @param x any Momocs object
-#' @param fac the id of the name of the $fac column to look for
+#' @param fac the id of the name of the $fac column to look for ([fac_dispatcher] not yet supported)
 #' @param from which level(s) should be renamed; passed as a single or several characters
 #' @param to which name should be used to rename this/these levels
 #' @return a Momocs object of the same type
 #' @family handling functions
 #' @examples
 #' # single renaming
-#' rw_fac(bot, "type", "whisky", "agua_de_fuego") # 1 instead of "type" is fine too
+#' rw_fac(bot, "type", "whisky", "agua_de_fuego")$type # 1 instead of "type" is fine too
 #' # several renaming
 #' bot2 <- mutate(bot, fake=factor(rep(letters[1:4], 10)))
 #' rw_fac(bot2, "fake", c("a", "e"), "ae")$fake
 #' @export
 rw_fac <- function(x, fac, from, to){
-  new_levels <- unique(c(levels(x$fac[, fac] %>% unlist), to))
-  fac2 <- factor(x$fac[, fac], levels = new_levels)
+  fac2 <- fac_dispatcher(x, fac)
+  levels(fac2) <- c(to, levels(fac2))
   for (i in seq_along(from)) {
     fac2[which(fac2==from[i])] <- to
   }

@@ -188,6 +188,7 @@ print.Coo <- function(x, n=4, ...) {
   # summary(x$fac) %>% print
   .print_fac(x$fac, n=n)
   .other_components(x)
+  cat("\n")
 }
 
 # str.* ----------------------

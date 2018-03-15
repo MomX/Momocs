@@ -213,7 +213,7 @@ print.OutCoe <- function(x, ...) {
     #cat(" - $coe: harmonic coefficients\n")
   }
   # we print the fac
-  .print.fac(OutCoe$fac)
+  .print_fac(OutCoe$fac)
 }
 
 

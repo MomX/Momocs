@@ -108,7 +108,7 @@ Ldk.Coo <- function(coo, links = NULL, slidings = NULL, fac = coo$fac) {
 #     }
 #   }
 #   # we print the fac
-#   .print.fac(Ldk$fac)
+#   .print_fac(Ldk$fac)
 # }
 
 # The print method for LdkCoe objects
@@ -132,5 +132,5 @@ print.LdkCoe <- function(x, ...) {
   cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n",
     sep = "")
   # we print the fac
-  .print.fac(Ldk$fac)
+  .print_fac(Ldk$fac)
 }

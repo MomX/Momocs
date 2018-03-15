@@ -26,5 +26,5 @@ print.TraCoe <- function(x, ...) {
   var.nb <- ncol(TraCoe$coe)
   cat(" - $coe:", shp.nb, "shapes described with", var.nb, "variables\n")
   # we print the fac
-  .print.fac(TraCoe$fac)
+  .print_fac(TraCoe$fac)
 }
