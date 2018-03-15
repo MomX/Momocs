@@ -117,7 +117,7 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   }
 
   PCA <- x
-  f0 <- fac #<- prepare_fac(x, fac)
+  f0 <- fac
   #fac handling
   fac <- fac_dispatcher(x, fac)
 
@@ -326,7 +326,7 @@ classification_metrics.LDA <- function(x){
 # #'   if (!is.factor(fac)){
 # #'     fac <- x$fac[, fac]
 # #'   }
-# #'   # fac <- prepare_fac(x, fac)
+# #'   # fac <- fac_dispatcher(x, fac)
 # #'   # if any NAs, we remove them
 # #'   if (any(is.na(fac))) {
 # #'     x  <- x %>% slice(which(!is.na(fac)))

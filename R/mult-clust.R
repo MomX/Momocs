@@ -103,7 +103,7 @@ CLUST.PCA <- function(x,
 
   # we grab the fac
   if (!missing(fac))
-    fac <- prepare_fac(x, fac)
+    fac <- fac_dispatcher(x, fac)
 
   # and color it if palette is not null
   if (is.null(palette) | missing(fac)){
@@ -114,7 +114,7 @@ CLUST.PCA <- function(x,
 
   # prepares tip.label
   if (!missing(tip_labels))
-    phylo$tip.label <- as.character(prepare_fac(x, tip_labels))
+    phylo$tip.label <- as.character(fac_dispatcher(x, tip_labels))
 
   # plot the phylo
   plot(phylo, type=type, tip.color=tip.colors, ...)
@@ -131,7 +131,7 @@ CLUST.Coe <-
     phylo <- x$coe %>% dist(method = dist_method) %>%
       hclust(method = hclust_method) %>% ape::as.phylo()
     if (!missing(fac))
-      fac <- prepare_fac(x, fac)
+      fac <- fac_dispatcher(x, fac)
     if (is.null(palette) | missing(fac)) {
       tip.colors <- rep(par("fg"), nrow(x$coe))
     }
@@ -139,7 +139,7 @@ CLUST.Coe <-
       tip.colors <- palette(nlevels(fac))[fac]
     }
     if (!missing(tip_labels))
-      phylo$tip.label <- as.character(prepare_fac(x, tip_labels))
+      phylo$tip.label <- as.character(fac_dispatcher(x, tip_labels))
     plot(phylo, type = type, tip.color = tip.colors, ...)
     invisible(phylo)
   }
