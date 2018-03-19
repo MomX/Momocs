@@ -2,64 +2,31 @@
 # .grey90   <- "#e5e5e5"
 # .grey60   <- "#999999"
 
-### ____plot____ -------------------------------------------
-#' Multivariate plots using grindr layers
+#' Prepare for layers
 #'
-#' Quickly vizualize [PCA] objects and build customs plots
-#' using the [layers]. See examples.
+#' Typically on multivariate object (eg [PCA]) before layers.
+#' Used internally by [plot_PCA] and friends
 #'
-#' @note This approach will replace \link{plot.PCA} in further versions.
-#' This \code{cheap base biplot} may be packaged at some point.
-#' All comments are welcome.
+#' @param x multivariate object
+#' @param f to feed [fac_dispatcher]
+#' @param axes to show (default: `c(1, 2)`)
+#' @param palette a [palette] (default: `pal_qual`)
+#' @return a list to send to [layers]
 #'
-#' @param x \code{PCA} object
-#' @param f \code{factor}. A column name or number from \code{$fac},
-#' or a factor can directly be passed. Accept \code{numeric} as well.
-#' @param axes \code{numeric} of length two to select PCs to use
-#' (\code{c(1, 2)} by default)
-#' @param palette \code{color palette} to use \code{col_summer} by default
 #' @family grindr
-#'
-#' @examples
-#' ### First prepare two PCA objects.
-#'
-#' # Some outlines with bot
-#' bp <- bot %>% mutate(fake=sample(letters[1:5], 40, replace=TRUE)) %>%
-#' efourier(6) %>% PCA
-#'
-#' # Some curves with olea
-#' op <- olea %>%
-#' mutate(s=coo_area(.)) %>%
-#' filter(var != "Cypre") %>%
-#' chop(~view) %>% lapply(opoly, 5, nb.pts=90) %>%
-#' combine %>% PCA
-#' op$fac$s %<>% as.character() %>% as.numeric()
-#'
-#' op %>% plot_PCA %>% layer_frame
-#'
-#' ### Now we can play with layers
-#'
-#' op %>% plot_PCA %>% layer_fullframe %>% layer_points
-#' op %>% plot_PCA(~s) %>% layer_fullframe %>% layer_points(pch=3, cex=2)
-#' op %>% plot_PCA(~var+domes) %>% layer_frame %>% layer_ellipses
-#'
-#' # you can combine the layers you like with a function like:
-#' myplot <- function(x){
-#' x %>%
-#'  layer_fullframe %>%
-#'  layer_points %>%
-#'  layer_ellipsesaxes %>%
-#'  layer_chullfilled
-#' }
-#'
-#' # and even continue after this function
-#' op %>% plot_PCA(~var) %>% myplot() %>%
-#'    layer_stars %>% layer_title("hi there!") %>%
-#'    layer_rug %>% layer_eigen %>% layer_legend
-#'
-#' # You get the idea.
 #' @export
-plot_PCA <- function(x, f, axes=c(1, 2), palette=col_summer){
+layerize <- function(x, ...){
+  UseMethod("layerize")
+}
+
+#' @export
+layerize.default <-
+function(x, ...){
+  message("not defined on this class")
+}
+
+#' @export
+layerize.PCA <- function(x, f, axes=c(1, 2), palette=pal_qual){
   # grab the selected columns
   xy <- x$x[, axes]
   # prepare a factor
@@ -98,6 +65,129 @@ plot_PCA <- function(x, f, axes=c(1, 2), palette=col_summer){
        baseline1=x$baseline1, baseline2=x$baseline2)
 }
 
+### ____plot____ -------------------------------------------
+#' Multivariate plots using grindr layers
+#'
+#' Quickly vizualize [PCA] objects and build customs plots
+#' using the [layers]. See examples.
+#'
+#' @note This approach will replace \link{plot.PCA} in further versions.
+#' This \code{cheap base biplot} may be packaged at some point.
+#' All comments are welcome.
+#'
+#' @param x \code{PCA} object
+#' @param f \code{factor}. A column name or number from \code{$fac},
+#' or a factor can directly be passed. Accept \code{numeric} as well.
+#' @param axes \code{numeric} of length two to select PCs to use
+#' (\code{c(1, 2)} by default)
+#' @param palette \code{color palette} to use \code{col_summer} by default
+#' @param points `logical` whether to draw this with [layer_points]
+#' @param points_transp `numeric` to feed [layer_points] (default:0.25)
+#' @param morphospace `logical` whether to draw this using [layer_morphospace]
+#' @param morphospace_position to feed [layer_morphospace] (default: "range")
+#' @param chull `logical` whether to draw this with [layer_chull]
+#' @param chullfilled `logical` whether to draw this with [layer_chullfilled]
+#' @param center_origin `logical` whether to center origin
+#' @param zoom `numeric` zoom level for the frame (default: 0.9)
+#' @param eigen `logical` whether to draw this using [layer_eigen]
+#' @param box `logical` whether to draw this using [layer_box]
+#' @param axesnames `logical` whether to draw this using [layer_axesnames]
+#' @param axesvar `logical` whether to draw this using [layer_axesvar]
+#' @family grindr
+#'
+#' @examples
+#' ### First prepare two PCA objects.
+#'
+#' # Some outlines with bot
+#' bp <- bot %>% mutate(fake=sample(letters[1:5], 40, replace=TRUE)) %>%
+#' efourier(6) %>% PCA
+#' plot_PCA(bp)
+#' plot_PCA(bp, ~type)
+#' plot_PCA(bp, ~fake)
+#'
+#' # Some curves with olea
+#' op <- olea %>%
+#' mutate(s=coo_area(.)) %>%
+#' filter(var != "Cypre") %>%
+#' chop(~view) %>% lapply(opoly, 5, nb.pts=90) %>%
+#' combine %>% PCA
+#' op$fac$s %<>% as.character() %>% as.numeric()
+#'
+#' op %>% plot_PCA
+#'
+#' ### Now we can play with layers
+#'
+#' # you can combine the layers you like with a function like:
+#' myplot <- function(x){
+#' x %>%
+#'  layer_ellipsesaxes %>%
+#'  layer_chullfilled
+#' }
+#'
+#' # and even continue after this function
+#' #op %>% plot_PCA(~var) %>% myplot() %>%
+#' #    layer_title("hi there!")
+#'
+#' # You get the idea.
+#' @export
+plot_PCA <- function(x, f, axes=c(1, 2),
+         palette=pal_qual,
+         points=TRUE,
+         points_transp=1/4,
+         # morphospace
+         morphospace=TRUE,
+         morphospace_position="range",
+         chull=TRUE,
+         chullfilled=FALSE,
+         center_origin=TRUE, zoom=0.9,
+         eigen=TRUE,
+         box=TRUE,
+         axesnames=TRUE, axesvar=TRUE){
+
+  # prepare ---------------------------
+  if (missing(f))
+    x %<>% layerize(axes=axes, palette=palette)
+  else
+    x %<>% layerize(f, axes=axes, palette=palette)
+
+  # frame
+  x %<>%
+    layer_frame(center_origin=center_origin, zoom = zoom) %>%
+    layer_axes()
+
+  # cosmetics
+  if (axesnames)
+    x %<>% layer_axesnames()
+
+  if (axesvar)
+    x %<>% layer_axesvar()
+
+  if (eigen)
+    x %<>% layer_eigen()
+
+  if (box)
+    x %<>% layer_box()
+
+  # morphospace -----------------------
+  if (morphospace)
+    x %<>% layer_morphospace()
+
+  # data ------------------------------
+  if (points)
+    x %<>% layer_points(transp=points_transp)
+
+  # groups dispersion -----------------
+  if (chull)
+    x %<>% layer_chull()
+
+  if (chullfilled)
+    x %<>% layer_chullfilled()
+
+  # propagate
+  invisible(x)
+}
+
+# bot %>% efourier(6) %>% PCA %>% plot_PCA
 ### _____Layers_____ ---------------------------------------
 # frame and options ----------------------------------------
 
@@ -196,8 +286,9 @@ layer_fullframe <- function(x, ...){
 #' @rdname layers
 #' @param pch to use for drawing components
 #' @param cex to use for drawing components
-layer_points <- function(x, pch=20, cex=4/log1p(nrow(x$xy)), ...){
-  points(x$xy, col=x$colors_rows, pch=pch, cex=cex, ...)
+#' @param transp transparency to use (min: 0 defaut:0 max:1)
+layer_points <- function(x, pch=20, cex=4/log1p(nrow(x$xy)), transp=0, ...){
+  points(x$xy, col=pal_alpha(x$colors_rows, transp=transp), pch=pch, cex=cex, ...)
   # propagate
   invisible(x)
 }
@@ -213,6 +304,7 @@ layer_points <- function(x, pch=20, cex=4/log1p(nrow(x$xy)), ...){
 #' @param rotate \code{numeric} angle (in radians) to rotate shapes
 #' when displayed on the morphospace (default \code{0})
 #' @param size \code{numeric} size to use to feed \link{coo_template} (default \code{0.9})
+#' @param col color to draw shapes
 #' @param flipx \code{logical} whether to flip shapes against the x-axis (default \code{FALSE})
 #' @param flipy \code{logical} whether to flip shapes against the y-axis (default \code{FALSE})
 #' @param draw \code{logical} whether to draw shapes (default \code{TRUE})
@@ -222,6 +314,7 @@ layer_morphospace <-
                       "xy", "range_axes", "full_axes")[1],
            nb=12, nr=6, nc=5,
            rotate=0, size=0.9,
+           col="#999999",
            flipx=FALSE, flipy=FALSE, draw=TRUE, ...){
     # shortcut for useful components
     xy <- x$xy
@@ -367,7 +460,7 @@ layer_morphospace <-
 
       # finally draw the morphospace
       if (draw)
-        lapply(shp, draw_method)
+        lapply(shp, draw_method, col=col)
       # if (!is.null(PCA$links)) lapply(shp, function(x) ldk_links(x, PCA$links, col="grey90"))
     }
     # propagate
@@ -777,7 +870,9 @@ layer_eigen <- function(x, nb_max=5, cex=1/2, ...){
   # handle bars selection, height and colors
   if (max(x$axes)>nb_max)
     nb_max <- max(x$axes)
-  h0 <- x$sdev[1:nb_max]
+  var <- x$sdev^2
+  ev <- var/sum(var)
+  h0 <- ev[1:nb_max]
   hb <- h0*range_height*w[2]*2 # *2 because of 0.5 below
   cols <- rep("grey98", nb_max)
   cols[x$axes] <- "grey60"

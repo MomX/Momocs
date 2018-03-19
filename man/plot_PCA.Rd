@@ -4,7 +4,10 @@
 \alias{plot_PCA}
 \title{Multivariate plots using grindr layers}
 \usage{
-plot_PCA(x, f, axes = c(1, 2), palette = col_summer)
+plot_PCA(x, f, axes = c(1, 2), palette = pal_qual, points = TRUE,
+  points_transp = 1/4, morphospace = TRUE, morphospace_position = "range",
+  chull = TRUE, chullfilled = FALSE, center_origin = TRUE, zoom = 0.9,
+  eigen = TRUE, box = TRUE, axesnames = TRUE, axesvar = TRUE)
 }
 \arguments{
 \item{x}{\code{PCA} object}
@@ -16,6 +19,30 @@ or a factor can directly be passed. Accept \code{numeric} as well.}
 (\code{c(1, 2)} by default)}
 
 \item{palette}{\code{color palette} to use \code{col_summer} by default}
+
+\item{points}{\code{logical} whether to draw this with \link{layer_points}}
+
+\item{points_transp}{\code{numeric} to feed \link{layer_points} (default:0.25)}
+
+\item{morphospace}{\code{logical} whether to draw this using \link{layer_morphospace}}
+
+\item{morphospace_position}{to feed \link{layer_morphospace} (default: "range")}
+
+\item{chull}{\code{logical} whether to draw this with \link{layer_chull}}
+
+\item{chullfilled}{\code{logical} whether to draw this with \link{layer_chullfilled}}
+
+\item{center_origin}{\code{logical} whether to center origin}
+
+\item{zoom}{\code{numeric} zoom level for the frame (default: 0.9)}
+
+\item{eigen}{\code{logical} whether to draw this using \link{layer_eigen}}
+
+\item{box}{\code{logical} whether to draw this using \link{layer_box}}
+
+\item{axesnames}{\code{logical} whether to draw this using \link{layer_axesnames}}
+
+\item{axesvar}{\code{logical} whether to draw this using \link{layer_axesvar}}
 }
 \description{
 Quickly vizualize \link{PCA} objects and build customs plots
@@ -32,6 +59,9 @@ All comments are welcome.
 # Some outlines with bot
 bp <- bot \%>\% mutate(fake=sample(letters[1:5], 40, replace=TRUE)) \%>\%
 efourier(6) \%>\% PCA
+plot_PCA(bp)
+plot_PCA(bp, ~type)
+plot_PCA(bp, ~fake)
 
 # Some curves with olea
 op <- olea \%>\%
@@ -41,31 +71,25 @@ chop(~view) \%>\% lapply(opoly, 5, nb.pts=90) \%>\%
 combine \%>\% PCA
 op$fac$s \%<>\% as.character() \%>\% as.numeric()
 
-op \%>\% plot_PCA \%>\% layer_frame
+op \%>\% plot_PCA
 
 ### Now we can play with layers
-
-op \%>\% plot_PCA \%>\% layer_fullframe \%>\% layer_points
-op \%>\% plot_PCA(~s) \%>\% layer_fullframe \%>\% layer_points(pch=3, cex=2)
-op \%>\% plot_PCA(~var+domes) \%>\% layer_frame \%>\% layer_ellipses
 
 # you can combine the layers you like with a function like:
 myplot <- function(x){
 x \%>\%
- layer_fullframe \%>\%
- layer_points \%>\%
  layer_ellipsesaxes \%>\%
  layer_chullfilled
 }
 
 # and even continue after this function
-op \%>\% plot_PCA(~var) \%>\% myplot() \%>\%
-   layer_stars \%>\% layer_title("hi there!") \%>\%
-   layer_rug \%>\% layer_eigen \%>\% layer_legend
+#op \%>\% plot_PCA(~var) \%>\% myplot() \%>\%
+#    layer_title("hi there!")
 
 # You get the idea.
 }
 \seealso{
-Other grindr: \code{\link{drawers}}, \code{\link{layers}},
+Other grindr: \code{\link{drawers}},
+  \code{\link{layerize}}, \code{\link{layers}},
   \code{\link{papers}}, \code{\link{pile}}
 }

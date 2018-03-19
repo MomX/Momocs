@@ -37,11 +37,12 @@ layer_box(x, border = "#e5e5e5", ...)
 
 layer_fullframe(x, ...)
 
-layer_points(x, pch = 20, cex = 4/log1p(nrow(x$xy)), ...)
+layer_points(x, pch = 20, cex = 4/log1p(nrow(x$xy)), transp = 0, ...)
 
 layer_morphospace(x, position = c("range", "full", "circle", "xy",
   "range_axes", "full_axes")[1], nb = 12, nr = 6, nc = 5, rotate = 0,
-  size = 0.9, flipx = FALSE, flipy = FALSE, draw = TRUE, ...)
+  size = 0.9, col = "#999999", flipx = FALSE, flipy = FALSE,
+  draw = TRUE, ...)
 
 layer_ellipses(x, conf = 0.5, lwd = 1, alpha = 0, ...)
 
@@ -101,6 +102,8 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 
 \item{cex}{to use for drawing components}
 
+\item{transp}{transparency to use (min: 0 defaut:0 max:1)}
+
 \item{position}{one of \code{range, full, circle,
 xy, range_axes, full_axes)} to feed \link{morphospace_positions} (default \code{range})}
 
@@ -149,6 +152,8 @@ when displayed on the morphospace (default \code{0})}
 
 \item{probs}{\code{numeric} sequence to feed \code{stats::quantile}
 and to indicate where to draw ticks and legend labels}
+
+\item{col}{color to draw shapes}
 }
 \description{
 Useful layers for building custom
@@ -157,6 +162,7 @@ mutivariate plots using the cheapbabi approach. See examples.
 \seealso{
 grindr_drawers
 
-Other grindr: \code{\link{drawers}}, \code{\link{papers}},
+Other grindr: \code{\link{drawers}},
+  \code{\link{layerize}}, \code{\link{papers}},
   \code{\link{pile}}, \code{\link{plot_PCA}}
 }
