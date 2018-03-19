@@ -116,17 +116,22 @@ layerize.PCA <- function(x, f, axes=c(1, 2), palette=pal_qual){
 #' op %>% plot_PCA
 #'
 #' ### Now we can play with layers
+#' # and for instance build a custom plot
+#' # it should start with plot_PCA()
 #'
-#' # you can combine the layers you like with a function like:
-#' myplot <- function(x){
+#' my_plot <- function(x, ...){
+#'
 #' x %>%
-#'  layer_ellipsesaxes %>%
-#'  layer_chullfilled
+#'     plot_PCA(...) %>%
+#'     layer_points %>%
+#'     layer_ellipsesaxes %>%
+#'     layer_rug
 #' }
 #'
 #' # and even continue after this function
-#' #op %>% plot_PCA(~var) %>% myplot() %>%
-#' #    layer_title("hi there!")
+#' op %>% my_plot(~var, axes=c(1, 3)) %>%
+#'     layer_title("hi there!") %>%
+#'     layer_stars()
 #'
 #' # You get the idea.
 #' @export
@@ -496,7 +501,7 @@ layer_ellipses <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
         conf_ell(x = xy_i, conf = conf[j])$ell %>%
           coo_close %>%
           draw_lines(col=x$colors_groups[i] %>%
-                       col_alpha(alpha[j]), ...)
+                       pal_alpha(alpha[j]), ...)
       }
     }
   }
@@ -529,7 +534,7 @@ layer_ellipsesfilled <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
           coo_close %>%
           draw_polygon(fill=NA,
                        col=x$colors_groups[i] %>%
-                         col_alpha(alpha[j]), ...)
+                         pal_alpha(alpha[j]), ...)
       }
     }
   }
@@ -563,12 +568,12 @@ layer_ellipsesaxes <- function(x, conf=0.5, lwd=1, alpha=0, ...) {
                  seg_i[2, 1], seg_i[2, 2],
                  lwd = lwd[j],
                  col=x$colors_groups[i] %>%
-                   col_alpha(alpha[j]), lend=2, ...)
+                   pal_alpha(alpha[j]), lend=2, ...)
         segments(seg_i[3, 1], seg_i[3, 2],
                  seg_i[4, 1], seg_i[4, 2],
                  lwd = lwd[j],
                  col=x$colors_groups[i] %>%
-                   col_alpha(alpha[j]), lend=2, ...)
+                   pal_alpha(alpha[j]), lend=2, ...)
 
       }
     }
@@ -611,7 +616,7 @@ layer_chullfilled <- function(x, alpha=0.8, ...){
       # with less than 3 points in a group,
       # coo_chull would fail
       coo %>% coo_chull() %>% coo_close %>%
-        draw_polygon(fill=NA, col=col_alpha(x$colors_groups[i], alpha), ...)
+        draw_polygon(fill=NA, col=pal_alpha(x$colors_groups[i], alpha), ...)
     }
   }
   # propagate
@@ -638,7 +643,7 @@ layer_stars <- function(x, alpha=0.5, ...) {
     for (j in 1:nrow(xy_i)) {
       segments(c_i[1], c_i[2],
                xy_i[j, 1], xy_i[j, 2],
-               col = col_alpha(colors_groups[i], alpha), ...)
+               col = pal_alpha(colors_groups[i], alpha), ...)
     }
   }
   # propagate
@@ -705,11 +710,11 @@ layer_density <- function(x, levels_density=20,
     if (density)
       graphics::image(ki$x, ki$y, ki$z, add = TRUE,
                       xlim = range(ki$x), ylim = range(ki$y),
-                      col = col_transp(levels_density, colors_groups[i], alpha))
+                      col = pal_manual(colors_groups[i], transp=alpha)(levels_density))
     if (contour)
       graphics::contour(ki$x, ki$y, ki$z, add = TRUE,
                         nlevels = levels_contour,
-                        col=col_alpha(rep(colors_groups[i], levels_contour), alpha))
+                        col=pal_manual(colors_groups[i], transp=alpha)(levels_contour))
   }
   # propagate
   invisible(x)
@@ -767,7 +772,7 @@ layer_labelgroups <- function(x, col=par("fg"), cex=3/4, font=2,
          ybottom = cxys[, 2] - h/2 + p,
          xright  = cxys[, 1] + w/2 + p,
          ytop    = cxys[, 2] + h/2 + p,
-         col     = col_alpha("#FFFFFF", alpha), border = NA)
+         col     = pal_alpha("#FFFFFF", alpha), border = NA)
   }
   # draw labels
   text(cxys[, 1], cxys[, 2] + p,

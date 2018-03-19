@@ -74,17 +74,22 @@ op$fac$s \%<>\% as.character() \%>\% as.numeric()
 op \%>\% plot_PCA
 
 ### Now we can play with layers
+# and for instance build a custom plot
+# it should start with plot_PCA()
 
-# you can combine the layers you like with a function like:
-myplot <- function(x){
+my_plot <- function(x, ...){
+
 x \%>\%
- layer_ellipsesaxes \%>\%
- layer_chullfilled
+    plot_PCA(...) \%>\%
+    layer_points \%>\%
+    layer_ellipsesaxes \%>\%
+    layer_rug
 }
 
 # and even continue after this function
-#op \%>\% plot_PCA(~var) \%>\% myplot() \%>\%
-#    layer_title("hi there!")
+op \%>\% my_plot(~var, axes=c(1, 3)) \%>\%
+    layer_title("hi there!") \%>\%
+    layer_stars()
 
 # You get the idea.
 }
