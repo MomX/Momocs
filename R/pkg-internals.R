@@ -202,7 +202,7 @@
 # options like ------
 
 .is_verbose <- function()
-  options("verbose")[[1]]
+  ifelse(options("Momocs_verbose")[[1]], TRUE, FALSE)
 
 # options("verbose"=F)
 # .is_verbose()
