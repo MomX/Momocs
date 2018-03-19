@@ -152,8 +152,6 @@ when displayed on the morphospace (default \code{0})}
 
 \item{probs}{\code{numeric} sequence to feed \code{stats::quantile}
 and to indicate where to draw ticks and legend labels}
-
-\item{col}{color to draw shapes}
 }
 \description{
 Useful layers for building custom
@@ -162,7 +160,6 @@ mutivariate plots using the cheapbabi approach. See examples.
 \seealso{
 grindr_drawers
 
-Other grindr: \code{\link{drawers}},
-  \code{\link{layerize}}, \code{\link{papers}},
+Other grindr: \code{\link{drawers}}, \code{\link{papers}},
   \code{\link{pile}}, \code{\link{plot_PCA}}
 }

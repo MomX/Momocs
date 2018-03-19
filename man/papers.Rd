@@ -44,7 +44,6 @@ This approach will (soon) replace \link{coo_plot} and friends in further version
 All comments are welcome.
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layerize}}, \code{\link{layers}},
+Other grindr: \code{\link{drawers}}, \code{\link{layers}},
   \code{\link{pile}}, \code{\link{plot_PCA}}
 }

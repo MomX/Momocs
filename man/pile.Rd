@@ -87,7 +87,6 @@ wings \%>\% my_pile(transp=3/4)
      pile
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layerize}}, \code{\link{layers}},
+Other grindr: \code{\link{drawers}}, \code{\link{layers}},
   \code{\link{papers}}, \code{\link{plot_PCA}}
 }

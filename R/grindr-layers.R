@@ -2,31 +2,7 @@
 # .grey90   <- "#e5e5e5"
 # .grey60   <- "#999999"
 
-#' Prepare for layers
-#'
-#' Typically on multivariate object (eg [PCA]) before layers.
-#' Used internally by [plot_PCA] and friends
-#'
-#' @param x multivariate object
-#' @param f to feed [fac_dispatcher]
-#' @param axes to show (default: `c(1, 2)`)
-#' @param palette a [palette] (default: `pal_qual`)
-#' @return a list to send to [layers]
-#'
-#' @family grindr
-#' @export
-layerize <- function(x, ...){
-  UseMethod("layerize")
-}
-
-#' @export
-layerize.default <-
-function(x, ...){
-  message("not defined on this class")
-}
-
-#' @export
-layerize.PCA <- function(x, f, axes=c(1, 2), palette=pal_qual){
+.layerize_PCA <- function(x, f, axes=c(1, 2), palette=pal_qual){
   # grab the selected columns
   xy <- x$x[, axes]
   # prepare a factor
@@ -151,9 +127,9 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 
   # prepare ---------------------------
   if (missing(f))
-    x %<>% layerize(axes=axes, palette=palette)
+    x %<>% .layerize_PCA(axes=axes, palette=palette)
   else
-    x %<>% layerize(f, axes=axes, palette=palette)
+    x %<>% .layerize_PCA(f, axes=axes, palette=palette)
 
   # frame
   x %<>%
@@ -309,7 +285,6 @@ layer_points <- function(x, pch=20, cex=4/log1p(nrow(x$xy)), transp=0, ...){
 #' @param rotate \code{numeric} angle (in radians) to rotate shapes
 #' when displayed on the morphospace (default \code{0})
 #' @param size \code{numeric} size to use to feed \link{coo_template} (default \code{0.9})
-#' @param col color to draw shapes
 #' @param flipx \code{logical} whether to flip shapes against the x-axis (default \code{FALSE})
 #' @param flipy \code{logical} whether to flip shapes against the y-axis (default \code{FALSE})
 #' @param draw \code{logical} whether to draw shapes (default \code{TRUE})

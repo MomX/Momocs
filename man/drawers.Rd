@@ -121,7 +121,6 @@ bot \%>\%
 \seealso{
 grindr_layers
 
-Other grindr: \code{\link{layerize}}, \code{\link{layers}},
-  \code{\link{papers}}, \code{\link{pile}},
-  \code{\link{plot_PCA}}
+Other grindr: \code{\link{layers}}, \code{\link{papers}},
+  \code{\link{pile}}, \code{\link{plot_PCA}}
 }

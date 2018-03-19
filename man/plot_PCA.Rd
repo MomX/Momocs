@@ -94,7 +94,6 @@ op \%>\% my_plot(~var, axes=c(1, 3)) \%>\%
 # You get the idea.
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layerize}}, \code{\link{layers}},
+Other grindr: \code{\link{drawers}}, \code{\link{layers}},
   \code{\link{papers}}, \code{\link{pile}}
 }
