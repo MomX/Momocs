@@ -1,6 +1,6 @@
 # fac -------
 #' @export
-.print_fac <- function(x, n=4){
+.print_fac <- function(x, n=6){
   # # remove dim
   # pre <- format(x, n=n) %>% `[`(-1)
   # # remove 'more rows'
@@ -13,7 +13,7 @@
   #   paste0("  ", .) %>%
   #   # nicely cat
   #   cat(sep="\n")
-  print(x)
+  print(x, n=n)
 }
 
 # # Used in Coo/Coe printers

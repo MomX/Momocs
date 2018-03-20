@@ -64,7 +64,7 @@ Large \code{Coo} are sampled, both in terms of the number of shapes and of point
 A variation of this plot was called \code{stack} before \code{Momocs 1.2.5}
 }
 \examples{
-# all Coo are supported wtih sensible defaults
+# all Coo are supported with sensible defaults
 pile(bot)    # outlines
 pile(olea, ~var, pal=pal_qual_Dark2, paper_fun=paper_grid)   # curves
 pile(wings)  # landmarks
@@ -73,7 +73,7 @@ pile(wings)  # landmarks
 pile(bot, trans=0.9) \%>\% draw_centroid
 
 # if you are not happy with this, build your own !
-# eg see Momocs::pile.Out
+# eg see Momocs::pile.Out (no quotes)
 
 my_pile <- function(x, col_labels="red", transp=0.5){
     x \%>\% paper_chess(n=100) \%>\%

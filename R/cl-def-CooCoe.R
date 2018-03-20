@@ -157,7 +157,7 @@ Coe <- function(...) {
 
 # The print method for Out objects
 #' @export
-print.Coo <- function(x, n=4, ...) {
+print.Coo <- function(x, n=6, ...) {
   x <- validate(x)
   coo_nb <- length(x)
   if (coo_nb==0){
