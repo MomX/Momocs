@@ -13,7 +13,7 @@ def_links(x, nb.ldk)
 user click on the top of the graphical window.}
 }
 \description{
-Works on Ldk objects, on 2cols matrices, 3dim arrays (msshapes turns it into a matrix).
+Works on Ldk objects, on 2-cols matrices, 3-dim arrays (mshapes turns it into a matrix).
 }
 \examples{
 \dontrun{

@@ -23,8 +23,8 @@ a list with the following components is returned (invisibly because $manovas
 may be very long, see examples):
 \itemize{
 \item manovas a list containing all the raw manovas
-\item summary a matrix with all important statists
-\item stars.tab a table with 'significance star', discutable but useful:
+\item summary
+\item stars.tab a table with 'significance stars', discutable but largely used:
 '\emph{\strong{' if Pr(>F) < 0.001; '}' of < 0.01; '}' if < 0.05; '.' if < 0.10 and '-' if above.
 }
 }

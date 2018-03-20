@@ -2,7 +2,7 @@
 % Please edit documentation in R/coo-ldk-utilities.R
 \name{links_all}
 \alias{links_all}
-\title{Creates links (all pariwise combinations) between landmarks}
+\title{Creates links (all pairwise combinations) between landmarks}
 \usage{
 links_all(coo)
 }
@@ -14,7 +14,7 @@ a matrix that can be passed to \link{ldk_links}, etc. The columns
 are the row ids of the original shape.
 }
 \description{
-Creates links (all pariwise combinations) between landmarks
+Creates links (all pairwise combinations) between landmarks
 }
 \examples{
 w <- wings[1]

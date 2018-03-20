@@ -15,7 +15,7 @@ arrange(.data, ...)
 a Momocs object of the same class.
 }
 \description{
-Arange shapes by variables, from the \code{$fac}. See examples and \code{?dplyr::arrange}.
+Arrange shapes by variables, from the \code{$fac}. See examples and \code{?dplyr::arrange}.
 }
 \details{
 dplyr verbs are maintained.

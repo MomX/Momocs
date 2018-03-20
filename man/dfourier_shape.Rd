@@ -17,7 +17,7 @@ the number of harmonics to generate}
 \item{nb.pts}{if \code{A} and/or \code{B} are not provided,
 the number of points to use to reconstruct the shapes}
 
-\item{alpha}{tThe power coefficient associated with the (usually decreasing)
+\item{alpha}{The power coefficient associated with the (usually decreasing)
 amplitude of the harmonic coefficients (see \link{efourier_shape})}
 
 \item{plot}{logical whether to plot the shape}

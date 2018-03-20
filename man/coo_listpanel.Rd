@@ -14,7 +14,7 @@ coo_listpanel(coo.list, dim, byrow = TRUE, fromtop = TRUE, cols, borders,
 \item{dim}{A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
 the panel display. If missing, shapes are arranged in a square.}
 
-\item{byrow}{\code{logical}. Whether to succesive shape by row or by col.}
+\item{byrow}{\code{logical}. Whether to draw successive shape by row or by col.}
 
 \item{fromtop}{\code{logical}. Whether to display shapes from the top of the
 plotting region.}

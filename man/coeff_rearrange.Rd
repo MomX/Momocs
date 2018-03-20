@@ -20,9 +20,9 @@ from one to the other format. In short, this function rearranges column order. S
 }
 \examples{
 m_name <- m_rank <- matrix(1:32, 2, 16)
-# this one is order by name
+# this one is ordered by name
 colnames(m_name) <- paste0(rep(letters[1:4], each=4), 1:4)
-# this one is order by rank
+# this one is ordered by rank
 colnames(m_rank) <- paste0(letters[1:4], rep(1:4, each=4))
 
 m_rank

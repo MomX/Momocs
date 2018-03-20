@@ -15,7 +15,7 @@ coo_ruban(coo, dev, palette = col_heat, normalize = TRUE, ...)
 
 \item{normalize}{logical whether to normalize (TRUE by default) distances}
 
-\item{...}{other paremeters to fed segments, eg lwd (see examples)}
+\item{...}{other parameters to fed segments, eg lwd (see examples)}
 }
 \value{
 nothing

@@ -38,7 +38,7 @@ to classify new data.
 }
 \note{
 Uses the same number of PC axis as the LDA object provided. You should probably use \link{rePCA} in
-conjonction with reLDA to get 'homologous' scores.
+conjunction with reLDA to get 'homologous' scores.
 }
 \examples{
 # We select the first 10 individuals in bot,

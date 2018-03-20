@@ -20,7 +20,7 @@ a list with components:
 \item \code{iterationnumber} number of iterations
 \item \code{Q} convergence criterion
 \item \code{Qi} full list of Q
-\item \code{Qd} difference between succesive Q
+\item \code{Qd} difference between successive Q
 \item \code{interproc.dist} minimal sum of squared norms of pairwise differences between
 all shapes in the superimposed sample
 \item \code{mshape} mean shape configuration

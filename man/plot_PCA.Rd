@@ -45,13 +45,12 @@ or a factor can directly be passed. Accept \code{numeric} as well.}
 \item{axesvar}{\code{logical} whether to draw this using \link{layer_axesvar}}
 }
 \description{
-Quickly vizualize \link{PCA} objects and build customs plots
+Quickly vizualise \link{PCA} objects and friends (\link{LDA}) and build customs plots
 using the \link{layers}. See examples.
 }
 \note{
-This approach will replace \link{plot.PCA} in further versions.
-This \code{cheap base biplot} may be packaged at some point.
-All comments are welcome.
+This approach will replace \link{plot.PCA} (and \code{plot.lda} in further versions.
+This is part of \code{grindr} approach that may be packaged at some point. All comments are welcome.
 }
 \examples{
 ### First prepare two PCA objects.

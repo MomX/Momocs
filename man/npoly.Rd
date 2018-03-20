@@ -31,7 +31,7 @@ by default \eqn{(x= 0.5; y=0)}}
 \value{
 when applied on a single shape, a list with components:
 \itemize{
-\item \code{coeff} the coefficients (includint the intercept)
+\item \code{coeff} the coefficients (including the intercept)
 \item \code{ortho} whether orthogonal or natural polynomials were fitted
 \item \code{degree} degree of the fit (could be retrieved through \code{coeff} though)
 \item \code{baseline1} the first baseline point (so far the first point)

@@ -34,7 +34,7 @@ see \link{import_jpg1} for important informations about how the outlines are ext
 and \link{import_Conte} for the algorithm itself.
 
 If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
-file in the folder taht contains all your files. All the outlines should be imported then.
+file in the folder that contains all your files. All the outlines should be imported then.
 }
 \note{
 Note this function will be deprecated from Momocs

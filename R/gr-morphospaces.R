@@ -53,7 +53,7 @@ morphospacePCA <- function(PCA, xax, yax, pos.shp, nb.shp = 24,
   if (lm==4){ #form top left, clockwise
     dx <- c(-d, d, -d, d)
     dy <- c(d, d, -d, -d)}
-  # indices of succesive coe to select
+  # indices of successive coe to select
   if (lm==1){
     col.start <- 1
     col.end   <- length(mshape)
