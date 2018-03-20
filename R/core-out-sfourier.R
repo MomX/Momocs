@@ -72,7 +72,7 @@ sfourier.Out <- function(x, nb.h){
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     # nb.h <- ifelse(q >= 32, 32, q)
-    nb.h <- calibrate_harmonicpower(Out, method="sfourier",
+    nb.h <- calibrate_harmonicpower_sfourier(Out,
                                     thresh = 99, plot=FALSE)$minh
     # if (.is_verbose()) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
   }
