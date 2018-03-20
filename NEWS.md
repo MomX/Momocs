@@ -20,6 +20,7 @@
 ### Deprecated
 * All `is.*` aliases for `is_*` methods
 * Deprecated `classify` for a while
+* All `calibrate_*(..., method)` have been renamed to `calibrate_*_method`. See `?calibrate_reconstructions` and friends.
 * Deprecated `plot3.PCA` (will be replaced in further versions)
 * `Ntable` now splitted into of `plot_table` + `table`
 * `coo_tangle` now in `coo_angle_tangent`
