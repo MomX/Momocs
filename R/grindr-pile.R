@@ -21,7 +21,7 @@
 #' @family grindr
 #' @note A variation of this plot was called `stack` before `Momocs 1.2.5`
 #' @examples
-#' # all Coo are supported wtih sensible defaults
+#' # all Coo are supported with sensible defaults
 #' pile(bot)    # outlines
 #' pile(olea, ~var, pal=pal_qual_Dark2, paper_fun=paper_grid)   # curves
 #' pile(wings)  # landmarks
@@ -30,7 +30,7 @@
 #' pile(bot, trans=0.9) %>% draw_centroid
 #'
 #' # if you are not happy with this, build your own !
-#' # eg see Momocs::pile.Out
+#' # eg see Momocs::pile.Out (no quotes)
 #'
 #' my_pile <- function(x, col_labels="red", transp=0.5){
 #'     x %>% paper_chess(n=100) %>%
@@ -113,14 +113,13 @@ pile.array <- function(coo, f,  sample=64, subset=1000, pal=pal_qual, paper_fun=
 pile.Out <- function(coo, f, sample=64, subset=1000, pal=pal_qual,
                      paper_fun=paper, draw_fun=draw_outlines, transp=0, ...){
 
-  coo <- coo$coo
   if (length(coo)>1000){
     if (is.numeric(subset)){
-      coo <- coo[sample(x=1:length(coo), size=subset, replace = FALSE)]
+      coo <- slice(coo, sample(x=length(coo), size=subset, replace = FALSE))
       message("* a subset of 1000 shapes is shown.")
     }
     if (is.numeric(sample)){
-      coo <- lapply(coo, coo_sample, sample)
+      coo <- coo_sample(coo, sample)
       message("* shapes sampled to 64 points.")
     }
   }
@@ -137,14 +136,13 @@ pile.Out <- function(coo, f, sample=64, subset=1000, pal=pal_qual,
 pile.Opn <- function(coo, f, sample=64, subset=1000, pal=pal_qual,
                      paper_fun=paper, draw_fun=draw_curves, transp=0, ...){
 
-  coo <- coo$coo
   if (length(coo)>1000){
     if (is.numeric(subset)){
-      coo <- coo[sample(x=1:length(coo), size=subset, replace = FALSE)]
+      coo <- slice(coo, sample(x=length(coo), size=subset, replace = FALSE))
       message("* a subset of 1000 shapes is shown.")
     }
     if (is.numeric(sample)){
-      coo <- lapply(coo, coo_sample, sample)
+      coo <- coo_sample(coo, sample)
       message("* shapes sampled to 64 points.")
     }
   }
@@ -162,14 +160,13 @@ pile.Opn <- function(coo, f, sample=64, subset=1000, pal=pal_qual,
 pile.Ldk <- function(coo, f, sample=64, subset=1000, pal=pal_qual,
                      paper_fun=paper, draw_fun=draw_landmarks, transp=0, ...){
 
-  coo <- coo$coo
   if (length(coo)>1000){
     if (is.numeric(subset)){
-      coo <- coo[sample(x=1:length(coo), size=subset, replace = FALSE)]
+      coo <- slice(coo, sample(x=length(coo), size=subset, replace = FALSE))
       message("* a subset of 1000 shapes is shown.")
     }
     if (is.numeric(sample)){
-      coo <- lapply(coo, coo_sample, sample)
+      coo <- coo_sample(coo, sample)
       message("* shapes sampled to 64 points.")
     }
   }

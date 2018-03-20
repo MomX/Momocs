@@ -52,7 +52,7 @@ paper_grid <- function(coo, grid=c(10, 5), cols=c("#ffa500", "#e5e5e5"), ...){
 
   # prepare the grid paper colors
   cols <- cols %>%
-    col_alpha(0.5) %>%
+    pal_alpha(0.5) %>%
     rep.int(c(1, grid[2]-1)) %>%
     rep(grid[1])
   # draw lines
