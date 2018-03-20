@@ -141,105 +141,53 @@ combine...well combines... this <code>$fac</code>. See examples.</p>
 #&gt; --------------------
 #&gt;  - $coe: 20 outlines described, 10 harmonics
 #&gt; # A tibble: 20 x 2
-#&gt;    type   fake 
-#&gt;    &lt;fct&gt;  &lt;fct&gt;
-#&gt;  1 whisky a    
-#&gt;  2 whisky a    
-#&gt;  3 whisky a    
-#&gt;  4 whisky a    
-#&gt;  5 whisky a    
-#&gt;  6 whisky a    
-#&gt;  7 whisky a    
-#&gt;  8 whisky a    
-#&gt;  9 whisky a    
-#&gt; 10 whisky a    
-#&gt; 11 whisky b    
-#&gt; 12 whisky b    
-#&gt; 13 whisky b    
-#&gt; 14 whisky b    
-#&gt; 15 whisky b    
-#&gt; 16 whisky b    
-#&gt; 17 whisky b    
-#&gt; 18 whisky b    
-#&gt; 19 whisky b    
-#&gt; 20 whisky b    </div><div class='input'><span class='fu'>dissolve</span>(<span class='no'>wbf</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 14 more rows</div><div class='input'><span class='fu'>dissolve</span>(<span class='no'>wbf</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------
 #&gt;  - $coe: 20 outlines described, 10 harmonics
 #&gt; # A tibble: 20 x 2
-#&gt;    type   fake 
-#&gt;    &lt;fct&gt;  &lt;fct&gt;
-#&gt;  1 whisky a    
-#&gt;  2 whisky a    
-#&gt;  3 whisky a    
-#&gt;  4 whisky a    
-#&gt;  5 whisky a    
-#&gt;  6 whisky a    
-#&gt;  7 whisky a    
-#&gt;  8 whisky a    
-#&gt;  9 whisky a    
-#&gt; 10 whisky a    
-#&gt; 11 whisky b    
-#&gt; 12 whisky b    
-#&gt; 13 whisky b    
-#&gt; 14 whisky b    
-#&gt; 15 whisky b    
-#&gt; 16 whisky b    
-#&gt; 17 whisky b    
-#&gt; 18 whisky b    
-#&gt; 19 whisky b    
-#&gt; 20 whisky b    </div><div class='input'>
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 14 more rows</div><div class='input'>
 <span class='co'># or using chop (yet combine here makes no sense)</span>
 <span class='no'>bw</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='chop.html'>chop</a></span>(~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'>lapply</span>(<span class='no'>efourier</span>, <span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='no'>combine</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bw</span> <span class='kw'>%&gt;%</span> <span class='fu'>dissolve</span>(<span class='fl'>1</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------
 #&gt;  - $coe: 20 outlines described, 10 harmonics
 #&gt; # A tibble: 20 x 2
-#&gt;    type  fake 
-#&gt;    &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 beer  c    
-#&gt;  2 beer  c    
-#&gt;  3 beer  c    
-#&gt;  4 beer  c    
-#&gt;  5 beer  c    
-#&gt;  6 beer  c    
-#&gt;  7 beer  c    
-#&gt;  8 beer  c    
-#&gt;  9 beer  c    
-#&gt; 10 beer  c    
-#&gt; 11 beer  d    
-#&gt; 12 beer  d    
-#&gt; 13 beer  d    
-#&gt; 14 beer  d    
-#&gt; 15 beer  d    
-#&gt; 16 beer  d    
-#&gt; 17 beer  d    
-#&gt; 18 beer  d    
-#&gt; 19 beer  d    
-#&gt; 20 beer  d    </div><div class='input'><span class='no'>bw</span> <span class='kw'>%&gt;%</span> <span class='fu'>dissolve</span>(<span class='fl'>2</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
+#&gt;   type  fake 
+#&gt;   &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 beer  c    
+#&gt; 2 beer  c    
+#&gt; 3 beer  c    
+#&gt; 4 beer  c    
+#&gt; 5 beer  c    
+#&gt; 6 beer  c    
+#&gt; # ... with 14 more rows</div><div class='input'><span class='no'>bw</span> <span class='kw'>%&gt;%</span> <span class='fu'>dissolve</span>(<span class='fl'>2</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------
 #&gt;  - $coe: 20 outlines described, 10 harmonics
 #&gt; # A tibble: 20 x 2
-#&gt;    type  fake 
-#&gt;    &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 beer  c    
-#&gt;  2 beer  c    
-#&gt;  3 beer  c    
-#&gt;  4 beer  c    
-#&gt;  5 beer  c    
-#&gt;  6 beer  c    
-#&gt;  7 beer  c    
-#&gt;  8 beer  c    
-#&gt;  9 beer  c    
-#&gt; 10 beer  c    
-#&gt; 11 beer  d    
-#&gt; 12 beer  d    
-#&gt; 13 beer  d    
-#&gt; 14 beer  d    
-#&gt; 15 beer  d    
-#&gt; 16 beer  d    
-#&gt; 17 beer  d    
-#&gt; 18 beer  d    
-#&gt; 19 beer  d    
-#&gt; 20 beer  d    </div></pre>
+#&gt;   type  fake 
+#&gt;   &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 beer  c    
+#&gt; 2 beer  c    
+#&gt; 3 beer  c    
+#&gt; 4 beer  c    
+#&gt; 5 beer  c    
+#&gt; 6 beer  c    
+#&gt; # ... with 14 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -256,7 +204,7 @@ combine...well combines... this <code>$fac</code>. See examples.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

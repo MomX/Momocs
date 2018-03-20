@@ -154,6 +154,9 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - coerce,data.frame,gpc.poly-method
 #&gt;   - coerce,dgCMatrix,vector-method
 #&gt;   - coerce,dsCMatrix,vector-method
+#&gt;   - coerce,git_commit,data.frame-method
+#&gt;   - coerce,git_repository,data.frame-method
+#&gt;   - coerce,git_tree,data.frame-method
 #&gt;   - coerce,GridTopology,data.frame-method
 #&gt;   - coerce,list,indMatrix-method
 #&gt;   - coerce,Matrix,vector-method
@@ -273,9 +276,6 @@ andnow_method, given a function/method name, return supported classes.</p>
 <span class='co'>#methods for Coo objects</span>
 <span class='fu'>andnow</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; * 'Out' class:
 #&gt;   - add_ldk.Out
-#&gt;   - calibrate_deviations.Out
-#&gt;   - calibrate_harmonicpower.Out
-#&gt;   - calibrate_reconstructions.Out
 #&gt;   - combine.Out
 #&gt;   - coo_bookstein.Out
 #&gt;   - coo_down.Out
@@ -410,6 +410,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 <span class='co'># methods for plot</span>
 <span class='fu'>andnow_method</span>(<span class='st'>"plot"</span>)</div><div class='output co'>#&gt;   - plot,ANY,ANY-method
 #&gt;   - plot,color,ANY-method
+#&gt;   - plot,git_repository,ANY-method
 #&gt;   - plot,gpc.poly,ANY-method
 #&gt;   - plot,Spatial,missing-method
 #&gt;   - plot,SpatialCollections,missing-method
@@ -523,7 +524,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

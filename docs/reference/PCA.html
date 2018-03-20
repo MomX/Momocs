@@ -184,19 +184,15 @@ There is also a generic method (eg for traditional morphometrics) that centers a
 #&gt;  - 40 shapes 
 #&gt;  - $method: [ efourier analysis ]
 #&gt; # A tibble: 40 x 2
-#&gt;    type   fake 
-#&gt;    &lt;fct&gt;  &lt;fct&gt;
-#&gt;  1 whisky a    
-#&gt;  2 whisky a    
-#&gt;  3 whisky a    
-#&gt;  4 whisky a    
-#&gt;  5 whisky a    
-#&gt;  6 whisky a    
-#&gt;  7 whisky a    
-#&gt;  8 whisky a    
-#&gt;  9 whisky a    
-#&gt; 10 whisky a    
-#&gt; # ... with 30 more rows
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 34 more rows
 #&gt;  - All components: sdev, rotation, center, scale, x, eig, fac, mshape, method, cuts.</div><div class='input'><span class='fu'>plot</span>(<span class='no'>bot.p</span>, <span class='kw'>morpho</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='img'><img src='PCA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>)</div><div class='img'><img src='PCA-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='no'>olea</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='input'><span class='no'>op.p</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>op</span>)
 <span class='no'>op.p</span></div><div class='output co'>#&gt; A PCA object
@@ -204,40 +200,31 @@ There is also a generic method (eg for traditional morphometrics) that centers a
 #&gt;  - 210 shapes 
 #&gt;  - $method: [ npoly analysis ]
 #&gt; # A tibble: 210 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VL    O10  
-#&gt;  3 Aglan cult  VD    O11  
-#&gt;  4 Aglan cult  VL    O11  
-#&gt;  5 Aglan cult  VD    O12  
-#&gt;  6 Aglan cult  VL    O12  
-#&gt;  7 Aglan cult  VD    O13  
-#&gt;  8 Aglan cult  VL    O13  
-#&gt;  9 Aglan cult  VD    O14  
-#&gt; 10 Aglan cult  VL    O14  
-#&gt; # ... with 200 more rows
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows
 #&gt;  - All components: sdev, rotation, center, scale, x, eig, fac, mshape, method, mod, baseline1, baseline2, cuts.</div><div class='input'><span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='fl'>1</span>, <span class='kw'>morpho</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='PCA-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
-<span class='no'>wpp</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>wp</span>)
+<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:85238</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:5.4545</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:1.1678</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:0.0014869</span></div><div class='output co'>#&gt; <span class='message'>iteration: 5	gain:0.9109</span></div><div class='output co'>#&gt; <span class='message'>iteration: 6	gain:0.25865</span></div><div class='output co'>#&gt; <span class='message'>iteration: 7	gain:0.11654</span></div><div class='output co'>#&gt; <span class='message'>iteration: 8	gain:0.0002648</span></div><div class='output co'>#&gt; <span class='message'>iteration: 9	gain:0.078733</span></div><div class='output co'>#&gt; <span class='message'>iteration: 10	gain:0.037936</span></div><div class='output co'>#&gt; <span class='message'>iteration: 11	gain:0.0036029</span></div><div class='output co'>#&gt; <span class='message'>iteration: 12	gain:4.6608e-06</span></div><div class='input'><span class='no'>wpp</span> <span class='kw'>&lt;-</span> <span class='fu'>PCA</span>(<span class='no'>wp</span>)
 <span class='no'>wpp</span></div><div class='output co'>#&gt; A PCA object
 #&gt; --------------------
 #&gt;  - 127 shapes 
 #&gt;  - $method: [ procrustes analysis ]
 #&gt; # A tibble: 127 x 1
-#&gt;    group
-#&gt;    &lt;fct&gt;
-#&gt;  1 AN   
-#&gt;  2 AN   
-#&gt;  3 AN   
-#&gt;  4 AN   
-#&gt;  5 AN   
-#&gt;  6 AN   
-#&gt;  7 AN   
-#&gt;  8 AN   
-#&gt;  9 AN   
-#&gt; 10 AN   
-#&gt; # ... with 117 more rows
+#&gt;   group
+#&gt;   &lt;fct&gt;
+#&gt; 1 AN   
+#&gt; 2 AN   
+#&gt; 3 AN   
+#&gt; 4 AN   
+#&gt; 5 AN   
+#&gt; 6 AN   
+#&gt; # ... with 121 more rows
 #&gt;  - All components: sdev, rotation, center, scale, x, eig, fac, mshape, method, cuts, links.</div><div class='input'><span class='fu'>plot</span>(<span class='no'>wpp</span>, <span class='fl'>1</span>)</div><div class='img'><img src='PCA-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># "foreign prcomp"</span>
 <span class='fu'>head</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -269,7 +256,7 @@ There is also a generic method (eg for traditional morphometrics) that centers a
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

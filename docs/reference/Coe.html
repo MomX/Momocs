@@ -151,19 +151,15 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; --------------------
 #&gt;  - $coe: 40 outlines described, 12 harmonics
 #&gt; # A tibble: 40 x 2
-#&gt;    type   fake 
-#&gt;    &lt;fct&gt;  &lt;fct&gt;
-#&gt;  1 whisky a    
-#&gt;  2 whisky a    
-#&gt;  3 whisky a    
-#&gt;  4 whisky a    
-#&gt;  5 whisky a    
-#&gt;  6 whisky a    
-#&gt;  7 whisky a    
-#&gt;  8 whisky a    
-#&gt;  9 whisky a    
-#&gt; 10 whisky a    
-#&gt; # ... with 30 more rows</div><div class='input'><span class='fu'>class</span>(<span class='no'>bot.f</span>)</div><div class='output co'>#&gt; [1] "OutCoe" "Coe"   </div><div class='input'><span class='fu'>inherits</span>(<span class='no'>bot.f</span>, <span class='st'>"Coe"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 34 more rows</div><div class='input'><span class='fu'>class</span>(<span class='no'>bot.f</span>)</div><div class='output co'>#&gt; [1] "OutCoe" "Coe"   </div><div class='input'><span class='fu'>inherits</span>(<span class='no'>bot.f</span>, <span class='st'>"Coe"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># if you want to work directly on the matrix of coefficients</span>
 <span class='no'>bot.f</span>$<span class='no'>coe</span></div><div class='output co'>#&gt;                A1           A2         A3         A4          A5          A6
 #&gt; brahma          1  0.006766531 0.09348184 0.01374288 0.023818571 0.008592275
@@ -510,19 +506,15 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt;  - $coe: 210 open outlines described
 #&gt;  - $baseline1: (-0.5; 0), $baseline2: (0.5; 0)
 #&gt; # A tibble: 210 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VL    O10  
-#&gt;  3 Aglan cult  VD    O11  
-#&gt;  4 Aglan cult  VL    O11  
-#&gt;  5 Aglan cult  VD    O12  
-#&gt;  6 Aglan cult  VL    O12  
-#&gt;  7 Aglan cult  VD    O13  
-#&gt;  8 Aglan cult  VL    O13  
-#&gt;  9 Aglan cult  VD    O14  
-#&gt; 10 Aglan cult  VL    O14  
-#&gt; # ... with 200 more rows</div><div class='input'><span class='fu'>class</span>(<span class='no'>op</span>)</div><div class='output co'>#&gt; [1] "OpnCoe" "Coe"   </div><div class='input'><span class='no'>op</span>$<span class='no'>coe</span> <span class='co'># same thing</span></div><div class='output co'>#&gt;                     Intercept            x1         x2            x3
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows</div><div class='input'><span class='fu'>class</span>(<span class='no'>op</span>)</div><div class='output co'>#&gt; [1] "OpnCoe" "Coe"   </div><div class='input'><span class='no'>op</span>$<span class='no'>coe</span> <span class='co'># same thing</span></div><div class='output co'>#&gt;                     Intercept            x1         x2            x3
 #&gt; 0001-cAglan_O10VD  0.21728164  0.0820952380 -0.9016209 -0.0174933751
 #&gt; 0001-cAglan_O10VL  0.17440503  0.0338452396 -0.7077580  0.0188673254
 #&gt; 0001-cAglan_O11VD  0.17605784 -0.0181821226 -0.7153938  0.1131745169
@@ -857,24 +849,19 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; 0125-wMouBo1_O17VD -0.1391688664 -0.005128136
 #&gt; 0125-wMouBo1_O17VL -0.1277018851 -0.009272098
 #&gt;  [ reached getOption("max.print") -- omitted 44 rows ]</div><div class='input'>
-<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
-<span class='no'>wp</span></div><div class='output co'>#&gt; An LdkCoe [full Generalized Procrustes] object with: 
+<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:85238</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:5.4545</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:1.1678</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:0.0014869</span></div><div class='output co'>#&gt; <span class='message'>iteration: 5	gain:0.9109</span></div><div class='output co'>#&gt; <span class='message'>iteration: 6	gain:0.25865</span></div><div class='output co'>#&gt; <span class='message'>iteration: 7	gain:0.11654</span></div><div class='output co'>#&gt; <span class='message'>iteration: 8	gain:0.0002648</span></div><div class='output co'>#&gt; <span class='message'>iteration: 9	gain:0.078733</span></div><div class='output co'>#&gt; <span class='message'>iteration: 10	gain:0.037936</span></div><div class='output co'>#&gt; <span class='message'>iteration: 11	gain:0.0036029</span></div><div class='output co'>#&gt; <span class='message'>iteration: 12	gain:4.6608e-06</span></div><div class='input'><span class='no'>wp</span></div><div class='output co'>#&gt; An LdkCoe [full Generalized Procrustes] object with: 
 #&gt; --------------------
 #&gt;  - $coo: 127 configuration of landmarks (18 +/- 0 coordinates)
 #&gt; # A tibble: 127 x 1
-#&gt;    group
-#&gt;    &lt;fct&gt;
-#&gt;  1 AN   
-#&gt;  2 AN   
-#&gt;  3 AN   
-#&gt;  4 AN   
-#&gt;  5 AN   
-#&gt;  6 AN   
-#&gt;  7 AN   
-#&gt;  8 AN   
-#&gt;  9 AN   
-#&gt; 10 AN   
-#&gt; # ... with 117 more rows</div><div class='input'><span class='fu'>class</span>(<span class='no'>wp</span>) <span class='co'># for Ldk methods, LdkCoe objects can also be considered as Coo objects</span></div><div class='output co'>#&gt; [1] "LdkCoe" "Coe"    "Ldk"    "Coo"   </div><div class='input'><span class='co'># so you can apply all Ldk methods available.</span>
+#&gt;   group
+#&gt;   &lt;fct&gt;
+#&gt; 1 AN   
+#&gt; 2 AN   
+#&gt; 3 AN   
+#&gt; 4 AN   
+#&gt; 5 AN   
+#&gt; 6 AN   
+#&gt; # ... with 121 more rows</div><div class='input'><span class='fu'>class</span>(<span class='no'>wp</span>) <span class='co'># for Ldk methods, LdkCoe objects can also be considered as Coo objects</span></div><div class='output co'>#&gt; [1] "LdkCoe" "Coe"    "Ldk"    "Coo"   </div><div class='input'><span class='co'># so you can apply all Ldk methods available.</span>
 <span class='no'>wp</span>$<span class='no'>coe</span> <span class='co'># Procrustes aligned coordinates</span></div><div class='output co'>#&gt;               x1            x2        x3        x4        x5        x6
 #&gt; AN1   -0.4903861 -0.0772408724 0.2217823 0.2625401 0.2629377 0.2456404
 #&gt; AN2   -0.4813359 -0.0043196292 0.2358211 0.2469906 0.2493395 0.2433227
@@ -1063,7 +1050,7 @@ with <code>methods(class=Coe)</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

@@ -99,7 +99,7 @@
     </div>
 
     
-    <p>Arange shapes by variables, from the <code>$fac</code>. See examples and <code><a href='http://dplyr.tidyverse.org/reference/arrange.html'>?dplyr::arrange</a></code>.</p>
+    <p>Arrange shapes by variables, from the <code>$fac</code>. See examples and <code><a href='http://dplyr.tidyverse.org/reference/arrange.html'>?dplyr::arrange</a></code>.</p>
     
 
     <pre class="usage"><span class='fu'>arrange</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
@@ -143,19 +143,15 @@
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 4 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VL    O10  
-#&gt;  3 Aglan cult  VD    O11  
-#&gt;  4 Aglan cult  VL    O11  
-#&gt;  5 Aglan cult  VD    O12  
-#&gt;  6 Aglan cult  VL    O12  
-#&gt;  7 Aglan cult  VD    O13  
-#&gt;  8 Aglan cult  VL    O13  
-#&gt;  9 Aglan cult  VD    O14  
-#&gt; 10 Aglan cult  VL    O14  
-#&gt; # ... with 200 more rows
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># we create a new column</span>
 <span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>.</span>)) <span class='kw'>%$%</span> <span class='no'>fac</span>$<span class='no'>id</span></div><div class='output co'>#&gt;   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
 #&gt;  [19]  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36
@@ -201,7 +197,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

@@ -109,7 +109,22 @@ the first harmonic or not, and based and the maximum possible number
 of harmonics on the <code>Coo</code> object.</p>
     
 
-    <pre class="usage"><span class='fu'>calibrate_harmonicpower</span>(<span class='no'>x</span>, <span class='no'>method</span>, <span class='no'>id</span>, <span class='no'>nb.h</span>, <span class='no'>drop</span>, <span class='no'>thresh</span>, <span class='no'>plot</span>)</pre>
+    <pre class="usage"><span class='fu'>calibrate_harmonicpower</span>()
+
+<span class='fu'>calibrate_harmonicpower_efourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>x</span>), <span class='no'>nb.h</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>95</span>, <span class='fl'>99</span>, <span class='fl'>99.9</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_harmonicpower_rfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>x</span>), <span class='no'>nb.h</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>95</span>, <span class='fl'>99</span>, <span class='fl'>99.9</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_harmonicpower_tfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>x</span>), <span class='no'>nb.h</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>95</span>, <span class='fl'>99</span>, <span class='fl'>99.9</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_harmonicpower_sfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>x</span>), <span class='no'>nb.h</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>95</span>, <span class='fl'>99</span>, <span class='fl'>99.9</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_harmonicpower_dfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>x</span>), <span class='no'>nb.h</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>95</span>, <span class='fl'>99</span>, <span class='fl'>99.9</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -117,11 +132,6 @@ of harmonics on the <code>Coo</code> object.</p>
     <tr>
       <th>x</th>
       <td><p>a <code>Coo</code> of <code>Opn</code> object</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>any method from <code>c('efourier', 'rfourier', 'sfourier', 'tfourier')</code> for <code>Out</code>s and
-<code>dfourier</code> for <code>Out</code>s.</p></td>
     </tr>
     <tr>
       <th>id</th>
@@ -172,13 +182,19 @@ and as follows for radii variation and tangent angle:
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>cal</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
-    <span class='fu'>calibrate_harmonicpower</span>()</div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='432.632880098887' /></div><span class='co'># NOT RUN {</span>
-<span class='co'># for Opn objects</span>
-<span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower</span>(<span class='st'>"dfourier"</span>)
-
+    <pre class="examples"><div class='input'><span class='no'>b5</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>)
+<span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_efourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;     5     5     8    11 </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_rfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;    11    11    12    12 </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_tfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-3.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;     9     9    11    12 </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_sfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-4.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;     2     2     2     7 </div><div class='input'>
+<span class='co'># on Opn</span>
+<span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>calibrate_harmonicpower_dfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-5.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;     4     4    10    12 </div><span class='co'># NOT RUN {</span>
 <span class='co'># let customize the ggplot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+<span class='no'>cal</span> <span class='kw'>&lt;-</span> <span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_efourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)
 <span class='no'>cal</span>$<span class='no'>gg</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_minimal</a></span>() +
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a></span>(<span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>3.5</span>, <span class='fl'>12.5</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>100</span>)) +
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggtitle</a></span>(<span class='st'>"Harmonic power calibration"</span>)
@@ -203,7 +219,7 @@ and as follows for radii variation and tangent angle:
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

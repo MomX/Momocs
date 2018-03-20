@@ -143,47 +143,30 @@ is not checked, so anything with the same number of rows will be merged.</p>
 #&gt;   - 40 outlines, 162 +/- 21 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 40 x 2
-#&gt;    type   fake 
-#&gt;    &lt;fct&gt;  &lt;fct&gt;
-#&gt;  1 whisky a    
-#&gt;  2 whisky a    
-#&gt;  3 whisky a    
-#&gt;  4 whisky a    
-#&gt;  5 whisky a    
-#&gt;  6 whisky a    
-#&gt;  7 whisky a    
-#&gt;  8 whisky a    
-#&gt;  9 whisky a    
-#&gt; 10 whisky a    
-#&gt; # ... with 30 more rows
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 34 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># or, if you have many levels</span>
 <span class='no'>bot_s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='chop.html'>chop</a></span>(<span class='no'>bot</span>, ~<span class='no'>type</span>)
 <span class='no'>bot_s</span>$<span class='no'>whisky</span></div><div class='output co'>#&gt; Out (outlines)
 #&gt;   - 20 outlines, 158 +/- 23 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 20 x 2
-#&gt;    type   fake 
-#&gt;    &lt;fct&gt;  &lt;fct&gt;
-#&gt;  1 whisky a    
-#&gt;  2 whisky a    
-#&gt;  3 whisky a    
-#&gt;  4 whisky a    
-#&gt;  5 whisky a    
-#&gt;  6 whisky a    
-#&gt;  7 whisky a    
-#&gt;  8 whisky a    
-#&gt;  9 whisky a    
-#&gt; 10 whisky a    
-#&gt; 11 whisky b    
-#&gt; 12 whisky b    
-#&gt; 13 whisky b    
-#&gt; 14 whisky b    
-#&gt; 15 whisky b    
-#&gt; 16 whisky b    
-#&gt; 17 whisky b    
-#&gt; 18 whisky b    
-#&gt; 19 whisky b    
-#&gt; 20 whisky b    
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 14 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># note that you can apply something (single function or a more</span>
 <span class='co'># complex pipe) then combine everyone, since combine also works on lists</span>
 <span class='co'># eg:</span>
@@ -195,28 +178,15 @@ is not checked, so anything with the same number of rows will be merged.</p>
 #&gt; --------------------
 #&gt;  - $coe: 20 outlines described, and (total) 80 coefficients
 #&gt; # A tibble: 20 x 2
-#&gt;    type  fake 
-#&gt;    &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 beer  c    
-#&gt;  2 beer  c    
-#&gt;  3 beer  c    
-#&gt;  4 beer  c    
-#&gt;  5 beer  c    
-#&gt;  6 beer  c    
-#&gt;  7 beer  c    
-#&gt;  8 beer  c    
-#&gt;  9 beer  c    
-#&gt; 10 beer  c    
-#&gt; 11 beer  d    
-#&gt; 12 beer  d    
-#&gt; 13 beer  d    
-#&gt; 14 beer  d    
-#&gt; 15 beer  d    
-#&gt; 16 beer  d    
-#&gt; 17 beer  d    
-#&gt; 18 beer  d    
-#&gt; 19 beer  d    
-#&gt; 20 beer  d    </div></pre>
+#&gt;   type  fake 
+#&gt;   &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 beer  c    
+#&gt; 2 beer  c    
+#&gt; 3 beer  c    
+#&gt; 4 beer  c    
+#&gt; 5 beer  c    
+#&gt; 6 beer  c    
+#&gt; # ... with 14 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -235,7 +205,7 @@ is not checked, so anything with the same number of rows will be merged.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

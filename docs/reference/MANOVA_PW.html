@@ -134,8 +134,8 @@ pairwise combination of the factor provided.</p>
     <p>a list with the following components is returned (invisibly because $manovas
 may be very long, see examples):</p><ul>
 <li><p>manovas a list containing all the raw manovas</p></li>
-<li><p>summary a matrix with all important statists</p></li>
-<li><p>stars.tab a table with 'significance star', discutable but useful:
+<li><p>summary</p></li>
+<li><p>stars.tab a table with 'significance stars', discutable but largely used:
 '<em><strong>' if Pr(&gt;F) &lt; 0.001; '</strong>' of &lt; 0.01; '</em>' if &lt; 0.05; '.' if &lt; 0.10 and '-' if above.</p></li>
 </ul>
 
@@ -159,7 +159,7 @@ equivalent to <a href='MANOVA.html'>MANOVA</a>. <code>MANOVA_PW.PCA</code> works
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># we create a fake factor with 4 levels</span>
 <span class='no'>bot</span>$<span class='no'>fac</span>$<span class='no'>fake</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
-<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>8</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>MANOVA_PW</span>(<span class='no'>bot.p</span>, <span class='st'>'fake'</span>) <span class='co'># or MANOVA_PW(bot.p, 2)</span></div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 6 were retained</span></div><div class='output co'>#&gt; $stars.tab
+<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>8</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>MANOVA_PW</span>(<span class='no'>bot.p</span>, <span class='st'>'fake'</span>) <span class='co'># or MANOVA_PW(bot.p, 2)</span></div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 6 were retained</span></div><div class='output co'>#&gt; <span class='message'>ab</span></div><div class='output co'>#&gt; <span class='message'>ac</span></div><div class='output co'>#&gt; <span class='message'>ad</span></div><div class='output co'>#&gt; <span class='message'>bc</span></div><div class='output co'>#&gt; <span class='message'>bd</span></div><div class='output co'>#&gt; <span class='message'>cd</span></div><div class='output co'>#&gt; $stars.tab
 #&gt;   a b c  d 
 #&gt; a   - ** **
 #&gt; b     *  * 
@@ -174,14 +174,14 @@ equivalent to <a href='MANOVA.html'>MANOVA</a>. <code>MANOVA_PW.PCA</code> works
 #&gt; b - d  1 0.5793   2.9830      6     13 0.046573
 #&gt; c - d  1 0.3489   1.1611      6     13 0.383292</div><div class='input'>
 <span class='co'># an example on open outlines</span>
-<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='no'>olea</span>))</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='input'><span class='fu'>MANOVA_PW</span>(<span class='no'>op</span>, <span class='st'>'domes'</span>)</div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 2 were retained</span></div><div class='output co'>#&gt; $stars.tab
+<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='no'>olea</span>))</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='input'><span class='fu'>MANOVA_PW</span>(<span class='no'>op</span>, <span class='st'>'domes'</span>)</div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 2 were retained</span></div><div class='output co'>#&gt; <span class='message'>cultwild</span></div><div class='output co'>#&gt; $stars.tab
 #&gt;      cult wild
 #&gt; cult      *** 
 #&gt; 
 #&gt; $summary (see also $manovas)
 #&gt;             Df Pillai approx F num Df den Df    Pr(&gt;F)
 #&gt; cult - wild  1 0.2721    38.69      2    207 5.315e-15</div><div class='input'><span class='co'># to get the results</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>MANOVA_PW</span>(<span class='no'>op</span>, <span class='st'>'domes'</span>)</div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 2 were retained</span></div><div class='output co'>#&gt; $stars.tab
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>MANOVA_PW</span>(<span class='no'>op</span>, <span class='st'>'domes'</span>)</div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 2 were retained</span></div><div class='output co'>#&gt; <span class='message'>cultwild</span></div><div class='output co'>#&gt; $stars.tab
 #&gt;      cult wild
 #&gt; cult      *** 
 #&gt; 
@@ -216,7 +216,7 @@ equivalent to <a href='MANOVA.html'>MANOVA</a>. <code>MANOVA_PW.PCA</code> works
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

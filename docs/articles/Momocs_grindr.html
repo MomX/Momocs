@@ -75,7 +75,7 @@
       <h1>Layered shape and multivariate plots with grindr</h1>
                         <h4 class="author">Vincent Bonhomme</h4>
             
-            <h4 class="date">2018-03-15</h4>
+            <h4 class="date">2018-03-20</h4>
           </div>
 
     
@@ -109,19 +109,15 @@
 ##   - 40 outlines, 162 +/- 21 coords (in $coo)
 ##   - 2 classifiers (in $fac): 
 ## # A tibble: 40 x 2
-##    type   fake 
-##    &lt;fct&gt;  &lt;fct&gt;
-##  1 whisky a    
-##  2 whisky a    
-##  3 whisky a    
-##  4 whisky a    
-##  5 whisky a    
-##  6 whisky a    
-##  7 whisky a    
-##  8 whisky a    
-##  9 whisky a    
-## 10 whisky a    
-## # ... with 30 more rows
+##   type   fake 
+##   &lt;fct&gt;  &lt;fct&gt;
+## 1 whisky a    
+## 2 whisky a    
+## 3 whisky a    
+## 4 whisky a    
+## 5 whisky a    
+## 6 whisky a    
+## # ... with 34 more rows
 ##   - also: $ldk</code></pre>
 <p>Here we used a different paper, and at the exit of the <code>cheapbabi</code> pipe we assigned the (otherwise invisibly) returned value to <code>x</code>, here the <em>untouched</em> <code>bot</code>.</p>
 <p>All available papers are listed below:</p>
@@ -509,7 +505,7 @@
 <span class="st">    </span>layer_morphospace <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span>layer_points <span class="op">%&gt;%</span><span class="st"> </span>layer_chull <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span>layer_eigen <span class="op">%&gt;%</span><span class="st"> </span>layer_legend</code></pre></div>
-<p><img src="Momocs_grindr_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="Momocs_grindr_files/figure-html/unnamed-chunk-9-1.png" width="672"><img src="Momocs_grindr_files/figure-html/unnamed-chunk-9-2.png" width="672"></p>
 <p>It works pretty much the same way as <code>drawers</code>, you can access the full list with <code>apropos("layer_")</code> and <code><a href="../reference/layers.html">?layers</a></code>.</p>
 <p>Here again, I’ll write more once <code>cheapbabi</code> development will become stable.</p>
 <p><strong>All suggestions and comments are welcome!</strong></p>
@@ -540,7 +536,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

@@ -163,9 +163,9 @@ groups defined with the fac argument if provided) and the Coe object is returned
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
-in that case, the other columns of the fac are also returned, usingthe first row within every level, but they may
-not be representive of the group. Also notice that for PCA objects, mean scores are returned
-within a PCA object (accesible with PCA$x) that can be plotted directly but other slots are left
+in that case, the other columns of the fac are also returned, using the first row within every level, but they may
+not be representative of the group. Also notice that for PCA objects, mean scores are returned
+within a PCA object (accessible with <code>PCA$x</code>) that can be plotted directly but other slots are left
 unchanged.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -368,7 +368,7 @@ unchanged.</p>
 #&gt;   &lt;fct&gt;  &lt;fct&gt;
 #&gt; 1 beer   c    
 #&gt; 2 whisky a    </div><div class='input'><span class='fu'>class</span>(<span class='no'>ms</span>$<span class='no'>Coe</span>)</div><div class='output co'>#&gt; [1] "OutCoe" "Coe"   </div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='no'>ms</span>$<span class='no'>shp</span>
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='img'><img src='mshapes-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='tps_arr.html'>tps_arr</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='no'>ms</span>$<span class='no'>beer</span>) <span class='co'>#etc.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='img'><img src='mshapes-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='img'><img src='mshapes-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='tps_arr.html'>tps_arr</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='no'>ms</span>$<span class='no'>beer</span>) <span class='co'>#etc.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='img'><img src='mshapes-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>'VL'</span>), <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>mshapes</span>(<span class='no'>op</span>, <span class='st'>'var'</span>) <span class='co'>#etc</span>
 <span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; An OpnCoe object [ npoly analysis ]
 #&gt; --------------------
@@ -380,25 +380,20 @@ unchanged.</p>
 #&gt; 1 Aglan  cult  VL    O10  
 #&gt; 2 MouBo1 wild  VL    O10  
 #&gt; 3 PicMa  cult  VL    O10  </div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='mshapes-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
-<span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>mshapes</span>(<span class='no'>wp</span>, <span class='fl'>1</span>)
+<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:85238</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:5.4545</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:1.1678</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:0.0014869</span></div><div class='output co'>#&gt; <span class='message'>iteration: 5	gain:0.9109</span></div><div class='output co'>#&gt; <span class='message'>iteration: 6	gain:0.25865</span></div><div class='output co'>#&gt; <span class='message'>iteration: 7	gain:0.11654</span></div><div class='output co'>#&gt; <span class='message'>iteration: 8	gain:0.0002648</span></div><div class='output co'>#&gt; <span class='message'>iteration: 9	gain:0.078733</span></div><div class='output co'>#&gt; <span class='message'>iteration: 10	gain:0.037936</span></div><div class='output co'>#&gt; <span class='message'>iteration: 11	gain:0.0036029</span></div><div class='output co'>#&gt; <span class='message'>iteration: 12	gain:4.6608e-06</span></div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>mshapes</span>(<span class='no'>wp</span>, <span class='fl'>1</span>)
 <span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; Ldk (landmarks)
 #&gt;   - 11 landmarks, 18 +/- 0 coords (in $coo)
 #&gt;   - 1 classifiers (in $fac): 
 #&gt; # A tibble: 11 x 1
-#&gt;    group
-#&gt;    &lt;fct&gt;
-#&gt;  1 AE   
-#&gt;  2 AN   
-#&gt;  3 CA   
-#&gt;  4 CX   
-#&gt;  5 DE   
-#&gt;  6 MA   
-#&gt;  7 OR   
-#&gt;  8 PS   
-#&gt;  9 TO   
-#&gt; 10 UR   
-#&gt; 11 WY   
+#&gt;   group
+#&gt;   &lt;fct&gt;
+#&gt; 1 AE   
+#&gt; 2 AN   
+#&gt; 3 CA   
+#&gt; 4 CX   
+#&gt; 5 DE   
+#&gt; 6 MA   
+#&gt; # ... with 5 more rows
 #&gt;   - also: $links   - also: $slidings</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Ldk.html'>Ldk</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='co'>#etc.</span></div><div class='img'><img src='mshapes-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>ms</span>$<span class='no'>Coe</span>) <span class='co'># equivalent (except the $fac slot)</span></div><div class='img'><img src='mshapes-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -420,7 +415,7 @@ unchanged.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

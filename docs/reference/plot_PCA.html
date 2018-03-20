@@ -99,11 +99,14 @@
     </div>
 
     
-    <p>Quickly vizualize <a href='PCA.html'>PCA</a> objects and build customs plots
+    <p>Quickly vizualise <a href='PCA.html'>PCA</a> objects and friends (<a href='LDA.html'>LDA</a>) and build customs plots
 using the <a href='layers.html'>layers</a>. See examples.</p>
     
 
-    <pre class="usage"><span class='fu'>plot_PCA</span>(<span class='no'>x</span>, <span class='no'>f</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_summer</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_PCA</span>(<span class='no'>x</span>, <span class='no'>f</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>, <span class='kw'>morphospace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>morphospace_position</span> <span class='kw'>=</span> <span class='st'>"range"</span>,
+  <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axesvar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -126,13 +129,60 @@ or a factor can directly be passed. Accept <code>numeric</code> as well.</p></td
       <th>palette</th>
       <td><p><code>color palette</code> to use <code>col_summer</code> by default</p></td>
     </tr>
+    <tr>
+      <th>points</th>
+      <td><p><code>logical</code> whether to draw this with <a href='layers.html'>layer_points</a></p></td>
+    </tr>
+    <tr>
+      <th>points_transp</th>
+      <td><p><code>numeric</code> to feed <a href='layers.html'>layer_points</a> (default:0.25)</p></td>
+    </tr>
+    <tr>
+      <th>morphospace</th>
+      <td><p><code>logical</code> whether to draw this using <a href='layers.html'>layer_morphospace</a></p></td>
+    </tr>
+    <tr>
+      <th>morphospace_position</th>
+      <td><p>to feed <a href='layers.html'>layer_morphospace</a> (default: "range")</p></td>
+    </tr>
+    <tr>
+      <th>chull</th>
+      <td><p><code>logical</code> whether to draw this with <a href='layers.html'>layer_chull</a></p></td>
+    </tr>
+    <tr>
+      <th>chullfilled</th>
+      <td><p><code>logical</code> whether to draw this with <a href='layers.html'>layer_chullfilled</a></p></td>
+    </tr>
+    <tr>
+      <th>center_origin</th>
+      <td><p><code>logical</code> whether to center origin</p></td>
+    </tr>
+    <tr>
+      <th>zoom</th>
+      <td><p><code>numeric</code> zoom level for the frame (default: 0.9)</p></td>
+    </tr>
+    <tr>
+      <th>eigen</th>
+      <td><p><code>logical</code> whether to draw this using <a href='layers.html'>layer_eigen</a></p></td>
+    </tr>
+    <tr>
+      <th>box</th>
+      <td><p><code>logical</code> whether to draw this using <a href='layers.html'>layer_box</a></p></td>
+    </tr>
+    <tr>
+      <th>axesnames</th>
+      <td><p><code>logical</code> whether to draw this using <a href='layers.html'>layer_axesnames</a></p></td>
+    </tr>
+    <tr>
+      <th>axesvar</th>
+      <td><p><code>logical</code> whether to draw this using <a href='layers.html'>layer_axesvar</a></p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>This approach will replace <a href='plot.PCA.html'>plot.PCA</a> in further versions.
-This <code>cheap base biplot</code> may be packaged at some point.
-All comments are welcome.</p>
+    <p>This approach will replace <a href='plot.PCA.html'>plot.PCA</a> (and <code>plot.lda</code> in further versions.
+This is part of <code>grindr</code> approach that may be packaged at some point. All comments are welcome.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -145,7 +195,7 @@ All comments are welcome.</p>
 
 <span class='co'># Some outlines with bot</span>
 <span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>fake</span><span class='kw'>=</span><span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='fl'>40</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'>
+<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>)</div><div class='img'><img src='plot_PCA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>type</span>)</div><div class='img'><img src='plot_PCA-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>fake</span>)</div><div class='img'><img src='plot_PCA-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Some curves with olea</span>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span> <span class='kw'>%&gt;%</span>
 <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>s</span><span class='kw'>=</span><span class='fu'><a href='coo_area.html'>coo_area</a></span>(<span class='no'>.</span>)) <span class='kw'>%&gt;%</span>
@@ -154,23 +204,24 @@ All comments are welcome.</p>
 <span class='no'>combine</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span>
 <span class='no'>op</span>$<span class='no'>fac</span>$<span class='no'>s</span> <span class='kw'>%&lt;&gt;%</span> <span class='fu'>as.character</span>() <span class='kw'>%&gt;%</span> <span class='fu'>as.numeric</span>()
 
-<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='no'>plot_PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>layer_frame</span></div><div class='input'>
+<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='no'>plot_PCA</span></div><div class='img'><img src='plot_PCA-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'>### Now we can play with layers</span>
+<span class='co'># and for instance build a custom plot</span>
+<span class='co'># it should start with plot_PCA()</span>
 
-<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='no'>plot_PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>layer_fullframe</span> <span class='kw'>%&gt;%</span> <span class='no'>layer_points</span></div><div class='img'><img src='plot_PCA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_PCA</span>(~<span class='no'>s</span>) <span class='kw'>%&gt;%</span> <span class='no'>layer_fullframe</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_points</a></span>(<span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='img'><img src='plot_PCA-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_PCA</span>(~<span class='no'>var</span>+<span class='no'>domes</span>) <span class='kw'>%&gt;%</span> <span class='no'>layer_frame</span> <span class='kw'>%&gt;%</span> <span class='no'>layer_ellipses</span></div><div class='img'><img src='plot_PCA-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='co'># you can combine the layers you like with a function like:</span>
-<span class='no'>myplot</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>){
+<span class='no'>my_plot</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>...</span>){
+
 <span class='no'>x</span> <span class='kw'>%&gt;%</span>
- <span class='no'>layer_fullframe</span> <span class='kw'>%&gt;%</span>
- <span class='no'>layer_points</span> <span class='kw'>%&gt;%</span>
- <span class='no'>layer_ellipsesaxes</span> <span class='kw'>%&gt;%</span>
- <span class='no'>layer_chullfilled</span>
+    <span class='fu'>plot_PCA</span>(<span class='no'>...</span>) <span class='kw'>%&gt;%</span>
+    <span class='no'>layer_points</span> <span class='kw'>%&gt;%</span>
+    <span class='no'>layer_ellipsesaxes</span> <span class='kw'>%&gt;%</span>
+    <span class='no'>layer_rug</span>
 }
 
 <span class='co'># and even continue after this function</span>
-<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_PCA</span>(~<span class='no'>var</span>) <span class='kw'>%&gt;%</span> <span class='fu'>myplot</span>() <span class='kw'>%&gt;%</span>
-   <span class='no'>layer_stars</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_title</a></span>(<span class='st'>"hi there!"</span>) <span class='kw'>%&gt;%</span>
-   <span class='no'>layer_rug</span> <span class='kw'>%&gt;%</span> <span class='no'>layer_eigen</span> <span class='kw'>%&gt;%</span> <span class='no'>layer_legend</span></div><div class='img'><img src='plot_PCA-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>my_plot</span>(~<span class='no'>var</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='layers.html'>layer_title</a></span>(<span class='st'>"hi there!"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='layers.html'>layer_stars</a></span>()</div><div class='img'><img src='plot_PCA-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 # You get the idea.
 </div></pre>
   </div>
@@ -191,7 +242,7 @@ All comments are welcome.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

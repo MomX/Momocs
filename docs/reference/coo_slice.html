@@ -168,8 +168,7 @@ If provided, <code>ids</code> will be ignored.</p></td>
 <span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>sh2</span><span class='kw'>[[</span><span class='fl'>1</span>]])</div><div class='img'><img src='coo_slice-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Use coo_slice with `ldk` instead:</span>
 <span class='co'># hearts as an example</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>h</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='co'># 4 landmarks</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>h</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:11.895</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:0.017192</span></div><div class='input'><span class='co'># 4 landmarks</span>
 <span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slice-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>x</span>$<span class='no'>ldk</span>[<span class='fl'>1</span>:<span class='fl'>5</span>]</div><div class='output co'>#&gt; [[1]]
 #&gt; [1] 65 56 50 19
 #&gt; 
@@ -218,7 +217,7 @@ If provided, <code>ids</code> will be ignored.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

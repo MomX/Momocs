@@ -166,7 +166,7 @@ retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>24</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>)
-<span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>0.99</span>) <span class='co'># retains 0.99 of the total variance</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
+<span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>0.99</span>) <span class='co'># retains 0.99 of the total variance</span></div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;         classified
 #&gt; actual   beer whisky
 #&gt;   beer     17      3
@@ -176,7 +176,7 @@ retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_
 #&gt;   beer whisky 
 #&gt;   0.85   0.95 
 #&gt; 
-#&gt;  * Leave-one-out cross-validation ($CV.correct): (90% - 36/40): </div><div class='input'><span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>5</span>) <span class='co'># retain 5 axis</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
+#&gt;  * Leave-one-out cross-validation ($CV.correct): (90% - 36/40): </div><div class='input'><span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>5</span>) <span class='co'># retain 5 axis</span></div><div class='output co'>#&gt; <span class='message'>5 PC retained</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;         classified
 #&gt; actual   beer whisky
 #&gt;   beer     16      4
@@ -186,8 +186,7 @@ retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_
 #&gt;   beer whisky 
 #&gt;    0.8    0.8 
 #&gt; 
-#&gt;  * Leave-one-out cross-validation ($CV.correct): (80% - 32/40): </div><div class='input'><span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>0.99</span>)
-<span class='no'>bot.l</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
+#&gt;  * Leave-one-out cross-validation ($CV.correct): (80% - 32/40): </div><div class='input'><span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>0.99</span>)</div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='no'>bot.l</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;         classified
 #&gt; actual   beer whisky
 #&gt;   beer     17      3
@@ -198,8 +197,7 @@ retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_
 #&gt;   0.85   0.95 
 #&gt; 
 #&gt;  * Leave-one-out cross-validation ($CV.correct): (90% - 36/40): </div><div class='input'><span class='fu'>plot</span>(<span class='no'>bot.l</span>)</div><div class='img'><img src='LDA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; NULL</div><div class='input'><span class='no'>bot.f</span>$<span class='no'>fac</span>$<span class='no'>plop</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
-<span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'>LDA</span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>), <span class='st'>'plop'</span>)
-<span class='no'>bot.l</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
+<span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'>LDA</span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>), <span class='st'>'plop'</span>)</div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='no'>bot.l</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;       classified
 #&gt; actual a b c d
 #&gt;      a 5 5 0 0
@@ -232,7 +230,7 @@ retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

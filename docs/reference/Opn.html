@@ -139,35 +139,25 @@ specifying the grouping structure</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#Methods on Opn</span>
-<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='no'>Opn</span>)</div><div class='output co'>#&gt;  [1] add_ldk                   calibrate_deviations     
-#&gt;  [3] calibrate_harmonicpower   calibrate_reconstructions
-#&gt;  [5] combine                   coo_bookstein            
-#&gt;  [7] coo_sample_prop           coo_sample               
-#&gt;  [9] coo_slice                 coo_smoothcurve          
-#&gt; [11] def_ldk_angle             def_ldk_direction        
-#&gt; [13] def_ldk_tips              def_ldk                  
-#&gt; [15] dfourier                  fgProcrustes             
-#&gt; [17] get_ldk                   npoly                    
-#&gt; [19] opoly                     panel                    
-#&gt; [21] pile                      rearrange_ldk            
+<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='no'>Opn</span>)</div><div class='output co'>#&gt;  [1] add_ldk           combine           coo_bookstein     coo_sample_prop  
+#&gt;  [5] coo_sample        coo_slice         coo_smoothcurve   def_ldk_angle    
+#&gt;  [9] def_ldk_direction def_ldk_tips      def_ldk           dfourier         
+#&gt; [13] fgProcrustes      get_ldk           npoly             opoly            
+#&gt; [17] panel             pile              rearrange_ldk    
 #&gt; see '?methods' for accessing help and source code</div><div class='input'><span class='co'># we load some open outlines. See ?olea for credits</span>
 <span class='no'>olea</span></div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 4 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VL    O10  
-#&gt;  3 Aglan cult  VD    O11  
-#&gt;  4 Aglan cult  VL    O11  
-#&gt;  5 Aglan cult  VD    O12  
-#&gt;  6 Aglan cult  VL    O12  
-#&gt;  7 Aglan cult  VD    O13  
-#&gt;  8 Aglan cult  VL    O13  
-#&gt;  9 Aglan cult  VD    O14  
-#&gt; 10 Aglan cult  VL    O14  
-#&gt; # ... with 200 more rows
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>olea</span>)</div><div class='img'><img src='Opn-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># orthogonal polynomials</span>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>, <span class='kw'>degree</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='input'><span class='co'># we print the Coe</span>
 <span class='no'>op</span></div><div class='output co'>#&gt; An OpnCoe object [ opoly analysis ]
@@ -175,23 +165,18 @@ specifying the grouping structure</p></td>
 #&gt;  - $coe: 210 open outlines described
 #&gt;  - $baseline1: (-0.5; 0), $baseline2: (0.5; 0)
 #&gt; # A tibble: 210 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VL    O10  
-#&gt;  3 Aglan cult  VD    O11  
-#&gt;  4 Aglan cult  VL    O11  
-#&gt;  5 Aglan cult  VD    O12  
-#&gt;  6 Aglan cult  VL    O12  
-#&gt;  7 Aglan cult  VD    O13  
-#&gt;  8 Aglan cult  VL    O13  
-#&gt;  9 Aglan cult  VD    O14  
-#&gt; 10 Aglan cult  VL    O14  
-#&gt; # ... with 200 more rows</div><div class='input'><span class='co'># Let's do a PCA on it</span>
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows</div><div class='input'><span class='co'># Let's do a PCA on it</span>
 <span class='no'>op.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>)
 <span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'domes'</span>)</div><div class='img'><img src='Opn-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'var'</span>)</div><div class='img'><img src='Opn-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># and now an LDA after a PCA</span>
-<span class='no'>olda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)
-<span class='co'># for CV table</span>
+<span class='no'>olda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)</div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='co'># for CV table</span>
 <span class='no'>olda</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;         classified
 #&gt; actual   Aglan Cypre MouBo1 PicMa
@@ -223,7 +208,7 @@ specifying the grouping structure</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

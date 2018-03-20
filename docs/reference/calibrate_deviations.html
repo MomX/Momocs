@@ -103,8 +103,35 @@
 range of harmonic number.</p>
     
 
-    <pre class="usage"><span class='fu'>calibrate_deviations</span>(<span class='no'>x</span>, <span class='no'>method</span>, <span class='no'>id</span>, <span class='no'>range</span>, <span class='no'>norm.centsize</span>, <span class='no'>dist.method</span>,
-  <span class='no'>interpolate.factor</span>, <span class='no'>dist.nbpts</span>, <span class='no'>plot</span>)</pre>
+    <pre class="usage"><span class='fu'>calibrate_deviations</span>()
+
+<span class='fu'>calibrate_deviations_efourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>range</span>, <span class='kw'>norm.centsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dist.method</span> <span class='kw'>=</span> <span class='no'>edm_nearest</span>, <span class='kw'>interpolate.factor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist.nbpts</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_deviations_tfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>range</span>, <span class='kw'>norm.centsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dist.method</span> <span class='kw'>=</span> <span class='no'>edm_nearest</span>, <span class='kw'>interpolate.factor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist.nbpts</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_deviations_rfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>range</span>, <span class='kw'>norm.centsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dist.method</span> <span class='kw'>=</span> <span class='no'>edm_nearest</span>, <span class='kw'>interpolate.factor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist.nbpts</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_deviations_sfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>range</span>, <span class='kw'>norm.centsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dist.method</span> <span class='kw'>=</span> <span class='no'>edm_nearest</span>, <span class='kw'>interpolate.factor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist.nbpts</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_deviations_npoly</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>range</span>, <span class='kw'>norm.centsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dist.method</span> <span class='kw'>=</span> <span class='no'>edm_nearest</span>, <span class='kw'>interpolate.factor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist.nbpts</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_deviations_opoly</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>range</span>, <span class='kw'>norm.centsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dist.method</span> <span class='kw'>=</span> <span class='no'>edm_nearest</span>, <span class='kw'>interpolate.factor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist.nbpts</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>calibrate_deviations_dfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>range</span>, <span class='kw'>norm.centsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dist.method</span> <span class='kw'>=</span> <span class='no'>edm_nearest</span>, <span class='kw'>interpolate.factor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist.nbpts</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -112,11 +139,6 @@ range of harmonic number.</p>
     <tr>
       <th>x</th>
       <td><p>and <code>Out</code> or <code>Opn</code> object on which to calibrate_deviations</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>any method from <code>c('efourier', 'rfourier', 'tfourier')</code> and
-<code>'dfourier'</code>.</p></td>
     </tr>
     <tr>
       <th>id</th>
@@ -169,6 +191,8 @@ to 1 by default, no interpolation will be made in you do not ask for it. Note,
 that interpolation to decrease artefactual errors may also be done outside
 <code>calibrate_deviations</code> and will be probably be removed from it
 in further versions.</p>
+<p>Note also that this code is quite old now and would need a good review,
+planned for 2018.</p>
 <p>For *poly methods on Opn objects, the deviations are calculated from a degree 12 polynom.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -179,45 +203,15 @@ in further versions.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
-   <span class='fu'>calibrate_deviations</span>()</div><div class='output co'>#&gt; <span class='message'>method not provided. efourier is used</span></div><div class='output co'>#&gt; <span class='error'>Error in grid.Call.graphics(C_setviewport, vp, TRUE): non-finite location and/or size for viewport</span></div><div class='img'><img src='calibrate_deviations-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='co'># on Opn</span>
-<span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
-   <span class='fu'>calibrate_deviations</span>()
-
-<span class='co'># lets customize the ggplot</span>
-<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fu'>calibrate_deviations</span>(<span class='no'>bot</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>10</span>)$<span class='no'>gg</span>
-<span class='no'>gg</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_hline</a></span>(<span class='kw'>yintercept</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0.001</span>, <span class='fl'>0.005</span>), <span class='kw'>linetype</span><span class='kw'>=</span><span class='fl'>3</span>)
-<span class='no'>gg</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>labs</a></span>(<span class='kw'>col</span><span class='kw'>=</span><span class='st'>"Number of harmonics"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='st'>"Number of harmonics"</span>,
-           <span class='kw'>title</span><span class='kw'>=</span><span class='st'>"Harmonic power"</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_bw</a></span>()
-<span class='no'>gg</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_polar'>coord_polar</a></span>()
-
-<span class='co'>### intermediate results can be accessed eg with:</span>
-<span class='no'>shp</span> <span class='kw'>&lt;-</span> <span class='no'>hearts</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_interpolate.html'>coo_interpolate</a></span>(<span class='fl'>360</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_samplerr.html'>coo_samplerr</a></span>(<span class='fl'>60</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='Out.html'>Out</a></span>()
-<span class='fu'>calibrate_deviations</span>(<span class='no'>shp</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>range</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>24</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"efourier"</span>) <span class='kw'>%$%</span>
-   <span class='no'>res</span> <span class='kw'>%&gt;%</span> <span class='fu'>apply</span>(<span class='fl'>1</span>, <span class='no'>mean</span>) <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"b"</span>)
-<span class='fu'>calibrate_deviations</span>(<span class='no'>shp</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>range</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>24</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"rfourier"</span>) <span class='kw'>%$%</span>
-   <span class='no'>res</span> <span class='kw'>%&gt;%</span> <span class='fu'>apply</span>(<span class='fl'>1</span>, <span class='no'>mean</span>) <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"b"</span>)
-<span class='fu'>calibrate_deviations</span>(<span class='no'>shp</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>range</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>24</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"tfourier"</span>) <span class='kw'>%$%</span>
-   <span class='no'>res</span> <span class='kw'>%&gt;%</span> <span class='fu'>apply</span>(<span class='fl'>1</span>, <span class='no'>mean</span>) <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"b"</span>)
-
-<span class='co'># ... providing an illustration of the e vs r/t fourier approaches developped in the help page.</span>
-
-<span class='co'>### illustration of interpolate.factor</span>
-<span class='no'>interp</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>)
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>()
-<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fu'>seq_along</span>(<span class='no'>interp</span>))
-<span class='fu'>calibrate_deviations</span>(<span class='no'>shp</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>range</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>24</span>,
-   <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"tfourier"</span>, <span class='kw'>interpolate.factor</span><span class='kw'>=</span><span class='no'>interp</span>[<span class='no'>i</span>], <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='kw'>%$%</span>
-   <span class='no'>res</span> <span class='kw'>%&gt;%</span> <span class='fu'>apply</span>(<span class='fl'>1</span>, <span class='no'>mean</span>) <span class='kw'>-&gt;</span> <span class='no'>res</span><span class='kw'>[[</span><span class='no'>i</span>]]
-
- <span class='co'>### int_5 is more accurate than no inteprolation</span>
- <span class='fu'>sign</span>(<span class='no'>res</span><span class='kw'>[[</span><span class='fl'>2</span>]] - <span class='no'>res</span><span class='kw'>[[</span><span class='fl'>1</span>]])
- <span class='co'>### int 25 is more accurate than int_5, etc.</span>
- <span class='fu'>sign</span>(<span class='no'>res</span><span class='kw'>[[</span><span class='fl'>3</span>]] - <span class='no'>res</span><span class='kw'>[[</span><span class='fl'>2</span>]])
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>b5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='no'>bot</span>, <span class='fl'>1</span>:<span class='fl'>5</span>) <span class='co'>#for the sake of speed</span>
+<span class='no'>b5</span> <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_deviations_efourier</span>()</div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;     5     5    10    15 </div><div class='img'><img src='calibrate_deviations-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>b5</span> <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_deviations_rfourier</span>()</div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;    50    56    63    64 </div><div class='output co'>#&gt; <span class='message'>'range' was too high and set to 4 15 27 39 51 63</span></div><div class='img'><img src='calibrate_deviations-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>b5</span> <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_deviations_tfourier</span>()</div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;    20    40    61    64 </div><div class='output co'>#&gt; <span class='message'>'range' was too high and set to 4 15 27 39 51 63</span></div><div class='img'><img src='calibrate_deviations-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>b5</span> <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_deviations_sfourier</span>()</div><div class='output co'>#&gt;   90%   95%   99% 99.9% 
+#&gt;     2     2     2     8 </div><div class='img'><img src='calibrate_deviations-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>o5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='no'>olea</span>, <span class='fl'>1</span>:<span class='fl'>5</span>) <span class='co'>#for the sake of speed</span>
+<span class='no'>o5</span> <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_deviations_opoly</span>()</div><div class='output co'>#&gt; <span class='message'>'range' was missing and set to 1:8</span></div><div class='output co'>#&gt; <span class='message'>deviations calculated from a degree 12 polynom</span></div><div class='img'><img src='calibrate_deviations-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>o5</span> <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_deviations_npoly</span>()</div><div class='output co'>#&gt; <span class='message'>'range' was missing and set to 1:8</span></div><div class='output co'>#&gt; <span class='message'>deviations calculated from a degree 12 polynom</span></div><div class='img'><img src='calibrate_deviations-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>o5</span> <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_deviations_dfourier</span>()</div><div class='output co'>#&gt; <span class='message'>'range' was missing and set to 1:8</span></div><div class='img'><img src='calibrate_deviations-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -238,7 +232,7 @@ in further versions.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

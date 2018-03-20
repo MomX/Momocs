@@ -143,73 +143,57 @@
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 4 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VL    O10  
-#&gt;  3 Aglan cult  VD    O11  
-#&gt;  4 Aglan cult  VL    O11  
-#&gt;  5 Aglan cult  VD    O12  
-#&gt;  6 Aglan cult  VL    O12  
-#&gt;  7 Aglan cult  VD    O13  
-#&gt;  8 Aglan cult  VL    O13  
-#&gt;  9 Aglan cult  VD    O14  
-#&gt; 10 Aglan cult  VL    O14  
-#&gt; # ... with 200 more rows
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># we retain on dorsal views</span>
 <span class='fu'>filter</span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>"VD"</span>)</div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 120 curves, 99 +/- 3 coords (in $coo)
 #&gt;   - 4 classifiers (in $fac): 
 #&gt; # A tibble: 120 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VD    O11  
-#&gt;  3 Aglan cult  VD    O12  
-#&gt;  4 Aglan cult  VD    O13  
-#&gt;  5 Aglan cult  VD    O14  
-#&gt;  6 Aglan cult  VD    O15  
-#&gt;  7 Aglan cult  VD    O16  
-#&gt;  8 Aglan cult  VD    O17  
-#&gt;  9 Aglan cult  VD    O18  
-#&gt; 10 Aglan cult  VD    O19  
-#&gt; # ... with 110 more rows
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VD    O11  
+#&gt; 3 Aglan cult  VD    O12  
+#&gt; 4 Aglan cult  VD    O13  
+#&gt; 5 Aglan cult  VD    O14  
+#&gt; 6 Aglan cult  VD    O15  
+#&gt; # ... with 114 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># only dorsal views and Aglan+PicMa varieties</span>
 <span class='fu'>filter</span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>"VD"</span>, <span class='no'>var</span> <span class='kw'>%in%</span> <span class='fu'>c</span>(<span class='st'>"Aglan"</span>, <span class='st'>"PicMa"</span>))</div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 60 curves, 100 +/- 2 coords (in $coo)
 #&gt;   - 4 classifiers (in $fac): 
 #&gt; # A tibble: 60 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VD    O11  
-#&gt;  3 Aglan cult  VD    O12  
-#&gt;  4 Aglan cult  VD    O13  
-#&gt;  5 Aglan cult  VD    O14  
-#&gt;  6 Aglan cult  VD    O15  
-#&gt;  7 Aglan cult  VD    O16  
-#&gt;  8 Aglan cult  VD    O17  
-#&gt;  9 Aglan cult  VD    O18  
-#&gt; 10 Aglan cult  VD    O19  
-#&gt; # ... with 50 more rows
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VD    O11  
+#&gt; 3 Aglan cult  VD    O12  
+#&gt; 4 Aglan cult  VD    O13  
+#&gt; 5 Aglan cult  VD    O14  
+#&gt; 6 Aglan cult  VD    O15  
+#&gt; # ... with 54 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># we create an id column and retain the 120 first shapes</span>
 <span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>olea</span>)) <span class='kw'>%&gt;%</span> <span class='fu'>filter</span>(<span class='no'>id</span> <span class='kw'>&gt;</span> <span class='fl'>120</span>)</div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 90 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 5 classifiers (in $fac): 
 #&gt; # A tibble: 90 x 5
-#&gt;    var   domes view  ind      id
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;int&gt;
-#&gt;  1 PicMa cult  VD    O24     121
-#&gt;  2 PicMa cult  VL    O24     122
-#&gt;  3 PicMa cult  VD    O25     123
-#&gt;  4 PicMa cult  VL    O25     124
-#&gt;  5 PicMa cult  VD    O26     125
-#&gt;  6 PicMa cult  VL    O26     126
-#&gt;  7 PicMa cult  VD    O27     127
-#&gt;  8 PicMa cult  VL    O27     128
-#&gt;  9 PicMa cult  VD    O28     129
-#&gt; 10 PicMa cult  VL    O28     130
-#&gt; # ... with 80 more rows
+#&gt;   var   domes view  ind      id
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;int&gt;
+#&gt; 1 PicMa cult  VD    O24     121
+#&gt; 2 PicMa cult  VL    O24     122
+#&gt; 3 PicMa cult  VD    O25     123
+#&gt; 4 PicMa cult  VL    O25     124
+#&gt; 5 PicMa cult  VD    O26     125
+#&gt; 6 PicMa cult  VL    O26     126
+#&gt; # ... with 84 more rows
 #&gt;   - also: $ldk</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -231,7 +215,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

@@ -143,72 +143,56 @@
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 4 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 4
-#&gt;    var   domes view  ind  
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD    O10  
-#&gt;  2 Aglan cult  VL    O10  
-#&gt;  3 Aglan cult  VD    O11  
-#&gt;  4 Aglan cult  VL    O11  
-#&gt;  5 Aglan cult  VD    O12  
-#&gt;  6 Aglan cult  VL    O12  
-#&gt;  7 Aglan cult  VD    O13  
-#&gt;  8 Aglan cult  VL    O13  
-#&gt;  9 Aglan cult  VD    O14  
-#&gt; 10 Aglan cult  VL    O14  
-#&gt; # ... with 200 more rows
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='fu'>select</span>(<span class='no'>olea</span>, <span class='no'>var</span>, <span class='no'>view</span>) <span class='co'># drops domes and ind</span></div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 2
-#&gt;    var   view 
-#&gt;    &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan VD   
-#&gt;  2 Aglan VL   
-#&gt;  3 Aglan VD   
-#&gt;  4 Aglan VL   
-#&gt;  5 Aglan VD   
-#&gt;  6 Aglan VL   
-#&gt;  7 Aglan VD   
-#&gt;  8 Aglan VL   
-#&gt;  9 Aglan VD   
-#&gt; 10 Aglan VL   
-#&gt; # ... with 200 more rows
+#&gt;   var   view 
+#&gt;   &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan VD   
+#&gt; 2 Aglan VL   
+#&gt; 3 Aglan VD   
+#&gt; 4 Aglan VL   
+#&gt; 5 Aglan VD   
+#&gt; 6 Aglan VL   
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='fu'>select</span>(<span class='no'>olea</span>, <span class='kw'>variety</span><span class='kw'>=</span><span class='no'>var</span>, <span class='kw'>domesticated_status</span><span class='kw'>=</span><span class='no'>domes</span>, <span class='no'>view</span>)</div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 3 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 3
-#&gt;    variety domesticated_status view 
-#&gt;    &lt;fct&gt;   &lt;fct&gt;               &lt;fct&gt;
-#&gt;  1 Aglan   cult                VD   
-#&gt;  2 Aglan   cult                VL   
-#&gt;  3 Aglan   cult                VD   
-#&gt;  4 Aglan   cult                VL   
-#&gt;  5 Aglan   cult                VD   
-#&gt;  6 Aglan   cult                VL   
-#&gt;  7 Aglan   cult                VD   
-#&gt;  8 Aglan   cult                VL   
-#&gt;  9 Aglan   cult                VD   
-#&gt; 10 Aglan   cult                VL   
-#&gt; # ... with 200 more rows
+#&gt;   variety domesticated_status view 
+#&gt;   &lt;fct&gt;   &lt;fct&gt;               &lt;fct&gt;
+#&gt; 1 Aglan   cult                VD   
+#&gt; 2 Aglan   cult                VL   
+#&gt; 3 Aglan   cult                VD   
+#&gt; 4 Aglan   cult                VL   
+#&gt; 5 Aglan   cult                VD   
+#&gt; 6 Aglan   cult                VL   
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># combine with filter with magrittr pipes</span>
 <span class='co'># only dorsal views, and 'var' and 'domes' columns</span>
 <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>"VD"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>select</span>(<span class='no'>var</span>, <span class='no'>domes</span>)</div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 120 curves, 99 +/- 3 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 120 x 2
-#&gt;    var   domes
-#&gt;    &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult 
-#&gt;  2 Aglan cult 
-#&gt;  3 Aglan cult 
-#&gt;  4 Aglan cult 
-#&gt;  5 Aglan cult 
-#&gt;  6 Aglan cult 
-#&gt;  7 Aglan cult 
-#&gt;  8 Aglan cult 
-#&gt;  9 Aglan cult 
-#&gt; 10 Aglan cult 
-#&gt; # ... with 110 more rows
+#&gt;   var   domes
+#&gt;   &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult 
+#&gt; 2 Aglan cult 
+#&gt; 3 Aglan cult 
+#&gt; 4 Aglan cult 
+#&gt; 5 Aglan cult 
+#&gt; 6 Aglan cult 
+#&gt; # ... with 114 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='fu'>head</span>(<span class='no'>olea</span>$<span class='no'>fac</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 4
 #&gt;   var   domes view  ind  
 #&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
@@ -222,56 +206,44 @@
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 2
-#&gt;    domes view 
-#&gt;    &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 cult  VD   
-#&gt;  2 cult  VL   
-#&gt;  3 cult  VD   
-#&gt;  4 cult  VL   
-#&gt;  5 cult  VD   
-#&gt;  6 cult  VL   
-#&gt;  7 cult  VD   
-#&gt;  8 cult  VL   
-#&gt;  9 cult  VD   
-#&gt; 10 cult  VL   
-#&gt; # ... with 200 more rows
+#&gt;   domes view 
+#&gt;   &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 cult  VD   
+#&gt; 2 cult  VL   
+#&gt; 3 cult  VD   
+#&gt; 4 cult  VL   
+#&gt; 5 cult  VD   
+#&gt; 6 cult  VL   
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># remove some columns</span>
 <span class='fu'>select</span>(<span class='no'>olea</span>, -<span class='no'>ind</span>)</div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 3 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 3
-#&gt;    var   domes view 
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt;  1 Aglan cult  VD   
-#&gt;  2 Aglan cult  VL   
-#&gt;  3 Aglan cult  VD   
-#&gt;  4 Aglan cult  VL   
-#&gt;  5 Aglan cult  VD   
-#&gt;  6 Aglan cult  VL   
-#&gt;  7 Aglan cult  VD   
-#&gt;  8 Aglan cult  VL   
-#&gt;  9 Aglan cult  VD   
-#&gt; 10 Aglan cult  VL   
-#&gt; # ... with 200 more rows
+#&gt;   var   domes view 
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD   
+#&gt; 2 Aglan cult  VL   
+#&gt; 3 Aglan cult  VD   
+#&gt; 4 Aglan cult  VL   
+#&gt; 5 Aglan cult  VD   
+#&gt; 6 Aglan cult  VL   
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># rename on the fly and select some columns</span>
 <span class='co'># you can use rename instead</span>
 <span class='fu'>select</span>(<span class='no'>olea</span>, <span class='kw'>foo</span><span class='kw'>=</span><span class='no'>domes</span>)</div><div class='output co'>#&gt; Opn (curves)
 #&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
 #&gt;   - 1 classifiers (in $fac): 
 #&gt; # A tibble: 210 x 1
-#&gt;    foo  
-#&gt;    &lt;fct&gt;
-#&gt;  1 cult 
-#&gt;  2 cult 
-#&gt;  3 cult 
-#&gt;  4 cult 
-#&gt;  5 cult 
-#&gt;  6 cult 
-#&gt;  7 cult 
-#&gt;  8 cult 
-#&gt;  9 cult 
-#&gt; 10 cult 
-#&gt; # ... with 200 more rows
+#&gt;   foo  
+#&gt;   &lt;fct&gt;
+#&gt; 1 cult 
+#&gt; 2 cult 
+#&gt; 3 cult 
+#&gt; 4 cult 
+#&gt; 5 cult 
+#&gt; 6 cult 
+#&gt; # ... with 204 more rows
 #&gt;   - also: $ldk</div><div class='input'>
 </div></pre>
   </div>
@@ -294,7 +266,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">

@@ -152,7 +152,8 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
 #&gt; 2 AN6       6     2 y         </div><div class='input'>
 <span class='co'># a way to illustrate, filter outliers</span>
 <span class='co'># conf has been chosen deliberately low to show some outliers</span>
-<span class='no'>x_f</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>x_p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>x_f</span>)
+<span class='no'>x_f</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; 99% 
+#&gt;  10 </div><div class='output co'>#&gt; <span class='message'>'nb.h' not provided and set to 10 (99% harmonic power)</span></div><div class='input'><span class='no'>x_p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>x_f</span>)
 <span class='co'># which are outliers (conf is ridiculously low here)</span>
 <span class='fu'>which_out</span>(<span class='no'>x_p</span>$<span class='no'>x</span>[, <span class='fl'>1</span>], <span class='fl'>0.5</span>)</div><div class='output co'>#&gt;       duvel    latrappe ballantines 
 #&gt;           6          13          22 </div><div class='input'><span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='st'>"black"</span>, <span class='fu'>nrow</span>(<span class='no'>x_p</span>$<span class='no'>x</span>))
@@ -180,7 +181,7 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>.</p>
+  <p>Developed by <a href='http://www.vincentbonhomme.fr'>Vincent Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">
