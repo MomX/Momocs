@@ -621,7 +621,7 @@ calibrate_deviations_efourier <-
 
     # missing lineat.y
     if (missing(range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE)
+      hr <- calibrate_harmonicpower_efourier(Coo, plot=FALSE)
       range <- unique(hr$minh)
     }
 
@@ -754,7 +754,7 @@ calibrate_deviations_tfourier <-
 
     # missing lineat.y
     if (missing(range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE)
+      hr <- calibrate_harmonicpower_tfourier(Coo, plot=FALSE)
       range <- unique(hr$minh)
     }
 
@@ -887,12 +887,145 @@ calibrate_deviations_rfourier <-
 
     # missing lineat.y
     if (missing(range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE)
+      hr <- calibrate_harmonicpower_rfourier(Coo, plot=FALSE)
       range <- unique(hr$minh)
     }
 
     method <- rfourier
     method.i <- rfourier_i
+
+    # We define the highest possible nb.h along Coo@coo[id]
+    min.nb.pts <- min(coo_nb(Coo))
+    nb.h.best <- floor(min.nb.pts/2) - 1
+    # we handle too ambitious range
+    if (max(range) > nb.h.best) {
+      range <- floor(seq(4, nb.h.best, length = 6))
+      message("'range' was too high and set to ", paste(range, collapse=" "))
+    }
+    # we prepare the results array
+    nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
+    nr <- length(range)
+    nc <- nb.pts
+    nk <- length(id)
+    res <- array(NA, dim = c(nr, nc, nk),
+                 dimnames = list(paste0("h", range),
+                                 paste("pt", 1:nb.pts), names(Coo)[id]))
+    # progressbar
+    if (nk > 5) {
+      pb <- progress::progress_bar$new(total = nk)
+      t <- TRUE
+    } else {
+      t <- FALSE
+    }
+    # the core loops that will calculate deviations
+    for (ind in seq_along(id)) {
+      coo <- Coo$coo[[id[ind]]] #Coo[id]?
+      # below, the best possible fit
+      # coo_best <- method.i(method(coo, nb.h = nb.h.best), nb.pts = nb.pts)
+      coo_best <- coo_interpolate(coo, coo_nb(coo)*interpolate.factor)
+      for (i in seq(along = range)) {
+        # for each number of harmonics we calculate deviation with
+        # the FUN=method
+        coo_i <- method.i(method(coo, nb.h = range[i]), nb.pts = nb.pts)
+        res[i, , ind] <- dist.method(coo_i, coo_best)
+      }
+      # we normalize by the centroid size and prepare the y.title
+      if (norm.centsize) {
+        res[, , ind] <- res[, , ind]/coo_centsize(coo)
+        y.title <- "Deviation (in % of the centroid size)"
+      } else {
+        y.title <- "Deviation (in original units)"
+      }
+      if (t)
+        pb$tick()
+    }
+    # below we manage for single/several individuals if more than
+    # 1, we calculate median and sd
+    if (nk > 1) {
+      m <- apply(res, 1:2, median)
+      d <- apply(res, 1:2, sd)
+      # we prepare a df
+      # we prepare a df
+      m %>% dplyr::as_data_frame() %>% seq_along %>%
+        lapply(function(i) data.frame(Var1=rownames(m),
+                                      Var2=colnames(m)[i],
+                                      value=m[,i])) %>%
+        do.call("rbind", .) %>%
+        cbind(as.numeric(d)) -> xx
+      colnames(xx) <- c("harm", "pt", "med", "sd")
+      # hideous but avoid the aes_string problem fro ribbon todo
+      xx$mmsd <- xx$med - xx$sd
+      xx$mpsd <- xx$med + xx$sd
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
+      # hideous but avoid the aes_string problem fro ribbon
+      xx$mmsd <- xx$med - xx$sd
+      xx$mpsd <- xx$med + xx$sd
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
+      # we ggplot
+      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
+        geom_ribbon(aes_string(ymin="mmsd", ymax="mpsd",
+                               fill="harm"), linetype=0,  alpha=0.1) +
+        geom_line(aes_string(x="pt", y="med", col="harm")) +
+        labs(x="Points along the outline", y=y.title,
+             col=NULL, fill=NULL) +
+        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$mpsd)))
+    } else {
+      m <- res[, , 1]
+      d <- NULL
+      # we prepare a df
+      xx <- m %>% as.data.frame() %>% seq_along %>%
+        lapply(function(i) data.frame(Var1=rownames(m),
+                                      Var2=colnames(m)[i],
+                                      value=m[,i])) %>%
+        do.call("rbind", .)
+      colnames(xx) <- c("harm", "pt", "med")
+      # hideous - todo
+      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
+      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
+        geom_line() +
+        labs(x="Points along the outline", y=y.title, col=NULL) +
+        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
+    }
+    #     # horizontal lines
+    #     if (!is.null(thresh)) {
+    #       gg <- gg + geom_hline(aes(yintercept=thresh))
+    #     }
+    # we plot the ggplot
+    if (plot){
+      print(gg)
+      invisible(list(gg=gg, res = res, m = m, d = d))
+    } else {
+      return(list(gg=gg, res = res, m = m, d = d))
+    }
+  }
+
+#' @rdname calibrate_deviations
+#' @export
+calibrate_deviations_sfourier <-
+  function(x,
+           id = 1, range,
+           norm.centsize = TRUE,
+           dist.method = edm_nearest,
+           interpolate.factor = 1,
+           dist.nbpts = 120,
+           plot = TRUE) {
+
+    .check(is_Out(x),
+           "only defined on Out")
+
+    Coo <- x
+    # Out dispatcher
+
+    # missing lineat.y
+    if (missing(range)) {
+      hr <- calibrate_harmonicpower_sfourier(Coo, plot=FALSE)
+      range <- unique(hr$minh)
+    }
+
+    method <- sfourier
+    method.i <- sfourier_i
 
     # We define the highest possible nb.h along Coo@coo[id]
     min.nb.pts <- min(coo_nb(Coo))
@@ -1293,6 +1426,9 @@ calibrate_deviations_dfourier <-
     }
     # we prepare the results array
     nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
+    nr <- length(range)
+    nc <- nb.pts
+    nk <- length(id)
 
     res <- array(NA, dim = c(nr, nb.pts, nk),
                  dimnames = list(paste0("h", range),
@@ -1380,139 +1516,6 @@ calibrate_deviations_dfourier <-
         coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
     }
 
-    if (plot){
-      print(gg)
-      invisible(list(gg=gg, res = res, m = m, d = d))
-    } else {
-      return(list(gg=gg, res = res, m = m, d = d))
-    }
-  }
-
-#' @rdname calibrate_deviations
-#' @export
-calibrate_deviations_sfourier <-
-  function(x,
-           id = 1, range,
-           norm.centsize = TRUE,
-           dist.method = edm_nearest,
-           interpolate.factor = 1,
-           dist.nbpts = 120,
-           plot = TRUE) {
-
-    .check(is_Out(x),
-           "only defined on Out")
-
-    Coo <- x
-    # Out dispatcher
-
-    # missing lineat.y
-    if (missing(range)) {
-      hr <- calibrate_harmonicpower(Coo, plot=FALSE)
-      range <- unique(hr$minh)
-    }
-
-    method <- sfourier
-    method.i <- sfourier_i
-
-    # We define the highest possible nb.h along Coo@coo[id]
-    min.nb.pts <- min(coo_nb(Coo))
-    nb.h.best <- floor(min.nb.pts/2) - 1
-    # we handle too ambitious range
-    if (max(range) > nb.h.best) {
-      range <- floor(seq(4, nb.h.best, length = 6))
-      message("'range' was too high and set to ", paste(range, collapse=" "))
-    }
-    # we prepare the results array
-    nb.pts <- ifelse(dist.nbpts == "max", 2 * nb.h.best, dist.nbpts)
-    nr <- length(range)
-    nc <- nb.pts
-    nk <- length(id)
-    res <- array(NA, dim = c(nr, nc, nk),
-                 dimnames = list(paste0("h", range),
-                                 paste("pt", 1:nb.pts), names(Coo)[id]))
-    # progressbar
-    if (nk > 5) {
-      pb <- progress::progress_bar$new(total = nk)
-      t <- TRUE
-    } else {
-      t <- FALSE
-    }
-    # the core loops that will calculate deviations
-    for (ind in seq_along(id)) {
-      coo <- Coo$coo[[id[ind]]] #Coo[id]?
-      # below, the best possible fit
-      # coo_best <- method.i(method(coo, nb.h = nb.h.best), nb.pts = nb.pts)
-      coo_best <- coo_interpolate(coo, coo_nb(coo)*interpolate.factor)
-      for (i in seq(along = range)) {
-        # for each number of harmonics we calculate deviation with
-        # the FUN=method
-        coo_i <- method.i(method(coo, nb.h = range[i]), nb.pts = nb.pts)
-        res[i, , ind] <- dist.method(coo_i, coo_best)
-      }
-      # we normalize by the centroid size and prepare the y.title
-      if (norm.centsize) {
-        res[, , ind] <- res[, , ind]/coo_centsize(coo)
-        y.title <- "Deviation (in % of the centroid size)"
-      } else {
-        y.title <- "Deviation (in original units)"
-      }
-      if (t)
-        pb$tick()
-    }
-    # below we manage for single/several individuals if more than
-    # 1, we calculate median and sd
-    if (nk > 1) {
-      m <- apply(res, 1:2, median)
-      d <- apply(res, 1:2, sd)
-      # we prepare a df
-      # we prepare a df
-      m %>% dplyr::as_data_frame() %>% seq_along %>%
-        lapply(function(i) data.frame(Var1=rownames(m),
-                                      Var2=colnames(m)[i],
-                                      value=m[,i])) %>%
-        do.call("rbind", .) %>%
-        cbind(as.numeric(d)) -> xx
-      colnames(xx) <- c("harm", "pt", "med", "sd")
-      # hideous but avoid the aes_string problem fro ribbon todo
-      xx$mmsd <- xx$med - xx$sd
-      xx$mpsd <- xx$med + xx$sd
-      # hideous - todo
-      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
-      # hideous but avoid the aes_string problem fro ribbon
-      xx$mmsd <- xx$med - xx$sd
-      xx$mpsd <- xx$med + xx$sd
-      # hideous - todo
-      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
-      # we ggplot
-      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
-        geom_ribbon(aes_string(ymin="mmsd", ymax="mpsd",
-                               fill="harm"), linetype=0,  alpha=0.1) +
-        geom_line(aes_string(x="pt", y="med", col="harm")) +
-        labs(x="Points along the outline", y=y.title,
-             col=NULL, fill=NULL) +
-        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$mpsd)))
-    } else {
-      m <- res[, , 1]
-      d <- NULL
-      # we prepare a df
-      xx <- m %>% as.data.frame() %>% seq_along %>%
-        lapply(function(i) data.frame(Var1=rownames(m),
-                                      Var2=colnames(m)[i],
-                                      value=m[,i])) %>%
-        do.call("rbind", .)
-      colnames(xx) <- c("harm", "pt", "med")
-      # hideous - todo
-      xx$pt <- xx$pt %>% gsub("pt ", "", .) %>% as.numeric
-      gg <- ggplot(xx, aes_string(x="pt", y="med", col="harm")) +
-        geom_line() +
-        labs(x="Points along the outline", y=y.title, col=NULL) +
-        coord_cartesian(xlim=range(xx$pt), ylim=c(0, max(xx$med)))
-    }
-    #     # horizontal lines
-    #     if (!is.null(thresh)) {
-    #       gg <- gg + geom_hline(aes(yintercept=thresh))
-    #     }
-    # we plot the ggplot
     if (plot){
       print(gg)
       invisible(list(gg=gg, res = res, m = m, d = d))

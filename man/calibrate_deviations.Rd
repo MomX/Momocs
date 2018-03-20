@@ -5,10 +5,10 @@
 \alias{calibrate_deviations_efourier}
 \alias{calibrate_deviations_tfourier}
 \alias{calibrate_deviations_rfourier}
+\alias{calibrate_deviations_sfourier}
 \alias{calibrate_deviations_npoly}
 \alias{calibrate_deviations_opoly}
 \alias{calibrate_deviations_dfourier}
-\alias{calibrate_deviations_sfourier}
 \title{Quantitative calibration, through deviations, for Out and Opn objects}
 \usage{
 calibrate_deviations()
@@ -25,6 +25,10 @@ calibrate_deviations_rfourier(x, id = 1, range, norm.centsize = TRUE,
   dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
   plot = TRUE)
 
+calibrate_deviations_sfourier(x, id = 1, range, norm.centsize = TRUE,
+  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
+  plot = TRUE)
+
 calibrate_deviations_npoly(x, id = 1, range, norm.centsize = TRUE,
   dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
   plot = TRUE)
@@ -34,10 +38,6 @@ calibrate_deviations_opoly(x, id = 1, range, norm.centsize = TRUE,
   plot = TRUE)
 
 calibrate_deviations_dfourier(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
-
-calibrate_deviations_sfourier(x, id = 1, range, norm.centsize = TRUE,
   dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
   plot = TRUE)
 }
