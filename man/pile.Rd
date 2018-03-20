@@ -10,30 +10,37 @@
 \alias{pile.Ldk}
 \title{Graphical pile of shapes}
 \usage{
-pile(coo, f, pal, paper_fun, draw_fun, transp, ...)
+pile(coo, f, sample, subset, pal, paper_fun, draw_fun, transp, ...)
 
-\method{pile}{default}(coo, f, pal = pal_qual, paper_fun = paper,
-  draw_fun = draw_curves, transp = 0, ...)
+\method{pile}{default}(coo, f, sample, subset, pal = pal_qual,
+  paper_fun = paper, draw_fun = draw_curves, transp = 0, ...)
 
-\method{pile}{list}(coo, f, pal = pal_qual, paper_fun = paper,
-  draw_fun = draw_curves, transp = 0, ...)
+\method{pile}{list}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
+  paper_fun = paper, draw_fun = draw_curves, transp = 0, ...)
 
-\method{pile}{array}(coo, f, pal = pal_qual, paper_fun = paper,
-  draw_fun = draw_landmarks, transp = 0, ...)
+\method{pile}{array}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
+  paper_fun = paper, draw_fun = draw_landmarks, transp = 0, ...)
 
-\method{pile}{Out}(coo, f, pal = pal_qual, paper_fun = paper,
-  draw_fun = draw_outlines, transp = 0, ...)
+\method{pile}{Out}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
+  paper_fun = paper, draw_fun = draw_outlines, transp = 0, ...)
 
-\method{pile}{Opn}(coo, f, pal = pal_qual, paper_fun = paper,
-  draw_fun = draw_curves, transp = 0, ...)
+\method{pile}{Opn}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
+  paper_fun = paper, draw_fun = draw_curves, transp = 0, ...)
 
-\method{pile}{Ldk}(coo, f, pal = pal_qual, paper_fun = paper,
-  draw_fun = draw_landmarks, transp = 0, ...)
+\method{pile}{Ldk}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
+  paper_fun = paper, draw_fun = draw_landmarks, transp = 0, ...)
 }
 \arguments{
 \item{coo}{a single shape or any  \link{Coo} object}
 
 \item{f}{factor specification}
+
+\item{sample}{\code{numeric} number of points to \link{coo_sample}
+if the number of shapes is > 1000 (default: 64).
+If non-numeric (eg \code{FALSE}) do not sample.}
+
+\item{subset}{\code{numeric} only draw this number of (randomly chosen) shapes if
+the number of shapes is > 1000 (default: 1000) If non-numeric (eg \code{FALSE}) do not sample.}
 
 \item{pal}{palette among \link{palettes} (default: pal_qual)}
 
@@ -49,6 +56,9 @@ pile(coo, f, pal, paper_fun, draw_fun, transp, ...)
 Pile all shapes in the same graphical window. Useful to check
 their normalization in terms of size, position, rotation, first point, etc.
 It is, essentially, a shortcut around \code{paper + drawers} of the grindr family.
+}
+\details{
+Large \code{Coo} are sampled, both in terms of the number of shapes and of points to drawn.
 }
 \note{
 A variation of this plot was called \code{stack} before \code{Momocs 1.2.5}
