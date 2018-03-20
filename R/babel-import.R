@@ -287,7 +287,7 @@ import_jpg1 <- function(jpg.path,
 #' and \link{import_Conte} for the algorithm itself.
 #'
 #' If \code{jpg.paths} is not provided (or \code{NULL}), you will have to select any \code{.jpg}
-#' file in the folder taht contains all your files. All the outlines should be imported then.
+#' file in the folder that contains all your files. All the outlines should be imported then.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 #' @examples
 #' \dontrun{
@@ -573,7 +573,7 @@ pix2chc <- function(coo) {
     stop("matrix must contain only entire pixels indices")
   }
   if (any(apply(coo_d, 1, function(x) all(x == rep(0, 2))))) {
-    stop("at least two succesive coordinates don't code for a displacement")
+    stop("at least two successive coordinates do not code for a displacement")
   }
   m <- as.matrix(expand.grid(-1:1, -1:1))[-5, ]
   g <- c(5, 6, 7, 4, 0, 3, 2, 1)

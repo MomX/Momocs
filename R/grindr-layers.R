@@ -44,12 +44,11 @@
 ### ____plot____ -------------------------------------------
 #' Multivariate plots using grindr layers
 #'
-#' Quickly vizualize [PCA] objects and build customs plots
+#' Quickly vizualise [PCA] objects and friends ([LDA]) and build customs plots
 #' using the [layers]. See examples.
 #'
-#' @note This approach will replace \link{plot.PCA} in further versions.
-#' This \code{cheap base biplot} may be packaged at some point.
-#' All comments are welcome.
+#' @note This approach will replace \link{plot.PCA} (and `plot.lda` in further versions.
+#' This is part of `grindr` approach that may be packaged at some point. All comments are welcome.
 #'
 #' @param x \code{PCA} object
 #' @param f \code{factor}. A column name or number from \code{$fac},

@@ -15,9 +15,9 @@
 #' @return the averaged shape; on Coe objects, a list with two components: \code{$Coe} object of the same class, and
 #' \code{$shp} a list of matrices of (x, y) coordinates.
 #' @details Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
-#' in that case, the other columns of the fac are also returned, usingthe first row within every level, but they may
-#' not be representive of the group. Also notice that for PCA objects, mean scores are returned
-#' within a PCA object (accesible with PCA$x) that can be plotted directly but other slots are left
+#' in that case, the other columns of the fac are also returned, using the first row within every level, but they may
+#' not be representative of the group. Also notice that for PCA objects, mean scores are returned
+#' within a PCA object (accessible with `PCA$x`) that can be plotted directly but other slots are left
 #' unchanged.
 #' @rdname mshapes
 #' @family multivariate

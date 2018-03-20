@@ -367,7 +367,7 @@ filter.PCA <- filter.Coo
 # arrange -------------------------------
 #' Arranges (ala dplyr) on Momocs objects
 #'
-#' Arange shapes by variables, from the \code{$fac}. See examples and \code{?dplyr::arrange}.
+#' Arrange shapes by variables, from the \code{$fac}. See examples and \code{?dplyr::arrange}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
 #' @param ... logical conditions
 #' @details dplyr verbs are maintained.

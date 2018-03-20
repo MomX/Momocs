@@ -208,7 +208,7 @@ dfourier_i <- function(df, nb.h, nb.pts = 60) {
 #' the number of harmonics to generate
 #' @param nb.pts if \code{A} and/or \code{B} are not provided,
 #' the number of points to use to reconstruct the shapes
-#' @param alpha tThe power coefficient associated with the (usually decreasing)
+#' @param alpha The power coefficient associated with the (usually decreasing)
 #' amplitude of the harmonic coefficients (see \link{efourier_shape})
 #' @param plot logical whether to plot the shape
 #' @family dfourier

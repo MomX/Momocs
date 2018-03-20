@@ -35,7 +35,7 @@
 #'
 #' Normalization of coefficients has long been a matter of trouble,
 #' and not only for newcomers. There are two ways of normalizing outlines: the first,
-#' and by far the msot used, is to use a "numerical" alignment, directly on the
+#' and by far the most used, is to use a "numerical" alignment, directly on the
 #' matrix of coefficients. The coefficients of the first harmonic are consumed
 #' by this process but harmonics of higher rank are normalized in terms of size
 #' and rotation. This is sometimes referred as using the "first ellipse", as the
@@ -46,15 +46,16 @@
 #'
 #' But here is the pitfall: if your shapes are prone to bad aligments among all
 #' the first ellipses, this will result in poorly (or even not at all) "homologous" coefficients.
-#' The shapes prone to this are either (at least roughly) circular and/or with a strong
+#' The shapes particularly prone to this are either (at least roughly) circular and/or with a strong
 #' bilateral symmetry. You can try to use \code{\link{stack}} on the \code{\link{Coe}} object
-#'  returned by \code{efourier}. Also, when plotting PCA using Momocs,
-#' this will be strikingly clear though. This phenomenon will result in two clusters,
-#' and more strikingly into upside-down (or 180 degrees rotated)
-#' shapes on the morphospace. If this happen, you should seriously consider
-#' aligning your shapes \emph{before} the \code{efourier} step,
-#' and performing the latter with no normalization (\code{norm = FALSE}), since
-#' it has been done before.
+#'  returned by \code{efourier}. Also, and perhaps more explicitely, morphospace usually show a mirroring symmetry,
+#'  typically visible when calculated in some couple of components (usually the first two).
+#'
+#'  If you see these  upside-down (or 180 degrees rotated) shapes on the morphospace,
+#'  you should seriously consider aligning your shapes __before__ the [efourier] step,
+#' and performing the latter with `norm = FALSE`.
+#'
+#' Such a pitfall explains the (quite annoying) message when passing `efourier` with just the `Out`.
 #'
 #' You have several options to align your shapes, using control points (or landmarks),
 #' by far the most time consuming (and less reproducible) but possibly the best one too

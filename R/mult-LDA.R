@@ -392,7 +392,7 @@ classification_metrics.LDA <- function(x){
 #' \item newdata the data used to calculate passed to predict.lda
 #' }
 #' @note Uses the same number of PC axis as the LDA object provided. You should probably use \link{rePCA} in
-#' conjonction with reLDA to get 'homologous' scores.
+#' conjunction with reLDA to get 'homologous' scores.
 #' @examples
 #' # We select the first 10 individuals in bot,
 #' # for whisky and beer bottles. It will be our referential.

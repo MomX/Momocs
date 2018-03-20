@@ -216,7 +216,7 @@ coo_arrows <- function(coo1, coo2,
 #' @param dev numeric a vector of distances or anythinh relevant
 #' @param  palette the color palette to use or any palette
 #' @param normalize logical whether to normalize (TRUE by default) distances
-#' @param ... other paremeters to fed segments, eg lwd (see examples)
+#' @param ... other parameters to fed segments, eg lwd (see examples)
 #' @return nothing
 #' @family plotting functions
 #' @examples
@@ -265,7 +265,7 @@ coo_ruban <- function(coo, dev,
 #' @param coo.list A \code{list} of coordinates
 #' @param dim A \code{vector} of the form \code{(nb.row, nb.cols)} to specify
 #' the panel display. If missing, shapes are arranged in a square.
-#' @param byrow \code{logical}. Whether to succesive shape by row or by col.
+#' @param byrow \code{logical}. Whether to draw successive shape by row or by col.
 #' @param fromtop \code{logical}. Whether to display shapes from the top of the
 #' plotting region.
 #' @param cols A \code{vector} of colors to fill shapes.

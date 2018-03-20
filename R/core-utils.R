@@ -80,9 +80,9 @@ coeff_split <- function(cs, nb.h = 8, cph = 4) {
 #' @param by character either "name" (\code{A1, A2, ..}) or "rank" (\code{A1, B1, ...})
 #' @examples
 #' m_name <- m_rank <- matrix(1:32, 2, 16)
-#' # this one is order by name
+#' # this one is ordered by name
 #' colnames(m_name) <- paste0(rep(letters[1:4], each=4), 1:4)
-#' # this one is order by rank
+#' # this one is ordered by rank
 #' colnames(m_rank) <- paste0(letters[1:4], rep(1:4, each=4))
 #'
 #' m_rank

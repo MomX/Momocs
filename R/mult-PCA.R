@@ -177,7 +177,7 @@ print.PCA <- function(x, ...){
 #' Get paired individual on a Coe, PCA or LDA objects
 #'
 #' If you have paired individuals, i.e. before and after a treatment or for repeated measures,
-#' and if you have coded coded it into \code{$fac}, this methods allows you to retrieve the cooresponding PC/LD scores,
+#' and if you have coded coded it into \code{$fac}, this methods allows you to retrieve the corresponding PC/LD scores,
 #' or coefficients for \link{Coe} objects.
 #' @param x any \link{Coe}, \link{PCA} of \link{LDA} object.
 #' @param fac factor or column name or id corresponding to the pairing factor.

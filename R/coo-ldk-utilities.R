@@ -37,7 +37,7 @@ ldk_check <- function(ldk) {
 }
 
 
-#' Creates links (all pariwise combinations) between landmarks
+#' Creates links (all pairwise combinations) between landmarks
 #'
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @return a matrix that can be passed to \link{ldk_links}, etc. The columns
@@ -112,7 +112,7 @@ coo_ldk <- function(coo, nb.ldk) {
 
 #' Defines links between landmarks
 #'
-#' Works on Ldk objects, on 2cols matrices, 3dim arrays (msshapes turns it into a matrix).
+#' Works on Ldk objects, on 2-cols matrices, 3-dim arrays (mshapes turns it into a matrix).
 #' @param x Ldk, matric or array
 #' @param nb.ldk numeric the iterative procedure is stopped when the
 #' user click on the top of the graphical window.
