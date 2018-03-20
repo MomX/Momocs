@@ -47,12 +47,13 @@ reference:
   - pProcrustes
 
 
-- title: Calibration and other helpers
+- title: Calibration and other helpers for (open or not) outlines
   desc: When defined
   contents:
   - calibrate_deviations
   - calibrate_harmonicpower
   - calibrate_reconstructions
+  - calibrate_r2
   - harm_pow
   - hcontrib
   - coeff_rearrange
@@ -141,9 +142,10 @@ reference:
   - which_out
 
 - title: Graphics
-  desc: We all love graphics, don't we?
+  desc: Because who does not love graphics?
   contents:
   - panel
+  - pile
   - stack.Coo
   - inspect
   - papers
