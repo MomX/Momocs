@@ -218,5 +218,6 @@ reference:
   - is_equallyspacedradii
 
 - title: coo_ toolbox
+  desc: circa 100 helpers for 2D shapes and Coo objects
   contents:
   - starts_with("coo_")
