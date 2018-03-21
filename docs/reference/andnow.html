@@ -154,9 +154,6 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - coerce,data.frame,gpc.poly-method
 #&gt;   - coerce,dgCMatrix,vector-method
 #&gt;   - coerce,dsCMatrix,vector-method
-#&gt;   - coerce,git_commit,data.frame-method
-#&gt;   - coerce,git_repository,data.frame-method
-#&gt;   - coerce,git_tree,data.frame-method
 #&gt;   - coerce,GridTopology,data.frame-method
 #&gt;   - coerce,list,indMatrix-method
 #&gt;   - coerce,Matrix,vector-method
@@ -292,8 +289,10 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - efourier.Out
 #&gt;   - fgProcrustes.Out
 #&gt;   - get_ldk.Out
+#&gt;   - mosaic.Out
 #&gt;   - panel.Out
 #&gt;   - pile.Out
+#&gt;   - print.Out
 #&gt;   - rearrange_ldk.Out
 #&gt;   - rfourier.Out
 #&gt;   - sfourier.Out
@@ -393,6 +392,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - names&lt;-.Coo
 #&gt;   - Opn.Coo
 #&gt;   - Out.Coo
+#&gt;   - plot.Coo
 #&gt;   - print.Coo
 #&gt;   - rename.Coo
 #&gt;   - sample_frac.Coo
@@ -401,6 +401,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - slice.Coo
 #&gt;   - stack.Coo
 #&gt;   - str.Coo
+#&gt;   - subset.Coo
 #&gt;   - subsetize.Coo
 #&gt;   - table.Coo
 #&gt;   - validate.Coo</div><div class='input'>
@@ -410,7 +411,6 @@ andnow_method, given a function/method name, return supported classes.</p>
 <span class='co'># methods for plot</span>
 <span class='fu'>andnow_method</span>(<span class='st'>"plot"</span>)</div><div class='output co'>#&gt;   - plot,ANY,ANY-method
 #&gt;   - plot,color,ANY-method
-#&gt;   - plot,git_repository,ANY-method
 #&gt;   - plot,gpc.poly,ANY-method
 #&gt;   - plot,Spatial,missing-method
 #&gt;   - plot,SpatialCollections,missing-method
@@ -431,6 +431,7 @@ andnow_method, given a function/method name, return supported classes.</p>
 #&gt;   - plot.auteurMCMCMC
 #&gt;   - plot.bilat.symmetry
 #&gt;   - plot.compareFits
+#&gt;   - plot.Coo
 #&gt;   - plot.correlogram
 #&gt;   - plot.correlogramList
 #&gt;   - plot.correspondence

@@ -149,35 +149,26 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># samples 50% of the bottles no matter their type</span>
-<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 20 outlines, 157 +/- 22 coords (in $coo)
-#&gt;   - 2 classifiers (in $fac): 
-#&gt; # A tibble: 20 x 2
-#&gt;   type   fake 
-#&gt;   &lt;fct&gt;  &lt;fct&gt;
-#&gt; 1 whisky a    
-#&gt; 2 whisky a    
-#&gt; 3 whisky a    
-#&gt; 4 whisky b    
-#&gt; 5 beer   c    
-#&gt; 6 beer   c    
-#&gt; # ... with 14 more rows
-#&gt;   - also: $ldk</div><div class='input'><span class='co'># 80% bottles of beer and of whisky</span>
+<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; An Out object with: 
+#&gt;  - $coo: 20 outlines (164 +/- 21 coordinates, all unclosed)
+#&gt;  - $fac: 2 classifiers:
+#&gt;      'type' (factor 0): .
+#&gt;      'fake' (factor 0): .</div><div class='input'><span class='co'># 80% bottles of beer and of whisky</span>
 <span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.8</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>)$<span class='no'>fac</span>)</div><div class='output co'>#&gt;         fake
 #&gt; type     a b c d
-#&gt;   beer   0 0 9 7
+#&gt;   beer   0 0 7 9
 #&gt;   whisky 8 8 0 0</div><div class='input'><span class='co'># bootstrap the same number of bootles of each type but with replacement</span>
 <span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>names</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>1</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
-#&gt;  ballantines       brahma    bushmills        caney       chimay       chivas 
-#&gt;            2            2            2            2            1            1 
-#&gt;       corona      dalmore        duvel famousgrouse glenmorangie   grimbergen 
-#&gt;            1            1            2            1            1            1 
-#&gt;      guiness highlandpark   hoegardeen  jackdaniels           jb     latrappe 
-#&gt;            1            2            2            1            1            1 
-#&gt;   makersmark  nicechouffe         oban   pecheresse sierranevada       tamdhu 
-#&gt;            2            1            2            1            2            1 
-#&gt;        tauro    westmalle   wildturkey       yoichi 
-#&gt;            1            2            2            1 </div><div class='input'>
+#&gt;          amrut    ballantines         brahma      bushmills          caney 
+#&gt;              2              2              2              2              2 
+#&gt;         chimay         chivas   franziskaner    glendronach   glenmorangie 
+#&gt;              1              1              2              3              2 
+#&gt;     grimbergen        guiness     hoegardeen    jackdaniels        jupiler 
+#&gt;              2              1              2              1              2 
+#&gt;     kingfisher       latrappe lindemanskriek       magallan     makersmark 
+#&gt;              2              1              1              1              2 
+#&gt;           oban     pecheresse   sierranevada         yoichi 
+#&gt;              2              1              1              2 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

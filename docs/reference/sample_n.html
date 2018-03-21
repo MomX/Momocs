@@ -145,39 +145,32 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># samples 5 bottles no matter their type</span>
-<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 5 outlines, 166 +/- 30 coords (in $coo)
-#&gt;   - 2 classifiers (in $fac): 
-#&gt; # A tibble: 5 x 2
-#&gt;   type   fake 
-#&gt;   &lt;fct&gt;  &lt;fct&gt;
-#&gt; 1 beer   c    
-#&gt; 2 beer   d    
-#&gt; 3 whisky b    
-#&gt; 4 whisky a    
-#&gt; 5 whisky a    
-#&gt;   - also: $ldk</div><div class='input'><span class='co'># 5 bottles of beer and of whisky</span>
+<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; An Out object with: 
+#&gt;  - $coo: 5 outlines (154 +/- 14 coordinates, all unclosed)
+#&gt;  - $fac: 2 classifiers:
+#&gt;      'type' (factor 0): .
+#&gt;      'fake' (factor 0): .</div><div class='input'><span class='co'># 5 bottles of beer and of whisky</span>
 <span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>))</div><div class='output co'>#&gt;         fake
 #&gt; type     a b c d
-#&gt;   beer   0 0 5 0
-#&gt;   whisky 3 2 0 0</div><div class='input'><span class='co'># many repetitions</span>
+#&gt;   beer   0 0 3 2
+#&gt;   whisky 1 4 0 0</div><div class='input'><span class='co'># many repetitions</span>
 <span class='fu'><a href='table.html'>table</a></span>(<span class='fu'>names</span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>400</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
 #&gt;          amrut    ballantines         brahma      bushmills          caney 
-#&gt;             14             19              7              7              8 
+#&gt;             14             18              7              8              8 
 #&gt;         chimay         chivas         corona        dalmore    deusventrue 
-#&gt;             11             10              9             15             14 
+#&gt;             12             11             10             14             13 
 #&gt;          duvel   famousgrouse   franziskaner    glendronach   glenmorangie 
-#&gt;              8              9             13              4             12 
+#&gt;              9              9             12              3             11 
 #&gt;     grimbergen        guiness   highlandpark     hoegardeen    jackdaniels 
-#&gt;              9             10             11             19             11 
+#&gt;              9             11             11             21             12 
 #&gt;             jb  johnniewalker        jupiler     kingfisher       latrappe 
-#&gt;              9              8              9              9             11 
+#&gt;              7              8              9              9             12 
 #&gt; lindemanskriek       magallan     makersmark    nicechouffe           oban 
-#&gt;              7             14             10             10              4 
+#&gt;              9             13              9              7              3 
 #&gt;     oldpotrero     pecheresse      redbreast   sierranevada         tamdhu 
-#&gt;              9              7             11              4              8 
+#&gt;             10              7             12              4              8 
 #&gt;     tanglefoot          tauro      westmalle     wildturkey         yoichi 
-#&gt;             10             10              9              9             12 </div><div class='input'>
+#&gt;             11             11              8              9             11 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -139,33 +139,20 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
-#&gt;   - 4 classifiers (in $fac): 
-#&gt; # A tibble: 210 x 4
-#&gt;   var   domes view  ind  
-#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt; 1 Aglan cult  VD    O10  
-#&gt; 2 Aglan cult  VL    O10  
-#&gt; 3 Aglan cult  VD    O11  
-#&gt; 4 Aglan cult  VL    O11  
-#&gt; 5 Aglan cult  VD    O12  
-#&gt; 6 Aglan cult  VL    O12  
-#&gt; # ... with 204 more rows
-#&gt;   - also: $ldk</div><div class='input'><span class='fu'>mutate</span>(<span class='no'>olea</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fu'>factor</span>(<span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>olea</span>)))</div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
-#&gt;   - 5 classifiers (in $fac): 
-#&gt; # A tibble: 210 x 5
-#&gt;   var   domes view  ind   id   
-#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
-#&gt; 1 Aglan cult  VD    O10   1    
-#&gt; 2 Aglan cult  VL    O10   2    
-#&gt; 3 Aglan cult  VD    O11   3    
-#&gt; 4 Aglan cult  VL    O11   4    
-#&gt; 5 Aglan cult  VD    O12   5    
-#&gt; 6 Aglan cult  VL    O12   6    
-#&gt; # ... with 204 more rows
-#&gt;   - also: $ldk</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; An Opn object with: 
+#&gt;  - $coo: 210 open outlines (99 +/- 4 coordinates)
+#&gt;  - $fac: 4 classifiers:
+#&gt;      'var' (factor 0): .
+#&gt;      'domes' (factor 0): .
+#&gt;      'view' (factor 0): .
+#&gt;      'ind' (factor 0): .</div><div class='input'><span class='fu'>mutate</span>(<span class='no'>olea</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fu'>factor</span>(<span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>olea</span>)))</div><div class='output co'>#&gt; An Opn object with: 
+#&gt;  - $coo: 210 open outlines (99 +/- 4 coordinates)
+#&gt;  - $fac: 5 classifiers:
+#&gt;      'var' (factor 0): .
+#&gt;      'domes' (factor 0): .
+#&gt;      'view' (factor 0): .
+#&gt;      'ind' (factor 0): .
+#&gt;      'id' (factor 0): .</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
