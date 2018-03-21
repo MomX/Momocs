@@ -379,6 +379,13 @@ coo_template.default <- function(coo, size = 1) {
 #' @rdname coo_template
 #' @name coo_template
 #' @export
+coo_template.list <- function(coo, size=1){
+  lapply(coo, coo_template, size=size)
+}
+
+#' @rdname coo_template
+#' @name coo_template
+#' @export
 coo_template.Coo <- function(coo, size=1){
   Coo <- coo
   Coo$coo <- lapply(Coo$coo, coo_template, size=size)
@@ -397,7 +404,7 @@ coo_template_relatively <- function(coo, size=1){
 #' @export
 coo_template_relatively.list <- function(coo, size = 1) {
   how_big <- coo_diffrange(coo) %>% apply(1, prod)
-  rel_big <- size / (how_big/(max(how_big)))
+  rel_big <- (how_big/(max(how_big))) * size
   res <- lapply(seq_along(coo),
                 function(i) coo_template(coo[[i]], size = rel_big[i]))
   names(res) <- names(coo)
@@ -408,7 +415,8 @@ coo_template_relatively.list <- function(coo, size = 1) {
 #' @name coo_template
 #' @export
 coo_template_relatively.Coo <- function(coo, size = 1) {
-  coo %>% coo_template_relatively()
+  coo$coo %<>% coo_template_relatively(size=size)
+  coo
 }
 
 # coo_rotate -----------------

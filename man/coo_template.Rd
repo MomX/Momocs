@@ -5,6 +5,8 @@
 \alias{coo_template}
 \alias{coo_template.default}
 \alias{coo_template}
+\alias{coo_template.list}
+\alias{coo_template}
 \alias{coo_template.Coo}
 \alias{coo_template}
 \alias{coo_template_relatively}
@@ -17,6 +19,8 @@
 coo_template(coo, size)
 
 \method{coo_template}{default}(coo, size = 1)
+
+\method{coo_template}{list}(coo, size = 1)
 
 \method{coo_template}{Coo}(coo, size = 1)
 
