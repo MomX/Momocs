@@ -98,5 +98,6 @@ wings \%>\% my_pile(transp=3/4)
 }
 \seealso{
 Other grindr: \code{\link{drawers}}, \code{\link{layers}},
-  \code{\link{papers}}, \code{\link{plot_PCA}}
+  \code{\link{mosaic_engine}}, \code{\link{papers}},
+  \code{\link{plot_PCA}}
 }

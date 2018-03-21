@@ -160,6 +160,7 @@ mutivariate plots using the cheapbabi approach. See examples.
 \seealso{
 grindr_drawers
 
-Other grindr: \code{\link{drawers}}, \code{\link{papers}},
+Other grindr: \code{\link{drawers}},
+  \code{\link{mosaic_engine}}, \code{\link{papers}},
   \code{\link{pile}}, \code{\link{plot_PCA}}
 }

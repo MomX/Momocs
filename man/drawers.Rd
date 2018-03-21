@@ -27,10 +27,10 @@ draw_outline(coo, f, col = par("fg"), fill = NA, lwd = 1, lty = 1,
 draw_outlines(coo, f, col = par("fg"), fill = NA, lwd = 1, lty = 1,
   transp = 0, pal = pal_qual, ...)
 
-draw_points(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0,
+draw_points(coo, f, col = par("fg"), cex = 1/2, pch = 20, transp = 0,
   pal = pal_qual, ...)
 
-draw_landmarks(coo, f, col = par("fg"), cex = 1, pch = 20, transp = 0,
+draw_landmarks(coo, f, col = par("fg"), cex = 1/2, pch = 20, transp = 0,
   pal = pal_qual, ...)
 
 draw_lines(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0,
@@ -45,7 +45,7 @@ draw_curve(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0,
 draw_curves(coo, f, col = par("fg"), lwd = 1, lty = 1, transp = 0,
   pal = pal_qual, ...)
 
-draw_firstpoint(coo, f, label = "^", col = par("fg"), cex = 1,
+draw_firstpoint(coo, f, label = "^", col = par("fg"), cex = 3/4,
   transp = 0, pal = pal_qual, ...)
 
 draw_axes(coo, col = "#333333", cex = 3/4, lwd = 3/4, ...)
@@ -121,6 +121,7 @@ bot \%>\%
 \seealso{
 grindr_layers
 
-Other grindr: \code{\link{layers}}, \code{\link{papers}},
+Other grindr: \code{\link{layers}},
+  \code{\link{mosaic_engine}}, \code{\link{papers}},
   \code{\link{pile}}, \code{\link{plot_PCA}}
 }

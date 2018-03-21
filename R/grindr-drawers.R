@@ -79,6 +79,7 @@ draw_polygon <- function(coo, f, col=par("fg"), fill=NA,  lwd=1, lty=1, transp=0
     fills <- this_dispatcher(f, pal_alpha(par("bg"), 1))
   else
     fills <- this_dispatcher(f, fill) %>% pal_alpha(transp)
+
   cols    <- this_dispatcher(f, col) %>% pal_alpha(transp)
   lwds    <- this_dispatcher(f, lwd)
   ltys    <- this_dispatcher(f, lty)
@@ -107,7 +108,7 @@ draw_outlines <- draw_polygon
 
 #' @export
 #' @rdname drawers
-draw_points <- function(coo,  f, col=par("fg"), cex=1, pch=20, transp=0, pal=pal_qual, ...){
+draw_points <- function(coo,  f, col=par("fg"), cex=1/2, pch=20, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
@@ -268,7 +269,7 @@ draw_curves <- draw_lines
 
 #' @export
 #' @rdname drawers
-draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=1, transp=0, pal=pal_qual, ...){
+draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=3/4, transp=0, pal=pal_qual, ...){
   # shape case
   if (is_shp(coo))
     x <- list(coo)
