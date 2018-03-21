@@ -28,6 +28,8 @@
 * `truss` now in `coo_truss` and a method of its own
 * `plot.Coo` is now `inspect`
 * `pos.shapes` is now `morphospace_positions`
+* Deprecated `rename` (handled by `select` anyway)
+* Deprecated `table` (poor shortcut anyway and avoid this boring startup message)
 * Deprecated `stack2` and `panel2` before their rewriting
 * Deprecated `as_Out`, that should have been `efourier_i.OutCoe` anyway.
 * Consequently deprecated `panel.OutCoe` method that was additionnaly the only `Coe` method. May be back in further versions.

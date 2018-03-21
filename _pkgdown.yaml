@@ -99,7 +99,6 @@ reference:
   - sample_frac
   - sample_n
   - slice
-  - table
   - validate
 
 - title: Import/Export
@@ -120,7 +119,7 @@ reference:
   - pix2chc
 
 - title: Multivariate methods
-  desc: Will be in [Momecs](http://www.github.com/MomX/Momecs) at some point
+  desc: Will be in [Momecs](http://www.github.com/MomX/Momecs) at some point, and with KMEDOIDS, SVM, NNET and QDA
   contents:
   - PCA
   - LDA

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-handling.R
 \name{dissolve}
 \alias{dissolve}
-\title{Dissolves Coe objects}
+\title{Dissolve Coe objects}
 \usage{
 dissolve(x, retain)
 }
@@ -36,9 +36,8 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{at_least}}, \code{\link{chop}},
   \code{\link{combine}}, \code{\link{fac_dispatcher}},
   \code{\link{filter}}, \code{\link{mutate}},
-  \code{\link{rename}}, \code{\link{rescale}},
-  \code{\link{rm_harm}}, \code{\link{rm_uncomplete}},
-  \code{\link{rw_fac}}, \code{\link{sample_frac}},
-  \code{\link{sample_n}}, \code{\link{select}},
-  \code{\link{slice}}, \code{\link{table}}
+  \code{\link{rescale}}, \code{\link{rm_harm}},
+  \code{\link{rm_uncomplete}}, \code{\link{rw_fac}},
+  \code{\link{sample_frac}}, \code{\link{sample_n}},
+  \code{\link{select}}, \code{\link{slice}}
 }

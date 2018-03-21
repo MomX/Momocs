@@ -274,7 +274,7 @@ MANOVA_PW.PCA <- function(x,
       message(pws[i, ])
   }
   names(manovas) <- rownames(res)
-  # we prepare a 'signifance' table, with 'significant' stars
+  # we prepare a 'signifance' table, with 'significance' stars
   # (discutable but helpful) see stats:::print.summary.lm
   stars <- symnum(res[, 6], corr = FALSE, na = "?",
                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),

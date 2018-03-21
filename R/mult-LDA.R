@@ -308,7 +308,7 @@ classification_metrics.LDA <- function(x){
 # #' }
 # #'
 # #' @examples
-# #' table(olea, "var")
+# #' table(olea$var)
 # #' x <- opoly(olea, 5)
 # #' classify(x, fac="var", ref=c("Aglan","Cypre"), unk="PicMa")
 # #' @export

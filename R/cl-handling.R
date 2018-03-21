@@ -158,7 +158,7 @@ subsetize.PCA <- function(x, subset, ...){
 
 
 # select -------------------------------
-#' Selects (ala dplyr) on Momocs objects
+#' Select and rename columns by name
 #'
 #' Select variables by name, from the \code{$fac}. See examples and \code{?dplyr::select}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -180,7 +180,6 @@ subsetize.PCA <- function(x, subset, ...){
 #' # remove some columns
 #' select(olea, -ind)
 #' # rename on the fly and select some columns
-#' # you can use rename instead
 #' select(olea, foo=domes)
 #'
 #' @export
@@ -207,45 +206,8 @@ select.Coe <- select.Coo
 #' @export
 select.PCA <- select.Coo
 
-# rename -------------------------------
-#' Renames (ala dplyr) on Momocs objects
-#'
-#' Rename variables by name, from the \code{$fac}. See examples and \code{?dplyr::rename}.
-#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
-#' @param ... comma separated list of unquoted expressions
-#' @details dplyr verbs are maintained.
-#' @return a Momocs object of the same class.
-#' @family handling functions
-#' @examples
-#' olea
-#' rename(olea, Ind=ind, View=view)
-#' @export
-rename <- function(.data, ...){
-  UseMethod("rename")
-}
-
-#' @export
-rename.default <- function(.data, ...){
-  dplyr::rename(.data, ...)
-}
-
-#' @export
-rename.Coo <- function(.data, ...){
-  #.data %<>% validate()
-  .data$fac <- rename(.data$fac, ...)
-  .data$fac %<>% data.frame()
-  .data
-}
-
-#' @export
-rename.Coe <- rename.Coo
-
-#' @export
-rename.PCA <- rename.Coo
-
-
 # mutate -------------------------------
-#' Mutates (ala dplyr) on Momocs objects
+#' Add new variables
 #'
 #' Add new variables to the \code{$fac}. See examples and \code{?dplyr::mutate}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -281,45 +243,9 @@ mutate.Coe <- mutate.Coo
 #' @export
 mutate.PCA <- mutate.Coo
 
-# # transmute -------------------------------
-# #' Transmutes (ala dplyr) on Momocs objects
-# #'
-# #' Add new variables to the \code{$fac} and drop existing ones. See examples and \code{?dplyr::transmute}.
-# #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
-# #' @param ... comma separated list of unquoted expressions
-# #' @details dplyr verbs are maintained.
-# #' @return a Momocs object of the same class.
-# #' @family handling functions
-# #' @examples
-# #' olea
-# #' transmute(olea, id=factor(1:length(olea)))
-# #' @export
-# transmute <- function(.data, ...){
-#   UseMethod("transmute")
-# }
-#
-# #' @export
-# transmute.default <- function(.data, ...){
-#   dplyr::transmute(.data, ...)
-# }
-#
-# #' @export
-# transmute.Coo <- function(.data, ...){
-#   #.data %<>% validate()
-#   .data$fac <- transmute(.data$fac, ...)
-#   .data$fac %<>% dplyr::as_data_frame()
-#   .data
-# }
-#
-# #' @export
-# transmute.Coe <- transmute.Coo
-#
-#
-# #' @export
-# transmute.PCA <- transmute.Coo
 
 # filter -------------------------------
-#' Filters (ala dplyr) on Momocs objects
+#' Subset based on conditions
 #'
 #' Return shapes with matching conditions, from the \code{$fac}. See examples and \code{?dplyr::filter}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -365,7 +291,7 @@ filter.Coe <- filter.Coo
 filter.PCA <- filter.Coo
 
 # arrange -------------------------------
-#' Arranges (ala dplyr) on Momocs objects
+#' Arrange rows by variables
 #'
 #' Arrange shapes by variables, from the \code{$fac}. See examples and \code{?dplyr::arrange}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -410,7 +336,7 @@ arrange.PCA <- arrange.Coo
 
 # slice ---------------------
 
-#' Slices (ala dplyr) on Momocs objects
+#' Subset based on positions
 #'
 #' Select rows by position, based on \code{$fac}. See examples and \code{?dplyr::slice}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
@@ -457,7 +383,7 @@ slice.PCA <- function(.data, ...){
 
 # sample_n ---------------
 
-#' Samples n shapes on Momocs objects
+#' Sample n shapes
 #'
 #' Sample n shapes from a Momocs object. See examples and \code{?dplyr::sample_n}.
 #'
@@ -472,7 +398,7 @@ slice.PCA <- function(.data, ...){
 #' # samples 5 bottles no matter their type
 #' sample_n(bot, 5)
 #' # 5 bottles of beer and of whisky
-#' table(sample_n(bot, 5, fac="type"))
+#' table(sample_n(bot, 5, fac="type")$type)
 #' # many repetitions
 #' table(names(sample_n(bot, 400, replace=TRUE)))
 #'
@@ -522,7 +448,7 @@ sample_n.Coe <- sample_n.Coo
 
 # sample_frac ---------------
 
-#' Samples a fraction of shapes in Momocs objects
+#' Sample a fraction of shapes
 #'
 #' Sample a fraction of shapes from a Momocs object. See examples and \code{?dplyr::sample_n}.
 #'
@@ -588,7 +514,7 @@ sample_frac.Coe <- sample_frac.Coo
 
 # chop ----------------------
 
-#' Chops (rough slicing) Momocs objects
+#' Split to several objects based on a factor
 #'
 #' Rougher slicing that accepts a classifier
 #' ie a column name from the \code{$fac} on Momocs classes.
@@ -668,7 +594,7 @@ chop.Coe <- function(.data, fac){
 
 
 # combine --------------------------------------
-#' Combines Momocs objects
+#' Combine several objects
 #'
 #' Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
 #' it combines row-wise (ie, merges shapes as a \code{c} would do) ; but on Coe it combines column-wise
@@ -832,7 +758,7 @@ combine.OpnCoe <- function(...) {
 }
 
 # dissolve --------------------
-#' Dissolves Coe objects
+#' Dissolve Coe objects
 #'
 #' the opposite of combine, typically used after it. Note that the \code{$fac} slot may be wrong since
 #' combine...well combines... this \code{$fac}. See examples.
@@ -885,64 +811,64 @@ dissolve.Coe <- function(x, retain){
   return(x2)
 }
 
-# table --------------------------
-#' Cross-tabulates objects
-#'
-#' Simply extends base \link{table} for a more convenient use on $fac slot.
-#'
-#' @param ... a list of, first, a Momocs object (Coo, Coe, PCA, etc.), then, column names in the $fac slot. If not specified,
-#' returns a table on the entire $fac data.frame
-#'
-#' @family handling functions
-#' @examples
-#' table(olea, "var", "domes")
-#' table(olea)
-#' @rdname table
-#' @export
-table <- function(...){
-  UseMethod("table")
-}
-
-#' @rdname table
-#' @export
-table.default <- function(...){
-  base::table(...)
-}
-
-#' @rdname table
-#' @export
-table.Coo <- function(...){
-  args <- list(...)
-  #    return(args)
-  x <- args[[1]]
-  if (!is_fac(x)) stop("no $fac defined")
-  if (length(args)>1) {
-    # a little helper for mismatched colnames
-    cn <- unlist(args[-1])
-    matches <- match(cn, colnames(x$fac))
-    if (any(is.na(matches))) {
-      mispelled <- which(is.na(matches))
-      stop(cn[mispelled], "' mispelled or not defined in $fac")
-    }
-    matches <- match(cn, names(x$fac))
-    # single line avoids a title to be printed for the table
-    base::table(x$fac[, unlist(args[-1])])
-  } else {
-    base::table(x$fac)
-  }
-}
-
-#' @rdname table
-#' @export
-table.Coe <- table.Coo
-
-#' @rdname table
-#' @export
-table.PCA <- table.Coo
-
-#' @rdname table
-#' @export
-table.LDA <- table.Coo
+# # #' # table --------------------------
+# # #' # #' Cross tables
+# #' # #'
+# #' # #' Simply extends base \link{table} for a more convenient use on $fac slot.
+# #' # #'
+# #' # #' @param ... a list of, first, a Momocs object (Coo, Coe, PCA, etc.), then, column names in the $fac slot. If not specified,
+# #' # #' returns a table on the entire $fac data.frame
+# #' # #'
+# #' # #' @family handling functions
+# #' # #' @examples
+# #' # #' table(olea, "var", "domes")
+# #' # #' table(olea)
+# #' # #' @rdname table
+# #' # #' @export
+# #' table <- function(...){
+# #'   UseMethod("table")
+# #' }
+# #'
+# #' # #' @rdname table
+# #' # #' @export
+# #' table.default <- function(...){
+# #'   base::table(...)
+# #' }
+# #'
+# #' # #' @rdname table
+# #' # #' @export
+# #' table.Coo <- function(...){
+# #'   args <- list(...)
+# #'   #    return(args)
+# #'   x <- args[[1]]
+# #'   if (!is_fac(x)) stop("no $fac defined")
+# #'   if (length(args)>1) {
+# #'     # a little helper for mismatched colnames
+# #'     cn <- unlist(args[-1])
+# #'     matches <- match(cn, colnames(x$fac))
+# #'     if (any(is.na(matches))) {
+# #'       mispelled <- which(is.na(matches))
+# #'       stop(cn[mispelled], "' mispelled or not defined in $fac")
+# #'     }
+# #'     matches <- match(cn, names(x$fac))
+# #'     # single line avoids a title to be printed for the table
+# #'     base::table(x$fac[, unlist(args[-1])])
+# #'   } else {
+# #'     base::table(x$fac)
+# #'   }
+# #' }
+# #'
+# #' # #' @rdname table
+# #' # #' @export
+# #' table.Coe <- table.Coo
+# #'
+# #' # #' @rdname table
+# #' # #' @export
+# #' table.PCA <- table.Coo
+# #'
+# #' # #' @rdname table
+# #' # #' @export
+# #' table.LDA <- table.Coo
 
 
 # rw_fac ---------------------
@@ -976,7 +902,7 @@ rw_fac <- function(x, fac, from, to){
 }
 
 # at_least ------------------------
-#' Retains group with at least a certain number of individuals
+#' Retain groups with at least n shapes
 #'
 #' Examples are self-speaking.
 #'
@@ -986,7 +912,7 @@ rw_fac <- function(x, fac, from, to){
 #' @note if N is too ambitious the original object is returned with a message
 #' @family handling functions
 #' @examples
-#' table(trilo, "onto")
+#' table(trilo$onto)
 #' at_least(trilo, "onto", 9)
 #' at_least(trilo, "onto", 16)
 #' at_least(trilo, "onto", 2000) # too ambitious !
@@ -1003,7 +929,7 @@ at_least <- function(x, fac, N){
 }
 
 # rm ------------
-#' Removes shapes with incomplete slices
+#' Remove shapes with incomplete slices
 #'
 #' Imagine you take three views of every object you study. Then, you can \link{slice},
 #' \link{filter} or \link{chop} your entire dataset, do morphometrics on it,
