@@ -10,7 +10,7 @@
 #' @param byrow `logical` whether to order shapes by rows
 #' @param fromtop `logical` whether to order shapes from top
 #' @param sample `numeric` number of points to [coo_sample]
-#' @param `palette` from [palettes]
+#' @param pal one of [palettes]
 #' @param ... additional arguments to feed the main drawer
 #' if the number of shapes is > 1000 (default: 64).
 #' If non-numeric (eg `FALSE`) do not sample.

@@ -53,13 +53,13 @@ If non-numeric (eg \code{FALSE}) do not sample.}
 
 \item{f}{factor specification to feed \link{fac_dispatcher}}
 
+\item{pal}{one of \link{palettes}}
+
 \item{paper_fun}{a \link{papers} function (default: \code{paper})}
 
 \item{draw_fun}{one of \link{drawers} for \code{pile.list}}
 
 \item{legend}{\code{logical} whether to draw a legend (will be improved in further versions)}
-
-\item{`palette`}{from \link{palettes}}
 }
 \value{
 a list of templated and translated shapes
