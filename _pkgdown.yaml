@@ -143,6 +143,7 @@ reference:
   desc: Because who does not love graphics?
   contents:
   - panel
+  - mosaic
   - pile
   - stack.Coo
   - inspect
@@ -192,10 +193,6 @@ reference:
   - trilo
   - wings
 
-- title: coo_ toolbox
-  contents:
-  - starts_with("coo_")
-
 - title: Farming shapes
   desc: Most of them will move to [Momfarm](http://www.github.com/MomX/Momfarm) soon
   contents:
@@ -204,7 +201,7 @@ reference:
   - perm
 
 - title: Color palettes
-  desc: Based from RColorBrewer, viridis and more.
+  desc: Qualitative, diverging and sequential, all those colorblind friendly from RColorBrewer, viridis and more.
   contents:
   - starts_with("pal_")
 
@@ -218,6 +215,8 @@ reference:
   - edm
   - edm_nearest
   - edi
-  - is_clockwise
-  - is_closed
   - is_equallyspacedradii
+
+- title: coo_ toolbox
+  contents:
+  - starts_with("coo_")
