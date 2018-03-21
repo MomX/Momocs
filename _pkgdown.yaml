@@ -90,7 +90,6 @@ reference:
   - dissolve
   - filter
   - mutate
-  - rename
   - rescale
   - select
   - rm_harm
