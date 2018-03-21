@@ -31,8 +31,10 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_close}}, \code{\link{coo_down}},
   \code{\link{coo_dxy}}, \code{\link{coo_extract}},
   \code{\link{coo_flipx}}, \code{\link{coo_force2close}},
-  \code{\link{coo_interpolate}}, \code{\link{coo_jitter}},
-  \code{\link{coo_left}}, \code{\link{coo_nb}},
+  \code{\link{coo_interpolate}},
+  \code{\link{coo_is_closed}}, \code{\link{coo_jitter}},
+  \code{\link{coo_left}},
+  \code{\link{coo_likely_clockwise}}, \code{\link{coo_nb}},
   \code{\link{coo_perim}}, \code{\link{coo_range}},
   \code{\link{coo_rev}}, \code{\link{coo_right}},
   \code{\link{coo_rotatecenter}}, \code{\link{coo_rotate}},
@@ -45,9 +47,7 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_smoothcurve}}, \code{\link{coo_smooth}},
   \code{\link{coo_template}}, \code{\link{coo_trans}},
   \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
-  \code{\link{coo_up}}, \code{\link{is_clockwise}},
-  \code{\link{is_closed}},
-  \code{\link{is_equallyspacedradii}}
+  \code{\link{coo_up}}, \code{\link{is_equallyspacedradii}}
 
 Other coo_trimming functions: \code{\link{coo_trimbottom}},
   \code{\link{coo_trimtop}}

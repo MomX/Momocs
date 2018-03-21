@@ -58,7 +58,7 @@ tfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, ...) {
     if (is.list(coo)) {
         coo <- l2m(coo)
     }
-    if (is_closed(coo)) {
+    if (coo_is_closed(coo)) {
         coo <- coo_unclose(coo)
     }
     if (nb.h * 2 > nrow(coo)) {

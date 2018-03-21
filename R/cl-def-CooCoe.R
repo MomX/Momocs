@@ -178,7 +178,7 @@ print.Coo <- function(x, n=6, ...) {
     cat("Ldk (landmarks)\n")
   }
   coo_len <- sapply(x$coo, nrow)
-  coo_closed <- sapply(x$coo, is_closed)
+  coo_closed <- sapply(x$coo, coo_is_closed)
   # number of outlines
   cat("  - ", coo_nb, " ", what, ", ",
       round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coords (in $coo)\n", sep="")

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Removes shapes with incomplete slices — rm_uncomplete • Momocs</title>
+<title>Remove shapes with incomplete slices — rm_uncomplete • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -95,7 +95,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Removes shapes with incomplete slices</h1>
+    <h1>Remove shapes with incomplete slices</h1>
     </div>
 
     
@@ -131,11 +131,10 @@ This function helps you to remove those ugly ducklings. See examples</p>
   <code><a href='at_least.html'>at_least</a></code>, <code><a href='chop.html'>chop</a></code>,
   <code><a href='combine.html'>combine</a></code>, <code><a href='dissolve.html'>dissolve</a></code>,
   <code><a href='fac_dispatcher.html'>fac_dispatcher</a></code>, <code><a href='filter.html'>filter</a></code>,
-  <code><a href='mutate.html'>mutate</a></code>, <code><a href='rename.html'>rename</a></code>,
-  <code><a href='rescale.html'>rescale</a></code>, <code><a href='rm_harm.html'>rm_harm</a></code>,
-  <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_frac.html'>sample_frac</a></code>,
-  <code><a href='sample_n.html'>sample_n</a></code>, <code><a href='select.html'>select</a></code>,
-  <code><a href='slice.html'>slice</a></code>, <code><a href='table.html'>table</a></code></p>
+  <code><a href='mutate.html'>mutate</a></code>, <code><a href='rescale.html'>rescale</a></code>,
+  <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rw_fac.html'>rw_fac</a></code>,
+  <code><a href='sample_frac.html'>sample_frac</a></code>, <code><a href='sample_n.html'>sample_n</a></code>,
+  <code><a href='select.html'>select</a></code>, <code><a href='slice.html'>slice</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -144,12 +143,12 @@ This function helps you to remove those ugly ducklings. See examples</p>
 <span class='co'># we select the var Aglan since it is the only one complete</span>
 <span class='no'>ol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>olea</span>, <span class='no'>var</span> <span class='kw'>==</span> <span class='st'>"Aglan"</span>)
 <span class='co'># everything seems fine</span>
-<span class='fu'><a href='table.html'>table</a></span>(<span class='no'>ol</span>, <span class='st'>"view"</span>, <span class='st'>"ind"</span>)</div><div class='output co'>#&gt;     ind
-#&gt; view O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
+<span class='fu'>table</span>(<span class='no'>ol</span>$<span class='no'>view</span>, <span class='no'>ol</span>$<span class='no'>ind</span>)</div><div class='output co'>#&gt;     
+#&gt;      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
 #&gt;   VD  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
 #&gt;   VL  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
-#&gt;     ind
-#&gt; view O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
+#&gt;     
+#&gt;      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
 #&gt;   VD   1   1   1  1   1  1  1  1  1  1  1
 #&gt;   VL   1   1   1  1   1  1  1  1  1  1  1</div><div class='input'><span class='co'># indeed</span>
 <span class='fu'>rm_uncomplete</span>(<span class='no'>ol</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='st'>"ind"</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='st'>"view"</span>)</div><div class='output co'>#&gt; <span class='message'>all ids have 2 slices</span></div><div class='output co'>#&gt; An Opn object with: 
@@ -161,21 +160,21 @@ This function helps you to remove those ugly ducklings. See examples</p>
 #&gt;      'ind' (factor 0): .</div><div class='input'>
 <span class='co'># we mess the ol object by removing a single shape</span>
 <span class='no'>ol.pb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='no'>ol</span>, -<span class='fl'>1</span>)
-<span class='fu'><a href='table.html'>table</a></span>(<span class='no'>ol.pb</span>, <span class='st'>"view"</span>, <span class='st'>"ind"</span>)</div><div class='output co'>#&gt;     ind
-#&gt; view O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
+<span class='fu'>table</span>(<span class='no'>ol.pb</span>$<span class='no'>view</span>, <span class='no'>ol.pb</span>$<span class='no'>ind</span>)</div><div class='output co'>#&gt;     
+#&gt;      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
 #&gt;   VD  1   0   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
 #&gt;   VL  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
-#&gt;     ind
-#&gt; view O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
+#&gt;     
+#&gt;      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
 #&gt;   VD   1   1   1  1   1  1  1  1  1  1  1
 #&gt;   VL   1   1   1  1   1  1  1  1  1  1  1</div><div class='input'><span class='co'># the counterpart has been removed with a notice</span>
 <span class='no'>ol.ok</span> <span class='kw'>&lt;-</span> <span class='fu'>rm_uncomplete</span>(<span class='no'>ol.pb</span>, <span class='st'>"ind"</span>, <span class='st'>"view"</span>)</div><div class='output co'>#&gt; <span class='message'>those shapes did not have 2 slices and has been removed: O10</span></div><div class='input'><span class='co'># now you can combine them</span>
-<span class='fu'><a href='table.html'>table</a></span>(<span class='no'>ol.ok</span>, <span class='st'>"view"</span>, <span class='st'>"ind"</span>)</div><div class='output co'>#&gt;     ind
-#&gt; view O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
+<span class='fu'>table</span>(<span class='no'>ol.ok</span>$<span class='no'>view</span>, <span class='no'>ol.ok</span>$<span class='no'>ind</span>)</div><div class='output co'>#&gt;     
+#&gt;      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
 #&gt;   VD  0   0   0   0   0   0   0   0   0   0   0  0   0   0   0   0   0   0   0
 #&gt;   VL  0   0   0   0   0   0   0   0   0   0   0  0   0   0   0   0   0   0   0
-#&gt;     ind
-#&gt; view O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
+#&gt;     
+#&gt;      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
 #&gt;   VD   0   0   0  0   0  0  0  0  0  0  0
 #&gt;   VL   0   0   0  0   0  0  0  0  0  0  0</div></pre>
   </div>

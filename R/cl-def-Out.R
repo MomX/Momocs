@@ -116,7 +116,7 @@ Out.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 #   ### Header
 #   cat("An Out object with: \n")
 #   coo_len <- sapply(Out$coo, nrow)
-#   coo_closed <- sapply(Out$coo, is_closed)
+#   coo_closed <- sapply(Out$coo, coo_is_closed)
 #   # number of outlines
 #   cat(" - $coo:", coo_nb, "outlines")
 #

@@ -18,9 +18,9 @@
 #' @family thin plate splines
 #' @export
 tps2d <- function(grid0, fr, to) {
-  if (is_closed(fr))
+  if (coo_is_closed(fr))
     fr <- coo_unclose(fr)
-  if (is_closed(to))
+  if (coo_is_closed(to))
     to <- coo_unclose(to)
   if (!is.matrix(grid0))
     grid0 <- as.matrix(grid0)

@@ -186,12 +186,12 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
 <span class='co'>#pure random</span>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
-<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='table.html'>table</a></span>(<span class='no'>a</span>, <span class='no'>b</span>)
+<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'>table</span>(<span class='no'>a</span>, <span class='no'>b</span>)
 
 <span class='co'># veryhuge + some structure</span>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>10</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>10</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
-<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='table.html'>table</a></span>(<span class='no'>a</span>, <span class='no'>b</span>)
+<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'>table</span>(<span class='no'>a</span>, <span class='no'>b</span>)
 <span class='fu'>diag</span>(<span class='no'>tab</span>) <span class='kw'>&lt;-</span> <span class='fu'>round</span>(<span class='fu'>runif</span>(<span class='fl'>10</span>, <span class='fl'>10</span>, <span class='fl'>20</span>))
 
 <span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>c</span>(<span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,

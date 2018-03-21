@@ -92,7 +92,7 @@ eFourier <- efourier
 efourier.default <- function(x, nb.h, smooth.it = 0, ...) {
   coo <- x
   coo <- coo_check(coo)
-  if (is_closed(coo))
+  if (coo_is_closed(coo))
     coo <- coo_unclose(coo)
   nr <- nrow(coo)
   if (missing(nb.h)) {

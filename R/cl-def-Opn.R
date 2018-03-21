@@ -86,7 +86,7 @@ Opn.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 #   ### Header
 #   cat("An Opn object with: \n")
 #   coo_len <- sapply(Opn$coo, nrow)
-#   coo_closed <- sapply(Opn$coo, is_closed)
+#   coo_closed <- sapply(Opn$coo, coo_is_closed)
 #   # number of outlines
 #   cat(" - $coo:", coo_nb, "open outlines")
 #   # number of coordinates

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retains group with at least a certain number of individuals — at_least • Momocs</title>
+<title>Retain groups with at least n shapes — at_least • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -95,7 +95,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retains group with at least a certain number of individuals</h1>
+    <h1>Retain groups with at least n shapes</h1>
     </div>
 
     
@@ -131,15 +131,14 @@
   <code><a href='chop.html'>chop</a></code>, <code><a href='combine.html'>combine</a></code>,
   <code><a href='dissolve.html'>dissolve</a></code>, <code><a href='fac_dispatcher.html'>fac_dispatcher</a></code>,
   <code><a href='filter.html'>filter</a></code>, <code><a href='mutate.html'>mutate</a></code>,
-  <code><a href='rename.html'>rename</a></code>, <code><a href='rescale.html'>rescale</a></code>,
-  <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
-  <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_frac.html'>sample_frac</a></code>,
-  <code><a href='sample_n.html'>sample_n</a></code>, <code><a href='select.html'>select</a></code>,
-  <code><a href='slice.html'>slice</a></code>, <code><a href='table.html'>table</a></code></p>
+  <code><a href='rescale.html'>rescale</a></code>, <code><a href='rm_harm.html'>rm_harm</a></code>,
+  <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>, <code><a href='rw_fac.html'>rw_fac</a></code>,
+  <code><a href='sample_frac.html'>sample_frac</a></code>, <code><a href='sample_n.html'>sample_n</a></code>,
+  <code><a href='select.html'>select</a></code>, <code><a href='slice.html'>slice</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='table.html'>table</a></span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>)</div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='fu'>table</span>(<span class='no'>trilo</span>$<span class='no'>onto</span>)</div><div class='output co'>#&gt; 
 #&gt;  a  b  c  d 
 #&gt;  7 16 18  9 </div><div class='input'><span class='fu'>at_least</span>(<span class='no'>trilo</span>, <span class='st'>"onto"</span>, <span class='fl'>9</span>)</div><div class='output co'>#&gt; An Out object with: 
 #&gt;  - $coo: 43 outlines (64 +/- 0 coordinates, all unclosed)

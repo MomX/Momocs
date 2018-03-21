@@ -1450,7 +1450,7 @@ coo_interpolate <- function(coo, n) {
 #' @export
 coo_interpolate.default <- function(coo, n) {
   coo <- coo_check(coo)
-  if (!is_closed(coo)) {
+  if (!coo_is_closed(coo)) {
     coo <- coo_close(coo)
   }
   orig <- coo_perimcum(coo)
@@ -1558,41 +1558,41 @@ coo_smoothcurve.Opn <- function(coo, n) {
   return(Opn)
 }
 
-# is_closed ----------
-#' Tests if shapes are closed
+# coo_is_closed ----------
+#' Test if shapes are closed
 #'
 #' Returns TRUE/FALSE whether the last coordinate of the shapes is the same
 #' as the first one.
 #'
-#' @aliases is_closed
+#' @aliases coo_is_closed
 #' @inheritParams coo_check
 #' @return a single or a vector of \code{logical}.
 #' @family coo_ utilities
 #' @examples
-#' is_closed(matrix(1:10, ncol=2))
-#' is_closed(coo_close(matrix(1:10, ncol=2)))
-#' is_closed(bot)
-#' is_closed(coo_close(bot))
+#' coo_is_closed(matrix(1:10, ncol=2))
+#' coo_is_closed(coo_close(matrix(1:10, ncol=2)))
+#' coo_is_closed(bot)
+#' coo_is_closed(coo_close(bot))
 #' @export
-is_closed <- function(coo) {
-  UseMethod("is_closed")
+coo_is_closed <- function(coo) {
+  UseMethod("coo_is_closed")
 }
 
 #' @export
-is_closed.default <- function(coo) {
+coo_is_closed.default <- function(coo) {
   coo <- coo_check(coo)
   identical(coo[1, ], coo[nrow(coo), ])
 }
 
 #' @export
-is_closed.Coo <- function(coo) {
+coo_is_closed.Coo <- function(coo) {
   Coo <- coo
-  return(sapply(Coo$coo, is_closed))
+  return(sapply(Coo$coo, coo_is_closed))
 }
 
-#' @rdname is_closed
+#' @rdname coo_is_closed
 #' @export
-is_open <- function(coo) !is_closed(coo)
+is_open <- function(coo) !coo_is_closed(coo)
 
 # is_equallyspacedradii ----------
 #' Tests if coordinates likely have equally spaced radii
@@ -1646,24 +1646,26 @@ is_equallyspacedradii.Coo <- function(coo, thres=pi/90){
 # coo_clockwise
 # see http://en.wikipedia.org/wiki/Shoelace_formula
 
-#' Tests if shapes are developping clockwise or anticlockwise
+#' Tests if shapes are (likely) developping clockwise or anticlockwise
 #'
 #' @inheritParams coo_check
 #' @return a single or a vector of \code{logical}.
 #' @family coo_ utilities
 #' @examples
 #' shapes[4] %>% coo_sample(64) %>% coo_plot()  #clockwise cat
-#' shapes[4] %>% is_clockwise()
-#' shapes[4] %>% coo_rev() %>% is_clockwise()
+#' shapes[4] %>% coo_likely_clockwise()
+#' shapes[4] %>% coo_rev() %>% coo_likely_clockwise()
 #'
 #' # on Coo
-#' shapes %>% is_clockwise %>% `[`(4)
+#' shapes %>% coo_likely_clockwise %>% `[`(4)
+#' @rdname coo_likely_clockwise
 #' @export
-is_clockwise <- function(coo)
-  UseMethod("is_clockwise")
+coo_likely_clockwise <- function(coo)
+  UseMethod("coo_likely_clockwise")
 
+#' @rdname coo_likely_clockwise
 #' @export
-is_clockwise.default <- function(coo){
+coo_likely_clockwise.default <- function(coo){
   res <- numeric(nrow(coo)-1)
   for (i in seq_along(res)){
     res[i] <- (coo[i+1, 1] - coo[i, 1]) * (coo[i+1, 2] - coo[i, 2])
@@ -1671,16 +1673,18 @@ is_clockwise.default <- function(coo){
   sum(res)>0
 }
 
+#' @rdname coo_likely_clockwise
 #' @export
-is_clockwise.Coo <- function(coo){
-  sapply(coo$coo, is_clockwise)
+coo_likely_clockwise.Coo <- function(coo){
+  sapply(coo$coo, coo_likely_clockwise)
 }
 
-#' @rdname is_clockwise
+#' @rdname coo_likely_clockwise
 #' @export
-is_anticlockwise <- function(coo){
-  !is_clockwise(coo)
+coo_likely_anticlockwise <- function(coo){
+  !coo_likely_clockwise(coo)
 }
+
 # coo_close -----------------
 #' Closes/uncloses shapes
 #'
@@ -1694,11 +1698,11 @@ is_anticlockwise <- function(coo){
 #' x2 <- coo_close(x)
 #' x3 <- coo_unclose(x2)
 #' x
-#' is_closed(x)
+#' coo_is_closed(x)
 #' x2
-#' is_closed(x2)
+#' coo_is_closed(x2)
 #' x3
-#' is_closed(x3)
+#' coo_is_closed(x3)
 #' @rdname coo_close
 #' @export
 coo_close <- function(coo) {
@@ -1708,7 +1712,7 @@ coo_close <- function(coo) {
 #' @export
 coo_close.default <- function(coo) {
   coo <- coo_check(coo)
-  ifelse(is_closed(coo), return(coo), return(rbind(coo, coo[1, ])))
+  ifelse(coo_is_closed(coo), return(coo), return(rbind(coo, coo[1, ])))
 }
 
 #' @export
@@ -1731,11 +1735,11 @@ coo_close.Coo <- function(coo) {
 #' x2 <- coo_close(x)
 #' x3 <- coo_unclose(x2)
 #' x
-#' is_closed(x)
+#' coo_is_closed(x)
 #' x2
-#' is_closed(x2)
+#' coo_is_closed(x2)
 #' x3
-#' is_closed(x3)
+#' coo_is_closed(x3)
 #' @rdname coo_close
 #' @export
 coo_unclose <- function(coo) {
@@ -1745,7 +1749,7 @@ coo_unclose <- function(coo) {
 #' @export
 coo_unclose.default <- function(coo) {
   coo <- coo_check(coo)
-  ifelse(is_closed(coo), return(coo[-nrow(coo), ]), return(coo))
+  ifelse(coo_is_closed(coo), return(coo[-nrow(coo), ]), return(coo))
 }
 
 #' @export
@@ -1784,7 +1788,7 @@ coo_force2close <- function(coo){
 coo_force2close.default <- function(coo) {
   coo <- coo_check(coo)
   xy <- coo_centpos(coo)
-  if (is_closed(coo)) {
+  if (coo_is_closed(coo)) {
     return(coo)
   }
   n <- nrow(coo)

@@ -53,7 +53,7 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, ...) {
       nb.h <- 12
       message("'nb.h' not provided and set to ", nb.h)
     }
-    if (is_closed(coo)) {
+    if (coo_is_closed(coo)) {
         coo <- coo_unclose(coo)
     }
     if (nb.h * 2 > nrow(coo) | missing(nb.h)) {

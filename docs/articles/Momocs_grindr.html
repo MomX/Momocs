@@ -92,6 +92,11 @@
 <h2 class="hasAnchor">
 <a href="#drawers" class="anchor"></a>Drawers</h2>
 <p>Papers and drawers are used to represent a shape (as a <code>matrix</code> of coordinates) or a collection of shapes (as any <code>Coo</code> object, namely <code>Out</code>, <code>Opn</code> or <code>Ldk</code>). It all starts with a <code>paper*</code> function, the simplest one being <code>paper</code>.</p>
+<pre><code>## Warning: S3 methods 'is_clockwise.Coo', 'is_clockwise.default',
+## 'is_closed.Coo', 'is_closed.default' were declared in NAMESPACE but not
+## found</code></pre>
+<pre><code>## Warning in setup_ns_exports(pkg, export_all): Objects listed as exports,
+## but not present in namespace: is_anticlockwise, is_clockwise, is_closed</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bot[<span class="dv">1</span>] <span class="op">%&gt;%</span><span class="st"> </span>paper <span class="co"># single shape</span></code></pre></div>
 <p><img src="Momocs_grindr_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">olea <span class="op">%&gt;%</span><span class="st"> </span>paper   <span class="co"># Coo (here Opn) object</span></code></pre></div>

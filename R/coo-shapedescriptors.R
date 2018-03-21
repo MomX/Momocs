@@ -316,7 +316,7 @@ coo_rectilinearity <- function(coo) {
 coo_rectilinearity.default <- function(coo) {
   # some check
   coo <- coo_check(coo)
-  if (is_closed(coo)) {
+  if (coo_is_closed(coo)) {
     coo_c <- coo
     coo <- coo_unclose(coo)
   } else {

@@ -27,20 +27,20 @@ x <- (matrix(1:10, ncol=2))
 x2 <- coo_close(x)
 x3 <- coo_unclose(x2)
 x
-is_closed(x)
+coo_is_closed(x)
 x2
-is_closed(x2)
+coo_is_closed(x2)
 x3
-is_closed(x3)
+coo_is_closed(x3)
 x <- (matrix(1:10, ncol=2))
 x2 <- coo_close(x)
 x3 <- coo_unclose(x2)
 x
-is_closed(x)
+coo_is_closed(x)
 x2
-is_closed(x2)
+coo_is_closed(x2)
 x3
-is_closed(x3)
+coo_is_closed(x3)
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
@@ -53,8 +53,10 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_down}}, \code{\link{coo_dxy}},
   \code{\link{coo_extract}}, \code{\link{coo_flipx}},
   \code{\link{coo_force2close}},
-  \code{\link{coo_interpolate}}, \code{\link{coo_jitter}},
-  \code{\link{coo_left}}, \code{\link{coo_nb}},
+  \code{\link{coo_interpolate}},
+  \code{\link{coo_is_closed}}, \code{\link{coo_jitter}},
+  \code{\link{coo_left}},
+  \code{\link{coo_likely_clockwise}}, \code{\link{coo_nb}},
   \code{\link{coo_perim}}, \code{\link{coo_range}},
   \code{\link{coo_rev}}, \code{\link{coo_right}},
   \code{\link{coo_rotatecenter}}, \code{\link{coo_rotate}},
@@ -68,7 +70,6 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_template}}, \code{\link{coo_trans}},
   \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
-  \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
 
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
@@ -81,8 +82,10 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_down}}, \code{\link{coo_dxy}},
   \code{\link{coo_extract}}, \code{\link{coo_flipx}},
   \code{\link{coo_force2close}},
-  \code{\link{coo_interpolate}}, \code{\link{coo_jitter}},
-  \code{\link{coo_left}}, \code{\link{coo_nb}},
+  \code{\link{coo_interpolate}},
+  \code{\link{coo_is_closed}}, \code{\link{coo_jitter}},
+  \code{\link{coo_left}},
+  \code{\link{coo_likely_clockwise}}, \code{\link{coo_nb}},
   \code{\link{coo_perim}}, \code{\link{coo_range}},
   \code{\link{coo_rev}}, \code{\link{coo_right}},
   \code{\link{coo_rotatecenter}}, \code{\link{coo_rotate}},
@@ -96,6 +99,5 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_template}}, \code{\link{coo_trans}},
   \code{\link{coo_trimbottom}}, \code{\link{coo_trimtop}},
   \code{\link{coo_trim}}, \code{\link{coo_up}},
-  \code{\link{is_clockwise}}, \code{\link{is_closed}},
   \code{\link{is_equallyspacedradii}}
 }
