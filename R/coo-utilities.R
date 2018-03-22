@@ -712,7 +712,8 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' stack(y[[2]])
 #'
 #' # new ldks from tipping points, new ldks from angle
-#' olea %>% def_ldk_tips %>%
+#' olea %>% slice(1:5) %>% # for the sake of speed
+#' def_ldk_tips %>%
 #' def_ldk_angle(0.75*pi) %>% def_ldk_angle(0.25*pi) %>%
 #' coo_slice(ldk =1:4) -> oleas
 #' oleas[[1]] %>% stack

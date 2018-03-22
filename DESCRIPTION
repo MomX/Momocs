@@ -8,7 +8,7 @@ Authors@R: c(
 Description: The goal of Momocs is to provide a complete, convenient, 
        reproducible and open-source toolkit for 2D morphometrics.
        It includes most common 2D morphometrics approaches on outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.
-       It allows reproducible, pipeable, complex morphometric analyses and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.
+       It allows reproducible, complex morphometric analyses and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.
 License: GPL-2 | GPL-3
 URL: https://github.com/MomX/Momocs/
 BugReports: https://github.com/MomX/Momocs/issues
