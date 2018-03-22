@@ -160,10 +160,9 @@
 <code>pos.shapes</code> is now <code>morphospace_positions</code>
 </li>
 <li>
-<code>is_clockwise</code> is deprecated, now <code>coo_likely_clockwise</code>
-</li>
-<li>Deprecated <code>is_anticlockwise</code>
-</li>
+<code>is_closed</code> is deprecated, now <code>coo_is_closed</code>; same for <code>is_open</code> now <code>coo_is_open</code>, to comply with all <code>coo_*</code> friends naming scheme</li>
+<li>
+<code>is_clockwise</code> is deprecated, now <code>coo_likely_clockwise</code>; same for <code>is_anticlockwise</code> now <code>coo_likely_anticlockwise</code>. Better reflect the incertainty and gather with <code>coo_*</code> friends</li>
 <li>Deprecated <code>rename</code> (handled by <code>select</code> anyway)</li>
 <li>Deprecated <code>table</code> (poor shortcut anyway and avoid this boring startup message)</li>
 <li>Deprecated <code>stack2</code> and <code>panel2</code> before their rewriting</li>
@@ -184,8 +183,7 @@
 <li>Released <code>reshape2</code>, <code>plyr</code> dependencies</li>
 <li>Now depends <code>RColorBrewer</code>, <code>progress</code>
 </li>
-<li>Proper indications of external functions with <code>::</code>
-</li>
+<li>Proper indications of external functions with <code>::</code>. A nice side effect is to remove annoying messages when attaching Momocs. Another is the removal of most <code>importFrom</code>.</li>
 </ul>
 </div>
 <div id="breaking-changes" class="section level3">

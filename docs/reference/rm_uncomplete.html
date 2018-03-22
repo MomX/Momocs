@@ -151,13 +151,20 @@ This function helps you to remove those ugly ducklings. See examples</p>
 #&gt;      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
 #&gt;   VD   1   1   1  1   1  1  1  1  1  1  1
 #&gt;   VL   1   1   1  1   1  1  1  1  1  1  1</div><div class='input'><span class='co'># indeed</span>
-<span class='fu'>rm_uncomplete</span>(<span class='no'>ol</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='st'>"ind"</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='st'>"view"</span>)</div><div class='output co'>#&gt; <span class='message'>all ids have 2 slices</span></div><div class='output co'>#&gt; An Opn object with: 
-#&gt;  - $coo: 60 open outlines (98 +/- 4 coordinates)
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 0): .
-#&gt;      'domes' (factor 0): .
-#&gt;      'view' (factor 0): .
-#&gt;      'ind' (factor 0): .</div><div class='input'>
+<span class='fu'>rm_uncomplete</span>(<span class='no'>ol</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='st'>"ind"</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='st'>"view"</span>)</div><div class='output co'>#&gt; <span class='message'>all ids have 2 slices</span></div><div class='output co'>#&gt; Opn (curves)
+#&gt;   - 60 curves, 98 +/- 4 coords (in $coo)
+#&gt;   - 4 classifiers (in $fac): 
+#&gt; # A tibble: 60 x 4
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 54 more rows
+#&gt;   - also: $ldk</div><div class='input'>
 <span class='co'># we mess the ol object by removing a single shape</span>
 <span class='no'>ol.pb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='no'>ol</span>, -<span class='fl'>1</span>)
 <span class='fu'>table</span>(<span class='no'>ol.pb</span>$<span class='no'>view</span>, <span class='no'>ol.pb</span>$<span class='no'>ind</span>)</div><div class='output co'>#&gt;     

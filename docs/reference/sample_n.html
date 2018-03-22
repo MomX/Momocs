@@ -144,11 +144,18 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># samples 5 bottles no matter their type</span>
-<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 5 outlines (154 +/- 14 coordinates, all unclosed)
-#&gt;  - $fac: 2 classifiers:
-#&gt;      'type' (factor 0): .
-#&gt;      'fake' (factor 0): .</div><div class='input'><span class='co'># 5 bottles of beer and of whisky</span>
+<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 5 outlines, 154 +/- 14 coords (in $coo)
+#&gt;   - 2 classifiers (in $fac): 
+#&gt; # A tibble: 5 x 2
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 beer   d    
+#&gt; 2 whisky b    
+#&gt; 3 beer   c    
+#&gt; 4 whisky b    
+#&gt; 5 beer   c    
+#&gt;   - also: $ldk</div><div class='input'><span class='co'># 5 bottles of beer and of whisky</span>
 <span class='fu'>table</span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>)$<span class='no'>type</span>)</div><div class='output co'>#&gt; 
 #&gt;   beer whisky 
 #&gt;      5      5 </div><div class='input'><span class='co'># many repetitions</span>

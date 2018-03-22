@@ -138,17 +138,35 @@ is not checked, so anything with the same number of rows will be merged.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>bot</span>, <span class='no'>type</span><span class='kw'>==</span><span class='st'>"whisky"</span>)
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>bot</span>, <span class='no'>type</span><span class='kw'>==</span><span class='st'>"beer"</span>)
-<span class='fu'>combine</span>(<span class='no'>w</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 40 outlines (162 +/- 21 coordinates, all unclosed)
-#&gt;  - $fac: 2 classifiers:
-#&gt;      'type' (factor 0): .
-#&gt;      'fake' (factor 0): .</div><div class='input'><span class='co'># or, if you have many levels</span>
+<span class='fu'>combine</span>(<span class='no'>w</span>, <span class='no'>b</span>)</div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 40 outlines, 162 +/- 21 coords (in $coo)
+#&gt;   - 2 classifiers (in $fac): 
+#&gt; # A tibble: 40 x 2
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 34 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='co'># or, if you have many levels</span>
 <span class='no'>bot_s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='chop.html'>chop</a></span>(<span class='no'>bot</span>, ~<span class='no'>type</span>)
-<span class='no'>bot_s</span>$<span class='no'>whisky</span></div><div class='output co'>#&gt; An Out object with: 
-#&gt;  - $coo: 20 outlines (158 +/- 23 coordinates, all unclosed)
-#&gt;  - $fac: 2 classifiers:
-#&gt;      'type' (factor 0): .
-#&gt;      'fake' (factor 0): .</div><div class='input'><span class='co'># note that you can apply something (single function or a more</span>
+<span class='no'>bot_s</span>$<span class='no'>whisky</span></div><div class='output co'>#&gt; Out (outlines)
+#&gt;   - 20 outlines, 158 +/- 23 coords (in $coo)
+#&gt;   - 2 classifiers (in $fac): 
+#&gt; # A tibble: 20 x 2
+#&gt;   type   fake 
+#&gt;   &lt;fct&gt;  &lt;fct&gt;
+#&gt; 1 whisky a    
+#&gt; 2 whisky a    
+#&gt; 3 whisky a    
+#&gt; 4 whisky a    
+#&gt; 5 whisky a    
+#&gt; 6 whisky a    
+#&gt; # ... with 14 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='co'># note that you can apply something (single function or a more</span>
 <span class='co'># complex pipe) then combine everyone, since combine also works on lists</span>
 <span class='co'># eg:</span>
 <span class='co'># bot_s2 &lt;- lapply(bot_s, efourier, 10)</span>
