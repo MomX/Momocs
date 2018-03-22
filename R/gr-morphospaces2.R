@@ -13,7 +13,7 @@ morphospace.pos <-
       yr <- .y.range.gg(gg) * 0.9
       dfx <- data.frame(x=seq(xr[1], xr[2], length=nc.shp), y=0)
       dfy <- data.frame(x=0, y=seq(yr[1], yr[2], length=nr.shp))
-      pos <- bind_rows(dfx, dfy) %>% unique()
+      pos <- dplyr::bind_rows(dfx, dfy) %>% unique()
       return(pos)
     }
 
@@ -166,9 +166,9 @@ morphospace2PCA <- function(PCA, xax, yax, pos,
   i_n <- rep(i, each=pts.shp)
   df_trans <- select(pos0, x_t=x, y_t=y) %>% dplyr::slice(rep(i_n, nb.met))
   # we bind together and apply the translation
-  df <- bind_cols(df_shp, df_trans) %>%
+  df <- dplyr::bind_cols(df_shp, df_trans) %>%
     # we add the two translations
-    mutate_(x = quote(x_c + x_t + x_d), y = quote(y_c + y_t + y_d))
+    dplyr::mutate_(x = quote(x_c + x_t + x_d), y = quote(y_c + y_t + y_d))
   # %>%
     # and rearrange the columsn (pure cosmetics)
     #select(SHP, shp, shp1, x, y,

@@ -256,7 +256,7 @@ MANOVA_PW.PCA <- function(x,
   x <- PCA$x[, retain]
 
   # we get all combinations, and prepare the loop
-  pws <- t(combn(levels(fac), 2))
+  pws <- t(utils::combn(levels(fac), 2))
   n <- nrow(pws)
   cn <- colnames(summary(manova(x~ fac))$stats)
   res <- matrix(NA, nrow = n, ncol = 6,
@@ -315,7 +315,7 @@ MANOVA_PW.PCA <- function(x,
 #     fac <- fac_dispatcher(Coe, fac)
 #   }
 #   # we get all combinations, and prepare the loop
-#   pws <- t(combn(levels(fac), 2))
+#   pws <- t(utils::combn(levels(fac), 2))
 #   n <- nrow(pws)
 #   cn <- colnames(MANOVA(Coe, fac)$stats)
 #   res <- matrix(NA, nrow = n, ncol = 6,

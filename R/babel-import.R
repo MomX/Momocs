@@ -39,7 +39,7 @@ import_txt <- function(txt.paths = .lf.auto(), ...) {
   }
   res <- list()
   for (i in seq(along = txt.paths)) {
-    coo <- read.table(txt.paths[i], ...)
+    coo <- utils::read.table(txt.paths[i], ...)
     res[[i]] <- as.matrix(coo)
     if (t)
       pb$tick()
@@ -182,7 +182,7 @@ import_jpg1 <- function(jpg.path,
                         auto.notcentered = TRUE,
                         fun.notcentered = NULL,
                         threshold = 0.5) {
-  img <- readJPEG(jpg.path)
+  img <- jpeg::readJPEG(jpg.path)
   # if a RVB is provided by the way, apply (img, 1:2, mean) is
   # much slower
   if (!is.matrix(img)) {
@@ -369,7 +369,7 @@ import_StereoMorph_curve1 <- function(path){
   stop("deprecated due to major update in StereoMorph export file format. You can try the solution by Stas Malavin before this being fixed in Momocs: https://github.com/stas-malavin/Momocs/blob/master/R/importSM.r")
 
   # we split the loci contained in the first column
-  df <- read.table(path, header=FALSE, stringsAsFactors = FALSE) %>%
+  df <- utils::read.table(path, header=FALSE, stringsAsFactors = FALSE) %>%
     select(locus=1, x=2, y=3) %>%
     mutate(name=substr(locus, 1, nchar(locus)-4)) %>%
     select(name, x, y)
@@ -406,7 +406,7 @@ import_StereoMorph_ldk1 <- function(path){
   stop("deprecated due to major update in StereoMorph export file format. You can try the solution by Stas Malavin before this being fixed in Momocs: https://github.com/stas-malavin/Momocs/blob/master/R/importSM.r")
 
   # a cousin of import_txt
-  read.table(path, header=FALSE,
+  utils::read.table(path, header=FALSE,
              row.names=1, col.names=c("l", "x", "y"), stringsAsFactors = FALSE)
 }
 
@@ -875,7 +875,7 @@ chc2pix <- function(chc) {
 #          "db must be provided")
 #   # if db is provided as a path
 #   if (is.character(db))
-#     db <- read.table(db, ...)
+#     db <- utils::read.table(db, ...)
 #   # lots of check
 #   .check(is.data.frame(db),
 #          "db must be a data.frame")
@@ -1058,11 +1058,11 @@ img_plot <- function(img) {
   # plotter..
   if (missing(img)) {
     source <- file.choose()
-    img <- readJPEG(source)
+    img <- jpeg::readJPEG(source)
     cat("img_plot('", source, "')\n", sep = "")
   }
   if (is.character(img)) {
-    img <- readJPEG(img)
+    img <- jpeg::readJPEG(img)
   }
   if (!is.matrix(img)) {
     img <- (img[, , 1] + img[, , 2] + img[, , 3])/3
@@ -1089,11 +1089,11 @@ img_plot0 <- function(img) {
   # plotter..
   if (missing(img)) {
     source <- file.choose()
-    img <- readJPEG(source)
+    img <- jpeg::readJPEG(source)
     cat("img_plot('", source, "')\n", sep = "")
   }
   if (is.character(img)) {
-    img <- readJPEG(img)
+    img <- jpeg::readJPEG(img)
   }
   if (!is.matrix(img)) {
     img <- (img[, , 1] + img[, , 2] + img[, , 3])/3

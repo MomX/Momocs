@@ -193,9 +193,9 @@
 .rcolors2hex <- function(x){
   x <- x %>% grDevices::col2rgb()
   if ("alpha" %in% rownames(x)){
-    apply(x, 2, function(.) rgb(.[1], .[2], .[3], alpha=.[4], maxColorValue = 255))
+    apply(x, 2, function(.) grDevices::rgb(.[1], .[2], .[3], alpha=.[4], maxColorValue = 255))
   } else {
-    apply(x, 2, function(.) rgb(.[1], .[2], .[3], maxColorValue = 255))
+    apply(x, 2, function(.) grDevices::rgb(.[1], .[2], .[3], maxColorValue = 255))
   }
 }
 

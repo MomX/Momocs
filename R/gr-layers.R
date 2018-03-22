@@ -275,13 +275,13 @@
 .density <- function(xy, fac, levels, col, transp, n.kde2d = 50) {
   if (missing(fac) | is.null(fac))
     fac <- factor(rep("f", nrow(xy)))
-  # z0 <- kde2d(xy[, 1], xy[, 2], n=n.kde2d, lims =
+  # z0 <- MASS::kde2d(xy[, 1], xy[, 2], n=n.kde2d, lims =
   # c(par('usr')))$z zmin <- min(z0) zmax <- max(z0)
   xy <- as.matrix(xy)
   for (i in seq(along = levels(fac))) {
     xy.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(xy.i)) {
-      ki <- kde2d(xy.i[, 1], xy.i[, 2], n = n.kde2d, lims = c(par("usr")))
+      ki <- MASS::kde2d(xy.i[, 1], xy.i[, 2], n = n.kde2d, lims = c(par("usr")))
       # ki$z <- .normalize(ki$z, zmin, zmax)
       ki$z <- .normalize(ki$z)
       image(ki$x, ki$y, ki$z, add = TRUE, xlim = range(ki$x),
@@ -296,13 +296,13 @@
 .contour <- function(xy, fac, levels, col, transp, n.kde2d = 50) {
   if (missing(fac) | is.null(fac))
     fac <- factor(rep("f", nrow(xy)))
-  # z0 <- kde2d(xy[, 1], xy[, 2], n=n.kde2d, lims =
+  # z0 <- MASS::kde2d(xy[, 1], xy[, 2], n=n.kde2d, lims =
   # c(par('usr')))$z zmin <- min(z0) zmax <- max(z0)
   xy <- as.matrix(xy)
   for (i in seq(along = levels(fac))) {
     xy.i <- xy[fac == levels(fac)[i], ]
     if (is.matrix(xy.i)) {
-      ki <- kde2d(xy.i[, 1], xy.i[, 2], n = n.kde2d, lims = c(par("usr")))
+      ki <- MASS::kde2d(xy.i[, 1], xy.i[, 2], n = n.kde2d, lims = c(par("usr")))
       # ki$z <- .normalize(ki$z, zmin, zmax)
       ki$z <- .normalize(ki$z)
       contour(ki$x, ki$y, ki$z, add = TRUE, nlevels = levels,
@@ -413,11 +413,11 @@
   c(-m, m)
 }
 .x.range.gg <- function(gg){
-  ggplot_build(gg)$panel$ranges[[1]]$x.range
+  ggplot2::ggplot_build(gg)$panel$ranges[[1]]$x.range
 }
 
 .y.range.gg <- function(gg){
-  ggplot_build(gg)$panel$ranges[[1]]$y.range
+  ggplot2::ggplot_build(gg)$panel$ranges[[1]]$y.range
 }
 
 .wdw.gg <- function(gg){

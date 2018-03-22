@@ -329,8 +329,8 @@ plot_CV.default <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TR
   df <- as.data.frame(tab)
   #colnames(df) <- c("actual", "classified", "count")
   if (freq) {
-    df <- df %>% group_by_(colnames(df)[1]) %>%
-      mutate(Freq=round(Freq/sum(Freq), round))
+    df <- df %>% dplyr::group_by_(colnames(df)[1]) %>%
+      dplyr::mutate(Freq=round(Freq/sum(Freq), round))
   gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], fill="Freq")) +
     geom_tile()  +
     scale_fill_gradient(low="white", high="red", na.value="white") +

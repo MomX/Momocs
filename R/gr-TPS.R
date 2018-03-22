@@ -239,7 +239,7 @@ tps_arr <- function(fr, to, amp = 1,
     grid0 <- .grid.sample(fr, to, nside = round(sqrt(arr.nb)), over = over)
   }
   else {
-    grid0 <- spsample(Polygon(coo_close(fr)), arr.nb, type='regular')@coords
+    grid0 <- sp::spsample(sp::Polygon(coo_close(fr)), arr.nb, type='regular')@coords
   }
   grid1 <- tps2d(grid0, fr, to)
   # grille simple, on affiche d'abord les deux courbes
@@ -328,7 +328,7 @@ tps_iso <- function(fr, to, amp = 1,
   if (grid) {
     grid0 <- .grid.sample(fr, to, nside = round(sqrt(iso.nb)), over = over)
   } else {
-    grid0 <- spsample(Polygon(coo_close(fr)), iso.nb, type='regular')@coords
+    grid0 <- sp::spsample(sp::Polygon(coo_close(fr)), iso.nb, type='regular')@coords
   }
   grid1 <- tps2d(grid0, fr, to)
   def <- edm(grid0, grid1)

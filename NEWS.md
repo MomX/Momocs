@@ -43,7 +43,7 @@
 ### Dependencies
 * Released `reshape2`, `plyr` dependencies
 * Now depends `RColorBrewer`, `progress`
-* Proper indications of external functions with `::`
+* Proper indications of external functions with `::`. A nice side effect is to remove annoying messages when attaching Momocs. Another is the removal of most `importFrom`.
 
 ### Breaking changes
 * Besides deprecated/renamed functions there should be no breaking changes.

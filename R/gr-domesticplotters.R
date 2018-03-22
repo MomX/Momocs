@@ -483,7 +483,7 @@ ldk_chull <- function(ldk, col = "grey40", lty = 1) {
   ldk <- ldk_check(ldk)
   nl <- dim(ldk)[1]
   for (i in 1:nl) {
-    ind.i <- chull(ldk[i, 1, ], ldk[i, 2, ])
+    ind.i <- grDevices::chull(ldk[i, 1, ], ldk[i, 2, ])
     coo_draw(coo_close(t(ldk[i, , ind.i])), border = col,
              col = NA, lty = lty, points = FALSE, first.point = FALSE,
              centroid = FALSE)
@@ -613,7 +613,7 @@ plot_table <- function(x, fac1, fac2=fac1, rm0 = FALSE){
     stop("plot_table must be called on an object with a $fac slot")
   if (missing(fac1))
     stop("'fac1' must be specified")
-  df <- select_(x$fac, fac1, fac2)
+  df <- dplyr::select_(x$fac, fac1, fac2)
   # we return a barplot when a single fac is called (fac1 then)
   if (missing(fac2) | identical(fac1, fac2)) { # | is justified by rm0 after
     gg <- ggplot(df, aes_string(x=fac1)) + geom_bar()

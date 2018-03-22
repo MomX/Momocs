@@ -51,7 +51,7 @@ ldk_check <- function(ldk) {
 #' @export
 links_all <- function(coo) {
     coo <- coo_check(coo)
-    links <- t(combn(1:nrow(coo), 2))
+    links <- t(utils::combn(1:nrow(coo), 2))
     return(links)
 }
 
@@ -70,7 +70,7 @@ links_all <- function(coo) {
 #' @export
 links_delaunay <- function(coo) {
     coo <- coo_check(coo)
-    links <- delaunayn(coo)
+    links <- geometry::delaunayn(coo)
     links <- rbind(links[, -1], links[, -2], links[, -3])
     links <- links[-which(duplicated(links)), ]
     return(links)

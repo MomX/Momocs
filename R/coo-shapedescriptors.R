@@ -649,7 +649,7 @@ coo_chull <- function(coo){
 #' @export
 coo_chull.default <- function(coo) {
   coo <- coo_check(coo)
-  return(coo[chull(coo), ])
+  return(coo[grDevices::chull(coo), ])
 }
 
 #' @rdname coo_chull
@@ -676,7 +676,7 @@ coo_chull_onion.default <- function(coo, close=TRUE){
   res <- list()
   i <- 1
   while(is.matrix(coo) && nrow(coo) > 3){
-    chi_ids <- chull(coo[, 1], coo[, 2])
+    chi_ids <- grDevices::chull(coo[, 1], coo[, 2])
     # if asked to close, then close ids and coos will follow
     if(close)
       chi_ids <- c(chi_ids, chi_ids[1])

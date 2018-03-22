@@ -330,9 +330,9 @@ plot.PCA <- function(x, fac, xax=1, yax=2,
     }
   }
   # if Rcolors are passed...
-  if (any(col %in% colors()) & any(col.groups %in% colors())){
-    col.groups[which(col.groups %in% colors())] %<>% .rcolors2hex()
-    col[which(col %in% colors())] %<>% .rcolors2hex()
+  if (any(col %in% grDevices::colors()) & any(col.groups %in% grDevices::colors())){
+    col.groups[which(col.groups %in% grDevices::colors())] %<>% .rcolors2hex()
+    col[which(col %in% grDevices::colors())] %<>% .rcolors2hex()
   }
 
   # cosmetics
@@ -643,7 +643,7 @@ calculate_ellipse <- function(data, vars, type, level, segments){
     ellipse <- rbind(as.numeric(c(NA, NA)))
   } else {
     if (type == "t"){
-      v <- cov.trob(data[,vars])
+      v <- MASS::cov.trob(data[,vars])
     } else if (type == "norm"){
       v <- cov.wt(data[,vars])
     } else if (type == "euclid"){

@@ -37,26 +37,28 @@
 #' Matthias Mace, Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 #' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
-#' @import ape
-#' @import dplyr
-#' @import sp
+# #' @import ape
+# #' @import dplyr
+# #' @importFrom dplyr arrange arrange_ data_frame as_data_frame count select select_ slice filter filter_ bind_rows bind_cols group_by group_by_ mutate transmute
+# #' @import sp
 #' @import ggplot2
-#' @importFrom geometry delaunayn convhulln
-#' @importFrom geomorph gpagen
-#' @importFrom graphics boxplot
-#' @importFrom grDevices colorRamp
-#' @importFrom jpeg readJPEG
-#' @importFrom MASS lda ginv kde2d cov.trob
-#' @importFrom utils stack browseURL combn ls.str modifyList methods
-#' packageVersion read.table
-#' txtProgressBar write.table
-#' @importFrom grDevices chull colors rgb colorRampPalette
-#' @importFrom graphics abline arrows axis barplot box
+# #' @importFrom geometry delaunayn convhulln
+# #' @importFrom geomorph gpagen
+# #' @importFrom grDevices colorRamp
+# #' @importFrom jpeg readJPEG
+# #' @importFrom MASS lda ginv kde2d cov.trob
+# only stack should remain todo when stack.Coo will be removed definitely
+# #' @importFrom utils stack browseURL combn ls.str modifyList methods
+# #' packageVersion read.table
+# #' txtProgressBar write.table
+#' @importFrom utils stack
+# #' @importFrom grDevices chull colors rgb colorRampPalette
+#' @importFrom graphics abline arrows axis barplot box boxplot
 #' contour hist image layout legend lines locator
-#' par points polygon rasterImage rect rug
+#' par plot points polygon rasterImage rect rug
 #' segments strheight strwidth text title
-#' @importFrom RColorBrewer brewer.pal brewer.pal.info
-#' @importFrom rgeos gIntersection
+# #' @importFrom RColorBrewer brewer.pal brewer.pal.info
+# #' @importFrom rgeos gIntersection
 #' @importFrom stats cor cov cov.wt df dist dnorm fft
 #' hclust kmeans lm manova median na.omit
 #' poly prcomp predict qf qnorm rnorm
@@ -68,9 +70,9 @@ NULL
 
 
 ##### We include magrittr pipes when loading Momocs
-
+#' @importFrom magrittr %>%
 #' @export
-dplyr::`%>%`
+magrittr::`%>%`
 
 #' @importFrom magrittr %<>%
 #' @export
@@ -88,7 +90,7 @@ magrittr::`%T>%`
 # prevents "no visible binding for global variable"
 # http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
-                  "x_c", "x_d", "y_c", "y_d", ".id",
+                  "x_c", "x_d", "y_c", "y_d", ".id", "id", "count",
                   "node", "label", "angle", "hjust", "Freq",
                   "locus", "name", ".", "actual", "classified"))
 

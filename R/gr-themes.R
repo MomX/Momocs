@@ -1,6 +1,6 @@
 
 theme_empty <- function (base_size = 12, base_family = "", ...){
-  modifyList(theme_light(
+  utils::modifyList(theme_light(
     base_size = base_size,
     base_family = base_family),
     list (

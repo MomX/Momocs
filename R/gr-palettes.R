@@ -45,12 +45,12 @@ pal_alpha <- function(cols, transp = 0) {
 #' @rdname palettes
 #' @export
 pal_manual <- function(cols, transp=0){
-  ramp <- colorRamp(cols)
+  ramp <- grDevices::colorRamp(cols)
   function(n) {
     x <- ramp(seq.int(0, 1, length.out = n))
     if (ncol(x) == 4L)
-      rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
-    else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
+      grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
+    else grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
   }
 }
 
@@ -64,12 +64,12 @@ pal_manual <- function(cols, transp=0){
 .pal_brewer <- function(n, name){
   # RColorBrewer always want at least 3 levels
   if (n<3){
-    return(colorRampPalette(RColorBrewer::brewer.pal(3, name)[1:2])(n))
+    return(grDevices::colorRampPalette(RColorBrewer::brewer.pal(3, name)[1:2])(n))
   }
   # But no more than a given value given in brewer.pal.info
   mc <- RColorBrewer::brewer.pal.info[name, "maxcolors"]
   if (n>mc){
-    return(colorRampPalette(RColorBrewer::brewer.pal(mc, name))(n))
+    return(grDevices::colorRampPalette(RColorBrewer::brewer.pal(mc, name))(n))
   } else {
     # If between 3 and max allowed, simply brewer.pal
     return(RColorBrewer::brewer.pal(n, name))
@@ -79,7 +79,7 @@ pal_manual <- function(cols, transp=0){
 #' @rdname palettes
 #' @export
 pal_qual_solarized <- function(n, transp=0){
-  colorRampPalette(c("#dc322f",
+  grDevices::colorRampPalette(c("#dc322f",
 "#d33682",
 "#6c71c4",
 "#268bd2",
@@ -91,7 +91,7 @@ pal_qual_solarized <- function(n, transp=0){
 #' @rdname palettes
 #' @export
 pal_seq_grey <- function(n, transp=0){
-  colorRampPalette(c("#E5E5E5",
+  grDevices::colorRampPalette(c("#E5E5E5",
                      "#1A1A1A"))(n) %>%
     pal_alpha(transp)
 }
@@ -303,7 +303,7 @@ pal_seq_YlOrRd <- function(n, transp=0){
 # ramps created with:
 
 # vir <- viridisLite::viridis.map
-# vir[vir$opt=="A", 1:3] %>% rgb %>%
+# vir[vir$opt=="A", 1:3] %>% grDevices::rgb %>%
 #   paste0("'", ., "', ") %>% cat(fill=T)
 #A=magma, B=inferno, C=plasma, D=viridis
 
@@ -529,12 +529,12 @@ pal_seq_YlOrRd <- function(n, transp=0){
 #' @rdname palettes
 #' @export
 pal_seq_magma <- function(n, transp=0){
-  ramp <- colorRamp(.magma)
+  ramp <- grDevices::colorRamp(.magma)
   f <- function(n, transp=0) {
     x <- ramp(seq.int(0, 1, length.out = n))
     if (ncol(x) == 4L)
-      rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
-    else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
+      grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
+    else grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
   }
   f(n, transp)
 }
@@ -542,12 +542,12 @@ pal_seq_magma <- function(n, transp=0){
 #' @rdname palettes
 #' @export
 pal_seq_inferno <- function(n, transp=0){
-  ramp <- colorRamp(.inferno)
+  ramp <- grDevices::colorRamp(.inferno)
   f <- function(n, transp=0) {
     x <- ramp(seq.int(0, 1, length.out = n))
     if (ncol(x) == 4L)
-      rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
-    else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
+      grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
+    else grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
   }
   f(n, transp)
 }
@@ -555,12 +555,12 @@ pal_seq_inferno <- function(n, transp=0){
 #' @rdname palettes
 #' @export
 pal_seq_plasma <- function(n, transp=0){
-  ramp <- colorRamp(.plasma)
+  ramp <- grDevices::colorRamp(.plasma)
   f <- function(n, transp=0) {
     x <- ramp(seq.int(0, 1, length.out = n))
     if (ncol(x) == 4L)
-      rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
-    else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
+      grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
+    else grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
   }
   f(n, transp)
 }
@@ -568,12 +568,12 @@ pal_seq_plasma <- function(n, transp=0){
 #' @rdname palettes
 #' @export
 pal_seq_viridis <- function(n, transp=0){
-  ramp <- colorRamp(.viridis)
+  ramp <- grDevices::colorRamp(.viridis)
   f <- function(n, transp) {
     x <- ramp(seq.int(0, 1, length.out = n))
     if (ncol(x) == 4L)
-      rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
-    else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
+      grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255) %>% pal_alpha(transp)
+    else grDevices::rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255) %>% pal_alpha(transp)
   }
   f(n, transp)
 }

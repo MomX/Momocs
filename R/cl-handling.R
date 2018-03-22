@@ -1051,7 +1051,7 @@ rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){
   # multiple magnification case
   # if a path is provided we read it
   if (is.character(scale_mapping))
-    scale_mapping <- read.table(scale_mapping, header=TRUE, ...)
+    scale_mapping <- utils::read.table(scale_mapping, header=TRUE, ...)
   # we prepare the two cols and match
   mag_orig <- x$fac[, magnification_col] %>% as.numeric()
   mag_rule <- scale_mapping[, 1] %>% as.character %>% as.numeric()

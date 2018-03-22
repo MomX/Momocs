@@ -159,7 +159,7 @@ coo_truss <- function(x){
 #' @export
 coo_truss.default <- function(x){
   res <- as.numeric(dist(x))
-  names(res) <- apply(combn(1:nrow(x), 2), 2, paste, collapse="-")
+  names(res) <- apply(utils::combn(1:nrow(x), 2), 2, paste, collapse="-")
   return(res)
 }
 

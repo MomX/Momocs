@@ -24,14 +24,14 @@
 andnow <- function(x){
   for (i in class(x)){
     cat("* '", i, "' class:\n", sep="")
-    cat(paste0("  - ", methods(class=i), "\n"), sep="")
+    cat(paste0("  - ", utils::methods(class=i), "\n"), sep="")
   }
 }
 
 #' @rdname andnow
 #' @export
 andnow_method <- function(x) {
-  m <- try(suppressWarnings(methods(x)), silent=TRUE)
+  m <- try(suppressWarnings(utils::methods(x)), silent=TRUE)
   if (!("try-error" %in% class(m)) && length(m)!=0)
     cat(paste0("  - ", m, "\n"), sep="")
   else
@@ -98,13 +98,13 @@ Momocs_currentCRANversion <- function(){
 Momocs_help <- function(topic=NULL){
   url <- "http://momx.github.io/Momocs/reference/"
   if (!is.null(topic)) url <- paste0(url, topic, ".html")
-  browseURL(url)
+  utils::browseURL(url)
 }
 
 #' @rdname Momocs_version
 #' @name Momocs_version
 #' @export
 Momocs_installedversion <- function() {
-  packageVersion("Momocs")
+  utils::packageVersion("Momocs")
 }
 

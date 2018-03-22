@@ -361,7 +361,7 @@ classification_metrics.LDA <- function(x){
 # #' #   probs_fac <- cbind(pred$posterior, select(P1_all$fac, Site, Period)) %>%
 # #' #     group_by(Site, Period) %>%
 # #' #     summarise_each(funs(mean))
-# #' #   probs_fac <- bind_cols(select(probs_fac, 1:2), round(select(probs_fac, 3)))
+# #' #   probs_fac <- dplyr::bind_cols(dplyr::select(probs_fac, 1:2), round(select(probs_fac, 3)))
 # #'   probs_fac <- NULL
 # #'
 # #'   return(list(N_ref=nrow(L0$x),

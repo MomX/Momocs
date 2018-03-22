@@ -197,12 +197,12 @@ print.Coo <- function(x, n=6, ...) {
 #' @export
 str.Coo <- function(object, ...) {
     Coo <- object
-    ls.str(Coo)
+    utils::ls.str(Coo)
 }
 #' @export
 str.Coe <- function(object, ...) {
     Coe <- object
-    ls.str(Coe)
+    utils::ls.str(Coe)
 }
 
 # getters ---------------

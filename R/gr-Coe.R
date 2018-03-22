@@ -26,9 +26,9 @@ boxplot.OutCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
   df <- as_df(x)
   # we retrive coefficient rank and names, and we filter
   df <- df %>%
-    mutate_(coeN = "substr(coefficient, 1, 1)",
+    dplyr::mutate_(coeN = "substr(coefficient, 1, 1)",
            coeR = "as.numeric(substr(coefficient, 2, 2))")
-  df <- filter_(df, ~ coeR > drop, ~ coeR <= retain)
+  df <- dplyr::filter_(df, ~ coeR > drop, ~ coeR <= retain)
   # we ggplot
   gg <- ggplot(df, aes_string(x="factor(coeR)", y="value", fill="factor(coeN)")) +
     geom_boxplot(outlier.size = 1) +
@@ -86,7 +86,7 @@ hist.OutCoe <- function(x, retain=4, drop=0, bw=20, ...){
   df <- df %>%
     mutate(coeN = substr(df$coefficient, 1, 1),
            coeR = as.numeric(substr(df$coefficient, 2, 2)))
-  df <- filter_(df, ~ coeR > drop, ~ coeR <= retain)
+  df <- dplyr::filter_(df, ~ coeR > drop, ~ coeR <= retain)
   # we ggplot
   gg <- ggplot(df, aes_string(x="value")) +
     geom_histogram(binwidth=diff(range(df$value))/bw) +

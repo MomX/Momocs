@@ -259,9 +259,9 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 # #' @export
 # stack2 <- function(Coo){
 #   df <- as_df(Coo)
-#   gg <- ggplot(df, aes_string(x="x", y="y", group="id")) +
-#     geom_path() +
-#     coord_equal()
+#   gg <- ggplot2::ggplot(df, aes_string(x="x", y="y", group="id")) +
+#     ggplot2::geom_path() +
+#     ggplot2::coord_equal()
 #   gg
 # }
 

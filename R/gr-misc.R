@@ -43,7 +43,7 @@
 #' @name color_palettes
 #' @rdname color_palettes
 #' @export
-col_summer <- colorRampPalette(c(
+col_summer <- grDevices::colorRampPalette(c(
   "#4876FF",
   "#FFFF00",
   "#FF3030"
@@ -51,7 +51,7 @@ col_summer <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_summer2 <- colorRampPalette(c(
+col_summer2 <- grDevices::colorRampPalette(c(
   "#781C81",
   "#413B93",
   "#4065B1",
@@ -68,7 +68,7 @@ col_summer2 <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_spring <- colorRampPalette(c(
+col_spring <- grDevices::colorRampPalette(c(
   "#a3baff",
   "#ffff7f",
   "#ff9797"
@@ -76,7 +76,7 @@ col_spring <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_autumn <- colorRampPalette(c(
+col_autumn <- grDevices::colorRampPalette(c(
   "#3353b3",
   "#b1b100",
   "#b32222"
@@ -84,7 +84,7 @@ col_autumn <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_black <- colorRampPalette(c(
+col_black <- grDevices::colorRampPalette(c(
   "#000000",
   "#000000"
 ))
@@ -92,7 +92,7 @@ col_black <- colorRampPalette(c(
 ### solarized
 #' @rdname color_palettes
 #' @export
-col_solarized <- colorRampPalette(c(
+col_solarized <- grDevices::colorRampPalette(c(
   "#dc322f",
   "#d33682",
   "#6c71c4",
@@ -104,7 +104,7 @@ col_solarized <- colorRampPalette(c(
 ### colorspace
 #' @rdname color_palettes
 #' @export
-col_gallus <- colorRampPalette(c(
+col_gallus <- grDevices::colorRampPalette(c(
   "#d7191c",
   "#fdae61",
   "#ffffbf",
@@ -114,7 +114,7 @@ col_gallus <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_qual <- colorRampPalette(c(
+col_qual <- grDevices::colorRampPalette(c(
   "#a6cee3",
   "#1f78b4",
   "#b2df8a",
@@ -128,7 +128,7 @@ col_qual <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_heat <- colorRampPalette(c(
+col_heat <- grDevices::colorRampPalette(c(
   "#ffffb2",
   "#fecc5c",
   "#fd8d3c",
@@ -138,7 +138,7 @@ col_heat <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_hot <- colorRampPalette(c(
+col_hot <- grDevices::colorRampPalette(c(
   "#fee5d9",
   "#fcae91",
   "#fb6a4a",
@@ -147,7 +147,7 @@ col_hot <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_cold <- colorRampPalette(c(
+col_cold <- grDevices::colorRampPalette(c(
   "#f2f0f7",
   "#cbc9e2",
   "#9e9ac8",
@@ -157,27 +157,27 @@ col_cold <- colorRampPalette(c(
 
 #' @rdname color_palettes
 #' @export
-col_sari <- colorRampPalette(c(
+col_sari <- grDevices::colorRampPalette(c(
   "#551A8B",
   "#47A23E",
   "#FF7F00"
 ))
 #' @rdname color_palettes
 #' @export
-col_india <- colorRampPalette(c(
+col_india <- grDevices::colorRampPalette(c(
   "#FF9933",
   "#FFFFFF",
   "#138808"
 ))
 #' @rdname color_palettes
 #' @export
-col_bw <- colorRampPalette(c(
+col_bw <- grDevices::colorRampPalette(c(
   "#000000",
   "#FFFFFF"
 ))
 #' @rdname color_palettes
 #' @export
-col_grey <- colorRampPalette(c(
+col_grey <- grDevices::colorRampPalette(c(
   "#B3B3B3",
   "#4D4D4D"
 ))

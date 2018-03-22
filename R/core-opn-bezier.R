@@ -39,10 +39,10 @@ bezier <- function(coo, n) {
                 t1[i]^(p - j))
         }
     }
-    B <- ginv(t(J[, 1:n]) %*% J[, 1:n]) %*% (t(J[, 1:n])) %*%
+    B <- MASS::ginv(t(J[, 1:n]) %*% J[, 1:n]) %*% (t(J[, 1:n])) %*%
         coo
     coo <- J[, 1:n] %*% B
-    B <- ginv(t(J[, 1:n]) %*% J[, 1:n]) %*% (t(J[, 1:n])) %*%
+    B <- MASS::ginv(t(J[, 1:n]) %*% J[, 1:n]) %*% (t(J[, 1:n])) %*%
         coo
     list(J = J, B = B)
 }

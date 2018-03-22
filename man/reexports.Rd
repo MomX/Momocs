@@ -17,8 +17,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dplyr}{\code{\link[dplyr]{\%>\%}}}
-
-  \item{magrittr}{\code{\link[magrittr]{\%<>\%}}, \code{\link[magrittr]{\%$\%}}, \code{\link[magrittr]{\%T>\%}}}
+  \item{magrittr}{\code{\link[magrittr]{\%>\%}}, \code{\link[magrittr]{\%<>\%}}, \code{\link[magrittr]{\%$\%}}, \code{\link[magrittr]{\%T>\%}}}
 }}
 
