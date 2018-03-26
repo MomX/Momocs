@@ -868,9 +868,9 @@ chc2pix <- function(chc) {
 #'
 # #' @export
 # bind_db.Coo <- function(x, fac_col="id", db, db_col="id", ...){
-#   # checks a bit on x if its a Coo (waiting for validate.Coe todo)
+#   # checks a bit on x if its a Coo (waiting for verify.Coe todo)
 #   if (is_Coo(x))
-#     x <- validate(x)
+#     x <- verify(x)
 #   .check(!missing(db),
 #          "db must be provided")
 #   # if db is provided as a path

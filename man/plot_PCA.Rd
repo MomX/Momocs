@@ -6,8 +6,9 @@
 \usage{
 plot_PCA(x, f, axes = c(1, 2), palette = pal_qual, points = TRUE,
   points_transp = 1/4, morphospace = TRUE, morphospace_position = "range",
-  chull = TRUE, chullfilled = FALSE, center_origin = TRUE, zoom = 0.9,
-  eigen = TRUE, box = TRUE, axesnames = TRUE, axesvar = TRUE)
+  chull = TRUE, chullfilled = FALSE, labelgroups = FALSE, legend = TRUE,
+  center_origin = TRUE, zoom = 0.9, eigen = TRUE, box = TRUE,
+  axesnames = TRUE, axesvar = TRUE)
 }
 \arguments{
 \item{x}{\code{PCA} object}
@@ -31,6 +32,10 @@ or a factor can directly be passed. Accept \code{numeric} as well.}
 \item{chull}{\code{logical} whether to draw this with \link{layer_chull}}
 
 \item{chullfilled}{\code{logical} whether to draw this with \link{layer_chullfilled}}
+
+\item{labelgroups}{\code{logical} whether to draw this with \link{layer_labelgroups}}
+
+\item{legend}{\code{logical} whether to draw this with \link{layer_legend}}
 
 \item{center_origin}{\code{logical} whether to center origin}
 

@@ -67,8 +67,8 @@ sfourier.default <- function(x, nb.h){
 #' @export
 sfourier.Out <- function(x, nb.h){
   Out <- x
-  # validates
-  Out %<>% validate()
+  # verify
+  Out %<>% verify()
   q <- floor(min(sapply(Out$coo, nrow)/2))
   if (missing(nb.h)) {
     # nb.h <- ifelse(q >= 32, 32, q)

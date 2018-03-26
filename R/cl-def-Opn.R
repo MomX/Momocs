@@ -77,7 +77,7 @@ Opn.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 # # The print method for Out objects
 # #' @export
 # print.Opn <- function(x, ...) {
-#   Opn <- validate(x)
+#   Opn <- verify(x)
 #   coo_nb <- length(Opn)
 #   if (coo_nb==0){
 #     cat("An empty Opn object")

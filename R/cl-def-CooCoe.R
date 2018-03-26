@@ -158,7 +158,7 @@ Coe <- function(...) {
 # The print method for Out objects
 #' @export
 print.Coo <- function(x, n=6, ...) {
-  x <- validate(x)
+  x <- verify(x)
   coo_nb <- length(x)
   if (coo_nb==0){
     cat("empty", class(x)[1])

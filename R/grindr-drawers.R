@@ -76,7 +76,7 @@ draw_polygon <- function(coo, f, col=par("fg"), fill=NA,  lwd=1, lty=1, transp=0
 
   # dispatch drawer argument
   if (missing(fill))
-    fills <- this_dispatcher(f, pal_alpha(par("bg"), 1))
+    fills <- this_dispatcher(f, par("bg")) %>% pal_alpha(transp)
   else
     fills <- this_dispatcher(f, fill) %>% pal_alpha(transp)
 

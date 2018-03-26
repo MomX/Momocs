@@ -75,8 +75,8 @@ opoly.Opn <- function(x,
                                  nb.pts = 120,
                                  ...) {
   Opn <- x
-  # validates
-  Opn %<>% validate()
+  # verify
+  Opn %<>% verify()
   # we check a bit
   min.pts <- min(sapply(Opn$coo, nrow))
   if (nb.pts > min.pts) {
@@ -190,8 +190,8 @@ npoly.Opn <- function(x,
                       baseline2 = c(0.5, 0),
                       nb.pts = 120, ...) {
   Opn <- x
-  # validates
-  Opn %<>% validate()
+  # verify
+  Opn %<>% verify()
   # we check a bit
   min.pts <- min(sapply(Opn$coo, nrow))
   if (nb.pts > min.pts) {

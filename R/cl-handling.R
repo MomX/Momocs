@@ -72,26 +72,26 @@ fac_dispatcher <- function(x, fac){
 
 
 # subsetize -------------------------------
-# #' Subsetize various Momocs objects
-# #'
-# #'
-# #' Subsetize is a wrapper around dplyr's verbs and should NOT be used directly.
-# #'
-# #' @rdname subset
-# #' @param x a \code{Coo} or a \link{Coe} object.
-# #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
-# #' @param ... useless here but maintains consistence with the generic subset.
-# #' @family handling functions
-# #' @examples
-# #' # Do not use subset directly
-# #' @rdname subset
-# #' @export
+#' Subsetize various Momocs objects
+#'
+#'
+#' Subsetize is a wrapper around dplyr's verbs and should NOT be used directly.
+#'
+#' @rdname subset
+#' @param x a \code{Coo} or a \link{Coe} object.
+#' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
+#' @param ... useless here but maintains consistence with the generic subset.
+#' @family handling functions
+#' @examples
+#' # Do not use subset directly
+#' @rdname subset
+#' @export
 subsetize <- function(x, subset, ...){
   UseMethod("subsetize")
 }
 
-# #' @rdname subset
-# #' @export
+#' @rdname subset
+#' @export
 subsetize.Coo <- function(x, subset, ...) {
   Coo <- x
   e <- substitute(subset)
@@ -115,8 +115,8 @@ subsetize.Coo <- function(x, subset, ...) {
   return(Coo2)
 }
 
-# #' @rdname subset
-# #' @export
+#' @rdname subset
+#' @export
 subsetize.Coe <- function(x, subset, ...) {
   Coe <- x
   e <- substitute(subset)
@@ -137,8 +137,8 @@ subsetize.Coe <- function(x, subset, ...) {
   return(Coe2)
 }
 
-# #' @rdname subset
-# #' @export
+#' @rdname subset
+#' @export
 subsetize.PCA <- function(x, subset, ...){
   PCA <- x
   e <- substitute(subset)
@@ -194,7 +194,7 @@ select.default <- function(.data, ...){
 
 #' @export
 select.Coo <- function(.data, ...){
-  #.data %<>% validate()
+  #.data %<>% verify()
   .data$fac <- select(.data$fac, ...)
   .data$fac %<>% data.frame()
   .data
@@ -230,7 +230,7 @@ mutate.default <- function(.data, ...){
 
 #' @export
 mutate.Coo <- function(.data, ...){
-  #.data %<>% validate()
+  #.data %<>% verify()
   .data$fac <- mutate(.data$fac, ...)
   .data$fac %<>% dplyr::as_data_frame()
   .data
@@ -273,7 +273,7 @@ filter.default <- function(.data, ...){
 
 #' @export
 filter.Coo <- function(.data, ...){
-  #.data %<>% validate()
+  #.data %<>% verify()
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- filter(df, ...)
@@ -317,7 +317,7 @@ arrange.default <- function(.data, ...){
 
 #' @export
 arrange.Coo <- function(.data, ...){
-  #.data %<>% validate()
+  #.data %<>% verify()
   df <- .data$fac
   df <- mutate(df, .id=1:nrow(df))
   df <- arrange(df, ...)
@@ -361,7 +361,7 @@ slice.default <- function(.data, ...){
 
 #' @export
 slice.Coo <- function(.data, ...){
-  #.data %<>% validate()
+  #.data %<>% verify()
   .data %<>% subsetize(...)
   # .data$fac %<>% .refactor()
   .data
@@ -416,7 +416,7 @@ sample_n.default <- function(tbl, size, replace=FALSE, ...){
 sample_n.Coo <- function(tbl, size, replace = FALSE, fac=NULL, ...){
   Coo <- tbl
   if (size==0) return(slice(Coo, 0))
-  #Coo %<>% validate()
+  #Coo %<>% verify()
   if (missing(fac)) {
     fac <- NULL
     N <- length(Coo)
@@ -484,7 +484,7 @@ sample_frac.Coo <- function(tbl, size=1, replace = FALSE, fac=NULL, ...){
     stop("size must be >0 and <= 1")
   Coo <- tbl
   if (size==0) return(slice(Coo, 0))
-  #Coo %<>% validate()
+  #Coo %<>% verify()
   if (missing(fac)) {
     fac <- NULL
     N <- length(Coo)
@@ -545,7 +545,7 @@ chop.default <- function(.data, fac){
 #' @export
 chop.Coo <- function(.data, fac){
   Coo <- .data
-  #Coo %<>% validate()
+  #Coo %<>% verify()
   # hideous but works
   # e <- substitute(fac)
   # f <- eval(e, Coo$fac, parent.frame())
@@ -647,7 +647,7 @@ combine.Out <- function(...) {
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
-  #Out %<>% validate()
+  #Out %<>% verify()
   return(Out)
 }
 
@@ -663,7 +663,7 @@ combine.Opn <- function(...) {
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Opn$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
-  #Opn %<>% validate()
+  #Opn %<>% verify()
   return(Opn)
 }
 
@@ -680,7 +680,7 @@ combine.Ldk <- function(...) {
   }
   cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   Ldk$cuts <- cutS
-  #Ldk %<>% validate()
+  #Ldk %<>% verify()
   return(Ldk)
 }
 

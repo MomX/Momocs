@@ -98,7 +98,7 @@ reference:
   - sample_frac
   - sample_n
   - slice
-  - validate
+  - verify
 
 - title: Import/Export
   desc: Will be all moved to [Momit](http://www.github.com/MomX/Momit) soon

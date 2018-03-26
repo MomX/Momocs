@@ -4,31 +4,31 @@
 #' \link{Coo} objects, \link{Out}, \link{Opn} and \link{Ldk} objects.
 #'
 #' Implemented before all morphometric methods and handling verbs.
-#' To see what is checked, try eg \code{Momocs:::validate.Coo}
+#' To see what is checked, try eg \code{Momocs:::verify.Coo}
 #' @param Coo any Coo object
 #' @return a Coo object.
 #' @examples
 #' \dontrun{
-#' validate(bot)
+#' verify(bot)
 #' bot[12] <- NA
-#' validate(bot)
+#' verify(bot)
 #'
-#' validate(hearts)
+#' verify(hearts)
 #' hearts$ldk[[4]] <- c(1, 2)
-#' validate(hearts)
+#' verify(hearts)
 #' }
 #' @export
-validate <- function(Coo){
-  UseMethod("validate")
+verify <- function(Coo){
+  UseMethod("verify")
 }
 
 #' @export
-validate.default <- function(Coo){
+verify.default <- function(Coo){
   stop("only implemented on Coo")
 }
 
 #' @export
-validate.Coo <- function(Coo){
+verify.Coo <- function(Coo){
   # checks coo
   Coo <- coo_check(Coo)
   n <- length(Coo$coo)

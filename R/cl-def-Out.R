@@ -107,7 +107,7 @@ Out.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 # # The print method for Out objects
 # #' @export
 # print.Out <- function(x, ...) {
-#   Out <- validate(x)
+#   Out <- verify(x)
 #   coo_nb <- length(Out)
 #   if (coo_nb==0){
 #     cat("An empty Out object")

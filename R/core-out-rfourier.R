@@ -96,8 +96,8 @@ rfourier.default <- function(x, nb.h, smooth.it = 0, norm = FALSE, ...) {
 #' @export
 rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, ...) {
   Out <- x
-  # validates
-  Out %<>% validate()
+  # verify
+  Out %<>% verify()
   # tests if we actually have equally spaced radii
   esr <- Out %>% is_equallyspacedradii(thres=thres)
   if (any(is.na(esr)))

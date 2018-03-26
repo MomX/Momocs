@@ -91,11 +91,11 @@ test_that("filter works fine",{
 # slice
 
 test_that("slice works fine",{
-  expect_true(x %>% slice(0) %>% validate %>% is_Out())
-  expect_true(x %>% slice(1) %>% validate %>% is_Out())
-  expect_true(x %>% slice(-1) %>% validate %>% is_Out())
-  expect_true(x %>% slice(1:5) %>% validate %>% is_Out())
-  expect_true(x %>% slice(-(1:5)) %>% validate %>% is_Out())
+  expect_true(x %>% slice(0) %>% verify %>% is_Out())
+  expect_true(x %>% slice(1) %>% verify %>% is_Out())
+  expect_true(x %>% slice(-1) %>% verify %>% is_Out())
+  expect_true(x %>% slice(1:5) %>% verify %>% is_Out())
+  expect_true(x %>% slice(-(1:5)) %>% verify %>% is_Out())
   expect_true(x %>% slice(sample(c(TRUE, FALSE), length(.), rep=T)) %>% is_Out())
 })
 

@@ -79,7 +79,7 @@ Ldk.Coo <- function(coo, links = NULL, slidings = NULL, fac = coo$fac) {
 # # The print method for Ldk objects
 # #' @export
 # print.Ldk <- function(x, ...) {
-#   Ldk <- validate(x)
+#   Ldk <- verify(x)
 #   coo_nb <- length(Ldk)
 #   if (coo_nb==0){
 #     cat("An empty Ldk object")

@@ -37,5 +37,6 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{mutate}}, \code{\link{rescale}},
   \code{\link{rm_harm}}, \code{\link{rm_uncomplete}},
   \code{\link{sample_frac}}, \code{\link{sample_n}},
-  \code{\link{select}}, \code{\link{slice}}
+  \code{\link{select}}, \code{\link{slice}},
+  \code{\link{subsetize}}
 }

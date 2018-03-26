@@ -62,6 +62,9 @@
 #' @param morphospace_position to feed [layer_morphospace] (default: "range")
 #' @param chull `logical` whether to draw this with [layer_chull]
 #' @param chullfilled `logical` whether to draw this with [layer_chullfilled]
+#' @param labelgroups `logical` whether to draw this with [layer_labelgroups]
+#' @param legend `logical` whether to draw this with [layer_legend]
+#' @param title `character` if specified, fee [layer_title] (default to `""`)
 #' @param center_origin `logical` whether to center origin
 #' @param zoom `numeric` zoom level for the frame (default: 0.9)
 #' @param eigen `logical` whether to draw this using [layer_eigen]
@@ -88,7 +91,7 @@
 #' combine %>% PCA
 #' op$fac$s %<>% as.character() %>% as.numeric()
 #'
-#' op %>% plot_PCA
+#' op %>% plot_PCA(title="hi there!")
 #'
 #' ### Now we can play with layers
 #' # and for instance build a custom plot
@@ -117,18 +120,26 @@ plot_PCA <- function(x, f, axes=c(1, 2),
          # morphospace
          morphospace=TRUE,
          morphospace_position="range",
+         # chulls
          chull=TRUE,
          chullfilled=FALSE,
+         # legends
+         labelgroups=FALSE,
+         legend=TRUE,
+         # cosmetics (mainly)
+         title="",
          center_origin=TRUE, zoom=0.9,
          eigen=TRUE,
          box=TRUE,
          axesnames=TRUE, axesvar=TRUE){
 
   # prepare ---------------------------
-  if (missing(f))
+  if (missing(f)){
     x %<>% .layerize_PCA(axes=axes, palette=palette)
-  else
+    labelgroups <- legend <- FALSE
+  } else {
     x %<>% .layerize_PCA(f, axes=axes, palette=palette)
+  }
 
   # frame
   x %<>%
@@ -150,7 +161,7 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 
   # morphospace -----------------------
   if (morphospace)
-    x %<>% layer_morphospace()
+    x %<>% layer_morphospace(position = morphospace_position)
 
   # data ------------------------------
   if (points)
@@ -162,6 +173,16 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 
   if (chullfilled)
     x %<>% layer_chullfilled()
+
+  # legends
+  if (legend)
+    x %<>% layer_legend()
+
+  if (labelgroups)
+    x %<>% layer_labelgroups()
+
+  if (title != "")
+    x %<>% layer_title(title)
 
   # propagate
   invisible(x)
@@ -590,7 +611,7 @@ layer_chullfilled <- function(x, alpha=0.8, ...){
       # with less than 3 points in a group,
       # coo_chull would fail
       coo %>% coo_chull() %>% coo_close %>%
-        draw_polygon(fill=NA, col=pal_alpha(x$colors_groups[i], alpha), ...)
+        draw_polygon(fill=x$colors_groups[i], col=x$colors_groups[i], transp = alpha, ...)
     }
   }
   # propagate
@@ -898,7 +919,7 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
   old <- par(mar=rep(0, 4), xpd=NA)
   on.exit(par(old))
   # default dimensions
-  range_padding = 1/60
+  range_padding = 1/30
   range_width   = 1/60
   range_height  = 1/8
   # window dimensions
@@ -921,7 +942,7 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
     # scale position
     s_y0 <- u[4] - w[2]*(range_padding+range_height)
     s_y1 <- u[4] - w[2]*range_padding
-    s_x0 <- u[2] - w[1]*(range_padding+range_width) - wid_leg
+    s_x0 <- u[2] - w[1]*(range_padding+range_width) - wid_leg*1.5
     s_x1 <- u[2] - w[1]*range_padding - wid_leg
     # scale_bars positions
     s_ys <- seq(s_y0, s_y1, length.out = 100)

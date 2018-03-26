@@ -189,7 +189,7 @@ fgProcrustes.default <- function(x, tol = 1e-05,  coo=NULL) {
 
 #' @export
 fgProcrustes.Out <- function(x, tol = 1e-10, coo=FALSE) {
-  Coo <- validate(x)
+  Coo <- verify(x)
   # if no $ldk defined, we convert Out into a Ldk and then
   # perform the fgProcrustes and return back an Out object.
   if (coo | (length(Coo$ldk) == 0)) {
@@ -302,7 +302,7 @@ fgsProcrustes.default <- function(x){
 
 #' @export
 fgsProcrustes.Ldk <- function(x){
-  x2 <- x <- validate(x)
+  x2 <- x <- verify(x)
   .check(is_slidings(x),
         "no slidings defined")
   g <- geomorph::gpagen(A=l2a(x$coo),

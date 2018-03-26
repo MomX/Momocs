@@ -1,4 +1,9 @@
-# Momocs 1.2.5
+# Momocs 1.2.9.1
+* `morphospace_position` and `chullfilled` in `plot_PCA` now properly working
+* `verify` replaces `validate` to avoid conflict with `shiny::validate` (for Momecs)
+* `subsetize` now exported (again)
+
+# Momocs 1.2.9
 ### Preamble
 * Started a general review of Momocs (including #184) to prepare for MomX. For my convenience, all changes will stack on 1.2.5 on GitHub but will appear, in the end, as 1.9.0 on CRAN to both reflect proximity with 2.0 and the huge quantity if changes since 1.2
 * Moved everything to `github.com/MomX/Momocs`
