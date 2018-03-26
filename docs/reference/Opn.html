@@ -158,7 +158,7 @@ specifying the grouping structure</p></td>
 #&gt; 5 Aglan cult  VD    O12  
 #&gt; 6 Aglan cult  VL    O12  
 #&gt; # ... with 204 more rows
-#&gt;   - also: $ldk</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>olea</span>)</div><div class='img'><img src='Opn-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># orthogonal polynomials</span>
+#&gt;   - also: $ldk</div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>olea</span>)</div><div class='img'><img src='Opn-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># orthogonal polynomials</span>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>, <span class='kw'>degree</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='input'><span class='co'># we print the Coe</span>
 <span class='no'>op</span></div><div class='output co'>#&gt; An OpnCoe object [ opoly analysis ]
 #&gt; --------------------
@@ -175,7 +175,7 @@ specifying the grouping structure</p></td>
 #&gt; 6 Aglan cult  VL    O12  
 #&gt; # ... with 204 more rows</div><div class='input'><span class='co'># Let's do a PCA on it</span>
 <span class='no'>op.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>)
-<span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'domes'</span>)</div><div class='img'><img src='Opn-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'var'</span>)</div><div class='img'><img src='Opn-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># and now an LDA after a PCA</span>
+<span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'domes'</span>)</div><div class='img'><img src='Opn-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>op.p</span>, <span class='st'>'var'</span>)</div><div class='img'><img src='Opn-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># and now an LDA after a PCA</span>
 <span class='no'>olda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)</div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='co'># for CV table</span>
 <span class='no'>olda</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;         classified
@@ -189,7 +189,7 @@ specifying the grouping structure</p></td>
 #&gt;     Aglan     Cypre    MouBo1     PicMa 
 #&gt; 0.3500000 0.1333333 0.9000000 0.5833333 
 #&gt; 
-#&gt;  * Leave-one-out cross-validation ($CV.correct): (54.3% - 114/210): </div><div class='input'><span class='fu'>plot</span>(<span class='no'>olda</span>)</div><div class='img'><img src='Opn-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
+#&gt;  * Leave-one-out cross-validation ($CV.correct): (54.3% - 114/210): </div><div class='input'><span class='fu'>plot</span>(<span class='no'>olda</span>)</div><div class='img'><img src='Opn-8.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

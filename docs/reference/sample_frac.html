@@ -142,29 +142,30 @@
   <code><a href='mutate.html'>mutate</a></code>, <code><a href='rescale.html'>rescale</a></code>,
   <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
   <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_n.html'>sample_n</a></code>,
-  <code><a href='select.html'>select</a></code>, <code><a href='slice.html'>slice</a></code></p>
+  <code><a href='select.html'>select</a></code>, <code><a href='slice.html'>slice</a></code>,
+  <code><a href='subset.html'>subsetize</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># samples 50% of the bottles no matter their type</span>
 <span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 20 outlines, 164 +/- 21 coords (in $coo)
+#&gt;   - 20 outlines, 168 +/- 20 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 20 x 2
 #&gt;   type   fake 
 #&gt;   &lt;fct&gt;  &lt;fct&gt;
 #&gt; 1 beer   c    
-#&gt; 2 whisky a    
-#&gt; 3 whisky b    
-#&gt; 4 whisky a    
-#&gt; 5 whisky b    
-#&gt; 6 beer   d    
+#&gt; 2 beer   c    
+#&gt; 3 whisky a    
+#&gt; 4 whisky b    
+#&gt; 5 whisky a    
+#&gt; 6 whisky b    
 #&gt; # ... with 14 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># 80% bottles of beer and of whisky</span>
 <span class='fu'>table</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.8</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>)$<span class='no'>fac</span>)</div><div class='output co'>#&gt;         fake
 #&gt; type     a b c d
-#&gt;   beer   0 0 7 9
+#&gt;   beer   0 0 8 8
 #&gt;   whisky 8 8 0 0</div><div class='input'><span class='co'># bootstrap the same number of bootles of each type but with replacement</span>
 <span class='fu'>table</span>(<span class='fu'>names</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>1</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
 #&gt;          amrut    ballantines         brahma      bushmills          caney 
@@ -175,8 +176,8 @@
 #&gt;              2              1              2              1              2 
 #&gt;     kingfisher       latrappe lindemanskriek       magallan     makersmark 
 #&gt;              2              1              1              1              2 
-#&gt;           oban     pecheresse   sierranevada         yoichi 
-#&gt;              2              1              1              2 </div><div class='input'>
+#&gt;           oban     pecheresse   sierranevada     wildturkey         yoichi 
+#&gt;              2              1              1              1              1 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

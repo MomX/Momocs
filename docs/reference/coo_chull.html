@@ -163,7 +163,7 @@ remove them, until less than 3 points are left.</p>
     <pre class="examples"><div class='input'><span class='co'># coo_chull</span>
 <span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>hearts</span>[<span class='fl'>4</span>], <span class='fl'>32</span>)
 <span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>h</span>)</div><div class='input'><span class='no'>ch</span> <span class='kw'>&lt;-</span> <span class='fu'>coo_chull</span>(<span class='no'>h</span>)
-<span class='fu'>lines</span>(<span class='no'>ch</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>lty</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='img'><img src='coo_chull-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>lines</span>(<span class='no'>ch</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>lty</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='img'><img src='coo_chull-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_chull</span></div><div class='output co'>#&gt; $brahma
 #&gt;       [,1] [,2]
 #&gt;  [1,]  316  124
@@ -1482,7 +1482,7 @@ remove them, until less than 3 points are left.</p>
 <span class='fu'>plot</span>(<span class='no'>x</span>, ~<span class='no'>type</span>, <span class='kw'>eig</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='input'><span class='no'>peeling_the_whisky_onion</span> <span class='kw'>&lt;-</span> <span class='no'>all_whisky_points</span> <span class='kw'>%&gt;%</span> <span class='no'>as.matrix</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_chull_onion</span>()
 <span class='co'># you may need to par(xpd=NA) to ensure all segments</span>
 <span class='co'># even those outside the graphical window are drawn</span>
-<span class='no'>peeling_the_whisky_onion</span>$<span class='no'>coo</span> <span class='kw'>%&gt;%</span> <span class='fu'>lapply</span>(<span class='no'>coo_draw</span>)</div><div class='img'><img src='coo_chull-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; [[1]]
+<span class='no'>peeling_the_whisky_onion</span>$<span class='no'>coo</span> <span class='kw'>%&gt;%</span> <span class='fu'>lapply</span>(<span class='no'>coo_draw</span>)</div><div class='img'><img src='coo_chull-5.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; [[1]]
 #&gt; NULL
 #&gt; 
 #&gt; [[2]]
@@ -1493,7 +1493,7 @@ remove them, until less than 3 points are left.</p>
 #&gt; </div><div class='input'><span class='co'># simulated data</span>
 <span class='no'>xy</span> <span class='kw'>&lt;-</span> <span class='fu'>replicate</span>(<span class='fl'>2</span>, <span class='fu'>rnorm</span>(<span class='fl'>50</span>))
 <span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>xy</span>, <span class='kw'>poly</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='input'><span class='no'>xy</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_chull_onion</span>() <span class='kw'>%$%</span> <span class='no'>coo</span> <span class='kw'>%&gt;%</span>
-<span class='fu'>lapply</span>(<span class='no'>polygon</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"#00000022"</span>)</div><div class='img'><img src='coo_chull-3.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; [[1]]
+<span class='fu'>lapply</span>(<span class='no'>polygon</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"#00000022"</span>)</div><div class='img'><img src='coo_chull-6.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; [[1]]
 #&gt; NULL
 #&gt; 
 #&gt; [[2]]
