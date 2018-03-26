@@ -9,7 +9,8 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -79,7 +80,8 @@
 <!--README.md is generated from README.Rmd. Please edit that file -->
 <div id="momocs" class="section level2">
 <h2 class="hasAnchor">
-<a href="#momocs" class="anchor"></a>Momocs</h2>
+<a href="#momocs" class="anchor"></a>Momocs <img src="https://noto-website-2.storage.googleapis.com/emoji/emoji_u1f54a.png" width="30px">
+</h2>
 <p><em>Part of <a href="https://momx.github.io/MomX/">MomX</a></em></p>
 <!--Badges -->
 <p><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://travis-ci.org/MomX/Momocs"><img src="https://travis-ci.org/MomX/Momocs.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/MomX/Momocs?branch=master"><img src="https://img.shields.io/codecov/c/MomX/Momocs/master.svg" alt="Coverage Status"></a> <a href="http://cran.r-project.org/package=Momocs"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a> <img src="http://cranlogs.r-pkg.org/badges/Momocs" alt="CRAN downloads last month"><img src="http://cranlogs.r-pkg.org/badges/grand-total/Momocs" alt="CRAN downloads grand total"></p>
@@ -173,15 +175,21 @@ __Misc__
 <h3 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h3>
 <p>This is a basic example of a complete analysis doing: inspection, normalization of raw outlines, elliptical Fourier transforms, dimmensionality reduction and classification, using a single line.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Momocs)
-hearts <span class="op">%T&gt;%</span><span class="st">                    </span><span class="co"># a built in dataset</span>
-<span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># family picture on raw outlines</span>
-<span class="st">  </span><span class="kw"><a href="reference/fgProcrustes.html">fgProcrustes</a></span>() <span class="op">%T&gt;%</span><span class="st">          </span><span class="co"># full generalized Procrustes alignment</span>
-<span class="st">  </span><span class="kw"><a href="reference/coo_slide.html">coo_slide</a></span>(<span class="dt">ldk=</span><span class="dv">1</span>) <span class="op">%T&gt;%</span><span class="st">        </span><span class="co"># redefine an homologous 1st point</span>
-<span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># another family picture after fgProcrustes</span>
-<span class="st">  </span><span class="kw"><a href="reference/efourier.html">efourier</a></span>(<span class="dv">6</span>, <span class="dt">norm=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># elliptical Fourier transforms</span>
-<span class="st">  </span><span class="kw"><a href="reference/PCA.html">PCA</a></span>() <span class="op">%T&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># a PCA and a PC1:2 plot</span>
-<span class="st">  </span><span class="kw"><a href="reference/LDA.html">LDA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/plot_CV.html">plot_CV</a></span>()      <span class="co"># an LDA and confusion matrix</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Momocs)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/load_all">load_all</a></span>()
+<span class="co">#&gt; Loading Momocs</span>
+<span class="co">#&gt; This is Momocs 1.2.9.1</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+hearts <span class="op">%T&gt;%</span><span class="st">                    </span><span class="co"># A toy dataset</span>
+<span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># Take a family picture of raw outlines</span>
+<span class="st">  </span><span class="kw"><a href="reference/fgProcrustes.html">fgProcrustes</a></span>() <span class="op">%&gt;%</span><span class="st">          </span><span class="co"># Full generalized Procrustes alignment</span>
+<span class="st">  </span><span class="kw"><a href="reference/coo_slide.html">coo_slide</a></span>(<span class="dt">ldk =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span><span class="st">      </span><span class="co"># Redefine a robust 1st point between the cheeks</span>
+<span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># Another picture of aligned outlines</span>
+<span class="st">  </span><span class="kw"><a href="reference/efourier.html">efourier</a></span>(<span class="dv">6</span>, <span class="dt">norm=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Elliptical Fourier Transforms</span>
+<span class="st">  </span><span class="kw"><a href="reference/PCA.html">PCA</a></span>() <span class="op">%T&gt;%</span><span class="st">                   </span><span class="co"># Principal Component Analysis</span>
+<span class="st">  </span><span class="kw"><a href="reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">           </span><span class="co"># A PC1:2 plot</span>
+<span class="st">  </span><span class="kw"><a href="reference/LDA.html">LDA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">                </span><span class="co"># Linear Discriminant Anlysis</span>
+<span class="st">  </span><span class="kw"><a href="reference/plot_CV.html">plot_CV</a></span>()                    <span class="co"># And the confusion matrix after leave-one-out</span></code></pre></div>
 <p><img src="README-example-1.png" width="672"><img src="README-example-2.png" width="672"><img src="README-example-3.png" width="672"><img src="README-example-4.png" width="672"></p>
 </div>
 </div>

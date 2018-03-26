@@ -1,7 +1,7 @@
 
 <!--README.md is generated from README.Rmd. Please edit that file -->
-Momocs
-------
+Momocs <img src="https://noto-website-2.storage.googleapis.com/emoji/emoji_u1f54a.png" width="30px">
+----------------------------------------------------------------------------------------------------
 
 *Part of [MomX](https://momx.github.io/MomX/)*
 
@@ -106,14 +106,26 @@ This is a basic example of a complete analysis doing: inspection, normalization 
 
 ``` r
 library(Momocs)
-hearts %T>%                    # a built in dataset
-  stack() %>%                  # family picture on raw outlines
-  fgProcrustes() %T>%          # full generalized Procrustes alignment
-  coo_slide(ldk=1) %T>%        # redefine an homologous 1st point
-  stack() %>%                  # another family picture after fgProcrustes
-  efourier(6, norm=FALSE) %>%  # elliptical Fourier transforms
-  PCA() %T>% plot(~aut) %>%    # a PCA and a PC1:2 plot
-  LDA(~aut) %>% plot_CV()      # an LDA and confusion matrix
+```
+
+``` r
+devtools::load_all()
+#> Loading Momocs
+#> This is Momocs 1.2.9.1
+```
+
+``` r
+
+hearts %T>%                    # A toy dataset
+  stack() %>%                  # Take a family picture of raw outlines
+  fgProcrustes() %>%          # Full generalized Procrustes alignment
+  coo_slide(ldk = 2) %T>%      # Redefine a robust 1st point between the cheeks
+  stack() %>%                  # Another picture of aligned outlines
+  efourier(6, norm=FALSE) %>%  # Elliptical Fourier Transforms
+  PCA() %T>%                   # Principal Component Analysis
+  plot_PCA(~aut) %>%           # A PC1:2 plot
+  LDA(~aut) %>%                # Linear Discriminant Anlysis
+  plot_CV()                    # And the confusion matrix after leave-one-out
 ```
 
 ![](README-example-1.png)![](README-example-2.png)![](README-example-3.png)![](README-example-4.png)
