@@ -90,7 +90,8 @@ shapes2 \%>\% mosaic(relatively=FALSE)
 shapes2 \%>\% mosaic(relatively=TRUE) \%>\% draw_centroid()
 }
 \seealso{
-Other grindr: \code{\link{drawers}}, \code{\link{layers}},
+Other grindr: \code{\link{drawers}},
+  \code{\link{layer_morphospace_PCA}},
   \code{\link{papers}}, \code{\link{pile}},
-  \code{\link{plot_PCA}}
+  \code{\link{plot_LDA}}, \code{\link{plot_PCA}}
 }

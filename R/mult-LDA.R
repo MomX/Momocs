@@ -80,21 +80,31 @@ LDA.default <- function(x, fac, retain, ...) {
   # we build the list to be returned
   LDA <- list(x = X, fac = fac, removed = remove, mod = mod,
               mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
-              CV.correct = CV.correct, CV.ce = ce, LDs = LDs, mshape = NULL, method = "other")
+              CV.correct = CV.correct, CV.ce = ce, LDs = LDs, mshape = NULL)
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)
 }
 
-#' @export
-LDA.OutCoe <- function(x, fac, retain, ...) {
-  #  stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
-  LDA(x$coe, fac_dispatcher(x, fac))
-}
+# #' @export
+# LDA.OutCoe <- function(x, fac, retain, ...) {
+#   #  stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
+#   LDA(x$coe, fac_dispatcher(x, fac))
+# }
 
 #' @export
 LDA.Coe <- function(x, fac, retain, ...) {
   # stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
-  LDA(x$coe, fac_dispatcher(x, fac))
+  res <- LDA(x$coe, fac_dispatcher(x, fac))
+  if (!is.null(x$method))
+    res$method <- x$method
+  if (!is.null(x$cuts))
+    res$cuts <- x$cuts
+  if (!is.null(x$mshape))
+    res$mshape <- x$mshape
+
+  res$mshape <- apply(x$coe, 2, mean)
+
+  res
 }
 
 #' @rdname LDA

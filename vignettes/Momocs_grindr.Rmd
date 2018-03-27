@@ -93,16 +93,16 @@ So far, you can easily customize plots with:
 
 ```{r}
 x <- bot %>% efourier(6) %>% PCA
-plot_PCA(x, ~type) %>% 
-    layer_fullframe %>% 
-    layer_morphospace %>% 
-    layer_points %>% layer_chull %>% 
-    layer_eigen %>% layer_legend
+# plot_PCA(x, ~type) %>% 
+#     layer_fullframe %>% 
+#     layer_morphospace %>% 
+#     layer_points %>% layer_chull %>% 
+#     layer_eigen %>% layer_legend
 ```
 
 It works pretty much the same way as `drawers`, you can access the full list with `apropos("layer_")` and `?layers`. 
 
-Here again, I'll write more once `cheapbabi` development will become stable.
+Here again, I'll write more once `grindr` development will become stable.
 
 __All suggestions and comments are welcome!__
 
