@@ -73,7 +73,7 @@
        colors_groups=colors_groups, colors_rows=colors_rows,
        object="PCA", axes=axes, palette=palette,
        method=x$method, mshape=x$mshape, cuts=x$cuts,
-       eig=x$eig, sdev=x$sdev, rotation=x$LDs[, axes, drop=FALSE],
+       eig=x$eig, sdev=x$mod$svd, rotation=x$LDs[, axes, drop=FALSE],
        baseline1=x$baseline1, baseline2=x$baseline2)
 }
 
@@ -200,7 +200,7 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 
   # morphospace -----------------------
   if (morphospace)
-    x %<>% layer_morphospace(position = morphospace_position)
+    x %<>% layer_morphospace_PCA(position = morphospace_position)
 
   # data ------------------------------
   if (points)
@@ -237,7 +237,7 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 #' This is part of `grindr` approach that may be packaged at some point. All comments are welcome.
 #'
 #' @param x \code{PCA} object
-#' @param `layer_2` a function (no quotes) for drawing LD1 when there are two levels. So far, one of
+#' @param layer_2 a function (no quotes) for drawing LD1 when there are two levels. So far, one of
 #' `layer_histogram_2` (default) or `layer_density_2`
 #' @param axes \code{numeric} of length two to select PCs to use
 #' (\code{c(1, 2)} by default)
@@ -315,7 +315,7 @@ plot_LDA <- function(x, layer_2=layer_histogram_2, axes=c(1, 2),
                      points=TRUE,
                      points_transp=1/4,
                      # morphospace
-                     morphospace=TRUE,
+                     morphospace=FALSE,
                      morphospace_position="range",
                      # chulls
                      chull=TRUE,
@@ -349,19 +349,19 @@ plot_LDA <- function(x, layer_2=layer_histogram_2, axes=c(1, 2),
   if (axesnames)
     x %<>% layer_axesnames()
 
-  # if (axesvar)
-  #   x %<>% layer_axesvar()
-  #
-  # if (eigen)
-  #   x %<>% layer_eigen()
+  if (axesvar)
+    x %<>% layer_axesvar()
+
+  if (eigen)
+    x %<>% layer_eigen()
 
   if (box)
     x %<>% layer_box()
 
   # morphospace -----------------------
-  # if (morphospace)
-  #   x %<>% layer_morphospace(position = morphospace_position)
-  #
+  if (morphospace)
+    x %<>% layer_morphospace_LDA(position = morphospace_position)
+
   # data ------------------------------
   if (points)
     x %<>% layer_points(transp=points_transp)

@@ -6,13 +6,16 @@
 \usage{
 plot_LDA(x, layer_2 = layer_histogram_2, axes = c(1, 2),
   palette = pal_qual, points = TRUE, points_transp = 1/4,
-  morphospace = TRUE, morphospace_position = "range", chull = TRUE,
+  morphospace = FALSE, morphospace_position = "range", chull = TRUE,
   chullfilled = FALSE, labelgroups = FALSE, legend = TRUE, title = "",
   center_origin = TRUE, zoom = 0.9, eigen = TRUE, box = TRUE,
   axesnames = TRUE, axesvar = TRUE)
 }
 \arguments{
 \item{x}{\code{PCA} object}
+
+\item{layer_2}{a function (no quotes) for drawing LD1 when there are two levels. So far, one of
+\code{layer_histogram_2} (default) or \code{layer_density_2}}
 
 \item{axes}{\code{numeric} of length two to select PCs to use
 (\code{c(1, 2)} by default)}
@@ -48,9 +51,6 @@ plot_LDA(x, layer_2 = layer_histogram_2, axes = c(1, 2),
 \item{axesnames}{\code{logical} whether to draw this using \link{layer_axesnames}}
 
 \item{axesvar}{\code{logical} whether to draw this using \link{layer_axesvar}}
-
-\item{`layer_2`}{a function (no quotes) for drawing LD1 when there are two levels. So far, one of
-\code{layer_histogram_2} (default) or \code{layer_density_2}}
 }
 \description{
 Quickly vizualise \link{PCA} objects and friends (\link{LDA}) and build customs plots
