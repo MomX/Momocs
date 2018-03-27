@@ -83,13 +83,13 @@
 ### __plot_PCA__ -------------------------------------------
 #' PCA plot using grindr layers
 #'
-#' Quickly vizualise [PCA] objects and friends ([LDA]) and build customs plots
+#' Quickly vizualise [PCA] objects and friends and build customs plots
 #' using the [layers]. See examples.
 #'
 #' @note This approach will replace \link{plot.PCA} (and `plot.lda` in further versions.
 #' This is part of `grindr` approach that may be packaged at some point. All comments are welcome.
 #'
-#' @param x \code{PCA} object
+#' @param x a [PCA] object
 #' @param f \code{factor}. A column name or number from \code{$fac},
 #' or a factor can directly be passed. Accept \code{numeric} as well.
 #' @param axes \code{numeric} of length two to select PCs to use
@@ -227,18 +227,17 @@ plot_PCA <- function(x, f, axes=c(1, 2),
   invisible(x)
 }
 
-### __plot_PCA__ -------------------------------------------
-#' PCA plot using grindr layers
+### __plot_LDA__ -------------------------------------------
+#' LDA plot using grindr layers
 #'
-#' Quickly vizualise [PCA] objects and friends ([LDA]) and build customs plots
+#' Quickly vizualise [LDA] objects and build customs plots
 #' using the [layers]. See examples.
 #'
-#' @note This approach will replace \link{plot.PCA} (and `plot.lda` in further versions.
+#' @note This approach will replace \link{plot.LDA}.
 #' This is part of `grindr` approach that may be packaged at some point. All comments are welcome.
 #'
-#' @param x \code{PCA} object
-#' @param layer_2 a function (no quotes) for drawing LD1 when there are two levels. So far, one of
-#' `layer_histogram_2` (default) or `layer_density_2`
+#' @param x [LDA] object
+#' @param layer_2 a function (no quotes) for drawing LD1 when there are two levels. So far, one of `layer_histogram_2` (default) or `layer_density_2`
 #' @param axes \code{numeric} of length two to select PCs to use
 #' (\code{c(1, 2)} by default)
 #' @param palette \code{color palette} to use \code{col_summer} by default
@@ -260,7 +259,7 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 #' @family grindr
 #'
 #' @examples
-#' ### First prepare two PCA objects.
+#' ### First prepare an LDA object
 #'
 #' # Some outlines with bot
 #' bl <- bot %>%
@@ -310,7 +309,8 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 #'
 #' # You get the idea.
 #' @export
-plot_LDA <- function(x, layer_2=layer_histogram_2, axes=c(1, 2),
+plot_LDA <- function(x, layer_2=layer_histogram_2,
+                     axes=c(1, 2),
                      palette=pal_qual,
                      points=TRUE,
                      points_transp=1/4,
@@ -336,8 +336,7 @@ plot_LDA <- function(x, layer_2=layer_histogram_2, axes=c(1, 2),
 
 
   if (ncol(x$xy) < 2){
-    x %>% layer_2()
-    return(x)
+    x %>% layer_2 %>% return()
   }
 
   # frame
@@ -833,8 +832,8 @@ layer_rug <- function(x, size=1/200, ...){
 #' @param freq `logical`to feed` [hist] (default: `FALSE`)
 #' @param breaks to feed [hist] (default: calculated on the pooled values)
 #' @param split `logical` whether to split the two distributions into two plots
-#' @export
 #' @rdname layers
+#' @export
 layer_histogram_2 <- function(x, freq=FALSE, breaks, split=FALSE, transp=0){
   # handles par for split or non-split
   if (split){
@@ -880,9 +879,8 @@ layer_histogram_2 <- function(x, freq=FALSE, breaks, split=FALSE, transp=0){
 
 #' @param bw to feed [density] (default: [stats::bw.nrd0])
 #' @param rug `logical` whether to add [rug] (default: `TRUE`)
-#' @param split `logical` whether to split the two distributions into two plots
-#' @export
 #' @rdname layers
+#' @export
 layer_density_2 <- function(x, bw, split=FALSE, rug=TRUE, transp=0){
   # handles par for split or non-split
   if (split){
@@ -912,7 +910,7 @@ layer_density_2 <- function(x, bw, split=FALSE, rug=TRUE, transp=0){
   yl <- sapply(ds, `[`, "y") %>% do.call("c", .) %>% range()
 
   # plots the first density
-  d1 <- density(xy[f==levels(f)[1], ], bw=bw)
+  d1 <- stats::density(xy[f==levels(f)[1], ], bw=bw)
   plot(d1, xlim=xl, ylim=yl, yaxs="i",
        type = "n", xlab="LD1",
        main=levels(f)[1],  bty="n")
@@ -938,7 +936,6 @@ layer_density_2 <- function(x, bw, split=FALSE, rug=TRUE, transp=0){
   # propagate
   invisible(x)
 }
-
 
 # cosmetics layers -----------------------------------------
 #' @export
@@ -1110,3 +1107,6 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
 #'   text(loadings.lab[, 1], loadings.lab[, 2], labels = rownames(loadings.lab),
 #'        cex = 0.8, col = col)
 #' }
+
+# morphospace ----------------------------------------------
+

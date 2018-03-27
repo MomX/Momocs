@@ -161,7 +161,7 @@
 # @examples
 # vecs_param(1, 0, 0, 2)
 #
-# @export vecs_param
+# @export
 .vecs_param <- function(r1, i1, r2, i2) {
   x <- c(r1, i1, r2, i2)
   if (!is.numeric(x)) {

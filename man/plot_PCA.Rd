@@ -11,7 +11,7 @@ plot_PCA(x, f, axes = c(1, 2), palette = pal_qual, points = TRUE,
   box = TRUE, axesnames = TRUE, axesvar = TRUE)
 }
 \arguments{
-\item{x}{\code{PCA} object}
+\item{x}{a \link{PCA} object}
 
 \item{f}{\code{factor}. A column name or number from \code{$fac},
 or a factor can directly be passed. Accept \code{numeric} as well.}
@@ -52,7 +52,7 @@ or a factor can directly be passed. Accept \code{numeric} as well.}
 \item{axesvar}{\code{logical} whether to draw this using \link{layer_axesvar}}
 }
 \description{
-Quickly vizualise \link{PCA} objects and friends (\link{LDA}) and build customs plots
+Quickly vizualise \link{PCA} objects and friends and build customs plots
 using the \link{layers}. See examples.
 }
 \note{
@@ -101,7 +101,7 @@ op \%>\% my_plot(~var, axes=c(1, 3)) \%>\%
 }
 \seealso{
 Other grindr: \code{\link{drawers}},
-  \code{\link{layer_morphospace_PCA}},
+  \code{\link{layers_morphospace}}, \code{\link{layers}},
   \code{\link{mosaic_engine}}, \code{\link{papers}},
   \code{\link{pile}}, \code{\link{plot_LDA}}
 }

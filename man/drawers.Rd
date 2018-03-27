@@ -121,8 +121,8 @@ bot \%>\%
 \seealso{
 grindr_layers
 
-Other grindr: \code{\link{layer_morphospace_PCA}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_LDA}},
-  \code{\link{plot_PCA}}
+Other grindr: \code{\link{layers_morphospace}},
+  \code{\link{layers}}, \code{\link{mosaic_engine}},
+  \code{\link{papers}}, \code{\link{pile}},
+  \code{\link{plot_LDA}}, \code{\link{plot_PCA}}
 }

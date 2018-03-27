@@ -45,7 +45,7 @@ All comments are welcome.
 }
 \seealso{
 Other grindr: \code{\link{drawers}},
-  \code{\link{layer_morphospace_PCA}},
+  \code{\link{layers_morphospace}}, \code{\link{layers}},
   \code{\link{mosaic_engine}}, \code{\link{pile}},
   \code{\link{plot_LDA}}, \code{\link{plot_PCA}}
 }

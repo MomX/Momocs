@@ -1,4 +1,7 @@
 # Momocs 1.2.9.1
+* morphospace on LDAs are (finally) back, yet still quite experimental.
+* `plot_LDA` now on. Pretty much the same as `plot_PCA` (which was expected yet nice).
+* `.layerize_LDA` as an internal to prepare the previous
 * `morphospace_position` and `chullfilled` in `plot_PCA` now properly working
 * `verify` replaces `validate` to avoid conflict with `shiny::validate` (for Momecs)
 * `subsetize` now exported (again)

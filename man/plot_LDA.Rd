@@ -2,7 +2,7 @@
 % Please edit documentation in R/grindr-layers.R
 \name{plot_LDA}
 \alias{plot_LDA}
-\title{PCA plot using grindr layers}
+\title{LDA plot using grindr layers}
 \usage{
 plot_LDA(x, layer_2 = layer_histogram_2, axes = c(1, 2),
   palette = pal_qual, points = TRUE, points_transp = 1/4,
@@ -12,10 +12,9 @@ plot_LDA(x, layer_2 = layer_histogram_2, axes = c(1, 2),
   axesnames = TRUE, axesvar = TRUE)
 }
 \arguments{
-\item{x}{\code{PCA} object}
+\item{x}{\link{LDA} object}
 
-\item{layer_2}{a function (no quotes) for drawing LD1 when there are two levels. So far, one of
-\code{layer_histogram_2} (default) or \code{layer_density_2}}
+\item{layer_2}{a function (no quotes) for drawing LD1 when there are two levels. So far, one of \code{layer_histogram_2} (default) or \code{layer_density_2}}
 
 \item{axes}{\code{numeric} of length two to select PCs to use
 (\code{c(1, 2)} by default)}
@@ -53,15 +52,15 @@ plot_LDA(x, layer_2 = layer_histogram_2, axes = c(1, 2),
 \item{axesvar}{\code{logical} whether to draw this using \link{layer_axesvar}}
 }
 \description{
-Quickly vizualise \link{PCA} objects and friends (\link{LDA}) and build customs plots
+Quickly vizualise \link{LDA} objects and build customs plots
 using the \link{layers}. See examples.
 }
 \note{
-This approach will replace \link{plot.PCA} (and \code{plot.lda} in further versions.
+This approach will replace \link{plot.LDA}.
 This is part of \code{grindr} approach that may be packaged at some point. All comments are welcome.
 }
 \examples{
-### First prepare two PCA objects.
+### First prepare an LDA object
 
 # Some outlines with bot
 bl <- bot \%>\%
@@ -113,7 +112,7 @@ bl \%>\% plot_LDA \%>\% layer_morphospace_LDA
 }
 \seealso{
 Other grindr: \code{\link{drawers}},
-  \code{\link{layer_morphospace_PCA}},
+  \code{\link{layers_morphospace}}, \code{\link{layers}},
   \code{\link{mosaic_engine}}, \code{\link{papers}},
   \code{\link{pile}}, \code{\link{plot_PCA}}
 }
