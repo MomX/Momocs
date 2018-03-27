@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -150,15 +150,15 @@
     <pre class="examples"><div class='input'>
 <span class='co'># samples 50% of the bottles no matter their type</span>
 <span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 20 outlines, 168 +/- 20 coords (in $coo)
+#&gt;   - 20 outlines, 164 +/- 19 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 20 x 2
 #&gt;   type   fake 
 #&gt;   &lt;fct&gt;  &lt;fct&gt;
-#&gt; 1 beer   c    
-#&gt; 2 beer   c    
-#&gt; 3 whisky a    
-#&gt; 4 whisky b    
+#&gt; 1 whisky b    
+#&gt; 2 beer   d    
+#&gt; 3 beer   d    
+#&gt; 4 whisky a    
 #&gt; 5 whisky a    
 #&gt; 6 whisky b    
 #&gt; # ... with 14 more rows
@@ -168,16 +168,16 @@
 #&gt;   beer   0 0 8 8
 #&gt;   whisky 8 8 0 0</div><div class='input'><span class='co'># bootstrap the same number of bootles of each type but with replacement</span>
 <span class='fu'>table</span>(<span class='fu'>names</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>1</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
-#&gt;          amrut    ballantines         brahma      bushmills          caney 
-#&gt;              2              2              2              2              2 
-#&gt;         chimay         chivas   franziskaner    glendronach   glenmorangie 
-#&gt;              1              1              2              3              2 
-#&gt;     grimbergen        guiness     hoegardeen    jackdaniels        jupiler 
-#&gt;              2              1              2              1              2 
-#&gt;     kingfisher       latrappe lindemanskriek       magallan     makersmark 
-#&gt;              2              1              1              1              2 
-#&gt;           oban     pecheresse   sierranevada     wildturkey         yoichi 
-#&gt;              2              1              1              1              1 </div><div class='input'>
+#&gt;        amrut  ballantines    bushmills       chimay       chivas       corona 
+#&gt;            1            4            1            2            1            2 
+#&gt;      dalmore  deusventrue        duvel famousgrouse franziskaner      guiness 
+#&gt;            1            3            1            2            2            1 
+#&gt; highlandpark   hoegardeen      jupiler   kingfisher     latrappe   makersmark 
+#&gt;            1            2            1            1            1            1 
+#&gt;  nicechouffe   oldpotrero    redbreast   tanglefoot    westmalle   wildturkey 
+#&gt;            1            3            4            1            1            1 
+#&gt;       yoichi 
+#&gt;            1 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

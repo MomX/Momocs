@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -115,11 +115,6 @@ mutivariate plots using the cheapbabi approach. See examples.</p>
 
 <span class='fu'>layer_points</span>(<span class='no'>x</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>4</span>/<span class='fu'>log1p</span>(<span class='fu'>nrow</span>(<span class='no'>x</span>$<span class='no'>xy</span>)), <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
 
-<span class='fu'>layer_morphospace</span>(<span class='no'>x</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"range"</span>, <span class='st'>"full"</span>, <span class='st'>"circle"</span>, <span class='st'>"xy"</span>,
-  <span class='st'>"range_axes"</span>, <span class='st'>"full_axes"</span>)[<span class='fl'>1</span>], <span class='kw'>nb</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>nr</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>nc</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>rotate</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#999999"</span>, <span class='kw'>flipx</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>flipy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>draw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
-
 <span class='fu'>layer_ellipses</span>(<span class='no'>x</span>, <span class='kw'>conf</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
 
 <span class='fu'>layer_ellipsesfilled</span>(<span class='no'>x</span>, <span class='kw'>conf</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
@@ -144,6 +139,10 @@ mutivariate plots using the cheapbabi approach. See examples.</p>
   <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>, <span class='kw'>abbreviate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='fu'>layer_rug</span>(<span class='no'>x</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>200</span>, <span class='no'>...</span>)
+
+<span class='fu'>layer_histogram_2</span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>breaks</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>layer_density_2</span>(<span class='no'>x</span>, <span class='no'>bw</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rug</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='fu'>layer_title</span>(<span class='no'>x</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='no'>...</span>)
 
@@ -207,44 +206,6 @@ mutivariate plots using the cheapbabi approach. See examples.</p>
       <td><p>transparency to use (min: 0 defaut:0 max:1)</p></td>
     </tr>
     <tr>
-      <th>position</th>
-      <td><p>one of <code>range, full, circle,
-xy, range_axes, full_axes)</code> to feed <a href='morphospace_positions.html'>morphospace_positions</a> (default <code>range</code>)</p></td>
-    </tr>
-    <tr>
-      <th>nb</th>
-      <td><p><code>numeric</code> total number of shapes when <code>position="circle"</code> (default <code>12</code>)</p></td>
-    </tr>
-    <tr>
-      <th>nr</th>
-      <td><p><code>numeric</code> number of rows to position shapes (default <code>6</code>)</p></td>
-    </tr>
-    <tr>
-      <th>nc</th>
-      <td><p><code>numeric</code> number of columns to position shapes (default <code>5</code>)</p></td>
-    </tr>
-    <tr>
-      <th>rotate</th>
-      <td><p><code>numeric</code> angle (in radians) to rotate shapes
-when displayed on the morphospace (default <code>0</code>)</p></td>
-    </tr>
-    <tr>
-      <th>size</th>
-      <td><p><code>numeric</code> size to use to feed coo_template (default <code>0.9</code>)</p></td>
-    </tr>
-    <tr>
-      <th>flipx</th>
-      <td><p><code>logical</code> whether to flip shapes against the x-axis (default <code>FALSE</code>)</p></td>
-    </tr>
-    <tr>
-      <th>flipy</th>
-      <td><p><code>logical</code> whether to flip shapes against the y-axis (default <code>FALSE</code>)</p></td>
-    </tr>
-    <tr>
-      <th>draw</th>
-      <td><p><code>logical</code> whether to draw shapes (default <code>TRUE</code>)</p></td>
-    </tr>
-    <tr>
       <th>conf</th>
       <td><p><code>numeric</code> between 0 and 1 for confidence ellipses</p></td>
     </tr>
@@ -285,6 +246,26 @@ when displayed on the morphospace (default <code>0</code>)</p></td>
       <td><p><code>logical</code> whether to draw a rectangle below names</p></td>
     </tr>
     <tr>
+      <th>freq</th>
+      <td><p><code>logical</code>to feed<code>[hist] (default:</code>FALSE`)</p></td>
+    </tr>
+    <tr>
+      <th>breaks</th>
+      <td><p>to feed hist (default: calculated on the pooled values)</p></td>
+    </tr>
+    <tr>
+      <th>split</th>
+      <td><p><code>logical</code> whether to split the two distributions into two plots</p></td>
+    </tr>
+    <tr>
+      <th>bw</th>
+      <td><p>to feed density (default: <a href='http://www.rdocumentation.org/packages/stats/topics/bandwidth'>stats::bw.nrd0</a>)</p></td>
+    </tr>
+    <tr>
+      <th>rug</th>
+      <td><p><code>logical</code> whether to add rug (default: <code>TRUE</code>)</p></td>
+    </tr>
+    <tr>
       <th>title</th>
       <td><p>to add to the plot (default <code>""</code>)</p></td>
     </tr>
@@ -307,8 +288,10 @@ and to indicate where to draw ticks and legend labels</p></td>
 
     <p>grindr_drawers</p>
 <p>Other grindr: <code><a href='drawers.html'>drawers</a></code>,
+  <code>layers_morphospace</code>,
   <code><a href='mosaic.html'>mosaic_engine</a></code>, <code><a href='papers.html'>papers</a></code>,
-  <code><a href='pile.html'>pile</a></code>, <code><a href='plot_PCA.html'>plot_PCA</a></code></p>
+  <code><a href='pile.html'>pile</a></code>, <code><a href='plot_LDA.html'>plot_LDA</a></code>,
+  <code><a href='plot_PCA.html'>plot_PCA</a></code></p>
     
 
   </div>

@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -135,7 +135,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>col_transp</span>(<span class='fl'>10</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>'#000000'</span>)
 <span class='no'>x</span></div><div class='output co'>#&gt;  [1] "#00000000" "#0000001c" "#00000038" "#00000055" "#00000071" "#0000008d"
-#&gt;  [7] "#000000aa" "#000000c6" "#000000e2" "#000000ff"</div><div class='input'><span class='fu'>barplot</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>x</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>'a transparent black is grey'</span>)</div><div class='img'><img src='color_transparency-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+#&gt;  [7] "#000000aa" "#000000c6" "#000000e2" "#000000ff"</div><div class='input'><span class='fu'>barplot</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>x</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>'a transparent black is grey'</span>)</div><div class='img'><img src='color_transparency-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='no'>summer10</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='color_palettes.html'>col_summer</a></span>(<span class='fl'>10</span>)
 <span class='no'>summer10</span></div><div class='output co'>#&gt;  [1] "#4876FF" "#7094C6" "#99B28D" "#C2D155" "#EAEF1C" "#FFE805" "#FFBA0F"
 #&gt;  [8] "#FF8C1A" "#FF5E25" "#FF3030"</div><div class='input'><span class='no'>summer10.transp8</span> <span class='kw'>&lt;-</span> <span class='fu'>col_alpha</span>(<span class='no'>summer10</span>, <span class='fl'>0.8</span>)
@@ -143,7 +143,7 @@
 #&gt;  [7] "#FFBA0F32" "#FF8C1A32" "#FF5E2532" "#FF303032"</div><div class='input'><span class='no'>summer10.transp2</span> <span class='kw'>&lt;-</span> <span class='fu'>col_alpha</span>(<span class='no'>summer10</span>, <span class='fl'>0.8</span>)
 <span class='no'>summer10.transp2</span></div><div class='output co'>#&gt;  [1] "#4876FF32" "#7094C632" "#99B28D32" "#C2D15532" "#EAEF1C32" "#FFE80532"
 #&gt;  [7] "#FFBA0F32" "#FF8C1A32" "#FF5E2532" "#FF303032"</div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>10</span>
-<span class='fu'>barplot</span>(<span class='no'>x</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>summer10.transp8</span>)</div><div class='input'><span class='fu'>barplot</span>(<span class='no'>x</span>/<span class='fl'>2</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>summer10.transp2</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='color_transparency-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>barplot</span>(<span class='no'>x</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>summer10.transp8</span>)</div><div class='input'><span class='fu'>barplot</span>(<span class='no'>x</span>/<span class='fl'>2</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>summer10.transp2</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='color_transparency-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

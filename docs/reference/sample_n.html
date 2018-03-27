@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -146,37 +146,37 @@
     <pre class="examples"><div class='input'>
 <span class='co'># samples 5 bottles no matter their type</span>
 <span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 5 outlines, 156 +/- 22 coords (in $coo)
+#&gt;   - 5 outlines, 144 +/- 12 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 5 x 2
 #&gt;   type   fake 
 #&gt;   &lt;fct&gt;  &lt;fct&gt;
-#&gt; 1 beer   d    
-#&gt; 2 beer   d    
+#&gt; 1 whisky b    
+#&gt; 2 beer   c    
 #&gt; 3 whisky b    
-#&gt; 4 beer   c    
-#&gt; 5 whisky b    
+#&gt; 4 beer   d    
+#&gt; 5 whisky a    
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># 5 bottles of beer and of whisky</span>
 <span class='fu'>table</span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>5</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>)$<span class='no'>type</span>)</div><div class='output co'>#&gt; 
 #&gt;   beer whisky 
 #&gt;      5      5 </div><div class='input'><span class='co'># many repetitions</span>
 <span class='fu'>table</span>(<span class='fu'>names</span>(<span class='fu'>sample_n</span>(<span class='no'>bot</span>, <span class='fl'>400</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
 #&gt;          amrut    ballantines         brahma      bushmills          caney 
-#&gt;             14             18              7              8              8 
+#&gt;             15             14              6              8              9 
 #&gt;         chimay         chivas         corona        dalmore    deusventrue 
-#&gt;             12             11             10             14             13 
+#&gt;             11             13              9             13              9 
 #&gt;          duvel   famousgrouse   franziskaner    glendronach   glenmorangie 
-#&gt;              9              9             13              3             10 
+#&gt;              9              8             10              4             11 
 #&gt;     grimbergen        guiness   highlandpark     hoegardeen    jackdaniels 
-#&gt;              9             11             11             21             12 
+#&gt;              9             14             14             19             13 
 #&gt;             jb  johnniewalker        jupiler     kingfisher       latrappe 
-#&gt;              7              8              9              9             12 
+#&gt;              8              8              7             10             13 
 #&gt; lindemanskriek       magallan     makersmark    nicechouffe           oban 
-#&gt;              9             13              9              7              3 
+#&gt;              9             14              8              9              5 
 #&gt;     oldpotrero     pecheresse      redbreast   sierranevada         tamdhu 
-#&gt;             10              7             12              4              8 
+#&gt;              8              8              7              5              9 
 #&gt;     tanglefoot          tauro      westmalle     wildturkey         yoichi 
-#&gt;             11             11              8              9             11 </div><div class='input'>
+#&gt;             11             14              7             11             11 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

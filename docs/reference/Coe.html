@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -144,8 +144,8 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; [19] perm        reLDA       sample_frac sample_n    select      slice      
 #&gt; [25] str         subsetize   which_out  
 #&gt; see '?methods' for accessing help and source code</div><div class='input'><span class='co'># to see all methods for OutCoe objects.</span>
-<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>) <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span></div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib hist     LDA      MANOVA   mshapes  PCA     
-#&gt;  [9] print    rm_asym  rm_sym   symmetry
+<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>) <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span></div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib hist     MANOVA   mshapes  PCA      print   
+#&gt;  [9] rm_asym  rm_sym   symmetry
 #&gt; see '?methods' for accessing help and source code</div><div class='input'>
 <span class='no'>bot.f</span><span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.f</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------

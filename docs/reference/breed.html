@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -167,7 +167,7 @@ multiplied by <code>rate</code>.</p>
 #&gt;  [9,]  2.40882230 3.826442 11.5882377
 #&gt; [10,] 10.19002487 4.197451  3.2041191</div><div class='input'>
 <span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.m</span> <span class='kw'>&lt;-</span> <span class='fu'>breed</span>(<span class='no'>bot.f</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>80</span>)
-<span class='no'>bot.m</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='img'><img src='breed-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>bot.m</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='img'><img src='breed-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 # breed fac wise
 # bot.f %>%  breed(~type, size=50) %>% PCA %>% plot(~type)
 </div></pre>

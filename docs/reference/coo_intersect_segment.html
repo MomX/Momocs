@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -138,7 +138,7 @@ or a list or a numeric of length 4.</p></td>
 <span class='no'>seg</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>2</span>) <span class='co'># passed as a numeric of length(4)</span>
 <span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>coo</span>)</div><div class='input'><span class='fu'>segments</span>(<span class='no'>seg</span>[<span class='fl'>1</span>], <span class='no'>seg</span>[<span class='fl'>2</span>], <span class='no'>seg</span>[<span class='fl'>3</span>], <span class='no'>seg</span>[<span class='fl'>4</span>])</div><div class='input'><span class='no'>coo</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_intersect_segment</span>(<span class='no'>seg</span>) <span class='kw'>%T&gt;%</span> <span class='no'>print</span> <span class='kw'>%&gt;%</span>
 <span class='co'># prints on the console and draw it</span>
-   <span class='no'>coo</span>[<span class='no'>.</span>, , <span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>FALSE</span>] <span class='kw'>%&gt;%</span> <span class='fu'>points</span>(<span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>)</div><div class='img'><img src='coo_intersect_segment-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; [1] 79</div><div class='input'>
+   <span class='no'>coo</span>[<span class='no'>.</span>, , <span class='kw'>drop</span><span class='kw'>=</span><span class='fl'>FALSE</span>] <span class='kw'>%&gt;%</span> <span class='fu'>points</span>(<span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>)</div><div class='img'><img src='coo_intersect_segment-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; [1] 79</div><div class='input'>
 <span class='co'># on Coo</span>
 <span class='no'>bot</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>) <span class='kw'>%&gt;%</span> <span class='co'># for the sake of speed</span>

@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -159,7 +159,7 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
 #&gt;           6          13          22 </div><div class='input'><span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='st'>"black"</span>, <span class='fu'>nrow</span>(<span class='no'>x_p</span>$<span class='no'>x</span>))
 <span class='no'>outliers</span> <span class='kw'>&lt;-</span> <span class='fu'>which_out</span>(<span class='no'>x_p</span>$<span class='no'>x</span>[, <span class='fl'>1</span>], <span class='fl'>0.5</span>)
 <span class='no'>cols</span>[<span class='no'>outliers</span>] <span class='kw'>&lt;-</span> <span class='st'>"red"</span>
-<span class='fu'>plot</span>(<span class='no'>x_p</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>cols</span>)</div><div class='img'><img src='which_out-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># remove them for Coe, rePCA, replot</span>
+<span class='fu'>plot</span>(<span class='no'>x_p</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>cols</span>)</div><div class='img'><img src='which_out-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># remove them for Coe, rePCA, replot</span>
 <span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(-<span class='no'>outliers</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(e, Coe$fac, parent.frame()): object 'outliers' not found</span></div><div class='input'>
 <span class='co'># or directly with which_out.Coe</span>
 <span class='co'># which relies on a PCA</span>

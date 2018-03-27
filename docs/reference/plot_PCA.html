@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multivariate plots using grindr layers — plot_PCA • Momocs</title>
+<title>PCA plot using grindr layers — plot_PCA • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -95,26 +95,26 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multivariate plots using grindr layers</h1>
+    <h1>PCA plot using grindr layers</h1>
     </div>
 
     
-    <p>Quickly vizualise <a href='PCA.html'>PCA</a> objects and friends (<a href='LDA.html'>LDA</a>) and build customs plots
+    <p>Quickly vizualise <a href='PCA.html'>PCA</a> objects and friends and build customs plots
 using the <a href='layers.html'>layers</a>. See examples.</p>
     
 
     <pre class="usage"><span class='fu'>plot_PCA</span>(<span class='no'>x</span>, <span class='no'>f</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>, <span class='kw'>morphospace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>morphospace_position</span> <span class='kw'>=</span> <span class='st'>"range"</span>,
   <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>labelgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axesvar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axesvar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>PCA</code> object</p></td>
+      <td><p>a <a href='PCA.html'>PCA</a> object</p></td>
     </tr>
     <tr>
       <th>f</th>
@@ -140,11 +140,11 @@ or a factor can directly be passed. Accept <code>numeric</code> as well.</p></td
     </tr>
     <tr>
       <th>morphospace</th>
-      <td><p><code>logical</code> whether to draw this using <a href='layers.html'>layer_morphospace</a></p></td>
+      <td><p><code>logical</code> whether to draw this using <a href='layers_morphospace.html'>layer_morphospace_PCA</a></p></td>
     </tr>
     <tr>
       <th>morphospace_position</th>
-      <td><p>to feed <a href='layers.html'>layer_morphospace</a> (default: "range")</p></td>
+      <td><p>to feed <a href='layers_morphospace.html'>layer_morphospace_PCA</a> (default: "range")</p></td>
     </tr>
     <tr>
       <th>chull</th>
@@ -161,6 +161,10 @@ or a factor can directly be passed. Accept <code>numeric</code> as well.</p></td
     <tr>
       <th>legend</th>
       <td><p><code>logical</code> whether to draw this with <a href='layers.html'>layer_legend</a></p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p><code>character</code> if specified, fee <a href='layers.html'>layer_title</a> (default to <code>""</code>)</p></td>
     </tr>
     <tr>
       <th>center_origin</th>
@@ -195,9 +199,10 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other grindr: <code><a href='drawers.html'>drawers</a></code>, <code><a href='layers.html'>layers</a></code>,
+    <p>Other grindr: <code><a href='drawers.html'>drawers</a></code>,
+  <code>layers_morphospace</code>, <code><a href='layers.html'>layers</a></code>,
   <code><a href='mosaic.html'>mosaic_engine</a></code>, <code><a href='papers.html'>papers</a></code>,
-  <code><a href='pile.html'>pile</a></code></p>
+  <code><a href='pile.html'>pile</a></code>, <code><a href='plot_LDA.html'>plot_LDA</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -205,7 +210,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 
 <span class='co'># Some outlines with bot</span>
 <span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>fake</span><span class='kw'>=</span><span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='fl'>40</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>)</div><div class='img'><img src='plot_PCA-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>type</span>)</div><div class='img'><img src='plot_PCA-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>fake</span>)</div><div class='img'><img src='plot_PCA-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>)</div><div class='img'><img src='plot_PCA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>type</span>)</div><div class='img'><img src='plot_PCA-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>fake</span>)</div><div class='img'><img src='plot_PCA-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Some curves with olea</span>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span> <span class='kw'>%&gt;%</span>
 <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>s</span><span class='kw'>=</span><span class='fu'><a href='coo_area.html'>coo_area</a></span>(<span class='no'>.</span>)) <span class='kw'>%&gt;%</span>
@@ -214,7 +219,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 <span class='no'>combine</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span>
 <span class='no'>op</span>$<span class='no'>fac</span>$<span class='no'>s</span> <span class='kw'>%&lt;&gt;%</span> <span class='fu'>as.character</span>() <span class='kw'>%&gt;%</span> <span class='fu'>as.numeric</span>()
 
-<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='no'>plot_PCA</span></div><div class='img'><img src='plot_PCA-9.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_PCA</span>(<span class='kw'>title</span><span class='kw'>=</span><span class='st'>"hi there!"</span>)</div><div class='img'><img src='plot_PCA-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'>### Now we can play with layers</span>
 <span class='co'># and for instance build a custom plot</span>
 <span class='co'># it should start with plot_PCA()</span>
@@ -231,7 +236,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 <span class='co'># and even continue after this function</span>
 <span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>my_plot</span>(~<span class='no'>var</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='layers.html'>layer_title</a></span>(<span class='st'>"hi there!"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='layers.html'>layer_stars</a></span>()</div><div class='img'><img src='plot_PCA-10.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <span class='fu'><a href='layers.html'>layer_stars</a></span>()</div><div class='img'><img src='plot_PCA-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 # You get the idea.
 </div></pre>
   </div>

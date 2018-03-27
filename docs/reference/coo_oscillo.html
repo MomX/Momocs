@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -141,7 +141,7 @@ curves.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>])</div><div class='img'><img src='coo_oscillo-6.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1] 0.00000000 4.70353942 3.90929170 3.90044215 3.89159259 4.66814120
+    <pre class="examples"><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>])</div><div class='img'><img src='coo_oscillo-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1] 0.00000000 4.70353942 3.90929170 3.90044215 3.89159259 4.66814120
 #&gt;   [7] 3.87389348 3.07964576 6.21238885 6.20353930 6.19468974 6.18584018
 #&gt;  [13] 6.17699063 5.38274291 6.15929151 6.15044196 6.14159240 5.34734468
 #&gt;  [19] 6.12389329 5.32964557 5.32079601 4.52654829 5.30309689 4.50884917
@@ -259,7 +259,7 @@ curves.</p></td>
 #&gt; [691] 2.53318563 1.73893791 2.51548651 2.50663696 1.71238924 2.48893784
 #&gt; [697] 1.69469012 2.47123873 1.67699101 2.45353961 1.65929189 1.65044234
 #&gt; [703] 2.42699094 1.63274322 1.62389367 3.18584044 4.74778721 4.73893765
-#&gt; [709] 4.73008809 3.93584037</div><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='st'>'efourier'</span>)</div><div class='img'><img src='coo_oscillo-7.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; # A tibble: 710 x 2
+#&gt; [709] 4.73008809 3.93584037</div><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='st'>'efourier'</span>)</div><div class='img'><img src='coo_oscillo-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; # A tibble: 710 x 2
 #&gt;       dx    dy
 #&gt;    &lt;dbl&gt; &lt;dbl&gt;
 #&gt;  1    0.    0.
@@ -272,7 +272,7 @@ curves.</p></td>
 #&gt;  8   -5.   -6.
 #&gt;  9   -4.   -6.
 #&gt; 10   -3.   -6.
-#&gt; # ... with 700 more rows</div><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='st'>'rfourier'</span>)</div><div class='img'><img src='coo_oscillo-8.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1]  34.28884  35.22856  35.85539  36.52625  37.23875  38.21062  38.96933
+#&gt; # ... with 700 more rows</div><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='st'>'rfourier'</span>)</div><div class='img'><img src='coo_oscillo-3.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1]  34.28884  35.22856  35.85539  36.52625  37.23875  38.21062  38.96933
 #&gt;   [8]  38.77938  38.96933  39.18390  39.42267  39.68521  39.97105  41.22840
 #&gt;  [15]  41.55177  41.89653  42.26213  43.56815  43.96536  45.28850  46.61700
 #&gt;  [22]  47.52337  48.85250  49.75835  50.66774  51.58049  52.10667  53.03236
@@ -373,7 +373,7 @@ curves.</p></td>
 #&gt; [687]  51.97622  50.63034  49.28829  47.95039  46.61700  45.71452  44.38155
 #&gt; [694]  43.05376  42.14616  40.81915  39.91086  38.58472  37.67564  36.35049
 #&gt; [701]  35.44054  34.53556  33.20556  32.29988  31.39993  30.97074  31.88281
-#&gt; [708]  32.80000  33.72190  34.28884</div><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='st'>'tfourier'</span>)</div><div class='img'><img src='coo_oscillo-9.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1] 0.00000000 4.70353942 3.90929170 3.90044215 3.89159259 4.66814120
+#&gt; [708]  32.80000  33.72190  34.28884</div><div class='input'><span class='fu'>coo_oscillo</span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='st'>'tfourier'</span>)</div><div class='img'><img src='coo_oscillo-4.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1] 0.00000000 4.70353942 3.90929170 3.90044215 3.89159259 4.66814120
 #&gt;   [7] 3.87389348 3.07964576 6.21238885 6.20353930 6.19468974 6.18584018
 #&gt;  [13] 6.17699063 5.38274291 6.15929151 6.15044196 6.14159240 5.34734468
 #&gt;  [19] 6.12389329 5.32964557 5.32079601 4.52654829 5.30309689 4.50884917
@@ -492,7 +492,7 @@ curves.</p></td>
 #&gt; [697] 1.69469012 2.47123873 1.67699101 2.45353961 1.65929189 1.65044234
 #&gt; [703] 2.42699094 1.63274322 1.62389367 3.18584044 4.74778721 4.73893765
 #&gt; [709] 4.73008809 3.93584037</div><div class='input'><span class='co'>#tfourier is prone to high-frequency noise but smoothing can help</span>
-<span class='fu'>coo_oscillo</span>(<span class='fu'><a href='coo_smooth.html'>coo_smooth</a></span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='fl'>10</span>), <span class='st'>'tfourier'</span>)</div><div class='img'><img src='coo_oscillo-10.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1] 0.000000000 6.210281146 6.150339598 6.110870956 6.093957661 6.111051488
+<span class='fu'>coo_oscillo</span>(<span class='fu'><a href='coo_smooth.html'>coo_smooth</a></span>(<span class='no'>shapes</span>[<span class='fl'>4</span>], <span class='fl'>10</span>), <span class='st'>'tfourier'</span>)</div><div class='img'><img src='coo_oscillo-5.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;   [1] 0.000000000 6.210281146 6.150339598 6.110870956 6.093957661 6.111051488
 #&gt;   [7] 6.210841936 0.294826636 1.163080415 1.662325460 1.784906858 1.788459018
 #&gt;  [13] 1.754364939 1.713694996 1.673686879 1.624391221 1.550688278 1.445544249
 #&gt;  [19] 1.313650160 1.165054644 1.007403085 0.842241873 0.665533492 0.472501809

@@ -147,11 +147,15 @@ reference:
   - pile
   - stack.Coo
   - inspect
+  - starts_with("plot_")
+  - starts_with("tps_")
+
+- title: grindr Graphics
+  desc: (base) graphics is not dead!
+  contents:
   - papers
   - drawers
   - layers
-  - starts_with("plot_")
-  - starts_with("tps_")
 
 - title: Bridges
   desc: Convert between different classes

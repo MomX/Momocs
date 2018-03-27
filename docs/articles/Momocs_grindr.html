@@ -9,7 +9,8 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -75,7 +76,7 @@
       <h1>Layered shape and multivariate plots with grindr</h1>
                         <h4 class="author">Vincent Bonhomme</h4>
             
-            <h4 class="date">2018-03-26</h4>
+            <h4 class="date">2018-03-27</h4>
           </div>
 
     
@@ -500,14 +501,13 @@
 <p>When working with multivariate euclidean (eg when <code>asp=1</code>) we often need to do again and again the same plot to explore the resulting data, for instance drawing convex hulls, confidence ellipses, etc. I implemented this layered strategy mostly to generalize former <code>plot.PCA</code> and reuse large parts.</p>
 <p>So far, you can easily customize plots with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>bot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(<span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span>PCA
-<span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(x, <span class="op">~</span>type) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span>layer_fullframe <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span>layer_morphospace <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span>layer_points <span class="op">%&gt;%</span><span class="st"> </span>layer_chull <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span>layer_eigen <span class="op">%&gt;%</span><span class="st"> </span>layer_legend</code></pre></div>
-<p><img src="Momocs_grindr_files/figure-html/unnamed-chunk-9-1.png" width="672"><img src="Momocs_grindr_files/figure-html/unnamed-chunk-9-2.png" width="672"></p>
+<span class="co"># plot_PCA(x, ~type) %&gt;% </span>
+<span class="co">#     layer_fullframe %&gt;% </span>
+<span class="co">#     layer_morphospace %&gt;% </span>
+<span class="co">#     layer_points %&gt;% layer_chull %&gt;% </span>
+<span class="co">#     layer_eigen %&gt;% layer_legend</span></code></pre></div>
 <p>It works pretty much the same way as <code>drawers</code>, you can access the full list with <code>apropos("layer_")</code> and <code><a href="../reference/layers.html">?layers</a></code>.</p>
-<p>Here again, I’ll write more once <code>cheapbabi</code> development will become stable.</p>
+<p>Here again, I’ll write more once <code>grindr</code> development will become stable.</p>
 <p><strong>All suggestions and comments are welcome!</strong></p>
 <hr>
 <ul>
