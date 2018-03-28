@@ -1,3 +1,31 @@
+.restore_LDs <- function(x){
+  ids_drop <- c(x$ids_collinear, x$ids_constant)
+  # nothing dropped case
+  if (length(ids_drop)==0)
+    return(x$LDs)
+  ids_keep <- setdiff(1:ncol(x$x), ids_drop)
+  # transpose unnormalized LDs so that columns are coe, rows LDs
+  x_keep <- x$LDs %>% t
+  # # build x_drop matrix from mean dropped coe
+  # x_drop <- apply(x$x[, ids_drop], 2, mean) %>%
+  #   list %>% rep(nrow(x_keep)) %>% do.call("rbind", .)
+  x_drop <- matrix(0, nrow(x_keep), length(ids_drop))
+  # dimnames it
+  if (!is.null(names(ids_drop)))
+    colnames(x_drop) <- names(ids_drop)
+  rownames(x_drop) <- rownames(x_keep)
+
+  # reinsert columns
+  res <- reinsert_columns(x_keep, x_drop, ids_keep, ids_drop)
+
+  # restore dimnames (overchecking but possibly safer)
+  if (!is.null(colnames(x$x)))
+    rownames(res) <- colnames(x$x)
+  if (!is.null(rownames(x_keep)))
+    colnames(res) <- rownames(x_keep)
+  res
+}
+
 # LDA methods on Coe -------------
 
 #' Linear Discriminant Analysis on Coe objects
@@ -49,58 +77,107 @@ LDA <- function(x, fac, retain, ...) {
 #' @rdname LDA
 #' @export
 LDA.default <- function(x, fac, retain, ...) {
-  X <- x
-  if (!is.matrix(X))
-    X <- as.matrix(X)
+  x0 <- x
+  # some checks
+  if (!is.matrix(x))
+    x <- as.matrix(x)
   if (missing(fac))
     stop("no fac provided")
-  # now we calculate two lda models with MASS::lda one with
-  mod <- MASS::lda(X, grouping = fac)
-  mod.pred <- predict(mod, X)
-  # leave-one-out cross validation
-  CV.fac <- MASS::lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
-  # we build a nice table from it
-  CV.tab <- table(fac, CV.fac)
+  # dispatch fac
+  f <- fac_dispatcher(x, fac)
+
+  # handles constant and collinear variables
+  ids_constant  <- which_constant(x)
+  if (length(ids_constant)>0){
+    ids_collinear <- which_collinear(x[, -ids_constant])
+  } else {
+    ids_collinear <- which_collinear(x)
+  }
+
+  # message about them, if verbose
+  if (.is_verbose()){
+    if (length(ids_constant)>0){
+      if (is.null(colnames(x))){
+        message("removed", length(ids_constant), "collinear columns")
+      } else {
+        message("removed these collinear columns:", paste(colnames(x)[ids_constant], collapse=", "))
+      }
+    }
+    if (length(ids_collinear)>0){
+      if (is.null(colnames(x))) {
+        message("removed", length(ids_collinear), "collinear columns")
+      } else {
+        message("removed these collinear columns:", paste(colnames(x)[ids_collinear], collapse=", "))
+      }
+    }
+  }
+
+  # drop concerned columns
+  ids_drop <- c(ids_constant, ids_collinear)
+  if (length(ids_drop)>0)
+    x <- x[, -c(ids_constant, ids_collinear)]
+
+  # now we calculate two lda models with MASS::lda,
+  #   1st - with  CV
+  mod      <- MASS::lda(x = x, grouping=f, ...)
+  mod.pred <- predict(mod, x)
+  #   2nd - with leave-one-out cross validation
+  CV.fac   <- MASS::lda(x=x, grouping=f,
+                        tol = 1e-05, CV = TRUE, ...)$class
+
+  # build a nice table from it
+  CV.tab <- table(f, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")
   CV.correct <- sum(diag(CV.tab))/sum(CV.tab)
-  # we calculate unstandardized LDs
-  n <- nrow(X)
-  lm.mod <- lm(X ~ fac)
-  dfw <- n - nlevels(fac)
+
+  # return to unstandardized LDs
+  n <- nrow(x)
+  lm.mod <- lm(x ~ f)
+  dfw <- n - nlevels(f)
   SSw <- var(lm.mod$residuals) * (n - 1)
   VCVw <- SSw/dfw
   LDs <- VCVw %*% mod$scaling
 
-  # class error
+  # calculate class error
   tab <- CV.tab
-  ce <- numeric(nrow(tab))
-  for (i in 1:nrow(tab)) ce[i] <- 1-(sum(tab[i, -i])/sum(tab[i, ]))
+  ce <- sapply(seq_along(1:nrow(tab)),
+               function(i) 1-(sum(tab[i, -i])/sum(tab[i, ])))
   names(ce) <- rownames(tab)
 
   # we build the list to be returned
-  LDA <- list(x = X, fac = fac, removed = remove, mod = mod,
-              mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
-              CV.correct = CV.correct, CV.ce = ce, LDs = LDs, mshape = NULL)
-  class(LDA) <- c("LDA", class(LDA))
-  return(LDA)
-}
+  res <- list(x = x0, fac = f,
+              mod = mod,
+              mod.pred = mod.pred,
+              CV.fac = CV.fac,
+              CV.tab = CV.tab,
+              CV.correct = CV.correct,
+              CV.ce = ce,
+              LDs = LDs,
+              ids_constant=ids_constant,
+              ids_collinear=ids_collinear)
 
-# #' @export
-# LDA.OutCoe <- function(x, fac, retain, ...) {
-#   #  stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
-#   LDA(x$coe, fac_dispatcher(x, fac))
-# }
+  if (is.list(x0) && !is.null(x0$mshape))
+    res$mshape <- x0$mshape
+
+  class(res) <- unique(c("LDA", class(res)))
+  return(res)
+}
 
 #' @export
 LDA.Coe <- function(x, fac, retain, ...) {
-  # stop("LDA on other Coe than OutCoe is deprecated, try on a PCA object")
-  res <- LDA(x$coe, fac_dispatcher(x, fac))
+  # since important warnings are handled
+  # and replace by messages
+  # and that if something bad happens,
+  # MASS:lda would stop anyway
+  res <- suppressWarnings(
+    LDA(x$coe, fac_dispatcher(x, fac))
+  )
   if (!is.null(x$method))
     res$method <- x$method
   if (!is.null(x$cuts))
     res$cuts <- x$cuts
-  if (!is.null(x$mshape))
-    res$mshape <- x$mshape
+  # if (!is.null(x$mshape))
+  #   res$mshape <- x$mshape
 
   res$mshape <- apply(x$coe, 2, mean)
 
@@ -112,7 +189,7 @@ LDA.Coe <- function(x, fac, retain, ...) {
 LDA.PCA <- function(x, fac, retain = 0.99, ...) {
 
   if (length(retain)==1 && retain < 1)
-      retain <- scree_min(x, retain)
+    retain <- scree_min(x, retain)
   if (length(retain)==1 && retain == "best")
     retain <- 1:ncol(x$x)
 
@@ -257,8 +334,8 @@ classification_metrics.table <- function(x){
 
   # macro precision, recall, f1
   macro_avg <- dplyr::data_frame(avg_precision=mean(precision),
-                          avg_recall=mean(recall),
-                          avg_f1=mean(f1))
+                                 avg_recall=mean(recall),
+                                 avg_f1=mean(f1))
 
   # one vs all
   ova = lapply(1 : nc,
@@ -442,8 +519,8 @@ reLDA.default <- function(newdata, LDA){
 #' @rdname reLDA
 #' @export
 reLDA.PCA <- function(newdata, LDA){
-#   if (missing(newdata) | !any(class(newdata) == "PCA"))
-#     stop(" * a PCA object must be provided")
+  #   if (missing(newdata) | !any(class(newdata) == "PCA"))
+  #     stop(" * a PCA object must be provided")
   mod <- LDA$mod
   nc <- ncol(LDA$x)
   reLDA <- predict(mod, newdata$x[, 1:nc])
