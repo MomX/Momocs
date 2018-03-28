@@ -128,8 +128,8 @@ dfourier.Opn <- function(coo, nb.h) {
 
 #' @rdname dfourier
 #' @export
-dfourier.list <- function(x, ...){
-  lapply(x, dfourier, ...)
+dfourier.list <- function(coo, nb.h){
+  lapply(coo, dfourier, nb.h)
 }
 
 #' @rdname dfourier

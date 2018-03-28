@@ -14,7 +14,7 @@ dfourier(coo, nb.h)
 
 \method{dfourier}{Opn}(coo, nb.h)
 
-\method{dfourier}{list}(x, ...)
+\method{dfourier}{list}(coo, nb.h)
 
 \method{dfourier}{Coo}(coo, nb.h)
 }

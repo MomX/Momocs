@@ -10,6 +10,7 @@
 #' @param nc `numeric` number of columns to position shapes (default `5`)
 #' @param rotate `numeric` angle (in radians) to rotate shapes when displayed on the morphospace (default: `0`)
 #' @param size `numeric` size to use to feed [coo_template] (default: `0.9`)
+#' @param col color to draw shapes (default: `#999999`)
 #' @param flipx `logical` whether to flip shapes against the x-axis (default: `FALSE`)
 #' @param flipy `logical` whether to flip shapes against the y-axis (default: `FALSE`)
 #' @param draw `logical` whether to draw shapes (default: `TRUE`)

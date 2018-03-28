@@ -32,6 +32,8 @@ layer_morphospace_LDA(x, position = c("range", "full", "circle", "xy",
 
 \item{size}{\code{numeric} size to use to feed \link{coo_template} (default: \code{0.9})}
 
+\item{col}{color to draw shapes (default: \code{#999999})}
+
 \item{flipx}{\code{logical} whether to flip shapes against the x-axis (default: \code{FALSE})}
 
 \item{flipy}{\code{logical} whether to flip shapes against the y-axis (default: \code{FALSE})}

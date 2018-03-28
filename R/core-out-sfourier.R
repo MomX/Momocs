@@ -101,8 +101,8 @@ sfourier.Out <- function(x, nb.h){
 
 #' @rdname sfourier
 #' @export
-sfourier.list <- function(x, ...){
-  lapply(x, sfourier, ...)
+sfourier.list <- function(x, nb.h){
+  lapply(x, sfourier, nb.h)
 }
 
 #' Inverse radii variation Fourier transform

@@ -811,6 +811,7 @@ layer_labelgroups <- function(x, col=par("fg"), cex=3/4, font=2,
 }
 
 # meta layers ----------------------------------------------
+#' @param size `numeric` as a fraction of graphical window (default: `1/200`)
 #' @export
 #' @rdname layers
 layer_rug <- function(x, size=1/200, ...){

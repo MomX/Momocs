@@ -13,7 +13,7 @@ sfourier(x, nb.h)
 
 \method{sfourier}{Out}(x, nb.h)
 
-\method{sfourier}{list}(x, ...)
+\method{sfourier}{list}(x, nb.h)
 }
 \arguments{
 \item{x}{A \code{list} or \code{matrix} of coordinates or an \code{Out} object}

@@ -124,6 +124,8 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 
 \item{rect}{\code{logical} whether to draw a rectangle below names}
 
+\item{size}{\code{numeric} as a fraction of graphical window (default: \code{1/200})}
+
 \item{freq}{\code{logical}to feed\code{[hist] (default:}FALSE`)}
 
 \item{breaks}{to feed \link{hist} (default: calculated on the pooled values)}
