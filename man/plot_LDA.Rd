@@ -4,17 +4,15 @@
 \alias{plot_LDA}
 \title{LDA plot using grindr layers}
 \usage{
-plot_LDA(x, layer_2 = layer_histogram_2, axes = c(1, 2),
-  palette = pal_qual, points = TRUE, points_transp = 1/4,
-  morphospace = FALSE, morphospace_position = "range", chull = TRUE,
-  chullfilled = FALSE, labelgroups = FALSE, legend = TRUE, title = "",
-  center_origin = TRUE, zoom = 0.9, eigen = TRUE, box = TRUE,
-  axesnames = TRUE, axesvar = TRUE)
+plot_LDA(x, axes = c(1, 2), palette = pal_qual, points = TRUE,
+  points_transp = 1/4, morphospace = FALSE,
+  morphospace_position = "range", chull = TRUE, chullfilled = FALSE,
+  labelgroups = FALSE, legend = TRUE, title = "", center_origin = TRUE,
+  zoom = 0.9, eigen = TRUE, box = TRUE, iftwo_layer = layer_histogram_2,
+  iftwo_split = FALSE, axesnames = TRUE, axesvar = TRUE)
 }
 \arguments{
 \item{x}{\link{LDA} object}
-
-\item{layer_2}{a function (no quotes) for drawing LD1 when there are two levels. So far, one of \code{layer_histogram_2} (default) or \code{layer_density_2}}
 
 \item{axes}{\code{numeric} of length two to select PCs to use
 (\code{c(1, 2)} by default)}
@@ -46,6 +44,11 @@ plot_LDA(x, layer_2 = layer_histogram_2, axes = c(1, 2),
 \item{eigen}{\code{logical} whether to draw this using \link{layer_eigen}}
 
 \item{box}{\code{logical} whether to draw this using \link{layer_box}}
+
+\item{iftwo_layer}{function (no quotes) for drawing LD1 when there are two levels.
+So far, one of \link{layer_histogram_2} (default) or \link{layer_density_2}}
+
+\item{iftwo_split}{to feed \code{split} argument in \link{layer_histogram_2} or \link{layer_density_2}}
 
 \item{axesnames}{\code{logical} whether to draw this using \link{layer_axesnames}}
 

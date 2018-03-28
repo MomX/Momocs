@@ -43,9 +43,13 @@
 
 
 .layerize_LDA <- function(x, f=x$fac, axes=c(1, 2), palette=pal_qual){
+  # restore LDs if some were dropped because constant or collinear
+  x$LDs <- .restore_LDs(x)
+
   if (ncol(x$LDs) < 2){
     message("* Only two levels, so a single LD and preparing for an histogram")
     xy <- x$mod.pred$x[, 1, drop=FALSE]
+    axes <- 1
   } else {
     xy <- x$mod.pred$x[, axes]
   }
@@ -237,7 +241,6 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 #' This is part of `grindr` approach that may be packaged at some point. All comments are welcome.
 #'
 #' @param x [LDA] object
-#' @param layer_2 a function (no quotes) for drawing LD1 when there are two levels. So far, one of `layer_histogram_2` (default) or `layer_density_2`
 #' @param axes \code{numeric} of length two to select PCs to use
 #' (\code{c(1, 2)} by default)
 #' @param palette \code{color palette} to use \code{col_summer} by default
@@ -254,6 +257,9 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 #' @param zoom `numeric` zoom level for the frame (default: 0.9)
 #' @param eigen `logical` whether to draw this using [layer_eigen]
 #' @param box `logical` whether to draw this using [layer_box]
+#' @param iftwo_layer  function (no quotes) for drawing LD1 when there are two levels.
+#' So far, one of [layer_histogram_2] (default) or [layer_density_2]
+#' @param iftwo_split to feed `split` argument in [layer_histogram_2] or [layer_density_2]
 #' @param axesnames `logical` whether to draw this using [layer_axesnames]
 #' @param axesvar `logical` whether to draw this using [layer_axesvar]
 #' @family grindr
@@ -309,7 +315,7 @@ plot_PCA <- function(x, f, axes=c(1, 2),
 #'
 #' # You get the idea.
 #' @export
-plot_LDA <- function(x, layer_2=layer_histogram_2,
+plot_LDA <- function(x,
                      axes=c(1, 2),
                      palette=pal_qual,
                      points=TRUE,
@@ -328,6 +334,8 @@ plot_LDA <- function(x, layer_2=layer_histogram_2,
                      center_origin=TRUE, zoom=0.9,
                      eigen=TRUE,
                      box=TRUE,
+                     iftwo_layer=layer_histogram_2,
+                     iftwo_split=FALSE,
                      axesnames=TRUE, axesvar=TRUE){
 
   # prepare ---------------------------
@@ -335,8 +343,9 @@ plot_LDA <- function(x, layer_2=layer_histogram_2,
   x %<>% .layerize_LDA(axes=axes, palette=palette)
 
 
-  if (ncol(x$xy) < 2){
-    x %>% layer_2 %>% return()
+  if (length(x$axes) < 2){
+    x %>% iftwo_layer(split=iftwo_split)
+    return(x)
   }
 
   # frame
@@ -912,21 +921,29 @@ layer_density_2 <- function(x, bw, split=FALSE, rug=TRUE, transp=0){
   # plots the first density
   d1 <- stats::density(xy[f==levels(f)[1], ], bw=bw)
   plot(d1, xlim=xl, ylim=yl, yaxs="i",
-       type = "n", xlab="LD1",
-       main=levels(f)[1],  bty="n")
+       type = "n", xlab="LD1", bty="n", main="")
   polygon(d1, col = cols[1])
   # and the first rug if required
   if (rug)
     graphics::rug(xy[f==levels(f)[1], ], ticksize = ticksize, col=cols0[1], line=1/2)
+  # add the 1st title if splitted, legend otherwise
+  if (split)
+    title(levels(f)[1])
+  else
+    layer_legend(x)
+
 
   # same for second density
   d2 <- stats::density(xy[f==levels(f)[2], ], bw=bw)
-  if (split)
+  #
+  if (split){
     plot(d2,
          xlim=xl, ylim=yl, yaxs="i",
-         type = "n", xlab="LD1",
-         main=levels(f)[2],  bty="n")
+         type = "n", xlab="LD1", bty="n", main="")
+    title(levels(f)[2])
+  }
   graphics::polygon(d2, col = cols[2])
+  # rug if any
   if(rug)
     graphics::rug(xy[f==levels(f)[2], ], ticksize = ticksize, col=cols0[2], line=1/2)
 
@@ -1108,5 +1125,4 @@ layer_legend <- function(x, probs=seq(0, 1, 0.25), cex=3/4,  ...){
 #'        cex = 0.8, col = col)
 #' }
 
-# morphospace ----------------------------------------------
 
