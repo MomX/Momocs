@@ -42,7 +42,7 @@
 }
 
 
-.layerize_LDA <- function(x, f=x$fac, axes=c(1, 2), palette=pal_qual){
+.layerize_LDA <- function(x, f=x$f, axes=c(1, 2), palette=pal_qual){
   # restore LDs if some were dropped because constant or collinear
   x$LDs <- .restore_LDs(x)
 
@@ -342,11 +342,13 @@ plot_LDA <- function(x,
 
   x %<>% .layerize_LDA(axes=axes, palette=palette)
 
-
   if (length(x$axes) < 2){
     x %>% iftwo_layer(split=iftwo_split)
     return(x)
   }
+
+  .check(all(axes <= ncol(x$rotation)),
+         "axes must all be <= number of LDs")
 
   # frame
   x %<>%
@@ -875,12 +877,22 @@ layer_histogram_2 <- function(x, freq=FALSE, breaks, split=FALSE, transp=0){
   # draw the two hists
   graphics::hist(xy[f==levels(f)[1], ], freq=freq, breaks=breaks,
        xlim=xl, ylim=yl, xlab="LD1", ylab=NA,
-       main=levels(f)[1],
+       main="",
        col=cols[1], axes=TRUE)
+
+  if (split)
+    title(levels(f)[1])
+  else
+    layer_legend(x)
+
   graphics::hist(xy[f==levels(f)[2], ], freq=freq, breaks=breaks,
        xlim=xl, ylim=yl, xlab="LD1", ylab=NA,
-       main=levels(f)[2],
+       main="",
        col=cols[2], axes=TRUE, add=!split)
+
+  if (split)
+    title(levels(f)[2])
+
   # restore layout (incompatible with on.exit - do not know why)
   graphics::layout(1)
   # propagate

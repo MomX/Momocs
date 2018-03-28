@@ -70,7 +70,7 @@ reinsert_columns <- function(x_keep, x_drop, ids_keep, ids_drop){
   lapply(1:n,
          # one of the two which will return an integer(0)
          function(i) cbind(x_keep[, which(ids_keep==i)], x_drop[, which(ids_drop==i)])) %>%
-    do.call("rbind", .)
+    do.call("cbind", .)
 }
 
 # andnow --------

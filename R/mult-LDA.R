@@ -20,10 +20,10 @@
 
   # restore dimnames (overchecking but possibly safer)
   if (!is.null(colnames(x$x)))
-    rownames(res) <- colnames(x$x)
+    colnames(res) <- colnames(x$x)
   if (!is.null(rownames(x_keep)))
-    colnames(res) <- rownames(x_keep)
-  res
+    rownames(res) <- rownames(x_keep)
+  t(res)
 }
 
 # LDA methods on Coe -------------
@@ -145,7 +145,7 @@ LDA.default <- function(x, fac, retain, ...) {
   names(ce) <- rownames(tab)
 
   # we build the list to be returned
-  res <- list(x = x0, fac = f,
+  res <- list(x = x0, f = f,
               mod = mod,
               mod.pred = mod.pred,
               CV.fac = CV.fac,
@@ -176,6 +176,8 @@ LDA.Coe <- function(x, fac, retain, ...) {
     res$method <- x$method
   if (!is.null(x$cuts))
     res$cuts <- x$cuts
+  if (!is.null(x$fac))
+    res$fac <- x$fac
   # if (!is.null(x$mshape))
   #   res$mshape <- x$mshape
 
