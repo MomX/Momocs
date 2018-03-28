@@ -275,6 +275,11 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, coo=NULL) {
   return(Coo2)
 }
 
+#' @export
+fgProcrustes.list <- function(x, ...){
+  lapply(x, fgProcrustes, ...)
+}
+
 # fgsProcrustes-----------------
 #' Full Generalized Procrustes alignment between shapes with sliding landmarks
 #'
@@ -316,4 +321,8 @@ fgsProcrustes.Ldk <- function(x){
   return(x2)
 }
 
+#' @export
+fgsProcrustes.list <- function(x, ...){
+  lapply(x, fgsProcrustes, ...)
+}
 ##### end Procrustes

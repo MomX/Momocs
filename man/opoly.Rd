@@ -4,6 +4,7 @@
 \alias{opoly}
 \alias{opoly.default}
 \alias{opoly.Opn}
+\alias{opoly.list}
 \title{Calculate orthogonal polynomial fits on open outlines}
 \usage{
 opoly(x, ...)
@@ -12,6 +13,8 @@ opoly(x, ...)
 
 \method{opoly}{Opn}(x, degree, baseline1 = c(-0.5, 0), baseline2 = c(0.5,
   0), nb.pts = 120, ...)
+
+\method{opoly}{list}(x, ...)
 }
 \arguments{
 \item{x}{a matrix (or a list) of (x; y) coordinates}

@@ -183,6 +183,11 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...
   return(res)
 }
 
+#' @rdname efourier
+#' @export
+efourier.list <- function(x, ...){
+  lapply(x, efourier, ...)
+}
 
 #' @rdname efourier
 #' @export

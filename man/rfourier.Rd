@@ -4,6 +4,7 @@
 \alias{rfourier}
 \alias{rfourier.default}
 \alias{rfourier.Out}
+\alias{rfourier.list}
 \title{Radii variation Fourier transform (equally spaced radii)}
 \usage{
 rfourier(x, ...)
@@ -12,6 +13,8 @@ rfourier(x, ...)
 
 \method{rfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE,
   thres = pi/90, ...)
+
+\method{rfourier}{list}(x, ...)
 }
 \arguments{
 \item{x}{A \code{list} or \code{matrix} of coordinates or an \code{Out} object}

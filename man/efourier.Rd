@@ -4,6 +4,7 @@
 \alias{efourier}
 \alias{efourier.default}
 \alias{efourier.Out}
+\alias{efourier.list}
 \alias{efourier_norm}
 \title{Elliptical Fourier transform (and its normalization)}
 \usage{
@@ -13,6 +14,8 @@ efourier(x, ...)
 
 \method{efourier}{Out}(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE,
   ...)
+
+\method{efourier}{list}(x, ...)
 
 efourier_norm(ef, start = FALSE)
 }

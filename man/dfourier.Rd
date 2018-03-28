@@ -4,6 +4,7 @@
 \alias{dfourier}
 \alias{dfourier.default}
 \alias{dfourier.Opn}
+\alias{dfourier.list}
 \alias{dfourier.Coo}
 \title{Discrete cosinus transform}
 \usage{
@@ -12,6 +13,8 @@ dfourier(coo, nb.h)
 \method{dfourier}{default}(coo, nb.h)
 
 \method{dfourier}{Opn}(coo, nb.h)
+
+\method{dfourier}{list}(x, ...)
 
 \method{dfourier}{Coo}(coo, nb.h)
 }

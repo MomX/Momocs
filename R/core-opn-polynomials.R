@@ -121,6 +121,11 @@ opoly.Opn <- function(x,
   return(res)
 }
 
+#' @rdname opoly
+#' @export
+opoly.list <- function(x, ...){
+  lapply(x, opoly, ...)
+}
 
 #' Calculate natural polynomial fits on open outlines
 #'
@@ -234,6 +239,12 @@ npoly.Opn <- function(x,
                 mod = mod)
   res$cuts <- ncol(res$coe)
   return(res)
+}
+
+#' @rdname npoly
+#' @export
+npoly.list <- function(x, ...){
+  lapply(x, npoly, ...)
 }
 
 #' Calculates shape from a polynomial model

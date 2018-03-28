@@ -128,6 +128,12 @@ dfourier.Opn <- function(coo, nb.h) {
 
 #' @rdname dfourier
 #' @export
+dfourier.list <- function(x, ...){
+  lapply(x, dfourier, ...)
+}
+
+#' @rdname dfourier
+#' @export
 dfourier.Coo <- function(coo, nb.h) {
   stop("dfourier can only be applied on Opn objects")
 }

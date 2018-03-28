@@ -23,7 +23,8 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
  olea \%>\%
       filter(var == "Aglan") \%>\% # to have a balanced nb of 'view'
       chop(~view) \%>\%    # split into a list of 2
-      lapply(npoly) \%>\% # separately apply npoly
+      npoly \%>\%          # separately apply npoly
+                         # strict equivalent to lapply(npoly)
       combine \%>\%       # recombine
       PCA \%>\% plot      # an illustration of the 2 views
       # treated separately

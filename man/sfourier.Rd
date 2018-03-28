@@ -4,6 +4,7 @@
 \alias{sfourier}
 \alias{sfourier.default}
 \alias{sfourier.Out}
+\alias{sfourier.list}
 \title{Radii variation Fourier transform (equally spaced curvilinear abscissa)}
 \usage{
 sfourier(x, nb.h)
@@ -11,6 +12,8 @@ sfourier(x, nb.h)
 \method{sfourier}{default}(x, nb.h)
 
 \method{sfourier}{Out}(x, nb.h)
+
+\method{sfourier}{list}(x, ...)
 }
 \arguments{
 \item{x}{A \code{list} or \code{matrix} of coordinates or an \code{Out} object}

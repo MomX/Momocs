@@ -4,6 +4,7 @@
 \alias{tfourier}
 \alias{tfourier.default}
 \alias{tfourier.Out}
+\alias{tfourier.list}
 \title{Tangent angle Fourier transform}
 \usage{
 tfourier(x, ...)
@@ -11,6 +12,8 @@ tfourier(x, ...)
 \method{tfourier}{default}(x, nb.h, smooth.it = 0, norm = FALSE, ...)
 
 \method{tfourier}{Out}(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...)
+
+\method{tfourier}{list}(x, ...)
 }
 \arguments{
 \item{x}{A list or matrix of coordinates or an \code{Out}}

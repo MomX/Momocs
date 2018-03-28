@@ -132,6 +132,12 @@ rfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, thres=pi/90, 
   return(res)
 }
 
+#' @rdname rfourier
+#' @export
+rfourier.list <- function(x, ...){
+  lapply(x, rfourier, ...)
+}
+
 #' Inverse radii variation Fourier transform
 #'
 #' \code{rfourier_i} uses the inverse radii variation (equally spaced radii) transformation to

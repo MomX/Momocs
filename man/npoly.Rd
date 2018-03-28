@@ -4,6 +4,7 @@
 \alias{npoly}
 \alias{npoly.default}
 \alias{npoly.Opn}
+\alias{npoly.list}
 \title{Calculate natural polynomial fits on open outlines}
 \usage{
 npoly(x, ...)
@@ -12,6 +13,8 @@ npoly(x, ...)
 
 \method{npoly}{Opn}(x, degree, baseline1 = c(-0.5, 0), baseline2 = c(0.5,
   0), nb.pts = 120, ...)
+
+\method{npoly}{list}(x, ...)
 }
 \arguments{
 \item{x}{a matrix (or a list) of (x; y) coordinates or an \link{Opn} object}

@@ -133,6 +133,12 @@ tfourier.Out <- function(x, nb.h = 40, smooth.it = 0, norm = TRUE, ...) {
   return(res)
 }
 
+#' @rdname tfourier
+#' @export
+tfourier.list <- function(x, ...){
+  lapply(x, tfourier, ...)
+}
+
 #' Inverse tangent angle Fourier transform
 #'
 #' \code{tfourier_i} uses the inverse tangent angle Fourier transformation to

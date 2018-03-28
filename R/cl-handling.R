@@ -528,7 +528,8 @@ sample_frac.Coe <- sample_frac.Coo
 #'  olea %>%
 #'       filter(var == "Aglan") %>% # to have a balanced nb of 'view'
 #'       chop(~view) %>%    # split into a list of 2
-#'       lapply(npoly) %>% # separately apply npoly
+#'       npoly %>%          # separately apply npoly
+#'                          # strict equivalent to lapply(npoly)
 #'       combine %>%       # recombine
 #'       PCA %>% plot      # an illustration of the 2 views
 #'       # treated separately
@@ -616,11 +617,11 @@ chop.Coe <- function(.data, fac){
 #' # note that you can apply something (single function or a more
 #' # complex pipe) then combine everyone, since combine also works on lists
 #' # eg:
-#' # bot_s2 <- lapply(bot_s, efourier, 10)
+#' # bot_s2 <- efourier(bot_s, 10) # equivalent to lapply(bot_s, efourier, 10)
 #' # bot_sf <- combine(bot_s2)
 #'
 #' # pipe style
-#' lapply(bot_s, efourier, 10) %>% combine()
+#' efourier(bot_s, 10) %>% combine()
 #' @export
 combine <- function(...) {
   UseMethod("combine")
