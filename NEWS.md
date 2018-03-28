@@ -1,4 +1,6 @@
 # Momocs 1.2.9.1
+* all morphometrics methods now accepts `list`s which is more elegant when working with `chop`+`combine`
+* `LDA` methods have been partly rewritten and now handles constant and collinear variables by dropping them and storing them in the returned list
 * morphospace on LDAs are (finally) back, yet still quite experimental.
 * `plot_LDA` now on. Pretty much the same as `plot_PCA` (which was expected yet nice).
 * `.layerize_LDA` as an internal to prepare the previous
