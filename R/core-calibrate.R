@@ -1641,12 +1641,13 @@ calibrate_harmonicpower_efourier <-
       minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
     minh <- minh+drop
     # talk to me
-    if (.is_verbose()){
-      #     cat("\n$minh:\n")
-      print(minh)
-    }
+    # if (.is_verbose()){
+    #   #     cat("\n$minh:\n")
+    #   print(minh)
+    # }
     # we return the full matrix, the ggplot and the thresholds
-    invisible(list(gg=gg, q=res, minh=minh))
+
+    return(list(gg=gg, q=res, minh=minh))
   }
 
 #' @rdname calibrate_harmonicpower
@@ -1708,12 +1709,9 @@ calibrate_harmonicpower_rfourier <-
       wi <- which(med.res > thresh[i])
       minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
     minh <- minh+drop
-    # talk to me
-    if (.is_verbose()){
-      #     cat("\n$minh:\n")
-      print(minh)}
+
     # we return the full matrix, the ggplot and the thresholds
-    invisible(list(gg=gg, q=res, minh=minh))
+    return(list(gg=gg, q=res, minh=minh))
   }
 
 #' @rdname calibrate_harmonicpower
@@ -1775,12 +1773,8 @@ calibrate_harmonicpower_tfourier <-
       wi <- which(med.res > thresh[i])
       minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
     minh <- minh+drop
-    # talk to me
-    if (.is_verbose()){
-      #     cat("\n$minh:\n")
-      print(minh)}
-    # we return the full matrix, the ggplot and the thresholds
-    invisible(list(gg=gg, q=res, minh=minh))
+
+    return(list(gg=gg, q=res, minh=minh))
   }
 
 #' @rdname calibrate_harmonicpower
@@ -1842,13 +1836,9 @@ calibrate_harmonicpower_sfourier <-
       wi <- which(med.res > thresh[i])
       minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
     minh <- minh+drop
-    # talk to me
-    if (.is_verbose()){
-      #     cat("\n$minh:\n")
-      print(minh)}
-    # we return the full matrix, the ggplot and the thresholds
-    invisible(list(gg=gg, q=res, minh=minh))
-  }
+
+    return(list(gg=gg, q=res, minh=minh))
+}
 
 
 #' @rdname calibrate_harmonicpower
@@ -1910,12 +1900,8 @@ calibrate_harmonicpower_dfourier <-
       wi <- which(med.res > thresh[i])
       minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
     minh <- minh+drop
-    # talk to me
-    if (.is_verbose()){
-      #     cat("\n$minh:\n")
-      print(minh)}
-    # we return the full matrix, the ggplot and the thresholds
-    invisible(list(gg=gg, q=res, minh=minh))
+
+    return(list(gg=gg, q=res, minh=minh))
   }
 
 # 4. calibrate_r2 ----------------
@@ -1990,12 +1976,9 @@ calibrate_r2_opoly <- function(Opn, id = 1:length(Opn),
     wi <- which(med.res > thresh[i])
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
   mind <- minh
-  # talk to me
-  if (.is_verbose()){
-    #     cat("\n$minh:\n")
-    print(mind)}
-  # we return the full matrix, the ggplot and the thresholds
-  invisible(list(gg=gg, q=res, mind=mind))
+
+  return(list(gg=gg, q=res, mind=mind))
+
 }
 
 #' @rdname calibrate_r2
@@ -2038,11 +2021,6 @@ calibrate_r2_npoly <- function(Opn, id = 1:length(Opn),
   for (i in seq(along=thresh)){
     wi <- which(med.res > thresh[i])
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
-  mind <- minh
-  # talk to me
-  if (.is_verbose()){
-    #     cat("\n$minh:\n")
-    print(mind)}
-  # we return the full matrix, the ggplot and the thresholds
-  invisible(list(gg=gg, q=res, mind=mind))
+
+  return(list(gg=gg, q=res, mind=mind))
 }
