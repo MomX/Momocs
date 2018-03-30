@@ -8,7 +8,7 @@
 #' @param x a [Coe] or [PCA] object
 #' @param fac factor specification for [fac_dispatcher]
 #' @param type `character` one of `c("horizontal", "vertical", "fan")` (default: `horizontal`)
-#' @param k `numeric` if provided, cut the tree into this number of groups
+#' @param k `numeric` if provided and greater than 1, cut the tree into this number of groups
 #' @param dist_method to feed [dist]'s `method` argument, that is one of
 #' `euclidean` (default), `maximum`, `manhattan`, `canberra`, `binary` or `minkowski`.
 #' @param hclust_method to feed [hclust]'s `method` argument, one of
@@ -106,7 +106,7 @@ CLUST.Coe <- function(x,
     dendextend::set("labels_cex", cex)
 
   # cut, if required
-  if (!missing(k)){
+  if (!missing(k) && k > 1){
     d %<>% dendextend::set("branches_k_color", palette(k), k=k)
   }
 

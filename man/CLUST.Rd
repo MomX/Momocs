@@ -23,7 +23,7 @@ CLUST(x, ...)
 
 \item{type}{\code{character} one of \code{c("horizontal", "vertical", "fan")} (default: \code{horizontal})}
 
-\item{k}{\code{numeric} if provided, cut the tree into this number of groups}
+\item{k}{\code{numeric} if provided and greater than 1, cut the tree into this number of groups}
 
 \item{dist_method}{to feed \link{dist}'s \code{method} argument, that is one of
 \code{euclidean} (default), \code{maximum}, \code{manhattan}, \code{canberra}, \code{binary} or \code{minkowski}.}
