@@ -12,9 +12,10 @@
 #' fl %>% PCA() %>% plot("sp")
 #' @export
 TraCoe <- function(coe = matrix(), fac = dplyr::data_frame()) {
-  TraCoe <- list(coe = coe, fac = fac)
-  TraCoe <- structure(list(coe = coe, fac = fac), class=c("TraCoe", "Coe"))
-  return(TraCoe)
+  structure(
+    list(coe = coe, fac = dplyr::as_data_frame(fac)),
+    class=c("TraCoe", "Coe")
+  )
 }
 
 #' @export
