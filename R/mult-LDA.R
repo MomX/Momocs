@@ -86,6 +86,10 @@ LDA.default <- function(x, fac, retain, ...) {
   # dispatch fac
   f <- fac_dispatcher(x, fac)
 
+  # check that at least two levels
+  .check(nlevels(f)>1,
+         "* less than two levels in the grouping passed")
+
   # handles constant and collinear variables
   ids_constant  <- which_constant(x)
   if (length(ids_constant)>0){
