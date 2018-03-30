@@ -100,68 +100,78 @@
 
     
     <p>Performs hierarchical clustering through dist and hclust. So far it is mainly
-a wrapper around these two functions, plus plotting using plot.phylo from the
-package ape.</p>
+a wrapper around these two functions, plus plotting using the <code>dendextend</code> package facilities.</p>
     
 
-    <pre class="usage"><span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fan"</span>, <span class='kw'>dist_method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>,
-  <span class='kw'>hclust_method</span> <span class='kw'>=</span> <span class='st'>"complete"</span>, <span class='kw'>retain</span> <span class='kw'>=</span> <span class='fl'>0.99</span>, <span class='no'>tip_labels</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_qual</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for Coe</span>
+<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"horizontal"</span>, <span class='st'>"vertical"</span>, <span class='st'>"fan"</span>)[<span class='fl'>1</span>], <span class='no'>k</span>,
+  <span class='kw'>dist_method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>, <span class='kw'>hclust_method</span> <span class='kw'>=</span> <span class='st'>"complete"</span>, <span class='kw'>retain</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
+  <span class='no'>labels</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a PCA object (Coe method deprecated so far)</p></td>
-    </tr>
-    <tr>
-      <th>fac</th>
-      <td><p>the id or column name or formula for columns to use from $fac.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>to pass to <code><a href='http://www.rdocumentation.org/packages/ape/topics/plot.phylo'>ape::plot.phylo</a></code>'s <code>type</code> argument, one of
-"cladogram", "phylogram", "radial", "unrooted" or "fan" (by default)</p></td>
-    </tr>
-    <tr>
-      <th>dist_method</th>
-      <td><p>to feed dist's <code>method</code> argument, one of
-"euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski".</p></td>
-    </tr>
-    <tr>
-      <th>hclust_method</th>
-      <td><p>to feed hclust's method argument, one of
-"ward.D", "ward.D2", "single", "complete" (default), "average", "mcquitty", "median" or "centroid".</p></td>
-    </tr>
-    <tr>
-      <th>retain</th>
-      <td><p>number of axis to retain from the PCA as a range of number eg <code>1:5</code> to retain
-the first 5 PCs. If a number &lt;= 1 is passed, then the number of PCs retained
-will be enough to capture this proportion of variance.</p></td>
-    </tr>
-    <tr>
-      <th>tip_labels</th>
-      <td><p>the id or column name in $fac to use as tip_labels rather than rownames. Note that
-you can also pass a character (or a factor) with the same number of rows of x$x</p></td>
-    </tr>
-    <tr>
-      <th>palette</th>
-      <td><p>a color palette to use (<code>col_qual</code> by default).
-If <code>NULL</code>, <code>par("fg")</code> is used</p></td>
+      <td><p>a <a href='Coe.html'>Coe</a> or <a href='PCA.html'>PCA</a> object</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional parameters to feed <code>plot.phylo</code></p></td>
+      <td><p>useless here</p></td>
+    </tr>
+    <tr>
+      <th>fac</th>
+      <td><p>factor specification for <a href='fac_dispatcher.html'>fac_dispatcher</a></p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p><code>character</code> one of <code>c("horizontal", "vertical", "fan")</code> (default: <code>horizontal</code>)</p></td>
+    </tr>
+    <tr>
+      <th>k</th>
+      <td><p><code>numeric</code> if provided and greater than 1, cut the tree into this number of groups</p></td>
+    </tr>
+    <tr>
+      <th>dist_method</th>
+      <td><p>to feed dist's <code>method</code> argument, that is one of
+<code>euclidean</code> (default), <code>maximum</code>, <code>manhattan</code>, <code>canberra</code>, <code>binary</code> or <code>minkowski</code>.</p></td>
+    </tr>
+    <tr>
+      <th>hclust_method</th>
+      <td><p>to feed hclust's <code>method</code> argument, one of
+<code>ward.D</code>, <code>ward.D2</code>, <code>single</code>, <code>complete</code> (default), <code>average</code>, <code>mcquitty</code>, <code>median</code> or <code>centroid</code>.</p></td>
+    </tr>
+    <tr>
+      <th>retain</th>
+      <td><p>number of axis to retain if a <a href='PCA.html'>PCA</a> object is passed. If a number &lt; 1 is passed, then the number of PCs retained
+will be enough to capture this proportion of variance via <a href='scree.html'>scree_min</a></p></td>
+    </tr>
+    <tr>
+      <th>labels</th>
+      <td><p>factor specification for labelling tips and to feed <a href='fac_dispatcher.html'>fac_dispatcher</a></p></td>
+    </tr>
+    <tr>
+      <th>lwd</th>
+      <td><p>for branches (default: <code>0.25</code>)</p></td>
+    </tr>
+    <tr>
+      <th>cex</th>
+      <td><p>for labels (default: <code>1</code>)</p></td>
+    </tr>
+    <tr>
+      <th>palette</th>
+      <td><p>one of available palettes</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the <code>phylo</code> object, invisibly</p>
+    <p>a <code>ggplot</code> plot</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -173,41 +183,15 @@ If <code>NULL</code>, <code>par("fg")</code> is used</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># we prepare a PCA with shorter names</span>
-<span class='no'>olea_lite</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span>
-<span class='fu'>names</span>(<span class='no'>olea_lite</span>) <span class='kw'>&lt;-</span> <span class='fu'>as.character</span>(<span class='no'>olea</span>$<span class='no'>fac</span>$<span class='no'>var</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>olea_lite</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>()
-
-<span class='co'># By default</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>)
-
-<span class='co'># With a fac</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='fl'>1</span>)
-
-<span class='co'># plot.phylo types</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='st'>"var"</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"cladogram"</span>)
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='st'>"var"</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"phylogram"</span>)
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='st'>"var"</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"radial"</span>)
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='st'>"var"</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"unrooted"</span>)
-
-<span class='co'># other dist/hclust methods</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='st'>"var"</span>, <span class='kw'>layout</span><span class='kw'>=</span><span class='st'>"cladogram"</span>, <span class='kw'>dist_method</span><span class='kw'>=</span><span class='st'>"minkowski"</span>, <span class='kw'>hclust_method</span><span class='kw'>=</span><span class='st'>"average"</span>)
-
-<span class='co'># With another</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='st'>"domes"</span>, <span class='kw'>tip_labels</span><span class='kw'>=</span><span class='st'>"var"</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_india</span>)
-
-<span class='co'># Alternative ways to pass a factor</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='fl'>1</span>)
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='st'>"var"</span>)
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, ~<span class='no'>var</span>)
-<span class='co'># Strict equivalent before but formula allows this:</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, ~ <span class='no'>domes</span> + <span class='no'>var</span>, <span class='kw'>tip_labels</span> <span class='kw'>=</span> ~ <span class='no'>domes</span> + <span class='no'>var</span>)
-
-<span class='co'># More arguments to plot.phylo</span>
-<span class='fu'>CLUST</span>(<span class='no'>x</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>)
-
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='co'># On Coe</span>
+<span class='no'>bf</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>CLUST</span>(<span class='no'>bf</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 79 rows containing missing values (geom_point).</span></div><div class='img'><img src='CLUST-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># with a factor and vertical</span>
+<span class='fu'>CLUST</span>(<span class='no'>bf</span>, ~<span class='no'>type</span>, <span class='st'>"v"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 79 rows containing missing values (geom_point).</span></div><div class='img'><img src='CLUST-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># with some cutting and different dist/hclust methods</span>
+<span class='fu'>CLUST</span>(<span class='no'>bf</span>,
+      <span class='kw'>dist_method</span><span class='kw'>=</span><span class='st'>"maximum"</span>, <span class='kw'>hclust_method</span><span class='kw'>=</span><span class='st'>"average"</span>,
+      <span class='kw'>labels</span><span class='kw'>=</span>~<span class='no'>type</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='fu'><a href='palettes.html'>pal_manual</a></span>(<span class='fu'>c</span>(<span class='st'>"green"</span>, <span class='st'>"yellow"</span>, <span class='st'>"red"</span>)))</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 79 rows containing missing values (geom_point).</span></div><div class='img'><img src='CLUST-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># On PCA</span>
+<span class='no'>bf</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>CLUST</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 79 rows containing missing values (geom_point).</span></div><div class='img'><img src='CLUST-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

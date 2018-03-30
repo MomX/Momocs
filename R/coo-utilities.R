@@ -192,9 +192,11 @@ coo_nb.Coo <- function(coo){
 #' coo_plot(coo_centre(bot[1]))
 #' # this
 #' coo_plot(coo_center(bot[1]))
+#'
 #' # on Coo objects
-#' stack(bot)
-#' stack(coo_center(bot))
+#' b <- slice(bot, 1:5) # speed sake
+#' stack(slice(b, 1:5)
+#' stack(coo_center(b))
 #' @aliases coo_centre
 #' @export
 coo_center <- function(coo) {
@@ -240,12 +242,14 @@ coo_centre <- coo_center
 #' coo_plot(b, lwd=2)
 #' coo_draw(coo_scalex(b, 1.5), bor="blue")
 #' coo_draw(coo_scaley(b, 0.5), bor="red")
+#'
 #' # this also works on Coo objects:
-#' stack(bot)
-#' bot %>% coo_center %>% coo_scale %>% stack
-#' bot %>% coo_center %>% coo_scaley(0.5) %>% stack
+#' b <- slice(bot, 5) # for speed sake
+#' stack(b)
+#' b %>% coo_center %>% coo_scale %>% stack
+#' b %>% coo_center %>% coo_scaley(0.5) %>% stack
 #' #equivalent to:
-#' #bot %>% coo_center %>% coo_scalex(2) %>% stack
+#' #b %>% coo_center %>% coo_scalex(2) %>% stack
 #' @family scaling functions
 #' @rdname coo_scale
 #' @name coo_scale
@@ -435,9 +439,11 @@ coo_template_relatively.Coo <- function(coo, size = 1) {
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_rotate(bot[1], pi/2))
+#'
 #' # on Coo
-#' stack(bot)
-#' stack(coo_rotate(bot, pi/2))
+#' b <- bot %>% slice(1:5) # for speed sake
+#' stack(b)
+#' stack(coo_rotate(b, pi/2))
 #' @family rotation functions
 #' @export
 coo_rotate <- function(coo, theta = 0) {
@@ -506,9 +512,10 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_align(bot[1]))
+#'
 #' # on a Coo
-#' stack(bot)
-#' stack(coo_align(bot))
+#' b <- bot %>% slice(1:5) # for speed sake
+#' stack(coo_align(b))
 #' @family aligning functions
 #' @family coo_ utilities
 #' @export
@@ -581,7 +588,9 @@ coo_alignxax.Coo <- function(coo) {
 #' b <- bot[1]
 #' coo_plot(b)
 #' coo_plot(coo_aligncalliper(b))
-#' bot.al <- coo_aligncalliper(bot)
+#'
+#' b <- bot %>% slice(1:5) # for speed sake
+#' bot.al <- coo_aligncalliper(b)
 #' stack(bot.al)
 #' }
 #' @family aligning functions
@@ -615,9 +624,8 @@ coo_aligncalliper.Coo <- function(coo) {
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @examples
-#' \dontrun{
-#' stack(coo_alignminradius(hearts))
-#' }
+#' b <- bot %>% slice(1:5) # for speed sake
+#' stack(coo_alignminradius(b))
 #' @family aligning functions
 #' @family coo_ utilities
 #' @export
@@ -654,9 +662,11 @@ coo_alignminradius.Coo <- function(coo){
 #' @examples
 #' coo_plot(bot[1])
 #' coo_plot(coo_trans(bot[1], 50, 100))
+#'
 #' # on Coo
-#' stack(bot)
-#' stack(coo_trans(bot, 50, 100))
+#' b <- bot %>% slice(1:5) # for speed sake
+#' stack(b)
+#' stack(coo_trans(b, 50, 100))
 #' @export
 coo_trans <- function(coo, x = 0, y = 0) {
   UseMethod("coo_trans")
@@ -824,16 +834,17 @@ coo_slice.Ldk <- function(coo, ids, ldk){
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo_slice} and friends.
 #' @examples
-#' stack(hearts)
+#' h <- hearts %>% slice(1:5) # for speed sake
+#' stack(h)
 #' # set the first landmark as the starting point
-#' stack(coo_slide(hearts, ldk=1))
+#' stack(coo_slide(h, ldk=1))
 #' # set the 50th point as the starting point (everywhere)
-#' stack(coo_slide(hearts, id=50))
+#' stack(coo_slide(h, id=50))
 #' # set the id-random-th point as the starting point (everywhere)
 #' set.seed(123) # just for the reproducibility
-#' id_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
+#' id_random <- sample(x=min(sapply(h$coo, nrow)), size=length(h),
 #' replace=TRUE)
-#' stack(coo_slide(hearts, id=id_random))
+#' stack(coo_slide(h, id=id_random))
 #' @family sliding functions
 #' @family coo_ utilities
 #' @export
@@ -1078,8 +1089,9 @@ coo_intersect_direction.Coo <-
 #' coo_plot(coo_slidedirection(b, "down"))
 #'
 #' # on Coo objects
-#' stack(bot)
-#' stack(coo_slidedirection(bot, "left"))
+#' b <- bot %>% slice(1:5) # for speed sake
+#' stack(b)
+#' stack(coo_slidedirection(b, "left"))
 #'
 #' @family sliding functions
 #' @family coo_ utilities
@@ -1208,8 +1220,9 @@ coo_slidegap.Coo <- function(coo, force=FALSE){
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @examples
 #' b <- bot[1]
-#' stack(bot)
-#' stack(coo_sample(bot, 24))
+#' b <- bot %>% slice(1:5) # for speed sake
+#' stack(b)
+#' stack(coo_sample(b, 24))
 #' coo_plot(b)
 #' coo_plot(coo_sample(b, 24))
 #' @family sampling functions
@@ -1432,13 +1445,12 @@ coo_samplerr.Coo <- function(coo, n) {
 #' @param n  code{integer}, the number fo points to interpolate.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @examples
-#' b <- bot[1]
-#' stack(bot)
-#' stack(coo_scale(bot))
-#' coo_plot(b)
-#' coo_plot(coo_scale(b))
-#' stack(bot)
-#' stack(coo_interpolate(coo_sample(bot, 12), 120))
+#' b5 <- bot %>% slice(1:5) # for speed sake
+#' stack(b5)
+#' stack(coo_scale(b5))
+#' coo_plot(coo_scale(b5))
+#' stack(b5)
+#' stack(coo_interpolate(coo_sample(b5, 12), 120))
 #' coo_plot(bot[1])
 #' coo_plot(coo_interpolate(coo_sample(bot[1], 12), 120))
 #' @family sampling functions
@@ -1483,11 +1495,11 @@ coo_interpolate.Coo <- function(coo, n) {
 #' @param n \code{integer} the number of smoothing iterations
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @examples
-#' b <- bot[1]
-#' stack(bot)
-#' stack(coo_smooth(bot, 10))
-#' coo_plot(bot[1])
-#' coo_plot(coo_smooth(bot[1], 30))
+#' b5 <- slice(bot, 1:5) # for speed sake
+#' stack(b5)
+#' stack(coo_smooth(b5, 10))
+#' coo_plot(b5[1])
+#' coo_plot(coo_smooth(b5[1], 30))
 #' @family smoothing functions
 #' @family coo_ utilities
 #' @export
@@ -2210,8 +2222,9 @@ coo_jitter.Coo <- function(coo, ...){
 #' @param ldk2 \code{numeric} the id of the second point of the new baseline (the last, by default)
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @examples
-#' stack(hearts)
-#' stack(coo_bookstein(hearts, 2, 4))
+#' h <- hearts %>% slice(1:5) # for the sake of speed
+#' stack(h)
+#' stack(coo_bookstein(h, 2, 4))
 #' h <- hearts[1]
 #' coo_plot(h)
 #' coo_plot(coo_bookstein(h, 20, 57), border='red')
@@ -2279,8 +2292,9 @@ coo_bookstein.Ldk <- function(coo, ldk1, ldk2) {
 #' @param t2 \code{numeric} the (x; y) coordinates of the 2nd point of the new baseline
 #' @return a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
 #' @examples
-#' stack(hearts)
-#' stack(coo_baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
+#' h <- hearts %>% slice(1:5) # for speed sake
+#' stack(h)
+#' stack(coo_baseline(h, 2, 4, c(-1, 0), c(1, 1)))
 #' @family baselining functions
 #' @family coo_ utilities
 #' @export

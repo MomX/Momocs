@@ -161,7 +161,8 @@ but may be used for any table (likely with <code>freq=FALSE</code>).</p>
 <span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_CV</span>(<span class='no'>ol</span>, <span class='kw'>freq</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 <span class='no'>gg</span></div><div class='img'><img src='plot_CV-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># and you can tune the gg object wit regular ggplot2 syntax eg</span>
-<span class='no'>gg</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_hue'>scale_color_discrete</a></span>(<span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>120</span>, <span class='fl'>240</span>))</div><div class='img'><img src='plot_CV-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>gg</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_hue'>scale_color_discrete</a></span>(<span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>120</span>, <span class='fl'>240</span>))</div><div class='output co'>#&gt; <span class='message'>Scale for 'colour' is already present. Adding another scale for 'colour',</span>
+#&gt; <span class='message'>which will replace the existing scale.</span></div><div class='img'><img src='plot_CV-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># freq=TRUE</span>
 <span class='fu'>plot_CV</span>(<span class='no'>ol</span>, <span class='kw'>freq</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='plot_CV-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>

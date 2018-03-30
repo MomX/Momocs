@@ -99,7 +99,7 @@
     </div>
 
     
-    <p>Sample a fraction of shapes from a Momocs object. See examples and <code><a href='http://dplyr.tidyverse.org/reference/sample.html'>?dplyr::sample_n</a></code>.</p>
+    <p>Sample a fraction of shapes from a Momocs object. See examples and <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/sample'>?dplyr::sample_n</a></code>.</p>
     
 
     <pre class="usage"><span class='fu'>sample_frac</span>(<span class='no'>tbl</span>, <span class='no'>size</span>, <span class='no'>replace</span>, <span class='no'>fac</span>, <span class='no'>...</span>)</pre>
@@ -150,34 +150,32 @@
     <pre class="examples"><div class='input'>
 <span class='co'># samples 50% of the bottles no matter their type</span>
 <span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 20 outlines, 164 +/- 19 coords (in $coo)
+#&gt;   - 20 outlines, 164 +/- 23 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 20 x 2
 #&gt;   type   fake 
 #&gt;   &lt;fct&gt;  &lt;fct&gt;
-#&gt; 1 whisky b    
+#&gt; 1 whisky a    
 #&gt; 2 beer   d    
-#&gt; 3 beer   d    
-#&gt; 4 whisky a    
-#&gt; 5 whisky a    
-#&gt; 6 whisky b    
+#&gt; 3 whisky b    
+#&gt; 4 beer   d    
+#&gt; 5 beer   d    
+#&gt; 6 whisky a    
 #&gt; # ... with 14 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># 80% bottles of beer and of whisky</span>
 <span class='fu'>table</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.8</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>)$<span class='no'>fac</span>)</div><div class='output co'>#&gt;         fake
 #&gt; type     a b c d
-#&gt;   beer   0 0 8 8
+#&gt;   beer   0 0 9 7
 #&gt;   whisky 8 8 0 0</div><div class='input'><span class='co'># bootstrap the same number of bootles of each type but with replacement</span>
 <span class='fu'>table</span>(<span class='fu'>names</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>1</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
 #&gt;        amrut  ballantines    bushmills       chimay       chivas       corona 
 #&gt;            1            4            1            2            1            2 
-#&gt;      dalmore  deusventrue        duvel famousgrouse franziskaner      guiness 
-#&gt;            1            3            1            2            2            1 
-#&gt; highlandpark   hoegardeen      jupiler   kingfisher     latrappe   makersmark 
-#&gt;            1            2            1            1            1            1 
-#&gt;  nicechouffe   oldpotrero    redbreast   tanglefoot    westmalle   wildturkey 
-#&gt;            1            3            4            1            1            1 
-#&gt;       yoichi 
-#&gt;            1 </div><div class='input'>
+#&gt;      dalmore  deusventrue        duvel famousgrouse franziskaner highlandpark 
+#&gt;            1            4            1            2            3            1 
+#&gt;   hoegardeen      jupiler   kingfisher   makersmark  nicechouffe   oldpotrero 
+#&gt;            2            1            1            1            1            3 
+#&gt;    redbreast   tanglefoot    westmalle   wildturkey       yoichi 
+#&gt;            4            1            1            1            1 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
