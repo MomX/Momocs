@@ -1,4 +1,6 @@
 # Momocs 1.2.9.1 (GitHub)
+* `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
+* `TraCoe` class properly `data_frame`ize fac when build from `raCoe()`
 * `CLUST` methods have been rewrote and now wraps around `dendextend`. Consequently released `ape` dependency.
 * all morphometrics methods now accepts `list`s which is more elegant when working with `chop`+`combine`
 * `LDA` methods have been partly rewritten and now handles constant and collinear variables by dropping them and storing them in the returned list
