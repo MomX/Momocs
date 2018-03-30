@@ -181,7 +181,7 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ef</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>24</span>)
-<span class='fu'>efourier_shape</span>(<span class='no'>ef</span>$<span class='no'>an</span>, <span class='no'>ef</span>$<span class='no'>bn</span>, <span class='no'>ef</span>$<span class='no'>cn</span>, <span class='no'>ef</span>$<span class='no'>dn</span>) <span class='co'># equivalent to efourier_i(ef)</span></div><div class='img'><img src='efourier_shape-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;                 x          y
+<span class='fu'>efourier_shape</span>(<span class='no'>ef</span>$<span class='no'>an</span>, <span class='no'>ef</span>$<span class='no'>bn</span>, <span class='no'>ef</span>$<span class='no'>cn</span>, <span class='no'>ef</span>$<span class='no'>dn</span>) <span class='co'># equivalent to efourier_i(ef)</span></div><div class='img'><img src='efourier_shape-4.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;                 x          y
 #&gt;  [1,] -139.292006   52.55414
 #&gt;  [2,] -136.616807   10.69211
 #&gt;  [3,] -131.350271  -30.94211
@@ -241,69 +241,69 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 #&gt; [57,] -103.969321  212.65038
 #&gt; [58,] -121.348549  174.68203
 #&gt; [59,] -136.478064  135.92288
-#&gt; [60,] -141.748300   94.09730</div><div class='input'><span class='fu'>efourier_shape</span>() <span class='co'># is autonomous</span></div><div class='img'><img src='efourier_shape-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;                  x           y
-#&gt;  [1,] -0.287703971  0.75307909
-#&gt;  [2,] -0.141309030  0.92526638
-#&gt;  [3,]  0.017400126  1.09132692
-#&gt;  [4,]  0.191076626  1.25111166
-#&gt;  [5,]  0.381068734  1.40284188
-#&gt;  [6,]  0.586912126  1.54304773
-#&gt;  [7,]  0.805994605  1.66675305
-#&gt;  [8,]  1.033438201  1.76789137
-#&gt;  [9,]  1.262222226  1.83991214
-#&gt; [10,]  1.483546679  1.87651421
-#&gt; [11,]  1.687410824  1.87242813
-#&gt; [12,]  1.863359263  1.82416135
-#&gt; [13,]  2.001329614  1.73062150
-#&gt; [14,]  2.092523872  1.59354340
-#&gt; [15,]  2.130220946  1.41766314
-#&gt; [16,]  2.110451241  1.21060707
-#&gt; [17,]  2.032465276  0.98249129
-#&gt; [18,]  1.898946240  0.74525675
-#&gt; [19,]  1.715939339  0.51179190
-#&gt; [20,]  1.492496740  0.29491793
-#&gt; [21,]  1.240063289  0.10632736
-#&gt; [22,]  0.971652517 -0.04442585
-#&gt; [23,]  0.700882387 -0.15078871
-#&gt; [24,]  0.440953856 -0.20983939
-#&gt; [25,]  0.203661258 -0.22262009
-#&gt; [26,] -0.001478788 -0.19413404
-#&gt; [27,] -0.167903633 -0.13299804
-#&gt; [28,] -0.292427202 -0.05077401
-#&gt; [29,] -0.375373141  0.03896764
-#&gt; [30,] -0.420408935  0.12177423
-#&gt; [31,] -0.434098617  0.18353017
-#&gt; [32,] -0.425217000  0.21166363
-#&gt; [33,] -0.403889692  0.19623454
-#&gt; [34,] -0.380638279  0.13080864
-#&gt; [35,] -0.365417721  0.01304071
-#&gt; [36,] -0.366732471 -0.15508371
-#&gt; [37,] -0.390909216 -0.36736829
-#&gt; [38,] -0.441588300 -0.61387522
-#&gt; [39,] -0.519474495 -0.88170064
-#&gt; [40,] -0.622362757 -1.15598580
-#&gt; [41,] -0.745428581 -1.42107337
-#&gt; [42,] -0.881747844 -1.66170660
-#&gt; [43,] -1.022990147 -1.86416682
-#&gt; [44,] -1.160214486 -2.01725221
-#&gt; [45,] -1.284688036 -2.11301733
-#&gt; [46,] -1.388648653 -2.14721633
-#&gt; [47,] -1.465939246 -2.11942130
-#&gt; [48,] -1.512456674 -2.03281822
-#&gt; [49,] -1.526377685 -1.89371221
-#&gt; [50,] -1.508147753 -1.71080052
-#&gt; [51,] -1.460242944 -1.49429138
-#&gt; [52,] -1.386737907 -1.25495892
-#&gt; [53,] -1.292732288 -1.00322744
-#&gt; [54,] -1.183701588 -0.74837211
-#&gt; [55,] -1.064845180 -0.49790831
-#&gt; [56,] -0.940503455 -0.25722072
-#&gt; [57,] -0.813707787 -0.02945671
-#&gt; [58,] -0.685912265  0.18431932
-#&gt; [59,] -0.556936245  0.38474116
-#&gt; [60,] -0.425123974  0.57357997</div><div class='input'>
+#&gt; [60,] -141.748300   94.09730</div><div class='input'><span class='fu'>efourier_shape</span>() <span class='co'># is autonomous</span></div><div class='img'><img src='efourier_shape-5.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;                 x           y
+#&gt;  [1,] -0.39288440  2.57778934
+#&gt;  [2,] -0.43328190  2.53598875
+#&gt;  [3,] -0.46341861  2.46024878
+#&gt;  [4,] -0.47963971  2.33944359
+#&gt;  [5,] -0.47857850  2.16466926
+#&gt;  [6,] -0.45778067  1.93010270
+#&gt;  [7,] -0.41626749  1.63359561
+#&gt;  [8,] -0.35496670  1.27695492
+#&gt;  [9,] -0.27695170  0.86589050
+#&gt; [10,] -0.18744943  0.40964145
+#&gt; [11,] -0.09360040 -0.07967862
+#&gt; [12,] -0.00398086 -0.58795191
+#&gt; [13,]  0.07207754 -1.10005898
+#&gt; [14,]  0.12531231 -1.60091983
+#&gt; [15,]  0.14742342 -2.07647910
+#&gt; [16,]  0.13194944 -2.51454890
+#&gt; [17,]  0.07503876 -2.90543925
+#&gt; [18,] -0.02396516 -3.24232873
+#&gt; [19,] -0.16219050 -3.52135459
+#&gt; [20,] -0.33320020 -3.74143025
+#&gt; [21,] -0.52726925 -3.90382455
+#&gt; [22,] -0.73196474 -4.01156036
+#&gt; [23,] -0.93298900 -4.06870641
+#&gt; [24,] -1.11522054 -4.07964527
+#&gt; [25,] -1.26386778 -4.04840039
+#&gt; [26,] -1.36563820 -3.97809643
+#&gt; [27,] -1.40982241 -3.87061154
+#&gt; [28,] -1.38919812 -3.72645763
+#&gt; [29,] -1.30067388 -3.54489939
+#&gt; [30,] -1.14561437 -3.32429585
+#&gt; [31,] -0.92981666 -3.06262356
+#&gt; [32,] -0.66313712 -2.75811951
+#&gt; [33,] -0.35879961 -2.40996788
+#&gt; [34,] -0.03244283 -2.01894857
+#&gt; [35,]  0.29901212 -1.58796728
+#&gt; [36,]  0.61857835 -1.12239840
+#&gt; [37,]  0.91040160 -0.63018955
+#&gt; [38,]  1.16084121 -0.12170076
+#&gt; [39,]  1.35934603  0.39072161
+#&gt; [40,]  1.49905775  0.89340864
+#&gt; [41,]  1.57709914  1.37221714
+#&gt; [42,]  1.59453399  1.81348872
+#&gt; [43,]  1.55601519  2.20503225
+#&gt; [44,]  1.46916456  2.53703693
+#&gt; [45,]  1.34375128  2.80282721
+#&gt; [46,]  1.19075161  2.99938312
+#&gt; [47,]  1.02138027  3.12757001
+#&gt; [48,]  0.84618338  3.19204784
+#&gt; [49,]  0.67427303  3.20085957
+#&gt; [50,]  0.51276659  3.16472826
+#&gt; [51,]  0.36647158  3.09612025
+#&gt; [52,]  0.23783063  3.00815430
+#&gt; [53,]  0.12711449  2.91345224
+#&gt; [54,]  0.03282621  2.82303316
+#&gt; [55,] -0.04774054  2.74535030
+#&gt; [56,] -0.11786053  2.68555791
+#&gt; [57,] -0.18073072  2.64507472
+#&gt; [58,] -0.23889461  2.62148436
+#&gt; [59,] -0.29380298  2.60878229
+#&gt; [60,] -0.34556033  2.59794774</div><div class='input'>
 <span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Out.html'>Out</a></span>(<span class='fu'><a href='bridges.html'>a2l</a></span>(<span class='fu'>replicate</span>(<span class='fl'>100</span>,
-<span class='fu'>efourier_shape</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>2.5</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>))))) <span class='co'># Bubble family</span></div><div class='img'><img src='efourier_shape-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>efourier_shape</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>2.5</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>))))) <span class='co'># Bubble family</span></div><div class='img'><img src='efourier_shape-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -156,7 +156,9 @@ See <a href='coo_bookstein.html'>coo_bookstein</a>.</p>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
 <span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>)
 <span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_aligncalliper</span>(<span class='no'>b</span>))
-<span class='no'>bot.al</span> <span class='kw'>&lt;-</span> <span class='fu'>coo_aligncalliper</span>(<span class='no'>bot</span>)
+
+<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='co'># for speed sake</span>
+<span class='no'>bot.al</span> <span class='kw'>&lt;-</span> <span class='fu'>coo_aligncalliper</span>(<span class='no'>b</span>)
 <span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>bot.al</span>)
 <span class='co'># }</span></pre>
   </div>

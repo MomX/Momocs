@@ -1,4 +1,5 @@
 # Momocs 1.2.9.1 (GitHub)
+* `plot_CV` has been slightly refreshed: jitter always jitters the same way, and in a more compact radius around celle centers. This should be called `plot_confusion`.
 * `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
 * `TraCoe` class properly `data_frame`ize fac when build from `raCoe()`
 * `CLUST` methods have been rewrote and now wraps around `dendextend`. Consequently released `ape` dependency.

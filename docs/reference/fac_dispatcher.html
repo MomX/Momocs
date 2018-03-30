@@ -127,8 +127,10 @@ when passed to Momocs objects. Intensively used (internally).</p>
     <p><code>fac</code> can be:</p><ul>
 <li><p>a factor, passed on the fly</p></li>
 <li><p>a column id from <code>$fac</code></p></li>
-<li><p>a column name from <code>fac</code></p></li>
-<li><p>a formula (preferred) in the form: <code>~column_name</code> (from <code>$fac</code>, no quotes)</p></li>
+<li><p>a column name from <code>fac</code>; if not found, return <code>NULL</code> with a message</p></li>
+<li><p>a formula in the form: <code>~column_name</code> (from <code>$fac</code>, no quotes).
+It expresses more in a concise way. Also allows interacting on the fly. See examples.</p></li>
+<li><p>a <code>NULL</code> returns a <code>NULL</code>, with a message</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -172,18 +174,20 @@ when passed to Momocs objects. Intensively used (internally).</p>
 #&gt; type34 type35 type36 type37 type38 type39 type40 
 #&gt;   beer   beer   beer   beer   beer   beer   beer 
 #&gt; Levels: beer whisky</div><div class='input'><span class='co'># same, numeric case</span>
-<span class='fu'>fac_dispatcher</span>(<span class='no'>bot</span>, <span class='st'>"s"</span>)</div><div class='output co'>#&gt;         s1         s2         s3         s4         s5         s6         s7 
-#&gt; -0.1958989  1.1775844  0.6834736 -1.2754967  0.6379564 -1.3775896 -0.5983108 
-#&gt;         s8         s9        s10        s11        s12        s13        s14 
-#&gt;  1.2109204 -2.2510452 -1.7790142  1.3013727 -0.8147928  1.2437070 -0.1682502 
-#&gt;        s15        s16        s17        s18        s19        s20        s21 
-#&gt;  0.4277757  0.8132789 -0.6512119 -0.3045909 -0.4150972  2.8160843  0.1261471 
-#&gt;        s22        s23        s24        s25        s26        s27        s28 
-#&gt;  0.4728004 -0.3407535 -0.2417906  1.3787547 -0.3388837  0.0201363  0.3769622 
-#&gt;        s29        s30        s31        s32        s33        s34        s35 
-#&gt; -0.4317237  1.9590642 -1.4284596  2.0112930 -0.3515919  1.3571196 -1.9991774 
-#&gt;        s36        s37        s38        s39        s40 
-#&gt;  0.9560806  0.8764313 -1.2712170 -0.7683239  0.1935248 </div><div class='input'>
+<span class='fu'>fac_dispatcher</span>(<span class='no'>bot</span>, <span class='st'>"s"</span>)</div><div class='output co'>#&gt;           s1           s2           s3           s4           s5           s6 
+#&gt;  1.751916726 -0.848822909 -0.036849050 -0.444763521  0.478518115 -0.077862440 
+#&gt;           s7           s8           s9          s10          s11          s12 
+#&gt; -0.003609624  0.489831017 -1.214862470 -0.197096846  1.708650899 -0.759601384 
+#&gt;          s13          s14          s15          s16          s17          s18 
+#&gt;  0.972369565 -1.031840383  0.768586627  0.301285060  0.424560581  0.006571057 
+#&gt;          s19          s20          s21          s22          s23          s24 
+#&gt;  0.741297749  1.559007487 -0.417168752 -0.420322963  0.697185864 -0.210961609 
+#&gt;          s25          s26          s27          s28          s29          s30 
+#&gt;  1.541085498  0.284831960  0.321961376 -1.068526069  1.425715862  1.199570200 
+#&gt;          s31          s32          s33          s34          s35          s36 
+#&gt; -1.678036407  1.828806163 -0.535208856 -0.835660641 -0.758469900 -1.324129902 
+#&gt;          s37          s38          s39          s40 
+#&gt;  0.788467471 -1.376718465 -1.070395242 -0.986740931 </div><div class='input'>
 <span class='co'># formula interface</span>
 <span class='fu'>fac_dispatcher</span>(<span class='no'>bot</span>, ~<span class='no'>type</span>)</div><div class='output co'>#&gt;  [1] whisky whisky whisky whisky whisky whisky whisky whisky whisky whisky
 #&gt; [11] whisky whisky whisky whisky whisky whisky whisky whisky whisky whisky
@@ -196,7 +200,9 @@ when passed to Momocs objects. Intensively used (internally).</p>
 #&gt; [17] whisky_a whisky_b whisky_c whisky_d beer_a   beer_b   beer_c   beer_d  
 #&gt; [25] beer_a   beer_b   beer_c   beer_d   beer_a   beer_b   beer_c   beer_d  
 #&gt; [33] beer_a   beer_b   beer_c   beer_d   beer_a   beer_b   beer_c   beer_d  
-#&gt; Levels: beer_a beer_b beer_c beer_d whisky_a whisky_b whisky_c whisky_d</div></pre>
+#&gt; Levels: beer_a beer_b beer_c beer_d whisky_a whisky_b whisky_c whisky_d</div><div class='input'>
+<span class='co'># when passing NULL or non existing column</span>
+<span class='fu'>fac_dispatcher</span>(<span class='fl'>42</span>, <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'>fac_dispatcher</span>(<span class='no'>bot</span>, <span class='st'>"loser"</span>)</div><div class='output co'>#&gt; <span class='message'>not a valid column specification, returning NULL</span></div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
