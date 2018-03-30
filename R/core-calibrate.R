@@ -1838,7 +1838,7 @@ calibrate_harmonicpower_sfourier <-
     minh <- minh+drop
 
     return(list(gg=gg, q=res, minh=minh))
-}
+  }
 
 
 #' @rdname calibrate_harmonicpower
@@ -2021,6 +2021,6 @@ calibrate_r2_npoly <- function(Opn, id = 1:length(Opn),
   for (i in seq(along=thresh)){
     wi <- which(med.res > thresh[i])
     minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
-
+  mind <- minh
   return(list(gg=gg, q=res, mind=mind))
 }
