@@ -18,9 +18,10 @@ Aligns the coordinates along their longer axis using var-cov matrix and eigen va
 \examples{
 coo_plot(bot[1])
 coo_plot(coo_align(bot[1]))
+
 # on a Coo
-stack(bot)
-stack(coo_align(bot))
+b <- bot \%>\% slice(1:5) # for speed sake
+stack(coo_align(b))
 }
 \seealso{
 Other aligning functions: \code{\link{coo_aligncalliper}},

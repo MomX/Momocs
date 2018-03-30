@@ -60,12 +60,14 @@ b <- bot[1] \%>\% coo_center \%>\% coo_scale
 coo_plot(b, lwd=2)
 coo_draw(coo_scalex(b, 1.5), bor="blue")
 coo_draw(coo_scaley(b, 0.5), bor="red")
+
 # this also works on Coo objects:
-stack(bot)
-bot \%>\% coo_center \%>\% coo_scale \%>\% stack
-bot \%>\% coo_center \%>\% coo_scaley(0.5) \%>\% stack
+b <- slice(bot, 5) # for speed sake
+stack(b)
+b \%>\% coo_center \%>\% coo_scale \%>\% stack
+b \%>\% coo_center \%>\% coo_scaley(0.5) \%>\% stack
 #equivalent to:
-#bot \%>\% coo_center \%>\% coo_scalex(2) \%>\% stack
+#b \%>\% coo_center \%>\% coo_scalex(2) \%>\% stack
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},

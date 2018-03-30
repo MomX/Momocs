@@ -21,7 +21,9 @@ See \link{coo_bookstein}.
 b <- bot[1]
 coo_plot(b)
 coo_plot(coo_aligncalliper(b))
-bot.al <- coo_aligncalliper(bot)
+
+b <- bot \%>\% slice(1:5) # for speed sake
+bot.al <- coo_aligncalliper(b)
 stack(bot.al)
 }
 }

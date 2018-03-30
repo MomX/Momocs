@@ -23,9 +23,11 @@ dividing coordinates by 'scale', translating to the original position.
 \examples{
 coo_plot(bot[1])
 coo_plot(coo_rotate(bot[1], pi/2))
+
 # on Coo
-stack(bot)
-stack(coo_rotate(bot, pi/2))
+b <- bot \%>\% slice(1:5) # for speed sake
+stack(b)
+stack(coo_rotate(b, pi/2))
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},

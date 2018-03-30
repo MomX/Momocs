@@ -25,9 +25,11 @@ coo_plot(bot[1])
 coo_plot(coo_centre(bot[1]))
 # this
 coo_plot(coo_center(bot[1]))
+
 # on Coo objects
-stack(bot)
-stack(coo_center(bot))
+b <- slice(bot, 1:5) # speed sake
+stack(slice(b, 1:5)
+stack(coo_center(b))
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},

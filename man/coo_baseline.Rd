@@ -26,8 +26,9 @@ for the \code{ldk1}-th and \code{ldk2}-th points.
 By default it returns Bookstein's coordinates.
 }
 \examples{
-stack(hearts)
-stack(coo_baseline(hearts, 2, 4, c(-1, 0), c(1, 1)))
+h <- hearts \%>\% slice(1:5) # for speed sake
+stack(h)
+stack(coo_baseline(h, 2, 4, c(-1, 0), c(1, 1)))
 }
 \seealso{
 Other baselining functions: \code{\link{coo_bookstein}}

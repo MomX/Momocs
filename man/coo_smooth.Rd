@@ -19,11 +19,11 @@ Smoothes coordinates using a simple moving average.
 May be useful to remove digitization noise, mainly on outlines and open outlines.
 }
 \examples{
-b <- bot[1]
-stack(bot)
-stack(coo_smooth(bot, 10))
-coo_plot(bot[1])
-coo_plot(coo_smooth(bot[1], 30))
+b5 <- slice(bot, 1:5) # for speed sake
+stack(b5)
+stack(coo_smooth(b5, 10))
+coo_plot(b5[1])
+coo_plot(coo_smooth(b5[1], 30))
 }
 \seealso{
 Other smoothing functions: \code{\link{coo_smoothcurve}}

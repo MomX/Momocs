@@ -23,8 +23,9 @@ and them being homologous, typically on Ldk.
 }
 \examples{
 b <- bot[1]
-stack(bot)
-stack(coo_sample(bot, 24))
+b <- bot \%>\% slice(1:5) # for speed sake
+stack(b)
+stack(coo_sample(b, 24))
 coo_plot(b)
 coo_plot(coo_sample(b, 24))
 coo_extract(bot[1], c(3, 9, 12)) # or :

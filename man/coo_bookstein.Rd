@@ -28,8 +28,9 @@ For \code{Out} and \code{Opn} defines the first landmark as the first point of t
 new shapes with \link{coo_slide}.
 }
 \examples{
-stack(hearts)
-stack(coo_bookstein(hearts, 2, 4))
+h <- hearts \%>\% slice(1:5) # for the sake of speed
+stack(h)
+stack(coo_bookstein(h, 2, 4))
 h <- hearts[1]
 coo_plot(h)
 coo_plot(coo_bookstein(h, 20, 57), border='red')

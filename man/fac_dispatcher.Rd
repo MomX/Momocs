@@ -23,8 +23,10 @@ when passed to Momocs objects. Intensively used (internally).
 \itemize{
 \item a factor, passed on the fly
 \item a column id from \code{$fac}
-\item a column name from \code{fac}
-\item a formula (preferred) in the form: \code{~column_name} (from \code{$fac}, no quotes)
+\item a column name from \code{fac}; if not found, return \code{NULL} with a message
+\item a formula in the form: \code{~column_name} (from \code{$fac}, no quotes).
+It expresses more in a concise way. Also allows interacting on the fly. See examples.
+\item a \code{NULL} returns a \code{NULL}, with a message
 }
 }
 \examples{
@@ -47,6 +49,10 @@ fac_dispatcher(bot, ~type)
 
 # formula interface + interaction on the fly
 fac_dispatcher(bot, ~type+fake)
+
+# when passing NULL or non existing column
+fac_dispatcher(42, NULL)
+fac_dispatcher(bot, "loser")
 }
 \seealso{
 Other handling functions: \code{\link{arrange}},

@@ -34,16 +34,17 @@ id is ignored with a message.
 See examples.
 }
 \examples{
-stack(hearts)
+h <- hearts \%>\% slice(1:5) # for speed sake
+stack(h)
 # set the first landmark as the starting point
-stack(coo_slide(hearts, ldk=1))
+stack(coo_slide(h, ldk=1))
 # set the 50th point as the starting point (everywhere)
-stack(coo_slide(hearts, id=50))
+stack(coo_slide(h, id=50))
 # set the id-random-th point as the starting point (everywhere)
 set.seed(123) # just for the reproducibility
-id_random <- sample(x=min(sapply(hearts$coo, nrow)), size=length(hearts),
+id_random <- sample(x=min(sapply(h$coo, nrow)), size=length(h),
 replace=TRUE)
-stack(coo_slide(hearts, id=id_random))
+stack(coo_slide(h, id=id_random))
 }
 \seealso{
 \link{coo_slice} and friends.

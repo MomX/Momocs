@@ -22,9 +22,11 @@ Translates the coordinates by a 'x' and 'y' value
 \examples{
 coo_plot(bot[1])
 coo_plot(coo_trans(bot[1], 50, 100))
+
 # on Coo
-stack(bot)
-stack(coo_trans(bot, 50, 100))
+b <- bot \%>\% slice(1:5) # for speed sake
+stack(b)
+stack(coo_trans(b, 50, 100))
 }
 \seealso{
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
