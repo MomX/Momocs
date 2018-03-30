@@ -325,6 +325,7 @@ plot_CV <- function(x, ...){UseMethod("plot_CV")}
 #' @rdname plot_CV
 #' @export
 plot_CV.default <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
+  set.seed(123) # so that jitter always jitters the same way
   tab <- x
   df <- as.data.frame(tab)
   #colnames(df) <- c("actual", "classified", "count")
@@ -441,11 +442,16 @@ plot_CV.LDA <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,.
 #' plot_CV2(opl)
 #' @rdname plot_CV2
 #' @export
-plot_CV2 <- function(x, ...){UseMethod("plot_CV2")}
+plot_CV2 <- function(x, ...){
+  UseMethod("plot_CV2")
+}
+
 #' @rdname plot_CV2
 #' @export
 plot_CV2.LDA <- function(x, ...){
-  plot_CV2(x$CV.tab, ...)}
+  plot_CV2(x$CV.tab, ...)
+}
+
 #' @rdname plot_CV2
 #' @export
 plot_CV2.table <- function(x, links.FUN = arrows, col = TRUE,
