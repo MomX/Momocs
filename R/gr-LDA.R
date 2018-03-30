@@ -342,7 +342,9 @@ plot_CV.default <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TR
     df %<>% filter(Freq!=0)
     df <- df[rep(row.names(df), df$Freq), ]
     df <- mutate(df, col=c("wrong", "correct")[(actual==classified)+1])
-    gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], col="col")) + geom_jitter(width = 0.25, height = 0.25, alpha=0.5) +
+    gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], col="col")) +
+      geom_jitter(width = 0.1, height = 0.1, alpha=0.5) +
+      scale_color_manual(values=pal_qual(2)) +
       theme_linedraw() + theme(legend.position="none") +
       theme(axis.text=element_text(size=10),
             axis.text.x=element_text(angle=90, hjust=1),
