@@ -179,7 +179,7 @@ plot_PCA <- function(x, f, axes=c(1, 2),
          axesnames=TRUE, axesvar=TRUE){
 
   # prepare ---------------------------
-  if (missing(f)){
+  if (missing(f) | is.null(f)){
     x %<>% .layerize_PCA(axes=axes, palette=palette)
     labelgroups <- legend <- FALSE
   } else {

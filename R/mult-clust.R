@@ -85,9 +85,9 @@ CLUST.Coe <- function(x,
 
   # handle labels (could be shortened)
   dendextend::`labels<-`(d, names(x))
-  if (!missing(fac))          # if fac is provided, use it
+  if (!missing(fac) && !is.null(fac))          # if fac is provided, use it
     dendextend::`labels<-`(d, as.character(fac_dispatcher(x, fac)))
-  if (!missing(labels))      # but if labels is provided, overwrite it
+  if (!missing(labels) && !is.null(labels))      # but if labels is provided, overwrite it
     dendextend::`labels<-`(d, as.character(fac_dispatcher(x, labels)))
 
   # # handles abbreviation
@@ -111,7 +111,7 @@ CLUST.Coe <- function(x,
   }
 
   # color labels
-  if (!missing(fac)){
+  if (!missing(fac) && !is.null(fac)){
     f <- fac_dispatcher(x, fac)
     d %<>% dendextend::set("labels_colors",
                            palette(nlevels(f))[f])
