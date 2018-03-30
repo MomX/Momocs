@@ -37,22 +37,8 @@
 #' Matthias Mace, Stas Malavin, Neus Martinez, Sabrina Renaud, Marcelo Reginato, Evan Saitta, David Siddons, Eleanor Stillman,
 #' Theodore Stammer, Norbert Telmon, Jean-Frederic Terral, Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
-# #' @import ape
-# #' @import dplyr
-# #' @importFrom dplyr arrange arrange_ data_frame as_data_frame count select select_ slice filter filter_ bind_rows bind_cols group_by group_by_ mutate transmute
-# #' @import sp
 #' @import ggplot2
-# #' @importFrom geometry delaunayn convhulln
-# #' @importFrom geomorph gpagen
-# #' @importFrom grDevices colorRamp
-# #' @importFrom jpeg readJPEG
-# #' @importFrom MASS lda ginv kde2d cov.trob
-# only stack should remain todo when stack.Coo will be removed definitely
-# #' @importFrom utils stack browseURL combn ls.str modifyList methods
-# #' packageVersion read.table
-# #' txtProgressBar write.table
 #' @importFrom utils stack
-# #' @importFrom grDevices chull colors rgb colorRampPalette
 #' @importFrom graphics abline arrows axis barplot box boxplot
 #' contour hist image layout legend lines locator
 #' par plot points polygon rasterImage rect rug
@@ -63,7 +49,6 @@
 #' hclust kmeans lm manova median na.omit
 #' poly prcomp predict qf qnorm rnorm
 #' runif sd symnum terms var
-
 #' @docType package
 #' @name Momocs
 NULL

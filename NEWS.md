@@ -1,4 +1,5 @@
-# Momocs 1.2.9.1
+# Momocs 1.2.9.1 (GitHub)
+* `CLUST` methods have been rewrote and now wraps around `dendextend`. Consequently released `ape` dependency.
 * all morphometrics methods now accepts `list`s which is more elegant when working with `chop`+`combine`
 * `LDA` methods have been partly rewritten and now handles constant and collinear variables by dropping them and storing them in the returned list
 * morphospace on LDAs are (finally) back, yet still quite experimental.
