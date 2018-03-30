@@ -103,12 +103,12 @@
 using the <a href='layers.html'>layers</a>. See examples.</p>
     
 
-    <pre class="usage"><span class='fu'>plot_LDA</span>(<span class='no'>x</span>, <span class='kw'>layer_2</span> <span class='kw'>=</span> <span class='no'>layer_histogram_2</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>),
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>,
-  <span class='kw'>morphospace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>morphospace_position</span> <span class='kw'>=</span> <span class='st'>"range"</span>, <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>labelgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axesvar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_LDA</span>(<span class='no'>x</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>, <span class='kw'>morphospace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>morphospace_position</span> <span class='kw'>=</span> <span class='st'>"range"</span>, <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>labelgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>iftwo_layer</span> <span class='kw'>=</span> <span class='no'>layer_histogram_2</span>,
+  <span class='kw'>iftwo_split</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axesvar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -116,10 +116,6 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
     <tr>
       <th>x</th>
       <td><p><a href='LDA.html'>LDA</a> object</p></td>
-    </tr>
-    <tr>
-      <th>layer_2</th>
-      <td><p>a function (no quotes) for drawing LD1 when there are two levels. So far, one of <code>layer_histogram_2</code> (default) or <code>layer_density_2</code></p></td>
     </tr>
     <tr>
       <th>axes</th>
@@ -181,6 +177,15 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
     <tr>
       <th>box</th>
       <td><p><code>logical</code> whether to draw this using <a href='layers.html'>layer_box</a></p></td>
+    </tr>
+    <tr>
+      <th>iftwo_layer</th>
+      <td><p>function (no quotes) for drawing LD1 when there are two levels.
+So far, one of <a href='layers.html'>layer_histogram_2</a> (default) or <a href='layers.html'>layer_density_2</a></p></td>
+    </tr>
+    <tr>
+      <th>iftwo_split</th>
+      <td><p>to feed <code>split</code> argument in <a href='layers.html'>layer_histogram_2</a> or <a href='layers.html'>layer_density_2</a></p></td>
     </tr>
     <tr>
       <th>axesnames</th>

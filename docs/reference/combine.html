@@ -170,11 +170,11 @@ is not checked, so anything with the same number of rows will be merged.</p>
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># note that you can apply something (single function or a more</span>
 <span class='co'># complex pipe) then combine everyone, since combine also works on lists</span>
 <span class='co'># eg:</span>
-<span class='co'># bot_s2 &lt;- lapply(bot_s, efourier, 10)</span>
+<span class='co'># bot_s2 &lt;- efourier(bot_s, 10) # equivalent to lapply(bot_s, efourier, 10)</span>
 <span class='co'># bot_sf &lt;- combine(bot_s2)</span>
 
 <span class='co'># pipe style</span>
-<span class='fu'>lapply</span>(<span class='no'>bot_s</span>, <span class='no'>efourier</span>, <span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'>combine</span>()</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; An OutCoe object [ combined: efourier + efourier analyses ]
+<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot_s</span>, <span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'>combine</span>()</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; An OutCoe object [ combined: efourier + efourier analyses ]
 #&gt; --------------------
 #&gt;  - $coe: 20 outlines described, and (total) 80 coefficients
 #&gt; # A tibble: 20 x 2
