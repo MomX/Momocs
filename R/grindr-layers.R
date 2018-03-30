@@ -77,7 +77,9 @@
        colors_groups=colors_groups, colors_rows=colors_rows,
        object="PCA", axes=axes, palette=palette,
        method=x$method, mshape=x$mshape, cuts=x$cuts,
-       eig=x$eig, sdev=x$mod$svd, rotation=x$LDs[, axes, drop=FALSE],
+       eig=x$eig, sdev=x$mod$svd,
+       rotation=x$LDs[, axes, drop=FALSE],
+       LDs=x$LDs,
        baseline1=x$baseline1, baseline2=x$baseline2)
 }
 
@@ -340,6 +342,7 @@ plot_LDA <- function(x,
 
   # prepare ---------------------------
 
+
   x %<>% .layerize_LDA(axes=axes, palette=palette)
 
   if (length(x$axes) < 2){
@@ -347,7 +350,7 @@ plot_LDA <- function(x,
     return(x)
   }
 
-  .check(all(axes <= ncol(x$rotation)),
+  .check(all(axes <= ncol(x$LDs)),
          "axes must all be <= number of LDs")
 
   # frame
