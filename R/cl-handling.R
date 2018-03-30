@@ -9,8 +9,10 @@
 #' `fac` can be:
 #'  * a factor, passed on the fly
 #'  * a column id from `$fac`
-#'  * a column name from `fac`
-#'  * a formula (preferred) in the form: `~column_name` (from `$fac`, no quotes)
+#'  * a column name from `fac`; if not found, return `NULL` with a message
+#'  * a formula in the form: `~column_name` (from `$fac`, no quotes).
+#'  It expresses more in a concise way. Also allows interacting on the fly. See examples.
+#'  * a `NULL` returns a `NULL`, with a message
 #'
 #'
 #' @param x a Momocs object (any `Coo`, `Coe`, `PCA`, etc.)
@@ -38,8 +40,16 @@
 #'
 #' # formula interface + interaction on the fly
 #' fac_dispatcher(bot, ~type+fake)
+#'
+#' # when passing NULL or non existing column
+#' fac_dispatcher(42, NULL)
+#' fac_dispatcher(bot, "loser")
 #' @export
 fac_dispatcher <- function(x, fac){
+  # same reasonning than for exit
+  # allow to pass fac=NULL
+  if (is.null(fac))
+    return(NULL)
   # factor case
   if (is.factor(fac))
     return(fac)
@@ -55,8 +65,10 @@ fac_dispatcher <- function(x, fac){
   }
   # column case as character
   if (is.character(fac) && length(fac)==1) {
-    if (!(fac %in% colnames(x$fac)))
-      stop("invalid column name")
+    if (!(fac %in% colnames(x$fac))){
+      message("not a valid column specification, returning NULL")
+      return(NULL)
+    }
     fac <- x$fac[, fac]
     if (is.data.frame(fac)) #dplyr data_frame do not drop
       fac <- unlist(fac)
@@ -68,6 +80,10 @@ fac_dispatcher <- function(x, fac){
       stop("invalid column id")
     return(x$fac[, fac] %>% unlist)
   }
+  # other case, return NULL
+  # important for Momecs, but I think generally
+  message("not a valid fac_dispatcher specification, returning NULL")
+  return(NULL)
 }
 
 
