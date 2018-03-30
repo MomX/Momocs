@@ -1597,7 +1597,7 @@ calibrate_harmonicpower_efourier <-
 
     # here we define the maximum nb.h, if missing
     if (missing(nb.h)){
-      nb.h <- floor(min(sapply(Out$coo, nrow))/2)
+      nb.h <- floor(min(coo_nb(Out)/2))-1
     }
     # we prepare the result matrix
     res <- matrix(nrow = length(id), ncol = (nb.h - drop))
@@ -1612,24 +1612,27 @@ calibrate_harmonicpower_efourier <-
     #res <- res[, -drop]
     # we calculte cumsum and percentages
     res <- t(apply(res, 1, function(x) cumsum(x) / sum(x))) * 100
-    # we ggplot
-    h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmectics
-    res %>% as.data.frame() %>% seq_along %>%
-      lapply(function(i) data.frame(Var1=rownames(res),
-                                    Var2=colnames(res)[i],
-                                    value=res[,i])) %>%
-      do.call("rbind", .) %>%
-      `colnames<-`(c("shp", "harm", "hp")) -> xx
-    if (length(id) > 2) {
-      gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
-        labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
-        coord_cartesian(xlim=c(0.5, h_display+0.5))
-    } else {
-      gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_point() +
-        labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
-        coord_cartesian(xlim=c(0.5, h_display+0.5))
+    gg <- NA
+    if (plot){
+      # we ggplot
+      h_display <- which(apply(res, 2, median) >= 99)[1] + 2 # cosmectics
+      res %>% as.data.frame() %>% seq_along %>%
+        lapply(function(i) data.frame(Var1=rownames(res),
+                                      Var2=colnames(res)[i],
+                                      value=res[,i])) %>%
+        do.call("rbind", .) %>%
+        `colnames<-`(c("shp", "harm", "hp")) -> xx
+      if (length(id) > 2) {
+        gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_boxplot() +
+          labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
+          coord_cartesian(xlim=c(0.5, h_display+0.5))
+      } else {
+        gg <- ggplot(xx, aes_string(x="harm", y="hp")) + geom_point() +
+          labs(x="Harmonic rank", y="Cumulative sum harmonic power") +
+          coord_cartesian(xlim=c(0.5, h_display+0.5))
+        print(gg)
+      }
     }
-    if (plot) print(gg)
     # we calculate quantiles and add nice rowcolnames
     # also the median (independently of probs [0.5, etc]) since
     # thresh may change
@@ -1638,15 +1641,9 @@ calibrate_harmonicpower_efourier <-
     names(minh) <- paste0(thresh, "%")
     for (i in seq(along=thresh)){
       wi <- which(med.res > thresh[i])
-      minh[i] <- ifelse(length(wi)==0, NA, min(wi))}
+      minh[i] <- ifelse(length(wi)==0, NA, min(wi))
+    }
     minh <- minh+drop
-    # talk to me
-    # if (.is_verbose()){
-    #   #     cat("\n$minh:\n")
-    #   print(minh)
-    # }
-    # we return the full matrix, the ggplot and the thresholds
-
     return(list(gg=gg, q=res, minh=minh))
   }
 

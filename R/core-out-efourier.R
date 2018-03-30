@@ -144,16 +144,18 @@ efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...
   Out <- x
   # verify
   Out %<>% verify()
-  q <- floor(min(sapply(Out$coo, nrow)/2))
+  q <- floor(min(coo_nb(Out)/2))-1
   if (missing(nb.h)) {
     #nb.h <- ifelse(q >= 32, 32, q)
     nb.h <- calibrate_harmonicpower_efourier(Out, thresh = 99, plot=FALSE)$minh
-    if (.is_verbose()) message("'nb.h' not provided and set to ", nb.h, " (99% harmonic power)")
+    if (.is_verbose())
+      message("'nb.h' set to ", nb.h,
+              " (99% harmonic power)")
   }
   if (nb.h > q) {
     nb.h <- q
-    message("at least one outline has no more than ", q * 2,
-            " coordinates. 'nb.h' has been set to ", q, " harmonics")
+    message("at least one outline has >", q * 2,
+            " coordinates. 'nb.h' set to ", q)
   }
   coo <- Out$coo
   col.n <- paste0(rep(LETTERS[1:4], each = nb.h), rep(1:nb.h,
