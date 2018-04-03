@@ -195,7 +195,7 @@ coo_nb.Coo <- function(coo){
 #'
 #' # on Coo objects
 #' b <- slice(bot, 1:5) # speed sake
-#' stack(slice(b, 1:5)
+#' stack(slice(b, 1:5))
 #' stack(coo_center(b))
 #' @aliases coo_centre
 #' @export
