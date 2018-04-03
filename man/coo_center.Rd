@@ -28,7 +28,7 @@ coo_plot(coo_center(bot[1]))
 
 # on Coo objects
 b <- slice(bot, 1:5) # speed sake
-stack(slice(b, 1:5)
+stack(slice(b, 1:5))
 stack(coo_center(b))
 }
 \seealso{
