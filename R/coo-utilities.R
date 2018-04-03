@@ -1218,20 +1218,11 @@ coo_slidegap.Coo <- function(coo, force=FALSE){
 #' @param coo either a \code{matrix} of (x; y) coordinates or a \link{Coo} object.
 #' @param ids \code{integer}, the ids of points to sample.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
-#' @examples
-#' b <- bot[1]
-#' b <- bot %>% slice(1:5) # for speed sake
-#' stack(b)
-#' stack(coo_sample(b, 24))
-#' coo_plot(b)
-#' coo_plot(coo_sample(b, 24))
 #' @family sampling functions
 #' @family coo_ utilities
 #' @examples
 #' coo_extract(bot[1], c(3, 9, 12)) # or :
 #' bot[1] %>% coo_extract(c(3, 9, 12))
-#'
-#' coo_extract(bot, c(3, 5, 7))
 #' @export
 coo_extract <- function(coo, ids){
   UseMethod("coo_extract")
