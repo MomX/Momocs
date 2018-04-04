@@ -494,7 +494,7 @@ layer_axes <- function(x, col="#999999", lwd=1/2, ...){
 }
 
 #' @export
-#' @rdname drawers
+#' @rdname layers
 # cosmetics
 layer_ticks <- function(x, col="#333333", cex=3/4, lwd=3/4, ...){
   # neater par
