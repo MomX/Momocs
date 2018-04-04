@@ -80,14 +80,6 @@
 #' is shared with \link{plot.PCA} waiting for a general rewriting of a multivariate plotter.
 #' See https://github.com/vbonhomme/Momocs/issues/121
 #' @seealso \link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
-#' @examples
-#' bot.f <- efourier(bot, 24)
-#' bot.l <- LDA(PCA(bot.f), "type")
-#' plot(bot.l)
-#'
-#' bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
-#' bot.l <- LDA(PCA(bot.f), "fake")
-#' plot(bot.l)
 #' @method plot LDA
 #' @export
 plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
@@ -147,6 +139,8 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
                      rug=TRUE,
                      title=substitute(x), box=TRUE, old.par=TRUE, ...
 ){
+  # todo
+  message("will be deprecated soon, see ?plot_LDA")
   ##### Preliminaries
   # morphospace deprecated
   morphospace=FALSE

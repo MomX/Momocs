@@ -176,15 +176,6 @@ Morphospaces are deprecated so far. 99% of the code
 is shared with \link{plot.PCA} waiting for a general rewriting of a multivariate plotter.
 See https://github.com/vbonhomme/Momocs/issues/121
 }
-\examples{
-bot.f <- efourier(bot, 24)
-bot.l <- LDA(PCA(bot.f), "type")
-plot(bot.l)
-
-bot.f$fac$fake <- factor(rep(letters[1:4], each=10))
-bot.l <- LDA(PCA(bot.f), "fake")
-plot(bot.l)
-}
 \seealso{
 \link{LDA}, \link{plot_CV}, \link{plot_CV2}, \link{plot.PCA}.
 }

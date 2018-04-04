@@ -63,12 +63,11 @@
 #' LDA(bot.p, 'type', retain=0.99) # retains 0.99 of the total variance
 #' LDA(bot.p, 'type', retain=5) # retain 5 axis
 #' bot.l <- LDA(bot.p, 'type', retain=0.99)
-#' bot.l
-#' plot(bot.l)
-#' bot.f$fac$plop <- factor(rep(letters[1:4], each=10))
+#' plot_LDA(bot.l)
+
+#' bot.f <- mutate(bot.f, plop=factor(rep(letters[1:4], each=10)))
 #' bot.l <- LDA(PCA(bot.f), 'plop')
-#' bot.l
-#' plot(bot.l)
+#' plot_LDA(bot.l) # will replace the former soon
 #' @export
 LDA <- function(x, fac, retain, ...) {
   UseMethod("LDA")
@@ -77,7 +76,10 @@ LDA <- function(x, fac, retain, ...) {
 #' @rdname LDA
 #' @export
 LDA.default <- function(x, fac, retain, ...) {
+
+  # copy the original
   x0 <- x
+
   # some checks
   if (!is.matrix(x))
     x <- as.matrix(x)
@@ -149,7 +151,8 @@ LDA.default <- function(x, fac, retain, ...) {
   names(ce) <- rownames(tab)
 
   # we build the list to be returned
-  res <- list(x = x0, f = f,
+  res <- list(x = x0,
+              f = f,
               mod = mod,
               mod.pred = mod.pred,
               CV.fac = CV.fac,
@@ -210,9 +213,9 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   }
 
   PCA <- x
-  f0 <- fac
+
   #fac handling
-  fac <- fac_dispatcher(x, fac)
+  f <- fac_dispatcher(x, fac)
 
   if (.is_verbose()) message(retain, " PC retained")
   X <- PCA$x[, 1:retain]
@@ -227,20 +230,20 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   }
   X <- as.matrix(X)
   # now we calculate two lda models with MASS::lda one with
-  mod <- MASS::lda(X, grouping=fac, tol = 1e-08, ...)
+  mod <- MASS::lda(X, grouping=f, tol = 1e-08, ...)
   mod.pred <- predict(mod, X)
   # leave-one-out cross validation
-  CV.fac <- MASS::lda(X, grouping = fac, tol = 1e-08, CV = TRUE, ...)$class
+  CV.fac <- MASS::lda(X, grouping = f, tol = 1e-08, CV = TRUE, ...)$class
   # we build a nice table from it
-  CV.tab <- table(fac, CV.fac)
+  CV.tab <- table(f, CV.fac)
   names(dimnames(CV.tab)) <- c("actual", "classified")
   CV.correct <- sum(diag(CV.tab))/sum(CV.tab)
   # we calculate unstandardized LDs (wrong here for use in
   # shape reconstruction, would need one more step (PCA2shp?)
   # but not sure how useful it is)
   n <- nrow(X)
-  lm.mod <- lm(X ~ fac)
-  dfw <- n - nlevels(fac)
+  lm.mod <- lm(X ~ f)
+  dfw <- n - nlevels(f)
   SSw <- var(lm.mod$residuals) * (n - 1)
   VCVw <- SSw/dfw
   LDs <- VCVw %*% mod$scaling
@@ -251,10 +254,18 @@ LDA.PCA <- function(x, fac, retain = 0.99, ...) {
   for (i in 1:nrow(tab)) ce[i] <- 1-(sum(tab[i, -i])/sum(tab[i, ]))
   names(ce) <- rownames(tab)
 
-  LDA <- list(x = X, fac = fac, f0 = f0, removed = remove, mod = mod,
-              mod.pred = mod.pred, CV.fac = CV.fac, CV.tab = CV.tab,
-              CV.correct = CV.correct, CV.ce = ce, LDs = LDs,
-              mshape = NULL, method = "LDAPCA")  # may be interesting to add LDA on PCA here?
+  LDA <- list(x = X,
+              f = f,
+              fac = x$fac,
+              removed = remove,
+              mod = mod,
+              mod.pred = mod.pred,
+              CV.fac = CV.fac,
+              CV.tab = CV.tab,
+              CV.correct = CV.correct,
+              CV.ce = ce, LDs = LDs,
+              mshape = NULL,
+              method = "LDAPCA")  # may be interesting to add LDA on PCA here?
   class(LDA) <- c("LDA", class(LDA))
   return(LDA)
 }
@@ -265,7 +276,7 @@ print.LDA <- function(x, ...) {
   cat(" * Cross-validation table ($CV.tab):\n")
   print(x$CV.tab)
 
-  cat("\n * Class correctness ($CV.ce):\n")
+  cat("\n * Class accuracy ($CV.ce):\n")
   print(x$CV.ce)
 
   cat("\n * Leave-one-out cross-validation ($CV.correct): (",

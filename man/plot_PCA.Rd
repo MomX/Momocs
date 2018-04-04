@@ -4,7 +4,7 @@
 \alias{plot_PCA}
 \title{PCA plot using grindr layers}
 \usage{
-plot_PCA(x, f, axes = c(1, 2), palette = pal_qual, points = TRUE,
+plot_PCA(x, f = NULL, axes = c(1, 2), palette = pal_qual, points = TRUE,
   points_transp = 1/4, morphospace = TRUE, morphospace_position = "range",
   chull = TRUE, chullfilled = FALSE, labelgroups = FALSE, legend = TRUE,
   title = "", center_origin = TRUE, zoom = 0.9, eigen = TRUE,

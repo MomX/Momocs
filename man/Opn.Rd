@@ -40,9 +40,9 @@ plot(op.p, 'domes')
 plot(op.p, 'var')
 # and now an LDA after a PCA
 olda <- LDA(PCA(op), 'var')
-# for CV table
+# for CV table and others
 olda
-plot(olda)
+plot_LDA(olda)
 }
 \seealso{
 Other classes: \code{\link{Coe}}, \code{\link{Coo}},

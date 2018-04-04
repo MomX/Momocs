@@ -2,6 +2,44 @@
 # .grey90   <- "#e5e5e5"
 # .grey60   <- "#999999"
 
+.layerize_df <- function(x, f, palette=pal_qual){
+  # grab the selected columns
+  xy <- x
+  # prepare a factor
+  if (missing(f)){ # no factor provided
+    f <- factor(rep(1, nrow(x$x)))
+    colors_groups <- rep(par("fg"), nlevels(f))
+    colors_rows   <- colors_groups[f]
+  } else {         # something provided, handle with fac_dispatcher
+    f <- x %>% fac_dispatcher(f)
+    if (is.numeric(f)){
+      colors_groups <- NA
+      colors_rows <- f %>% .normalize()  %>%
+        cut(breaks = 1e3)  %>% as.numeric() %>% `[`(palette(1e3), .)
+    }
+    if (is.factor(f)){
+      colors_groups <- palette(nlevels(f))
+      colors_rows   <- colors_groups[f]
+    }
+  }
+
+  # NA handling
+  nas <- which(is.na(f))
+  if (length(nas)>0){
+    xy <- xy[-nas, ]
+    f  <- f[-nas]
+    colors_groups <- colors_groups[-nas]
+    colors_rows   <- colors_rows[-nas]
+  }
+  # return as a list and
+  # add potentially useful other components
+  list(xy=xy, f=f,
+       colors_groups=colors_groups,
+       colors_rows=colors_rows,
+       palette=palette)
+}
+
+
 .layerize_PCA <- function(x, f, axes=c(1, 2), palette=pal_qual){
   # grab the selected columns
   xy <- x$x[, axes]
@@ -158,25 +196,27 @@
 #'
 #' # You get the idea.
 #' @export
-plot_PCA <- function(x, f, axes=c(1, 2),
-         palette=pal_qual,
-         points=TRUE,
-         points_transp=1/4,
-         # morphospace
-         morphospace=TRUE,
-         morphospace_position="range",
-         # chulls
-         chull=TRUE,
-         chullfilled=FALSE,
-         # legends
-         labelgroups=FALSE,
-         legend=TRUE,
-         # cosmetics (mainly)
-         title="",
-         center_origin=TRUE, zoom=0.9,
-         eigen=TRUE,
-         box=TRUE,
-         axesnames=TRUE, axesvar=TRUE){
+plot_PCA <- function(x,
+                     f=NULL,
+                     axes=c(1, 2),
+                     palette=pal_qual,
+                     points=TRUE,
+                     points_transp=1/4,
+                     # morphospace
+                     morphospace=TRUE,
+                     morphospace_position="range",
+                     # chulls
+                     chull=TRUE,
+                     chullfilled=FALSE,
+                     # legends
+                     labelgroups=FALSE,
+                     legend=TRUE,
+                     # cosmetics (mainly)
+                     title="",
+                     center_origin=TRUE, zoom=0.9,
+                     eigen=TRUE,
+                     box=TRUE,
+                     axesnames=TRUE, axesvar=TRUE){
 
   # prepare ---------------------------
   if (missing(f) | is.null(f)){
@@ -213,10 +253,10 @@ plot_PCA <- function(x, f, axes=c(1, 2),
     x %<>% layer_points(transp=points_transp)
 
   # groups dispersion -----------------
-  if (chull)
+  if (chull & nlevels(x$f)>1)
     x %<>% layer_chull()
 
-  if (chullfilled)
+  if (chullfilled & nlevels(x$f)>1)
     x %<>% layer_chullfilled()
 
   # legends
@@ -879,9 +919,9 @@ layer_histogram_2 <- function(x, freq=FALSE, breaks, split=FALSE, transp=0){
 
   # draw the two hists
   graphics::hist(xy[f==levels(f)[1], ], freq=freq, breaks=breaks,
-       xlim=xl, ylim=yl, xlab="LD1", ylab=NA,
-       main="",
-       col=cols[1], axes=TRUE)
+                 xlim=xl, ylim=yl, xlab="LD1", ylab=NA,
+                 main="",
+                 col=cols[1], axes=TRUE)
 
   if (split)
     title(levels(f)[1])
@@ -889,9 +929,9 @@ layer_histogram_2 <- function(x, freq=FALSE, breaks, split=FALSE, transp=0){
     layer_legend(x)
 
   graphics::hist(xy[f==levels(f)[2], ], freq=freq, breaks=breaks,
-       xlim=xl, ylim=yl, xlab="LD1", ylab=NA,
-       main="",
-       col=cols[2], axes=TRUE, add=!split)
+                 xlim=xl, ylim=yl, xlab="LD1", ylab=NA,
+                 main="",
+                 col=cols[2], axes=TRUE, add=!split)
 
   if (split)
     title(levels(f)[2])

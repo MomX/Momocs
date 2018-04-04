@@ -32,9 +32,9 @@
 #' plot(op.p, 'var')
 #' # and now an LDA after a PCA
 #' olda <- LDA(PCA(op), 'var')
-#' # for CV table
+#' # for CV table and others
 #' olda
-#' plot(olda)
+#' plot_LDA(olda)
 #' @export
 Opn <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   UseMethod("Opn")
