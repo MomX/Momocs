@@ -1,9 +1,10 @@
 # Momocs 1.2.9.1 (GitHub)
-* new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend.
+* new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend. Now depends `cluster`
 * `plot_CV` has been slightly refreshed: jitter always jitters the same way, and in a more compact radius around celle centers. This should be called `plot_confusion`.
 * `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
 * `TraCoe` class properly `data_frame`ize fac when build from `raCoe()`
-* `CLUST` methods have been rewrote and now wraps around `dendextend`. Consequently released `ape` dependency.
+* `CLUST` methods have been rewrote and now wraps around `dendextend`.
+* Consequently released `ape` dependency.
 * all morphometrics methods now accepts `list`s which is more elegant when working with `chop`+`combine`
 * `LDA` methods have been partly rewritten and now handles constant and collinear variables by dropping them and storing them in the returned list
 * morphospace on LDAs are (finally) back, yet still quite experimental.
