@@ -103,7 +103,7 @@
 using the <a href='layers.html'>layers</a>. See examples.</p>
     
 
-    <pre class="usage"><span class='fu'>plot_PCA</span>(<span class='no'>x</span>, <span class='no'>f</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>plot_PCA</span>(<span class='no'>x</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>, <span class='kw'>morphospace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>morphospace_position</span> <span class='kw'>=</span> <span class='st'>"range"</span>,
   <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>labelgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -210,7 +210,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 
 <span class='co'># Some outlines with bot</span>
 <span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>fake</span><span class='kw'>=</span><span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='fl'>40</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_PCA(bp): argument "f" is missing, with no default</span></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>type</span>)</div><div class='img'><img src='plot_PCA-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>fake</span>)</div><div class='img'><img src='plot_PCA-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>)</div><div class='img'><img src='plot_PCA-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>type</span>)</div><div class='img'><img src='plot_PCA-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_PCA</span>(<span class='no'>bp</span>, ~<span class='no'>fake</span>)</div><div class='img'><img src='plot_PCA-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Some curves with olea</span>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span> <span class='kw'>%&gt;%</span>
 <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>s</span><span class='kw'>=</span><span class='fu'><a href='coo_area.html'>coo_area</a></span>(<span class='no'>.</span>)) <span class='kw'>%&gt;%</span>
@@ -219,7 +219,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 <span class='no'>combine</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span>
 <span class='no'>op</span>$<span class='no'>fac</span>$<span class='no'>s</span> <span class='kw'>%&lt;&gt;%</span> <span class='fu'>as.character</span>() <span class='kw'>%&gt;%</span> <span class='fu'>as.numeric</span>()
 
-<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_PCA</span>(<span class='kw'>title</span><span class='kw'>=</span><span class='st'>"hi there!"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_PCA(., title = "hi there!"): argument "f" is missing, with no default</span></div><div class='input'>
+<span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_PCA</span>(<span class='kw'>title</span><span class='kw'>=</span><span class='st'>"hi there!"</span>)</div><div class='img'><img src='plot_PCA-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'>### Now we can play with layers</span>
 <span class='co'># and for instance build a custom plot</span>
 <span class='co'># it should start with plot_PCA()</span>
@@ -236,7 +236,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 <span class='co'># and even continue after this function</span>
 <span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>my_plot</span>(~<span class='no'>var</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='layers.html'>layer_title</a></span>(<span class='st'>"hi there!"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='layers.html'>layer_stars</a></span>()</div><div class='img'><img src='plot_PCA-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <span class='fu'><a href='layers.html'>layer_stars</a></span>()</div><div class='img'><img src='plot_PCA-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 # You get the idea.
 </div></pre>
   </div>

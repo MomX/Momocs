@@ -104,7 +104,7 @@ Is is intended to ease calculations, data handling and multivariate statistics
 just ad the other Momocs' classes</p>
     
 
-    <pre class="usage"><span class='fu'>TraCoe</span>(<span class='kw'>coe</span> <span class='kw'>=</span> <span class='fu'>matrix</span>(), <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/reexports'>data_frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>TraCoe</span>(<span class='kw'>coe</span> <span class='kw'>=</span> <span class='fu'>matrix</span>(), <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -128,8 +128,8 @@ just ad the other Momocs' classes</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># let's (more or less) rebuild the flower dataset</span>
-<span class='no'>fl</span> <span class='kw'>&lt;-</span> <span class='fu'>TraCoe</span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/reexports'>data_frame</a></span>(<span class='kw'>sp</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>))
-<span class='no'>fl</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(<span class='st'>"sp"</span>)</div><div class='img'><img src='TraCoe-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='no'>fl</span> <span class='kw'>&lt;-</span> <span class='fu'>TraCoe</span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>(<span class='kw'>sp</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>))
+<span class='no'>fl</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>(<span class='st'>"sp"</span>)</div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='TraCoe-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

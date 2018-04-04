@@ -104,6 +104,8 @@
 <h1 class="hasAnchor">
 <a href="#momocs-1-2-9-1-github" class="anchor"></a>Momocs 1.2.9.1 (GitHub)</h1>
 <ul>
+<li>new multivariate method: <code>KMEDOIDS</code> on top of <code><a href="http://www.rdocumentation.org/packages/cluster/topics/pam">cluster::pam</a></code>. Added a <code>plot_silhouette</code> to go with this friend. Now depends <code>cluster</code>
+</li>
 <li>
 <code>plot_CV</code> has been slightly refreshed: jitter always jitters the same way, and in a more compact radius around celle centers. This should be called <code>plot_confusion</code>.</li>
 <li>
@@ -112,7 +114,8 @@
 <code>TraCoe</code> class properly <code>data_frame</code>ize fac when build from <code>raCoe()</code>
 </li>
 <li>
-<code>CLUST</code> methods have been rewrote and now wraps around <code>dendextend</code>. Consequently released <code>ape</code> dependency.</li>
+<code>CLUST</code> methods have been rewrote and now wraps around <code>dendextend</code>.</li>
+<li>Consequently released <code>ape</code> dependency.</li>
 <li>all morphometrics methods now accepts <code>list</code>s which is more elegant when working with <code>chop</code>+<code>combine</code>
 </li>
 <li>
@@ -161,7 +164,7 @@
 <li>
 <code>efourier</code> with default <code>norm=TRUE</code> now messages about how wrong it may be</li>
 <li>
-<code><a href="http://www.rdocumentation.org/packages/dplyr/topics/reexports">dplyr::data_frame</a></code> everywhere pertinent</li>
+<code><a href="http://dplyr.tidyverse.org/reference/reexports.html">dplyr::data_frame</a></code> everywhere pertinent</li>
 </ul>
 </div>
 <div id="deprecated" class="section level3">

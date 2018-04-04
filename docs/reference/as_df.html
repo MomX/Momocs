@@ -161,11 +161,11 @@
 #&gt; 2       caney whisky    a -0.03300353 -0.0081976554  4.283401e-03 5.093717e-17
 #&gt; 3       amrut   beer    c -0.05172598 -0.0088654471 -3.884884e-03 4.245244e-17
 #&gt; 4 ballantines   beer    c  0.12960997  0.0002101794 -4.439654e-04 7.247341e-17</div><div class='input'><span class='co'># LDA object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>2 PC retained</span></div><div class='output co'>#&gt;        f         PC1           PC2
-#&gt; 1 whisky -0.04488046  0.0168529232
-#&gt; 2 whisky -0.03300353 -0.0081976554
-#&gt; 3   beer -0.05172598 -0.0088654471
-#&gt; 4   beer  0.12960997  0.0002101794</div></pre>
+<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>2 PC retained</span></div><div class='output co'>#&gt;           PC1           PC2      f
+#&gt; 1 -0.04488046  0.0168529232 whisky
+#&gt; 2 -0.03300353 -0.0081976554 whisky
+#&gt; 3 -0.05172598 -0.0088654471   beer
+#&gt; 4  0.12960997  0.0002101794   beer</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -149,21 +149,21 @@ replacement.</p>
 #&gt; [1,]    1    4    7   10
 #&gt; [2,]    2    5    8   11
 #&gt; [3,]    3    6    9   12</div><div class='input'><span class='fu'>perm</span>(<span class='no'>m</span>, <span class='kw'>margin</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt;      [,1] [,2] [,3] [,4]
-#&gt; [1,]    1    4    9   10
-#&gt; [2,]    3    4    7   10
-#&gt; [3,]    1    5    9   12
-#&gt; [4,]    3    4    7   12
-#&gt; [5,]    3    4    7   12</div><div class='input'><span class='fu'>perm</span>(<span class='no'>m</span>, <span class='kw'>margin</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>10</span>)</div><div class='output co'>#&gt;       [,1] [,2] [,3]
-#&gt;  [1,]    1   11    6
-#&gt;  [2,]    4    2    3
-#&gt;  [3,]   10   11    3
-#&gt;  [4,]    4   11    9
-#&gt;  [5,]    7    8    9
-#&gt;  [6,]   10   11    9
-#&gt;  [7,]    7   11   12
-#&gt;  [8,]    1    5    9
-#&gt;  [9,]    7   11    6
-#&gt; [10,]    7    8   12</div><div class='input'>
+#&gt; [1,]    2    4    9   11
+#&gt; [2,]    1    5    8   12
+#&gt; [3,]    3    5    7   11
+#&gt; [4,]    1    4    9   10
+#&gt; [5,]    1    4    8   10</div><div class='input'><span class='fu'>perm</span>(<span class='no'>m</span>, <span class='kw'>margin</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>10</span>)</div><div class='output co'>#&gt;       [,1] [,2] [,3]
+#&gt;  [1,]   10    8    6
+#&gt;  [2,]    1    5    6
+#&gt;  [3,]   10    5    3
+#&gt;  [4,]    4    2    3
+#&gt;  [5,]    1   11    3
+#&gt;  [6,]    1    2    9
+#&gt;  [7,]    7    2    6
+#&gt;  [8,]    1   11    9
+#&gt;  [9,]    4    5    6
+#&gt; [10,]    4   11    3</div><div class='input'>
 <span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.m</span> <span class='kw'>&lt;-</span> <span class='fu'>perm</span>(<span class='no'>bot.f</span>, <span class='fl'>80</span>)
 <span class='no'>bot.m</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------

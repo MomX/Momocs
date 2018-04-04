@@ -162,29 +162,13 @@ and them being homologous, typically on Ldk.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='co'># for speed sake</span>
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>b</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_extract-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>b</span>, <span class='fl'>24</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_extract-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>)</div><div class='output co'>#&gt; <span class='error'>Error in xy.coords(x, y, xlabel, ylabel, log): 'x' is a list, but does not have components 'x' and 'y'</span></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>b</span>, <span class='fl'>24</span>))</div><div class='output co'>#&gt; <span class='error'>Error in xy.coords(x, y, xlabel, ylabel, log): 'x' is a list, but does not have components 'x' and 'y'</span></div><div class='input'><span class='fu'>coo_extract</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>9</span>, <span class='fl'>12</span>)) <span class='co'># or :</span></div><div class='output co'>#&gt;      [,1] [,2]
+    <pre class="examples"><div class='input'><span class='fu'>coo_extract</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>9</span>, <span class='fl'>12</span>)) <span class='co'># or :</span></div><div class='output co'>#&gt;      [,1] [,2]
 #&gt; [1,]   40  529
 #&gt; [2,]   57  414
 #&gt; [3,]   63  361</div><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_extract</span>(<span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>9</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt;      [,1] [,2]
 #&gt; [1,]   40  529
 #&gt; [2,]   57  414
-#&gt; [3,]   63  361</div><div class='input'>
-<span class='fu'>coo_extract</span>(<span class='no'>bot</span>, <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 40 outlines, 3 +/- 0 coords (in $coo)
-#&gt;   - 2 classifiers (in $fac): 
-#&gt; # A tibble: 40 x 2
-#&gt;   type   fake 
-#&gt;   &lt;fct&gt;  &lt;fct&gt;
-#&gt; 1 whisky a    
-#&gt; 2 whisky a    
-#&gt; 3 whisky a    
-#&gt; 4 whisky a    
-#&gt; 5 whisky a    
-#&gt; 6 whisky a    
-#&gt; # ... with 34 more rows
-#&gt;   - also: $ldk</div></pre>
+#&gt; [3,]   63  361</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
