@@ -4,6 +4,7 @@
 \alias{layers}
 \alias{layer_frame}
 \alias{layer_axes}
+\alias{layer_ticks}
 \alias{layer_grid}
 \alias{layer_box}
 \alias{layer_fullframe}
@@ -31,6 +32,8 @@
 layer_frame(x, center_origin = TRUE, zoom = 0.9)
 
 layer_axes(x, col = "#999999", lwd = 1/2, ...)
+
+layer_ticks(x, col = "#333333", cex = 3/4, lwd = 3/4, ...)
 
 layer_grid(x, col = "#999999", lty = 3, grid = 3, ...)
 
@@ -92,6 +95,8 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 
 \item{...}{additional options to feed core functions for each layer}
 
+\item{cex}{to use for drawing components}
+
 \item{lty}{linetype for drawing components}
 
 \item{grid}{\code{numeric} number of grid to draw}
@@ -99,8 +104,6 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 \item{border}{color (hexadecimal) to use to draw border}
 
 \item{pch}{to use for drawing components}
-
-\item{cex}{to use for drawing components}
 
 \item{transp}{transparency to use (min: 0 defaut:0 max:1)}
 
