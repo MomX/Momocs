@@ -1,6 +1,6 @@
 ## ---- echo=FALSE---------------------------------------------------------
 library(knitr)
-opts_chunk$set(eval = TRUE, message=FALSE, 
+opts_chunk$set(eval = TRUE, message=FALSE,
                warnings=FALSE, results="hold")
 
 ## ---- echo=FALSE---------------------------------------------------------
@@ -23,21 +23,21 @@ x
 apropos("paper")
 
 ## ------------------------------------------------------------------------
-bot %>% paper_grid %>% 
-    draw_outline(~type, bor=col_qual) %>% 
-    draw_axes %>% draw_centroid %>% draw_firstpoint
+bot %>% paper_grid %>%
+    draw_outline(~type, bor=col_qual) %>%
+    draw_ticks %>% draw_centroid %>% draw_firstpoint
 
 ## ------------------------------------------------------------------------
 paper(bot) %>% draw_outlines(~type, bor=col_qual)
-paper(bot) %>% 
-    draw_outlines(factor(rep(1:5, 8)), bor=col_qual) %>% 
+paper(bot) %>%
+    draw_outlines(factor(rep(1:5, 8)), bor=col_qual) %>%
     draw_centroid(~type, pch=c(1, 3))
 
 ## ------------------------------------------------------------------------
 x <- bot %>% efourier(6) %>% PCA
-plot_PCA(x, ~type) %>% 
-    layer_fullframe %>% 
-    layer_morphospace %>% 
-    layer_points %>% layer_chull %>% 
+plot_PCA(x, ~type) %>%
+    layer_fullframe %>%
+    layer_morphospace %>%
+    layer_points %>% layer_chull %>%
     layer_eigen %>% layer_legend
 

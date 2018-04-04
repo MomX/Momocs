@@ -2,9 +2,9 @@
 # .grey90   <- "#e5e5e5"
 # .grey60   <- "#999999"
 
-.layerize_df <- function(x, f, palette=pal_qual){
+.layerize_df <- function(x, f, axes=c(1, 2), palette=pal_qual){
   # grab the selected columns
-  xy <- x
+  xy <- x[, axes]
   # prepare a factor
   if (missing(f)){ # no factor provided
     f <- factor(rep(1, nrow(x$x)))
@@ -245,7 +245,7 @@ plot_PCA <- function(x,
     x %<>% layer_box()
 
   # morphospace -----------------------
-  if (morphospace)
+  if (morphospace & !is.null(x$method))
     x %<>% layer_morphospace_PCA(position = morphospace_position)
 
   # data ------------------------------
@@ -489,6 +489,34 @@ layer_axes <- function(x, col="#999999", lwd=1/2, ...){
   on.exit(par(old))
   # add x=0 and y=0 lines for axes
   abline(h=0, v=0, col=col, lwd=lwd, ...)
+  # propagate
+  invisible(x)
+}
+
+#' @export
+#' @rdname drawers
+# cosmetics
+layer_ticks <- function(x, col="#333333", cex=3/4, lwd=3/4, ...){
+  # neater par
+  old <- par(mar=rep(1/8, 4))
+  on.exit(par(old))
+
+  # calculate positions
+  at_x <- pretty(seq(par("usr")[1], par("usr")[2], length.out=5))
+  at_y <- pretty(seq(par("usr")[3], par("usr")[4], length.out=5))
+
+  # calculate gaps
+  hx <- .wdw()[1]/200
+  hy <- .wdw()[2]/200
+
+  # draw ticjs
+  segments(at_x, -hy, at_x, hy, col=col)
+  segments(-hx, at_y, hx, at_y, col=col)
+
+  # add positions text
+  text(at_x, -strheight(at_x) - hy, labels=at_x, adj=c(0.5, 1), cex=cex)
+  text(-strwidth(at_y) - hx, at_y, labels=at_y, adj=c(1, 0.5), cex=cex)
+
   # propagate
   invisible(x)
 }

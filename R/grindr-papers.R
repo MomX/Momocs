@@ -14,7 +14,7 @@
 #' @rdname papers
 #' @export
 paper <- function(coo, ...){
-  coo %>% paper_white() %>% draw_axes()
+  coo %>% paper_white() %>% draw_ticks()
 }
 
 #' @rdname papers

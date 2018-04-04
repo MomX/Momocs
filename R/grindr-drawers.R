@@ -320,8 +320,17 @@ draw_firstpoint <- function(coo, f, label="^", col=par("fg"), cex=3/4, transp=0,
 
 #' @export
 #' @rdname drawers
+draw_axes <- function(coo, col="#999999", lwd=1/2, ...){
+  # add x=0 and y=0 lines for axes
+  abline(h=0, v=0, col=col, lwd=lwd, ...)
+  # propagate
+  invisible(coo)
+}
+
+#' @export
+#' @rdname drawers
 # cosmetics
-draw_axes <- function(coo, col="#333333", cex=3/4, lwd=3/4, ...){
+draw_ticks <- function(coo, col="#333333", cex=3/4, lwd=3/4, ...){
   at <- function(x) signif(c(min(x), mean(x), max(x)), 3)
   # we dont need this here but it preserves
   # parallelism between functions
