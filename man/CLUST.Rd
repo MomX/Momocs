@@ -66,8 +66,8 @@ bf \%>\% PCA \%>\% CLUST
 }
 \seealso{
 Other multivariate: \code{\link{KMEANS}},
-  \code{\link{LDA}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}},
+  \code{\link{KMEDOIDS}}, \code{\link{LDA}},
+  \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
+  \code{\link{PCA}}, \code{\link{classification_metrics}},
   \code{\link{mshapes}}
 }

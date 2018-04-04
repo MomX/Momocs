@@ -56,8 +56,8 @@ res$summary
 \link{MANOVA}, \link{manova}.
 
 Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{LDA}},
-  \code{\link{MANOVA}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}},
+  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
+  \code{\link{LDA}}, \code{\link{MANOVA}},
+  \code{\link{PCA}}, \code{\link{classification_metrics}},
   \code{\link{mshapes}}
 }

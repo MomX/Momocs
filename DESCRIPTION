@@ -16,7 +16,8 @@ Depends: R(>= 3.2)
 LazyData: true
 Imports: dplyr, magrittr, graphics, geometry, geomorph, ggplot2,
        grDevices, jpeg, MASS, progress, RColorBrewer, rgeos, sp, utils,
-    dendextend
+    dendextend,
+    cluster
 Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

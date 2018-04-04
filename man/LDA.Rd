@@ -60,8 +60,8 @@ plot_LDA(bot.l) # will replace the former soon
 }
 \seealso{
 Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}},
+  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
+  \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
+  \code{\link{PCA}}, \code{\link{classification_metrics}},
   \code{\link{mshapes}}
 }

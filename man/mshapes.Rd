@@ -89,7 +89,8 @@ panel(ms$Coe) # equivalent (except the $fac slot)
 }
 \seealso{
 Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{LDA}},
-  \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
-  \code{\link{PCA}}, \code{\link{classification_metrics}}
+  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
+  \code{\link{LDA}}, \code{\link{MANOVA_PW}},
+  \code{\link{MANOVA}}, \code{\link{PCA}},
+  \code{\link{classification_metrics}}
 }
