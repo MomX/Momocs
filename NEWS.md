@@ -46,7 +46,6 @@
 * `pos.shapes` is now `morphospace_positions`
 * `is_closed` is deprecated, now `coo_is_closed`; same for `is_open` now `coo_is_open`, to comply with all `coo_*` friends naming scheme
 * `is_clockwise` is deprecated, now `coo_likely_clockwise`; same for `is_anticlockwise` now `coo_likely_anticlockwise`. Better reflect the incertainty and gather with `coo_*` friends
-* Deprecated `rename` (handled by `select` anyway)
 * Deprecated `table` (poor shortcut anyway and avoid this boring startup message)
 * Deprecated `stack2` and `panel2` before their rewriting
 * Deprecated `as_Out`, that should have been `efourier_i.OutCoe` anyway.
