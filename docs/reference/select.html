@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select and rename columns by name — select • Momocs</title>
+<title>Select columns by name — select • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -70,6 +70,9 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
+    <li>
+      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -95,11 +98,13 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select and rename columns by name</h1>
+    <h1>Select columns by name</h1>
     </div>
 
     
-    <p>Select variables by name, from the <code>$fac</code>. See examples and <code><a href='http://dplyr.tidyverse.org/reference/select.html'>?dplyr::select</a></code>.</p>
+    <p>Select variables by name, from the <code>$fac</code>. Selected variables
+can also be renamed on the fly.
+See examples and <code><a href='http://dplyr.tidyverse.org/reference/select.html'>?dplyr::select</a></code>.</p>
     
 
     <pre class="usage"><span class='fu'>select</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
@@ -131,11 +136,11 @@
   <code><a href='at_least.html'>at_least</a></code>, <code><a href='chop.html'>chop</a></code>,
   <code><a href='combine.html'>combine</a></code>, <code><a href='dissolve.html'>dissolve</a></code>,
   <code><a href='fac_dispatcher.html'>fac_dispatcher</a></code>, <code><a href='filter.html'>filter</a></code>,
-  <code><a href='mutate.html'>mutate</a></code>, <code><a href='rescale.html'>rescale</a></code>,
-  <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
-  <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_frac.html'>sample_frac</a></code>,
-  <code><a href='sample_n.html'>sample_n</a></code>, <code><a href='slice.html'>slice</a></code>,
-  <code><a href='subset.html'>subsetize</a></code></p>
+  <code><a href='mutate.html'>mutate</a></code>, <code><a href='rename.html'>rename</a></code>,
+  <code><a href='rescale.html'>rescale</a></code>, <code><a href='rm_harm.html'>rm_harm</a></code>,
+  <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>, <code><a href='rw_fac.html'>rw_fac</a></code>,
+  <code><a href='sample_frac.html'>sample_frac</a></code>, <code><a href='sample_n.html'>sample_n</a></code>,
+  <code><a href='slice.html'>slice</a></code>, <code><a href='subset.html'>subsetize</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

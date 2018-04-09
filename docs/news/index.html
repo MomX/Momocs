@@ -70,6 +70,9 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
+    <li>
+      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -107,7 +110,7 @@
 <li>new multivariate method: <code>KMEDOIDS</code> on top of <code><a href="http://www.rdocumentation.org/packages/cluster/topics/pam">cluster::pam</a></code>. Added a <code>plot_silhouette</code> to go with this friend. Now depends <code>cluster</code>
 </li>
 <li>
-<code>plot_CV</code> has been slightly refreshed: jitter always jitters the same way, and in a more compact radius around celle centers. This should be called <code>plot_confusion</code>.</li>
+<code>plot_CV</code> has been slightly refreshed: jitter now always jitters the same way, and in a more compact radius around cell centers. This might be renamed to <code>plot_confusion</code> at some point.</li>
 <li>
 <code>fac_dispatcher</code> supports <code>NULL</code> which eases a lot multivariate plots (notably Momecs side)</li>
 <li>
@@ -196,7 +199,6 @@
 <code>is_closed</code> is deprecated, now <code>coo_is_closed</code>; same for <code>is_open</code> now <code>coo_is_open</code>, to comply with all <code>coo_*</code> friends naming scheme</li>
 <li>
 <code>is_clockwise</code> is deprecated, now <code>coo_likely_clockwise</code>; same for <code>is_anticlockwise</code> now <code>coo_likely_anticlockwise</code>. Better reflect the incertainty and gather with <code>coo_*</code> friends</li>
-<li>Deprecated <code>rename</code> (handled by <code>select</code> anyway)</li>
 <li>Deprecated <code>table</code> (poor shortcut anyway and avoid this boring startup message)</li>
 <li>Deprecated <code>stack2</code> and <code>panel2</code> before their rewriting</li>
 <li>Deprecated <code>as_Out</code>, that should have been <code>efourier_i.OutCoe</code> anyway.</li>

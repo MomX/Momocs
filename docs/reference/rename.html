@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Renames (ala dplyr) on Momocs objects — rename • Momocs</title>
+<title>Rename columns by name — rename • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -70,6 +70,9 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
+    <li>
+      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -95,11 +98,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Renames (ala dplyr) on Momocs objects</h1>
+    <h1>Rename columns by name</h1>
     </div>
 
     
-    <p>Rename variables by name, from the <code>$fac</code>. See examples and <code><a href='http://dplyr.tidyverse.org/reference/select.html'>?dplyr::rename</a></code>.</p>
+    <p>Rename variables, from the <code>$fac</code>. See examples and <a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::rename</a>.</p>
     
 
     <pre class="usage"><span class='fu'>rename</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
@@ -135,23 +138,38 @@
   <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
   <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_frac.html'>sample_frac</a></code>,
   <code><a href='sample_n.html'>sample_n</a></code>, <code><a href='select.html'>select</a></code>,
-  <code><a href='slice.html'>slice</a></code>, <code><a href='table.html'>table</a></code></p>
+  <code><a href='slice.html'>slice</a></code>, <code><a href='subset.html'>subsetize</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; An Opn object with: 
-#&gt;  - $coo: 210 open outlines (99 +/- 4 coordinates)
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 0): .
-#&gt;      'domes' (factor 0): .
-#&gt;      'view' (factor 0): .
-#&gt;      'ind' (factor 0): .</div><div class='input'><span class='fu'>rename</span>(<span class='no'>olea</span>, <span class='kw'>Ind</span><span class='kw'>=</span><span class='no'>ind</span>, <span class='kw'>View</span><span class='kw'>=</span><span class='no'>view</span>)</div><div class='output co'>#&gt; An Opn object with: 
-#&gt;  - $coo: 210 open outlines (99 +/- 4 coordinates)
-#&gt;  - $fac: 4 classifiers:
-#&gt;      'var' (factor 4): Aglan, Cypre, MouBo1, PicMa.
-#&gt;      'domes' (factor 2): cult, wild.
-#&gt;      'View' (factor 2): VD, VL.
-#&gt;      'Ind' (factor 30): O1, O10, O11, O12, O13, O14, O15, O16, O17, O18, O19 ... + 19 more.</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; Opn (curves)
+#&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
+#&gt;   - 4 classifiers (in $fac): 
+#&gt; # A tibble: 210 x 4
+#&gt;   var   domes view  ind  
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan cult  VD    O10  
+#&gt; 2 Aglan cult  VL    O10  
+#&gt; 3 Aglan cult  VD    O11  
+#&gt; 4 Aglan cult  VL    O11  
+#&gt; 5 Aglan cult  VD    O12  
+#&gt; 6 Aglan cult  VL    O12  
+#&gt; # ... with 204 more rows
+#&gt;   - also: $ldk</div><div class='input'><span class='fu'>rename</span>(<span class='no'>olea</span>, <span class='kw'>variety</span><span class='kw'>=</span><span class='no'>var</span>, <span class='kw'>domesticated</span><span class='kw'>=</span><span class='no'>domes</span>) <span class='co'># rename var column</span></div><div class='output co'>#&gt; Opn (curves)
+#&gt;   - 210 curves, 99 +/- 4 coords (in $coo)
+#&gt;   - 4 classifiers (in $fac): 
+#&gt; # A tibble: 210 x 4
+#&gt;   variety domesticated view  ind  
+#&gt;   &lt;fct&gt;   &lt;fct&gt;        &lt;fct&gt; &lt;fct&gt;
+#&gt; 1 Aglan   cult         VD    O10  
+#&gt; 2 Aglan   cult         VL    O10  
+#&gt; 3 Aglan   cult         VD    O11  
+#&gt; 4 Aglan   cult         VL    O11  
+#&gt; 5 Aglan   cult         VD    O12  
+#&gt; 6 Aglan   cult         VL    O12  
+#&gt; # ... with 204 more rows
+#&gt;   - also: $ldk</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
