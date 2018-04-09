@@ -1,6 +1,6 @@
 # Momocs 1.2.9.1 (GitHub)
 * new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend. Now depends `cluster`
-* `plot_CV` has been slightly refreshed: jitter always jitters the same way, and in a more compact radius around celle centers. This should be called `plot_confusion`.
+* `plot_CV` has been slightly refreshed: jitter now always jitters the same way, and in a more compact radius around cell centers. This might be renamed to `plot_confusion` at some point.
 * `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
 * `TraCoe` class properly `data_frame`ize fac when build from `raCoe()`
 * `CLUST` methods have been rewrote and now wraps around `dendextend`.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cl-handling.R
 \name{select}
 \alias{select}
-\title{Select and rename columns by name}
+\title{Select columns by name}
 \usage{
 select(.data, ...)
 }
@@ -15,7 +15,9 @@ select(.data, ...)
 a Momocs object of the same class.
 }
 \description{
-Select variables by name, from the \code{$fac}. See examples and \code{?dplyr::select}.
+Select variables by name, from the \code{$fac}. Selected variables
+can also be renamed on the fly.
+See examples and \code{?dplyr::select}.
 }
 \details{
 dplyr verbs are maintained.
@@ -41,9 +43,9 @@ Other handling functions: \code{\link{arrange}},
   \code{\link{at_least}}, \code{\link{chop}},
   \code{\link{combine}}, \code{\link{dissolve}},
   \code{\link{fac_dispatcher}}, \code{\link{filter}},
-  \code{\link{mutate}}, \code{\link{rescale}},
-  \code{\link{rm_harm}}, \code{\link{rm_uncomplete}},
-  \code{\link{rw_fac}}, \code{\link{sample_frac}},
-  \code{\link{sample_n}}, \code{\link{slice}},
-  \code{\link{subsetize}}
+  \code{\link{mutate}}, \code{\link{rename}},
+  \code{\link{rescale}}, \code{\link{rm_harm}},
+  \code{\link{rm_uncomplete}}, \code{\link{rw_fac}},
+  \code{\link{sample_frac}}, \code{\link{sample_n}},
+  \code{\link{slice}}, \code{\link{subsetize}}
 }

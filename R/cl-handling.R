@@ -174,9 +174,11 @@ subsetize.PCA <- function(x, subset, ...){
 
 
 # select -------------------------------
-#' Select and rename columns by name
+#' Select columns by name
 #'
-#' Select variables by name, from the \code{$fac}. See examples and \code{?dplyr::select}.
+#' Select variables by name, from the \code{$fac}. Selected variables
+#' can also be renamed on the fly.
+#' See examples and \code{?dplyr::select}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
 #' @param ... comma separated list of unquoted expressions
 #' @details dplyr verbs are maintained.
@@ -221,6 +223,45 @@ select.Coe <- select.Coo
 
 #' @export
 select.PCA <- select.Coo
+
+
+# rename -------------------------------
+#' Rename columns by name
+#'
+#' Rename variables, from the \code{$fac}. See examples and [dplyr::rename].
+#' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
+#' @param ... comma separated list of unquoted expressions
+#' @details dplyr verbs are maintained.
+#' @return a Momocs object of the same class.
+#' @family handling functions
+#' @examples
+#' olea
+#' rename(olea, variety=var, domesticated=domes) # rename var column
+#'
+#' @export
+rename <- function(.data, ...){
+  UseMethod("rename")
+}
+
+#' @export
+rename.default <- function(.data, ...){
+  dplyr::rename(.data, ...)
+}
+
+#' @export
+rename.Coo <- function(.data, ...){
+  #.data %<>% verify()
+  .data$fac <- rename(.data$fac, ...)
+  .data$fac %<>% data.frame()
+  .data
+}
+
+#' @export
+rename.Coe <- rename.Coo
+
+#' @export
+rename.PCA <- rename.Coo
+
 
 # mutate -------------------------------
 #' Add new variables

@@ -4,7 +4,7 @@
 \alias{plot_mshapes}
 \title{Pairwise comparison of a list of shapes}
 \usage{
-plot_mshapes(x, size = 3/4, col2 = "#FF0000")
+plot_mshapes(x, size = 3/4, palette = pal_div)
 }
 \arguments{
 \item{x}{a list of shapes (eg as returned by \link{mshapes})}
@@ -12,13 +12,13 @@ plot_mshapes(x, size = 3/4, col2 = "#FF0000")
 \item{size}{numeric shrinking factor for shapes (and \link{coo_template};
 3/4 by default)}
 
-\item{col2}{color as hexadecimal ("#FF0000", eg red, by default)}
+\item{palette}{on of \link{palettes}}
 }
 \description{
 "Confusion matrix" of a list of shapes. See examples.
 }
 \note{
-Inspired by Chitwood et al. (2016) New Phytologist
+Directly inspired by Chitwood et al. (2016) in \emph{New Phytologist}
 }
 \examples{
 bot \%>\% efourier(6) \%>\% mshapes("type") \%>\% plot_mshapes
@@ -26,5 +26,12 @@ bot \%>\% efourier(6) \%>\% mshapes("type") \%>\% plot_mshapes
 # but works on list of shapes, eg:
 leaves <- shapes \%>\% slice(grep("leaf", names(shapes))) \%$\% coo
 class(leaves)
-leaves \%>\% plot_mshapes(col2="#0000FF")
+leaves \%>\% plot_mshapes()
+
+# or
+shapes \%>\%
+# subset and degrade
+slice(1:12) \%>\% coo_sample(60) \%$\%  # grab the coo
+coo \%>\%
+plot_mshapes()
 }

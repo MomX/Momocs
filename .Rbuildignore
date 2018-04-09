@@ -12,7 +12,7 @@ README.md
 ^cran-comments\.md$
 ^revdep$
 Momocs_arch.jpg
-tmp/.*
+dev/.*
 ^docs$
 ^README\.Rmd$
 ^README-.*\.png$
