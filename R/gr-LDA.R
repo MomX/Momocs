@@ -338,7 +338,7 @@ plot_CV.default <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TR
     df <- df[rep(row.names(df), df$Freq), ]
     df <- mutate(df, col=c("wrong", "correct")[(actual==classified)+1])
     gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], col="col")) +
-      geom_jitter(width = 0.1, height = 0.1, alpha=0.5) +
+      geom_jitter(width = 0.25, height = 0.25, alpha=0.5) +
       scale_color_manual(values=pal_qual(2)) +
       theme_linedraw() + theme(legend.position="none") +
       theme(axis.text=element_text(size=10),
@@ -347,11 +347,20 @@ plot_CV.default <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TR
   }
   if (labels){
     if (rm0) {
-      gg <- gg + geom_text(data=filter(df, Freq !=0), aes_string(label="Freq"), size=rel(cex))
+      gg <- gg + geom_text(data=filter(df, Freq !=0),
+                           aes_string(label="Freq"),
+                           col="#000000",
+                           alpha=0.5,
+                           size=rel(cex))
     } else {
-      gg <- gg + geom_text(aes_string(label="Freq"), size=rel(cex))
+      gg <- gg + geom_text(aes_string(label="Freq"),
+                           col="#000000",
+                           alpha=0.5,
+                           size=rel(cex))
     }
   }
+
+  gg <- gg + coord_equal()
   return(gg)}
 
 #' @rdname plot_CV
