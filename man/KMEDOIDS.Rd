@@ -67,6 +67,7 @@ plot(k_range, widths, type="b")
 Other multivariate: \code{\link{CLUST}},
   \code{\link{KMEANS}}, \code{\link{LDA}},
   \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
-  \code{\link{PCA}}, \code{\link{classification_metrics}},
-  \code{\link{mshapes}}
+  \code{\link{MDS}}, \code{\link{MSHAPES}},
+  \code{\link{NMDS}}, \code{\link{PCA}},
+  \code{\link{classification_metrics}}
 }

@@ -4,9 +4,13 @@
 
 .layerize_df <- function(x, f, axes=c(1, 2), palette=pal_qual){
   # grab the selected columns
-  xy <- x[, axes]
+  # not optimal - to check
+  # if (!is.null(x$x))
+    xy <- x$x[, axes]
+  # else
+  # xy <- x[, axes]
   # prepare a factor
-  if (missing(f)){ # no factor provided
+  if (missing(f) | is.null(f)){ # no factor or NULL provided
     f <- factor(rep(1, nrow(x$x)))
     colors_groups <- rep(par("fg"), nlevels(f))
     colors_rows   <- colors_groups[f]
@@ -121,6 +125,20 @@
        baseline1=x$baseline1, baseline2=x$baseline2)
 }
 
+.layerize_NMDS <- function(x, f=NULL, axes=c(1, 2), palette=pal_qual){
+  x0 <- list(x=x$points, fac=x$fac)
+  res <- .layerize_df(x0, f=f, axes=axes, palette=palette)
+  res$axes <- axes
+  res
+}
+
+.layerize_MDS <- function(x, f=NULL, axes=c(1, 2), palette=pal_qual){
+  x0 <- list(x=x$x, fac=x$fac)
+  res <- .layerize_df(x0, f=f, axes=axes, palette=palette)
+  res$axes <- axes
+  res
+}
+
 # LDA(bp, ~type) %>% .layerize_LDA() -> x
 
 
@@ -134,8 +152,7 @@
 #' This is part of `grindr` approach that may be packaged at some point. All comments are welcome.
 #'
 #' @param x a [PCA] object
-#' @param f \code{factor}. A column name or number from \code{$fac},
-#' or a factor can directly be passed. Accept \code{numeric} as well.
+#' @param f factor specification to feed [fac_dispatcher]
 #' @param axes \code{numeric} of length two to select PCs to use
 #' (\code{c(1, 2)} by default)
 #' @param palette \code{color palette} to use \code{col_summer} by default
@@ -213,10 +230,14 @@ plot_PCA <- function(x,
                      legend=TRUE,
                      # cosmetics (mainly)
                      title="",
-                     center_origin=TRUE, zoom=0.9,
+                     center_origin=TRUE,
+                     zoom=0.9,
                      eigen=TRUE,
                      box=TRUE,
                      axesnames=TRUE, axesvar=TRUE){
+  # check ------
+  .check(any(class(x)=="PCA"),
+         "only supported on LDA objects")
 
   # prepare ---------------------------
   if (missing(f) | is.null(f)){
@@ -233,7 +254,7 @@ plot_PCA <- function(x,
 
   # cosmetics
   if (axesnames)
-    x %<>% layer_axesnames()
+    x %<>% layer_axesnames(name = "PC")
 
   if (axesvar)
     x %<>% layer_axesvar()
@@ -380,9 +401,11 @@ plot_LDA <- function(x,
                      iftwo_split=FALSE,
                      axesnames=TRUE, axesvar=TRUE){
 
+  # check ------
+  .check(any(class(x)=="LDA"),
+         "only supported on LDA objects")
+
   # prepare ---------------------------
-
-
   x %<>% .layerize_LDA(axes=axes, palette=palette)
 
   if (length(x$axes) < 2){
@@ -400,7 +423,7 @@ plot_LDA <- function(x,
 
   # cosmetics
   if (axesnames)
-    x %<>% layer_axesnames()
+    x %<>% layer_axesnames(name = "LD")
 
   if (axesvar)
     x %<>% layer_axesvar()
@@ -561,6 +584,15 @@ layer_fullframe <- function(x, ...){
     layer_box() %>%
     layer_axesvar() %>%
     layer_axesnames()
+}
+
+
+layer_semiframe <- function(x, ...){
+  x %>%
+    layer_frame(...) %>%
+    layer_grid() %>%
+    layer_axes() %>%
+    layer_box()
 }
 
 # shapes ---------------------------------------------------

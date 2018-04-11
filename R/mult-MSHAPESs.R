@@ -3,12 +3,13 @@
 #' Mean shape calculation for Coo, Coe, etc.
 #'
 #' Quite a versatile function that calculates mean (or median, or whatever function)
-#' on list or an array of shapes, an Ldk object. It can also be used on OutCoe and OpnCoe objects.
+#' on list or an array of shapes, an Ldk object. It can also be used on Coe objects.
 #' In that case, the reverse transformation (from coefficients to shapes) is calculated, (within
-#' groups defined with the fac argument if provided) and the Coe object is returned.
+#' groups defined with the fac argument if provided) and the Coe object is _also_ returned
+#' (in `$Coe`) along with a list of shapes (in `$shp`) and can then be passed to `plot_MSHAPES`.
 #'
 #' @param x a list, array, Ldk, LdkCoe, OutCoe or OpnCoe or PCA object
-#' @param fac factor from the $fac slot (only for Coe objects). See examples below.
+#' @param fac factor specification for [fac_dispatcher]
 #' @param FUN a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)
 #' @param nb.pts numeric the number of points for calculated shapes (only Coe objects)
 #' @param ... useless here.
@@ -19,19 +20,19 @@
 #' not be representative of the group. Also notice that for PCA objects, mean scores are returned
 #' within a PCA object (accessible with `PCA$x`) that can be plotted directly but other slots are left
 #' unchanged.
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @family multivariate
 #' @examples
 #' #### on shapes
-#' mshapes(wings)
-#' mshapes(wings$coo)
-#' mshapes(coo_sample(bot, 24)$coo)
+#' MSHAPES(wings)
+#' MSHAPES(wings$coo)
+#' MSHAPES(coo_sample(bot, 24)$coo)
 #' stack(wings)
-#' coo_draw(mshapes(wings))
+#' coo_draw(MSHAPES(wings))
 #'
 #' bot.f <- efourier(bot, 12)
-#' mshapes(bot.f) # the mean (global) shape
-#' ms <- mshapes(bot.f, 'type')
+#' MSHAPES(bot.f) # the mean (global) shape
+#' ms <- MSHAPES(bot.f, 'type')
 #' ms$Coe
 #' class(ms$Coe)
 #' ms <- ms$shp
@@ -40,51 +41,49 @@
 #' tps_arr(ms$whisky, ms$beer) #etc.
 #'
 #' op <- npoly(filter(olea, view=='VL'), 5)
-#' ms <- mshapes(op, 'var') #etc
+#' ms <- MSHAPES(op, ~var) #etc
 #' ms$Coe
 #' panel(Opn(ms$shp), names=TRUE)
 #'
 #' wp <- fgProcrustes(wings, tol=1e-4)
-#' ms <- mshapes(wp, 1)
-#' ms$Coe
-#' panel(Ldk(ms$shp), names=TRUE) #etc.
-#' panel(ms$Coe) # equivalent (except the $fac slot)
-#' @rdname mshapes
+#' ms <- MSHAPES(wp, 1)
+#' plot_MSHAPES(ms)
+#' @rdname MSHAPES
 #' @export
-mshapes <- function(x, ...) {
-  UseMethod("mshapes")
+MSHAPES <- function(x, ...) {
+  UseMethod("MSHAPES")
 }
 
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @export
-mshapes.list <- function(x, FUN=mean, ...) {
+MSHAPES.list <- function(x, FUN=mean, ...) {
   A <- ldk_check(x)
   return(apply(A, 1:2, FUN, na.rm = TRUE))
 }
 
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @export
-mshapes.array <- function(x, FUN=mean, ...) {
+MSHAPES.array <- function(x, FUN=mean, ...) {
   if (length(dim(x)) == 3) {
     A <- ldk_check(x)
     return(apply(A, 1:2, FUN, na.rm = TRUE))
   }
 }
 
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @export
-mshapes.Ldk <- function(x, FUN=mean, ...) {
+MSHAPES.Ldk <- function(x, FUN=mean, ...) {
   Ldk <- x
   A <- ldk_check(Ldk$coo)
   return(apply(A, 1:2, mean, na.rm = TRUE))
 }
 
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @export
-mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
+MSHAPES.OutCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
     OutCoe <- x
     nb.h <- ncol(OutCoe$coe)/4  #todo
-    if (missing(fac)) {
+    if (is.null(fac)) {
         message("no 'fac' provided, returns meanshape")
         coe.mshape <- apply(OutCoe$coe, 2, FUN)
         xf <- coeff_split(coe.mshape, nb.h, 4)
@@ -111,12 +110,15 @@ mshapes.OutCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     Coe2 <- OutCoe
     Coe2$coe <- coe
     Coe2$fac <- slice(Coe2$fac, rows)
-    return(list(Coe = Coe2, shp = shp))
+
+    res <- list(Coe = Coe2, shp = shp) %>%
+      .prepend_class("MSHAPES")
+    return(res)
 }
 
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @export
-mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
+MSHAPES.OpnCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
     OpnCoe <- x
     #todo: check if method is all identical
         	p <- pmatch(tolower(OpnCoe$method[1]), c("opoly", "npoly", "dfourier"))
@@ -126,7 +128,7 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
       method_i <- switch(p, opoly_i, npoly_i, dfourier_i) # dfourier_i
     }
     n <- length(OpnCoe$mshape)  #todo
-    if (missing(fac)) {
+    if (is.null(fac)) {
         message("no 'fac' provided, returns meanshape")
         coe.mshape <- apply(OpnCoe$coe, 2, FUN)
         mod.mshape <- OpnCoe$mod
@@ -156,16 +158,20 @@ mshapes.OpnCoe <- function(x, fac, FUN=mean, nb.pts = 120, ...) {
     Coe2 <- OpnCoe
     Coe2$coe <- coe
     Coe2$fac <- slice(Coe2$fac, rows)
-    return(list(Coe = Coe2, shp = shp))
+
+    res <- list(Coe = Coe2, shp = shp) %>%
+      .prepend_class("MSHAPES")
+    return(res)
+
 }
 
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @export
-mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
+MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, ...) {
     LdkCoe <- x
-    if (missing(fac)) {
+    if (is.null(fac)) {
         message("no 'fac' provided. Returns meanshape")
-        return(mshapes(LdkCoe$coo))
+        return(MSHAPES(LdkCoe$coo))
     }
 
     f <- fac_dispatcher(x, fac)
@@ -174,17 +180,21 @@ mshapes.LdkCoe <- function(x, fac, FUN=mean, ...) {
     shp <- list()
     rows <- numeric()
     for (i in seq(along = fl)) {
-        shp[[i]] <- mshapes(LdkCoe$coo[f == fl[i]], FUN=FUN)
+        shp[[i]] <- MSHAPES(LdkCoe$coo[f == fl[i]], FUN=FUN)
         rows[i] <- which(f == fl[i])[1]
     }
     names(shp) <- fl
     Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
-    return(list(Coe = Coe2, shp = shp))
+
+    res <- list(Coe = Coe2, shp = shp) %>%
+      .prepend_class("MSHAPES")
+    return(res)
+
 }
 
-#' @rdname mshapes
+#' @rdname MSHAPES
 #' @export
-mshapes.PCA <- function(x, fac, ...){
+MSHAPES.PCA <- function(x, fac, ...){
   # cehck for single individuals within a group..
   x0 <- x
   f <- fac_dispatcher(x, fac)
@@ -202,11 +212,13 @@ mshapes.PCA <- function(x, fac, ...){
   x0$x <- res
   # should retain the true name and not "fac"
   x0$fac <- dplyr::data_frame(fac=levels(f))
-  x0
+
 }
 
 #' @export
-#' @rdname mshapes
-MSHAPES <- mshapes
+#' @rdname MSHAPES
+mshapes <- function(...){
+  .Deprecated("MSHAPES")
+}
 
-##### end mshapes
+##### end MSHAPES

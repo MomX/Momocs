@@ -24,11 +24,11 @@ nothing
 Useful to display differences between shapes
 }
 \examples{
-ms <- mshapes(efourier(bot , 10), "type")
+ms <- MSHAPES(efourier(bot , 10), "type")
 b <- ms$shp$beer
 w <- ms$shp$whisky
 # we obtain the mean shape, then euclidean distances between points
-m <- mshapes(list(b, w))
+m <- MSHAPES(list(b, w))
 d <- edm(b, w)
 # First plot
 coo_plot(m, plot=FALSE)

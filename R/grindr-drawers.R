@@ -372,7 +372,7 @@ draw_labels <- function(coo, labels=1:nrow(coo), cex=1/2, d=1/20, ...){
   # if a Coo is provided turn it into the mean shape
   # Coo case
   if (is_Coo(coo))
-    coo <- mshapes(coo)
+    coo <- MSHAPES(coo)
 
   # centrifugate labels positions of d*median(distance centroid)
   # away from centroid
@@ -438,7 +438,7 @@ draw_links <- function(coo, f, links, col="#99999955", lwd=1/2, lty=1, transp=0,
   # propagate
   invisible(coo)
 }
-# wings %>% mshapes %>% paper %>% draw_links(links=wings$links) %>% draw_landmarks %>% draw_labels(d=1/5)
+# wings %>% MSHAPES %>% paper %>% draw_links(links=wings$links) %>% draw_landmarks %>% draw_labels(d=1/5)
 
 #' @export
 #' @rdname drawers

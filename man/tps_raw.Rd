@@ -30,7 +30,7 @@ returns position of sampled points on it.
 }
 \examples{
 \dontrun{
-ms <- mshapes(efourier(bot, 10), "type")
+ms <- MSHAPES(efourier(bot, 10), "type")
 b <- ms$shp$beer
 w <- ms$shp$whisky
 g <- tps_raw(b, w)

@@ -52,7 +52,7 @@ configurations.
 }
 \examples{
 botF <- efourier(bot)
-x <- mshapes(botF, 'type', nb.pts=80)$shp
+x <- MSHAPES(botF, 'type', nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
 tps_grid(fr, to, amp=3, grid.size=10)

@@ -159,5 +159,5 @@ Other grindr: \code{\link{drawers}},
   \code{\link{layers_morphospace}},
   \code{\link{mosaic_engine}}, \code{\link{papers}},
   \code{\link{pile}}, \code{\link{plot_LDA}},
-  \code{\link{plot_PCA}}
+  \code{\link{plot_NMDS}}, \code{\link{plot_PCA}}
 }

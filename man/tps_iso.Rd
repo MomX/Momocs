@@ -61,7 +61,7 @@ them with or without isolines.
 }
 \examples{
 botF <- efourier(bot)
-x <- mshapes(botF, 'type', nb.pts=80)$shp
+x <- MSHAPES(botF, 'type', nb.pts=80)$shp
 fr <- x$beer
 to <- x$whisky
 tps_iso(fr, to, iso.nb=200, amp=3)

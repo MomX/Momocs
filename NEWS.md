@@ -1,5 +1,9 @@
 # Momocs 1.2.9.1 (GitHub)
-* new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend. Now depends `cluster`
+* new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend. Now depends `cluster`.
+* new multivariate method: `NMDS` on top of `vegan::metaMDS`; use `plot_NMDS` to plot it and `vegan::stressplot` for a Shepard plot. Now depends `vegan`.
+* new multivariate method: `MDS` on top of `cmdscale`; use `plot_MDS` to plot it.
+* `mshapes` is now `MSHAPES` to stick with other capitalized "multivariate" methods. `mshapes` now just announces its future deprecation.
+* Consequently, `plot_MSHAPES` is the new method for plotting it. Works on lists and on the result of `MSHAPES`.
 * `plot_CV` has been slightly refreshed: jitter now always jitters the same way, and in a more compact radius around cell centers. This might be renamed to `plot_confusion` at some point.
 * `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
 * `TraCoe` class properly `data_frame`ize fac when build from `raCoe()`

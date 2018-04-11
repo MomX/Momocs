@@ -13,8 +13,7 @@ plot_PCA(x, f = NULL, axes = c(1, 2), palette = pal_qual, points = TRUE,
 \arguments{
 \item{x}{a \link{PCA} object}
 
-\item{f}{\code{factor}. A column name or number from \code{$fac},
-or a factor can directly be passed. Accept \code{numeric} as well.}
+\item{f}{factor specification to feed \link{fac_dispatcher}}
 
 \item{axes}{\code{numeric} of length two to select PCs to use
 (\code{c(1, 2)} by default)}
@@ -103,5 +102,6 @@ op \%>\% my_plot(~var, axes=c(1, 3)) \%>\%
 Other grindr: \code{\link{drawers}},
   \code{\link{layers_morphospace}}, \code{\link{layers}},
   \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_LDA}}
+  \code{\link{pile}}, \code{\link{plot_LDA}},
+  \code{\link{plot_NMDS}}
 }

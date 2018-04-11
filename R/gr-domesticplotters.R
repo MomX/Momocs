@@ -220,11 +220,11 @@ coo_arrows <- function(coo1, coo2,
 #' @return nothing
 #' @family plotting functions
 #' @examples
-#' ms <- mshapes(efourier(bot , 10), "type")
+#' ms <- MSHAPES(efourier(bot , 10), "type")
 #' b <- ms$shp$beer
 #' w <- ms$shp$whisky
 #' # we obtain the mean shape, then euclidean distances between points
-#' m <- mshapes(list(b, w))
+#' m <- MSHAPES(list(b, w))
 #' d <- edm(b, w)
 #' # First plot
 #' coo_plot(m, plot=FALSE)
@@ -413,7 +413,7 @@ ldk_links <- function(ldk, links, ...) {
 #' @param ax logical whether to draw ellipses axes
 #' @param ax.lty an lty for ellipses axes
 #' @examples
-#' coo_plot(mshapes(wings))
+#' coo_plot(MSHAPES(wings))
 #' ldk_confell(wings$coo)
 #' @family plotting functions
 #' @family ldk plotters
@@ -448,7 +448,7 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' @param col a color for drawing the contour lines
 #' @seealso \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
 #' @examples
-#' coo_plot(mshapes(wings))
+#' coo_plot(MSHAPES(wings))
 #' ldk_contour(wings$coo)
 #' @family plotting functions
 #' @family ldk plotters
@@ -474,7 +474,7 @@ ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
 #' @param lty an lty for drawing the convex hulls
 #' @seealso \link{coo_chull}, \link{chull}, \link{ldk_confell}, \link{ldk_contour}
 #' @examples
-#' coo_plot(mshapes(wings))
+#' coo_plot(MSHAPES(wings))
 #' ldk_chull(wings$coo)
 #' @family plotting functions
 #' @family ldk plotters

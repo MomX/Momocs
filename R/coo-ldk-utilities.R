@@ -112,14 +112,14 @@ coo_ldk <- function(coo, nb.ldk) {
 
 #' Defines links between landmarks
 #'
-#' Works on Ldk objects, on 2-cols matrices, 3-dim arrays (mshapes turns it into a matrix).
+#' Works on Ldk objects, on 2-cols matrices, 3-dim arrays ([MSHAPES] turns it into a matrix).
 #' @param x Ldk, matric or array
 #' @param nb.ldk numeric the iterative procedure is stopped when the
 #' user click on the top of the graphical window.
 #' @family ldk helpers
 #' @examples
 #' \dontrun{
-#' wm <- mshapes(wings)
+#' wm <- MSHAPES(wings)
 #' links <- def_links(wm, 3) # click to define pairs of landmarks
 #' ldk_links(wm, links)
 #' }
@@ -183,7 +183,7 @@ def_links.matrix <- function(x, nb.ldk){
 
 #' @export
 def_links.Ldk <- function(x, nb.ldk){
-  m <- mshapes(x)
+  m <- MSHAPES(x)
   links <- def_links.matrix(m, nb.ldk)
   x$links <- links
   return(x)
@@ -192,7 +192,7 @@ def_links.Ldk <- function(x, nb.ldk){
 #' @export
 def_links.array <- function(x, nb.ldk){
   if (length(dim(x)) == 3){
-    x <- mshapes(x)
+    x <- MSHAPES(x)
     links <- def_links.matrix(x)
   } else {
     stop("only defined on Ldk objects, matrices and 3-dim arrays")

@@ -221,11 +221,11 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
   # }
   # Specific to Ldk not very clean below
   # A <- l2a(Coo$coo)
-  # mA <- mshapes(A)
+  # mA <- MSHAPES(A)
 
   if (meanshape){
     A <- l2a(get_ldk(Coo))
-    mA <- mshapes(A)
+    mA <- MSHAPES(A)
     if (ldk_confell) {
       ldk_confell(A, conf = 0.9, col=meanshape_col)
     }
@@ -237,10 +237,10 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
     }
     if (ldk_links | missing(ldk_links))  {
       if (is_links(Coo))
-        ldk_links(mshapes(A), Coo$links, col=ldk_col)
+        ldk_links(MSHAPES(A), Coo$links, col=ldk_col)
     }
     if (ldk_labels) {
-      ldk_labels(mshapes(A), col=meanshape_col)
+      ldk_labels(MSHAPES(A), col=meanshape_col)
     }
     points(mA, pch = ldk_pch,
            cex = ifelse(ldk_cex > 0.5, ldk_cex * 1.5, 0.5), col = meanshape_col)

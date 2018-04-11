@@ -100,5 +100,6 @@ wings \%>\% my_pile(transp=3/4)
 Other grindr: \code{\link{drawers}},
   \code{\link{layers_morphospace}}, \code{\link{layers}},
   \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{plot_LDA}}, \code{\link{plot_PCA}}
+  \code{\link{plot_LDA}}, \code{\link{plot_NMDS}},
+  \code{\link{plot_PCA}}
 }

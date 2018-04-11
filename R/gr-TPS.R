@@ -79,7 +79,7 @@ tps_apply <- function(fr, to, new){
 #' @family thin plate splines
 #' @examples
 #' \dontrun{
-#' ms <- mshapes(efourier(bot, 10), "type")
+#' ms <- MSHAPES(efourier(bot, 10), "type")
 #' b <- ms$shp$beer
 #' w <- ms$shp$whisky
 #' g <- tps_raw(b, w)
@@ -134,7 +134,7 @@ tps_raw <- function(fr, to, amp = 1,
 #' @family thin plate splines
 #' @examples
 #' botF <- efourier(bot)
-#' x <- mshapes(botF, 'type', nb.pts=80)$shp
+#' x <- MSHAPES(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps_grid(fr, to, amp=3, grid.size=10)
@@ -217,7 +217,7 @@ tps_grid <- function(fr, to, amp = 1,
 #' @family thin plate splines
 #' @examples
 #' botF <- efourier(bot)
-#' x <- mshapes(botF, 'type', nb.pts=80)$shp
+#' x <- MSHAPES(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3)
@@ -308,7 +308,7 @@ tps_arr <- function(fr, to, amp = 1,
 #' @family thin plate splines
 #' @examples
 #' botF <- efourier(bot)
-#' x <- mshapes(botF, 'type', nb.pts=80)$shp
+#' x <- MSHAPES(botF, 'type', nb.pts=80)$shp
 #' fr <- x$beer
 #' to <- x$whisky
 #' tps_iso(fr, to, iso.nb=200, amp=3)

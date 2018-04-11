@@ -17,7 +17,7 @@ ldk_chull(ldk, col = "grey40", lty = 1)
 A wrapper that uses \link{coo_chull}
 }
 \examples{
-coo_plot(mshapes(wings))
+coo_plot(MSHAPES(wings))
 ldk_chull(wings$coo)
 }
 \seealso{

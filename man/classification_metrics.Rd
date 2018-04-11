@@ -46,6 +46,7 @@ used is partley derived from the Revolution Analytics blog post (with their auth
 Other multivariate: \code{\link{CLUST}},
   \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
   \code{\link{LDA}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{PCA}},
-  \code{\link{mshapes}}
+  \code{\link{MANOVA}}, \code{\link{MDS}},
+  \code{\link{MSHAPES}}, \code{\link{NMDS}},
+  \code{\link{PCA}}
 }

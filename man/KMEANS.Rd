@@ -39,6 +39,7 @@ KMEANS(bp, 2)
 Other multivariate: \code{\link{CLUST}},
   \code{\link{KMEDOIDS}}, \code{\link{LDA}},
   \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
-  \code{\link{PCA}}, \code{\link{classification_metrics}},
-  \code{\link{mshapes}}
+  \code{\link{MDS}}, \code{\link{MSHAPES}},
+  \code{\link{NMDS}}, \code{\link{PCA}},
+  \code{\link{classification_metrics}}
 }
