@@ -126,6 +126,9 @@ reference:
   - MANOVA
   - MANOVA_PW
   - KMEANS
+  - KMEDOIDS
+  - MDS
+  - NMDS
   - CLUST
 
 - title: More on multivariate
