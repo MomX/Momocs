@@ -762,7 +762,7 @@ coo_solidity.Coo <- function(coo) {
 #' Calculated using the sum of the absolute value of the second derivative of
 #' the \code{smooth.spline} prediction for each defined point.
 #' @param coo a \code{matrix} of (x; y) coordinates or any `Coo`
-#' @return `numeric` for a single shape, `list` for `Coo`
+#' @return `numeric` for a single shape and for `Coo`
 #' @source Siobhan Braybrook.
 #'
 #' @family coo_ descriptors
@@ -780,11 +780,11 @@ coo_tac <- function(coo){
 #' @export
 coo_tac.default <- function(coo) {
   coo <- coo_check(coo)
-  tac <- sum(abs(predict(smooth.spline(coo), deriv = 2)$y))
+  tac <- sum(abs(predict(stats::smooth.spline(coo), deriv = 2)$y))
   return(tac)
 }
 
 #' @export
 coo_tac.Coo <- function(coo) {
-  lapply(coo$coo, coo_tac)
+  sapply(coo$coo, stats::coo_tac)
 }
