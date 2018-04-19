@@ -755,3 +755,36 @@ coo_solidity.default <- function(coo) {
 coo_solidity.Coo <- function(coo) {
   lapply(coo$coo, coo_solidity)
 }
+
+# coo_tac -------
+#' Calculates the total absolute curvature of a shape
+#'
+#' Calculated using the sum of the absolute value of the second derivative of
+#' the \code{smooth.spline} prediction for each defined point.
+#' @param coo a \code{matrix} of (x; y) coordinates or any `Coo`
+#' @return `numeric` for a single shape, `list` for `Coo`
+#' @source Siobhan Braybrook.
+#'
+#' @family coo_ descriptors
+#' @examples
+#' coo_tac(bot[1])
+#'
+#' bot %>%
+#'     slice(1:3) %>%  # for speed sake only
+#'     coo_tac
+#' @export
+coo_tac <- function(coo){
+  UseMethod("coo_tac")
+}
+
+#' @export
+coo_tac.default <- function(coo) {
+  coo <- coo_check(coo)
+  tac <- sum(abs(predict(smooth.spline(coo), deriv = 2)$y))
+  return(tac)
+}
+
+#' @export
+coo_tac.Coo <- function(coo) {
+  lapply(coo$coo, coo_tac)
+}
