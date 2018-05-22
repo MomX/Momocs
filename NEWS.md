@@ -17,6 +17,7 @@
 * `morphospace_position` and `chullfilled` in `plot_PCA` now properly working
 * `verify` replaces `validate` to avoid conflict with `shiny::validate` (for Momecs)
 * `subsetize` now exported (again)
+* `def_ldk` gains a `close` and `points` argument
 
 # Momocs 1.2.9
 ### Preamble

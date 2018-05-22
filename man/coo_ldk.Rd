@@ -4,12 +4,16 @@
 \alias{coo_ldk}
 \title{Defines landmarks interactively}
 \usage{
-coo_ldk(coo, nb.ldk)
+coo_ldk(coo, nb.ldk, close = FALSE, points = TRUE)
 }
 \arguments{
 \item{coo}{a \code{matrix} or a list of (x; y) coordinates.}
 
 \item{nb.ldk}{\code{integer}, the number of landmarks to define}
+
+\item{close}{\code{logical} whether to close (typically for outlines)}
+
+\item{points}{\code{logical} whether to display points}
 }
 \value{
 \code{numeric} that corresponds to the closest ids,

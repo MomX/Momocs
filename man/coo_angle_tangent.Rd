@@ -49,5 +49,6 @@ Other coo_ descriptors: \code{\link{coo_angle_edge1}},
   \code{\link{coo_elongation}}, \code{\link{coo_length}},
   \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
   \code{\link{coo_rectilinearity}},
-  \code{\link{coo_solidity}}, \code{\link{coo_width}}
+  \code{\link{coo_solidity}}, \code{\link{coo_tac}},
+  \code{\link{coo_width}}
 }
