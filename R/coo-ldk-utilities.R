@@ -83,6 +83,8 @@ links_delaunay <- function(coo) {
 #' Used in other facilities to acquire/manipulate data.
 #' @param coo a \code{matrix} or a list of (x; y) coordinates.
 #' @param nb.ldk \code{integer}, the number of landmarks to define
+#' @param close \code{logical} whether to close (typically for outlines)
+#' @param points \code{logical} whether to display points
 #' @return \code{numeric} that corresponds to the closest ids,
 #' on the shape, from cliked points.
 #' @examples
@@ -92,10 +94,11 @@ links_delaunay <- function(coo) {
 #' coo_ldk(bot, 2) # this also works on Out
 #' }
 #' @export
-coo_ldk <- function(coo, nb.ldk) {
+coo_ldk <- function(coo, nb.ldk, close=FALSE, points=TRUE) {
   if (is.list(coo))
     coo <- l2m(coo)
-  coo_plot(coo)
+  if (close) coo <- coo_close(coo)
+  coo_plot(coo, points=points)
   ldk <- numeric(nb.ldk)
   cat("[")
   for (i in 1:nb.ldk) {
@@ -216,6 +219,8 @@ def_links.default <- function(x, nb.ldk){
 #' stored in the \code{$ldk} slot of the \code{Coo} object.
 #' @param Coo an Out or Opn object
 #' @param nb.ldk the number of landmarks to define on every shape
+#' @param close \code{logical} whether to close (typically for outlines)
+#' @param points \code{logical} whether to display points
 #' @return an Out or an Opn object with some landmarks defined
 #' @family ldk/slidings methods
 #' @examples
@@ -229,17 +234,17 @@ def_links.default <- function(x, nb.ldk){
 #' }
 #' @export
 #' @export
-def_ldk <- function(Coo, nb.ldk) {
+def_ldk <- function(Coo, nb.ldk, close, points) {
   UseMethod("def_ldk")
 }
 #' @export
-def_ldk.Out <- function(Coo, nb.ldk) {
+def_ldk.Out <- function(Coo, nb.ldk, close=TRUE, points=FALSE) {
   if (missing(nb.ldk))
     stop("'nb.ldk' must be specified")
   ldk <- list()
   for (i in seq(along = Coo$coo)) {
     cat(i, "/", length(Coo$coo), " ")
-    Coo$ldk[[i]] <- coo_ldk(Coo$coo[[i]], nb.ldk = nb.ldk)
+    Coo$ldk[[i]] <- coo_ldk(Coo$coo[[i]], nb.ldk = nb.ldk, close=close, points=points)
   }
   return(Coo)
 }

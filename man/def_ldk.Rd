@@ -4,12 +4,16 @@
 \alias{def_ldk}
 \title{Defines new landmarks on Out and Opn objects}
 \usage{
-def_ldk(Coo, nb.ldk)
+def_ldk(Coo, nb.ldk, close, points)
 }
 \arguments{
 \item{Coo}{an Out or Opn object}
 
 \item{nb.ldk}{the number of landmarks to define on every shape}
+
+\item{close}{\code{logical} whether to close (typically for outlines)}
+
+\item{points}{\code{logical} whether to display points}
 }
 \value{
 an Out or an Opn object with some landmarks defined
