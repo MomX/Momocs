@@ -786,5 +786,5 @@ coo_tac.default <- function(coo) {
 
 #' @export
 coo_tac.Coo <- function(coo) {
-  sapply(coo$coo, stats::coo_tac)
+  sapply(coo$coo, coo_tac)
 }
