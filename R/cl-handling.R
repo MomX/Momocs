@@ -59,8 +59,18 @@ fac_dispatcher <- function(x, fac){
     if (any(is.na(match(column_name, colnames(x$fac)))))
       stop("formula provided must match with $fac column names")
     fac <- x$fac[, column_name]
-    if (is.data.frame(fac))
+
+    # now we have a data.frame (and even a data_frame) all the time
+    if (is.data.frame(fac) && ncol(fac) < 2){
+      fac <- unlist(fac)
+      if (is.character(fac)){
+        message("factor passed was a character, and coerced to a factor.")
+        fac <- factor(fac)
+      }
+    } else {
       fac <- factor(apply(fac, 1, paste, collapse = "_"))
+    }
+
     return(fac)
   }
   # column case as character

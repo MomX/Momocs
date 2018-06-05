@@ -6,7 +6,7 @@
   # grab the selected columns
   # not optimal - to check
   # if (!is.null(x$x))
-    xy <- x$x[, axes]
+  xy <- x$x[, axes]
   # else
   # xy <- x[, axes]
   # prepare a factor
@@ -16,6 +16,15 @@
     colors_rows   <- colors_groups[f]
   } else {         # something provided, handle with fac_dispatcher
     f <- x %>% fac_dispatcher(f)
+
+    # handle palettes
+    if (missing(palette) | is.null(palette)){
+      if (is.numeric(f))
+        palette <- pal_seq
+      else
+        palette <- pal_qual
+    }
+
     if (is.numeric(f)){
       colors_groups <- NA
       colors_rows <- f %>% .normalize()  %>%
@@ -54,6 +63,16 @@
     colors_rows   <- colors_groups[f]
   } else {         # something provided, handle with fac_dispatcher
     f <- x %>% fac_dispatcher(f)
+
+    # handle palettes
+    if (missing(palette) | is.null(palette)){
+      if (is.numeric(f))
+        palette <- pal_seq
+      else
+        palette <- pal_qual
+    }
+
+
     if (is.numeric(f)){
       colors_groups <- NA
       colors_rows <- f %>% .normalize()  %>%
@@ -216,7 +235,7 @@
 plot_PCA <- function(x,
                      f=NULL,
                      axes=c(1, 2),
-                     palette=pal_qual,
+                     palette=NULL,
                      points=TRUE,
                      points_transp=1/4,
                      # morphospace
@@ -281,8 +300,13 @@ plot_PCA <- function(x,
     x %<>% layer_chullfilled()
 
   # legends
-  if (legend)
-    x %<>% layer_legend()
+  if (legend){
+    if (missing(legend) && is.factor(x$f) && nlevels(x$f)>18){
+      message("Many levels! Pass with legend=TRUE if you really want it.")
+    } else {
+      x %<>% layer_legend()
+    }
+  }
 
   if (labelgroups)
     x %<>% layer_labelgroups()
@@ -450,8 +474,13 @@ plot_LDA <- function(x,
     x %<>% layer_chullfilled()
 
   # legends
-  if (legend)
-    x %<>% layer_legend()
+  if (legend){
+    if (missing(legend) && is.factor(x$f) && nlevels(x$f)>18){
+      message("Many levels! Pass with legend=TRUE if you really want it.")
+    } else {
+      x %<>% layer_legend()
+    }
+  }
 
   if (labelgroups)
     x %<>% layer_labelgroups()
