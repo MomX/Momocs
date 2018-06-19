@@ -34,7 +34,7 @@
 #'
 #' @aliases LDA
 #' @rdname LDA
-#' @param x a  PCA object
+#' @param x a  Coe or a PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
 #' @param retain the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).
 #' @param ... additional arguments to feed \link{lda}
