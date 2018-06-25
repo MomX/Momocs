@@ -33,17 +33,6 @@ If an id is (also) passed, id is ignored with a message.
 }
 }
 \examples{
-h <- hearts \%>\% slice(1:5) # for speed sake
-stack(h)
-# set the first landmark as the starting point
-stack(coo_slide(h, ldk=1))
-# set the 50th point as the starting point (everywhere)
-stack(coo_slide(h, id=50))
-# set the id-random-th point as the starting point (everywhere)
-set.seed(123) # just for the reproducibility
-id_random <- sample(x=min(sapply(h$coo, nrow)), size=length(h),
-replace=TRUE)
-stack(coo_slide(h, id=id_random))
 # on a single shape
 bot[1] \%>\% coo_center \%>\% coo_align \%>\%
    coo_sample(12) \%>\% coo_slidedirection("right") \%T>\%
