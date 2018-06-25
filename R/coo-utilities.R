@@ -502,6 +502,111 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
   return(Coo)
 }
 
+# coo_untiltx --------
+#' Removes rotation so that the centroid and a given point are parallel to the x-axis
+#'
+#' Rotationnal biases appear after [coo_slidedirection] (and friends).
+#' Typically useful for outline analysis where phasing matters. See examples.
+#'
+#' @aliases coo_untilt
+#' @inheritParams coo_check
+#' @param id \code{numeric} the id of the point that will become the new first point. See details below
+#' for the method on Coo objects.
+#' @param ldk \code{numeric} the id of the ldk to use as id, only on \code{Out}
+#' @details For Coo objects, and in particular for Out and Opn two different ways of coo_sliding
+#' are available:
+#' \itemize{
+#' \item \strong{no ldk passed and an id is passed}: all id-th points
+#' within the shapes will become the first points.
+#' \item \strong{a single ldk is passed}: the ldk-th ldk will be used to slide every shape.
+#' If an id is (also) passed, id is ignored with a message.
+#' }
+#' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
+#' @seealso \link{coo_slide} and friends.
+#' @examples
+#' h <- hearts %>% slice(1:5) # for speed sake
+#' stack(h)
+#' # set the first landmark as the starting point
+#' stack(coo_slide(h, ldk=1))
+#' # set the 50th point as the starting point (everywhere)
+#' stack(coo_slide(h, id=50))
+#' # set the id-random-th point as the starting point (everywhere)
+#' set.seed(123) # just for the reproducibility
+#' id_random <- sample(x=min(sapply(h$coo, nrow)), size=length(h),
+#' replace=TRUE)
+#' stack(coo_slide(h, id=id_random))
+#' @family coo_ utilities
+#' @examples
+#' # on a single shape
+#' bot[1] %>% coo_center %>% coo_align %>%
+#'    coo_sample(12) %>% coo_slidedirection("right") %T>%
+#'    coo_plot() %>% # the first point is not on the x-axis
+#'    coo_untiltx() %>%
+#'    coo_draw(border="red") # this (red) one is
+#'
+#' # on an Out
+#' # prepare bot
+#' prebot <- bot %>% coo_center %>% coo_scale %>%
+#'    coo_align %>% coo_slidedirection("right")
+#' prebot %>% stack # some dephasing remains
+#' prebot %>% coo_untiltx() %>% stack # much better
+#' # _here_ there is no change but the second, untilted, is correct
+#' prebot %>% efourier(8, norm=FALSE) %>% PCA %>% plot_PCA(~type)
+#' prebot %>% coo_untiltx %>% efourier(8, norm=FALSE) %>% PCA %>% plot_PCA(~type)
+#'
+#' # an example using ldks:
+#' # the landmark #2 is on the x-axis
+#' hearts %>%
+#'   slice(1:5) %>% fgProcrustes(tol=1e-3) %>% # for speed sake
+#'   coo_center %>% coo_untiltx(ldk=2) %>% stack
+#' @export
+coo_untiltx <- function(coo, id, ldk){
+  UseMethod("coo_untiltx")
+}
+
+#' @export
+coo_untiltx.default <- function(coo, id=1, ldk){
+  if (!missing(ldk))
+    message("only 'id' is supported on single shapes")
+  # find the right triplet of points to calculate the angle to untilt
+  # this one is the concerned point
+  edge_xy <- coo[id,, drop=FALSE]
+  # then, the centroid
+  cent_xy <- coo_centpos(coo) %>% matrix(nrow=1)
+  # finally the target (the x of the edge and the y of the centroid since untiltX)
+  targ_xy <- c(edge_xy[, 1], cent_xy[, 2])
+  # build the triplet and take the right (signed) angle
+  theta <- rbind(edge_xy, cent_xy, targ_xy) %>%
+    coo_angle_edges() %>% `[`(2)
+  # remove this difference and return the untilted shape
+  coo %>%
+    coo_rotatecenter(theta=theta, center=cent_xy) %>%
+    return
+}
+
+#' @export
+coo_untiltx.Coo <- function(coo, id=1, ldk){
+  Coo <- coo
+  # when ldk is provided ---
+  # first we check a bit
+  if (!missing(ldk)) {
+    .check(is_ldk(Coo), "this object has no $ldk")
+    if (!missing(id))
+      warning("'id' provided will be ignored")
+    # here we loop and take the corresponding id
+    for (i in seq(along = Coo$coo)) {
+      Coo$coo[[i]] <- coo_untiltx(Coo$coo[[i]], id=Coo$ldk[[i]][ldk])
+    }
+    return(Coo)
+  } else {
+    # when id is provided ---
+    for (i in seq(along = Coo$coo)) {
+      Coo$coo[[i]] <- coo_untiltx(Coo$coo[[i]], id=id)
+    }
+  }
+  return(Coo)
+}
+
 # coo_align ----------
 #' Aligns coordinates
 #'
@@ -827,8 +932,8 @@ coo_slice.Ldk <- function(coo, ids, ldk){
 #' within the shapes will become the first points. $ldk will be slided accordingly.
 #' \item \strong{no ldk passed and a vector of ids matching the length of the Coo}: for every shape,
 #' the id-th point will be used as the id-th point. $ldk will be slided accordingly.
-#' \item \strong{a single ldk is passed}: the ldk-th ldk will be used to slide every shape. If an ldk is passed,
-#' id is ignored with a message.
+#' \item \strong{a single ldk is passed}: the ldk-th ldk will be used to slide every shape.
+#' If an id is (also) passed, it is ignored with a message.
 #' }
 #' See examples.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
@@ -1075,6 +1180,10 @@ coo_intersect_direction.Coo <-
 #'
 #' Shapes are centered and then, according to direction, the point northwards, southwards,
 #' eastwards or westwards the centroid, becomes the first point with \link{coo_slide}.
+#' 'right' is possibly the most sensible option (and is by default),
+#' since 0 radians points eastwards, relatively to the origin.
+#' This should be followed by a [coo_untiltx] is most cases to remove any rotationnal dephasing/bias.
+#'
 #' @inheritParams coo_check
 #' @param direction \code{character} one of \code{"down", "left", "up", "right"} ("right" by default)
 #' @param center \code{logical} whether to center or not before sliding
@@ -1091,7 +1200,10 @@ coo_intersect_direction.Coo <-
 #' # on Coo objects
 #' b <- bot %>% slice(1:5) # for speed sake
 #' stack(b)
-#' stack(coo_slidedirection(b, "left"))
+#' stack(coo_slidedirection(b, "right"))
+#'
+#' # This should be followed by a [coo_untiltx] in most (if not all) cases
+#' stack(coo_slidedirection(b, "right") %>% coo_untiltx)
 #'
 #' @family sliding functions
 #' @family coo_ utilities
