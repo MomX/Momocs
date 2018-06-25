@@ -175,7 +175,7 @@ subsetize.PCA <- function(x, subset, ...){
     PCA2$fac <- PCA$fac
     PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
     names(PCA2$fac) <- names(PCA$fac)
-    PCA2$fac %<>% dplyr::as_data_frame
+    #PCA2$fac %<>% dplyr::as_data_frame
     # PCA2$fac %<>% .refactor()
   }
   return(PCA2)
@@ -342,8 +342,8 @@ filter.default <- function(.data, ...){
 filter.Coo <- function(.data, ...){
   #.data %<>% verify()
   df <- .data$fac
-  df <- mutate(df, .id=1:nrow(df))
-  df <- filter(df, ...)
+  df <- dplyr::mutate(df, .id=1:nrow(df))
+  df <- dplyr::filter(df, ...)
   .data <- subsetize(.data, df$.id)
   .data$fac %<>% dplyr::as_data_frame()
   # .data$fac %<>% .refactor()
