@@ -229,6 +229,20 @@
 #' op %>% my_plot(~var, axes=c(1, 3)) %>%
 #'     layer_title("hi there!")
 #'
+#' # grindr allows (almost nice) tricks like highligting:
+#'
+#' bp %>% .layerize_PCA(~fake) %>%
+#'   layer_frame %>% layer_axes() %>%
+#'   layer_morphospace_PCA() -> x
+#'
+#' highlight <- function(x, ..., col_F="#CCCCCC", col_T="#FC8D62FF"){
+#'  args <- list(...)
+#'  x$colors_groups <- c(col_F, col_T)
+#'  x$colors_rows <- c(col_F, col_T)[(x$f %in% l)+1]
+#'  x
+#' }
+#' x %>% highlight("a", "b") %>% layer_points() %>% layer_chull()
+#'
 #' # You get the idea.
 #' @export
 plot_PCA <- function(x,
