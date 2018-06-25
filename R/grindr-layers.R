@@ -227,8 +227,7 @@
 #'
 #' # and even continue after this function
 #' op %>% my_plot(~var, axes=c(1, 3)) %>%
-#'     layer_title("hi there!") %>%
-#'     layer_stars()
+#'     layer_title("hi there!")
 #'
 #' # You get the idea.
 #' @export

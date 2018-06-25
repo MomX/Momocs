@@ -22,6 +22,9 @@ a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 \description{
 Shapes are centered and then, according to direction, the point northwards, southwards,
 eastwards or westwards the centroid, becomes the first point with \link{coo_slide}.
+'right' is possibly the most sensible option (and is by default),
+since 0 radians points eastwards, relatively to the origin.
+This should be followed by a \link{coo_untiltx} is most cases to remove any rotationnal dephasing/bias.
 }
 \examples{
 b <- coo_rotate(bot[1], pi/6) # dummy example just to make it obvious
@@ -34,7 +37,10 @@ coo_plot(coo_slidedirection(b, "down"))
 # on Coo objects
 b <- bot \%>\% slice(1:5) # for speed sake
 stack(b)
-stack(coo_slidedirection(b, "left"))
+stack(coo_slidedirection(b, "right"))
+
+# This should be followed by a [coo_untiltx] in most (if not all) cases
+stack(coo_slidedirection(b, "right") \%>\% coo_untiltx)
 
 }
 \seealso{
@@ -66,5 +72,6 @@ Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_smooth}}, \code{\link{coo_template}},
   \code{\link{coo_trans}}, \code{\link{coo_trimbottom}},
   \code{\link{coo_trimtop}}, \code{\link{coo_trim}},
-  \code{\link{coo_up}}, \code{\link{is_equallyspacedradii}}
+  \code{\link{coo_untiltx}}, \code{\link{coo_up}},
+  \code{\link{is_equallyspacedradii}}
 }

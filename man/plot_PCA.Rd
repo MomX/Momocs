@@ -4,7 +4,7 @@
 \alias{plot_PCA}
 \title{PCA plot using grindr layers}
 \usage{
-plot_PCA(x, f = NULL, axes = c(1, 2), palette = pal_qual, points = TRUE,
+plot_PCA(x, f = NULL, axes = c(1, 2), palette = NULL, points = TRUE,
   points_transp = 1/4, morphospace = TRUE, morphospace_position = "range",
   chull = TRUE, chullfilled = FALSE, labelgroups = FALSE, legend = TRUE,
   title = "", center_origin = TRUE, zoom = 0.9, eigen = TRUE,
@@ -93,8 +93,7 @@ x \%>\%
 
 # and even continue after this function
 op \%>\% my_plot(~var, axes=c(1, 3)) \%>\%
-    layer_title("hi there!") \%>\%
-    layer_stars()
+    layer_title("hi there!")
 
 # You get the idea.
 }

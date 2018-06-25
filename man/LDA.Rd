@@ -13,7 +13,7 @@ LDA(x, fac, retain, ...)
 \method{LDA}{PCA}(x, fac, retain = 0.99, ...)
 }
 \arguments{
-\item{x}{a  PCA object}
+\item{x}{a  Coe or a PCA object}
 
 \item{fac}{the grouping factor (names of one of the $fac column or column id)}
 
