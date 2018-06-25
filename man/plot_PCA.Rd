@@ -104,7 +104,7 @@ bp \%>\% .layerize_PCA(~fake) \%>\%
 highlight <- function(x, ..., col_F="#CCCCCC", col_T="#FC8D62FF"){
  args <- list(...)
  x$colors_groups <- c(col_F, col_T)
- x$colors_rows <- c(col_F, col_T)[(x$f \%in\% l)+1]
+ x$colors_rows <- c(col_F, col_T)[(x$f \%in\% args)+1]
  x
 }
 x \%>\% highlight("a", "b") \%>\% layer_points() \%>\% layer_chull()

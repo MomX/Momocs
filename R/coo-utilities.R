@@ -523,18 +523,6 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
 #' }
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @seealso \link{coo_slide} and friends.
-#' @examples
-#' h <- hearts %>% slice(1:5) # for speed sake
-#' stack(h)
-#' # set the first landmark as the starting point
-#' stack(coo_slide(h, ldk=1))
-#' # set the 50th point as the starting point (everywhere)
-#' stack(coo_slide(h, id=50))
-#' # set the id-random-th point as the starting point (everywhere)
-#' set.seed(123) # just for the reproducibility
-#' id_random <- sample(x=min(sapply(h$coo, nrow)), size=length(h),
-#' replace=TRUE)
-#' stack(coo_slide(h, id=id_random))
 #' @family coo_ utilities
 #' @examples
 #' # on a single shape
