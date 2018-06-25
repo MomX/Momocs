@@ -317,7 +317,9 @@ mutate.PCA <- mutate.Coo
 #' Return shapes with matching conditions, from the \code{$fac}. See examples and \code{?dplyr::filter}.
 #' @param .data a \code{Coo}, \code{Coe}, \code{PCA} object
 #' @param ... logical conditions
-#' @details dplyr verbs are maintained.
+#' @details dplyr verbs are maintained. You should probbaly not filter on PCA objects.
+#' The latter are calculated using all individuals and filtering may lead to false conclusions.
+#' If you want to highlith some individuals, see examples in [plot_PCA].
 #' @return a Momocs object of the same class.
 #' @family handling functions
 #' @examples

@@ -18,7 +18,9 @@ a Momocs object of the same class.
 Return shapes with matching conditions, from the \code{$fac}. See examples and \code{?dplyr::filter}.
 }
 \details{
-dplyr verbs are maintained.
+dplyr verbs are maintained. You should probbaly not filter on PCA objects.
+The latter are calculated using all individuals and filtering may lead to false conclusions.
+If you want to highlith some individuals, see examples in \link{plot_PCA}.
 }
 \examples{
 olea
