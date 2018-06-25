@@ -20,17 +20,18 @@ coo_check <- function(coo){
 
 #' @export
 coo_check.default <- function(coo) {
-  if (is.matrix(coo)) {
-    return(coo)
-  }
   if (is.data.frame(coo) && all(sapply(coo, class)=="numeric")){
-    return(as.matrix(coo))
+    coo <- as.matrix(coo)
   }
   if (is.list(coo)) {
     if (length(coo) == 1)
-      return(l2m(coo))
+      coo <- l2m(coo)
   }
-  stop("do not know how to turn into a coo")
+  # checks for ncol==2 and no NAs
+  if (is_shp(coo))
+    coo
+  else
+    stop("do not know how to turn into a coo")
 }
 
 #' @export
