@@ -264,14 +264,14 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 
 <span class='no'>bp</span> <span class='kw'>%&gt;%</span> <span class='fu'>.layerize_PCA</span>(~<span class='no'>fake</span>) <span class='kw'>%&gt;%</span>
   <span class='no'>layer_frame</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_axes</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='layers_morphospace.html'>layer_morphospace_PCA</a></span>() <span class='kw'>-&gt;</span> <span class='no'>x</span></div><div class='output co'>#&gt; <span class='message'>factor passed was a character, and coerced to a factor.</span></div><div class='img'><img src='plot_PCA-6.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='fu'><a href='layers_morphospace.html'>layer_morphospace_PCA</a></span>() <span class='kw'>-&gt;</span> <span class='no'>x</span></div><div class='output co'>#&gt; <span class='message'>factor passed was a character, and coerced to a factor.</span></div><div class='input'>
 <span class='no'>highlight</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>col_F</span><span class='kw'>=</span><span class='st'>"#CCCCCC"</span>, <span class='no'>col_T</span><span class='kw'>=</span><span class='st'>"#FC8D62FF"</span>){
  <span class='no'>args</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='no'>...</span>)
  <span class='no'>x</span>$<span class='no'>colors_groups</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='no'>col_F</span>, <span class='no'>col_T</span>)
- <span class='no'>x</span>$<span class='no'>colors_rows</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='no'>col_F</span>, <span class='no'>col_T</span>)[(<span class='no'>x</span>$<span class='no'>f</span> <span class='kw'>%in%</span> <span class='no'>l</span>)+<span class='fl'>1</span>]
+ <span class='no'>x</span>$<span class='no'>colors_rows</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='no'>col_F</span>, <span class='no'>col_T</span>)[(<span class='no'>x</span>$<span class='no'>f</span> <span class='kw'>%in%</span> <span class='no'>args</span>)+<span class='fl'>1</span>]
  <span class='no'>x</span>
 }
-<span class='no'>x</span> <span class='kw'>%&gt;%</span> <span class='fu'>highlight</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_points</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_chull</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error in x$f %in% l: objet 'l' introuvable</span></div><div class='input'>
+<span class='no'>x</span> <span class='kw'>%&gt;%</span> <span class='fu'>highlight</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_points</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_chull</a></span>()</div><div class='img'><img src='plot_PCA-6.png' alt='' width='700' height='433' /></div><div class='input'>
 # You get the idea.
 </div></pre>
   </div>
