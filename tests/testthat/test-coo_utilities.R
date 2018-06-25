@@ -5,7 +5,7 @@ test_that("coo_check works fine", {
   expect_true(is_shp(coo_check(bot[1])))
   expect_true(is_shp(coo_check(olea[1])))
   expect_true(is_shp(coo_check(wings[1])))
-  expect_false(is_shp(coo_check(flower[1])))
+  expect_error(coo_check(flower[1]))
   expect_false(is_shp("plop"))
   expect_true(is_Out(coo_check(bot)))
   bot[1] <- NA
