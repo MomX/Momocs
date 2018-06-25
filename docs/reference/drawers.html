@@ -18,13 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="grindr drawers for shape plots — drawers" />
+
+<meta property="og:description" content="Useful drawers for building custom
+shape plots using the grindr approach. See examples and vignettes." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +89,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +104,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,16 +112,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>grindr drawers for shape plots</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/grindr-drawers.R'><code>R/grindr-drawers.R</code></a></small>
+    <div class="hidden name"><code>drawers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Useful drawers for building custom
 shape plots using the grindr approach. See examples and vignettes.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>draw_polygon</span>(<span class='no'>coo</span>, <span class='no'>f</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>par</span>(<span class='st'>"fg"</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>pal</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>, <span class='no'>...</span>)
@@ -148,7 +169,7 @@ shape plots using the grindr approach. See examples and vignettes.</p>
 <span class='fu'>draw_title</span>(<span class='no'>coo</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>sub</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>/<span class='fl'>4</span>), <span class='kw'>font</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>1</span>),
   <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>200</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -236,22 +257,23 @@ All comments are welcome.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>grindr_layers</p>
+    <div class='dont-index'><p>grindr_layers</p>
 <p>Other grindr: <code>layers_morphospace</code>,
   <code><a href='layers.html'>layers</a></code>, <code><a href='mosaic.html'>mosaic_engine</a></code>,
   <code><a href='papers.html'>papers</a></code>, <code><a href='pile.html'>pile</a></code>,
-  <code><a href='plot_LDA.html'>plot_LDA</a></code>, <code><a href='plot_PCA.html'>plot_PCA</a></code></p>
+  <code><a href='plot_LDA.html'>plot_LDA</a></code>, <code><a href='plot_NMDS.html'>plot_NMDS</a></code>,
+  <code><a href='plot_PCA.html'>plot_PCA</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='papers.html'>paper_grid</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>draw_polygon</span>()</div><div class='img'><img src='drawers-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='no'>paper_chess</span> <span class='kw'>%&gt;%</span> <span class='fu'>draw_lines</span>(~<span class='no'>var</span>)</div><div class='img'><img src='drawers-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='papers.html'>paper_grid</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>draw_polygon</span>()</div><div class='img'><img src='drawers-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='no'>paper_chess</span> <span class='kw'>%&gt;%</span> <span class='fu'>draw_lines</span>(~<span class='no'>var</span>)</div><div class='img'><img src='drawers-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>hearts</span>[<span class='fl'>240</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='papers.html'>paper_white</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>draw_outline</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>24</span>) <span class='kw'>%&gt;%</span> <span class='no'>draw_landmarks</span> <span class='kw'>%&gt;%</span> <span class='fu'>draw_labels</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>draw_links</span>(<span class='kw'>links</span><span class='kw'>=</span><span class='fu'>replicate</span>(<span class='fl'>2</span>, <span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>24</span>, <span class='fl'>8</span>)))</div><div class='img'><img src='drawers-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+  <span class='fu'>draw_links</span>(<span class='kw'>links</span><span class='kw'>=</span><span class='fu'>replicate</span>(<span class='fl'>2</span>, <span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>24</span>, <span class='fl'>8</span>)))</div><div class='img'><img src='drawers-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>bot</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='papers.html'>paper_grid</a></span>() <span class='kw'>%&gt;%</span>
     <span class='fu'>draw_outlines</span>() <span class='kw'>%&gt;%</span>
-    <span class='fu'>draw_title</span>(<span class='st'>"Alcohol abuse \nis dangerous for health"</span>, <span class='st'>"Drink responsibly"</span>)</div><div class='img'><img src='drawers-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
+    <span class='fu'>draw_title</span>(<span class='st'>"Alcohol abuse \nis dangerous for health"</span>, <span class='st'>"Drink responsibly"</span>)</div><div class='img'><img src='drawers-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -280,5 +302,8 @@ All comments are welcome.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

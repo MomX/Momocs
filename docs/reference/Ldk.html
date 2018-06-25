@@ -18,13 +18,32 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Builds an Ldk object — Ldk" />
+
+<meta property="og:description" content="In Momocs, Ldk classes objects are
+lists of configurations of landmarks, with optionnal components,
+on which generic methods such as plotting methods (e.g. stack)
+and specific methods (e.g. fgProcrustes).
+Ldk objects are primarily Coo objects. In a sense, morphometrics methods
+on Ldk objects preserves (x, y) coordinates and LdkCoe are also Ldk objects." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +66,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +93,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +108,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,12 +116,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Builds an Ldk object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/cl-def-Ldk.R'><code>R/cl-def-Ldk.R</code></a></small>
+    <div class="hidden name"><code>Ldk.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>In Momocs, <code>Ldk</code> classes objects are
 lists of configurations of <b>l</b>an<b>d</b>mar<b>k</b>s, with optionnal components,
@@ -109,10 +133,11 @@ and specific methods (e.g. <a href='fgProcrustes.html'>fgProcrustes</a>).
 <code>Ldk</code> objects are primarily <code><a href='Coo.html'>Coo</a></code> objects. In a sense, morphometrics methods
 on Ldk objects preserves (x, y) coordinates and <code>LdkCoe</code> are also <code>Ldk</code> objects.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>Ldk</span>(<span class='no'>coo</span>, <span class='kw'>links</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>slidings</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>())</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -151,7 +176,7 @@ to homogeneize the number of coordinates among shapes.</p>
     <pre class="examples"><div class='input'><span class='co'>#Methods on Ldk</span>
 <span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='no'>Ldk</span>)</div><div class='output co'>#&gt;  [1] combine         coo_bookstein   coo_slice       d              
 #&gt;  [5] def_links       def_slidings    fgProcrustes    fgsProcrustes  
-#&gt;  [9] get_ldk         get_slidings    mosaic          mshapes        
+#&gt;  [9] get_ldk         get_slidings    mosaic          MSHAPES        
 #&gt; [13] panel           pile            rearrange_ldk   slidings_scheme
 #&gt; [17] stack           which_out      
 #&gt; see '?methods' for accessing help and source code</div></pre>
@@ -183,5 +208,8 @@ to homogeneize the number of coordinates among shapes.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -18,13 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Data: Landmark and semilandmark coordinates on cereal glumes — chaff" />
+
+<meta property="og:description" content="Data: Landmark and semilandmark coordinates on cereal glumes" />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +88,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +103,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,15 +111,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Data: Landmark and semilandmark coordinates on cereal glumes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/pkg-datasets.R'><code>R/pkg-datasets.R</code></a></small>
+    <div class="hidden name"><code>data_chaff.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Data: Landmark and semilandmark coordinates on cereal glumes</p>
     
+    </div>
 
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -119,13 +139,13 @@ PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Fo
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other datasets: <code><a href='data_apodemus.html'>apodemus</a></code>, <code><a href='data_bot.html'>bot</a></code>,
+    <div class='dont-index'><p>Other datasets: <code><a href='data_apodemus.html'>apodemus</a></code>, <code><a href='data_bot.html'>bot</a></code>,
   <code><a href='data_charring.html'>charring</a></code>, <code><a href='data_flower.html'>flower</a></code>,
   <code><a href='data_hearts.html'>hearts</a></code>, <code><a href='data_molars.html'>molars</a></code>,
   <code><a href='data_mosquito.html'>mosquito</a></code>, <code><a href='data_mouse.html'>mouse</a></code>,
   <code><a href='data_nsfishes.html'>nsfishes</a></code>, <code><a href='data_oak.html'>oak</a></code>,
   <code><a href='data_olea.html'>olea</a></code>, <code><a href='data_shapes.html'>shapes</a></code>,
-  <code><a href='data_trilo.html'>trilo</a></code>, <code><a href='data_wings.html'>wings</a></code></p>
+  <code><a href='data_trilo.html'>trilo</a></code>, <code><a href='data_wings.html'>wings</a></code></p></div>
     
 
   </div>
@@ -155,5 +175,8 @@ PI: Glynis Jones, Dept of Archaeology, Sheffield, UK. Data collected by Emily Fo
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

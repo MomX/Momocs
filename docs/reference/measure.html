@@ -18,13 +18,31 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Measures shape descriptors — measure" />
+
+<meta property="og:description" content="Calculates shape descriptors on Coo and other objects.
+Any function that returns a scalar when fed coordinates can be passed
+and naturally those of Momocs (pick some there apropos(&quot;coo_&quot;)). Functions
+without arguments (eg coo_area) have to be passed without brackets but
+functions with arguments (eg d) have to be passed &quot;entirely&quot;. See examples." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +65,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +92,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +107,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,12 +115,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Measures shape descriptors</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/core-premodern.R'><code>R/core-premodern.R</code></a></small>
+    <div class="hidden name"><code>measure.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Calculates shape descriptors on Coo and other objects.
 Any function that returns a scalar when fed coordinates can be passed
@@ -108,10 +131,11 @@ and naturally those of Momocs (pick some there <code>apropos("coo_")</code>). Fu
 without arguments (eg <a href='coo_area.html'>coo_area</a>) have to be passed without brackets but
 functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely". See examples.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>measure</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -130,7 +154,7 @@ functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other premodern: <code><a href='coo_truss.html'>coo_truss</a></code></p>
+    <div class='dont-index'><p>Other premodern: <code><a href='coo_truss.html'>coo_truss</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -149,16 +173,16 @@ functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely
 #&gt; # ... with 34 more rows</div><div class='input'><span class='no'>bm</span>$<span class='no'>coe</span></div><div class='output co'>#&gt; # A tibble: 40 x 2
 #&gt;       area perim
 #&gt;  *   &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 234515. 2482.
+#&gt;  1 234515  2482.
 #&gt;  2 201056. 2269.
 #&gt;  3 119460. 1578.
 #&gt;  4 119568. 1817.
 #&gt;  5 165736. 2066.
-#&gt;  6 114015. 1487.
-#&gt;  7 149503. 1954.
+#&gt;  6 114015  1487.
+#&gt;  7 149503  1954.
 #&gt;  8 147642. 1826.
 #&gt;  9 130178. 1751.
-#&gt; 10 219548. 2399.
+#&gt; 10 219548  2399.
 #&gt; # ... with 30 more rows</div><div class='input'>
 <span class='co'># how to use arguments, eg with the d() function</span>
 <span class='fu'>measure</span>(<span class='no'>wings</span>, <span class='no'>coo_area</span>, <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>), <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))</div><div class='output co'>#&gt; A TraCoe object --------------------
@@ -177,22 +201,22 @@ functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely
 <span class='fu'>measure</span>(<span class='no'>bot</span>$<span class='no'>coo</span>, <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)</div><div class='output co'>#&gt; # A tibble: 40 x 2
 #&gt;       area perim
 #&gt;  *   &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 234515. 2482.
+#&gt;  1 234515  2482.
 #&gt;  2 201056. 2269.
 #&gt;  3 119460. 1578.
 #&gt;  4 119568. 1817.
 #&gt;  5 165736. 2066.
-#&gt;  6 114015. 1487.
-#&gt;  7 149503. 1954.
+#&gt;  6 114015  1487.
+#&gt;  7 149503  1954.
 #&gt;  8 147642. 1826.
 #&gt;  9 130178. 1751.
-#&gt; 10 219548. 2399.
+#&gt; 10 219548  2399.
 #&gt; # ... with 30 more rows</div><div class='input'>
 <span class='co'># and also, to get a data_frame (one row)</span>
 <span class='fu'>measure</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 2
-#&gt;      area perim
-#&gt;     &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1 234515. 2482.</div></pre>
+#&gt;     area perim
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 234515 2482.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -221,5 +245,8 @@ functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

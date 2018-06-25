@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Calculates and draw 'efourier' shapes. — efourier_shape" />
+
+<meta property="og:description" content="efourier_shape calculates a 'Fourier elliptical shape' given Fourier
+coefficients (see Details) or can generate some 'efourier' shapes.
+Mainly intended to generate shapes and/or to understand how efourier works." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +90,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +105,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,21 +113,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculates and draw 'efourier' shapes.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/core-out-efourier.R'><code>R/core-out-efourier.R</code></a></small>
+    <div class="hidden name"><code>efourier_shape.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>efourier_shape</code> calculates a 'Fourier elliptical shape' given Fourier
 coefficients (see <code>Details</code>) or can generate some 'efourier' shapes.
 Mainly intended to generate shapes and/or to understand how efourier works.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>efourier_shape</span>(<span class='no'>an</span>, <span class='no'>bn</span>, <span class='no'>cn</span>, <span class='no'>dn</span>, <span class='no'>nb.h</span>, <span class='kw'>nb.pts</span> <span class='kw'>=</span> <span class='fl'>60</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -178,13 +200,13 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other efourier: <code><a href='efourier_i.html'>efourier_i</a></code>,
-  <code><a href='efourier.html'>efourier</a></code></p>
+    <div class='dont-index'><p>Other efourier: <code><a href='efourier_i.html'>efourier_i</a></code>,
+  <code><a href='efourier.html'>efourier</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ef</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>24</span>)
-<span class='fu'>efourier_shape</span>(<span class='no'>ef</span>$<span class='no'>an</span>, <span class='no'>ef</span>$<span class='no'>bn</span>, <span class='no'>ef</span>$<span class='no'>cn</span>, <span class='no'>ef</span>$<span class='no'>dn</span>) <span class='co'># equivalent to efourier_i(ef)</span></div><div class='img'><img src='efourier_shape-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;                 x          y
+<span class='fu'>efourier_shape</span>(<span class='no'>ef</span>$<span class='no'>an</span>, <span class='no'>ef</span>$<span class='no'>bn</span>, <span class='no'>ef</span>$<span class='no'>cn</span>, <span class='no'>ef</span>$<span class='no'>dn</span>) <span class='co'># equivalent to efourier_i(ef)</span></div><div class='img'><img src='efourier_shape-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                 x          y
 #&gt;  [1,] -139.292006   52.55414
 #&gt;  [2,] -136.616807   10.69211
 #&gt;  [3,] -131.350271  -30.94211
@@ -244,7 +266,7 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 #&gt; [57,] -103.969321  212.65038
 #&gt; [58,] -121.348549  174.68203
 #&gt; [59,] -136.478064  135.92288
-#&gt; [60,] -141.748300   94.09730</div><div class='input'><span class='fu'>efourier_shape</span>() <span class='co'># is autonomous</span></div><div class='img'><img src='efourier_shape-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;                 x           y
+#&gt; [60,] -141.748300   94.09730</div><div class='input'><span class='fu'>efourier_shape</span>() <span class='co'># is autonomous</span></div><div class='img'><img src='efourier_shape-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                 x           y
 #&gt;  [1,] -0.39288440  2.57778934
 #&gt;  [2,] -0.43328190  2.53598875
 #&gt;  [3,] -0.46341861  2.46024878
@@ -306,7 +328,7 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 #&gt; [59,] -0.29380298  2.60878229
 #&gt; [60,] -0.34556033  2.59794774</div><div class='input'>
 <span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Out.html'>Out</a></span>(<span class='fu'><a href='bridges.html'>a2l</a></span>(<span class='fu'>replicate</span>(<span class='fl'>100</span>,
-<span class='fu'>efourier_shape</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>2.5</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>))))) <span class='co'># Bubble family</span></div><div class='img'><img src='efourier_shape-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>efourier_shape</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>2.5</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>))))) <span class='co'># Bubble family</span></div><div class='img'><img src='efourier_shape-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -339,5 +361,8 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

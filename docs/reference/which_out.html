@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Identify outliers — which_out" />
+
+<meta property="og:description" content="A simple wrapper around dnorm that helps identify outliers. In particular,
+it may be useful on Coe object (in this case a PCA is first calculated) and also
+on Ldk for detecting possible outliers on freshly digitized/imported datasets." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +90,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +105,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,21 +113,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Identify outliers</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/cl-helpers.R'><code>R/cl-helpers.R</code></a></small>
+    <div class="hidden name"><code>which_out.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>A simple wrapper around dnorm that helps identify outliers. In particular,
 it may be useful on <a href='Coe.html'>Coe</a> object (in this case a PCA is first calculated) and also
 on <a href='Ldk.html'>Ldk</a> for detecting possible outliers on freshly digitized/imported datasets.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>which_out</span>(<span class='no'>x</span>, <span class='no'>conf</span>, <span class='no'>nax</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -161,12 +183,12 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
 #&gt;           6          13          22 </div><div class='input'><span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='st'>"black"</span>, <span class='fu'>nrow</span>(<span class='no'>x_p</span>$<span class='no'>x</span>))
 <span class='no'>outliers</span> <span class='kw'>&lt;-</span> <span class='fu'>which_out</span>(<span class='no'>x_p</span>$<span class='no'>x</span>[, <span class='fl'>1</span>], <span class='fl'>0.5</span>)
 <span class='no'>cols</span>[<span class='no'>outliers</span>] <span class='kw'>&lt;-</span> <span class='st'>"red"</span>
-<span class='fu'>plot</span>(<span class='no'>x_p</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>cols</span>)</div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='which_out-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># remove them for Coe, rePCA, replot</span>
-<span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(-<span class='no'>outliers</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(e, Coe$fac, parent.frame()): object 'outliers' not found</span></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>x_p</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>cols</span>)</div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='which_out-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># remove them for Coe, rePCA, replot</span>
+<span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(-<span class='no'>outliers</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(e, Coe$fac, parent.frame()): objet 'outliers' introuvable</span></div><div class='input'>
 <span class='co'># or directly with which_out.Coe</span>
 <span class='co'># which relies on a PCA</span>
 <span class='no'>outliers</span> <span class='kw'>&lt;-</span> <span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'>which_out</span>(<span class='fl'>0.5</span>, <span class='kw'>nax</span><span class='kw'>=</span><span class='fl'>0.95</span>) <span class='kw'>%&gt;%</span> <span class='fu'>na.omit</span>()
-<span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(-<span class='no'>outliers</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(e, Coe$fac, parent.frame()): object 'outliers' not found</span></div></pre>
+<span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(-<span class='no'>outliers</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(e, Coe$fac, parent.frame()): objet 'outliers' introuvable</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -193,5 +215,8 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

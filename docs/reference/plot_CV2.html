@@ -18,13 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Plots a cross-correlation table — plot_CV2" />
+
+<meta property="og:description" content="Or any contingency/confusion table. A simple graphic representation based on variable
+width and/or color for arrows or segments, based on the relative frequencies." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +89,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +104,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,16 +112,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plots a cross-correlation table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/gr-LDA.R'><code>R/gr-LDA.R</code></a></small>
+    <div class="hidden name"><code>plot_CV2.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Or any contingency/confusion table. A simple graphic representation based on variable
 width and/or color for arrows or segments, based on the relative frequencies.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>plot_CV2</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -117,7 +138,7 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
   <span class='kw'>lwd0</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>gap.dots</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>pch.dots</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>gap.names</span> <span class='kw'>=</span> <span class='fl'>0.25</span>,
   <span class='kw'>cex.names</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -180,7 +201,7 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='LDA.html'>LDA</a>, <a href='plot.LDA.html'>plot.LDA</a>, <a href='plot_CV.html'>plot_CV</a>.</p>
+    <div class='dont-index'><p><a href='LDA.html'>LDA</a>, <a href='plot.LDA.html'>plot.LDA</a>, <a href='plot_CV.html'>plot_CV</a>.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -212,7 +233,7 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
 <span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'>as.table</span>(<span class='no'>tab</span>)
 
 
-<span class='fu'>plot_CV2</span>(<span class='no'>tab</span>)</div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='no'>arrows</span>) <span class='co'># if you prefer arrows</span></div><div class='img'><img src='plot_CV2-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd0</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_india</span>) <span class='co'># if you like india but not lwds</span></div><div class='img'><img src='plot_CV2-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>col0</span><span class='kw'>=</span><span class='st'>'pink'</span>) <span class='co'># only lwd</span></div><div class='img'><img src='plot_CV2-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd0</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>cex.names</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='co'># if you're getting old</span></div><div class='img'><img src='plot_CV2-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='co'># pretty but useless</span></div><div class='img'><img src='plot_CV2-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col.breaks</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='co'># if you think it's either good or bad</span></div><div class='img'><img src='plot_CV2-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>NA</span>) <span class='co'># if you do not like dots</span></div><div class='img'><img src='plot_CV2-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>gap.dots</span><span class='kw'>=</span><span class='fl'>0</span>) <span class='co'># if you want to 'fill the gap'</span></div><div class='img'><img src='plot_CV2-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>gap.dots</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='co'># or not</span></div><div class='img'><img src='plot_CV2-9.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>plot_CV2</span>(<span class='no'>tab</span>)</div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='no'>arrows</span>) <span class='co'># if you prefer arrows</span></div><div class='img'><img src='plot_CV2-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd0</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_india</span>) <span class='co'># if you like india but not lwds</span></div><div class='img'><img src='plot_CV2-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>col0</span><span class='kw'>=</span><span class='st'>'pink'</span>) <span class='co'># only lwd</span></div><div class='img'><img src='plot_CV2-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd0</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>cex.names</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='co'># if you're getting old</span></div><div class='img'><img src='plot_CV2-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='co'># pretty but useless</span></div><div class='img'><img src='plot_CV2-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col.breaks</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='co'># if you think it's either good or bad</span></div><div class='img'><img src='plot_CV2-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>NA</span>) <span class='co'># if you do not like dots</span></div><div class='img'><img src='plot_CV2-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>gap.dots</span><span class='kw'>=</span><span class='fl'>0</span>) <span class='co'># if you want to 'fill the gap'</span></div><div class='img'><img src='plot_CV2-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>gap.dots</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='co'># or not</span></div><div class='img'><img src='plot_CV2-9.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>#trilo examples</span>
 <span class='no'>trilo.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>trilo</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>trilo.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>trilo.f</span>), <span class='st'>'onto'</span>)</div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='no'>trilo.l</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;       classified
@@ -226,9 +247,9 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
 #&gt;         a         b         c         d 
 #&gt; 0.0000000 0.7500000 0.6111111 0.6666667 
 #&gt; 
-#&gt;  * Leave-one-out cross-validation ($CV.correct): (58% - 29/50): </div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>trilo.l</span>)</div><div class='img'><img src='plot_CV2-10.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+#&gt;  * Leave-one-out cross-validation ($CV.correct): (58% - 29/50): </div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>trilo.l</span>)</div><div class='img'><img src='plot_CV2-10.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># olea example</span>
-<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='input'><span class='no'>opl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)</div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>opl</span>)</div><div class='img'><img src='plot_CV2-11.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='input'><span class='no'>opl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>), <span class='st'>'var'</span>)</div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>opl</span>)</div><div class='img'><img src='plot_CV2-11.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -255,5 +276,8 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Inverse tangent angle Fourier transform — tfourier_i" />
+
+<meta property="og:description" content="tfourier_i uses the inverse tangent angle Fourier transformation to
+calculate a shape, when given a list with Fourier coefficients, typically
+obtained computed with tfourier." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +90,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +105,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,22 +113,26 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Inverse tangent angle Fourier transform</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/core-out-tfourier.R'><code>R/core-out-tfourier.R</code></a></small>
+    <div class="hidden name"><code>tfourier_i.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>tfourier_i</code> uses the inverse tangent angle Fourier transformation to
 calculate a shape, when given a list with Fourier coefficients, typically
 obtained computed with <a href='tfourier.html'>tfourier</a>.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>tfourier_i</span>(<span class='no'>tf</span>, <span class='no'>nb.h</span>, <span class='kw'>nb.pts</span> <span class='kw'>=</span> <span class='fl'>120</span>, <span class='kw'>force2close</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>perim</span> <span class='kw'>=</span> <span class='fl'>2</span> * <span class='no'>pi</span>, <span class='kw'>thetao</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -172,8 +194,8 @@ pp.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other tfourier: <code><a href='tfourier_shape.html'>tfourier_shape</a></code>,
-  <code><a href='tfourier.html'>tfourier</a></code></p>
+    <div class='dont-index'><p>Other tfourier: <code><a href='tfourier_shape.html'>tfourier_shape</a></code>,
+  <code><a href='tfourier.html'>tfourier</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -255,87 +277,87 @@ pp.</p>
 #&gt; 
 #&gt; $y1
 #&gt; [1] 561
-#&gt; </div><div class='input'><span class='fu'><a href='tfourier_shape.html'>tfourier_shape</a></span>()</div><div class='img'><img src='tfourier_i-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt;                x           y
-#&gt;  [1,] 0.05240222  0.04434392
-#&gt;  [2,] 0.12793229  0.06926107
-#&gt;  [3,] 0.20631788  0.08272784
-#&gt;  [4,] 0.28583339  0.08444219
-#&gt;  [5,] 0.36474032  0.07447461
-#&gt;  [6,] 0.44139157  0.05325570
-#&gt;  [7,] 0.51432606  0.02153479
-#&gt;  [8,] 0.58234519 -0.01968479
-#&gt;  [9,] 0.64456552 -0.06922554
-#&gt; [10,] 0.70044540 -0.12582143
-#&gt; [11,] 0.74978678 -0.18819998
-#&gt; [12,] 0.79271611 -0.25515316
-#&gt; [13,] 0.82965015 -0.32559131
-#&gt; [14,] 0.86125311 -0.39857698
-#&gt; [15,] 0.88839117 -0.47333781
-#&gt; [16,] 0.91208916 -0.54925923
-#&gt; [17,] 0.93349218 -0.62585927
-#&gt; [18,] 0.95383324 -0.70274813
-#&gt; [19,] 0.97440540 -0.77957548
-#&gt; [20,] 0.99653547 -0.85596865
-#&gt; [21,] 1.02155462 -0.93146499
-#&gt; [22,] 1.05076027 -1.00544259
-#&gt; [23,] 1.08536360 -1.07705450
-#&gt; [24,] 1.12641752 -1.14517374
-#&gt; [25,] 1.17472221 -1.20835850
-#&gt; [26,] 1.23070877 -1.26484886
-#&gt; [27,] 1.29430691 -1.31260796
-#&gt; [28,] 1.36480919 -1.34941943
-#&gt; [29,] 1.44075172 -1.37304965
-#&gt; [30,] 1.51983810 -1.38147583
-#&gt; [31,] 1.59893715 -1.37316941
-#&gt; [32,] 1.67418416 -1.34741006
-#&gt; [33,] 1.74120712 -1.30458976
-#&gt; [34,] 1.79548311 -1.24645395
-#&gt; [35,] 1.83280632 -1.17622124
-#&gt; [36,] 1.84982189 -1.09852873
-#&gt; [37,] 1.84455387 -1.01916939
-#&gt; [38,] 1.81683937 -0.94462034
-#&gt; [39,] 1.76858015 -0.88140085
-#&gt; [40,] 1.70374197 -0.83533930
-#&gt; [41,] 1.62806978 -0.81085716
-#&gt; [42,] 1.54853717 -0.81038833
-#&gt; [43,] 1.47260030 -0.83403677
-#&gt; [44,] 1.40736711 -0.87953717
-#&gt; [45,] 1.35881157 -0.94252935
-#&gt; [46,] 1.33115486 -1.01709986
-#&gt; [47,] 1.32650199 -1.09649764
-#&gt; [48,] 1.34477263 -1.17390461
-#&gt; [49,] 1.38391072 -1.24314236
-#&gt; [50,] 1.44031176 -1.29921890
-#&gt; [51,] 1.50937789 -1.33865904
-#&gt; [52,] 1.58610404 -1.35960550
-#&gt; [53,] 1.66561000 -1.36171703
-#&gt; [54,] 1.74355866 -1.34591636
-#&gt; [55,] 1.81643083 -1.31405254
-#&gt; [56,] 1.88165539 -1.26853976
-#&gt; [57,] 1.93761517 -1.21202288
-#&gt; [58,] 1.98356108 -1.14710270
-#&gt; [59,] 2.01947054 -1.07613675
-#&gt; [60,] 2.04588325 -1.00111659
-#&gt; [61,] 2.06374002 -0.92361310
-#&gt; [62,] 2.07424171 -0.84477548
-#&gt; [63,] 2.07873706 -0.76536863
-#&gt; [64,] 2.07864139 -0.68583469
-#&gt; [65,] 2.07538357 -0.60636745
-#&gt; [66,] 2.07037545 -0.52699130
-#&gt; [67,] 2.06499685 -0.44763938
-#&gt; [68,] 2.06058894 -0.36822763
-#&gt; [69,] 2.05844921 -0.28872243
-#&gt; [70,] 2.05982265 -0.20920030
-#&gt; [71,] 2.06588487 -0.12989768
-#&gt; [72,] 2.07771494 -0.05124842
-#&gt; [73,] 2.09625760  0.02609384
-#&gt; [74,] 2.12227674  0.10125141
-#&gt; [75,] 2.15630410  0.17313878
-#&gt; [76,] 2.19858921  0.24050068
-#&gt; [77,] 2.24905735  0.30197118
-#&gt; [78,] 2.30728315  0.35615063
-#&gt; [79,] 2.37248600  0.40169450
-#&gt; [80,] 2.44355175  0.43740605</div></pre>
+#&gt; </div><div class='input'><span class='fu'><a href='tfourier_shape.html'>tfourier_shape</a></span>()</div><div class='img'><img src='tfourier_i-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                 x            y
+#&gt;  [1,] -0.04489454  0.053729362
+#&gt;  [2,] -0.11525825  0.090805016
+#&gt;  [3,] -0.19246103  0.109920116
+#&gt;  [4,] -0.27198241  0.111336145
+#&gt;  [5,] -0.35010215  0.096404200
+#&gt;  [6,] -0.42406571  0.067163023
+#&gt;  [7,] -0.49210282  0.025973117
+#&gt;  [8,] -0.55334212 -0.024775314
+#&gt;  [9,] -0.60766679 -0.082865641
+#&gt; [10,] -0.65554845 -0.146371564
+#&gt; [11,] -0.69788651 -0.213700197
+#&gt; [12,] -0.73586844 -0.283578870
+#&gt; [13,] -0.77085701 -0.355003342
+#&gt; [14,] -0.80430329 -0.427162905
+#&gt; [15,] -0.83767956 -0.499354872
+#&gt; [16,] -0.87242464 -0.570898111
+#&gt; [17,] -0.90989336 -0.641053301
+#&gt; [18,] -0.95130365 -0.708956497
+#&gt; [19,] -0.99767691 -0.773572106
+#&gt; [20,] -1.04977069 -0.833671132
+#&gt; [21,] -1.10800644 -0.887839884
+#&gt; [22,] -1.17239874 -0.934522722
+#&gt; [23,] -1.24249605 -0.972099613
+#&gt; [24,] -1.31734450 -0.998995071
+#&gt; [25,] -1.39548649 -1.013810087
+#&gt; [26,] -1.47500329 -1.015463589
+#&gt; [27,] -1.55360568 -1.003326038
+#&gt; [28,] -1.62876990 -0.977326105
+#&gt; [29,] -1.69790836 -0.938012884
+#&gt; [30,] -1.75855780 -0.886560955
+#&gt; [31,] -1.80856311 -0.824713363
+#&gt; [32,] -1.84623428 -0.754666673
+#&gt; [33,] -1.87045727 -0.678911130
+#&gt; [34,] -1.88074631 -0.600045476
+#&gt; [35,] -1.87723402 -0.520589075
+#&gt; [36,] -1.86060491 -0.442812932
+#&gt; [37,] -1.83198539 -0.368606608
+#&gt; [38,] -1.79280805 -0.299391061
+#&gt; [39,] -1.74466941 -0.236079711
+#&gt; [40,] -1.68919826 -0.179083152
+#&gt; [41,] -1.62794794 -0.128348019
+#&gt; [42,] -1.56232049 -0.083418140
+#&gt; [43,] -1.49352593 -0.043506190
+#&gt; [44,] -1.42257548 -0.007566101
+#&gt; [45,] -1.35030517  0.025640188
+#&gt; [46,] -1.27742436  0.057484231
+#&gt; [47,] -1.20458353  0.089419634
+#&gt; [48,] -1.13245522  0.122933249
+#&gt; [49,] -1.06182163  0.159492129
+#&gt; [50,] -0.99366149  0.200478112
+#&gt; [51,] -0.92922651  0.247102028
+#&gt; [52,] -0.87009515  0.300291662
+#&gt; [53,] -0.81818802  0.360551982
+#&gt; [54,] -0.77572736  0.427803361
+#&gt; [55,] -0.74512257  0.501213189
+#&gt; [56,] -0.72876880  0.579047692
+#&gt; [57,] -0.72875551  0.658581683
+#&gt; [58,] -0.74649941  0.736111095
+#&gt; [59,] -0.78233896  0.807112377
+#&gt; [60,] -0.83515243  0.866579959
+#&gt; [61,] -0.90208206  0.909546003
+#&gt; [62,] -0.97845469  0.931746821
+#&gt; [63,] -1.05797649  0.930354088
+#&gt; [64,] -1.13324162  0.904647744
+#&gt; [65,] -1.19653484  0.856485267
+#&gt; [66,] -1.24083574  0.790431607
+#&gt; [67,] -1.26086681  0.713461406
+#&gt; [68,] -1.25398890  0.634225366
+#&gt; [69,] -1.22075267  0.561968815
+#&gt; [70,] -1.16496950  0.505277602
+#&gt; [71,] -1.09325940  0.470878236
+#&gt; [72,] -1.01414512  0.462718172
+#&gt; [73,] -0.93685955  0.481495724
+#&gt; [74,] -0.87009113  0.524711852
+#&gt; [75,] -0.82089479  0.587204864
+#&gt; [76,] -0.79394536  0.662033892
+#&gt; [77,] -0.79122401  0.741521313
+#&gt; [78,] -0.81213274  0.818257750
+#&gt; [79,] -0.85395053  0.885910750
+#&gt; [80,] -0.91249735  0.939743140</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -370,5 +392,8 @@ pp.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -18,13 +18,31 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Calcuates symmetry indices on OutCoe objects — symmetry" />
+
+<meta property="og:description" content="For OutCoe objects obtained with efourier, calculates several
+indices on the matrix of coefficients: AD, the sum of absolute values of
+harmonic coefficients A and D; BC same thing for B and C; amp the
+sum of the absolute value of all harmonic coefficients and sym which is the ratio
+of AD over amp. See references below for more details." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +65,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +92,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +107,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,12 +115,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calcuates symmetry indices on OutCoe objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/cl-def-Out.R'><code>R/cl-def-Out.R</code></a></small>
+    <div class="hidden name"><code>symmetry.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>For <a href='OutCoe.html'>OutCoe</a> objects obtained with <a href='efourier.html'>efourier</a>, calculates several
 indices on the matrix of coefficients: <code>AD</code>, the sum of absolute values of
@@ -108,10 +131,11 @@ harmonic coefficients A and D; <code>BC</code> same thing for B and C; <code>amp
 sum of the absolute value of all harmonic coefficients and <code>sym</code> which is the ratio
 of <code>AD</code> over <code>amp</code>. See references below for more details.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>symmetry</span>(<span class='no'>OutCoe</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -151,12 +175,12 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='rm_asym.html'>rm_asym</a> and rm_sym.</p>
+    <div class='dont-index'><p><a href='rm_asym.html'>rm_asym</a> and rm_sym.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>symmetry</span>(<span class='no'>bot.f</span>)
-<span class='fu'>hist</span>(<span class='no'>res</span>[, <span class='st'>'sym'</span>])</div><div class='img'><img src='symmetry-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>hist</span>(<span class='no'>res</span>[, <span class='st'>'sym'</span>])</div><div class='img'><img src='symmetry-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -189,5 +213,8 @@ and principal component analysis. Annals of Botany, 94(5), 657-64. doi:10.1093/a
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

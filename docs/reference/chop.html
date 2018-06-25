@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Split to several objects based on a factor — chop" />
+
+<meta property="og:description" content="Rougher slicing that accepts a classifier
+ie a column name from the $fac on Momocs classes.
+Returns a named (after every level) list that can be lapply-ed and combined. See examples." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +90,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +105,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,21 +113,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Split to several objects based on a factor</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/cl-handling.R'><code>R/cl-handling.R</code></a></small>
+    <div class="hidden name"><code>chop.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Rougher slicing that accepts a classifier
 ie a column name from the <code>$fac</code> on Momocs classes.
 Returns a named (after every level) list that can be lapply-ed and combined. See examples.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>chop</span>(<span class='no'>.data</span>, <span class='no'>fac</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -128,7 +150,7 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other handling functions: <code><a href='arrange.html'>arrange</a></code>,
+    <div class='dont-index'><p>Other handling functions: <code><a href='arrange.html'>arrange</a></code>,
   <code><a href='at_least.html'>at_least</a></code>, <code><a href='combine.html'>combine</a></code>,
   <code><a href='dissolve.html'>dissolve</a></code>, <code><a href='fac_dispatcher.html'>fac_dispatcher</a></code>,
   <code><a href='filter.html'>filter</a></code>, <code><a href='mutate.html'>mutate</a></code>,
@@ -136,7 +158,7 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
   <code><a href='rm_harm.html'>rm_harm</a></code>, <code><a href='rm_uncomplete.html'>rm_uncomplete</a></code>,
   <code><a href='rw_fac.html'>rw_fac</a></code>, <code><a href='sample_frac.html'>sample_frac</a></code>,
   <code><a href='sample_n.html'>sample_n</a></code>, <code><a href='select.html'>select</a></code>,
-  <code><a href='slice.html'>slice</a></code>, <code><a href='subset.html'>subsetize</a></code></p>
+  <code><a href='slice.html'>slice</a></code>, <code><a href='subset.html'>subsetize</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -146,7 +168,7 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
       <span class='no'>npoly</span> <span class='kw'>%&gt;%</span>          <span class='co'># separately apply npoly</span>
                          <span class='co'># strict equivalent to lapply(npoly)</span>
       <span class='no'>combine</span> <span class='kw'>%&gt;%</span>       <span class='co'># recombine</span>
-      <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span>      <span class='co'># an illustration of the 2 views</span></div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 95</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='chop-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>      # treated separately
+      <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span>      <span class='co'># an illustration of the 2 views</span></div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 95</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='chop-1.png' alt='' width='700' height='433' /></div><div class='input'>      # treated separately
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -176,5 +198,8 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

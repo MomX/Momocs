@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Get paired individual on a Coe, PCA or LDA objects — get_pairs" />
+
+<meta property="og:description" content="If you have paired individuals, i.e. before and after a treatment or for repeated measures,
+and if you have coded coded it into $fac, this methods allows you to retrieve the corresponding PC/LD scores,
+or coefficients for Coe objects." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +90,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +105,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,21 +113,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get paired individual on a Coe, PCA or LDA objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/mult-PCA.R'><code>R/mult-PCA.R</code></a></small>
+    <div class="hidden name"><code>get_pairs.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>If you have paired individuals, i.e. before and after a treatment or for repeated measures,
 and if you have coded coded it into <code>$fac</code>, this methods allows you to retrieve the corresponding PC/LD scores,
 or coefficients for <a href='Coe.html'>Coe</a> objects.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>get_pairs</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='no'>range</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -146,7 +168,7 @@ first level of the <code>fac</code> provided; <code>x2</code> same thing for the
 <span class='fu'>plot</span>(<span class='no'>botcp</span>, <span class='st'>"type"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='color_palettes.html'>col_summer</a></span>(<span class='fl'>2</span>), <span class='kw'>pch</span><span class='kw'>=</span><span class='fu'>rep</span>(<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>20</span>), <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>40</span>), <span class='kw'>eigen</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='input'><span class='no'>bot.pairs</span> <span class='kw'>&lt;-</span> <span class='fu'>get_pairs</span>(<span class='no'>botcp</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='st'>"session"</span>, <span class='kw'>range</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>2</span>)
 <span class='fu'>segments</span>(<span class='no'>bot.pairs</span>$<span class='no'>session1</span>[, <span class='fl'>1</span>], <span class='no'>bot.pairs</span>$<span class='no'>session1</span>[, <span class='fl'>2</span>],
        <span class='no'>bot.pairs</span>$<span class='no'>session2</span>[, <span class='fl'>1</span>], <span class='no'>bot.pairs</span>$<span class='no'>session2</span>[, <span class='fl'>2</span>],
-       <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='color_palettes.html'>col_summer</a></span>(<span class='fl'>2</span>)[<span class='no'>bot.pairs</span>$<span class='no'>fac</span>$<span class='no'>type</span>])</div><div class='img'><img src='get_pairs-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+       <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='color_palettes.html'>col_summer</a></span>(<span class='fl'>2</span>)[<span class='no'>bot.pairs</span>$<span class='no'>fac</span>$<span class='no'>type</span>])</div><div class='img'><img src='get_pairs-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 </div></pre>
   </div>
@@ -175,5 +197,8 @@ first level of the <code>fac</code> provided; <code>x2</code> same thing for the
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

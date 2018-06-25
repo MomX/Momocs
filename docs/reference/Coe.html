@@ -18,13 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Coe "super" class — Coe" />
+
+<meta property="og:description" content="Coe class is the 'parent' or 'super' class of
+OutCoe, OpnCoe, LdkCoe and TraCoe classes." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +89,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +104,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,20 +112,24 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Coe "super" class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/cl-def-CooCoe.R'><code>R/cl-def-CooCoe.R</code></a></small>
+    <div class="hidden name"><code>Coe.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>Coe</code> class is the 'parent' or 'super' class of
 <code><a href='OutCoe.html'>OutCoe</a></code>, <code><a href='OpnCoe.html'>OpnCoe</a></code>, <code>LdkCoe</code> and <code>TraCoe</code> classes.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>Coe</span>(<span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -120,8 +141,8 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Useful shortcuts are described below. See <code>browseVignettes("Momocs")</code> for
-a detail of the design behind Momocs' classes.
-    <code>Coe</code> class is the 'parent' class of the following 'child' classes</p><ul>
+a detail of the design behind Momocs' classes.</p>
+<p><code>Coe</code> class is the 'parent' class of the following 'child' classes</p><ul>
 <li><p><code><a href='OutCoe.html'>OutCoe</a></code> for coefficients from closed <b>out</b>lines morphometrics</p></li>
 <li><p><code><a href='OpnCoe.html'>OpnCoe</a></code> for coefficients from <b>op</b>e<b>n</b> outlines morphometrics</p></li>
 <li><p><code>LdkCoe</code> for coefficients from configuration of <b>l</b>an<b>d</b>mar<b>k</b>s morphometrics.</p></li>
@@ -134,20 +155,21 @@ with <code>methods(class=Coe)</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other classes: <code><a href='Coo.html'>Coo</a></code>, <code><a href='OpnCoe.html'>OpnCoe</a></code>,
+    <div class='dont-index'><p>Other classes: <code><a href='Coo.html'>Coo</a></code>, <code><a href='OpnCoe.html'>OpnCoe</a></code>,
   <code><a href='Opn.html'>Opn</a></code>, <code><a href='OutCoe.html'>OutCoe</a></code>,
-  <code><a href='Out.html'>Out</a></code>, <code><a href='TraCoe.html'>TraCoe</a></code></p>
+  <code><a href='Out.html'>Out</a></code>, <code><a href='TraCoe.html'>TraCoe</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># to see all methods for Coe objects.</span>
 <span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'Coe'</span>)</div><div class='output co'>#&gt;  [1] [           [&lt;-         $           arrange     as_df       breed      
 #&gt;  [7] chop        CLUST       dim         dissolve    export      filter     
-#&gt; [13] get_pairs   KMEDOIDS    LDA         length      mutate      names      
-#&gt; [19] names&lt;-     perm        reLDA       rename      sample_frac sample_n   
-#&gt; [25] select      slice       str         subsetize   which_out  
+#&gt; [13] get_pairs   KMEDOIDS    LDA         length      MDS         mutate     
+#&gt; [19] names       names&lt;-     NMDS        perm        reLDA       rename     
+#&gt; [25] sample_frac sample_n    select      slice       str         subsetize  
+#&gt; [31] which_out  
 #&gt; see '?methods' for accessing help and source code</div><div class='input'><span class='co'># to see all methods for OutCoe objects.</span>
-<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>) <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span></div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib hist     MANOVA   mshapes  PCA      print   
+<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>) <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span></div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib hist     MANOVA   MSHAPES  PCA      print   
 #&gt;  [9] rm_asym  rm_sym   symmetry
 #&gt; see '?methods' for accessing help and source code</div><div class='input'>
 <span class='no'>bot.f</span><span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bot.f</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
@@ -185,6 +207,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot      1  0.018782346 0.07275504 0.03848616 0.008439294 0.018172933
 #&gt; tauro           1  0.007333709 0.09536301 0.01149374 0.023043384 0.007093187
 #&gt; westmalle       1  0.009100416 0.09469091 0.01450202 0.023460557 0.009582984
+#&gt; amrut           1  0.004198631 0.09500128 0.02143863 0.026005715 0.011729658
+#&gt; ballantines     1 -0.000653116 0.05733309 0.03154946 0.017516836 0.034198742
+#&gt; bushmills       1 -0.004927807 0.08149528 0.01036776 0.023910616 0.017320375
+#&gt; chivas          1  0.021613712 0.08642271 0.04314511 0.008460823 0.014376414
+#&gt; dalmore         1  0.038669436 0.07265717 0.05680730 0.003277741 0.019363348
+#&gt; famousgrouse    1  0.003373189 0.08802317 0.02019928 0.025507211 0.016776448
+#&gt; glendronach     1  0.003257554 0.09526153 0.02074249 0.026167146 0.010932661
+#&gt; glenmorangie    1  0.008572527 0.09410920 0.02136020 0.024756735 0.011430941
+#&gt; highlandpark    1 -0.002122354 0.06989902 0.03612531 0.023554876 0.027350465
+#&gt; jackdaniels     1  0.008777794 0.08626120 0.02940216 0.019373419 0.015295504
+#&gt; jb              1  0.004384491 0.09517564 0.02460733 0.023505329 0.010741163
+#&gt; johnniewalker   1  0.002370576 0.08321025 0.01719991 0.022474617 0.017724976
+#&gt; magallan        1 -0.008648015 0.09924533 0.01455296 0.037258989 0.011586345
+#&gt; makersmark      1  0.016536161 0.10229688 0.03388156 0.008773613 0.010192259
+#&gt; oban            1  0.001652893 0.09909342 0.02127249 0.028337047 0.009671380
+#&gt; oldpotrero      1  0.022935601 0.09391465 0.03109455 0.009138035 0.012979620
+#&gt; redbreast       1  0.017769276 0.09281598 0.04425688 0.011246633 0.012792733
+#&gt; tamdhu          1  0.005270821 0.09375949 0.02020814 0.025073663 0.010943288
+#&gt; wildturkey      1  0.008605609 0.09229119 0.03228916 0.020978082 0.013010663
+#&gt; yoichi          1 -0.001738226 0.07733113 0.02843759 0.024035740 0.023420967
 #&gt;                           A7          A8            A9           A10
 #&gt; brahma          0.0031835706 0.005158502 -7.262824e-04  0.0047287291
 #&gt; caney           0.0035527091 0.007010166  1.214949e-03  0.0038734169
@@ -206,6 +248,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot     -0.0108560295 0.008370133 -2.988319e-03  0.0052185654
 #&gt; tauro           0.0052560957 0.006425077  9.461829e-04  0.0040141970
 #&gt; westmalle       0.0051463840 0.006848999  3.534839e-04  0.0042382642
+#&gt; amrut           0.0019176785 0.008515916  1.392307e-03  0.0089150426
+#&gt; ballantines     0.0045419501 0.014014932 -5.273138e-03  0.0006083616
+#&gt; bushmills       0.0095020099 0.012457087 -3.988679e-04  0.0048132802
+#&gt; chivas         -0.0053775410 0.013797633  2.198119e-03  0.0031741809
+#&gt; dalmore        -0.0072008170 0.012093037  5.368701e-03  0.0025492686
+#&gt; famousgrouse    0.0035195429 0.008617844 -1.621645e-03  0.0075384656
+#&gt; glendronach     0.0018504691 0.007851391  1.483976e-03  0.0086527932
+#&gt; glenmorangie    0.0023552959 0.007521806  1.103445e-03  0.0069834516
+#&gt; highlandpark   -0.0024258364 0.003973480 -7.894105e-03  0.0013284975
+#&gt; jackdaniels    -0.0047279969 0.008903250 -2.124758e-03  0.0090062900
+#&gt; jb             -0.0015584637 0.008915452  4.097146e-04  0.0089915939
+#&gt; johnniewalker   0.0034197782 0.009945811 -3.913888e-03  0.0059350940
+#&gt; magallan        0.0095026108 0.003088506  1.575409e-03  0.0054824432
+#&gt; makersmark      0.0003303914 0.016520390 -1.901653e-03  0.0031138042
+#&gt; oban            0.0022492968 0.007479292  2.478319e-03  0.0090114539
+#&gt; oldpotrero      0.0015843674 0.012237947 -4.671411e-04  0.0023549220
+#&gt; redbreast      -0.0046107656 0.015170859  3.884228e-03  0.0045806501
+#&gt; tamdhu          0.0013188307 0.006535142  1.700604e-04  0.0072170216
+#&gt; wildturkey     -0.0038244377 0.010171775  1.641229e-03  0.0092477531
+#&gt; yoichi         -0.0011328612 0.006117569 -8.008551e-03  0.0034639875
 #&gt;                          A11           A12 B1            B2            B3
 #&gt; brahma         -0.0013733386  0.0016363823  0 -1.900652e-04  3.306231e-04
 #&gt; caney          -0.0018777601  0.0011330555  0  5.012013e-04 -3.851293e-04
@@ -227,6 +289,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot     -0.0003179777 -0.0031166695  0  2.257469e-04 -2.009399e-04
 #&gt; tauro          -0.0010466330  0.0023514452  0  1.762712e-04 -8.961804e-05
 #&gt; westmalle      -0.0004882420  0.0023217071  0  2.683034e-04  5.829510e-04
+#&gt; amrut          -0.0004155995  0.0028189180  0  3.259091e-04  3.840090e-04
+#&gt; ballantines    -0.0024674938 -0.0002274846  0 -8.980074e-06  1.013064e-03
+#&gt; bushmills      -0.0043970618  0.0017818484  0  8.084328e-04  8.012671e-04
+#&gt; chivas         -0.0016654883 -0.0026415175  0  6.073651e-04  3.070684e-04
+#&gt; dalmore         0.0025922354 -0.0039822137  0  1.097768e-03  6.881659e-04
+#&gt; famousgrouse    0.0001300206  0.0046515437  0  1.287495e-04 -1.324051e-04
+#&gt; glendronach    -0.0002084792  0.0025405566  0  4.149836e-04  1.394907e-04
+#&gt; glenmorangie   -0.0001692272  0.0025838514  0  8.773153e-05 -6.257124e-05
+#&gt; highlandpark    0.0023214993  0.0028070218  0 -6.291662e-04 -7.091405e-04
+#&gt; jackdaniels    -0.0011544544  0.0013660407  0  1.828207e-04 -5.854778e-04
+#&gt; jb             -0.0026073348  0.0016289320  0  5.770034e-04  1.295536e-04
+#&gt; johnniewalker  -0.0026799451  0.0046998857  0  1.610309e-03  1.521699e-03
+#&gt; magallan        0.0034410693  0.0056372281  0 -1.110357e-03 -1.017379e-03
+#&gt; makersmark     -0.0037381840  0.0031052372  0 -2.272912e-03 -1.921977e-03
+#&gt; oban           -0.0000555700  0.0026159662  0  5.217373e-04  3.289690e-04
+#&gt; oldpotrero      0.0002650070  0.0005717670  0 -4.566144e-04  2.434271e-04
+#&gt; redbreast      -0.0017153754 -0.0017080604  0  1.568632e-04  1.213587e-04
+#&gt; tamdhu         -0.0004660552  0.0022520466  0  1.013117e-03  4.671170e-04
+#&gt; wildturkey     -0.0011040540  0.0003877287  0  9.489660e-04  9.344159e-04
+#&gt; yoichi         -0.0005670111  0.0040850862  0  2.371406e-04  3.337929e-04
 #&gt;                           B4            B5            B6            B7
 #&gt; brahma         -5.191749e-04  1.067446e-04 -9.218905e-05  5.604686e-07
 #&gt; caney           3.333918e-04 -2.899903e-04  7.350207e-05 -4.952054e-04
@@ -248,6 +330,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot     -3.556495e-04 -4.589428e-04 -1.231722e-04 -1.030225e-04
 #&gt; tauro           8.045507e-05  4.030041e-05  1.942858e-04  7.124766e-05
 #&gt; westmalle       2.086425e-04  5.569697e-04 -1.481080e-04  2.680453e-04
+#&gt; amrut           2.692429e-04  2.370884e-04  4.975910e-05  1.929742e-04
+#&gt; ballantines    -2.175286e-04  1.006239e-03 -2.063087e-04  6.874951e-04
+#&gt; bushmills       9.888621e-04  5.333749e-04  6.026329e-04  3.382499e-07
+#&gt; chivas          1.231654e-04 -3.404412e-05  8.988476e-05  1.476812e-04
+#&gt; dalmore         2.545366e-04  1.352642e-04 -1.253930e-04  2.101188e-04
+#&gt; famousgrouse   -1.274614e-04  2.141211e-04 -1.073666e-04  1.188717e-05
+#&gt; glendronach     1.071609e-04 -2.016928e-04 -6.904446e-05 -1.327779e-04
+#&gt; glenmorangie    1.913928e-04 -9.675222e-05  1.480796e-04 -8.118855e-05
+#&gt; highlandpark   -2.204109e-04 -5.021317e-04  3.287316e-04 -2.505046e-04
+#&gt; jackdaniels    -7.969529e-04 -4.880520e-04 -1.903562e-04  3.092736e-04
+#&gt; jb             -1.422141e-04 -2.056778e-04 -2.053789e-04  1.048725e-04
+#&gt; johnniewalker   1.140415e-03  1.505532e-04  2.156619e-04 -1.772208e-04
+#&gt; magallan       -7.964354e-04 -6.143625e-04 -3.734865e-04 -1.291146e-04
+#&gt; makersmark     -3.452843e-04 -1.437534e-04  4.289043e-04 -9.732915e-04
+#&gt; oban            3.351843e-04  4.359254e-05  1.826487e-05 -6.027186e-05
+#&gt; oldpotrero     -2.060062e-04  3.778706e-05 -5.576392e-04  2.258336e-04
+#&gt; redbreast      -1.087561e-04 -1.587376e-04 -9.420764e-05 -7.636860e-06
+#&gt; tamdhu          2.449976e-04  3.452581e-05 -1.344683e-04  1.407481e-04
+#&gt; wildturkey      2.048265e-04  1.038328e-04  7.988232e-06  2.379076e-04
+#&gt; yoichi          2.790195e-04  2.201285e-04  1.423493e-05 -5.626562e-05
 #&gt;                           B8            B9           B10           B11
 #&gt; brahma          6.268503e-06 -1.960132e-04  1.334431e-04  4.058288e-05
 #&gt; caney           8.536695e-05 -4.143363e-04  1.667420e-04 -3.134942e-04
@@ -269,6 +371,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot      5.673867e-06 -2.751261e-04 -3.002656e-04 -2.455063e-04
 #&gt; tauro           2.932668e-04  1.286768e-04  1.547277e-04  1.336644e-04
 #&gt; westmalle      -1.539093e-04  4.586356e-04  1.799417e-05  3.301881e-04
+#&gt; amrut           1.570262e-04  2.548664e-04  1.115168e-04  7.490810e-06
+#&gt; ballantines    -3.868333e-05  3.003380e-04  1.592670e-04 -5.079525e-05
+#&gt; bushmills       2.135771e-04 -2.019147e-04  1.348464e-04 -1.302260e-04
+#&gt; chivas          1.332194e-04  1.056333e-04  2.227781e-05  4.227956e-05
+#&gt; dalmore        -4.021158e-06  2.679348e-04 -2.632871e-05  1.881627e-04
+#&gt; famousgrouse   -2.566731e-04  2.195639e-04 -7.568478e-05  1.842423e-04
+#&gt; glendronach     2.453495e-05 -7.915842e-06 -1.865175e-05 -6.786263e-05
+#&gt; glenmorangie    1.557411e-04 -3.527084e-06  1.414448e-04 -9.027797e-06
+#&gt; highlandpark    3.870735e-04 -4.437162e-04  1.970082e-04 -4.866817e-04
+#&gt; jackdaniels    -1.751848e-04 -3.777874e-05 -1.953733e-04  2.389926e-04
+#&gt; jb              1.396719e-04  1.902920e-04 -7.877557e-05  4.429623e-05
+#&gt; johnniewalker   5.133497e-04  1.719490e-04  5.339652e-04 -1.814410e-04
+#&gt; magallan       -1.577770e-04 -1.006505e-04 -1.482048e-04 -8.058980e-06
+#&gt; makersmark     -5.600587e-04 -7.200799e-04  4.777646e-04  2.581853e-04
+#&gt; oban            8.787835e-05  1.113193e-04  1.307306e-04 -2.483305e-05
+#&gt; oldpotrero     -3.831452e-04  2.156873e-04 -5.679089e-04  2.063675e-04
+#&gt; redbreast       2.541246e-05  2.426826e-05 -8.753325e-05 -8.652635e-06
+#&gt; tamdhu         -3.383952e-05  3.365051e-04 -1.785979e-04 -4.280721e-06
+#&gt; wildturkey      3.002663e-04  1.207047e-04  1.615231e-04 -7.004425e-06
+#&gt; yoichi         -1.168653e-04 -8.227670e-05  5.854442e-05  8.229082e-05
 #&gt;                          B12 C1            C2            C3            C4
 #&gt; brahma         -1.917814e-04  0 -1.637571e-03 -3.936895e-03  5.408096e-03
 #&gt; caney           2.011956e-05  0  1.239828e-03 -2.845651e-04  3.757825e-04
@@ -290,6 +412,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot     -9.215486e-05  0 -7.405447e-04  3.028807e-04  6.337466e-04
 #&gt; tauro           1.226045e-04  0  1.122815e-04 -2.572009e-04 -8.133564e-04
 #&gt; westmalle       4.757341e-05  0  1.228197e-03 -2.741133e-04  9.140310e-05
+#&gt; amrut          -9.179140e-05  0  4.658444e-04 -4.347520e-04 -3.326225e-05
+#&gt; ballantines     3.235267e-04  0 -5.591149e-04  1.469581e-03 -1.536579e-03
+#&gt; bushmills       2.015409e-04  0 -3.958316e-04  1.944836e-03 -7.053533e-05
+#&gt; chivas         -6.666931e-05  0 -1.172232e-03 -1.218925e-03 -3.262755e-05
+#&gt; dalmore        -9.894417e-05  0  6.958725e-04 -1.680610e-03  6.152298e-04
+#&gt; famousgrouse   -7.211196e-05  0  7.115395e-05  8.468121e-04 -4.933730e-04
+#&gt; glendronach    -9.224044e-05  0 -7.099606e-05  6.421159e-04 -4.706785e-04
+#&gt; glenmorangie    6.261072e-05  0 -8.919633e-06 -2.628346e-04  9.674043e-05
+#&gt; highlandpark    1.369676e-04  0 -1.617000e-03  5.528353e-04 -3.372340e-04
+#&gt; jackdaniels     3.169089e-04  0  5.328968e-04 -1.540810e-03 -5.769145e-04
+#&gt; jb             -5.463792e-05  0 -2.505933e-03 -9.424246e-04 -8.780719e-04
+#&gt; johnniewalker  -5.200179e-05  0  4.677592e-03 -4.233763e-04 -1.898993e-03
+#&gt; magallan       -1.072102e-04  0  2.189543e-04  4.632813e-04  1.888985e-04
+#&gt; makersmark      8.085419e-06  0  1.698257e-03 -6.596354e-04  3.533379e-04
+#&gt; oban           -6.805926e-05  0  6.795967e-07  1.085005e-06 -4.641661e-04
+#&gt; oldpotrero     -3.604369e-04  0 -6.093255e-05  4.513517e-05 -4.902640e-04
+#&gt; redbreast       1.217829e-04  0 -1.468386e-03  1.265193e-04 -1.396525e-04
+#&gt; tamdhu         -2.219702e-04  0  9.586941e-04  6.330302e-04 -2.779959e-04
+#&gt; wildturkey      2.260401e-05  0 -9.213008e-05 -1.129525e-03 -4.176692e-04
+#&gt; yoichi          1.472054e-04  0  5.380772e-05 -7.906572e-05 -7.656576e-04
 #&gt;                           C5            C6            C7            C8
 #&gt; brahma         -1.259407e-03 -3.994402e-03  3.268582e-03  4.792269e-04
 #&gt; caney          -4.017802e-05  4.699805e-04  2.518166e-04  6.300072e-04
@@ -311,6 +453,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot      6.556462e-04  1.058980e-03  8.585128e-04  5.745493e-04
 #&gt; tauro          -4.748704e-04 -3.315681e-04 -4.564306e-04 -3.514821e-04
 #&gt; westmalle      -4.491227e-04 -2.495132e-04 -7.270457e-05 -1.344863e-04
+#&gt; amrut           8.477464e-05 -1.080422e-04  2.126076e-04 -9.256970e-05
+#&gt; ballantines     6.528392e-04 -2.944984e-04 -5.656855e-04  1.789388e-04
+#&gt; bushmills       9.280815e-04 -4.013982e-04 -6.650163e-04 -5.644542e-04
+#&gt; chivas          1.300827e-04 -3.851168e-05  4.239507e-05  1.334791e-04
+#&gt; dalmore        -2.964899e-04 -1.304289e-04  7.782306e-04 -4.877421e-04
+#&gt; famousgrouse    6.303902e-04 -1.322629e-04 -2.372041e-04 -2.550728e-05
+#&gt; glendronach    -3.501431e-04 -2.525866e-04  3.742212e-04  1.133101e-04
+#&gt; glenmorangie   -3.395833e-04 -4.246431e-04 -3.274667e-04  1.061570e-04
+#&gt; highlandpark    6.066669e-04  1.088092e-03  5.256719e-04  5.273203e-04
+#&gt; jackdaniels     1.023982e-03  9.323203e-04  1.214171e-03  5.898250e-04
+#&gt; jb              2.339479e-04  3.473492e-04  3.733691e-04  1.626720e-04
+#&gt; johnniewalker  -8.686486e-04 -1.355694e-03  1.175580e-03  3.264915e-04
+#&gt; magallan        2.310078e-04 -1.038695e-04 -1.026307e-05  1.023165e-04
+#&gt; makersmark     -5.037028e-04 -1.240866e-04 -7.956100e-05 -6.606345e-05
+#&gt; oban           -3.076544e-04 -4.937905e-04 -1.310019e-05 -2.416906e-04
+#&gt; oldpotrero     -5.717320e-04 -9.307817e-04  1.291075e-04 -5.512552e-04
+#&gt; redbreast      -6.765261e-04  1.325618e-04  4.297985e-04  3.419357e-04
+#&gt; tamdhu         -1.871447e-04 -1.524034e-04  6.923348e-05 -5.932353e-04
+#&gt; wildturkey     -5.568095e-04  1.396939e-04 -3.130911e-04 -2.441291e-05
+#&gt; yoichi         -1.807137e-04 -7.887244e-04 -4.647802e-04 -2.321719e-04
 #&gt;                           C9           C10           C11           C12
 #&gt; brahma         -1.321861e-03  7.225736e-04  2.052451e-04  1.666890e-04
 #&gt; caney           4.837212e-04 -3.443095e-04  1.349160e-04  4.336526e-06
@@ -332,6 +494,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot      7.740523e-04  4.070373e-04  5.906937e-04  9.596081e-04
 #&gt; tauro          -3.210499e-04 -2.265987e-04  5.213196e-05  1.560054e-07
 #&gt; westmalle       4.839335e-04  5.801730e-05  1.736045e-04 -1.456983e-04
+#&gt; amrut          -1.864115e-04 -2.461486e-04 -3.925113e-04 -1.058934e-04
+#&gt; ballantines    -5.195587e-04  3.044292e-04 -2.940957e-04 -8.254562e-05
+#&gt; bushmills      -7.180710e-04  9.032786e-05 -3.120552e-04  3.338259e-04
+#&gt; chivas         -3.525098e-05 -9.088640e-05  2.114664e-04 -4.123221e-05
+#&gt; dalmore         2.200639e-05 -1.248926e-04 -1.755355e-06  2.379108e-04
+#&gt; famousgrouse   -3.212998e-04  3.215665e-04 -7.784050e-05 -5.945648e-04
+#&gt; glendronach     9.391914e-05  1.721023e-04 -5.496005e-04 -4.452810e-05
+#&gt; glenmorangie   -1.452951e-05  2.274608e-05  8.210480e-05  2.227747e-04
+#&gt; highlandpark   -1.043832e-04  2.593737e-04  7.274696e-06 -7.945600e-05
+#&gt; jackdaniels    -6.541464e-05  8.873609e-04  3.142194e-04  5.911319e-04
+#&gt; jb             -2.944987e-04  2.504811e-05 -2.127576e-05 -1.962938e-04
+#&gt; johnniewalker  -8.111435e-05 -2.403699e-04 -1.403144e-03 -1.314933e-04
+#&gt; magallan        4.068423e-04  5.073294e-04  1.401801e-04  3.243760e-04
+#&gt; makersmark      4.971815e-04  6.070002e-04  1.442476e-05 -8.225582e-05
+#&gt; oban           -1.976049e-04 -2.813942e-04 -2.577944e-04 -9.115022e-05
+#&gt; oldpotrero     -5.682370e-04  1.529407e-07 -2.873197e-04 -1.840435e-04
+#&gt; redbreast      -3.874401e-05  4.931648e-05  3.073398e-04  8.441133e-05
+#&gt; tamdhu         -5.985664e-04 -4.647946e-04 -1.822017e-04  1.592463e-04
+#&gt; wildturkey      1.524887e-05 -6.414600e-04  2.874523e-04 -2.824274e-05
+#&gt; yoichi         -2.834302e-04  1.556736e-04 -8.243757e-05  1.918715e-04
 #&gt;                       D1          D2         D3           D4         D5
 #&gt; brahma         0.2937120 -0.04602927 0.05240292 -0.035768593 0.03999516
 #&gt; caney          0.3046235 -0.07069129 0.05062805 -0.011400633 0.04383297
@@ -353,6 +535,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot     0.4079636 -0.09801072 0.04110270 -0.028374451 0.04305818
 #&gt; tauro          0.2869165 -0.06868727 0.05072815 -0.010829946 0.04098501
 #&gt; westmalle      0.2901614 -0.07168182 0.04932024 -0.012449351 0.03886788
+#&gt; amrut          0.2916508 -0.07148727 0.03950517 -0.025866432 0.04086520
+#&gt; ballantines    0.4617826 -0.07263052 0.04705459 -0.054513278 0.00386769
+#&gt; bushmills      0.3159155 -0.02993821 0.05271205 -0.040523047 0.01619821
+#&gt; chivas         0.4010304 -0.12319740 0.04665481 -0.003452339 0.05226216
+#&gt; dalmore        0.4148687 -0.14805699 0.04396881 -0.010373143 0.05369374
+#&gt; famousgrouse   0.3082730 -0.05984603 0.04245023 -0.038145717 0.02994654
+#&gt; glendronach    0.2880496 -0.06941189 0.04010808 -0.026119002 0.04146027
+#&gt; glenmorangie   0.2784428 -0.06974209 0.02918920 -0.025306813 0.04836028
+#&gt; highlandpark   0.4216191 -0.07914764 0.04537064 -0.044351756 0.02868104
+#&gt; jackdaniels    0.3474874 -0.08171102 0.04501412 -0.023326513 0.04362364
+#&gt; jb             0.2978504 -0.07724044 0.04167029 -0.021228975 0.04549082
+#&gt; johnniewalker  0.3097702 -0.04720860 0.04457306 -0.040162288 0.02378800
+#&gt; magallan       0.2790080 -0.04764937 0.01811567 -0.036589697 0.02988117
+#&gt; makersmark     0.3905990 -0.12195322 0.04665759  0.014950483 0.04867625
+#&gt; oban           0.2773362 -0.07277254 0.03313763 -0.023775433 0.04405146
+#&gt; oldpotrero     0.3550787 -0.13906787 0.05059907  0.008348999 0.04726562
+#&gt; redbreast      0.3884532 -0.13265717 0.04117925 -0.003816545 0.05332588
+#&gt; tamdhu         0.2956700 -0.06219547 0.04086923 -0.024902731 0.04397834
+#&gt; wildturkey     0.3186215 -0.08962249 0.03633236 -0.023651702 0.05160018
+#&gt; yoichi         0.3745590 -0.07064336 0.04209729 -0.040564238 0.03281077
 #&gt;                           D6            D7            D8            D9
 #&gt; brahma          1.156917e-02  1.544573e-02  0.0013278090  0.0017860170
 #&gt; caney           4.485691e-03  9.597789e-03  0.0016029758  0.0082459711
@@ -374,6 +576,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot      1.902021e-02  1.046530e-02  0.0039430719 -0.0033493172
 #&gt; tauro           2.321158e-03  1.173141e-02  0.0034750116  0.0079425387
 #&gt; westmalle       1.786521e-03  1.515342e-02  0.0060316179  0.0079388255
+#&gt; amrut           6.369733e-03  1.572832e-02 -0.0038463793  0.0013700406
+#&gt; ballantines     4.344419e-03  1.645402e-02  0.0254142957  0.0095935791
+#&gt; bushmills      -1.167929e-02  2.000745e-02  0.0117755165  0.0158424792
+#&gt; chivas          7.036241e-03 -4.363041e-03  0.0063540528  0.0079672331
+#&gt; dalmore         1.718407e-02 -6.837798e-03  0.0070735547 -0.0019258037
+#&gt; famousgrouse    4.059251e-03  2.229183e-02  0.0037608752  0.0010406075
+#&gt; glendronach     6.223170e-03  1.521132e-02 -0.0043261577  0.0013210684
+#&gt; glenmorangie    5.822448e-03  1.976818e-02 -0.0044147538  0.0033213121
+#&gt; highlandpark    1.979571e-02  2.717259e-02  0.0200795294 -0.0021232596
+#&gt; jackdaniels     1.186579e-02  1.329499e-02 -0.0005343742 -0.0016003714
+#&gt; jb              6.441694e-03  1.187397e-02 -0.0057652170  0.0017868329
+#&gt; johnniewalker   8.789822e-05  2.661158e-02  0.0128165570  0.0105593342
+#&gt; magallan        6.181261e-03  2.628647e-02  0.0002557046  0.0036531313
+#&gt; makersmark     -5.885380e-03 -3.124763e-04  0.0123974490  0.0123986615
+#&gt; oban            7.290747e-03  1.526810e-02 -0.0064234752  0.0024990961
+#&gt; oldpotrero     -1.263673e-03  9.106123e-06  0.0131403235  0.0062358607
+#&gt; redbreast       7.554115e-03 -5.549155e-03  0.0028962725  0.0066649976
+#&gt; tamdhu          7.609569e-03  1.817766e-02 -0.0043937269  0.0004398248
+#&gt; wildturkey      1.072078e-02  1.329394e-02 -0.0045720419 -0.0006442784
+#&gt; yoichi          1.665764e-02  2.932085e-02  0.0147708913  0.0009353830
 #&gt;                         D10           D11          D12
 #&gt; brahma          0.006789017  0.0048196384  0.007143143
 #&gt; caney           0.011464283  0.0039468981  0.003663644
@@ -395,7 +617,26 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; tanglefoot      0.012760316  0.0055315212  0.008787267
 #&gt; tauro           0.007452360  0.0026002512  0.004223806
 #&gt; westmalle       0.005389195  0.0009150318  0.004619774
-#&gt;  [ reached getOption("max.print") -- omitted 20 rows ]</div><div class='input'>
+#&gt; amrut           0.008090140  0.0077694214  0.009648834
+#&gt; ballantines     0.009641210 -0.0013505569  0.001193993
+#&gt; bushmills       0.012190958  0.0027373737  0.003932980
+#&gt; chivas          0.019338356  0.0019726115  0.002305432
+#&gt; dalmore         0.016575636  0.0049437344  0.004000701
+#&gt; famousgrouse    0.003906640  0.0019458696  0.010187413
+#&gt; glendronach     0.008581179  0.0087430642  0.009902698
+#&gt; glenmorangie    0.007165778  0.0033642678  0.009454943
+#&gt; highlandpark    0.003043362 -0.0045393480  0.006887804
+#&gt; jackdaniels     0.009896143  0.0071305091  0.011652937
+#&gt; jb              0.011312129  0.0089093269  0.008895351
+#&gt; johnniewalker   0.004724823 -0.0013880745  0.003178167
+#&gt; magallan       -0.002901850  0.0030725685  0.006182579
+#&gt; makersmark      0.007706173 -0.0025568628  0.002741739
+#&gt; oban            0.007789470  0.0092615797  0.008856510
+#&gt; oldpotrero      0.009884923  0.0004827760  0.006465018
+#&gt; redbreast       0.019010171  0.0030489037  0.003575003
+#&gt; tamdhu          0.006990252  0.0067355151  0.011091059
+#&gt; wildturkey      0.012225665  0.0056575767  0.009083087
+#&gt; yoichi          0.001967838 -0.0043542059  0.006408266</div><div class='input'>
 <span class='co'>#getters</span>
 <span class='no'>bot.f</span>[<span class='fl'>1</span>]</div><div class='output co'>#&gt;            A1            A2            A3            A4            A5 
 #&gt;  1.000000e+00  6.766531e-03  9.348184e-02  1.374288e-02  2.381857e-02 
@@ -684,6 +925,50 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; 0125-wMouBo1_O16VL 0.23326324  0.0488121606 -0.9494775  0.0695524370
 #&gt; 0125-wMouBo1_O17VD 0.22052161  0.0832275267 -0.9054632  0.0488414527
 #&gt; 0125-wMouBo1_O17VL 0.23176223  0.0423807072 -0.9708804  0.0691689042
+#&gt; 0125-wMouBo1_O18VD 0.22137457  0.0667803792 -0.9594549 -0.0053748893
+#&gt; 0125-wMouBo1_O18VL 0.21477981  0.0995960722 -0.8879203  0.0419509417
+#&gt; 0125-wMouBo1_O19VD 0.20398899 -0.0609533423 -0.8709192  0.1105576865
+#&gt; 0125-wMouBo1_O19VL 0.20426129  0.0509978535 -0.8246557  0.0040920315
+#&gt; 0125-wMouBo1_O1VD  0.22026276  0.0780412149 -0.9278662  0.0354235848
+#&gt; 0125-wMouBo1_O1VL  0.23496803  0.1139643929 -0.9551441  0.0292138104
+#&gt; 0125-wMouBo1_O20VD 0.21821767  0.0322591445 -0.9016256  0.0602308906
+#&gt; 0125-wMouBo1_O20VL 0.23442593  0.0327895956 -0.9817619  0.0597326015
+#&gt; 0125-wMouBo1_O21VD 0.18909979  0.0462617258 -0.7798647  0.0297087552
+#&gt; 0125-wMouBo1_O21VL 0.24969155  0.0995791291 -1.0188876  0.0488933559
+#&gt; 0125-wMouBo1_O22VD 0.22984107  0.0654461893 -0.9451709  0.0310217968
+#&gt; 0125-wMouBo1_O22VL 0.24550951  0.0520980933 -1.0086728  0.0572622480
+#&gt; 0125-wMouBo1_O23VD 0.24925436  0.0373694748 -1.0252985  0.0209736348
+#&gt; 0125-wMouBo1_O23VL 0.22043348 -0.0301946741 -0.9294530  0.0394466473
+#&gt; 0125-wMouBo1_O24VD 0.22290706  0.0805151751 -0.9019173  0.0418668268
+#&gt; 0125-wMouBo1_O24VL 0.24100542  0.0335096307 -0.9785418  0.0623975907
+#&gt; 0125-wMouBo1_O25VD 0.23384817  0.0816932466 -0.9911284 -0.0068789229
+#&gt; 0125-wMouBo1_O25VL 0.22292557  0.0432838189 -0.9333467  0.0574774987
+#&gt; 0125-wMouBo1_O26VD 0.21810243  0.0513093050 -0.9217217 -0.0131430251
+#&gt; 0125-wMouBo1_O26VL 0.19810765  0.0242678007 -0.8075390  0.0565630002
+#&gt; 0125-wMouBo1_O27VD 0.23187453  0.0453093495 -0.9894214 -0.0085185471
+#&gt; 0125-wMouBo1_O27VL 0.20408385  0.0202634500 -0.8002120  0.0336295414
+#&gt; 0125-wMouBo1_O28VD 0.22025843  0.1121501527 -0.9198706 -0.0582466407
+#&gt; 0125-wMouBo1_O28VL 0.18561477  0.0032354513 -0.7452582  0.0375723248
+#&gt; 0125-wMouBo1_O29VD 0.25709114  0.1175532466 -1.0950456 -0.0212746551
+#&gt; 0125-wMouBo1_O29VL 0.23486253  0.0577475395 -0.9383747  0.0560995104
+#&gt; 0125-wMouBo1_O2VD  0.22302483  0.0333965363 -0.9413178  0.0243144765
+#&gt; 0125-wMouBo1_O2VL  0.23892087  0.0979275281 -0.9877977 -0.0168207170
+#&gt; 0125-wMouBo1_O30VD 0.27219534  0.1190873704 -1.1221068  0.0269060340
+#&gt; 0125-wMouBo1_O30VL 0.25088715  0.0935315155 -1.0587948  0.0425885246
+#&gt; 0125-wMouBo1_O3VD  0.23337441  0.0519188288 -0.9806883  0.0214060409
+#&gt; 0125-wMouBo1_O3VL  0.21313679  0.0075232908 -0.8638998  0.0355457609
+#&gt; 0125-wMouBo1_O4VD  0.19510917 -0.0262698897 -0.7865855  0.0824134876
+#&gt; 0125-wMouBo1_O4VL  0.24148398  0.0590954249 -1.0192049  0.0133718728
+#&gt; 0125-wMouBo1_O5VD  0.23463351  0.0127890100 -0.9947945  0.0617170374
+#&gt; 0125-wMouBo1_O5VL  0.23540593  0.0927530157 -0.9473588  0.0241599004
+#&gt; 0125-wMouBo1_O6VD  0.21388069  0.0448125843 -0.8811050 -0.0187149803
+#&gt; 0125-wMouBo1_O6VL  0.19693370 -0.0404391694 -0.7981819  0.1110957370
+#&gt; 0125-wMouBo1_O7VD  0.23515227  0.0636867722 -0.9362205  0.0767137787
+#&gt; 0125-wMouBo1_O7VL  0.19075490  0.0693636751 -0.7369358  0.0102032851
+#&gt; 0125-wMouBo1_O8VD  0.22059769  0.0238591389 -0.9479522  0.0622891501
+#&gt; 0125-wMouBo1_O8VL  0.22524616  0.0696864084 -0.9204583  0.0659353881
+#&gt; 0125-wMouBo1_O9VD  0.23668791  0.0296600751 -1.0124501  0.0659259928
+#&gt; 0125-wMouBo1_O9VL  0.22708513  0.0726133899 -0.9372184  0.0486002167
 #&gt;                               x4           x5
 #&gt; 0001-cAglan_O10VD  -0.1122924204  0.011811482
 #&gt; 0001-cAglan_O10VL  -0.0779230878  0.029245826
@@ -851,7 +1136,50 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; 0125-wMouBo1_O16VL -0.1899418287  0.009715178
 #&gt; 0125-wMouBo1_O17VD -0.1391688664 -0.005128136
 #&gt; 0125-wMouBo1_O17VL -0.1277018851 -0.009272098
-#&gt;  [ reached getOption("max.print") -- omitted 44 rows ]</div><div class='input'>
+#&gt; 0125-wMouBo1_O18VD -0.1443842365  0.031073880
+#&gt; 0125-wMouBo1_O18VL -0.1390597617 -0.004759846
+#&gt; 0125-wMouBo1_O19VD -0.1441671535  0.060497508
+#&gt; 0125-wMouBo1_O19VL -0.1221715131  0.020918665
+#&gt; 0125-wMouBo1_O1VD  -0.1417840460 -0.015559430
+#&gt; 0125-wMouBo1_O1VL  -0.1698479339 -0.025768093
+#&gt; 0125-wMouBo1_O20VD -0.1372108152 -0.004491672
+#&gt; 0125-wMouBo1_O20VL -0.1535939815  0.029665377
+#&gt; 0125-wMouBo1_O21VD -0.0891273779 -0.005008645
+#&gt; 0125-wMouBo1_O21VL -0.1890499757 -0.015240229
+#&gt; 0125-wMouBo1_O22VD -0.1637553199  0.003421954
+#&gt; 0125-wMouBo1_O22VL -0.1623708983 -0.008730847
+#&gt; 0125-wMouBo1_O23VD -0.1834655316  0.026522318
+#&gt; 0125-wMouBo1_O23VL -0.1674130936  0.063389559
+#&gt; 0125-wMouBo1_O24VD -0.1586301633 -0.002838081
+#&gt; 0125-wMouBo1_O24VL -0.2039197415 -0.013594800
+#&gt; 0125-wMouBo1_O25VD -0.1682203008  0.017616638
+#&gt; 0125-wMouBo1_O25VL -0.1090353052  0.004866802
+#&gt; 0125-wMouBo1_O26VD -0.1583415388  0.030290845
+#&gt; 0125-wMouBo1_O26VL -0.1289387583  0.041994378
+#&gt; 0125-wMouBo1_O27VD -0.1677297119  0.056390324
+#&gt; 0125-wMouBo1_O27VL -0.1377412296  0.047386485
+#&gt; 0125-wMouBo1_O28VD -0.1441183994  0.006142353
+#&gt; 0125-wMouBo1_O28VL -0.1500057364  0.071254159
+#&gt; 0125-wMouBo1_O29VD -0.1841434041  0.006546213
+#&gt; 0125-wMouBo1_O29VL -0.1717283394  0.002413615
+#&gt; 0125-wMouBo1_O2VD  -0.1787113472  0.029780265
+#&gt; 0125-wMouBo1_O2VL  -0.2069887483 -0.008301580
+#&gt; 0125-wMouBo1_O30VD -0.2596889585 -0.033590471
+#&gt; 0125-wMouBo1_O30VL -0.2089829321 -0.009712427
+#&gt; 0125-wMouBo1_O3VD  -0.1822212213  0.068692130
+#&gt; 0125-wMouBo1_O3VL  -0.1615093101  0.059007889
+#&gt; 0125-wMouBo1_O4VD  -0.1243448588  0.040692622
+#&gt; 0125-wMouBo1_O4VL  -0.1712222718 -0.002086956
+#&gt; 0125-wMouBo1_O5VD  -0.1581744157  0.064188642
+#&gt; 0125-wMouBo1_O5VL  -0.2060281371 -0.040847996
+#&gt; 0125-wMouBo1_O6VD  -0.1058225116  0.006360021
+#&gt; 0125-wMouBo1_O6VL  -0.1285952926  0.066283858
+#&gt; 0125-wMouBo1_O7VD  -0.1811606623  0.020997417
+#&gt; 0125-wMouBo1_O7VL  -0.0819459609  0.008617285
+#&gt; 0125-wMouBo1_O8VD  -0.1270985763 -0.005867603
+#&gt; 0125-wMouBo1_O8VL  -0.1449122001 -0.006618885
+#&gt; 0125-wMouBo1_O9VD  -0.1577287178  0.010577178
+#&gt; 0125-wMouBo1_O9VL  -0.1480660701 -0.003695914</div><div class='input'>
 <span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:85238</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:5.4545</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:1.1678</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:0.0014869</span></div><div class='output co'>#&gt; <span class='message'>iteration: 5	gain:0.9109</span></div><div class='output co'>#&gt; <span class='message'>iteration: 6	gain:0.25865</span></div><div class='output co'>#&gt; <span class='message'>iteration: 7	gain:0.11654</span></div><div class='output co'>#&gt; <span class='message'>iteration: 8	gain:0.0002648</span></div><div class='output co'>#&gt; <span class='message'>iteration: 9	gain:0.078733</span></div><div class='output co'>#&gt; <span class='message'>iteration: 10	gain:0.037936</span></div><div class='output co'>#&gt; <span class='message'>iteration: 11	gain:0.0036029</span></div><div class='output co'>#&gt; <span class='message'>iteration: 12	gain:4.6608e-06</span></div><div class='input'><span class='no'>wp</span></div><div class='output co'>#&gt; An LdkCoe [full Generalized Procrustes] object with: 
 #&gt; --------------------
 #&gt;  - $coo: 127 configuration of landmarks (18 +/- 0 coordinates)
@@ -893,6 +1221,106 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; CA25  -0.4701017  0.0500039531 0.2469042 0.2602820 0.2600845 0.2494179
 #&gt; CA26  -0.4650544 -0.0216267377 0.2319790 0.2521383 0.2576391 0.2552502
 #&gt; CA27  -0.4538088 -0.0084602493 0.2346953 0.2566785 0.2677619 0.2671652
+#&gt; OR28  -0.4637713 -0.0477920482 0.2045999 0.2578209 0.2671159 0.2629036
+#&gt; MA29  -0.4629219  0.0321116811 0.2619550 0.2690056 0.2673865 0.2532011
+#&gt; MA30  -0.4742123  0.0030956174 0.2334896 0.2498498 0.2560707 0.2493825
+#&gt; MA31  -0.4836879  0.0069209292 0.2474598 0.2586100 0.2556380 0.2410900
+#&gt; PS32  -0.4966865  0.0391155492 0.2238827 0.2389684 0.2445230 0.2383233
+#&gt; PS33  -0.4862470  0.0458871368 0.2217868 0.2376948 0.2495218 0.2412655
+#&gt; PS34  -0.4924802  0.0150562407 0.2309360 0.2380132 0.2385102 0.2356114
+#&gt; PS35  -0.4707290 -0.0006002878 0.2405335 0.2529984 0.2560948 0.2531939
+#&gt; PS36  -0.4803836  0.0102730844 0.2281296 0.2477097 0.2515668 0.2472582
+#&gt; PS37  -0.4843258  0.0024028477 0.2176865 0.2418547 0.2524581 0.2451259
+#&gt; PS38  -0.4883378  0.0118484725 0.2295328 0.2450015 0.2522843 0.2466915
+#&gt; PS39  -0.4690847  0.0189814229 0.2275286 0.2404160 0.2493283 0.2491193
+#&gt; PS40  -0.4717352  0.0529221074 0.2306354 0.2445206 0.2524045 0.2488082
+#&gt; PS41  -0.4675149  0.0055338922 0.2178578 0.2412064 0.2558840 0.2563138
+#&gt; PS42  -0.4701387 -0.0323776679 0.2047337 0.2425064 0.2488978 0.2420441
+#&gt; PS43  -0.4645253  0.0756444651 0.2312453 0.2391609 0.2506441 0.2468912
+#&gt; AE44  -0.4751306 -0.0189998125 0.2391881 0.2482958 0.2546274 0.2535184
+#&gt; AE45  -0.4713262  0.0190877316 0.2211272 0.2369924 0.2457966 0.2464675
+#&gt; AE46  -0.4793240  0.0154352041 0.2355722 0.2479336 0.2481412 0.2417354
+#&gt; AE47  -0.4655857  0.0330131699 0.2194334 0.2445648 0.2500301 0.2497781
+#&gt; AE48  -0.4814419 -0.0064276126 0.2536637 0.2590450 0.2592360 0.2486189
+#&gt; AE49  -0.4633669  0.0162850684 0.2187336 0.2482184 0.2535284 0.2519458
+#&gt; AE50  -0.4818430  0.0276565944 0.2290440 0.2431639 0.2470307 0.2463222
+#&gt; AE51  -0.4717854 -0.0107380386 0.2351167 0.2508803 0.2535223 0.2475772
+#&gt; AE52  -0.4751718  0.0079636905 0.2161555 0.2389092 0.2506185 0.2488742
+#&gt; AE53  -0.4806706 -0.0193521408 0.2187248 0.2373009 0.2465621 0.2411057
+#&gt; AE54  -0.4727036  0.0042108013 0.2320931 0.2441456 0.2497347 0.2443997
+#&gt; AE55  -0.4648109  0.0320594294 0.2372708 0.2518183 0.2592408 0.2577254
+#&gt; AE56  -0.4656881 -0.0271367171 0.2316906 0.2509734 0.2581266 0.2565626
+#&gt; AE57  -0.4842659 -0.0221459770 0.2455679 0.2555353 0.2579698 0.2515831
+#&gt; AE58  -0.4732906  0.0583111991 0.2189619 0.2420021 0.2480801 0.2465842
+#&gt; AE59  -0.4826614 -0.0055109034 0.2353246 0.2616776 0.2591074 0.2433245
+#&gt; AE60  -0.4776819  0.0361985864 0.2264325 0.2477540 0.2513377 0.2452895
+#&gt; AE61  -0.4622851 -0.0375564249 0.2439904 0.2601170 0.2585246 0.2505337
+#&gt; AE62  -0.4901109  0.0139016570 0.2341265 0.2452450 0.2514735 0.2435937
+#&gt; AE63  -0.4778689  0.0059326918 0.2345290 0.2555313 0.2597192 0.2532171
+#&gt; AE64  -0.4866713 -0.0211278522 0.2363310 0.2454225 0.2499140 0.2497218
+#&gt; AE65  -0.4747013  0.0096370900 0.2263689 0.2404820 0.2468540 0.2468924
+#&gt; AE66  -0.4770609  0.0289938693 0.2154977 0.2365918 0.2511497 0.2479861
+#&gt; AE67  -0.4738697 -0.0127942516 0.2079247 0.2405387 0.2499394 0.2466076
+#&gt; AE68  -0.4695830  0.0127835066 0.2194401 0.2511752 0.2566908 0.2492283
+#&gt; AE69  -0.4870054  0.0120532237 0.2187724 0.2356498 0.2457444 0.2418698
+#&gt; AE70  -0.4740745  0.0073883301 0.2259985 0.2480648 0.2512486 0.2461310
+#&gt; AE71  -0.4876717  0.0068433316 0.2200788 0.2428721 0.2481034 0.2424651
+#&gt; AE72  -0.4797509  0.0081026467 0.2245616 0.2412007 0.2474588 0.2432870
+#&gt; AE73  -0.4843069 -0.0148347883 0.2477355 0.2591776 0.2565598 0.2445700
+#&gt; AE74  -0.4989950  0.0351053498 0.2067432 0.2417746 0.2463127 0.2380709
+#&gt; AE75  -0.4926251  0.0129225930 0.2263471 0.2395037 0.2467434 0.2461064
+#&gt; AE76  -0.4796260  0.0284369497 0.2125456 0.2289068 0.2379092 0.2370167
+#&gt; AE77  -0.4896450  0.0084219164 0.2270883 0.2420046 0.2492042 0.2442177
+#&gt; AE78  -0.4815443  0.0110464680 0.2354319 0.2509660 0.2486875 0.2390881
+#&gt; AE79  -0.4857311  0.0126008175 0.2207099 0.2543744 0.2570460 0.2508193
+#&gt; AE80  -0.4782387  0.0008281550 0.2179099 0.2395857 0.2499844 0.2469499
+#&gt; AE81  -0.4615457  0.0164291601 0.2176351 0.2374321 0.2518671 0.2540789
+#&gt; AE82  -0.4884519 -0.0106538331 0.2160159 0.2393541 0.2506138 0.2421664
+#&gt; AE83  -0.4705078 -0.0056279366 0.2332360 0.2532273 0.2574819 0.2450765
+#&gt; AE84  -0.4834266  0.0392376792 0.2218313 0.2452149 0.2579084 0.2497404
+#&gt; AE85  -0.4614373  0.0166569893 0.2382297 0.2527011 0.2535060 0.2513441
+#&gt; AE86  -0.4743142  0.0023747913 0.2348435 0.2477458 0.2523643 0.2464463
+#&gt; AE87  -0.4710524  0.0055143617 0.2358212 0.2574112 0.2634583 0.2570548
+#&gt; AE88  -0.4811958  0.0202407074 0.2402234 0.2524725 0.2550288 0.2481862
+#&gt; AE89  -0.4728614  0.0600877805 0.2262157 0.2478574 0.2508310 0.2479599
+#&gt; AE90  -0.4811721 -0.0129281070 0.2306759 0.2486340 0.2512593 0.2429589
+#&gt; AE91  -0.4787060 -0.0063258854 0.2179601 0.2412824 0.2465921 0.2444416
+#&gt; AE92  -0.4676804  0.0006939836 0.2213538 0.2480270 0.2560936 0.2529227
+#&gt; AE93  -0.4956991  0.0006842668 0.2157046 0.2387369 0.2510117 0.2479131
+#&gt; AE94  -0.4710652 -0.0241132332 0.2458021 0.2587664 0.2633650 0.2597377
+#&gt; AE95  -0.4682616 -0.0080587188 0.2282672 0.2477248 0.2517332 0.2493852
+#&gt; AE96  -0.4497588  0.0409062847 0.2372324 0.2475565 0.2577684 0.2556016
+#&gt; AE97  -0.4761968 -0.0156457787 0.2388082 0.2615259 0.2659854 0.2588269
+#&gt; AE98  -0.4817969  0.0129960129 0.2323155 0.2449023 0.2507774 0.2465727
+#&gt; AE99  -0.4615156 -0.0127084527 0.2381147 0.2534017 0.2576362 0.2549987
+#&gt; AE100 -0.4499972  0.0331232392 0.2444058 0.2625980 0.2650402 0.2609805
+#&gt; CX101 -0.4692256  0.0043635731 0.2378623 0.2518176 0.2526448 0.2438104
+#&gt; CX102 -0.4903447  0.0270782240 0.2293201 0.2430549 0.2476099 0.2460063
+#&gt; CX103 -0.4629762 -0.0081099516 0.2330363 0.2540131 0.2680560 0.2619035
+#&gt; CX104 -0.4758282  0.0111860492 0.2390832 0.2482208 0.2531962 0.2502730
+#&gt; CX105 -0.4705595  0.0024651540 0.2374182 0.2480171 0.2532758 0.2492300
+#&gt; CX106 -0.4722430  0.0364742011 0.2258349 0.2468639 0.2503663 0.2462427
+#&gt; CX107 -0.4587152  0.0375447528 0.2269780 0.2486545 0.2541377 0.2493935
+#&gt; CX108 -0.4556717  0.0433322708 0.2531895 0.2677216 0.2665952 0.2576603
+#&gt; CX109 -0.4673029  0.0307418881 0.2398158 0.2519511 0.2554861 0.2465034
+#&gt; CX110 -0.4672923 -0.0003220306 0.2452768 0.2529421 0.2576699 0.2522021
+#&gt; CX111 -0.4688355  0.0171403522 0.2322405 0.2482367 0.2509717 0.2498871
+#&gt; CX112 -0.4612448  0.0166512579 0.2453780 0.2566150 0.2620002 0.2542223
+#&gt; CX113 -0.4785652 -0.0009886246 0.2483359 0.2516231 0.2503122 0.2475229
+#&gt; CX114 -0.4535773  0.0315446638 0.2316883 0.2554382 0.2602241 0.2521935
+#&gt; CX115 -0.4520759  0.0053465686 0.2161774 0.2456214 0.2573436 0.2545183
+#&gt; CX116 -0.4665827  0.0505882944 0.2328362 0.2533265 0.2557499 0.2493237
+#&gt; CX117 -0.4698457  0.0067789575 0.2546311 0.2582040 0.2584644 0.2544549
+#&gt; CX118 -0.4742105  0.0174354468 0.2364650 0.2530266 0.2591185 0.2548040
+#&gt; CX119 -0.4851122  0.0178447281 0.2342310 0.2532256 0.2601677 0.2546199
+#&gt; CX120 -0.4585248  0.0247987428 0.2311740 0.2564811 0.2620054 0.2557259
+#&gt; CX121 -0.4785343 -0.0098741976 0.2132364 0.2424333 0.2596655 0.2573000
+#&gt; CX122 -0.4807203  0.0198273495 0.2200239 0.2448440 0.2524412 0.2487965
+#&gt; CX123 -0.4702768  0.0048000885 0.2179982 0.2374480 0.2468627 0.2448362
+#&gt; CX124 -0.4749971  0.0257042149 0.2346633 0.2482036 0.2486357 0.2420005
+#&gt; CX125 -0.4698922  0.0015294827 0.2237229 0.2492294 0.2553190 0.2514336
+#&gt; DE126 -0.4610449  0.0098016056 0.2072745 0.2380490 0.2459344 0.2479856
+#&gt; DE127 -0.4592018 -0.0137824054 0.2347466 0.2534159 0.2605519 0.2518998
 #&gt;              x7        x8         x9          x10         x11        x12
 #&gt; AN1   0.2297349 0.2027949 0.12744259  0.042149363 -0.06700208 -0.4077770
 #&gt; AN2   0.2316264 0.1951079 0.14523308  0.046685049 -0.05399881 -0.4022324
@@ -921,6 +1349,106 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; CA25  0.2247244 0.1693678 0.11013408  0.015076009 -0.10082506 -0.4054532
 #&gt; CA26  0.2405420 0.1948626 0.13297955  0.034734681 -0.06339405 -0.4086478
 #&gt; CA27  0.2522757 0.2018210 0.10168858  0.028061290 -0.05577609 -0.3952339
+#&gt; OR28  0.2379974 0.1845977 0.12525417  0.037882114 -0.03944734 -0.4179881
+#&gt; MA29  0.2188160 0.1680095 0.12041292  0.028168910 -0.06859210 -0.3959298
+#&gt; MA30  0.2319195 0.1825306 0.10828350  0.038196512 -0.05389217 -0.4117696
+#&gt; MA31  0.2160502 0.1739678 0.11600023  0.037612288 -0.06333271 -0.4051982
+#&gt; PS32  0.2219460 0.1756597 0.10698179  0.031101070 -0.06915899 -0.4093142
+#&gt; PS33  0.2231371 0.1735664 0.11028370 -0.001059176 -0.08196749 -0.4055881
+#&gt; PS34  0.2127724 0.1806878 0.11090319  0.027968991 -0.07593449 -0.4222441
+#&gt; PS35  0.2397342 0.1978072 0.10178680  0.010200337 -0.08340665 -0.4070461
+#&gt; PS36  0.2276147 0.1737511 0.11975148  0.027754677 -0.06735228 -0.4160055
+#&gt; PS37  0.2240830 0.1838596 0.10807476  0.037741821 -0.05996066 -0.4100057
+#&gt; PS38  0.2292188 0.1882293 0.12218702  0.016950623 -0.09255464 -0.4051699
+#&gt; PS39  0.2392766 0.1906324 0.11590071  0.036277644 -0.09186510 -0.4125710
+#&gt; PS40  0.2257550 0.1819422 0.10865467  0.034466690 -0.07105386 -0.4123390
+#&gt; PS41  0.2427168 0.2024393 0.11492750  0.045251986 -0.07616489 -0.3994700
+#&gt; PS42  0.2300601 0.1856391 0.11234333  0.045299768 -0.04887775 -0.4156492
+#&gt; PS43  0.2232688 0.1757123 0.09167281  0.010214523 -0.08862382 -0.4035807
+#&gt; AE44  0.2378870 0.1777679 0.10738108  0.029500067 -0.06630082 -0.3999047
+#&gt; AE45  0.2296598 0.1927408 0.12017881  0.030528846 -0.08140307 -0.4165405
+#&gt; AE46  0.2260487 0.1882816 0.11506703  0.039631329 -0.07170575 -0.4128464
+#&gt; AE47  0.2337371 0.2022682 0.12443050  0.019011530 -0.10650711 -0.4067567
+#&gt; AE48  0.2213401 0.1733489 0.10624263  0.014880482 -0.11620739 -0.3995907
+#&gt; AE49  0.2331338 0.2024258 0.12887901  0.036379019 -0.06762635 -0.4001960
+#&gt; AE50  0.2317174 0.1913035 0.10356523  0.009910553 -0.08626705 -0.4127682
+#&gt; AE51  0.2351101 0.1755704 0.11999016  0.031375236 -0.04560514 -0.3919220
+#&gt; AE52  0.2266421 0.1922577 0.12812411  0.042496864 -0.06523336 -0.4062166
+#&gt; AE53  0.2271295 0.1847545 0.12009187  0.031178069 -0.07171376 -0.4148803
+#&gt; AE54  0.2219216 0.1785621 0.10673719  0.026301589 -0.08068053 -0.4179467
+#&gt; AE55  0.2413135 0.2030661 0.10436727  0.014351434 -0.11421660 -0.3983590
+#&gt; AE56  0.2386977 0.1854891 0.11088683  0.032677562 -0.08673964 -0.4105900
+#&gt; AE57  0.2229824 0.1709358 0.10681860  0.032417416 -0.06962971 -0.3924960
+#&gt; AE58  0.2336584 0.1985266 0.11974321  0.039473426 -0.08115767 -0.4090334
+#&gt; AE59  0.2189290 0.1658272 0.10654750  0.019667991 -0.06562394 -0.4073714
+#&gt; AE60  0.2209154 0.1893773 0.10490745  0.021242182 -0.10627822 -0.3952316
+#&gt; AE61  0.2319539 0.1791103 0.11323205  0.033472806 -0.09116928 -0.4028660
+#&gt; AE62  0.2300991 0.1893241 0.12117113  0.026012951 -0.07705182 -0.4105504
+#&gt; AE63  0.2353279 0.1848172 0.08900924  0.010844800 -0.07837797 -0.3985616
+#&gt; AE64  0.2330535 0.1800114 0.12303293  0.036434534 -0.06263673 -0.3964270
+#&gt; AE65  0.2339390 0.1980881 0.11929305  0.036954963 -0.11127507 -0.4115845
+#&gt; AE66  0.2266783 0.1781940 0.10023699  0.015009698 -0.10129622 -0.4118024
+#&gt; AE67  0.2370497 0.1924698 0.12119858  0.039844666 -0.07913544 -0.4157738
+#&gt; AE68  0.2253490 0.1745779 0.11026389  0.026346275 -0.09389317 -0.4085123
+#&gt; AE69  0.2304344 0.2000069 0.11905716  0.030353506 -0.07847453 -0.4150666
+#&gt; AE70  0.2257063 0.1967605 0.11332196  0.034319308 -0.09145077 -0.4073949
+#&gt; AE71  0.2312514 0.1856517 0.11613459  0.037425928 -0.06263261 -0.3944502
+#&gt; AE72  0.2230346 0.1702954 0.10188854  0.031250948 -0.08737828 -0.4141342
+#&gt; AE73  0.2241888 0.1720458 0.10372974  0.046771908 -0.06539444 -0.3922458
+#&gt; AE74  0.2097193 0.1688758 0.10268281  0.023628618 -0.08334506 -0.4179949
+#&gt; AE75  0.2311220 0.1720535 0.10052622  0.039636835 -0.06624447 -0.4091500
+#&gt; AE76  0.2248480 0.1859046 0.12306471  0.023495907 -0.08627716 -0.4220100
+#&gt; AE77  0.2265418 0.1877997 0.12198016  0.017233645 -0.08718675 -0.4026273
+#&gt; AE78  0.2193818 0.1797061 0.12829026  0.030374341 -0.07165182 -0.4011903
+#&gt; AE79  0.2274751 0.1813681 0.12039910  0.043565695 -0.08267288 -0.3909071
+#&gt; AE80  0.2367348 0.1956930 0.11535372  0.034679520 -0.07516322 -0.4147752
+#&gt; AE81  0.2344393 0.1964421 0.12075483  0.050093662 -0.05215929 -0.4027597
+#&gt; AE82  0.2133466 0.1894863 0.12631585  0.037866814 -0.08519279 -0.3987917
+#&gt; AE83  0.2225112 0.1848867 0.13029233  0.030071373 -0.07828584 -0.4112227
+#&gt; AE84  0.2303627 0.1896239 0.11479207  0.034252368 -0.08775671 -0.3920071
+#&gt; AE85  0.2382768 0.1965260 0.10016710  0.017903630 -0.08123673 -0.4125776
+#&gt; AE86  0.2294507 0.1865413 0.12273959  0.050834086 -0.05057886 -0.3966038
+#&gt; AE87  0.2324188 0.1834655 0.10518310  0.041478027 -0.06037695 -0.3991367
+#&gt; AE88  0.2331675 0.1830576 0.10589843  0.041671660 -0.08179323 -0.4079943
+#&gt; AE89  0.2213925 0.1821448 0.11822706  0.024825284 -0.09222377 -0.4066529
+#&gt; AE90  0.2271233 0.1874272 0.11702050  0.031595727 -0.07165494 -0.4083184
+#&gt; AE91  0.2261842 0.1882583 0.12314018  0.031457068 -0.09624713 -0.4075965
+#&gt; AE92  0.2353472 0.1999616 0.11753491  0.033427159 -0.08120009 -0.4114548
+#&gt; AE93  0.2231298 0.1718626 0.12079035  0.024569680 -0.09255414 -0.3970728
+#&gt; AE94  0.2381626 0.1833549 0.11172060  0.037035690 -0.08275991 -0.3933545
+#&gt; AE95  0.2377736 0.1993512 0.13289363  0.041381872 -0.08556020 -0.4059401
+#&gt; AE96  0.2382222 0.1994763 0.11325031  0.041177916 -0.08371362 -0.3986976
+#&gt; AE97  0.2379847 0.1839076 0.11241727  0.035290002 -0.08214217 -0.3914992
+#&gt; AE98  0.2247463 0.1909574 0.11375774  0.030208691 -0.07152208 -0.4098180
+#&gt; AE99  0.2327923 0.1991574 0.12884119  0.035617471 -0.08683729 -0.3971082
+#&gt; AE100 0.2378651 0.1743921 0.09815820  0.010079809 -0.10572321 -0.3993662
+#&gt; CX101 0.2290634 0.1922113 0.11706654  0.047499598 -0.08249333 -0.4052408
+#&gt; CX102 0.2292201 0.1759433 0.11784725  0.044757026 -0.06103723 -0.4162241
+#&gt; CX103 0.2394906 0.1920527 0.11460948  0.025783054 -0.07999556 -0.3953467
+#&gt; CX104 0.2314811 0.1810417 0.12189441  0.041330242 -0.06916266 -0.3990450
+#&gt; CX105 0.2370686 0.1898445 0.11305059  0.034285266 -0.04972392 -0.4073886
+#&gt; CX106 0.2332700 0.1903888 0.13298539  0.043718144 -0.06454599 -0.4055715
+#&gt; CX107 0.2422932 0.1842311 0.13513144  0.046414661 -0.07022393 -0.4073709
+#&gt; CX108 0.2320641 0.1680876 0.11722991  0.032798883 -0.05511538 -0.3923226
+#&gt; CX109 0.2343461 0.2007064 0.12777520  0.032991040 -0.04693471 -0.4017350
+#&gt; CX110 0.2378256 0.1832145 0.12061885  0.046312191 -0.06979634 -0.4049007
+#&gt; CX111 0.2273916 0.1904541 0.12951344  0.050553292 -0.04986043 -0.4005445
+#&gt; CX112 0.2368238 0.1967757 0.10012933  0.016340591 -0.08056717 -0.3963017
+#&gt; CX113 0.2250973 0.1856874 0.11469059  0.052222629 -0.06172299 -0.4011447
+#&gt; CX114 0.2315073 0.1909604 0.12303076  0.044334794 -0.07353437 -0.4037772
+#&gt; CX115 0.2406246 0.2156893 0.13532312  0.039022395 -0.09270886 -0.4037738
+#&gt; CX116 0.2286136 0.1914034 0.11687857  0.030252447 -0.06613119 -0.4064285
+#&gt; CX117 0.2364399 0.2008020 0.12725475  0.029796086 -0.05115167 -0.3890260
+#&gt; CX118 0.2389231 0.1886206 0.11744251  0.042858943 -0.06479441 -0.4008367
+#&gt; CX119 0.2295195 0.1890828 0.11228640  0.031705081 -0.08406074 -0.4006192
+#&gt; CX120 0.2347885 0.1916033 0.11000659  0.039165020 -0.07423109 -0.4020109
+#&gt; CX121 0.2420748 0.2012741 0.14721864  0.041501518 -0.07227370 -0.3876239
+#&gt; CX122 0.2266152 0.1953674 0.12522253  0.036802608 -0.07701901 -0.4115296
+#&gt; CX123 0.2370120 0.2174698 0.13148350  0.035195475 -0.07744550 -0.4106558
+#&gt; CX124 0.2294427 0.1976999 0.12663618  0.037664998 -0.08985566 -0.4066066
+#&gt; CX125 0.2366984 0.1947963 0.12739965  0.043416429 -0.07848370 -0.3991531
+#&gt; DE126 0.2335214 0.2054728 0.14076235  0.055480070 -0.03540640 -0.4124836
+#&gt; DE127 0.2300890 0.1908931 0.12178439  0.045953238 -0.07662462 -0.4021156
 #&gt;              x13        x14         x15          x16        x17        x18
 #&gt; AN1   -0.3121452 -0.1757556 0.071077749 -0.053680979 0.05716034 -0.1392725
 #&gt; AN2   -0.3866385 -0.1804348 0.049192318 -0.051605180 0.06224194 -0.1449953
@@ -949,6 +1477,106 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; CA25  -0.3868375 -0.1713219 0.067985490 -0.024504728 0.04418100 -0.1391173
 #&gt; CA26  -0.3936130 -0.1659836 0.065342611 -0.047276565 0.05141235 -0.1512842
 #&gt; CA27  -0.3680806 -0.1830120 0.018059156 -0.034566843 0.05422930 -0.1834975
+#&gt; OR28  -0.3918495 -0.1703890 0.068515987 -0.039962336 0.03184352 -0.1073316
+#&gt; MA29  -0.3876129 -0.1755741 0.055629165 -0.048118792 0.02617943 -0.1621261
+#&gt; MA30  -0.3981922 -0.1747164 0.060296481 -0.015570315 0.04795257 -0.1327142
+#&gt; MA31  -0.3858099 -0.1907907 0.070167604 -0.027136264 0.06410250 -0.1316637
+#&gt; PS32  -0.4008926 -0.1701442 0.076132206 -0.025720510 0.07936838 -0.1040850
+#&gt; PS33  -0.4000871 -0.1598863 0.085652073 -0.012991835 0.07777681 -0.1187450
+#&gt; PS34  -0.3996794 -0.1594991 0.079206263  0.001378425 0.08297738 -0.1041841
+#&gt; PS35  -0.3916883 -0.1722879 0.063426419 -0.027317260 0.07314364 -0.1358436
+#&gt; PS36  -0.3956491 -0.1825935 0.070441989 -0.017539326 0.07781404 -0.1225420
+#&gt; PS37  -0.4030648 -0.1676189 0.073768645 -0.012311634 0.09289937 -0.1426678
+#&gt; PS38  -0.3943659 -0.1539642 0.075623787 -0.024299324 0.08226156 -0.1411380
+#&gt; PS39  -0.3909129 -0.1753476 0.068432630 -0.026240766 0.07277333 -0.1426448
+#&gt; PS40  -0.3971485 -0.1775512 0.077271289 -0.032439082 0.04949726 -0.1446110
+#&gt; PS41  -0.3851975 -0.1903705 0.056899843 -0.025993345 0.05120159 -0.1455218
+#&gt; PS42  -0.3952176 -0.1857630 0.096276207 -0.008342917 0.07965381 -0.1310876
+#&gt; PS43  -0.3873390 -0.2040016 0.094881630 -0.020232841 0.07969414 -0.1507268
+#&gt; AE44  -0.3935043 -0.1686985 0.080403244 -0.019590013 0.05650751 -0.1429478
+#&gt; AE45  -0.4044345 -0.1807828 0.080080270 -0.027371983 0.08758681 -0.1283880
+#&gt; AE46  -0.3877688 -0.1826434 0.068468426 -0.028747570 0.07764930 -0.1409281
+#&gt; AE47  -0.3954530 -0.1928479 0.053073539 -0.011263882 0.07282672 -0.1237529
+#&gt; AE48  -0.3856091 -0.1721542 0.080953576 -0.002019208 0.07128859 -0.1251678
+#&gt; AE49  -0.3799460 -0.2306580 0.057033764 -0.031691788 0.06831712 -0.1413947
+#&gt; AE50  -0.3899505 -0.1678836 0.081567350 -0.018534096 0.07926030 -0.1332952
+#&gt; AE51  -0.3814706 -0.2113567 0.080195200 -0.031441401 0.05431378 -0.1393322
+#&gt; AE52  -0.4017703 -0.1968762 0.074177800 -0.016766850 0.05761993 -0.1218044
+#&gt; AE53  -0.3956571 -0.1790778 0.093334802 -0.008269134 0.09424695 -0.1248084
+#&gt; AE54  -0.3988277 -0.1755184 0.100669825 -0.007743004 0.07639700 -0.1317531
+#&gt; AE55  -0.3831872 -0.1815106 0.065178788 -0.040485985 0.07366867 -0.1574901
+#&gt; AE56  -0.3905465 -0.1710561 0.074691038 -0.015542385 0.07474481 -0.1472409
+#&gt; AE57  -0.3986041 -0.1706592 0.079346536 -0.010540198 0.05234976 -0.1271655
+#&gt; AE58  -0.3897427 -0.1740109 0.048371290 -0.040174869 0.06828578 -0.1545881
+#&gt; AE59  -0.3998859 -0.1801248 0.085393403 -0.011760791 0.08504388 -0.1279039
+#&gt; AE60  -0.3846600 -0.1870761 0.067709976 -0.014810871 0.08511054 -0.1305364
+#&gt; AE61  -0.3872584 -0.1838257 0.072704045 -0.022086968 0.07101440 -0.1276053
+#&gt; AE62  -0.3979410 -0.1557943 0.072894739 -0.030372100 0.07143383 -0.1374557
+#&gt; AE63  -0.3819381 -0.1892396 0.073246297 -0.009679841 0.07091753 -0.1374262
+#&gt; AE64  -0.3829555 -0.1818286 0.083394526 -0.020786057 0.05514922 -0.1400324
+#&gt; AE65  -0.3951099 -0.1713246 0.056780301 -0.010588308 0.09200741 -0.1327136
+#&gt; AE66  -0.3921785 -0.1765161 0.105879721 -0.012768653 0.09223277 -0.1268277
+#&gt; AE67  -0.4004018 -0.1816844 0.072560949 -0.005836437 0.08262865 -0.1212670
+#&gt; AE68  -0.3979824 -0.1965104 0.096777413 -0.002088865 0.07332413 -0.1273863
+#&gt; AE69  -0.3988305 -0.1559302 0.077225585 -0.023057951 0.07909842 -0.1319003
+#&gt; AE70  -0.3925801 -0.1728311 0.071313071 -0.019971750 0.07593679 -0.1378859
+#&gt; AE71  -0.3862255 -0.2024513 0.082159028 -0.015698342 0.07097893 -0.1348347
+#&gt; AE72  -0.3941251 -0.1874525 0.106295530 -0.007229155 0.09395388 -0.1212595
+#&gt; AE73  -0.3895883 -0.1879054 0.088811013 -0.026449348 0.04949957 -0.1323648
+#&gt; AE74  -0.3997462 -0.1524586 0.093791256  0.008108908 0.08591494 -0.1081885
+#&gt; AE75  -0.3969594 -0.1817188 0.093070047 -0.006805452 0.06059666 -0.1151251
+#&gt; AE76  -0.3956379 -0.1881325 0.103413945 -0.001083621 0.09363305 -0.1264083
+#&gt; AE77  -0.3888907 -0.1764735 0.079498189 -0.013542144 0.07981284 -0.1254377
+#&gt; AE78  -0.4098476 -0.1776413 0.069450248 -0.014972195 0.06650114 -0.1220764
+#&gt; AE79  -0.3773833 -0.2131414 0.076037377 -0.025487868 0.06233738 -0.1314095
+#&gt; AE80  -0.3849328 -0.2015079 0.081237859 -0.015413807 0.07882066 -0.1277460
+#&gt; AE81  -0.3813350 -0.2126430 0.060486194 -0.023884257 0.04901171 -0.1543430
+#&gt; AE82  -0.3899233 -0.1814005 0.100788223 -0.020365433 0.08603747 -0.1272120
+#&gt; AE83  -0.3851135 -0.1927388 0.088915936 -0.020959595 0.04293359 -0.1241767
+#&gt; AE84  -0.3796059 -0.1953551 0.062669334 -0.030910936 0.06103658 -0.1376072
+#&gt; AE85  -0.3984712 -0.1647239 0.048206875 -0.028489561 0.06932076 -0.1359028
+#&gt; AE86  -0.3809497 -0.1916234 0.056774011 -0.028476557 0.04954496 -0.1571128
+#&gt; AE87  -0.3872837 -0.1718402 0.049162073 -0.025192692 0.04744451 -0.1635293
+#&gt; AE88  -0.4035528 -0.1482527 0.043878672 -0.022352035 0.05682663 -0.1355111
+#&gt; AE89  -0.3993287 -0.1742979 0.078780877 -0.032681414 0.06579144 -0.1460677
+#&gt; AE90  -0.3865592 -0.1733919 0.074614599 -0.009458153 0.06414568 -0.1319724
+#&gt; AE91  -0.3898059 -0.1817979 0.090863646 -0.016264061 0.08434454 -0.1177806
+#&gt; AE92  -0.3899441 -0.1846722 0.060100425 -0.018845157 0.07646547 -0.1481309
+#&gt; AE93  -0.3837984 -0.1778074 0.105580035 -0.007699443 0.09115159 -0.1365033
+#&gt; AE94  -0.3858411 -0.1778977 0.049171731 -0.028385828 0.06119390 -0.1448931
+#&gt; AE95  -0.3852302 -0.1989011 0.067210379 -0.018271899 0.06964505 -0.1551422
+#&gt; AE96  -0.3888325 -0.1802272 0.048946568 -0.037292754 0.03197339 -0.1735895
+#&gt; AE97  -0.3716527 -0.1604233 0.066772927 -0.040586661 0.04739370 -0.1707661
+#&gt; AE98  -0.3945267 -0.1857643 0.065275588 -0.017261584 0.08878217 -0.1406023
+#&gt; AE99  -0.3820797 -0.2085124 0.055524814 -0.037128884 0.06706239 -0.1372565
+#&gt; AE100 -0.3905738 -0.1880817 0.058029534 -0.034442344 0.06146853 -0.1379566
+#&gt; CX101 -0.4020832 -0.1791136 0.048785612 -0.024149898 0.06711185 -0.1299305
+#&gt; CX102 -0.3974500 -0.1598071 0.044063772 -0.012585954 0.07106705 -0.1385187
+#&gt; CX103 -0.3778030 -0.1964949 0.043331546 -0.021977423 0.06458910 -0.1541615
+#&gt; CX104 -0.3921375 -0.1905919 0.044787466 -0.023839210 0.07316266 -0.1450522
+#&gt; CX105 -0.3982483 -0.1771842 0.042021631 -0.017439531 0.05087749 -0.1370104
+#&gt; CX106 -0.3854523 -0.1859207 0.029835710 -0.022881489 0.05321849 -0.1525835
+#&gt; CX107 -0.3943932 -0.2024951 0.029977868 -0.022753137 0.05178909 -0.1505943
+#&gt; CX108 -0.3848622 -0.2059909 0.017684453 -0.061019818 0.03988159 -0.1412630
+#&gt; CX109 -0.3908986 -0.1969258 0.007345992 -0.028309198 0.05007433 -0.1456312
+#&gt; CX110 -0.3958851 -0.1871724 0.024257641 -0.023035952 0.06638360 -0.1382984
+#&gt; CX111 -0.3905891 -0.1997725 0.033333039 -0.026704525 0.05550472 -0.1489199
+#&gt; CX112 -0.3859992 -0.1967870 0.042480364 -0.021382513 0.06013382 -0.1452679
+#&gt; CX113 -0.3956452 -0.1824075 0.054794573 -0.020054342 0.05963795 -0.1493959
+#&gt; CX114 -0.3880079 -0.1894015 0.028167358 -0.030897520 0.05145617 -0.1613498
+#&gt; CX115 -0.3952089 -0.1753617 0.038927819 -0.031828301 0.06155411 -0.1591911
+#&gt; CX116 -0.3804300 -0.1578720 0.039472808 -0.028576937 0.03925274 -0.1816767
+#&gt; CX117 -0.3752261 -0.1812033 0.014099632 -0.044522159 0.03438858 -0.1643394
+#&gt; CX118 -0.3783218 -0.1842180 0.020968759 -0.024417381 0.03880148 -0.1416663
+#&gt; CX119 -0.3876880 -0.1642279 0.063028351 -0.026604581 0.04438565 -0.1417841
+#&gt; CX120 -0.3885057 -0.1835640 0.046820549 -0.029805750 0.04352958 -0.1594563
+#&gt; CX121 -0.3856952 -0.1765809 0.029440631 -0.016400605 0.05020029 -0.1573624
+#&gt; CX122 -0.3948544 -0.1545663 0.058086899 -0.023719498 0.07346505 -0.1590835
+#&gt; CX123 -0.3968285 -0.1614952 0.057832839 -0.026330932 0.07153727 -0.1594431
+#&gt; CX124 -0.3969098 -0.1750242 0.063461357 -0.012314613 0.05507356 -0.1534782
+#&gt; CX125 -0.3909619 -0.1815405 0.038028530 -0.007172401 0.05914780 -0.1535176
+#&gt; DE126 -0.4010904 -0.1869290 0.028588778 -0.042188507 0.07257837 -0.1463060
+#&gt; DE127 -0.3907798 -0.2048159 0.046708462 -0.043424145 0.10138235 -0.1466804
 #&gt;                 y1         y2         y3         y4         y5            y6
 #&gt; AN1    0.012940709 0.08272526 0.08560756 0.04594317 0.02596190  3.143299e-04
 #&gt; AN2    0.022617407 0.07813611 0.05997935 0.04205430 0.02339555  6.896711e-03
@@ -977,6 +1605,106 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; CA25   0.008602965 0.08817922 0.06937341 0.05184568 0.03087060  7.789416e-03
 #&gt; CA26   0.020828611 0.05990145 0.05710090 0.03837851 0.02687625  1.014661e-02
 #&gt; CA27   0.016365436 0.08526013 0.07075179 0.05315992 0.02914189  5.176485e-03
+#&gt; OR28   0.016813122 0.07454310 0.07435364 0.04638727 0.02765763 -1.428018e-03
+#&gt; MA29   0.010508611 0.08627781 0.05969181 0.04561651 0.02654045  8.884086e-03
+#&gt; MA30   0.025985316 0.08316052 0.06942867 0.05087559 0.02870372  6.839667e-03
+#&gt; MA31   0.011797664 0.08593919 0.07148202 0.04904123 0.01922311 -6.144203e-05
+#&gt; PS32   0.020858884 0.08883547 0.07126842 0.05320605 0.02642864  1.005218e-02
+#&gt; PS33   0.019570600 0.09110353 0.08040689 0.06759163 0.03451355  3.603363e-03
+#&gt; PS34   0.023205187 0.08899618 0.06172004 0.05021956 0.03094809  1.225889e-02
+#&gt; PS35   0.014352581 0.07698724 0.06094769 0.04184716 0.02578064  9.104242e-03
+#&gt; PS36   0.016663556 0.08691018 0.07171140 0.04793633 0.02378378  3.988240e-03
+#&gt; PS37   0.017831518 0.09049828 0.06565135 0.04890196 0.02110384  3.045069e-03
+#&gt; PS38   0.020271448 0.07495147 0.06587836 0.04779847 0.02331681  8.793776e-03
+#&gt; PS39   0.024678879 0.08033366 0.06722823 0.05285819 0.03115694  1.041729e-02
+#&gt; PS40   0.022715627 0.08150089 0.06535493 0.05253714 0.03008279  1.088806e-02
+#&gt; PS41   0.031619000 0.08831737 0.07838953 0.05979100 0.03143288  1.214292e-02
+#&gt; PS42   0.032770692 0.08158968 0.07926493 0.04793822 0.02364465  4.956151e-03
+#&gt; PS43   0.009560758 0.09715985 0.06602268 0.05469755 0.02976343  7.719840e-03
+#&gt; AE44   0.024190583 0.08041522 0.06280104 0.05270158 0.03341776  1.450459e-02
+#&gt; AE45   0.020047991 0.07466231 0.06347434 0.05108819 0.03319969  1.238372e-02
+#&gt; AE46   0.028845036 0.08337019 0.06916339 0.04413890 0.02509052  7.797998e-03
+#&gt; AE47   0.019770067 0.08714405 0.07137228 0.04414044 0.03009269  8.473658e-03
+#&gt; AE48   0.004400242 0.07887755 0.05923914 0.04867761 0.02847316  1.129429e-02
+#&gt; AE49   0.028810908 0.07970432 0.07270123 0.04629711 0.02624466  5.220370e-03
+#&gt; AE50   0.017155932 0.09152243 0.06580724 0.04676050 0.02993652  5.432342e-03
+#&gt; AE51   0.024247109 0.10036667 0.07848954 0.05258132 0.02630740  8.506526e-03
+#&gt; AE52   0.016686790 0.08214827 0.07005692 0.05466978 0.02854291  8.872821e-03
+#&gt; AE53   0.020865588 0.08293164 0.07177186 0.04937161 0.02586701  1.213761e-03
+#&gt; AE54   0.016304885 0.08395474 0.06314014 0.04779098 0.03048625  9.340139e-03
+#&gt; AE55   0.009798911 0.06925844 0.05937117 0.04572773 0.02510729  7.990555e-03
+#&gt; AE56   0.022971479 0.06984018 0.07118771 0.05036483 0.02675622  6.478037e-03
+#&gt; AE57   0.014458459 0.08639816 0.06275222 0.04803967 0.02983664  7.876850e-03
+#&gt; AE58   0.024575717 0.08355604 0.07060626 0.04925506 0.02853145  1.092331e-02
+#&gt; AE59   0.018354019 0.07065295 0.07222012 0.04597065 0.02679178  4.510184e-03
+#&gt; AE60   0.020607430 0.09662121 0.08367998 0.06057833 0.02757697  5.415454e-03
+#&gt; AE61   0.018529871 0.07996983 0.06973738 0.04297008 0.02953638  9.298726e-03
+#&gt; AE62   0.007574425 0.06726764 0.06137613 0.04745176 0.02335596  2.959682e-03
+#&gt; AE63   0.015956767 0.08931611 0.07747472 0.05121248 0.02760659  9.748814e-03
+#&gt; AE64   0.033042149 0.07653044 0.06345024 0.05157628 0.03438170  1.276873e-02
+#&gt; AE65   0.027088076 0.07637889 0.06279719 0.04671995 0.02850020  1.438772e-02
+#&gt; AE66   0.018683136 0.09201167 0.07374708 0.05665552 0.02900556  6.111669e-03
+#&gt; AE67   0.028402897 0.07501412 0.07198061 0.05224498 0.02611332  7.192070e-03
+#&gt; AE68   0.017469650 0.08543062 0.07150616 0.04934816 0.02673700  5.607013e-03
+#&gt; AE69   0.025424957 0.07948916 0.06691942 0.04794217 0.02610478  1.075628e-02
+#&gt; AE70   0.024402942 0.08678510 0.07353861 0.04877741 0.02614060  7.741517e-03
+#&gt; AE71   0.025309742 0.09829363 0.07486010 0.04943864 0.02751699  6.540653e-03
+#&gt; AE72   0.018997774 0.08321654 0.07059669 0.05059427 0.02896803  9.817544e-03
+#&gt; AE73   0.017634502 0.08079130 0.06152843 0.04408687 0.02802004  4.975414e-03
+#&gt; AE74   0.013866245 0.08995457 0.08133589 0.05467921 0.02918941  1.029912e-03
+#&gt; AE75   0.019045472 0.08457467 0.06510350 0.05010914 0.02932881  1.204081e-02
+#&gt; AE76   0.024072341 0.08751525 0.06283676 0.04650634 0.02841181  1.019612e-02
+#&gt; AE77   0.019637677 0.08254027 0.07454056 0.05420963 0.03101185  9.704262e-03
+#&gt; AE78   0.020662320 0.08300227 0.06994329 0.04928349 0.02793595  7.812910e-03
+#&gt; AE79   0.019114853 0.08929595 0.07642983 0.04518931 0.02111113  5.806297e-03
+#&gt; AE80   0.020531107 0.07974158 0.06547620 0.04347760 0.02390444  8.906784e-03
+#&gt; AE81   0.032663600 0.09658187 0.07138059 0.05480025 0.03004544  9.628165e-03
+#&gt; AE82   0.016070662 0.09010082 0.07316634 0.05723526 0.03115175  8.837480e-03
+#&gt; AE83   0.011845956 0.08853924 0.07340989 0.05070644 0.02748793 -1.261841e-03
+#&gt; AE84   0.016675131 0.09931164 0.07456350 0.05665031 0.03281160  1.259227e-02
+#&gt; AE85   0.018959472 0.09109891 0.06777746 0.04204871 0.02751899  8.323262e-03
+#&gt; AE86   0.024400656 0.09834951 0.06994460 0.05154759 0.02823778  9.007538e-03
+#&gt; AE87   0.023679965 0.08551271 0.06984470 0.04972487 0.03074529  4.769174e-03
+#&gt; AE88   0.009084897 0.08494789 0.05601141 0.04051574 0.02195391  4.261822e-03
+#&gt; AE89   0.008703514 0.09421476 0.06623393 0.04562391 0.02270013  6.391406e-03
+#&gt; AE90   0.023589240 0.09286933 0.06778966 0.04761115 0.02373509  7.449167e-03
+#&gt; AE91   0.027591570 0.08740021 0.07424829 0.05285772 0.03121315  1.336688e-02
+#&gt; AE92   0.020878581 0.08354259 0.06452972 0.04529696 0.02508293  2.692974e-03
+#&gt; AE93   0.020364590 0.08839652 0.07281333 0.05736523 0.02925682  1.288991e-02
+#&gt; AE94   0.018612681 0.07856159 0.06208977 0.04487545 0.02619393  7.952412e-03
+#&gt; AE95   0.017466328 0.06626041 0.05949728 0.04144419 0.02093362  8.847872e-03
+#&gt; AE96   0.020812387 0.09328760 0.06776309 0.05466275 0.03236216  7.943648e-03
+#&gt; AE97   0.014950558 0.07894500 0.07298622 0.04984451 0.02787630  9.011754e-03
+#&gt; AE98   0.018048366 0.08218655 0.05785554 0.04056599 0.02329563  4.651400e-03
+#&gt; AE99   0.020086306 0.07576808 0.06395551 0.04630783 0.02900804  1.089983e-02
+#&gt; AE100  0.015831988 0.08825021 0.07494671 0.05312310 0.03215297  1.088273e-02
+#&gt; CX101  0.018795956 0.08935710 0.06789183 0.04795449 0.02523404  6.371193e-03
+#&gt; CX102  0.016518484 0.07642958 0.05812753 0.04822808 0.03384453  1.273086e-02
+#&gt; CX103  0.015547354 0.08786580 0.07199873 0.05340470 0.02005191  5.641065e-03
+#&gt; CX104  0.017189492 0.09087689 0.06213815 0.04676742 0.02521513  5.651163e-03
+#&gt; CX105  0.024725460 0.08781316 0.07190276 0.05216423 0.02507603  8.995220e-03
+#&gt; CX106  0.025863561 0.09773886 0.07361245 0.04629580 0.02515056  5.161508e-03
+#&gt; CX107  0.021442632 0.08575526 0.06660921 0.04419384 0.02231315  5.480938e-03
+#&gt; CX108  0.021702864 0.09068568 0.06604510 0.04954652 0.02503920  8.609927e-03
+#&gt; CX109  0.023766493 0.08000771 0.05864626 0.04431554 0.02486217  8.732166e-03
+#&gt; CX110  0.016550882 0.07592534 0.05470113 0.04476934 0.02504541  7.360211e-03
+#&gt; CX111  0.027264329 0.08864175 0.06601191 0.04864348 0.02950447  1.095960e-02
+#&gt; CX112  0.011569628 0.09505486 0.06915401 0.05050916 0.02413023  6.095627e-03
+#&gt; CX113  0.019369159 0.07854490 0.05795837 0.04556672 0.02528180  7.189544e-03
+#&gt; CX114  0.023238263 0.08832770 0.07678710 0.05221398 0.03013315  7.968388e-03
+#&gt; CX115  0.027651358 0.08324651 0.07205780 0.05038590 0.02390324  4.849758e-03
+#&gt; CX116  0.012675200 0.09956746 0.07259229 0.05203469 0.02617173  8.008980e-03
+#&gt; CX117  0.015586293 0.09100442 0.05089735 0.04191792 0.02374686  1.123756e-02
+#&gt; CX118  0.031449170 0.09235629 0.06811639 0.05206086 0.02838282  1.140648e-02
+#&gt; CX119  0.013745274 0.08549800 0.06630680 0.05060673 0.02801849  4.633690e-03
+#&gt; CX120  0.018455954 0.09281479 0.07953684 0.05130723 0.02550724  3.429425e-03
+#&gt; CX121  0.020414366 0.07806293 0.06908880 0.04828702 0.02436715  1.094832e-02
+#&gt; CX122  0.020437082 0.08049679 0.07032598 0.04798958 0.02580869  5.994081e-03
+#&gt; CX123  0.020779332 0.08043123 0.06478827 0.04765953 0.02367920  3.633164e-03
+#&gt; CX124  0.008693571 0.08304099 0.05964069 0.04238379 0.02053099  4.573827e-03
+#&gt; CX125  0.024191200 0.08505697 0.07388359 0.05161500 0.02943552  1.075635e-02
+#&gt; DE126  0.028743006 0.08903730 0.07586468 0.04853198 0.02611016  1.496347e-03
+#&gt; DE127  0.017577011 0.07460363 0.06141399 0.04376222 0.02306809  3.169495e-03
 #&gt;                 y7          y8          y9         y10         y11          y12
 #&gt; AN1   -0.022649189 -0.04491682 -0.07374538 -0.09601290 -0.11012881 -0.016186374
 #&gt; AN2   -0.008293681 -0.03422274 -0.05729695 -0.08755589 -0.10376366 -0.017409735
@@ -1005,6 +1733,106 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; CA25  -0.015464259 -0.04558097 -0.06305784 -0.08679045 -0.10419788 -0.027559722
 #&gt; CA26  -0.006850989 -0.03086755 -0.05461535 -0.08499266 -0.10066221 -0.014478931
 #&gt; CA27  -0.017371640 -0.04565815 -0.06878017 -0.08807469 -0.09721580 -0.021529340
+#&gt; OR28  -0.024884025 -0.04856538 -0.06284213 -0.08217272 -0.09500423 -0.010338476
+#&gt; MA29  -0.015305677 -0.03905387 -0.05435324 -0.07951540 -0.09998587 -0.021699383
+#&gt; MA30  -0.010830826 -0.04014587 -0.06174684 -0.08858721 -0.11324231 -0.023679810
+#&gt; MA31  -0.018693859 -0.04114152 -0.05874363 -0.08529651 -0.10615164 -0.020701468
+#&gt; PS32  -0.013966466 -0.04517533 -0.06293871 -0.08771601 -0.11564335 -0.016807583
+#&gt; PS33  -0.018776208 -0.04768058 -0.07021445 -0.09612266 -0.11243954 -0.028360280
+#&gt; PS34  -0.016073530 -0.03891633 -0.06707825 -0.08913113 -0.11259819 -0.031952668
+#&gt; PS35  -0.010668484 -0.03446438 -0.05734226 -0.08174171 -0.09966869 -0.023743891
+#&gt; PS36  -0.014157478 -0.04083456 -0.05969736 -0.08589872 -0.09592821 -0.024563197
+#&gt; PS37  -0.015252593 -0.03496569 -0.06362832 -0.08430584 -0.10395747 -0.023446545
+#&gt; PS38  -0.009658301 -0.03155247 -0.05594179 -0.08232837 -0.10135455 -0.022742137
+#&gt; PS39  -0.006758154 -0.04003466 -0.06450970 -0.09301382 -0.11491943 -0.022560283
+#&gt; PS40  -0.011222186 -0.03617550 -0.06365645 -0.09115652 -0.10911202 -0.026271572
+#&gt; PS41  -0.012940927 -0.03947064 -0.07030047 -0.09689251 -0.11705327 -0.018025037
+#&gt; PS42  -0.012198023 -0.03887209 -0.06932825 -0.09426942 -0.12867258 -0.020120759
+#&gt; PS43  -0.019414621 -0.04313361 -0.06508623 -0.08628821 -0.11223167 -0.031958390
+#&gt; AE44  -0.009862565 -0.04162169 -0.06575485 -0.09724047 -0.11362328 -0.019572409
+#&gt; AE45  -0.013919750 -0.03736902 -0.06139491 -0.08689098 -0.09977618 -0.016312319
+#&gt; AE46  -0.012293880 -0.03405824 -0.05890612 -0.08537648 -0.11204538 -0.031127521
+#&gt; AE47  -0.015128109 -0.03730592 -0.06522030 -0.08784736 -0.10309964 -0.022486159
+#&gt; AE48  -0.011282026 -0.03763378 -0.06120954 -0.08005449 -0.09320239 -0.020265334
+#&gt; AE49  -0.013581771 -0.03320759 -0.06028047 -0.09255185 -0.10543529 -0.023953740
+#&gt; AE50  -0.016254706 -0.03720747 -0.06166044 -0.08785440 -0.10496814 -0.033748871
+#&gt; AE51  -0.010477868 -0.04660942 -0.06632196 -0.10183059 -0.11802733 -0.017840665
+#&gt; AE52  -0.019736948 -0.04341103 -0.06769374 -0.08994812 -0.11161750 -0.009069694
+#&gt; AE53  -0.015348492 -0.04042114 -0.06346312 -0.09055656 -0.10530105 -0.021329263
+#&gt; AE54  -0.014568653 -0.03743935 -0.06222679 -0.08734416 -0.10859000 -0.022838159
+#&gt; AE55  -0.009486833 -0.03299983 -0.05186462 -0.06913573 -0.09092268 -0.022685238
+#&gt; AE56  -0.014514176 -0.03571901 -0.05809880 -0.08359656 -0.10117988 -0.018954400
+#&gt; AE57  -0.016422408 -0.04442620 -0.06163090 -0.08727425 -0.10892525 -0.023305894
+#&gt; AE58  -0.010379970 -0.03232794 -0.06253845 -0.09112264 -0.11407538 -0.018992170
+#&gt; AE59  -0.011135897 -0.03425113 -0.05188090 -0.07854994 -0.09559787 -0.016985997
+#&gt; AE60  -0.016656370 -0.03730417 -0.06911755 -0.10360299 -0.12256957 -0.021948261
+#&gt; AE61  -0.012104224 -0.04374636 -0.06728560 -0.09264173 -0.11459293 -0.018771819
+#&gt; AE62  -0.010673021 -0.03344729 -0.05815414 -0.07509566 -0.08490892 -0.014079257
+#&gt; AE63  -0.013636781 -0.04137447 -0.06643661 -0.08818611 -0.10471203 -0.025303081
+#&gt; AE64  -0.012348047 -0.04000695 -0.06399164 -0.09334313 -0.11516262 -0.028942077
+#&gt; AE65  -0.006835167 -0.03207311 -0.06044790 -0.08432838 -0.09764515 -0.023000118
+#&gt; AE66  -0.012869407 -0.04184462 -0.06285361 -0.08876602 -0.11098107 -0.022663986
+#&gt; AE67  -0.008986228 -0.03835474 -0.06364629 -0.09113951 -0.10315901 -0.018390877
+#&gt; AE68  -0.018185810 -0.04065622 -0.05756225 -0.08006326 -0.10332340 -0.026942811
+#&gt; AE69  -0.010161718 -0.03434324 -0.06205444 -0.08432543 -0.10616567 -0.017812980
+#&gt; AE70  -0.013342037 -0.03088334 -0.06566204 -0.09585289 -0.11753789 -0.017924490
+#&gt; AE71  -0.009675901 -0.04048271 -0.06486542 -0.09489982 -0.11795273 -0.019558273
+#&gt; AE72  -0.011024725 -0.04145468 -0.06627121 -0.08851423 -0.10322912 -0.024121632
+#&gt; AE73  -0.012323513 -0.03770377 -0.06288326 -0.08704623 -0.11475920 -0.027624769
+#&gt; AE74  -0.023281909 -0.04456212 -0.06608231 -0.08807882 -0.10561837 -0.027461067
+#&gt; AE75  -0.014425002 -0.03966683 -0.06084724 -0.08662237 -0.10593663 -0.021154709
+#&gt; AE76  -0.008971430 -0.03793524 -0.06233432 -0.08505486 -0.10300464 -0.030926795
+#&gt; AE77  -0.015540722 -0.04290387 -0.06647833 -0.09428041 -0.10514082 -0.020484133
+#&gt; AE78  -0.012716677 -0.03826144 -0.06122659 -0.08908530 -0.10687600 -0.023643201
+#&gt; AE79  -0.011670763 -0.03582857 -0.06011415 -0.08866983 -0.11625621 -0.018462381
+#&gt; AE80  -0.011376077 -0.03652695 -0.06014513 -0.08236946 -0.10361199 -0.018662537
+#&gt; AE81  -0.016041414 -0.04030890 -0.07264075 -0.10449132 -0.12395139 -0.024058155
+#&gt; AE82  -0.020090293 -0.04201812 -0.07355589 -0.10066656 -0.10941949 -0.011429217
+#&gt; AE83  -0.021642035 -0.04538780 -0.06313137 -0.08528360 -0.10440104 -0.021037397
+#&gt; AE84  -0.014986003 -0.04248272 -0.06992434 -0.09749194 -0.10998563 -0.018000771
+#&gt; AE85  -0.010224402 -0.03959890 -0.06433016 -0.09075392 -0.10643589 -0.025758156
+#&gt; AE86  -0.014931562 -0.04480389 -0.06953978 -0.09809811 -0.12410132 -0.032433594
+#&gt; AE87  -0.012020671 -0.03778471 -0.06362996 -0.08783494 -0.11593000 -0.025401678
+#&gt; AE88  -0.008953251 -0.03274035 -0.05703902 -0.07992429 -0.09841572 -0.025017768
+#&gt; AE89  -0.015992977 -0.03742957 -0.05870742 -0.08557781 -0.10030554 -0.025819614
+#&gt; AE90  -0.011304985 -0.03520523 -0.06689844 -0.09597716 -0.12232366 -0.029532334
+#&gt; AE91  -0.012113141 -0.04107338 -0.07231876 -0.10063577 -0.11554828 -0.025353990
+#&gt; AE92  -0.015689638 -0.03491986 -0.05842992 -0.08010566 -0.10556848 -0.024083021
+#&gt; AE93  -0.013902442 -0.04308499 -0.06746251 -0.09391003 -0.09889693 -0.023301050
+#&gt; AE94  -0.012761380 -0.03713347 -0.06143860 -0.08744287 -0.10256059 -0.019180160
+#&gt; AE95  -0.008317183 -0.03318093 -0.05476417 -0.07908761 -0.09724389 -0.021155349
+#&gt; AE96  -0.015020142 -0.04128751 -0.06920775 -0.09239337 -0.11308318 -0.027996097
+#&gt; AE97  -0.013626874 -0.04201361 -0.06469334 -0.08936881 -0.10632223 -0.014566792
+#&gt; AE98  -0.014268091 -0.03160728 -0.05121990 -0.07681353 -0.10049387 -0.024983638
+#&gt; AE99  -0.012078815 -0.03513301 -0.06537555 -0.08815014 -0.10844488 -0.015811525
+#&gt; AE100 -0.015063521 -0.04454227 -0.06204188 -0.09158681 -0.10159634 -0.028707296
+#&gt; CX101 -0.012506483 -0.03810211 -0.06348835 -0.09067597 -0.10432864 -0.018161767
+#&gt; CX102 -0.012979442 -0.04179307 -0.05884064 -0.08217746 -0.10441455 -0.010663378
+#&gt; CX103 -0.016869366 -0.04349414 -0.06480518 -0.08860683 -0.10069260 -0.025008779
+#&gt; CX104 -0.013146703 -0.04263805 -0.06496109 -0.08814420 -0.10491095 -0.022729998
+#&gt; CX105 -0.012346430 -0.04218885 -0.06624380 -0.09075616 -0.11116688 -0.017447970
+#&gt; CX106 -0.012493887 -0.04112181 -0.06372150 -0.09442919 -0.11529131 -0.023500610
+#&gt; CX107 -0.008316955 -0.03997740 -0.05356670 -0.08198276 -0.10489391 -0.017103549
+#&gt; CX108 -0.010675696 -0.03906940 -0.05835676 -0.08206873 -0.10102607 -0.022317942
+#&gt; CX109 -0.008017759 -0.03277675 -0.05972361 -0.08489993 -0.10131875 -0.018720647
+#&gt; CX110 -0.011892203 -0.03699618 -0.05726879 -0.07949827 -0.09867063 -0.017793106
+#&gt; CX111 -0.014987168 -0.03983512 -0.06525173 -0.09407267 -0.11798696 -0.017169711
+#&gt; CX112 -0.013259271 -0.03887557 -0.06563220 -0.08857604 -0.10528651 -0.021789123
+#&gt; CX113 -0.011448311 -0.03243057 -0.05901815 -0.08553508 -0.10607396 -0.015084765
+#&gt; CX114 -0.011667456 -0.03827435 -0.06604410 -0.10039906 -0.11771613 -0.016469787
+#&gt; CX115 -0.012356502 -0.03552277 -0.06246200 -0.09034838 -0.10473695 -0.019160434
+#&gt; CX116 -0.016208465 -0.04317615 -0.06922503 -0.09249430 -0.11336644 -0.024235107
+#&gt; CX117 -0.010293465 -0.03366607 -0.06180279 -0.08867867 -0.10355896 -0.020478738
+#&gt; CX118 -0.009851651 -0.03843103 -0.06622876 -0.09572786 -0.10943615 -0.031354556
+#&gt; CX119 -0.017645804 -0.04022362 -0.05828576 -0.08374648 -0.10009014 -0.023650395
+#&gt; CX120 -0.016997094 -0.04076017 -0.06604435 -0.09307333 -0.10750493 -0.025146048
+#&gt; CX121 -0.016093799 -0.04469016 -0.06732068 -0.09196516 -0.11049207 -0.013967805
+#&gt; CX122 -0.014023238 -0.03254583 -0.05832615 -0.08241454 -0.10217696 -0.014350003
+#&gt; CX123 -0.013941192 -0.03358028 -0.06438323 -0.08609421 -0.10174067 -0.018241190
+#&gt; CX124 -0.012730469 -0.03257608 -0.05687281 -0.08602453 -0.09105863 -0.021119726
+#&gt; CX125 -0.012020926 -0.03913766 -0.06330350 -0.09481454 -0.11424544 -0.009227913
+#&gt; DE126 -0.019321238 -0.03999234 -0.06599276 -0.09152014 -0.10655577 -0.009402325
+#&gt; DE127 -0.013159406 -0.03350596 -0.05476136 -0.07905244 -0.09179589 -0.020875258
 #&gt;               y13        y14        y15         y16           y17         y18
 #&gt; AN1   0.031629319 0.03391547 0.05061577 0.023676085 -0.0058486892 -0.02384140
 #&gt; AN2   0.023926985 0.02632800 0.03959424 0.017384017 -0.0058875266 -0.02588248
@@ -1033,7 +1861,106 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; CA25  0.009569139 0.02658843 0.05114756 0.022697704 -0.0020237300 -0.02198926
 #&gt; CA26  0.017519278 0.02453807 0.03993388 0.019168660 -0.0005098765 -0.02141466
 #&gt; CA27  0.018043507 0.02646240 0.04037343 0.018049061 -0.0098821407 -0.01427213
-#&gt;  [ reached getOption("max.print") -- omitted 100 rows ]</div><div class='input'>
+#&gt; OR28  0.017928415 0.03137184 0.04420691 0.027436910 -0.0063128459 -0.02915102
+#&gt; MA29  0.012587050 0.02288118 0.04696138 0.021867891 -0.0018020821 -0.03010125
+#&gt; MA30  0.020146706 0.02899291 0.04104589 0.017256433 -0.0108982412 -0.02330431
+#&gt; MA31  0.014368316 0.02456082 0.04953016 0.027380755 -0.0047865069 -0.01774669
+#&gt; PS32  0.015373970 0.02680132 0.04710163 0.021307117 -0.0071921175 -0.03179412
+#&gt; PS33  0.022343115 0.02811016 0.05025699 0.022546643 -0.0111073008 -0.03534547
+#&gt; PS34  0.020311096 0.03302952 0.04868505 0.021229032 -0.0072330437 -0.02761950
+#&gt; PS35  0.012787121 0.02439174 0.04750925 0.020821881 -0.0076924599 -0.01920767
+#&gt; PS36  0.020296980 0.02819520 0.04384365 0.017565901 -0.0108985363 -0.02891716
+#&gt; PS37  0.019332874 0.02777554 0.04141525 0.018430909 -0.0056359361 -0.02279418
+#&gt; PS38  0.014203489 0.01976264 0.03926035 0.018371870 -0.0064795686 -0.02255150
+#&gt; PS39  0.018812419 0.02727820 0.04428427 0.020823244 -0.0084951591 -0.02758012
+#&gt; PS40  0.017292510 0.02265565 0.04728448 0.019230401 -0.0070568719 -0.02489134
+#&gt; PS41  0.026375994 0.02492862 0.03676670 0.010547144 -0.0160263444 -0.02960196
+#&gt; PS42  0.024349780 0.02958817 0.04751387 0.018787813 -0.0033310371 -0.02361179
+#&gt; PS43  0.009707325 0.02965271 0.05400725 0.028037662 -0.0054118723 -0.02280445
+#&gt; AE44  0.022206042 0.02872387 0.04677668 0.021428176 -0.0062426938 -0.03324756
+#&gt; AE45  0.017074132 0.02500930 0.04207813 0.015593125 -0.0125064236 -0.02644135
+#&gt; AE46  0.019957371 0.02210795 0.04425189 0.016124958 -0.0059190967 -0.02112148
+#&gt; AE47  0.012769929 0.02550525 0.04834536 0.021286591 -0.0072694133 -0.03054343
+#&gt; AE48  0.009011350 0.02787617 0.04194609 0.019448501 -0.0033596775 -0.02223687
+#&gt; AE49  0.020172805 0.02672348 0.03791124 0.017883592 -0.0082890538 -0.02436994
+#&gt; AE50  0.017983541 0.02523023 0.04456562 0.022415619  0.0006198492 -0.02573580
+#&gt; AE51  0.028276768 0.02475533 0.04560880 0.018291385 -0.0155396117 -0.03078340
+#&gt; AE52  0.018496966 0.02805840 0.04598526 0.019076256 -0.0100420413 -0.02107529
+#&gt; AE53  0.018988053 0.02825789 0.04835605 0.022694056 -0.0086753937 -0.02522250
+#&gt; AE54  0.016957663 0.02749672 0.04936006 0.023673274 -0.0054390199 -0.03005873
+#&gt; AE55  0.007779078 0.01965419 0.03971491 0.017674928 -0.0056945927 -0.01928768
+#&gt; AE56  0.015525644 0.01943886 0.04180478 0.016528916 -0.0075640486 -0.02126979
+#&gt; AE57  0.021649727 0.03142068 0.05043371 0.022094419 -0.0032279250 -0.02974770
+#&gt; AE58  0.014861057 0.02358611 0.04126946 0.017768041 -0.0127003376 -0.02279560
+#&gt; AE59  0.013815413 0.02137424 0.03836963 0.012426314 -0.0118008435 -0.02428271
+#&gt; AE60  0.017810087 0.03218713 0.05088695 0.020450808 -0.0079102771 -0.03670515
+#&gt; AE61  0.013592262 0.02666170 0.05506633 0.024673294 -0.0035990553 -0.01729413
+#&gt; AE62  0.010788025 0.02279618 0.04028712 0.016167170 -0.0081136871 -0.01555213
+#&gt; AE63  0.019865892 0.02713488 0.04740451 0.015227369 -0.0146190674 -0.02668000
+#&gt; AE64  0.029558118 0.02810862 0.04581103 0.018179791 -0.0051154001 -0.03449724
+#&gt; AE65  0.013747177 0.02120494 0.03460262 0.015391609 -0.0102467196 -0.02624182
+#&gt; AE66  0.015239003 0.02322341 0.05196184 0.018378759 -0.0109858334 -0.03405311
+#&gt; AE67  0.020646451 0.02196527 0.03653913 0.015457621 -0.0086937587 -0.02318604
+#&gt; AE68  0.015040336 0.02794639 0.04624587 0.019438586 -0.0080738129 -0.02996223
+#&gt; AE69  0.015458242 0.02141271 0.04330143 0.017228877 -0.0125403543 -0.02663419
+#&gt; AE70  0.014137334 0.02400970 0.04994542 0.025004071 -0.0113149009 -0.02796512
+#&gt; AE71  0.026207501 0.02682591 0.04499242 0.016599384 -0.0147678524 -0.03438227
+#&gt; AE72  0.017118539 0.02848296 0.05058592 0.018731216 -0.0130637188 -0.02943016
+#&gt; AE73  0.019052734 0.03180831 0.04991368 0.020746914 -0.0014263526 -0.01479110
+#&gt; AE74  0.016244128 0.03259079 0.04730166 0.023661956 -0.0069015203 -0.02786766
+#&gt; AE75  0.021824911 0.02720334 0.04639836 0.013554001 -0.0120446990 -0.02848553
+#&gt; AE76  0.019251021 0.02578827 0.04750071 0.017171761 -0.0114041685 -0.02961893
+#&gt; AE77  0.020455630 0.02536735 0.04868923 0.018379563 -0.0107074190 -0.02900031
+#&gt; AE78  0.019013128 0.03336659 0.04116906 0.015354267 -0.0116203230 -0.02411374
+#&gt; AE79  0.019997854 0.02636608 0.04235093 0.017891929 -0.0082395920 -0.02431266
+#&gt; AE80  0.017929390 0.02416470 0.04377097 0.019649532 -0.0083678882 -0.02649226
+#&gt; AE81  0.024156541 0.02920418 0.04871154 0.019261341 -0.0100478849 -0.02489370
+#&gt; AE82  0.020581764 0.02706467 0.04897500 0.018346880 -0.0091234517 -0.02522759
+#&gt; AE83  0.016778981 0.03114402 0.05393464 0.024514787 -0.0092304772 -0.02698633
+#&gt; AE84  0.024619159 0.02874173 0.04199725 0.016290585 -0.0153471761 -0.03603457
+#&gt; AE85  0.010398332 0.02846624 0.04731618 0.025323022 -0.0055374471 -0.02459170
+#&gt; AE86  0.036345005 0.02984857 0.04512286 0.020648475 -0.0058123002 -0.02373204
+#&gt; AE87  0.020221714 0.02813340 0.04238086 0.015525761 -0.0086128158 -0.01932365
+#&gt; AE88  0.015662860 0.02902069 0.04315383 0.021516369 -0.0017844394 -0.02225457
+#&gt; AE89  0.010792058 0.02447851 0.05054583 0.021326521 -0.0053925522 -0.02178508
+#&gt; AE90  0.027138847 0.03212033 0.05107540 0.023253561 -0.0046628700 -0.03072711
+#&gt; AE91  0.019036380 0.03167821 0.04463118 0.018498531 -0.0112106368 -0.02226817
+#&gt; AE92  0.012811619 0.02363094 0.04162190 0.021165336 -0.0067167026 -0.01574026
+#&gt; AE93  0.022473354 0.02652072 0.04508831 0.014070406 -0.0157460606 -0.03293519
+#&gt; AE94  0.012303786 0.02681355 0.04453401 0.023846470 -0.0029542844 -0.02231230
+#&gt; AE95  0.016906058 0.02469353 0.04023674 0.021998951 -0.0084591085 -0.01607673
+#&gt; AE96  0.017494002 0.02548368 0.04706841 0.020547912 -0.0079886664 -0.02044892
+#&gt; AE97  0.016646001 0.02471507 0.04874865 0.015425458 -0.0047699188 -0.02378795
+#&gt; AE98  0.013392058 0.02393447 0.04162787 0.019367042 -0.0054168334 -0.02012179
+#&gt; AE99  0.019980006 0.02394787 0.04300539 0.020766024 -0.0044500311 -0.02428092
+#&gt; AE100 0.011986799 0.02529439 0.04705713 0.018311223 -0.0085783044 -0.02572083
+#&gt; CX101 0.016229373 0.02795537 0.04467154 0.019165286 -0.0099841798 -0.02637868
+#&gt; CX102 0.017253535 0.01912253 0.04066227 0.015077750 -0.0067003333 -0.02042628
+#&gt; CX103 0.020074223 0.03028945 0.04633492 0.020038098 -0.0052370957 -0.02653226
+#&gt; CX104 0.014936941 0.02834343 0.04792016 0.024514766 -0.0071750054 -0.01984755
+#&gt; CX105 0.019213633 0.02529058 0.03834746 0.019781934 -0.0075284546 -0.02563194
+#&gt; CX106 0.018303378 0.02768797 0.04678521 0.019771862 -0.0097028255 -0.02611004
+#&gt; CX107 0.015810261 0.02182992 0.03976230 0.017125115 -0.0078564453 -0.02662489
+#&gt; CX108 0.016219167 0.02519860 0.04244214 0.010270168 -0.0112957283 -0.03094904
+#&gt; CX109 0.017066852 0.02501398 0.03544986 0.016410762 -0.0056039127 -0.02321044
+#&gt; CX110 0.012382808 0.02480709 0.04162261 0.020592599 -0.0085507011 -0.01308753
+#&gt; CX111 0.020637349 0.02905606 0.04625899 0.017164612 -0.0095679571 -0.02527126
+#&gt; CX112 0.012661551 0.02761092 0.04364508 0.019189271 -0.0085139017 -0.01768773
+#&gt; CX113 0.014466773 0.01984869 0.04218261 0.018604409 -0.0039228170 -0.01549933
+#&gt; CX114 0.018328556 0.02243157 0.03906682 0.015977692 -0.0068658958 -0.01703644
+#&gt; CX115 0.014978478 0.02220531 0.04056494 0.018216321 -0.0086790677 -0.02479352
+#&gt; CX116 0.017436399 0.03146683 0.04684757 0.021305072 -0.0043496704 -0.02505105
+#&gt; CX117 0.017902850 0.02937567 0.04468358 0.018405213 -0.0043340491 -0.02194497
+#&gt; CX118 0.027144430 0.02327763 0.03538112 0.015200957 -0.0075386159 -0.02620753
+#&gt; CX119 0.017128005 0.02243496 0.04337225 0.016759618 -0.0031363049 -0.02172532
+#&gt; CX120 0.017129876 0.03025056 0.04708472 0.019116144 -0.0119676996 -0.02313915
+#&gt; CX121 0.023238260 0.02442110 0.04506626 0.020718179 -0.0018103603 -0.01827235
+#&gt; CX122 0.015060057 0.02122317 0.04009783 0.016096360 -0.0109807525 -0.02871213
+#&gt; CX123 0.012182070 0.02677965 0.04411924 0.020246003 -0.0085147008 -0.01780221
+#&gt; CX124 0.012936296 0.02604252 0.04671675 0.019657687 -0.0007939672 -0.02304091
+#&gt; CX125 0.019918869 0.02308288 0.04046104 0.013776812 -0.0108913149 -0.02853693
+#&gt; DE126 0.018364399 0.02746759 0.03974314 0.015251424 -0.0136047259 -0.02422073
+#&gt; DE127 0.016636092 0.02410737 0.03777222 0.017679489 -0.0115595562 -0.01507975</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -1063,5 +1990,8 @@ with <code>methods(class=Coe)</code>.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

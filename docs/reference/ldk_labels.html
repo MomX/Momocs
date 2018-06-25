@@ -18,13 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Add landmarks labels — ldk_labels" />
+
+<meta property="og:description" content="Add landmarks labels" />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +88,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +103,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,19 +111,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add landmarks labels</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/gr-domesticplotters.R'><code>R/gr-domesticplotters.R</code></a></small>
+    <div class="hidden name"><code>ldk_labels.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Add landmarks labels</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>ldk_labels</span>(<span class='no'>ldk</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>2</span>/<span class='fl'>3</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -130,7 +150,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other plotting functions: <code><a href='coo_arrows.html'>coo_arrows</a></code>,
+    <div class='dont-index'><p>Other plotting functions: <code><a href='coo_arrows.html'>coo_arrows</a></code>,
   <code><a href='coo_draw.html'>coo_draw</a></code>, <code><a href='coo_listpanel.html'>coo_listpanel</a></code>,
   <code><a href='coo_lolli.html'>coo_lolli</a></code>, <code><a href='coo_plot.html'>coo_plot</a></code>,
   <code><a href='coo_ruban.html'>coo_ruban</a></code>, <code><a href='ldk_chull.html'>ldk_chull</a></code>,
@@ -139,12 +159,12 @@
   <code><a href='plot_table.html'>plot_table</a></code></p>
 <p>Other ldk plotters: <code><a href='ldk_chull.html'>ldk_chull</a></code>,
   <code><a href='ldk_confell.html'>ldk_confell</a></code>, <code><a href='ldk_contour.html'>ldk_contour</a></code>,
-  <code><a href='ldk_links.html'>ldk_links</a></code></p>
+  <code><a href='ldk_links.html'>ldk_links</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>wings</span>[<span class='fl'>1</span>])</div><div class='input'><span class='fu'>ldk_labels</span>(<span class='no'>wings</span>[<span class='fl'>1</span>])</div><div class='img'><img src='ldk_labels-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># closer and smaller</span>
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>wings</span>[<span class='fl'>1</span>])</div><div class='input'><span class='fu'>ldk_labels</span>(<span class='no'>wings</span>[<span class='fl'>1</span>], <span class='kw'>d</span><span class='kw'>=</span><span class='fl'>0.05</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='img'><img src='ldk_labels-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>wings</span>[<span class='fl'>1</span>])</div><div class='input'><span class='fu'>ldk_labels</span>(<span class='no'>wings</span>[<span class='fl'>1</span>])</div><div class='img'><img src='ldk_labels-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># closer and smaller</span>
+<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>wings</span>[<span class='fl'>1</span>])</div><div class='input'><span class='fu'>ldk_labels</span>(<span class='no'>wings</span>[<span class='fl'>1</span>], <span class='kw'>d</span><span class='kw'>=</span><span class='fl'>0.05</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='img'><img src='ldk_labels-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -171,5 +191,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

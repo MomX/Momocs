@@ -18,13 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Convert (x; y) coordinates to chaincoded coordinates — pix2chc" />
+
+<meta property="og:description" content="Useful to convert (x; y) coordinates to chain-coded coordinates." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +88,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +103,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,21 +111,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Convert (x; y) coordinates to chaincoded coordinates</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/babel-import.R'><code>R/babel-import.R</code></a></small>
+    <div class="hidden name"><code>babel.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Useful to convert (x; y) coordinates to chain-coded coordinates.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>pix2chc</span>(<span class='no'>coo</span>)
 
 <span class='fu'>chc2pix</span>(<span class='no'>chc</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -136,7 +156,7 @@ Elliptic Fourier features of a closed contour.
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>chc2pix</p>
+    <div class='dont-index'><p>chc2pix</p>
 <p>Other import functions: <code><a href='import_Conte.html'>import_Conte</a></code>,
   <code><a href='import_StereoMorph.html'>import_StereoMorph_curve1</a></code>,
   <code><a href='import_jpg1.html'>import_jpg1</a></code>, <code><a href='import_jpg.html'>import_jpg</a></code>,
@@ -144,7 +164,7 @@ Elliptic Fourier features of a closed contour.
 <p>Other import functions: <code><a href='import_Conte.html'>import_Conte</a></code>,
   <code><a href='import_StereoMorph.html'>import_StereoMorph_curve1</a></code>,
   <code><a href='import_jpg1.html'>import_jpg1</a></code>, <code><a href='import_jpg.html'>import_jpg</a></code>,
-  <code><a href='import_tps.html'>import_tps</a></code>, <code><a href='import_txt.html'>import_txt</a></code></p>
+  <code><a href='import_tps.html'>import_tps</a></code>, <code><a href='import_txt.html'>import_txt</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -673,7 +693,393 @@ Elliptic Fourier features of a closed contour.
 #&gt; [498,]   58  101
 #&gt; [499,]   59  101
 #&gt; [500,]   60  101
-#&gt;  [ reached getOption("max.print") -- omitted 387 rows ]</div></pre>
+#&gt; [501,]   61  101
+#&gt; [502,]   62  101
+#&gt; [503,]   63  101
+#&gt; [504,]   64  101
+#&gt; [505,]   65  101
+#&gt; [506,]   66  101
+#&gt; [507,]   67  101
+#&gt; [508,]   68  101
+#&gt; [509,]   69  101
+#&gt; [510,]   70  101
+#&gt; [511,]   71  101
+#&gt; [512,]   72  101
+#&gt; [513,]   73  101
+#&gt; [514,]   74  101
+#&gt; [515,]   75  101
+#&gt; [516,]   76  101
+#&gt; [517,]   77  101
+#&gt; [518,]   78  101
+#&gt; [519,]   79  101
+#&gt; [520,]   80  101
+#&gt; [521,]   81  102
+#&gt; [522,]   82  101
+#&gt; [523,]   83  102
+#&gt; [524,]   82  103
+#&gt; [525,]   82  104
+#&gt; [526,]   82  105
+#&gt; [527,]   82  106
+#&gt; [528,]   81  107
+#&gt; [529,]   81  108
+#&gt; [530,]   81  109
+#&gt; [531,]   81  110
+#&gt; [532,]   80  111
+#&gt; [533,]   80  112
+#&gt; [534,]   80  113
+#&gt; [535,]   80  114
+#&gt; [536,]   79  115
+#&gt; [537,]   79  116
+#&gt; [538,]   79  117
+#&gt; [539,]   78  118
+#&gt; [540,]   78  119
+#&gt; [541,]   78  120
+#&gt; [542,]   78  121
+#&gt; [543,]   77  122
+#&gt; [544,]   77  123
+#&gt; [545,]   77  124
+#&gt; [546,]   77  125
+#&gt; [547,]   76  126
+#&gt; [548,]   76  127
+#&gt; [549,]   76  128
+#&gt; [550,]   76  129
+#&gt; [551,]   76  130
+#&gt; [552,]   75  131
+#&gt; [553,]   75  132
+#&gt; [554,]   75  133
+#&gt; [555,]   75  134
+#&gt; [556,]   75  135
+#&gt; [557,]   75  136
+#&gt; [558,]   76  137
+#&gt; [559,]   76  138
+#&gt; [560,]   77  139
+#&gt; [561,]   78  140
+#&gt; [562,]   79  140
+#&gt; [563,]   80  140
+#&gt; [564,]   81  140
+#&gt; [565,]   82  140
+#&gt; [566,]   83  141
+#&gt; [567,]   84  140
+#&gt; [568,]   85  140
+#&gt; [569,]   86  139
+#&gt; [570,]   87  139
+#&gt; [571,]   88  138
+#&gt; [572,]   89  138
+#&gt; [573,]   90  137
+#&gt; [574,]   91  136
+#&gt; [575,]   92  136
+#&gt; [576,]   93  135
+#&gt; [577,]   94  134
+#&gt; [578,]   95  134
+#&gt; [579,]   96  133
+#&gt; [580,]   97  132
+#&gt; [581,]   98  131
+#&gt; [582,]   99  131
+#&gt; [583,]  100  130
+#&gt; [584,]  101  129
+#&gt; [585,]  102  129
+#&gt; [586,]  103  128
+#&gt; [587,]  104  127
+#&gt; [588,]  105  126
+#&gt; [589,]  106  126
+#&gt; [590,]  107  125
+#&gt; [591,]  108  124
+#&gt; [592,]  109  124
+#&gt; [593,]  110  123
+#&gt; [594,]  111  122
+#&gt; [595,]  112  122
+#&gt; [596,]  113  121
+#&gt; [597,]  114  120
+#&gt; [598,]  115  119
+#&gt; [599,]  116  119
+#&gt; [600,]  117  118
+#&gt; [601,]  118  117
+#&gt; [602,]  119  117
+#&gt; [603,]  120  116
+#&gt; [604,]  121  115
+#&gt; [605,]  122  114
+#&gt; [606,]  123  114
+#&gt; [607,]  124  113
+#&gt; [608,]  125  112
+#&gt; [609,]  126  112
+#&gt; [610,]  127  111
+#&gt; [611,]  128  110
+#&gt; [612,]  129  110
+#&gt; [613,]  130  109
+#&gt; [614,]  131  108
+#&gt; [615,]  132  107
+#&gt; [616,]  133  107
+#&gt; [617,]  134  106
+#&gt; [618,]  135  105
+#&gt; [619,]  136  105
+#&gt; [620,]  137  104
+#&gt; [621,]  138  103
+#&gt; [622,]  139  102
+#&gt; [623,]  140  102
+#&gt; [624,]  141  101
+#&gt; [625,]  142  100
+#&gt; [626,]  143  100
+#&gt; [627,]  144   99
+#&gt; [628,]  145   98
+#&gt; [629,]  146   98
+#&gt; [630,]  147   97
+#&gt; [631,]  148   96
+#&gt; [632,]  149   95
+#&gt; [633,]  150   95
+#&gt; [634,]  151   94
+#&gt; [635,]  152   93
+#&gt; [636,]  153   93
+#&gt; [637,]  154   92
+#&gt; [638,]  155   91
+#&gt; [639,]  156   90
+#&gt; [640,]  157   90
+#&gt; [641,]  158   89
+#&gt; [642,]  159   88
+#&gt; [643,]  160   88
+#&gt; [644,]  161   87
+#&gt; [645,]  162   86
+#&gt; [646,]  163   86
+#&gt; [647,]  164   85
+#&gt; [648,]  165   84
+#&gt; [649,]  166   83
+#&gt; [650,]  167   83
+#&gt; [651,]  168   82
+#&gt; [652,]  169   81
+#&gt; [653,]  170   81
+#&gt; [654,]  171   80
+#&gt; [655,]  170   79
+#&gt; [656,]  169   78
+#&gt; [657,]  168   77
+#&gt; [658,]  167   77
+#&gt; [659,]  166   76
+#&gt; [660,]  165   75
+#&gt; [661,]  164   75
+#&gt; [662,]  163   74
+#&gt; [663,]  162   73
+#&gt; [664,]  161   72
+#&gt; [665,]  160   72
+#&gt; [666,]  159   71
+#&gt; [667,]  158   70
+#&gt; [668,]  157   70
+#&gt; [669,]  156   69
+#&gt; [670,]  155   68
+#&gt; [671,]  154   67
+#&gt; [672,]  153   67
+#&gt; [673,]  152   66
+#&gt; [674,]  151   65
+#&gt; [675,]  150   65
+#&gt; [676,]  149   64
+#&gt; [677,]  148   63
+#&gt; [678,]  147   63
+#&gt; [679,]  146   62
+#&gt; [680,]  145   61
+#&gt; [681,]  144   60
+#&gt; [682,]  143   60
+#&gt; [683,]  142   59
+#&gt; [684,]  141   58
+#&gt; [685,]  140   58
+#&gt; [686,]  139   57
+#&gt; [687,]  138   56
+#&gt; [688,]  137   55
+#&gt; [689,]  136   55
+#&gt; [690,]  135   54
+#&gt; [691,]  134   53
+#&gt; [692,]  133   53
+#&gt; [693,]  132   52
+#&gt; [694,]  131   51
+#&gt; [695,]  130   51
+#&gt; [696,]  129   50
+#&gt; [697,]  128   49
+#&gt; [698,]  127   48
+#&gt; [699,]  126   48
+#&gt; [700,]  125   47
+#&gt; [701,]  124   46
+#&gt; [702,]  123   46
+#&gt; [703,]  122   45
+#&gt; [704,]  121   44
+#&gt; [705,]  120   44
+#&gt; [706,]  119   43
+#&gt; [707,]  118   42
+#&gt; [708,]  117   41
+#&gt; [709,]  116   41
+#&gt; [710,]  115   40
+#&gt; [711,]  114   39
+#&gt; [712,]  113   38
+#&gt; [713,]  112   38
+#&gt; [714,]  111   37
+#&gt; [715,]  110   36
+#&gt; [716,]  109   36
+#&gt; [717,]  108   35
+#&gt; [718,]  107   34
+#&gt; [719,]  106   34
+#&gt; [720,]  105   33
+#&gt; [721,]  104   32
+#&gt; [722,]  103   31
+#&gt; [723,]  102   31
+#&gt; [724,]  101   30
+#&gt; [725,]  100   29
+#&gt; [726,]   99   29
+#&gt; [727,]   98   28
+#&gt; [728,]   97   27
+#&gt; [729,]   96   27
+#&gt; [730,]   95   26
+#&gt; [731,]   94   25
+#&gt; [732,]   93   24
+#&gt; [733,]   92   24
+#&gt; [734,]   91   23
+#&gt; [735,]   90   22
+#&gt; [736,]   89   22
+#&gt; [737,]   88   21
+#&gt; [738,]   87   20
+#&gt; [739,]   86   20
+#&gt; [740,]   85   19
+#&gt; [741,]   84   19
+#&gt; [742,]   83   19
+#&gt; [743,]   82   19
+#&gt; [744,]   81   18
+#&gt; [745,]   80   19
+#&gt; [746,]   79   19
+#&gt; [747,]   78   20
+#&gt; [748,]   77   21
+#&gt; [749,]   76   22
+#&gt; [750,]   75   23
+#&gt; [751,]   75   24
+#&gt; [752,]   75   25
+#&gt; [753,]   75   26
+#&gt; [754,]   75   27
+#&gt; [755,]   75   28
+#&gt; [756,]   75   29
+#&gt; [757,]   75   30
+#&gt; [758,]   76   31
+#&gt; [759,]   76   32
+#&gt; [760,]   76   33
+#&gt; [761,]   77   34
+#&gt; [762,]   77   35
+#&gt; [763,]   77   36
+#&gt; [764,]   77   37
+#&gt; [765,]   78   38
+#&gt; [766,]   78   39
+#&gt; [767,]   78   40
+#&gt; [768,]   78   41
+#&gt; [769,]   79   42
+#&gt; [770,]   79   43
+#&gt; [771,]   79   44
+#&gt; [772,]   79   45
+#&gt; [773,]   80   46
+#&gt; [774,]   80   47
+#&gt; [775,]   80   48
+#&gt; [776,]   80   49
+#&gt; [777,]   81   50
+#&gt; [778,]   81   51
+#&gt; [779,]   81   52
+#&gt; [780,]   81   53
+#&gt; [781,]   82   54
+#&gt; [782,]   82   55
+#&gt; [783,]   82   56
+#&gt; [784,]   83   57
+#&gt; [785,]   82   58
+#&gt; [786,]   81   58
+#&gt; [787,]   80   58
+#&gt; [788,]   79   59
+#&gt; [789,]   78   59
+#&gt; [790,]   77   59
+#&gt; [791,]   76   59
+#&gt; [792,]   75   59
+#&gt; [793,]   74   59
+#&gt; [794,]   73   59
+#&gt; [795,]   72   59
+#&gt; [796,]   71   59
+#&gt; [797,]   70   58
+#&gt; [798,]   69   58
+#&gt; [799,]   68   58
+#&gt; [800,]   67   58
+#&gt; [801,]   66   57
+#&gt; [802,]   65   57
+#&gt; [803,]   64   56
+#&gt; [804,]   63   55
+#&gt; [805,]   63   54
+#&gt; [806,]   63   53
+#&gt; [807,]   62   52
+#&gt; [808,]   62   51
+#&gt; [809,]   62   50
+#&gt; [810,]   61   49
+#&gt; [811,]   61   48
+#&gt; [812,]   60   47
+#&gt; [813,]   60   46
+#&gt; [814,]   60   45
+#&gt; [815,]   59   44
+#&gt; [816,]   59   43
+#&gt; [817,]   58   42
+#&gt; [818,]   58   41
+#&gt; [819,]   58   40
+#&gt; [820,]   57   39
+#&gt; [821,]   57   38
+#&gt; [822,]   56   37
+#&gt; [823,]   56   36
+#&gt; [824,]   56   35
+#&gt; [825,]   55   34
+#&gt; [826,]   55   33
+#&gt; [827,]   54   32
+#&gt; [828,]   54   31
+#&gt; [829,]   53   30
+#&gt; [830,]   53   29
+#&gt; [831,]   52   28
+#&gt; [832,]   52   27
+#&gt; [833,]   51   26
+#&gt; [834,]   50   25
+#&gt; [835,]   50   24
+#&gt; [836,]   49   23
+#&gt; [837,]   49   22
+#&gt; [838,]   48   21
+#&gt; [839,]   47   20
+#&gt; [840,]   46   19
+#&gt; [841,]   46   18
+#&gt; [842,]   45   17
+#&gt; [843,]   44   16
+#&gt; [844,]   43   15
+#&gt; [845,]   42   14
+#&gt; [846,]   41   13
+#&gt; [847,]   40   12
+#&gt; [848,]   39   11
+#&gt; [849,]   38   10
+#&gt; [850,]   37    9
+#&gt; [851,]   36    8
+#&gt; [852,]   35    8
+#&gt; [853,]   34    7
+#&gt; [854,]   33    7
+#&gt; [855,]   32    6
+#&gt; [856,]   31    5
+#&gt; [857,]   30    5
+#&gt; [858,]   29    4
+#&gt; [859,]   28    4
+#&gt; [860,]   27    3
+#&gt; [861,]   26    3
+#&gt; [862,]   25    3
+#&gt; [863,]   24    2
+#&gt; [864,]   23    2
+#&gt; [865,]   22    2
+#&gt; [866,]   21    2
+#&gt; [867,]   20    1
+#&gt; [868,]   19    1
+#&gt; [869,]   18    1
+#&gt; [870,]   17    1
+#&gt; [871,]   16    1
+#&gt; [872,]   15    0
+#&gt; [873,]   14    0
+#&gt; [874,]   13    0
+#&gt; [875,]   12    0
+#&gt; [876,]   11    0
+#&gt; [877,]   10    0
+#&gt; [878,]    9    0
+#&gt; [879,]    8    0
+#&gt; [880,]    7    0
+#&gt; [881,]    6    0
+#&gt; [882,]    5    0
+#&gt; [883,]    4    0
+#&gt; [884,]    3    0
+#&gt; [885,]    2    0
+#&gt; [886,]    1    0
+#&gt; [887,]    0    0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -704,5 +1110,8 @@ Elliptic Fourier features of a closed contour.
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pairwise comparison of a list of shapes — plot_mshapes • Momocs</title>
+<title>Pairwise comparison of a list of shapes — plot_MSHAPES • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Pairwise comparison of a list of shapes — plot_MSHAPES" />
+
+<meta property="og:description" content="&quot;Confusion matrix&quot; of a list of shapes. See examples." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +88,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +103,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,24 +111,33 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Pairwise comparison of a list of shapes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/gr-MSHAPES.R'><code>R/gr-MSHAPES.R</code></a></small>
+    <div class="hidden name"><code>plot_MSHAPES.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>"Confusion matrix" of a list of shapes. See examples.</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>plot_mshapes</span>(<span class='no'>x</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_div</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_MSHAPES</span>(<span class='no'>x</span>, <span class='no'>draw_fun</span>, <span class='no'>size</span>, <span class='no'>palette</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a list of shapes (eg as returned by <a href='mshapes.html'>mshapes</a>)</p></td>
+      <td><p>a list of shapes (eg as returned by <a href='MSHAPES.html'>MSHAPES</a>)</p></td>
+    </tr>
+    <tr>
+      <th>draw_fun</th>
+      <td><p>one of <a href='drawers.html'>draw_outline</a>, <a href='drawers.html'>draw_curves</a>, <a href='drawers.html'>draw_landmarks</a>.
+When the result of <a href='MSHAPES.html'>MSHAPES</a> is passed, detected based on <code>$Coe</code>, otherwise default to <code>draw_curves</code>.</p></td>
     </tr>
     <tr>
       <th>size</th>
@@ -131,16 +156,18 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='mshapes.html'>mshapes</a></span>(<span class='st'>"type"</span>) <span class='kw'>%&gt;%</span> <span class='no'>plot_mshapes</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='img'><img src='plot_mshapes-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># above, a shortcut for working with the result of mshapes</span>
-<span class='co'># but works on list of shapes, eg:</span>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='MSHAPES.html'>MSHAPES</a></span>(~<span class='no'>type</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'>
+<span class='co'># custom colors</span>
+<span class='no'>x</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_MSHAPES</span>(<span class='kw'>palette</span><span class='kw'>=</span><span class='fu'><a href='palettes.html'>pal_manual</a></span>(<span class='fu'>c</span>(<span class='st'>"darkgreen"</span>, <span class='st'>"orange"</span>)))</div><div class='img'><img src='plot_MSHAPES-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># also works on list of shapes, eg:</span>
 <span class='no'>leaves</span> <span class='kw'>&lt;-</span> <span class='no'>shapes</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fu'>grep</span>(<span class='st'>"leaf"</span>, <span class='fu'>names</span>(<span class='no'>shapes</span>))) <span class='kw'>%$%</span> <span class='no'>coo</span>
-<span class='fu'>class</span>(<span class='no'>leaves</span>)</div><div class='output co'>#&gt; [1] "list"</div><div class='input'><span class='no'>leaves</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_mshapes</span>()</div><div class='img'><img src='plot_mshapes-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>class</span>(<span class='no'>leaves</span>)</div><div class='output co'>#&gt; [1] "list"</div><div class='input'><span class='no'>leaves</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_MSHAPES</span>()</div><div class='img'><img src='plot_MSHAPES-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># or</span>
 <span class='no'>shapes</span> <span class='kw'>%&gt;%</span>
 <span class='co'># subset and degrade</span>
 <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>12</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>60</span>) <span class='kw'>%$%</span>  <span class='co'># grab the coo</span>
-<span class='no'>coo</span> <span class='kw'>%&gt;%</span>
-<span class='fu'>plot_mshapes</span>()</div><div class='img'><img src='plot_mshapes-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
+    <span class='no'>coo</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>plot_MSHAPES</span>()</div><div class='img'><img src='plot_MSHAPES-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -167,5 +194,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

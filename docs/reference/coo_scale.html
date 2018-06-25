@@ -18,13 +18,31 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Scales coordinates — coo_scale" />
+
+<meta property="og:description" content="coo_scale scales the coordinates by a 'scale' factor. If not provided,
+assumed to be the centroid size. It involves three steps: centering from current position,
+dividing coordinates by 'scale', pushing back to the original position.
+coo_scalex applies a scaling (or shrinking) parallel to the x-axis,
+coo_scaley does the same for the y axis." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +65,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +92,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +107,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,12 +115,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Scales coordinates</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/coo-utilities.R'><code>R/coo-utilities.R</code></a></small>
+    <div class="hidden name"><code>coo_scale.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>coo_scale</code> scales the coordinates by a 'scale' factor. If not provided,
 assumed to be the centroid size. It involves three steps: centering from current position,
@@ -108,6 +131,7 @@ dividing coordinates by 'scale', pushing back to the original position.
 <code>coo_scalex</code> applies a scaling (or shrinking) parallel to the x-axis,
 <code>coo_scaley</code> does the same for the y axis.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>coo_scale</span>(<span class='no'>coo</span>, <span class='no'>scale</span>)
 
@@ -133,7 +157,7 @@ dividing coordinates by 'scale', pushing back to the original position.
 <span class='co'># S3 method for Coo</span>
 <span class='fu'>coo_scaley</span>(<span class='no'>coo</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -153,7 +177,7 @@ by default, the centroid size for <code>coo_scale</code>; 1 for <code>scalex</co
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other coo_ utilities: <code><a href='coo_aligncalliper.html'>coo_aligncalliper</a></code>,
+    <div class='dont-index'><p>Other coo_ utilities: <code><a href='coo_aligncalliper.html'>coo_aligncalliper</a></code>,
   <code><a href='coo_alignminradius.html'>coo_alignminradius</a></code>,
   <code><a href='coo_alignxax.html'>coo_alignxax</a></code>, <code><a href='coo_align.html'>coo_align</a></code>,
   <code><a href='coo_baseline.html'>coo_baseline</a></code>, <code><a href='coo_bookstein.html'>coo_bookstein</a></code>,
@@ -178,18 +202,18 @@ by default, the centroid size for <code>coo_scale</code>; 1 for <code>scalex</co
   <code><a href='coo_smoothcurve.html'>coo_smoothcurve</a></code>, <code><a href='coo_smooth.html'>coo_smooth</a></code>,
   <code>coo_template</code>, <code><a href='coo_trans.html'>coo_trans</a></code>,
   <code><a href='coo_trimbottom.html'>coo_trimbottom</a></code>, <code><a href='coo_trimtop.html'>coo_trimtop</a></code>,
-  <code><a href='coo_trim.html'>coo_trim</a></code>, <code><a href='coo_up.html'>coo_up</a></code>,
-  <code><a href='is_equallyspacedradii.html'>is_equallyspacedradii</a></code></p>
-<p>Other scaling functions: <code>coo_template</code></p>
+  <code><a href='coo_trim.html'>coo_trim</a></code>, <code><a href='coo_untiltx.html'>coo_untiltx</a></code>,
+  <code><a href='coo_up.html'>coo_up</a></code>, <code><a href='is_equallyspacedradii.html'>is_equallyspacedradii</a></code></p>
+<p>Other scaling functions: <code>coo_template</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># on a single shape</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_scale</span>
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'>coo_scalex</span>(<span class='no'>b</span>, <span class='fl'>1.5</span>), <span class='kw'>bor</span><span class='kw'>=</span><span class='st'>"blue"</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'>coo_scaley</span>(<span class='no'>b</span>, <span class='fl'>0.5</span>), <span class='kw'>bor</span><span class='kw'>=</span><span class='st'>"red"</span>)</div><div class='img'><img src='coo_scale-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'>coo_scalex</span>(<span class='no'>b</span>, <span class='fl'>1.5</span>), <span class='kw'>bor</span><span class='kw'>=</span><span class='st'>"blue"</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'>coo_scaley</span>(<span class='no'>b</span>, <span class='fl'>0.5</span>), <span class='kw'>bor</span><span class='kw'>=</span><span class='st'>"red"</span>)</div><div class='img'><img src='coo_scale-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># this also works on Coo objects:</span>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='no'>bot</span>, <span class='fl'>5</span>) <span class='co'># for speed sake</span>
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>b</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_scale-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>b</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_scale</span> <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_scale-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>b</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_scaley</span>(<span class='fl'>0.5</span>) <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_scale-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>#equivalent to:
+<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>b</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_scale-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>b</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_scale</span> <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_scale-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>b</span> <span class='kw'>%&gt;%</span> <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_scaley</span>(<span class='fl'>0.5</span>) <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_scale-4.png' alt='' width='700' height='433' /></div><div class='input'>#equivalent to:
 #b %>% coo_center %>% coo_scalex(2) %>% stack
 </div></pre>
   </div>
@@ -220,5 +244,8 @@ by default, the centroid size for <code>coo_scale</code>; 1 for <code>scalex</co
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

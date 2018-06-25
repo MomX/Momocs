@@ -18,13 +18,30 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Adds new landmarks on Out and Opn objects — add_ldk" />
+
+<meta property="og:description" content="Helps to add new landmarks on a Coo object on top of existing ones.
+The number of landmarks must be specified and rows indices that
+correspond to the nearest points clicked on every outlines are
+stored in the $ldk slot of the Coo object." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +64,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +91,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +106,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,22 +114,26 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Adds new landmarks on Out and Opn objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/coo-ldk-utilities.R'><code>R/coo-ldk-utilities.R</code></a></small>
+    <div class="hidden name"><code>add_ldk.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Helps to add new landmarks on a <code>Coo</code> object on top of existing ones.
 The number of landmarks must be specified and rows indices that
 correspond to the nearest points clicked on every outlines are
 stored in the <code>$ldk</code> slot of the <code>Coo</code> object.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>add_ldk</span>(<span class='no'>Coo</span>, <span class='no'>nb.ldk</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -134,10 +157,10 @@ then this function is equivalent to <a href='def_ldk.html'>def_ldk</a>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other ldk/slidings methods: <code><a href='def_ldk.html'>def_ldk</a></code>,
+    <div class='dont-index'><p>Other ldk/slidings methods: <code><a href='def_ldk.html'>def_ldk</a></code>,
   <code><a href='def_slidings.html'>def_slidings</a></code>, <code><a href='get_ldk.html'>get_ldk</a></code>,
   <code><a href='get_slidings.html'>get_slidings</a></code>, <code><a href='rearrange_ldk.html'>rearrange_ldk</a></code>,
-  <code><a href='slidings_scheme.html'>slidings_scheme</a></code></p>
+  <code><a href='slidings_scheme.html'>slidings_scheme</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -180,5 +203,8 @@ then this function is equivalent to <a href='def_ldk.html'>def_ldk</a>.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

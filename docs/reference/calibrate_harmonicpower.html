@@ -18,13 +18,34 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Quantitative calibration, through harmonic power, for Out and Opn objects — calibrate_harmonicpower" />
+
+<meta property="og:description" content="Estimates the number of harmonics required for the four Fourier methods
+implemented in Momocs: elliptical Fourier analysis
+(see efourier), radii variation analysis (see rfourier)
+and tangent angle analysis (see tfourier) and
+discrete Fourier transform (see dfourier).
+It returns and can plot cumulated harmonic power whether dropping
+the first harmonic or not, and based and the maximum possible number
+of harmonics on the Coo object." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +68,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +95,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +110,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,12 +118,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Quantitative calibration, through harmonic power, for Out and Opn objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/core-calibrate.R'><code>R/core-calibrate.R</code></a></small>
+    <div class="hidden name"><code>calibrate_harmonicpower.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Estimates the number of harmonics required for the four Fourier methods
 implemented in Momocs: elliptical Fourier analysis
@@ -111,6 +137,7 @@ It returns and can plot cumulated harmonic power whether dropping
 the first harmonic or not, and based and the maximum possible number
 of harmonics on the <code>Coo</code> object.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>calibrate_harmonicpower</span>()
 
@@ -129,7 +156,7 @@ of harmonics on the <code>Coo</code> object.</p>
 <span class='fu'>calibrate_harmonicpower_dfourier</span>(<span class='no'>x</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>x</span>), <span class='no'>nb.h</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>90</span>, <span class='fl'>95</span>, <span class='fl'>99</span>, <span class='fl'>99.9</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -179,14 +206,14 @@ and as follows for radii variation and tangent angle:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other calibration: <code><a href='calibrate_deviations.html'>calibrate_deviations</a></code>,
+    <div class='dont-index'><p>Other calibration: <code><a href='calibrate_deviations.html'>calibrate_deviations</a></code>,
   <code><a href='calibrate_r2.html'>calibrate_r2</a></code>,
-  <code><a href='calibrate_reconstructions.html'>calibrate_reconstructions</a></code></p>
+  <code><a href='calibrate_reconstructions.html'>calibrate_reconstructions</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>b5</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>)
-<span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_efourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; 
+<span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_efourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $q
 #&gt;                   h1       h2       h3       h4       h5       h6       h7
 #&gt; brahma      12.04060 75.93567 84.25707 96.30510 97.54758 98.98871 99.14762
@@ -204,7 +231,7 @@ and as follows for radii variation and tangent angle:
 #&gt; $minh
 #&gt;   90%   95%   99% 99.9% 
 #&gt;     5     5     8    11 
-#&gt; </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_rfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-3.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_rfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $q
 #&gt;                   h1       h2       h3       h4       h5       h6       h7
 #&gt; brahma      18.78231 33.31995 46.22113 58.10127 67.82970 75.05028 80.97400
@@ -222,7 +249,7 @@ and as follows for radii variation and tangent angle:
 #&gt; $minh
 #&gt;   90%   95%   99% 99.9% 
 #&gt;    11    11    12    12 
-#&gt; </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_tfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-4.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-5.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_tfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $q
 #&gt;                   h1       h2       h3       h4       h5       h6       h7
 #&gt; brahma      59.14067 61.93044 70.84946 73.04960 78.52305 82.00362 83.54236
@@ -240,7 +267,7 @@ and as follows for radii variation and tangent angle:
 #&gt; $minh
 #&gt;   90%   95%   99% 99.9% 
 #&gt;     9     9    11    12 
-#&gt; </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_sfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-6.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-7.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_sfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $q
 #&gt;                   h1       h2       h3       h4       h5       h6       h7
 #&gt; brahma      99.38619 99.44134 99.59446 99.83182 99.92895 99.93156 99.94529
@@ -261,7 +288,7 @@ and as follows for radii variation and tangent angle:
 #&gt; </div><div class='input'>
 <span class='co'># on Opn</span>
 <span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>calibrate_harmonicpower_dfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-8.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-9.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; 
+    <span class='fu'>calibrate_harmonicpower_dfourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)</div><div class='img'><img src='calibrate_harmonicpower-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $gg</div><div class='img'><img src='calibrate_harmonicpower-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $q
 #&gt;                         h1       h2       h3       h4       h5       h6
 #&gt; 0001-cAglan_O10VD 82.53723 88.47281 96.36372 96.81316 98.24342 98.36453
@@ -317,5 +344,8 @@ and as follows for radii variation and tangent angle:
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -18,13 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Calculate the angle formed by three (x; y) coordinates — coo_angle_edge1" />
+
+<meta property="og:description" content="Returns the angle (in radians) defined by a triplet of points
+either signed ('atan2') or not ('acos')." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +89,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +104,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,22 +112,26 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculate the angle formed by three (x; y) coordinates</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/coo-shapedescriptors.R'><code>R/coo-shapedescriptors.R</code></a></small>
+    <div class="hidden name"><code>coo_angle_edge1.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Returns the angle (in radians) defined by a triplet of points
 either signed ('atan2') or not ('acos').</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>coo_angle_edge1</span>(<span class='no'>coo</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"atan2"</span>, <span class='st'>"acos"</span>)[<span class='fl'>1</span>])
 
 <span class='fu'>coo_theta3</span>(<span class='no'>coo</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"atan2"</span>, <span class='st'>"acos"</span>)[<span class='fl'>1</span>])</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -134,7 +155,7 @@ in future releases.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other coo_ descriptors: <code><a href='coo_angle_edges.html'>coo_angle_edges</a></code>,
+    <div class='dont-index'><p>Other coo_ descriptors: <code><a href='coo_angle_edges.html'>coo_angle_edges</a></code>,
   <code><a href='coo_angle_tangent.html'>coo_angle_tangent</a></code>, <code><a href='coo_area.html'>coo_area</a></code>,
   <code><a href='coo_boundingbox.html'>coo_boundingbox</a></code>, <code>coo_chull</code>,
   <code>coo_circularity</code>,
@@ -143,13 +164,14 @@ in future releases.</p>
   <code><a href='coo_elongation.html'>coo_elongation</a></code>, <code><a href='coo_length.html'>coo_length</a></code>,
   <code><a href='coo_lw.html'>coo_lw</a></code>, <code><a href='coo_rectangularity.html'>coo_rectangularity</a></code>,
   <code><a href='coo_rectilinearity.html'>coo_rectilinearity</a></code>,
-  <code><a href='coo_solidity.html'>coo_solidity</a></code>, <code><a href='coo_width.html'>coo_width</a></code></p>
+  <code><a href='coo_solidity.html'>coo_solidity</a></code>, <code><a href='coo_tac.html'>coo_tac</a></code>,
+  <code><a href='coo_width.html'>coo_width</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>64</span>)
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>b</span>[<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>14</span>, <span class='fl'>24</span>), ]
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>)</div><div class='img'><img src='coo_angle_edge1-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='coo_angle_edges.html'>coo_angle_edges</a></span>(<span class='no'>b</span>)</div><div class='output co'>#&gt; [1] -0.5930708 -1.2338616 -1.3146603</div><div class='input'><span class='fu'><a href='coo_angle_edges.html'>coo_angle_edges</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>])</div><div class='output co'>#&gt;   [1] -3.062114  2.999696 -2.999696  3.141593 -3.086094  3.132419  3.048323
+<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>)</div><div class='img'><img src='coo_angle_edge1-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='coo_angle_edges.html'>coo_angle_edges</a></span>(<span class='no'>b</span>)</div><div class='output co'>#&gt; [1] -0.5930708 -1.2338616 -1.3146603</div><div class='input'><span class='fu'><a href='coo_angle_edges.html'>coo_angle_edges</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>])</div><div class='output co'>#&gt;   [1] -3.062114  2.999696 -2.999696  3.141593 -3.086094  3.132419  3.048323
 #&gt;   [8] -3.094647 -3.103636  3.056691  3.141593  3.137301  3.050933 -3.141593
 #&gt;  [15] -3.141593  3.046641  3.141593  3.056691  3.133225  3.141593  3.132419
 #&gt;  [22] -3.086094 -3.135223 -3.101017 -3.046641 -3.141593 -2.953371 -3.063562
@@ -199,5 +221,8 @@ in future releases.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

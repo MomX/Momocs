@@ -18,13 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Methods for PCA eigen values — scree" />
+
+<meta property="og:description" content="A set of functions around PCA/LDA eigen/trace. scree calculates their proportion and cumulated proportion;
+scree_min returns the minimal number of axis to use to retain a given proportion; scree_plot displays a screeplot." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +89,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +104,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,16 +112,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Methods for PCA eigen values</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/gr-PCA.R'><code>R/gr-PCA.R</code></a></small>
+    <div class="hidden name"><code>scree.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>A set of functions around PCA/LDA eigen/trace. <code>scree</code> calculates their proportion and cumulated proportion;
 <code>scree_min</code> returns the minimal number of axis to use to retain a given proportion; <code>scree_plot</code> displays a screeplot.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>scree</span>(<span class='no'>x</span>, <span class='no'>nax</span>)
 
@@ -118,7 +139,7 @@
 
 <span class='fu'>scree_plot</span>(<span class='no'>x</span>, <span class='kw'>nax</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -155,7 +176,7 @@
 #&gt;  8 8        0.00190  0.994
 #&gt;  9 9        0.00159  0.996
 #&gt; 10 10       0.00122  0.997</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>0.99</span>)</div><div class='output co'>#&gt; [1] 7</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 10</div><div class='input'>
-<span class='fu'>scree_plot</span>(<span class='no'>bp</span>)</div><div class='img'><img src='scree-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>scree_plot</span>(<span class='no'>bp</span>, <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='img'><img src='scree-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>scree_plot</span>(<span class='no'>bp</span>)</div><div class='img'><img src='scree-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>scree_plot</span>(<span class='no'>bp</span>, <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='img'><img src='scree-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># on LDA, it uses svd</span>
 <span class='no'>bl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>)), <span class='st'>"var"</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to 5</span></div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bl</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 3
 #&gt;   axis  proportion cumsum
@@ -190,5 +211,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

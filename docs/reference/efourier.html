@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="Elliptical Fourier transform (and its normalization) — efourier" />
+
+<meta property="og:description" content="efourier computes Elliptical Fourier Analysis (or Transforms or EFT)
+from a matrix (or a list) of (x; y) coordinates. efourier_norm normalizes Fourier coefficients.
+Read Details carefully." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Momocs</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">Momocs</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -70,13 +90,10 @@
     <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
     </li>
-    <li>
-      <a href="../articles/Momocs_speed_dating.html">Momocs speed dating</a>
-    </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -88,6 +105,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,17 +113,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Elliptical Fourier transform (and its normalization)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/core-out-efourier.R'><code>R/core-out-efourier.R</code></a></small>
+    <div class="hidden name"><code>efourier.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>efourier</code> computes Elliptical Fourier Analysis (or Transforms or EFT)
 from a matrix (or a list) of (x; y) coordinates. <code>efourier_norm</code> normalizes Fourier coefficients.
 Read Details carefully.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -121,7 +143,7 @@ Read Details carefully.</p>
 
 <span class='fu'>efourier_norm</span>(<span class='no'>ef</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -215,8 +237,8 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other efourier: <code><a href='efourier_i.html'>efourier_i</a></code>,
-  <code><a href='efourier_shape.html'>efourier_shape</a></code></p>
+    <div class='dont-index'><p>Other efourier: <code><a href='efourier_i.html'>efourier_i</a></code>,
+  <code><a href='efourier_shape.html'>efourier_shape</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -248,7 +270,7 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 #&gt; $co
 #&gt; [1] 1080.921
 #&gt; </div><div class='input'><span class='no'>efi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier_i.html'>efourier_i</a></span>(<span class='no'>ef</span>)
-<span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>efi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>)</div><div class='img'><img src='efourier-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>efi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>)</div><div class='img'><img src='efourier-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># on Out</span>
 <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------
@@ -295,5 +317,8 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
