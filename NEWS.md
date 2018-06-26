@@ -1,4 +1,4 @@
-# Momocs 1.2.9.1 (GitHub)
+# Momocs 1.2.9+ (GitHub)
 * new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend. Now depends `cluster`.
 * new multivariate method: `NMDS` on top of `vegan::metaMDS`; use `plot_NMDS` to plot it and `vegan::stressplot` for a Shepard plot. Now depends `vegan`.
 * new multivariate method: `MDS` on top of `cmdscale`; use `plot_MDS` to plot it.
