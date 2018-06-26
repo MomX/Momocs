@@ -538,7 +538,7 @@ coo_rotatecenter.Coo <- function(coo, theta, center = c(0, 0)) {
 #' prebot <- bot %>% coo_center %>% coo_scale %>%
 #'    coo_align %>% coo_slidedirection("right")
 #' prebot %>% stack # some dephasing remains
-#' prebot %>% coo_untiltx() %>% stack # much better
+#' prebot %>% coo_slidedirection("right") %>% coo_untiltx() %>% stack # much better
 #' # _here_ there is no change but the second, untilted, is correct
 #' prebot %>% efourier(8, norm=FALSE) %>% PCA %>% plot_PCA(~type)
 #' prebot %>% coo_untiltx %>% efourier(8, norm=FALSE) %>% PCA %>% plot_PCA(~type)
