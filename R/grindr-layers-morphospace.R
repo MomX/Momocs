@@ -145,7 +145,7 @@ layer_morphospace_PCA <- function(x,
                                  baseline2 = x$baseline2[1:2 + (i-1)*2])
     # landmarks
     if (mi == "procrustes")
-      shp <- PCA2shp_procrustes(pos = pos, rot = rot[ids, ])
+      shp <- PCA2shp_procrustes(pos = pos, rot = rot[ids, ], mshape=mshape[ids])
 
     # reconstructed shapes are now waiting in shp
     # for templating, translating and friends
