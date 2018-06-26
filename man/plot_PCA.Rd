@@ -95,19 +95,19 @@ x \%>\%
 op \%>\% my_plot(~var, axes=c(1, 3)) \%>\%
     layer_title("hi there!")
 
-# grindr allows (almost nice) tricks like highligting:
+# grindr allows (almost nice) tricks like highlighting:
 
-bp \%>\% .layerize_PCA(~fake) \%>\%
-  layer_frame \%>\% layer_axes() \%>\%
-  layer_morphospace_PCA() -> x
+# bp \%>\% .layerize_PCA(~fake) \%>\%
+#   layer_frame \%>\% layer_axes() \%>\%
+#   layer_morphospace_PCA() -> x
 
-highlight <- function(x, ..., col_F="#CCCCCC", col_T="#FC8D62FF"){
- args <- list(...)
- x$colors_groups <- c(col_F, col_T)
- x$colors_rows <- c(col_F, col_T)[(x$f \%in\% args)+1]
- x
-}
-x \%>\% highlight("a", "b") \%>\% layer_points()
+# highlight <- function(x, ..., col_F="#CCCCCC", col_T="#FC8D62FF"){
+#  args <- list(...)
+#  x$colors_groups <- c(col_F, col_T)
+#  x$colors_rows <- c(col_F, col_T)[(x$f \%in\% args)+1]
+#  x
+#  }
+# x \%>\% highlight("a", "b") \%>\% layer_points()
 
 # You get the idea.
 }
