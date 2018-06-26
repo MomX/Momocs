@@ -99,7 +99,8 @@
        object="PCA", axes=axes, palette=palette,
        method=x$method, mshape=x$mshape, cuts=x$cuts,
        eig=x$eig, sdev=x$sdev, rotation=x$rotation[, axes],
-       baseline1=x$baseline1, baseline2=x$baseline2)
+       baseline1=x$baseline1, baseline2=x$baseline2,
+       links=x$links)
 }
 
 
@@ -141,7 +142,8 @@
        eig=x$eig, sdev=x$mod$svd,
        rotation=x$LDs[, axes, drop=FALSE],
        LDs=x$LDs,
-       baseline1=x$baseline1, baseline2=x$baseline2)
+       baseline1=x$baseline1, baseline2=x$baseline2,
+       links=x$links)
 }
 
 .layerize_NMDS <- function(x, f=NULL, axes=c(1, 2), palette=pal_qual){

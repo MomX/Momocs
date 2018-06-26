@@ -168,8 +168,13 @@ layer_morphospace_PCA <- function(x,
     SHP[[i]] <- shp
 
     # finally draw the morphospace
-    if (draw)
+    if (draw){
       lapply(shp, draw_method, col=col)
+# special case when links
+      if (is_links(x)){
+        lapply(shp, function(.x) draw_links(.x, links=x$links, col=col))
+      }
+    }
     # if (!is.null(PCA$links)) lapply(shp, function(x) ldk_links(x, PCA$links, col="grey90"))
   }
   # propagate
