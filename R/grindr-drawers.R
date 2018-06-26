@@ -368,6 +368,11 @@ draw_ticks <- function(coo, col="#333333", cex=3/4, lwd=3/4, ...){
 #' @export
 #' @rdname drawers
 draw_labels <- function(coo, labels=1:nrow(coo), cex=1/2, d=1/20, ...){
+    # neater par
+  # here ensure that even centrifugated labels got plotted
+  old <- par(mar=rep(1/8, 4))
+  on.exit(par(old))
+
   # this one does not support f and,
   # if a Coo is provided turn it into the mean shape
   # Coo case
