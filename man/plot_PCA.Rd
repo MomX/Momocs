@@ -72,7 +72,7 @@ plot_PCA(bp, ~fake)
 op <- olea \%>\%
 mutate(s=coo_area(.)) \%>\%
 filter(var != "Cypre") \%>\%
-chop(~view) \%>\% lapply(opoly, 5, nb.pts=90) \%>\%
+chop(~view) \%>\% opoly(5, nb.pts=90) \%>\%
 combine \%>\% PCA
 op$fac$s \%<>\% as.character() \%>\% as.numeric()
 
@@ -107,7 +107,7 @@ highlight <- function(x, ..., col_F="#CCCCCC", col_T="#FC8D62FF"){
  x$colors_rows <- c(col_F, col_T)[(x$f \%in\% args)+1]
  x
 }
-x \%>\% highlight("a", "b") \%>\% layer_points() \%>\% layer_chull()
+x \%>\% highlight("a", "b") \%>\% layer_points()
 
 # You get the idea.
 }
