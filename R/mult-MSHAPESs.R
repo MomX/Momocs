@@ -90,7 +90,8 @@ MSHAPES.OutCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
         return(efourier_i(xf, nb.pts = nb.pts))
     }
 
-    f <- fac_dispatcher(x, fac)
+    f <- fac_dispatcher(x, fac) %>% factor
+
     fl <- levels(f)
     shp <- list()
     rows <- numeric()
@@ -123,7 +124,7 @@ MSHAPES.OpnCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
     #todo: check if method is all identical
         	p <- pmatch(tolower(OpnCoe$method[1]), c("opoly", "npoly", "dfourier"))
     	if (is.na(p)) {
-      		warning("unvalid method. efourier is used.\n")
+      		stop("unvalid method\n")
     	} else {
       method_i <- switch(p, opoly_i, npoly_i, dfourier_i) # dfourier_i
     }
@@ -136,7 +137,7 @@ MSHAPES.OpnCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
         return(method_i(mod.mshape))
     }
 
-    f <- fac_dispatcher(x, fac)
+    f <- fac_dispatcher(x, fac) %>% factor
 
     fl <- levels(f)
     shp <- list()
@@ -174,7 +175,7 @@ MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, ...) {
         return(MSHAPES(LdkCoe$coo))
     }
 
-    f <- fac_dispatcher(x, fac)
+    f <- fac_dispatcher(x, fac) %>% factor
 
     fl <- levels(f)
     shp <- list()
