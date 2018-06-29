@@ -94,6 +94,7 @@ reference:
   - select
   - rm_harm
   - rm_uncomplete
+  - rm_missing
   - rw_fac
   - sample_frac
   - sample_n
