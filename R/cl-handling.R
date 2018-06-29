@@ -1047,6 +1047,35 @@ rm_uncomplete <- function(x, id, by){
   }
 }
 
+# rm ------------
+#' Remove shapes with missing data in fac
+#'
+#' Any row (or within a given column if `by` is specified) containing `NA` in `$fac` and the corresponding shapes in `$coo`, lines in `$coe` or other objects
+#' will also be dropped.
+#' @param x the object on which to NA
+#' @param by which column of the $fac should objects have complete views
+#' @family handling functions
+#' @examples
+#' bot$fac$type[3] <- NA
+#' bot$fac$fake[9] <- NA
+#'
+#' bot %>% length()
+#' bot %>% rm_missing() %>% length
+#' bot %>% rm_missing("fake") %>% length()
+#' @export
+rm_missing <- function(x, by){
+  UseMethod("rm_missing")
+}
+#' @export
+rm_missing.default <- function(x, by){
+  .check(is_fac(x),
+         "no fac to filter with")
+  if (missing(by))
+    filter(x, !apply(is.na(x$fac), 1, any))
+  else
+    filter(x, !is.na(x$fac[, by]))
+}
+
 #' Removes harmonics from Coe objects
 #'
 #' Useful to drop harmonics on Coe objects. Should only work for

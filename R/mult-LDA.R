@@ -188,7 +188,6 @@ LDA.Coe <- function(x, fac, retain, ...) {
   if (any(is.na(f)))
     stop("some NAs in the factor provided; LDA does not know how to handle them")
 
-
   res <- suppressWarnings(
     LDA(coes, f)
   )
