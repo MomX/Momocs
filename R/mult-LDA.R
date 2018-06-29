@@ -83,6 +83,10 @@ LDA.default <- function(x, fac, retain, ...) {
   # some checks
   if (!is.matrix(x))
     x <- as.matrix(x)
+
+  if (any(is.na(x)))
+    stop("some NAs; LDA does not know how to handle them")
+
   if (missing(fac))
     stop("no fac provided")
   # dispatch fac
@@ -176,8 +180,17 @@ LDA.Coe <- function(x, fac, retain, ...) {
   # and replace by messages
   # and that if something bad happens,
   # MASS:lda would stop anyway
+  coes <- x$coe
+  f <- fac_dispatcher(x, fac)
+
+  if (any(is.na(coes)))
+    stop("some NAs in the coefficients provided; LDA does not know how to handle them")
+  if (any(is.na(f)))
+    stop("some NAs in the factor provided; LDA does not know how to handle them")
+
+
   res <- suppressWarnings(
-    LDA(x$coe, fac_dispatcher(x, fac))
+    LDA(coes, f)
   )
   if (!is.null(x$method))
     res$method <- x$method
