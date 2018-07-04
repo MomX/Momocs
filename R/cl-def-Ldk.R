@@ -38,7 +38,7 @@ Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_fr
   if (is_shp(x))
     Ldk(list(x))
   else
-    message("an Ldk object can only be build from a shape, a list, an array or a Coo object")
+    message("an Ldk object can only be built from a shape, a list, an array or a Coo object")
 
 }
 
@@ -51,7 +51,7 @@ Ldk.list <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame
   Ldk <- structure(list(coo = coo, links = links, slidings = slidings, fac = fac), class = c("Ldk",
     "Coo"))
   if (!is.null(Ldk$fac))
-    Ldk$fac <- as.data.frame(Ldk$fac, stringsAsFactors = FALSE)
+    Ldk$fac <- as.data.frame(Ldk$fac, stringsAsFactors = FALSE) %>% dplyr::as_data_frame()
   class(Ldk) <- c("Ldk", "Coo")
   if (is.null(names(Ldk)))
     names(Ldk) <- paste0("shp", 1:length(Ldk))
