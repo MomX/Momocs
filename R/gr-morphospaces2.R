@@ -137,6 +137,10 @@ morphospace2PCA <- function(PCA, xax, yax, pos,
                                 amp.shp = amp.shp)}
     ### Then...
     # we template and center shapes
+    # to fix Tom S. bug (for procrustes)
+    if (nrow(shp[[1]])<pts.shp)
+      pts.shp <- nrow(shp[[1]])
+
     shp <- lapply(shp,
                   function(x) x %>%
                     coo_template(size = size.shp.final[i]) %>%
