@@ -816,6 +816,9 @@ layer_stars <- function(x, alpha=0.5, ...) {
   # loop along levels and draw
   for (i in seq_along(levels(f))) {
     xy_i <- x$xy[f == levels(f)[i],, drop=FALSE]
+    # to prevent levels with 0
+    if (nrow(xy_i) < 1)
+      next()
     c_i <- coo_centpos(xy_i)
     for (j in 1:nrow(xy_i)) {
       segments(c_i[1], c_i[2],
