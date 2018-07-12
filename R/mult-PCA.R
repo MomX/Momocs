@@ -291,6 +291,7 @@ rePCA.PCA <- function(PCA, Coe){
   # we prepare a new PCA object
   PCA2 <- PCA
   PCA2$x <- matrix(NA, nrow(coe), ncol(rot), dimnames = list(rownames(coe), colnames(rot)))
+  PCA2$fac <- Coe$fac
   # we recenter
   coe <- apply(coe, 2, function(x) x - mean(x))
   # learn matrix calculus bitch
