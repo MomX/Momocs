@@ -9,11 +9,10 @@
 #' we want a apply a trasnformation grid.
 #'
 #' @param grid0 a matrix of coordinates on which to calculate deformations
-#' @param fr the reference \eqn{(x; y)} coordinates
-#' @param to the target \eqn{(x; y)} coordinates
-#' @param new the target coordinates (again)
-#' @return a matrix of \code{(x; y)} coordinates with TPS-interpolated
-#' deformations
+#' @param fr the reference shape
+#' @param to the target shape
+#' @param new the shape on which to apply the `shp1->shp2` calibrated tps trasnformation
+#' @return a shape.
 #' @rdname tps2d
 #' @family thin plate splines
 #' @export
