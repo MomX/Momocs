@@ -44,7 +44,7 @@ The last released version can be installed from [CRAN](https://CRAN.R-project.or
 install.packages("Momocs")
 ```
 
-But I recommend using the development version from GitHub with:
+But I recommend using (and only support) the development version from GitHub with:
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("MomX/Momocs")
@@ -130,7 +130,6 @@ devtools::load_all()
 
 
 ```{r example, message=FALSE}
-
 hearts %T>%                    # A toy dataset
   stack() %>%                  # Take a family picture of raw outlines
   fgProcrustes() %>%          # Full generalized Procrustes alignment
@@ -141,5 +140,4 @@ hearts %T>%                    # A toy dataset
   plot_PCA(~aut) %>%           # A PC1:2 plot
   LDA(~aut) %>%                # Linear Discriminant Anlysis
   plot_CV()                    # And the confusion matrix after leave-one-out
-
 ```
