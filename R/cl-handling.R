@@ -223,8 +223,7 @@ select.default <- function(.data, ...){
 #' @export
 select.Coo <- function(.data, ...){
   #.data %<>% verify()
-  .data$fac <- select(.data$fac, ...)
-  .data$fac %<>% data.frame()
+  .data$fac <- select(.data$fac, ...) %>% dplyr::as_data_frame()
   .data
 }
 
@@ -261,8 +260,7 @@ rename.default <- function(.data, ...){
 #' @export
 rename.Coo <- function(.data, ...){
   #.data %<>% verify()
-  .data$fac <- rename(.data$fac, ...)
-  .data$fac %<>% data.frame()
+  .data$fac <- rename(.data$fac, ...) %>% dplyr::as_data_frame()
   .data
 }
 
@@ -298,8 +296,7 @@ mutate.default <- function(.data, ...){
 #' @export
 mutate.Coo <- function(.data, ...){
   #.data %<>% verify()
-  .data$fac <- mutate(.data$fac, ...)
-  .data$fac %<>% dplyr::as_data_frame()
+  .data$fac <- mutate(.data$fac, ...) %>% dplyr::as_data_frame()
   .data
 }
 
@@ -779,7 +776,7 @@ combine.OutCoe <- function(...) {
     stop("objects to combine must have the same number of items")
   # Out <- Out(do.call( c, lapply( args, c )))
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
-  facS <- args[[1]]$fac
+  facS <- args[[1]]$fac %>% dplyr::as_data_frame()
   methodS <- do.call(c, lapply(args, function(x) x$method))
   normS <- do.call(c, lapply(args, function(x) x$norm))
   OutCoe <- OutCoe(coe = coeS, fac = facS, method = methodS, norm = normS)
@@ -807,7 +804,7 @@ combine.OpnCoe <- function(...) {
   if (length(unique(sapply(args, length))) != 1)
     stop("objects to combine must have the same number of items")
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
-  facS <- args[[1]]$fac
+  facS <- args[[1]]$fac %>% dplyr::as_data_frame()
   methodS <- do.call(c, lapply(args, function(x) x$method))
   baseline1S <- do.call(c, lapply(args, function(x) x$baseline1))
   baseline2S <- do.call(c, lapply(args, function(x) x$baseline2))

@@ -20,6 +20,7 @@
 * `verify` replaces `validate` to avoid conflict with `shiny::validate` (for Momecs)
 * `subsetize` now exported (again)
 * `def_ldk` gains a `close` and `points` argument
+* no more printing of Coo errors that was due to some forgotten `data.frame` rather than `data_frame`
 * fixed minor bugs (see GitHub history of commits)
 
 # Momocs 1.2.9
