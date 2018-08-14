@@ -506,7 +506,7 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
 #' \dontrun{
 #' library(ggplot2)
 #' gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
-#' gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
+#' gg$gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")
 #' }
 #' @rdname PCcontrib
 #' @export
