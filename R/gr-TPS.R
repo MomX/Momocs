@@ -40,6 +40,8 @@ tps2d <- function(grid0, fr, to) {
     to <- coo_unclose(to)
   if (!is.matrix(grid0))
     grid0 <- as.matrix(grid0)
+  .check(nrow(fr)==nrow(to),
+         "shapes must have the same number of points")
   p <- nrow(fr)
   q <- nrow(grid0)
   P <- matrix(NA, p, p)
