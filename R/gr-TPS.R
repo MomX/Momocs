@@ -15,6 +15,23 @@
 #' @return a shape.
 #' @rdname tps2d
 #' @family thin plate splines
+#' @examples
+# some toy data
+#'
+#'shapes <- shapes %>%
+#'  coo_scale() %>% coo_center() %>%
+#'  coo_slidedirection("up") %>%
+#'  coo_sample(64)
+#'
+#'leaf1 <- shapes[14]
+#'leaf2 <- shapes[15]
+#'
+#'# tps grid on the two leafs2
+#'tps_grid(leaf1, leaf2)
+#'# apply the (leaf1 -> leaf2) tps trasnformation  onto leaf1
+#'# (that thus get closer to leaf2)
+#'tps_apply(leaf1, leaf2, leaf1) %>% coo_draw(bor="purple")
+#'
 #' @export
 tps2d <- function(grid0, fr, to) {
   if (coo_is_closed(fr))
