@@ -72,6 +72,13 @@
         palette <- pal_qual
     }
 
+    # NA handling
+    nas <- which(is.na(f))
+    if (length(nas)>0){
+      xy <- xy[-nas, ]
+      f  <- f[-nas]
+      message("some NAs were dropped")
+    }
 
     if (is.numeric(f)){
       colors_groups <- NA
