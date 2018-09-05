@@ -641,10 +641,12 @@ chop.Coo <- function(.data, fac){
 #' @export
 chop.Coe <- function(.data, fac){
   Coe <- .data
-  # hideous but works
-  e <- substitute(fac)
-  f <- eval(e, Coe$fac, parent.frame())
+  if (!is.factor(fac))
+    f <- fac_dispatcher(.data, fac)
+  else
+    f <- fac
   fl <- levels(f)
+
   res <- list()
   for (i in fl) {
     Coe2 <- Coe
@@ -657,7 +659,8 @@ chop.Coe <- function(.data, fac){
     }
     res[[i]] <- Coe2
   }
-  return(res)}
+  return(res)
+  }
 
 
 # combine --------------------------------------
