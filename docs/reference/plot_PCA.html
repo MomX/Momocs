@@ -64,7 +64,7 @@ using the layers. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
       </span>
     </div>
 
@@ -239,7 +239,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span> <span class='kw'>%&gt;%</span>
 <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>s</span><span class='kw'>=</span><span class='fu'><a href='coo_area.html'>coo_area</a></span>(<span class='no'>.</span>)) <span class='kw'>%&gt;%</span>
 <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>var</span> <span class='kw'>!=</span> <span class='st'>"Cypre"</span>) <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='chop.html'>chop</a></span>(~<span class='no'>view</span>) <span class='kw'>%&gt;%</span> <span class='fu'>lapply</span>(<span class='no'>opoly</span>, <span class='fl'>5</span>, <span class='kw'>nb.pts</span><span class='kw'>=</span><span class='fl'>90</span>) <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='chop.html'>chop</a></span>(~<span class='no'>view</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='fl'>5</span>, <span class='kw'>nb.pts</span><span class='kw'>=</span><span class='fl'>90</span>) <span class='kw'>%&gt;%</span>
 <span class='no'>combine</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span>
 <span class='no'>op</span>$<span class='no'>fac</span>$<span class='no'>s</span> <span class='kw'>%&lt;&gt;%</span> <span class='fu'>as.character</span>() <span class='kw'>%&gt;%</span> <span class='fu'>as.numeric</span>()
 
@@ -260,18 +260,20 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 <span class='co'># and even continue after this function</span>
 <span class='no'>op</span> <span class='kw'>%&gt;%</span> <span class='fu'>my_plot</span>(~<span class='no'>var</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='layers.html'>layer_title</a></span>(<span class='st'>"hi there!"</span>)</div><div class='img'><img src='plot_PCA-5.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># grindr allows (almost nice) tricks like highligting:</span>
+# grindr allows (almost nice) tricks like highlighting:
 
-<span class='no'>bp</span> <span class='kw'>%&gt;%</span> <span class='fu'>.layerize_PCA</span>(~<span class='no'>fake</span>) <span class='kw'>%&gt;%</span>
-  <span class='no'>layer_frame</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_axes</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='layers_morphospace.html'>layer_morphospace_PCA</a></span>() <span class='kw'>-&gt;</span> <span class='no'>x</span></div><div class='output co'>#&gt; <span class='message'>factor passed was a character, and coerced to a factor.</span></div><div class='input'>
-<span class='no'>highlight</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>col_F</span><span class='kw'>=</span><span class='st'>"#CCCCCC"</span>, <span class='no'>col_T</span><span class='kw'>=</span><span class='st'>"#FC8D62FF"</span>){
- <span class='no'>args</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='no'>...</span>)
- <span class='no'>x</span>$<span class='no'>colors_groups</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='no'>col_F</span>, <span class='no'>col_T</span>)
- <span class='no'>x</span>$<span class='no'>colors_rows</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='no'>col_F</span>, <span class='no'>col_T</span>)[(<span class='no'>x</span>$<span class='no'>f</span> <span class='kw'>%in%</span> <span class='no'>args</span>)+<span class='fl'>1</span>]
- <span class='no'>x</span>
-}
-<span class='no'>x</span> <span class='kw'>%&gt;%</span> <span class='fu'>highlight</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_points</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_chull</a></span>()</div><div class='img'><img src='plot_PCA-6.png' alt='' width='700' height='433' /></div><div class='input'>
+# bp %>% .layerize_PCA(~fake) %>%
+#   layer_frame %>% layer_axes() %>%
+#   layer_morphospace_PCA() -> x
+
+# highlight <- function(x, ..., col_F="#CCCCCC", col_T="#FC8D62FF"){
+#  args <- list(...)
+#  x$colors_groups <- c(col_F, col_T)
+#  x$colors_rows <- c(col_F, col_T)[(x$f %in% args)+1]
+#  x
+#  }
+# x %>% highlight("a", "b") %>% layer_points()
+
 # You get the idea.
 </div></pre>
   </div>

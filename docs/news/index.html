@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
       </span>
     </div>
 
@@ -115,9 +115,9 @@
       <small>Source: <a href='https://github.com/MomX/Momocs//blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="momocs-1-2-9-1-github" class="section level1">
+    <div id="momocs-1-2-9-github" class="section level1">
 <h1 class="page-header">
-<a href="#momocs-1-2-9-1-github" class="anchor"></a>Momocs 1.2.9.1 (GitHub)<small> Unreleased </small>
+<a href="#momocs-1-2-9-github" class="anchor"></a>Momocs 1.2.9+ (GitHub)<small> 2018-03-22 </small>
 </h1>
 <ul>
 <li>new multivariate method: <code>KMEDOIDS</code> on top of <code><a href="http://www.rdocumentation.org/packages/cluster/topics/pam">cluster::pam</a></code>. Added a <code>plot_silhouette</code> to go with this friend. Now depends <code>cluster</code>.</li>
@@ -125,6 +125,8 @@
 <li>new multivariate method: <code>MDS</code> on top of <code>cmdscale</code>; use <code>plot_MDS</code> to plot it.</li>
 <li>
 <code>mshapes</code> is now <code>MSHAPES</code> to stick with other capitalized “multivariate” methods. <code>mshapes</code> now just announces its future deprecation.</li>
+<li>new handling method <code>rm_missing</code> to deal with missing data in <code>$fac</code>
+</li>
 <li>Consequently, <code>plot_MSHAPES</code> is the new method for plotting it. Works on lists and on the result of <code>MSHAPES</code>.</li>
 <li>
 <code>plot_CV</code> has been slightly refreshed: jitter now always jitters the same way, and in a more compact radius around cell centers. This might be renamed to <code>plot_confusion</code> at some point.</li>
@@ -142,6 +144,8 @@
 <code>LDA</code> methods have been partly rewritten and now handles constant and collinear variables by dropping them and storing them in the returned list</li>
 <li>morphospace on LDAs are (finally) back, yet still quite experimental.</li>
 <li>
+<code>coo_untiltx</code> now removes (residual) rotational biases after <code>coo_slidedirection</code> and should be used after it.</li>
+<li>
 <code>plot_LDA</code> now on. Pretty much the same as <code>plot_PCA</code> (which was expected yet nice).</li>
 <li>
 <code>.layerize_LDA</code> as an internal to prepare the previous</li>
@@ -153,6 +157,9 @@
 <code>subsetize</code> now exported (again)</li>
 <li>
 <code>def_ldk</code> gains a <code>close</code> and <code>points</code> argument</li>
+<li>no more printing of Coo errors that was due to some forgotten <code>data.frame</code> rather than <code>data_frame</code>
+</li>
+<li>fixed minor bugs (see GitHub history of commits)</li>
 </ul>
 </div>
     <div id="momocs-1-2-9" class="section level1">
@@ -163,7 +170,7 @@
 <h3 class="hasAnchor">
 <a href="#preamble" class="anchor"></a>Preamble</h3>
 <ul>
-<li>Started a general review of Momocs (including <a href='https://github.com/MomX/Momocs//issues/184'>#184</a>) to prepare for MomX. For my convenience, all changes will stack on 1.2.5 on GitHub but will appear, in the end, as 1.9.0 on CRAN to both reflect proximity with 2.0 and the huge quantity if changes since 1.2</li>
+<li>Started a general review of Momocs (including <a href='https://github.com/MomX/Momocs//issues/184'>#184</a>) to prepare for MomX. For my convenience, all changes will stack on 1.2.5 on GitHub but will appear, in the end, as 1.9.0 on CRAN to both reflect proximity with 2.0 and the huge quantity of changes since 1.2</li>
 <li>Moved everything to <code>github.com/MomX/Momocs</code>
 </li>
 <li>ongoing complete review of code</li>
@@ -365,7 +372,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#momocs-1-2-9-1-github">1.2.9.1</a></li>
+        <li><a href="#momocs-1-2-9-github">1.2.9</a></li>
         <li><a href="#momocs-1-2-9">1.2.9</a></li>
         <li><a href="#momocs-1-2-4-github">1.2.4</a></li>
         <li><a href="#momocs-1-2-3-github">1.2.3</a></li>

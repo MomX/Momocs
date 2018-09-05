@@ -64,7 +64,7 @@ Out, Opn and Ldk classes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
       </span>
     </div>
 
@@ -153,7 +153,13 @@ to use specific methods.</p>
 <p>In other words, <code><a href='Out.html'>Out</a></code>, <code><a href='Opn.html'>Opn</a></code> and <code><a href='Ldk.html'>Ldk</a></code> classes
 are all, primarily, <code>Coo</code> objects on which we define generic <em>and</em>
 specific methods. See their respective help pages for more help.</p>
-<p>You can access all the methods available for <code>Coo</code> objects
+<p><code>Coo</code> objects all have the following components:</p><ul>
+<li><p><code>$coo</code> which is a list of matrices for coordinates</p></li>
+<li><p><code>$fac</code> a <code>data_frame</code> for covariates (if any). You can provide
+this data_frame directly, as long as it has as many rows as there are matrices in <code>$coo</code> (see examples),
+or use an helper function such as <a href='lf_structure.html'>lf_structure</a>.</p></li>
+</ul>
+    <p>You can access all the methods available for <code>Coo</code> objects
 with <code>methods(class=Coo)</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -213,6 +219,19 @@ with <code>methods(class=Coo)</code>.</p>
 <span class='fu'>names</span>(<span class='no'>bot</span>) <span class='co'># access all individual names</span>
 <span class='no'>bot2</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>
 <span class='fu'>names</span>(<span class='no'>bot2</span>) <span class='kw'>&lt;-</span> <span class='fu'>paste0</span>(<span class='st'>'newnames'</span>, <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='no'>bot2</span>)) <span class='co'># define new names</span>
+
+<span class='co'># Add a $fac from scratch</span>
+<span class='no'>coo</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>:<span class='fl'>5</span>] <span class='co'># a list of five matrices</span>
+<span class='fu'>length</span>(<span class='no'>coo</span>)
+<span class='fu'>sapply</span>(<span class='no'>coo</span>, <span class='no'>class</span>)
+
+<span class='no'>fac</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>name</span><span class='kw'>=</span><span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='kw'>value</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>5</span>:<span class='fl'>1</span>))
+<span class='co'># Then you have to define the subclass using the right builder</span>
+<span class='co'># here we have outlines, so we use Out</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Out.html'>Out</a></span>(<span class='no'>coo</span>, <span class='no'>fac</span>)
+<span class='no'>x</span>$<span class='no'>coo</span>
+<span class='no'>x</span>$<span class='no'>fac</span>
+
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

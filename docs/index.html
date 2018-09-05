@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@
 <a href="#installation" class="anchor"></a>Installation</h3>
 <p>The last released version can be installed from <a href="https://CRAN.R-project.org/package=Momocs">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"Momocs"</span>)</a></code></pre></div>
-<p>But I recommend using the development version from GitHub with:</p>
+<p>But I recommend using (and only support) the development version from GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"MomX/Momocs"</span>)</a></code></pre></div>
 <!--
@@ -187,18 +187,17 @@ __Misc__
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(Momocs)</a></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/load_all">load_all</a></span>()</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Loading Momocs</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; This is Momocs 1.2.9.3</span></a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">hearts <span class="op">%T&gt;%</span><span class="st">                    </span><span class="co"># A toy dataset</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># Take a family picture of raw outlines</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/fgProcrustes.html">fgProcrustes</a></span>() <span class="op">%&gt;%</span><span class="st">          </span><span class="co"># Full generalized Procrustes alignment</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/coo_slide.html">coo_slide</a></span>(<span class="dt">ldk =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span><span class="st">      </span><span class="co"># Redefine a robust 1st point between the cheeks</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># Another picture of aligned outlines</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/efourier.html">efourier</a></span>(<span class="dv">6</span>, <span class="dt">norm=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Elliptical Fourier Transforms</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/PCA.html">PCA</a></span>() <span class="op">%T&gt;%</span><span class="st">                   </span><span class="co"># Principal Component Analysis</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">           </span><span class="co"># A PC1:2 plot</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/LDA.html">LDA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">                </span><span class="co"># Linear Discriminant Anlysis</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="reference/plot_CV.html">plot_CV</a></span>()                    <span class="co"># And the confusion matrix after leave-one-out</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; This is Momocs 1.2.9.4</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">hearts <span class="op">%T&gt;%</span><span class="st">                    </span><span class="co"># A toy dataset</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># Take a family picture of raw outlines</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/fgProcrustes.html">fgProcrustes</a></span>() <span class="op">%&gt;%</span><span class="st">          </span><span class="co"># Full generalized Procrustes alignment</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/coo_slide.html">coo_slide</a></span>(<span class="dt">ldk =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span><span class="st">      </span><span class="co"># Redefine a robust 1st point between the cheeks</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/stack.Coo.html">stack</a></span>() <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># Another picture of aligned outlines</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/efourier.html">efourier</a></span>(<span class="dv">6</span>, <span class="dt">norm=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Elliptical Fourier Transforms</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/PCA.html">PCA</a></span>() <span class="op">%T&gt;%</span><span class="st">                   </span><span class="co"># Principal Component Analysis</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">           </span><span class="co"># A PC1:2 plot</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/LDA.html">LDA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">                </span><span class="co"># Linear Discriminant Anlysis</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/plot_CV.html">plot_CV</a></span>()                    <span class="co"># And the confusion matrix after leave-one-out</span></a></code></pre></div>
 <p><img src="README-example-1.png" width="700"><img src="README-example-2.png" width="700"><img src="README-example-3.png" width="700"><img src="README-example-4.png" width="700"></p>
 </div>
 </div>
