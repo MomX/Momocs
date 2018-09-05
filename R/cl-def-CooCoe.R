@@ -26,6 +26,12 @@
 #' are all, primarily, \code{Coo} objects on which we define generic \emph{and}
 #' specific methods. See their respective help pages for more help.
 #'
+#' `Coo` objects all have the following components:
+#'  * `$coo` which is a list of matrices for coordinates
+#'  * `$fac` a `data_frame` for covariates (if any). You can provide
+#'  this data_frame directly, as long as it has as many rows as there are matrices in `$coo` (see examples),
+#'  or use an helper function such as [lf_structure].
+#'
 #' You can access all the methods available for \code{Coo} objects
 #' with \code{methods(class=Coo)}.
 #'
@@ -80,6 +86,19 @@
 #' names(bot) # access all individual names
 #' bot2 <- bot
 #' names(bot2) <- paste0('newnames', 1:length(bot2)) # define new names
+#'
+#' # Add a $fac from scratch
+#' coo <- bot[1:5] # a list of five matrices
+#' length(coo)
+#' sapply(coo, class)
+#'
+#' fac <- data.frame(name=letters[1:5], value=c(5:1))
+#' # Then you have to define the subclass using the right builder
+#' # here we have outlines, so we use Out
+#' x <- Out(coo, fac)
+#' x$coo
+#' x$fac
+#'
 #' }
 #' @export
 Coo <- function(...) {
