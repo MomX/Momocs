@@ -25,7 +25,7 @@ as_df(x)
 \item{x}{an object, typically a Momocs object}
 }
 \value{
-a \code{data.frame}
+a \link[dplyr:data_frame]{dplyr::data_frame}
 }
 \description{
 Used in particular for compatibility with the \code{tidyverse}

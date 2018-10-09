@@ -179,7 +179,7 @@ m2ll <- function(m, index=NULL){
 #'
 #' Used in particular for compatibility with the \code{tidyverse}
 #' @param x an object, typically a Momocs object
-#' @return a \code{data.frame}
+#' @return a [dplyr::data_frame]
 #' @examples
 #' # smaller Out
 #' lite_bot <- bot %>% slice(c(1, 2, 21, 22)) %>% coo_sample(12)
@@ -215,6 +215,7 @@ as_df.Coo <- function(x){
   }
   #rbind them all and return
   do.call("rbind", res) %>%
+    dplyr::as_data_frame() %>%
     return()
 }
 
@@ -237,6 +238,7 @@ as_df.Coe <- function(x){
   }
   #rbind them all and return
   do.call("rbind", res) %>%
+    dplyr::as_data_frame() %>%
     return()
 }
 
@@ -248,7 +250,7 @@ as_df.TraCoe <- function(x){
   if (is_fac(x)) {
     dplyr::bind_cols(x$fac, df_coe)
   } else {
-    df_coe
+    df_coe %>% dplyr::as_data_frame()
   }
 }
 
