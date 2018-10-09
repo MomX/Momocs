@@ -44,7 +44,7 @@ coo_check.Coo <- function(coo){
 
   res <- sapply(coo$coo, function(x) try(coo_check(x), silent=TRUE))
   if (.is.error(res)){
-    stop(paste(names(coo)[.which.is.error(res)], collapse=", "), " do not pass coo_check")
+    stop(paste(.which.is.error(res), collapse=", "), " do not pass coo_check")
   }
   return(coo)
 }
