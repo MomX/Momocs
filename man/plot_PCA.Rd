@@ -6,9 +6,10 @@
 \usage{
 plot_PCA(x, f = NULL, axes = c(1, 2), palette = NULL, points = TRUE,
   points_transp = 1/4, morphospace = TRUE, morphospace_position = "range",
-  chull = TRUE, chullfilled = FALSE, labelgroups = FALSE, legend = TRUE,
-  title = "", center_origin = TRUE, zoom = 0.9, eigen = TRUE,
-  box = TRUE, axesnames = TRUE, axesvar = TRUE)
+  chull = TRUE, chullfilled = FALSE, labelpoints = FALSE,
+  labelgroups = FALSE, legend = TRUE, title = "", center_origin = TRUE,
+  zoom = 0.9, eigen = TRUE, box = TRUE, axesnames = TRUE,
+  axesvar = TRUE)
 }
 \arguments{
 \item{x}{a \link{PCA} object}
@@ -31,6 +32,8 @@ plot_PCA(x, f = NULL, axes = c(1, 2), palette = NULL, points = TRUE,
 \item{chull}{\code{logical} whether to draw this with \link{layer_chull}}
 
 \item{chullfilled}{\code{logical} whether to draw this with \link{layer_chullfilled}}
+
+\item{labelpoints}{\code{logical} whether to draw this with \link{layer_labelpoints}}
 
 \item{labelgroups}{\code{logical} whether to draw this with \link{layer_labelgroups}}
 

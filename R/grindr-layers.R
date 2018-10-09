@@ -190,6 +190,7 @@
 #' @param morphospace_position to feed [layer_morphospace_PCA] (default: "range")
 #' @param chull `logical` whether to draw this with [layer_chull]
 #' @param chullfilled `logical` whether to draw this with [layer_chullfilled]
+#' @param labelpoints `logical` whether to draw this with [layer_labelpoints]
 #' @param labelgroups `logical` whether to draw this with [layer_labelgroups]
 #' @param legend `logical` whether to draw this with [layer_legend]
 #' @param title `character` if specified, fee [layer_title] (default to `""`)
@@ -267,6 +268,7 @@ plot_PCA <- function(x,
                      chull=TRUE,
                      chullfilled=FALSE,
                      # legends
+                     labelpoints=FALSE,
                      labelgroups=FALSE,
                      legend=TRUE,
                      # cosmetics (mainly)
@@ -329,6 +331,9 @@ plot_PCA <- function(x,
       x %<>% layer_legend()
     }
   }
+
+  if (labelpoints)
+    x %<>% layer_labelpoints()
 
   if (labelgroups)
     x %<>% layer_labelgroups()
