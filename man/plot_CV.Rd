@@ -6,28 +6,40 @@
 \alias{plot_CV.LDA}
 \title{Plots a cross-validation table as an heatmap}
 \usage{
-plot_CV(x, ...)
+plot_CV(x, freq = FALSE, rm0 = FALSE, pc = FALSE, fill = TRUE,
+  labels = TRUE, axis.size = 10, axis.x.angle = 45, cell.size = 2.5,
+  signif = 2, ...)
 
-\method{plot_CV}{default}(x, freq = FALSE, rm0 = TRUE, cex = 5,
-  round = 2, labels = TRUE, ...)
+\method{plot_CV}{default}(x, freq = FALSE, rm0 = FALSE, pc = FALSE,
+  fill = TRUE, labels = TRUE, axis.size = 10, axis.x.angle = 45,
+  cell.size = 2.5, signif = 2, ...)
 
-\method{plot_CV}{LDA}(x, freq = FALSE, rm0 = TRUE, cex = 5, round = 2,
-  labels = TRUE, ...)
+\method{plot_CV}{LDA}(x, freq = TRUE, rm0 = TRUE, pc = TRUE,
+  fill = TRUE, labels = TRUE, axis.size = 10, axis.x.angle = 45,
+  cell.size = 2.5, signif = 2, ...)
 }
 \arguments{
 \item{x}{a (cross-validation table) or an LDA object}
 
-\item{...}{only used for the generic}
-
-\item{freq}{logical whether to display frequencies or counts}
+\item{freq}{logical whether to display frequencies (within an actual class) or counts}
 
 \item{rm0}{logical whether to remove zeros}
 
-\item{cex}{numeric to adjust labels in every cell. NA to remove them}
+\item{pc}{logical whether to multiply proportion by 100, ie display percentages}
 
-\item{round}{numeric, when freq=TRUE how many decimals should we display}
+\item{fill}{logical whether to fill cell according to count/freq}
 
-\item{labels}{logical whether to display freq or counts as text labels}
+\item{labels}{logical whether to add text labels on cells}
+
+\item{axis.size}{numeric to adjust axis labels}
+
+\item{axis.x.angle}{numeric to rotate x-axis labels}
+
+\item{cell.size}{numeric to adjust text labels on cells}
+
+\item{signif}{numeric to round frequencies using \link{signif}}
+
+\item{...}{useless here}
 }
 \value{
 a ggplot object
@@ -38,16 +50,25 @@ and values as heatmaps. Used in Momocs for plotting cross-validation tables
 but may be used for any table (likely with \code{freq=FALSE}).
 }
 \examples{
-ol <- LDA(PCA(opoly(olea, 5)), "domes")
-# freq=FALSE inspired by Chitwood et al. New Phytol fig. 4
-gg <- plot_CV(ol, freq=FALSE)
-gg
+h <- hearts \%>\%
+     fgProcrustes(0.01) \%>\% coo_slide(ldk=2) \%T>\% stack \%>\%
+     efourier(6, norm=FALSE) \%>\% LDA(~aut)
 
-# and you can tune the gg object wit regular ggplot2 syntax eg
-gg + ggplot2::scale_color_discrete(h = c(120, 240))
+h \%>\% plot_CV()
+h \%>\% plot_CV(freq=FALSE, rm0=FALSE, fill=FALSE)
+# you can customize the returned gg with some ggplot2 functions
+h \%>\% plot_CV(labels=FALSE, fill=TRUE, axis.size=5) + ggplot2::ggtitle("A confusion matrix")
 
-# freq=TRUE
-plot_CV(ol, freq=TRUE)
+# or build your own using the prepared data_frame:
+df <- h \%>\% plot_CV() \%$\% data
+df
+
+# you can even use it as a cross-table plotter
+bot$fac \%>\% table \%>\% plot_CV()
+
+# or on any matrix
+# set.seed(123) # for the sake of reproducibility
+matrix(runif(50), 5, 10) \%>\% as.table \%>\% plot_CV()
 }
 \seealso{
 \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{plot_table}.

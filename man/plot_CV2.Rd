@@ -48,6 +48,10 @@ plot_CV2(x, ...)
 Or any contingency/confusion table. A simple graphic representation based on variable
 width and/or color for arrows or segments, based on the relative frequencies.
 }
+\note{
+When \code{freq=FALSE}, the fill colors are not weighted
+within actual classes and should not be displayed if classes sizes are not balanced.
+}
 \examples{
 # Below various table that you can try. We will use the last one for the examples.
 \dontrun{

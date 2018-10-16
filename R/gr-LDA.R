@@ -154,26 +154,26 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
     xy <- x$mod.pred$x[, c(xax, yax)]
   }
 
-      if (!missing(col)){
-        if (length(col)==nlevels(fac)) {
-          col.groups <- col
-          col <- col.groups[fac]
-        } else {
-          col.groups <- rep(col[1], nlevels(fac))
-          if (length(col) != nrow(xy)){
-            col <- rep(col[1], nrow(xy))}}
-      } else {
-        col.groups <- palette(nlevels(fac))
-        if (length(col) != nrow(xy)){
-          col <- col.groups[fac]}
-      }
-      # pch handling
-      if (!missing(pch)) {
-        if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
-      }
-      else {
-        pch <- 20
-      }
+  if (!missing(col)){
+    if (length(col)==nlevels(fac)) {
+      col.groups <- col
+      col <- col.groups[fac]
+    } else {
+      col.groups <- rep(col[1], nlevels(fac))
+      if (length(col) != nrow(xy)){
+        col <- rep(col[1], nrow(xy))}}
+  } else {
+    col.groups <- palette(nlevels(fac))
+    if (length(col) != nrow(xy)){
+      col <- col.groups[fac]}
+  }
+  # pch handling
+  if (!missing(pch)) {
+    if (length(pch)==nlevels(fac)) { pch <- pch[fac] }
+  }
+  else {
+    pch <- 20
+  }
 
 
   # # if fac is a numeric
@@ -189,19 +189,19 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
   #   }
   # }
 
-if (nlevels(fac) <= 2){
+  if (nlevels(fac) <= 2){
     op <- par(mfrow=c(2, 1), oma=c(0, 0, 0, 0), mar=c(4, 1, 3, 1 ))
     on.exit(op)
     hist.range <- range(xy)
     hist(xy[fac==levels(fac)[1]], xlim=hist.range,
-                   ylab=NA, xlab="LD1", main=levels(fac)[1],
-                   col=palette(2)[1], axes=FALSE); axis(1)
+         ylab=NA, xlab="LD1", main=levels(fac)[1],
+         col=palette(2)[1], axes=FALSE); axis(1)
     hist(xy[fac==levels(fac)[2]], xlim=hist.range,
-                   ylab=NA, xlab="LD1", main=levels(fac)[2],
-                   col=palette(2)[2], axes=FALSE); axis(1)
+         ylab=NA, xlab="LD1", main=levels(fac)[2],
+         col=palette(2)[2], axes=FALSE); axis(1)
     par(mfrow=c(1, 1))
     return()
-}
+  }
 
   # cosmetics
   if ((density) & missing(contour)) contour   <- TRUE
@@ -293,82 +293,150 @@ if (nlevels(fac) <= 2){
 #' but may be used for any table (likely with \code{freq=FALSE}).
 #'
 #' @param x a (cross-validation table) or an LDA object
-#' @param freq logical whether to display frequencies or counts
+#' @param freq logical whether to display frequencies (within an actual class) or counts
 #' @param rm0 logical whether to remove zeros
-#' @param cex numeric to adjust labels in every cell. NA to remove them
-#' @param round numeric, when freq=TRUE how many decimals should we display
-#' @param labels logical whether to display freq or counts as text labels
-#' @param ... only used for the generic
+#' @param pc logical whether to multiply proportion by 100, ie display percentages
+#' @param fill logical whether to fill cell according to count/freq
+#' @param labels logical whether to add text labels on cells
+#' @param axis.size numeric to adjust axis labels
+#' @param axis.x.angle numeric to rotate x-axis labels
+#' @param cell.size numeric to adjust text labels on cells
+#' @param signif numeric to round frequencies using [signif]
+#' @param ... useless here
 #' @return a ggplot object
 #' @seealso \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{plot_table}.
 #' @examples
-#' ol <- LDA(PCA(opoly(olea, 5)), "domes")
-#' # freq=FALSE inspired by Chitwood et al. New Phytol fig. 4
-#' gg <- plot_CV(ol, freq=FALSE)
-#' gg
+#' h <- hearts %>%
+#'      fgProcrustes(0.01) %>% coo_slide(ldk=2) %T>% stack %>%
+#'      efourier(6, norm=FALSE) %>% LDA(~aut)
 #'
-#' # and you can tune the gg object wit regular ggplot2 syntax eg
-#' gg + ggplot2::scale_color_discrete(h = c(120, 240))
+#' h %>% plot_CV()
+#' h %>% plot_CV(freq=FALSE, rm0=FALSE, fill=FALSE)
+#' # you can customize the returned gg with some ggplot2 functions
+#' h %>% plot_CV(labels=FALSE, fill=TRUE, axis.size=5) + ggplot2::ggtitle("A confusion matrix")
 #'
-#' # freq=TRUE
-#' plot_CV(ol, freq=TRUE)
+#' # or build your own using the prepared data_frame:
+#' df <- h %>% plot_CV() %$% data
+#' df
+#'
+#' # you can even use it as a cross-table plotter
+#' bot$fac %>% table %>% plot_CV()
+#'
+#' # or on any matrix
+#' # set.seed(123) # for the sake of reproducibility
+#' matrix(runif(50), 5, 10) %>% as.table %>% plot_CV()
 #' @rdname plot_CV
 #' @export
-plot_CV <- function(x, ...){UseMethod("plot_CV")}
+plot_CV <- function(x,
+                    freq = FALSE, rm0 = FALSE, pc=FALSE,
+                    fill=TRUE, labels=TRUE,
+                    axis.size=10,
+                    axis.x.angle = 45,
+                    cell.size = 2.5,
+                    signif = 2,
+                    ...){UseMethod("plot_CV")}
 
 #' @rdname plot_CV
 #' @export
-plot_CV.default <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
-  set.seed(123) # so that jitter always jitters the same way
-  tab <- x
-  df <- as.data.frame(tab)
-  #colnames(df) <- c("actual", "classified", "count")
-  if (freq) {
-    df <- df %>% dplyr::group_by_(colnames(df)[1]) %>%
-      dplyr::mutate(Freq=round(Freq/sum(Freq), round))
-  gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], fill="Freq")) +
-    geom_tile()  +
-    scale_fill_gradient(low="white", high="red", na.value="white") +
-    theme_linedraw() + theme(legend.position="none") +
-    theme(axis.text=element_text(size=10),
-          axis.text.x=element_text(angle=90, hjust=1),
-          axis.title=element_text(size=14, face="bold"))
-  } else {
-    df %<>% filter(Freq!=0)
-    df <- df[rep(row.names(df), df$Freq), ]
-    df <- mutate(df, col=c("wrong", "correct")[(actual==classified)+1])
-    gg <- ggplot(df, aes_string(x=colnames(df)[1], y=colnames(df)[2], col="col")) +
-      geom_jitter(width = 0.25, height = 0.25, alpha=0.5) +
-      scale_color_manual(values=pal_qual(2)) +
-      theme_linedraw() + theme(legend.position="none") +
-      theme(axis.text=element_text(size=10),
-            axis.text.x=element_text(angle=90, hjust=1),
-            axis.title=element_text(size=14, face="bold"))
-  }
-  if (labels){
-    if (rm0) {
-      gg <- gg + geom_text(data=filter(df, Freq !=0),
-                           aes_string(label="Freq"),
-                           col="#000000",
-                           alpha=0.5,
-                           size=rel(cex))
-    } else {
-      gg <- gg + geom_text(aes_string(label="Freq"),
-                           col="#000000",
-                           alpha=0.5,
-                           size=rel(cex))
+plot_CV.default <- function(x,
+                            freq = FALSE, rm0 = FALSE, pc=FALSE,
+                            fill=TRUE, labels=TRUE,
+                            axis.size=10,
+                            axis.x.angle = 45,
+                            cell.size = 2.5,
+                            signif = 2, ...){
+
+  # check a bit
+  .check(is.matrix(x), "x must be a table or a matrix")
+
+  # mat dimensions and try to adapt a bit
+  n <- nrow(x)
+  if ( n > 60 && missing(labels))
+    labels <- FALSE
+
+  # expect a table with rows for actual, columns for predicted
+  df <- x %>%
+    dplyr::as_data_frame() %>%
+    `colnames<-`(c("actual", "predicted", "n")) %>%
+    dplyr::mutate(actual=factor(actual), predicted=factor(predicted)) %>%
+    dplyr::arrange(actual, .by_group=predicted)
+
+  # if freq, frequencies within actual class
+  if (freq){
+    df %<>%
+      dplyr::group_by(actual) %>%
+      dplyr::mutate(n=n/sum(n)) %>%
+      dplyr::ungroup()
+
+    # if pc, turn into percentages
+    if (pc) {
+      df %<>% dplyr::mutate(n=100*n)
     }
+
   }
 
-  gg <- gg + coord_equal()
-  return(gg)}
+  # round, if required
+  df %<>% dplyr::mutate(n=signif(n, signif))
 
-#' @rdname plot_CV
-#' @export
-plot_CV.LDA <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,...){
-  plot_CV(x$CV.tab, freq=freq, rm0=rm0, cex=cex, round=round, labels=labels, ...)
+  # if required, remove zeros
+  if (rm0){
+    df %<>% filter(n!=0)
+  }
+
+  df$actual2 <- factor(df$actual, levels=rev(levels(df$actual)))
+
+  # initiates the gg
+  gg <- df %>%
+    ggplot() +
+    aes(x=predicted, y=actual2) +
+    # cosmetics
+    xlab("predicted as") + ylab("") +
+    # we all love squares
+    coord_equal() +
+    # put the x-axis on top
+    scale_x_discrete(position = "top") +
+    # gg + theme(panel.grid.major = element_line(size = 0.3))
+    theme_minimal() +
+    theme(panel.background = element_rect(fill = NA, colour=NA),
+          panel.grid.major = element_line(size = 0.1),
+          axis.text.y = element_text(size=axis.size),
+          axis.text.x = element_text(size=axis.size,
+                                     angle = axis.x.angle,
+                                     hjust = 0))
+
+  # add fill, if required
+  if (fill){
+    gg <- gg +
+      geom_tile(aes(fill=n), alpha=0.5) +
+      scale_fill_viridis_c(direction= -1) +
+      guides(fill=FALSE)
+  }
+  # add labels, if required
+  if (labels){
+    gg <- gg + geom_text(aes(label=n), size=cell.size)
+  }
+
+  # return this beauty
+  gg
 }
 
+#' @rdname plot_CV
+#' @export
+plot_CV.LDA <- function(x,
+                        freq = TRUE, rm0 = TRUE, pc=TRUE,
+                        fill=TRUE, labels=TRUE,
+                        axis.size=10,
+                        axis.x.angle = 45,
+                        cell.size = 2.5,
+                        signif = 2, ...){
+  plot_CV(x$CV.tab,
+          freq=freq, rm0=rm0,
+          fill=fill, labels=labels,
+          axis.size=axis.size,
+          axis.x.angle=axis.x.angle,
+          cell.size=cell.size,
+          signif=signif,  ...)
+}
 
 # plot_CV2 ---------
 #' Plots a cross-correlation table
@@ -391,6 +459,8 @@ plot_CV.LDA <- function(x, freq=FALSE, rm0 = TRUE, cex=5, round=2, labels=TRUE,.
 #' @param legend logical whether to add a legend
 #' @param ... useless here.
 #' @seealso \link{LDA}, \link{plot.LDA}, \link{plot_CV}.
+#' @note When `freq=FALSE`, the fill colors are not weighted
+#' within actual classes and should not be displayed if classes sizes are not balanced.
 #' @examples
 #' # Below various table that you can try. We will use the last one for the examples.
 #' \dontrun{
