@@ -717,6 +717,8 @@ combine.Out <- function(...) {
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
+  # ensure $fac is a data_frame
+  Out$fac %<>% dplyr::as_data_frame()
   #Out %<>% verify()
   return(Out)
 }
@@ -733,6 +735,8 @@ combine.Opn <- function(...) {
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Opn$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
+  # ensure $fac is a data_frame
+  Opn$fac %<>% dplyr::as_data_frame()
   #Opn %<>% verify()
   return(Opn)
 }
@@ -750,6 +754,10 @@ combine.Ldk <- function(...) {
   }
   cutS <- do.call(c,  lapply(args, function(x) ncol(x$coe)))
   Ldk$cuts <- cutS
+
+  # ensure $fac is a data_frame
+  Ldk$fac %<>% dplyr::as_data_frame()
+
   #Ldk %<>% verify()
   return(Ldk)
 }
@@ -797,6 +805,10 @@ combine.OutCoe <- function(...) {
   }
   OutCoe$cuts <- cutS
   names(OutCoe$method) <- names(args)
+
+  # ensure $fac is a data_frame
+  OutCoe$fac %<>% dplyr::as_data_frame()
+
   return(OutCoe)
 }
 
@@ -824,6 +836,11 @@ combine.OpnCoe <- function(...) {
                    baseline1=baseline1S, baseline2=baseline2S,
                    mod=modS, r2=r2S)
   OpnCoe$cuts <- cutS
+
+  # ensure $fac is a data_frame
+  OpnCoe$fac %<>% dplyr::as_data_frame()
+
+
   return(OpnCoe)
 }
 
