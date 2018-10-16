@@ -101,7 +101,9 @@ Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 coo <- bot[1]
 coo_plot(coo)
 ef <- efourier(coo, 12)
-ef
+# same but silent
+efourier(coo, 12, norm=TRUE)
+# inverse EFT
 efi <- efourier_i(ef)
 coo_draw(efi, border='red', col=NA)
 

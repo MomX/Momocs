@@ -76,7 +76,9 @@
 #' coo <- bot[1]
 #' coo_plot(coo)
 #' ef <- efourier(coo, 12)
-#' ef
+#' # same but silent
+#' efourier(coo, 12, norm=TRUE)
+#' # inverse EFT
 #' efi <- efourier_i(ef)
 #' coo_draw(efi, border='red', col=NA)
 #'
@@ -139,8 +141,8 @@ efourier.default <- function(x, nb.h, smooth.it = 0, ...) {
 #' @rdname efourier
 #' @export
 efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...) {
-  if (norm)
-    message("you selected `norm=TRUE`, which is not recommended. See ?efourier")
+  if (norm && missing(norm))
+    message("`norm=TRUE` is used and this may be troublesome. See ?efourier")
   Out <- x
   # verify
   Out %<>% verify()
