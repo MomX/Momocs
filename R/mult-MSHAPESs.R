@@ -14,12 +14,8 @@
 #' @param nb.pts numeric the number of points for calculated shapes (only Coe objects)
 #' @param ... useless here.
 #' @return the averaged shape; on Coe objects, a list with two components: \code{$Coe} object of the same class, and
-#' \code{$shp} a list of matrices of (x, y) coordinates.
-#' @details Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
-#' in that case, the other columns of the fac are also returned, using the first row within every level, but they may
-#' not be representative of the group. Also notice that for PCA objects, mean scores are returned
-#' within a PCA object (accessible with `PCA$x`) that can be plotted directly but other slots are left
-#' unchanged.
+#' \code{$shp} a list of matrices of (x, y) coordinates. On [PCA] and [LDA] objects, the FUN (typically mean or median)
+#' of scores on `PCs` or `LDs`. This method used on the latter objects may be moved to another function at some point.
 #' @rdname MSHAPES
 #' @family multivariate
 #' @examples
@@ -38,9 +34,11 @@
 #' ms <- ms$shp
 #' coo_plot(ms$beer)
 #' coo_draw(ms$whisky, border='forestgreen')
+#' \dontrun{
 #' tps_arr(ms$whisky, ms$beer) #etc.
+#'}
 #'
-#' op <- npoly(filter(olea, view=='VL'), 5)
+#' op <- olea %>% filter(view=="VL") %>% npoly(5)
 #' ms <- MSHAPES(op, ~var) #etc
 #' ms$Coe
 #' panel(Opn(ms$shp), names=TRUE)
@@ -48,6 +46,12 @@
 #' wp <- fgProcrustes(wings, tol=1e-4)
 #' ms <- MSHAPES(wp, 1)
 #' plot_MSHAPES(ms)
+#'
+#' # on PCA and LDA just return a data_frame
+#' bot.f %>% PCA %>% MSHAPES(~type)
+#' bot.f %>% LDA(~fake) %>% MSHAPES(~fake)
+#' # LDA on ~fake but average on type
+#' bot.f %>% LDA(~fake) %>% MSHAPES(~type)
 #' @rdname MSHAPES
 #' @export
 MSHAPES <- function(x, ...) {
@@ -81,139 +85,167 @@ MSHAPES.Ldk <- function(x, FUN=mean, ...) {
 #' @rdname MSHAPES
 #' @export
 MSHAPES.OutCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
-    OutCoe <- x
-    nb.h <- ncol(OutCoe$coe)/4  #todo
-    if (is.null(fac)) {
-        message("no 'fac' provided, returns meanshape")
-        coe.mshape <- apply(OutCoe$coe, 2, FUN)
-        xf <- coeff_split(coe.mshape, nb.h, 4)
-        return(efourier_i(xf, nb.pts = nb.pts))
+  OutCoe <- x
+  nb.h <- ncol(OutCoe$coe)/4  #todo
+  if (is.null(fac)) {
+    message("no 'fac' provided, returns meanshape")
+    coe.mshape <- apply(OutCoe$coe, 2, FUN)
+    xf <- coeff_split(coe.mshape, nb.h, 4)
+    return(efourier_i(xf, nb.pts = nb.pts))
+  }
+
+  f <- fac_dispatcher(x, fac) %>% factor
+
+  fl <- levels(f)
+  shp <- list()
+  rows <- numeric()
+  coe <- matrix(NA, nrow = nlevels(f), ncol = ncol(OutCoe$coe),
+                dimnames = list(fl, colnames(OutCoe$coe)))
+  for (i in seq(along = fl)) {
+    coe.i <- OutCoe$coe[f == fl[i], ]
+    rows[i] <- which(f == fl[i])[1]
+    if (is.matrix(coe.i) | is.data.frame(coe.i)) {
+      coe.i <- apply(coe.i, 2, FUN)
     }
+    coe[i, ] <- coe.i
+    xf <- coeff_split(cs = coe.i, nb.h = nb.h, cph = 4)
+    shp[[i]] <- efourier_i(xf, nb.h = nb.h, nb.pts = nb.pts)
+  }
+  names(shp) <- fl
+  Coe2 <- OutCoe
+  Coe2$coe <- coe
+  Coe2$fac <- slice(Coe2$fac, rows)
 
-    f <- fac_dispatcher(x, fac) %>% factor
-
-    fl <- levels(f)
-    shp <- list()
-    rows <- numeric()
-    coe <- matrix(NA, nrow = nlevels(f), ncol = ncol(OutCoe$coe),
-        dimnames = list(fl, colnames(OutCoe$coe)))
-    for (i in seq(along = fl)) {
-        coe.i <- OutCoe$coe[f == fl[i], ]
-        rows[i] <- which(f == fl[i])[1]
-        if (is.matrix(coe.i) | is.data.frame(coe.i)) {
-            coe.i <- apply(coe.i, 2, FUN)
-        }
-        coe[i, ] <- coe.i
-        xf <- coeff_split(cs = coe.i, nb.h = nb.h, cph = 4)
-        shp[[i]] <- efourier_i(xf, nb.h = nb.h, nb.pts = nb.pts)
-    }
-    names(shp) <- fl
-    Coe2 <- OutCoe
-    Coe2$coe <- coe
-    Coe2$fac <- slice(Coe2$fac, rows)
-
-    res <- list(Coe = Coe2, shp = shp) %>%
-      .prepend_class("MSHAPES")
-    return(res)
+  res <- list(Coe = Coe2, shp = shp) %>%
+    .prepend_class("MSHAPES")
+  return(res)
 }
 
 #' @rdname MSHAPES
 #' @export
 MSHAPES.OpnCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
-    OpnCoe <- x
-    #todo: check if method is all identical
-        	p <- pmatch(tolower(OpnCoe$method[1]), c("opoly", "npoly", "dfourier"))
-    	if (is.na(p)) {
-      		stop("unvalid method\n")
-    	} else {
-      method_i <- switch(p, opoly_i, npoly_i, dfourier_i) # dfourier_i
-    }
-    n <- length(OpnCoe$mshape)  #todo
-    if (is.null(fac)) {
-        message("no 'fac' provided, returns meanshape")
-        coe.mshape <- apply(OpnCoe$coe, 2, FUN)
-        mod.mshape <- OpnCoe$mod
-        mod.mshape$coefficients <- coe.mshape
-        return(method_i(mod.mshape))
-    }
-
-    f <- fac_dispatcher(x, fac) %>% factor
-
-    fl <- levels(f)
-    shp <- list()
-    rows <- numeric()
-    coe <- matrix(NA, nrow = nlevels(f), ncol = ncol(OpnCoe$coe),
-        dimnames = list(fl, colnames(OpnCoe$coe)))
+  OpnCoe <- x
+  #todo: check if method is all identical
+  p <- pmatch(tolower(OpnCoe$method[1]), c("opoly", "npoly", "dfourier"))
+  if (is.na(p)) {
+    stop("unvalid method\n")
+  } else {
+    method_i <- switch(p, opoly_i, npoly_i, dfourier_i) # dfourier_i
+  }
+  n <- length(OpnCoe$mshape)  #todo
+  if (is.null(fac)) {
+    message("no 'fac' provided, returns meanshape")
+    coe.mshape <- apply(OpnCoe$coe, 2, FUN)
     mod.mshape <- OpnCoe$mod
-    for (i in seq(along = fl)) {
-        coe.i <- OpnCoe$coe[f == fl[i], ]
-        rows[i] <- which(f == fl[i])[1]
-        if (is.matrix(coe.i)) {
-            coe.i <- apply(coe.i, 2, FUN)
-        }
-        mod.mshape$coeff <- coe.i
-        coe[i, ] <- coe.i
-        shp[[i]] <- method_i(mod.mshape)
-    }
-    names(shp) <- fl
-    Coe2 <- OpnCoe
-    Coe2$coe <- coe
-    Coe2$fac <- slice(Coe2$fac, rows)
+    mod.mshape$coefficients <- coe.mshape
+    return(method_i(mod.mshape))
+  }
 
-    res <- list(Coe = Coe2, shp = shp) %>%
-      .prepend_class("MSHAPES")
-    return(res)
+  f <- fac_dispatcher(x, fac) %>% factor
+
+  fl <- levels(f)
+  shp <- list()
+  rows <- numeric()
+  coe <- matrix(NA, nrow = nlevels(f), ncol = ncol(OpnCoe$coe),
+                dimnames = list(fl, colnames(OpnCoe$coe)))
+  mod.mshape <- OpnCoe$mod
+  for (i in seq(along = fl)) {
+    coe.i <- OpnCoe$coe[f == fl[i], ]
+    rows[i] <- which(f == fl[i])[1]
+    if (is.matrix(coe.i)) {
+      coe.i <- apply(coe.i, 2, FUN)
+    }
+    mod.mshape$coeff <- coe.i
+    coe[i, ] <- coe.i
+    shp[[i]] <- method_i(mod.mshape)
+  }
+  names(shp) <- fl
+  Coe2 <- OpnCoe
+  Coe2$coe <- coe
+  Coe2$fac <- slice(Coe2$fac, rows)
+
+  res <- list(Coe = Coe2, shp = shp) %>%
+    .prepend_class("MSHAPES")
+  return(res)
 
 }
 
 #' @rdname MSHAPES
 #' @export
 MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, ...) {
-    LdkCoe <- x
-    if (is.null(fac)) {
-        message("no 'fac' provided. Returns meanshape")
-        return(MSHAPES(LdkCoe$coo))
-    }
+  LdkCoe <- x
+  if (is.null(fac)) {
+    message("no 'fac' provided. Returns meanshape")
+    return(MSHAPES(LdkCoe$coo))
+  }
 
-    f <- fac_dispatcher(x, fac) %>% factor
+  f <- fac_dispatcher(x, fac) %>% factor
 
-    fl <- levels(f)
-    shp <- list()
-    rows <- numeric()
-    for (i in seq(along = fl)) {
-        shp[[i]] <- MSHAPES(LdkCoe$coo[f == fl[i]], FUN=FUN)
-        rows[i] <- which(f == fl[i])[1]
-    }
-    names(shp) <- fl
-    Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
+  fl <- levels(f)
+  shp <- list()
+  rows <- numeric()
+  for (i in seq(along = fl)) {
+    shp[[i]] <- MSHAPES(LdkCoe$coo[f == fl[i]], FUN=FUN)
+    rows[i] <- which(f == fl[i])[1]
+  }
+  names(shp) <- fl
+  Coe2 <- Ldk(shp, fac=slice(LdkCoe$fac, rows))
 
-    res <- list(Coe = Coe2, shp = shp) %>%
-      .prepend_class("MSHAPES")
-    return(res)
+  res <- list(Coe = Coe2, shp = shp) %>%
+    .prepend_class("MSHAPES")
+  return(res)
 
 }
 
 #' @rdname MSHAPES
 #' @export
-MSHAPES.PCA <- function(x, fac, ...){
-  # cehck for single individuals within a group..
+MSHAPES.PCA <- function(x, fac, FUN=mean, ...){
+  # check for single individuals within a group..
   x0 <- x
-  f <- fac_dispatcher(x, fac)
-  x <- x$x
-  res <- matrix(NA, nrow=nlevels(f), ncol=ncol(x),
-                dimnames=list(levels(f), colnames(x)))
-  for (i in seq(along=levels(f))){
-    x.i <- x[f == levels(f)[i], ]
-    if (!is.matrix(x.i)) {
-      res[i, ] <- x.i
-      next()
-    }
-    res[i, ] <- apply(x.i, 2, mean)
-  }
-  x0$x <- res
-  # should retain the true name and not "fac"
-  x0$fac <- dplyr::data_frame(fac=levels(f))
 
+  # f data_frame
+  # first dispatch
+  f <- fac_dispatcher(x, fac)
+  fdf <- dplyr::data_frame(fac=f)
+
+  # res data_frame
+  res <- x$x %>%
+    dplyr::as_data_frame() %>%
+    dplyr::bind_cols(fdf, .) %>%
+    dplyr::group_by(fac) %>%
+    dplyr::summarise_all(FUN)
+
+  # just change the fac for the real name and return
+  colnames(res)[1] <- fac %>% as.character() %>% `[`(-1)
+  res
+}
+
+#' @rdname MSHAPES
+#' @export
+MSHAPES.LDA <- function(x, fac, FUN=mean, ...){
+  # check for single individuals within a group..
+  x0 <- x
+  # # if fac provided, dispatch it - not sure this has an utility
+  # if (!missing(fac))
+    f <- fac_dispatcher(x, fac)
+  #otherwise use the one from the LDA
+  # else
+  #   f <- x$f
+
+  # f data_frame
+  # first dispatch
+  fdf <- dplyr::data_frame(fac=f)
+
+  # res data_frame
+  res <- x$mod.pred$x %>%
+    dplyr::as_data_frame() %>%
+    dplyr::bind_cols(fdf, .) %>%
+    dplyr::group_by(fac) %>%
+    dplyr::summarise_all(FUN)
+
+  # just change the fac for the real name and return
+  colnames(res)[1] <- fac %>% as.character() %>% `[`(-1)
+  res
 }
 
 #' @export
