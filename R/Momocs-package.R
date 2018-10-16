@@ -79,7 +79,8 @@ magrittr::`%T>%`
 globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
                   "x_c", "x_d", "y_c", "y_d", ".id", "id", "count",
                   "node", "label", "angle", "hjust", "Freq",
-                  "locus", "name", ".", "actual", "classified",
+                  "locus", "name", ".", "actual", "classified", "predicted", "coo", "actual2",
+                  "coeff", "key", "value",
                   # KMEDOIDS:
                  "cluster", "desc", "n", "neighbor", "sil_width", "width"
                   ))
