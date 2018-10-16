@@ -995,15 +995,19 @@ lf_structure <- function(lf, names = character(), split = "_",
 #' Given a list of files (lf) that includes matching filenames with .jpg (black masks)
 #' and .txt (landmark positions on them as .txt), returns an Out with $ldk defined.
 #' Typically be useful if you use ImageJ to define landmarks on your outlines.
+#'
 #' @param lf a list of filenames
 #' @note Not optimized (images are read twice). Please do not hesitate to contact me
 #' should you have a particular case or need something.
 #' @family babel functions
 #' @export
 tie_jpg_txt <- function(lf){
-  tbl <- table(.trim.ext(.trim.path(lf)))
-  if ((length(unique(tbl)) != 1) | (unique(tbl) !=2))
-    stop("mismatches in filenames", which(tbl!=2))
+
+  # check pairs
+  mismatches <- lf %>% .trim.both() %>%
+    table %>% `!=`(2) %>% which
+  if (length(mismatches)>0)
+    stop("* mismatches found between .jpg and .txt filenames: ", names(mismatches))
 
   # we retrieve the list of .txt et.jpg
   out.lf <- lf[grep(".jpg", lf)]
