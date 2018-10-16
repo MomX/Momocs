@@ -65,7 +65,7 @@ but may be used for any table (likely with freq=FALSE)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -129,15 +129,19 @@ but may be used for any table (likely with <code>freq=FALSE</code>).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>plot_CV</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>plot_CV</span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rm0</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>pc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axis.size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>axis.x.angle</span> <span class='kw'>=</span> <span class='fl'>45</span>, <span class='kw'>cell.size</span> <span class='kw'>=</span> <span class='fl'>2.5</span>,
+  <span class='kw'>signif</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>plot_CV</span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rm0</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>plot_CV</span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rm0</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>pc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axis.size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>axis.x.angle</span> <span class='kw'>=</span> <span class='fl'>45</span>,
+  <span class='kw'>cell.size</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>signif</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for LDA</span>
-<span class='fu'>plot_CV</span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rm0</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plot_CV</span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rm0</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pc</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>axis.size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>axis.x.angle</span> <span class='kw'>=</span> <span class='fl'>45</span>,
+  <span class='kw'>cell.size</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>signif</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,28 +151,44 @@ but may be used for any table (likely with <code>freq=FALSE</code>).</p>
       <td><p>a (cross-validation table) or an LDA object</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>only used for the generic</p></td>
-    </tr>
-    <tr>
       <th>freq</th>
-      <td><p>logical whether to display frequencies or counts</p></td>
+      <td><p>logical whether to display frequencies (within an actual class) or counts</p></td>
     </tr>
     <tr>
       <th>rm0</th>
       <td><p>logical whether to remove zeros</p></td>
     </tr>
     <tr>
-      <th>cex</th>
-      <td><p>numeric to adjust labels in every cell. NA to remove them</p></td>
+      <th>pc</th>
+      <td><p>logical whether to multiply proportion by 100, ie display percentages</p></td>
     </tr>
     <tr>
-      <th>round</th>
-      <td><p>numeric, when freq=TRUE how many decimals should we display</p></td>
+      <th>fill</th>
+      <td><p>logical whether to fill cell according to count/freq</p></td>
     </tr>
     <tr>
       <th>labels</th>
-      <td><p>logical whether to display freq or counts as text labels</p></td>
+      <td><p>logical whether to add text labels on cells</p></td>
+    </tr>
+    <tr>
+      <th>axis.size</th>
+      <td><p>numeric to adjust axis labels</p></td>
+    </tr>
+    <tr>
+      <th>axis.x.angle</th>
+      <td><p>numeric to rotate x-axis labels</p></td>
+    </tr>
+    <tr>
+      <th>cell.size</th>
+      <td><p>numeric to adjust text labels on cells</p></td>
+    </tr>
+    <tr>
+      <th>signif</th>
+      <td><p>numeric to round frequencies using signif</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>useless here</p></td>
     </tr>
     </table>
     
@@ -182,14 +202,32 @@ but may be used for any table (likely with <code>freq=FALSE</code>).</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>, <span class='fl'>5</span>)), <span class='st'>"domes"</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='co'># freq=FALSE inspired by Chitwood et al. New Phytol fig. 4</span>
-<span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_CV</span>(<span class='no'>ol</span>, <span class='kw'>freq</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='no'>gg</span></div><div class='img'><img src='plot_CV-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># and you can tune the gg object wit regular ggplot2 syntax eg</span>
-<span class='no'>gg</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_hue'>scale_color_discrete</a></span>(<span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>120</span>, <span class='fl'>240</span>))</div><div class='output co'>#&gt; <span class='message'>Scale for 'colour' is already present. Adding another scale for 'colour',</span>
-#&gt; <span class='message'>which will replace the existing scale.</span></div><div class='img'><img src='plot_CV-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># freq=TRUE</span>
-<span class='fu'>plot_CV</span>(<span class='no'>ol</span>, <span class='kw'>freq</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='plot_CV-3.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='no'>hearts</span> <span class='kw'>%&gt;%</span>
+     <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='fl'>0.01</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_slide.html'>coo_slide</a></span>(<span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='kw'>%T&gt;%</span> <span class='no'>stack</span> <span class='kw'>%&gt;%</span>
+     <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>, <span class='kw'>norm</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>aut</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:44481</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:37.931</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:11.298</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:0.14521</span></div><div class='output co'>#&gt; <span class='message'>iteration: 5	gain:8.1902</span></div><div class='output co'>#&gt; <span class='message'>iteration: 6	gain:3.2495</span></div><div class='output co'>#&gt; <span class='message'>iteration: 7	gain:0.30402</span></div><div class='output co'>#&gt; <span class='message'>iteration: 8	gain:0.01652</span></div><div class='output co'>#&gt; <span class='message'>iteration: 9	gain:0.31912</span></div><div class='output co'>#&gt; <span class='message'>iteration: 10	gain:0.0053838</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='plot_CV-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>h</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_CV</span>()</div><div class='img'><img src='plot_CV-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>h</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_CV</span>(<span class='kw'>freq</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>rm0</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='img'><img src='plot_CV-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># you can customize the returned gg with some ggplot2 functions</span>
+<span class='no'>h</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_CV</span>(<span class='kw'>labels</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>axis.size</span><span class='kw'>=</span><span class='fl'>5</span>) + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggtitle</a></span>(<span class='st'>"A confusion matrix"</span>)</div><div class='img'><img src='plot_CV-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># or build your own using the prepared data_frame:</span>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>h</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_CV</span>() <span class='kw'>%$%</span> <span class='no'>data</span>
+<span class='no'>df</span></div><div class='output co'>#&gt; # A tibble: 33 x 4
+#&gt;    actual predicted     n actual2
+#&gt;    &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt; &lt;fct&gt;  
+#&gt;  1 ced    ced       0.77  ced    
+#&gt;  2 ced    mat       0.1   ced    
+#&gt;  3 ced    rom       0.067 ced    
+#&gt;  4 ced    vince     0.067 ced    
+#&gt;  5 jeya   jeya      0.87  jeya   
+#&gt;  6 jeya   ponnu     0.067 jeya   
+#&gt;  7 jeya   vince     0.067 jeya   
+#&gt;  8 mat    ced       0.033 mat    
+#&gt;  9 mat    jeya      0.1   mat    
+#&gt; 10 mat    mat       0.47  mat    
+#&gt; # ... with 23 more rows</div><div class='input'>
+<span class='co'># you can even use it as a cross-table plotter</span>
+<span class='no'>bot</span>$<span class='no'>fac</span> <span class='kw'>%&gt;%</span> <span class='no'>table</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_CV</span>()</div><div class='img'><img src='plot_CV-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># or on any matrix</span>
+<span class='co'># set.seed(123) # for the sake of reproducibility</span>
+<span class='fu'>matrix</span>(<span class='fu'>runif</span>(<span class='fl'>50</span>), <span class='fl'>5</span>, <span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='no'>as.table</span> <span class='kw'>%&gt;%</span> <span class='fu'>plot_CV</span>()</div><div class='img'><img src='plot_CV-6.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

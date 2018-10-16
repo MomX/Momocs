@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Converts Momocs objects to data.frames — as_df • Momocs</title>
+<title>Turn Momocs objects into tydy data_frames — as_df • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Converts Momocs objects to data.frames — as_df" />
+<meta property="og:title" content="Turn Momocs objects into tydy data_frames — as_df" />
 
 <meta property="og:description" content="Used in particular for compatibility with the tidyverse" />
 <meta name="twitter:card" content="summary" />
@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Converts Momocs objects to data.frames</h1>
+    <h1>Turn Momocs objects into tydy data_frames</h1>
     <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/babel-bridges.R'><code>R/babel-bridges.R</code></a></small>
     <div class="hidden name"><code>as_df.Rd</code></div>
     </div>
@@ -125,22 +125,19 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>as_df</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>as_df</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for Coo</span>
-<span class='fu'>as_df</span>(<span class='no'>x</span>)
+<span class='fu'>as_df</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for Coe</span>
-<span class='fu'>as_df</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for TraCoe</span>
-<span class='fu'>as_df</span>(<span class='no'>x</span>)
+<span class='fu'>as_df</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for PCA</span>
-<span class='fu'>as_df</span>(<span class='no'>x</span>)
+<span class='fu'>as_df</span>(<span class='no'>x</span>, <span class='no'>retain</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for LDA</span>
-<span class='fu'>as_df</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>as_df</span>(<span class='no'>x</span>, <span class='no'>retain</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,11 +146,20 @@
       <th>x</th>
       <td><p>an object, typically a Momocs object</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>useless here</p></td>
+    </tr>
+    <tr>
+      <th>retain</th>
+      <td><p>numeric for use with <a href='scree.html'>scree</a> methods. Defaut to all. If <code>&lt;1</code>,
+enough axes to retain this proportion of variance; if <code>&gt;1</code>, this number of axes.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>data.frame</code></p>
+    <p>a <a href='http://dplyr.tidyverse.org/reference/reexports.html'>dplyr::data_frame</a></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -162,33 +168,99 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># smaller Out</span>
-<span class='no'>lite_bot</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>21</span>, <span class='fl'>22</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>12</span>)
+    <pre class="examples"><div class='input'><span class='co'># first, some (baby) objects</span>
+<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>12</span>)
+<span class='no'>bf</span> <span class='kw'>&lt;-</span> <span class='no'>b</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>5</span>, <span class='kw'>norm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='co'># Coo object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt;       id   x   y   type fake
-#&gt; 1 brahma  37 561 whisky    a
-#&gt; 2 brahma  63 361 whisky    a
-#&gt; 3 brahma  42 150 whisky    a
-#&gt; 4 brahma 143  15 whisky    a
-#&gt; 5 brahma 316 113 whisky    a
-#&gt; 6 brahma 305 302 whisky    a</div><div class='input'><span class='co'># Coe object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt;       id coefficient        value   type fake
-#&gt; 1 brahma          A1  1.000000000 whisky    a
-#&gt; 2 brahma          A2  0.011981787 whisky    a
-#&gt; 3 brahma          B1  0.000000000 whisky    a
-#&gt; 4 brahma          B2 -0.001124918 whisky    a
-#&gt; 5 brahma          C1  0.000000000 whisky    a
-#&gt; 6 brahma          C2 -0.004341232 whisky    a</div><div class='input'><span class='co'># PCA object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt;           .id   type fake         PC1           PC2           PC3          PC4
-#&gt; 1      brahma whisky    a -0.04488046  0.0168529232  4.544783e-05 5.614897e-17
-#&gt; 2       caney whisky    a -0.03300353 -0.0081976554  4.283401e-03 5.093717e-17
-#&gt; 3       amrut   beer    c -0.05172598 -0.0088654471 -3.884884e-03 4.245244e-17
-#&gt; 4 ballantines   beer    c  0.12960997  0.0002101794 -4.439654e-04 7.247341e-17</div><div class='input'><span class='co'># LDA object</span>
-<span class='no'>lite_bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>2 PC retained</span></div><div class='output co'>#&gt;           PC1           PC2      f
-#&gt; 1 -0.04488046  0.0168529232 whisky
-#&gt; 2 -0.03300353 -0.0081976554 whisky
-#&gt; 3 -0.05172598 -0.0088654471   beer
-#&gt; 4  0.12960997  0.0002101794   beer</div></pre>
+<span class='no'>b</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span></div><div class='output co'>#&gt; # A tibble: 40 x 3
+#&gt;    coo            type   fake 
+#&gt;    &lt;list&gt;         &lt;fct&gt;  &lt;fct&gt;
+#&gt;  1 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  2 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  3 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  4 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  5 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  6 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  7 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  8 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt;  9 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt; 10 &lt;dbl [12 × 2]&gt; whisky a    
+#&gt; # ... with 30 more rows</div><div class='input'><span class='co'># Coe object</span>
+<span class='no'>bf</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span></div><div class='output co'>#&gt; # A tibble: 40 x 22
+#&gt;    type   fake     A1      A2     A3      A4     A5    B1        B2       B3
+#&gt;    &lt;fct&gt;  &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 whisky a     1     0.0120  0.0917 0.0124  0.0248     0 -0.00112  -0.00100
+#&gt;  2 whisky a     1     0.0110  0.0918 0.0124  0.0224     0 -0.00125  -0.00280
+#&gt;  3 whisky a     1     0.0213  0.0770 0.0240  0.0140     0 -0.00637   0.00124
+#&gt;  4 whisky a     1     0.00905 0.0960 0.00971 0.0263     0 -0.000555 -0.00204
+#&gt;  5 whisky a     1.    0.0208  0.0913 0.0208  0.0193     0 -0.00108   0.00113
+#&gt;  6 whisky a     1.    0.0200  0.0722 0.0213  0.0119     0 -0.00215   0.00349
+#&gt;  7 whisky a     1     0.00998 0.0912 0.0122  0.0248     0 -0.000172 -0.00124
+#&gt;  8 whisky a     1     0.0197  0.0845 0.0217  0.0164     0 -0.000464 -0.00144
+#&gt;  9 whisky a     1     0.0194  0.0864 0.0214  0.0191     0 -0.00288  -0.00196
+#&gt; 10 whisky a     1.000 0.0128  0.0929 0.0141  0.0236     0 -0.000998 -0.00170
+#&gt; # ... with 30 more rows, and 12 more variables: B4 &lt;dbl&gt;, B5 &lt;dbl&gt;, C1 &lt;dbl&gt;,
+#&gt; #   C2 &lt;dbl&gt;, C3 &lt;dbl&gt;, C4 &lt;dbl&gt;, C5 &lt;dbl&gt;, D1 &lt;dbl&gt;, D2 &lt;dbl&gt;, D3 &lt;dbl&gt;,
+#&gt; #   D4 &lt;dbl&gt;, D5 &lt;dbl&gt;</div><div class='input'>
+<span class='co'># PCA object</span>
+<span class='no'>bf</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>as_df</span>     <span class='co'># all PCs by default</span></div><div class='output co'>#&gt; `retain` is too ambitious. All axes returned</div><div class='output co'>#&gt; # A tibble: 40 x 22
+#&gt;    type   fake      PC1      PC2       PC3       PC4      PC5      PC6      PC7
+#&gt;    &lt;fct&gt;  &lt;fct&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 whisky a     -0.0520  0.0226  -0.00517  -0.00866   1.31e-2  1.09e-3  5.06e-3
+#&gt;  2 whisky a     -0.0356 -0.00197  0.00880  -0.00800   1.67e-3 -4.14e-3 -3.06e-5
+#&gt;  3 whisky a      0.0811  0.00232  0.00202   0.00307   7.56e-4 -3.99e-3  3.37e-3
+#&gt;  4 whisky a     -0.0694  0.00396  0.0115   -0.00718  -1.72e-3 -4.63e-3  1.78e-3
+#&gt;  5 whisky a     -0.0146 -0.0455   0.00662   0.00305  -2.45e-5  1.69e-2 -1.31e-3
+#&gt;  6 whisky a      0.121   0.0208   0.00168  -0.0115    2.42e-3 -2.48e-3 -2.55e-3
+#&gt;  7 whisky a     -0.0428  0.0170   0.00359  -0.000329 -3.13e-3  1.78e-3  4.73e-3
+#&gt;  8 whisky a      0.0343 -0.00950  0.000959 -0.00764   6.12e-3  2.03e-3 -5.70e-4
+#&gt;  9 whisky a      0.0114 -0.00619 -0.00207   0.00298   5.44e-3 -2.31e-4  3.57e-3
+#&gt; 10 whisky a     -0.0440 -0.00410  0.00285  -0.00367   3.75e-3  7.95e-4 -2.55e-4
+#&gt; # ... with 30 more rows, and 13 more variables: PC8 &lt;dbl&gt;, PC9 &lt;dbl&gt;,
+#&gt; #   PC10 &lt;dbl&gt;, PC11 &lt;dbl&gt;, PC12 &lt;dbl&gt;, PC13 &lt;dbl&gt;, PC14 &lt;dbl&gt;, PC15 &lt;dbl&gt;,
+#&gt; #   PC16 &lt;dbl&gt;, PC17 &lt;dbl&gt;, PC18 &lt;dbl&gt;, PC19 &lt;dbl&gt;, PC20 &lt;dbl&gt;</div><div class='input'><span class='no'>bf</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'>as_df</span>(<span class='fl'>2</span>) <span class='co'># or 2</span></div><div class='output co'>#&gt; # A tibble: 40 x 4
+#&gt;    type   fake      PC1      PC2
+#&gt;    &lt;fct&gt;  &lt;fct&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 whisky a     -0.0520  0.0226 
+#&gt;  2 whisky a     -0.0356 -0.00197
+#&gt;  3 whisky a      0.0811  0.00232
+#&gt;  4 whisky a     -0.0694  0.00396
+#&gt;  5 whisky a     -0.0146 -0.0455 
+#&gt;  6 whisky a      0.121   0.0208 
+#&gt;  7 whisky a     -0.0428  0.0170 
+#&gt;  8 whisky a      0.0343 -0.00950
+#&gt;  9 whisky a      0.0114 -0.00619
+#&gt; 10 whisky a     -0.0440 -0.00410
+#&gt; # ... with 30 more rows</div><div class='input'><span class='no'>bf</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'>as_df</span>(<span class='fl'>0.99</span>) <span class='co'># or enough for 99%</span></div><div class='output co'>#&gt; # A tibble: 40 x 8
+#&gt;    type   fake      PC1      PC2       PC3       PC4        PC5       PC6
+#&gt;    &lt;fct&gt;  &lt;fct&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 whisky a     -0.0520  0.0226  -0.00517  -0.00866   0.0131     0.00109 
+#&gt;  2 whisky a     -0.0356 -0.00197  0.00880  -0.00800   0.00167   -0.00414 
+#&gt;  3 whisky a      0.0811  0.00232  0.00202   0.00307   0.000756  -0.00399 
+#&gt;  4 whisky a     -0.0694  0.00396  0.0115   -0.00718  -0.00172   -0.00463 
+#&gt;  5 whisky a     -0.0146 -0.0455   0.00662   0.00305  -0.0000245  0.0169  
+#&gt;  6 whisky a      0.121   0.0208   0.00168  -0.0115    0.00242   -0.00248 
+#&gt;  7 whisky a     -0.0428  0.0170   0.00359  -0.000329 -0.00313    0.00178 
+#&gt;  8 whisky a      0.0343 -0.00950  0.000959 -0.00764   0.00612    0.00203 
+#&gt;  9 whisky a      0.0114 -0.00619 -0.00207   0.00298   0.00544   -0.000231
+#&gt; 10 whisky a     -0.0440 -0.00410  0.00285  -0.00367   0.00375    0.000795
+#&gt; # ... with 30 more rows</div><div class='input'>
+<span class='co'># LDA object</span>
+<span class='no'>bf</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>fake</span>) <span class='kw'>%&gt;%</span> <span class='no'>as_df</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; # A tibble: 40 x 8
+#&gt;    actual predicted posterior type   fake     LD1    LD2     LD3
+#&gt;    &lt;fct&gt;  &lt;fct&gt;         &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 a      a             1.000 whisky a     -4.19   1.84  -1.56  
+#&gt;  2 a      a             0.997 whisky a     -2.74   1.68  -0.0456
+#&gt;  3 a      a             0.878 whisky a     -2.26   0.171 -0.293 
+#&gt;  4 a      a             0.935 whisky a     -3.17  -0.527 -0.611 
+#&gt;  5 a      a             0.997 whisky a     -2.97   1.54   0.665 
+#&gt;  6 a      a             0.989 whisky a     -4.64  -0.937  0.385 
+#&gt;  7 a      d             0.620 whisky a     -0.109  2.26  -0.0356
+#&gt;  8 a      a             0.999 whisky a     -4.20   0.797  0.520 
+#&gt;  9 a      a             0.994 whisky a     -2.97   0.925 -0.640 
+#&gt; 10 a      b             0.826 whisky a     -1.52  -0.749  0.113 
+#&gt; # ... with 30 more rows</div><div class='input'># same options apply
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

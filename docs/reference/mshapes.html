@@ -67,7 +67,7 @@ groups defined with the fac argument if provided) and the Coe object is also ret
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -154,7 +154,10 @@ groups defined with the fac argument if provided) and the Coe object is <em>also
 <span class='fu'>MSHAPES</span>(<span class='no'>x</span>, <span class='kw'>fac</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for PCA</span>
-<span class='fu'>MSHAPES</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='no'>...</span>)
+<span class='fu'>MSHAPES</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for LDA</span>
+<span class='fu'>MSHAPES</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='no'>...</span>)
 
 <span class='fu'>mshapes</span>(<span class='no'>...</span>)</pre>
     
@@ -186,15 +189,8 @@ groups defined with the fac argument if provided) and the Coe object is <em>also
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>the averaged shape; on Coe objects, a list with two components: <code>$Coe</code> object of the same class, and
-<code>$shp</code> a list of matrices of (x, y) coordinates.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
-in that case, the other columns of the fac are also returned, using the first row within every level, but they may
-not be representative of the group. Also notice that for PCA objects, mean scores are returned
-within a PCA object (accessible with <code>PCA$x</code>) that can be plotted directly but other slots are left
-unchanged.</p>
+<code>$shp</code> a list of matrices of (x, y) coordinates. On <a href='PCA.html'>PCA</a> and <a href='LDA.html'>LDA</a> objects, the FUN (typically mean or median)
+of scores on <code>PCs</code> or <code>LDs</code>. This method used on the latter objects may be moved to another function at some point.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -269,7 +265,7 @@ unchanged.</p>
 #&gt; 22 123.650 663.775
 #&gt; 23 109.650 590.000
 #&gt; 24  83.625 514.500</div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>wings</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'>MSHAPES</span>(<span class='no'>wings</span>))</div><div class='img'><img src='MSHAPES-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>MSHAPES</span>(<span class='no'>bot.f</span>) <span class='co'># the mean (global) shape</span></div><div class='output co'>#&gt; <span class='message'>no 'fac' provided, returns meanshape</span></div><div class='output co'>#&gt;                   x             y
+<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='fu'>MSHAPES</span>(<span class='no'>bot.f</span>) <span class='co'># the mean (global) shape</span></div><div class='output co'>#&gt; <span class='message'>no 'fac' provided, returns meanshape</span></div><div class='output co'>#&gt;                   x             y
 #&gt;   [1,]  1.168906286 -0.0001651753
 #&gt;   [2,]  1.163078247  0.0421600553
 #&gt;   [3,]  1.145987931  0.0791545836
@@ -398,8 +394,10 @@ unchanged.</p>
 #&gt;   &lt;fct&gt;  &lt;fct&gt;
 #&gt; 1 beer   c    
 #&gt; 2 whisky a    </div><div class='input'><span class='fu'>class</span>(<span class='no'>ms</span>$<span class='no'>Coe</span>)</div><div class='output co'>#&gt; [1] "OutCoe" "Coe"   </div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='no'>ms</span>$<span class='no'>shp</span>
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='img'><img src='MSHAPES-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='tps_arr.html'>tps_arr</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='no'>ms</span>$<span class='no'>beer</span>) <span class='co'>#etc.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='output co'>#&gt; <span class='warning'>Warning: zero-length arrow is of indeterminate angle and so skipped</span></div><div class='img'><img src='MSHAPES-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>'VL'</span>), <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>MSHAPES</span>(<span class='no'>op</span>, ~<span class='no'>var</span>) <span class='co'>#etc</span>
+<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='img'><img src='MSHAPES-2.png' alt='' width='700' height='433' /></div><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='tps_arr.html'>tps_arr</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='no'>ms</span>$<span class='no'>beer</span>) <span class='co'>#etc.</span>
+<span class='co'># }</span><div class='input'>
+<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>view</span><span class='kw'>==</span><span class='st'>"VL"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>MSHAPES</span>(<span class='no'>op</span>, ~<span class='no'>var</span>) <span class='co'>#etc</span>
 <span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; An OpnCoe object [ npoly analysis ]
 #&gt; --------------------
 #&gt;  - $coe: 3 open outlines described
@@ -409,9 +407,32 @@ unchanged.</p>
 #&gt;   &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
 #&gt; 1 Aglan  cult  VL    O10  
 #&gt; 2 MouBo1 wild  VL    O10  
-#&gt; 3 PicMa  cult  VL    O10  </div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='MSHAPES-4.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; 3 PicMa  cult  VL    O10  </div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='MSHAPES-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:85238</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:5.4545</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:1.1678</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:0.0014869</span></div><div class='output co'>#&gt; <span class='message'>iteration: 5	gain:0.9109</span></div><div class='output co'>#&gt; <span class='message'>iteration: 6	gain:0.25865</span></div><div class='output co'>#&gt; <span class='message'>iteration: 7	gain:0.11654</span></div><div class='output co'>#&gt; <span class='message'>iteration: 8	gain:0.0002648</span></div><div class='output co'>#&gt; <span class='message'>iteration: 9	gain:0.078733</span></div><div class='output co'>#&gt; <span class='message'>iteration: 10	gain:0.037936</span></div><div class='output co'>#&gt; <span class='message'>iteration: 11	gain:0.0036029</span></div><div class='output co'>#&gt; <span class='message'>iteration: 12	gain:4.6608e-06</span></div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>MSHAPES</span>(<span class='no'>wp</span>, <span class='fl'>1</span>)
-<span class='fu'><a href='plot_MSHAPES.html'>plot_MSHAPES</a></span>(<span class='no'>ms</span>)</div><div class='img'><img src='MSHAPES-5.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='plot_MSHAPES.html'>plot_MSHAPES</a></span>(<span class='no'>ms</span>)</div><div class='img'><img src='MSHAPES-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># on PCA and LDA just return a data_frame</span>
+<span class='no'>bot.f</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'>MSHAPES</span>(~<span class='no'>type</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 41
+#&gt;   type       PC1      PC2      PC3      PC4      PC5      PC6      PC7      PC8
+#&gt;   &lt;fct&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 beer  -0.00396 -8.28e-4 -0.00513 -0.00375  0.00243 -0.00200  0.00127 -8.98e-4
+#&gt; 2 whis…  0.00396  8.28e-4  0.00513  0.00375 -0.00243  0.00200 -0.00127  8.98e-4
+#&gt; # ... with 32 more variables: PC9 &lt;dbl&gt;, PC10 &lt;dbl&gt;, PC11 &lt;dbl&gt;, PC12 &lt;dbl&gt;,
+#&gt; #   PC13 &lt;dbl&gt;, PC14 &lt;dbl&gt;, PC15 &lt;dbl&gt;, PC16 &lt;dbl&gt;, PC17 &lt;dbl&gt;, PC18 &lt;dbl&gt;,
+#&gt; #   PC19 &lt;dbl&gt;, PC20 &lt;dbl&gt;, PC21 &lt;dbl&gt;, PC22 &lt;dbl&gt;, PC23 &lt;dbl&gt;, PC24 &lt;dbl&gt;,
+#&gt; #   PC25 &lt;dbl&gt;, PC26 &lt;dbl&gt;, PC27 &lt;dbl&gt;, PC28 &lt;dbl&gt;, PC29 &lt;dbl&gt;, PC30 &lt;dbl&gt;,
+#&gt; #   PC31 &lt;dbl&gt;, PC32 &lt;dbl&gt;, PC33 &lt;dbl&gt;, PC34 &lt;dbl&gt;, PC35 &lt;dbl&gt;, PC36 &lt;dbl&gt;,
+#&gt; #   PC37 &lt;dbl&gt;, PC38 &lt;dbl&gt;, PC39 &lt;dbl&gt;, PC40 &lt;dbl&gt;</div><div class='input'><span class='no'>bot.f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>fake</span>) <span class='kw'>%&gt;%</span> <span class='fu'>MSHAPES</span>(~<span class='no'>fake</span>)</div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; # A tibble: 4 x 4
+#&gt;   fake     LD1    LD2    LD3
+#&gt;   &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1 a      -9.64  0.662  2.65 
+#&gt; 2 b     -11.5  -0.930 -2.36 
+#&gt; 3 c       9.37  3.15  -0.792
+#&gt; 4 d      11.7  -2.88   0.505</div><div class='input'><span class='co'># LDA on ~fake but average on type</span>
+<span class='no'>bot.f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>fake</span>) <span class='kw'>%&gt;%</span> <span class='fu'>MSHAPES</span>(~<span class='no'>type</span>)</div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; # A tibble: 2 x 4
+#&gt;   type     LD1    LD2    LD3
+#&gt;   &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1 beer    10.5  0.134 -0.144
+#&gt; 2 whisky -10.5 -0.134  0.144</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -419,8 +440,6 @@ unchanged.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -125,11 +125,17 @@
 <li>new multivariate method: <code>MDS</code> on top of <code>cmdscale</code>; use <code>plot_MDS</code> to plot it.</li>
 <li>
 <code>mshapes</code> is now <code>MSHAPES</code> to stick with other capitalized “multivariate” methods. <code>mshapes</code> now just announces its future deprecation.</li>
+<li>
+<code>MSHAPES</code> now just returns data_frame of PCs or LDs when used on <code>PCA</code> or <code>LDA</code> objects.</li>
 <li>new handling method <code>rm_missing</code> to deal with missing data in <code>$fac</code>
 </li>
 <li>Consequently, <code>plot_MSHAPES</code> is the new method for plotting it. Works on lists and on the result of <code>MSHAPES</code>.</li>
 <li>
-<code>plot_CV</code> has been slightly refreshed: jitter now always jitters the same way, and in a more compact radius around cell centers. This might be renamed to <code>plot_confusion</code> at some point.</li>
+<code>plot_CV</code> has been refreshed, and is better now at plotting either small or very big matrices.</li>
+<li>
+<code>boxplot</code> methods on Coe have been refreshed</li>
+<li>
+<code>hist</code> methods on Coe deprecated</li>
 <li>
 <code>fac_dispatcher</code> supports <code>NULL</code> which eases a lot multivariate plots (notably Momecs side)</li>
 <li>
@@ -159,6 +165,8 @@
 <code>def_ldk</code> gains a <code>close</code> and <code>points</code> argument</li>
 <li>no more printing of Coo errors that was due to some forgotten <code>data.frame</code> rather than <code>data_frame</code>
 </li>
+<li>
+<code>as_df</code> now returns more useful <code>data_frame</code> everywhere and gain a <code>retain</code> argument</li>
 <li>fixed minor bugs (see GitHub history of commits)</li>
 </ul>
 </div>

@@ -64,7 +64,7 @@ pairwise combination of the factor provided." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -184,7 +184,7 @@ equivalent to <a href='MANOVA.html'>MANOVA</a>. <code>MANOVA_PW.PCA</code> works
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># we create a fake factor with 4 levels</span>
 <span class='no'>bot</span>$<span class='no'>fac</span>$<span class='no'>fake</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>))
-<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>8</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='fu'>MANOVA_PW</span>(<span class='no'>bot.p</span>, <span class='st'>'fake'</span>) <span class='co'># or MANOVA_PW(bot.p, 2)</span></div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 6 were retained</span></div><div class='output co'>#&gt; <span class='message'>ab</span></div><div class='output co'>#&gt; <span class='message'>ac</span></div><div class='output co'>#&gt; <span class='message'>ad</span></div><div class='output co'>#&gt; <span class='message'>bc</span></div><div class='output co'>#&gt; <span class='message'>bd</span></div><div class='output co'>#&gt; <span class='message'>cd</span></div><div class='output co'>#&gt; $stars.tab
+<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>8</span>))</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='fu'>MANOVA_PW</span>(<span class='no'>bot.p</span>, <span class='st'>'fake'</span>) <span class='co'># or MANOVA_PW(bot.p, 2)</span></div><div class='output co'>#&gt; <span class='message'>PC axes 1 to 6 were retained</span></div><div class='output co'>#&gt; <span class='message'>ab</span></div><div class='output co'>#&gt; <span class='message'>ac</span></div><div class='output co'>#&gt; <span class='message'>ad</span></div><div class='output co'>#&gt; <span class='message'>bc</span></div><div class='output co'>#&gt; <span class='message'>bd</span></div><div class='output co'>#&gt; <span class='message'>cd</span></div><div class='output co'>#&gt; $stars.tab
 #&gt;   a b c  d 
 #&gt; a   - ** **
 #&gt; b     *  * 

@@ -64,7 +64,7 @@ using the layers. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -206,70 +206,65 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### First prepare an NMDS object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
-#&gt; Run 1 stress 0.07227127 
-#&gt; ... Procrustes: rmse 1.163172e-05  max resid 4.587762e-05 
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
+#&gt; Run 1 stress 0.07227126 
+#&gt; ... Procrustes: rmse 9.86259e-06  max resid 2.138246e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 2 stress 0.07227134 
-#&gt; ... Procrustes: rmse 2.396678e-05  max resid 7.336814e-05 
+#&gt; Run 2 stress 0.07227125 
+#&gt; ... Procrustes: rmse 5.606532e-06  max resid 2.141605e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 3 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.651025e-05  max resid 6.50427e-05 
+#&gt; Run 3 stress 0.07227127 
+#&gt; ... Procrustes: rmse 3.371012e-05  max resid 0.0001371314 
 #&gt; ... Similar to previous best
-#&gt; Run 4 stress 0.07227131 
-#&gt; ... Procrustes: rmse 1.771463e-05  max resid 7.743227e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 5 stress 0.07227127 
-#&gt; ... Procrustes: rmse 2.827268e-05  max resid 0.0001151061 
+#&gt; Run 4 stress 0.1476563 
+#&gt; Run 5 stress 0.07227125 
+#&gt; ... Procrustes: rmse 2.325105e-06  max resid 7.83702e-06 
 #&gt; ... Similar to previous best
 #&gt; Run 6 stress 0.07227125 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 4.736605e-06  max resid 1.884858e-05 
+#&gt; ... Procrustes: rmse 7.428249e-06  max resid 2.630202e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 7 stress 0.07227128 
-#&gt; ... Procrustes: rmse 2.873635e-05  max resid 0.0001136562 
+#&gt; Run 7 stress 0.07227127 
+#&gt; ... Procrustes: rmse 1.100152e-05  max resid 4.944553e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 8 stress 0.07227126 
-#&gt; ... Procrustes: rmse 1.223044e-05  max resid 4.763694e-05 
+#&gt; Run 8 stress 0.07227128 
+#&gt; ... Procrustes: rmse 3.314176e-05  max resid 0.0001379795 
 #&gt; ... Similar to previous best
-#&gt; Run 9 stress 0.07227136 
-#&gt; ... Procrustes: rmse 3.536476e-05  max resid 0.0001216162 
+#&gt; Run 9 stress 0.07227128 
+#&gt; ... Procrustes: rmse 3.620206e-05  max resid 0.0001523612 
 #&gt; ... Similar to previous best
-#&gt; Run 10 stress 0.07227129 
-#&gt; ... Procrustes: rmse 1.690321e-05  max resid 4.883207e-05 
+#&gt; Run 10 stress 0.146277 
+#&gt; Run 11 stress 0.07227127 
+#&gt; ... Procrustes: rmse 1.575428e-05  max resid 5.33223e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 11 stress 0.0722713 
-#&gt; ... Procrustes: rmse 4.164052e-05  max resid 0.0001678931 
+#&gt; Run 12 stress 0.1629845 
+#&gt; Run 13 stress 0.0722713 
+#&gt; ... Procrustes: rmse 3.516792e-05  max resid 0.0001306068 
 #&gt; ... Similar to previous best
-#&gt; Run 12 stress 0.1558549 
-#&gt; Run 13 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.181189e-06  max resid 2.218746e-05 
+#&gt; Run 14 stress 0.07227127 
+#&gt; ... Procrustes: rmse 1.620834e-05  max resid 5.386396e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 14 stress 0.07227125 
-#&gt; ... Procrustes: rmse 4.798799e-06  max resid 2.033393e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 15 stress 0.07227128 
-#&gt; ... Procrustes: rmse 3.678776e-05  max resid 0.0001580423 
+#&gt; Run 15 stress 0.07227125 
+#&gt; ... Procrustes: rmse 9.064569e-06  max resid 3.247021e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 16 stress 0.07227129 
-#&gt; ... Procrustes: rmse 2.077526e-05  max resid 5.826541e-05 
+#&gt; ... Procrustes: rmse 4.424743e-05  max resid 0.0001762434 
 #&gt; ... Similar to previous best
-#&gt; Run 17 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.819981e-06  max resid 1.985423e-05 
+#&gt; Run 17 stress 0.07227126 
+#&gt; ... Procrustes: rmse 1.53515e-05  max resid 6.062682e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 18 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.905254e-06  max resid 2.827244e-05 
+#&gt; ... Procrustes: rmse 8.235858e-06  max resid 3.322576e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 19 stress 0.07227126 
-#&gt; ... Procrustes: rmse 8.651829e-06  max resid 2.263447e-05 
+#&gt; Run 19 stress 0.07227136 
+#&gt; ... Procrustes: rmse 6.661401e-05  max resid 0.0002579598 
 #&gt; ... Similar to previous best
-#&gt; Run 20 stress 0.07227129 
-#&gt; ... Procrustes: rmse 4.397587e-05  max resid 0.0001865397 
+#&gt; Run 20 stress 0.07227126 
+#&gt; ... Procrustes: rmse 1.088194e-05  max resid 3.852899e-05 
 #&gt; ... Similar to previous best
 #&gt; *** Solution reached</div><div class='input'>
 <span class='fu'>plot_NMDS</span>(<span class='no'>x</span>)</div><div class='img'><img src='plot_NMDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_NMDS</span>(<span class='no'>x</span>, ~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_stars</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span>()</div><div class='img'><img src='plot_NMDS-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>### Same on MDS object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>MDS</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>MDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'>
 <span class='fu'>plot_MDS</span>(<span class='no'>x</span>)</div><div class='img'><img src='plot_NMDS-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_MDS</span>(<span class='no'>x</span>, ~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_stars</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span>()</div><div class='img'><img src='plot_NMDS-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

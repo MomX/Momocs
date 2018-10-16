@@ -64,7 +64,7 @@ width and/or color for arrows or segments, based on the relative frequencies." /
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -199,6 +199,11 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>When <code>freq=FALSE</code>, the fill colors are not weighted
+within actual classes and should not be displayed if classes sizes are not balanced.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='LDA.html'>LDA</a>, <a href='plot.LDA.html'>plot.LDA</a>, <a href='plot_CV.html'>plot_CV</a>.</p></div>
@@ -235,7 +240,7 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
 
 <span class='fu'>plot_CV2</span>(<span class='no'>tab</span>)</div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='no'>arrows</span>) <span class='co'># if you prefer arrows</span></div><div class='img'><img src='plot_CV2-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd0</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_india</span>) <span class='co'># if you like india but not lwds</span></div><div class='img'><img src='plot_CV2-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>col0</span><span class='kw'>=</span><span class='st'>'pink'</span>) <span class='co'># only lwd</span></div><div class='img'><img src='plot_CV2-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd0</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>cex.names</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='co'># if you're getting old</span></div><div class='img'><img src='plot_CV2-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='co'># pretty but useless</span></div><div class='img'><img src='plot_CV2-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>col.breaks</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='co'># if you think it's either good or bad</span></div><div class='img'><img src='plot_CV2-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>NA</span>) <span class='co'># if you do not like dots</span></div><div class='img'><img src='plot_CV2-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>gap.dots</span><span class='kw'>=</span><span class='fl'>0</span>) <span class='co'># if you want to 'fill the gap'</span></div><div class='img'><img src='plot_CV2-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_CV2</span>(<span class='no'>tab</span>, <span class='kw'>gap.dots</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='co'># or not</span></div><div class='img'><img src='plot_CV2-9.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>#trilo examples</span>
-<span class='no'>trilo.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>trilo</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>trilo.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>trilo.f</span>), <span class='st'>'onto'</span>)</div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='no'>trilo.l</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
+<span class='no'>trilo.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>trilo</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>trilo.l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>trilo.f</span>), <span class='st'>'onto'</span>)</div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='no'>trilo.l</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
 #&gt;       classified
 #&gt; actual  a  b  c  d
 #&gt;      a  0  5  2  0
@@ -256,6 +261,8 @@ width and/or color for arrows or segments, based on the relative frequencies.</p
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#note">Note</a></li>
+
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>

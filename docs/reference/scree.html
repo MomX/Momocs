@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Methods for PCA eigen values — scree • Momocs</title>
+<title>How many axes to retain this much of variance or trace ? — scree • Momocs</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Methods for PCA eigen values — scree" />
+<meta property="og:title" content="How many axes to retain this much of variance or trace ? — scree" />
 
 <meta property="og:description" content="A set of functions around PCA/LDA eigen/trace. scree calculates their proportion and cumulated proportion;
 scree_min returns the minimal number of axis to use to retain a given proportion; scree_plot displays a screeplot." />
@@ -64,7 +64,7 @@ scree_min returns the minimal number of axis to use to retain a given proportion
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -115,7 +115,7 @@ scree_min returns the minimal number of axis to use to retain a given proportion
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Methods for PCA eigen values</h1>
+    <h1>How many axes to retain this much of variance or trace ?</h1>
     <small class="dont-index">Source: <a href='https://github.com/MomX/Momocs//blob/master/R/gr-PCA.R'><code>R/gr-PCA.R</code></a></small>
     <div class="hidden name"><code>scree.Rd</code></div>
     </div>
@@ -130,14 +130,14 @@ scree_min returns the minimal number of axis to use to retain a given proportion
     <pre class="usage"><span class='fu'>scree</span>(<span class='no'>x</span>, <span class='no'>nax</span>)
 
 <span class='co'># S3 method for PCA</span>
-<span class='fu'>scree</span>(<span class='no'>x</span>, <span class='kw'>nax</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>)
+<span class='fu'>scree</span>(<span class='no'>x</span>, <span class='no'>nax</span>)
 
 <span class='co'># S3 method for LDA</span>
-<span class='fu'>scree</span>(<span class='no'>x</span>, <span class='kw'>nax</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>)
+<span class='fu'>scree</span>(<span class='no'>x</span>, <span class='no'>nax</span>)
 
-<span class='fu'>scree_min</span>(<span class='no'>x</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.99</span>)
+<span class='fu'>scree_min</span>(<span class='no'>x</span>, <span class='no'>prop</span>)
 
-<span class='fu'>scree_plot</span>(<span class='no'>x</span>, <span class='kw'>nax</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>)</pre>
+<span class='fu'>scree_plot</span>(<span class='no'>x</span>, <span class='no'>nax</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,11 +148,14 @@ scree_min returns the minimal number of axis to use to retain a given proportion
     </tr>
     <tr>
       <th>nax</th>
-      <td><p>numeric range of axis to consider</p></td>
+      <td><p>numeric range of axes to consider.
+All by default for <code>scree_min</code>, display until <code>0.99</code> for <code>scree_plot</code></p></td>
     </tr>
     <tr>
       <th>prop</th>
-      <td><p>numeric how many axis are enough this proportion of variance, if too high then number of axis is returned.</p></td>
+      <td><p>numeric how many axes are enough to gather this proportion of variance.
+Default to 1, all axes are returned
+defaut to 1: all axis are returned</p></td>
     </tr>
     </table>
     
@@ -163,27 +166,28 @@ scree_min returns the minimal number of axis to use to retain a given proportion
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># On PCA</span>
-<span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>))</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
-#&gt;    axis  proportion cumsum
-#&gt;    &lt;ord&gt;      &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1 1        0.761    0.761
-#&gt;  2 2        0.170    0.931
-#&gt;  3 3        0.0294   0.960
-#&gt;  4 4        0.0135   0.974
-#&gt;  5 5        0.00860  0.982
-#&gt;  6 6        0.00719  0.990
-#&gt;  7 7        0.00306  0.993
-#&gt;  8 8        0.00190  0.994
-#&gt;  9 9        0.00159  0.996
-#&gt; 10 10       0.00122  0.997</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>0.99</span>)</div><div class='output co'>#&gt; [1] 7</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 10</div><div class='input'>
+<span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>))</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; # A tibble: 40 x 3
+#&gt;     axis proportion cumsum
+#&gt;    &lt;int&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1     1    0.761    0.761
+#&gt;  2     2    0.170    0.931
+#&gt;  3     3    0.0294   0.960
+#&gt;  4     4    0.0135   0.974
+#&gt;  5     5    0.00860  0.982
+#&gt;  6     6    0.00719  0.990
+#&gt;  7     7    0.00306  0.993
+#&gt;  8     8    0.00190  0.994
+#&gt;  9     9    0.00159  0.996
+#&gt; 10    10    0.00122  0.997
+#&gt; # ... with 30 more rows</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>0.99</span>)</div><div class='output co'>#&gt; [1] 7</div><div class='input'><span class='fu'>scree_min</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 37</div><div class='input'>
 <span class='fu'>scree_plot</span>(<span class='no'>bp</span>)</div><div class='img'><img src='scree-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>scree_plot</span>(<span class='no'>bp</span>, <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='img'><img src='scree-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># on LDA, it uses svd</span>
 <span class='no'>bl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>)), <span class='st'>"var"</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to 5</span></div><div class='output co'>#&gt; <span class='message'>4 PC retained</span></div><div class='input'><span class='fu'>scree</span>(<span class='no'>bl</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 3
-#&gt;   axis  proportion cumsum
-#&gt;   &lt;ord&gt;      &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1 1         0.913   0.913
-#&gt; 2 2         0.0603  0.973
-#&gt; 3 3         0.0268  1.000</div><div class='input'>
+#&gt;    axis proportion cumsum
+#&gt;   &lt;int&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1     1     0.913   0.913
+#&gt; 2     2     0.0603  0.973
+#&gt; 3     3     0.0268  1.000</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

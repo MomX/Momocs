@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -174,34 +174,34 @@
     <pre class="examples"><div class='input'>
 <span class='co'># samples 50% of the bottles no matter their type</span>
 <span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 20 outlines, 158 +/- 22 coords (in $coo)
+#&gt;   - 20 outlines, 165 +/- 18 coords (in $coo)
 #&gt;   - 2 classifiers (in $fac): 
 #&gt; # A tibble: 20 x 2
 #&gt;   type   fake 
 #&gt;   &lt;fct&gt;  &lt;fct&gt;
-#&gt; 1 whisky b    
-#&gt; 2 beer   d    
-#&gt; 3 whisky b    
-#&gt; 4 whisky a    
+#&gt; 1 beer   d    
+#&gt; 2 beer   c    
+#&gt; 3 whisky a    
+#&gt; 4 whisky b    
 #&gt; 5 beer   c    
-#&gt; 6 beer   c    
+#&gt; 6 whisky a    
 #&gt; # ... with 14 more rows
 #&gt;   - also: $ldk</div><div class='input'><span class='co'># 80% bottles of beer and of whisky</span>
 <span class='fu'>table</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>0.8</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"type"</span>)$<span class='no'>fac</span>)</div><div class='output co'>#&gt;         fake
-#&gt; type     a b c d
-#&gt;   beer   0 0 7 9
-#&gt;   whisky 8 8 0 0</div><div class='input'><span class='co'># bootstrap the same number of bootles of each type but with replacement</span>
+#&gt; type      a  b  c  d
+#&gt;   beer    0  0  8  8
+#&gt;   whisky 10  6  0  0</div><div class='input'><span class='co'># bootstrap the same number of bootles of each type but with replacement</span>
 <span class='fu'>table</span>(<span class='fu'>names</span>(<span class='fu'>sample_frac</span>(<span class='no'>bot</span>, <span class='fl'>1</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)))</div><div class='output co'>#&gt; 
-#&gt;    ballantines         brahma      bushmills          caney         chivas 
-#&gt;              3              1              1              1              2 
-#&gt;         corona        dalmore          duvel   franziskaner    glendronach 
-#&gt;              2              3              6              1              1 
-#&gt;     grimbergen   highlandpark     hoegardeen    jackdaniels             jb 
-#&gt;              1              1              2              1              1 
-#&gt;        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe 
-#&gt;              1              1              1              1              4 
-#&gt;     oldpotrero     pecheresse         tamdhu         yoichi 
-#&gt;              1              1              1              2 </div><div class='input'>
+#&gt;         brahma      bushmills          caney         chimay         chivas 
+#&gt;              1              1              2              2              1 
+#&gt;    deusventrue          duvel   franziskaner   glenmorangie        guiness 
+#&gt;              2              1              1              2              2 
+#&gt;   highlandpark    jackdaniels  johnniewalker     kingfisher lindemanskriek 
+#&gt;              3              2              1              1              2 
+#&gt;     makersmark    nicechouffe     oldpotrero     pecheresse   sierranevada 
+#&gt;              3              1              2              1              2 
+#&gt;         tamdhu      westmalle     wildturkey         yoichi 
+#&gt;              1              1              4              1 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

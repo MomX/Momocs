@@ -65,7 +65,7 @@ on Ldk for detecting possible outliers on freshly digitized/imported datasets." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
 <span class='no'>x</span>[<span class='fl'>4</span>] <span class='kw'>&lt;-</span> <span class='fl'>99</span>
 <span class='fu'>which_out</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] 4</div><div class='input'>
 <span class='co'># on a Coe</span>
-<span class='no'>bf</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>)</div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='input'><span class='no'>bf</span>$<span class='no'>coe</span>[<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>6</span>), <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>5</span>
+<span class='no'>bf</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bf</span>$<span class='no'>coe</span>[<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>6</span>), <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>5</span>
 <span class='fu'>which_out</span>(<span class='no'>bf</span>)</div><div class='output co'>#&gt; [1] 1 6</div><div class='input'>
 <span class='co'># on Ldk</span>
 <span class='no'>w_no</span> <span class='kw'>&lt;-</span> <span class='no'>w_ok</span> <span class='kw'>&lt;-</span> <span class='no'>wings</span>
@@ -177,7 +177,7 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
 #&gt; 2 AN6       6     2 y         </div><div class='input'>
 <span class='co'># a way to illustrate, filter outliers</span>
 <span class='co'># conf has been chosen deliberately low to show some outliers</span>
-<span class='no'>x_f</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'><span class='no'>x_p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>x_f</span>)
+<span class='no'>x_f</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'><span class='no'>x_p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>x_f</span>)
 <span class='co'># which are outliers (conf is ridiculously low here)</span>
 <span class='fu'>which_out</span>(<span class='no'>x_p</span>$<span class='no'>x</span>[, <span class='fl'>1</span>], <span class='fl'>0.5</span>)</div><div class='output co'>#&gt;       duvel    latrappe ballantines 
 #&gt;           6          13          22 </div><div class='input'><span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='st'>"black"</span>, <span class='fu'>nrow</span>(<span class='no'>x_p</span>$<span class='no'>x</span>))

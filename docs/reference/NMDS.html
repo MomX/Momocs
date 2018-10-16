@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
       </span>
     </div>
 
@@ -175,55 +175,60 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>you selected `norm=TRUE`, which is not recommended. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
-#&gt; Run 1 stress 0.07227132 
-#&gt; ... Procrustes: rmse 2.134479e-05  max resid 6.102186e-05 
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
+#&gt; Run 1 stress 0.07227126 
+#&gt; ... Procrustes: rmse 1.617493e-05  max resid 6.031545e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 2 stress 0.1536611 
-#&gt; Run 3 stress 0.1729718 
-#&gt; Run 4 stress 0.07227128 
-#&gt; ... Procrustes: rmse 2.27572e-05  max resid 0.0001142424 
+#&gt; Run 2 stress 0.07227125 
+#&gt; ... Procrustes: rmse 9.322816e-06  max resid 3.38855e-05 
+#&gt; ... Similar to previous best
+#&gt; Run 3 stress 0.07227127 
+#&gt; ... Procrustes: rmse 3.550582e-05  max resid 0.0001313918 
+#&gt; ... Similar to previous best
+#&gt; Run 4 stress 0.07227126 
+#&gt; ... Procrustes: rmse 2.426918e-05  max resid 9.204528e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 5 stress 0.07227125 
-#&gt; ... Procrustes: rmse 8.797053e-06  max resid 3.993071e-05 
+#&gt; ... Procrustes: rmse 4.726889e-06  max resid 1.445588e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 6 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.388401e-06  max resid 2.000297e-05 
+#&gt; Run 6 stress 0.1684233 
+#&gt; Run 7 stress 0.07227126 
+#&gt; ... Procrustes: rmse 1.940177e-05  max resid 6.916372e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 7 stress 0.07227129 
-#&gt; ... Procrustes: rmse 4.13528e-05  max resid 0.0001738164 
+#&gt; Run 8 stress 0.0722713 
+#&gt; ... Procrustes: rmse 1.880684e-05  max resid 4.590807e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 8 stress 0.1476538 
 #&gt; Run 9 stress 0.07227125 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 3.713068e-06  max resid 1.69194e-05 
+#&gt; ... Procrustes: rmse 4.175003e-06  max resid 1.463801e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 10 stress 0.07227125 
-#&gt; ... Procrustes: rmse 4.388959e-06  max resid 1.391617e-05 
+#&gt; ... Procrustes: rmse 5.948362e-06  max resid 2.787275e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 11 stress 0.07227131 
-#&gt; ... Procrustes: rmse 4.67699e-05  max resid 0.0001804122 
+#&gt; Run 11 stress 0.07227129 
+#&gt; ... Procrustes: rmse 2.156687e-05  max resid 7.252355e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 12 stress 0.1647891 
-#&gt; Run 13 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.048337e-05  max resid 8.248206e-05 
+#&gt; Run 12 stress 0.1723591 
+#&gt; Run 13 stress 0.07227128 
+#&gt; ... Procrustes: rmse 3.718727e-05  max resid 0.0001561026 
 #&gt; ... Similar to previous best
-#&gt; Run 14 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.071888e-05  max resid 8.201421e-05 
+#&gt; Run 14 stress 0.07227125 
+#&gt; ... Procrustes: rmse 7.202872e-06  max resid 2.44823e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 15 stress 0.1606942 
-#&gt; Run 16 stress 0.07227125 
-#&gt; ... Procrustes: rmse 8.159651e-06  max resid 3.149556e-05 
+#&gt; Run 15 stress 0.1692495 
+#&gt; Run 16 stress 0.07227127 
+#&gt; ... Procrustes: rmse 3.023991e-05  max resid 0.000125352 
 #&gt; ... Similar to previous best
 #&gt; Run 17 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.742992e-06  max resid 7.302496e-06 
+#&gt; ... Procrustes: rmse 5.73856e-06  max resid 1.841418e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 18 stress 0.1776129 
+#&gt; Run 18 stress 0.07227125 
+#&gt; ... Procrustes: rmse 3.792351e-06  max resid 2.003342e-05 
+#&gt; ... Similar to previous best
 #&gt; Run 19 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.328271e-05  max resid 5.422646e-05 
+#&gt; ... Procrustes: rmse 8.642971e-06  max resid 2.135103e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 20 stress 0.07227125 
-#&gt; ... Procrustes: rmse 2.15242e-06  max resid 6.763911e-06 
+#&gt; ... Procrustes: rmse 8.377458e-06  max resid 2.278946e-05 
 #&gt; ... Similar to previous best
 #&gt; *** Solution reached</div><div class='input'>
 # Shepard diagram # before a Momocs wrapper
