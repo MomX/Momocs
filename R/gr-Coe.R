@@ -5,113 +5,42 @@
 #' Explores the distribution of coefficient values.
 #'
 #' @param x the \link{Coe} object
-#' @param retain numeric the number of harmonics to retain
-#' @param drop numeric the number of harmonics to drop
-#' @param center.y logical whether to center the y-axis
-#' @param ... useless here but maintain the consistency with generic boxplot
+#' @param ... useless here
 #' @return a ggplot2 object
 #' @aliases boxplot.Coe
 #' @family Coe_graphics
 #' @examples
-#' data(bot)
-#' bot.f <- efourier(bot, 24)
-#' boxplot(bot.f)
+#' # on OutCoe
+#' bot %>% efourier(9) %>% rm_harm(1) %>% boxplot()
 #'
 #' data(olea)
 #' op <- opoly(olea)
 #' boxplot(op)
 #' @export
-boxplot.OutCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
+boxplot.OutCoe <- function(x, ...){
   # we convert to a data.frame
-  df <- as_df(x)
-  # we retrive coefficient rank and names, and we filter
-  df <- df %>%
-    dplyr::mutate_(coeN = "substr(coefficient, 1, 1)",
-           coeR = "as.numeric(substr(coefficient, 2, 2))")
-  df <- dplyr::filter_(df, ~ coeR > drop, ~ coeR <= retain)
-  # we ggplot
-  gg <- ggplot(df, aes_string(x="factor(coeR)", y="value", fill="factor(coeN)")) +
-    geom_boxplot(outlier.size = 1) +
-    labs(x="Harmonic rank", y="Coefficient amplitude", fill="Coefficient")
-  if (center.y) gg <- gg + ylim(.center_range(df$value))
-  gg
+  x$coe %>%
+    .melt_mat %>%
+    dplyr::mutate(coeff=factor(as.numeric(substr(key, 2, nchar(key)))),
+                  harm=substr(key, 1, 1)) %>%
+    ggplot() +
+    aes(coeff, value) +
+    geom_boxplot() +
+    facet_grid(harm~., scales = "free_y")
 }
 
 #'@export
-boxplot.OpnCoe <- function(x, retain=6, drop=0, center.y = TRUE, ...){
+boxplot.OpnCoe <- function(x, ...){
   # xfourier case should be treated as a Out
   if (grepl("fourier", x$method)) {
-    gg <- boxplot.OutCoe(x, retain=retain, drop=drop, center.y=center.y, ...)
-    return(gg)
+    return(boxplot.OutCoe(x))
   }
   # otherwise...
-  # retain drop is easier to do before the as_df
-  retain <- ifelse(retain<ncol(x$coe), retain, ncol(x$coe))
-  x$coe <- x$coe[, drop+1 : retain]
-  df <- as_df(x)
-  # we ggplot
-  gg <- ggplot(df, aes_string(x="coefficient", y="value")) +
-    geom_boxplot(outlier.size = 1) +
-    labs(x="Coefficient", y="Amplitude")
-  if (center.y) gg <- gg + ylim(.center_range(df$value))
-  gg
-}
-
-
-#' Histogram of morphometric coefficients
-#'
-#' Explores the distribution of coefficient values.
-#'
-#' @param x the \link{Coe} object
-#' @param retain numeric the number of harmonics to retain
-#' @param drop numeric the number of harmonics to drop
-#' @param bw the number of bins (range/bw) to display
-#' @param ... useless here but maintain the consistency with generic hist
-#' @return a ggplot2 object
-#' @family Coe_graphics
-#' @aliases hist.Coe
-#' @examples
-#' data(bot)
-#' bot.f <- efourier(bot, 24)
-#' hist(bot.f)
-#'
-#' data(olea)
-#' op <- opoly(olea)
-#' hist(op)
-#' @export
-hist.OutCoe <- function(x, retain=4, drop=0, bw=20, ...){
-  # we convert to a data.frame
-  df <- as_df(x)
-  # we retrive coefficient rank and names, and we filter
-  df <- df %>%
-    mutate(coeN = substr(df$coefficient, 1, 1),
-           coeR = as.numeric(substr(df$coefficient, 2, 2)))
-  df <- dplyr::filter_(df, ~ coeR > drop, ~ coeR <= retain)
-  # we ggplot
-  gg <- ggplot(df, aes_string(x="value")) +
-    geom_histogram(binwidth=diff(range(df$value))/bw) +
-    facet_grid(coeR ~ coeN) +
-    labs(x="Coefficient amplitude", y="Freq")
-  gg
-}
-
-#' @export
-hist.OpnCoe <- function(x, retain=4, drop=0, bw=20, ...){
-  # xfourier case should be treated as a Out
-  if (grepl("fourier", x$method)) {
-    gg <- hist.OutCoe(x, retain=retain, drop=drop, bw=bw, ...)
-    return(gg)
-  }
-  # otherwise...
-  # retain drop is easier to do before the as_df
-  retain <- ifelse(retain<ncol(x$coe), retain, ncol(x$coe))
-  x$coe <- x$coe[, drop+1 : retain]
-  df <- as_df(x)
-  gg <- ggplot(df, aes_string(x="value")) +
-    geom_histogram(binwidth=diff(range(df$value))/bw) +
-    facet_grid(coefficient ~ .) +
-    labs(x="Coefficient amplitude", y="Freq")
-  gg
+  x$coe %>%
+    .melt_mat %>%
+    ggplot() +
+    aes(key, value) +
+    geom_boxplot()
 }
 
 #' Harmonic contribution to shape
