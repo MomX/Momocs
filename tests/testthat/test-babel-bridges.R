@@ -69,5 +69,3 @@ test_that("as_df converts all classes to data.frames", {
   flower$fac <- data.frame()
   expect_true(is.data.frame(flower %>% as_df))
 })
-
-
