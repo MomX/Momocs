@@ -277,7 +277,7 @@ fgProcrustes.Ldk <- function(x, tol = 1e-10, coo=NULL) {
 
 #' @export
 fgProcrustes.list <- function(x, ...){
-  lapply(x, fgProcrustes, ...)
+  x %>% Ldk %>% fgProcrustes(...) %$% coo
 }
 
 # fgsProcrustes-----------------
