@@ -3,9 +3,12 @@
 * new multivariate method: `NMDS` on top of `vegan::metaMDS`; use `plot_NMDS` to plot it and `vegan::stressplot` for a Shepard plot. Now depends `vegan`.
 * new multivariate method: `MDS` on top of `cmdscale`; use `plot_MDS` to plot it.
 * `mshapes` is now `MSHAPES` to stick with other capitalized "multivariate" methods. `mshapes` now just announces its future deprecation.
+* `MSHAPES` now just returns data_frame of PCs or LDs when used on `PCA` or `LDA` objects.
 * new handling method `rm_missing` to deal with missing data in `$fac`
 * Consequently, `plot_MSHAPES` is the new method for plotting it. Works on lists and on the result of `MSHAPES`.
-* `plot_CV` has been slightly refreshed: jitter now always jitters the same way, and in a more compact radius around cell centers. This might be renamed to `plot_confusion` at some point.
+* `plot_CV` has been refreshed, and is better now at plotting either small or very big matrices.
+* `boxplot` methods on Coe have been refreshed
+* `hist` methods on Coe deprecated
 * `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
 * `TraCoe` class properly `data_frame`ize fac when build from `raCoe()`
 * `CLUST` methods have been rewrote and now wraps around `dendextend`.
@@ -21,7 +24,7 @@
 * `subsetize` now exported (again)
 * `def_ldk` gains a `close` and `points` argument
 * no more printing of Coo errors that was due to some forgotten `data.frame` rather than `data_frame`
-* `as_df` now returns `data_frame` everywhere
+* `as_df` now returns more useful `data_frame` everywhere and gain a `retain` argument
 * fixed minor bugs (see GitHub history of commits)
 
 # Momocs 1.2.9
