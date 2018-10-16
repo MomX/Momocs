@@ -9,6 +9,7 @@
 \alias{MSHAPES.OpnCoe}
 \alias{MSHAPES.LdkCoe}
 \alias{MSHAPES.PCA}
+\alias{MSHAPES.LDA}
 \alias{mshapes}
 \title{Mean shape calculation for Coo, Coe, etc.}
 \usage{
@@ -26,7 +27,9 @@ MSHAPES(x, ...)
 
 \method{MSHAPES}{LdkCoe}(x, fac = NULL, FUN = mean, ...)
 
-\method{MSHAPES}{PCA}(x, fac, ...)
+\method{MSHAPES}{PCA}(x, fac, FUN = mean, ...)
+
+\method{MSHAPES}{LDA}(x, fac, FUN = mean, ...)
 
 mshapes(...)
 }
@@ -43,7 +46,8 @@ mshapes(...)
 }
 \value{
 the averaged shape; on Coe objects, a list with two components: \code{$Coe} object of the same class, and
-\code{$shp} a list of matrices of (x, y) coordinates.
+\code{$shp} a list of matrices of (x, y) coordinates. On \link{PCA} and \link{LDA} objects, the FUN (typically mean or median)
+of scores on \code{PCs} or \code{LDs}. This method used on the latter objects may be moved to another function at some point.
 }
 \description{
 Quite a versatile function that calculates mean (or median, or whatever function)
@@ -51,13 +55,6 @@ on list or an array of shapes, an Ldk object. It can also be used on Coe objects
 In that case, the reverse transformation (from coefficients to shapes) is calculated, (within
 groups defined with the fac argument if provided) and the Coe object is \emph{also} returned
 (in \code{$Coe}) along with a list of shapes (in \code{$shp}) and can then be passed to \code{plot_MSHAPES}.
-}
-\details{
-Note that on Coe objects, the average can be made within levels of the passed $fac (if any);
-in that case, the other columns of the fac are also returned, using the first row within every level, but they may
-not be representative of the group. Also notice that for PCA objects, mean scores are returned
-within a PCA object (accessible with \code{PCA$x}) that can be plotted directly but other slots are left
-unchanged.
 }
 \examples{
 #### on shapes
@@ -75,9 +72,11 @@ class(ms$Coe)
 ms <- ms$shp
 coo_plot(ms$beer)
 coo_draw(ms$whisky, border='forestgreen')
+\dontrun{
 tps_arr(ms$whisky, ms$beer) #etc.
+}
 
-op <- npoly(filter(olea, view=='VL'), 5)
+op <- olea \%>\% filter(view=="VL") \%>\% npoly(5)
 ms <- MSHAPES(op, ~var) #etc
 ms$Coe
 panel(Opn(ms$shp), names=TRUE)
@@ -85,6 +84,12 @@ panel(Opn(ms$shp), names=TRUE)
 wp <- fgProcrustes(wings, tol=1e-4)
 ms <- MSHAPES(wp, 1)
 plot_MSHAPES(ms)
+
+# on PCA and LDA just return a data_frame
+bot.f \%>\% PCA \%>\% MSHAPES(~type)
+bot.f \%>\% LDA(~fake) \%>\% MSHAPES(~fake)
+# LDA on ~fake but average on type
+bot.f \%>\% LDA(~fake) \%>\% MSHAPES(~type)
 }
 \seealso{
 Other multivariate: \code{\link{CLUST}},
