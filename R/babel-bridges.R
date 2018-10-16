@@ -173,101 +173,156 @@ m2ll <- function(m, index=NULL){
   return(ll)
 }
 
+# home made melt for Coe
+.melt_mat <- function(x){
+  if (is.null(colnames(x)))
+    colnames(x) <- 1:ncol(x)
+  dplyr::data_frame(key=rep(colnames(x), each=nrow(x)),
+                    value=as.numeric(x))
+
+}
+
 # as_df methods ------------------
 
-#' Converts Momocs objects to data.frames
+#' Turn Momocs objects into tydy data_frames
 #'
 #' Used in particular for compatibility with the \code{tidyverse}
+#'
 #' @param x an object, typically a Momocs object
+#' @param retain numeric for use with [scree] methods. Defaut to all. If `<1`,
+#' enough axes to retain this proportion of variance; if `>1`, this number of axes.
+#' @param ... useless here
 #' @return a [dplyr::data_frame]
 #' @examples
-#' # smaller Out
-#' lite_bot <- bot %>% slice(c(1, 2, 21, 22)) %>% coo_sample(12)
+#' # first, some (baby) objects
+#' b <- bot %>% coo_sample(12)
+#' bf <- b %>% efourier(5, norm=TRUE)
+
 #' # Coo object
-#' lite_bot %>% as_df %>% head
+#' b %>% as_df
 #' # Coe object
-#' lite_bot %>% efourier(2) %>% as_df %>% head
+#' bf %>% as_df
+#'
 #' # PCA object
-#' lite_bot %>% efourier(2) %>% PCA %>% as_df %>% head
+#' bf %>% PCA %>% as_df     # all PCs by default
+#' bf %>% PCA %>% as_df(2) # or 2
+#' bf %>% PCA %>% as_df(0.99) # or enough for 99%
+#'
 #' # LDA object
-#' lite_bot %>% efourier(2) %>% PCA %>% LDA(~type) %>% as_df %>% head
+#' bf %>% LDA(~fake) %>% as_df
+#' # same options apply
 #' @family bridges functions
 #' @rdname as_df
 #' @export
-as_df <- function(x){
+as_df <- function(x, ...){
   UseMethod("as_df")
 }
 
 #' @rdname as_df
 #' @export
-as_df.Coo <- function(x){
-  res <- lapply(seq_along(x$coo),
-                function(i) data.frame(id=names(x$coo)[i],
-                                       x=x$coo[[i]][, 1],
-                                       y=x$coo[[i]][, 2]))
-
-  # if there is a fac
-  if (is_fac(x)){
-    # create a list of data.frames, each row repeated (number of coefficients) times
-    fac <- lapply(seq_along(res), function(i) x$fac[rep(i, nrow(res[[i]])),, drop=FALSE])
-    # and cbind them
-    res <- lapply(seq_along(res), function(i) dplyr::bind_cols(res[[i]], fac[[i]]))
-  }
-  #rbind them all and return
-  do.call("rbind", res) %>%
-    dplyr::as_data_frame() %>%
-    return()
+as_df.Coo <- function(x, ...){
+  # res <- lapply(seq_along(x$coo),
+  #               function(i) data.frame(id=names(x$coo)[i],
+  #                                      x=x$coo[[i]][, 1],
+  #                                      y=x$coo[[i]][, 2]))
+  #
+  # # if there is a fac
+  # if (is_fac(x)){
+  #   # create a list of data.frames, each row repeated (number of coefficients) times
+  #   fac <- lapply(seq_along(res), function(i) x$fac[rep(i, nrow(res[[i]])),, drop=FALSE])
+  #   # and cbind them
+  #   res <- lapply(seq_along(res), function(i) dplyr::bind_cols(res[[i]], fac[[i]]))
+  # }
+  # #rbind them all and return
+  # do.call("rbind", res) %>%
+  #   dplyr::as_data_frame() %>%
+  #   return()
+  dplyr::bind_cols(
+    dplyr::data_frame(coo=x$coo),
+    x$fac
+  )
 }
 
 #' @rdname as_df
 #' @export
-as_df.Coe <- function(x){
+as_df.Coe <- function(x, ...){
+  # need this since if no fac, bind_cols wont be happy
+  if (!is_fac(x))
+    return(dplyr::as_data_frame(x$coe))
   # shortcut
-  coe <- x$coe
-  # ala tidyr::gather
-  res <- lapply(1:nrow(coe),
-                function(i) data.frame(id=rownames(coe)[i],
-                                       coefficient=colnames(coe),
-                                       value=as.numeric(coe[i, ])))
-  # if there is a fac
-  if (is_fac(x)){
-  # create a list of data.frames, each row repeated (number of coefficients) times
-  fac <- lapply(seq_along(res), function(i) x$fac[rep(i, ncol(coe)),, drop=FALSE])
-  # and cbind them
-  res <- lapply(seq_along(res), function(i) dplyr::bind_cols(res[[i]], fac[[i]]))
+  dplyr::bind_cols(
+    x$fac,
+    dplyr::as_data_frame(x$coe)
+  )
+}
+
+
+#' @rdname as_df
+#' @export
+as_df.PCA <- function(x, retain, ...){
+
+  scores_df <- dplyr::as_data_frame(x$x)
+
+  # if retain is not provided, all returned
+  if (missing(retain)){
+    retain <- nrow(scores_df)
   }
-  #rbind them all and return
-  do.call("rbind", res) %>%
-    dplyr::as_data_frame() %>%
-    return()
-}
 
-#' @rdname as_df
-#' @export
-as_df.TraCoe <- function(x){
-  df_coe <- as.data.frame(x$coe)
-  # if a $fac is present
-  if (is_fac(x)) {
-    dplyr::bind_cols(x$fac, df_coe)
-  } else {
-    df_coe %>% dplyr::as_data_frame()
+  # check for too ambitious
+  if (retain > ncol(scores_df)){
+    cat("`retain` is too ambitious. All axes returned\n")
+    retain <- ncol(scores_df)
   }
+
+  # proportion case
+  if (retain<1){
+    retain <- scree_min(x, retain)
+  }
+
+  # select the concerned columns
+  scores_df <- select(scores_df, 1:retain)
+
+  # return fac and scores
+  dplyr::bind_cols(x$fac, scores_df)
 }
 
 #' @rdname as_df
 #' @export
-as_df.PCA <- function(x){
-  if(is.null(rownames(x$x)))
-    rownames(x$x) <- 1:nrow(x$x)
-  dplyr::bind_cols(data.frame(.id=rownames(x$x)),
-                   x$fac,
-                   as.data.frame(x$x))
-}
+as_df.LDA <- function(x, retain, ...){
+  scores_df <- dplyr::as_data_frame(x$mod.pred$x)
 
-#' @rdname as_df
-#' @export
-as_df.LDA <- function(x){
-  dplyr::bind_cols(as.data.frame(x$x), data.frame(f=x$f))
+  # if retain is not provided, all returned
+  if (missing(retain)){
+    retain <- ncol(scores_df)
+  }
+
+  # check for too ambitious
+  if (retain > nrow(scores_df)){
+    cat("`retain` is too ambitious. All axes returned\n")
+    retain <- ncol(scores_df)
+  }
+
+  # proportion case
+  if (retain<1){
+    retain <- scree_min(x, retain)
+  }
+
+  # proportion case
+  if (retain<1)
+    retain <- scree_min(x, retain)
+  # select the concerned columns
+  scores_df <- select(scores_df, 1:retain)
+
+  # now the big one
+  dplyr::bind_cols(
+    # actual, predicted, posterior
+    dplyr::data_frame(actual     = x$f,
+                      predicted  = x$mod.pred$class,
+                      posterior  = apply(x$mod.pred$posterior, 1, max)),
+    # the original fac
+    x$fac,
+    # and LD scores
+    scores_df)
 }
 
 ##### end bridges
