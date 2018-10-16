@@ -554,14 +554,18 @@ PCcontrib.PCA <-
   }
 
 
-#' Methods for PCA eigen values
+# scree ---------------
+#' How many axes to retain this much of variance or trace ?
 #'
 #' A set of functions around PCA/LDA eigen/trace. \code{scree} calculates their proportion and cumulated proportion;
 #' \code{scree_min} returns the minimal number of axis to use to retain a given proportion; \code{scree_plot} displays a screeplot.
 #'
 #' @param x a \link{PCA} object
-#' @param nax numeric range of axis to consider
-#' @param prop numeric how many axis are enough this proportion of variance, if too high then number of axis is returned.
+#' @param nax numeric range of axes to consider.
+#' All by default for `scree_min`, display until `0.99` for `scree_plot`
+#' @param prop numeric how many axes are enough to gather this proportion of variance.
+#' Default to 1, all axes are returned
+#' defaut to 1: all axis are returned
 #' @return scree returns a data.frame, scree_min a numeric, scree_plot a ggplot.
 #' @examples
 #' # On PCA
@@ -584,54 +588,65 @@ scree <- function(x, nax) {
 
 #' @export
 #' @rdname scree
-scree.PCA <- function(x, nax=1:10){
+scree.PCA <- function(x, nax){
+  # calculate proportion for each axi
   eig <- (x$sdev^2)
   eig <- eig / sum(eig)
-  if (max(nax)>length(eig)) nax <- 1:length(eig)
-  eig <- eig[nax]
-  df <-  dplyr::data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
-  df
+  # if nax not provided, take all
+  if (missing(nax)){
+    nax <- 1:length(eig)
+  }
+  # return a data_frame
+  dplyr::data_frame(axis=nax,
+                    proportion=eig[nax],
+                    cumsum=cumsum(eig)[nax])
 }
 
 #' @export
 #' @rdname scree
-scree.LDA <- function(x, nax=1:10){
+scree.LDA <- function(x, nax){
   eig <- (x$mod$svd^2)
   eig <- eig / sum(eig)
-  if (max(nax)>length(eig)) nax <- 1:length(eig)
-  eig <- eig[nax]
-  df <-  dplyr::data_frame(axis=ordered(1:length(eig)), proportion=eig, cumsum=cumsum(eig))
-  df
+
+  # if nax not provided, take all
+  if (missing(nax)){
+    nax <- 1:length(eig)
+  }
+  # return a data_frame
+  dplyr::data_frame(axis=nax,
+                    proportion=eig[nax],
+                    cumsum=cumsum(eig)[nax])
+
 }
 
 #' @export
 #' @rdname scree
-scree_min <- function(x, prop=0.99){
+scree_min <- function(x, prop){
+  # early return if prop is missing
+  if (missing(prop)){
+    cat("`prop` not provided. All axes returned\n")
+    return(nrow(scree(x)))
+  }
   enough <- scree(x)$cumsum >= prop
   ifelse(any(enough), min(which(enough)), length(enough))
 }
 
 #' @export
 #' @rdname scree
-scree_plot <- function(x, nax=1:10){
+scree_plot <- function(x, nax){
+  # if missing,e neough to gather 99%
+  if (missing(nax))
+    nax <- 1:scree_min(x, 0.99)
+  # obtain the df
   df <- scree(x, nax)
-  gg <- ggplot(df, aes_string(x="axis", y="proportion")) +
-    geom_hline(yintercept=c(0.5, 0.90, 0.95, 0.99), linetype=2, alpha=0.5) +
-    geom_bar(stat="identity") + geom_text(label=round(df$cumsum, 3), vjust=0) +
+  # for entire x-axis
+  df$axis <- ordered(df$axis)
+  ggplot(df) +
+    aes_string(x="axis", y="proportion") +
+    geom_bar(stat="identity") +
+  geom_text(label=round(df$cumsum, 3), vjust=0) +
     labs(x="Components", y="Proportion")
-  gg
 }
-
-
-# selected=NULL,
-# return(df)
-# fills <- rep("black", nrow(df))
-# fills[selected] <- "red"
-# gg <- ggplot(data=df, aes(x=x, y=y), fill=fill) +
-#   geom_bar(fill=fills, stat="identity") +
-#   labs(x="Components", y="Variances")
-# gg
-
 
 
 #### borrowed from ggplot2 by Hadley

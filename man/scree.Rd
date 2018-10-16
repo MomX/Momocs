@@ -6,24 +6,27 @@
 \alias{scree.LDA}
 \alias{scree_min}
 \alias{scree_plot}
-\title{Methods for PCA eigen values}
+\title{How many axes to retain this much of variance or trace ?}
 \usage{
 scree(x, nax)
 
-\method{scree}{PCA}(x, nax = 1:10)
+\method{scree}{PCA}(x, nax)
 
-\method{scree}{LDA}(x, nax = 1:10)
+\method{scree}{LDA}(x, nax)
 
-scree_min(x, prop = 0.99)
+scree_min(x, prop)
 
-scree_plot(x, nax = 1:10)
+scree_plot(x, nax)
 }
 \arguments{
 \item{x}{a \link{PCA} object}
 
-\item{nax}{numeric range of axis to consider}
+\item{nax}{numeric range of axes to consider.
+All by default for \code{scree_min}, display until \code{0.99} for \code{scree_plot}}
 
-\item{prop}{numeric how many axis are enough this proportion of variance, if too high then number of axis is returned.}
+\item{prop}{numeric how many axes are enough to gather this proportion of variance.
+Default to 1, all axes are returned
+defaut to 1: all axis are returned}
 }
 \value{
 scree returns a data.frame, scree_min a numeric, scree_plot a ggplot.
