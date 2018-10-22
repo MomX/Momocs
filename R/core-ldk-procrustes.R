@@ -175,7 +175,7 @@ fgProcrustes.default <- function(x, tol = 1e-05,  coo=NULL) {
     Qi[iter] <- sum(Qm2)
     iter <- iter + 1
     if (.is_verbose()) {
-      message("iteration: ", iter, "\tgain:", signif(abs(Q), 5))
+      cat("iteration: ", iter, "\tgain:", signif(abs(Q), 5), "\n")
     }
     temp1 <- temp2
   } # end of the big loop
