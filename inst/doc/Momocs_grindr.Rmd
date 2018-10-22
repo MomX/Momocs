@@ -102,7 +102,7 @@ x <- bot %>% efourier(6) %>% PCA
 
 It works pretty much the same way as `drawers`, you can access the full list with `apropos("layer_")` and `?layers`. 
 
-Here again, I'll write more once `cheapbabi` development will become stable.
+Here again, I'll write more once `grindr` development will become stable.
 
 __All suggestions and comments are welcome!__
 
