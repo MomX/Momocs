@@ -1,16 +1,18 @@
-# Momocs 1.2.9+ (GitHub)
+# Momocs 1.3.0
 * new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend. Now depends `cluster`.
 * new multivariate method: `NMDS` on top of `vegan::metaMDS`; use `plot_NMDS` to plot it and `vegan::stressplot` for a Shepard plot. Now depends `vegan`.
 * new multivariate method: `MDS` on top of `cmdscale`; use `plot_MDS` to plot it.
 * `mshapes` is now `MSHAPES` to stick with other capitalized "multivariate" methods. `mshapes` now just announces its future deprecation.
 * `MSHAPES` now just returns data_frame of PCs or LDs when used on `PCA` or `LDA` objects.
-* new handling method `rm_missing` to deal with missing data in `$fac`
 * Consequently, `plot_MSHAPES` is the new method for plotting it. Works on lists and on the result of `MSHAPES`.
 * `plot_CV` has been refreshed, and is better now at plotting either small or very big matrices.
+* `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
+* new handling method `rm_missing` to deal with missing data in `$fac`
 * `boxplot` methods on Coe have been refreshed
 * `hist` methods on Coe deprecated
-* `fac_dispatcher` supports `NULL` which eases a lot multivariate plots (notably Momecs side)
-* `TraCoe` class properly `data_frame`ize fac when build from `raCoe()`
+* `coo_plot` no longer a method and gains a `cex.first.point` argument
+* new method: `coo_scalars` that gather all scalar descriptors of shape
+* `TraCoe` class properly `data_frame`ize fac when build from `TraCoe()`
 * `CLUST` methods have been rewrote and now wraps around `dendextend`.
 * Consequently released `ape` dependency.
 * all morphometrics methods now accepts `list`s which is more elegant when working with `chop`+`combine`
@@ -19,12 +21,14 @@
 * `coo_untiltx` now removes (residual) rotational biases after `coo_slidedirection` and should be used after it.
 * `plot_LDA` now on. Pretty much the same as `plot_PCA` (which was expected yet nice).
 * `.layerize_LDA` as an internal to prepare the previous
+* new vignettes: `Momocs_coo` and `Momocs_FAQ`; others refreshed.
 * `morphospace_position` and `chullfilled` in `plot_PCA` now properly working
 * `verify` replaces `validate` to avoid conflict with `shiny::validate` (for Momecs)
 * `subsetize` now exported (again)
 * `def_ldk` gains a `close` and `points` argument
 * no more printing of Coo errors that was due to some forgotten `data.frame` rather than `data_frame`
 * `as_df` now returns more useful `data_frame` everywhere and gain a `retain` argument
+* deprecated `coo_angle_edge1` and friends, now in `coo_angle_edges` see 1.2.9.
 * fixed minor bugs (see GitHub history of commits)
 
 # Momocs 1.2.9
