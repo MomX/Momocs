@@ -64,7 +64,7 @@ in other graphical functions, in methods, etc." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.0</span>
       </span>
     </div>
 
@@ -87,7 +87,16 @@ in other graphical functions, in methods, etc." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Momocs_FAQ.html">Momocs' Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_coo.html">Operations on shapes</a>
+    </li>
+    <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_intro.html">An introduction to Momocs</a>
     </li>
   </ul>
 </li>
@@ -127,11 +136,8 @@ in other graphical functions, in methods, etc.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>coo_plot</span>(<span class='no'>coo</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>coo_plot</span>(<span class='no'>coo</span>, <span class='no'>xlim</span>, <span class='no'>ylim</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"#333333"</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>first.point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>coo_plot</span>(<span class='no'>coo</span>, <span class='no'>xlim</span>, <span class='no'>ylim</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"#333333"</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>first.point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cex.first.point</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
   <span class='kw'>centroid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>xy.axis</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>poly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>plot.new</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
@@ -143,10 +149,6 @@ in other graphical functions, in methods, etc.</p>
     <tr>
       <th>coo</th>
       <td><p>A <code>list</code> or a <code>matrix</code> of coordinates.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>further arguments for use in coo_plot methods. See examples.</p></td>
     </tr>
     <tr>
       <th>xlim</th>
@@ -182,6 +184,10 @@ number of points is &lt; 100, then points are plotted.</p></td>
     <tr>
       <th>first.point</th>
       <td><p><code>logical</code> whether to plot or not the first point.</p></td>
+    </tr>
+    <tr>
+      <th>cex.first.point</th>
+      <td><p><code>numeric</code> size of this first point</p></td>
     </tr>
     <tr>
       <th>centroid</th>
@@ -220,6 +226,10 @@ of landmarks or not (eg a closed outline).</p></td>
     <tr>
       <th>zoom</th>
       <td><p>a numeric to take your distances.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments for use in coo_plot methods. See examples.</p></td>
     </tr>
     </table>
     

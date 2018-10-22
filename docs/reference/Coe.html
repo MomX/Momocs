@@ -64,7 +64,7 @@ OutCoe, OpnCoe, LdkCoe and TraCoe classes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.0</span>
       </span>
     </div>
 
@@ -87,7 +87,16 @@ OutCoe, OpnCoe, LdkCoe and TraCoe classes." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Momocs_FAQ.html">Momocs' Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_coo.html">Operations on shapes</a>
+    </li>
+    <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_intro.html">An introduction to Momocs</a>
     </li>
   </ul>
 </li>
@@ -169,8 +178,8 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; [25] sample_frac sample_n    select      slice       str         subsetize  
 #&gt; [31] which_out  
 #&gt; see '?methods' for accessing help and source code</div><div class='input'><span class='co'># to see all methods for OutCoe objects.</span>
-<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>) <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span></div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib hist     MANOVA   MSHAPES  PCA      print   
-#&gt;  [9] rm_asym  rm_sym   symmetry
+<span class='fu'>methods</span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>) <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span></div><div class='output co'>#&gt;  [1] boxplot  combine  hcontrib MANOVA   MSHAPES  PCA      print    rm_asym 
+#&gt;  [9] rm_sym   symmetry
 #&gt; see '?methods' for accessing help and source code</div><div class='input'>
 <span class='no'>bot.f</span><span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bot.f</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
 #&gt; --------------------
@@ -1180,7 +1189,18 @@ with <code>methods(class=Coe)</code>.</p>
 #&gt; 0125-wMouBo1_O8VL  -0.1449122001 -0.006618885
 #&gt; 0125-wMouBo1_O9VD  -0.1577287178  0.010577178
 #&gt; 0125-wMouBo1_O9VL  -0.1480660701 -0.003695914</div><div class='input'>
-<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:85238</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:5.4545</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:1.1678</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:0.0014869</span></div><div class='output co'>#&gt; <span class='message'>iteration: 5	gain:0.9109</span></div><div class='output co'>#&gt; <span class='message'>iteration: 6	gain:0.25865</span></div><div class='output co'>#&gt; <span class='message'>iteration: 7	gain:0.11654</span></div><div class='output co'>#&gt; <span class='message'>iteration: 8	gain:0.0002648</span></div><div class='output co'>#&gt; <span class='message'>iteration: 9	gain:0.078733</span></div><div class='output co'>#&gt; <span class='message'>iteration: 10	gain:0.037936</span></div><div class='output co'>#&gt; <span class='message'>iteration: 11	gain:0.0036029</span></div><div class='output co'>#&gt; <span class='message'>iteration: 12	gain:4.6608e-06</span></div><div class='input'><span class='no'>wp</span></div><div class='output co'>#&gt; An LdkCoe [full Generalized Procrustes] object with: 
+<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; iteration:  1 	gain: 85238 
+#&gt; iteration:  2 	gain: 5.4545 
+#&gt; iteration:  3 	gain: 1.1678 
+#&gt; iteration:  4 	gain: 0.0014869 
+#&gt; iteration:  5 	gain: 0.9109 
+#&gt; iteration:  6 	gain: 0.25865 
+#&gt; iteration:  7 	gain: 0.11654 
+#&gt; iteration:  8 	gain: 0.0002648 
+#&gt; iteration:  9 	gain: 0.078733 
+#&gt; iteration:  10 	gain: 0.037936 
+#&gt; iteration:  11 	gain: 0.0036029 
+#&gt; iteration:  12 	gain: 4.6608e-06 </div><div class='input'><span class='no'>wp</span></div><div class='output co'>#&gt; An LdkCoe [full Generalized Procrustes] object with: 
 #&gt; --------------------
 #&gt;  - $coo: 127 configuration of landmarks (18 +/- 0 coordinates)
 #&gt; # A tibble: 127 x 1

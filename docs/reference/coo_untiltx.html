@@ -64,7 +64,7 @@ Typically useful for outline analysis where phasing matters. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.0</span>
       </span>
     </div>
 
@@ -87,7 +87,16 @@ Typically useful for outline analysis where phasing matters. See examples." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Momocs_FAQ.html">Momocs' Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_coo.html">Operations on shapes</a>
+    </li>
+    <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_intro.html">An introduction to Momocs</a>
     </li>
   </ul>
 </li>
@@ -211,7 +220,10 @@ If an id is (also) passed, id is ignored with a message.</p></li>
 <span class='co'># the landmark #2 is on the x-axis</span>
 <span class='no'>hearts</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-3</span>) <span class='kw'>%&gt;%</span> <span class='co'># for speed sake</span>
-  <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_untiltx</span>(<span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='output co'>#&gt; <span class='message'>iteration: 1	gain:11.895</span></div><div class='output co'>#&gt; <span class='message'>iteration: 2	gain:0.017192</span></div><div class='output co'>#&gt; <span class='message'>iteration: 3	gain:0.003271</span></div><div class='output co'>#&gt; <span class='message'>iteration: 4	gain:6.8308e-05</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_untiltx-6.png' alt='' width='700' height='433' /></div></pre>
+  <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_untiltx</span>(<span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='no'>stack</span></div><div class='output co'>#&gt; iteration:  1 	gain: 11.895 
+#&gt; iteration:  2 	gain: 0.017192 
+#&gt; iteration:  3 	gain: 0.003271 
+#&gt; iteration:  4 	gain: 6.8308e-05 </div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_untiltx-6.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

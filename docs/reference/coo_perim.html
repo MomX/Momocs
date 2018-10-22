@@ -65,7 +65,7 @@ coo_perimcum does the same and calculates and cumulative sum." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.9.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.0</span>
       </span>
     </div>
 
@@ -88,7 +88,16 @@ coo_perimcum does the same and calculates and cumulative sum." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Momocs_FAQ.html">Momocs' Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_coo.html">Operations on shapes</a>
+    </li>
+    <li>
       <a href="../articles/Momocs_grindr.html">Layered shape and multivariate plots with grindr</a>
+    </li>
+    <li>
+      <a href="../articles/Momocs_intro.html">An introduction to Momocs</a>
     </li>
   </ul>
 </li>
@@ -204,21 +213,8 @@ a <code>list</code> of those.</p>
 <span class='no'>b5</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>12</span>)
 
 <span class='co'># coo_perim</span>
-<span class='fu'>coo_perim</span>(<span class='no'>b1</span>)</div><div class='output co'>#&gt; [1] 2140.62</div><div class='input'><span class='fu'>coo_perim</span>(<span class='no'>b5</span>)</div><div class='output co'>#&gt; $brahma
-#&gt; [1] 2140.62
-#&gt; 
-#&gt; $caney
-#&gt; [1] 1942.307
-#&gt; 
-#&gt; $chimay
-#&gt; [1] 1354.083
-#&gt; 
-#&gt; $corona
-#&gt; [1] 1555.883
-#&gt; 
-#&gt; $deusventrue
-#&gt; [1] 1768.427
-#&gt; </div><div class='input'>
+<span class='fu'>coo_perim</span>(<span class='no'>b1</span>)</div><div class='output co'>#&gt; [1] 2140.62</div><div class='input'><span class='fu'>coo_perim</span>(<span class='no'>b5</span>)</div><div class='output co'>#&gt;      brahma       caney      chimay      corona deusventrue 
+#&gt;    2140.620    1942.307    1354.083    1555.883    1768.427 </div><div class='input'>
 <span class='co'># coo_perimpts</span>
 <span class='fu'>coo_perimpts</span>(<span class='no'>b1</span>)</div><div class='output co'>#&gt;  [1] 201.6829 212.0424 168.6001 198.8291 189.3198 221.2261 190.0026 206.7293
 #&gt;  [9] 192.2134 137.2079 222.7667</div><div class='input'><span class='no'>b5</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_perimpts</span>()</div><div class='output co'>#&gt; $brahma
