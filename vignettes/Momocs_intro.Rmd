@@ -665,7 +665,7 @@ bot %>% efourier %>% PCA %>% as_df
 ```
 
 If the heretic you want to exit R to do stats elsewhere, `export` is your friend:
-```{r}
+```{r, eval=FALSE}
 bot %>% efourier %>% export
 bot %>% efourier %>% PCA %>% export
 ```

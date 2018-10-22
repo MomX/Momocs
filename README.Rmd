@@ -127,9 +127,12 @@ library(Momocs)
 ```{r}
 devtools::load_all()
 ```
+```{r, echo=FALSE}
+options(Momocs_verbose = FALSE)
+```
 
 
-```{r example, message=FALSE}
+```{r example, message=FALSE, message=FALSE}
 hearts %T>%                    # A toy dataset
   stack() %>%                  # Take a family picture of raw outlines
   fgProcrustes() %>%          # Full generalized Procrustes alignment
@@ -138,6 +141,6 @@ hearts %T>%                    # A toy dataset
   efourier(6, norm=FALSE) %>%  # Elliptical Fourier Transforms
   PCA() %T>%                   # Principal Component Analysis
   plot_PCA(~aut) %>%           # A PC1:2 plot
-  LDA(~aut) %>%                # Linear Discriminant Anlysis
-  plot_CV()                    # And the confusion matrix after leave-one-out
+  LDA(~aut) %>%                # Linear Discriminant Analysis
+  plot_CV()                    # And the confusion matrix after leave one out cross validation
 ```

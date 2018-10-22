@@ -18,3 +18,4 @@ dev/.*
 ^README-.*\.png$
 ^pkgdown$
 __.*
+stats.R

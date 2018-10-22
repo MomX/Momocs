@@ -205,74 +205,9 @@ __Misc__
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/efourier.html">efourier</a></span>(<span class="dv">6</span>, <span class="dt">norm=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Elliptical Fourier Transforms</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/PCA.html">PCA</a></span>() <span class="op">%T&gt;%</span><span class="st">                   </span><span class="co"># Principal Component Analysis</span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">           </span><span class="co"># A PC1:2 plot</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/LDA.html">LDA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">                </span><span class="co"># Linear Discriminant Anlysis</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/plot_CV.html">plot_CV</a></span>()                    <span class="co"># And the confusion matrix after leave-one-out</span></a></code></pre></div>
-<p><img src="README-example-1.png" width="700"></p>
-<pre><code>#&gt; iteration:  1    gain: 44481 
-#&gt; iteration:  2    gain: 37.931 
-#&gt; iteration:  3    gain: 11.298 
-#&gt; iteration:  4    gain: 0.14521 
-#&gt; iteration:  5    gain: 8.1902 
-#&gt; iteration:  6    gain: 3.2495 
-#&gt; iteration:  7    gain: 0.30402 
-#&gt; iteration:  8    gain: 0.01652 
-#&gt; iteration:  9    gain: 0.31912 
-#&gt; iteration:  10   gain: 0.0053838 
-#&gt; iteration:  11   gain: 0.12112 
-#&gt; iteration:  12   gain: 0.0024292 
-#&gt; iteration:  13   gain: 0.070565 
-#&gt; iteration:  14   gain: 0.051506 
-#&gt; iteration:  15   gain: 0.018159 
-#&gt; iteration:  16   gain: 9.3746e-05 
-#&gt; iteration:  17   gain: 0.0081691 
-#&gt; iteration:  18   gain: 0.0095204 
-#&gt; iteration:  19   gain: 0.0053355 
-#&gt; iteration:  20   gain: 8.8911e-05 
-#&gt; iteration:  21   gain: 0.0026385 
-#&gt; iteration:  22   gain: 0.0026055 
-#&gt; iteration:  23   gain: 0.0012946 
-#&gt; iteration:  24   gain: 2.2802e-05 
-#&gt; iteration:  25   gain: 0.00062172 
-#&gt; iteration:  26   gain: 0.00063931 
-#&gt; iteration:  27   gain: 0.00032867 
-#&gt; iteration:  28   gain: 7.1042e-06 
-#&gt; iteration:  29   gain: 0.00015772 
-#&gt; iteration:  30   gain: 0.00016121 
-#&gt; iteration:  31   gain: 8.2509e-05 
-#&gt; iteration:  32   gain: 2.0399e-06 
-#&gt; iteration:  33   gain: 3.9258e-05 
-#&gt; iteration:  34   gain: 4.0364e-05 
-#&gt; iteration:  35   gain: 2.0771e-05 
-#&gt; iteration:  36   gain: 5.8426e-07 
-#&gt; iteration:  37   gain: 9.8171e-06 
-#&gt; iteration:  38   gain: 1.0125e-05 
-#&gt; iteration:  39   gain: 5.2254e-06 
-#&gt; iteration:  40   gain: 1.6452e-07 
-#&gt; iteration:  41   gain: 2.4518e-06 
-#&gt; iteration:  42   gain: 2.5384e-06 
-#&gt; iteration:  43   gain: 1.3148e-06 
-#&gt; iteration:  44   gain: 4.5876e-08 
-#&gt; iteration:  45   gain: 6.1247e-07 
-#&gt; iteration:  46   gain: 6.3647e-07 
-#&gt; iteration:  47   gain: 3.3083e-07 
-#&gt; iteration:  48   gain: 1.2677e-08 
-#&gt; iteration:  49   gain: 1.5297e-07 
-#&gt; iteration:  50   gain: 1.5958e-07 
-#&gt; iteration:  51   gain: 8.3247e-08 
-#&gt; iteration:  52   gain: 3.4779e-09 
-#&gt; iteration:  53   gain: 3.8203e-08 
-#&gt; iteration:  54   gain: 4.001e-08 
-#&gt; iteration:  55   gain: 2.0947e-08 
-#&gt; iteration:  56   gain: 9.486e-10 
-#&gt; iteration:  57   gain: 9.5406e-09 
-#&gt; iteration:  58   gain: 1.0031e-08 
-#&gt; iteration:  59   gain: 5.2714e-09 
-#&gt; iteration:  60   gain: 2.5739e-10 
-#&gt; iteration:  61   gain: 2.382e-09 
-#&gt; iteration:  62   gain: 2.5157e-09 
-#&gt; iteration:  63   gain: 1.326e-09 
-#&gt; iteration:  64   gain: 6.9122e-11</code></pre>
-<p><img src="README-example-2.png" width="700"><img src="README-example-3.png" width="700"><img src="README-example-4.png" width="700"></p>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/LDA.html">LDA</a></span>(<span class="op">~</span>aut) <span class="op">%&gt;%</span><span class="st">                </span><span class="co"># Linear Discriminant Analysis</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/plot_CV.html">plot_CV</a></span>()                    <span class="co"># And the confusion matrix after leave one out cross validation</span></a></code></pre></div>
+<p><img src="README-example-1.png" width="700"><img src="README-example-2.png" width="700"><img src="README-example-3.png" width="700"><img src="README-example-4.png" width="700"></p>
 </div>
 </div>
   </div>

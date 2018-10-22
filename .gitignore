@@ -12,4 +12,5 @@ r-hub.R
 dev/
 .Rd2pdf*
 __.*
+stats.R
 
