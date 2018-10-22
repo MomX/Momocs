@@ -1,7 +1,7 @@
 Package: Momocs
 Title: Morphometrics using R
-Version: 1.2.9.5
-Date: 2018-10-16
+Version: 1.3.0
+Date: 2018-10-22
 Authors@R: c(
        person("Vincent", "Bonhomme", ,"bonhomme.vincent@gmail.com", c("aut", "cre")), 
        person("Julien", "Claude", , , c("aut"), comment = "core functions in base R"))
@@ -14,7 +14,7 @@ URL: https://github.com/MomX/Momocs/
 BugReports: https://github.com/MomX/Momocs/issues
 Depends: R(>= 3.2)
 LazyData: true
-Imports: cluster, dendextend, dplyr, magrittr,geometry, geomorph, ggplot2, graphics, 
+Imports: cluster, dendextend, dplyr, magrittr, geometry, geomorph, ggplot2, graphics, 
        grDevices, jpeg, MASS, progress, RColorBrewer, rgeos, sp, utils, vegan
 Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
 VignetteBuilder: knitr
