@@ -15,6 +15,7 @@
 #' @param points \code{logical}. Whether to display points. If missing and
 #' number of points is < 100, then points are plotted.
 #' @param first.point \code{logical} whether to plot or not the first point.
+#' @param cex.first.point \code{numeric} size of this first point
 #' @param centroid \code{logical}. Whether to display centroid.
 #' @param xy.axis \code{logical}. Whether to draw the xy axis.
 #' @param pch The \code{pch} for points.
@@ -41,14 +42,9 @@
 #' @aliases coo_plot
 #' @rdname coo_plot
 #' @export
-coo_plot <- function(coo, ...) {
-  UseMethod("coo_plot")
-}
-
-#' @rdname coo_plot
-#' @export
-coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
-                             col = NA, lwd = 1, lty = 1, points = FALSE, first.point = TRUE,
+coo_plot <- function(coo, xlim, ylim, border = "#333333",
+                             col = NA, lwd = 1, lty = 1, points = FALSE,
+                             first.point = TRUE, cex.first.point=0.5,
                              centroid = TRUE, xy.axis = TRUE, pch = 1, cex = 0.5, main = NA,
                              poly = TRUE, plot.new = TRUE, plot = TRUE, zoom = 1, ...) {
   # todo zoom
@@ -108,7 +104,7 @@ coo_plot.default <- function(coo, xlim, ylim, border = "#333333",
     }
     if (first.point) {
       angle <- atan2(coo[2, 2] - coo[1, 2], coo[2, 1] - coo[1, 1]) * (180 / pi) - 90
-      text(coo[1, 1], coo[1, 2], labels = "^", cex=0.5, srt=angle)
+      text(coo[1, 1], coo[1, 2], labels = "^", cex=cex.first.point, srt=angle)
     }
     if (centroid) {
       cent <- coo_centpos(coo)
