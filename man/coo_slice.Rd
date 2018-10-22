@@ -62,6 +62,9 @@ y[[1]] \%>\% coo_bookstein() \%>\% npoly \%>\% PCA \%>\% plot(~aut)
 
 }
 \seealso{
+Have a look to \link{coo_slidegap} if you have problems with gaps
+after slicing around landmarks and/or starting points.
+
 Other coo_ utilities: \code{\link{coo_aligncalliper}},
   \code{\link{coo_alignminradius}},
   \code{\link{coo_alignxax}}, \code{\link{coo_align}},

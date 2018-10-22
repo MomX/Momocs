@@ -2,14 +2,11 @@
 % Please edit documentation in R/gr-domesticplotters.R
 \name{coo_plot}
 \alias{coo_plot}
-\alias{coo_plot.default}
 \alias{ldk_plot}
 \title{Plots a single shape}
 \usage{
-coo_plot(coo, ...)
-
-\method{coo_plot}{default}(coo, xlim, ylim, border = "#333333", col = NA,
-  lwd = 1, lty = 1, points = FALSE, first.point = TRUE,
+coo_plot(coo, xlim, ylim, border = "#333333", col = NA, lwd = 1,
+  lty = 1, points = FALSE, first.point = TRUE, cex.first.point = 0.5,
   centroid = TRUE, xy.axis = TRUE, pch = 1, cex = 0.5, main = NA,
   poly = TRUE, plot.new = TRUE, plot = TRUE, zoom = 1, ...)
 
@@ -17,8 +14,6 @@ ldk_plot(coo, ...)
 }
 \arguments{
 \item{coo}{A \code{list} or a \code{matrix} of coordinates.}
-
-\item{...}{further arguments for use in coo_plot methods. See examples.}
 
 \item{xlim}{If \code{coo_plot} is called and \code{coo} is missing, then a
 vector of length 2 specifying the \code{ylim} of the ploting area.}
@@ -39,6 +34,8 @@ number of points is < 100, then points are plotted.}
 
 \item{first.point}{\code{logical} whether to plot or not the first point.}
 
+\item{cex.first.point}{\code{numeric} size of this first point}
+
 \item{centroid}{\code{logical}. Whether to display centroid.}
 
 \item{xy.axis}{\code{logical}. Whether to draw the xy axis.}
@@ -58,6 +55,8 @@ of landmarks or not (eg a closed outline).}
 \item{plot}{logical whether to plot something or just to create an empty plot.}
 
 \item{zoom}{a numeric to take your distances.}
+
+\item{...}{further arguments for use in coo_plot methods. See examples.}
 }
 \value{
 No returned value.
