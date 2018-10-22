@@ -697,7 +697,7 @@ coo_aligncalliper <- function(coo) {
 #' @export
 coo_aligncalliper.default <- function(coo) {
   coo <- coo_check(coo)
-  cal.ind <- coo_calliper(coo, arr.ind = TRUE)$arr.ind
+  cal.ind <- coo_calliper(coo, arr.ind = TRUE)$arr_ind[[1]]
   coo <- coo_bookstein(coo, cal.ind[1], cal.ind[2])
   return(coo)
 }
@@ -732,7 +732,7 @@ coo_alignminradius.default <- function(coo){
   id_minrad <- which.min(coo_centdist(coo))
   coo <- coo_slide(coo, id_minrad)
   m <- matrix(c(coo[1, ],  0, 0, 1, 0), nrow=3, byrow=TRUE)
-  th <- .coo_angle_edge1(m)
+  th <- coo_angle_edges(m)[2]
   coo_rotate(coo, -th)
 }
 
@@ -789,6 +789,8 @@ coo_trans.Coo <- function(coo, x = 0, y = 0) {
 #' @param ids \code{numeric} of length >= 2, where to slice the shape(s)
 #' @param ldk \code{numeric} the id of the ldk to use as ids, only on \code{Out} and \code{Opn}.
 #' If provided, \code{ids} will be ignored.
+#' @seealso Have a look to [coo_slidegap] if you have problems with gaps
+#' after slicing around landmarks and/or starting points.
 #' @return a list of shapes or a list of \link{Opn}
 #' @examples
 #' h <- slice(hearts, 1:5)  # speed purpose only
@@ -1730,7 +1732,7 @@ is_equallyspacedradii.default <- function(coo, thres=pi/90){
   res <- vector("numeric", nrow(coo))
   for (i in 1:nrow(coo)){
     res[i] <- rbind(coo[i, ], cent, coo1[i, ]) %>%
-      .coo_angle_edge1("acos")
+      .coo_angle_edge1("acos") %>% `[`(2)
   }
   sd(res) < thres
 }
@@ -2098,7 +2100,7 @@ coo_up.Coo <- function(coo, slidegap=FALSE){
   coo
 }
 
-# coo_donw --------
+# coo_down --------
 #' coo_down
 #' Retains coordinates with negative y-coordinates
 #'
@@ -2631,7 +2633,7 @@ coo_perim.default <- function(coo) {
 #' @name coo_perim
 #' @export
 coo_perim.Coo <- function(coo) {
-  lapply(coo$coo, coo_perim)
+  sapply(coo$coo, coo_perim)
 }
 
 

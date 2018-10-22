@@ -146,34 +146,25 @@ coo_area.Coo <- function(coo){
 # area.poly(as(coo, 'gpc.poly'))}
 
 # coo_angle ------
-#' Calculate the angle formed by three (x; y) coordinates
+
+#' Calculates the angle of every edge of a shape
 #'
-#' Returns the angle (in radians) defined by a triplet of points
-#' either signed ('atan2') or not ('acos').
-#' @param coo a 3x2 \code{matrix} of 3 points (rows) and (x; y) coordinates
-#' @param method one of 'atan2' or 'acos' for a signed or not angle.
-#' @return \code{numeric} the angle in radians.
-#' @note \code{coo_theta3} is deprecated and will be removed
+#' Returns the angle (in radians) of every edge of a shape,
+# either signed ('atan2') or not ('acos').
+#' @param coo a \code{matrix} or a list of (x; y) coordinates or any `Coo`
+#' @param method 'atan2' (or 'acos') for a signed (or not) angle.
+#' @return \code{numeric} the angles in radians for every edge.
+#' @note \code{coo_thetapts} is deprecated and will be removed
 #' in future releases.
 #' @family coo_ descriptors
 #' @examples
 #' b <- coo_sample(bot[1], 64)
-#' b <- b[c(1, 14, 24), ]
-#' coo_plot(b)
 #' coo_angle_edges(b)
-#' coo_angle_edges(bot[1])
-#' @rdname coo_angle_edge1
+#' @rdname coo_angle_edges
 #' @export
-coo_angle_edge1 <- function(coo, method = c("atan2", "acos")[1]) {
-  .Deprecated("coo_angle_edges")
+coo_angle_edges <- function(coo, method = c("atan2", "acos")[1]){
+  UseMethod("coo_angle_edges")
 }
-
-#' @rdname coo_angle_edge1
-#' @export
-coo_theta3 <- function(coo, method = c("atan2", "acos")[1]){
-  .Deprecated("coo_angle_edges")
-}
-
 
 .coo_angle_edge1 <- function(coo, method = c("atan2", "acos")[1]) {
   .check(is.matrix(coo) && nrow(coo)==3 && ncol(coo)==2,
@@ -189,27 +180,6 @@ coo_theta3 <- function(coo, method = c("atan2", "acos")[1]){
                   (sqrt(sum(a * a)) * sqrt(sum(b * b))))
   }
   ang
-}
-
-
-#' Calculates the angle of every edge of a shape
-#'
-#' Returns the angle (in radians) of every edge of a shape,
-# either signed ('atan2') or not ('acos'). A wrapper for
-# \link{coo_angle_edge1}
-#' @param coo a \code{matrix} or a list of (x; y) coordinates or any `Coo`
-#' @param method 'atan2' (or 'acos') for a signed (or not) angle.
-#' @return \code{numeric} the angles in radians for every edge.
-#' @note \code{coo_thetapts} is deprecated and will be removed
-#' in future releases.
-#' @family coo_ descriptors
-#' @examples
-#' b <- coo_sample(bot[1], 64)
-#' coo_angle_edges(b)
-#' @rdname coo_angle_edges
-#' @export
-coo_angle_edges <- function(coo, method = c("atan2", "acos")[1]){
-  UseMethod("coo_angle_edges")
 }
 
 #' @rdname coo_angle_edges
@@ -229,12 +199,6 @@ coo_angle_edges.default <- function(coo, method = c("atan2", "acos")[1]) {
 #' @export
 coo_angle_edges.Coo <- function(coo, method = c("atan2", "acos")[1]) {
   lapply(coo$coo, coo_angle_edges, method=method)
-}
-
-#' @rdname coo_angle_edges
-#' @export
-coo_thetapts <- function(coo, method = c("atan2", "acos")[1]){
-  .Deprecated("coo_angle_edges")
 }
 
 #' Calculates the tangent angle along the perimeter of a
@@ -788,3 +752,60 @@ coo_tac.default <- function(coo) {
 coo_tac.Coo <- function(coo) {
   sapply(coo$coo, coo_tac)
 }
+
+# coo_tac -------
+#' Calculates all scalar descriptors of shape
+#'
+#' See examples for the full list.
+#'
+#' @details [coo_rectilinearity] being not particularly optimized, it takes around 30 times more
+#' time to include it than to calculate _all_ others and is thus not includedby default.
+#' by default.
+#' @param coo a \code{matrix} of (x; y) coordinates or any `Coo`
+#' @param rectilinearity `logical` whether to include rectilinearity using [coo_rectilinearity]
+#' @return `data_frame`
+#'
+#' @family coo_ descriptors
+#' @examples
+#'
+#' df <- bot %>% coo_scalars() # pass bot %>% coo_scalars(TRUE) if you want rectilinearity
+#' colnames(df) %>% cat(sep="\n") # all scalars used
+#'
+#' # a PCA on all these descriptors
+#' TraCoe(coo_scalars(bot), fac=bot$fac) %>% PCA %>% plot_PCA(~type)
+#'
+#' @export
+coo_scalars <- function(coo, rectilinearity=FALSE){
+  UseMethod("coo_scalars")
+}
+
+#' @export
+coo_scalars.default <- function(coo, rectilinearity=FALSE){
+  res <- dplyr::data_frame(
+    area=coo_area(coo),
+    calliper=coo_calliper(coo),
+    centsize=coo_centsize(coo),
+    circularity=coo_circularity(coo),
+    circularityharalick=coo_circularityharalick(coo),
+    circularitynorm=coo_circularitynorm(coo),
+    convexity=coo_convexity(coo),
+    eccentricityboundingbox=coo_eccentricityboundingbox(coo),
+    eccentricityeigen=coo_eccentricityeigen(coo),
+    elongation=coo_elongation(coo),
+    length=coo_length(coo),
+    perim=coo_perim(coo),
+    rectangularity=coo_rectangularity(coo),
+    solidity=coo_solidity(coo),
+    width=coo_width(coo)
+  )
+  if (rectilinearity)
+    res$rectilinearity <- coo_rectilinearity(coo)
+  res
+}
+
+#' @export
+coo_scalars.Coo <- function(coo, rectilinearity=FALSE){
+  lapply(coo$coo, function(.x) .x %>% coo_scalars(rectilinearity=rectilinearity)) %>%
+    dplyr::bind_rows()
+}
+
