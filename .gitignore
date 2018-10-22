@@ -11,4 +11,5 @@ man/phoenix.Rd
 r-hub.R
 dev/
 .Rd2pdf*
+__.*
 
