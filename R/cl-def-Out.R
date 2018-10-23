@@ -7,8 +7,8 @@
 #' and specific methods (e.g. \link{efourier} can be applied.
 #'  \code{Out} objects are primarily \code{\link{Coo}} objects.
 #'
-#' @param x a \code{list} of matrices of \eqn{(x; y)} coordinates,
-#' or an array or an Out object or an Ldk object
+#' @param x a \code{list} of matrices of `(x; y)` coordinates,
+#' or an array or an Out object or an Ldk object, or a data.frame (and friends)
 #' @param fac (optional) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
 #' @param ldk (optional) \code{list} of landmarks as row number indices
@@ -28,6 +28,44 @@ Out.default <- function(x, fac = dplyr::data_frame(), ldk = list()) {
     Out(list(x))
   else
     message("an Out object can only be built from a shape, a list, an array or a Coo object")
+}
+
+# for Momit and mom_df
+#' @export
+Out.data.frame <- function(coo, fac = dplyr::data_frame(), ldk = list()){
+  x <- coo
+  # check if there is a coo column and initiate the Out
+  .check(any(colnames(x)=="coo"),
+         "data.frame must have a `coo` column")
+  res <- Out(x$coo)
+  x <- dplyr::select(x, -coo)
+
+  # if any name column, add/drop
+  if (any(colnames(x)=="name")){
+    names(res) <- x$name
+    x <- dplyr::select(x, -name)
+  }
+
+  # if any ldk column, add/drop it
+  if (!missing(ldk)){
+    res$ldk <- ldk
+  } else {
+    if (any(colnames(x)=="ldk")){
+      res$ldk <- x$ldk
+      x <- dplyr::select(x, -ldk)
+    }
+  }
+
+  # if cols remains, create a coo from them
+  if (!missing(fac)){
+    res$fac <- fac
+  } else {
+    if (ncol(x)>0)
+      res$fac <- x
+  }
+
+  # return this beauty
+  res
 }
 
 #' @export

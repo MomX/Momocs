@@ -7,8 +7,8 @@
 Out(x, fac = dplyr::data_frame(), ldk = list())
 }
 \arguments{
-\item{x}{a \code{list} of matrices of \eqn{(x; y)} coordinates,
-or an array or an Out object or an Ldk object}
+\item{x}{a \code{list} of matrices of \code{(x; y)} coordinates,
+or an array or an Out object or an Ldk object, or a data.frame (and friends)}
 
 \item{fac}{(optional) a \code{data.frame} of factors and/or numerics
 specifying the grouping structure}

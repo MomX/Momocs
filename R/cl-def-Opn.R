@@ -9,7 +9,7 @@
 #' and specific methods (e.g. \link{npoly} can be applied.
 #'  \code{\link{Opn}} objects are primarily \code{\link{Coo}} objects.
 #'
-#' @param x \code{list} of matrices of (x; y) coordinates
+#' @param x \code{list} of matrices of (x; y) coordinates, or an array, or a data.frame (and friends)
 #' @param fac (optionnal) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
 #' @param ldk (optionnal) \code{list} of landmarks as row number indices
@@ -48,6 +48,43 @@ Opn.default <- function(x, fac = dplyr::data_frame(), ldk = list()) {
     message("an Opn object can only be built from a shape, a list, an array or a Coo object")
 }
 
+# for Momit and mom_df
+#' @export
+Out.data.frame <- function(x, fac = dplyr::data_frame(), ldk = list()){
+  # check if there is a coo column and initiate the Out
+  .check(any(colnames(x)=="coo"),
+         "data.frame must have a `coo` column")
+  res <- Opn(x$coo)
+  x <- dplyr::select(x, -coo)
+
+  # if any name column, add/drop
+  if (any(colnames(x)=="name")){
+    names(res) <- x$name
+    x <- dplyr::select(x, -name)
+  }
+
+  # if any ldk column, add/drop it
+  if (!missing(ldk)){
+    res$ldk <- ldk
+  } else {
+    if (any(colnames(x)=="ldk")){
+      res$ldk <- x$ldk
+      x <- dplyr::select(x, -ldk)
+    }
+  }
+
+  # if cols remains, create a coo from them
+  if (!missing(fac)){
+    res$fac <- fac
+  } else {
+    if (ncol(x)>0)
+      res$fac <- x
+  }
+
+  # return this beauty
+  res
+}
+
 #' @export
 Opn.list <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   x <- lapply(x, as.matrix)
@@ -57,6 +94,34 @@ Opn.list <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   class(Opn) <- c("Opn", "Coo")
   if (is.null(names(Opn))) names(Opn) <- paste0("shp", 1:length(Opn))
   return(Opn)
+}
+
+#' @export
+Opn.data.frame <- function(x){
+  # check if there is a coo column and initiate the Out
+  .check(any(colnames(x)=="coo"),
+         "data.frame must have a `coo` column")
+  res <- Opn(x$coo)
+  x <- dplyr::select(x, -coo)
+
+  # if any name column, add/drop
+  if (any(colnames(x)=="name")){
+    names(res) <- x$name
+    x <- dplyr::select(x, -name)
+  }
+
+  # if any ldk column, add/drop it
+  if (any(colnames(x)=="ldk")){
+    res$ldk <- x$ldk
+    x <- dplyr::select(x, -ldk)
+  }
+
+  # if cols remains, create a coo from them
+  if (ncol(x)>0)
+    res$fac <- x
+
+  # return this beauty
+  res
 }
 
 #' @export

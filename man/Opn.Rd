@@ -7,7 +7,7 @@
 Opn(x, fac = dplyr::data_frame(), ldk = list())
 }
 \arguments{
-\item{x}{\code{list} of matrices of (x; y) coordinates}
+\item{x}{\code{list} of matrices of (x; y) coordinates, or an array, or a data.frame (and friends)}
 
 \item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
 specifying the grouping structure}

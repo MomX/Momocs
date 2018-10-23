@@ -15,11 +15,11 @@
 #' to homogeneize the number of coordinates among shapes.
 #'
 #' @param coo a \code{list} of matrices of (x; y) coordinates,
-#' or an array, an Ldk object.
-#' @param links (optionnal) a 2-columns \code{matrix} of 'links' between landmarks, mainly for plotting
-#' @param slidings (optionnal) a 3-columns \code{matrix} defining (if any) sliding landmarks
+#' or an array, or an Ldk object or a data.frame (and friends)
 #' @param fac (optionnal) a \code{data.frame} of factors and/or numerics
 #' specifying the grouping structure
+#' @param links (optionnal) a 2-columns \code{matrix} of 'links' between landmarks, mainly for plotting
+#' @param slidings (optionnal) a 3-columns \code{matrix} defining (if any) sliding landmarks
 #' @return an \code{Ldk} object
 #' @details implementation of \code{$slidings} is inspired by \code{geomorph}
 #' @family classes
@@ -28,13 +28,15 @@
 #' @examples
 #' #Methods on Ldk
 #' methods(class=Ldk)
+#'
+#' str(mosquito)
 #' @export
 Ldk <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
   UseMethod("Ldk")
 }
 
 #' @export
-Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
+Ldk.default <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
   if (is_shp(x))
     Ldk(list(x))
   else
@@ -42,14 +44,61 @@ Ldk.default <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_fr
 
 }
 
+# for Momit and mom_df
 #' @export
-Ldk.list <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
+Ldk.data.frame <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
+  x <- coo
+  .check(any(colnames(x)=="coo"),
+         "data.frame must have a `coo` column")
+  res <- Out(x$coo)
+  x <- dplyr::select(x, -coo)
+
+  # if any name column, add/drop
+  if (any(colnames(x)=="name")){
+    names(res) <- x$name
+    x <- dplyr::select(x, -name)
+  }
+
+  # if any links column, add/drop it
+  if (!missing(links)){
+    res$links <- links
+  } else {
+    if (any(colnames(x)=="links")){
+      res$links <- x$links
+      x <- dplyr::select(x, -links)
+    }
+  }
+
+  # if any slidings column, add/drop it
+  if (!missing(slidings)){
+    res$slidings <- slidings
+  } else {
+    if (any(colnames(x)=="slidings")){
+      res$slidings <- x$slidings
+      x <- dplyr::select(x, -slidings)
+    }
+  }
+
+  # if cols remains, create a coo from them
+  if (!missing(fac)){
+    res$fac <- fac
+  } else {
+    if (ncol(x)>0)
+      res$fac <- x
+  }
+
+  # return this beauty
+  res
+}
+
+#' @export
+Ldk.list <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
   if (missing(slidings) & identical(names(coo), c("coo", "slidings", "scale"))) {
     slidings <- coo$slidings
     coo <- coo$coo
   }
   Ldk <- structure(list(coo = coo, links = links, slidings = slidings, fac = fac), class = c("Ldk",
-    "Coo"))
+                                                                                             "Coo"))
   if (!is.null(Ldk$fac))
     Ldk$fac <- as.data.frame(Ldk$fac, stringsAsFactors = FALSE) %>% dplyr::as_data_frame()
   class(Ldk) <- c("Ldk", "Coo")
@@ -59,7 +108,7 @@ Ldk.list <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame
 }
 
 #' @export
-Ldk.array <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
+Ldk.array <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
   x <- a2l(coo)
   Ldk <- Ldk(x, links = links, slidings = slidings, fac = fac)
   if (is.null(names(Ldk)))
@@ -68,7 +117,7 @@ Ldk.array <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_fram
 }
 
 #' @export
-Ldk.Coo <- function(coo, links = NULL, slidings = NULL, fac = coo$fac) {
+Ldk.Coo <- function(coo, fac = coo$fac, links = NULL, slidings = NULL) {
   .check((length(unique(coo_nb(coo))) == 1), "shapes do not have the same number of landmarks")
   Ldk <- Ldk(coo = coo$coo, links = links, slidings = slidings, fac = fac)
   if (is.null(names(Ldk)))
@@ -130,7 +179,7 @@ print.LdkCoe <- function(x, ...) {
   cat(" - $coo:", coo_nb, "configuration of landmarks")
   # number of coordinates
   cat(" (", round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coordinates)\n",
-    sep = "")
+      sep = "")
   # we print the fac
   .print_fac(Ldk$fac)
 }

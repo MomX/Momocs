@@ -27,6 +27,7 @@
 * `subsetize` now exported (again)
 * `def_ldk` gains a `close` and `points` argument
 * no more printing of Coo errors that was due to some forgotten `data.frame` rather than `data_frame`
+* all `Coo` builders gain a `.data.frame` method, notably to ease compatibility with Momit
 * `as_df` now returns more useful `data_frame` everywhere and gain a `retain` argument
 * deprecated `coo_angle_edge1` and friends, now in `coo_angle_edges` see 1.2.9.
 * fixed minor bugs (see GitHub history of commits)

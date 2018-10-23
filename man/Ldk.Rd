@@ -9,7 +9,7 @@ Ldk(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame())
 }
 \arguments{
 \item{coo}{a \code{list} of matrices of (x; y) coordinates,
-or an array, an Ldk object.}
+or an array, or an Ldk object or a data.frame (and friends)}
 
 \item{links}{(optionnal) a 2-columns \code{matrix} of 'links' between landmarks, mainly for plotting}
 
@@ -39,4 +39,6 @@ implementation of \code{$slidings} is inspired by \code{geomorph}
 \examples{
 #Methods on Ldk
 methods(class=Ldk)
+
+str(mosquito)
 }
