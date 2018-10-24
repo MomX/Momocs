@@ -6,8 +6,6 @@ output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 3
-    highlight: tango
-    
 vignette: >
   %\VignetteIndexEntry{grindr}
   %\VignetteEngine{knitr::rmarkdown}

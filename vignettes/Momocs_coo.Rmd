@@ -6,7 +6,6 @@ output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 6
-toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Momocs_coo}
   %\VignetteEngine{knitr::rmarkdown}
