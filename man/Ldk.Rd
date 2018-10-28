@@ -5,18 +5,18 @@
 \alias{LdkCoe}
 \title{Builds an Ldk object}
 \usage{
-Ldk(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame())
+Ldk(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL)
 }
 \arguments{
 \item{coo}{a \code{list} of matrices of (x; y) coordinates,
 or an array, or an Ldk object or a data.frame (and friends)}
 
+\item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
+specifying the grouping structure}
+
 \item{links}{(optionnal) a 2-columns \code{matrix} of 'links' between landmarks, mainly for plotting}
 
 \item{slidings}{(optionnal) a 3-columns \code{matrix} defining (if any) sliding landmarks}
-
-\item{fac}{(optionnal) a \code{data.frame} of factors and/or numerics
-specifying the grouping structure}
 }
 \value{
 an \code{Ldk} object

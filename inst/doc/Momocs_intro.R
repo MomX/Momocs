@@ -54,20 +54,19 @@ stack(bot)
 ## ------------------------------------------------------------------------
 coo_oscillo(bot[1], "efourier")
 
-## ------------------------------------------------------------------------
-Ptolemy(bot[1])
+## ---- eval=FALSE---------------------------------------------------------
+#  Ptolemy(bot[1])
 
-## ---- echo=FALSE---------------------------------------------------------
-calibrate_harmonicpower_efourier(bot)
-calibrate_deviations_efourier(bot)
-calibrate_reconstructions_efourier(bot)
+## ---- echo=FALSE, eval=FALSE, results='hide'-----------------------------
+#  calibrate_harmonicpower_efourier(bot)
+#  calibrate_deviations_efourier(bot)
+#  calibrate_reconstructions_efourier(bot)
 
 ## ------------------------------------------------------------------------
 bot.f <- efourier(bot, nb.h=10)
 bot.f
 
 ## ------------------------------------------------------------------------
-# hist(bot.f, drop=0)
 boxplot(bot.f, drop=1)
 
 ## ------------------------------------------------------------------------
@@ -75,29 +74,16 @@ bot.p <- PCA(bot.f)
 class(bot.p)        # a PCA object, let's plot it
 plot(bot.p)
 
-## ---- message=FALSE, error=FALSE, warning=FALSE, results="hide"----------
-# raw molars dataset
-stack(molars, title = "Non-aligned molars")
-# Procrustes-aligned and slided molars
-mol.al <- fgProcrustes(molars, tol = 1e-4) %>% coo_slidedirection("left")
-stack(mol.al, title="Aligned molars")
-
-# Now compare PCA and morphospace using the 1st harmonic alignment
-molars %>% efourier(norm=TRUE) %>% PCA() %>% plot("type")
-# and the a priori normalization
-molars %>% efourier(norm=FALSE) %>% PCA() %>% plot("type")
-
 ## ------------------------------------------------------------------------
 olea
-pile(olea)     # already aligned \o/
-pile(olea, ~view)    # another family picture
+pile(olea, ~view)    # a family picture colored by a factor
 
 ## ------------------------------------------------------------------------
 op <- opoly(olea)           # orthogonal polynomials
 class(op)                   # an OpnCoe, but also a Coe
 op.p <- PCA(op)             # we calculate a PCA on it
 class(op.p)                 # a PCA object
-plot(PCA(op), ~domes+var)   # notice the formula interface to combine factors
+op %>% PCA %>% plot(~domes+var)   # notice the formula interface to combine factors
 
 ## ---- message=FALSE------------------------------------------------------
 with(olea$fac, table(view, var))
@@ -112,17 +98,18 @@ PCA() %>% plot_PCA(~var)
 
 ## ---- message=FALSE, echo=TRUE-------------------------------------------
 pile(wings)
+options(Momocs_verbose=FALSE) # to silent Momocs
 w.al <- fgProcrustes(wings)
 pile(w.al)
 
 # PCA
-PCA(w.al) %>% plot(1)
+PCA(w.al) %>% plot_PCA(1)
 
 ## ---- message=FALSE, echo=TRUE-------------------------------------------
 pile(chaff)
 chaff.al <- fgsProcrustes(chaff)
 pile(chaff.al)
-chaff.al %>% PCA() %>% plot(~taxa, chull.filled=TRUE)
+chaff.al %>% PCA() %>% plot_PCA(~taxa, chullfilled = TRUE)
 
 ## ------------------------------------------------------------------------
 hearts
@@ -132,42 +119,38 @@ panel(hearts, fac="aut", names="aut")
 ht <- measure(hearts, coo_area, coo_circularity, d(1, 3))
 class(ht)
 ht$coe
-ht %>% PCA() %>% plot("aut", pch=20, ellipsesax=F, ellipse=T, loadings=T)
+ht %>% PCA() %>% plot_PCA(~aut)
+
+## ---- eval=FALSE---------------------------------------------------------
+#  flower
+#  flower %>% PCA() %>% plot_PCA(~sps)
 
 ## ------------------------------------------------------------------------
-flower
-flower %>% PCA() %>% plot("sp", loadings=TRUE, contour=TRUE, lev.contour=5)
+bot_sc <- bot %>% coo_scalars %>% TraCoe(fac=bot$fac)
+bot_sc %>% PCA %>% plot_PCA(~type)
 
 ## ---- message=FALSE------------------------------------------------------
 bot.f <- efourier(bot)
 
 ## ------------------------------------------------------------------------
 bot.p <- PCA(bot.f)
-plot(bot.p)
+plot_PCA(bot.p)
 
 ## ------------------------------------------------------------------------
-plot(bot.p, "type") # equivalent to plot(bot.p, 1)
+plot_PCA(bot.p, ~type) # there are many ways to pass the factor, see ?plot_PCA and ?fac_dispatcher
+
+## ---- eval=FALSE---------------------------------------------------------
+#  scree(bot.p)
+#  scree_plot(bot.p)
+#  boxplot(bot.p, 1)
+#  PCcontrib(bot.p)
 
 ## ------------------------------------------------------------------------
-plot(bot.p, 1, ellipses=TRUE, ellipsesax = FALSE, pch=c(4, 5))
-plot(bot.p, 1, chull=TRUE, pos.shp = "full_axes", abbreviate.labelsgroups = TRUE, points=FALSE, labelspoints = TRUE)
-plot(bot.p, 1, pos.shp="circle", stars=TRUE, chull.filled=TRUE, palette=col_spring)
-
-## ------------------------------------------------------------------------
-# plot2(bot.p, "type") # deprecated for the moment
-
-## ------------------------------------------------------------------------
-scree(bot.p)
-scree_plot(bot.p)
-boxplot(bot.p, 1)
-PCcontrib(bot.p)
+bot.p %>% as_df(3) # The first three PCs 
 
 ## ------------------------------------------------------------------------
 TraCoe(iris[, -5], fac=data.frame(sp=iris$Species)) %>%
-PCA() %>% plot("sp", loadings=TRUE)
-# or
-PCA(iris[, -5], fac=data.frame(sp=iris$Species)) %>%
-plot("sp", chull=TRUE, ellipses=TRUE, conf_ellipses = 0.9)
+PCA() %>% plot_PCA(~sp)
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  #LDA(bot.f, 1)
@@ -182,59 +165,71 @@ plot("sp", chull=TRUE, ellipses=TRUE, conf_ellipses = 0.9)
 #  plot(bot.l)
 #  # plot the cross-validation table
 #  plot_CV(bot.l)  # tabular version
-#  plot_CV(bot.l, freq=TRUE) # frequency table
-#  plot_CV2(bot.l) # arrays version
 
 ## ------------------------------------------------------------------------
-MANOVA(bot.p, "type")
+MANOVA(bot.p,  ~type)
 
 ## ------------------------------------------------------------------------
-MANOVA_PW(bot.p, "type")
+MANOVA_PW(bot.p, ~type)
 
 ## ------------------------------------------------------------------------
 bot %<>% mutate(cs=coo_centsize(.))
-bot %>% efourier %>% PCA %>% MANOVA("cs")
+bot %>% efourier %>% PCA %>% MANOVA(~cs)
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  CLUST(bot.p, 1)
+#  CLUST(bot.p, ~type)
 
 ## ------------------------------------------------------------------------
 KMEANS(bot.p, centers = 5)
 
-## ---- eval=FALSE---------------------------------------------------------
-#  # mean shape
-#  bot.f %>% MSHAPES() %>% coo_plot()
-#  # mean shape, per group
-#  bot.ms <- mshapes(bot.f, 1)
-#  beer   <- bot.ms$shp$beer    %T>% coo_plot(border="blue")
-#  whisky <- bot.ms$shp$whisky  %T>% coo_draw(border="red")
-#  legend("topright", lwd=1,
-#  col=c("blue", "red"), legend=c("beer", "whisky"))
+## ---- eval=TRUE----------------------------------------------------------
+# mean shape
+bot.f %>% MSHAPES() %>% coo_plot()
+# mean shape, per group
+bot.ms <- MSHAPES(bot.f, ~type)
+# lets rebuild an Out
+Out(bot.ms$shp) %>% panel(names=TRUE)
+# or individual shapes
+beer   <- bot.ms$shp$beer    %>% coo_plot(border="blue")
+whisky <- bot.ms$shp$whisky  %>% coo_draw(border="red")
 
-## ---- eval=FALSE---------------------------------------------------------
-#  # leaves <- shapes %>% slice(grep("leaf", names(shapes))) %$% coo
-#  # leaves %>% plot_mshapes(col2="#0000FF")
-#  
-#  # or from mshapes directly
-#  bot %>% efourier(6) %>% mshapes("type") %>% plot_mshapes
+## ---- eval=TRUE----------------------------------------------------------
+leaves <- shapes %>% slice(grep("leaf", names(shapes))) %$% coo
+leaves %>% plot_MSHAPES()
+
+# or from mshapes directly
+bot %>% efourier(6) %>% MSHAPES(~type) %>% plot_MSHAPES()
 
 ## ---- results="markup"---------------------------------------------------
 data(olea)
 olea
 
-# slice: select individuals based on their position
+## ------------------------------------------------------------------------
+mutate(olea, fake=factor(rep(letters[1:2], each=105)))
+
+## ---- results="markup"---------------------------------------------------
 slice(olea, 1:5)
 slice(olea, -(1:100))
 
-# filter: select individual based on a logical condition
+## ---- results="markup"---------------------------------------------------
+filter(olea, domes=="cult")
+# %in% is useful
+filter(olea, var %in% c("Aglan", "Cypre"))
+# or its complement
+filter(olea, !(var %in% c("Aglan", "Cypre")))
+# Also works with more than one condition
 filter(olea, domes=="cult", view!="VD")
+# or on operation on numeric, here a dummy numeric column
+olea %>% mutate(foo=1:210) %>% filter(foo<12)
+olea %>% mutate(foo=1:210) %>% filter(foo>median(foo))
 
-# select: pick, reorder columns from the $fac
+## ------------------------------------------------------------------------
+# reorder columns
+select(olea, view, domes, var, ind)
+# drop some and show the use of numeric index
 select(olea, 1, Ind=ind)
-
-# mutate: add new columns
-mutate(olea, fake=factor(rep(letters[1:2], each=105)))
-
+# drop one
+select(olea, -ind)
 
 ## ------------------------------------------------------------------------
 olea %>%
@@ -243,26 +238,22 @@ rename(domesticated=domes) %>%
 select(-ind)
 
 ## ------------------------------------------------------------------------
+olea$fac %>% dplyr::group_by(var) %>% 
+  dplyr::mutate(n=1:n(), N=n())
+
+## ------------------------------------------------------------------------
 with(olea$fac, table(var, view))
 # we drop 'Cypre' since there is no VL for 'Cypre' var
-olea %>% filter(var != "Cypre") %>%
+olea %>% 
+  filter(var != "Cypre") %>%
   # split, do morphometrics, combine
   chop(~view) %>% opoly %>% combine() %>%
   # note the two views in the morphospace
-  PCA() %>% plot("var")
-
-## ---- eval=FALSE---------------------------------------------------------
-#  retain <- x$fac %>%
-#  # here we sort and create an id
-#  arrange(your_column) %>% mutate(.id=1:n()) %>%
-#  dplyr::group_by(taxa) %>% slice(1:10) %$% .id
-#  # it worked!
-#  x %>% slice(retain) %$% table(fac$taxa)
+  PCA() %>% plot_PCA(~var)
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  names(bot)
 #  length(bot)
-#  table(olea, "var", "domes")
 #  bot[1]
 #  bot[1:5]
 #  bot$brahma
@@ -289,8 +280,12 @@ coeffs_in_Momocs %>% PCA %>% plot
 #  # closing R, going to the beach, back at work
 #  load("Bottles.rda") # bot is back
 
+## ------------------------------------------------------------------------
+bot %>% as_df
+bot %>% efourier %>% as_df
+bot %>% efourier %>% PCA %>% as_df
+
 ## ---- eval=FALSE---------------------------------------------------------
-#  bot %>% as_df # then %>% write.table
 #  bot %>% efourier %>% export
 #  bot %>% efourier %>% PCA %>% export
 
@@ -302,7 +297,6 @@ coeffs_in_Momocs %>% PCA %>% plot
 #  # from Coe objects
 #  bot.f$coe # matrix of coefficients
 #  bot.f$fac # data.frame for covariates
-#  as_df(bot.f)
 #  
 #  # from PCA objects
 #  bot.p$x        # scores
@@ -317,19 +311,4 @@ coeffs_in_Momocs %>% PCA %>% plot
 #  coo_ruban(beer, edm(beer, whisky), lwd=8) # we add ruban based from deviations
 #  coo_draw(whisky)
 #  title("coo_ruban")
-
-## ------------------------------------------------------------------------
-panel(bot)
-
-## ------------------------------------------------------------------------
-# we build a ggplot object from a shape turned into a data.frame
-library(ggplot2)
-shapes[4] %>% m2d() %>% ggplot() +
-aes(x, y) + geom_path() + coord_equal() +
-labs(title="ggplot2 Meow") + theme_minimal()
-
-## ------------------------------------------------------------------------
-bot.p %>% as_df() %>% ggplot() +
-aes(x=PC1, y=PC2, col=type) + coord_equal() +
-geom_point() + geom_density2d() + theme_light()
 

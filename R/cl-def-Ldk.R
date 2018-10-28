@@ -31,7 +31,7 @@
 #'
 #' str(mosquito)
 #' @export
-Ldk <- function(coo, links = NULL, slidings = NULL, fac = dplyr::data_frame()) {
+Ldk <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
   UseMethod("Ldk")
 }
 

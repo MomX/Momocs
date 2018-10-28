@@ -113,22 +113,34 @@ andnow_method <- function(x) {
 
 
 # Momocs_*() -----------
-#' Install last version of Momocs
+#' Momocs helpers
 #'
-#' Download the last version of Momocs from its GitHub account
-#' from \code{http://www.github.com/MomX/Momocs}), install it and load it (\code{library(Momocs)}).
-#' You need devtools, but it is checked anyway.
-#' @rdname Momocs_version
-#' @name Momocs_version
+#' Help access Momocs website (`Momocs_website`)
+#' and online help (`Momocs_help`),
+#' last released function (`Momocs_currentCRANversion`),
+#' last development version on GitHub (`Momocs_currentGitHubversion`)`,
+#' install the latter (`Momocs_installlastversion`) ,
+#' know the currently installed version (`Momocs_installedversion`).
+#' @param topic `character` quoted function name for which you want to browse online help
+#' @rdname Momocs_helpers
 #' @examples
 #' \dontrun{
-#' Momocs_currentGitHubversion()
+#' Momocs_website()
+#' Momocs_help("efourier")
 #' Momocs_currentCRANversion()
+#' Momocs_currentGitHubversion()
+#' Momocs_installlastversion()
+#' Momocs_installedversion
 #' }
-#' @rdname Momocs_version
-#' @name Momocs_version
+#' @rdname Momocs_helpers
 #' @export
-Momocs_lastversion <- function() {
+Momocs_installedversion <- function() {
+  utils::packageVersion("Momocs")
+}
+
+#' @rdname Momocs_helpers
+#' @export
+Momocs_installlastversion <- function() {
   if (!requireNamespace("devtools", quietly = TRUE)) {
     stop("devtools needed for this function to work. Please install it with install.packages('devtools')",
          call. = FALSE)
@@ -138,8 +150,7 @@ Momocs_lastversion <- function() {
   message("last Momocs version has been installed from GitHub. Loaded into R")
 }
 
-#' @rdname Momocs_version
-#' @name Momocs_version
+#' @rdname Momocs_helpers
 #' @export
 Momocs_currentGitHubversion <- function(){
   "https://raw.githubusercontent.com/MomX/Momocs/master/DESCRIPTION" %>%
@@ -148,8 +159,7 @@ Momocs_currentGitHubversion <- function(){
     gsub("Version: ", "", .)
 }
 
-#' @rdname Momocs_version
-#' @name Momocs_version
+#' @rdname Momocs_helpers
 #' @export
 Momocs_currentCRANversion <- function(){
   x <- readLines("https://cran.r-project.org/web/packages/Momocs/index.html")
@@ -157,16 +167,7 @@ Momocs_currentCRANversion <- function(){
     gsub("<td>", "", .) %>% gsub("</td>", "", .)
 }
 
-
-#' Browse Momocs online doc
-#'
-#' Launch a browser to an online version of the manual
-#' @param topic the function name to access. If not specified the homepage of
-#' the online manual is accessed.
-#' @examples
-#' \dontrun{
-#' Momocs_help("efourier")
-#' }
+#' @rdname Momocs_helpers
 #' @export
 Momocs_help <- function(topic=NULL){
   url <- "http://momx.github.io/Momocs/reference/"
@@ -174,10 +175,9 @@ Momocs_help <- function(topic=NULL){
   utils::browseURL(url)
 }
 
-#' @rdname Momocs_version
-#' @name Momocs_version
+#' @rdname Momocs_helpers
 #' @export
-Momocs_installedversion <- function() {
-  utils::packageVersion("Momocs")
+Momocs_website <- function() {
+    utils::browseURL("http://momx.github.io/Momocs")
 }
 

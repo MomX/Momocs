@@ -6,7 +6,6 @@ output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 6
-toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Momocs_faq}
   %\VignetteEngine{knitr::rmarkdown}
@@ -25,6 +24,18 @@ Of course ! Please distinguish the following cases:
 1. **Bare help** You do not understand something. If you can find the answer in the help pages and/or vignette, please contact me. I will answer you _and_ add it to the doc. If you expect me to fix all your problems and answer all your questions, read the next bullet.
 1. **Collaboration**. If you would like us to work together, drop me a line directly: `bonhomme.vincent@gmail.com`. If you finish your PhD in 3 weeks and you need me for all the morphometrics inside, I'm afraid all I have to offer is my shoulder :-s
 1. **Improve Momocs**. I'm always looking for help for improving Momocs: code review, polish, improvement, English presentation, datasets, etc. Feel free to commit directly on GitHub or drop me a line.
+
+#### How to access all methods for a given class?
+Try `methods(class="your_class")`, eg `methods(class="Opn")`
+
+#### How to access methods defined for a particular function?
+`methods("your_function")`, eg `methods("fgProcrustes")
+
+#### How can I access the help for a particular method?
+Try `?method`, eg `?coo_center`
+
+#### How can I access the code for a particular method?
+Try `Momocs:::method.class` (no brackets), eg `Momocs:::coo_center.default`
 
 ## Architecture
 #### Is there a bigger plan for Momocs?

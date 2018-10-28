@@ -97,7 +97,7 @@ Opn.list <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 }
 
 #' @export
-Opn.data.frame <- function(x){
+Opn.data.frame <- function(x, fac = dplyr::data_frame(), ldk = list()){
   # check if there is a coo column and initiate the Out
   .check(any(colnames(x)=="coo"),
          "data.frame must have a `coo` column")

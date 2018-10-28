@@ -12,7 +12,7 @@
 
 <meta name="author" content="Vincent Bonhomme" />
 
-<meta name="date" content="2018-10-22" />
+<meta name="date" content="2018-10-28" />
 
 <title>Momocs’ Frequently Asked Questions</title>
 
@@ -214,13 +214,17 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Momocs’ Frequently Asked Questions</h1>
 <h4 class="author"><em>Vincent Bonhomme</em></h4>
-<h4 class="date"><em>2018-10-22</em></h4>
+<h4 class="date"><em>2018-10-28</em></h4>
 
 
 <div id="TOC">
 <ul>
 <li><a href="#generalities">Generalities</a><ul>
 <li><a href="#can-i-contact-you">Can I contact you?</a></li>
+<li><a href="#how-to-access-all-methods-for-a-given-class">How to access all methods for a given class?</a></li>
+<li><a href="#how-to-access-methods-defined-for-a-particular-function">How to access methods defined for a particular function?</a></li>
+<li><a href="#how-can-i-access-the-help-for-a-particular-method">How can I access the help for a particular method?</a></li>
+<li><a href="#how-can-i-access-the-code-for-a-particular-method">How can I access the code for a particular method?</a></li>
 </ul></li>
 <li><a href="#architecture">Architecture</a><ul>
 <li><a href="#is-there-a-bigger-plan-for-momocs">Is there a bigger plan for Momocs?</a></li>
@@ -250,6 +254,22 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><strong>Collaboration</strong>. If you would like us to work together, drop me a line directly: <code>bonhomme.vincent@gmail.com</code>. If you finish your PhD in 3 weeks and you need me for all the morphometrics inside, I’m afraid all I have to offer is my shoulder :-s</li>
 <li><strong>Improve Momocs</strong>. I’m always looking for help for improving Momocs: code review, polish, improvement, English presentation, datasets, etc. Feel free to commit directly on GitHub or drop me a line.</li>
 </ol>
+</div>
+<div id="how-to-access-all-methods-for-a-given-class" class="section level4">
+<h4>How to access all methods for a given class?</h4>
+<p>Try <code>methods(class=&quot;your_class&quot;)</code>, eg <code>methods(class=&quot;Opn&quot;)</code></p>
+</div>
+<div id="how-to-access-methods-defined-for-a-particular-function" class="section level4">
+<h4>How to access methods defined for a particular function?</h4>
+<p><code>methods(&quot;your_function&quot;)</code>, eg `methods(“fgProcrustes”)</p>
+</div>
+<div id="how-can-i-access-the-help-for-a-particular-method" class="section level4">
+<h4>How can I access the help for a particular method?</h4>
+<p>Try <code>?method</code>, eg <code>?coo_center</code></p>
+</div>
+<div id="how-can-i-access-the-code-for-a-particular-method" class="section level4">
+<h4>How can I access the code for a particular method?</h4>
+<p>Try <code>Momocs:::method.class</code> (no brackets), eg <code>Momocs:::coo_center.default</code></p>
 </div>
 </div>
 <div id="architecture" class="section level2">

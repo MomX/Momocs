@@ -4,31 +4,25 @@ author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
-  toc: true
-toc_depth: 3
-#output:
-#  html_document:
-#    toc: true
-#    toc_depth: 3
-#    highlight: tango
-
+    toc: true
+    toc_depth: 6
 vignette: >
   %\VignetteIndexEntry{Momocs_intro}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
+
 ```{r, echo=FALSE}
 library(knitr)
 opts_chunk$set(eval = TRUE, message=FALSE,
                warnings=FALSE, results="hold")
 ```
 
+## News
+As of Oct. 2018, Momocs is being extensively polished these days and may evolve before its 2.0 release as part of [MomX](http://momx.online).
+ 
 ## Preliminaries
 
-### News
-Momocs is being extensively polished these days and may evolve before its 2.0 release as prt of [MomX](http://momx.online).
- -- October 2018
- 
 ### Abstract
 Momocs aims to provide a complete and convenient toolkit for morphometrics. It is intended for scientists interested in describing quantitatively the shape, and its (co)variations, of the objects they study.
 
@@ -48,9 +42,10 @@ Prior to analysis, Momocs can be used to acquire and manipulate data or to impor
 * There is a much nicer [online version of this manual](http://momx.github.io/Momocs/) that can be accessed from the console with, e.g. `Momocs_help("efourier")`.
 * Feel free to contribute to Momocs through [GitHub](http://www.github.com/MomX/Momocs): report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that's definitely worth [a look](http://r-pkgs.had.co.nz/git.html).
 * Feel free to drop me a line, should you need a hand or would like to collaborate with me:   `bonhomme.vincent@gmail.com`.
+* Before asking for help, please read Momocs's FAQ: `vignette("Momocs_FAQ")`.
 
 ### Get, install and use it
-First, of all, let's download the last version of Momocs. You will need to install the `devtools` package to get it from my [GitHub](http://www.github.com/MomX/Momocs) repository :
+First, of all, let's download the last version of Momocs. You will need to install the `devtools` package - if you do not have it yet - to get it from my [GitHub](http://www.github.com/MomX/Momocs) repository :
 
   ```{r, eval=FALSE}
 install.packages("devtools")
@@ -70,7 +65,11 @@ Keywords used all accross Momocs are introduced here in __bold__.
 
 Morphometrics is the ugly job of turning beautiful shapes into quantitative variables. Just kidding, that's pretty exciting.
 
-A __shape__ is defined as a collection of `(x; y)` coordinates. No 3D yet but different __families__ can be handled: __outlines__, here in a first-quarter moon ; __open outlines__, here is the sterile valve of an olive stone; __configuration of landmarks__; here, hologous points from a mosquito wing.
+A __shape__ is defined as a collection of `(x; y)` coordinates. No 3D yet but different __families__ are handled by Momocs:
+
+1. __outlines__, here in a first-quarter moon ;
+2. __open outlines__, here is the sterile valve of an olive stone; 
+3. __configuration of landmarks__; here, homologous points from a mosquito wing.
 
 ```{r, echo=FALSE, message=FALSE}
 shapes[18] %>% coo_sample(60) %>% coo_plot(points=TRUE)
@@ -83,12 +82,12 @@ They are all single shapes defined by a matrix of `(x; y)` coordinates; here are
 ```{r}
 shapes[18] %>% head()
 ```
-A few dozens of operations on single shapes are implemented such as: plotting, centering, calculating areas, etc. These 70+ operations can be accessed with `apropos("coo_")`. But working on single shapes is quite boring.
+Many operations on shapes are implemented such as: plotting, geometric operations, scalar descriptions, etc. These operations have their dedicated vignette, see `vignette("Momocs_coo")`.
 
-Shapes can be organized into a __collection__ of coordinates: a `Coo` object that carries:
+Working on single shape can quicly be boring. Shapes can be organized into a collection of coordinates: a `Coo` object that carries:
 
 * a component named `$coo`, a `list` of shapes (as `matrix`.ces);
-* most of the time, a component named `$fac`, a `data.frame` to store covariates, either `factor`s or `numeric`s;
+* most of the time, a component named `$fac`, a `data.frame` (or the modern equivalent, a `data_frame`) to store covariates, either `factor`s or `numeric`s;
 * possibly, other components of interest.
 
 One can do several things with a `Coo` object: visualize it, apply morphometric operations, handle the data it contains, but in the end, a __ morphometric method__ will turn coordinates into coefficients.
@@ -112,11 +111,11 @@ Some operations on `Coo`/`Coe` are __generic__ in that they do not depend of the
 
 Momocs implement this desirable behavior and defines __classes__ and __subclasses__, as S3 objects.
 
-`Coo`                                | Morphometrics methods              | `Coe`
--------------------------------------|------------------------------------|----------
-`OutCoo` (outlines)                  | `efourier`, `rfourier`, `sfourier`, `tfourier` | `OutCoe`
-`OpnCoo` (open outlines)             | `npoly`, `opoly`, `dfourier`       | `OpnCoe`
-`LdkCoo` (configuration of landmarks)|`fgProcrustes`, `slide`             | `LdkCoe`
+`Coo`                                | Morphometrics methods                           | `Coe`
+-------------------------------------|------------------------------------------------ |----------
+`OutCoo` (outlines)                  | `efourier`, `rfourier`, `sfourier`, `tfourier`  | `OutCoe`
+`OpnCoo` (open outlines)             | `npoly`, `opoly`, `dfourier`                    | `OpnCoe`
+`LdkCoo` (configuration of landmarks)|`fgProcrustes`, `slide`                          | `LdkCoe`
 
 
 In other words:
@@ -140,10 +139,9 @@ panel(shapes, names=TRUE) # base graphics
 
 `shapes` is one of the datasets bundled with Momocs. It's ("lazy") loaded in memory as soon as you call it, no need for `data(shapes)`. To see all Momocs' datasets, try `data(package="Momocs")`. These datasets are all `Coo` objects (try `class(bot)`), ie collection of shapes.
 
-One can do many things on a `Coo` object, as above, e.g. printing a summary of it (just by typing its name in the console), plotting a family picture with `panel` or `panel2`. Note the `2` that refers to a `ggplot2` variant of a given plot.
+One can do many things on a `Coo` object, as above, eg printing a summary of it (just by typing its name in the console), plotting a family picture with `panel`, etc.
 
-So far, we're interested in single shapes so
-let's extract the 4th shape from `shapes`, using the traditional syntax.  We plot it with `coo_plot` that comes with several options for plotting all families of shapes.
+So far, we're interested in single shapes so let's extract the 4th shape from `shapes`, using the traditional syntax.  We plot it with `coo_plot` that comes with several options for plotting all families of shapes.
 
 ```{r}
 shp <- shapes[4]
@@ -155,7 +153,7 @@ coo_plot(shp, col="grey80", border=NA, centroid=FALSE, main="Meow")
 
 Let's now do some basic operations on this shape. They all named `coo_*` and you can have the full list with `apropos("coo_")`. `coo_*` family encompasses:
 
-  * geometric operations (such as centering, scaling, etc.)
+* geometric operations (such as centering, scaling, etc.)
 * plotting functions
 * scalar descriptors of shape (such as area, perimeter, circularity, rectilinearity, etc.)
 * various other operations on a single shape.
@@ -165,7 +163,7 @@ coo_plot(coo_center(shp), main="centered Meow")
 coo_plot(coo_sample(shp, 64), points=TRUE, pch=20, main="64-pts Meow")
 ```
 
-Momocs makes use of [maggritr](https://CRAN.R-project.org/package=magrittr)'s pipe operators. A nice introduction can be found [there](https://CRAN.R-project.org/package=magrittr). `magrittr` requires a (very small) cerebral gymnastics at the beginning but the benefits are huge, for defining moprhometric pipelines in Momocs but also for R as a whole. It makes things clearer, it: saves typing; reduces intermediate variable assignation; reads from left to right; substantiates the pipe we (should) have in mind. `magrittr`'s pipes are already loaded with Momocs.
+Momocs is fully compatible with [maggritr](https://CRAN.R-project.org/package=magrittr)'s pipe operators. A nice introduction can be found [there](https://CRAN.R-project.org/package=magrittr). `magrittr` requires a (very small) cerebral gymnastics at the beginning but the benefits are huge, for defining moprhometric pipelines in Momocs but also for R as a whole. It makes things clearer, it: saves typing; reduces intermediate variable assignation; reads from left to right; substantiates the pipe we (should) have in mind. `magrittr`'s pipes are already loaded with Momocs.
 
 ```{r}
 shapes[4] %>% coo_smooth(5) %>% coo_sample(64) %>% coo_scale() %>% coo_plot()
@@ -173,6 +171,8 @@ shapes[4] %>% coo_smooth(5) %>% coo_sample(64) %>% coo_scale() %>% coo_plot()
 cs64 <- function(x) x %>% coo_sample(64) %>% coo_scale() %>% coo_center()
 shapes[4] %>% cs64 %>% coo_plot() # note the axes
 ```
+
+Have a look to the dedicated vignette with `vignette("Momocs_coo")`.
 
 The most familiar operation can directly be applied on `Coo` objects:
   ```{r}
@@ -193,22 +193,22 @@ panel(bot, fac="type", names=TRUE)
 stack(bot)
 ````
 
-Here we will illustrate outline analysis with some elliptical Fourier transforms (but the less used - and tested - radii variation Fourier transforms, its variant used by Renaud et al., and tangent angle Fourier transforms are also implemented with `rfourier`, `sfourier` and `tfourier` respectively).
+Here, we will illustrate outline analysis with elliptical Fourier transforms (but the less used and tested `rfourier`, `sfourier` and `tfourier` are also implemented).
 
-The idea behind elliptical Fourier transforms is to fit the x and y coordinates separately, that is the blue and red curves below:
+The idea behind elliptical Fourier transforms is to fit the `x` and `y` coordinates separately, that is the blue and red curves below:
   ```{r}
 coo_oscillo(bot[1], "efourier")
 ```
 
-Graphically, this is equivalent to fitting Ptolemaic ellipses on the plane:
+Graphically, this is equivalent to fitting Ptolemaic ellipses on the plane, try the following:
 
-  ```{r}
+  ```{r, eval=FALSE}
 Ptolemy(bot[1])
 ```
 
-Let's calibrate the number of harmonics required. More details can be found in their respective help files.
+Let's calibrate the number of harmonics required. More details can be found in their respective help files. Try the following:
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE, results='hide'}
 calibrate_harmonicpower_efourier(bot)
 calibrate_deviations_efourier(bot)
 calibrate_reconstructions_efourier(bot)
@@ -223,9 +223,8 @@ bot.f
 
 `bot.f` is a `Coe` object (and even an `OutCoe`), you have have a look to the help files to go deeper into Momocs classes.
 
-Let's have a look to the amplitude of fitted coefficients.
+You can have a look to the amplitude of fitted coefficients with:
 ```{r}
-# hist(bot.f, drop=0)
 boxplot(bot.f, drop=1)
 ```
 
@@ -239,24 +238,9 @@ plot(bot.p)
 
 Amazing but we will do much better afterwards.
 
-The question of normalization in elliptical Fourier transforms is central. Normalization can either be done beforehand, with geometric operations, or afterhand, directly on the matrix of Fourier coefficients and consuming the first harmonic. In brief, I'm not a big fan of the "use the first harmonics and see what happens" strategy, as some biases can be introduced (and actually quite hard to detect), particularly on rounded/ellipsoid shapes. More can be found in `?efourier`.
+The question of normalization in elliptical Fourier transforms is central: have a look to `?efourier`. 
 
-Here is an example of such bias from the `molars` dataset generously shared by Cornu and Detroit.
-
-```{r, message=FALSE, error=FALSE, warning=FALSE, results="hide"}
-# raw molars dataset
-stack(molars, title = "Non-aligned molars")
-# Procrustes-aligned and slided molars
-mol.al <- fgProcrustes(molars, tol = 1e-4) %>% coo_slidedirection("left")
-stack(mol.al, title="Aligned molars")
-
-# Now compare PCA and morphospace using the 1st harmonic alignment
-molars %>% efourier(norm=TRUE) %>% PCA() %>% plot("type")
-# and the a priori normalization
-molars %>% efourier(norm=FALSE) %>% PCA() %>% plot("type")
-```
-
-Finally, you can drop some harmonics with `rm_harm`. And methods that removes the bilateral (a)symmetry are implemented: `rm_asym` and `rm_sym`, while `symmetry` calculates some related indices.
+You can also drop some harmonics with `rm_harm`. And methods that removes the bilateral (a)symmetry are implemented: `rm_asym` and `rm_sym`, while `symmetry` calculates some related indices.
 
 ### Open outlines
 Open outlines are curves. Methods actually implemented are:
@@ -273,8 +257,7 @@ They have two orthogonal views (a lateral and a dorsal view). See the paper cite
 
 ```{r}
 olea
-pile(olea)     # already aligned \o/
-pile(olea, ~view)    # another family picture
+pile(olea, ~view)    # a family picture colored by a factor
 ```
 
 Now, we gonna calculate `opoly` on it and plot the result of the PCA. Notice how consistent is the grammar and the objects obtained:
@@ -284,7 +267,7 @@ op <- opoly(olea)           # orthogonal polynomials
 class(op)                   # an OpnCoe, but also a Coe
 op.p <- PCA(op)             # we calculate a PCA on it
 class(op.p)                 # a PCA object
-plot(PCA(op), ~domes+var)   # notice the formula interface to combine factors
+op %>% PCA %>% plot(~domes+var)   # notice the formula interface to combine factors
 ```
 
 But this is perfectly wrong! We merged the two views are if they were different individuals. Momocs can first `chop` or `filter` the whole dataset to separate the two views, do morphometrics on them, and `combine` them afterwards.
@@ -309,20 +292,21 @@ _Landmarks methods are still quite experimental (i.e. not tested extensively)
 Let's have a look to graphics facilities and apply a full generalized Procrustes adjustment:
   ```{r, message=FALSE, echo=TRUE}
 pile(wings)
+options(Momocs_verbose=FALSE) # to silent Momocs
 w.al <- fgProcrustes(wings)
 pile(w.al)
 
 # PCA
-PCA(w.al) %>% plot(1)
+PCA(w.al) %>% plot_PCA(1)
 ```
 
-Sliding landmarks are supported and rely on `geomorph` package by D.C. Adams and E. Otarola-Castillo.
+Sliding landmarks are supported and rely on `geomorph` package by Adams and colleagues.
 
 ```{r, message=FALSE, echo=TRUE}
 pile(chaff)
 chaff.al <- fgsProcrustes(chaff)
 pile(chaff.al)
-chaff.al %>% PCA() %>% plot(~taxa, chull.filled=TRUE)
+chaff.al %>% PCA() %>% plot_PCA(~taxa, chullfilled = TRUE)
 ```
 
 Again, the grammar is consistent for landmarks.
@@ -345,23 +329,30 @@ Let's describe these hearts with scalar descriptors: area, circularity and the d
 ht <- measure(hearts, coo_area, coo_circularity, d(1, 3))
 class(ht)
 ht$coe
-ht %>% PCA() %>% plot("aut", pch=20, ellipsesax=F, ellipse=T, loadings=T)
+ht %>% PCA() %>% plot_PCA(~aut)
 ```
 
-Again, there are plenty of scalar descriptors of shape, which names starts with `coo_*`, `apropos("coo_")`.
+Again, there are plenty of scalar descriptors of shape, which names starts with `coo_*`, `apropos("coo_")`. Have a look to the coo_vignette, see `vignette("Momocs_coo")`.
 
 Such a `TraCoe` is provided in the `flower` dataset which is simply a rearranged `iris`. Once again, note the grammar consistency.
 
-```{r}
+```{r, eval=FALSE}
 flower
-flower %>% PCA() %>% plot("sp", loadings=TRUE, contour=TRUE, lev.contour=5)
+flower %>% PCA() %>% plot_PCA(~sps)
+```
+
+You can build your own `TraCoe` with `coo_scalars`:
+
+```{r}
+bot_sc <- bot %>% coo_scalars %>% TraCoe(fac=bot$fac)
+bot_sc %>% PCA %>% plot_PCA(~type)
 ```
 
 Note that, by default, PCA on `TraCoe` object first centers and scales variables. This can be changed, see `?PCA`.
 
 ## Multivariate statistics
 
-This section will mainly be illustrated with `bot`, and consequently outline analysis, but it works the same on any `Coe` object, resulting from open outlines, configuration of landmarks, traditional morphometrics, etc.
+This section will mainly be illustrated with `bot`, and consequently outline analysis, but it works exactly the same on any `Coe` object, resulting from open outlines, configuration of landmarks, traditional morphometrics, etc.
 
 ```{r, message=FALSE}
 bot.f <- efourier(bot)
@@ -373,43 +364,33 @@ Let's see the main components of shape variability with a Principal Component An
 
 ```{r}
 bot.p <- PCA(bot.f)
-plot(bot.p)
+plot_PCA(bot.p)
 ````
 
 Morphological spaces are reconstructed on the fly with `plot.PCA`. We call it `plot.PCA` because it uses the familiar `plot` but on the particular `PCA` class (type `class(bot.p)`). We may want to display the two groups saved in `bot$fac`. Just type the id of the column or its name.
 ```{r}
-plot(bot.p, "type") # equivalent to plot(bot.p, 1)
+plot_PCA(bot.p, ~type) # there are many ways to pass the factor, see ?plot_PCA and ?fac_dispatcher
 ```
 
-`plot.PCA` has many arguments and examples below will give a glimpse, but see `?plot.PCA` for the full list.
-
-```{r}
-plot(bot.p, 1, ellipses=TRUE, ellipsesax = FALSE, pch=c(4, 5))
-plot(bot.p, 1, chull=TRUE, pos.shp = "full_axes", abbreviate.labelsgroups = TRUE, points=FALSE, labelspoints = TRUE)
-plot(bot.p, 1, pos.shp="circle", stars=TRUE, chull.filled=TRUE, palette=col_spring)
-```
-
-You have a `ggplot2` alternative, that is not completely consistent:
-  ```{r}
-# plot2(bot.p, "type") # deprecated for the moment
-```
-
-And other helper functions for the `PCA` class:
-  ```{r}
+See `?plot_PCA` for much more complex graphics. And also these helper functions for the `PCA` class:
+  ```{r, eval=FALSE}
 scree(bot.p)
 scree_plot(bot.p)
 boxplot(bot.p, 1)
 PCcontrib(bot.p)
 ```
 
+You can also export the `PCA` object as a `.txt` file (see `?export`) or as a `data_frame` for further use with R with:
+```{r}
+bot.p %>% as_df(3) # The first three PCs 
+```
+
+
 By the way, you can use Momocs plotters to plot non-morphometric datasets. Using a `TraCoe` object is an option, but `PCA` also works fine. Let's see an example with `iris` dataset:
 
 ```{r}
 TraCoe(iris[, -5], fac=data.frame(sp=iris$Species)) %>%
-PCA() %>% plot("sp", loadings=TRUE)
-# or
-PCA(iris[, -5], fac=data.frame(sp=iris$Species)) %>%
-plot("sp", chull=TRUE, ellipses=TRUE, conf_ellipses = 0.9)
+PCA() %>% plot_PCA(~sp)
 ```
 
 ### `LDA`: Linear Discriminant Analysis
@@ -427,36 +408,34 @@ bot.l %>% summary
 plot(bot.l)
 # plot the cross-validation table
 plot_CV(bot.l)  # tabular version
-plot_CV(bot.l, freq=TRUE) # frequency table
-plot_CV2(bot.l) # arrays version
 ```
 
-Finally, if you need to classify using LDA methods, see `classify`.
+You can also export turn it into a `data_frame` with `as_df`.
 
 ### `MANOVA`: Multivariate Analysis of (co)variace
 We can test for a difference in the distribution of PC scores with:
 ```{r}
-MANOVA(bot.p, "type")
+MANOVA(bot.p,  ~type)
 ```
 
 We can also calculate pairwise combination between every levels of a `fac`. Here we just have two levels, so a single pairwise combination but the syntax is:
 
 ```{r}
-MANOVA_PW(bot.p, "type")
+MANOVA_PW(bot.p, ~type)
 ```
 
 If we want a MANCOVA instead :
 
 ```{r}
 bot %<>% mutate(cs=coo_centsize(.))
-bot %>% efourier %>% PCA %>% MANOVA("cs")
+bot %>% efourier %>% PCA %>% MANOVA(~cs)
 ```
 
 
 ### `CLUST`: Hierarchical clustering
 A hierarchical classification now. It relies on `dist` + `hclust` + `ape::plot.phylo`.
 ```{r, eval=FALSE}
-CLUST(bot.p, 1)
+CLUST(bot.p, ~type)
 ```
 Monophyly is plotted by default. Many options can be found in `?CLUST`
 
@@ -466,53 +445,75 @@ A very minimal k-means clustering is implemented:
 KMEANS(bot.p, centers = 5)
 ```
 
-### `mshapes`: Mean shapes
+### `MSHAPES`: Mean shapes
 We can retrieve the mean shapes, group wise (if a `fac` is specified), or the global mean shape (if omitted). It works from the `Coe` object:
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 # mean shape
 bot.f %>% MSHAPES() %>% coo_plot()
 # mean shape, per group
-bot.ms <- mshapes(bot.f, 1)
-beer   <- bot.ms$shp$beer    %T>% coo_plot(border="blue")
-whisky <- bot.ms$shp$whisky  %T>% coo_draw(border="red")
-legend("topright", lwd=1,
-col=c("blue", "red"), legend=c("beer", "whisky"))
+bot.ms <- MSHAPES(bot.f, ~type)
+# lets rebuild an Out
+Out(bot.ms$shp) %>% panel(names=TRUE)
+# or individual shapes
+beer   <- bot.ms$shp$beer    %>% coo_plot(border="blue")
+whisky <- bot.ms$shp$whisky  %>% coo_draw(border="red")
 ```
 
 We can also plot a pairwise comparison of them:
-```{r, eval=FALSE}
-# leaves <- shapes %>% slice(grep("leaf", names(shapes))) %$% coo
-# leaves %>% plot_mshapes(col2="#0000FF")
+```{r, eval=TRUE}
+leaves <- shapes %>% slice(grep("leaf", names(shapes))) %$% coo
+leaves %>% plot_MSHAPES()
 
 # or from mshapes directly
-bot %>% efourier(6) %>% mshapes("type") %>% plot_mshapes
+bot %>% efourier(6) %>% MSHAPES(~type) %>% plot_MSHAPES()
 ```
 
 
 ## Manipulating objects
-### `dplyr` verbs
 One common yet boring task of morphometrics consists in handling datasets: add new information, remove some individuals, etc.
 
 Momocs adapts [dplyr](https://CRAN.R-project.org/package=dplyr) verbs to its objects, and add new ones. If you have never heard of dplyr, let's have a look to its introduction [there](https://CRAN.R-project.org/package=dplyr), this may change your (R) life.
 
-Basics verbs are implemented; try the following:
-  ```{r, results="markup"}
+```{r, results="markup"}
 data(olea)
 olea
+```
 
-# slice: select individuals based on their position
+
+### `mutate`: add new columns
+```{r}
+mutate(olea, fake=factor(rep(letters[1:2], each=105)))
+```
+
+
+### `slice`: select individuals based on their position
+```{r, results="markup"}
 slice(olea, 1:5)
 slice(olea, -(1:100))
+```
 
-# filter: select individual based on a logical condition
+### `filter`: select individual based on a logical condition
+```{r, results="markup"}
+filter(olea, domes=="cult")
+# %in% is useful
+filter(olea, var %in% c("Aglan", "Cypre"))
+# or its complement
+filter(olea, !(var %in% c("Aglan", "Cypre")))
+# Also works with more than one condition
 filter(olea, domes=="cult", view!="VD")
+# or on operation on numeric, here a dummy numeric column
+olea %>% mutate(foo=1:210) %>% filter(foo<12)
+olea %>% mutate(foo=1:210) %>% filter(foo>median(foo))
+```
 
-# select: pick, reorder columns from the $fac
+### `select`: pick, reorder columns from the $fac
+```{r}
+# reorder columns
+select(olea, view, domes, var, ind)
+# drop some and show the use of numeric index
 select(olea, 1, Ind=ind)
-
-# mutate: add new columns
-mutate(olea, fake=factor(rep(letters[1:2], each=105)))
-
+# drop one
+select(olea, -ind)
 ```
 
 And you can pipe those operations: say, we only want dorsal views from domesticated individuals, for a (renamed) 'status' column, and drop the 'ind' column:
@@ -523,33 +524,30 @@ olea %>%
   select(-ind)
 ```
 
-This should save some headaches.
+You can also use dplyr verbs on the `fac` directly, eg:
+```{r}
+olea$fac %>% dplyr::group_by(var) %>% 
+  dplyr::mutate(n=1:n(), N=n())
+```
 
-### New verbs ala `dplyr`
-New verbs are implemented: for instance, you can `chop` (a rougher slicing) according to a condition: this will create a list, on which you can apply further operations, then `combine` it back. This is particularly useful when you want to apply independant treatments to different partitions, eg orthogonal views of your model. Prior to this, we can use `table` to cross-tabulate data from `$fac`. We could have done the first step of what follows with `rm_uncomplete` that drops (if any) missing data.
+If you want to save it, do not forget to reassign it back to the `$fac`: `olea$fac <- olea$fac %>% some_operations` or even `olea$fac %<>% some_operations`.
+
+Note that if you due to namespace conflicts, if you use `dplyr`, and in a larger extent the tidyverse you **must** use `library(dplyr)` (or `library(tydyverse)`) **before** `library(Momocs)`.
+
+That being said, the adaptation of these dplyr verbs should save time and some headaches.
+
+New verbs are implemented: for instance, you can `chop` (a `split` on `Coo` objects) according to a condition: this will create a list, on which you can apply further operations, then `combine` it back. This is particularly useful when you want to apply independant treatments to different partitions, eg orthogonal views of your model. Prior to this, we can use `table` to cross-tabulate data from `$fac`. We could have done the first step of what follows with `rm_uncomplete` that drops (if any) missing data.
 
 ```{r}
 with(olea$fac, table(var, view))
 # we drop 'Cypre' since there is no VL for 'Cypre' var
-olea %>% filter(var != "Cypre") %>%
+olea %>% 
+  filter(var != "Cypre") %>%
   # split, do morphometrics, combine
   chop(~view) %>% opoly %>% combine() %>%
   # note the two views in the morphospace
-  PCA() %>% plot("var")
+  PCA() %>% plot_PCA(~var)
 ```
-
-Also if you need some `group_by` operation, you can use the `fac` `data.frame`. For instance if you want to `arrange` based on a column and retain the top 10 shapes, then you can:
-
-  ```{r, eval=FALSE}
-retain <- x$fac %>%
-  # here we sort and create an id
-  arrange(your_column) %>% mutate(.id=1:n()) %>%
-  dplyr::group_by(taxa) %>% slice(1:10) %$% .id
-# it worked!
-x %>% slice(retain) %$% table(fac$taxa)
-```
-
-
 
 ### Various helpers
 Some methods help, on `Coe` objects to:
@@ -563,7 +561,6 @@ Some methods help, on `Coe` objects to:
 Several shortcuts are implemented on `Coo` and `Coe` objects:
   * `names` returns shape names;
 * `length` returns their number;
-* `table` cross-tabulates the`$fac` component;
 * `Ntable` does the same job and plots a confusion matrix;
 * `[]` extracts one (or more) shape;
 * `$` can access either a shape name or a column name for the `$fac`.
@@ -572,7 +569,6 @@ Try the following:
   ```{r, eval=FALSE}
 names(bot)
 length(bot)
-table(olea, "var", "domes")
 bot[1]
 bot[1:5]
 bot$brahma
@@ -580,7 +576,9 @@ bot$type
 ```
 
 ## Babel import/export
-There are various morphometrics formats in the wild, almost as much as softwares. Momocs tries to create bridges between them, all gathered in the **Babel** family.
+There are various morphometrics formats in the wild, almost as much as softwares. Momocs tries to create bridges between them, all gathered in the **Babel** family. 
+
+Note that these will move to [**Momit**](https://momx.github.io/Momit/)/[**Momecs**](https://momx.github.io/Momecs/) asap.
 
 ### Bridges within R
 You can convert from/to array, matrix, list or data.frame with the functions `{a, m, l, d}2{a, m, l, d}`. For instance, `l2a` converts a list into an array that you can use with `geomorph`; `a2l` does the inverse operation.
@@ -599,14 +597,15 @@ Ldk(coo=pupfish$coords %>% a2l,
 ```
 
 ### Import from StereoMorph
-If you use this excellent package by Olsen to digitize landmarks and curves, you can import them, from the files produced with the functions `import_StereoMorph_ldk` and `import_StereoMorph_curve`.
+If you use StereoMorph to digitize landmarks and curves, you can import them, from the files produced with the functions `import_StereoMorph_ldk` and `import_StereoMorph_curve`.
 
 ### Import from tps and other digitizing softwares
 * `.tps` files can be read with `import_tps`
 * `.nts` files an be read with `nts2Coo` (will be turned into `import_nts` soon)
 
 ### Direct build of *Coe objects
-* You're not bound with Momocs from the "shapes" step, ie you do not have to start from `Coo` objects. For instance if you have a matrix of coefficients, you can directly build an `OutCoe` with the builder (see below). Same approach for `OpnCoe` and `TraCoe`; have a look to the help files of these builders.
+
+You're not bound with Momocs from the "shapes" step, ie you do not have to start from `Coo` objects. For instance if you have a matrix of coefficients, you can directly build an `OutCoe` with the builder (see below). Same approach for `OpnCoe` and `TraCoe`; have a look to the help files of these builders.
 
 ```{r}
 # we simulate an imported matrix of coordinates, eg from a .csv
@@ -631,10 +630,15 @@ load("Bottles.rda") # bot is back
 ```
 
 ### Export from R
-Any Momocs object, `Coo`s, `Coe`s, `PCA`s, etc. can be turned into a `data.frame` with `as_df`. Work with `dplyr`, `ggplot2` is made easy and you can export it as `.txt`, `.csv` "by hand" or use the `export` function:
+Any Momocs object, `Coo`s, `Coe`s, `PCA`s, etc. can be turned into a `data.frame` with `as_df`. 
+```{r}
+bot %>% as_df
+bot %>% efourier %>% as_df
+bot %>% efourier %>% PCA %>% as_df
+```
 
+If the heretic you want to exit R to do stats elsewhere, `export` is your friend:
 ```{r, eval=FALSE}
-bot %>% as_df # then %>% write.table
 bot %>% efourier %>% export
 bot %>% efourier %>% PCA %>% export
 ```
@@ -649,7 +653,6 @@ bot$fac # data.frame for covariates
 # from Coe objects
 bot.f$coe # matrix of coefficients
 bot.f$fac # data.frame for covariates
-as_df(bot.f)
 
 # from PCA objects
 bot.p$x        # scores
@@ -657,8 +660,7 @@ bot.p$rotation # rotation matrix
 ```
 
 ## Graphics
-The most common graphics have been already presented in previous sections. But there are many more of them, and they are gathered in the
-**Graphics** family that can be accessed with ... TODO.
+Most graphics are currently being rewritten, either to pure `ggplot2` or using grindr. See the dedicated embryo of vignette: see `vignette("Momocs_grindr")`.
 
 ### `tps_*`: Thin Plate Splines
 TPS have not been presented before but here there are:
@@ -682,48 +684,11 @@ coo_draw(whisky)
 title("coo_ruban")
 ```
 
-### `ggplot2`
-Many graphical function have their `ggplot2` counterpart:
-
-```{r}
-panel(bot)
-```
-
-Otherwise, you can build your own plots. Let's begin with a simple example:
-  ```{r}
-# we build a ggplot object from a shape turned into a data.frame
-library(ggplot2)
-shapes[4] %>% m2d() %>% ggplot() +
-  aes(x, y) + geom_path() + coord_equal() +
-  labs(title="ggplot2 Meow") + theme_minimal()
-```
-
-Here is a more complicated plot that takes profit of `as_df` methods that turns objects into `ggplot2`-friendly `data.frame`s:
-
-  ```{r}
-bot.p %>% as_df() %>% ggplot() +
-  aes(x=PC1, y=PC2, col=type) + coord_equal() +
-  geom_point() + geom_density2d() + theme_light()
-```
-
 ### Color palettes
 * Nice palettes are bundled with Momocs, see `?palettes`.
 
 ## Frequently asked questions
-
-* __How to access all methods for a given class?__
-+ `methods(class="your_class")`, eg `methods(class="Opn")`
-
-* __How to access methods defined for a particular function?__
-+ `methods("your_function")`, eg `methods("fgProcrustes")`
-
-* __How can I access help for a particular methods?__
-+ `function.class`, eg `?plot.PCA`
-
-* __How can I access the code of a method?__
-+ For functions, just type its name, eg `lf_structure`; for methods add its class, eg `plot.PCA`
-
-* __To be continued__
+See `vignette("Momocs_FAQ")`.
 
 ------
   * Done with love by Vincent Bonhomme `<bonhomme.vincent@gmail.com>`.

@@ -1,11 +1,8 @@
 ## ----setup, include=FALSE------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 
-## ------------------------------------------------------------------------
-devtools::load_all("~/Research/MomX/Momocs")
-
-## ---- eval=FALSE, message=FALSE, warning=FALSE---------------------------
-#  library(Momocs)
+## ---- eval=TRUE, message=FALSE, warning=FALSE----------------------------
+library(Momocs)
 
 ## ------------------------------------------------------------------------
 # a single shape

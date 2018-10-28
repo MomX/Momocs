@@ -6,7 +6,6 @@ output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 6
-toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Momocs_coo}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,11 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Preamble
 In Momocs, a shape is a matrix of `(x, y)` coordinates. When they are plenty, they are usually gathered in a `Coo` object which is, essentially, a list with at least a `$coo` component.
 
-```{r}
-devtools::load_all("~/Research/MomX/Momocs")
-```
-
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
 library(Momocs)
 ```
 

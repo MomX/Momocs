@@ -32,8 +32,7 @@ Out.default <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 
 # for Momit and mom_df
 #' @export
-Out.data.frame <- function(coo, fac = dplyr::data_frame(), ldk = list()){
-  x <- coo
+Out.data.frame <- function(x, fac = dplyr::data_frame(), ldk = list()){
   # check if there is a coo column and initiate the Out
   .check(any(colnames(x)=="coo"),
          "data.frame must have a `coo` column")
