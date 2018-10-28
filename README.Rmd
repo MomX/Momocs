@@ -31,7 +31,7 @@ It includes most common 2D morphometrics approaches on outlines, open outlines, 
 
 It allows reproducible, pipeable, complex morphometric analyses and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.
 
-Its core functions are borrowed from hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
+It hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
 
 * __Check__ the online doc and the tutorials [there](http://momx.github.io/Momocs/)
 * __You're welcome to__ implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/MomX/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
@@ -135,7 +135,7 @@ options(Momocs_verbose = FALSE)
 ```{r example, message=FALSE, message=FALSE}
 hearts %T>%                    # A toy dataset
   stack() %>%                  # Take a family picture of raw outlines
-  fgProcrustes() %>%          # Full generalized Procrustes alignment
+  fgProcrustes() %>%           # Full generalized Procrustes alignment
   coo_slide(ldk = 2) %T>%      # Redefine a robust 1st point between the cheeks
   stack() %>%                  # Another picture of aligned outlines
   efourier(6, norm=FALSE) %>%  # Elliptical Fourier Transforms
