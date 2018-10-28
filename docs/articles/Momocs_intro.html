@@ -92,7 +92,7 @@
       <h1>An introduction to Momocs</h1>
                         <h4 class="author">Vincent Bonhomme</h4>
             
-            <h4 class="date">2018-10-23</h4>
+            <h4 class="date">2018-10-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/MomX/Momocs//blob/master/vignettes/Momocs_intro.Rmd"><code>vignettes/Momocs_intro.Rmd</code></a></small>
       <div class="hidden name"><code>Momocs_intro.Rmd</code></div>
@@ -127,7 +127,7 @@
 <a href="#survival-tips" class="anchor"></a>Survival tips</h3>
 <ul>
 <li>This vignette introduces Momocs, as for every R function, each function has its own manual page, eg <code><a href="../reference/efourier.html">?efourier</a></code>.</li>
-<li>There is a much nicer <a href="http://momx.github.io/Momocs/">online version of this manual</a> that can be accessed from the console with, e.g. <code><a href="../reference/Momocs_help.html">Momocs_help("efourier")</a></code>.</li>
+<li>There is a much nicer <a href="http://momx.github.io/Momocs/">online version of this manual</a> that can be accessed from the console with, e.g. <code><a href="../reference/Momocs_helpers.html">Momocs_help("efourier")</a></code>.</li>
 <li>Feel free to contribute to Momocs through <a href="http://www.github.com/MomX/Momocs">GitHub</a>: report issues, ask for new features, share data and methods, correct typos, write better vignettes, helpfiles, or whatever pleases you. If you have never heard of GitHub, that’s definitely worth <a href="http://r-pkgs.had.co.nz/git.html">a look</a>.</li>
 <li>Feel free to drop me a line, should you need a hand or would like to collaborate with me: <code>bonhomme.vincent@gmail.com</code>.</li>
 <li>Before asking for help, please read Momocs’s FAQ: <code><a href="../articles/Momocs_FAQ.html">vignette("Momocs_FAQ")</a></code>.</li>
@@ -278,7 +278,6 @@
 <p><img src="Momocs_intro_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>(<span class="kw"><a href="../reference/coo_sample.html">coo_sample</a></span>(shp, <span class="dv">64</span>), <span class="dt">points=</span><span class="ot">TRUE</span>, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">main=</span><span class="st">"64-pts Meow"</span>)</a></code></pre></div>
 <p><img src="Momocs_intro_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
-<p>Have a look to the dedicated vignette with <code><a href="../articles/Momocs_coo.html">vignette("Momocs_coo")</a></code>.</p>
 <p>Momocs is fully compatible with <a href="https://CRAN.R-project.org/package=magrittr">maggritr</a>’s pipe operators. A nice introduction can be found <a href="https://CRAN.R-project.org/package=magrittr">there</a>. <code>magrittr</code> requires a (very small) cerebral gymnastics at the beginning but the benefits are huge, for defining moprhometric pipelines in Momocs but also for R as a whole. It makes things clearer, it: saves typing; reduces intermediate variable assignation; reads from left to right; substantiates the pipe we (should) have in mind. <code>magrittr</code>’s pipes are already loaded with Momocs.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">shapes[<span class="dv">4</span>] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_smooth.html">coo_smooth</a></span>(<span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_sample.html">coo_sample</a></span>(<span class="dv">64</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">coo_scale</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>()</a></code></pre></div>
 <p><img src="Momocs_intro_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
@@ -286,6 +285,7 @@
 <a class="sourceLine" id="cb12-2" data-line-number="2">cs64 &lt;-<span class="st"> </span><span class="cf">function</span>(x) x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_sample.html">coo_sample</a></span>(<span class="dv">64</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">coo_scale</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_center.html">coo_center</a></span>()</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">shapes[<span class="dv">4</span>] <span class="op">%&gt;%</span><span class="st"> </span>cs64 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>() <span class="co"># note the axes</span></a></code></pre></div>
 <p><img src="Momocs_intro_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
+<p>Have a look to the dedicated vignette with <code><a href="../articles/Momocs_coo.html">vignette("Momocs_coo")</a></code>.</p>
 <p>The most familiar operation can directly be applied on <code>Coo</code> objects:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">bot <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">coo_center <span class="op">%&gt;%</span><span class="st"> </span>coo_scale <span class="op">%&gt;%</span></a>
@@ -352,11 +352,9 @@
 ##  9    20  -147
 ## 10    22  -158
 ## # ... with 128 more rows</code></pre>
-<p>Graphically, this is equivalent to fitting Ptolemaic ellipses on the plane:</p>
+<p>Graphically, this is equivalent to fitting Ptolemaic ellipses on the plane, try the following:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="../reference/Ptolemy.html">Ptolemy</a></span>(bot[<span class="dv">1</span>])</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
-<p>Let’s calibrate the number of harmonics required. More details can be found in their respective help files.</p>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-14-1.png" width="700"><img src="Momocs_intro_files/figure-html/unnamed-chunk-14-2.png" width="700"><img src="Momocs_intro_files/figure-html/unnamed-chunk-14-3.png" width="700"></p>
+<p>Let’s calibrate the number of harmonics required. More details can be found in their respective help files. Try the following:</p>
 <p>Here, 10 harmonics gather 99% of the harmonic power. If you’re happy with this criterium, you can even omit <code>nb.h</code> in <code>efourier</code>: that’s the default parameter, returned with a message.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">bot.f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(bot, <span class="dt">nb.h=</span><span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb21-2" data-line-number="2">bot.f</a></code></pre></div>
@@ -374,9 +372,8 @@
 ## 6 whisky a    
 ## # ... with 34 more rows</code></pre>
 <p><code>bot.f</code> is a <code>Coe</code> object (and even an <code>OutCoe</code>), you have have a look to the help files to go deeper into Momocs classes.</p>
-<p>Let’s have a look to the amplitude of fitted coefficients.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># hist(bot.f, drop=0)</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">boxplot</span>(bot.f, <span class="dt">drop=</span><span class="dv">1</span>)</a></code></pre></div>
+<p>You can have a look to the amplitude of fitted coefficients with:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">boxplot</span>(bot.f, <span class="dt">drop=</span><span class="dv">1</span>)</a></code></pre></div>
 <p><img src="Momocs_intro_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 <p>Now, we can calculate a PCA on the <code>Coe</code> object and plot it, along with morphospaces, calculated on the fly.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">bot.p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(bot.f)</a>
@@ -385,21 +382,8 @@
 <p><img src="Momocs_intro_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 <pre><code>## [1] "PCA"    "prcomp"</code></pre>
 <p>Amazing but we will do much better afterwards.</p>
-<p>The question of normalization in elliptical Fourier transforms is central: have a look to <code><a href="../reference/efourier.html">?efourier</a></code>. Here is an example of such bias from the <code>molars</code> dataset shared by Cornu and Detroit.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># raw molars dataset</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw"><a href="../reference/stack.Coo.html">stack</a></span>(molars, <span class="dt">title =</span> <span class="st">"Non-aligned molars"</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># Procrustes-aligned and slided molars</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">mol.al &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fgProcrustes.html">fgProcrustes</a></span>(molars, <span class="dt">tol =</span> <span class="fl">1e-4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_slidedirection.html">coo_slidedirection</a></span>(<span class="st">"left"</span>)</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="kw"><a href="../reference/stack.Coo.html">stack</a></span>(mol.al, <span class="dt">title=</span><span class="st">"Aligned molars"</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-18-2.png" width="700"></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># Now compare PCA and morphospace using the 1st harmonic alignment</span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">molars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(<span class="dt">norm=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="st">"type"</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-18-3.png" width="700"></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># and the a priori normalization</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">molars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(<span class="dt">norm=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="st">"type"</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-18-4.png" width="700"></p>
-<p>Finally, you can drop some harmonics with <code>rm_harm</code>. And methods that removes the bilateral (a)symmetry are implemented: <code>rm_asym</code> and <code>rm_sym</code>, while <code>symmetry</code> calculates some related indices.</p>
+<p>The question of normalization in elliptical Fourier transforms is central: have a look to <code><a href="../reference/efourier.html">?efourier</a></code>.</p>
+<p>You can also drop some harmonics with <code>rm_harm</code>. And methods that removes the bilateral (a)symmetry are implemented: <code>rm_asym</code> and <code>rm_sym</code>, while <code>symmetry</code> calculates some related indices.</p>
 </div>
 <div id="open-outlines" class="section level3">
 <h3 class="hasAnchor">
@@ -416,11 +400,9 @@
 <p>Note that <code>opoly</code> and <code>npoly</code> can only be used on <em>simple</em> curves, curves that have at most one <code>y</code> for any <code>x</code> coordinates, at least under a given orientation. <code>dfourier</code> can fit <em>complex</em> curves, curves “that back on their feets”.</p>
 <p>Here, we will work on the fertile valves of olive stones, a (very partial) dataset provided by my colleagues Terral, Ivorra, and others.</p>
 <p>They have two orthogonal views (a lateral and a dorsal view). See the paper cited in <code><a href="../reference/data_olea.html">?olea</a></code> for more details. Let’s explore it a bit:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">olea</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw"><a href="../reference/pile.html">pile</a></span>(olea)           <span class="co"># already aligned \o/</span></a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="../reference/pile.html">pile</a></span>(olea, <span class="op">~</span>view)    <span class="co"># another family picture</span></a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-19-2.png" width="700"></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">olea</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw"><a href="../reference/pile.html">pile</a></span>(olea, <span class="op">~</span>view)    <span class="co"># a family picture colored by a factor</span></a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
 <pre><code>## Opn (curves)
 ##   - 210 curves, 99 +/- 4 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -436,25 +418,25 @@
 ## # ... with 204 more rows
 ##   - also: $ldk</code></pre>
 <p>Now, we gonna calculate <code>opoly</code> on it and plot the result of the PCA. Notice how consistent is the grammar and the objects obtained:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">op &lt;-<span class="st"> </span><span class="kw"><a href="../reference/opoly.html">opoly</a></span>(olea)           <span class="co"># orthogonal polynomials</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw">class</span>(op)                   <span class="co"># an OpnCoe, but also a Coe</span></a>
-<a class="sourceLine" id="cb33-3" data-line-number="3">op.p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(op)             <span class="co"># we calculate a PCA on it</span></a>
-<a class="sourceLine" id="cb33-4" data-line-number="4"><span class="kw">class</span>(op.p)                 <span class="co"># a PCA object</span></a>
-<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="kw">plot</span>(<span class="kw"><a href="../reference/PCA.html">PCA</a></span>(op), <span class="op">~</span>domes<span class="op">+</span>var)   <span class="co"># notice the formula interface to combine factors</span></a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">op &lt;-<span class="st"> </span><span class="kw"><a href="../reference/opoly.html">opoly</a></span>(olea)           <span class="co"># orthogonal polynomials</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">class</span>(op)                   <span class="co"># an OpnCoe, but also a Coe</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">op.p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(op)             <span class="co"># we calculate a PCA on it</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="kw">class</span>(op.p)                 <span class="co"># a PCA object</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">op <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="op">~</span>domes<span class="op">+</span>var)   <span class="co"># notice the formula interface to combine factors</span></a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
 <pre><code>## [1] "OpnCoe" "Coe"   
 ## [1] "PCA"    "prcomp"</code></pre>
 <p>But this is perfectly wrong! We merged the two views are if they were different individuals. Momocs can first <code>chop</code> or <code>filter</code> the whole dataset to separate the two views, do morphometrics on them, and <code>combine</code> them afterwards.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">with</span>(olea<span class="op">$</span>fac, <span class="kw">table</span>(view, var))</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co"># we drop 'Cypre' since there is no VL for 'Cypre' var</span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">olea <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(var <span class="op">!=</span><span class="st"> "Cypre"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co"># split, do morphometrics, combine</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="kw"><a href="../reference/chop.html">chop</a></span>(<span class="op">~</span>view) <span class="op">%&gt;%</span><span class="st"> </span>opoly <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/combine.html">combine</a></span>() <span class="op">%T&gt;%</span></a>
-<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="co"># we print the OpnCoe object, then resume to the pipe</span></a>
-<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="kw">print</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="co"># note the two views in the morphospace</span></a>
-<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>var)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">with</span>(olea<span class="op">$</span>fac, <span class="kw">table</span>(view, var))</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="co"># we drop 'Cypre' since there is no VL for 'Cypre' var</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">olea <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(var <span class="op">!=</span><span class="st"> "Cypre"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="co"># split, do morphometrics, combine</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="kw"><a href="../reference/chop.html">chop</a></span>(<span class="op">~</span>view) <span class="op">%&gt;%</span><span class="st"> </span>opoly <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/combine.html">combine</a></span>() <span class="op">%T&gt;%</span></a>
+<a class="sourceLine" id="cb30-6" data-line-number="6"><span class="co"># we print the OpnCoe object, then resume to the pipe</span></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="kw">print</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-8" data-line-number="8"><span class="co"># note the two views in the morphospace</span></a>
+<a class="sourceLine" id="cb30-9" data-line-number="9"><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>var)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
 <pre><code>##     var
 ## view Aglan Cypre MouBo1 PicMa
 ##   VD    30    30     30    30
@@ -481,74 +463,23 @@
 <a href="#configuration-of-landmarks" class="anchor"></a>Configuration of landmarks</h3>
 <p>_Landmarks methods are still quite experimental (i.e. not tested extensively)</p>
 <p>Let’s have a look to graphics facilities and apply a full generalized Procrustes adjustment:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw"><a href="../reference/pile.html">pile</a></span>(wings)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">w.al &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fgProcrustes.html">fgProcrustes</a></span>(wings)</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw"><a href="../reference/pile.html">pile</a></span>(w.al)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># PCA</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(w.al) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dv">1</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-22-3.png" width="700"></p>
-<pre><code>## iteration:  1  gain: 85238 
-## iteration:  2  gain: 5.4545 
-## iteration:  3  gain: 1.1678 
-## iteration:  4  gain: 0.0014869 
-## iteration:  5  gain: 0.9109 
-## iteration:  6  gain: 0.25865 
-## iteration:  7  gain: 0.11654 
-## iteration:  8  gain: 0.0002648 
-## iteration:  9  gain: 0.078733 
-## iteration:  10     gain: 0.037936 
-## iteration:  11     gain: 0.0036029 
-## iteration:  12     gain: 4.6608e-06 
-## iteration:  13     gain: 0.00049314 
-## iteration:  14     gain: 0.0030611 
-## iteration:  15     gain: 0.0025019 
-## iteration:  16     gain: 9.4812e-06 
-## iteration:  17     gain: 0.0013242 
-## iteration:  18     gain: 0.001169 
-## iteration:  19     gain: 0.00052665 
-## iteration:  20     gain: 2.3483e-06 
-## iteration:  21     gain: 0.00025593 
-## iteration:  22     gain: 0.00026726 
-## iteration:  23     gain: 0.00013815 
-## iteration:  24     gain: 7.5215e-07 
-## iteration:  25     gain: 6.8679e-05 
-## iteration:  26     gain: 6.8458e-05 
-## iteration:  27     gain: 3.421e-05 
-## iteration:  28     gain: 2.1631e-07 
-## iteration:  29     gain: 1.6876e-05 
-## iteration:  30     gain: 1.7031e-05 
-## iteration:  31     gain: 8.5923e-06 
-## iteration:  32     gain: 6.2134e-08 
-## iteration:  33     gain: 4.2372e-06 
-## iteration:  34     gain: 4.2678e-06 
-## iteration:  35     gain: 2.1504e-06 
-## iteration:  36     gain: 1.7482e-08 
-## iteration:  37     gain: 1.0581e-06 
-## iteration:  38     gain: 1.0675e-06 
-## iteration:  39     gain: 5.3868e-07 
-## iteration:  40     gain: 4.8641e-09 
-## iteration:  41     gain: 2.646e-07 
-## iteration:  42     gain: 2.6714e-07 
-## iteration:  43     gain: 1.3491e-07 
-## iteration:  44     gain: 1.3392e-09 
-## iteration:  45     gain: 6.6144e-08 
-## iteration:  46     gain: 6.6844e-08 
-## iteration:  47     gain: 3.3788e-08 
-## iteration:  48     gain: 3.6573e-10 
-## iteration:  49     gain: 1.6536e-08 
-## iteration:  50     gain: 1.6726e-08 
-## iteration:  51     gain: 8.4622e-09 
-## iteration:  52     gain: 9.9249e-11</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="../reference/pile.html">pile</a></span>(wings)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">Momocs_verbose=</span><span class="ot">FALSE</span>) <span class="co"># to silent Momocs</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">w.al &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fgProcrustes.html">fgProcrustes</a></span>(wings)</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="kw"><a href="../reference/pile.html">pile</a></span>(w.al)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-21-2.png" width="700"></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># PCA</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(w.al) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="dv">1</span>)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-21-3.png" width="700"></p>
 <p>Sliding landmarks are supported and rely on <code>geomorph</code> package by Adams and colleagues.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw"><a href="../reference/pile.html">pile</a></span>(chaff)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">chaff.al &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fgsProcrustes.html">fgsProcrustes</a></span>(chaff)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw"><a href="../reference/pile.html">pile</a></span>(chaff.al)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-23-2.png" width="700"></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">chaff.al <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="op">~</span>taxa, <span class="dt">chull.filled=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-23-3.png" width="700"></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw"><a href="../reference/pile.html">pile</a></span>(chaff)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">chaff.al &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fgsProcrustes.html">fgsProcrustes</a></span>(chaff)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw"><a href="../reference/pile.html">pile</a></span>(chaff.al)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">chaff.al <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>taxa, <span class="dt">chullfilled =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-22-3.png" width="700"></p>
 <pre><code>## 
   |                                                                       
   |                                                                 |   0%
@@ -569,9 +500,9 @@
 <a href="#traditional-morphometrics" class="anchor"></a>Traditional morphometrics</h3>
 <p>Traditional morphometrics lose geometries: from the variables, you can’t unambiguously reconstruct the shape. Every shape is described by a combination of measurements, (inter landmark distance, quantitative variables, scalar descriptor, etc.)</p>
 <p>Momocs provides some basics utilities to work with such objects in the <code>TraCoe</code> class. There is not <code>TraCoo</code> per se but it can be obtained from any <code>Coo</code> with the <code>measure</code> method. Let’s take the <code>hearts</code> dataset that comes from handdrawn heart shapes from my former colleagues at the French Intitute of Pondicherry:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">hearts</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw"><a href="../reference/panel.Coo.html">panel</a></span>(hearts, <span class="dt">fac=</span><span class="st">"aut"</span>, <span class="dt">names=</span><span class="st">"aut"</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">hearts</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw"><a href="../reference/panel.Coo.html">panel</a></span>(hearts, <span class="dt">fac=</span><span class="st">"aut"</span>, <span class="dt">names=</span><span class="st">"aut"</span>)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 <pre><code>## Out (outlines)
 ##   - 240 outlines, 80 +/- 0 coords (in $coo)
 ##   - 1 classifiers (in $fac): 
@@ -588,11 +519,11 @@
 ##   - also: $ldk</code></pre>
 <p>Notice that there are 4 landmarks defined on them. Such landmarks on outlines can be: defined with<code><a href="../reference/def_ldk.html">def_ldk()</a></code>, retrieved with <code><a href="../reference/get_ldk.html">get_ldk()</a></code>, and overall used to align outlines with <code><a href="../reference/fgProcrustes.html">fgProcrustes()</a></code>. You can compare: <code>hearts %&gt;% stack()</code> with <code>hearts %&gt;% fgProcrustes() %&gt;% coo_slide(ldk=1) %&gt;% stack()</code>.</p>
 <p>Let’s describe these hearts with scalar descriptors: area, circularity and the distance between the 1st and the 3rd bumps of the hearts. <code>measure</code> is of great help. Note the loadings.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">ht &lt;-<span class="st"> </span><span class="kw"><a href="../reference/measure.html">measure</a></span>(hearts, coo_area, coo_circularity, <span class="kw"><a href="../reference/d.html">d</a></span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">class</span>(ht)</a>
-<a class="sourceLine" id="cb47-3" data-line-number="3">ht<span class="op">$</span>coe</a>
-<a class="sourceLine" id="cb47-4" data-line-number="4">ht <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="st">"aut"</span>, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">ellipsesax=</span>F, <span class="dt">ellipse=</span>T, <span class="dt">loadings=</span>T)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">ht &lt;-<span class="st"> </span><span class="kw"><a href="../reference/measure.html">measure</a></span>(hearts, coo_area, coo_circularity, <span class="kw"><a href="../reference/d.html">d</a></span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">class</span>(ht)</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">ht<span class="op">$</span>coe</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">ht <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>aut)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 <pre><code>## [1] "TraCoe" "Coe"   
 ## # A tibble: 240 x 3
 ##     area circularity   d1.3
@@ -610,25 +541,12 @@
 ## # ... with 230 more rows</code></pre>
 <p>Again, there are plenty of scalar descriptors of shape, which names starts with <code>coo_*</code>, <code>apropos("coo_")</code>. Have a look to the coo_vignette, see <code><a href="../articles/Momocs_coo.html">vignette("Momocs_coo")</a></code>.</p>
 <p>Such a <code>TraCoe</code> is provided in the <code>flower</code> dataset which is simply a rearranged <code>iris</code>. Once again, note the grammar consistency.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">flower</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">flower <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="st">"sp"</span>, <span class="dt">loadings=</span><span class="ot">TRUE</span>, <span class="dt">contour=</span><span class="ot">TRUE</span>, <span class="dt">lev.contour=</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">flower</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">flower <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>sps)</a></code></pre></div>
+<p>You can build your own <code>TraCoe</code> with <code>coo_scalars</code>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">bot_sc &lt;-<span class="st"> </span>bot <span class="op">%&gt;%</span><span class="st"> </span>coo_scalars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/TraCoe.html">TraCoe</a></span>(<span class="dt">fac=</span>bot<span class="op">$</span>fac)</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">bot_sc <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>type)</a></code></pre></div>
 <p><img src="Momocs_intro_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
-<pre><code>## A TraCoe object --------------------
-##  - $coe: 150 shapes described with 4 variables
-## # A tibble: 150 x 1
-##   sp    
-##   &lt;fct&gt; 
-## 1 setosa
-## 2 setosa
-## 3 setosa
-## 4 setosa
-## 5 setosa
-## 6 setosa
-## # ... with 144 more rows</code></pre>
-<p>You can build ypur own <code>TraCoe</code> with <code>coo_scalars</code>:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">bot_sc &lt;-<span class="st"> </span>bot <span class="op">%&gt;%</span><span class="st"> </span>coo_scalars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/TraCoe.html">TraCoe</a></span>(<span class="dt">fac=</span>bot<span class="op">$</span>fac)</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">bot_sc <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>type)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
 <p>Note that, by default, PCA on <code>TraCoe</code> object first centers and scales variables. This can be changed, see <code><a href="../reference/PCA.html">?PCA</a></code>.</p>
 </div>
 </div>
@@ -636,91 +554,73 @@
 <h2 class="hasAnchor">
 <a href="#multivariate-statistics" class="anchor"></a>Multivariate statistics</h2>
 <p>This section will mainly be illustrated with <code>bot</code>, and consequently outline analysis, but it works exactly the same on any <code>Coe</code> object, resulting from open outlines, configuration of landmarks, traditional morphometrics, etc.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">bot.f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(bot)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">bot.f &lt;-<span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(bot)</a></code></pre></div>
 <div id="pca-principal-component-analysis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pca-principal-component-analysis" class="anchor"></a><code>PCA</code>: Principal Component Analysis</h3>
 <p>Let’s see the main components of shape variability with a Principal Component Analysis.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">bot.p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(bot.f)</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">plot</span>(bot.p)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">bot.p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(bot.f)</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(bot.p)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
 <p>Morphological spaces are reconstructed on the fly with <code>plot.PCA</code>. We call it <code>plot.PCA</code> because it uses the familiar <code>plot</code> but on the particular <code>PCA</code> class (type <code>class(bot.p)</code>). We may want to display the two groups saved in <code>bot$fac</code>. Just type the id of the column or its name.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">plot</span>(bot.p, <span class="st">"type"</span>) <span class="co"># equivalent to plot(bot.p, 1)</span></a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-30-1.png" width="700"></p>
-<p><code>plot.PCA</code> has many arguments and examples below will give a glimpse, but see <code><a href="../reference/plot.PCA.html">?plot.PCA</a></code> for the full list.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">plot</span>(bot.p, <span class="dv">1</span>, <span class="dt">ellipses=</span><span class="ot">TRUE</span>, <span class="dt">ellipsesax =</span> <span class="ot">FALSE</span>, <span class="dt">pch=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>))</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-31-1.png" width="700"></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">plot</span>(bot.p, <span class="dv">1</span>, <span class="dt">chull=</span><span class="ot">TRUE</span>, <span class="dt">pos.shp =</span> <span class="st">"full_axes"</span>, <span class="dt">abbreviate.labelsgroups =</span> <span class="ot">TRUE</span>, <span class="dt">points=</span><span class="ot">FALSE</span>, <span class="dt">labelspoints =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-31-2.png" width="700"></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">plot</span>(bot.p, <span class="dv">1</span>, <span class="dt">pos.shp=</span><span class="st">"circle"</span>, <span class="dt">stars=</span><span class="ot">TRUE</span>, <span class="dt">chull.filled=</span><span class="ot">TRUE</span>, <span class="dt">palette=</span>col_spring)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-31-3.png" width="700"></p>
-<p>You have a <code>ggplot2</code> alternative, that is not completely consistent:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co"># plot2(bot.p, "type") # deprecated for the moment</span></a></code></pre></div>
-<p>And other helper functions for the <code>PCA</code> class:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw"><a href="../reference/scree.html">scree</a></span>(bot.p)</a>
-<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="kw"><a href="../reference/scree.html">scree_plot</a></span>(bot.p)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-33-1.png" width="700"></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">boxplot</span>(bot.p, <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-33-2.png" width="700"></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw"><a href="../reference/PCcontrib.html">PCcontrib</a></span>(bot.p)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-33-3.png" width="700"></p>
-<pre><code>## # A tibble: 40 x 3
-##     axis proportion cumsum
-##    &lt;int&gt;      &lt;dbl&gt;  &lt;dbl&gt;
-##  1     1    0.761    0.761
-##  2     2    0.170    0.931
-##  3     3    0.0294   0.960
-##  4     4    0.0135   0.974
-##  5     5    0.00860  0.982
-##  6     6    0.00719  0.990
-##  7     7    0.00306  0.993
-##  8     8    0.00190  0.994
-##  9     9    0.00159  0.996
-## 10    10    0.00122  0.997
-## # ... with 30 more rows
-## `prop` not provided. All axes returned
-## `prop` not provided. All axes returned</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(bot.p, <span class="op">~</span>type) <span class="co"># there are many ways to pass the factor, see ?plot_PCA and ?fac_dispatcher</span></a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
+<p>See <code><a href="../reference/plot_PCA.html">?plot_PCA</a></code> for much more complex graphics. And also these helper functions for the <code>PCA</code> class:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw"><a href="../reference/scree.html">scree</a></span>(bot.p)</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw"><a href="../reference/scree.html">scree_plot</a></span>(bot.p)</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="kw">boxplot</span>(bot.p, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="kw"><a href="../reference/PCcontrib.html">PCcontrib</a></span>(bot.p)</a></code></pre></div>
+<p>You can also export the <code>PCA</code> object as a <code>.txt</code> file (see <code><a href="../reference/export.html">?export</a></code>) or as a <code>data_frame</code> for further use with R with:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">bot.p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/as_df.html">as_df</a></span>(<span class="dv">3</span>) <span class="co"># The first three PCs </span></a></code></pre></div>
+<pre><code>## # A tibble: 40 x 5
+##    type   fake      PC1       PC2      PC3
+##    &lt;fct&gt;  &lt;fct&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 whisky a     -0.0528 -0.0231    0.00245
+##  2 whisky a     -0.0369  0.00725  -0.00866
+##  3 whisky a      0.0809 -0.00479  -0.00222
+##  4 whisky a     -0.0694  0.00229  -0.0158 
+##  5 whisky a     -0.0112  0.0476   -0.0127 
+##  6 whisky a      0.115  -0.0170   -0.0103 
+##  7 whisky a     -0.0443 -0.0186   -0.00496
+##  8 whisky a      0.0287  0.00996  -0.0114 
+##  9 whisky a      0.0123  0.000603  0.00364
+## 10 whisky a     -0.0458  0.00564  -0.00889
+## # ... with 30 more rows</code></pre>
 <p>By the way, you can use Momocs plotters to plot non-morphometric datasets. Using a <code>TraCoe</code> object is an option, but <code>PCA</code> also works fine. Let’s see an example with <code>iris</code> dataset:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw"><a href="../reference/TraCoe.html">TraCoe</a></span>(iris[, <span class="dv">-5</span>], <span class="dt">fac=</span><span class="kw">data.frame</span>(<span class="dt">sp=</span>iris<span class="op">$</span>Species)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="st">"sp"</span>, <span class="dt">loadings=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-34-1.png" width="700"></p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># or</span></a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw"><a href="../reference/PCA.html">PCA</a></span>(iris[, <span class="dv">-5</span>], <span class="dt">fac=</span><span class="kw">data.frame</span>(<span class="dt">sp=</span>iris<span class="op">$</span>Species)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3"><span class="kw">plot</span>(<span class="st">"sp"</span>, <span class="dt">chull=</span><span class="ot">TRUE</span>, <span class="dt">ellipses=</span><span class="ot">TRUE</span>, <span class="dt">conf_ellipses =</span> <span class="fl">0.9</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-34-2.png" width="700"></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw"><a href="../reference/TraCoe.html">TraCoe</a></span>(iris[, <span class="dv">-5</span>], <span class="dt">fac=</span><span class="kw">data.frame</span>(<span class="dt">sp=</span>iris<span class="op">$</span>Species)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>sp)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-32-1.png" width="700"></p>
 </div>
 <div id="lda-linear-discriminant-analysis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#lda-linear-discriminant-analysis" class="anchor"></a><code>LDA</code>: Linear Discriminant Analysis</h3>
 <p>We can also calculate a Linear Discriminant Analysis on the PCA scores, or on the <code>Coe</code> object, directly on the matrix of coefficients (and results may be better yet we may encounter collinearity between variables). Try the following:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co">#LDA(bot.f, 1)</span></a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="co"># we work on PCA scores</span></a>
-<a class="sourceLine" id="cb65-3" data-line-number="3">bot.l &lt;-<span class="st"> </span><span class="kw"><a href="../reference/LDA.html">LDA</a></span>(bot.p, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb65-4" data-line-number="4"><span class="co"># print a summary, along with the leave-one-out cross-validation table.</span></a>
-<a class="sourceLine" id="cb65-5" data-line-number="5">bot.l</a>
-<a class="sourceLine" id="cb65-6" data-line-number="6"><span class="co"># a much more detailed summary</span></a>
-<a class="sourceLine" id="cb65-7" data-line-number="7">bot.l <span class="op">%&gt;%</span><span class="st"> </span>summary</a>
-<a class="sourceLine" id="cb65-8" data-line-number="8"><span class="co"># plot.LDA works pretty much with the same grammar as plot.PCA</span></a>
-<a class="sourceLine" id="cb65-9" data-line-number="9"><span class="co"># here we only have one LD</span></a>
-<a class="sourceLine" id="cb65-10" data-line-number="10"><span class="kw">plot</span>(bot.l)</a>
-<a class="sourceLine" id="cb65-11" data-line-number="11"><span class="co"># plot the cross-validation table</span></a>
-<a class="sourceLine" id="cb65-12" data-line-number="12"><span class="kw"><a href="../reference/plot_CV.html">plot_CV</a></span>(bot.l)  <span class="co"># tabular version</span></a>
-<a class="sourceLine" id="cb65-13" data-line-number="13"><span class="kw"><a href="../reference/plot_CV.html">plot_CV</a></span>(bot.l, <span class="dt">freq=</span><span class="ot">TRUE</span>) <span class="co"># frequency table</span></a>
-<a class="sourceLine" id="cb65-14" data-line-number="14"><span class="kw"><a href="../reference/plot_CV2.html">plot_CV2</a></span>(bot.l) <span class="co"># arrays version</span></a></code></pre></div>
-<p>Finally, if you need to classify using LDA methods, see <code>classify</code>.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co">#LDA(bot.f, 1)</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="co"># we work on PCA scores</span></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">bot.l &lt;-<span class="st"> </span><span class="kw"><a href="../reference/LDA.html">LDA</a></span>(bot.p, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4"><span class="co"># print a summary, along with the leave-one-out cross-validation table.</span></a>
+<a class="sourceLine" id="cb52-5" data-line-number="5">bot.l</a>
+<a class="sourceLine" id="cb52-6" data-line-number="6"><span class="co"># a much more detailed summary</span></a>
+<a class="sourceLine" id="cb52-7" data-line-number="7">bot.l <span class="op">%&gt;%</span><span class="st"> </span>summary</a>
+<a class="sourceLine" id="cb52-8" data-line-number="8"><span class="co"># plot.LDA works pretty much with the same grammar as plot.PCA</span></a>
+<a class="sourceLine" id="cb52-9" data-line-number="9"><span class="co"># here we only have one LD</span></a>
+<a class="sourceLine" id="cb52-10" data-line-number="10"><span class="kw">plot</span>(bot.l)</a>
+<a class="sourceLine" id="cb52-11" data-line-number="11"><span class="co"># plot the cross-validation table</span></a>
+<a class="sourceLine" id="cb52-12" data-line-number="12"><span class="kw"><a href="../reference/plot_CV.html">plot_CV</a></span>(bot.l)  <span class="co"># tabular version</span></a></code></pre></div>
+<p>You can also export turn it into a <code>data_frame</code> with <code>as_df</code>.</p>
 </div>
 <div id="manova-multivariate-analysis-of-covariace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#manova-multivariate-analysis-of-covariace" class="anchor"></a><code>MANOVA</code>: Multivariate Analysis of (co)variace</h3>
 <p>We can test for a difference in the distribution of PC scores with:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw"><a href="../reference/MANOVA.html">MANOVA</a></span>(bot.p, <span class="st">"type"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw"><a href="../reference/MANOVA.html">MANOVA</a></span>(bot.p,  <span class="op">~</span>type)</a></code></pre></div>
 <pre><code>##           Df Hotelling-Lawley approx F num Df den Df   Pr(&gt;F)    
 ## fac        1           2.8388   12.977      7     32 8.88e-08 ***
 ## Residuals 38                                                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>We can also calculate pairwise combination between every levels of a <code>fac</code>. Here we just have two levels, so a single pairwise combination but the syntax is:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw"><a href="../reference/MANOVA_PW.html">MANOVA_PW</a></span>(bot.p, <span class="st">"type"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw"><a href="../reference/MANOVA_PW.html">MANOVA_PW</a></span>(bot.p, <span class="op">~</span>type)</a></code></pre></div>
 <pre><code>## $stars.tab
 ##      beer whisky
 ## beer      ***   
@@ -729,8 +629,8 @@
 ##               Df Pillai approx F num Df den Df   Pr(&gt;F)
 ## beer - whisky  1 0.7395    12.98      7     32 8.88e-08</code></pre>
 <p>If we want a MANCOVA instead :</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">bot <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(<span class="dt">cs=</span><span class="kw"><a href="../reference/coo_centsize.html">coo_centsize</a></span>(.))</a>
-<a class="sourceLine" id="cb70-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/MANOVA.html">MANOVA</a></span>(<span class="st">"cs"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">bot <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(<span class="dt">cs=</span><span class="kw"><a href="../reference/coo_centsize.html">coo_centsize</a></span>(.))</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/MANOVA.html">MANOVA</a></span>(<span class="op">~</span>cs)</a></code></pre></div>
 <pre><code>##           Df Hotelling-Lawley approx F num Df den Df Pr(&gt;F)
 ## fac        1          0.32229   1.4733      7     32  0.212
 ## Residuals 38</code></pre>
@@ -739,46 +639,46 @@
 <h3 class="hasAnchor">
 <a href="#clust-hierarchical-clustering" class="anchor"></a><code>CLUST</code>: Hierarchical clustering</h3>
 <p>A hierarchical classification now. It relies on <code>dist</code> + <code>hclust</code> + <code><a href="http://www.rdocumentation.org/packages/ape/topics/plot.phylo">ape::plot.phylo</a></code>.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="kw"><a href="../reference/CLUST.html">CLUST</a></span>(bot.p, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw"><a href="../reference/CLUST.html">CLUST</a></span>(bot.p, <span class="op">~</span>type)</a></code></pre></div>
 <p>Monophyly is plotted by default. Many options can be found in <code><a href="../reference/CLUST.html">?CLUST</a></code></p>
 </div>
 <div id="kmeans-k-means-clustering" class="section level3">
 <h3 class="hasAnchor">
 <a href="#kmeans-k-means-clustering" class="anchor"></a><code>KMEANS</code>: K-means clustering</h3>
 <p>A very minimal k-means clustering is implemented:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw"><a href="../reference/KMEANS.html">KMEANS</a></span>(bot.p, <span class="dt">centers =</span> <span class="dv">5</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-40-1.png" width="700"></p>
-<pre><code>## K-means clustering with 5 clusters of sizes 5, 6, 18, 6, 5
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw"><a href="../reference/KMEANS.html">KMEANS</a></span>(bot.p, <span class="dt">centers =</span> <span class="dv">5</span>)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-38-1.png" width="700"></p>
+<pre><code>## K-means clustering with 5 clusters of sizes 5, 5, 6, 18, 6
 ## 
 ## Cluster means:
 ##           PC1          PC2
-## 1  0.02497106 -0.006671549
-## 2  0.10184224 -0.028875902
-## 3 -0.04433327  0.008000365
-## 4 -0.04573875 -0.031541607
-## 5  0.06730453  0.050371247
+## 1  0.06730453  0.050371247
+## 2  0.02497106 -0.006671549
+## 3 -0.02673158  0.017713990
+## 4 -0.05066899 -0.008418168
+## 5  0.10184224 -0.028875902
 ## 
 ## Clustering vector:
 ##         brahma          caney         chimay         corona    deusventrue 
-##              4              3              2              3              3 
+##              4              3              5              4              3 
 ##          duvel   franziskaner     grimbergen        guiness     hoegardeen 
-##              2              4              1              1              3 
+##              5              4              2              2              4 
 ##        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe 
-##              3              3              2              3              3 
+##              4              4              5              3              3 
 ##     pecheresse   sierranevada     tanglefoot          tauro      westmalle 
-##              3              1              2              3              3 
+##              4              2              5              4              4 
 ##          amrut    ballantines      bushmills         chivas        dalmore 
-##              3              2              4              5              5 
+##              4              5              4              1              1 
 ##   famousgrouse    glendronach   glenmorangie   highlandpark    jackdaniels 
-##              4              3              3              2              1 
+##              4              4              4              5              2 
 ##             jb  johnniewalker       magallan     makersmark           oban 
-##              3              4              4              5              3 
+##              3              4              4              1              4 
 ##     oldpotrero      redbreast         tamdhu     wildturkey         yoichi 
-##              5              5              3              3              1 
+##              1              1              4              3              2 
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 0.001916822 0.006121728 0.006537571 0.001860776 0.002720829
-##  (between_SS / total_SS =  89.4 %)
+## [1] 0.002720829 0.001916822 0.001886406 0.007905382 0.006121728
+##  (between_SS / total_SS =  88.6 %)
 ## 
 ## Available components:
 ## 
@@ -790,25 +690,25 @@
 <h3 class="hasAnchor">
 <a href="#mshapes-mean-shapes" class="anchor"></a><code>MSHAPES</code>: Mean shapes</h3>
 <p>We can retrieve the mean shapes, group wise (if a <code>fac</code> is specified), or the global mean shape (if omitted). It works from the <code>Coe</code> object:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># mean shape</span></a>
-<a class="sourceLine" id="cb75-2" data-line-number="2">bot.f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/MSHAPES.html">MSHAPES</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>()</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-41-1.png" width="700"></p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="co"># mean shape, per group</span></a>
-<a class="sourceLine" id="cb76-2" data-line-number="2">bot.ms &lt;-<span class="st"> </span><span class="kw"><a href="../reference/MSHAPES.html">MSHAPES</a></span>(bot.f, <span class="op">~</span>type)</a>
-<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="co"># lets rebuild an Out</span></a>
-<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="kw"><a href="../reference/Out.html">Out</a></span>(bot.ms<span class="op">$</span>shp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/panel.Coo.html">panel</a></span>(<span class="dt">names=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-41-2.png" width="700"></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="co"># or individual shapes</span></a>
-<a class="sourceLine" id="cb77-2" data-line-number="2">beer   &lt;-<span class="st"> </span>bot.ms<span class="op">$</span>shp<span class="op">$</span>beer    <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>(<span class="dt">border=</span><span class="st">"blue"</span>)</a>
-<a class="sourceLine" id="cb77-3" data-line-number="3">whisky &lt;-<span class="st"> </span>bot.ms<span class="op">$</span>shp<span class="op">$</span>whisky  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_draw.html">coo_draw</a></span>(<span class="dt">border=</span><span class="st">"red"</span>)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-41-3.png" width="700"></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co"># mean shape</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">bot.f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/MSHAPES.html">MSHAPES</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>()</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-39-1.png" width="700"></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># mean shape, per group</span></a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">bot.ms &lt;-<span class="st"> </span><span class="kw"><a href="../reference/MSHAPES.html">MSHAPES</a></span>(bot.f, <span class="op">~</span>type)</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="co"># lets rebuild an Out</span></a>
+<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="kw"><a href="../reference/Out.html">Out</a></span>(bot.ms<span class="op">$</span>shp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/panel.Coo.html">panel</a></span>(<span class="dt">names=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-39-2.png" width="700"></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># or individual shapes</span></a>
+<a class="sourceLine" id="cb64-2" data-line-number="2">beer   &lt;-<span class="st"> </span>bot.ms<span class="op">$</span>shp<span class="op">$</span>beer    <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>(<span class="dt">border=</span><span class="st">"blue"</span>)</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">whisky &lt;-<span class="st"> </span>bot.ms<span class="op">$</span>shp<span class="op">$</span>whisky  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/coo_draw.html">coo_draw</a></span>(<span class="dt">border=</span><span class="st">"red"</span>)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-39-3.png" width="700"></p>
 <p>We can also plot a pairwise comparison of them:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">leaves &lt;-<span class="st"> </span>shapes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/slice.html">slice</a></span>(<span class="kw">grep</span>(<span class="st">"leaf"</span>, <span class="kw">names</span>(shapes))) <span class="op">%$%</span><span class="st"> </span>coo</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2">leaves <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_MSHAPES.html">plot_MSHAPES</a></span>()</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-42-1.png" width="700"></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co"># or from mshapes directly</span></a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(<span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/MSHAPES.html">MSHAPES</a></span>(<span class="op">~</span>type) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_MSHAPES.html">plot_MSHAPES</a></span>()</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-42-2.png" width="700"></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">leaves &lt;-<span class="st"> </span>shapes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/slice.html">slice</a></span>(<span class="kw">grep</span>(<span class="st">"leaf"</span>, <span class="kw">names</span>(shapes))) <span class="op">%$%</span><span class="st"> </span>coo</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">leaves <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_MSHAPES.html">plot_MSHAPES</a></span>()</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-40-1.png" width="700"></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co"># or from mshapes directly</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(<span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/MSHAPES.html">MSHAPES</a></span>(<span class="op">~</span>type) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_MSHAPES.html">plot_MSHAPES</a></span>()</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-40-2.png" width="700"></p>
 </div>
 </div>
 <div id="manipulating-objects" class="section level2">
@@ -816,8 +716,8 @@
 <a href="#manipulating-objects" class="anchor"></a>Manipulating objects</h2>
 <p>One common yet boring task of morphometrics consists in handling datasets: add new information, remove some individuals, etc.</p>
 <p>Momocs adapts <a href="https://CRAN.R-project.org/package=dplyr">dplyr</a> verbs to its objects, and add new ones. If you have never heard of dplyr, let’s have a look to its introduction <a href="https://CRAN.R-project.org/package=dplyr">there</a>, this may change your (R) life.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">data</span>(olea)</a>
-<a class="sourceLine" id="cb80-2" data-line-number="2">olea</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">data</span>(olea)</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">olea</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 210 curves, 99 +/- 4 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -835,7 +735,7 @@
 <div id="mutate-add-new-columns" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mutate-add-new-columns" class="anchor"></a><code>mutate</code>: add new columns</h3>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(olea, <span class="dt">fake=</span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">each=</span><span class="dv">105</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(olea, <span class="dt">fake=</span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">each=</span><span class="dv">105</span>)))</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 210 curves, 99 +/- 4 coords (in $coo)
 ##   - 5 classifiers (in $fac): 
@@ -854,7 +754,7 @@
 <div id="slice-select-individuals-based-on-their-position" class="section level3">
 <h3 class="hasAnchor">
 <a href="#slice-select-individuals-based-on-their-position" class="anchor"></a><code>slice</code>: select individuals based on their position</h3>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw"><a href="../reference/slice.html">slice</a></span>(olea, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw"><a href="../reference/slice.html">slice</a></span>(olea, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 5 curves, 99 +/- 4 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -867,7 +767,7 @@
 ## 4 Aglan cult  VL    O11  
 ## 5 Aglan cult  VD    O12  
 ##   - also: $ldk</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw"><a href="../reference/slice.html">slice</a></span>(olea, <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw"><a href="../reference/slice.html">slice</a></span>(olea, <span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>))</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 110 curves, 99 +/- 4 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -886,7 +786,7 @@
 <div id="filter-select-individual-based-on-a-logical-condition" class="section level3">
 <h3 class="hasAnchor">
 <a href="#filter-select-individual-based-on-a-logical-condition" class="anchor"></a><code>filter</code>: select individual based on a logical condition</h3>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, domes<span class="op">==</span><span class="st">"cult"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, domes<span class="op">==</span><span class="st">"cult"</span>)</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 150 curves, 99 +/- 3 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -901,8 +801,8 @@
 ## 6 Aglan cult  VL    O12  
 ## # ... with 144 more rows
 ##   - also: $ldk</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="co"># %in% is useful</span></a>
-<a class="sourceLine" id="cb90-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, var <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Aglan"</span>, <span class="st">"Cypre"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="co"># %in% is useful</span></a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, var <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Aglan"</span>, <span class="st">"Cypre"</span>))</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 90 curves, 99 +/- 4 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -917,8 +817,8 @@
 ## 6 Aglan cult  VL    O12  
 ## # ... with 84 more rows
 ##   - also: $ldk</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="co"># or its complement</span></a>
-<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, <span class="op">!</span>(var <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Aglan"</span>, <span class="st">"Cypre"</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co"># or its complement</span></a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, <span class="op">!</span>(var <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Aglan"</span>, <span class="st">"Cypre"</span>)))</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 120 curves, 99 +/- 3 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -933,8 +833,8 @@
 ## 6 PicMa cult  VL    O12  
 ## # ... with 114 more rows
 ##   - also: $ldk</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="co"># Also works with more than one condition</span></a>
-<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, domes<span class="op">==</span><span class="st">"cult"</span>, view<span class="op">!=</span><span class="st">"VD"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="co"># Also works with more than one condition</span></a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(olea, domes<span class="op">==</span><span class="st">"cult"</span>, view<span class="op">!=</span><span class="st">"VD"</span>)</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 60 curves, 97 +/- 4 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -949,8 +849,8 @@
 ## 6 Aglan cult  VL    O15  
 ## # ... with 54 more rows
 ##   - also: $ldk</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># or on operation on numeric, here a dummy numeric column</span></a>
-<a class="sourceLine" id="cb96-2" data-line-number="2">olea <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(<span class="dt">foo=</span><span class="dv">1</span><span class="op">:</span><span class="dv">210</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(foo<span class="op">&lt;</span><span class="dv">12</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="co"># or on operation on numeric, here a dummy numeric column</span></a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">olea <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(<span class="dt">foo=</span><span class="dv">1</span><span class="op">:</span><span class="dv">210</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(foo<span class="op">&lt;</span><span class="dv">12</span>)</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 11 curves, 99 +/- 5 coords (in $coo)
 ##   - 5 classifiers (in $fac): 
@@ -965,7 +865,7 @@
 ## 6 Aglan cult  VL    O12       6
 ## # ... with 5 more rows
 ##   - also: $ldk</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1">olea <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(<span class="dt">foo=</span><span class="dv">1</span><span class="op">:</span><span class="dv">210</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(foo<span class="op">&gt;</span><span class="kw">median</span>(foo))</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">olea <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(<span class="dt">foo=</span><span class="dv">1</span><span class="op">:</span><span class="dv">210</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(foo<span class="op">&gt;</span><span class="kw">median</span>(foo))</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 105 curves, 99 +/- 4 coords (in $coo)
 ##   - 5 classifiers (in $fac): 
@@ -984,12 +884,12 @@
 <div id="select-pick-reorder-columns-from-the-fac" class="section level3">
 <h3 class="hasAnchor">
 <a href="#select-pick-reorder-columns-from-the-fac" class="anchor"></a><code>select</code>: pick, reorder columns from the $fac</h3>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="co"># reorder columns</span></a>
-<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="kw"><a href="../reference/select.html">select</a></span>(olea, view, domes, var, ind)</a>
-<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="co"># drop some and show the use of numeric index</span></a>
-<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="kw"><a href="../reference/select.html">select</a></span>(olea, <span class="dv">1</span>, <span class="dt">Ind=</span>ind)</a>
-<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="co"># drop one</span></a>
-<a class="sourceLine" id="cb100-6" data-line-number="6"><span class="kw"><a href="../reference/select.html">select</a></span>(olea, <span class="op">-</span>ind)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="co"># reorder columns</span></a>
+<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="kw"><a href="../reference/select.html">select</a></span>(olea, view, domes, var, ind)</a>
+<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="co"># drop some and show the use of numeric index</span></a>
+<a class="sourceLine" id="cb87-4" data-line-number="4"><span class="kw"><a href="../reference/select.html">select</a></span>(olea, <span class="dv">1</span>, <span class="dt">Ind=</span>ind)</a>
+<a class="sourceLine" id="cb87-5" data-line-number="5"><span class="co"># drop one</span></a>
+<a class="sourceLine" id="cb87-6" data-line-number="6"><span class="kw"><a href="../reference/select.html">select</a></span>(olea, <span class="op">-</span>ind)</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 210 curves, 99 +/- 4 coords (in $coo)
 ##   - 4 classifiers (in $fac): 
@@ -1033,10 +933,10 @@
 ## # ... with 204 more rows
 ##   - also: $ldk</code></pre>
 <p>And you can pipe those operations: say, we only want dorsal views from domesticated individuals, for a (renamed) ‘status’ column, and drop the ‘ind’ column:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">olea <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(domes<span class="op">==</span><span class="st">"cult"</span>, view<span class="op">==</span><span class="st">"VD"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="kw"><a href="../reference/rename.html">rename</a></span>(<span class="dt">domesticated=</span>domes) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="kw"><a href="../reference/select.html">select</a></span>(<span class="op">-</span>ind)</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">olea <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="kw"><a href="../reference/filter.html">filter</a></span>(domes<span class="op">==</span><span class="st">"cult"</span>, view<span class="op">==</span><span class="st">"VD"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="kw"><a href="../reference/rename.html">rename</a></span>(<span class="dt">domesticated=</span>domes) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="kw"><a href="../reference/select.html">select</a></span>(<span class="op">-</span>ind)</a></code></pre></div>
 <pre><code>## Opn (curves)
 ##   - 90 curves, 100 +/- 2 coords (in $coo)
 ##   - 3 classifiers (in $fac): 
@@ -1052,8 +952,8 @@
 ## # ... with 84 more rows
 ##   - also: $ldk</code></pre>
 <p>You can also use dplyr verbs on the <code>fac</code> directly, eg:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">olea<span class="op">$</span>fac <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(var) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">n=</span><span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(), <span class="dt">N=</span><span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">olea<span class="op">$</span>fac <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(var) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">n=</span><span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(), <span class="dt">N=</span><span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## # A tibble: 210 x 6
 ## # Groups:   var [4]
 ##    var   domes view  ind       n     N
@@ -1073,15 +973,15 @@
 <p>Note that if you due to namespace conflicts, if you use <code>dplyr</code>, and in a larger extent the tidyverse you <strong>must</strong> use <code>library(dplyr)</code> (or <code>library(tydyverse)</code>) <strong>before</strong> <code>library(Momocs)</code>.</p>
 <p>That being said, the adaptation of these dplyr verbs should save time and some headaches.</p>
 <p>New verbs are implemented: for instance, you can <code>chop</code> (a <code>split</code> on <code>Coo</code> objects) according to a condition: this will create a list, on which you can apply further operations, then <code>combine</code> it back. This is particularly useful when you want to apply independant treatments to different partitions, eg orthogonal views of your model. Prior to this, we can use <code>table</code> to cross-tabulate data from <code>$fac</code>. We could have done the first step of what follows with <code>rm_uncomplete</code> that drops (if any) missing data.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">with</span>(olea<span class="op">$</span>fac, <span class="kw">table</span>(var, view))</a>
-<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="co"># we drop 'Cypre' since there is no VL for 'Cypre' var</span></a>
-<a class="sourceLine" id="cb106-3" data-line-number="3">olea <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb106-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(var <span class="op">!=</span><span class="st"> "Cypre"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb106-5" data-line-number="5"><span class="st">  </span><span class="co"># split, do morphometrics, combine</span></a>
-<a class="sourceLine" id="cb106-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/chop.html">chop</a></span>(<span class="op">~</span>view) <span class="op">%&gt;%</span><span class="st"> </span>opoly <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/combine.html">combine</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb106-7" data-line-number="7"><span class="st">  </span><span class="co"># note the two views in the morphospace</span></a>
-<a class="sourceLine" id="cb106-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>var)</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-50-1.png" width="700"></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">with</span>(olea<span class="op">$</span>fac, <span class="kw">table</span>(var, view))</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2"><span class="co"># we drop 'Cypre' since there is no VL for 'Cypre' var</span></a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">olea <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb93-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(var <span class="op">!=</span><span class="st"> "Cypre"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb93-5" data-line-number="5"><span class="st">  </span><span class="co"># split, do morphometrics, combine</span></a>
+<a class="sourceLine" id="cb93-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/chop.html">chop</a></span>(<span class="op">~</span>view) <span class="op">%&gt;%</span><span class="st"> </span>opoly <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/combine.html">combine</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb93-7" data-line-number="7"><span class="st">  </span><span class="co"># note the two views in the morphospace</span></a>
+<a class="sourceLine" id="cb93-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/PCA.html">PCA</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/plot_PCA.html">plot_PCA</a></span>(<span class="op">~</span>var)</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-48-1.png" width="700"></p>
 <pre><code>##         view
 ## var      VD VL
 ##   Aglan  30 30
@@ -1095,12 +995,12 @@
 <p>Some methods help, on <code>Coe</code> objects to: * select groups with at least a certain number of individuals in them: <code>at_least</code> * removes outliers : <code>which_out</code> * sample a given number: <code>sample_n</code>; * sample a given proportion: <code>sample_frac</code>; * generate new individuals based on calibrated Gaussian coefficient generation: <code>breed</code>; * generate new individuals based on permutations: <code>perm</code>.</p>
 <p>Several shortcuts are implemented on <code>Coo</code> and <code>Coe</code> objects: * <code>names</code> returns shape names; * <code>length</code> returns their number; * <code>Ntable</code> does the same job and plots a confusion matrix; * <code>[]</code> extracts one (or more) shape; * <code>$</code> can access either a shape name or a column name for the <code>$fac</code>.</p>
 <p>Try the following:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="kw">names</span>(bot)</a>
-<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="kw">length</span>(bot)</a>
-<a class="sourceLine" id="cb108-3" data-line-number="3">bot[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb108-4" data-line-number="4">bot[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
-<a class="sourceLine" id="cb108-5" data-line-number="5">bot<span class="op">$</span>brahma</a>
-<a class="sourceLine" id="cb108-6" data-line-number="6">bot<span class="op">$</span>type</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">names</span>(bot)</a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="kw">length</span>(bot)</a>
+<a class="sourceLine" id="cb95-3" data-line-number="3">bot[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb95-4" data-line-number="4">bot[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb95-5" data-line-number="5">bot<span class="op">$</span>brahma</a>
+<a class="sourceLine" id="cb95-6" data-line-number="6">bot<span class="op">$</span>type</a></code></pre></div>
 </div>
 </div>
 <div id="babel-importexport" class="section level2">
@@ -1113,19 +1013,19 @@
 <a href="#bridges-within-r" class="anchor"></a>Bridges within R</h3>
 <p>You can convert from/to array, matrix, list or data.frame with the functions <code>{a, m, l, d}2{a, m, l, d}</code>. For instance, <code>l2a</code> converts a list into an array that you can use with <code>geomorph</code>; <code>a2l</code> does the inverse operation.</p>
 <p>Imagine you want to import pupfish from <code>geomorph</code> as a <code>Ldk</code> object:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">library</span>(geomorph)</a>
-<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="kw">data</span>(pupfish)</a>
-<a class="sourceLine" id="cb109-3" data-line-number="3"><span class="kw">str</span>(pupfish)</a>
-<a class="sourceLine" id="cb109-4" data-line-number="4"><span class="co"># so $coords will become $coo, and</span></a>
-<a class="sourceLine" id="cb109-5" data-line-number="5"><span class="co"># all other components will be turned into a data.frame to feed $fac</span></a>
-<a class="sourceLine" id="cb109-6" data-line-number="6"><span class="co"># with a single line</span></a>
-<a class="sourceLine" id="cb109-7" data-line-number="7"><span class="kw"><a href="../reference/Ldk.html">Ldk</a></span>(<span class="dt">coo=</span>pupfish<span class="op">$</span>coords <span class="op">%&gt;%</span><span class="st"> </span>a2l,</a>
-<a class="sourceLine" id="cb109-8" data-line-number="8">  <span class="dt">fac=</span>pupfish[<span class="op">-</span><span class="dv">1</span>] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">library</span>(geomorph)</a>
+<a class="sourceLine" id="cb96-2" data-line-number="2"><span class="kw">data</span>(pupfish)</a>
+<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="kw">str</span>(pupfish)</a>
+<a class="sourceLine" id="cb96-4" data-line-number="4"><span class="co"># so $coords will become $coo, and</span></a>
+<a class="sourceLine" id="cb96-5" data-line-number="5"><span class="co"># all other components will be turned into a data.frame to feed $fac</span></a>
+<a class="sourceLine" id="cb96-6" data-line-number="6"><span class="co"># with a single line</span></a>
+<a class="sourceLine" id="cb96-7" data-line-number="7"><span class="kw"><a href="../reference/Ldk.html">Ldk</a></span>(<span class="dt">coo=</span>pupfish<span class="op">$</span>coords <span class="op">%&gt;%</span><span class="st"> </span>a2l,</a>
+<a class="sourceLine" id="cb96-8" data-line-number="8">  <span class="dt">fac=</span>pupfish[<span class="op">-</span><span class="dv">1</span>] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>())</a></code></pre></div>
 </div>
 <div id="import-from-stereomorph" class="section level3">
 <h3 class="hasAnchor">
 <a href="#import-from-stereomorph" class="anchor"></a>Import from StereoMorph</h3>
-<p>If you use this excellent package by Olsen to digitize landmarks and curves, you can import them, from the files produced with the functions <code>import_StereoMorph_ldk</code> and <code>import_StereoMorph_curve</code>.</p>
+<p>If you use StereoMorph to digitize landmarks and curves, you can import them, from the files produced with the functions <code>import_StereoMorph_ldk</code> and <code>import_StereoMorph_curve</code>.</p>
 </div>
 <div id="import-from-tps-and-other-digitizing-softwares" class="section level3">
 <h3 class="hasAnchor">
@@ -1142,11 +1042,11 @@
 <h3 class="hasAnchor">
 <a href="#direct-build-of-coe-objects" class="anchor"></a>Direct build of *Coe objects</h3>
 <p>You’re not bound with Momocs from the “shapes” step, ie you do not have to start from <code>Coo</code> objects. For instance if you have a matrix of coefficients, you can directly build an <code>OutCoe</code> with the builder (see below). Same approach for <code>OpnCoe</code> and <code>TraCoe</code>; have a look to the help files of these builders.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="co"># we simulate an imported matrix of coordinates, eg from a .csv</span></a>
-<a class="sourceLine" id="cb110-2" data-line-number="2">coeffs_from_the_wild &lt;-<span class="st"> </span>bot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(<span class="dv">6</span>) <span class="op">%$%</span><span class="st"> </span>coe</a>
-<a class="sourceLine" id="cb110-3" data-line-number="3">coeffs_in_Momocs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/OutCoe.html">OutCoe</a></span>(<span class="dt">coe=</span>coeffs_from_the_wild, <span class="dt">method=</span><span class="st">"efourier"</span>, <span class="dt">norm=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb110-4" data-line-number="4">coeffs_in_Momocs <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
-<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-53-1.png" width="700"></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="co"># we simulate an imported matrix of coordinates, eg from a .csv</span></a>
+<a class="sourceLine" id="cb97-2" data-line-number="2">coeffs_from_the_wild &lt;-<span class="st"> </span>bot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/efourier.html">efourier</a></span>(<span class="dv">6</span>) <span class="op">%$%</span><span class="st"> </span>coe</a>
+<a class="sourceLine" id="cb97-3" data-line-number="3">coeffs_in_Momocs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/OutCoe.html">OutCoe</a></span>(<span class="dt">coe=</span>coeffs_from_the_wild, <span class="dt">method=</span><span class="st">"efourier"</span>, <span class="dt">norm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb97-4" data-line-number="4">coeffs_in_Momocs <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span>plot</a></code></pre></div>
+<p><img src="Momocs_intro_files/figure-html/unnamed-chunk-51-1.png" width="700"></p>
 </div>
 <div id="import-misc" class="section level3">
 <h3 class="hasAnchor">
@@ -1162,17 +1062,17 @@
 <h3 class="hasAnchor">
 <a href="#save-from-r" class="anchor"></a>Save from R</h3>
 <p>The best way to save a Momocs object is probably to use the base <code>save</code> function. You can call it back afterwards with <code>load</code>:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="kw">save</span>(bot, <span class="dt">file=</span><span class="st">"Bottles.rda"</span>)</a>
-<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="co"># closing R, going to the beach, back at work</span></a>
-<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="kw">load</span>(<span class="st">"Bottles.rda"</span>) <span class="co"># bot is back</span></a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">save</span>(bot, <span class="dt">file=</span><span class="st">"Bottles.rda"</span>)</a>
+<a class="sourceLine" id="cb98-2" data-line-number="2"><span class="co"># closing R, going to the beach, back at work</span></a>
+<a class="sourceLine" id="cb98-3" data-line-number="3"><span class="kw">load</span>(<span class="st">"Bottles.rda"</span>) <span class="co"># bot is back</span></a></code></pre></div>
 </div>
 <div id="export-from-r" class="section level3">
 <h3 class="hasAnchor">
 <a href="#export-from-r" class="anchor"></a>Export from R</h3>
 <p>Any Momocs object, <code>Coo</code>s, <code>Coe</code>s, <code>PCA</code>s, etc. can be turned into a <code>data.frame</code> with <code>as_df</code>.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">bot <span class="op">%&gt;%</span><span class="st"> </span>as_df</a>
-<a class="sourceLine" id="cb112-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>as_df</a>
-<a class="sourceLine" id="cb112-3" data-line-number="3">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span>as_df</a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">bot <span class="op">%&gt;%</span><span class="st"> </span>as_df</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>as_df</a>
+<a class="sourceLine" id="cb99-3" data-line-number="3">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span>as_df</a></code></pre></div>
 <pre><code>## # A tibble: 40 x 4
 ##    coo             type   fake     cs
 ##    &lt;list&gt;          &lt;fct&gt;  &lt;fct&gt; &lt;dbl&gt;
@@ -1227,26 +1127,26 @@
 ## #   PC30 &lt;dbl&gt;, PC31 &lt;dbl&gt;, PC32 &lt;dbl&gt;, PC33 &lt;dbl&gt;, PC34 &lt;dbl&gt;,
 ## #   PC35 &lt;dbl&gt;, PC36 &lt;dbl&gt;, PC37 &lt;dbl&gt;, PC38 &lt;dbl&gt;, PC39 &lt;dbl&gt;, PC40 &lt;dbl&gt;</code></pre>
 <p>If the heretic you want to exit R to do stats elsewhere, <code>export</code> is your friend:</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>export</a>
-<a class="sourceLine" id="cb114-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span>export</a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>export</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2">bot <span class="op">%&gt;%</span><span class="st"> </span>efourier <span class="op">%&gt;%</span><span class="st"> </span>PCA <span class="op">%&gt;%</span><span class="st"> </span>export</a></code></pre></div>
 <p>But, of course, you can directly access information within the Momocs objects; try the following:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="co"># from Coo objects</span></a>
-<a class="sourceLine" id="cb115-2" data-line-number="2">bot<span class="op">$</span>coo <span class="co"># list of matrices (of xy coordinates)</span></a>
-<a class="sourceLine" id="cb115-3" data-line-number="3">bot<span class="op">$</span>fac <span class="co"># data.frame for covariates</span></a>
-<a class="sourceLine" id="cb115-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb115-5" data-line-number="5"><span class="co"># from Coe objects</span></a>
-<a class="sourceLine" id="cb115-6" data-line-number="6">bot.f<span class="op">$</span>coe <span class="co"># matrix of coefficients</span></a>
-<a class="sourceLine" id="cb115-7" data-line-number="7">bot.f<span class="op">$</span>fac <span class="co"># data.frame for covariates</span></a>
-<a class="sourceLine" id="cb115-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb115-9" data-line-number="9"><span class="co"># from PCA objects</span></a>
-<a class="sourceLine" id="cb115-10" data-line-number="10">bot.p<span class="op">$</span>x        <span class="co"># scores</span></a>
-<a class="sourceLine" id="cb115-11" data-line-number="11">bot.p<span class="op">$</span>rotation <span class="co"># rotation matrix</span></a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="co"># from Coo objects</span></a>
+<a class="sourceLine" id="cb102-2" data-line-number="2">bot<span class="op">$</span>coo <span class="co"># list of matrices (of xy coordinates)</span></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3">bot<span class="op">$</span>fac <span class="co"># data.frame for covariates</span></a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"><span class="co"># from Coe objects</span></a>
+<a class="sourceLine" id="cb102-6" data-line-number="6">bot.f<span class="op">$</span>coe <span class="co"># matrix of coefficients</span></a>
+<a class="sourceLine" id="cb102-7" data-line-number="7">bot.f<span class="op">$</span>fac <span class="co"># data.frame for covariates</span></a>
+<a class="sourceLine" id="cb102-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb102-9" data-line-number="9"><span class="co"># from PCA objects</span></a>
+<a class="sourceLine" id="cb102-10" data-line-number="10">bot.p<span class="op">$</span>x        <span class="co"># scores</span></a>
+<a class="sourceLine" id="cb102-11" data-line-number="11">bot.p<span class="op">$</span>rotation <span class="co"># rotation matrix</span></a></code></pre></div>
 </div>
 </div>
 <div id="graphics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graphics" class="anchor"></a>Graphics</h2>
-<p>The most common graphics have been already presented in previous sections. But there are many more of them, and they are gathered in the <strong>Graphics</strong> family that can be accessed with … TODO.</p>
+<p>Most graphics are currently being rewritten, either to pure <code>ggplot2</code> or using grindr. See the dedicated embryo of vignette: see <code><a href="../articles/Momocs_grindr.html">vignette("Momocs_grindr")</a></code>.</p>
 <div id="tps_-thin-plate-splines" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tps_-thin-plate-splines" class="anchor"></a><code>tps_*</code>: Thin Plate Splines</h3>
@@ -1256,14 +1156,14 @@ tps_arr(beer, whisky)
 tps_iso(beer, whisky)</a></code></pre>
 <p>Again, plenty options in <code>?tps_*</code>.</p>
 <p>You may also like lolliplots and friends:</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw"><a href="../reference/coo_lolli.html">coo_lolli</a></span>(beer, whisky); <span class="kw">title</span>(<span class="st">"coo_lolli"</span>)</a>
-<a class="sourceLine" id="cb117-2" data-line-number="2"><span class="kw"><a href="../reference/coo_arrows.html">coo_arrows</a></span>(beer, whisky); <span class="kw">title</span>(<span class="st">"coo_arrow"</span>)</a>
-<a class="sourceLine" id="cb117-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb117-4" data-line-number="4"><span class="co"># an example with coo_ruban</span></a>
-<a class="sourceLine" id="cb117-5" data-line-number="5"><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>(beer) <span class="co"># to get the first plot</span></a>
-<a class="sourceLine" id="cb117-6" data-line-number="6"><span class="kw"><a href="../reference/coo_ruban.html">coo_ruban</a></span>(beer, <span class="kw"><a href="../reference/edm.html">edm</a></span>(beer, whisky), <span class="dt">lwd=</span><span class="dv">8</span>) <span class="co"># we add ruban based from deviations</span></a>
-<a class="sourceLine" id="cb117-7" data-line-number="7"><span class="kw"><a href="../reference/coo_draw.html">coo_draw</a></span>(whisky)</a>
-<a class="sourceLine" id="cb117-8" data-line-number="8"><span class="kw">title</span>(<span class="st">"coo_ruban"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw"><a href="../reference/coo_lolli.html">coo_lolli</a></span>(beer, whisky); <span class="kw">title</span>(<span class="st">"coo_lolli"</span>)</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="kw"><a href="../reference/coo_arrows.html">coo_arrows</a></span>(beer, whisky); <span class="kw">title</span>(<span class="st">"coo_arrow"</span>)</a>
+<a class="sourceLine" id="cb104-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="co"># an example with coo_ruban</span></a>
+<a class="sourceLine" id="cb104-5" data-line-number="5"><span class="kw"><a href="../reference/coo_plot.html">coo_plot</a></span>(beer) <span class="co"># to get the first plot</span></a>
+<a class="sourceLine" id="cb104-6" data-line-number="6"><span class="kw"><a href="../reference/coo_ruban.html">coo_ruban</a></span>(beer, <span class="kw"><a href="../reference/edm.html">edm</a></span>(beer, whisky), <span class="dt">lwd=</span><span class="dv">8</span>) <span class="co"># we add ruban based from deviations</span></a>
+<a class="sourceLine" id="cb104-7" data-line-number="7"><span class="kw"><a href="../reference/coo_draw.html">coo_draw</a></span>(whisky)</a>
+<a class="sourceLine" id="cb104-8" data-line-number="8"><span class="kw">title</span>(<span class="st">"coo_ruban"</span>)</a></code></pre></div>
 </div>
 <div id="color-palettes" class="section level3">
 <h3 class="hasAnchor">

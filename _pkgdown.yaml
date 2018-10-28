@@ -215,11 +215,12 @@ reference:
 
 - title: Momocs helpers
   desc: To access online website and help and different versions
-  - Momocs_website()
-  - Momocs_help()
-  - Momocs_currentCRANversion()
-  - Momocs_currentGitHubversion()
-  - Momocs_installlastversion()
+  contents:
+  - Momocs_website
+  - Momocs_help
+  - Momocs_currentCRANversion
+  - Momocs_currentGitHubversion
+  - Momocs_installlastversion
   - Momocs_installedversion
 
 - title: Misc
