@@ -98,7 +98,7 @@ coo_ldk <- function(coo, nb.ldk, close=FALSE, points=TRUE) {
   if (is.list(coo))
     coo <- l2m(coo)
   if (close) coo <- coo_close(coo)
-  coo_plot(coo, points=points)
+  coo_plot(coo, lty = 2)
   ldk <- numeric(nb.ldk)
   cat("[")
   for (i in 1:nb.ldk) {
@@ -107,7 +107,7 @@ coo_ldk <- function(coo, nb.ldk, close=FALSE, points=TRUE) {
     ldk[i] <- which.min(l)
     points(coo[ldk[i], 1], coo[ldk[i], 2], pch = 20, col = "red",
            cex = 0.5)
-    cat("*")
+    cat('\r', i, 'of', nb.ldk)
   }
   cat("]\n")
   return(ldk)
