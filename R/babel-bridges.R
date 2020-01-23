@@ -106,6 +106,8 @@ m2d <- function(m) {
 l2a <- function(l) {
   .check(length(unique(sapply(l, length))) == 1,
          "matrices in list must have the same dimensions")
+  .check(!any(is.na(sapply(l, names))) == 0, 
+	       "lists in list must be named, as in is.name(l[[1]]) & etc.")
   nr <- nrow(l[[1]])
   nc <- 2
   ni <- length(l)
