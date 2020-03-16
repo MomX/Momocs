@@ -13,9 +13,9 @@ rescale(x, scaling_factor, scale_mapping, magnification_col, ...)
 have the same scale}
 
 \item{scale_mapping}{either a data.frame or a path to read such a data.frame. It MUST contain
-three columns in that order: magnification found in \code{$fac}, column \code{"magnification_col"}, pixels, real length unit.
+three columns in that order: magnification found in \verb{$fac}, column \code{"magnification_col"}, pixels, real length unit.
 Column names do not matter but must be specified, as read.table reads with \code{header=TRUE} Every
-different magnification level found in \code{$fac}, column \code{"magnification_col"} must have its row.}
+different magnification level found in \verb{$fac}, column \code{"magnification_col"} must have its row.}
 
 \item{magnification_col}{the name or id of the $fac column to look for magnification levels for every image}
 
@@ -55,14 +55,24 @@ This function is simple but quite complex to detail. Feel free to contact me sho
 problem with it. You can just access its code (type \code{rescale}) and reply it yourself.
 }
 \seealso{
-Other handling functions: \code{\link{arrange}},
-  \code{\link{at_least}}, \code{\link{chop}},
-  \code{\link{combine}}, \code{\link{dissolve}},
-  \code{\link{fac_dispatcher}}, \code{\link{filter}},
-  \code{\link{mutate}}, \code{\link{rename}},
-  \code{\link{rm_harm}}, \code{\link{rm_missing}},
-  \code{\link{rm_uncomplete}}, \code{\link{rw_fac}},
-  \code{\link{sample_frac}}, \code{\link{sample_n}},
-  \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subsetize}}
+Other handling functions: 
+\code{\link{arrange}()},
+\code{\link{at_least}()},
+\code{\link{chop}()},
+\code{\link{combine}()},
+\code{\link{dissolve}()},
+\code{\link{fac_dispatcher}()},
+\code{\link{filter}()},
+\code{\link{mutate}()},
+\code{\link{rename}()},
+\code{\link{rm_harm}()},
+\code{\link{rm_missing}()},
+\code{\link{rm_uncomplete}()},
+\code{\link{rw_fac}()},
+\code{\link{sample_frac}()},
+\code{\link{sample_n}()},
+\code{\link{select}()},
+\code{\link{slice}()},
+\code{\link{subsetize}()}
 }
+\concept{handling functions}

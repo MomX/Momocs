@@ -58,14 +58,12 @@ MSHAPES <- function(x, ...) {
   UseMethod("MSHAPES")
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.list <- function(x, FUN=mean, ...) {
   A <- ldk_check(x)
   return(apply(A, 1:2, FUN, na.rm = TRUE))
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.array <- function(x, FUN=mean, ...) {
   if (length(dim(x)) == 3) {
@@ -74,7 +72,6 @@ MSHAPES.array <- function(x, FUN=mean, ...) {
   }
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.Ldk <- function(x, FUN=mean, ...) {
   Ldk <- x
@@ -82,7 +79,6 @@ MSHAPES.Ldk <- function(x, FUN=mean, ...) {
   return(apply(A, 1:2, mean, na.rm = TRUE))
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.OutCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   OutCoe <- x
@@ -121,7 +117,6 @@ MSHAPES.OutCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   return(res)
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.OpnCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   OpnCoe <- x
@@ -170,7 +165,6 @@ MSHAPES.OpnCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
 
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, ...) {
   LdkCoe <- x
@@ -197,7 +191,6 @@ MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, ...) {
 
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.PCA <- function(x, fac, FUN=mean, ...){
   # check for single individuals within a group..
@@ -220,7 +213,6 @@ MSHAPES.PCA <- function(x, fac, FUN=mean, ...){
   res
 }
 
-#' @rdname MSHAPES
 #' @export
 MSHAPES.LDA <- function(x, fac, FUN=mean, ...){
   # check for single individuals within a group..
@@ -246,12 +238,6 @@ MSHAPES.LDA <- function(x, fac, FUN=mean, ...){
   # just change the fac for the real name and return
   colnames(res)[1] <- fac %>% as.character() %>% `[`(-1)
   res
-}
-
-#' @export
-#' @rdname MSHAPES
-mshapes <- function(...){
-  .Deprecated("MSHAPES")
 }
 
 ##### end MSHAPES

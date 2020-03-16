@@ -60,6 +60,9 @@ bf \%>\% PCA \%>\% export()
 }
 }
 \seealso{
-Other bridges functions: \code{\link{as_df}},
-  \code{\link{bridges}}, \code{\link{complex}}
+Other bridges functions: 
+\code{\link{as_df}()},
+\code{\link{bridges}},
+\code{\link{complex}}
 }
+\concept{bridges functions}

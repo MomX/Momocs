@@ -12,7 +12,7 @@ rm_missing(x, by)
 \item{by}{which column of the $fac should objects have complete views}
 }
 \description{
-Any row (or within a given column if \code{by} is specified) containing \code{NA} in \code{$fac} and the corresponding shapes in \code{$coo}, lines in \code{$coe} or other objects
+Any row (or within a given column if \code{by} is specified) containing \code{NA} in \verb{$fac} and the corresponding shapes in \verb{$coo}, lines in \verb{$coe} or other objects
 will also be dropped.
 }
 \examples{
@@ -24,14 +24,24 @@ bot \%>\% rm_missing() \%>\% length
 bot \%>\% rm_missing("fake") \%>\% length()
 }
 \seealso{
-Other handling functions: \code{\link{arrange}},
-  \code{\link{at_least}}, \code{\link{chop}},
-  \code{\link{combine}}, \code{\link{dissolve}},
-  \code{\link{fac_dispatcher}}, \code{\link{filter}},
-  \code{\link{mutate}}, \code{\link{rename}},
-  \code{\link{rescale}}, \code{\link{rm_harm}},
-  \code{\link{rm_uncomplete}}, \code{\link{rw_fac}},
-  \code{\link{sample_frac}}, \code{\link{sample_n}},
-  \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subsetize}}
+Other handling functions: 
+\code{\link{arrange}()},
+\code{\link{at_least}()},
+\code{\link{chop}()},
+\code{\link{combine}()},
+\code{\link{dissolve}()},
+\code{\link{fac_dispatcher}()},
+\code{\link{filter}()},
+\code{\link{mutate}()},
+\code{\link{rename}()},
+\code{\link{rescale}()},
+\code{\link{rm_harm}()},
+\code{\link{rm_uncomplete}()},
+\code{\link{rw_fac}()},
+\code{\link{sample_frac}()},
+\code{\link{sample_n}()},
+\code{\link{select}()},
+\code{\link{slice}()},
+\code{\link{subsetize}()}
 }
+\concept{handling functions}

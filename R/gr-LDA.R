@@ -322,9 +322,6 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
 #' # you can even use it as a cross-table plotter
 #' bot$fac %>% table %>% plot_CV()
 #'
-#' # or on any matrix
-#' # set.seed(123) # for the sake of reproducibility
-#' matrix(runif(50), 5, 10) %>% as.table %>% plot_CV()
 #' @rdname plot_CV
 #' @export
 plot_CV <- function(x,

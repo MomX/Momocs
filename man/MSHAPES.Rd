@@ -2,45 +2,18 @@
 % Please edit documentation in R/mult-MSHAPESs.R
 \name{MSHAPES}
 \alias{MSHAPES}
-\alias{MSHAPES.list}
-\alias{MSHAPES.array}
-\alias{MSHAPES.Ldk}
-\alias{MSHAPES.OutCoe}
-\alias{MSHAPES.OpnCoe}
-\alias{MSHAPES.LdkCoe}
-\alias{MSHAPES.PCA}
-\alias{MSHAPES.LDA}
-\alias{mshapes}
 \title{Mean shape calculation for Coo, Coe, etc.}
 \usage{
 MSHAPES(x, ...)
-
-\method{MSHAPES}{list}(x, FUN = mean, ...)
-
-\method{MSHAPES}{array}(x, FUN = mean, ...)
-
-\method{MSHAPES}{Ldk}(x, FUN = mean, ...)
-
-\method{MSHAPES}{OutCoe}(x, fac = NULL, FUN = mean, nb.pts = 120, ...)
-
-\method{MSHAPES}{OpnCoe}(x, fac = NULL, FUN = mean, nb.pts = 120, ...)
-
-\method{MSHAPES}{LdkCoe}(x, fac = NULL, FUN = mean, ...)
-
-\method{MSHAPES}{PCA}(x, fac, FUN = mean, ...)
-
-\method{MSHAPES}{LDA}(x, fac, FUN = mean, ...)
-
-mshapes(...)
 }
 \arguments{
 \item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe or PCA object}
 
 \item{...}{useless here.}
 
-\item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
-
 \item{fac}{factor specification for \link{fac_dispatcher}}
+
+\item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
 
 \item{nb.pts}{numeric the number of points for calculated shapes (only Coe objects)}
 }
@@ -54,7 +27,7 @@ Quite a versatile function that calculates mean (or median, or whatever function
 on list or an array of shapes, an Ldk object. It can also be used on Coe objects.
 In that case, the reverse transformation (from coefficients to shapes) is calculated, (within
 groups defined with the fac argument if provided) and the Coe object is \emph{also} returned
-(in \code{$Coe}) along with a list of shapes (in \code{$shp}) and can then be passed to \code{plot_MSHAPES}.
+(in \verb{$Coe}) along with a list of shapes (in \verb{$shp}) and can then be passed to \code{plot_MSHAPES}.
 }
 \examples{
 #### on shapes
@@ -92,10 +65,16 @@ bot.f \%>\% LDA(~fake) \%>\% MSHAPES(~fake)
 bot.f \%>\% LDA(~fake) \%>\% MSHAPES(~type)
 }
 \seealso{
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
-  \code{\link{LDA}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{MDS}},
-  \code{\link{NMDS}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEANS}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{NMDS}()},
+\code{\link{PCA}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

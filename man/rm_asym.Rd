@@ -5,7 +5,6 @@
 \alias{rm_sym}
 \alias{rm_asym.default}
 \alias{rm_asym.OutCoe}
-\alias{rm_sym}
 \alias{rm_sym.default}
 \alias{rm_sym.OutCoe}
 \title{Removes asymmetric and symmetric variation on OutCoe objects}

@@ -4,8 +4,12 @@
 \alias{import_jpg}
 \title{Extract outline coordinates from multiple .jpg files}
 \usage{
-import_jpg(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
-  fun.notcentered = NULL, threshold = 0.5)
+import_jpg(
+  jpg.paths = .lf.auto(),
+  auto.notcentered = TRUE,
+  fun.notcentered = NULL,
+  threshold = 0.5
+)
 }
 \arguments{
 \item{jpg.paths}{a vector of paths corresponding to the .jpg files to import. If not
@@ -54,8 +58,12 @@ coo <- import_jpg()
 }
 }
 \seealso{
-Other import functions: \code{\link{import_Conte}},
-  \code{\link{import_StereoMorph_curve1}},
-  \code{\link{import_jpg1}}, \code{\link{import_tps}},
-  \code{\link{import_txt}}, \code{\link{pix2chc}}
+Other import functions: 
+\code{\link{import_Conte}()},
+\code{\link{import_StereoMorph_curve1}()},
+\code{\link{import_jpg1}()},
+\code{\link{import_tps}()},
+\code{\link{import_txt}()},
+\code{\link{pix2chc}()}
 }
+\concept{import functions}

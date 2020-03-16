@@ -20,8 +20,7 @@ PCA(x, scale., center, fac)
 
 \method{PCA}{TraCoe}(x, scale. = TRUE, center = TRUE, fac)
 
-\method{PCA}{default}(x, scale. = TRUE, center = TRUE,
-  fac = dplyr::data_frame())
+\method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = dplyr::data_frame())
 
 as_PCA(x, fac)
 }
@@ -85,10 +84,16 @@ class(iris.p)
 plot(iris.p, 1)
 }
 \seealso{
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
-  \code{\link{LDA}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{MDS}},
-  \code{\link{MSHAPES}}, \code{\link{NMDS}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEANS}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{MSHAPES}()},
+\code{\link{NMDS}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

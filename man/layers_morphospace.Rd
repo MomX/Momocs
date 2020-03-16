@@ -3,24 +3,41 @@
 \name{layers_morphospace}
 \alias{layers_morphospace}
 \alias{layer_morphospace_PCA}
-\alias{layers_morphospace}
 \alias{layer_morphospace_LDA}
 \title{Morphospace layers}
 \usage{
-layer_morphospace_PCA(x, position = c("range", "full", "circle", "xy",
-  "range_axes", "full_axes")[1], nb = 12, nr = 6, nc = 5, rotate = 0,
-  size = 0.9, col = "#999999", flipx = FALSE, flipy = FALSE,
-  draw = TRUE)
+layer_morphospace_PCA(
+  x,
+  position = c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
+  nb = 12,
+  nr = 6,
+  nc = 5,
+  rotate = 0,
+  size = 0.9,
+  col = "#999999",
+  flipx = FALSE,
+  flipy = FALSE,
+  draw = TRUE
+)
 
-layer_morphospace_LDA(x, position = c("range", "full", "circle", "xy",
-  "range_axes", "full_axes")[1], nb = 12, nr = 6, nc = 5, rotate = 0,
-  size = 0.9, col = "#999999", flipx = FALSE, flipy = FALSE,
-  draw = TRUE)
+layer_morphospace_LDA(
+  x,
+  position = c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
+  nb = 12,
+  nr = 6,
+  nc = 5,
+  rotate = 0,
+  size = 0.9,
+  col = "#999999",
+  flipx = FALSE,
+  flipy = FALSE,
+  draw = TRUE
+)
 }
 \arguments{
 \item{x}{layered \link{PCA} or \link{LDA}. Typically, the object returned by \link{plot_PCA} and \link{plot_LDA}}
 
-\item{position}{one of \code{range, full, circle, xy, range_axes, full_axes} to feed \link{morphospace_positions} (default: \code{range})}
+\item{position}{one of \verb{range, full, circle, xy, range_axes, full_axes} to feed \link{morphospace_positions} (default: \code{range})}
 
 \item{nb}{\code{numeric} total number of shapes when \code{position="circle"} (default: \code{12})}
 
@@ -32,7 +49,7 @@ layer_morphospace_LDA(x, position = c("range", "full", "circle", "xy",
 
 \item{size}{\code{numeric} size to use to feed \link{coo_template} (default: \code{0.9})}
 
-\item{col}{color to draw shapes (default: \code{#999999})}
+\item{col}{color to draw shapes (default: \verb{#999999})}
 
 \item{flipx}{\code{logical} whether to flip shapes against the x-axis (default: \code{FALSE})}
 
@@ -44,13 +61,24 @@ layer_morphospace_LDA(x, position = c("range", "full", "circle", "xy",
 Used internally by \link{plot_PCA}, \link{plot_LDA}, etc. but may be useful elsewhere.
 }
 \seealso{
-Other grindr: \code{\link{drawers}}, \code{\link{layers}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_LDA}},
-  \code{\link{plot_NMDS}}, \code{\link{plot_PCA}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers}},
+\code{\link{mosaic_engine}()},
+\code{\link{papers}},
+\code{\link{pile}()},
+\code{\link{plot_LDA}()},
+\code{\link{plot_NMDS}()},
+\code{\link{plot_PCA}()}
 
-Other grindr: \code{\link{drawers}}, \code{\link{layers}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_LDA}},
-  \code{\link{plot_NMDS}}, \code{\link{plot_PCA}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers}},
+\code{\link{mosaic_engine}()},
+\code{\link{papers}},
+\code{\link{pile}()},
+\code{\link{plot_LDA}()},
+\code{\link{plot_NMDS}()},
+\code{\link{plot_PCA}()}
 }
+\concept{grindr}

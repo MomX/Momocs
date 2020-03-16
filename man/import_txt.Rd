@@ -35,8 +35,12 @@ will be fully operationnal.
 Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \seealso{
-Other import functions: \code{\link{import_Conte}},
-  \code{\link{import_StereoMorph_curve1}},
-  \code{\link{import_jpg1}}, \code{\link{import_jpg}},
-  \code{\link{import_tps}}, \code{\link{pix2chc}}
+Other import functions: 
+\code{\link{import_Conte}()},
+\code{\link{import_StereoMorph_curve1}()},
+\code{\link{import_jpg1}()},
+\code{\link{import_jpg}()},
+\code{\link{import_tps}()},
+\code{\link{pix2chc}()}
 }
+\concept{import functions}

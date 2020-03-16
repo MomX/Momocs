@@ -23,6 +23,9 @@ ldk_links(wm, links)
 }
 }
 \seealso{
-Other ldk helpers: \code{\link{ldk_check}},
-  \code{\link{links_all}}, \code{\link{links_delaunay}}
+Other ldk helpers: 
+\code{\link{ldk_check}()},
+\code{\link{links_all}()},
+\code{\link{links_delaunay}()}
 }
+\concept{ldk helpers}

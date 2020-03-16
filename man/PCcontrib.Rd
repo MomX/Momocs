@@ -7,8 +7,7 @@
 \usage{
 PCcontrib(PCA, ...)
 
-\method{PCcontrib}{PCA}(PCA, nax, sd.r = c(-2, -1, -0.5, 0, 0.5, 1, 2),
-  gap = 1, ...)
+\method{PCcontrib}{PCA}(PCA, nax, sd.r = c(-2, -1, -0.5, 0, 0.5, 1, 2), gap = 1, ...)
 }
 \arguments{
 \item{PCA}{a \code{PCA} object}

@@ -10,10 +10,22 @@ plot_CV2(x, ...)
 
 \method{plot_CV2}{LDA}(x, ...)
 
-\method{plot_CV2}{table}(x, links.FUN = arrows, col = TRUE,
-  col0 = "black", col.breaks = 5, palette = col_heat, lwd = TRUE,
-  lwd0 = 5, gap.dots = 0.2, pch.dots = 20, gap.names = 0.25,
-  cex.names = 1, legend = TRUE, ...)
+\method{plot_CV2}{table}(
+  x,
+  links.FUN = arrows,
+  col = TRUE,
+  col0 = "black",
+  col.breaks = 5,
+  palette = col_heat,
+  lwd = TRUE,
+  lwd0 = 5,
+  gap.dots = 0.2,
+  pch.dots = 20,
+  gap.names = 0.25,
+  cex.names = 1,
+  legend = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{an \link{LDA} object, a table or a squared matrix}

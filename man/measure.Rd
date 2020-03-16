@@ -36,5 +36,7 @@ measure(bot$coo, coo_area, coo_perim)
 measure(bot[1], coo_area, coo_perim)
 }
 \seealso{
-Other premodern: \code{\link{coo_truss}}
+Other premodern: 
+\code{\link{coo_truss}()}
 }
+\concept{premodern}

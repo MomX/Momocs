@@ -7,7 +7,7 @@
 coo_centsize(coo)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \verb{(x; y)} coordinates or any \link{Coo} object.}
 }
 \value{
 \code{numeric}, the centroid size.
@@ -27,6 +27,9 @@ coo_centsize(bot)
 mutate(bot, size=coo_centsize(bot))
 }
 \seealso{
-Other centroid functions: \code{\link{coo_centdist}},
-  \code{\link{coo_centpos}}
+Other centroid functions: 
+\code{\link{coo_centdist}()},
+\code{\link{coo_centpos}()}
 }
+\concept{centroid functions}
+\concept{coo_utilities}

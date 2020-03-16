@@ -4,8 +4,16 @@
 \alias{Ptolemy}
 \title{Ptolemaic ellipses and illustration of efourier}
 \usage{
-Ptolemy(coo, t = seq(0, 2 * pi, length = 7)[-1], nb.h = 3, nb.pts = 360,
-  palette = col_heat, zoom = 5/4, legend = TRUE, ...)
+Ptolemy(
+  coo,
+  t = seq(0, 2 * pi, length = 7)[-1],
+  nb.h = 3,
+  nb.pts = 360,
+  palette = col_heat,
+  zoom = 5/4,
+  legend = TRUE,
+  ...
+)
 }
 \arguments{
 \item{coo}{a matrix of (x; y) coordinates}

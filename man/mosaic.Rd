@@ -8,22 +8,66 @@
 \alias{mosaic.Ldk}
 \title{Plots mosaics of shapes.}
 \usage{
-mosaic_engine(coo_list, dim, asp = 1, byrow = TRUE, fromtop = TRUE,
-  sample = 60, relatively = FALSE, template_size = 0.92)
+mosaic_engine(
+  coo_list,
+  dim,
+  asp = 1,
+  byrow = TRUE,
+  fromtop = TRUE,
+  sample = 60,
+  relatively = FALSE,
+  template_size = 0.92
+)
 
 mosaic(x, ...)
 
-\method{mosaic}{Out}(x, f, relatively = FALSE, pal = pal_qual,
-  sample = 60, paper_fun = paper_white, draw_fun = draw_outlines,
-  legend = TRUE, dim = NA, asp = 1, byrow = TRUE, fromtop = TRUE, ...)
+\method{mosaic}{Out}(
+  x,
+  f,
+  relatively = FALSE,
+  pal = pal_qual,
+  sample = 60,
+  paper_fun = paper_white,
+  draw_fun = draw_outlines,
+  legend = TRUE,
+  dim = NA,
+  asp = 1,
+  byrow = TRUE,
+  fromtop = TRUE,
+  ...
+)
 
-\method{mosaic}{Opn}(x, f, relatively = FALSE, pal = pal_qual,
-  sample = 60, paper_fun = paper_white, draw_fun = draw_curves,
-  legend = TRUE, dim = NA, asp = 1, byrow = TRUE, fromtop = TRUE, ...)
+\method{mosaic}{Opn}(
+  x,
+  f,
+  relatively = FALSE,
+  pal = pal_qual,
+  sample = 60,
+  paper_fun = paper_white,
+  draw_fun = draw_curves,
+  legend = TRUE,
+  dim = NA,
+  asp = 1,
+  byrow = TRUE,
+  fromtop = TRUE,
+  ...
+)
 
-\method{mosaic}{Ldk}(x, f, relatively = FALSE, pal = pal_qual,
-  sample = 60, paper_fun = paper_white, draw_fun = draw_landmarks,
-  legend = TRUE, dim = NA, asp = 1, byrow = TRUE, fromtop = TRUE, ...)
+\method{mosaic}{Ldk}(
+  x,
+  f,
+  relatively = FALSE,
+  pal = pal_qual,
+  sample = 60,
+  paper_fun = paper_white,
+  draw_fun = draw_landmarks,
+  legend = TRUE,
+  dim = NA,
+  asp = 1,
+  byrow = TRUE,
+  fromtop = TRUE,
+  ...
+)
 }
 \arguments{
 \item{coo_list}{\code{list} of shapes}
@@ -42,7 +86,7 @@ mosaic(x, ...)
 or, if \code{FALSE}(by default) \link{coo_template}.
 In other words, whether to preserve size or not.}
 
-\item{template_size}{\code{numeric} to feed \code{coo_template(_relatively)}.
+\item{template_size}{\code{numeric} to feed \verb{coo_template(_relatively)}.
 Only useful to add padding around shapes when the default value (0.95) is lowered.}
 
 \item{x}{any \link{Coo} object}
@@ -90,9 +134,14 @@ shapes2 \%>\% mosaic(relatively=FALSE)
 shapes2 \%>\% mosaic(relatively=TRUE) \%>\% draw_centroid()
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layers_morphospace}}, \code{\link{layers}},
-  \code{\link{papers}}, \code{\link{pile}},
-  \code{\link{plot_LDA}}, \code{\link{plot_NMDS}},
-  \code{\link{plot_PCA}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers_morphospace}},
+\code{\link{layers}},
+\code{\link{papers}},
+\code{\link{pile}()},
+\code{\link{plot_LDA}()},
+\code{\link{plot_NMDS}()},
+\code{\link{plot_PCA}()}
 }
+\concept{grindr}

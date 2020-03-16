@@ -3,7 +3,6 @@
 \docType{package}
 \name{Momocs}
 \alias{Momocs}
-\alias{Momocs-package}
 \title{Momocs}
 \description{
 The goal of Momocs is to provide a complete, convenient,

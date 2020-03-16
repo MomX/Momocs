@@ -10,9 +10,20 @@ CLUST(x, ...)
 
 \method{CLUST}{default}(x, ...)
 
-\method{CLUST}{Coe}(x, fac, type = c("horizontal", "vertical", "fan")[1], k,
-  dist_method = "euclidean", hclust_method = "complete", retain = 0.99,
-  labels, lwd = 1/4, cex = 1/2, palette = pal_qual, ...)
+\method{CLUST}{Coe}(
+  x,
+  fac,
+  type = c("horizontal", "vertical", "fan")[1],
+  k,
+  dist_method = "euclidean",
+  hclust_method = "complete",
+  retain = 0.99,
+  labels,
+  lwd = 1/4,
+  cex = 1/2,
+  palette = pal_qual,
+  ...
+)
 }
 \arguments{
 \item{x}{a \link{Coe} or \link{PCA} object}
@@ -65,10 +76,16 @@ bf \%>\% PCA \%>\% CLUST
 
 }
 \seealso{
-Other multivariate: \code{\link{KMEANS}},
-  \code{\link{KMEDOIDS}}, \code{\link{LDA}},
-  \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
-  \code{\link{MDS}}, \code{\link{MSHAPES}},
-  \code{\link{NMDS}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{KMEANS}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{MSHAPES}()},
+\code{\link{NMDS}()},
+\code{\link{PCA}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

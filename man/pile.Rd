@@ -12,23 +12,77 @@
 \usage{
 pile(coo, f, sample, subset, pal, paper_fun, draw_fun, transp, ...)
 
-\method{pile}{default}(coo, f, sample, subset, pal = pal_qual,
-  paper_fun = paper, draw_fun = draw_curves, transp = 0, ...)
+\method{pile}{default}(
+  coo,
+  f,
+  sample,
+  subset,
+  pal = pal_qual,
+  paper_fun = paper,
+  draw_fun = draw_curves,
+  transp = 0,
+  ...
+)
 
-\method{pile}{list}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
-  paper_fun = paper, draw_fun = draw_curves, transp = 0, ...)
+\method{pile}{list}(
+  coo,
+  f,
+  sample = 64,
+  subset = 1000,
+  pal = pal_qual,
+  paper_fun = paper,
+  draw_fun = draw_curves,
+  transp = 0,
+  ...
+)
 
-\method{pile}{array}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
-  paper_fun = paper, draw_fun = draw_landmarks, transp = 0, ...)
+\method{pile}{array}(
+  coo,
+  f,
+  sample = 64,
+  subset = 1000,
+  pal = pal_qual,
+  paper_fun = paper,
+  draw_fun = draw_landmarks,
+  transp = 0,
+  ...
+)
 
-\method{pile}{Out}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
-  paper_fun = paper, draw_fun = draw_outlines, transp = 0, ...)
+\method{pile}{Out}(
+  coo,
+  f,
+  sample = 64,
+  subset = 1000,
+  pal = pal_qual,
+  paper_fun = paper,
+  draw_fun = draw_outlines,
+  transp = 0,
+  ...
+)
 
-\method{pile}{Opn}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
-  paper_fun = paper, draw_fun = draw_curves, transp = 0, ...)
+\method{pile}{Opn}(
+  coo,
+  f,
+  sample = 64,
+  subset = 1000,
+  pal = pal_qual,
+  paper_fun = paper,
+  draw_fun = draw_curves,
+  transp = 0,
+  ...
+)
 
-\method{pile}{Ldk}(coo, f, sample = 64, subset = 1000, pal = pal_qual,
-  paper_fun = paper, draw_fun = draw_landmarks, transp = 0, ...)
+\method{pile}{Ldk}(
+  coo,
+  f,
+  sample = 64,
+  subset = 1000,
+  pal = pal_qual,
+  paper_fun = paper,
+  draw_fun = draw_landmarks,
+  transp = 0,
+  ...
+)
 }
 \arguments{
 \item{coo}{a single shape or any  \link{Coo} object}
@@ -61,7 +115,7 @@ It is, essentially, a shortcut around \code{paper + drawers} of the grindr famil
 Large \code{Coo} are sampled, both in terms of the number of shapes and of points to drawn.
 }
 \note{
-A variation of this plot was called \code{stack} before \code{Momocs 1.2.5}
+A variation of this plot was called \code{stack} before \verb{Momocs 1.2.5}
 }
 \examples{
 # all Coo are supported with sensible defaults
@@ -97,9 +151,14 @@ wings \%>\% my_pile(transp=3/4)
      pile
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layers_morphospace}}, \code{\link{layers}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{plot_LDA}}, \code{\link{plot_NMDS}},
-  \code{\link{plot_PCA}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers_morphospace}},
+\code{\link{layers}},
+\code{\link{mosaic_engine}()},
+\code{\link{papers}},
+\code{\link{plot_LDA}()},
+\code{\link{plot_NMDS}()},
+\code{\link{plot_PCA}()}
 }
+\concept{grindr}

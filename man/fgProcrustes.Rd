@@ -36,7 +36,7 @@ if landmarks have been previousy defined, then (with a message) on the \code{$co
 but in that case, all shapes must have the same number of coordinates (\link{coo_sample} may help).
 }
 \note{
-Slightly less optimized than procGPA in the shapes package (~20% on my machine).
+Slightly less optimized than procGPA in the shapes package (~20\% on my machine).
 Will be optimized when performance will be the last thing to improve!
 Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
@@ -55,6 +55,9 @@ fgProcrustes(hearts) \%>\%  stack()
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
 \seealso{
-Other procrustes functions: \code{\link{fProcrustes}},
-  \code{\link{fgsProcrustes}}, \code{\link{pProcrustes}}
+Other procrustes functions: 
+\code{\link{fProcrustes}()},
+\code{\link{fgsProcrustes}()},
+\code{\link{pProcrustes}()}
 }
+\concept{procrustes functions}

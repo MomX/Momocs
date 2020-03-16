@@ -11,14 +11,12 @@ coo_intersect_angle(coo, angle = 0)
 
 coo_intersect_direction(coo, direction = c("down", "left", "up", "right")[4])
 
-\method{coo_intersect_direction}{default}(coo, direction = c("down", "left",
-  "up", "right")[4])
+\method{coo_intersect_direction}{default}(coo, direction = c("down", "left", "up", "right")[4])
 
-\method{coo_intersect_direction}{Coo}(coo, direction = c("down", "left", "up",
-  "right")[4])
+\method{coo_intersect_direction}{Coo}(coo, direction = c("down", "left", "up", "right")[4])
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \verb{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{angle}{\code{numeric} an angle in radians (0 by default).}
 
@@ -54,5 +52,7 @@ coo \%>\% coo_intersect_angle(pi/7) \%>\%
 
 }
 \seealso{
-Other coo_ intersect: \code{\link{coo_intersect_segment}}
+Other coo_ intersect: 
+\code{\link{coo_intersect_segment}()}
 }
+\concept{coo_ intersect}

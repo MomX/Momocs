@@ -23,6 +23,9 @@ links <- links_all(w)
 ldk_links(w, links)
 }
 \seealso{
-Other ldk helpers: \code{\link{def_links}},
-  \code{\link{ldk_check}}, \code{\link{links_delaunay}}
+Other ldk helpers: 
+\code{\link{def_links}()},
+\code{\link{ldk_check}()},
+\code{\link{links_delaunay}()}
 }
+\concept{ldk helpers}

@@ -43,10 +43,16 @@ used is partley derived from the Revolution Analytics blog post (with their auth
 \item \url{http://www.r-bloggers.com/is-your-classification-model-making-lucky-guesses/}
 }
 
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
-  \code{\link{LDA}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{MDS}},
-  \code{\link{MSHAPES}}, \code{\link{NMDS}},
-  \code{\link{PCA}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEANS}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{MSHAPES}()},
+\code{\link{NMDS}()},
+\code{\link{PCA}()}
 }
+\concept{multivariate}

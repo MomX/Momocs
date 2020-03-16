@@ -33,9 +33,9 @@ specific methods. See their respective help pages for more help.
 
 \code{Coo} objects all have the following components:
 \itemize{
-\item \code{$coo} which is a list of matrices for coordinates
-\item \code{$fac} a \code{data_frame} for covariates (if any). You can provide
-this data_frame directly, as long as it has as many rows as there are matrices in \code{$coo} (see examples),
+\item \verb{$coo} which is a list of matrices for coordinates
+\item \verb{$fac} a \code{data_frame} for covariates (if any). You can provide
+this data_frame directly, as long as it has as many rows as there are matrices in \verb{$coo} (see examples),
 or use an helper function such as \link{lf_structure}.
 }
 
@@ -108,7 +108,12 @@ x$fac
 }
 }
 \seealso{
-Other classes: \code{\link{Coe}}, \code{\link{OpnCoe}},
-  \code{\link{Opn}}, \code{\link{OutCoe}},
-  \code{\link{Out}}, \code{\link{TraCoe}}
+Other classes: 
+\code{\link{Coe}()},
+\code{\link{OpnCoe}()},
+\code{\link{Opn}()},
+\code{\link{OutCoe}()},
+\code{\link{Out}()},
+\code{\link{TraCoe}()}
 }
+\concept{classes}

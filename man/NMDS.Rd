@@ -20,7 +20,7 @@ NMDS(x, distance = "bray", k = 2, try = 20, trymax = 20, ...)
 \item{...}{additional parameters to feed \link[vegan:metaMDS]{vegan::metaMDS}}
 }
 \value{
-what is returned by \link[vegan:metaMDS]{vegan::metaMDS} plus \code{$fac}. And prepend \code{NMDS} class to it.
+what is returned by \link[vegan:metaMDS]{vegan::metaMDS} plus \verb{$fac}. And prepend \code{NMDS} class to it.
 }
 \description{
 A wrapper around \link[vegan:metaMDS]{vegan::metaMDS}.
@@ -36,10 +36,16 @@ x <- bot \%>\% efourier \%>\% NMDS
 
 }
 \seealso{
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
-  \code{\link{LDA}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{MDS}},
-  \code{\link{MSHAPES}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEANS}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{MSHAPES}()},
+\code{\link{PCA}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

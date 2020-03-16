@@ -23,8 +23,8 @@ as_df(x, ...)
 
 \item{...}{useless here}
 
-\item{retain}{numeric for use with \link{scree} methods. Defaut to all. If \code{<1},
-enough axes to retain this proportion of variance; if \code{>1}, this number of axes.}
+\item{retain}{numeric for use with \link{scree} methods. Defaut to all. If \verb{<1},
+enough axes to retain this proportion of variance; if \verb{>1}, this number of axes.}
 }
 \value{
 a \link[dplyr:data_frame]{dplyr::data_frame}
@@ -51,6 +51,9 @@ bf \%>\% LDA(~fake) \%>\% as_df
 # same options apply
 }
 \seealso{
-Other bridges functions: \code{\link{bridges}},
-  \code{\link{complex}}, \code{\link{export}}
+Other bridges functions: 
+\code{\link{bridges}},
+\code{\link{complex}},
+\code{\link{export}()}
 }
+\concept{bridges functions}

@@ -45,7 +45,12 @@ olda
 plot_LDA(olda)
 }
 \seealso{
-Other classes: \code{\link{Coe}}, \code{\link{Coo}},
-  \code{\link{OpnCoe}}, \code{\link{OutCoe}},
-  \code{\link{Out}}, \code{\link{TraCoe}}
+Other classes: 
+\code{\link{Coe}()},
+\code{\link{Coo}()},
+\code{\link{OpnCoe}()},
+\code{\link{OutCoe}()},
+\code{\link{Out}()},
+\code{\link{TraCoe}()}
 }
+\concept{classes}

@@ -10,17 +10,53 @@
 \usage{
 panel(x, ...)
 
-\method{panel}{Out}(x, dim, cols, borders, fac, palette = col_summer,
-  coo_sample = 120, names = NULL, cex.names = 0.6, points = TRUE,
-  points.pch = 3, points.cex = 0.2, points.col, ...)
+\method{panel}{Out}(
+  x,
+  dim,
+  cols,
+  borders,
+  fac,
+  palette = col_summer,
+  coo_sample = 120,
+  names = NULL,
+  cex.names = 0.6,
+  points = TRUE,
+  points.pch = 3,
+  points.cex = 0.2,
+  points.col,
+  ...
+)
 
-\method{panel}{Opn}(x, cols, borders, fac, palette = col_summer,
-  coo_sample = 120, names = NULL, cex.names = 0.6, points = TRUE,
-  points.pch = 3, points.cex = 0.2, points.col, ...)
+\method{panel}{Opn}(
+  x,
+  cols,
+  borders,
+  fac,
+  palette = col_summer,
+  coo_sample = 120,
+  names = NULL,
+  cex.names = 0.6,
+  points = TRUE,
+  points.pch = 3,
+  points.cex = 0.2,
+  points.col,
+  ...
+)
 
-\method{panel}{Ldk}(x, cols, borders, fac, palette = col_summer,
-  names = NULL, cex.names = 0.6, points = TRUE, points.pch = 3,
-  points.cex = 0.2, points.col = "#333333", ...)
+\method{panel}{Ldk}(
+  x,
+  cols,
+  borders,
+  fac,
+  palette = col_summer,
+  names = NULL,
+  cex.names = 0.6,
+  points = TRUE,
+  points.pch = 3,
+  points.cex = 0.2,
+  points.col = "#333333",
+  ...
+)
 }
 \arguments{
 \item{x}{The \code{Coo} object to plot.}
@@ -69,6 +105,8 @@ panel(bot, c(4, 10))
 panel(bot, fac='type', palette=col_spring, names=TRUE)
 }
 \seealso{
-Other Coo_graphics: \code{\link{inspect}},
-  \code{\link{stack}}
+Other Coo_graphics: 
+\code{\link{inspect}()},
+\code{\link{stack}()}
 }
+\concept{Coo_graphics}

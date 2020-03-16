@@ -6,17 +6,47 @@
 \alias{plot_CV.LDA}
 \title{Plots a cross-validation table as an heatmap}
 \usage{
-plot_CV(x, freq = FALSE, rm0 = FALSE, pc = FALSE, fill = TRUE,
-  labels = TRUE, axis.size = 10, axis.x.angle = 45, cell.size = 2.5,
-  signif = 2, ...)
+plot_CV(
+  x,
+  freq = FALSE,
+  rm0 = FALSE,
+  pc = FALSE,
+  fill = TRUE,
+  labels = TRUE,
+  axis.size = 10,
+  axis.x.angle = 45,
+  cell.size = 2.5,
+  signif = 2,
+  ...
+)
 
-\method{plot_CV}{default}(x, freq = FALSE, rm0 = FALSE, pc = FALSE,
-  fill = TRUE, labels = TRUE, axis.size = 10, axis.x.angle = 45,
-  cell.size = 2.5, signif = 2, ...)
+\method{plot_CV}{default}(
+  x,
+  freq = FALSE,
+  rm0 = FALSE,
+  pc = FALSE,
+  fill = TRUE,
+  labels = TRUE,
+  axis.size = 10,
+  axis.x.angle = 45,
+  cell.size = 2.5,
+  signif = 2,
+  ...
+)
 
-\method{plot_CV}{LDA}(x, freq = TRUE, rm0 = TRUE, pc = TRUE,
-  fill = TRUE, labels = TRUE, axis.size = 10, axis.x.angle = 45,
-  cell.size = 2.5, signif = 2, ...)
+\method{plot_CV}{LDA}(
+  x,
+  freq = TRUE,
+  rm0 = TRUE,
+  pc = TRUE,
+  fill = TRUE,
+  labels = TRUE,
+  axis.size = 10,
+  axis.x.angle = 45,
+  cell.size = 2.5,
+  signif = 2,
+  ...
+)
 }
 \arguments{
 \item{x}{a (cross-validation table) or an LDA object}
@@ -66,9 +96,6 @@ df
 # you can even use it as a cross-table plotter
 bot$fac \%>\% table \%>\% plot_CV()
 
-# or on any matrix
-# set.seed(123) # for the sake of reproducibility
-matrix(runif(50), 5, 10) \%>\% as.table \%>\% plot_CV()
 }
 \seealso{
 \link{LDA}, \link{plot.LDA}, and (pretty much the same) \link{plot_table}.

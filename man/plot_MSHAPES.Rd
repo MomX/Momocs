@@ -10,7 +10,7 @@ plot_MSHAPES(x, draw_fun, size, palette)
 \item{x}{a list of shapes (eg as returned by \link{MSHAPES})}
 
 \item{draw_fun}{one of \link{draw_outline}, \link{draw_curves}, \link{draw_landmarks}.
-When the result of \link{MSHAPES} is passed, detected based on \code{$Coe}, otherwise default to \code{draw_curves}.}
+When the result of \link{MSHAPES} is passed, detected based on \verb{$Coe}, otherwise default to \code{draw_curves}.}
 
 \item{size}{numeric shrinking factor for shapes (and \link{coo_template};
 3/4 by default)}

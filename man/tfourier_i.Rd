@@ -4,8 +4,15 @@
 \alias{tfourier_i}
 \title{Inverse tangent angle Fourier transform}
 \usage{
-tfourier_i(tf, nb.h, nb.pts = 120, force2close = FALSE, rescale = TRUE,
-  perim = 2 * pi, thetao = 0)
+tfourier_i(
+  tf,
+  nb.h,
+  nb.pts = 120,
+  force2close = FALSE,
+  rescale = TRUE,
+  perim = 2 * pi,
+  thetao = 0
+)
 }
 \arguments{
 \item{tf}{a list with ao, an and bn components, typically as returned by
@@ -54,6 +61,8 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series, Springer 316
 pp.
 }
 \seealso{
-Other tfourier: \code{\link{tfourier_shape}},
-  \code{\link{tfourier}}
+Other tfourier: 
+\code{\link{tfourier_shape}()},
+\code{\link{tfourier}()}
 }
+\concept{tfourier}

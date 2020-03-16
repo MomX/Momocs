@@ -36,10 +36,16 @@ bp <- PCA(efourier(bot, 10))
 KMEANS(bp, 2)
 }
 \seealso{
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEDOIDS}}, \code{\link{LDA}},
-  \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
-  \code{\link{MDS}}, \code{\link{MSHAPES}},
-  \code{\link{NMDS}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{MSHAPES}()},
+\code{\link{NMDS}()},
+\code{\link{PCA}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

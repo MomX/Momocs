@@ -12,11 +12,20 @@ Borrowed default shapes from (c) Adobe Photoshop. Do not send me to jail.
 Data: Outline coordinates of various shapes
 }
 \seealso{
-Other datasets: \code{\link{apodemus}}, \code{\link{bot}},
-  \code{\link{chaff}}, \code{\link{charring}},
-  \code{\link{flower}}, \code{\link{hearts}},
-  \code{\link{molars}}, \code{\link{mosquito}},
-  \code{\link{mouse}}, \code{\link{nsfishes}},
-  \code{\link{oak}}, \code{\link{olea}},
-  \code{\link{trilo}}, \code{\link{wings}}
+Other datasets: 
+\code{\link{apodemus}},
+\code{\link{bot}},
+\code{\link{chaff}},
+\code{\link{charring}},
+\code{\link{flower}},
+\code{\link{hearts}},
+\code{\link{molars}},
+\code{\link{mosquito}},
+\code{\link{mouse}},
+\code{\link{nsfishes}},
+\code{\link{oak}},
+\code{\link{olea}},
+\code{\link{trilo}},
+\code{\link{wings}}
 }
+\concept{datasets}

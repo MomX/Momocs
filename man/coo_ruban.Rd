@@ -45,19 +45,32 @@ coo_plot(m, plot=FALSE)
 coo_ruban(m, d, palette=col_black)
 }
 \seealso{
-Other plotting functions: \code{\link{coo_arrows}},
-  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
-  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}, \code{\link{plot_devsegments}},
-  \code{\link{plot_table}}
+Other plotting functions: 
+\code{\link{coo_arrows}()},
+\code{\link{coo_draw}()},
+\code{\link{coo_listpanel}()},
+\code{\link{coo_lolli}()},
+\code{\link{coo_plot}()},
+\code{\link{ldk_chull}()},
+\code{\link{ldk_confell}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()},
+\code{\link{plot_devsegments}()},
+\code{\link{plot_table}()}
 
-Other plotting functions: \code{\link{coo_arrows}},
-  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
-  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}, \code{\link{plot_devsegments}},
-  \code{\link{plot_table}}
+Other plotting functions: 
+\code{\link{coo_arrows}()},
+\code{\link{coo_draw}()},
+\code{\link{coo_listpanel}()},
+\code{\link{coo_lolli}()},
+\code{\link{coo_plot}()},
+\code{\link{ldk_chull}()},
+\code{\link{ldk_confell}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()},
+\code{\link{plot_devsegments}()},
+\code{\link{plot_table}()}
 }
+\concept{plotting functions}

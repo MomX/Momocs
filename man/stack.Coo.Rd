@@ -6,19 +6,53 @@
 \alias{stack.Ldk}
 \title{Family picture of shapes}
 \usage{
-\method{stack}{Coo}(x, cols, borders, fac, palette = col_summer,
-  coo_sample = 120, points = FALSE, first.point = TRUE, centroid = TRUE,
-  ldk = TRUE, ldk_pch = 3, ldk_col = "#FF000055", ldk_cex = 0.5,
-  ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-  ldk_chull = FALSE, ldk_labels = FALSE, xy.axis = TRUE,
-  title = substitute(x), ...)
+\method{stack}{Coo}(
+  x,
+  cols,
+  borders,
+  fac,
+  palette = col_summer,
+  coo_sample = 120,
+  points = FALSE,
+  first.point = TRUE,
+  centroid = TRUE,
+  ldk = TRUE,
+  ldk_pch = 3,
+  ldk_col = "#FF000055",
+  ldk_cex = 0.5,
+  ldk_links = FALSE,
+  ldk_confell = FALSE,
+  ldk_contour = FALSE,
+  ldk_chull = FALSE,
+  ldk_labels = FALSE,
+  xy.axis = TRUE,
+  title = substitute(x),
+  ...
+)
 
-\method{stack}{Ldk}(x, cols, borders, first.point = TRUE, centroid = TRUE,
-  ldk = TRUE, ldk_pch = 20, ldk_col = col_alpha("#000000", 0.5),
-  ldk_cex = 0.3, meanshape = FALSE, meanshape_col = "#FF0000",
-  ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
-  ldk_chull = FALSE, ldk_labels = FALSE, slidings = TRUE,
-  slidings_pch = "", xy.axis = TRUE, title = substitute(x), ...)
+\method{stack}{Ldk}(
+  x,
+  cols,
+  borders,
+  first.point = TRUE,
+  centroid = TRUE,
+  ldk = TRUE,
+  ldk_pch = 20,
+  ldk_col = col_alpha("#000000", 0.5),
+  ldk_cex = 0.3,
+  meanshape = FALSE,
+  meanshape_col = "#FF0000",
+  ldk_links = FALSE,
+  ldk_confell = FALSE,
+  ldk_contour = FALSE,
+  ldk_chull = FALSE,
+  ldk_labels = FALSE,
+  slidings = TRUE,
+  slidings_pch = "",
+  xy.axis = TRUE,
+  title = substitute(x),
+  ...
+)
 }
 \arguments{
 \item{x}{The \code{Coo} object to plot.}
@@ -94,6 +128,8 @@ stack(chaffal, meanshape=TRUE, meanshape_col="blue")
 }
 }
 \seealso{
-Other Coo_graphics: \code{\link{inspect}},
-  \code{\link{panel}}
+Other Coo_graphics: 
+\code{\link{inspect}()},
+\code{\link{panel}()}
 }
+\concept{Coo_graphics}

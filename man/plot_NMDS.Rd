@@ -5,15 +5,37 @@
 \alias{plot_MDS}
 \title{NMDS plot unsing grindr layers}
 \usage{
-plot_NMDS(x, f = NULL, axes = c(1, 2), points = TRUE,
-  points_transp = 1/4, chull = TRUE, chullfilled = FALSE,
-  labelgroups = FALSE, legend = TRUE, title = "", box = TRUE,
-  axesnames = TRUE, palette = pal_qual)
+plot_NMDS(
+  x,
+  f = NULL,
+  axes = c(1, 2),
+  points = TRUE,
+  points_transp = 1/4,
+  chull = TRUE,
+  chullfilled = FALSE,
+  labelgroups = FALSE,
+  legend = TRUE,
+  title = "",
+  box = TRUE,
+  axesnames = TRUE,
+  palette = pal_qual
+)
 
-plot_MDS(x, f = NULL, axes = c(1, 2), points = TRUE,
-  points_transp = 1/4, chull = TRUE, chullfilled = FALSE,
-  labelgroups = FALSE, legend = TRUE, title = "", box = TRUE,
-  axesnames = TRUE, palette = pal_qual)
+plot_MDS(
+  x,
+  f = NULL,
+  axes = c(1, 2),
+  points = TRUE,
+  points_transp = 1/4,
+  chull = TRUE,
+  chullfilled = FALSE,
+  labelgroups = FALSE,
+  legend = TRUE,
+  title = "",
+  box = TRUE,
+  axesnames = TRUE,
+  palette = pal_qual
+)
 }
 \arguments{
 \item{x}{the result of \link{MDS} or \link{NMDS}}
@@ -61,9 +83,14 @@ plot_MDS(x)
 plot_MDS(x, ~type) \%>\% layer_stars() \%>\% layer_labelpoints()
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layers_morphospace}}, \code{\link{layers}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_LDA}},
-  \code{\link{plot_PCA}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers_morphospace}},
+\code{\link{layers}},
+\code{\link{mosaic_engine}()},
+\code{\link{papers}},
+\code{\link{pile}()},
+\code{\link{plot_LDA}()},
+\code{\link{plot_PCA}()}
 }
+\concept{grindr}

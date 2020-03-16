@@ -11,20 +11,50 @@
 \usage{
 calibrate_harmonicpower()
 
-calibrate_harmonicpower_efourier(x, id = 1:length(x), nb.h, drop = 1,
-  thresh = c(90, 95, 99, 99.9), plot = TRUE)
+calibrate_harmonicpower_efourier(
+  x,
+  id = 1:length(x),
+  nb.h,
+  drop = 1,
+  thresh = c(90, 95, 99, 99.9),
+  plot = TRUE
+)
 
-calibrate_harmonicpower_rfourier(x, id = 1:length(x), nb.h, drop = 1,
-  thresh = c(90, 95, 99, 99.9), plot = TRUE)
+calibrate_harmonicpower_rfourier(
+  x,
+  id = 1:length(x),
+  nb.h,
+  drop = 1,
+  thresh = c(90, 95, 99, 99.9),
+  plot = TRUE
+)
 
-calibrate_harmonicpower_tfourier(x, id = 1:length(x), nb.h, drop = 1,
-  thresh = c(90, 95, 99, 99.9), plot = TRUE)
+calibrate_harmonicpower_tfourier(
+  x,
+  id = 1:length(x),
+  nb.h,
+  drop = 1,
+  thresh = c(90, 95, 99, 99.9),
+  plot = TRUE
+)
 
-calibrate_harmonicpower_sfourier(x, id = 1:length(x), nb.h, drop = 1,
-  thresh = c(90, 95, 99, 99.9), plot = TRUE)
+calibrate_harmonicpower_sfourier(
+  x,
+  id = 1:length(x),
+  nb.h,
+  drop = 1,
+  thresh = c(90, 95, 99, 99.9),
+  plot = TRUE
+)
 
-calibrate_harmonicpower_dfourier(x, id = 1:length(x), nb.h, drop = 1,
-  thresh = c(90, 95, 99, 99.9), plot = TRUE)
+calibrate_harmonicpower_dfourier(
+  x,
+  id = 1:length(x),
+  nb.h,
+  drop = 1,
+  thresh = c(90, 95, 99, 99.9),
+  plot = TRUE
+)
 }
 \arguments{
 \item{x}{a \code{Coo} of \code{Opn} object}
@@ -86,7 +116,9 @@ ggtitle("Harmonic power calibration")
 }
 }
 \seealso{
-Other calibration: \code{\link{calibrate_deviations}},
-  \code{\link{calibrate_r2}},
-  \code{\link{calibrate_reconstructions}}
+Other calibration: 
+\code{\link{calibrate_deviations}()},
+\code{\link{calibrate_r2}()},
+\code{\link{calibrate_reconstructions}()}
 }
+\concept{calibration}

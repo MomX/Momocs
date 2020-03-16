@@ -7,9 +7,16 @@
 \usage{
 hcontrib(Coe, ...)
 
-\method{hcontrib}{OutCoe}(Coe, id, harm.r, amp.r = c(0, 0.5, 1, 2, 5, 10),
-  main = "Harmonic contribution to shape", xlab = "Harmonic rank",
-  ylab = "Amplification factor", ...)
+\method{hcontrib}{OutCoe}(
+  Coe,
+  id,
+  harm.r,
+  amp.r = c(0, 0.5, 1, 2, 5, 10),
+  main = "Harmonic contribution to shape",
+  xlab = "Harmonic rank",
+  ylab = "Amplification factor",
+  ...
+)
 }
 \arguments{
 \item{Coe}{a \code{\link{Coe}} object (either \code{OutCoe} or (soon) \code{OpnCoe})}
@@ -41,5 +48,7 @@ hcontrib(bot.f, harm.r=3:10, amp.r=1:8, col="grey20",
    main="A huge panel")
 }
 \seealso{
-Other Coe_graphics: \code{\link{boxplot.OutCoe}}
+Other Coe_graphics: 
+\code{\link{boxplot.OutCoe}()}
 }
+\concept{Coe_graphics}

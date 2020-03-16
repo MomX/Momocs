@@ -4,8 +4,12 @@
 \alias{coo_oscillo}
 \title{Momocs' 'oscilloscope' for Fourier-based approaches}
 \usage{
-coo_oscillo(coo, method = c("efourier", "rfourier", "tfourier", "all")[4],
-  shape = TRUE, nb.pts = 12)
+coo_oscillo(
+  coo,
+  method = c("efourier", "rfourier", "tfourier", "all")[4],
+  shape = TRUE,
+  nb.pts = 12
+)
 }
 \arguments{
 \item{coo}{A list or a matrix of coordinates.}

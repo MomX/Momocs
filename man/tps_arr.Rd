@@ -4,11 +4,29 @@
 \alias{tps_arr}
 \title{Deformation 'vector field' using Thin Plate Splines}
 \usage{
-tps_arr(fr, to, amp = 1, grid = TRUE, over = 1.2, palette = col_summer,
-  arr.nb = 200, arr.levels = 100, arr.len = 0.1, arr.ang = 20,
-  arr.lwd = 0.75, arr.col = "grey50", poly = TRUE, shp = TRUE,
-  shp.col = rep(NA, 2), shp.border = col_qual(2), shp.lwd = c(2, 2),
-  shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
+tps_arr(
+  fr,
+  to,
+  amp = 1,
+  grid = TRUE,
+  over = 1.2,
+  palette = col_summer,
+  arr.nb = 200,
+  arr.levels = 100,
+  arr.len = 0.1,
+  arr.ang = 20,
+  arr.lwd = 0.75,
+  arr.col = "grey50",
+  poly = TRUE,
+  shp = TRUE,
+  shp.col = rep(NA, 2),
+  shp.border = col_qual(2),
+  shp.lwd = c(2, 2),
+  shp.lty = c(1, 1),
+  legend = TRUE,
+  legend.text,
+  ...
+)
 }
 \arguments{
 \item{fr}{the reference \eqn{(x; y)} coordinates}
@@ -74,7 +92,10 @@ tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3)
 tps_arr(fr, to, arr.nb=200, palette=col_sari, amp=3, grid=FALSE)
 }
 \seealso{
-Other thin plate splines: \code{\link{tps2d}},
-  \code{\link{tps_grid}}, \code{\link{tps_iso}},
-  \code{\link{tps_raw}}
+Other thin plate splines: 
+\code{\link{tps2d}()},
+\code{\link{tps_grid}()},
+\code{\link{tps_iso}()},
+\code{\link{tps_raw}()}
 }
+\concept{thin plate splines}

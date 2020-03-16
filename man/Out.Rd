@@ -7,7 +7,7 @@
 Out(x, fac = dplyr::data_frame(), ldk = list())
 }
 \arguments{
-\item{x}{a \code{list} of matrices of \code{(x; y)} coordinates,
+\item{x}{a \code{list} of matrices of \verb{(x; y)} coordinates,
 or an array or an Out object or an Ldk object, or a data.frame (and friends)}
 
 \item{fac}{(optional) a \code{data.frame} of factors and/or numerics
@@ -28,7 +28,12 @@ and specific methods (e.g. \link{efourier} can be applied.
 methods(class=Out)
 }
 \seealso{
-Other classes: \code{\link{Coe}}, \code{\link{Coo}},
-  \code{\link{OpnCoe}}, \code{\link{Opn}},
-  \code{\link{OutCoe}}, \code{\link{TraCoe}}
+Other classes: 
+\code{\link{Coe}()},
+\code{\link{Coo}()},
+\code{\link{OpnCoe}()},
+\code{\link{Opn}()},
+\code{\link{OutCoe}()},
+\code{\link{TraCoe}()}
 }
+\concept{classes}

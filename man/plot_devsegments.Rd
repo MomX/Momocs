@@ -40,11 +40,18 @@ coo_draw(out.6, lty=2, points=FALSE, col=NA)
 par(xpd=FALSE)
 }
 \seealso{
-Other plotting functions: \code{\link{coo_arrows}},
-  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
-  \code{\link{coo_ruban}}, \code{\link{ldk_chull}},
-  \code{\link{ldk_confell}}, \code{\link{ldk_contour}},
-  \code{\link{ldk_labels}}, \code{\link{ldk_links}},
-  \code{\link{plot_table}}
+Other plotting functions: 
+\code{\link{coo_arrows}()},
+\code{\link{coo_draw}()},
+\code{\link{coo_listpanel}()},
+\code{\link{coo_lolli}()},
+\code{\link{coo_plot}()},
+\code{\link{coo_ruban}()},
+\code{\link{ldk_chull}()},
+\code{\link{ldk_confell}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()},
+\code{\link{plot_table}()}
 }
+\concept{plotting functions}

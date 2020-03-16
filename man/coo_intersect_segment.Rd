@@ -7,7 +7,7 @@
 coo_intersect_segment(coo, seg, center = TRUE)
 }
 \arguments{
-\item{coo}{\code{matrix} of \code{(x; y)} coordinates or any \link{Coo} object.}
+\item{coo}{\code{matrix} of \verb{(x; y)} coordinates or any \link{Coo} object.}
 
 \item{seg}{a 2x2 \code{matrix} defining the starting and ending points;
 or a list or a numeric of length 4.}
@@ -38,5 +38,7 @@ bot \%>\%
     coo_intersect_segment(matrix(c(0, 0, 1000, 1000), ncol=2, byrow=TRUE))
 }
 \seealso{
-Other coo_ intersect: \code{\link{coo_intersect_angle}}
+Other coo_ intersect: 
+\code{\link{coo_intersect_angle}()}
 }
+\concept{coo_ intersect}

@@ -27,5 +27,7 @@ op <- opoly(olea)
 boxplot(op)
 }
 \seealso{
-Other Coe_graphics: \code{\link{hcontrib}}
+Other Coe_graphics: 
+\code{\link{hcontrib}()}
 }
+\concept{Coe_graphics}

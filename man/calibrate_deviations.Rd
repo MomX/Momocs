@@ -13,33 +13,82 @@
 \usage{
 calibrate_deviations()
 
-calibrate_deviations_efourier(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
+calibrate_deviations_efourier(
+  x,
+  id = 1,
+  range,
+  norm.centsize = TRUE,
+  dist.method = edm_nearest,
+  interpolate.factor = 1,
+  dist.nbpts = 120,
+  plot = TRUE
+)
 
-calibrate_deviations_tfourier(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
+calibrate_deviations_tfourier(
+  x,
+  id = 1,
+  range,
+  norm.centsize = TRUE,
+  dist.method = edm_nearest,
+  interpolate.factor = 1,
+  dist.nbpts = 120,
+  plot = TRUE
+)
 
-calibrate_deviations_rfourier(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
+calibrate_deviations_rfourier(
+  x,
+  id = 1,
+  range,
+  norm.centsize = TRUE,
+  dist.method = edm_nearest,
+  interpolate.factor = 1,
+  dist.nbpts = 120,
+  plot = TRUE
+)
 
-calibrate_deviations_sfourier(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
+calibrate_deviations_sfourier(
+  x,
+  id = 1,
+  range,
+  norm.centsize = TRUE,
+  dist.method = edm_nearest,
+  interpolate.factor = 1,
+  dist.nbpts = 120,
+  plot = TRUE
+)
 
-calibrate_deviations_npoly(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
+calibrate_deviations_npoly(
+  x,
+  id = 1,
+  range,
+  norm.centsize = TRUE,
+  dist.method = edm_nearest,
+  interpolate.factor = 1,
+  dist.nbpts = 120,
+  plot = TRUE
+)
 
-calibrate_deviations_opoly(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
+calibrate_deviations_opoly(
+  x,
+  id = 1,
+  range,
+  norm.centsize = TRUE,
+  dist.method = edm_nearest,
+  interpolate.factor = 1,
+  dist.nbpts = 120,
+  plot = TRUE
+)
 
-calibrate_deviations_dfourier(x, id = 1, range, norm.centsize = TRUE,
-  dist.method = edm_nearest, interpolate.factor = 1, dist.nbpts = 120,
-  plot = TRUE)
+calibrate_deviations_dfourier(
+  x,
+  id = 1,
+  range,
+  norm.centsize = TRUE,
+  dist.method = edm_nearest,
+  interpolate.factor = 1,
+  dist.nbpts = 120,
+  plot = TRUE
+)
 }
 \arguments{
 \item{x}{and \code{Out} or \code{Opn} object on which to calibrate_deviations}
@@ -47,7 +96,7 @@ calibrate_deviations_dfourier(x, id = 1, range, norm.centsize = TRUE,
 \item{id}{the shape on which to perform calibrate_deviations}
 
 \item{range}{vector of harmonics (or degree for opoly and npoly on Opn) on which to perform calibrate_deviations.
-If not provided, the harmonics corresponding to 0.9, 0.95 and 0.99% of harmonic power
+If not provided, the harmonics corresponding to 0.9, 0.95 and 0.99\% of harmonic power
 are used.}
 
 \item{norm.centsize}{logical whether to normalize deviation by the centroid size}
@@ -101,7 +150,9 @@ o5 \%>\% calibrate_deviations_dfourier()
 
 }
 \seealso{
-Other calibration: \code{\link{calibrate_harmonicpower}},
-  \code{\link{calibrate_r2}},
-  \code{\link{calibrate_reconstructions}}
+Other calibration: 
+\code{\link{calibrate_harmonicpower}()},
+\code{\link{calibrate_r2}()},
+\code{\link{calibrate_reconstructions}()}
 }
+\concept{calibration}

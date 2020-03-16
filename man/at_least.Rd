@@ -26,14 +26,24 @@ at_least(trilo, "onto", 16)
 at_least(trilo, "onto", 2000) # too ambitious !
 }
 \seealso{
-Other handling functions: \code{\link{arrange}},
-  \code{\link{chop}}, \code{\link{combine}},
-  \code{\link{dissolve}}, \code{\link{fac_dispatcher}},
-  \code{\link{filter}}, \code{\link{mutate}},
-  \code{\link{rename}}, \code{\link{rescale}},
-  \code{\link{rm_harm}}, \code{\link{rm_missing}},
-  \code{\link{rm_uncomplete}}, \code{\link{rw_fac}},
-  \code{\link{sample_frac}}, \code{\link{sample_n}},
-  \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subsetize}}
+Other handling functions: 
+\code{\link{arrange}()},
+\code{\link{chop}()},
+\code{\link{combine}()},
+\code{\link{dissolve}()},
+\code{\link{fac_dispatcher}()},
+\code{\link{filter}()},
+\code{\link{mutate}()},
+\code{\link{rename}()},
+\code{\link{rescale}()},
+\code{\link{rm_harm}()},
+\code{\link{rm_missing}()},
+\code{\link{rm_uncomplete}()},
+\code{\link{rw_fac}()},
+\code{\link{sample_frac}()},
+\code{\link{sample_n}()},
+\code{\link{select}()},
+\code{\link{slice}()},
+\code{\link{subsetize}()}
 }
+\concept{handling functions}

@@ -21,14 +21,29 @@ calibrate_reconstructions_tfourier(x, id, range = 1:9)
 
 calibrate_reconstructions_sfourier(x, id, range = 1:9)
 
-calibrate_reconstructions_npoly(x, id, range = 2:10, baseline1 = c(-1, 0),
-  baseline2 = c(1, 0))
+calibrate_reconstructions_npoly(
+  x,
+  id,
+  range = 2:10,
+  baseline1 = c(-1, 0),
+  baseline2 = c(1, 0)
+)
 
-calibrate_reconstructions_opoly(x, id, range = 2:10, baseline1 = c(-1, 0),
-  baseline2 = c(1, 0))
+calibrate_reconstructions_opoly(
+  x,
+  id,
+  range = 2:10,
+  baseline1 = c(-1, 0),
+  baseline2 = c(1, 0)
+)
 
-calibrate_reconstructions_dfourier(x, id, range = 2:10, baseline1 = c(-1,
-  0), baseline2 = c(1, 0))
+calibrate_reconstructions_dfourier(
+  x,
+  id,
+  range = 2:10,
+  baseline1 = c(-1, 0),
+  baseline2 = c(1, 0)
+)
 }
 \arguments{
 \item{x}{the \code{Coo} object on which to calibrate_reconstructions}
@@ -81,7 +96,9 @@ olea \%>\%
 
 }
 \seealso{
-Other calibration: \code{\link{calibrate_deviations}},
-  \code{\link{calibrate_harmonicpower}},
-  \code{\link{calibrate_r2}}
+Other calibration: 
+\code{\link{calibrate_deviations}()},
+\code{\link{calibrate_harmonicpower}()},
+\code{\link{calibrate_r2}()}
 }
+\concept{calibration}

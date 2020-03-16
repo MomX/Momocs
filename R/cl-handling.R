@@ -116,7 +116,6 @@ subsetize <- function(x, subset, ...){
   UseMethod("subsetize")
 }
 
-#' @rdname subset
 #' @export
 subsetize.Coo <- function(x, subset, ...) {
   Coo <- x
@@ -141,7 +140,6 @@ subsetize.Coo <- function(x, subset, ...) {
   return(Coo2)
 }
 
-#' @rdname subset
 #' @export
 subsetize.Coe <- function(x, subset, ...) {
   Coe <- x
@@ -163,7 +161,6 @@ subsetize.Coe <- function(x, subset, ...) {
   return(Coe2)
 }
 
-#' @rdname subset
 #' @export
 subsetize.PCA <- function(x, subset, ...){
   PCA <- x
@@ -180,8 +177,6 @@ subsetize.PCA <- function(x, subset, ...){
   }
   return(PCA2)
 }
-
-
 
 # select -------------------------------
 #' Select columns by name

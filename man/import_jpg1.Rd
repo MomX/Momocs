@@ -4,8 +4,12 @@
 \alias{import_jpg1}
 \title{Extract outline coordinates from a single .jpg file}
 \usage{
-import_jpg1(jpg.path, auto.notcentered = TRUE, fun.notcentered = NULL,
-  threshold = 0.5)
+import_jpg1(
+  jpg.path,
+  auto.notcentered = TRUE,
+  fun.notcentered = NULL,
+  threshold = 0.5
+)
 }
 \arguments{
 \item{jpg.path}{vector of paths corresponding to the .jpg files to import, such as
@@ -68,8 +72,12 @@ will be fully operationnal.
 \link{import_jpg}, \link{import_Conte}, \link{import_txt}, \link{lf_structure}.
 See also Momocs' vignettes for data import.
 
-Other import functions: \code{\link{import_Conte}},
-  \code{\link{import_StereoMorph_curve1}},
-  \code{\link{import_jpg}}, \code{\link{import_tps}},
-  \code{\link{import_txt}}, \code{\link{pix2chc}}
+Other import functions: 
+\code{\link{import_Conte}()},
+\code{\link{import_StereoMorph_curve1}()},
+\code{\link{import_jpg}()},
+\code{\link{import_tps}()},
+\code{\link{import_txt}()},
+\code{\link{pix2chc}()}
 }
+\concept{import functions}

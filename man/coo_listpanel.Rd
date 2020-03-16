@@ -4,9 +4,20 @@
 \alias{coo_listpanel}
 \title{Plots sets of shapes.}
 \usage{
-coo_listpanel(coo.list, dim, byrow = TRUE, fromtop = TRUE, cols, borders,
-  poly = TRUE, points = FALSE, points.pch = 3, points.cex = 0.2,
-  points.col = "#333333", ...)
+coo_listpanel(
+  coo.list,
+  dim,
+  byrow = TRUE,
+  fromtop = TRUE,
+  cols,
+  borders,
+  poly = TRUE,
+  points = FALSE,
+  points.pch = 3,
+  points.cex = 0.2,
+  points.col = "#333333",
+  ...
+)
 }
 \arguments{
 \item{coo.list}{A \code{list} of coordinates}
@@ -50,11 +61,18 @@ according to a factor, use \link{arrange}.
 coo_listpanel(bot$coo) # equivalent to panel(bot)
 }
 \seealso{
-Other plotting functions: \code{\link{coo_arrows}},
-  \code{\link{coo_draw}}, \code{\link{coo_lolli}},
-  \code{\link{coo_plot}}, \code{\link{coo_ruban}},
-  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}, \code{\link{plot_devsegments}},
-  \code{\link{plot_table}}
+Other plotting functions: 
+\code{\link{coo_arrows}()},
+\code{\link{coo_draw}()},
+\code{\link{coo_lolli}()},
+\code{\link{coo_plot}()},
+\code{\link{coo_ruban}()},
+\code{\link{ldk_chull}()},
+\code{\link{ldk_confell}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()},
+\code{\link{plot_devsegments}()},
+\code{\link{plot_table}()}
 }
+\concept{plotting functions}

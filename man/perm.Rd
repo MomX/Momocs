@@ -40,5 +40,7 @@ bot.m <- perm(bot.f, 80)
 bot.m
 }
 \seealso{
-Other farming: \code{\link{breed}}
+Other farming: 
+\code{\link{breed}()}
 }
+\concept{farming}

@@ -64,10 +64,16 @@ widths <- sapply(k_range, function(k) KMEDOIDS(bot_f, k=k)$silinfo$avg.width)
 plot(k_range, widths, type="b")
 }
 \seealso{
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{LDA}},
-  \code{\link{MANOVA_PW}}, \code{\link{MANOVA}},
-  \code{\link{MDS}}, \code{\link{MSHAPES}},
-  \code{\link{NMDS}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEANS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{MSHAPES}()},
+\code{\link{NMDS}()},
+\code{\link{PCA}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

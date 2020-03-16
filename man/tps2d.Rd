@@ -45,7 +45,10 @@ tps_apply(leaf1, leaf2, leaf1) \%>\% coo_draw(bor="purple")
 
 }
 \seealso{
-Other thin plate splines: \code{\link{tps_arr}},
-  \code{\link{tps_grid}}, \code{\link{tps_iso}},
-  \code{\link{tps_raw}}
+Other thin plate splines: 
+\code{\link{tps_arr}()},
+\code{\link{tps_grid}()},
+\code{\link{tps_iso}()},
+\code{\link{tps_raw}()}
 }
+\concept{thin plate splines}

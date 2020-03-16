@@ -4,12 +4,28 @@
 \alias{plot_LDA}
 \title{LDA plot using grindr layers}
 \usage{
-plot_LDA(x, axes = c(1, 2), palette = pal_qual, points = TRUE,
-  points_transp = 1/4, morphospace = FALSE,
-  morphospace_position = "range", chull = TRUE, chullfilled = FALSE,
-  labelgroups = FALSE, legend = TRUE, title = "", center_origin = TRUE,
-  zoom = 0.9, eigen = TRUE, box = TRUE, iftwo_layer = layer_histogram_2,
-  iftwo_split = FALSE, axesnames = TRUE, axesvar = TRUE)
+plot_LDA(
+  x,
+  axes = c(1, 2),
+  palette = pal_qual,
+  points = TRUE,
+  points_transp = 1/4,
+  morphospace = FALSE,
+  morphospace_position = "range",
+  chull = TRUE,
+  chullfilled = FALSE,
+  labelgroups = FALSE,
+  legend = TRUE,
+  title = "",
+  center_origin = TRUE,
+  zoom = 0.9,
+  eigen = TRUE,
+  box = TRUE,
+  iftwo_layer = layer_histogram_2,
+  iftwo_split = FALSE,
+  axesnames = TRUE,
+  axesvar = TRUE
+)
 }
 \arguments{
 \item{x}{\link{LDA} object}
@@ -114,9 +130,14 @@ bl \%>\% plot_LDA \%>\% layer_morphospace_LDA
 # You get the idea.
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layers_morphospace}}, \code{\link{layers}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_NMDS}},
-  \code{\link{plot_PCA}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers_morphospace}},
+\code{\link{layers}},
+\code{\link{mosaic_engine}()},
+\code{\link{papers}},
+\code{\link{pile}()},
+\code{\link{plot_NMDS}()},
+\code{\link{plot_PCA}()}
 }
+\concept{grindr}

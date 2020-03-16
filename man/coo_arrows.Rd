@@ -25,11 +25,18 @@ coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 title("Hi there !")
 }
 \seealso{
-Other plotting functions: \code{\link{coo_draw}},
-  \code{\link{coo_listpanel}}, \code{\link{coo_lolli}},
-  \code{\link{coo_plot}}, \code{\link{coo_ruban}},
-  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}, \code{\link{plot_devsegments}},
-  \code{\link{plot_table}}
+Other plotting functions: 
+\code{\link{coo_draw}()},
+\code{\link{coo_listpanel}()},
+\code{\link{coo_lolli}()},
+\code{\link{coo_plot}()},
+\code{\link{coo_ruban}()},
+\code{\link{ldk_chull}()},
+\code{\link{ldk_confell}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()},
+\code{\link{plot_devsegments}()},
+\code{\link{plot_table}()}
 }
+\concept{plotting functions}

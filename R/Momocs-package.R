@@ -88,7 +88,11 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
 # welcome message
 .onAttach <- function(lib, pkg) {
   packageStartupMessage('This is Momocs ',
-                        utils::packageDescription('Momocs', field='Version'),
+                        utils::packageDescription('Momocs', field='Version'), "\n",
+                        "~~~ \n",
+                        "Now retired no longer maintained.\n",
+                        "Switch to version >2.0: https://github.com/MomX/Momocs \n",
+                        "See you there ;-)",
                         appendLF = TRUE)
 }
 

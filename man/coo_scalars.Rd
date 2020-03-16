@@ -25,22 +25,29 @@ by default.
 \examples{
 
 df <- bot \%>\% coo_scalars() # pass bot \%>\% coo_scalars(TRUE) if you want rectilinearity
-colnames(df) \%>\% cat(sep="\\n") # all scalars used
+colnames(df) \%>\% cat(sep="\n") # all scalars used
 
 # a PCA on all these descriptors
 TraCoe(coo_scalars(bot), fac=bot$fac) \%>\% PCA \%>\% plot_PCA(~type)
 
 }
 \seealso{
-Other coo_ descriptors: \code{\link{coo_angle_edges}},
-  \code{\link{coo_angle_tangent}}, \code{\link{coo_area}},
-  \code{\link{coo_boundingbox}}, \code{\link{coo_chull}},
-  \code{\link{coo_circularity}},
-  \code{\link{coo_convexity}},
-  \code{\link{coo_eccentricity}},
-  \code{\link{coo_elongation}}, \code{\link{coo_length}},
-  \code{\link{coo_lw}}, \code{\link{coo_rectangularity}},
-  \code{\link{coo_rectilinearity}},
-  \code{\link{coo_solidity}}, \code{\link{coo_tac}},
-  \code{\link{coo_width}}
+Other coo_ descriptors: 
+\code{\link{coo_angle_edges}()},
+\code{\link{coo_angle_tangent}()},
+\code{\link{coo_area}()},
+\code{\link{coo_boundingbox}()},
+\code{\link{coo_chull}()},
+\code{\link{coo_circularity}()},
+\code{\link{coo_convexity}()},
+\code{\link{coo_eccentricity}},
+\code{\link{coo_elongation}()},
+\code{\link{coo_length}()},
+\code{\link{coo_lw}()},
+\code{\link{coo_rectangularity}()},
+\code{\link{coo_rectilinearity}()},
+\code{\link{coo_solidity}()},
+\code{\link{coo_tac}()},
+\code{\link{coo_width}()}
 }
+\concept{coo_ descriptors}

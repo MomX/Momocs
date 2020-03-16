@@ -4,8 +4,14 @@
 \alias{ldk_confell}
 \title{Draws confidence ellipses for landmark positions}
 \usage{
-ldk_confell(ldk, conf = 0.5, col = "grey40", ell.lty = 1, ax = TRUE,
-  ax.lty = 2)
+ldk_confell(
+  ldk,
+  conf = 0.5,
+  col = "grey40",
+  ell.lty = 1,
+  ax = TRUE,
+  ax.lty = 2
+)
 }
 \arguments{
 \item{ldk}{an array (or a list) of landmarks}
@@ -28,15 +34,25 @@ coo_plot(MSHAPES(wings))
 ldk_confell(wings$coo)
 }
 \seealso{
-Other plotting functions: \code{\link{coo_arrows}},
-  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_lolli}}, \code{\link{coo_plot}},
-  \code{\link{coo_ruban}}, \code{\link{ldk_chull}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}, \code{\link{plot_devsegments}},
-  \code{\link{plot_table}}
+Other plotting functions: 
+\code{\link{coo_arrows}()},
+\code{\link{coo_draw}()},
+\code{\link{coo_listpanel}()},
+\code{\link{coo_lolli}()},
+\code{\link{coo_plot}()},
+\code{\link{coo_ruban}()},
+\code{\link{ldk_chull}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()},
+\code{\link{plot_devsegments}()},
+\code{\link{plot_table}()}
 
-Other ldk plotters: \code{\link{ldk_chull}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}
+Other ldk plotters: 
+\code{\link{ldk_chull}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()}
 }
+\concept{ldk plotters}
+\concept{plotting functions}

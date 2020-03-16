@@ -35,8 +35,12 @@ bot2$ldk
 }
 }
 \seealso{
-Other ldk/slidings methods: \code{\link{add_ldk}},
-  \code{\link{def_slidings}}, \code{\link{get_ldk}},
-  \code{\link{get_slidings}}, \code{\link{rearrange_ldk}},
-  \code{\link{slidings_scheme}}
+Other ldk/slidings methods: 
+\code{\link{add_ldk}()},
+\code{\link{def_slidings}()},
+\code{\link{get_ldk}()},
+\code{\link{get_slidings}()},
+\code{\link{rearrange_ldk}()},
+\code{\link{slidings_scheme}()}
 }
+\concept{ldk/slidings methods}

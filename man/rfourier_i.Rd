@@ -46,6 +46,8 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-Other rfourier: \code{\link{rfourier_shape}},
-  \code{\link{rfourier}}
+Other rfourier: 
+\code{\link{rfourier_shape}()},
+\code{\link{rfourier}()}
 }
+\concept{rfourier}

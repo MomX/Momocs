@@ -4,26 +4,74 @@
 \alias{plot.LDA}
 \title{Plots Linear Discriminant Analysis}
 \usage{
-\method{plot}{LDA}(x, fac = x$fac, xax = 1, yax = 2, points = TRUE,
-  col = "#000000", pch = 20, cex = 0.5, palette = col_solarized,
-  center.origin = FALSE, zoom = 1, xlim = NULL, ylim = NULL,
-  bg = par("bg"), grid = TRUE, nb.grids = 3, morphospace = FALSE,
+\method{plot}{LDA}(
+  x,
+  fac = x$fac,
+  xax = 1,
+  yax = 2,
+  points = TRUE,
+  col = "#000000",
+  pch = 20,
+  cex = 0.5,
+  palette = col_solarized,
+  center.origin = FALSE,
+  zoom = 1,
+  xlim = NULL,
+  ylim = NULL,
+  bg = par("bg"),
+  grid = TRUE,
+  nb.grids = 3,
+  morphospace = FALSE,
   pos.shp = c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
-  amp.shp = 1, size.shp = 1, nb.shp = 12, nr.shp = 6, nc.shp = 5,
-  rotate.shp = 0, flipx.shp = FALSE, flipy.shp = FALSE, pts.shp = 60,
-  border.shp = col_alpha("#000000", 0.5), lwd.shp = 1,
-  col.shp = col_alpha("#000000", 0.95), stars = FALSE, ellipses = FALSE,
-  conf.ellipses = 0.5, ellipsesax = TRUE, conf.ellipsesax = c(0.5, 0.9),
-  lty.ellipsesax = 1, lwd.ellipsesax = sqrt(2), chull = FALSE,
-  chull.lty = 1, chull.filled = FALSE, chull.filled.alpha = 0.92,
-  density = FALSE, lev.density = 20, contour = FALSE, lev.contour = 3,
-  n.kde2d = 100, delaunay = FALSE, loadings = FALSE,
-  labelspoints = FALSE, col.labelspoints = par("fg"),
-  cex.labelspoints = 0.6, abbreviate.labelspoints = TRUE,
-  labelsgroups = TRUE, cex.labelsgroups = 0.8, rect.labelsgroups = FALSE,
-  abbreviate.labelsgroups = FALSE, color.legend = FALSE, axisnames = TRUE,
-  axisvar = TRUE, unit = FALSE, eigen = TRUE, rug = TRUE,
-  title = substitute(x), box = TRUE, old.par = TRUE, ...)
+  amp.shp = 1,
+  size.shp = 1,
+  nb.shp = 12,
+  nr.shp = 6,
+  nc.shp = 5,
+  rotate.shp = 0,
+  flipx.shp = FALSE,
+  flipy.shp = FALSE,
+  pts.shp = 60,
+  border.shp = col_alpha("#000000", 0.5),
+  lwd.shp = 1,
+  col.shp = col_alpha("#000000", 0.95),
+  stars = FALSE,
+  ellipses = FALSE,
+  conf.ellipses = 0.5,
+  ellipsesax = TRUE,
+  conf.ellipsesax = c(0.5, 0.9),
+  lty.ellipsesax = 1,
+  lwd.ellipsesax = sqrt(2),
+  chull = FALSE,
+  chull.lty = 1,
+  chull.filled = FALSE,
+  chull.filled.alpha = 0.92,
+  density = FALSE,
+  lev.density = 20,
+  contour = FALSE,
+  lev.contour = 3,
+  n.kde2d = 100,
+  delaunay = FALSE,
+  loadings = FALSE,
+  labelspoints = FALSE,
+  col.labelspoints = par("fg"),
+  cex.labelspoints = 0.6,
+  abbreviate.labelspoints = TRUE,
+  labelsgroups = TRUE,
+  cex.labelsgroups = 0.8,
+  rect.labelsgroups = FALSE,
+  abbreviate.labelsgroups = FALSE,
+  color.legend = FALSE,
+  axisnames = TRUE,
+  axisvar = TRUE,
+  unit = FALSE,
+  eigen = TRUE,
+  rug = TRUE,
+  title = substitute(x),
+  box = TRUE,
+  old.par = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class "LDA", typically obtained with \link{LDA}}
@@ -172,7 +220,7 @@ Widely inspired by the "layers" philosophy behind graphical functions
 of the ade4 R package.
 }
 \note{
-Morphospaces are deprecated so far. 99% of the code
+Morphospaces are deprecated so far. 99\% of the code
 is shared with \link{plot.PCA} waiting for a general rewriting of a multivariate plotter.
 See https://github.com/vbonhomme/Momocs/issues/121
 }

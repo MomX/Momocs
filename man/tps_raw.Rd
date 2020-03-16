@@ -43,7 +43,10 @@ for (i in 1:g$dim[2]) lines(g$grid[cols_ids + (i-1)*g$dim[1], ])
 }
 }
 \seealso{
-Other thin plate splines: \code{\link{tps2d}},
-  \code{\link{tps_arr}}, \code{\link{tps_grid}},
-  \code{\link{tps_iso}}
+Other thin plate splines: 
+\code{\link{tps2d}()},
+\code{\link{tps_arr}()},
+\code{\link{tps_grid}()},
+\code{\link{tps_iso}()}
 }
+\concept{thin plate splines}

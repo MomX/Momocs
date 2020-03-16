@@ -55,10 +55,16 @@ res$summary
 \seealso{
 \link{MANOVA}, \link{manova}.
 
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
-  \code{\link{LDA}}, \code{\link{MANOVA}},
-  \code{\link{MDS}}, \code{\link{MSHAPES}},
-  \code{\link{NMDS}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEANS}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA}()},
+\code{\link{MDS}()},
+\code{\link{MSHAPES}()},
+\code{\link{NMDS}()},
+\code{\link{PCA}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

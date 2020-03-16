@@ -12,14 +12,11 @@ def_ldk_angle(coo, angle)
 
 def_ldk_direction(coo, direction = c("down", "left", "up", "right")[4])
 
-\method{def_ldk_direction}{default}(coo, direction = c("down", "left", "up",
-  "right")[4])
+\method{def_ldk_direction}{default}(coo, direction = c("down", "left", "up", "right")[4])
 
-\method{def_ldk_direction}{Out}(coo, direction = c("down", "left", "up",
-  "right")[4])
+\method{def_ldk_direction}{Out}(coo, direction = c("down", "left", "up", "right")[4])
 
-\method{def_ldk_direction}{Opn}(coo, direction = c("down", "left", "up",
-  "right")[4])
+\method{def_ldk_direction}{Opn}(coo, direction = c("down", "left", "up", "right")[4])
 }
 \arguments{
 \item{coo}{a code{Out} or \code{Opn} object}

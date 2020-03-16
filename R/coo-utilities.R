@@ -2504,7 +2504,7 @@ coo_centsize <- function(coo){
 coo_centsize.default <- function(coo) {
   coo <- coo_check(coo)
   cp <- coo_centpos(coo)
-  mean(sqrt((coo[, 1] - cp[1])^2 + (coo[, 2] - cp[2])^2))
+  sqrt(mean((coo[, 1] - cp[1])^2 + (coo[, 2] - cp[2])^2))
 }
 
 #' @export

@@ -25,6 +25,9 @@ If a list is provided, checks that the number of landmarks is consistent.
 #coo_check(list(x=1:5, y=6:10))
 }
 \seealso{
-Other ldk helpers: \code{\link{def_links}},
-  \code{\link{links_all}}, \code{\link{links_delaunay}}
+Other ldk helpers: 
+\code{\link{def_links}()},
+\code{\link{links_all}()},
+\code{\link{links_delaunay}()}
 }
+\concept{ldk helpers}

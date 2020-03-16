@@ -5,7 +5,6 @@
 \alias{pal_alpha}
 \alias{pal}
 \alias{palette}
-\alias{palettes}
 \alias{pal_manual}
 \alias{pal_qual_solarized}
 \alias{pal_seq_grey}

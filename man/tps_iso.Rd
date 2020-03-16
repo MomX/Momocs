@@ -4,10 +4,26 @@
 \alias{tps_iso}
 \title{Deformation isolines using Thin Plate Splines.}
 \usage{
-tps_iso(fr, to, amp = 1, grid = FALSE, over = 1.2, palette = col_spring,
-  iso.nb = 1000, iso.levels = 12, cont = TRUE, cont.col = "black",
-  poly = TRUE, shp = TRUE, shp.border = col_qual(2), shp.lwd = c(2, 2),
-  shp.lty = c(1, 1), legend = TRUE, legend.text, ...)
+tps_iso(
+  fr,
+  to,
+  amp = 1,
+  grid = FALSE,
+  over = 1.2,
+  palette = col_spring,
+  iso.nb = 1000,
+  iso.levels = 12,
+  cont = TRUE,
+  cont.col = "black",
+  poly = TRUE,
+  shp = TRUE,
+  shp.border = col_qual(2),
+  shp.lwd = c(2, 2),
+  shp.lty = c(1, 1),
+  legend = TRUE,
+  legend.text,
+  ...
+)
 }
 \arguments{
 \item{fr}{The reference \eqn{(x; y)} coordinates}
@@ -68,7 +84,10 @@ tps_iso(fr, to, iso.nb=200, amp=3)
 tps_iso(fr, to, iso.nb=200, amp=3, grid=TRUE)
 }
 \seealso{
-Other thin plate splines: \code{\link{tps2d}},
-  \code{\link{tps_arr}}, \code{\link{tps_grid}},
-  \code{\link{tps_raw}}
+Other thin plate splines: 
+\code{\link{tps2d}()},
+\code{\link{tps_arr}()},
+\code{\link{tps_grid}()},
+\code{\link{tps_raw}()}
 }
+\concept{thin plate splines}

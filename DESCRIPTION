@@ -1,7 +1,7 @@
 Package: Momocs
 Title: Morphometrics using R
 Version: 1.3.0
-Date: 2018-10-22
+Date: 2020-03-16h
 Authors@R: c(
        person("Vincent", "Bonhomme", ,"bonhomme.vincent@gmail.com", c("aut", "cre")), 
        person("Julien", "Claude", , , c("aut"), comment = "core functions in base R"))
@@ -20,6 +20,5 @@ LazyData: true
 Imports: cluster, dendextend, dplyr, magrittr, geometry, geomorph, ggplot2, graphics, 
        grDevices, jpeg, MASS, progress, RColorBrewer, rgeos, sp, utils, vegan
 Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
-VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 7.0.2

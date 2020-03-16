@@ -22,9 +22,9 @@ when passed to Momocs objects. Intensively used (internally).
 \code{fac} can be:
 \itemize{
 \item a factor, passed on the fly
-\item a column id from \code{$fac}
+\item a column id from \verb{$fac}
 \item a column name from \code{fac}; if not found, return \code{NULL} with a message
-\item a formula in the form: \code{~column_name} (from \code{$fac}, no quotes).
+\item a formula in the form: \code{~column_name} (from \verb{$fac}, no quotes).
 It expresses more in a concise way. Also allows interacting on the fly. See examples.
 \item a \code{NULL} returns a \code{NULL}, with a message
 }
@@ -55,14 +55,24 @@ fac_dispatcher(42, NULL)
 fac_dispatcher(bot, "loser")
 }
 \seealso{
-Other handling functions: \code{\link{arrange}},
-  \code{\link{at_least}}, \code{\link{chop}},
-  \code{\link{combine}}, \code{\link{dissolve}},
-  \code{\link{filter}}, \code{\link{mutate}},
-  \code{\link{rename}}, \code{\link{rescale}},
-  \code{\link{rm_harm}}, \code{\link{rm_missing}},
-  \code{\link{rm_uncomplete}}, \code{\link{rw_fac}},
-  \code{\link{sample_frac}}, \code{\link{sample_n}},
-  \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subsetize}}
+Other handling functions: 
+\code{\link{arrange}()},
+\code{\link{at_least}()},
+\code{\link{chop}()},
+\code{\link{combine}()},
+\code{\link{dissolve}()},
+\code{\link{filter}()},
+\code{\link{mutate}()},
+\code{\link{rename}()},
+\code{\link{rescale}()},
+\code{\link{rm_harm}()},
+\code{\link{rm_missing}()},
+\code{\link{rm_uncomplete}()},
+\code{\link{rw_fac}()},
+\code{\link{sample_frac}()},
+\code{\link{sample_n}()},
+\code{\link{select}()},
+\code{\link{slice}()},
+\code{\link{subsetize}()}
 }
+\concept{handling functions}

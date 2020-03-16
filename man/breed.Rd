@@ -17,7 +17,7 @@ breed(x, ...)
 
 \item{...}{useless here}
 
-\item{fac}{a column, a formula or a column id from \code{$fac}}
+\item{fac}{a column, a formula or a column id from \verb{$fac}}
 
 \item{margin}{numeric whether 1 or 2 (rows or columns)}
 
@@ -46,5 +46,7 @@ bot.m \%>\% PCA \%>\% plot
 # bot.f \%>\%  breed(~type, size=50) \%>\% PCA \%>\% plot(~type)
 }
 \seealso{
-Other farming: \code{\link{perm}}
+Other farming: 
+\code{\link{perm}()}
 }
+\concept{farming}

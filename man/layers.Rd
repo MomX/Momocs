@@ -57,14 +57,35 @@ layer_stars(x, alpha = 0.5, ...)
 
 layer_delaunay(x, ...)
 
-layer_density(x, levels_density = 20, levels_contour = 4, alpha = 1/3,
-  n = 200, density = TRUE, contour = TRUE)
+layer_density(
+  x,
+  levels_density = 20,
+  levels_contour = 4,
+  alpha = 1/3,
+  n = 200,
+  density = TRUE,
+  contour = TRUE
+)
 
-layer_labelpoints(x, col = par("fg"), cex = 2/3, font = 1,
-  abbreviate = FALSE, ...)
+layer_labelpoints(
+  x,
+  col = par("fg"),
+  cex = 2/3,
+  font = 1,
+  abbreviate = FALSE,
+  ...
+)
 
-layer_labelgroups(x, col = par("fg"), cex = 3/4, font = 2, rect = TRUE,
-  alpha = 1/4, abbreviate = FALSE, ...)
+layer_labelgroups(
+  x,
+  col = par("fg"),
+  cex = 3/4,
+  font = 2,
+  rect = TRUE,
+  alpha = 1/4,
+  abbreviate = FALSE,
+  ...
+)
 
 layer_rug(x, size = 1/200, ...)
 
@@ -129,7 +150,7 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 
 \item{size}{\code{numeric} as a fraction of graphical window (default: \code{1/200})}
 
-\item{freq}{\code{logical}to feed\code{[hist] (default:}FALSE`)}
+\item{freq}{\code{logical}to feed\verb{[hist] (default:}FALSE`)}
 
 \item{breaks}{to feed \link{hist} (default: calculated on the pooled values)}
 
@@ -155,9 +176,14 @@ mutivariate plots using the cheapbabi approach. See examples.
 \seealso{
 grindr_drawers
 
-Other grindr: \code{\link{drawers}},
-  \code{\link{layers_morphospace}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_LDA}},
-  \code{\link{plot_NMDS}}, \code{\link{plot_PCA}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers_morphospace}},
+\code{\link{mosaic_engine}()},
+\code{\link{papers}},
+\code{\link{pile}()},
+\code{\link{plot_LDA}()},
+\code{\link{plot_NMDS}()},
+\code{\link{plot_PCA}()}
 }
+\concept{grindr}

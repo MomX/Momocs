@@ -61,7 +61,7 @@ is_links(x)
 \description{
 Class testers test if any of the classes of an object \emph{is} of a given class. For instance
 \code{is_PCA} on a \link{PCA} object (of classes \code{PCA} and \code{prcomp}) will return \code{TRUE}.
-Component testers check if \emph{there_is} a particular component (eg \code{$fac}, etc.) in an object.
+Component testers check if \emph{there_is} a particular component (eg \verb{$fac}, etc.) in an object.
 }
 \examples{
 is_Coo(bot)

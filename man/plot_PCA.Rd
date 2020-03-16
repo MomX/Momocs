@@ -4,12 +4,28 @@
 \alias{plot_PCA}
 \title{PCA plot using grindr layers}
 \usage{
-plot_PCA(x, f = NULL, axes = c(1, 2), palette = NULL, points = TRUE,
-  points_transp = 1/4, morphospace = TRUE, morphospace_position = "range",
-  chull = TRUE, chullfilled = FALSE, labelpoints = FALSE,
-  labelgroups = FALSE, legend = TRUE, title = "", center_origin = TRUE,
-  zoom = 0.9, eigen = TRUE, box = TRUE, axesnames = TRUE,
-  axesvar = TRUE)
+plot_PCA(
+  x,
+  f = NULL,
+  axes = c(1, 2),
+  palette = NULL,
+  points = TRUE,
+  points_transp = 1/4,
+  morphospace = TRUE,
+  morphospace_position = "range",
+  chull = TRUE,
+  chullfilled = FALSE,
+  labelpoints = FALSE,
+  labelgroups = FALSE,
+  legend = TRUE,
+  title = "",
+  center_origin = TRUE,
+  zoom = 0.9,
+  eigen = TRUE,
+  box = TRUE,
+  axesnames = TRUE,
+  axesvar = TRUE
+)
 }
 \arguments{
 \item{x}{a \link{PCA} object}
@@ -115,9 +131,14 @@ op \%>\% my_plot(~var, axes=c(1, 3)) \%>\%
 # You get the idea.
 }
 \seealso{
-Other grindr: \code{\link{drawers}},
-  \code{\link{layers_morphospace}}, \code{\link{layers}},
-  \code{\link{mosaic_engine}}, \code{\link{papers}},
-  \code{\link{pile}}, \code{\link{plot_LDA}},
-  \code{\link{plot_NMDS}}
+Other grindr: 
+\code{\link{drawers}},
+\code{\link{layers_morphospace}},
+\code{\link{layers}},
+\code{\link{mosaic_engine}()},
+\code{\link{papers}},
+\code{\link{pile}()},
+\code{\link{plot_LDA}()},
+\code{\link{plot_NMDS}()}
 }
+\concept{grindr}

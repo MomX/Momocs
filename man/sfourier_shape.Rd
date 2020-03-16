@@ -56,6 +56,8 @@ Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in the mandib
 of \emph{Apodemus} wood mice. \emph{J Biogeogr} 30:1617-1628.
 }
 \seealso{
-Other sfourier: \code{\link{sfourier_i}},
-  \code{\link{sfourier}}
+Other sfourier: 
+\code{\link{sfourier_i}()},
+\code{\link{sfourier}()}
 }
+\concept{sfourier}

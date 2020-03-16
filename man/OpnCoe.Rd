@@ -4,9 +4,15 @@
 \alias{OpnCoe}
 \title{Builds an OpnCoe object}
 \usage{
-OpnCoe(coe = matrix(), fac = dplyr::data_frame(), method = character(),
-  baseline1 = numeric(), baseline2 = numeric(), mod = list(),
-  r2 = numeric())
+OpnCoe(
+  coe = matrix(),
+  fac = dplyr::data_frame(),
+  method = character(),
+  baseline1 = numeric(),
+  baseline2 = numeric(),
+  mod = list(),
+  r2 = numeric()
+)
 }
 \arguments{
 \item{coe}{\code{matrix} of morphometric coefficients}
@@ -39,7 +45,12 @@ and specific methods can be applied.
 methods(class='OpnCoe')
 }
 \seealso{
-Other classes: \code{\link{Coe}}, \code{\link{Coo}},
-  \code{\link{Opn}}, \code{\link{OutCoe}},
-  \code{\link{Out}}, \code{\link{TraCoe}}
+Other classes: 
+\code{\link{Coe}()},
+\code{\link{Coo}()},
+\code{\link{Opn}()},
+\code{\link{OutCoe}()},
+\code{\link{Out}()},
+\code{\link{TraCoe}()}
 }
+\concept{classes}

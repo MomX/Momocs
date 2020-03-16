@@ -4,9 +4,14 @@
 \alias{morphospace_positions}
 \title{Calculates nice positions on a plane for drawing shapes}
 \usage{
-morphospace_positions(xy, pos.shp = c("range", "full", "circle", "xy",
-  "range_axes", "full_axes")[1], nb.shp = 12, nr.shp = 6, nc.shp = 5,
-  circle.r.shp)
+morphospace_positions(
+  xy,
+  pos.shp = c("range", "full", "circle", "xy", "range_axes", "full_axes")[1],
+  nb.shp = 12,
+  nr.shp = 6,
+  nc.shp = 5,
+  circle.r.shp
+)
 }
 \arguments{
 \item{xy}{a matrix of points typically from a PCA or other multivariate method on

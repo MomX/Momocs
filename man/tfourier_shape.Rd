@@ -4,8 +4,7 @@
 \alias{tfourier_shape}
 \title{Calculates and draws 'tfourier' shapes.}
 \usage{
-tfourier_shape(an, bn, ao = 0, nb.h, nb.pts = 80, alpha = 2,
-  plot = TRUE)
+tfourier_shape(an, bn, ao = 0, nb.h, nb.pts = 80, alpha = 2, plot = TRUE)
 }
 \arguments{
 \item{an}{\code{numeric}. The \eqn{a_n} Fourier coefficients on which to
@@ -47,6 +46,8 @@ Claude, J. (2008) \emph{Morphometrics with R}, Use R! series,
 Springer 316 pp.
 }
 \seealso{
-Other tfourier: \code{\link{tfourier_i}},
-  \code{\link{tfourier}}
+Other tfourier: 
+\code{\link{tfourier_i}()},
+\code{\link{tfourier}()}
 }
+\concept{tfourier}

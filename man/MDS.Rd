@@ -16,7 +16,7 @@ MDS(x, method = "euclidean", k = 2, ...)
 \item{...}{additional parameters to feed \link[stats:cmdscale]{stats::cmdscale}}
 }
 \value{
-what is returned by \link[stats:dist]{stats::dist} plus \code{$fac}. And prepend \code{MDS} class to it.
+what is returned by \link[stats:dist]{stats::dist} plus \verb{$fac}. And prepend \code{MDS} class to it.
 }
 \description{
 A wrapper around \link[stats:cmdscale]{stats::cmdscale}.
@@ -31,10 +31,16 @@ x
 
 }
 \seealso{
-Other multivariate: \code{\link{CLUST}},
-  \code{\link{KMEANS}}, \code{\link{KMEDOIDS}},
-  \code{\link{LDA}}, \code{\link{MANOVA_PW}},
-  \code{\link{MANOVA}}, \code{\link{MSHAPES}},
-  \code{\link{NMDS}}, \code{\link{PCA}},
-  \code{\link{classification_metrics}}
+Other multivariate: 
+\code{\link{CLUST}()},
+\code{\link{KMEANS}()},
+\code{\link{KMEDOIDS}()},
+\code{\link{LDA}()},
+\code{\link{MANOVA_PW}()},
+\code{\link{MANOVA}()},
+\code{\link{MSHAPES}()},
+\code{\link{NMDS}()},
+\code{\link{PCA}()},
+\code{\link{classification_metrics}()}
 }
+\concept{multivariate}

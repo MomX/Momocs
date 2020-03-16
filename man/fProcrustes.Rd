@@ -28,6 +28,9 @@ Directly borrowed from Claude (2008), called there the \code{fPsup} function.
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 }
 \seealso{
-Other procrustes functions: \code{\link{fgProcrustes}},
-  \code{\link{fgsProcrustes}}, \code{\link{pProcrustes}}
+Other procrustes functions: 
+\code{\link{fgProcrustes}()},
+\code{\link{fgsProcrustes}()},
+\code{\link{pProcrustes}()}
 }
+\concept{procrustes functions}

@@ -5,10 +5,28 @@
 \alias{ldk_plot}
 \title{Plots a single shape}
 \usage{
-coo_plot(coo, xlim, ylim, border = "#333333", col = NA, lwd = 1,
-  lty = 1, points = FALSE, first.point = TRUE, cex.first.point = 0.5,
-  centroid = TRUE, xy.axis = TRUE, pch = 1, cex = 0.5, main = NA,
-  poly = TRUE, plot.new = TRUE, plot = TRUE, zoom = 1, ...)
+coo_plot(
+  coo,
+  xlim,
+  ylim,
+  border = "#333333",
+  col = NA,
+  lwd = 1,
+  lty = 1,
+  points = FALSE,
+  first.point = TRUE,
+  cex.first.point = 0.5,
+  centroid = TRUE,
+  xy.axis = TRUE,
+  pch = 1,
+  cex = 0.5,
+  main = NA,
+  poly = TRUE,
+  plot.new = TRUE,
+  plot = TRUE,
+  zoom = 1,
+  ...
+)
 
 ldk_plot(coo, ...)
 }
@@ -76,11 +94,18 @@ coo_plot(b, points=TRUE, pch=20)
 coo_plot(b, xy.axis=FALSE, lwd=2, col='#F2F2F2')
 }
 \seealso{
-Other plotting functions: \code{\link{coo_arrows}},
-  \code{\link{coo_draw}}, \code{\link{coo_listpanel}},
-  \code{\link{coo_lolli}}, \code{\link{coo_ruban}},
-  \code{\link{ldk_chull}}, \code{\link{ldk_confell}},
-  \code{\link{ldk_contour}}, \code{\link{ldk_labels}},
-  \code{\link{ldk_links}}, \code{\link{plot_devsegments}},
-  \code{\link{plot_table}}
+Other plotting functions: 
+\code{\link{coo_arrows}()},
+\code{\link{coo_draw}()},
+\code{\link{coo_listpanel}()},
+\code{\link{coo_lolli}()},
+\code{\link{coo_ruban}()},
+\code{\link{ldk_chull}()},
+\code{\link{ldk_confell}()},
+\code{\link{ldk_contour}()},
+\code{\link{ldk_labels}()},
+\code{\link{ldk_links}()},
+\code{\link{plot_devsegments}()},
+\code{\link{plot_table}()}
 }
+\concept{plotting functions}

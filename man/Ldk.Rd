@@ -42,3 +42,5 @@ methods(class=Ldk)
 
 str(mosquito)
 }
+\concept{classes
+\code{Ldk} methods must be, so far, considered as experimental in Momocs.}

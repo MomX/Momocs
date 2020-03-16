@@ -4,10 +4,23 @@
 \alias{tps_grid}
 \title{Deformation grids using Thin Plate Splines}
 \usage{
-tps_grid(fr, to, amp = 1, over = 1.2, grid.size = 15,
-  grid.col = "grey80", poly = TRUE, shp = TRUE, shp.col = rep(NA, 2),
-  shp.border = col_qual(2), shp.lwd = c(1, 1), shp.lty = c(1, 1),
-  legend = TRUE, legend.text, ...)
+tps_grid(
+  fr,
+  to,
+  amp = 1,
+  over = 1.2,
+  grid.size = 15,
+  grid.col = "grey80",
+  poly = TRUE,
+  shp = TRUE,
+  shp.col = rep(NA, 2),
+  shp.border = col_qual(2),
+  shp.lwd = c(1, 1),
+  shp.lty = c(1, 1),
+  legend = TRUE,
+  legend.text,
+  ...
+)
 }
 \arguments{
 \item{fr}{the reference \eqn{(x; y)} coordinates}
@@ -58,7 +71,10 @@ to <- x$whisky
 tps_grid(fr, to, amp=3, grid.size=10)
 }
 \seealso{
-Other thin plate splines: \code{\link{tps2d}},
-  \code{\link{tps_arr}}, \code{\link{tps_iso}},
-  \code{\link{tps_raw}}
+Other thin plate splines: 
+\code{\link{tps2d}()},
+\code{\link{tps_arr}()},
+\code{\link{tps_iso}()},
+\code{\link{tps_raw}()}
 }
+\concept{thin plate splines}

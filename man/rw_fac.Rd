@@ -30,14 +30,24 @@ bot2 <- mutate(bot, fake=factor(rep(letters[1:4], 10)))
 rw_fac(bot2, "fake", c("a", "e"), "ae")$fake
 }
 \seealso{
-Other handling functions: \code{\link{arrange}},
-  \code{\link{at_least}}, \code{\link{chop}},
-  \code{\link{combine}}, \code{\link{dissolve}},
-  \code{\link{fac_dispatcher}}, \code{\link{filter}},
-  \code{\link{mutate}}, \code{\link{rename}},
-  \code{\link{rescale}}, \code{\link{rm_harm}},
-  \code{\link{rm_missing}}, \code{\link{rm_uncomplete}},
-  \code{\link{sample_frac}}, \code{\link{sample_n}},
-  \code{\link{select}}, \code{\link{slice}},
-  \code{\link{subsetize}}
+Other handling functions: 
+\code{\link{arrange}()},
+\code{\link{at_least}()},
+\code{\link{chop}()},
+\code{\link{combine}()},
+\code{\link{dissolve}()},
+\code{\link{fac_dispatcher}()},
+\code{\link{filter}()},
+\code{\link{mutate}()},
+\code{\link{rename}()},
+\code{\link{rescale}()},
+\code{\link{rm_harm}()},
+\code{\link{rm_missing}()},
+\code{\link{rm_uncomplete}()},
+\code{\link{sample_frac}()},
+\code{\link{sample_n}()},
+\code{\link{select}()},
+\code{\link{slice}()},
+\code{\link{subsetize}()}
 }
+\concept{handling functions}

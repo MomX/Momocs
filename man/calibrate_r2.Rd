@@ -8,11 +8,23 @@
 \usage{
 calibrate_r2()
 
-calibrate_r2_opoly(Opn, id = 1:length(Opn), degree.range = 1:8,
-  thresh = c(0.9, 0.95, 0.99, 0.999), plot = TRUE, ...)
+calibrate_r2_opoly(
+  Opn,
+  id = 1:length(Opn),
+  degree.range = 1:8,
+  thresh = c(0.9, 0.95, 0.99, 0.999),
+  plot = TRUE,
+  ...
+)
 
-calibrate_r2_npoly(Opn, id = 1:length(Opn), degree.range = 1:8,
-  thresh = c(0.9, 0.95, 0.99, 0.999), plot = TRUE, ...)
+calibrate_r2_npoly(
+  Opn,
+  id = 1:length(Opn),
+  degree.range = 1:8,
+  thresh = c(0.9, 0.95, 0.99, 0.999),
+  plot = TRUE,
+  ...
+)
 }
 \arguments{
 \item{Opn}{an Opn object}
@@ -49,7 +61,9 @@ olea \%>\% slice(1:5) \%>\% #for the sake of spped
 
 }
 \seealso{
-Other calibration: \code{\link{calibrate_deviations}},
-  \code{\link{calibrate_harmonicpower}},
-  \code{\link{calibrate_reconstructions}}
+Other calibration: 
+\code{\link{calibrate_deviations}()},
+\code{\link{calibrate_harmonicpower}()},
+\code{\link{calibrate_reconstructions}()}
 }
+\concept{calibration}

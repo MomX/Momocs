@@ -11,8 +11,14 @@ npoly(x, ...)
 
 \method{npoly}{default}(x, degree, ...)
 
-\method{npoly}{Opn}(x, degree, baseline1 = c(-0.5, 0), baseline2 = c(0.5,
-  0), nb.pts = 120, ...)
+\method{npoly}{Opn}(
+  x,
+  degree,
+  baseline1 = c(-0.5, 0),
+  baseline2 = c(0.5, 0),
+  nb.pts = 120,
+  ...
+)
 
 \method{npoly}{list}(x, ...)
 }
@@ -65,6 +71,8 @@ for (i in 1:10) { r[i] <- npoly(o, degree=i)$r2 }
 plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 }
 \seealso{
-Other polynomials: \code{\link{opoly_i}},
-  \code{\link{opoly}}
+Other polynomials: 
+\code{\link{opoly_i}()},
+\code{\link{opoly}()}
 }
+\concept{polynomials}
