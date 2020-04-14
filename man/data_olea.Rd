@@ -4,7 +4,9 @@
 \name{olea}
 \alias{olea}
 \title{Data: Outline coordinates of olive seeds open outlines.}
-\format{An \link{Opn} object with the outline coordinates of olive seeds.}
+\format{
+An \link{Opn} object with the outline coordinates of olive seeds.
+}
 \source{
 We thank Jean-Frederic Terral and Sarah Ivorra (UMR CBAE, Montpellier, France)
 from allowing us to share the data.

@@ -1,37 +1,179 @@
 
-# Momocs
+<!--README.md is generated from README.Rmd. Please edit that file -->
 
-<!-- badges: start -->
-<!-- badges: end -->
 ## Momocs <img src="https://noto-website-2.storage.googleapis.com/emoji/emoji_u1f54a.png" width="30px">
-_Part of [MomX](https://momx.github.io/MomX/)_
+
+*Part of [MomX](https://momx.github.io/MomX/)*
 
 <!--Badges -->
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis-CI Build Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/MomX/Momocs)
-[![Coverage Status](https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
+[![Travis-CI Build
+Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/MomX/Momocs)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
-![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs) ![CRAN downloads grand total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
+![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)
+![CRAN downloads grand
+total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
+
+The goal of Momocs is to provide a complete, convenient, reproducible
+and open-source toolkit for 2D morphometrics.
+
+It includes most common 2D morphometrics approaches on outlines, open
+outlines, configurations of landmarks, traditional morphometrics, and
+facilities for data preparation, manipulation and visualization with a
+consistent grammar throughout.
+
+It allows reproducible, pipeable, complex morphometric analyses and
+other morphometrics approaches should be easy to plug in, or develop
+from, on top of this canvas.
+
+It hinges on the core functions developed in the must-have book
+*[Morphometrics with
+R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)*
+by [Julien
+Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/)
+(2008).
+
+  - **Check** the online doc and the tutorials
+    [there](http://momx.github.io/Momocs/)
+  - **You’re welcome to** implement ideas, propose new ones, review the
+    code, the helpfiles or the vignettes, report bugs, ask for help and
+    propose to collaborate with me: [here on
+    GitHub](https://github.com/MomX/Momocs/issues) or there:
+    `bonhomme.vincent@gmail.com`.
+
+### Installation
+
+The last released version can be installed from
+[CRAN](https://CRAN.R-project.org/package=Momocs) with:
+
+``` r
+install.packages("Momocs")
+```
+
+But I recommend using (and only support) the development version from
+GitHub with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("MomX/Momocs")
+```
 
 <!--
-The goal of Momocs is to provide a complete, convenient, reproducible and open-source toolkit for 2D morphometrics.
+## Features
+__Matrices of xy-coordinates__
+* ~100 generic tools like centering, scaling, rotating, calculating area, perimeter, etc. Full list with `apropos("coo_")`
+* generic plotters: `coo_plot` and `g` (work in progress)
 
-It includes most common 2D morphometrics approaches on outlines, open outlines, configurations of landmarks, traditional morphometrics, and facilities for data preparation, manipulation and visualization with a consistent grammar throughout.
+__Data acquisition + Babel__
 
-It allows reproducible, pipeable, complex morphometric analyses and other morphometrics approaches should be easy to plug in, or develop from, on top of this canvas.
+* Outline extraction from black mask/silhouettes `.jpgs`
+* Landmark definition on outlines (`def_ldk` or via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Open curves digitization with bezier curves (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
+* Import/Export from/to `.nts`, `.tps`, `PAST`, `.txt`, etc.
 
-It hinges on the core functions developed in the must-have book _[Morphometrics with R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)_ by [Julien Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/) (2008).
+__Outline analysis__
 
-* __Check__ the online doc and the tutorials [there](http://momx.github.io/Momocs/)
-* __You're welcome to__ implement ideas, propose new ones, review the code, the helpfiles or the vignettes, report bugs, ask for help and propose to collaborate with me: [here on GitHub](https://github.com/MomX/Momocs/issues) or there: `bonhomme.vincent@gmail.com`.
+* Elliptical Fourier analysis (`efourier`)
+* Radii variation (`rfourier`)
+* Radii variation - curvilinear abscissa (`sfourier`)
+* Tangent Angle Fourier analysis (`tfourier`)
 
+__Open-outlines__
+
+* Natural (raw) polynomials (`npoly`)
+* Orthogonal (Legendre) polynomials (`opoly`)
+* Discrete Cosinus Transform (`dfourier`)
+* `bezier` core functions
+
+__Configuration of landmarks__
+
+* Full Generalized Procrustes Adjustment (`fgProcrustes`)
+* Sliding semi-landmarks (`fgsProcrustes`)
+
+__Traditional morphometrics and global shape descriptors__
+
+* Facilities for multivariate analysis (see `flowers`)
+* A long list of shape scalars (eg. `coo_eccentricity`, `coo_rectilinearity`, etc.)
+
+__Data handling__
+
+* Easy data manipulation with `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
+* New verbs useful for morphometrics such as `combine` and `chop`, to handle several 2D views
+* Permutation methods to resample data (`perm`, `breed`)
+
+__Multivariate analysis__
+
+* Mean shape (groupwise) calculations (`mshapes`)
+* Principal component analysis (`PCA`)
+* Multivariate analysis of variance (`MANOVA` + pairwise testing `MANOVA_PW`)
+* Linear discriminant analysis and screening (`LDA`)
+* Hierarchical clustering (`CLUST`)
+* K-means (`KMEANS`)
+
+__Graphical methods__
+
+* Family pictures and quick inspection of whole datasets (`stack` and `panel`)
+* Some `ggplot2` plots, when useful (and convet Momocs' objects into `data.frames it with `as_df`)
+* Morphological spaces for PCA
+* Thin plate splines and variation around deformation grids
+
+
+__Misc__
+
+* Datasets for all types of data (`apodemus`, `bot`, `chaff`, `charring`, `flower`,  `hearts`, `molars`, `mosquito`, `mouse`, `oak`, `olea`, `shapes`, `trilo`, `wings`)
+* [Shiny](http://shiny.rstudio.com/) demonstrators/helpers. See [Momecs](https://github.com/vbonhomme/Momecs/)
+* [Online documentation](http://vbonhomme.github.io/Momocs/)
 -->
 
-### News 
-* Momocs is being actively rewritten around tibbles. I plan a 2.0 release in April 2020.
-* Bits of dismembered old Momocs will feed MomX ecosystem.
+### Example
 
-* The last version (1.2.9) released on CRAN is [available there as a .tar.gz](https://cran.r-project.org/src/contrib/Archive/Momocs/Momocs_1.2.9.tar.gz)
-* The last version (1.3.0) released on GitHub is [available here as a .tar.gz](https://github.com/MomX/Momocs/releases/download/1.3.0/Momocs_1.3.0.tar.gz)
-* None of them are no longer supported.
-* I will soon release Momocs 2.0
+This is a basic example of a complete analysis doing: inspection,
+normalization of raw outlines, elliptical Fourier transforms,
+dimmensionality reduction and classification, using a single line.
+
+``` r
+library(Momocs)
+```
+
+``` r
+devtools::load_all()
+#> Loading Momocs
+#> Registered S3 method overwritten by 'vegan':
+#>   method     from      
+#>   rev.hclust dendextend
+#> 
+#>   Momocs is now retired and will no longer be maintained.
+#>   Please see Momocs2 and more generally MomX ecosystem:
+#> 
+#>                <https://momx.github.io/>
+```
+
+``` r
+hearts %T>%                    # A toy dataset
+  stack() %>%                  # Take a family picture of raw outlines
+  fgProcrustes() %>%           # Full generalized Procrustes alignment
+  coo_slide(ldk = 2) %T>%      # Redefine a robust 1st point between the cheeks
+  stack() %>%                  # Another picture of aligned outlines
+  efourier(6, norm=FALSE) %>%  # Elliptical Fourier Transforms
+  PCA() %T>%                   # Principal Component Analysis
+  plot_PCA(~aut) %>%           # A PC1:2 plot
+  LDA(~aut) %>%                # Linear Discriminant Analysis
+  plot_CV()                    # And the confusion matrix after leave one out cross validation
+#> Warning: `as_data_frame()` is deprecated as of tibble 2.0.0.
+#> Please use `as_tibble()` instead.
+#> The signature and semantics have changed, see `?as_tibble`.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_warnings()` to see where this warning was generated.
+```
+
+![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->
+
+    #> Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+    #> Please use `tibble()` instead.
+    #> This warning is displayed once every 8 hours.
+    #> Call `lifecycle::last_warnings()` to see where this warning was generated.
+
+![](README-example-3.png)<!-- -->![](README-example-4.png)<!-- -->

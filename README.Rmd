@@ -14,8 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Momocs <img src="https://noto-website-2.storage.googleapis.com/emoji/emoji_u1f54a.png" width="30px">
-_Part of [MomX](https://momx.github.io/MomX/)_
+## Momocs 
+
+**Momocs is now retired, please see [MomX](https://momx.github.io/MomX/)
+**
 
 <!--Badges -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)

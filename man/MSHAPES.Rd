@@ -4,18 +4,18 @@
 \alias{MSHAPES}
 \title{Mean shape calculation for Coo, Coe, etc.}
 \usage{
-MSHAPES(x, ...)
+MSHAPES(x, fac = NULL, FUN = mean, nb.pts = 120, ...)
 }
 \arguments{
 \item{x}{a list, array, Ldk, LdkCoe, OutCoe or OpnCoe or PCA object}
-
-\item{...}{useless here.}
 
 \item{fac}{factor specification for \link{fac_dispatcher}}
 
 \item{FUN}{a function to compute the mean shape (\link{mean} by default, by \link{median} can be considered)}
 
 \item{nb.pts}{numeric the number of points for calculated shapes (only Coe objects)}
+
+\item{...}{useless here.}
 }
 \value{
 the averaged shape; on Coe objects, a list with two components: \code{$Coe} object of the same class, and

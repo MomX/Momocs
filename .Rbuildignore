@@ -19,3 +19,4 @@ dev/.*
 ^pkgdown$
 __.*
 stats.R
+old_vignettes

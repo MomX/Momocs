@@ -4,8 +4,10 @@
 \name{chaff}
 \alias{chaff}
 \title{Data: Landmark and semilandmark coordinates on cereal glumes}
-\format{An \link{Ldk} object with 21 configurations of landmarks and semi-landmarks (4 partitions)
-sampled on cereal glumes}
+\format{
+An \link{Ldk} object with 21 configurations of landmarks and semi-landmarks (4 partitions)
+sampled on cereal glumes
+}
 \source{
 Research support was provided by the European Research Council
 (Evolutionary Origins of Agriculture (grant no. 269830-EOA)

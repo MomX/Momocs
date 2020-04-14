@@ -915,7 +915,7 @@ chc2pix <- function(chc) {
 #' \item \code{002_speciesI_siteA_ind2_lateralview} } etc., this function returns a \link{data.frame}
 #' from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
 #'
-#' The number of groups must be consistent accross filenames.
+#' The number of groups must be consistent across filenames.
 #' @param lf a list (its names are used, except if it is a list from \link{import_tps}
 #' in this case \code{names(lf$coo)} is used) of a list of filenames, as characters, typically such as
 #' those obtained with \link{list.files}. Alternatively, a path to a folder

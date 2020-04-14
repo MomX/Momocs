@@ -110,7 +110,6 @@ fac_dispatcher <- function(x, fac){
 #' @family handling functions
 #' @examples
 #' # Do not use subset directly
-#' @rdname subset
 #' @export
 subsetize <- function(x, subset, ...){
   UseMethod("subsetize")

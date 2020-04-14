@@ -4,7 +4,9 @@
 \name{oak}
 \alias{oak}
 \title{Data: Configuration of landmarks of oak leaves}
-\format{A \link{Ldk} object containing 11 (x; y) landmarks  from 176 oak leaves wings, from}
+\format{
+A \link{Ldk} object containing 11 (x; y) landmarks  from 176 oak leaves wings, from
+}
 \source{
 Viscosi, V., & Cardini, A. (2011). Leaf morphology, taxonomy and
 geometric morphometrics: a simplified protocol for beginners.

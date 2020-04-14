@@ -353,10 +353,12 @@ plot_CV.default <- function(x,
 
   # expect a table with rows for actual, columns for predicted
   df <- x %>%
-    dplyr::as_data_frame() %>%
+    dplyr::as_tibble() %>%
     `colnames<-`(c("actual", "predicted", "n")) %>%
     dplyr::mutate(actual=factor(actual), predicted=factor(predicted)) %>%
-    dplyr::arrange(actual, .by_group=predicted)
+    dplyr::group_by(predicted) %>%
+    dplyr::arrange(actual) %>%
+    dplyr::ungroup()
 
   # if freq, frequencies within actual class
   if (freq){

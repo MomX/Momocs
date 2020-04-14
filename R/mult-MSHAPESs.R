@@ -52,20 +52,19 @@
 #' bot.f %>% LDA(~fake) %>% MSHAPES(~fake)
 #' # LDA on ~fake but average on type
 #' bot.f %>% LDA(~fake) %>% MSHAPES(~type)
-#' @rdname MSHAPES
 #' @export
-MSHAPES <- function(x, ...) {
+MSHAPES <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   UseMethod("MSHAPES")
 }
 
 #' @export
-MSHAPES.list <- function(x, FUN=mean, ...) {
+MSHAPES.list <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   A <- ldk_check(x)
   return(apply(A, 1:2, FUN, na.rm = TRUE))
 }
 
 #' @export
-MSHAPES.array <- function(x, FUN=mean, ...) {
+MSHAPES.array <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   if (length(dim(x)) == 3) {
     A <- ldk_check(x)
     return(apply(A, 1:2, FUN, na.rm = TRUE))
@@ -73,7 +72,7 @@ MSHAPES.array <- function(x, FUN=mean, ...) {
 }
 
 #' @export
-MSHAPES.Ldk <- function(x, FUN=mean, ...) {
+MSHAPES.Ldk <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   Ldk <- x
   A <- ldk_check(Ldk$coo)
   return(apply(A, 1:2, mean, na.rm = TRUE))
@@ -166,7 +165,7 @@ MSHAPES.OpnCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
 }
 
 #' @export
-MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, ...) {
+MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   LdkCoe <- x
   if (is.null(fac)) {
     message("no 'fac' provided. Returns meanshape")
@@ -192,7 +191,7 @@ MSHAPES.LdkCoe <- function(x, fac=NULL, FUN=mean, ...) {
 }
 
 #' @export
-MSHAPES.PCA <- function(x, fac, FUN=mean, ...){
+MSHAPES.PCA <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...){
   # check for single individuals within a group..
   x0 <- x
 
@@ -214,7 +213,7 @@ MSHAPES.PCA <- function(x, fac, FUN=mean, ...){
 }
 
 #' @export
-MSHAPES.LDA <- function(x, fac, FUN=mean, ...){
+MSHAPES.LDA <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...){
   # check for single individuals within a group..
   x0 <- x
   # # if fac provided, dispatch it - not sure this has an utility

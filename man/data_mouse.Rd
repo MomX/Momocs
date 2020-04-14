@@ -4,7 +4,9 @@
 \name{mouse}
 \alias{mouse}
 \title{Data: Outline coordinates of mouse molars}
-\format{A \link{Out} object 64 coordinates of 30 wood molar outlines.}
+\format{
+A \link{Out} object 64 coordinates of 30 wood molar outlines.
+}
 \source{
 Renaud S, Dufour AB, Hardouin EA, Ledevin R, Auffray JC (2015):
 Once upon multivariate analyses: When they tell several stories about biological evolution.

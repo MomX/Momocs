@@ -4,7 +4,9 @@
 \name{shapes}
 \alias{shapes}
 \title{Data: Outline coordinates of various shapes}
-\format{An \link{Out} object with the outline coordinates of some various shapes.}
+\format{
+An \link{Out} object with the outline coordinates of some various shapes.
+}
 \source{
 Borrowed default shapes from (c) Adobe Photoshop. Do not send me to jail.
 }

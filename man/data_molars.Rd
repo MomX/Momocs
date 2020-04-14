@@ -4,12 +4,14 @@
 \name{molars}
 \alias{molars}
 \title{Data: Outline coordinates of 360 molars}
-\format{A \link{Out} object containing 79 equilinearly spaced (x; y)
+\format{
+A \link{Out} object containing 79 equilinearly spaced (x; y)
 coordinates for 360 crown outlines, of modern human molars,
 along with their type (\code{$type}) - 90 first upper molars (UM1), 90 second upper molars (UM2),
 90 first lower molars (LM1), 90 second lower molars (LM2) -
 and the individual (\code{ind}) they come from (the data of the 360 molars are taken
-from 180 individuals).}
+from 180 individuals).
+}
 \source{
 Corny, J., & Detroit, F. (2014). Technical Note: Anatomic
 identification of isolated modern human molars: testing Procrustes aligned

@@ -4,7 +4,9 @@
 \name{wings}
 \alias{wings}
 \title{Data: Landmarks coordinates of mosquito wings}
-\format{A \link{Ldk} object containing 18 (x; y) landmarks  from 127 mosquito wings, from}
+\format{
+A \link{Ldk} object containing 18 (x; y) landmarks  from 127 mosquito wings, from
+}
 \source{
 Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
 }

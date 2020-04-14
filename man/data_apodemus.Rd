@@ -4,7 +4,9 @@
 \name{apodemus}
 \alias{apodemus}
 \title{Data: Outline coordinates of Apodemus (wood mouse) mandibles}
-\format{A \link{Out} object 64 coordinates of 30 wood molar outlines.}
+\format{
+A \link{Out} object 64 coordinates of 30 wood molar outlines.
+}
 \source{
 Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in
 the mandible shape of \emph{Apodemus} wood mice. \emph{Journal of Biogeography} 30:1617-1628.

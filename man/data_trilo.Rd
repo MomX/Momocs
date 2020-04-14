@@ -4,8 +4,10 @@
 \name{trilo}
 \alias{trilo}
 \title{Data: Outline coordinates of cephalic outlines of trilobite}
-\format{A \link{Out} object 64 coordinates of 50 cephalic outlines from different
-ontogenetic stages of trilobite.}
+\format{
+A \link{Out} object 64 coordinates of 50 cephalic outlines from different
+ontogenetic stages of trilobite.
+}
 \source{
 Arranged from: \url{http://folk.uio.no} (used to be in \code{ohammer} website but
 seems to be deprecated now).
