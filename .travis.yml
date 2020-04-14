@@ -5,9 +5,28 @@ warnings_are_errors: false
 
 env:
 - RGL_USE_NULL=TRUE
- 
+
+ addons:
+  apt:
+    packages:
+      - libgdal-dev
+      - libproj-dev
+
+before_install:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install libcgal-dev libglu1-mesa-dev mesa-common-dev; fi
+
 after_success:
-- Rscript -e 'covr::codecov()'
+  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'pkgdown::build_site()'
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_PAT
+  keep-history: true
+  local-dir: docs
+  on:
+    branch: master
 
 notifications:
   email:
@@ -15,4 +34,4 @@ notifications:
       - bonhomme.vincent@gmail.com
     on_success: change
     on_failure: change
-    
+
