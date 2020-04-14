@@ -1,9 +1,10 @@
 
 <!--README.md is generated from README.Rmd. Please edit that file -->
 
-## Momocs <img src="https://noto-website-2.storage.googleapis.com/emoji/emoji_u1f54a.png" width="30px">
+## Momocs
 
-*Part of [MomX](https://momx.github.io/MomX/)*
+**Momocs is now retired, please see [MomX](https://momx.github.io/MomX/)
+**
 
 <!--Badges -->
 
@@ -16,33 +17,6 @@ Status](https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg)](https:/
 ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)
 ![CRAN downloads grand
 total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
-
-The goal of Momocs is to provide a complete, convenient, reproducible
-and open-source toolkit for 2D morphometrics.
-
-It includes most common 2D morphometrics approaches on outlines, open
-outlines, configurations of landmarks, traditional morphometrics, and
-facilities for data preparation, manipulation and visualization with a
-consistent grammar throughout.
-
-It allows reproducible, pipeable, complex morphometric analyses and
-other morphometrics approaches should be easy to plug in, or develop
-from, on top of this canvas.
-
-It hinges on the core functions developed in the must-have book
-*[Morphometrics with
-R](http://www.springer.com/statistics/life+sciences,+medicine+%26+health/book/978-0-387-77789-4)*
-by [Julien
-Claude](http://www.isem.univ-montp2.fr/recherche/equipes/biologie-du-developpement-et-evolution/personnel/claude-julien/)
-(2008).
-
-  - **Check** the online doc and the tutorials
-    [there](http://momx.github.io/Momocs/)
-  - **You’re welcome to** implement ideas, propose new ones, review the
-    code, the helpfiles or the vignettes, report bugs, ask for help and
-    propose to collaborate with me: [here on
-    GitHub](https://github.com/MomX/Momocs/issues) or there:
-    `bonhomme.vincent@gmail.com`.
 
 ### Installation
 
@@ -148,7 +122,7 @@ devtools::load_all()
 #>   Momocs is now retired and will no longer be maintained.
 #>   Please see Momocs2 and more generally MomX ecosystem:
 #> 
-#>                <https://momx.github.io/>
+#>              <   https://momx.github.io   >
 ```
 
 ``` r
