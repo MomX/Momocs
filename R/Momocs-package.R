@@ -91,7 +91,7 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
   Momocs is now retired and will no longer be maintained.
   Please see Momocs2 and more generally MomX ecosystem:
 
-               <https://momx.github.io/>",
+             <   https://momx.github.io   >",
   appendLF = TRUE)
 }
 
