@@ -6,14 +6,11 @@ warnings_are_errors: false
 env:
 - RGL_USE_NULL=TRUE
 
- addons:
+addons:
   apt:
     packages:
       - libgdal-dev
       - libproj-dev
-
-before_install:
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install libcgal-dev libglu1-mesa-dev mesa-common-dev; fi
 
 after_success:
   - Rscript -e 'covr::codecov()'
