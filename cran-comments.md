@@ -4,8 +4,8 @@
 
 ## Before release
 Followed devtools::release() and statisfied all requests, particularly:
-* r-hub check (using `rhub::check_for_cran()`)
-* win-builder (using `devtools::release()`) 
+* r-hub check (using `rhub::check_for_cran()` there: https://builder.r-hub.io/status/original/Momocs_1.3.0.tar.gz-0fd354bb55d84e5086950734f1842072 )
+* win-builder (using `devtools::release()` there: https://win-builder.r-project.org/iFUhS8KN02WR/00check.log )
 
 ## R CMD check results
 ```
