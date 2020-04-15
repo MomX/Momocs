@@ -11,7 +11,6 @@
 #' @param range vector of harmonics on which to perform calibrate_reconstructions
 #' @param baseline1 \eqn{(x; y)} coordinates for the first point of the baseline
 #' @param baseline2 \eqn{(x; y)} coordinates for the second point of the baseline
-#' @param ... only used for the generic
 #' @return a ggplot object and the full list of intermediate results. See examples.
 #' @family calibration
 #' @name calibrate_reconstructions
@@ -43,12 +42,6 @@
 #' olea %>%
 #'     calibrate_reconstructions_dfourier(id=1)
 #'
-#' @rdname calibrate_reconstructions
-#' @export
-calibrate_reconstructions <- function(){
-  message("Deprecated, see ?calibrate_reconstructions")
-}
-
 #' @rdname calibrate_reconstructions
 #' @export
 calibrate_reconstructions_efourier <-

@@ -13,6 +13,7 @@
 #' All the shapes in x must have the same number of landmarks. If you are
 #' trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample} beforehand
 #' to homogeneize the number of coordinates among shapes.
+#' Please note that Ldk methods are as experimental.
 #'
 #' @param coo a \code{list} of matrices of (x; y) coordinates,
 #' or an array, or an Ldk object or a data.frame (and friends)
@@ -23,7 +24,6 @@
 #' @return an \code{Ldk} object
 #' @details implementation of \code{$slidings} is inspired by \code{geomorph}
 #' @family classes
-#' \code{Ldk} methods must be, so far, considered as experimental in Momocs.
 #' @aliases LdkCoe
 #' @examples
 #' #Methods on Ldk

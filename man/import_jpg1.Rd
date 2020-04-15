@@ -8,7 +8,8 @@ import_jpg1(
   jpg.path,
   auto.notcentered = TRUE,
   fun.notcentered = NULL,
-  threshold = 0.5
+  threshold = 0.5,
+  ...
 )
 }
 \arguments{

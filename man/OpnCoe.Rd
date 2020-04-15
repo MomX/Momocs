@@ -48,6 +48,7 @@ methods(class='OpnCoe')
 Other classes: 
 \code{\link{Coe}()},
 \code{\link{Coo}()},
+\code{\link{Ldk}()},
 \code{\link{Opn}()},
 \code{\link{OutCoe}()},
 \code{\link{Out}()},

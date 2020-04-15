@@ -33,6 +33,7 @@ on Ldk objects preserves (x, y) coordinates and \code{LdkCoe} are also \code{Ldk
 All the shapes in x must have the same number of landmarks. If you are
 trying to make an Ldk object from an Out or an Opn object, try \link{coo_sample} beforehand
 to homogeneize the number of coordinates among shapes.
+Please note that Ldk methods are as experimental.
 
 implementation of \code{$slidings} is inspired by \code{geomorph}
 }
@@ -42,5 +43,14 @@ methods(class=Ldk)
 
 str(mosquito)
 }
-\concept{classes
-\code{Ldk} methods must be, so far, considered as experimental in Momocs.}
+\seealso{
+Other classes: 
+\code{\link{Coe}()},
+\code{\link{Coo}()},
+\code{\link{OpnCoe}()},
+\code{\link{Opn}()},
+\code{\link{OutCoe}()},
+\code{\link{Out}()},
+\code{\link{TraCoe}()}
+}
+\concept{classes}

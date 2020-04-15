@@ -153,6 +153,6 @@ o5 \%>\% calibrate_deviations_dfourier()
 Other calibration: 
 \code{\link{calibrate_harmonicpower}()},
 \code{\link{calibrate_r2}()},
-\code{\link{calibrate_reconstructions}()}
+\code{\link{calibrate_reconstructions}}
 }
 \concept{calibration}

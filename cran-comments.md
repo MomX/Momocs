@@ -1,6 +1,10 @@
 ## Test environments
-* local OS X 10.13.2 install, R 3.4.4
-* ubuntu x86_64-pc-linux-gnu R 3.4.4 (on travis-ci https://travis-ci.org/MomX/Momocs)
+* local OS X 10.13.2 install, R 3.6.2
+* ubuntu x86_64-pc-linux-gnu (64-bit) with R 3.6.2 (on travis-ci https://travis-ci.org/MomX/Momocs)
+
+## Before release
+Followed devtools::release():
+* Including rhub::check_for_cran()
 * win-builder (devtools::release) 
 
 ## R CMD check results

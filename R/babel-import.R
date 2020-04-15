@@ -181,7 +181,7 @@ import_Conte <- function(img, x) {
 import_jpg1 <- function(jpg.path,
                         auto.notcentered = TRUE,
                         fun.notcentered = NULL,
-                        threshold = 0.5) {
+                        threshold = 0.5, ...) {
   img <- jpeg::readJPEG(jpg.path)
   # if a RVB is provided by the way, apply (img, 1:2, mean) is
   # much slower

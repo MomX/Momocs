@@ -110,6 +110,7 @@ x$fac
 \seealso{
 Other classes: 
 \code{\link{Coe}()},
+\code{\link{Ldk}()},
 \code{\link{OpnCoe}()},
 \code{\link{Opn}()},
 \code{\link{OutCoe}()},

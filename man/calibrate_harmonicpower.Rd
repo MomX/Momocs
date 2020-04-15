@@ -119,6 +119,6 @@ ggtitle("Harmonic power calibration")
 Other calibration: 
 \code{\link{calibrate_deviations}()},
 \code{\link{calibrate_r2}()},
-\code{\link{calibrate_reconstructions}()}
+\code{\link{calibrate_reconstructions}}
 }
 \concept{calibration}

@@ -11,8 +11,6 @@
 \alias{calibrate_reconstructions_dfourier}
 \title{Calibrate using reconstructed shapes}
 \usage{
-calibrate_reconstructions()
-
 calibrate_reconstructions_efourier(x, id, range = 1:9)
 
 calibrate_reconstructions_rfourier(x, id, range = 1:9)
@@ -55,8 +53,6 @@ calibrate_reconstructions_dfourier(
 \item{baseline1}{\eqn{(x; y)} coordinates for the first point of the baseline}
 
 \item{baseline2}{\eqn{(x; y)} coordinates for the second point of the baseline}
-
-\item{...}{only used for the generic}
 }
 \value{
 a ggplot object and the full list of intermediate results. See examples.
