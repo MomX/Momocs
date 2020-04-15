@@ -6,7 +6,7 @@ Authors@R: c(
        person("Vincent", "Bonhomme", ,"bonhomme.vincent@gmail.com", c("aut", "cre")), 
        person("Julien", "Claude", , , c("aut"), comment = "core functions in base R"))
 Description: The development of this package 
-       is now over, see Momocs2 and more generally MomX ecosystem.
+       is now over, it is superseded by Momocs2 and more generally MomX ecosystem.
        The goal of Momocs is to provide a complete, convenient, 
        reproducible and open-source toolkit for 2D morphometrics.
        It includes most common 2D morphometrics approaches on outlines, open outlines, 

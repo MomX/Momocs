@@ -89,7 +89,7 @@ globalVariables(c("x", "y", "f", "xend", "yend", "shp1", "ddply",
 .onAttach <- function(lib, pkg) {
   packageStartupMessage("
   Momocs is now retired and will no longer be maintained.
-  Please see Momocs2 and more generally MomX ecosystem:
+  It is superseded by Momocs2 and more generally MomX ecosystem:
 
              <   https://momx.github.io   >",
   appendLF = TRUE)
