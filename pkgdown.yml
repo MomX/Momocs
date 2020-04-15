@@ -1,12 +1,8 @@
-pandoc: 2.2.1
-pkgdown: 1.1.0
+pandoc: 2.9.2.1
+pkgdown: 1.4.1
 pkgdown_sha: ~
-articles:
-  Momocs_FAQ: Momocs_FAQ.html
-  Momocs_coo: Momocs_coo.html
-  Momocs_grindr: Momocs_grindr.html
-  Momocs_intro: Momocs_intro.html
+articles: {}
 urls:
-  reference: http://momx.github.io/Momocs//reference
-  article: http://momx.github.io/Momocs//articles
+  reference: http://momx.github.io/Momocs/reference
+  article: http://momx.github.io/Momocs/articles
 
