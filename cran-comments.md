@@ -1,6 +1,8 @@
 ## Test environments
-* local OS X 10.13.2 install, R 3.6.2
+* local OS X 10.13.2 install, R 3.6.2 with --as-cran on my machine
 * ubuntu x86_64-pc-linux-gnu (64-bit) with R 3.6.2 (on travis-ci https://travis-ci.org/MomX/Momocs)
+
+Both succeeded.
 
 ## Before release
 Followed devtools::release() and statisfied all requests, particularly:
