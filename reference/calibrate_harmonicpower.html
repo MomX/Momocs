@@ -231,7 +231,7 @@ and as follows for radii variation and tangent angle:
     <div class='dont-index'><p>Other calibration: 
 <code><a href='calibrate_deviations.html'>calibrate_deviations</a>()</code>,
 <code><a href='calibrate_r2.html'>calibrate_r2</a>()</code>,
-<code><a href='calibrate_reconstructions.html'>calibrate_reconstructions</a>()</code></p></div>
+<code><a href='calibrate_reconstructions.html'>calibrate_reconstructions</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>b5</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>)
@@ -332,9 +332,9 @@ and as follows for radii variation and tangent angle:
 <span class='co'># let customize the ggplot</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='no'>cal</span> <span class='kw'>&lt;-</span> <span class='no'>b5</span>  <span class='kw'>%&gt;%</span> <span class='fu'>calibrate_harmonicpower_efourier</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)
-<span class='no'>cal</span>$<span class='no'>gg</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span>() +
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_cartesian.html'>coord_cartesian</a></span>(<span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3.5</span>, <span class='fl'>12.5</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>90</span>, <span class='fl'>100</span>)) +
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span>(<span class='st'>"Harmonic power calibration"</span>)
+<span class='no'>cal</span>$<span class='no'>gg</span> + <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggtheme.html'>theme_minimal</a></span>() +
+<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/coord_cartesian.html'>coord_cartesian</a></span>(<span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3.5</span>, <span class='fl'>12.5</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>90</span>, <span class='fl'>100</span>)) +
+<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>ggtitle</a></span>(<span class='st'>"Harmonic power calibration"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
