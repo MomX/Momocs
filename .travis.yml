@@ -12,6 +12,10 @@ addons:
       - libgdal-dev
       - libproj-dev
 
+before_install:
+  - tlmgr install index
+  - sudo apt-get -y install  libglu1-mesa-dev
+
 after_success:
   - Rscript -e 'covr::codecov()'
   - Rscript -e 'pkgdown::build_site()'
