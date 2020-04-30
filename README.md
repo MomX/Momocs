@@ -8,7 +8,9 @@
 
 <!--Badges -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#retired)
+[![R build
+status](https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg)](https://github.com/MomX/Momocs/actions)
 [![Travis-CI Build
 Status](https://travis-ci.org/MomX/Momocs.svg?branch=master)](https://travis-ci.org/MomX/Momocs)
 [![Coverage
@@ -120,7 +122,7 @@ devtools::load_all()
 #>   rev.hclust dendextend
 #> 
 #>   Momocs is now retired and will no longer be maintained.
-#>   Please see Momocs2 and more generally MomX ecosystem:
+#>   It is superseded by Momocs2 and more generally MomX ecosystem:
 #> 
 #>              <   https://momx.github.io   >
 ```

@@ -130,10 +130,10 @@ subsetize.Coo <- function(x, subset, ...) {
     Coo2$fac <- Coo$fac[retain, ]
     # bloody dirty case where a factor is returned
     if (ncol(Coo$fac)==1 & is.factor(Coo2$fac)) {
-      Coo2$fac <- dplyr::as_data_frame(Coo2$fac)
+      Coo2$fac <- tibble::as_tibble(Coo2$fac)
     }
     names(Coo2$fac) <- names(Coo$fac)
-    Coo2$fac %<>% dplyr::as_data_frame()
+    Coo2$fac %<>% tibble::as_tibble()
     # Coo2$fac %<>% .refactor()
   }
   return(Coo2)
@@ -151,10 +151,10 @@ subsetize.Coe <- function(x, subset, ...) {
     Coe2$fac <- Coe$fac[retain, ]
     # bloody dirty case where a factor is returned
     if (ncol(Coe$fac)==1 & is.factor(Coe2$fac)) {
-      Coe2$fac <- dplyr::as_data_frame(Coe2$fac)
+      Coe2$fac <- tibble::as_tibble(Coe2$fac)
     }
     names(Coe2$fac) <- names(Coe$fac)
-    Coe2$fac %<>% dplyr::as_data_frame()
+    Coe2$fac %<>% tibble::as_tibble()
     # Coe2$fac %<>% .refactor()
   }
   return(Coe2)
@@ -171,7 +171,7 @@ subsetize.PCA <- function(x, subset, ...){
     PCA2$fac <- PCA$fac
     PCA2$fac <- as.data.frame(PCA2$fac[retain, ])
     names(PCA2$fac) <- names(PCA$fac)
-    #PCA2$fac %<>% dplyr::as_data_frame
+    #PCA2$fac %<>% tibble::as_tibble
     # PCA2$fac %<>% .refactor()
   }
   return(PCA2)
@@ -217,7 +217,7 @@ select.default <- function(.data, ...){
 #' @export
 select.Coo <- function(.data, ...){
   #.data %<>% verify()
-  .data$fac <- select(.data$fac, ...) %>% dplyr::as_data_frame()
+  .data$fac <- select(.data$fac, ...) %>% tibble::as_tibble()
   .data
 }
 
@@ -254,7 +254,7 @@ rename.default <- function(.data, ...){
 #' @export
 rename.Coo <- function(.data, ...){
   #.data %<>% verify()
-  .data$fac <- rename(.data$fac, ...) %>% dplyr::as_data_frame()
+  .data$fac <- rename(.data$fac, ...) %>% tibble::as_tibble()
   .data
 }
 
@@ -290,7 +290,7 @@ mutate.default <- function(.data, ...){
 #' @export
 mutate.Coo <- function(.data, ...){
   #.data %<>% verify()
-  .data$fac <- mutate(.data$fac, ...) %>% dplyr::as_data_frame()
+  .data$fac <- mutate(.data$fac, ...) %>% tibble::as_tibble()
   .data
 }
 
@@ -338,7 +338,7 @@ filter.Coo <- function(.data, ...){
   df <- dplyr::mutate(df, .id=1:nrow(df))
   df <- dplyr::filter(df, ...)
   .data <- subsetize(.data, df$.id)
-  .data$fac %<>% dplyr::as_data_frame()
+  .data$fac %<>% tibble::as_tibble()
   # .data$fac %<>% .refactor()
   .data
 }
@@ -382,7 +382,7 @@ arrange.Coo <- function(.data, ...){
   df <- mutate(df, .id=1:nrow(df))
   df <- arrange(df, ...)
   .data <- subsetize(.data, df$.id)
-  .data$fac %<>% dplyr::as_data_frame()
+  .data$fac %<>% tibble::as_tibble()
   .data
 }
 
@@ -624,7 +624,7 @@ chop.Coo <- function(.data, fac){
       Coo2$ldk <- Coo$ldk[retain]
     if (ncol(Coo$fac) > 0) {
       Coo2$fac <- Coo$fac
-      Coo2$fac <- dplyr::as_data_frame(Coo2$fac[retain, ])
+      Coo2$fac <- tibble::as_tibble(Coo2$fac[retain, ])
       names(Coo2$fac) <- names(Coo$fac)
     }
     res[[i]] <- Coo2
@@ -648,7 +648,7 @@ chop.Coe <- function(.data, fac){
     Coe2$coe <- Coe$coe[retain, ]
     if (ncol(Coe$fac) > 0) {
       Coe2$fac <- Coe$fac
-      Coe2$fac <- dplyr::as_data_frame(Coe2$fac[retain, ])
+      Coe2$fac <- tibble::as_tibble(Coe2$fac[retain, ])
       names(Coe2$fac) <- names(Coe$fac)
     }
     res[[i]] <- Coe2
@@ -707,12 +707,12 @@ combine.Out <- function(...) {
   #     stop("objects to combine must have the same number of items")
   Out <- Out(do.call(c, lapply(args, function(x) c(x$coo))))
   Out$fac <- do.call("rbind", lapply(args, function(x) x$fac))
-  Out$fac %<>% dplyr::as_data_frame()
+  Out$fac %<>% tibble::as_tibble()
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Out$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
   # ensure $fac is a data_frame
-  Out$fac %<>% dplyr::as_data_frame()
+  Out$fac %<>% tibble::as_tibble()
   #Out %<>% verify()
   return(Out)
 }
@@ -725,12 +725,12 @@ combine.Opn <- function(...) {
   #     stop("objects to combine must have the same number of items")
   Opn <- Opn(do.call(c, lapply(args, function(x) c(x$coo))))
   Opn$fac <- do.call("rbind", lapply(args, function(x) x$fac))
-  Opn$fac %<>% dplyr::as_data_frame()
+  Opn$fac %<>% tibble::as_tibble()
   if (any(lapply(args, function(x) length(x$ldk)) != 0)) {
     Opn$ldk <- do.call("c", lapply(args, function(x) x$ldk))
   }
   # ensure $fac is a data_frame
-  Opn$fac %<>% dplyr::as_data_frame()
+  Opn$fac %<>% tibble::as_tibble()
   #Opn %<>% verify()
   return(Opn)
 }
@@ -750,7 +750,7 @@ combine.Ldk <- function(...) {
   Ldk$cuts <- cutS
 
   # ensure $fac is a data_frame
-  Ldk$fac %<>% dplyr::as_data_frame()
+  Ldk$fac %<>% tibble::as_tibble()
 
   #Ldk %<>% verify()
   return(Ldk)

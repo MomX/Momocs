@@ -71,7 +71,7 @@ Out.data.frame <- function(x, fac = dplyr::data_frame(), ldk = list()){
 Out.list <- function(x, fac = dplyr::data_frame(), ldk = list()) {
   Out <- structure(list(coo = x, fac = fac, ldk = ldk), class=c("Out", "Coo"))
   if (!is.null(Out$fac))
-    Out$fac <- dplyr::as_data_frame(Out$fac, stringsAsFactors = FALSE)
+    Out$fac <- tibble::as_tibble(Out$fac, stringsAsFactors = FALSE)
   if (is.null(names(Out))) names(Out) <- paste0("shp", 1:length(Out))
   return(Out)
 }

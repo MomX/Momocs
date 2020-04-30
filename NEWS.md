@@ -1,5 +1,8 @@
+# Momocs 1.3.1
+* Changed all `dplyr::as_data_frame` for `tibble::as_tibble`
+
 # Momocs 1.3.0
-* **This version will be the last one released on CRAN. Momocs is now retired and will no longer be maintained. See momx.github.io. As of April 15, 2020 it satisifies all available testing approaches**.
+* **This version will be the last major one released on CRAN. Momocs is now retired and will no longer be maintained. See momx.github.io. As of April 15, 2020 it satisifies all available testing approaches**.
 * new multivariate method: `KMEDOIDS` on top of `cluster::pam`. Added a `plot_silhouette` to go with this friend. Now depends `cluster`.
 * new multivariate method: `NMDS` on top of `vegan::metaMDS`; use `plot_NMDS` to plot it and `vegan::stressplot` for a Shepard plot. Now depends `vegan`.
 * new multivariate method: `MDS` on top of `cmdscale`; use `plot_MDS` to plot it.
