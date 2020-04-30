@@ -95,7 +95,7 @@ coo_boundingbox <- function(coo){
 coo_boundingbox.default <- function(coo){
   coo %>% apply(2, range) %>% as.numeric() %>%
     sapply(list) %>% `names<-`(c("x0", "x1", "y0", "y1")) %>%
-    dplyr::as_data_frame()
+    tibble::as_tibble()
 }
 
 #' @export

@@ -90,7 +90,7 @@ measure.list <- function(x, ...){
   for (i in seq_along(funs)){
     l[[i]] <- sapply(x, funs[i])
   }
-  data.frame(l) %>% dplyr::as_data_frame() %>% return
+  data.frame(l) %>% tibble::as_tibble() %>% return
 }
 
 #' @export
@@ -109,7 +109,7 @@ measure.Coo <- function(x, ...){
       l[[i]] <- sapply(x$coo, funs[i])
     }
   }
-  coe <- data.frame(l) %>% dplyr::as_data_frame()
+  coe <- data.frame(l) %>% tibble::as_tibble()
   fac <- x$fac
   TraCoe(coe = coe,
          fac = fac)

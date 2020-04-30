@@ -13,7 +13,7 @@
 #' @export
 TraCoe <- function(coe = matrix(), fac = dplyr::data_frame()) {
   structure(
-    list(coe = coe, fac = dplyr::as_data_frame(fac)),
+    list(coe = coe, fac = tibble::as_tibble(fac)),
     class=c("TraCoe", "Coe")
   )
 }

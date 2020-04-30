@@ -781,7 +781,7 @@ combine.OutCoe <- function(...) {
     stop("objects to combine must have the same number of items")
   # Out <- Out(do.call( c, lapply( args, c )))
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
-  facS <- args[[1]]$fac %>% dplyr::as_data_frame()
+  facS <- args[[1]]$fac %>% tibble::as_tibble()
   methodS <- do.call(c, lapply(args, function(x) x$method))
   normS <- do.call(c, lapply(args, function(x) x$norm))
   OutCoe <- OutCoe(coe = coeS, fac = facS, method = methodS, norm = normS)
@@ -801,7 +801,7 @@ combine.OutCoe <- function(...) {
   names(OutCoe$method) <- names(args)
 
   # ensure $fac is a data_frame
-  OutCoe$fac %<>% dplyr::as_data_frame()
+  OutCoe$fac %<>% tibble::as_tibble()
 
   return(OutCoe)
 }
@@ -813,7 +813,7 @@ combine.OpnCoe <- function(...) {
   if (length(unique(sapply(args, length))) != 1)
     stop("objects to combine must have the same number of items")
   coeS <- do.call("cbind", lapply(args, function(x) x$coe))
-  facS <- args[[1]]$fac %>% dplyr::as_data_frame()
+  facS <- args[[1]]$fac %>% tibble::as_tibble()
   methodS <- do.call(c, lapply(args, function(x) x$method))
   baseline1S <- do.call(c, lapply(args, function(x) x$baseline1))
   baseline2S <- do.call(c, lapply(args, function(x) x$baseline2))
@@ -832,7 +832,7 @@ combine.OpnCoe <- function(...) {
   OpnCoe$cuts <- cutS
 
   # ensure $fac is a data_frame
-  OpnCoe$fac %<>% dplyr::as_data_frame()
+  OpnCoe$fac %<>% tibble::as_tibble()
 
 
   return(OpnCoe)

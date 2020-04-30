@@ -673,7 +673,7 @@ calibrate_deviations_efourier <-
       d <- apply(res, 1:2, sd)
       # we prepare a df
       # we prepare a df
-      m %>% dplyr::as_data_frame() %>% seq_along %>%
+      m %>% tibble::as_tibble() %>% seq_along %>%
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%
@@ -806,7 +806,7 @@ calibrate_deviations_tfourier <-
       d <- apply(res, 1:2, sd)
       # we prepare a df
       # we prepare a df
-      m %>% dplyr::as_data_frame() %>% seq_along %>%
+      m %>% tibble::as_tibble() %>% seq_along %>%
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%
@@ -939,7 +939,7 @@ calibrate_deviations_rfourier <-
       d <- apply(res, 1:2, sd)
       # we prepare a df
       # we prepare a df
-      m %>% dplyr::as_data_frame() %>% seq_along %>%
+      m %>% tibble::as_tibble() %>% seq_along %>%
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%
@@ -1072,7 +1072,7 @@ calibrate_deviations_sfourier <-
       d <- apply(res, 1:2, sd)
       # we prepare a df
       # we prepare a df
-      m %>% dplyr::as_data_frame() %>% seq_along %>%
+      m %>% tibble::as_tibble() %>% seq_along %>%
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%

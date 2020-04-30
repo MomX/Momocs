@@ -202,7 +202,7 @@ MSHAPES.PCA <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...){
 
   # res data_frame
   res <- x$x %>%
-    dplyr::as_data_frame() %>%
+    tibble::as_tibble() %>%
     dplyr::bind_cols(fdf, .) %>%
     dplyr::group_by(fac) %>%
     dplyr::summarise_all(FUN)
@@ -229,7 +229,7 @@ MSHAPES.LDA <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...){
 
   # res data_frame
   res <- x$mod.pred$x %>%
-    dplyr::as_data_frame() %>%
+    tibble::as_tibble() %>%
     dplyr::bind_cols(fdf, .) %>%
     dplyr::group_by(fac) %>%
     dplyr::summarise_all(FUN)

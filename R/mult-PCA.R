@@ -136,7 +136,7 @@ PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=dplyr::data_frame()
   PCA <- prcomp(x, scale. = scale., center = center)
   eig <- (PCA$sdev^2)
   PCA$eig <- eig/sum(eig)
-  if (!is.null(fac)) fac <- dplyr::as_data_frame(fac)
+  if (!is.null(fac)) fac <- tibble::as_tibble()(fac)
   PCA$fac <- fac
   PCA$method <- NULL
   # PCA$baseline2 <- OpnCoe$baseline2
@@ -155,7 +155,7 @@ as_PCA <- function(x, fac){
 as_PCA.default <- function(x, fac){
   if (class(x)[1] != "PCA"){
     class(x) <- c("PCA", class(x))
-    if (!missing(fac)) x$fac <- dplyr::as_data_frame(fac)
+    if (!missing(fac)) x$fac <- tibble::as_tibble()(fac)
     return(x)}}
 
 #' @export

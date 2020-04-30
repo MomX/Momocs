@@ -184,7 +184,7 @@ KMEDOIDS.PCA <- function(x,
 plot_silhouette <- function(x, palette=pal_qual){
   x <- x$silinfo$widths
   x %>%
-    dplyr::as_data_frame() %>%
+    tibble::as_tibble() %>%
     dplyr::mutate(x=1:nrow(x),
                   cluster=factor(cluster),
                   neighbor=factor(neighbor)) %>%
