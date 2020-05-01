@@ -20,9 +20,8 @@ jobs:
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
 
-        if: runner.os == 'macOS'
-        run: |
-          wget https://dl.bintray.com/xquartz/downloads/XQuartz-2.7.11.dmg
-          sudo hdiutil attach XQuartz-2.7.11.dmg
-          sudo installer -package /Volumes/XQuartz-2.7.11/XQuartz.pkg -target /
-
+    env:
+      # suppress warnings of rgl package
+      RGL_USE_NULL: true
+      # required on macOS >= 10.15.4 for correct linking
+      SDKROOT: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
