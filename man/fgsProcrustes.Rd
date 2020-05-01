@@ -20,10 +20,11 @@ Landmarks methods are the less tested in Momocs. Keep in mind that some features
 are still experimental and that your help is welcome.
 }
 \examples{
+\dontrun{
 chaffp <- fgsProcrustes(chaff)
 chaffp
 chaffp \%>\% PCA() \%>\% plot("taxa")
-
+}
 }
 \seealso{
 Other procrustes functions: 

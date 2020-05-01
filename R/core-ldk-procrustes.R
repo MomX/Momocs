@@ -291,10 +291,11 @@ fgProcrustes.list <- function(x, ...){
 #' are still experimental and that your help is welcome.
 #' @family procrustes functions
 #' @examples
+#' \dontrun{
 #' chaffp <- fgsProcrustes(chaff)
 #' chaffp
 #' chaffp %>% PCA() %>% plot("taxa")
-#'
+#'}
 #' @export
 fgsProcrustes <- function(x){
   UseMethod("fgsProcrustes")
