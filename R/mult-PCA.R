@@ -155,7 +155,7 @@ as_PCA <- function(x, fac){
 as_PCA.default <- function(x, fac){
   if (class(x)[1] != "PCA"){
     class(x) <- c("PCA", class(x))
-    if (!missing(fac)) x$fac <- tibble::as_tibble()(fac)
+    if (!missing(fac)) x$fac <- tibble::as_tibble(fac)
     return(x)}}
 
 #' @export

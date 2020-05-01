@@ -34,24 +34,6 @@
 #' ms <- ms$shp
 #' coo_plot(ms$beer)
 #' coo_draw(ms$whisky, border='forestgreen')
-#' \dontrun{
-#' tps_arr(ms$whisky, ms$beer) #etc.
-#'}
-#'
-#' op <- olea %>% filter(view=="VL") %>% npoly(5)
-#' ms <- MSHAPES(op, ~var) #etc
-#' ms$Coe
-#' panel(Opn(ms$shp), names=TRUE)
-#'
-#' wp <- fgProcrustes(wings, tol=1e-4)
-#' ms <- MSHAPES(wp, 1)
-#' plot_MSHAPES(ms)
-#'
-#' # on PCA and LDA just return a data_frame
-#' bot.f %>% PCA %>% MSHAPES(~type)
-#' bot.f %>% LDA(~fake) %>% MSHAPES(~fake)
-#' # LDA on ~fake but average on type
-#' bot.f %>% LDA(~fake) %>% MSHAPES(~type)
 #' @export
 MSHAPES <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...) {
   UseMethod("MSHAPES")

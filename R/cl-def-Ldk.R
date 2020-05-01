@@ -100,7 +100,7 @@ Ldk.list <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NU
   Ldk <- structure(list(coo = coo, links = links, slidings = slidings, fac = fac), class = c("Ldk",
                                                                                              "Coo"))
   if (!is.null(Ldk$fac))
-    Ldk$fac <- as.data.frame(Ldk$fac, stringsAsFactors = FALSE) %>% tibble::as_tibble()()
+    Ldk$fac <- tibble::as_tibble(fac)
   class(Ldk) <- c("Ldk", "Coo")
   if (is.null(names(Ldk)))
     names(Ldk) <- paste0("shp", 1:length(Ldk))
