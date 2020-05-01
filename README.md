@@ -138,11 +138,6 @@ hearts %T>%                    # A toy dataset
   plot_PCA(~aut) %>%           # A PC1:2 plot
   LDA(~aut) %>%                # Linear Discriminant Analysis
   plot_CV()                    # And the confusion matrix after leave one out cross validation
-#> Warning: `as_data_frame()` is deprecated as of tibble 2.0.0.
-#> Please use `as_tibble()` instead.
-#> The signature and semantics have changed, see `?as_tibble`.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_warnings()` to see where this warning was generated.
 ```
 
 ![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->
