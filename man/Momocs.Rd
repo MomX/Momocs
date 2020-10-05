@@ -33,7 +33,7 @@ Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 \references{
 \itemize{
 \item Bonhomme V, Picq S, Gaucherel C, Claude J. 2014. Momocs: Outline Analysis Using R.
-\emph{Journal of Statistical Software} \bold{56}. \url{http://www.jstatsoft.org/v56/i13}.
+\emph{Journal of Statistical Software} \bold{56}. \url{https://www.jstatsoft.org/v56/i13}.
 \item Claude J. 2008. \emph{Morphometrics with R}. Springer-Verlag, New-York.
 }
 }

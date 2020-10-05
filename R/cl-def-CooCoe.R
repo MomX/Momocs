@@ -136,7 +136,7 @@ Coo <- function(...) {
 #' # to see all methods for OutCoe objects.
 #' methods(class='OutCoe') # same for OpnCoe, LdkCoe, TraCoe
 #'
-#' bot.f<- efourier(bot, 12)
+#' bot.f <- efourier(bot, 12)
 #' bot.f
 #' class(bot.f)
 #' inherits(bot.f, "Coe")
@@ -155,7 +155,7 @@ Coo <- function(...) {
 #' bot.f[1:5] <- matrix(1:48, nrow=5, ncol=48, byrow=TRUE)
 #' bot.f[1:5]
 #'
-#' # An illustration of Momocs desing. See also browseVignettes("Momocs")
+#' # An illustration of Momocs design. See also browseVignettes("Momocs")
 #' op <- opoly(olea, 5)
 #' op
 #' class(op)

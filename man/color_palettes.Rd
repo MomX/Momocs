@@ -60,9 +60,9 @@ colors (hexadecimal format)
 Colors, colors, colors.
 }
 \note{
-Among available color palettes, \code{col_solarized} is based on Solarized: \url{http://ethanschoonover.com/solarized};
+Among available color palettes, \code{col_solarized} is based on Solarized: \url{https://ethanschoonover.com/solarized/};
 \code{col_div}, \code{col_qual}, \code{col_heat}, \code{col_cold}
-and \code{col_gallus} are based on on ColorBrewer2: \url{http://colorbrewer2.org/}.
+and \code{col_gallus} are based on on ColorBrewer2: \url{https://colorbrewer2.org/}.
 }
 \examples{
 

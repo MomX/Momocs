@@ -23,7 +23,7 @@ No reverse dependencies.
 
 ## Also
 
-Apologies for letting archive the last version, related to `return` versus `return()`. Haven't found any `return` in my code, so I think it was a false negative. I took the opportunity to make a couple of minor changes.
+Apologies for letting archive the last version, related to `return` versus `return()`. I have corrected the two reported by r-hub. I also took the opportunity to make a couple of minor changes.
 
 Thanks a lot, dear CRAN maintainers !
 

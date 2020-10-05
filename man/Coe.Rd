@@ -55,7 +55,7 @@ bot.f[1]
 bot.f[1:5] <- matrix(1:48, nrow=5, ncol=48, byrow=TRUE)
 bot.f[1:5]
 
-# An illustration of Momocs desing. See also browseVignettes("Momocs")
+# An illustration of Momocs design. See also browseVignettes("Momocs")
 op <- opoly(olea, 5)
 op
 class(op)

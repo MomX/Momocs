@@ -20,7 +20,7 @@ NULL
 #' @rdname data_trilo
 #' @format A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 #' ontogenetic stages of trilobite.
-#' @source  Arranged from: \url{http://folk.uio.no} (used to be in \code{ohammer} website but
+#' @source  Arranged from: \url{ https://folk.universitetetioslo.no/} (used to be in \code{ohammer} website but
 #' seems to be deprecated now).
 #' The original data included 51 outlines and 5 ontogenetic stages,
 #' but one of them has just a single outline thas has been removed.
@@ -120,7 +120,7 @@ NULL
 #' identification of isolated modern human molars: testing Procrustes aligned
 #' outlines as a standardization procedure for elliptic fourier analysis.
 #' \emph{American Journal of Physical Anthropology}, 153(2), 314-22. doi:10.1002/ajpa.22428
-#' \url{http://onlinelibrary.wiley.com/doi/10.1002/ajpa.22428/abstract}
+#' \url{ https://onlinelibrary.wiley.com/doi/abs/10.1002/ajpa.22428}
 #' @family datasets
 NULL
 
@@ -170,7 +170,7 @@ NULL
 #' @format A \link{Out} object 64 coordinates of 30 wood molar outlines.
 #' @source  Renaud S, Dufour AB, Hardouin EA, Ledevin R, Auffray JC (2015):
 #' Once upon multivariate analyses: When they tell several stories about biological evolution.
-#' \emph{PLoS One} 10:1-18 \url{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0132801}
+#' \emph{PLoS One} 10:1-18 \url{ https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0132801}
 #' @family datasets
 NULL
 
@@ -182,7 +182,7 @@ NULL
 #' @format A \link{Out} object 64 coordinates of 30 wood molar outlines.
 #' @source  Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in
 #'  the mandible shape of \emph{Apodemus} wood mice. \emph{Journal of Biogeography} 30:1617-1628.
-#' \url{http://onlinelibrary.wiley.com/doi/10.1046/j.1365-2699.2003.00932.x/full}
+#' \url{https://onlinelibrary.wiley.com/doi/full/10.1046/j.1365-2699.2003.00932.x}
 #' @family datasets
 NULL
 

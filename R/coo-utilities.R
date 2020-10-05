@@ -570,7 +570,7 @@ coo_untiltx.default <- function(coo, id=1, ldk){
   # remove this difference and return the untilted shape
   coo %>%
     coo_rotatecenter(theta=theta, center=cent_xy) %>%
-    return
+    return()
 }
 
 #' @export

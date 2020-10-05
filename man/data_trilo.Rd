@@ -9,7 +9,7 @@ A \link{Out} object 64 coordinates of 50 cephalic outlines from different
 ontogenetic stages of trilobite.
 }
 \source{
-Arranged from: \url{http://folk.uio.no} (used to be in \code{ohammer} website but
+Arranged from: \url{ https://folk.universitetetioslo.no/} (used to be in \code{ohammer} website but
 seems to be deprecated now).
 The original data included 51 outlines and 5 ontogenetic stages,
 but one of them has just a single outline thas has been removed.

@@ -90,7 +90,7 @@ measure.list <- function(x, ...){
   for (i in seq_along(funs)){
     l[[i]] <- sapply(x, funs[i])
   }
-  data.frame(l) %>% tibble::as_tibble() %>% return
+  data.frame(l) %>% tibble::as_tibble() %>% return()
 }
 
 #' @export
