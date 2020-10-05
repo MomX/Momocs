@@ -1,6 +1,7 @@
 # Momocs 1.3.2
 * Turned remaining `return` for `return()` to please R CMD check
-* `as_df` now uses `tibble::as_tibble` instead of `dplyr::as_data_frame` which also removes an annoying message
+* `as_df` now uses `tibble` verbs everywhere
+* printing Coo is faster now at the price of sampling 100 shapes on which to calculate the mean number of coordinates and their sd.
 * Removed the (quite) annoying startup message. I will not have time for MomX until 2021 anyway
 
 # Momocs 1.3.1

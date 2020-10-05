@@ -18,6 +18,10 @@ With --as-cran on my machine.
 
 Only the NOTE for archiving on CRAN.
 
+### 
+Everything is alright except a dependency in utf8 that I do not really understand but seems to be related to vignettes.
+
+
 ## Reverse dependencies
 No reverse dependencies.
 

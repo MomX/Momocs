@@ -131,6 +131,7 @@ Coo <- function(...) {
 #'
 #' @family classes
 #' @examples
+#' \dontrun{
 #' # to see all methods for Coe objects.
 #' methods(class='Coe')
 #' # to see all methods for OutCoe objects.
@@ -166,7 +167,7 @@ Coo <- function(...) {
 #' class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects
 #' # so you can apply all Ldk methods available.
 #' wp$coe # Procrustes aligned coordinates
-#'
+#'}
 #' @export
 Coe <- function(...) {
     message("Coe constructor does not exist alone. See ?Coe")
@@ -196,8 +197,13 @@ print.Coo <- function(x, n=6, ...) {
     what <- "landmarks"
     cat("Ldk (landmarks)\n")
   }
-  coo_len <- sapply(x$coo, nrow)
-  coo_closed <- sapply(x$coo, coo_is_closed)
+  # to speed up printing for large Coo
+  if (length(x$coo)>100){
+    coo_len <- sapply(sample(x$coo, 100), nrow)
+  } else {
+    coo_len <- sapply(x$coo, nrow)
+  }
+
   # number of outlines
   cat("  - ", coo_nb, " ", what, ", ",
       round(mean(coo_len)), " +/- ", round(sd(coo_len)), " coords (in $coo)\n", sep="")

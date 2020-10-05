@@ -31,12 +31,13 @@ You can access all the methods available for \code{Coe} objects
 with \code{methods(class=Coe)}.
 }
 \examples{
+\dontrun{
 # to see all methods for Coe objects.
 methods(class='Coe')
 # to see all methods for OutCoe objects.
 methods(class='OutCoe') # same for OpnCoe, LdkCoe, TraCoe
 
-bot.f<- efourier(bot, 12)
+bot.f <- efourier(bot, 12)
 bot.f
 class(bot.f)
 inherits(bot.f, "Coe")
@@ -66,7 +67,7 @@ wp
 class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects
 # so you can apply all Ldk methods available.
 wp$coe # Procrustes aligned coordinates
-
+}
 }
 \seealso{
 Other classes: 
