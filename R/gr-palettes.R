@@ -7,7 +7,7 @@
 #' and with transparency support thanks to `pal_alpha` that can be used alone.
 #' Also, all viridis palettes (see the [package on CRAN](https://CRAN.R-project.org/package=viridis)),
 #' yet color ramps are borrowed and Momocs does not depend on it.
-#' Also, `pal_qual_solarized` based on Solarized: \url{http://ethanschoonover.com/solarized}
+#' Also, `pal_qual_solarized` based on Solarized: \url{https://ethanschoonover.com/solarized/}
 #' and `pal_seq_grey` only shades of grey from `grey10` to `grey90`.
 #'
 #' Default color palettes are currently:

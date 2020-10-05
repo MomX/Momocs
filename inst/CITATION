@@ -11,7 +11,7 @@ citEntry(entry = "Article",
   volume       = "56",
   number       = "13",
   pages        = "1--24",
-  url          = "http://www.jstatsoft.org/v56/i13/",
+  url          = "https://www.jstatsoft.org/v56/i13/",
 
   textVersion  =
   paste("Vincent Bonhomme, Sandrine Picq, Cedric Gaucherel, Julien Claude (2014).",

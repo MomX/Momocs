@@ -133,7 +133,7 @@ recreated without the number of colors limitation
 and with transparency support thanks to \code{pal_alpha} that can be used alone.
 Also, all viridis palettes (see the \href{https://CRAN.R-project.org/package=viridis}{package on CRAN}),
 yet color ramps are borrowed and Momocs does not depend on it.
-Also, \code{pal_qual_solarized} based on Solarized: \url{http://ethanschoonover.com/solarized}
+Also, \code{pal_qual_solarized} based on Solarized: \url{https://ethanschoonover.com/solarized/}
 and \code{pal_seq_grey} only shades of grey from \code{grey10} to \code{grey90}.
 }
 \details{
