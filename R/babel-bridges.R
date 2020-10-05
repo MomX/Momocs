@@ -238,7 +238,7 @@ as_df.Coo <- function(x, ...){
   #   dplyr::as_data_frame() %>%
   #   return()
   dplyr::bind_cols(
-    tibble::as_tibble(coo=x$coo),
+    tibble::tibble(coo=x$coo),
     x$fac
   )
 }
@@ -316,7 +316,7 @@ as_df.LDA <- function(x, retain, ...){
   # now the big one
   dplyr::bind_cols(
     # actual, predicted, posterior
-    dplyr::data_frame(actual     = x$f,
+    tibble::tibble(actual     = x$f,
                       predicted  = x$mod.pred$class,
                       posterior  = apply(x$mod.pred$posterior, 1, max)),
     # the original fac

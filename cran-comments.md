@@ -1,6 +1,6 @@
 ## Test environments
-* local OS X 10.13.2 install, R 3.6.2 with --as-cran on my machine
-* ubuntu x86_64-pc-linux-gnu (64-bit) with R 3.6.2 (on travis-ci https://travis-ci.org/MomX/Momocs)
+* local OS X 10.15.6 install, R 4.0.0 with --as-cran on my machine
+* ubuntu x86_64-pc-linux-gnu (64-bit) with R 4.0.2 (on travis-ci https://travis-ci.org/MomX/Momocs)
 
 Both succeeded.
 
@@ -23,11 +23,7 @@ No reverse dependencies.
 
 ## Also
 
-Apologies for leeting archive the last version.
-
-I was not able to make required changes at that time since I was busy with this package successor.
-
-Yet I consider it 'retired', I would be happy if it finds its way to CRAN for the sake of reproducibility.
+Apologies for letting archive the last version, related to `return` versus `return()`. Haven't found any `return` in my code, so I think it was a false negative. I took the opportunity to make a couple of minor changes.
 
 Thanks a lot, dear CRAN maintainers !
 
