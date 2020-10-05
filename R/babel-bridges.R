@@ -238,7 +238,7 @@ as_df.Coo <- function(x, ...){
   #   dplyr::as_data_frame() %>%
   #   return()
   dplyr::bind_cols(
-    dplyr::data_frame(coo=x$coo),
+    tibble::as_tibble(coo=x$coo),
     x$fac
   )
 }
