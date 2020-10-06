@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -40,7 +44,6 @@
 <meta property="og:title" content="NMDS plot unsing grindr layers — plot_NMDS" />
 <meta property="og:description" content="Quickly vizualise MDS and NMDS objects and build customs plots
 using the layers. See examples." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -58,7 +61,7 @@ using the layers. See examples." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +75,7 @@ using the layers. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -226,54 +229,59 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### First prepare an NMDS object</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
-#&gt; Run 1 stress 0.07227125 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 4.874815e-06  max resid 1.922024e-05 
+#&gt; Run 1 stress 0.07227126 
+#&gt; ... Procrustes: rmse 2.381226e-05  max resid 9.813984e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 2 stress 0.1611602 
+#&gt; Run 2 stress 0.07227125 
+#&gt; ... Procrustes: rmse 5.398747e-06  max resid 1.801246e-05 
+#&gt; ... Similar to previous best
 #&gt; Run 3 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.320369e-05  max resid 6.620272e-05 
+#&gt; ... Procrustes: rmse 1.016816e-05  max resid 3.960546e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 4 stress 0.0722713 
-#&gt; ... Procrustes: rmse 4.960853e-05  max resid 0.0002121614 
+#&gt; Run 4 stress 0.07227125 
+#&gt; ... Procrustes: rmse 7.108404e-06  max resid 3.438065e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 5 stress 0.07227133 
-#&gt; ... Procrustes: rmse 6.23965e-05  max resid 0.0002534245 
+#&gt; ... Procrustes: rmse 6.025535e-05  max resid 0.0002354647 
 #&gt; ... Similar to previous best
-#&gt; Run 6 stress 0.07227129 
-#&gt; ... Procrustes: rmse 4.746086e-05  max resid 0.000206382 
+#&gt; Run 6 stress 0.07227126 
+#&gt; ... Procrustes: rmse 2.31341e-05  max resid 9.482347e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 7 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.184177e-05  max resid 4.588981e-05 
+#&gt; Run 7 stress 0.1659492 
+#&gt; Run 8 stress 0.07227125 
+#&gt; ... Procrustes: rmse 6.728685e-06  max resid 2.889537e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 8 stress 0.1619478 
-#&gt; Run 9 stress 0.1700874 
-#&gt; Run 10 stress 0.0722713 
-#&gt; ... Procrustes: rmse 1.593082e-05  max resid 4.503188e-05 
+#&gt; Run 9 stress 0.1717543 
+#&gt; Run 10 stress 0.07227135 
+#&gt; ... Procrustes: rmse 2.711831e-05  max resid 0.000104351 
 #&gt; ... Similar to previous best
-#&gt; Run 11 stress 0.1694862 
-#&gt; Run 12 stress 0.07227145 
-#&gt; ... Procrustes: rmse 5.699131e-05  max resid 0.0001988014 
+#&gt; Run 11 stress 0.07227128 
+#&gt; ... Procrustes: rmse 1.915063e-05  max resid 6.038756e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 13 stress 0.1675769 
-#&gt; Run 14 stress 0.07227126 
-#&gt; ... Procrustes: rmse 1.643244e-05  max resid 6.313328e-05 
+#&gt; Run 12 stress 0.3988279 
+#&gt; Run 13 stress 0.07227126 
+#&gt; ... Procrustes: rmse 2.422202e-05  max resid 9.792758e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 15 stress 0.07227129 
-#&gt; ... Procrustes: rmse 3.509651e-05  max resid 0.000136143 
+#&gt; Run 14 stress 0.07227125 
+#&gt; ... Procrustes: rmse 5.461193e-06  max resid 1.91242e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 16 stress 0.07227142 
-#&gt; ... Procrustes: rmse 3.412954e-05  max resid 8.052024e-05 
+#&gt; Run 15 stress 0.07227134 
+#&gt; ... Procrustes: rmse 6.751208e-05  max resid 0.0002664567 
 #&gt; ... Similar to previous best
-#&gt; Run 17 stress 0.07227125 
-#&gt; ... Procrustes: rmse 4.351561e-06  max resid 1.969273e-05 
+#&gt; Run 16 stress 0.07227125 
+#&gt; ... Procrustes: rmse 4.220468e-06  max resid 2.161552e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 18 stress 0.07227126 
-#&gt; ... Procrustes: rmse 9.297598e-06  max resid 3.280504e-05 
+#&gt; Run 17 stress 0.07227127 
+#&gt; ... Procrustes: rmse 2.884357e-05  max resid 0.0001198705 
 #&gt; ... Similar to previous best
-#&gt; Run 19 stress 0.1553256 
-#&gt; Run 20 stress 0.07227132 
-#&gt; ... Procrustes: rmse 2.964159e-05  max resid 9.551984e-05 
+#&gt; Run 18 stress 0.07227125 
+#&gt; ... Procrustes: rmse 8.609579e-06  max resid 3.162325e-05 
+#&gt; ... Similar to previous best
+#&gt; Run 19 stress 0.07227125 
+#&gt; ... Procrustes: rmse 7.593247e-06  max resid 2.720023e-05 
+#&gt; ... Similar to previous best
+#&gt; Run 20 stress 0.07227126 
+#&gt; ... Procrustes: rmse 1.675066e-05  max resid 6.230567e-05 
 #&gt; ... Similar to previous best
 #&gt; *** Solution reached</div><div class='input'>
 <span class='fu'>plot_NMDS</span>(<span class='no'>x</span>)</div><div class='img'><img src='plot_NMDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_NMDS</span>(<span class='no'>x</span>, ~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_stars</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span>()</div><div class='img'><img src='plot_NMDS-2.png' alt='' width='700' height='433' /></div><div class='input'>
@@ -281,14 +289,10 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>MDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'>
 <span class='fu'>plot_MDS</span>(<span class='no'>x</span>)</div><div class='img'><img src='plot_NMDS-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_MDS</span>(<span class='no'>x</span>, ~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_stars</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span>()</div><div class='img'><img src='plot_NMDS-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -299,7 +303,7 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

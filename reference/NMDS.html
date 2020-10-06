@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 
 <meta property="og:title" content="Non metric multidimensional scaling — NMDS" />
 <meta property="og:description" content="A wrapper around vegan::metaMDS." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -57,7 +60,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -174,59 +177,54 @@
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'vegan':</span>
 #&gt; <span class='message'>  method     from      </span>
 #&gt; <span class='message'>  rev.hclust dendextend</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
-#&gt; Run 1 stress 0.07227126 
-#&gt; ... Procrustes: rmse 1.617493e-05  max resid 6.031545e-05 
+#&gt; Run 1 stress 0.07227132 
+#&gt; ... Procrustes: rmse 2.134479e-05  max resid 6.102186e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 2 stress 0.07227125 
-#&gt; ... Procrustes: rmse 9.322816e-06  max resid 3.38855e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 3 stress 0.07227127 
-#&gt; ... Procrustes: rmse 3.550582e-05  max resid 0.0001313918 
-#&gt; ... Similar to previous best
-#&gt; Run 4 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.426918e-05  max resid 9.204528e-05 
+#&gt; Run 2 stress 0.1536611 
+#&gt; Run 3 stress 0.1729718 
+#&gt; Run 4 stress 0.07227128 
+#&gt; ... Procrustes: rmse 2.27572e-05  max resid 0.0001142424 
 #&gt; ... Similar to previous best
 #&gt; Run 5 stress 0.07227125 
-#&gt; ... Procrustes: rmse 4.726889e-06  max resid 1.445588e-05 
+#&gt; ... Procrustes: rmse 8.797053e-06  max resid 3.993071e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 6 stress 0.1684233 
-#&gt; Run 7 stress 0.07227126 
-#&gt; ... Procrustes: rmse 1.940177e-05  max resid 6.916372e-05 
+#&gt; Run 6 stress 0.07227125 
+#&gt; ... Procrustes: rmse 5.388401e-06  max resid 2.000297e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 8 stress 0.0722713 
-#&gt; ... Procrustes: rmse 1.880684e-05  max resid 4.590807e-05 
+#&gt; Run 7 stress 0.07227129 
+#&gt; ... Procrustes: rmse 4.13528e-05  max resid 0.0001738164 
 #&gt; ... Similar to previous best
+#&gt; Run 8 stress 0.1476538 
 #&gt; Run 9 stress 0.07227125 
-#&gt; ... Procrustes: rmse 4.175003e-06  max resid 1.463801e-05 
+#&gt; ... New best solution
+#&gt; ... Procrustes: rmse 3.713068e-06  max resid 1.69194e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 10 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.948362e-06  max resid 2.787275e-05 
+#&gt; ... Procrustes: rmse 4.388959e-06  max resid 1.391617e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 11 stress 0.07227129 
-#&gt; ... Procrustes: rmse 2.156687e-05  max resid 7.252355e-05 
+#&gt; Run 11 stress 0.07227131 
+#&gt; ... Procrustes: rmse 4.67699e-05  max resid 0.0001804122 
 #&gt; ... Similar to previous best
-#&gt; Run 12 stress 0.1723591 
-#&gt; Run 13 stress 0.07227128 
-#&gt; ... Procrustes: rmse 3.718727e-05  max resid 0.0001561026 
+#&gt; Run 12 stress 0.1647891 
+#&gt; Run 13 stress 0.07227126 
+#&gt; ... Procrustes: rmse 2.048337e-05  max resid 8.248206e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 14 stress 0.07227125 
-#&gt; ... Procrustes: rmse 7.202872e-06  max resid 2.44823e-05 
+#&gt; Run 14 stress 0.07227126 
+#&gt; ... Procrustes: rmse 2.071888e-05  max resid 8.201421e-05 
 #&gt; ... Similar to previous best
-#&gt; Run 15 stress 0.1692495 
-#&gt; Run 16 stress 0.07227127 
-#&gt; ... Procrustes: rmse 3.023991e-05  max resid 0.000125352 
+#&gt; Run 15 stress 0.1606942 
+#&gt; Run 16 stress 0.07227125 
+#&gt; ... Procrustes: rmse 8.159651e-06  max resid 3.149556e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 17 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.73856e-06  max resid 1.841418e-05 
+#&gt; ... Procrustes: rmse 1.742992e-06  max resid 7.302496e-06 
 #&gt; ... Similar to previous best
-#&gt; Run 18 stress 0.07227125 
-#&gt; ... Procrustes: rmse 3.792351e-06  max resid 2.003342e-05 
-#&gt; ... Similar to previous best
+#&gt; Run 18 stress 0.1776129 
 #&gt; Run 19 stress 0.07227125 
-#&gt; ... Procrustes: rmse 8.642971e-06  max resid 2.135103e-05 
+#&gt; ... Procrustes: rmse 1.328271e-05  max resid 5.422646e-05 
 #&gt; ... Similar to previous best
 #&gt; Run 20 stress 0.07227125 
-#&gt; ... Procrustes: rmse 8.377458e-06  max resid 2.278946e-05 
+#&gt; ... Procrustes: rmse 2.15242e-06  max resid 6.763911e-06 
 #&gt; ... Similar to previous best
 #&gt; *** Solution reached</div><div class='input'>
 # Shepard diagram # before a Momocs wrapper
@@ -234,16 +232,10 @@
 
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -254,7 +246,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

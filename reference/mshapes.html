@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -43,7 +47,6 @@ on list or an array of shapes, an Ldk object. It can also be used on Coe objects
 In that case, the reverse transformation (from coefficients to shapes) is calculated, (within
 groups defined with the fac argument if provided) and the Coe object is also returned
 (in $Coe) along with a list of shapes (in $shp) and can then be passed to plot_MSHAPES." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -61,7 +64,7 @@ groups defined with the fac argument if provided) and the Coe object is also ret
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -75,7 +78,7 @@ groups defined with the fac argument if provided) and the Coe object is also ret
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -365,63 +368,12 @@ of scores on <code>PCs</code> or <code>LDs</code>. This method used on the latte
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> beer   c    
 #&gt; </span><span style='color: #555555;'>2</span><span> whisky a    </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>ms</span>$<span class='no'>Coe</span>)</div><div class='output co'>#&gt; [1] "OutCoe" "Coe"   </div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='no'>ms</span>$<span class='no'>shp</span>
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='img'><img src='MSHAPES-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='tps_arr.html'>tps_arr</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='no'>ms</span>$<span class='no'>beer</span>) <span class='co'>#etc.</span>
-}
-
-<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>view</span><span class='kw'>==</span><span class='st'>"VL"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>MSHAPES</span>(<span class='no'>op</span>, ~<span class='no'>var</span>) <span class='co'>#etc</span>
-<span class='no'>ms</span>$<span class='no'>Coe</span></div><div class='output co'>#&gt; An OpnCoe object [ npoly analysis ]
-#&gt; --------------------
-#&gt;  - $coe: 3 open outlines described
-#&gt;  - $baseline1: (-0.5; 0), $baseline2: (0.5; 0)
-#&gt; </span><span style='color: #555555;'># A tibble: 3 x 4</span><span>
-#&gt;   var    domes view  ind  
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Aglan  cult  VL    O10  
-#&gt; </span><span style='color: #555555;'>2</span><span> MouBo1 wild  VL    O10  
-#&gt; </span><span style='color: #555555;'>3</span><span> PicMa  cult  VL    O10  </div><div class='input'><span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='no'>ms</span>$<span class='no'>shp</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='MSHAPES-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)</div><div class='output co'>#&gt; iteration:  1 	gain: 53084 
-#&gt; iteration:  2 	gain: 0.1323 
-#&gt; iteration:  3 	gain: 0.056732 
-#&gt; iteration:  4 	gain: 0.00012401 
-#&gt; iteration:  5 	gain: 0.038609 
-#&gt; iteration:  6 	gain: 0.018221 
-#&gt; iteration:  7 	gain: 0.0014165 
-#&gt; iteration:  8 	gain: 6.1489e-06 </div><div class='input'><span class='no'>ms</span> <span class='kw'>&lt;-</span> <span class='fu'>MSHAPES</span>(<span class='no'>wp</span>, <span class='fl'>1</span>)
-<span class='fu'><a href='plot_MSHAPES.html'>plot_MSHAPES</a></span>(<span class='no'>ms</span>)</div><div class='img'><img src='MSHAPES-4.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># on PCA and LDA just return a data_frame</span>
-<span class='no'>bot.f</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'>MSHAPES</span>(~<span class='no'>type</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 41</span><span>
-#&gt;   type       PC1      PC2      PC3      PC4      PC5      PC6      PC7      PC8
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> beer  -</span><span style='color: #BB0000;'>0.003</span><span style='color: #BB0000;text-decoration: underline;'>96</span><span> -</span><span style='color: #BB0000;'>8.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span> -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>13</span><span> -</span><span style='color: #BB0000;'>0.003</span><span style='color: #BB0000;text-decoration: underline;'>75</span><span>  0.002</span><span style='text-decoration: underline;'>43</span><span> -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>00</span><span>  0.001</span><span style='text-decoration: underline;'>27</span><span> -</span><span style='color: #BB0000;'>8.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> whis…  0.003</span><span style='text-decoration: underline;'>96</span><span>  8.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>  0.005</span><span style='text-decoration: underline;'>13</span><span>  0.003</span><span style='text-decoration: underline;'>75</span><span> -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>43</span><span>  0.002</span><span style='text-decoration: underline;'>00</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>27</span><span>  8.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>
-#&gt; </span><span style='color: #555555;'># … with 32 more variables: PC9 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC10 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC11 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC12 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   PC13 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC14 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC15 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC16 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC17 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC18 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   PC19 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC20 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC21 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC22 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC23 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC24 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   PC25 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC26 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC27 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC28 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC29 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC30 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   PC31 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC32 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC33 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC34 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC35 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC36 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   PC37 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC38 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC39 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, PC40 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='no'>bot.f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>fake</span>) <span class='kw'>%&gt;%</span> <span class='fu'>MSHAPES</span>(~<span class='no'>fake</span>)</div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
-#&gt;   fake     LD1    LD2    LD3
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a      -</span><span style='color: #BB0000;'>9.64</span><span>  0.662  2.65 
-#&gt; </span><span style='color: #555555;'>2</span><span> b     -</span><span style='color: #BB0000;'>11.5</span><span>  -</span><span style='color: #BB0000;'>0.930</span><span> -</span><span style='color: #BB0000;'>2.36</span><span> 
-#&gt; </span><span style='color: #555555;'>3</span><span> c       9.37  3.15  -</span><span style='color: #BB0000;'>0.792</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> d      11.7  -</span><span style='color: #BB0000;'>2.88</span><span>   0.505</div><div class='input'><span class='co'># LDA on ~fake but average on type</span>
-<span class='no'>bot.f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>fake</span>) <span class='kw'>%&gt;%</span> <span class='fu'>MSHAPES</span>(~<span class='no'>type</span>)</div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 4</span><span>
-#&gt;   type     LD1    LD2    LD3
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> beer    10.5  0.134 -</span><span style='color: #BB0000;'>0.144</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> whisky -</span><span style='color: #BB0000;'>10.5</span><span> -</span><span style='color: #BB0000;'>0.134</span><span>  0.144</div></span></pre>
+<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>ms</span>$<span class='no'>beer</span>)</div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>ms</span>$<span class='no'>whisky</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'forestgreen'</span>)</div><div class='img'><img src='MSHAPES-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -432,7 +384,7 @@ of scores on <code>PCs</code> or <code>LDs</code>. This method used on the latte
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
