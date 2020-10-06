@@ -8,8 +8,8 @@ All OK (besides the 'archived package/new submission' note)
 
 ## Before release
 Followed devtools::release() and statisfied all requests, particularly:
-* r-hub check (using `rhub::check_for_cran()` there: https://builder.r-hub.io/status/Momocs_1.3.2.tar.gz-0a9ee40cb3c4453980b02d051020ed73 )
-* win-builder (using `devtools::release()` there: https://win-builder.r-project.org/1lg7KzDr9uQv/00check.log )
+* r-hub check (using `rhub::check_for_cran()` there: https://builder.r-hub.io/status/Momocs_1.3.2.tar.gz-45445c8756a84be4b8d54c9c02ad5095 )
+* win-builder (using `devtools::release()` there: https://win-builder.r-project.org/237v42T36AGH )
 
 ## Reverse dependencies
 No reverse dependencies.
