@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Momocs 
 
-**Momocs is now retired, please see [MomX](https://momx.github.io/MomX/)
+**Momocs will soon retire, please see [MomX](https://momx.github.io/MomX/)
 **
 
 <!--Badges -->

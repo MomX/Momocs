@@ -3,8 +3,8 @@
 
 ## Momocs
 
-**Momocs is now retired, please see [MomX](https://momx.github.io/MomX/)
-**
+**Momocs will soon retire, please see
+[MomX](https://momx.github.io/MomX/) **
 
 <!--Badges -->
 
@@ -120,11 +120,6 @@ devtools::load_all()
 #> Registered S3 method overwritten by 'vegan':
 #>   method     from      
 #>   rev.hclust dendextend
-#> 
-#>   Momocs is now retired and will no longer be maintained.
-#>   It is superseded by Momocs2 and more generally MomX ecosystem:
-#> 
-#>              <   https://momx.github.io   >
 ```
 
 ``` r
