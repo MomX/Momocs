@@ -1,3 +1,6 @@
+# Momocs 1.3.3
+* `plot_PCA` and `plot_LDA` did not consistently work within eg `pdf()`. Thanks to Bill fof pointing this. (214)
+
 # Momocs 1.3.2
 * Turned remaining `return` for `return()` to please R CMD check
 * `as_df` now uses `tibble` verbs everywhere

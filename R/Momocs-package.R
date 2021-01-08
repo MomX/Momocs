@@ -35,7 +35,7 @@
 #' Carl Lipo, Cedric Gaucherel, Catherine Girard, QGouil (GitHub), Christian Steven Hoggard,
 #' Sarah Ivorra, Glynis Jones, Nathalie Keller, Ricardo Kriebel, Remi Laffont, Fabien Lafuma,
 #' Matthias Mace, Stas Malavin, Neus Martinez, Ben Marwick, Sabrina Renaud, Marcelo Reginato,
-#' Evan Saitta, David Siddons, Eleanor Stillman,
+#' Evan Saitta, Bill Sellers, David Siddons, Eleanor Stillman,
 #' Theodore Stammer, Tom Stubbs, Norbert Telmon, Jean-Frederic Terral,
 #' Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
