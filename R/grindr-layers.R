@@ -291,9 +291,17 @@ plot_PCA <- function(x,
   }
 
   # frame
-  x %<>%
-    layer_frame(center_origin=center_origin, zoom = zoom) %>%
-    layer_axes()
+  x %>%
+    layer_frame(center_origin=center_origin, zoom = zoom) -> x
+  x %>%
+    layer_axes() -> x
+
+  # this one did not work, quite inconsistently
+  # so we "wait" for the plot to be created
+  # thanks to Bill for pointing this
+  # x %<>%
+  #   layer_frame(center_origin=center_origin, zoom = zoom) %>%
+  #   layer_axes()
 
   # cosmetics
   if (axesnames)
@@ -467,10 +475,17 @@ plot_LDA <- function(x,
   .check(all(axes <= ncol(x$LDs)),
          "axes must all be <= number of LDs")
 
-  # frame
-  x %<>%
-    layer_frame(center_origin=center_origin, zoom = zoom) %>%
-    layer_axes()
+  # frame (see plot_PCA, this no longer worked and we had to "wait"
+  # for the plot to be created)
+  # x %<>%
+  #   layer_frame(center_origin=center_origin, zoom = zoom) %>%
+  #   layer_axes()
+
+  x %>%
+    layer_frame(center_origin=center_origin, zoom = zoom) -> x
+  x %>%
+    layer_axes() -> x
+
 
   # cosmetics
   if (axesnames)
@@ -564,8 +579,8 @@ layer_frame <- function(x, center_origin = TRUE, zoom = 0.9){
 #' @param ... additional options to feed core functions for each layer
 layer_axes <- function(x, col="#999999", lwd=1/2, ...){
   # neater par
-  old <- par(mar=rep(1/8, 4))
-  on.exit(par(old))
+  # old <- par(mar=rep(1/8, 4))
+  # on.exit(par(old))
   # add x=0 and y=0 lines for axes
   abline(h=0, v=0, col=col, lwd=lwd, ...)
   # propagate
