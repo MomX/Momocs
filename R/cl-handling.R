@@ -1084,7 +1084,7 @@ rm_missing.default <- function(x, by){
   if (missing(by))
     filter(x, !apply(is.na(x$fac), 1, any))
   else
-    filter(x, !is.na(x$fac[, by]))
+    filter(x, !is.na(x$fac[[by]]))
 }
 
 #' Removes harmonics from Coe objects
