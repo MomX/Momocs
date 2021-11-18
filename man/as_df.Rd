@@ -27,7 +27,7 @@ as_df(x, ...)
 enough axes to retain this proportion of variance; if \verb{>1}, this number of axes.}
 }
 \value{
-a \link[dplyr:data_frame]{dplyr::data_frame}
+a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
 Used in particular for compatibility with the \code{tidyverse}

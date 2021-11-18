@@ -1941,6 +1941,7 @@ coo_shearx.default <- function(coo, k=1){
 #' @export
 coo_shearx.Coo <-function(coo, k=1){
   coo$coo <- lapply(coo$coo, coo_shearx, k=k)
+  coo
 }
 
 # coo_sheary ----------------
@@ -1958,6 +1959,7 @@ coo_sheary.default <- function(coo, k=1){
 #' @export
 coo_sheary.Coo <- function(coo, k=1){
   coo$coo <- lapply(coo$coo, coo_sheary, k=k)
+  coo
 }
 
 # coo_flipx -----------------
@@ -2044,7 +2046,7 @@ coo_dxy.default <- function(coo) {
   coo <- coo_check(coo)
   dx <- coo[, 1] - coo[1, 1]
   dy <- coo[, 2] - coo[1, 2]
-  return(dplyr::data_frame(dx = dx, dy = dy))
+  return(dplyr::tibble(dx = dx, dy = dy))
 }
 
 #' @export
@@ -2686,7 +2688,7 @@ coo_calliper.default <- function(coo, arr.ind = FALSE) {
     # to return a vector (numeric and sorted) of the rows between
     # which the max length has been found
     arr.ind <- sort(as.numeric(arr.ind[1, ]))
-    return(dplyr::data_frame(length = max(d), arr_ind = list(arr.ind)))
+    return(dplyr::tibble(length = max(d), arr_ind = list(arr.ind)))
   } else {
     return(max(d))
   }

@@ -781,7 +781,7 @@ coo_scalars <- function(coo, rectilinearity=FALSE){
 
 #' @export
 coo_scalars.default <- function(coo, rectilinearity=FALSE){
-  res <- dplyr::data_frame(
+  res <- dplyr::tibble(
     area=coo_area(coo),
     calliper=coo_calliper(coo),
     centsize=coo_centsize(coo),

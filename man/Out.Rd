@@ -4,7 +4,7 @@
 \alias{Out}
 \title{Builds an Out object}
 \usage{
-Out(x, fac = dplyr::data_frame(), ldk = list())
+Out(x, fac = dplyr::tibble(), ldk = list())
 }
 \arguments{
 \item{x}{a \code{list} of matrices of \verb{(x; y)} coordinates,

@@ -180,7 +180,7 @@ MSHAPES.PCA <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...){
   # f data_frame
   # first dispatch
   f <- fac_dispatcher(x, fac)
-  fdf <- dplyr::data_frame(fac=f)
+  fdf <- dplyr::tibble(fac=f)
 
   # res data_frame
   res <- x$x %>%
@@ -207,7 +207,7 @@ MSHAPES.LDA <- function(x, fac=NULL, FUN=mean, nb.pts = 120, ...){
 
   # f data_frame
   # first dispatch
-  fdf <- dplyr::data_frame(fac=f)
+  fdf <- dplyr::tibble(fac=f)
 
   # res data_frame
   res <- x$mod.pred$x %>%

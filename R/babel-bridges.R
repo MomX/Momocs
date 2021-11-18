@@ -98,7 +98,7 @@ d2m <- function(d) {
 m2d <- function(m) {
   .check(is_shp(m),
          "matrix must be a shp")
-  dplyr::data_frame(x=m[, 1], y=m[, 2])
+  dplyr::tibble(x=m[, 1], y=m[, 2])
 }
 
 #' @rdname bridges
@@ -177,7 +177,7 @@ m2ll <- function(m, index=NULL){
 .melt_mat <- function(x){
   if (is.null(colnames(x)))
     colnames(x) <- 1:ncol(x)
-  dplyr::data_frame(key=rep(colnames(x), each=nrow(x)),
+  dplyr::tibble(key=rep(colnames(x), each=nrow(x)),
                     value=as.numeric(x))
 
 }
@@ -192,7 +192,7 @@ m2ll <- function(m, index=NULL){
 #' @param retain numeric for use with [scree] methods. Defaut to all. If `<1`,
 #' enough axes to retain this proportion of variance; if `>1`, this number of axes.
 #' @param ... useless here
-#' @return a [dplyr::data_frame]
+#' @return a [dplyr::tibble()]
 #' @examples
 #' # first, some (baby) objects
 #' b <- bot %>% coo_sample(12)

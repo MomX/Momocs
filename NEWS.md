@@ -1,5 +1,10 @@
+# Momocs 1.4.0
+* Fixed several minor bugs, mostly with plotting.
+* I'm currently out of academia but I'm looking for funding to develop MomX. If you have any ideas, ring my bell.
+
 # Momocs 1.3.3
 * `plot_PCA` and `plot_LDA` did not consistently work within eg `pdf()`. Thanks to Bill fof pointing this. (214)
+* coo_shearx/y did not return the Coo. Fixed.
 
 # Momocs 1.3.2
 * Turned remaining `return` for `return()` to please R CMD check
@@ -61,8 +66,8 @@
 * Palettes are now those colorblind-friendly from RColorBrewer and those, state of the art, virids palettes. See also `pal_manual`, `pal_qual_solarized` and `pal_seq_grey`.
 * `dispatch_fac` is now behind all `fac` arguments
 * `fgProcrustes` now accepts lists
-* `efourier` with default `norm=TRUE` now messages about how wrong it may be
-* `dplyr::data_frame` everywhere pertinent
+# * `efourier` with default `norm=TRUE` now messages about how wrong it may be
+* `dplyr::tibble()` everywhere pertinent
 
 ### Deprecated
 * All `is.*` aliases for `is_*` methods

@@ -81,7 +81,7 @@ calibrate_reconstructions_efourier <-
     coos$id <- as.numeric(coos$id)
     best <- method_i(method(coo, nb.h = max.h))
     best <- coo_close(best)
-    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::tibble(x=best[, 1], y=best[, 2])
     # cosmetics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -149,7 +149,7 @@ calibrate_reconstructions_rfourier <-
     coos$id <- as.numeric(coos$id)
     best <- method_i(method(coo, nb.h = max.h))
     best <- coo_close(best)
-    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::tibble(x=best[, 1], y=best[, 2])
     # cosmetics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -217,7 +217,7 @@ calibrate_reconstructions_tfourier <-
     coos$id <- as.numeric(coos$id)
     best <- method_i(method(coo, nb.h = max.h))
     best <- coo_close(best)
-    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::tibble(x=best[, 1], y=best[, 2])
     # cosmetics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -285,7 +285,7 @@ calibrate_reconstructions_sfourier <-
     coos$id <- as.numeric(coos$id)
     best <- method_i(method(coo, nb.h = max.h))
     best <- coo_close(best)
-    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::tibble(x=best[, 1], y=best[, 2])
     # cosmetics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -361,7 +361,7 @@ calibrate_reconstructions_npoly <-
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- res[[length(res)]]
-    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::tibble(x=best[, 1], y=best[, 2])
     # cosmectics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -439,7 +439,7 @@ calibrate_reconstructions_opoly <-
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- res[[length(res)]]
-    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::tibble(x=best[, 1], y=best[, 2])
     # cosmectics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),
@@ -512,7 +512,7 @@ calibrate_reconstructions_dfourier <-
     colnames(coos) <- c("id", "x", "y")
     coos$id <- as.numeric(coos$id)
     best <- res[[length(res)]]
-    best <- dplyr::data_frame(x=best[, 1], y=best[, 2])
+    best <- dplyr::tibble(x=best[, 1], y=best[, 2])
     # cosmectics
     theme_empty <- theme(axis.line=element_blank(),
                          axis.text.x=element_blank(),

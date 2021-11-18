@@ -19,19 +19,19 @@ coo_oscillo2 <- function(coo, method=c("dxy", "radius", "tangent")[1]){
          "unvalid method")
   if (method=="radius"){
     value=coo_centdist(coo)
-    df <- dplyr::data_frame(value=value,
+    df <- dplyr::tibble(value=value,
                             id=seq_along(value),
                             what="centroid_dist")
   }
   if (method=="tangent"){
     value=coo_angle_tangent(coo)
-    df <- dplyr::data_frame(value=value,
+    df <- dplyr::tibble(value=value,
                             id=seq_along(value),
                             what="tangent_angle")
   }
   if (method=="dxy"){
     tmp <- coo_dxy(coo)
-    df <- dplyr::data_frame(value=c(tmp$dx, tmp$dy),
+    df <- dplyr::tibble(value=c(tmp$dx, tmp$dy),
                             id=rep(seq_along(tmp$dx), 2),
                             what=rep(c("dx", "dy"), each=nrow(tmp)))
   }

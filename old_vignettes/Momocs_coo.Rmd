@@ -70,7 +70,7 @@ coo_area(shapes[4]) # in pixels^2
 coo_area(shapes)
 
 # a subset
-dplyr::data_frame(area=coo_area(shapes),
+dplyr::tibble(area=coo_area(shapes),
                   perim=coo_perim(shapes)) %>% head()
 ```
 

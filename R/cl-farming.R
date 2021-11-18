@@ -37,7 +37,7 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
   coe <- perm(x$coe, margin=2, sample, size=size, replace=replace)
   rownames(coe) <- paste0("id", 1:size)
   x$coe <- coe
-  x$fac <- dplyr::data_frame()
+  x$fac <- dplyr::tibble()
   x}
 
 # breed --------
@@ -88,7 +88,7 @@ breed.Coe <- function(x, fac, size, rate=1, ...){
     coe <- breed(x$coe, margin=2, size=size, rate=rate)
     rownames(coe) <- paste0("id", 1:size)
     x$coe <- coe
-    x$fac <- dplyr::data_frame()
+    x$fac <- dplyr::tibble()
     return(x)
   } else {
     f <- fac_dispatcher(x, fac)

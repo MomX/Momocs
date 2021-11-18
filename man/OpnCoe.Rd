@@ -6,7 +6,7 @@
 \usage{
 OpnCoe(
   coe = matrix(),
-  fac = dplyr::data_frame(),
+  fac = dplyr::tibble(),
   method = character(),
   baseline1 = numeric(),
   baseline2 = numeric(),

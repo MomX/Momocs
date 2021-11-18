@@ -132,7 +132,7 @@ PCA.TraCoe <- function(x, scale. = TRUE, center = TRUE, fac) {
 
 #' @rdname PCA
 #' @export
-PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=dplyr::data_frame()) {
+PCA.default <- function(x, scale. = TRUE, center = TRUE, fac=dplyr::tibble()) {
   PCA <- prcomp(x, scale. = scale., center = center)
   eig <- (PCA$sdev^2)
   PCA$eig <- eig/sum(eig)

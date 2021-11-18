@@ -8,10 +8,10 @@
 #' @family classes
 #' @examples
 #' # let's (more or less) rebuild the flower dataset
-#' fl <- TraCoe(iris[, 1:4], dplyr::data_frame(sp=iris$Species))
+#' fl <- TraCoe(iris[, 1:4], dplyr::tibble(sp=iris$Species))
 #' fl %>% PCA() %>% plot("sp")
 #' @export
-TraCoe <- function(coe = matrix(), fac = dplyr::data_frame()) {
+TraCoe <- function(coe = matrix(), fac = dplyr::tibble()) {
   structure(
     list(coe = coe, fac = tibble::as_tibble(fac)),
     class=c("TraCoe", "Coe")

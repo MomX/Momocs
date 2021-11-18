@@ -156,7 +156,7 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 
 \item{split}{\code{logical} whether to split the two distributions into two plots}
 
-\item{bw}{to feed \link{density} (default: \link[stats:bw.nrd0]{stats::bw.nrd0})}
+\item{bw}{to feed \link{density} (default: \link[stats:bandwidth]{stats::bw.nrd0})}
 
 \item{rug}{\code{logical} whether to add \link{rug} (default: \code{TRUE})}
 

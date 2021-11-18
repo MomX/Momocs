@@ -4,7 +4,7 @@
 \alias{OutCoe}
 \title{Builds an OutCoe object}
 \usage{
-OutCoe(coe = matrix(), fac = dplyr::data_frame(), method, norm)
+OutCoe(coe = matrix(), fac = dplyr::tibble(), method, norm)
 }
 \arguments{
 \item{coe}{\code{matrix} of harmonic coefficients}

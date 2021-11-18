@@ -1,7 +1,7 @@
 context("nse")
 
 x <- Out(a2l(replicate(50, matrix(1:4, 2, 2))),
-         fac=dplyr::data_frame(a=rep(letters[1:5], 10),
+         fac=dplyr::tibble(a=rep(letters[1:5], 10),
                                b=rep(LETTERS[1:5], each=10)))
 
 
@@ -150,7 +150,7 @@ test_that("subsetize works fine", {
 
 # at_least
 xx <- Out(a2l(replicate(50, matrix(1:4, 2, 2))),
-          fac=dplyr::data_frame(a=rep(letters[1:5], 10),
+          fac=dplyr::tibble(a=rep(letters[1:5], 10),
                                 b=factor(c(rep(LETTERS[1], 5),
                                            rep(LETTERS[2], 10),
                                            rep(LETTERS[3], 15),

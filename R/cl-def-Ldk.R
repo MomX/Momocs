@@ -31,12 +31,12 @@
 #'
 #' str(mosquito)
 #' @export
-Ldk <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
+Ldk <- function(coo, fac = dplyr::tibble(), links = NULL, slidings = NULL) {
   UseMethod("Ldk")
 }
 
 #' @export
-Ldk.default <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
+Ldk.default <- function(coo, fac = dplyr::tibble(), links = NULL, slidings = NULL) {
   if (is_shp(x))
     Ldk(list(x))
   else
@@ -46,7 +46,7 @@ Ldk.default <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings =
 
 # for Momit and mom_df
 #' @export
-Ldk.data.frame <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
+Ldk.data.frame <- function(coo, fac = dplyr::tibble(), links = NULL, slidings = NULL) {
   x <- coo
   .check(any(colnames(x)=="coo"),
          "data.frame must have a `coo` column")
@@ -92,7 +92,7 @@ Ldk.data.frame <- function(coo, fac = dplyr::data_frame(), links = NULL, sliding
 }
 
 #' @export
-Ldk.list <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
+Ldk.list <- function(coo, fac = dplyr::tibble(), links = NULL, slidings = NULL) {
   if (missing(slidings) & identical(names(coo), c("coo", "slidings", "scale"))) {
     slidings <- coo$slidings
     coo <- coo$coo
@@ -108,7 +108,7 @@ Ldk.list <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NU
 }
 
 #' @export
-Ldk.array <- function(coo, fac = dplyr::data_frame(), links = NULL, slidings = NULL) {
+Ldk.array <- function(coo, fac = dplyr::tibble(), links = NULL, slidings = NULL) {
   x <- a2l(coo)
   Ldk <- Ldk(x, links = links, slidings = slidings, fac = fac)
   if (is.null(names(Ldk)))

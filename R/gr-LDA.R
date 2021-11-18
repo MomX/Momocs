@@ -279,9 +279,9 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
   if (box) box()
   # we return a df
   if (is.null(fac))
-    invisible(dplyr::data_frame(x=xy[, 1], y=xy[, 2]))
+    invisible(dplyr::tibble(x=xy[, 1], y=xy[, 2]))
   else
-    invisible(dplyr::data_frame(x=xy[, 1], y=xy[, 2], fac=fac))
+    invisible(dplyr::tibble(x=xy[, 1], y=xy[, 2], fac=fac))
 }
 
 

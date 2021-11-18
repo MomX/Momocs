@@ -20,7 +20,7 @@ PCA(x, scale., center, fac)
 
 \method{PCA}{TraCoe}(x, scale. = TRUE, center = TRUE, fac)
 
-\method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = dplyr::data_frame())
+\method{PCA}{default}(x, scale. = TRUE, center = TRUE, fac = dplyr::tibble())
 
 as_PCA(x, fac)
 }

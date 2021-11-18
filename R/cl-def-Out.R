@@ -18,12 +18,12 @@
 #' @examples
 #' methods(class=Out)
 #' @export
-Out <- function(x, fac = dplyr::data_frame(), ldk = list()) {
+Out <- function(x, fac = dplyr::tibble(), ldk = list()) {
   UseMethod("Out")
 }
 
 #' @export
-Out.default <- function(x, fac = dplyr::data_frame(), ldk = list()) {
+Out.default <- function(x, fac = dplyr::tibble(), ldk = list()) {
   if (is_shp(x))
     Out(list(x))
   else
@@ -32,7 +32,7 @@ Out.default <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 
 # for Momit and mom_df
 #' @export
-Out.data.frame <- function(x, fac = dplyr::data_frame(), ldk = list()){
+Out.data.frame <- function(x, fac = dplyr::tibble(), ldk = list()){
   # check if there is a coo column and initiate the Out
   .check(any(colnames(x)=="coo"),
          "data.frame must have a `coo` column")
@@ -68,7 +68,7 @@ Out.data.frame <- function(x, fac = dplyr::data_frame(), ldk = list()){
 }
 
 #' @export
-Out.list <- function(x, fac = dplyr::data_frame(), ldk = list()) {
+Out.list <- function(x, fac = dplyr::tibble(), ldk = list()) {
   Out <- structure(list(coo = x, fac = fac, ldk = ldk), class=c("Out", "Coo"))
   if (!is.null(Out$fac))
     Out$fac <- tibble::as_tibble(Out$fac, stringsAsFactors = FALSE)
@@ -77,7 +77,7 @@ Out.list <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 }
 
 #' @export
-Out.array <- function(x, fac = dplyr::data_frame(), ldk = list()) {
+Out.array <- function(x, fac = dplyr::tibble(), ldk = list()) {
   x <- a2l(x)
   Out <- Out(x, fac = fac, ldk = ldk)
   if (is.null(names(Out))) names(Out) <- paste0("shp", 1:length(Out))
@@ -85,7 +85,7 @@ Out.array <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 }
 
 #' @export
-Out.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
+Out.Coo <- function(x, fac = dplyr::tibble(), ldk = list()) {
   Out <- Out(x = x$coo, fac = x$fac, ldk = x$ldk)
   if (is.null(names(Out))) names(Out) <- paste0("shp", 1:length(Out))
   return(Out)
@@ -202,7 +202,7 @@ Out.Coo <- function(x, fac = dplyr::data_frame(), ldk = list()) {
 #' # all OutCoe methods
 #' methods(class='OutCoe')
 #' @export
-OutCoe <- function(coe = matrix(), fac = dplyr::data_frame(), method,
+OutCoe <- function(coe = matrix(), fac = dplyr::tibble(), method,
                    norm) {
   if (missing(method))
     stop("a method must be provided to OutCoe")
