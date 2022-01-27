@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>Slides the coordinates so that the id-th point become the first one.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coo_slide</span>(<span class='no'>coo</span>, <span class='no'>id</span>, <span class='no'>ldk</span>)</pre>
+    <pre class="usage"><span class='fu'>coo_slide</span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>id</span>, <span class='va'>ldk</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,7 +178,7 @@ If an id is (also) passed, it is ignored with a message.</p></li>
 <code><a href='coo_down.html'>coo_down</a>()</code>,
 <code><a href='coo_dxy.html'>coo_dxy</a>()</code>,
 <code><a href='coo_extract.html'>coo_extract</a>()</code>,
-<code><a href='coo_flip.html'>coo_flipx</a>()</code>,
+<code><a href='coo_flipx.html'>coo_flipx</a>()</code>,
 <code><a href='coo_force2close.html'>coo_force2close</a>()</code>,
 <code><a href='coo_interpolate.html'>coo_interpolate</a>()</code>,
 <code><a href='coo_is_closed.html'>coo_is_closed</a>()</code>,
@@ -196,7 +196,7 @@ If an id is (also) passed, it is ignored with a message.</p></li>
 <code><a href='coo_samplerr.html'>coo_samplerr</a>()</code>,
 <code><a href='coo_sample.html'>coo_sample</a>()</code>,
 <code><a href='coo_scale.html'>coo_scale</a>()</code>,
-<code><a href='coo_shear.html'>coo_shearx</a>()</code>,
+<code><a href='coo_shearx.html'>coo_shearx</a>()</code>,
 <code><a href='coo_slice.html'>coo_slice</a>()</code>,
 <code><a href='coo_slidedirection.html'>coo_slidedirection</a>()</code>,
 <code><a href='coo_slidegap.html'>coo_slidegap</a>()</code>,
@@ -212,14 +212,26 @@ If an id is (also) passed, it is ignored with a message.</p></li>
 <code><a href='is_equallyspacedradii.html'>is_equallyspacedradii</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='no'>hearts</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='co'># for speed sake</span>
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>h</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slide-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># set the first landmark as the starting point</span>
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'>coo_slide</span>(<span class='no'>h</span>, <span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>1</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slide-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># set the 50th point as the starting point (everywhere)</span>
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'>coo_slide</span>(<span class='no'>h</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>50</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slide-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># set the id-random-th point as the starting point (everywhere)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>) <span class='co'># just for the reproducibility</span>
-<span class='no'>id_random</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>h</span>$<span class='no'>coo</span>, <span class='no'>nrow</span>)), <span class='kw'>size</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>h</span>),
-<span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'>coo_slide</span>(<span class='no'>h</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='no'>id_random</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_slide-4.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>h</span> <span class='op'>&lt;-</span> <span class='va'>hearts</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='co'># for speed sake</span></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='coo_slide-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='co'># set the first landmark as the starting point</span></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='fu'>coo_slide</span><span class='op'>(</span><span class='va'>h</span>, ldk<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='coo_slide-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='co'># set the 50th point as the starting point (everywhere)</span></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='fu'>coo_slide</span><span class='op'>(</span><span class='va'>h</span>, id<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='coo_slide-3.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='co'># set the id-random-th point as the starting point (everywhere)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span> <span class='co'># just for the reproducibility</span></span>
+<span class='r-in'><span class='va'>id_random</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>$</span><span class='va'>coo</span>, <span class='va'>nrow</span><span class='op'>)</span><span class='op'>)</span>, size<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>,</span>
+<span class='r-in'>replace<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='fu'>coo_slide</span><span class='op'>(</span><span class='va'>h</span>, id<span class='op'>=</span><span class='va'>id_random</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='coo_slide-4.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -235,7 +247,7 @@ If an id is (also) passed, it is ignored with a message.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

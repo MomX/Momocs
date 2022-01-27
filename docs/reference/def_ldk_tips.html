@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>On <a href='Opn.html'>Opn</a> objects, this can be used before <a href='coo_slice.html'>coo_slice</a>. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>def_ldk_tips</span>(<span class='no'>coo</span>)</pre>
+    <pre class="usage"><span class='fu'>def_ldk_tips</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,11 +138,22 @@
     <p>any existing ldk will be preserved.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='is.html'>is_ldk</a></span>(<span class='no'>olea</span>) <span class='co'># no ldk for olea</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='no'>olea</span> <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for the sake of speed</span>
-<span class='no'>def_ldk_tips</span> <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='def_ldk_angle.html'>def_ldk_angle</a></span>(<span class='fl'>3</span>*<span class='no'>pi</span>/<span class='fl'>4</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='def_ldk_angle.html'>def_ldk_angle</a></span>(<span class='no'>pi</span>/<span class='fl'>4</span>) <span class='kw'>%T&gt;%</span> <span class='no'>stack</span> <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='coo_slice.html'>coo_slice</a></span>(<span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>4</span>) <span class='kw'>-&gt;</span> <span class='no'>oleas</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='def_ldk_tips-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>oleas</span><span class='kw'>[[</span><span class='fl'>1</span>]])</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='def_ldk_tips-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>oleas</span><span class='kw'>[[</span><span class='fl'>2</span>]]) <span class='co'># etc.</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='def_ldk_tips-3.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='is.html'>is_ldk</a></span><span class='op'>(</span><span class='va'>olea</span><span class='op'>)</span> <span class='co'># no ldk for olea</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] FALSE</span>
+<span class='r-in'><span class='va'>olea</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'><span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'>#for the sake of speed</span></span>
+<span class='r-in'><span class='va'>def_ldk_tips</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'><span class='fu'><a href='def_ldk_angle.html'>def_ldk_angle</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='def_ldk_angle.html'>def_ldk_angle</a></span><span class='op'>(</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/tee.html'>%T&gt;%</a></span> <span class='va'>stack</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'><span class='fu'><a href='coo_slice.html'>coo_slice</a></span><span class='op'>(</span>ldk<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>oleas</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='def_ldk_tips-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>oleas</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='def_ldk_tips-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>oleas</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span> <span class='co'># etc.</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='def_ldk_tips-3.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -158,7 +169,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>A wrapper around <a href='https://rdrr.io/r/stats/cmdscale.html'>stats::cmdscale</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MDS</span>(<span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>MDS</span><span class='op'>(</span><span class='va'>x</span>, method <span class='op'>=</span> <span class='st'>"euclidean"</span>, k <span class='op'>=</span> <span class='fl'>2</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,69 +166,74 @@
 <code><a href='classification_metrics.html'>classification_metrics</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>MDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'><span class='no'>x</span></div><div class='output co'>#&gt; $x
-#&gt;                       [,1]          [,2]
-#&gt; brahma         -0.05277530 -0.0230987121
-#&gt; caney          -0.03692797  0.0072496676
-#&gt; chimay          0.08091319 -0.0047905849
-#&gt; corona         -0.06936747  0.0022942672
-#&gt; deusventrue    -0.01117242  0.0475689844
-#&gt; duvel           0.11514484 -0.0169960574
-#&gt; franziskaner   -0.04425459 -0.0185989836
-#&gt; grimbergen      0.02874996  0.0099554795
-#&gt; guiness         0.01231138  0.0006027416
-#&gt; hoegardeen     -0.04579716  0.0056378311
-#&gt; jupiler        -0.05431287  0.0072952179
-#&gt; kingfisher     -0.03821463 -0.0034548056
-#&gt; latrappe        0.13300133 -0.0384264345
-#&gt; lindemanskriek -0.03540248  0.0147002348
-#&gt; nicechouffe    -0.02097431  0.0133514818
-#&gt; pecheresse     -0.05277659  0.0083010974
-#&gt; sierranevada    0.03905169 -0.0068665050
-#&gt; tanglefoot      0.07741376 -0.0020813543
-#&gt; tauro          -0.05456357  0.0073871372
-#&gt; westmalle      -0.05000066  0.0065364611
-#&gt; amrut          -0.04851067  0.0003233973
-#&gt; ballantines     0.12125872 -0.0671656955
-#&gt; bushmills      -0.03619504 -0.0540035080
-#&gt; chivas          0.07579382  0.0395367090
-#&gt; dalmore         0.10196157  0.0535941215
-#&gt; famousgrouse   -0.03460400 -0.0243909943
-#&gt; glendronach    -0.05266032 -0.0003142188
-#&gt; glenmorangie   -0.06127392  0.0037530633
-#&gt; highlandpark    0.08332158 -0.0437952867
-#&gt; jackdaniels     0.01064050 -0.0005682657
-#&gt; jb             -0.04043031  0.0088167995
-#&gt; johnniewalker  -0.03553374 -0.0387787659
-#&gt; magallan       -0.07106980 -0.0303786761
-#&gt; makersmark      0.06020727  0.0476203806
-#&gt; oban           -0.06297482  0.0061352696
-#&gt; oldpotrero      0.03373439  0.0616822707
-#&gt; redbreast       0.06482559  0.0494227507
-#&gt; tamdhu         -0.04715671 -0.0061720938
-#&gt; wildturkey     -0.01548202  0.0145967715
-#&gt; yoichi          0.03410175 -0.0364811930
-#&gt; 
-#&gt; $fac
-#&gt; <span style='color: #555555;'># A tibble: 40 x 2</span><span>
-#&gt;    type   fake 
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 2</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 3</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 4</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 5</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 6</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 7</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 8</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'> 9</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>10</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'># … with 30 more rows</span><span>
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "MDS"  "list"</div><div class='input'>
-
-</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>efourier</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>MDS</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-in'><span class='va'>x</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                       [,1]          [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brahma         -0.05277530 -0.0230987121</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> caney          -0.03692797  0.0072496676</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> chimay          0.08091319 -0.0047905849</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> corona         -0.06936747  0.0022942672</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> deusventrue    -0.01117242  0.0475689844</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> duvel           0.11514484 -0.0169960574</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> franziskaner   -0.04425459 -0.0185989836</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> grimbergen      0.02874996  0.0099554795</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> guiness         0.01231138  0.0006027416</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> hoegardeen     -0.04579716  0.0056378311</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jupiler        -0.05431287  0.0072952179</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> kingfisher     -0.03821463 -0.0034548056</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> latrappe        0.13300133 -0.0384264345</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lindemanskriek -0.03540248  0.0147002348</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> nicechouffe    -0.02097431  0.0133514818</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pecheresse     -0.05277659  0.0083010974</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> sierranevada    0.03905169 -0.0068665050</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tanglefoot      0.07741376 -0.0020813543</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tauro          -0.05456357  0.0073871372</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> westmalle      -0.05000066  0.0065364611</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> amrut          -0.04851067  0.0003233973</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ballantines     0.12125872 -0.0671656955</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> bushmills      -0.03619504 -0.0540035080</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> chivas          0.07579382  0.0395367090</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dalmore         0.10196157  0.0535941215</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> famousgrouse   -0.03460400 -0.0243909943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> glendronach    -0.05266032 -0.0003142188</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> glenmorangie   -0.06127392  0.0037530633</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> highlandpark    0.08332158 -0.0437952867</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jackdaniels     0.01064050 -0.0005682657</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jb             -0.04043031  0.0088167995</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> johnniewalker  -0.03553374 -0.0387787659</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> magallan       -0.07106980 -0.0303786761</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> makersmark      0.06020727  0.0476203806</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> oban           -0.06297482  0.0061352696</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> oldpotrero      0.03373439  0.0616822707</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> redbreast       0.06482559  0.0494227507</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tamdhu         -0.04715671 -0.0061720938</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> wildturkey     -0.01548202  0.0145967715</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> yoichi          0.03410175 -0.0364811930</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $fac</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 40 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    type   fake </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 30 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "MDS"  "list"</span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -244,7 +249,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

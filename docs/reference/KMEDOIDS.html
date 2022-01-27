@@ -76,7 +76,7 @@ component." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ component." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,16 +126,16 @@ Beware that morphospaces are calculated so far for the 1st and 2nd
 component.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>KMEDOIDS</span>(<span class='no'>x</span>, <span class='no'>k</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>k</span>, metric <span class='op'>=</span> <span class='st'>"euclidean"</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>KMEDOIDS</span>(<span class='no'>x</span>, <span class='no'>k</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>, <span class='no'>...</span>)
+<span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>k</span>, metric <span class='op'>=</span> <span class='st'>"euclidean"</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Coe</span>
-<span class='fu'>KMEDOIDS</span>(<span class='no'>x</span>, <span class='no'>k</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>, <span class='no'>...</span>)
+<span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>k</span>, metric <span class='op'>=</span> <span class='st'>"euclidean"</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for PCA</span>
-<span class='fu'>KMEDOIDS</span>(<span class='no'>x</span>, <span class='no'>k</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>, <span class='no'>retain</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>k</span>, metric <span class='op'>=</span> <span class='st'>"euclidean"</span>, <span class='va'>retain</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,81 +180,113 @@ component.</p>
 <code><a href='classification_metrics.html'>classification_metrics</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>bot</span>)
-<span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>10</span>))</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='fu'><a href='KMEANS.html'>KMEANS</a></span>(<span class='no'>bp</span>, <span class='fl'>2</span>)</div><div class='img'><img src='KMEDOIDS-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; K-means clustering with 2 clusters of sizes 14, 26
-#&gt; 
-#&gt; Cluster means:
-#&gt;           PC1          PC2
-#&gt; 1  0.07496282  0.003229186
-#&gt; 2 -0.04036460 -0.001738792
-#&gt; 
-#&gt; Clustering vector:
-#&gt;         brahma          caney         chimay         corona    deusventrue 
-#&gt;              2              2              1              2              2 
-#&gt;          duvel   franziskaner     grimbergen        guiness     hoegardeen 
-#&gt;              1              2              1              2              2 
-#&gt;        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe 
-#&gt;              2              2              1              2              2 
-#&gt;     pecheresse   sierranevada     tanglefoot          tauro      westmalle 
-#&gt;              2              1              1              2              2 
-#&gt;          amrut    ballantines      bushmills         chivas        dalmore 
-#&gt;              2              1              2              1              1 
-#&gt;   famousgrouse    glendronach   glenmorangie   highlandpark    jackdaniels 
-#&gt;              2              2              2              1              2 
-#&gt;             jb  johnniewalker       magallan     makersmark           oban 
-#&gt;              2              2              2              1              2 
-#&gt;     oldpotrero      redbreast         tamdhu     wildturkey         yoichi 
-#&gt;              1              1              2              2              1 
-#&gt; 
-#&gt; Within cluster sum of squares by cluster:
-#&gt; [1] 0.03758606 0.02127484
-#&gt;  (between_SS / total_SS =  67.3 %)
-#&gt; 
-#&gt; Available components:
-#&gt; 
-#&gt; [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
-#&gt; [6] "betweenss"    "size"         "iter"         "ifault"      </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>) <span class='co'># for reproducibility on a dummy matrix</span>
-<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, <span class='fl'>10</span>, <span class='fl'>10</span>)) <span class='kw'>%&gt;%</span>
-<span class='fu'>KMEDOIDS</span>(<span class='fl'>5</span>)</div><div class='output co'>#&gt; Medoids:
-#&gt;      ID          
-#&gt; [1,] 10  5.543380
-#&gt; [2,] 30 22.538149
-#&gt; [3,]  4 10.705084
-#&gt; [4,]  7 14.609162
-#&gt; [5,] 78 -2.207177
-#&gt; Clustering vector:
-#&gt;   [1] 1 1 2 3 3 2 4 5 1 1 2 4 4 3 1 2 4 5 4 1 5 1 5 1 1 5 4 3 5 2 4 1 2 2 4 4 4
-#&gt;  [38] 3 1 1 1 1 5 2 2 5 1 1 4 3 3 3 3 2 1 2 5 4 3 3 4 1 1 5 5 4 4 3 2 2 1 5 2 1
-#&gt;  [75] 1 2 1 5 3 3 3 4 1 4 1 4 2 4 1 2 2 4 3 1 2 1 2 2 1 5
-#&gt; Objective function:
-#&gt;    build     swap 
-#&gt; 2.132534 1.937061 
-#&gt; 
-#&gt; Available components:
-#&gt;  [1] "medoids"       "id.med"        "clustering"    "objective"    
-#&gt;  [5] "isolation"     "clusinfo"      "silinfo"       "diss"         
-#&gt;  [9] "call"          "data"          "k"             "ids_constant" 
-#&gt; [13] "ids_collinear"</div><div class='input'>
-<span class='co'># On a Coe</span>
-<span class='no'>bot_f</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>()</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'>
-<span class='no'>bot_k</span> <span class='kw'>&lt;-</span> <span class='no'>bot_f</span> <span class='kw'>%&gt;%</span> <span class='fu'>KMEDOIDS</span>(<span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='input'><span class='co'># confusion matrix</span>
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>bot_k</span>$<span class='no'>fac</span>$<span class='no'>type</span>, <span class='no'>bot_k</span>$<span class='no'>clustering</span>)</div><div class='output co'>#&gt;         
-#&gt;           1  2
-#&gt;   beer   12  8
-#&gt;   whisky 14  6</div><div class='input'>
-<span class='co'># on a PCA</span>
-<span class='no'>bot_k2</span> <span class='kw'>&lt;-</span> <span class='no'>bot_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>KMEDOIDS</span>(<span class='fl'>12</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>0.9</span>)
-
-<span class='co'># confusion matrix</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>bot_k</span>, <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>fac</span>$<span class='no'>type</span>, <span class='no'>clustering</span>))</div><div class='output co'>#&gt;         clustering
-#&gt;           1  2
-#&gt;   beer   12  8
-#&gt;   whisky 14  6</div><div class='input'><span class='co'># silhouette plot</span>
-<span class='no'>bot_k</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='plot_silhouette.html'>plot_silhouette</a></span>()</div><div class='img'><img src='KMEDOIDS-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># average width as a function of k</span>
-<span class='no'>k_range</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>:<span class='fl'>12</span>
-<span class='no'>widths</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>k_range</span>, <span class='kw'>function</span>(<span class='no'>k</span>) <span class='fu'>KMEDOIDS</span>(<span class='no'>bot_f</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='no'>k</span>)$<span class='no'>silinfo</span>$<span class='no'>avg.width</span>)</div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='output co'>#&gt; <span class='message'>removed these collinear columns:A1, B1, C1</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>k_range</span>, <span class='no'>widths</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"b"</span>)</div><div class='img'><img src='KMEDOIDS-3.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='fu'><a href='KMEANS.html'>KMEANS</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='KMEDOIDS-1.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> K-means clustering with 2 clusters of sizes 14, 26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Cluster means:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           PC1          PC2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  0.07496282  0.003229186</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 -0.04036460 -0.001738792</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Clustering vector:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         brahma          caney         chimay         corona    deusventrue </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              2              2              1              2              2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          duvel   franziskaner     grimbergen        guiness     hoegardeen </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              1              2              1              2              2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              2              2              1              2              2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     pecheresse   sierranevada     tanglefoot          tauro      westmalle </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              2              1              1              2              2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          amrut    ballantines      bushmills         chivas        dalmore </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              2              1              2              1              1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   famousgrouse    glendronach   glenmorangie   highlandpark    jackdaniels </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              2              2              2              1              2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             jb  johnniewalker       magallan     makersmark           oban </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              2              2              2              1              2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     oldpotrero      redbreast         tamdhu     wildturkey         yoichi </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              1              1              2              2              1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Within cluster sum of squares by cluster:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.03758606 0.02127484</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  (between_SS / total_SS =  67.3 %)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Available components:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [6] "betweenss"    "size"         "iter"         "ifault"      </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span> <span class='co'># for reproducibility on a dummy matrix</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>10</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'><span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Medoids:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      ID          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] 10  5.543380</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 30 22.538149</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,]  4 10.705084</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]  7 14.609162</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,] 78 -2.207177</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Clustering vector:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] 1 1 2 3 3 2 4 5 1 1 2 4 4 3 1 2 4 5 4 1 5 1 5 1 1 5 4 3 5 2 4 1 2 2 4 4 4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [38] 3 1 1 1 1 5 2 2 5 1 1 4 3 3 3 3 2 1 2 5 4 3 3 4 1 1 5 5 4 4 3 2 2 1 5 2 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [75] 1 2 1 5 3 3 3 4 1 4 1 4 2 4 1 2 2 4 3 1 2 1 2 2 1 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Objective function:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    build     swap </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2.132534 1.937061 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Available components:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "medoids"       "id.med"        "clustering"    "objective"    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5] "isolation"     "clusinfo"      "silinfo"       "diss"         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] "call"          "data"          "k"             "ids_constant" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "ids_collinear"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># On a Coe</span></span>
+<span class='r-in'><span class='va'>bot_f</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>bot_k</span> <span class='op'>&lt;-</span> <span class='va'>bot_f</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-in'><span class='co'># confusion matrix</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>bot_k</span><span class='op'>$</span><span class='va'>fac</span><span class='op'>$</span><span class='va'>type</span>, <span class='va'>bot_k</span><span class='op'>$</span><span class='va'>clustering</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           1  2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer   12  8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   whisky 14  6</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># on a PCA</span></span>
+<span class='r-in'><span class='va'>bot_k2</span> <span class='op'>&lt;-</span> <span class='va'>bot_f</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='fl'>12</span>, retain<span class='op'>=</span><span class='fl'>0.9</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># confusion matrix</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>bot_k</span>, <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>fac</span><span class='op'>$</span><span class='va'>type</span>, <span class='va'>clustering</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         clustering</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           1  2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer   12  8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   whisky 14  6</span>
+<span class='r-in'><span class='co'># silhouette plot</span></span>
+<span class='r-in'><span class='va'>bot_k</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='plot_silhouette.html'>plot_silhouette</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='KMEDOIDS-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># average width as a function of k</span></span>
+<span class='r-in'><span class='va'>k_range</span> <span class='op'>&lt;-</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>12</span></span>
+<span class='r-in'><span class='va'>widths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>k_range</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>k</span><span class='op'>)</span> <span class='fu'>KMEDOIDS</span><span class='op'>(</span><span class='va'>bot_f</span>, k<span class='op'>=</span><span class='va'>k</span><span class='op'>)</span><span class='op'>$</span><span class='va'>silinfo</span><span class='op'>$</span><span class='va'>avg.width</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> removed these collinear columns:A1, B1, C1</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k_range</span>, <span class='va'>widths</span>, type<span class='op'>=</span><span class='st'>"b"</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='KMEDOIDS-3.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -270,7 +302,7 @@ component.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

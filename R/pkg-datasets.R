@@ -36,7 +36,6 @@ NULL
 #' used Rohlf and Archie (1984). Note that the links defined here are quite approximate.
 #' @source Rohlf F, Archie J. 1984. A comparison of Fourier methods for the
 #' description of wing shape in mosquitoes (Diptera: Culicidae). \emph{Systematic Biology}: 302-317.
-#' Arranged from: \url{http://life.bio.sunysb.edu/morph/data/RohlfArchieWingOutlines.nts}.
 #' @family datasets
 NULL
 
@@ -87,7 +86,7 @@ NULL
 #' @name wings
 #' @rdname data_wings
 #' @format A \link{Ldk} object containing 18 (x; y) landmarks  from 127 mosquito wings, from
-#' @source Rohlf and Slice 1990 and \url{http://life.bio.sunysb.edu/morph/data/RohlfSlice1990Mosq.nts}
+#' @source Rohlf and Slice 1990.
 #' @family datasets
 NULL
 

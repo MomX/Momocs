@@ -75,7 +75,7 @@ mutivariate plots using the cheapbabi approach. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ mutivariate plots using the cheapbabi approach. See examples." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,79 +124,79 @@ mutivariate plots using the cheapbabi approach. See examples." />
 mutivariate plots using the cheapbabi approach. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_frame</span>(<span class='no'>x</span>, <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)
+    <pre class="usage"><span class='fu'>layer_frame</span><span class='op'>(</span><span class='va'>x</span>, center_origin <span class='op'>=</span> <span class='cn'>TRUE</span>, zoom <span class='op'>=</span> <span class='fl'>0.9</span><span class='op'>)</span>
 
-<span class='fu'>layer_axes</span>(<span class='no'>x</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#999999"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>, <span class='no'>...</span>)
+<span class='fu'>layer_axes</span><span class='op'>(</span><span class='va'>x</span>, col <span class='op'>=</span> <span class='st'>"#999999"</span>, lwd <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_ticks</span>(<span class='no'>x</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#333333"</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='no'>...</span>)
+<span class='fu'>layer_ticks</span><span class='op'>(</span><span class='va'>x</span>, col <span class='op'>=</span> <span class='st'>"#333333"</span>, cex <span class='op'>=</span> <span class='fl'>3</span><span class='op'>/</span><span class='fl'>4</span>, lwd <span class='op'>=</span> <span class='fl'>3</span><span class='op'>/</span><span class='fl'>4</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_grid</span>(<span class='no'>x</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#999999"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)
+<span class='fu'>layer_grid</span><span class='op'>(</span><span class='va'>x</span>, col <span class='op'>=</span> <span class='st'>"#999999"</span>, lty <span class='op'>=</span> <span class='fl'>3</span>, grid <span class='op'>=</span> <span class='fl'>3</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_box</span>(<span class='no'>x</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"#e5e5e5"</span>, <span class='no'>...</span>)
+<span class='fu'>layer_box</span><span class='op'>(</span><span class='va'>x</span>, border <span class='op'>=</span> <span class='st'>"#e5e5e5"</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_fullframe</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>layer_fullframe</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_points</span>(<span class='no'>x</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>4</span>/<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log1p</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>x</span>$<span class='no'>xy</span>)), <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
+<span class='fu'>layer_points</span><span class='op'>(</span><span class='va'>x</span>, pch <span class='op'>=</span> <span class='fl'>20</span>, cex <span class='op'>=</span> <span class='fl'>4</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log1p</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>$</span><span class='va'>xy</span><span class='op'>)</span><span class='op'>)</span>, transp <span class='op'>=</span> <span class='fl'>0</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_ellipses</span>(<span class='no'>x</span>, <span class='kw'>conf</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
+<span class='fu'>layer_ellipses</span><span class='op'>(</span><span class='va'>x</span>, conf <span class='op'>=</span> <span class='fl'>0.5</span>, lwd <span class='op'>=</span> <span class='fl'>1</span>, alpha <span class='op'>=</span> <span class='fl'>0</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_ellipsesfilled</span>(<span class='no'>x</span>, <span class='kw'>conf</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
+<span class='fu'>layer_ellipsesfilled</span><span class='op'>(</span><span class='va'>x</span>, conf <span class='op'>=</span> <span class='fl'>0.5</span>, lwd <span class='op'>=</span> <span class='fl'>1</span>, alpha <span class='op'>=</span> <span class='fl'>0</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_ellipsesaxes</span>(<span class='no'>x</span>, <span class='kw'>conf</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
+<span class='fu'>layer_ellipsesaxes</span><span class='op'>(</span><span class='va'>x</span>, conf <span class='op'>=</span> <span class='fl'>0.5</span>, lwd <span class='op'>=</span> <span class='fl'>1</span>, alpha <span class='op'>=</span> <span class='fl'>0</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_chull</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>layer_chull</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_chullfilled</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='no'>...</span>)
+<span class='fu'>layer_chullfilled</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='fl'>0.8</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_stars</span>(<span class='no'>x</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='no'>...</span>)
+<span class='fu'>layer_stars</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='fl'>0.5</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_delaunay</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>layer_delaunay</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_density</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>levels_density</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>levels_contour</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>3</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>200</span>,
-  <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>contour</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>layer_density</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  levels_density <span class='op'>=</span> <span class='fl'>20</span>,
+  levels_contour <span class='op'>=</span> <span class='fl'>4</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>3</span>,
+  n <span class='op'>=</span> <span class='fl'>200</span>,
+  density <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  contour <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>layer_labelpoints</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"fg"</span>),
-  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>2</span>/<span class='fl'>3</span>,
-  <span class='kw'>font</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>abbreviate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)
+<span class='fu'>layer_labelpoints</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='st'>"fg"</span><span class='op'>)</span>,
+  cex <span class='op'>=</span> <span class='fl'>2</span><span class='op'>/</span><span class='fl'>3</span>,
+  font <span class='op'>=</span> <span class='fl'>1</span>,
+  abbreviate <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>layer_labelgroups</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"fg"</span>),
-  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>,
-  <span class='kw'>font</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>rect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>,
-  <span class='kw'>abbreviate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)
+<span class='fu'>layer_labelgroups</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='st'>"fg"</span><span class='op'>)</span>,
+  cex <span class='op'>=</span> <span class='fl'>3</span><span class='op'>/</span><span class='fl'>4</span>,
+  font <span class='op'>=</span> <span class='fl'>2</span>,
+  rect <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>4</span>,
+  abbreviate <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>layer_rug</span>(<span class='no'>x</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>200</span>, <span class='no'>...</span>)
+<span class='fu'>layer_rug</span><span class='op'>(</span><span class='va'>x</span>, size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>200</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_histogram_2</span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>breaks</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+<span class='fu'>layer_histogram_2</span><span class='op'>(</span><span class='va'>x</span>, freq <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>breaks</span>, split <span class='op'>=</span> <span class='cn'>FALSE</span>, transp <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
 
-<span class='fu'>layer_density_2</span>(<span class='no'>x</span>, <span class='no'>bw</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rug</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>transp</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+<span class='fu'>layer_density_2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>bw</span>, split <span class='op'>=</span> <span class='cn'>FALSE</span>, rug <span class='op'>=</span> <span class='cn'>TRUE</span>, transp <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
 
-<span class='fu'>layer_title</span>(<span class='no'>x</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='no'>...</span>)
+<span class='fu'>layer_title</span><span class='op'>(</span><span class='va'>x</span>, title <span class='op'>=</span> <span class='st'>""</span>, cex <span class='op'>=</span> <span class='fl'>3</span><span class='op'>/</span><span class='fl'>4</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_axesnames</span>(<span class='no'>x</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Axis"</span>, <span class='no'>...</span>)
+<span class='fu'>layer_axesnames</span><span class='op'>(</span><span class='va'>x</span>, cex <span class='op'>=</span> <span class='fl'>3</span><span class='op'>/</span><span class='fl'>4</span>, name <span class='op'>=</span> <span class='st'>"Axis"</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_eigen</span>(<span class='no'>x</span>, <span class='kw'>nb_max</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>2</span>, <span class='no'>...</span>)
+<span class='fu'>layer_eigen</span><span class='op'>(</span><span class='va'>x</span>, nb_max <span class='op'>=</span> <span class='fl'>5</span>, cex <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_axesvar</span>(<span class='no'>x</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='no'>...</span>)
+<span class='fu'>layer_axesvar</span><span class='op'>(</span><span class='va'>x</span>, cex <span class='op'>=</span> <span class='fl'>3</span><span class='op'>/</span><span class='fl'>4</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>layer_legend</span>(<span class='no'>x</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0.25</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>4</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>layer_legend</span><span class='op'>(</span><span class='va'>x</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0.25</span><span class='op'>)</span>, cex <span class='op'>=</span> <span class='fl'>3</span><span class='op'>/</span><span class='fl'>4</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -307,7 +307,7 @@ mutivariate plots using the cheapbabi approach. See examples.</p>
     </tr>
     <tr>
       <th>bw</th>
-      <td><p>to feed <a href='https://rdrr.io/r/stats/density.html'>density</a> (default: <a href='https://rdrr.io/r/stats/bandwidth.html'>stats::bw.nrd0</a>)</p></td>
+      <td><p>to feed <a href='https://rdrr.io/r/stats/density.html'>density</a> (default: stats::bw.nrd0)</p></td>
     </tr>
     <tr>
       <th>rug</th>
@@ -338,7 +338,7 @@ and to indicate where to draw ticks and legend labels</p></td>
 <p>Other grindr: 
 <code><a href='drawers.html'>drawers</a></code>,
 <code><a href='layers_morphospace.html'>layers_morphospace</a></code>,
-<code><a href='mosaic.html'>mosaic_engine</a>()</code>,
+<code><a href='mosaic_engine.html'>mosaic_engine</a>()</code>,
 <code><a href='papers.html'>papers</a></code>,
 <code><a href='pile.html'>pile</a>()</code>,
 <code><a href='plot_LDA.html'>plot_LDA</a>()</code>,
@@ -360,7 +360,7 @@ and to indicate where to draw ticks and legend labels</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -76,7 +76,7 @@ Mainly intended to generate shapes and/or to understand how dfourier works." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ Mainly intended to generate shapes and/or to understand how dfourier works." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ Mainly intended to generate shapes and/or to understand how dfourier works." />
 Mainly intended to generate shapes and/or to understand how dfourier works.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dfourier_shape</span>(<span class='no'>A</span>, <span class='no'>B</span>, <span class='no'>nb.h</span>, <span class='kw'>nb.pts</span> <span class='kw'>=</span> <span class='fl'>60</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>dfourier_shape</span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>B</span>, <span class='va'>nb.h</span>, nb.pts <span class='op'>=</span> <span class='fl'>60</span>, alpha <span class='op'>=</span> <span class='fl'>2</span>, plot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,9 +167,109 @@ amplitude of the harmonic coefficients (see <a href='efourier_shape.html'>efouri
 <code><a href='dfourier.html'>dfourier</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># some signatures</span>
-<span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='coo_align.html'>coo_align</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>48</span>, <span class='fu'>dfourier_shape</span>(<span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>6</span>)))))</div><div class='img'><img src='dfourier_shape-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-8.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-9.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-10.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-11.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-12.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-13.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-14.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-15.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-16.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-17.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-18.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-19.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-20.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-21.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-22.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-23.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-24.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-25.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-26.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-27.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-28.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-29.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-30.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-31.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-32.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-33.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-34.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-35.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-36.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-37.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-38.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-39.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-40.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-41.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-42.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-43.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-44.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-45.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-46.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-47.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-48.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-49.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># some worms</span>
-<span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='coo_align.html'>coo_align</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>48</span>, <span class='fu'>dfourier_shape</span>(<span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>6</span>)))))</div><div class='img'><img src='dfourier_shape-50.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-51.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-52.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-53.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-54.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-55.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-56.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-57.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-58.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-59.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-60.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-61.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-62.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-63.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-64.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-65.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-66.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-67.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-68.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-69.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-70.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-71.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-72.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-73.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-74.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-75.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-76.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-77.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-78.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-79.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-80.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-81.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-82.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-83.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-84.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-85.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-86.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-87.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-88.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-89.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-90.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-91.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-92.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-93.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-94.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-95.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-96.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-97.png' alt='' width='700' height='433' /></div><div class='img'><img src='dfourier_shape-98.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># some signatures</span></span>
+<span class='r-in'><span class='fu'><a href='panel.html'>panel</a></span><span class='op'>(</span><span class='fu'><a href='coo_align.html'>coo_align</a></span><span class='op'>(</span><span class='fu'><a href='Opn.html'>Opn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span><span class='op'>(</span><span class='fl'>48</span>, <span class='fu'>dfourier_shape</span><span class='op'>(</span>alpha<span class='op'>=</span><span class='fl'>0.5</span>, nb.h<span class='op'>=</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='dfourier_shape-1.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-2.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-3.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-4.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-5.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-6.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-7.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-8.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-9.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-10.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-11.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-12.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-13.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-14.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-15.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-16.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-17.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-18.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-19.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-20.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-21.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-22.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-23.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-24.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-25.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-26.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-27.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-28.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-29.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-30.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-31.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-32.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-33.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-34.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-35.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-36.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-37.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-38.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-39.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-40.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-41.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-42.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-43.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-44.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-45.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-46.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-47.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-48.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-49.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='co'># some worms</span></span>
+<span class='r-in'><span class='fu'><a href='panel.html'>panel</a></span><span class='op'>(</span><span class='fu'><a href='coo_align.html'>coo_align</a></span><span class='op'>(</span><span class='fu'><a href='Opn.html'>Opn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span><span class='op'>(</span><span class='fl'>48</span>, <span class='fu'>dfourier_shape</span><span class='op'>(</span>alpha<span class='op'>=</span><span class='fl'>2</span>, nb.h<span class='op'>=</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='dfourier_shape-50.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-51.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-52.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-53.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-54.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-55.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-56.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-57.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-58.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-59.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-60.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-61.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-62.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-63.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-64.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-65.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-66.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-67.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-68.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-69.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-70.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-71.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-72.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-73.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-74.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-75.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-76.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-77.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-78.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-79.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-80.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-81.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-82.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-83.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-84.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-85.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-86.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-87.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-88.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-89.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-90.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-91.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-92.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-93.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-94.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-95.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-96.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-97.png' alt='' width='700' height='433' /></span>
+<span class='r-plt img'><img src='dfourier_shape-98.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -185,7 +285,7 @@ amplitude of the harmonic coefficients (see <a href='efourier_shape.html'>efouri
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

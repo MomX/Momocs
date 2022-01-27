@@ -78,7 +78,7 @@ This function helps you to remove those ugly ducklings. See examples" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@ This function helps you to remove those ugly ducklings. See examples" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@ was impossible to obtain, for one or more objects, combine will not work.
 This function helps you to remove those ugly ducklings. See examples</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rm_uncomplete</span>(<span class='no'>x</span>, <span class='no'>id</span>, <span class='no'>by</span>)</pre>
+    <pre class="usage"><span class='fu'>rm_uncomplete</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>id</span>, <span class='va'>by</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,55 +169,66 @@ This function helps you to remove those ugly ducklings. See examples</p>
 <code><a href='sample_n.html'>sample_n</a>()</code>,
 <code><a href='select.html'>select</a>()</code>,
 <code><a href='slice.html'>slice</a>()</code>,
-<code><a href='subset.html'>subsetize</a>()</code></p></div>
+<code><a href='subsetize.html'>subsetize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># we load olea</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>olea</span>)
-<span class='co'># we select the var Aglan since it is the only one complete</span>
-<span class='no'>ol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>olea</span>, <span class='no'>var</span> <span class='kw'>==</span> <span class='st'>"Aglan"</span>)
-<span class='co'># everything seems fine</span>
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>ol</span>$<span class='no'>view</span>, <span class='no'>ol</span>$<span class='no'>ind</span>)</div><div class='output co'>#&gt;     
-#&gt;      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
-#&gt;   VD  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
-#&gt;   VL  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
-#&gt;     
-#&gt;      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
-#&gt;   VD   1   1   1  1   1  1  1  1  1  1  1
-#&gt;   VL   1   1   1  1   1  1  1  1  1  1  1</div><div class='input'><span class='co'># indeed</span>
-<span class='fu'>rm_uncomplete</span>(<span class='no'>ol</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='st'>"ind"</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='st'>"view"</span>)</div><div class='output co'>#&gt; <span class='message'>all ids have 2 slices</span></div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 60 curves, 98 +/- 4 coords (in $coo)
-#&gt;   - 4 classifiers (in $fac): 
-#&gt; <span style='color: #555555;'># A tibble: 60 x 4</span><span>
-#&gt;   var   domes view  ind  
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Aglan cult  VD    O10  
-#&gt; </span><span style='color: #555555;'>2</span><span> Aglan cult  VL    O10  
-#&gt; </span><span style='color: #555555;'>3</span><span> Aglan cult  VD    O11  
-#&gt; </span><span style='color: #555555;'>4</span><span> Aglan cult  VL    O11  
-#&gt; </span><span style='color: #555555;'>5</span><span> Aglan cult  VD    O12  
-#&gt; </span><span style='color: #555555;'>6</span><span> Aglan cult  VL    O12  
-#&gt; </span><span style='color: #555555;'># … with 54 more rows</span><span>
-#&gt;   - also: $ldk</div><div class='input'>
-<span class='co'># we mess the ol object by removing a single shape</span>
-<span class='no'>ol.pb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='no'>ol</span>, -<span class='fl'>1</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>ol.pb</span>$<span class='no'>view</span>, <span class='no'>ol.pb</span>$<span class='no'>ind</span>)</div><div class='output co'>#&gt;     
-#&gt;      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
-#&gt;   VD  1   0   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
-#&gt;   VL  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1
-#&gt;     
-#&gt;      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
-#&gt;   VD   1   1   1  1   1  1  1  1  1  1  1
-#&gt;   VL   1   1   1  1   1  1  1  1  1  1  1</div><div class='input'><span class='co'># the counterpart has been removed with a notice</span>
-<span class='no'>ol.ok</span> <span class='kw'>&lt;-</span> <span class='fu'>rm_uncomplete</span>(<span class='no'>ol.pb</span>, <span class='st'>"ind"</span>, <span class='st'>"view"</span>)</div><div class='output co'>#&gt; <span class='message'>those shapes did not have 2 slices and has been removed: O10</span></div><div class='input'><span class='co'># now you can combine them</span>
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>ol.ok</span>$<span class='no'>view</span>, <span class='no'>ol.ok</span>$<span class='no'>ind</span>)</div><div class='output co'>#&gt;     
-#&gt;      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26
-#&gt;   VD  0   0   0   0   0   0   0   0   0   0   0  0   0   0   0   0   0   0   0
-#&gt;   VL  0   0   0   0   0   0   0   0   0   0   0  0   0   0   0   0   0   0   0
-#&gt;     
-#&gt;      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9
-#&gt;   VD   0   0   0  0   0  0  0  0  0  0  0
-#&gt;   VL   0   0   0  0   0  0  0  0  0  0  0</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># we load olea</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>olea</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># we select the var Aglan since it is the only one complete</span></span>
+<span class='r-in'><span class='va'>ol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span><span class='op'>(</span><span class='va'>olea</span>, <span class='va'>var</span> <span class='op'>==</span> <span class='st'>"Aglan"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># everything seems fine</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>ol</span><span class='op'>$</span><span class='va'>view</span>, <span class='va'>ol</span><span class='op'>$</span><span class='va'>ind</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VD  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VL  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VD   1   1   1  1   1  1  1  1  1  1  1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VL   1   1   1  1   1  1  1  1  1  1  1</span>
+<span class='r-in'><span class='co'># indeed</span></span>
+<span class='r-in'><span class='fu'>rm_uncomplete</span><span class='op'>(</span><span class='va'>ol</span>, id<span class='op'>=</span><span class='st'>"ind"</span>, by<span class='op'>=</span><span class='st'>"view"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> all ids have 2 slices</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Opn (curves)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 60 curves, 98 +/- 4 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 4 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 60 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   var   domes view  ind  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Aglan cult  VD    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Aglan cult  VL    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Aglan cult  VD    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Aglan cult  VL    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Aglan cult  VD    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Aglan cult  VL    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 54 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># we mess the ol object by removing a single shape</span></span>
+<span class='r-in'><span class='va'>ol.pb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='va'>ol</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>ol.pb</span><span class='op'>$</span><span class='va'>view</span>, <span class='va'>ol.pb</span><span class='op'>$</span><span class='va'>ind</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VD  1   0   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VL  1   1   1   1   1   1   1   1   1   1   1  1   1   1   1   1   1   1   1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VD   1   1   1  1   1  1  1  1  1  1  1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VL   1   1   1  1   1  1  1  1  1  1  1</span>
+<span class='r-in'><span class='co'># the counterpart has been removed with a notice</span></span>
+<span class='r-in'><span class='va'>ol.ok</span> <span class='op'>&lt;-</span> <span class='fu'>rm_uncomplete</span><span class='op'>(</span><span class='va'>ol.pb</span>, <span class='st'>"ind"</span>, <span class='st'>"view"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> those shapes did not have 2 slices and has been removed: O10</span>
+<span class='r-in'><span class='co'># now you can combine them</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>ol.ok</span><span class='op'>$</span><span class='va'>view</span>, <span class='va'>ol.ok</span><span class='op'>$</span><span class='va'>ind</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      O1 O10 O11 O12 O13 O14 O15 O16 O17 O18 O19 O2 O20 O21 O22 O23 O24 O25 O26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VD  0   0   0   0   0   0   0   0   0   0   0  0   0   0   0   0   0   0   0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VL  0   0   0   0   0   0   0   0   0   0   0  0   0   0   0   0   0   0   0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      O27 O28 O29 O3 O30 O4 O5 O6 O7 O8 O9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VD   0   0   0  0   0  0  0  0  0  0  0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   VL   0   0   0  0   0  0  0  0  0  0  0</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -233,7 +244,7 @@ This function helps you to remove those ugly ducklings. See examples</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

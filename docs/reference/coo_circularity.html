@@ -78,7 +78,7 @@ and shape factor, but normalized to the unit circle." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@ and shape factor, but normalized to the unit circle." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -130,29 +130,29 @@ to digitalization noise than <code>coo_circularity</code>.
 and shape factor, but normalized to the unit circle.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coo_circularity</span>(<span class='no'>coo</span>)
+    <pre class="usage"><span class='fu'>coo_circularity</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>coo_circularity</span>(<span class='no'>coo</span>)
+<span class='fu'>coo_circularity</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Coo</span>
-<span class='fu'>coo_circularity</span>(<span class='no'>coo</span>)
+<span class='fu'>coo_circularity</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
-<span class='fu'>coo_circularityharalick</span>(<span class='no'>coo</span>)
+<span class='fu'>coo_circularityharalick</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>coo_circularityharalick</span>(<span class='no'>coo</span>)
+<span class='fu'>coo_circularityharalick</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Coo</span>
-<span class='fu'>coo_circularityharalick</span>(<span class='no'>coo</span>)
+<span class='fu'>coo_circularityharalick</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
-<span class='fu'>coo_circularitynorm</span>(<span class='no'>coo</span>)
+<span class='fu'>coo_circularitynorm</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>coo_circularitynorm</span>(<span class='no'>coo</span>)
+<span class='fu'>coo_circularitynorm</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Coo</span>
-<span class='fu'>coo_circularitynorm</span>(<span class='no'>coo</span>)</pre>
+<span class='fu'>coo_circularitynorm</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,61 +192,73 @@ the corresponding circularity measurement.</p>
 <code><a href='coo_width.html'>coo_width</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># coo_circularity</span>
-<span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_circularity</span>()</div><div class='output co'>#&gt; [1] 26.26463</div><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'># for speed sake only</span>
-    <span class='no'>coo_circularity</span></div><div class='output co'>#&gt; $brahma
-#&gt; [1] 26.26463
-#&gt; 
-#&gt; $caney
-#&gt; [1] 25.60553
-#&gt; 
-#&gt; $chimay
-#&gt; [1] 20.83278
-#&gt; 
-#&gt; $corona
-#&gt; [1] 27.61134
-#&gt; 
-#&gt; $deusventrue
-#&gt; [1] 25.75573
-#&gt; </div><div class='input'>
-<span class='co'># coo_circularityharalick</span>
-<span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_circularityharalick</span>()</div><div class='output co'>#&gt; [1] 2.320493</div><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'># for speed sake only</span>
-    <span class='no'>coo_circularityharalick</span></div><div class='output co'>#&gt; $brahma
-#&gt; [1] 2.320493
-#&gt; 
-#&gt; $caney
-#&gt; [1] 2.374045
-#&gt; 
-#&gt; $chimay
-#&gt; [1] 2.935174
-#&gt; 
-#&gt; $corona
-#&gt; [1] 2.261573
-#&gt; 
-#&gt; $deusventrue
-#&gt; [1] 2.397828
-#&gt; </div><div class='input'>
-<span class='co'># coo_circularitynorm</span>
-<span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_circularitynorm</span>()</div><div class='output co'>#&gt; [1] 2.090073</div><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'># for speed sake only</span>
-    <span class='no'>coo_circularitynorm</span></div><div class='output co'>#&gt; $brahma
-#&gt; [1] 2.090073
-#&gt; 
-#&gt; $caney
-#&gt; [1] 2.037623
-#&gt; 
-#&gt; $chimay
-#&gt; [1] 1.65782
-#&gt; 
-#&gt; $corona
-#&gt; [1] 2.197241
-#&gt; 
-#&gt; $deusventrue
-#&gt; [1] 2.049576
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># coo_circularity</span></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coo_circularity</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 26.26463</span>
+<span class='r-in'><span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># for speed sake only</span></span>
+<span class='r-in'>    <span class='va'>coo_circularity</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $brahma</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 26.26463</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $caney</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 25.60553</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $chimay</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 20.83278</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $corona</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 27.61134</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $deusventrue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 25.75573</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># coo_circularityharalick</span></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coo_circularityharalick</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.320493</span>
+<span class='r-in'><span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># for speed sake only</span></span>
+<span class='r-in'>    <span class='va'>coo_circularityharalick</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $brahma</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.320493</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $caney</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.374045</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $chimay</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.935174</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $corona</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.261573</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $deusventrue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.397828</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># coo_circularitynorm</span></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coo_circularitynorm</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.090073</span>
+<span class='r-in'><span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># for speed sake only</span></span>
+<span class='r-in'>    <span class='va'>coo_circularitynorm</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $brahma</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.090073</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $caney</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.037623</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $chimay</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.65782</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $corona</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.197241</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $deusventrue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2.049576</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -262,7 +274,7 @@ the corresponding circularity measurement.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

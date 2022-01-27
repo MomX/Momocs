@@ -75,7 +75,7 @@ PC orientation being arbitrary, this may help to have a better display." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ PC orientation being arbitrary, this may help to have a better display." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@ PC orientation being arbitrary, this may help to have a better display." />
 PC orientation being arbitrary, this may help to have a better display.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>flip_PCaxes</span>(<span class='no'>x</span>, <span class='no'>axs</span>)</pre>
+    <pre class="usage"><span class='fu'>flip_PCaxes</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>axs</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,7 +141,15 @@ PC orientation being arbitrary, this may help to have a better display.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bp</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='flip_PCaxes-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>bp</span> <span class='kw'>%&gt;%</span> <span class='fu'>flip_PCaxes</span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>()</div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='flip_PCaxes-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>bp</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>PCA</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='va'>bp</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>plot</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will be deprecated soon, see ?plot_PCA</span>
+<span class='r-plt img'><img src='flip_PCaxes-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='va'>bp</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>flip_PCaxes</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will be deprecated soon, see ?plot_PCA</span>
+<span class='r-plt img'><img src='flip_PCaxes-2.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -157,7 +165,7 @@ PC orientation being arbitrary, this may help to have a better display.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -76,7 +76,7 @@ on Ldk for detecting possible outliers on freshly digitized/imported datasets." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ on Ldk for detecting possible outliers on freshly digitized/imported datasets." 
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ it may be useful on <a href='Coe.html'>Coe</a> object (in this case a PCA is fir
 on <a href='Ldk.html'>Ldk</a> for detecting possible outliers on freshly digitized/imported datasets.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>which_out</span>(<span class='no'>x</span>, <span class='no'>conf</span>, <span class='no'>nax</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>which_out</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>conf</span>, <span class='va'>nax</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,36 +155,59 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
     <p>experimental. dnorm parameters used are <code>median(x), sd(x)</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># on a numeric</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>)
-<span class='no'>x</span>[<span class='fl'>4</span>] <span class='kw'>&lt;-</span> <span class='fl'>99</span>
-<span class='fu'>which_out</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] 4</div><div class='input'>
-<span class='co'># on a Coe</span>
-<span class='no'>bf</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bf</span>$<span class='no'>coe</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>6</span>), <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>5</span>
-<span class='fu'>which_out</span>(<span class='no'>bf</span>)</div><div class='output co'>#&gt; [1] 1 6</div><div class='input'>
-<span class='co'># on Ldk</span>
-<span class='no'>w_no</span> <span class='kw'>&lt;-</span> <span class='no'>w_ok</span> <span class='kw'>&lt;-</span> <span class='no'>wings</span>
-<span class='no'>w_no</span>$<span class='no'>coo</span><span class='kw'>[[</span><span class='fl'>2</span>]][<span class='fl'>1</span>, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>2</span>
-<span class='no'>w_no</span>$<span class='no'>coo</span><span class='kw'>[[</span><span class='fl'>6</span>]][<span class='fl'>2</span>, <span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>2</span>
-<span class='fu'>which_out</span>(<span class='no'>w_ok</span>, <span class='kw'>conf</span><span class='kw'>=</span><span class='fl'>1e-12</span>) <span class='co'># with low conf, no outliers</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='fu'>which_out</span>(<span class='no'>w_no</span>, <span class='kw'>conf</span><span class='kw'>=</span><span class='fl'>1e-12</span>) <span class='co'># as expected</span></div><div class='output co'>#&gt; <span class='message'>found 127 possible outliers</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 4</span><span>
-#&gt;   shape    id   row coordinate
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #555555;'>1</span><span> AN2       2     1 x         
-#&gt; </span><span style='color: #555555;'>2</span><span> AN6       6     2 y         </div><div class='input'>
-<span class='co'># a way to illustrate, filter outliers</span>
-<span class='co'># conf has been chosen deliberately low to show some outliers</span>
-<span class='no'>x_f</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'><span class='no'>x_p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>x_f</span>)
-<span class='co'># which are outliers (conf is ridiculously low here)</span>
-<span class='fu'>which_out</span>(<span class='no'>x_p</span>$<span class='no'>x</span>[, <span class='fl'>1</span>], <span class='fl'>0.5</span>)</div><div class='output co'>#&gt;       duvel    latrappe ballantines 
-#&gt;           6          13          22 </div><div class='input'><span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"black"</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>x_p</span>$<span class='no'>x</span>))
-<span class='no'>outliers</span> <span class='kw'>&lt;-</span> <span class='fu'>which_out</span>(<span class='no'>x_p</span>$<span class='no'>x</span>[, <span class='fl'>1</span>], <span class='fl'>0.5</span>)
-<span class='no'>cols</span>[<span class='no'>outliers</span>] <span class='kw'>&lt;-</span> <span class='st'>"red"</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x_p</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>cols</span>)</div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='which_out-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># remove them for Coe, rePCA, replot</span>
-<span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(-<span class='no'>outliers</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(e, Coe$fac, parent.frame()): object 'outliers' not found</span></div><div class='input'>
-<span class='co'># or directly with which_out.Coe</span>
-<span class='co'># which relies on a PCA</span>
-<span class='no'>outliers</span> <span class='kw'>&lt;-</span> <span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'>which_out</span>(<span class='fl'>0.5</span>, <span class='kw'>nax</span><span class='kw'>=</span><span class='fl'>0.95</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span>()
-<span class='no'>x_f</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(-<span class='no'>outliers</span>) <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(e, Coe$fac, parent.frame()): object 'outliers' not found</span></div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># on a numeric</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>99</span></span>
+<span class='r-in'><span class='fu'>which_out</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># on a Coe</span></span>
+<span class='r-in'><span class='va'>bf</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='va'>bf</span><span class='op'>$</span><span class='va'>coe</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>6</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>5</span></span>
+<span class='r-in'><span class='fu'>which_out</span><span class='op'>(</span><span class='va'>bf</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 6</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># on Ldk</span></span>
+<span class='r-in'><span class='va'>w_no</span> <span class='op'>&lt;-</span> <span class='va'>w_ok</span> <span class='op'>&lt;-</span> <span class='va'>wings</span></span>
+<span class='r-in'><span class='va'>w_no</span><span class='op'>$</span><span class='va'>coo</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>2</span></span>
+<span class='r-in'><span class='va'>w_no</span><span class='op'>$</span><span class='va'>coo</span><span class='op'>[[</span><span class='fl'>6</span><span class='op'>]</span><span class='op'>]</span><span class='op'>[</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>2</span></span>
+<span class='r-in'><span class='fu'>which_out</span><span class='op'>(</span><span class='va'>w_ok</span>, conf<span class='op'>=</span><span class='fl'>1e-12</span><span class='op'>)</span> <span class='co'># with low conf, no outliers</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-in'><span class='fu'>which_out</span><span class='op'>(</span><span class='va'>w_no</span>, conf<span class='op'>=</span><span class='fl'>1e-12</span><span class='op'>)</span> <span class='co'># as expected</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> found 127 possible outliers</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 2 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   shape    id   row coordinate</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> AN2       2     1 x         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> AN6       6     2 y         </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># a way to illustrate, filter outliers</span></span>
+<span class='r-in'><span class='co'># conf has been chosen deliberately low to show some outliers</span></span>
+<span class='r-in'><span class='va'>x_f</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>efourier</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-in'><span class='va'>x_p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>x_f</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># which are outliers (conf is ridiculously low here)</span></span>
+<span class='r-in'><span class='fu'>which_out</span><span class='op'>(</span><span class='va'>x_p</span><span class='op'>$</span><span class='va'>x</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       duvel    latrappe ballantines </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           6          13          22 </span>
+<span class='r-in'><span class='va'>cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"black"</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>x_p</span><span class='op'>$</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>outliers</span> <span class='op'>&lt;-</span> <span class='fu'>which_out</span><span class='op'>(</span><span class='va'>x_p</span><span class='op'>$</span><span class='va'>x</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cols</span><span class='op'>[</span><span class='va'>outliers</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"red"</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x_p</span>, col<span class='op'>=</span><span class='va'>cols</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will be deprecated soon, see ?plot_PCA</span>
+<span class='r-plt img'><img src='which_out-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='co'># remove them for Coe, rePCA, replot</span></span>
+<span class='r-in'><span class='va'>x_f</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>outliers</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>PCA</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>plot</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in eval(e, Coe$fac, parent.frame()):</span> object 'outliers' not found</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># or directly with which_out.Coe</span></span>
+<span class='r-in'><span class='co'># which relies on a PCA</span></span>
+<span class='r-in'><span class='va'>outliers</span> <span class='op'>&lt;-</span> <span class='va'>x_f</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>which_out</span><span class='op'>(</span><span class='fl'>0.5</span>, nax<span class='op'>=</span><span class='fl'>0.95</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x_f</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>outliers</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>PCA</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>plot</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in eval(e, Coe$fac, parent.frame()):</span> object 'outliers' not found</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -200,7 +223,7 @@ if &lt;1 retain enough axes to retain this proportion of the variance</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

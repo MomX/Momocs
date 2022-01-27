@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>Nothing more than <code>coo_lw(coo)[1]</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coo_length</span>(<span class='no'>coo</span>)</pre>
+    <pre class="usage"><span class='fu'>coo_length</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,35 +162,41 @@ to Coo objects. See also <a href='coo_centsize.html'>coo_centsize</a> and <a hre
 <code><a href='coo_width.html'>coo_width</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>coo_length</span>(<span class='no'>bot</span>[<span class='fl'>1</span>])</div><div class='output co'>#&gt; [1] 1087.831</div><div class='input'><span class='fu'>coo_length</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt;         brahma          caney         chimay         corona    deusventrue 
-#&gt;      1087.8309       994.1615       643.8746       805.9889       886.0715 
-#&gt;          duvel   franziskaner     grimbergen        guiness     hoegardeen 
-#&gt;       606.0107       865.0272       765.0962       742.1752      1048.1058 
-#&gt;        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe 
-#&gt;       984.2303       718.3227       737.3475       821.1190       686.2766 
-#&gt;     pecheresse   sierranevada     tanglefoot          tauro      westmalle 
-#&gt;       928.6771       654.2412       680.6856       984.3941       768.0226 
-#&gt;          amrut    ballantines      bushmills         chivas        dalmore 
-#&gt;       864.0899       707.8465       882.0460       793.0187       672.0897 
-#&gt;   famousgrouse    glendronach   glenmorangie   highlandpark    jackdaniels 
-#&gt;       608.2238       822.0508       986.0991       705.9991       793.1392 
-#&gt;             jb  johnniewalker       magallan     makersmark           oban 
-#&gt;      1008.1334       337.7117       759.0041       851.3161       862.0016 
-#&gt;     oldpotrero      redbreast         tamdhu     wildturkey         yoichi 
-#&gt;       596.0958       426.0429      1008.3194      1097.1657       712.1001 </div><div class='input'><span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='no'>bot</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fu'>coo_length</span>(<span class='no'>bot</span>))</div><div class='output co'>#&gt; Out (outlines)
-#&gt;   - 40 outlines, 162 +/- 21 coords (in $coo)
-#&gt;   - 3 classifiers (in $fac): 
-#&gt; <span style='color: #555555;'># A tibble: 40 x 3</span><span>
-#&gt;   type   fake   size
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> whisky a     </span><span style='text-decoration: underline;'>1</span><span>088.
-#&gt; </span><span style='color: #555555;'>2</span><span> whisky a      994.
-#&gt; </span><span style='color: #555555;'>3</span><span> whisky a      644.
-#&gt; </span><span style='color: #555555;'>4</span><span> whisky a      806.
-#&gt; </span><span style='color: #555555;'>5</span><span> whisky a      886.
-#&gt; </span><span style='color: #555555;'>6</span><span> whisky a      606.
-#&gt; </span><span style='color: #555555;'># … with 34 more rows</span><span>
-#&gt;   - also: $ldk</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>coo_length</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1087.831</span>
+<span class='r-in'><span class='fu'>coo_length</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         brahma          caney         chimay         corona    deusventrue </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      1087.8309       994.1615       643.8746       805.9889       886.0715 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          duvel   franziskaner     grimbergen        guiness     hoegardeen </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       606.0107       865.0272       765.0962       742.1752      1048.1058 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        jupiler     kingfisher       latrappe lindemanskriek    nicechouffe </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       984.2303       718.3227       737.3475       821.1190       686.2766 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     pecheresse   sierranevada     tanglefoot          tauro      westmalle </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       928.6771       654.2412       680.6856       984.3941       768.0226 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          amrut    ballantines      bushmills         chivas        dalmore </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       864.0899       707.8465       882.0460       793.0187       672.0897 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   famousgrouse    glendronach   glenmorangie   highlandpark    jackdaniels </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       608.2238       822.0508       986.0991       705.9991       793.1392 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             jb  johnniewalker       magallan     makersmark           oban </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      1008.1334       337.7117       759.0041       851.3161       862.0016 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     oldpotrero      redbreast         tamdhu     wildturkey         yoichi </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       596.0958       426.0429      1008.3194      1097.1657       712.1001 </span>
+<span class='r-in'><span class='fu'><a href='mutate.html'>mutate</a></span><span class='op'>(</span><span class='va'>bot</span>, size<span class='op'>=</span><span class='fu'>coo_length</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Out (outlines)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 40 outlines, 162 +/- 21 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 3 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 40 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   type   fake   size</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> whisky a     <span style='text-decoration: underline;'>1</span>088.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> whisky a      994.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> whisky a      644.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> whisky a      806.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> whisky a      886.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> whisky a      606.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 34 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -206,7 +212,7 @@ to Coo objects. See also <a href='coo_centsize.html'>coo_centsize</a> and <a hre
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

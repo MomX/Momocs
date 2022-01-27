@@ -75,7 +75,7 @@ a Coo (Out, Opn or Ldk) objects." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ a Coo (Out, Opn or Ldk) objects." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,58 +124,58 @@ a Coo (Out, Opn or Ldk) objects." />
 a <a href='Coo.html'>Coo</a> (<a href='Out.html'>Out</a>, <a href='Opn.html'>Opn</a> or <a href='Ldk.html'>Ldk</a>) objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>panel</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>panel</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Out</span>
-<span class='fu'>panel</span>(
-  <span class='no'>x</span>,
-  <span class='no'>dim</span>,
-  <span class='no'>cols</span>,
-  <span class='no'>borders</span>,
-  <span class='no'>fac</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_summer</span>,
-  <span class='kw'>coo_sample</span> <span class='kw'>=</span> <span class='fl'>120</span>,
-  <span class='kw'>names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cex.names</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>points.pch</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>points.cex</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
-  <span class='no'>points.col</span>,
-  <span class='no'>...</span>
-)
+<span class='fu'>panel</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>dim</span>,
+  <span class='va'>cols</span>,
+  <span class='va'>borders</span>,
+  <span class='va'>fac</span>,
+  palette <span class='op'>=</span> <span class='va'>col_summer</span>,
+  coo_sample <span class='op'>=</span> <span class='fl'>120</span>,
+  names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cex.names <span class='op'>=</span> <span class='fl'>0.6</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  points.pch <span class='op'>=</span> <span class='fl'>3</span>,
+  points.cex <span class='op'>=</span> <span class='fl'>0.2</span>,
+  <span class='va'>points.col</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for Opn</span>
-<span class='fu'>panel</span>(
-  <span class='no'>x</span>,
-  <span class='no'>cols</span>,
-  <span class='no'>borders</span>,
-  <span class='no'>fac</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_summer</span>,
-  <span class='kw'>coo_sample</span> <span class='kw'>=</span> <span class='fl'>120</span>,
-  <span class='kw'>names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cex.names</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>points.pch</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>points.cex</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
-  <span class='no'>points.col</span>,
-  <span class='no'>...</span>
-)
+<span class='fu'>panel</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>cols</span>,
+  <span class='va'>borders</span>,
+  <span class='va'>fac</span>,
+  palette <span class='op'>=</span> <span class='va'>col_summer</span>,
+  coo_sample <span class='op'>=</span> <span class='fl'>120</span>,
+  names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cex.names <span class='op'>=</span> <span class='fl'>0.6</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  points.pch <span class='op'>=</span> <span class='fl'>3</span>,
+  points.cex <span class='op'>=</span> <span class='fl'>0.2</span>,
+  <span class='va'>points.col</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for Ldk</span>
-<span class='fu'>panel</span>(
-  <span class='no'>x</span>,
-  <span class='no'>cols</span>,
-  <span class='no'>borders</span>,
-  <span class='no'>fac</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_summer</span>,
-  <span class='kw'>names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cex.names</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>points.pch</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>points.cex</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
-  <span class='kw'>points.col</span> <span class='kw'>=</span> <span class='st'>"#333333"</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>panel</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>cols</span>,
+  <span class='va'>borders</span>,
+  <span class='va'>fac</span>,
+  palette <span class='op'>=</span> <span class='va'>col_summer</span>,
+  names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cex.names <span class='op'>=</span> <span class='fl'>0.6</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  points.pch <span class='op'>=</span> <span class='fl'>3</span>,
+  points.cex <span class='op'>=</span> <span class='fl'>0.2</span>,
+  points.col <span class='op'>=</span> <span class='st'>"#333333"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -248,11 +248,19 @@ Either a single value or of length exactly equals to the number of coordinates.<
 
     <div class='dont-index'><p>Other Coo_graphics: 
 <code><a href='inspect.html'>inspect</a>()</code>,
-<code><a href='stack.Coo.html'>stack</a>()</code></p></div>
+<code><a href='stack.html'>stack</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>panel</span>(<span class='no'>mosquito</span>, <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>cex.names</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='img'><img src='panel.Coo-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>panel</span>(<span class='no'>olea</span>)</div><div class='img'><img src='panel.Coo-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>panel</span>(<span class='no'>bot</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>10</span>))</div><div class='img'><img src='panel.Coo-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># an illustration of the use of fac</span>
-<span class='fu'>panel</span>(<span class='no'>bot</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>'type'</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_spring</span>, <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='panel.Coo-4.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>panel</span><span class='op'>(</span><span class='va'>mosquito</span>, names<span class='op'>=</span><span class='cn'>TRUE</span>, cex.names<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='panel.Coo-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'>panel</span><span class='op'>(</span><span class='va'>olea</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='panel.Coo-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'>panel</span><span class='op'>(</span><span class='va'>bot</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='panel.Coo-3.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='co'># an illustration of the use of fac</span></span>
+<span class='r-in'><span class='fu'>panel</span><span class='op'>(</span><span class='va'>bot</span>, fac<span class='op'>=</span><span class='st'>'type'</span>, palette<span class='op'>=</span><span class='va'>col_spring</span>, names<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='panel.Coo-4.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -268,7 +276,7 @@ Either a single value or of length exactly equals to the number of coordinates.<
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

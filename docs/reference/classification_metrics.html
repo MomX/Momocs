@@ -75,7 +75,7 @@ individuals is not enough, so here are more detailed metrics when working on cla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ individuals is not enough, so here are more detailed metrics when working on cla
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@ individuals is not enough, so here are more detailed metrics when working on cla
 individuals is not enough, so here are more detailed metrics when working on classification.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>classification_metrics</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>classification_metrics</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,93 +171,98 @@ used is partley derived from the Revolution Analytics blog post (with their auth
 <code><a href='PCA.html'>PCA</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># some morphometrics on 'hearts'</span>
-<span class='no'>hearts</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='coo_slide.html'>coo_slide</a></span>(<span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='kw'>norm</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='PCA.html'>PCA</a></span>() <span class='kw'>%&gt;%</span>
-<span class='co'># now the LDA and its summary</span>
-<span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>aut</span>) <span class='kw'>%&gt;%</span> <span class='fu'>classification_metrics</span>()</div><div class='output co'>#&gt; iteration:  1 	gain: 30322 
-#&gt; iteration:  2 	gain: 1.2498 
-#&gt; iteration:  3 	gain: 0.34194 </div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 7 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>11 PC retained</span></div><div class='output co'>#&gt; $accuracy
-#&gt; [1] 0.7666667
-#&gt; 
-#&gt; $macro_prf
-#&gt; <span style='color: #555555;'># A tibble: 8 x 3</span><span>
-#&gt;   precision recall    f1
-#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     0.839  0.867 0.852
-#&gt; </span><span style='color: #555555;'>2</span><span>     0.75   0.8   0.774
-#&gt; </span><span style='color: #555555;'>3</span><span>     0.542  0.433 0.481
-#&gt; </span><span style='color: #555555;'>4</span><span>     0.893  0.833 0.862
-#&gt; </span><span style='color: #555555;'>5</span><span>     0.893  0.833 0.862
-#&gt; </span><span style='color: #555555;'>6</span><span>     0.812  0.867 0.839
-#&gt; </span><span style='color: #555555;'>7</span><span>     0.871  0.9   0.885
-#&gt; </span><span style='color: #555555;'>8</span><span>     0.529  0.6   0.562
-#&gt; 
-#&gt; $macro_avg
-#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
-#&gt;   avg_precision avg_recall avg_f1
-#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>         0.766      0.767  0.765
-#&gt; 
-#&gt; $ova
-#&gt; $ova$ced
-#&gt;         classified
-#&gt; actual   ced others
-#&gt;   ced     26      4
-#&gt;   others   5    205
-#&gt; 
-#&gt; $ova$jeya
-#&gt;         classified
-#&gt; actual   jeya others
-#&gt;   jeya     24      6
-#&gt;   others    8    202
-#&gt; 
-#&gt; $ova$mat
-#&gt;         classified
-#&gt; actual   mat others
-#&gt;   mat     13     17
-#&gt;   others  11    199
-#&gt; 
-#&gt; $ova$ponnu
-#&gt;         classified
-#&gt; actual   ponnu others
-#&gt;   ponnu     25      5
-#&gt;   others     3    207
-#&gt; 
-#&gt; $ova$remi
-#&gt;         classified
-#&gt; actual   remi others
-#&gt;   remi     25      5
-#&gt;   others    3    207
-#&gt; 
-#&gt; $ova$rom
-#&gt;         classified
-#&gt; actual   rom others
-#&gt;   rom     26      4
-#&gt;   others   6    204
-#&gt; 
-#&gt; $ova$ruks
-#&gt;         classified
-#&gt; actual   ruks others
-#&gt;   ruks     27      3
-#&gt;   others    4    206
-#&gt; 
-#&gt; $ova$vince
-#&gt;         classified
-#&gt; actual   vince others
-#&gt;   vince     18     12
-#&gt;   others    16    194
-#&gt; 
-#&gt; 
-#&gt; $ova_sum
-#&gt;           classified
-#&gt; actual     relevant others
-#&gt;   relevant      184     56
-#&gt;   others         56   1624
-#&gt; 
-#&gt; $kappa
-#&gt; [1] 0.7333333
-#&gt; </div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># some morphometrics on 'hearts'</span></span>
+<span class='r-in'><span class='va'>hearts</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span><span class='op'>(</span>tol<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'><span class='fu'><a href='coo_slide.html'>coo_slide</a></span><span class='op'>(</span>ldk<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span>norm<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'><span class='co'># now the LDA and its summary</span></span>
+<span class='r-in'><span class='fu'><a href='LDA.html'>LDA</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>aut</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>classification_metrics</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iteration:  1 	gain: 30322 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iteration:  2 	gain: 1.2498 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iteration:  3 	gain: 0.34194 </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 7 (99% harmonic power)</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 11 PC retained</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $accuracy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.7666667</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $macro_prf</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 8 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   precision recall    f1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     0.839  0.867 0.852</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>     0.75   0.8   0.774</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>     0.542  0.433 0.481</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span>     0.893  0.833 0.862</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span>     0.893  0.833 0.862</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span>     0.812  0.867 0.839</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>7</span>     0.871  0.9   0.885</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>8</span>     0.529  0.6   0.562</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $macro_avg</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   avg_precision avg_recall avg_f1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>         0.766      0.767  0.765</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$ced</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   ced others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ced     26      4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others   5    205</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$jeya</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   jeya others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   jeya     24      6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others    8    202</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$mat</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   mat others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   mat     13     17</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others  11    199</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$ponnu</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   ponnu others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ponnu     25      5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others     3    207</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$remi</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   remi others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   remi     25      5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others    3    207</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$rom</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   rom others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   rom     26      4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others   6    204</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$ruks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   ruks others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ruks     27      3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others    4    206</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova$vince</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   vince others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   vince     18     12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others    16    194</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ova_sum</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual     relevant others</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   relevant      184     56</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   others         56   1624</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $kappa</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.7333333</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -273,7 +278,7 @@ used is partley derived from the Revolution Analytics blog post (with their auth
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

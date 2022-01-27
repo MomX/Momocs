@@ -76,7 +76,7 @@ obtained computed with sfourier." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ obtained computed with sfourier." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ calculate a shape, when given a list with Fourier coefficients, typically
 obtained computed with <a href='sfourier.html'>sfourier</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sfourier_i</span>(<span class='no'>rf</span>, <span class='no'>nb.h</span>, <span class='kw'>nb.pts</span> <span class='kw'>=</span> <span class='fl'>120</span>, <span class='kw'>dtheta</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>sfourier_i</span><span class='op'>(</span><span class='va'>rf</span>, <span class='va'>nb.h</span>, nb.pts <span class='op'>=</span> <span class='fl'>120</span>, dtheta <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,43 +171,48 @@ of <em>Apodemus</em> wood mice. <em>J Biogeogr</em> 30:1617-1628.</p>
 <code><a href='sfourier.html'>sfourier</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>coo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='coo_center.html'>coo_center</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>]) <span class='co'># centering is almost mandatory for sfourier family</span>
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>coo</span>)</div><div class='input'><span class='no'>rf</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='sfourier.html'>sfourier</a></span>(<span class='no'>coo</span>, <span class='fl'>12</span>)
-<span class='no'>rf</span></div><div class='output co'>#&gt; $an
-#&gt;  [1]  4.604028e-03 -2.999389e-01 -9.402145e-04  1.149290e-02  7.204731e-03
-#&gt;  [6] -9.029436e-03 -3.801153e-04 -3.509909e-03  3.066128e-03 -1.605563e-04
-#&gt; [11] -5.282196e-05 -2.663480e-03
-#&gt; 
-#&gt; $bn
-#&gt;  [1] -5.890572e-03  3.958517e-02 -7.064423e-03 -2.988931e-03  1.291082e-02
-#&gt;  [6]  2.814025e-03 -1.504084e-03  5.682629e-04  5.198896e-03 -3.561684e-05
-#&gt; [11] -1.358067e-03  2.234144e-03
-#&gt; 
-#&gt; $ao
-#&gt; [1] 334.5633
-#&gt; 
-#&gt; $r
-#&gt;   [1] 139.1167 135.1134 135.8741 136.8427 141.0323 143.5802 151.2095 162.8116
-#&gt;   [9] 175.5101 182.5204 198.0176 214.4721 223.4262 241.8735 260.7074 269.7883
-#&gt;  [17] 289.8301 310.0117 320.9760 342.0111 363.0862 373.1664 393.9569 415.7375
-#&gt;  [25] 436.2997 445.8192 465.8759 484.9159 494.7304 512.1917 523.5711 525.7951
-#&gt;  [33] 528.7641 528.6261 529.8403 529.9849 528.9630 529.2840 529.5332 529.6230
-#&gt;  [41] 526.6029 525.3373 516.8135 501.5361 492.0222 473.0432 453.3357 442.8940
-#&gt;  [49] 422.7064 402.9506 393.5883 373.2914 353.4743 342.9622 323.7894 303.5315
-#&gt;  [57] 283.8734 274.5648 254.3851 234.8608 225.9056 207.4851 188.9917 179.2651
-#&gt;  [65] 163.2102 148.4020 142.2876 131.8906 124.2115 121.7441 122.3408 126.4329
-#&gt;  [73] 133.8555 138.8126 149.4057 160.3977 165.1035 178.0327 190.2983 196.3891
-#&gt;  [81] 207.9233 218.2629 225.0539 239.8685 256.5975 274.7171 283.4915 303.0400
-#&gt;  [89] 323.0170 333.5460 353.5262 373.8148 383.4986 404.8965 425.3750 435.1409
-#&gt;  [97] 455.5781 476.1955 487.0166 508.4428 526.8989 546.1072 554.4755 557.9344
-#&gt; [105] 558.1869 558.1342 557.6074 557.8729 556.8590 542.6716 524.9317 515.3814
-#&gt; [113] 494.2988 473.6200 462.7267 442.2440 421.9866 401.6471 390.8306 370.6053
-#&gt; [121] 350.7010 341.4100 321.0176 301.2409 290.9421 272.0980 254.7364 246.6077
-#&gt; [129] 230.9259 217.6545 212.0765 201.6712 191.0722 180.1960 174.3784 163.0992
-#&gt; [137] 152.9502 148.4252
-#&gt; </div><div class='input'><span class='no'>rfi</span> <span class='kw'>&lt;-</span> <span class='fu'>sfourier_i</span>(<span class='no'>rf</span>)
-<span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>rfi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>)</div><div class='img'><img src='sfourier_i-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>coo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='coo_center.html'>coo_center</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span> <span class='co'># centering is almost mandatory for sfourier family</span></span>
+<span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>rf</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='sfourier.html'>sfourier</a></span><span class='op'>(</span><span class='va'>coo</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>rf</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $an</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  4.604028e-03 -2.999389e-01 -9.402145e-04  1.149290e-02  7.204731e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6] -9.029436e-03 -3.801153e-04 -3.509909e-03  3.066128e-03 -1.605563e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11] -5.282196e-05 -2.663480e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -5.890572e-03  3.958517e-02 -7.064423e-03 -2.988931e-03  1.291082e-02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]  2.814025e-03 -1.504084e-03  5.682629e-04  5.198896e-03 -3.561684e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11] -1.358067e-03  2.234144e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ao</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 334.5633</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $r</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] 139.1167 135.1134 135.8741 136.8427 141.0323 143.5802 151.2095 162.8116</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [9] 175.5101 182.5204 198.0176 214.4721 223.4262 241.8735 260.7074 269.7883</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [17] 289.8301 310.0117 320.9760 342.0111 363.0862 373.1664 393.9569 415.7375</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [25] 436.2997 445.8192 465.8759 484.9159 494.7304 512.1917 523.5711 525.7951</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [33] 528.7641 528.6261 529.8403 529.9849 528.9630 529.2840 529.5332 529.6230</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [41] 526.6029 525.3373 516.8135 501.5361 492.0222 473.0432 453.3357 442.8940</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [49] 422.7064 402.9506 393.5883 373.2914 353.4743 342.9622 323.7894 303.5315</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [57] 283.8734 274.5648 254.3851 234.8608 225.9056 207.4851 188.9917 179.2651</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [65] 163.2102 148.4020 142.2876 131.8906 124.2115 121.7441 122.3408 126.4329</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [73] 133.8555 138.8126 149.4057 160.3977 165.1035 178.0327 190.2983 196.3891</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [81] 207.9233 218.2629 225.0539 239.8685 256.5975 274.7171 283.4915 303.0400</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [89] 323.0170 333.5460 353.5262 373.8148 383.4986 404.8965 425.3750 435.1409</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [97] 455.5781 476.1955 487.0166 508.4428 526.8989 546.1072 554.4755 557.9344</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [105] 558.1869 558.1342 557.6074 557.8729 556.8590 542.6716 524.9317 515.3814</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [113] 494.2988 473.6200 462.7267 442.2440 421.9866 401.6471 390.8306 370.6053</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [121] 350.7010 341.4100 321.0176 301.2409 290.9421 272.0980 254.7364 246.6077</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [129] 230.9259 217.6545 212.0765 201.6712 191.0722 180.1960 174.3784 163.0992</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [137] 152.9502 148.4252</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='va'>rfi</span> <span class='op'>&lt;-</span> <span class='fu'>sfourier_i</span><span class='op'>(</span><span class='va'>rf</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span><span class='op'>(</span><span class='va'>rfi</span>, border<span class='op'>=</span><span class='st'>'red'</span>, col<span class='op'>=</span><span class='cn'>NA</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='sfourier_i-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -223,7 +228,7 @@ of <em>Apodemus</em> wood mice. <em>J Biogeogr</em> 30:1617-1628.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

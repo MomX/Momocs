@@ -75,7 +75,7 @@ them with or without isolines." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ them with or without isolines." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,26 +124,26 @@ them with or without isolines." />
 them with or without isolines.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tps_iso</span>(
-  <span class='no'>fr</span>,
-  <span class='no'>to</span>,
-  <span class='kw'>amp</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>over</span> <span class='kw'>=</span> <span class='fl'>1.2</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_spring</span>,
-  <span class='kw'>iso.nb</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>iso.levels</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>cont</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cont.col</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>poly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>shp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>shp.border</span> <span class='kw'>=</span> <span class='fu'><a href='color_palettes.html'>col_qual</a></span>(<span class='fl'>2</span>),
-  <span class='kw'>shp.lwd</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>),
-  <span class='kw'>shp.lty</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>),
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>legend.text</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>tps_iso</span><span class='op'>(</span>
+  <span class='va'>fr</span>,
+  <span class='va'>to</span>,
+  amp <span class='op'>=</span> <span class='fl'>1</span>,
+  grid <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  over <span class='op'>=</span> <span class='fl'>1.2</span>,
+  palette <span class='op'>=</span> <span class='va'>col_spring</span>,
+  iso.nb <span class='op'>=</span> <span class='fl'>1000</span>,
+  iso.levels <span class='op'>=</span> <span class='fl'>12</span>,
+  cont <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  cont.col <span class='op'>=</span> <span class='st'>"black"</span>,
+  poly <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  shp <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  shp.border <span class='op'>=</span> <span class='fu'><a href='color_palettes.html'>col_qual</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>,
+  shp.lwd <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  shp.lty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>,
+  legend <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>legend.text</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,10 +240,17 @@ deformations</p></td>
 <code><a href='tps_raw.html'>tps_raw</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>botF</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='MSHAPES.html'>MSHAPES</a></span>(<span class='no'>botF</span>, <span class='st'>'type'</span>, <span class='kw'>nb.pts</span><span class='kw'>=</span><span class='fl'>80</span>)$<span class='no'>shp</span>
-<span class='no'>fr</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>$<span class='no'>beer</span>
-<span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>$<span class='no'>whisky</span>
-<span class='fu'>tps_iso</span>(<span class='no'>fr</span>, <span class='no'>to</span>, <span class='kw'>iso.nb</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>amp</span><span class='kw'>=</span><span class='fl'>3</span>)</div><div class='img'><img src='tps_iso-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>tps_iso</span>(<span class='no'>fr</span>, <span class='no'>to</span>, <span class='kw'>iso.nb</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>amp</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>grid</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='tps_iso-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>botF</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='MSHAPES.html'>MSHAPES</a></span><span class='op'>(</span><span class='va'>botF</span>, <span class='st'>'type'</span>, nb.pts<span class='op'>=</span><span class='fl'>80</span><span class='op'>)</span><span class='op'>$</span><span class='va'>shp</span></span>
+<span class='r-in'><span class='va'>fr</span> <span class='op'>&lt;-</span> <span class='va'>x</span><span class='op'>$</span><span class='va'>beer</span></span>
+<span class='r-in'><span class='va'>to</span> <span class='op'>&lt;-</span> <span class='va'>x</span><span class='op'>$</span><span class='va'>whisky</span></span>
+<span class='r-in'><span class='fu'>tps_iso</span><span class='op'>(</span><span class='va'>fr</span>, <span class='va'>to</span>, iso.nb<span class='op'>=</span><span class='fl'>200</span>, amp<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='tps_iso-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'>tps_iso</span><span class='op'>(</span><span class='va'>fr</span>, <span class='va'>to</span>, iso.nb<span class='op'>=</span><span class='fl'>200</span>, amp<span class='op'>=</span><span class='fl'>3</span>, grid<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='tps_iso-2.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -259,7 +266,7 @@ deformations</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -75,7 +75,7 @@ list of coordinates." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ list of coordinates." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,16 +124,16 @@ list of coordinates." />
 list of coordinates.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tfourier</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>tfourier</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>tfourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>tfourier</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>nb.h</span>, smooth.it <span class='op'>=</span> <span class='fl'>0</span>, norm <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Out</span>
-<span class='fu'>tfourier</span>(<span class='no'>x</span>, <span class='kw'>nb.h</span> <span class='kw'>=</span> <span class='fl'>40</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>tfourier</span><span class='op'>(</span><span class='va'>x</span>, nb.h <span class='op'>=</span> <span class='fl'>40</span>, smooth.it <span class='op'>=</span> <span class='fl'>0</span>, norm <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>tfourier</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>tfourier</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,7 +179,7 @@ that the first point used is sent on the origin.</p></td>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Silent message and progress bars (if any) with <code><a href='https://rdrr.io/r/base/options.html'>options("verbose"=FALSE)</a></code>.</p>
+    <p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
 <p>Directly borrowed for Claude (2008), and called <code>fourier2</code> there.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -194,83 +194,89 @@ pp.</p>
 <code><a href='tfourier_shape.html'>tfourier_shape</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>coo</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>coo</span>)</div><div class='input'><span class='no'>tf</span>  <span class='kw'>&lt;-</span> <span class='fu'>tfourier</span>(<span class='no'>coo</span>, <span class='fl'>12</span>)
-<span class='no'>tf</span></div><div class='output co'>#&gt; $ao
-#&gt; [1] 7.733739
-#&gt; 
-#&gt; $an
-#&gt;  [1]  0.04522478 -0.37556233  0.02768553  0.94117330 -0.39901487 -0.77638246
-#&gt;  [7] -0.57686667  0.04409017 -0.76045376 -0.46366388 -0.60869408 -0.14084193
-#&gt; 
-#&gt; $bn
-#&gt;  [1]  0.008457058  2.526564125 -0.554083930  0.313312077 -0.288987146
-#&gt;  [6]  0.032821965 -0.226300468  0.409651090 -0.021830547  0.015586993
-#&gt; [11]  0.414880500  0.677636372
-#&gt; 
-#&gt; $phi
-#&gt;   [1] 0.00000000 0.03394792 6.12970584 6.22607257 6.18054224 6.19051042
-#&gt;   [7] 6.13580603 5.99700591 5.99842093 5.99084704 5.86041492 5.81488459
-#&gt;  [13] 5.76506244 5.62887223 5.58334190 5.53781157 5.39732954 5.35179921
-#&gt;  [19] 5.22136709 5.16746875 5.12193843 5.06723404 5.07720222 5.03804123
-#&gt;  [25] 5.03308691 5.08250829 5.03697796 5.17966914 5.21216935 5.41953309
-#&gt;  [31] 5.77457625 5.99961627 6.05629266 6.19411028 6.06367816 6.15041823
-#&gt;  [37] 6.20005411 6.10694068 6.10899345 6.11083173 6.24864935 6.21627616
-#&gt;  [43] 0.15041122 0.41687566 0.72706839 0.84208756 0.93719564 0.93924841
-#&gt;  [49] 0.94130119 0.84818776 0.80265743 0.85207881 0.75917987 0.75672633
-#&gt;  [55] 0.62053611 0.71690284 0.62442716 0.58361378 0.52907469 0.53478153
-#&gt;  [61] 0.44702280 0.39677552 0.39819054 0.39061666 0.21281593 0.16728561
-#&gt;  [67] 0.07417217 6.26424405 6.21871372 6.07886944 5.99538267 5.94148434
-#&gt;  [73] 5.89595401 5.85879168 5.85121780 5.90000142 6.00172285 5.85652387
-#&gt;  [79] 5.95289060 6.03171526 6.08391184 6.21482206 6.12821895 6.02776111
-#&gt;  [85] 5.90179053 5.77058090 5.73820771 5.54311764 5.45064197 5.40081982
-#&gt;  [91] 5.40652666 5.31405098 5.27323760 5.21869850 5.17746000 5.13664661
-#&gt;  [97] 5.13334469 5.04086901 4.99104686 4.62111347 5.01682255 4.60719411
-#&gt; [103] 5.30626827 6.00978848 6.15257805 6.15247100 6.15452378 6.10899345
-#&gt; [109] 6.19573352 0.50480943 1.60303743 0.87544326 1.21632143 1.02825629
-#&gt; [115] 1.03030907 0.88982703 0.79735136 0.79876638 0.84818776 0.70770572
-#&gt; [121] 0.61523005 0.51420121 0.66606644 0.52558441 0.48434590 0.34125395
-#&gt; [127] 0.16219458 0.14695801 6.24944229 6.18612024 6.12136151 6.11662487
-#&gt; [133] 6.17219791 6.26019663 0.02904262 0.07417217 0.07622495 0.08278017
-#&gt; 
-#&gt; $t
-#&gt;   [1] 0.00000000 0.04553033 0.09106066 0.13659098 0.18212131 0.22765164
-#&gt;   [7] 0.27318197 0.31871230 0.36424263 0.40977295 0.45530328 0.50083361
-#&gt;  [13] 0.54636394 0.59189427 0.63742460 0.68295492 0.72848525 0.77401558
-#&gt;  [19] 0.81954591 0.86507624 0.91060657 0.95613689 1.00166722 1.04719755
-#&gt;  [25] 1.09272788 1.13825821 1.18378854 1.22931886 1.27484919 1.32037952
-#&gt;  [31] 1.36590985 1.41144018 1.45697051 1.50250083 1.54803116 1.59356149
-#&gt;  [37] 1.63909182 1.68462215 1.73015248 1.77568280 1.82121313 1.86674346
-#&gt;  [43] 1.91227379 1.95780412 2.00333445 2.04886477 2.09439510 2.13992543
-#&gt;  [49] 2.18545576 2.23098609 2.27651642 2.32204674 2.36757707 2.41310740
-#&gt;  [55] 2.45863773 2.50416806 2.54969839 2.59522871 2.64075904 2.68628937
-#&gt;  [61] 2.73181970 2.77735003 2.82288036 2.86841068 2.91394101 2.95947134
-#&gt;  [67] 3.00500167 3.05053200 3.09606233 3.14159265 3.18712298 3.23265331
-#&gt;  [73] 3.27818364 3.32371397 3.36924430 3.41477462 3.46030495 3.50583528
-#&gt;  [79] 3.55136561 3.59689594 3.64242627 3.68795659 3.73348692 3.77901725
-#&gt;  [85] 3.82454758 3.87007791 3.91560823 3.96113856 4.00666889 4.05219922
-#&gt;  [91] 4.09772955 4.14325988 4.18879020 4.23432053 4.27985086 4.32538119
-#&gt;  [97] 4.37091152 4.41644185 4.46197217 4.50750250 4.55303283 4.59856316
-#&gt; [103] 4.64409349 4.68962382 4.73515414 4.78068447 4.82621480 4.87174513
-#&gt; [109] 4.91727546 4.96280579 5.00833611 5.05386644 5.09939677 5.14492710
-#&gt; [115] 5.19045743 5.23598776 5.28151808 5.32704841 5.37257874 5.41810907
-#&gt; [121] 5.46363940 5.50916973 5.55470005 5.60023038 5.64576071 5.69129104
-#&gt; [127] 5.73682137 5.78235170 5.82788202 5.87341235 5.91894268 5.96447301
-#&gt; [133] 6.01000334 6.05553367 6.10106399 6.14659432 6.19212465 6.23765498
-#&gt; 
-#&gt; $perimeter
-#&gt; [1] 2513.886
-#&gt; 
-#&gt; $thetao
-#&gt; [1] -1.508378
-#&gt; 
-#&gt; $x1
-#&gt; [1] 37
-#&gt; 
-#&gt; $y1
-#&gt; [1] 561
-#&gt; </div><div class='input'><span class='no'>tfi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tfourier_i.html'>tfourier_i</a></span>(<span class='no'>tf</span>)
-<span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>tfi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>) <span class='co'># the outline is not closed...</span></div><div class='input'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='fu'><a href='tfourier_i.html'>tfourier_i</a></span>(<span class='no'>tf</span>, <span class='kw'>force2close</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'blue'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>) <span class='co'># we force it to close.</span></div><div class='img'><img src='tfourier-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>coo</span> <span class='op'>&lt;-</span> <span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tf</span>  <span class='op'>&lt;-</span> <span class='fu'>tfourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tf</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ao</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 7.733739</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $an</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  0.04522478 -0.37556233  0.02768553  0.94117330 -0.39901487 -0.77638246</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] -0.57686667  0.04409017 -0.76045376 -0.46366388 -0.60869408 -0.14084193</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  0.008457058  2.526564125 -0.554083930  0.313312077 -0.288987146</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]  0.032821965 -0.226300468  0.409651090 -0.021830547  0.015586993</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11]  0.414880500  0.677636372</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $phi</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] 0.00000000 0.03394792 6.12970584 6.22607257 6.18054224 6.19051042</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [7] 6.13580603 5.99700591 5.99842093 5.99084704 5.86041492 5.81488459</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [13] 5.76506244 5.62887223 5.58334190 5.53781157 5.39732954 5.35179921</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [19] 5.22136709 5.16746875 5.12193843 5.06723404 5.07720222 5.03804123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [25] 5.03308691 5.08250829 5.03697796 5.17966914 5.21216935 5.41953309</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [31] 5.77457625 5.99961627 6.05629266 6.19411028 6.06367816 6.15041823</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [37] 6.20005411 6.10694068 6.10899345 6.11083173 6.24864935 6.21627616</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [43] 0.15041122 0.41687566 0.72706839 0.84208756 0.93719564 0.93924841</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [49] 0.94130119 0.84818776 0.80265743 0.85207881 0.75917987 0.75672633</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [55] 0.62053611 0.71690284 0.62442716 0.58361378 0.52907469 0.53478153</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [61] 0.44702280 0.39677552 0.39819054 0.39061666 0.21281593 0.16728561</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [67] 0.07417217 6.26424405 6.21871372 6.07886944 5.99538267 5.94148434</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [73] 5.89595401 5.85879168 5.85121780 5.90000142 6.00172285 5.85652387</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [79] 5.95289060 6.03171526 6.08391184 6.21482206 6.12821895 6.02776111</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [85] 5.90179053 5.77058090 5.73820771 5.54311764 5.45064197 5.40081982</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [91] 5.40652666 5.31405098 5.27323760 5.21869850 5.17746000 5.13664661</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [97] 5.13334469 5.04086901 4.99104686 4.62111347 5.01682255 4.60719411</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [103] 5.30626827 6.00978848 6.15257805 6.15247100 6.15452378 6.10899345</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [109] 6.19573352 0.50480943 1.60303743 0.87544326 1.21632143 1.02825629</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [115] 1.03030907 0.88982703 0.79735136 0.79876638 0.84818776 0.70770572</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [121] 0.61523005 0.51420121 0.66606644 0.52558441 0.48434590 0.34125395</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [127] 0.16219458 0.14695801 6.24944229 6.18612024 6.12136151 6.11662487</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [133] 6.17219791 6.26019663 0.02904262 0.07417217 0.07622495 0.08278017</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $t</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] 0.00000000 0.04553033 0.09106066 0.13659098 0.18212131 0.22765164</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [7] 0.27318197 0.31871230 0.36424263 0.40977295 0.45530328 0.50083361</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [13] 0.54636394 0.59189427 0.63742460 0.68295492 0.72848525 0.77401558</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [19] 0.81954591 0.86507624 0.91060657 0.95613689 1.00166722 1.04719755</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [25] 1.09272788 1.13825821 1.18378854 1.22931886 1.27484919 1.32037952</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [31] 1.36590985 1.41144018 1.45697051 1.50250083 1.54803116 1.59356149</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [37] 1.63909182 1.68462215 1.73015248 1.77568280 1.82121313 1.86674346</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [43] 1.91227379 1.95780412 2.00333445 2.04886477 2.09439510 2.13992543</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [49] 2.18545576 2.23098609 2.27651642 2.32204674 2.36757707 2.41310740</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [55] 2.45863773 2.50416806 2.54969839 2.59522871 2.64075904 2.68628937</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [61] 2.73181970 2.77735003 2.82288036 2.86841068 2.91394101 2.95947134</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [67] 3.00500167 3.05053200 3.09606233 3.14159265 3.18712298 3.23265331</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [73] 3.27818364 3.32371397 3.36924430 3.41477462 3.46030495 3.50583528</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [79] 3.55136561 3.59689594 3.64242627 3.68795659 3.73348692 3.77901725</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [85] 3.82454758 3.87007791 3.91560823 3.96113856 4.00666889 4.05219922</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [91] 4.09772955 4.14325988 4.18879020 4.23432053 4.27985086 4.32538119</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [97] 4.37091152 4.41644185 4.46197217 4.50750250 4.55303283 4.59856316</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [103] 4.64409349 4.68962382 4.73515414 4.78068447 4.82621480 4.87174513</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [109] 4.91727546 4.96280579 5.00833611 5.05386644 5.09939677 5.14492710</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [115] 5.19045743 5.23598776 5.28151808 5.32704841 5.37257874 5.41810907</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [121] 5.46363940 5.50916973 5.55470005 5.60023038 5.64576071 5.69129104</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [127] 5.73682137 5.78235170 5.82788202 5.87341235 5.91894268 5.96447301</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [133] 6.01000334 6.05553367 6.10106399 6.14659432 6.19212465 6.23765498</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $perimeter</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2513.886</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $thetao</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -1.508378</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 37</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $y1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 561</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='va'>tfi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tfourier_i.html'>tfourier_i</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span><span class='op'>(</span><span class='va'>tfi</span>, border<span class='op'>=</span><span class='st'>'red'</span>, col<span class='op'>=</span><span class='cn'>NA</span><span class='op'>)</span> <span class='co'># the outline is not closed...</span></span>
+<span class='r-in'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span><span class='op'>(</span><span class='fu'><a href='tfourier_i.html'>tfourier_i</a></span><span class='op'>(</span><span class='va'>tf</span>, force2close<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>, border<span class='op'>=</span><span class='st'>'blue'</span>, col<span class='op'>=</span><span class='cn'>NA</span><span class='op'>)</span> <span class='co'># we force it to close.</span></span>
+<span class='r-plt img'><img src='tfourier-1.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -286,7 +292,7 @@ pp.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

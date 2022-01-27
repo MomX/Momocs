@@ -78,7 +78,7 @@ from one to the other format. In short, this function rearranges column order. S
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@ from one to the other format. In short, this function rearranges column order. S
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@ as <code>A1, B1, C1, D1, ..., An, Bn, Cn, Dn</code>, this functions helps to go
 from one to the other format. In short, this function rearranges column order. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coeff_rearrange</span>(<span class='no'>x</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"name"</span>, <span class='st'>"rank"</span>)[<span class='fl'>1</span>])</pre>
+    <pre class="usage"><span class='fu'>coeff_rearrange</span><span class='op'>(</span><span class='va'>x</span>, by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"name"</span>, <span class='st'>"rank"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,30 +147,43 @@ from one to the other format. In short, this function rearranges column order. S
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m_name</span> <span class='kw'>&lt;-</span> <span class='no'>m_rank</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>1</span>:<span class='fl'>32</span>, <span class='fl'>2</span>, <span class='fl'>16</span>)
-<span class='co'># this one is ordered by name</span>
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>m_name</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>4</span>), <span class='fl'>1</span>:<span class='fl'>4</span>)
-<span class='co'># this one is ordered by rank</span>
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>m_rank</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>4</span>))
-
-<span class='no'>m_rank</span></div><div class='output co'>#&gt;      a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
-#&gt; [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31
-#&gt; [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</div><div class='input'><span class='no'>m_rank</span> <span class='kw'>%&gt;%</span> <span class='fu'>coeff_rearrange</span>(<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"name"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `arrange_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `arrange()` instead.</span>
-#&gt; <span class='warning'>See vignette('programming') for more help</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt;      a1 a2 a3 a4 b1 b2 b3 b4 c1 c2 c3 c4 d1 d2 d3 d4
-#&gt; [1,]  1  9 17 25  3 11 19 27  5 13 21 29  7 15 23 31
-#&gt; [2,]  2 10 18 26  4 12 20 28  6 14 22 30  8 16 24 32</div><div class='input'><span class='no'>m_rank</span> <span class='kw'>%&gt;%</span> <span class='fu'>coeff_rearrange</span>(<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"rank"</span>) <span class='co'>#no change</span></div><div class='output co'>#&gt;      a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
-#&gt; [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31
-#&gt; [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</div><div class='input'>
-<span class='no'>m_name</span></div><div class='output co'>#&gt;      a1 a2 a3 a4 b1 b2 b3 b4 c1 c2 c3 c4 d1 d2 d3 d4
-#&gt; [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31
-#&gt; [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</div><div class='input'><span class='no'>m_name</span> <span class='kw'>%&gt;%</span> <span class='fu'>coeff_rearrange</span>(<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"name"</span>) <span class='co'># no change</span></div><div class='output co'>#&gt;      a1 a2 a3 a4 b1 b2 b3 b4 c1 c2 c3 c4 d1 d2 d3 d4
-#&gt; [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31
-#&gt; [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</div><div class='input'><span class='no'>m_name</span> <span class='kw'>%&gt;%</span> <span class='fu'>coeff_rearrange</span>(<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"rank"</span>)</div><div class='output co'>#&gt;      a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
-#&gt; [1,]  1  9 17 25  3 11 19 27  5 13 21 29  7 15 23 31
-#&gt; [2,]  2 10 18 26  4 12 20 28  6 14 22 30  8 16 24 32</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>m_name</span> <span class='op'>&lt;-</span> <span class='va'>m_rank</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>32</span>, <span class='fl'>2</span>, <span class='fl'>16</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># this one is ordered by name</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>m_name</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, each<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># this one is ordered by rank</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>m_rank</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>, each<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>m_rank</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</span>
+<span class='r-in'><span class='va'>m_rank</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coeff_rearrange</span><span class='op'>(</span>by<span class='op'>=</span><span class='st'>"name"</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>`arrange_()` was deprecated in dplyr 0.7.0.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Please use `arrange()` instead.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> See vignette('programming') for more help</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>This warning is displayed once every 8 hours.</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      a1 a2 a3 a4 b1 b2 b3 b4 c1 c2 c3 c4 d1 d2 d3 d4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]  1  9 17 25  3 11 19 27  5 13 21 29  7 15 23 31</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  2 10 18 26  4 12 20 28  6 14 22 30  8 16 24 32</span>
+<span class='r-in'><span class='va'>m_rank</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coeff_rearrange</span><span class='op'>(</span>by<span class='op'>=</span><span class='st'>"rank"</span><span class='op'>)</span> <span class='co'>#no change</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>m_name</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      a1 a2 a3 a4 b1 b2 b3 b4 c1 c2 c3 c4 d1 d2 d3 d4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</span>
+<span class='r-in'><span class='va'>m_name</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coeff_rearrange</span><span class='op'>(</span>by<span class='op'>=</span><span class='st'>"name"</span><span class='op'>)</span> <span class='co'># no change</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      a1 a2 a3 a4 b1 b2 b3 b4 c1 c2 c3 c4 d1 d2 d3 d4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32</span>
+<span class='r-in'><span class='va'>m_name</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coeff_rearrange</span><span class='op'>(</span>by<span class='op'>=</span><span class='st'>"rank"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]  1  9 17 25  3 11 19 27  5 13 21 29  7 15 23 31</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  2 10 18 26  4 12 20 28  6 14 22 30  8 16 24 32</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -186,7 +199,7 @@ from one to the other format. In short, this function rearranges column order. S
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

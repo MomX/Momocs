@@ -75,7 +75,7 @@ using the layers. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ using the layers. See examples." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,28 +124,28 @@ using the layers. See examples." />
 using the <a href='layers.html'>layers</a>. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_LDA</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>),
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>,
-  <span class='kw'>morphospace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>morphospace_position</span> <span class='kw'>=</span> <span class='st'>"range"</span>,
-  <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labelgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>center_origin</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
-  <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>iftwo_layer</span> <span class='kw'>=</span> <span class='no'>layer_histogram_2</span>,
-  <span class='kw'>iftwo_split</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>axesvar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>plot_LDA</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  axes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  palette <span class='op'>=</span> <span class='va'>pal_qual</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  points_transp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>4</span>,
+  morphospace <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  morphospace_position <span class='op'>=</span> <span class='st'>"range"</span>,
+  chull <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  chullfilled <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labelgroups <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  legend <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='st'>""</span>,
+  center_origin <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  zoom <span class='op'>=</span> <span class='fl'>0.9</span>,
+  eigen <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  box <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  iftwo_layer <span class='op'>=</span> <span class='va'>layer_histogram_2</span>,
+  iftwo_split <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  axesnames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axesvar <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,7 +157,7 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
     <tr>
       <th>axes</th>
       <td><p><code>numeric</code> of length two to select PCs to use
-(<code><a href='https://rdrr.io/r/base/c.html'>c(1, 2)</a></code> by default)</p></td>
+(<code>c(1, 2)</code> by default)</p></td>
     </tr>
     <tr>
       <th>palette</th>
@@ -244,61 +244,66 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 <code><a href='drawers.html'>drawers</a></code>,
 <code><a href='layers_morphospace.html'>layers_morphospace</a></code>,
 <code><a href='layers.html'>layers</a></code>,
-<code><a href='mosaic.html'>mosaic_engine</a>()</code>,
+<code><a href='mosaic_engine.html'>mosaic_engine</a>()</code>,
 <code><a href='papers.html'>papers</a></code>,
 <code><a href='pile.html'>pile</a>()</code>,
 <code><a href='plot_NMDS.html'>plot_NMDS</a>()</code>,
 <code><a href='plot_PCA.html'>plot_PCA</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>### First prepare an LDA object</span>
-
-<span class='co'># Some outlines with bot</span>
-<span class='no'>bl</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span>
-      <span class='co'># cheap alignement before efourier</span>
-      <span class='fu'><a href='coo_align.html'>coo_align</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>coo_center</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_slidedirection.html'>coo_slidedirection</a></span>(<span class='st'>"left"</span>) <span class='kw'>%&gt;%</span>
-      <span class='co'># add a fake column</span>
-      <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>fake</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='fl'>40</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='kw'>%&gt;%</span>
-      <span class='co'># EFT</span>
-      <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='fl'>6</span>, <span class='kw'>norm</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-      <span class='co'># LDA</span>
-      <span class='fu'><a href='LDA.html'>LDA</a></span>(~<span class='no'>fake</span>)</div><div class='output co'>#&gt; <span class='message'>factor passed was a character, and coerced to a factor.</span></div><div class='input'>
-<span class='no'>bl</span> <span class='kw'>%&gt;%</span> <span class='no'>plot_LDA</span> <span class='kw'>%&gt;%</span> <span class='no'>layer_morphospace_LDA</span></div><div class='output co'>#&gt; <span class='message'>* layer_morphospace_LDA is back, but experimental</span></div><div class='img'><img src='plot_LDA-1.png' alt='' width='700' height='433' /></div><div class='input'>
-# Below inherited from plot_PCA and to adapt here.
-#plot_PCA(bp)
-#plot_PCA(bp, ~type)
-#plot_PCA(bp, ~fake)
-
-# Some curves with olea
-#op &lt;- olea %&gt;%
-#mutate(s=coo_area(.)) %&gt;%
-#filter(var != "Cypre") %&gt;%
-#chop(~view) %&gt;% lapply(opoly, 5, nb.pts=90) %&gt;%
-#combine %&gt;% PCA
-#op$fac$s %&lt;&gt;% as.character() %&gt;% as.numeric()
-
-#op %&gt;% plot_PCA(title="hi there!")
-
-### Now we can play with layers
-# and for instance build a custom plot
-# it should start with plot_PCA()
-
-#my_plot &lt;- function(x, ...){
-
-#x %&gt;%
-#     plot_PCA(...) %&gt;%
-#    layer_points %&gt;%
-#     layer_ellipsesaxes %&gt;%
-#    layer_rug
-# }
-
-# and even continue after this function
-# op %&gt;% my_plot(~var, axes=c(1, 3)) %&gt;%
-#     layer_title("hi there!") %&gt;%
-#    layer_stars()
-
-# You get the idea.
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>### First prepare an LDA object</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Some outlines with bot</span></span>
+<span class='r-in'><span class='va'>bl</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>      <span class='co'># cheap alignement before efourier</span></span>
+<span class='r-in'>      <span class='fu'><a href='coo_align.html'>coo_align</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>coo_center</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='coo_slidedirection.html'>coo_slidedirection</a></span><span class='op'>(</span><span class='st'>"left"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>      <span class='co'># add a fake column</span></span>
+<span class='r-in'>      <span class='fu'><a href='mutate.html'>mutate</a></span><span class='op'>(</span>fake<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span>, <span class='fl'>40</span>, replace<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>      <span class='co'># EFT</span></span>
+<span class='r-in'>      <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='fl'>6</span>, norm<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>      <span class='co'># LDA</span></span>
+<span class='r-in'>      <span class='fu'><a href='LDA.html'>LDA</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>fake</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> factor passed was a character, and coerced to a factor.</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>bl</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>plot_LDA</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>layer_morphospace_LDA</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * layer_morphospace_LDA is back, but experimental</span>
+<span class='r-plt img'><img src='plot_LDA-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Below inherited from plot_PCA and to adapt here.</span></span>
+<span class='r-in'><span class='co'>#plot_PCA(bp)</span></span>
+<span class='r-in'><span class='co'>#plot_PCA(bp, ~type)</span></span>
+<span class='r-in'><span class='co'>#plot_PCA(bp, ~fake)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Some curves with olea</span></span>
+<span class='r-in'><span class='co'>#op &lt;- olea %&gt;%</span></span>
+<span class='r-in'><span class='co'>#mutate(s=coo_area(.)) %&gt;%</span></span>
+<span class='r-in'><span class='co'>#filter(var != "Cypre") %&gt;%</span></span>
+<span class='r-in'><span class='co'>#chop(~view) %&gt;% lapply(opoly, 5, nb.pts=90) %&gt;%</span></span>
+<span class='r-in'><span class='co'>#combine %&gt;% PCA</span></span>
+<span class='r-in'><span class='co'>#op$fac$s %&lt;&gt;% as.character() %&gt;% as.numeric()</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#op %&gt;% plot_PCA(title="hi there!")</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>### Now we can play with layers</span></span>
+<span class='r-in'><span class='co'># and for instance build a custom plot</span></span>
+<span class='r-in'><span class='co'># it should start with plot_PCA()</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#my_plot &lt;- function(x, ...){</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#x %&gt;%</span></span>
+<span class='r-in'><span class='co'>#     plot_PCA(...) %&gt;%</span></span>
+<span class='r-in'><span class='co'>#    layer_points %&gt;%</span></span>
+<span class='r-in'><span class='co'>#     layer_ellipsesaxes %&gt;%</span></span>
+<span class='r-in'><span class='co'>#    layer_rug</span></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># and even continue after this function</span></span>
+<span class='r-in'><span class='co'># op %&gt;% my_plot(~var, axes=c(1, 3)) %&gt;%</span></span>
+<span class='r-in'><span class='co'>#     layer_title("hi there!") %&gt;%</span></span>
+<span class='r-in'><span class='co'>#    layer_stars()</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># You get the idea.</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -314,7 +319,7 @@ This is part of <code>grindr</code> approach that may be packaged at some point.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

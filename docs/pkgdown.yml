@@ -1,8 +1,8 @@
-pandoc: 2.9.2.1
-pkgdown: 1.5.1
+pandoc: 2.11.2
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2020-10-06T12:09Z
+last_built: 2021-11-18T20:40Z
 urls:
   reference: http://momx.github.io/Momocs/reference
   article: http://momx.github.io/Momocs/articles

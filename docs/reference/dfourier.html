@@ -75,7 +75,7 @@ a shape (mainly open outlines)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ a shape (mainly open outlines)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,19 +124,19 @@ a shape (mainly open outlines)." />
 a shape (mainly open outlines).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)
+    <pre class="usage"><span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>nb.h</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)
+<span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>nb.h</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Opn</span>
-<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)
+<span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>nb.h</span><span class='op'>)</span>
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)
+<span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>nb.h</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Coo</span>
-<span class='fu'>dfourier</span>(<span class='no'>coo</span>, <span class='no'>nb.h</span>)</pre>
+<span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>nb.h</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,7 +167,7 @@ experimental. Yet improved by a factor 10, this method is still long to execute.
 It will be improved in further releases but it should not be so painful right now.
 It also explains the progress bar. Shapes should be aligned
 before performing the dct transform.</p>
-<p>Silent message and progress bars (if any) with <code><a href='https://rdrr.io/r/base/options.html'>options("verbose"=FALSE)</a></code>.</p>
+<p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -185,40 +185,54 @@ The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysi
 <code><a href='dfourier_shape.html'>dfourier_shape</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>)  <span class='co'># because it's long</span>
-<span class='no'>od</span> <span class='kw'>&lt;-</span> <span class='fu'>dfourier</span>(<span class='no'>olea</span>)
-<span class='no'>od</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'od' not found</span></div><div class='input'><span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>od</span>)</div><div class='output co'>#&gt; <span class='error'>Error in PCA(od): object 'od' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>op</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(op, 1): object 'op' not found</span></div><div class='input'>
-<span class='co'># dfourier and inverse dfourier</span>
-<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span>[<span class='fl'>1</span>]
-<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='coo_bookstein.html'>coo_bookstein</a></span>(<span class='no'>o</span>)
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>o</span>)</div><div class='input'><span class='no'>o.dfourier</span> <span class='kw'>&lt;-</span> <span class='fu'>dfourier</span>(<span class='no'>o</span>, <span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>12</span>)
-<span class='no'>o.dfourier</span></div><div class='output co'>#&gt; $an
-#&gt;  [1] -3.11820730 -0.13206715 -0.24781390 -0.09660325 -0.06788311 -0.06691169
-#&gt;  [7] -0.03519719 -0.06016120 -0.02071002 -0.06544994 -0.01169704 -0.06810722
-#&gt; 
-#&gt; $bn
-#&gt;  [1]  0.032926049 -0.914830858  0.005334948 -0.268975696 -0.006644877
-#&gt;  [6] -0.101625518  0.003834764 -0.049467452  0.003042230 -0.028964333
-#&gt; [11] -0.002260202 -0.022833346
-#&gt; 
-#&gt; $mod
-#&gt;  [1] 3.11838113 0.92431446 0.24787132 0.28579733 0.06820756 0.12167547
-#&gt;  [7] 0.03540548 0.07788709 0.02093227 0.07157253 0.01191341 0.07183283
-#&gt; 
-#&gt; $phi
-#&gt;  [1]  3.131034 -1.714168  3.120068 -1.915601 -3.044016 -2.153064  3.033070
-#&gt;  [8] -2.453432  2.995739 -2.724958 -2.950716 -2.818113
-#&gt; </div><div class='input'><span class='no'>o.i</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dfourier_i.html'>dfourier_i</a></span>(<span class='no'>o.dfourier</span>)
-<span class='no'>o.i</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='coo_bookstein.html'>coo_bookstein</a></span>(<span class='no'>o.i</span>)
-<span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>o.i</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>)</div><div class='img'><img src='dfourier-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>#future calibrate_reconstructions</span>
-<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='no'>olea</span>[<span class='fl'>1</span>]
-<span class='no'>h.range</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>:<span class='fl'>13</span>
-<span class='no'>coo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
-<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>along</span><span class='kw'>=</span><span class='no'>h.range</span>)){
-<span class='no'>coo</span><span class='kw'>[[</span><span class='no'>i</span>]] <span class='kw'>&lt;-</span> <span class='fu'><a href='dfourier_i.html'>dfourier_i</a></span>(<span class='fu'>dfourier</span>(<span class='no'>o</span>, <span class='kw'>nb.h</span><span class='kw'>=</span><span class='no'>h.range</span>[<span class='no'>i</span>]))}
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>coo</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>'h'</span>, <span class='no'>h.range</span>)
-<span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Opn.html'>Opn</a></span>(<span class='no'>coo</span>), <span class='kw'>borders</span><span class='kw'>=</span><span class='fu'><a href='color_palettes.html'>col_india</a></span>(<span class='fl'>12</span>), <span class='kw'>names</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>'Discrete Cosine Transforms'</span>)</div><div class='img'><img src='dfourier-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span>  <span class='co'># because it's long</span></span>
+<span class='r-in'><span class='va'>od</span> <span class='op'>&lt;-</span> <span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>olea</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>od</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in eval(expr, envir, enclos):</span> object 'od' not found</span>
+<span class='r-in'><span class='va'>op</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>od</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in PCA(od):</span> object 'od' not found</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>op</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in plot(op, 1):</span> object 'op' not found</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># dfourier and inverse dfourier</span></span>
+<span class='r-in'><span class='va'>o</span> <span class='op'>&lt;-</span> <span class='va'>olea</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>o</span> <span class='op'>&lt;-</span> <span class='fu'><a href='coo_bookstein.html'>coo_bookstein</a></span><span class='op'>(</span><span class='va'>o</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='va'>o</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>o.dfourier</span> <span class='op'>&lt;-</span> <span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>o</span>, nb.h<span class='op'>=</span><span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>o.dfourier</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $an</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -3.11820730 -0.13206715 -0.24781390 -0.09660325 -0.06788311 -0.06691169</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] -0.03519719 -0.06016120 -0.02071002 -0.06544994 -0.01169704 -0.06810722</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  0.032926049 -0.914830858  0.005334948 -0.268975696 -0.006644877</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6] -0.101625518  0.003834764 -0.049467452  0.003042230 -0.028964333</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11] -0.002260202 -0.022833346</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mod</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 3.11838113 0.92431446 0.24787132 0.28579733 0.06820756 0.12167547</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] 0.03540548 0.07788709 0.02093227 0.07157253 0.01191341 0.07183283</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $phi</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  3.131034 -1.714168  3.120068 -1.915601 -3.044016 -2.153064  3.033070</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8] -2.453432  2.995739 -2.724958 -2.950716 -2.818113</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='va'>o.i</span> <span class='op'>&lt;-</span> <span class='fu'><a href='dfourier_i.html'>dfourier_i</a></span><span class='op'>(</span><span class='va'>o.dfourier</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>o.i</span> <span class='op'>&lt;-</span> <span class='fu'><a href='coo_bookstein.html'>coo_bookstein</a></span><span class='op'>(</span><span class='va'>o.i</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span><span class='op'>(</span><span class='va'>o.i</span>, border<span class='op'>=</span><span class='st'>'red'</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='dfourier-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#future calibrate_reconstructions</span></span>
+<span class='r-in'><span class='va'>o</span> <span class='op'>&lt;-</span> <span class='va'>olea</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>h.range</span> <span class='op'>&lt;-</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>13</span></span>
+<span class='r-in'><span class='va'>coo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>along<span class='op'>=</span><span class='va'>h.range</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span></span>
+<span class='r-in'><span class='va'>coo</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='dfourier_i.html'>dfourier_i</a></span><span class='op'>(</span><span class='fu'>dfourier</span><span class='op'>(</span><span class='va'>o</span>, nb.h<span class='op'>=</span><span class='va'>h.range</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>'h'</span>, <span class='va'>h.range</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='panel.html'>panel</a></span><span class='op'>(</span><span class='fu'><a href='Opn.html'>Opn</a></span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span>, borders<span class='op'>=</span><span class='fu'><a href='color_palettes.html'>col_india</a></span><span class='op'>(</span><span class='fl'>12</span><span class='op'>)</span>, names<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='st'>'Discrete Cosine Transforms'</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='dfourier-2.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -234,7 +248,7 @@ The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysi
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

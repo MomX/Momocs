@@ -81,7 +81,7 @@ other analyses." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ other analyses." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@ for the first point of <code>m1</code> to any point of <code>m2</code> and so on
 other analyses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>edm_nearest</span>(<span class='no'>m1</span>, <span class='no'>m2</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>edm_nearest</span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>m2</span>, full <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,13 +172,17 @@ more shapes) Procrustes surimposition may provide a better solution.</p>
     <div class='dont-index'><p><a href='ed.html'>ed</a>, <a href='edm.html'>edm</a>, <a href='https://rdrr.io/r/stats/dist.html'>dist</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>nc</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='fu'>edm_nearest</span>(<span class='no'>x</span>, <span class='no'>x</span>+<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt; [1] 1.7052861 0.4820394 1.2476872 1.2152761 1.2985473</div><div class='input'><span class='fu'>edm_nearest</span>(<span class='no'>x</span>, <span class='no'>x</span>+<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>), <span class='kw'>full</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; $d
-#&gt; [1] 1.0314453 0.6573120 0.8698611 1.5454186 1.1600059
-#&gt; 
-#&gt; $pos
-#&gt; [1] 2 2 4 4 5
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, nc<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>edm_nearest</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>x</span><span class='op'>+</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.7052861 0.4820394 1.2476872 1.2152761 1.2985473</span>
+<span class='r-in'><span class='fu'>edm_nearest</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>x</span><span class='op'>+</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>, full<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $d</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.0314453 0.6573120 0.8698611 1.5454186 1.1600059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $pos</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2 2 4 4 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -194,7 +198,7 @@ more shapes) Procrustes surimposition may provide a better solution.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

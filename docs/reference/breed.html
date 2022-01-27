@@ -79,7 +79,7 @@ multiplied by rate." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@ multiplied by rate." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -132,13 +132,13 @@ centered on the mean of the column, and with a sd equals to it standard deviates
 multiplied by <code>rate</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>breed</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>breed</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>breed</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>margin</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>size</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
+<span class='fu'>breed</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fac</span>, margin <span class='op'>=</span> <span class='fl'>2</span>, <span class='va'>size</span>, rate <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Coe</span>
-<span class='fu'>breed</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='no'>size</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>breed</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fac</span>, <span class='va'>size</span>, rate <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,27 +175,36 @@ multiplied by <code>rate</code>.</p>
 <code><a href='perm.html'>perm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>1</span>:<span class='fl'>12</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>3</span>)
-<span class='fu'>breed</span>(<span class='no'>m</span>, <span class='kw'>margin</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>4</span>)</div><div class='output co'>#&gt;          [,1]     [,2]     [,3]      [,4]
-#&gt; [1,] 2.670620 4.597120 8.401255  9.157338
-#&gt; [2,] 1.150985 5.719108 9.356390 10.720259
-#&gt; [3,] 3.066805 4.819941 8.019227  9.469230
-#&gt; [4,] 1.992539 6.046191 7.530582 13.546154</div><div class='input'><span class='fu'>breed</span>(<span class='no'>m</span>, <span class='kw'>margin</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>10</span>)</div><div class='output co'>#&gt;              [,1]     [,2]       [,3]
-#&gt;  [1,]  1.30970018 1.769321 -1.5597512
-#&gt;  [2,] -0.01744358 6.486750  0.5512378
-#&gt;  [3,]  7.13301779 9.320377  7.0219317
-#&gt;  [4,]  8.52622563 4.558342 10.8915399
-#&gt;  [5,]  2.01645375 7.194958  8.0983293
-#&gt;  [6,]  3.54852287 6.733022 14.7962926
-#&gt;  [7,]  4.57290872 6.963033  4.4282392
-#&gt;  [8,] 10.02364430 6.407625 10.4446975
-#&gt;  [9,]  2.40882230 3.826442 11.5882377
-#&gt; [10,] 10.19002487 4.197451  3.2041191</div><div class='input'>
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bot.m</span> <span class='kw'>&lt;-</span> <span class='fu'>breed</span>(<span class='no'>bot.f</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>80</span>)
-<span class='no'>bot.m</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span></div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='breed-1.png' alt='' width='700' height='433' /></div><div class='input'>
-# breed fac wise
-# bot.f %&gt;%  breed(~type, size=50) %&gt;% PCA %&gt;% plot(~type)
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, nrow<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>breed</span><span class='op'>(</span><span class='va'>m</span>, margin<span class='op'>=</span><span class='fl'>2</span>, size<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          [,1]     [,2]     [,3]      [,4]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] 2.670620 4.597120 8.401255  9.157338</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 1.150985 5.719108 9.356390 10.720259</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] 3.066805 4.819941 8.019227  9.469230</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] 1.992539 6.046191 7.530582 13.546154</span>
+<span class='r-in'><span class='fu'>breed</span><span class='op'>(</span><span class='va'>m</span>, margin<span class='op'>=</span><span class='fl'>1</span>, size<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              [,1]     [,2]       [,3]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,]  1.30970018 1.769321 -1.5597512</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] -0.01744358 6.486750  0.5512378</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,]  7.13301779 9.320377  7.0219317</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,]  8.52622563 4.558342 10.8915399</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,]  2.01645375 7.194958  8.0983293</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,]  3.54852287 6.733022 14.7962926</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,]  4.57290872 6.963033  4.4282392</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 10.02364430 6.407625 10.4446975</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,]  2.40882230 3.826442 11.5882377</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 10.19002487 4.197451  3.2041191</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>bot.f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='va'>bot.m</span> <span class='op'>&lt;-</span> <span class='fu'>breed</span><span class='op'>(</span><span class='va'>bot.f</span>, size<span class='op'>=</span><span class='fl'>80</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot.m</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>PCA</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>plot</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will be deprecated soon, see ?plot_PCA</span>
+<span class='r-plt img'><img src='breed-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># breed fac wise</span></span>
+<span class='r-in'><span class='co'># bot.f %&gt;%  breed(~type, size=50) %&gt;% PCA %&gt;% plot(~type)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -211,7 +220,7 @@ multiplied by <code>rate</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

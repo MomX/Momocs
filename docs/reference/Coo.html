@@ -75,7 +75,7 @@ Out, Opn and Ldk classes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ Out, Opn and Ldk classes." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@ Out, Opn and Ldk classes." />
 <code><a href='Out.html'>Out</a></code>, <code><a href='Opn.html'>Opn</a></code> and <code><a href='Ldk.html'>Ldk</a></code> classes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Coo</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>Coo</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,7 +137,7 @@ Out, Opn and Ldk classes." />
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Useful shortcuts are described below. See <code><a href='https://rdrr.io/r/utils/browseVignettes.html'>browseVignettes("Momocs")</a></code> for
+    <p>Useful shortcuts are described below. See <code>browseVignettes("Momocs")</code> for
 a detail of the design behind Momocs' classes.</p>
 <p><code>Coo</code> class is the 'parent' class of the following 'child' classes</p><ul>
 <li><p><code><a href='Out.html'>Out</a></code> for closed <b>out</b>lines</p></li>
@@ -159,7 +159,7 @@ or use an helper function such as <a href='lf_structure.html'>lf_structure</a>.<
 </ul>
 
 <p>You can access all the methods available for <code>Coo</code> objects
-with <code><a href='https://rdrr.io/r/utils/methods.html'>methods(class=Coo)</a></code>.</p>
+with <code>methods(class=Coo)</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other classes: 
@@ -172,69 +172,70 @@ with <code><a href='https://rdrr.io/r/utils/methods.html'>methods(class=Coo)</a>
 <code><a href='TraCoe.html'>TraCoe</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># to see all methods for Coo objects.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'Coo'</span>)
-
-<span class='co'># to see all methods for Out objects.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'Out'</span>) <span class='co'># same for Opn and Ldk</span>
-
-<span class='co'># Let's take an Out example. But all methods shown here</span>
-<span class='co'># work on Ldk (try on 'wings') and on Opn ('olea')</span>
-<span class='no'>bot</span>
-
-<span class='co'># Primarily a 'Coo' object, but also an 'Out'</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>bot</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='no'>bot</span>, <span class='st'>"Coo"</span>)
-<span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>bot</span>)
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>bot</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot</span>)
-
-<span class='co'># Getters (you can also use it to set data)</span>
-<span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_plot.html'>coo_plot</a></span>()
-<span class='no'>bot</span>[<span class='fl'>1</span>:<span class='fl'>5</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>()
-
-<span class='co'># Setters</span>
-<span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='no'>shapes</span>[<span class='fl'>4</span>]
-<span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>bot</span>)
-
-<span class='no'>bot</span>[<span class='fl'>1</span>:<span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='no'>shapes</span>[<span class='fl'>4</span>:<span class='fl'>8</span>]
-<span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='no'>bot</span>)
-
-<span class='co'># access the different components</span>
-<span class='co'># $coo coordinates</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>bot</span>$<span class='no'>coo</span>)
-<span class='co'># $fac grouping factors</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>bot</span>$<span class='no'>fac</span>)
-<span class='co'># or if you know the name of the column of interest</span>
-<span class='no'>bot</span>$<span class='no'>type</span>
-<span class='co'># table</span>
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>bot</span>$<span class='no'>fac</span>)
-<span class='co'># an internal view of an Out object</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>bot</span>)
-
-<span class='co'># subsetting</span>
-<span class='co'># see ?filter, ?select, and their 'see also' section for the</span>
-<span class='co'># complete list of dplyr-like verbs implemented in Momocs</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>bot</span>) <span class='co'># the number of shapes</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>bot</span>) <span class='co'># access all individual names</span>
-<span class='no'>bot2</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>bot2</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>'newnames'</span>, <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>bot2</span>)) <span class='co'># define new names</span>
-
-<span class='co'># Add a $fac from scratch</span>
-<span class='no'>coo</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>:<span class='fl'>5</span>] <span class='co'># a list of five matrices</span>
-<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>coo</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>coo</span>, <span class='no'>class</span>)
-
-<span class='no'>fac</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>name</span><span class='kw'>=</span><span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='kw'>value</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>:<span class='fl'>1</span>))
-<span class='co'># Then you have to define the subclass using the right builder</span>
-<span class='co'># here we have outlines, so we use Out</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Out.html'>Out</a></span>(<span class='no'>coo</span>, <span class='no'>fac</span>)
-<span class='no'>x</span>$<span class='no'>coo</span>
-<span class='no'>x</span>$<span class='no'>fac</span>
-
-}</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># to see all methods for Coo objects.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span><span class='op'>(</span>class<span class='op'>=</span><span class='st'>'Coo'</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># to see all methods for Out objects.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span><span class='op'>(</span>class<span class='op'>=</span><span class='st'>'Out'</span><span class='op'>)</span> <span class='co'># same for Opn and Ldk</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Let's take an Out example. But all methods shown here</span></span>
+<span class='r-in'><span class='co'># work on Ldk (try on 'wings') and on Opn ('olea')</span></span>
+<span class='r-in'><span class='va'>bot</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Primarily a 'Coo' object, but also an 'Out'</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='st'>"Coo"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='panel.html'>panel</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Getters (you can also use it to set data)</span></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Setters</span></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>shapes</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='panel.html'>panel</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>shapes</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>8</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='panel.html'>panel</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># access the different components</span></span>
+<span class='r-in'><span class='co'># $coo coordinates</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>$</span><span class='va'>coo</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># $fac grouping factors</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>$</span><span class='va'>fac</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># or if you know the name of the column of interest</span></span>
+<span class='r-in'><span class='va'>bot</span><span class='op'>$</span><span class='va'>type</span></span>
+<span class='r-in'><span class='co'># table</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>$</span><span class='va'>fac</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># an internal view of an Out object</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># subsetting</span></span>
+<span class='r-in'><span class='co'># see ?filter, ?select, and their 'see also' section for the</span></span>
+<span class='r-in'><span class='co'># complete list of dplyr-like verbs implemented in Momocs</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span> <span class='co'># the number of shapes</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span> <span class='co'># access all individual names</span></span>
+<span class='r-in'><span class='va'>bot2</span> <span class='op'>&lt;-</span> <span class='va'>bot</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>bot2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>'newnames'</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>bot2</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># define new names</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Add a $fac from scratch</span></span>
+<span class='r-in'><span class='va'>coo</span> <span class='op'>&lt;-</span> <span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='co'># a list of five matrices</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>class</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>fac</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>name<span class='op'>=</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span>, value<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Then you have to define the subclass using the right builder</span></span>
+<span class='r-in'><span class='co'># here we have outlines, so we use Out</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Out.html'>Out</a></span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>fac</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span><span class='op'>$</span><span class='va'>coo</span></span>
+<span class='r-in'><span class='va'>x</span><span class='op'>$</span><span class='va'>fac</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -250,7 +251,7 @@ with <code><a href='https://rdrr.io/r/utils/methods.html'>methods(class=Coo)</a>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

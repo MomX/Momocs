@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>Return shapes with matching conditions, from the <code>$fac</code>. See examples and <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>?dplyr::filter</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>filter</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>filter</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,65 +165,73 @@ If you want to highlith some individuals, see examples in <a href='plot_PCA.html
 <code><a href='sample_n.html'>sample_n</a>()</code>,
 <code><a href='select.html'>select</a>()</code>,
 <code><a href='slice.html'>slice</a>()</code>,
-<code><a href='subset.html'>subsetize</a>()</code></p></div>
+<code><a href='subsetize.html'>subsetize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 210 curves, 98 +/- 4 coords (in $coo)
-#&gt;   - 4 classifiers (in $fac): 
-#&gt; <span style='color: #555555;'># A tibble: 210 x 4</span><span>
-#&gt;   var   domes view  ind  
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Aglan cult  VD    O10  
-#&gt; </span><span style='color: #555555;'>2</span><span> Aglan cult  VL    O10  
-#&gt; </span><span style='color: #555555;'>3</span><span> Aglan cult  VD    O11  
-#&gt; </span><span style='color: #555555;'>4</span><span> Aglan cult  VL    O11  
-#&gt; </span><span style='color: #555555;'>5</span><span> Aglan cult  VD    O12  
-#&gt; </span><span style='color: #555555;'>6</span><span> Aglan cult  VL    O12  
-#&gt; </span><span style='color: #555555;'># … with 204 more rows</span><span>
-#&gt;   - also: $ldk</div><div class='input'><span class='co'># we retain on dorsal views</span>
-<span class='fu'>filter</span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>"VD"</span>)</div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 120 curves, 100 +/- 3 coords (in $coo)
-#&gt;   - 4 classifiers (in $fac): 
-#&gt; </span><span style='color: #555555;'># A tibble: 120 x 4</span><span>
-#&gt;   var   domes view  ind  
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Aglan cult  VD    O10  
-#&gt; </span><span style='color: #555555;'>2</span><span> Aglan cult  VD    O11  
-#&gt; </span><span style='color: #555555;'>3</span><span> Aglan cult  VD    O12  
-#&gt; </span><span style='color: #555555;'>4</span><span> Aglan cult  VD    O13  
-#&gt; </span><span style='color: #555555;'>5</span><span> Aglan cult  VD    O14  
-#&gt; </span><span style='color: #555555;'>6</span><span> Aglan cult  VD    O15  
-#&gt; </span><span style='color: #555555;'># … with 114 more rows</span><span>
-#&gt;   - also: $ldk</div><div class='input'><span class='co'># only dorsal views and Aglan+PicMa varieties</span>
-<span class='fu'>filter</span>(<span class='no'>olea</span>, <span class='no'>view</span><span class='kw'>==</span><span class='st'>"VD"</span>, <span class='no'>var</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Aglan"</span>, <span class='st'>"PicMa"</span>))</div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 60 curves, 100 +/- 2 coords (in $coo)
-#&gt;   - 4 classifiers (in $fac): 
-#&gt; </span><span style='color: #555555;'># A tibble: 60 x 4</span><span>
-#&gt;   var   domes view  ind  
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Aglan cult  VD    O10  
-#&gt; </span><span style='color: #555555;'>2</span><span> Aglan cult  VD    O11  
-#&gt; </span><span style='color: #555555;'>3</span><span> Aglan cult  VD    O12  
-#&gt; </span><span style='color: #555555;'>4</span><span> Aglan cult  VD    O13  
-#&gt; </span><span style='color: #555555;'>5</span><span> Aglan cult  VD    O14  
-#&gt; </span><span style='color: #555555;'>6</span><span> Aglan cult  VD    O15  
-#&gt; </span><span style='color: #555555;'># … with 54 more rows</span><span>
-#&gt;   - also: $ldk</div><div class='input'><span class='co'># we create an id column and retain the 120 first shapes</span>
-<span class='no'>olea</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>olea</span>)) <span class='kw'>%&gt;%</span> <span class='fu'>filter</span>(<span class='no'>id</span> <span class='kw'>&gt;</span> <span class='fl'>120</span>)</div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 90 curves, 99 +/- 4 coords (in $coo)
-#&gt;   - 5 classifiers (in $fac): 
-#&gt; </span><span style='color: #555555;'># A tibble: 90 x 5</span><span>
-#&gt;   var   domes view  ind      id
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> PicMa cult  VD    O24     121
-#&gt; </span><span style='color: #555555;'>2</span><span> PicMa cult  VL    O24     122
-#&gt; </span><span style='color: #555555;'>3</span><span> PicMa cult  VD    O25     123
-#&gt; </span><span style='color: #555555;'>4</span><span> PicMa cult  VL    O25     124
-#&gt; </span><span style='color: #555555;'>5</span><span> PicMa cult  VD    O26     125
-#&gt; </span><span style='color: #555555;'>6</span><span> PicMa cult  VL    O26     126
-#&gt; </span><span style='color: #555555;'># … with 84 more rows</span><span>
-#&gt;   - also: $ldk</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>olea</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Opn (curves)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 210 curves, 98 +/- 4 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 4 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 210 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   var   domes view  ind  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Aglan cult  VD    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Aglan cult  VL    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Aglan cult  VD    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Aglan cult  VL    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Aglan cult  VD    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Aglan cult  VL    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 204 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+<span class='r-in'><span class='co'># we retain on dorsal views</span></span>
+<span class='r-in'><span class='fu'>filter</span><span class='op'>(</span><span class='va'>olea</span>, <span class='va'>view</span><span class='op'>==</span><span class='st'>"VD"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Opn (curves)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 120 curves, 100 +/- 3 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 4 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 120 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   var   domes view  ind  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Aglan cult  VD    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Aglan cult  VD    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Aglan cult  VD    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Aglan cult  VD    O13  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Aglan cult  VD    O14  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Aglan cult  VD    O15  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 114 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+<span class='r-in'><span class='co'># only dorsal views and Aglan+PicMa varieties</span></span>
+<span class='r-in'><span class='fu'>filter</span><span class='op'>(</span><span class='va'>olea</span>, <span class='va'>view</span><span class='op'>==</span><span class='st'>"VD"</span>, <span class='va'>var</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Aglan"</span>, <span class='st'>"PicMa"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Opn (curves)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 60 curves, 100 +/- 2 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 4 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 60 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   var   domes view  ind  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Aglan cult  VD    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Aglan cult  VD    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Aglan cult  VD    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Aglan cult  VD    O13  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Aglan cult  VD    O14  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Aglan cult  VD    O15  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 54 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+<span class='r-in'><span class='co'># we create an id column and retain the 120 first shapes</span></span>
+<span class='r-in'><span class='va'>olea</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='mutate.html'>mutate</a></span><span class='op'>(</span>id<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>olea</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>filter</span><span class='op'>(</span><span class='va'>id</span> <span class='op'>&gt;</span> <span class='fl'>120</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Opn (curves)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 90 curves, 99 +/- 4 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 5 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 90 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   var   domes view  ind      id</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> PicMa cult  VD    O24     121</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> PicMa cult  VL    O24     122</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> PicMa cult  VD    O25     123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> PicMa cult  VL    O25     124</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> PicMa cult  VD    O26     125</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> PicMa cult  VL    O26     126</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 84 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +247,7 @@ If you want to highlith some individuals, see examples in <a href='plot_PCA.html
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

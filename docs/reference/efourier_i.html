@@ -76,7 +76,7 @@ obtained computed with efourier." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ obtained computed with efourier." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ calculate a shape, when given a list with Fourier coefficients, typically
 obtained computed with <a href='efourier.html'>efourier</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>efourier_i</span>(<span class='no'>ef</span>, <span class='no'>nb.h</span>, <span class='kw'>nb.pts</span> <span class='kw'>=</span> <span class='fl'>120</span>)</pre>
+    <pre class="usage"><span class='fu'>efourier_i</span><span class='op'>(</span><span class='va'>ef</span>, <span class='va'>nb.h</span>, nb.pts <span class='op'>=</span> <span class='fl'>120</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,7 +139,7 @@ obtained computed with <a href='efourier.html'>efourier</a>.</p>
     <tr>
       <th>nb.h</th>
       <td><p><code>integer</code>. The number of harmonics to use. If not
-specified, <code><a href='https://rdrr.io/r/base/length.html'>length(ef$an)</a></code> is used.</p></td>
+specified, <code>length(ef$an)</code> is used.</p></td>
     </tr>
     <tr>
       <th>nb.pts</th>
@@ -169,34 +169,39 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 <code><a href='efourier.html'>efourier</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>coo</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>coo</span>)</div><div class='input'><span class='no'>ef</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>coo</span>, <span class='fl'>12</span>)
-<span class='no'>ef</span></div><div class='output co'>#&gt; $an
-#&gt;  [1] -143.1142910    5.2925309   22.9922936  -11.3596452  -14.9412217
-#&gt;  [6]   -5.4200881    5.7177112    0.4509076    0.3107020   -3.1633079
-#&gt; [11]    0.2814646    3.4927761
-#&gt; 
-#&gt; $bn
-#&gt;  [1] -13.8501141 -21.8994092  11.4235084  13.5870435 -12.6401807   2.5050679
-#&gt;  [7]   5.1968464  -0.5366171  -1.0431706   1.0823659   2.3427969   0.1022387
-#&gt; 
-#&gt; $cn
-#&gt;  [1]  64.44753053  -3.15375656 -17.96822626   5.76052596   7.17390949
-#&gt;  [6]  -2.98410094  -1.20013013   1.18299684  -0.36305436  -0.46782525
-#&gt; [11]   0.67134872   0.08954658
-#&gt; 
-#&gt; $dn
-#&gt;  [1] -484.90299209   -1.04774048   42.07408510    3.40654863   -9.19128141
-#&gt;  [6]   -2.99359284    0.96722479    2.22582484    0.02026172   -2.26134728
-#&gt; [11]   -0.04679906    0.80569603
-#&gt; 
-#&gt; $ao
-#&gt; [1] 349.02
-#&gt; 
-#&gt; $co
-#&gt; [1] 1080.921
-#&gt; </div><div class='input'><span class='no'>efi</span> <span class='kw'>&lt;-</span> <span class='fu'>efourier_i</span>(<span class='no'>ef</span>)
-<span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>efi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>)</div><div class='img'><img src='efourier_i-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>coo</span> <span class='op'>&lt;-</span> <span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ef</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>coo</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ef</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $an</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -143.1142910    5.2925309   22.9922936  -11.3596452  -14.9412217</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]   -5.4200881    5.7177112    0.4509076    0.3107020   -3.1633079</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11]    0.2814646    3.4927761</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -13.8501141 -21.8994092  11.4235084  13.5870435 -12.6401807   2.5050679</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7]   5.1968464  -0.5366171  -1.0431706   1.0823659   2.3427969   0.1022387</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $cn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  64.44753053  -3.15375656 -17.96822626   5.76052596   7.17390949</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]  -2.98410094  -1.20013013   1.18299684  -0.36305436  -0.46782525</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11]   0.67134872   0.08954658</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $dn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -484.90299209   -1.04774048   42.07408510    3.40654863   -9.19128141</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]   -2.99359284    0.96722479    2.22582484    0.02026172   -2.26134728</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11]   -0.04679906    0.80569603</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ao</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 349.02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $co</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1080.921</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='va'>efi</span> <span class='op'>&lt;-</span> <span class='fu'>efourier_i</span><span class='op'>(</span><span class='va'>ef</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span><span class='op'>(</span><span class='va'>efi</span>, border<span class='op'>=</span><span class='st'>'red'</span>, col<span class='op'>=</span><span class='cn'>NA</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='efourier_i-1.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -212,7 +217,7 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

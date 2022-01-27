@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>Returns the (x; y) centroid coordinates of a shape.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coo_centpos</span>(<span class='no'>coo</span>)</pre>
+    <pre class="usage"><span class='fu'>coo_centpos</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,7 +156,7 @@
 <code><a href='coo_down.html'>coo_down</a>()</code>,
 <code><a href='coo_dxy.html'>coo_dxy</a>()</code>,
 <code><a href='coo_extract.html'>coo_extract</a>()</code>,
-<code><a href='coo_flip.html'>coo_flipx</a>()</code>,
+<code><a href='coo_flipx.html'>coo_flipx</a>()</code>,
 <code><a href='coo_force2close.html'>coo_force2close</a>()</code>,
 <code><a href='coo_interpolate.html'>coo_interpolate</a>()</code>,
 <code><a href='coo_is_closed.html'>coo_is_closed</a>()</code>,
@@ -174,7 +174,7 @@
 <code><a href='coo_samplerr.html'>coo_samplerr</a>()</code>,
 <code><a href='coo_sample.html'>coo_sample</a>()</code>,
 <code><a href='coo_scale.html'>coo_scale</a>()</code>,
-<code><a href='coo_shear.html'>coo_shearx</a>()</code>,
+<code><a href='coo_shearx.html'>coo_shearx</a>()</code>,
 <code><a href='coo_slice.html'>coo_slice</a>()</code>,
 <code><a href='coo_slidedirection.html'>coo_slidedirection</a>()</code>,
 <code><a href='coo_slidegap.html'>coo_slidegap</a>()</code>,
@@ -191,50 +191,55 @@
 <code><a href='is_equallyspacedradii.html'>is_equallyspacedradii</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>b</span>)</div><div class='input'><span class='no'>xy</span> <span class='kw'>&lt;-</span> <span class='fu'>coo_centpos</span>(<span class='no'>b</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='no'>xy</span>[<span class='fl'>1</span>], <span class='no'>xy</span>[<span class='fl'>2</span>], <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>'blue'</span>)</div><div class='img'><img src='coo_centpos-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># on a Coo</span>
-<span class='fu'>coo_centpos</span>(<span class='no'>bot</span>)</div><div class='output co'>#&gt;                       x        y
-#&gt; brahma         175.0580 543.8696
-#&gt; caney          182.7083 507.7560
-#&gt; chimay         169.0106 314.8095
-#&gt; corona         185.0155 407.2326
-#&gt; deusventrue    179.5592 467.2632
-#&gt; duvel          179.2484 287.1180
-#&gt; franziskaner   161.3548 423.2016
-#&gt; grimbergen     166.7460 394.8651
-#&gt; guiness        182.2022 372.0546
-#&gt; hoegardeen     173.2539 526.9275
-#&gt; jupiler        175.6026 510.9744
-#&gt; kingfisher     161.8407 365.2253
-#&gt; latrappe       176.0368 344.0147
-#&gt; lindemanskriek 163.9261 405.4034
-#&gt; nicechouffe    170.5548 338.1233
-#&gt; pecheresse     175.3023 489.5271
-#&gt; sierranevada   166.5795 333.5682
-#&gt; tanglefoot     174.5862 346.1724
-#&gt; tauro          175.5230 511.7644
-#&gt; westmalle      161.7943 383.0000
-#&gt; amrut          162.7225 420.5654
-#&gt; ballantines    174.2260 329.5000
-#&gt; bushmills      180.8303 432.3697
-#&gt; chivas         182.0244 405.7500
-#&gt; dalmore        176.4258 328.0452
-#&gt; famousgrouse   174.1065 299.2071
-#&gt; glendronach    173.2792 409.4365
-#&gt; glenmorangie   177.2514 493.9385
-#&gt; highlandpark   167.4852 346.6272
-#&gt; jackdaniels    182.8867 387.7600
-#&gt; jb             172.6149 509.0057
-#&gt; johnniewalker  174.4940 165.5655
-#&gt; magallan       167.2482 388.9149
-#&gt; makersmark     176.4802 402.7571
-#&gt; oban           176.5307 447.6536
-#&gt; oldpotrero     165.9160 284.7634
-#&gt; redbreast      176.8305 202.1977
-#&gt; tamdhu         173.7955 530.5625
-#&gt; wildturkey     173.7243 537.4973
-#&gt; yoichi         181.2764 361.1545</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>xy</span> <span class='op'>&lt;-</span> <span class='fu'>coo_centpos</span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span><span class='op'>(</span><span class='va'>xy</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='va'>xy</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, cex<span class='op'>=</span><span class='fl'>2</span>, col<span class='op'>=</span><span class='st'>'blue'</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='coo_centpos-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='co'># on a Coo</span></span>
+<span class='r-in'><span class='fu'>coo_centpos</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                       x        y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brahma         175.0580 543.8696</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> caney          182.7083 507.7560</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> chimay         169.0106 314.8095</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> corona         185.0155 407.2326</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> deusventrue    179.5592 467.2632</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> duvel          179.2484 287.1180</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> franziskaner   161.3548 423.2016</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> grimbergen     166.7460 394.8651</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> guiness        182.2022 372.0546</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> hoegardeen     173.2539 526.9275</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jupiler        175.6026 510.9744</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> kingfisher     161.8407 365.2253</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> latrappe       176.0368 344.0147</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lindemanskriek 163.9261 405.4034</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> nicechouffe    170.5548 338.1233</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pecheresse     175.3023 489.5271</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> sierranevada   166.5795 333.5682</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tanglefoot     174.5862 346.1724</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tauro          175.5230 511.7644</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> westmalle      161.7943 383.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> amrut          162.7225 420.5654</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ballantines    174.2260 329.5000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> bushmills      180.8303 432.3697</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> chivas         182.0244 405.7500</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dalmore        176.4258 328.0452</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> famousgrouse   174.1065 299.2071</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> glendronach    173.2792 409.4365</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> glenmorangie   177.2514 493.9385</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> highlandpark   167.4852 346.6272</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jackdaniels    182.8867 387.7600</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jb             172.6149 509.0057</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> johnniewalker  174.4940 165.5655</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> magallan       167.2482 388.9149</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> makersmark     176.4802 402.7571</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> oban           176.5307 447.6536</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> oldpotrero     165.9160 284.7634</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> redbreast      176.8305 202.1977</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tamdhu         173.7955 530.5625</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> wildturkey     173.7243 537.4973</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> yoichi         181.2764 361.1545</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -250,7 +255,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

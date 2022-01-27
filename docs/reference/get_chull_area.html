@@ -75,7 +75,7 @@ only be compared within the same PCA." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ only be compared within the same PCA." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,9 +124,9 @@ only be compared within the same PCA." />
 only be compared within the same PCA.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_chull_area</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>xax</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>yax</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+    <pre class="usage"><span class='fu'>get_chull_area</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fac</span>, xax <span class='op'>=</span> <span class='fl'>1</span>, yax <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 
-<span class='fu'>get_chull_volume</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>xax</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>yax</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>zax</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
+<span class='fu'>get_chull_volume</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fac</span>, xax <span class='op'>=</span> <span class='fl'>1</span>, yax <span class='op'>=</span> <span class='fl'>2</span>, zax <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,18 +163,28 @@ list for every level of fac</p>
 get_chull_volume is calculated using geometry::convexhulln</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='fu'>get_chull_area</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; [1] 0.01968577</div><div class='input'><span class='fu'>get_chull_area</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; $beer
-#&gt; [1] 0.01802331
-#&gt; 
-#&gt; $whisky
-#&gt; [1] 0.008768242
-#&gt; </div><div class='input'>
-<span class='fu'>get_chull_volume</span>(<span class='no'>bp</span>)</div><div class='output co'>#&gt; [1] 0.0005563784</div><div class='input'><span class='fu'>get_chull_volume</span>(<span class='no'>bp</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; $beer
-#&gt; [1] 0.0004506466
-#&gt; 
-#&gt; $whisky
-#&gt; [1] 0.0001181342
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>bp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='fu'>get_chull_area</span><span class='op'>(</span><span class='va'>bp</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.01968577</span>
+<span class='r-in'><span class='fu'>get_chull_area</span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $beer</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.01802331</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $whisky</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.008768242</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>get_chull_volume</span><span class='op'>(</span><span class='va'>bp</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.0005563784</span>
+<span class='r-in'><span class='fu'>get_chull_volume</span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $beer</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.0004506466</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $whisky</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.0001181342</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -190,7 +200,7 @@ get_chull_volume is calculated using geometry::convexhulln</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

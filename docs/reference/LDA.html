@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,13 +122,13 @@
     <p>Calculates a LDA on <a href='Coe.html'>Coe</a> on top of <a href='https://rdrr.io/pkg/MASS/man/lda.html'>MASS::lda</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>LDA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='no'>retain</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>LDA</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fac</span>, <span class='va'>retain</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>LDA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='no'>retain</span>, <span class='no'>...</span>)
+<span class='fu'>LDA</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fac</span>, <span class='va'>retain</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for PCA</span>
-<span class='fu'>LDA</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>retain</span> <span class='kw'>=</span> <span class='fl'>0.99</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>LDA</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fac</span>, retain <span class='op'>=</span> <span class='fl'>0.99</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +172,7 @@
 
     <p>For LDA.PCA, retain can be passed as a vector (eg: 1:5, and retain=1, retain=2, ...,
 retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_axes is used).</p>
-<p>Silent message and progress bars (if any) with <code><a href='https://rdrr.io/r/base/options.html'>options("verbose"=FALSE)</a></code>.</p>
+<p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other multivariate: 
@@ -188,154 +188,172 @@ retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_
 <code><a href='classification_metrics.html'>classification_metrics</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>24</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>)
-<span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>0.99</span>) <span class='co'># retains 0.99 of the total variance</span></div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
-#&gt;         classified
-#&gt; actual   beer whisky
-#&gt;   beer     17      3
-#&gt;   whisky    1     19
-#&gt; 
-#&gt;  * Class accuracy ($CV.ce):
-#&gt;   beer whisky 
-#&gt;   0.85   0.95 
-#&gt; 
-#&gt;  * Leave-one-out cross-validation ($CV.correct): (90% - 36/40): </div><div class='input'><span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>5</span>) <span class='co'># retain 5 axis</span></div><div class='output co'>#&gt; <span class='message'>5 PC retained</span></div><div class='output co'>#&gt;  * Cross-validation table ($CV.tab):
-#&gt;         classified
-#&gt; actual   beer whisky
-#&gt;   beer     16      4
-#&gt;   whisky    4     16
-#&gt; 
-#&gt;  * Class accuracy ($CV.ce):
-#&gt;   beer whisky 
-#&gt;    0.8    0.8 
-#&gt; 
-#&gt;  * Leave-one-out cross-validation ($CV.correct): (80% - 32/40): </div><div class='input'><span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'>LDA</span>(<span class='no'>bot.p</span>, <span class='st'>'type'</span>, <span class='kw'>retain</span><span class='kw'>=</span><span class='fl'>0.99</span>)</div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='fu'><a href='plot_LDA.html'>plot_LDA</a></span>(<span class='no'>bot.l</span>)</div><div class='output co'>#&gt; <span class='message'>* Only two levels, so a single LD and preparing for an histogram</span></div><div class='img'><img src='LDA-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $xy
-#&gt;                        LD1
-#&gt; brahma          2.06882655
-#&gt; caney           1.95733171
-#&gt; chimay          3.18567319
-#&gt; corona          1.91972111
-#&gt; deusventrue     1.51983847
-#&gt; duvel           3.25459981
-#&gt; franziskaner    1.20540643
-#&gt; grimbergen      1.78612198
-#&gt; guiness         0.31717542
-#&gt; hoegardeen      2.23601856
-#&gt; jupiler         2.41738081
-#&gt; kingfisher      1.17563178
-#&gt; latrappe        2.48017277
-#&gt; lindemanskriek  0.84132717
-#&gt; nicechouffe    -0.20973451
-#&gt; pecheresse      2.73987210
-#&gt; sierranevada    2.12878315
-#&gt; tanglefoot      0.50802841
-#&gt; tauro           2.45585085
-#&gt; westmalle       1.86373375
-#&gt; amrut          -1.63004033
-#&gt; ballantines    -3.31173062
-#&gt; bushmills      -1.09107572
-#&gt; chivas         -1.97923449
-#&gt; dalmore        -0.60822705
-#&gt; famousgrouse   -1.43517709
-#&gt; glendronach    -1.56712869
-#&gt; glenmorangie   -1.46854222
-#&gt; highlandpark   -2.62231929
-#&gt; jackdaniels    -0.70483285
-#&gt; jb             -2.24638367
-#&gt; johnniewalker  -0.97832954
-#&gt; magallan       -2.17603623
-#&gt; makersmark     -1.23316404
-#&gt; oban           -2.34336958
-#&gt; oldpotrero     -0.37639098
-#&gt; redbreast      -4.17639973
-#&gt; tamdhu         -0.09818091
-#&gt; wildturkey     -3.48193578
-#&gt; yoichi         -2.32326072
-#&gt; 
-#&gt; $f
-#&gt;  type1  type2  type3  type4  type5  type6  type7  type8  type9 type10 type11 
-#&gt; whisky whisky whisky whisky whisky whisky whisky whisky whisky whisky whisky 
-#&gt; type12 type13 type14 type15 type16 type17 type18 type19 type20 type21 type22 
-#&gt; whisky whisky whisky whisky whisky whisky whisky whisky whisky   beer   beer 
-#&gt; type23 type24 type25 type26 type27 type28 type29 type30 type31 type32 type33 
-#&gt;   beer   beer   beer   beer   beer   beer   beer   beer   beer   beer   beer 
-#&gt; type34 type35 type36 type37 type38 type39 type40 
-#&gt;   beer   beer   beer   beer   beer   beer   beer 
-#&gt; Levels: beer whisky
-#&gt; 
-#&gt; $colors_groups
-#&gt; [1] "#66C2A5FF" "#FC8D62FF"
-#&gt; 
-#&gt; $colors_rows
-#&gt;  [1] "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF"
-#&gt;  [7] "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF"
-#&gt; [13] "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF"
-#&gt; [19] "#FC8D62FF" "#FC8D62FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"
-#&gt; [25] "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"
-#&gt; [31] "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"
-#&gt; [37] "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"
-#&gt; 
-#&gt; $object
-#&gt; [1] "PCA"
-#&gt; 
-#&gt; $axes
-#&gt; [1] 1
-#&gt; 
-#&gt; $palette
-#&gt; function (n, transp = 0) 
-#&gt; {
-#&gt;     .pal_brewer(n, "Set2") %&gt;% pal_alpha(transp = transp)
-#&gt; }
-#&gt; &lt;bytecode: 0x7fc701a9a6b0&gt;
-#&gt; &lt;environment: namespace:Momocs&gt;
-#&gt; 
-#&gt; $method
-#&gt; [1] "LDAPCA"
-#&gt; 
-#&gt; $mshape
-#&gt; NULL
-#&gt; 
-#&gt; $cuts
-#&gt; NULL
-#&gt; 
-#&gt; $eig
-#&gt; NULL
-#&gt; 
-#&gt; $sdev
-#&gt; [1] 11.33732
-#&gt; 
-#&gt; $rotation
-#&gt;               LD1
-#&gt; PC1 -0.0021966326
-#&gt; PC2 -0.0004659024
-#&gt; PC3  0.0028778651
-#&gt; PC4 -0.0020601963
-#&gt; PC5  0.0016842402
-#&gt; PC6 -0.0008112386
-#&gt; PC7 -0.0006776597
-#&gt; PC8 -0.0004229307
-#&gt; 
-#&gt; $LDs
-#&gt;               LD1
-#&gt; PC1 -0.0021966326
-#&gt; PC2 -0.0004659024
-#&gt; PC3  0.0028778651
-#&gt; PC4 -0.0020601963
-#&gt; PC5  0.0016842402
-#&gt; PC6 -0.0008112386
-#&gt; PC7 -0.0006776597
-#&gt; PC8 -0.0004229307
-#&gt; 
-#&gt; $baseline1
-#&gt; NULL
-#&gt; 
-#&gt; $baseline2
-#&gt; NULL
-#&gt; 
-#&gt; $links
-#&gt; NULL
-#&gt; </div><div class='input'><span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='no'>bot.f</span>, <span class='kw'>plop</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>10</span>)))
-<span class='no'>bot.l</span> <span class='kw'>&lt;-</span> <span class='fu'>LDA</span>(<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>), <span class='st'>'plop'</span>)</div><div class='output co'>#&gt; <span class='message'>8 PC retained</span></div><div class='input'><span class='fu'><a href='plot_LDA.html'>plot_LDA</a></span>(<span class='no'>bot.l</span>) <span class='co'># will replace the former soon</span></div><div class='img'><img src='LDA-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>bot.f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>24</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='va'>bot.p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>bot.f</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>LDA</span><span class='op'>(</span><span class='va'>bot.p</span>, <span class='st'>'type'</span>, retain<span class='op'>=</span><span class='fl'>0.99</span><span class='op'>)</span> <span class='co'># retains 0.99 of the total variance</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 8 PC retained</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  * Cross-validation table ($CV.tab):</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   beer whisky</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer     17      3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   whisky    1     19</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  * Class accuracy ($CV.ce):</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer whisky </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.85   0.95 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  * Leave-one-out cross-validation ($CV.correct): (90% - 36/40): </span>
+<span class='r-in'><span class='fu'>LDA</span><span class='op'>(</span><span class='va'>bot.p</span>, <span class='st'>'type'</span>, retain<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span> <span class='co'># retain 5 axis</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 5 PC retained</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  * Cross-validation table ($CV.tab):</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         classified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> actual   beer whisky</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer     16      4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   whisky    4     16</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  * Class accuracy ($CV.ce):</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer whisky </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    0.8    0.8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  * Leave-one-out cross-validation ($CV.correct): (80% - 32/40): </span>
+<span class='r-in'><span class='va'>bot.l</span> <span class='op'>&lt;-</span> <span class='fu'>LDA</span><span class='op'>(</span><span class='va'>bot.p</span>, <span class='st'>'type'</span>, retain<span class='op'>=</span><span class='fl'>0.99</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 8 PC retained</span>
+<span class='r-in'><span class='fu'><a href='plot_LDA.html'>plot_LDA</a></span><span class='op'>(</span><span class='va'>bot.l</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * Only two levels, so a single LD and preparing for an histogram</span>
+<span class='r-plt img'><img src='LDA-1.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $xy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                        LD1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brahma          2.06882655</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> caney           1.95733171</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> chimay          3.18567319</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> corona          1.91972111</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> deusventrue     1.51983847</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> duvel           3.25459981</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> franziskaner    1.20540643</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> grimbergen      1.78612198</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> guiness         0.31717542</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> hoegardeen      2.23601856</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jupiler         2.41738081</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> kingfisher      1.17563178</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> latrappe        2.48017277</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lindemanskriek  0.84132717</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> nicechouffe    -0.20973451</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pecheresse      2.73987210</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> sierranevada    2.12878315</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tanglefoot      0.50802841</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tauro           2.45585085</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> westmalle       1.86373375</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> amrut          -1.63004033</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ballantines    -3.31173062</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> bushmills      -1.09107572</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> chivas         -1.97923449</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dalmore        -0.60822705</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> famousgrouse   -1.43517709</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> glendronach    -1.56712869</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> glenmorangie   -1.46854222</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> highlandpark   -2.62231929</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jackdaniels    -0.70483285</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> jb             -2.24638367</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> johnniewalker  -0.97832954</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> magallan       -2.17603623</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> makersmark     -1.23316404</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> oban           -2.34336958</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> oldpotrero     -0.37639098</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> redbreast      -4.17639973</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tamdhu         -0.09818091</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> wildturkey     -3.48193578</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> yoichi         -2.32326072</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $f</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  type1  type2  type3  type4  type5  type6  type7  type8  type9 type10 type11 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> whisky whisky whisky whisky whisky whisky whisky whisky whisky whisky whisky </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> type12 type13 type14 type15 type16 type17 type18 type19 type20 type21 type22 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> whisky whisky whisky whisky whisky whisky whisky whisky whisky   beer   beer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> type23 type24 type25 type26 type27 type28 type29 type30 type31 type32 type33 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer   beer   beer   beer   beer   beer   beer   beer   beer   beer   beer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> type34 type35 type36 type37 type38 type39 type40 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beer   beer   beer   beer   beer   beer   beer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Levels: beer whisky</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $colors_groups</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#66C2A5FF" "#FC8D62FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $colors_rows</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF" "#FC8D62FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19] "#FC8D62FF" "#FC8D62FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [31] "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37] "#66C2A5FF" "#66C2A5FF" "#66C2A5FF" "#66C2A5FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $object</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "PCA"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $axes</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $palette</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> function (n, transp = 0) </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     .pal_brewer(n, "Set2") %&gt;% pal_alpha(transp = transp)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;bytecode: 0x7fd444af4d18&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;environment: namespace:Momocs&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $method</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "LDAPCA"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mshape</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $cuts</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $eig</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $sdev</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 11.33732</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $rotation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               LD1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC1 -0.0021966326</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC2 -0.0004659024</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC3  0.0028778651</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC4 -0.0020601963</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC5  0.0016842402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC6 -0.0008112386</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC7 -0.0006776597</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC8 -0.0004229307</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $LDs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               LD1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC1 -0.0021966326</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC2 -0.0004659024</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC3  0.0028778651</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC4 -0.0020601963</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC5  0.0016842402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC6 -0.0008112386</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC7 -0.0006776597</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PC8 -0.0004229307</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $baseline1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $baseline2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $links</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='va'>bot.f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mutate.html'>mutate</a></span><span class='op'>(</span><span class='va'>bot.f</span>, plop<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, each<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot.l</span> <span class='op'>&lt;-</span> <span class='fu'>LDA</span><span class='op'>(</span><span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>bot.f</span><span class='op'>)</span>, <span class='st'>'plop'</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 8 PC retained</span>
+<span class='r-in'><span class='fu'><a href='plot_LDA.html'>plot_LDA</a></span><span class='op'>(</span><span class='va'>bot.l</span><span class='op'>)</span> <span class='co'># will replace the former soon</span></span>
+<span class='r-plt img'><img src='LDA-2.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -351,7 +369,7 @@ retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

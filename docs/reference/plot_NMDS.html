@@ -75,7 +75,7 @@ using the layers. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ using the layers. See examples." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,37 +124,37 @@ using the layers. See examples." />
 using the <a href='layers.html'>layers</a>. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_NMDS</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>f</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>),
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>,
-  <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labelgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>
-)
+    <pre class="usage"><span class='fu'>plot_NMDS</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  f <span class='op'>=</span> <span class='cn'>NULL</span>,
+  axes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  points_transp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>4</span>,
+  chull <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  chullfilled <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labelgroups <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  legend <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='st'>""</span>,
+  box <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axesnames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  palette <span class='op'>=</span> <span class='va'>pal_qual</span>
+<span class='op'>)</span>
 
-<span class='fu'>plot_MDS</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>f</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>),
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>points_transp</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>,
-  <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>chullfilled</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labelgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>axesnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>pal_qual</span>
-)</pre>
+<span class='fu'>plot_MDS</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  f <span class='op'>=</span> <span class='cn'>NULL</span>,
+  axes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  points_transp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>4</span>,
+  chull <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  chullfilled <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labelgroups <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  legend <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='st'>""</span>,
+  box <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axesnames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  palette <span class='op'>=</span> <span class='va'>pal_qual</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,7 +170,7 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
     <tr>
       <th>axes</th>
       <td><p><code>numeric</code> of length two to select PCs to use
-(<code><a href='https://rdrr.io/r/base/c.html'>c(1, 2)</a></code> by default)</p></td>
+(<code>c(1, 2)</code> by default)</p></td>
     </tr>
     <tr>
       <th>points</th>
@@ -220,74 +220,94 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
 <code><a href='drawers.html'>drawers</a></code>,
 <code><a href='layers_morphospace.html'>layers_morphospace</a></code>,
 <code><a href='layers.html'>layers</a></code>,
-<code><a href='mosaic.html'>mosaic_engine</a>()</code>,
+<code><a href='mosaic_engine.html'>mosaic_engine</a>()</code>,
 <code><a href='papers.html'>papers</a></code>,
 <code><a href='pile.html'>pile</a>()</code>,
 <code><a href='plot_LDA.html'>plot_LDA</a>()</code>,
 <code><a href='plot_PCA.html'>plot_PCA</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>### First prepare an NMDS object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
-#&gt; Run 1 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.381226e-05  max resid 9.813984e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 2 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.398747e-06  max resid 1.801246e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 3 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.016816e-05  max resid 3.960546e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 4 stress 0.07227125 
-#&gt; ... Procrustes: rmse 7.108404e-06  max resid 3.438065e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 5 stress 0.07227133 
-#&gt; ... Procrustes: rmse 6.025535e-05  max resid 0.0002354647 
-#&gt; ... Similar to previous best
-#&gt; Run 6 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.31341e-05  max resid 9.482347e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 7 stress 0.1659492 
-#&gt; Run 8 stress 0.07227125 
-#&gt; ... Procrustes: rmse 6.728685e-06  max resid 2.889537e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 9 stress 0.1717543 
-#&gt; Run 10 stress 0.07227135 
-#&gt; ... Procrustes: rmse 2.711831e-05  max resid 0.000104351 
-#&gt; ... Similar to previous best
-#&gt; Run 11 stress 0.07227128 
-#&gt; ... Procrustes: rmse 1.915063e-05  max resid 6.038756e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 12 stress 0.3988279 
-#&gt; Run 13 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.422202e-05  max resid 9.792758e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 14 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.461193e-06  max resid 1.91242e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 15 stress 0.07227134 
-#&gt; ... Procrustes: rmse 6.751208e-05  max resid 0.0002664567 
-#&gt; ... Similar to previous best
-#&gt; Run 16 stress 0.07227125 
-#&gt; ... Procrustes: rmse 4.220468e-06  max resid 2.161552e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 17 stress 0.07227127 
-#&gt; ... Procrustes: rmse 2.884357e-05  max resid 0.0001198705 
-#&gt; ... Similar to previous best
-#&gt; Run 18 stress 0.07227125 
-#&gt; ... Procrustes: rmse 8.609579e-06  max resid 3.162325e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 19 stress 0.07227125 
-#&gt; ... Procrustes: rmse 7.593247e-06  max resid 2.720023e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 20 stress 0.07227126 
-#&gt; ... Procrustes: rmse 1.675066e-05  max resid 6.230567e-05 
-#&gt; ... Similar to previous best
-#&gt; *** Solution reached</div><div class='input'>
-<span class='fu'>plot_NMDS</span>(<span class='no'>x</span>)</div><div class='img'><img src='plot_NMDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_NMDS</span>(<span class='no'>x</span>, ~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_stars</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span>()</div><div class='img'><img src='plot_NMDS-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>### Same on MDS object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>MDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='input'>
-<span class='fu'>plot_MDS</span>(<span class='no'>x</span>)</div><div class='img'><img src='plot_NMDS-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_MDS</span>(<span class='no'>x</span>, ~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_stars</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span>()</div><div class='img'><img src='plot_NMDS-4.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>### First prepare an NMDS object</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>efourier</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>NMDS</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>results may be meaningless because data have negative entries in method “bray”</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 0 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 1 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.189443e-06  max resid 1.723229e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 2 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 4.652192e-06  max resid 1.792204e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 3 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 2.082389e-06  max resid 7.278089e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 4 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 7.917109e-06  max resid 3.563239e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 5 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.11719e-05  max resid 4.420689e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 6 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 7.0436e-06  max resid 2.832968e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 7 stress 0.1659489 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 8 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.333644e-06  max resid 2.688398e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 9 stress 0.1717542 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 10 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.169194e-06  max resid 2.057508e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 11 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.793606e-06  max resid 2.240695e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 12 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 2.436606e-06  max resid 1.206057e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 13 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.674202e-06  max resid 2.206627e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 14 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 6.183384e-06  max resid 2.464175e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 15 stress 0.07227126 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.838659e-05  max resid 7.303832e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 16 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 6.291716e-06  max resid 3.235569e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 17 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 8.448117e-06  max resid 3.641249e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 18 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 4.566722e-06  max resid 1.738098e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 19 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.744469e-06  max resid 5.633608e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 20 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 4.729808e-06  max resid 1.898942e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> *** Solution reached</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>plot_NMDS</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...):</span> plot.new has not been called yet</span>
+<span class='r-in'><span class='fu'>plot_NMDS</span><span class='op'>(</span><span class='va'>x</span>, <span class='op'>~</span><span class='va'>type</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='layers.html'>layer_stars</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...):</span> plot.new has not been called yet</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>### Same on MDS object</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>efourier</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>MDS</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>plot_MDS</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...):</span> plot.new has not been called yet</span>
+<span class='r-in'><span class='fu'>plot_MDS</span><span class='op'>(</span><span class='va'>x</span>, <span class='op'>~</span><span class='va'>type</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='layers.html'>layer_stars</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='layers.html'>layer_labelpoints</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...):</span> plot.new has not been called yet</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -303,7 +323,7 @@ using the <a href='layers.html'>layers</a>. See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

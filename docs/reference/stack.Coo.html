@@ -75,7 +75,7 @@ object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ object." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -125,54 +125,54 @@ object.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for Coo</span>
-<span class='fu'>stack</span>(
-  <span class='no'>x</span>,
-  <span class='no'>cols</span>,
-  <span class='no'>borders</span>,
-  <span class='no'>fac</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_summer</span>,
-  <span class='kw'>coo_sample</span> <span class='kw'>=</span> <span class='fl'>120</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>first.point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>centroid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ldk</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ldk_pch</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>ldk_col</span> <span class='kw'>=</span> <span class='st'>"#FF000055"</span>,
-  <span class='kw'>ldk_cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>ldk_links</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_confell</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_contour</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_chull</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_labels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>xy.axis</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>x</span>),
-  <span class='no'>...</span>
-)
+<span class='fu'>stack</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>cols</span>,
+  <span class='va'>borders</span>,
+  <span class='va'>fac</span>,
+  palette <span class='op'>=</span> <span class='va'>col_summer</span>,
+  coo_sample <span class='op'>=</span> <span class='fl'>120</span>,
+  points <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  first.point <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  centroid <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ldk <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ldk_pch <span class='op'>=</span> <span class='fl'>3</span>,
+  ldk_col <span class='op'>=</span> <span class='st'>"#FF000055"</span>,
+  ldk_cex <span class='op'>=</span> <span class='fl'>0.5</span>,
+  ldk_links <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_confell <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_contour <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_chull <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_labels <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  xy.axis <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for Ldk</span>
-<span class='fu'>stack</span>(
-  <span class='no'>x</span>,
-  <span class='no'>cols</span>,
-  <span class='no'>borders</span>,
-  <span class='kw'>first.point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>centroid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ldk</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ldk_pch</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>ldk_col</span> <span class='kw'>=</span> <span class='fu'><a href='color_transparency.html'>col_alpha</a></span>(<span class='st'>"#000000"</span>, <span class='fl'>0.5</span>),
-  <span class='kw'>ldk_cex</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
-  <span class='kw'>meanshape</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>meanshape_col</span> <span class='kw'>=</span> <span class='st'>"#FF0000"</span>,
-  <span class='kw'>ldk_links</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_confell</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_contour</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_chull</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ldk_labels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>slidings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>slidings_pch</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>xy.axis</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>x</span>),
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>stack</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>cols</span>,
+  <span class='va'>borders</span>,
+  first.point <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  centroid <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ldk <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ldk_pch <span class='op'>=</span> <span class='fl'>20</span>,
+  ldk_col <span class='op'>=</span> <span class='fu'><a href='col_transp.html'>col_alpha</a></span><span class='op'>(</span><span class='st'>"#000000"</span>, <span class='fl'>0.5</span><span class='op'>)</span>,
+  ldk_cex <span class='op'>=</span> <span class='fl'>0.3</span>,
+  meanshape <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  meanshape_col <span class='op'>=</span> <span class='st'>"#FF0000"</span>,
+  ldk_links <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_confell <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_contour <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_chull <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ldk_labels <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  slidings <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  slidings_pch <span class='op'>=</span> <span class='st'>""</span>,
+  xy.axis <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -285,23 +285,24 @@ Either a single value or of length exactly equals to the number of coordinates.<
 
     <div class='dont-index'><p>Other Coo_graphics: 
 <code><a href='inspect.html'>inspect</a>()</code>,
-<code><a href='panel.Coo.html'>panel</a>()</code></p></div>
+<code><a href='panel.html'>panel</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>stack</span>(<span class='no'>bot</span>)
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)
-<span class='fu'>stack</span>(<span class='no'>bot.f</span>)
-<span class='fu'>stack</span>(<span class='no'>mosquito</span>, <span class='kw'>borders</span><span class='kw'>=</span><span class='st'>'#1A1A1A22'</span>, <span class='kw'>first.point</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'>stack</span>(<span class='no'>hearts</span>)
-<span class='fu'>stack</span>(<span class='no'>hearts</span>, <span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'>stack</span>(<span class='no'>hearts</span>, <span class='kw'>borders</span><span class='kw'>=</span><span class='st'>'#1A1A1A22'</span>, <span class='kw'>ldk</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ldk_col</span><span class='kw'>=</span><span class='fu'><a href='color_palettes.html'>col_summer</a></span>(<span class='fl'>4</span>), <span class='kw'>ldk_pch</span><span class='kw'>=</span><span class='fl'>20</span>)
-<span class='fu'>stack</span>(<span class='no'>hearts</span>, <span class='kw'>fac</span><span class='kw'>=</span><span class='st'>"aut"</span>, <span class='kw'>palette</span><span class='kw'>=</span><span class='no'>col_sari</span>)
-
-<span class='no'>chaffal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>chaff</span>)
-<span class='fu'>stack</span>(<span class='no'>chaffal</span>, <span class='kw'>slidings</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'>stack</span>(<span class='no'>chaffal</span>, <span class='kw'>meanshape</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>meanshape_col</span><span class='kw'>=</span><span class='st'>"blue"</span>)
-}</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot.f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>bot.f</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>mosquito</span>, borders<span class='op'>=</span><span class='st'>'#1A1A1A22'</span>, first.point<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>hearts</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>hearts</span>, ldk<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>hearts</span>, borders<span class='op'>=</span><span class='st'>'#1A1A1A22'</span>, ldk<span class='op'>=</span><span class='cn'>TRUE</span>, ldk_col<span class='op'>=</span><span class='fu'><a href='color_palettes.html'>col_summer</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>, ldk_pch<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>hearts</span>, fac<span class='op'>=</span><span class='st'>"aut"</span>, palette<span class='op'>=</span><span class='va'>col_sari</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>chaffal</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span><span class='op'>(</span><span class='va'>chaff</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>chaffal</span>, slidings<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>stack</span><span class='op'>(</span><span class='va'>chaffal</span>, meanshape<span class='op'>=</span><span class='cn'>TRUE</span>, meanshape_col<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -317,7 +318,7 @@ Either a single value or of length exactly equals to the number of coordinates.<
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

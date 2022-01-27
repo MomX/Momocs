@@ -76,7 +76,7 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ ie a column name from the <code>$fac</code> on Momocs classes.
 Returns a named (after every level) list that can be lapply-ed and combined. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>chop</span>(<span class='no'>.data</span>, <span class='no'>fac</span>)</pre>
+    <pre class="usage"><span class='fu'>chop</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>fac</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,17 +164,24 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
 <code><a href='sample_n.html'>sample_n</a>()</code>,
 <code><a href='select.html'>select</a>()</code>,
 <code><a href='slice.html'>slice</a>()</code>,
-<code><a href='subset.html'>subsetize</a>()</code></p></div>
+<code><a href='subsetize.html'>subsetize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='no'>olea</span> <span class='kw'>%&gt;%</span>
-      <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>var</span> <span class='kw'>==</span> <span class='st'>"Aglan"</span>) <span class='kw'>%&gt;%</span> <span class='co'># to have a balanced nb of 'view'</span>
-      <span class='fu'>chop</span>(~<span class='no'>view</span>) <span class='kw'>%&gt;%</span>    <span class='co'># split into a list of 2</span>
-      <span class='no'>npoly</span> <span class='kw'>%&gt;%</span>          <span class='co'># separately apply npoly</span>
-                         <span class='co'># strict equivalent to lapply(npoly)</span>
-      <span class='no'>combine</span> <span class='kw'>%&gt;%</span>       <span class='co'># recombine</span>
-      <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='no'>plot</span>      <span class='co'># an illustration of the 2 views</span></div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 95</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='output co'>#&gt; <span class='message'>'nb.pts' missing and set to: 91</span></div><div class='output co'>#&gt; <span class='message'>'degree' missing and set to: 5</span></div><div class='output co'>#&gt; <span class='message'>will be deprecated soon, see ?plot_PCA</span></div><div class='img'><img src='chop-1.png' alt='' width='700' height='433' /></div><div class='input'>      # treated separately
-</div></pre>
+    <pre class="examples"><span class='r-in'> <span class='va'>olea</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>      <span class='fu'><a href='filter.html'>filter</a></span><span class='op'>(</span><span class='va'>var</span> <span class='op'>==</span> <span class='st'>"Aglan"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># to have a balanced nb of 'view'</span></span>
+<span class='r-in'>      <span class='fu'>chop</span><span class='op'>(</span><span class='op'>~</span><span class='va'>view</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>    <span class='co'># split into a list of 2</span></span>
+<span class='r-in'>      <span class='va'>npoly</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>          <span class='co'># separately apply npoly</span></span>
+<span class='r-in'>                         <span class='co'># strict equivalent to lapply(npoly)</span></span>
+<span class='r-in'>      <span class='va'>combine</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>       <span class='co'># recombine</span></span>
+<span class='r-in'>      <span class='va'>PCA</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>plot</span>      <span class='co'># an illustration of the 2 views</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.pts' missing and set to: 95</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'degree' missing and set to: 5</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.pts' missing and set to: 91</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'degree' missing and set to: 5</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will be deprecated soon, see ?plot_PCA</span>
+<span class='r-plt img'><img src='chop-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'>      <span class='co'># treated separately</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -190,7 +197,7 @@ Returns a named (after every level) list that can be lapply-ed and combined. See
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

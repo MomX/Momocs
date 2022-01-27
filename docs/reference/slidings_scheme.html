@@ -75,7 +75,7 @@ partition scheme from $slidings of Ldk objects." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ partition scheme from $slidings of Ldk objects." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@ partition scheme from $slidings of Ldk objects." />
 partition scheme from <code>$slidings</code> of <code>Ldk</code> objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>slidings_scheme</span>(<span class='no'>Coo</span>)</pre>
+    <pre class="usage"><span class='fu'>slidings_scheme</span><span class='op'>(</span><span class='va'>Coo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,20 +150,25 @@ their position. Or a NULL if no slidings are defined</p>
 <code><a href='rearrange_ldk.html'>rearrange_ldk</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># no slidings defined a NULL is returned with a message</span>
-<span class='fu'>slidings_scheme</span>(<span class='no'>wings</span>)</div><div class='output co'>#&gt; <span class='message'>no sliding defined</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
-<span class='co'># slidings defined</span>
-<span class='fu'>slidings_scheme</span>(<span class='no'>chaff</span>)</div><div class='output co'>#&gt; $n
-#&gt; [1] 4
-#&gt; 
-#&gt; $id
-#&gt;            start end
-#&gt; partition1    13  52
-#&gt; partition2    53  92
-#&gt; partition3    93 132
-#&gt; partition4   133 172
-#&gt; </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># no slidings defined a NULL is returned with a message</span></span>
+<span class='r-in'><span class='fu'>slidings_scheme</span><span class='op'>(</span><span class='va'>wings</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> no sliding defined</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># slidings defined</span></span>
+<span class='r-in'><span class='fu'>slidings_scheme</span><span class='op'>(</span><span class='va'>chaff</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $id</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            start end</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> partition1    13  52</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> partition2    53  92</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> partition3    93 132</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> partition4   133 172</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -179,7 +184,7 @@ their position. Or a NULL if no slidings are defined</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

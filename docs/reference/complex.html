@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,9 +122,9 @@
     <p>Convert complex to/from cartesian coordinates</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cpx2coo</span>(<span class='no'>Z</span>)
+    <pre class="usage"><span class='fu'>cpx2coo</span><span class='op'>(</span><span class='va'>Z</span><span class='op'>)</span>
 
-<span class='fu'>coo2cpx</span>(<span class='no'>coo</span>)</pre>
+<span class='fu'>coo2cpx</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,12 +150,14 @@
 <code><a href='export.html'>export</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>shapes</span>[<span class='fl'>4</span>] <span class='kw'>%&gt;%</span>            <span class='co'># from cartesian</span>
-    <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>24</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>coo2cpx</span>() <span class='kw'>%T&gt;%</span>       <span class='co'># to complex</span>
-    <span class='fu'>cpx2coo</span>()            <span class='co'># and back</span></div><div class='output co'>#&gt;  [1] 200+ 62i 205+ 43i 176+ 43i 146+ 44i 156+ 23i 186+ 20i 202+ 15i 172+  9i
-#&gt;  [9] 143+ 16i 130+ 45i 135+ 74i 133+104i 142+134i 165+160i 191+182i 203+210i
-#&gt; [17] 225+226i 239+204i 238+178i 237+150i 227+120i 221+ 91i 224+ 62i 219+ 45i</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>shapes</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>            <span class='co'># from cartesian</span></span>
+<span class='r-in'>    <span class='fu'><a href='coo_sample.html'>coo_sample</a></span><span class='op'>(</span><span class='fl'>24</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'>coo2cpx</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/tee.html'>%T&gt;%</a></span>       <span class='co'># to complex</span></span>
+<span class='r-in'>    <span class='fu'>cpx2coo</span><span class='op'>(</span><span class='op'>)</span>            <span class='co'># and back</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 200+ 62i 205+ 43i 176+ 43i 146+ 44i 156+ 23i 186+ 20i 202+ 15i 172+  9i</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] 143+ 16i 130+ 45i 135+ 74i 133+104i 142+134i 165+160i 191+182i 203+210i</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17] 225+226i 239+204i 238+178i 237+150i 227+120i 221+ 91i 224+ 62i 219+ 45i</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -171,7 +173,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

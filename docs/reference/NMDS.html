@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>A wrapper around <a href='https://rdrr.io/pkg/vegan/man/metaMDS.html'>vegan::metaMDS</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>NMDS</span>(<span class='no'>x</span>, <span class='kw'>distance</span> <span class='kw'>=</span> <span class='st'>"bray"</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>try</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>trymax</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>NMDS</span><span class='op'>(</span><span class='va'>x</span>, distance <span class='op'>=</span> <span class='st'>"bray"</span>, k <span class='op'>=</span> <span class='fl'>2</span>, try <span class='op'>=</span> <span class='fl'>20</span>, trymax <span class='op'>=</span> <span class='fl'>20</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,63 +174,70 @@
 <code><a href='classification_metrics.html'>classification_metrics</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>NMDS</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'vegan':</span>
-#&gt; <span class='message'>  method     from      </span>
-#&gt; <span class='message'>  rev.hclust dendextend</span></div><div class='output co'>#&gt; <span class='message'>'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: results may be meaningless because data have negative entries in method “bray”</span></div><div class='output co'>#&gt; Run 0 stress 0.07227125 
-#&gt; Run 1 stress 0.07227132 
-#&gt; ... Procrustes: rmse 2.134479e-05  max resid 6.102186e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 2 stress 0.1536611 
-#&gt; Run 3 stress 0.1729718 
-#&gt; Run 4 stress 0.07227128 
-#&gt; ... Procrustes: rmse 2.27572e-05  max resid 0.0001142424 
-#&gt; ... Similar to previous best
-#&gt; Run 5 stress 0.07227125 
-#&gt; ... Procrustes: rmse 8.797053e-06  max resid 3.993071e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 6 stress 0.07227125 
-#&gt; ... Procrustes: rmse 5.388401e-06  max resid 2.000297e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 7 stress 0.07227129 
-#&gt; ... Procrustes: rmse 4.13528e-05  max resid 0.0001738164 
-#&gt; ... Similar to previous best
-#&gt; Run 8 stress 0.1476538 
-#&gt; Run 9 stress 0.07227125 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 3.713068e-06  max resid 1.69194e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 10 stress 0.07227125 
-#&gt; ... Procrustes: rmse 4.388959e-06  max resid 1.391617e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 11 stress 0.07227131 
-#&gt; ... Procrustes: rmse 4.67699e-05  max resid 0.0001804122 
-#&gt; ... Similar to previous best
-#&gt; Run 12 stress 0.1647891 
-#&gt; Run 13 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.048337e-05  max resid 8.248206e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 14 stress 0.07227126 
-#&gt; ... Procrustes: rmse 2.071888e-05  max resid 8.201421e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 15 stress 0.1606942 
-#&gt; Run 16 stress 0.07227125 
-#&gt; ... Procrustes: rmse 8.159651e-06  max resid 3.149556e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 17 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.742992e-06  max resid 7.302496e-06 
-#&gt; ... Similar to previous best
-#&gt; Run 18 stress 0.1776129 
-#&gt; Run 19 stress 0.07227125 
-#&gt; ... Procrustes: rmse 1.328271e-05  max resid 5.422646e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 20 stress 0.07227125 
-#&gt; ... Procrustes: rmse 2.15242e-06  max resid 6.763911e-06 
-#&gt; ... Similar to previous best
-#&gt; *** Solution reached</div><div class='input'>
-# Shepard diagram # before a Momocs wrapper
-# vegan::stressplot(x)
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>efourier</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>NMDS</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Registered S3 method overwritten by 'vegan':</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   method     from      </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   rev.hclust dendextend</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'comm' has negative data: 'autotransform', 'noshare' and 'wascores' set to FALSE</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>results may be meaningless because data have negative entries in method “bray”</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 0 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 1 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 3.936045e-06  max resid 1.87576e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 2 stress 0.1536609 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 3 stress 0.1729702 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 4 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.981988e-06  max resid 2.874886e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 5 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 2.19081e-06  max resid 8.275813e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 6 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 7.028881e-06  max resid 2.808569e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 7 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 9.669053e-06  max resid 3.852924e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 8 stress 0.1476475 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 9 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.146136e-06  max resid 4.040052e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 10 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 2.035531e-06  max resid 8.084339e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 11 stress 0.07227126 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 7.291301e-06  max resid 2.685738e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 12 stress 0.1647891 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 13 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 6.99825e-06  max resid 2.725125e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 14 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.714743e-06  max resid 2.216745e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 15 stress 0.1606935 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 16 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 6.971937e-06  max resid 2.720148e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 17 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 8.281514e-07  max resid 2.450366e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 18 stress 0.1776127 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 19 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 4.920735e-06  max resid 1.945613e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 20 stress 0.07227125 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.95309e-06  max resid 6.877957e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> *** Solution reached</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Shepard diagram # before a Momocs wrapper</span></span>
+<span class='r-in'><span class='co'># vegan::stressplot(x)</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -246,7 +253,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

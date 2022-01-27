@@ -76,7 +76,7 @@ Mainly intended to generate shapes and/or to understand how efourier works." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ Mainly intended to generate shapes and/or to understand how efourier works." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ coefficients (see <code>Details</code>) or can generate some 'efourier' shapes.
 Mainly intended to generate shapes and/or to understand how efourier works.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>efourier_shape</span>(<span class='no'>an</span>, <span class='no'>bn</span>, <span class='no'>cn</span>, <span class='no'>dn</span>, <span class='no'>nb.h</span>, <span class='kw'>nb.pts</span> <span class='kw'>=</span> <span class='fl'>60</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>efourier_shape</span><span class='op'>(</span><span class='va'>an</span>, <span class='va'>bn</span>, <span class='va'>cn</span>, <span class='va'>dn</span>, <span class='va'>nb.h</span>, nb.pts <span class='op'>=</span> <span class='fl'>60</span>, alpha <span class='op'>=</span> <span class='fl'>2</span>, plot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,130 +199,138 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 <code><a href='efourier.html'>efourier</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ef</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='fl'>24</span>)
-<span class='fu'>efourier_shape</span>(<span class='no'>ef</span>$<span class='no'>an</span>, <span class='no'>ef</span>$<span class='no'>bn</span>, <span class='no'>ef</span>$<span class='no'>cn</span>, <span class='no'>ef</span>$<span class='no'>dn</span>) <span class='co'># equivalent to efourier_i(ef)</span></div><div class='img'><img src='efourier_shape-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                 x          y
-#&gt;  [1,] -139.292006   52.55414
-#&gt;  [2,] -136.616807   10.69211
-#&gt;  [3,] -131.350271  -30.94211
-#&gt;  [4,] -125.199336  -72.07640
-#&gt;  [5,] -118.953152 -113.78248
-#&gt;  [6,] -113.609682 -155.07182
-#&gt;  [7,] -110.814096 -196.99594
-#&gt;  [8,] -110.406802 -238.82588
-#&gt;  [9,] -114.448576 -280.46843
-#&gt; [10,] -121.291958 -321.87890
-#&gt; [11,] -128.793705 -362.93618
-#&gt; [12,] -133.799480 -404.68963
-#&gt; [13,] -133.459946 -446.39242
-#&gt; [14,] -121.381226 -485.99486
-#&gt; [15,]  -90.225043 -512.97786
-#&gt; [16,]  -49.878625 -523.21089
-#&gt; [17,]   -8.353210 -526.12066
-#&gt; [18,]   33.911396 -525.08469
-#&gt; [19,]   74.759609 -519.43972
-#&gt; [20,]  113.051448 -502.25491
-#&gt; [21,]  136.285584 -468.52283
-#&gt; [22,]  141.399365 -427.41134
-#&gt; [23,]  140.746409 -385.31652
-#&gt; [24,]  138.719031 -343.56495
-#&gt; [25,]  136.547192 -301.87577
-#&gt; [26,]  132.884166 -259.94004
-#&gt; [27,]  128.335128 -218.62173
-#&gt; [28,]  123.859620 -176.68909
-#&gt; [29,]  118.283114 -135.32263
-#&gt; [30,]  115.872309  -93.60856
-#&gt; [31,]  116.738256  -51.46991
-#&gt; [32,]  121.746650  -10.34707
-#&gt; [33,]  130.044438   31.28459
-#&gt; [34,]  135.215555   72.30011
-#&gt; [35,]  135.968480  114.36171
-#&gt; [36,]  127.773756  155.43284
-#&gt; [37,]  110.008193  192.61949
-#&gt; [38,]   91.059514  230.59227
-#&gt; [39,]   78.417823  270.00689
-#&gt; [40,]   72.336775  311.64758
-#&gt; [41,]   67.126887  353.28501
-#&gt; [42,]   63.718346  394.51271
-#&gt; [43,]   58.801472  437.18028
-#&gt; [44,]   54.675788  477.22927
-#&gt; [45,]   57.783825  520.56987
-#&gt; [46,]   46.279411  554.26720
-#&gt; [47,]    8.173233  561.94185
-#&gt; [48,]  -37.145543  559.89637
-#&gt; [49,]  -64.096831  541.62656
-#&gt; [50,]  -64.927840  500.81669
-#&gt; [51,]  -64.170645  459.21723
-#&gt; [52,]  -69.796352  417.94924
-#&gt; [53,]  -72.732679  375.54798
-#&gt; [54,]  -77.369097  334.76587
-#&gt; [55,]  -80.882096  292.41632
-#&gt; [56,]  -87.983533  251.76743
-#&gt; [57,] -103.969321  212.65038
-#&gt; [58,] -121.348549  174.68203
-#&gt; [59,] -136.478064  135.92288
-#&gt; [60,] -141.748300   94.09730</div><div class='input'><span class='fu'>efourier_shape</span>() <span class='co'># is autonomous</span></div><div class='img'><img src='efourier_shape-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                 x             y
-#&gt;  [1,] -1.20612491 -0.2199189049
-#&gt;  [2,] -0.88560628 -0.4120049402
-#&gt;  [3,] -0.53032007 -0.5970331058
-#&gt;  [4,] -0.14430304 -0.7619638376
-#&gt;  [5,]  0.26506082 -0.8940456619
-#&gt;  [6,]  0.68720725 -0.9818560629
-#&gt;  [7,]  1.10891439 -1.0162953960
-#&gt;  [8,]  1.51514398 -0.9914426245
-#&gt;  [9,]  1.89012998 -0.9051912666
-#&gt; [10,]  2.21861647 -0.7596014446
-#&gt; [11,]  2.48712882 -0.5609277752
-#&gt; [12,]  2.68515567 -0.3193108794
-#&gt; [13,]  2.80612436 -0.0481499360
-#&gt; [14,]  2.84807001  0.2367978089
-#&gt; [15,]  2.81392485  0.5185199915
-#&gt; [16,]  2.71138983  0.7799654340
-#&gt; [17,]  2.55238866  1.0052740728
-#&gt; [18,]  2.35214459  1.1809190828
-#&gt; [19,]  2.12795589  1.2966671691
-#&gt; [20,]  1.89777553  1.3462788300
-#&gt; [21,]  1.67872037  1.3278931874
-#&gt; [22,]  1.48564310  1.2440696282
-#&gt; [23,]  1.32989573  1.1014884267
-#&gt; [24,]  1.21839695  0.9103419586
-#&gt; [25,]  1.15308864  0.6834743636
-#&gt; [26,]  1.13083119  0.4353481657
-#&gt; [27,]  1.14374770  0.1809295765
-#&gt; [28,]  1.17998579 -0.0654111474
-#&gt; [29,]  1.22482781 -0.2908921608
-#&gt; [30,]  1.26204861 -0.4851257466
-#&gt; [31,]  1.27539780 -0.6406773476
-#&gt; [32,]  1.25007286 -0.7533426209
-#&gt; [33,]  1.17405140 -0.8221344835
-#&gt; [34,]  1.03916497 -0.8489993462
-#&gt; [35,]  0.84182195 -0.8383062951
-#&gt; [36,]  0.58332027 -0.7961725741
-#&gt; [37,]  0.26972973 -0.7297015375
-#&gt; [38,] -0.08863662 -0.6462141614
-#&gt; [39,] -0.47810460 -0.5525519118
-#&gt; [40,] -0.88278535 -0.4545177543
-#&gt; [41,] -1.28587420 -0.3565046092
-#&gt; [42,] -1.67097813 -0.2613384931
-#&gt; [43,] -2.02334833 -0.1703392607
-#&gt; [44,] -2.33090655 -0.0835778034
-#&gt; [45,] -2.58497650 -0.0002872333
-#&gt; [46,] -2.78066272  0.0806308185
-#&gt; [47,] -2.91685524  0.1600734882
-#&gt; [48,] -2.99587592  0.2382485064
-#&gt; [49,] -3.02281782  0.3142960147
-#&gt; [50,] -3.00465829  0.3860731270
-#&gt; [51,] -2.94924789  0.4501354496
-#&gt; [52,] -2.86428722  0.5019273053
-#&gt; [53,] -2.75640309  0.5361683592
-#&gt; [54,] -2.63042233  0.5474012198
-#&gt; [55,] -2.48891975  0.5306448353
-#&gt; [56,] -2.33208581  0.4820842188
-#&gt; [57,] -2.15792524  0.3997197960
-#&gt; [58,] -1.96276182  0.2839003441
-#&gt; [59,] -1.74199126  0.1376721554
-#&gt; [60,] -1.49099696 -0.0331070116</div><div class='input'>
-<span class='fu'><a href='panel.Coo.html'>panel</a></span>(<span class='fu'><a href='Out.html'>Out</a></span>(<span class='fu'><a href='bridges.html'>a2l</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>100</span>,
-<span class='fu'>efourier_shape</span>(<span class='kw'>nb.h</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>2.5</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>))))) <span class='co'># Bubble family</span></div><div class='img'><img src='efourier_shape-3.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>ef</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>24</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>efourier_shape</span><span class='op'>(</span><span class='va'>ef</span><span class='op'>$</span><span class='va'>an</span>, <span class='va'>ef</span><span class='op'>$</span><span class='va'>bn</span>, <span class='va'>ef</span><span class='op'>$</span><span class='va'>cn</span>, <span class='va'>ef</span><span class='op'>$</span><span class='va'>dn</span><span class='op'>)</span> <span class='co'># equivalent to efourier_i(ef)</span></span>
+<span class='r-plt img'><img src='efourier_shape-1.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                 x          y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] -139.292006   52.55414</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] -136.616807   10.69211</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] -131.350271  -30.94211</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] -125.199336  -72.07640</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] -118.953152 -113.78248</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] -113.609682 -155.07182</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] -110.814096 -196.99594</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] -110.406802 -238.82588</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] -114.448576 -280.46843</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] -121.291958 -321.87890</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] -128.793705 -362.93618</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] -133.799480 -404.68963</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] -133.459946 -446.39242</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] -121.381226 -485.99486</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,]  -90.225043 -512.97786</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,]  -49.878625 -523.21089</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,]   -8.353210 -526.12066</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,]   33.911396 -525.08469</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19,]   74.759609 -519.43972</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [20,]  113.051448 -502.25491</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21,]  136.285584 -468.52283</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [22,]  141.399365 -427.41134</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23,]  140.746409 -385.31652</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [24,]  138.719031 -343.56495</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25,]  136.547192 -301.87577</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [26,]  132.884166 -259.94004</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [27,]  128.335128 -218.62173</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [28,]  123.859620 -176.68909</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [29,]  118.283114 -135.32263</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [30,]  115.872309  -93.60856</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [31,]  116.738256  -51.46991</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [32,]  121.746650  -10.34707</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [33,]  130.044438   31.28459</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [34,]  135.215555   72.30011</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [35,]  135.968480  114.36171</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [36,]  127.773756  155.43284</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37,]  110.008193  192.61949</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [38,]   91.059514  230.59227</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [39,]   78.417823  270.00689</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [40,]   72.336775  311.64758</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [41,]   67.126887  353.28501</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [42,]   63.718346  394.51271</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [43,]   58.801472  437.18028</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [44,]   54.675788  477.22927</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [45,]   57.783825  520.56987</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [46,]   46.279411  554.26720</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [47,]    8.173233  561.94185</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [48,]  -37.145543  559.89637</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [49,]  -64.096831  541.62656</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [50,]  -64.927840  500.81669</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [51,]  -64.170645  459.21723</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [52,]  -69.796352  417.94924</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [53,]  -72.732679  375.54798</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [54,]  -77.369097  334.76587</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [55,]  -80.882096  292.41632</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [56,]  -87.983533  251.76743</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [57,] -103.969321  212.65038</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [58,] -121.348549  174.68203</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [59,] -136.478064  135.92288</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [60,] -141.748300   94.09730</span>
+<span class='r-in'><span class='fu'>efourier_shape</span><span class='op'>(</span><span class='op'>)</span> <span class='co'># is autonomous</span></span>
+<span class='r-plt img'><img src='efourier_shape-2.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                 x             y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] -1.20612491 -0.2199189049</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] -0.88560628 -0.4120049402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] -0.53032007 -0.5970331058</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] -0.14430304 -0.7619638376</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,]  0.26506082 -0.8940456619</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,]  0.68720725 -0.9818560629</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,]  1.10891439 -1.0162953960</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,]  1.51514398 -0.9914426245</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,]  1.89012998 -0.9051912666</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,]  2.21861647 -0.7596014446</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,]  2.48712882 -0.5609277752</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,]  2.68515567 -0.3193108794</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,]  2.80612436 -0.0481499360</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,]  2.84807001  0.2367978089</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,]  2.81392485  0.5185199915</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,]  2.71138983  0.7799654340</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,]  2.55238866  1.0052740728</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,]  2.35214459  1.1809190828</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19,]  2.12795589  1.2966671691</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [20,]  1.89777553  1.3462788300</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21,]  1.67872037  1.3278931874</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [22,]  1.48564310  1.2440696282</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23,]  1.32989573  1.1014884267</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [24,]  1.21839695  0.9103419586</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25,]  1.15308864  0.6834743636</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [26,]  1.13083119  0.4353481657</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [27,]  1.14374770  0.1809295765</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [28,]  1.17998579 -0.0654111474</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [29,]  1.22482781 -0.2908921608</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [30,]  1.26204861 -0.4851257466</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [31,]  1.27539780 -0.6406773476</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [32,]  1.25007286 -0.7533426209</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [33,]  1.17405140 -0.8221344835</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [34,]  1.03916497 -0.8489993462</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [35,]  0.84182195 -0.8383062951</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [36,]  0.58332027 -0.7961725741</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37,]  0.26972973 -0.7297015375</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [38,] -0.08863662 -0.6462141614</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [39,] -0.47810460 -0.5525519118</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [40,] -0.88278535 -0.4545177543</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [41,] -1.28587420 -0.3565046092</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [42,] -1.67097813 -0.2613384931</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [43,] -2.02334833 -0.1703392607</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [44,] -2.33090655 -0.0835778034</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [45,] -2.58497650 -0.0002872333</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [46,] -2.78066272  0.0806308185</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [47,] -2.91685524  0.1600734882</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [48,] -2.99587592  0.2382485064</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [49,] -3.02281782  0.3142960147</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [50,] -3.00465829  0.3860731270</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [51,] -2.94924789  0.4501354496</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [52,] -2.86428722  0.5019273053</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [53,] -2.75640309  0.5361683592</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [54,] -2.63042233  0.5474012198</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [55,] -2.48891975  0.5306448353</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [56,] -2.33208581  0.4820842188</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [57,] -2.15792524  0.3997197960</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [58,] -1.96276182  0.2839003441</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [59,] -1.74199126  0.1376721554</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [60,] -1.49099696 -0.0331070116</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='panel.html'>panel</a></span><span class='op'>(</span><span class='fu'><a href='Out.html'>Out</a></span><span class='op'>(</span><span class='fu'><a href='bridges.html'>a2l</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span><span class='op'>(</span><span class='fl'>100</span>,</span>
+<span class='r-in'><span class='fu'>efourier_shape</span><span class='op'>(</span>nb.h<span class='op'>=</span><span class='fl'>6</span>, alpha<span class='op'>=</span><span class='fl'>2.5</span>, plot<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Bubble family</span></span>
+<span class='r-plt img'><img src='efourier_shape-3.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -338,7 +346,7 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

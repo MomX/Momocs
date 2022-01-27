@@ -76,7 +76,7 @@ See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ See examples." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ be passed to different objects and used in combination with <a href='measure.htm
 See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>d</span>(<span class='no'>x</span>, <span class='no'>id1</span>, <span class='no'>id2</span>)</pre>
+    <pre class="usage"><span class='fu'>d</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>id1</span>, <span class='va'>id2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,100 +153,106 @@ See examples.</p>
     <div class='dont-index'><p>if you want all pairwise combinations, see <a href='coo_truss.html'>coo_truss</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># single shape</span>
-<span class='fu'>d</span>(<span class='no'>wings</span>[<span class='fl'>1</span>], <span class='fl'>1</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.7581273</div><div class='input'><span class='co'># Ldk object</span>
-<span class='fu'>d</span>(<span class='no'>wings</span>, <span class='fl'>1</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt;       AN1       AN2       AN3       AN4       AN5       AN6       AN7       AN8 
-#&gt; 0.7581273 0.7281573 0.7127928 0.7185018 0.7367129 0.7124015 0.7285464 0.7301814 
-#&gt;       AN9      AN10      AN11      TO12      WY13      WY14      WY15      WY16 
-#&gt; 0.7091337 0.7087522 0.7100063 0.6994695 0.7257983 0.7250806 0.7227536 0.7176631 
-#&gt;      UR17      UR18      UR19      UR20      CA21      CA22      CA23      CA24 
-#&gt; 0.7207639 0.7269677 0.7153795 0.7397394 0.7373042 0.7172436 0.7223663 0.7182525 
-#&gt;      CA25      CA26      CA27      OR28      MA29      MA30      MA31      PS32 
-#&gt; 0.7317102 0.7172721 0.7127463 0.7244861 0.7335012 0.7238598 0.7424106 0.7366003 
-#&gt;      PS33      PS34      PS35      PS36      PS37      PS38      PS39      PS40 
-#&gt; 0.7262568 0.7315960 0.7233414 0.7278607 0.7262419 0.7331013 0.7087411 0.7163488 
-#&gt;      PS41      PS42      PS43      AE44      AE45      AE46      AE47      AE48 
-#&gt; 0.7085592 0.7134963 0.7062850 0.7233241 0.7080950 0.7261707 0.7100848 0.7421942 
-#&gt;      AE49      AE50      AE51      AE52      AE53      AE54      AE55      AE56 
-#&gt; 0.7115717 0.7248944 0.7230917 0.7144437 0.7182977 0.7168990 0.7175543 0.7165161 
-#&gt;      AE57      AE58      AE59      AE60      AE61      AE62      AE63      AE64 
-#&gt; 0.7404125 0.7154040 0.7448661 0.7261959 0.7224206 0.7360905 0.7335780 0.7318912 
-#&gt;      AE65      AE66      AE67      AE68      AE69      AE70      AE71      AE72 
-#&gt; 0.7151047 0.7147967 0.7145111 0.7210058 0.7222862 0.7212556 0.7302622 0.7216666 
-#&gt;      AE73      AE74      AE75      AE76      AE77      AE78      AE79      AE80 
-#&gt; 0.7437503 0.7436207 0.7327989 0.7092307 0.7315643 0.7322983 0.7398728 0.7173188 
-#&gt;      AE81      AE82      AE83      AE84      AE85      AE86      AE87      AE88 
-#&gt; 0.6992811 0.7286847 0.7241596 0.7290020 0.7136496 0.7222001 0.7283568 0.7341570 
-#&gt;      AE89      AE90      AE91      AE92      AE93      AE94      AE95      AE96 
-#&gt; 0.7213378 0.7293730 0.7198584 0.7149219 0.7354247 0.7296066 0.7157059 0.6982300 
-#&gt;      AE97      AE98      AE99     AE100     CX101     CX102     CX103     CX104 
-#&gt; 0.7382611 0.7261058 0.7145814 0.7133695 0.7205058 0.7340288 0.7172196 0.7235002 
-#&gt;     CX105     CX106     CX107     CX108     CX109     CX110     CX111     CX112 
-#&gt; 0.7186017 0.7191322 0.7077697 0.7256004 0.7205312 0.7205628 0.7171014 0.7182613 
-#&gt;     CX113     CX114     CX115     CX116     CX117     CX118     CX119     CX120 
-#&gt; 0.7299714 0.7094558 0.6976466 0.7216434 0.7297104 0.7277296 0.7383755 0.7150724 
-#&gt;     CX121     CX122     CX123     CX124     CX125     DE126     DE127 
-#&gt; 0.7217969 0.7252883 0.7075976 0.7231878 0.7190234 0.7001547 0.7128613 </div><div class='input'><span class='co'># Out object</span>
-<span class='fu'>d</span>(<span class='no'>hearts</span>, <span class='fl'>2</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt;      shp1      shp2      shp3      shp4      shp5      shp6      shp7      shp8 
-#&gt; 0.7631146 0.7182864 0.8451851 0.8524332 0.6289745 0.7469257 0.7650846 0.5290089 
-#&gt;      shp9     shp10     shp11     shp12     shp13     shp14     shp15     shp16 
-#&gt; 0.6103333 0.6236372 0.7429723 0.6348490 0.7671199 0.6810554 0.6338818 0.6853828 
-#&gt;     shp17     shp18     shp19     shp20     shp21     shp22     shp23     shp24 
-#&gt; 0.6238002 0.8866637 0.6208528 0.5822941 0.5880879 0.8852956 0.7346886 0.7203612 
-#&gt;     shp25     shp26     shp27     shp28     shp29     shp30     shp31     shp32 
-#&gt; 0.6834542 0.6683383 0.6815803 0.6992615 0.8837326 0.6694748 0.9143077 0.7462901 
-#&gt;     shp33     shp34     shp35     shp36     shp37     shp38     shp39     shp40 
-#&gt; 0.8324069 0.8263567 0.7156152 0.7400215 0.8636179 0.7327721 0.7302947 0.8022611 
-#&gt;     shp41     shp42     shp43     shp44     shp45     shp46     shp47     shp48 
-#&gt; 0.7876690 0.6702961 0.7657328 0.7114349 0.8160898 0.8514524 0.7864097 0.8544094 
-#&gt;     shp49     shp50     shp51     shp52     shp53     shp54     shp55     shp56 
-#&gt; 0.8540897 0.7362736 0.7839997 0.7141854 0.7881206 0.7844670 0.7976090 0.7780533 
-#&gt;     shp57     shp58     shp59     shp60     shp61     shp62     shp63     shp64 
-#&gt; 0.7790919 0.7977559 0.8113749 0.7159091 0.7119202 0.6425247 0.8280741 0.7699237 
-#&gt;     shp65     shp66     shp67     shp68     shp69     shp70     shp71     shp72 
-#&gt; 0.9112877 0.7542011 0.8073623 0.8916280 0.7638459 0.7394304 0.7120199 0.8475767 
-#&gt;     shp73     shp74     shp75     shp76     shp77     shp78     shp79     shp80 
-#&gt; 0.8467397 0.7998835 0.9270539 0.7642246 0.8594367 0.7209088 0.7989868 0.7535296 
-#&gt;     shp81     shp82     shp83     shp84     shp85     shp86     shp87     shp88 
-#&gt; 0.8750936 0.9212785 0.8739192 0.7410993 0.7711573 0.9040280 0.8445564 0.8595617 
-#&gt;     shp89     shp90     shp91     shp92     shp93     shp94     shp95     shp96 
-#&gt; 0.7544551 0.8765394 0.7649132 0.8566908 0.8672661 0.8905499 0.8167811 0.6780182 
-#&gt;     shp97     shp98     shp99    shp100    shp101    shp102    shp103    shp104 
-#&gt; 0.7720006 0.9065548 0.8954063 0.8858552 0.8706311 0.8762412 0.9093137 0.9002444 
-#&gt;    shp105    shp106    shp107    shp108    shp109    shp110    shp111    shp112 
-#&gt; 0.9036831 0.8292070 0.8859845 0.8851778 0.8619118 0.9206441 0.8397867 0.8692543 
-#&gt;    shp113    shp114    shp115    shp116    shp117    shp118    shp119    shp120 
-#&gt; 0.8671550 0.7668184 0.8522446 0.7407808 0.7615372 0.7884933 0.9120387 0.8496588 
-#&gt;    shp121    shp122    shp123    shp124    shp125    shp126    shp127    shp128 
-#&gt; 0.7128952 0.8452803 0.7808519 0.8506531 0.8119996 0.7727404 0.7854347 0.8393396 
-#&gt;    shp129    shp130    shp131    shp132    shp133    shp134    shp135    shp136 
-#&gt; 0.8445801 0.7802361 0.7640858 0.8662670 0.7090051 0.8541041 0.7161086 0.7619554 
-#&gt;    shp137    shp138    shp139    shp140    shp141    shp142    shp143    shp144 
-#&gt; 0.7454238 0.8066868 0.8413141 0.7679260 0.8279943 0.7932280 0.8050323 0.8471870 
-#&gt;    shp145    shp146    shp147    shp148    shp149    shp150    shp151    shp152 
-#&gt; 0.7967146 0.8006016 0.8237974 0.8582077 0.9160836 0.8401398 0.7995380 0.6738980 
-#&gt;    shp153    shp154    shp155    shp156    shp157    shp158    shp159    shp160 
-#&gt; 0.7307879 0.7278767 0.8359675 0.8280149 0.8104836 0.7733338 0.8047466 0.6754903 
-#&gt;    shp161    shp162    shp163    shp164    shp165    shp166    shp167    shp168 
-#&gt; 0.7218993 0.6596433 0.8148563 0.6368536 0.7098642 0.7902415 0.7481063 0.7169491 
-#&gt;    shp169    shp170    shp171    shp172    shp173    shp174    shp175    shp176 
-#&gt; 0.7126700 0.7845322 0.7388734 0.7834291 0.6949870 0.6693791 0.6995516 0.6978463 
-#&gt;    shp177    shp178    shp179    shp180    shp181    shp182    shp183    shp184 
-#&gt; 0.7198900 0.7878513 0.8469718 0.7758912 0.7731482 0.6759113 0.7120142 0.6643103 
-#&gt;    shp185    shp186    shp187    shp188    shp189    shp190    shp191    shp192 
-#&gt; 0.7535931 0.7760557 0.7520940 0.7106488 0.6974563 0.7151895 0.8647945 0.7771309 
-#&gt;    shp193    shp194    shp195    shp196    shp197    shp198    shp199    shp200 
-#&gt; 0.7450503 0.6718839 0.7454927 0.5912441 0.7118493 0.7229153 0.8140886 0.8216331 
-#&gt;    shp201    shp202    shp203    shp204    shp205    shp206    shp207    shp208 
-#&gt; 0.7815022 0.6470323 0.6373149 0.5962023 0.6925027 0.7957830 0.6756185 0.7093084 
-#&gt;    shp209    shp210    shp211    shp212    shp213    shp214    shp215    shp216 
-#&gt; 0.6560775 0.7320395 0.7869578 0.7326762 0.7769385 0.8253959 0.6940959 0.7130844 
-#&gt;    shp217    shp218    shp219    shp220    shp221    shp222    shp223    shp224 
-#&gt; 0.6848838 0.8305747 0.7472713 0.7586330 0.8380628 0.7593495 0.6286220 0.7498917 
-#&gt;    shp225    shp226    shp227    shp228    shp229    shp230    shp231    shp232 
-#&gt; 0.7584135 0.7930154 0.7907987 0.7237335 0.8102214 0.8092945 0.7134718 0.8471743 
-#&gt;    shp233    shp234    shp235    shp236    shp237    shp238    shp239    shp240 
-#&gt; 0.7870556 0.8002813 0.7853021 0.8028798 0.7940435 0.8044962 0.6784667 0.7779515 </div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># single shape</span></span>
+<span class='r-in'><span class='fu'>d</span><span class='op'>(</span><span class='va'>wings</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.7581273</span>
+<span class='r-in'><span class='co'># Ldk object</span></span>
+<span class='r-in'><span class='fu'>d</span><span class='op'>(</span><span class='va'>wings</span>, <span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       AN1       AN2       AN3       AN4       AN5       AN6       AN7       AN8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7581273 0.7281573 0.7127928 0.7185018 0.7367129 0.7124015 0.7285464 0.7301814 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       AN9      AN10      AN11      TO12      WY13      WY14      WY15      WY16 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7091337 0.7087522 0.7100063 0.6994695 0.7257983 0.7250806 0.7227536 0.7176631 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      UR17      UR18      UR19      UR20      CA21      CA22      CA23      CA24 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7207639 0.7269677 0.7153795 0.7397394 0.7373042 0.7172436 0.7223663 0.7182525 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      CA25      CA26      CA27      OR28      MA29      MA30      MA31      PS32 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7317102 0.7172721 0.7127463 0.7244861 0.7335012 0.7238598 0.7424106 0.7366003 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      PS33      PS34      PS35      PS36      PS37      PS38      PS39      PS40 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7262568 0.7315960 0.7233414 0.7278607 0.7262419 0.7331013 0.7087411 0.7163488 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      PS41      PS42      PS43      AE44      AE45      AE46      AE47      AE48 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7085592 0.7134963 0.7062850 0.7233241 0.7080950 0.7261707 0.7100848 0.7421942 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      AE49      AE50      AE51      AE52      AE53      AE54      AE55      AE56 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7115717 0.7248944 0.7230917 0.7144437 0.7182977 0.7168990 0.7175543 0.7165161 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      AE57      AE58      AE59      AE60      AE61      AE62      AE63      AE64 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7404125 0.7154040 0.7448661 0.7261959 0.7224206 0.7360905 0.7335780 0.7318912 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      AE65      AE66      AE67      AE68      AE69      AE70      AE71      AE72 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7151047 0.7147967 0.7145111 0.7210058 0.7222862 0.7212556 0.7302622 0.7216666 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      AE73      AE74      AE75      AE76      AE77      AE78      AE79      AE80 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7437503 0.7436207 0.7327989 0.7092307 0.7315643 0.7322983 0.7398728 0.7173188 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      AE81      AE82      AE83      AE84      AE85      AE86      AE87      AE88 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6992811 0.7286847 0.7241596 0.7290020 0.7136496 0.7222001 0.7283568 0.7341570 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      AE89      AE90      AE91      AE92      AE93      AE94      AE95      AE96 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7213378 0.7293730 0.7198584 0.7149219 0.7354247 0.7296066 0.7157059 0.6982300 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      AE97      AE98      AE99     AE100     CX101     CX102     CX103     CX104 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7382611 0.7261058 0.7145814 0.7133695 0.7205058 0.7340288 0.7172196 0.7235002 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     CX105     CX106     CX107     CX108     CX109     CX110     CX111     CX112 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7186017 0.7191322 0.7077697 0.7256004 0.7205312 0.7205628 0.7171014 0.7182613 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     CX113     CX114     CX115     CX116     CX117     CX118     CX119     CX120 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7299714 0.7094558 0.6976466 0.7216434 0.7297104 0.7277296 0.7383755 0.7150724 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     CX121     CX122     CX123     CX124     CX125     DE126     DE127 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7217969 0.7252883 0.7075976 0.7231878 0.7190234 0.7001547 0.7128613 </span>
+<span class='r-in'><span class='co'># Out object</span></span>
+<span class='r-in'><span class='fu'>d</span><span class='op'>(</span><span class='va'>hearts</span>, <span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      shp1      shp2      shp3      shp4      shp5      shp6      shp7      shp8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7631146 0.7182864 0.8451851 0.8524332 0.6289745 0.7469257 0.7650846 0.5290089 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      shp9     shp10     shp11     shp12     shp13     shp14     shp15     shp16 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6103333 0.6236372 0.7429723 0.6348490 0.7671199 0.6810554 0.6338818 0.6853828 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp17     shp18     shp19     shp20     shp21     shp22     shp23     shp24 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6238002 0.8866637 0.6208528 0.5822941 0.5880879 0.8852956 0.7346886 0.7203612 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp25     shp26     shp27     shp28     shp29     shp30     shp31     shp32 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6834542 0.6683383 0.6815803 0.6992615 0.8837326 0.6694748 0.9143077 0.7462901 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp33     shp34     shp35     shp36     shp37     shp38     shp39     shp40 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.8324069 0.8263567 0.7156152 0.7400215 0.8636179 0.7327721 0.7302947 0.8022611 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp41     shp42     shp43     shp44     shp45     shp46     shp47     shp48 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7876690 0.6702961 0.7657328 0.7114349 0.8160898 0.8514524 0.7864097 0.8544094 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp49     shp50     shp51     shp52     shp53     shp54     shp55     shp56 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.8540897 0.7362736 0.7839997 0.7141854 0.7881206 0.7844670 0.7976090 0.7780533 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp57     shp58     shp59     shp60     shp61     shp62     shp63     shp64 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7790919 0.7977559 0.8113749 0.7159091 0.7119202 0.6425247 0.8280741 0.7699237 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp65     shp66     shp67     shp68     shp69     shp70     shp71     shp72 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.9112877 0.7542011 0.8073623 0.8916280 0.7638459 0.7394304 0.7120199 0.8475767 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp73     shp74     shp75     shp76     shp77     shp78     shp79     shp80 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.8467397 0.7998835 0.9270539 0.7642246 0.8594367 0.7209088 0.7989868 0.7535296 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp81     shp82     shp83     shp84     shp85     shp86     shp87     shp88 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.8750936 0.9212785 0.8739192 0.7410993 0.7711573 0.9040280 0.8445564 0.8595617 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp89     shp90     shp91     shp92     shp93     shp94     shp95     shp96 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7544551 0.8765394 0.7649132 0.8566908 0.8672661 0.8905499 0.8167811 0.6780182 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     shp97     shp98     shp99    shp100    shp101    shp102    shp103    shp104 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7720006 0.9065548 0.8954063 0.8858552 0.8706311 0.8762412 0.9093137 0.9002444 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp105    shp106    shp107    shp108    shp109    shp110    shp111    shp112 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.9036831 0.8292070 0.8859845 0.8851778 0.8619118 0.9206441 0.8397867 0.8692543 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp113    shp114    shp115    shp116    shp117    shp118    shp119    shp120 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.8671550 0.7668184 0.8522446 0.7407808 0.7615372 0.7884933 0.9120387 0.8496588 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp121    shp122    shp123    shp124    shp125    shp126    shp127    shp128 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7128952 0.8452803 0.7808519 0.8506531 0.8119996 0.7727404 0.7854347 0.8393396 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp129    shp130    shp131    shp132    shp133    shp134    shp135    shp136 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.8445801 0.7802361 0.7640858 0.8662670 0.7090051 0.8541041 0.7161086 0.7619554 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp137    shp138    shp139    shp140    shp141    shp142    shp143    shp144 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7454238 0.8066868 0.8413141 0.7679260 0.8279943 0.7932280 0.8050323 0.8471870 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp145    shp146    shp147    shp148    shp149    shp150    shp151    shp152 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7967146 0.8006016 0.8237974 0.8582077 0.9160836 0.8401398 0.7995380 0.6738980 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp153    shp154    shp155    shp156    shp157    shp158    shp159    shp160 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7307879 0.7278767 0.8359675 0.8280149 0.8104836 0.7733338 0.8047466 0.6754903 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp161    shp162    shp163    shp164    shp165    shp166    shp167    shp168 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7218993 0.6596433 0.8148563 0.6368536 0.7098642 0.7902415 0.7481063 0.7169491 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp169    shp170    shp171    shp172    shp173    shp174    shp175    shp176 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7126700 0.7845322 0.7388734 0.7834291 0.6949870 0.6693791 0.6995516 0.6978463 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp177    shp178    shp179    shp180    shp181    shp182    shp183    shp184 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7198900 0.7878513 0.8469718 0.7758912 0.7731482 0.6759113 0.7120142 0.6643103 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp185    shp186    shp187    shp188    shp189    shp190    shp191    shp192 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7535931 0.7760557 0.7520940 0.7106488 0.6974563 0.7151895 0.8647945 0.7771309 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp193    shp194    shp195    shp196    shp197    shp198    shp199    shp200 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7450503 0.6718839 0.7454927 0.5912441 0.7118493 0.7229153 0.8140886 0.8216331 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp201    shp202    shp203    shp204    shp205    shp206    shp207    shp208 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7815022 0.6470323 0.6373149 0.5962023 0.6925027 0.7957830 0.6756185 0.7093084 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp209    shp210    shp211    shp212    shp213    shp214    shp215    shp216 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6560775 0.7320395 0.7869578 0.7326762 0.7769385 0.8253959 0.6940959 0.7130844 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp217    shp218    shp219    shp220    shp221    shp222    shp223    shp224 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6848838 0.8305747 0.7472713 0.7586330 0.8380628 0.7593495 0.6286220 0.7498917 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp225    shp226    shp227    shp228    shp229    shp230    shp231    shp232 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7584135 0.7930154 0.7907987 0.7237335 0.8102214 0.8092945 0.7134718 0.8471743 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    shp233    shp234    shp235    shp236    shp237    shp238    shp239    shp240 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.7870556 0.8002813 0.7853021 0.8028798 0.7940435 0.8044962 0.6784667 0.7779515 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -262,7 +268,7 @@ See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

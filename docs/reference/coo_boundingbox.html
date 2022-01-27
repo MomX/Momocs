@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>Calculates coordinates of the bounding box</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coo_boundingbox</span>(<span class='no'>coo</span>)</pre>
+    <pre class="usage"><span class='fu'>coo_boundingbox</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,7 +153,7 @@
 <code><a href='coo_down.html'>coo_down</a>()</code>,
 <code><a href='coo_dxy.html'>coo_dxy</a>()</code>,
 <code><a href='coo_extract.html'>coo_extract</a>()</code>,
-<code><a href='coo_flip.html'>coo_flipx</a>()</code>,
+<code><a href='coo_flipx.html'>coo_flipx</a>()</code>,
 <code><a href='coo_force2close.html'>coo_force2close</a>()</code>,
 <code><a href='coo_interpolate.html'>coo_interpolate</a>()</code>,
 <code><a href='coo_is_closed.html'>coo_is_closed</a>()</code>,
@@ -171,7 +171,7 @@
 <code><a href='coo_samplerr.html'>coo_samplerr</a>()</code>,
 <code><a href='coo_sample.html'>coo_sample</a>()</code>,
 <code><a href='coo_scale.html'>coo_scale</a>()</code>,
-<code><a href='coo_shear.html'>coo_shearx</a>()</code>,
+<code><a href='coo_shearx.html'>coo_shearx</a>()</code>,
 <code><a href='coo_slice.html'>coo_slice</a>()</code>,
 <code><a href='coo_slidedirection.html'>coo_slidedirection</a>()</code>,
 <code><a href='coo_slidegap.html'>coo_slidegap</a>()</code>,
@@ -205,23 +205,27 @@
 <code><a href='coo_width.html'>coo_width</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'>coo_boundingbox</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 4</span><span>
-#&gt;      x0    x1    y0    y1
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>    33   316    14  </span><span style='text-decoration: underline;'>1</span><span>102</div><div class='input'><span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'>coo_boundingbox</span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 40 x 4</span><span>
-#&gt;       x0    x1    y0    y1
-#&gt;  </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>    33   316    14  </span><span style='text-decoration: underline;'>1</span><span>102
-#&gt; </span><span style='color: #555555;'> 2</span><span>    51   312    26  </span><span style='text-decoration: underline;'>1</span><span>020
-#&gt; </span><span style='color: #555555;'> 3</span><span>    48   291    11   654
-#&gt; </span><span style='color: #555555;'> 4</span><span>    90   277    16   822
-#&gt; </span><span style='color: #555555;'> 5</span><span>    36   323    53   939
-#&gt; </span><span style='color: #555555;'> 6</span><span>    58   298    11   617
-#&gt; </span><span style='color: #555555;'> 7</span><span>    54   268     5   870
-#&gt; </span><span style='color: #555555;'> 8</span><span>    40   292    25   790
-#&gt; </span><span style='color: #555555;'> 9</span><span>    67   297    17   759
-#&gt; </span><span style='color: #555555;'>10</span><span>    40   307    21  </span><span style='text-decoration: underline;'>1</span><span>069
-#&gt; </span><span style='color: #555555;'># … with 30 more rows</span><span></div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coo_boundingbox</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      x0    x1    y0    y1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>    33   316    14  <span style='text-decoration: underline;'>1</span>102</span>
+<span class='r-in'><span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coo_boundingbox</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 40 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       x0    x1    y0    y1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span>    33   316    14  <span style='text-decoration: underline;'>1</span>102</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span>    51   312    26  <span style='text-decoration: underline;'>1</span>020</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span>    48   291    11   654</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span>    90   277    16   822</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span>    36   323    53   939</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span>    58   298    11   617</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span>    54   268     5   870</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span>    40   292    25   790</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span>    67   297    17   759</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span>    40   307    21  <span style='text-decoration: underline;'>1</span>069</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 30 more rows</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -237,7 +241,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

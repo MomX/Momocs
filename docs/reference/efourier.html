@@ -76,7 +76,7 @@ Read Details carefully." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ Read Details carefully." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -126,18 +126,18 @@ from a matrix (or a list) of (x; y) coordinates. <code>efourier_norm</code> norm
 Read Details carefully.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>efourier</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)
+<span class='fu'>efourier</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>nb.h</span>, smooth.it <span class='op'>=</span> <span class='fl'>0</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Out</span>
-<span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>nb.h</span>, <span class='kw'>smooth.it</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>efourier</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>nb.h</span>, smooth.it <span class='op'>=</span> <span class='fl'>0</span>, norm <span class='op'>=</span> <span class='cn'>TRUE</span>, start <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>efourier</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>efourier</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>efourier_norm</span>(<span class='no'>ef</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>efourier_norm</span><span class='op'>(</span><span class='va'>ef</span>, start <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,7 +202,7 @@ It is the default option of <code>efourier</code>.</p>
 <p>But here is the pitfall: if your shapes are prone to bad aligments among all
 the first ellipses, this will result in poorly (or even not at all) "homologous" coefficients.
 The shapes particularly prone to this are either (at least roughly) circular and/or with a strong
-bilateral symmetry. You can try to use <code><a href='stack.Coo.html'>stack</a></code> on the <code><a href='Coe.html'>Coe</a></code> object
+bilateral symmetry. You can try to use <code><a href='stack.html'>stack</a></code> on the <code><a href='Coe.html'>Coe</a></code> object
 returned by <code>efourier</code>. Also, and perhaps more explicitely, morphospace usually show a mirroring symmetry,
 typically visible when calculated in some couple of components (usually the first two).</p>
 <p>If you see these  upside-down (or 180 degrees rotated) shapes on the morphospace,
@@ -220,7 +220,7 @@ to minimize any subsequent problems.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Directly borrowed for Claude (2008).</p>
-<p>Silent message and progress bars (if any) with <code><a href='https://rdrr.io/r/base/options.html'>options("verbose"=FALSE)</a></code>.</p>
+<p>Silent message and progress bars (if any) with <code>options("verbose"=FALSE)</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Claude, J. (2008) <em>Morphometrics with R</em>, Use R! series,
@@ -234,49 +234,58 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 <code><a href='efourier_shape.html'>efourier_shape</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># single shape</span>
-<span class='no'>coo</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span>[<span class='fl'>1</span>]
-<span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>coo</span>)</div><div class='input'><span class='no'>ef</span> <span class='kw'>&lt;-</span> <span class='fu'>efourier</span>(<span class='no'>coo</span>, <span class='fl'>12</span>)
-<span class='co'># same but silent</span>
-<span class='fu'>efourier</span>(<span class='no'>coo</span>, <span class='fl'>12</span>, <span class='kw'>norm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; $an
-#&gt;  [1] -143.1142910    5.2925309   22.9922936  -11.3596452  -14.9412217
-#&gt;  [6]   -5.4200881    5.7177112    0.4509076    0.3107020   -3.1633079
-#&gt; [11]    0.2814646    3.4927761
-#&gt; 
-#&gt; $bn
-#&gt;  [1] -13.8501141 -21.8994092  11.4235084  13.5870435 -12.6401807   2.5050679
-#&gt;  [7]   5.1968464  -0.5366171  -1.0431706   1.0823659   2.3427969   0.1022387
-#&gt; 
-#&gt; $cn
-#&gt;  [1]  64.44753053  -3.15375656 -17.96822626   5.76052596   7.17390949
-#&gt;  [6]  -2.98410094  -1.20013013   1.18299684  -0.36305436  -0.46782525
-#&gt; [11]   0.67134872   0.08954658
-#&gt; 
-#&gt; $dn
-#&gt;  [1] -484.90299209   -1.04774048   42.07408510    3.40654863   -9.19128141
-#&gt;  [6]   -2.99359284    0.96722479    2.22582484    0.02026172   -2.26134728
-#&gt; [11]   -0.04679906    0.80569603
-#&gt; 
-#&gt; $ao
-#&gt; [1] 349.02
-#&gt; 
-#&gt; $co
-#&gt; [1] 1080.921
-#&gt; </div><div class='input'><span class='co'># inverse EFT</span>
-<span class='no'>efi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier_i.html'>efourier_i</a></span>(<span class='no'>ef</span>)
-<span class='fu'><a href='coo_draw.html'>coo_draw</a></span>(<span class='no'>efi</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'red'</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>NA</span>)</div><div class='img'><img src='efourier-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># on Out</span>
-<span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='no'>efourier</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>'nb.h' set to 10 (99% harmonic power)</span></div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
-#&gt; --------------------
-#&gt;  - $coe: 5 outlines described, 10 harmonics
-#&gt; <span style='color: #555555;'># A tibble: 5 x 2</span><span>
-#&gt;   type   fake 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>2</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>3</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>4</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>5</span><span> whisky a    </div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># single shape</span></span>
+<span class='r-in'><span class='va'>coo</span> <span class='op'>&lt;-</span> <span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ef</span> <span class='op'>&lt;-</span> <span class='fu'>efourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># same but silent</span></span>
+<span class='r-in'><span class='fu'>efourier</span><span class='op'>(</span><span class='va'>coo</span>, <span class='fl'>12</span>, norm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $an</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -143.1142910    5.2925309   22.9922936  -11.3596452  -14.9412217</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]   -5.4200881    5.7177112    0.4509076    0.3107020   -3.1633079</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11]    0.2814646    3.4927761</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -13.8501141 -21.8994092  11.4235084  13.5870435 -12.6401807   2.5050679</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7]   5.1968464  -0.5366171  -1.0431706   1.0823659   2.3427969   0.1022387</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $cn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  64.44753053  -3.15375656 -17.96822626   5.76052596   7.17390949</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]  -2.98410094  -1.20013013   1.18299684  -0.36305436  -0.46782525</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11]   0.67134872   0.08954658</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $dn</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] -484.90299209   -1.04774048   42.07408510    3.40654863   -9.19128141</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6]   -2.99359284    0.96722479    2.22582484    0.02026172   -2.26134728</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11]   -0.04679906    0.80569603</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $ao</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 349.02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $co</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1080.921</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='co'># inverse EFT</span></span>
+<span class='r-in'><span class='va'>efi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier_i.html'>efourier_i</a></span><span class='op'>(</span><span class='va'>ef</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='coo_draw.html'>coo_draw</a></span><span class='op'>(</span><span class='va'>efi</span>, border<span class='op'>=</span><span class='st'>'red'</span>, col<span class='op'>=</span><span class='cn'>NA</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='efourier-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># on Out</span></span>
+<span class='r-in'><span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>efourier</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'nb.h' set to 10 (99% harmonic power)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An OutCoe object [ elliptical Fourier analysis ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - $coe: 5 outlines described, 10 harmonics</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   type   fake </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> whisky a    </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -292,7 +301,7 @@ two-dimensional outlines. <em>Systematic Biology</em> <b>34</b>: 59-68.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

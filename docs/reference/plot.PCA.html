@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -123,74 +123,74 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for PCA</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='no'>fac</span>,
-  <span class='kw'>xax</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>yax</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"#000000"</span>,
-  <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='no'>col_solarized</span>,
-  <span class='kw'>center.origin</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bg</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"bg"</span>),
-  <span class='kw'>grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>nb.grids</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>morphospace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>pos.shp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"range"</span>, <span class='st'>"full"</span>, <span class='st'>"circle"</span>, <span class='st'>"xy"</span>, <span class='st'>"range_axes"</span>, <span class='st'>"full_axes"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>amp.shp</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>size.shp</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>nb.shp</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>nr.shp</span> <span class='kw'>=</span> <span class='fl'>6</span>,
-  <span class='kw'>nc.shp</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>rotate.shp</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>flipx.shp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>flipy.shp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>pts.shp</span> <span class='kw'>=</span> <span class='fl'>60</span>,
-  <span class='kw'>border.shp</span> <span class='kw'>=</span> <span class='fu'><a href='color_transparency.html'>col_alpha</a></span>(<span class='st'>"#000000"</span>, <span class='fl'>0.5</span>),
-  <span class='kw'>lwd.shp</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>col.shp</span> <span class='kw'>=</span> <span class='fu'><a href='color_transparency.html'>col_alpha</a></span>(<span class='st'>"#000000"</span>, <span class='fl'>0.95</span>),
-  <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ellipses</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>conf.ellipses</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>ellipsesax</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>conf.ellipsesax</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.9</span>),
-  <span class='kw'>lty.ellipsesax</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lwd.ellipsesax</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fl'>2</span>),
-  <span class='kw'>chull</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>chull.lty</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>chull.filled</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>chull.filled.alpha</span> <span class='kw'>=</span> <span class='fl'>0.92</span>,
-  <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>lev.density</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>contour</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>lev.contour</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>n.kde2d</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>delaunay</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>loadings</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labelspoints</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>col.labelspoints</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"fg"</span>),
-  <span class='kw'>cex.labelspoints</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-  <span class='kw'>abbreviate.labelspoints</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>labelsgroups</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cex.labelsgroups</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>rect.labelsgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>abbreviate.labelsgroups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>color.legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>axisnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>axisvar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>unit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>rug</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>x</span>),
-  <span class='kw'>box</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>old.par</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>fac</span>,
+  xax <span class='op'>=</span> <span class='fl'>1</span>,
+  yax <span class='op'>=</span> <span class='fl'>2</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  col <span class='op'>=</span> <span class='st'>"#000000"</span>,
+  pch <span class='op'>=</span> <span class='fl'>20</span>,
+  cex <span class='op'>=</span> <span class='fl'>0.5</span>,
+  palette <span class='op'>=</span> <span class='va'>col_solarized</span>,
+  center.origin <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  zoom <span class='op'>=</span> <span class='fl'>1</span>,
+  xlim <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylim <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bg <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='st'>"bg"</span><span class='op'>)</span>,
+  grid <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  nb.grids <span class='op'>=</span> <span class='fl'>3</span>,
+  morphospace <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  pos.shp <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"range"</span>, <span class='st'>"full"</span>, <span class='st'>"circle"</span>, <span class='st'>"xy"</span>, <span class='st'>"range_axes"</span>, <span class='st'>"full_axes"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+  amp.shp <span class='op'>=</span> <span class='fl'>1</span>,
+  size.shp <span class='op'>=</span> <span class='fl'>1</span>,
+  nb.shp <span class='op'>=</span> <span class='fl'>12</span>,
+  nr.shp <span class='op'>=</span> <span class='fl'>6</span>,
+  nc.shp <span class='op'>=</span> <span class='fl'>5</span>,
+  rotate.shp <span class='op'>=</span> <span class='fl'>0</span>,
+  flipx.shp <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  flipy.shp <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  pts.shp <span class='op'>=</span> <span class='fl'>60</span>,
+  border.shp <span class='op'>=</span> <span class='fu'><a href='col_transp.html'>col_alpha</a></span><span class='op'>(</span><span class='st'>"#000000"</span>, <span class='fl'>0.5</span><span class='op'>)</span>,
+  lwd.shp <span class='op'>=</span> <span class='fl'>1</span>,
+  col.shp <span class='op'>=</span> <span class='fu'><a href='col_transp.html'>col_alpha</a></span><span class='op'>(</span><span class='st'>"#000000"</span>, <span class='fl'>0.95</span><span class='op'>)</span>,
+  stars <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ellipses <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  conf.ellipses <span class='op'>=</span> <span class='fl'>0.5</span>,
+  ellipsesax <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  conf.ellipsesax <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>0.9</span><span class='op'>)</span>,
+  lty.ellipsesax <span class='op'>=</span> <span class='fl'>1</span>,
+  lwd.ellipsesax <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>,
+  chull <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  chull.lty <span class='op'>=</span> <span class='fl'>1</span>,
+  chull.filled <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  chull.filled.alpha <span class='op'>=</span> <span class='fl'>0.92</span>,
+  density <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  lev.density <span class='op'>=</span> <span class='fl'>20</span>,
+  contour <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  lev.contour <span class='op'>=</span> <span class='fl'>3</span>,
+  n.kde2d <span class='op'>=</span> <span class='fl'>100</span>,
+  delaunay <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  loadings <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labelspoints <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  col.labelspoints <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='st'>"fg"</span><span class='op'>)</span>,
+  cex.labelspoints <span class='op'>=</span> <span class='fl'>0.6</span>,
+  abbreviate.labelspoints <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  labelsgroups <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  cex.labelsgroups <span class='op'>=</span> <span class='fl'>0.8</span>,
+  rect.labelsgroups <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  abbreviate.labelsgroups <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  color.legend <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  axisnames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axisvar <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  unit <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  eigen <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  rug <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  box <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  old.par <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -481,111 +481,112 @@ More importantly, as of early 2018, I plan I complete rewrite of
     <div class='dont-index'><p><a href='plot.LDA.html'>plot.LDA</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)
-<span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>bot.f</span>)
-
-<span class='co'>### Morphospace options</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='kw'>pos.shp</span><span class='kw'>=</span><span class='st'>"full"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='kw'>pos.shp</span><span class='kw'>=</span><span class='st'>"range"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='kw'>pos.shp</span><span class='kw'>=</span><span class='st'>"xy"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='kw'>pos.shp</span><span class='kw'>=</span><span class='st'>"circle"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='kw'>pos.shp</span><span class='kw'>=</span><span class='st'>"range_axes"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='kw'>pos.shp</span><span class='kw'>=</span><span class='st'>"full_axes"</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='kw'>morpho</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-
-<span class='co'>### Passing factors to plot.PCA</span>
-<span class='co'># 3 equivalent methods</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='st'>"type"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, <span class='fl'>1</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bot.p</span>, ~<span class='no'>type</span>)
-
-<span class='co'># let's create a dummy factor of the correct length</span>
-<span class='co'># and another added to the $fac with mutate</span>
-<span class='co'># and a numeric of the correct length</span>
-<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='fl'>20</span>))
-<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='fl'>20</span>))
-<span class='no'>bot</span> <span class='kw'>%&lt;&gt;%</span> <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='kw'>cs</span><span class='kw'>=</span><span class='fu'><a href='coo_centsize.html'>coo_centsize</a></span>(<span class='no'>.</span>), <span class='kw'>z</span><span class='kw'>=</span><span class='no'>z</span>)
-<span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='no'>efourier</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span>
-<span class='co'># so bp contains type, cs (numeric) and z; not f</span>
-<span class='co'># yet f can be passed on the fly</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='no'>f</span>)
-<span class='co'># numeric fac are allowed</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='st'>"cs"</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>color.legend</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='co'># formula allows combinations of factors</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, ~<span class='no'>type</span>+<span class='no'>z</span>)
-
-<span class='co'>### other morphometric approaches works the same</span>
-<span class='co'># open curves</span>
-<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='npoly.html'>npoly</a></span>(<span class='no'>olea</span>, <span class='fl'>5</span>)
-<span class='no'>op.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>op</span>)
-<span class='no'>op.p</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>op.p</span>, ~ <span class='no'>domes</span> + <span class='no'>var</span>, <span class='kw'>morpho</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='co'># use of formula</span>
-
-<span class='co'># landmarks</span>
-<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
-<span class='no'>wpp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>wp</span>)
-<span class='no'>wpp</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>wpp</span>, <span class='fl'>1</span>)
-
-<span class='co'># traditionnal measurements</span>
-<span class='no'>flower</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fl'>1</span>)
-
-<span class='co'># plot.PCA can be used after a PCA</span>
-<span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>], <span class='kw'>fac</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>)  <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fl'>1</span>)
-
-<span class='co'>### Cosmetic options</span>
-<span class='co'># window</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>zoom</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='kw'>zoom</span><span class='kw'>=</span><span class='fl'>0.5</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='kw'>center.origin</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>grid</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-
-<span class='co'># colors</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>) <span class='co'># globally</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#00FF00"</span>, <span class='st'>"#0000FF"</span>)) <span class='co'># for every level</span>
-<span class='co'># a color vector of the right length</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#00FF00"</span>, <span class='st'>"#0000FF"</span>), <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>20</span>))
-<span class='co'># a color vector of the right length, mixign Rcolor names (not a good idea though)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#00FF00"</span>, <span class='st'>"forestgreen"</span>), <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>20</span>))
-
-
-<span class='co'># ellipses</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>conf.ellipsesax</span><span class='kw'>=</span><span class='fl'>2</span>/<span class='fl'>3</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>ellipsesax</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>ellipsesax</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ellipses</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-
-<span class='co'># stars</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>stars</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>ellipsesax</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-
-<span class='co'># convex hulls</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>chull</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>chull.lty</span><span class='kw'>=</span><span class='fl'>3</span>)
-
-<span class='co'># filled convex hulls</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>chull.filled</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>chull.filled.alpha</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='kw'>chull.lty</span> <span class='kw'>=</span><span class='fl'>1</span>) <span class='co'># you can omit chull.filled=TRUE</span>
-
-<span class='co'># density kernel</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>density</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>contour</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>lev.contour</span><span class='kw'>=</span><span class='fl'>10</span>)
-
-<span class='co'># delaunay</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>delaunay</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-
-<span class='co'># loadings</span>
-<span class='no'>flower</span> <span class='kw'>%&gt;%</span> <span class='no'>PCA</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fl'>1</span>, <span class='kw'>loadings</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-
-<span class='co'># point/group labelling</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>labelspoint</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='co'># see options for abbreviations</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='fl'>1</span>, <span class='kw'>labelsgroup</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='co'># see options for abbreviations</span>
-
-<span class='co'># clean axes, no rug, no border, random title</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='kw'>axisvar</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>axisnames</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>rug</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>box</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>title</span><span class='kw'>=</span><span class='st'>"random"</span>)
-
-<span class='co'># no eigen</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bp</span>, <span class='kw'>eigen</span><span class='kw'>=</span><span class='fl'>FALSE</span>) <span class='co'># eigen cause troubles to graphical window</span>
-<span class='co'># eigen may causes troubles to the graphical window. you can try old.par = TRUE</span>
-}</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>bot.f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot.p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>bot.f</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>### Morphospace options</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, pos.shp<span class='op'>=</span><span class='st'>"full"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, pos.shp<span class='op'>=</span><span class='st'>"range"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, pos.shp<span class='op'>=</span><span class='st'>"xy"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, pos.shp<span class='op'>=</span><span class='st'>"circle"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, pos.shp<span class='op'>=</span><span class='st'>"range_axes"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, pos.shp<span class='op'>=</span><span class='st'>"full_axes"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, morpho<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>### Passing factors to plot.PCA</span></span>
+<span class='r-in'><span class='co'># 3 equivalent methods</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, <span class='st'>"type"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bot.p</span>, <span class='op'>~</span><span class='va'>type</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># let's create a dummy factor of the correct length</span></span>
+<span class='r-in'><span class='co'># and another added to the $fac with mutate</span></span>
+<span class='r-in'><span class='co'># and a numeric of the correct length</span></span>
+<span class='r-in'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/compound.html'>%&lt;&gt;%</a></span> <span class='fu'><a href='mutate.html'>mutate</a></span><span class='op'>(</span>cs<span class='op'>=</span><span class='fu'><a href='coo_centsize.html'>coo_centsize</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>, z<span class='op'>=</span><span class='va'>z</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bp</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>efourier</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>PCA</span></span>
+<span class='r-in'><span class='co'># so bp contains type, cs (numeric) and z; not f</span></span>
+<span class='r-in'><span class='co'># yet f can be passed on the fly</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='va'>f</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># numeric fac are allowed</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='st'>"cs"</span>, cex<span class='op'>=</span><span class='fl'>3</span>, color.legend<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># formula allows combinations of factors</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='op'>~</span><span class='va'>type</span><span class='op'>+</span><span class='va'>z</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>### other morphometric approaches works the same</span></span>
+<span class='r-in'><span class='co'># open curves</span></span>
+<span class='r-in'><span class='va'>op</span> <span class='op'>&lt;-</span> <span class='fu'><a href='npoly.html'>npoly</a></span><span class='op'>(</span><span class='va'>olea</span>, <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>op.p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>op</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>op.p</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>op.p</span>, <span class='op'>~</span> <span class='va'>domes</span> <span class='op'>+</span> <span class='va'>var</span>, morpho<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># use of formula</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># landmarks</span></span>
+<span class='r-in'><span class='va'>wp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span><span class='op'>(</span><span class='va'>wings</span>, tol<span class='op'>=</span><span class='fl'>1e-4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>wpp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>wp</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>wpp</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>wpp</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># traditionnal measurements</span></span>
+<span class='r-in'><span class='va'>flower</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>PCA</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># plot.PCA can be used after a PCA</span></span>
+<span class='r-in'><span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, fac<span class='op'>=</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span>  <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>### Cosmetic options</span></span>
+<span class='r-in'><span class='co'># window</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, zoom<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, zoom<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, center.origin<span class='op'>=</span><span class='cn'>FALSE</span>, grid<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># colors</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, col<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span> <span class='co'># globally</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#00FF00"</span>, <span class='st'>"#0000FF"</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># for every level</span></span>
+<span class='r-in'><span class='co'># a color vector of the right length</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#00FF00"</span>, <span class='st'>"#0000FF"</span><span class='op'>)</span>, each<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># a color vector of the right length, mixign Rcolor names (not a good idea though)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#00FF00"</span>, <span class='st'>"forestgreen"</span><span class='op'>)</span>, each<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># ellipses</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, conf.ellipsesax<span class='op'>=</span><span class='fl'>2</span><span class='op'>/</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, ellipsesax<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, ellipsesax<span class='op'>=</span><span class='cn'>TRUE</span>, ellipses<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># stars</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, stars<span class='op'>=</span><span class='cn'>TRUE</span>, ellipsesax<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># convex hulls</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, chull<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, chull.lty<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># filled convex hulls</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, chull.filled<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, chull.filled.alpha <span class='op'>=</span> <span class='fl'>0.8</span>, chull.lty <span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='co'># you can omit chull.filled=TRUE</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># density kernel</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, density<span class='op'>=</span><span class='cn'>TRUE</span>, contour<span class='op'>=</span><span class='cn'>TRUE</span>, lev.contour<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># delaunay</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, delaunay<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># loadings</span></span>
+<span class='r-in'><span class='va'>flower</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>PCA</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fl'>1</span>, loadings<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># point/group labelling</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, labelspoint<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># see options for abbreviations</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, <span class='fl'>1</span>, labelsgroup<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># see options for abbreviations</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># clean axes, no rug, no border, random title</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, axisvar<span class='op'>=</span><span class='cn'>FALSE</span>, axisnames<span class='op'>=</span><span class='cn'>FALSE</span>, rug<span class='op'>=</span><span class='cn'>FALSE</span>, box<span class='op'>=</span><span class='cn'>FALSE</span>, title<span class='op'>=</span><span class='st'>"random"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># no eigen</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bp</span>, eigen<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='co'># eigen cause troubles to graphical window</span></span>
+<span class='r-in'><span class='co'># eigen may causes troubles to the graphical window. you can try old.par = TRUE</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -601,7 +602,7 @@ More importantly, as of early 2018, I plan I complete rewrite of
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

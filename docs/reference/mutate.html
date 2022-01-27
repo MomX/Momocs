@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +122,7 @@
     <p>Add new variables to the <code>$fac</code>. See examples and <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>?dplyr::mutate</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mutate</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>mutate</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,36 +163,40 @@
 <code><a href='sample_n.html'>sample_n</a>()</code>,
 <code><a href='select.html'>select</a>()</code>,
 <code><a href='slice.html'>slice</a>()</code>,
-<code><a href='subset.html'>subsetize</a>()</code></p></div>
+<code><a href='subsetize.html'>subsetize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>olea</span></div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 210 curves, 99 +/- 3 coords (in $coo)
-#&gt;   - 4 classifiers (in $fac): 
-#&gt; <span style='color: #555555;'># A tibble: 210 x 4</span><span>
-#&gt;   var   domes view  ind  
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Aglan cult  VD    O10  
-#&gt; </span><span style='color: #555555;'>2</span><span> Aglan cult  VL    O10  
-#&gt; </span><span style='color: #555555;'>3</span><span> Aglan cult  VD    O11  
-#&gt; </span><span style='color: #555555;'>4</span><span> Aglan cult  VL    O11  
-#&gt; </span><span style='color: #555555;'>5</span><span> Aglan cult  VD    O12  
-#&gt; </span><span style='color: #555555;'>6</span><span> Aglan cult  VL    O12  
-#&gt; </span><span style='color: #555555;'># … with 204 more rows</span><span>
-#&gt;   - also: $ldk</div><div class='input'><span class='fu'>mutate</span>(<span class='no'>olea</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>olea</span>)))</div><div class='output co'>#&gt; Opn (curves)
-#&gt;   - 210 curves, 98 +/- 4 coords (in $coo)
-#&gt;   - 5 classifiers (in $fac): 
-#&gt; </span><span style='color: #555555;'># A tibble: 210 x 5</span><span>
-#&gt;   var   domes view  ind   id   
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Aglan cult  VD    O10   1    
-#&gt; </span><span style='color: #555555;'>2</span><span> Aglan cult  VL    O10   2    
-#&gt; </span><span style='color: #555555;'>3</span><span> Aglan cult  VD    O11   3    
-#&gt; </span><span style='color: #555555;'>4</span><span> Aglan cult  VL    O11   4    
-#&gt; </span><span style='color: #555555;'>5</span><span> Aglan cult  VD    O12   5    
-#&gt; </span><span style='color: #555555;'>6</span><span> Aglan cult  VL    O12   6    
-#&gt; </span><span style='color: #555555;'># … with 204 more rows</span><span>
-#&gt;   - also: $ldk</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>olea</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Opn (curves)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 210 curves, 99 +/- 3 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 4 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 210 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   var   domes view  ind  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Aglan cult  VD    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Aglan cult  VL    O10  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Aglan cult  VD    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Aglan cult  VL    O11  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Aglan cult  VD    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Aglan cult  VL    O12  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 204 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+<span class='r-in'><span class='fu'>mutate</span><span class='op'>(</span><span class='va'>olea</span>, id<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>olea</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Opn (curves)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 210 curves, 98 +/- 4 coords (in $coo)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - 5 classifiers (in $fac): </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 210 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   var   domes view  ind   id   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Aglan cult  VD    O10   1    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Aglan cult  VL    O10   2    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Aglan cult  VD    O11   3    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Aglan cult  VL    O11   4    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Aglan cult  VD    O12   5    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Aglan cult  VL    O12   6    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 204 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - also: $ldk</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -208,7 +212,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

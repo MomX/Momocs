@@ -75,7 +75,7 @@ OutCoe, OpnCoe, LdkCoe and TraCoe classes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ OutCoe, OpnCoe, LdkCoe and TraCoe classes." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@ OutCoe, OpnCoe, LdkCoe and TraCoe classes." />
 <code><a href='OutCoe.html'>OutCoe</a></code>, <code><a href='OpnCoe.html'>OpnCoe</a></code>, <code>LdkCoe</code> and <code>TraCoe</code> classes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Coe</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>Coe</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,7 +137,7 @@ OutCoe, OpnCoe, LdkCoe and TraCoe classes." />
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Useful shortcuts are described below. See <code><a href='https://rdrr.io/r/utils/browseVignettes.html'>browseVignettes("Momocs")</a></code> for
+    <p>Useful shortcuts are described below. See <code>browseVignettes("Momocs")</code> for
 a detail of the design behind Momocs' classes.</p>
 <p><code>Coe</code> class is the 'parent' class of the following 'child' classes</p><ul>
 <li><p><code><a href='OutCoe.html'>OutCoe</a></code> for coefficients from closed <b>out</b>lines morphometrics</p></li>
@@ -149,7 +149,7 @@ a detail of the design behind Momocs' classes.</p>
 are all, primarily, <code>Coe</code> objects on which we define generic <em>and</em>
 specific methods. See their respective help pages for more help.</p>
 <p>You can access all the methods available for <code>Coe</code> objects
-with <code><a href='https://rdrr.io/r/utils/methods.html'>methods(class=Coe)</a></code>.</p>
+with <code>methods(class=Coe)</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other classes: 
@@ -162,43 +162,44 @@ with <code><a href='https://rdrr.io/r/utils/methods.html'>methods(class=Coe)</a>
 <code><a href='TraCoe.html'>TraCoe</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># to see all methods for Coe objects.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'Coe'</span>)
-<span class='co'># to see all methods for OutCoe objects.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span>(<span class='kw'>class</span><span class='kw'>=</span><span class='st'>'OutCoe'</span>) <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span>
-
-<span class='no'>bot.f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>)
-<span class='no'>bot.f</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>bot.f</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span>(<span class='no'>bot.f</span>, <span class='st'>"Coe"</span>)
-
-<span class='co'># if you want to work directly on the matrix of coefficients</span>
-<span class='no'>bot.f</span>$<span class='no'>coe</span>
-
-<span class='co'>#getters</span>
-<span class='no'>bot.f</span>[<span class='fl'>1</span>]
-<span class='no'>bot.f</span>[<span class='fl'>1</span>:<span class='fl'>5</span>]
-
-<span class='co'>#setters</span>
-<span class='no'>bot.f</span>[<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>48</span>
-<span class='no'>bot.f</span>[<span class='fl'>1</span>]
-
-<span class='no'>bot.f</span>[<span class='fl'>1</span>:<span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>1</span>:<span class='fl'>48</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>5</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>48</span>, <span class='kw'>byrow</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>bot.f</span>[<span class='fl'>1</span>:<span class='fl'>5</span>]
-
-<span class='co'># An illustration of Momocs design. See also browseVignettes("Momocs")</span>
-<span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='opoly.html'>opoly</a></span>(<span class='no'>olea</span>, <span class='fl'>5</span>)
-<span class='no'>op</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>op</span>)
-<span class='no'>op</span>$<span class='no'>coe</span> <span class='co'># same thing</span>
-
-<span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span>(<span class='no'>wings</span>, <span class='kw'>tol</span><span class='kw'>=</span><span class='fl'>1e-4</span>)
-<span class='no'>wp</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>wp</span>) <span class='co'># for Ldk methods, LdkCoe objects can also be considered as Coo objects</span>
-<span class='co'># so you can apply all Ldk methods available.</span>
-<span class='no'>wp</span>$<span class='no'>coe</span> <span class='co'># Procrustes aligned coordinates</span>
-}</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># to see all methods for Coe objects.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span><span class='op'>(</span>class<span class='op'>=</span><span class='st'>'Coe'</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># to see all methods for OutCoe objects.</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/methods.html'>methods</a></span><span class='op'>(</span>class<span class='op'>=</span><span class='st'>'OutCoe'</span><span class='op'>)</span> <span class='co'># same for OpnCoe, LdkCoe, TraCoe</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>bot.f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>12</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot.f</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>bot.f</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span><span class='op'>(</span><span class='va'>bot.f</span>, <span class='st'>"Coe"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># if you want to work directly on the matrix of coefficients</span></span>
+<span class='r-in'><span class='va'>bot.f</span><span class='op'>$</span><span class='va'>coe</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#getters</span></span>
+<span class='r-in'><span class='va'>bot.f</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>bot.f</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#setters</span></span>
+<span class='r-in'><span class='va'>bot.f</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>48</span></span>
+<span class='r-in'><span class='va'>bot.f</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>bot.f</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>48</span>, nrow<span class='op'>=</span><span class='fl'>5</span>, ncol<span class='op'>=</span><span class='fl'>48</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bot.f</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># An illustration of Momocs design. See also browseVignettes("Momocs")</span></span>
+<span class='r-in'><span class='va'>op</span> <span class='op'>&lt;-</span> <span class='fu'><a href='opoly.html'>opoly</a></span><span class='op'>(</span><span class='va'>olea</span>, <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>op</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>op</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>op</span><span class='op'>$</span><span class='va'>coe</span> <span class='co'># same thing</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>wp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fgProcrustes.html'>fgProcrustes</a></span><span class='op'>(</span><span class='va'>wings</span>, tol<span class='op'>=</span><span class='fl'>1e-4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>wp</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>wp</span><span class='op'>)</span> <span class='co'># for Ldk methods, LdkCoe objects can also be considered as Coo objects</span></span>
+<span class='r-in'><span class='co'># so you can apply all Ldk methods available.</span></span>
+<span class='r-in'><span class='va'>wp</span><span class='op'>$</span><span class='va'>coe</span> <span class='co'># Procrustes aligned coordinates</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -214,7 +215,7 @@ with <code><a href='https://rdrr.io/r/utils/methods.html'>methods(class=Coe)</a>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

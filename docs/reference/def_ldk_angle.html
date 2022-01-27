@@ -75,7 +75,7 @@ Out and Opn objects." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ Out and Opn objects." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,18 +124,18 @@ Out and Opn objects." />
 <a href='Out.html'>Out</a> and <a href='Opn.html'>Opn</a> objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>def_ldk_angle</span>(<span class='no'>coo</span>, <span class='no'>angle</span>)
+    <pre class="usage"><span class='fu'>def_ldk_angle</span><span class='op'>(</span><span class='va'>coo</span>, <span class='va'>angle</span><span class='op'>)</span>
 
-<span class='fu'>def_ldk_direction</span>(<span class='no'>coo</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span>)[<span class='fl'>4</span>])
+<span class='fu'>def_ldk_direction</span><span class='op'>(</span><span class='va'>coo</span>, direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>def_ldk_direction</span>(<span class='no'>coo</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span>)[<span class='fl'>4</span>])
+<span class='fu'>def_ldk_direction</span><span class='op'>(</span><span class='va'>coo</span>, direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Out</span>
-<span class='fu'>def_ldk_direction</span>(<span class='no'>coo</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span>)[<span class='fl'>4</span>])
+<span class='fu'>def_ldk_direction</span><span class='op'>(</span><span class='va'>coo</span>, direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Opn</span>
-<span class='fu'>def_ldk_direction</span>(<span class='no'>coo</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span>)[<span class='fl'>4</span>])</pre>
+<span class='fu'>def_ldk_direction</span><span class='op'>(</span><span class='va'>coo</span>, direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"down"</span>, <span class='st'>"left"</span>, <span class='st'>"up"</span>, <span class='st'>"right"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,18 +163,24 @@ Out and Opn objects." />
 See <a href='def_ldk_tips.html'>def_ldk_tips</a> as well.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># adds a new landmark towards south east</span>
-<span class='no'>hearts</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'># for speed purpose only</span>
-   <span class='fu'>def_ldk_angle</span>(-<span class='no'>pi</span>/<span class='fl'>6</span>) <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>()</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='def_ldk_angle-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># on Out and towards NW and NE here</span>
-<span class='no'>olea</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='co'>#for speed purpose only</span>
-   <span class='fu'>def_ldk_angle</span>(<span class='fl'>3</span>*<span class='no'>pi</span>/<span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'>def_ldk_angle</span>(<span class='no'>pi</span>/<span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
-   <span class='no'>stack</span></div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='def_ldk_angle-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># adds a new landmark towards south east</span></span>
+<span class='r-in'><span class='va'>hearts</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>   <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># for speed purpose only</span></span>
+<span class='r-in'>   <span class='fu'>def_ldk_angle</span><span class='op'>(</span><span class='op'>-</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>6</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='def_ldk_angle-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># on Out and towards NW and NE here</span></span>
+<span class='r-in'><span class='va'>olea</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>   <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'>#for speed purpose only</span></span>
+<span class='r-in'>   <span class='fu'>def_ldk_angle</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>   <span class='fu'>def_ldk_angle</span><span class='op'>(</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>   <span class='va'>stack</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='def_ldk_angle-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -190,7 +196,7 @@ See <a href='def_ldk_tips.html'>def_ldk_tips</a> as well.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

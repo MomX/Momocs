@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,23 +122,23 @@
     <p>Convert between different classes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l2m</span>(<span class='no'>l</span>)
+    <pre class="usage"><span class='fu'>l2m</span><span class='op'>(</span><span class='va'>l</span><span class='op'>)</span>
 
-<span class='fu'>m2l</span>(<span class='no'>m</span>)
+<span class='fu'>m2l</span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 
-<span class='fu'>d2m</span>(<span class='no'>d</span>)
+<span class='fu'>d2m</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
 
-<span class='fu'>m2d</span>(<span class='no'>m</span>)
+<span class='fu'>m2d</span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 
-<span class='fu'>l2a</span>(<span class='no'>l</span>)
+<span class='fu'>l2a</span><span class='op'>(</span><span class='va'>l</span><span class='op'>)</span>
 
-<span class='fu'>a2l</span>(<span class='no'>a</span>)
+<span class='fu'>a2l</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
 
-<span class='fu'>a2m</span>(<span class='no'>a</span>)
+<span class='fu'>a2m</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
 
-<span class='fu'>m2a</span>(<span class='no'>m</span>)
+<span class='fu'>m2a</span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
 
-<span class='fu'>m2ll</span>(<span class='no'>m</span>, <span class='kw'>index</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>m2ll</span><span class='op'>(</span><span class='va'>m</span>, index <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,211 +181,225 @@ useful elsewhere</p>
 <code><a href='export.html'>export</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># matrix/list</span>
-<span class='no'>wings</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'>m2l</span>() <span class='kw'>%T&gt;%</span> <span class='no'>print</span> <span class='kw'>%&gt;%</span>        <span class='co'># matrix to list</span>
-   <span class='fu'>l2m</span>()                       <span class='co'># and back</span></div><div class='output co'>#&gt; $x
-#&gt; [1] -0.4933  0.2645  0.0424 -0.1768
-#&gt; 
-#&gt; $y
-#&gt; [1]  0.0130  0.0261 -0.0966  0.0341
-#&gt; </div><div class='output co'>#&gt;            x       y
-#&gt; [1,] -0.4933  0.0130
-#&gt; [2,]  0.2645  0.0261
-#&gt; [3,]  0.0424 -0.0966
-#&gt; [4,] -0.1768  0.0341</div><div class='input'>
-<span class='co'># data.frame/matrix</span>
-<span class='no'>wings</span>[<span class='fl'>1</span>] <span class='kw'>%&gt;%</span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span>(<span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
-   <span class='fu'>m2d</span>() <span class='kw'>%T&gt;%</span> <span class='no'>print</span> <span class='kw'>%&gt;%</span>        <span class='co'># matrix to data.frame</span>
-   <span class='no'>d2m</span>                         <span class='co'># and back</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 2</span><span>
-#&gt;         x       y
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.493</span><span>   0.013 
-#&gt; </span><span style='color: #555555;'>2</span><span>  0.264   0.026</span><span style='text-decoration: underline;'>1</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span>  0.042</span><span style='text-decoration: underline;'>4</span><span> -</span><span style='color: #BB0000;'>0.096</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.177</span><span>   0.034</span><span style='text-decoration: underline;'>1</span><span></div><div class='output co'>#&gt;            x       y
-#&gt; [1,] -0.4933  0.0130
-#&gt; [2,]  0.2645  0.0261
-#&gt; [3,]  0.0424 -0.0966
-#&gt; [4,] -0.1768  0.0341</div><div class='input'>
- <span class='co'># list/array</span>
- <span class='no'>wings</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>) <span class='kw'>%$%</span>
- <span class='no'>coo</span> <span class='kw'>%&gt;%</span> <span class='no'>l2a</span> <span class='kw'>%T&gt;%</span> <span class='no'>print</span> <span class='kw'>%&gt;%</span>    <span class='co'># list to array</span>
- <span class='no'>a2l</span>                           <span class='co'># and back</span></div><div class='output co'>#&gt; , , AN1
-#&gt; 
-#&gt;          x       y
-#&gt; 1  -0.4933  0.0130
-#&gt; 2  -0.0777  0.0832
-#&gt; 3   0.2231  0.0861
-#&gt; 4   0.2641  0.0462
-#&gt; 5   0.2645  0.0261
-#&gt; 6   0.2471  0.0003
-#&gt; 7   0.2311 -0.0228
-#&gt; 8   0.2040 -0.0452
-#&gt; 9   0.1282 -0.0742
-#&gt; 10  0.0424 -0.0966
-#&gt; 11 -0.0674 -0.1108
-#&gt; 12 -0.4102 -0.0163
-#&gt; 13 -0.3140  0.0318
-#&gt; 14 -0.1768  0.0341
-#&gt; 15  0.0715  0.0509
-#&gt; 16 -0.0540  0.0238
-#&gt; 17  0.0575 -0.0059
-#&gt; 18 -0.1401 -0.0240
-#&gt; 
-#&gt; , , AN2
-#&gt; 
-#&gt;          x       y
-#&gt; 1  -0.4814  0.0135
-#&gt; 2  -0.0058  0.0780
-#&gt; 3   0.2345  0.0644
-#&gt; 4   0.2460  0.0467
-#&gt; 5   0.2487  0.0281
-#&gt; 6   0.2430  0.0115
-#&gt; 7   0.2316 -0.0039
-#&gt; 8   0.1956 -0.0305
-#&gt; 9   0.1462 -0.0545
-#&gt; 10  0.0483 -0.0866
-#&gt; 11 -0.0520 -0.1047
-#&gt; 12 -0.4016 -0.0250
-#&gt; 13 -0.3868  0.0166
-#&gt; 14 -0.1808  0.0229
-#&gt; 15  0.0484  0.0405
-#&gt; 16 -0.0519  0.0164
-#&gt; 17  0.0623 -0.0047
-#&gt; 18 -0.1444 -0.0286
-#&gt; </div><div class='output co'>#&gt; [[1]]
-#&gt;          x       y
-#&gt; 1  -0.4933  0.0130
-#&gt; 2  -0.0777  0.0832
-#&gt; 3   0.2231  0.0861
-#&gt; 4   0.2641  0.0462
-#&gt; 5   0.2645  0.0261
-#&gt; 6   0.2471  0.0003
-#&gt; 7   0.2311 -0.0228
-#&gt; 8   0.2040 -0.0452
-#&gt; 9   0.1282 -0.0742
-#&gt; 10  0.0424 -0.0966
-#&gt; 11 -0.0674 -0.1108
-#&gt; 12 -0.4102 -0.0163
-#&gt; 13 -0.3140  0.0318
-#&gt; 14 -0.1768  0.0341
-#&gt; 15  0.0715  0.0509
-#&gt; 16 -0.0540  0.0238
-#&gt; 17  0.0575 -0.0059
-#&gt; 18 -0.1401 -0.0240
-#&gt; 
-#&gt; [[2]]
-#&gt;          x       y
-#&gt; 1  -0.4814  0.0135
-#&gt; 2  -0.0058  0.0780
-#&gt; 3   0.2345  0.0644
-#&gt; 4   0.2460  0.0467
-#&gt; 5   0.2487  0.0281
-#&gt; 6   0.2430  0.0115
-#&gt; 7   0.2316 -0.0039
-#&gt; 8   0.1956 -0.0305
-#&gt; 9   0.1462 -0.0545
-#&gt; 10  0.0483 -0.0866
-#&gt; 11 -0.0520 -0.1047
-#&gt; 12 -0.4016 -0.0250
-#&gt; 13 -0.3868  0.0166
-#&gt; 14 -0.1808  0.0229
-#&gt; 15  0.0484  0.0405
-#&gt; 16 -0.0519  0.0164
-#&gt; 17  0.0623 -0.0047
-#&gt; 18 -0.1444 -0.0286
-#&gt; </div><div class='input'>
- <span class='co'># array/matrix</span>
- <span class='no'>wings</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>) <span class='kw'>%$%</span>
- <span class='fu'>l2a</span>(<span class='no'>coo</span>) <span class='kw'>%&gt;%</span>                  <span class='co'># and array (from a list)</span>
- <span class='no'>a2m</span> <span class='kw'>%T&gt;%</span> <span class='no'>print</span> <span class='kw'>%&gt;%</span>            <span class='co'># to matrix</span>
- <span class='no'>m2a</span>                           <span class='co'># and back</span></div><div class='output co'>#&gt;          x1      x2     x3     x4     x5     x6     x7     x8     x9    x10
-#&gt; AN1 -0.4933 -0.0777 0.2231 0.2641 0.2645 0.2471 0.2311 0.2040 0.1282 0.0424
-#&gt; AN2 -0.4814 -0.0058 0.2345 0.2460 0.2487 0.2430 0.2316 0.1956 0.1462 0.0483
-#&gt;         x11     x12     x13     x14    x15     x16    x17     x18     y1     y2
-#&gt; AN1 -0.0674 -0.4102 -0.3140 -0.1768 0.0715 -0.0540 0.0575 -0.1401 0.0130 0.0832
-#&gt; AN2 -0.0520 -0.4016 -0.3868 -0.1808 0.0484 -0.0519 0.0623 -0.1444 0.0135 0.0780
-#&gt;         y3     y4     y5     y6      y7      y8      y9     y10     y11     y12
-#&gt; AN1 0.0861 0.0462 0.0261 0.0003 -0.0228 -0.0452 -0.0742 -0.0966 -0.1108 -0.0163
-#&gt; AN2 0.0644 0.0467 0.0281 0.0115 -0.0039 -0.0305 -0.0545 -0.0866 -0.1047 -0.0250
-#&gt;        y13    y14    y15    y16     y17     y18
-#&gt; AN1 0.0318 0.0341 0.0509 0.0238 -0.0059 -0.0240
-#&gt; AN2 0.0166 0.0229 0.0405 0.0164 -0.0047 -0.0286</div><div class='output co'>#&gt; , , AN1
-#&gt; 
-#&gt;          x       y
-#&gt; 1  -0.4933  0.0130
-#&gt; 2  -0.0777  0.0832
-#&gt; 3   0.2231  0.0861
-#&gt; 4   0.2641  0.0462
-#&gt; 5   0.2645  0.0261
-#&gt; 6   0.2471  0.0003
-#&gt; 7   0.2311 -0.0228
-#&gt; 8   0.2040 -0.0452
-#&gt; 9   0.1282 -0.0742
-#&gt; 10  0.0424 -0.0966
-#&gt; 11 -0.0674 -0.1108
-#&gt; 12 -0.4102 -0.0163
-#&gt; 13 -0.3140  0.0318
-#&gt; 14 -0.1768  0.0341
-#&gt; 15  0.0715  0.0509
-#&gt; 16 -0.0540  0.0238
-#&gt; 17  0.0575 -0.0059
-#&gt; 18 -0.1401 -0.0240
-#&gt; 
-#&gt; , , AN2
-#&gt; 
-#&gt;          x       y
-#&gt; 1  -0.4814  0.0135
-#&gt; 2  -0.0058  0.0780
-#&gt; 3   0.2345  0.0644
-#&gt; 4   0.2460  0.0467
-#&gt; 5   0.2487  0.0281
-#&gt; 6   0.2430  0.0115
-#&gt; 7   0.2316 -0.0039
-#&gt; 8   0.1956 -0.0305
-#&gt; 9   0.1462 -0.0545
-#&gt; 10  0.0483 -0.0866
-#&gt; 11 -0.0520 -0.1047
-#&gt; 12 -0.4016 -0.0250
-#&gt; 13 -0.3868  0.0166
-#&gt; 14 -0.1808  0.0229
-#&gt; 15  0.0484  0.0405
-#&gt; 16 -0.0519  0.0164
-#&gt; 17  0.0623 -0.0047
-#&gt; 18 -0.1444 -0.0286
-#&gt; </div><div class='input'>
- <span class='co'># m2ll</span>
-<span class='fu'>m2ll</span>(<span class='no'>wings</span>[<span class='fl'>1</span>], <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>5</span>)) <span class='co'># grab slices and coordinates</span></div><div class='output co'>#&gt; [[1]]
-#&gt;         [,1]   [,2]
-#&gt; [1,] -0.4933 0.0130
-#&gt; [2,] -0.0777 0.0832
-#&gt; [3,]  0.2231 0.0861
-#&gt; [4,]  0.2641 0.0462
-#&gt; [5,]  0.2645 0.0261
-#&gt; [6,]  0.2471 0.0003
-#&gt; 
-#&gt; [[2]]
-#&gt;        [,1]    [,2]
-#&gt; [1,] 0.2311 -0.0228
-#&gt; [2,] 0.2040 -0.0452
-#&gt; [3,] 0.1282 -0.0742
-#&gt; [4,] 0.0424 -0.0966
-#&gt; 
-#&gt; [[3]]
-#&gt;         [,1]    [,2]
-#&gt; [1,] -0.0674 -0.1108
-#&gt; [2,] -0.4102 -0.0163
-#&gt; [3,] -0.3140  0.0318
-#&gt; 
-#&gt; [[4]]
-#&gt;         [,1]    [,2]
-#&gt; [1,] -0.1768  0.0341
-#&gt; [2,]  0.0715  0.0509
-#&gt; [3,] -0.0540  0.0238
-#&gt; [4,]  0.0575 -0.0059
-#&gt; [5,] -0.1401 -0.0240
-#&gt; </div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># matrix/list</span></span>
+<span class='r-in'><span class='va'>wings</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>   <span class='fu'>m2l</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/tee.html'>%T&gt;%</a></span> <span class='va'>print</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>        <span class='co'># matrix to list</span></span>
+<span class='r-in'>   <span class='fu'>l2m</span><span class='op'>(</span><span class='op'>)</span>                       <span class='co'># and back</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $x</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -0.4933  0.2645  0.0424 -0.1768</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]  0.0130  0.0261 -0.0966  0.0341</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -0.4933  0.0130</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  0.2645  0.0261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,]  0.0424 -0.0966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] -0.1768  0.0341</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># data.frame/matrix</span></span>
+<span class='r-in'><span class='va'>wings</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='coo_sample.html'>coo_sample</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>   <span class='fu'>m2d</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/tee.html'>%T&gt;%</a></span> <span class='va'>print</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>        <span class='co'># matrix to data.frame</span></span>
+<span class='r-in'>   <span class='va'>d2m</span>                         <span class='co'># and back</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> -<span style='color: #BB0000;'>0.493</span>   0.013 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>  0.264   0.026<span style='text-decoration: underline;'>1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>  0.042<span style='text-decoration: underline;'>4</span> -<span style='color: #BB0000;'>0.096</span><span style='color: #BB0000; text-decoration: underline;'>6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>0.177</span>   0.034<span style='text-decoration: underline;'>1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -0.4933  0.0130</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  0.2645  0.0261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,]  0.0424 -0.0966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] -0.1768  0.0341</span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># list/array</span></span>
+<span class='r-in'> <span class='va'>wings</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/exposition.html'>%$%</a></span></span>
+<span class='r-in'> <span class='va'>coo</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>l2a</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/tee.html'>%T&gt;%</a></span> <span class='va'>print</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>    <span class='co'># list to array</span></span>
+<span class='r-in'> <span class='va'>a2l</span>                           <span class='co'># and back</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> , , AN1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  -0.4933  0.0130</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  -0.0777  0.0832</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   0.2231  0.0861</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   0.2641  0.0462</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   0.2645  0.0261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   0.2471  0.0003</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   0.2311 -0.0228</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   0.2040 -0.0452</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   0.1282 -0.0742</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  0.0424 -0.0966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 -0.0674 -0.1108</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 -0.4102 -0.0163</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 -0.3140  0.0318</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 -0.1768  0.0341</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15  0.0715  0.0509</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 -0.0540  0.0238</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17  0.0575 -0.0059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 -0.1401 -0.0240</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> , , AN2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  -0.4814  0.0135</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  -0.0058  0.0780</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   0.2345  0.0644</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   0.2460  0.0467</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   0.2487  0.0281</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   0.2430  0.0115</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   0.2316 -0.0039</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   0.1956 -0.0305</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   0.1462 -0.0545</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  0.0483 -0.0866</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 -0.0520 -0.1047</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 -0.4016 -0.0250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 -0.3868  0.0166</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 -0.1808  0.0229</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15  0.0484  0.0405</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 -0.0519  0.0164</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17  0.0623 -0.0047</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 -0.1444 -0.0286</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  -0.4933  0.0130</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  -0.0777  0.0832</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   0.2231  0.0861</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   0.2641  0.0462</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   0.2645  0.0261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   0.2471  0.0003</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   0.2311 -0.0228</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   0.2040 -0.0452</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   0.1282 -0.0742</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  0.0424 -0.0966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 -0.0674 -0.1108</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 -0.4102 -0.0163</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 -0.3140  0.0318</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 -0.1768  0.0341</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15  0.0715  0.0509</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 -0.0540  0.0238</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17  0.0575 -0.0059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 -0.1401 -0.0240</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[2]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  -0.4814  0.0135</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  -0.0058  0.0780</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   0.2345  0.0644</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   0.2460  0.0467</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   0.2487  0.0281</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   0.2430  0.0115</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   0.2316 -0.0039</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   0.1956 -0.0305</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   0.1462 -0.0545</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  0.0483 -0.0866</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 -0.0520 -0.1047</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 -0.4016 -0.0250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 -0.3868  0.0166</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 -0.1808  0.0229</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15  0.0484  0.0405</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 -0.0519  0.0164</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17  0.0623 -0.0047</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 -0.1444 -0.0286</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># array/matrix</span></span>
+<span class='r-in'> <span class='va'>wings</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/exposition.html'>%$%</a></span></span>
+<span class='r-in'> <span class='fu'>l2a</span><span class='op'>(</span><span class='va'>coo</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>                  <span class='co'># and array (from a list)</span></span>
+<span class='r-in'> <span class='va'>a2m</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/tee.html'>%T&gt;%</a></span> <span class='va'>print</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>            <span class='co'># to matrix</span></span>
+<span class='r-in'> <span class='va'>m2a</span>                           <span class='co'># and back</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          x1      x2     x3     x4     x5     x6     x7     x8     x9    x10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN1 -0.4933 -0.0777 0.2231 0.2641 0.2645 0.2471 0.2311 0.2040 0.1282 0.0424</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN2 -0.4814 -0.0058 0.2345 0.2460 0.2487 0.2430 0.2316 0.1956 0.1462 0.0483</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         x11     x12     x13     x14    x15     x16    x17     x18     y1     y2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN1 -0.0674 -0.4102 -0.3140 -0.1768 0.0715 -0.0540 0.0575 -0.1401 0.0130 0.0832</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN2 -0.0520 -0.4016 -0.3868 -0.1808 0.0484 -0.0519 0.0623 -0.1444 0.0135 0.0780</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         y3     y4     y5     y6      y7      y8      y9     y10     y11     y12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN1 0.0861 0.0462 0.0261 0.0003 -0.0228 -0.0452 -0.0742 -0.0966 -0.1108 -0.0163</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN2 0.0644 0.0467 0.0281 0.0115 -0.0039 -0.0305 -0.0545 -0.0866 -0.1047 -0.0250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        y13    y14    y15    y16     y17     y18</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN1 0.0318 0.0341 0.0509 0.0238 -0.0059 -0.0240</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AN2 0.0166 0.0229 0.0405 0.0164 -0.0047 -0.0286</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> , , AN1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  -0.4933  0.0130</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  -0.0777  0.0832</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   0.2231  0.0861</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   0.2641  0.0462</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   0.2645  0.0261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   0.2471  0.0003</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   0.2311 -0.0228</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   0.2040 -0.0452</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   0.1282 -0.0742</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  0.0424 -0.0966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 -0.0674 -0.1108</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 -0.4102 -0.0163</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 -0.3140  0.0318</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 -0.1768  0.0341</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15  0.0715  0.0509</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 -0.0540  0.0238</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17  0.0575 -0.0059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 -0.1401 -0.0240</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> , , AN2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          x       y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  -0.4814  0.0135</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  -0.0058  0.0780</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   0.2345  0.0644</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   0.2460  0.0467</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   0.2487  0.0281</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   0.2430  0.0115</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   0.2316 -0.0039</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   0.1956 -0.0305</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   0.1462 -0.0545</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  0.0483 -0.0866</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 -0.0520 -0.1047</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 -0.4016 -0.0250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 -0.3868  0.0166</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 -0.1808  0.0229</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15  0.0484  0.0405</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 -0.0519  0.0164</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17  0.0623 -0.0047</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 -0.1444 -0.0286</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># m2ll</span></span>
+<span class='r-in'><span class='fu'>m2ll</span><span class='op'>(</span><span class='va'>wings</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># grab slices and coordinates</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         [,1]   [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -0.4933 0.0130</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] -0.0777 0.0832</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,]  0.2231 0.0861</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]  0.2641 0.0462</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,]  0.2645 0.0261</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [6,]  0.2471 0.0003</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[2]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        [,1]    [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] 0.2311 -0.0228</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 0.2040 -0.0452</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] 0.1282 -0.0742</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] 0.0424 -0.0966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[3]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         [,1]    [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -0.0674 -0.1108</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] -0.4102 -0.0163</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] -0.3140  0.0318</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[4]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         [,1]    [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] -0.1768  0.0341</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]  0.0715  0.0509</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] -0.0540  0.0238</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]  0.0575 -0.0059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,] -0.1401 -0.0240</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -401,7 +415,7 @@ useful elsewhere</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

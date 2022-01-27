@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,10 +122,10 @@
     <p>Calculates and plots shape variation along Principal Component axes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>PCcontrib</span>(<span class='no'>PCA</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>PCcontrib</span><span class='op'>(</span><span class='va'>PCA</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for PCA</span>
-<span class='fu'>PCcontrib</span>(<span class='no'>PCA</span>, <span class='no'>nax</span>, <span class='kw'>sd.r</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>2</span>, -<span class='fl'>1</span>, -<span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>gap</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>PCcontrib</span><span class='op'>(</span><span class='va'>PCA</span>, <span class='va'>nax</span>, sd.r <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, gap <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,15 +158,21 @@ to 1 (whish should never superimpose shapes), reduce it to get a more compact pl
     <p>(invisibly) a list with <code>gg</code> the ggplot object and <code>shp</code> the list of shapes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bot.p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span>(<span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>bot</span>, <span class='fl'>12</span>))</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='fu'>PCcontrib</span>(<span class='no'>bot.p</span>, <span class='kw'>nax</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `mutate_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `mutate()` instead.</span>
-#&gt; <span class='warning'>See vignette('programming') for more help</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='img'><img src='PCcontrib-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='no'>gg</span> <span class='kw'>&lt;-</span> <span class='fu'>PCcontrib</span>(<span class='no'>bot.p</span>, <span class='kw'>nax</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>8</span>, <span class='kw'>sd.r</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>, -<span class='fl'>3</span>, -<span class='fl'>2</span>, -<span class='fl'>1</span>, -<span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
-<span class='no'>gg</span>$<span class='no'>gg</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>geom_polygon</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='st'>"slategrey"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"black"</span>) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span>(<span class='st'>"A nice title"</span>)
-}</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>bot.p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PCA.html'>PCA</a></span><span class='op'>(</span><span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='fu'>PCcontrib</span><span class='op'>(</span><span class='va'>bot.p</span>, nax<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>`mutate_()` was deprecated in dplyr 0.7.0.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Please use `mutate()` instead.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> See vignette('programming') for more help</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>This warning is displayed once every 8 hours.</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span>
+<span class='r-plt img'><img src='PCcontrib-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>gg</span> <span class='op'>&lt;-</span> <span class='fu'>PCcontrib</span><span class='op'>(</span><span class='va'>bot.p</span>, nax<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span>, sd.r<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>3</span>, <span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>0.5</span>, <span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>gg</span><span class='op'>$</span><span class='va'>gg</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>geom_polygon</a></span><span class='op'>(</span>fill<span class='op'>=</span><span class='st'>"slategrey"</span>, col<span class='op'>=</span><span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span><span class='op'>(</span><span class='st'>"A nice title"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -182,7 +188,7 @@ to 1 (whish should never superimpose shapes), reduce it to get a more compact pl
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

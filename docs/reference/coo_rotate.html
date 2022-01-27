@@ -77,7 +77,7 @@ dividing coordinates by 'scale', translating to the original position." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@ dividing coordinates by 'scale', translating to the original position." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@ assumed to be the centroid size. It involves three steps: centering from current
 dividing coordinates by 'scale', translating to the original position.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coo_rotate</span>(<span class='no'>coo</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>coo_rotate</span><span class='op'>(</span><span class='va'>coo</span>, theta <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,7 +164,7 @@ dividing coordinates by 'scale', translating to the original position.</p>
 <code><a href='coo_down.html'>coo_down</a>()</code>,
 <code><a href='coo_dxy.html'>coo_dxy</a>()</code>,
 <code><a href='coo_extract.html'>coo_extract</a>()</code>,
-<code><a href='coo_flip.html'>coo_flipx</a>()</code>,
+<code><a href='coo_flipx.html'>coo_flipx</a>()</code>,
 <code><a href='coo_force2close.html'>coo_force2close</a>()</code>,
 <code><a href='coo_interpolate.html'>coo_interpolate</a>()</code>,
 <code><a href='coo_is_closed.html'>coo_is_closed</a>()</code>,
@@ -181,7 +181,7 @@ dividing coordinates by 'scale', translating to the original position.</p>
 <code><a href='coo_samplerr.html'>coo_samplerr</a>()</code>,
 <code><a href='coo_sample.html'>coo_sample</a>()</code>,
 <code><a href='coo_scale.html'>coo_scale</a>()</code>,
-<code><a href='coo_shear.html'>coo_shearx</a>()</code>,
+<code><a href='coo_shearx.html'>coo_shearx</a>()</code>,
 <code><a href='coo_slice.html'>coo_slice</a>()</code>,
 <code><a href='coo_slidedirection.html'>coo_slidedirection</a>()</code>,
 <code><a href='coo_slidegap.html'>coo_slidegap</a>()</code>,
@@ -200,10 +200,20 @@ dividing coordinates by 'scale', translating to the original position.</p>
 <code><a href='coo_rotatecenter.html'>coo_rotatecenter</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='no'>bot</span>[<span class='fl'>1</span>])</div><div class='img'><img src='coo_rotate-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span>(<span class='fu'>coo_rotate</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='no'>pi</span>/<span class='fl'>2</span>))</div><div class='img'><img src='coo_rotate-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># on Coo</span>
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice.html'>slice</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>) <span class='co'># for speed sake</span>
-<span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='no'>b</span>)</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_rotate-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='stack.Coo.html'>stack</a></span>(<span class='fu'>coo_rotate</span>(<span class='no'>b</span>, <span class='no'>pi</span>/<span class='fl'>2</span>))</div><div class='output co'>#&gt; <span class='message'>will soon be deprecated, see ?pile</span></div><div class='img'><img src='coo_rotate-4.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='coo_rotate-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='coo_plot.html'>coo_plot</a></span><span class='op'>(</span><span class='fu'>coo_rotate</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='va'>pi</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='coo_rotate-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># on Coo</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span> <span class='co'># for speed sake</span></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='coo_rotate-3.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='fu'>coo_rotate</span><span class='op'>(</span><span class='va'>b</span>, <span class='va'>pi</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
+<span class='r-plt img'><img src='coo_rotate-4.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -219,7 +229,7 @@ dividing coordinates by 'scale', translating to the original position.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

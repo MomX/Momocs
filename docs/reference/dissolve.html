@@ -75,7 +75,7 @@ combine...well combines... this $fac. See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ combine...well combines... this $fac. See examples." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@ combine...well combines... this $fac. See examples." />
 combine...well combines... this <code>$fac</code>. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dissolve</span>(<span class='no'>x</span>, <span class='no'>retain</span>)</pre>
+    <pre class="usage"><span class='fu'>dissolve</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>retain</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,64 +160,79 @@ combine...well combines... this <code>$fac</code>. See examples.</p>
 <code><a href='sample_n.html'>sample_n</a>()</code>,
 <code><a href='select.html'>select</a>()</code>,
 <code><a href='slice.html'>slice</a>()</code>,
-<code><a href='subset.html'>subsetize</a>()</code></p></div>
+<code><a href='subsetize.html'>subsetize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>bot</span>)
-<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>bot</span>, <span class='no'>type</span><span class='kw'>==</span><span class='st'>"whisky"</span>)
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>bot</span>, <span class='no'>type</span><span class='kw'>==</span><span class='st'>"beer"</span>)
-<span class='no'>wf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>w</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span>(<span class='no'>b</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>wbf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='combine.html'>combine</a></span>(<span class='no'>wf</span>, <span class='no'>bf</span>)
-<span class='fu'>dissolve</span>(<span class='no'>wbf</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
-#&gt; --------------------
-#&gt;  - $coe: 20 outlines described, 10 harmonics
-#&gt; <span style='color: #555555;'># A tibble: 20 x 2</span><span>
-#&gt;   type   fake 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>2</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>3</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>4</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>5</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>6</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div><div class='input'><span class='fu'>dissolve</span>(<span class='no'>wbf</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
-#&gt; --------------------
-#&gt;  - $coe: 20 outlines described, 10 harmonics
-#&gt; </span><span style='color: #555555;'># A tibble: 20 x 2</span><span>
-#&gt;   type   fake 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>2</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>3</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>4</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>5</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>6</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div><div class='input'>
-<span class='co'># or using chop (yet combine here makes no sense)</span>
-<span class='no'>bw</span> <span class='kw'>&lt;-</span> <span class='no'>bot</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='chop.html'>chop</a></span>(~<span class='no'>type</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>efourier</span>, <span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='no'>combine</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='output co'>#&gt; <span class='message'>`norm=TRUE` is used and this may be troublesome. See ?efourier</span></div><div class='input'><span class='no'>bw</span> <span class='kw'>%&gt;%</span> <span class='fu'>dissolve</span>(<span class='fl'>1</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
-#&gt; --------------------
-#&gt;  - $coe: 20 outlines described, 10 harmonics
-#&gt; </span><span style='color: #555555;'># A tibble: 20 x 2</span><span>
-#&gt;   type  fake 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>2</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>3</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>4</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>5</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>6</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div><div class='input'><span class='no'>bw</span> <span class='kw'>%&gt;%</span> <span class='fu'>dissolve</span>(<span class='fl'>2</span>)</div><div class='output co'>#&gt; An OutCoe object [ elliptical Fourier analysis ]
-#&gt; --------------------
-#&gt;  - $coe: 20 outlines described, 10 harmonics
-#&gt; </span><span style='color: #555555;'># A tibble: 20 x 2</span><span>
-#&gt;   type  fake 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>2</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>3</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>4</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>5</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'>6</span><span> beer  c    
-#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>bot</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='va'>type</span><span class='op'>==</span><span class='st'>"whisky"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='filter.html'>filter</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='va'>type</span><span class='op'>==</span><span class='st'>"beer"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>wf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>w</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='va'>bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='efourier.html'>efourier</a></span><span class='op'>(</span><span class='va'>b</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='va'>wbf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='combine.html'>combine</a></span><span class='op'>(</span><span class='va'>wf</span>, <span class='va'>bf</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>dissolve</span><span class='op'>(</span><span class='va'>wbf</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An OutCoe object [ elliptical Fourier analysis ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - $coe: 20 outlines described, 10 harmonics</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 20 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   type   fake </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 14 more rows</span></span>
+<span class='r-in'><span class='fu'>dissolve</span><span class='op'>(</span><span class='va'>wbf</span>, <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An OutCoe object [ elliptical Fourier analysis ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - $coe: 20 outlines described, 10 harmonics</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 20 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   type   fake </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 14 more rows</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># or using chop (yet combine here makes no sense)</span></span>
+<span class='r-in'><span class='va'>bw</span> <span class='op'>&lt;-</span> <span class='va'>bot</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='chop.html'>chop</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>type</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>efourier</span>, <span class='fl'>10</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>combine</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> 'norm=TRUE' is used and this may be troublesome. See ?efourier</span>
+<span class='r-in'><span class='va'>bw</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>dissolve</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An OutCoe object [ elliptical Fourier analysis ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - $coe: 20 outlines described, 10 harmonics</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 20 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   type  fake </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 14 more rows</span></span>
+<span class='r-in'><span class='va'>bw</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>dissolve</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> An OutCoe object [ elliptical Fourier analysis ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - $coe: 20 outlines described, 10 harmonics</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 20 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   type  fake </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> beer  c    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 14 more rows</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -233,7 +248,7 @@ combine...well combines... this <code>$fac</code>. See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

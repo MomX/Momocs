@@ -78,7 +78,7 @@ functions with arguments (eg d) have to be passed &quot;entirely&quot;. See exam
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@ functions with arguments (eg d) have to be passed &quot;entirely&quot;. See exam
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -125,12 +125,12 @@ functions with arguments (eg d) have to be passed &quot;entirely&quot;. See exam
     <div class="ref-description">
     <p>Calculates shape descriptors on Coo and other objects.
 Any function that returns a scalar when fed coordinates can be passed
-and naturally those of Momocs (pick some there <code><a href='https://rdrr.io/r/utils/apropos.html'>apropos("coo_")</a></code>). Functions
+and naturally those of Momocs (pick some there <code>apropos("coo_")</code>). Functions
 without arguments (eg <a href='coo_area.html'>coo_area</a>) have to be passed without brackets but
 functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely". See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>measure</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>measure</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,65 +154,75 @@ functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely
 <code><a href='coo_truss.html'>coo_truss</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bm</span> <span class='kw'>&lt;-</span> <span class='fu'>measure</span>(<span class='no'>bot</span>, <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)
-<span class='no'>bm</span></div><div class='output co'>#&gt; A TraCoe object --------------------
-#&gt;  - $coe: 40 shapes described with 2 variables
-#&gt; <span style='color: #555555;'># A tibble: 40 x 2</span><span>
-#&gt;   type   fake 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>2</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>3</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>4</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>5</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'>6</span><span> whisky a    
-#&gt; </span><span style='color: #555555;'># … with 34 more rows</span><span></div><div class='input'><span class='no'>bm</span>$<span class='no'>coe</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 40 x 2</span><span>
-#&gt;       area perim
-#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>234</span><span>515  </span><span style='text-decoration: underline;'>2</span><span>482.
-#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='text-decoration: underline;'>201</span><span>056. </span><span style='text-decoration: underline;'>2</span><span>269.
-#&gt; </span><span style='color: #555555;'> 3</span><span> </span><span style='text-decoration: underline;'>119</span><span>460. </span><span style='text-decoration: underline;'>1</span><span>578.
-#&gt; </span><span style='color: #555555;'> 4</span><span> </span><span style='text-decoration: underline;'>119</span><span>568. </span><span style='text-decoration: underline;'>1</span><span>817.
-#&gt; </span><span style='color: #555555;'> 5</span><span> </span><span style='text-decoration: underline;'>165</span><span>736. </span><span style='text-decoration: underline;'>2</span><span>066.
-#&gt; </span><span style='color: #555555;'> 6</span><span> </span><span style='text-decoration: underline;'>114</span><span>015  </span><span style='text-decoration: underline;'>1</span><span>487.
-#&gt; </span><span style='color: #555555;'> 7</span><span> </span><span style='text-decoration: underline;'>149</span><span>503  </span><span style='text-decoration: underline;'>1</span><span>954.
-#&gt; </span><span style='color: #555555;'> 8</span><span> </span><span style='text-decoration: underline;'>147</span><span>642. </span><span style='text-decoration: underline;'>1</span><span>826.
-#&gt; </span><span style='color: #555555;'> 9</span><span> </span><span style='text-decoration: underline;'>130</span><span>178. </span><span style='text-decoration: underline;'>1</span><span>751.
-#&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='text-decoration: underline;'>219</span><span>548  </span><span style='text-decoration: underline;'>2</span><span>399.
-#&gt; </span><span style='color: #555555;'># … with 30 more rows</span><span></div><div class='input'>
-<span class='co'># how to use arguments, eg with the d() function</span>
-<span class='fu'>measure</span>(<span class='no'>wings</span>, <span class='no'>coo_area</span>, <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>), <span class='fu'><a href='d.html'>d</a></span>(<span class='fl'>4</span>, <span class='fl'>5</span>))</div><div class='output co'>#&gt; A TraCoe object --------------------
-#&gt;  - $coe: 127 shapes described with 3 variables
-#&gt; </span><span style='color: #555555;'># A tibble: 127 x 1</span><span>
-#&gt;   group
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> AN   
-#&gt; </span><span style='color: #555555;'>2</span><span> AN   
-#&gt; </span><span style='color: #555555;'>3</span><span> AN   
-#&gt; </span><span style='color: #555555;'>4</span><span> AN   
-#&gt; </span><span style='color: #555555;'>5</span><span> AN   
-#&gt; </span><span style='color: #555555;'>6</span><span> AN   
-#&gt; </span><span style='color: #555555;'># … with 121 more rows</span><span></div><div class='input'>
-<span class='co'># alternatively, to get a data_frame</span>
-<span class='fu'>measure</span>(<span class='no'>bot</span>$<span class='no'>coo</span>, <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 40 x 2</span><span>
-#&gt;       area perim
-#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>234</span><span>515  </span><span style='text-decoration: underline;'>2</span><span>482.
-#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='text-decoration: underline;'>201</span><span>056. </span><span style='text-decoration: underline;'>2</span><span>269.
-#&gt; </span><span style='color: #555555;'> 3</span><span> </span><span style='text-decoration: underline;'>119</span><span>460. </span><span style='text-decoration: underline;'>1</span><span>578.
-#&gt; </span><span style='color: #555555;'> 4</span><span> </span><span style='text-decoration: underline;'>119</span><span>568. </span><span style='text-decoration: underline;'>1</span><span>817.
-#&gt; </span><span style='color: #555555;'> 5</span><span> </span><span style='text-decoration: underline;'>165</span><span>736. </span><span style='text-decoration: underline;'>2</span><span>066.
-#&gt; </span><span style='color: #555555;'> 6</span><span> </span><span style='text-decoration: underline;'>114</span><span>015  </span><span style='text-decoration: underline;'>1</span><span>487.
-#&gt; </span><span style='color: #555555;'> 7</span><span> </span><span style='text-decoration: underline;'>149</span><span>503  </span><span style='text-decoration: underline;'>1</span><span>954.
-#&gt; </span><span style='color: #555555;'> 8</span><span> </span><span style='text-decoration: underline;'>147</span><span>642. </span><span style='text-decoration: underline;'>1</span><span>826.
-#&gt; </span><span style='color: #555555;'> 9</span><span> </span><span style='text-decoration: underline;'>130</span><span>178. </span><span style='text-decoration: underline;'>1</span><span>751.
-#&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='text-decoration: underline;'>219</span><span>548  </span><span style='text-decoration: underline;'>2</span><span>399.
-#&gt; </span><span style='color: #555555;'># … with 30 more rows</span><span></div><div class='input'>
-<span class='co'># and also, to get a data_frame (one row)</span>
-<span class='fu'>measure</span>(<span class='no'>bot</span>[<span class='fl'>1</span>], <span class='no'>coo_area</span>, <span class='no'>coo_perim</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
-#&gt;     area perim
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='text-decoration: underline;'>234</span><span>515 </span><span style='text-decoration: underline;'>2</span><span>482.</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>bm</span> <span class='op'>&lt;-</span> <span class='fu'>measure</span><span class='op'>(</span><span class='va'>bot</span>, <span class='va'>coo_area</span>, <span class='va'>coo_perim</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bm</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A TraCoe object --------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - $coe: 40 shapes described with 2 variables</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 40 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   type   fake </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> whisky a    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 34 more rows</span></span>
+<span class='r-in'><span class='va'>bm</span><span class='op'>$</span><span class='va'>coe</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 40 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       area perim</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> <span style='text-decoration: underline;'>234</span>515  <span style='text-decoration: underline;'>2</span>482.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> <span style='text-decoration: underline;'>201</span>056. <span style='text-decoration: underline;'>2</span>269.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> <span style='text-decoration: underline;'>119</span>460. <span style='text-decoration: underline;'>1</span>578.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> <span style='text-decoration: underline;'>119</span>568. <span style='text-decoration: underline;'>1</span>817.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> <span style='text-decoration: underline;'>165</span>736. <span style='text-decoration: underline;'>2</span>066.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> <span style='text-decoration: underline;'>114</span>015  <span style='text-decoration: underline;'>1</span>487.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> <span style='text-decoration: underline;'>149</span>503  <span style='text-decoration: underline;'>1</span>954.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> <span style='text-decoration: underline;'>147</span>642. <span style='text-decoration: underline;'>1</span>826.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> <span style='text-decoration: underline;'>130</span>178. <span style='text-decoration: underline;'>1</span>751.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> <span style='text-decoration: underline;'>219</span>548  <span style='text-decoration: underline;'>2</span>399.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 30 more rows</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># how to use arguments, eg with the d() function</span></span>
+<span class='r-in'><span class='fu'>measure</span><span class='op'>(</span><span class='va'>wings</span>, <span class='va'>coo_area</span>, <span class='fu'><a href='d.html'>d</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='d.html'>d</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A TraCoe object --------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  - $coe: 127 shapes described with 3 variables</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 127 × 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   group</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> AN   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> AN   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> AN   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> AN   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> AN   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> AN   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 121 more rows</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># alternatively, to get a data_frame</span></span>
+<span class='r-in'><span class='fu'>measure</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>$</span><span class='va'>coo</span>, <span class='va'>coo_area</span>, <span class='va'>coo_perim</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 40 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       area perim</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> <span style='text-decoration: underline;'>234</span>515  <span style='text-decoration: underline;'>2</span>482.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> <span style='text-decoration: underline;'>201</span>056. <span style='text-decoration: underline;'>2</span>269.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> <span style='text-decoration: underline;'>119</span>460. <span style='text-decoration: underline;'>1</span>578.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> <span style='text-decoration: underline;'>119</span>568. <span style='text-decoration: underline;'>1</span>817.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> <span style='text-decoration: underline;'>165</span>736. <span style='text-decoration: underline;'>2</span>066.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> <span style='text-decoration: underline;'>114</span>015  <span style='text-decoration: underline;'>1</span>487.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> <span style='text-decoration: underline;'>149</span>503  <span style='text-decoration: underline;'>1</span>954.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> <span style='text-decoration: underline;'>147</span>642. <span style='text-decoration: underline;'>1</span>826.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> <span style='text-decoration: underline;'>130</span>178. <span style='text-decoration: underline;'>1</span>751.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> <span style='text-decoration: underline;'>219</span>548  <span style='text-decoration: underline;'>2</span>399.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 30 more rows</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># and also, to get a data_frame (one row)</span></span>
+<span class='r-in'><span class='fu'>measure</span><span class='op'>(</span><span class='va'>bot</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='va'>coo_area</span>, <span class='va'>coo_perim</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     area perim</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> <span style='text-decoration: underline;'>234</span>515 <span style='text-decoration: underline;'>2</span>482.</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -228,7 +238,7 @@ functions with arguments (eg <a href='d.html'>d</a>) have to be passed "entirely
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
