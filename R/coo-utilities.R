@@ -955,7 +955,7 @@ coo_slide.default <- function(coo, id, ldk) {
     return(coo)
   }
   n <- nrow(coo)
-  slided.rows <- c(id:n, 1:(id - 1))
+  slided.rows <- unique(c(id:n, 1:(id - 1)))
   return(coo[slided.rows, ])
 }
 
@@ -1772,11 +1772,17 @@ coo_likely_clockwise <- function(coo)
 #' @rdname coo_likely_clockwise
 #' @export
 coo_likely_clockwise.default <- function(coo){
-  res <- numeric(nrow(coo)-1)
-  for (i in seq_along(res)){
-    res[i] <- (coo[i+1, 1] - coo[i, 1]) * (coo[i+1, 2] - coo[i, 2])
-  }
-  sum(res)>0
+  # it uses, complex numbers, polar coordinates and
+  # the rolling difference in argument.
+ coo %>%
+    # cartesian to polar
+    coo2cpx() %>%
+    # retrieve argument
+    Arg() %>%
+    # and the diff along successive points
+    diff() %>%
+    # test if on average it is negative
+    `>`(0) %>% mean() %>% `<`(0.5)
 }
 
 #' @rdname coo_likely_clockwise

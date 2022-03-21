@@ -111,7 +111,6 @@ stack.Coo <-
            ldk_confell = FALSE, ldk_contour = FALSE,
            ldk_chull = FALSE, ldk_labels = FALSE,
            xy.axis = TRUE, title=substitute(x), ...) {
-    message("will soon be deprecated, see ?pile")
     Coo <- x
     # downsize
     if (is.numeric(coo_sample)) {
@@ -176,7 +175,6 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
                       ldk_links = FALSE, ldk_confell = FALSE, ldk_contour = FALSE,
                       ldk_chull = FALSE, ldk_labels = FALSE,
                       slidings=TRUE, slidings_pch="", xy.axis = TRUE, title=substitute(x), ...) {
-  message("will soon be deprecated, see ?pile")
   Coo <- x
   if (missing(cols)) {
     cols <- rep(NA, length(Coo))

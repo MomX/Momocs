@@ -1,6 +1,9 @@
 # Momocs 1.4.0
 * Fixed several minor bugs, mostly with plotting.
-* I'm currently out of academia but I'm looking for funding to develop MomX. If you have any ideas, ring my bell.
+* coo_slide duplicated the initial point in some cases. Now fixed.
+* coo_likely_clockwise (and friends) now uses complex numbers and is much more robust.
+* removed some annoying messages.
+* I'm currently out of academia and I'm looking for funding to develop MomX. I plan to give some of my time in 2022 and after but if you have any ideas, either directly or through hiring me for consulting, ring my bell!
 
 # Momocs 1.3.3
 * `plot_PCA` and `plot_LDA` did not consistently work within eg `pdf()`. Thanks to Bill fof pointing this. (214)

@@ -1072,7 +1072,6 @@ calibrate_deviations_sfourier <-
       d <- apply(res, 1:2, sd)
       # we prepare a df
       # we prepare a df
-      m %>% tibble::as_tibble() %>% seq_along %>%
         lapply(function(i) data.frame(Var1=rownames(m),
                                       Var2=colnames(m)[i],
                                       value=m[,i])) %>%
