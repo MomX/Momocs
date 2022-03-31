@@ -145,10 +145,10 @@ subsetize.Coe <- function(x, subset, ...) {
   e <- substitute(subset)
   retain <- eval(e, Coe$fac, parent.frame())
   Coe2 <- Coe
-  Coe2$coe <- Coe$coe[retain, ]
+  Coe2$coe <- Coe$coe[retain,, drop=FALSE ]
   #   if (is.numeric(Coe2$coe)) Coe2$coe <- t(as.matrix(Coe2$coe)) # single shp case
   if (ncol(Coe$fac) > 0) {
-    Coe2$fac <- Coe$fac[retain, ]
+    Coe2$fac <- Coe$fac[retain,, drop=FALSE]
     # bloody dirty case where a factor is returned
     if (ncol(Coe$fac)==1 & is.factor(Coe2$fac)) {
       Coe2$fac <- tibble::as_tibble(Coe2$fac)

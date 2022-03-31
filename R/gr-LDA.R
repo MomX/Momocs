@@ -139,8 +139,7 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
                      rug=TRUE,
                      title=substitute(x), box=TRUE, old.par=TRUE, ...
 ){
-  # todo
-  message("will be deprecated soon, see ?plot_LDA")
+
   ##### Preliminaries
   # morphospace deprecated
   morphospace=FALSE

@@ -172,7 +172,7 @@ morphospace2PCA <- function(PCA, xax, yax, pos,
   # we bind together and apply the translation
   df <- dplyr::bind_cols(df_shp, df_trans) %>%
     # we add the two translations
-    dplyr::mutate_(x = quote(x_c + x_t + x_d), y = quote(y_c + y_t + y_d))
+    dplyr::mutate(x = quote(x_c + x_t + x_d), y = quote(y_c + y_t + y_d))
   # %>%
     # and rearrange the columsn (pure cosmetics)
     #select(SHP, shp, shp1, x, y,
