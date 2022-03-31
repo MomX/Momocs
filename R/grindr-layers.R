@@ -280,7 +280,7 @@ plot_PCA <- function(x,
                      axesnames=TRUE, axesvar=TRUE){
   # check ------
   .check(any(class(x)=="PCA"),
-         "only supported on LDA objects")
+         "only supported on PCA objects")
 
   # prepare ---------------------------
   if (missing(f) | is.null(f)){

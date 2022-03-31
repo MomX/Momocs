@@ -19,7 +19,10 @@ opts_chunk$set(eval = TRUE, message=FALSE,
 ```
 
 ## News
-As of Oct. 2018, Momocs is being extensively polished these days and may evolve before its 2.0 release as part of [MomX](http://momx.online).
+
+* As of Apr. 2022, I'm looking for funding and thus time to finish MomX. Some of it below may become obsolete but it's quite often demanded so I brought it back to life.
+
+* As of Oct. 2018, Momocs is being extensively polished these days and may evolve before its 2.0 release as part of [MomX](http://momx.online).
  
 ## Preliminaries
 
@@ -47,7 +50,7 @@ Prior to analysis, Momocs can be used to acquire and manipulate data or to impor
 ### Get, install and use it
 First, of all, let's download the last version of Momocs. You will need to install the `devtools` package - if you do not have it yet - to get it from my [GitHub](http://www.github.com/MomX/Momocs) repository :
 
-  ```{r, eval=FALSE}
+```{r, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("MomX/Momocs")
 ```
@@ -56,9 +59,21 @@ The typical `install_packages("Momocs")` will get you the last CRAN version of M
 
 We can start using Momocs, as long as it has been loaded using:
 
-  ```{r, eval=TRUE, echo=TRUE, message=FALSE}
+```{r, eval=TRUE, echo=TRUE, message=FALSE}
 library(Momocs)
 ```
+
+Future versions of Momocs (and MomX at some point) will totally embrace the tidyverse. My best advice if you're doing regular data science using R and if you do not master it yet is : i) to have a look at it [https://www.tidyverse.org/]() and ii) to have more than a look at it.
+
+*One important point is you use tidyverse or any of its packages (dplyr, purrr, etc.) is to load them **before** Momocs, ie :
+
+```{r, eval=FALSE, echo=TRUE, message=FALSE}
+library(tidyverse)
+library(Momocs)
+```
+
+
+
 
 ## Design
 Keywords used all accross Momocs are introduced here in __bold__.
@@ -175,7 +190,7 @@ shapes[4] %>% cs64 %>% coo_plot() # note the axes
 Have a look to the dedicated vignette with `vignette("Momocs_coo")`.
 
 The most familiar operation can directly be applied on `Coo` objects:
-  ```{r}
+```{r}
 bot %>%
   coo_center %>% coo_scale %>%
   coo_alignxax() %>% coo_slidedirection("up") %T>%
@@ -191,18 +206,18 @@ data(bot)
 bot
 panel(bot, fac="type", names=TRUE)
 stack(bot)
-````
+```
 
 Here, we will illustrate outline analysis with elliptical Fourier transforms (but the less used and tested `rfourier`, `sfourier` and `tfourier` are also implemented).
 
 The idea behind elliptical Fourier transforms is to fit the `x` and `y` coordinates separately, that is the blue and red curves below:
-  ```{r}
+```{r}
 coo_oscillo(bot[1], "efourier")
 ```
 
 Graphically, this is equivalent to fitting Ptolemaic ellipses on the plane, try the following:
 
-  ```{r, eval=FALSE}
+```{r, eval=FALSE}
 Ptolemy(bot[1])
 ```
 
@@ -233,7 +248,7 @@ Now, we can calculate a PCA on the `Coe` object and plot it, along with morphosp
 ```{r}
 bot.p <- PCA(bot.f)
 class(bot.p)        # a PCA object, let's plot it
-plot(bot.p)
+plot_PCA(bot.p)
 ```
 
 Amazing but we will do much better afterwards.
@@ -290,7 +305,7 @@ Now the PCA is done on the combination of two `OpnCoe` objects, each one resulti
 _Landmarks methods are still quite experimental (i.e. not tested extensively)
 
 Let's have a look to graphics facilities and apply a full generalized Procrustes adjustment:
-  ```{r, message=FALSE, echo=TRUE}
+```{r, message=FALSE, echo=TRUE}
 pile(wings)
 options(Momocs_verbose=FALSE) # to silent Momocs
 w.al <- fgProcrustes(wings)
@@ -316,7 +331,7 @@ Traditional morphometrics lose geometries: from the variables, you can't unambig
 
 Momocs provides some basics utilities to work with such objects in the `TraCoe` class. There is not `TraCoo` per se but it can be obtained from any `Coo` with the `measure` method. Let's take the `hearts` dataset that comes from handdrawn heart shapes from my former colleagues at the French Intitute of Pondicherry:
 
-  ```{r}
+```{r}
 hearts
 panel(hearts, fac="aut", names="aut")
 ```
@@ -338,7 +353,7 @@ Such a `TraCoe` is provided in the `flower` dataset which is simply a rearranged
 
 ```{r, eval=FALSE}
 flower
-flower %>% PCA() %>% plot_PCA(~sps)
+flower %>% PCA() %>% plot_PCA(~sp)
 ```
 
 You can build your own `TraCoe` with `coo_scalars`:
@@ -365,7 +380,7 @@ Let's see the main components of shape variability with a Principal Component An
 ```{r}
 bot.p <- PCA(bot.f)
 plot_PCA(bot.p)
-````
+```
 
 Morphological spaces are reconstructed on the fly with `plot.PCA`. We call it `plot.PCA` because it uses the familiar `plot` but on the particular `PCA` class (type `class(bot.p)`). We may want to display the two groups saved in `bot$fac`. Just type the id of the column or its name.
 ```{r}
@@ -373,11 +388,11 @@ plot_PCA(bot.p, ~type) # there are many ways to pass the factor, see ?plot_PCA a
 ```
 
 See `?plot_PCA` for much more complex graphics. And also these helper functions for the `PCA` class:
-  ```{r, eval=FALSE}
+```{r, eval=FALSE}
 scree(bot.p)
 scree_plot(bot.p)
 boxplot(bot.p, 1)
-PCcontrib(bot.p)
+PCcontrib(bot.p, nax = 1:3)
 ```
 
 You can also export the `PCA` object as a `.txt` file (see `?export`) or as a `data_frame` for further use with R with:
@@ -517,17 +532,18 @@ select(olea, -ind)
 ```
 
 And you can pipe those operations: say, we only want dorsal views from domesticated individuals, for a (renamed) 'status' column, and drop the 'ind' column:
-  ```{r}
+```{r}
 olea %>%
   filter(domes=="cult", view=="VD") %>%
   rename(domesticated=domes) %>%
   select(-ind)
 ```
 
-You can also use dplyr verbs on the `fac` directly, eg:
+You can also use dplyr verbs on the `fac` directly (if you load dplyr *before* Momocs, you will not need 'dplyr::') eg:
 ```{r}
-olea$fac %>% dplyr::group_by(var) %>% 
-  dplyr::mutate(n=1:n(), N=n())
+olea$fac %>% 
+  dplyr::group_by(var) %>% 
+  dplyr::mutate(n=1:dplyr::n(), N=dplyr::n())
 ```
 
 If you want to save it, do not forget to reassign it back to the `$fac`: `olea$fac <- olea$fac %>% some_operations` or even `olea$fac %<>% some_operations`.
@@ -566,7 +582,7 @@ Several shortcuts are implemented on `Coo` and `Coe` objects:
 * `$` can access either a shape name or a column name for the `$fac`.
 
 Try the following:
-  ```{r, eval=FALSE}
+```{r, eval=FALSE}
 names(bot)
 length(bot)
 bot[1]
@@ -585,7 +601,7 @@ You can convert from/to array, matrix, list or data.frame with the functions `{a
 
 Imagine you want to import pupfish from `geomorph` as a `Ldk` object:
 
-  ```{r, eval=FALSE}
+```{r, eval=FALSE}
 library(geomorph)
 data(pupfish)
 str(pupfish)

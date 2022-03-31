@@ -3,6 +3,7 @@
 * coo_slide duplicated the initial point in some cases. Now fixed.
 * coo_likely_clockwise (and friends) now uses complex numbers and is much more robust.
 * removed some annoying messages.
+* slice(..., 1) now returns a matrix for $coe, not a numeric ([,,drop=FALSE])
 * I'm currently out of academia and I'm looking for funding to develop MomX. I plan to give some of my time in 2022 and after but if you have any ideas, either directly or through hiring me for consulting, ring my bell!
 
 # Momocs 1.3.3
