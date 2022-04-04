@@ -119,7 +119,7 @@ NULL
 #' identification of isolated modern human molars: testing Procrustes aligned
 #' outlines as a standardization procedure for elliptic fourier analysis.
 #' \emph{American Journal of Physical Anthropology}, 153(2), 314-22. doi:10.1002/ajpa.22428
-#' \url{ https://onlinelibrary.wiley.com/doi/abs/10.1002/ajpa.22428}
+#' see `https://onlinelibrary.wiley.com/doi/abs/10.1002/ajpa.22428`
 #' @family datasets
 NULL
 
@@ -181,7 +181,7 @@ NULL
 #' @format A \link{Out} object 64 coordinates of 30 wood molar outlines.
 #' @source  Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in
 #'  the mandible shape of \emph{Apodemus} wood mice. \emph{Journal of Biogeography} 30:1617-1628.
-#' \url{https://onlinelibrary.wiley.com/doi/full/10.1046/j.1365-2699.2003.00932.x}
+#' see `https://onlinelibrary.wiley.com/doi/full/10.1046/j.1365-2699.2003.00932.x`
 #' @family datasets
 NULL
 

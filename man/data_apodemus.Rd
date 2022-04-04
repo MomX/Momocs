@@ -10,7 +10,7 @@ A \link{Out} object 64 coordinates of 30 wood molar outlines.
 \source{
 Renaud S, Pale JRM, Michaux JR (2003): Adaptive latitudinal trends in
 the mandible shape of \emph{Apodemus} wood mice. \emph{Journal of Biogeography} 30:1617-1628.
-\url{https://onlinelibrary.wiley.com/doi/full/10.1046/j.1365-2699.2003.00932.x}
+see \verb{https://onlinelibrary.wiley.com/doi/full/10.1046/j.1365-2699.2003.00932.x}
 }
 \description{
 Data: Outline coordinates of Apodemus (wood mouse) mandibles

@@ -54,7 +54,7 @@ fac_dispatcher <- function(x, fac){
   if (is.factor(fac))
     return(fac)
   # formula case
-  if (class(fac) == "formula") {
+  if (inherits(fac, "formula")) {
     column_name <- attr(terms(fac), "term.labels")
     if (any(is.na(match(column_name, colnames(x$fac)))))
       stop("formula provided must match with $fac column names")
