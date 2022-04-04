@@ -16,11 +16,8 @@ knitr::opts_chunk$set(
 
 ## Momocs 
 
-**Momocs will soon retire, please see [MomX](https://momx.github.io/MomX/)
-**
-
 <!--Badges -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#retired)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![R build status](https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg)](https://github.com/MomX/Momocs/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)

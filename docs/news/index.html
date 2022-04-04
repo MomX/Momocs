@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,9 +116,32 @@
       <small>Source: <a href='https://github.com/MomX/Momocs/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="momocs-140" class="section level1">
+<h1 class="page-header" data-toc-text="1.4.0">
+<a href="#momocs-140" class="anchor"></a>Momocs 1.4.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed several minor bugs, mostly with plotting.</li>
+<li>coo_slide duplicated the initial point in some cases. Now fixed.</li>
+<li>coo_likely_clockwise (and friends) now uses complex numbers and is much more robust.</li>
+<li>removed some annoying messages.</li>
+<li>slice(…, 1) now returns a matrix for $coe, not a numeric ([,,drop=FALSE])</li>
+<li>I’m currently out of academia and I’m looking for funding to develop MomX. I plan to give some of my time in 2022 and after but if you have any ideas, either directly or through hiring me for consulting, ring my bell!</li>
+</ul>
+</div>
+    <div id="momocs-133" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.3">
+<a href="#momocs-133" class="anchor"></a>Momocs 1.3.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code>plot_PCA</code> and <code>plot_LDA</code> did not consistently work within eg <code><a href="https://rdrr.io/r/grDevices/pdf.html">pdf()</a></code>. Thanks to Bill fof pointing this. (214)</li>
+<li>coo_shearx/y did not return the Coo. Fixed.</li>
+</ul>
+</div>
     <div id="momocs-132" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.2">
-<a href="#momocs-132" class="anchor"></a>Momocs 1.3.2<small> Unreleased </small>
+<a href="#momocs-132" class="anchor"></a>Momocs 1.3.2<small> 2020-10-06 </small>
 </h1>
 <ul>
 <li>Turned remaining <code>return</code> for <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> to please R CMD check</li>
@@ -133,7 +156,7 @@
 <a href="#momocs-131" class="anchor"></a>Momocs 1.3.1<small> Unreleased </small>
 </h1>
 <ul>
-<li>Changed all <code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::as_data_frame</a></code> for <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">tibble::as_tibble</a></code>
+<li>Changed all <code><a href="https://tibble.tidyverse.org/reference/deprecated.html">dplyr::as_data_frame</a></code> for <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">tibble::as_tibble</a></code>
 </li>
 </ul>
 </div>
@@ -186,7 +209,7 @@
 <li>
 <code>morphospace_position</code> and <code>chullfilled</code> in <code>plot_PCA</code> now properly working</li>
 <li>
-<code>verify</code> replaces <code>validate</code> to avoid conflict with <code><a href="https://shiny.rstudio.com/reference/shiny/latest/validate.html">shiny::validate</a></code> (for Momecs)</li>
+<code>verify</code> replaces <code>validate</code> to avoid conflict with <code><a href="https://rdrr.io/pkg/shiny/man/validate.html">shiny::validate</a></code> (for Momecs)</li>
 <li>
 <code>subsetize</code> now exported (again)</li>
 <li>
@@ -221,18 +244,16 @@
 <h3 class="hasAnchor">
 <a href="#new" class="anchor"></a>New</h3>
 <ul>
-<li>new functions: <code>andnow</code> and <code>andnow_method</code> class tells you what to do with this object, and which classes are supported by this function/method.</li>
-<li>new <code>coo_*</code> methods: <code>coo_range</code>, <code>coo_range_enlarge</code>, <code>coo_diffrange</code>, <code>coo_template_relatively</code>. The latter will prepare ground for proper size handling, notably for morphospaces.</li>
-<li>Many <code>coo</code> functions ported to methods and now supporting <code>.Coo</code> directly: <code>coo_angle_edges</code>, <code>coo_angle_tangent</code>, <code>coo_boundingbox</code>, <code>coo_calliper</code>, <code>coo_chull</code>, <code>coo_chull_onion</code>, <code>coo_circularity</code>, <code>coo_circularityharalick</code>, <code>coo_circularity_norm</code>, <code>coo_convexity</code>, <code>coo_dxy</code>, <code>coo_eccentricityboundingbox</code>, <code>coo_eccentricityeigen</code>, <code>coo_elongation</code>, <code>coo_intersect_angle</code>, <code>coo_intersect_direction</code>, <code>coo_intersect_segment</code>, <code>coo_perim</code>, <code>coo_perimcum</code>, <code>coo_perimpts</code>, <code>coo_rectangularity</code>, <code>coo_rectilinearity</code>, <code>coo_scalex</code>, <code>coo_scaley</code>, <code>coo_solidity</code>, <code>coo_truss</code>.</li>
-<li>Palettes are now those colorblind-friendly from RColorBrewer and those, state of the art, virids palettes. See also <code>pal_manual</code>, <code>pal_qual_solarized</code> and <code>pal_seq_grey</code>.</li>
+<li><p>new functions: <code>andnow</code> and <code>andnow_method</code> class tells you what to do with this object, and which classes are supported by this function/method.</p></li>
+<li><p>new <code>coo_*</code> methods: <code>coo_range</code>, <code>coo_range_enlarge</code>, <code>coo_diffrange</code>, <code>coo_template_relatively</code>. The latter will prepare ground for proper size handling, notably for morphospaces.</p></li>
+<li><p>Many <code>coo</code> functions ported to methods and now supporting <code>.Coo</code> directly: <code>coo_angle_edges</code>, <code>coo_angle_tangent</code>, <code>coo_boundingbox</code>, <code>coo_calliper</code>, <code>coo_chull</code>, <code>coo_chull_onion</code>, <code>coo_circularity</code>, <code>coo_circularityharalick</code>, <code>coo_circularity_norm</code>, <code>coo_convexity</code>, <code>coo_dxy</code>, <code>coo_eccentricityboundingbox</code>, <code>coo_eccentricityeigen</code>, <code>coo_elongation</code>, <code>coo_intersect_angle</code>, <code>coo_intersect_direction</code>, <code>coo_intersect_segment</code>, <code>coo_perim</code>, <code>coo_perimcum</code>, <code>coo_perimpts</code>, <code>coo_rectangularity</code>, <code>coo_rectilinearity</code>, <code>coo_scalex</code>, <code>coo_scaley</code>, <code>coo_solidity</code>, <code>coo_truss</code>.</p></li>
+<li><p>Palettes are now those colorblind-friendly from RColorBrewer and those, state of the art, virids palettes. See also <code>pal_manual</code>, <code>pal_qual_solarized</code> and <code>pal_seq_grey</code>.</p></li>
+<li><p><code>dispatch_fac</code> is now behind all <code>fac</code> arguments</p></li>
 <li>
-<code>dispatch_fac</code> is now behind all <code>fac</code> arguments</li>
-<li>
-<code>fgProcrustes</code> now accepts lists</li>
-<li>
-<code>efourier</code> with default <code>norm=TRUE</code> now messages about how wrong it may be</li>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::tibble()</a></code> everywhere pertinent</li>
+<p><code>fgProcrustes</code> now accepts lists</p>
+<h1 id="-efourier-with-default-normtrue-now-messages-about-how-wrong-it-may-be" class="page-header" data-toc-text="1.2.9">* <code>efourier</code><small> 2018-03-22 </small> with default <code>norm=TRUE</code> now messages about how wrong it may be</h1>
+</li>
+<li><p><code><a href="https://tibble.tidyverse.org/reference/tibble.html">dplyr::tibble()</a></code> everywhere pertinent</p></li>
 </ul>
 </div>
 <div id="deprecated" class="section level3">
@@ -302,7 +323,7 @@
 <li>Fixed a bug in <code>LDA</code> when <code>retain=1</code> (#e7704eb)</li>
 <li>Messages homogeneity</li>
 <li>Internals have been lightened</li>
-<li>verbosity and progress bar are now handled via <code><a href="https://rdrr.io/r/base/options.html">options("verbose")</a></code>
+<li>verbosity and progress bar are now handled via <code>options("verbose")</code>
 </li>
 <li>Various minor bugs fixes, see GitHub</li>
 </ul>
@@ -421,7 +442,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

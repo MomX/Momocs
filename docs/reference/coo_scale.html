@@ -235,13 +235,10 @@ by default, the centroid size for <code>coo_scale</code>; 1 for <code>scalex</co
 <span class='r-in'><span class='co'># this also works on Coo objects:</span></span>
 <span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='slice.html'>slice</a></span><span class='op'>(</span><span class='va'>bot</span>, <span class='fl'>5</span><span class='op'>)</span> <span class='co'># for speed sake</span></span>
 <span class='r-in'><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
 <span class='r-plt img'><img src='coo_scale-2.png' alt='' width='700' height='433' /></span>
 <span class='r-in'><span class='va'>b</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>coo_center</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>coo_scale</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>stack</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
 <span class='r-plt img'><img src='coo_scale-3.png' alt='' width='700' height='433' /></span>
 <span class='r-in'><span class='va'>b</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>coo_center</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>coo_scaley</span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='va'>stack</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> will soon be deprecated, see ?pile</span>
 <span class='r-plt img'><img src='coo_scale-4.png' alt='' width='700' height='433' /></span>
 <span class='r-in'><span class='co'>#equivalent to:</span></span>
 <span class='r-in'><span class='co'>#b %&gt;% coo_center %&gt;% coo_scalex(2) %&gt;% stack</span></span>
