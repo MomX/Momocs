@@ -3,12 +3,9 @@
 
 ## Momocs
 
-**Momocs will soon retire, please see
-[MomX](https://momx.github.io/MomX/) **
-
 <!--Badges -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#retired)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![R build
 status](https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg)](https://github.com/MomX/Momocs/actions)
 [![Coverage
@@ -114,7 +111,7 @@ library(Momocs)
 
 ``` r
 devtools::load_all()
-#> Loading Momocs
+#> ℹ Loading Momocs
 #> Registered S3 method overwritten by 'vegan':
 #>   method     from      
 #>   rev.hclust dendextend
@@ -135,9 +132,7 @@ hearts %T>%                    # A toy dataset
 
 ![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->
 
-    #> Warning: `data_frame()` is deprecated as of tibble 1.1.0.
-    #> Please use `tibble()` instead.
-    #> This warning is displayed once every 8 hours.
-    #> Call `lifecycle::last_warnings()` to see where this warning was generated.
+    #> Warning: `guides(<scale> = FALSE)` is deprecated. Please use `guides(<scale> =
+    #> "none")` instead.
 
 ![](README-example-3.png)<!-- -->![](README-example-4.png)<!-- -->
