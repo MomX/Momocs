@@ -22,3 +22,4 @@ stats.R
 old_vignettes
 ^CRAN-RELEASE$
 ^\.github$
+^CRAN-SUBMISSION$

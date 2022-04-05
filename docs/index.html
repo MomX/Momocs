@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -59,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/MomX/Momocs">
+  <a href="https://github.com/MomX/Momocs" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -76,21 +72,23 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="momocs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#momocs" class="anchor"></a>Momocs</h2>
+<div class="section level2">
+<h2 id="momocs">Momocs<a class="anchor" aria-label="anchor" href="#momocs"></a>
+</h2>
 <!--Badges -->
 
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
-<p>The last released version can be installed from <a href="https://CRAN.R-project.org/package=Momocs">CRAN</a> with:</p>
+<p><strong>The tutorial/introduction is back! Download it <a href="https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html" class="external-link">there</a></strong></p>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
+<p>The last released version can be installed from <a href="https://CRAN.R-project.org/package=Momocs" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"Momocs"</span><span class="op">)</span></code></pre></div>
-<p>But I recommend using (and only support) the development version from GitHub with:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Momocs"</span><span class="op">)</span></code></pre></div>
+<p>But I recommend using (and only support) the development version from
+GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"MomX/Momocs"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"MomX/Momocs"</span><span class="op">)</span></code></pre></div>
 <!--
 ## Features
 __Matrices of xy-coordinates__
@@ -158,28 +156,30 @@ __Misc__
 * [Online documentation](http://vbonhomme.github.io/Momocs/)
 -->
 </div>
-<div id="example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h3>
-<p>This is a basic example of a complete analysis doing: inspection, normalization of raw outlines, elliptical Fourier transforms, dimmensionality reduction and classification, using a single line.</p>
+<div class="section level3">
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h3>
+<p>This is a basic example of a complete analysis doing: inspection,
+normalization of raw outlines, elliptical Fourier transforms,
+dimmensionality reduction and classification, using a single line.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MomX/Momocs/">Momocs</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MomX/Momocs/" class="external-link">Momocs</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html">load_all</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ℹ Loading Momocs</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'vegan':</span>
 <span class="co">#&gt;   method     from      </span>
 <span class="co">#&gt;   rev.hclust dendextend</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hearts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html">%T&gt;%</a></span>                    <span class="co"># A toy dataset</span>
-  <span class="fu"><a href="reference/stack.html">stack</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>                  <span class="co"># Take a family picture of raw outlines</span>
-  <span class="fu"><a href="reference/fgProcrustes.html">fgProcrustes</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           <span class="co"># Full generalized Procrustes alignment</span>
-  <span class="fu"><a href="reference/coo_slide.html">coo_slide</a></span><span class="op">(</span>ldk <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html">%T&gt;%</a></span>      <span class="co"># Redefine a robust 1st point between the cheeks</span>
-  <span class="fu"><a href="reference/stack.html">stack</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>                  <span class="co"># Another picture of aligned outlines</span>
-  <span class="fu"><a href="reference/efourier.html">efourier</a></span><span class="op">(</span><span class="fl">6</span>, norm<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co"># Elliptical Fourier Transforms</span>
-  <span class="fu"><a href="reference/PCA.html">PCA</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html">%T&gt;%</a></span>                   <span class="co"># Principal Component Analysis</span>
-  <span class="fu"><a href="reference/plot_PCA.html">plot_PCA</a></span><span class="op">(</span><span class="op">~</span><span class="va">aut</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           <span class="co"># A PC1:2 plot</span>
-  <span class="fu"><a href="reference/LDA.html">LDA</a></span><span class="op">(</span><span class="op">~</span><span class="va">aut</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>                <span class="co"># Linear Discriminant Analysis</span>
+<code class="sourceCode R"><span class="va">hearts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html" class="external-link">%T&gt;%</a></span>                    <span class="co"># A toy dataset</span>
+  <span class="fu"><a href="reference/stack.Coo.html">stack</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                  <span class="co"># Take a family picture of raw outlines</span>
+  <span class="fu"><a href="reference/fgProcrustes.html">fgProcrustes</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>           <span class="co"># Full generalized Procrustes alignment</span>
+  <span class="fu"><a href="reference/coo_slide.html">coo_slide</a></span><span class="op">(</span>ldk <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html" class="external-link">%T&gt;%</a></span>      <span class="co"># Redefine a robust 1st point between the cheeks</span>
+  <span class="fu"><a href="reference/stack.Coo.html">stack</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                  <span class="co"># Another picture of aligned outlines</span>
+  <span class="fu"><a href="reference/efourier.html">efourier</a></span><span class="op">(</span><span class="fl">6</span>, norm<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  <span class="co"># Elliptical Fourier Transforms</span>
+  <span class="fu"><a href="reference/PCA.html">PCA</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html" class="external-link">%T&gt;%</a></span>                   <span class="co"># Principal Component Analysis</span>
+  <span class="fu"><a href="reference/plot_PCA.html">plot_PCA</a></span><span class="op">(</span><span class="op">~</span><span class="va">aut</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>           <span class="co"># A PC1:2 plot</span>
+  <span class="fu"><a href="reference/LDA.html">LDA</a></span><span class="op">(</span><span class="op">~</span><span class="va">aut</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                <span class="co"># Linear Discriminant Analysis</span>
   <span class="fu"><a href="reference/plot_CV.html">plot_CV</a></span><span class="op">(</span><span class="op">)</span>                    <span class="co"># And the confusion matrix after leave one out cross validation</span></code></pre></div>
 <p><img src="README-example-1.png"><!-- --><img src="README-example-2.png"><!-- --></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span></span>
@@ -191,59 +191,65 @@ __Misc__
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=Momocs">https://​cloud.r-project.org/​package=Momocs</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/MomX/Momocs/">https://​github.com/​MomX/​Momocs/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/MomX/Momocs/issues">https://​github.com/​MomX/​Momocs/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=Momocs" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/MomX/Momocs/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/MomX/Momocs/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a> | <a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a>
-</li>
-</ul>
-</div>
-<div class="citation">
-<h2>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html">Citing Momocs</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>
-<a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a> <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Julien Claude <br><small class="roles"> Author </small>  <br><small>(core functions in base R)</small>
+<a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a> | <a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a>
 </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
-<li><a href="https://github.com/MomX/Momocs/actions"><img src="https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/github/MomX/Momocs?branch=master"><img src="https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg" alt="Coverage Status"></a></li>
-<li><a href="http://cran.r-project.org/package=Momocs"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a></li>
+<li><a href="authors.html#citation">Citing Momocs</a></li>
 </ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>
+<a href="http://www.vincentbonhomme.fr" class="external-link">Vincent Bonhomme</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Julien Claude <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
+<li><a href="https://github.com/MomX/Momocs/actions" class="external-link"><img src="https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/github/MomX/Momocs?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg" alt="Coverage Status"></a></li>
+<li><a href="http://cran.r-project.org/package=Momocs" class="external-link"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>, Julien Claude.</p>
+  <p></p>
+<p>Developed by <a href="http://www.vincentbonhomme.fr" class="external-link">Vincent
+Bonhomme</a>, Julien Claude.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>
@@ -251,6 +257,8 @@ __Misc__
 
   
 
+
+  
 
   </body>
 </html>

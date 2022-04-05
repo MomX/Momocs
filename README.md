@@ -10,10 +10,13 @@
 status](https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg)](https://github.com/MomX/Momocs/actions)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
 ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)
 ![CRAN downloads grand
 total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
+
+**The tutorial/introduction is back! Download it
+[there](https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html)**
 
 ### Installation
 
