@@ -73,7 +73,7 @@
 * Palettes are now those colorblind-friendly from RColorBrewer and those, state of the art, virids palettes. See also `pal_manual`, `pal_qual_solarized` and `pal_seq_grey`.
 * `dispatch_fac` is now behind all `fac` arguments
 * `fgProcrustes` now accepts lists
-# * `efourier` with default `norm=TRUE` now messages about how wrong it may be
+* `efourier` with default `norm=TRUE` now messages about how wrong it may be
 * `dplyr::tibble()` everywhere pertinent
 
 ### Deprecated
