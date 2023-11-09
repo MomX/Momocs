@@ -257,7 +257,7 @@ def_ldk.Opn <- def_ldk.Out
 #' A wrapper on \link{coo_intersect_angle} and \link{coo_intersect_direction} for
 #' \link{Out} and \link{Opn} objects.
 #'
-#' @param coo a code{Out} or \code{Opn} object
+#' @param coo a \code{Out} or \code{Opn} object
 #' @param angle \code{numeric} an angle in radians (0 by default).
 #' @param direction \code{character} one of \code{"down", "left", "up", "right"} ("right" by default)
 #' @note any existing ldk will be preserved.

@@ -913,7 +913,7 @@ chc2pix <- function(chc) {
 #' \itemize{
 #' \item \code{001_speciesI_siteA_ind1_dorsalview}
 #' \item \code{002_speciesI_siteA_ind2_lateralview} } etc., this function returns a \link{data.frame}
-#' from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
+#' from it that can be passed to \link{Out}, \link{Opn}, \link{Ldk} objects.
 #'
 #' The number of groups must be consistent across filenames.
 #' @param lf a list (its names are used, except if it is a list from \link{import_tps}

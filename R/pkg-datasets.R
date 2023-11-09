@@ -131,7 +131,7 @@ NULL
 #' @format A \code{TraCoe} object with 150 measurements of 4 variables
 #' (petal + sepal) x (length x width) on 3 species of iris. This dataset is
 #' the classical \link{iris} formatted for Momocs.
-#' @source see link{iris}
+#' @source see \link{iris}
 #' @family datasets
 NULL
 

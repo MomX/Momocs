@@ -1543,7 +1543,7 @@ coo_samplerr.Coo <- function(coo, n) {
 #' along the perimeter of the coordinates provided and keeping the first point
 #'
 #' @inheritParams coo_check
-#' @param n  code{integer}, the number fo points to interpolate.
+#' @param n  \code{integer}, the number fo points to interpolate.
 #' @return a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.
 #' @examples
 #' b5 <- bot %>% slice(1:5) # for speed sake

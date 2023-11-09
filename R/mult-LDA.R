@@ -323,8 +323,7 @@ print.LDA <- function(x, ...) {
 #' used is partley derived from the Revolution Analytics blog post (with their authorization). Thanks to them!
 #' \enumerate{
 #' \item \url{https://en.wikipedia.org/wiki/Precision_and_recall}
-#' \item \url{https://blog.revolutionanalytics.com/2016/03/com_class_eval_metrics_r.html}
-#' \item \url{https://www.r-bloggers.com/2016/03/is-your-classification-model-making-lucky-guesses/}
+#' \item \code{https://blog.revolutionanalytics.com/2016/03/com_class_eval_metrics_r.html}
 #' }
 #' @family multivariate
 #' @examples
