@@ -1,22 +1,21 @@
-citHeader("If you use Momocs in publications, please cite this paper:")
-
-citEntry(entry = "Article",
-  title        = "Momocs: Outline Analysis Using R",
-  author       = personList(as.person("Vincent Bonhomme"),
-                   as.person("Sandrine Picq"),
-                   as.person("Cedric Gaucherel"),
-                   as.person("Julien Claude")),
-  journal      = "Journal of Statistical Software",
-  year         = "2014",
-  volume       = "56",
-  number       = "13",
-  pages        = "1--24",
-  url          = "https://www.jstatsoft.org/v56/i13/",
-
-  textVersion  =
-  paste("Vincent Bonhomme, Sandrine Picq, Cedric Gaucherel, Julien Claude (2014).",
-        "Momocs: Outline Analysis Using R.",
-        "Journal of Statistical Software, 56(13), 1-24.",
-        "URL http://www.jstatsoft.org/v56/i13/.")
-)
-
+bibentry(bibtype     = "Manual",
+         header      = paste("To cite the", sQuote("Momocs"),
+                             "package in publications, please use:"),
+         textversion = paste("Vincent Bonhomme, Sandrine Picq, Cedric Gaucherel, Julien Claude (2014)."),
+        title="Momocs: Outline Analysis Using R",
+        journal      = "Journal of Statistical Software",
+        year         = "2014",
+        volume       = "56",
+        number       = "13",
+        pages        = "1--24",
+        url          = "https://www.jstatsoft.org/v56/i13/",
+        author      = c(person(given = "Vincent", family = "Bonhomme",
+                              role = c("aut", "cre"),
+                              email = "bonhomme.vincent@gmail.com"),
+                         person(given = "Sandrine", family = "Picq",
+                              role = c("aut")),
+                         person(given = "Cédric", family = "Gaucherel",
+                              role = c("aut")),
+                        person(given = "Julien", family = "Claude",
+                              role = c("aut")))
+                              )
