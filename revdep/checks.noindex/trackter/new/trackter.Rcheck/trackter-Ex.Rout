@@ -1,0 +1,610 @@
+
+R version 4.1.3 (2022-03-10) -- "One Push-Up"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "trackter"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('trackter')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("amp.freq")
+> ### * amp.freq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: amp.freq
+> ### Title: Computes amplitude and frequency of wave-like data
+> ### Aliases: amp.freq
+> 
+> ### ** Examples
+> 
+> 
+> #Compute waveform patterns
+> x <- seq(0,pi,0.1)
+> y <- sin(x^1.3*pi)
+> plot(x,y)
+> 
+> amp.freq(x=x,y=y)
+$a
+[1] 0.9936235 0.9906554 0.9931397
+
+$f
+[1] 69.44444
+
+$a.f
+[1] 0.9904598 0.9862815 0.9879148
+
+$snr
+[1] 38.76
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("bearing.xy")
+> ### * bearing.xy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bearing.xy
+> ### Title: Computes the heading between to cartesian points
+> ### Aliases: bearing.xy
+> 
+> ### ** Examples
+> 
+> #example
+> A <- c(0,0)
+> B <- c(-5,5)
+> thet <- bearing.xy(A[1],B[1],A[2],B[2])
+> deg(thet)
+[1] 45
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cosine.ang")
+> ### * cosine.ang
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cosine.ang
+> ### Title: Computes angle between two segments sharing a point.
+> ### Aliases: cosine.ang
+> 
+> ### ** Examples
+> 
+> #a right triangle
+> L=3
+> R=3
+> O=sqrt(L^2+R^2)
+> cosine.ang(L,R,O)
+[1] 1.570796
+> 
+> 
+> 
+> cleanEx()
+> nameEx("dist.2d")
+> ### * dist.2d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dist.2d
+> ### Title: Computes distance between two points in Cartesian space.
+> ### Aliases: dist.2d
+> 
+> ### ** Examples
+> 
+> #Find the lengths of the sides of a tringle and print to plot
+> x <- c(0,3,2)
+> y <- c(0,3,0)
+> plot(x,y)
+> lines(x,y)
+> lines(x[c(1,3)],y[c(1,3)])
+> hyp <- dist.2d(x[1],x[2],y[1],y[2])
+> s1 <- dist.2d(x[1],x[3],y[1],y[3])
+> s2 <- dist.2d(x[2],x[3],y[2],y[3])
+> text(mean(x[1:2],mean(y[2:3])),labels=round(hyp,1))
+> text(mean(x[c(1,3)]),y[1]+0.25,labels=round(s1,1))
+> text(mean(x[c(2:3)]),mean(y[2:3]),labels=round(s2,1))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fin.kin")
+> ### * fin.kin
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fin.kin
+> ### Title: Tracking of fin-like extensions of body contours
+> ### Aliases: fin.kin
+> 
+> ### ** Examples
+> 
+> ###plot pectoral-fin amplitudes of a swimming sunfish
+> ## Not run: 
+> ##D require(ggplot2)
+> ##D 
+> ##D #download example avi video
+> ##D f <- "https://github.com/ckenaley/exampledata/blob/master/sunfish_pect.avi?raw=true"
+> ##D download.file(f,"sunfish.avi")
+> ##D 
+> ##D #extract images with ffmpeg opereations and reduce them to 600 px wide with a filter
+> ##D filt.red <- " -vf scale=600:-1 " #filter
+> ##D vid.to.images2(vid.path="sunfish.avi",filt = filt.red) #extract
+> ##D 
+> ##D #number of frames
+> ##D fr <- length(list.files("images"))
+> ##D #extract contours and other data
+> ##D kin <- kin.simple(image.dir = "images",frames=c(1:fr),thr=0.9,ant.per = 0.25)
+> ##D #fin amplitudes by frame with data.table
+> ##D fin.pos <- c(0.25,.5)
+> ##D fin.dat <- kin$cont[, { f <- fin.kin(data.frame(x=x,y=y),fin.pos =fin.pos);
+> ##D list(amp=f$amp$amp,fin=f$amp$fin,amp.bl=f$amp$amp.bl)},by=list(frame)]
+> ##D p <- ggplot(dat=fin.dat,aes(x=frame,y=amp,col=fin))+geom_line()+theme_classic(15)
+> ##D print(p)
+> ##D 
+> ##D 
+> ##D ## plot body and fin contours of frame 1
+> ##D cont <- data.frame(x=kin$cont[frame==2,list(x,y)]$x,y=kin$cont[frame==2,list(y)]$y)
+> ##D fins <- fin.kin(cont,fin.pos =fin.pos,x.bins=100)
+> ##D 
+> ##D #plot body contour and fins 
+> ##D p <- qplot(data=fins$body,x=x,y=y)+geom_point(data=fins$fin,aes(x,y),col="red",size=3)
+> ##D p+geom_point(data=fins$fin.pts,aes(x,y,shape=pos))+xlim(c(0,kin$dim[1]))+ylim(c(0,kin$dim[2]))
+> ##D 
+> ##D #plot body contour minus fins and the body midline
+> ##D p <- qplot(data=fins$comp,x=x,y=y)+geom_point(data=fins$midline,aes(x,ml.pred),col="red",size=2)
+> ##D p+xlim(c(0,kin$dim[1]))+ylim(c(0,kin$dim[2]))
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fish-shapes")
+> ### * fish-shapes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fishshapes
+> ### Title: Contour data of fish and arbitrary shapes
+> ### Aliases: fishshapes
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> library(Momocs)
+
+Attaching package: ‘Momocs’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+> data(fishshapes)
+> panel(fishshapes)
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:Momocs’
+
+> nameEx("halfwave")
+> ### * halfwave
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: halfwave
+> ### Title: Compute half wavelengths from a sine-like waveform
+> ### Aliases: halfwave
+> 
+> ### ** Examples
+> 
+> 
+> require(ggplot2)
+Loading required package: ggplot2
+> 
+> #Find length of the half waves
+> x <- seq(0,pi,0.01)
+> y <- sin(x^2*pi)
+> qplot(x,y)
+> 
+> #zero method predicting zeros
+> w.z <- halfwave(x,y,method="zeros",fit=TRUE,smoothing="spline")
+> 
+> #plot waveform with detected half waves using fitted 'zeros' method
+> p <- ggplot()+geom_point(aes(x=x,y=y))
+> p <- p+geom_line(data=w.z$names,aes(x=x,y=y,col=wave),alpha=0.4,size=3,inherit.aes=FALSE)
+> p+theme_classic()
+> 
+> #plot lambda as it varies with position
+> qplot(data=w.z$dat,x=pos1,y=l)
+> 
+> #peak-to-trough method
+> w.p <- halfwave(x,y,method="p2t")
+> qplot(data=w.p$names,x=x,y=y,col=wave)
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:ggplot2’
+
+> nameEx("images.to.video")
+> ### * images.to.video
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: images.to.video
+> ### Title: Stitches images into a video file
+> ### Aliases: images.to.video
+> 
+> ### ** Examples
+> 
+> 
+> #make some images
+> 
+> 
+> 
+> cleanEx()
+> nameEx("images.to.video2")
+> ### * images.to.video2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: images.to.video2
+> ### Title: Stitches images from video file passing filters to ffmpeg
+> ### Aliases: images.to.video2
+> 
+> ### ** Examples
+> 
+> 
+> #make some spiralled images and video
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("kin.LDA")
+> ### * kin.LDA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: kin.LDA
+> ### Title: Midline tracking over image sequences with ROI search using LDA
+> ### Aliases: kin.LDA
+> 
+> ### ** Examples
+> 
+> # produce a classic midline waveform plot of swimming 
+> # fish searching a image field with a two fish-like ROIs
+> ## Not run: 
+> ##D require(wesanderson)
+> ##D require(ggplot2)
+> ##D require(data.table)
+> ##D require(dplyr)
+> ##D require(EBImage)
+> ##D 
+> ##D #download example images and place in 'example' subdirectory
+> ##D f <- "https://github.com/ckenaley/exampledata/blob/master/example.zip?raw=true"
+> ##D download.file(f, "temp.zip")
+> ##D unzip("temp.zip")
+> ##D unlink("temp.zip")
+> ##D 
+> ##D #load fishshapes data
+> ##D data(fishshapes)
+> ##D 
+> ##D 
+> ##D kin <- kin.LDA(image.dir = "example",frames=1:20,thr=0.7,
+> ##D               ant.per=.25,enorm=FALSE,show.prog = FALSE,retrain=2,
+> ##D               train.dat = fishshapes,after.train="LDA",edges=FALSE, 
+> ##D               )
+> ##D ml <- kin$midline
+> ##D  #x start at 0
+> ##D ml <-ml[,x2:=x-x[1],by=frame]
+> ##D 
+> ##D #compute instantaneous amplitude of tail (last/rightmost point) and wave crest x position  by frame
+> ##D ml2 <-ml[,.(amp.i=abs(last(wave.y))),by=frame]
+> ##D 
+> ##D ml <- merge(ml,ml2,by="frame") #merge these
+> ##D 
+> ##D pal <- wes_palette("Zissou1", 100, type = "continuous") #"Zissou" color palette
+> ##D p <- ggplot(dat=ml,aes(x=x2,y=wave.y))+theme_classic(15)+scale_color_gradientn(colours = pal)
+> ##D p <- p+geom_line(aes(group=frame,color=amp.i),
+> ##D stat="smooth",method = "loess", size = 1.5,alpha = 0.5)
+> ##D print(p)
+> ##D 
+> ##D 
+> ##D ### Make a video of processed frames
+> ##D 
+> ##D images.to.video2(image.dir="processed_images",
+> ##D vid.name="trout_test",frame.rate=5,qual=100,raw=FALSE)
+> ##D file.exists("trout_test_red.mp4")
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("kin.search")
+> ### * kin.search
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: kin.search
+> ### Title: Midline tracking over image sequences
+> ### Aliases: kin.search
+> 
+> ### ** Examples
+> 
+> 
+> #### plot lot caudal amplitude and produce a classic midline waveform plot of swimming fish	
+> ##A very long example.
+> ## Not run: 
+> ##D 	
+> ##D 
+> ##D #download example images and place in 'example' subdirectory	
+> ##D f <- "https://github.com/ckenaley/exampledata/blob/master/example.zip?raw=true"	
+> ##D 
+> ##D download.file(f, paste0(tempdir(),"/temp.zip"))
+> ##D unzip(paste0(tempdir(),"/temp.zip"), exdir=tempdir())	
+> ##D unlink(paste0(tempdir(),"/temp.zip"))	
+> ##D 
+> ##D dir.create(paste0(tempdir(),"/processed_images"))
+> ##D kin <- kin.search(image.dir =paste0(tempdir(),"/example"),	
+> ##D        search.for = "largest",	
+> ##D       smoothing = "loess",frames=1:50,
+> ##D       out.dir=paste0(tempdir(),"/processed_images"),
+> ##D       show.prog = FALSE,thr = "otsu",	
+> ##D       image.type="bin",smooth=0.4)	
+> ##D 
+> ##D #plot instantaneous amplitude of tail (last/rightmost point) over frames 	
+> ##D p <- ggplot(dat=kin$kin.dat,aes(x=frame,y=amp))+geom_line()+geom_point()+theme_classic(15)
+> ##D print(p)	
+> ##D 	
+> ##D # midline plot	
+> ##D ml <- kin$midline	
+> ##D #leftmost x starts at 0	
+> ##D ml <- ml[,x2:=x-x[1],by=frame]	
+> ##D 
+> ##D ml <- merge(ml,kin$kin.dat[,list(frame,amp)],by="frame") #merge these	
+> ##D 
+> ##D pal <- wes_palette("Zissou1", 100, type = "continuous") #"Zissou" color palette
+> ##D 
+> ##D p <- ggplot(dat=ml,aes(x=x2,y=wave.y))+theme_classic(15)+scale_color_gradientn(colours = pal)	
+> ##D p <- p+geom_line(aes(group=frame,color=amp),stat="smooth",method = "loess", size = 1.5)	
+> ##D print(p)	
+> ##D 	
+> ##D #Make a video of processed frames	
+> ##D 
+> ##D images.to.video2(image.dir=paste0(tempdir(),"/processed_images"),	
+> ##D vid.name="trout_test",out.dir=tempdir(),frame.rate=5,qual=100,raw=FALSE)	
+> ##D file.exists(paste0(tempdir(),"/trout_test_red.mp4"))
+> ##D 
+> ## End(Not run)
+> 
+> ## A very short example.
+> 
+> #retrieve image 
+> i <- EBImage::readImage(system.file("extdata/img", "sunfish_BCF.jpg", package = "trackter"))
+> #create directory and write image to it
+> t <- tempdir()
+> 
+> 
+> dir.create(paste0(t,"/images"))
+> EBImage::writeImage(i,paste0(t,"/images/sunfish001.jpg"),type = "jpeg")
+> 
+> list.files(paste0(t,"/images"))
+[1] "sunfish001.jpg"
+> #run kin.search and save output image to directory
+> kin.i<- kin.search(image.dir = paste0(t,"/images"),smooth=0.7,save = TRUE,out.dir = t)
+> 
+> #plot midline over original image
+> with(kin.i$midline,plot(x,wave.y))
+> 
+> i2 <- EBImage::readImage(paste0(t,"/sunfish001_000.jpg"))
+> EBImage::display(i2,method="raster")
+> 
+> #clean up
+> unlink(paste0(t,"/images"),recursive=TRUE)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("kin.simple")
+> ### * kin.simple
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: kin.simple
+> ### Title: Simplified midline tracking over image sequences
+> ### Aliases: kin.simple
+> 
+> ### ** Examples
+> 
+> #### plot caudal amplitude and produce a classic midline waveform plot of swimming fish	
+> ##A very long example.
+> ## Not run: 
+> ##D 	
+> ##D 
+> ##D #download example images and place in 'example' subdirectory	
+> ##D f <- "https://github.com/ckenaley/exampledata/blob/master/example.zip?raw=true"	
+> ##D 
+> ##D download.file(f, paste0(tempdir(),"/temp.zip"))
+> ##D unzip(paste0(tempdir(),"/temp.zip"), exdir=tempdir())	
+> ##D unlink(paste0(tempdir(),"/temp.zip"))	
+> ##D 
+> ##D dir.create(paste0(tempdir(),"/processed_images"))
+> ##D kin <- kin.simple(image.dir =paste0(tempdir(),"/example"),	
+> ##D       smoothing = "loess",frames=1:50,
+> ##D       out.dir=paste0(tempdir(),"/processed_images"),
+> ##D       show.prog = FALSE,thr = "otsu",	
+> ##D       image.type="bin",smooth=0.4)	
+> ##D 
+> ##D #plot instantaneous amplitude of tail (last/rightmost point) over frames 	
+> ##D p <- ggplot(dat=kin$kin.dat,aes(x=frame,y=amp))+geom_line()+geom_point()+theme_classic(15)	
+> ##D print(p)	
+> ##D 	
+> ##D # midline plot	
+> ##D ml <- kin$midline	
+> ##D #leftmost x starts at 0	
+> ##D ml <- ml[,x2:=x-x[1],by=frame]	
+> ##D 
+> ##D ml <- merge(ml,kin$kin.dat[,list(frame,amp)],by="frame") #merge these	
+> ##D 
+> ##D pal <- wes_palette("Zissou1", 100, type = "continuous") #"Zissou" color palette
+> ##D 
+> ##D p <- ggplot(dat=ml,aes(x=x2,y=wave.y))+theme_classic(15)+scale_color_gradientn(colours = pal)	
+> ##D p <- p+geom_line(aes(group=frame,color=amp),stat="smooth",method = "loess", size = 1.5)	
+> ##D print(p)	
+> ##D 	
+> ##D #Make a video of processed frames	
+> ##D 
+> ##D images.to.video2(image.dir=paste0(tempdir(),"/processed_images"),	
+> ##D vid.name="trout_test",out.dir=tempdir(),frame.rate=5,qual=100,raw=FALSE)	
+> ##D file.exists(paste0(tempdir(),"/trout_test_red.mp4"))
+> ##D 
+> ## End(Not run)
+> 
+> ## A very short example.
+> 
+> #retrieve image 
+> i <- EBImage::readImage(system.file("extdata/img", "sunfish_BCF.jpg", package = "trackter"))
+> #create directory and write image to it
+> t <-tempdir()
+> dir.create(paste0(t,"/images"))
+> EBImage::writeImage(i,paste0(t,"/images/sunfish001.jpg"),type = "jpeg")
+> 
+> #run kin.search and save output image to directory
+> kin.i<- kin.simple(image.dir = paste0(t,"/images"),save = TRUE,out.dir = t)
+> 
+> #plot midline
+> with(kin.i$midline,plot(x,wave.y))
+> i2 <- EBImage::readImage(paste0(t,"/sunfish001_000.jpg"))
+> EBImage::display(i2,method="raster")
+> #clean up
+> unlink(paste0(t,"/images"),recursive=TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vid.to.images")
+> ### * vid.to.images
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vid.to.images
+> ### Title: Extracts images from a video file with ffmpeg
+> ### Aliases: vid.to.images
+> 
+> ### ** Examples
+> 
+> 
+> #make a video with animation package
+> 
+> 
+> 
+> cleanEx()
+> nameEx("vid.to.images2")
+> ### * vid.to.images2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vid.to.images2
+> ### Title: Extracts images from a video file with ffmpeg
+> ### Aliases: vid.to.images2
+> 
+> ### ** Examples
+> 
+> 
+> #make a video with animation package
+> 
+> 
+> 
+> cleanEx()
+> nameEx("wave")
+> ### * wave
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: wave
+> ### Title: Compute wavelengths from a sine-like waveform
+> ### Aliases: wave
+> 
+> ### ** Examples
+> 
+> 
+> require(ggplot2)
+Loading required package: ggplot2
+> #Find length of the full waves
+> x <- seq(0,pi,0.01)
+> y <- sin(x^2*pi)
+> 
+> #zero method
+> w.z <- wave(x,y,method="zeros",smoothing="spline",smooth=0.1)
+> 
+> #plot wave with detected full waves using fitted 'zeros' method
+> p <- ggplot()+geom_point(aes(x=x,y=y))
+> p <- p+geom_line(data=w.z$names,aes(x=x,y=y,col=wave),alpha=0.4,size=3,inherit.aes=FALSE)
+> p+theme_classic()
+> 
+> #plot lambda as it varies with position
+> 
+> qplot(data=w.z$dat,x=pos1,y=l)
+> 
+> #trough-to-trough method
+> w.p <- wave(x,y,method="t2t")
+> 
+> qplot(data=w.p$names,x=x,y=y,col=wave)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+
+detaching ‘package:ggplot2’
+
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  4.339 0.287 5.039 0.002 0.003 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

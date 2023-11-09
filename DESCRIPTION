@@ -1,7 +1,7 @@
 Package: Momocs
 Title: Morphometrics using R
-Version: 1.4.0
-Date: 2022-04-03
+Version: 1.4.1
+Date: 2023-11-09
 Authors@R: c(
        person("Vincent", "Bonhomme", ,"bonhomme.vincent@gmail.com", c("aut", "cre")), 
        person("Julien", "Claude", , , c("aut"), comment = "core functions in base R"))
@@ -32,11 +32,11 @@ Imports:
     MASS,
     progress,
     RColorBrewer,
-    rgeos,
     sp,
+    sf,
     utils,
     vegan,
     tibble
 Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1

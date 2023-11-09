@@ -1,3 +1,6 @@
+# Momocs 1.4.1
+* Removed rgeos dependency so that Momocs can resurect on CRAN
+
 # Momocs 1.4.0
 * Fixed several minor bugs, mostly with plotting.
 * coo_slide duplicated the initial point in some cases. Now fixed.

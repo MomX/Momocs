@@ -1,0 +1,33 @@
+Package: Momocs
+Title: Morphometrics using R
+Version: 1.4.0
+Date: 2022-04-03
+Authors@R: c(
+       person("Vincent", "Bonhomme", ,"bonhomme.vincent@gmail.com", c("aut", "cre")), 
+       person("Julien", "Claude", , , c("aut"), comment = "core functions in base R"))
+Description: The goal of 'Momocs' is to provide a complete, convenient, 
+       reproducible and open-source toolkit for 2D morphometrics.
+       It includes most common 2D morphometrics approaches on outlines, open outlines, 
+       configurations of landmarks, traditional morphometrics, and facilities for data preparation, 
+       manipulation and visualization with a consistent grammar throughout.
+       It allows reproducible, complex morphometrics analyses and other morphometrics approaches 
+       should be easy to plug in, or develop from, on top of this canvas. 
+License: GPL-2 | GPL-3
+Encoding: UTF-8
+URL: https://github.com/MomX/Momocs/
+BugReports: https://github.com/MomX/Momocs/issues
+Depends: R(>= 3.2)
+LazyData: true
+Imports: cluster, dendextend, dplyr, magrittr, geometry, geomorph,
+        ggplot2, graphics, grDevices, jpeg, MASS, progress,
+        RColorBrewer, rgeos, sp, utils, vegan, tibble
+Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
+RoxygenNote: 7.1.2
+NeedsCompilation: no
+Packaged: 2022-04-04 15:59:26 UTC; vbonhomme
+Author: Vincent Bonhomme [aut, cre],
+  Julien Claude [aut] (core functions in base R)
+Maintainer: Vincent Bonhomme <bonhomme.vincent@gmail.com>
+Repository: CRAN
+Date/Publication: 2022-04-04 16:50:02 UTC
+Built: R 4.1.3; ; 2022-04-05 10:29:11 UTC; unix
