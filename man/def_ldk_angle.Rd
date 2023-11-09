@@ -19,7 +19,7 @@ def_ldk_direction(coo, direction = c("down", "left", "up", "right")[4])
 \method{def_ldk_direction}{Opn}(coo, direction = c("down", "left", "up", "right")[4])
 }
 \arguments{
-\item{coo}{a code{Out} or \code{Opn} object}
+\item{coo}{a \code{Out} or \code{Opn} object}
 
 \item{angle}{\code{numeric} an angle in radians (0 by default).}
 

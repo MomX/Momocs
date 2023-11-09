@@ -32,7 +32,7 @@ and with every individual including its belonging levels, e.g.:
 \itemize{
 \item \code{001_speciesI_siteA_ind1_dorsalview}
 \item \code{002_speciesI_siteA_ind2_lateralview} } etc., this function returns a \link{data.frame}
-from it that can be passed to \link{Out}, {Opn}, {Ldk} objects.
+from it that can be passed to \link{Out}, \link{Opn}, \link{Ldk} objects.
 }
 \details{
 The number of groups must be consistent across filenames.

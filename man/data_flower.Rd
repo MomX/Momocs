@@ -10,7 +10,7 @@ A \code{TraCoe} object with 150 measurements of 4 variables
 the classical \link{iris} formatted for Momocs.
 }
 \source{
-see link{iris}
+see \link{iris}
 }
 \description{
 Data: Measurement of iris flowers

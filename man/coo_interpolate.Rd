@@ -9,7 +9,7 @@ coo_interpolate(coo, n)
 \arguments{
 \item{coo}{\code{matrix} of \verb{(x; y)} coordinates or any \link{Coo} object.}
 
-\item{n}{code{integer}, the number fo points to interpolate.}
+\item{n}{\code{integer}, the number fo points to interpolate.}
 }
 \value{
 a \code{matrix} of (x; y) coordinates, or a \link{Coo} object.

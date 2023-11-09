@@ -32,7 +32,7 @@ magnifications. More in the Details section
 The i) case above is straightforward, if 1cm is 500pix long on all your pictures,
 just call \code{rescale(your_Coo, scaling_factor=1/500)} and all coordinates will be in cm.
 
-The ii) second case is more subtle. First you need to code in your /link{Coo} object, in the fac
+The ii) second case is more subtle. First you need to code in your \link{Coo} object, in the fac
 slot, a column named, say "mag", for magnification. Imagine you have 4 magnifications: 0.5, 1, 2 and 5,
 we have to indicate for each magnification, how many pixels stands for how many units in the real world.
 
