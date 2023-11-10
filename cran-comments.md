@@ -5,7 +5,7 @@
 
 ## Before release
 * Followed devtools::release() and satisfied all requests.
-* Still has a MikTex related note and a warning on win-devel because of local functions, yet not exposed to user.
+* Still has a MikTex related note, apparently it's a MikTex related bug.
 
 ## Reverse dependencies
 No breaking change for 1 dependent package.
