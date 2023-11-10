@@ -1,7 +1,7 @@
 # layers ------
 
 # create an empty frame
-#' @export
+
 .frame <- function(xy, xlim=NULL, ylim=NULL, center.origin = FALSE, zoom = 1, bg="white") {
   op <- par(bg=bg)
   on.exit(par(op))
@@ -29,7 +29,7 @@
   }
 }
 
-#' @export
+
 .chessboard <- function(n=50, col="grey98", w){
   # grabs window parameters if not provided
   if (missing(w)) w <- par("usr")
@@ -47,7 +47,7 @@
     rect(xl + g[j], yb[j], xl + g[j] + side, yb[j]+side, col=col, border=NA)
 }
 
-#' @export
+
 .axes_corner <- function(bb, w, col="grey20", signif=2, lwd=0.5, cex=0.5){
   # if required we prettify bb coordinates
   if (is.numeric(signif))
@@ -67,7 +67,7 @@
 }
 
 # grid layer
-#' @export
+
 .grid <- function(nb.grids = 3) {
   m <- max(abs(par("usr")))
   g <- seq(0, m, length = nb.grids)
@@ -88,7 +88,7 @@
 }
 
 # rug
-#' @export
+
 .rug <- function(xy, fac, col) {
 
   xy <- jitter(xy, 5)
@@ -117,7 +117,7 @@
 }
 
 # confidence ellipses
-#' @export
+
 .ellipses <- function(xy, fac, conf, col) {
   nas <- which(is.na(fac))
   if (length(nas)>0){
@@ -139,7 +139,7 @@
 }
 
 # confidence ellipses
-#' @export
+
 .ellipsesax <- function(xy, fac, conf, col, lty = 1, lwd = 1) {
 
   nas <- which(is.na(fac))
@@ -177,7 +177,7 @@
 }
 
 # convex hulls
-#' @export
+
 .chull <- function(coo, fac, col, lty) {
   nas <- which(is.na(fac))
   if (length(nas)>0){
@@ -198,7 +198,7 @@
 }
 
 # filled convex hulls
-#' @export
+
 .chullfilled <- function(coo, fac, col) {
   nas <- which(is.na(fac))
   if (length(nas)>0){
@@ -218,7 +218,7 @@
 
 
 # add labels
-#' @export
+
 .labelsgroups <- function(xy, fac,
                           col, cex = 0.8, rect = TRUE, abbreviate = FALSE) {
   cent <- matrix(NA, nlevels(fac), 2)
@@ -256,7 +256,7 @@
 }
 
 # add 'stars'
-#' @export
+
 .stars <- function(xy, fac, col) {
   col.i <- col_alpha(col, 0.2)
   for (i in seq(along = levels(fac))) {
@@ -271,7 +271,7 @@
 }
 
 # add density
-#' @export
+
 .density <- function(xy, fac, levels, col, transp, n.kde2d = 50) {
   if (missing(fac) | is.null(fac))
     fac <- factor(rep("f", nrow(xy)))
@@ -292,7 +292,7 @@
 }
 
 # add contour lines
-#' @export
+
 .contour <- function(xy, fac, levels, col, transp, n.kde2d = 50) {
   if (missing(fac) | is.null(fac))
     fac <- factor(rep("f", nrow(xy)))
@@ -313,7 +313,7 @@
 }
 
 # add delaunay triangulation
-#' @export
+
 .delaunay <- function(xy, fac, col) {
   if (missing(fac) | is.null(fac))
     fac <- factor(rep("f", nrow(xy)))
@@ -330,7 +330,7 @@
 }
 
 # add loading vectors
-#' @export
+
 .loadings <- function(loadings.mat, d = 1, d.lab = 1.2, col = "red") {
   loadings.mat <- loadings.mat * d
   loadings.lab <- loadings.mat * d.lab
@@ -342,7 +342,7 @@
 
 
 # add eigen
-#' @export
+
 .eigen <- function(ev, xax, yax, ratio = 0.08, ev.names="") {
   op <- par(no.readonly = TRUE)
   #on.exit(par(op))
@@ -368,7 +368,7 @@
 }
 
 # names axes
-#' @export
+
 .axisnames <- function(xax, yax, nax = "PC") {
   cex <- 2/3
   # gx <- strwidth('PCN', cex=cex)/1.5
@@ -381,7 +381,7 @@
 }
 
 # adds var captured
-#' @export
+
 .axisvar <- function(ev, xax, yax) {
   cex <- 0.7
   var <- ev^2
@@ -395,7 +395,7 @@
 }
 
 # adds title to plots
-#' @export
+
 .title <- function(title) {
   # for cases where plot(PCA()) are passed
   if (is.call(title)) title <- as.character(title)[1]
