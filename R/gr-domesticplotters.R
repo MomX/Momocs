@@ -635,7 +635,6 @@ plot_table <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 
 ##### Graphics misc
 
-#' @export
 .grid.sample <- function(..., nside = 10, over = 1) {
   wdw <- apply(rbind(...), 2, range)
   wdw <- coo_scale(wdw, scale = 1/over)
@@ -647,7 +646,6 @@ plot_table <- function(x, fac1, fac2=fac1, rm0 = FALSE){
 }
 
 # returns the size of the graphical window
-#' @export
 .wdw <- function() {
   wdw <- par("usr")
   x <- wdw[2] - wdw[1]
