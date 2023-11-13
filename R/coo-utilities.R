@@ -642,11 +642,9 @@ coo_align.Coo <- function(coo) {
 #' the alignment step. This may solve your problem because coo_calliper orders the \code{$arr.ind} used by
 #' coo_aligncalliper.
 #' @examples
-#' \dontrun{
 #' b <- bot[1]
 #' coo_plot(b)
 #' coo_plot(coo_alignxax(b))
-#' }
 #' @family aligning functions
 #' @family coo_ utilities
 #' @export
@@ -678,7 +676,6 @@ coo_alignxax.Coo <- function(coo) {
 #' @inheritParams coo_check
 #' @return a \code{matrix} of (x; y) coordinates, or any \link{Coo} object.
 #' @examples
-#' \dontrun{
 #' b <- bot[1]
 #' coo_plot(b)
 #' coo_plot(coo_aligncalliper(b))
@@ -686,7 +683,6 @@ coo_alignxax.Coo <- function(coo) {
 #' b <- bot %>% slice(1:5) # for speed sake
 #' bot.al <- coo_aligncalliper(b)
 #' stack(bot.al)
-#' }
 #' @family aligning functions
 #' @family coo_ utilities
 #' @export
@@ -2725,6 +2721,7 @@ coo_calliper.Coo <- function(coo, arr.ind = FALSE) {
 #' @param trim \code{numeric}, the number of coordinates to trim
 #' @family coo_ utilities
 #' @family coo_trimming functions
+#' @return a trimmed shape
 #' @examples
 #' olea[1] %>% coo_sample(12) %T>%
 #'    print() %T>% ldk_plot() %>%
@@ -2750,6 +2747,7 @@ coo_trim.Coo <- function(coo, trim=1){
 #' Removes \code{trim} coordinates from the top of a shape.
 #' @inheritParams coo_check
 #' @param trim \code{numeric}, the number of coordinates to trim
+#' @return a trimmed shape
 #' @family coo_ utilities
 #' @family coo_trimming functions
 #' @examples
@@ -2781,6 +2779,7 @@ coo_trimtop.Coo <- function(coo, trim=1){
 #' Removes \code{trim} coordinates from the bottom of a shape.
 #' @inheritParams coo_check
 #' @param trim \code{numeric}, the number of coordinates to trim
+#' @return a trimmed shape
 #' @family coo_ utilities
 #' @family coo_trimming functions
 #' @examples

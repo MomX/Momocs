@@ -13,6 +13,9 @@ with landmarks inside}
 \item{new_ldk_ids}{a vector of numeric with the ldk to retain \emph{and}
 in the right order (see below)}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Helps reorder and retain landmarks by simply changing the order in which they
 are recorded in the \code{Coo} objects. Note that for \code{Out} and \code{Opn}

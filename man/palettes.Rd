@@ -127,6 +127,9 @@ pal_div(n, transp = 0)
 
 \item{n}{\code{numeric} number of colors}
 }
+\value{
+a palette function
+}
 \description{
 All colorblind friendly RColorBrewer palettes
 recreated without the number of colors limitation

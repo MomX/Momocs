@@ -212,6 +212,9 @@ a matrix of positions. See \link{morphospace_positions}}
 
 \item{...}{useless here, just to fit the generic plot}
 }
+\value{
+a plot
+}
 \description{
 The Momocs' \code{\link{LDA}} plotter with many graphical options.
 }

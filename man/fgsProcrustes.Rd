@@ -12,6 +12,9 @@ fgsProcrustes(x)
 \arguments{
 \item{x}{Ldk object with some \code{$slidings}}
 }
+\value{
+a list
+}
 \description{
 Directly wrapped around \code{geomorph::gpagen}.
 }
@@ -20,11 +23,10 @@ Landmarks methods are the less tested in Momocs. Keep in mind that some features
 are still experimental and that your help is welcome.
 }
 \examples{
-\dontrun{
-chaffp <- fgsProcrustes(chaff)
+ch <- chaff \%>\% slice(1:5) # for the sake of speed
+chaffp <- fgsProcrustes(ch)
 chaffp
 chaffp \%>\% PCA() \%>\% plot("taxa")
-}
 }
 \seealso{
 Other procrustes functions: 

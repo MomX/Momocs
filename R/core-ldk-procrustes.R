@@ -99,15 +99,15 @@ fProcrustes <- function(coo1, coo2) {
 #' @references Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.
 #' @family procrustes functions
 #' @examples
-#' \dontrun{
 #' # on Ldk
-#' stack(wings)
-#' fgProcrustes(wings, tol=0.1) %>% stack()
+#' w <- wings %>% slice(1:5) # for the sake of speed
+#' stack(w)
+#' fgProcrustes(w, tol=0.1) %>% stack()
 #'
 #' # on Out
-#' stack(hearts)
-#' fgProcrustes(hearts) %>%  stack()
-#' }
+#' h <- hearts %>% slice(1:5) # for the sake of speed
+#' stack(h)
+#' fgProcrustes(h) %>%  stack()
 #' @export
 fgProcrustes <- function(x, tol, coo) {
   UseMethod("fgProcrustes")
@@ -289,13 +289,13 @@ fgProcrustes.list <- function(x, ...){
 #' @source See \code{?gpagen} in \code{geomorph} package
 #' @note Landmarks methods are the less tested in Momocs. Keep in mind that some features
 #' are still experimental and that your help is welcome.
+#' @return a list
 #' @family procrustes functions
 #' @examples
-#' \dontrun{
-#' chaffp <- fgsProcrustes(chaff)
+#' ch <- chaff %>% slice(1:5) # for the sake of speed
+#' chaffp <- fgsProcrustes(ch)
 #' chaffp
 #' chaffp %>% PCA() %>% plot("taxa")
-#'}
 #' @export
 fgsProcrustes <- function(x){
   UseMethod("fgsProcrustes")

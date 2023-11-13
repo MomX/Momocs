@@ -17,6 +17,9 @@ tab by default}
 \item{dec}{the string  to feed \link{write.table}) (default \code{"."})
 by default.}
 }
+\value{
+an external file
+}
 \description{
 Writes a \code{.txt} or \code{.xls} or whatever readable from a single shape,
 a  \link{Coe}, or a \link{PCA} object, along with individual names and \code{$fac}.
@@ -39,8 +42,8 @@ do 'statistics' there, an innocent and adorable kitten
 is probably murdered somewhere. Use R!
 }
 \examples{
+# Will write (and remove) files on your working directory!
 \dontrun{
-# Will write files on your machine!
 bf <- efourier(bot, 6)
 # Export Coe (here Fourier coefficients)
 export(bf) # data.txt which can be opened by every software including MS Excel
@@ -53,7 +56,7 @@ export(bf, file='data.xls', dec=',')
 bf \%>\% PCA \%>\% export()
 
 # for shapes (matrices)
- export(bot[1], file='bot1.txt')
+# export(bot[1], file='bot1.txt')
 
  # remove these files from your machine
  file.remove("coefficients.txt", "data.xls", "scores.txt")

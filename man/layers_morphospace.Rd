@@ -57,6 +57,9 @@ layer_morphospace_LDA(
 
 \item{draw}{\code{logical} whether to draw shapes (default: \code{TRUE})}
 }
+\value{
+a drawing layer
+}
 \description{
 Used internally by \link{plot_PCA}, \link{plot_LDA}, etc. but may be useful elsewhere.
 }

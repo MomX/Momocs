@@ -96,7 +96,7 @@ tps_apply <- function(fr, to, new){
 #' points along the grid; \code{dim} the dimension of the grid.
 #' @family thin plate splines
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ms <- MSHAPES(efourier(bot, 10), "type")
 #' b <- ms$shp$beer
 #' w <- ms$shp$whisky

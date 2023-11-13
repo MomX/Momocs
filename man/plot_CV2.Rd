@@ -56,6 +56,9 @@ plot_CV2(x, ...)
 
 \item{legend}{logical whether to add a legend}
 }
+\value{
+a ggplot2 object
+}
 \description{
 Or any contingency/confusion table. A simple graphic representation based on variable
 width and/or color for arrows or segments, based on the relative frequencies.
@@ -66,7 +69,6 @@ within actual classes and should not be displayed if classes sizes are not balan
 }
 \examples{
 # Below various table that you can try. We will use the last one for the examples.
-\dontrun{
 #pure random
 a <- sample(rep(letters[1:4], each=10))
 b <- sample(rep(letters[1:4], each=10))
@@ -84,7 +86,7 @@ tab <- matrix(c(8, 3, 1, 0, 0,
                 1, 1, 2, 7, 1,
                 0, 9, 1, 4, 5), 5, 5, byrow=TRUE)
 tab <- as.table(tab)
-}
+
 # good prediction
 tab <- matrix(c(8, 1, 1, 0, 0,
                1, 7, 1, 0, 0,

@@ -12,6 +12,9 @@ img_plot0(img)
 \arguments{
 \item{img}{a matrix of an image, such as those obtained with \link{readJPEG}.}
 }
+\value{
+a plot
+}
 \description{
 A very simple image plotter. If provided with a path,
 reads the .jpg and plots it. If not provided with an imagematrix, will

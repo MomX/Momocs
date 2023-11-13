@@ -15,6 +15,9 @@ ldk_contour(ldk, nlevels = 5, grid.nb = 50, col = "grey60")
 
 \item{col}{a color for drawing the contour lines}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Using \link{kde2d} in the MASS package.
 }

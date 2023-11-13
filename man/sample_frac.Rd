@@ -17,6 +17,9 @@ sample_frac(tbl, size, replace, fac, ...)
 
 \item{...}{additional arguments to dplyr::sample_frac and to maintain generic compatibility}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Sample a fraction of shapes from a Momocs object. See examples and \code{?dplyr::sample_n}.
 }

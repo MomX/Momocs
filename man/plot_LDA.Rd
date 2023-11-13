@@ -70,6 +70,9 @@ So far, one of \link{layer_histogram_2} (default) or \link{layer_density_2}}
 
 \item{axesvar}{\code{logical} whether to draw this using \link{layer_axesvar}}
 }
+\value{
+a plot
+}
 \description{
 Quickly vizualise \link{LDA} objects and build customs plots
 using the \link{layers}. See examples.

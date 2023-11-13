@@ -107,12 +107,15 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{slidings_pch}{\code{pch} for semi landmarks}
 }
+\value{
+a plot
+}
 \description{
 Plots all the outlines, on the same graph, from a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk})
 object.
 }
 \examples{
-\dontrun{
+\donttest{
 stack(bot)
 bot.f <- efourier(bot, 12)
 stack(bot.f)

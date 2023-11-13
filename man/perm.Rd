@@ -23,6 +23,9 @@ perm(x, ...)
 
 \item{replace}{logical, whether to use \link{sample} with replacement}
 }
+\value{
+a Coe object of same class
+}
 \description{
 This methods applies permutations column-wise on the \code{coe} of any
 \link{Coe} object but relies on a function that can be used on any matrix.

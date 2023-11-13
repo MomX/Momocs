@@ -210,6 +210,7 @@ morphospaceLDA <- function(LDA, xax, yax, pos.shp, nb.shp = 24,
 #' @param nr.shp the number of rows to position shapes
 #' @param nc.shp the number of cols to position shapes
 #' @param circle.r.shp if circle, its radius
+#' @return a data.frame of positions
 #' @details See \link{plot.PCA} for self-speaking examples
 #' @export
 morphospace_positions <- function(xy, pos.shp = c("range", "full", "circle", "xy",

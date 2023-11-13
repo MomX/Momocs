@@ -290,7 +290,7 @@ import_jpg1 <- function(jpg.path,
 #' file in the folder that contains all your files. All the outlines should be imported then.
 #' @return a list of matrices of (x; y) coordinates that can be passed to \link{Out}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 # # if your images are in the folder '/foo/jpgs/'
 #' lf <- list.files('/foo/jpegs', full.names=TRUE)
@@ -362,6 +362,7 @@ import_jpg <- function(jpg.paths = .lf.auto(), auto.notcentered = TRUE,
 #' of \link{Opn} or \link{Ldk} objects, respectively. Please do not hesitate to contact me
 #' should you have a particular case or need something.
 #' @rdname import_StereoMorph
+#' @return a list of class Coo
 #' @family import functions
 #' @export
 import_StereoMorph_curve1 <- function(path){
@@ -555,6 +556,7 @@ tps2coo <- function(tps, curves=TRUE){
 #' @references Kuhl, F. P., & Giardina, C. R. (1982).
 #' Elliptic Fourier features of a closed contour.
 #' \emph{Computer Graphics and Image Processing}, 18(3), 236-258.
+#' @return a matrix or a numeric
 #' @examples
 #' pix2chc(shapes[1]) %T>% print %>% # from pix to chc
 #' chc2pix()                         # and back
@@ -987,7 +989,7 @@ lf_structure <- function(lf, names = character(), split = "_",
     # really ugly way to fill the df
     fac[, i] <- factor(sapply(lf0, function(x) x[i]))
   }
-  return(fac)
+  return(tibble::as_tibble(fac))
 }
 
 #' Binds .jpg outlines from .txt landmarks taken on them
@@ -999,6 +1001,7 @@ lf_structure <- function(lf, names = character(), split = "_",
 #' @param lf a list of filenames
 #' @note Not optimized (images are read twice). Please do not hesitate to contact me
 #' should you have a particular case or need something.
+#' @return an Out object
 #' @family babel functions
 #' @export
 tie_jpg_txt <- function(lf){
@@ -1055,6 +1058,7 @@ tie_jpg_txt <- function(lf){
 #' \code{img_plot0} does the same job but preserves the \code{par} and plots axes.
 #'
 #' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
+#' @return a plot
 #' @rdname img_plot
 #' @export
 img_plot <- function(img) {

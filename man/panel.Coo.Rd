@@ -90,6 +90,9 @@ Either a single value or of length exactly equals to the number of coordinates.}
 
 \item{points.col}{(for Ldk) and a col  for these points}
 }
+\value{
+a plot
+}
 \description{
 Plots all the outlines, side by side, from
 a \link{Coo} (\link{Out}, \link{Opn} or \link{Ldk}) objects.

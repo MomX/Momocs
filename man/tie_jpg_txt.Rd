@@ -9,6 +9,9 @@ tie_jpg_txt(lf)
 \arguments{
 \item{lf}{a list of filenames}
 }
+\value{
+an Out object
+}
 \description{
 Given a list of files (lf) that includes matching filenames with .jpg (black masks)
 and .txt (landmark positions on them as .txt), returns an Out with $ldk defined.

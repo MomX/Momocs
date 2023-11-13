@@ -11,6 +11,7 @@
 #' @param size numeric the required size for the final object, same size by default.
 #' @param replace logical, whether to use \link{sample} with replacement
 #' @param ... useless here
+#' @return a Coe object of same class
 #' @family farming
 #' @examples
 #' m <- matrix(1:12, nrow=3)
@@ -55,6 +56,7 @@ perm.Coe <- function(x, size, replace=TRUE, ...){
 #' @param size numeric the required size for the final object, same size by default
 #' @param rate numeric the number of sd for \link{rnorm}, 1 by default.
 #' @param ... useless here
+#' @return a Coe object of same class
 #' @family farming
 #' @examples
 #' m <- matrix(1:12, nrow=3)

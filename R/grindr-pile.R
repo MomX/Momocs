@@ -19,6 +19,7 @@
 #' @param transp `numeric` for transparency (default:adjusted, min:0, max=0)
 #' @param ... more arguments to feed the core drawer, depending on the object
 #' @family grindr
+#' @return a plot
 #' @note A variation of this plot was called `stack` before `Momocs 1.2.5`
 #' @examples
 #' # all Coo are supported with sensible defaults

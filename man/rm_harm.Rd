@@ -11,6 +11,9 @@ rm_harm(x, drop = 1)
 
 \item{drop}{numeric number of harmonics to drop}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Useful to drop harmonics on Coe objects. Should only work for
 Fourier-based approached since it looks for \code{[A-D][1-drop]} pattern.

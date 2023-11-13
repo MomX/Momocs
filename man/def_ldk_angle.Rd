@@ -25,6 +25,9 @@ def_ldk_direction(coo, direction = c("down", "left", "up", "right")[4])
 
 \item{direction}{\code{character} one of \code{"down", "left", "up", "right"} ("right" by default)}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 A wrapper on \link{coo_intersect_angle} and \link{coo_intersect_direction} for
 \link{Out} and \link{Opn} objects.

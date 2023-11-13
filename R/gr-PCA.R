@@ -76,6 +76,7 @@
 #' @param box whether to draw a box around the plotting region
 #' @param old.par whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.
 #' @param ... useless here, just to fit the generic plot
+#' @return a plot
 #' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
 #' @seealso \link{plot.LDA}
@@ -84,7 +85,7 @@
 #' \code{plot.PCA} and other multivariate plotters.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bot.f <- efourier(bot, 12)
 #' bot.p <- PCA(bot.f)
 #'
@@ -131,12 +132,6 @@
 #' wpp <- PCA(wp)
 #' wpp
 #' plot(wpp, 1)
-#'
-#' # traditionnal measurements
-#' flower %>% PCA %>% plot(1)
-#'
-#' # plot.PCA can be used after a PCA
-#' PCA(iris[, 1:4], fac=iris$Species)  %>% plot(1)
 #'
 #' ### Cosmetic options
 #' # window
@@ -503,7 +498,7 @@ boxplot.PCA <- function(x, fac=NULL, nax, ...){
 #' @examples
 #' bot.p <- PCA(efourier(bot, 12))
 #' PCcontrib(bot.p, nax=1:3)
-#' \dontrun{
+#' \donttest{
 #' library(ggplot2)
 #' gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
 #' gg$gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")

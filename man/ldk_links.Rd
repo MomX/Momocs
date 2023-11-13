@@ -14,6 +14,9 @@ on the second column the ending-id (id= the number of the coordinate)}
 
 \item{...}{additional parameters to fed \link{segments}}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Cosmetics only but useful to visualize shape variation.
 }

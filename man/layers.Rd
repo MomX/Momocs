@@ -169,6 +169,9 @@ layer_legend(x, probs = seq(0, 1, 0.25), cex = 3/4, ...)
 \item{probs}{\code{numeric} sequence to feed \code{stats::quantile}
 and to indicate where to draw ticks and legend labels}
 }
+\value{
+a drawing layer
+}
 \description{
 Useful layers for building custom
 mutivariate plots using the cheapbabi approach. See examples.

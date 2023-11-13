@@ -4,6 +4,9 @@
 \name{Momocs}
 \alias{Momocs}
 \title{Momocs}
+\value{
+nothing
+}
 \description{
 The goal of Momocs is to provide a complete, convenient,
 reproducible and open-source toolkit for 2D morphometrics.

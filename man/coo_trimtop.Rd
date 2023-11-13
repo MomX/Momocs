@@ -11,6 +11,9 @@ coo_trimtop(coo, trim = 1)
 
 \item{trim}{\code{numeric}, the number of coordinates to trim}
 }
+\value{
+a trimmed shape
+}
 \description{
 Removes \code{trim} coordinates from the top of a shape.
 }

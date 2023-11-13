@@ -26,6 +26,9 @@ ldk_confell(
 
 \item{ax.lty}{an lty for ellipses axes}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Draws confidence ellipses for landmark positions
 }

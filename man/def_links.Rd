@@ -12,6 +12,9 @@ def_links(x, nb.ldk)
 \item{nb.ldk}{numeric the iterative procedure is stopped when the
 user click on the top of the graphical window.}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Works on Ldk objects, on 2-cols matrices, 3-dim arrays (\link{MSHAPES} turns it into a matrix).
 }

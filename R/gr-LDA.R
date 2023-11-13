@@ -74,6 +74,7 @@
 #' @param box whether to draw a box around the plotting region
 #' @param old.par whether to restore the old \link{par}. Set it to \code{FALSE} if you want to reuse the graphical window.
 #' @param ... useless here, just to fit the generic plot
+#' @return a plot
 #' @details Widely inspired by the "layers" philosophy behind graphical functions
 #' of the ade4 R package.
 #' @note Morphospaces are deprecated so far. 99% of the code
@@ -456,12 +457,12 @@ plot_CV.LDA <- function(x,
 #' @param cex.names a cex for the names
 #' @param legend logical whether to add a legend
 #' @param ... useless here.
+#' @return a ggplot2 object
 #' @seealso \link{LDA}, \link{plot.LDA}, \link{plot_CV}.
 #' @note When `freq=FALSE`, the fill colors are not weighted
 #' within actual classes and should not be displayed if classes sizes are not balanced.
 #' @examples
 #' # Below various table that you can try. We will use the last one for the examples.
-#' \dontrun{
 #' #pure random
 #' a <- sample(rep(letters[1:4], each=10))
 #' b <- sample(rep(letters[1:4], each=10))
@@ -480,7 +481,7 @@ plot_CV.LDA <- function(x,
 #'                 1, 1, 2, 7, 1,
 #'                 0, 9, 1, 4, 5), 5, 5, byrow=TRUE)
 #' tab <- as.table(tab)
-#' }
+#'
 #' # good prediction
 #' tab <- matrix(c(8, 1, 1, 0, 0,
 #'                1, 7, 1, 0, 0,
@@ -586,7 +587,4 @@ plot_CV2.table <- function(x, links.FUN = arrows, col = TRUE,
   # we restore the graphics parameters
   par(op)
 }
-
-
-
 

@@ -9,6 +9,7 @@
 #' @param size numeric shrinking factor for shapes (and \link{coo_template};
 #' 3/4 by default)
 #' @param palette on of [palettes]
+#' @return a plot
 #' @examples
 #' x <- bot %>% efourier(6) %>% MSHAPES(~type)
 #'

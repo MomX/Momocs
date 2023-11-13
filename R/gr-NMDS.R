@@ -17,6 +17,7 @@
 #' @param title `character` if specified, fee [layer_title] (default to `""`)
 #' @param box `logical` whether to draw this using [layer_box]
 #' @param axesnames `logical` whether to draw this using [layer_axesnames]
+#' @return a plot
 #' @family grindr
 #'
 #' @examples

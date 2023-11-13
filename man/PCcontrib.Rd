@@ -30,7 +30,7 @@ Calculates and plots shape variation along Principal Component axes.
 \examples{
 bot.p <- PCA(efourier(bot, 12))
 PCcontrib(bot.p, nax=1:3)
-\dontrun{
+\donttest{
 library(ggplot2)
 gg <- PCcontrib(bot.p, nax=1:8, sd.r=c(-5, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 5))
 gg$gg + geom_polygon(fill="slategrey", col="black") + ggtitle("A nice title")

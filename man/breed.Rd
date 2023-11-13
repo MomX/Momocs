@@ -25,6 +25,9 @@ breed(x, ...)
 
 \item{rate}{numeric the number of sd for \link{rnorm}, 1 by default.}
 }
+\value{
+a Coe object of same class
+}
 \description{
 This methods applies column-wise on the \code{coe} of any
 \link{Coe} object but relies on a function that can be used on any matrix. It

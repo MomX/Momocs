@@ -14,6 +14,9 @@ chc2pix(chc)
 
 \item{chc}{chain coordinates}
 }
+\value{
+a matrix or a numeric
+}
 \description{
 Useful to convert (x; y) coordinates to chain-coded coordinates.
 }

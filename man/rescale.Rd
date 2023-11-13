@@ -21,6 +21,9 @@ different magnification level found in \verb{$fac}, column \code{"magnification_
 
 \item{...}{additional arguments (besides header=TRUE) to pass to read.table if 'scale_mapping' is a path}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Most of the time, (x, y) coordinates are recorded in pixels. If we want to have
 them in mm, cm, etc. we need to convert them and to rescale them. This functions

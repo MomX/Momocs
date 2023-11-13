@@ -15,6 +15,9 @@ ldk_labels(ldk, d = 0.05, cex = 2/3, ...)
 
 \item{...}{additional parameters to fed \link{text}}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Add landmarks labels
 }

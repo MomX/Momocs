@@ -191,6 +191,7 @@ col_grey <- grDevices::colorRampPalette(c(
 #' @param cols on or more colors, provided as hexadecimal values
 #' @param transp numeric between 0 and 1, the value of the transparency to obtain
 #' @rdname color_transparency
+#' @return colors
 #' @examples
 #' x <- col_transp(10, col='#000000')
 #' x

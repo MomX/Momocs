@@ -17,6 +17,9 @@ When the result of \link{MSHAPES} is passed, detected based on \verb{$Coe}, othe
 
 \item{palette}{on of \link{palettes}}
 }
+\value{
+a plot
+}
 \description{
 "Confusion matrix" of a list of shapes. See examples.
 }

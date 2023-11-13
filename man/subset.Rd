@@ -13,6 +13,9 @@ subsetize(x, subset, ...)
 
 \item{...}{useless here but maintains consistence with the generic subset.}
 }
+\value{
+a subsetted object of same class
+}
 \description{
 Subsetize is a wrapper around dplyr's verbs and should NOT be used directly.
 }

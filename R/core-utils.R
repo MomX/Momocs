@@ -76,6 +76,7 @@ coeff_split <- function(cs, nb.h = 8, cph = 4) {
 #' as \code{A1, B1, C1, D1, ..., An, Bn, Cn, Dn}, this functions helps to go
 #' from one to the other format. In short, this function rearranges column order. See examples.
 #'
+#' @return a Momocs object of same class
 #' @param x matrix (with colnames)
 #' @param by character either "name" (\code{A1, A2, ..}) or "rank" (\code{A1, B1, ...})
 #' @examples

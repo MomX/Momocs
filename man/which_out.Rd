@@ -16,6 +16,9 @@ if <1 retain enough axes to retain this proportion of the variance}
 
 \item{...}{additional parameters to be passed to PCA (only for Coe)}
 }
+\value{
+a vector of indices
+}
 \description{
 A simple wrapper around \link{dnorm} that helps identify outliers. In particular,
 it may be useful on \link{Coe} object (in this case a PCA is first calculated) and also

@@ -35,6 +35,9 @@ hcontrib(Coe, ...)
 
 \item{ylab}{a title for the y-axis}
 }
+\value{
+a plot
+}
 \description{
 Calculates contribution of harmonics to shape. The amplitude of every coefficients
 of a given harmonic is multiplied by the coefficients provided and the resulting

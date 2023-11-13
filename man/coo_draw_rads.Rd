@@ -11,6 +11,9 @@ coo_draw_rads(coo, ...)
 
 \item{...}{arguments to feed \link{segments}}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Given a shape, all centroid-points radii are drawn using \link{segments}
 that can be passed with options

@@ -106,7 +106,7 @@ b5  \%>\% calibrate_harmonicpower_sfourier(nb.h=12)
 # on Opn
 olea \%>\% slice(1:5) \%>\%
     calibrate_harmonicpower_dfourier(nb.h=12)
-\dontrun{
+\donttest{
 # let customize the ggplot
 library(ggplot2)
 cal <- b5  \%>\% calibrate_harmonicpower_efourier(nb.h=12)

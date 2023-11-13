@@ -120,6 +120,7 @@ coo_ldk <- function(coo, nb.ldk, close=FALSE, points=TRUE) {
 #' @param nb.ldk numeric the iterative procedure is stopped when the
 #' user click on the top of the graphical window.
 #' @family ldk helpers
+#' @return a Momocs object of same class
 #' @examples
 #' \dontrun{
 #' wm <- MSHAPES(wings)
@@ -261,6 +262,7 @@ def_ldk.Opn <- def_ldk.Out
 #' @param angle \code{numeric} an angle in radians (0 by default).
 #' @param direction \code{character} one of \code{"down", "left", "up", "right"} ("right" by default)
 #' @note any existing ldk will be preserved.
+#' @return a Momocs object of same class
 #' @seealso Typically used before \link{coo_slice} and \link{coo_slide}.
 #'  See \link{def_ldk_tips} as well.
 #'
@@ -341,6 +343,7 @@ def_ldk_direction.Opn <- def_ldk_direction.Out
 #'
 #' @param coo \code{Opn} object
 #' @note any existing ldk will be preserved.
+#' @return a Momocs object of same class
 #' @examples
 #' is_ldk(olea) # no ldk for olea
 #' olea %>%
@@ -491,6 +494,7 @@ get_ldk.Opn <- get_ldk.Out
 #' with landmarks inside
 #' @param new_ldk_ids a vector of numeric with the ldk to retain \emph{and}
 #' in the right order (see below)
+#' @return a Momocs object of same class
 #' @family ldk/slidings methods
 #' @examples
 #' # Out example
@@ -644,6 +648,7 @@ slidings_scheme.Ldk <- function(Coo){
 #' 5 to 11 must be considered as sliding landmarks (4 and 12 being fixed); or as a list of numeric.
 #'
 #' See examples below.
+#' @return a Momocs object of same class
 #' @family ldk/slidings methods
 #' @examples
 #' #waiting for a sliding dataset...

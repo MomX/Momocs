@@ -32,6 +32,9 @@ Ptolemy(
 
 \item{...}{additional parameters to feed \link{coo_plot}}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Calculate and display Ptolemaic ellipses which illustrates
 intuitively the principle behing elliptical Fourier analysis.

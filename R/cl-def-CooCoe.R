@@ -35,9 +35,9 @@
 #' You can access all the methods available for \code{Coo} objects
 #' with \code{methods(class=Coo)}.
 #'
+#' @return a list of class Coo
 #' @family classes
 #' @examples
-#' \dontrun{
 #' # to see all methods for Coo objects.
 #' methods(class='Coo')
 #'
@@ -53,7 +53,6 @@
 #' inherits(bot, "Coo")
 #' panel(bot)
 #' stack(bot)
-#' plot(bot)
 #'
 #' # Getters (you can also use it to set data)
 #' bot[1] %>% coo_plot()
@@ -98,8 +97,6 @@
 #' x <- Out(coo, fac)
 #' x$coo
 #' x$fac
-#'
-#' }
 #' @export
 Coo <- function(...) {
     message("Coo constructor does not exist alone. See ?Coo")
@@ -129,9 +126,9 @@ Coo <- function(...) {
 #' You can access all the methods available for \code{Coe} objects
 #' with \code{methods(class=Coe)}.
 #'
+#' @return a list of class Coe
 #' @family classes
 #' @examples
-#' \dontrun{
 #' # to see all methods for Coe objects.
 #' methods(class='Coe')
 #' # to see all methods for OutCoe objects.
@@ -167,7 +164,6 @@ Coo <- function(...) {
 #' class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects
 #' # so you can apply all Ldk methods available.
 #' wp$coe # Procrustes aligned coordinates
-#'}
 #' @export
 Coe <- function(...) {
     message("Coe constructor does not exist alone. See ?Coe")

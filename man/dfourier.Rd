@@ -46,12 +46,12 @@ before performing the dct transform.
 Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
-\dontrun{ # because it's long
-od <- dfourier(olea)
+o <- olea \%>\% slice(1:5) # for the sake of speed
+od <- dfourier(o)
 od
 op <- PCA(od)
 plot(op, 1)
-}
+
 # dfourier and inverse dfourier
 o <- olea[1]
 o <- coo_bookstein(o)

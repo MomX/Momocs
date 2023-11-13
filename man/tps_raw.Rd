@@ -29,7 +29,7 @@ points along the grid; \code{dim} the dimension of the grid.
 returns position of sampled points on it.
 }
 \examples{
-\dontrun{
+\donttest{
 ms <- MSHAPES(efourier(bot, 10), "type")
 b <- ms$shp$beer
 w <- ms$shp$whisky

@@ -11,6 +11,9 @@ TraCoe(coe = matrix(), fac = dplyr::tibble())
 
 \item{fac}{a data.frame for covariates}
 }
+\value{
+a list of class TraCoe
+}
 \description{
 Defines the builder for traditional measurement class in Momocs.
 Is is intended to ease calculations, data handling and multivariate statistics

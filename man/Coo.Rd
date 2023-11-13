@@ -9,6 +9,9 @@ Coo(...)
 \arguments{
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
+\value{
+a list of class Coo
+}
 \description{
 \code{Coo} class is the 'parent' or 'super' class of
 \code{\link{Out}}, \code{\link{Opn}} and \code{\link{Ldk}} classes.
@@ -43,7 +46,6 @@ You can access all the methods available for \code{Coo} objects
 with \code{methods(class=Coo)}.
 }
 \examples{
-\dontrun{
 # to see all methods for Coo objects.
 methods(class='Coo')
 
@@ -59,7 +61,6 @@ class(bot)
 inherits(bot, "Coo")
 panel(bot)
 stack(bot)
-plot(bot)
 
 # Getters (you can also use it to set data)
 bot[1] \%>\% coo_plot()
@@ -104,8 +105,6 @@ fac <- data.frame(name=letters[1:5], value=c(5:1))
 x <- Out(coo, fac)
 x$coo
 x$fac
-
-}
 }
 \seealso{
 Other classes: 

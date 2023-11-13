@@ -12,6 +12,9 @@ dissolve(x, retain)
 \item{retain}{the partition id to retain. Or their name if the partitions are named
 (see x$method) eg after a chop}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 the opposite of combine, typically used after it. Note that the \code{$fac} slot may be wrong since
 combine...well combines... this \code{$fac}. See examples.

@@ -20,6 +20,9 @@ col_alpha(cols, transp = 0)
 
 \item{transp}{numeric between 0 and 1, the value of the transparency to obtain}
 }
+\value{
+colors
+}
 \description{
 To ease transparency handling.
 }

@@ -200,6 +200,7 @@
 #' @param box `logical` whether to draw this using [layer_box]
 #' @param axesnames `logical` whether to draw this using [layer_axesnames]
 #' @param axesvar `logical` whether to draw this using [layer_axesvar]
+#' @return a plot
 #' @family grindr
 #'
 #' @examples
@@ -384,6 +385,7 @@ plot_PCA <- function(x,
 #' @param iftwo_split to feed `split` argument in [layer_histogram_2] or [layer_density_2]
 #' @param axesnames `logical` whether to draw this using [layer_axesnames]
 #' @param axesvar `logical` whether to draw this using [layer_axesvar]
+#' @return a plot
 #' @family grindr
 #'
 #' @examples
@@ -552,6 +554,7 @@ plot_LDA <- function(x,
 #' @param x a list, typically returned by \link{plot_PCA}
 #' @param center_origin \code{logical} whether to center the origin (default \code{TRUE})
 #' @param zoom \code{numeric} to change the zoom (default \code{0.9})
+#' @return a drawing layer
 #' @export
 layer_frame <- function(x, center_origin = TRUE, zoom = 0.9){
   # neater par

@@ -11,6 +11,9 @@ coo_trim(coo, trim = 1)
 
 \item{trim}{\code{numeric}, the number of coordinates to trim}
 }
+\value{
+a trimmed shape
+}
 \description{
 Removes \code{trim} coordinates at both ends of a shape, ie
 from top and bottom of the shape matrix.

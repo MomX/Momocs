@@ -106,6 +106,9 @@ the number of shapes is > 1000 (default: 1000) If non-numeric (eg \code{FALSE}) 
 
 \item{...}{more arguments to feed the core drawer, depending on the object}
 }
+\value{
+a plot
+}
 \description{
 Pile all shapes in the same graphical window. Useful to check
 their normalization in terms of size, position, rotation, first point, etc.

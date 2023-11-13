@@ -17,6 +17,9 @@ coo_arrows(coo1, coo2, length = coo_centsize(coo1)/15, angle = 20, ...)
 
 \item{...}{optional parameters to fed \link{arrows}.}
 }
+\value{
+a plot
+}
 \description{
 Draws 'arrows' between two configurations.
 }

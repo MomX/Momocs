@@ -16,6 +16,7 @@
 #' @param draw `logical` whether to draw shapes (default: `TRUE`)
 #' @rdname layers_morphospace
 #' @name layers_morphospace
+#' @return a drawing layer
 #' @family grindr
 #' @export
 layer_morphospace_PCA <- function(x,

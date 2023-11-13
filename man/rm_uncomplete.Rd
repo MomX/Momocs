@@ -13,6 +13,9 @@ rm_uncomplete(x, id, by)
 
 \item{by}{which column of the $fac should objects have complete views}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Imagine you take three views of every object you study. Then, you can \link{slice},
 \link{filter} or \link{chop} your entire dataset, do morphometrics on it,

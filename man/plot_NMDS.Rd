@@ -65,6 +65,9 @@ plot_MDS(
 
 \item{palette}{\code{color palette} to use \code{col_summer} by default}
 }
+\value{
+a plot
+}
 \description{
 Quickly vizualise \link{MDS} and \link{NMDS} objects and build customs plots
 using the \link{layers}. See examples.

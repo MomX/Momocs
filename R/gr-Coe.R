@@ -57,6 +57,7 @@ boxplot.OpnCoe <- function(x, ...){
 #' @param ylab a title for the y-axis
 #' @param ... additional parameter to pass to \code{\link{coo_draw}}
 #' @rdname harm.contrib
+#' @return a plot
 #' @family Coe_graphics
 #' @examples
 #' data(bot)

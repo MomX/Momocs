@@ -69,6 +69,9 @@ plot_PCA(
 
 \item{axesvar}{\code{logical} whether to draw this using \link{layer_axesvar}}
 }
+\value{
+a plot
+}
 \description{
 Quickly vizualise \link{PCA} objects and friends and build customs plots
 using the \link{layers}. See examples.

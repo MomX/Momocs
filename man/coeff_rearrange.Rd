@@ -11,6 +11,9 @@ coeff_rearrange(x, by = c("name", "rank")[1])
 
 \item{by}{character either "name" (\code{A1, A2, ..}) or "rank" (\code{A1, B1, ...})}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Momocs uses colnamed matrices to store (typically) Fourier coefficients
 in \link{Coe} objects (typically \link{OutCoe}). They are arranged as rank-wise:

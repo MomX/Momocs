@@ -22,6 +22,9 @@ amplitude of the harmonic coefficients (see \link{efourier_shape})}
 
 \item{plot}{logical whether to plot the shape}
 }
+\value{
+a list of shapes or a plot
+}
 \description{
 Calculates shapes based on 'Discrete cosine transforms' given harmonic coefficients
 (see \link{dfourier}) or can generate some random 'dfourier' shapes.

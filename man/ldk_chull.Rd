@@ -13,6 +13,9 @@ ldk_chull(ldk, col = "grey40", lty = 1)
 
 \item{lty}{an lty for drawing the convex hulls}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 A wrapper that uses \link{coo_chull}
 }

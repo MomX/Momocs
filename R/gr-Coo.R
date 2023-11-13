@@ -9,6 +9,7 @@
 #' random shape is plotted. If passed with \code{'all'} all shapes are plotted,
 #' one by one.
 #' @param ... further arguments to be passed to \link{coo_plot}
+#' @return an interactive plot
 #' @family Coo_graphics
 #' @examples
 #' \dontrun{
@@ -78,9 +79,10 @@ inspect.Coo <- function(x, id, ...) {
 #' @param xy.axis whether to draw or not the x and y axes
 #' @param title a title for the plot. The name of the \code{Coo} by default
 #' @param ... further arguments to be passed to \link{coo_plot}
+#' @return a plot
 #' @family Coo_graphics
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' stack(bot)
 #' bot.f <- efourier(bot, 12)
 #' stack(bot.f)
@@ -287,6 +289,7 @@ stack.Ldk <- function(x, cols, borders, first.point = TRUE, centroid = TRUE,
 #' @param points.col (for Ldk) and a col  for these points
 #' @param ... additional arguments to feed generic \code{plot}
 #' @note If you want to reorder shapes according to a factor, use \link{arrange}.
+#' @return a plot
 #' @family Coo_graphics
 #' @examples
 #' panel(mosquito, names=TRUE, cex.names=0.5)

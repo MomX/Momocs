@@ -9,6 +9,7 @@
 #' @note This approach will (soon) replace [coo_plot] and friends in further versions.
 #' All comments are welcome.
 #'
+#' @return a drawing layer
 #' @family grindr
 #' @name papers
 #' @rdname papers

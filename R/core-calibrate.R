@@ -1559,7 +1559,7 @@ calibrate_deviations_dfourier <-
 #' # on Opn
 #' olea %>% slice(1:5) %>%
 #'     calibrate_harmonicpower_dfourier(nb.h=12)
-#' \dontrun{
+#' \donttest{
 #' # let customize the ggplot
 #' library(ggplot2)
 #' cal <- b5  %>% calibrate_harmonicpower_efourier(nb.h=12)
@@ -1905,18 +1905,17 @@ calibrate_harmonicpower_dfourier <-
 #' @param thresh the threshold to return diagnostic
 #' @param plot logical whether to print the plot
 #' @param ... useless here
+#' @return a ggpot2 object
 #' @details May be long, so you can estimate it on a sample either with id here, or one of
 #' \link{sample_n} or \link{sample_frac}
 #' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
 #' @family calibration
 #' @examples
-#' \dontrun{
 #' olea %>% slice(1:5) %>% #for the sake of spped
 #'     calibrate_r2_opoly(degree.range=1:5, thresh=c(0.9, 0.99))
 #'
 #' olea %>% slice(1:5) %>% #for the sake of spped
 #'     calibrate_r2_npoly(degree.range=1:5, thresh=c(0.9, 0.99))
-#' }
 #'
 #' @rdname calibrate_r2
 #' @export

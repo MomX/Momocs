@@ -39,6 +39,7 @@
 #' Theodore Stammer, Tom Stubbs, Norbert Telmon, Jean-Frederic Terral,
 #' Bill Venables, Daniele Ventura, Michael Wallace,
 #' Asher Wishkerman, John Wood for their helpful ideas and bug reports.
+#' @return nothing
 #' @import ggplot2
 #' @importFrom utils stack
 #' @importFrom graphics abline arrows axis barplot box boxplot

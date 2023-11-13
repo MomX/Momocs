@@ -11,6 +11,9 @@ def_slidings(Coo, slidings)
 
 \item{slidings}{a matrix, a numeric or a list of numeric. See Details}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Defines sliding landmarks matrix
 }

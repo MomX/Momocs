@@ -21,13 +21,15 @@ Implemented before all morphometric methods and handling verbs.
 To see what is checked, try eg \code{Momocs:::verify.Coo}
 }
 \examples{
-\dontrun{
 verify(bot)
 bot[12] <- NA
-verify(bot)
+# you would not use try, but here we cope with R CMD CHECK standards
+plop <- try(verify(bot), silent=TRUE)
+class(plop)
 
 verify(hearts)
 hearts$ldk[[4]] <- c(1, 2)
-verify(hearts)
-}
+# same remark
+plop2 <- try(verify(hearts), silent=TRUE)
+class(plop2)
 }

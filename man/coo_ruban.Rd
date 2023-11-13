@@ -18,7 +18,7 @@ coo_ruban(coo, dev, palette = col_heat, normalize = TRUE, ...)
 \item{...}{other parameters to fed segments, eg lwd (see examples)}
 }
 \value{
-nothing
+a plot
 }
 \description{
 Useful to display differences between shapes

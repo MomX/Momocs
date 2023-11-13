@@ -9,6 +9,9 @@ Coe(...)
 \arguments{
 \item{...}{anything and, anyway, this function will simply returns a message.}
 }
+\value{
+a list of class Coe
+}
 \description{
 \code{Coe} class is the 'parent' or 'super' class of
 \code{\link{OutCoe}}, \code{\link{OpnCoe}}, \code{LdkCoe} and \code{TraCoe} classes.
@@ -31,7 +34,6 @@ You can access all the methods available for \code{Coe} objects
 with \code{methods(class=Coe)}.
 }
 \examples{
-\dontrun{
 # to see all methods for Coe objects.
 methods(class='Coe')
 # to see all methods for OutCoe objects.
@@ -67,7 +69,6 @@ wp
 class(wp) # for Ldk methods, LdkCoe objects can also be considered as Coo objects
 # so you can apply all Ldk methods available.
 wp$coe # Procrustes aligned coordinates
-}
 }
 \seealso{
 Other classes: 

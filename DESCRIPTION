@@ -14,7 +14,8 @@ Description: The goal of 'Momocs' is to provide a complete, convenient,
        should be easy to plug in, or develop from, on top of this canvas. 
 License: GPL-2 | GPL-3
 Encoding: UTF-8
-URL: https://github.com/MomX/Momocs/
+URL: https://github.com/MomX/Momocs/,
+    http://momx.github.io/Momocs/
 BugReports: https://github.com/MomX/Momocs/issues
 Depends: R(>= 3.2)
 LazyData: true

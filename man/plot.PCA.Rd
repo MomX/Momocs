@@ -212,6 +212,9 @@ a matrix of positions. See \link{morphospace_positions}}
 
 \item{...}{useless here, just to fit the generic plot}
 }
+\value{
+a plot
+}
 \description{
 The Momocs' \code{\link{PCA}} plotter with morphospaces and many graphical options.
 }
@@ -225,7 +228,7 @@ More importantly, as of early 2018, I plan I complete rewrite of
 \code{plot.PCA} and other multivariate plotters.
 }
 \examples{
-\dontrun{
+\donttest{
 bot.f <- efourier(bot, 12)
 bot.p <- PCA(bot.f)
 
@@ -272,12 +275,6 @@ wp <- fgProcrustes(wings, tol=1e-4)
 wpp <- PCA(wp)
 wpp
 plot(wpp, 1)
-
-# traditionnal measurements
-flower \%>\% PCA \%>\% plot(1)
-
-# plot.PCA can be used after a PCA
-PCA(iris[, 1:4], fac=iris$Species)  \%>\% plot(1)
 
 ### Cosmetic options
 # window

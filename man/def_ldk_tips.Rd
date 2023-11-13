@@ -9,6 +9,9 @@ def_ldk_tips(coo)
 \arguments{
 \item{coo}{\code{Opn} object}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 On \link{Opn} objects, this can be used before \link{coo_slice}. See examples.
 }

@@ -21,7 +21,7 @@
 #' @note RColorBrewer palettes are not happy when `n` is lower than 3 and above
 #' a given number for each palette. If this is the case, these functions will
 #' create a color palette with [colorRampPalette] and return colors even so.
-#'
+#' @return a palette function
 #' @aliases pal palette
 #' @examples
 #' pal_div_BrBG(5) %>% barplot(rep(1, 5), col=.)

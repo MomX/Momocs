@@ -20,6 +20,9 @@ import_StereoMorph_ldk(path, names)
 
 \item{names}{to feed \link{lf_structure}}
 }
+\value{
+a list of class Coo
+}
 \description{
 Helps to read \code{.txt} files created by StereoMorph into (x; y) coordinates
 or Momocs objects. Can be applied to 'curves' or 'ldk' text files.

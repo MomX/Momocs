@@ -9,6 +9,9 @@ combine(...)
 \arguments{
 \item{...}{a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Combine \code{Coo} objects after a slicing, either manual or using \link{slice} or \link{chop}. Note that on Coo object,
 it combines row-wise (ie, merges shapes as a \code{c} would do) ; but on Coe it combines column-wise

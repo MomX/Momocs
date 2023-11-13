@@ -39,6 +39,9 @@ calibrate_r2_npoly(
 
 \item{...}{useless here}
 }
+\value{
+a ggpot2 object
+}
 \description{
 Estimates the r2 to calibrate the degree for \link{npoly} and \link{opoly} methods.
 Also returns a plot
@@ -51,13 +54,11 @@ May be long, so you can estimate it on a sample either with id here, or one of
 Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
-\dontrun{
 olea \%>\% slice(1:5) \%>\% #for the sake of spped
     calibrate_r2_opoly(degree.range=1:5, thresh=c(0.9, 0.99))
 
 olea \%>\% slice(1:5) \%>\% #for the sake of spped
     calibrate_r2_npoly(degree.range=1:5, thresh=c(0.9, 0.99))
-}
 
 }
 \seealso{

@@ -77,7 +77,7 @@ of landmarks or not (eg a closed outline).}
 \item{...}{further arguments for use in coo_plot methods. See examples.}
 }
 \value{
-No returned value.
+a plot
 }
 \description{
 A simple wrapper around \link{plot} for plotting shapes. Widely used in Momocs

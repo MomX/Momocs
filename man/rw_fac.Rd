@@ -16,7 +16,7 @@ rw_fac(x, fac, from, to)
 \item{to}{which name should be used to rename this/these levels}
 }
 \value{
-a Momocs object of the same type
+a Momocs object of the same class
 }
 \description{
 rw_fac stands for 'rewriting rule'. Typically useful to correct typos

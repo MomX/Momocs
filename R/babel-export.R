@@ -27,9 +27,11 @@
 #' do 'statistics' there, an innocent and adorable kitten
 #' is probably murdered somewhere. Use R!
 #'
+#' @return an external file
+#'
 #' @examples
+#' # Will write (and remove) files on your working directory!
 #' \dontrun{
-#' # Will write files on your machine!
 #' bf <- efourier(bot, 6)
 #' # Export Coe (here Fourier coefficients)
 #' export(bf) # data.txt which can be opened by every software including MS Excel
@@ -42,7 +44,7 @@
 #' bf %>% PCA %>% export()
 #'
 #' # for shapes (matrices)
-#'  export(bot[1], file='bot1.txt')
+#' # export(bot[1], file='bot1.txt')
 #'
 #'  # remove these files from your machine
 #'  file.remove("coefficients.txt", "data.xls", "scores.txt")

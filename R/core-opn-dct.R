@@ -29,12 +29,12 @@
 #'
 #' @family dfourier
 #' @examples
-#' \dontrun{ # because it's long
-#' od <- dfourier(olea)
+#' o <- olea %>% slice(1:5) # for the sake of speed
+#' od <- dfourier(o)
 #' od
 #' op <- PCA(od)
 #' plot(op, 1)
-#' }
+#'
 #' # dfourier and inverse dfourier
 #' o <- olea[1]
 #' o <- coo_bookstein(o)
@@ -217,6 +217,7 @@ dfourier_i <- function(df, nb.h, nb.pts = 60) {
 #' @param alpha The power coefficient associated with the (usually decreasing)
 #' amplitude of the harmonic coefficients (see \link{efourier_shape})
 #' @param plot logical whether to plot the shape
+#' @return a list of shapes or a plot
 #' @family dfourier
 #' @examples
 #' # some signatures

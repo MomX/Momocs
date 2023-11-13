@@ -28,7 +28,7 @@
 #' @param plot logical whether to plot something or just to create an empty plot.
 #' @param zoom a numeric to take your distances.
 #' @param ... further arguments for use in coo_plot methods. See examples.
-#' @return No returned value.
+#' @return a plot
 #' @family plotting functions
 #' @examples
 #' b <- bot[1]
@@ -122,6 +122,7 @@ coo_plot <- function(coo, xlim, ylim, border = "#333333",
 #' @param coo a \code{list} or a \code{matrix} of coordinates.
 #' @param ... optional parameters for \link{coo_plot}
 #' @family plotting functions
+#' @return a drawing on the last plot
 #' @examples
 #' b1 <- bot[4]
 #' b2 <- bot[5]
@@ -139,7 +140,7 @@ coo_draw <- function(coo, ...) {
 #'
 #' @param coo a shape
 #' @param ... arguments to feed \link{segments}
-#'
+#' @return a drawing on the last plot
 #' @examples
 #' shp <- shapes[4] %>% coo_sample(24) %T>% coo_plot
 #' coo_draw_rads(shp, col=col_summer(24))
@@ -158,6 +159,7 @@ coo_draw_rads <- function(coo, ...){
 #' @param pch a pch for the points (default to NA)
 #' @param cex a cex for the points
 #' @param ... optional parameters to fed \link{points} and \link{segments}.
+#' @return a drawing on the last plot
 #' @family plotting functions
 #' @examples
 #' coo_lolli(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
@@ -187,6 +189,7 @@ coo_lolli <- function(coo1, coo2,
 #' @param angle an angle for the arrows
 #' @param ... optional parameters to fed \link{arrows}.
 #' @family plotting functions
+#' @return a plot
 #' @examples
 #' coo_arrows(coo_sample(olea[3], 50), coo_sample(olea[6], 50))
 #' title("Hi there !")
@@ -213,7 +216,7 @@ coo_arrows <- function(coo1, coo2,
 #' @param  palette the color palette to use or any palette
 #' @param normalize logical whether to normalize (TRUE by default) distances
 #' @param ... other parameters to fed segments, eg lwd (see examples)
-#' @return nothing
+#' @return a plot
 #' @family plotting functions
 #' @examples
 #' ms <- MSHAPES(efourier(bot , 10), "type")
@@ -360,6 +363,7 @@ ldk_plot <- function(coo, ...){
 #' @param ... additional parameters to fed \link{text}
 #' @family plotting functions
 #' @family ldk plotters
+#' @return a drawing on the last plot
 #' @examples
 #' coo_plot(wings[1])
 #' ldk_labels(wings[1])
@@ -390,6 +394,7 @@ ldk_labels <- function(ldk, d = 0.05, cex = 2/3, ...) {
 #' @param ... additional parameters to fed \link{segments}
 #' @family plotting functions
 #' @family ldk plotters
+#' @return a drawing on the last plot
 #' @export
 ldk_links <- function(ldk, links, ...) {
   ldk <- ldk_check(ldk)
@@ -413,6 +418,7 @@ ldk_links <- function(ldk, links, ...) {
 #' ldk_confell(wings$coo)
 #' @family plotting functions
 #' @family ldk plotters
+#' @return a drawing on the last plot
 #' @export
 ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
                         ax = TRUE, ax.lty = 2) {
@@ -448,6 +454,7 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 #' ldk_contour(wings$coo)
 #' @family plotting functions
 #' @family ldk plotters
+#' @return a drawing on the last plot
 #' @export
 ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
   ldk <- ldk_check(ldk)
@@ -474,6 +481,7 @@ ldk_contour <- function(ldk, nlevels = 5, grid.nb = 50, col = "grey60") {
 #' ldk_chull(wings$coo)
 #' @family plotting functions
 #' @family ldk plotters
+#' @return a drawing on the last plot
 #' @export
 ldk_chull <- function(ldk, col = "grey40", lty = 1) {
   ldk <- ldk_check(ldk)
@@ -497,6 +505,7 @@ ldk_chull <- function(ldk, col = "grey40", lty = 1) {
 #' @param coo A matrix of coordinates.
 #' @param cols A vector of color of \code{length = nrow(coo)}.
 #' @param lwd The \code{lwd} to use for drawing segments.
+#' @return a drawing on the last plot
 #' @examples
 #'
 #' # we load some data
@@ -794,6 +803,7 @@ coo_oscillo <- function(coo,
 #' @param palette a color palette
 #' @param legend \code{logical}. Whether to plot the legend box
 #' @param ... additional parameters to feed \link{coo_plot}
+#' @return a drawing on the last plot
 #' @references
 #' This method has been inspired by the figures found in the followings papers.
 #' Kuhl FP, Giardina CR. 1982. Elliptic Fourier features of a closed contour.

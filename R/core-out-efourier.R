@@ -142,7 +142,7 @@ efourier.default <- function(x, nb.h, smooth.it = 0, ...) {
 #' @export
 efourier.Out <- function(x, nb.h, smooth.it = 0, norm = TRUE, start = FALSE, ...) {
   if (norm && missing(norm))
-    message("'norm=TRUE' is used and this may be troublesome. See ?efourier")
+    message("'norm=TRUE' is used and this may be troublesome. See ?efourier #Details")
   Out <- x
   # verify
   Out %<>% verify()

@@ -31,6 +31,7 @@
 #' @param font `numeric` to feed [text] (`c(2, 1)` by default)
 #' @param padding `numeric` a fraction of the graphical window (`1/200` by default)
 #' @param ... additional options to feed core functions for each drawer
+#' @return a drawing layer
 #'
 #' @examples
 #' bot[1] %>% paper_grid() %>% draw_polygon()

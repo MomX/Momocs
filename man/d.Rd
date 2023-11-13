@@ -13,6 +13,9 @@ d(x, id1, id2)
 
 \item{id2}{id of the 2nd row}
 }
+\value{
+numeric
+}
 \description{
 The main advantage over \link{ed} is that it is a method that can
 be passed to different objects and used in combination with \link{measure}.

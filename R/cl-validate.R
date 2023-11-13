@@ -8,15 +8,17 @@
 #' @param Coo any Coo object
 #' @return a Coo object.
 #' @examples
-#' \dontrun{
 #' verify(bot)
 #' bot[12] <- NA
-#' verify(bot)
+#' # you would not use try, but here we cope with R CMD CHECK standards
+#' plop <- try(verify(bot), silent=TRUE)
+#' class(plop)
 #'
 #' verify(hearts)
 #' hearts$ldk[[4]] <- c(1, 2)
-#' verify(hearts)
-#' }
+#' # same remark
+#' plop2 <- try(verify(hearts), silent=TRUE)
+#' class(plop2)
 #' @export
 verify <- function(Coo){
   UseMethod("verify")

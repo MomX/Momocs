@@ -13,6 +13,9 @@ plot_devsegments(coo, cols, lwd = 1)
 
 \item{lwd}{The \code{lwd} to use for drawing segments.}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Given a matrix of (x; y) coordinates, draws segments between every points
 defined by the row of the matrix and uses a color to display an information.

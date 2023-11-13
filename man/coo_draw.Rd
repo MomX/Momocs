@@ -11,6 +11,9 @@ coo_draw(coo, ...)
 
 \item{...}{optional parameters for \link{coo_plot}}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 \code{coo_draw} is simply a \link{coo_plot} with \code{plot.new=FALSE}, ie
 that adds a shape on the active plot.

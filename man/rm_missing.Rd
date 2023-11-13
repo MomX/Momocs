@@ -11,6 +11,9 @@ rm_missing(x, by)
 
 \item{by}{which column of the $fac should objects have complete views}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Any row (or within a given column if \code{by} is specified) containing \code{NA} in \verb{$fac} and the corresponding shapes in \verb{$coo}, lines in \verb{$coe} or other objects
 will also be dropped.

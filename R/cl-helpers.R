@@ -129,6 +129,7 @@ is_links <- function(x) is.matrix(x$links)
 #' @param nax number of axes to retain (only for Coe),
 #' if <1 retain enough axes to retain this proportion of the variance
 #' @param ... additional parameters to be passed to PCA (only for Coe)
+#' @return a vector of indices
 #' @note experimental. dnorm parameters used are \code{median(x), sd(x)}
 #' @examples
 #' # on a numeric

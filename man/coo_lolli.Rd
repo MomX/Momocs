@@ -17,6 +17,9 @@ coo_lolli(coo1, coo2, pch = NA, cex = 0.5, ...)
 
 \item{...}{optional parameters to fed \link{points} and \link{segments}.}
 }
+\value{
+a drawing on the last plot
+}
 \description{
 Draws 'lollipops' between two configurations.
 }

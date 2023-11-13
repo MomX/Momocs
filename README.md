@@ -6,17 +6,27 @@
 <!--Badges -->
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![R build
-status](https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg)](https://github.com/MomX/Momocs/actions)
+[![R-CMD-check](https://github.com/MomX/Momocs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MomX/Momocs/actions/workflows/R-CMD-check.yaml)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
 ![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)
 ![CRAN downloads grand
 total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
 
-**The tutorial/introduction is back! Download it
-[there](https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html)**
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+### News
+
+- I’m still looking for funding to develop MomX. If you have any idea,
+  please email me `<bonhomme.vincent@gmail.com>`
+- I’m available for consulting, training and collaboration, worldwide.
+- Momocs is back on CRAN and no longer relies on the retired `rgeos`
+  dependency
+- The tutorial/introduction is back! Download it
+  [there](https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html)\*\*
 
 ### Installation
 
@@ -40,64 +50,46 @@ devtools::install_github("MomX/Momocs")
 __Matrices of xy-coordinates__
 * ~100 generic tools like centering, scaling, rotating, calculating area, perimeter, etc. Full list with `apropos("coo_")`
 * generic plotters: `coo_plot` and `g` (work in progress)
-
-__Data acquisition + Babel__
-
-* Outline extraction from black mask/silhouettes `.jpgs`
+&#10;__Data acquisition + Babel__
+&#10;* Outline extraction from black mask/silhouettes `.jpgs`
 * Landmark definition on outlines (`def_ldk` or via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
 * Open curves digitization with bezier curves (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
 * Import/Export from/to `.nts`, `.tps`, `PAST`, `.txt`, etc.
-
-__Outline analysis__
-
-* Elliptical Fourier analysis (`efourier`)
+&#10;__Outline analysis__
+&#10;* Elliptical Fourier analysis (`efourier`)
 * Radii variation (`rfourier`)
 * Radii variation - curvilinear abscissa (`sfourier`)
 * Tangent Angle Fourier analysis (`tfourier`)
-
-__Open-outlines__
-
-* Natural (raw) polynomials (`npoly`)
+&#10;__Open-outlines__
+&#10;* Natural (raw) polynomials (`npoly`)
 * Orthogonal (Legendre) polynomials (`opoly`)
 * Discrete Cosinus Transform (`dfourier`)
 * `bezier` core functions
-
-__Configuration of landmarks__
-
-* Full Generalized Procrustes Adjustment (`fgProcrustes`)
+&#10;__Configuration of landmarks__
+&#10;* Full Generalized Procrustes Adjustment (`fgProcrustes`)
 * Sliding semi-landmarks (`fgsProcrustes`)
-
-__Traditional morphometrics and global shape descriptors__
-
-* Facilities for multivariate analysis (see `flowers`)
+&#10;__Traditional morphometrics and global shape descriptors__
+&#10;* Facilities for multivariate analysis (see `flowers`)
 * A long list of shape scalars (eg. `coo_eccentricity`, `coo_rectilinearity`, etc.)
-
-__Data handling__
-
-* Easy data manipulation with `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
+&#10;__Data handling__
+&#10;* Easy data manipulation with `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
 * New verbs useful for morphometrics such as `combine` and `chop`, to handle several 2D views
 * Permutation methods to resample data (`perm`, `breed`)
-
-__Multivariate analysis__
-
-* Mean shape (groupwise) calculations (`mshapes`)
+&#10;__Multivariate analysis__
+&#10;* Mean shape (groupwise) calculations (`mshapes`)
 * Principal component analysis (`PCA`)
 * Multivariate analysis of variance (`MANOVA` + pairwise testing `MANOVA_PW`)
 * Linear discriminant analysis and screening (`LDA`)
 * Hierarchical clustering (`CLUST`)
 * K-means (`KMEANS`)
-
-__Graphical methods__
-
-* Family pictures and quick inspection of whole datasets (`stack` and `panel`)
+&#10;__Graphical methods__
+&#10;* Family pictures and quick inspection of whole datasets (`stack` and `panel`)
 * Some `ggplot2` plots, when useful (and convet Momocs' objects into `data.frames it with `as_df`)
 * Morphological spaces for PCA
 * Thin plate splines and variation around deformation grids
-
-
+&#10;
 __Misc__
-
-* Datasets for all types of data (`apodemus`, `bot`, `chaff`, `charring`, `flower`,  `hearts`, `molars`, `mosquito`, `mouse`, `oak`, `olea`, `shapes`, `trilo`, `wings`)
+&#10;* Datasets for all types of data (`apodemus`, `bot`, `chaff`, `charring`, `flower`,  `hearts`, `molars`, `mosquito`, `mouse`, `oak`, `olea`, `shapes`, `trilo`, `wings`)
 * [Shiny](http://shiny.rstudio.com/) demonstrators/helpers. See [Momecs](https://github.com/vbonhomme/Momecs/)
 * [Online documentation](http://vbonhomme.github.io/Momocs/)
 -->
@@ -135,7 +127,12 @@ hearts %T>%                    # A toy dataset
 
 ![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->
 
-    #> Warning: `guides(<scale> = FALSE)` is deprecated. Please use `guides(<scale> =
-    #> "none")` instead.
+    #> Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as
+    #> of ggplot2 3.3.4.
+    #> ℹ The deprecated feature was likely used in the Momocs package.
+    #>   Please report the issue at <https://github.com/MomX/Momocs/issues>.
+    #> This warning is displayed once every 8 hours.
+    #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    #> generated.
 
 ![](README-example-3.png)<!-- -->![](README-example-4.png)<!-- -->

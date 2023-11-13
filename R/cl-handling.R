@@ -108,6 +108,7 @@ fac_dispatcher <- function(x, fac){
 #' @param subset logical taken from the \code{$fac} slot, or indices. See examples.
 #' @param ... useless here but maintains consistence with the generic subset.
 #' @family handling functions
+#' @return a subsetted object of same class
 #' @examples
 #' # Do not use subset directly
 #' @export
@@ -452,6 +453,7 @@ slice.PCA <- function(.data, ...){
 #' @param replace logical whether sample should be done with ot without replacement
 #' @param fac a column name if a \code{$fac} is defined; size is then applied within levels of this factor
 #' @param ... additional arguments to dplyr::sample_n and to maintain generic compatibility
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #'
@@ -518,6 +520,7 @@ sample_n.Coe <- sample_n.Coo
 #' @param fac a column name if a \code{$fac} is defined; size is then applied within levels of this factor
 #' @note the resulting fraction is rounded with \link{ceiling}.
 #' @param ... additional arguments to dplyr::sample_frac and to maintain generic compatibility
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #'
@@ -669,6 +672,7 @@ chop.Coe <- function(.data, fac){
 #' @param ... a list of Out(Coe), Opn(Coe), Ldk objects (but of the same class)
 #' @note Note that the order of shapes or their coefficients
 #' is not checked, so anything with the same number of rows will be merged.
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #' w <- filter(bot, type=="whisky")
@@ -847,6 +851,7 @@ combine.OpnCoe <- function(...) {
 #' @param x a Coe object
 #' @param retain the partition id to retain. Or their name if the partitions are named
 #' (see x$method) eg after a chop
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #' data(bot)
@@ -963,7 +968,7 @@ dissolve.Coe <- function(x, retain){
 #' @param fac the id of the name of the $fac column to look for ([fac_dispatcher] not yet supported)
 #' @param from which level(s) should be renamed; passed as a single or several characters
 #' @param to which name should be used to rename this/these levels
-#' @return a Momocs object of the same type
+#' @return a Momocs object of the same class
 #' @family handling functions
 #' @examples
 #' # single renaming
@@ -991,6 +996,7 @@ rw_fac <- function(x, fac, from, to){
 #' @param fac the id of name of the $fac column
 #' @param N minimal number of individuals to retain the group
 #' @note if N is too ambitious the original object is returned with a message
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #' table(trilo$onto)
@@ -1020,6 +1026,7 @@ at_least <- function(x, fac, N){
 #' @param x the object on which to remove uncomplete "by"
 #' @param id of the objects, within the $fac slot
 #' @param by which column of the $fac should objects have complete views
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #' # we load olea
@@ -1065,6 +1072,7 @@ rm_uncomplete <- function(x, id, by){
 #' will also be dropped.
 #' @param x the object on which to NA
 #' @param by which column of the $fac should objects have complete views
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #' bot$fac$type[3] <- NA
@@ -1094,6 +1102,7 @@ rm_missing.default <- function(x, by){
 #'
 #' @param x Coe object
 #' @param drop numeric number of harmonics to drop
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @examples
 #' data(bot)
@@ -1149,6 +1158,7 @@ rm_harm <- function(x, drop=1){
 #'
 #' @note This function is simple but quite complex to detail. Feel free to contact me should you have any
 #' problem with it. You can just access its code (type \code{rescale}) and reply it yourself.
+#' @return a Momocs object of same class
 #' @family handling functions
 #' @export
 rescale <- function(x, scaling_factor, scale_mapping, magnification_col, ...){

@@ -13,6 +13,9 @@ at_least(x, fac, N)
 
 \item{N}{minimal number of individuals to retain the group}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Examples are self-speaking.
 }

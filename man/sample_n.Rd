@@ -17,6 +17,9 @@ sample_n(tbl, size, replace, fac, ...)
 
 \item{...}{additional arguments to dplyr::sample_n and to maintain generic compatibility}
 }
+\value{
+a Momocs object of same class
+}
 \description{
 Sample n shapes from a Momocs object. See examples and \code{?dplyr::sample_n}.
 }

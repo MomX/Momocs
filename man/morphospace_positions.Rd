@@ -32,6 +32,9 @@ with columns named \code{("x", "y")}.}
 
 \item{circle.r.shp}{if circle, its radius}
 }
+\value{
+a data.frame of positions
+}
 \description{
 Calculates nice positions on a plane for drawing shapes
 }

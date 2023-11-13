@@ -199,6 +199,9 @@ draw_title(
 
 \item{padding}{\code{numeric} a fraction of the graphical window (\code{1/200} by default)}
 }
+\value{
+a drawing layer
+}
 \description{
 Useful drawers for building custom
 shape plots using the grindr approach. See examples and vignettes.

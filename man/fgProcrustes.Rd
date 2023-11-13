@@ -41,15 +41,15 @@ Will be optimized when performance will be the last thing to improve!
 Silent message and progress bars (if any) with \code{options("verbose"=FALSE)}.
 }
 \examples{
-\dontrun{
 # on Ldk
-stack(wings)
-fgProcrustes(wings, tol=0.1) \%>\% stack()
+w <- wings \%>\% slice(1:5) # for the sake of speed
+stack(w)
+fgProcrustes(w, tol=0.1) \%>\% stack()
 
 # on Out
-stack(hearts)
-fgProcrustes(hearts) \%>\%  stack()
-}
+h <- hearts \%>\% slice(1:5) # for the sake of speed
+stack(h)
+fgProcrustes(h) \%>\%  stack()
 }
 \references{
 Claude, J. (2008). Morphometrics with R. Analysis (p. 316). Springer.

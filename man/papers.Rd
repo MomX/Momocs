@@ -35,6 +35,9 @@ number of majors lines, and the number of minor lines within two major ones}
 
 \item{pch}{to use for dots}
 }
+\value{
+a drawing layer
+}
 \description{
 Papers on which to use \link{drawers} for building custom
 shape plots using the grindr approach. See examples and vignettes.
