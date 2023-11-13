@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://momx.github.io/Momocs/404.html</loc>
+  </url>
+  <url>
+    <loc>http://momx.github.io/Momocs/authors.html</loc>
+  </url>
+  <url>
     <loc>http://momx.github.io/Momocs/index.html</loc>
+  </url>
+  <url>
+    <loc>http://momx.github.io/Momocs/news/index.html</loc>
   </url>
   <url>
     <loc>http://momx.github.io/Momocs/reference/CLUST.html</loc>
@@ -527,6 +536,9 @@
   </url>
   <url>
     <loc>http://momx.github.io/Momocs/reference/import_txt.html</loc>
+  </url>
+  <url>
+    <loc>http://momx.github.io/Momocs/reference/index.html</loc>
   </url>
   <url>
     <loc>http://momx.github.io/Momocs/reference/inspect.html</loc>

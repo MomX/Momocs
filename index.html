@@ -4,14 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="The goal of Momocs is to provide a complete, convenient, 
+       reproducible and open-source toolkit for 2D morphometrics.
+       It includes most common 2D morphometrics approaches on outlines, open outlines, 
+       configurations of landmarks, traditional morphometrics, and facilities for data preparation, 
+       manipulation and visualization with a consistent grammar throughout.
+       It allows reproducible, complex morphometrics analyses and other morphometrics approaches 
+       should be easy to plug in, or develop from, on top of this canvas. ">
 <title>Morphometrics using R • Momocs</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Morphometrics using R">
 <meta property="og:description" content="The goal of Momocs is to provide a complete, convenient, 
        reproducible and open-source toolkit for 2D morphometrics.
@@ -25,221 +31,216 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">Momocs</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">Momocs</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="news/index.html">Changelog</a>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/MomX/Momocs">
-    <span class="fa fa-github fa-lg"></span>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/MomX/Momocs/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div id="momocs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#momocs" class="anchor"></a>Momocs</h2>
-<p><strong>Momocs will soon retire, please see <a href="https://momx.github.io/MomX/">MomX</a> </strong></p>
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level2">
+<h2 id="momocs">Momocs<a class="anchor" aria-label="anchor" href="#momocs"></a>
+</h2>
 <!--Badges -->
-<p><a href="https://www.tidyverse.org/lifecycle/#retired"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://github.com/MomX/Momocs/actions"><img src="https://github.com/MomX/Momocs/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://travis-ci.org/MomX/Momocs"><img src="https://travis-ci.org/MomX/Momocs.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/MomX/Momocs?branch=master"><img src="https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg" alt="Coverage Status"></a> <a href="http://cran.r-project.org/package=Momocs"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a> <img src="http://cranlogs.r-pkg.org/badges/Momocs" alt="CRAN downloads last month"><img src="http://cranlogs.r-pkg.org/badges/grand-total/Momocs" alt="CRAN downloads grand total"></p>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
-<p>The last released version can be installed from <a href="https://CRAN.R-project.org/package=Momocs">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"Momocs"</span>)</pre></div>
+<p><a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://github.com/MomX/Momocs/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/MomX/Momocs/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="http://cran.r-project.org/package=Momocs" class="external-link"><img src="http://www.r-pkg.org/badges/version/Momocs" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/github/MomX/Momocs?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg" alt="Coverage Status"></a> <img src="http://cranlogs.r-pkg.org/badges/Momocs" alt="CRAN downloads last month"><img src="http://cranlogs.r-pkg.org/badges/grand-total/Momocs" alt="CRAN downloads grand total"></p>
+<!-- badges: start -->
+<!-- badges: end -->
+<div class="section level3">
+<h3 id="news">News<a class="anchor" aria-label="anchor" href="#news"></a>
+</h3>
+<ul>
+<li>I’m still looking for funding to develop MomX. If you have any idea, please email me <code>&lt;bonhomme.vincent@gmail.com&gt;</code>
+</li>
+<li>I’m available for consulting, training and collaboration, worldwide.</li>
+<li>Momocs is back on CRAN and no longer relies on the retired <code>rgeos</code> dependency</li>
+<li>The tutorial/introduction is back! Download it <a href="https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html" class="external-link">there</a>**</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
+<p>The last released version can be installed from <a href="https://CRAN.R-project.org/package=Momocs" class="external-link">CRAN</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Momocs"</span><span class="op">)</span></span></code></pre></div>
 <p>But I recommend using (and only support) the development version from GitHub with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"MomX/Momocs"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"MomX/Momocs"</span><span class="op">)</span></span></code></pre></div>
 <!--
 ## Features
 __Matrices of xy-coordinates__
 * ~100 generic tools like centering, scaling, rotating, calculating area, perimeter, etc. Full list with `apropos("coo_")`
 * generic plotters: `coo_plot` and `g` (work in progress)
-
-__Data acquisition + Babel__
-
-* Outline extraction from black mask/silhouettes `.jpgs`
+&#10;__Data acquisition + Babel__
+&#10;* Outline extraction from black mask/silhouettes `.jpgs`
 * Landmark definition on outlines (`def_ldk` or via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
 * Open curves digitization with bezier curves (via [StereoMorph](https://github.com/aaronolsen/StereoMorph))
 * Import/Export from/to `.nts`, `.tps`, `PAST`, `.txt`, etc.
-
-__Outline analysis__
-
-* Elliptical Fourier analysis (`efourier`)
+&#10;__Outline analysis__
+&#10;* Elliptical Fourier analysis (`efourier`)
 * Radii variation (`rfourier`)
 * Radii variation - curvilinear abscissa (`sfourier`)
 * Tangent Angle Fourier analysis (`tfourier`)
-
-__Open-outlines__
-
-* Natural (raw) polynomials (`npoly`)
+&#10;__Open-outlines__
+&#10;* Natural (raw) polynomials (`npoly`)
 * Orthogonal (Legendre) polynomials (`opoly`)
 * Discrete Cosinus Transform (`dfourier`)
 * `bezier` core functions
-
-__Configuration of landmarks__
-
-* Full Generalized Procrustes Adjustment (`fgProcrustes`)
+&#10;__Configuration of landmarks__
+&#10;* Full Generalized Procrustes Adjustment (`fgProcrustes`)
 * Sliding semi-landmarks (`fgsProcrustes`)
-
-__Traditional morphometrics and global shape descriptors__
-
-* Facilities for multivariate analysis (see `flowers`)
+&#10;__Traditional morphometrics and global shape descriptors__
+&#10;* Facilities for multivariate analysis (see `flowers`)
 * A long list of shape scalars (eg. `coo_eccentricity`, `coo_rectilinearity`, etc.)
-
-__Data handling__
-
-* Easy data manipulation with `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
+&#10;__Data handling__
+&#10;* Easy data manipulation with `filter`, `select`, `slice`, `mutate` and other verbs ala [dplyr](https://github.com/hadley/dplyr/)
 * New verbs useful for morphometrics such as `combine` and `chop`, to handle several 2D views
 * Permutation methods to resample data (`perm`, `breed`)
-
-__Multivariate analysis__
-
-* Mean shape (groupwise) calculations (`mshapes`)
+&#10;__Multivariate analysis__
+&#10;* Mean shape (groupwise) calculations (`mshapes`)
 * Principal component analysis (`PCA`)
 * Multivariate analysis of variance (`MANOVA` + pairwise testing `MANOVA_PW`)
 * Linear discriminant analysis and screening (`LDA`)
 * Hierarchical clustering (`CLUST`)
 * K-means (`KMEANS`)
-
-__Graphical methods__
-
-* Family pictures and quick inspection of whole datasets (`stack` and `panel`)
+&#10;__Graphical methods__
+&#10;* Family pictures and quick inspection of whole datasets (`stack` and `panel`)
 * Some `ggplot2` plots, when useful (and convet Momocs' objects into `data.frames it with `as_df`)
 * Morphological spaces for PCA
 * Thin plate splines and variation around deformation grids
-
-
+&#10;
 __Misc__
-
-* Datasets for all types of data (`apodemus`, `bot`, `chaff`, `charring`, `flower`,  `hearts`, `molars`, `mosquito`, `mouse`, `oak`, `olea`, `shapes`, `trilo`, `wings`)
+&#10;* Datasets for all types of data (`apodemus`, `bot`, `chaff`, `charring`, `flower`,  `hearts`, `molars`, `mosquito`, `mouse`, `oak`, `olea`, `shapes`, `trilo`, `wings`)
 * [Shiny](http://shiny.rstudio.com/) demonstrators/helpers. See [Momecs](https://github.com/vbonhomme/Momecs/)
 * [Online documentation](http://vbonhomme.github.io/Momocs/)
 -->
 </div>
-<div id="example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h3>
+<div class="section level3">
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h3>
 <p>This is a basic example of a complete analysis doing: inspection, normalization of raw outlines, elliptical Fourier transforms, dimmensionality reduction and classification, using a single line.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Momocs</span>)</pre></div>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/load_all.html">load_all</a></span>()
-<span class="co">#&gt; Loading Momocs</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'vegan':</span>
-<span class="co">#&gt;   method     from      </span>
-<span class="co">#&gt;   rev.hclust dendextend</span></pre></div>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="no">hearts</span> <span class="kw">%T&gt;%</span>                    <span class="co"># A toy dataset</span>
-  <span class="fu"><a href="reference/stack.Coo.html">stack</a></span>() <span class="kw">%&gt;%</span>                  <span class="co"># Take a family picture of raw outlines</span>
-  <span class="fu"><a href="reference/fgProcrustes.html">fgProcrustes</a></span>() <span class="kw">%&gt;%</span>           <span class="co"># Full generalized Procrustes alignment</span>
-  <span class="fu"><a href="reference/coo_slide.html">coo_slide</a></span>(<span class="kw">ldk</span> <span class="kw">=</span> <span class="fl">2</span>) <span class="kw">%T&gt;%</span>      <span class="co"># Redefine a robust 1st point between the cheeks</span>
-  <span class="fu"><a href="reference/stack.Coo.html">stack</a></span>() <span class="kw">%&gt;%</span>                  <span class="co"># Another picture of aligned outlines</span>
-  <span class="fu"><a href="reference/efourier.html">efourier</a></span>(<span class="fl">6</span>, <span class="kw">norm</span><span class="kw">=</span><span class="fl">FALSE</span>) <span class="kw">%&gt;%</span>  <span class="co"># Elliptical Fourier Transforms</span>
-  <span class="fu"><a href="reference/PCA.html">PCA</a></span>() <span class="kw">%T&gt;%</span>                   <span class="co"># Principal Component Analysis</span>
-  <span class="fu"><a href="reference/plot_PCA.html">plot_PCA</a></span>(~<span class="no">aut</span>) <span class="kw">%&gt;%</span>           <span class="co"># A PC1:2 plot</span>
-  <span class="fu"><a href="reference/LDA.html">LDA</a></span>(~<span class="no">aut</span>) <span class="kw">%&gt;%</span>                <span class="co"># Linear Discriminant Analysis</span>
-  <span class="fu"><a href="reference/plot_CV.html">plot_CV</a></span>()                    <span class="co"># And the confusion matrix after leave one out cross validation</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MomX/Momocs/" class="external-link">Momocs</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ Loading Momocs</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'vegan':</span></span>
+<span><span class="co">#&gt;   method     from      </span></span>
+<span><span class="co">#&gt;   rev.hclust dendextend</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hearts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html" class="external-link">%T&gt;%</a></span>                    <span class="co"># A toy dataset</span></span>
+<span>  <span class="fu"><a href="reference/stack.Coo.html">stack</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                  <span class="co"># Take a family picture of raw outlines</span></span>
+<span>  <span class="fu"><a href="reference/fgProcrustes.html">fgProcrustes</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>           <span class="co"># Full generalized Procrustes alignment</span></span>
+<span>  <span class="fu"><a href="reference/coo_slide.html">coo_slide</a></span><span class="op">(</span>ldk <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html" class="external-link">%T&gt;%</a></span>      <span class="co"># Redefine a robust 1st point between the cheeks</span></span>
+<span>  <span class="fu"><a href="reference/stack.Coo.html">stack</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                  <span class="co"># Another picture of aligned outlines</span></span>
+<span>  <span class="fu"><a href="reference/efourier.html">efourier</a></span><span class="op">(</span><span class="fl">6</span>, norm<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  <span class="co"># Elliptical Fourier Transforms</span></span>
+<span>  <span class="fu"><a href="reference/PCA.html">PCA</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/tee.html" class="external-link">%T&gt;%</a></span>                   <span class="co"># Principal Component Analysis</span></span>
+<span>  <span class="fu"><a href="reference/plot_PCA.html">plot_PCA</a></span><span class="op">(</span><span class="op">~</span><span class="va">aut</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>           <span class="co"># A PC1:2 plot</span></span>
+<span>  <span class="fu"><a href="reference/LDA.html">LDA</a></span><span class="op">(</span><span class="op">~</span><span class="va">aut</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>                <span class="co"># Linear Discriminant Analysis</span></span>
+<span>  <span class="fu"><a href="reference/plot_CV.html">plot_CV</a></span><span class="op">(</span><span class="op">)</span>                    <span class="co"># And the confusion matrix after leave one out cross validation</span></span></code></pre></div>
 <p><img src="README-example-1.png"><!-- --><img src="README-example-2.png"><!-- --></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#&gt; Warning: `data_frame()` is deprecated as of tibble 1.1.0.</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; Please use `tibble()` instead.</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: The `&lt;scale&gt;` argument of `guides()` cannot be `FALSE`. Use "none" instead as</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; of ggplot2 3.3.4.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ The deprecated feature was likely used in the Momocs package.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Please report the issue at &lt;https://github.com/MomX/Momocs/issues&gt;.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; generated.</span></span></code></pre></div>
 <p><img src="README-example-3.png"><!-- --><img src="README-example-4.png"><!-- --></p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=Momocs">https://​cloud.r-project.org/​package=Momocs</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/MomX/Momocs/">https://​github.com/​MomX/​Momocs/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/MomX/Momocs/issues">https://​github.com/​MomX/​Momocs/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=Momocs" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/MomX/Momocs/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/MomX/Momocs/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a> | <a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a>
+<a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a> | <a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a>
 </li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing Momocs</a></li>
+<li><a href="authors.html#citation">Citing Momocs</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>
-<a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a> <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Julien Claude <br><small class="roles"> Author </small>  <br><small>(core functions in base R)</small>
-</li>
+<li>Vincent Bonhomme <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Julien Claude <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-  </div>
+
+
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p>Developed by <a href="http://www.vincentbonhomme.fr">Vincent Bonhomme</a>, Julien Claude.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Vincent Bonhomme, Julien Claude.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
