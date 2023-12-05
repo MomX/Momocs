@@ -82,13 +82,14 @@ CLUST.Coe <- function(x,
     stats::dist(method = dist_method) %>%
     stats::hclust(method = hclust_method) %>%
     stats::as.dendrogram()
+  order_d <- stats::order.dendrogram(d)
 
   # handle labels (could be shortened)
   dendextend::`labels<-`(d, names(x))
   if (!missing(fac) && !is.null(fac))          # if fac is provided, use it
-    dendextend::`labels<-`(d, as.character(fac_dispatcher(x, fac)))
+    dendextend::labels(d) <- as.character(fac_dispatcher(x, fac))[order_d]
   if (!missing(labels) && !is.null(labels))      # but if labels is provided, overwrite it
-    dendextend::`labels<-`(d, as.character(fac_dispatcher(x, labels)))
+    dendextend::labels(d) <- as.character(fac_dispatcher(x, labels))[order_d]
 
   # # handles abbreviation
   # if (!missing(abbreviate_n)){ # abbreviate if required
@@ -112,7 +113,7 @@ CLUST.Coe <- function(x,
 
   # color labels
   if (!missing(fac) && !is.null(fac)){
-    f <- fac_dispatcher(x, fac)
+    f <- fac_dispatcher(x, fac)[order_d]
     d %<>% dendextend::set("labels_colors",
                            palette(nlevels(f))[f])
   }
