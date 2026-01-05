@@ -5,4 +5,4 @@ to see their documentation.
 
 - magrittr:
 
-  `%<>%`, `%>%`, `%$%`, `%T>%`
+  `%$%`, `%<>%`, `%>%`, `%T>%`

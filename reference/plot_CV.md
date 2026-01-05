@@ -124,31 +124,8 @@ h <- hearts %>%
 
 
 h %>% plot_CV()
-#> Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as
-#> of ggplot2 3.3.4.
-#> ℹ The deprecated feature was likely used in the Momocs package.
-#>   Please report the issue at <https://github.com/MomX/Momocs/issues>.
 
 h %>% plot_CV(freq=FALSE, rm0=FALSE, fill=FALSE)
 
-# you can customize the returned gg with some ggplot2 functions
-h %>% plot_CV(labels=FALSE, fill=TRUE, axis.size=5) + ggplot2::ggtitle("A confusion matrix")
-
-
-# or build your own using the prepared data_frame:
-df <- h %>% plot_CV() %$% data
-#> Error in eval(substitute(expr), data, enclos = parent.frame()): invalid 'envir' argument of type 'object'
-df
-#> function (x, df1, df2, ncp, log = FALSE) 
-#> {
-#>     if (missing(ncp)) 
-#>         .Call(C_df, x, df1, df2, log)
-#>     else .Call(C_dnf, x, df1, df2, ncp, log)
-#> }
-#> <bytecode: 0x564c8b6d9100>
-#> <environment: namespace:stats>
-
-# you can even use it as a cross-table plotter
-bot$fac %>% table %>% plot_CV()
-
+# you can also customize the returned gg with some ggplot2 functions
 ```
