@@ -1057,7 +1057,7 @@ tie_jpg_txt <- function(lf){
 #' \code{img_plot} is used in import functions such as \link{import_jpg1};
 #' \code{img_plot0} does the same job but preserves the \code{par} and plots axes.
 #'
-#' @param img a matrix of an image, such as those obtained with \link{readJPEG}.
+#' @param img a matrix of an image, such as those obtained with readJPEG.
 #' @return a plot
 #' @rdname img_plot
 #' @export

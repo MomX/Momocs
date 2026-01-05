@@ -10,7 +10,7 @@ img_plot(img)
 img_plot0(img)
 }
 \arguments{
-\item{img}{a matrix of an image, such as those obtained with \link{readJPEG}.}
+\item{img}{a matrix of an image, such as those obtained with readJPEG.}
 }
 \value{
 a plot

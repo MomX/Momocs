@@ -19,7 +19,7 @@ LDA(x, fac, retain, ...)
 
 \item{retain}{the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).}
 
-\item{...}{additional arguments to feed \link{lda}}
+\item{...}{additional arguments to feed lda}
 }
 \value{
 a 'LDA' object on which to apply \link{plot.LDA}, which is a list with components:
@@ -27,7 +27,7 @@ a 'LDA' object on which to apply \link{plot.LDA}, which is a list with component
 \item \code{x} any \link{Coe} object (or a matrix)
 \item \code{fac} grouping factor used
 \item \code{removed} ids of columns in the original matrix that have been removed since constant (if any)
-\item \code{mod} the raw lda mod from \link{lda}
+\item \code{mod} the raw lda mod from lda
 \item \code{mod.pred} the predicted model using x and mod
 \item \code{CV.fac} cross-validated classification
 \item \code{CV.tab} cross-validation tabke

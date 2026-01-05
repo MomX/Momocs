@@ -60,7 +60,7 @@ links_all <- function(coo) {
 #' @param coo a matrix (or a list) of (x; y) coordinates
 #' @return a matrix that can be passed to \link{ldk_links}, etc. The columns
 #' are the row ids of the original shape.
-#' @details uses \link{delaunayn} in the \code{geometry} package.
+#' @details uses delaunayn in the \code{geometry} package.
 #' @family ldk helpers
 #' @examples
 #' w <- wings[1]

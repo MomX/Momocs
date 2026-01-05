@@ -86,15 +86,7 @@ h <- hearts \%>\%
 
 h \%>\% plot_CV()
 h \%>\% plot_CV(freq=FALSE, rm0=FALSE, fill=FALSE)
-# you can customize the returned gg with some ggplot2 functions
-h \%>\% plot_CV(labels=FALSE, fill=TRUE, axis.size=5) + ggplot2::ggtitle("A confusion matrix")
-
-# or build your own using the prepared data_frame:
-df <- h \%>\% plot_CV() \%$\% data
-df
-
-# you can even use it as a cross-table plotter
-bot$fac \%>\% table \%>\% plot_CV()
+# you can also customize the returned gg with some ggplot2 functions
 
 }
 \seealso{

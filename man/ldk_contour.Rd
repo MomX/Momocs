@@ -19,14 +19,14 @@ ldk_contour(ldk, nlevels = 5, grid.nb = 50, col = "grey60")
 a drawing on the last plot
 }
 \description{
-Using \link{kde2d} in the MASS package.
+Using kde2d in the MASS package.
 }
 \examples{
 coo_plot(MSHAPES(wings))
 ldk_contour(wings$coo)
 }
 \seealso{
-\link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
+kde2d, \link{ldk_confell}, \link{ldk_chull}
 
 Other plotting functions: 
 \code{\link{coo_arrows}()},

@@ -33,7 +33,7 @@ a list with components (from ?predict.lda ).
 }
 }
 \description{
-Basically a wrapper around \link{predict.lda} from the package MASS. Uses a LDA model
+Basically a wrapper around predict.lda from the package MASS. Uses a LDA model
 to classify new data.
 }
 \note{

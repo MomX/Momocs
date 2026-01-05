@@ -17,7 +17,7 @@ are the row ids of the original shape.
 Creates links (Delaunay triangulation) between landmarks
 }
 \details{
-uses \link{delaunayn} in the \code{geometry} package.
+uses delaunayn in the \code{geometry} package.
 }
 \examples{
 w <- wings[1]

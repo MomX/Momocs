@@ -51,11 +51,11 @@
 #' @param chull.lty if yes, its linetype
 #' @param chull.filled logical whether to add filled convex hulls
 #' @param chull.filled.alpha numeric alpha transparency
-#' @param density whether to add a 2d density kernel estimation (based on \link{kde2d})
+#' @param density whether to add a 2d density kernel estimation (based on kde2d)
 #' @param lev.density if yes, the number of levels to plot (through \link{image})
 #' @param contour whether to add contour lines based on 2d density kernel
 #' @param lev.contour if yes, the (approximate) number of lines to draw
-#' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
+#' @param n.kde2d the number of bins for kde2d, ie the 'smoothness' of density kernel
 #' @param delaunay logical whether to add a delaunay 'mesh' between points
 #' @param loadings logical whether to add loadings for every variables
 #' @param labelspoints if TRUE rownames are used as labels, a colname from $fac can also be passed

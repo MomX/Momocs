@@ -443,12 +443,12 @@ ldk_confell <- function(ldk, conf = 0.5, col = "grey40", ell.lty = 1,
 
 #' Draws kernel density contours around landmark
 #'
-#' Using \link{kde2d} in the MASS package.
+#' Using kde2d in the MASS package.
 #' @param ldk an array (or a list) of landmarks
 #' @param nlevels the number of contour lines
 #' @param grid.nb the grid.nb
 #' @param col a color for drawing the contour lines
-#' @seealso \link{kde2d}, \link{ldk_confell}, \link{ldk_chull}
+#' @seealso kde2d, \link{ldk_confell}, \link{ldk_chull}
 #' @examples
 #' coo_plot(MSHAPES(wings))
 #' ldk_contour(wings$coo)

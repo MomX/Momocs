@@ -162,7 +162,7 @@ a matrix of positions. See \link{morphospace_positions}}
 
 \item{chull.filled.alpha}{numeric alpha transparency}
 
-\item{density}{whether to add a 2d density kernel estimation (based on \link{kde2d})}
+\item{density}{whether to add a 2d density kernel estimation (based on kde2d)}
 
 \item{lev.density}{if yes, the number of levels to plot (through \link{image})}
 
@@ -170,7 +170,7 @@ a matrix of positions. See \link{morphospace_positions}}
 
 \item{lev.contour}{if yes, the (approximate) number of lines to draw}
 
-\item{n.kde2d}{the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel}
+\item{n.kde2d}{the number of bins for kde2d, ie the 'smoothness' of density kernel}
 
 \item{delaunay}{logical whether to add a delaunay 'mesh' between points}
 

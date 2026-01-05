@@ -49,11 +49,11 @@
 #' @param chull.lty if yes, its linetype
 #' @param chull.filled logical whether to add filled convex hulls
 #' @param chull.filled.alpha numeric alpha transparency
-#' @param density whether to add a 2d density kernel estimation (based on \link{kde2d})
+#' @param density whether to add a 2d density kernel estimation (based on kde2d)
 #' @param lev.density if yes, the number of levels to plot (through \link{image})
 #' @param contour whether to add contour lines based on 2d density kernel
 #' @param lev.contour if yes, the (approximate) number of lines to draw
-#' @param n.kde2d the number of bins for \link{kde2d}, ie the 'smoothness' of density kernel
+#' @param n.kde2d the number of bins for kde2d, ie the 'smoothness' of density kernel
 #' @param delaunay logical whether to add a delaunay 'mesh' between points
 #' @param loadings logical whether to add loadings for every variables
 #' @param labelspoints if TRUE rownames are used as labels, a colname from $fac can also be passed
@@ -312,15 +312,8 @@ plot.LDA <- function(x, fac=x$fac, xax=1, yax=2,
 #'
 #' h %>% plot_CV()
 #' h %>% plot_CV(freq=FALSE, rm0=FALSE, fill=FALSE)
-#' # you can customize the returned gg with some ggplot2 functions
-#' h %>% plot_CV(labels=FALSE, fill=TRUE, axis.size=5) + ggplot2::ggtitle("A confusion matrix")
-#'
-#' # or build your own using the prepared data_frame:
-#' df <- h %>% plot_CV() %$% data
-#' df
-#'
-#' # you can even use it as a cross-table plotter
-#' bot$fac %>% table %>% plot_CV()
+#' # you can also customize the returned gg with some ggplot2 functions
+
 #'
 #' @rdname plot_CV
 #' @export
@@ -408,7 +401,7 @@ plot_CV.default <- function(x,
     gg <- gg +
       geom_tile(aes(fill=n), alpha=0.5) +
       scale_fill_viridis_c(direction= -1) +
-      guides(fill=FALSE)
+      guides(fill="none")
   }
   # add labels, if required
   if (labels){

@@ -37,7 +37,7 @@
 #' @param x a  Coe or a PCA object
 #' @param fac the grouping factor (names of one of the $fac column or column id)
 #' @param retain the proportion of the total variance to retain (if retain<1) using \link{scree}, or the number of PC axis (if retain>1).
-#' @param ... additional arguments to feed \link{lda}
+#' @param ... additional arguments to feed lda
 #' @note For LDA.PCA, retain can be passed as a vector (eg: 1:5, and retain=1, retain=2, ...,
 #' retain=5) will be tried, or as "best" (same as before but retain=1:number_of_pc_axes is used).
 #' @note Silent message and progress bars (if any) with `options("verbose"=FALSE)`.
@@ -46,7 +46,7 @@
 #'  \item \code{x} any \link{Coe} object (or a matrix)
 #'  \item \code{fac} grouping factor used
 #'  \item \code{removed} ids of columns in the original matrix that have been removed since constant (if any)
-#'  \item \code{mod} the raw lda mod from \link{lda}
+#'  \item \code{mod} the raw lda mod from lda
 #'  \item \code{mod.pred} the predicted model using x and mod
 #'  \item \code{CV.fac} cross-validated classification
 #'  \item \code{CV.tab} cross-validation tabke
@@ -492,7 +492,7 @@ classification_metrics.LDA <- function(x){
 
 #' "Redo" a LDA on new data
 #'
-#' Basically a wrapper around \link{predict.lda} from the package MASS. Uses a LDA model
+#' Basically a wrapper around predict.lda from the package MASS. Uses a LDA model
 #' to classify new data.
 #' @param newdata to use, a \link{PCA} or any \link{Coe} object
 #' @param LDA a \link{LDA} object
