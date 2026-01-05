@@ -1,27 +1,20 @@
 
 <!--README.md is generated from README.Rmd. Please edit that file -->
 
-## Momocs
-
-<!--Badges -->
-
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![R-CMD-check](https://github.com/MomX/Momocs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MomX/Momocs/actions/workflows/R-CMD-check.yaml)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Momocs)](http://cran.r-project.org/package=Momocs)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/MomX/Momocs/master.svg)](https://codecov.io/github/MomX/Momocs?branch=master)
-![CRAN downloads last month](http://cranlogs.r-pkg.org/badges/Momocs)
-![CRAN downloads grand
-total](http://cranlogs.r-pkg.org/badges/grand-total/Momocs)
+# Momocs <a href="http://momx.github.io/Momocs/"><img src="man/figures/logo.png" align="right" height="139" alt="Momocs website" /></a>
 
 <!-- badges: start -->
 
+[![Lifecycle:
+superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/Momocs)](https://CRAN.R-project.org/package=Momocs)
 <!-- badges: end -->
 
 ### News
 
-- I’m still looking for funding to develop MomX. If you have any idea,
-  please email me `<bonhomme.vincent@gmail.com>`
+- Momocs is now retiring and, one day, will no longer be supported in
+  favour of Momocs2 and the entire MomX ecosystem. (as of Jan 26)
 - I’m available for consulting, training and collaboration, worldwide.
 - Momocs is back on CRAN and no longer relies on the retired `rgeos`
   dependency
@@ -125,7 +118,7 @@ hearts %T>%                    # A toy dataset
   plot_CV()                    # And the confusion matrix after leave one out cross validation
 ```
 
-![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->
+![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->![](README-example-3.png)<!-- -->
 
     #> Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as
     #> of ggplot2 3.3.4.
@@ -135,4 +128,4 @@ hearts %T>%                    # A toy dataset
     #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
     #> generated.
 
-![](README-example-3.png)<!-- -->![](README-example-4.png)<!-- -->
+![](README-example-4.png)<!-- -->
