@@ -1,768 +1,259 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://momx.github.io/Momocs/404.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/authors.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/index.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/news/index.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/CLUST.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/Coe.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/Coo.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/KMEANS.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/KMEDOIDS.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/LDA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/Ldk.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/MANOVA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/MANOVA_PW.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/MDS.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/MSHAPES.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/Momocs.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/NMDS.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/Opn.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/OpnCoe.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/Out.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/OutCoe.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/PCA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/PCcontrib.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/Ptolemy.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/TraCoe.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/add_ldk.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/arrange.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/as_df.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/at_least.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/babel.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/bezier.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/bezier_i.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/boxplot.OutCoe.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/boxplot.PCA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/breed.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/bridges.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/calibrate_deviations.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/calibrate_harmonicpower.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/calibrate_r2.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/calibrate_reconstructions.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/chop.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/classification_metrics.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coeff_rearrange.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coeff_sel.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coeff_split.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/color_palettes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/color_transparency.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/combine.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/complex.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_align.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_aligncalliper.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_alignminradius.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_alignxax.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_angle_edges.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_angle_tangent.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_area.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_arrows.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_baseline.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_bookstein.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_boundingbox.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_calliper.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_centdist.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_center.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_centpos.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_centsize.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_check.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_chull.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_circularity.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_close.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_convexity.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_down.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_draw.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_draw_rads.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_dxy.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_eccentricity.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_elongation.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_extract.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_flip.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_force2close.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_interpolate.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_intersect_angle.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_intersect_segment.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_is_closed.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_jitter.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_ldk.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_left.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_length.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_likely_clockwise.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_listpanel.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_lolli.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_lw.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_nb.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_oscillo.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_perim.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_plot.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_range.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_rectangularity.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_rectilinearity.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_rev.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_right.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_rotate.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_rotatecenter.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_ruban.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_sample.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_sample_prop.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_samplerr.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_scalars.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_scale.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_shear.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_slice.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_slide.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_slidedirection.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_slidegap.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_smooth.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_smoothcurve.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_solidity.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_tac.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_template.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_trans.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_trim.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_trimbottom.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_trimtop.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_truss.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_untiltx.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_up.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/coo_width.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/d.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_apodemus.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_bot.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_chaff.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_charring.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_flower.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_hearts.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_molars.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_mosquito.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_mouse.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_nsfishes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_oak.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_olea.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_shapes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_trilo.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/data_wings.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/def_ldk.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/def_ldk_angle.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/def_ldk_tips.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/def_links.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/def_slidings.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/dfourier.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/dfourier_i.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/dfourier_shape.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/dissolve.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/drawers.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/ed.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/edi.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/edm.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/edm_nearest.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/efourier.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/efourier_i.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/efourier_shape.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/export.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/fProcrustes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/fac_dispatcher.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/fgProcrustes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/fgsProcrustes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/filter.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/flip_PCaxes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/get_chull_area.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/get_ldk.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/get_pairs.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/get_slidings.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/harm.contrib.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/harm_pow.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/img_plot.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/import_Conte.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/import_StereoMorph.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/import_jpg.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/import_jpg1.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/import_tps.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/import_txt.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/inspect.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/is.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/is_equallyspacedradii.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/layers.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/layers_morphospace.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/ldk_check.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/ldk_chull.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/ldk_confell.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/ldk_contour.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/ldk_labels.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/ldk_links.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/lf_structure.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/links_all.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/links_delaunay.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/measure.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/morphospace_positions.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/mosaic.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/mutate.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/npoly.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/opoly.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/pProcrustes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/palettes.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/panel.Coo.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/papers.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/perm.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/pile.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot.LDA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot.PCA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_CV.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_CV2.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_LDA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_MSHAPES.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_NMDS.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_PCA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_devsegments.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_silhouette.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/plot_table.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/poly_i.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/reLDA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rePCA.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rearrange_ldk.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rename.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rescale.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rfourier.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rfourier_i.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rfourier_shape.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rm_asym.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rm_harm.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rm_missing.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rm_uncomplete.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/rw_fac.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/sample_frac.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/sample_n.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/scree.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/select.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/sfourier.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/sfourier_i.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/sfourier_shape.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/slice.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/slidings_scheme.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/stack.Coo.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/subset.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/symmetry.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tfourier.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tfourier_i.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tfourier_shape.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tie_jpg_txt.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tps2d.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tps_arr.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tps_grid.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tps_iso.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/tps_raw.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/verify.html</loc>
-  </url>
-  <url>
-    <loc>http://momx.github.io/Momocs/reference/which_out.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://momx.github.io/Momocs/404.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/authors.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/index.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/news/index.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/CLUST.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/Coe.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/Coo.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/KMEANS.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/KMEDOIDS.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/LDA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/Ldk.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/MANOVA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/MANOVA_PW.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/MDS.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/MSHAPES.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/Momocs.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/NMDS.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/Opn.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/OpnCoe.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/Out.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/OutCoe.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/PCA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/PCcontrib.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/Ptolemy.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/TraCoe.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/add_ldk.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/arrange.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/as_df.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/at_least.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/babel.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/bezier.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/bezier_i.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/boxplot.OutCoe.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/boxplot.PCA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/breed.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/bridges.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/calibrate_deviations.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/calibrate_harmonicpower.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/calibrate_r2.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/calibrate_reconstructions.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/chop.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/classification_metrics.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coeff_rearrange.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coeff_sel.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coeff_split.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/color_palettes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/color_transparency.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/combine.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/complex.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_align.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_aligncalliper.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_alignminradius.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_alignxax.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_angle_edges.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_angle_tangent.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_area.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_arrows.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_baseline.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_bookstein.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_boundingbox.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_calliper.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_centdist.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_center.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_centpos.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_centsize.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_check.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_chull.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_circularity.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_close.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_convexity.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_down.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_draw.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_draw_rads.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_dxy.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_eccentricity.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_elongation.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_extract.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_flip.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_force2close.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_interpolate.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_intersect_angle.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_intersect_segment.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_is_closed.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_jitter.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_ldk.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_left.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_length.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_likely_clockwise.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_listpanel.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_lolli.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_lw.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_nb.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_oscillo.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_perim.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_plot.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_range.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_rectangularity.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_rectilinearity.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_rev.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_right.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_rotate.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_rotatecenter.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_ruban.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_sample.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_sample_prop.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_samplerr.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_scalars.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_scale.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_shear.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_slice.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_slide.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_slidedirection.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_slidegap.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_smooth.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_smoothcurve.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_solidity.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_tac.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_template.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_trans.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_trim.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_trimbottom.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_trimtop.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_truss.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_untiltx.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_up.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/coo_width.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/d.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_apodemus.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_bot.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_chaff.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_charring.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_flower.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_hearts.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_molars.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_mosquito.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_mouse.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_nsfishes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_oak.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_olea.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_shapes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_trilo.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/data_wings.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/def_ldk.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/def_ldk_angle.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/def_ldk_tips.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/def_links.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/def_slidings.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/dfourier.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/dfourier_i.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/dfourier_shape.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/dissolve.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/drawers.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/ed.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/edi.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/edm.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/edm_nearest.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/efourier.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/efourier_i.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/efourier_shape.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/export.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/fProcrustes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/fac_dispatcher.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/fgProcrustes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/fgsProcrustes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/filter.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/flip_PCaxes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/get_chull_area.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/get_ldk.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/get_pairs.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/get_slidings.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/harm.contrib.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/harm_pow.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/img_plot.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/import_Conte.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/import_StereoMorph.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/import_jpg.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/import_jpg1.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/import_tps.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/import_txt.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/index.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/inspect.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/is.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/is_equallyspacedradii.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/layers.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/layers_morphospace.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/ldk_check.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/ldk_chull.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/ldk_confell.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/ldk_contour.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/ldk_labels.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/ldk_links.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/lf_structure.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/links_all.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/links_delaunay.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/measure.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/morphospace_positions.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/mosaic.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/mutate.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/npoly.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/opoly.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/pProcrustes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/palettes.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/panel.Coo.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/papers.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/perm.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/pile.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot.LDA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot.PCA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_CV.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_CV2.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_LDA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_MSHAPES.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_NMDS.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_PCA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_devsegments.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_silhouette.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/plot_table.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/poly_i.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/reLDA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rePCA.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rearrange_ldk.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/reexports.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rename.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rescale.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rfourier.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rfourier_i.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rfourier_shape.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rm_asym.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rm_harm.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rm_missing.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rm_uncomplete.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/rw_fac.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/sample_frac.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/sample_n.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/scree.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/select.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/sfourier.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/sfourier_i.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/sfourier_shape.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/slice.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/slidings_scheme.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/stack.Coo.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/subset.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/symmetry.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tfourier.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tfourier_i.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tfourier_shape.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tie_jpg_txt.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tps2d.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tps_arr.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tps_grid.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tps_iso.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/tps_raw.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/verify.html</loc></url>
+<url><loc>http://momx.github.io/Momocs/reference/which_out.html</loc></url>
 </urlset>
+
