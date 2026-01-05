@@ -49,8 +49,8 @@ All comments are welcome.
 \seealso{
 Other grindr: 
 \code{\link{drawers}},
-\code{\link{layers_morphospace}},
 \code{\link{layers}},
+\code{\link{layers_morphospace}},
 \code{\link{mosaic_engine}()},
 \code{\link{pile}()},
 \code{\link{plot_LDA}()},

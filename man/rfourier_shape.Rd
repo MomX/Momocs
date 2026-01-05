@@ -58,7 +58,7 @@ Springer 316 pp.
 }
 \seealso{
 Other rfourier: 
-\code{\link{rfourier_i}()},
-\code{\link{rfourier}()}
+\code{\link{rfourier}()},
+\code{\link{rfourier_i}()}
 }
 \concept{rfourier}

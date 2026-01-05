@@ -72,7 +72,7 @@ plot(2:10, r[2:10], type='b', pch=20, col='red', main='R2 / degree')
 }
 \seealso{
 Other polynomials: 
-\code{\link{opoly_i}()},
-\code{\link{opoly}()}
+\code{\link{opoly}()},
+\code{\link{opoly_i}()}
 }
 \concept{polynomials}

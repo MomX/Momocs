@@ -397,7 +397,7 @@ plot_CV.default <- function(x,
     # gg + theme(panel.grid.major = element_line(size = 0.3))
     theme_minimal() +
     theme(panel.background = element_rect(fill = NA, colour=NA),
-          panel.grid.major = element_line(size = 0.1),
+          # panel.grid.major = element_line(size = 0.1),
           axis.text.y = element_text(size=axis.size),
           axis.text.x = element_text(size=axis.size,
                                      angle = axis.x.angle,

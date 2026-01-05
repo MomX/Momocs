@@ -62,7 +62,7 @@ pp.
 }
 \seealso{
 Other tfourier: 
-\code{\link{tfourier_shape}()},
-\code{\link{tfourier}()}
+\code{\link{tfourier}()},
+\code{\link{tfourier_shape}()}
 }
 \concept{tfourier}

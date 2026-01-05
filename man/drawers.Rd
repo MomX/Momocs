@@ -227,8 +227,8 @@ bot \%>\%
 grindr_layers
 
 Other grindr: 
-\code{\link{layers_morphospace}},
 \code{\link{layers}},
+\code{\link{layers_morphospace}},
 \code{\link{mosaic_engine}()},
 \code{\link{papers}},
 \code{\link{pile}()},

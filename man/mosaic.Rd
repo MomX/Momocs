@@ -136,8 +136,8 @@ shapes2 \%>\% mosaic(relatively=TRUE) \%>\% draw_centroid()
 \seealso{
 Other grindr: 
 \code{\link{drawers}},
-\code{\link{layers_morphospace}},
 \code{\link{layers}},
+\code{\link{layers_morphospace}},
 \code{\link{papers}},
 \code{\link{pile}()},
 \code{\link{plot_LDA}()},

@@ -1,7 +1,7 @@
 Package: Momocs
 Title: Morphometrics using R
-Version: 1.4.1
-Date: 2023-11-13
+Version: 1.4.2
+Date: 2025-1-5
 Authors@R: c(
        person("Vincent", "Bonhomme", ,"bonhomme.vincent@gmail.com", c("aut", "cre")), 
        person("Julien", "Claude", , , c("aut"), comment = "core functions in base R"))
@@ -11,7 +11,9 @@ Description: The goal of 'Momocs' is to provide a complete, convenient,
        configurations of landmarks, traditional morphometrics, and facilities for data preparation, 
        manipulation and visualization with a consistent grammar throughout.
        It allows reproducible, complex morphometrics analyses and other morphometrics approaches 
-       should be easy to plug in, or develop from, on top of this canvas. 
+       should be easy to plug in, or develop from, on top of this canvas. Now superseded by Momocs2 
+       and the MomX ecosystem. Momocs should be considered retired and will one day be 
+       no longer be supported.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 URL: https://github.com/MomX/Momocs/,
@@ -40,4 +42,4 @@ Imports:
     tibble
 Suggests: devtools, knitr, rmarkdown, testthat, covr, roxygen2
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.3

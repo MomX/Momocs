@@ -41,8 +41,8 @@ analysis techniques for morphometrics. In \emph{Proceedings of the Michigan Morp
 \seealso{
 Other import functions: 
 \code{\link{import_StereoMorph_curve1}()},
-\code{\link{import_jpg1}()},
 \code{\link{import_jpg}()},
+\code{\link{import_jpg1}()},
 \code{\link{import_tps}()},
 \code{\link{import_txt}()},
 \code{\link{pix2chc}()}

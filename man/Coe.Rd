@@ -74,10 +74,10 @@ wp$coe # Procrustes aligned coordinates
 Other classes: 
 \code{\link{Coo}()},
 \code{\link{Ldk}()},
-\code{\link{OpnCoe}()},
 \code{\link{Opn}()},
-\code{\link{OutCoe}()},
+\code{\link{OpnCoe}()},
 \code{\link{Out}()},
+\code{\link{OutCoe}()},
 \code{\link{TraCoe}()}
 }
 \concept{classes}

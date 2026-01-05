@@ -2,6 +2,7 @@
 % Please edit documentation in R/Momocs-package.R
 \docType{package}
 \name{Momocs}
+\alias{Momocs-package}
 \alias{Momocs}
 \title{Momocs}
 \value{
@@ -48,4 +49,13 @@ Asher Wishkerman, John Wood for their helpful ideas and bug reports.
 \item \bold{Email}: \code{bonhomme.vincent@gmail.com} to contribute to dev,
 ask for something, propose collaboration, share your data, etc.
 }
+}
+\author{
+\strong{Maintainer}: Vincent Bonhomme \email{bonhomme.vincent@gmail.com}
+
+Authors:
+\itemize{
+  \item Julien Claude (core functions in base R)
+}
+
 }

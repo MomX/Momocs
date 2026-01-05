@@ -88,8 +88,8 @@ plot_MDS(x, ~type) \%>\% layer_stars() \%>\% layer_labelpoints()
 \seealso{
 Other grindr: 
 \code{\link{drawers}},
-\code{\link{layers_morphospace}},
 \code{\link{layers}},
+\code{\link{layers_morphospace}},
 \code{\link{mosaic_engine}()},
 \code{\link{papers}},
 \code{\link{pile}()},

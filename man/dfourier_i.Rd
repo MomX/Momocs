@@ -53,7 +53,7 @@ The Discrete Cosine Transform, a Fourier-related Method for Morphometric Analysi
 }
 \seealso{
 Other dfourier: 
-\code{\link{dfourier_shape}()},
-\code{\link{dfourier}()}
+\code{\link{dfourier}()},
+\code{\link{dfourier_shape}()}
 }
 \concept{dfourier}

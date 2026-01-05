@@ -24,3 +24,6 @@ old_vignettes
 ^\.github$
 ^CRAN-SUBMISSION$
 ^_pkgdown\.yml$
+^lda2_domestic.R$
+
+^CODE_OF_CONDUCT\.md$

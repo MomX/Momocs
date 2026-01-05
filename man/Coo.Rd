@@ -110,10 +110,10 @@ x$fac
 Other classes: 
 \code{\link{Coe}()},
 \code{\link{Ldk}()},
-\code{\link{OpnCoe}()},
 \code{\link{Opn}()},
-\code{\link{OutCoe}()},
+\code{\link{OpnCoe}()},
 \code{\link{Out}()},
+\code{\link{OutCoe}()},
 \code{\link{TraCoe}()}
 }
 \concept{classes}

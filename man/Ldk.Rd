@@ -47,10 +47,10 @@ str(mosquito)
 Other classes: 
 \code{\link{Coe}()},
 \code{\link{Coo}()},
-\code{\link{OpnCoe}()},
 \code{\link{Opn}()},
-\code{\link{OutCoe}()},
+\code{\link{OpnCoe}()},
 \code{\link{Out}()},
+\code{\link{OutCoe}()},
 \code{\link{TraCoe}()}
 }
 \concept{classes}

@@ -66,7 +66,7 @@ two-dimensional outlines. \emph{Systematic Biology} \bold{34}: 59-68.
 }
 \seealso{
 Other efourier: 
-\code{\link{efourier_i}()},
-\code{\link{efourier}()}
+\code{\link{efourier}()},
+\code{\link{efourier_i}()}
 }
 \concept{efourier}

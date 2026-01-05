@@ -50,8 +50,8 @@ Other classes:
 \code{\link{Coo}()},
 \code{\link{Ldk}()},
 \code{\link{Opn}()},
-\code{\link{OutCoe}()},
 \code{\link{Out}()},
+\code{\link{OutCoe}()},
 \code{\link{TraCoe}()}
 }
 \concept{classes}

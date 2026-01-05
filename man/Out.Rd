@@ -32,8 +32,8 @@ Other classes:
 \code{\link{Coe}()},
 \code{\link{Coo}()},
 \code{\link{Ldk}()},
-\code{\link{OpnCoe}()},
 \code{\link{Opn}()},
+\code{\link{OpnCoe}()},
 \code{\link{OutCoe}()},
 \code{\link{TraCoe}()}
 }

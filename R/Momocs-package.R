@@ -52,9 +52,8 @@
 #' hclust kmeans lm manova median na.omit
 #' poly prcomp predict qf qnorm rnorm
 #' runif sd symnum terms var
-#' @docType package
 #' @name Momocs
-NULL
+"_PACKAGE"
 
 
 ##### We include magrittr pipes when loading Momocs

@@ -36,16 +36,16 @@ will be fully operationnal.
 Other import functions: 
 \code{\link{import_Conte}()},
 \code{\link{import_StereoMorph_curve1}()},
-\code{\link{import_jpg1}()},
 \code{\link{import_jpg}()},
+\code{\link{import_jpg1}()},
 \code{\link{import_txt}()},
 \code{\link{pix2chc}()}
 
 Other import functions: 
 \code{\link{import_Conte}()},
 \code{\link{import_StereoMorph_curve1}()},
-\code{\link{import_jpg1}()},
 \code{\link{import_jpg}()},
+\code{\link{import_jpg1}()},
 \code{\link{import_txt}()},
 \code{\link{pix2chc}()}
 }
