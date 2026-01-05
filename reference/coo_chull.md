@@ -1394,7 +1394,7 @@ coo_chull_onion
 #> {
 #>     UseMethod("coo_chull_onion")
 #> }
-#> <bytecode: 0x5623fee7e308>
+#> <bytecode: 0x5643a97692f8>
 #> <environment: namespace:Momocs>
 x <- bot %>% efourier(6) %>% PCA
 #> 'norm=TRUE' is used and this may be troublesome. See ?efourier #Details

@@ -8,7 +8,7 @@
 - Momocs is back on CRAN and no longer relies on the retired `rgeos`
   dependency
 - The tutorial/introduction is back! Download it
-  [there](https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html)\*\*
+  [there](https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html)
 
 ### Installation
 

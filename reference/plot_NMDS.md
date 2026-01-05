@@ -137,16 +137,16 @@ x <- bot %>% efourier %>% NMDS
 #>                  in method “bray”
 #> Run 0 stress 0.07227125 
 #> Run 1 stress 0.07227125 
-#> ... Procrustes: rmse 8.46009e-06  max resid 3.090637e-05 
+#> ... Procrustes: rmse 8.460091e-06  max resid 3.090637e-05 
 #> ... Similar to previous best
 #> Run 2 stress 0.07227125 
 #> ... New best solution
-#> ... Procrustes: rmse 5.108025e-06  max resid 1.882959e-05 
+#> ... Procrustes: rmse 5.108024e-06  max resid 1.882959e-05 
 #> ... Similar to previous best
 #> Run 3 stress 0.1558547 
 #> Run 4 stress 0.1653725 
 #> Run 5 stress 0.07227125 
-#> ... Procrustes: rmse 1.464745e-06  max resid 5.407828e-06 
+#> ... Procrustes: rmse 1.464749e-06  max resid 5.407828e-06 
 #> ... Similar to previous best
 #> Run 6 stress 0.1566038 
 #> Run 7 stress 0.07227125 
@@ -156,31 +156,31 @@ x <- bot %>% efourier %>% NMDS
 #> ... Procrustes: rmse 5.69994e-06  max resid 2.264085e-05 
 #> ... Similar to previous best
 #> Run 9 stress 0.07227125 
-#> ... Procrustes: rmse 3.375563e-06  max resid 1.412437e-05 
+#> ... Procrustes: rmse 3.375566e-06  max resid 1.412437e-05 
 #> ... Similar to previous best
 #> Run 10 stress 0.07227125 
 #> ... Procrustes: rmse 1.702584e-06  max resid 7.024297e-06 
 #> ... Similar to previous best
 #> Run 11 stress 0.07227125 
-#> ... Procrustes: rmse 4.198102e-06  max resid 1.568591e-05 
+#> ... Procrustes: rmse 4.198101e-06  max resid 1.568591e-05 
 #> ... Similar to previous best
 #> Run 12 stress 0.07227125 
-#> ... Procrustes: rmse 2.782199e-06  max resid 9.31499e-06 
+#> ... Procrustes: rmse 2.782198e-06  max resid 9.31499e-06 
 #> ... Similar to previous best
 #> Run 13 stress 0.07227125 
 #> ... Procrustes: rmse 6.140461e-06  max resid 2.422899e-05 
 #> ... Similar to previous best
 #> Run 14 stress 0.07227125 
-#> ... Procrustes: rmse 2.37118e-06  max resid 6.726446e-06 
+#> ... Procrustes: rmse 2.371183e-06  max resid 6.726446e-06 
 #> ... Similar to previous best
 #> Run 15 stress 0.07227125 
-#> ... Procrustes: rmse 4.036545e-06  max resid 1.59661e-05 
+#> ... Procrustes: rmse 4.036543e-06  max resid 1.59661e-05 
 #> ... Similar to previous best
 #> Run 16 stress 0.07227125 
-#> ... Procrustes: rmse 5.818499e-06  max resid 2.334124e-05 
+#> ... Procrustes: rmse 5.818498e-06  max resid 2.334124e-05 
 #> ... Similar to previous best
 #> Run 17 stress 0.07227125 
-#> ... Procrustes: rmse 1.884872e-06  max resid 7.993225e-06 
+#> ... Procrustes: rmse 1.884869e-06  max resid 7.993225e-06 
 #> ... Similar to previous best
 #> Run 18 stress 0.07227125 
 #> ... Procrustes: rmse 9.897688e-06  max resid 3.87602e-05 
