@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 * Momocs is now retiring and, one day, will no longer be supported in favour of Momocs2 and the entire MomX ecosystem. (as of Jan 26)
 * I'm available for consulting, training and collaboration, worldwide.
 * Momocs is back on CRAN and no longer relies on the retired `rgeos` dependency
-* The tutorial/introduction is back! Download it [there](https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html)**
+* The tutorial/introduction is back! Download it [there](https://github.com/MomX/Momocs/releases/download/v1.4.0/Momocs_intro.html)
 
 ### Installation
 The last released version can be installed from [CRAN](https://CRAN.R-project.org/package=Momocs ) with:
