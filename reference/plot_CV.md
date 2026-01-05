@@ -145,7 +145,7 @@ df
 #>         .Call(C_df, x, df1, df2, log)
 #>     else .Call(C_dnf, x, df1, df2, ncp, log)
 #> }
-#> <bytecode: 0x5605f9ba3678>
+#> <bytecode: 0x562411060e68>
 #> <environment: namespace:stats>
 
 # you can even use it as a cross-table plotter

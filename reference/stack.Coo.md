@@ -235,14 +235,14 @@ chaffal <- fgProcrustes(chaff)
 #> iteration:  34   gain: 5.7787e-09 
 #> iteration:  35   gain: 3.9287e-09 
 #> iteration:  36   gain: 1.0587e-09 
-#> iteration:  37   gain: 9.259e-10 
+#> iteration:  37   gain: 9.2591e-10 
 #> iteration:  38   gain: 1.4847e-09 
 #> iteration:  39   gain: 1.039e-09 
 #> iteration:  40   gain: 2.9925e-10 
 #> iteration:  41   gain: 2.2588e-10 
 #> iteration:  42   gain: 3.8255e-10 
 #> iteration:  43   gain: 2.7403e-10 
-#> iteration:  44   gain: 8.3659e-11 
+#> iteration:  44   gain: 8.3666e-11 
 stack(chaffal, slidings=FALSE)
 
 stack(chaffal, meanshape=TRUE, meanshape_col="blue")
