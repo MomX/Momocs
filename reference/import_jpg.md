@@ -88,7 +88,7 @@ Out(coo)
 #> empty Out
 
 coo <- import_jpg()
-#> Warning: unable to translate '`Z1<a9>U' to a wide string
+#> Warning: unable to translate '<e0><db><ce>!V' to a wide string
 #> Warning: input string 1 is invalid
 #> Extracting 0.jpg outlines...
 #> Done in 0 secs
