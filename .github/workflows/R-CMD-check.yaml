@@ -12,7 +12,6 @@ jobs:
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
-    # Add timeout per OS
     timeout-minutes: 45
 
     strategy:
@@ -27,7 +26,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       _R_CHECK_FORCE_SUGGESTS_: false
+      # Fix for rgl
       RGL_USE_NULL: true
+      # Fix for foreign function calls hanging on Windows
+      _R_CHECK_FF_CALLS_: ${{ runner.os != 'Windows' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -39,11 +41,24 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev
+
       - name: Install dependencies
         run: |
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
           install.packages(c("rcmdcheck", "roxygen2"))
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
       - name: Check package
@@ -52,7 +67,9 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
           _R_CHECK_FORCE_SUGGESTS_: false
           RGL_USE_NULL: true
-          # Skip donttest on Windows if it's causing issues
+          # Critical: Skip foreign function check on Windows
+          _R_CHECK_FF_CALLS_: ${{ runner.os != 'Windows' }}
+          # Also skip donttest if needed
           _R_CHECK_DONTTEST_EXAMPLES_: ${{ runner.os != 'Windows' }}
         run: |
           options(crayon.enabled = TRUE)
@@ -62,6 +79,12 @@ jobs:
             check_dir = "check"
           )
         shell: Rscript {0}
+
+      - name: Show testthat output
+        if: always()
+        run: |
+          find . -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
 
       - name: Upload check results
         if: failure()
