@@ -120,6 +120,7 @@ reference:
   - filter
   - mutate
   - rescale
+  - rename
   - select
   - rm_harm
   - rm_uncomplete
@@ -128,6 +129,7 @@ reference:
   - sample_frac
   - sample_n
   - slice
+  - subsetize
   - verify
 
 - title: Import/Export
@@ -171,6 +173,10 @@ reference:
   - reLDA
   - classification_metrics
   - which_out
+  - plot.LDA
+  - plot.PCA
+  - boxplot.OutCoe
+  - boxplot.PCA
 
 - title: Graphics
   desc: Because who does not love graphics?
@@ -189,6 +195,7 @@ reference:
   - papers
   - drawers
   - layers
+  - layers_morphospace
 
 - title: Bridges
   desc: Convert between different classes
@@ -241,28 +248,19 @@ reference:
   desc: Qualitative, diverging and sequential, all those colorblind friendly from RColorBrewer, viridis and more.
   contents:
   - starts_with("pal_")
-
-- title: Momocs helpers
-  desc: To access online website and help and different versions
-  contents:
-  - Momocs_website
-  - Momocs_help
-  - Momocs_currentCRANversion
-  - Momocs_currentGitHubversion
-  - Momocs_installlastversion
-  - Momocs_installedversion
+  - color_palettes
+  - col_transp
 
 - title: Misc
   contents:
-  - andnow
-  - Momocs_version
-  - Momocs_help
+  - Momocs
   - complex
   - ed
   - edm
   - edm_nearest
   - edi
   - is_equallyspacedradii
+  - fac_dispatcher
 
 - title: coo_ toolbox
   desc: circa 100 helpers for 2D shapes and Coo objects
