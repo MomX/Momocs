@@ -11,9 +11,10 @@ Description: The goal of 'Momocs' is to provide a complete, convenient,
        configurations of landmarks, traditional morphometrics, and facilities for data preparation, 
        manipulation and visualization with a consistent grammar throughout.
        It allows reproducible, complex morphometrics analyses and other morphometrics approaches 
-       should be easy to plug in, or develop from, on top of this canvas. Now superseded by Momocs2 
-       and the MomX ecosystem. Momocs should be considered retired and will 
-       no longer be supported someday.
+       should be easy to plug in, or develop from, on top of this canvas. Companion paper is published 
+       in JSS Bonhomme V, Picq S, Gaucherel C and Claude J (2014) <doi:10.18637/jss.v056.i13>. 
+       Now superseded by 'Momocs2' and the 'MomX' ecosystem.
+       'Momocs' should be considered retired and will no longer be supported someday.
 License: GPL (>= 3)
 Encoding: UTF-8
 URL: https://github.com/MomX/Momocs/,
