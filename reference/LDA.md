@@ -204,7 +204,7 @@ plot_LDA(bot.l)
 #> {
 #>     .pal_brewer(n, "Set2") %>% pal_alpha(transp = transp)
 #> }
-#> <bytecode: 0x562b6169ffa0>
+#> <bytecode: 0x55ed4d1695e8>
 #> <environment: namespace:Momocs>
 #> 
 #> $method

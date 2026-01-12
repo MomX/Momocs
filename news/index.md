@@ -1,9 +1,10 @@
 # Changelog
 
-## Momocs 1.4.2
+## Momocs 1.5.0
 
 - Fixed old ggplot2::element_line dependency.
-- Will now only be maintained as legacy until MomX arrives.
+- Various very minor fixes
+- From now on will only be maintained as legacy now that MomX arrives.
 
 ## Momocs 1.4.1
 
