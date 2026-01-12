@@ -32,12 +32,20 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev
+          sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libudunits2-dev \
+            libgdal-dev \
+            libgeos-dev \
+            libproj-dev \
+            libjpeg-dev
       - name: Install dependencies
         run: |
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
           install.packages(c("rcmdcheck", "roxygen2"))
+          # Install required packages for Momocs methods
+          install.packages(c("geomorph", "jpeg", "sf"))
         shell: Rscript {0}
       - name: Session info
         run: |
