@@ -118,14 +118,4 @@ hearts %T>%                    # A toy dataset
   plot_CV()                    # And the confusion matrix after leave one out cross validation
 ```
 
-![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->![](README-example-3.png)<!-- -->
-
-    #> Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as
-    #> of ggplot2 3.3.4.
-    #> ℹ The deprecated feature was likely used in the Momocs package.
-    #>   Please report the issue at <https://github.com/MomX/Momocs/issues>.
-    #> This warning is displayed once every 8 hours.
-    #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-    #> generated.
-
-![](README-example-4.png)<!-- -->
+![](README-example-1.png)<!-- -->![](README-example-2.png)<!-- -->![](README-example-3.png)<!-- -->![](README-example-4.png)<!-- -->
