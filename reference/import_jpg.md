@@ -88,6 +88,8 @@ Out(coo)
 #> empty Out
 
 coo <- import_jpg()
+#> Warning: unable to translate 'ptF<bd><ca>U' to a wide string
+#> Warning: input string 1 is invalid
 #> Extracting 0.jpg outlines...
 #> Done in 0 secs
 # }
